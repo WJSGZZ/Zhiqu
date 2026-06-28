@@ -35,12 +35,10 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opac
 .topbar{position:sticky;top:0;z-index:30;background:rgba(238,233,220,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
 .topbar-inner{max-width:720px;margin:0 auto;padding:11px 22px 12px;display:flex;align-items:center;gap:13px;}
 .seal-sm{flex:none;width:34px;height:34px;border-radius:8px;background:var(--green-deep);color:#F2EFE6;font-family:var(--serif);font-size:13px;letter-spacing:.5px;line-height:1.02;text-align:center;display:flex;align-items:center;justify-content:center;}
-.bar-title{font-family:var(--serif);font-size:15.5px;font-weight:600;color:var(--ink);white-space:nowrap;letter-spacing:1px;}
 .prog{flex:1;display:flex;align-items:center;gap:10px;min-width:0;}
 .prog-track{flex:1;height:5px;background:var(--track);border-radius:99px;overflow:hidden;}
 .prog-fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .5s cubic-bezier(.4,0,.2,1);}
 .prog-pct{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap;min-width:32px;text-align:right;letter-spacing:.3px;}
-@media (max-width:560px){.bar-title{display:none;}}
 
 /* ---- layout ---- */
 .wrap{position:relative;z-index:1;max-width:720px;margin:0 auto;padding:34px 22px 78px;}
@@ -167,7 +165,7 @@ textarea{resize:vertical;min-height:76px;}
 <body>
 
 <div class="topbar"><div class="topbar-inner">
-  <div class="seal-sm">知衢</div><div class="bar-title">志愿盘点</div>
+  <div class="seal-sm">知衢</div>
   <div class="prog"><div class="prog-track"><div class="prog-fill" id="fill"></div></div><div class="prog-pct" id="pct">0%</div></div>
 </div></div>
 
@@ -180,11 +178,11 @@ textarea{resize:vertical;min-height:76px;}
   </div>
 
   <div class="intro">
-    <p class="lede">填志愿，是你第一次用一个数字，去兑换一种人生的可能。</p>
-    <p>没有"客观最优的志愿"，只有"<b>适合你</b>的志愿"。同样的分数，给一个想毕业就工作的人、和一个铁了心读研的人，答案可能完全相反——所以一切，从把你自己看清楚开始。</p>
-    <p>题目分十节，每节开头都有一句"<b>为什么问这个</b>"。<b>有些题会根据你的选择，自动多问几句</b>——比如选了"出国"，下面就会追问出国的事。多数点一点就行，不知道的可以跳过。</p>
+    <p class="lede">一个分数，一种人生。<br>这一次，轮到你自己来选。</p>
+    <p>分数能为你推开几扇门，却不会告诉你，哪一扇背后是你真正想去的地方。这道题考的，从来不是“你考了多少”，而是“你是谁，想过怎样的日子”。所以别急着挑学校——先认清你自己。</p>
     <hr class="rule">
-    <p><span class="how">最后一步</span>拉到底点"生成我的画像"，会汇成一段文字，一键复制发回去。若有没填的，会先提醒你一声。</p>
+    <p>题目分十节，每节开头都附一句“<b>为什么问这个</b>”——你边填，边把其中的道理看明白。<b>有些题会顺着你的选择往下追问</b>，比如选了“出国”，底下就接着问出国的事。大多点一点就好，拿不准的，跳过也无妨。</p>
+    <p><span class="how">最后一步</span>点一下“生成我的画像”，所有答案会汇成一段文字，复制下来发回去就好。要是漏了什么要紧的，它会先轻轻提醒你一声。</p>
   </div>
 
   <div class="timeline">
