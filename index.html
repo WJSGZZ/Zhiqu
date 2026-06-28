@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>知衢 · 高考志愿全维度自我盘点</title>
+<style>
+:root{
+  /* 宣纸与松烟 — rice-paper & pine-soot ink */
+  --paper:#F1EEE3; --paper2:#E9E5D7; --card:#FCFBF6;
+  --ink:#26302C; --muted:#6B776F; --faint:#9AA39B;
+  --line:#E4DECE; --line2:#EDE8DA;
+  --deep:#184E3D;   /* 松烟深 — primary action & lit milestones (signature) */
+  --pine:#2B5650;   /* 苍绿 — headings, secondary */
+  --jade:#3E8073;   /* 青翠 — selection, accents */
+  --jade-soft:#E7EFEA; --jade-line:#CFE0D9;
+  --amber:#A9772B; --amber-soft:#F5EDD9; --amber-line:#E4D2A4;
+  --serif:'Songti SC','STSong','Noto Serif SC','Source Han Serif SC','SimSun',serif;
+  --sans:'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans SC',-apple-system,system-ui,sans-serif;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto;}}
+
+@keyframes rise{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+@keyframes slidein{from{opacity:0;transform:translateY(-5px);}to{opacity:1;transform:none;}}
+@keyframes flashq{0%{background:rgba(255,247,224,.9);}100%{background:transparent;}}
+
+body{margin:0;color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.72;background:var(--paper);}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(135% 72% at 50% 0%, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 56%);}
+body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+/* ---- top bar ---- */
+.topbar{position:sticky;top:0;z-index:30;background:rgba(241,238,227,.84);backdrop-filter:blur(10px) saturate(1.1);-webkit-backdrop-filter:blur(10px) saturate(1.1);border-bottom:1px solid var(--line);}
+.topbar-inner{max-width:760px;margin:0 auto;padding:11px 20px 12px;display:flex;align-items:center;gap:13px;}
+.seal-sm{flex:none;width:34px;height:34px;border-radius:8px;background:var(--deep);color:#F1EEE3;font-family:var(--serif);font-size:13px;letter-spacing:.5px;line-height:1.02;text-align:center;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 7px -2px rgba(24,78,61,.55);}
+.bar-title{font-family:var(--serif);font-size:15.5px;font-weight:600;color:var(--ink);white-space:nowrap;letter-spacing:.4px;}
+.prog{flex:1;display:flex;align-items:center;gap:10px;min-width:0;}
+.prog-track{flex:1;height:6px;background:var(--paper2);border-radius:99px;overflow:hidden;box-shadow:inset 0 1px 2px rgba(40,50,47,.08);}
+.prog-fill{height:100%;width:0;background:linear-gradient(90deg,var(--jade),var(--deep));border-radius:99px;transition:width .5s cubic-bezier(.4,0,.2,1);}
+.prog-pct{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap;min-width:32px;text-align:right;letter-spacing:.3px;}
+@media (max-width:560px){.bar-title{display:none;}}
+
+/* ---- layout ---- */
+.wrap{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:30px 20px 76px;}
+.hero{padding:6px 2px 0;}
+.eyebrow{font-size:12px;letter-spacing:3px;color:var(--jade);margin:0 0 13px;display:flex;align-items:center;gap:11px;}
+.eyebrow::after{content:'';height:1px;flex:1;background:linear-gradient(90deg,var(--jade-line),transparent);}
+.hero h1{font-family:var(--serif);font-weight:600;font-size:31px;line-height:1.24;letter-spacing:.5px;margin:0 0 9px;}
+.hero .tag{color:var(--muted);font-size:14.5px;margin:0;line-height:1.6;}
+
+.intro{position:relative;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px 24px 20px;margin:22px 0 6px;box-shadow:0 1px 2px rgba(38,48,44,.04),0 14px 34px -22px rgba(38,48,44,.20);}
+.intro .lede{font-family:var(--serif);font-size:19.5px;line-height:1.5;color:var(--pine);margin:0 0 14px;padding-left:15px;border-left:3px solid var(--jade);}
+.intro p{margin:0 0 11px;color:#414b46;} .intro p:last-child{margin-bottom:0;} .intro b{color:var(--ink);font-weight:600;}
+.intro .rule{height:1px;background:var(--line2);margin:15px 0 14px;border:0;}
+.how{display:inline-block;background:var(--jade-soft);color:var(--pine);border:1px solid var(--jade-line);border-radius:8px;padding:2px 10px;font-size:13px;font-weight:600;margin-right:7px;}
+
+/* ---- the road (signature) ---- */
+.timeline{position:relative;margin-top:30px;}
+.timeline::before{content:'';position:absolute;left:17px;top:20px;bottom:38px;width:2px;background:linear-gradient(var(--jade-line) 0%, var(--line) 72%, transparent 100%);}
+@media (max-width:560px){.timeline::before{left:14px;}}
+.section{position:relative;margin:0 0 24px;padding-left:50px;}
+@media (max-width:560px){.section{padding-left:42px;}}
+.badge{position:absolute;left:0;top:2px;width:36px;height:36px;border-radius:50%;background:var(--card);border:1.5px solid var(--jade-line);color:var(--pine);font-family:var(--serif);font-size:16px;font-weight:600;display:flex;align-items:center;justify-content:center;z-index:2;box-shadow:0 0 0 5px var(--paper);transition:background .45s ease,color .45s ease,border-color .45s ease,box-shadow .45s ease,transform .3s ease;}
+.badge.done{background:var(--deep);border-color:var(--deep);color:#F1EEE3;box-shadow:0 0 0 5px var(--paper),0 5px 13px -3px rgba(24,78,61,.55);}
+@media (max-width:560px){.badge{width:30px;height:30px;font-size:14px;top:1px;box-shadow:0 0 0 4px var(--paper);}.badge.done{box-shadow:0 0 0 4px var(--paper),0 5px 13px -3px rgba(24,78,61,.55);}}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px 22px 19px;box-shadow:0 1px 2px rgba(38,48,44,.035),0 16px 36px -26px rgba(38,48,44,.18);}
+.sec-title{font-family:var(--serif);font-size:21px;font-weight:600;color:var(--pine);margin:0 0 5px;line-height:1.32;letter-spacing:.3px;}
+.sec-why{font-size:13.5px;color:var(--muted);font-style:italic;line-height:1.62;margin:0 0 18px;}
+
+/* ---- questions ---- */
+.q{margin:0 0 20px;} .q:last-child{margin-bottom:2px;}
+.q-label{font-weight:600;font-size:15.5px;line-height:1.56;margin:0 0 10px;color:var(--ink);}
+.q-label .n{color:var(--jade);font-family:var(--serif);font-weight:600;margin-right:6px;font-size:16px;}
+.q-label .opt-note{font-weight:400;color:var(--faint);font-size:13px;}
+.hint{font-size:12.5px;color:var(--muted);line-height:1.62;margin:8px 0 0;padding-left:11px;border-left:2px solid var(--jade-line);}
+
+.opts{display:flex;flex-wrap:wrap;gap:8px;}
+.opt{position:relative;display:inline-flex;cursor:pointer;max-width:100%;}
+.opt input{position:absolute;opacity:0;width:1px;height:1px;margin:0;}
+.opt .box{border:1px solid var(--line);background:#fff;border-radius:11px;padding:9px 14px;font-size:14.5px;line-height:1.42;color:var(--ink);user-select:none;transition:background .16s,border-color .16s,color .16s,box-shadow .16s,transform .12s;}
+.opt .box:hover{border-color:var(--jade);background:var(--jade-soft);transform:translateY(-1px);box-shadow:0 4px 12px -6px rgba(62,128,115,.45);}
+.opt input:checked + .box{background:var(--jade);border-color:var(--jade);color:#fff;box-shadow:0 4px 13px -5px rgba(62,128,115,.5);}
+.opt input:checked + .box:hover{transform:translateY(-1px);}
+.opt input:focus-visible + .box{outline:2px solid var(--deep);outline-offset:2px;}
+.opts.stack{flex-direction:column;align-items:stretch;}
+.opts.stack .opt{display:block;} .opts.stack .box{display:block;}
+
+input[type=text],input[type=number],textarea{width:100%;font-family:var(--sans);font-size:15px;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:11px;padding:11px 13px;line-height:1.6;transition:border-color .16s,box-shadow .16s;}
+input[type=text]::placeholder,input[type=number]::placeholder,textarea::placeholder{color:#B4B8AD;}
+input:focus,textarea:focus{outline:none;border-color:var(--jade);box-shadow:0 0 0 3px var(--jade-soft);}
+textarea{resize:vertical;min-height:74px;}
+.mt{margin-top:10px;}
+.pair{display:flex;gap:12px;flex-wrap:wrap;} .pair > div{flex:1 1 150px;}
+
+/* ---- conditional follow-up ---- */
+.followup{display:none;margin:13px 0 6px;padding:15px 16px 6px;border-left:3px solid var(--jade);background:linear-gradient(180deg,#F1F6F3,#F7F5ED);border-radius:0 13px 13px 0;}
+.followup.show{display:block;}
+@media (prefers-reduced-motion: no-preference){.followup.show{animation:slidein .34s cubic-bezier(.4,0,.2,1) both;}}
+.ftag{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;font-weight:600;color:var(--jade);letter-spacing:1.2px;margin-bottom:11px;}
+.ftag::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--jade);box-shadow:0 0 0 3px var(--jade-soft);}
+
+/* ---- ranking ---- */
+.rank{display:flex;flex-direction:column;gap:9px;}
+.rank-item{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer;text-align:left;font-family:var(--sans);font-size:14.5px;color:var(--ink);width:100%;transition:background .16s,border-color .16s,box-shadow .16s,transform .12s;}
+.rank-item:hover{border-color:var(--jade);background:var(--jade-soft);transform:translateY(-1px);box-shadow:0 4px 12px -6px rgba(62,128,115,.4);}
+.rank-item.on{border-color:var(--deep);background:#fff;box-shadow:0 3px 12px -5px rgba(24,78,61,.28);}
+.rank-num{flex:none;width:27px;height:27px;border-radius:50%;border:1.5px dashed var(--line);color:var(--faint);font-family:var(--serif);font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .18s;}
+.rank-item.on .rank-num{background:var(--deep);border-style:solid;border-color:var(--deep);color:#F1EEE3;}
+.rank-reset{align-self:flex-start;margin-top:3px;background:transparent;border:none;color:var(--jade);font-family:var(--sans);font-size:13px;cursor:pointer;padding:3px 0;border-bottom:1px solid transparent;transition:border-color .15s;}
+.rank-reset:hover{border-bottom-color:var(--jade);}
+
+/* ---- finish / warn / output ---- */
+.finish{margin-top:14px;}
+.gen-btn{appearance:none;border:none;cursor:pointer;width:100%;font-family:var(--serif);font-size:18.5px;letter-spacing:2px;color:#F4F1E8;padding:17px 26px;border-radius:14px;background:linear-gradient(180deg,#1E5A47,#163F31);box-shadow:0 9px 22px -10px rgba(22,63,49,.7),inset 0 1px 0 rgba(255,255,255,.08);transition:transform .08s,box-shadow .2s,filter .2s;}
+.gen-btn:hover{filter:brightness(1.07);box-shadow:0 13px 28px -10px rgba(22,63,49,.75),inset 0 1px 0 rgba(255,255,255,.1);}
+.gen-btn:active{transform:translateY(1px);}
+.gen-btn:focus-visible{outline:3px solid var(--jade);outline-offset:3px;}
+
+.warn{display:none;margin-top:16px;background:var(--amber-soft);border:1px solid var(--amber-line);border-radius:15px;padding:17px 18px;box-shadow:0 12px 28px -20px rgba(120,90,30,.45);}
+.warn.show{display:block;}
+@media (prefers-reduced-motion: no-preference){.warn.show{animation:slidein .3s ease both;}}
+.warn h3{font-family:var(--serif);color:var(--amber);font-size:16.5px;font-weight:600;margin:0 0 7px;}
+.warn p{margin:0 0 12px;font-size:13.5px;color:#6a5a33;line-height:1.6;}
+.warn-list{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 15px;}
+.warn-chip{background:#fff;border:1px solid var(--amber-line);border-radius:9px;padding:6px 11px;font-size:12.5px;color:#6a5a33;cursor:pointer;transition:background .15s,border-color .15s,transform .12s;}
+.warn-chip:hover{background:#fffaf0;border-color:var(--amber);transform:translateY(-1px);}
+.warn-actions{display:flex;gap:10px;flex-wrap:wrap;}
+.btn-back{appearance:none;cursor:pointer;background:var(--amber);color:#fff;border:none;font-family:var(--sans);font-size:14px;font-weight:600;padding:10px 18px;border-radius:10px;transition:filter .15s;}
+.btn-back:hover{filter:brightness(1.06);}
+.btn-force{appearance:none;cursor:pointer;background:transparent;color:#6a5a33;border:1.5px solid var(--amber-line);font-family:var(--sans);font-size:14px;padding:10px 18px;border-radius:10px;transition:background .15s;}
+.btn-force:hover{background:#fff;}
+
+.flash{animation:flashq 1.6s ease;border-radius:10px;}
+
+#output{display:none;margin-top:18px;} #output.show{display:block;}
+@media (prefers-reduced-motion: no-preference){#output.show{animation:rise .4s ease both;}}
+.out-head{font-family:var(--serif);color:var(--pine);font-size:17px;font-weight:600;margin:0 0 9px;}
+#summary{width:100%;min-height:340px;font-family:var(--sans);font-size:13px;line-height:1.7;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:13px;padding:14px 15px;resize:vertical;}
+.copy-row{display:flex;gap:11px;margin-top:11px;align-items:center;flex-wrap:wrap;}
+.copy-btn{appearance:none;cursor:pointer;background:var(--pine);color:#F4F1E8;border:none;font-family:var(--sans);font-size:15px;font-weight:600;padding:11px 22px;border-radius:12px;box-shadow:0 7px 16px -8px rgba(43,86,80,.6);transition:filter .15s,transform .08s;}
+.copy-btn:hover{filter:brightness(1.08);} .copy-btn:active{transform:translateY(1px);}
+.copy-btn:focus-visible{outline:2px solid var(--deep);outline-offset:2px;}
+.copied{color:var(--jade);font-size:13.5px;font-weight:600;}
+
+.vow{margin-top:34px;border-top:1px solid var(--line);padding-top:18px;font-size:12.5px;color:var(--muted);line-height:1.8;}
+.vow b{color:var(--pine);font-weight:600;font-family:var(--serif);}
+
+@media (prefers-reduced-motion: no-preference){
+  .hero,.intro,.section{animation:rise .55s ease both;}
+  .intro{animation-delay:.04s;}
+}
+@media (max-width:480px){
+  body{font-size:15.5px;}
+  .hero h1{font-size:25px;}
+  .sec-title{font-size:19px;}
+  .wrap{padding:24px 16px 64px;}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="topbar-inner">
+  <div class="seal-sm">知衢</div><div class="bar-title">志愿盘点</div>
+  <div class="prog"><div class="prog-track"><div class="prog-fill" id="fill"></div></div><div class="prog-pct" id="pct">0%</div></div>
+</div></div>
+
+<div class="wrap">
+  <div class="hero">
+    <p class="eyebrow">知衢 · 为你这一个人</p>
+    <h1>高考志愿 · 全维度自我盘点</h1>
+    <p class="tag">分数、城市、专业、学校、目标、性格、约束……一次问清楚。约 15–20 分钟。</p>
+  </div>
+
+  <div class="intro">
+    <p class="lede">填志愿，是你第一次用一个数字，去兑换一种人生的可能。</p>
+    <p>没有"客观最优的志愿"，只有"<b>适合你这一个人</b>的志愿"。同样的分数，给一个想毕业就工作的人、和一个铁了心读研的人，答案可能完全相反——所以一切，从把你自己看清楚开始。</p>
+    <p>题目分十节，每节开头都有一句"<b>为什么问这个</b>"。<b>有些题会根据你的选择，自动多问几句</b>——比如选了"出国"，下面就会追问出国的事。多数点一点就行，不知道的可以跳过。</p>
+    <hr class="rule">
+    <p><span class="how">最后一步</span>拉到底点"生成我的画像"，会汇成一段文字，一键复制发回去。若有没填的，会先提醒你一声。</p>
+  </div>
+
+  <div class="timeline">
+
+    <!-- ===== 1 ===== -->
+    <section class="section"><div class="badge">1</div><div class="card">
+      <div class="sec-title">一 · 你的分数坐标</div>
+      <p class="sec-why">这几项决定"你够得着哪一片"。最要紧的是：跨年只有位次能比，分数不能比——今年的 560 分和去年的 560 分含金量可能天差地别，但"全省第两万名"年年可比。</p>
+
+      <div class="q"><div class="q-label">怎么称呼你？<span class="opt-note">（可留空）</span></div>
+        <input type="text" id="name" placeholder="昵称或名字，不填也行"></div>
+
+      <div class="q"><div class="q-label">性别<span class="opt-note">（可不填；只在军校/警校/航海等少数招生类型才用得上）</span></div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="sex" value="男"><span class="box">男</span></label>
+          <label class="opt"><input type="radio" name="sex" value="女"><span class="box">女</span></label>
+          <label class="opt"><input type="radio" name="sex" value="不便透露"><span class="box">不便透露</span></label>
+        </div></div>
+
+      <div class="q req"><div class="q-label"><span class="n">①</span>你是哪个省（市/自治区）的考生？</div>
+        <input type="text" id="province" placeholder="例如：河南、四川、广东……"></div>
+
+      <div class="q req" data-label="② 高考分与全省位次"><div class="pair">
+        <div><div class="q-label"><span class="n">②</span>高考总分（投档分）</div><input type="number" id="score" placeholder="含政策加分"></div>
+        <div><div class="q-label"><span class="n">③</span>全省位次</div><input type="number" id="rank" placeholder="比分数更关键"></div>
+      </div><p class="hint">不知道位次？拿你省的"一分一段表"按分数一查就有。还没出分也没关系，能填多少填多少。</p></div>
+
+      <div class="q req"><div class="q-label"><span class="n">④</span>你的科类 / 选科是？</div>
+        <div class="opts stack">
+          <label class="opt"><input type="radio" name="kelei" value="新高考3+1+2"><span class="box">新高考 3+1+2（首选物理或历史，再从化/生/政/地选两科）</span></label>
+          <label class="opt"><input type="radio" name="kelei" value="新高考3+3"><span class="box">新高考 3+3（6 或 7 门里选 3 门）</span></label>
+          <label class="opt"><input type="radio" name="kelei" value="传统理科"><span class="box">传统理科</span></label>
+          <label class="opt"><input type="radio" name="kelei" value="传统文科"><span class="box">传统文科</span></label>
+          <label class="opt"><input type="radio" name="kelei" value="不清楚"><span class="box">不太清楚</span></label>
+        </div>
+        <input class="mt" type="text" id="subjects" placeholder="写下你的具体选科组合，例如：物理+化学+生物">
+        <p class="hint">选科直接决定你能报哪些专业——很多专业必选物理或化学。</p></div>
+
+      <div class="q req"><div class="q-label"><span class="n">⑤</span>你的分数大致落在哪一档？</div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="tier" value="远在本科线之上"><span class="box">远在本科线之上</span></label>
+          <label class="opt"><input type="radio" name="tier" value="特控/一本线附近或之上"><span class="box">特控/一本线附近或之上</span></label>
+          <label class="opt"><input type="radio" name="tier" value="本科线附近（边缘）"><span class="box">本科线附近（边缘）</span></label>
+          <label class="opt"><input type="radio" name="tier" value="专科段"><span class="box">专科段</span></label>
+          <label class="opt"><input type="radio" name="tier" value="不清楚"><span class="box">不清楚</span></label>
+        </div>
+        <input class="mt" type="text" id="linecha" placeholder="若知道，写下你高出本科线/特控线大约多少分（选填）"></div>
+    </div></section>
+
+    <!-- ===== 2 ===== -->
+    <section class="section"><div class="badge">2</div><div class="card">
+      <div class="sec-title">二 · 你的根本目标</div>
+      <p class="sec-why">这一节最关键——它决定后面所有取舍的天平往哪边倒。其实它也在帮你想清楚一件大事：你读大学，到底是为了什么。</p>
+
+      <div class="q req"><div class="q-label"><span class="n">⑥</span>毕业之后，你心里更偏向哪一种？</div>
+        <div class="opts stack">
+          <label class="opt"><input type="radio" name="goal" value="直接就业"><span class="box">直接就业（尽早工作挣钱）</span></label>
+          <label class="opt"><input type="radio" name="goal" value="读研考研"><span class="box">读研 / 考研深造</span></label>
+          <label class="opt"><input type="radio" name="goal" value="争取保研"><span class="box">如果可能，走保研（看重院校的推免资格）</span></label>
+          <label class="opt"><input type="radio" name="goal" value="考公考编"><span class="box">考公考编 / 进体制</span></label>
+          <label class="opt"><input type="radio" name="goal" value="出国留学"><span class="box">出国留学</span></label>
+          <label class="opt"><input type="radio" name="goal" value="参军军警"><span class="box">参军 / 走军警路线</span></label>
+          <label class="opt"><input type="radio" name="goal" value="还没想好"><span class="box">还没想好（那我们会帮你留足转弯余地）</span></label>
+        </div>
+      </div>
+
+      <!-- 就业 -->
+      <div class="followup" data-when="goal=直接就业">
+        <span class="ftag">追问 · 就业方向</span>
+        <div class="q req"><div class="q-label">你更想进哪类单位？<span class="opt-note">（可多选）</span></div>
+          <div class="opts">
+            <label class="opt"><input type="checkbox" name="job_unit" value="互联网/科技大厂"><span class="box">互联网/科技大厂</span></label>
+            <label class="opt"><input type="checkbox" name="job_unit" value="国企/央企"><span class="box">国企/央企</span></label>
+            <label class="opt"><input type="checkbox" name="job_unit" value="外企"><span class="box">外企</span></label>
+            <label class="opt"><input type="checkbox" name="job_unit" value="体制内单位"><span class="box">体制内单位</span></label>
+            <label class="opt"><input type="checkbox" name="job_unit" value="中小私企"><span class="box">中小私企</span></label>
+            <label class="opt"><input type="checkbox" name="job_unit" value="创业公司"><span class="box">创业公司</span></label>
+            <label class="opt"><input type="checkbox" name="job_unit" value="还没想好"><span class="box">还没想好</span></label>
+          </div></div>
+        <div class="q req"><div class="q-label">就业时你更看重？</div>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="job_value" value="起薪高"><span class="box">起薪高</span></label>
+            <label class="opt"><input type="radio" name="job_value" value="发展空间"><span class="box">发展空间</span></label>
+            <label class="opt"><input type="radio" name="job_value" value="稳定"><span class="box">稳定</span></label>
+            <label class="opt"><input type="radio" name="job_value" value="行业前景"><span class="box">行业前景好</span></label>
+          </div></div>
+        <div class="q"><div class="q-label">有没有特别想进的行业/公司？<span class="opt-note">（选填）</span></div>
+          <input type="text" id="job_target" placeholder="如：新能源、芯片、某互联网公司……"></div>
+      </div>
+
+      <!-- 考研 -->
+      <div class="followup" data-when="goal=读研考研">
+        <span class="ftag">追问 · 考研深造</span>
+        <div class="q req"><div class="q-label">想读本专业还是跨专业？</div>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="ky_cross" value="本专业深耕"><span class="box">本专业深耕</span></label>
+            <label class="opt"><input type="radio" name="ky_cross" value="想跨专业"><span class="box">想跨专业</span></label>
+            <label class="opt"><input type="radio" name="ky_cross" value="还不确定"><span class="box">还不确定</span></label>
+          </div></div>
+        <div class="q req"><div class="q-label">读研目标院校层次？</div>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="ky_level" value="冲名校"><span class="box">冲名校（985/强校）</span></label>
+            <label class="opt"><input type="radio" name="ky_level" value="本校或同层次"><span class="box">本校或同层次</span></label>
+            <label class="opt"><input type="radio" name="ky_level" value="能上岸就行"><span class="box">只要能上岸</span></label>
+            <label class="opt"><input type="radio" name="ky_level" value="还没想"><span class="box">还没想</span></label>
+          </div></div>
+        <div class="q req"><div class="q-label">读研主要为了？<span class="opt-note">（可多选）</span></div>
+          <div class="opts">
+            <label class="opt"><input type="checkbox" name="ky_why" value="学历门槛/更好就业"><span class="box">学历门槛 / 更好就业</span></label>
+            <label class="opt"><input type="checkbox" name="ky_why" value="真心学术兴趣"><span class="box">真心学术兴趣</span></label>
+            <label class="opt"><input type="checkbox" name="ky_why" value="暂缓就业"><span class="box">暂缓就业</span></label>
+            <label class="opt"><input type="checkbox" name="ky_why" value="提升出身平台"><span class="box">提升出身平台</span></label>
+          </div></div>
+        <div class="q req"><div class="q-label">本科院校有没有"推免（保研）资格"会影响保研——你在意吗？</div>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="ky_tuimian" value="很在意"><span class="box">很在意</span></label>
+            <label class="opt"><input type="radio" name="ky_tuimian" value="一般"><span class="box">一般</span></label>
+            <label class="opt"><input type="radio" name="ky_tuimian" value="不太懂"><span class="box">不太懂</span></label>
+          </div><p class="hint">没有推免资格的学校，四年后只能考研、不能保研——这是两条难度差很大的路。</p></div>
+      </div>
+
+      <!-- 保研 -->
+      <div class="followup" data-when="goal=争取保研">
+        <span class="ftag">追问 · 保研</span>
+        <div class="q req"><div class="q-label">你知道保研主要看"绩点排名 + 院校有无推免资格"吗？</div>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="by_know" value="知道"><span class="box">知道</span></label>
+            <label class="opt"><input type="radio" name="by_know" value="大概知道"><span class="box">大概知道</span></label>
+            <label class="opt"><input type="radio" name="by_know" value="不知道"><span class="box">不知道</span></label>
+          </div></div>
+        <div class="q req"><div class="q-label">愿意为更高的保研率，去一所综合排名稍低、但推免名额多的学校吗？</div>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="by_tradeoff" value="愿意"><span class="box">愿意</span></label>
+            <label class="opt"><input type="radio" name="by_tradeoff" value="不愿意"><span class="box">不愿意</span></label>
+            <label class="opt"><input type="radio" name="by_tradeoff" value="看情况"><span class="box">看情况</span></label>
+          </div></div>
+        <div class="q"><div class="q-label">目标读研院校层次？<span class="opt-note">（选填）</span></div>
+          <input type="text" id="by_level" placeholder="如：想保到本校 / 冲外校985……"></div>
+      </div>
+
+      <!-- 考公考编 -->
+      <div class="followup" data-when="goal=考公考编">
+        <span class="ftag">追问 · 考公考编</span>
+        <div class="q req"><div class="q-label">目标方向？<span class="opt-note">（可多选）</span></div>
+          <div class="opts">
+            <label class="opt"><input type="checkbox" name="gk_dir" value="国考"><span class="box">国考</span></label>
+            <label class="opt"><input type="checkbox" name="gk_dir" value="省考"><span class="box">省考</span></label>
+            <label class="opt"><input type="checkbox" name="gk_dir" value="选调生"><span class="box">选调生</span></label>
+            <label class="opt"><input type="checkbox" name="gk_dir" value="事业编"><span class="box">事业编</span></label>
+            <label class="opt"><input type="checkbox" name="gk_dir" value="教师编"><span class="box">教师编</span></label>
+            <label class="opt"><input type="checkbox" name="gk_dir" value="还没定"><span class="box">还没定</span></label>
+          </div></div>
+        <div class="q req"><div class="q-label">部分"选调生"只面向特定院校/专业的应届生——你在意院校是否在选调名单里吗？</div>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="gk_xuandiao" value="很在意"><span class="box">很在意</span></label>
+            <label class="opt"><input type="radio" name="gk_xuandiao" value="一般"><span class="box">一般</span></label>
+            <label class="opt"><input type="radio" name="gk_xuandiao" value="不了解"><span class="box">不了解</span></label>
+          </div><p class="hint">很多省份的定向选调，只认特定高校名单——这会直接影响"该报哪所学校"。</p></div>
+        <div class="q req"><div class="q-label">想回家乡考，还是哪里都行？</div>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="gk_home" value="回家乡"><span class="box">回家乡</span></label>
+            <label class="opt"><input type="radio" name="gk_home" value="去大城市"><span class="box">去大城市</span></label>
+            <label class="opt"><input type="radio" name="gk_home" value="哪里都行"><span class="box">哪里都行</span></label>
+          </div></div>
+      </div>
+
+      <!-- 出国 -->
+      <div class="followup" data-when="goal=出国留学">
+        <span class="ftag">追问 · 出国留学</span>
+        <div class="q req"><div class="q-label">目标国家/地区？<span class="opt-note">（可多选）</span></div>
+          <div class="opts">
+            <label class="opt"><input type="checkbox" name="ab_country" value="美国"><span class="box">美国</span></label>
+            <label class="opt"><input type="checkbox" name="ab_country" value="英国"><span class="box">英国</span></label>
+            <label class="opt"><input type="checkbox" name="ab_country" value="中国香港/澳门/新加坡"><span class="box">中国香港/澳门/新加坡</span></label>
+            <label class="opt"><input type="checkbox" name="ab_country" value="欧洲"><span class="box">欧洲</span></label>
+            <label class="opt"><input type="checkbox" name="ab_country" value="澳洲/新西兰"><span class="box">澳洲/新西兰</span></label>
+            <label class="opt"><input type="checkbox" name="ab_country" value="加拿大"><span class="box">加拿大</span></label>
+            <label class="opt"><input type="checkbox" name="ab_country" value="日韩"><span class="box">日韩</span></label>
+            <label class="opt"><input type="checkbox" name="ab_country" value="还没定"><span class="box">还没定</span></label>
+          </div></div>
+        <div class="q req"><div class="q-label">留学费用不低，家庭预算大致？</div>
+          <div class="opts stack">
+            <label class="opt"><input type="radio" name="ab_budget" value="比较充足"><span class="box">比较充足</span></label>
+            <label class="opt"><input type="radio" name="ab_budget" value="需规划/争取奖学金"><span class="box">需要规划 / 争取奖学金</span></label>
+            <label class="opt"><input type="radio" name="ab_budget" value="压力较大需谨慎"><span class="box">压力较大，需谨慎</span></label>
+            <label class="opt"><input type="radio" name="ab_budget" value="还没和家里谈"><span class="box">还没和家里谈</span></label>
+          </div></div>
+        <div class="q req"><div class="q-label">本科院校的海外认可度/排名对你重要吗？<span class="opt-note">（会影响申研）</span></div>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="ab_rank" value="很重要"><span class="box">很重要</span></label>
+            <label class="opt"><input type="radio" name="ab_rank" value="一般"><span class="box">一般</span></label>
+            <label class="opt"><input type="radio" name="ab_rank" value="不清楚"><span class="box">不清楚</span></label>
+          </div></div>
+        <div class="q req"><div class="q-label">语言考试（雅思/托福）有规划吗？</div>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="ab_lang" value="已在准备"><span class="box">已在准备</span></label>
+            <label class="opt"><input type="radio" name="ab_lang" value="计划准备"><span class="box">计划准备</span></label>
+            <label class="opt"><input type="radio" name="ab_lang" value="还没开始"><span class="box">还没开始</span></label>
+          </div></div>
+      </div>
+
+      <!-- 军警 -->
+      <div class="followup" data-when="goal=参军军警">
+        <span class="ftag">追问 · 军警路线</span>
+        <div class="q req"><div class="q-label">了解军警类对体检/政审/年龄的硬性要求吗？</div>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="mil_know" value="了解"><span class="box">了解</span></label>
+            <label class="opt"><input type="radio" name="mil_know" value="大概了解"><span class="box">大概了解</span></label>
+            <label class="opt"><input type="radio" name="mil_know" value="不了解"><span class="box">不了解</span></label>
+          </div></div>
+        <div class="q req"><div class="q-label">你的目标是？</div>
+          <div class="opts stack">
+            <label class="opt"><input type="radio" name="mil_goal" value="报考军校/警校"><span class="box">报考军校 / 警校</span></label>
+            <label class="opt"><input type="radio" name="mil_goal" value="大学期间或毕业入伍"><span class="box">大学期间或毕业入伍</span></label>
+            <label class="opt"><input type="radio" name="mil_goal" value="还在了解"><span class="box">还在了解</span></label>
+          </div></div>
+      </div>
+
+      <!-- 还没想好 -->
+      <div class="followup" data-when="goal=还没想好">
+        <span class="ftag">追问 · 先留余地</span>
+        <div class="q req"><div class="q-label">没关系，这很常见。选学校专业时我们会优先帮你"留余地"。你最担心哪种"选错"？<span class="opt-note">（可多选）</span></div>
+          <div class="opts">
+            <label class="opt"><input type="checkbox" name="ns_worry" value="选错专业"><span class="box">选错专业</span></label>
+            <label class="opt"><input type="checkbox" name="ns_worry" value="去错城市"><span class="box">去错城市</span></label>
+            <label class="opt"><input type="checkbox" name="ns_worry" value="学校不够好"><span class="box">学校不够好</span></label>
+            <label class="opt"><input type="checkbox" name="ns_worry" value="将来不好就业"><span class="box">将来不好就业</span></label>
+          </div></div>
+      </div>
+
+      <div class="q req"><div class="q-label"><span class="n">⑦</span>这些里，你和家里最看重哪几样？<span class="opt-note">（可多选，选最重要的 2–3 项）</span></div>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="value" value="稳定"><span class="box">稳定（旱涝保收）</span></label>
+          <label class="opt"><input type="checkbox" name="value" value="高收入"><span class="box">高收入</span></label>
+          <label class="opt"><input type="checkbox" name="value" value="社会地位"><span class="box">社会地位、受尊重</span></label>
+          <label class="opt"><input type="checkbox" name="value" value="自我实现"><span class="box">自我实现、做喜欢的事</span></label>
+          <label class="opt"><input type="checkbox" name="value" value="工作生活平衡"><span class="box">工作生活平衡</span></label>
+          <label class="opt"><input type="checkbox" name="value" value="发展空间"><span class="box">发展空间、上升通道</span></label>
+          <label class="opt"><input type="checkbox" name="value" value="帮助他人"><span class="box">帮助他人、社会价值</span></label>
+        </div></div>
+
+      <div class="q"><div class="q-label"><span class="n">⑧</span>哪怕很模糊——你最想成为什么样的人，或做什么样的工作？<span class="opt-note">（选填）</span></div>
+        <textarea id="dream" placeholder="例如：想进互联网大厂做技术 / 想当一名医生 / 想考公进家乡的单位 / 完全不知道……都可以"></textarea></div>
+    </div></section>
+
+    <!-- ===== 3 ===== -->
+    <section class="section"><div class="badge">3</div><div class="card">
+      <div class="sec-title">三 · 专业：想学什么，绝不学什么</div>
+      <p class="sec-why">专业是你未来四年每天打交道的东西。提醒一句：别被专业名字骗了——"信息与计算科学"其实是数学，"生物医学工程"是工科，一定看培养方案，而非望文生义。</p>
+
+      <div class="q req"><div class="q-label"><span class="n">⑨</span>你心里对"读什么专业"，有多明确？</div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="majorclear" value="很明确"><span class="box">很明确，就想读某个</span></label>
+          <label class="opt"><input type="radio" name="majorclear" value="有几个方向"><span class="box">有几个备选方向</span></label>
+          <label class="opt"><input type="radio" name="majorclear" value="完全没想好"><span class="box">完全没想好</span></label>
+        </div></div>
+
+      <div class="followup" data-when="majorclear=完全没想好">
+        <span class="ftag">追问 · 帮你找方向</span>
+        <div class="q req"><div class="q-label">别急，这很常见。下面哪几件事最戳你？<span class="opt-note">（可多选）</span></div>
+          <div class="opts">
+            <label class="opt"><input type="checkbox" name="explore" value="拆解或搭建实物"><span class="box">拆解或搭建实物</span></label>
+            <label class="opt"><input type="checkbox" name="explore" value="和数字/逻辑较劲"><span class="box">和数字/逻辑较劲</span></label>
+            <label class="opt"><input type="checkbox" name="explore" value="写作/表达/思辨"><span class="box">写作/表达/思辨</span></label>
+            <label class="opt"><input type="checkbox" name="explore" value="帮助或影响他人"><span class="box">帮助或影响他人</span></label>
+            <label class="opt"><input type="checkbox" name="explore" value="艺术/审美/创造"><span class="box">艺术/审美/创造</span></label>
+            <label class="opt"><input type="checkbox" name="explore" value="钻研未知"><span class="box">钻研未知</span></label>
+            <label class="opt"><input type="checkbox" name="explore" value="组织带人做事"><span class="box">组织带人做事</span></label>
+            <label class="opt"><input type="checkbox" name="explore" value="和商业/钱打交道"><span class="box">和商业/钱打交道</span></label>
+          </div></div>
+      </div>
+
+      <div class="q req"><div class="q-label"><span class="n">⑩</span>哪些专业/领域你有点感兴趣？<span class="opt-note">（可多选）</span></div>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="major" value="计算机/软件/人工智能"><span class="box">计算机/软件/人工智能</span></label>
+          <label class="opt"><input type="checkbox" name="major" value="电子信息/通信"><span class="box">电子信息/通信</span></label>
+          <label class="opt"><input type="checkbox" name="major" value="自动化/机器人"><span class="box">自动化/机器人</span></label>
+          <label class="opt"><input type="checkbox" name="major" value="机械/能源/航空航天"><span class="box">机械/能源/航空航天</span></label>
+          <label class="opt"><input type="checkbox" name="major" value="电气工程"><span class="box">电气工程</span></label>
+          <label class="opt"><input type="checkbox" name="major" value="土木/建筑"><span class="box">土木/建筑</span></label>
+          <label class="opt"><input type="checkbox" name="major" value="材料/化工"><span class="box">材料/化工</span></label>
+          <label class="opt"><input type="checkbox" name="major" value="数学/物理/统计"><span class="box">数学/物理/统计</span></label>
+          <label class="opt"><input type="checkbox" name="major" value="经济/金融/财会"><span class="box">经济/金融/财会</span></label>
+          <label class="opt"><input type="checkbox" name="major" value="临床医学/口腔/中医"><span class="box">临床医学/口腔/中医</span></label>
+          <label class="opt"><input type="checkbox" name="major" value="药学/护理/医技"><span class="box">药学/护理/医技</span></label>
+          <label class="opt"><input type="checkbox" name="major" value="法学"><span class="box">法学</span></label>
+          <label class="opt"><input type="checkbox" name="major" value="师范/教育"><span class="box">师范/教育</span></label>
+          <label class="opt"><input type="checkbox" name="major" value="中文/新闻传播"><span class="box">中文/新闻传播</span></label>
+          <label class="opt"><input type="checkbox" name="major" value="外语"><span class="box">外语</span></label>
+          <label class="opt"><input type="checkbox" name="major" value="心理学"><span class="box">心理学</span></label>
+          <label class="opt"><input type="checkbox" name="major" value="设计/艺术"><span class="box">设计/艺术</span></label>
+          <label class="opt"><input type="checkbox" name="major" value="管理/工商"><span class="box">管理/工商</span></label>
+          <label class="opt"><input type="checkbox" name="major" value="公共管理/政治学"><span class="box">公共管理/政治学</span></label>
+          <label class="opt"><input type="checkbox" name="major" value="生物/医药/农林"><span class="box">生物/医药/农林</span></label>
+          <label class="opt"><input type="checkbox" name="major" value="地理/环境/海洋"><span class="box">地理/环境/海洋</span></label>
+          <label class="opt"><input type="checkbox" name="major" value="历史/哲学/社科"><span class="box">历史/哲学/社科</span></label>
+          <label class="opt"><input type="checkbox" name="major" value="暂时没有/想听建议"><span class="box">暂时没有，想听建议</span></label>
+        </div>
+        <input class="mt" type="text" id="majorOther" placeholder="还有其他想读的专业？写在这里"></div>
+
+      <div class="q"><div class="q-label"><span class="n">⑪</span>有没有明确不想读的专业？<span class="opt-note">（选填）</span></div>
+        <input type="text" id="majorNo" placeholder="例如：不想读护理 / 化工 / 土木……如实写，没有就留空"></div>
+
+      <div class="q req"><div class="q-label"><span class="n">⑫</span>"专业冷热"和"自己喜欢"，你更偏向？</div>
+        <div class="opts stack">
+          <label class="opt"><input type="radio" name="hotcold" value="优先热门好就业"><span class="box">优先选热门、好就业的</span></label>
+          <label class="opt"><input type="radio" name="hotcold" value="优先自己喜欢"><span class="box">优先选自己喜欢的</span></label>
+          <label class="opt"><input type="radio" name="hotcold" value="想兼顾"><span class="box">想兼顾两者</span></label>
+        </div>
+        <p class="hint">提醒：风口四年一变，今天的热门可能正是高位接盘；而人的禀性更稳。两者都要，别让"现在什么火"碾压"你是什么料"。</p></div>
+
+      <div class="q req"><div class="q-label"><span class="n">⑬</span>能接受"大类招生"吗？<span class="opt-note">（先进大类，大二再分流到具体专业）</span></div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="dalei" value="能接受"><span class="box">能接受</span></label>
+          <label class="opt"><input type="radio" name="dalei" value="不太想"><span class="box">不太想（想一进校就定专业）</span></label>
+          <label class="opt"><input type="radio" name="dalei" value="看情况"><span class="box">看情况</span></label>
+        </div></div>
+
+      <div class="q req"><div class="q-label"><span class="n">⑭</span>入学后"转专业"的机会，对你有多重要？</div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="zhuanzhuan" value="很重要"><span class="box">很重要（想留余地）</span></label>
+          <label class="opt"><input type="radio" name="zhuanzhuan" value="一般"><span class="box">一般</span></label>
+          <label class="opt"><input type="radio" name="zhuanzhuan" value="不重要"><span class="box">不重要（我很确定）</span></label>
+        </div></div>
+
+      <div class="q req"><div class="q-label"><span class="n">⑮</span>为了一所更好的学校，去读一个不太喜欢的专业，你愿意吗？</div>
+        <div class="opts stack">
+          <label class="opt"><input type="radio" name="schoolvsmajor" value="愿意-校名优先"><span class="box">愿意——校名/层次更重要</span></label>
+          <label class="opt"><input type="radio" name="schoolvsmajor" value="不愿意-专业优先"><span class="box">不愿意——专业更重要</span></label>
+          <label class="opt"><input type="radio" name="schoolvsmajor" value="看情况"><span class="box">看情况 / 难取舍</span></label>
+        </div>
+        <p class="hint">这是填志愿里最经典的一道取舍题，没有标准答案，只有适合你的答案。</p></div>
+    </div></section>
+
+    <!-- ===== 4 ===== -->
+    <section class="section"><div class="badge">4</div><div class="card">
+      <div class="sec-title">四 · 院校：想上什么样的大学</div>
+      <p class="sec-why">名校也有弱势专业，普通院校也有全国顶尖的王牌专业。所以"学校"既要看层次，也要看它在你想读的方向上强不强。</p>
+
+      <div class="q req"><div class="q-label"><span class="n">⑯</span>对院校层次，你的最低期望是？</div>
+        <div class="opts stack">
+          <label class="opt"><input type="radio" name="level" value="非985不去"><span class="box">非 985 不去</span></label>
+          <label class="opt"><input type="radio" name="level" value="985或211/双一流"><span class="box">争取 985 / 211 / 双一流</span></label>
+          <label class="opt"><input type="radio" name="level" value="普通一本即可"><span class="box">普通一本（公办本科）就可以</span></label>
+          <label class="opt"><input type="radio" name="level" value="能上本科就行"><span class="box">能上本科就行</span></label>
+          <label class="opt"><input type="radio" name="level" value="专科也接受"><span class="box">专科也接受（看专业/就业）</span></label>
+          <label class="opt"><input type="radio" name="level" value="不确定"><span class="box">不确定，想听建议</span></label>
+        </div></div>
+
+      <div class="q req"><div class="q-label"><span class="n">⑰</span>偏好的院校类型？<span class="opt-note">（可多选）</span></div>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="schooltype" value="综合性大学"><span class="box">综合性大学</span></label>
+          <label class="opt"><input type="checkbox" name="schooltype" value="理工类"><span class="box">理工类</span></label>
+          <label class="opt"><input type="checkbox" name="schooltype" value="师范类"><span class="box">师范类</span></label>
+          <label class="opt"><input type="checkbox" name="schooltype" value="财经类"><span class="box">财经类</span></label>
+          <label class="opt"><input type="checkbox" name="schooltype" value="政法类"><span class="box">政法类</span></label>
+          <label class="opt"><input type="checkbox" name="schooltype" value="医药类"><span class="box">医药类</span></label>
+          <label class="opt"><input type="checkbox" name="schooltype" value="农林类"><span class="box">农林类</span></label>
+          <label class="opt"><input type="checkbox" name="schooltype" value="语言类"><span class="box">语言类</span></label>
+          <label class="opt"><input type="checkbox" name="schooltype" value="军警类"><span class="box">军警类</span></label>
+          <label class="opt"><input type="checkbox" name="schooltype" value="无所谓"><span class="box">无所谓</span></label>
+        </div></div>
+
+      <div class="q"><div class="q-label"><span class="n">⑱</span>有没有"梦校"，或特别想去的学校？<span class="opt-note">（选填）</span></div>
+        <input type="text" id="dreamschool" placeholder="写下校名，多个用顿号隔开；没有就留空"></div>
+
+      <div class="q"><div class="q-label"><span class="n">⑲</span>有没有绝对不考虑的学校？<span class="opt-note">（选填）</span></div>
+        <input type="text" id="noschool" placeholder="如有，写在这里"></div>
+
+      <div class="q req"><div class="q-label"><span class="n">⑳</span>公办 / 民办 / 中外合作，你的态度？</div>
+        <div class="opts stack">
+          <label class="opt"><input type="radio" name="public" value="只考虑公办"><span class="box">只考虑公办</span></label>
+          <label class="opt"><input type="radio" name="public" value="可接受中外合作"><span class="box">可接受中外合作办学</span></label>
+          <label class="opt"><input type="radio" name="public" value="民办也行(兜底)"><span class="box">民办也行（作为兜底）</span></label>
+          <label class="opt"><input type="radio" name="public" value="看学费再说"><span class="box">看学费再说</span></label>
+        </div></div>
+    </div></section>
+
+    <!-- ===== 5 ===== -->
+    <section class="section"><div class="badge">5</div><div class="card">
+      <div class="sec-title">五 · 城市与地域</div>
+      <p class="sec-why">大学所在的城市，往往悄悄决定了你的实习机会、眼界、人脉，甚至未来在哪安家。它的分量，常被低估。</p>
+
+      <div class="q req"><div class="q-label"><span class="n">㉑</span>愿意离开本省吗？</div>
+        <div class="opts stack">
+          <label class="opt"><input type="radio" name="leave" value="一定留本省"><span class="box">一定留在本省 / 本地区</span></label>
+          <label class="opt"><input type="radio" name="leave" value="优先本省"><span class="box">优先本省，但好学校可以出省</span></label>
+          <label class="opt"><input type="radio" name="leave" value="愿意去外省"><span class="box">愿意去外省</span></label>
+          <label class="opt"><input type="radio" name="leave" value="想出去看看"><span class="box">特别想出去看看世界</span></label>
+        </div></div>
+
+      <div class="q req"><div class="q-label"><span class="n">㉒</span>偏好的城市层级？<span class="opt-note">（可多选）</span></div>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="citytier" value="一线(北上广深)"><span class="box">一线（北上广深）</span></label>
+          <label class="opt"><input type="checkbox" name="citytier" value="新一线"><span class="box">新一线（成都/杭州/武汉/南京/西安等）</span></label>
+          <label class="opt"><input type="checkbox" name="citytier" value="省会城市"><span class="box">省会城市</span></label>
+          <label class="opt"><input type="checkbox" name="citytier" value="经济发达沿海"><span class="box">经济发达的沿海地区</span></label>
+          <label class="opt"><input type="checkbox" name="citytier" value="家乡及周边"><span class="box">家乡及周边</span></label>
+          <label class="opt"><input type="checkbox" name="citytier" value="不太在意"><span class="box">不太在意</span></label>
+        </div></div>
+
+      <div class="q"><div class="q-label"><span class="n">㉓</span>特别想去的城市？ / 绝对不想去的城市？<span class="opt-note">（选填）</span></div>
+        <input type="text" id="cityYes" placeholder="特别想去的城市">
+        <input class="mt" type="text" id="cityNo" placeholder="绝对不想去的城市 / 地区"></div>
+
+      <div class="q req"><div class="q-label"><span class="n">㉔</span>离家远近，你更偏向？</div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="distance" value="越近越好"><span class="box">越近越好</span></label>
+          <label class="opt"><input type="radio" name="distance" value="几小时车程"><span class="box">几小时车程内</span></label>
+          <label class="opt"><input type="radio" name="distance" value="无所谓"><span class="box">无所谓</span></label>
+          <label class="opt"><input type="radio" name="distance" value="越远越好"><span class="box">越远越好</span></label>
+        </div></div>
+
+      <div class="q"><div class="q-label"><span class="n">㉕</span>对气候 / 饮食，有硬性要求吗？<span class="opt-note">（选填，可多选）</span></div>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="climate" value="怕冷"><span class="box">怕冷（不去太北）</span></label>
+          <label class="opt"><input type="checkbox" name="climate" value="怕热/潮湿"><span class="box">怕热或潮湿</span></label>
+          <label class="opt"><input type="checkbox" name="climate" value="吃不了辣"><span class="box">吃不了辣</span></label>
+          <label class="opt"><input type="checkbox" name="climate" value="有饮食/宗教习惯"><span class="box">有特定饮食/宗教习惯</span></label>
+          <label class="opt"><input type="checkbox" name="climate" value="都能适应"><span class="box">都能适应</span></label>
+        </div>
+        <input class="mt" type="text" id="climateNote" placeholder="需要补充的，写在这里"></div>
+
+      <div class="q req"><div class="q-label"><span class="n">㉖</span>城市的实习 / 就业资源，你在意吗？</div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="cityjob" value="很在意"><span class="box">很在意（想在大城市就业）</span></label>
+          <label class="opt"><input type="radio" name="cityjob" value="一般"><span class="box">一般</span></label>
+          <label class="opt"><input type="radio" name="cityjob" value="不太在意"><span class="box">不太在意</span></label>
+        </div></div>
+
+      <div class="q"><div class="q-label"><span class="n">㉗</span>家里在某些城市或行业，有资源、人脉吗？<span class="opt-note">（选填，但很有用）</span></div>
+        <input type="text" id="family_resource" placeholder="例如：亲戚在某城市、家里熟悉某行业……如实写或留空"></div>
+    </div></section>
+
+    <!-- ===== 6 ===== -->
+    <section class="section"><div class="badge">6</div><div class="card">
+      <div class="sec-title">六 · 你是个什么样的人</div>
+      <p class="sec-why">很多人这会儿还没想好读啥，太正常了——所以不直接问"你想学什么"，而是从侧面，把你的禀性拼出来。这决定了"什么专业你读得下去、待得住"。</p>
+
+      <div class="q req"><div class="q-label"><span class="n">㉘</span>哪些科目你学起来最不费劲、甚至享受？<span class="opt-note">（可多选）</span></div>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="good" value="语文"><span class="box">语文</span></label>
+          <label class="opt"><input type="checkbox" name="good" value="数学"><span class="box">数学</span></label>
+          <label class="opt"><input type="checkbox" name="good" value="英语"><span class="box">英语</span></label>
+          <label class="opt"><input type="checkbox" name="good" value="物理"><span class="box">物理</span></label>
+          <label class="opt"><input type="checkbox" name="good" value="化学"><span class="box">化学</span></label>
+          <label class="opt"><input type="checkbox" name="good" value="生物"><span class="box">生物</span></label>
+          <label class="opt"><input type="checkbox" name="good" value="政治"><span class="box">政治</span></label>
+          <label class="opt"><input type="checkbox" name="good" value="历史"><span class="box">历史</span></label>
+          <label class="opt"><input type="checkbox" name="good" value="地理"><span class="box">地理</span></label>
+          <label class="opt"><input type="checkbox" name="good" value="信息/技术"><span class="box">信息/技术</span></label>
+        </div></div>
+
+      <div class="q"><div class="q-label"><span class="n">㉙</span>哪些科目你一看就犯怵？<span class="opt-note">（选填，可多选）</span></div>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="bad" value="语文"><span class="box">语文</span></label>
+          <label class="opt"><input type="checkbox" name="bad" value="数学"><span class="box">数学</span></label>
+          <label class="opt"><input type="checkbox" name="bad" value="英语"><span class="box">英语</span></label>
+          <label class="opt"><input type="checkbox" name="bad" value="物理"><span class="box">物理</span></label>
+          <label class="opt"><input type="checkbox" name="bad" value="化学"><span class="box">化学</span></label>
+          <label class="opt"><input type="checkbox" name="bad" value="生物"><span class="box">生物</span></label>
+          <label class="opt"><input type="checkbox" name="bad" value="政治"><span class="box">政治</span></label>
+          <label class="opt"><input type="checkbox" name="bad" value="历史"><span class="box">历史</span></label>
+          <label class="opt"><input type="checkbox" name="bad" value="地理"><span class="box">地理</span></label>
+        </div></div>
+
+      <div class="q req"><div class="q-label"><span class="n">㉚</span>你更喜欢——</div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="people" value="和人打交道"><span class="box">和人打交道</span></label>
+          <label class="opt"><input type="radio" name="people" value="和物/数/代码打交道"><span class="box">和物/数/代码打交道</span></label>
+          <label class="opt"><input type="radio" name="people" value="都还行"><span class="box">都还行</span></label>
+        </div></div>
+
+      <div class="q req"><div class="q-label"><span class="n">㉛</span>面对问题，你更喜欢——</div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="answer" value="有标准答案"><span class="box">有标准答案、清晰的对错</span></label>
+          <label class="opt"><input type="radio" name="answer" value="开放探索"><span class="box">开放探索、没有唯一解</span></label>
+          <label class="opt"><input type="radio" name="answer" value="看情况"><span class="box">看情况</span></label>
+        </div></div>
+
+      <div class="q req"><div class="q-label"><span class="n">㉜</span>下面哪些性格更像你？<span class="opt-note">（可多选）</span></div>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="trait" value="偏内向爱钻研"><span class="box">偏内向，爱独处钻研</span></label>
+          <label class="opt"><input type="checkbox" name="trait" value="偏外向需社交"><span class="box">偏外向，需要社交变化</span></label>
+          <label class="opt"><input type="checkbox" name="trait" value="坐得住冷板凳"><span class="box">坐得住冷板凳</span></label>
+          <label class="opt"><input type="checkbox" name="trait" value="怕枯燥重复"><span class="box">怕枯燥重复</span></label>
+          <label class="opt"><input type="checkbox" name="trait" value="抗压较强"><span class="box">抗压较强</span></label>
+          <label class="opt"><input type="checkbox" name="trait" value="细心耐心"><span class="box">细心、有耐心</span></label>
+          <label class="opt"><input type="checkbox" name="trait" value="有领导欲"><span class="box">有组织/领导欲</span></label>
+          <label class="opt"><input type="checkbox" name="trait" value="共情力强"><span class="box">共情力强、喜欢助人</span></label>
+          <label class="opt"><input type="checkbox" name="trait" value="爱动手实践"><span class="box">爱动手实践</span></label>
+          <label class="opt"><input type="checkbox" name="trait" value="爱动脑思考"><span class="box">爱动脑思考</span></label>
+        </div></div>
+
+      <div class="q req"><div class="q-label"><span class="n">㉝</span>你最擅长、最享受运用的能力是？<span class="opt-note">（可多选）</span></div>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="skill" value="逻辑推理"><span class="box">逻辑推理</span></label>
+          <label class="opt"><input type="checkbox" name="skill" value="数字计算"><span class="box">数字计算</span></label>
+          <label class="opt"><input type="checkbox" name="skill" value="语言表达"><span class="box">语言表达</span></label>
+          <label class="opt"><input type="checkbox" name="skill" value="动手实验"><span class="box">动手实验</span></label>
+          <label class="opt"><input type="checkbox" name="skill" value="空间想象"><span class="box">空间想象</span></label>
+          <label class="opt"><input type="checkbox" name="skill" value="记忆背诵"><span class="box">记忆背诵</span></label>
+          <label class="opt"><input type="checkbox" name="skill" value="与人沟通"><span class="box">与人沟通</span></label>
+          <label class="opt"><input type="checkbox" name="skill" value="审美创造"><span class="box">审美、创造</span></label>
+          <label class="opt"><input type="checkbox" name="skill" value="组织协调"><span class="box">组织协调</span></label>
+        </div></div>
+
+      <div class="q"><div class="q-label"><span class="n">㉞</span>课余时间，你最容易"沉进去"的是什么？<span class="opt-note">（选填，尽量具体）</span></div>
+        <input type="text" id="hobby" placeholder="比如：打策略游戏、画画、写代码、组织活动、看科普、捣鼓机械、研究历史……"></div>
+
+      <div class="q req"><div class="q-label"><span class="n">㉟</span>你向往的工作状态更接近？<span class="opt-note">（可多选）</span></div>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="worklife" value="朝九晚五稳定"><span class="box">朝九晚五、安稳</span></label>
+          <label class="opt"><input type="checkbox" name="worklife" value="高薪高强度"><span class="box">高薪、能接受高强度</span></label>
+          <label class="opt"><input type="checkbox" name="worklife" value="自由灵活"><span class="box">自由、灵活</span></label>
+          <label class="opt"><input type="checkbox" name="worklife" value="钻研创造"><span class="box">钻研、创造</span></label>
+          <label class="opt"><input type="checkbox" name="worklife" value="带团队做事"><span class="box">带团队、做成事</span></label>
+          <label class="opt"><input type="checkbox" name="worklife" value="帮助他人"><span class="box">直接帮助他人</span></label>
+        </div></div>
+    </div></section>
+
+    <!-- ===== 7 ===== -->
+    <section class="section"><div class="badge">7</div><div class="card">
+      <div class="sec-title">七 · 现实约束（硬门槛）</div>
+      <p class="sec-why">这些能"一票否决"一个志愿——宁可现在问清楚，也别等录取了才发现报不了。没有的项不选就行。</p>
+
+      <div class="q req"><div class="q-label"><span class="n">㊱</span>身体条件，有以下情况吗？<span class="opt-note">（可多选，没有就选"都没有"）</span></div>
+        <div class="opts stack">
+          <label class="opt"><input type="checkbox" name="body" value="色盲或色弱"><span class="box">色盲 或 色弱（医学、化学、生物、部分工科受限）</span></label>
+          <label class="opt"><input type="checkbox" name="body" value="视力较差"><span class="box">视力较差（军警、飞行、航海等有要求）</span></label>
+          <label class="opt"><input type="checkbox" name="body" value="身高/其他体检限制"><span class="box">身高或其他可能影响体检的情况</span></label>
+          <label class="opt"><input type="checkbox" name="body" value="以上都没有"><span class="box">以上都没有</span></label>
+        </div>
+        <input class="mt" type="text" id="bodyNote" placeholder="如选了'其他'，请简单说明"></div>
+
+      <div class="q req"><div class="q-label"><span class="n">㊲</span>你的高考外语语种是？</div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="lang" value="英语"><span class="box">英语</span></label>
+          <label class="opt"><input type="radio" name="lang" value="日语"><span class="box">日语</span></label>
+          <label class="opt"><input type="radio" name="lang" value="俄语"><span class="box">俄语</span></label>
+          <label class="opt"><input type="radio" name="lang" value="其他语种"><span class="box">其他语种</span></label>
+        </div>
+        <p class="hint">部分专业只招英语语种考生，小语种考生要特别留意。</p></div>
+
+      <div class="q"><div class="q-label"><span class="n">㊳</span>有没有明显拖后腿的单科？<span class="opt-note">（选填）</span></div>
+        <input type="text" id="weaksubject" placeholder="例如：英语偏弱 / 数学不好……部分专业对单科有要求。没有就留空"></div>
+
+      <div class="q req"><div class="q-label"><span class="n">㊴</span>家庭经济，对学费的承受？</div>
+        <div class="opts stack">
+          <label class="opt"><input type="radio" name="money" value="高学费没问题"><span class="box">中外合作/民办的高学费（一年数万）没问题</span></label>
+          <label class="opt"><input type="radio" name="money" value="尽量公办"><span class="box">尽量选公办（学费几千一年）</span></label>
+          <label class="opt"><input type="radio" name="money" value="需考虑助学金/专项"><span class="box">需要考虑助学金 / 专项 / 公费等减负路径</span></label>
+          <label class="opt"><input type="radio" name="money" value="需和家里商量"><span class="box">需要和家里商量 / 不确定</span></label>
+        </div></div>
+
+      <div class="q req"><div class="q-label"><span class="n">㊵</span>特殊招生路径，有了解或意向吗？<span class="opt-note">（可多选，不了解就选最后一项）</span></div>
+        <div class="opts stack">
+          <label class="opt"><input type="checkbox" name="special" value="强基计划"><span class="box">强基计划（基础学科）</span></label>
+          <label class="opt"><input type="checkbox" name="special" value="综合评价"><span class="box">综合评价招生</span></label>
+          <label class="opt"><input type="checkbox" name="special" value="专项计划"><span class="box">专项计划（国家/地方/高校，面向农村及贫困地区）</span></label>
+          <label class="opt"><input type="checkbox" name="special" value="公费师范/医学"><span class="box">公费师范 / 公费医学（毕业定向就业）</span></label>
+          <label class="opt"><input type="checkbox" name="special" value="军校/警校"><span class="box">军校 / 警校</span></label>
+          <label class="opt"><input type="checkbox" name="special" value="定向/民族班等"><span class="box">定向培养 / 民族班等</span></label>
+          <label class="opt"><input type="checkbox" name="special" value="都没考虑"><span class="box">都没考虑 / 不了解</span></label>
+        </div></div>
+
+      <div class="q req"><div class="q-label"><span class="n">㊶</span>"提前批"你想冲吗？<span class="opt-note">（军警、公费师范、航海、小语种等多在提前批）</span></div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="tiqian" value="想冲提前批"><span class="box">想冲</span></label>
+          <label class="opt"><input type="radio" name="tiqian" value="不考虑"><span class="box">不考虑</span></label>
+          <label class="opt"><input type="radio" name="tiqian" value="不了解"><span class="box">不了解，想听讲解</span></label>
+        </div></div>
+    </div></section>
+
+    <!-- ===== 8 ===== -->
+    <section class="section"><div class="badge">8</div><div class="card">
+      <div class="sec-title">八 · 风险偏好与填报心态</div>
+      <p class="sec-why">同样的分，有人想求稳保底，有人想搏一把名校。没有对错，但这决定了你那张志愿表是"进取"还是"鲁莽"。</p>
+
+      <div class="q req"><div class="q-label"><span class="n">㊷</span>"冲稳保"的风格，你更偏向？</div>
+        <div class="opts stack">
+          <label class="opt"><input type="radio" name="risk" value="求稳为主"><span class="box">求稳为主——不滑档最重要</span></label>
+          <label class="opt"><input type="radio" name="risk" value="稳中带冲"><span class="box">稳中带冲——主要求稳，留一两个冲</span></label>
+          <label class="opt"><input type="radio" name="risk" value="敢冲名校"><span class="box">敢冲名校——能接受一定风险</span></label>
+          <label class="opt"><input type="radio" name="risk" value="想搏一把"><span class="box">想搏一把——宁缺毋滥</span></label>
+        </div></div>
+
+      <div class="q req"><div class="q-label"><span class="n">㊸</span>如果只能去一所不太理想的学校，和"复读再来"之间，你倾向？</div>
+        <div class="opts stack">
+          <label class="opt"><input type="radio" name="repeat" value="接受录取不复读"><span class="box">接受录取，不复读</span></label>
+          <label class="opt"><input type="radio" name="repeat" value="可能会复读"><span class="box">可能会考虑复读</span></label>
+          <label class="opt"><input type="radio" name="repeat" value="宁可复读"><span class="box">宁可复读，也不将就</span></label>
+          <label class="opt"><input type="radio" name="repeat" value="没想过"><span class="box">没想过这个问题</span></label>
+        </div>
+        <p class="hint">这关系到"保底"该保到什么程度——是问到底线，不是触霉头。</p></div>
+
+      <div class="q req"><div class="q-label"><span class="n">㊹</span>对"服从专业调剂"，你目前的态度是？</div>
+        <div class="opts stack">
+          <label class="opt"><input type="radio" name="tiaoji" value="愿意服从"><span class="box">愿意服从（优先保住院校，能接受被调到别的专业）</span></label>
+          <label class="opt"><input type="radio" name="tiaoji" value="不愿意"><span class="box">不愿意（宁可滑档，也想读到喜欢的专业）</span></label>
+          <label class="opt"><input type="radio" name="tiaoji" value="看情况"><span class="box">看情况 / 还没想好</span></label>
+        </div></div>
+
+      <div class="followup" data-when="tiaoji=不愿意">
+        <span class="ftag">追问 · 确认一下风险</span>
+        <div class="q req"><div class="q-label">不服从调剂，万一你的分进了某校投档线、却够不上你填的专业，可能被"退档"、直接掉到下一批次。了解这个风险后，你还坚持吗？</div>
+          <div class="opts stack">
+            <label class="opt"><input type="radio" name="tiaoji_confirm" value="仍坚持"><span class="box">仍坚持（我能接受这个风险）</span></label>
+            <label class="opt"><input type="radio" name="tiaoji_confirm" value="改为看情况"><span class="box">那我改成"看情况"</span></label>
+            <label class="opt"><input type="radio" name="tiaoji_confirm" value="想再了解"><span class="box">想再了解清楚</span></label>
+          </div></div>
+      </div>
+
+      <div class="q"><div class="q-label"><span class="n">㊺</span>有没有咨询过机构、老师或亲友？他们跟你说了什么？<span class="opt-note">（选填）</span></div>
+        <textarea id="advice" placeholder="把听到的说法写下来——无论是建议还是'内部消息'，我们会帮你一起辨别真伪。"></textarea></div>
+    </div></section>
+
+    <!-- ===== 9 ===== -->
+    <section class="section"><div class="badge">9</div><div class="card">
+      <div class="sec-title">九 · 排个序：到底谁最重要</div>
+      <p class="sec-why">这是整份问卷的"题眼"。当几个选项各有取舍、难分高下时，正是你心里这把尺子，决定最终该选哪一个。</p>
+
+      <div class="q req" id="rankq"><div class="q-label"><span class="n">㊻</span>按重要程度，依次点选下面五项（先点最重要的）</div>
+        <p class="hint" style="margin-top:0;margin-bottom:11px;">点一下 = 排上序号；再点一下 = 取消。点错了可以"清空重排"。</p>
+        <div class="rank" id="rank">
+          <button type="button" class="rank-item" data-id="学校层次（名校光环）"><span class="rank-num">–</span><span>学校层次 · 名校光环</span></button>
+          <button type="button" class="rank-item" data-id="专业（兴趣与适配）"><span class="rank-num">–</span><span>专业 · 我感兴趣、适合我</span></button>
+          <button type="button" class="rank-item" data-id="城市与地域"><span class="rank-num">–</span><span>城市与地域</span></button>
+          <button type="button" class="rank-item" data-id="就业/升学前景"><span class="rank-num">–</span><span>就业 / 升学前景</span></button>
+          <button type="button" class="rank-item" data-id="录取稳妥（不滑档）"><span class="rank-num">–</span><span>录取稳妥 · 不滑档</span></button>
+        </div>
+        <button type="button" class="rank-reset" id="rankReset">清空重排</button>
+      </div>
+    </div></section>
+
+    <!-- ===== 10 ===== -->
+    <section class="section"><div class="badge">10</div><div class="card">
+      <div class="sec-title">十 · 你心里的话</div>
+      <p class="sec-why">数据能算出"能不能进"，算不出"你真正在意什么"。下面几句随便写，越真实越好——这往往是整份问卷里最有用的部分。</p>
+
+      <div class="q"><div class="q-label"><span class="n">㊼</span>关于填志愿，你现在最纠结、最想弄明白的一件事是什么？<span class="opt-note">（选填）</span></div>
+        <textarea id="worry" placeholder="把心里那个绕不开的疙瘩写下来。"></textarea></div>
+
+      <div class="q"><div class="q-label"><span class="n">㊽</span>家里人对你的志愿有什么期望？如果他们和你想法不一样，也请如实写下来。<span class="opt-note">（选填）</span></div>
+        <textarea id="family" placeholder="例如：爸妈希望我学医/考师范，但我自己更想……"></textarea>
+        <p class="hint">父母的期望和你的意愿，常在同一张桌子上"打架"。两边都摊开，才好帮你们对齐——而不是替谁站队。</p></div>
+
+      <div class="q"><div class="q-label"><span class="n">㊾</span>关于你自己或家庭，还有什么想让顾问知道的？<span class="opt-note">（选填）</span></div>
+        <textarea id="more" placeholder="任何你觉得重要的信息，都可以写在这里。"></textarea></div>
+    </div></section>
+
+  </div><!-- /timeline -->
+
+  <div class="finish">
+    <button class="gen-btn" type="button" onclick="clickGenerate()">生成我的画像</button>
+
+    <div class="warn" id="warn">
+      <h3>等一下，有几处还没填 👀</h3>
+      <p id="warnMsg"></p>
+      <div class="warn-list" id="warnList"></div>
+      <div class="warn-actions">
+        <button class="btn-back" type="button" onclick="hideWarn()">返回补填</button>
+        <button class="btn-force" type="button" onclick="doGenerate()">未填的留空，仍要生成</button>
+      </div>
+    </div>
+
+    <div id="output">
+      <p class="out-head">这段就是你的"画像"。复制它，发回去就行 ↓</p>
+      <textarea id="summary" readonly></textarea>
+      <div class="copy-row">
+        <button class="copy-btn" type="button" onclick="copySummary()">一键复制</button>
+        <span class="copied" id="copiedMsg"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="vow">
+    填完之后，请记住三句话：<br>
+    <b>一、</b>这份问卷不是官方建议，最终一切以你省考试院官方填报系统、当年招生计划与各校最新招生章程为准。<br>
+    <b>二、</b>用来分析的 AI 也会犯错，可能基于过时或错误的数据给出错判，请务必交叉核实。<br>
+    <b>三、</b>最终的决策权和后果，永远属于你和你的家庭。这份问卷，只是帮你把自己看得更清楚的一面镜子。
+  </div>
+</div>
+
+<script>
+  function val(id){var el=document.getElementById(id);return el&&el.value?el.value.trim():'';}
+  function radio(name){var el=document.querySelector('input[name="'+name+'"]:checked');return el?el.value:'';}
+  function checks(name){var n=document.querySelectorAll('input[name="'+name+'"]:checked'),o=[];for(var i=0;i<n.length;i++)o.push(n[i].value);return o.join('、');}
+  function f(v){return(v&&v.length)?v:'（未填）';}
+  function isVisible(el){return !!(el&&el.offsetParent!==null);}
+
+  /* ----- conditional follow-ups ----- */
+  function refreshFollowups(){
+    document.querySelectorAll('.followup').forEach(function(fu){
+      var cond=fu.getAttribute('data-when'); // name=value
+      var eq=cond.indexOf('='); var name=cond.slice(0,eq), value=cond.slice(eq+1);
+      var on=!!document.querySelector('input[name="'+name+'"][value="'+value+'"]:checked');
+      if(on){ fu.classList.add('show'); }
+      else if(fu.classList.contains('show')){
+        fu.classList.remove('show');
+        // clear its inputs so hidden answers don't linger
+        fu.querySelectorAll('input').forEach(function(i){ if(i.type==='radio'||i.type==='checkbox') i.checked=false; else i.value=''; });
+        fu.querySelectorAll('textarea').forEach(function(t){ t.value=''; });
+      }
+    });
+  }
+
+  /* ----- ranking ----- */
+  var rankOrder=[];
+  function renderRank(){
+    document.querySelectorAll('#rank .rank-item').forEach(function(it){
+      var id=it.getAttribute('data-id'),pos=rankOrder.indexOf(id),num=it.querySelector('.rank-num');
+      if(pos>=0){num.textContent=(pos+1);it.classList.add('on');}else{num.textContent='–';it.classList.remove('on');}
+    });
+  }
+  document.querySelectorAll('#rank .rank-item').forEach(function(it){
+    it.addEventListener('click',function(){
+      var id=it.getAttribute('data-id'),pos=rankOrder.indexOf(id);
+      if(pos>=0)rankOrder.splice(pos,1);else rankOrder.push(id);
+      renderRank();updateProgress();
+    });
+  });
+  document.getElementById('rankReset').addEventListener('click',function(){rankOrder=[];renderRank();updateProgress();});
+  function rankText(){return rankOrder.length?rankOrder.map(function(x,i){return(i+1)+'. '+x;}).join('  >  '):'（未排序）';}
+
+  /* ----- answered? / missing / progress ----- */
+  function isAnswered(q){
+    if(q.querySelector('#rank')) return rankOrder.length>0;
+    var rad=q.querySelectorAll('input[type=radio]');
+    if(rad.length) return !!q.querySelector('input[type=radio]:checked');
+    var chk=q.querySelectorAll('input[type=checkbox]');
+    if(chk.length) return !!q.querySelector('input[type=checkbox]:checked');
+    var txt=q.querySelectorAll('input[type=text],input[type=number],textarea');
+    if(txt.length){ for(var i=0;i<txt.length;i++){ if(!txt[i].value.trim()) return false; } return true; }
+    return true;
+  }
+  function getLabel(q){
+    if(q.dataset.label) return q.dataset.label;
+    var lbl=q.querySelector('.q-label'); if(!lbl) return '某题';
+    var c=lbl.cloneNode(true); c.querySelectorAll('.opt-note').forEach(function(n){n.remove();});
+    return c.textContent.trim();
+  }
+  function visibleReqs(){ return Array.prototype.filter.call(document.querySelectorAll('.q.req'),isVisible); }
+  function getMissing(){ return visibleReqs().filter(function(q){return !isAnswered(q);}); }
+  function markSections(){
+    document.querySelectorAll('.section').forEach(function(sec){
+      var badge=sec.querySelector('.badge'); if(!badge) return;
+      var rs=Array.prototype.filter.call(sec.querySelectorAll('.q.req'),isVisible);
+      badge.classList.toggle('done', rs.length>0 && rs.every(isAnswered));
+    });
+  }
+
+  var fill=document.getElementById('fill'),pctEl=document.getElementById('pct');
+  function updateProgress(){
+    var reqs=visibleReqs(),done=0;
+    reqs.forEach(function(q){ if(isAnswered(q)) done++; });
+    var pct=reqs.length?Math.round(done/reqs.length*100):0;
+    fill.style.width=pct+'%'; pctEl.textContent=pct+'%';
+    markSections();
+  }
+  document.addEventListener('change',function(){refreshFollowups();updateProgress();});
+  document.addEventListener('input',updateProgress);
+  refreshFollowups(); updateProgress();
+
+  /* ----- generate flow ----- */
+  function clickGenerate(){
+    var miss=getMissing();
+    document.getElementById('output').classList.remove('show');
+    if(miss.length){ showWarn(miss); }
+    else { hideWarn(); doGenerate(); }
+  }
+  function showWarn(miss){
+    var warn=document.getElementById('warn');
+    document.getElementById('warnMsg').textContent='你还有 '+miss.length+' 处没填。可以点下面任意一项跳过去补填；如果就是不想填，点"仍要生成"，这些会留空，不影响后续分析。';
+    var list=document.getElementById('warnList'); list.innerHTML='';
+    miss.forEach(function(q){
+      var chip=document.createElement('div'); chip.className='warn-chip'; chip.textContent=getLabel(q);
+      chip.addEventListener('click',function(){
+        q.scrollIntoView({behavior:'smooth',block:'center'});
+        q.classList.remove('flash'); void q.offsetWidth; q.classList.add('flash');
+      });
+      list.appendChild(chip);
+    });
+    warn.classList.add('show');
+    warn.scrollIntoView({behavior:'smooth',block:'center'});
+  }
+  function hideWarn(){ document.getElementById('warn').classList.remove('show'); }
+
+  function doGenerate(){
+    hideWarn();
+    var L=[],name=val('name');
+    L.push('【知衢 · 高考志愿全维度自我盘点】');
+    if(name) L.push('称呼：'+name);
+    var sex=radio('sex'); if(sex) L.push('性别：'+sex);
+    L.push('');
+    L.push('— 一、分数坐标 —');
+    L.push('省份：'+f(val('province')));
+    L.push('高考分（投档分）：'+f(val('score'))+'　全省位次：'+f(val('rank')));
+    var ke=radio('kelei'),sub=val('subjects');
+    L.push('科类/选科：'+f(ke)+(sub?'（'+sub+'）':''));
+    L.push('分数档位：'+f(radio('tier'))+(val('linecha')?'　线差：'+val('linecha'):''));
+    L.push('');
+    L.push('— 二、根本目标 —');
+    var goal=radio('goal'); L.push('毕业后第一意向：'+f(goal));
+    if(goal==='直接就业'){
+      L.push('  · 想进的单位：'+f(checks('job_unit')));
+      L.push('  · 就业最看重：'+f(radio('job_value')));
+      if(val('job_target')) L.push('  · 想进的行业/公司：'+val('job_target'));
+    }else if(goal==='读研考研'){
+      L.push('  · 本/跨专业：'+f(radio('ky_cross')));
+      L.push('  · 读研目标层次：'+f(radio('ky_level')));
+      L.push('  · 读研动机：'+f(checks('ky_why')));
+      L.push('  · 是否在意推免资格：'+f(radio('ky_tuimian')));
+    }else if(goal==='争取保研'){
+      L.push('  · 是否懂保研机制：'+f(radio('by_know')));
+      L.push('  · 愿否为保研率换稍弱学校：'+f(radio('by_tradeoff')));
+      if(val('by_level')) L.push('  · 目标读研层次：'+val('by_level'));
+    }else if(goal==='考公考编'){
+      L.push('  · 目标方向：'+f(checks('gk_dir')));
+      L.push('  · 是否在意选调名单：'+f(radio('gk_xuandiao')));
+      L.push('  · 回家乡或大城市：'+f(radio('gk_home')));
+    }else if(goal==='出国留学'){
+      L.push('  · 目标国家/地区：'+f(checks('ab_country')));
+      L.push('  · 家庭预算：'+f(radio('ab_budget')));
+      L.push('  · 是否在意本科海外认可度：'+f(radio('ab_rank')));
+      L.push('  · 语言考试规划：'+f(radio('ab_lang')));
+    }else if(goal==='参军军警'){
+      L.push('  · 是否了解军警硬性要求：'+f(radio('mil_know')));
+      L.push('  · 目标：'+f(radio('mil_goal')));
+    }else if(goal==='还没想好'){
+      L.push('  · 最担心的"选错"：'+f(checks('ns_worry')));
+    }
+    L.push('最看重的价值：'+f(checks('value')));
+    if(val('dream')) L.push('职业梦想：'+val('dream'));
+    L.push('');
+    L.push('— 三、专业 —');
+    var mc=radio('majorclear'); L.push('专业明确度：'+f(mc));
+    if(mc==='完全没想好') L.push('  · 兴趣探索（最戳的事）：'+f(checks('explore')));
+    var maj=checks('major'),majO=val('majorOther');
+    L.push('感兴趣的专业：'+f(maj)+(majO?'；其他：'+majO:''));
+    if(val('majorNo')) L.push('明确不想读：'+val('majorNo'));
+    L.push('冷热 vs 兴趣：'+f(radio('hotcold')));
+    L.push('能否接受大类招生：'+f(radio('dalei')));
+    L.push('转专业机会的重要性：'+f(radio('zhuanzhuan')));
+    L.push('校名 vs 专业：'+f(radio('schoolvsmajor')));
+    L.push('');
+    L.push('— 四、院校 —');
+    L.push('院校层次最低期望：'+f(radio('level')));
+    L.push('偏好院校类型：'+f(checks('schooltype')));
+    if(val('dreamschool')) L.push('梦校/特别想去：'+val('dreamschool'));
+    if(val('noschool')) L.push('绝对不去的学校：'+val('noschool'));
+    L.push('公办/民办/中外合作：'+f(radio('public')));
+    L.push('');
+    L.push('— 五、城市与地域 —');
+    L.push('是否愿离开本省：'+f(radio('leave')));
+    L.push('偏好城市层级：'+f(checks('citytier')));
+    if(val('cityYes')||val('cityNo')) L.push('想去：'+f(val('cityYes'))+'　不想去：'+f(val('cityNo')));
+    L.push('离家远近：'+f(radio('distance')));
+    var cli=checks('climate'),cliN=val('climateNote');
+    if(cli||cliN) L.push('气候/饮食：'+f(cli)+(cliN?'；'+cliN:''));
+    L.push('在意城市就业资源：'+f(radio('cityjob')));
+    if(val('family_resource')) L.push('家庭资源/人脉：'+val('family_resource'));
+    L.push('');
+    L.push('— 六、禀性 —');
+    L.push('学得轻松的科目：'+f(checks('good')));
+    if(checks('bad')) L.push('犯怵的科目：'+checks('bad'));
+    L.push('更喜欢打交道的对象：'+f(radio('people')));
+    L.push('面对问题偏好：'+f(radio('answer')));
+    L.push('性格特征：'+f(checks('trait')));
+    L.push('擅长享受的能力：'+f(checks('skill')));
+    if(val('hobby')) L.push('最容易沉进去的事：'+val('hobby'));
+    L.push('向往的工作状态：'+f(checks('worklife')));
+    L.push('');
+    L.push('— 七、现实约束 —');
+    var bd=checks('body'),bdN=val('bodyNote');
+    L.push('身体条件：'+f(bd)+(bdN?'；'+bdN:''));
+    L.push('外语语种：'+f(radio('lang')));
+    if(val('weaksubject')) L.push('单科短板：'+val('weaksubject'));
+    L.push('家庭经济（学费）：'+f(radio('money')));
+    L.push('特殊招生路径意向：'+f(checks('special')));
+    L.push('提前批意向：'+f(radio('tiqian')));
+    L.push('');
+    L.push('— 八、风险与心态 —');
+    L.push('冲稳保风格：'+f(radio('risk')));
+    L.push('录取不理想 vs 复读：'+f(radio('repeat')));
+    var tj=radio('tiaoji'); L.push('服从调剂态度：'+f(tj));
+    if(tj==='不愿意'&&radio('tiaoji_confirm')) L.push('  · 知晓退档风险后：'+radio('tiaoji_confirm'));
+    if(val('advice')) L.push('已听到的建议/消息：'+val('advice'));
+    L.push('');
+    L.push('— 九、优先级排序（题眼）—');
+    L.push(rankText());
+    L.push('');
+    L.push('— 十、心里话 —');
+    if(val('worry')) L.push('最纠结/最想弄明白：'+val('worry'));
+    if(val('family')) L.push('家里人的期望：'+val('family'));
+    if(val('more')) L.push('其他补充：'+val('more'));
+    L.push('');
+    L.push('（本表由「知衢」全维度问卷生成，供志愿分析参考。一切以官方招生数据为准；AI 会出错，请交叉核实；最终决策权在考生与家庭。）');
+
+    var ta=document.getElementById('summary'); ta.value=L.join('\n');
+    document.getElementById('output').classList.add('show');
+    document.getElementById('copiedMsg').textContent='';
+    document.getElementById('output').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+
+  function copySummary(){
+    var ta=document.getElementById('summary'),msg=document.getElementById('copiedMsg');
+    var done=function(){msg.textContent='已复制 ✓ 发回去就行';};
+    var fb=function(){ta.removeAttribute('readonly');ta.focus();ta.select();try{document.execCommand('copy');done();}catch(e){msg.textContent='请长按文本框手动复制';}ta.setAttribute('readonly','readonly');};
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(ta.value).then(done).catch(fb);}else{fb();}
+  }
+</script>
+</body>
+</html>
