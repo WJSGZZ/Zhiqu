@@ -1,6 +1,4 @@
-<!-- 放入 logo 后取消下一行注释：
-<p align="center"><img src="assets/logo.png" width="120" alt="知衢 logo"></p>
--->
+<p align="center"><img src="assets/logo.png" width="140" alt="知衢 logo"></p>
 
 <h1 align="center">知衢 · Zhiqu</h1>
 
