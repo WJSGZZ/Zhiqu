@@ -142,18 +142,22 @@ def cmd_predict(a):
     print(f"\n共 {len(rows)} 个，保留 {len(kept)} 个" + (f"（过线概率 {a.min_p:.0%} – {a.max_p:.1%}）" if log_r else ""))
     if skipped:
         print("跳过（缺位次）：" + "、".join(skipped))
+    shaky = [x[0]["name"] for x in kept if x[0]["unstable"]]
+    if shaky:
+        print("⚠ 历年位次跳变超过约 40%（已自动放大波动）：" + "、".join(shaky))
+        print("  多半是组内专业、招生条件或组号含义变了；先查招生章程和当年专业组组成，再决定是否保留。")
     print("区间只反映历年波动，不含招生计划、选科要求等今年的新变化；这些需要人工判断后写进 adj。")
 
     if a.out:
         fields = list(kept[0][0]["raw"].keys()) if kept else []
-        extra = ["pred_rank", "pred_low", "pred_high", "p_clear"]
+        extra = ["pred_rank", "pred_low", "pred_high", "p_clear", "unstable"]
         with open(a.out, "w", encoding="utf-8", newline="") as fh:
             w = csv.DictWriter(fh, fieldnames=fields + [c for c in extra if c not in fields])
             w.writeheader()
             for r, mid, lo, hi, p in kept:
                 row = dict(r["raw"])
                 row.update(pred_rank=round(mid), pred_low=round(lo), pred_high=round(hi),
-                           p_clear="" if p is None else round(p, 4))
+                           p_clear="" if p is None else round(p, 4), unstable=int(r["unstable"]))
                 w.writerow(row)
         print(f"已写出候选池：{a.out}（utility 列留给效用打分）")
 
