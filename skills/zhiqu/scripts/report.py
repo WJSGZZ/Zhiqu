@@ -243,12 +243,13 @@ def build(rep, opt):
     # 03 方向
     ds = rep.get("directions", [])
     if ds:
-        body = '<p class="lead">' + E(rep.get("directions_intro", "以下方向由兴趣、能力、目标和约束交叉得出。每个方向都列出支持证据、反面证据和验证办法。")) + "</p><div class='grid2'>"
+        body = '<p class="lead">' + E(rep.get("directions_intro", "以下方向由兴趣、能力、目标和约束交叉得出。每个方向都列出支持证据、反面证据、有条件的就业前景和验证办法。")) + "</p><div class='grid2'>"
         for d in ds:
             body += (f'<div class="card"><div class="fit">{E(d.get("fit", ""))}</div><h3>{E(d["name"])}</h3>'
                      f'<div class="small">{E(d.get("majors", ""))}</div><dl>'
                      + (f"<dt>支持</dt><dd>{'；'.join(E(x) for x in d.get('evidence', []))}</dd>" if d.get("evidence") else "")
                      + (f"<dt>反面</dt><dd>{'；'.join(E(x) for x in d.get('counter', []))}</dd>" if d.get("counter") else "")
+                     + (f"<dt>前景（有条件）</dt><dd>{'<br>'.join(E(x) for x in d.get('outlook', []))}</dd>" if d.get("outlook") else "")
                      + (f"<dt>怎么验证</dt><dd>{E(d['verify'])}</dd>" if d.get("verify") else "")
                      + "</dl></div>")
         body += "</div>"
