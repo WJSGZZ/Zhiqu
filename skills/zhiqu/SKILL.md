@@ -44,11 +44,15 @@ description: 知衢 · 高考志愿顾问。读取「知衢」问卷生成的考
 | 等位分（今年的分在往年相当于多少） | `python3 scripts/rank.py equiv --table 今年.csv --past 去年.csv --past 前年.csv 596` |
 | 出分前：估分 → 位次区间 | `python3 scripts/rank.py estimate --table 去年.csv 596 --err 8` |
 | 预测各志愿今年录取线、过线概率，筛候选池 | `python3 scripts/rank.py predict 志愿.csv --rank 23500 [--table 今年.csv] --min-p 0.02 --out 候选池.csv` |
+| 逐年回测：整体漂移、误差大小、结构突变清单、招生计划弹性 | `python3 scripts/backtest.py --year 2022=data/guangdong/physics_2022.csv --year 2023=data/guangdong/physics_2023.csv` |
 | 选出期望效用最高的志愿表 | `python3 scripts/optimize.py 候选池.csv --rank 23500 --slots 45 --u-fall -60 [--max-fall 0.01]` |
 
 - 一分一段表 CSV：`score` 列，加 `count`（该分人数）或 `cumulative`（累计人数）列。位次取该分的累计人数，与多数省份公布口径一致。
 - 志愿 CSV 的列说明见 [volunteer-game.md](references/volunteer-game.md#3-csv-列说明)；示例在 `examples/candidates_demo.csv`（虚构）。`predict` 不需要 `utility` 列，输出的候选池保留原列并追加预测结果，补上效用即可交给 `optimize.py`。
 - 出分前优化时，把 `estimate` 给出的 `--rank-sd` 传给 `optimize.py`，它会把考生自己位次的不确定性一起模拟。
+- 考生总数变化明显时，`predict` 和 `optimize.py` 都可加 `--cohort 年份=人数 … --cohort-now 人数`，把历年位次按百分位折算到今年；与不折算的结果对照着看，因为人数增长未必均匀分布在各分数段。
+- 招生计划数不要机械地折算进预测：广东 2022→2023 回测中，计划翻倍平均只让位次放松约 1%（见 [backtests.md](references/backtests.md)）。
+- 省份已有回测记录时，先读 [backtests.md](references/backtests.md) 中该省的变化记录；遇到与记录同类、且填报前可知的变化，据此调整 `adj` 或 `sigma` 并在报告中注明。新发现的原因补进记录。
 - 等位分默认按位次对齐；两年同科类考生总数差别明显时，再用 `--by percentile` 对照一次，两者差得多就在报告里说明。
 
 ## 报告写法

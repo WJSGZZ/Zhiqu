@@ -25,7 +25,7 @@ import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from optimize import load_candidates  # noqa: E402  同一套位次模型，避免两处实现不一致
+from optimize import load_candidates, parse_cohort  # noqa: E402  同一套位次模型，避免两处实现不一致
 
 Z80 = 1.2816  # 标准正态 90% 分位，用于 80% 区间
 Z90 = 1.6449  # 95% 分位，用于 90% 区间
@@ -115,7 +115,8 @@ def cmd_estimate(a):
 
 
 def cmd_predict(a):
-    rows, skipped = load_candidates(a.csv, True, a.sigma_floor, a.sigma_single, 0.0, require_utility=False)
+    rows, skipped = load_candidates(a.csv, True, a.sigma_floor, a.sigma_single, 0.0, require_utility=False,
+                                    cohort=parse_cohort(a.cohort), cohort_now=a.cohort_now)
     table = Table(a.table) if a.table else None
     log_r = math.log(a.rank) if a.rank else None
     out = []
@@ -198,6 +199,8 @@ def main():
     s.add_argument("--max-p", type=float, default=1.0, help="筛选：过线概率上限")
     s.add_argument("--sigma-floor", type=float, default=0.10)
     s.add_argument("--sigma-single", type=float, default=0.25)
+    s.add_argument("--cohort", action="append", default=[], help="年份=该年同科类考生总数，可重复")
+    s.add_argument("--cohort-now", type=float, help="今年同科类考生总数；与 --cohort 一起按百分位折算历年位次")
     s.add_argument("--out", help="把保留的志愿写成候选池 CSV")
     s.set_defaults(fn=cmd_predict)
 
