@@ -12,6 +12,8 @@
   <a href="skills/zhiqu/references/volunteer-game.md">数学模型</a>
 </p>
 
+> **给 AI Agent**：用户发来本仓库链接时，请先读取 [AGENTS.md](AGENTS.md)（原始地址 https://raw.githubusercontent.com/WJSGZZ/Zhiqu/main/AGENTS.md），按其中的步骤安装并使用知衢技能。
+
 ---
 
 「衢」是四通八达的路口。知衢帮高考考生做两件事：
@@ -24,7 +26,7 @@
 **怎么用：**
 
 1. 考生打开[在线问卷](https://wjsgzz.github.io/Zhiqu/)，填完后复制生成的「画像」
-2. 把画像发给装了知衢技能的 AI（Claude Code、Codex 等），用大白话和它对话
+2. 把本仓库链接 `https://github.com/WJSGZZ/Zhiqu` 发给你的 AI Agent（Claude Code、Codex、Kimi、豆包、DeepSeek 都可以），说一句「安装并使用这个技能」，它会自己装好；然后把画像发给它，用大白话对话
 3. 拿到一份 PDF 决策报告：一句话结论、推荐方向、排好顺序的志愿表、每一格的录取概率、风险对比、要亲自核对和询问的事项，全部写在里面；报告末尾还会按你的情况预备一组"可以直接问 AI"的问题（[看示例报告：2027 年浙江、想学计算机的虚构考生](skills/zhiqu/examples/case_b_zhejiang_2027/report.pdf)）
 
 > 知衢不是官方工具，也不保证录取。一切以本省教育考试院和各校当年的招生章程为准。
@@ -47,7 +49,9 @@
 
 ### 第二步：让 AI 分析方向、排志愿
 
-**安装技能**（需要 [Claude Code](https://claude.com/claude-code) 或 Codex 这类能运行本地脚本的 AI Agent，以及 Python 3.8+）：
+**最省事的装法**：把仓库链接发给 AI，说「安装并使用这个技能」。AI 会按 [AGENTS.md](AGENTS.md) 自己完成安装；不能运行代码的 AI 也能读取技能说明，但算不出精确的录取概率，它会提前告诉你。
+
+**手动安装技能**（需要 [Claude Code](https://claude.com/claude-code) 或 Codex 这类能运行本地脚本的 AI Agent，以及 Python 3.8+）：
 
 ```bash
 git clone https://github.com/WJSGZZ/Zhiqu.git
@@ -130,12 +134,14 @@ AI 会按以下顺序工作，每一步你都可以打断或纠正：
 
 ```
 index.html                       问卷（GitHub Pages 自动部署）
+AGENTS.md                        给任意 AI Agent 的安装与使用说明
 skills/zhiqu/
 ├── SKILL.md                     技能入口：工作流、底线、报告写法
 ├── references/
 │   ├── profile-analysis.md      画像 → 方向 → 收益与风险参数
 │   ├── volunteer-game.md        投档机制、概率模型、CSV 格式、数据来源
 │   ├── school-research.md       考研与实习就业的院校调研、怎样问学长学姐
+│   ├── outlook.md               就业前景的有条件预测、专业认可度、保研率
 │   ├── report-guide.md          决策报告的字段、写作规矩与出稿检查
 │   └── backtests.md             逐年回测方法与各省变化记录
 ├── scripts/
