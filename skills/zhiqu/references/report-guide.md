@@ -19,6 +19,7 @@ python3 scripts/report.py report.json --opt result.json --out 志愿填报决策
 - **结论先行，一段一个意思。** 摘要要点控制在 3–5 条，每条一句话讲清"是什么、为什么"。
 - **给考生留下行动。** "接下来你要做的事"不超过 3 条，要具体到去哪里查、问谁。
 - **追问清单要个性化。** 从这份报告里找出考生最可能卡住或最在意的地方：画像里的矛盾、两个方向怎么选、差一点够上的志愿、家人的不同意见、某个参数换了会怎样。每条问题用考生自己的口吻写，后面附一句"为什么值得问"。6–10 条，分 2–4 组。
+- **前景写成有条件的判断，并实际算一次悲观情景。** 方向卡片的 `outlook` 写明前提和前提不成立时的后果（方法见 [outlook.md](outlook.md)）；把受影响方向的效用按悲观情景下调后重跑，敏感性表里同时给出"按原表填、结果悲观"和"按悲观情景重排"两个数，差距就是押错方向的代价。
 - **不确定的写成不确定。** 推算值、OCR 数据、单人说法、未核实的原因，都在对应位置注明。
 
 ## report.json 字段
@@ -30,7 +31,7 @@ python3 scripts/report.py report.json --opt result.json --out 志愿填报决策
 | `summary.points` | 3–5 条核心结论 | 摘要 |
 | `summary.actions` | 最多 3 条待办 | 摘要 |
 | `profile.intro` / `facts` / `priorities` / `constraints` / `tensions` | 画像要点、权重（小数）、硬约束、需要考生想清楚的矛盾 | 你的画像 |
-| `directions` | 每个方向：`name` `fit` `majors` `evidence` `counter` `verify` | 专业方向 |
+| `directions` | 每个方向：`name` `fit` `majors` `evidence` `counter` `outlook` `verify`；`outlook` 是若干条"若……则……；若不成立……"的前景判断 | 专业方向 |
 | `list_notes` | 志愿名 → 一句话说明（为什么在这一格） | 志愿表 |
 | `why` / `stress_mult` / `sensitivity` | 排序理由段落、压力倍数、敏感性表 `[假设, 期望效用, 滑档概率, 前段是否变化]` | 为什么这样排 |
 | `research` / `questions` | 院校调研 `[方面, 发现, 证据等级]`；请考生亲自去问学长学姐的问题 | 院校调研 |
