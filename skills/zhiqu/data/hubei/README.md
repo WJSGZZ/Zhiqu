@@ -1,0 +1,13 @@
+# 湖北 · 本科普通批录取院校（首选物理）平行志愿投档线（院校专业组，只公布分数）
+
+| 年份 | 来源页面 |
+|---|---|
+| 2023 | <http://jyt.hubei.gov.cn/bmdt/ztzl/gxzs/xxgs/202307/t20230721_4763257.shtml> |
+| 2024 | <http://jyt.hubei.gov.cn/bmdt/ztzl/gxzs/zszy/zsfw/202407/t20240721_5274253.shtml> |
+| 2025 | <https://jyt.hubei.gov.cn/bmdt/ztzl/gxzs/zszy/zsfw/202507/t20250721_5727304.shtml> |
+
+下载日期：2026-09-28。列：`code, name, group, major, plan, admit, score, rank`（缺的留空）。
+
+- 来源：湖北省教育厅。2023—2024 年为文本 PDF；2025 年为图片，本机 OCR 识别后，用 2023—2024 年"代号 → 校名"对照剔除代号认错的行（保留 2571、剔除 254），抽查分数 7 个错 1 个（相差 3 分）。
+- 2026 年表（湖北教育考试网，PNG）OCR 质量不足，未收录。
+- 按"学校 + 选科要求"匹配（`--key major`）。

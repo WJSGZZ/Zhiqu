@@ -12,3 +12,11 @@
 - 原表中少数顶尖院校写作"683以上""88以内"，CSV 只保留数字（683、88），实际含义是"不低于/不超过"。
 - 表中**没有组内专业**；专业组组成需另查当年招生专业目录或各校招生计划。
 - 参考：2023 年物理类 569 分对应位次 54261（官方分数段统计表附件 2，扫描件，人工读取）。
+
+## 2024—2026 年补充（2026-09-28）
+
+| 文件 | 来源 |
+|---|---|
+| `physics_2024.csv` | <https://eea.gd.gov.cn/zwgk/sjfb/tjsj/content/post_4458419.html>（附件压缩包内 PDF） |
+| `physics_2025.csv` | <https://eea.gd.gov.cn/ptgk/content/post_4746781.html> |
+| `physics_2026.csv` | <https://eea.gd.gov.cn/ptgk/content/post_4926622.html> |

@@ -26,6 +26,12 @@ import re
 import statistics as st
 
 JUMP = math.log(1.4)
+METRIC = "rank"
+
+
+def val(v):
+    """统一尺度：位次模式取 log(位次)；分数模式取 -分数（数值越大越宽松，与位次同向）。"""
+    return math.log(v["rank"]) if METRIC == "rank" else -v["score"]
 RECENCY = [1.0, 0.15, 0.05]  # 与 optimize.py 的近期加权一致
 
 
@@ -35,24 +41,38 @@ def major_key(name):
     return re.sub(r"\s+", "", s)
 
 
+def school_key(r):
+    """院校名称去掉 [公办] 之类的方括号标注与空白；圆括号里的校区、城市保留。"""
+    return re.sub(r"\s+", "", re.sub(r"\[[^\]]*\]", "", r.get("name") or ""))
+
+
+SCHOOL_BY = "code"
+
+
 def load(path, key):
     out, dup = {}, set()
     with open(path, encoding="utf-8-sig", newline="") as fh:
         for r in csv.DictReader(fh):
             try:
-                plan = int(r["plan"])
-            except (KeyError, ValueError):
-                continue
+                plan = int(r["plan"]) if (r.get("plan") or "").strip() else None  # 部分省份不公布计划数
+            except ValueError:
+                plan = None
             rank_s = (r.get("rank") or "").strip()
             admit_s = (r.get("admit") or "").strip()
-            full = bool(rank_s) and (int(admit_s) >= plan if admit_s else True) and plan > 0
+            if not rank_s.isdigit():
+                rank_s = ""
+            filled = (plan is None or plan > 0) and (int(admit_s) >= plan if admit_s and plan else True)
+            full = bool(rank_s) and filled
+            if METRIC == "score":
+                full = filled and (r.get("score") or "").strip().replace(".", "", 1).isdigit() and float(r["score"]) > 0  # 0 分表示无人投档
             k2 = major_key(r.get("major")) if key == "major" else (r.get("group") or "").strip()
-            k = (r["code"].strip(), k2)
+            k = (r["code"].strip() if SCHOOL_BY == "code" else school_key(r), k2)
             if k in out:
                 dup.add(k)
             out[k] = {"name": (r.get("name") or "").strip(),
                       "label": (r.get("major") or r.get("group") or "").strip(),
-                      "plan": plan, "rank": int(rank_s) if rank_s else None, "full": full}
+                      "plan": plan, "rank": int(rank_s) if rank_s else None, "full": full,
+                      "score": float(r["score"]) if (r.get("score") or "").strip().replace(".", "", 1).isdigit() and float(r["score"]) > 0 else None}
     for k in dup:  # 同校同名专业（如不同校区）无法唯一匹配，整体剔除
         out.pop(k, None)
     return out
@@ -86,11 +106,21 @@ def main():
                     help="跨年匹配方式：group=院校+专业组代码；major=院校+专业名称")
     ap.add_argument("--year", action="append", required=True, help="年份=投档CSV，至少两年")
     ap.add_argument("--cohort", action="append", default=[], help="年份=同科类考生总数，用于按百分位折算")
+    ap.add_argument("--school", choices=["code", "name"], default="code",
+                    help="院校跨年匹配：code=院校代号（默认）；name=院校名称（代号每年重编的省份，如河北）")
+    ap.add_argument("--metric", choices=["rank", "score"], default="rank",
+                    help="rank=按位次（默认）；score=只有分数、没有一分一段表时按分数，逐年扣除整体漂移")
+    ap.add_argument("--jump-points", type=float, default=15, help="分数模式下的突变阈值（分）")
     ap.add_argument("--min-rank", type=int, default=500, help="忽略位次过靠前的组（样本极小、波动失真）")
     ap.add_argument("--top", type=int, default=15, help="列出变化最大的条目数")
     ap.add_argument("--out", help="把相邻年份的逐条残差写成 CSV")
     a = ap.parse_args()
 
+    global METRIC, JUMP, SCHOOL_BY
+    METRIC = a.metric
+    SCHOOL_BY = a.school
+    if METRIC == "score":
+        JUMP = a.jump_points
     years = sorted((int(k), v) for k, v in (x.split("=", 1) for x in a.year))
     cohort = {int(k): float(v) for k, v in (x.split("=", 1) for x in a.cohort)}
     if len(years) < 2:
@@ -105,7 +135,7 @@ def main():
 
     def ok(y, k):
         v = data[y].get(k)
-        return v is not None and v["full"] and v["rank"] >= a.min_rank
+        return v is not None and v["full"] and (METRIC == "score" or v["rank"] >= a.min_rank)
 
     rows_out = []
     print("# 知衢 · 投档回测\n")
@@ -118,51 +148,94 @@ def main():
         if not pairs:
             print(f"## {y0} → {y1}：无可匹配条目\n")
             continue
-        errs = [math.log(v1["rank"] / scaled(y0, y1, v0["rank"])) for _, v0, v1 in pairs]
+        errs = [val(v1) - val(v0) - (math.log(scaled(y0, y1, 1.0)) if METRIC == "rank" else 0.0) for _, v0, v1 in pairs]
+        drift = st.median(errs)
+        if METRIC == "score":  # 分数含试卷难度，逐年扣除整体漂移后再比较
+            errs = [e - drift for e in errs]
         s = summarize(errs)
         stable = [(k, v0, v1, e) for (k, v0, v1), e in zip(pairs, errs) if abs(e) <= JUMP]
         print(f"## {y0} → {y1}\n")
         print(f"- 两年都存在且满额：{s['n']} 条（{y0} 共 {len(d0)}，{y1} 共 {len(d1)}）")
-        print(f"- 整体漂移（对数误差中位数）：{s['bias']:+.3f}，即录取位次普遍{'放松' if s['bias'] > 0 else '收紧'}约 {abs(math.expm1(s['bias'])):.1%}")
+        if METRIC == "rank":
+            print(f"- 整体漂移（对数误差中位数）：{drift:+.3f}，即录取位次普遍{'放松' if drift > 0 else '收紧'}约 {abs(math.expm1(drift)):.1%}")
+        else:
+            print(f"- 整体漂移：投档分普遍{'下降' if drift > 0 else '上升'} {abs(drift):.1f} 分（含试卷难度变化；以下误差已扣除该漂移）")
         print(f"- 误差：平均绝对误差 {s['mae']:.3f}；去掉突变后标准差 {s['sd_stable']:.3f}")
-        print(f"- 结构突变（变化 > 40%）：{s['jump']:.1%}")
-        fit = ols([math.log(v1["plan"] / v0["plan"]) for _, v0, v1, _ in stable], [e for *_, e in stable])
+        print(f"- 结构突变（{'变化 > 40%' if METRIC == 'rank' else f'偏离 > {JUMP:g} 分'}）：{s['jump']:.1%}")
+        if s["jump"] > 0.3:
+            print("- ⚠ 突变比例异常高，多半是匹配错位：院校代号可能每年重编（试 --school name），或组号含义变了")
+        withplan = [p for p in stable if p[1]["plan"] and p[2]["plan"]] if METRIC == "rank" else []
+        fit = ols([math.log(v1["plan"] / v0["plan"]) for _, v0, v1, _ in withplan], [e for *_, e in withplan])
         if fit:
             b, se, r2 = fit
             print(f"- 招生计划弹性（去掉突变）：{b:+.3f} ± {se:.3f}，R² = {r2:.3f}（计划翻倍 → 位次约 {math.expm1(b * math.log(2)):+.1%}）")
-        print(f"\n变化最大的 {a.top} 条（待查原因）：\n")
-        print(f"| 院校 | 专业/组 | {y0} 位次 | {y1} 位次 | 变化 | 计划 |")
-        print("|---|---|---|---|---|---|")
+        if a.top:
+            print(f"\n变化最大的 {a.top} 条（待查原因）：\n")
+            print(f"| 院校 | 专业/组 | {y0} 位次 | {y1} 位次 | 变化 | 计划 |")
+            print("|---|---|---|---|---|---|")
         for (k, v0, v1), e in sorted(zip(pairs, errs), key=lambda p: -abs(p[1]))[: a.top]:
-            print(f"| {v1['name']} | {v1['label']} | {v0['rank']} | {v1['rank']} | {math.expm1(e):+.0%} | {v0['plan']}→{v1['plan']} |")
+            if METRIC == "rank":
+                print(f"| {v1['name']} | {v1['label']} | {v0['rank']} | {v1['rank']} | {math.expm1(e):+.0%} | {v0['plan'] or '-'}→{v1['plan'] or '-'} |")
+            else:
+                print(f"| {v1['name']} | {v1['label']} | {v0['score']:g} 分 | {v1['score']:g} 分 | {-e:+.0f} 分（已扣漂移） | {v0['plan'] or '-'}→{v1['plan'] or '-'} |")
         print()
         for (k, v0, v1), e in zip(pairs, errs):
             rows_out.append({"from": y0, "to": y1, "code": k[0], "key": k[1], "name": v1["name"],
-                             "rank_from": v0["rank"], "rank_to": v1["rank"], "log_err": round(e, 4),
+                             "rank_from": v0["rank"], "rank_to": v1["rank"], "err": round(e, 4),
                              "plan_from": v0["plan"], "plan_to": v1["plan"], "jump": int(abs(e) > JUMP)})
 
     # ---- 三年及以上：比较预测方法、检验均值回归 ----
     if len(ys) >= 3:
         print("## 预测方法比较（只用目标年之前的数据）\n")
-        methods = {"只看去年": [], "去年 + 历史漂移": [], "近期加权（本工具默认）": [], "近两年平均": [],
-                   "近三年平均": [], "近三年中位数": []}
+        methods = {"只看去年": [], "去年 + 历史漂移": [], "去年 + 漂移 + 本省自相关修正": [],
+                   "近期加权（本工具默认）": [], "近两年平均": [], "近三年平均": [], "近三年中位数": []}
         drifts = {}
         for y0, y1 in zip(ys, ys[1:]):
-            e = [math.log(data[y1][k]["rank"] / data[y0][k]["rank"]) for k in data[y1] if ok(y0, k) and ok(y1, k)]
+            e = [val(data[y1][k]) - val(data[y0][k]) for k in data[y1] if ok(y0, k) and ok(y1, k)]
             if e:
                 drifts[y1] = st.median(e)
+        def cum_drift(y):  # 从首年到 y 年累计的全省漂移
+            return sum(drifts.get(z, 0.0) for z in range(ys[0] + 1, y + 1))
+
+        def ar_coef(until):  # 只用 until 年及以前的数据估计"本年变化对上年变化"的系数
+            xs_, ys_ = [], []
+            for j in range(2, len(ys)):
+                b0, b1, b2 = ys[j - 2], ys[j - 1], ys[j]
+                if b2 > until:
+                    break
+                for k in data[b2]:
+                    if ok(b0, k) and ok(b1, k) and ok(b2, k):
+                        l0, l1, l2 = (val(data[y][k]) - cum_drift(y) for y in (b0, b1, b2))
+                        if abs(l1 - l0) <= 2 * JUMP and abs(l2 - l1) <= 2 * JUMP:
+                            xs_.append(l1 - l0)
+                            ys_.append(l2 - l1)
+            f = ols(xs_, ys_)
+            return f[0] if f else 0.0
+
+        ar_cache = {}
         for i in range(2, len(ys)):
             t = ys[i]
             hist = ys[max(0, i - 3):i][::-1]  # 最近在前
             for k in data[t]:
                 if not ok(t, k) or not all(ok(h, k) for h in hist[:2]):
                     continue
-                logs = [math.log(scaled(h, t, data[h][k]["rank"])) for h in hist if ok(h, k)]
-                actual = math.log(data[t][k]["rank"])
+                if METRIC == "rank":
+                    logs = [val(data[h][k]) + math.log(scaled(h, t, 1.0)) for h in hist if ok(h, k)]
+                else:  # 分数模式：把往年分数按已实现的逐年漂移换算到目标年尺度（试卷难度不可预测，也与位次预测无关）
+                    logs = [val(data[h][k]) + sum(drifts.get(y, 0.0) for y in range(h + 1, t + 1)) for h in hist if ok(h, k)]
+                actual = val(data[t][k])
                 ws = RECENCY[: len(logs)]
                 methods["只看去年"].append(actual - logs[0])
                 past = [drifts[y] for y in drifts if y < t]  # 只用目标年之前已知的漂移
-                methods["去年 + 历史漂移"].append(actual - logs[0] - (st.mean(past) if past else 0.0))
+                if METRIC == "rank":
+                    d_hat = st.mean(past) if past else 0.0
+                    methods["去年 + 历史漂移"].append(actual - logs[0] - d_hat)
+                    if t not in ar_cache:
+                        ar_cache[t] = ar_coef(t - 1)
+                    last_change = (logs[0] - logs[1]) - drifts.get(hist[0], 0.0)  # 去年相对全省的变化
+                    if abs(last_change) > 2 * JUMP:
+                        last_change = 0.0
+                    methods["去年 + 漂移 + 本省自相关修正"].append(actual - logs[0] - d_hat - ar_cache[t] * last_change)
                 methods["近期加权（本工具默认）"].append(actual - sum(w * l for w, l in zip(ws, logs)) / sum(ws))
                 methods["近两年平均"].append(actual - st.mean(logs[:2]))
                 if len(logs) >= 3:
@@ -182,7 +255,8 @@ def main():
             a0, a1, a2 = ys[i - 2], ys[i - 1], ys[i]
             for k in data[a2]:
                 if ok(a0, k) and ok(a1, k) and ok(a2, k):
-                    l0, l1, l2 = (math.log(data[y][k]["rank"]) for y in (a0, a1, a2))
+                    # 扣掉逐年的全省整体漂移，只看单个志愿相对全省的变化；否则持续的漂移会伪装成"趋势"
+                    l0, l1, l2 = (val(data[y][k]) - sum(drifts.get(z, 0.0) for z in range(ys[0] + 1, y + 1)) for y in (a0, a1, a2))
                     if abs(l1 - l0) <= 2 * JUMP and abs(l2 - l1) <= 2 * JUMP:  # 排除明显的换义
                         dx.append(l1 - l0)
                         dy.append(l2 - l1)
