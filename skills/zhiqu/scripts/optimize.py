@@ -32,7 +32,8 @@ except AttributeError:  # Python < 3.10
     def popcount(x):
         return bin(x).count("1")
 
-RECENCY_WEIGHTS = [1.0, 0.7, 0.5, 0.35, 0.25]
+# 近期加权：浙江 2022—2026 回测中，第二年权重 0.1—0.2 最好，更早年份几乎不应计入（见 references/backtests.md）
+RECENCY_WEIGHTS = [1.0, 0.15, 0.05, 0.02, 0.01]
 JUMP_WARN = math.log(1.4)  # 相邻年份位次变化超过约 40% 视为不稳定
 
 
@@ -55,8 +56,9 @@ def parse_cohort(items):
 
 
 def load_candidates(path, default_obey, sigma_floor, sigma_single, u_fall, require_utility=True,
-                    cohort=None, cohort_now=None):
-    """cohort/cohort_now 给出时，历年位次按"今年考生总数 / 当年考生总数"折算（即按百分位对齐）。"""
+                    cohort=None, cohort_now=None, drift=0.0, target_year=None):
+    """cohort/cohort_now 给出时，历年位次按"今年考生总数 / 当年考生总数"折算（即按百分位对齐）。
+    drift 为全省录取位次每年的对数漂移（由 backtest.py 估计），第 Y 年的数据补上 (target_year - Y) × drift。"""
     rows, skipped = [], []
     with open(path, encoding="utf-8-sig", newline="") as fh:
         reader = csv.DictReader(fh)
@@ -74,6 +76,10 @@ def load_candidates(path, default_obey, sigma_floor, sigma_single, u_fall, requi
                     yr = int("".join(ch for ch in c if ch.isdigit()) or 0)
                     if hist[k] and yr in cohort:
                         hist[k] *= cohort_now / cohort[yr]
+            if drift:
+                years_of = [int("".join(ch for ch in c if ch.isdigit()) or 0) for c in rank_cols]
+                tgt = target_year or (max(years_of) + 1)
+                hist = [x * math.exp(drift * (tgt - yr)) if x else x for x, yr in zip(hist, years_of)]
             pts = [(k, x) for k, x in enumerate(hist) if x and x > 0]
             u = parse_float(r.get("utility"))
             if not require_utility and u is None:
@@ -253,6 +259,8 @@ def main():
     ap.add_argument("--sigma-single", type=float, default=0.25, help="只有一年数据时的波动，默认 0.25")
     ap.add_argument("--no-obey", action="store_true", help="默认所有志愿不服从调剂（可被 CSV 的 obey 列逐行覆盖）")
     ap.add_argument("--stress", type=float, default=2.0, help="补位用的压力情景波动倍数，默认 2；设 1 关闭补位")
+    ap.add_argument("--drift", type=float, default=0.0, help="全省录取位次每年的对数漂移，取 backtest.py 近年的整体漂移，如 0.02")
+    ap.add_argument("--target-year", type=int, help="预测的年份，默认为数据最近一年 +1")
     ap.add_argument("--cohort", action="append", default=[], help="年份=该年同科类考生总数，可重复；配合 --cohort-now 按百分位折算")
     ap.add_argument("--cohort-now", type=float, help="今年同科类考生总数")
     ap.add_argument("--sims", type=int, default=4000, help="模拟次数，默认 4000")
@@ -264,7 +272,8 @@ def main():
     if not 0 <= args.rho < 1:
         sys.exit("--rho 应在 [0, 1) 内")
     rows, skipped = load_candidates(args.csv, not args.no_obey, args.sigma_floor, args.sigma_single, args.u_fall,
-                                    cohort=parse_cohort(args.cohort), cohort_now=args.cohort_now)
+                                    cohort=parse_cohort(args.cohort), cohort_now=args.cohort_now,
+                                    drift=args.drift, target_year=args.target_year)
     if not rows:
         sys.exit("没有可用的候选志愿")
     admit, adjust = simulate(rows, args.rank, args.rank_sd, args.rho, args.sims, args.seed)
