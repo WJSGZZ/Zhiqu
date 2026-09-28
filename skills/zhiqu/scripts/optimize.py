@@ -45,7 +45,18 @@ def parse_float(v, default=None):
     return float(v)
 
 
-def load_candidates(path, default_obey, sigma_floor, sigma_single, u_fall, require_utility=True):
+def parse_cohort(items):
+    """把 ["2022=195000", ...] 解析为 {2022: 195000.0}。"""
+    out = {}
+    for x in items or []:
+        k, v = x.split("=", 1)
+        out[int(k)] = float(v)
+    return out
+
+
+def load_candidates(path, default_obey, sigma_floor, sigma_single, u_fall, require_utility=True,
+                    cohort=None, cohort_now=None):
+    """cohort/cohort_now 给出时，历年位次按"今年考生总数 / 当年考生总数"折算（即按百分位对齐）。"""
     rows, skipped = [], []
     with open(path, encoding="utf-8-sig", newline="") as fh:
         reader = csv.DictReader(fh)
@@ -58,6 +69,11 @@ def load_candidates(path, default_obey, sigma_floor, sigma_single, u_fall, requi
         for i, r in enumerate(reader, start=2):
             name = (r.get("name") or r.get("id") or f"第{i}行").strip()
             hist = [parse_float(r.get(c)) for c in rank_cols]
+            if cohort and cohort_now:
+                for k, c in enumerate(rank_cols):
+                    yr = int("".join(ch for ch in c if ch.isdigit()) or 0)
+                    if hist[k] and yr in cohort:
+                        hist[k] *= cohort_now / cohort[yr]
             pts = [(k, x) for k, x in enumerate(hist) if x and x > 0]
             u = parse_float(r.get("utility"))
             if not require_utility and u is None:
@@ -237,6 +253,8 @@ def main():
     ap.add_argument("--sigma-single", type=float, default=0.25, help="只有一年数据时的波动，默认 0.25")
     ap.add_argument("--no-obey", action="store_true", help="默认所有志愿不服从调剂（可被 CSV 的 obey 列逐行覆盖）")
     ap.add_argument("--stress", type=float, default=2.0, help="补位用的压力情景波动倍数，默认 2；设 1 关闭补位")
+    ap.add_argument("--cohort", action="append", default=[], help="年份=该年同科类考生总数，可重复；配合 --cohort-now 按百分位折算")
+    ap.add_argument("--cohort-now", type=float, help="今年同科类考生总数")
     ap.add_argument("--sims", type=int, default=4000, help="模拟次数，默认 4000")
     ap.add_argument("--seed", type=int, default=42)
     ap.add_argument("--max-swap-evals", type=int, default=20000)
@@ -245,7 +263,8 @@ def main():
 
     if not 0 <= args.rho < 1:
         sys.exit("--rho 应在 [0, 1) 内")
-    rows, skipped = load_candidates(args.csv, not args.no_obey, args.sigma_floor, args.sigma_single, args.u_fall)
+    rows, skipped = load_candidates(args.csv, not args.no_obey, args.sigma_floor, args.sigma_single, args.u_fall,
+                                    cohort=parse_cohort(args.cohort), cohort_now=args.cohort_now)
     if not rows:
         sys.exit("没有可用的候选志愿")
     admit, adjust = simulate(rows, args.rank, args.rank_sd, args.rho, args.sims, args.seed)

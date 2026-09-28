@@ -119,10 +119,13 @@ skills/zhiqu/
 ├── SKILL.md                     技能入口：工作流、底线、报告写法
 ├── references/
 │   ├── profile-analysis.md      画像 → 方向 → 收益与风险参数
-│   └── volunteer-game.md        投档机制、概率模型、CSV 格式、数据来源
+│   ├── volunteer-game.md        投档机制、概率模型、CSV 格式、数据来源
+│   └── backtests.md             逐年回测方法与各省变化记录
 ├── scripts/
 │   ├── rank.py                  分数↔位次、等位分、估分区间、录取线预测
+│   ├── backtest.py              逐年回测：漂移、误差、结构突变、计划弹性
 │   └── optimize.py              期望收益优化器
+├── data/guangdong/              广东官方投档数据（整理为 CSV，注明来源）
 └── examples/candidates_demo.csv 虚构示例数据
 ```
 
