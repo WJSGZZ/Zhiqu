@@ -25,15 +25,29 @@ description: 知衢 · 高考志愿顾问。读取「知衢」问卷生成的考
 
 1. **读画像，先查缺。** 逐节解析（字段含义见 [profile-analysis.md](references/profile-analysis.md#画像字段)）。只追问**会改变结论**的缺项：省份、位次、选科、批次、身体条件、学费上限、服从调剂态度、优先级排序。其余留空就按"未知"处理，不反复追问。
 2. **方向分析。** 按 [profile-analysis.md](references/profile-analysis.md) 做兴趣 × 能力 × 目标 × 约束的交叉，产出 2–4 个专业方向，每个附支持证据、反证和"怎么验证"（通常是读目标院校该专业的培养方案）。
-3. **核实本省规则与数据。** 当年填报模式（院校专业组 / 专业+院校 / 传统院校+专业）、每批次志愿个数、是否平行志愿、同分排序规则、投档比例；一分一段表；候选志愿近三年最低录取位次、今年招生计划与选科要求、招生章程中的体检/单科/语种/调剂规则。只用一手来源，出处和查询日期写进结果。数据来源清单见 [volunteer-game.md](references/volunteer-game.md#数据从哪来)。
-4. **建候选池并打效用。** 候选池通常是可填志愿数的 1.5–3 倍，覆盖从"够不着但想要"到"稳拿"的完整区间。每个候选按四个结局属性打 0–10 分，用考生的排序换算权重，得出 0–100 的效用；专业组还要估计被调剂的概率和调剂后的效用。方法见 [profile-analysis.md](references/profile-analysis.md#从画像到效用)。
-5. **计算。** 把候选池写成 CSV，运行：
-   ```bash
-   python3 scripts/optimize.py candidates.csv --rank <位次> --slots <志愿数> --u-fall <滑档效用> [--max-fall 0.01]
-   ```
-   模型、参数和 CSV 列说明见 [volunteer-game.md](references/volunteer-game.md)。示例数据在 `examples/candidates_demo.csv`（虚构）。
+3. **核实本省规则与数据。** 当年填报模式（院校专业组 / 专业+院校 / 传统院校+专业）、每批次志愿个数、是否平行志愿、同分排序规则、投档比例；一分一段表；候选志愿近三年最低录取位次、今年招生计划与选科要求、招生章程中的体检/单科/语种/调剂规则。只用一手来源，出处和查询日期写进结果。数据来源清单见 [volunteer-game.md](references/volunteer-game.md#6-数据从哪来)。
+4. **换算位次、预测录取线、筛候选池。** 用 `scripts/rank.py`（见下文"计算工具"）：只有分数时先换算位次；还没出分就用 `estimate` 得到位次区间；把收集到的志愿历年位次写成 CSV，用 `predict` 算出每个志愿今年的预测位次、分数线和单独过线概率，筛掉几乎不可能（如 < 2%）的冲刺项。候选池通常是可填志愿数的 1.5–3 倍，覆盖从"够不着但想要"到"稳拿"的完整区间。
+5. **打效用，再优化。** 每个候选按四个结局属性打 0–10 分，用考生的排序换算权重，得出 0–100 的效用；专业组还要估计被调剂的概率和调剂后的效用。方法见 [profile-analysis.md](references/profile-analysis.md#从画像到效用)。打分表先给考生确认，再运行 `optimize.py`。
 6. **敏感性检查。** 至少改动一次 `--rho`（如 0.1 / 0.5）和 `--u-fall`，看推荐表前段是否稳定。结论随参数大幅翻转的地方，要在报告里明说"这里取决于你怎么看滑档"。
 7. **交付。** 见下文"报告写法"。
+
+## 计算工具
+
+**凡是数字都用脚本算，不心算、不估读表格。** AI 负责找数据、做判断、解释结果；脚本负责确定性的计算。两个脚本只依赖 Python 标准库，共用同一套位次模型。
+
+| 要做的事 | 命令 |
+|---|---|
+| 分数 → 位次 | `python3 scripts/rank.py score --table 一分一段.csv 596` |
+| 位次 → 分数 | `python3 scripts/rank.py rank --table 一分一段.csv 23500` |
+| 等位分（今年的分在往年相当于多少） | `python3 scripts/rank.py equiv --table 今年.csv --past 去年.csv --past 前年.csv 596` |
+| 出分前：估分 → 位次区间 | `python3 scripts/rank.py estimate --table 去年.csv 596 --err 8` |
+| 预测各志愿今年录取线、过线概率，筛候选池 | `python3 scripts/rank.py predict 志愿.csv --rank 23500 [--table 今年.csv] --min-p 0.02 --out 候选池.csv` |
+| 选出期望效用最高的志愿表 | `python3 scripts/optimize.py 候选池.csv --rank 23500 --slots 45 --u-fall -60 [--max-fall 0.01]` |
+
+- 一分一段表 CSV：`score` 列，加 `count`（该分人数）或 `cumulative`（累计人数）列。位次取该分的累计人数，与多数省份公布口径一致。
+- 志愿 CSV 的列说明见 [volunteer-game.md](references/volunteer-game.md#3-csv-列说明)；示例在 `examples/candidates_demo.csv`（虚构）。`predict` 不需要 `utility` 列，输出的候选池保留原列并追加预测结果，补上效用即可交给 `optimize.py`。
+- 出分前优化时，把 `estimate` 给出的 `--rank-sd` 传给 `optimize.py`，它会把考生自己位次的不确定性一起模拟。
+- 等位分默认按位次对齐；两年同科类考生总数差别明显时，再用 `--by percentile` 对照一次，两者差得多就在报告里说明。
 
 ## 报告写法
 
