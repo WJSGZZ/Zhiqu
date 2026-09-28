@@ -33,6 +33,7 @@ except AttributeError:  # Python < 3.10
         return bin(x).count("1")
 
 RECENCY_WEIGHTS = [1.0, 0.7, 0.5, 0.35, 0.25]
+JUMP_WARN = math.log(1.4)  # 相邻年份位次变化超过约 40% 视为不稳定
 
 
 def parse_float(v, default=None):
@@ -74,6 +75,11 @@ def load_candidates(path, default_obey, sigma_floor, sigma_single, u_fall, requi
                 sigma = max(sd, sigma_floor)
             else:
                 sigma = sigma_single
+            # 相邻年份位次变化过大（>约40%），多半是组内专业、招生条件或组号含义变了
+            jumps = [abs(logs[k] - logs[k + 1]) for k in range(len(logs) - 1)]
+            unstable = bool(jumps) and max(jumps) > JUMP_WARN
+            if unstable:
+                sigma = max(sigma, max(jumps))
             sigma = parse_float(r.get("sigma"), sigma)
             obey_raw = (r.get("obey") or "").strip()
             obey = default_obey if obey_raw == "" else obey_raw in ("1", "是", "y", "yes", "true")
@@ -94,6 +100,7 @@ def load_candidates(path, default_obey, sigma_floor, sigma_single, u_fall, requi
                 "sigma": sigma,
                 "expected_cut": math.exp(mu),
                 "n_years": len(pts),
+                "unstable": unstable,
                 "note": (r.get("note") or "").strip(),
                 "raw": r,
             })
@@ -266,6 +273,9 @@ def main():
     p(f"- 滑档效用 {args.u_fall}｜滑档上限 {args.max_fall if args.max_fall is not None else '未设'}")
     if skipped:
         p(f"- 跳过：{'、'.join(skipped)}")
+    shaky = [r["name"] for r in rows if r["unstable"]]
+    if shaky:
+        p(f"- ⚠ 历年位次跳变超过约 40%，已自动放大波动，请查招生章程与专业组组成：{'、'.join(shaky)}")
     p("")
     p("## 推荐志愿表（已按效用从高到低排好，即填报顺序）\n")
     p("| 序 | 志愿 | 效用 | 单独过线概率 | 最终落在此处 | 其中被调剂 | 标签 | 预估最低位次 |")
