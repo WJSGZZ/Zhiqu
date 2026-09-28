@@ -44,7 +44,7 @@ def parse_float(v, default=None):
     return float(v)
 
 
-def load_candidates(path, default_obey, sigma_floor, sigma_single, u_fall):
+def load_candidates(path, default_obey, sigma_floor, sigma_single, u_fall, require_utility=True):
     rows, skipped = [], []
     with open(path, encoding="utf-8-sig", newline="") as fh:
         reader = csv.DictReader(fh)
@@ -59,6 +59,8 @@ def load_candidates(path, default_obey, sigma_floor, sigma_single, u_fall):
             hist = [parse_float(r.get(c)) for c in rank_cols]
             pts = [(k, x) for k, x in enumerate(hist) if x and x > 0]
             u = parse_float(r.get("utility"))
+            if not require_utility and u is None:
+                u = 0.0
             if not pts or u is None:
                 skipped.append(f"{name}（缺{'位次' if not pts else '效用'}）")
                 continue
@@ -93,6 +95,7 @@ def load_candidates(path, default_obey, sigma_floor, sigma_single, u_fall):
                 "expected_cut": math.exp(mu),
                 "n_years": len(pts),
                 "note": (r.get("note") or "").strip(),
+                "raw": r,
             })
     return rows, skipped
 
