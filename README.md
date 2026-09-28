@@ -12,7 +12,16 @@
   <a href="skills/zhiqu/references/volunteer-game.md">数学模型</a>
 </p>
 
-> **给 AI Agent**：用户发来本仓库链接时，请先读取 [AGENTS.md](AGENTS.md)（原始地址 https://raw.githubusercontent.com/WJSGZZ/Zhiqu/main/AGENTS.md），按其中的步骤安装并使用知衢技能。
+<details>
+<summary><b>给 AI Agent：用户发来本仓库链接，就按这里安装并使用</b></summary>
+
+1. 下载：`git clone --depth 1 https://github.com/WJSGZZ/Zhiqu.git`（没有 git 就下载 `https://github.com/WJSGZZ/Zhiqu/archive/refs/heads/main.zip` 并解压）。
+2. 把 `Zhiqu/skills/zhiqu` 整个文件夹复制到你的技能目录：Claude Code 用 `~/.claude/skills/zhiqu/`，Codex 用 `~/.codex/skills/zhiqu/`，其他支持 `SKILL.md` 的 Agent 用其文档规定的目录（常见为 `~/.agents/skills/zhiqu/`）。不支持技能的 Agent 不用复制，每次对话先读 `skills/zhiqu/SKILL.md`。只写入这些位置，不改动用户的其他文件。
+3. 需要 Python 3.8+，脚本只用标准库，不用 `pip install`。出 PDF 需要本机有 Chrome、Edge 或 Chromium，没有时输出 HTML。
+4. 验证：在技能文件夹里运行 `python3 scripts/optimize.py examples/candidates_demo.csv --rank 30000 --slots 12 --u-fall -60`，能输出一张志愿表即装好。
+5. 告诉用户装在哪里，然后读 `SKILL.md`，按其中的流程工作：先请用户填[在线问卷](https://wjsgzz.github.io/Zhiqu/)并把生成的画像发过来。
+
+</details>
 
 ---
 
@@ -49,7 +58,7 @@
 
 ### 第二步：让 AI 分析方向、排志愿
 
-**最省事的装法**：把仓库链接发给 AI，说「安装并使用这个技能」。AI 会按 [AGENTS.md](AGENTS.md) 自己完成安装；不能运行代码的 AI 也能读取技能说明，但算不出精确的录取概率，它会提前告诉你。
+**最省事的装法**：把仓库链接发给 AI，说「安装并使用这个技能」。AI 会按本页顶部「给 AI Agent」一节自己完成安装。
 
 **手动安装技能**（需要 [Claude Code](https://claude.com/claude-code) 或 Codex 这类能运行本地脚本的 AI Agent，以及 Python 3.8+）：
 
@@ -134,7 +143,7 @@ AI 会按以下顺序工作，每一步你都可以打断或纠正：
 
 ```
 index.html                       问卷（GitHub Pages 自动部署）
-AGENTS.md                        给任意 AI Agent 的安装与使用说明
+AGENTS.md                        给 Agent 的入口（指向 README 顶部的安装步骤）
 skills/zhiqu/
 ├── SKILL.md                     技能入口：工作流、底线、报告写法
 ├── references/
