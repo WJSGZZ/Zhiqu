@@ -22,23 +22,24 @@ E = html.escape
 
 CSS = r"""
 @page { size: A4; margin: 20mm 18mm 20mm 18mm; background: #FBF6E6;
-  @top-left { content: "知衢 · 志愿填报决策报告"; font: 8pt "PingFang SC", sans-serif; color: #8C8472; }
-  @top-right { content: "__RUNHEAD__"; font: 8pt "PingFang SC", sans-serif; color: #8C8472; }
-  @bottom-right { content: counter(page) " / " counter(pages); font: 8pt "PingFang SC", sans-serif; color: #8C8472; }
-  @bottom-left { content: "仅供参考 · 以当年官方招生信息为准"; font: 8pt "PingFang SC", sans-serif; color: #A39B87; }
+  @top-left { content: "知衢 · 志愿填报决策报告"; font: 8pt "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; color: #8C8472; }
+  @top-right { content: "__RUNHEAD__"; font: 8pt "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; color: #8C8472; }
+  @bottom-right { content: counter(page) " / " counter(pages); font: 8pt "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; color: #8C8472; }
+  @bottom-left { content: "仅供参考 · 以当年官方招生信息为准"; font: 8pt "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; color: #A39B87; }
 }
 @page cover { margin: 0; @top-left { content: none; } @top-right { content: none; } @bottom-right { content: none; } @bottom-left { content: none; } }
-:root { --ink:#1B1B1B; --soft:#4A4740; --muted:#7D7665; --rule:#D9CFB4; --rule2:#BFB294;
+:root { --ink:#161616; --soft:#3B3832; --muted:#66604F; --rule:#D9CFB4; --rule2:#BFB294;
   --accent:#21473E; --accent2:#34685D; --pale:#EFE7D0; --amber:#9A6B1F; --red:#9B3B2E; --green:#2F6B4F; }
 * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 html, body { background: #FBF6E6; }
-body { margin: 0; color: var(--ink); font: 10pt/1.72 "PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",sans-serif; }
-h1,h2,h3 { font-family: "Songti SC","STSong","Noto Serif SC","Source Han Serif SC",serif; color: var(--ink); }
+body { margin: 0; color: var(--ink); font: 10pt/1.75 "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; font-feature-settings: "lnum"; }
+h1,h2,h3 { font-family: "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; font-weight: 700; color: var(--ink); }
 h2 { font-size: 17pt; margin: 0 0 4mm; padding-bottom: 2.5mm; border-bottom: 1.2pt solid var(--accent); break-after: avoid; }
-h2 .no { color: var(--accent); margin-right: 3mm; font-family: "PingFang SC",sans-serif; font-weight: 600; font-size: 12pt; vertical-align: 2pt; }
+h2 .no { color: var(--accent); margin-right: 3mm; font-weight: 400; font-size: 13pt; vertical-align: 1pt; }
 h3 { font-size: 12pt; margin: 6mm 0 2mm; break-after: avoid; }
 p { margin: 0 0 2.6mm; }
 section { margin-top: 12mm; }
+section:not(.major) { break-inside: avoid-page; }
 section.major { break-before: page; margin-top: 0; }
 svg.chart { width: 100%; height: auto; display: block; }
 .lead { font-size: 11pt; color: var(--soft); }
@@ -57,7 +58,7 @@ svg.chart { width: 100%; height: auto; display: block; }
 .cover .meta span { font-size: 12pt; }
 .cover .verdict { margin: 9mm 22mm 0; padding: 6mm 8mm; background: #FFFDF6; border-left: 3pt solid var(--accent); }
 .cover .verdict b { display:block; font-size: 8pt; color: var(--accent); letter-spacing: 2pt; margin-bottom: 2mm; }
-.cover .verdict p { font-family: "Songti SC","STSong",serif; font-size: 14pt; line-height: 1.6; margin: 0; }
+.cover .verdict p { font-size: 14pt; line-height: 1.6; margin: 0; }
 .cover .foot { position: absolute; left: 22mm; right: 22mm; bottom: 16mm; font-size: 8pt; color: var(--muted); border-top: .6pt solid var(--rule); padding-top: 3mm; }
 
 /* kpis */
@@ -65,7 +66,7 @@ svg.chart { width: 100%; height: auto; display: block; }
 .kpis div { padding: 3mm 3mm 3mm 0; }
 .kpis div + div { padding-left: 4mm; border-left: .6pt solid var(--rule); }
 .kpis b { display:block; font-size: 8pt; color: var(--muted); font-weight: 500; }
-.kpis span { font: 600 18pt/1.25 "PingFang SC",sans-serif; font-variant-numeric: tabular-nums; }
+.kpis span { font: 700 19pt/1.25 "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; }
 .kpis em { display:block; font-style: normal; font-size: 8pt; color: var(--soft); }
 
 /* boxes */
@@ -100,13 +101,20 @@ tr.hl td { background: #F3EBD2; }
 .fig .cap { font-size: 8pt; color: var(--muted); margin-top: 1mm; }
 .fig .ttl { font-size: 9pt; font-weight: 600; margin-bottom: 1mm; }
 .glossary dt { font-weight: 600; margin-top: 1.5mm; } .glossary dd { margin: 0 0 1mm; color: var(--soft); }
+ul.asklist { list-style: none; padding: 0; margin: 0 0 3mm; }
+ul.asklist li { padding: 2mm 0 2mm 4mm; border-left: 2pt solid var(--rule2); margin: 0 0 2mm; background: #FFFDF6; break-inside: avoid; }
+ul.asklist li b { font-weight: 600; } ul.asklist li span { display: block; font-size: 8.5pt; color: var(--muted); margin-top: .5mm; }
 .toc { margin-top: 2mm; columns: 2; column-gap: 10mm; } .toc div { display: flex; border-bottom: .4pt dotted var(--rule2); padding: 1.1mm 0; break-inside: avoid; }
 .toc div span:first-child { width: 10mm; color: var(--accent); font-weight: 600; }
 """
 
 
 def pct(x, d=0):
-    return "–" if x is None else f"{x * 100:.{d}f}%"
+    if x is None:
+        return "–"
+    if d == 0 and 0 < x < 0.01:
+        d = 1  # 小于 1% 时保留一位小数，避免把 0.5% 显示成 0%
+    return f"{x * 100:.{d}f}%"
 
 
 def bars_h(items, width=640, bar_h=13, gap=6, label_w=170, color="#34685D", fmt=lambda v: f"{v:.0%}", vmax=None):
@@ -114,7 +122,7 @@ def bars_h(items, width=640, bar_h=13, gap=6, label_w=170, color="#34685D", fmt=
     vmax = vmax or max((v for _, v in items), default=1) or 1
     h = len(items) * (bar_h + gap) + 4
     w_plot = width - label_w - 44
-    out = [f'<svg class="chart" viewBox="0 0 {width} {h}" xmlns="http://www.w3.org/2000/svg" font-family="PingFang SC, sans-serif" font-size="9">']
+    out = [f'<svg class="chart" viewBox="0 0 {width} {h}" xmlns="http://www.w3.org/2000/svg" font-family="PT Serif, Songti SC, Noto Serif SC, serif" font-size="9">']
     for i, (lab, v) in enumerate(items):
         y = i * (bar_h + gap) + 2
         bw = max(0.5, w_plot * v / vmax)
@@ -133,7 +141,7 @@ def strategy_chart(rows, width=640):
     label_w, bar_h, gap = 150, 18, 10
     h = len(rows) * (bar_h + gap) + 8
     w_plot = width - label_w - 110
-    out = [f'<svg class="chart" viewBox="0 0 {width} {h}" xmlns="http://www.w3.org/2000/svg" font-family="PingFang SC, sans-serif" font-size="9">']
+    out = [f'<svg class="chart" viewBox="0 0 {width} {h}" xmlns="http://www.w3.org/2000/svg" font-family="PT Serif, Songti SC, Noto Serif SC, serif" font-size="9">']
     for i, (n, eu, pf, hl) in enumerate(rows):
         y = i * (bar_h + gap) + 4
         bw = max(1, w_plot * max(eu, 0) / vmax)
@@ -149,14 +157,20 @@ def strategy_chart(rows, width=640):
 def outcome_strip(items, pfall, width=640):
     """结局分布：一条 100% 堆积条，按志愿顺序着色，展示"最可能落在哪里"。"""
     h = 34
-    out = [f'<svg class="chart" viewBox="0 0 {width} {h}" xmlns="http://www.w3.org/2000/svg" font-family="PingFang SC, sans-serif" font-size="8">']
+    out = [f'<svg class="chart" viewBox="0 0 {width} {h}" xmlns="http://www.w3.org/2000/svg" font-family="PT Serif, Songti SC, Noto Serif SC, serif" font-size="8">']
     x = 0.0
-    palette = ["#21473E", "#34685D", "#4F8577", "#6FA092", "#93B8AC", "#B7CFC6", "#D5E2DB"]
+    strong = ["#21473E", "#5E8C7F", "#34685D", "#7FA597"]  # 主要去向（≥5%）按出现顺序交替深浅
+    k = 0
     for i, (lab, p) in enumerate(items):
         w = width * p
         if w <= 0:
             continue
-        out.append(f'<rect x="{x:.1f}" y="0" width="{w:.1f}" height="18" fill="{palette[min(i, len(palette) - 1)]}"/>')
+        if p >= 0.05:
+            col = strong[k % len(strong)]
+            k += 1
+        else:
+            col = "#CFC6AE"
+        out.append(f'<rect x="{x:.1f}" y="0" width="{w:.1f}" height="18" fill="{col}" stroke="#FBF6E6" stroke-width="0.6"/>')
         if w > 34:
             out.append(f'<text x="{x + 3:.1f}" y="12" fill="#fff">{E(str(i + 1))} · {p:.0%}</text>')
         x += w
@@ -175,7 +189,8 @@ def build(rep, opt):
     pfall = (opt or {}).get("p_fall")
     stress = (opt or {}).get("stress", {})
     top = [x for x in lst if x["p_land"] >= 0.005]
-    p_top3 = sum(x["p_land"] for x in lst[:3]) if lst else None
+    # 以原专业录取、且偏好分 ≥ 70 的概率（被调剂的部分不计入）
+    p_good = sum(x["p_land"] - x.get("p_adjusted", 0) for x in lst if x["utility"] >= 70) if lst else None
     likely = max(lst, key=lambda x: x["p_land"]) if lst else None
     secs = []
     n = 0
@@ -193,12 +208,12 @@ def build(rep, opt):
         body += ('<div class="kpis">'
                  f'<div><b>推荐志愿数</b><span class="num">{len(lst)}</span><em>本批次可填 {E(str(m.get("slots", "–")))} 个</em></div>'
                  f'<div><b>最可能的去向</b><span style="font-size:11pt">{E(likely["name"]) if likely else "–"}</span><em>概率约 {pct(likely["p_land"]) if likely else "–"}</em></div>'
-                 f'<div><b>进入前三志愿的概率</b><span class="num">{pct(p_top3)}</span><em>前三个是你最想去的</em></div>'
+                 f'<div><b>满意度 70 分以上的概率</b><span class="num">{pct(p_good)}</span><em>100 分 = 候选中你最想去的</em></div>'
                  f'<div><b>滑档风险</b><span class="num">{pct(pfall, 1)}</span><em>录取线整体大波动时 {pct(stress.get("p_fall"), 1)}</em></div>'
                  '</div>')
     if lst:
         body += ('<div class="fig"><div class="ttl">你最终会被哪里录取</div>' + outcome_strip([(x["name"], x["p_land"]) for x in lst], pfall or 0)
-                 + '<div class="cap">数字是志愿序号（见第 04 节志愿表）。</div></div>')
+                 + '<div class="cap">数字是志愿序号，对应"志愿表"一节；浅色是录取概率不到 5% 的志愿。</div></div>')
     if s.get("points"):
         body += '<div class="box key"><h4>核心结论</h4><ol class="tight">' + "".join(f"<li>{E(x)}</li>" for x in s["points"]) + "</ol></div>"
     if s.get("actions"):
@@ -252,7 +267,7 @@ def build(rep, opt):
                      f"<td class='r'>{x['utility']:g}</td><td class='r'>{pct(x['p_clear'])}</td><td class='r'>{pct(x['p_land'], 1)}</td>"
                      f"<td class='r'>{x['expected_cut_rank']:,}</td><td class='small'>{E(notes.get(x['name'], ''))}</td></tr>")
         body += "</tbody></table>"
-        body += ('<p class="small">"偏好"是 0–100 的分数，由第 02 节的权重和各项打分算出。"单独过线"只看这一个志愿；"最终录取"考虑了前面志愿可能已经录取你；"预测位次"是今年最低录取位次的中位预测。'
+        body += ('<p class="small">"偏好"是 0–100 的分数，由"你的画像"一节的权重和各项打分算出。"单独过线"只看这一个志愿；"最终录取"考虑了前面志愿可能已经录取你；"预测位次"是今年最低录取位次的中位预测。'
                  '冲：单独过线 &lt; 40%；稳：40%–85%；保：≥ 85%。高亮行是最可能的去向。</p>')
         sec("志愿表", body, major=True)
 
@@ -295,6 +310,15 @@ def build(rep, opt):
                 + "".join(f"<tr><td class='c'>□</td><td>{E(a)}</td><td class='small'>{E(b)}</td></tr>" for a, b in rep["todo"]) + "</tbody></table>")
         sec("填报前核对清单", body)
 
+    # 可以直接问我（个性化的追问清单）
+    if rep.get("ask_me"):
+        body = ('<p class="lead">' + E(rep.get("ask_me_intro", "这份报告是和 AI 一起做出来的。看不懂的地方、想换个假设算一算，都可以直接回去问它。下面是根据你的情况预备的问题，挑感兴趣的问就行。")) + "</p>")
+        for grp in rep["ask_me"]:
+            body += f'<h3>{E(grp["topic"])}</h3><ul class="asklist">' + "".join(
+                f'<li><b>“{E(q["q"])}”</b>' + (f'<span>{E(q["why"])}</span>' if q.get("why") else "") + "</li>" for q in grp["items"]) + "</ul>"
+        body += '<p class="small">提问时可以直接说"按报告志愿表的第 3 个志愿……"，AI 会接着这份报告的数据回答；它不知道的会说不知道。</p>'
+        sec("还想知道什么？可以直接问", body, major=True)
+
     # 08 方法与假设（可用术语）
     body = '<p class="lead">这一节写给想了解细节的读者，会用到一些专业术语，术语解释在本节末尾。</p>'
     if rep.get("assumptions"):
@@ -312,6 +336,16 @@ def build(rep, opt):
              "<dt>漂移</dt><dd>全省录取位次整体逐年变宽或变紧的趋势。</dd>"
              "<dt>回测</dt><dd>用过去的数据去\"预测\"已经发生的年份，检验方法准不准。</dd></dl></div>")
     sec("方法与假设", body, major=True)
+
+    # 事后回看（仅用于回测案例）
+    if rep.get("hindsight"):
+        h = rep["hindsight"]
+        body = '<p class="lead">' + E(h.get("intro", "")) + "</p>"
+        if h.get("table"):
+            body += "<table><thead><tr>" + "".join(f"<th>{E(c)}</th>" for c in h["columns"]) + "</tr></thead><tbody>" + "".join(
+                "<tr>" + "".join(f"<td>{E(str(c))}</td>" for c in row) + "</tr>" for row in h["table"]) + "</tbody></table>"
+        body += "".join(f"<p>{E(x)}</p>" for x in h.get("notes", []))
+        sec("事后回看", body, major=True)
 
     # 09 来源与声明
     body = ""
@@ -334,8 +368,7 @@ def build(rep, opt):
              + "</div>"
              + (f'<div class="verdict"><b>一句话结论</b><p>{E(s.get("headline", ""))}</p></div>' if s.get("headline") else "")
              + f'<div class="verdict" style="background:transparent;border-left-color:var(--rule2)"><b>目录</b><div class="toc">{toc}</div></div>'
-             + '<div class="foot">本报告由「知衢」生成，供考生与家庭决策参考。数据来源、假设与局限见第 '
-             + f'{len(secs) - 1:02d}、{len(secs):02d} 节。</div></div>')
+             + '<div class="foot">本报告由「知衢」生成，供考生与家庭决策参考。数据来源、假设与局限见"方法与假设"和"数据来源与声明"两节。</div></div>')
     runhead = f'{m.get("candidate", "")} · {m.get("province", "")} {m.get("category", "")}'.replace('"', "")
     css = CSS.replace("__RUNHEAD__", runhead)
     return f'<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>{E(m.get("title", "志愿填报决策报告"))}</title><style>{css}</style></head><body>{cover}{"".join(b for _, _, b in secs)}</body></html>'
