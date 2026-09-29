@@ -58,9 +58,11 @@ def parse_cohort(items):
     return out
 
 
-def parse_majors(text, hist_latest):
-    """组内专业，按考生填报顺序："专业:效用:去年该专业组内最低位次;..."。
-    返回 [(名称, 效用, delta)]，delta = ln(该专业去年位次 / 本组去年最低位次) ≤ 0，表示比组线难多少。"""
+def parse_majors(text, hist_latest, complete=True):
+    """组内专业，按考生填报顺序："专业:效用:去年该专业组内最低位次;..."（同一年的数据）。
+    返回 [(名称, 效用, delta)]，delta ≤ 0 表示比组线难多少：
+    complete=True（列出了组内全部专业）时，相对于列表里最松的专业计算，最松的专业线即组线；
+    否则相对于最近一年的组线计算。"""
     out = []
     for part in (text or "").replace("；", ";").split(";"):
         bits = [b.strip() for b in part.replace("：", ":").split(":")]
@@ -70,9 +72,9 @@ def parse_majors(text, hist_latest):
         rk = parse_float(bits[2]) if len(bits) > 2 else None
         if u is None:
             continue
-        delta = min(0.0, math.log(rk / hist_latest)) if rk and hist_latest else 0.0
-        out.append((bits[0], u, delta))
-    return out
+        out.append([bits[0], u, rk])
+    base = max((m[2] for m in out if m[2]), default=None) if complete else hist_latest
+    return [(n, u, min(0.0, math.log(rk / base)) if rk and base else 0.0) for n, u, rk in out]
 
 
 FIRST_CHOICE_GAP = 0.25  # "志愿优先"的粗略近似：非第一专业志愿每级额外相当于位次难 ~25%
@@ -135,11 +137,12 @@ def load_candidates(path, default_obey, sigma_floor, sigma_single, u_fall, requi
                 ua = u_fall  # 不服从调剂 → 退档，等同滑档
             elif ua is None:
                 ua = u if p_adj == 0 else 0.0
-            majors = parse_majors(r.get("majors"), hist_latest=pts[0][1])
+            complete = (r.get("majors_complete") or "1").strip() not in ("0", "否", "no", "false")
+            majors = parse_majors(r.get("majors"), hist_latest=pts[0][1], complete=complete)
             rule = (r.get("rule") or "score").strip().lower()
             gaps = [parse_float(x, 0.0) for x in (r.get("gap") or "").replace("，", ",").split(",") if x.strip()]
             rows.append({
-                "majors": majors, "rule": rule, "gaps": gaps,
+                "majors": majors, "rule": rule, "gaps": gaps, "complete": complete,
                 "id": (r.get("id") or "").strip() or name,
                 "name": name,
                 "u": u,
@@ -177,9 +180,14 @@ def simulate(rows, rank, rank_sd, rho, n, seed, sigma_mult=1.0):
                 if row["majors"]:
                     # 组内按专业分配：先看考生填的第 1 个专业，依次往下；都不够就调剂（或退档）
                     sw = max(0.08, 0.5 * row["sigma"] * sigma_mult)
+                    cuts = [log_cut + delta + sw * rng.gauss(0, 1) for _, _, delta in row["majors"]]
+                    if row["complete"]:
+                        # 列出了组内全部专业：组线就是最松那个专业的线，整体平移使最松的专业线 = 组线
+                        shift = max(cuts) - log_cut
+                        cuts = [c - shift for c in cuts]
                     got = None
                     for k, (_, _, delta) in enumerate(row["majors"]):
-                        cut_k = min(log_cut, log_cut + delta + sw * rng.gauss(0, 1))
+                        cut_k = min(log_cut, cuts[k])
                         if row["rule"] == "gap" and k:
                             pen = sum(row["gaps"][:k]) if row["gaps"] else 0.0
                         elif row["rule"] == "first" and k:

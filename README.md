@@ -155,6 +155,7 @@ skills/zhiqu/
 │   ├── report-guide.md          决策报告的字段、写作规矩与出稿检查
 │   └── backtests.md             逐年回测方法与各省变化记录
 ├── scripts/
+│   ├── pool.py                  从本省历年投档数据生成候选表（按所在地、公办筛选）
 │   ├── rank.py                  分数↔位次、等位分、估分区间、录取线预测
 │   ├── backtest.py              逐年回测：漂移、误差、结构突变、计划弹性
 │   ├── calibrate.py             校准检验：模型说的过线概率和实际是否一致
@@ -162,7 +163,7 @@ skills/zhiqu/
 │   ├── civil_service.py         统计省考职位表中各专业能报的岗位
 │   ├── optimize.py              期望收益优化器
 │   └── report.py                生成 PDF 决策报告
-├── data/                        10 个省份的官方投档数据（整理为 CSV，注明来源与口径）
+├── data/                        10 个省份的官方投档数据、全国高校名单、公务员职位统计（整理为 CSV，注明来源）
 └── examples/                    虚构示例：候选志愿、报告内容与生成的 PDF
 ```
 
