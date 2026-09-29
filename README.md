@@ -157,6 +157,7 @@ skills/zhiqu/
 ├── scripts/
 │   ├── rank.py                  分数↔位次、等位分、估分区间、录取线预测
 │   ├── backtest.py              逐年回测：漂移、误差、结构突变、计划弹性
+│   ├── calibrate.py             校准检验：模型说的过线概率和实际是否一致
 │   ├── special_types.py         提前批、专项、定向等类型的回测汇总
 │   ├── civil_service.py         统计省考职位表中各专业能报的岗位
 │   ├── optimize.py              期望收益优化器

@@ -117,7 +117,7 @@ def cmd_estimate(a):
 def cmd_predict(a):
     rows, skipped = load_candidates(a.csv, True, a.sigma_floor, a.sigma_single, 0.0, require_utility=False,
                                     cohort=parse_cohort(a.cohort), cohort_now=a.cohort_now,
-                                    drift=a.drift, target_year=a.target_year)
+                                    drift=a.drift, target_year=a.target_year, sigma_scale=a.sigma_scale)
     table = Table(a.table) if a.table else None
     log_r = math.log(a.rank) if a.rank else None
     out = []
@@ -200,6 +200,7 @@ def main():
     s.add_argument("--max-p", type=float, default=1.0, help="筛选：过线概率上限")
     s.add_argument("--sigma-floor", type=float, default=0.10)
     s.add_argument("--sigma-single", type=float, default=0.25)
+    s.add_argument("--sigma-scale", type=float, default=1.0, help="按省校准的波动倍数（calibrate.py）")
     s.add_argument("--drift", type=float, default=0.0, help="全省录取位次每年的对数漂移（backtest.py 估计）")
     s.add_argument("--target-year", type=int, help="预测的年份，默认为数据最近一年 +1")
     s.add_argument("--cohort", action="append", default=[], help="年份=该年同科类考生总数，可重复")
