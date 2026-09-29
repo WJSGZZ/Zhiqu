@@ -193,6 +193,7 @@ def build(rep, opt):
     p_good = sum(x["p_land"] - x.get("p_adjusted", 0) for x in lst if x["utility"] >= 70) if lst else None
     likely = max(lst, key=lambda x: x["p_land"]) if lst else None
     secs = []
+    missing = []
     n = 0
 
     def sec(title, body, major=False):
@@ -200,6 +201,15 @@ def build(rep, opt):
         n += 1
         cls = ' class="major"' if major else ""
         secs.append((n, title, f'<section{cls}><h2><span class="no">{n:02d}</span>{E(title)}</h2>{body}</section>'))
+
+    # 目录固定：每一节都出现。没有内容的节写明原因（report.json 的 omitted.<键>），并在终端提醒。
+    omitted = rep.get("omitted", {})
+
+    def blank(key, title, default, major=False):
+        why = omitted.get(key)
+        if not why:
+            missing.append(title)
+        sec(title, f'<div class="box"><h4>本节说明</h4><p>{E(why or default)}</p></div>', major)
 
     # 01 摘要
     s = rep.get("summary", {})
@@ -254,6 +264,8 @@ def build(rep, opt):
                      + "</dl></div>")
         body += "</div>"
         sec("专业方向", body, major=True)
+    else:
+        blank("directions", "专业方向", "本次没有做专业方向分析。", major=True)
 
     # 04 志愿表
     if lst:
@@ -291,6 +303,9 @@ def build(rep, opt):
             body += "<h3>换一种假设，结论会变吗</h3><table><thead><tr><th>假设</th><th class='r'>期望效用</th><th class='r'>滑档概率</th><th>前段是否变化</th></tr></thead><tbody>" + "".join(
                 f"<tr><td>{E(a)}</td><td class='r'>{E(str(b))}</td><td class='r'>{E(str(c))}</td><td>{E(d)}</td></tr>" for a, b, c, d in rep["sensitivity"]) + "</tbody></table>"
         sec("为什么这样排", body)
+    else:
+        blank("list", "志愿表", "本次没有运行志愿组合优化，因此没有志愿表。", major=True)
+        blank("list", "为什么这样排", "本次没有运行志愿组合优化，因此没有排序依据与方案对比。")
 
     # 06 院校调研
     rs = rep.get("research", [])
@@ -304,12 +319,16 @@ def build(rep, opt):
             body += ('<div class="box key"><h4>请你亲自去问学长学姐的问题</h4><p class="small">开头先说明：每条回答请标"确认 / 听说 / 不知道"，不确定就说不知道。最好问两个以上、不同年级的人。</p><ol class="tight">'
                      + "".join(f"<li>{E(x)}</li>" for x in qs) + "</ol></div>")
         sec("院校调研", body)
+    else:
+        blank("research", "院校调研", "本次没有做院校调研。")
 
     # 07 待核实
     if rep.get("todo"):
         body = ('<p class="lead">以下事项会直接影响能不能报、报了能不能录，请在正式填报前逐一核对。</p><table><thead><tr><th class="c" style="width:8%">✓</th><th>事项</th><th style="width:30%">去哪里查</th></tr></thead><tbody>'
                 + "".join(f"<tr><td class='c'>□</td><td>{E(a)}</td><td class='small'>{E(b)}</td></tr>" for a, b in rep["todo"]) + "</tbody></table>")
         sec("填报前核对清单", body)
+    else:
+        blank("todo", "填报前核对清单", "本次没有列出待核对事项。")
 
     # 可以直接问我（个性化的追问清单）
     if rep.get("ask_me"):
@@ -319,6 +338,8 @@ def build(rep, opt):
                 f'<li><b>“{E(q["q"])}”</b>' + (f'<span>{E(q["why"])}</span>' if q.get("why") else "") + "</li>" for q in grp["items"]) + "</ul>"
         body += '<p class="small">提问时可以直接说"按报告志愿表的第 3 个志愿……"，AI 会接着这份报告的数据回答；它不知道的会说不知道。</p>'
         sec("还想知道什么？可以直接问", body, major=True)
+    else:
+        blank("ask_me", "还想知道什么？可以直接问", "本次没有预备追问清单。", major=True)
 
     # 08 方法与假设（可用术语）
     body = '<p class="lead">这一节写给想了解细节的读者，会用到一些专业术语，术语解释在本节末尾。</p>'
@@ -347,6 +368,8 @@ def build(rep, opt):
                 "<tr>" + "".join(f"<td>{E(str(c))}</td>" for c in row) + "</tr>" for row in h["table"]) + "</tbody></table>"
         body += "".join(f"<p>{E(x)}</p>" for x in h.get("notes", []))
         sec("事后回看", body, major=True)
+    else:
+        sec("事后回看", '<p class="lead">' + E(omitted.get("hindsight", "录取结果公布后，把真实的投档线和最终去向填进这一节，与本报告的预测逐条对照：哪些判断准、哪些偏了、偏在哪里。这样下一次的判断才会更准。")) + "</p>", major=True)
 
     # 09 来源与声明
     body = ""
@@ -372,6 +395,8 @@ def build(rep, opt):
              + '<div class="foot">本报告由「知衢」生成，供考生与家庭决策参考。数据来源、假设与局限见"方法与假设"和"数据来源与声明"两节。</div></div>')
     runhead = f'{m.get("candidate", "")} · {m.get("province", "")} {m.get("category", "")}'.replace('"', "")
     css = CSS.replace("__RUNHEAD__", runhead)
+    if missing:
+        print("提醒：以下各节没有内容，也没有在 omitted 中写明原因：" + "、".join(dict.fromkeys(missing)), file=sys.stderr)
     return f'<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>{E(m.get("title", "志愿填报决策报告"))}</title><style>{css}</style></head><body>{cover}{"".join(b for _, _, b in secs)}</body></html>'
 
 
