@@ -263,6 +263,11 @@ def build(rep, opt):
                      + (f"<dt>怎么验证</dt><dd>{E(d['verify'])}</dd>" if d.get("verify") else "")
                      + "</dl></div>")
         body += "</div>"
+        if rep.get("news"):
+            body += ("<h3>近期报道与政策</h3><p class='small'>前景和录取线都会受社会情况影响。下表是填报前查到的相关报道，影响一栏是本报告的判断。</p>"
+                     "<table><thead><tr><th>事件</th><th style='width:12%'>日期</th><th style='width:22%'>来源</th><th style='width:30%'>对本报告的影响</th></tr></thead><tbody>"
+                     + "".join(f"<tr><td>{E(a)}</td><td class='small'>{E(b)}</td><td class='small' style='word-break:break-all'>{E(c)}</td><td>{E(d)}</td></tr>" for a, b, c, d in rep["news"])
+                     + "</tbody></table>")
         sec("专业方向", body, major=True)
     else:
         blank("directions", "专业方向", "本次没有做专业方向分析。", major=True)
@@ -337,9 +342,9 @@ def build(rep, opt):
             body += f'<h3>{E(grp["topic"])}</h3><ul class="asklist">' + "".join(
                 f'<li><b>“{E(q["q"])}”</b>' + (f'<span>{E(q["why"])}</span>' if q.get("why") else "") + "</li>" for q in grp["items"]) + "</ul>"
         body += '<p class="small">提问时可以直接说"按报告志愿表的第 3 个志愿……"，AI 会接着这份报告的数据回答；它不知道的会说不知道。</p>'
-        sec("还想知道什么？可以直接问", body, major=True)
+        sec("追问清单", body, major=True)
     else:
-        blank("ask_me", "还想知道什么？可以直接问", "本次没有预备追问清单。", major=True)
+        blank("ask_me", "追问清单", "本次没有预备追问清单。", major=True)
 
     # 08 方法与假设（可用术语）
     body = '<p class="lead">这一节写给想了解细节的读者，会用到一些专业术语，术语解释在本节末尾。</p>'
