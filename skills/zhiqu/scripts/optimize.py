@@ -56,9 +56,10 @@ def parse_cohort(items):
 
 
 def load_candidates(path, default_obey, sigma_floor, sigma_single, u_fall, require_utility=True,
-                    cohort=None, cohort_now=None, drift=0.0, target_year=None):
+                    cohort=None, cohort_now=None, drift=0.0, target_year=None, sigma_scale=1.0):
     """cohort/cohort_now 给出时，历年位次按"今年考生总数 / 当年考生总数"折算（即按百分位对齐）。
-    drift 为全省录取位次每年的对数漂移（由 backtest.py 估计），第 Y 年的数据补上 (target_year - Y) × drift。"""
+    drift 为全省录取位次每年的对数漂移（由 backtest.py 估计），第 Y 年的数据补上 (target_year - Y) × drift。
+    sigma_scale 为按省校准的波动倍数（由 calibrate.py 估计，见 references/backtests.md），不作用于 CSV 里手填的 sigma。"""
     rows, skipped = [], []
     with open(path, encoding="utf-8-sig", newline="") as fh:
         reader = csv.DictReader(fh)
@@ -102,7 +103,7 @@ def load_candidates(path, default_obey, sigma_floor, sigma_single, u_fall, requi
             unstable = bool(jumps) and max(jumps) > JUMP_WARN
             if unstable:
                 sigma = max(sigma, max(jumps))
-            sigma = parse_float(r.get("sigma"), sigma)
+            sigma = parse_float(r.get("sigma"), sigma * sigma_scale)
             obey_raw = (r.get("obey") or "").strip()
             obey = default_obey if obey_raw == "" else obey_raw in ("1", "是", "y", "yes", "true")
             p_adj = parse_float(r.get("p_adjust"), 0.0)
@@ -257,6 +258,7 @@ def main():
     ap.add_argument("--rank-sd", type=float, default=0.0, help="考生位次本身的不确定性（对数尺度），出分后为 0")
     ap.add_argument("--sigma-floor", type=float, default=0.10, help="位次对数波动的下限，默认 0.10（约 ±10%%）")
     ap.add_argument("--sigma-single", type=float, default=0.25, help="只有一年数据时的波动，默认 0.25")
+    ap.add_argument("--sigma-scale", type=float, default=1.0, help="按省校准的波动倍数（calibrate.py；如广东专业组 1.6、河北 0.8）")
     ap.add_argument("--no-obey", action="store_true", help="默认所有志愿不服从调剂（可被 CSV 的 obey 列逐行覆盖）")
     ap.add_argument("--stress", type=float, default=2.0, help="补位用的压力情景波动倍数，默认 2；设 1 关闭补位")
     ap.add_argument("--drift", type=float, default=0.0, help="全省录取位次每年的对数漂移，取 backtest.py 近年的整体漂移，如 0.02")
@@ -273,7 +275,7 @@ def main():
         sys.exit("--rho 应在 [0, 1) 内")
     rows, skipped = load_candidates(args.csv, not args.no_obey, args.sigma_floor, args.sigma_single, args.u_fall,
                                     cohort=parse_cohort(args.cohort), cohort_now=args.cohort_now,
-                                    drift=args.drift, target_year=args.target_year)
+                                    drift=args.drift, target_year=args.target_year, sigma_scale=args.sigma_scale)
     if not rows:
         sys.exit("没有可用的候选志愿")
     admit, adjust = simulate(rows, args.rank, args.rank_sd, args.rho, args.sims, args.seed)
