@@ -187,7 +187,7 @@ def outcome_strip(items, pfall, width=640):
 def group_line(x):
     """专业组志愿：列出落到组内各专业和被调剂的概率。"""
     ms = x.get("majors")
-    if not ms:
+    if not ms or x.get("p_land", 0) <= 0:
         return ""
     parts = [f"{E(m['name'])} {pct(m['p'], 1)}" for m in ms] + [f"调剂 {pct(x.get('p_adjusted', 0), 1)}"]
     return "<div class='small'>组内：" + "｜".join(parts) + "</div>"
@@ -201,8 +201,18 @@ def build(rep, opt):
     stress = (opt or {}).get("stress", {})
     top = [x for x in lst if x["p_land"] >= 0.005]
     # 以原专业录取、且偏好分 ≥ 70 的概率（被调剂的部分不计入）
-    p_good = sum(x["p_land"] - x.get("p_adjusted", 0) for x in lst if x["utility"] >= 70) if lst else None
+    def good(x):
+        if x.get("majors"):  # 专业组：按组内实际落到的专业计
+            return sum(m["p"] for m in x["majors"] if m["utility"] >= 70)
+        return x["p_land"] - x.get("p_adjusted", 0) if x["utility"] >= 70 else 0.0
+    p_good = sum(good(x) for x in lst) if lst else None
     likely = max(lst, key=lambda x: x["p_land"]) if lst else None
+    likely_name = likely["name"] if likely else "–"
+    likely_p = likely["p_land"] if likely else None
+    if likely and likely.get("majors"):  # 专业组：显示"学校·最可能的专业"
+        top = max(likely["majors"], key=lambda m: m["p"])
+        likely_name = likely["name"].split("·")[0] + "·" + top["name"]
+        likely_p = top["p"]
     secs = []
     missing = []
     n = 0
@@ -228,7 +238,7 @@ def build(rep, opt):
     if lst:
         body += ('<div class="kpis">'
                  f'<div><b>推荐志愿数</b><span class="num">{len(lst)}</span><em>本批次可填 {E(str(m.get("slots", "–")))} 个</em></div>'
-                 f'<div><b>最可能的去向</b><span style="font-size:11pt">{E(likely["name"]) if likely else "–"}</span><em>概率约 {pct(likely["p_land"]) if likely else "–"}</em></div>'
+                 f'<div><b>最可能的去向</b><span style="font-size:11pt">{E(likely_name)}</span><em>概率约 {pct(likely_p)}</em></div>'
                  f'<div><b>满意度 70 分以上的概率</b><span class="num">{pct(p_good)}</span><em>100 分 = 候选中你最想去的</em></div>'
                  f'<div><b>滑档风险</b><span class="num">{pct(pfall, 1)}</span><em>录取线整体大波动时 {pct(stress.get("p_fall"), 1)}</em></div>'
                  '</div>')
