@@ -38,6 +38,10 @@ except AttributeError:  # Python < 3.10
 # 近期加权：浙江 2022—2026 回测中，第二年权重 0.1—0.2 最好，更早年份几乎不应计入（见 references/backtests.md）
 RECENCY_WEIGHTS = [1.0, 0.15, 0.05, 0.02, 0.01]
 JUMP_WARN = math.log(1.4)  # 相邻年份位次变化超过约 40% 视为不稳定
+# 按条目区分波动（v2，2026-09-29 分档校准得出，2023—2025 年选参、2026 年留出检验）：
+SHRINK_PRIOR, SHRINK_YEARS = 0.18, 2  # 历史年份少时，估出的波动向 0.18 收缩（等效 2 年先验）
+LEVEL_REF, LEVEL_GAMMA = 30000, 0.2    # 位次越靠前（热门），相对波动越大：乘以 (30000/位次)^0.2
+JUMP_FACTOR = 0.35                     # 历史上有大跳变时，按最大跳变的 0.35 倍放大（原为 1 倍，过于保守）
 
 
 def parse_float(v, default=None):
@@ -81,7 +85,7 @@ FIRST_CHOICE_GAP = 0.25  # "志愿优先"的粗略近似：非第一专业志愿
 
 
 def load_candidates(path, default_obey, sigma_floor, sigma_single, u_fall, require_utility=True,
-                    cohort=None, cohort_now=None, drift=0.0, target_year=None, sigma_scale=1.0):
+                    cohort=None, cohort_now=None, drift=0.0, target_year=None, sigma_scale=1.0, sigma_rule="v2"):
     """cohort/cohort_now 给出时，历年位次按"今年考生总数 / 当年考生总数"折算（即按百分位对齐）。
     drift 为全省录取位次每年的对数漂移（由 backtest.py 估计），第 Y 年的数据补上 (target_year - Y) × drift。
     sigma_scale 为按省校准的波动倍数（由 calibrate.py 估计，见 references/backtests.md），不作用于 CSV 里手填的 sigma。"""
@@ -117,17 +121,23 @@ def load_candidates(path, default_obey, sigma_floor, sigma_single, u_fall, requi
             logs = [math.log(x) for _, x in pts]
             mu = sum(w * l for w, l in zip(ws, logs)) / sum(ws)
             mu += math.log(parse_float(r.get("adj"), 1.0))
+            v2 = sigma_rule == "v2"
             if len(logs) >= 2:
                 m = sum(logs) / len(logs)
-                sd = math.sqrt(sum((l - m) ** 2 for l in logs) / (len(logs) - 1))
-                sigma = max(sd, sigma_floor)
+                var = sum((l - m) ** 2 for l in logs) / (len(logs) - 1)
+                if v2:
+                    n1 = len(logs) - 1
+                    var = (n1 * var + SHRINK_YEARS * SHRINK_PRIOR ** 2) / (n1 + SHRINK_YEARS)
+                sigma = max(math.sqrt(var), sigma_floor)
             else:
                 sigma = sigma_single
             # 相邻年份位次变化过大（>约40%），多半是组内专业、招生条件或组号含义变了
             jumps = [abs(logs[k] - logs[k + 1]) for k in range(len(logs) - 1)]
             unstable = bool(jumps) and max(jumps) > JUMP_WARN
             if unstable:
-                sigma = max(sigma, max(jumps))
+                sigma = max(sigma, (JUMP_FACTOR if v2 else 1.0) * max(jumps))
+            if v2:
+                sigma *= (LEVEL_REF / pts[0][1]) ** LEVEL_GAMMA
             sigma = parse_float(r.get("sigma"), sigma * sigma_scale)
             obey_raw = (r.get("obey") or "").strip()
             obey = default_obey if obey_raw == "" else obey_raw in ("1", "是", "y", "yes", "true")
@@ -328,6 +338,8 @@ def main():
     ap.add_argument("--rank-sd", type=float, default=0.0, help="考生位次本身的不确定性（对数尺度），出分后为 0")
     ap.add_argument("--sigma-floor", type=float, default=0.10, help="位次对数波动的下限，默认 0.10（约 ±10%%）")
     ap.add_argument("--sigma-single", type=float, default=0.25, help="只有一年数据时的波动，默认 0.25")
+    ap.add_argument("--sigma-rule", choices=["v2", "legacy"], default="v2",
+                    help="波动规则：v2 = 按条目区分（默认，见 references/backtests.md）；legacy = 2026-09-29 之前的规则，用于重现旧示例")
     ap.add_argument("--sigma-scale", type=float, default=1.0, help="按省校准的波动倍数（calibrate.py；如广东专业组 1.6、河北 0.8）")
     ap.add_argument("--no-obey", action="store_true", help="默认所有志愿不服从调剂（可被 CSV 的 obey 列逐行覆盖）")
     ap.add_argument("--stress", type=float, default=2.0, help="补位用的压力情景波动倍数，默认 2；设 1 关闭补位")
@@ -345,7 +357,8 @@ def main():
         sys.exit("--rho 应在 [0, 1) 内")
     rows, skipped = load_candidates(args.csv, not args.no_obey, args.sigma_floor, args.sigma_single, args.u_fall,
                                     cohort=parse_cohort(args.cohort), cohort_now=args.cohort_now,
-                                    drift=args.drift, target_year=args.target_year, sigma_scale=args.sigma_scale)
+                                    drift=args.drift, target_year=args.target_year, sigma_scale=args.sigma_scale,
+                                    sigma_rule=args.sigma_rule)
     if not rows:
         sys.exit("没有可用的候选志愿")
     admit, adjust, masks = simulate(rows, args.rank, args.rank_sd, args.rho, args.sims, args.seed)

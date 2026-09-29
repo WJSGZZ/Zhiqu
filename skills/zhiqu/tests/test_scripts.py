@@ -50,6 +50,12 @@ class TestOptimizeRegression(unittest.TestCase):
         utils = [x["utility"] for x in r["list"]]
         self.assertEqual(utils, sorted(utils, reverse=True), "志愿表应按效用从高到低排列")
 
+    def test_case_c_legacy_reproduces(self):
+        """旧示例用 --sigma-rule legacy 必须能重现报告里的数字。"""
+        r = optimize_json("examples/case_c_guangdong_e2e/candidates.csv", "--rank", "30500", "--slots", "45", "--u-fall", "-60",
+                          "--max-fall", "0.01", "--drift", "0.06", "--target-year", "2027", "--sigma-scale", "1.6", "--sigma-rule", "legacy")
+        self.assertAlmostEqual(r["expected_utility"], 94.1, delta=0.1)
+
     def test_sigma_scale_default_is_neutral(self):
         a = optimize_json("examples/candidates_demo.csv", "--rank", "22000", "--slots", "6", "--u-fall", "-60")
         b = optimize_json("examples/candidates_demo.csv", "--rank", "22000", "--slots", "6", "--u-fall", "-60", "--sigma-scale", "1.0")
