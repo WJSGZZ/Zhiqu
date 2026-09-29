@@ -14,3 +14,8 @@
 
 - 位次为空表示该专业本轮投档人数未满（官方表注），回测时排除。
 - 2021 年官方页面（zjzs.net/moban/index/8a11f1547aa7a49c017abc8b5de900fc.html）已 404，暂缺。
+
+
+## 提前录取（`early_general.csv`）
+
+列：`year, code, name, loc, major, subjects, admit, years, avg, score, rank`。来源：浙江省教育考试院《浙江省普通高校招生投档及专业录取情况》2023—2025 年（<https://www.zjzs.net/art/2026/6/22/art_45_12416.html>）中"普通类提前录取各专业录取情况"一节，PDF 文本提取，下载日期 2026-09-29。按书中说明，有政审、面试、三位一体、综合评价、定向等特殊要求的提前录取不在其中；2026 年的书尚未出版。

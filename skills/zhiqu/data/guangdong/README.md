@@ -20,3 +20,17 @@
 | `physics_2024.csv` | <https://eea.gd.gov.cn/zwgk/sjfb/tjsj/content/post_4458419.html>（附件压缩包内 PDF） |
 | `physics_2025.csv` | <https://eea.gd.gov.cn/ptgk/content/post_4746781.html> |
 | `physics_2026.csv` | <https://eea.gd.gov.cn/ptgk/content/post_4926622.html> |
+
+
+## 提前批与专项（`early_physics.csv`）
+
+列：`year, subject, type, code, name, group, plan, admit, score, rank`。含物理、历史两类，`type` 为官方分类（军检、面试院校 / 非军检、面试院校 / 教师专项 / 农村卫生专项 / 特殊类型招生（高校专项计划）/ 空军、海军招飞院校）。
+
+| 年份 | 来源 |
+|---|---|
+| 2026 | <https://eea.gd.gov.cn/ptgk/content/post_4923339.html>、<https://eea.gd.gov.cn/ptgk/content/post_4923886.html>、<https://eea.gd.gov.cn/ptgk/content/post_4924250.html>（仅物理类） |
+| 2025 | <https://eea.gd.gov.cn/ptgk/content/post_4742803.html>、<https://eea.gd.gov.cn/ptgk/content/post_4743597.html>、<https://eea.gd.gov.cn/ptgk/content/post_4746199.html>（仅物理类） |
+| 2024 | <https://eea.gd.gov.cn/ptgk/content/post_4453920.html>、<https://eea.gd.gov.cn/ptgk/content/post_4455004.html>（压缩包；非军检表内含教师专项） |
+| 2023 | <https://eea.gd.gov.cn/ptgk/content/post_4217777.html>（非军检）；军检院校投档页面没有附件，暂缺 |
+
+下载日期 2026-09-29，均为官方 PDF 文本提取。2023—2025 年教师专项、农村卫生专项未单独找到附件。
