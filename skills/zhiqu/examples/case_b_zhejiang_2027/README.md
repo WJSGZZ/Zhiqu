@@ -13,14 +13,13 @@
 
 ```bash
 python3 scripts/optimize.py examples/case_b_zhejiang_2027/candidates.csv --rank 28000 --slots 80 \
-  --u-fall -60 --max-fall 0.01 --drift 0.015 --target-year 2027 --sigma-floor 0.15 --sigma-rule legacy \
+  --u-fall -60 --max-fall 0.01 --drift 0.015 --target-year 2027 --sigma-floor 0.15 --sigma-scale 0.9 \
   --json examples/case_b_zhejiang_2027/result.json
 python3 scripts/report.py examples/case_b_zhejiang_2027/report.json \
   --opt examples/case_b_zhejiang_2027/result.json --out examples/case_b_zhejiang_2027/report.pdf
 ```
 
-`--drift 0.015` 与 `--sigma-floor 0.15` 来自浙江回测：近三年全省位次平均每年放松约 1.5%；2027 年选考要求改版，参照 2024 年改版时的实测波动放大下限。
+`--drift 0.015`、`--sigma-floor 0.15` 与 `--sigma-scale 0.9` 来自浙江回测和校准检验：近三年全省位次平均每年放松约 1.5%；2027 年选考要求改版，参照 2024 年改版时的实测波动放大下限。
 
-敏感性表最后一行是前景悲观情景：把名称含"人工智能""数据科学""智能科学""大数据"的候选效用各减 25 分（下限 0），用同样的参数重跑 `optimize.py` 得到重排后的 75.9；"仍按原表填报"的 70.3 是用原表每一格的落点概率乘以下调后的效用算出的。
+敏感性表最后一行是前景悲观情景：把名称含"人工智能""数据科学""智能科学""大数据"的候选效用各减 25 分（下限 0），用同样的参数重跑 `optimize.py` 得到重排后的 75.6；"仍按原表填报"的 70.6 是用原表每一格的落点概率乘以下调后的效用算出的。
 
-> 注：本例生成于 2026-09-29 引入"按条目区分波动"之前，重现命令加了 `--sigma-rule legacy`。新版默认波动规则（v2）下，本例期望效用约 76.5、最可能去向不变；报告按旧规则生成，待重新生成。

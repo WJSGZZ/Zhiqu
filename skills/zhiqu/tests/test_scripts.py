@@ -50,8 +50,16 @@ class TestOptimizeRegression(unittest.TestCase):
         utils = [x["utility"] for x in r["list"]]
         self.assertEqual(utils, sorted(utils, reverse=True), "志愿表应按效用从高到低排列")
 
-    def test_case_c_legacy_reproduces(self):
-        """旧示例用 --sigma-rule legacy 必须能重现报告里的数字。"""
+    def test_examples_reproduce(self):
+        """示例 README 里的重现命令必须得到报告里的数字。"""
+        c = optimize_json("examples/case_c_guangdong_e2e/candidates.csv", "--rank", "30500", "--slots", "45", "--u-fall", "-60",
+                          "--max-fall", "0.01", "--drift", "0.06", "--target-year", "2027", "--sigma-scale", "1.7")
+        self.assertAlmostEqual(c["expected_utility"], 93.7, delta=0.1)
+        b = optimize_json("examples/case_b_zhejiang_2027/candidates.csv", "--rank", "28000", "--slots", "80", "--u-fall", "-60",
+                          "--max-fall", "0.01", "--drift", "0.015", "--target-year", "2027", "--sigma-floor", "0.15", "--sigma-scale", "0.9")
+        self.assertAlmostEqual(b["expected_utility"], 76.5, delta=0.1)
+
+    def test_legacy_rule_still_available(self):
         r = optimize_json("examples/case_c_guangdong_e2e/candidates.csv", "--rank", "30500", "--slots", "45", "--u-fall", "-60",
                           "--max-fall", "0.01", "--drift", "0.06", "--target-year", "2027", "--sigma-scale", "1.6", "--sigma-rule", "legacy")
         self.assertAlmostEqual(r["expected_utility"], 94.1, delta=0.1)

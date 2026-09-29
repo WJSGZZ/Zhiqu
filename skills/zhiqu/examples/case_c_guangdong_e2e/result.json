@@ -9,7 +9,8 @@
     "rank_sd": 0.0,
     "sigma_floor": 0.1,
     "sigma_single": 0.25,
-    "sigma_scale": 1.6,
+    "sigma_rule": "v2",
+    "sigma_scale": 1.7,
     "no_obey": false,
     "stress": 2.0,
     "drift": 0.06,
@@ -21,11 +22,11 @@
     "max_swap_evals": 20000,
     "json": "examples/case_c_guangdong_e2e/result.json"
   },
-  "expected_utility": 94.06519999999999,
+  "expected_utility": 93.65889999999999,
   "p_fall": 0.0,
   "stress": {
-    "expected_utility": 91.971525,
-    "p_fall": 0.001
+    "expected_utility": 91.54232499999999,
+    "p_fall": 0.00025
   },
   "n_core": 3,
   "list": [
@@ -33,28 +34,29 @@
       "order": 1,
       "id": "11845-216",
       "name": "广东工业大学·216组（计算机类、人工智能(创新班)…）",
-      "utility": 99.9,
-      "p_clear": 0.59675,
-      "p_land": 0.59675,
+      "utility": 99.7,
+      "p_clear": 0.584,
+      "p_land": 0.584,
       "p_adjusted": 0.0,
       "tag": "稳",
       "expected_cut_rank": 32176,
-      "sigma": 0.18722856923322723,
+      "sigma": 0.24474462856114043,
       "obey": true,
       "n_years": 4,
       "code": "11845",
       "group": "216",
       "major_code": "",
+      "limits": "",
       "majors": [
         {
           "name": "计算机类",
           "utility": 100.0,
-          "p": 0.5925
+          "p": 0.574
         },
         {
           "name": "人工智能(创新班)",
           "utility": 81.1,
-          "p": 0.00425
+          "p": 0.01
         }
       ]
     },
@@ -62,28 +64,29 @@
       "order": 2,
       "id": "11845-207",
       "name": "广东工业大学·207组（数据科学与大数据技术、物联网工程…）",
-      "utility": 94.3,
-      "p_clear": 0.674,
-      "p_land": 0.23075,
+      "utility": 94.4,
+      "p_clear": 0.683,
+      "p_land": 0.235,
       "p_adjusted": 0.0,
       "tag": "稳",
       "expected_cut_rank": 35362,
-      "sigma": 0.3067035478012111,
+      "sigma": 0.308991330116847,
       "obey": true,
       "n_years": 4,
       "code": "11845",
       "group": "207",
       "major_code": "",
+      "limits": "",
       "majors": [
         {
           "name": "数据科学与大数据技术",
           "utility": 97.1,
-          "p": 0.189
+          "p": 0.1895
         },
         {
           "name": "物联网工程",
           "utility": 79.5,
-          "p": 0.04175
+          "p": 0.0455
         }
       ]
     },
@@ -93,21 +96,22 @@
       "name": "广东工业大学·226组（法学…）",
       "utility": 74.2,
       "p_clear": 1.0,
-      "p_land": 0.1725,
+      "p_land": 0.181,
       "p_adjusted": 0.0,
       "tag": "保",
       "expected_cut_rank": 63756,
-      "sigma": 0.16000000000000003,
+      "sigma": 0.17363993561833638,
       "obey": true,
       "n_years": 4,
       "code": "11845",
       "group": "226",
       "major_code": "",
+      "limits": "",
       "majors": [
         {
           "name": "法学",
           "utility": 74.2,
-          "p": 0.1725
+          "p": 0.181
         }
       ]
     },
@@ -116,17 +120,18 @@
       "id": "11845-213",
       "name": "广东工业大学·213组（电子信息工程(腾创班)、电子信息类…）",
       "utility": 74.1,
-      "p_clear": 0.52875,
+      "p_clear": 0.5615,
       "p_land": 0.0,
       "p_adjusted": 0.0,
       "tag": "稳",
       "expected_cut_rank": 33016,
-      "sigma": 1.0137433236529092,
+      "sigma": 0.5836313913111238,
       "obey": true,
       "n_years": 5,
       "code": "11845",
       "group": "213",
       "major_code": "",
+      "limits": "",
       "majors": [
         {
           "name": "电子信息工程(腾创班)",
@@ -149,18 +154,19 @@
       "order": 5,
       "id": "11845-225",
       "name": "广东工业大学·225组（应用统计学、信息与计算科学…）",
-      "utility": 58.7,
-      "p_clear": 0.99875,
+      "utility": 58.4,
+      "p_clear": 0.989,
       "p_land": 0.0,
       "p_adjusted": 0.0,
       "tag": "保",
       "expected_cut_rank": 50021,
-      "sigma": 0.1647196243045486,
+      "sigma": 0.21430805456636146,
       "obey": true,
       "n_years": 4,
       "code": "11845",
       "group": "225",
       "major_code": "",
+      "limits": "",
       "majors": [
         {
           "name": "应用统计学",
@@ -186,20 +192,56 @@
     },
     {
       "order": 6,
+      "id": "11845-223",
+      "name": "广东工业大学·223组（微电子科学与工程、集成电路设计与集成系统(创新班)…）",
+      "utility": 55.1,
+      "p_clear": 0.40125,
+      "p_land": 0.0,
+      "p_adjusted": 0.0,
+      "tag": "稳",
+      "expected_cut_rank": 28582,
+      "sigma": 0.2531978258250285,
+      "obey": true,
+      "n_years": 4,
+      "code": "11845",
+      "group": "223",
+      "major_code": "",
+      "limits": "",
+      "majors": [
+        {
+          "name": "微电子科学与工程",
+          "utility": 55.1,
+          "p": 0.0
+        },
+        {
+          "name": "集成电路设计与集成系统(创新班)",
+          "utility": 55.0,
+          "p": 0.0
+        },
+        {
+          "name": "集成电路设计与集成系统",
+          "utility": 55.0,
+          "p": 0.0
+        }
+      ]
+    },
+    {
+      "order": 7,
       "id": "11845-220",
       "name": "广东工业大学·220组（电子科学与技术(创新班)、电子科学与技术…）",
-      "utility": 51.0,
-      "p_clear": 0.8415,
+      "utility": 50.3,
+      "p_clear": 0.7935,
       "p_land": 0.0,
       "p_adjusted": 0.0,
       "tag": "稳",
       "expected_cut_rank": 37662,
-      "sigma": 0.19932460578283095,
+      "sigma": 0.24356708353781245,
       "obey": true,
       "n_years": 4,
       "code": "11845",
       "group": "220",
       "major_code": "",
+      "limits": "",
       "majors": [
         {
           "name": "电子科学与技术(创新班)",
@@ -229,21 +271,22 @@
       ]
     },
     {
-      "order": 7,
+      "order": 8,
       "id": "11845-206",
       "name": "广东工业大学·206组（自动化(创新班)、自动化类…）",
       "utility": 39.1,
-      "p_clear": 0.38275,
+      "p_clear": 0.3905,
       "p_land": 0.0,
       "p_adjusted": 0.0,
       "tag": "冲",
       "expected_cut_rank": 25418,
-      "sigma": 0.6781793993567308,
+      "sigma": 0.6400584919346523,
       "obey": true,
       "n_years": 5,
       "code": "11845",
       "group": "206",
       "major_code": "",
+      "limits": "",
       "majors": [
         {
           "name": "自动化(创新班)",
@@ -264,11 +307,11 @@
     }
   ],
   "baseline_top_utility": [
-    94.06519999999999,
+    93.65889999999999,
     0.0
   ],
   "baseline_safest": [
-    94.06519999999999,
+    93.65889999999999,
     0.0
   ],
   "skipped": []
