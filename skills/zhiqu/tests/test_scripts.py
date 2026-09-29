@@ -119,6 +119,24 @@ class TestOtherScripts(unittest.TestCase):
                 self.assertIn(title, html)
             self.assertIn("知其所往，方行其衢。", html)
 
+    def test_limits_shown_in_report(self):
+        with tempfile.TemporaryDirectory() as d:
+            src = os.path.join(d, "c.csv")
+            with open(os.path.join(ROOT, "examples/candidates_demo.csv"), encoding="utf-8") as f:
+                rows = list(csv.reader(f))
+            rows[0].append("limits")
+            for r in rows[1:]:
+                r.append("色弱不宜报考；英语单科不低于 110 分")
+            write_csv(src, rows[0], rows[1:])
+            res = os.path.join(d, "r.json")
+            run("scripts/optimize.py", src, "--rank", "22000", "--slots", "6", "--u-fall", "-60", "--json", res)
+            with open(res, encoding="utf-8") as f:
+                self.assertIn("色弱不宜报考", json.dumps(json.load(f), ensure_ascii=False))
+            out = os.path.join(d, "r.html")
+            run("scripts/report.py", "examples/report_demo.json", "--opt", res, "--out", out)
+            with open(out, encoding="utf-8") as f:
+                self.assertIn("限制：色弱不宜报考", f.read())
+
     def test_pool_filters(self):
         with tempfile.TemporaryDirectory() as d:
             out = os.path.join(d, "p.csv")
