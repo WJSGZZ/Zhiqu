@@ -356,6 +356,27 @@ def build(rep, opt):
     else:
         blank("todo", "填报前核对清单", "本次没有列出待核对事项。")
 
+    # 填报单：照着录入官方系统
+    if lst:
+        rows_html = ""
+        for x in lst:
+            code = x.get("code") or ""
+            sub = x.get("group") or x.get("major_code") or ""
+            ms = "、".join(f"{i}. {m['name']}" for i, m in enumerate(x.get("majors") or [], 1))
+            rows_html += (f"<tr><td class='c num'>{x['order']}</td><td class='num'>{E(code) or '＿＿＿'}</td><td>{E(x['name'].split('（')[0].split('·')[0] if x.get('group') else x['name'].split('（')[0])}</td>"
+                          f"<td class='num'>{E(sub) or '＿＿'}</td><td class='small'>{E(ms) or '—'}</td>"
+                          f"<td class='c'>{'是' if x.get('obey', True) else '<b>否</b>'}</td><td class='c'>□</td></tr>")
+        body = ('<p class="lead">这一页用来照着录入志愿填报系统。录错一个代码，前面算得再准也没用，所以请逐格核对。</p>'
+                '<div class="box warn"><h4>录入前必读</h4><ol class="tight">'
+                '<li>院校代码、专业组或专业代码<b>每年可能变</b>：表中代码来自往年数据，必须按今年的招生计划或专业目录逐个核对、改正。</li>'
+                '<li>专业组志愿：组内专业按下表顺序填；"服从调剂"一栏与本报告的计算一致，改动前先回来重算。</li>'
+                '<li>录入后，把系统里的志愿表截图或打印，逐行对照本页勾选；提交前确认截止时间。</li></ol></div>'
+                "<table><thead><tr><th class='c'>序</th><th>院校代码</th><th>院校</th><th>专业组 / 专业代码</th><th>组内专业志愿顺序</th><th class='c'>服从调剂</th><th class='c'>已核对</th></tr></thead><tbody>"
+                + rows_html + "</tbody></table>")
+        sec("填报单", body, major=True)
+    else:
+        blank("list", "填报单", "本次没有运行志愿组合优化，因此没有填报单。", major=True)
+
     # 可以直接问我（个性化的追问清单）
     if rep.get("ask_me"):
         body = ('<p class="lead">' + E(rep.get("ask_me_intro", "这份报告是和 AI 一起做出来的。看不懂的地方、想换个假设算一算，都可以直接回去问它。下面是根据你的情况预备的问题，挑感兴趣的问就行。")) + "</p>")
