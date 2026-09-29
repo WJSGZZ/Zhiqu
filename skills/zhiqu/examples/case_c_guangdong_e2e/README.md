@@ -12,7 +12,7 @@
 
 ```bash
 python3 scripts/optimize.py examples/case_c_guangdong_e2e/candidates.csv --rank 30500 --slots 45 \
-  --u-fall -60 --max-fall 0.01 --drift 0.06 --target-year 2027 --sigma-scale 1.6 --sigma-rule legacy \
+  --u-fall -60 --max-fall 0.01 --drift 0.06 --target-year 2027 --sigma-scale 1.7 \
   --json examples/case_c_guangdong_e2e/result.json
 python3 scripts/report.py examples/case_c_guangdong_e2e/report.json \
   --opt examples/case_c_guangdong_e2e/result.json --out examples/case_c_guangdong_e2e/report.pdf
@@ -26,4 +26,3 @@ python3 scripts/report.py examples/case_c_guangdong_e2e/report.json \
 4. 组内分配模型的缺陷：组内最松的专业线应等于组线，原实现让"进了组却哪个专业都不够"的情况被高估（计算机组调剂概率虚高到 16%）→ 已改为以同年最松专业为基准，并按组线整体平移。
 5. 报告对专业组的"最可能去向"显示了整组名称 → 改为"学校·最可能的专业"，满意度指标按组内实际专业计算。
 
-> 注：本例生成于 2026-09-29 引入"按条目区分波动"之前，重现命令加了 `--sigma-rule legacy`。新版默认波动规则（v2，广东倍数 1.7）下，本例期望效用约 93.7、各组落点相差不到 2 个百分点；报告按旧规则生成，待重新生成。
