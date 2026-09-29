@@ -160,11 +160,13 @@ skills/zhiqu/
 │   ├── rank.py                  分数↔位次、等位分、估分区间、录取线预测
 │   ├── backtest.py              逐年回测：漂移、误差、结构突变、计划弹性
 │   ├── calibrate.py             校准检验：模型说的过线概率和实际是否一致
+│   ├── validate_data.py         数据校验：分数与位次一致、重复、年份、院校代码
 │   ├── special_types.py         提前批、专项、定向等类型的回测汇总
 │   ├── civil_service.py         统计省考职位表中各专业能报的岗位
 │   ├── optimize.py              期望收益优化器
 │   └── report.py                生成 PDF 决策报告
-├── data/                        10 个省份的官方投档数据、全国高校名单、公务员职位统计（整理为 CSV，注明来源）
+├── tests/                       自动测试（python3 -m unittest discover -s tests）
+├── data/                        10 个省份的官方投档数据、全国高校名单、公务员职位统计；年度更新步骤见 data/README.md
 └── examples/                    虚构示例：候选志愿、报告内容与生成的 PDF
 ```
 
