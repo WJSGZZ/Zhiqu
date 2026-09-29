@@ -391,7 +391,8 @@ def main():
                     "tag": label(p_clear[j]), "expected_cut_rank": round(r["expected_cut"]),
                     "sigma": r["sigma"], "obey": r["obey"], "n_years": r["n_years"],
                     "code": (r["raw"].get("code") or "").strip(), "group": (r["raw"].get("group") or "").strip(),
-                    "major_code": (r["raw"].get("major_code") or "").strip()})
+                    "major_code": (r["raw"].get("major_code") or "").strip(),
+                    "limits": (r["raw"].get("limits") or "").strip()})
         if r["majors"]:
             out[-1]["majors"] = [{"name": nm, "utility": u, "p": c / args.sims} for (nm, u, _), c in zip(r["majors"], mk or [0] * len(r["majors"]))]
             p("|  | " + "；".join(f"{nm} {c / args.sims:.1%}" for (nm, _, _), c in zip(r["majors"], mk or [0] * len(r["majors"]))) + f"；调剂 {b / args.sims:.1%} | | | | | | | |")

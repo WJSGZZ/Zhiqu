@@ -184,6 +184,11 @@ def outcome_strip(items, pfall, width=640):
     return "".join(out)
 
 
+def limit_line(x):
+    """招生章程里的硬性限制（体检、单科、语种、性别等），提醒考生录入前再核对一次。"""
+    return f"<div class='small' style='color:#9B3B2E'>限制：{E(x['limits'])}</div>" if x.get("limits") else ""
+
+
 def group_line(x):
     """专业组志愿：列出落到组内各专业和被调剂的概率。"""
     ms = x.get("majors")
@@ -304,7 +309,7 @@ def build(rep, opt):
             hl = " class='hl'" if likely and x is likely else ""
             body += (f"<tr{hl}><td class='c num'>{x['order']}</td><td>{E(x['name'])}{group_line(x)}</td><td class='c'><span class='tag {E(x['tag'])}'>{E(x['tag'])}</span></td>"
                      f"<td class='r'>{x['utility']:g}</td><td class='r'>{pct(x['p_clear'])}</td><td class='r'>{pct(x['p_land'], 1)}</td>"
-                     f"<td class='r'>{x['expected_cut_rank']:,}</td><td class='small'>{E(notes.get(x['name'], ''))}</td></tr>")
+                     f"<td class='r'>{x['expected_cut_rank']:,}</td><td class='small'>{E(notes.get(x['name'], ''))}{limit_line(x)}</td></tr>")
         body += "</tbody></table>"
         body += ('<p class="small">"偏好"是 0–100 的分数，由"你的画像"一节的权重和各项打分算出。"单独过线"只看这一个志愿；"最终录取"考虑了前面志愿可能已经录取你；"预测位次"是今年最低录取位次的中位预测。'
                  '冲：单独过线 &lt; 40%；稳：40%–85%；保：≥ 85%。高亮行是最可能的去向。</p>')
@@ -364,7 +369,7 @@ def build(rep, opt):
             sub = x.get("group") or x.get("major_code") or ""
             ms = "、".join(f"{i}. {m['name']}" for i, m in enumerate(x.get("majors") or [], 1))
             rows_html += (f"<tr><td class='c num'>{x['order']}</td><td class='num'>{E(code) or '＿＿＿'}</td><td>{E(x['name'].split('（')[0].split('·')[0] if x.get('group') else x['name'].split('（')[0])}</td>"
-                          f"<td class='num'>{E(sub) or '＿＿'}</td><td class='small'>{E(ms) or '—'}</td>"
+                          f"<td class='num'>{E(sub) or '＿＿'}</td><td class='small'>{E(ms) or '—'}{limit_line(x)}</td>"
                           f"<td class='c'>{'是' if x.get('obey', True) else '<b>否</b>'}</td><td class='c'>□</td></tr>")
         body = ('<p class="lead">这一页用来照着录入志愿填报系统。录错一个代码，前面算得再准也没用，所以请逐格核对。</p>'
                 '<div class="box warn"><h4>录入前必读</h4><ol class="tight">'
