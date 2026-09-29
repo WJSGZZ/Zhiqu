@@ -2,7 +2,7 @@
 
 <h1 align="center">知衢 · Zhiqu</h1>
 
-<p align="center"><b>高考志愿：先认清自己，再算清每一格。</b></p>
+<p align="center"><i>路有四方，心知所向。</i></p>
 
 <p align="center">
   <a href="https://wjsgzz.github.io/Zhiqu/">在线问卷</a> ·
