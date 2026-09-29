@@ -7,6 +7,9 @@
 - 今年各志愿的最低录取位次 C_j 未知：log C_j ~ Normal(mu_j, sigma_j)，
   mu_j 为历年位次对数的近期加权平均（再乘人工校正 adj），各志愿通过共同因子相关（rho）。
 - 过线后仍可能进不了所填专业（p_adjust）：服从调剂得 utility_adjusted；不服从则退档，等同滑档。
+- 专业组可改填 majors 列（"专业:效用:去年组内该专业最低位次;..."，按填报顺序）和 rule 列
+  （score = 分数优先，gap = 专业级差，配合 gap 列给出每级级差折算的对数位次；first = 志愿优先），
+  由模拟直接算出落到每个专业和被调剂的概率，此时 p_adjust 不再使用。
 - 目标：最大化期望效用 E[U]；可另加"滑档概率上限"硬约束。
 - 组合选择：边际改进贪心（独立情形下由 Chade & Smith 2006 证明最优），再做有限的单点替换。
 - 补位：基准模型认为"已无增益"后，剩余位置在压力情景（波动 ×stress）下继续贪心补满，
@@ -55,6 +58,26 @@ def parse_cohort(items):
     return out
 
 
+def parse_majors(text, hist_latest):
+    """组内专业，按考生填报顺序："专业:效用:去年该专业组内最低位次;..."。
+    返回 [(名称, 效用, delta)]，delta = ln(该专业去年位次 / 本组去年最低位次) ≤ 0，表示比组线难多少。"""
+    out = []
+    for part in (text or "").replace("；", ";").split(";"):
+        bits = [b.strip() for b in part.replace("：", ":").split(":")]
+        if len(bits) < 2 or not bits[0]:
+            continue
+        u = parse_float(bits[1])
+        rk = parse_float(bits[2]) if len(bits) > 2 else None
+        if u is None:
+            continue
+        delta = min(0.0, math.log(rk / hist_latest)) if rk and hist_latest else 0.0
+        out.append((bits[0], u, delta))
+    return out
+
+
+FIRST_CHOICE_GAP = 0.25  # "志愿优先"的粗略近似：非第一专业志愿每级额外相当于位次难 ~25%
+
+
 def load_candidates(path, default_obey, sigma_floor, sigma_single, u_fall, require_utility=True,
                     cohort=None, cohort_now=None, drift=0.0, target_year=None, sigma_scale=1.0):
     """cohort/cohort_now 给出时，历年位次按"今年考生总数 / 当年考生总数"折算（即按百分位对齐）。
@@ -83,8 +106,8 @@ def load_candidates(path, default_obey, sigma_floor, sigma_single, u_fall, requi
                 hist = [x * math.exp(drift * (tgt - yr)) if x else x for x, yr in zip(hist, years_of)]
             pts = [(k, x) for k, x in enumerate(hist) if x and x > 0]
             u = parse_float(r.get("utility"))
-            if not require_utility and u is None:
-                u = 0.0
+            if u is None and ((r.get("majors") or "").strip() or not require_utility):
+                u = 0.0  # 有组内专业时，效用由各专业效用和落点概率算出
             if not pts or u is None:
                 skipped.append(f"{name}（缺{'位次' if not pts else '效用'}）")
                 continue
@@ -112,7 +135,11 @@ def load_candidates(path, default_obey, sigma_floor, sigma_single, u_fall, requi
                 ua = u_fall  # 不服从调剂 → 退档，等同滑档
             elif ua is None:
                 ua = u if p_adj == 0 else 0.0
+            majors = parse_majors(r.get("majors"), hist_latest=pts[0][1])
+            rule = (r.get("rule") or "score").strip().lower()
+            gaps = [parse_float(x, 0.0) for x in (r.get("gap") or "").replace("，", ",").split(",") if x.strip()]
             rows.append({
+                "majors": majors, "rule": rule, "gaps": gaps,
                 "id": (r.get("id") or "").strip() or name,
                 "name": name,
                 "u": u,
@@ -137,6 +164,7 @@ def simulate(rows, rank, rank_sd, rho, n, seed, sigma_mult=1.0):
     b = math.sqrt(1 - rho)
     admit = [0] * len(rows)
     adjust = [0] * len(rows)
+    masks = [[0] * len(row["majors"]) for row in rows]
     log_rank = math.log(rank)
     for s in range(n):
         z0 = rng.gauss(0, 1)
@@ -146,14 +174,44 @@ def simulate(rows, rank, rank_sd, rho, n, seed, sigma_mult=1.0):
             log_cut = row["mu"] + sigma_mult * row["sigma"] * (a * z0 + b * rng.gauss(0, 1))
             if lr <= log_cut:
                 admit[j] |= bit
+                if row["majors"]:
+                    # 组内按专业分配：先看考生填的第 1 个专业，依次往下；都不够就调剂（或退档）
+                    sw = max(0.08, 0.5 * row["sigma"] * sigma_mult)
+                    got = None
+                    for k, (_, _, delta) in enumerate(row["majors"]):
+                        cut_k = min(log_cut, log_cut + delta + sw * rng.gauss(0, 1))
+                        if row["rule"] == "gap" and k:
+                            pen = sum(row["gaps"][:k]) if row["gaps"] else 0.0
+                        elif row["rule"] == "first" and k:
+                            pen = FIRST_CHOICE_GAP * k
+                        else:
+                            pen = 0.0
+                        if lr + pen <= cut_k:
+                            got = k
+                            break
+                    if got is None:
+                        adjust[j] |= bit
+                    else:
+                        masks[j][got] |= bit
+                    continue
             if row["p_adj"] > 0 and rng.random() < row["p_adj"]:
                 adjust[j] |= bit
-    return admit, adjust
+    return admit, adjust, masks
+
+
+def set_group_utility(rows, admit, adjust, masks):
+    """有组内专业的志愿：效用取"过线后"的条件期望（各专业按落点概率加权，含调剂），用于排序和展示。"""
+    for j, row in enumerate(rows):
+        if row["majors"]:
+            k_all = popcount(admit[j])
+            if k_all:
+                tot = sum(u * popcount(m) for (_, u, _), m in zip(row["majors"], masks[j])) + row["ua"] * popcount(adjust[j])
+                row["u"] = round(tot / k_all, 1)
 
 
 class Evaluator:
-    def __init__(self, rows, admit, adjust, n, u_fall, max_fall, penalty):
-        self.rows, self.admit, self.adjust = rows, admit, adjust
+    def __init__(self, rows, admit, adjust, masks, n, u_fall, max_fall, penalty):
+        self.rows, self.admit, self.adjust, self.masks = rows, admit, adjust, masks
         self.n, self.full = n, (1 << n) - 1
         self.u_fall, self.max_fall, self.penalty = u_fall, max_fall, penalty
 
@@ -168,12 +226,16 @@ class Evaluator:
                 adj = hit & self.adjust[j]
                 k_adj = popcount(adj)
                 k = popcount(hit)
-                total += self.rows[j]["u"] * (k - k_adj) + self.rows[j]["ua"] * k_adj
+                if self.rows[j]["majors"]:
+                    total += sum(u * popcount(hit & m) for (_, u, _), m in zip(self.rows[j]["majors"], self.masks[j]))
+                    total += self.rows[j]["ua"] * k_adj
+                else:
+                    total += self.rows[j]["u"] * (k - k_adj) + self.rows[j]["ua"] * k_adj
                 if detail:
-                    land[j] = (k - k_adj, k_adj)
+                    land[j] = (k - k_adj, k_adj, [popcount(hit & m) for m in self.masks[j]])
                 rem &= ~self.admit[j]
             elif detail:
-                land[j] = (0, 0)
+                land[j] = (0, 0, [])
         k_fall = popcount(rem)
         total += self.u_fall * k_fall
         eu, p_fall = total / self.n, k_fall / self.n
@@ -278,14 +340,15 @@ def main():
                                     drift=args.drift, target_year=args.target_year, sigma_scale=args.sigma_scale)
     if not rows:
         sys.exit("没有可用的候选志愿")
-    admit, adjust = simulate(rows, args.rank, args.rank_sd, args.rho, args.sims, args.seed)
-    ev = Evaluator(rows, admit, adjust, args.sims, args.u_fall, args.max_fall, penalty=1e4)
+    admit, adjust, masks = simulate(rows, args.rank, args.rank_sd, args.rho, args.sims, args.seed)
+    set_group_utility(rows, admit, adjust, masks)
+    ev = Evaluator(rows, admit, adjust, masks, args.sims, args.u_fall, args.max_fall, penalty=1e4)
     p_clear = [popcount(a) / args.sims for a in admit]
 
     best = greedy(ev, len(rows), args.slots, args.max_swap_evals)
     n_core = len(best)
-    s_admit, s_adjust = simulate(rows, args.rank, args.rank_sd, args.rho, args.sims, args.seed + 1, args.stress)
-    stress_ev = Evaluator(rows, s_admit, s_adjust, args.sims, args.u_fall, args.max_fall, penalty=1e4)
+    s_admit, s_adjust, s_masks = simulate(rows, args.rank, args.rank_sd, args.rho, args.sims, args.seed + 1, args.stress)
+    stress_ev = Evaluator(rows, s_admit, s_adjust, s_masks, args.sims, args.u_fall, args.max_fall, penalty=1e4)
     if args.stress > 1 and len(best) < args.slots:
         best = fill_under_stress(ev, stress_ev, best, len(rows), args.slots)
     eu, p_fall, _, land = ev.evaluate(best, detail=True)
@@ -312,13 +375,16 @@ def main():
     p("|---|---|---|---|---|---|---|---|")
     for k, j in enumerate(best, 1):
         r = rows[j]
-        a, b = land.get(j, (0, 0))
+        a, b, mk = land.get(j, (0, 0, []))
         lp = (a + b) / args.sims
         p(f"| {k} | {r['name']} | {r['u']:g} | {p_clear[j]:.0%} | {lp:.1%} | {b / args.sims:.1%} | {label(p_clear[j])} | {r['expected_cut']:.0f} |")
         out.append({"order": k, "id": r["id"], "name": r["name"], "utility": r["u"],
                     "p_clear": p_clear[j], "p_land": lp, "p_adjusted": b / args.sims,
                     "tag": label(p_clear[j]), "expected_cut_rank": round(r["expected_cut"]),
                     "sigma": r["sigma"], "obey": r["obey"], "n_years": r["n_years"]})
+        if r["majors"]:
+            out[-1]["majors"] = [{"name": nm, "utility": u, "p": c / args.sims} for (nm, u, _), c in zip(r["majors"], mk or [0] * len(r["majors"]))]
+            p("|  | " + "；".join(f"{nm} {c / args.sims:.1%}" for (nm, _, _), c in zip(r["majors"], mk or [0] * len(r["majors"]))) + f"；调剂 {b / args.sims:.1%} | | | | | | | |")
     p("")
     p("## 汇总\n")
     p(f"- 期望效用 E[U] = **{eu:.1f}**；滑档（含退档）概率 = **{p_fall:.2%}**")
@@ -328,7 +394,7 @@ def main():
     if len(best) < args.slots:
         p(f"- 只填了 {len(best)}/{args.slots} 个：候选池里再加任何一个都没有增益，可以扩充候选池后重算")
     for cut in (90, 75, 60):  # 按主结局效用计，不含被调剂的部分
-        prob = sum(land.get(j, (0, 0))[0] for j in best if rows[j]["u"] >= cut) / args.sims
+        prob = sum(land.get(j, (0, 0, []))[0] for j in best if rows[j]["u"] >= cut) / args.sims
         p(f"- 以原专业录取、且效用 ≥ {cut} 的概率：{prob:.0%}")
     p("")
     p("## 对照：两种常见直觉填法\n")
