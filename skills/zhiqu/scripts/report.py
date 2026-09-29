@@ -184,6 +184,15 @@ def outcome_strip(items, pfall, width=640):
     return "".join(out)
 
 
+def group_line(x):
+    """专业组志愿：列出落到组内各专业和被调剂的概率。"""
+    ms = x.get("majors")
+    if not ms:
+        return ""
+    parts = [f"{E(m['name'])} {pct(m['p'], 1)}" for m in ms] + [f"调剂 {pct(x.get('p_adjusted', 0), 1)}"]
+    return "<div class='small'>组内：" + "｜".join(parts) + "</div>"
+
+
 def build(rep, opt):
     m = rep.get("meta", {})
     lst = (opt or {}).get("list", [])
@@ -283,7 +292,7 @@ def build(rep, opt):
                  "<th class='r'>单独过线</th><th class='r'>最终录取</th><th class='r'>预测位次</th><th>说明</th></tr></thead><tbody>")
         for x in lst:
             hl = " class='hl'" if likely and x is likely else ""
-            body += (f"<tr{hl}><td class='c num'>{x['order']}</td><td>{E(x['name'])}</td><td class='c'><span class='tag {E(x['tag'])}'>{E(x['tag'])}</span></td>"
+            body += (f"<tr{hl}><td class='c num'>{x['order']}</td><td>{E(x['name'])}{group_line(x)}</td><td class='c'><span class='tag {E(x['tag'])}'>{E(x['tag'])}</span></td>"
                      f"<td class='r'>{x['utility']:g}</td><td class='r'>{pct(x['p_clear'])}</td><td class='r'>{pct(x['p_land'], 1)}</td>"
                      f"<td class='r'>{x['expected_cut_rank']:,}</td><td class='small'>{E(notes.get(x['name'], ''))}</td></tr>")
         body += "</tbody></table>"
