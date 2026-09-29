@@ -1,6 +1,6 @@
 {
   "params": {
-    "csv": "candB.csv",
+    "csv": "examples/case_b_zhejiang_2027/candidates.csv",
     "rank": 28000.0,
     "slots": 80,
     "u_fall": -60.0,
@@ -9,6 +9,7 @@
     "rank_sd": 0.0,
     "sigma_floor": 0.15,
     "sigma_single": 0.25,
+    "sigma_scale": 1.0,
     "no_obey": false,
     "stress": 2.0,
     "drift": 0.015,
@@ -18,7 +19,7 @@
     "sims": 4000,
     "seed": 42,
     "max_swap_evals": 20000,
-    "json": "optB.json"
+    "json": "examples/case_b_zhejiang_2027/result.json"
   },
   "expected_utility": 76.930425,
   "p_fall": 0.0,
@@ -40,7 +41,10 @@
       "expected_cut_rank": 12360,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "1167",
+      "group": "",
+      "major_code": "041"
     },
     {
       "order": 2,
@@ -54,7 +58,10 @@
       "expected_cut_rank": 13545,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "1154",
+      "group": "",
+      "major_code": "010"
     },
     {
       "order": 3,
@@ -68,7 +75,10 @@
       "expected_cut_rank": 12366,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "4428",
+      "group": "",
+      "major_code": "016"
     },
     {
       "order": 4,
@@ -82,7 +92,10 @@
       "expected_cut_rank": 14362,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "1155",
+      "group": "",
+      "major_code": "012"
     },
     {
       "order": 5,
@@ -96,7 +109,10 @@
       "expected_cut_rank": 12646,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "3259",
+      "group": "",
+      "major_code": "022"
     },
     {
       "order": 6,
@@ -110,7 +126,10 @@
       "expected_cut_rank": 15389,
       "sigma": 0.25,
       "obey": true,
-      "n_years": 1
+      "n_years": 1,
+      "code": "1117",
+      "group": "",
+      "major_code": "020"
     },
     {
       "order": 7,
@@ -124,7 +143,10 @@
       "expected_cut_rank": 13699,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "1160",
+      "group": "",
+      "major_code": "006"
     },
     {
       "order": 8,
@@ -138,7 +160,10 @@
       "expected_cut_rank": 14116,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "1154",
+      "group": "",
+      "major_code": "013"
     },
     {
       "order": 9,
@@ -152,7 +177,10 @@
       "expected_cut_rank": 15299,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 3
+      "n_years": 3,
+      "code": "1154",
+      "group": "",
+      "major_code": "015"
     },
     {
       "order": 10,
@@ -166,7 +194,10 @@
       "expected_cut_rank": 14878,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 2
+      "n_years": 2,
+      "code": "1155",
+      "group": "",
+      "major_code": "013"
     },
     {
       "order": 11,
@@ -180,7 +211,10 @@
       "expected_cut_rank": 14708,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "3256",
+      "group": "",
+      "major_code": "036"
     },
     {
       "order": 12,
@@ -194,7 +228,10 @@
       "expected_cut_rank": 14861,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "5141",
+      "group": "",
+      "major_code": "028"
     },
     {
       "order": 13,
@@ -208,7 +245,10 @@
       "expected_cut_rank": 13913,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 3
+      "n_years": 3,
+      "code": "",
+      "group": "",
+      "major_code": ""
     },
     {
       "order": 14,
@@ -222,7 +262,10 @@
       "expected_cut_rank": 15348,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "4039",
+      "group": "",
+      "major_code": "023"
     },
     {
       "order": 15,
@@ -236,7 +279,10 @@
       "expected_cut_rank": 14424,
       "sigma": 0.25,
       "obey": true,
-      "n_years": 1
+      "n_years": 1,
+      "code": "4093",
+      "group": "",
+      "major_code": "041"
     },
     {
       "order": 16,
@@ -250,7 +296,10 @@
       "expected_cut_rank": 17970,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "1128",
+      "group": "",
+      "major_code": "039"
     },
     {
       "order": 17,
@@ -264,7 +313,10 @@
       "expected_cut_rank": 14290,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 2
+      "n_years": 2,
+      "code": "6144",
+      "group": "",
+      "major_code": "017"
     },
     {
       "order": 18,
@@ -278,7 +330,10 @@
       "expected_cut_rank": 13801,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "1153",
+      "group": "",
+      "major_code": "043"
     },
     {
       "order": 19,
@@ -292,7 +347,10 @@
       "expected_cut_rank": 23940,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 4
+      "n_years": 4,
+      "code": "0003",
+      "group": "",
+      "major_code": "022"
     },
     {
       "order": 20,
@@ -306,7 +364,10 @@
       "expected_cut_rank": 15560,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 4
+      "n_years": 4,
+      "code": "0003",
+      "group": "",
+      "major_code": "023"
     },
     {
       "order": 21,
@@ -320,7 +381,10 @@
       "expected_cut_rank": 14426,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "3216",
+      "group": "",
+      "major_code": "037"
     },
     {
       "order": 22,
@@ -334,7 +398,10 @@
       "expected_cut_rank": 15121,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "3256",
+      "group": "",
+      "major_code": "035"
     },
     {
       "order": 23,
@@ -348,7 +415,10 @@
       "expected_cut_rank": 14064,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "5005",
+      "group": "",
+      "major_code": "024"
     },
     {
       "order": 24,
@@ -362,7 +432,10 @@
       "expected_cut_rank": 19298,
       "sigma": 0.25,
       "obey": true,
-      "n_years": 1
+      "n_years": 1,
+      "code": "3216",
+      "group": "",
+      "major_code": "044"
     },
     {
       "order": 25,
@@ -376,7 +449,10 @@
       "expected_cut_rank": 17075,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 2
+      "n_years": 2,
+      "code": "6102",
+      "group": "",
+      "major_code": "009"
     },
     {
       "order": 26,
@@ -390,7 +466,10 @@
       "expected_cut_rank": 15427,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "3273",
+      "group": "",
+      "major_code": "014"
     },
     {
       "order": 27,
@@ -404,7 +483,10 @@
       "expected_cut_rank": 17551,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 2
+      "n_years": 2,
+      "code": "1128",
+      "group": "",
+      "major_code": "041"
     },
     {
       "order": 28,
@@ -418,7 +500,10 @@
       "expected_cut_rank": 15267,
       "sigma": 0.25,
       "obey": true,
-      "n_years": 1
+      "n_years": 1,
+      "code": "4093",
+      "group": "",
+      "major_code": "024"
     },
     {
       "order": 29,
@@ -432,7 +517,10 @@
       "expected_cut_rank": 15158,
       "sigma": 0.25,
       "obey": true,
-      "n_years": 1
+      "n_years": 1,
+      "code": "4093",
+      "group": "",
+      "major_code": "045"
     },
     {
       "order": 30,
@@ -446,7 +534,10 @@
       "expected_cut_rank": 15726,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "3404",
+      "group": "",
+      "major_code": "002"
     },
     {
       "order": 31,
@@ -460,7 +551,10 @@
       "expected_cut_rank": 15830,
       "sigma": 0.25,
       "obey": true,
-      "n_years": 1
+      "n_years": 1,
+      "code": "6144",
+      "group": "",
+      "major_code": "016"
     },
     {
       "order": 32,
@@ -474,7 +568,10 @@
       "expected_cut_rank": 14771,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "3517",
+      "group": "",
+      "major_code": "014"
     },
     {
       "order": 33,
@@ -488,7 +585,10 @@
       "expected_cut_rank": 20048,
       "sigma": 0.25,
       "obey": true,
-      "n_years": 1
+      "n_years": 1,
+      "code": "0003",
+      "group": "",
+      "major_code": "025"
     },
     {
       "order": 34,
@@ -502,7 +602,10 @@
       "expected_cut_rank": 15954,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 3
+      "n_years": 3,
+      "code": "3646",
+      "group": "",
+      "major_code": "026"
     },
     {
       "order": 35,
@@ -516,7 +619,10 @@
       "expected_cut_rank": 18149,
       "sigma": 0.33784401868788905,
       "obey": true,
-      "n_years": 2
+      "n_years": 2,
+      "code": "0006",
+      "group": "",
+      "major_code": "023"
     },
     {
       "order": 36,
@@ -530,7 +636,10 @@
       "expected_cut_rank": 14687,
       "sigma": 0.25,
       "obey": true,
-      "n_years": 1
+      "n_years": 1,
+      "code": "4093",
+      "group": "",
+      "major_code": "044"
     },
     {
       "order": 37,
@@ -544,7 +653,10 @@
       "expected_cut_rank": 16644,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "3404",
+      "group": "",
+      "major_code": "006"
     },
     {
       "order": 38,
@@ -558,7 +670,10 @@
       "expected_cut_rank": 16032,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 2
+      "n_years": 2,
+      "code": "3457",
+      "group": "",
+      "major_code": "005"
     },
     {
       "order": 39,
@@ -572,7 +687,10 @@
       "expected_cut_rank": 19991,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "6108",
+      "group": "",
+      "major_code": "020"
     },
     {
       "order": 40,
@@ -586,7 +704,10 @@
       "expected_cut_rank": 25574,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "3115",
+      "group": "",
+      "major_code": "011"
     },
     {
       "order": 41,
@@ -600,7 +721,10 @@
       "expected_cut_rank": 17670,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 2
+      "n_years": 2,
+      "code": "4236",
+      "group": "",
+      "major_code": "014"
     },
     {
       "order": 42,
@@ -614,7 +738,10 @@
       "expected_cut_rank": 16956,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "3765",
+      "group": "",
+      "major_code": "020"
     },
     {
       "order": 43,
@@ -628,7 +755,10 @@
       "expected_cut_rank": 21689,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 3
+      "n_years": 3,
+      "code": "1149",
+      "group": "",
+      "major_code": "008"
     },
     {
       "order": 44,
@@ -642,7 +772,10 @@
       "expected_cut_rank": 18949,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "2108",
+      "group": "",
+      "major_code": "003"
     },
     {
       "order": 45,
@@ -656,7 +789,10 @@
       "expected_cut_rank": 17986,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "4342",
+      "group": "",
+      "major_code": "039"
     },
     {
       "order": 46,
@@ -670,7 +806,10 @@
       "expected_cut_rank": 14330,
       "sigma": 0.25,
       "obey": true,
-      "n_years": 1
+      "n_years": 1,
+      "code": "6147",
+      "group": "",
+      "major_code": "024"
     },
     {
       "order": 47,
@@ -684,7 +823,10 @@
       "expected_cut_rank": 20284,
       "sigma": 0.34762239413598195,
       "obey": true,
-      "n_years": 4
+      "n_years": 4,
+      "code": "0006",
+      "group": "",
+      "major_code": "021"
     },
     {
       "order": 48,
@@ -698,7 +840,10 @@
       "expected_cut_rank": 21165,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 2
+      "n_years": 2,
+      "code": "0006",
+      "group": "",
+      "major_code": "024"
     },
     {
       "order": 49,
@@ -712,7 +857,10 @@
       "expected_cut_rank": 16245,
       "sigma": 0.25,
       "obey": true,
-      "n_years": 1
+      "n_years": 1,
+      "code": "3646",
+      "group": "",
+      "major_code": "052"
     },
     {
       "order": 50,
@@ -726,7 +874,10 @@
       "expected_cut_rank": 17332,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "3267",
+      "group": "",
+      "major_code": "012"
     },
     {
       "order": 51,
@@ -740,7 +891,10 @@
       "expected_cut_rank": 20251,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 4
+      "n_years": 4,
+      "code": "3267",
+      "group": "",
+      "major_code": "022"
     },
     {
       "order": 52,
@@ -754,7 +908,10 @@
       "expected_cut_rank": 27327,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "4406",
+      "group": "",
+      "major_code": "013"
     },
     {
       "order": 53,
@@ -768,7 +925,10 @@
       "expected_cut_rank": 14589,
       "sigma": 0.25,
       "obey": true,
-      "n_years": 1
+      "n_years": 1,
+      "code": "4093",
+      "group": "",
+      "major_code": "043"
     },
     {
       "order": 54,
@@ -782,7 +942,10 @@
       "expected_cut_rank": 27252,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "3119",
+      "group": "",
+      "major_code": "024"
     },
     {
       "order": 55,
@@ -796,7 +959,10 @@
       "expected_cut_rank": 18162,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 2
+      "n_years": 2,
+      "code": "4236",
+      "group": "",
+      "major_code": "015"
     },
     {
       "order": 56,
@@ -810,7 +976,10 @@
       "expected_cut_rank": 18761,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 2
+      "n_years": 2,
+      "code": "4236",
+      "group": "",
+      "major_code": "016"
     },
     {
       "order": 57,
@@ -824,7 +993,10 @@
       "expected_cut_rank": 12349,
       "sigma": 0.25,
       "obey": true,
-      "n_years": 1
+      "n_years": 1,
+      "code": "6204",
+      "group": "",
+      "major_code": "036"
     },
     {
       "order": 58,
@@ -838,7 +1010,10 @@
       "expected_cut_rank": 20053,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "4342",
+      "group": "",
+      "major_code": "040"
     },
     {
       "order": 59,
@@ -852,7 +1027,10 @@
       "expected_cut_rank": 20810,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "4342",
+      "group": "",
+      "major_code": "042"
     },
     {
       "order": 60,
@@ -866,7 +1044,10 @@
       "expected_cut_rank": 19209,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 3
+      "n_years": 3,
+      "code": "2108",
+      "group": "",
+      "major_code": "009"
     },
     {
       "order": 61,
@@ -880,7 +1061,10 @@
       "expected_cut_rank": 28323,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 2
+      "n_years": 2,
+      "code": "5103",
+      "group": "",
+      "major_code": "014"
     },
     {
       "order": 62,
@@ -894,7 +1078,10 @@
       "expected_cut_rank": 31707,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 2
+      "n_years": 2,
+      "code": "3127",
+      "group": "",
+      "major_code": "008"
     },
     {
       "order": 63,
@@ -908,7 +1095,10 @@
       "expected_cut_rank": 23627,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "0006",
+      "group": "",
+      "major_code": "004"
     },
     {
       "order": 64,
@@ -922,7 +1112,10 @@
       "expected_cut_rank": 29123,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 3
+      "n_years": 3,
+      "code": "3125",
+      "group": "",
+      "major_code": "021"
     },
     {
       "order": 65,
@@ -936,7 +1129,10 @@
       "expected_cut_rank": 34074,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "1142",
+      "group": "",
+      "major_code": "006"
     },
     {
       "order": 66,
@@ -950,7 +1146,10 @@
       "expected_cut_rank": 29943,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "3257",
+      "group": "",
+      "major_code": "010"
     },
     {
       "order": 67,
@@ -964,7 +1163,10 @@
       "expected_cut_rank": 26556,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 3
+      "n_years": 3,
+      "code": "3243",
+      "group": "",
+      "major_code": "047"
     },
     {
       "order": 68,
@@ -978,7 +1180,10 @@
       "expected_cut_rank": 29359,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "5129",
+      "group": "",
+      "major_code": "031"
     },
     {
       "order": 69,
@@ -992,7 +1197,10 @@
       "expected_cut_rank": 23582,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 2
+      "n_years": 2,
+      "code": "0006",
+      "group": "",
+      "major_code": "008"
     },
     {
       "order": 70,
@@ -1006,7 +1214,10 @@
       "expected_cut_rank": 32351,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 3
+      "n_years": 3,
+      "code": "3125",
+      "group": "",
+      "major_code": "023"
     },
     {
       "order": 71,
@@ -1020,7 +1231,10 @@
       "expected_cut_rank": 25088,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "2303",
+      "group": "",
+      "major_code": "007"
     },
     {
       "order": 72,
@@ -1034,7 +1248,10 @@
       "expected_cut_rank": 29049,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "",
+      "group": "",
+      "major_code": ""
     },
     {
       "order": 73,
@@ -1048,7 +1265,10 @@
       "expected_cut_rank": 30108,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "0005",
+      "group": "",
+      "major_code": "050"
     },
     {
       "order": 74,
@@ -1062,7 +1282,10 @@
       "expected_cut_rank": 37873,
       "sigma": 0.25,
       "obey": true,
-      "n_years": 1
+      "n_years": 1,
+      "code": "0008",
+      "group": "",
+      "major_code": "027"
     },
     {
       "order": 75,
@@ -1076,7 +1299,10 @@
       "expected_cut_rank": 31881,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "3113",
+      "group": "",
+      "major_code": "002"
     },
     {
       "order": 76,
@@ -1090,7 +1316,10 @@
       "expected_cut_rank": 35199,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "3238",
+      "group": "",
+      "major_code": "021"
     },
     {
       "order": 77,
@@ -1104,7 +1333,10 @@
       "expected_cut_rank": 42313,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "0007",
+      "group": "",
+      "major_code": "006"
     },
     {
       "order": 78,
@@ -1118,7 +1350,10 @@
       "expected_cut_rank": 46213,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "0020",
+      "group": "",
+      "major_code": "031"
     },
     {
       "order": 79,
@@ -1132,7 +1367,10 @@
       "expected_cut_rank": 40938,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 3
+      "n_years": 3,
+      "code": "1111",
+      "group": "",
+      "major_code": "003"
     },
     {
       "order": 80,
@@ -1146,7 +1384,10 @@
       "expected_cut_rank": 59793,
       "sigma": 0.15,
       "obey": true,
-      "n_years": 5
+      "n_years": 5,
+      "code": "3138",
+      "group": "",
+      "major_code": "021"
     }
   ],
   "baseline_top_utility": [

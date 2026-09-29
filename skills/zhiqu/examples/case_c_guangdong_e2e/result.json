@@ -1,6 +1,6 @@
 {
   "params": {
-    "csv": "/private/tmp/claude-501/-Users-xik-Desktop-Folder-Xik/04cd1cc3-0386-47af-b7fe-dacb1bab3611/scratchpad/e2e/cand.csv",
+    "csv": "examples/case_c_guangdong_e2e/candidates.csv",
     "rank": 30500.0,
     "slots": 45,
     "u_fall": -60.0,
@@ -19,7 +19,7 @@
     "sims": 4000,
     "seed": 42,
     "max_swap_evals": 20000,
-    "json": "/private/tmp/claude-501/-Users-xik-Desktop-Folder-Xik/04cd1cc3-0386-47af-b7fe-dacb1bab3611/scratchpad/e2e/opt.json"
+    "json": "examples/case_c_guangdong_e2e/result.json"
   },
   "expected_utility": 94.06519999999999,
   "p_fall": 0.0,
@@ -42,6 +42,9 @@
       "sigma": 0.18722856923322723,
       "obey": true,
       "n_years": 4,
+      "code": "11845",
+      "group": "216",
+      "major_code": "",
       "majors": [
         {
           "name": "计算机类",
@@ -68,6 +71,9 @@
       "sigma": 0.3067035478012111,
       "obey": true,
       "n_years": 4,
+      "code": "11845",
+      "group": "207",
+      "major_code": "",
       "majors": [
         {
           "name": "数据科学与大数据技术",
@@ -94,6 +100,9 @@
       "sigma": 0.16000000000000003,
       "obey": true,
       "n_years": 4,
+      "code": "11845",
+      "group": "226",
+      "major_code": "",
       "majors": [
         {
           "name": "法学",
@@ -115,6 +124,9 @@
       "sigma": 1.0137433236529092,
       "obey": true,
       "n_years": 5,
+      "code": "11845",
+      "group": "213",
+      "major_code": "",
       "majors": [
         {
           "name": "电子信息工程(腾创班)",
@@ -146,6 +158,9 @@
       "sigma": 0.1647196243045486,
       "obey": true,
       "n_years": 4,
+      "code": "11845",
+      "group": "225",
+      "major_code": "",
       "majors": [
         {
           "name": "应用统计学",
@@ -182,6 +197,9 @@
       "sigma": 0.19932460578283095,
       "obey": true,
       "n_years": 4,
+      "code": "11845",
+      "group": "220",
+      "major_code": "",
       "majors": [
         {
           "name": "电子科学与技术(创新班)",
@@ -223,6 +241,9 @@
       "sigma": 0.6781793993567308,
       "obey": true,
       "n_years": 5,
+      "code": "11845",
+      "group": "206",
+      "major_code": "",
       "majors": [
         {
           "name": "自动化(创新班)",
