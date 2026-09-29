@@ -144,6 +144,7 @@ AI 会按以下顺序工作，每一步你都可以打断或纠正：
 ```
 index.html                       问卷（GitHub Pages 自动部署）
 AGENTS.md                        给 Agent 的入口（指向 README 顶部的安装步骤）
+ROADMAP.md                       完善清单：数据、模型、校准、因子、偏好、问卷、工程
 skills/zhiqu/
 ├── SKILL.md                     技能入口：工作流、底线、报告写法
 ├── references/
