@@ -52,6 +52,8 @@ svg.chart { width: 100%; height: auto; display: block; }
 .cover .kicker { font-size: 9pt; letter-spacing: 3pt; opacity: .85; }
 .cover h1 { color: #FBF6E6; font-size: 30pt; margin: 6mm 0 3mm; letter-spacing: 1pt; }
 .cover .sub { font-size: 11pt; opacity: .9; }
+.cover .motto { margin-top: 9mm; font-size: 10.5pt; letter-spacing: 4pt; opacity: .78; display: flex; align-items: center; gap: 4mm; }
+.cover .motto::before { content: ""; width: 8mm; height: .6pt; background: #F5EFDD; opacity: .7; }
 .cover .meta { padding: 10mm 22mm 0; display: grid; grid-template-columns: repeat(3,1fr); gap: 6mm 8mm; }
 .cover .meta div { border-top: .8pt solid var(--rule2); padding-top: 2mm; }
 .cover .meta b { display:block; font-size: 8pt; color: var(--muted); font-weight: 500; letter-spacing: 1pt; }
@@ -389,7 +391,8 @@ def build(rep, opt):
 
     toc = "".join(f"<div><span>{i:02d}</span><span>{E(t)}</span></div>" for i, t, _ in secs)
     cover = (f'<div class="cover"><div class="band"><div class="kicker">知 衢 · 志 愿 填 报 决 策 报 告</div>'
-             f'<h1>{E(m.get("title", "志愿填报决策报告"))}</h1><div class="sub">{E(m.get("subtitle", ""))}</div></div>'
+             f'<h1>{E(m.get("title", "志愿填报决策报告"))}</h1><div class="sub">{E(m.get("subtitle", ""))}</div>'
+             '<div class="motto">知其所往，方行其衢。</div></div>'
              '<div class="meta">'
              + "".join(f"<div><b>{E(a)}</b><span>{E(str(b))}</span></div>" for a, b in [
                  ("考生", m.get("candidate", "–")), ("省份 · 科类", f'{m.get("province", "–")} · {m.get("category", "–")}'),
