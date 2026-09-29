@@ -9,6 +9,7 @@
 | `<省份>/early_*.csv` | 提前批、专项计划（广东、浙江、江苏） |
 | `schools.csv` | 教育部全国普通高等学校名单（2025 年 6 月）：代码、所在省市、办学层次、民办/合作办学备注 |
 | `civil_service/` | 公务员职位表的各专业可报岗位统计 |
+| `births_by_province.csv` | 分省年末人口与出生率（2016、2023 年），国家统计局《中国统计年鉴》2017 表 2-8、2024 表 2-7（表格为图片，人工录入后核对） |
 
 各省官方来源：广东 eea.gd.gov.cn，浙江 zjzs.net，江苏 jseea.cn，山东 sdzk.cn，河北 hebeea.edu.cn，辽宁 lnzsks.com，湖南 jyt.hunan.gov.cn，湖北 jyt.hubei.gov.cn，上海 shmeea.edu.cn，黑龙江 lzk.hl.cn。
 
