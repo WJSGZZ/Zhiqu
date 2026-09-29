@@ -32,8 +32,12 @@ def phi(z):
     return 0.5 * (1 + math.erf(z / math.sqrt(2)))
 
 
-def predict(hist, drift, target, sigma_floor, sigma_single):
-    """hist: [(year, rank)]，近的在前。与 optimize.load_candidates 相同的规则。"""
+def predict(hist, drift, target, sigma_floor, sigma_single, shrink=None, gamma=0.0, ref=30000, jump_c=1.0):
+    """hist: [(year, rank)]，近的在前。与 optimize.load_candidates 相同的规则。
+    可选修正（用于检验，默认关闭）：shrink=(先验波动, 等效年数) 把少量年份估出的波动向先验收缩；
+    gamma>0 时位次越靠前波动越大（乘以 (ref/位次)^gamma）；jump_c<1 时缩小跳变放大的幅度。"""
+    if shrink or gamma or jump_c != 1.0:
+        return predict_v2(hist, drift, target, sigma_floor, sigma_single, shrink, gamma, ref, jump_c)
     pts = [(k, math.log(r) + drift * (target - y)) for k, (y, r) in enumerate(hist)]
     ws = [RECENCY_WEIGHTS[min(k, len(RECENCY_WEIGHTS) - 1)] for k, _ in pts]
     logs = [l for _, l in pts]
@@ -49,6 +53,28 @@ def predict(hist, drift, target, sigma_floor, sigma_single):
     return mu, sigma
 
 
+def predict_v2(hist, drift, target, sigma_floor, sigma_single, shrink, gamma, ref, jump_c):
+    pts = [(k, math.log(r) + drift * (target - y)) for k, (y, r) in enumerate(hist)]
+    ws = [RECENCY_WEIGHTS[min(k, len(RECENCY_WEIGHTS) - 1)] for k, _ in pts]
+    logs = [l for _, l in pts]
+    mu = sum(w * l for w, l in zip(ws, logs)) / sum(ws)
+    if len(logs) >= 2:
+        var = st.variance(logs)
+        if shrink:
+            prior, k0 = shrink
+            n1 = len(logs) - 1
+            var = (n1 * var + k0 * prior ** 2) / (n1 + k0)
+        sigma = max(math.sqrt(var), sigma_floor)
+        jumps = [abs(logs[k] - logs[k + 1]) for k in range(len(logs) - 1)]
+        if max(jumps) > JUMP_WARN:
+            sigma = max(sigma, jump_c * max(jumps))
+    else:
+        sigma = sigma_single
+    if gamma:
+        sigma *= (ref / hist[0][1]) ** gamma
+    return mu, sigma
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--province", default="")
@@ -59,6 +85,8 @@ def main():
     ap.add_argument("--sigma-floor", type=float, default=0.10)
     ap.add_argument("--sigma-single", type=float, default=0.25)
     ap.add_argument("--min-rank", type=int, default=500)
+    ap.add_argument("--by", choices=["none", "level", "plan", "hist", "jump"], default="none",
+                    help="分档校准：level=位次段三等分，plan=计划人数，hist=历史年数，jump=历史上是否有过大跳变")
     ap.add_argument("--sigma-mult", type=float, default=1.0, help="把 sigma 乘以这个倍数再检验（找出校准所需的放大倍数）")
     a = ap.parse_args()
     bt.SCHOOL_BY = a.school
@@ -72,7 +100,7 @@ def main():
     for y0, y1 in zip(years, years[1:]):
         d = [math.log(data[y1][k]["rank"] / data[y0][k]["rank"]) for k in data[y0] if k in data[y1]]
         step[y1] = st.median(d) if d else 0.0
-    pits, by_year = [], {}
+    pits, by_year, bins = [], {}, {}
     for t in years[2:] if len(years) > 2 else years[1:]:
         prev = [y for y in years if y < t]
         if a.drift == "auto":
@@ -81,13 +109,29 @@ def main():
         else:
             drift = float(a.drift)
         u_t = []
+        cuts = sorted(math.log(v["rank"]) for v in data[t].values())
+        t1, t2 = cuts[len(cuts) // 3], cuts[2 * len(cuts) // 3]
         for k, v in data[t].items():
             hist = [(y, data[y][k]["rank"]) for y in sorted(prev, reverse=True) if k in data[y]]
             if not hist:
                 continue
             mu, sigma = predict(hist, drift, t, a.sigma_floor, a.sigma_single)
             sigma *= a.sigma_mult
-            u_t.append(phi((math.log(v["rank"]) - mu) / sigma))
+            u = phi((math.log(v["rank"]) - mu) / sigma)
+            u_t.append(u)
+            if a.by != "none":
+                if a.by == "level":
+                    lr = math.log(hist[0][1])
+                    b = "位次靠前 1/3" if lr < t1 else ("位次中间 1/3" if lr < t2 else "位次靠后 1/3")
+                elif a.by == "plan":
+                    pl = data[t][k].get("plan")
+                    b = "计划未知" if not pl else ("计划 ≤5" if pl <= 5 else ("计划 6–20" if pl <= 20 else "计划 >20"))
+                elif a.by == "hist":
+                    b = f"历史 {min(len(hist), 3)}{'+' if len(hist) >= 3 else ''} 年"
+                else:
+                    ls = [math.log(r) for _, r in hist]
+                    b = "有过 >40% 跳变" if len(ls) > 1 and max(abs(x - y) for x, y in zip(ls, ls[1:])) > JUMP_WARN else "历史平稳"
+                bins.setdefault(b, []).append(u)
         by_year[t] = (drift, u_t)
         pits += u_t
     n = len(pits)
@@ -104,6 +148,12 @@ def main():
         # 考生位次取在预测分布的 (1-p) 分位：过线 ⇔ 真实录取线位次 ≥ 考生位次 ⇔ PIT ≥ 1-p
         obs = sum(u >= 1 - p for u in pits) / n
         print(f"| {p:.0%} | {obs:.1%} |")
+    if bins:
+        print(f"\n分档（{a.by}）")
+        print("| 档 | 样本 | 平均 PIT | 80% 覆盖 | 比 5% 分位还热 | 比 95% 分位还冷 |\n|---|---|---|---|---|---|")
+        for b, us in sorted(bins.items()):
+            m = len(us)
+            print(f"| {b} | {m} | {st.mean(us):.3f} | {sum(.1 <= x <= .9 for x in us) / m:.1%} | {sum(x < .05 for x in us) / m:.1%} | {sum(x > .95 for x in us) / m:.1%} |")
     print("\n逐年（漂移为当年使用的估计值）")
     for t, (d, u) in by_year.items():
         if u:
