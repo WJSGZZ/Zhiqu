@@ -6,6 +6,7 @@
 
 <p align="center">
   <a href="https://wjsgzz.github.io/Zhiqu/">在线问卷</a> ·
+  <a href="#读研版">读研版</a> ·
   <a href="#使用教程">使用教程</a> ·
   <a href="skills/zhiqu/references/volunteer-game.md">数学模型</a>
 </p>
@@ -14,10 +15,10 @@
 <summary><b>给 AI Agent：用户发来本仓库链接，就按这里安装并使用</b></summary>
 
 1. 下载：`git clone --depth 1 https://github.com/WJSGZZ/Zhiqu.git`（没有 git 就下载 `https://github.com/WJSGZZ/Zhiqu/archive/refs/heads/main.zip` 并解压）。
-2. 把 `Zhiqu/skills/zhiqu` 整个文件夹复制到你的技能目录：Claude Code 用 `~/.claude/skills/zhiqu/`，Codex 用 `~/.codex/skills/zhiqu/`，其他支持 `SKILL.md` 的 Agent 用其文档规定的目录（常见为 `~/.agents/skills/zhiqu/`）。不支持技能的 Agent 不用复制，每次对话先读 `skills/zhiqu/SKILL.md`。只写入这些位置，不改动用户的其他文件。
+2. 仓库有两个技能：`skills/zhiqu`（高考志愿）和 `skills/zhiqu-grad`（读研规划）。把两个文件夹都复制到你的技能目录（用户明确只要其中一个时只复制那一个）：Claude Code 用 `~/.claude/skills/`，Codex 用 `~/.codex/skills/`，其他支持 `SKILL.md` 的 Agent 用其文档规定的目录（常见为 `~/.agents/skills/`）。不支持技能的 Agent 不用复制，每次对话先读对应的 `SKILL.md`。只写入这些位置，不改动用户的其他文件。
 3. 需要 Python 3.8+，脚本只用标准库，不用 `pip install`。出 PDF 需要本机有 Chrome、Edge 或 Chromium，没有时输出 HTML。
-4. 验证：在技能文件夹里运行 `python3 scripts/optimize.py examples/candidates_demo.csv --rank 30000 --slots 12 --u-fall -60`，能输出一张志愿表即装好。
-5. 告诉用户装在哪里，然后读 `SKILL.md`，按其中的流程工作：先请用户填[在线问卷](https://wjsgzz.github.io/Zhiqu/)并把生成的画像发过来。
+4. 验证：读研版只需确认 `zhiqu-grad/SKILL.md` 存在；高考版在 `zhiqu` 文件夹里运行 `python3 scripts/optimize.py examples/candidates_demo.csv --rank 30000 --slots 12 --u-fall -60`，能输出一张志愿表即装好。
+5. 告诉用户装在哪里，问清是高考还是读研，然后读对应的 `SKILL.md`，按其中的流程工作：先请用户填[在线问卷](https://wjsgzz.github.io/Zhiqu/)（首页选"高考志愿"或"读研规划"）并把生成的画像发过来。
 
 </details>
 
@@ -38,6 +39,15 @@
 
 > 知衢不是官方工具，也不保证录取。一切以本省教育考试院和各校当年的招生章程为准。
 
+### 读研版
+
+本科生读研前也要做一次选择，而且路更多：考研（一年只能报一所，失败靠调剂）、境外读研、国内的中外合作办学（有的走统考、发中国学历，有的学校自主招生、只发外方学位）、先工作、考公。读研版先判断**该走哪条路**，再在路内选学校和项目，给出按月的时间线和失败后的备选。
+
+1. 打开[在线问卷](https://wjsgzz.github.io/Zhiqu/)，选「读研规划」，约 15 分钟，复制生成的画像（以 `【读研 · 自我盘点】` 开头）
+2. 把画像发给装好知衢的 AI
+
+规则以教育部当年《全国硕士研究生招生工作管理规定》为准（当前收录 2027 年版）。保研（推免）不需要填报志愿，不在读研版范围内。院校数据在确定学生和方向后才按需收集。
+
 ---
 
 ## 使用教程
@@ -46,7 +56,7 @@
 
 ### 第一步：填问卷，生成画像
 
-1. 打开 **[在线问卷](https://wjsgzz.github.io/Zhiqu/)**，手机和电脑都能用。
+1. 打开 **[在线问卷](https://wjsgzz.github.io/Zhiqu/)**，选「高考志愿」，手机和电脑都能用。
 2. 先准备好：**全省位次**（比分数更重要，查本省"一分一段表"即可）和**选科组合**。
 3. 按顺序填完十节。拿不准的题可以留空；选了"出国""考公"这类选项，下面会自动出现追问。
 4. 第九节"排个序"最关键：按你真正在乎的程度，依次点选五项，它决定了后面怎么计算收益。
@@ -142,7 +152,9 @@ AI 会按以下顺序工作，每一步你都可以打断或纠正：
 ## 目录
 
 ```
-index.html                       问卷（GitHub Pages 自动部署）
+index.html                       问卷入口：选择高考或读研（GitHub Pages 自动部署）
+gaokao.html                      高考志愿问卷
+grad.html                        读研规划问卷
 AGENTS.md                        给 Agent 的入口（指向 README 顶部的安装步骤）
 DESIGN.md                        设计方案：目标、原则、结构、关键决定
 ROADMAP.md                       完善清单：数据、模型、校准、因子、偏好、问卷、工程
@@ -169,6 +181,15 @@ skills/zhiqu/
 ├── tests/                       自动测试（python3 -m unittest discover -s tests）
 ├── data/                        10 个省份的官方投档数据、全国高校名单、公务员职位统计；年度更新步骤见 data/README.md
 └── examples/                    虚构示例：候选志愿、报告内容与生成的 PDF
+skills/zhiqu-grad/               读研版技能
+├── SKILL.md                     技能入口：时间坐标 → 路径判断 → 按需收集数据 → 报告
+└── references/
+    ├── routes.md                为什么读研；考研、境外、合作办学、先工作、考公的比较与组合
+    ├── kaoyan.md                2027 年考研规则、报考类型限制、择校期望值、时间线、复试调剂、二战
+    ├── abroad.md                境外读研：预算、学制、回国认证与落户、选校与时间线
+    ├── sino-foreign.md          中外合作办学：合法性核查、统招与非统招、证书与认证
+    ├── data-sources.md          数据来源与按候选收集的清单
+    └── report-guide.md          报告的 12 节固定目录
 ```
 
 ## 免责声明

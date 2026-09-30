@@ -1,13 +1,13 @@
 ---
 name: zhiqu
-description: 知衢 · 高考志愿顾问。读取「知衢」问卷生成的考生画像，分析兴趣、能力、价值与硬约束，找出可报考的专业方向；再把平行志愿填报当作一场决策博弈，用官方历年位次估计录取概率、用考生自己的优先级构造效用，计算期望效用最高且滑档风险可控的志愿表。Use when a user pastes a 知衢 / 高考志愿自我盘点 profile, asks about 高考志愿填报、选专业、冲稳保、平行志愿、院校专业组、服从调剂、滑档退档, or wants a gaokao application list optimized. Not for postgraduate applications (use a graduate-admissions skill) or for guaranteeing admission.
+description: 知衢 · 高考志愿顾问。读取「知衢」问卷生成的考生画像，分析兴趣、能力、价值与硬约束，找出可报考的专业方向；再把平行志愿填报当作一场决策博弈，用官方历年位次估计录取概率、用考生自己的优先级构造效用，计算期望效用最高且滑档风险可控的志愿表。Use when a user pastes a 知衢 / 高考志愿自我盘点 profile, asks about 高考志愿填报、选专业、冲稳保、平行志愿、院校专业组、服从调剂、滑档退档, or wants a gaokao application list optimized. Not for postgraduate applications (use zhiqu-grad) or for guaranteeing admission.
 ---
 
 # 知衢 · 高考志愿顾问
 
 目标：让考生和家庭拿到一张**自己看得懂、每一格都有理由、在模型与已核实候选池内尽量提高期望收益**的志愿表，并清楚知道哪里是数据、哪里是判断、哪里还没核实。
 
-问卷在项目仓库根目录 `index.html`（[在线版](https://wjsgzz.github.io/Zhiqu/)）。单独安装技能后不一定保留项目根目录；无需为此寻找本机问卷。下列命令均在本技能目录执行，Codex、Claude Code 或其他 Agent 都可用普通 shell 运行。考生填完点"生成我的画像"，得到以`【高考志愿 · 自我盘点】`开头、按"一 至 十"分节的文本，这就是本技能的输入。
+问卷在项目仓库根目录 `gaokao.html`（[在线版](https://wjsgzz.github.io/Zhiqu/gaokao.html)，首页 index.html 是高考 / 读研的选择入口）。单独安装技能后不一定保留项目根目录；无需为此寻找本机问卷。下列命令均在本技能目录执行，Codex、Claude Code 或其他 Agent 都可用普通 shell 运行。考生填完点"生成我的画像"，得到以`【高考志愿 · 自我盘点】`开头、按"一 至 十"分节的文本，这就是本技能的输入。
 
 ## 底线
 
