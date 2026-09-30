@@ -1,180 +1,89 @@
 <p align="center"><img src="assets/logo.png" width="128" alt="知衢"></p>
 <h1 align="center">知衢</h1>
-<p align="center"><strong>把重要选择，想得更清楚。</strong></p>
-<p align="center">高考志愿 · 读研规划 · 求职方向</p>
-<p align="center"><a href="https://wjsgzz.github.io/Zhiqu/">填写问卷</a> · <a href="#先看看三个普通人的选择">看三个案例</a> · <a href="#安装与开始使用">安装使用</a> · <a href="ROADMAP.md">进展与待办</a></p>
+<p align="center"><strong>知其所往，方行其衢。</strong></p>
+<p align="center">高考志愿 · 读研规划 · 求职方向——在人生的几个路口，把选择想清楚</p>
+<p align="center">
+  <a href="https://wjsgzz.github.io/Zhiqu/">填写问卷</a> ·
+  <a href="#看三个例子">看三个例子</a> ·
+  <a href="#三步开始">三步开始</a> ·
+  <a href="AGENTS.md">给 AI Agent</a> ·
+  <a href="DESIGN.md">设计文档</a>
+</p>
 
-选专业、读研、找工作时，最难的往往不是信息太少，而是不知道哪些信息与自己有关。
+<details>
+<summary><b>给 AI Agent：用户发来本仓库链接时，先读 <a href="AGENTS.md">AGENTS.md</a></b></summary>
 
-你可能喜欢一个方向，又担心工作；想换一个平台，却承担不起反复试错；希望听取家人的建议，也想保留自己的选择。知衢从这些具体处境开始：先了解你想要什么、能做什么、承担得起什么，再比较可走的路。
+AGENTS.md 里有安装脚本、项目地图、工作规则和验证命令。只安装、只读取，不修改项目源代码；安装不等于获准上传用户资料或代发消息。
 
-**它给你的，是有理由的选择、看得见的代价，以及走到哪个节点需要重新判断。** 不要求你先成为成绩拔尖、目标清晰的人。对还不知道的事，它会写明缺什么，帮你把下一步缩小到可以核实的问题。
+</details>
 
-## 从你正在面对的选择开始
+<p align="center"><img src="assets/readme/entry.png" width="760" alt="知衢问卷入口：高考志愿、读研规划、求职方向"></p>
 
-| 你现在的处境 | 版本与问卷 | 你会拿到什么 |
-|---|---|---|
-| 不知道学什么；出分后要填志愿 | [高考版](skills/zhiqu/SKILL.md) · [问卷](https://wjsgzz.github.io/Zhiqu/gaokao.html) | 方向分析；出分后，在核实资格与候选后计算志愿组合、说明过线与调剂风险 |
-| 犹豫读研还是工作；要择校或比较录取 | [读研版](skills/zhiqu-grad/SKILL.md) · [问卷](https://wjsgzz.github.io/Zhiqu/grad.html) | 先比较路径，再看院校与项目；费用、时间线、失败去向与更新检查点 |
-| 不知道找什么工作；要比较offer或跳槽 | [求职版](skills/zhiqu-career/SKILL.md) · [问卷](https://wjsgzz.github.io/Zhiqu/career.html) | 工作内容与能力匹配、城市与生活成本、合同条件、进入路线与备选 |
+选专业、读研、找工作时，最难的往往不是信息太少，而是不知道哪些信息和自己有关。知衢先用一份 15 分钟左右的问卷了解你，再由你自己的 AI Agent（Claude Code、Codex 等）按知衢的方法查官方资料、做计算，交给你一份看得懂的报告：**有理由的选择、看得见的代价，以及走到哪一步需要重新判断。**
 
-三版都做发展规划与关键选择，也说明大致怎么走；不提供逐日备考、讲题、文书或简历代写、面试陪练、代投或代签。求职版适用于专科到博士。读研版暂不办理推免流程；推免同样涉及志愿与录取，暂不覆盖属于产品范围选择。
+## 它能帮你做什么
 
-## 先看看三个普通人的选择
+- **高考**：按你的位次、选科和自己排的优先级，用各省官方历年投档数据，排出一张期望满意度最高、滑档风险可控的志愿表，并写清每一格为什么在这里。
+- **读研**：先判断该走考研、境外读研、中外合作办学、先工作还是考公，再在路里挑学校；分清哪些可以算、哪些只能比较情景。
+- **求职**：专科到博士都适用。找出工作内容、收入、城市、节奏都合适的方向；拿到 offer 时，算清到手收入、时薪和扣掉房租后每月剩多少。
+- **传统视角（可选）**：填了出生信息，问卷当场排出八字，报告把它和你的性格自评、现实条件放在一起对照，只用来提问和反思，**不参与打分，不排除任何选项**。
 
-三个案例都以**2026年秋季的处境，面向2027年的目标**展开，分别在浙江、广东、四川。人物、生日、经历和预算完全虚构；官方事实、计算和未决事项分别标注。它们展示的是做决定的过程，不是成功案例或统计有效性证明。
+知衢给路线图，不陪跑：不代写文书、不改简历、不做题目辅导，也不保证录取或录用。
 
-| 人物 | 正在犹豫什么 | 阅读案例 |
-|---|---|---|
-| **小禾，17岁，浙江高三** | 喜欢哲学和历史，父母更希望读师范；她想知道自己喜欢的是专业，还是专业的名字 | [网页](skills/zhiqu/examples/demo_2027_gaokao/report.html) · [PDF](skills/zhiqu/examples/demo_2027_gaokao/report.pdf) · [画像与复现](skills/zhiqu/examples/demo_2027_gaokao/README.md) |
-| **小林，21岁，广东普通本科电气类** | 实践有兴趣，数学英语有短板；既想读研，又怕备考、秋招两头落空，家里支持也有上限 | [网页](skills/zhiqu-grad/examples/demo_2027/report.html) · [PDF](skills/zhiqu-grad/examples/demo_2027/report.pdf) · [画像与复现](skills/zhiqu-grad/examples/demo_2027/README.md) |
-| **小宁，20岁，四川高职会计类** | 毕业后需要收入，又担心学历限制；第一份工作与专升本，怎样比较才不只听单位名气 | [网页](skills/zhiqu-career/examples/demo_2027/report.html) · [PDF](skills/zhiqu-career/examples/demo_2027/report.pdf) · [画像与复现](skills/zhiqu-career/examples/demo_2027/README.md) |
+## 看三个例子
 
-他们都有长处，也有一般人的迟疑、习惯和现实牵挂。报告不会把这些写成需要被纠正的人格标签。
+三个完全虚构的普通人，分别在浙江、广东、四川，都面向 2027 年。每个例子分两步：**现在**，资料不全时只做方向和预算；**假想后续阶段**，演示资料齐了之后知衢会算出什么。人物是虚构的，用到的招生、工资、政策数据是真实官方数据。
 
-**每个案例都分两步走，像真实使用一样。** 第一步是现在：资料不全时，只做方向、路径和预算，不编造概率。第二步是一个明确标注的"假想"后续阶段，演示资料齐了之后知衢会算出什么：
-- **小禾假想出分后**：用浙江官方投档数据排出志愿表。按她自己的排序和父母的排序各算一次，两种排序算出的最可能去向其实相同，分歧只在第二去向。
-- **小林假想初试成绩**：把几个可能的分数放进华工电气专硕两年的官方录取分布，看处在什么位置；不换算成个人录取概率。
-- **小宁假想拿到两个 offer**：算出工资高的直签岗位扣掉房租后，每月反而比离家近的派遣岗位少剩约 580 元。
+### 小禾 · 浙江高三：喜欢哲学和历史，父母希望读师范
 
-想看出分后的表格与计算，可看[浙江案例B](skills/zhiqu/examples/case_b_zhejiang_2027/README.md)和[广东案例C](skills/zhiqu/examples/case_c_guangdong_e2e/README.md)；想实际运行候选→预测→优化→报告，见[纯虚构计算流程](skills/zhiqu/examples/pipeline_demo/README.md)。历史算例不构成当年的正式推荐，也不覆盖当前三个人的未知条件。
+<img src="assets/readme/demo-gaokao.png" width="760" alt="小禾假想出分后的志愿表">
 
-## 怎样使用
+用浙江 2022—2026 年官方投档位次，按她的排序（专业 > 前景 > 城市 > 学校）排出 21 个志愿，最可能落在浙江外国语学院汉语言文学（师范），约 73%。换成父母的排序（前景优先）再算一次，**最可能的去向不变**，分歧只在第二去向，约占四分之一的概率。哲学在浙江可以报，但以这个位次只能冲。
 
-1. **选择问卷，填写与你有关的部分。** 不确定就写不确定；出生资料与传统视角自愿填写。
-2. **复制生成的画像给支持本地文件与Python的AI Agent。** 说明目标年份、当前阶段，以及这次最想解决的选择。安装方法见下节。
-3. **先确认关键资料与取舍。** AI追问真正影响结论的信息，找方向、查官方资料，并请你确认偏好和约束。
-4. **阅读报告，纠正不符合自己的判断。** 可以说“这个专业我不愿意读”“预算需要降低”或“先按我和父母分别比较”。你不需要用专业术语。
-5. **到检查点更新。** 出分、拿到录取或offer、费用或家庭条件变化后，重新生成画像与报告。
+[阅读报告](skills/zhiqu/examples/demo_2027_gaokao/report.md) · [PDF](skills/zhiqu/examples/demo_2027_gaokao/report.pdf) · [画像与复现](skills/zhiqu/examples/demo_2027_gaokao/README.md)
 
-画像开头用于识别版本：`【高考志愿 · 自我盘点】`、`【读研 · 自我盘点】`、`【求职 · 自我盘点】`。
+### 小林 · 广东普通本科电气类：想读研，又怕备考和秋招两头落空
 
-可以直接这样开始：
+<img src="assets/readme/demo-grad.png" width="760" alt="小林的初试分数情景对照">
 
-```text
-这是我的知衢画像。我计划2027年入学，现在还在备考。
-请先比较读研与工作的路径，写清预算、尚未核实的条件和下次检查点。
-【读研 · 自我盘点】
-……
-```
+华南理工大学电气专硕 2026 年统考录取约 120 人，比 2025 年多了一倍，多出来的主要是新增的"基地计划"。两年录取者的初试中位数都在 382 分左右，变的是最低分（365 → 330）。所以关键不是"华工难不难"，而是 **2027 年名额还在不在**，以及她的模考落在哪一段。报告不编个人上岸概率。
 
-```text
-我是2027年广东考生，已出分。请按同科类位次和当年完整专业组核实，
-先让我确认愿意读的专业与调剂态度，再计算志愿表。
-```
+[阅读报告](skills/zhiqu-grad/examples/demo_2027/report.md) · [PDF](skills/zhiqu-grad/examples/demo_2027/report.pdf) · [画像与复现](skills/zhiqu-grad/examples/demo_2027/README.md)
 
-你会拿到固定12节报告，以一句话结论和摘要开始，后面保留证据、取舍、行动路线与来源。不同版本的节名按场景变化；缺内容的节说明原因。HTML可直接打开，PDF适合分享和打印；只有少量问题时，不强行生成整份报告。
+### 小宁 · 四川高职会计类：先工作，还是专升本
 
-## 安装与开始使用
+<img src="assets/readme/demo-career.png" width="760" alt="小宁的两个假想 offer 比较">
 
-### 给AI Agent的入口
+工资高的直签岗位在省会要租房，每月剩约 1780 元；工资低的劳务派遣岗位离家近，每月剩约 2363 元，另有公积金。**钱多不等于剩得多**；但派遣要问清能不能转直签，直签能学到完整的账务流程。收入参考用四川省人社厅公布的工资价位，并注明那不是应届起薪。
 
-用户发来本仓库链接并要求安装使用时：先按本节检查环境与安装位置，再问使用哪一版，读取对应SKILL.md，邀请用户填写问卷。不要修改项目源代码，也不要把安装视为上传画像或发送消息的授权。
+[阅读报告](skills/zhiqu-career/examples/demo_2027/report.md) · [PDF](skills/zhiqu-career/examples/demo_2027/report.pdf) · [画像与复现](skills/zhiqu-career/examples/demo_2027/README.md)
 
-这是文件型技能，适合能读取SKILL.md、运行本地Python并按需访问官方网页的Agent。Claude Code、Codex可采用相应技能目录；普通网页版聊天可讨论画像，但不能据此承诺已安装技能或实际运行本地计算。
+想看更多高考算例：[浙江案例 B](skills/zhiqu/examples/case_b_zhejiang_2027/README.md)、[广东案例 C](skills/zhiqu/examples/case_c_guangdong_e2e/README.md)。
 
-### 环境与技能依赖
+## 三步开始
 
-- 建议Python **3.10或更高**；预测、优化、验证与报告核心使用标准库，历法引擎已随仓库固定版本提供。
-- 生成PDF需要本机Chrome、Edge或Chromium；没有浏览器仍可生成HTML。
-- 公务员职位表若为旧`.xls`，解析时另需可选`xlrd`；其他核心流程不需要它。原始附件只在临时目录处理。
-- 当前共用资料在`zhiqu`中，求职版还引用读研版的方向资料。**最省心的安装方式是同层保留三个知衢技能及bazi**，按需加载；bazi用于复核出生资料或独立八字任务。只做高考且不使用传统视角时，可以仅安装zhiqu。
-- `zhiqu-shared`仍是拟议迁移，当前不要安装不存在的目录。
+1. **填问卷**：打开[在线问卷](https://wjsgzz.github.io/Zhiqu/)，选高考、读研或求职。拿不准的可以留空，出生信息自愿填写。作答只存在你自己的浏览器里。
+2. **交给 AI Agent**：把本仓库链接 `https://github.com/WJSGZZ/Zhiqu` 发给能运行本地程序的 AI Agent，说"安装并使用这个技能"；再把问卷生成的画像发给它（以 `【高考志愿 · 自我盘点】`、`【读研 · 自我盘点】` 或 `【求职 · 自我盘点】` 开头），说明你现在处在哪个阶段、最想解决什么。
+3. **读报告，纠正它**：报告固定 12 节，第一页就是结论和下一步。不符合你的地方直接说，比如"这个专业我不愿意读""按我和父母分别算一次"。到了出分、拿到 offer 这些节点，回来更新问卷，重新算。
 
-```bash
-git clone https://github.com/WJSGZZ/Zhiqu.git
-cd Zhiqu
-python3 --version
-```
+## 哪些可以相信，哪些还要核实
 
-按Agent与使用范围选择目标目录，例如：
+- **事实**：招生、院校、工资、政策只用官方公开资料，写明年份和查询日期；遇到验证码、登录不绕过，记为缺口。
+- **计算**：高考志愿表的录取概率在有位次数据的省份做过校准检验（各省情况见[年度研究](skills/zhiqu/data/calibration/README.md)），但仍是估计；滑档概率为零只说明模拟里没出现，不等于没有风险。读研和求职以情景比较为主，群体数据不直接套成个人概率或个人工资。
+- **八字**：传统视角，现实预测效度未经验证；删掉它，所有资格、打分和排序都不变。
+- **你的资料**：公开仓库不收真实个人信息。画像发给哪个 AI、要不要填出生信息，都由你决定。
 
-| 范围 | 目标目录（技能放在其下） |
-|---|---|
-| Claude Code个人安装 | `~/.claude/skills/` |
-| Claude Code项目安装 | `<项目>/.claude/skills/` |
-| Codex个人安装 | `~/.codex/skills/` |
-| 共用母版管理 | `<项目>/.agents/skills/`，再按各Agent要求建立发现入口 |
-
-在仓库根目录执行下面的复制脚本，把目标改成所需目录。**已有任一同名文件夹时会停下，先检查原版本，再选择更新方法，避免混入两套文件。** 本脚本不改变已有Agent配置。
-
-```bash
-python3 - <<'PY'
-from pathlib import Path
-import shutil
-source = Path('skills')
-target = Path('~/.claude/skills').expanduser()  # Codex可改为~/.codex/skills
-names = ('zhiqu', 'zhiqu-grad', 'zhiqu-career', 'bazi')
-for name in names:
-    if not (source / name / 'SKILL.md').is_file():
-        raise SystemExit(f'源技能不完整：{name}')
-    if (target / name).exists() or (target / name).is_symlink():
-        raise SystemExit(f'已有 {target / name}，先核对版本，不覆盖')
-target.mkdir(parents=True, exist_ok=True)
-for name in names:
-    shutil.copytree(source / name, target / name,
-                    ignore=shutil.ignore_patterns('__pycache__', '*.pyc'))
-print(f'已安装到 {target}')
-PY
-```
-
-安装后可在目标`zhiqu`目录运行：
-
-```bash
-python3 scripts/optimize.py examples/candidates_demo.csv --rank 30000 --slots 12 --u-fall -60
-```
-
-该命令只验证优化器入口，不证明数据覆盖或个性化报告有效。继续读取所需SKILL.md；维护示例的完整复核见下节。安装源码默认来自仓库main；分支中的新demo与README在合并前需从对应分支查看，本轮没有自动发布或合并。
-
-## 哪些可以相信，哪些还需要核实
-
-**关于事实。** 招生、院校、费用、岗位与政策使用官方公开资料，并注明年份和查询日期。遇到验证码、登录或人机验证不绕过，记为缺口。项目仓库存放整理后的CSV，原始xls、pdf与图片附件不入库；生成的示例报告另作成品保留。
-
-**关于高考计算。** 各省、科类、批次分别分析。位次也会受人数、计划与制度变化影响，跨年可比性需要检查；不能把外省系数当作本省已校准参数。专业组号相同不代表组内专业相同，正式历史拼接需要可信对应。高考数据与覆盖情况见[data目录](skills/zhiqu/data/README.md)和[官方缺口](skills/zhiqu/references/public-data-gaps.md)。
-
-模型模拟录取线的共同波动，使用贪心选择与局部交换寻找组合，**不保证全局最优**。单项过线概率、整张表落点概率与最终录取是不同的量；资格、组内专业分配与退档风险需要另核。零次滑档只是有限模拟未出现，不能写成风险为零。依据与失败的研究假设见[回测记录](skills/zhiqu/references/backtests.md)、[模型说明](skills/zhiqu/references/volunteer-game.md)与[年度研究](skills/zhiqu/data/calibration/README.md)。
-
-**关于读研与求职。** 两版目前以按候选调研和情景比较为主，没有高考式完整候选数据库与统一录取优化器。群体录取率、工资分位数不能直接套成个人概率或个人薪资；未知的输入就保持未知。货币、时间与满意度分别陈述，再请本人确认取舍。
-
-**关于八字。** 自愿选择的传统反思视角，与性格作答、现实经历并列核对；不参与资格、打分、推荐排序或排除选项，不预测录取与录用。出生日期与时间可用工具复算，命理解释的现实预测效度未经验证。[联动边界](skills/zhiqu/references/bazi-lens.md)与[独立八字技能](skills/bazi/SKILL.md)分别说明两种用途。
-
-**关于你的资料。** 公开仓库不收真实个人信息。问卷生成画像后，由本人选择提供给哪个Agent；出生资料可留空。提供真实材料前检查其中的身份证、联系方式等是否必要，也确认所用Agent与服务的隐私规则。问卷使用外部资源时不把它宣传成完全离线，联网情况由实际页面实现决定。
-
-## 开发、维护与复现
-
-先读[DESIGN](DESIGN.md)了解目标与已定原则，再读[ROADMAP](ROADMAP.md)核对任务、分支、证据与交接状态。保留其他Agent的有效改动，在新分支实施；main的合并由作者决定。问卷题目与受保护案例不随文档维护顺手修改。
-
-在仓库根目录运行：
-
-```bash
-python3 -m unittest discover -s skills/zhiqu/tests
-python3 skills/zhiqu/scripts/check_family.py
-python3 skills/zhiqu/scripts/validate_data.py
-python3 skills/zhiqu/scripts/check_demos.py
-```
-
-前三份人物报告使用同一个Markdown渲染器，重现命令见各demo的README。出生输入、实际命盘输出、时间线与预算都保存在案例目录；`check_demos.py`会重新排盘并核对预算，不替代正文、官方资格或版面的人工审核。
-
-其他可运行入口：
-
-```bash
-cd skills/zhiqu
-python3 scripts/audit_skill.py --examples
-python3 scripts/pipeline.py examples/pipeline_demo/config.json --out-dir /tmp/zhiqu-pipeline-new
-```
-
-pipeline的输出目录须为空。它使用纯虚构投档数据，用来核对可复现计算；[偏好核对示例](skills/zhiqu/examples/preference_demo/README.md)展示本人/家长两种场景，交互重算见[使用说明](skills/zhiqu/references/interactive-report.md)。数据变动运行validate_data与相关口径检查；模型变动须在该省合格留出年份证明误差下降，否则只保留定性提示。PDF交付前检查实际渲染、数字与来源。
+方法细节见[设计文档](DESIGN.md)、[模型说明](skills/zhiqu/references/volunteer-game.md)、[回测记录](skills/zhiqu/references/backtests.md)。
 
 ## 仓库导航
 
 | 入口 | 内容 |
 |---|---|
-| [index.html](index.html) · [gaokao.html](gaokao.html) · [grad.html](grad.html) · [career.html](career.html) | 三版问卷入口；在线站点对应部署版本，不一定等于当前分支 |
-| [AGENTS.md](AGENTS.md) | Agent接手与安装入口 |
-| [DESIGN.md](DESIGN.md) · [ROADMAP.md](ROADMAP.md) | 设计决定、完善清单与跨Agent交接 |
-| [skills/zhiqu](skills/zhiqu/) | 高考技能、当前共用层、官方数据、预测/优化/报告、验证与示例 |
-| [skills/zhiqu-grad](skills/zhiqu-grad/) | 读研路径、阶段与候选调研 |
-| [skills/zhiqu-career](skills/zhiqu-career/) | 工作匹配、生活成本与offer比较 |
-| [skills/bazi](skills/bazi/) | 固定历法引擎、独立命理方法与可选联动 |
+| [问卷](https://wjsgzz.github.io/Zhiqu/)（[index.html](index.html)、[gaokao](gaokao.html)、[grad](grad.html)、[career](career.html)） | 三版问卷，GitHub Pages 部署 |
+| [skills/zhiqu](skills/zhiqu/) | 高考技能，也是三版共用的核心：官方数据、预测、优化、报告、检查脚本 |
+| [skills/zhiqu-grad](skills/zhiqu-grad/) · [skills/zhiqu-career](skills/zhiqu-career/) | 读研版、求职版 |
+| [skills/bazi](skills/bazi/) | 八字技能：排盘与解盘 |
+| [AGENTS.md](AGENTS.md) | 给 AI Agent：安装、项目地图、规则与验证 |
+| [DESIGN.md](DESIGN.md) · [ROADMAP.md](ROADMAP.md) | 设计与决定、完善清单与协作记录 |
 
-知其所往，方行其衢。最终的选择仍属于你；知衢负责把理由、代价与未知讲清楚，让这一步走得更明白。
+> 知衢不是官方工具，不保证录取或录用。一切以考试院、教育部、各校和用人单位当年的正式文件为准；最终的选择属于你自己。
