@@ -21,7 +21,18 @@ EXCLUDE = "中外合作|国际|民办|独立学院|专项|联合培养|预科|�
 def schools():
     with open(os.path.join(HERE, "..", "data", "schools.csv"), encoding="utf-8") as f:
         rows = list(csv.DictReader(f))
-    return {r["code"]: r for r in rows}, {r["name"]: r for r in rows}
+    by_code, by_name = {r["code"]: r for r in rows}, {r["name"]: r for r in rows}
+    aliases = os.path.join(HERE, "..", "data", "school-name-changes.csv")
+    if os.path.exists(aliases):
+        with open(aliases, encoding="utf-8-sig", newline="") as f:
+            for r in csv.DictReader(f):
+                # 教育部10位标识码的后5位对应本教育部名单 code；不据此改省级招生代号。
+                identifier = (r.get("school_code") or "").strip()
+                if re.fullmatch(r"\d{10}", identifier) and identifier[-5:] in by_code:
+                    info = by_code[identifier[-5:]]
+                    for name in (r["former_name"], r["current_name"]):
+                        by_name.setdefault(name, info)
+    return by_code, by_name
 
 
 def name_variants(name):
