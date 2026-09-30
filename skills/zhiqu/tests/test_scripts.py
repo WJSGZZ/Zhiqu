@@ -191,6 +191,102 @@ class TestOtherScripts(unittest.TestCase):
         self.assertNotRegex("中央民族大学", pool.EXCLUDE)
 
 
+class TestPoolHistory(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.old = os.path.join(self.tmp.name, "old.csv")
+        self.new = os.path.join(self.tmp.name, "new.csv")
+        self.out = os.path.join(self.tmp.name, "pool.csv")
+        self.map = os.path.join(self.tmp.name, "map.csv")
+        self.header = ["code", "name", "group", "major", "rank", "plan"]
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def pool(self, *extra):
+        return run("scripts/pool.py", "--year", "2025=" + self.old,
+                   "--year", "2026=" + self.new, "--key", "group", "--out", self.out, *extra)
+
+    def rows(self):
+        with open(self.out, encoding="utf-8") as f:
+            return list(csv.DictReader(f))
+
+    def test_same_group_number_is_not_history_evidence(self):
+        write_csv(self.old, self.header, [["11845", "旧名称", "201", "物理", 50000, 20]])
+        write_csv(self.new, self.header, [["11845", "广东工业大学", "201", "物理+化学", 30000, ""]])
+        self.assertEqual(self.pool()[0], 0)
+        row = self.rows()[0]
+        self.assertEqual(row["rank_2025"], "")
+        self.assertEqual(row["rank_2026"], "30000")
+        self.assertEqual(row["history_status"], "latest_only")
+        self.assertEqual(row["name"], "广东工业大学·201组")
+        self.assertEqual(row["requirement"], "物理+化学")
+        self.assertEqual(row["plan"], "")
+
+    def test_verified_map_matches_renumbered_groups(self):
+        write_csv(self.old, self.header, [["11845", "广东工业大学", "201", "物理+化学", 50000, 20]])
+        write_csv(self.new, self.header, [["11845", "广东工业大学", "209", "物理+化学", 30000, 25]])
+        write_csv(self.map, ["year", "code", "group", "history_key", "source"],
+                  [[2025, "11845", "201", "gdut-a", "official-old"],
+                   [2026, "11845", "209", "gdut-a", "official-new"]])
+        self.assertEqual(self.pool("--group-map", self.map)[0], 0)
+        row = self.rows()[0]
+        self.assertEqual((row["group"], row["rank_2025"], row["history_status"]), ("209", "50000", "verified"))
+        self.assertIn("official-old", row["note"])
+        self.assertIn("official-new", row["note"])
+
+    def test_split_map_and_duplicate_input_fail_without_output(self):
+        write_csv(self.old, self.header, [["11845", "广东工业大学", "201", "", 50000, 20]])
+        write_csv(self.new, self.header, [["11845", "广东工业大学", "209", "", 30000, 25]] * 2)
+        self.assertNotEqual(self.pool()[0], 0)
+        self.assertFalse(os.path.exists(self.out))
+        write_csv(self.map, ["year", "code", "group", "history_key", "source"],
+                  [[2026, "11845", "209", "gdut-a", "official"],
+                   [2026, "11845", "210", "gdut-a", "official"]])
+        code, out, err = self.pool("--group-map", self.map)
+        self.assertNotEqual(code, 0)
+        self.assertIn("不是一对一", err)
+        self.assertFalse(os.path.exists(self.out))
+
+    def test_duplicate_major_year_is_excluded_not_overwritten(self):
+        write_csv(self.old, self.header, [["11845", "广东工业大学", "", "计算机", 50000, 20],
+                                         ["11845", "广东工业大学", "", "计算机", 45000, 10]])
+        write_csv(self.new, self.header, [["11845", "广东工业大学", "", "计算机", 30000, 25]])
+        code, out, err = run("scripts/pool.py", "--year", "2025=" + self.old,
+                             "--year", "2026=" + self.new, "--key", "major", "--out", self.out)
+        self.assertEqual(code, 0, err)
+        self.assertEqual(self.rows()[0]["rank_2025"], "")
+        self.assertEqual(self.rows()[0]["rank_2026"], "30000")
+        self.assertIn("重复", out)
+
+    def test_public_filter_excludes_unknown_school(self):
+        write_csv(self.old, self.header, [])
+        write_csv(self.new, self.header, [["99999", "待核学校", "201", "", 30000, 20],
+                                         ["11845", "广东工业大学", "209", "", 30000, 25]])
+        self.assertEqual(self.pool("--public")[0], 0)
+        self.assertEqual([r["code"] for r in self.rows()], ["11845"])
+        self.assertEqual(self.pool("--in-province", "浙江省", "--out-province")[0], 0)
+        self.assertEqual([r["code"] for r in self.rows()], ["11845"])
+
+
+class TestCohortGuard(unittest.TestCase):
+    def test_predict_and_optimize_reject_double_correction(self):
+        shared = ["examples/candidates_demo.csv", "--rank", "22000", "--cohort", "2025=100000",
+                  "--cohort-now", "110000", "--drift", "0.02"]
+        for command in (["scripts/rank.py", "predict", *shared],
+                        ["scripts/optimize.py", *shared, "--slots", "6", "--u-fall", "-60"]):
+            code, out, err = run(*command)
+            self.assertNotEqual(code, 0)
+            self.assertIn("重复计算", err)
+
+    def test_cohort_requires_pair_and_positive_counts(self):
+        for extra in (["--cohort", "2025=100000"], ["--cohort-now", "110000"],
+                      ["--cohort", "2025=0", "--cohort-now", "110000"]):
+            code, out, err = run("scripts/rank.py", "predict", "examples/candidates_demo.csv", *extra)
+            self.assertNotEqual(code, 0)
+            self.assertNotIn("Traceback", err)
+
+
 class TestValidateData(unittest.TestCase):
     def test_detects_scrambled_ranks(self):
         import random
