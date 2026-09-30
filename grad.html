@@ -204,7 +204,7 @@ textarea{resize:vertical;min-height:76px;}
     <p class="lede">读研不是本科的续集，是一次重新选择。</p>
     <p>同样是"读个研"，统考、境外申请、国内的中外合作项目，规则、花费、拿到的证书都不一样；有些路一旦错过报名时间，就要再等一年。所以这份问卷先问你为什么读、现在在哪、能投入什么，再谈去哪里。</p>
     <hr class="rule">
-    <p>问卷共九节，每节开头有一句"<b>为什么问这个</b>"。<b>有些题会随你的选择追问</b>，比如勾了"境外读研"，下面会问预算和语言。不确定的可以留空。</p>
+    <p>问卷共十节（第六节"方向与状态"可选），每节开头有一句"<b>为什么问这个</b>"。<b>有些题会随你的选择追问</b>，比如勾了"境外读研"，下面会问预算和语言。不确定的可以留空。</p>
     <p><span class="how">最后一步</span>点击"生成我的画像"，复制那段文字发回即可。保研（推免）不需要填报志愿，这里不涉及；如果你已经有推免机会，在第四节注明就好。</p>
   </div>
 
@@ -320,6 +320,28 @@ textarea{resize:vertical;min-height:76px;}
           <label class="opt"><input type="radio" name="after" value="留在境外工作"><span class="box">留在境外工作</span></label>
           <label class="opt"><input type="radio" name="after" value="还没想好"><span class="box">还没想好</span></label>
         </div></div>
+
+      <div class="followup" data-when="why=目标岗位要求硕士">
+        <span class="ftag">追问 · 岗位要求</span>
+        <div class="q"><div class="q-label">你想去的岗位，真的要求硕士吗？</div>
+          <div class="opts stack">
+            <label class="opt"><input type="radio" name="job_need" value="查过招聘要求，确实要求硕士"><span class="box">查过招聘要求，确实要求硕士</span></label>
+            <label class="opt"><input type="radio" name="job_need" value="查过，本科也能进但硕士更有优势"><span class="box">查过，本科也能进，但硕士更有优势</span></label>
+            <label class="opt"><input type="radio" name="job_need" value="没查过，听说的"><span class="box">没查过，是听说的</span></label>
+          </div>
+          <input class="mt" type="text" id="job_need_note" placeholder="岗位或公司名（选填）"></div>
+      </div>
+
+      <div class="q"><div class="q-label">你对"工作"的了解主要来自哪里？<span class="opt-note">（可多选）</span></div>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="work_know" value="自己实习或兼职"><span class="box">自己实习 / 兼职</span></label>
+          <label class="opt"><input type="checkbox" name="work_know" value="家人朋友的工作"><span class="box">家人朋友的工作</span></label>
+          <label class="opt"><input type="checkbox" name="work_know" value="网上和社交媒体"><span class="box">网上 / 社交媒体</span></label>
+          <label class="opt"><input type="checkbox" name="work_know" value="几乎没有了解"><span class="box">几乎没有了解</span></label>
+        </div></div>
+
+      <div class="q"><div class="q-label">如果现在直接去工作，你最担心什么？<span class="opt-note">（选填）</span></div>
+        <input type="text" id="work_fear" placeholder="例如：找不到好工作；怕一辈子只能做这个；学历被看低"></div>
     </div></section>
 
     <section class="section" data-title="路径与打算"><div class="card">
@@ -493,8 +515,90 @@ textarea{resize:vertical;min-height:76px;}
         </div></div>
     </div></section>
 
+    <section class="section" data-title="方向与状态（可选）"><div class="card">
+      <div class="sec-head"><div class="badge">六</div><div class="sec-title">方向与状态 <span class="opt-note">（可选）</span></div></div>
+      <p class="sec-why">不少人手里已经有几个目标院校，却说不清为什么是它们；也有人卡在"不知道自己想要什么"。迷茫有好几种，解法各不相同。这一节帮你看清自己卡在哪：大多是很普通的烦恼，不代表你有什么问题。整节都可以跳过。作答只保存在你自己的浏览器里，发不发给 AI 由你决定。</p>
+
+      <div class="q"><div class="q-label">已经有的目标院校或项目（最多三个），分别是谁提出的？</div>
+        <input type="text" id="tgt1" placeholder="目标 1：学校与专业/项目">
+        <div class="opts mt">
+          <label class="opt"><input type="checkbox" name="tgt1_by" value="自己"><span class="box">自己</span></label>
+          <label class="opt"><input type="checkbox" name="tgt1_by" value="父母"><span class="box">父母</span></label>
+          <label class="opt"><input type="checkbox" name="tgt1_by" value="老师或学长"><span class="box">老师 / 学长</span></label>
+          <label class="opt"><input type="checkbox" name="tgt1_by" value="看排名"><span class="box">看排名</span></label>
+          <label class="opt"><input type="checkbox" name="tgt1_by" value="同学都报"><span class="box">同学都报</span></label>
+        </div></div>
+      <div class="q"><div class="q-label">目标 2</div>
+        <input type="text" id="tgt2" placeholder="学校与专业/项目（选填）">
+        <div class="opts mt">
+          <label class="opt"><input type="checkbox" name="tgt2_by" value="自己"><span class="box">自己</span></label>
+          <label class="opt"><input type="checkbox" name="tgt2_by" value="父母"><span class="box">父母</span></label>
+          <label class="opt"><input type="checkbox" name="tgt2_by" value="老师或学长"><span class="box">老师 / 学长</span></label>
+          <label class="opt"><input type="checkbox" name="tgt2_by" value="看排名"><span class="box">看排名</span></label>
+          <label class="opt"><input type="checkbox" name="tgt2_by" value="同学都报"><span class="box">同学都报</span></label>
+        </div></div>
+      <div class="q"><div class="q-label">目标 3</div>
+        <input type="text" id="tgt3" placeholder="学校与专业/项目（选填）">
+        <div class="opts mt">
+          <label class="opt"><input type="checkbox" name="tgt3_by" value="自己"><span class="box">自己</span></label>
+          <label class="opt"><input type="checkbox" name="tgt3_by" value="父母"><span class="box">父母</span></label>
+          <label class="opt"><input type="checkbox" name="tgt3_by" value="老师或学长"><span class="box">老师 / 学长</span></label>
+          <label class="opt"><input type="checkbox" name="tgt3_by" value="看排名"><span class="box">看排名</span></label>
+          <label class="opt"><input type="checkbox" name="tgt3_by" value="同学都报"><span class="box">同学都报</span></label>
+        </div></div>
+      <div class="q"><div class="q-label">这些目标，你最看中的是什么？<span class="opt-note">（选填）</span></div>
+        <input type="text" id="tgt_why" placeholder="例如：名气；离家近；导师；说不上来"></div>
+
+      <div class="q"><div class="q-label">你觉得自己卡在哪？<span class="opt-note">（可多选）</span></div>
+        <div class="opts stack">
+          <label class="opt"><input type="checkbox" name="stuck" value="不知道自己想要什么"><span class="box">不知道自己想要什么</span></label>
+          <label class="opt"><input type="checkbox" name="stuck" value="不了解读研和工作实际是什么样"><span class="box">不了解读研、工作实际是什么样</span></label>
+          <label class="opt"><input type="checkbox" name="stuck" value="听到的说法互相矛盾"><span class="box">听到的说法互相矛盾，不知道信谁</span></label>
+          <label class="opt"><input type="checkbox" name="stuck" value="我想要的和家里想要的不一样"><span class="box">我想要的和家里想要的不一样</span></label>
+          <label class="opt"><input type="checkbox" name="stuck" value="几个都想要，舍不得放弃"><span class="box">几个都想要，舍不得放弃</span></label>
+          <label class="opt"><input type="checkbox" name="stuck" value="怕选错，一直不敢定"><span class="box">怕选错，一直不敢定</span></label>
+          <label class="opt"><input type="checkbox" name="stuck" value="觉得选什么都差不多，提不起劲"><span class="box">觉得选什么都差不多，提不起劲</span></label>
+          <label class="opt"><input type="checkbox" name="stuck" value="总拿自己和同学比"><span class="box">总拿自己和同学比，越比越慌</span></label>
+          <label class="opt"><input type="checkbox" name="stuck" value="怕让家里失望"><span class="box">怕让家里失望</span></label>
+          <label class="opt"><input type="checkbox" name="stuck" value="已经投入很多，不甘心换方向"><span class="box">已经投入很多，不甘心换方向</span></label>
+          <label class="opt"><input type="checkbox" name="stuck" value="总想挑到最好的那个"><span class="box">总想挑到"最好"的那个</span></label>
+          <label class="opt"><input type="checkbox" name="stuck" value="知道该做什么，但一直拖着"><span class="box">知道该做什么，但一直拖着</span></label>
+          <label class="opt"><input type="checkbox" name="stuck" value="担心就业形势不好"><span class="box">担心现在的就业形势</span></label>
+          <label class="opt"><input type="checkbox" name="stuck" value="其实不太迷茫"><span class="box">其实不太迷茫</span></label>
+        </div></div>
+
+      <div class="q"><div class="q-label">下面四句话，哪些符合你？<span class="opt-note">（可多选）</span></div>
+        <div class="opts stack">
+          <label class="opt"><input type="checkbox" name="adapt" value="我会想几年后的自己"><span class="box">我会想几年后的自己会在做什么</span></label>
+          <label class="opt"><input type="checkbox" name="adapt" value="我觉得这条路我能做主"><span class="box">我觉得这条路我自己能做主</span></label>
+          <label class="opt"><input type="checkbox" name="adapt" value="我会主动去了解陌生的方向"><span class="box">我会主动去了解陌生的方向</span></label>
+          <label class="opt"><input type="checkbox" name="adapt" value="我相信需要的东西我学得会"><span class="box">我相信需要的东西我学得会</span></label>
+        </div></div>
+
+      <div class="q"><div class="q-label">不考虑钱和别人的看法，三年后一个普通的工作日，你希望自己在做什么？<span class="opt-note">（选填）</span></div>
+        <textarea id="future_day" placeholder="越具体越好：在哪、和谁、做什么事"></textarea></div>
+
+      <div class="q"><div class="q-label">最近一次做到忘了时间的事是什么？<span class="opt-note">（选填）</span></div>
+        <input type="text" id="flow" placeholder="学习、工作、爱好都算"></div>
+
+      <div class="q"><div class="q-label">你最怕的结果是什么？一直拖着没决定，真正的原因是什么？<span class="opt-note">（选填）</span></div>
+        <textarea id="fear" placeholder="写给自己看的，可以很直白"></textarea></div>
+
+      <div class="q"><div class="q-label">最近两周，你的睡眠、情绪和精力怎么样？</div>
+        <div class="opts stack">
+          <label class="opt"><input type="radio" name="mood" value="基本正常"><span class="box">基本正常</span></label>
+          <label class="opt"><input type="radio" name="mood" value="有些压力，但能应付"><span class="box">有些压力，但能应付</span></label>
+          <label class="opt"><input type="radio" name="mood" value="经常低落或焦虑，已经影响学习和生活"><span class="box">经常低落或焦虑，已经影响学习和生活</span></label>
+          <label class="opt"><input type="radio" name="mood" value="不想说"><span class="box">不想说</span></label>
+        </div></div>
+      <div class="followup" data-when="mood=经常低落或焦虑，已经影响学习和生活">
+        <span class="ftag">想对你说</span>
+        <p class="hint">谢谢你愿意写下来。这不软弱，也不是一份问卷能解决的事。建议找学校的心理咨询中心聊一聊，也可以拨打全国统一心理援助热线 <b>12356</b>。如果有伤害自己的念头，或者正处在危险中，请立即拨打 <b>120</b> 或 <b>110</b>，并告诉身边信任的人。</p>
+      </div>
+    </div></section>
+
     <section class="section" data-title="现实约束"><div class="card">
-      <div class="sec-head"><div class="badge">六</div><div class="sec-title">现实约束</div></div>
+      <div class="sec-head"><div class="badge">七</div><div class="sec-title">现实约束</div></div>
       <p class="sec-why">钱、时间、家里的期望，往往比分数更早决定哪条路走得通。</p>
 
       <div class="q req"><div class="q-label">家里能支持你多久不挣钱？</div>
@@ -513,7 +617,7 @@ textarea{resize:vertical;min-height:76px;}
     </div></section>
 
     <section class="section" data-title="风险与心态"><div class="card">
-      <div class="sec-head"><div class="badge">七</div><div class="sec-title">风险与心态</div></div>
+      <div class="sec-head"><div class="badge">八</div><div class="sec-title">风险与心态</div></div>
       <p class="sec-why">考研只有一次机会、申请结果彼此相关。你愿意为更好的学校承担多大的落空风险，决定了报哪里。</p>
 
       <div class="q req"><div class="q-label">名校和稳妥之间，你更偏向？</div>
@@ -532,7 +636,7 @@ textarea{resize:vertical;min-height:76px;}
     </div></section>
 
     <section class="section" data-title="优先级排序"><div class="card">
-      <div class="sec-head"><div class="badge">八</div><div class="sec-title">优先级排序</div></div>
+      <div class="sec-head"><div class="badge">九</div><div class="sec-title">优先级排序</div></div>
       <p class="sec-why">这是整份问卷的题眼。几个都想要的时候，排序决定取舍；后面给每个候选打分就按这个顺序定权重。</p>
 
       <div class="q req" id="rankq"><div class="q-label">按重要程度，依次点选下面六项（先点最重要的）</div>
@@ -550,7 +654,7 @@ textarea{resize:vertical;min-height:76px;}
     </div></section>
 
     <section class="section" data-title="心里话"><div class="card">
-      <div class="sec-head"><div class="badge">九</div><div class="sec-title">你心里的话</div></div>
+      <div class="sec-head"><div class="badge">十</div><div class="sec-title">你心里的话</div></div>
       <p class="sec-why">数据算不出你真正在乎什么。下面几句越实在越好。</p>
 
       <div class="q"><div class="q-label">现在最纠结、最想弄明白的一件事<span class="opt-note">（选填）</span></div>

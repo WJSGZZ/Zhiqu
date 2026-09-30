@@ -165,6 +165,7 @@ skills/zhiqu/
 │   ├── volunteer-game.md        投档机制、概率模型、CSV 格式、数据来源
 │   ├── school-research.md       考研与实习就业的院校调研、怎样问学长学姐
 │   ├── outlook.md               就业前景的有条件预测、专业认可度、保研率
+│   ├── job-market.md            当前全国就业形势：数据快照、正确读法、对高考/读研/求职的含义（两个技能共用）
 │   ├── special-admissions.md    提前批、专项、定向、强基、综合评价：讲解、三省回测与建议
 │   ├── report-guide.md          决策报告的字段、写作规矩与出稿检查
 │   └── backtests.md             逐年回测方法与各省变化记录
@@ -188,6 +189,7 @@ skills/zhiqu-grad/               读研版技能
     ├── kaoyan.md                2027 年考研规则、报考类型限制、择校期望值、时间线、复试调剂、二战
     ├── abroad.md                境外读研：预算、学制、回国认证与落户、选校与时间线
     ├── sino-foreign.md          中外合作办学：合法性核查、统招与非统招、证书与认证
+    ├── direction-and-state.md   "方向与状态"一节的读法：迷茫的类别、日常困扰、小步骤、边界
     ├── data-sources.md          数据来源与按候选收集的清单
     └── report-guide.md          报告的 12 节固定目录
 ```
