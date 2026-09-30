@@ -22,10 +22,10 @@
   },
   "evidence": [
     {
-      "candidate": "江门会计助理、出纳与应收应付文员",
+      "candidate": "会计助理、出纳、应收应付文员（四川）",
       "status": "pending",
-      "source": "https://www.jiangmen.gov.cn/bmpd/jmsrlzyhshbzj/zcfg/jycy/content/post_3426923.html",
-      "verified_scope": "2025工资报告公告采用2024调查期数据；不是2027毕业生薪资或在招岗位证明",
+      "source": "https://rst.sc.gov.cn/rst/gsgg/2025/7/7/770dc72520ef42c493044cfb1f8c404f.shtml",
+      "verified_scope": "四川省2024年工资价位：在岗人员分职业、分学历分位值；不是2027应届生薪资或在招岗位证明",
       "unresolved": [
         "具体用人单位正式招聘公告",
         "学历与应届条件",
@@ -33,6 +33,79 @@
         "社保与加班",
         "实际offer"
       ]
+    },
+    {
+      "candidate": "四川普通专升本（2027）",
+      "status": "pending",
+      "source": "https://www.sceea.cn/Html/202512/Newsdetail_4595.html",
+      "verified_scope": "2026年报名通告：时间与费用；2027年规则未发布",
+      "unresolved": [
+        "2027报考资格",
+        "招生专业与计划",
+        "两年学费与生活费"
+      ]
     }
-  ]
+  ],
+  "province": "四川省",
+  "hypothetical_followup": {
+    "label": "假想拿到两个offer（虚构单位与条件，只为演示比较方法）",
+    "tax_rule": "居民个人综合所得：每年减除6万元及个人缴纳的社保公积金；本例无专项附加扣除",
+    "ss_personal_rate_assumption": 0.105,
+    "offers": [
+      {
+        "name": "A 代理记账公司·会计助理（直签，一档地区）",
+        "monthly_gross": 4800,
+        "months": 12,
+        "ss_base": 4000,
+        "hf_rate": 0.0,
+        "extra_hours_per_month": 10,
+        "monthly_rent": 1100,
+        "monthly_other": 1500,
+        "minimum_wage_tier": 2330,
+        "note": "社保按假设的基数下限缴，无公积金；月末加班；需在外租房"
+      },
+      {
+        "name": "B 国企下属单位·出纳（劳务派遣，离家近的二档地区）",
+        "monthly_gross": 4300,
+        "months": 13,
+        "ss_base": 4300,
+        "hf_rate": 0.08,
+        "extra_hours_per_month": 0,
+        "monthly_rent": 400,
+        "monthly_other": 1100,
+        "minimum_wage_tier": 2200,
+        "note": "第13个月写进合同；五险一金按实际工资缴，公积金个人与单位各8%；住家里，每月交家里400元"
+      }
+    ],
+    "standard_hours_per_year": 2000,
+    "reference_wages": {
+      "source": "https://rst.sc.gov.cn/rst/gsgg/2025/7/7/770dc72520ef42c493044cfb1f8c404f.shtml",
+      "scope": "四川省2024年人力资源市场工资价位（2025-07-07发布），在岗人员全年工资，万元/年；不是应届生offer",
+      "会计专业人员": {
+        "p10": 4.2,
+        "p25": 5.28,
+        "p50": 6.8,
+        "p75": 9.17,
+        "p90": 12.94
+      },
+      "大学专科学历": {
+        "p10": 3.84,
+        "p25": 4.97,
+        "p50": 6.79,
+        "p75": 9.8,
+        "p90": 14.2
+      }
+    },
+    "minimum_wage": {
+      "source": "https://www.sc.gov.cn/10462/10464/13298/14097/2025/1/3/ac932dd586f343beb8aa54db49b3366c.shtml",
+      "tier1": 2330,
+      "tier2": 2200,
+      "effective": "2025-01-01",
+      "note": "已公开征求意见拟上调至2500/2360，未正式执行"
+    },
+    "upgrade_exam": {
+      "source": "https://www.sceea.cn/Html/202512/Newsdetail_4595.html",
+      "note": "四川2026年普通专升本：2025年12月发布报名通告，2026-04-16至17考试，报名考试费80元/生；2027年以正式通告为准"
+    }
+  }
 }

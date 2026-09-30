@@ -22,17 +22,20 @@
 
 ## 先看看三个普通人的选择
 
-三个案例都以**2026年秋季的处境，面向2027年的目标**展开。人物、生日、经历和预算完全虚构；官方事实、计算和未决事项分别标注。它们展示的是做决定的过程，不是成功案例或统计有效性证明。
+三个案例都以**2026年秋季的处境，面向2027年的目标**展开，分别在浙江、广东、四川。人物、生日、经历和预算完全虚构；官方事实、计算和未决事项分别标注。它们展示的是做决定的过程，不是成功案例或统计有效性证明。
 
 | 人物 | 正在犹豫什么 | 阅读案例 |
 |---|---|---|
-| **小禾，17岁，高三** | 喜欢文字与人文，选了物理，父母更希望师范；她想知道自己喜欢的是专业，还是专业的名字 | [网页](skills/zhiqu/examples/demo_2027_gaokao/report.html) · [PDF](skills/zhiqu/examples/demo_2027_gaokao/report.pdf) · [画像与复现](skills/zhiqu/examples/demo_2027_gaokao/README.md) |
-| **小林，21岁，普通本科电气类** | 实践有兴趣，数学英语有短板；既想读研，又怕备考、秋招两头落空，家里支持也有上限 | [网页](skills/zhiqu-grad/examples/demo_2027/report.html) · [PDF](skills/zhiqu-grad/examples/demo_2027/report.pdf) · [画像与复现](skills/zhiqu-grad/examples/demo_2027/README.md) |
-| **小宁，20岁，高职会计类** | 毕业后需要收入，又担心学历限制；第一份工作与专升本，怎样比较才不只听单位名气 | [网页](skills/zhiqu-career/examples/demo_2027/report.html) · [PDF](skills/zhiqu-career/examples/demo_2027/report.pdf) · [画像与复现](skills/zhiqu-career/examples/demo_2027/README.md) |
+| **小禾，17岁，浙江高三** | 喜欢哲学和历史，父母更希望读师范；她想知道自己喜欢的是专业，还是专业的名字 | [网页](skills/zhiqu/examples/demo_2027_gaokao/report.html) · [PDF](skills/zhiqu/examples/demo_2027_gaokao/report.pdf) · [画像与复现](skills/zhiqu/examples/demo_2027_gaokao/README.md) |
+| **小林，21岁，广东普通本科电气类** | 实践有兴趣，数学英语有短板；既想读研，又怕备考、秋招两头落空，家里支持也有上限 | [网页](skills/zhiqu-grad/examples/demo_2027/report.html) · [PDF](skills/zhiqu-grad/examples/demo_2027/report.pdf) · [画像与复现](skills/zhiqu-grad/examples/demo_2027/README.md) |
+| **小宁，20岁，四川高职会计类** | 毕业后需要收入，又担心学历限制；第一份工作与专升本，怎样比较才不只听单位名气 | [网页](skills/zhiqu-career/examples/demo_2027/report.html) · [PDF](skills/zhiqu-career/examples/demo_2027/report.pdf) · [画像与复现](skills/zhiqu-career/examples/demo_2027/README.md) |
 
 他们都有长处，也有一般人的迟疑、习惯和现实牵挂。报告不会把这些写成需要被纠正的人格标签。
 
-**阶段决定报告能说到哪里。** 小禾尚未出分，报告先做方向与调研，不能给可直接录入的志愿表；小林尚未初试，不编个人上岸百分比；小宁尚无offer，不把期望工资写成实际待遇。等资料齐了，再更新判断。
+**每个案例都分两步走，像真实使用一样。** 第一步是现在：资料不全时，只做方向、路径和预算，不编造概率。第二步是一个明确标注的"假想"后续阶段，演示资料齐了之后知衢会算出什么：
+- **小禾假想出分后**：用浙江官方投档数据排出志愿表。按她自己的排序和父母的排序各算一次，两种排序算出的最可能去向其实相同，分歧只在第二去向。
+- **小林假想初试成绩**：把几个可能的分数放进华工电气专硕两年的官方录取分布，看处在什么位置；不换算成个人录取概率。
+- **小宁假想拿到两个 offer**：算出工资高的直签岗位扣掉房租后，每月反而比离家近的派遣岗位少剩约 580 元。
 
 想看出分后的表格与计算，可看[浙江案例B](skills/zhiqu/examples/case_b_zhejiang_2027/README.md)和[广东案例C](skills/zhiqu/examples/case_c_guangdong_e2e/README.md)；想实际运行候选→预测→优化→报告，见[纯虚构计算流程](skills/zhiqu/examples/pipeline_demo/README.md)。历史算例不构成当年的正式推荐，也不覆盖当前三个人的未知条件。
 

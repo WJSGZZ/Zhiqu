@@ -1,8 +1,7 @@
 {
   "birth_datetime_local": "2009-03-18T08:20:00",
   "timezone": "Asia/Shanghai",
-  "longitude": 113.60,
-  "time_basis": "compare",
+  "time_basis": "civil",
   "day_boundary": "both",
   "late_zi_hour_stem": "both",
   "traditional_gender_parameter": "female",

@@ -1,30 +1,28 @@
-# 小林：普通本科，考研也要留就业路径
+# 小林 · 广东 · 读研：想读电气，怕备考和秋招两头落空
 
-这是一个完全虚构的普通人案例，决策时点为2026-09-30，目标年份2027。人物、经历、生日与费用情景均为设定，官方事实另列来源；不含真实个人资料，不声称具有统计代表性。
+完全虚构的人物，官方事实另列来源。报告分两个阶段，演示"带你走一遍"的完整流程：
 
-先读[报告正文](report.md)，或打开[HTML报告](report.html)与[PDF报告](report.pdf)。人物背景见[画像](profile.txt)。本例示范怎样在结果未知时做规划，不能直接拿去替本人填报、报名或签约。具体阶段、证据范围与不确定性写在报告中。
+1. **初试前（2026-09-30）：比较考研、就业、合作办学等路径，核对预算和时间窗口。**
+2. **假想初试成绩（330/355/380/400）：放进华南理工大学电气专硕 2025、2026 年官方录取者的初试分布里看位置，不换算成个人录取概率。**
+
+先读[报告正文](report.md)，或打开[网页版](report.html)与[PDF](report.pdf)。人物背景见[画像](profile.txt)。示例只演示方法，不能直接拿去替真实的人填报、报名或签约。
+
+## 文件
+
+| 文件 | 作用 |
+|---|---|
+| profile.txt | 按问卷字段整理的人物画像（人物完全虚构） |
+| case.json | 时间线、阶段、预算、证据状态，以及假想后续阶段的全部输入 |
+| case.json 中的 hypothetical_followup | 华工官方拟录取初试成绩统计（按普通计划、基地计划分开），只保存统计值，不含考生个人信息 |
+| birth_input.json / birth_chart.json | 出生资料（只到省份，按北京时间）与排盘工具的实际输出 |
+| calculations.json | 周岁与费用情景 |
+| report.md / report.html / report.pdf | 同一份 12 节报告的正文、网页与打印版 |
 
 ## 复现（仓库根目录）
 
 ```bash
-python3 skills/bazi/scripts/calculate_bazi.py skills/zhiqu-grad/examples/demo_2027/birth_input.json > /tmp/zhiqu-grad-chart.json
 python3 skills/zhiqu/scripts/check_demos.py
-python3 skills/zhiqu/scripts/render_report.py skills/zhiqu-grad/examples/demo_2027/report.md --out /tmp/zhiqu-grad-report.html
-python3 skills/zhiqu/scripts/render_report.py skills/zhiqu-grad/examples/demo_2027/report.md --out /tmp/zhiqu-grad-report.pdf
+python3 skills/zhiqu/scripts/render_report.py skills/zhiqu-grad/examples/demo_2027/report.md --out /tmp/demo_2027.pdf
 ```
 
-PDF需要本机Chrome、Edge或Chromium；没有浏览器时先生成HTML。工具只负责计算与排版，不能验证官方资料是否完整。修改case.json中的明确费用假设后，用check_demos.py --write更新calculations.json，并同步报告文字再重现。
-
-## 文件与可信度
-
-| 文件 | 作用 |
-|---|---|
-| profile.txt | 按问卷字段整理的人物画像，不声称为网页逐字导出 |
-| case.json | 虚构标记、学籍时间线、阶段、预算与候选的证据状态；未知概率与结果留null |
-| birth_input.json / birth_chart.json | 显式时间、时区、经度、误差与传统顺逆参数，以及工具实际输出 |
-| calculations.json | 实际运行得到的周岁与预算情景，不是学费、工资或录取事实 |
-| report.md / report.html / report.pdf | 同一份12节报告的可编辑正文、网页与打印版 |
-
-出生日期先按学制选择，再实际排盘，不按性格倒选命盘。本次法定时间、平太阳时、真太阳时、换日口径与±10分钟产生同一候选。历法可以核算；命理主题不能证明现实能力、考试结果或工作适配，删掉八字不会改变正式建议。
-
-本轮替换了旧claude/demo算例的叙事与证据处理，未沿用其未经核准的个人概率、专业组猜测或旧起运整数年龄。
+`check_demos.py` 会重新排盘、重算费用和 offer 数字，并按 case.json 记录的参数重跑高考优化器，结果必须和保存的一致。修改 case.json 里的假设后，用 `--write` 更新 calculations.json，再同步报告文字。

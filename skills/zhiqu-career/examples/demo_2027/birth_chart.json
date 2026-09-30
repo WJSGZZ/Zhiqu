@@ -9,8 +9,7 @@
   "input": {
     "birth_datetime_local": "2006-06-21T10:20:00",
     "timezone": "Asia/Shanghai",
-    "longitude": 113.08,
-    "time_basis": "compare",
+    "time_basis": "civil",
     "day_boundary": "both",
     "late_zi_hour_stem": "both",
     "traditional_gender_parameter": "male",
@@ -41,9 +40,7 @@
       ],
       "compatible_conventions": {
         "time_bases": [
-          "civil",
-          "mean_solar",
-          "apparent_solar"
+          "civil"
         ],
         "day_boundaries": [
           "zi_initial",
@@ -670,14 +667,6 @@
         "civil": {
           "start": "2006-06-21 10:10:00",
           "end": "2006-06-21 10:30:00"
-        },
-        "mean_solar": {
-          "start": "2006-06-21 09:42:19.200000",
-          "end": "2006-06-21 10:02:19.200000"
-        },
-        "apparent_solar": {
-          "start": "2006-06-21 09:41:00.763409",
-          "end": "2006-06-21 10:01:00.580730"
         }
       }
     }

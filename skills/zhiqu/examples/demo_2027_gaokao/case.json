@@ -3,6 +3,7 @@
   "kind": "gaokao",
   "person": "小禾",
   "gender": "女",
+  "province": "浙江省",
   "decision_date": "2026-09-30",
   "education_entry": "2024-09-01",
   "graduation_date": "2027-06-30",
@@ -16,22 +17,68 @@
   "official_offer": null,
   "budget": {
     "annual_limit": 26000,
-    "annual_tuition_assumption": 7000,
-    "annual_housing_assumption": 1800,
+    "annual_tuition_assumption": 6000,
+    "annual_housing_assumption": 1500,
     "monthly_living_assumption": 1300,
     "living_months": 12
   },
+  "hypothetical_followup": {
+    "label": "假想出分后（虚构位次，只为演示计算流程）",
+    "rank": 58000,
+    "slots": 80,
+    "slots_source": "https://www.zjzs.net/art/2026/7/27/art_159_12577.html",
+    "candidates": "candidates_after_score.csv",
+    "result": "result_after_score.json",
+    "parent_weights_result": "result_after_score_parent_weights.json",
+    "weights_student": {
+      "major": 0.52,
+      "outlook": 0.27,
+      "city": 0.15,
+      "school": 0.06
+    },
+    "weights_parent": {
+      "major": 0.27,
+      "outlook": 0.52,
+      "city": 0.15,
+      "school": 0.06
+    },
+    "anchors": {
+      "top_100": "浙江大学·人文科学试验班（专业10、前景7、城市8、学校10；本人心目中最理想，位次够不到）",
+      "floor_0": "衢州学院·小学教育(师范)（专业4、前景4、城市6、学校4.5；本人确认最差也能接受）"
+    },
+    "optimize_args": [
+      "--rank",
+      "58000",
+      "--slots",
+      "80",
+      "--u-fall",
+      "-60",
+      "--max-fall",
+      "0.01",
+      "--drift",
+      "0.023",
+      "--sigma-scale",
+      "1.0",
+      "--target-year",
+      "2027",
+      "--seed",
+      "1"
+    ],
+    "calibration_source": "data/calibration/model_review_2026.csv 浙江 2026 留出年：正态、倍数1.0、漂移约0.023",
+    "eligibility_assumption": "演示假设所列专业的2027选考要求为不限或包含历史/政治/地理之一；未逐条核实，正式填报前须按考试院选考要求逐条核对",
+    "parent_weights_candidates": "candidates_after_score_parent_weights.csv"
+  },
   "evidence": [
     {
-      "candidate": "广东财经大学汉语言文学相关方向",
+      "candidate": "候选池全部专业的2027选考科目要求",
       "status": "pending",
-      "source": "https://rwycb.gdufe.edu.cn/2021/1011/c6664a140881/page.htm",
-      "verified_scope": "官方学院介绍列出专业；不是2027广东选科、组内目录或招生计划证明",
+      "source": "https://www.zjzs.net/col/col369/index.html",
+      "verified_scope": "浙江省教育考试院'2027年及以后选考科目要求'查询入口；本例未逐条查询",
       "unresolved": [
-        "2027选科要求",
-        "当年专业组完整目录",
-        "体检与单科限制",
-        "学费"
+        "每个专业的选考要求",
+        "2027招生计划",
+        "学费与住宿费",
+        "体检与单科限制"
       ]
     }
   ]

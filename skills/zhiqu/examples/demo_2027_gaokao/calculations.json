@@ -3,8 +3,8 @@
   "scenario_only": true,
   "age_at_decision": 17,
   "age_at_target": 18,
-  "annual_cost": 24400,
-  "annual_margin": 1600,
-  "annual_cost_if_living_plus_200": 26800,
-  "annual_margin_if_living_plus_200": -800
+  "annual_cost": 23100,
+  "annual_margin": 2900,
+  "annual_cost_if_living_plus_200": 25500,
+  "annual_margin_if_living_plus_200": 500
 }

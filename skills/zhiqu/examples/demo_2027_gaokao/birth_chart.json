@@ -9,8 +9,7 @@
   "input": {
     "birth_datetime_local": "2009-03-18T08:20:00",
     "timezone": "Asia/Shanghai",
-    "longitude": 113.6,
-    "time_basis": "compare",
+    "time_basis": "civil",
     "day_boundary": "both",
     "late_zi_hour_stem": "both",
     "traditional_gender_parameter": "female",
@@ -41,9 +40,7 @@
       ],
       "compatible_conventions": {
         "time_bases": [
-          "civil",
-          "mean_solar",
-          "apparent_solar"
+          "civil"
         ],
         "day_boundaries": [
           "zi_initial",
@@ -723,14 +720,6 @@
         "civil": {
           "start": "2009-03-18 08:10:00",
           "end": "2009-03-18 08:30:00"
-        },
-        "mean_solar": {
-          "start": "2009-03-18 07:44:24",
-          "end": "2009-03-18 08:04:24"
-        },
-        "apparent_solar": {
-          "start": "2009-03-18 07:35:34.916385",
-          "end": "2009-03-18 07:55:35.163068"
         }
       }
     }
