@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>读研 · 自我盘点</title>
+<style>
+:root{
+  /* 宣纸 · 松烟 · 石绿 — flat fields, no gradients */
+  --paper:#EEE9DC; --card:#FAF7EE; --track:#E3DDCB;
+  --ink:#222A26; --ink-soft:#454E48; --muted:#6E776E; --faint:#9CA197;
+  --line:#E0D9C7; --line-strong:#CEC6B1;
+  --green:#34685D;       /* 石绿 — selection, accents, progress */
+  --green-deep:#21473E;  /* 黛绿 — headings, primary action, the stamped seal (signature) */
+  --green-pale:#E7EDE8;  /* flat pale field — follow-ups, hover */
+  --green-line:#C8D8D1;
+  --amber:#A8772B; --amber-soft:#F3EBD6; --amber-line:#E0CE9F;
+  --serif:'Songti SC','STSong','Noto Serif SC','Source Han Serif SC','SimSun',serif;
+  --sans:'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans SC',-apple-system,system-ui,sans-serif;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto;}}
+
+@keyframes rise{from{opacity:0;transform:translateY(9px);}to{opacity:1;transform:none;}}
+@keyframes slidein{from{opacity:0;transform:translateY(-5px);}to{opacity:1;transform:none;}}
+@keyframes flashq{0%{background:#F6EFD8;}100%{background:transparent;}}
+@keyframes stamp{0%{transform:scale(.55);opacity:.35;}60%{transform:scale(1.1);}100%{transform:scale(1);}}
+
+body{margin:0;color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.74;background:var(--paper);}
+body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.022;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+/* ---- top bar ---- */
+.topbar{position:sticky;top:0;z-index:30;background:rgba(238,233,220,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+.topbar-inner{max-width:720px;margin:0 auto;padding:11px 22px 12px;display:flex;align-items:center;gap:13px;}
+.seal-sm{flex:none;width:34px;height:34px;border-radius:8px;background:var(--green-deep);color:#F2EFE6;font-family:var(--serif);font-size:13px;letter-spacing:.5px;line-height:1.02;text-align:center;display:flex;align-items:center;justify-content:center;}
+.prog{flex:1;display:flex;align-items:center;gap:10px;min-width:0;}
+.prog-track{flex:1;height:5px;background:var(--track);border-radius:99px;overflow:hidden;}
+.prog-fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .5s cubic-bezier(.4,0,.2,1);}
+.prog-pct{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap;min-width:32px;text-align:right;letter-spacing:.3px;}
+
+/* ---- layout ---- */
+.wrap{position:relative;z-index:1;max-width:720px;margin:0 auto;padding:34px 22px 78px;}
+.hero{position:relative;overflow:hidden;padding:8px 2px 2px;}
+.hero-mark{position:absolute;right:-14px;top:-46px;z-index:0;font-family:var(--serif);font-size:210px;line-height:1;color:var(--ink);opacity:.04;pointer-events:none;user-select:none;}
+.hero > :not(.hero-mark){position:relative;z-index:1;}
+.eyebrow{font-size:12px;letter-spacing:4px;color:var(--green);margin:0 0 14px;display:flex;align-items:center;gap:12px;}
+.eyebrow::after{content:'';height:1px;width:46px;background:var(--green-line);}
+.hero h1{font-family:var(--serif);font-weight:600;font-size:32px;line-height:1.22;letter-spacing:1px;margin:0 0 10px;color:var(--ink);}
+.hero .tag{color:var(--muted);font-size:14.5px;margin:0;line-height:1.6;}
+
+.intro{position:relative;background:var(--card);border:1px solid var(--line);border-radius:4px;padding:26px 26px 22px;margin:24px 0 8px;box-shadow:0 1px 2px rgba(34,42,38,.04),0 18px 40px -28px rgba(34,42,38,.22);}
+.intro .lede{font-family:var(--serif);font-size:20px;line-height:1.52;color:var(--green-deep);margin:0 0 15px;padding-left:16px;border-left:2px solid var(--green);}
+.intro p{margin:0 0 11px;color:var(--ink-soft);} .intro p:last-child{margin-bottom:0;} .intro b{color:var(--ink);font-weight:600;}
+.intro .rule{height:1px;background:var(--line);margin:16px 0 14px;border:0;}
+.how{display:inline-block;background:var(--green-pale);color:var(--green-deep);border:1px solid var(--green-line);border-radius:3px;padding:1px 9px;font-size:13px;font-weight:600;margin-right:7px;}
+
+/* ---- album leaves + seal badges (signature) ---- */
+.timeline{position:relative;margin-top:32px;}
+.section{margin:0 0 18px;}
+.sec-head{display:flex;align-items:center;gap:13px;margin:0 0 7px;}
+.badge{flex:none;width:34px;height:34px;border-radius:9px;background:var(--card);border:1.5px solid var(--line-strong);color:var(--ink-soft);font-family:var(--serif);font-size:17px;font-weight:600;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 2px rgba(34,42,38,.05);transition:background .4s ease,color .4s ease,border-color .4s ease,box-shadow .4s ease;}
+.badge.done{background:var(--green-deep);border-color:var(--green-deep);color:#F2EFE6;box-shadow:0 4px 12px -3px rgba(33,71,62,.55);}
+@media (prefers-reduced-motion: no-preference){.badge.done{animation:stamp .38s cubic-bezier(.34,1.4,.5,1) both;}}
+@media (max-width:560px){.badge{width:30px;height:30px;font-size:15px;border-radius:8px;}}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:23px 24px 20px;box-shadow:0 1px 2px rgba(34,42,38,.035),0 18px 38px -30px rgba(34,42,38,.2);}
+.sec-title{font-family:var(--serif);font-size:22px;font-weight:600;color:var(--green-deep);margin:0;line-height:1.3;letter-spacing:1px;}
+.sec-why{font-size:13.5px;color:var(--muted);font-style:italic;line-height:1.66;margin:0 0 19px;}
+
+/* ---- questions ---- */
+.q{margin:0 0 21px;} .q:last-child{margin-bottom:2px;}
+.q-label{font-weight:600;font-size:15.5px;line-height:1.58;margin:0 0 10px;color:var(--ink);}
+.q-label .n{color:var(--green);font-family:var(--serif);font-weight:600;margin-right:6px;font-size:15px;}
+.q-label .opt-note{font-weight:400;color:var(--faint);font-size:13px;}
+.hint{font-size:12.5px;color:var(--muted);line-height:1.64;margin:8px 0 0;padding-left:12px;border-left:2px solid var(--green-line);}
+
+.opts{display:flex;flex-wrap:wrap;gap:8px;}
+.opt{position:relative;display:inline-flex;cursor:pointer;max-width:100%;}
+.opt input{position:absolute;opacity:0;width:1px;height:1px;margin:0;}
+.opt .box{border:1px solid var(--line-strong);background:#FFFDF8;border-radius:3px;padding:9px 14px;font-size:14.5px;line-height:1.42;color:var(--ink);user-select:none;transition:background .15s,border-color .15s,color .15s,transform .12s;}
+.opt .box:hover{border-color:var(--green);background:var(--green-pale);transform:translateY(-1px);}
+.opt input:checked + .box{background:var(--green);border-color:var(--green);color:#FBF8EF;}
+.opt input:checked + .box:hover{transform:translateY(-1px);}
+.opt input:focus-visible + .box{outline:2px solid var(--green-deep);outline-offset:2px;}
+.opts.stack{flex-direction:column;align-items:stretch;}
+.opts.stack .opt{display:block;} .opts.stack .box{display:block;}
+
+input[type=text],input[type=number],textarea{width:100%;font-family:var(--sans);font-size:15px;color:var(--ink);background:#FFFDF8;border:1px solid var(--line-strong);border-radius:3px;padding:11px 13px;line-height:1.6;transition:border-color .15s,box-shadow .15s;}
+input[type=text]::placeholder,input[type=number]::placeholder,textarea::placeholder{color:#AEB2A7;}
+input:focus,textarea:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px var(--green-pale);}
+textarea{resize:vertical;min-height:76px;}
+.mt{margin-top:10px;}
+.pair{display:flex;gap:12px;flex-wrap:wrap;} .pair > div{flex:1 1 150px;}
+.minilabel{font-size:12.5px;color:var(--muted);margin-bottom:5px;}
+
+/* ---- conditional follow-up ---- */
+.followup{display:none;margin:14px 0 6px;padding:16px 17px 6px;border-left:2px solid var(--green);background:var(--green-pale);border-radius:0 4px 4px 0;}
+.followup.show{display:block;}
+@media (prefers-reduced-motion: no-preference){.followup.show{animation:slidein .34s cubic-bezier(.4,0,.2,1) both;}}
+.ftag{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:600;color:var(--green-deep);letter-spacing:1.5px;margin-bottom:12px;}
+.ftag::before{content:'';width:5px;height:5px;background:var(--green-deep);border-radius:1px;transform:rotate(45deg);}
+
+/* ---- ranking ---- */
+.rank{display:flex;flex-direction:column;gap:9px;}
+.rank-item{display:flex;align-items:center;gap:12px;background:#FFFDF8;border:1px solid var(--line-strong);border-radius:4px;padding:12px 14px;cursor:pointer;text-align:left;font-family:var(--sans);font-size:14.5px;color:var(--ink);width:100%;transition:background .15s,border-color .15s,transform .12s;}
+.rank-item:hover{border-color:var(--green);background:var(--green-pale);transform:translateY(-1px);}
+.rank-item.on{border-color:var(--green-deep);background:#FFFDF8;}
+.rank-num{flex:none;width:27px;height:27px;border-radius:6px;border:1.5px dashed var(--line-strong);color:var(--faint);font-family:var(--serif);font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .18s;}
+.rank-item.on .rank-num{background:var(--green-deep);border-style:solid;border-color:var(--green-deep);color:#F2EFE6;}
+.rank-reset{align-self:flex-start;margin-top:3px;background:transparent;border:none;color:var(--green);font-family:var(--sans);font-size:13px;cursor:pointer;padding:3px 0;border-bottom:1px solid transparent;transition:border-color .15s;}
+.rank-reset:hover{border-bottom-color:var(--green);}
+
+/* ---- finish / warn / output ---- */
+.finish{margin-top:16px;}
+.gen-btn{appearance:none;border:none;cursor:pointer;width:100%;font-family:var(--serif);font-size:19px;letter-spacing:5px;color:#F2EFE6;padding:17px 26px;border-radius:4px;background:var(--green-deep);box-shadow:0 10px 24px -12px rgba(33,71,62,.7);transition:transform .08s,box-shadow .2s,background .2s;}
+.gen-btn:hover{background:#1B3D35;box-shadow:0 14px 30px -12px rgba(33,71,62,.8);}
+.gen-btn:active{transform:translateY(1px);}
+.gen-btn:focus-visible{outline:3px solid var(--green);outline-offset:3px;}
+
+.warn{display:none;margin-top:16px;background:var(--amber-soft);border:1px solid var(--amber-line);border-radius:4px;padding:18px 19px;}
+.warn.show{display:block;}
+@media (prefers-reduced-motion: no-preference){.warn.show{animation:slidein .3s ease both;}}
+.warn h3{font-family:var(--serif);color:var(--amber);font-size:16.5px;font-weight:600;margin:0 0 7px;letter-spacing:.5px;}
+.warn p{margin:0 0 12px;font-size:13.5px;color:#6a5a33;line-height:1.62;}
+.warn-list{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 15px;}
+.warn-chip{background:#FFFDF8;border:1px solid var(--amber-line);border-radius:3px;padding:6px 11px;font-size:12.5px;color:#6a5a33;cursor:pointer;transition:background .15s,border-color .15s,transform .12s;}
+.warn-chip:hover{background:#fff;border-color:var(--amber);transform:translateY(-1px);}
+.warn-actions{display:flex;gap:10px;flex-wrap:wrap;}
+.btn-back{appearance:none;cursor:pointer;background:var(--amber);color:#fff;border:none;font-family:var(--sans);font-size:14px;font-weight:600;padding:10px 18px;border-radius:3px;transition:background .15s;}
+.btn-back:hover{background:#946823;}
+.btn-force{appearance:none;cursor:pointer;background:transparent;color:#6a5a33;border:1.5px solid var(--amber-line);font-family:var(--sans);font-size:14px;padding:10px 18px;border-radius:3px;transition:background .15s;}
+.btn-force:hover{background:#fff;}
+
+.flash{animation:flashq 1.6s ease;border-radius:3px;}
+
+#output{display:none;margin-top:20px;} #output.show{display:block;}
+@media (prefers-reduced-motion: no-preference){#output.show{animation:rise .4s ease both;}}
+.out-head{font-family:var(--serif);color:var(--green-deep);font-size:17px;font-weight:600;margin:0 0 9px;letter-spacing:.5px;}
+#summary{width:100%;min-height:340px;font-family:var(--sans);font-size:13px;line-height:1.7;color:var(--ink);background:#FFFDF8;border:1px solid var(--line-strong);border-radius:4px;padding:15px 16px;resize:vertical;}
+.copy-row{display:flex;gap:11px;margin-top:11px;align-items:center;flex-wrap:wrap;}
+.copy-btn{appearance:none;cursor:pointer;background:var(--green);color:#F2EFE6;border:none;font-family:var(--sans);font-size:15px;font-weight:600;padding:11px 22px;border-radius:3px;transition:background .15s,transform .08s;}
+.copy-btn:hover{background:#2C5A50;} .copy-btn:active{transform:translateY(1px);}
+.copy-btn:focus-visible{outline:2px solid var(--green-deep);outline-offset:2px;}
+.copied{color:var(--green);font-size:13.5px;font-weight:600;}
+
+.vow{margin-top:36px;border-top:1px solid var(--line);padding-top:19px;font-size:12.5px;color:var(--muted);line-height:1.85;}
+.vow b{color:var(--green-deep);font-weight:600;font-family:var(--serif);}
+
+/* ---- motto ---- */
+.motto{font-family:var(--serif);font-size:16.5px;letter-spacing:4px;color:var(--green-deep);margin:0 0 12px;display:flex;align-items:center;gap:12px;}
+.motto::before{content:'';flex:none;width:18px;height:1px;background:var(--green);}
+
+/* ---- motion: ink, reveal, press ---- */
+@keyframes ink{from{opacity:0;filter:blur(16px);transform:scale(1.08) rotate(-2deg);}to{opacity:.04;filter:blur(0);transform:none;}}
+@keyframes drawline{from{width:0;}to{width:46px;}}
+@keyframes pick{0%{transform:scale(.95);}55%{transform:scale(1.035);}100%{transform:scale(1);}}
+@keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(52,104,93,0);}50%{box-shadow:0 0 0 4px rgba(52,104,93,.18);}}
+.card{transition:border-color .35s ease,box-shadow .35s ease;}
+.card:focus-within{border-color:var(--green-line);box-shadow:0 1px 2px rgba(34,42,38,.04),0 22px 44px -28px rgba(33,71,62,.32);}
+@media (prefers-reduced-motion: no-preference){
+  .hero-mark{animation:ink 1.8s cubic-bezier(.2,.7,.2,1) both;}
+  .eyebrow{animation:rise .6s ease .05s both;}
+  .eyebrow::after{animation:drawline .9s cubic-bezier(.4,0,.2,1) .35s both;}
+  .hero h1{animation:rise .7s ease .14s both;}
+  .motto{animation:rise .7s ease .3s both;}
+  .hero .tag{animation:rise .7s ease .42s both;}
+  .intro{animation:rise .7s ease .55s both;}
+  html.reveal-on .section{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);}
+  html.reveal-on .section.in{opacity:1;transform:none;}
+  .opt input:checked + .box{animation:pick .28s cubic-bezier(.34,1.4,.5,1);}
+  .rank-item.on .rank-num{animation:stamp .34s cubic-bezier(.34,1.4,.5,1) both;}
+  .gen-btn:hover{transform:translateY(-1px);}
+  .prog-track.full{animation:glow 1.6s ease 2;}
+}
+@media (max-width:480px){
+  body{font-size:15.5px;}
+  .hero h1{font-size:26px;}
+  .hero-mark{font-size:150px;top:-32px;}
+  .sec-title{font-size:19.5px;}
+  .wrap{padding:26px 16px 64px;}
+  .gen-btn{letter-spacing:3px;}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="topbar-inner">
+  <div class="seal-sm">知衢</div>
+  <div class="prog"><div class="prog-track"><div class="prog-fill" id="fill"></div></div><div class="prog-pct" id="pct">0%</div></div>
+</div></div>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="hero-mark" aria-hidden="true">衢</div>
+    <p class="eyebrow">知衢 · 硕士版</p>
+    <h1>读研 · 自我盘点</h1>
+    <p class="motto">知其所往，方行其衢。</p>
+    <p class="tag">考研、境外读研、中外合作办学、先工作、考公……先看清路，再挑学校。约 15 分钟。</p>
+  </div>
+
+  <div class="intro">
+    <p class="lede">读研不是本科的续集，是一次重新选择。</p>
+    <p>同样是"读个研"，统考、境外申请、国内的中外合作项目，规则、花费、拿到的证书都不一样；有些路一旦错过报名时间，就要再等一年。所以这份问卷先问你为什么读、现在在哪、能投入什么，再谈去哪里。</p>
+    <hr class="rule">
+    <p>问卷共九节，每节开头有一句"<b>为什么问这个</b>"。<b>有些题会随你的选择追问</b>，比如勾了"境外读研"，下面会问预算和语言。不确定的可以留空。</p>
+    <p><span class="how">最后一步</span>点击"生成我的画像"，复制那段文字发回即可。保研（推免）不需要填报志愿，这里不涉及；如果你已经有推免机会，在第四节注明就好。</p>
+  </div>
+
+  <div class="timeline">
+
+    <section class="section" data-title="你现在的位置"><div class="card">
+      <div class="sec-head"><div class="badge">一</div><div class="sec-title">你现在的位置</div></div>
+      <p class="sec-why">读研的路能不能走，首先取决于时间：考研每年 10 月报名、12 月初试，错过就要等一年；境外申请多在大四上学期开始。所以先弄清你读到哪了、想哪年入学。</p>
+
+      <div class="q"><div class="q-label">怎么称呼你？<span class="opt-note">（可留空）</span></div>
+        <input type="text" id="name" placeholder="昵称即可"></div>
+
+      <div class="q req"><div class="q-label">你现在是？</div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="grade" value="大一或大二"><span class="box">大一 / 大二</span></label>
+          <label class="opt"><input type="radio" name="grade" value="大三"><span class="box">大三</span></label>
+          <label class="opt"><input type="radio" name="grade" value="大四"><span class="box">大四</span></label>
+          <label class="opt"><input type="radio" name="grade" value="已毕业3年内"><span class="box">已毕业 3 年内</span></label>
+          <label class="opt"><input type="radio" name="grade" value="已毕业3年以上"><span class="box">已毕业 3 年以上</span></label>
+        </div></div>
+
+      <div class="q req"><div class="q-label">想哪一年入学读研？</div>
+        <input type="text" id="entry_year" placeholder="例如：2027 年秋季；还不确定就写大概"></div>
+
+      <div class="q req"><div class="q-label">本科学校的层次</div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="school_tier" value="985"><span class="box">985</span></label>
+          <label class="opt"><input type="radio" name="school_tier" value="211"><span class="box">211</span></label>
+          <label class="opt"><input type="radio" name="school_tier" value="双一流（非985/211）"><span class="box">双一流（非 985/211）</span></label>
+          <label class="opt"><input type="radio" name="school_tier" value="普通公办本科"><span class="box">普通公办本科</span></label>
+          <label class="opt"><input type="radio" name="school_tier" value="民办或独立学院"><span class="box">民办 / 独立学院</span></label>
+          <label class="opt"><input type="radio" name="school_tier" value="专科或专升本"><span class="box">专科 / 专升本</span></label>
+          <label class="opt"><input type="radio" name="school_tier" value="中外合作大学或境外"><span class="box">中外合作大学 / 境外</span></label>
+        </div>
+        <input class="mt" type="text" id="school_name" placeholder="学校名（选填；境外申请时有的学校按具体院校名单定要求）"></div>
+
+      <div class="q req"><div class="q-label">本科专业</div>
+        <input type="text" id="major" placeholder="例如：汉语言文学、电气工程及其自动化"></div>
+    </div></section>
+
+    <section class="section" data-title="学业与语言"><div class="card">
+      <div class="sec-head"><div class="badge">二</div><div class="sec-title">学业与语言</div></div>
+      <p class="sec-why">考研看初试分数，但复试会看本科成绩和经历；境外申请的门槛主要是均分和语言。成绩请按成绩单原样写（例如 85.3/100 或 3.4/4.0），不要自己换算，不同学校的换算方法不一样。</p>
+
+      <div class="q req"><div class="q-label">均分或绩点（写清满分）</div>
+        <input type="text" id="gpa" placeholder="例如：85.3/100，或 3.42/4.0"></div>
+
+      <div class="q"><div class="q-label">专业排名<span class="opt-note">（知道就写）</span></div>
+        <input type="text" id="rank_in_major" placeholder="例如：12/120"></div>
+
+      <div class="q req"><div class="q-label">有没有挂科？</div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="fail" value="没有"><span class="box">没有</span></label>
+          <label class="opt"><input type="radio" name="fail" value="有，已重修通过"><span class="box">有，已重修通过</span></label>
+          <label class="opt"><input type="radio" name="fail" value="有，尚未通过"><span class="box">有，尚未通过</span></label>
+        </div></div>
+
+      <div class="q req"><div class="q-label">英语成绩<span class="opt-note">（可多选）</span></div>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="eng" value="四级"><span class="box">四级</span></label>
+          <label class="opt"><input type="checkbox" name="eng" value="六级"><span class="box">六级</span></label>
+          <label class="opt"><input type="checkbox" name="eng" value="雅思"><span class="box">雅思</span></label>
+          <label class="opt"><input type="checkbox" name="eng" value="托福"><span class="box">托福</span></label>
+          <label class="opt"><input type="checkbox" name="eng" value="都还没考"><span class="box">都还没考</span></label>
+        </div>
+        <input class="mt" type="text" id="eng_score" placeholder="分数，例如：六级 520；雅思 6.5（小分 6）"></div>
+
+      <div class="q req"><div class="q-label">你的数学基础</div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="math" value="强"><span class="box">强</span></label>
+          <label class="opt"><input type="radio" name="math" value="一般"><span class="box">一般</span></label>
+          <label class="opt"><input type="radio" name="math" value="弱"><span class="box">弱</span></label>
+          <label class="opt"><input type="radio" name="math" value="目标方向不考数学"><span class="box">目标方向不考数学</span></label>
+        </div>
+        <p class="hint">很多理工、经管方向考研要考数学，它往往是最耗时的一科。</p></div>
+
+      <div class="q"><div class="q-label">做过哪些事？<span class="opt-note">（可多选）</span></div>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="exp" value="科研项目"><span class="box">科研项目</span></label>
+          <label class="opt"><input type="checkbox" name="exp" value="论文"><span class="box">论文</span></label>
+          <label class="opt"><input type="checkbox" name="exp" value="竞赛获奖"><span class="box">竞赛获奖</span></label>
+          <label class="opt"><input type="checkbox" name="exp" value="实习或工作"><span class="box">实习 / 工作</span></label>
+          <label class="opt"><input type="checkbox" name="exp" value="学生工作"><span class="box">学生工作</span></label>
+          <label class="opt"><input type="checkbox" name="exp" value="暂时没有"><span class="box">暂时没有</span></label>
+        </div>
+        <input class="mt" type="text" id="exp_note" placeholder="一两句说明最有代表性的一项（选填）"></div>
+    </div></section>
+
+    <section class="section" data-title="为什么读研"><div class="card">
+      <div class="sec-head"><div class="badge">三</div><div class="sec-title">为什么读研</div></div>
+      <p class="sec-why">这是最重要的一节。为了"岗位要硕士"而读，和为了"再想想"而读，该走的路完全不同。后一种情况，先工作几年常常更划算，这不是失败。</p>
+
+      <div class="q req"><div class="q-label">你想读研的原因<span class="opt-note">（可多选）</span></div>
+        <div class="opts stack">
+          <label class="opt"><input type="checkbox" name="why" value="目标岗位要求硕士"><span class="box">想去的岗位要求硕士学历</span></label>
+          <label class="opt"><input type="checkbox" name="why" value="喜欢科研想读博"><span class="box">喜欢科研，将来可能读博</span></label>
+          <label class="opt"><input type="checkbox" name="why" value="想换专业或方向"><span class="box">想换专业 / 换方向</span></label>
+          <label class="opt"><input type="checkbox" name="why" value="想换城市或平台"><span class="box">想换城市、换更好的平台</span></label>
+          <label class="opt"><input type="checkbox" name="why" value="考公选调或落户需要"><span class="box">考公、选调或落户需要</span></label>
+          <label class="opt"><input type="checkbox" name="why" value="暂时不想工作再想想"><span class="box">暂时不想工作，再想想</span></label>
+          <label class="opt"><input type="checkbox" name="why" value="家里希望我读"><span class="box">家里希望我读</span></label>
+          <label class="opt"><input type="checkbox" name="why" value="身边的人都在读"><span class="box">身边的人都在读</span></label>
+        </div></div>
+
+      <div class="q"><div class="q-label">如果只能留一个，最主要的原因是？<span class="opt-note">（选填）</span></div>
+        <input type="text" id="why_main" placeholder="用自己的话说"></div>
+
+      <div class="q req"><div class="q-label">读完之后，你最可能去做什么？</div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="after" value="企业就业"><span class="box">企业就业</span></label>
+          <label class="opt"><input type="radio" name="after" value="考公考编或选调"><span class="box">考公考编 / 选调</span></label>
+          <label class="opt"><input type="radio" name="after" value="读博或科研"><span class="box">读博 / 科研</span></label>
+          <label class="opt"><input type="radio" name="after" value="留在境外工作"><span class="box">留在境外工作</span></label>
+          <label class="opt"><input type="radio" name="after" value="还没想好"><span class="box">还没想好</span></label>
+        </div></div>
+    </div></section>
+
+    <section class="section" data-title="路径与打算"><div class="card">
+      <div class="sec-head"><div class="badge">四</div><div class="sec-title">路径与打算</div></div>
+      <p class="sec-why">考研一年只能报一所学校，失败靠调剂；申请可以同时投很多个；中外合作项目有的走统考、有的只发外方学位。勾选你在考虑的所有路，每条会追问几句。</p>
+
+      <div class="q req"><div class="q-label">你在考虑哪些路？<span class="opt-note">（可多选）</span></div>
+        <div class="opts stack">
+          <label class="opt"><input type="checkbox" name="route" value="国内考研"><span class="box">国内考研（统考）</span></label>
+          <label class="opt"><input type="checkbox" name="route" value="境外读研"><span class="box">境外读研（港、新、英、澳、欧、美、日等）</span></label>
+          <label class="opt"><input type="checkbox" name="route" value="中外合作办学"><span class="box">国内的中外合作办学 / 境内读境外学位</span></label>
+          <label class="opt"><input type="checkbox" name="route" value="先工作"><span class="box">先工作，以后再说</span></label>
+          <label class="opt"><input type="checkbox" name="route" value="考公"><span class="box">考公考编</span></label>
+          <label class="opt"><input type="checkbox" name="route" value="已有推免机会"><span class="box">我已经有推免（保研）机会</span></label>
+          <label class="opt"><input type="checkbox" name="route" value="还没想好"><span class="box">还没想好</span></label>
+        </div></div>
+
+      <div class="followup" data-when="route=国内考研">
+        <span class="ftag">追问 · 考研</span>
+        <div class="q req"><div class="q-label">本专业还是跨专业？</div>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="ky_cross" value="本专业"><span class="box">本专业</span></label>
+            <label class="opt"><input type="radio" name="ky_cross" value="跨专业"><span class="box">跨专业</span></label>
+            <label class="opt"><input type="radio" name="ky_cross" value="还不确定"><span class="box">还不确定</span></label>
+          </div></div>
+        <div class="q req"><div class="q-label">学硕还是专硕？</div>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="ky_type" value="学硕"><span class="box">学硕（偏科研）</span></label>
+            <label class="opt"><input type="radio" name="ky_type" value="专硕"><span class="box">专硕（偏就业）</span></label>
+            <label class="opt"><input type="radio" name="ky_type" value="都可以"><span class="box">都可以</span></label>
+            <label class="opt"><input type="radio" name="ky_type" value="不了解区别"><span class="box">不了解区别</span></label>
+          </div></div>
+        <div class="q req"><div class="q-label">目标层次</div>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="ky_level" value="冲名校"><span class="box">冲名校</span></label>
+            <label class="opt"><input type="radio" name="ky_level" value="本校或同层次"><span class="box">本校或同层次</span></label>
+            <label class="opt"><input type="radio" name="ky_level" value="能上岸就行"><span class="box">能上岸就行</span></label>
+          </div></div>
+        <div class="q"><div class="q-label">已经想好的学校或专业<span class="opt-note">（选填）</span></div>
+          <input type="text" id="ky_target" placeholder="例如：某大学 计算机技术（专硕）"></div>
+        <div class="q req"><div class="q-label">复习进度和每天能投入的时间</div>
+          <input type="text" id="ky_prep" placeholder="例如：还没开始，每天能学 6 小时；数学一轮过半"></div>
+        <div class="q req"><div class="q-label">一志愿没考上，能接受调剂吗？</div>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="ky_tj" value="能，去哪都行"><span class="box">能，去哪都行</span></label>
+            <label class="opt"><input type="radio" name="ky_tj" value="只接受部分城市或层次"><span class="box">只接受部分城市或层次</span></label>
+            <label class="opt"><input type="radio" name="ky_tj" value="不接受"><span class="box">不接受</span></label>
+          </div></div>
+        <div class="q req"><div class="q-label">能接受二战吗？</div>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="ky_again" value="能"><span class="box">能</span></label>
+            <label class="opt"><input type="radio" name="ky_again" value="最多一次"><span class="box">最多一次</span></label>
+            <label class="opt"><input type="radio" name="ky_again" value="不能"><span class="box">不能</span></label>
+          </div></div>
+        <div class="q"><div class="q-label">非全日制可以考虑吗？</div>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="ky_part" value="可以"><span class="box">可以</span></label>
+            <label class="opt"><input type="radio" name="ky_part" value="不考虑"><span class="box">不考虑</span></label>
+            <label class="opt"><input type="radio" name="ky_part" value="不了解"><span class="box">不了解</span></label>
+          </div></div>
+        <div class="q"><div class="q-label">以下情况是否符合？<span class="opt-note">（影响加分或能报的专业，可多选）</span></div>
+          <div class="opts stack">
+            <label class="opt"><input type="checkbox" name="ky_special" value="西部计划等服务期满"><span class="box">西部计划、三支一扶、特岗教师等服务期满</span></label>
+            <label class="opt"><input type="checkbox" name="ky_special" value="退役大学生士兵"><span class="box">退役大学生士兵</span></label>
+            <label class="opt"><input type="checkbox" name="ky_special" value="本科毕业后工作满3年"><span class="box">本科毕业后工作满 3 年（MBA、MPA 等需要）</span></label>
+            <label class="opt"><input type="checkbox" name="ky_special" value="本科是法学"><span class="box">本科是法学（影响法硕报哪一类）</span></label>
+            <label class="opt"><input type="checkbox" name="ky_special" value="都不符合"><span class="box">都不符合</span></label>
+          </div></div>
+      </div>
+
+      <div class="followup" data-when="route=境外读研">
+        <span class="ftag">追问 · 境外读研</span>
+        <div class="q req"><div class="q-label">想去哪里？<span class="opt-note">（可多选）</span></div>
+          <div class="opts">
+            <label class="opt"><input type="checkbox" name="ab_region" value="香港或澳门"><span class="box">香港 / 澳门</span></label>
+            <label class="opt"><input type="checkbox" name="ab_region" value="新加坡"><span class="box">新加坡</span></label>
+            <label class="opt"><input type="checkbox" name="ab_region" value="英国"><span class="box">英国</span></label>
+            <label class="opt"><input type="checkbox" name="ab_region" value="澳大利亚或新西兰"><span class="box">澳 / 新西兰</span></label>
+            <label class="opt"><input type="checkbox" name="ab_region" value="欧洲大陆"><span class="box">欧洲大陆</span></label>
+            <label class="opt"><input type="checkbox" name="ab_region" value="美国或加拿大"><span class="box">美 / 加</span></label>
+            <label class="opt"><input type="checkbox" name="ab_region" value="日本或韩国"><span class="box">日 / 韩</span></label>
+            <label class="opt"><input type="checkbox" name="ab_region" value="还没定"><span class="box">还没定</span></label>
+          </div></div>
+        <div class="q req"><div class="q-label">全程总预算（学费 + 生活费，人民币）</div>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="ab_budget" value="20万以内"><span class="box">20 万以内</span></label>
+            <label class="opt"><input type="radio" name="ab_budget" value="20—40万"><span class="box">20—40 万</span></label>
+            <label class="opt"><input type="radio" name="ab_budget" value="40—80万"><span class="box">40—80 万</span></label>
+            <label class="opt"><input type="radio" name="ab_budget" value="80万以上"><span class="box">80 万以上</span></label>
+            <label class="opt"><input type="radio" name="ab_budget" value="还没和家里谈"><span class="box">还没和家里谈</span></label>
+          </div>
+          <p class="hint">预算决定了哪些地区可以考虑，最好先和家里谈清楚。</p></div>
+        <div class="q req"><div class="q-label">学制偏好</div>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="ab_len" value="一年制"><span class="box">一年制</span></label>
+            <label class="opt"><input type="radio" name="ab_len" value="两年制"><span class="box">两年制</span></label>
+            <label class="opt"><input type="radio" name="ab_len" value="都可以"><span class="box">都可以</span></label>
+          </div></div>
+        <div class="q req"><div class="q-label">读完打算回国工作吗？</div>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="ab_back" value="回国"><span class="box">回国</span></label>
+            <label class="opt"><input type="radio" name="ab_back" value="先留当地"><span class="box">先留当地</span></label>
+            <label class="opt"><input type="radio" name="ab_back" value="看情况"><span class="box">看情况</span></label>
+          </div>
+          <p class="hint">回国工作的话，要提前查学历认证、目标城市落户政策和目标单位（尤其考公、国企）是否认可。</p></div>
+      </div>
+
+      <div class="followup" data-when="route=中外合作办学">
+        <span class="ftag">追问 · 中外合作办学</span>
+        <div class="q req"><div class="q-label">你需要"国内统招研究生学历"吗？</div>
+          <div class="opts stack">
+            <label class="opt"><input type="radio" name="cf_need" value="需要（要考公、选调或进部分国企）"><span class="box">需要（打算考公、选调或进部分国企）</span></label>
+            <label class="opt"><input type="radio" name="cf_need" value="不需要，外方学位就够"><span class="box">不需要，外方学位就够</span></label>
+            <label class="opt"><input type="radio" name="cf_need" value="不清楚区别"><span class="box">不清楚两者的区别</span></label>
+          </div>
+          <p class="hint">有的合作项目走统考、发中国学历；有的学校自主招生、只发外方学位，学信网查不到。两者差别很大。</p></div>
+        <div class="q"><div class="q-label">看中它的哪一点？<span class="opt-note">（可多选）</span></div>
+          <div class="opts">
+            <label class="opt"><input type="checkbox" name="cf_why" value="外方学位"><span class="box">外方学位</span></label>
+            <label class="opt"><input type="checkbox" name="cf_why" value="离家近"><span class="box">离家近</span></label>
+            <label class="opt"><input type="checkbox" name="cf_why" value="比出国便宜"><span class="box">比出国便宜</span></label>
+            <label class="opt"><input type="checkbox" name="cf_why" value="国际化课程"><span class="box">国际化课程</span></label>
+            <label class="opt"><input type="checkbox" name="cf_why" value="觉得更容易录取"><span class="box">觉得更容易录取</span></label>
+          </div></div>
+        <div class="q"><div class="q-label">已经看中的项目<span class="opt-note">（选填）</span></div>
+          <input type="text" id="cf_target" placeholder="写学校和项目全称"></div>
+      </div>
+
+      <div class="followup" data-when="route=先工作">
+        <span class="ftag">追问 · 先工作</span>
+        <div class="q"><div class="q-label">想做什么工作？大概几年后再考虑读研？</div>
+          <input type="text" id="work_plan" placeholder="例如：做产品，工作 2—3 年后申请在职或境外项目"></div>
+      </div>
+
+      <div class="followup" data-when="route=考公">
+        <span class="ftag">追问 · 考公</span>
+        <div class="q"><div class="q-label">目标省份和岗位类型；知道这些岗位对学历、专业的要求吗？</div>
+          <input type="text" id="gk_plan" placeholder="例如：广东省考，税务类；不清楚是否要求硕士"></div>
+      </div>
+
+      <div class="followup" data-when="route=已有推免机会">
+        <span class="ftag">追问 · 推免</span>
+        <div class="q"><div class="q-label">推免的去向和进度</div>
+          <input type="text" id="tm_status" placeholder="例如：已拿到本校学硕待录取；在犹豫是否放弃去申请境外"></div>
+      </div>
+    </div></section>
+
+    <section class="section" data-title="专业方向"><div class="card">
+      <div class="sec-head"><div class="badge">五</div><div class="sec-title">专业方向</div></div>
+      <p class="sec-why">读研两三年，加上工作最初几年，都会在这个方向上。先排除确定不想做的，比盲目追热门更可靠。也提醒一句：没接触过的方向，不一定比你现在的好。</p>
+
+      <div class="q req"><div class="q-label">你对本科专业的感觉</div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="like_major" value="很喜欢"><span class="box">很喜欢</span></label>
+          <label class="opt"><input type="radio" name="like_major" value="还行"><span class="box">还行</span></label>
+          <label class="opt"><input type="radio" name="like_major" value="不喜欢"><span class="box">不喜欢</span></label>
+          <label class="opt"><input type="radio" name="like_major" value="说不清"><span class="box">说不清</span></label>
+        </div></div>
+
+      <div class="q req"><div class="q-label">想读的方向</div>
+        <input type="text" id="dir_want" placeholder="可以写具体专业，也可以写想做的事"></div>
+
+      <div class="q"><div class="q-label">确定不想做的方向<span class="opt-note">（选填）</span></div>
+        <input type="text" id="dir_no" placeholder="例如：不想整天写代码；不想做实验"></div>
+
+      <div class="q"><div class="q-label">对想读的方向，你真正接触过吗？</div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="dir_tried" value="做过相关课题或实习"><span class="box">做过课题或实习</span></label>
+          <label class="opt"><input type="radio" name="dir_tried" value="上过相关课"><span class="box">上过相关课</span></label>
+          <label class="opt"><input type="radio" name="dir_tried" value="没有，只是了解"><span class="box">没有，只是了解</span></label>
+        </div></div>
+    </div></section>
+
+    <section class="section" data-title="现实约束"><div class="card">
+      <div class="sec-head"><div class="badge">六</div><div class="sec-title">现实约束</div></div>
+      <p class="sec-why">钱、时间、家里的期望，往往比分数更早决定哪条路走得通。</p>
+
+      <div class="q req"><div class="q-label">家里能支持你多久不挣钱？</div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="money" value="1年左右"><span class="box">1 年左右</span></label>
+          <label class="opt"><input type="radio" name="money" value="2—3年"><span class="box">2—3 年</span></label>
+          <label class="opt"><input type="radio" name="money" value="3年以上"><span class="box">3 年以上</span></label>
+          <label class="opt"><input type="radio" name="money" value="希望我尽快工作"><span class="box">希望我尽快工作</span></label>
+        </div></div>
+
+      <div class="q"><div class="q-label">城市偏好<span class="opt-note">（选填）</span></div>
+        <input type="text" id="city" placeholder="例如：想留在长三角；必须离家近"></div>
+
+      <div class="q"><div class="q-label">家里对你读研的期望<span class="opt-note">（选填）</span></div>
+        <textarea id="family" placeholder="如果和你的想法不一样，也请如实写。"></textarea></div>
+    </div></section>
+
+    <section class="section" data-title="风险与心态"><div class="card">
+      <div class="sec-head"><div class="badge">七</div><div class="sec-title">风险与心态</div></div>
+      <p class="sec-why">考研只有一次机会、申请结果彼此相关。你愿意为更好的学校承担多大的落空风险，决定了报哪里。</p>
+
+      <div class="q req"><div class="q-label">名校和稳妥之间，你更偏向？</div>
+        <div class="opts stack">
+          <label class="opt"><input type="radio" name="risk" value="宁可冒险冲名校"><span class="box">宁可冒险冲更好的学校</span></label>
+          <label class="opt"><input type="radio" name="risk" value="两者之间"><span class="box">两者之间</span></label>
+          <label class="opt"><input type="radio" name="risk" value="优先稳稳上岸"><span class="box">优先稳稳上岸</span></label>
+        </div></div>
+
+      <div class="q req"><div class="q-label">如果这一年什么都没成，最坏你能接受什么？</div>
+        <div class="opts stack">
+          <label class="opt"><input type="radio" name="worst" value="直接工作"><span class="box">直接工作</span></label>
+          <label class="opt"><input type="radio" name="worst" value="再准备一年"><span class="box">再准备一年</span></label>
+          <label class="opt"><input type="radio" name="worst" value="很难接受，必须有学上"><span class="box">很难接受，必须有学上</span></label>
+        </div></div>
+    </div></section>
+
+    <section class="section" data-title="优先级排序"><div class="card">
+      <div class="sec-head"><div class="badge">八</div><div class="sec-title">优先级排序</div></div>
+      <p class="sec-why">这是整份问卷的题眼。几个都想要的时候，排序决定取舍；后面给每个候选打分就按这个顺序定权重。</p>
+
+      <div class="q req" id="rankq"><div class="q-label">按重要程度，依次点选下面六项（先点最重要的）</div>
+        <p class="hint" style="margin-top:0;margin-bottom:11px;">点一下 = 排上序号；再点一下 = 取消。</p>
+        <div class="rank" id="rank">
+          <button type="button" class="rank-item" data-id="学校层次与平台"><span class="rank-num">–</span><span>学校层次 · 平台</span></button>
+          <button type="button" class="rank-item" data-id="专业方向"><span class="rank-num">–</span><span>专业方向 · 兴趣</span></button>
+          <button type="button" class="rank-item" data-id="城市"><span class="rank-num">–</span><span>城市</span></button>
+          <button type="button" class="rank-item" data-id="毕业去向"><span class="rank-num">–</span><span>毕业去向 · 就业或考公</span></button>
+          <button type="button" class="rank-item" data-id="上岸把握"><span class="rank-num">–</span><span>上岸把握</span></button>
+          <button type="button" class="rank-item" data-id="时间与花费"><span class="rank-num">–</span><span>时间与花费</span></button>
+        </div>
+        <button type="button" class="rank-reset" id="rankReset">清空重排</button>
+      </div>
+    </div></section>
+
+    <section class="section" data-title="心里话"><div class="card">
+      <div class="sec-head"><div class="badge">九</div><div class="sec-title">你心里的话</div></div>
+      <p class="sec-why">数据算不出你真正在乎什么。下面几句越实在越好。</p>
+
+      <div class="q"><div class="q-label">现在最纠结、最想弄明白的一件事<span class="opt-note">（选填）</span></div>
+        <textarea id="worry" placeholder="例如：到底该考研还是去香港读一年？"></textarea></div>
+
+      <div class="q"><div class="q-label">已经听到的建议或消息<span class="opt-note">（选填）</span></div>
+        <textarea id="advice" placeholder="例如：学长说某校今年扩招；中介说某项目包录取……我们会逐条核实。"></textarea></div>
+
+      <div class="q"><div class="q-label">还有什么想让顾问知道的？<span class="opt-note">（选填）</span></div>
+        <textarea id="more" placeholder="任何你觉得重要的信息。"></textarea></div>
+    </div></section>
+
+  </div><!-- /timeline -->
+
+  <div class="finish">
+    <button class="gen-btn" type="button" onclick="clickGenerate()">生成我的画像</button>
+
+    <div class="warn" id="warn">
+      <h3>等一下，有几处还没填</h3>
+      <p id="warnMsg"></p>
+      <div class="warn-list" id="warnList"></div>
+      <div class="warn-actions">
+        <button class="btn-back" type="button" onclick="hideWarn()">返回补填</button>
+        <button class="btn-force" type="button" onclick="doGenerate()">未填的留空，仍要生成</button>
+      </div>
+    </div>
+
+    <div id="output">
+      <p class="out-head">这段就是你的"画像"。复制它，发回去就行 ↓</p>
+      <textarea id="summary" readonly></textarea>
+      <div class="copy-row">
+        <button class="copy-btn" type="button" onclick="copySummary()">一键复制</button>
+        <span class="copied" id="copiedMsg"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="vow">
+    填完之后，请记住三句话：<br>
+    <b>一、</b>这份问卷不是官方建议，一切以教育部当年招生规定、研招网、各校招生简章与项目官网为准。<br>
+    <b>二、</b>用来分析的 AI 也会犯错，请务必交叉核实。<br>
+    <b>三、</b>最终的决策权和后果，永远属于你自己。
+  </div>
+</div>
+
+<script>
+  function val(id){var el=document.getElementById(id);return el&&el.value?el.value.trim():'';}
+  function radio(name){var el=document.querySelector('input[name="'+name+'"]:checked');return el?el.value:'';}
+  function checks(name){var n=document.querySelectorAll('input[name="'+name+'"]:checked'),o=[];for(var i=0;i<n.length;i++)o.push(n[i].value);return o.join('、');}
+  function f(v){return(v&&v.length)?v:'（未填）';}
+  function isVisible(el){return !!(el&&el.offsetParent!==null);}
+
+  /* ----- conditional follow-ups ----- */
+  function refreshFollowups(){
+    document.querySelectorAll('.followup').forEach(function(fu){
+      var cond=fu.getAttribute('data-when'); // name=value
+      var eq=cond.indexOf('='); var name=cond.slice(0,eq), value=cond.slice(eq+1);
+      var on=!!document.querySelector('input[name="'+name+'"][value="'+value+'"]:checked');
+      if(on){ fu.classList.add('show'); }
+      else if(fu.classList.contains('show')){
+        fu.classList.remove('show');
+        // clear its inputs so hidden answers don't linger
+        fu.querySelectorAll('input').forEach(function(i){ if(i.type==='radio'||i.type==='checkbox') i.checked=false; else i.value=''; });
+        fu.querySelectorAll('textarea').forEach(function(t){ t.value=''; });
+      }
+    });
+  }
+
+  /* ----- ranking ----- */
+  var rankOrder=[];
+  function renderRank(){
+    document.querySelectorAll('#rank .rank-item').forEach(function(it){
+      var id=it.getAttribute('data-id'),pos=rankOrder.indexOf(id),num=it.querySelector('.rank-num');
+      if(pos>=0){num.textContent=(pos+1);it.classList.add('on');}else{num.textContent='–';it.classList.remove('on');}
+    });
+  }
+  document.querySelectorAll('#rank .rank-item').forEach(function(it){
+    it.addEventListener('click',function(){
+      var id=it.getAttribute('data-id'),pos=rankOrder.indexOf(id);
+      if(pos>=0)rankOrder.splice(pos,1);else rankOrder.push(id);
+      renderRank();updateProgress();saveState();
+    });
+  });
+  document.getElementById('rankReset').addEventListener('click',function(){rankOrder=[];renderRank();updateProgress();saveState();});
+  function rankText(){return rankOrder.length?rankOrder.map(function(x,i){return(i+1)+'. '+x;}).join('  >  '):'（未排序）';}
+
+  /* ----- answered? / missing / progress ----- */
+  function isAnswered(q){
+    if(q.querySelector('#rank')) return rankOrder.length>0;
+    var rad=q.querySelectorAll('input[type=radio]');
+    if(rad.length) return !!q.querySelector('input[type=radio]:checked');
+    var chk=q.querySelectorAll('input[type=checkbox]');
+    if(chk.length) return !!q.querySelector('input[type=checkbox]:checked');
+    var txt=q.querySelectorAll('input[type=text],input[type=number],textarea');
+    if(txt.length){ for(var i=0;i<txt.length;i++){ if(!txt[i].value.trim()) return false; } return true; }
+    return true;
+  }
+  function getLabel(q){
+    if(q.dataset.label) return q.dataset.label;
+    var lbl=q.querySelector('.q-label'); if(!lbl) return '某题';
+    var c=lbl.cloneNode(true); c.querySelectorAll('.opt-note').forEach(function(n){n.remove();});
+    return c.textContent.trim();
+  }
+  function visibleReqs(){ return Array.prototype.filter.call(document.querySelectorAll('.q.req'),isVisible); }
+  function getMissing(){ return visibleReqs().filter(function(q){return !isAnswered(q);}); }
+  function markSections(){
+    document.querySelectorAll('.section').forEach(function(sec){
+      var badge=sec.querySelector('.badge'); if(!badge) return;
+      var rs=Array.prototype.filter.call(sec.querySelectorAll('.q.req'),isVisible);
+      badge.classList.toggle('done', rs.length>0 && rs.every(isAnswered));
+    });
+  }
+
+  var fill=document.getElementById('fill'),pctEl=document.getElementById('pct');
+  function updateProgress(){
+    var reqs=visibleReqs(),done=0;
+    reqs.forEach(function(q){ if(isAnswered(q)) done++; });
+    var pct=reqs.length?Math.round(done/reqs.length*100):0;
+    fill.style.width=pct+'%'; pctEl.textContent=pct+'%';
+    markSections();
+  }
+  /* ----- 本地缓存：填了就存，刷新/重开页面自动读回 ----- */
+  var STORE_KEY='zhiqu_grad_v1';
+  function saveState(){
+    try{
+      var d={text:{},radio:{},check:{},rank:rankOrder};
+      document.querySelectorAll('input[type=text],input[type=number],input[type=date],input[type=time],textarea').forEach(function(el){ if(el.id&&el.value) d.text[el.id]=el.value; });
+      document.querySelectorAll('input[type=radio]:checked').forEach(function(el){ if(el.name) d.radio[el.name]=el.value; });
+      document.querySelectorAll('input[type=checkbox]:checked').forEach(function(el){ if(el.name){ (d.check[el.name]=d.check[el.name]||[]).push(el.value); } });
+      localStorage.setItem(STORE_KEY, JSON.stringify(d));
+    }catch(e){/* 无痕模式/禁用存储时静默降级，不影响填写 */}
+  }
+  function restoreState(){
+    try{
+      var raw=localStorage.getItem(STORE_KEY); if(!raw) return false;
+      var d=JSON.parse(raw); if(!d) return false;
+      if(d.text) Object.keys(d.text).forEach(function(id){ var el=document.getElementById(id); if(el) el.value=d.text[id]; });
+      function setChecked(name,vals){ document.querySelectorAll('input[name="'+name+'"]').forEach(function(el){ if(vals.indexOf(el.value)>=0) el.checked=true; }); }
+      if(d.radio) Object.keys(d.radio).forEach(function(n){ setChecked(n,[d.radio[n]]); });
+      if(d.check) Object.keys(d.check).forEach(function(n){ setChecked(n,d.check[n]); });
+      if(d.rank && d.rank.length) rankOrder=d.rank.slice();
+      return true;
+    }catch(e){ return false; }
+  }
+  function clearState(){ try{ localStorage.removeItem(STORE_KEY); }catch(e){} }
+
+  document.addEventListener('change',function(){refreshFollowups();updateProgress();saveState();});
+  document.addEventListener('input',function(){updateProgress();saveState();});
+
+  /* 读回上次内容，再把分支题/排序/进度/印章一起刷新 */
+  var hadSaved=restoreState();
+  refreshFollowups(); renderRank(); updateProgress();
+  if(hadSaved) showRestoredNotice();
+
+  function showRestoredNotice(){
+    if(document.getElementById('restoredBar')) return;
+    var bar=document.createElement('div'); bar.id='restoredBar';
+    bar.style.cssText='max-width:680px;margin:14px auto 0;padding:10px 15px;background:var(--green-pale);border:1px solid var(--green);border-radius:4px;color:var(--green-deep);font-size:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;line-height:1.5;';
+    var txt=document.createElement('span'); txt.textContent='已为你恢复上次填写的内容，接着填就好。';
+    var btn=document.createElement('button'); btn.type='button'; btn.textContent='清空重填';
+    btn.style.cssText='border:1px solid var(--green);background:transparent;color:var(--green-deep);border-radius:4px;padding:5px 13px;font-size:13px;cursor:pointer;white-space:nowrap;';
+    btn.addEventListener('click',function(){ if(confirm('确定清空已填写的内容、从头开始吗？此操作无法撤销。')){ clearState(); location.reload(); } });
+    bar.appendChild(txt); bar.appendChild(btn);
+    var top=document.querySelector('.topbar');
+    if(top&&top.parentNode) top.parentNode.insertBefore(bar, top.nextSibling);
+    else document.body.insertBefore(bar, document.body.firstChild);
+  }
+
+  /* ----- generate flow ----- */
+  function clickGenerate(){
+    var miss=getMissing();
+    document.getElementById('output').classList.remove('show');
+    if(miss.length){ showWarn(miss); }
+    else { hideWarn(); doGenerate(); }
+  }
+  function showWarn(miss){
+    var warn=document.getElementById('warn');
+    document.getElementById('warnMsg').textContent='你还有 '+miss.length+' 处没填。可以点下面任意一项跳过去补填；如果就是不想填，点"仍要生成"，这些会留空，不影响后续分析。';
+    var list=document.getElementById('warnList'); list.innerHTML='';
+    miss.forEach(function(q){
+      var chip=document.createElement('div'); chip.className='warn-chip'; chip.textContent=getLabel(q);
+      chip.addEventListener('click',function(){
+        q.scrollIntoView({behavior:'smooth',block:'center'});
+        q.classList.remove('flash'); void q.offsetWidth; q.classList.add('flash');
+      });
+      list.appendChild(chip);
+    });
+    warn.classList.add('show');
+    warn.scrollIntoView({behavior:'smooth',block:'center'});
+  }
+  function hideWarn(){ document.getElementById('warn').classList.remove('show'); }
+
+
+  function answerOf(q){
+    if(q.querySelector('#rank')) return rankOrder.length?rankText():'';
+    var parts=[];
+    var r=q.querySelector('input[type=radio]:checked'); if(r) parts.push(r.value);
+    var c=q.querySelectorAll('input[type=checkbox]:checked');
+    if(c.length){ var a=[]; c.forEach(function(x){a.push(x.value);}); parts.push(a.join('、')); }
+    q.querySelectorAll('input[type=text],input[type=number],textarea').forEach(function(t){ if(t.value.trim()) parts.push(t.value.trim()); });
+    return parts.join('；');
+  }
+  function doGenerate(){
+    hideWarn();
+    var L=['【读研 · 自我盘点】'], nm=['一','二','三','四','五','六','七','八','九','十'];
+    document.querySelectorAll('.section').forEach(function(sec,i){
+      L.push(''); L.push('— '+nm[i]+'、'+sec.getAttribute('data-title')+' —');
+      var lastFu=null;
+      sec.querySelectorAll('.q').forEach(function(q){
+        if(!isVisible(q)) return;
+        var fu=q.closest('.followup');
+        if(fu&&fu!==lastFu){ var tag=fu.querySelector('.ftag'); L.push('［'+(tag?tag.textContent.trim():'追问')+'］'); }
+        lastFu=fu;
+        var a=answerOf(q);
+        if(!a && !q.classList.contains('req')) return;
+        L.push((fu?'  · ':'')+getLabel(q)+'：'+(a||'（未填）'));
+      });
+    });
+    L.push('');
+    L.push('（本表由「知衢 · 硕士版」问卷生成，填写日期 '+new Date().toISOString().slice(0,10)+'。一切以教育部当年规定、研招网、各校与项目官网为准；AI 会出错，请交叉核实；最终决策权在本人。）');
+    var ta=document.getElementById('summary'); ta.value=L.join('\n');
+    document.getElementById('output').classList.add('show');
+    document.getElementById('copiedMsg').textContent='';
+    document.getElementById('output').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+
+  function copySummary(){
+    var ta=document.getElementById('summary'),msg=document.getElementById('copiedMsg');
+    var done=function(){msg.textContent='已复制 ✓ 发回去就行';};
+    var fb=function(){ta.removeAttribute('readonly');ta.focus();ta.select();try{document.execCommand('copy');done();}catch(e){msg.textContent='请长按文本框手动复制';}ta.setAttribute('readonly','readonly');};
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(ta.value).then(done).catch(fb);}else{fb();}
+  }
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var secs=document.querySelectorAll('.section'); if(!secs.length) return;
+  document.documentElement.classList.add('reveal-on');
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px',threshold:0.04});
+  secs.forEach(function(el){io.observe(el);});
+  // 从锚点跳转、打印或恢复滚动位置时，确保内容可见
+  window.addEventListener('beforeprint',function(){secs.forEach(function(el){el.classList.add('in');});});
+  var fill=document.getElementById('fill');
+  if(fill) new MutationObserver(function(){fill.parentNode.classList.toggle('full',fill.style.width==='100%');}).observe(fill,{attributes:true,attributeFilter:['style']});
+})();
+</script>
+</body>
+</html>
