@@ -1,6 +1,6 @@
 ---
 name: zhiqu-grad
-description: 知衢 · 读研规划。读取「知衢 · 硕士版」问卷生成的学生画像，先判断该走考研、申请（境外读研、中外合作办学）、先工作还是考公，再给出选校选项目、时间线和备选方案，重点算清"上岸概率 × 值不值"。Use when a user pastes a 知衢硕士版 / 读研自我盘点 profile, or asks about 考研择校、报考条件、复试线、调剂、二战、港新英澳读研选校、中外合作办学、读研还是工作. Not for 保研/推免 (no application list to fill), gaokao (use zhiqu) or for writing application essays in depth.
+description: 知衢 · 读研规划。读取「知衢 · 硕士版」问卷生成的学生画像，先判断该走考研、申请（境外读研、中外合作办学）、先工作还是考公，再给出选校选项目、时间线和备选方案，重点算清"上岸概率 × 值不值"。Use when a user pastes a 知衢硕士版 / 读研自我盘点 profile, or asks about 考研择校、报考条件、复试线、调剂、二战、港新英澳读研选校、中外合作办学、读研还是工作. Not for 保研/推免 (outside current scope), gaokao (use zhiqu) or for writing application essays in depth.
 ---
 
 # 知衢 · 硕士版

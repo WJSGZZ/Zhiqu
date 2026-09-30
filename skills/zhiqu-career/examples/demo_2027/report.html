@@ -1,0 +1,89 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>第一份工作，不必替你决定一生</title><style>
+@page { size: A4; margin: 20mm 18mm 20mm 18mm; background: #FBF6E6;
+  @top-left { content: "知衢 · 志愿填报决策报告"; font: 8pt "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; color: #8C8472; }
+  @top-right { content: "小宁 · 完全虚构 · 求职版"; font: 8pt "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; color: #8C8472; }
+  @bottom-right { content: counter(page) " / " counter(pages); font: 8pt "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; color: #8C8472; }
+  @bottom-left { content: "仅供参考 · 以当年官方招生信息为准"; font: 8pt "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; color: #A39B87; }
+}
+@page cover { margin: 0; @top-left { content: none; } @top-right { content: none; } @bottom-right { content: none; } @bottom-left { content: none; } }
+:root { --ink:#161616; --soft:#3B3832; --muted:#66604F; --rule:#D9CFB4; --rule2:#BFB294;
+  --accent:#21473E; --accent2:#34685D; --pale:#EFE7D0; --amber:#9A6B1F; --red:#9B3B2E; --green:#2F6B4F; }
+* { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+html, body { background: #FBF6E6; }
+body { margin: 0; color: var(--ink); font: 10pt/1.75 "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; font-feature-settings: "lnum"; }
+h1,h2,h3 { font-family: "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; font-weight: 700; color: var(--ink); }
+h2 { font-size: 17pt; margin: 0 0 4mm; padding-bottom: 2.5mm; border-bottom: 1.2pt solid var(--accent); break-after: avoid; }
+h2 .no { color: var(--accent); margin-right: 3mm; font-weight: 400; font-size: 13pt; vertical-align: 1pt; }
+h3 { font-size: 12pt; margin: 6mm 0 2mm; break-after: avoid; }
+p { margin: 0 0 2.6mm; }
+section { margin-top: 12mm; }
+section:not(.major) { break-inside: avoid-page; }
+section.major { break-before: page; margin-top: 0; }
+svg.chart { width: 100%; height: auto; display: block; }
+.lead { font-size: 11pt; color: var(--soft); }
+.small { font-size: 8.5pt; color: var(--muted); }
+.num { font-variant-numeric: tabular-nums; }
+
+/* cover */
+.cover { page: cover; width: 210mm; height: 296mm; overflow: hidden; padding: 0; position: relative; background: #FBF6E6; break-after: page; }
+.cover .band { background: var(--accent); color: #F5EFDD; padding: 26mm 22mm 13mm; }
+.cover .kicker { font-size: 9pt; letter-spacing: 3pt; opacity: .85; }
+.cover h1 { color: #FBF6E6; font-size: 30pt; margin: 6mm 0 3mm; letter-spacing: 1pt; }
+.cover .sub { font-size: 11pt; opacity: .9; }
+.cover .motto { margin-top: 9mm; font-size: 10.5pt; letter-spacing: 4pt; opacity: .78; display: flex; align-items: center; gap: 4mm; }
+.cover .motto::before { content: ""; width: 8mm; height: .6pt; background: #F5EFDD; opacity: .7; }
+.cover .meta { padding: 10mm 22mm 0; display: grid; grid-template-columns: repeat(3,1fr); gap: 6mm 8mm; }
+.cover .meta div { border-top: .8pt solid var(--rule2); padding-top: 2mm; }
+.cover .meta b { display:block; font-size: 8pt; color: var(--muted); font-weight: 500; letter-spacing: 1pt; }
+.cover .meta span { font-size: 12pt; }
+.cover .verdict { margin: 9mm 22mm 0; padding: 6mm 8mm; background: #FFFDF6; border-left: 3pt solid var(--accent); }
+.cover .verdict b { display:block; font-size: 8pt; color: var(--accent); letter-spacing: 2pt; margin-bottom: 2mm; }
+.cover .verdict p { font-size: 14pt; line-height: 1.6; margin: 0; }
+.cover .foot { position: absolute; left: 22mm; right: 22mm; bottom: 16mm; font-size: 8pt; color: var(--muted); border-top: .6pt solid var(--rule); padding-top: 3mm; }
+
+/* kpis */
+.kpis { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; border-top: 1pt solid var(--ink); border-bottom: .6pt solid var(--rule2); margin: 4mm 0 6mm; }
+.kpis div { padding: 3mm 3mm 3mm 0; }
+.kpis div + div { padding-left: 4mm; border-left: .6pt solid var(--rule); }
+.kpis b { display:block; font-size: 8pt; color: var(--muted); font-weight: 500; }
+.kpis span { font: 700 19pt/1.25 "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; }
+.kpis em { display:block; font-style: normal; font-size: 8pt; color: var(--soft); }
+
+/* boxes */
+.box { background: #FFFDF6; border: .6pt solid var(--rule); padding: 4mm 5mm; margin: 3mm 0 4mm; break-inside: avoid; }
+.box.key { border-left: 2.5pt solid var(--accent); }
+.box.warn { border-left: 2.5pt solid var(--amber); }
+.box h4 { margin: 0 0 1.5mm; font-size: 9pt; letter-spacing: 1pt; color: var(--accent); }
+.box.warn h4 { color: var(--amber); }
+ol.tight, ul.tight { margin: 0; padding-left: 5mm; }
+ol.tight li, ul.tight li { margin: .6mm 0; }
+
+/* tables */
+table { width: 100%; border-collapse: collapse; margin: 2mm 0 4mm; font-size: 8.8pt; }
+thead th { white-space: nowrap; text-align: left; font-weight: 600; color: var(--soft); border-top: 1pt solid var(--ink); border-bottom: .6pt solid var(--ink); padding: 1.6mm 2mm; font-size: 8pt; }
+tbody td { border-bottom: .4pt solid var(--rule); padding: 1.5mm 2mm; vertical-align: top; }
+tbody tr { break-inside: avoid; }
+td.r, th.r { text-align: right; font-variant-numeric: tabular-nums; }
+td.c, th.c { text-align: center; }
+tr.hl td { background: #F3EBD2; }
+.tag { display: inline-block; min-width: 7mm; text-align: center; font-size: 7.5pt; padding: .2mm 1.5mm; border-radius: 1mm; color: #fff; }
+.tag.冲 { background: var(--red); } .tag.稳 { background: var(--amber); } .tag.保 { background: var(--green); }
+
+/* two columns / cards */
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+.card { background: #FFFDF6; border: .6pt solid var(--rule); padding: 4mm 5mm; break-inside: avoid; }
+.card h3 { margin: 0 0 1mm; }
+.card .fit { font-size: 8pt; color: var(--accent); letter-spacing: 1pt; }
+.card dl { margin: 2mm 0 0; }
+.card dt { font-size: 8pt; color: var(--muted); margin-top: 1.6mm; }
+.card dd { margin: 0; }
+.fig { margin: 2mm 0 5mm; break-inside: avoid; }
+.fig .cap { font-size: 8pt; color: var(--muted); margin-top: 1mm; }
+.fig .ttl { font-size: 9pt; font-weight: 600; margin-bottom: 1mm; }
+.glossary dt { font-weight: 600; margin-top: 1.5mm; } .glossary dd { margin: 0 0 1mm; color: var(--soft); }
+ul.asklist { list-style: none; padding: 0; margin: 0 0 3mm; }
+ul.asklist li { padding: 2mm 0 2mm 4mm; border-left: 2pt solid var(--rule2); margin: 0 0 2mm; background: #FFFDF6; break-inside: avoid; }
+ul.asklist li b { font-weight: 600; } ul.asklist li span { display: block; font-size: 8.5pt; color: var(--muted); margin-top: .5mm; }
+.toc { margin-top: 2mm; columns: 2; column-gap: 10mm; } .toc div { display: flex; border-bottom: .4pt dotted var(--rule2); padding: 1.1mm 0; break-inside: avoid; }
+.toc div span:first-child { width: 10mm; color: var(--accent); font-weight: 600; }
+</style></head><body><div class="cover"><div class="band"><div class="kicker">知 衢 · 决 策 报 告</div><h1>第一份工作，不必替你决定一生</h1><div class="sub">小宁的毕业求职与升本取舍 · 2027 毕业目标</div><div class="motto">知其所往，方行其衢。</div></div><div class="meta"><div><b>本人</b><span>小宁 · 完全虚构</span></div><div><b>版本</b><span>求职版</span></div><div><b>报告日期</b><span>2026-09-30</span></div></div><div class="verdict"><b>备注</b><p>尚无offer；规划假设不是招聘承诺，也不是2027工资预测。</p></div><div class="verdict" style="background:transparent;border-left-color:var(--rule2)"><b>目录</b><div class="toc"><div><span>01</span><span>摘要</span></div><div><span>02</span><span>你的画像</span></div><div><span>03</span><span>你看重什么、卡在哪</span></div><div><span>04</span><span>候选方向</span></div><div><span>05</span><span>方向比较</span></div><div><span>06</span><span>目标岗位清单</span></div><div><span>07</span><span>时间窗口与检查点</span></div><div><span>08</span><span>行动路线</span></div><div><span>09</span><span>offer 比较（有 offer 时）</span></div><div><span>10</span><span>风险与权益</span></div><div><span>11</span><span>追问清单</span></div><div><span>12</span><span>方法、数据来源与声明</span></div></div></div><div class="foot">本报告由「知衢」生成，供本人决策参考；数据来源、假设与局限见"方法与假设"和"数据来源与声明"两节。</div></div><section class="major"><h2><span class='no'>01</span>摘要</h2><p><strong>先把一份能做、收入条件过关的基础财务工作找实，再判断升本是否值得。</strong> 小宁眼下最需要的不是一个响亮的单位名字，而是能承担生活、积累真实经验的起点。</p><p>他在普通高职读会计，会做一些基础操作，但还没有独立处理复杂账务的能力。家里希望稳定，他也怕学历被卡；这两种担心都合理，却不能替代具体招聘条件。</p><ul><li>优先调查会计助理、出纳、应收应付文员；具体资格必须看正式公告，不把岗位名称当录用承诺。</li><li>专升本保留为条件选项：先核对2027政策与两年费用，不能用“学历重要”略过眼下的收入压力。</li><li>暂无offer，所以没有到手工资或时薪结论。示范假设每月可支配收入4500元、支出2300元，结余2200元；住房多600元时只剩1600元。</li></ul><p>下一步两周内收集与本人条件匹配的正式招聘公告、核对学校实习和2027毕业节点，并与家庭确认升本期间能否承担生活。下一次检查点是拿到第一份具体面试反馈或offer，而不是无限看经验帖。</p></section><section><h2><span class='no'>02</span>你的画像</h2><p>小宁，男，20周岁，2024年入读三年制高职，预计2027年6月毕业。大数据与会计专业，在江门生活；短期实习做过凭证录入与资料整理，Excel仍是基础水平，初级会计考试尚未通过。</p><p>他细致、慢热，有时怕问不会的事；喜欢把数字对上，不想做推销。普通的执行力和有限经历，会影响能入门的岗位，却不等于以后只能留在一种工作里。</p><table><thead><tr><th>类型</th><th>内容</th><th>怎么处理</th></tr></thead><tbody><tr><td>事实设定</td><td>高职在读、基础实习、暂无offer</td><td>不包装成成熟会计，不预先计算实际到手收入</td></tr><tr><td>偏好</td><td>离家近、流程清楚、偶尔忙可以</td><td>比较真实工作节奏与通勤</td></tr><tr><td>约束</td><td>毕业后约三个月内需要持续收入</td><td>没有资金方案不默认再读两年</td></tr><tr><td>待核实判断</td><td>进国企就稳定；专科一直没机会</td><td>核对合同甲方、学历、招聘与内部成长条件</td></tr></tbody></table><h3>可选传统视角</h3><p>虚构出生资料2006-06-21 10:20，江门，Asia/Shanghai。四柱复算为<strong>丙戌、甲午、辛巳、癸巳</strong>；三种时间口径、两种换日与±10分钟得到同一候选。传统男参数顺行，2011-11-08 00:20起运；2027按工具年段为丙申运。不能照抄旧版女参数逆运。</p><p>午月、巳火并见，丙官、甲财、癸食神透干，在传统框架内可提出“规则与责任、怎样处理压力”的反思问题；不能据此证明他适合财会或不适合销售。他选择财务来自实际学习和偏好；不爱推销也是本人设定，不是八字结论。删除本段，岗位资格、预算和方向判断不变。</p></section><section><h2><span class='no'>03</span>你看重什么、卡在哪</h2><p>小宁说想稳定，但稳定可能是按时发工资、合同清楚、少变动，也可能只是父母认可的单位名字。先把这些拆开，才知道哪些条件值得坚持，哪些可以交换。</p><p>他最担心“先工作就输给升本的人”。现在比较的是两条具体路径，不是给学历高低排人格价值：工作能不能积累能力，升本能不能打开自己想进的门，都要有事实支撑。</p><p>他可以先读三个真实岗位公告，标出自己已经具备、能补齐、目前不符合的条件。不会一项技能不等于整个方向不可行，但明确必需的学历或资格不能被乐观评分盖过去。</p></section><section><h2><span class='no'>04</span>候选方向</h2><table><thead><tr><th>方向</th><th>主要日常</th><th>支持与差距</th><th>进入前核对</th></tr></thead><tbody><tr><td>会计助理</td><td>单据、基础记账、对账与资料</td><td>有短期体验；复杂账务需要指导</td><td>是否招专科/应届、是否有人带、实际职责</td></tr><tr><td>出纳</td><td>收付款、凭证与资金核对</td><td>细致是线索；责任与内控要求更高</td><td>岗位权限、复核流程、证书和培训要求</td></tr><tr><td>应收应付文员</td><td>发票、账款核对、流程沟通</td><td>数据流程兴趣相关；需提高跨部门沟通</td><td>是否兼销售、加班与合同甲方</td></tr><tr><td>升本后再就业</td><td>继续学习后进入岗位</td><td>可能拓宽学历门槛；成本与具体收益未知</td><td>2027资格、专业、费用、家庭支出支持</td></tr></tbody></table><p>收入区间本次不填：未取得与2027应届、高职、具体城市和岗位相符的在招样本。官方在岗人员工资报告不能直接作新毕业生的offer报价。</p></section><section><h2><span class='no'>05</span>方向比较</h2><p>当前优先顺序是<strong>基础财务岗位调研并行，升本条件核查随后</strong>；不能把岗位名称排成录用把握顺序。三种财务岗位之间要看实际职责和指导条件，而不是“出纳看起来最稳”。</p><p>若一份工作有清楚的合同、带教和真实财务职责，薪水略低但生活能承担，可以保留；若只是以财务名字包装销售，或本人不满足硬要求，就降低或取消该具体选项。专业与性别不预设岗位能力。</p><p>敏感性：家庭能够完整承担升本费用且正式岗位普遍需要本科时，升本的优先级可能提高；资金缺口无法解决或已有可接受的实际offer时，先就业更值得认真比较。目前没有证据支持唯一结论。</p></section><section><h2><span class='no'>06</span>目标岗位清单</h2><p>正式推荐的具体单位清单暂为空：尚未审核在招公告。以下是<strong>调研目标类型</strong>，不是现成职位。</p><ul><li>江门或可负担通勤范围内，有明确带教的制造业、服务业财务助理。</li><li>职责与权限清楚的出纳或应收应付岗位。</li><li>父母提到的国企财务岗：核对学历、应届条件和直签/外包后再决定，不因名气默认为优先。</li></ul><p>每条公告记录年份、岗位职责、学历、合同甲方、薪资构成、地点与状态。“待核实”保留用于调查；“已证实不符合”只针对有原文证据的具体岗位，不扩成对整类单位的否定。</p></section><section><h2><span class='no'>07</span>时间窗口与检查点</h2><table><thead><tr><th>阶段</th><th>路线</th><th>检查点</th></tr></thead><tbody><tr><td>2026年秋季</td><td>了解校招、实习要求与基础岗位</td><td>查学校正式实习通知；收集公告，不假定全学期能到岗</td></tr><tr><td>2026年底—2027年初</td><td>对照真实要求补能力，核对升本政策</td><td>2027政策正式发布后重新判断资格与时间冲突</td></tr><tr><td>2027年春季</td><td>比较春招、升本与家庭费用</td><td>有具体面试反馈或offer后更新画像</td></tr><tr><td>2027年毕业前后</td><td>核对毕业材料、入职与合同</td><td>不把毕业时点等同所有单位报到日</td></tr><tr><td>入职后</td><td>对照实际工作与当初期望</td><td>收到第一份工资和了解实际工时后复核</td></tr></tbody></table><p>这里是案例规划窗口，不是学校、招聘或考试的统一官方时间表。具体报名、签约、报到截止日期按所选单位公告填写。</p></section><section><h2><span class='no'>08</span>行动路线</h2><p>先确认自己能独立完成哪些基础任务，再找有人指导且职责匹配的岗位。优先补与公告相关的Excel核对、单据流程与沟通，不为了“技能多”报名一堆课程。</p><p>升本线先解决三件事：资格、可选专业与两年费用。若家庭不能承担没有全职工资的阶段，不默认靠未经确认的兼职填补；可以比较未来其他学习路径，但不同学历形式的适用条件需另外核实。</p><p>里程碑是能说清一份实际做过的任务、看懂三类岗位的关键要求、拿到可审核的公告或反馈。知衢给路线和切换条件，不代写简历、模拟面试或替本人投递。</p></section><section><h2><span class='no'>09</span>offer 比较（有 offer 时）</h2><p><strong>当前暂无offer。</strong> 不把期望税前4500—5500元当实际工资，也不计算未知社保、公积金、个税或每小时收入。</p><p>预算沙盘采用“月可支配收入4500元”，这是假设，不是税前工资推算：住房600元、其他生活1700元，月结余2200元。住房增加600元后，结余1600元；若家庭需要固定支持，还须从结余中扣除已确认金额。这个计算只说明成本怎样改变选择。</p><p>拿到offer后逐项输入税前工资、发薪月数、确定与浮动奖金、缴费基数、扣费、工时、通勤、合同甲方。公积金的个人重视程度由本人确认，不自动按“半个现金”计分。</p></section><section><h2><span class='no'>10</span>风险与权益</h2><p>合同里写的用人单位和广告里的品牌是否相同，岗位是直签、派遣还是外包，必须确认。培训费、押金、账户权限、轮岗、实际工作内容和加班安排也要问清。</p><p>本例没有审核具体合同，因此不宣布某项待遇合法或违法。应届资格、实习安排、证书与升本规定按适用年份的官方文件核对；需要法律判断时使用当前正式规则，而不是只看旧经验。</p></section><section><h2><span class='no'>11</span>追问清单</h2><ul><li>会计助理到底是有人教账务，还是每天只整理资料？不同单位同名岗位差别很大。</li><li>进国企但签的是外包公司，和直接签国企有什么不同？先核对合同，不用名称替代条件。</li><li>家里能支持升本多久，哪些费用不能靠我自己想象？把支出与资金来源逐项确认。</li><li>起薪一般但有人带，和值得多一点却长期做杂事，怎样比较？看内容、成本与成长，不只看月薪。</li><li>我怕问问题，是不适合财务还是需要学会工作沟通？先看具体任务与反馈，不贴性格标签。</li><li>先工作以后还能学习吗？可以保留路径，但报名资格和学历认可需按具体方案核查。</li></ul></section><section><h2><span class='no'>12</span>方法、数据来源与声明</h2><p>本例按“满意与胜任”交叉生成方向，再用资格、生活成本和时间约束筛选具体岗位。没有在招样本或offer时不生成录用概率、工资预测或最终排名。预算来自case.json，calculations.json可复现。</p><p><a href="https://www.jiangmen.gov.cn/bmpd/jmsrlzyhshbzj/zcfg/jycy/content/post_3426923.html">江门市人社局2025工资价位发布公告</a>，2026-09-30访问：网页发布于2026-01-13，调查期为2024年。公告说明群体薪酬来源，不能当作2027高职应届工资；本次不摘录工资表数值。具体岗位与升本2027条件仍待核实。</p><p>人物、生日、学历背景、实习和生活预算全部虚构，无真实个人或企业身份。八字结构来自固定引擎，不证明现实职业适配。报告不保证录用，签约、投递和询问均由本人操作。</p></section></body></html>

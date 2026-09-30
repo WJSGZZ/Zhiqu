@@ -1,0 +1,38 @@
+{
+  "fictional": true,
+  "kind": "grad",
+  "person": "小林",
+  "gender": "女",
+  "decision_date": "2026-09-30",
+  "education_entry": "2023-09-01",
+  "graduation_date": "2027-06-30",
+  "target_date": "2027-09-01",
+  "stage": "pre_exam",
+  "birth_datetime": "2004-11-02T14:20:00",
+  "pillars_text": "甲申 甲戌 乙酉 癸未",
+  "luck_start": "2013-04-10T04:20:00+08:00",
+  "personal_success_probability": null,
+  "official_2027_score": null,
+  "official_offer": null,
+  "budget": {
+    "annual_limit": 30000,
+    "annual_tuition_assumption": 12000,
+    "annual_housing_assumption": 1500,
+    "monthly_living_assumption": 1300,
+    "living_months": 12
+  },
+  "evidence": [
+    {
+      "candidate": "广东工业大学电气工程专业学位",
+      "status": "pending",
+      "source": "https://automation.gdut.edu.cn/info/1044/8869.htm",
+      "verified_scope": "2025培养方案确认专业与三年学制；不证明2027统考名额、费用或报考限制",
+      "unresolved": [
+        "2027招生目录与考试科目",
+        "统考计划",
+        "费用与奖助",
+        "就业岗位资格"
+      ]
+    }
+  ]
+}

@@ -46,10 +46,10 @@ description: Rigorous Chinese BaZi/Four Pillars interpretation, climate regulati
 
 若用户只给现成四柱，可以直接解释；必要时用一句话声明“本次按所给四柱分析，未独立复核历法”。若地点或历史时区未知而用户确实要求排盘，先核查再排，不用今天的 UTC 偏移代替历史时区。
 
-完整读取 [calendar-conventions.md](references/calendar-conventions.md) 和 [interface.md](references/interface.md)，再构造 JSON 调用：
+完整读取 [calendar-conventions.md](references/calendar-conventions.md) 和 [interface.md](references/interface.md)，再构造 JSON；在本技能目录下调用：
 
 ```bash
-python3 .agents/skills/bazi/scripts/calculate_bazi.py input.json > chart.json
+python3 scripts/calculate_bazi.py input.json > chart.json
 ```
 
 需要比较时间口径、换日或晚子时干规则时，使用 `compare`／`both`，不要静默选取更贴合经历的一盘。
@@ -100,9 +100,9 @@ python3 .agents/skills/bazi/scripts/calculate_bazi.py input.json > chart.json
 把用于形成规则的案例与用于评价的留出案例分开。事前写明事件类别、方向、时间窗、概率、触发条件和失败阈值，再冻结：
 
 ```bash
-python3 .agents/skills/bazi/scripts/evaluate_predictions.py freeze draft.jsonl --output frozen.jsonl
-python3 .agents/skills/bazi/scripts/evaluate_predictions.py verify frozen.jsonl
-python3 .agents/skills/bazi/scripts/evaluate_predictions.py score frozen.jsonl outcomes.jsonl --output report.json
+python3 scripts/evaluate_predictions.py freeze draft.jsonl --output frozen.jsonl
+python3 scripts/evaluate_predictions.py verify frozen.jsonl
+python3 scripts/evaluate_predictions.py score frozen.jsonl outcomes.jsonl --output report.json
 ```
 
 同时报告命中、失败、模糊和不可判，连同覆盖率、Brier、校准、特异性、复杂度、基线和失败案例。不要把用户已透露的经历当作独立验证。
