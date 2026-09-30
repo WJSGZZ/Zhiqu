@@ -7,7 +7,7 @@
    随机抽取成对比较，违反比例超过阈值（默认 2%）报警——多半是列错位、OCR 错读或位次推算有误；
 3. 重复键（同一院校代码 + 专业组 / 专业出现多次）；
 4. 年份覆盖（中间缺年）；
-5. 院校代码与教育部高校名单（data/schools.csv）的匹配率，只对使用全国统一 5 位代码的省份有意义；
+5. 代码数值在教育部高校名单（data/schools.csv）的出现率，不证明同一学校，须核对校名；
 6. 同一院校代码在同一文件里出现多个校名（括号注释除外）——多半是 PDF 水印字或识别噪声混进了校名
    （如江苏的"育南京大学"、上海的"市华东师大"、湖北的"北京化 工大学信"）。
 
@@ -83,7 +83,7 @@ def check_file(path, codes):
     c5 = [k[0] for k in keys if re.fullmatch(r"\d{5}", k[0])]
     if len(c5) > 0.8 * len(keys):
         rate = sum(c in codes for c in c5) / len(c5)
-        notes.append(f"代码匹配教育部名单 {rate:.1%}")
+        notes.append(f"代码值在教育部名单出现 {rate:.1%}（数值重合不证明学校身份）")
         if rate < 0.9:
             issues.append(f"院校代码与教育部名单匹配率只有 {rate:.1%}")
     return issues, notes

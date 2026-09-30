@@ -138,7 +138,7 @@ def review_long_term(out, holdout=2026):
         yearly={}
         for y0,y in zip(years,list(years)[1:]):
             previous,current=data[y0],data[y]
-            common=previous.keys() & current.keys()
+            common=sorted(previous.keys() & current.keys())
             if not common: continue
             drift=st.median(val(current[k][metric],metric)-val(previous[k][metric],metric) for k in common)
             med={}
