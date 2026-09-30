@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>求职 · 自我盘点</title>
+<style>
+:root{
+  /* 宣纸 · 松烟 · 石绿 — flat fields, no gradients */
+  --paper:#EEE9DC; --card:#FAF7EE; --track:#E3DDCB;
+  --ink:#222A26; --ink-soft:#454E48; --muted:#6E776E; --faint:#9CA197;
+  --line:#E0D9C7; --line-strong:#CEC6B1;
+  --green:#34685D;       /* 石绿 — selection, accents, progress */
+  --green-deep:#21473E;  /* 黛绿 — headings, primary action, the stamped seal (signature) */
+  --green-pale:#E7EDE8;  /* flat pale field — follow-ups, hover */
+  --green-line:#C8D8D1;
+  --amber:#A8772B; --amber-soft:#F3EBD6; --amber-line:#E0CE9F;
+  --serif:'Songti SC','STSong','Noto Serif SC','Source Han Serif SC','SimSun',serif;
+  --sans:'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans SC',-apple-system,system-ui,sans-serif;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto;}}
+
+@keyframes rise{from{opacity:0;transform:translateY(9px);}to{opacity:1;transform:none;}}
+@keyframes slidein{from{opacity:0;transform:translateY(-5px);}to{opacity:1;transform:none;}}
+@keyframes flashq{0%{background:#F6EFD8;}100%{background:transparent;}}
+@keyframes stamp{0%{transform:scale(.55);opacity:.35;}60%{transform:scale(1.1);}100%{transform:scale(1);}}
+
+body{margin:0;color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.74;background:var(--paper);}
+body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.022;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+/* ---- top bar ---- */
+.topbar{position:sticky;top:0;z-index:30;background:rgba(238,233,220,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+.topbar-inner{max-width:720px;margin:0 auto;padding:11px 22px 12px;display:flex;align-items:center;gap:13px;}
+.seal-sm{flex:none;width:34px;height:34px;border-radius:8px;background:var(--green-deep);color:#F2EFE6;font-family:var(--serif);font-size:13px;letter-spacing:.5px;line-height:1.02;text-align:center;display:flex;align-items:center;justify-content:center;}
+.prog{flex:1;display:flex;align-items:center;gap:10px;min-width:0;}
+.prog-track{flex:1;height:5px;background:var(--track);border-radius:99px;overflow:hidden;}
+.prog-fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .5s cubic-bezier(.4,0,.2,1);}
+.prog-pct{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap;min-width:32px;text-align:right;letter-spacing:.3px;}
+
+/* ---- layout ---- */
+.wrap{position:relative;z-index:1;max-width:720px;margin:0 auto;padding:34px 22px 78px;}
+.hero{position:relative;overflow:hidden;padding:8px 2px 2px;}
+.hero-mark{position:absolute;right:-14px;top:-46px;z-index:0;font-family:var(--serif);font-size:210px;line-height:1;color:var(--ink);opacity:.04;pointer-events:none;user-select:none;}
+.hero > :not(.hero-mark){position:relative;z-index:1;}
+.eyebrow{font-size:12px;letter-spacing:4px;color:var(--green);margin:0 0 14px;display:flex;align-items:center;gap:12px;}
+.eyebrow::after{content:'';height:1px;width:46px;background:var(--green-line);}
+.hero h1{font-family:var(--serif);font-weight:600;font-size:32px;line-height:1.22;letter-spacing:1px;margin:0 0 10px;color:var(--ink);}
+.hero .tag{color:var(--muted);font-size:14.5px;margin:0;line-height:1.6;}
+
+.intro{position:relative;background:var(--card);border:1px solid var(--line);border-radius:4px;padding:26px 26px 22px;margin:24px 0 8px;box-shadow:0 1px 2px rgba(34,42,38,.04),0 18px 40px -28px rgba(34,42,38,.22);}
+.intro .lede{font-family:var(--serif);font-size:20px;line-height:1.52;color:var(--green-deep);margin:0 0 15px;padding-left:16px;border-left:2px solid var(--green);}
+.intro p{margin:0 0 11px;color:var(--ink-soft);} .intro p:last-child{margin-bottom:0;} .intro b{color:var(--ink);font-weight:600;}
+.intro .rule{height:1px;background:var(--line);margin:16px 0 14px;border:0;}
+.how{display:inline-block;background:var(--green-pale);color:var(--green-deep);border:1px solid var(--green-line);border-radius:3px;padding:1px 9px;font-size:13px;font-weight:600;margin-right:7px;}
+
+/* ---- album leaves + seal badges (signature) ---- */
+.timeline{position:relative;margin-top:32px;}
+.section{margin:0 0 18px;}
+.sec-head{display:flex;align-items:center;gap:13px;margin:0 0 7px;}
+.badge{flex:none;width:34px;height:34px;border-radius:9px;background:var(--card);border:1.5px solid var(--line-strong);color:var(--ink-soft);font-family:var(--serif);font-size:17px;font-weight:600;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 2px rgba(34,42,38,.05);transition:background .4s ease,color .4s ease,border-color .4s ease,box-shadow .4s ease;}
+.badge.done{background:var(--green-deep);border-color:var(--green-deep);color:#F2EFE6;box-shadow:0 4px 12px -3px rgba(33,71,62,.55);}
+@media (prefers-reduced-motion: no-preference){.badge.done{animation:stamp .38s cubic-bezier(.34,1.4,.5,1) both;}}
+@media (max-width:560px){.badge{width:30px;height:30px;font-size:15px;border-radius:8px;}}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:23px 24px 20px;box-shadow:0 1px 2px rgba(34,42,38,.035),0 18px 38px -30px rgba(34,42,38,.2);}
+.sec-title{font-family:var(--serif);font-size:22px;font-weight:600;color:var(--green-deep);margin:0;line-height:1.3;letter-spacing:1px;}
+.sec-why{font-size:13.5px;color:var(--muted);font-style:italic;line-height:1.66;margin:0 0 19px;}
+
+/* ---- questions ---- */
+.q{margin:0 0 21px;} .q:last-child{margin-bottom:2px;}
+.q-label{font-weight:600;font-size:15.5px;line-height:1.58;margin:0 0 10px;color:var(--ink);}
+.q-label .n{color:var(--green);font-family:var(--serif);font-weight:600;margin-right:6px;font-size:15px;}
+.q-label .opt-note{font-weight:400;color:var(--faint);font-size:13px;}
+.hint{font-size:12.5px;color:var(--muted);line-height:1.64;margin:8px 0 0;padding-left:12px;border-left:2px solid var(--green-line);}
+
+.opts{display:flex;flex-wrap:wrap;gap:8px;}
+.opt{position:relative;display:inline-flex;cursor:pointer;max-width:100%;}
+.opt input{position:absolute;opacity:0;width:1px;height:1px;margin:0;}
+.opt .box{border:1px solid var(--line-strong);background:#FFFDF8;border-radius:3px;padding:9px 14px;font-size:14.5px;line-height:1.42;color:var(--ink);user-select:none;transition:background .15s,border-color .15s,color .15s,transform .12s;}
+.opt .box:hover{border-color:var(--green);background:var(--green-pale);transform:translateY(-1px);}
+.opt input:checked + .box{background:var(--green);border-color:var(--green);color:#FBF8EF;}
+.opt input:checked + .box:hover{transform:translateY(-1px);}
+.opt input:focus-visible + .box{outline:2px solid var(--green-deep);outline-offset:2px;}
+.opts.stack{flex-direction:column;align-items:stretch;}
+.opts.stack .opt{display:block;} .opts.stack .box{display:block;}
+
+input[type=text],input[type=number],textarea{width:100%;font-family:var(--sans);font-size:15px;color:var(--ink);background:#FFFDF8;border:1px solid var(--line-strong);border-radius:3px;padding:11px 13px;line-height:1.6;transition:border-color .15s,box-shadow .15s;}
+input[type=text]::placeholder,input[type=number]::placeholder,textarea::placeholder{color:#AEB2A7;}
+input:focus,textarea:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px var(--green-pale);}
+textarea{resize:vertical;min-height:76px;}
+.mt{margin-top:10px;}
+.pair{display:flex;gap:12px;flex-wrap:wrap;} .pair > div{flex:1 1 150px;}
+.minilabel{font-size:12.5px;color:var(--muted);margin-bottom:5px;}
+
+/* ---- conditional follow-up ---- */
+.followup{display:none;margin:14px 0 6px;padding:16px 17px 6px;border-left:2px solid var(--green);background:var(--green-pale);border-radius:0 4px 4px 0;}
+.followup.show{display:block;}
+@media (prefers-reduced-motion: no-preference){.followup.show{animation:slidein .34s cubic-bezier(.4,0,.2,1) both;}}
+.ftag{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:600;color:var(--green-deep);letter-spacing:1.5px;margin-bottom:12px;}
+.ftag::before{content:'';width:5px;height:5px;background:var(--green-deep);border-radius:1px;transform:rotate(45deg);}
+
+/* ---- ranking ---- */
+.rank{display:flex;flex-direction:column;gap:9px;}
+.rank-item{display:flex;align-items:center;gap:12px;background:#FFFDF8;border:1px solid var(--line-strong);border-radius:4px;padding:12px 14px;cursor:pointer;text-align:left;font-family:var(--sans);font-size:14.5px;color:var(--ink);width:100%;transition:background .15s,border-color .15s,transform .12s;}
+.rank-item:hover{border-color:var(--green);background:var(--green-pale);transform:translateY(-1px);}
+.rank-item.on{border-color:var(--green-deep);background:#FFFDF8;}
+.rank-num{flex:none;width:27px;height:27px;border-radius:6px;border:1.5px dashed var(--line-strong);color:var(--faint);font-family:var(--serif);font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .18s;}
+.rank-item.on .rank-num{background:var(--green-deep);border-style:solid;border-color:var(--green-deep);color:#F2EFE6;}
+.rank-reset{align-self:flex-start;margin-top:3px;background:transparent;border:none;color:var(--green);font-family:var(--sans);font-size:13px;cursor:pointer;padding:3px 0;border-bottom:1px solid transparent;transition:border-color .15s;}
+.rank-reset:hover{border-bottom-color:var(--green);}
+
+/* ---- finish / warn / output ---- */
+.finish{margin-top:16px;}
+.gen-btn{appearance:none;border:none;cursor:pointer;width:100%;font-family:var(--serif);font-size:19px;letter-spacing:5px;color:#F2EFE6;padding:17px 26px;border-radius:4px;background:var(--green-deep);box-shadow:0 10px 24px -12px rgba(33,71,62,.7);transition:transform .08s,box-shadow .2s,background .2s;}
+.gen-btn:hover{background:#1B3D35;box-shadow:0 14px 30px -12px rgba(33,71,62,.8);}
+.gen-btn:active{transform:translateY(1px);}
+.gen-btn:focus-visible{outline:3px solid var(--green);outline-offset:3px;}
+
+.warn{display:none;margin-top:16px;background:var(--amber-soft);border:1px solid var(--amber-line);border-radius:4px;padding:18px 19px;}
+.warn.show{display:block;}
+@media (prefers-reduced-motion: no-preference){.warn.show{animation:slidein .3s ease both;}}
+.warn h3{font-family:var(--serif);color:var(--amber);font-size:16.5px;font-weight:600;margin:0 0 7px;letter-spacing:.5px;}
+.warn p{margin:0 0 12px;font-size:13.5px;color:#6a5a33;line-height:1.62;}
+.warn-list{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 15px;}
+.warn-chip{background:#FFFDF8;border:1px solid var(--amber-line);border-radius:3px;padding:6px 11px;font-size:12.5px;color:#6a5a33;cursor:pointer;transition:background .15s,border-color .15s,transform .12s;}
+.warn-chip:hover{background:#fff;border-color:var(--amber);transform:translateY(-1px);}
+.warn-actions{display:flex;gap:10px;flex-wrap:wrap;}
+.btn-back{appearance:none;cursor:pointer;background:var(--amber);color:#fff;border:none;font-family:var(--sans);font-size:14px;font-weight:600;padding:10px 18px;border-radius:3px;transition:background .15s;}
+.btn-back:hover{background:#946823;}
+.btn-force{appearance:none;cursor:pointer;background:transparent;color:#6a5a33;border:1.5px solid var(--amber-line);font-family:var(--sans);font-size:14px;padding:10px 18px;border-radius:3px;transition:background .15s;}
+.btn-force:hover{background:#fff;}
+
+.flash{animation:flashq 1.6s ease;border-radius:3px;}
+
+#output{display:none;margin-top:20px;} #output.show{display:block;}
+@media (prefers-reduced-motion: no-preference){#output.show{animation:rise .4s ease both;}}
+.out-head{font-family:var(--serif);color:var(--green-deep);font-size:17px;font-weight:600;margin:0 0 9px;letter-spacing:.5px;}
+#summary{width:100%;min-height:340px;font-family:var(--sans);font-size:13px;line-height:1.7;color:var(--ink);background:#FFFDF8;border:1px solid var(--line-strong);border-radius:4px;padding:15px 16px;resize:vertical;}
+.copy-row{display:flex;gap:11px;margin-top:11px;align-items:center;flex-wrap:wrap;}
+.copy-btn{appearance:none;cursor:pointer;background:var(--green);color:#F2EFE6;border:none;font-family:var(--sans);font-size:15px;font-weight:600;padding:11px 22px;border-radius:3px;transition:background .15s,transform .08s;}
+.copy-btn:hover{background:#2C5A50;} .copy-btn:active{transform:translateY(1px);}
+.copy-btn:focus-visible{outline:2px solid var(--green-deep);outline-offset:2px;}
+.copied{color:var(--green);font-size:13.5px;font-weight:600;}
+
+.vow{margin-top:36px;border-top:1px solid var(--line);padding-top:19px;font-size:12.5px;color:var(--muted);line-height:1.85;}
+.vow b{color:var(--green-deep);font-weight:600;font-family:var(--serif);}
+
+/* ---- motto ---- */
+.motto{font-family:var(--serif);font-size:16.5px;letter-spacing:4px;color:var(--green-deep);margin:0 0 12px;display:flex;align-items:center;gap:12px;}
+.motto::before{content:'';flex:none;width:18px;height:1px;background:var(--green);}
+
+/* ---- motion: ink, reveal, press ---- */
+@keyframes ink{from{opacity:0;filter:blur(16px);transform:scale(1.08) rotate(-2deg);}to{opacity:.04;filter:blur(0);transform:none;}}
+@keyframes drawline{from{width:0;}to{width:46px;}}
+@keyframes pick{0%{transform:scale(.95);}55%{transform:scale(1.035);}100%{transform:scale(1);}}
+@keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(52,104,93,0);}50%{box-shadow:0 0 0 4px rgba(52,104,93,.18);}}
+.card{transition:border-color .35s ease,box-shadow .35s ease;}
+.card:focus-within{border-color:var(--green-line);box-shadow:0 1px 2px rgba(34,42,38,.04),0 22px 44px -28px rgba(33,71,62,.32);}
+@media (prefers-reduced-motion: no-preference){
+  .hero-mark{animation:ink 1.8s cubic-bezier(.2,.7,.2,1) both;}
+  .eyebrow{animation:rise .6s ease .05s both;}
+  .eyebrow::after{animation:drawline .9s cubic-bezier(.4,0,.2,1) .35s both;}
+  .hero h1{animation:rise .7s ease .14s both;}
+  .motto{animation:rise .7s ease .3s both;}
+  .hero .tag{animation:rise .7s ease .42s both;}
+  .intro{animation:rise .7s ease .55s both;}
+  html.reveal-on .section{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);}
+  html.reveal-on .section.in{opacity:1;transform:none;}
+  .opt input:checked + .box{animation:pick .28s cubic-bezier(.34,1.4,.5,1);}
+  .rank-item.on .rank-num{animation:stamp .34s cubic-bezier(.34,1.4,.5,1) both;}
+  .gen-btn:hover{transform:translateY(-1px);}
+  .prog-track.full{animation:glow 1.6s ease 2;}
+}
+@media (max-width:480px){
+  body{font-size:15.5px;}
+  .hero h1{font-size:26px;}
+  .hero-mark{font-size:150px;top:-32px;}
+  .sec-title{font-size:19.5px;}
+  .wrap{padding:26px 16px 64px;}
+  .gen-btn{letter-spacing:3px;}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="topbar-inner">
+  <div class="seal-sm">知衢</div>
+  <div class="prog"><div class="prog-track"><div class="prog-fill" id="fill"></div></div><div class="prog-pct" id="pct">0%</div></div>
+</div></div>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="hero-mark" aria-hidden="true">衢</div>
+    <p class="eyebrow">知衢 · 求职版</p>
+    <h1>求职 · 自我盘点</h1>
+    <p class="motto">知其所往，方行其衢。</p>
+    <p class="tag">专科、本科、硕士都适用。找一份工作内容、收入、城市、节奏都合适的工作。约 15 分钟。</p>
+  </div>
+
+  <div class="intro">
+    <p class="lede">找工作不只是找"一份工作"。</p>
+    <p>是找内容、收入、节奏、城市都合适、自己也做得好的位置；同样的月薪，在不同城市、不同单位、不同岗位上，过的日子完全不一样。所以这份问卷先问你现在在哪、擅长什么、想要什么样的生活，再谈具体投哪些岗位。</p>
+    <hr class="rule">
+    <p>问卷多在求职开始前或进行中填；到了关键节点（开始投递、拿到 offer、想跳槽），可以回来改几处、重新生成。问卷共九节（第六节"方向与状态"可选），每节开头有一句"<b>为什么问这个</b>"。<b>有些题会随你的选择追问</b>，比如手里有多个 offer 在比较，下面会问每个 offer 的细节。不确定的可以留空。</p>
+    <p><span class="how">最后一步</span>点击"生成我的画像"，复制那段文字，发给装了知衢的 AI 即可。</p>
+  </div>
+
+  <div class="timeline">
+
+    <section class="section" data-title="你现在的位置"><div class="card">
+      <div class="sec-head"><div class="badge">一</div><div class="sec-title">你现在的位置</div></div>
+      <p class="sec-why">学历、阶段和城市决定了能投哪些岗位、现在最该做什么。</p>
+
+      <div class="q"><div class="q-label">怎么称呼你？<span class="opt-note">（可留空）</span></div>
+        <input type="text" id="name" placeholder="昵称即可"></div>
+
+      <div class="q req"><div class="q-label">最高学历</div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="degree" value="专科"><span class="box">专科</span></label>
+          <label class="opt"><input type="radio" name="degree" value="本科"><span class="box">本科</span></label>
+          <label class="opt"><input type="radio" name="degree" value="硕士"><span class="box">硕士</span></label>
+          <label class="opt"><input type="radio" name="degree" value="博士"><span class="box">博士</span></label>
+          <label class="opt"><input type="radio" name="degree" value="其他"><span class="box">其他</span></label>
+        </div>
+        <input class="mt" type="text" id="school_major" placeholder="学校名与专业（选填）"></div>
+
+      <div class="q req"><div class="q-label">学校层次</div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="school_tier" value="985"><span class="box">985</span></label>
+          <label class="opt"><input type="radio" name="school_tier" value="211"><span class="box">211</span></label>
+          <label class="opt"><input type="radio" name="school_tier" value="双一流（非985/211）"><span class="box">双一流（非 985/211）</span></label>
+          <label class="opt"><input type="radio" name="school_tier" value="普通公办本科"><span class="box">普通公办本科</span></label>
+          <label class="opt"><input type="radio" name="school_tier" value="民办或独立学院"><span class="box">民办或独立学院</span></label>
+          <label class="opt"><input type="radio" name="school_tier" value="高职专科（含双高院校）"><span class="box">高职专科（含"双高"院校）</span></label>
+          <label class="opt"><input type="radio" name="school_tier" value="境外或中外合作"><span class="box">境外或中外合作</span></label>
+        </div></div>
+
+      <div class="q req"><div class="q-label">你现在是？</div>
+        <div class="opts stack">
+          <label class="opt"><input type="radio" name="stage_now" value="在校，明年毕业"><span class="box">在校，明年毕业</span></label>
+          <label class="opt"><input type="radio" name="stage_now" value="应届毕业生"><span class="box">应届毕业生</span></label>
+          <label class="opt"><input type="radio" name="stage_now" value="毕业1—3年"><span class="box">毕业 1—3 年</span></label>
+          <label class="opt"><input type="radio" name="stage_now" value="工作3年以上"><span class="box">工作 3 年以上</span></label>
+          <label class="opt"><input type="radio" name="stage_now" value="目前没有工作"><span class="box">目前没有工作</span></label>
+        </div></div>
+
+      <div class="q req"><div class="q-label">求职进行到哪一步？</div>
+        <div class="opts stack">
+          <label class="opt"><input type="radio" name="job_stage" value="还没开始"><span class="box">还没开始</span></label>
+          <label class="opt"><input type="radio" name="job_stage" value="正在准备简历和投递"><span class="box">正在准备简历和投递</span></label>
+          <label class="opt"><input type="radio" name="job_stage" value="已经在面试"><span class="box">已经在面试</span></label>
+          <label class="opt"><input type="radio" name="job_stage" value="手里有offer在比较"><span class="box">手里有 offer 在比较</span></label>
+          <label class="opt"><input type="radio" name="job_stage" value="在职，考虑跳槽"><span class="box">在职，考虑跳槽</span></label>
+        </div></div>
+
+      <div class="followup" data-when="job_stage=手里有offer在比较">
+        <span class="ftag">追问 · 比较 offer</span>
+        <div class="q req"><div class="q-label">列出每个 offer：公司、岗位、城市、月薪×月数、五险一金比例、截止确认日期</div>
+          <textarea id="offers_list" placeholder="例如：A 公司，产品岗，杭州，15K×14 薪，六险二金，9 月 20 日前确认"></textarea></div>
+      </div>
+
+      <div class="followup" data-when="job_stage=在职，考虑跳槽">
+        <span class="ftag">追问 · 在职跳槽</span>
+        <div class="q req"><div class="q-label">现在的工作（行业、岗位、税前月薪、工作年限）</div>
+          <input type="text" id="current_job" placeholder="例如：教育行业，课程顾问，税前 8K，做了 2 年"></div>
+        <div class="q req"><div class="q-label">想离开的主要原因</div>
+          <textarea id="leave_reason" placeholder="例如：加班太多；看不到晋升空间；薪资涨不动"></textarea></div>
+      </div>
+
+      <div class="q req"><div class="q-label">现在所在城市</div>
+        <input type="text" id="city_now" placeholder="例如：武汉"></div>
+    </div></section>
+
+    <section class="section" data-title="能力与经历"><div class="card">
+      <div class="sec-head"><div class="badge">二</div><div class="sec-title">能力与经历</div></div>
+      <p class="sec-why">招聘看的是你做过什么、会什么；你擅长的事，也往往是你做得久、做得开心的事。</p>
+
+      <div class="q req"><div class="q-label">实习或工作经历</div>
+        <textarea id="work_exp" placeholder="写最有代表性的一两段：在哪、做什么、结果如何；没有就写“没有”"></textarea></div>
+
+      <div class="q"><div class="q-label">证书与技能<span class="opt-note">（选填，可多选）</span></div>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="certs" value="计算机等级或编程"><span class="box">计算机等级或编程</span></label>
+          <label class="opt"><input type="checkbox" name="certs" value="外语（四六级、雅思等）"><span class="box">外语（四六级、雅思等）</span></label>
+          <label class="opt"><input type="checkbox" name="certs" value="会计或财经类证书"><span class="box">会计或财经类证书</span></label>
+          <label class="opt"><input type="checkbox" name="certs" value="教师资格证"><span class="box">教师资格证</span></label>
+          <label class="opt"><input type="checkbox" name="certs" value="驾驶证"><span class="box">驾驶证</span></label>
+          <label class="opt"><input type="checkbox" name="certs" value="职业技能等级证书"><span class="box">职业技能等级证书</span></label>
+          <label class="opt"><input type="checkbox" name="certs" value="法律职业资格"><span class="box">法律职业资格</span></label>
+          <label class="opt"><input type="checkbox" name="certs" value="医护类执业资格"><span class="box">医护类执业资格</span></label>
+          <label class="opt"><input type="checkbox" name="certs" value="暂时没有"><span class="box">暂时没有</span></label>
+        </div>
+        <input class="mt" type="text" id="certs_detail" placeholder="具体名称或等级（选填）"></div>
+
+      <div class="q req"><div class="q-label">你比较擅长的事<span class="opt-note">（可多选）</span></div>
+        <div class="opts stack">
+          <label class="opt"><input type="checkbox" name="strength" value="和人沟通、说服别人"><span class="box">和人沟通、说服别人</span></label>
+          <label class="opt"><input type="checkbox" name="strength" value="写作和表达"><span class="box">写作和表达</span></label>
+          <label class="opt"><input type="checkbox" name="strength" value="数据、数字和分析"><span class="box">数据、数字和分析</span></label>
+          <label class="opt"><input type="checkbox" name="strength" value="动手操作、修理、做东西"><span class="box">动手操作、修理、做东西</span></label>
+          <label class="opt"><input type="checkbox" name="strength" value="组织协调、带团队"><span class="box">组织协调、带团队</span></label>
+          <label class="opt"><input type="checkbox" name="strength" value="设计、创意、审美"><span class="box">设计、创意、审美</span></label>
+          <label class="opt"><input type="checkbox" name="strength" value="照顾和帮助别人"><span class="box">照顾和帮助别人</span></label>
+          <label class="opt"><input type="checkbox" name="strength" value="钻研问题、查资料"><span class="box">钻研问题、查资料</span></label>
+          <label class="opt"><input type="checkbox" name="strength" value="按流程把事情做细"><span class="box">按流程把事情做细</span></label>
+        </div></div>
+
+      <div class="q"><div class="q-label">明显不擅长或不想做的事<span class="opt-note">（选填）</span></div>
+        <input type="text" id="weakness" placeholder="例如：不擅长和陌生人打交道；不想做重复性录入工作"></div>
+    </div></section>
+
+    <section class="section" data-title="想做什么样的工作"><div class="card">
+      <div class="sec-head"><div class="badge">三</div><div class="sec-title">想做什么样的工作</div></div>
+      <p class="sec-why">工资只是一部分。每天具体在做什么、和什么样的人打交道、节奏快慢，决定了你能不能做得久。</p>
+
+      <div class="q req"><div class="q-label">你更喜欢哪类工作内容<span class="opt-note">（可多选）</span></div>
+        <div class="opts stack">
+          <label class="opt"><input type="checkbox" name="content_pref" value="动手做东西、操作设备、户外或现场"><span class="box">动手做东西、操作设备、户外或现场</span></label>
+          <label class="opt"><input type="checkbox" name="content_pref" value="研究、分析、解决复杂问题"><span class="box">研究、分析、解决复杂问题</span></label>
+          <label class="opt"><input type="checkbox" name="content_pref" value="创作、设计、表达"><span class="box">创作、设计、表达</span></label>
+          <label class="opt"><input type="checkbox" name="content_pref" value="教学、照顾、服务他人"><span class="box">教学、照顾、服务他人</span></label>
+          <label class="opt"><input type="checkbox" name="content_pref" value="带团队、谈判、销售、做决策"><span class="box">带团队、谈判、销售、做决策</span></label>
+          <label class="opt"><input type="checkbox" name="content_pref" value="按规则处理数据、文件、流程"><span class="box">按规则处理数据、文件、流程</span></label>
+        </div></div>
+
+      <div class="q req"><div class="q-label">更喜欢的工作场所</div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="workplace" value="办公室"><span class="box">办公室</span></label>
+          <label class="opt"><input type="radio" name="workplace" value="工厂或现场"><span class="box">工厂或现场</span></label>
+          <label class="opt"><input type="radio" name="workplace" value="外勤、到处跑"><span class="box">外勤、到处跑</span></label>
+          <label class="opt"><input type="radio" name="workplace" value="门店或窗口服务"><span class="box">门店或窗口服务</span></label>
+          <label class="opt"><input type="radio" name="workplace" value="远程或自由职业"><span class="box">远程或自由职业</span></label>
+          <label class="opt"><input type="radio" name="workplace" value="都可以"><span class="box">都可以</span></label>
+        </div></div>
+
+      <div class="q req"><div class="q-label">你想进哪类单位<span class="opt-note">（可多选）</span></div>
+        <div class="opts stack">
+          <label class="opt"><input type="checkbox" name="org_type" value="公务员"><span class="box">公务员</span></label>
+          <label class="opt"><input type="checkbox" name="org_type" value="事业单位（学校、医院等）"><span class="box">事业单位（学校、医院等）</span></label>
+          <label class="opt"><input type="checkbox" name="org_type" value="国企央企"><span class="box">国企央企</span></label>
+          <label class="opt"><input type="checkbox" name="org_type" value="大型民企"><span class="box">大型民企</span></label>
+          <label class="opt"><input type="checkbox" name="org_type" value="中小企业"><span class="box">中小企业</span></label>
+          <label class="opt"><input type="checkbox" name="org_type" value="外企"><span class="box">外企</span></label>
+          <label class="opt"><input type="checkbox" name="org_type" value="创业公司"><span class="box">创业公司</span></label>
+          <label class="opt"><input type="checkbox" name="org_type" value="自己创业或自由职业"><span class="box">自己创业或自由职业</span></label>
+          <label class="opt"><input type="checkbox" name="org_type" value="还没想好"><span class="box">还没想好</span></label>
+        </div></div>
+
+      <div class="q req"><div class="q-label">能接受的加班程度</div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="overtime" value="基本不加班"><span class="box">基本不加班</span></label>
+          <label class="opt"><input type="radio" name="overtime" value="偶尔加班"><span class="box">偶尔加班</span></label>
+          <label class="opt"><input type="radio" name="overtime" value="经常加班也行，只要回报高"><span class="box">经常加班也行，只要回报高</span></label>
+        </div></div>
+
+      <div class="q"><div class="q-label">能接受出差或外派吗</div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="travel" value="能"><span class="box">能</span></label>
+          <label class="opt"><input type="radio" name="travel" value="偶尔可以"><span class="box">偶尔可以</span></label>
+          <label class="opt"><input type="radio" name="travel" value="不能"><span class="box">不能</span></label>
+        </div></div>
+
+      <div class="q"><div class="q-label">有没有已经想投的岗位或公司<span class="opt-note">（选填）</span></div>
+        <input type="text" id="target_job" placeholder="例如：某公司的市场专员岗位"></div>
+    </div></section>
+
+    <section class="section" data-title="钱与城市"><div class="card">
+      <div class="sec-head"><div class="badge">四</div><div class="sec-title">钱与城市</div></div>
+      <p class="sec-why">同样的月薪，在不同城市、不同的五险一金和年终奖下，到手和能攒下的钱差别很大。先说出你的底线。</p>
+
+      <div class="q req"><div class="q-label">能接受的最低月薪（税前，元）</div>
+        <input type="text" id="min_salary" placeholder="例如：6000"></div>
+
+      <div class="q"><div class="q-label">期望月薪（税前，元）<span class="opt-note">（选填）</span></div>
+        <input type="text" id="target_salary" placeholder="例如：8000—10000"></div>
+
+      <div class="q req"><div class="q-label">钱和稳定之间你更看重</div>
+        <div class="opts stack">
+          <label class="opt"><input type="radio" name="money_vs_stable" value="现金收入高，波动大也行"><span class="box">现金收入高，波动大也行</span></label>
+          <label class="opt"><input type="radio" name="money_vs_stable" value="两者之间"><span class="box">两者之间</span></label>
+          <label class="opt"><input type="radio" name="money_vs_stable" value="稳定、福利好，钱少一点也行"><span class="box">稳定、福利好，钱少一点也行</span></label>
+        </div></div>
+
+      <div class="q req"><div class="q-label">城市打算</div>
+        <div class="opts stack">
+          <label class="opt"><input type="radio" name="city_plan" value="留在现在的城市"><span class="box">留在现在的城市</span></label>
+          <label class="opt"><input type="radio" name="city_plan" value="回家乡或离家近"><span class="box">回家乡或离家近</span></label>
+          <label class="opt"><input type="radio" name="city_plan" value="去一线或新一线城市"><span class="box">去一线或新一线城市</span></label>
+          <label class="opt"><input type="radio" name="city_plan" value="哪里机会好去哪里"><span class="box">哪里机会好去哪里</span></label>
+        </div>
+        <input class="mt" type="text" id="city_specific" placeholder="具体城市（选填）"></div>
+
+      <div class="q"><div class="q-label">有没有落户需求</div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="hukou" value="需要"><span class="box">需要</span></label>
+          <label class="opt"><input type="radio" name="hukou" value="最好有"><span class="box">最好有</span></label>
+          <label class="opt"><input type="radio" name="hukou" value="不需要"><span class="box">不需要</span></label>
+          <label class="opt"><input type="radio" name="hukou" value="不清楚"><span class="box">不清楚</span></label>
+        </div></div>
+    </div></section>
+
+    <section class="section" data-title="现实约束"><div class="card">
+      <div class="sec-head"><div class="badge">五</div><div class="sec-title">现实约束</div></div>
+      <p class="sec-why">家里的经济情况、健康和家人的期望，常常比兴趣更早决定你能等多久、能冒多大的险。</p>
+
+      <div class="q req"><div class="q-label">你多快需要有收入</div>
+        <div class="opts stack">
+          <label class="opt"><input type="radio" name="urgency" value="马上，越快越好"><span class="box">马上，越快越好</span></label>
+          <label class="opt"><input type="radio" name="urgency" value="几个月内"><span class="box">几个月内</span></label>
+          <label class="opt"><input type="radio" name="urgency" value="可以等半年以上，找到合适的再说"><span class="box">可以等半年以上，找到合适的再说</span></label>
+        </div></div>
+
+      <div class="q"><div class="q-label">身体或其他方面的限制<span class="opt-note">（选填）</span></div>
+        <input type="text" id="limitation" placeholder="例如：不能久站；不能频繁出差"></div>
+
+      <div class="q"><div class="q-label">家里对你工作的期望<span class="opt-note">（选填）</span></div>
+        <textarea id="family_expect" placeholder="如果和你的想法不一样，也请如实写。"></textarea></div>
+    </div></section>
+
+    <section class="section" data-title="方向与状态（可选）"><div class="card">
+      <div class="sec-head"><div class="badge">六</div><div class="sec-title">方向与状态 <span class="opt-note">（可选）</span></div></div>
+      <p class="sec-why">很多人手里已经有几个想投的公司或岗位，却说不清为什么；也有人投了很多没有回音，越来越没底。这一节帮你看清卡在哪：大多是很普通的烦恼，不代表你有什么问题。整节都可以跳过。作答只保存在你自己的浏览器里，发不发给 AI 由你决定。</p>
+
+      <div class="q"><div class="q-label">已经有的目标岗位或公司（最多三个），分别是谁提出的？</div>
+        <input type="text" id="tgt1" placeholder="目标 1：公司与岗位">
+        <div class="opts mt">
+          <label class="opt"><input type="checkbox" name="tgt1_by" value="自己"><span class="box">自己</span></label>
+          <label class="opt"><input type="checkbox" name="tgt1_by" value="父母"><span class="box">父母</span></label>
+          <label class="opt"><input type="checkbox" name="tgt1_by" value="老师或学长"><span class="box">老师 / 学长</span></label>
+          <label class="opt"><input type="checkbox" name="tgt1_by" value="看名气"><span class="box">看名气</span></label>
+          <label class="opt"><input type="checkbox" name="tgt1_by" value="同学都投"><span class="box">同学都投</span></label>
+        </div></div>
+      <div class="q"><div class="q-label">目标 2</div>
+        <input type="text" id="tgt2" placeholder="公司与岗位（选填）">
+        <div class="opts mt">
+          <label class="opt"><input type="checkbox" name="tgt2_by" value="自己"><span class="box">自己</span></label>
+          <label class="opt"><input type="checkbox" name="tgt2_by" value="父母"><span class="box">父母</span></label>
+          <label class="opt"><input type="checkbox" name="tgt2_by" value="老师或学长"><span class="box">老师 / 学长</span></label>
+          <label class="opt"><input type="checkbox" name="tgt2_by" value="看名气"><span class="box">看名气</span></label>
+          <label class="opt"><input type="checkbox" name="tgt2_by" value="同学都投"><span class="box">同学都投</span></label>
+        </div></div>
+      <div class="q"><div class="q-label">目标 3</div>
+        <input type="text" id="tgt3" placeholder="公司与岗位（选填）">
+        <div class="opts mt">
+          <label class="opt"><input type="checkbox" name="tgt3_by" value="自己"><span class="box">自己</span></label>
+          <label class="opt"><input type="checkbox" name="tgt3_by" value="父母"><span class="box">父母</span></label>
+          <label class="opt"><input type="checkbox" name="tgt3_by" value="老师或学长"><span class="box">老师 / 学长</span></label>
+          <label class="opt"><input type="checkbox" name="tgt3_by" value="看名气"><span class="box">看名气</span></label>
+          <label class="opt"><input type="checkbox" name="tgt3_by" value="同学都投"><span class="box">同学都投</span></label>
+        </div></div>
+      <div class="q"><div class="q-label">这些目标，你最看中的是什么？<span class="opt-note">（选填）</span></div>
+        <input type="text" id="tgt_why" placeholder="例如：名气；离家近；钱多；说不上来"></div>
+
+      <div class="q"><div class="q-label">你觉得自己卡在哪？<span class="opt-note">（可多选）</span></div>
+        <div class="opts stack">
+          <label class="opt"><input type="checkbox" name="stuck" value="不知道自己想要什么"><span class="box">不知道自己想要什么</span></label>
+          <label class="opt"><input type="checkbox" name="stuck" value="不了解工作实际内容"><span class="box">不了解这些工作每天实际在做什么</span></label>
+          <label class="opt"><input type="checkbox" name="stuck" value="听到的说法互相矛盾"><span class="box">听到的说法互相矛盾，不知道信谁</span></label>
+          <label class="opt"><input type="checkbox" name="stuck" value="我想要的和家里想要的不一样"><span class="box">我想要的和家里想要的不一样</span></label>
+          <label class="opt"><input type="checkbox" name="stuck" value="几个都想要，舍不得放弃"><span class="box">几个都想要，舍不得放弃</span></label>
+          <label class="opt"><input type="checkbox" name="stuck" value="怕选错，一直不敢定"><span class="box">怕选错，一直不敢定</span></label>
+          <label class="opt"><input type="checkbox" name="stuck" value="觉得选什么都差不多，提不起劲"><span class="box">觉得选什么都差不多，提不起劲</span></label>
+          <label class="opt"><input type="checkbox" name="stuck" value="总拿自己和同学比"><span class="box">总拿自己和同学比，越比越慌</span></label>
+          <label class="opt"><input type="checkbox" name="stuck" value="怕让家里失望"><span class="box">怕让家里失望</span></label>
+          <label class="opt"><input type="checkbox" name="stuck" value="已经投入很多，不甘心换方向"><span class="box">已经投入很多，不甘心换方向</span></label>
+          <label class="opt"><input type="checkbox" name="stuck" value="总想挑到最好的那个"><span class="box">总想挑到"最好"的那个</span></label>
+          <label class="opt"><input type="checkbox" name="stuck" value="知道该做什么，但一直拖着"><span class="box">知道该做什么，但一直拖着</span></label>
+          <label class="opt"><input type="checkbox" name="stuck" value="担心就业形势不好"><span class="box">担心现在的就业形势</span></label>
+          <label class="opt"><input type="checkbox" name="stuck" value="投了很多没回音"><span class="box">投了很多没回音</span></label>
+          <label class="opt"><input type="checkbox" name="stuck" value="面试总是挂"><span class="box">面试总是挂</span></label>
+          <label class="opt"><input type="checkbox" name="stuck" value="不知道自己能做什么工作"><span class="box">不知道自己能做什么工作</span></label>
+          <label class="opt"><input type="checkbox" name="stuck" value="其实不太迷茫"><span class="box">其实不太迷茫</span></label>
+        </div></div>
+
+      <div class="q"><div class="q-label">下面四句话，哪些符合你？<span class="opt-note">（可多选）</span></div>
+        <div class="opts stack">
+          <label class="opt"><input type="checkbox" name="adapt" value="我会想几年后的自己"><span class="box">我会想几年后的自己会在做什么</span></label>
+          <label class="opt"><input type="checkbox" name="adapt" value="我觉得这条路我能做主"><span class="box">我觉得这条路我自己能做主</span></label>
+          <label class="opt"><input type="checkbox" name="adapt" value="我会主动去了解陌生的方向"><span class="box">我会主动去了解陌生的方向</span></label>
+          <label class="opt"><input type="checkbox" name="adapt" value="我相信需要的东西我学得会"><span class="box">我相信需要的东西我学得会</span></label>
+        </div></div>
+
+      <div class="q"><div class="q-label">不考虑钱和别人的看法，三年后一个普通的工作日，你希望自己在做什么？<span class="opt-note">（选填）</span></div>
+        <textarea id="future_day" placeholder="越具体越好：在哪、和谁、做什么事"></textarea></div>
+
+      <div class="q"><div class="q-label">最近一次做到忘了时间的事是什么？<span class="opt-note">（选填）</span></div>
+        <input type="text" id="flow" placeholder="学习、工作、爱好都算"></div>
+
+      <div class="q"><div class="q-label">你最怕的结果是什么？一直拖着没决定，真正的原因是什么？<span class="opt-note">（选填）</span></div>
+        <textarea id="fear" placeholder="写给自己看的，可以很直白"></textarea></div>
+
+      <div class="q"><div class="q-label">最近两周，你的睡眠、情绪和精力怎么样？</div>
+        <div class="opts stack">
+          <label class="opt"><input type="radio" name="mood" value="基本正常"><span class="box">基本正常</span></label>
+          <label class="opt"><input type="radio" name="mood" value="有些压力，但能应付"><span class="box">有些压力，但能应付</span></label>
+          <label class="opt"><input type="radio" name="mood" value="经常低落或焦虑，已经影响学习和生活"><span class="box">经常低落或焦虑，已经影响学习和生活</span></label>
+          <label class="opt"><input type="radio" name="mood" value="不想说"><span class="box">不想说</span></label>
+        </div></div>
+      <div class="followup" data-when="mood=经常低落或焦虑，已经影响学习和生活">
+        <span class="ftag">想对你说</span>
+        <p class="hint">谢谢你愿意写下来。这不软弱，也不是一份问卷能解决的事。建议找学校的心理咨询中心聊一聊，也可以拨打全国统一心理援助热线 <b>12356</b>。如果有伤害自己的念头，或者正处在危险中，请立即拨打 <b>120</b> 或 <b>110</b>，并告诉身边信任的人。</p>
+      </div>
+    </div></section>
+
+    <section class="section" data-title="求职方法"><div class="card">
+      <div class="sec-head"><div class="badge">七</div><div class="sec-title">求职方法</div></div>
+      <p class="sec-why">找工作的渠道和方法对结果影响很大；知道你卡在哪一步，才好对症调整。</p>
+
+      <div class="q"><div class="q-label">主要通过哪些渠道找工作<span class="opt-note">（选填，可多选）</span></div>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="channel" value="学校就业网或宣讲会"><span class="box">学校就业网或宣讲会</span></label>
+          <label class="opt"><input type="checkbox" name="channel" value="公司官网"><span class="box">公司官网</span></label>
+          <label class="opt"><input type="checkbox" name="channel" value="招聘App"><span class="box">招聘 App</span></label>
+          <label class="opt"><input type="checkbox" name="channel" value="熟人推荐"><span class="box">熟人推荐</span></label>
+          <label class="opt"><input type="checkbox" name="channel" value="公务员或事业单位考试"><span class="box">公务员或事业单位考试</span></label>
+          <label class="opt"><input type="checkbox" name="channel" value="还没开始"><span class="box">还没开始</span></label>
+        </div></div>
+
+      <div class="q"><div class="q-label">到目前投了多少、收到几次面试、结果如何<span class="opt-note">（选填）</span></div>
+        <input type="text" id="apply_stats" placeholder="例如：投了 30 家，面试 3 次，都在等结果"></div>
+
+      <div class="q"><div class="q-label">简历有人帮你看过吗</div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="resume_reviewed" value="有"><span class="box">有</span></label>
+          <label class="opt"><input type="radio" name="resume_reviewed" value="没有"><span class="box">没有</span></label>
+          <label class="opt"><input type="radio" name="resume_reviewed" value="还没写"><span class="box">还没写</span></label>
+        </div></div>
+    </div></section>
+
+    <section class="section" data-title="优先级排序"><div class="card">
+      <div class="sec-head"><div class="badge">八</div><div class="sec-title">优先级排序</div></div>
+      <p class="sec-why">这是整份问卷的题眼。几样都想要的时候，排序决定取舍；后面比较岗位和 offer 就按这个顺序定权重。</p>
+
+      <div class="q req" id="rankq"><div class="q-label">按重要程度，依次点选下面七项（先点最重要的）</div>
+        <p class="hint" style="margin-top:0;margin-bottom:11px;">点一下 = 排上序号；再点一下 = 取消。</p>
+        <div class="rank" id="rank">
+          <button type="button" class="rank-item" data-id="收入"><span class="rank-num">–</span><span>收入</span></button>
+          <button type="button" class="rank-item" data-id="工作内容"><span class="rank-num">–</span><span>工作内容 · 做得开心</span></button>
+          <button type="button" class="rank-item" data-id="稳定"><span class="rank-num">–</span><span>稳定 · 不怕被裁</span></button>
+          <button type="button" class="rank-item" data-id="成长与前景"><span class="rank-num">–</span><span>成长 · 行业前景</span></button>
+          <button type="button" class="rank-item" data-id="城市"><span class="rank-num">–</span><span>城市 · 离家远近</span></button>
+          <button type="button" class="rank-item" data-id="工作与生活平衡"><span class="rank-num">–</span><span>工作与生活平衡</span></button>
+          <button type="button" class="rank-item" data-id="单位名气"><span class="rank-num">–</span><span>单位名气 · 说出去好听</span></button>
+        </div>
+        <button type="button" class="rank-reset" id="rankReset">清空重排</button>
+      </div>
+    </div></section>
+
+    <section class="section" data-title="心里话"><div class="card">
+      <div class="sec-head"><div class="badge">九</div><div class="sec-title">你心里的话</div></div>
+      <p class="sec-why">数据算不出你真正在乎什么。下面几句越实在越好。</p>
+
+      <div class="q"><div class="q-label">现在最纠结、最想弄明白的一件事<span class="opt-note">（选填）</span></div>
+        <textarea id="worry" placeholder="例如：到底该去大厂做销售，还是回老家考编？"></textarea></div>
+
+      <div class="q"><div class="q-label">已经听到的建议或消息<span class="opt-note">（选填）</span></div>
+        <textarea id="advice" placeholder="例如：朋友说某行业很赚钱；某机构说交钱包就业……我们会逐条核实。"></textarea></div>
+
+      <div class="q"><div class="q-label">还有什么想让顾问知道的？<span class="opt-note">（选填）</span></div>
+        <textarea id="more" placeholder="任何你觉得重要的信息。"></textarea></div>
+    </div></section>
+
+
+  </div><!-- /timeline -->
+
+  <div class="finish">
+    <button class="gen-btn" type="button" onclick="clickGenerate()">生成我的画像</button>
+
+    <div class="warn" id="warn">
+      <h3>等一下，有几处还没填</h3>
+      <p id="warnMsg"></p>
+      <div class="warn-list" id="warnList"></div>
+      <div class="warn-actions">
+        <button class="btn-back" type="button" onclick="hideWarn()">返回补填</button>
+        <button class="btn-force" type="button" onclick="doGenerate()">未填的留空，仍要生成</button>
+      </div>
+    </div>
+
+    <div id="output">
+      <p class="out-head">这段就是你的"画像"。复制它，发回去就行 ↓</p>
+      <textarea id="summary" readonly></textarea>
+      <div class="copy-row">
+        <button class="copy-btn" type="button" onclick="copySummary()">一键复制</button>
+        <span class="copied" id="copiedMsg"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="vow">
+    填完之后，请记住三句话：<br>
+    <b>一、</b>这份问卷不是官方建议，薪资、政策、招聘条件以劳动合同、用人单位书面文件与人社部门发布为准。<br>
+    <b>二、</b>用来分析的 AI 也会犯错，请务必交叉核实。<br>
+    <b>三、</b>最终的决策权和后果，永远属于你自己。
+  </div>
+</div>
+
+<script>
+  function val(id){var el=document.getElementById(id);return el&&el.value?el.value.trim():'';}
+  function radio(name){var el=document.querySelector('input[name="'+name+'"]:checked');return el?el.value:'';}
+  function checks(name){var n=document.querySelectorAll('input[name="'+name+'"]:checked'),o=[];for(var i=0;i<n.length;i++)o.push(n[i].value);return o.join('、');}
+  function f(v){return(v&&v.length)?v:'（未填）';}
+  function isVisible(el){return !!(el&&el.offsetParent!==null);}
+
+  /* ----- conditional follow-ups ----- */
+  function refreshFollowups(){
+    document.querySelectorAll('.followup').forEach(function(fu){
+      var cond=fu.getAttribute('data-when'); // name=value
+      var eq=cond.indexOf('='); var name=cond.slice(0,eq), value=cond.slice(eq+1);
+      var on=!!document.querySelector('input[name="'+name+'"][value="'+value+'"]:checked');
+      if(on){ fu.classList.add('show'); }
+      else if(fu.classList.contains('show')){
+        fu.classList.remove('show');
+        // clear its inputs so hidden answers don't linger
+        fu.querySelectorAll('input').forEach(function(i){ if(i.type==='radio'||i.type==='checkbox') i.checked=false; else i.value=''; });
+        fu.querySelectorAll('textarea').forEach(function(t){ t.value=''; });
+      }
+    });
+  }
+
+  /* ----- ranking ----- */
+  var rankOrder=[];
+  function renderRank(){
+    document.querySelectorAll('#rank .rank-item').forEach(function(it){
+      var id=it.getAttribute('data-id'),pos=rankOrder.indexOf(id),num=it.querySelector('.rank-num');
+      if(pos>=0){num.textContent=(pos+1);it.classList.add('on');}else{num.textContent='–';it.classList.remove('on');}
+    });
+  }
+  document.querySelectorAll('#rank .rank-item').forEach(function(it){
+    it.addEventListener('click',function(){
+      var id=it.getAttribute('data-id'),pos=rankOrder.indexOf(id);
+      if(pos>=0)rankOrder.splice(pos,1);else rankOrder.push(id);
+      renderRank();updateProgress();saveState();
+    });
+  });
+  document.getElementById('rankReset').addEventListener('click',function(){rankOrder=[];renderRank();updateProgress();saveState();});
+  function rankText(){return rankOrder.length?rankOrder.map(function(x,i){return(i+1)+'. '+x;}).join('  >  '):'（未排序）';}
+
+  /* ----- answered? / missing / progress ----- */
+  function isAnswered(q){
+    if(q.querySelector('#rank')) return rankOrder.length>0;
+    var rad=q.querySelectorAll('input[type=radio]');
+    if(rad.length) return !!q.querySelector('input[type=radio]:checked');
+    var chk=q.querySelectorAll('input[type=checkbox]');
+    if(chk.length) return !!q.querySelector('input[type=checkbox]:checked');
+    var txt=q.querySelectorAll('input[type=text],input[type=number],textarea');
+    if(txt.length){ for(var i=0;i<txt.length;i++){ if(!txt[i].value.trim()) return false; } return true; }
+    return true;
+  }
+  function getLabel(q){
+    if(q.dataset.label) return q.dataset.label;
+    var lbl=q.querySelector('.q-label'); if(!lbl) return '某题';
+    var c=lbl.cloneNode(true); c.querySelectorAll('.opt-note').forEach(function(n){n.remove();});
+    return c.textContent.trim();
+  }
+  function visibleReqs(){ return Array.prototype.filter.call(document.querySelectorAll('.q.req'),isVisible); }
+  function getMissing(){ return visibleReqs().filter(function(q){return !isAnswered(q);}); }
+  function markSections(){
+    document.querySelectorAll('.section').forEach(function(sec){
+      var badge=sec.querySelector('.badge'); if(!badge) return;
+      var rs=Array.prototype.filter.call(sec.querySelectorAll('.q.req'),isVisible);
+      badge.classList.toggle('done', rs.length>0 && rs.every(isAnswered));
+    });
+  }
+
+  var fill=document.getElementById('fill'),pctEl=document.getElementById('pct');
+  function updateProgress(){
+    var reqs=visibleReqs(),done=0;
+    reqs.forEach(function(q){ if(isAnswered(q)) done++; });
+    var pct=reqs.length?Math.round(done/reqs.length*100):0;
+    fill.style.width=pct+'%'; pctEl.textContent=pct+'%';
+    markSections();
+  }
+  /* ----- 本地缓存：填了就存，刷新/重开页面自动读回 ----- */
+  var STORE_KEY='zhiqu_career_v1';
+  function saveState(){
+    try{
+      var d={text:{},radio:{},check:{},rank:rankOrder};
+      document.querySelectorAll('input[type=text],input[type=number],input[type=date],input[type=time],textarea').forEach(function(el){ if(el.id&&el.value) d.text[el.id]=el.value; });
+      document.querySelectorAll('input[type=radio]:checked').forEach(function(el){ if(el.name) d.radio[el.name]=el.value; });
+      document.querySelectorAll('input[type=checkbox]:checked').forEach(function(el){ if(el.name){ (d.check[el.name]=d.check[el.name]||[]).push(el.value); } });
+      localStorage.setItem(STORE_KEY, JSON.stringify(d));
+    }catch(e){/* 无痕模式/禁用存储时静默降级，不影响填写 */}
+  }
+  function restoreState(){
+    try{
+      var raw=localStorage.getItem(STORE_KEY); if(!raw) return false;
+      var d=JSON.parse(raw); if(!d) return false;
+      if(d.text) Object.keys(d.text).forEach(function(id){ var el=document.getElementById(id); if(el) el.value=d.text[id]; });
+      function setChecked(name,vals){ document.querySelectorAll('input[name="'+name+'"]').forEach(function(el){ if(vals.indexOf(el.value)>=0) el.checked=true; }); }
+      if(d.radio) Object.keys(d.radio).forEach(function(n){ setChecked(n,[d.radio[n]]); });
+      if(d.check) Object.keys(d.check).forEach(function(n){ setChecked(n,d.check[n]); });
+      if(d.rank && d.rank.length) rankOrder=d.rank.slice();
+      return true;
+    }catch(e){ return false; }
+  }
+  function clearState(){ try{ localStorage.removeItem(STORE_KEY); }catch(e){} }
+
+  document.addEventListener('change',function(){refreshFollowups();updateProgress();saveState();});
+  document.addEventListener('input',function(){updateProgress();saveState();});
+
+  /* 读回上次内容，再把分支题/排序/进度/印章一起刷新 */
+  var hadSaved=restoreState();
+  refreshFollowups(); renderRank(); updateProgress();
+  if(hadSaved) showRestoredNotice();
+
+  function showRestoredNotice(){
+    if(document.getElementById('restoredBar')) return;
+    var bar=document.createElement('div'); bar.id='restoredBar';
+    bar.style.cssText='max-width:680px;margin:14px auto 0;padding:10px 15px;background:var(--green-pale);border:1px solid var(--green);border-radius:4px;color:var(--green-deep);font-size:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;line-height:1.5;';
+    var txt=document.createElement('span'); txt.textContent='已为你恢复上次填写的内容，接着填就好。';
+    var btn=document.createElement('button'); btn.type='button'; btn.textContent='清空重填';
+    btn.style.cssText='border:1px solid var(--green);background:transparent;color:var(--green-deep);border-radius:4px;padding:5px 13px;font-size:13px;cursor:pointer;white-space:nowrap;';
+    btn.addEventListener('click',function(){ if(confirm('确定清空已填写的内容、从头开始吗？此操作无法撤销。')){ clearState(); location.reload(); } });
+    bar.appendChild(txt); bar.appendChild(btn);
+    var top=document.querySelector('.topbar');
+    if(top&&top.parentNode) top.parentNode.insertBefore(bar, top.nextSibling);
+    else document.body.insertBefore(bar, document.body.firstChild);
+  }
+
+  /* ----- generate flow ----- */
+  function clickGenerate(){
+    var miss=getMissing();
+    document.getElementById('output').classList.remove('show');
+    if(miss.length){ showWarn(miss); }
+    else { hideWarn(); doGenerate(); }
+  }
+  function showWarn(miss){
+    var warn=document.getElementById('warn');
+    document.getElementById('warnMsg').textContent='你还有 '+miss.length+' 处没填。可以点下面任意一项跳过去补填；如果就是不想填，点"仍要生成"，这些会留空，不影响后续分析。';
+    var list=document.getElementById('warnList'); list.innerHTML='';
+    miss.forEach(function(q){
+      var chip=document.createElement('div'); chip.className='warn-chip'; chip.textContent=getLabel(q);
+      chip.addEventListener('click',function(){
+        q.scrollIntoView({behavior:'smooth',block:'center'});
+        q.classList.remove('flash'); void q.offsetWidth; q.classList.add('flash');
+      });
+      list.appendChild(chip);
+    });
+    warn.classList.add('show');
+    warn.scrollIntoView({behavior:'smooth',block:'center'});
+  }
+  function hideWarn(){ document.getElementById('warn').classList.remove('show'); }
+
+
+  function answerOf(q){
+    if(q.querySelector('#rank')) return rankOrder.length?rankText():'';
+    var parts=[];
+    var r=q.querySelector('input[type=radio]:checked'); if(r) parts.push(r.value);
+    var c=q.querySelectorAll('input[type=checkbox]:checked');
+    if(c.length){ var a=[]; c.forEach(function(x){a.push(x.value);}); parts.push(a.join('、')); }
+    q.querySelectorAll('input[type=text],input[type=number],textarea').forEach(function(t){ if(t.value.trim()) parts.push(t.value.trim()); });
+    return parts.join('；');
+  }
+  function doGenerate(){
+    hideWarn();
+    var L=['【求职 · 自我盘点】'], nm=['一','二','三','四','五','六','七','八','九'];
+    document.querySelectorAll('.section').forEach(function(sec,i){
+      L.push(''); L.push('— '+nm[i]+'、'+sec.getAttribute('data-title')+' —');
+      var lastFu=null;
+      sec.querySelectorAll('.q').forEach(function(q){
+        if(!isVisible(q)) return;
+        var fu=q.closest('.followup');
+        if(fu&&fu!==lastFu){ var tag=fu.querySelector('.ftag'); L.push('［'+(tag?tag.textContent.trim():'追问')+'］'); }
+        lastFu=fu;
+        var a=answerOf(q);
+        if(!a && !q.classList.contains('req')) return;
+        L.push((fu?'  · ':'')+getLabel(q)+'：'+(a||'（未填）'));
+      });
+    });
+    L.push('');
+    L.push('（本表由「知衢 · 求职版」问卷生成，填写日期 '+new Date().toISOString().slice(0,10)+'。薪资、政策以用人单位书面文件和官方发布为准；AI 会出错，请交叉核实；最终决策权在本人。）');
+    var ta=document.getElementById('summary'); ta.value=L.join('\n');
+    document.getElementById('output').classList.add('show');
+    document.getElementById('copiedMsg').textContent='';
+    document.getElementById('output').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+
+  function copySummary(){
+    var ta=document.getElementById('summary'),msg=document.getElementById('copiedMsg');
+    var done=function(){msg.textContent='已复制 ✓ 发回去就行';};
+    var fb=function(){ta.removeAttribute('readonly');ta.focus();ta.select();try{document.execCommand('copy');done();}catch(e){msg.textContent='请长按文本框手动复制';}ta.setAttribute('readonly','readonly');};
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(ta.value).then(done).catch(fb);}else{fb();}
+  }
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var secs=document.querySelectorAll('.section'); if(!secs.length) return;
+  document.documentElement.classList.add('reveal-on');
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px',threshold:0.04});
+  secs.forEach(function(el){io.observe(el);});
+  // 从锚点跳转、打印或恢复滚动位置时，确保内容可见
+  window.addEventListener('beforeprint',function(){secs.forEach(function(el){el.classList.add('in');});});
+  var fill=document.getElementById('fill');
+  if(fill) new MutationObserver(function(){fill.parentNode.classList.toggle('full',fill.style.width==='100%');}).observe(fill,{attributes:true,attributeFilter:['style']});
+})();
+</script>
+</body>
+</html>
