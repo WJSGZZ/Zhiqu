@@ -7,7 +7,9 @@
    随机抽取成对比较，违反比例超过阈值（默认 2%）报警——多半是列错位、OCR 错读或位次推算有误；
 3. 重复键（同一院校代码 + 专业组 / 专业出现多次）；
 4. 年份覆盖（中间缺年）；
-5. 院校代码与教育部高校名单（data/schools.csv）的匹配率，只对使用全国统一 5 位代码的省份有意义。
+5. 院校代码与教育部高校名单（data/schools.csv）的匹配率，只对使用全国统一 5 位代码的省份有意义；
+6. 同一院校代码在同一文件里出现多个校名（括号注释除外）——多半是 PDF 水印字或识别噪声混进了校名
+   （如江苏的"育南京大学"、上海的"市华东师大"、湖北的"北京化 工大学信"）。
 
 usage: python3 scripts/validate_data.py [省份目录名 ...]   # 不给则检查全部
 """
@@ -65,6 +67,17 @@ def check_file(path, codes):
         notes.append(f"重复键 {dup} 条（按 code + {sub or '无'}）")
         if dup / len(keys) > 0.05:
             issues.append(f"重复键占 {dup / len(keys):.1%}：同校同名专业（如不同校区）会在回测中被剔除，比例过高需检查")
+    # 同一代码多个校名（去掉括号里的校区、办学类型等注释后比较）
+    names = {}
+    for r in rows:
+        base = re.sub(r"[（(\[].*$", "", (r.get("name") or "").strip()).strip()
+        names.setdefault((r.get("code") or "").strip(), set()).add(base)
+    multi = {c: n for c, n in names.items() if c and len(n) > 1}
+    if multi:
+        eg = "；".join(f"{c}: {'/'.join(sorted(n))}" for c, n in list(multi.items())[:3])
+        notes.append(f"同代码多校名 {len(multi)} 个")
+        if multi:
+            issues.append(f"{len(multi)} 个院校代码对应多个校名（如 {eg}）：检查水印字或识别错误")
     # 院校代码匹配
     c5 = [k[0] for k in keys if re.fullmatch(r"\d{5}", k[0])]
     if len(c5) > 0.8 * len(keys):
