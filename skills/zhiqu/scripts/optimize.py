@@ -89,6 +89,13 @@ def load_candidates(path, default_obey, sigma_floor, sigma_single, u_fall, requi
     """cohort/cohort_now 给出时，历年位次按"今年考生总数 / 当年考生总数"折算（即按百分位对齐）。
     drift 为全省录取位次每年的对数漂移（由 backtest.py 估计），第 Y 年的数据补上 (target_year - Y) × drift。
     sigma_scale 为按省校准的波动倍数（由 calibrate.py 估计，见 references/backtests.md），不作用于 CSV 里手填的 sigma。"""
+    if bool(cohort) != (cohort_now is not None):
+        sys.exit("--cohort 与 --cohort-now 必须一起提供")
+    if cohort and drift:
+        sys.exit("--cohort 与非零 --drift 不可同时使用，会重复计算人数变化")
+    if cohort and (not math.isfinite(cohort_now) or cohort_now <= 0 or
+                   any(not math.isfinite(v) or v <= 0 for v in cohort.values())):
+        sys.exit("考生人数必须为有限正数")
     rows, skipped = [], []
     with open(path, encoding="utf-8-sig", newline="") as fh:
         reader = csv.DictReader(fh)
