@@ -212,6 +212,8 @@ def build(rep, opt):
         return x["p_land"] - x.get("p_adjusted", 0) if x["utility"] >= 70 else 0.0
     p_good = sum(good(x) for x in lst) if lst else None
     likely = max(lst, key=lambda x: x["p_land"]) if lst else None
+    sims = ((opt or {}).get("params") or {}).get("sims") or 4000
+    fall_txt = lambda p: (f"&lt; {100 / sims:.2g}%" if p == 0 else pct(p, 1))  # 模拟中一次都没出现，只能说低于 1/模拟次数
     likely_name = likely["name"] if likely else "–"
     likely_p = likely["p_land"] if likely else None
     if likely and likely.get("majors"):  # 专业组：显示"学校·最可能的专业"
@@ -245,7 +247,7 @@ def build(rep, opt):
                  f'<div><b>推荐志愿数</b><span class="num">{len(lst)}</span><em>本批次可填 {E(str(m.get("slots", "–")))} 个</em></div>'
                  f'<div><b>最可能的去向</b><span style="font-size:11pt">{E(likely_name)}</span><em>概率约 {pct(likely_p)}</em></div>'
                  f'<div><b>满意度 70 分以上的概率</b><span class="num">{pct(p_good)}</span><em>100 分 = 候选中你最想去的</em></div>'
-                 f'<div><b>滑档风险</b><span class="num">{pct(pfall, 1)}</span><em>录取线整体大波动时 {pct(stress.get("p_fall"), 1)}</em></div>'
+                 f'<div><b>滑档风险</b><span class="num">{fall_txt(pfall)}</span><em>录取线整体大波动时 {fall_txt(stress.get("p_fall"))}</em></div>'
                  '</div>')
     if lst:
         body += ('<div class="fig"><div class="ttl">你最终会被哪里录取</div>' + outcome_strip([(x["name"], x["p_land"]) for x in lst], pfall or 0)

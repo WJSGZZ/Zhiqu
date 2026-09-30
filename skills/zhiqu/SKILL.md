@@ -53,7 +53,7 @@ description: 知衢 · 高考志愿顾问。读取「知衢」问卷生成的考
 - 维护：`python3 -m unittest discover -s tests` 跑全部自动测试；`python3 scripts/validate_data.py` 校验数据；每年更新数据的步骤见 [data/README.md](data/README.md)。
 - 志愿 CSV 的列说明见 [volunteer-game.md](references/volunteer-game.md#3-csv-列说明)；示例在 `examples/candidates_demo.csv`（虚构）。`predict` 不需要 `utility` 列，输出的候选池保留原列并追加预测结果，补上效用即可交给 `optimize.py`。
 - 出分前优化时，把 `estimate` 给出的 `--rank-sd` 传给 `optimize.py`，它会把考生自己位次的不确定性一起模拟。
-- 考生总数变化明显时，`predict` 和 `optimize.py` 都可加 `--cohort 年份=人数 … --cohort-now 人数`，把历年位次按百分位折算到今年；与不折算的结果对照着看，因为人数增长未必均匀分布在各分数段。
+- 考生总数变化明显时，`predict` 和 `optimize.py` 都可加 `--cohort 年份=人数 … --cohort-now 人数`，把历年位次按百分位折算到今年；与不折算的结果对照着看，因为人数增长未必均匀分布在各分数段。**不要与 `--drift` 同时使用**：回测估出的漂移已经包含了考生人数变化的影响，两者叠加会重复计算。
 - 招生计划数不要机械地折算进预测：广东 2022→2023 回测中，计划翻倍平均只让位次放松约 1%（见 [backtests.md](references/backtests.md)）。
 - `data/` 已有 10 个省份的官方投档数据（广东、浙江、山东、河北、辽宁、江苏、湖北、湖南、上海、黑龙江），可直接用于回测和查历年线；各目录 README 写明来源与口径（有的位次为推算值、有的为 OCR 数据）。
 - 省份已有回测记录时，先读 [backtests.md](references/backtests.md) 中该省的变化记录和"跨省结论"，把近年整体漂移作为 `--drift` 传给 `predict` 和 `optimize.py`，并按该省的校准结果传 `--sigma-scale`（按条目区分波动的默认规则下：浙江 0.9、河北 0.7、山东 0.8、江苏 1.6（`--drift 0.07`）、湖南 1.3（`--drift 0.05`）、上海 1.0（`--drift 0.05`，只有一年检验，暂定）、黑龙江 1.8（`--drift 0`，暂定）、广东及其他专业组省份 1.7）；遇到与记录同类、且填报前可知的变化，据此调整 `adj` 或 `sigma` 并在报告中注明。新发现的原因补进记录。
