@@ -83,16 +83,18 @@ def scan():
 def teacher_births():
     """检验：师范专业相对同校其他专业的变冷，是否在出生人口降得更快的省份更明显。
 
-    出生人口 = 年末人口 × 出生率（data/births_by_province.csv，国家统计局《中国统计年鉴》2017 表 2-8、2024 表 2-7）。
+    出生人口 = 年末常住人口 × 出生率（data/births_by_province.csv，国家统计局国家数据库"分省年度数据"），比较 2016 与 2024 年。
     用浙江、河北、山东三个有位次的省份，按院校所在省（data/schools.csv）汇总师范专业的相对变化。
     usage: python3 scripts/factor_scan.py --teacher-births
     """
     import random
     prov_of = {r["name"]: re.sub("省|市|壮族自治区|回族自治区|维吾尔自治区|自治区", "", r["province"])
                for r in csv.DictReader(open(D + "schools.csv", encoding="utf-8"))}
-    decl = {}
+    births = {}
     for r in csv.DictReader(open(D + "births_by_province.csv", encoding="utf-8")):
-        decl[r["province"]] = math.log(float(r["pop_2023"]) * float(r["birth_rate_2023"]) / (float(r["pop_2016"]) * float(r["birth_rate_2016"])))
+        p = re.sub("省|市|壮族自治区|回族自治区|维吾尔自治区|自治区", "", r["province"])
+        births[(p, int(r["year"]))] = float(r["population_10k"]) * float(r["birth_rate_permille"])
+    decl = {p: math.log(births[(p, 2024)] / births[(p, 2016)]) for p, y in births if y == 2016 and (p, 2024) in births}
     per = collections.defaultdict(list)
     for exam in ("浙江", "河北", "山东"):
         pat, Y, _ = CFG[exam]
