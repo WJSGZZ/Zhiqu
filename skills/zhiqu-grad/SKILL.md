@@ -41,7 +41,9 @@ description: 知衢 · 硕士升学顾问。读取「知衢 · 硕士版」问�
    - 考研看 `references/kaoyan.md`；
    - 出国/境外看 `references/abroad.md`。
 
-   前景判断同高考版：若同时安装了 `zhiqu`，读 `../zhiqu/references/outlook.md`，用条件句写前景，兴趣优先，前景只用来排除风险。
+   - 第六节"方向与状态"有作答，或第三节显示对工作了解很少时，读 `references/direction-and-state.md`：判断卡在哪一类，给小而具体的下一步；日常烦恼用平常语气回应，不下诊断。
+
+   前景判断同高考版：若同时安装了 `zhiqu`，读 `../zhiqu/references/outlook.md`（专业和行业的有条件前景）和 `../zhiqu/references/job-market.md`（全国就业形势，每次先更新数字）。用条件句写前景，兴趣优先，前景只用来排除风险。
 4. **确定方向后再收集数据**（`references/data-sources.md`）。只收集和这位学生的候选相关的数据：
    - 目标院校近三年的复试线和拟录取名单；
    - 招生目录与推免人数；
