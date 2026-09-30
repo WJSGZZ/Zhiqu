@@ -7,6 +7,7 @@
 <p align="center">
   <a href="https://wjsgzz.github.io/Zhiqu/">在线问卷</a> ·
   <a href="#读研版">读研版</a> ·
+  <a href="#求职版">求职版</a> ·
   <a href="#使用教程">使用教程</a> ·
   <a href="skills/zhiqu/references/volunteer-game.md">数学模型</a>
 </p>
@@ -15,10 +16,10 @@
 <summary><b>给 AI Agent：用户发来本仓库链接，就按这里安装并使用</b></summary>
 
 1. 下载：`git clone --depth 1 https://github.com/WJSGZZ/Zhiqu.git`（没有 git 就下载 `https://github.com/WJSGZZ/Zhiqu/archive/refs/heads/main.zip` 并解压）。
-2. 仓库有两个技能：`skills/zhiqu`（高考志愿）和 `skills/zhiqu-grad`（读研规划）。把两个文件夹都复制到你的技能目录（用户明确只要其中一个时只复制那一个）：Claude Code 用 `~/.claude/skills/`，Codex 用 `~/.codex/skills/`，其他支持 `SKILL.md` 的 Agent 用其文档规定的目录（常见为 `~/.agents/skills/`）。不支持技能的 Agent 不用复制，每次对话先读对应的 `SKILL.md`。只写入这些位置，不改动用户的其他文件。
+2. 仓库有三个技能：`skills/zhiqu`（高考志愿）、`skills/zhiqu-grad`（读研规划）和 `skills/zhiqu-career`（求职方向）。三个文件夹都复制到你的技能目录，它们互相引用部分参考文件（如就业形势）；用户明确只要其中一个时，至少连同 `zhiqu` 一起复制：Claude Code 用 `~/.claude/skills/`，Codex 用 `~/.codex/skills/`，其他支持 `SKILL.md` 的 Agent 用其文档规定的目录（常见为 `~/.agents/skills/`）。不支持技能的 Agent 不用复制，每次对话先读对应的 `SKILL.md`。只写入这些位置，不改动用户的其他文件。
 3. 需要 Python 3.8+，脚本只用标准库，不用 `pip install`。出 PDF 需要本机有 Chrome、Edge 或 Chromium，没有时输出 HTML。
-4. 验证：读研版只需确认 `zhiqu-grad/SKILL.md` 存在；高考版在 `zhiqu` 文件夹里运行 `python3 scripts/optimize.py examples/candidates_demo.csv --rank 30000 --slots 12 --u-fall -60`，能输出一张志愿表即装好。
-5. 告诉用户装在哪里，问清是高考还是读研，然后读对应的 `SKILL.md`，按其中的流程工作：先请用户填[在线问卷](https://wjsgzz.github.io/Zhiqu/)（首页选"高考志愿"或"读研规划"）并把生成的画像发过来。
+4. 验证：读研版、求职版只需确认对应的 `SKILL.md` 存在；高考版在 `zhiqu` 文件夹里运行 `python3 scripts/optimize.py examples/candidates_demo.csv --rank 30000 --slots 12 --u-fall -60`，能输出一张志愿表即装好。
+5. 告诉用户装在哪里，问清是高考、读研还是求职，然后读对应的 `SKILL.md`，按其中的流程工作：先请用户填[在线问卷](https://wjsgzz.github.io/Zhiqu/)（首页选"高考志愿""读研规划"或"求职方向"）并把生成的画像发过来。
 
 </details>
 
@@ -47,6 +48,13 @@
 2. 把画像发给装好知衢的 AI
 
 规则以教育部当年《全国硕士研究生招生工作管理规定》为准（当前收录 2027 年版）。保研（推免）不需要填报志愿，不在读研版范围内。院校数据在确定学生和方向后才按需收集。
+
+### 求职版
+
+专科、本科、硕士都适用。目标是找到**工作内容、收入、城市、节奏都满意，自己也做得好**的工作：先从兴趣、能力和底线找出几个具体的职业方向；在投递中就诊断卡在哪一步；手里有 offer 就算清到手收入、时薪和合同条件，再按你自己的优先级比较。
+
+1. 打开[在线问卷](https://wjsgzz.github.io/Zhiqu/)，选「求职方向」，约 15 分钟，复制生成的画像（以 `【求职 · 自我盘点】` 开头）
+2. 把画像发给装好知衢的 AI
 
 ---
 
@@ -155,6 +163,7 @@ AI 会按以下顺序工作，每一步你都可以打断或纠正：
 index.html                       问卷入口：选择高考或读研（GitHub Pages 自动部署）
 gaokao.html                      高考志愿问卷
 grad.html                        读研规划问卷
+career.html                      求职方向问卷
 AGENTS.md                        给 Agent 的入口（指向 README 顶部的安装步骤）
 DESIGN.md                        设计方案：目标、原则、结构、关键决定
 ROADMAP.md                       完善清单：数据、模型、校准、因子、偏好、问卷、工程
@@ -191,6 +200,14 @@ skills/zhiqu-grad/               读研版技能
     ├── sino-foreign.md          中外合作办学：合法性核查、统招与非统招、证书与认证
     ├── direction-and-state.md   "方向与状态"一节的读法：迷茫的类别、日常困扰、小步骤、边界
     ├── data-sources.md          数据来源与按候选收集的清单
+    └── report-guide.md          报告的 12 节固定目录
+skills/zhiqu-career/             求职版技能
+├── SKILL.md                     技能入口：阶段 → 找方向 → 诊断或比较 offer → 报告
+└── references/
+    ├── fit.md                   人与工作的匹配（工作适应理论、兴趣六类型）、生成候选方向、不同学历的重点
+    ├── offer-compare.md         到手收入、时薪、城市结余、钱以外的维度、排序与敏感性
+    ├── job-search.md            求职时间线、卡在哪一步的诊断、数据来源、安全提醒
+    ├── labor-rules.md           劳动合同、试用期、三方协议、社保公积金、最低工资、个税、应届身份（附官方出处）
     └── report-guide.md          报告的 12 节固定目录
 ```
 

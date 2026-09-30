@@ -182,7 +182,7 @@ textarea{resize:vertical;min-height:76px;}
   .wrap{padding:26px 16px 64px;}
   .gen-btn{letter-spacing:3px;}
 }
-.choices{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:8px 0 40px;}
+.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:8px 0 40px;}
 .choice{display:block;text-decoration:none;color:inherit;background:var(--card,#fff);border:1px solid rgba(52,104,93,.25);border-radius:6px;padding:26px 24px 22px;transition:transform .15s,box-shadow .2s,border-color .2s;}
 .choice:hover{transform:translateY(-2px);border-color:var(--green,#34685D);box-shadow:0 14px 30px -18px rgba(33,71,62,.6);}
 .choice:focus-visible{outline:3px solid var(--green,#34685D);outline-offset:3px;}
@@ -190,6 +190,7 @@ textarea{resize:vertical;min-height:76px;}
 .choice h2{font-family:var(--serif);font-size:24px;margin:0 0 10px;color:var(--green-deep,#21473E);}
 .choice p{margin:0 0 14px;font-size:15px;line-height:1.7;}
 .choice .c-go{font-size:14px;color:var(--green,#34685D);}
+@media (max-width:900px) and (min-width:641px){.choices{grid-template-columns:1fr 1fr;}}
 @media (max-width:640px){.choices{grid-template-columns:1fr;}}
 @media (prefers-reduced-motion:reduce){.choice{transition:none;}.choice:hover{transform:none;}}
 </style>
@@ -202,7 +203,7 @@ textarea{resize:vertical;min-height:76px;}
     <p class="eyebrow">知衢</p>
     <h1>升学 · 自我盘点</h1>
     <p class="motto">知其所往，方行其衢。</p>
-    <p class="tag">先选你现在面对的是哪一场选择。填完生成一段"画像"，交给装了知衢技能的 AI 分析。</p>
+    <p class="tag">先选你现在面对的是哪一场选择，不必三种都填。填完生成一段"画像"，交给装了知衢技能的 AI 分析。</p>
   </div>
 
   <div class="choices">
@@ -216,6 +217,12 @@ textarea{resize:vertical;min-height:76px;}
       <p class="c-eyebrow">读研</p>
       <h2>读研规划</h2>
       <p>考研、境外读研、中外合作办学、先工作还是考公。先看清路，再挑学校。约 15 分钟。</p>
+      <span class="c-go">进入问卷 →</span>
+    </a>
+    <a class="choice" href="career.html">
+      <p class="c-eyebrow">求职</p>
+      <h2>求职方向</h2>
+      <p>专科、本科、硕士都适用：工作内容、收入、城市、节奏，找一份合适的。约 15 分钟。</p>
       <span class="c-go">进入问卷 →</span>
     </a>
   </div>
