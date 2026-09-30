@@ -1,0 +1,9 @@
+{
+  "all_money_values_cny": true,
+  "scenario_only": true,
+  "age_at_decision": 20,
+  "age_at_target": 21,
+  "monthly_expenses": 2300,
+  "monthly_remaining": 2200,
+  "monthly_remaining_if_housing_plus_600": 1600
+}

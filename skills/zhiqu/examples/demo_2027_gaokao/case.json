@@ -1,0 +1,38 @@
+{
+  "fictional": true,
+  "kind": "gaokao",
+  "person": "小禾",
+  "gender": "女",
+  "decision_date": "2026-09-30",
+  "education_entry": "2024-09-01",
+  "graduation_date": "2027-06-30",
+  "target_date": "2027-09-01",
+  "stage": "pre_score",
+  "birth_datetime": "2009-03-18T08:20:00",
+  "pillars_text": "己丑 丁卯 壬戌 甲辰",
+  "luck_start": "2015-02-03T10:20:00+08:00",
+  "personal_success_probability": null,
+  "official_2027_score": null,
+  "official_offer": null,
+  "budget": {
+    "annual_limit": 26000,
+    "annual_tuition_assumption": 7000,
+    "annual_housing_assumption": 1800,
+    "monthly_living_assumption": 1300,
+    "living_months": 12
+  },
+  "evidence": [
+    {
+      "candidate": "广东财经大学汉语言文学相关方向",
+      "status": "pending",
+      "source": "https://rwycb.gdufe.edu.cn/2021/1011/c6664a140881/page.htm",
+      "verified_scope": "官方学院介绍列出专业；不是2027广东选科、组内目录或招生计划证明",
+      "unresolved": [
+        "2027选科要求",
+        "当年专业组完整目录",
+        "体检与单科限制",
+        "学费"
+      ]
+    }
+  ]
+}

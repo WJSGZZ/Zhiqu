@@ -1,0 +1,38 @@
+{
+  "fictional": true,
+  "kind": "career",
+  "person": "小宁",
+  "gender": "男",
+  "decision_date": "2026-09-30",
+  "education_entry": "2024-09-01",
+  "graduation_date": "2027-06-30",
+  "target_date": "2027-09-30",
+  "stage": "pre_offer",
+  "birth_datetime": "2006-06-21T10:20:00",
+  "pillars_text": "丙戌 甲午 辛巳 癸巳",
+  "luck_start": "2011-11-08T00:20:00+08:00",
+  "personal_success_probability": null,
+  "official_2027_score": null,
+  "official_offer": null,
+  "budget": {
+    "take_home_assumption": 4500,
+    "monthly_housing_assumption": 600,
+    "monthly_other_expenses_assumption": 1700,
+    "family_reserve_needed": true
+  },
+  "evidence": [
+    {
+      "candidate": "江门会计助理、出纳与应收应付文员",
+      "status": "pending",
+      "source": "https://www.jiangmen.gov.cn/bmpd/jmsrlzyhshbzj/zcfg/jycy/content/post_3426923.html",
+      "verified_scope": "2025工资报告公告采用2024调查期数据；不是2027毕业生薪资或在招岗位证明",
+      "unresolved": [
+        "具体用人单位正式招聘公告",
+        "学历与应届条件",
+        "合同甲方",
+        "社保与加班",
+        "实际offer"
+      ]
+    }
+  ]
+}

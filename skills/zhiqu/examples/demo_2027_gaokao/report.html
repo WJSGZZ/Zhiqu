@@ -1,0 +1,89 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>喜欢的东西，能不能成为要走的路</title><style>
+@page { size: A4; margin: 20mm 18mm 20mm 18mm; background: #FBF6E6;
+  @top-left { content: "知衢 · 志愿填报决策报告"; font: 8pt "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; color: #8C8472; }
+  @top-right { content: "小禾 · 完全虚构 · 高考版"; font: 8pt "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; color: #8C8472; }
+  @bottom-right { content: counter(page) " / " counter(pages); font: 8pt "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; color: #8C8472; }
+  @bottom-left { content: "仅供参考 · 以当年官方招生信息为准"; font: 8pt "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; color: #A39B87; }
+}
+@page cover { margin: 0; @top-left { content: none; } @top-right { content: none; } @bottom-right { content: none; } @bottom-left { content: none; } }
+:root { --ink:#161616; --soft:#3B3832; --muted:#66604F; --rule:#D9CFB4; --rule2:#BFB294;
+  --accent:#21473E; --accent2:#34685D; --pale:#EFE7D0; --amber:#9A6B1F; --red:#9B3B2E; --green:#2F6B4F; }
+* { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+html, body { background: #FBF6E6; }
+body { margin: 0; color: var(--ink); font: 10pt/1.75 "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; font-feature-settings: "lnum"; }
+h1,h2,h3 { font-family: "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; font-weight: 700; color: var(--ink); }
+h2 { font-size: 17pt; margin: 0 0 4mm; padding-bottom: 2.5mm; border-bottom: 1.2pt solid var(--accent); break-after: avoid; }
+h2 .no { color: var(--accent); margin-right: 3mm; font-weight: 400; font-size: 13pt; vertical-align: 1pt; }
+h3 { font-size: 12pt; margin: 6mm 0 2mm; break-after: avoid; }
+p { margin: 0 0 2.6mm; }
+section { margin-top: 12mm; }
+section:not(.major) { break-inside: avoid-page; }
+section.major { break-before: page; margin-top: 0; }
+svg.chart { width: 100%; height: auto; display: block; }
+.lead { font-size: 11pt; color: var(--soft); }
+.small { font-size: 8.5pt; color: var(--muted); }
+.num { font-variant-numeric: tabular-nums; }
+
+/* cover */
+.cover { page: cover; width: 210mm; height: 296mm; overflow: hidden; padding: 0; position: relative; background: #FBF6E6; break-after: page; }
+.cover .band { background: var(--accent); color: #F5EFDD; padding: 26mm 22mm 13mm; }
+.cover .kicker { font-size: 9pt; letter-spacing: 3pt; opacity: .85; }
+.cover h1 { color: #FBF6E6; font-size: 30pt; margin: 6mm 0 3mm; letter-spacing: 1pt; }
+.cover .sub { font-size: 11pt; opacity: .9; }
+.cover .motto { margin-top: 9mm; font-size: 10.5pt; letter-spacing: 4pt; opacity: .78; display: flex; align-items: center; gap: 4mm; }
+.cover .motto::before { content: ""; width: 8mm; height: .6pt; background: #F5EFDD; opacity: .7; }
+.cover .meta { padding: 10mm 22mm 0; display: grid; grid-template-columns: repeat(3,1fr); gap: 6mm 8mm; }
+.cover .meta div { border-top: .8pt solid var(--rule2); padding-top: 2mm; }
+.cover .meta b { display:block; font-size: 8pt; color: var(--muted); font-weight: 500; letter-spacing: 1pt; }
+.cover .meta span { font-size: 12pt; }
+.cover .verdict { margin: 9mm 22mm 0; padding: 6mm 8mm; background: #FFFDF6; border-left: 3pt solid var(--accent); }
+.cover .verdict b { display:block; font-size: 8pt; color: var(--accent); letter-spacing: 2pt; margin-bottom: 2mm; }
+.cover .verdict p { font-size: 14pt; line-height: 1.6; margin: 0; }
+.cover .foot { position: absolute; left: 22mm; right: 22mm; bottom: 16mm; font-size: 8pt; color: var(--muted); border-top: .6pt solid var(--rule); padding-top: 3mm; }
+
+/* kpis */
+.kpis { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; border-top: 1pt solid var(--ink); border-bottom: .6pt solid var(--rule2); margin: 4mm 0 6mm; }
+.kpis div { padding: 3mm 3mm 3mm 0; }
+.kpis div + div { padding-left: 4mm; border-left: .6pt solid var(--rule); }
+.kpis b { display:block; font-size: 8pt; color: var(--muted); font-weight: 500; }
+.kpis span { font: 700 19pt/1.25 "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; }
+.kpis em { display:block; font-style: normal; font-size: 8pt; color: var(--soft); }
+
+/* boxes */
+.box { background: #FFFDF6; border: .6pt solid var(--rule); padding: 4mm 5mm; margin: 3mm 0 4mm; break-inside: avoid; }
+.box.key { border-left: 2.5pt solid var(--accent); }
+.box.warn { border-left: 2.5pt solid var(--amber); }
+.box h4 { margin: 0 0 1.5mm; font-size: 9pt; letter-spacing: 1pt; color: var(--accent); }
+.box.warn h4 { color: var(--amber); }
+ol.tight, ul.tight { margin: 0; padding-left: 5mm; }
+ol.tight li, ul.tight li { margin: .6mm 0; }
+
+/* tables */
+table { width: 100%; border-collapse: collapse; margin: 2mm 0 4mm; font-size: 8.8pt; }
+thead th { white-space: nowrap; text-align: left; font-weight: 600; color: var(--soft); border-top: 1pt solid var(--ink); border-bottom: .6pt solid var(--ink); padding: 1.6mm 2mm; font-size: 8pt; }
+tbody td { border-bottom: .4pt solid var(--rule); padding: 1.5mm 2mm; vertical-align: top; }
+tbody tr { break-inside: avoid; }
+td.r, th.r { text-align: right; font-variant-numeric: tabular-nums; }
+td.c, th.c { text-align: center; }
+tr.hl td { background: #F3EBD2; }
+.tag { display: inline-block; min-width: 7mm; text-align: center; font-size: 7.5pt; padding: .2mm 1.5mm; border-radius: 1mm; color: #fff; }
+.tag.冲 { background: var(--red); } .tag.稳 { background: var(--amber); } .tag.保 { background: var(--green); }
+
+/* two columns / cards */
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+.card { background: #FFFDF6; border: .6pt solid var(--rule); padding: 4mm 5mm; break-inside: avoid; }
+.card h3 { margin: 0 0 1mm; }
+.card .fit { font-size: 8pt; color: var(--accent); letter-spacing: 1pt; }
+.card dl { margin: 2mm 0 0; }
+.card dt { font-size: 8pt; color: var(--muted); margin-top: 1.6mm; }
+.card dd { margin: 0; }
+.fig { margin: 2mm 0 5mm; break-inside: avoid; }
+.fig .cap { font-size: 8pt; color: var(--muted); margin-top: 1mm; }
+.fig .ttl { font-size: 9pt; font-weight: 600; margin-bottom: 1mm; }
+.glossary dt { font-weight: 600; margin-top: 1.5mm; } .glossary dd { margin: 0 0 1mm; color: var(--soft); }
+ul.asklist { list-style: none; padding: 0; margin: 0 0 3mm; }
+ul.asklist li { padding: 2mm 0 2mm 4mm; border-left: 2pt solid var(--rule2); margin: 0 0 2mm; background: #FFFDF6; break-inside: avoid; }
+ul.asklist li b { font-weight: 600; } ul.asklist li span { display: block; font-size: 8.5pt; color: var(--muted); margin-top: .5mm; }
+.toc { margin-top: 2mm; columns: 2; column-gap: 10mm; } .toc div { display: flex; border-bottom: .4pt dotted var(--rule2); padding: 1.1mm 0; break-inside: avoid; }
+.toc div span:first-child { width: 10mm; color: var(--accent); font-weight: 600; }
+</style></head><body><div class="cover"><div class="band"><div class="kicker">知 衢 · 决 策 报 告</div><h1>喜欢的东西，能不能成为要走的路</h1><div class="sub">小禾的高三方向探索 · 2027 高考前</div><div class="motto">知其所往，方行其衢。</div></div><div class="meta"><div><b>本人</b><span>小禾 · 完全虚构</span></div><div><b>版本</b><span>高考版</span></div><div><b>报告日期</b><span>2026-09-30</span></div></div><div class="verdict"><b>备注</b><p>尚未出分；这是一份方向与调研报告，不是可直接录入的志愿表。</p></div><div class="verdict" style="background:transparent;border-left-color:var(--rule2)"><b>目录</b><div class="toc"><div><span>01</span><span>摘要</span></div><div><span>02</span><span>你的画像</span></div><div><span>03</span><span>专业方向</span></div><div><span>04</span><span>志愿表</span></div><div><span>05</span><span>为什么这样排</span></div><div><span>06</span><span>院校调研</span></div><div><span>07</span><span>填报前核对清单</span></div><div><span>08</span><span>填报单</span></div><div><span>09</span><span>追问清单</span></div><div><span>10</span><span>方法与假设</span></div><div><span>11</span><span>事后回看</span></div><div><span>12</span><span>数据来源与声明</span></div></div></div><div class="foot">本报告由「知衢」生成，供本人决策参考；数据来源、假设与局限见"方法与假设"和"数据来源与声明"两节。</div></div><section class="major"><h2><span class='no'>01</span>摘要</h2><p><strong>先别急着在“喜欢人文”和“听父母选师范”之间选一边。</strong> 你现在最需要的，是把喜欢的内容变成几种能体验、能比较的学习与工作日常。物理选科不自动否定人文兴趣，但具体专业能不能报，必须等当年的选科要求与招生计划核准。</p><p>你不是没有方向：你喜欢把事情讲清楚，也愿意写；但喜欢历史故事，并不等于愿意每天读大量史料；作文还不错，也不等于一定喜欢做记者。父母说的“稳”，更需要拆成费用、工作地点和生活节奏。</p><ul><li>当前保留三个方向：中文与传播、法学、教育。哲学与历史作为兴趣与课程体验线索保留。</li><li>先做两次小体验，再谈专业排序；不拿短暂的新鲜感换四年学习。</li><li>家庭每年总预算26000元。按假设费用计算需要24400元，只剩1600元余量，收费与生活费必须重新核实。</li></ul><p><strong>下一步三件事</strong>：两周内读一份本科培养方案并做一项小体验；和父母说明“你们说的稳定具体是什么”；下一次有官方计划、体检或高考成绩时更新画像。这里“两周”是案例安排，不是官方截止日期。</p></section><section><h2><span class='no'>02</span>你的画像</h2><h3>已知的生活与学习</h3><p>小禾，女，17周岁，广东韶关普通公办高中高三，2024年入学、预计2027年毕业。选物理、化学、政治。校内考试约540—565分是虚构设定，不能据此换算全省位次。高考成绩尚无。</p><p>她愿意给班级活动写短稿，数学有时拖后腿，陌生环境里慢热，有截止日期时能认真完成任务。没有竞赛奖，也没有特殊资源。这些条件足以开始探索，不需要先变成一个“特别优秀”的人。</p><table><thead><tr><th>类型</th><th>本例内容</th><th>怎样使用</th></tr></thead><tbody><tr><td>事实设定</td><td>普通高中、选科、尚未出分</td><td>确定阶段；正式资格须本人核实</td></tr><tr><td>偏好</td><td>人文内容、广东优先</td><td>生成方向，不替代招生资格</td></tr><tr><td>约束</td><td>每年总预算26000元</td><td>总费用越界就重新选或请本人确认</td></tr><tr><td>待核实判断</td><td>师范稳定；写作不错就适合传播</td><td>通过课程体验与工作访谈检验</td></tr></tbody></table><h3>可选传统视角</h3><p>出生资料完全虚构：2009-03-18 08:20，韶关，Asia/Shanghai，±10分钟。工具所得四柱为<strong>己丑、丁卯、壬戌、甲辰</strong>；本次三种时间口径与两种换日约定得到同一候选。传统女参数顺行，起运2015-02-03 10:20；2027按工具年段在己巳运。虚岁字段不用于现实年龄。</p><p>传统结构里卯月木气与甲木表达主题可以引出“怎样把想法说清楚”的反思问题；官财透干又可提出“外部期待是否压过自己的兴趣”。这是体系内的主题联想，未经现实预测验证，不能证明性格、专业适配或考试结果。她对表达的兴趣来自自述；她的拖延则不能被一张盘合理化。删去本段，方向、资格和费用判断完全不变。</p></section><section><h2><span class='no'>03</span>专业方向</h2><table><thead><tr><th>方向</th><th>为什么值得看</th><th>最强反面与验证方式</th></tr></thead><tbody><tr><td>中文与传播</td><td>愿意写、解释事情，对文字内容有持续兴趣</td><td>喜欢作文不等于喜欢编辑与传播工作；读课程表，做一篇基于两种来源的短报道，看是否愿意反复修改</td></tr><tr><td>法学</td><td>对规则与社会问题有兴趣，可检验论证能力</td><td>阅读、证据与程序常比辩论热闹更重要；读一份判决书，分清事实、争议、理由，避免只看短视频</td></tr><tr><td>教育</td><td>可把表达兴趣与教学连接</td><td>师范不保证编制；她是否愿意重复解释、管理课堂尚未知，先询问教师日常并做一次小讲解</td></tr><tr><td>哲学/历史兴趣线</td><td>保留真正喜欢的内容，不急于把兴趣全部变成职业</td><td>大学学习包含原典、研究方法和大量阅读；先体验，再决定是否作为主修、辅修或长期兴趣</td></tr></tbody></table><p>若传播方向能接受核查、修改与现实工作节奏，才继续升为主要候选；若不愿承受这些内容，它更可能适合作为兴趣。教育方向若只剩“家里觉得稳定”这个理由，就先降低优先级，而不是直接删除。</p></section><section><h2><span class='no'>04</span>志愿表</h2><p><strong>当前不生成正式志愿表。</strong> 2027高考未举行，成绩、位次和当年完整专业组尚未知。此时给一张带代码和“录取概率”的表，会让还没核实的东西看起来已经确定。</p><p>目前留下的是方向调研清单：广东财经大学汉语言文学相关方向有官方学院介绍可读；2027是否招收本人的科类、具体专业组、校区、费用与章程均待核实。教育与法学方向先找官方培养方案，不猜专业组。</p><p>当前正式可填候选数为0，原因是年度资料与个人结果未齐，不代表这些方向不可行。仓库中的优化器算例可以另外演示计算方法，不能当作小禾的推荐表。</p></section><section><h2><span class='no'>05</span>为什么这样排</h2><p>目前顺序是<strong>先体验，再查资格与成本，出分后再优化</strong>。先看中文与传播，因为她已有持续的表达线索；法学与教育并列调研，尚无证据支持两者的固定先后。不是因为某专业“火”，也不是因为她的八字或性别。</p><p>她与父母先各写一份排序，再讨论最具体的分歧：愿不愿长期教学、能接受哪座城市、如果没有编制怎么办。本人明确不能接受的生活不能仅靠家长高评分覆盖。</p><p>当前没有量化效用或概率，不能声称某一张表“最优”。出分后固定本人认可的底线和理想锚点，补全候选再计算。</p></section><section><h2><span class='no'>06</span>院校调研</h2><p>广东财经大学官方学院介绍列出了汉语言文学等本科专业，可以用来了解院系方向；这不等于2027年投档资格证明。先看课程里的必修与实践要求，再找当年的招生目录。</p><p>请本人或家庭在官方页面核对：专业所在校区、选科要求、完整专业组、调剂后可能就读的专业、学费住宿费，以及是否存在体检和单科限制。未知的事项保留为待核实，不替本人默认“都符合”。</p></section><section><h2><span class='no'>07</span>填报前核对清单</h2><table><thead><tr><th>事项</th><th>当前状态</th><th>下一次何时核对</th></tr></thead><tbody><tr><td>2027报考资格与体检</td><td>尚未最终核实</td><td>报名及正式体检后</td></tr><tr><td>高考分数、同科类全省位次</td><td>尚无</td><td>官方出分后</td></tr><tr><td>专业组完整目录、选科及章程</td><td>尚无2027依据</td><td>官方发布后</td></tr><tr><td>调剂态度</td><td>未确认</td><td>看完完整目录后</td></tr><tr><td>总费用</td><td>当前仅为假设</td><td>取得学校收费标准后</td></tr></tbody></table><p>费用测算采用学费7000元、住宿1800元、每月生活1300元、12个月生活费，均为<strong>虚构规划假设</strong>：总计24400元，距26000元预算剩1600元。若生活费每月多200元，总计26800元，超过预算800元。不能用尚未确认的奖助金填平缺口。</p></section><section><h2><span class='no'>08</span>填报单</h2><p><strong>当前为空：没有可直接录入招生系统的条目。</strong> 官方代码、批次和专业顺序均须在当年资料与本人确认后填写。不要把调研学校名复制成志愿。</p></section><section><h2><span class='no'>09</span>追问清单</h2><ul><li>我喜欢表达，但不想每天和陌生人打交道，中文与传播的日常差别是什么？需要把专业名字拆成具体任务。</li><li>我选了物理，人文专业到底有哪些能报？等当年选科与目录，不能用经验替代。</li><li>父母说师范稳，是希望离家近、费用低，还是一定要编制？这些目标需要分别比较。</li><li>预算只剩一点余量，住宿或生活费变贵怎么办？先比较成本情景，再讨论是否调整城市。</li><li>一个专业组有我不想读的专业，还能只看喜欢的那个吗？须一起看调剂风险。</li><li>不把哲学当主修，是不是就等于放弃兴趣？可以比较课程、辅修或长期阅读，但学校是否提供须核实。</li></ul></section><section><h2><span class='no'>10</span>方法与假设</h2><p>本报告展示出分前的方向探索，采用兴趣、能力、价值与约束交叉判断。课程体验是调查线索，不能作为职业预测测验。候选采用待核实状态，不进入正式优化。</p><p>预算由case.json实际算出，结果保存在calculations.json；可用check_demos.py复现。当前不使用跨省参数、不生成个人录取概率、不模拟未来官方成绩。八字输入和输出独立保存，不进入计算。</p></section><section><h2><span class='no'>11</span>事后回看</h2><p>当前没有真实录取结果。2027资料齐全后先重做正式表，放榜后再记录哪些判断被支持、哪些需要修改。虚构案例不能证明真实服务的录取效果。</p></section><section><h2><span class='no'>12</span>数据来源与声明</h2><ul><li>人物、生日、学校层次、成绩习惯、家庭预算与费用假设全部虚构；画像是问卷字段整理版。</li><li><a href="https://rwycb.gdufe.edu.cn/2021/1011/c6664a140881/page.htm">广东财经大学人文与传播学院介绍</a>：2026-09-30访问；仅用于本科专业探索，不证明2027招生资格。</li><li><a href="https://eea.gd.gov.cn/">广东省教育考试院</a>：当年报考、计划与出分资料的查询入口；本例未取得2027最终资料。</li><li>历法采用仓库固定lunar-python 1.4.8引擎与显式时区、口径；计算事实与命理解释分别陈述。</li></ul><p>知衢帮助把选择的依据讲清楚，不保证录取，不代填系统。选择最终由本人和家庭作出；临近决策必须重新核实官方文件。</p></section></body></html>
