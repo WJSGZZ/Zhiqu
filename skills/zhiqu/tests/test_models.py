@@ -35,6 +35,16 @@ class TestSharedModel(unittest.TestCase):
         self.assertEqual(original[0],changed[0])
         self.assertNotEqual(original[1],changed[1])
 
+    def test_scale_for_earlier_year_does_not_use_later_errors(self):
+        from unittest.mock import patch
+        def row(v): return dict(rank=v,full=True)
+        d={2022:{'a':row(10000)},2023:{'a':row(11000)},2024:{'a':row(12000)},2025:{'a':row(13000)},2026:{'a':row(14000)}}
+        with patch.object(em,'load_series',return_value=d): before=em.review('zhejiang',2026)
+        d[2025]['a']['rank']=90000
+        with patch.object(em,'load_series',return_value=d): after=em.review('zhejiang',2026)
+        early=lambda rows:[r for r in rows if r.get('target_year')==2024]
+        self.assertEqual(early(before),early(after))
+
     def test_heavy_tail_improves_extreme_loss_but_not_guaranteed_central(self):
         normal=em.score([(2,.1)],1,'normal')['nll']
         thick=em.score([(2,.1)],1,'mixture')['nll']

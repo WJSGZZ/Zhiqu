@@ -15,7 +15,7 @@
 
 1. 下载：`git clone --depth 1 https://github.com/WJSGZZ/Zhiqu.git`（没有 git 就下载 `https://github.com/WJSGZZ/Zhiqu/archive/refs/heads/main.zip` 并解压）。
 2. 把 `Zhiqu/skills/zhiqu` 整个文件夹复制到你的技能目录：Claude Code 用 `~/.claude/skills/zhiqu/`，Codex 用 `~/.codex/skills/zhiqu/`，其他支持 `SKILL.md` 的 Agent 用其文档规定的目录（常见为 `~/.agents/skills/zhiqu/`）。不支持技能的 Agent 不用复制，每次对话先读 `skills/zhiqu/SKILL.md`。只写入这些位置，不改动用户的其他文件。
-3. 需要 Python 3.8+，脚本只用标准库，不用 `pip install`。出 PDF 需要本机有 Chrome、Edge 或 Chromium，没有时输出 HTML。
+3. 需要 Python 3.8+，核心预测、优化、报告和交互重算只用标准库，不用 `pip install`；旧版 `.xls` 公务员职位表解析另需可选 `xlrd`，缺依赖时先整理为 CSV 或由人工核验统计。出 PDF 需要本机有 Chrome、Edge 或 Chromium，没有时输出 HTML。
 4. 验证：在技能文件夹里运行 `python3 scripts/optimize.py examples/candidates_demo.csv --rank 30000 --slots 12 --u-fall -60`，能输出一张志愿表即装好。
 5. 告诉用户装在哪里，然后读 `SKILL.md`，按其中的流程工作：先请用户填[在线问卷](https://wjsgzz.github.io/Zhiqu/)并把生成的画像发过来。
 
@@ -97,7 +97,7 @@ AI 会按以下顺序工作，每一步你都可以打断或纠正：
 3. **核实数据**：查本省当年的填报规则（志愿个数、专业组模式）、一分一段表和候选志愿的历年最低录取位次，并注明出处。
 4. **预测**：换算分数与位次；还没出分就按估分给出位次区间；预测每个志愿今年的录取位次和分数线，以及你单独过线的概率。
 5. **打分**：给每个候选志愿的学校、专业、城市、前景打分，按你的第九节排序加权，并请你确认。
-6. **计算**：算出期望收益最高的志愿表，同时和"只冲名校""只求稳"两种填法对比。
+6. **计算**：在已核实候选池和模型假设内，尽量提高志愿表的期望收益，同时和"只冲名校""只求稳"两种填法对比。
 7. **交付报告**：生成一份 PDF 决策报告。开头是给普通人看的一句话结论和摘要，后面是志愿表（每一格的理由、录取概率、冲/稳/保）、三种填法的对比、换参数后结论会不会变、院校调研、填报前核对清单，最后是方法、数据来源和声明。
 
 **用好它的几个建议**：
@@ -129,7 +129,7 @@ AI 会按以下顺序工作，每一步你都可以打断或纠正：
 
 ## 原理
 
-一句话：平行志愿下，你会落到表中第一个"位次过线"的志愿，所以表内顺序应该按喜好排，真正要决定的是**选哪几个**。知衢用历年位次模拟今年录取线的波动（包括各校一起涨落），再逐个挑出让期望收益增加最多的志愿。在各志愿互相独立的情况下，这种挑法被证明是最优的（Chade & Smith, 2006）。详见[数学模型](skills/zhiqu/references/volunteer-game.md)。
+一句话：平行志愿下，你会落到表中第一个"位次过线"的志愿，所以表内顺序应该按喜好排，真正要决定的是**选哪几个**。知衢用历年位次模拟今年录取线的波动（包括各校一起涨落），再逐个挑出让期望收益增加最多的志愿。实际工具采用贪心加入与局部交换；共同波动、风险约束和组内调剂存在时，不保证全局最优。详见[数学模型](skills/zhiqu/references/volunteer-game.md)。
 
 用一份虚构数据（6 个志愿位）做对比：
 
@@ -176,3 +176,7 @@ skills/zhiqu/
 1. 这不是官方建议。一切以本省教育考试院当年的填报规则、招生计划和各校最新招生章程为准。
 2. AI 和统计模型都会出错。概率是根据历年数据推算的，不是录取承诺，请交叉核实。
 3. 最终的决策权和后果，属于考生和家庭。
+
+## 维护与本地复核
+
+开始修改先读 [设计决定](DESIGN.md) 与 [完善清单](ROADMAP.md)。在 `skills/zhiqu` 目录运行 `python3 -m unittest discover -s tests`、`python3 scripts/validate_data.py` 和 `python3 scripts/audit_skill.py --examples`。工程操作见 [报告指南](skills/zhiqu/references/report-guide.md)，本轮官方样本与覆盖缺口见 [查缺记录](skills/zhiqu/references/public-data-gaps.md)。各省、科类和批次分别分析；历史位次、校准参数不跨省直接套用。
