@@ -11,6 +11,7 @@ import sys
 import tempfile
 import urllib.request
 import urllib.error
+from urllib.parse import urlsplit
 from check_report import check_report
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -29,6 +30,7 @@ def local_links(root=ROOT):
                 path = target.split('#')[0]
                 if path and not (doc.parent / path).exists():
                     errors.append(f'{doc.relative_to(root)}: 无效本地链接 {target}')
+    urls = {u for u in urls if urlsplit(u).hostname not in ("localhost", "127.0.0.1", "::1")}
     return errors, urls
 
 
