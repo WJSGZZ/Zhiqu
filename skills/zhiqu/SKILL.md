@@ -83,6 +83,7 @@ description: 知衢 · 高考志愿顾问。读取「知衢」问卷生成的考
 
 ## 本地工程入口
 
+- [本机交互重算报告](references/interactive-report.md)：勾选候选、调整已有参数，调用现有模型实际重算。
 - [报告指南](references/report-guide.md)：一条命令串起候选池、预测、优化与报告，及报告数字核验。
 - `python3 scripts/audit_skill.py --examples`：本地链接、全部脚本入口、案例 B/C 重现；外链检查可选，受验证或登录阻碍只记缺口。
 - `python3 scripts/check_yfyd.py --help`：一分一段累计与投档同分区间核对；告警或未参与核验不能当作完整通过。
