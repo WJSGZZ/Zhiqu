@@ -6,6 +6,7 @@
 import csv
 import json
 import os
+import re
 import subprocess
 import sys
 import tempfile
@@ -165,6 +166,29 @@ class TestOtherScripts(unittest.TestCase):
             self.assertTrue(all(r["province"] == "广东省" for r in rows))
             self.assertTrue(all(20000 <= int(r["rank_2026"]) <= 40000 for r in rows))
             self.assertFalse(any("中外合作" in r["name"] or "专项" in r["name"] for r in rows))
+
+    def test_pool_matches_provincial_codes_by_name(self):
+        # 浙江用本省院校代号，必须按校名匹配教育部名单，否则"留本省"会筛掉全部条目
+        with tempfile.TemporaryDirectory() as d:
+            out = os.path.join(d, "p.csv")
+            code, _, err = run("scripts/pool.py", "--year", "2025=data/zhejiang/general_2025.csv",
+                               "--year", "2026=data/zhejiang/general_2026.csv", "--key", "major",
+                               "--in-province", "浙江省", "--public", "--out", out)
+            self.assertEqual(code, 0, err)
+            with open(out, encoding="utf-8") as f:
+                rows = list(csv.DictReader(f))
+            self.assertGreater(len(rows), 1000)
+            self.assertTrue(all(r["province"] == "浙江省" for r in rows))
+            self.assertFalse(any(re.search("马来西亚|预科|高本贯通", r["name"]) for r in rows))
+
+    def test_pool_lookup_and_exclusions(self):
+        import pool
+        by_code, by_name = pool.schools()
+        self.assertEqual(pool.lookup("", "中国石油大学(华东)(青岛市)[公办]", by_code, by_name)["city"], "青岛市")
+        self.assertEqual(pool.lookup("", "北京大学医学部", by_code, by_name)["name"], "北京大学")
+        for name in ("重庆大学(本科预科班)", "湖南师范大学(面向麻阳县)", "中南大学(民族班)"):
+            self.assertRegex(name, pool.EXCLUDE)
+        self.assertNotRegex("中央民族大学", pool.EXCLUDE)
 
 
 class TestValidateData(unittest.TestCase):
