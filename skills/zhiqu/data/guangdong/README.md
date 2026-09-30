@@ -21,13 +21,21 @@
 | `physics_2025.csv` | <https://eea.gd.gov.cn/ptgk/content/post_4746781.html> |
 | `physics_2026.csv` | <https://eea.gd.gov.cn/ptgk/content/post_4926622.html> |
 
-## 普通类历史本科批投档（`history_2025.csv`）
+## 普通类历史本科批投档（`history_2022.csv`—`history_2026.csv`）
 
-| 年份 | 官方来源 | 查询日期 |
-|---|---|---|
-| 2025 | 广东省教育考试院《广东省2025年本科普通类（历史）投档情况》PDF，<https://eea.gd.gov.cn/attachment/0/585/585885/4746781.pdf>（发布页：<https://eea.gd.gov.cn/ptgk/content/post_4746781.html>） | 2026-09-30 |
+五个年度文件采用同一列序：`code,name,group,major,plan,admit,score,rank,score_bound,rank_bound`。`major` 留空，因为官方表列出的是专业组整体投档，不含组内专业。普通最低分/排位写入 `score`、`rank`；无投档的 `-` 留空；官方以区间文字表示的值留在 bound 列，不能当作精确数值。2022 年北京大学、清华大学原表分别写“651以上”“28以内”，因此精确列留空、边界原文记入 `score_bound` 和 `rank_bound`。
 
-列与同年 `physics_2025.csv` 一致：`code,name,group,plan,admit,score,rank`。PDF 共 35 页，整理为 1,637 行（前 34 页每页 47 行，末页 39 行）；保留 3 条无最低分/位次的零投档行。文本层混入了斜置“广东省教育考试院”水印字，清理时按院校代码与同年官方物理表及教育部高校名单规范校名；个别新名未在名单中出现时按 PDF 字样核对。表只含专业组投档数据，不含组内专业。当前仅补齐 2025，2024、2026 历史类表仍待获取；不据此声称广东各年已齐。
+| 文件 | 行数 | PDF页数 | 无投档行 | 官方来源 | 查询日期 |
+|---|---:|---:|---:|---|---|
+| `history_2022.csv` | 1,288 | 41 | 0 | 广东省教育考试院《广东省2022年本科普通类（历史）投档情况》[PDF](https://eea.gd.gov.cn/attachment/0/494/494062/3975483.pdf)，[发布页](https://eea.gd.gov.cn/gkmlpt/content/3/3975/post_3975480.html) | 2026-09-30 |
+| `history_2023.csv` | 1,381 | 33 | 0 | 广东省教育考试院[官方附件ZIP](https://eea.gd.gov.cn/attachment/0/526/526559/4221648.zip)（历史类PDF；[发布页](https://eea.gd.gov.cn/ptgk/content/post_4221648.html)） | 2026-09-30 |
+| `history_2024.csv` | 1,448 | 29 | 5 | 广东省教育考试院[官方附件ZIP](https://eea.gd.gov.cn/attachment/0/554/554636/4458419.zip)（历史类PDF；[发布页](https://eea.gd.gov.cn/zwgk/sjfb/tjsj/content/post_4458419.html)） | 2026-09-30 |
+| `history_2025.csv` | 1,637 | 35 | 3 | 广东省教育考试院《广东省2025年本科普通类（历史）投档情况》[PDF](https://eea.gd.gov.cn/attachment/0/585/585885/4746781.pdf)，[发布页](https://eea.gd.gov.cn/ptgk/content/post_4746781.html) | 2026-09-30 |
+| `history_2026.csv` | 1,768 | 30 | 2 | 广东省教育考试院[历史类PDF](https://eea.gd.gov.cn/attachment/0/620/620024/4926622.pdf)（[发布页](https://eea.gd.gov.cn/ptgk/content/post_4926622.html)） | 2026-09-30 |
+
+2022、2023、2024、2026 表格PDF由表格网格抽取（pdfplumber `extract_tables`），逐条保留官方代码、名称、组号、计划数、投档数、最低分和最低排位；按每页记录数汇总与文件行数相等，页脚总页数与PDF页数一致。2025 表为既有抽取，保留35页、1,637行的记录数。本轮复核名称时，2025 PDF第34页清晰列出`14001 | 聊城大学东昌学院 | 202 | 10 | 10 | 512 | 48720`，其前后行各字段也与表格列对齐；故按原表修正此前误用当前高校代码表造成的名称。2022、2023、2024、2026官方PDF中同一代码和名称也在表内逐年明确出现。扫描/文本抽取中的水印仅在出现独立前置字且同年官方物理类表能精确核实时清理；不得按当前院校名单覆盖官方原表名称。2026历史表代码10349的名称为“绍兴大学”，即使同年物理表名称不同，也保留历史表原文。
+
+`score`、`rank` 均为空的记录数分别为：2022年2条边界档，2023年0条，2024年5条零投档，2025年3条零投档，2026年2条零投档。零投档行不提供精确最低分与位次，不推填数值。2022年另外两条边界档保留官方文字，不伪装为精确651分/28位。
 
 ## 一分一段表覆盖量（`../cohort_coverage.csv`）
 

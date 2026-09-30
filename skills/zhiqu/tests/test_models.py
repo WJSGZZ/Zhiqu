@@ -35,6 +35,16 @@ class TestSharedModel(unittest.TestCase):
         self.assertEqual(original[0],changed[0])
         self.assertNotEqual(original[1],changed[1])
 
+    def test_history_series_never_reads_physics_rows(self):
+        from unittest.mock import patch
+        from pathlib import Path
+        with tempfile.TemporaryDirectory() as d:
+            folder=Path(d)/'guangdong';folder.mkdir()
+            (folder/'history_2025.csv').write_text('code,name,group,rank\n10564,示例校,201,10000\n')
+            (folder/'physics_2025.csv').write_text('code,name,group,rank\n10564,示例校,201,90000\n')
+            with patch.object(em,'DATA',d): data=em.load_series('guangdong_history')
+            self.assertEqual(next(iter(data[2025].values()))['rank'],10000)
+
     def test_scale_for_earlier_year_does_not_use_later_errors(self):
         from unittest.mock import patch
         def row(v): return dict(rank=v,full=True)
@@ -44,6 +54,14 @@ class TestSharedModel(unittest.TestCase):
         with patch.object(em,'load_series',return_value=d): after=em.review('zhejiang',2026)
         early=lambda rows:[r for r in rows if r.get('target_year')==2024]
         self.assertEqual(early(before),early(after))
+
+    def test_two_year_series_is_evaluated_without_tuning_on_holdout(self):
+        from unittest.mock import patch
+        data={2025:{'a':dict(rank=10000,full=True)},2026:{'a':dict(rank=11000,full=True)}}
+        with patch.object(em,'load_series',return_value=data): rows=em.review('hunan_history',2026)
+        self.assertEqual(len(rows),2)
+        self.assertTrue(all(r['sigma_scale']==1.0 and r['n']==1 for r in rows))
+        self.assertTrue(all(r['category']=='history' for r in rows))
 
     def test_heavy_tail_improves_extreme_loss_but_not_guaranteed_central(self):
         normal=em.score([(2,.1)],1,'normal')['nll']
@@ -59,6 +77,14 @@ class TestSchoolAlias(unittest.TestCase):
         for old,new in (("湖州师范学院","湖州师范大学"),("浙江科技学院","浙江科技大学")):
             self.assertEqual(pool.lookup("9999",new,codes,names)["code"],names[old]["code"])
             self.assertTrue(pool.lookup("9999",new,codes,names)["province"])
+
+    def test_admissions_code_collision_cannot_override_school_name(self):
+        import pool
+        codes,names=pool.schools()
+        self.assertEqual(pool.lookup("14001","聊城大学东昌学院",codes,names)["name"],"聊城大学东昌学院")
+        self.assertEqual(pool.lookup("14001","聊城大学东昌学院",codes,names)["province"],"山东省")
+        self.assertEqual(pool.lookup("14001","未核实新学院",codes,names),{})
+        self.assertEqual(pool.lookup("","北京大学未核实新学院",codes,names),{})
 
 
 class TestPreferenceChecks(unittest.TestCase):

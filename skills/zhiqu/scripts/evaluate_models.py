@@ -28,6 +28,12 @@ SERIES = {
     'shanghai': ('general', 'group', 'code'),
     'heilongjiang': ('physics', 'group', 'code'),
 }
+# 有独立历史类表时新增独立系列；普通类不分科省份不再人为拆科。
+for province, (stem, key, school) in list(SERIES.items()):
+    folder = os.path.join(DATA, province)
+    if stem != 'general' and any(n.startswith('history_') and n.endswith('.csv') for n in os.listdir(folder)):
+        SERIES[province + '_history'] = ('history', key, school)
+
 SCALES = (0.7, 0.9, 1.0, 1.3, 1.7, 2.0)
 # 在看留出结果前固定；禁止按留出表现再更改。
 MIX_WEIGHT, MIX_SPREAD = 0.10, 3.0
@@ -63,13 +69,14 @@ def load_series(province):
     stem, key, school = SERIES[province]
     bt.SCHOOL_BY, bt.METRIC = school, 'rank'
     data = {}
-    for name in sorted(os.listdir(os.path.join(DATA, province))):
+    folder = province[:-8] if province.endswith('_history') else province
+    for name in sorted(os.listdir(os.path.join(DATA, folder))):
         if not name.startswith(stem+'_') or not name.endswith('.csv'):
             continue
         year = name[len(stem)+1:-4]
         if not year.isdigit():
             continue
-        data[int(year)] = {k:v for k,v in bt.load(os.path.join(DATA, province, name), key).items()
+        data[int(year)] = {k:v for k,v in bt.load(os.path.join(DATA, folder, name), key).items()
                            if v['full'] and v['rank'] and v['rank'] >= 500}
     return data
 
@@ -102,17 +109,18 @@ def review(province, holdout):
     yearly = yearly_errors(data)
     training = [e for y,(_,es) in yearly.items() if y < holdout for e in es]
     rows = []
+    context = dict(province=province[:-8] if province.endswith('_history') else province, category=SERIES[province][0], series=province)
     status = 'major_name' if SERIES[province][1] == 'major' else 'group_number_exploratory'
-    if not training:
-        return [dict(province=province, target_year=holdout, split='unavailable', matching_status=status, note='无可用训练位次，不调参')]
-    fitted = {d:min(SCALES,key=lambda s:score(training,s,d)['nll']) for d in ('normal','mixture')}
+    if not any(errors for year, (_, errors) in yearly.items() if year <= holdout):
+        return [dict(**context, target_year=holdout, split='unavailable', matching_status=status, note='无可用训练位次，不调参')]
+    fitted = {d:min(SCALES,key=lambda s:score(training,s,d)['nll']) if training else 1.0 for d in ('normal','mixture')}
     for target,(drift,errors) in yearly.items():
         if target > holdout or not errors:
             continue
         prior_errors = [e for y,(_,es) in yearly.items() if y < target for e in es]
         for d in ('normal','mixture'):
             scale = fitted[d] if target == holdout else (min(SCALES,key=lambda s:score(prior_errors,s,d)['nll']) if prior_errors else 1.0)
-            rows.append(dict(province=province, target_year=target, split='retrospective_holdout' if target==holdout else 'rolling_history',
+            rows.append(dict(**context, target_year=target, split='retrospective_holdout' if target==holdout else 'rolling_history',
                              matching_status=status, distribution=d, sigma_scale=scale, drift=drift,
                              **score(errors,scale,d), note='固定混合10%×3；仅用目标年前误差选参，无先前误差用1；研究输出，不改生产默认'))
     hold = {r['distribution']:r for r in rows if r['split']=='retrospective_holdout'}
@@ -123,10 +131,10 @@ def review(province, holdout):
     return rows
 
 
-def review_rho(out):
+def review_rho(out, holdout=None):
     rows=[]
     for province in ('zhejiang','hebei','shandong'):
-        data=load_series(province);years=sorted(data);steps=[]
+        data=load_series(province);years=sorted(y for y in data if holdout is None or y<=holdout);steps=[]
         for a,b in zip(years,years[1:]):
             change=[math.log(data[b][k]['rank']/data[a][k]['rank'])/(b-a) for k in data[a].keys() & data[b].keys()]
             if change: steps.append((b,st.median(change),st.pvariance(change)))
@@ -146,19 +154,19 @@ def review_rho(out):
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--holdout',type=int,default=2026)
-    ap.add_argument('--province',action='append',choices=sorted(SERIES))
+    ap.add_argument('--province','--series',dest='province',action='append',choices=sorted(SERIES),help='选择独立系列；_history表示历史类，与物理类分开')
     ap.add_argument('--out',required=True)
     ap.add_argument('--rho-out',help='三个专业匹配省份的年度共同波动描述估计CSV，不自动改变rho')
     a = ap.parse_args()
     rows = [r for p in a.province or SERIES for r in review(p,a.holdout)]
-    fields = ['province','target_year','split','matching_status','distribution','sigma_scale','drift','n','nll',
+    fields = ['province','category','series','target_year','split','matching_status','distribution','sigma_scale','drift','n','nll',
               'calibration_error','coverage_80','hot_tail_05','holdout_improves_both','note']
     with open(a.out,'w',encoding='utf-8',newline='') as f:
         w=csv.DictWriter(f,fieldnames=fields,lineterminator="\n");w.writeheader();w.writerows(rows)
-    if a.rho_out: review_rho(a.rho_out)
+    if a.rho_out: review_rho(a.rho_out,a.holdout)
     for r in rows:
-        if r['split'] in ('holdout','unavailable'):
-            print(r['province'],r.get('distribution','不可用'), 'n='+str(r.get('n',0)),
+        if r['split'] in ('retrospective_holdout','unavailable'):
+            print(r['series'],r.get('distribution','不可用'), 'n='+str(r.get('n',0)),
                   'NLL='+str(round(r.get('nll',0),4)), '区间误差='+str(round(r.get('calibration_error',0),4)),
                   r['matching_status'])
 
