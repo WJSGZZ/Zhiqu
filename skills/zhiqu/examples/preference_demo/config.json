@@ -1,0 +1,76 @@
+{
+  "scenarios": {
+    "student": {
+      "confirmed": true,
+      "priority": [
+        "major",
+        "city",
+        "outlook",
+        "school"
+      ],
+      "anchors": {
+        "low": {
+          "name": "虚构底线",
+          "scores": {
+            "school": 2,
+            "major": 2,
+            "city": 2,
+            "outlook": 2
+          }
+        },
+        "high": {
+          "name": "虚构梦校",
+          "scores": {
+            "school": 9,
+            "major": 9,
+            "city": 9,
+            "outlook": 9
+          }
+        }
+      },
+      "checks": [
+        {
+          "a": "a",
+          "b": "b",
+          "choice": "b"
+        }
+      ]
+    },
+    "parent": {
+      "confirmed": true,
+      "priority": [
+        "school",
+        "outlook",
+        "city",
+        "major"
+      ],
+      "anchors": {
+        "low": {
+          "name": "虚构底线",
+          "scores": {
+            "school": 2,
+            "major": 2,
+            "city": 2,
+            "outlook": 2
+          }
+        },
+        "high": {
+          "name": "虚构梦校",
+          "scores": {
+            "school": 9,
+            "major": 9,
+            "city": 9,
+            "outlook": 9
+          }
+        }
+      },
+      "checks": [
+        {
+          "a": "a",
+          "b": "b",
+          "choice": "b"
+        }
+      ]
+    }
+  }
+}

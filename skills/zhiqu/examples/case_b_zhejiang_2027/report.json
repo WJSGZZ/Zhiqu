@@ -346,5 +346,19 @@
    "https://www.hzzx.gov.cn/cshz/content/2025-02/28/content_8870231.htm",
    "2026-09-28"
   ]
+ ],
+ "numeric_claims": [
+  {
+   "report_path": "summary.points.2",
+   "number_index": 2,
+   "result_path": "baseline_top_utility.0",
+   "tolerance": 0.05
+  },
+  {
+   "report_path": "summary.points.2",
+   "number_index": 3,
+   "result_path": "expected_utility",
+   "tolerance": 0.05
+  }
  ]
 }

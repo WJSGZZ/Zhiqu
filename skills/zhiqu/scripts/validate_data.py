@@ -7,12 +7,13 @@
    随机抽取成对比较，违反比例超过阈值（默认 2%）报警——多半是列错位、OCR 错读或位次推算有误；
 3. 重复键（同一院校代码 + 专业组 / 专业出现多次）；
 4. 年份覆盖（中间缺年）；
-5. 院校代码与教育部高校名单（data/schools.csv）的匹配率，只对使用全国统一 5 位代码的省份有意义；
+5. 代码数值在教育部高校名单（data/schools.csv）的出现率，不证明同一学校，须核对校名；
 6. 同一院校代码在同一文件里出现多个校名（括号注释除外）——多半是 PDF 水印字或识别噪声混进了校名
    （如江苏的"育南京大学"、上海的"市华东师大"、湖北的"北京化 工大学信"）。
 
 usage: python3 scripts/validate_data.py [省份目录名 ...]   # 不给则检查全部
 """
+import argparse
 import csv
 import os
 import random
@@ -20,7 +21,7 @@ import re
 import sys
 
 DATA = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data")
-SKIP_DIRS = {"civil_service"}
+SKIP_DIRS = {"civil_service", "calibration"}
 VIOLATION_WARN = 0.02
 
 
@@ -82,16 +83,22 @@ def check_file(path, codes):
     c5 = [k[0] for k in keys if re.fullmatch(r"\d{5}", k[0])]
     if len(c5) > 0.8 * len(keys):
         rate = sum(c in codes for c in c5) / len(c5)
-        notes.append(f"代码匹配教育部名单 {rate:.1%}")
+        notes.append(f"代码值在教育部名单出现 {rate:.1%}（数值重合不证明学校身份）")
         if rate < 0.9:
             issues.append(f"院校代码与教育部名单匹配率只有 {rate:.1%}")
     return issues, notes
 
 
 def main():
+    parser = argparse.ArgumentParser(description="校验投档 CSV：重复键、位次与分数、年份覆盖和院校代码")
+    parser.add_argument("provinces", nargs="*", help="data 下的省份目录；默认全部省份")
+    args = parser.parse_args()
     with open(os.path.join(DATA, "schools.csv"), encoding="utf-8") as f:
         codes = {r["code"] for r in csv.DictReader(f)}
-    provs = sys.argv[1:] or sorted(d for d in os.listdir(DATA) if os.path.isdir(os.path.join(DATA, d)) and d not in SKIP_DIRS)
+    provs = args.provinces or sorted(d for d in os.listdir(DATA) if os.path.isdir(os.path.join(DATA, d)) and d not in SKIP_DIRS)
+    for province in provs:
+        if province not in os.listdir(DATA) or not os.path.isdir(os.path.join(DATA, province)):
+            parser.error(f"未知省份目录：{province}")
     n_issue = 0
     for p in provs:
         files = sorted(fn for fn in os.listdir(os.path.join(DATA, p)) if fn.endswith(".csv") and not fn.startswith(("yfyd", "early")))

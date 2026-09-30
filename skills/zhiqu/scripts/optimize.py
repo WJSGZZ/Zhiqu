@@ -84,6 +84,35 @@ def parse_majors(text, hist_latest, complete=True):
 FIRST_CHOICE_GAP = 0.25  # "志愿优先"的粗略近似：非第一专业志愿每级额外相当于位次难 ~25%
 
 
+def model_parameters(hist, sigma_floor=0.10, sigma_single=0.25, sigma_scale=1.0, sigma_rule="v2"):
+    """共享位次分布参数。hist 最近年份在前，缺年保留 None 以免错用近期权重。
+    调用者先处理 cohort/drift；手填 adj/sigma 是外层人工修正，不在此处自动改变。
+    """
+    pts = [(k, x) for k, x in enumerate(hist) if x and x > 0]
+    if not pts:
+        raise ValueError("没有可用历史位次")
+    ws = [RECENCY_WEIGHTS[min(k, len(RECENCY_WEIGHTS) - 1)] for k, _ in pts]
+    logs = [math.log(x) for _, x in pts]
+    mu = sum(w * l for w, l in zip(ws, logs)) / sum(ws)
+    v2 = sigma_rule == "v2"
+    if len(logs) >= 2:
+        m = sum(logs) / len(logs)
+        var = sum((l - m) ** 2 for l in logs) / (len(logs) - 1)
+        if v2:
+            n1 = len(logs) - 1
+            var = (n1 * var + SHRINK_YEARS * SHRINK_PRIOR ** 2) / (n1 + SHRINK_YEARS)
+        sigma = max(math.sqrt(var), sigma_floor)
+    else:
+        sigma = sigma_single
+    jumps = [abs(logs[k] - logs[k + 1]) for k in range(len(logs) - 1)]
+    unstable = bool(jumps) and max(jumps) > JUMP_WARN
+    if unstable:
+        sigma = max(sigma, (JUMP_FACTOR if v2 else 1.0) * max(jumps))
+    if v2:
+        sigma *= (LEVEL_REF / pts[0][1]) ** LEVEL_GAMMA
+    return mu, sigma * sigma_scale, unstable
+
+
 def load_candidates(path, default_obey, sigma_floor, sigma_single, u_fall, require_utility=True,
                     cohort=None, cohort_now=None, drift=0.0, target_year=None, sigma_scale=1.0, sigma_rule="v2"):
     """cohort/cohort_now 给出时，历年位次按"今年考生总数 / 当年考生总数"折算（即按百分位对齐）。
@@ -124,28 +153,9 @@ def load_candidates(path, default_obey, sigma_floor, sigma_single, u_fall, requi
             if not pts or u is None:
                 skipped.append(f"{name}（缺{'位次' if not pts else '效用'}）")
                 continue
-            ws = [RECENCY_WEIGHTS[min(k, len(RECENCY_WEIGHTS) - 1)] for k, _ in pts]
-            logs = [math.log(x) for _, x in pts]
-            mu = sum(w * l for w, l in zip(ws, logs)) / sum(ws)
+            mu, sigma, unstable = model_parameters(hist, sigma_floor, sigma_single, sigma_scale, sigma_rule)
             mu += math.log(parse_float(r.get("adj"), 1.0))
-            v2 = sigma_rule == "v2"
-            if len(logs) >= 2:
-                m = sum(logs) / len(logs)
-                var = sum((l - m) ** 2 for l in logs) / (len(logs) - 1)
-                if v2:
-                    n1 = len(logs) - 1
-                    var = (n1 * var + SHRINK_YEARS * SHRINK_PRIOR ** 2) / (n1 + SHRINK_YEARS)
-                sigma = max(math.sqrt(var), sigma_floor)
-            else:
-                sigma = sigma_single
-            # 相邻年份位次变化过大（>约40%），多半是组内专业、招生条件或组号含义变了
-            jumps = [abs(logs[k] - logs[k + 1]) for k in range(len(logs) - 1)]
-            unstable = bool(jumps) and max(jumps) > JUMP_WARN
-            if unstable:
-                sigma = max(sigma, (JUMP_FACTOR if v2 else 1.0) * max(jumps))
-            if v2:
-                sigma *= (LEVEL_REF / pts[0][1]) ** LEVEL_GAMMA
-            sigma = parse_float(r.get("sigma"), sigma * sigma_scale)
+            sigma = parse_float(r.get("sigma"), sigma)
             obey_raw = (r.get("obey") or "").strip()
             obey = default_obey if obey_raw == "" else obey_raw in ("1", "是", "y", "yes", "true")
             p_adj = parse_float(r.get("p_adjust"), 0.0)

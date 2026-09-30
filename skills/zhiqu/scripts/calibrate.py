@@ -18,6 +18,7 @@ usage:
   python3 scripts/calibrate.py --province 浙江 --key major --year 2022=data/zhejiang/general_2022.csv ... [--drift auto|0]
 """
 import argparse
+import csv
 import math
 import os
 import statistics as st
@@ -25,7 +26,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import backtest as bt  # noqa: E402
-from optimize import RECENCY_WEIGHTS, JUMP_WARN  # noqa: E402
+from optimize import RECENCY_WEIGHTS, JUMP_WARN, model_parameters  # noqa: E402
 
 
 def phi(z):
@@ -87,6 +88,8 @@ def main():
     ap.add_argument("--min-rank", type=int, default=500)
     ap.add_argument("--by", choices=["none", "level", "plan", "hist", "jump"], default="none",
                     help="分档校准：level=位次段三等分，plan=计划人数，hist=历史年数，jump=历史上是否有过大跳变")
+    ap.add_argument("--sigma-rule", choices=["v2", "legacy"], default="v2", help="与正式预测一致，默认 v2；旧结果重现用 legacy")
+    ap.add_argument("--out", help="逐年校准结果 CSV（包含口径和漂移，无自动调参）")
     ap.add_argument("--sigma-mult", type=float, default=1.0, help="把 sigma 乘以这个倍数再检验（找出校准所需的放大倍数）")
     a = ap.parse_args()
     bt.SCHOOL_BY = a.school
@@ -98,7 +101,7 @@ def main():
     # 相邻年份整体漂移（对数位次变化的中位数）
     step = {}
     for y0, y1 in zip(years, years[1:]):
-        d = [math.log(data[y1][k]["rank"] / data[y0][k]["rank"]) for k in data[y0] if k in data[y1]]
+        d = [math.log(data[y1][k]["rank"] / data[y0][k]["rank"]) / (y1-y0) for k in data[y0] if k in data[y1]]
         step[y1] = st.median(d) if d else 0.0
     pits, by_year, bins = [], {}, {}
     for t in years[2:] if len(years) > 2 else years[1:]:
@@ -109,14 +112,17 @@ def main():
         else:
             drift = float(a.drift)
         u_t = []
-        cuts = sorted(math.log(v["rank"]) for v in data[t].values())
+        cuts = sorted(math.log(v["rank"]) for y in prev[-1:] for v in data[y].values())
+        if not cuts:
+            continue
         t1, t2 = cuts[len(cuts) // 3], cuts[2 * len(cuts) // 3]
         for k, v in data[t].items():
             hist = [(y, data[y][k]["rank"]) for y in sorted(prev, reverse=True) if k in data[y]]
             if not hist:
                 continue
-            mu, sigma = predict(hist, drift, t, a.sigma_floor, a.sigma_single)
-            sigma *= a.sigma_mult
+            slots = [data[y][k]["rank"] * math.exp(drift * (t - y)) if k in data[y] else None
+                     for y in sorted(prev, reverse=True)]
+            mu, sigma, _ = model_parameters(slots, a.sigma_floor, a.sigma_single, a.sigma_mult, a.sigma_rule)
             u = phi((math.log(v["rank"]) - mu) / sigma)
             u_t.append(u)
             if a.by != "none":
@@ -124,7 +130,7 @@ def main():
                     lr = math.log(hist[0][1])
                     b = "位次靠前 1/3" if lr < t1 else ("位次中间 1/3" if lr < t2 else "位次靠后 1/3")
                 elif a.by == "plan":
-                    pl = data[t][k].get("plan")
+                    pl = data[hist[0][0]][k].get("plan")  # 目标年的投档表计划可能含追加，不能用作事前分档
                     b = "计划未知" if not pl else ("计划 ≤5" if pl <= 5 else ("计划 6–20" if pl <= 20 else "计划 >20"))
                 elif a.by == "hist":
                     b = f"历史 {min(len(hist), 3)}{'+' if len(hist) >= 3 else ''} 年"
@@ -138,7 +144,9 @@ def main():
     if not n:
         sys.exit("没有可检验的条目")
     cover = lambda lo, hi: sum(lo <= u <= hi for u in pits) / n
-    print(f"## {a.province} 校准检验（{a.key}，sigma×{a.sigma_mult:g}）  样本 {n}")
+    print(f"## {a.province} 校准检验（{a.key}，{a.sigma_rule}，sigma×{a.sigma_mult:g}）  样本 {n}")
+    if a.key == "group":
+        print("⚠ 按组号对应的检验仅供探索；未核实跨年组组成，不能据此宣称正式录取概率已校准")
     print(f"平均 PIT {st.mean(pits):.3f}（0.5 为无偏；> 0.5 表示真实位次比预测更靠后 = 实际更容易，模型偏保守）")
     print(f"50% 区间覆盖 {cover(.25, .75):.1%} | 80% 区间覆盖 {cover(.10, .90):.1%} | 90% 区间覆盖 {cover(.05, .95):.1%}")
     print(f"尾部：真实比 5% 分位还热 {sum(u < .05 for u in pits) / n:.1%}（应为 5%）；比 95% 分位还冷 {sum(u > .95 for u in pits) / n:.1%}（应为 5%）")
@@ -158,6 +166,19 @@ def main():
     for t, (d, u) in by_year.items():
         if u:
             print(f"- {t}：漂移 {d:+.3f}，样本 {len(u)}，平均 PIT {st.mean(u):.3f}，80% 覆盖 {sum(.1 <= x <= .9 for x in u) / len(u):.1%}")
+
+    if a.out:
+        with open(a.out, "w", encoding="utf-8", newline="") as f:
+            fields = ["province", "target_year", "key", "school", "sigma_rule", "sigma_mult", "drift", "n", "mean_pit", "coverage_80", "tail_hot_05", "matching_status"]
+            w = csv.DictWriter(f, fieldnames=fields,lineterminator="\n")
+            w.writeheader()
+            for t, (d, us) in by_year.items():
+                if us:
+                    w.writerow(dict(province=a.province, target_year=t, key=a.key, school=a.school,
+                                    sigma_rule=a.sigma_rule, sigma_mult=a.sigma_mult, drift=d, n=len(us),
+                                    mean_pit=st.mean(us), coverage_80=sum(.1 <= x <= .9 for x in us) / len(us),
+                                    tail_hot_05=sum(x < .05 for x in us) / len(us),
+                                    matching_status="group_number_exploratory" if a.key == "group" else "major_name"))
 
 
 if __name__ == "__main__":

@@ -21,7 +21,18 @@ EXCLUDE = "中外合作|国际|民办|独立学院|专项|联合培养|预科|�
 def schools():
     with open(os.path.join(HERE, "..", "data", "schools.csv"), encoding="utf-8") as f:
         rows = list(csv.DictReader(f))
-    return {r["code"]: r for r in rows}, {r["name"]: r for r in rows}
+    by_code, by_name = {r["code"]: r for r in rows}, {r["name"]: r for r in rows}
+    aliases = os.path.join(HERE, "..", "data", "school-name-changes.csv")
+    if os.path.exists(aliases):
+        with open(aliases, encoding="utf-8-sig", newline="") as f:
+            for r in csv.DictReader(f):
+                # 教育部10位标识码的后5位对应本教育部名单 code；不据此改省级招生代号。
+                identifier = (r.get("school_code") or "").strip()
+                if re.fullmatch(r"\d{10}", identifier) and identifier[-5:] in by_code:
+                    info = by_code[identifier[-5:]]
+                    for name in (r["former_name"], r["current_name"]):
+                        by_name.setdefault(name, info)
+    return by_code, by_name
 
 
 def name_variants(name):
@@ -36,19 +47,18 @@ def name_variants(name):
 
 
 def lookup(code, name, by_code, by_name):
-    """先按教育部代码匹配（广东等用国标代码的省份），再按校名匹配（浙江、山东等用本省院校代号的省份）；
-    校名不在名单里时取名单中最长的前缀校名（北京大学医学部 → 北京大学）。
-    2025 年 6 月以后更名或新设的院校（如湖州师范学院 → 湖州师范大学）匹配不到，记为未知。"""
-    if code in by_code:
-        return by_code[code]
+    """先按明确校名/官方更名别名确认实体；招生代号不能覆盖不同学校的名称。
+    去除末尾校区/路径括号后仍匹配不到时保留未知，不用一般校名前缀猜公办属性。
+    北京大学医学部为已有核实的母校归属特例（官方 bjmu.edu.cn）。
+    """
     variants = name_variants(name)
     for n in variants:
         if n in by_name:
             return by_name[n]
-    n = variants[-1]
-    for k in range(len(n) - 1, 3, -1):
-        if n[:k] in by_name:
-            return by_name[n[:k]]
+    if code in by_code and by_code[code]["name"] in variants:
+        return by_code[code]
+    if variants[-1] == "北京大学医学部":
+        return by_name.get("北京大学", {})
     return {}
 
 

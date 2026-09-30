@@ -5,6 +5,7 @@
 usage: python3 scripts/factor_scan.py                   # 因子扫描
        python3 scripts/factor_scan.py --teacher-births  # 出生人口与师范变冷的检验
 """
+import argparse
 import csv,math,re,statistics as st,collections,random,sys
 import os
 D=os.path.join(os.path.dirname(os.path.abspath(__file__)),'..','data')+'/'
@@ -116,13 +117,72 @@ def teacher_births():
                     per[prov_of[n]].append(c - st.median(other[n]))
     rows = sorted((p, len(v), st.mean(v), decl[p]) for p, v in per.items() if len(v) >= 15 and p in decl)
     x, y = [r[3] for r in rows], [r[2] for r in rows]
-    r0 = st.correlation(x, y)
+    r0 = corr(x, y)
+    if r0 is None:
+        raise SystemExit("省份有效样本不足30，不能沿用原相关统计")
     rng = random.Random(0)
-    pv = sum(abs(st.correlation(x, rng.sample(y, len(y)))) >= abs(r0) for _ in range(5000)) / 5000
+    pv = sum(abs(corr(x, rng.sample(y, len(y)))) >= abs(r0) for _ in range(5000)) / 5000
     allv = [c for v in per.values() for c in v]
     print(f"师范相对同校其他专业：平均每年变冷 {st.mean(allv):.3f}（对数位次），{sum(v > 0 for v in allv) / len(allv):.0%} 的情况变冷，共 {len(allv)} 条")
     print(f"院校所在省 {len(rows)} 个：出生人口降幅与师范变冷的相关 {r0:.2f}，置换检验 p = {pv:.3f}（负相关 = 出生人口降得越多，师范越冷）")
 
 
-if __name__ == "__main__":
-    teacher_births() if "--teacher-births" in sys.argv else scan()
+def review_long_term(out, holdout=2026):
+    """只复核三项事先选定的因子；扣除各年共同漂移，不将相关自动变成预测规则。"""
+    import backtest as bt
+    results=[]
+    for prov,(pat,years,metric) in CFG.items():
+        bt.SCHOOL_BY,bt.METRIC='name',metric
+        data={y:{(v['name'],k[1]):v for k,v in bt.load(D+pat.format(y),'major').items()
+                 if v['full'] and v.get(metric)} for y in years}
+        yearly={}
+        for y0,y in zip(years,list(years)[1:]):
+            previous,current=data[y0],data[y]
+            common=sorted(previous.keys() & current.keys())
+            if not common: continue
+            drift=st.median(val(current[k][metric],metric)-val(previous[k][metric],metric) for k in common)
+            med={}
+            grouped=collections.defaultdict(list)
+            for (school,major),r in previous.items(): grouped[school].append(val(r[metric],metric))
+            med={n:st.median(vs) for n,vs in grouped.items() if len(vs)>=3}
+            fs={f:[] for f in ('学校拉力','师范变冷','计划变化')}
+            for k in common:
+                n,m=k;old,new=previous[k],current[k]
+                residual=val(new[metric],metric)-val(old[metric],metric)-drift
+                if n in med: fs['学校拉力'].append((val(old[metric],metric)-med[n],residual))
+                fs['师范变冷'].append((int('师范' in old['label']),residual))
+                # 当年投档表的 plan 可能含事后追加，不能证明填报前可得
+                if old['plan'] and new['plan']: fs['计划变化'].append((math.log(new['plan']/old['plan']),residual))
+            yearly[y]=fs
+        for factor in ('学校拉力','师范变冷','计划变化'):
+            training=[p for y,fs in yearly.items() if y<holdout for p in fs[factor]]
+            train_r=corr(*zip(*training)) if len(training)>=30 else None
+            for y,fs in yearly.items():
+                pairs=fs[factor];r=corr(*zip(*pairs)) if len(pairs)>=30 else None
+                direction=('same' if r*train_r>0 else 'reversed') if r is not None and train_r is not None else 'unavailable'
+                results.append(dict(province=prov,year=y,split='retrospective_holdout' if y==holdout else 'training',
+                                    metric='log_rank' if metric=='rank' else 'minus_score_div10',factor=factor,n=len(pairs),
+                                    correlation='' if r is None else r,training_correlation='' if train_r is None else train_r,
+                                    holdout_direction=direction if y==holdout else '',
+                                    evidence='投档计划可含事后追加，非事前预测因子' if factor=='计划变化' else '描述相关；不自动并入预测'))
+    with open(out,'w',encoding='utf-8',newline='') as f:
+        w=csv.DictWriter(f,fieldnames=list(results[0]),lineterminator="\n");w.writeheader();w.writerows(results)
+    for r in results:
+        if r['split']=='retrospective_holdout': print(r['province'],r['factor'],r['correlation'],r['holdout_direction'],r['evidence'])
+
+
+def main():
+    ap=argparse.ArgumentParser(description=__doc__)
+    ap.add_argument('--teacher-births',action='store_true')
+    ap.add_argument('--review-long-term',action='store_true')
+    ap.add_argument('--holdout',type=int,default=2026)
+    ap.add_argument('--out')
+    a=ap.parse_args()
+    if a.review_long_term:
+        if not a.out: ap.error('--review-long-term 需要 --out')
+        review_long_term(a.out,a.holdout)
+    elif a.teacher_births: teacher_births()
+    else: scan()
+
+
+if __name__ == "__main__": main()
