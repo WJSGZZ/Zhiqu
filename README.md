@@ -16,7 +16,7 @@
 <summary><b>给 AI Agent：用户发来本仓库链接，就按这里安装并使用</b></summary>
 
 1. 下载：`git clone --depth 1 https://github.com/WJSGZZ/Zhiqu.git`（没有 git 就下载 `https://github.com/WJSGZZ/Zhiqu/archive/refs/heads/main.zip` 并解压）。
-2. 仓库有三个技能：`skills/zhiqu`（高考志愿）、`skills/zhiqu-grad`（读研规划）和 `skills/zhiqu-career`（求职方向）。三个文件夹都复制到你的技能目录，它们互相引用部分参考文件（如就业形势）；用户明确只要其中一个时，至少连同 `zhiqu` 一起复制：Claude Code 用 `~/.claude/skills/`，Codex 用 `~/.codex/skills/`，其他支持 `SKILL.md` 的 Agent 用其文档规定的目录（常见为 `~/.agents/skills/`）。不支持技能的 Agent 不用复制，每次对话先读对应的 `SKILL.md`。只写入这些位置，不改动用户的其他文件。
+2. 仓库有四个技能：`skills/zhiqu`（高考志愿，也是共用核心）、`skills/zhiqu-grad`（读研规划）、`skills/zhiqu-career`（求职方向）和 `skills/bazi`（八字，作为传统视角供前三者联动）。四个文件夹都复制到你的技能目录，它们用相对路径互相引用；用户明确只要其中一个时，至少连同 `zhiqu` 一起复制：Claude Code 用 `~/.claude/skills/`，Codex 用 `~/.codex/skills/`，其他支持 `SKILL.md` 的 Agent 用其文档规定的目录（常见为 `~/.agents/skills/`）。不支持技能的 Agent 不用复制，每次对话先读对应的 `SKILL.md`。只写入这些位置，不改动用户的其他文件。
 3. 需要 Python 3.8+，脚本只用标准库，不用 `pip install`。出 PDF 需要本机有 Chrome、Edge 或 Chromium，没有时输出 HTML。
 4. 验证：读研版、求职版只需确认对应的 `SKILL.md` 存在；高考版在 `zhiqu` 文件夹里运行 `python3 scripts/optimize.py examples/candidates_demo.csv --rank 30000 --slots 12 --u-fall -60`，能输出一张志愿表即装好。
 5. 告诉用户装在哪里，问清是高考、读研还是求职，然后读对应的 `SKILL.md`，按其中的流程工作：先请用户填[在线问卷](https://wjsgzz.github.io/Zhiqu/)（首页选"高考志愿""读研规划"或"求职方向"）并把生成的画像发过来。
@@ -55,6 +55,10 @@
 
 1. 打开[在线问卷](https://wjsgzz.github.io/Zhiqu/)，选「求职方向」，约 15 分钟，复制生成的画像（以 `【求职 · 自我盘点】` 开头）
 2. 把画像发给装好知衢的 AI
+
+### 传统视角：八字
+
+三份问卷都可以选填出生信息，网页当场排出八字：只填日期排出年、月、日三柱，填了时间排出完整四柱，再选性别排出大运。报告把八字当作**一面传统视角的镜子**，和你的性格自评、现实条件（能力、分数或学历、就业形势）放在一起对照，用来提出候选方向和值得想一想的问题。它**不参与任何打分和排序，也不会因为八字排除任何选项**。
 
 ---
 
@@ -174,6 +178,7 @@ skills/zhiqu/
 │   ├── volunteer-game.md        投档机制、概率模型、CSV 格式、数据来源
 │   ├── school-research.md       考研与实习就业的院校调研、怎样问学长学姐
 │   ├── outlook.md               就业前景的有条件预测、专业认可度、保研率
+│   ├── bazi-lens.md             八字作为传统视角：读到哪一层、十神主题与现代工作维度、三方对照、边界
 │   ├── shared-rules.md          三个技能共用：骨架、原则、防误伤、交付前自查、纠错流程、写作纪律
 │   ├── job-market.md            当前全国就业形势：数据快照、正确读法、对高考/读研/求职的含义（两个技能共用）
 │   ├── special-admissions.md    提前批、专项、定向、强基、综合评价：讲解、三省回测与建议
@@ -203,6 +208,7 @@ skills/zhiqu-grad/               读研版技能
     ├── direction-and-state.md   "方向与状态"一节的读法：迷茫的类别、日常困扰、小步骤、边界
     ├── data-sources.md          数据来源与按候选收集的清单
     └── report-guide.md          报告的 12 节固定目录
+skills/bazi/                     八字技能：排盘（含历法脚本）、解盘方法、证据与报告；与知衢联动时只输出主题倾向
 skills/zhiqu-career/             求职版技能
 ├── SKILL.md                     技能入口：阶段 → 找方向 → 诊断或比较 offer → 报告
 └── references/

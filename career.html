@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>求职 · 自我盘点</title>
+<script src="https://cdn.jsdelivr.net/npm/lunar-javascript@1.7.7/lunar.js" defer></script>
 <style>
 :root{
   /* 宣纸 · 松烟 · 石绿 — flat fields, no gradients */
@@ -204,7 +205,7 @@ textarea{resize:vertical;min-height:76px;}
     <p class="lede">找工作不只是找"一份工作"。</p>
     <p>是找内容、收入、节奏、城市都合适、自己也做得好的位置；同样的月薪，在不同城市、不同单位、不同岗位上，过的日子完全不一样。所以这份问卷先问你现在在哪、擅长什么、想要什么样的生活，再谈具体投哪些岗位。</p>
     <hr class="rule">
-    <p>问卷多在求职开始前或进行中填；到了关键节点（开始投递、拿到 offer、想跳槽），可以回来改几处、重新生成。问卷共八节（第六节"方向与状态"可选），每节开头有一句"<b>为什么问这个</b>"。<b>有些题会随你的选择追问</b>，比如手里有多个 offer 在比较，下面会问每个 offer 的细节。不确定的可以留空。</p>
+    <p>问卷多在求职开始前或进行中填；到了关键节点（开始投递、拿到 offer、想跳槽），可以回来改几处、重新生成。问卷共九节，其中「方向与状态」「性格与传统视角」两节可选，每节开头有一句"<b>为什么问这个</b>"。<b>有些题会随你的选择追问</b>，比如手里有多个 offer 在比较，下面会问每个 offer 的细节。不确定的可以留空。</p>
     <p><span class="how">最后一步</span>点击"生成我的画像"，复制那段文字，发给装了知衢的 AI 即可。</p>
   </div>
 
@@ -505,8 +506,86 @@ textarea{resize:vertical;min-height:76px;}
       </div>
     </div></section>
 
+    <section class="section" data-title="性格与传统视角（可选）"><div class="card">
+      <div class="sec-head"><div class="badge">七</div><div class="sec-title">性格与传统视角 <span class="opt-note">（可选）</span></div></div>
+      <p class="sec-why">你是什么样的人，会影响你适合什么样的路。前半部分是性格自评；后半部分是一个传统视角——八字，只用来对照和自我反思，不参与任何打分和排序。整节都可以跳过。</p>
+
+      <div class="q"><div class="q-label">你更喜欢和什么打交道？</div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="people" value="和人打交道"><span class="box">和人打交道</span></label>
+          <label class="opt"><input type="radio" name="people" value="和物/数/代码打交道"><span class="box">和物/数/代码打交道</span></label>
+          <label class="opt"><input type="radio" name="people" value="都还行"><span class="box">都还行</span></label>
+        </div></div>
+
+      <div class="q"><div class="q-label">面对问题，你更喜欢哪一种？</div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="answer" value="有标准答案"><span class="box">有标准答案、清晰的对错</span></label>
+          <label class="opt"><input type="radio" name="answer" value="开放探索"><span class="box">开放探索、没有唯一解</span></label>
+          <label class="opt"><input type="radio" name="answer" value="看情况"><span class="box">看情况</span></label>
+        </div></div>
+
+      <div class="q"><div class="q-label">下面哪些性格更像你？<span class="opt-note">（可多选）</span></div>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="trait" value="偏内向爱钻研"><span class="box">偏内向，爱独处钻研</span></label>
+          <label class="opt"><input type="checkbox" name="trait" value="偏外向需社交"><span class="box">偏外向，需要社交变化</span></label>
+          <label class="opt"><input type="checkbox" name="trait" value="坐得住冷板凳"><span class="box">坐得住冷板凳</span></label>
+          <label class="opt"><input type="checkbox" name="trait" value="怕枯燥重复"><span class="box">怕枯燥重复</span></label>
+          <label class="opt"><input type="checkbox" name="trait" value="抗压较强"><span class="box">抗压较强</span></label>
+          <label class="opt"><input type="checkbox" name="trait" value="细心耐心"><span class="box">细心、有耐心</span></label>
+          <label class="opt"><input type="checkbox" name="trait" value="有领导欲"><span class="box">有组织/领导欲</span></label>
+          <label class="opt"><input type="checkbox" name="trait" value="共情力强"><span class="box">共情力强、喜欢助人</span></label>
+          <label class="opt"><input type="checkbox" name="trait" value="爱动手实践"><span class="box">爱动手实践</span></label>
+          <label class="opt"><input type="checkbox" name="trait" value="爱动脑思考"><span class="box">爱动脑思考</span></label>
+        </div></div>
+
+      <div class="q"><div class="q-label">你的自律程度更接近？</div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="selfdiscipline" value="很自律"><span class="box">很自律，能管住自己</span></label>
+          <label class="opt"><input type="radio" name="selfdiscipline" value="中等"><span class="box">中等</span></label>
+          <label class="opt"><input type="radio" name="selfdiscipline" value="容易拖延"><span class="box">容易拖延，需要被推着</span></label>
+        </div></div>
+      <div class="q"><div class="q-label">面对全新的环境（异地、陌生人圈子），你？</div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="newenv" value="乐于拥抱"><span class="box">兴奋、乐于拥抱</span></label>
+          <label class="opt"><input type="radio" name="newenv" value="慢慢适应"><span class="box">慢慢就能适应</span></label>
+          <label class="opt"><input type="radio" name="newenv" value="比较抗拒"><span class="box">比较抗拒、有压力</span></label>
+        </div></div>
+      <div class="q"><div class="q-label">做一件事，你更习惯哪一种？</div>
+        <div class="opts stack">
+          <label class="opt"><input type="radio" name="planstyle" value="提前规划"><span class="box">提前规划好，一步步来</span></label>
+          <label class="opt"><input type="radio" name="planstyle" value="边走边看"><span class="box">边走边看，灵活调整</span></label>
+          <label class="opt"><input type="radio" name="planstyle" value="看情况"><span class="box">看情况</span></label>
+        </div></div>
+      <div class="q"><div class="q-label">做选择时，你更依赖什么？</div>
+        <div class="opts stack">
+          <label class="opt"><input type="radio" name="decidebasis" value="理性分析"><span class="box">理性分析、权衡利弊</span></label>
+          <label class="opt"><input type="radio" name="decidebasis" value="感受价值观"><span class="box">感受与价值观，在意对人的影响</span></label>
+          <label class="opt"><input type="radio" name="decidebasis" value="两者都有"><span class="box">两者都有</span></label>
+        </div></div>
+      <div class="q"><div class="q-label">下面哪种更像你？</div>
+        <div class="opts stack">
+          <label class="opt"><input type="radio" name="depthbreadth" value="钻深"><span class="box">钻一件事，越钻越深</span></label>
+          <label class="opt"><input type="radio" name="depthbreadth" value="涉广"><span class="box">接触多样，不断尝新</span></label>
+          <label class="opt"><input type="radio" name="depthbreadth" value="两者皆可"><span class="box">两者皆可</span></label>
+        </div></div>
+
+      <div class="q" data-bazi="1"><div class="q-label">出生信息 · 八字参考<span class="opt-note">（选填，多一个认识自己的角度）</span></div>
+        <div class="pair">
+          <div><div class="minilabel">出生日期（公历/阳历）</div><input type="date" id="birthdate"></div>
+          <div><div class="minilabel">出生时间（选填）</div><input type="time" id="birthtime"></div>
+        </div>
+        <input class="mt" type="text" id="birthplace" placeholder="出生地（选填；填了时间再填，用于真太阳时校正）">
+        <div class="opts mt">
+          <label class="opt"><input type="radio" name="bz_sex" value="男"><span class="box">男</span></label>
+          <label class="opt"><input type="radio" name="bz_sex" value="女"><span class="box">女</span></label>
+          <label class="opt"><input type="radio" name="bz_sex" value="不排大运"><span class="box">不排大运</span></label>
+        </div>
+        <p class="hint">只填日期可排出年、月、日三柱；填了出生时间可排完整四柱八字；再选性别可排大运。这是一个传统视角，只用来对照和自我反思，不参与任何打分和排序。</p>
+        <p class="hint" id="baziPreview"></p></div>
+    </div></section>
+
     <section class="section" data-title="优先级排序"><div class="card">
-      <div class="sec-head"><div class="badge">七</div><div class="sec-title">优先级排序</div></div>
+      <div class="sec-head"><div class="badge">八</div><div class="sec-title">优先级排序</div></div>
       <p class="sec-why">这是整份问卷的题眼。几样都想要的时候，排序决定取舍；后面比较岗位和 offer 就按这个顺序定权重。</p>
 
       <div class="q req" id="rankq"><div class="q-label">按重要程度，依次点选下面七项（先点最重要的）</div>
@@ -525,7 +604,7 @@ textarea{resize:vertical;min-height:76px;}
     </div></section>
 
     <section class="section" data-title="心里话"><div class="card">
-      <div class="sec-head"><div class="badge">八</div><div class="sec-title">你心里的话</div></div>
+      <div class="sec-head"><div class="badge">九</div><div class="sec-title">你心里的话</div></div>
       <p class="sec-why">数据算不出你真正在乎什么。下面几句越实在越好。</p>
 
       <div class="q"><div class="q-label">现在最纠结、最想弄明白的一件事<span class="opt-note">（选填）</span></div>
@@ -578,6 +657,97 @@ textarea{resize:vertical;min-height:76px;}
   function checks(name){var n=document.querySelectorAll('input[name="'+name+'"]:checked'),o=[];for(var i=0;i<n.length;i++)o.push(n[i].value);return o.join('、');}
   function f(v){return(v&&v.length)?v:'（未填）';}
   function isVisible(el){return !!(el&&el.offsetParent!==null);}
+
+  /* ===== 八字（传统视角，选填）排盘 =====
+     口径：按填入的北京时间计算，不做真太阳时校正；子时按 lunar-javascript 默认规则处理。
+     只填日期：只能排出年/月/日三柱（三柱六字）；分别用当天 00:00 与 23:59 各算一次，
+       若年/月/日某柱不同，则该柱显示"甲子/乙丑（需出生时间才能确定）"。
+     填了出生时间：排四柱八字；若时间在时辰边界（奇数整点：23/01/03/05/07/09/11/13/15/17/19/21 时）
+       前后 15 分钟内，标注"时辰临界"，并用 ±15 分钟重算，若有柱变化则给出对照。
+     大运：仅当填了出生时间、且性别为"男"或"女"时才计算（1=男，0=女，与库的 getYun 参数一致），取前 8 步。
+     若 lunar-javascript 未加载成功（离线/被拦截等），仅输出原始出生信息 + 提示 AI 按信息排盘，不阻断问卷。
+  */
+  function baziLibReady(){ return (typeof Solar!=='undefined') && (typeof Solar.fromYmdHms==='function'); }
+  function baziEightChar(y,m,d,hh,mi){ return Solar.fromYmdHms(y,m,d,hh,mi,0).getLunar().getEightChar(); }
+  function baziBoundaryNear(hh,mi){
+    var boundaries=[23,1,3,5,7,9,11,13,15,17,19,21];
+    var totalMin=hh*60+mi, near=false;
+    boundaries.forEach(function(bh){
+      var bmin=bh*60;
+      var diff=Math.min(Math.abs(totalMin-bmin),1440-Math.abs(totalMin-bmin));
+      if(diff<=15) near=true;
+    });
+    return near;
+  }
+  function baziShiftMinutes(y,m,d,hh,mi,delta){
+    var dt=new Date(y,m-1,d,hh,mi);
+    dt=new Date(dt.getTime()+delta*60000);
+    return {y:dt.getFullYear(),m:dt.getMonth()+1,d:dt.getDate(),hh:dt.getHours(),mi:dt.getMinutes()};
+  }
+  /* bdt: 'YYYY-MM-DD'  btm: 'HH:MM' 或空  bpl: 出生地文本或空  sexVal: '男'/'女'/其他 */
+  function computeBaziBlock(bdt,btm,bpl,sexVal){
+    if(!bdt) return {lines:[],preview:''};
+    var p=bdt.split('-'); var y=+p[0],m=+p[1],d=+p[2];
+    if(!baziLibReady()){
+      var offlineTxt='（排盘库未加载，请 AI 按出生信息排盘）';
+      return {lines:['八字（传统视角，选填）：'+offlineTxt],preview:offlineTxt};
+    }
+    try{
+      var lines=[],preview='';
+      if(btm){
+        var tp=btm.split(':'); var hh=+tp[0],mi=+tp[1];
+        var ec=baziEightChar(y,m,d,hh,mi);
+        var pillars='年柱 '+ec.getYear()+'　月柱 '+ec.getMonth()+'　日柱 '+ec.getDay()+'　时柱 '+ec.getTime();
+        var dayZhu='日主 '+ec.getDayGan()+'（'+ec.getDayWuXing().charAt(0)+'）';
+        preview=pillars+'　'+dayZhu;
+        lines.push('八字（传统视角，选填）：'+pillars+'　'+dayZhu);
+        lines.push('  · 口径：北京时间，未做真太阳时校正；子时按排盘库默认规则。');
+        lines.push('  · 十神：年干 '+ec.getYearShiShenGan()+'　月干 '+ec.getMonthShiShenGan()+'　时干 '+ec.getTimeShiShenGan()+'（日干为日主，不计十神）');
+        if(baziBoundaryNear(hh,mi)){
+          var s1=baziShiftMinutes(y,m,d,hh,mi,-15), s2=baziShiftMinutes(y,m,d,hh,mi,15);
+          var ec1=baziEightChar(s1.y,s1.m,s1.d,s1.hh,s1.mi), ec2=baziEightChar(s2.y,s2.m,s2.d,s2.hh,s2.mi);
+          var changed = ec1.getYear()!==ec.getYear()||ec1.getMonth()!==ec.getMonth()||ec1.getDay()!==ec.getDay()||ec1.getTime()!==ec.getTime()
+                     || ec2.getYear()!==ec.getYear()||ec2.getMonth()!==ec.getMonth()||ec2.getDay()!==ec.getDay()||ec2.getTime()!==ec.getTime();
+          var noteTail=changed?('　－15分：'+ec1.getYear()+' '+ec1.getMonth()+' '+ec1.getDay()+' '+ec1.getTime()+'　＋15分：'+ec2.getYear()+' '+ec2.getMonth()+' '+ec2.getDay()+' '+ec2.getTime()):'';
+          lines.push('  · （时辰临界：出生时间误差可能改变时柱）'+noteTail);
+          preview+='（时辰临界）';
+        }
+        if(sexVal==='男'||sexVal==='女'){
+          var genderFlag=(sexVal==='男')?1:0;
+          var yun=ec.getYun(genderFlag);
+          var list=yun.getDaYun(9); // index0=起运前，1..8为前8步大运
+          var first=list[1];
+          var arr=[];
+          for(var i=1;i<list.length;i++){ arr.push(list[i].getGanZhi()+'('+list[i].getStartYear()+')'); }
+          lines.push('  · 大运：'+first.getStartAge()+' 岁起运（'+first.getStartYear()+' 年），'+(yun.isForward()?'顺行':'逆行')+'；'+arr.join(' '));
+        }
+      } else {
+        var ec0=baziEightChar(y,m,d,0,0), ec1d=baziEightChar(y,m,d,23,59);
+        var yTxt = ec0.getYear()===ec1d.getYear() ? ec0.getYear() : (ec0.getYear()+'/'+ec1d.getYear()+'（需出生时间才能确定）');
+        var mTxt = ec0.getMonth()===ec1d.getMonth() ? ec0.getMonth() : (ec0.getMonth()+'/'+ec1d.getMonth()+'（需出生时间才能确定）');
+        var dTxt = ec0.getDay()===ec1d.getDay() ? ec0.getDay() : (ec0.getDay()+'/'+ec1d.getDay()+'（需出生时间才能确定）');
+        var pillars3='年柱 '+yTxt+'　月柱 '+mTxt+'　日柱 '+dTxt;
+        preview=pillars3;
+        lines.push('八字（传统视角，选填）：'+pillars3+'　日主 '+ec0.getDayGan()+'（'+ec0.getDayWuXing().charAt(0)+'）');
+        lines.push('  · 口径：北京时间，未做真太阳时校正；子时按排盘库默认规则。只填了日期，只能排年/月/日三柱；填出生时间可排完整四柱与大运。');
+      }
+      if(bpl) lines.push('  · 出生地：'+bpl+'（未用于校正，AI 可复核真太阳时）');
+      return {lines:lines,preview:preview};
+    }catch(e){
+      var errTxt='（排盘计算出错，请 AI 按出生信息排盘）';
+      return {lines:['八字（传统视角，选填）：'+errTxt],preview:errTxt};
+    }
+  }
+  function updateBaziPreview(){
+    var el=document.getElementById('baziPreview'); if(!el) return;
+    var r=computeBaziBlock(val('birthdate'),val('birthtime'),val('birthplace'),radio('bz_sex'));
+    el.textContent=r.preview;
+  }
+  ['birthdate','birthtime','birthplace'].forEach(function(id){
+    var el=document.getElementById(id); if(el){ el.addEventListener('input',updateBaziPreview); el.addEventListener('change',updateBaziPreview); }
+  });
+  document.querySelectorAll('input[name="bz_sex"]').forEach(function(el){ el.addEventListener('change',updateBaziPreview); });
+  window.addEventListener('load',updateBaziPreview);
 
   /* ----- conditional follow-ups ----- */
   function refreshFollowups(){
@@ -722,6 +892,12 @@ textarea{resize:vertical;min-height:76px;}
 
   function answerOf(q){
     if(q.querySelector('#rank')) return rankOrder.length?rankText():'';
+    if(q.dataset.bazi){
+      var bdt=val('birthdate'),btm=val('birthtime'),bpl=val('birthplace');
+      if(!bdt) return '';
+      var bz=computeBaziBlock(bdt,btm,bpl,radio('bz_sex'));
+      return (bdt?'公历'+bdt:'')+(btm?'　'+btm:'')+'\n'+bz.lines.join('\n');
+    }
     var parts=[];
     var r=q.querySelector('input[type=radio]:checked'); if(r) parts.push(r.value);
     var c=q.querySelectorAll('input[type=checkbox]:checked');
