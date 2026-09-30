@@ -1,0 +1,4 @@
+interface:
+  display_name: "专业八字研究与分析"
+  short_description: "专业解盘、岁运研究与统一交互式报告"
+  default_prompt: "Use $bazi to produce one evidence-linked Four Pillars synthesis, including conditional career and luck-cycle analysis, and render a consistent interactive HTML report when a full report is requested."

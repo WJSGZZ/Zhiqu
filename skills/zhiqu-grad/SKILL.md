@@ -52,6 +52,8 @@ description: 知衢 · 读研规划。读取「知衢 · 硕士版」问卷生�
 
    - 「方向与状态」一节有作答，或「为什么读研」一节显示对工作了解很少时，读 `references/direction-and-state.md`：判断卡在哪一类，给小而具体的下一步；日常烦恼用平常语气回应，不下诊断。
 
+   - 「性格与传统视角」一节有八字时，读 `../zhiqu/references/bazi-lens.md`：八字只作传统视角，与性格作答、现实三方对照，不进入打分和排序。
+
    前景判断同高考版：若同时安装了 `zhiqu`，读 `../zhiqu/references/outlook.md`（专业和行业的有条件前景）和 `../zhiqu/references/job-market.md`（全国就业形势，每次先更新数字）。用条件句写前景，兴趣优先，前景只用来排除风险。
 4. **确定方向后再收集数据**（`references/data-sources.md`）。只收集和这位学生的候选相关的数据：
    - 目标院校近三年的复试线和拟录取名单；
