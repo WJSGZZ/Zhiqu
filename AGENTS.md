@@ -1,12 +1,12 @@
-# 给 AI Agent
+# 贡献者规范
 
-这份文件写给第一次接触知衢的 AI Agent（Claude Code、Codex 等）。读完它，你应该知道这个项目是什么、怎么安装使用、怎么在不破坏它的前提下改进它。给人看的介绍在 [README.md](README.md)。
+写给参与知衢开发的人和 AI Agent（Claude Code、Codex 等）。产品介绍、安装与使用见 [README.md](README.md)；本文件说明项目结构、工作流程、检查与协作规则。
 
 ## 一、先分清你是来做什么的
 
 | 你的任务 | 读什么 | 不做什么 |
 |---|---|---|
-| **用知衢帮一个人做规划**（最常见：用户发来仓库链接，说"安装并使用"） | 本文件第二、三节，然后读对应技能的 `SKILL.md` | 不改项目源代码；安装不等于获准上传用户资料、代发消息或代为填报签约 |
+| **用知衢帮一个人做规划** | README 的"快速开始"，然后读对应技能的 `SKILL.md` | 不改项目源代码；安装不等于获准上传用户资料、代发消息或代为填报签约 |
 | **改进这个项目本身** | 本文件第四到七节，再读 [DESIGN.md](DESIGN.md) 和 [ROADMAP.md](ROADMAP.md) | 不在 main 上直接改；不整份覆盖别人写的文件 |
 
 ## 二、知衢是什么
@@ -34,37 +34,7 @@
 
 ## 三、安装与使用
 
-需要：Python 3.10 或更高，核心脚本只用标准库；出 PDF 需要本机有 Chrome、Edge 或 Chromium，没有时输出 HTML。旧版 `.xls` 公务员职位表解析另需可选的 `xlrd`。
-
-```bash
-git clone --depth 1 https://github.com/WJSGZZ/Zhiqu.git
-cd Zhiqu
-```
-
-把四个技能复制到你的技能目录。Claude Code 个人安装用 `~/.claude/skills/`，Codex 用 `~/.codex/skills/`，其他支持 `SKILL.md` 的 Agent 按其文档。已有同名文件夹时脚本会停下，先核对版本，不要覆盖：
-
-```bash
-python3 - <<'PY'
-from pathlib import Path
-import shutil
-source = Path('skills')
-target = Path('~/.claude/skills').expanduser()  # Codex 改为 ~/.codex/skills
-names = ('zhiqu', 'zhiqu-grad', 'zhiqu-career', 'bazi')
-for name in names:
-    if not (source / name / 'SKILL.md').is_file():
-        raise SystemExit(f'源技能不完整：{name}')
-    if (target / name).exists() or (target / name).is_symlink():
-        raise SystemExit(f'已有 {target / name}，先核对版本，不覆盖')
-target.mkdir(parents=True, exist_ok=True)
-for name in names:
-    shutil.copytree(source / name, target / name, ignore=shutil.ignore_patterns('__pycache__', '*.pyc'))
-print(f'已安装到 {target}')
-PY
-```
-
-验证安装：在安装后的 `zhiqu` 目录运行 `python3 scripts/optimize.py examples/candidates_demo.csv --rank 30000 --slots 12 --u-fall -60`，能输出一张志愿表即可。不支持技能目录的 Agent，每次对话先读对应的 `SKILL.md`。
-
-然后：告诉用户装在哪里，问清是高考、读研还是求职，请用户填[在线问卷](https://wjsgzz.github.io/Zhiqu/)并把画像发来，按对应 `SKILL.md` 工作。三个完整示例在各技能的 `examples/demo_2027*/`，照着它们的结构写报告。
+按 README 的"快速开始"安装四个技能（同层放置）并验证。使用时问清是高考、读研还是求职，请用户填问卷、发来画像，按对应 `SKILL.md` 工作。三个完整示例在各技能的 `examples/demo_2027*/`，报告结构以它们为准。
 
 ## 四、改进项目：开工前
 
