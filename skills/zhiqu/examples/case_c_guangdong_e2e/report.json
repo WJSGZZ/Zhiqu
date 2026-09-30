@@ -329,5 +329,42 @@
    "http://www.moe.gov.cn/jyb_xxgk/s5743/s5744/202506/t20250627_1195683.html",
    "2026-09-29"
   ]
+ ],
+ "numeric_claims": [
+  {
+   "report_path": "summary.headline",
+   "number_index": 0,
+   "result_path": "list.0.majors.0.p",
+   "scale": 100,
+   "tolerance": 0.5
+  },
+  {
+   "report_path": "summary.headline",
+   "number_index": 1,
+   "result_path": "list.1.majors.0.p",
+   "scale": 100,
+   "tolerance": 0.5
+  },
+  {
+   "report_path": "summary.headline",
+   "number_index": 2,
+   "result_path": "list.2.majors.0.p",
+   "scale": 100,
+   "tolerance": 0.5
+  },
+  {
+   "report_path": "summary.points.2",
+   "number_index": 2,
+   "result_path": "list.0.p_clear",
+   "scale": 100,
+   "tolerance": 0.5
+  },
+  {
+   "report_path": "summary.points.2",
+   "number_index": 4,
+   "result_path": "list.1.p_clear",
+   "scale": 100,
+   "tolerance": 0.5
+  }
  ]
 }

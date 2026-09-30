@@ -4,13 +4,21 @@
 某专业可报 = 职位学历含本科，且本科专业要求列出了该专业、其所属专业类或门类。"不限专业"的职位单独统计，不计入各专业。
 usage: python3 scripts/civil_service.py 职位表.xls 专业参考目录.xls 输出.csv
 """
+import argparse
 import csv, re, sys
-import xlrd
+
+
+def workbook(path):
+    try:
+        import xlrd
+    except ImportError:
+        raise SystemExit("读取 .xls 需可选依赖 xlrd；先在独立环境安装 xlrd，再运行。")
+    return xlrd.open_workbook(path)
 
 
 def positions(path):
     out = []
-    for sh in xlrd.open_workbook(path).sheets():
+    for sh in workbook(path).sheets():
         hi = next(i for i in range(6) if "招考单位" in sh.row_values(i))
         H = [str(c).replace("\n", "") for c in sh.row_values(hi)]
         col = lambda k: next(i for i, c in enumerate(H) if c.startswith(k))
@@ -25,7 +33,7 @@ def positions(path):
 
 
 def majors(path):
-    sh = xlrd.open_workbook(path).sheet_by_index(1)
+    sh = workbook(path).sheet_by_index(1)
     cls, maj, last = {}, {}, ""
     for i in range(4, sh.nrows):
         r = sh.row_values(i)
@@ -38,10 +46,17 @@ def majors(path):
 
 
 def main():
-    pos_path, cat_path, out = sys.argv[1:4]
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("positions", help="职位表 .xls")
+    parser.add_argument("catalog", help="专业参考目录 .xls")
+    parser.add_argument("out", help="输出 CSV")
+    args = parser.parse_args()
+    pos_path, cat_path, out = args.positions, args.catalog, args.out
     ug = [(set(re.findall(r"B\d+", req)), n, req) for edu, req, n in positions(pos_path) if "本科" in edu]
     open_n = sum(n for _, n, req in ug if req in ("", "不限"))
     total = sum(n for _, n, _ in ug)
+    if total <= 0:
+        parser.error("没有可统计的本科录用人数，请核对职位表格式和学历列")
     cls, maj = majors(cat_path)
     rows = []
     for code, (name, cc) in maj.items():

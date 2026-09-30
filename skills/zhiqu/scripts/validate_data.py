@@ -13,6 +13,7 @@
 
 usage: python3 scripts/validate_data.py [省份目录名 ...]   # 不给则检查全部
 """
+import argparse
 import csv
 import os
 import random
@@ -20,7 +21,7 @@ import re
 import sys
 
 DATA = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data")
-SKIP_DIRS = {"civil_service"}
+SKIP_DIRS = {"civil_service", "calibration"}
 VIOLATION_WARN = 0.02
 
 
@@ -89,9 +90,15 @@ def check_file(path, codes):
 
 
 def main():
+    parser = argparse.ArgumentParser(description="校验投档 CSV：重复键、位次与分数、年份覆盖和院校代码")
+    parser.add_argument("provinces", nargs="*", help="data 下的省份目录；默认全部省份")
+    args = parser.parse_args()
     with open(os.path.join(DATA, "schools.csv"), encoding="utf-8") as f:
         codes = {r["code"] for r in csv.DictReader(f)}
-    provs = sys.argv[1:] or sorted(d for d in os.listdir(DATA) if os.path.isdir(os.path.join(DATA, d)) and d not in SKIP_DIRS)
+    provs = args.provinces or sorted(d for d in os.listdir(DATA) if os.path.isdir(os.path.join(DATA, d)) and d not in SKIP_DIRS)
+    for province in provs:
+        if province not in os.listdir(DATA) or not os.path.isdir(os.path.join(DATA, province)):
+            parser.error(f"未知省份目录：{province}")
     n_issue = 0
     for p in provs:
         files = sorted(fn for fn in os.listdir(os.path.join(DATA, p)) if fn.endswith(".csv") and not fn.startswith(("yfyd", "early")))
