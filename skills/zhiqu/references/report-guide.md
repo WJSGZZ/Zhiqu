@@ -57,3 +57,57 @@ python3 scripts/report.py report.json --opt result.json --out 志愿填报决策
 2. 对照 `result.json` 核对摘要和志愿表里的每个数字。
 3. 通读前四节，确认没有未解释的术语。
 4. 确认"数据来源与声明"一节的来源和日期完整。
+
+## 一条命令重现完整流程
+
+先核实资格与偏好，再运行程序。`pipeline.py` 不替考生打分：它先用 `pool.py` 生成宽表，只保留偏好 CSV 中人工确认的 `id`，合并效用/约束/组内分配参数，再依次调用 `rank.py predict`、`optimize.py` 和 `report.py`。偏好表不能覆盖历史位次、院校代码、名称、选科或招生计划；旧 `id`、重复 `id` 与缺少效用的条目会报错。
+
+在技能目录执行纯虚构演示：
+
+```bash
+python3 scripts/pipeline.py examples/pipeline_demo/config.json --out-dir /tmp/zhiqu-pipeline-demo
+```
+
+输出目录必须为空，以免覆盖已有报告。生成 `pool.csv`、`reviewed.csv`、`predicted.csv`、`result.json` 与已核验的 `report.html`。配置的 `pdf` 设为 `true` 时再输出 PDF；需要本机浏览器。配置各输入路径相对配置文件目录解析，输出目录相对执行目录解析。
+
+配置的 `pool`、`predict`、`optimize` 是相应脚本的参数名与取值（参数名不带 `--`，可重复参数用数组）；`shared` 统一传递位次、漂移、考生人数、目标年、波动参数，禁止在某一步单独覆盖。`preferences` 是人工确认的偏好表，`report` 是报告内容 JSON。允许的偏好字段为 `id`、`utility`、`adj`、`p_adjust`、`utility_adjusted`、`obey`、`majors`、`majors_complete`、`rule`、`gap`、`limits`。凡填写 `majors`，必须显式填写 `majors_complete=0`（部分目录）或 `1`（已核实完整）；不允许沿用默认值。流程不增加录取规则；不得启用未经该省留出年验证的规则。
+
+演示使用由 `candidates_demo.csv` 转换的虚构投档表，没有真实学校、考生或官方资格。候选输入次序会影响固定种子下的有限模拟结果，因此一键流程的数值不承诺和直接运行原候选 CSV 完全相同；报告必须对应本次生成的 `result.json`。
+
+## 自动核验报告数字
+
+`report.py --opt` 在生成前自动检查封面位次、志愿位数、压力倍数与显式数字声明。可另外核验 HTML 的摘要指标和整张志愿表：
+
+```bash
+python3 scripts/check_report.py report.json --opt result.json --html report.html
+```
+
+HTML 核验覆盖推荐数量、最可能去向及概率、满意度指标、基准与压力滑档风险，以及逐行顺序、志愿名、标签、效用、过线概率、落点概率和预测位次。检查不通过时退出码为 1；HTML 中的数字按实际显示精度对照。
+
+自然语言数字须显式登记，程序不会猜“八成把握”说的是过线、落点还是满意度。例如摘要第二条文字为“平均满意度 76.4 分”，其数值来自同一次优化输出，可在 `report.json` 增加：
+
+```json
+"numeric_claims": [
+  {
+    "report_path": "summary.points.1",
+    "number_index": 0,
+    "result_path": "expected_utility",
+    "tolerance": 0.05
+  }
+]
+```
+
+路径用点号连接，数组下标从 0 开始；`number_index` 表示这段文字中的第几个数字。概率写成百分数时增加 `"scale": 100`，如显示到一位小数，容差可取 `0.05` 个百分点。若自然语言有年份、章节编号等其他数字，必须核准下标。未登记的正文、不同重算结果对应的敏感性表、官方事实和 PDF 排版仍须人工复核，不能把“自动通过”写成全报告已经审计。
+
+## 工程审计入口
+
+```bash
+python3 scripts/audit_skill.py --examples
+python3 scripts/audit_skill.py --external
+```
+
+第一条检查文档本地文件链接、全部脚本 `--help`，并在临时目录严格重现两个公开案例的保存结果。第二条额外请求文档外链；需要联网，普通 HTTP 可达性不代表页面内容或片段锚点正确。遇到人机验证、403、超时，记录“未确认”，不绕过验证。若 Python 没有配置系统 CA，可通过 `--ca-file <本机证书包路径>` 指定可信 CA，不能关闭证书验证。正文断言、章节锚点、浏览器中的实际内容与版式由主 Agent 终审。
+
+`civil_service.py` 的核心流程需读取旧式 `.xls`，使用可选依赖 `xlrd`，不是预测/优化标准库流程的依赖；命令帮助不要求安装它。
+
+本机筛选与参数重算的启动、核验及正文边界见 [交互报告说明](interactive-report.md)。

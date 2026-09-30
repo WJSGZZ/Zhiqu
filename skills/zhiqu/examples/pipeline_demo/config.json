@@ -1,0 +1,21 @@
+{
+  "pool": {
+    "year": [
+      "2023=admissions_2023.csv",
+      "2024=admissions_2024.csv",
+      "2025=admissions_2025.csv"
+    ],
+    "key": "major"
+  },
+  "preferences": "preferences.csv",
+  "shared": {
+    "rank": 22000
+  },
+  "optimize": {
+    "slots": 6,
+    "u-fall": -60,
+    "max-fall": 0.01
+  },
+  "report": "report.json",
+  "pdf": false
+}
