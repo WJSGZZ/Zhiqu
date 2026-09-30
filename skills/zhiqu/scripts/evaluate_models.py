@@ -109,15 +109,17 @@ def review(province, holdout):
     for target,(drift,errors) in yearly.items():
         if target > holdout or not errors:
             continue
+        prior_errors = [e for y,(_,es) in yearly.items() if y < target for e in es]
         for d in ('normal','mixture'):
-            rows.append(dict(province=province, target_year=target, split='retrospective_holdout' if target==holdout else 'training',
-                             matching_status=status, distribution=d, sigma_scale=fitted[d], drift=drift,
-                             **score(errors,fitted[d],d), note='固定混合10%×3；训练选参；研究输出，不改生产默认'))
+            scale = fitted[d] if target == holdout else (min(SCALES,key=lambda s:score(prior_errors,s,d)['nll']) if prior_errors else 1.0)
+            rows.append(dict(province=province, target_year=target, split='retrospective_holdout' if target==holdout else 'rolling_history',
+                             matching_status=status, distribution=d, sigma_scale=scale, drift=drift,
+                             **score(errors,scale,d), note='固定混合10%×3；仅用目标年前误差选参，无先前误差用1；研究输出，不改生产默认'))
     hold = {r['distribution']:r for r in rows if r['split']=='retrospective_holdout'}
     if len(hold)==2:
         improves = hold['mixture']['nll'] < hold['normal']['nll'] and hold['mixture']['calibration_error'] < hold['normal']['calibration_error']
         for r in rows:
-            r['holdout_improves_both'] = int(improves)
+            r['holdout_improves_both'] = int(improves) if r['target_year']==holdout else ''
     return rows
 
 
