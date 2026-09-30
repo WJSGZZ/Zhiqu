@@ -174,6 +174,7 @@ skills/zhiqu/
 │   ├── volunteer-game.md        投档机制、概率模型、CSV 格式、数据来源
 │   ├── school-research.md       考研与实习就业的院校调研、怎样问学长学姐
 │   ├── outlook.md               就业前景的有条件预测、专业认可度、保研率
+│   ├── shared-rules.md          三个技能共用：骨架、原则、防误伤、交付前自查、纠错流程、写作纪律
 │   ├── job-market.md            当前全国就业形势：数据快照、正确读法、对高考/读研/求职的含义（两个技能共用）
 │   ├── special-admissions.md    提前批、专项、定向、强基、综合评价：讲解、三省回测与建议
 │   ├── report-guide.md          决策报告的字段、写作规矩与出稿检查
@@ -183,6 +184,7 @@ skills/zhiqu/
 │   ├── rank.py                  分数↔位次、等位分、估分区间、录取线预测
 │   ├── backtest.py              逐年回测：漂移、误差、结构突变、计划弹性
 │   ├── calibrate.py             校准检验：模型说的过线概率和实际是否一致
+│   ├── check_family.py          一致性检查：引用、问卷节名、报告目录、复核期限、重复与体积
 │   ├── validate_data.py         数据校验：分数与位次一致、重复、年份、院校代码
 │   ├── special_types.py         提前批、专项、定向等类型的回测汇总
 │   ├── civil_service.py         统计省考职位表中各专业能报的岗位
