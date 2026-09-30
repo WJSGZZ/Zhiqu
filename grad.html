@@ -229,6 +229,37 @@ textarea{resize:vertical;min-height:76px;}
       <div class="q req"><div class="q-label">想哪一年入学读研？</div>
         <input type="text" id="entry_year" placeholder="例如：2027 年秋季；还不确定就写大概"></div>
 
+      <div class="q req"><div class="q-label">你现在处在哪个阶段？</div>
+        <div class="opts stack">
+          <label class="opt"><input type="radio" name="stage" value="还在考虑要不要读研"><span class="box">还在考虑要不要读研</span></label>
+          <label class="opt"><input type="radio" name="stage" value="决定了，还没开始准备"><span class="box">决定了，还没开始准备</span></label>
+          <label class="opt"><input type="radio" name="stage" value="正在备考或准备申请"><span class="box">正在备考 / 准备申请</span></label>
+          <label class="opt"><input type="radio" name="stage" value="初试成绩已出"><span class="box">考研初试成绩已出（等复试或调剂）</span></label>
+          <label class="opt"><input type="radio" name="stage" value="已有录取在比较"><span class="box">已有录取或 offer，在比较选择</span></label>
+        </div>
+        <p class="hint">越早填，能改变的越多；之后到了关键节点（报名、出分、国家线公布），再回来改几处、重新生成就行，上次的答案会保留。</p></div>
+
+      <div class="followup" data-when="stage=初试成绩已出">
+        <span class="ftag">追问 · 初试成绩</span>
+        <div class="q req"><div class="q-label">总分和各科分数</div>
+          <input type="text" id="score_detail" placeholder="例如：总分 352；政治 68、英语一 71、数学一 105、专业课 108"></div>
+        <div class="q req"><div class="q-label">一志愿院校与专业（写代码更好）</div>
+          <input type="text" id="first_choice" placeholder="例如：某大学 085400 电子信息（专硕）"></div>
+        <div class="q"><div class="q-label">过线情况</div>
+          <div class="opts stack">
+            <label class="opt"><input type="radio" name="line_status" value="过了一志愿复试线"><span class="box">过了一志愿复试线</span></label>
+            <label class="opt"><input type="radio" name="line_status" value="过国家线，没过一志愿复试线"><span class="box">过国家线，没过一志愿复试线</span></label>
+            <label class="opt"><input type="radio" name="line_status" value="国家线还没公布"><span class="box">国家线还没公布</span></label>
+            <label class="opt"><input type="radio" name="line_status" value="没过国家线"><span class="box">没过国家线</span></label>
+          </div></div>
+      </div>
+
+      <div class="followup" data-when="stage=已有录取在比较">
+        <span class="ftag">追问 · 已有录取</span>
+        <div class="q req"><div class="q-label">手里有哪些录取？各自的截止确认日期？</div>
+          <textarea id="offers" placeholder="例如：港某大学 MSc，留位费截止 3 月 15 日；国内某大学 调剂拟录取，确认截止 4 月 2 日"></textarea></div>
+      </div>
+
       <div class="q req"><div class="q-label">本科学校的层次</div>
         <div class="opts">
           <label class="opt"><input type="radio" name="school_tier" value="985"><span class="box">985</span></label>
