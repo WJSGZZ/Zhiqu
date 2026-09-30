@@ -9,6 +9,7 @@ report.json 的字段见 references/report-guide.md；result.json 是 optimize.p
 找不到浏览器时会只输出 HTML，并提示用浏览器"打印 → 存储为 PDF"。
 """
 import argparse
+from check_report import check_report
 import html
 import json
 import os
@@ -471,6 +472,10 @@ def main():
     a = ap.parse_args()
     rep = json.load(open(a.report, encoding="utf-8"))
     opt = json.load(open(a.opt, encoding="utf-8")) if a.opt else None
+    if opt:
+        errors = check_report(rep, opt)
+        if errors:
+            ap.error("报告数字核验失败：" + "；".join(errors))
     doc = build(rep, opt)
     if a.out.lower().endswith(".html"):
         open(a.out, "w", encoding="utf-8").write(doc)
