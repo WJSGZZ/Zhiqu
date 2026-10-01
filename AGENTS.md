@@ -19,18 +19,18 @@
 
 | 技能 | 用途 | 问卷 | 画像开头 |
 |---|---|---|---|
-| `skills/zhiqu` | 高考志愿，也是**三版共用的核心层** | `gaokao.html` | `【高考志愿 · 自我盘点】` |
+| `skills/zhiqu` | 高考志愿，也是**高考计算层** | `gaokao.html` | `【高考志愿 · 自我盘点】` |
 | `skills/zhiqu-grad` | 读研规划（考研、境外、中外合作办学、先工作、考公） | `grad.html` | `【读研 · 自我盘点】` |
 | `skills/zhiqu-career` | 求职方向（专科到博士） | `career.html` | `【求职 · 自我盘点】` |
 | `skills/bazi` | 八字：独立使用，或作为前三者的"传统视角" | 三份问卷都有可选的出生信息 | — |
 
-共用的规则和资料放在 `skills/zhiqu/references/`：
+共用的规则和资料放在 `skills/zhiqu-shared/references/`：
 - `shared-rules.md`：骨架、原则、防误伤、交付前自查、纠错流程、写作纪律。**每次交付报告前都要按它自查。**
 - `job-market.md`：全国就业形势；
 - `outlook.md`：专业与行业前景；
 - `bazi-lens.md`：八字怎么用、用到哪一层。
 
-读研版和求职版共用 `skills/zhiqu-grad/references/direction-and-state.md`（迷茫与状态）。技能之间用相对路径互相引用，所以**四个技能要同层安装**。
+读研版和求职版共用 `skills/zhiqu-shared/references/direction-and-state.md`（迷茫与状态）。技能之间用相对路径互相引用，所以**四个技能和 `zhiqu-shared` 共用目录要同层安装**。
 
 ## 三、安装与使用
 
@@ -59,7 +59,7 @@ python3 skills/zhiqu/scripts/validate_data.py          # 改了数据时
 
 ## 六、协作与合并
 
-- **一事一处**：会变的事实只放一个文件，别处链接；发现错误按 `skills/zhiqu/references/shared-rules.md` 的纠错流程处理。
+- **一事一处**：会变的事实只放一个文件，别处链接；发现错误按 `skills/zhiqu-shared/references/shared-rules.md` 的纠错流程处理。
 - **提交 PR**：说明改了什么、为什么、怎么验证的；检查输出贴在描述里。以下改动先开 issue 讨论：问卷题目、产品定位、删除已有功能。
 - **不提交真实个人信息**：示例一律虚构，地点只写到省。
 - **整合别人的分支**：逐处核对冲突，两边的新增都保留，不拿旧版整份覆盖。

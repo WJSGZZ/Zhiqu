@@ -17,5 +17,6 @@
     "max-fall": 0.01
   },
   "report": "report.json",
-  "pdf": false
+  "pdf": false,
+  "decision_mode": "simulation"
 }

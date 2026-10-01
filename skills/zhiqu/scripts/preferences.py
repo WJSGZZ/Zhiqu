@@ -9,22 +9,26 @@ import argparse
 import csv
 import json
 import math
+import re
 
 ATTRS = ('school', 'major', 'city', 'outlook')
 
 
-def weights(priority):
+def weights(priority, attrs=ATTRS):
     order = [x for x in priority if x != 'safety']
-    if len(order) != 4 or set(order) != set(ATTRS):
-        raise ValueError('priority 必须各含 school,major,city,outlook 一次，可另含 safety')
-    return {name: sum(1/j for j in range(i+1,5))/4 for i,name in enumerate(order)}
+    if len(order) != len(attrs) or set(order) != set(attrs):
+        raise ValueError('priority 必须各含已定义属性一次，可另含 safety')
+    return {name: sum(1/j for j in range(i+1,len(order)+1))/len(order) for i,name in enumerate(order)}
 
 
 def raw_score(scores, w):
-    vals = {a:float(scores[a]) for a in ATTRS}
+    try:
+        vals = {a:float(scores[a]) for a in w}
+    except (TypeError, KeyError, ValueError) as exc:
+        raise ValueError('属性未知，先调查或确认，不能自动填分') from exc
     if any(not math.isfinite(v) or not 0 <= v <= 10 for v in vals.values()):
         raise ValueError('属性分必须为 0–10 的有限数字；未知时先调查，不自动填分')
-    return 10*sum(w[a]*vals[a] for a in ATTRS)
+    return 10*sum(w[a]*vals[a] for a in w)
 
 
 def has_cycle(edges):
@@ -43,7 +47,10 @@ def evaluate(rows, config, scenario):
     spec = config['scenarios'][scenario]
     if spec.get('confirmed') is not True:
         raise ValueError('每个场景的排序与锚点必须由当事人确认（confirmed=true）')
-    w = weights(spec['priority'])
+    attrs = tuple(config.get('attributes', ATTRS))
+    if len(attrs) < 2 or len(set(attrs)) != len(attrs) or any(not isinstance(a,str) or not re.fullmatch('[a-z][a-z0-9_]*',a) or a=='safety' for a in attrs):
+        raise ValueError('attributes 须为至少两个不同属性标识，safety 另作风险约束')
+    w = weights(spec['priority'], attrs)
     lo, hi = [raw_score(spec['anchors'][a]['scores'],w) for a in ('low','high')]
     if hi <= lo:
         raise ValueError('梦校锚点效用必须高于底线锚点；先澄清两者，不反转或夹断')
@@ -52,7 +59,7 @@ def evaluate(rows, config, scenario):
         identifier = r.get('id')
         if not identifier or identifier in lookup:
             raise ValueError('候选 id 必须非空且唯一')
-        raw = raw_score({a:r[a+'_score'] for a in ATTRS},w)
+        raw = raw_score({a:r[a+'_score'] for a in attrs},w)
         u = 100*(raw-lo)/(hi-lo)
         row=dict(r,utility=round(u,6),utility_scenario=scenario)
         output.append(row);lookup[identifier]=row
@@ -73,7 +80,7 @@ def evaluate(rows, config, scenario):
     pairs=[]
     for i,a in enumerate(output):
         for b in output[i+1:]:
-            diffs=[float(a[k+'_score'])-float(b[k+'_score']) for k in ATTRS]
+            diffs=[float(a[k+'_score'])-float(b[k+'_score']) for k in attrs]
             if any(d>0 for d in diffs) and any(d<0 for d in diffs):
                 pairs.append((abs(a['utility']-b['utility']),a['id'],b['id']))
     return output, dict(scenario=scenario,weights=w,anchors=spec['anchors'],warnings=warnings,

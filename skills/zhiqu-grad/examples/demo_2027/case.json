@@ -38,6 +38,29 @@
         "统考计划",
         "费用与奖助",
         "就业岗位资格"
+      ],
+      "year": 2027,
+      "hard_conditions": [
+        {
+          "name": "2027招生目录与考试科目",
+          "status": "unknown",
+          "source": "https://automation.gdut.edu.cn/info/1044/8869.htm"
+        },
+        {
+          "name": "统考计划",
+          "status": "unknown",
+          "source": "https://automation.gdut.edu.cn/info/1044/8869.htm"
+        },
+        {
+          "name": "费用与奖助",
+          "status": "unknown",
+          "source": "https://automation.gdut.edu.cn/info/1044/8869.htm"
+        },
+        {
+          "name": "就业岗位资格",
+          "status": "unknown",
+          "source": "https://automation.gdut.edu.cn/info/1044/8869.htm"
+        }
       ]
     },
     {
@@ -49,6 +72,24 @@
         "2027招生目录与考试科目",
         "2027统考名额与基地计划",
         "费用"
+      ],
+      "year": 2027,
+      "hard_conditions": [
+        {
+          "name": "2027招生目录与考试科目",
+          "status": "unknown",
+          "source": "https://www2.scut.edu.cn/ep/2026/0408/c5226a623127/page.htm"
+        },
+        {
+          "name": "2027统考名额与基地计划",
+          "status": "unknown",
+          "source": "https://www2.scut.edu.cn/ep/2026/0408/c5226a623127/page.htm"
+        },
+        {
+          "name": "费用",
+          "status": "unknown",
+          "source": "https://www2.scut.edu.cn/ep/2026/0408/c5226a623127/page.htm"
+        }
       ]
     }
   ],
@@ -101,5 +142,62 @@
       "https://www2.scut.edu.cn/ep/2026/0408/c5226a623127/page.htm",
       "https://yz.scut.edu.cn/2025/0523/c30111a592029/page.htm"
     ]
-  }
+  },
+  "preference_model": {
+    "attributes": [
+      "training",
+      "career_fit",
+      "affordability",
+      "location",
+      "time"
+    ],
+    "confirmed": false,
+    "anchors": {
+      "low": {
+        "description": "可接受的就业备选，生活能承担",
+        "scores": null
+      },
+      "high": {
+        "description": "训练方向合适、费用可承担的读研结果",
+        "scores": null
+      }
+    },
+    "unresolved": [
+      "本人逐属性评分、完整锚点与优先级尚未确认，当前不算效用"
+    ],
+    "housing_fund_cash_factor": null
+  },
+  "probability_assessments": [
+    {
+      "stage": "pre_exam",
+      "kind": "qualitative",
+      "personal_probability": null,
+      "population": "华工2025/2026已拟录取的普通与基地计划考生，不是全部报考者",
+      "condition": "初试未发生；仅比较往年录取分布和模考情景",
+      "denominator": null,
+      "unknown": [
+        "报考总人数及未录取者分布",
+        "本人实际初试总分与单科",
+        "2027复试与名额"
+      ],
+      "cost_unit": "CNY",
+      "utility_unit": "separate_confirmed_scale"
+    },
+    {
+      "stage": "simulated_post_score",
+      "kind": "qualitative",
+      "score": 380,
+      "personal_probability": null,
+      "population": "往年已录取者（2025约53、2026约120）；不是本人同条件竞争池",
+      "condition": "模拟总分380；假设科目可比，单科与复试未核实",
+      "denominator": null,
+      "unknown": [
+        "单科线和2027复试名单",
+        "2027普通/基地计划余额及资格",
+        "本人复试表现与评分规则"
+      ],
+      "cost_unit": "CNY",
+      "utility_unit": "separate_confirmed_scale"
+    }
+  ]
 }

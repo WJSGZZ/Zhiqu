@@ -25,6 +25,7 @@ import json
 import math
 import random
 import sys
+from decision_evidence import require_formal
 
 try:
     (0).bit_count()
@@ -114,7 +115,7 @@ def model_parameters(hist, sigma_floor=0.10, sigma_single=0.25, sigma_scale=1.0,
 
 
 def load_candidates(path, default_obey, sigma_floor, sigma_single, u_fall, require_utility=True,
-                    cohort=None, cohort_now=None, drift=0.0, target_year=None, sigma_scale=1.0, sigma_rule="v2"):
+                    cohort=None, cohort_now=None, drift=0.0, target_year=None, sigma_scale=1.0, sigma_rule="v2", decision_mode="exploration"):
     """cohort/cohort_now 给出时，历年位次按"今年考生总数 / 当年考生总数"折算（即按百分位对齐）。
     drift 为全省录取位次每年的对数漂移（由 backtest.py 估计），第 Y 年的数据补上 (target_year - Y) × drift。
     sigma_scale 为按省校准的波动倍数（由 calibrate.py 估计，见 references/backtests.md），不作用于 CSV 里手填的 sigma。"""
@@ -135,6 +136,8 @@ def load_candidates(path, default_obey, sigma_floor, sigma_single, u_fall, requi
         if not rank_cols:
             sys.exit("CSV 缺少历年位次列，例如 rank_2025, rank_2024, rank_2023")
         for i, r in enumerate(reader, start=2):
+            if decision_mode == "formal":
+                require_formal(r, target_year)
             name = (r.get("name") or r.get("id") or f"第{i}行").strip()
             hist = [parse_float(r.get(c)) for c in rank_cols]
             if cohort and cohort_now:
@@ -368,14 +371,19 @@ def main():
     ap.add_argument("--seed", type=int, default=42)
     ap.add_argument("--max-swap-evals", type=int, default=20000)
     ap.add_argument("--json", help="另存完整结果为 JSON")
+    ap.add_argument("--decision-mode", choices=["formal", "simulation", "exploration"], default="exploration", help="正式推荐须逐项资格证据；默认仅探索，不能直接填报")
     args = ap.parse_args()
+    if args.decision_mode == "formal" and not args.target_year:
+        ap.error("正式推荐须提供 --target-year")
+    if args.decision_mode != "formal":
+        print("当前输出仅用于模拟/探索，资格未认证，不能直接填报", file=sys.stderr)
 
     if not 0 <= args.rho < 1:
         sys.exit("--rho 应在 [0, 1) 内")
     rows, skipped = load_candidates(args.csv, not args.no_obey, args.sigma_floor, args.sigma_single, args.u_fall,
                                     cohort=parse_cohort(args.cohort), cohort_now=args.cohort_now,
                                     drift=args.drift, target_year=args.target_year, sigma_scale=args.sigma_scale,
-                                    sigma_rule=args.sigma_rule)
+                                    sigma_rule=args.sigma_rule, decision_mode=args.decision_mode)
     if not rows:
         sys.exit("没有可用的候选志愿")
     admit, adjust, masks = simulate(rows, args.rank, args.rank_sd, args.rho, args.sims, args.seed)

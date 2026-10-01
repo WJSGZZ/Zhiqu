@@ -91,12 +91,12 @@ cd Zhiqu
 
 DEST=~/.claude/skills        # Codex 使用 ~/.codex/skills
 mkdir -p "$DEST"
-for s in zhiqu zhiqu-grad zhiqu-career bazi; do
+for s in zhiqu zhiqu-grad zhiqu-career bazi zhiqu-shared; do
   if [ -e "$DEST/$s" ]; then echo "已存在 $DEST/$s，未覆盖"; else cp -R "skills/$s" "$DEST/$s"; fi
 done
 ```
 
-四个技能必须安装在同一目录下，它们通过相对路径共用规则与数据。常用的技能目录：
+四个技能与 `zhiqu-shared` 共用目录必须安装在同一目录下，它们通过相对路径引用共用资料。读研和求职读取共用规则时无需加载高考数据；高考专用统计与工具按场景另读。常用的技能目录：
 
 | Agent | 个人安装 | 项目内安装 |
 |---|---|---|
@@ -111,7 +111,7 @@ cd "$DEST/zhiqu"
 python3 scripts/optimize.py examples/candidates_demo.csv --rank 30000 --slots 12 --u-fall -60
 ```
 
-输出一张志愿表即安装成功。更新时先 `git pull`，删除旧的四个目录后重新复制。
+输出一张探索用志愿表后，再运行 `python3 scripts/check_demos.py`，验证三版示例及八字依赖。`check_family.py` 是仓库级检查，需在含问卷的完整仓库中运行。正式填报须使用已核实资格证据与 `--decision-mode formal --target-year 年份`；示例只演示计算。更新时先 `git pull`，删除旧的四技能及共用目录后重新复制。
 
 ### 2. 填写问卷
 
@@ -170,7 +170,8 @@ flowchart LR
 ```
 index.html · gaokao.html · grad.html · career.html   问卷
 skills/
-├── zhiqu/          高考技能，兼三版共用层：数据、预测、优化、报告、检查脚本
+├── zhiqu-shared/   共用资料与检查器（不是独立技能）
+├── zhiqu/          高考技能：数据、预测、优化、报告、检查脚本
 ├── zhiqu-grad/     读研技能
 ├── zhiqu-career/   求职技能
 └── bazi/           八字技能：排盘引擎与解盘方法
@@ -187,6 +188,14 @@ python3 skills/zhiqu/scripts/validate_data.py         # 数据校验
 ```
 
 参与开发前请阅读 [AGENTS.md](AGENTS.md)。
+
+能力与验证范围：
+
+| 范围 | 已有验证 | 尚不能据此证明 |
+|---|---|---|
+| 高考投档模型 | 按省、科类复算历史预测和示例志愿表 | 某位考生必录、组内专业或退档风险准确 |
+| 三版共用能力 | 证据状态、固定偏好锚点、依赖与报告一致性检查 | 官方条件已被程序完整识别、个人偏好已获确认 |
+| 读研与求职 | 分数情景、预算和模拟offer可复算；行动路线有检查点 | 个人上岸概率、就业成功率或真实决策效果 |
 
 ## 局限
 
