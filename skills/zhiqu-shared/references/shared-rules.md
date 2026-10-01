@@ -90,3 +90,9 @@
 候选逐项记录适用年份、官方来源、硬条件（met / unknown / failed）和未决事项。状态为 verified（已核实可行）、pending（待核实）、ineligible（已证实不可行）。程序只校验结构、年份和状态，不认证官网域名、原文真实性或硬条件是否齐全；主 Agent 须阅读官方原文并人工确认全部适用条件。未知条件保留供调查，不当成满足；不满足的具体候选不能进入正式推荐。模拟演示必须另标阶段与假设，不能转换成正式资格。
 
 高考 CSV 的 `eligibility_evidence` 列保存上述 JSON（字段 status、year、source、hard_conditions、unresolved）；每个硬条件含 name、status、source。`optimize.py --decision-mode formal --target-year 年份` 拒绝缺失、过期、待核实或不合格的证据；默认 exploration 只作探索，simulation 只作模拟。pipeline 默认 formal，模拟配置须显式 decision_mode=simulation。读研和求职 case.json 使用相同证据字段；调查范围不等于项目或岗位资格已核准。
+
+## 三版行动路线的共同结构
+
+行动路线统一回答五件事：**门槛与差距、顺序与投入、里程碑与截止、切换条件与备选、下次检查点**。门槛未知就写待核，截止日期区分本人规划窗口与官方期限；切换条件由可观察的结果触发，不把历史最低分、性格或八字变成排除条件。给到能开始与复查的路线，不替本人承诺资格或安排逐日生活。
+
+高考的投档模型、三版共用的证据/偏好核对、读研与求职的情景演示分别说明验证范围。工具能运行、示例能复算，不等于个人录取概率或真实决策效果已获证明。

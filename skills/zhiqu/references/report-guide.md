@@ -111,3 +111,5 @@ python3 scripts/audit_skill.py --external
 `civil_service.py` 的核心流程需读取旧式 `.xls`，使用可选依赖 `xlrd`，不是预测/优化标准库流程的依赖；命令帮助不要求安装它。
 
 本机筛选与参数重算的启动、核验及正文边界见 [交互报告说明](interactive-report.md)。
+
+高考探索与填报的路线结构见[共用规则](../../zhiqu-shared/references/shared-rules.md)。
