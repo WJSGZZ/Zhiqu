@@ -15,6 +15,7 @@ import subprocess
 import sys
 from datetime import date
 from pathlib import Path
+from decision_evidence import validate_evidence
 
 SKILLS = Path(__file__).resolve().parents[2]
 DEMO_PATHS = (
@@ -101,8 +102,9 @@ def check_followup(path, case):
             fresh = json.loads(tmp.read_text(encoding='utf-8'))
             tmp.unlink()
             old = json.loads((path / saved).read_text(encoding='utf-8'))
-            if [x['name'] for x in fresh['list']] != [x['name'] for x in old['list']] or \
-                    abs(fresh['expected_utility'] - old['expected_utility']) > 0.05:
+            fresh.pop('params', None)
+            old.pop('params', None)
+            if fresh != old:
                 raise ValueError(f'{path}: {saved} is not reproduced by optimize.py with the recorded arguments')
     elif case['kind'] == 'grad':
         stats = f['official_stats']
@@ -139,6 +141,7 @@ def validate(case, chart, profile, report):
     if numbers != [f'{i:02d}' for i in range(1, 13)]:
         raise ValueError('report needs exactly the ordered 12 sections')
     for item in case['evidence']:
+        validate_evidence(item, int(case['target_date'][:4]))
         if item['status'] != 'pending' or not item['unresolved']:
             raise ValueError('the examples have unresolved annual eligibility; do not silently certify it')
         if not item['source'].startswith('https://') or not item['verified_scope']:

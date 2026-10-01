@@ -111,7 +111,7 @@ cd "$DEST/zhiqu"
 python3 scripts/optimize.py examples/candidates_demo.csv --rank 30000 --slots 12 --u-fall -60
 ```
 
-输出一张志愿表即安装成功。更新时先 `git pull`，删除旧的四个目录后重新复制。
+输出一张探索用志愿表后，再运行 `python3 scripts/check_demos.py`，验证三版示例及八字依赖。`check_family.py` 是仓库级检查，需在含问卷的完整仓库中运行。正式填报须使用已核实资格证据与 `--decision-mode formal --target-year 年份`；示例只演示计算。更新时先 `git pull`，删除旧的四个目录后重新复制。
 
 ### 2. 填写问卷
 

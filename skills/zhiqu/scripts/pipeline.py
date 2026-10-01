@@ -7,10 +7,11 @@ import subprocess
 import sys
 from pathlib import Path
 from check_report import check_report
+from decision_evidence import require_formal
 
 SCRIPTS = Path(__file__).resolve().parent
 SHARED = {'rank', 'rank-sd', 'sigma-floor', 'sigma-single', 'sigma-scale', 'sigma-rule', 'drift', 'target-year', 'cohort', 'cohort-now'}
-ALLOWED_PREFERENCES = {'id', 'utility', 'adj', 'p_adjust', 'utility_adjusted', 'obey', 'majors', 'majors_complete', 'rule', 'gap', 'limits'}
+ALLOWED_PREFERENCES = {'id', 'utility', 'adj', 'p_adjust', 'utility_adjusted', 'obey', 'majors', 'majors_complete', 'rule', 'gap', 'limits', 'eligibility_evidence'}
 
 
 def options(values):
@@ -82,8 +83,14 @@ def main():
         pool, scored, predicted, result, html = [out / n for n in ('pool.csv', 'reviewed.csv', 'predicted.csv', 'result.json', 'report.html')]
         run('pool.py', options(config['pool']) + ['--out', str(pool)], base)
         merge_preferences(pool, base / config['preferences'], scored)
+        if config.get('decision_mode', 'formal') == 'formal':
+            if not shared.get('target-year'):
+                raise ValueError('正式推荐须提供 shared.target-year')
+            with scored.open(encoding='utf-8', newline='') as fh:
+                for row in csv.DictReader(fh):
+                    require_formal(row, shared['target-year'])
         run('rank.py', ['predict', str(scored), *options(shared), *options(config.get('predict', {})), '--out', str(predicted)], base)
-        run('optimize.py', [str(predicted), *options(shared), *options(config['optimize']), '--json', str(result)], base)
+        run('optimize.py', [str(predicted), '--decision-mode', config.get('decision_mode', 'formal'), *options(shared), *options(config['optimize']), '--json', str(result)], base)
         report = base / config['report']
         rep = json.loads(report.read_text(encoding='utf-8'))
         opt = json.loads(result.read_text(encoding='utf-8'))

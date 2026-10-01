@@ -43,7 +43,7 @@ class DemoIntegrity(unittest.TestCase):
     def test_unknown_annual_eligibility_cannot_be_certified(self):
         changed = copy.deepcopy(self.case)
         changed['evidence'][0]['status'] = 'verified'
-        with self.assertRaisesRegex(ValueError, 'unresolved annual eligibility'):
+        with self.assertRaisesRegex(ValueError, '未决|unresolved annual eligibility'):
             check_demos.validate(changed, self.chart, self.profile, self.report)
 
 

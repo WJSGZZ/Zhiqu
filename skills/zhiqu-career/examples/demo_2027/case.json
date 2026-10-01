@@ -32,6 +32,34 @@
         "合同甲方",
         "社保与加班",
         "实际offer"
+      ],
+      "year": 2027,
+      "hard_conditions": [
+        {
+          "name": "具体用人单位正式招聘公告",
+          "status": "unknown",
+          "source": "https://rst.sc.gov.cn/rst/gsgg/2025/7/7/770dc72520ef42c493044cfb1f8c404f.shtml"
+        },
+        {
+          "name": "学历与应届条件",
+          "status": "unknown",
+          "source": "https://rst.sc.gov.cn/rst/gsgg/2025/7/7/770dc72520ef42c493044cfb1f8c404f.shtml"
+        },
+        {
+          "name": "合同甲方",
+          "status": "unknown",
+          "source": "https://rst.sc.gov.cn/rst/gsgg/2025/7/7/770dc72520ef42c493044cfb1f8c404f.shtml"
+        },
+        {
+          "name": "社保与加班",
+          "status": "unknown",
+          "source": "https://rst.sc.gov.cn/rst/gsgg/2025/7/7/770dc72520ef42c493044cfb1f8c404f.shtml"
+        },
+        {
+          "name": "实际offer",
+          "status": "unknown",
+          "source": "https://rst.sc.gov.cn/rst/gsgg/2025/7/7/770dc72520ef42c493044cfb1f8c404f.shtml"
+        }
       ]
     },
     {
@@ -43,6 +71,24 @@
         "2027报考资格",
         "招生专业与计划",
         "两年学费与生活费"
+      ],
+      "year": 2027,
+      "hard_conditions": [
+        {
+          "name": "2027报考资格",
+          "status": "unknown",
+          "source": "https://www.sceea.cn/Html/202512/Newsdetail_4595.html"
+        },
+        {
+          "name": "招生专业与计划",
+          "status": "unknown",
+          "source": "https://www.sceea.cn/Html/202512/Newsdetail_4595.html"
+        },
+        {
+          "name": "两年学费与生活费",
+          "status": "unknown",
+          "source": "https://www.sceea.cn/Html/202512/Newsdetail_4595.html"
+        }
       ]
     }
   ],

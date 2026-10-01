@@ -84,3 +84,9 @@
 - **会过期的事实加复核标记**：在文件中写 `<!-- 核实：YYYY-MM-DD；复核期限：YYYY-MM-DD -->`，到期由检查脚本提醒。
 - **控制体积**：SKILL.md 不超过 20 KB，单个参考文件不超过 30 KB。加新规则前，先看能否替换旧规则。
 - **每次改动后**：在 `skills/zhiqu` 下运行 `python3 scripts/check_family.py` 和 `python3 -m unittest discover -s tests`，都通过再提交。
+
+## 候选的证据状态
+
+候选逐项记录适用年份、官方来源、硬条件（met / unknown / failed）和未决事项。状态为 verified（已核实可行）、pending（待核实）、ineligible（已证实不可行）。程序只校验结构、年份和状态，不认证官网域名、原文真实性或硬条件是否齐全；主 Agent 须阅读官方原文并人工确认全部适用条件。未知条件保留供调查，不当成满足；不满足的具体候选不能进入正式推荐。模拟演示必须另标阶段与假设，不能转换成正式资格。
+
+高考 CSV 的 `eligibility_evidence` 列保存上述 JSON（字段 status、year、source、hard_conditions、unresolved）；每个硬条件含 name、status、source。`optimize.py --decision-mode formal --target-year 年份` 拒绝缺失、过期、待核实或不合格的证据；默认 exploration 只作探索，simulation 只作模拟。pipeline 默认 formal，模拟配置须显式 decision_mode=simulation。读研和求职 case.json 使用相同证据字段；调查范围不等于项目或岗位资格已核准。

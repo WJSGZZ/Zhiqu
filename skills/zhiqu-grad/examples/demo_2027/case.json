@@ -38,6 +38,29 @@
         "统考计划",
         "费用与奖助",
         "就业岗位资格"
+      ],
+      "year": 2027,
+      "hard_conditions": [
+        {
+          "name": "2027招生目录与考试科目",
+          "status": "unknown",
+          "source": "https://automation.gdut.edu.cn/info/1044/8869.htm"
+        },
+        {
+          "name": "统考计划",
+          "status": "unknown",
+          "source": "https://automation.gdut.edu.cn/info/1044/8869.htm"
+        },
+        {
+          "name": "费用与奖助",
+          "status": "unknown",
+          "source": "https://automation.gdut.edu.cn/info/1044/8869.htm"
+        },
+        {
+          "name": "就业岗位资格",
+          "status": "unknown",
+          "source": "https://automation.gdut.edu.cn/info/1044/8869.htm"
+        }
       ]
     },
     {
@@ -49,6 +72,24 @@
         "2027招生目录与考试科目",
         "2027统考名额与基地计划",
         "费用"
+      ],
+      "year": 2027,
+      "hard_conditions": [
+        {
+          "name": "2027招生目录与考试科目",
+          "status": "unknown",
+          "source": "https://www2.scut.edu.cn/ep/2026/0408/c5226a623127/page.htm"
+        },
+        {
+          "name": "2027统考名额与基地计划",
+          "status": "unknown",
+          "source": "https://www2.scut.edu.cn/ep/2026/0408/c5226a623127/page.htm"
+        },
+        {
+          "name": "费用",
+          "status": "unknown",
+          "source": "https://www2.scut.edu.cn/ep/2026/0408/c5226a623127/page.htm"
+        }
       ]
     }
   ],
