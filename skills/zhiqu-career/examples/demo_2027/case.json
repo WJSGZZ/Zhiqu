@@ -158,5 +158,30 @@
       "source": "https://rst.sc.gov.cn/rst/gsgg/2026/9/7/8b8edb37d4cd43ed995a0055f46b7705.shtml"
     },
     "minimum_wage_source": "https://www.sc.gov.cn/10462/zfwjts/2025/1/2/60841bcf38d844fb80ad1ea0b2d74e24.shtml"
+  },
+  "preference_model": {
+    "attributes": [
+      "remaining_cash",
+      "work_content",
+      "contract",
+      "growth",
+      "hours",
+      "location"
+    ],
+    "confirmed": false,
+    "anchors": {
+      "low": {
+        "description": "达到收入和合同底线、本人仍能接受的工作",
+        "scores": null
+      },
+      "high": {
+        "description": "内容、成长、生活结余都符合本人期望的工作",
+        "scores": null
+      }
+    },
+    "unresolved": [
+      "本人逐属性评分、完整锚点与优先级尚未确认，当前不算效用"
+    ],
+    "housing_fund_cash_factor": null
   }
 }

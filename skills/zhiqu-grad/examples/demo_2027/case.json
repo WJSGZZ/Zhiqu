@@ -142,5 +142,29 @@
       "https://www2.scut.edu.cn/ep/2026/0408/c5226a623127/page.htm",
       "https://yz.scut.edu.cn/2025/0523/c30111a592029/page.htm"
     ]
+  },
+  "preference_model": {
+    "attributes": [
+      "training",
+      "career_fit",
+      "affordability",
+      "location",
+      "time"
+    ],
+    "confirmed": false,
+    "anchors": {
+      "low": {
+        "description": "可接受的就业备选，生活能承担",
+        "scores": null
+      },
+      "high": {
+        "description": "训练方向合适、费用可承担的读研结果",
+        "scores": null
+      }
+    },
+    "unresolved": [
+      "本人逐属性评分、完整锚点与优先级尚未确认，当前不算效用"
+    ],
+    "housing_fund_cash_factor": null
   }
 }
