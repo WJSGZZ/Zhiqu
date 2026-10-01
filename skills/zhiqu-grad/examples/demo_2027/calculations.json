@@ -3,9 +3,9 @@
   "scenario_only": true,
   "age_at_decision": 21,
   "age_at_target": 22,
-  "annual_cost": 29100,
-  "annual_margin": 900,
-  "annual_cost_if_living_plus_200": 31500,
-  "annual_margin_if_living_plus_200": -1500,
-  "three_year_cost_assumption": 87300
+  "annual_cost": 25200,
+  "annual_margin": 4800,
+  "annual_cost_if_living_plus_200": 27600,
+  "annual_margin_if_living_plus_200": 2400,
+  "total_cost_over_program": 75600
 }

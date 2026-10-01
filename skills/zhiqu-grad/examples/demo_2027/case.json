@@ -1,5 +1,5 @@
 {
-  "fictional": true,
+  "simulated": true,
   "kind": "grad",
   "person": "小林",
   "gender": "女",
@@ -16,10 +16,16 @@
   "official_offer": null,
   "budget": {
     "annual_limit": 30000,
-    "annual_tuition_assumption": 12000,
-    "annual_housing_assumption": 1500,
+    "annual_tuition": 8000,
+    "annual_housing": 1600,
     "monthly_living_assumption": 1300,
-    "living_months": 12
+    "living_months": 12,
+    "years": 3,
+    "fee_basis": "用最近一年官方标准估计2027级：华南理工大学2026年硕士学费标准，专业学位全日制非定向能源动力(0858，含电气工程085801)8000元/学年、学制3年；研究生住宿费最高1600元/学年，取上限；生活费为本人估计",
+    "fee_sources": [
+      "https://yz.scut.edu.cn/2025/1009/c30381a604485/page.htm",
+      "https://admission.scut.edu.cn/_t1723/2025/0516/c30830a591233/page.htm"
+    ]
   },
   "evidence": [
     {
@@ -48,7 +54,7 @@
   ],
   "province": "广东省（就读与报考目标）；出生地湖南省",
   "hypothetical_followup": {
-    "label": "假想初试成绩（虚构分数情景，只为演示对照方法）",
+    "label": "模拟初试成绩（演示对照方法）",
     "score_scenarios": [
       330,
       355,

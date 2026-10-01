@@ -1,5 +1,5 @@
 {
-  "fictional": true,
+  "simulated": true,
   "kind": "career",
   "person": "小宁",
   "gender": "男",
@@ -48,7 +48,7 @@
   ],
   "province": "四川省",
   "hypothetical_followup": {
-    "label": "假想拿到两个offer（虚构单位与条件，只为演示比较方法）",
+    "label": "模拟拿到两个offer（演示比较方法）",
     "tax_rule": "居民个人综合所得：每年减除6万元及个人缴纳的社保公积金；本例无专项附加扣除",
     "ss_personal_rate_assumption": 0.105,
     "offers": [
@@ -56,25 +56,23 @@
         "name": "A 代理记账公司·会计助理（直签，一档地区）",
         "monthly_gross": 4800,
         "months": 12,
-        "ss_base": 4000,
         "hf_rate": 0.0,
         "extra_hours_per_month": 10,
         "monthly_rent": 1100,
         "monthly_other": 1500,
         "minimum_wage_tier": 2330,
-        "note": "社保按假设的基数下限缴，无公积金；月末加班；需在外租房"
+        "note": "社保按实际工资4800元缴（高于2026年基数下限4699元），无公积金；月末加班；需在外租房"
       },
       {
         "name": "B 国企下属单位·出纳（劳务派遣，离家近的二档地区）",
         "monthly_gross": 4300,
         "months": 13,
-        "ss_base": 4300,
         "hf_rate": 0.08,
         "extra_hours_per_month": 0,
         "monthly_rent": 400,
         "monthly_other": 1100,
         "minimum_wage_tier": 2200,
-        "note": "第13个月写进合同；五险一金按实际工资缴，公积金个人与单位各8%；住家里，每月交家里400元"
+        "note": "第13个月写进合同；月工资4300元低于2026年社保基数下限，社保按4699元缴；公积金按实际工资、个人与单位各8%；住家里，每月交家里400元"
       }
     ],
     "standard_hours_per_year": 2000,
@@ -106,6 +104,13 @@
     "upgrade_exam": {
       "source": "https://www.sceea.cn/Html/202512/Newsdetail_4595.html",
       "note": "四川2026年普通专升本：2025年12月发布报名通告，2026-04-16至17考试，报名考试费80元/生；2027年以正式通告为准"
-    }
+    },
+    "ss_base_limits": {
+      "lower": 4699,
+      "upper": 23493,
+      "scope": "四川省2026年度养老、失业、工伤保险缴费基数上下限（2026-09-07公布），用作2027年估计；月工资在上下限之间按实际工资缴",
+      "source": "https://rst.sc.gov.cn/rst/gsgg/2026/9/7/8b8edb37d4cd43ed995a0055f46b7705.shtml"
+    },
+    "minimum_wage_source": "https://www.sc.gov.cn/10462/zfwjts/2025/1/2/60841bcf38d844fb80ad1ea0b2d74e24.shtml"
   }
 }

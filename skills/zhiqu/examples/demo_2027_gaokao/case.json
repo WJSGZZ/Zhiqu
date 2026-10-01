@@ -1,5 +1,5 @@
 {
-  "fictional": true,
+  "simulated": true,
   "kind": "gaokao",
   "person": "小禾",
   "gender": "女",
@@ -17,13 +17,17 @@
   "official_offer": null,
   "budget": {
     "annual_limit": 26000,
-    "annual_tuition_assumption": 6000,
-    "annual_housing_assumption": 1500,
+    "annual_tuition": 4800,
+    "annual_housing": 1600,
     "monthly_living_assumption": 1300,
-    "living_months": 12
+    "living_months": 12,
+    "fee_basis": "用最近一年官方标准估计2027年：浙江外国语学院2026年招生章程，汉语言文学（含师范）学费4800元/学年，住宿费1200或1600元/学年，取高的一档；生活费为本人估计",
+    "fee_sources": [
+      "https://zs.zisu.edu.cn/info/1050/2204.htm"
+    ]
   },
   "hypothetical_followup": {
-    "label": "假想出分后（虚构位次，只为演示计算流程）",
+    "label": "模拟出分后（演示计算流程）",
     "rank": 58000,
     "slots": 80,
     "slots_source": "https://www.zjzs.net/art/2026/7/27/art_159_12577.html",

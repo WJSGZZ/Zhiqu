@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Validate the three fictional 2027 planning demos and reproduce their numbers.
+"""Validate the three simulated 2027 planning demos and reproduce their numbers.
 
 Run from any directory. --write updates calculations.json from explicit scenario
 assumptions; without it saved outputs must match. Each demo also has a clearly
-labelled hypothetical follow-up stage (假想出分后 / 假想初试成绩 / 假想offer):
+labelled simulated follow-up stage (模拟出分后 / 模拟初试成绩 / 模拟offer):
 the gaokao optimizer runs are re-executed and must reproduce the saved results,
 offer take-home pay is recomputed from explicit tax and contribution rules, and
 the grad score reference must carry official statistics. No model is changed.
@@ -45,15 +45,17 @@ def annual_tax(taxable):
 
 
 def offer_numbers(offer, f):
-    """一个假想 offer 的到手收入、时薪与月结余；公积金只按缴存额单列，是否计为收入由本人确认。"""
+    """一个模拟 offer 的到手收入、时薪与月结余；公积金只按缴存额单列，是否计为收入由本人确认。"""
     gross = offer['monthly_gross'] * offer['months']
-    ss = offer['ss_base'] * f['ss_personal_rate_assumption'] * 12
-    hf = offer['ss_base'] * offer['hf_rate'] * 12
+    lim = f['ss_base_limits']
+    ss_base = min(max(offer['monthly_gross'], lim['lower']), lim['upper'])  # 工资低于下限按下限缴，高于上限按上限缴
+    ss = ss_base * f['ss_personal_rate_assumption'] * 12
+    hf = offer['monthly_gross'] * offer['hf_rate'] * 12
     tax = annual_tax(gross - 60000 - ss - hf)
     take_home = gross - ss - hf - tax
     hours = f['standard_hours_per_year'] + offer['extra_hours_per_month'] * 12
     monthly = take_home / 12
-    return {'name': offer['name'], 'annual_gross': round(gross), 'personal_social_insurance': round(ss),
+    return {'name': offer['name'], 'annual_gross': round(gross), 'social_insurance_base': ss_base, 'personal_social_insurance': round(ss),
             'personal_housing_fund': round(hf), 'housing_fund_account_total': round(hf * 2), 'tax': round(tax),
             'annual_take_home_cash': round(take_home), 'monthly_take_home_cash': round(monthly),
             'hours_per_year': hours, 'hourly_cash': round(take_home / hours, 1),
@@ -68,12 +70,12 @@ def calculate(case):
               'age_at_decision': age_on(case['birth_datetime'], case['decision_date']),
               'age_at_target': age_on(case['birth_datetime'], case['target_date'])}
     if case['kind'] in ('gaokao', 'grad'):
-        annual = b['annual_tuition_assumption'] + b['annual_housing_assumption'] + b['monthly_living_assumption'] * b['living_months']
+        annual = b['annual_tuition'] + b['annual_housing'] + b['monthly_living_assumption'] * b['living_months']
         result.update(annual_cost=annual, annual_margin=b['annual_limit'] - annual,
                       annual_cost_if_living_plus_200=annual + 200 * b['living_months'],
                       annual_margin_if_living_plus_200=b['annual_limit'] - annual - 200 * b['living_months'])
         if case['kind'] == 'grad':
-            result['three_year_cost_assumption'] = annual * 3
+            result['total_cost_over_program'] = annual * b['years']
     else:
         expenses = b['monthly_housing_assumption'] + b['monthly_other_expenses_assumption']
         result.update(monthly_expenses=expenses,
@@ -86,9 +88,9 @@ def calculate(case):
 
 
 def check_followup(path, case):
-    """复现假想后续阶段：高考重跑优化器，读研核对官方统计齐全。"""
+    """复现模拟后续阶段：高考重跑优化器，读研核对官方统计齐全。"""
     f = case.get('hypothetical_followup')
-    if not f or '假想' not in f.get('label', ''):
+    if not f or '模拟' not in f.get('label', ''):
         raise ValueError(f'{path}: every demo needs a clearly labelled hypothetical follow-up stage')
     if case['kind'] == 'gaokao':
         for cand, saved in ((f['candidates'], f['result']),
@@ -113,8 +115,8 @@ def check_followup(path, case):
 def validate(case, chart, profile, report):
     if case.get('stage') != {'gaokao': 'pre_score', 'grad': 'pre_exam', 'career': 'pre_offer'}.get(case.get('kind')):
         raise ValueError('wrong decision stage for demo kind')
-    if case.get('fictional') is not True:
-        raise ValueError('demo must be explicitly fictional')
+    if case.get('simulated') is not True:
+        raise ValueError('demo must be explicitly simulated')
     if not case['education_entry'] < case['decision_date'] < case['graduation_date'] <= case['target_date']:
         raise ValueError('education / decision / graduation / target dates inconsistent')
     if case['target_date'][:4] != '2027':
@@ -175,7 +177,7 @@ def main():
     for path in DEMO_PATHS:
         name, result = check(path, args.write)
         print(name + ': ' + json.dumps(result, ensure_ascii=False))
-    print('3 fictional demos: birth recalculation, timeline, evidence scope, budgets and hypothetical follow-ups passed.')
+    print('3 simulated demos: birth recalculation, timeline, evidence scope, budgets and simulated follow-ups passed.')
 
 
 if __name__ == '__main__':
