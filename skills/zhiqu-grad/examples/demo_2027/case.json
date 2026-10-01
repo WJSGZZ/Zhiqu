@@ -166,5 +166,38 @@
       "本人逐属性评分、完整锚点与优先级尚未确认，当前不算效用"
     ],
     "housing_fund_cash_factor": null
-  }
+  },
+  "probability_assessments": [
+    {
+      "stage": "pre_exam",
+      "kind": "qualitative",
+      "personal_probability": null,
+      "population": "华工2025/2026已拟录取的普通与基地计划考生，不是全部报考者",
+      "condition": "初试未发生；仅比较往年录取分布和模考情景",
+      "denominator": null,
+      "unknown": [
+        "报考总人数及未录取者分布",
+        "本人实际初试总分与单科",
+        "2027复试与名额"
+      ],
+      "cost_unit": "CNY",
+      "utility_unit": "separate_confirmed_scale"
+    },
+    {
+      "stage": "simulated_post_score",
+      "kind": "qualitative",
+      "score": 380,
+      "personal_probability": null,
+      "population": "往年已录取者（2025约53、2026约120）；不是本人同条件竞争池",
+      "condition": "模拟总分380；假设科目可比，单科与复试未核实",
+      "denominator": null,
+      "unknown": [
+        "单科线和2027复试名单",
+        "2027普通/基地计划余额及资格",
+        "本人复试表现与评分规则"
+      ],
+      "cost_unit": "CNY",
+      "utility_unit": "separate_confirmed_scale"
+    }
+  ]
 }

@@ -29,6 +29,19 @@ class DemoIntegrity(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, 'future score'):
                     check_demos.validate(changed, self.chart, self.profile, self.report)
 
+    def test_qualitative_assessment_cannot_acquire_a_percentage(self):
+        changed = copy.deepcopy(self.case)
+        changed['probability_assessments'][0]['personal_probability'] = 0.6
+        with self.assertRaisesRegex(ValueError, 'personal probability'):
+            check_demos.check_followup(check_demos.DEMO_PATHS[1], changed)
+
+    def test_assessment_requires_conditions_and_unknowns(self):
+        for field in ('population', 'condition', 'unknown'):
+            changed = copy.deepcopy(self.case)
+            changed['probability_assessments'][1][field] = None
+            with self.assertRaisesRegex(ValueError, 'conditions and unknowns'):
+                check_demos.check_followup(check_demos.DEMO_PATHS[1], changed)
+
     def test_stale_start_direction_is_rejected(self):
         changed = copy.deepcopy(self.chart)
         changed['candidates'][0]['luck'][0]['start_datetime_birth_zone'] = '2006-01-01T00:00:00+08:00'

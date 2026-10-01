@@ -107,6 +107,11 @@ def check_followup(path, case):
             if fresh != old:
                 raise ValueError(f'{path}: {saved} is not reproduced by optimize.py with the recorded arguments')
     elif case['kind'] == 'grad':
+        for assessment in case['probability_assessments']:
+            if assessment['kind'] == 'qualitative' and assessment['personal_probability'] is not None:
+                raise ValueError('qualitative grad assessment cannot assert a personal probability')
+            if not assessment['population'] or not assessment['condition'] or not assessment['unknown']:
+                raise ValueError('grad assessment must state population, conditions and unknowns')
         stats = f['official_stats']
         if not stats or not all({'n', 'min', 'median', 'max'} <= set(v) for v in stats.values()):
             raise ValueError(f'{path}: grad follow-up needs official distribution statistics')
