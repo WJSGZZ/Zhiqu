@@ -5,11 +5,11 @@
 <p align="center"><b>面向高考、读研与求职的发展规划技能</b><br>知其所往，方行其衢。</p>
 
 <p align="center">
-  <a href="https://wjsgzz.github.io/Zhiqu/"><img src="https://img.shields.io/badge/在线问卷-打开-34685D" alt="在线问卷"></a>
-  <img src="https://img.shields.io/badge/Python-3.10%2B-34685D" alt="Python 3.10+">
-  <img src="https://img.shields.io/badge/依赖-仅标准库-A8772B" alt="仅标准库">
-  <img src="https://img.shields.io/badge/Agent-Claude%20Code%20%C2%B7%20Codex-A8772B" alt="Claude Code · Codex">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-34685D" alt="MIT License"></a>
+  <a href="https://wjsgzz.github.io/Zhiqu/"><img src="assets/readme/badges/questionnaire.svg" alt="在线问卷"></a>
+  <img src="assets/readme/badges/python.svg" alt="Python 3.10+">
+  <img src="assets/readme/badges/stdlib.svg" alt="仅标准库">
+  <img src="assets/readme/badges/agents.svg" alt="Claude Code · Codex">
+  <a href="LICENSE"><img src="assets/readme/badges/license.svg" alt="MIT License"></a>
 </p>
 
 <p align="center"><img src="assets/readme/entry.png" width="780" alt="知衢问卷入口"></p>
