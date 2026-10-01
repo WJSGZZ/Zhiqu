@@ -50,11 +50,11 @@ description: 知衢 · 读研规划。读取「知衢 · 硕士版」问卷生�
    - 考研看 `references/kaoyan.md`；
    - 出国/境外看 `references/abroad.md`。
 
-   - 「方向与状态」一节有作答，或「为什么读研」一节显示对工作了解很少时，读 `references/direction-and-state.md`：判断卡在哪一类，给小而具体的下一步；日常烦恼用平常语气回应，不下诊断。
+   - 「方向与状态」一节有作答，或「为什么读研」一节显示对工作了解很少时，读 `../zhiqu-shared/references/direction-and-state.md`：判断卡在哪一类，给小而具体的下一步；日常烦恼用平常语气回应，不下诊断。
 
-   - 「性格与传统视角」一节有八字时，读 `../zhiqu/references/bazi-lens.md`：八字只作传统视角，与性格作答、现实三方对照，不进入打分和排序。
+   - 「性格与传统视角」一节有八字时，读 `../zhiqu-shared/references/bazi-lens.md`：八字只作传统视角，与性格作答、现实三方对照，不进入打分和排序。
 
-   前景判断同高考版：若同时安装了 `zhiqu`，读 `../zhiqu/references/outlook.md`（专业和行业的有条件前景）和 `../zhiqu/references/job-market.md`（全国就业形势，每次先更新数字）。用条件句写前景，兴趣优先，前景只用来排除风险。
+   前景判断同高考版：若同时安装了 `zhiqu`，读 `../zhiqu-shared/references/outlook.md`（专业和行业的有条件前景）和 `../zhiqu-shared/references/job-market.md`（全国就业形势，每次先更新数字）。用条件句写前景，兴趣优先，前景只用来排除风险。
 4. **确定方向后再收集数据**（`references/data-sources.md`）。只收集和这位学生的候选相关的数据：
    - 目标院校近三年的复试线和拟录取名单；
    - 招生目录与推免人数；
@@ -72,6 +72,6 @@ description: 知衢 · 读研规划。读取「知衢 · 硕士版」问卷生�
 
 ## 原则
 
-共用的骨架、原则、防误伤规则和交付前自查见 `../zhiqu/references/shared-rules.md`，**每份报告交付前都按其中的"交付前自查"逐条核对**。读研版另有两条：
+共用的骨架、原则、防误伤规则和交付前自查见 `../zhiqu-shared/references/shared-rules.md`，**每份报告交付前都按其中的"交付前自查"逐条核对**。读研版另有两条：
 - **几个申请的结果高度相关**：同一个人的成绩、背景相同，不能把各个申请当成独立事件，把录取概率相乘。
 - **给路线图，不陪跑**：报告写清各路径大致怎么准备、要投入多少、里程碑和切换条件；不做逐日备考计划、讲题、复试辅导、代写文书。

@@ -10,7 +10,7 @@
 | 报名、初试时间与公告 | 研招网 yz.chsi.com.cn |
 | 国家线（一区、二区，按学科门类） | 教育部、研招网（次年 3 月前后） |
 | 调剂系统 | yz.chsi.com.cn/yztj |
-| 报考人数（全国） | 见 `../zhiqu/references/job-market.md` 的数据快照（唯一存放处） |
+| 报考人数（全国） | 见 `../zhiqu-shared/references/job-market.md` 的数据快照（唯一存放处） |
 
 ## 按候选收集（考研）
 

@@ -82,4 +82,4 @@
 
 不单独成节，不打乱 12 节的固定目录。
 
-开发者可用 `python3 scripts/check_calendar.py --js-library /path/to/lunar-javascript --node node` 比较固定JS版本与随库Python版本：普通时刻、23点/零点、立春前后，含精确起运、无时间与加载失败。JS库路径由开发者提供；问卷仍只接收分钟精度，秒级样本用于检验引擎交接。移除传统视角不影响正式候选和排序，计算器不读取命盘字段。
+开发者可用 `python3 ../zhiqu/scripts/check_calendar.py --js-library /path/to/lunar-javascript --node node` 比较固定JS版本与随库Python版本：普通时刻、23点/零点、立春前后，含精确起运、无时间与加载失败。JS库路径由开发者提供；问卷仍只接收分钟精度，秒级样本用于检验引擎交接。移除传统视角不影响正式候选和排序，计算器不读取命盘字段。
