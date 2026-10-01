@@ -15,7 +15,8 @@
      若 lunar-javascript 未加载成功（离线/被拦截等），仅输出原始出生信息 + 提示 AI 按信息排盘，不阻断问卷。
   */
   function baziLibReady(){ return (typeof Solar!=='undefined') && (typeof Solar.fromYmdHms==='function'); }
-  function baziEightChar(y,m,d,hh,mi){ return Solar.fromYmdHms(y,m,d,hh,mi,0).getLunar().getEightChar(); }
+  function baziEightChar(y,m,d,hh,mi,ss){ return Solar.fromYmdHms(y,m,d,hh,mi,ss||0).getLunar().getEightChar(); }
+  function baziYun(ec,genderFlag){return ec.getYun(genderFlag,2);}
   function baziBoundaryNear(hh,mi){
     var boundaries=[23,1,3,5,7,9,11,13,15,17,19,21];
     var totalMin=hh*60+mi, near=false;
@@ -27,9 +28,9 @@
     return near;
   }
   function baziShiftMinutes(y,m,d,hh,mi,delta){
-    var dt=new Date(y,m-1,d,hh,mi);
+    var dt=new Date(Date.UTC(y,m-1,d,hh,mi));
     dt=new Date(dt.getTime()+delta*60000);
-    return {y:dt.getFullYear(),m:dt.getMonth()+1,d:dt.getDate(),hh:dt.getHours(),mi:dt.getMinutes()};
+    return {y:dt.getUTCFullYear(),m:dt.getUTCMonth()+1,d:dt.getUTCDate(),hh:dt.getUTCHours(),mi:dt.getUTCMinutes()};
   }
   /* bdt: 'YYYY-MM-DD'  btm: 'HH:MM' 或空  bpl: 出生地文本或空  sexVal: '男'/'女'/其他 */
   function computeBaziBlock(bdt,btm,bpl,sexVal){
@@ -48,20 +49,23 @@
         var dayZhu='日主 '+ec.getDayGan()+'（'+ec.getDayWuXing().charAt(0)+'）';
         preview=pillars+'　'+dayZhu;
         lines.push('八字（传统视角，选填）：'+pillars+'　'+dayZhu);
-        lines.push('  · 口径：北京时间，未做真太阳时校正；子时按排盘库默认规则。');
+        lines.push('  · 口径：北京时间，未做真太阳时校正；日柱零点换日，晚子时时干按次日；起运按精确分钟折算。');
         lines.push('  · 十神：年干 '+ec.getYearShiShenGan()+'　月干 '+ec.getMonthShiShenGan()+'　时干 '+ec.getTimeShiShenGan()+'（日干为日主，不计十神）');
-        if(baziBoundaryNear(hh,mi)){
+        var minus=baziShiftMinutes(y,m,d,hh,mi,-15), plus=baziShiftMinutes(y,m,d,hh,mi,15);
+        var left=baziEightChar(minus.y,minus.m,minus.d,minus.hh,minus.mi), right=baziEightChar(plus.y,plus.m,plus.d,plus.hh,plus.mi);
+        var nearTerm=left.getYear()!==right.getYear()||left.getMonth()!==right.getMonth();
+        if(baziBoundaryNear(hh,mi)||nearTerm){
           var s1=baziShiftMinutes(y,m,d,hh,mi,-15), s2=baziShiftMinutes(y,m,d,hh,mi,15);
           var ec1=baziEightChar(s1.y,s1.m,s1.d,s1.hh,s1.mi), ec2=baziEightChar(s2.y,s2.m,s2.d,s2.hh,s2.mi);
           var changed = ec1.getYear()!==ec.getYear()||ec1.getMonth()!==ec.getMonth()||ec1.getDay()!==ec.getDay()||ec1.getTime()!==ec.getTime()
                      || ec2.getYear()!==ec.getYear()||ec2.getMonth()!==ec.getMonth()||ec2.getDay()!==ec.getDay()||ec2.getTime()!==ec.getTime();
           var noteTail=changed?('　－15分：'+ec1.getYear()+' '+ec1.getMonth()+' '+ec1.getDay()+' '+ec1.getTime()+'　＋15分：'+ec2.getYear()+' '+ec2.getMonth()+' '+ec2.getDay()+' '+ec2.getTime()):'';
-          lines.push('  · （时辰临界：出生时间误差可能改变时柱）'+noteTail);
-          preview+='（时辰临界）';
+          lines.push('  · （'+(nearTerm?'节气临界：出生时间误差可能改变年柱或月柱':'时辰临界：出生时间误差可能改变时柱')+'）'+noteTail);
+          preview+=nearTerm?'（节气临界）':'（时辰临界）';
         }
         if(sexVal==='男'||sexVal==='女'){
           var genderFlag=(sexVal==='男')?1:0;
-          var yun=ec.getYun(genderFlag);
+          var yun=baziYun(ec,genderFlag);
           var list=yun.getDaYun(9); // index0=起运前，1..8为前8步大运
           var first=list[1];
           var arr=[];
@@ -76,7 +80,7 @@
         var pillars3='年柱 '+yTxt+'　月柱 '+mTxt+'　日柱 '+dTxt;
         preview=pillars3;
         lines.push('八字（传统视角，选填）：'+pillars3+'　日主 '+ec0.getDayGan()+'（'+ec0.getDayWuXing().charAt(0)+'）');
-        lines.push('  · 口径：北京时间，未做真太阳时校正；子时按排盘库默认规则。只填了日期，只能排年/月/日三柱；填出生时间可排完整四柱与大运。');
+        lines.push('  · 口径：北京时间，未做真太阳时校正；日柱零点换日，晚子时时干按次日；起运按精确分钟折算。只填了日期，只能排年/月/日三柱；填出生时间可排完整四柱与大运。');
       }
       if(bpl) lines.push('  · 出生地：'+bpl+'（未用于校正，AI 可复核真太阳时）');
       return {lines:lines,preview:preview};
