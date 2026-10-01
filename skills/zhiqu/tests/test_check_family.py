@@ -25,9 +25,8 @@ def write(path, content):
 
 
 def make_min_repo(tmp):
-    """搭一个最小的仓库骨架：三个技能 + 两个 html + README/DESIGN。"""
+    """搭一个最小的仓库骨架：三个技能 + 两个 html + README。"""
     write(os.path.join(tmp, "README.md"), "# README\n")
-    write(os.path.join(tmp, "DESIGN.md"), "# DESIGN\n")
     write(os.path.join(tmp, "grad.html"),
           "<div data-title=\"优先级排序\"></div>\n"
           "<script>STORE_KEY='zhiqu_grad_v1'</script>\n")

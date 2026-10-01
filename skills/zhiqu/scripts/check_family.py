@@ -42,11 +42,11 @@ def skill_names(root):
 def scanned_files(root):
     """返回本检查器扫描范围内的文件（相对仓库根目录的路径）。
 
-    只扫描 skills/*/SKILL.md、skills/*/references/*.md、README.md、DESIGN.md；
+    只扫描 skills/*/SKILL.md、skills/*/references/*.md、README.md；
     不扫描 skills/zhiqu/data/** 和 examples/**（它们本来就不在上面的范围内）。
     """
     files = []
-    for name in ("README.md", "DESIGN.md"):
+    for name in ("README.md",):
         p = os.path.join(root, name)
         if os.path.isfile(p):
             files.append(name)
@@ -100,7 +100,7 @@ def _resolve_path(root, names, file_abspath, target):
     own_skill = parts[1] if parts[0] == "skills" and len(parts) > 1 else None
 
     # 技能内的文件只按本技能解析：引用别的技能必须写出 ../<技能>/ 路径，
-    # 否则安装后会找不到。仓库根目录的 README、DESIGN 可以泛指任一技能的文件。
+    # 否则安装后会找不到。仓库根目录的 README 可以泛指任一技能的文件。
     order = [own_skill] if own_skill else list(names)
     for n in order:
         skill_dir = os.path.join(root, "skills", n)

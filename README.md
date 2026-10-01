@@ -128,7 +128,7 @@ flowchart LR
 
 **读研与求职**：没有统一的全国数据库，确定方向后按候选收集数据。读研以官方拟录取名单的分数分布做情景对照；求职以人社部门工资价位作群体参考，按个税与社保规则测算 offer。
 
-详见[模型说明](skills/zhiqu/references/volunteer-game.md)、[回测记录](skills/zhiqu/references/backtests.md)与[设计文档](DESIGN.md)。
+详见[模型说明](skills/zhiqu/references/volunteer-game.md)与[回测记录](skills/zhiqu/references/backtests.md)。
 
 ## 数据
 
@@ -145,8 +145,6 @@ skills/
 ├── zhiqu-grad/     读研技能
 ├── zhiqu-career/   求职技能
 └── bazi/           八字技能：排盘引擎与解盘方法
-DESIGN.md           设计、决定与纠错记录
-ROADMAP.md          完善清单与协作记录
 AGENTS.md           贡献者（含 AI Agent）工作规范
 ```
 
@@ -159,7 +157,7 @@ python3 skills/zhiqu/scripts/check_demos.py           # 复现三个示例的排
 python3 skills/zhiqu/scripts/validate_data.py         # 数据校验
 ```
 
-参与开发前请阅读 [DESIGN.md](DESIGN.md)、[ROADMAP.md](ROADMAP.md) 与 [AGENTS.md](AGENTS.md)。
+参与开发前请阅读 [AGENTS.md](AGENTS.md)。
 
 ## 局限
 
