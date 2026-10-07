@@ -6,7 +6,7 @@
  "category": "综合（物理、化学、技术）",
  "mode": "simulation",
  "prepared_on": "2026-10-07",
- "data_commit": "6e7572e",
+ "data_commit": "0c3e51f",
  "province_rules": "data/zhejiang/rules.json",
  "rank": 33000,
  "slots": 80,
