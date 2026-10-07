@@ -1,0 +1,41 @@
+{
+ "province_rules": "data/zhejiang/rules.json",
+ "checked_on": "2026-10-07",
+ "items": [
+  {
+   "key": "slots",
+   "still_valid": true,
+   "note": "与 2026 年官方页面核对一致；2027 年规则 6 月公布后须重核"
+  },
+  {
+   "key": "parallel",
+   "still_valid": true,
+   "note": "与 2026 年官方页面核对一致；2027 年规则 6 月公布后须重核"
+  },
+  {
+   "key": "ratio",
+   "still_valid": true,
+   "note": "与 2026 年官方页面核对一致；2027 年规则 6 月公布后须重核"
+  },
+  {
+   "key": "tie_break",
+   "still_valid": true,
+   "note": "与 2026 年官方页面核对一致；2027 年规则 6 月公布后须重核"
+  },
+  {
+   "key": "withdraw",
+   "still_valid": true,
+   "note": "与 2026 年官方页面核对一致；2027 年规则 6 月公布后须重核"
+  },
+  {
+   "key": "fill_window",
+   "still_valid": true,
+   "note": "与 2026 年官方页面核对一致；2027 年规则 6 月公布后须重核"
+  }
+ ],
+ "data_gaps": {
+  "yfyd": "缺：本案位次为模拟输入，不涉及分数换算；真实案例须取当年官方一分一段表",
+  "plan_current": "未公布：以 2026 年投档表的专业与计划数为 2027 年参照；出分后以当年计划逐项核对",
+  "subject_req_table": "未入库：官方为 zip 附件，待获准下载整理；本案候选的选考资格全部标为待核（pending）"
+ }
+}

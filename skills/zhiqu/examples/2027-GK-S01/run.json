@@ -1,0 +1,23 @@
+{
+ "commands": [
+  "python3 scripts/pool.py --year 2022=data/zhejiang/general_2022.csv --year 2023=data/zhejiang/general_2023.csv --year 2024=data/zhejiang/general_2024.csv --year 2025=data/zhejiang/general_2025.csv --year 2026=data/zhejiang/general_2026.csv --key major --public --rank-min 12000 --rank-max 70000 --match-major '^(电气|智能电网|电力系统|电力工程|能源互联网|供用电|自动化|测控|机器人|智能制造|机械电子|智能感知|智能科学|能源与动力|新能源|储能|能源动力类|氢能|核工程|电子信息|通信工程|微电子|集成电路|电子科学|信息工程|光电信息)' --exclude-major 双学士 --in-provinces 浙江省,上海市,江苏省,北京市 --out pool_raw.csv   # 阶段 4：每步筛选的累计命令见 screening.json，起点是投档表实际行数",
+  "（人工）剔除 pool_raw.csv 中 note 提示“校区括号与名单所在地不符”的条目 → excluded_campus.csv",
+  "python3 scripts/rank.py predict pool_manual.csv --rank 33000 --drift 0.015 --target-year 2027 --sigma-floor 0.15 --sigma-scale 0.9 --min-p 0.02 --out pool.csv   # 之后补充 limits、source_grade、eligibility_evidence 三列",
+  "python3 scripts/preferences.py examples/2027-GK-S01/attributes.csv --config examples/2027-GK-S01/preferences_config.json --scenario student --out utilities.csv --review examples/2027-GK-S01/preferences_review.json   # 与 pool.csv 合并为 reviewed.csv",
+  "python3 scripts/category_shift.py data/zhejiang/general_2025.csv data/zhejiang/general_2026.csv --class 电气:电气 --class 自动化:自动化 --class \"电子信息类:电子信息|通信|微电子|集成电路\"   # 报告“为什么这样排”的 2026 年类别变热数字",
+  "python3 scripts/optimize.py examples/2027-GK-S01/reviewed.csv --rank 33000 --slots 80 --drift 0.015 --target-year 2027 --sigma-floor 0.15 --sigma-scale 0.9 --decision-mode simulation --u-fall -60 --max-fall 0.01 --json examples/2027-GK-S01/result.json",
+  "python3 scripts/optimize.py examples/2027-GK-S01/reviewed.csv --rank 33000 --slots 80 --drift 0.015 --target-year 2027 --sigma-floor 0.15 --sigma-scale 0.9 --decision-mode simulation --u-fall -60 --max-fall 0.01 --rho 0.1 --json examples/2027-GK-S01/sensitivity/rho_0.1.json",
+  "python3 scripts/optimize.py examples/2027-GK-S01/reviewed.csv --rank 33000 --slots 80 --drift 0.015 --target-year 2027 --sigma-floor 0.15 --sigma-scale 0.9 --decision-mode simulation --u-fall -60 --max-fall 0.01 --rho 0.5 --json examples/2027-GK-S01/sensitivity/rho_0.5.json",
+  "python3 scripts/optimize.py examples/2027-GK-S01/reviewed.csv --rank 33000 --slots 80 --drift 0.015 --target-year 2027 --sigma-floor 0.15 --sigma-scale 0.9 --decision-mode simulation --u-fall -30 --max-fall 0.03 --json examples/2027-GK-S01/sensitivity/ufall_-30.json",
+  "python3 scripts/optimize.py examples/2027-GK-S01/reviewed.csv --rank 33000 --slots 80 --drift 0.015 --target-year 2027 --sigma-floor 0.15 --sigma-scale 0.9 --decision-mode simulation --u-fall -100 --max-fall 0.005 --json examples/2027-GK-S01/sensitivity/ufall_-100.json",
+  "python3 scripts/optimize.py examples/2027-GK-S01/reviewed.csv --rank 33000 --slots 80 --drift 0.015 --target-year 2027 --sigma-floor 0.15 --sigma-scale 0.9 --decision-mode simulation --u-fall -60 --max-fall 0.01 --drift -0.07 --json examples/2027-GK-S01/sensitivity/drift_hotter.json",
+  "python3 scripts/optimize.py examples/2027-GK-S01/reviewed.csv --rank 33000 --slots 80 --drift 0.015 --target-year 2027 --sigma-floor 0.15 --sigma-scale 0.9 --decision-mode simulation --u-fall -60 --max-fall 0.01 --drift 0.06 --json examples/2027-GK-S01/sensitivity/drift_cooler.json",
+  "python3 scripts/optimize.py examples/2027-GK-S01/sensitivity/reviewed_outlook_pessimistic.csv --rank 33000 --slots 80 --drift 0.015 --target-year 2027 --sigma-floor 0.15 --sigma-scale 0.9 --decision-mode simulation --u-fall -60 --max-fall 0.01 --json examples/2027-GK-S01/sensitivity/outlook_pessimistic.json",
+  "python3 scripts/optimize.py examples/2027-GK-S01/sensitivity/reviewed_city_second.csv --rank 33000 --slots 80 --drift 0.015 --target-year 2027 --sigma-floor 0.15 --sigma-scale 0.9 --decision-mode simulation --u-fall -60 --max-fall 0.01 --json examples/2027-GK-S01/sensitivity/city_second.json",
+  "python3 scripts/optimize.py examples/2027-GK-S01/sensitivity/reviewed_outlook_second.csv --rank 33000 --slots 80 --drift 0.015 --target-year 2027 --sigma-floor 0.15 --sigma-scale 0.9 --decision-mode simulation --u-fall -60 --max-fall 0.01 --json examples/2027-GK-S01/sensitivity/outlook_second.json",
+  "python3 scripts/report.py examples/2027-GK-S01/report.json --opt examples/2027-GK-S01/result.json --out examples/2027-GK-S01/report.pdf --sheet examples/2027-GK-S01/entry_sheet.csv",
+  "python3 scripts/check_report.py examples/2027-GK-S01/report.json --opt examples/2027-GK-S01/result.json --html examples/2027-GK-S01/report.html",
+  "python3 scripts/case_check.py examples/2027-GK-S01 --stage 7"
+ ],
+ "note": "命令均在 skills/zhiqu 目录执行。阶段 4–5 的中间文件名为示意，最终产物是目录里的 pool.csv、reviewed.csv；重新打分的敏感性情景由 preferences.py 重算后写入 sensitivity/reviewed_*.csv。"
+}

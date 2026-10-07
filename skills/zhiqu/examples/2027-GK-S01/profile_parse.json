@@ -1,0 +1,62 @@
+{
+ "fields": [
+  {
+   "field": "年份",
+   "value": "2027",
+   "status": "inferred",
+   "confirmed": true,
+   "note": "问卷不记录年份；按“当前高三、尚未出分”推断为 2027，已向本人确认（模拟）"
+  },
+  {
+   "field": "省份",
+   "value": "浙江",
+   "status": "given"
+  },
+  {
+   "field": "位次",
+   "value": "33000（模拟出分）",
+   "status": "given",
+   "note": "模拟位次，不由分数换算；真实案例须取当年官方一分一段表"
+  },
+  {
+   "field": "选科",
+   "value": "物理、化学、技术",
+   "status": "given"
+  },
+  {
+   "field": "批次",
+   "value": "普通类第一段（专业+院校平行志愿，80 个）",
+   "status": "inferred",
+   "confirmed": true,
+   "note": "依据浙江 2026 规则；2027 规则 6 月公布"
+  },
+  {
+   "field": "体检",
+   "value": "无已知疾病；近视约 300 度；色觉未检查",
+   "status": "given",
+   "note": "色觉未检查：章程对部分电气类专业有色觉限制，见候选的 limits 列"
+  },
+  {
+   "field": "学费上限",
+   "value": "每年总费用约 38000 元（学费+住宿+生活）",
+   "status": "given"
+  },
+  {
+   "field": "调剂态度",
+   "value": "不适用（浙江按专业投档，无专业调剂）",
+   "status": "given"
+  },
+  {
+   "field": "优先级",
+   "value": "专业 > 学校层次 > 录取稳妥 > 就业前景 > 城市",
+   "status": "given"
+  }
+ ],
+ "missing": [
+  "色觉检查结果",
+  "2027 年真实位次与一分一段表（本案位次为模拟）"
+ ],
+ "tensions": [
+  "问卷“城市”排第五，但二选一核对中选了上海的上海应用技术大学而不是杭州的中国计量大学（见 preferences_review.json）"
+ ]
+}

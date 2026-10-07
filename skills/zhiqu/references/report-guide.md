@@ -27,15 +27,16 @@ python3 scripts/report.py report.json --opt result.json --out 志愿填报决策
 
 | 字段 | 内容 | 出现在 |
 |---|---|---|
-| `meta` | `title` `subtitle` `candidate` `province` `category` `batch` `score` `rank` `date` `slots` | 封面、页眉 |
+| `meta` | `title` `subtitle` `candidate` `province` `category` `batch` `score` `rank` `date` `slots`，付费报告另加 `case_id`（报告编号）与 `generated_on`（生成日期，YYYY-MM-DD），印在封面和页眉 | 封面、页眉 |
 | `summary.headline` | 一句话结论（大白话，含最可能的去向和滑档风险） | 封面、摘要 |
 | `summary.points` | 3–5 条核心结论 | 摘要 |
 | `summary.actions` | 最多 3 条待办 | 摘要 |
 | `profile.intro` / `facts` / `priorities` / `constraints` / `tensions` | 画像要点、权重（小数）、硬约束、需要考生想清楚的矛盾 | 你的画像 |
-| `directions` | 每个方向：`name` `fit` `majors` `evidence` `counter` `outlook` `verify`；`outlook` 是若干条"若……则……；若不成立……"的前景判断 | 专业方向 |
+| `directions` | 每个方向：`name` `fit` `majors` `evidence` `counter` `outlook` `verify`；`outlook` 是若干条"若……则……；若不成立……"的前景判断；`paths` 是 `[去向, 门槛, 代价, 依据]` 行，覆盖考研、考公、就业（生涯规划融在这里，不单独成块） | 专业方向 |
+| `roadmap` | `[核对项, 安排]` 五行：门槛与差距、顺序与投入、里程碑与截止、切换条件与备选、下次检查点 | 专业方向（末尾） |
 | `list_notes` | 志愿名 → 一句话说明（为什么在这一格） | 志愿表 |
 | `why` / `stress_mult` / `sensitivity` | 排序理由段落、压力倍数、敏感性表 `[假设, 期望效用, 滑档概率, 前段是否变化]` | 为什么这样排 |
-| `research` / `questions` | 院校调研 `[方面, 发现, 证据等级]`；请考生亲自去问学长学姐的问题 | 院校调研 |
+| `research` / `questions` | 院校调研 `[{school, items: [[方面, 发现, 证据等级]], sources: [https 链接]}]`；请考生亲自去问学长学姐的问题 | 院校调研 |
 | `todo` | `[事项, 去哪里查]` | 核对清单 |
 | `assumptions` / `backtest` | `[参数, 取值, 依据]`；本省回测结论 | 方法与假设 |
 | `ask_me` | 个性化追问清单：`[{topic, items: [{q, why}]}]`，`q` 用考生的口吻写 | "追问清单"一节 |
@@ -49,7 +50,30 @@ python3 scripts/report.py report.json --opt result.json --out 志愿填报决策
 
 01 摘要 · 02 你的画像 · 03 专业方向 · 04 志愿表 · 05 为什么这样排 · 06 院校调研 · 07 填报前核对清单 · 08 填报单 · 09 追问清单 · 10 方法与假设 · 11 事后回看 · 12 数据来源与声明
 
+**第 08 节**：出分后的正式报告是填报单，行动路线（门槛、顺序、里程碑、切换条件、检查点）并入第 03 节末尾的 `roadmap`；出分前的规划阶段没有志愿表，第 08 节用于行动路线（见 `examples/demo_2027_gaokao`）。目录标题与顺序由 `check_family.py` 对照本节、`report.py` 和各示例核对。
+
 某一节确实没有内容时，不删节，在 `omitted` 里写明原因（键为 `directions` `list` `research` `todo` `ask_me` `hindsight`），报告会在该节显示这句说明；没写原因时 `report.py` 会在终端提醒。"事后回看"在事前报告里默认提示考生放榜后回来对照。
+
+## 付费报告的必备内容与篇幅（由 `check_report.py` 的 `check_sections` 检查）
+
+目的：每份报告密度相近，不因分析者当天状态而厚薄不一。下限是“有、够、能溯源”，不是越长越好；写得好不好由复核判断。
+
+| 节 | 必备 | 下限 |
+|---|---|---|
+| 01 摘要 | 一句话结论、核心结论、待办 | 结论句 ≥ 20 字；核心结论 3–5 条；待办 1–3 条 |
+| 02 你的画像 | 事实表、权重、硬约束、矛盾 | 事实 ≥ 8 行；权重 ≥ 4 项且和为 1；硬约束 ≥ 3；矛盾 ≥ 1 |
+| 03 专业方向 | 2–4 个方向，每个有支持、反面、前景、验证、去向；末尾路线图与近期报道 | 支持 ≥ 2、反面 ≥ 1；前景 ≥ 2 条且都是“若……则……”；`paths` 覆盖考研/考公/就业且四格齐全；`roadmap` 五行；报道 ≥ 2 条 |
+| 04 志愿表 | 全部志愿及说明 | `list_notes` 至少覆盖 max(10, 志愿数/4) 个，名称须在志愿表内 |
+| 05 为什么这样排 | 排序理由、压力测试、敏感性 | 理由 ≥ 3 段；敏感性 ≥ 3 行且含前景悲观情景（须实际重算） |
+| 06 院校调研 | 最可能去的几所，逐条附来源 | ≥ 3 所；≥ 3 所各覆盖培养方案、转专业、收费、校区、就业质量中 ≥ 4 项有证据的内容（取不到的写“未取到”，不计入）；每所 ≥ 2 条 https 来源；每条发现标证据等级；学长学姐问题 ≥ 5 条 |
+| 07 填报前核对清单 | 待核事项与去哪里查 | ≥ 5 行 |
+| 08 填报单 | 与 `result.json` 一致的录入表 | 无空代码（`report.py --sheet` 同时导出 CSV） |
+| 09 追问清单 | 个性化追问 | 2–4 组、共 6–10 条 |
+| 10 方法与假设 | 参数、依据、本省回测 | 参数 ≥ 6 行；有回测结论 |
+| 11 事后回看 | 放榜后对照 | 事前报告可用 `omitted.hindsight` |
+| 12 数据来源与声明 | 来源、日期 | ≥ 8 行，每行 `[数据, 来源, YYYY-MM-DD]` |
+
+除“事后回看”外，付费报告不得用 `omitted` 省略章节。个案目录、阶段门槛与复核见 [case-workflow.md](case-workflow.md)。
 
 ## 出稿前检查
 
