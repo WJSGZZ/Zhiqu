@@ -23,7 +23,7 @@ PROFILE_FIELDS = ['年份', '省份', '位次', '选科', '批次', '体检', '�
 FIELD_STATUS = {'given', 'inferred', 'unknown'}
 CASE_ID = re.compile(r'^\d{4}-GK-(\d{4}|S\d{2})$')
 SKIP_REASONS = {'rank_band', 'direction', 'hard_constraint', 'category', 'manual', 'duplicate', 'other'}
-PITFALLS = ['没查到写成不存在', '群体数字当个人概率', '经验帖数字做决定', '按编号引用问卷', '同一事实写两处', '会过期的事实', '八字越界', '委派判断类任务']
+PITFALLS = ['没查到写成不存在', '群体数字当个人概率', '经验帖数字做决定', '按编号引用问卷', '同一事实写两处', '会过期的事实', '八字越界', '委派判断类任务', '取页摘要当原文']
 REPORT_MIN = {'summary_points': 3, 'directions': 2, 'research_schools': 3, 'ask_me_items': 6, 'sources': 8, 'sensitivity': 3}
 
 
