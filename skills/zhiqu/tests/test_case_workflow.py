@@ -154,5 +154,74 @@ class ReportSections(unittest.TestCase):
         self.assertTrue(any("有证据" in e for e in check_report.check_sections(rep)))
 
 
+    def test_methods_must_cover_six_topics_and_grades(self):
+        with open(os.path.join(SAMPLE, "report.json"), encoding="utf-8") as f:
+            rep = json.load(f)
+        self.assertEqual(check_report.check_sections(rep), [])
+        rep["methods"] = [b for b in rep["methods"] if "局限" not in b["title"]]
+        self.assertTrue(any("局限" in e for e in check_report.check_sections(rep)))
+        grade = next(b for b in rep["methods"] if "证据等级" in b["title"])
+        grade["rows"][0][2] = "很可能"
+        self.assertTrue(any("证据等级" in e for e in check_report.check_sections(rep)))
+
+
+RETRO = os.path.join(ROOT, "examples", "2026-GK-R01")
+
+
+class RetroSample(unittest.TestCase):
+    def test_retro_sample_passes_through_stage_7(self):
+        self.assertEqual(case_check.run(RETRO, 7).errors, [])
+
+    def test_retro_uses_only_pre_target_years(self):
+        with open(os.path.join(RETRO, "screening.json"), encoding="utf-8") as f:
+            self.assertEqual(json.load(f)["source_table"], "data/zhejiang/general_2025.csv")
+        with open(os.path.join(RETRO, "pool.csv"), encoding="utf-8") as f:
+            header = next(csv.reader(f))
+        self.assertNotIn("rank_2026", header)
+
+    def test_retro_judge_reproduces_hindsight(self):
+        with tempfile.TemporaryDirectory() as d:
+            out = os.path.join(d, "h.json")
+            code, _, err = run("scripts/retro_judge.py", os.path.join(RETRO, "result.json"), "--target", "data/zhejiang/general_2026.csv",
+                               "--rank", "33000", "--json", out)
+            self.assertEqual(code, 0, err)
+            with open(out, encoding="utf-8") as f:
+                again = json.load(f)
+        self.assertEqual((again["status"], again["landing_order"]), ("投档", 3))
+        with open(os.path.join(RETRO, "hindsight.json"), encoding="utf-8") as f:
+            self.assertEqual(json.load(f)["rows"], again["rows"])
+
+
+class RetroJudge(unittest.TestCase):
+    def judge(self, cuts, rank=100):
+        import retro_judge
+        idx = {("A", f"m{k}"): [c] for k, c in enumerate(cuts) if c != "missing"}
+        result = {"list": [{"order": k + 1, "id": f"A-m{k}", "code": "A", "name": f"m{k}", "p_clear": .5, "utility": 50}
+                           for k in range(len(cuts))]}
+        return retro_judge.judge(result, idx, rank, "major")
+
+    def test_first_cleared_entry_is_landing(self):
+        out = self.judge([90, 120, 200])
+        self.assertEqual((out["status"], out["landing_order"]), ("投档", 2))
+
+    def test_missing_before_landing_is_unknown_not_skipped(self):
+        out = self.judge([90, "missing", 200])
+        self.assertEqual((out["status"], out["blocker_order"]), ("无法判定", 2))
+
+    def test_all_short_is_fall(self):
+        self.assertEqual(self.judge([90, 80])["status"], "滑档")
+
+
+class SubjectCheck(unittest.TestCase):
+    def test_requirement_parsing(self):
+        import subject_check
+        self.assertEqual(subject_check.required("物理,化学(2门科目考生均须选考方可报考)"), ["物理", "化学"])
+        self.assertEqual(subject_check.required("不提科目要求"), [])
+        idx = {("甲大学", "电气工程及其自动化"): ["物理,化学(2门科目考生均须选考方可报考)"]}
+        self.assertEqual(subject_check.check("甲大学·电气工程及其自动化(卓越班)", idx, {"物理", "化学", "技术"})[0], "met")
+        self.assertEqual(subject_check.check("甲大学·电气工程及其自动化", idx, {"物理", "生物", "技术"})[0], "failed")
+        self.assertEqual(subject_check.check("乙大学·自动化", idx, {"物理"})[0], "unknown")
+
+
 if __name__ == "__main__":
     unittest.main()

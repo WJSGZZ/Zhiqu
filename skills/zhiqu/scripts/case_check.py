@@ -21,7 +21,7 @@ SKILL = SCRIPTS.parent
 PROFILE_HEAD = '【高考志愿 · 自我盘点】'
 PROFILE_FIELDS = ['年份', '省份', '位次', '选科', '批次', '体检', '学费上限', '调剂态度', '优先级']
 FIELD_STATUS = {'given', 'inferred', 'unknown'}
-CASE_ID = re.compile(r'^\d{4}-GK-(\d{4}|S\d{2})$')
+CASE_ID = re.compile(r'^\d{4}-GK-(\d{4}|[SR]\d{2})$')
 SKIP_REASONS = {'rank_band', 'direction', 'hard_constraint', 'category', 'manual', 'duplicate', 'other'}
 PITFALLS = ['没查到写成不存在', '群体数字当个人概率', '经验帖数字做决定', '按编号引用问卷', '同一事实写两处', '会过期的事实', '八字越界', '委派判断类任务', '取页摘要当原文']
 REPORT_MIN = {'summary_points': 3, 'directions': 2, 'research_schools': 3, 'ask_me_items': 6, 'sources': 8, 'sensitivity': 3}
@@ -87,7 +87,7 @@ class Gate:
             if case.get(key) in (None, ''):
                 self.err(0, f'case.json 缺 {key}')
         if not CASE_ID.match(str(case.get('case_id', ''))):
-            self.err(0, 'case_id 格式须为 年份-GK-四位序号（样板用 S 加两位序号，如 2027-GK-S01）')
+            self.err(0, 'case_id 格式须为 年份-GK-四位序号（样板用 S 加两位序号，如 2027-GK-S01；回溯样板用 R，如 2026-GK-R01）')
         elif case['case_id'] != self.dir.name:
             self.err(0, f'case_id {case["case_id"]} 与目录名 {self.dir.name} 不一致')
         if case.get('mode') not in ('formal', 'simulation'):

@@ -1,0 +1,70 @@
+{
+ "source_table": "data/zhejiang/general_2025.csv",
+ "pool": "pool.csv",
+ "steps": [
+  {
+   "name": "投档表中有 2025 位次且“校+专业”唯一",
+   "reason": "other",
+   "rule": "只保留 2025 年有位次（投档满额）且同校同名专业无重复键的条目；pool.py --exclude ''",
+   "before": 17890,
+   "after": 16444
+  },
+  {
+   "name": "剔除默认不进池的类型",
+   "reason": "category",
+   "rule": "pool.py 默认排除词：中外合作、国际、民办、独立学院、专项、联合培养、预科、民族班、面向某县的定向、分校招生、高本贯通、走读",
+   "before": 16444,
+   "after": 12503
+  },
+  {
+   "name": "只要公办",
+   "reason": "category",
+   "rule": "pool.py --public，按教育部名单备注排除民办与中外合作",
+   "before": 12503,
+   "after": 12438
+  },
+  {
+   "name": "位次段 12,000–70,000",
+   "reason": "rank_band",
+   "rule": "2025 年位次 12,000–70,000：与 2027-GK-S01 相同的位次段（本人位次的约 0.36—2.1 倍），事前登记",
+   "before": 12438,
+   "after": 4458
+  },
+  {
+   "name": "方向：专业名属于四个方向",
+   "reason": "direction",
+   "rule": "pool.py --match-major（只看专业名，不含校名）：^(电气|智能电网|电力系统|电力工程|能源互联网|供用电|自动化|测控|机器人|智能制造|机械电子|智能感知|智能科学|能源与动力|新能源|储能|能源动力类|氢能|核工程|电子信息|通信工程|微电子|集成电路|电子科学|信息工程|光电信息)",
+   "before": 4458,
+   "after": 604
+  },
+  {
+   "name": "剔除双学士学位项目",
+   "reason": "category",
+   "rule": "--exclude-major 双学士：本单不纳入（2025 年表内没有此类条目）",
+   "before": 604,
+   "after": 604
+  },
+  {
+   "name": "所在地：浙江、上海、江苏、北京",
+   "reason": "hard_constraint",
+   "rule": "本人确认的可去城市：--in-provinces 浙江省,上海市,江苏省,北京市（其余省份“绝对不去”，按硬约束排除）",
+   "before": 604,
+   "after": 213
+  },
+  {
+   "name": "人工核对校区所在地",
+   "reason": "manual",
+   "rule": "pool.py 在 note 列提示“校区括号与名单所在地不符”的条目，所在地不可信，剔除；本案为华北电力大学(保定)（校区在河北保定）",
+   "before": 213,
+   "after": 201,
+   "excluded_file": "excluded_campus.csv"
+  },
+  {
+   "name": "过线概率不足 2% 的冲刺项",
+   "reason": "rank_band",
+   "rule": "rank.py predict --rank 33000 --drift 0.023 --target-year 2026 --sigma-scale 1.0 --min-p 0.02：漂移与波动倍数取自 data/calibration/model_review_2026.csv 浙江 2026 行（只用 2026 年前选定）",
+   "before": 201,
+   "after": 117
+  }
+ ]
+}

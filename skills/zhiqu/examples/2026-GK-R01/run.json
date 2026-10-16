@@ -1,0 +1,19 @@
+{
+ "commands": [
+  "python3 scripts/pool.py --year 2022=data/zhejiang/general_2022.csv --year 2023=data/zhejiang/general_2023.csv --year 2024=data/zhejiang/general_2024.csv --year 2025=data/zhejiang/general_2025.csv --key major --public --rank-min 12000 --rank-max 70000 --match-major '^(电气|智能电网|电力系统|电力工程|能源互联网|供用电|自动化|测控|机器人|智能制造|机械电子|智能感知|智能科学|能源与动力|新能源|储能|能源动力类|氢能|核工程|电子信息|通信工程|微电子|集成电路|电子科学|信息工程|光电信息)' --exclude-major 双学士 --in-provinces 浙江省,上海市,江苏省,北京市 --out pool_raw.csv   # 阶段 4：每步筛选的累计命令见 screening.json，起点是 2025 年投档表实际行数",
+  "（脚本）剔除 pool_raw.csv 中 note 提示“校区括号与名单所在地不符”的条目 → excluded_campus.csv",
+  "python3 scripts/rank.py predict pool_manual.csv --rank 33000 --drift 0.023 --target-year 2026 --sigma-scale 1.0 --min-p 0.02 --out pool.csv   # 之后补充 limits、source_grade、eligibility_evidence 三列",
+  "打分：S01 已打分的候选沿用原分，其余按 S01 同校、同专业名分数套用，两者都没有的按事前登记的量表人工打分（basis 列逐条写明来源）",
+  "python3 scripts/preferences.py examples/2026-GK-R01/attributes.csv --config examples/2026-GK-R01/preferences_config.json --scenario student --out utilities.csv --review examples/2026-GK-R01/preferences_review.json   # 与 pool.csv 合并为 reviewed.csv",
+  "python3 scripts/optimize.py examples/2026-GK-R01/reviewed.csv --rank 33000 --slots 80 --drift 0.023 --target-year 2026 --sigma-scale 1.0 --decision-mode simulation --u-fall -60 --max-fall 0.01 --json examples/2026-GK-R01/result.json",
+  "python3 scripts/optimize.py examples/2026-GK-R01/reviewed.csv --rank 33000 --slots 80 --drift 0.023 --target-year 2026 --sigma-scale 1.0 --decision-mode simulation --u-fall -60 --max-fall 0.01 --rho 0.1 --json examples/2026-GK-R01/sensitivity/rho_0.1.json",
+  "python3 scripts/optimize.py examples/2026-GK-R01/reviewed.csv --rank 33000 --slots 80 --drift 0.023 --target-year 2026 --sigma-scale 1.0 --decision-mode simulation --u-fall -60 --max-fall 0.01 --rho 0.5 --json examples/2026-GK-R01/sensitivity/rho_0.5.json",
+  "python3 scripts/optimize.py examples/2026-GK-R01/reviewed.csv --rank 33000 --slots 80 --drift 0.023 --target-year 2026 --sigma-scale 1.0 --decision-mode simulation --u-fall -30 --max-fall 0.03 --json examples/2026-GK-R01/sensitivity/ufall_-30.json",
+  "python3 scripts/optimize.py examples/2026-GK-R01/reviewed.csv --rank 33000 --slots 80 --drift 0.023 --target-year 2026 --sigma-scale 1.0 --decision-mode simulation --u-fall -100 --max-fall 0.005 --json examples/2026-GK-R01/sensitivity/ufall_-100.json",
+  "python3 scripts/optimize.py examples/2026-GK-R01/reviewed.csv --rank 33000 --slots 80 --drift -0.047 --target-year 2026 --sigma-scale 1.0 --decision-mode simulation --u-fall -60 --max-fall 0.01 --json examples/2026-GK-R01/sensitivity/drift_hotter.json",
+  "python3 scripts/optimize.py examples/2026-GK-R01/reviewed.csv --rank 33000 --slots 80 --drift 0.083 --target-year 2026 --sigma-scale 1.0 --decision-mode simulation --u-fall -60 --max-fall 0.01 --json examples/2026-GK-R01/sensitivity/drift_cooler.json",
+  "python3 scripts/optimize.py examples/2026-GK-R01/sensitivity/reviewed_outlook_pessimistic.csv --rank 33000 --slots 80 --drift 0.023 --target-year 2026 --sigma-scale 1.0 --decision-mode simulation --u-fall -60 --max-fall 0.01 --json examples/2026-GK-R01/sensitivity/outlook_pessimistic.json",
+  "python3 scripts/retro_judge.py examples/2026-GK-R01/result.json --target data/zhejiang/general_2026.csv --rank 33000 --json examples/2026-GK-R01/hindsight.json   # 出稿后、写第 11 节时才运行"
+ ],
+ "note": "回溯样板：所有计算只读 2022—2025 年投档表；2026 年投档表只在 retro_judge.py 这一步读取。五档位次的回溯结果见 retro_ranks.csv"
+}

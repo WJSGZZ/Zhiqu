@@ -408,6 +408,14 @@ def build(rep, opt):
     else:
         blank("ask_me", "追问清单", "本次没有预备追问清单。", major=True)
 
+    def block(b):
+        """方法与事后回看的小节：标题、段落、可选表格。"""
+        html = f"<h3>{E(b['title'])}</h3>" + "".join(f"<p>{E(x)}</p>" for x in b.get("paras", []))
+        if b.get("rows"):
+            html += ("<table><thead><tr>" + "".join(f"<th>{E(c)}</th>" for c in b.get("columns", [])) + "</tr></thead><tbody>"
+                     + "".join("<tr>" + "".join(f"<td>{E(str(c))}</td>" for c in row) + "</tr>" for row in b["rows"]) + "</tbody></table>")
+        return html + "".join(f'<p class="small">{E(x)}</p>' for x in b.get("notes", []))
+
     # 08 方法与假设（可用术语）
     body = '<p class="lead">这一节写给想了解细节的读者，会用到一些专业术语，术语解释在本节末尾。</p>'
     if rep.get("assumptions"):
@@ -415,9 +423,10 @@ def build(rep, opt):
             f"<tr><td>{E(a)}</td><td class='num'>{E(str(b))}</td><td>{E(c)}</td></tr>" for a, b, c in rep["assumptions"]) + "</tbody></table>"
     body += ("<h3>模型</h3><p>平行志愿按\"分数优先、遵循志愿、一次投档\"投档，考生落到表中第一个\"位次过线\"的志愿，因此表内按效用降序排列是最优的，需要优化的是入选集合。"
              "各志愿今年的最低录取位次按对数正态分布建模：均值为历年位次对数的近期加权平均（以去年为主）并修正全省漂移，波动取历年离散度与下限的较大者；各志愿通过共同因子相关。"
-             "用蒙特卡洛模拟得到每种志愿组合的期望效用，再用边际改进贪心算法选择组合，并在压力情景下补满剩余志愿位。</p>")
+             "用蒙特卡洛模拟得到每种志愿组合的期望效用，再用边际改进贪心算法选择组合；基准下已无增益时，在压力情景（波动放大）下继续补位，只接受不降低基准期望的补位。</p>")
     if rep.get("backtest"):
         body += f"<h3>本省回测</h3><p>{E(rep['backtest'])}</p>"
+    body += "".join(block(b) for b in rep.get("methods", []))
     body += ('<div class="box glossary"><h4>术语解释</h4><dl>'
              "<dt>位次</dt><dd>全省同科类考生中的排名，比分数更能跨年比较。</dd>"
              "<dt>期望效用</dt><dd>各种可能结局的满意度，按发生概率加权后的平均值。</dd>"
@@ -434,6 +443,7 @@ def build(rep, opt):
             body += "<table><thead><tr>" + "".join(f"<th>{E(c)}</th>" for c in h["columns"]) + "</tr></thead><tbody>" + "".join(
                 "<tr>" + "".join(f"<td>{E(str(c))}</td>" for c in row) + "</tr>" for row in h["table"]) + "</tbody></table>"
         body += "".join(f"<p>{E(x)}</p>" for x in h.get("notes", []))
+        body += "".join(block(b) for b in h.get("extra", []))
         sec("事后回看", body, major=True)
     else:
         sec("事后回看", '<p class="lead">' + E(omitted.get("hindsight", "录取结果公布后，把真实的投档线和最终去向填进这一节，与本报告的预测逐条对照：哪些判断准、哪些偏了、偏在哪里。这样下一次的判断才会更准。")) + "</p>", major=True)

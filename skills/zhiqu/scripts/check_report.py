@@ -79,6 +79,8 @@ def check_report(rep, result, html=None):
 RESEARCH_ASPECTS = ('培养方案', '转专业', '收费', '校区', '就业')
 PATH_WORDS = ('考研', '考公', '就业')
 ROADMAP_ROWS = ('门槛与差距', '顺序与投入', '里程碑与截止', '切换条件与备选', '下次检查点')
+METHOD_TOPICS = ('数据', '模型', '参数', '不确定性', '局限', '证据等级')
+EVIDENCE_GRADES = ('已证实', '有证据待确认', '目前无证据', '不可能或极不可能')
 
 
 def check_sections(rep, result=None):
@@ -151,6 +153,13 @@ def check_sections(rep, result=None):
         errs.append('ask_me 须 2–4 组、共 6–10 条')
     if len(rep.get('assumptions', [])) < 6 or not rep.get('backtest'):
         errs.append('assumptions 至少 6 行且有 backtest')
+    titles = ' '.join(str(b.get('title', '')) for b in rep.get('methods', []))
+    lacking = [w for w in METHOD_TOPICS if w not in titles]
+    if lacking:
+        errs.append('methods 须有以下小节（标题含这些词）：' + '、'.join(lacking))
+    grade = next((b for b in rep.get('methods', []) if '证据等级' in str(b.get('title', ''))), None)
+    if grade and (len(grade.get('rows', [])) < 4 or any(len(r) != 3 or str(r[2]) not in EVIDENCE_GRADES for r in grade['rows'])):
+        errs.append('“结论与证据等级”至少 4 行，每行 [结论, 依据, 等级]，等级为：' + '、'.join(EVIDENCE_GRADES))
     src = rep.get('sources', [])
     if len(src) < 8 or any(len(r) != 3 or not re.fullmatch(r'\d{4}-\d{2}-\d{2}', str(r[2])) for r in src):
         errs.append('sources 至少 8 行，每行 [数据, 来源, YYYY-MM-DD]')

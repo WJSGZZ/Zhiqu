@@ -1,0 +1,27 @@
+{
+ "case_id": "2026-GK-R01",
+ "product": "gaokao",
+ "province": "浙江",
+ "year": 2026,
+ "category": "综合（物理、化学、技术）",
+ "mode": "simulation",
+ "prepared_on": "2026-10-16",
+ "data_commit": "9c839cc",
+ "province_rules": "data/zhejiang/rules.json",
+ "rank": 33000,
+ "slots": 80,
+ "candidate": "小远（模拟）",
+ "retro": {
+  "target_year": 2026,
+  "data_years": [
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "judge": "scripts/retro_judge.py",
+  "preregistered": "2026-10-16（ROADMAP T6 第一轮事前登记，运行前写入）"
+ },
+ "note": "对外样板（回溯版）：模拟考生，只用 2025 年及以前的官方数据，按 2026 年出分后填报的情形出稿；第 11 节用 2026 年真实投档线对照。2026 年适用的 2024 版选考要求与 2026 年招生计划未入库，资格项全部待核，故为 simulation 模式",
+ "pool_shortfall_reason": "方向、公办、位次段、所在地等硬约束内共 201 个候选，其中过线概率 ≥ 2% 的 117 个，已穷尽本人可接受范围，少于志愿位的 2 倍（160）；不为凑数加入不愿就读或几乎不可能的条目"
+}
