@@ -181,6 +181,41 @@ class TestOtherScripts(unittest.TestCase):
             self.assertTrue(all(r["province"] == "浙江省" for r in rows))
             self.assertFalse(any(re.search("马来西亚|预科|高本贯通", r["name"]) for r in rows))
 
+    def test_pool_match_major_ignores_school_name(self):
+        # --match 连校名一起匹配：“信息工程”会命中南京信息工程大学的所有专业；--match-major 只看专业名
+        with tempfile.TemporaryDirectory() as d:
+            a, b = os.path.join(d, "a.csv"), os.path.join(d, "b.csv")
+            base = ["scripts/pool.py", "--year", "2025=data/zhejiang/general_2025.csv",
+                    "--year", "2026=data/zhejiang/general_2026.csv", "--key", "major", "--public"]
+            self.assertEqual(run(*base, "--match", "信息工程", "--out", a)[0], 0)
+            self.assertEqual(run(*base, "--match-major", "信息工程", "--exclude-major", "金融", "--in-provinces", "江苏省,上海市", "--out", b)[0], 0)
+            with open(a, encoding="utf-8") as f:
+                loose = list(csv.DictReader(f))
+            with open(b, encoding="utf-8") as f:
+                strict = list(csv.DictReader(f))
+            self.assertTrue(any("金融" in r["name"] for r in loose))
+            self.assertTrue(strict)
+            self.assertTrue(all("信息工程" in r["name"].split("·", 1)[1] and "金融" not in r["name"] for r in strict))
+            self.assertTrue(all(r["province"] in ("江苏省", "上海市") for r in strict))
+
+    def test_pool_campus_suffix_warning(self):
+        import pool
+        by_code, by_name = pool.schools()
+        info = pool.lookup("", "华北电力大学(保定)", by_code, by_name)
+        self.assertIn("须人工核对", pool.campus_warning("华北电力大学(保定)", info))
+        self.assertEqual(pool.campus_warning("华北电力大学(北京)", pool.lookup("", "华北电力大学(北京)", by_code, by_name)), "")
+        self.assertEqual(pool.campus_warning("浙江大学", pool.lookup("", "浙江大学", by_code, by_name)), "")
+
+    def test_category_shift(self):
+        import category_shift
+        old = {("甲", "电气类"): 1000, ("甲", "法学"): 1000, ("乙", "电气工程(卓越班)"): 2000}
+        new = {("甲", "电气类"): 900, ("甲", "法学"): 1000, ("乙", "电气工程(卓越班)"): 1800}
+        ch = category_shift.shifts(old, new)
+        n, med, harder = category_shift.summarize(ch, "电气")
+        self.assertEqual((n, harder), (2, 1.0))
+        self.assertAlmostEqual(med, -0.1054, places=3)
+        self.assertEqual(category_shift.summarize(ch, "法学")[1], 0.0)
+
     def test_pool_lookup_and_exclusions(self):
         import pool
         by_code, by_name = pool.schools()

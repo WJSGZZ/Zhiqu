@@ -49,19 +49,21 @@ svg.chart { width: 100%; height: auto; display: block; }
 
 /* cover */
 .cover { page: cover; width: 210mm; height: 296mm; overflow: hidden; padding: 0; position: relative; background: #FBF6E6; break-after: page; }
-.cover .band { background: var(--accent); color: #F5EFDD; padding: 26mm 22mm 13mm; }
+.cover .band { background: var(--accent); color: #F5EFDD; padding: 20mm 22mm 10mm; }
 .cover .kicker { font-size: 9pt; letter-spacing: 3pt; opacity: .85; }
 .cover h1 { color: #FBF6E6; font-size: 30pt; margin: 6mm 0 3mm; letter-spacing: 1pt; }
 .cover .sub { font-size: 11pt; opacity: .9; }
-.cover .motto { margin-top: 9mm; font-size: 10.5pt; letter-spacing: 4pt; opacity: .78; display: flex; align-items: center; gap: 4mm; }
+.cover .motto { margin-top: 6mm; font-size: 10.5pt; letter-spacing: 4pt; opacity: .78; display: flex; align-items: center; gap: 4mm; }
 .cover .motto::before { content: ""; width: 8mm; height: .6pt; background: #F5EFDD; opacity: .7; }
-.cover .meta { padding: 10mm 22mm 0; display: grid; grid-template-columns: repeat(3,1fr); gap: 6mm 8mm; }
+.cover .meta { padding: 8mm 22mm 0; display: grid; grid-template-columns: repeat(3,1fr); gap: 4mm 8mm; }
 .cover .meta div { border-top: .8pt solid var(--rule2); padding-top: 2mm; }
 .cover .meta b { display:block; font-size: 8pt; color: var(--muted); font-weight: 500; letter-spacing: 1pt; }
 .cover .meta span { font-size: 12pt; }
 .cover .verdict { margin: 9mm 22mm 0; padding: 6mm 8mm; background: #FFFDF6; border-left: 3pt solid var(--accent); }
 .cover .verdict b { display:block; font-size: 8pt; color: var(--accent); letter-spacing: 2pt; margin-bottom: 2mm; }
 .cover .verdict p { font-size: 14pt; line-height: 1.6; margin: 0; }
+.cover .verdict.long p { font-size: 11pt; line-height: 1.55; }
+.cover .verdict.long { margin-top: 6mm; padding: 4mm 8mm; }
 .cover .foot { position: absolute; left: 22mm; right: 22mm; bottom: 16mm; font-size: 8pt; color: var(--muted); border-top: .6pt solid var(--rule); padding-top: 3mm; }
 
 /* kpis */
@@ -94,6 +96,8 @@ tr.hl td { background: #F3EBD2; }
 
 /* two columns / cards */
 .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+.grid2.wide { grid-template-columns: 1fr; }
+.card table { font-size: 8.5pt; margin-top: 2mm; }
 .card { background: #FFFDF6; border: .6pt solid var(--rule); padding: 4mm 5mm; break-inside: avoid; }
 .card h3 { margin: 0 0 1mm; }
 .card .fit { font-size: 8pt; color: var(--accent); letter-spacing: 1pt; }
@@ -107,7 +111,7 @@ tr.hl td { background: #F3EBD2; }
 ul.asklist { list-style: none; padding: 0; margin: 0 0 3mm; }
 ul.asklist li { padding: 2mm 0 2mm 4mm; border-left: 2pt solid var(--rule2); margin: 0 0 2mm; background: #FFFDF6; break-inside: avoid; }
 ul.asklist li b { font-weight: 600; } ul.asklist li span { display: block; font-size: 8.5pt; color: var(--muted); margin-top: .5mm; }
-.toc { margin-top: 2mm; columns: 2; column-gap: 10mm; } .toc div { display: flex; border-bottom: .4pt dotted var(--rule2); padding: 1.1mm 0; break-inside: avoid; }
+.toc { margin-top: 2mm; columns: 2; column-gap: 10mm; } .toc div { display: flex; border-bottom: .4pt dotted var(--rule2); padding: .8mm 0; break-inside: avoid; }
 .toc div span:first-child { width: 10mm; color: var(--accent); font-weight: 600; }
 """
 
@@ -282,7 +286,7 @@ def build(rep, opt):
     # 03 方向
     ds = rep.get("directions", [])
     if ds:
-        body = '<p class="lead">' + E(rep.get("directions_intro", "以下方向由兴趣、能力、目标和约束交叉得出。每个方向都列出支持证据、反面证据、有条件的就业前景和验证办法。")) + "</p><div class='grid2'>"
+        body = '<p class="lead">' + E(rep.get("directions_intro", "以下方向由兴趣、能力、目标和约束交叉得出。每个方向都列出支持证据、反面证据、有条件的就业前景和验证办法。")) + "</p><div class='grid2" + (" wide" if any(d.get("paths") for d in ds) else "") + "'>"
         for d in ds:
             body += (f'<div class="card"><div class="fit">{E(d.get("fit", ""))}</div><h3>{E(d["name"])}</h3>'
                      f'<div class="small">{E(d.get("majors", ""))}</div><dl>'
@@ -290,8 +294,15 @@ def build(rep, opt):
                      + (f"<dt>反面</dt><dd>{'；'.join(E(x) for x in d.get('counter', []))}</dd>" if d.get("counter") else "")
                      + (f"<dt>前景（有条件）</dt><dd>{'<br>'.join(E(x) for x in d.get('outlook', []))}</dd>" if d.get("outlook") else "")
                      + (f"<dt>怎么验证</dt><dd>{E(d['verify'])}</dd>" if d.get("verify") else "")
-                     + "</dl></div>")
+                     + "</dl>"
+                     + ("<table><thead><tr><th style='width:14%'>去向</th><th>门槛</th><th>代价</th><th style='width:24%'>依据</th></tr></thead><tbody>"
+                        + "".join(f"<tr><td>{E(a)}</td><td>{E(b)}</td><td>{E(c)}</td><td class='small'>{E(e)}</td></tr>" for a, b, c, e in d["paths"])
+                        + "</tbody></table>" if d.get("paths") else "")
+                     + "</div>")
         body += "</div>"
+        if rep.get("roadmap"):
+            body += ("<h3>路线图：门槛、顺序、里程碑与切换条件</h3><table><thead><tr><th style='width:20%'>核对项</th><th>安排</th></tr></thead><tbody>"
+                     + "".join(f"<tr><td>{E(a)}</td><td>{E(b)}</td></tr>" for a, b in rep["roadmap"]) + "</tbody></table>")
         if rep.get("news"):
             body += ("<h3>近期报道与政策</h3><p class='small'>前景和录取线都会受社会情况影响。下表是填报前查到的相关报道，影响一栏是本报告的判断。</p>"
                      "<table><thead><tr><th>事件</th><th style='width:12%'>日期</th><th style='width:22%'>来源</th><th style='width:30%'>对本报告的影响</th></tr></thead><tbody>"
@@ -348,7 +359,8 @@ def build(rep, opt):
         body = '<p class="lead">以下是对排名靠前学校的升学和就业调研。每条信息都注明了证据等级：官方文件 &gt; 多人一致 &gt; 单人说法 &gt; 推测。</p>'
         for r in rs:
             body += f"<h3>{E(r['school'])}</h3><table><thead><tr><th style='width:26%'>方面</th><th>发现</th><th style='width:18%'>证据等级</th></tr></thead><tbody>" + "".join(
-                f"<tr><td>{E(a)}</td><td>{E(b)}</td><td class='small'>{E(c)}</td></tr>" for a, b, c in r.get("items", [])) + "</tbody></table>"
+                f"<tr><td>{E(a)}</td><td>{E(b)}</td><td class='small'>{E(c)}</td></tr>" for a, b, c in r.get("items", [])) + "</tbody></table>" + (
+                "<p class='small' style='word-break:break-all'>来源：" + "；".join(E(u) for u in r["sources"]) + "</p>" if r.get("sources") else "")
         if qs:
             body += ('<div class="box key"><h4>请你亲自去问学长学姐的问题</h4><p class="small">开头先说明：每条回答请标"确认 / 听说 / 不知道"，不确定就说不知道。最好问两个以上、不同年级的人。</p><ol class="tight">'
                      + "".join(f"<li>{E(x)}</li>" for x in qs) + "</ol></div>")
@@ -444,16 +456,29 @@ def build(rep, opt):
              '<div class="meta">'
              + "".join(f"<div><b>{E(a)}</b><span>{E(str(b))}</span></div>" for a, b in [
                  ("考生", m.get("candidate", "–")), ("省份 · 科类", f'{m.get("province", "–")} · {m.get("category", "–")}'),
-                 ("批次", m.get("batch", "–")), ("分数", m.get("score", "–")), ("全省位次", m.get("rank", "–")), ("报告日期", m.get("date", "–"))])
+                 ("批次", m.get("batch", "–")), ("分数", m.get("score", "–")), ("全省位次", m.get("rank", "–")), ("报告日期", m.get("date", "–"))]
+             + ([("报告编号", m["case_id"])] if m.get("case_id") else []) + ([("生成日期", m["generated_on"])] if m.get("generated_on") else []))
              + "</div>"
-             + (f'<div class="verdict"><b>一句话结论</b><p>{E(s.get("headline", ""))}</p></div>' if s.get("headline") else "")
+             + (f'<div class="verdict{" long" if len(s.get("headline", "")) > 100 else ""}"><b>一句话结论</b><p>{E(s.get("headline", ""))}</p></div>' if s.get("headline") else "")
              + f'<div class="verdict" style="background:transparent;border-left-color:var(--rule2)"><b>目录</b><div class="toc">{toc}</div></div>'
              + '<div class="foot">本报告由「知衢」生成，供考生与家庭决策参考。数据来源、假设与局限见"方法与假设"和"数据来源与声明"两节。</div></div>')
-    runhead = f'{m.get("candidate", "")} · {m.get("province", "")} {m.get("category", "")}'.replace('"', "")
+    runhead = (f'{m.get("candidate", "")} · {m.get("province", "")} {m.get("category", "")}' + (f' · 编号 {m["case_id"]}' if m.get("case_id") else "")).replace('"', "")
     css = CSS.replace("__RUNHEAD__", runhead)
     if missing:
         print("提醒：以下各节没有内容，也没有在 omitted 中写明原因：" + "、".join(dict.fromkeys(missing)), file=sys.stderr)
     return f'<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>{E(m.get("title", "志愿填报决策报告"))}</title><style>{css}</style></head><body>{cover}{"".join(b for _, _, b in secs)}</body></html>'
+
+
+def write_sheet(opt, path):
+    """填报单 CSV：列与报告“填报单”一节一致，代码缺失的留空，由 case_check 拒绝。"""
+    import csv
+    with open(path, "w", encoding="utf-8-sig", newline="") as fh:
+        w = csv.writer(fh)
+        w.writerow(["序", "院校代码", "院校", "专业组", "专业代码", "组内专业顺序", "服从调剂"])
+        for x in (opt or {}).get("list", []):
+            ms = "、".join(f"{i}. {mj['name']}" for i, mj in enumerate(x.get("majors") or [], 1))
+            w.writerow([x["order"], x.get("code") or "", x["name"].split("（")[0].split("·")[0] if x.get("group") else x["name"].split("（")[0],
+                        x.get("group") or "", x.get("major_code") or "", ms, "是" if x.get("obey", True) else "否"])
 
 
 def find_browser():
@@ -469,6 +494,7 @@ def main():
     ap.add_argument("report", help="报告内容 JSON（字段见 references/report-guide.md）")
     ap.add_argument("--opt", help="optimize.py --json 的输出")
     ap.add_argument("--out", required=True, help="输出文件，.pdf 或 .html")
+    ap.add_argument("--sheet", help="另存填报单 CSV（序、院校代码、院校、专业组、专业代码、组内专业顺序、服从调剂），与报告里的填报单一致")
     a = ap.parse_args()
     rep = json.load(open(a.report, encoding="utf-8"))
     opt = json.load(open(a.opt, encoding="utf-8")) if a.opt else None
@@ -476,6 +502,8 @@ def main():
         errors = check_report(rep, opt)
         if errors:
             ap.error("报告数字核验失败：" + "；".join(errors))
+    if a.sheet:
+        write_sheet(opt, a.sheet)
     doc = build(rep, opt)
     if a.out.lower().endswith(".html"):
         open(a.out, "w", encoding="utf-8").write(doc)

@@ -1,0 +1,57 @@
+{
+ "attributes": [
+  "school",
+  "major",
+  "city",
+  "outlook"
+ ],
+ "scenarios": {
+  "student": {
+   "confirmed": true,
+   "priority": [
+    "major",
+    "school",
+    "safety",
+    "outlook",
+    "city"
+   ],
+   "anchors": {
+    "low": {
+     "name": "底线：省内一般公办院校的电子信息类，位次靠后",
+     "scores": {
+      "school": 4,
+      "major": 6,
+      "city": 7,
+      "outlook": 5.5
+     }
+    },
+    "high": {
+     "name": "梦校：浙江大学电气工程及其自动化",
+     "scores": {
+      "school": 10,
+      "major": 10,
+      "city": 10,
+      "outlook": 9.5
+     }
+    }
+   },
+   "checks": [
+    {
+     "a": "0006-电气工程及其自动化",
+     "b": "0003-电气类",
+     "choice": "0006-电气工程及其自动化"
+    },
+    {
+     "a": "0005-电气工程及其自动化",
+     "b": "3125-电气工程及其自动化",
+     "choice": "0005-电气工程及其自动化"
+    },
+    {
+     "a": "0013-电气工程及其自动化",
+     "b": "3159-电气工程及其自动化(卓越工程师计划试点班)",
+     "choice": "3159-电气工程及其自动化(卓越工程师计划试点班)"
+    }
+   ]
+  }
+ }
+}

@@ -62,6 +62,22 @@ def lookup(code, name, by_code, by_name):
     return {}
 
 
+def campus_warning(name, info):
+    """校名带校区括号（如“华北电力大学(保定)”）而教育部名单只有主校区时，名单里的所在地可能不是该校区所在地。
+    括号内容不在名单所在省市里就提醒，不改写所在地，须人工核对。"""
+    variants = name_variants(name)
+    if not info or len(variants) < 2:
+        return ""
+    for n in variants[1:]:
+        if n == info.get("name"):
+            suffix = re.sub(r"[\[【].*?[\]】]", "", name).replace("(", "（").replace(")", "）").strip()[len(n):].strip("（）")
+            place = info.get("province", "") + info.get("city", "")
+            if suffix and not any(w and w in place for w in (suffix, suffix.replace("校区", ""))):
+                return f"校区括号“{suffix}”与名单所在地“{info.get('province', '')}{info.get('city', '')}”不符，所在地须人工核对"
+            return ""
+    return ""
+
+
 def load_group_map(path, school_field):
     """人工核实的跨年一对一对应；source 留证据，不由组号推断对应关系。"""
     if not path:
@@ -97,6 +113,9 @@ def main():
     ap.add_argument("--public", action="store_true", help="排除民办与中外合作办学院校（按教育部名单备注）")
     ap.add_argument("--exclude", default=EXCLUDE, help="名称/专业中含这些词的条目排除（正则，空串表示不排除）；专项、预科、民族班、面向某县的定向、联合培养等需要单独资格或异地培养，默认排除")
     ap.add_argument("--match", help="只保留名称或专业匹配该正则的条目")
+    ap.add_argument("--match-major", help="只保留专业名（key=major 时的专业名，不含校名）匹配该正则的条目；--match 会连校名一起匹配，如“信息工程”会命中南京信息工程大学的所有专业")
+    ap.add_argument("--exclude-major", help="排除专业名匹配该正则的条目（只看专业名，不含校名）")
+    ap.add_argument("--in-provinces", help="只保留位于这些省市的院校，逗号分隔，如 浙江省,上海市,江苏省；与 --in-province 不同时使用")
     ap.add_argument("--rank-min", type=int, help="最近一年位次下限")
     ap.add_argument("--rank-max", type=int, help="最近一年位次上限")
     ap.add_argument("--out", required=True)
@@ -105,6 +124,8 @@ def main():
     years = sorted((int(y), p) for y, p in (s.split("=", 1) for s in a.year))
     if len({y for y, _ in years}) != len(years):
         ap.error("--year 不可重复指定同一年")
+    if a.in_province and a.in_provinces:
+        ap.error("--in-province 与 --in-provinces 不能同时使用")
     if a.group_map and a.key != "group":
         ap.error("--group-map 仅用于 --key group")
     try:
@@ -134,7 +155,7 @@ def main():
                 else:
                     k = (school_key, sub.strip())
                 e = table.setdefault(k, {"code": code, "school": school, "sub": sub.strip(),
-                                         "req": "", "ranks": {}, "plan": "", "sources": [], "ambiguous": set()})
+                                         "req": "", "ranks": {}, "plan": "", "sources": [], "ambiguous": set(), "major_code": ""})
                 if y in e["ambiguous"]:
                     continue
                 if y in e["ranks"]:
@@ -147,6 +168,7 @@ def main():
                 e["code"] = code  # 保留最近一年的院校代码，填报单用
                 e["school"], e["sub"] = school, sub.strip()
                 e["plan"] = r.get("plan") or ""  # 最新年份未知时，不冒用旧计划
+                e["major_code"] = (r.get("major_code") or "").strip()  # 填报单用；专业+院校省份的专业代号，随最近一年
                 if mapped:
                     e["sources"].append(f"{y}: {mapped[1]}")
                 if a.key == "group":
@@ -169,23 +191,32 @@ def main():
             continue
         if a.match and not re.search(a.match, text):
             continue
+        if a.match_major and not re.search(a.match_major, sub):
+            continue
+        if a.exclude_major and re.search(a.exclude_major, sub):
+            continue
+        if a.in_provinces and (not info or info.get("province") not in a.in_provinces.split(",")):
+            continue
         rl = e["ranks"][last]
         if (a.rank_min and rl < a.rank_min) or (a.rank_max and rl > a.rank_max):
             continue
         name = f"{e['school']}·{sub}组" if a.key == "group" else f"{e['school']}·{sub}"
         row = {"id": f"{code}-{sub}", "name": name, "code": code, "group": sub if a.key == "group" else "",
-               "requirement": e["req"], "province": info.get("province", "未知"), "city": info.get("city", ""),
+               "major_code": e["major_code"] if a.key == "major" else "", "requirement": e["req"], "province": info.get("province", "未知"), "city": info.get("city", ""),
                "plan": e["plan"]}
         row["history_status"] = ("verified" if len(e["ranks"]) > 1 else "latest_only") if a.key == "group" else "by_major"
         row["note"] = "；".join(e["sources"]) if e["sources"] else ("专业组跨年组成未核实，只用最近一年" if a.key == "group" else "")
         if e["ambiguous"]:
             row["note"] += "；重复专业键已剔除年份：" + ",".join(map(str, sorted(e["ambiguous"])))
+        warn = campus_warning(e["school"], info)
+        if warn:
+            row["note"] = (row["note"] + "；" if row["note"] else "") + warn
         for y, _ in reversed(years):
             row[f"rank_{y}"] = e["ranks"].get(y, "")
         rows.append(row)
     rows.sort(key=lambda r: r[f"rank_{last}"])
     unknown = sum(r["province"] == "未知" for r in rows)
-    cols = ["id", "name", "code", "group", "requirement", "province", "city", "plan", "history_status", "note"] + [f"rank_{y}" for y, _ in reversed(years)]
+    cols = ["id", "name", "code", "group", "major_code", "requirement", "province", "city", "plan", "history_status", "note"] + [f"rank_{y}" for y, _ in reversed(years)]
     with open(a.out, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=cols)
         w.writeheader()

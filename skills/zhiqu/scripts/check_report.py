@@ -76,6 +76,90 @@ def check_report(rep, result, html=None):
     return errors
 
 
+RESEARCH_ASPECTS = ('培养方案', '转专业', '收费', '校区', '就业')
+PATH_WORDS = ('考研', '考公', '就业')
+ROADMAP_ROWS = ('门槛与差距', '顺序与投入', '里程碑与截止', '切换条件与备选', '下次检查点')
+
+
+def check_sections(rep, result=None):
+    """付费报告每节的必备内容与篇幅下限（范围写在 references/report-guide.md）。不判断写得好不好，只查有没有、够不够、能不能溯源。"""
+    errs = []
+    s = rep.get('summary', {})
+    if len(str(s.get('headline', ''))) < 20:
+        errs.append('summary.headline 太短或缺失（≥ 20 字）')
+    if not 3 <= len(s.get('points', [])) <= 5:
+        errs.append('summary.points 须 3–5 条')
+    if not 1 <= len(s.get('actions', [])) <= 3:
+        errs.append('summary.actions 须 1–3 条')
+    pr = rep.get('profile', {})
+    if len(pr.get('facts', [])) < 8:
+        errs.append('profile.facts 至少 8 行')
+    pri = pr.get('priorities', [])
+    if len(pri) < 4 or abs(sum(float(b) for _, b in pri) - 1) > 0.02:
+        errs.append('profile.priorities 至少 4 项且权重之和为 1')
+    if len(pr.get('constraints', [])) < 3 or not pr.get('tensions'):
+        errs.append('profile.constraints 至少 3 条、tensions 至少 1 条')
+    ds = rep.get('directions', [])
+    if not 2 <= len(ds) <= 4:
+        errs.append('directions 须 2–4 个')
+    for d in ds:
+        name = d.get('name', '?')
+        if len(d.get('evidence', [])) < 2 or not d.get('counter') or not d.get('verify'):
+            errs.append(f'方向「{name}」须有 ≥ 2 条支持、≥ 1 条反面和怎么验证')
+        outlook = d.get('outlook', [])
+        if len(outlook) < 2 or not all('若' in x for x in outlook):
+            errs.append(f'方向「{name}」outlook 须 ≥ 2 条且每条是“若……则……”的有条件判断')
+        paths = d.get('paths', [])
+        if not all(any(w in str(r[0]) for r in paths) for w in PATH_WORDS) or any(len(r) != 4 or not all(str(c).strip() for c in r) for r in paths):
+            errs.append(f'方向「{name}」paths 须覆盖考研、考公、就业，每行 [去向, 门槛, 代价, 依据] 四格齐全')
+    road = [r[0] for r in rep.get('roadmap', [])]
+    if tuple(road) != ROADMAP_ROWS:
+        errs.append('roadmap 须依次为：' + '、'.join(ROADMAP_ROWS))
+    if len(rep.get('news', [])) < 2:
+        errs.append('news 至少 2 条近期报道或政策')
+    if len(rep.get('why', [])) < 3:
+        errs.append('why 至少 3 段')
+    sens = rep.get('sensitivity', [])
+    if len(sens) < 3 or not any('悲观' in str(r[0]) for r in sens):
+        errs.append('sensitivity 至少 3 行且含前景悲观情景')
+    if result is not None:
+        notes = rep.get('list_notes', {})
+        n = len(result.get('list', []))
+        if len(notes) < max(10, n // 4):
+            errs.append(f'list_notes 至少覆盖 {max(10, n // 4)} 个志愿（现有 {len(notes)}）')
+        unknown = set(notes) - {x['name'] for x in result.get('list', [])}
+        if unknown:
+            errs.append('list_notes 含不在志愿表中的名称：' + '、'.join(sorted(unknown)[:3]))
+    rs = rep.get('research', [])
+    if len(rs) < 3:
+        errs.append('research 至少 3 所院校')
+    covered = 0
+    for r in rs:
+        items = r.get('items', [])
+        got = {a for a in RESEARCH_ASPECTS if any(a in str(i[0]) and not str(i[2]).startswith('未取到') for i in items if len(i) == 3)}
+        covered += len(got) >= 4
+        if len([u for u in r.get('sources', []) if str(u).startswith('https://')]) < 2 or any(len(i) != 3 or not str(i[2]).strip() for i in items):
+            errs.append(f'院校「{r.get("school", "?")}」须有 ≥ 2 条 https 来源，且每条发现标证据等级')
+        if not got:
+            errs.append(f'院校「{r.get("school", "?")}」没有任何有证据的调研项（取不到的写“未取到”并说明原因，也要有其余可查的内容）')
+    if rs and covered < 3:
+        errs.append(f'至少 3 所院校须覆盖{"、".join(RESEARCH_ASPECTS)}中 ≥ 4 项有证据的内容（证据等级以“未取到”开头的不计），现有 {covered} 所')
+    if len(rep.get('questions', [])) < 5 or len(rep.get('todo', [])) < 5:
+        errs.append('questions 与 todo 各至少 5 条')
+    ask = rep.get('ask_me', [])
+    if not 2 <= len(ask) <= 4 or not 6 <= sum(len(x.get('items', [])) for x in ask) <= 10:
+        errs.append('ask_me 须 2–4 组、共 6–10 条')
+    if len(rep.get('assumptions', [])) < 6 or not rep.get('backtest'):
+        errs.append('assumptions 至少 6 行且有 backtest')
+    src = rep.get('sources', [])
+    if len(src) < 8 or any(len(r) != 3 or not re.fullmatch(r'\d{4}-\d{2}-\d{2}', str(r[2])) for r in src):
+        errs.append('sources 至少 8 行，每行 [数据, 来源, YYYY-MM-DD]')
+    bad = set(rep.get('omitted', {})) - {'hindsight'}
+    if bad:
+        errs.append('付费报告除“事后回看”外不得用 omitted 省略章节：' + '、'.join(sorted(bad)))
+    return errs
+
+
 def percentage(value, decimals=0):
     if decimals == 0 and 0 < value < 0.01:
         decimals = 1

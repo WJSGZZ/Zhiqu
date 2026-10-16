@@ -234,6 +234,41 @@ def check_section_names(root):
 _ROW_NUM_RE = re.compile(r"^\|\s*(\d{2})\b")
 
 
+GAOKAO_TITLES = ["摘要", "你的画像", "专业方向", "志愿表", "为什么这样排", "院校调研", "填报前核对清单", "填报单", "追问清单", "方法与假设", "事后回看", "数据来源与声明"]
+
+
+def _check_gaokao_toc(root, relpath, lines):
+    """高考报告 12 节的标题与顺序，须同时与 report-guide 内联目录、report.py、各示例 report.md 一致。
+    出分前的规划阶段示例没有志愿表，其第 08 节可以是“行动路线”（见 report-guide）。"""
+    out = []
+    toc = [(n, l) for n, l in enumerate(lines, 1) if l.startswith("01 摘要")]
+    if not toc:
+        return [(ERROR, relpath, 1, "report-guide.md 缺少内联目录行（以“01 摘要”开头）")]
+    lineno, line = toc[0]
+    got = re.findall(r"(\d{2})\s*([^\s·]+)", line)
+    if [t for _, t in got] != GAOKAO_TITLES or [n for n, _ in got] != [f"{i:02d}" for i in range(1, 13)]:
+        out.append((ERROR, relpath, lineno, f"内联目录应为固定的 12 节：{GAOKAO_TITLES}，实际 {[t for _, t in got]}"))
+    rp = os.path.join(root, "skills/zhiqu/scripts/report.py")
+    if os.path.isfile(rp):
+        titles = re.findall(r'sec\("([^"]+)"', open(rp, encoding="utf-8").read())
+        titles = [t for i, t in enumerate(titles) if t not in titles[:i]]
+        if titles != GAOKAO_TITLES:
+            out.append((ERROR, "skills/zhiqu/scripts/report.py", 1, f"report.py 的章节顺序与固定目录不一致：{titles}"))
+    exdir = os.path.join(root, "skills/zhiqu/examples")
+    if os.path.isdir(exdir):
+        for name in sorted(os.listdir(exdir)):
+            md = os.path.join(exdir, name, "report.md")
+            if not os.path.isfile(md):
+                continue
+            heads = re.findall(r"^## (\d{2}) (.+)$", open(md, encoding="utf-8").read(), re.M)
+            expect = list(zip([f"{i:02d}" for i in range(1, 13)], GAOKAO_TITLES))
+            ok = [h[0] for h in heads] == [e[0] for e in expect] and all(
+                h[1].strip() == e[1] or (h[0] == "08" and h[1].strip() == "行动路线") for h, e in zip(heads, expect))
+            if not ok:
+                out.append((ERROR, f"skills/zhiqu/examples/{name}/report.md", 1, "报告章节应为固定 12 节（出分前规划阶段第 08 节可为“行动路线”）"))
+    return out
+
+
 def check_report_guide(root):
     issues = []
     for relpath in ("skills/zhiqu-grad/references/report-guide.md",
@@ -249,7 +284,8 @@ def check_report_guide(root):
             if m:
                 nums.append((lineno, m.group(1)))
         if relpath == "skills/zhiqu/references/report-guide.md" and not nums:
-            # 这份文件不一定按 01-12 编号的表格组织，没有这类行就跳过
+            # 高考指南用一行内联目录“01 摘要 · 02 你的画像 …”；逐节核对标题与 report.py 一致
+            issues.extend(_check_gaokao_toc(root, relpath, lines))
             continue
         expected = [f"{i:02d}" for i in range(1, 13)]
         got = [n for _, n in nums]
