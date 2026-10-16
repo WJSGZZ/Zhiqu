@@ -90,8 +90,9 @@ textarea{resize:vertical;min-height:76px;}
 .minilabel{font-size:12.5px;color:var(--muted);margin-bottom:5px;}
 
 /* ---- conditional follow-up ---- */
-.followup{display:none;margin:14px 0 6px;padding:16px 17px 6px;border-left:2px solid var(--green);background:var(--green-pale);border-radius:0 4px 4px 0;}
+.followup{display:none;margin:14px 0 22px;padding:16px 17px 6px;border-left:2px solid var(--green);background:var(--green-pale);border-radius:0 4px 4px 0;}
 .followup.show{display:block;}
+.followup > .hint:first-of-type{margin:6px 0 14px;}
 @media (prefers-reduced-motion: no-preference){.followup.show{animation:slidein .34s cubic-bezier(.4,0,.2,1) both;}}
 .ftag{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:600;color:var(--green-deep);letter-spacing:1.5px;margin-bottom:12px;}
 .ftag::before{content:'';width:5px;height:5px;background:var(--green-deep);border-radius:1px;transform:rotate(45deg);}

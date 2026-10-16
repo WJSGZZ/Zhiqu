@@ -48,6 +48,10 @@
           <label class="opt"><input type="radio" name="sex" value="不便透露"><span class="box">不便透露</span></label>
         </div></div>
 
+      <div class="q req"><div class="q-label">你现在处在哪个阶段？</div>
+        <div class="opts stack"><label class="opt"><input type="radio" name="stage" value="高一或高二"><span class="box">高一或高二</span></label><label class="opt"><input type="radio" name="stage" value="高三上学期"><span class="box">高三上学期</span></label><label class="opt"><input type="radio" name="stage" value="高三下学期，还没出分"><span class="box">高三下学期，还没出分</span></label><label class="opt"><input type="radio" name="stage" value="已经出分"><span class="box">已经出分</span></label></div>
+        <p class="hint">招飞、军校、综合评价、强基计划、高校专项、港校申请等，多数在出分前就截止报名。知道你在哪个阶段，才能提醒哪些路还开着。</p></div>
+
       <div class="q req"><div class="q-label">你是哪个省（市/自治区）的考生？</div>
         <input type="text" id="province" placeholder="例如：河南、四川、广东……"></div>
 
@@ -76,6 +80,22 @@
           <label class="opt"><input type="radio" name="tier" value="不清楚"><span class="box">不清楚</span></label>
         </div>
         <input class="mt" type="text" id="linecha" placeholder="若知道，写下你高出本科线/特控线大约多少分（选填）"></div>
+
+      <div class="followup" data-when="tier=专科段">
+        <span class="ftag">追问 · 专科段</span>
+        <div class="q"><div class="q-label">读专科后，打算专升本吗？</div>
+          <div class="opts"><label class="opt"><input type="radio" name="zsb" value="打算"><span class="box">打算</span></label><label class="opt"><input type="radio" name="zsb" value="不打算"><span class="box">不打算，想直接就业</span></label><label class="opt"><input type="radio" name="zsb" value="还没想好"><span class="box">还没想好</span></label></div>
+          <p class="hint">专升本通常按专科学校所在省组织，能报的本科专业和次数由该省决定，所以专科学校在哪个省会影响以后的路。</p></div>
+        <div class="q"><div class="q-label">长期想在哪个省发展？<span class="opt-note">（选填）</span></div>
+          <input type="text" id="zk_province" placeholder="例如：留在本省 / 广东……"></div>
+      </div>
+
+      <div class="q"><div class="q-label">英语单科成绩，以及学考和年级排名<span class="opt-note">（选填）</span></div>
+        <div class="pair">
+          <div><input type="text" id="english_score" placeholder="英语单科分数或预估，例如 125"></div>
+          <div><input type="text" id="xk_rank" placeholder="学考等级、年级排名，例如：学考 8A、年级前 10%"></div>
+        </div>
+        <p class="hint">综合评价、三位一体、港校、中外合作和部分专业会看英语单科、学考等级或在校排名。填区间就行。</p></div>
     </div></section>
 
     <!-- ===== 2 ===== -->
@@ -696,6 +716,17 @@
         </div>
         <input class="mt" type="text" id="bodyNote" placeholder="如选了'其他'，请简单说明"></div>
 
+      <div class="q"><div class="q-label">视力的具体情况<span class="opt-note">（选填；招飞、军校、警校、航海等体检会查）</span></div>
+        <div class="opts"><label class="opt"><input type="radio" name="eyesurgery" value="做过近视手术或戴过OK镜"><span class="box">做过近视手术或戴过 OK 镜</span></label><label class="opt"><input type="radio" name="eyesurgery" value="没有"><span class="box">没有</span></label><label class="opt"><input type="radio" name="eyesurgery" value="不清楚"><span class="box">不清楚</span></label></div>
+        <input class="mt" type="text" id="nakedeye" placeholder="裸眼视力大致多少，例如：左 4.6 右 4.8（不知道就留空）"></div>
+
+      <div class="q"><div class="q-label">出生年月<span class="opt-note">（选填；只用来判断军校、招飞等的年龄条件，和后面的八字无关）</span></div>
+        <input type="text" id="birthym" placeholder="例如：2008-09；前面八字部分填过出生日期的，这里可不填"></div>
+
+      <div class="q"><div class="q-label">政治面貌与民族<span class="opt-note">（选填；只用于判断少数院校和民族班、预科的报考条件）</span></div>
+        <div class="opts"><label class="opt"><input type="radio" name="political" value="共青团员"><span class="box">共青团员</span></label><label class="opt"><input type="radio" name="political" value="中共党员或预备党员"><span class="box">中共党员或预备党员</span></label><label class="opt"><input type="radio" name="political" value="群众"><span class="box">群众</span></label><label class="opt"><input type="radio" name="political" value="不便透露"><span class="box">不便透露</span></label></div>
+        <input class="mt" type="text" id="ethnicity" placeholder="民族（选填），例如：汉族、蒙古族"></div>
+
       <div class="q req"><div class="q-label">你的高考外语语种是？</div>
         <div class="opts">
           <label class="opt"><input type="radio" name="lang" value="英语"><span class="box">英语</span></label>
@@ -737,7 +768,12 @@
           <label class="opt"><input type="checkbox" name="awards" value="英语/作文类"><span class="box">英语 / 作文类</span></label>
           <label class="opt"><input type="checkbox" name="awards" value="省级以上荣誉"><span class="box">省级以上荣誉</span></label>
           <label class="opt"><input type="checkbox" name="awards" value="暂时没有"><span class="box">暂时没有</span></label>
-        </div></div>
+        </div>
+        <input class="mt" type="text" id="award_level" placeholder="最高等级（选填），例如：数学竞赛省一、国家二级运动员"></div>
+
+      <div class="q"><div class="q-label">家里有没有军人、警察烈士，因公牺牲或伤残，长期在边防等特殊岗位的情况？<span class="opt-note">（选填；只答有没有，不用写细节）</span></div>
+        <div class="opts"><label class="opt"><input type="radio" name="famspecial" value="有，需要核对优待政策"><span class="box">有，需要核对优待政策</span></label><label class="opt"><input type="radio" name="famspecial" value="没有"><span class="box">没有</span></label><label class="opt"><input type="radio" name="famspecial" value="不便说"><span class="box">不便说</span></label></div>
+        <p class="hint">这类情况在部分院校和批次有优先录取或照顾政策。只需告诉我们“有”，具体由你对照当年政策核对。</p></div>
       <div class="q req"><div class="q-label">特殊招生路径，有了解或意向吗？<span class="opt-note">（可多选，不了解就选最后一项）</span></div>
         <div class="opts stack">
           <label class="opt"><input type="checkbox" name="special" value="强基计划"><span class="box">强基计划（基础学科）</span></label>
@@ -747,7 +783,21 @@
           <label class="opt"><input type="checkbox" name="special" value="军校/警校"><span class="box">军校 / 警校</span></label>
           <label class="opt"><input type="checkbox" name="special" value="定向/民族班等"><span class="box">定向培养 / 民族班等</span></label>
           <label class="opt"><input type="checkbox" name="special" value="都没考虑"><span class="box">都没考虑 / 不了解</span></label>
-        </div></div>
+        </div>
+        <p class="hint">不了解也没关系，后面几题帮我们判断你可能符合哪些。</p></div>
+
+      <div class="followup" data-when="special=专项计划">
+        <span class="ftag">追问 · 专项计划资格</span>
+        <p class="hint">专项计划看户籍和学籍，条件每年以本省当年公告为准。只需回答是或否，不用写地址。</p>
+        <div class="q"><div class="q-label">本人户籍在农村或脱贫县（实施区域）吗？</div><div class="opts"><label class="opt"><input type="radio" name="zx_hukou" value="是"><span class="box">是</span></label><label class="opt"><input type="radio" name="zx_hukou" value="否"><span class="box">否</span></label><label class="opt"><input type="radio" name="zx_hukou" value="不清楚"><span class="box">不清楚</span></label></div></div>
+        <div class="q"><div class="q-label">本人户籍在当地已满 3 年吗？</div><div class="opts"><label class="opt"><input type="radio" name="zx_years" value="是"><span class="box">是</span></label><label class="opt"><input type="radio" name="zx_years" value="否"><span class="box">否</span></label><label class="opt"><input type="radio" name="zx_years" value="不清楚"><span class="box">不清楚</span></label></div></div>
+        <div class="q"><div class="q-label">父母或法定监护人的户籍也在当地吗？</div><div class="opts"><label class="opt"><input type="radio" name="zx_parents" value="是"><span class="box">是</span></label><label class="opt"><input type="radio" name="zx_parents" value="否"><span class="box">否</span></label><label class="opt"><input type="radio" name="zx_parents" value="不清楚"><span class="box">不清楚</span></label></div></div>
+        <div class="q"><div class="q-label">高中 3 年的学籍在户籍所在县，并且实际在那里就读吗？</div><div class="opts"><label class="opt"><input type="radio" name="zx_school" value="是"><span class="box">是</span></label><label class="opt"><input type="radio" name="zx_school" value="否"><span class="box">否</span></label><label class="opt"><input type="radio" name="zx_school" value="不清楚"><span class="box">不清楚</span></label></div></div>
+      </div>
+
+      <div class="q"><div class="q-label">如果读公费师范、定向医学或定向培养，能接受毕业后到指定地区服务几年吗？<span class="opt-note">（选填）</span></div>
+        <div class="opts stack"><label class="opt"><input type="radio" name="servetime" value="能接受，县乡也愿意"><span class="box">能接受，县城或乡镇也愿意</span></label><label class="opt"><input type="radio" name="servetime" value="能接受，但只限城区"><span class="box">能接受，但只限城区或省会</span></label><label class="opt"><input type="radio" name="servetime" value="不能接受"><span class="box">不能接受</span></label><label class="opt"><input type="radio" name="servetime" value="没想过"><span class="box">没想过</span></label></div>
+        <p class="hint">这类路径包学费、有岗位，但要按协议服务若干年，期间流动和读研常受限制，违约要退费并交违约金。</p></div>
 
       <div class="q req"><div class="q-label">"提前批"你想冲吗？<span class="opt-note">（军警、公费师范、航海、小语种等多在提前批）</span></div>
         <div class="opts">
@@ -1041,11 +1091,18 @@
     var sex=radio('sex'); if(sex) L.push('性别：'+sex);
     L.push('');
     L.push('— 一、分数坐标 —');
+    L.push('当前阶段：'+f(radio('stage')));
     L.push('省份：'+f(val('province')));
     L.push('高考分（投档分）：'+f(val('score'))+'　全省位次：'+f(val('rank')));
     var ke=radio('kelei'),sub=val('subjects');
     L.push('科类/选科：'+f(ke)+(sub?'（'+sub+'）':''));
     L.push('分数档位：'+f(radio('tier'))+(val('linecha')?'　线差：'+val('linecha'):''));
+    if(radio('tier')==='专科段'){
+      L.push('  · 是否打算专升本：'+f(radio('zsb')));
+      if(val('zk_province')) L.push('  · 长期想在哪个省发展：'+val('zk_province'));
+    }
+    if(val('english_score')) L.push('英语单科：'+val('english_score'));
+    if(val('xk_rank')) L.push('学考与年级排名：'+val('xk_rank'));
     L.push('');
     L.push('— 二、根本目标 —');
     var goal=radio('goal'); L.push('毕业后第一意向：'+f(goal));
@@ -1143,13 +1200,22 @@
     L.push('— 七、现实约束 —');
     var bd=checks('body'),bdN=val('bodyNote');
     L.push('身体条件：'+f(bd)+(bdN?'；'+bdN:''));
+    if(radio('eyesurgery')||val('nakedeye')) L.push('视力细项：'+f(radio('eyesurgery'))+(val('nakedeye')?'；裸眼 '+val('nakedeye'):''));
+    if(val('birthym')||val('birthdate')) L.push('出生年月（用于年龄条件）：'+(val('birthym')||val('birthdate').slice(0,7)));
+    if(radio('political')) L.push('政治面貌：'+radio('political'));
+    if(val('ethnicity')) L.push('民族：'+val('ethnicity'));
     L.push('外语语种：'+f(radio('lang')));
     if(val('weaksubject')) L.push('单科短板：'+val('weaksubject'));
     L.push('家庭经济（学费）：'+f(radio('money')));
     L.push('生活费/求学开销：'+f(radio('livingcost')));
     if(radio('onlychild'))L.push('独生子女/就近照顾：'+radio('onlychild'));
-    if(checks('awards'))L.push('竞赛/特长/获奖：'+checks('awards'));
+    if(checks('awards')||val('award_level'))L.push('竞赛/特长/获奖：'+f(checks('awards'))+(val('award_level')?'（最高等级：'+val('award_level')+'）':''));
+    if(radio('famspecial')) L.push('特殊家庭情况：'+radio('famspecial'));
     L.push('特殊招生路径意向：'+f(checks('special')));
+    if(checks('special').indexOf('专项计划')>=0){
+      L.push('  · 专项资格（本人回答，待按当年公告核对）：户籍在实施区域 '+f(radio('zx_hukou'))+'；本人户籍满 3 年 '+f(radio('zx_years'))+'；父母户籍在当地 '+f(radio('zx_parents'))+'；户籍县高中学籍并就读满 3 年 '+f(radio('zx_school')));
+    }
+    if(radio('servetime')) L.push('定向服务期接受度：'+radio('servetime'));
     L.push('提前批意向：'+f(radio('tiqian')));
     L.push('');
     L.push('— 八、风险与心态 —');
