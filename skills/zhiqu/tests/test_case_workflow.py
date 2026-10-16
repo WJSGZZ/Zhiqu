@@ -230,5 +230,30 @@ class SubjectCheck(unittest.TestCase):
         self.assertEqual(subject_check.check("乙大学·自动化", idx, {"物理"})[0], "unknown")
 
 
+
+class ProvinceHealth(unittest.TestCase):
+    def test_grade_thresholds(self):
+        import province_health as ph
+        good = dict(coverage_80=.8, fail_95=.03, worst_fail_95=.05, match_rate=.8)
+        self.assertEqual(ph.grade(good, "major", 3, 2), "A")
+        self.assertEqual(ph.grade(good, "major", 3, 1), "B")
+        self.assertEqual(ph.grade(dict(good, worst_fail_95=.2), "major", 4, 3), "B")
+        self.assertEqual(ph.grade(dict(good, coverage_80=.97), "major", 3, 2), "C")
+        self.assertEqual(ph.grade(good, "major", 1, 0), "C")
+        self.assertEqual(ph.grade(good, "major", 0, 0), "D")
+
+    def test_renumbered_school_codes_match_by_name(self):
+        import province_health as ph
+        by = {(p, c): school for p, c, _, school in ph.SERIES}
+        for p in ("hebei", "fujian", "shanxi"):
+            self.assertEqual(by[(p, "physics")], "name")
+
+    def test_saved_grades(self):
+        with open(os.path.join(ROOT, "data", "calibration", "province_health.csv"), encoding="utf-8") as f:
+            pooled = {(r["province"], r["category"], r["key"]): r["grade"] for r in csv.DictReader(f) if r["record"] == "pooled"}
+        self.assertEqual(pooled[("hebei", "physics", "院校+专业名")], "A")
+        self.assertEqual(pooled[("henan", "physics", "")], "D")
+        self.assertNotIn("A", {g for (p, _, k), g in pooled.items() if k == "院校+组号"})
+
 if __name__ == "__main__":
     unittest.main()
