@@ -348,7 +348,7 @@ def build_html(meta, body_html, sections):
         body_parts.append(sec_html + "</section>")
 
     runhead = f"{person} · {edition}".replace('"', "")
-    css = CSS.replace("__RUNHEAD__", runhead) if CSS else ""
+    css = CSS.replace("__RUNHEAD__", runhead).replace("__TOPLEFT__", "知衢 · " + (title or "决策报告").replace('"', "")) if CSS else ""
     doc = (
         f'<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>{E(title)}</title>'
         f'<style>{css}</style></head><body>{cover}{"".join(body_parts)}</body></html>'
