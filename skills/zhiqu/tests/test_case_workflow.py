@@ -31,7 +31,13 @@ class SampleCase(unittest.TestCase):
         self.assertEqual(gate.errors, [])
 
     def test_stage_8_requires_independent_review(self):
-        gate = case_check.run(SAMPLE, 8)
+        with tempfile.TemporaryDirectory() as d:
+            case = os.path.join(d, "2027-GK-S01")
+            shutil.copytree(SAMPLE, case)
+            review = os.path.join(case, "review.json")
+            if os.path.exists(review):
+                os.remove(review)
+            gate = case_check.run(case, 8)
         self.assertTrue(any("review.json" in e for e in gate.errors))
 
     def test_result_reproduces(self):
@@ -243,7 +249,8 @@ class GradeWording(unittest.TestCase):
     def test_b_formatter_rounds_to_five(self):
         import report
         f = report.prob_formatter("B")
-        self.assertEqual((f(0.148), f(0.749), f(0.01), f(0.9999), f(0)), ("约 15%", "约 75%", "&lt; 5%", "&gt; 95%", "0%"))
+        self.assertEqual((f(0.148), f(0.749), f(0.01), f(0.03), f(0.96), f(0.9999), f(0), f(1)),
+                         ("约 15%", "约 75%", "&lt; 5%", "&lt; 5%", "&gt; 95%", "&gt; 95%", "0%", "100%"))
         self.assertIsNone(report.prob_formatter("C")(0.5))
 
     def test_samples_pass_grade_checks(self):

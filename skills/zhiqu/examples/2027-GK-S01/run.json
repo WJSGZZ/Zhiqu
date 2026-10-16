@@ -10,14 +10,15 @@
   "python3 scripts/optimize.py examples/2027-GK-S01/reviewed.csv --rank 33000 --slots 80 --drift 0.015 --target-year 2027 --sigma-floor 0.15 --sigma-scale 0.9 --decision-mode simulation --u-fall -60 --max-fall 0.01 --rho 0.5 --json examples/2027-GK-S01/sensitivity/rho_0.5.json",
   "python3 scripts/optimize.py examples/2027-GK-S01/reviewed.csv --rank 33000 --slots 80 --drift 0.015 --target-year 2027 --sigma-floor 0.15 --sigma-scale 0.9 --decision-mode simulation --u-fall -30 --max-fall 0.03 --json examples/2027-GK-S01/sensitivity/ufall_-30.json",
   "python3 scripts/optimize.py examples/2027-GK-S01/reviewed.csv --rank 33000 --slots 80 --drift 0.015 --target-year 2027 --sigma-floor 0.15 --sigma-scale 0.9 --decision-mode simulation --u-fall -100 --max-fall 0.005 --json examples/2027-GK-S01/sensitivity/ufall_-100.json",
-  "python3 scripts/optimize.py examples/2027-GK-S01/reviewed.csv --rank 33000 --slots 80 --drift 0.015 --target-year 2027 --sigma-floor 0.15 --sigma-scale 0.9 --decision-mode simulation --u-fall -60 --max-fall 0.01 --drift -0.07 --json examples/2027-GK-S01/sensitivity/drift_hotter.json",
+  "python3 scripts/optimize.py examples/2027-GK-S01/reviewed.csv --rank 33000 --slots 80 --drift -0.081 --target-year 2027 --sigma-floor 0.15 --sigma-scale 0.9 --decision-mode simulation --u-fall -60 --max-fall 0.01 --json examples/2027-GK-S01/sensitivity/drift_hotter.json",
   "python3 scripts/optimize.py examples/2027-GK-S01/reviewed.csv --rank 33000 --slots 80 --drift 0.015 --target-year 2027 --sigma-floor 0.15 --sigma-scale 0.9 --decision-mode simulation --u-fall -60 --max-fall 0.01 --drift 0.06 --json examples/2027-GK-S01/sensitivity/drift_cooler.json",
   "python3 scripts/optimize.py examples/2027-GK-S01/sensitivity/reviewed_outlook_pessimistic.csv --rank 33000 --slots 80 --drift 0.015 --target-year 2027 --sigma-floor 0.15 --sigma-scale 0.9 --decision-mode simulation --u-fall -60 --max-fall 0.01 --json examples/2027-GK-S01/sensitivity/outlook_pessimistic.json",
   "python3 scripts/optimize.py examples/2027-GK-S01/sensitivity/reviewed_city_second.csv --rank 33000 --slots 80 --drift 0.015 --target-year 2027 --sigma-floor 0.15 --sigma-scale 0.9 --decision-mode simulation --u-fall -60 --max-fall 0.01 --json examples/2027-GK-S01/sensitivity/city_second.json",
   "python3 scripts/optimize.py examples/2027-GK-S01/sensitivity/reviewed_outlook_second.csv --rank 33000 --slots 80 --drift 0.015 --target-year 2027 --sigma-floor 0.15 --sigma-scale 0.9 --decision-mode simulation --u-fall -60 --max-fall 0.01 --json examples/2027-GK-S01/sensitivity/outlook_second.json",
   "python3 scripts/report.py examples/2027-GK-S01/report.json --opt examples/2027-GK-S01/result.json --out examples/2027-GK-S01/report.pdf --sheet examples/2027-GK-S01/entry_sheet.csv",
   "python3 scripts/check_report.py examples/2027-GK-S01/report.json --opt examples/2027-GK-S01/result.json --html examples/2027-GK-S01/report.html",
-  "python3 scripts/case_check.py examples/2027-GK-S01 --stage 7"
+  "python3 scripts/case_check.py examples/2027-GK-S01 --stage 7",
+  "python3 scripts/optimize.py examples/2027-GK-S01/reviewed.csv --rank 33000 --slots 80 --drift 0.015 --target-year 2027 --sigma-floor 0.15 --sigma-scale 1.0 --decision-mode simulation --u-fall -60 --max-fall 0.01 --json examples/2027-GK-S01/sensitivity/scale_1.0.json"
  ],
  "note": "命令均在 skills/zhiqu 目录执行。阶段 4–5 的中间文件名为示意，最终产物是目录里的 pool.csv、reviewed.csv；重新打分的敏感性情景由 preferences.py 重算后写入 sensitivity/reviewed_*.csv。"
 }

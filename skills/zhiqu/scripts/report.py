@@ -144,14 +144,33 @@ def prob_formatter(grade):
         if grade == "B":
             if x <= 0:
                 return "0%"
-            v = round(x * 20) / 20
-            if v <= 0:
+            if x >= 1:
+                return "100%"
+            if x < 0.05:  # 取整到 5% 后两端会写成“约 0%”“约 100%”，与“有可能但很小”的含义不符
                 return "&lt; 5%"
-            if v >= 1 and x < 1:
+            if x > 0.95:
                 return "&gt; 95%"
-            return f"约 {v * 100:.0f}%"
+            return f"约 {round(x * 20) * 5:.0f}%"
         return None
     return f
+
+
+UTILITY_SCALE = "100 分 = 候选中你最想去的"
+
+
+def strategy_caption(eu, pfall, top, safe):
+    """按实际数字写策略图的图注，不预设“只挑最想去的一定滑档”。"""
+    parts = ["条越长越好；滑档概率越低越好。"]
+    if top:
+        if abs(top[0] - (eu or 0)) < 0.05 and abs(top[1] - (pfall or 0)) < 1e-9:
+            parts.append("只挑最想去的，在本案和本报告的方案结果相同：你最想去的几个里已经有够稳的保底。")
+        elif top[1] > (pfall or 0):
+            parts.append("只挑最想去的，滑档风险更高。")
+        elif top[0] < (eu or 0):
+            parts.append("只挑最想去的，滑档风险没有更高，但期望效用更低：前段太集中，落空后没有中间档接住。")
+    if safe and safe[0] < (eu or 0):
+        parts.append("只挑最稳的，几乎不会滑档，但浪费了分数。")
+    return "".join(parts)
 
 
 def interval80(x):
@@ -304,7 +323,7 @@ def build(rep, opt):
         body += ('<div class="kpis">'
                  f'<div><b>推荐志愿数</b><span class="num">{len(lst)}</span><em>本批次可填 {E(str(m.get("slots", "–")))} 个</em></div>'
                  f'<div><b>最可能的去向</b><span style="font-size:11pt">{E(likely_name)}</span><em>{"概率" + ("" if grade == "B" else "约 ") + fmt(likely_p) if numeric else "落点最集中的志愿（本省评级不给精确概率）"}</em></div>'
-                 + (f'<div><b>满意度 70 分以上的概率</b><span class="num">{fmt(p_good)}</span><em>100 分 = 候选中你最想去的</em></div>' if numeric else
+                 + (f'<div><b>满意度 70 分以上的概率</b><span class="num">{fmt(p_good)}</span><em>{E(m.get("utility_scale", UTILITY_SCALE))}</em></div>' if numeric else
                     f'<div><b>冲 / 稳 / 保</b><span class="num">{" / ".join(str(sum(x["tag"] == t for x in lst)) for t in ("冲", "稳", "保"))}</span><em>按模型过线可能性分档，不给百分比</em></div>')
                  + (f'<div><b>滑档风险</b><span class="num">{fall_txt(pfall)}</span><em>录取线整体大波动时 {fall_txt(stress.get("p_fall"))}</em></div>' if grade == "A" or pfall else
                     f'<div><b>滑档风险</b><span class="num">未出现</span><em>{sims:,} 次模拟中没有出现滑档；录取线整体大波动时{"也没有" if not stress.get("p_fall") else "：" + fall_txt(stress.get("p_fall"))}</em></div>')
@@ -314,6 +333,9 @@ def build(rep, opt):
                  + '<div class="cap">' + ('数字是志愿序号，对应"志愿表"一节；浅色是录取概率不到 5% 的志愿。' if numeric else '数字是志愿序号，对应"志愿表"一节；色块越宽越可能落在那里。本省评级不给精确百分比，见"方法与假设"。') + '</div></div>')
     if s.get("points"):
         body += '<div class="box key"><h4>核心结论</h4><ol class="tight">' + "".join(f"<li>{E(x)}</li>" for x in s["points"]) + "</ol></div>"
+    if s.get("after_the_fact"):  # 回溯样板：目标年真实结果，只有事后才知道，不能混进事前结论
+        body += ('<div class="box"><h4>事后才知道的结果（填报时不可能知道，不参与上面的结论）</h4><ul class="tight">'
+                 + "".join(f"<li>{E(x)}</li>" for x in s["after_the_fact"]) + "</ul></div>")
     if s.get("actions"):
         body += '<div class="box warn"><h4>接下来你要做的事</h4><ol class="tight">' + "".join(f"<li>{E(x)}</li>" for x in s["actions"]) + "</ol></div>"
     if s.get("plain"):
@@ -329,7 +351,7 @@ def build(rep, opt):
         body += "<table><thead><tr><th style='width:28%'>项目</th><th>情况</th></tr></thead><tbody>" + "".join(
             f"<tr><td>{E(a)}</td><td>{E(b)}</td></tr>" for a, b in pr["facts"]) + "</tbody></table>"
     if pr.get("priorities"):
-        body += ('<div class="fig"><div class="ttl">你最在乎什么（由问卷第九节的排序换算的权重）</div>'
+        body += ('<div class="fig"><div class="ttl">你最在乎什么（由问卷「排个序：到底谁最重要」一节的排序换算的权重）</div>'
                  + bars_h([(a, float(b)) for a, b in pr["priorities"]], fmt=lambda v: f"{v:.0%}", vmax=1)
                  + '<div class="cap">权重越大，这一项对"这个志愿好不好"的影响越大。"录取稳妥"不计入权重，而是决定你能承受多大的滑档风险。</div></div>')
     if pr.get("constraints"):
@@ -381,7 +403,7 @@ def build(rep, opt):
             probs = f"<td class='r'>{fmt(x['p_clear'])}</td><td class='r'>{fmt(x['p_land'], 1)}</td>" if numeric else ""
             rank_cell = f"{x['expected_cut_rank']:,}" if grade == "A" else f"{x['expected_cut_rank']:,}<div class='small'>{interval80(x)}</div>"
             body += (f"<tr{hl}><td class='c num'>{x['order']}</td><td>{E(x['name'])}{group_line(x, fmt)}</td><td class='c'><span class='tag {E(x['tag'])}'>{E(x['tag'])}</span></td>"
-                     f"<td class='r'>{x['utility']:g}</td>{probs}"
+                     f"<td class='r'>{x['utility']:.1f}</td>{probs}"
                      f"<td class='r'>{rank_cell}</td><td class='small'>{E(notes.get(x['name'], ''))}{limit_line(x)}</td></tr>")
         body += "</tbody></table>"
         body += ('<p class="small">"偏好"是 0–100 的分数，由"你的画像"一节的权重和各项打分算出。"单独过线"只看这一个志愿；"最终录取"考虑了前面志愿可能已经录取你；"预测位次"是今年最低录取位次的中位预测。'
@@ -399,12 +421,14 @@ def build(rep, opt):
             rows.append(("只挑最稳的", bs[0], bs[1], False))
         body = ('<p class="lead">"期望效用"可以理解为：把所有可能的结局按发生的概率加权平均后，你平均能得到多满意的结果。它同时考虑了"想不想去"和"能不能上"。</p>'
                 '<div class="fig"><div class="ttl">三种填法的对比</div>' + strategy_chart(rows, fmt=(None if grade == "A" else (lambda p: fall_txt(p) if p == 0 or numeric else "有")))
-                + '<div class="cap">条越长越好；滑档概率越低越好。只挑最想去的，容易滑档；只挑最稳的，又浪费了分数。</div></div>')
+                + '<div class="cap">' + E(strategy_caption(eu, pfall, bu, bs)) + '</div></div>')
         if rep.get("why"):
             body += "".join(f"<p>{E(x)}</p>" for x in rep["why"])
         if stress:
             body += (f'<div class="box"><h4>压力测试</h4><p>如果今年各校录取线的波动是往年的 {E(str(rep.get("stress_mult", 2)))} 倍，'
-                     f'这张志愿表的期望效用为 {stress.get("expected_utility", 0):.1f}，滑档{("概率为 " + fall_txt(stress.get("p_fall"))) if grade == "A" else ("：" + fall_txt(stress.get("p_fall")))}。</p></div>')
+                     f'这张志愿表的期望效用为 {stress.get("expected_utility", 0):.1f}，滑档{("概率为 " + fall_txt(stress.get("p_fall"))) if grade == "A" else ("：" + fall_txt(stress.get("p_fall")))}。'
+                     + ('波动放大后期望效用反而略高，是因为波动是双向放大的：排在前面的冲刺志愿意外过线的机会也变大，而后面的保底仍然够稳。这说明这张表在大波动下没有变差，不说明大波动对你有利。'
+                        if stress.get("expected_utility", 0) > (eu or 0) and not stress.get("p_fall") else '') + '</p></div>')
         if rep.get("sensitivity"):
             body += "<h3>换一种假设，结论会变吗</h3><table><thead><tr><th>假设</th><th class='r'>期望效用</th><th class='r'>滑档概率</th><th>前段是否变化</th></tr></thead><tbody>" + "".join(
                 f"<tr><td>{E(a)}</td><td class='r'>{E(str(b))}</td><td class='r'>{E(str(c))}</td><td>{E(d)}</td></tr>" for a, b, c, d in rep["sensitivity"]) + "</tbody></table>"

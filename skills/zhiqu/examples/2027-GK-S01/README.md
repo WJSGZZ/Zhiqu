@@ -14,7 +14,7 @@
 | 5 打分 | `attributes.csv`、`preferences_config.json`、`preferences_review.json`、`reviewed.csv` |
 | 6 计算 | `result.json`、`run.json`（全部命令）、`sensitivity/` |
 | 7 报告 | `report.json`、`report.pdf`、`report.html`、`entry_sheet.csv` |
-| 8 复核 | `review.json`：**尚未做**，须由没参与分析的新会话完成 |
+| 8 复核 | `review.json`：2026-10-16 第一次独立复核**不通过**（同分规则转述、参数口径不统一、变热情景幅度、100 分定义等），已逐条修改，待新的独立复核 |
 
 这一单暴露并已处理的问题：
 

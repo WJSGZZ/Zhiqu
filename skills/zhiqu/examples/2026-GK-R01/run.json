@@ -10,10 +10,11 @@
   "python3 scripts/optimize.py examples/2026-GK-R01/reviewed.csv --rank 33000 --slots 80 --drift 0.023 --target-year 2026 --sigma-scale 1.0 --decision-mode simulation --u-fall -60 --max-fall 0.01 --rho 0.5 --json examples/2026-GK-R01/sensitivity/rho_0.5.json",
   "python3 scripts/optimize.py examples/2026-GK-R01/reviewed.csv --rank 33000 --slots 80 --drift 0.023 --target-year 2026 --sigma-scale 1.0 --decision-mode simulation --u-fall -30 --max-fall 0.03 --json examples/2026-GK-R01/sensitivity/ufall_-30.json",
   "python3 scripts/optimize.py examples/2026-GK-R01/reviewed.csv --rank 33000 --slots 80 --drift 0.023 --target-year 2026 --sigma-scale 1.0 --decision-mode simulation --u-fall -100 --max-fall 0.005 --json examples/2026-GK-R01/sensitivity/ufall_-100.json",
-  "python3 scripts/optimize.py examples/2026-GK-R01/reviewed.csv --rank 33000 --slots 80 --drift -0.047 --target-year 2026 --sigma-scale 1.0 --decision-mode simulation --u-fall -60 --max-fall 0.01 --json examples/2026-GK-R01/sensitivity/drift_hotter.json",
+  "python3 scripts/optimize.py examples/2026-GK-R01/reviewed.csv --rank 33000 --slots 80 --drift -0.073 --target-year 2026 --sigma-scale 1.0 --decision-mode simulation --u-fall -60 --max-fall 0.01 --json examples/2026-GK-R01/sensitivity/drift_hotter.json",
   "python3 scripts/optimize.py examples/2026-GK-R01/reviewed.csv --rank 33000 --slots 80 --drift 0.083 --target-year 2026 --sigma-scale 1.0 --decision-mode simulation --u-fall -60 --max-fall 0.01 --json examples/2026-GK-R01/sensitivity/drift_cooler.json",
   "python3 scripts/optimize.py examples/2026-GK-R01/sensitivity/reviewed_outlook_pessimistic.csv --rank 33000 --slots 80 --drift 0.023 --target-year 2026 --sigma-scale 1.0 --decision-mode simulation --u-fall -60 --max-fall 0.01 --json examples/2026-GK-R01/sensitivity/outlook_pessimistic.json",
-  "python3 scripts/retro_judge.py examples/2026-GK-R01/result.json --target data/zhejiang/general_2026.csv --rank 33000 --json examples/2026-GK-R01/hindsight.json   # 出稿后、写第 11 节时才运行"
+  "python3 scripts/retro_judge.py examples/2026-GK-R01/result.json --target data/zhejiang/general_2026.csv --rank 33000 --json examples/2026-GK-R01/hindsight.json   # 出稿后、写第 11 节时才运行",
+  "python3 scripts/retro_run.py examples/2026-GK-R01   # 五档位次回溯：按 retro_config.json 的事前登记重跑，中间文件写到 retro_ranks/<位次>/"
  ],
- "note": "回溯样板：所有计算只读 2022—2025 年投档表；2026 年投档表只在 retro_judge.py 这一步读取。五档位次的回溯结果见 retro_ranks.csv"
+ "note": "回溯样板：所有计算只读 2022—2025 年投档表；2026 年投档表只在 retro_judge.py 这一步读取。五档位次的回溯结果见 retro_ranks.csv；每档中间文件在 retro_ranks/<位次>/。drift_hotter 情景（−0.073 = 全省漂移 0.023 + 电气类历年最大相对变化 −0.096）为出稿时加入，非事前登记"
 }

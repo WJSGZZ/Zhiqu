@@ -1,0 +1,41 @@
+{
+ "attributes": [
+  "school",
+  "major",
+  "city",
+  "outlook"
+ ],
+ "scenarios": {
+  "student": {
+   "confirmed": true,
+   "priority": [
+    "major",
+    "school",
+    "safety",
+    "outlook",
+    "city"
+   ],
+   "anchors": {
+    "low": {
+     "name": "底线：省内一般公办院校的电子信息类，位次靠后",
+     "scores": {
+      "school": 4,
+      "major": 6,
+      "city": 7,
+      "outlook": 5.5
+     }
+    },
+    "high": {
+     "name": "梦校：浙江大学电气工程及其自动化",
+     "scores": {
+      "school": 10,
+      "major": 10,
+      "city": 10,
+      "outlook": 9.5
+     }
+    }
+   },
+   "checks": []
+  }
+ }
+}

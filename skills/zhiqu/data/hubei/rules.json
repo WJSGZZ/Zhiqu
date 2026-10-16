@@ -1,0 +1,115 @@
+{
+  "schema": 1,
+  "province": "湖北",
+  "mode": "院校专业组",
+  "category_system": "3+1+2（物理、历史分科）",
+  "rules_year": 2026,
+  "target_year_rules": "2027 年招生工作通知通常 5 月下旬发布（图片版），出稿前须重核",
+  "source_note": "规则来自《省教育厅关于做好2026年普通高等学校招生工作的通知》，原文为 32 张图片，本机文字识别后逐条阅读；数字与相关投档表、征集公告对照无矛盾",
+  "items": {
+    "slots": {
+      "value": "本科普通批平行志愿最多 45 个院校专业组志愿，每组不超过 6 个专业及是否服从专业调剂；国家专项、高校专项、地方专项、预科班、民族班等单独设组，在本科普通批志愿栏内混合填报",
+      "source": "https://jyt.hubei.gov.cn/bmdt/ztzl/gxzs/xxgk/ywgg/202605/t20260522_5942173.shtml",
+      "verified": "2026-10-16",
+      "volatile": true
+    },
+    "parallel": {
+      "value": "“考生分数优先、遵循志愿顺序”，考生档案一次性投档；投出或录取后不补档、不补录",
+      "source": "https://jyt.hubei.gov.cn/bmdt/ztzl/gxzs/xxgk/ywgg/202605/t20260522_5942173.shtml",
+      "verified": "2026-10-16",
+      "volatile": true
+    },
+    "ratio": {
+      "value": "高校按在鄂招生计划数结合生源分布，与省教育厅招生办协商确定调阅档案要求；按模拟投档情况在正式投档前完成计划调整（文中未写比例数值）",
+      "source": "https://jyt.hubei.gov.cn/bmdt/ztzl/gxzs/xxgk/ywgg/202605/t20260522_5942173.shtml",
+      "verified": "2026-10-16",
+      "volatile": true
+    },
+    "tie_break": {
+      "value": "通知规定同分投档排序规则按《湖北省2021年普通高校考试招生和录取工作实施方案》（鄂招委〔2020〕7号）执行，原文未取得；2026 年官方投档线表列出的同分排序项依次为语数之和、语数最高、外语、首选科目、再选最高、再选次高、志愿号（待核）",
+      "source": "https://jyt.hubei.gov.cn/bmdt/ztzl/gxzs/zszy/zsfw/202607/t20260727_5983787.shtml",
+      "verified": "2026-10-16",
+      "volatile": true
+    },
+    "withdraw": {
+      "value": "是否录取及专业由高校按章程确定，高校负责解释退档原因；所有已录取的考生一律不能退档，不能换录到其他学校",
+      "source": "https://jyt.hubei.gov.cn/bmdt/ztzl/gxzs/xxgk/ywgg/202605/t20260522_5942173.shtml",
+      "verified": "2026-10-16",
+      "volatile": true
+    },
+    "subject_req": {
+      "value": "须符合院校专业组选考科目要求；2027 年起适用 2025 年公布的新版要求",
+      "source": "https://jyt.hubei.gov.cn/bmdt/ztzl/gxzs/xxgk/ywgg/202605/t20260522_5942173.shtml",
+      "verified": "2026-10-16",
+      "volatile": false
+    },
+    "fill_window": {
+      "value": "2026 年第 1 次集中填报 6 月 29 日 8:00—7 月 2 日 17:00，本科提前批 6 月 30 日 17:00 截止，本科普通批 7 月 2 日 17:00 截止；截止前可多次修改，以最后一次保存为准",
+      "source": "https://jyt.hubei.gov.cn/bmdt/ztzl/gxzs/xxgk/ywgg/202605/t20260522_5942173.shtml",
+      "verified": "2026-10-16",
+      "volatile": true
+    }
+  },
+  "datasets": {
+    "history": {
+      "years": [
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "path": "data/hubei/physics_{year}.csv",
+      "metric": "rank",
+      "source": "data/hubei/README.md",
+      "verified": "2026-10-16",
+      "note": "2025 年表为图片识别、不可靠，待重识别"
+    },
+    "history_history": {
+      "years": [
+        2023,
+        2024,
+        2026
+      ],
+      "path": "data/hubei/history_{year}.csv",
+      "metric": "rank",
+      "source": "data/hubei/README.md",
+      "verified": "2026-10-16",
+      "note": "缺 2025 年（图片，待识别）"
+    },
+    "yfyd": {
+      "years": [
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "path": "data/hubei/yfyd_{category}_{year}.csv",
+      "source": "data/hubei/README.md",
+      "verified": "2026-10-16"
+    },
+    "plan_current": {
+      "year": 2027,
+      "status": "未公布",
+      "proxy": "用最近一年投档表的组作参照，出分后以 2027 年招生计划核对"
+    },
+    "subject_req_table": {
+      "path": "data/subject_req_2027.csv",
+      "source": "data/README.md「2027 届选考科目要求」",
+      "verified": "2026-10-16"
+    }
+  },
+  "calibration": {
+    "physics": {
+      "drift": 0.0291,
+      "sigma_scale": 1.3,
+      "sigma_floor": 0.1,
+      "grade": "B",
+      "evidence": "data/calibration/README.md「十省可信度体检」；2025 年表重识别后须重算",
+      "verified": "2026-10-16"
+    },
+    "history": {
+      "grade": "C",
+      "note": "历史类投档表 2023、2024、2026 刚入库（缺 2025），待重跑体检"
+    }
+  }
+}

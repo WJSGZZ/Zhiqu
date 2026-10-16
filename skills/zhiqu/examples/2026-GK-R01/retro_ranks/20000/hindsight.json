@@ -1,0 +1,124 @@
+{
+ "rank": 20000,
+ "status": "投档",
+ "landing_order": 1,
+ "blocker_order": null,
+ "landing": "杭州电子科技大学·电气工程及其自动化",
+ "landing_utility": 83.255814,
+ "expected_utility": 83.24976748800002,
+ "n_slots": 10,
+ "n_observed": 10,
+ "brier": 0.06207964374999999,
+ "rows": [
+  {
+   "order": 1,
+   "id": "0006-电气工程及其自动化",
+   "name": "杭州电子科技大学·电气工程及其自动化",
+   "tag": "保",
+   "p_clear": 0.998,
+   "expected_cut_rank": 28752,
+   "actual_rank": 25051,
+   "cleared": true,
+   "note": ""
+  },
+  {
+   "order": 2,
+   "id": "3115-电气工程及其自动化",
+   "name": "上海电力大学·电气工程及其自动化",
+   "tag": "冲",
+   "p_clear": 0.05775,
+   "expected_cut_rank": 15274,
+   "actual_rank": 12455,
+   "cleared": false,
+   "note": ""
+  },
+  {
+   "order": 3,
+   "id": "0003-电气类",
+   "name": "浙江工业大学·电气类",
+   "tag": "保",
+   "p_clear": 0.9975,
+   "expected_cut_rank": 28413,
+   "actual_rank": 23833,
+   "cleared": true,
+   "note": ""
+  },
+  {
+   "order": 4,
+   "id": "3273-电气工程及其自动化",
+   "name": "南京邮电大学·电气工程及其自动化",
+   "tag": "冲",
+   "p_clear": 0.1005,
+   "expected_cut_rank": 16400,
+   "actual_rank": 14099,
+   "cleared": false,
+   "note": ""
+  },
+  {
+   "order": 5,
+   "id": "1155-电气工程及其自动化",
+   "name": "中国矿业大学(北京)·电气工程及其自动化",
+   "tag": "冲",
+   "p_clear": 0.196,
+   "expected_cut_rank": 15639,
+   "actual_rank": 13323,
+   "cleared": false,
+   "note": ""
+  },
+  {
+   "order": 6,
+   "id": "3216-电气工程及其自动化",
+   "name": "江南大学·电气工程及其自动化",
+   "tag": "冲",
+   "p_clear": 0.0255,
+   "expected_cut_rank": 15142,
+   "actual_rank": 13056,
+   "cleared": false,
+   "note": ""
+  },
+  {
+   "order": 7,
+   "id": "3267-电气工程及其自动化",
+   "name": "南京信息工程大学·电气工程及其自动化",
+   "tag": "稳",
+   "p_clear": 0.72825,
+   "expected_cut_rank": 21791,
+   "actual_rank": 18835,
+   "cleared": false,
+   "note": ""
+  },
+  {
+   "order": 8,
+   "id": "3273-智能电网信息工程",
+   "name": "南京邮电大学·智能电网信息工程",
+   "tag": "冲",
+   "p_clear": 0.19475,
+   "expected_cut_rank": 17654,
+   "actual_rank": 15687,
+   "cleared": false,
+   "note": ""
+  },
+  {
+   "order": 9,
+   "id": "3125-电气工程及其自动化",
+   "name": "上海海事大学·电气工程及其自动化",
+   "tag": "保",
+   "p_clear": 1.0,
+   "expected_cut_rank": 37264,
+   "actual_rank": 32639,
+   "cleared": true,
+   "note": ""
+  },
+  {
+   "order": 10,
+   "id": "3243-电气工程及其自动化",
+   "name": "南京工业大学·电气工程及其自动化",
+   "tag": "保",
+   "p_clear": 0.997,
+   "expected_cut_rank": 29745,
+   "actual_rank": 25274,
+   "cleared": true,
+   "note": ""
+  }
+ ]
+}

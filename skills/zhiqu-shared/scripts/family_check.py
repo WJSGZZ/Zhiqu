@@ -224,6 +224,15 @@ def check_section_names(root):
                     continue
                 issues.append((ERROR, relpath, lineno,
                                 f"用编号引用问卷节次，节次会变：{m.group(0)}"))
+    # 报告模板与示例正文里同样不能写“问卷第X节”（2026-10 复核发现模板写死了“问卷第九节”）
+    from pathlib import Path
+    extra = [f for f in ("skills/zhiqu/scripts/report.py", "skills/zhiqu/scripts/render_report.py") if (Path(root) / f).exists()]
+    extra += sorted(str(p.relative_to(root)) for p in Path(root).glob("skills/*/examples/*/report.json"))
+    extra += sorted(str(p.relative_to(root)) for p in Path(root).glob("skills/*/examples/*/report.md"))
+    for relpath in extra:
+        for lineno, line in enumerate(read_lines(root, relpath), 1):
+            for m in re.finditer(r"问卷第[一二三四五六七八九十0-9]+[节部分]", line):
+                issues.append((ERROR, relpath, lineno, f"用编号引用问卷节次，节次会变，请写节名：{m.group(0)}"))
     return issues
 
 
