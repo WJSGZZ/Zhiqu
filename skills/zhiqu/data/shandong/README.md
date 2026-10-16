@@ -2,6 +2,9 @@
 
 | 年份 | 来源页面 |
 |---|---|
+| 2020 | <https://www.sdzk.cn/NewsInfo.aspx?NewsID=4996>（新高考首年；官方表另有“投出数”“最低分”，写入 `admit`、`score`） |
+| 2021 | <https://www.sdzk.cn/NewsInfo.aspx?NewsID=5509> |
+| 2022 | <https://www.sdzk.cn/NewsInfo.aspx?NewsID=5846> |
 | 2023 | <https://www.sdzk.cn/NewsInfo.aspx?NewsID=6279> |
 | 2024 | <https://www.sdzk.cn/NewsInfo.aspx?NewsID=6656> |
 | 2025 | <https://www.sdzk.cn/NewsInfo.aspx?NewsID=6996> |
@@ -14,6 +17,13 @@
 - 跨年按院校名称 + 专业名称匹配（`--school name`）。
 
 
-## 一分一段（`yfyd_YYYY.csv`，2022—2026）
+## 一分一段（`yfyd_YYYY.csv`，2020—2026）
 
 来源：山东省教育招生考试院《YYYY 年夏季高考文化成绩一分一段表》（xls，无验证码，下载日期 2026-10-07）：[2022](https://www.sdzk.cn/NewsInfo.aspx?NewsID=5794)、[2026](https://www.sdzk.cn/NewsInfo.aspx?NewsID=7258)、[2025](https://www.sdzk.cn/NewsInfo.aspx?NewsID=6943)、[2024](https://www.sdzk.cn/NewsInfo.aspx?NewsID=6577)、[2023](https://www.sdzk.cn/NewsInfo.aspx?NewsID=6212)。官方表除“全体”外还分选考物理、化学、生物、思想政治、历史、地理各科的本段与累计人数，这里只取“全体”（山东按总成绩位次投档，不按单科排名）。列 `score,count,cum,source`；首行是合并档（累计含更高分），已标明。每年 543—548 行，最高档 2026 年 697、2025 年 692、2024 年 696、2023 年 697，最低到 150 分（线下没有位次）；校验：累计 = 上一行累计 + 本段人数逐行成立，分数无缺口，`check_yfyd.py` 无错误。山东 2020—2021 尚未收。
+
+
+## 2020—2022 年补齐（2026-10-16）
+
+- 投档表 `general_2020/2021/2022.csv`：16,714 / 17,150 / 18,286 行；`rank` 空 0 / 2 / 1 行（山东师范大学 2021、北京联合大学 2022 官方为空；清华大学“文科试验班类(通用基础类)”2021 年官方写“前50名”，非数字，留空）。用同一脚本重做 2023 投档表与 2022 一分一段，与已入库文件逐字节相同。2020 年表有 6 行位次不在同分区间，与官方原表一致，原因未查明。
+- 一分一段 `yfyd_2020.csv`（[NewsID=4938](https://www.sdzk.cn/NewsInfo.aspx?NewsID=4938)，7 月正式表，不是 1 月的模拟表 NewsID=4721）、`yfyd_2021.csv`（[NewsID=5458](https://www.sdzk.cn/NewsInfo.aspx?NewsID=5458)）：547、536 行，逐行递推一致。
+- 外购对照（按校名 + 专业名对外购“专业分数线”）：校名、专业、位次完全一致 2020 年 91.6%、2021 年 90.8%、2022 年 94.8%，校名写法不同而位次一致再加 0.6%—2.5%；差异主要是外购把同名专业合并、括号写法不同。2020 年位次不同的 622 行，官方位次全部落在一分一段区间内。外购 2020、2021 年一分一段与官方附件相同（2020 年逐字节相同），不是独立来源。
