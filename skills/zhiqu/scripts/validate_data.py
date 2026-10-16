@@ -21,7 +21,8 @@ import re
 import sys
 
 DATA = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data")
-SKIP_DIRS = {"civil_service", "calibration"}
+SKIP_DIRS = {"civil_service", "calibration", "purchased"}  # purchased 是本地内部库，不提交
+MAX_SCORE = 750
 VIOLATION_WARN = 0.02
 
 
@@ -43,6 +44,10 @@ def check_file(path, codes):
     if "code" not in header or "name" not in header or not ({"score", "rank"} & set(header)):
         issues.append(f"表头缺少必要列：{', '.join(header)}")
         return issues, notes
+    # 分数超出满分：十省高考总分均为 750；2026-10 发现江苏 xls 数值格转换时丢了小数点（688.0 → 6880）
+    over = [(r.get("name"), r.get("score")) for r in rows if (num(r.get("score")) or 0) > MAX_SCORE]
+    if over:
+        issues.append(f"{len(over)} 行分数超过满分 {MAX_SCORE}，疑似转换时丢了小数点：{over[:3]}")
     # 位次与分数一致性
     pairs = [(num(r.get("score")), num(r.get("rank"))) for r in rows]
     pairs = [(s, k) for s, k in pairs if s and k]

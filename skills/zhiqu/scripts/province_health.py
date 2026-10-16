@@ -33,6 +33,7 @@ SERIES = [
     ("jiangsu", "physics", ["major", "group"], "code"),
     ("jiangsu", "history", ["major", "group"], "code"),
     ("hubei", "physics", ["major", "group"], "code"),
+    ("hubei", "history", ["major", "group"], "code"),
     ("fujian", "physics", ["major", "group"], "name"),   # 福建院校代码每年重编，按校名匹配
     ("fujian", "history", ["major", "group"], "name"),
     ("hunan", "physics", ["group"], "code"),   # 湖南表的 major 列是组名（如“第104组”），不是选科要求，只能按组号
@@ -42,7 +43,7 @@ SERIES = [
     ("shanxi", "physics", ["group"], "name"),    # 山西院校代码每年重编；表中无选科要求，只能按组号
     ("shanxi", "history", ["group"], "name"),
 ]
-NO_TABLE = [("henan", "physics", "无官方投档表"), ("henan", "history", "无官方投档表"), ("hubei", "history", "无历史类投档表")]
+NO_TABLE = [("henan", "physics", "无官方投档表"), ("henan", "history", "无官方投档表")]
 MAJOR_NAME_PROVINCES = {"zhejiang", "shandong", "hebei"}  # major 列是专业名；其他省的 major 列是选科要求
 KEY_LABEL = {"major": "院校+专业名", "group": "院校+组号", "req": "院校+选科要求"}
 DIRECTIONS = {
@@ -56,21 +57,29 @@ JUMP = math.log(1.4)
 RHO = 0.3
 
 
-def load(province, stem, key, school_by):
+INTERNAL = os.path.join(DATA, "purchased", "internal_cutoffs")  # 本地内部库（外购，不提交）；只在 --internal 时读
+
+
+def load(province, stem, key, school_by, internal=False):
     bt.SCHOOL_BY, bt.METRIC = school_by, "rank"
     folder = os.path.join(DATA, province)
+    paths = {int(m.group(1)): os.path.join(folder, n) for n in os.listdir(folder)
+             if (m := re.fullmatch(stem + r"_(\d{4})\.csv", n))}
+    extra = os.path.join(INTERNAL, province)
+    if internal and key == "group" and os.path.isdir(extra):  # 外购的选科要求写法与官方不同，只能按组号补
+        for n in os.listdir(extra):
+            m = re.fullmatch(stem + r"_(\d{4})\.csv", n)
+            if m and int(m.group(1)) not in paths:
+                paths[int(m.group(1))] = os.path.join(extra, n)
     data, labels = {}, {}
-    for name in sorted(os.listdir(folder)):
-        m = re.fullmatch(stem + r"_(\d{4})\.csv", name)
-        if not m:
-            continue
-        rows = bt.load(os.path.join(folder, name), key)
+    for year in sorted(paths):
+        rows = bt.load(paths[year], key)
         if key == "major" and province not in MAJOR_NAME_PROVINCES:
             rows = {k: v for k, v in rows.items() if k[1]}  # 选科要求为空的条目无法按选科匹配
         usable = {k: v for k, v in rows.items() if v["full"] and v["rank"] and v["rank"] >= 500}
         if usable:
-            data[int(m.group(1))] = usable
-            labels[int(m.group(1))] = {k: v["label"] for k, v in usable.items()}
+            data[year] = usable
+            labels[year] = {k: v["label"] for k, v in usable.items()}
     return data, labels
 
 
@@ -132,8 +141,8 @@ def grade(summary, key, n_years, n_scaled):
     return "C"
 
 
-def review(province, stem, key, school_by):
-    data, labels = load(province, stem, key, school_by)
+def review(province, stem, key, school_by, internal=False):
+    data, labels = load(province, stem, key, school_by, internal)
     rows, pooled, worst = [], [], 0.0
     yr = yearly(data)
     n_scaled = 0
@@ -190,11 +199,13 @@ FIELDS = ["province", "category", "key", "years_available", "record", "target_ye
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--out", required=True)
+    ap.add_argument("--internal", action="store_true",
+                    help="官方缺的年份用本地内部库（外购，内部未核）补，只按组号；结果须标明，不替换正式评级")
     a = ap.parse_args()
     rows = []
     for province, stem, keys, school_by in SERIES:
         for key in keys:
-            rows += review(province, stem, key, school_by)
+            rows += review(province, stem, key, school_by, a.internal)
     for province, stem, why in NO_TABLE:
         rows.append(dict(province=province, category=stem, key="", record="pooled", n=0, years_tested=0, grade="D",
                          years_available=why))
