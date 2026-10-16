@@ -1,0 +1,47 @@
+{
+ "rank": 50000,
+ "status": "投档",
+ "landing_order": 2,
+ "blocker_order": null,
+ "landing": "浙江水利水电学院·电气工程及其自动化",
+ "landing_utility": 69.534884,
+ "expected_utility": 72.84081388925,
+ "n_slots": 3,
+ "n_observed": 3,
+ "brier": 0.0996451875,
+ "rows": [
+  {
+   "order": 1,
+   "id": "0013-电气工程及其自动化",
+   "name": "中国计量大学·电气工程及其自动化",
+   "tag": "稳",
+   "p_clear": 0.54675,
+   "expected_cut_rank": 50600,
+   "actual_rank": 42838,
+   "cleared": false,
+   "note": ""
+  },
+  {
+   "order": 2,
+   "id": "0030-电气工程及其自动化",
+   "name": "浙江水利水电学院·电气工程及其自动化",
+   "tag": "保",
+   "p_clear": 1.0,
+   "expected_cut_rank": 92997,
+   "actual_rank": 77469,
+   "cleared": true,
+   "note": ""
+  },
+  {
+   "order": 3,
+   "id": "0019-电气工程及其自动化",
+   "name": "浙大宁波理工学院·电气工程及其自动化",
+   "tag": "保",
+   "p_clear": 1.0,
+   "expected_cut_rank": 87919,
+   "actual_rank": 77608,
+   "cleared": true,
+   "note": ""
+  }
+ ]
+}

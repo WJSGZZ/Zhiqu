@@ -249,7 +249,8 @@ class GradeWording(unittest.TestCase):
     def test_b_formatter_rounds_to_five(self):
         import report
         f = report.prob_formatter("B")
-        self.assertEqual((f(0.148), f(0.749), f(0.01), f(0.9999), f(0)), ("约 15%", "约 75%", "&lt; 5%", "&gt; 95%", "0%"))
+        self.assertEqual((f(0.148), f(0.749), f(0.01), f(0.03), f(0.96), f(0.9999), f(0), f(1)),
+                         ("约 15%", "约 75%", "&lt; 5%", "&lt; 5%", "&gt; 95%", "&gt; 95%", "0%", "100%"))
         self.assertIsNone(report.prob_formatter("C")(0.5))
 
     def test_samples_pass_grade_checks(self):

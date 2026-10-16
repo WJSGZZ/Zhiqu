@@ -46,7 +46,7 @@ def check_report(rep, result, html=None):
         parser = Tables()
         parser.feed(html)
         from html import unescape
-        from report import interval80, prob_formatter
+        from report import UTILITY_SCALE, interval80, prob_formatter
         grade = rep.get('meta', {}).get('prob_grade', 'A')
         fmt = prob_formatter(grade)
         numeric = grade in ('A', 'B')
@@ -62,7 +62,7 @@ def check_report(rep, result, html=None):
             for i, (cells, item) in enumerate(zip(rows, result['list'])):
                 rank_cell = f'{item["expected_cut_rank"]:,}' + ('' if grade == 'A' else interval80(item))
                 probs = [unescape(fmt(item['p_clear'])), unescape(fmt(item['p_land'], 1))] if numeric else []
-                expected = [str(item['order']), item['tag'], f'{item["utility"]:g}'] + probs + [rank_cell]
+                expected = [str(item['order']), item['tag'], f'{item["utility"]:.1f}'] + probs + [rank_cell]
                 idx = (0, 2, 3) + ((4, 5, 6) if numeric else (4,))
                 actual = [cells[j] for j in idx] if len(cells) == len(head) else []
                 if actual != expected or not cells[1].startswith(item['name']):
@@ -81,9 +81,9 @@ def check_report(rep, result, html=None):
             fall = lambda p: (f'< {100/sims:.2g}%' if grade == 'A' else '模拟中未出现') if p == 0 else (unescape(fmt(p, 1)) if numeric else '有风险，见第 05 节')
             head4 = [str(len(items)), f'本批次可填 {rep.get("meta", {}).get("slots", "–")} 个', name]
             if grade == 'A':
-                mid = ['概率约 ' + percentage(probability), percentage(good), '100 分 = 候选中你最想去的']
+                mid = ['概率约 ' + percentage(probability), percentage(good), rep.get('meta', {}).get('utility_scale', UTILITY_SCALE)]
             elif numeric:
-                mid = ['概率' + unescape(fmt(probability)), unescape(fmt(good)), '100 分 = 候选中你最想去的']
+                mid = ['概率' + unescape(fmt(probability)), unescape(fmt(good)), rep.get('meta', {}).get('utility_scale', UTILITY_SCALE)]
             else:
                 mid = ['落点最集中的志愿（本省评级不给精确概率）', ' / '.join(str(sum(x['tag'] == t for x in items)) for t in ('冲', '稳', '保')), '按模型过线可能性分档，不给百分比']
             sp = result['stress']['p_fall']
