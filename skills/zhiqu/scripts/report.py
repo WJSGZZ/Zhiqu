@@ -40,10 +40,11 @@ h2 .no { color: var(--accent); margin-right: 3mm; font-weight: 400; font-size: 1
 h3 { font-size: 12pt; margin: 6mm 0 2mm; break-after: avoid; }
 p { margin: 0 0 2.6mm; }
 section { margin-top: 12mm; }
-section:not(.major) { break-inside: avoid-page; }
-section.major { break-before: page; margin-top: 0; }
+section.newpage { break-before: page; margin-top: 0; }
+p, li, dd { orphans: 3; widows: 3; }
+h4, dt { break-after: avoid; }
 svg.chart { width: 100%; height: auto; display: block; }
-.lead { font-size: 11pt; color: var(--soft); }
+.lead { font-size: 11pt; color: var(--soft); break-after: avoid; }
 .small { font-size: 8.5pt; color: var(--muted); }
 .num { font-variant-numeric: tabular-nums; }
 
@@ -75,7 +76,7 @@ svg.chart { width: 100%; height: auto; display: block; }
 .kpis em { display:block; font-style: normal; font-size: 8pt; color: var(--soft); }
 
 /* boxes */
-.box { background: #FFFDF6; border: .6pt solid var(--rule); padding: 4mm 5mm; margin: 3mm 0 4mm; break-inside: avoid; }
+.box { background: #FFFDF6; border: .6pt solid var(--rule); padding: 4mm 5mm; margin: 3mm 0 4mm; }
 .box.key { border-left: 2.5pt solid var(--accent); }
 .box.warn { border-left: 2.5pt solid var(--amber); }
 .box h4 { margin: 0 0 1.5mm; font-size: 9pt; letter-spacing: 1pt; color: var(--accent); }
@@ -98,7 +99,7 @@ tr.hl td { background: #F3EBD2; }
 .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
 .grid2.wide { grid-template-columns: 1fr; }
 .card table { font-size: 8.5pt; margin-top: 2mm; }
-.card { background: #FFFDF6; border: .6pt solid var(--rule); padding: 4mm 5mm; break-inside: avoid; }
+.card { background: #FFFDF6; border: .6pt solid var(--rule); padding: 4mm 5mm; }
 .card h3 { margin: 0 0 1mm; }
 .card .fit { font-size: 8pt; color: var(--accent); letter-spacing: 1pt; }
 .card dl { margin: 2mm 0 0; }
@@ -229,20 +230,24 @@ def build(rep, opt):
     missing = []
     n = 0
 
-    def sec(title, body, major=False):
+    # 只在封面之后另起一页，其余各节接着排：文中任何强制分页都可能让上一节剩下一两行独占一页、
+    # 留下大片空白（2026-10 的样板实测如此）。表格行不拆、表头每页重复，小标题跟着下文走。
+    NEW_PAGE = {"摘要"}
+
+    def sec(title, body):
         nonlocal n
         n += 1
-        cls = ' class="major"' if major else ""
+        cls = ' class="newpage"' if title in NEW_PAGE else ""
         secs.append((n, title, f'<section{cls}><h2><span class="no">{n:02d}</span>{E(title)}</h2>{body}</section>'))
 
     # 目录固定：每一节都出现。没有内容的节写明原因（report.json 的 omitted.<键>），并在终端提醒。
     omitted = rep.get("omitted", {})
 
-    def blank(key, title, default, major=False):
+    def blank(key, title, default):
         why = omitted.get(key)
         if not why:
             missing.append(title)
-        sec(title, f'<div class="box"><h4>本节说明</h4><p>{E(why or default)}</p></div>', major)
+        sec(title, f'<div class="box"><h4>本节说明</h4><p>{E(why or default)}</p></div>')
 
     # 01 摘要
     s = rep.get("summary", {})
@@ -263,7 +268,7 @@ def build(rep, opt):
         body += '<div class="box warn"><h4>接下来你要做的事</h4><ol class="tight">' + "".join(f"<li>{E(x)}</li>" for x in s["actions"]) + "</ol></div>"
     if s.get("plain"):
         body += "".join(f"<p>{E(x)}</p>" for x in s["plain"])
-    sec("摘要", body, major=True)
+    sec("摘要", body)
 
     # 02 画像
     pr = rep.get("profile", {})
@@ -281,7 +286,7 @@ def build(rep, opt):
         body += '<div class="box"><h4>硬约束（不满足的学校和专业已经排除）</h4><ul class="tight">' + "".join(f"<li>{E(x)}</li>" for x in pr["constraints"]) + "</ul></div>"
     if pr.get("tensions"):
         body += '<div class="box warn"><h4>需要你想清楚的矛盾</h4><ul class="tight">' + "".join(f"<li>{E(x)}</li>" for x in pr["tensions"]) + "</ul></div>"
-    sec("你的画像", body, major=True)
+    sec("你的画像", body)
 
     # 03 方向
     ds = rep.get("directions", [])
@@ -308,9 +313,9 @@ def build(rep, opt):
                      "<table><thead><tr><th>事件</th><th style='width:12%'>日期</th><th style='width:22%'>来源</th><th style='width:30%'>对本报告的影响</th></tr></thead><tbody>"
                      + "".join(f"<tr><td>{E(a)}</td><td class='small'>{E(b)}</td><td class='small' style='word-break:break-all'>{E(c)}</td><td>{E(d)}</td></tr>" for a, b, c, d in rep["news"])
                      + "</tbody></table>")
-        sec("专业方向", body, major=True)
+        sec("专业方向", body)
     else:
-        blank("directions", "专业方向", "本次没有做专业方向分析。", major=True)
+        blank("directions", "专业方向", "本次没有做专业方向分析。")
 
     # 04 志愿表
     if lst:
@@ -327,7 +332,7 @@ def build(rep, opt):
         body += "</tbody></table>"
         body += ('<p class="small">"偏好"是 0–100 的分数，由"你的画像"一节的权重和各项打分算出。"单独过线"只看这一个志愿；"最终录取"考虑了前面志愿可能已经录取你；"预测位次"是今年最低录取位次的中位预测。'
                  '冲：单独过线 &lt; 40%；稳：40%–85%；保：≥ 85%。高亮行是最可能的去向。</p>')
-        sec("志愿表", body, major=True)
+        sec("志愿表", body)
 
         # 05 为什么这样排
         rows = [("本报告的方案", eu, pfall, True)]
@@ -349,7 +354,7 @@ def build(rep, opt):
                 f"<tr><td>{E(a)}</td><td class='r'>{E(str(b))}</td><td class='r'>{E(str(c))}</td><td>{E(d)}</td></tr>" for a, b, c, d in rep["sensitivity"]) + "</tbody></table>"
         sec("为什么这样排", body)
     else:
-        blank("list", "志愿表", "本次没有运行志愿组合优化，因此没有志愿表。", major=True)
+        blank("list", "志愿表", "本次没有运行志愿组合优化，因此没有志愿表。")
         blank("list", "为什么这样排", "本次没有运行志愿组合优化，因此没有排序依据与方案对比。")
 
     # 06 院校调研
@@ -393,9 +398,9 @@ def build(rep, opt):
                 '<li>录入后，把系统里的志愿表截图或打印，逐行对照本页勾选；提交前确认截止时间。</li></ol></div>'
                 "<table><thead><tr><th class='c'>序</th><th>院校代码</th><th>院校</th><th>专业组 / 专业代码</th><th>组内专业志愿顺序</th><th class='c'>服从调剂</th><th class='c'>已核对</th></tr></thead><tbody>"
                 + rows_html + "</tbody></table>")
-        sec("填报单", body, major=True)
+        sec("填报单", body)
     else:
-        blank("list", "填报单", "本次没有运行志愿组合优化，因此没有填报单。", major=True)
+        blank("list", "填报单", "本次没有运行志愿组合优化，因此没有填报单。")
 
     # 可以直接问我（个性化的追问清单）
     if rep.get("ask_me"):
@@ -404,9 +409,9 @@ def build(rep, opt):
             body += f'<h3>{E(grp["topic"])}</h3><ul class="asklist">' + "".join(
                 f'<li><b>“{E(q["q"])}”</b>' + (f'<span>{E(q["why"])}</span>' if q.get("why") else "") + "</li>" for q in grp["items"]) + "</ul>"
         body += '<p class="small">提问时可以直接说"按报告志愿表的第 3 个志愿……"，AI 会接着这份报告的数据回答；它不知道的会说不知道。</p>'
-        sec("追问清单", body, major=True)
+        sec("追问清单", body)
     else:
-        blank("ask_me", "追问清单", "本次没有预备追问清单。", major=True)
+        blank("ask_me", "追问清单", "本次没有预备追问清单。")
 
     def block(b):
         """方法与事后回看的小节：标题、段落、可选表格。"""
@@ -433,7 +438,7 @@ def build(rep, opt):
              "<dt>蒙特卡洛模拟</dt><dd>按历史波动随机生成几千种\"今年可能的录取线\"，统计各种结局出现的频率。</dd>"
              "<dt>漂移</dt><dd>全省录取位次整体逐年变宽或变紧的趋势。</dd>"
              "<dt>回测</dt><dd>用过去的数据去\"预测\"已经发生的年份，检验方法准不准。</dd></dl></div>")
-    sec("方法与假设", body, major=True)
+    sec("方法与假设", body)
 
     # 事后回看（仅用于回测案例）
     if rep.get("hindsight"):
@@ -444,9 +449,9 @@ def build(rep, opt):
                 "<tr>" + "".join(f"<td>{E(str(c))}</td>" for c in row) + "</tr>" for row in h["table"]) + "</tbody></table>"
         body += "".join(f"<p>{E(x)}</p>" for x in h.get("notes", []))
         body += "".join(block(b) for b in h.get("extra", []))
-        sec("事后回看", body, major=True)
+        sec("事后回看", body)
     else:
-        sec("事后回看", '<p class="lead">' + E(omitted.get("hindsight", "录取结果公布后，把真实的投档线和最终去向填进这一节，与本报告的预测逐条对照：哪些判断准、哪些偏了、偏在哪里。这样下一次的判断才会更准。")) + "</p>", major=True)
+        sec("事后回看", '<p class="lead">' + E(omitted.get("hindsight", "录取结果公布后，把真实的投档线和最终去向填进这一节，与本报告的预测逐条对照：哪些判断准、哪些偏了、偏在哪里。这样下一次的判断才会更准。")) + "</p>")
 
     # 09 来源与声明
     body = ""

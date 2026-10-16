@@ -341,9 +341,9 @@ def build_html(meta, body_html, sections):
     body_parts = []
     for idx, (num, t, sec_html) in enumerate(sections):
         # 有编号的小节沿用 report.py 的 <span class="no">编号</span> 结构（已在渲染时写入）；
-        # 每个 `##` 小节各占一个 <section>，与 report.py 的分页习惯一致：除首节外都从新的一节开始，
-        # 具体是否分页交给浏览器打印时的 CSS（section 默认 break-inside: avoid-page）。
-        cls = ' class="major"' if idx == 0 else ""
+        # 每个 `##` 小节各占一个 <section>。只有首节另起一页（封面之后），其余接着排，
+        # 小节内允许跨页，避免整节被推到下一页而留下大片空白（CSS 见 report.py）。
+        cls = ' class="newpage"' if idx == 0 else ""
         sec_html = sec_html.replace("<section>", f"<section{cls}>", 1) if idx == 0 else sec_html
         body_parts.append(sec_html + "</section>")
 
