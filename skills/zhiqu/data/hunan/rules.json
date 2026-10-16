@@ -100,7 +100,7 @@
   "calibration": {
     "physics": {
       "drift": 0.0624,
-      "sigma_scale": 1.3,
+      "sigma_scale": 1.7,
       "sigma_floor": 0.1,
       "grade": "B",
       "grade_by_key": {

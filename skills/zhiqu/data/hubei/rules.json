@@ -116,9 +116,9 @@
       "drift": -0.0206,
       "sigma_scale": 0.7,
       "sigma_floor": 0.1,
-      "grade": "B",
+      "grade": "A",
       "grade_by_key": {
-        "院校+选科要求": "B",
+        "院校+选科要求": "A",
         "院校+组号": "B"
       },
       "target_year": 2027,
