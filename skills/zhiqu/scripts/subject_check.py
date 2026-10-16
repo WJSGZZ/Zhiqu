@@ -18,7 +18,7 @@ from pathlib import Path
 
 DATA = Path(__file__).resolve().parent.parent / "data"
 TABLE = DATA / "subject_req_2027.csv"
-CHAR = {"河北": "冀", "河南": "豫", "山东": "鲁", "江苏": "苏", "浙江": "浙", "福建": "闽", "湖北": "鄂", "湖南": "湘"}
+CHAR = {"河北": "冀", "河南": "豫", "山东": "鲁", "江苏": "苏", "浙江": "浙", "福建": "闽", "湖北": "鄂", "湖南": "湘", "广东": "粤"}
 
 
 def official_source(province):

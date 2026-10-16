@@ -94,8 +94,11 @@
       "proxy": "用最近一年投档表的条目作参照，出分后以 2027 年招生计划核对"
     },
     "subject_req_table": {
-      "status": "未入库",
-      "note": "官方汇总表未取得，个案先把依赖它的候选标为待核"
+      "status": "已入库",
+      "file": "data/subject_req_2027.csv（provinces 含“粤”）",
+      "source": "https://www.eeagd.edu.cn/xkcx2027/",
+      "note": "官方查询系统逐校取全，无专业代码；与他省同校同名专业要求全部一致",
+      "verified": "2026-10-16"
     }
   },
   "calibration": {
