@@ -111,15 +111,23 @@
       "sigma_scale": 0.9,
       "sigma_floor": 0.1,
       "grade": "A",
-      "evidence": "data/calibration/README.md「十省可信度体检」；参数由 province_health.py 的同一套函数按截至 2026 年的全部样本算出",
+      "grade_by_key": {
+        "院校+专业名": "A"
+      },
+      "target_year": 2027,
+      "evidence": "data/calibration/province_health.csv（2026-10-16 重跑）；漂移=最近三次相邻变化中位数的平均，倍数按全部检验误差的 NLL 在 0.7—2.0 中选（scripts/province_health.py next_params）",
       "verified": "2026-10-16"
     },
     "history": {
-      "drift": 0.0157,
+      "drift": 0.0049,
       "sigma_scale": 0.7,
       "sigma_floor": 0.1,
-      "grade": "C",
-      "evidence": "data/calibration/README.md「十省可信度体检」；参数由 province_health.py 的同一套函数按截至 2026 年的全部样本算出",
+      "grade": "A",
+      "grade_by_key": {
+        "院校+专业名": "A"
+      },
+      "target_year": 2027,
+      "evidence": "data/calibration/province_health.csv（2026-10-16 重跑）；漂移=最近三次相邻变化中位数的平均，倍数按全部检验误差的 NLL 在 0.7—2.0 中选（scripts/province_health.py next_params）",
       "verified": "2026-10-16"
     }
   }

@@ -108,6 +108,19 @@ def yearly(data):
     return out
 
 
+def next_params(province, stem, key, school_by):
+    """下一年（最新年 + 1）的生产参数，按同一规则：漂移取最近三次相邻变化中位数的平均，倍数在 SCALES 中按全部检验误差的 NLL 选。"""
+    data, _ = load(province, stem, key, school_by)
+    years = sorted(data)
+    if len(years) < 2:
+        return None
+    steps = [st.median(math.log(data[b][k]["rank"] / data[a][k]["rank"]) / (b - a) for k in data[a].keys() & data[b].keys())
+             for a, b in zip(years, years[1:]) if data[a].keys() & data[b].keys()]
+    errs = [(r, s) for _, (_, es) in yearly(data).items() for r, s, _, _ in es]
+    scale = min(SCALES, key=lambda x: score(errs, x, "normal")["nll"]) if errs else 1.0
+    return dict(target=years[-1] + 1, drift=round(st.mean(steps[-3:]), 4), sigma_scale=scale, n_errors=len(errs))
+
+
 def pits(errs, scale):
     from evaluate_models import phi
     return [phi(r / (s * scale)) for r, s, _, _ in errs]

@@ -45,3 +45,21 @@
 官方每年发布《普通类本科批常规志愿院校专业组投档最低分》，2021—2025 年是 45—86 张图片，2026 年是 ZIP 内的扫描 PDF（历史类 48 页、物理类 117 页），列为批次、科类、院校代号、院校名称、专业组（组代码 + 选科要求）、投档最低分，没有位次和计划数。官方页面（物理/历史）：[2026](https://www.eeafj.cn/gkptgkgsgg/20260725/14750.html) / [历史](https://www.eeafj.cn/gkptgkgsgg/20260725/14749.html)；[2025](https://www.eeafj.cn/gkptgkgsgg/20250726/14165.html) / [历史](https://www.eeafj.cn/gkptgkgsgg/20250726/14164.html)；[2024](https://www.eeafj.cn/gkptgkgsgg/20240726/13557.html) / [历史](https://www.eeafj.cn/gkptgkgsgg/20240726/13541.html)；[2023](https://www.eeafj.cn/gkptgkgsgg/20230728/12994.html) / [历史](https://www.eeafj.cn/gkptgkgsgg/20230728/13021.html)；[2022](https://www.eeafj.cn/gkptgkgsgg/20220728/12200.html) / [历史](https://www.eeafj.cn/gkptgkgsgg/20220728/12199.html)；[2021](https://www.eeafj.cn/gkptgkgsgg/20210726/11362.html) / [历史](https://www.eeafj.cn/gkptgkgsgg/20210726/11363.html)。高职（专科）批同栏目另有页面。
 
 **志愿个数**：2026 年本科批常规志愿 50 个院校专业组，高职（专科）批 40 个专业志愿（[2026 年录取实施办法](https://www.eeafj.cn/gkptgkgsgg/20260612/14670.html)）；2025 年本科批个数待核（检索摘要为 40 个）。
+
+## 2021—2023 年与 2026 年物理类投档线（2026-10-16，扫描件识别）
+
+| 文件 | 官方来源页 | 行数 | `rank` |
+|---|---|---:|---:|
+| `physics_2026.csv` | <https://www.eeafj.cn/gkptgkgsgg/20260725/14750.html> | 3,242 | 3,242 |
+| `physics_2023.csv` | <https://www.eeafj.cn/gkptgkgsgg/20230728/12994.html> | 2,224 | 2,224 |
+| `history_2023.csv` | <https://www.eeafj.cn/gkptgkgsgg/20230728/13021.html> | 1,094 | 1,094 |
+| `physics_2022.csv` | <https://www.eeafj.cn/gkptgkgsgg/20220728/12200.html> | 2,202 | 2,202 |
+| `history_2022.csv` | <https://www.eeafj.cn/gkptgkgsgg/20220728/12199.html> | 1,141 | 1,140 |
+| `physics_2021.csv` | <https://www.eeafj.cn/gkptgkgsgg/20210726/11362.html> | 2,147 | 空 |
+| `history_2021.csv` | <https://www.eeafj.cn/gkptgkgsgg/20210726/11363.html> | 1,167 | 空 |
+
+- 官方表为扫描图片（2021、2022 年 2480×3507，2023 年 826×1169 放大识别），多遍识别后对最终 CSV 做机械检查：院校代号 4 位且只增不减、`code+group` 不重复、组号与选科要求文字相符、分数为三位整数且在控制线与 750 之间、同年同名院校代号唯一，全部通过。每张表最低分恰好等于当年本科控制线（2021 物理 423、历史 467；2022 年 428、468；2023 年 431、453；2026 物理 446）。
+- 官方写“无生源线上”的行没有分数，未写入（物理 2026/2023/2022/2021 各 15、4、6、5 行，历史 2023/2022/2021 各 50、34、26 行）。
+- 校名错字按 2024—2026 已入库表纠正，稀有字回原图看过；各遍读数不一致的格子与人工定值清单在识别报告里（每表不超过 20 条）。
+- `rank` 按同年 `yfyd_*` 补（同分累计人数）；2021 年没有一分一段表，留空。投档位次全部落在同分区间内。
+- 外购库对照（同校名同组号、唯一对应）：最低分一致 物理 2022 97.8%、2023 96.8%，历史 2022 98.6%、2023 98.5%。不一致的多在 999 组，外购在同名院校下常取了另一个组；官方分数高于外购且相差十位或百位的 27 行已回原图确认读数无误。
