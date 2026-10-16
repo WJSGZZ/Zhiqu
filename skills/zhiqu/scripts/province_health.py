@@ -35,8 +35,8 @@ SERIES = [
     ("hubei", "physics", ["major", "group"], "code"),
     ("fujian", "physics", ["major", "group"], "name"),   # 福建院校代码每年重编，按校名匹配
     ("fujian", "history", ["major", "group"], "name"),
-    ("hunan", "physics", ["major", "group"], "code"),
-    ("hunan", "history", ["major", "group"], "code"),
+    ("hunan", "physics", ["group"], "code"),   # 湖南表的 major 列是组名（如“第104组”），不是选科要求，只能按组号
+    ("hunan", "history", ["group"], "code"),
     ("guangdong", "physics", ["group"], "code"),
     ("guangdong", "history", ["group"], "code"),
     ("shanxi", "physics", ["group"], "name"),    # 山西院校代码每年重编；表中无选科要求，只能按组号
