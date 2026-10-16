@@ -35,7 +35,7 @@ python3 scripts/report.py report.json --opt result.json --out 志愿填报决策
 | `profile.intro` / `facts` / `priorities` / `constraints` / `tensions` | 画像要点、权重（小数）、硬约束、需要考生想清楚的矛盾 | 你的画像 |
 | `directions` | 每个方向：`name` `fit` `majors` `evidence` `counter` `outlook` `verify`；`outlook` 是若干条"若……则……；若不成立……"的前景判断；`paths` 是 `[去向, 门槛, 代价, 依据]` 行，覆盖考研、考公、就业（生涯规划融在这里，不单独成块） | 专业方向 |
 | `roadmap` | `[核对项, 安排]` 五行：门槛与差距、顺序与投入、里程碑与截止、切换条件与备选、下次检查点 | 专业方向（末尾） |
-| `list_notes` | 志愿名 → 一句话说明（为什么在这一格） | 志愿表 |
+| `list_notes` | 志愿名 → 一句话说明（为什么在这一格）；过线概率偏低的专业组志愿，再写一句“若刚过组线，最可能落到哪个专业，它在不在你的可接受名单”（组内专业不全时写“组内专业不全，待核”） | 志愿表 |
 | `why` / `stress_mult` / `sensitivity` | 排序理由段落、压力倍数、敏感性表 `[假设, 期望效用, 滑档概率, 前段是否变化]` | 为什么这样排 |
 | `research` / `questions` | 院校调研 `[{school, items: [[方面, 发现, 证据等级]], sources: [https 链接]}]`；请考生亲自去问学长学姐的问题 | 院校调研 |
 | `todo` | `[事项, 去哪里查]` | 核对清单 |
