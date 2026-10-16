@@ -73,3 +73,16 @@
 | `history_2024.csv` | 269 | 1,291 | 106 |
 
 四张一分段表统一为 `score,count,cum,count_all,cum_all,source`：`count/cum` 是“含全国性加分”，`count_all/cum_all` 是“含全国性和地方性加分”，两套各自逐行递推一致；物理类重新解析的全国性一列与此前入库值逐行相同，末行改标为“100分以下汇总”。`scripts/check_yfyd.py` 只按 `cum` 核对位次区间，所以省属高校那几百行会报“不在区间”，这是有意的口径差别，不是错误。外购库的湖南位次每年对所有学校统一用一套累计列（2023 年全国性、2024 年含地方性），不能作为这条规则的旁证。本节取代上文“已清空 2023、2024 年 `rank`”与“2024 历史类不换算”的处理。
+
+## 2021—2022 年补齐（2026-10-16）
+
+| 文件 | 官方来源 | 行数 | rank 非空 |
+|---|---|---:|---:|
+| `physics_2022.csv`、`history_2022.csv` | 湖南招生考试信息港 2022 年本科批第一次投档线（<https://www.hneeb.cn/hnxxg/741/742/content_3656.html>，附件 rar 内 xls） | 3,442、1,727 | 3,343、1,647 |
+| `physics_2021.csv`、`history_2021.csv` | 同站 2021 年本科批第一次投档线（<https://www.hneeb.cn/hnxxg/741/742/content_2953.html>，附件 xls） | 3,050、1,613 | 2,939、1,546 |
+| `yfyd_physics/history_2022.csv` | 同站 2022 年档分 1 分段（<https://www.hneeb.cn/hnxxg/741/742/content_3609.html>、`content_3610`） | 562、530 | |
+| `yfyd_physics/history_2021.csv` | 湖南省教育厅网站 2021 年档分 1 分段（[t20210624_22745424](http://jyt.hunan.gov.cn/sjyt/hnsjyksy/web/ksyzkzx/202106/t20210624_22745424.html)、[t20210624_22745425](http://jyt.hunan.gov.cn/sjyt/hnsjyksy/web/ksyzkzx/202106/t20210624_22745425.html)） | 568、541 | |
+
+- 一分段两套加分口径都录（`count/cum` 全国性、`count_all/cum_all` 含地方性），各自递推 0 处不符；外购只有含地方性一套，与 `cum_all` 全部一致。
+- `rank` 按本文件上文“按加分适用范围恢复”的规则；同一脚本回放到 2023、2024 年四张表，与已入库结果逐行相同。投档行数与原表一致；外购对照分数一致 99.9%—100%，唯一 2 处差异（海南大学 2021 物理）回官方 xls 确认外购错。
+- 2021、2022 年物理一分段末行是“100分以下汇总”而原表没有单独的 100 分行，`check_yfyd.py --trailing-below-score-summary 100` 会对这两张报格式问题，写法与 `yfyd_history_2024.csv` 相同。
