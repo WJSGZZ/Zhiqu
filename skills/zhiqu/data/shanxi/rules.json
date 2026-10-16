@@ -1,0 +1,118 @@
+{
+  "schema": 1,
+  "province": "山西",
+  "mode": "院校专业组",
+  "category_system": "3+1+2（物理、历史分科；2025 年首届新高考）",
+  "rules_year": 2026,
+  "target_year_rules": "2027 年招生工作规定通常 5 月下旬发布，出稿前须重核",
+  "items": {
+    "slots": {
+      "value": "普通本科批平行志愿栏设 45 个院校专业组志愿，每组 6 个专业志愿和是否服从专业调剂；另设高水平运动队、预科班单志愿栏",
+      "source": "http://www.sxkszx.cn/news/2026529/n7284127182.html",
+      "verified": "2026-10-16",
+      "volatile": true
+    },
+    "parallel": {
+      "value": "“考生之间，分数优先；考生志愿，遵循顺序”，按高考总成绩排序位次和高校确定的调档比例投档",
+      "source": "http://www.sxkszx.cn/news/2026529/n7284127182.html",
+      "verified": "2026-10-16",
+      "volatile": true
+    },
+    "ratio": {
+      "value": "按高校确定的调档比例投档，投档数不是整数的向下取整（平行志愿未写比例上限；非平行志愿原则上 120% 以内）",
+      "source": "http://www.sxkszx.cn/news/2026529/n7284127182.html",
+      "verified": "2026-10-16",
+      "volatile": true
+    },
+    "tie_break": {
+      "value": "高考总成绩（含政策性加分）相同时，依次比较语文数学两科之和、语文或数学单科最高成绩、外语单科成绩、首选科目单科成绩、再选科目单科最高成绩、再选科目单科次高成绩",
+      "source": "http://www.sxkszx.cn/news/2026529/n7284127182.html",
+      "verified": "2026-10-16",
+      "volatile": true
+    },
+    "withdraw": {
+      "value": "投档后考生无正当理由不得申请退档，高校也不得以考生放弃志愿为由退档；不符合章程要求的责任由考生承担",
+      "source": "http://www.sxkszx.cn/news/2026529/n7284127182.html",
+      "verified": "2026-10-16",
+      "volatile": true
+    },
+    "subject_req": {
+      "value": "选考科目须符合所报考院校专业组的选考科目要求；2027 届要求未见公布",
+      "source": "http://www.sxkszx.cn/news/2026529/n7284127182.html",
+      "verified": "2026-10-16",
+      "volatile": false
+    },
+    "fill_window": {
+      "value": "2026 年第二段 7 月 2 日 8:00—7 月 7 日 18:00 填报普通本科批等志愿",
+      "source": "http://www.sxkszx.cn/news/2026622/n1891127206.html",
+      "verified": "2026-10-16",
+      "volatile": true
+    },
+    "special_plans": {
+      "value": "高校专项计划从 2026 年起在普通本科批招生录取，实行平行志愿",
+      "source": "http://www.sxkszx.cn/news/2026529/n7284127182.html",
+      "verified": "2026-10-16",
+      "volatile": true
+    }
+  },
+  "datasets": {
+    "history": {
+      "years": [
+        2025,
+        2026
+      ],
+      "path": "data/shanxi/physics_{year}.csv",
+      "metric": "rank",
+      "source": "data/shanxi/README.md",
+      "verified": "2026-10-16",
+      "note": "院校代码每年重编；表中多数组没有选科要求，组号跨年对应不可靠"
+    },
+    "history_history": {
+      "years": [
+        2025,
+        2026
+      ],
+      "path": "data/shanxi/history_{year}.csv",
+      "metric": "rank",
+      "source": "data/shanxi/README.md",
+      "verified": "2026-10-16",
+      "note": "院校代码每年重编；表中多数组没有选科要求，组号跨年对应不可靠"
+    },
+    "yfyd": {
+      "years": [
+        2025,
+        2026
+      ],
+      "path": "data/shanxi/yfyd_{category}_{year}.csv",
+      "source": "data/shanxi/README.md",
+      "verified": "2026-10-16"
+    },
+    "plan_current": {
+      "year": 2027,
+      "status": "未公布",
+      "proxy": "用最近一年投档表的条目作参照，出分后以 2027 年招生计划核对"
+    },
+    "subject_req_table": {
+      "status": "未公布",
+      "note": "官方汇总表未取得，个案先把依赖它的候选标为待核"
+    }
+  },
+  "calibration": {
+    "physics": {
+      "drift": 0.0574,
+      "sigma_scale": 1.3,
+      "sigma_floor": 0.1,
+      "grade": "C",
+      "evidence": "data/calibration/README.md「十省可信度体检」；参数由 province_health.py 的同一套函数按截至 2026 年的全部样本算出",
+      "verified": "2026-10-16"
+    },
+    "history": {
+      "drift": 0.0249,
+      "sigma_scale": 0.9,
+      "sigma_floor": 0.1,
+      "grade": "C",
+      "evidence": "data/calibration/README.md「十省可信度体检」；参数由 province_health.py 的同一套函数按截至 2026 年的全部样本算出",
+      "verified": "2026-10-16"
+    }
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "schema": 1,
+  "province": "福建",
+  "mode": "院校专业组",
+  "category_system": "3+1+2（物理、历史分科）",
+  "rules_year": 2026,
+  "target_year_rules": "2027 年录取实施办法通常 6 月中旬发布，出稿前须重核",
+  "items": {
+    "slots": {
+      "value": "本科批常规志愿设 50 个院校专业组志愿，另有 2 次征求志愿各 20 个；每组 6 个专业志愿和是否服从专业调剂",
+      "source": "https://www.eeafj.cn/gkptgkgsgg/20260612/14670.html",
+      "verified": "2026-10-16",
+      "volatile": true
+    },
+    "parallel": {
+      "value": "本科批常规志愿和征求志愿均实行院校专业组平行志愿投档；投档前先模拟投档，院校据此调整计划",
+      "source": "https://www.eeafj.cn/gkptgkgsgg/20260612/14670.html",
+      "verified": "2026-10-16",
+      "volatile": true
+    },
+    "ratio": {
+      "value": "实行平行志愿投档的院校（专业）原则上按招生计划数的 100% 投档",
+      "source": "https://www.eeafj.cn/gkptgkgsgg/20260612/14670.html",
+      "verified": "2026-10-16",
+      "volatile": true
+    },
+    "tie_break": {
+      "value": "高考总成绩相同的，先按同等优先，再依次比较语文与数学两科之和、语文或数学单科最高、外语、首选科目、再选科目单科最高、单科次高；仍相同比较志愿顺序，志愿顺序相同全部投档，是否录取由院校决定",
+      "source": "https://www.eeafj.cn/gkptgkgsgg/20260612/14670.html",
+      "verified": "2026-10-16",
+      "volatile": true
+    },
+    "withdraw": {
+      "value": "是否录取及所录专业由院校按章程确定，院校负责解释退档原因；考生一经投档、录取，一律不予退档、改录",
+      "source": "https://www.eeafj.cn/gkptgkgsgg/20260612/14670.html",
+      "verified": "2026-10-16",
+      "volatile": true
+    },
+    "subject_req": {
+      "value": "须符合所报院校专业组的选考科目要求",
+      "source": "https://www.eeafj.cn/gkptgkgsgg/20260612/14670.html",
+      "verified": "2026-10-16",
+      "volatile": false
+    },
+    "fill_window": {
+      "value": "具体时间见该文件附件《网上填报志愿时间安排表》（未取得文字版）",
+      "source": "https://www.eeafj.cn/gkptgkgsgg/20260612/14670.html",
+      "verified": "2026-10-16",
+      "volatile": true
+    },
+    "special_plans": {
+      "value": "2026 年起高校专项计划、地方专项计划在普通类本科批填报志愿并投档录取",
+      "source": "https://www.eeafj.cn/gkptgkgsgg/20260612/14670.html",
+      "verified": "2026-10-16",
+      "volatile": true
+    }
+  },
+  "datasets": {
+    "history": {
+      "years": [
+        2024,
+        2025
+      ],
+      "path": "data/fujian/physics_{year}.csv",
+      "metric": "rank",
+      "source": "data/fujian/README.md",
+      "verified": "2026-10-16",
+      "note": "院校代码每年重编，跨年按校名匹配"
+    },
+    "history_history": {
+      "years": [
+        2024,
+        2025,
+        2026
+      ],
+      "path": "data/fujian/history_{year}.csv",
+      "metric": "rank",
+      "source": "data/fujian/README.md",
+      "verified": "2026-10-16",
+      "note": "院校代码每年重编，跨年按校名匹配"
+    },
+    "yfyd": {
+      "years": [
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "path": "data/fujian/yfyd_{category}_{year}.csv",
+      "source": "data/fujian/README.md",
+      "verified": "2026-10-16"
+    },
+    "plan_current": {
+      "year": 2027,
+      "status": "未公布",
+      "proxy": "用最近一年投档表的条目作参照，出分后以 2027 年招生计划核对"
+    },
+    "subject_req_table": {
+      "path": "data/subject_req_2027.csv",
+      "source": "data/README.md「2027 届选考科目要求」",
+      "verified": "2026-10-16"
+    }
+  },
+  "calibration": {
+    "physics": {
+      "drift": 0.075,
+      "sigma_scale": 0.7,
+      "sigma_floor": 0.1,
+      "grade": "C",
+      "evidence": "data/calibration/README.md「十省可信度体检」；参数由 province_health.py 的同一套函数按截至 2026 年的全部样本算出",
+      "verified": "2026-10-16"
+    },
+    "history": {
+      "drift": 0.0191,
+      "sigma_scale": 0.7,
+      "sigma_floor": 0.1,
+      "grade": "B",
+      "evidence": "data/calibration/README.md「十省可信度体检」；参数由 province_health.py 的同一套函数按截至 2026 年的全部样本算出",
+      "verified": "2026-10-16"
+    }
+  }
+}

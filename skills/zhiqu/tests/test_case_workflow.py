@@ -31,7 +31,13 @@ class SampleCase(unittest.TestCase):
         self.assertEqual(gate.errors, [])
 
     def test_stage_8_requires_independent_review(self):
-        gate = case_check.run(SAMPLE, 8)
+        with tempfile.TemporaryDirectory() as d:
+            case = os.path.join(d, "2027-GK-S01")
+            shutil.copytree(SAMPLE, case)
+            review = os.path.join(case, "review.json")
+            if os.path.exists(review):
+                os.remove(review)
+            gate = case_check.run(case, 8)
         self.assertTrue(any("review.json" in e for e in gate.errors))
 
     def test_result_reproduces(self):
