@@ -40,7 +40,7 @@ python3 scripts/case_check.py <案例目录> --stage N    # 检查 0..N 阶段�
 | 4 筛选与候选池 | `screening.json`、`pool.csv`、可选 `excluded*.csv` | **账对得上**：起点 = 源表实际行数，每步 `after` = 下步 `before`，终点 = 候选池行数；人工剔除逐条有原因；池 ≥ 志愿位 2 倍，否则写原因；每行有资格证据和来源等级；formal 模式要求逐项 verified |
 | 5 打分 | `attributes.csv`、`preferences_config.json`、`preferences_review.json`、`reviewed.csv` | 场景经本人确认；每条打分有 `basis`；已打分的 = 候选池 |
 | 6 计算 | `result.json`、`run.json`、`sensitivity/*.json` | 参数与登记一致；记录实际命令；至少两组敏感性结果（`rho`、`u_fall`、`drift`、`sigma_scale` 或重新打分的候选表不同；重新打分的候选表放在 `sensitivity/` 下） |
-| 7 报告 | `report.json`、`report.html` 或 `.pdf`、`entry_sheet.csv` | 编号与生成日期；各节必备内容（见 [report-guide.md](report-guide.md#付费报告的必备内容与篇幅由-check_reportpy-的-check_sections-检查)）；数字与 `result.json`、HTML 一致；填报单无空代码 |
+| 7 报告 | `report.json`、`report.html` 或 `.pdf`、`entry_sheet.csv` | 编号与生成日期；各节必备内容（见 [report-guide.md](report-guide.md#付费报告的必备内容与篇幅由-check_reportpy-的-check_sections-检查)）；数字与 `result.json`、HTML 一致；概率评级不比本省体检评级更乐观、保底余量够、正文概率写法合规（见 [report-guide.md](report-guide.md#按本省评级写概率)）；填报单无空代码 |
 | 8 复核 | `review.json` | 新会话（主模型级别）复核；`AGENTS.md` 第七节的坑逐条 pass/fail 并写说明；随机抽查 ≥ 5 条来源，报告数字与原文一致 |
 
 阶段 4 的筛选链用 `pool.py` 的参数（位次段、方向匹配、排除词）逐步缩小，每一步记一行。门槛脚本自己数源表行数，所以起点不能随手写。

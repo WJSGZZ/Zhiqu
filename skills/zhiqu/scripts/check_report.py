@@ -45,7 +45,14 @@ def check_report(rep, result, html=None):
     if html is not None:
         parser = Tables()
         parser.feed(html)
-        tables = [t for t in parser.tables if t and t[0] == ['序', '志愿', '类型', '偏好', '单独过线', '最终录取', '预测位次', '说明']]
+        from html import unescape
+        from report import interval80, prob_formatter
+        grade = rep.get('meta', {}).get('prob_grade', 'A')
+        fmt = prob_formatter(grade)
+        numeric = grade in ('A', 'B')
+        rank_head = '预测位次' if grade == 'A' else '预测位次（80% 区间）'
+        head = ['序', '志愿', '类型', '偏好'] + (['单独过线', '最终录取'] if numeric else []) + [rank_head, '说明']
+        tables = [t for t in parser.tables if t and t[0] == head]
         if len(tables) != 1:
             errors.append('HTML 须有且仅有一张完整志愿表')
         else:
@@ -53,9 +60,11 @@ def check_report(rep, result, html=None):
             if len(rows) != len(result['list']):
                 errors.append('HTML 志愿行数与 result 不一致')
             for i, (cells, item) in enumerate(zip(rows, result['list'])):
-                expected = [str(item['order']), item['tag'], f'{item["utility"]:g}',
-                            f'{100*item["p_clear"]:.{1 if 0 < item["p_clear"] < 0.01 else 0}f}%', f'{100*item["p_land"]:.1f}%', f'{item["expected_cut_rank"]:,}']
-                actual = [cells[j] for j in (0, 2, 3, 4, 5, 6)] if len(cells) == 8 else []
+                rank_cell = f'{item["expected_cut_rank"]:,}' + ('' if grade == 'A' else interval80(item))
+                probs = [unescape(fmt(item['p_clear'])), unescape(fmt(item['p_land'], 1))] if numeric else []
+                expected = [str(item['order']), item['tag'], f'{item["utility"]:g}'] + probs + [rank_cell]
+                idx = (0, 2, 3) + ((4, 5, 6) if numeric else (4,))
+                actual = [cells[j] for j in idx] if len(cells) == len(head) else []
                 if actual != expected or not cells[1].startswith(item['name']):
                     errors.append(f'HTML 志愿表第 {i+1} 行与 result 不一致')
         metrics = Metrics()
@@ -69,8 +78,20 @@ def check_report(rep, result, html=None):
                 name, probability = name.split('·')[0] + '·' + major['name'], major['p']
             good = sum(sum(m['p'] for m in x['majors'] if m['utility'] >= 70) if x.get('majors') else (x['p_land'] - x.get('p_adjusted', 0) if x['utility'] >= 70 else 0) for x in items)
             sims = params.get('sims', 4000)
-            fall = lambda p: f'< {100/sims:.2g}%' if p == 0 else percentage(p, 1)
-            expected = [str(len(items)), f'本批次可填 {rep.get("meta", {}).get("slots", "–")} 个', name, '概率约 ' + percentage(probability), percentage(good), '100 分 = 候选中你最想去的', fall(result['p_fall']), '录取线整体大波动时 ' + fall(result['stress']['p_fall'])]
+            fall = lambda p: (f'< {100/sims:.2g}%' if grade == 'A' else '模拟中未出现') if p == 0 else (unescape(fmt(p, 1)) if numeric else '有风险，见第 05 节')
+            head4 = [str(len(items)), f'本批次可填 {rep.get("meta", {}).get("slots", "–")} 个', name]
+            if grade == 'A':
+                mid = ['概率约 ' + percentage(probability), percentage(good), '100 分 = 候选中你最想去的']
+            elif numeric:
+                mid = ['概率' + unescape(fmt(probability)), unescape(fmt(good)), '100 分 = 候选中你最想去的']
+            else:
+                mid = ['落点最集中的志愿（本省评级不给精确概率）', ' / '.join(str(sum(x['tag'] == t for x in items)) for t in ('冲', '稳', '保')), '按模型过线可能性分档，不给百分比']
+            sp = result['stress']['p_fall']
+            if grade == 'A' or result['p_fall']:
+                tail = [fall(result['p_fall']), '录取线整体大波动时 ' + fall(sp)]
+            else:
+                tail = ['未出现', f'{sims:,} 次模拟中没有出现滑档；录取线整体大波动时' + ('也没有' if not sp else '：' + fall(sp))]
+            expected = head4 + mid + tail
             if metrics.values != expected:
                 errors.append('HTML 摘要指标与 result 不一致')
     return errors
@@ -81,6 +102,65 @@ PATH_WORDS = ('考研', '考公', '就业')
 ROADMAP_ROWS = ('门槛与差距', '顺序与投入', '里程碑与截止', '切换条件与备选', '下次检查点')
 METHOD_TOPICS = ('数据', '模型', '参数', '不确定性', '局限', '证据等级')
 EVIDENCE_GRADES = ('已证实', '有证据待确认', '目前无证据', '不可能或极不可能')
+
+
+
+GRADES = "ABCD"
+PROVINCE_KEYS = {"山东": "shandong", "河南": "henan", "河北": "hebei", "山西": "shanxi", "广东": "guangdong", "福建": "fujian",
+                 "浙江": "zhejiang", "江苏": "jiangsu", "湖南": "hunan", "湖北": "hubei"}
+HEALTH = Path(__file__).resolve().parent.parent / "data" / "calibration" / "province_health.csv"
+# 正文里作者写的“概率”：过线、落点、落在、概率、把握、可能性后面 15 字内出现的百分数
+PROB_TEXT = re.compile(r"(过线|落点|落在|概率|把握|可能性)[^，。；：！？\n]{0,15}?(\d+(?:\.\d+)?)%")
+
+
+def province_grade(meta):
+    """本省本科类在十省体检中的评级（主匹配方式那一行）；查不到返回 None。"""
+    import csv
+    key = PROVINCE_KEYS.get(str(meta.get("province", ""))[:2])
+    if not key or not HEALTH.is_file():
+        return None
+    cat = str(meta.get("category", ""))
+    stem = "history" if "历史" in cat else ("general" if key in ("zhejiang", "shandong") else "physics")
+    with open(HEALTH, encoding="utf-8") as f:
+        for r in csv.DictReader(f):
+            if r["record"] == "pooled" and r["province"] == key and r["category"] == stem:
+                return r["grade"]
+    return None
+
+
+def check_grade(rep, result=None):
+    """按本省评级写概率（references/report-guide.md）：评级不比体检更乐观，保底余量够，正文概率写法合规。"""
+    errs, meta = [], rep.get("meta", {})
+    g = meta.get("prob_grade")
+    if g not in tuple(GRADES):
+        return ["meta.prob_grade 须为 A、B、C、D 之一（见 report-guide“按本省评级写概率”）"]
+    if not meta.get("grade_note"):
+        errs.append("meta.grade_note 须写明本省评级、是否改版年和采用这一档的理由")
+    base = province_grade(meta)
+    if base:
+        floor = GRADES[min(len(GRADES) - 1, GRADES.index(base) + (1 if meta.get("reform_year") else 0))]
+        if GRADES.index(g) < GRADES.index(floor):
+            errs.append(f"prob_grade {g} 比本省评级允许的 {floor} 更乐观（体检评级 {base}{'，改版年降一档' if meta.get('reform_year') else ''}）")
+    if result and result.get("list"):
+        lst, rank = result["list"], float(result.get("params", {}).get("rank") or 0)
+        wide = lambda x, k: rank and x.get("expected_cut_rank", 0) >= k * rank
+        if g == "A" and not any(x["p_clear"] >= 0.95 for x in lst):
+            errs.append("A 级保底不足：须至少一个志愿单独过线 ≥ 95%")
+        if g == "B" and not any(x["p_clear"] >= 0.99 and wide(x, 1.2) for x in lst):
+            errs.append("B 级保底不足：须至少一个志愿单独过线 ≥ 99% 且预测线比本人位次宽 20% 以上")
+        if g in "CD" and sum(bool(wide(x, 1.3)) for x in lst) < 2:
+            errs.append(f"{g} 级保底不足：须至少两个志愿的预测线比本人位次宽 30% 以上")
+    if g in "BCD":
+        s = rep.get("summary", {})
+        texts = [s.get("headline", "")] + list(s.get("points", [])) + list(s.get("actions", [])) + list(rep.get("why", []))
+        texts += list(rep.get("list_notes", {}).values()) + [str(r[1]) for r in rep.get("roadmap", [])]
+        texts += [str(i.get(k, "")) for grp in rep.get("ask_me", []) for i in grp.get("items", []) for k in ("q", "why")]
+        for t in texts:
+            for mt in PROB_TEXT.finditer(str(t)):
+                v = float(mt.group(2))
+                if g in "CD" or "." in mt.group(2) or v % 5:
+                    errs.append(f"{g} 级正文不应写“{mt.group(0)}”：" + ("不写百分比，改用冲稳保与区间" if g in "CD" else "取整到 5%"))
+    return errs
 
 
 def check_sections(rep, result=None):
@@ -166,6 +246,7 @@ def check_sections(rep, result=None):
     bad = set(rep.get('omitted', {})) - {'hindsight'}
     if bad:
         errs.append('付费报告除“事后回看”外不得用 omitted 省略章节：' + '、'.join(sorted(bad)))
+    errs += check_grade(rep, result)
     return errs
 
 

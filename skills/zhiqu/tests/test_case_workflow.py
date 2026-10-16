@@ -231,6 +231,41 @@ class SubjectCheck(unittest.TestCase):
 
 
 
+class GradeWording(unittest.TestCase):
+    def rep(self, name):
+        with open(os.path.join(ROOT, "examples", name, "report.json"), encoding="utf-8") as f:
+            return json.load(f)
+
+    def result(self, name):
+        with open(os.path.join(ROOT, "examples", name, "result.json"), encoding="utf-8") as f:
+            return json.load(f)
+
+    def test_b_formatter_rounds_to_five(self):
+        import report
+        f = report.prob_formatter("B")
+        self.assertEqual((f(0.148), f(0.749), f(0.01), f(0.9999), f(0)), ("约 15%", "约 75%", "&lt; 5%", "&gt; 95%", "0%"))
+        self.assertIsNone(report.prob_formatter("C")(0.5))
+
+    def test_samples_pass_grade_checks(self):
+        for name in ("2026-GK-R01", "2027-GK-S01"):
+            self.assertEqual(check_report.check_grade(self.rep(name), self.result(name)), [])
+
+    def test_grade_cannot_be_more_optimistic_than_health_check(self):
+        rep = self.rep("2027-GK-S01")
+        rep["meta"]["prob_grade"] = "B"  # 浙江 B、2027 改版年 → 最乐观只能 C
+        self.assertTrue(any("更乐观" in e for e in check_report.check_grade(rep)))
+
+    def test_c_grade_text_may_not_quote_percentages(self):
+        rep = self.rep("2027-GK-S01")
+        rep["summary"]["points"][0] += "中国计量过线约 99%。"
+        self.assertTrue(any("不写百分比" in e for e in check_report.check_grade(rep)))
+
+    def test_b_grade_needs_wide_safety_pick(self):
+        rep, res = self.rep("2026-GK-R01"), self.result("2026-GK-R01")
+        for x in res["list"]:
+            x["expected_cut_rank"] = int(res["params"]["rank"] * 1.1)
+        self.assertTrue(any("保底不足" in e for e in check_report.check_grade(rep, res)))
+
 class ProvinceHealth(unittest.TestCase):
     def test_grade_thresholds(self):
         import province_health as ph

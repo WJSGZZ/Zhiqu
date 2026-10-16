@@ -289,7 +289,7 @@ class Gate:
             self.err(7, 'report.meta.case_id 须等于案例号')
         if not rep.get('meta', {}).get('generated_on'):
             self.err(7, 'report.meta.generated_on（报告生成日期）缺失')
-        for msg in check_sections(rep):
+        for msg in check_sections(rep, res):
             self.err(7, msg)
         html = self.dir / 'report.html'
         for msg in check_report(rep, res, html.read_text(encoding='utf-8') if html.is_file() else None):

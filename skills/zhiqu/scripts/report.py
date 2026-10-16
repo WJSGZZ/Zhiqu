@@ -14,6 +14,7 @@ import html
 import json
 import os
 import shutil
+import math
 import subprocess
 import sys
 import tempfile
@@ -125,6 +126,41 @@ def pct(x, d=0):
     return f"{x * 100:.{d}f}%"
 
 
+GRADE_MEANING = {
+    "A": "本省历年回测显示概率基本可信，报告写百分比（仍是按历年波动推算，不是录取率）。",
+    "B": "本省概率大体可用但不够精确，百分比取整到 5%，并给出 80% 区间；保底要求留足余量。",
+    "C": "概率不够可信（本省检验年份太少、区间失准，或今年是改版年）：报告不写百分比，只写冲、稳、保三档和预测区间。",
+    "D": "本省无法检验概率，报告不出过线概率，只做定性分析。",
+}
+
+
+def prob_formatter(grade):
+    """按本省可信度评级显示概率：A 原样；B 取整到 5%；C、D 不显示数值（返回 None 由调用处改写）。"""
+    def f(x, d=0):
+        if x is None:
+            return "–"
+        if grade == "A":
+            return pct(x, d)
+        if grade == "B":
+            if x <= 0:
+                return "0%"
+            v = round(x * 20) / 20
+            if v <= 0:
+                return "&lt; 5%"
+            if v >= 1 and x < 1:
+                return "&gt; 95%"
+            return f"约 {v * 100:.0f}%"
+        return None
+    return f
+
+
+def interval80(x):
+    """80% 预测区间（位次），与优化器使用的 σ 一致。"""
+    lo = x["expected_cut_rank"] * math.exp(-1.2816 * x["sigma"])
+    hi = x["expected_cut_rank"] * math.exp(1.2816 * x["sigma"])
+    return f"{round(lo):,}–{round(hi):,}"
+
+
 def bars_h(items, width=640, bar_h=13, gap=6, label_w=170, color="#34685D", fmt=lambda v: f"{v:.0%}", vmax=None):
     """水平条形图：items = [(label, value)]"""
     vmax = vmax or max((v for _, v in items), default=1) or 1
@@ -143,7 +179,7 @@ def bars_h(items, width=640, bar_h=13, gap=6, label_w=170, color="#34685D", fmt=
     return "".join(out)
 
 
-def strategy_chart(rows, width=640):
+def strategy_chart(rows, width=640, fmt=None):
     """策略对比：期望效用条 + 滑档概率标注。rows = [(name, eu, pfall, highlight)]"""
     vmax = max(r[1] for r in rows) or 1
     label_w, bar_h, gap = 150, 18, 10
@@ -157,12 +193,12 @@ def strategy_chart(rows, width=640):
         out.append(f'<text x="{label_w - 6}" y="{y + bar_h - 5}" text-anchor="end" fill="#1B1B1B" font-weight="{600 if hl else 400}">{E(n)}</text>')
         out.append(f'<rect x="{label_w}" y="{y}" width="{bw:.1f}" height="{bar_h}" fill="{col}"/>')
         out.append(f'<text x="{label_w + bw + 5:.1f}" y="{y + bar_h - 5}" fill="#1B1B1B">期望 {eu:.1f}</text>')
-        out.append(f'<text x="{width - 4}" y="{y + bar_h - 5}" text-anchor="end" fill="{"#9B3B2E" if pf > 0.01 else "#4A4740"}">滑档 {pf:.1%}</text>')
+        out.append(f'<text x="{width - 4}" y="{y + bar_h - 5}" text-anchor="end" fill="{"#9B3B2E" if pf > 0.01 else "#4A4740"}">滑档 {fmt(pf) if fmt else f"{pf:.1%}"}</text>')
     out.append("</svg>")
     return "".join(out)
 
 
-def outcome_strip(items, pfall, width=640):
+def outcome_strip(items, pfall, width=640, fmt=None):
     """结局分布：一条 100% 堆积条，按志愿顺序着色，展示"最可能落在哪里"。"""
     h = 34
     out = [f'<svg class="chart" viewBox="0 0 {width} {h}" xmlns="http://www.w3.org/2000/svg" font-family="PT Serif, Songti SC, Noto Serif SC, serif" font-size="8">']
@@ -180,12 +216,13 @@ def outcome_strip(items, pfall, width=640):
             col = "#CFC6AE"
         out.append(f'<rect x="{x:.1f}" y="0" width="{w:.1f}" height="18" fill="{col}" stroke="#FBF6E6" stroke-width="0.6"/>')
         if w > 34:
-            out.append(f'<text x="{x + 3:.1f}" y="12" fill="#fff">{E(str(i + 1))} · {p:.0%}</text>')
+            lab = f"{p:.0%}" if fmt is None else fmt(p)
+            out.append(f'<text x="{x + 3:.1f}" y="12" fill="#fff">{E(str(i + 1))}{" · " + lab if lab else ""}</text>')
         x += w
     if pfall > 0:
         w = max(1.5, width * pfall)
         out.append(f'<rect x="{x:.1f}" y="0" width="{w:.1f}" height="18" fill="#9B3B2E"/>')
-    out.append(f'<text x="0" y="30" fill="#7D7665">左起为第 1 志愿；色块宽度 = 最终被该志愿录取的概率{"；红色 = 滑档" if pfall > 0 else ""}</text>')
+    out.append(f'<text x="0" y="30" fill="#7D7665">左起为第 1 志愿；色块宽度 = 最终被该志愿录取的可能性{"；红色 = 滑档" if pfall > 0 else ""}</text>')
     out.append("</svg>")
     return "".join(out)
 
@@ -195,12 +232,15 @@ def limit_line(x):
     return f"<div class='small' style='color:#9B3B2E'>限制：{E(x['limits'])}</div>" if x.get("limits") else ""
 
 
-def group_line(x):
+def group_line(x, fmt=None):
     """专业组志愿：列出落到组内各专业和被调剂的概率。"""
     ms = x.get("majors")
     if not ms or x.get("p_land", 0) <= 0:
         return ""
-    parts = [f"{E(m['name'])} {pct(m['p'], 1)}" for m in ms] + [f"调剂 {pct(x.get('p_adjusted', 0), 1)}"]
+    fmt = fmt or pct
+    if fmt(0.5) is None:
+        return "<div class='small'>组内：" + "、".join(E(m["name"]) for m in ms) + "（本省评级不给分专业概率）</div>"
+    parts = [f"{E(m['name'])} {fmt(m['p'], 1)}" for m in ms] + [f"调剂 {fmt(x.get('p_adjusted', 0), 1)}"]
     return "<div class='small'>组内：" + "｜".join(parts) + "</div>"
 
 
@@ -219,13 +259,21 @@ def build(rep, opt):
     p_good = sum(good(x) for x in lst) if lst else None
     likely = max(lst, key=lambda x: x["p_land"]) if lst else None
     sims = ((opt or {}).get("params") or {}).get("sims") or 4000
-    fall_txt = lambda p: (f"&lt; {100 / sims:.2g}%" if p == 0 else pct(p, 1))  # 模拟中一次都没出现，只能说低于 1/模拟次数
+    grade = m.get("prob_grade", "A")
+    fmt = prob_formatter(grade)
+    numeric = grade in ("A", "B")
+
+    def fall_txt(p):
+        if p == 0:  # 模拟中一次都没出现，只能说低于 1/模拟次数
+            return f"&lt; {100 / sims:.2g}%" if grade == "A" else "模拟中未出现"
+        return fmt(p, 1) if numeric else "有风险，见第 05 节"
     likely_name = likely["name"] if likely else "–"
     likely_p = likely["p_land"] if likely else None
     if likely and likely.get("majors"):  # 专业组：显示"学校·最可能的专业"
         top = max(likely["majors"], key=lambda m: m["p"])
         likely_name = likely["name"].split("·")[0] + "·" + top["name"]
         likely_p = top["p"]
+    strip_fmt = (lambda p: f"{p:.0%}") if grade == "A" else ((lambda p: fmt(p).replace("约 ", "≈").replace("&lt; ", "<").replace("&gt; ", ">")) if numeric else (lambda p: ""))
     secs = []
     missing = []
     n = 0
@@ -255,13 +303,15 @@ def build(rep, opt):
     if lst:
         body += ('<div class="kpis">'
                  f'<div><b>推荐志愿数</b><span class="num">{len(lst)}</span><em>本批次可填 {E(str(m.get("slots", "–")))} 个</em></div>'
-                 f'<div><b>最可能的去向</b><span style="font-size:11pt">{E(likely_name)}</span><em>概率约 {pct(likely_p)}</em></div>'
-                 f'<div><b>满意度 70 分以上的概率</b><span class="num">{pct(p_good)}</span><em>100 分 = 候选中你最想去的</em></div>'
-                 f'<div><b>滑档风险</b><span class="num">{fall_txt(pfall)}</span><em>录取线整体大波动时 {fall_txt(stress.get("p_fall"))}</em></div>'
-                 '</div>')
+                 f'<div><b>最可能的去向</b><span style="font-size:11pt">{E(likely_name)}</span><em>{"概率" + ("" if grade == "B" else "约 ") + fmt(likely_p) if numeric else "落点最集中的志愿（本省评级不给精确概率）"}</em></div>'
+                 + (f'<div><b>满意度 70 分以上的概率</b><span class="num">{fmt(p_good)}</span><em>100 分 = 候选中你最想去的</em></div>' if numeric else
+                    f'<div><b>冲 / 稳 / 保</b><span class="num">{" / ".join(str(sum(x["tag"] == t for x in lst)) for t in ("冲", "稳", "保"))}</span><em>按模型过线可能性分档，不给百分比</em></div>')
+                 + (f'<div><b>滑档风险</b><span class="num">{fall_txt(pfall)}</span><em>录取线整体大波动时 {fall_txt(stress.get("p_fall"))}</em></div>' if grade == "A" or pfall else
+                    f'<div><b>滑档风险</b><span class="num">未出现</span><em>{sims:,} 次模拟中没有出现滑档；录取线整体大波动时{"也没有" if not stress.get("p_fall") else "：" + fall_txt(stress.get("p_fall"))}</em></div>')
+                 + '</div>')
     if lst:
-        body += ('<div class="fig"><div class="ttl">你最终会被哪里录取</div>' + outcome_strip([(x["name"], x["p_land"]) for x in lst], pfall or 0)
-                 + '<div class="cap">数字是志愿序号，对应"志愿表"一节；浅色是录取概率不到 5% 的志愿。</div></div>')
+        body += ('<div class="fig"><div class="ttl">你最终会被哪里录取</div>' + outcome_strip([(x["name"], x["p_land"]) for x in lst], pfall or 0, fmt=strip_fmt)
+                 + '<div class="cap">' + ('数字是志愿序号，对应"志愿表"一节；浅色是录取概率不到 5% 的志愿。' if numeric else '数字是志愿序号，对应"志愿表"一节；色块越宽越可能落在那里。本省评级不给精确百分比，见"方法与假设"。') + '</div></div>')
     if s.get("points"):
         body += '<div class="box key"><h4>核心结论</h4><ol class="tight">' + "".join(f"<li>{E(x)}</li>" for x in s["points"]) + "</ol></div>"
     if s.get("actions"):
@@ -321,17 +371,23 @@ def build(rep, opt):
     if lst:
         notes = rep.get("list_notes", {})
         body = ('<p class="lead">下表就是建议的填报顺序。顺序按"你有多想去"排，而不是按"把握有多大"排：平行志愿会从第一个开始逐个检查，排在前面的冲刺志愿不会影响后面志愿的录取机会。</p>'
-                '<div class="fig"><div class="ttl">你最终会被哪里录取</div>' + outcome_strip([(x["name"], x["p_land"]) for x in lst], pfall or 0) + "</div>")
+                '<div class="fig"><div class="ttl">你最终会被哪里录取</div>' + outcome_strip([(x["name"], x["p_land"]) for x in lst], pfall or 0, fmt=strip_fmt) + "</div>")
+        prob_cols = "<th class='r'>单独过线</th><th class='r'>最终录取</th>" if numeric else ""
+        rank_col = "预测位次" if grade == "A" else "预测位次（80% 区间）"
         body += ("<table><thead><tr><th class='c'>序</th><th>志愿</th><th class='c'>类型</th><th class='r'>偏好</th>"
-                 "<th class='r'>单独过线</th><th class='r'>最终录取</th><th class='r'>预测位次</th><th>说明</th></tr></thead><tbody>")
+                 f"{prob_cols}<th class='r'>{rank_col}</th><th>说明</th></tr></thead><tbody>")
         for x in lst:
             hl = " class='hl'" if likely and x is likely else ""
-            body += (f"<tr{hl}><td class='c num'>{x['order']}</td><td>{E(x['name'])}{group_line(x)}</td><td class='c'><span class='tag {E(x['tag'])}'>{E(x['tag'])}</span></td>"
-                     f"<td class='r'>{x['utility']:g}</td><td class='r'>{pct(x['p_clear'])}</td><td class='r'>{pct(x['p_land'], 1)}</td>"
-                     f"<td class='r'>{x['expected_cut_rank']:,}</td><td class='small'>{E(notes.get(x['name'], ''))}{limit_line(x)}</td></tr>")
+            probs = f"<td class='r'>{fmt(x['p_clear'])}</td><td class='r'>{fmt(x['p_land'], 1)}</td>" if numeric else ""
+            rank_cell = f"{x['expected_cut_rank']:,}" if grade == "A" else f"{x['expected_cut_rank']:,}<div class='small'>{interval80(x)}</div>"
+            body += (f"<tr{hl}><td class='c num'>{x['order']}</td><td>{E(x['name'])}{group_line(x, fmt)}</td><td class='c'><span class='tag {E(x['tag'])}'>{E(x['tag'])}</span></td>"
+                     f"<td class='r'>{x['utility']:g}</td>{probs}"
+                     f"<td class='r'>{rank_cell}</td><td class='small'>{E(notes.get(x['name'], ''))}{limit_line(x)}</td></tr>")
         body += "</tbody></table>"
         body += ('<p class="small">"偏好"是 0–100 的分数，由"你的画像"一节的权重和各项打分算出。"单独过线"只看这一个志愿；"最终录取"考虑了前面志愿可能已经录取你；"预测位次"是今年最低录取位次的中位预测。'
-                 '冲：单独过线 &lt; 40%；稳：40%–85%；保：≥ 85%。高亮行是最可能的去向。</p>')
+                 '冲：单独过线 &lt; 40%；稳：40%–85%；保：≥ 85%。高亮行是最可能的去向。'
+                 + ('' if grade == "A" else '本省概率评级为 ' + grade + '：' + GRADE_MEANING[grade] + '“80% 区间”指今年最低录取位次大约有八成可能落在这个范围内。')
+                 + '</p>')
         sec("志愿表", body)
 
         # 05 为什么这样排
@@ -342,13 +398,13 @@ def build(rep, opt):
         if bs:
             rows.append(("只挑最稳的", bs[0], bs[1], False))
         body = ('<p class="lead">"期望效用"可以理解为：把所有可能的结局按发生的概率加权平均后，你平均能得到多满意的结果。它同时考虑了"想不想去"和"能不能上"。</p>'
-                '<div class="fig"><div class="ttl">三种填法的对比</div>' + strategy_chart(rows)
+                '<div class="fig"><div class="ttl">三种填法的对比</div>' + strategy_chart(rows, fmt=(None if grade == "A" else (lambda p: fall_txt(p) if p == 0 or numeric else "有")))
                 + '<div class="cap">条越长越好；滑档概率越低越好。只挑最想去的，容易滑档；只挑最稳的，又浪费了分数。</div></div>')
         if rep.get("why"):
             body += "".join(f"<p>{E(x)}</p>" for x in rep["why"])
         if stress:
             body += (f'<div class="box"><h4>压力测试</h4><p>如果今年各校录取线的波动是往年的 {E(str(rep.get("stress_mult", 2)))} 倍，'
-                     f'这张志愿表的期望效用为 {stress.get("expected_utility", 0):.1f}，滑档概率为 {pct(stress.get("p_fall"), 1)}。</p></div>')
+                     f'这张志愿表的期望效用为 {stress.get("expected_utility", 0):.1f}，滑档{("概率为 " + fall_txt(stress.get("p_fall"))) if grade == "A" else ("：" + fall_txt(stress.get("p_fall")))}。</p></div>')
         if rep.get("sensitivity"):
             body += "<h3>换一种假设，结论会变吗</h3><table><thead><tr><th>假设</th><th class='r'>期望效用</th><th class='r'>滑档概率</th><th>前段是否变化</th></tr></thead><tbody>" + "".join(
                 f"<tr><td>{E(a)}</td><td class='r'>{E(str(b))}</td><td class='r'>{E(str(c))}</td><td>{E(d)}</td></tr>" for a, b, c, d in rep["sensitivity"]) + "</tbody></table>"
@@ -431,6 +487,9 @@ def build(rep, opt):
              "用蒙特卡洛模拟得到每种志愿组合的期望效用，再用边际改进贪心算法选择组合；基准下已无增益时，在压力情景（波动放大）下继续补位，只接受不降低基准期望的补位。</p>")
     if rep.get("backtest"):
         body += f"<h3>本省回测</h3><p>{E(rep['backtest'])}</p>"
+    if m.get("prob_grade"):
+        body += ("<h3>本报告的概率评级</h3><p><b>" + E(m["prob_grade"]) + " 级。</b>" + E(GRADE_MEANING.get(m["prob_grade"], "")) + "</p>"
+                 + (f"<p>{E(m['grade_note'])}</p>" if m.get("grade_note") else ""))
     body += "".join(block(b) for b in rep.get("methods", []))
     body += ('<div class="box glossary"><h4>术语解释</h4><dl>'
              "<dt>位次</dt><dd>全省同科类考生中的排名，比分数更能跨年比较。</dd>"
