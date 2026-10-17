@@ -341,3 +341,17 @@ class CaseLibrary(unittest.TestCase):
                 self.assertIn(f"第 {h['landing_order']} 志愿 · {clean(h['landing'])}", text, d)
             else:
                 self.assertIn("无法判定", text, d)
+
+
+class ScoreTable(unittest.TestCase):
+    def test_merged_first_row_uses_official_cumulative(self):
+        """各省表首行常是合并档（本段人数不含更高分的人），位次必须取 cum 列，不能逐行累加 count。"""
+        import tempfile
+        sys.path.insert(0, os.path.join(ROOT, "scripts"))
+        from rank import Table
+        with tempfile.NamedTemporaryFile("w", suffix=".csv", delete=False, encoding="utf-8") as f:
+            f.write("score,count,cum,source\n697,7,56,官方，首行为合并档\n696,14,70,官方\n695,10,80,官方\n")
+        try:
+            self.assertEqual(Table(f.name).rank_of(695), (71, 80))
+        finally:
+            os.unlink(f.name)

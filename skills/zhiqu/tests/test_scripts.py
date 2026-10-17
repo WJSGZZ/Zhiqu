@@ -56,7 +56,7 @@ class TestOptimizeRegression(unittest.TestCase):
         c = optimize_json("examples/case_c_guangdong_e2e/candidates.csv", "--rank", "30500", "--slots", "45", "--u-fall", "-60",
                           "--max-fall", "0.01", "--drift", "0.06", "--target-year", "2027", "--sigma-scale", "1.7")
         self.assertAlmostEqual(c["expected_utility"], 93.7, delta=0.1)
-        b = optimize_json("examples/2026-GK-R12/retro_ranks/135204/reviewed.csv", "--rank", "135204", "--slots", "96", "--u-fall", "-60",
+        b = optimize_json("examples/2026-GK-R12/retro_ranks/135253/reviewed.csv", "--rank", "135253", "--slots", "96", "--u-fall", "-60",
                           "--max-fall", "0.01", "--drift", "0.0299", "--target-year", "2026", "--sigma-scale", "1.0", "--decision-mode", "simulation")
         self.assertAlmostEqual(b["expected_utility"], 73.64, delta=0.01)
 
