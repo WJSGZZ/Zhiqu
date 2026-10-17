@@ -25,6 +25,7 @@ from pathlib import Path
 SKILL = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import retro_judge  # noqa: E402
+from pool import join_key  # noqa: E402
 from rank import Table  # noqa: E402
 
 FIELDS = ["id", "name", "school_score", "major_score", "city_score", "outlook_score", "direction", "basis"]
@@ -108,14 +109,17 @@ def scale_row(row, cfg, prestige):
 
 
 def auto_drift(cfg):
-    """只用登记的往年数据：相邻两年同一条目位次对数比的中位数，取最近至多三步的平均；只有一年为 0。"""
+    """只用登记的往年数据：相邻两年同一条目位次对数比的中位数，取最近至多三步的平均；只有一年为 0。
+    同一条目按 pool.join_key 对应（全角、半角括号与逗号视为同一写法），与候选池一致；
+    登记了 "pool_join": "legacy" 的案例沿用旧对应方式，以便逐字节复现。"""
+    legacy = cfg.get("pool_join") == "legacy"
     data = {}
     for y in cfg["data_years"]:
         d = {}
         for r in read(SKILL / series_path(cfg, y)):
             if (r.get("rank") or "").strip():
-                d.setdefault(((r["name"] if cfg.get("school_key") == "name" else r["code"]).strip(),
-                              (r.get("major") if cfg["key"] == "major" else r.get("group") or "").strip()), []).append(float(r["rank"]))
+                d.setdefault((join_key(r["name"] if cfg.get("school_key") == "name" else r["code"], legacy),
+                              join_key(r.get("major") if cfg["key"] == "major" else r.get("group") or "", legacy)), []).append(float(r["rank"]))
         data[y] = {k: v[0] for k, v in d.items() if len(v) == 1}
     steps = []
     years = cfg["data_years"]
@@ -181,6 +185,8 @@ def one_rank(case, cfg, R, by_id, school, major, prestige=None, judge=True):
     opts = ["--school", cfg.get("school_key", "code")]
     if cfg.get("public", True):
         opts.append("--public")
+    if cfg.get("pool_join") == "legacy":
+        opts.append("--legacy-join")
     for k in ("match_major", "exclude_major", "match", "exclude", "in_provinces", "in_province"):
         if k in cfg:
             opts += [f"--{k.replace('_', '-')}", cfg[k]]

@@ -294,6 +294,23 @@ class TestPoolHistory(unittest.TestCase):
         self.assertEqual(self.rows()[0]["rank_2026"], "30000")
         self.assertIn("重复", out)
 
+    def test_major_history_ignores_bracket_and_comma_width(self):
+        # 浙江 2024 年把东南大学“临床医学（5+3一体化）”写成全角括号，其他年份是半角
+        write_csv(self.old, self.header, [["0001", "东南大学", "", "临床医学（5+3一体化，儿科学）", 9000, 5],
+                                         ["0001", "东南大学", "", "临床医学(八年制)", 3000, 5]])
+        write_csv(self.new, self.header, [["0001", "东南大学", "", "临床医学(5+3一体化,儿科学)", 8000, 6],
+                                         ["0001", "东南大学", "", "临床医学", 12000, 6]])
+        args = ["scripts/pool.py", "--year", "2025=" + self.old, "--year", "2026=" + self.new, "--key", "major", "--out", self.out]
+        code, _, err = run(*args)
+        self.assertEqual(code, 0, err)
+        rows = {r["name"]: r for r in self.rows()}
+        self.assertEqual(rows["东南大学·临床医学(5+3一体化,儿科学)"]["rank_2025"], "9000")
+        self.assertEqual(rows["东南大学·临床医学"]["rank_2025"], "")  # 只统一写法宽度，括号内容不同的不合并
+        self.assertEqual(len(rows), 2)
+        code, _, err = run(*args, "--legacy-join")  # 已登记案例的复现开关保留旧行为
+        self.assertEqual(code, 0, err)
+        self.assertEqual({r["name"]: r for r in self.rows()}["东南大学·临床医学(5+3一体化,儿科学)"]["rank_2025"], "")
+
     def test_public_filter_excludes_unknown_school(self):
         write_csv(self.old, self.header, [])
         write_csv(self.new, self.header, [["99999", "待核学校", "201", "", 30000, 20],

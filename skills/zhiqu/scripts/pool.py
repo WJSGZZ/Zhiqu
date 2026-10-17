@@ -78,6 +78,15 @@ def campus_warning(name, info):
     return ""
 
 
+def join_key(text, legacy=False):
+    """跨年对应用：全角括号、逗号换半角，其余照旧。浙江同一专业不同年份全角、半角混用
+    （如东南大学“临床医学（5+3一体化）”2024 年用全角），不统一会让旧年位次静默丢失；
+    只换写法宽度，不去空格、标签或括号内容，免得把真正不同的条目并成一条。
+    legacy=True 只去首尾空白（2026-10-17 以前的做法），仅供复现已登记的回溯案例。"""
+    text = (text or "").strip()
+    return text if legacy else text.replace("（", "(").replace("）", ")").replace("，", ",")
+
+
 def load_group_map(path, school_field):
     """人工核实的跨年一对一对应；source 留证据，不由组号推断对应关系。"""
     if not path:
@@ -118,6 +127,8 @@ def main():
     ap.add_argument("--in-provinces", help="只保留位于这些省市的院校，逗号分隔，如 浙江省,上海市,江苏省；与 --in-province 不同时使用")
     ap.add_argument("--rank-min", type=int, help="最近一年位次下限")
     ap.add_argument("--rank-max", type=int, help="最近一年位次上限")
+    ap.add_argument("--legacy-join", action="store_true",
+                    help="跨年对应不统一全角、半角括号与逗号（2026-10-17 以前的做法）；只用于复现已登记的回溯案例，新任务不要用")
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
     by_code, by_name = schools()
@@ -153,7 +164,7 @@ def main():
                     else:
                         continue  # 同组号不证明同组；未核实的历史不进入预测
                 else:
-                    k = (school_key, sub.strip())
+                    k = (join_key(school_key, a.legacy_join), join_key(sub, a.legacy_join))
                 e = table.setdefault(k, {"code": code, "school": school, "sub": sub.strip(),
                                          "req": "", "ranks": {}, "plan": "", "sources": [], "ambiguous": set(), "major_code": ""})
                 if y in e["ambiguous"]:
