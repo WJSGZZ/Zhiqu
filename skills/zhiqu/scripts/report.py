@@ -516,7 +516,7 @@ def build(rep, opt):
             ms = "、".join(f"{i}. {m['name']}" for i, m in enumerate(x.get("majors") or [], 1))
             rows_html += (f"<tr><td class='c num'>{x['order']}</td><td class='num'>{E(code) or '＿＿＿'}</td><td>{E(x['name'].split('（')[0].split('·')[0] if x.get('group') else x['name'].split('（')[0])}</td>"
                           f"<td class='num'>{E(sub) or '＿＿'}</td><td class='small'>{E(ms) or '—'}{limit_line(x)}</td>"
-                          f"<td class='c'>{'是' if x.get('obey', True) else '<b>否</b>'}</td><td class='c'>□</td></tr>")
+                          f"<td class='c'>{('是' if x.get('obey', True) else '<b>否</b>') if x.get('group') else '—'}</td><td class='c'>□</td></tr>")
         body = ('<p class="lead">这一页用来照着录入志愿填报系统。录错一个代码，前面算得再准也没用，所以请逐格核对。</p>'
                 '<div class="box warn"><h4>录入前必读</h4><ol class="tight">'
                 '<li>院校代码、专业组或专业代码<b>每年可能变</b>：表中代码来自往年数据，必须按今年的招生计划或专业目录逐个核对、改正。</li>'
@@ -623,7 +623,7 @@ def write_sheet(opt, path):
         for x in (opt or {}).get("list", []):
             ms = "、".join(f"{i}. {mj['name']}" for i, mj in enumerate(x.get("majors") or [], 1))
             w.writerow([x["order"], x.get("code") or "", x["name"].split("（")[0].split("·")[0] if x.get("group") else x["name"].split("（")[0],
-                        x.get("group") or "", x.get("major_code") or "", ms, "是" if x.get("obey", True) else "否"])
+                        x.get("group") or "", x.get("major_code") or "", ms, ("是" if x.get("obey", True) else "否") if x.get("group") else "—"])
 
 
 def find_browser():

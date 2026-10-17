@@ -88,12 +88,14 @@
 | **小林** · 广东电气大四 · 读研 | 均分 80，六级没过，想考华南理工大学电气专硕；把可能的初试分数放进华工两年的录取分布里看位置 | [报告](skills/zhiqu-grad/examples/demo_2027/report.pdf) · [说明](skills/zhiqu-grad/examples/demo_2027/README.md) |
 | **小宁** · 四川高职会计 · 求职 | 家里支持有限，毕业三个月内要有收入；两个 offer 按个税、社保、公积金算到手收入和每月结余 | [报告](skills/zhiqu-career/examples/demo_2027/report.pdf) · [说明](skills/zhiqu-career/examples/demo_2027/README.md) |
 
-## 复现
+## 复现与更新
 
-在技能目录 `skills/zhiqu` 下：
+在技能目录 `skills/zhiqu` 下，三条命令依次重算志愿表与 2026 年对照、敏感性情景，并重新生成完整版报告：
 
 ```bash
 python3 scripts/retro_run.py examples/2026-GK-R12
+python3 scripts/retro_sensitivity.py examples/2026-GK-R12
+python3 scripts/case_report.py examples/2026-GK-R12
 ```
 
-会从官方数据重新生成候选池、打分、志愿表和 2026 年对照结果，与仓库里的文件逐字节一致。每个案例目录里的 `retro_config.json` 是事先登记的设定（含登记后的改动记录），`profile.txt` 是问卷画像，`report.pdf` 是报告。
+每个案例目录里：`retro_config.json` 是事先登记的设定（含登记后的改动记录），`profile.txt` 是问卷画像，`narrative.json` 是人写的分析，`research.json` 是院校调研（每条带官方来源），`report.pdf` 是报告。数据或方法更新后照上面重跑即可，只需复查 `narrative.json` 里带数字的句子；这 11 份同时用作回归测试。

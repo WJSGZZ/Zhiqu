@@ -63,14 +63,29 @@ def pct(p, g):
 
 
 def round_text(t, g):
-    """B 级把作者写的百分数取整到 5%（只改数字，不改句子）。"""
-    if g != "B":
+    """B 级把作者写的百分数取整到 5%，与志愿表一致；“约前 12%”这类人数占比不改；不到 5% 写“不到 5%”。"""
+    if g != "B" or not isinstance(t, str):
         return t
     def f(m):
-        v = float(m.group(1))
-        r = int(round(v / 5)) * 5
-        return f"{max(r, 5)}%"
-    return re.sub(r"(\d+(?:\.\d+)?)%", f, t)
+        if m.group(1):
+            return m.group(0)  # “前 12%”是人数占比
+        v = float(m.group(3))
+        if v < 5:
+            return "不到 5%"
+        if v > 95:
+            return "超过 95%"
+        return ("约 " if (m.group(2) or "").startswith("约") else (m.group(2) or "")) + f"{int(round(v / 5)) * 5}%"
+    return re.sub(r"(前 ?)?(超过 ?|约 ?)?(\d+(?:\.\d+)?)%(?:\s?左右)?", f, t)
+
+
+def round_all(x, g):
+    if isinstance(x, str):
+        return round_text(x, g)
+    if isinstance(x, list):
+        return [round_all(v, g) for v in x]
+    if isinstance(x, dict):
+        return {k: round_all(v, g) for k, v in x.items()}
+    return x
 
 
 def read_csv(p):
@@ -148,7 +163,13 @@ def build(case_dir, research_dir=None, opportunities=None, render=True):
     group = cfg["key"] == "group"
     top = max(L, key=lambda x: x["p_land"])
     weights = sorted(review["weights"].items(), key=lambda kv: -kv[1])
-    score_txt = f"{cfg['score']} 分" if "score" in cfg else "（以位次为准）"
+    if "score" in cfg:
+        score_txt = f"{cfg['score']} 分"
+    else:
+        from rank import Table
+        yf = {"zhejiang": "yfyd_2026", "shandong": "yfyd_2026"}.get(cfg["province"], f"yfyd_{cfg.get('series', 'physics')}_2026")
+        table = SKILL / "data" / cfg["province"] / f"{yf}.csv"
+        score_txt = f"约 {Table(str(table)).score_of(R):g} 分（由登记位次换算）"
 
     # ---------- meta
     meta = dict(title="高考志愿填报决策报告",
@@ -163,8 +184,8 @@ def build(case_dir, research_dir=None, opportunities=None, render=True):
     lead, keys = c["lead"], c["points"]
     points = [round_text(k, g) for k in keys][:4]
     points.append(f"整张表 {len(L)} 个志愿，按你的排序算出的平均满意度 {res['expected_utility']:.1f} 分（0—100 分），模拟中滑档{'约为 0' if res['p_fall'] < 0.0005 else '约 ' + format(res['p_fall'], '.1%')}。")
-    summary = dict(headline=round_text(lead, g), points=points[:5], actions=c["actions"][:3],
-                   after_the_fact=c["after_the_fact"][:2])
+    summary = dict(headline=round_text(lead, g), points=points[:5], actions=round_all(c["actions"][:3], g),
+                   after_the_fact=round_all(c["after_the_fact"][:2], g))
 
     # ---------- profile
     facts = [["省份与位次", f"{P['name']}；{score_txt}，全省位次 {R:,}（分数换位次用 2026 年官方一分一段表）" if "score" in cfg else f"{P['name']}；位次 {R:,}（事先登记的位次）"],
@@ -192,7 +213,7 @@ def build(case_dir, research_dir=None, opportunities=None, render=True):
         constraints.append("专业组省份：组内有哪些专业要看 2026 年招生计划，本表按组排，未逐组核对组内专业")
     constraints += c.get("constraints_extra", [])
     profile = dict(intro=c["intro"], facts=facts, priorities=[[WNAME[k], round(v, 2)] for k, v in weights],
-                   constraints=constraints, tensions=c["tensions"])
+                   constraints=constraints, tensions=round_all(c["tensions"], g))
     s = sum(x[1] for x in profile["priorities"])
     profile["priorities"][0][1] = round(profile["priorities"][0][1] + 1 - s, 2)
 
@@ -201,11 +222,13 @@ def build(case_dir, research_dir=None, opportunities=None, render=True):
     for x in c["dirs"]:
         key, name, fit, ev = x["key"], x["name"], x["fit"], x["evidence"]
         base = D[key]
-        dirs.append(dict(name=name, fit=fit, majors=base["majors"], evidence=ev, counter=base["counter"],
+        dirs.append(dict(name=name, fit=fit, majors=base["majors"], evidence=round_all(ev, g), counter=base["counter"],
                          outlook=base["outlook"], verify=base["verify"], paths=base["paths"]))
 
     # ---------- roadmap
-    safe = next((x for x in L if x["p_clear"] >= 0.85 and x["order"] > top["order"]), None)
+    # 备选必须比最可能的去向更好考（预测线更靠后），否则顶不上
+    safe = next((x for x in L if x["p_clear"] >= 0.85 and x["order"] > top["order"]
+                 and x["expected_cut_rank"] > top["expected_cut_rank"]), None)
     rushes = [x for x in L if x["tag"] == "冲"][:2]
     gap = f"位次 {R:,}。最可能的去向 {clean(top['name'])}，预测线 {top['expected_cut_rank']:,}，单独过线{pct(top['p_clear'], g)}。"
     if rushes:
@@ -215,7 +238,7 @@ def build(case_dir, research_dir=None, opportunities=None, render=True):
               + "若真实位次明显靠前，把冲刺志愿换成更高一档的学校重算。" + "".join(c.get("switch", [])))
     roadmap = [["门槛与差距", round_text(gap, g)],
                ["顺序与投入", "出分当天确认位次 → 计划公布后逐条核对选考要求、专业代码与计划数" + ("、组内专业" if group else "") + " → 按 06 节核对重点学校的章程（体检、单科、收费） → 填报前一天对着官方计划册检查顺序。"],
-               ["里程碑与截止", str(rules["fill_window"]["value"])],
+               ["里程碑与截止", str(rules["fill_window"]["value"]).replace("见该文件附件 1", "见当年志愿填报通知的附件 1")],
                ["切换条件与备选", round_text(switch, g)],
                ["下次检查点", "出分当天（真实位次）→ 计划公布（核对代码与选考要求）→ 填报截止前一天（最后检查）→ 投档线公布（对照本报告第 11 节）→ 入学第一学期末（转专业窗口）。"]]
 
@@ -225,7 +248,7 @@ def build(case_dir, research_dir=None, opportunities=None, render=True):
                       ("tie_break", "与录取线同分时按这个规则排序"), ("subject_req", "选考科目不符的志愿不能填，须逐条核对")]:
         it = rules.get(k)
         if it:
-            news.append([str(it["value"]), f"{it['verified']}（核实）", f"{P['auth']} {it['source']}", impact])
+            news.append([str(it["value"]).replace("见该文件附件 1", "见当年志愿填报通知的附件 1"), f"2026 年规则（{it['verified']} 核实）", f"{P['auth']} {it['source']}", impact])
 
     # ---------- list_notes
     notes = {}
@@ -241,7 +264,7 @@ def build(case_dir, research_dir=None, opportunities=None, render=True):
         if p.get("pred_low") and p.get("pred_high"):
             t += f"（80% 区间 {int(float(p['pred_low'])):,}—{int(float(p['pred_high'])):,}）"
         if p.get("plan"):
-            t += f"；计划 {p['plan']} 人"
+            t += f"；{years[-1]} 年计划 {p['plan']} 人"
         if group and p.get("requirement"):
             t += f"；选科要求 {p['requirement']}"
         t += "。" + c.get("notes", {}).get(x["name"], "")
@@ -259,8 +282,10 @@ def build(case_dir, research_dir=None, opportunities=None, render=True):
 
     # ---------- sensitivity
     base_s = sens[0]
-    sensitivity = [[f"基准：共同波动 {res['params']['rho']}、滑档代价 {res['params']['u_fall']:g}", base_s["expected_utility"], "约 0" if float(base_s["p_fall"]) < 0.0005 else f"{float(base_s['p_fall']):.1%}", "—"]]
+    sensitivity = [[f"基准：共同波动 {res['params']['rho']}、滑档代价 {res['params']['u_fall']:g}".replace("-", "−"), base_s["expected_utility"], "约 0" if float(base_s["p_fall"]) < 0.0005 else f"{float(base_s['p_fall']):.1%}", "—"]]
     for r in sens[1:]:
+        if r["id"] == "ufall_-100" and res["params"]["u_fall"] <= -100:
+            continue  # 基准已经是最怕滑档的设定，这一行与基准相同
         same = r["top"] == base_s["top"]
         note = ("否：最可能的去向不变" if same else f"是：最可能的去向变为 {clean(r['top'])}") + ("，前 5 位不变" if r["same_top5"] == "是" else "，前 5 位有变化")
         label = r["scenario"].replace("前景悲观", "前景悲观")
@@ -272,6 +297,9 @@ def build(case_dir, research_dir=None, opportunities=None, render=True):
     if opportunities:
         import_opportunities(d, opportunities)
     research = json.loads((d / "research.json").read_text(encoding="utf-8")) if (d / "research.json").exists() else []
+    from urllib.parse import unquote
+    for r in research:  # 网址里的中文按原样显示，家长看得懂；浏览器打开时会自动转码
+        r["sources"] = [unquote(u) for u in r["sources"]]
 
     # ---------- questions / todo
     questions = c["questions"] + ["这个专业每年大概有多少人转出、多少人转入？门槛是什么？", "这个专业近两届毕业生去了哪些单位、多少人读研？（看学校就业质量报告）",
@@ -321,7 +349,7 @@ def build(case_dir, research_dir=None, opportunities=None, render=True):
     rep = dict(meta=meta, summary=summary, profile=profile,
                directions_intro="以下方向由你的兴趣、能力、目标和约束交叉得出。每个方向列出支持证据、反面证据、有条件的前景判断、验证办法，以及考研、考公、就业三条去向的门槛与代价。",
                directions=dirs, roadmap=roadmap, news=news, list_notes=list_notes, why=why, stress_mult="2",
-               sensitivity=sensitivity, research=research, questions=questions, todo=todo, ask_me=c["ask_me"],
+               sensitivity=sensitivity, research=research, questions=questions, todo=todo, ask_me=round_all(c["ask_me"], g),
                assumptions=assumptions, backtest=backtest, methods=methods, hindsight=hindsight, sources=sources,
                numeric_claims=[dict(report_path=f"summary.points.{len(summary['points']) - 1}", number_index=1,
                                     result_path="expected_utility", tolerance=0.05)])
@@ -353,6 +381,20 @@ def walk(x):
     elif isinstance(x, list):
         for v in x:
             yield from walk(v)
+
+
+def plain_change(a):
+    """登记后的改动写成家长能看懂的话；技术细节留在 retro_config.json。"""
+    t = a.get("change", "")
+    if "rank.py" in t:
+        return "分数换位次时，第一行合并档的人数没算全，位次少算了几十名；改用官方累计人数后重跑。所有志愿的过线判定都没有变。"
+    if "retro_judge" in t:
+        return "对照 2026 年结果时，把同一专业不同年份全角、半角括号的写法，以及河北校名里“(北京市)”这类后缀统一了。志愿表本身没改，只影响哪些志愿能和 2026 年对上号。"
+    if "pool.py 修正：专业组" in t:
+        return "候选池原先漏排了需要特殊资格的组（专项计划、预科班、联合培养等，这些标记写在选科要求一栏）；排除后重跑。" + ("同时按画像去掉了护理类组。" if "护理" in t else "")
+    if "legacy" in t or "括号" in t:
+        return "往年数据里同一专业的括号写法统一后，能读到的历史位次更全；本案保留登记时的结果，改动前后的差别已核对。"
+    return t
 
 
 def grade_note(cfg, g):
@@ -417,7 +459,7 @@ def hindsight_block(cfg, P, hind, L, pool, R):
     for r in hind["rows"]:
         if r["order"] > max(stop, 12):
             break
-        table.append([r["order"], clean(r["name"]), r["tag"], f"{r['p_clear']:.0%}", f"{r['expected_cut_rank']:,}",
+        table.append([r["order"], clean(r["name"]), r["tag"], round_text(f"{r['p_clear']:.0%}", "B" if cfg["province"] in ("zhejiang", "jiangsu", "hubei") else "A"), f"{r['expected_cut_rank']:,}",
                       f"{r['actual_rank']:,}" if r["actual_rank"] else "—",
                       "—" if r["cleared"] is None else ("是" if r["cleared"] else "否"), r["note"]])
     obs = [r for r in hind["rows"] if r["cleared"] is not None]
@@ -431,7 +473,7 @@ def hindsight_block(cfg, P, hind, L, pool, R):
     am = cfg.get("amendments", [])
     if am:
         extra.append(dict(title="登记后的改动（全部公开）", columns=["日期", "改了什么", "改前的结果"],
-                          rows=[[a["date"], a["change"], a.get("before", "")] for a in am], notes=["每处改动都在读取 2026 年结果之后发现，修正后重跑；判定结论见上。"]))
+                          rows=[[a["date"], plain_change(a), round_text(a.get("before", ""), "B" if cfg["province"] in ("zhejiang", "jiangsu", "hubei") else "A")] for a in am], notes=["每处改动都在读取 2026 年结果之后发现，修正后重跑；判定结论见上。"]))
     return dict(intro=f"本节是回溯：上面各节只用 2025 年及以前的数据写成，下面用{P['auth']}公布的 2026 年投档线逐条对照。",
                 columns=cols, table=table, notes=[n for n in notes if n], extra=extra)
 

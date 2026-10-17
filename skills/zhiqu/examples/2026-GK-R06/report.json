@@ -17,7 +17,7 @@
   "utility_scale": "0 分 = 你确认的底线（省内公办院校的自动化），100 分 = 最好的学校、最想读的专业、最想去的城市凑在一起（现实中未必存在）"
  },
  "summary": {
-  "headline": "::: kpi\n- 分数与位次 | 650 分 | 物理类全省第 4538 名，约前 1.3%\n- 志愿数 | 29 | 本批次最多 96 个\n- 最可能的去向 | 中央财经大学(北京市)·计算机类 | 概率约 57%\n- 2026 年真实结果 | 无法判定 | 跳过对不上号的志愿后，落在第 7 志愿\n:::",
+  "headline": "按 4,538 名，北京的计算机类能读到中央财经大学、北京交通大学这一档。最可能的去向是中央财经大学计算机类，概率约 57%。北邮软件、华东师大计算机这些冲刺机会不大，但排在前面不吃亏。",
   "points": [
    "冲刺：华东师大、北邮、西工大的计算机和软件，单条机会 2%—12%。",
    "最可能：中央财经大学计算机类（约 57%），其次北京交通大学计算机类（约 8%）。",
@@ -265,25 +265,25 @@
  "news": [
   [
    "本科批实行“专业（类）+学校”平行志愿，设 1 次集中填报和 2 次征集，每次最多 96 个志愿；不设专业服从调剂",
-   "2026-10-16（核实）",
+   "2026 年规则（2026-10-16 核实）",
    "河北省教育考试院 http://www.hebeea.edu.cn/c/2026-06-17/493051.html",
    "本表按 96 个志愿位计算"
   ],
   [
    "“分数优先、遵循志愿、一次投档、不再补档”：普通类按高考文化总成绩（含政策性加分）从高到低排序，按志愿顺序检索投档，一旦投档后续志愿失效",
-   "2026-10-16（核实）",
+   "2026 年规则（2026-10-16 核实）",
    "河北省教育考试院 http://www.hebeea.edu.cn/c/2026-06-17/493051.html",
    "平行志愿：冲刺放前面不会拖累后面的保底"
   ],
   [
    "待核：填报须知未写同分规则，省级原文未取得；转载与高校章程的说法为高考总成绩（含政策性加分）相同时，依次比较语文数学两科之和、语文或数学单科最高、外语、首选科目、再选科目最高与次高",
-   "2026-10-16（核实）",
+   "2026 年规则（2026-10-16 核实）",
    "河北省教育考试院 http://www.hebeea.edu.cn/c/2026-06-17/493051.html",
    "与录取线同分时按这个规则排序"
   ],
   [
    "填报须符合拟报专业（类）的选考科目要求，不符合的不能填报",
-   "2026-10-16（核实）",
+   "2026 年规则（2026-10-16 核实）",
    "河北省教育考试院 http://www.hebeea.edu.cn/c/2026-06-17/493051.html",
    "选考科目不符的志愿不能填，须逐条核对"
   ]
@@ -313,7 +313,7 @@
  "stress_mult": "2",
  "sensitivity": [
   [
-   "基准：共同波动 0.3、滑档代价 -60",
+   "基准：共同波动 0.3、滑档代价 −60",
    "82.3",
    "约 0",
    "—"
@@ -405,11 +405,11 @@
    "school": "北京交通大学",
    "sources": [
     "https://cs.bjtu.edu.cn/zsjy/bkszs2/zyzn/202309410.htm",
-    "https://zsw.bjtu.edu.cn/userfiles/0dc404673f155e37fee2a9923b8978c5/files/cms/article/2026/06/%E9%99%84%E4%BB%B6%20%E5%8C%97%E4%BA%AC%E4%BA%A4%E9%80%9A%E5%A4%A7%E5%AD%A62026%E5%B1%8A%E6%9C%AC%E7%A7%91%E6%8B%9B%E7%94%9F%E4%B8%93%E4%B8%9A%EF%BC%88%E7%B1%BB%EF%BC%89%E7%9B%AE%E5%BD%95(1).pdf",
+    "https://zsw.bjtu.edu.cn/userfiles/0dc404673f155e37fee2a9923b8978c5/files/cms/article/2026/06/附件 北京交通大学2026届本科招生专业（类）目录(1).pdf",
     "https://cs.bjtu.edu.cn/tzgg/5f8d3010a3134d5688c4f9b204957dc2.htm",
     "https://zsw.bjtu.edu.cn/f/newsCenter/article/5cc220a8189e408a929281c20c3e4ee5",
     "https://www.bjtu.edu.cn/docs/2025-09/30ed4527ba2a43858c5396489cb26fe1.pdf",
-    "https://job.bjtu.edu.cn/userfiles/881f81a909d0450cbd1bb74a667be8b9/files/cms/article/2025/03/%E5%8C%97%E4%BA%AC%E4%BA%A4%E9%80%9A%E5%A4%A7%E5%AD%A62024%E5%B1%8A%E5%B0%B1%E4%B8%9A%E8%B4%A8%E9%87%8F%E5%B9%B4%E5%BA%A6%E6%8A%A5%E5%91%8A.pdf",
+    "https://job.bjtu.edu.cn/userfiles/881f81a909d0450cbd1bb74a667be8b9/files/cms/article/2025/03/北京交通大学2024届就业质量年度报告.pdf",
     "https://www.bjtu.edu.cn/xxgkw/xxgk_xxgkml/jxzl/jxzl_xsjy/xsjy_jyzlndbg/index.htm",
     "https://zhantianyou.bjtu.edu.cn/rcpy/zsxb2/index.htm",
     "https://zhantianyou.bjtu.edu.cn/rcpy/zsxb2/189937.htm"
@@ -497,7 +497,7 @@
     "https://zsb.xidian.edu.cn/info/1009/6683.htm",
     "https://jwc.xidian.edu.cn/info/1024/10929.htm",
     "https://xdyx.xidian.edu.cn/info/1004/2204.htm",
-    "https://job.xidian.edu.cn/attachment/xidian/ueditor/file/20260128/3325_%E8%A5%BF%E5%AE%89%E7%94%B5%E5%AD%90%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A62025%E5%B1%8A%E5%B0%B1%E4%B8%9A%E8%B4%A8%E9%87%8F%E5%B9%B4%E5%BA%A6%E6%8A%A5%E5%91%8A.pdf",
+    "https://job.xidian.edu.cn/attachment/xidian/ueditor/file/20260128/3325_西安电子科技大学2025届就业质量年度报告.pdf",
     "https://info.xidian.edu.cn/info/1012/44760.htm"
    ],
    "items": [
@@ -891,7 +891,7 @@
     "rows": [
      [
       "2026-10-17",
-      "retro_judge.py 修正：对照 2026 年结果时统一全角/半角括号与逗号，去掉河北校名里“(北京市)”这类所在地后缀。志愿表本身不变，只影响能对上号的条目。",
+      "对照 2026 年结果时，把同一专业不同年份全角、半角括号的写法，以及河北校名里“(北京市)”这类后缀统一了。志愿表本身没改，只影响哪些志愿能和 2026 年对上号。",
       "修正前：卡在第 1 志愿（2026 年河北校名去掉了所在地后缀，对不上号），29 条里 16 条能对上号，第 7 志愿中央财经大学同样对不上号。修正后卡在第 3 志愿（西北工业大学计算机类（软件）2026 年确实没有这一条），23 条能对上号。"
      ]
     ],
@@ -959,7 +959,7 @@
   ],
   [
    "北京交通大学院校调研",
-   "https://zsw.bjtu.edu.cn/userfiles/0dc404673f155e37fee2a9923b8978c5/files/cms/article/2026/06/%E9%99%84%E4%BB%B6%20%E5%8C%97%E4%BA%AC%E4%BA%A4%E9%80%9A%E5%A4%A7%E5%AD%A62026%E5%B1%8A%E6%9C%AC%E7%A7%91%E6%8B%9B%E7%94%9F%E4%B8%93%E4%B8%9A%EF%BC%88%E7%B1%BB%EF%BC%89%E7%9B%AE%E5%BD%95(1).pdf",
+   "https://zsw.bjtu.edu.cn/userfiles/0dc404673f155e37fee2a9923b8978c5/files/cms/article/2026/06/附件 北京交通大学2026届本科招生专业（类）目录(1).pdf",
    "2026-10-17"
   ],
   [

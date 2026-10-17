@@ -337,6 +337,15 @@ class CaseLibrary(unittest.TestCase):
                     saved = json.load(f)
                 self.assertEqual(case_report.build(d, render=False), saved)
 
+    def test_no_markup_leaks_into_prose(self):
+        """手写内容里不能混进简版报告的排版标记（::: 卡片、表格竖线、** 粗体）。"""
+        for d in self.cases():
+            with open(os.path.join(d, "report.json"), encoding="utf-8") as f:
+                rep = json.load(f)
+            texts = [rep["summary"]["headline"]] + rep["summary"]["points"] + rep["summary"]["after_the_fact"] + rep["why"]
+            for t in texts:
+                self.assertNotRegex(t, r":::|\*\*|\s\|\s", f"{os.path.basename(d)}：{t[:40]}")
+
     def test_reports_state_the_real_outcome(self):
         import glob
         for d in self.cases():
