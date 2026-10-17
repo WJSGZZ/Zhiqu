@@ -1,0 +1,2 @@
+rank,pool,slots,status,landing_order,landing,landing_utility,expected_utility,blocker_order,observed,brier,drift
+10192,70,17,无法判定,,,,84.12,1,15,0.1044,0.0234

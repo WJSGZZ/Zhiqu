@@ -1,0 +1,201 @@
+{
+ "rank": 10192,
+ "status": "无法判定",
+ "landing_order": null,
+ "blocker_order": 1,
+ "landing": null,
+ "landing_utility": null,
+ "expected_utility": 84.11582356475002,
+ "n_slots": 17,
+ "n_observed": 15,
+ "brier": 0.10440360416666666,
+ "rows": [
+  {
+   "order": 1,
+   "id": "3206-临床医学(5+3一体化)",
+   "name": "东南大学·临床医学(5+3一体化)",
+   "tag": "冲",
+   "p_clear": 0.0455,
+   "expected_cut_rank": 6562,
+   "actual_rank": null,
+   "cleared": null,
+   "note": "目标年无此条目"
+  },
+  {
+   "order": 2,
+   "id": "3281-临床医学",
+   "name": "苏州大学·临床医学",
+   "tag": "冲",
+   "p_clear": 0.26375,
+   "expected_cut_rank": 8873,
+   "actual_rank": 9622,
+   "cleared": false,
+   "note": ""
+  },
+  {
+   "order": 3,
+   "id": "3281-临床医学(5+3一体化)",
+   "name": "苏州大学·临床医学(5+3一体化)",
+   "tag": "冲",
+   "p_clear": 0.09075,
+   "expected_cut_rank": 6996,
+   "actual_rank": 7549,
+   "cleared": false,
+   "note": ""
+  },
+  {
+   "order": 4,
+   "id": "3270-儿科学",
+   "name": "南京医科大学·儿科学",
+   "tag": "保",
+   "p_clear": 0.95825,
+   "expected_cut_rank": 16602,
+   "actual_rank": 20930,
+   "cleared": true,
+   "note": ""
+  },
+  {
+   "order": 5,
+   "id": "3270-临床医学",
+   "name": "南京医科大学·临床医学",
+   "tag": "稳",
+   "p_clear": 0.42425,
+   "expected_cut_rank": 9786,
+   "actual_rank": 10129,
+   "cleared": false,
+   "note": ""
+  },
+  {
+   "order": 6,
+   "id": "3270-临床医学（5+3一体化，儿科学）",
+   "name": "南京医科大学·临床医学（5+3一体化，儿科学）",
+   "tag": "冲",
+   "p_clear": 0.29375,
+   "expected_cut_rank": 9086,
+   "actual_rank": 11162,
+   "cleared": true,
+   "note": ""
+  },
+  {
+   "order": 7,
+   "id": "3270-临床医学（5+3一体化）",
+   "name": "南京医科大学·临床医学（5+3一体化）",
+   "tag": "冲",
+   "p_clear": 0.02625,
+   "expected_cut_rank": 6367,
+   "actual_rank": 6899,
+   "cleared": false,
+   "note": ""
+  },
+  {
+   "order": 8,
+   "id": "3216-临床医学",
+   "name": "江南大学·临床医学",
+   "tag": "保",
+   "p_clear": 0.99825,
+   "expected_cut_rank": 16966,
+   "actual_rank": 18734,
+   "cleared": true,
+   "note": ""
+  },
+  {
+   "order": 9,
+   "id": "3216-临床医学(卓越医师创新班)",
+   "name": "江南大学·临床医学(卓越医师创新班)",
+   "tag": "保",
+   "p_clear": 0.8825,
+   "expected_cut_rank": 14528,
+   "actual_rank": 9205,
+   "cleared": false,
+   "note": ""
+  },
+  {
+   "order": 10,
+   "id": "3281-医学影像学",
+   "name": "苏州大学·医学影像学",
+   "tag": "稳",
+   "p_clear": 0.81175,
+   "expected_cut_rank": 12131,
+   "actual_rank": null,
+   "cleared": null,
+   "note": "目标年无此条目"
+  },
+  {
+   "order": 11,
+   "id": "0009-临床医学(检验医师培养试验班)",
+   "name": "温州医科大学·临床医学(检验医师培养试验班)",
+   "tag": "保",
+   "p_clear": 0.9995,
+   "expected_cut_rank": 16201,
+   "actual_rank": 19905,
+   "cleared": true,
+   "note": ""
+  },
+  {
+   "order": 12,
+   "id": "0009-临床医学(5+3一体化，儿科学方向)",
+   "name": "温州医科大学·临床医学(5+3一体化，儿科学方向)",
+   "tag": "保",
+   "p_clear": 0.94975,
+   "expected_cut_rank": 14907,
+   "actual_rank": 16670,
+   "cleared": true,
+   "note": ""
+  },
+  {
+   "order": 13,
+   "id": "0009-临床医学(5+3一体化，老年医学方向)",
+   "name": "温州医科大学·临床医学(5+3一体化，老年医学方向)",
+   "tag": "保",
+   "p_clear": 0.87375,
+   "expected_cut_rank": 12641,
+   "actual_rank": 12894,
+   "cleared": true,
+   "note": ""
+  },
+  {
+   "order": 14,
+   "id": "3270-医学影像学",
+   "name": "南京医科大学·医学影像学",
+   "tag": "保",
+   "p_clear": 0.907,
+   "expected_cut_rank": 13064,
+   "actual_rank": 17335,
+   "cleared": true,
+   "note": ""
+  },
+  {
+   "order": 15,
+   "id": "3101-人工智能",
+   "name": "东华大学·人工智能",
+   "tag": "保",
+   "p_clear": 0.9665,
+   "expected_cut_rank": 13211,
+   "actual_rank": 11960,
+   "cleared": true,
+   "note": ""
+  },
+  {
+   "order": 16,
+   "id": "3273-人工智能",
+   "name": "南京邮电大学·人工智能",
+   "tag": "保",
+   "p_clear": 0.9995,
+   "expected_cut_rank": 16721,
+   "actual_rank": 14901,
+   "cleared": true,
+   "note": ""
+  },
+  {
+   "order": 17,
+   "id": "3267-软件工程",
+   "name": "南京信息工程大学·软件工程",
+   "tag": "保",
+   "p_clear": 1.0,
+   "expected_cut_rank": 21019,
+   "actual_rank": 19816,
+   "cleared": true,
+   "note": ""
+  }
+ ]
+}

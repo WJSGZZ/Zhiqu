@@ -1,0 +1,40 @@
+{
+ "attributes": [
+  "school",
+  "major",
+  "city",
+  "outlook"
+ ],
+ "scenarios": {
+  "student": {
+   "confirmed": true,
+   "priority": [
+    "school",
+    "city",
+    "major",
+    "outlook"
+   ],
+   "anchors": {
+    "low": {
+     "name": "底线：省内普通公办院校的专业组",
+     "scores": {
+      "school": 4,
+      "major": 6,
+      "city": 6,
+      "outlook": 7
+     }
+    },
+    "high": {
+     "name": "100 分：最好的学校、最想读的专业、最想去的城市凑在一起（现实中未必存在）",
+     "scores": {
+      "school": 10,
+      "major": 7,
+      "city": 10,
+      "outlook": 7
+     }
+    }
+   },
+   "checks": []
+  }
+ }
+}

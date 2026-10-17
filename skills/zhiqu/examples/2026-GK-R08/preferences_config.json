@@ -1,0 +1,40 @@
+{
+ "attributes": [
+  "school",
+  "major",
+  "city",
+  "outlook"
+ ],
+ "scenarios": {
+  "student": {
+   "confirmed": true,
+   "priority": [
+    "major",
+    "city",
+    "outlook",
+    "school"
+   ],
+   "anchors": {
+    "low": {
+     "name": "底线：外省民办院校的机械类",
+     "scores": {
+      "school": 3,
+      "major": 6,
+      "city": 5,
+      "outlook": 7
+     }
+    },
+    "high": {
+     "name": "100 分：最好的学校、最想读的专业、最想去的城市凑在一起（现实中未必存在）",
+     "scores": {
+      "school": 10,
+      "major": 9,
+      "city": 9.5,
+      "outlook": 7.5
+     }
+    }
+   },
+   "checks": []
+  }
+ }
+}

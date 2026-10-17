@@ -1,0 +1,102 @@
+{
+ "rank": 103352,
+ "status": "投档",
+ "landing_order": 3,
+ "blocker_order": null,
+ "landing": "宁波工程学院·机械设计制造及其自动化(中外合作办学)",
+ "landing_utility": 79.361179,
+ "expected_utility": 79.7804051125,
+ "n_slots": 8,
+ "n_observed": 7,
+ "brier": 0.08005533928571429,
+ "rows": [
+  {
+   "order": 1,
+   "id": "0019-智能制造工程",
+   "name": "浙大宁波理工学院·智能制造工程",
+   "tag": "冲",
+   "p_clear": 0.1825,
+   "expected_cut_rank": 93699,
+   "actual_rank": 82860,
+   "cleared": false,
+   "note": ""
+  },
+  {
+   "order": 2,
+   "id": "0019-机械设计制造及其自动化",
+   "name": "浙大宁波理工学院·机械设计制造及其自动化",
+   "tag": "冲",
+   "p_clear": 0.0965,
+   "expected_cut_rank": 91538,
+   "actual_rank": 79882,
+   "cleared": false,
+   "note": ""
+  },
+  {
+   "order": 3,
+   "id": "0028-机械设计制造及其自动化(中外合作办学)",
+   "name": "宁波工程学院·机械设计制造及其自动化(中外合作办学)",
+   "tag": "保",
+   "p_clear": 0.99825,
+   "expected_cut_rank": 133420,
+   "actual_rank": 111119,
+   "cleared": true,
+   "note": ""
+  },
+  {
+   "order": 4,
+   "id": "0014-机械电子工程",
+   "name": "浙江万里学院·机械电子工程",
+   "tag": "保",
+   "p_clear": 0.99075,
+   "expected_cut_rank": 128360,
+   "actual_rank": 110294,
+   "cleared": true,
+   "note": ""
+  },
+  {
+   "order": 5,
+   "id": "0028-材料成型及控制工程",
+   "name": "宁波工程学院·材料成型及控制工程",
+   "tag": "保",
+   "p_clear": 0.98175,
+   "expected_cut_rank": 124973,
+   "actual_rank": null,
+   "cleared": null,
+   "note": "目标年无此条目"
+  },
+  {
+   "order": 6,
+   "id": "0028-机械设计制造及其自动化",
+   "name": "宁波工程学院·机械设计制造及其自动化",
+   "tag": "稳",
+   "p_clear": 0.7195,
+   "expected_cut_rank": 109632,
+   "actual_rank": 94700,
+   "cleared": false,
+   "note": ""
+  },
+  {
+   "order": 7,
+   "id": "0063-机械制造及自动化",
+   "name": "宁波职业技术大学·机械制造及自动化",
+   "tag": "保",
+   "p_clear": 1.0,
+   "expected_cut_rank": 162884,
+   "actual_rank": 156573,
+   "cleared": true,
+   "note": ""
+  },
+  {
+   "order": 8,
+   "id": "0094-机械电子工程",
+   "name": "宁波大学科学技术学院·机械电子工程",
+   "tag": "保",
+   "p_clear": 1.0,
+   "expected_cut_rank": 159903,
+   "actual_rank": 144061,
+   "cleared": true,
+   "note": ""
+  }
+ ]
+}

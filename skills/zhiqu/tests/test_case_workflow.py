@@ -146,10 +146,11 @@ class GateFailures(unittest.TestCase):
 
 
 class ReportSections(unittest.TestCase):
-    def test_older_example_does_not_meet_paid_spec(self):
-        with open(os.path.join(ROOT, "examples", "case_b_zhejiang_2027", "report.json"), encoding="utf-8") as f:
-            errs = check_report.check_sections(json.load(f))
-        self.assertTrue(any("roadmap" in e for e in errs))
+    def test_report_without_roadmap_does_not_meet_paid_spec(self):
+        with open(os.path.join(SAMPLE, "report.json"), encoding="utf-8") as f:
+            rep = json.load(f)
+        rep.pop("roadmap", None)
+        self.assertTrue(any("roadmap" in e for e in check_report.check_sections(rep)))
 
     def test_unevidenced_research_does_not_count(self):
         with open(os.path.join(SAMPLE, "report.json"), encoding="utf-8") as f:
@@ -208,10 +209,26 @@ class RetroSample(unittest.TestCase):
 class RetroJudge(unittest.TestCase):
     def judge(self, cuts, rank=100):
         import retro_judge
-        idx = {("A", f"m{k}"): [c] for k, c in enumerate(cuts) if c != "missing"}
+        idx = {("A", f"m{k}"): [(c, "")] for k, c in enumerate(cuts) if c != "missing"}
         result = {"list": [{"order": k + 1, "id": f"A-m{k}", "code": "A", "name": f"m{k}", "p_clear": .5, "utility": 50}
                            for k in range(len(cuts))]}
         return retro_judge.judge(result, idx, rank, "major")
+
+    def test_name_key_for_provinces_that_renumber_codes(self):
+        import retro_judge
+        idx = {("甲校", "计算机"): [(150, "")]}
+        result = {"list": [{"order": 1, "id": "0142-计算机", "code": "0142", "name": "甲校·计算机", "p_clear": .5, "utility": 50}]}
+        out = retro_judge.judge(result, idx, 100, "major", school="name")
+        self.assertEqual((out["status"], out["landing_order"]), ("投档", 1))
+
+    def test_group_with_changed_requirement_is_not_compared(self):
+        import retro_judge
+        idx = {("A", "01"): [(150, "化学")], ("A", "02"): [(150, "不限")]}
+        result = {"list": [{"order": k + 1, "id": f"A-0{k + 1}", "code": "A", "group": f"0{k + 1}", "name": f"A·0{k + 1}组",
+                            "p_clear": .5, "utility": 50} for k in range(2)]}
+        out = retro_judge.judge(result, idx, 100, "group", requirement={"A-01": "化学和生物", "A-02": "不限"})
+        self.assertEqual((out["status"], out["blocker_order"]), ("无法判定", 1))
+        self.assertIn("选科要求变了", out["rows"][0]["note"])
 
     def test_first_cleared_entry_is_landing(self):
         out = self.judge([90, 120, 200])
@@ -299,3 +316,42 @@ class ProvinceHealth(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class CaseLibrary(unittest.TestCase):
+    """案例库（examples/2026-GK-R02…）：报告里写的真实结果与最可能去向，必须和计算文件一致。"""
+
+    def test_reports_match_hindsight(self):
+        import glob
+        cases = [d for d in sorted(glob.glob(os.path.join(ROOT, "examples", "2026-GK-R*")))
+                 if os.path.exists(os.path.join(d, "report.md"))]
+        self.assertGreaterEqual(len(cases), 11)
+        clean = lambda s: s.replace("[公办]", "").replace("[民办]", "")
+        for d in cases:
+            run = glob.glob(os.path.join(d, "retro_ranks", "*"))[0]
+            with open(os.path.join(run, "hindsight.json"), encoding="utf-8") as f:
+                h = json.load(f)
+            with open(os.path.join(run, "result.json"), encoding="utf-8") as f:
+                r = json.load(f)
+            with open(os.path.join(d, "report.md"), encoding="utf-8") as f:
+                text = f.read()
+            top = max(r["list"], key=lambda x: x["p_land"])
+            self.assertIn(f"{clean(top['name'])} | 概率约 {top['p_land']:.0%}", text, d)
+            if h["status"] == "投档":
+                self.assertIn(f"第 {h['landing_order']} 志愿 · {clean(h['landing'])}", text, d)
+            else:
+                self.assertIn("无法判定", text, d)
+
+
+class ScoreTable(unittest.TestCase):
+    def test_merged_first_row_uses_official_cumulative(self):
+        """各省表首行常是合并档（本段人数不含更高分的人），位次必须取 cum 列，不能逐行累加 count。"""
+        import tempfile
+        sys.path.insert(0, os.path.join(ROOT, "scripts"))
+        from rank import Table
+        with tempfile.NamedTemporaryFile("w", suffix=".csv", delete=False, encoding="utf-8") as f:
+            f.write("score,count,cum,source\n697,7,56,官方，首行为合并档\n696,14,70,官方\n695,10,80,官方\n")
+        try:
+            self.assertEqual(Table(f.name).rank_of(695), (71, 80))
+        finally:
+            os.unlink(f.name)

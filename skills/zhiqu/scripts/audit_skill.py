@@ -45,7 +45,7 @@ def public_url(url, context=None):
 
 def reproduce_cases(dest):
     errors = []
-    for directory in ('case_b_zhejiang_2027', 'case_c_guangdong_e2e'):
+    for directory in ('case_c_guangdong_e2e',):
         case = ROOT / 'examples' / directory
         old = json.loads((case / 'result.json').read_text(encoding='utf-8'))
         args = [sys.executable, str(ROOT / 'scripts/optimize.py'), str(case / 'candidates.csv')]

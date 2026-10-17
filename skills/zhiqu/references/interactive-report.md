@@ -16,9 +16,9 @@ python3 scripts/serve_report.py examples/candidates_demo.csv \
 已有优化结果时，可继承完整固定参数：
 
 ```bash
-python3 scripts/serve_report.py examples/case_b_zhejiang_2027/candidates.csv \
-  --report examples/case_b_zhejiang_2027/report.json \
-  --result examples/case_b_zhejiang_2027/result.json
+python3 scripts/serve_report.py examples/2026-GK-R01/reviewed.csv \
+  --report examples/2026-GK-R01/report.json \
+  --result examples/2026-GK-R01/result.json
 ```
 
 `--rank`、`--slots`、`--u-fall` 可覆盖继承的启动值。不提供 `--result` 时，这三项必须显式给出，其余参数用优化脚本的既有默认值。默认最多载入 1000 个候选、每次优化最多 90 秒；可用 `--max-candidates`（上限 2000）和 `--timeout`（上限 300 秒）在启动时调整。模拟次数从原结果继承，允许 100–20000 次，页面不调整模拟次数和随机种子。

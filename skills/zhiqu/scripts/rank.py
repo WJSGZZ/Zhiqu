@@ -42,6 +42,8 @@ class Table:
         with open(path, encoding="utf-8-sig", newline="") as fh:
             reader = csv.DictReader(fh)
             cols = {c.strip().lower(): c for c in reader.fieldnames or []}
+            if "cum" in cols and "cumulative" not in cols:
+                cols["cumulative"] = cols["cum"]  # 仓库各省表用 cum；首行常是合并档，只能信累计、不能逐行累加 count
             if "score" not in cols or not ({"count", "cumulative"} & cols.keys()):
                 sys.exit(f"{path}：需要 score 列，以及 count 或 cumulative 列")
             rows = []

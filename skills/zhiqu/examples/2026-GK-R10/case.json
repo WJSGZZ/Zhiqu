@@ -1,0 +1,25 @@
+{
+ "case_id": "2026-GK-R10",
+ "product": "gaokao",
+ "province": "湖北",
+ "year": 2026,
+ "category": "物理类（物理、化学、生物）",
+ "mode": "simulation",
+ "prepared_on": "2026-10-17",
+ "data_commit": "5693ad4",
+ "province_rules": "data/hubei/rules.json",
+ "rank": 29895,
+ "slots": 45,
+ "candidate": "雨桐（模拟）",
+ "retro": {
+  "target_year": 2026,
+  "data_years": [
+   2023,
+   2024,
+   2025
+  ],
+  "judge": "scripts/retro_judge.py",
+  "preregistered": "2026-10-17（案例库事前登记：人物、分数、筛选、打分规则、参数在判定前写入并提交）"
+ },
+ "note": "案例库（回溯版）：模拟考生，背景与偏好为虚构；分数为事前登记，位次按 2026 年官方一分一段表换算；只用 2025 年及以前的官方数据出表，再用 2026 年官方投档表对照。2026 年招生计划与 2024 版选科要求未入库，资格项待核，故为 simulation 模式"
+}
