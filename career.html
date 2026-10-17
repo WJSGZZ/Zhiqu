@@ -61,6 +61,16 @@
           <label class="opt"><input type="radio" name="school_tier" value="境外或中外合作"><span class="box">境外或中外合作</span></label>
         </div></div>
 
+      <div class="q"><div class="q-label">毕业时间<span class="opt-note">（选填）</span></div>
+        <input type="text" id="grad_time" placeholder="例如：2027 年 6 月；已毕业 2 年"><p class="hint">应届身份、校招时间、选调和不少国企岗位都看毕业年份。</p></div>
+
+      <div class="q"><div class="q-label">政治面貌<span class="opt-note">（选填）</span></div>
+        <div class="opts"><label class="opt"><input type="radio" name="political" value="中共党员（含预备）"><span class="box">中共党员（含预备）</span></label><label class="opt"><input type="radio" name="political" value="共青团员"><span class="box">共青团员</span></label><label class="opt"><input type="radio" name="political" value="群众"><span class="box">群众</span></label><label class="opt"><input type="radio" name="political" value="其他"><span class="box">其他</span></label></div>
+        <p class="hint">部分选调生、机关和国企岗位要求党员，报考前要知道。</p></div>
+
+      <div class="q"><div class="q-label">户籍所在省份<span class="opt-note">（选填）</span></div>
+        <input type="text" id="hukou" placeholder="例如：四川；户口在学校集体户"><p class="hint">有的考编岗位限本地户籍或生源，落户政策也和户籍有关。</p></div>
+
       <div class="q req"><div class="q-label">你现在是？</div>
         <div class="opts stack">
           <label class="opt"><input type="radio" name="stage_now" value="在校，明年毕业"><span class="box">在校，明年毕业</span></label>
@@ -241,6 +251,13 @@
 
       <div class="q"><div class="q-label">家里对你工作的期望<span class="opt-note">（选填）</span></div>
         <textarea id="family_expect" placeholder="如果和你的想法不一样，也请如实写。"></textarea></div>
+
+      <div class="q"><div class="q-label">家里最担心的是什么？<span class="opt-note">（可多选）</span></div>
+        <div class="opts stack"><label class="opt"><input type="checkbox" name="fam_worry" value="收入不稳定"><span class="box">收入不稳定</span></label><label class="opt"><input type="checkbox" name="fam_worry" value="钱不够花"><span class="box">钱不够花</span></label><label class="opt"><input type="checkbox" name="fam_worry" value="离家太远"><span class="box">离家太远</span></label><label class="opt"><input type="checkbox" name="fam_worry" value="学历或单位不够体面"><span class="box">学历或单位不够体面</span></label><label class="opt"><input type="checkbox" name="fam_worry" value="和别人家比"><span class="box">和别人家比</span></label><label class="opt"><input type="checkbox" name="fam_worry" value="年龄不等人"><span class="box">年龄不等人</span></label><label class="opt"><input type="checkbox" name="fam_worry" value="身体和压力"><span class="box">身体和压力</span></label><label class="opt"><input type="checkbox" name="fam_worry" value="没什么特别担心"><span class="box">没什么特别担心</span></label></div>
+        <p class="hint">家里的“担心”和他们给的“办法”是两回事。把担心说清楚，常常能找到你和家里都能接受的路。</p></div>
+
+      <div class="q"><div class="q-label">家里给的具体办法是什么？你自己怎么看？<span class="opt-note">（选填）</span></div>
+        <textarea id="fam_plan" placeholder="例如：家里希望我考编或者进国企；我觉得……"></textarea></div>
     </div></section>
 
     <section class="section" data-title="方向与状态（可选）"><div class="card">
