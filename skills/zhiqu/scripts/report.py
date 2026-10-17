@@ -230,6 +230,11 @@ def strategy_chart(rows, width=640, fmt=None):
     return "".join(out)
 
 
+def _text_width(text, size=9):
+    """估算 SVG 文字宽度：汉字按一个字号宽，其他字符按约 0.62 个字号。"""
+    return sum(size if ord(c) > 0x2E80 else size * 0.62 for c in text)
+
+
 def outcome_strip(items, pfall, width=640, fmt=None):
     """结局分布：一条 100% 堆积条，按志愿顺序着色，展示“最可能落在哪里”。图注由调用处写在条下。"""
     h = 26
@@ -248,11 +253,15 @@ def outcome_strip(items, pfall, width=640, fmt=None):
         else:
             col = "#D8CFB6"
         out.append(f'<rect x="{x:.1f}" y="0" width="{w:.1f}" height="{h}" fill="{col}" stroke="#FBF6E6" stroke-width="1"/>')
-        if w > 40:
-            lab = f"{p:.0%}" if fmt is None else fmt(p)
-            out.append(f'<text x="{x + 6:.1f}" y="{h / 2 + 3.5:.1f}" fill="#fff" font-weight="600">第 {i + 1} 志愿{" · " + lab if lab else ""}</text>')
+        pl = f"{p:.0%}" if fmt is None else fmt(p)
+        tail = f" · {pl}" if pl else ""
+        # 从长到短取第一个放得下的标签，窄段不把字截断
+        fits = [t for t in (f"第 {i + 1} 志愿{tail}", f"{i + 1}{tail}") if _text_width(t) + 12 <= w]
+        if fits:
+            out.append(f'<text x="{x + 6:.1f}" y="{h / 2 + 3.5:.1f}" fill="#fff" font-weight="600">{fits[0]}</text>')
         elif w > 14:
-            out.append(f'<text x="{x + w / 2:.1f}" y="{h / 2 + 3.5:.1f}" fill="#3B3832" text-anchor="middle">{i + 1}</text>')
+            ink = "#fff" if p >= 0.05 else "#3B3832"
+            out.append(f'<text x="{x + w / 2:.1f}" y="{h / 2 + 3.5:.1f}" fill="{ink}" text-anchor="middle">{i + 1}</text>')
         x += w
     if pfall > 0:
         w = max(1.5, width * pfall)
