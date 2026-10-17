@@ -13,7 +13,16 @@
 import argparse
 import csv
 import json
+import re
 from collections import defaultdict
+
+
+def norm(text):
+    """只统一写法、不改含义：全角括号与逗号换半角，去掉空格、[公办]类标签和“(上海市)”类所在地后缀。
+    浙江同一专业不同年份全角、半角括号混用；河北 2026 年校名去掉了所在地括号。"""
+    text = text.replace("（", "(").replace("）", ")").replace("，", ",").replace(" ", "")
+    text = re.sub(r"\[[^\]]*\]", "", text)
+    return re.sub(r"\([^()]*[市县]\)", "", text).strip()
 
 
 def target_index(path, key, school="code"):
@@ -22,8 +31,8 @@ def target_index(path, key, school="code"):
     idx = defaultdict(list)
     with open(path, encoding="utf-8") as f:
         for r in csv.DictReader(f):
-            k = ((r["name"] if school == "name" else r["code"]).strip(),
-                 (r.get("major") if key == "major" else r.get("group") or "").strip())
+            k = (norm(r["name"]) if school == "name" else r["code"].strip(),
+                 norm(r.get("major") or "") if key == "major" else (r.get("group") or "").strip())
             rank = r.get("rank", "").strip()
             idx[k].append((int(float(rank)) if rank else None, (r.get("major") or "").strip()))
     return idx
@@ -33,8 +42,8 @@ def judge(result, idx, rank, key, school="code", requirement=None):
     """requirement：专业组省份可给 {志愿 id: 往年选科要求}；目标年同组号但选科要求不同，视为另一组，不对照。"""
     rows, landing, status, blocker = [], None, None, None
     for item in result["list"]:
-        who = item["name"].split("·", 1)[0] if school == "name" else item.get("code", "")
-        k = (who.strip(), (item["id"].split("-", 1)[1] if key == "major" else item.get("group", "")).strip())
+        who = norm(item["name"].split("·", 1)[0]) if school == "name" else item.get("code", "").strip()
+        k = (who, norm(item["id"].split("-", 1)[1]) if key == "major" else item.get("group", "").strip())
         recs = idx.get(k, [])
         changed = key == "group" and requirement and len(recs) == 1 and recs[0][1] != requirement.get(item["id"], recs[0][1])
         if len(recs) == 1 and recs[0][0] is not None and not changed:

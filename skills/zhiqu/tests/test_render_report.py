@@ -236,6 +236,11 @@ class TestFullRender(unittest.TestCase):
         self.assertIn("--accent2:#34685D", doc)
         self.assertEqual(len(sections), 12)
 
+    def test_maintainer_comments_are_not_rendered(self):
+        doc, _ = rr.render(SAMPLE_MD.replace("内容占位。", "学费 8000 元 <!-- 核实：2026-10-17；复核期限：2027-07-01 -->", 1))
+        self.assertIn("学费 8000 元", doc)
+        self.assertNotIn("复核期限", doc)
+
     def test_render_html_via_cli(self):
         import subprocess
         import tempfile

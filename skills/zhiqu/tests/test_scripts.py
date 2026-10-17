@@ -56,9 +56,9 @@ class TestOptimizeRegression(unittest.TestCase):
         c = optimize_json("examples/case_c_guangdong_e2e/candidates.csv", "--rank", "30500", "--slots", "45", "--u-fall", "-60",
                           "--max-fall", "0.01", "--drift", "0.06", "--target-year", "2027", "--sigma-scale", "1.7")
         self.assertAlmostEqual(c["expected_utility"], 93.7, delta=0.1)
-        b = optimize_json("examples/case_b_zhejiang_2027/candidates.csv", "--rank", "28000", "--slots", "80", "--u-fall", "-60",
-                          "--max-fall", "0.01", "--drift", "0.015", "--target-year", "2027", "--sigma-floor", "0.15", "--sigma-scale", "0.9")
-        self.assertAlmostEqual(b["expected_utility"], 76.5, delta=0.1)
+        b = optimize_json("examples/2026-GK-R12/retro_ranks/135204/reviewed.csv", "--rank", "135204", "--slots", "96", "--u-fall", "-60",
+                          "--max-fall", "0.01", "--drift", "0.0299", "--target-year", "2026", "--sigma-scale", "1.0", "--decision-mode", "simulation")
+        self.assertAlmostEqual(b["expected_utility"], 73.64, delta=0.01)
 
     def test_legacy_rule_still_available(self):
         r = optimize_json("examples/case_c_guangdong_e2e/candidates.csv", "--rank", "30500", "--slots", "45", "--u-fall", "-60",

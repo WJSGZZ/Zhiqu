@@ -430,6 +430,7 @@ def build_html(meta, body_html, sections):
 def render(markdown_text):
     """返回 (html_document, sections)。sections 供测试和调用方检查用。"""
     meta, body = split_front_matter(markdown_text)
+    body = re.sub(r"[ \t]*<!--.*?-->", "", body, flags=re.S)  # 核实/复核期限等注释只给维护者看，不进报告
     body_html, sections = markdown_to_html(body)
     validate_sections(sections)
     doc = build_html(meta, body_html, sections)

@@ -21,18 +21,19 @@
     "monthly_living_assumption": 1300,
     "living_months": 12,
     "years": 3,
-    "fee_basis": "用最近一年官方标准估计2027级：华南理工大学2026年硕士学费标准，专业学位全日制非定向能源动力(0858，含电气工程085801)8000元/学年、学制3年；研究生住宿费最高1600元/学年，取上限；生活费为本人估计",
+    "fee_basis": "华南理工大学2027年硕士研究生学费标准（附件2，与2026年相同）：专业学位全日制非定向能源动力(0858，含电气工程085801)8000元/学年、学制3年；住宿费取华工2026年教育收费公示学生宿舍表的全校最高价1600元/学年（研究生宿舍600—1400元，多数不含水电），作为偏保守的上限；生活费为本人估计",
     "fee_sources": [
-      "https://yz.scut.edu.cn/2025/1009/c30381a604485/page.htm",
-      "https://admission.scut.edu.cn/_t1723/2025/0516/c30830a591233/page.htm"
-    ]
+      "https://yz.scut.edu.cn/2026/0930/c30381a636831/page.htm",
+      "https://xxgk.scut.edu.cn/2026/0724/c132a49401/page.htm"
+    ],
+    "fee_verified": "2026-10-17"
   },
   "evidence": [
     {
       "candidate": "广东工业大学电气工程专业学位",
       "status": "pending",
       "source": "https://automation.gdut.edu.cn/info/1044/8869.htm",
-      "verified_scope": "2025培养方案确认专业与三年学制；不证明2027统考名额、费用或报考限制",
+      "verified_scope": "2025培养方案确认专业与三年学制；2027年招生简章已于2026-09-30发布，尚未逐项核对电气工程的统考名额、科目、费用或报考限制",
       "unresolved": [
         "2027招生目录与考试科目",
         "统考计划",
@@ -44,17 +45,17 @@
         {
           "name": "2027招生目录与考试科目",
           "status": "unknown",
-          "source": "https://automation.gdut.edu.cn/info/1044/8869.htm"
+          "source": "https://yzw.gdut.edu.cn/info/1017/3865.htm"
         },
         {
           "name": "统考计划",
           "status": "unknown",
-          "source": "https://automation.gdut.edu.cn/info/1044/8869.htm"
+          "source": "https://yzw.gdut.edu.cn/info/1017/3865.htm"
         },
         {
           "name": "费用与奖助",
           "status": "unknown",
-          "source": "https://automation.gdut.edu.cn/info/1044/8869.htm"
+          "source": "https://yzw.gdut.edu.cn/info/1017/3865.htm"
         },
         {
           "name": "就业岗位资格",
@@ -66,31 +67,37 @@
     {
       "candidate": "华南理工大学电气工程（专硕）",
       "status": "pending",
-      "source": "https://www2.scut.edu.cn/ep/2026/0408/c5226a623127/page.htm",
-      "verified_scope": "2025、2026年官方拟录取名单的初试成绩分布已核实；2027年招生目录、统考名额与基地计划是否延续未公布",
+      "source": "https://yz.scut.edu.cn/2026/0930/c30381a636831/page.htm",
+      "verified_scope": "2025、2026年官方拟录取名单的初试成绩分布已核实；2027年招生章程及目录（2026-09-30发布）：085801拟招236人（含推免生），含基地计划160人；初试101、201、301、812电路原理；0858全日制非定向学费8000元/学年、3年",
       "unresolved": [
-        "2027招生目录与考试科目",
-        "2027统考名额与基地计划",
-        "费用"
+        "2027统考名额（扣除推免后）",
+        "2027复试线与单科线",
+        "本人报考资格（以报名审核为准）"
       ],
       "year": 2027,
       "hard_conditions": [
         {
           "name": "2027招生目录与考试科目",
-          "status": "unknown",
-          "source": "https://www2.scut.edu.cn/ep/2026/0408/c5226a623127/page.htm"
+          "status": "met",
+          "source": "https://yz.scut.edu.cn/2026/0930/c30381a636831/page.htm"
         },
         {
-          "name": "2027统考名额与基地计划",
-          "status": "unknown",
-          "source": "https://www2.scut.edu.cn/ep/2026/0408/c5226a623127/page.htm"
+          "name": "学费与学制",
+          "status": "met",
+          "source": "https://yz.scut.edu.cn/2026/0930/c30381a636831/page.htm"
         },
         {
-          "name": "费用",
+          "name": "2027统考名额（扣除推免后）",
           "status": "unknown",
-          "source": "https://www2.scut.edu.cn/ep/2026/0408/c5226a623127/page.htm"
+          "source": "https://yz.scut.edu.cn/2026/0930/c30381a636831/page.htm"
+        },
+        {
+          "name": "本人报考资格（以报名审核为准）",
+          "status": "unknown",
+          "source": "https://yz.scut.edu.cn/2026/0930/c30381a636831/page.htm"
         }
-      ]
+      ],
+      "verified_on": "2026-10-17"
     }
   ],
   "province": "广东省（就读与报考目标）；出生地湖南省",
@@ -129,15 +136,15 @@
         "max": 440
       },
       "2025_普通计划": {
-        "n": 53,
+        "n": 59,
         "min": 365,
         "q1": 374,
         "median": 383,
-        "q3": 394,
+        "q3": 392,
         "max": 420
       }
     },
-    "stats_method": "2026年为官方PDF文本层；2025年为官方扫描件本机文字识别，个别数字可能有误；已剔除退役大学生士兵、少数民族骨干、联培等专项；只保存统计值，不保存考生姓名或编号",
+    "stats_method": "2026年为官方PDF文本层；2025年为官方扫描件，2026-10-17逐页人工核对：电力学院085801共66行，剔除少数民族骨干计划4、退役大学生士兵计划1、广州城市理工学院联合培养2，余普通计划59人（75%分位391.5—392，按392记）；只保存统计值，不保存考生姓名或编号",
     "sources": [
       "https://www2.scut.edu.cn/ep/2026/0408/c5226a623127/page.htm",
       "https://yz.scut.edu.cn/2025/0523/c30111a592029/page.htm"
@@ -188,7 +195,7 @@
       "kind": "qualitative",
       "score": 380,
       "personal_probability": null,
-      "population": "往年已录取者（2025约53、2026约120）；不是本人同条件竞争池",
+      "population": "往年已录取者（2025约59、2026约120）；不是本人同条件竞争池",
       "condition": "模拟总分380；假设科目可比，单科与复试未核实",
       "denominator": null,
       "unknown": [

@@ -1,0 +1,40 @@
+{
+ "attributes": [
+  "school",
+  "major",
+  "city",
+  "outlook"
+ ],
+ "scenarios": {
+  "student": {
+   "confirmed": true,
+   "priority": [
+    "major",
+    "outlook",
+    "city",
+    "school"
+   ],
+   "anchors": {
+    "low": {
+     "name": "底线：省内普通公办医学院的药学",
+     "scores": {
+      "school": 4,
+      "major": 5,
+      "city": 6.5,
+      "outlook": 6
+     }
+    },
+    "high": {
+     "name": "100 分：最好的学校、最想读的专业、最想去的城市凑在一起（现实中未必存在）",
+     "scores": {
+      "school": 10,
+      "major": 10,
+      "city": 9.5,
+      "outlook": 8.5
+     }
+    }
+   },
+   "checks": []
+  }
+ }
+}

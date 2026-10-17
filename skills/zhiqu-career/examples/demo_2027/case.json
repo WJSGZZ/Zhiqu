@@ -25,7 +25,7 @@
       "candidate": "会计助理、出纳、应收应付文员（四川）",
       "status": "pending",
       "source": "https://rst.sc.gov.cn/rst/gsgg/2025/7/7/770dc72520ef42c493044cfb1f8c404f.shtml",
-      "verified_scope": "四川省2024年工资价位：在岗人员分职业、分学历分位值；不是2027应届生薪资或在招岗位证明",
+      "verified_scope": "四川省2024年人力资源市场工资价位：企业从业人员（企业薪酬调查，不含机关事业单位）分职业、分学历分位值；不是2027应届生薪资或在招岗位证明",
       "unresolved": [
         "具体用人单位正式招聘公告",
         "学历与应届条件",
@@ -95,11 +95,11 @@
   "province": "四川省",
   "hypothetical_followup": {
     "label": "模拟拿到两个offer（演示比较方法）",
-    "tax_rule": "居民个人综合所得：每年减除6万元及个人缴纳的社保公积金；本例无专项附加扣除",
-    "ss_personal_rate_assumption": 0.105,
+    "tax_rule": "居民个人综合所得：每年减除6万元基本减除费用及个人缴纳的社保公积金；本例无专项附加扣除",
+    "ss_personal_rate_assumption": 0.104,
     "offers": [
       {
-        "name": "A 代理记账公司·会计助理（直签，一档地区）",
+        "name": "A 代理记账公司·会计助理（直签，省会）",
         "monthly_gross": 4800,
         "months": 12,
         "hf_rate": 0.0,
@@ -107,24 +107,24 @@
         "monthly_rent": 1100,
         "monthly_other": 1500,
         "minimum_wage_tier": 2330,
-        "note": "社保按实际工资4800元缴（高于2026年基数下限4699元），无公积金；月末加班；需在外租房"
+        "note": "社保按实际工资4800元缴（高于2026年基数下限4699元），无公积金；月末加班，按没有加班费计算（假设）；需在外租房"
       },
       {
-        "name": "B 国企下属单位·出纳（劳务派遣，离家近的二档地区）",
+        "name": "B 国企下属单位·出纳（劳务派遣，离家近）",
         "monthly_gross": 4300,
         "months": 13,
         "hf_rate": 0.08,
         "extra_hours_per_month": 0,
         "monthly_rent": 400,
         "monthly_other": 1100,
-        "minimum_wage_tier": 2200,
-        "note": "第13个月写进合同；月工资4300元低于2026年社保基数下限，社保按4699元缴；公积金按实际工资、个人与单位各8%；住家里，每月交家里400元"
+        "minimum_wage_tier": 2330,
+        "note": "第13个月写进合同；月工资4300元低于2026年社保基数下限，社保按4699元缴；公积金按实际工资、个人与单位各8%；住家里，每月交家里400元。monthly_take_home_cash与monthly_remaining_cash是含第13个月的全年平均；平常月份实发约4300−489−344≈3467元，结余约1967元"
       }
     ],
     "standard_hours_per_year": 2000,
     "reference_wages": {
       "source": "https://rst.sc.gov.cn/rst/gsgg/2025/7/7/770dc72520ef42c493044cfb1f8c404f.shtml",
-      "scope": "四川省2024年人力资源市场工资价位（2025-07-07发布），在岗人员全年工资，万元/年；不是应届生offer",
+      "scope": "四川省2024年人力资源市场工资价位（2025-07-07发布），企业从业人员全年工资（企业薪酬调查，不含机关事业单位），万元/年；不是应届生offer",
       "会计专业人员": {
         "p10": 4.2,
         "p25": 5.28,
@@ -138,14 +138,28 @@
         "p50": 6.79,
         "p75": 9.8,
         "p90": 14.2
+      },
+      "工龄0~1年（不分职业）": {
+        "p10": 2.93,
+        "p25": 3.7,
+        "p50": 5.16,
+        "p75": 7.69,
+        "p90": 10.81
       }
     },
     "minimum_wage": {
-      "source": "https://www.sc.gov.cn/10462/10464/13298/14097/2025/1/3/ac932dd586f343beb8aa54db49b3366c.shtml",
+      "source": "https://www.sc.gov.cn/10462/zfwjts/2025/1/2/60841bcf38d844fb80ad1ea0b2d74e24.shtml",
       "tier1": 2330,
       "tier2": 2200,
       "effective": "2025-01-01",
-      "note": "已公开征求意见拟上调至2500/2360，未正式执行"
+      "note": "川府规〔2024〕4号，有效期3年；含个人缴纳的社保和公积金；各市（州）自选档次",
+      "proposal": {
+        "tier1": 2500,
+        "tier2": 2360,
+        "status": "省人社厅2026-05-09征求意见，6-09截止；截至2026-10-17未找到正式发文",
+        "source": "https://www.sc.gov.cn/10462/10464/10797/2026/5/10/a1c660174d83443ab23cc74b7cf6bbfd.shtml"
+      },
+      "verified": "2026-10-17"
     },
     "upgrade_exam": {
       "source": "https://www.sceea.cn/Html/202512/Newsdetail_4595.html",
@@ -154,10 +168,18 @@
     "ss_base_limits": {
       "lower": 4699,
       "upper": 23493,
-      "scope": "四川省2026年度养老、失业、工伤保险缴费基数上下限（2026-09-07公布），用作2027年估计；月工资在上下限之间按实际工资缴",
-      "source": "https://rst.sc.gov.cn/rst/gsgg/2026/9/7/8b8edb37d4cd43ed995a0055f46b7705.shtml"
+      "scope": "四川省2026年度养老、失业、工伤保险缴费基数上下限（2026-09-07公布），用作2027年估计；月工资在上下限之间按实际工资缴；医疗保险基数由医保部门另定，本例按同一基数估算",
+      "source": "https://rst.sc.gov.cn/rst/gsgg/2026/9/7/8b8edb37d4cd43ed995a0055f46b7705.shtml",
+      "publication_note": "往年在8—9月公布：2025年度2025-09-22，2026年度2026-09-07"
     },
-    "minimum_wage_source": "https://www.sc.gov.cn/10462/zfwjts/2025/1/2/60841bcf38d844fb80ad1ea0b2d74e24.shtml"
+    "ss_personal_rate_basis": {
+      "composition": "养老8%＋医疗2%（各市可能略有不同）＋失业0.4%",
+      "unemployment_source": "https://www.sc.gov.cn/10462/10778/10876/2024/7/9/8546d58ad39a491ab56ef7ae7580b7ab.shtml",
+      "unemployment_note": "四川转发人社部发〔2024〕40号：失业保险总费率1%，单位0.6%、个人0.4%，执行至2025-12-31；2026年以后是否延续未查到正式文件，若恢复0.5%每月约多扣5元",
+      "verified": "2026-10-17"
+    },
+    "minimum_wage_tier_note": "各市（州）自选执行档次，两地档次未核实；两份offer都按较高一档2330元比较",
+    "standard_hours_note": "2000小时为每天8小时、全年约250个工作日的近似值"
   },
   "preference_model": {
     "attributes": [

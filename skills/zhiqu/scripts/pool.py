@@ -180,7 +180,7 @@ def main():
         if last not in e["ranks"]:
             continue
         info = lookup(code, e["school"], by_code, by_name)
-        text = e["school"] + " " + e["sub"]
+        text = e["school"] + " " + e["sub"] + " " + e["req"]  # 专业组省份的专项、预科、中外合作标记常写在选科要求一栏
         if a.exclude and re.search(a.exclude, text + " " + info.get("note", "")):
             continue
         if not info:

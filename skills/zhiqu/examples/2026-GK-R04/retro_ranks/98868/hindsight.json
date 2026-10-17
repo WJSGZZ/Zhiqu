@@ -1,0 +1,91 @@
+{
+ "rank": 98868,
+ "status": "投档",
+ "landing_order": 1,
+ "blocker_order": null,
+ "landing": "济宁医学院·临床医学",
+ "landing_utility": 81.170483,
+ "expected_utility": 79.38435074475,
+ "n_slots": 7,
+ "n_observed": 7,
+ "brier": 0.19716498214285713,
+ "rows": [
+  {
+   "order": 1,
+   "id": "A443-临床医学",
+   "name": "济宁医学院·临床医学",
+   "tag": "稳",
+   "p_clear": 0.8415,
+   "expected_cut_rank": 109187,
+   "actual_rank": 136183,
+   "cleared": true,
+   "note": ""
+  },
+  {
+   "order": 2,
+   "id": "A440-临床医学",
+   "name": "滨州医学院·临床医学",
+   "tag": "冲",
+   "p_clear": 0.168,
+   "expected_cut_rank": 89233,
+   "actual_rank": 111114,
+   "cleared": true,
+   "note": ""
+  },
+  {
+   "order": 3,
+   "id": "A439-口腔医学技术",
+   "name": "山东第一医科大学·口腔医学技术",
+   "tag": "冲",
+   "p_clear": 0.221,
+   "expected_cut_rank": 90518,
+   "actual_rank": 104749,
+   "cleared": true,
+   "note": ""
+  },
+  {
+   "order": 4,
+   "id": "A438-麻醉学",
+   "name": "山东第二医科大学·麻醉学",
+   "tag": "冲",
+   "p_clear": 0.025,
+   "expected_cut_rank": 80855,
+   "actual_rank": 95473,
+   "cleared": false,
+   "note": ""
+  },
+  {
+   "order": 5,
+   "id": "A443-精神医学",
+   "name": "济宁医学院·精神医学",
+   "tag": "保",
+   "p_clear": 0.99975,
+   "expected_cut_rank": 133588,
+   "actual_rank": 149111,
+   "cleared": true,
+   "note": ""
+  },
+  {
+   "order": 6,
+   "id": "A443-医学影像学",
+   "name": "济宁医学院·医学影像学",
+   "tag": "稳",
+   "p_clear": 0.76475,
+   "expected_cut_rank": 106117,
+   "actual_rank": 122654,
+   "cleared": true,
+   "note": ""
+  },
+  {
+   "order": 7,
+   "id": "A447-口腔医学技术",
+   "name": "聊城大学·口腔医学技术",
+   "tag": "保",
+   "p_clear": 1.0,
+   "expected_cut_rank": 179867,
+   "actual_rank": 186659,
+   "cleared": true,
+   "note": ""
+  }
+ ]
+}

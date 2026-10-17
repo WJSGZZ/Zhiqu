@@ -146,10 +146,11 @@ class GateFailures(unittest.TestCase):
 
 
 class ReportSections(unittest.TestCase):
-    def test_older_example_does_not_meet_paid_spec(self):
-        with open(os.path.join(ROOT, "examples", "case_b_zhejiang_2027", "report.json"), encoding="utf-8") as f:
-            errs = check_report.check_sections(json.load(f))
-        self.assertTrue(any("roadmap" in e for e in errs))
+    def test_report_without_roadmap_does_not_meet_paid_spec(self):
+        with open(os.path.join(SAMPLE, "report.json"), encoding="utf-8") as f:
+            rep = json.load(f)
+        rep.pop("roadmap", None)
+        self.assertTrue(any("roadmap" in e for e in check_report.check_sections(rep)))
 
     def test_unevidenced_research_does_not_count(self):
         with open(os.path.join(SAMPLE, "report.json"), encoding="utf-8") as f:
@@ -315,3 +316,28 @@ class ProvinceHealth(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class CaseLibrary(unittest.TestCase):
+    """案例库（examples/2026-GK-R02…）：报告里写的真实结果与最可能去向，必须和计算文件一致。"""
+
+    def test_reports_match_hindsight(self):
+        import glob
+        cases = [d for d in sorted(glob.glob(os.path.join(ROOT, "examples", "2026-GK-R*")))
+                 if os.path.exists(os.path.join(d, "report.md"))]
+        self.assertGreaterEqual(len(cases), 11)
+        clean = lambda s: s.replace("[公办]", "").replace("[民办]", "")
+        for d in cases:
+            run = glob.glob(os.path.join(d, "retro_ranks", "*"))[0]
+            with open(os.path.join(run, "hindsight.json"), encoding="utf-8") as f:
+                h = json.load(f)
+            with open(os.path.join(run, "result.json"), encoding="utf-8") as f:
+                r = json.load(f)
+            with open(os.path.join(d, "report.md"), encoding="utf-8") as f:
+                text = f.read()
+            top = max(r["list"], key=lambda x: x["p_land"])
+            self.assertIn(f"{clean(top['name'])} | 概率约 {top['p_land']:.0%}", text, d)
+            if h["status"] == "投档":
+                self.assertIn(f"第 {h['landing_order']} 志愿 · {clean(h['landing'])}", text, d)
+            else:
+                self.assertIn("无法判定", text, d)

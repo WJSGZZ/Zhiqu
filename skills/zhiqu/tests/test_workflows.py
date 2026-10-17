@@ -1,5 +1,6 @@
 import copy
 import json
+import re
 from pathlib import Path
 import subprocess
 import sys
@@ -17,8 +18,8 @@ import report
 class WorkflowTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.result = json.loads((ROOT / 'examples/case_b_zhejiang_2027/result.json').read_text())
-        cls.rep = json.loads((ROOT / 'examples/case_b_zhejiang_2027/report.json').read_text())
+        cls.result = json.loads((ROOT / 'examples/2026-GK-R01/result.json').read_text())
+        cls.rep = json.loads((ROOT / 'examples/2026-GK-R01/report.json').read_text())
 
     def test_report_detects_metadata_and_claim_drift(self):
         rep = copy.deepcopy(self.rep)
@@ -33,9 +34,8 @@ class WorkflowTests(unittest.TestCase):
     def test_html_table_detects_changed_probability_and_missing_rows(self):
         html = report.build(self.rep, self.result)
         self.assertEqual(check_report(self.rep, self.result, html), [])
-        row = self.result['list'][0]
-        old = f"<td class='r'>{row['p_clear']:.0%}</td>"
-        changed = html.replace(old, "<td class='r'>999%</td>", 1)
+        changed = re.sub(r"<td class='r'>[^<]*\d+%</td>", "<td class='r'>999%</td>", html, count=1)
+        self.assertNotEqual(changed, html)
         self.assertTrue(check_report(self.rep, self.result, changed))
         self.assertTrue(check_report(self.rep, self.result, '<html></html>'))
         tampered = html.replace('概率约 ', '概率错 ', 1)
