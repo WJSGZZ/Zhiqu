@@ -67,6 +67,8 @@ svg.chart { width: 100%; height: auto; display: block; }
 .cover .verdict p { font-size: 14pt; line-height: 1.6; margin: 0; }
 .cover .verdict.long p { font-size: 11pt; line-height: 1.55; }
 .cover .verdict.long { margin-top: 6mm; padding: 4mm 8mm; }
+.cover.dense .meta { gap: 2.5mm 8mm; } .cover.dense .meta span { font-size: 11pt; }
+.cover.dense .verdict { margin-top: 5mm; padding: 4mm 8mm; } .cover.dense .verdict p { font-size: 11pt; line-height: 1.55; }
 .cover .foot { position: absolute; left: 22mm; right: 22mm; bottom: 16mm; font-size: 8pt; color: var(--muted); border-top: .6pt solid var(--rule); padding-top: 3mm; }
 
 /* kpis */
@@ -83,8 +85,9 @@ svg.chart { width: 100%; height: auto; display: block; }
 .box.warn { border-left: 2.5pt solid var(--amber); }
 .box h4 { margin: 0 0 1.5mm; font: 600 8.5pt var(--sans); letter-spacing: 1pt; color: var(--accent); }
 .box.warn h4 { color: var(--amber); }
-ol.tight, ul.tight { margin: 0; padding-left: 5mm; }
-ol.tight li, ul.tight li { margin: .6mm 0; }
+ol.tight, ul.tight, .box > ol, .box > ul { margin: 0; padding-left: 5mm; }
+ol.tight li, ul.tight li, .box > ol li, .box > ul li { margin: .6mm 0; }
+.box > p { margin: 0 0 1.5mm; } .box > p:last-child { margin-bottom: 0; }
 
 /* tables */
 table { width: 100%; border-collapse: collapse; margin: 2mm 0 4mm; font-size: 8.8pt; font-variant-numeric: tabular-nums; }
@@ -591,14 +594,15 @@ def build(rep, opt):
     sec("数据来源与声明", body)
 
     toc = "".join(f"<div><span>{i:02d}</span><span>{E(t)}</span></div>" for i, t, _ in secs)
-    cover = (f'<div class="cover"><div class="band"><div class="kicker">知 衢 · 志 愿 填 报 决 策 报 告</div>'
+    meta_rows = ([("考生", m.get("candidate", "–")), ("省份 · 科类", f'{m.get("province", "–")} · {m.get("category", "–")}'),
+                  ("批次", m.get("batch", "–")), ("分数", m.get("score", "–")), ("全省位次", m.get("rank", "–")), ("报告日期", m.get("date", "–"))]
+                 + ([("报告编号", m["case_id"])] if m.get("case_id") else []) + ([("生成日期", m["generated_on"])] if m.get("generated_on") else []))
+    dense = " dense" if len(meta_rows) > 6 else ""  # 封面信息超过两行时收紧间距，避免目录压到页脚
+    cover = (f'<div class="cover{dense}"><div class="band"><div class="kicker">知 衢 · 志 愿 填 报 决 策 报 告</div>'
              f'<h1>{E(m.get("title", "志愿填报决策报告"))}</h1><div class="sub">{E(m.get("subtitle", ""))}</div>'
              '<div class="motto">知其所往，方行其衢。</div></div>'
              '<div class="meta">'
-             + "".join(f"<div><b>{E(a)}</b><span>{E(str(b))}</span></div>" for a, b in [
-                 ("考生", m.get("candidate", "–")), ("省份 · 科类", f'{m.get("province", "–")} · {m.get("category", "–")}'),
-                 ("批次", m.get("batch", "–")), ("分数", m.get("score", "–")), ("全省位次", m.get("rank", "–")), ("报告日期", m.get("date", "–"))]
-             + ([("报告编号", m["case_id"])] if m.get("case_id") else []) + ([("生成日期", m["generated_on"])] if m.get("generated_on") else []))
+             + "".join(f"<div><b>{E(a)}</b><span>{E(str(b))}</span></div>" for a, b in meta_rows)
              + "</div>"
              + (f'<div class="verdict{" long" if len(s.get("headline", "")) > 100 else ""}"><b>一句话结论</b><p>{E(s.get("headline", ""))}</p></div>' if s.get("headline") else "")
              + f'<div class="verdict" style="background:transparent;border-left-color:var(--rule2)"><b>目录</b><div class="toc">{toc}</div></div>'

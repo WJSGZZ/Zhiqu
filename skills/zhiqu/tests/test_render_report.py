@@ -149,6 +149,55 @@ class TestMarkdownToHtml(unittest.TestCase):
         self.assertIn("&lt;script&gt;alert(1)&lt;/script&gt;", self.html)
 
 
+class TestReportElements(unittest.TestCase):
+    """与 report.py 同款的版面元素：提示框、数字卡、落点条、冲稳保标签。"""
+
+    MD = "\n".join([
+        "::: kpi",
+        "- 志愿数 | 21 | 可填 80 个",
+        "- 最可能的去向 | 浙江外国语学院·汉语言文学（师范） | 约 73%",
+        ":::",
+        "",
+        "::: strip",
+        "- 甲校 | 20%",
+        "- 乙校 | 79.5%",
+        "- 滑档 | 0.5%",
+        ":::",
+        "",
+        "> [!key] 核心结论",
+        "> 1. 第一条",
+        "> 2. 第二条",
+        "",
+        "> [!warn] 下一个检查点",
+        "> 出分后重算。",
+        "",
+        "| 序 | 标签 |",
+        "|---|---|",
+        "| 1 | 冲 |",
+    ])
+
+    def setUp(self):
+        self.html, _ = rr.markdown_to_html(self.MD)
+
+    def test_kpi_cards(self):
+        self.assertIn('<div class="kpis" style="grid-template-columns:repeat(2,1fr)">', self.html)
+        self.assertIn('<span class="num">21</span>', self.html)
+        self.assertIn('<span style="font-size:11pt">浙江外国语学院', self.html)  # 汉字多的值用小一号
+
+    def test_outcome_strip(self):
+        self.assertIn('<svg class="chart"', self.html)
+        self.assertIn("你最终会被哪里录取", self.html)
+        self.assertIn("红色是滑档", self.html)
+
+    def test_callout_boxes(self):
+        self.assertIn('<div class="box key"><h4>核心结论</h4><ol><li>第一条</li>', self.html)
+        self.assertIn('<div class="box warn"><h4>下一个检查点</h4><p>出分后重算。</p></div>', self.html)
+        self.assertNotIn("[!key]", self.html)
+
+    def test_tag_cells(self):
+        self.assertIn("<span class='tag 冲'>冲</span>", self.html)
+
+
 class TestValidation(unittest.TestCase):
     def test_well_ordered_sections_no_warning(self):
         _, sections = rr.markdown_to_html(rr.split_front_matter(SAMPLE_MD)[1])

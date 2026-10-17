@@ -72,7 +72,7 @@
 - **和父母的分歧**：换成父母"前景优先"的排序重算，最可能的去向不变。分歧只牵动约四分之一的结果，比一家人吵起来时想的小得多。
 - **钱**：按浙外 2026 年的收费标准，每年约 2.2 万，预算内还剩 4000。
 
-<img src="assets/readme/demo-gaokao.png" width="780" alt="小禾的志愿表">
+<img src="assets/readme/demo-gaokao.png" width="780" alt="小禾的报告摘要">
 
 [完整报告](skills/zhiqu/examples/demo_2027_gaokao/report.md) · [PDF](skills/zhiqu/examples/demo_2027_gaokao/report.pdf) · [画像](skills/zhiqu/examples/demo_2027_gaokao/profile.txt)
 
@@ -87,7 +87,7 @@
 - **模拟初试成绩**：330、355、380、400 四个分数各放进两年的录取分布里看位置。不编个人录取概率。
 - **钱**：华工 2026 年电气专硕学费 8000 元一年，加住宿和生活，三年约 7.6 万，在家里预算内。
 
-<img src="assets/readme/demo-grad.png" width="780" alt="小林的分数情景对照">
+<img src="assets/readme/demo-grad.png" width="780" alt="小林的报告摘要">
 
 [完整报告](skills/zhiqu-grad/examples/demo_2027/report.md) · [PDF](skills/zhiqu-grad/examples/demo_2027/report.pdf) · [画像](skills/zhiqu-grad/examples/demo_2027/profile.txt)
 
@@ -101,7 +101,7 @@
 - **专升本**：留作有条件的选项。先算清家里能不能承担两年没有全职工资。
 - **模拟两个 offer**：省会的直签岗位税前更高，但要租房，每月只剩约 1700 元。离家近的国企派遣岗位工资更低，社保还得按 2026 年 4699 元的基数下限缴，但住在家里，每月能剩约 2320 元，另有公积金。**钱多不等于剩得多**；而"国企"岗位的合同其实签在派遣公司，要先问清能不能转直签。
 
-<img src="assets/readme/demo-career.png" width="780" alt="小宁的 offer 比较">
+<img src="assets/readme/demo-career.png" width="780" alt="小宁的报告摘要">
 
 [完整报告](skills/zhiqu-career/examples/demo_2027/report.md) · [PDF](skills/zhiqu-career/examples/demo_2027/report.pdf) · [画像](skills/zhiqu-career/examples/demo_2027/profile.txt)
 

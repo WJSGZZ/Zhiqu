@@ -24,6 +24,14 @@ Markdown 格式：
   链接 `[文字](网址)`、无序/有序列表（一层嵌套）、GitHub 风格的 `|` 表格、
   引用块 `> `、分隔线 `---`/`***`。不支持原始 HTML 透传，文本一律转义。
 
+  与高考版 report.py 同款的版面元素（三版报告视觉一致，摘要页尽量都用上）：
+    提示框：引用块首行写 `> [!key] 核心结论`（绿边）、`> [!warn] 接下来要做的事`
+           （琥珀边）或 `> [!note] 标题`（无色边），其后各行是框内正文，可含列表。
+    数字卡：`::: kpi` 与 `:::` 之间每行 `- 标签 | 数值 | 一句说明`，最多 4 张。
+    落点条：`::: strip 标题` 与 `:::` 之间每行 `- 志愿名 | 概率`（如 73.3%），
+           可加一行 `- 滑档 | 概率`；按志愿顺序画“最终会被哪里录取”的色条。
+    表格里内容恰为“冲”“稳”“保”的格子自动画成彩色标签。
+
 找不到浏览器时会只输出 HTML，并提示用浏览器"打印 → 存储为 PDF"（与
 report.py 行为一致）。
 """
@@ -52,8 +60,12 @@ try:
     _report = _load_report_module()
     CSS = _report.CSS
     find_browser = _report.find_browser
+    outcome_strip = _report.outcome_strip
+    STRIP_CAP = _report.STRIP_CAP
 except Exception:  # pragma: no cover - 极端情况下 report.py 缺失或加载失败
     CSS = ""
+    outcome_strip = None
+    STRIP_CAP = ""
 
     def find_browser():
         return None
@@ -130,6 +142,48 @@ _OL_RE = re.compile(r"^(\s*)\d+[.)]\s+(.*)$")
 _HR_RE = re.compile(r"^\s*(---+|\*\*\*+|___+)\s*$")
 _QUOTE_RE = re.compile(r"^>\s?(.*)$")
 _TABLE_SEP_RE = re.compile(r"^\s*\|?\s*:?-{2,}:?\s*(\|\s*:?-{2,}:?\s*)*\|?\s*$")
+_FENCE_RE = re.compile(r"^:::\s*(kpi|strip)\s*(.*)$")
+_CALLOUT_RE = re.compile(r"^\[!(key|warn|note)\]\s*(.*)$")
+_TAGS = ("冲", "稳", "保")
+
+
+def _fence_items(lines):
+    """`- a | b | c` 形式的行 → [[a, b, c], ...]。"""
+    return [_split_table_row(re.sub(r"^\s*[-*+]\s+", "", ln)) for ln in lines if ln.strip()]
+
+
+def _pct(text):
+    m = re.search(r"([\d.]+)\s*%", text)
+    return float(m.group(1)) / 100 if m else 0.0
+
+
+def render_fence(kind, title, lines):
+    """渲染 `::: kpi` 数字卡与 `::: strip` 落点条（与 report.py 摘要页同款）。"""
+    items = _fence_items(lines)
+    if kind == "kpi":
+        cards = []
+        for row in items[:4]:
+            label, value, note = (row + ["", "", ""])[:3]
+            # 数字为主的短值用大字；汉字多的（如去向、方向）用小一号，免得在窄卡里折行
+            cjk = sum(ord(c) > 0x2E80 for c in value)
+            big = ' class="num"' if cjk <= 4 and len(value) <= 12 else ' style="font-size:11pt"'
+            cards.append(f"<div><b>{render_inline(label)}</b><span{big}>{render_inline(value)}</span>"
+                         + (f"<em>{render_inline(note)}</em>" if note else "") + "</div>")
+        return f'<div class="kpis" style="grid-template-columns:repeat({max(len(cards), 1)},1fr)">' + "".join(cards) + "</div>"
+    if outcome_strip is None:
+        return ""
+    pairs = [(r[0], _pct(r[1] if len(r) > 1 else "")) for r in items]
+    pfall = sum(p for name, p in pairs if name == "滑档")
+    pairs = [(name, p) for name, p in pairs if name != "滑档"]
+    cap = STRIP_CAP + "浅色是最终录取概率不到 5% 的志愿" + ("；红色是滑档" if pfall else "") + "。"
+    return (f'<div class="fig"><div class="ttl">{render_inline(title or "你最终会被哪里录取")}</div>'
+            + outcome_strip(pairs, pfall) + f'<div class="cap">{E(cap)}</div></div>')
+
+
+def _cell(text):
+    if text in _TAGS:
+        return f"<td class='c'><span class='tag {text}'>{text}</span></td>"
+    return f"<td>{render_inline(text)}</td>"
 
 
 def _split_table_row(line):
@@ -239,6 +293,17 @@ def markdown_to_html(body):
             i += 1
             continue
 
+        fm = _FENCE_RE.match(line.strip())
+        if fm:
+            buf = []
+            i += 1
+            while i < n and lines[i].strip() != ":::":
+                buf.append(lines[i])
+                i += 1
+            i += 1
+            out.append(render_fence(fm.group(1), fm.group(2).strip(), buf))
+            continue
+
         if _HR_RE.match(line):
             out.append("<hr>")
             i += 1
@@ -251,6 +316,12 @@ def markdown_to_html(body):
             while i < n and _QUOTE_RE.match(lines[i]):
                 buf.append(_QUOTE_RE.match(lines[i]).group(1))
                 i += 1
+            cm = _CALLOUT_RE.match(buf[0].strip())
+            if cm:
+                inner, _ = markdown_to_html("\n".join(buf[1:]))
+                cls = "" if cm.group(1) == "note" else " " + cm.group(1)
+                out.append(f'<div class="box{cls}"><h4>{render_inline(cm.group(2))}</h4>{inner}</div>')
+                continue
             para = " ".join(x for x in buf if x is not None).strip()
             out.append(f"<blockquote><p>{render_inline(para)}</p></blockquote>")
             continue
@@ -266,7 +337,7 @@ def markdown_to_html(body):
             out.append("<table><thead><tr>" + "".join(f"<th>{render_inline(c)}</th>" for c in header) + "</tr></thead><tbody>")
             for r in rows:
                 cells = r + [""] * (len(header) - len(r))
-                out.append("<tr>" + "".join(f"<td>{render_inline(c)}</td>" for c in cells[:len(header)]) + "</tr>")
+                out.append("<tr>" + "".join(_cell(c) for c in cells[:len(header)]) + "</tr>")
             out.append("</tbody></table>")
             continue
 
@@ -285,7 +356,7 @@ def markdown_to_html(body):
         i += 1
         while i < n and lines[i].strip() and not _ATX_RE.match(lines[i]) and not _HR_RE.match(lines[i]) \
                 and not _UL_RE.match(lines[i]) and not _OL_RE.match(lines[i]) and not _QUOTE_RE.match(lines[i]) \
-                and "|" not in lines[i]:
+                and "|" not in lines[i] and not _FENCE_RE.match(lines[i].strip()):
             buf.append(lines[i])
             i += 1
         out.append(f"<p>{render_inline(' '.join(buf))}</p>")
