@@ -16,27 +16,33 @@ import json
 from collections import defaultdict
 
 
-def target_index(path, key):
-    """(院校代码, 专业名或组号) → 目标年位次列表；没有位次的行记为 None。"""
+def target_index(path, key, school="code"):
+    """(院校代码或校名, 专业名或组号) → 目标年 [位次, 选科要求] 列表；没有位次的记为 None。
+    院校代号每年重编的省份（河北）用 school="name"。"""
     idx = defaultdict(list)
     with open(path, encoding="utf-8") as f:
         for r in csv.DictReader(f):
-            k = (r["code"].strip(), (r.get("major") if key == "major" else r.get("group") or "").strip())
+            k = ((r["name"] if school == "name" else r["code"]).strip(),
+                 (r.get("major") if key == "major" else r.get("group") or "").strip())
             rank = r.get("rank", "").strip()
-            idx[k].append(int(float(rank)) if rank else None)
+            idx[k].append((int(float(rank)) if rank else None, (r.get("major") or "").strip()))
     return idx
 
 
-def judge(result, idx, rank, key):
+def judge(result, idx, rank, key, school="code", requirement=None):
+    """requirement：专业组省份可给 {志愿 id: 往年选科要求}；目标年同组号但选科要求不同，视为另一组，不对照。"""
     rows, landing, status, blocker = [], None, None, None
     for item in result["list"]:
-        k = (item.get("code", "").strip(), (item["id"].split("-", 1)[1] if key == "major" else item.get("group", "")).strip())
+        who = item["name"].split("·", 1)[0] if school == "name" else item.get("code", "")
+        k = (who.strip(), (item["id"].split("-", 1)[1] if key == "major" else item.get("group", "")).strip())
         recs = idx.get(k, [])
-        if len(recs) == 1 and recs[0] is not None:
-            actual, cleared, note = recs[0], recs[0] >= rank, ""
+        changed = key == "group" and requirement and len(recs) == 1 and recs[0][1] != requirement.get(item["id"], recs[0][1])
+        if len(recs) == 1 and recs[0][0] is not None and not changed:
+            actual, cleared, note = recs[0][0], recs[0][0] >= rank, ""
         else:
             actual, cleared = None, None
-            note = "目标年无此条目" if not recs else ("目标年记录不唯一" if len(recs) > 1 else "目标年无位次（可能未满额）")
+            note = ("目标年无此条目" if not recs else "目标年记录不唯一" if len(recs) > 1
+                    else "目标年同组号但选科要求变了，视为另一组" if changed else "目标年无位次（可能未满额）")
         rows.append(dict(order=item["order"], id=item["id"], name=item["name"], tag=item.get("tag", ""),
                          p_clear=item["p_clear"], expected_cut_rank=item.get("expected_cut_rank"),
                          actual_rank=actual, cleared=cleared, note=note))
@@ -63,11 +69,12 @@ def main():
     ap.add_argument("--target", required=True, help="目标年官方投档 CSV")
     ap.add_argument("--rank", type=int, required=True)
     ap.add_argument("--key", choices=["major", "group"], default="major")
+    ap.add_argument("--school", choices=["code", "name"], default="code", help="院校代号每年重编的省份（河北）用 name")
     ap.add_argument("--json")
     a = ap.parse_args()
     with open(a.result, encoding="utf-8") as f:
         result = json.load(f)
-    out = judge(result, target_index(a.target, a.key), a.rank, a.key)
+    out = judge(result, target_index(a.target, a.key, a.school), a.rank, a.key, a.school)
     print(f"位次 {a.rank}：{out['status']}" + (f"，第 {out['landing_order']} 个志愿 {out['landing']}" if out["landing"] else "")
           + (f"（第 {out['blocker_order']} 个志愿在目标年无法对应）" if out["blocker_order"] else ""))
     print("| 序 | 志愿 | 标签 | 预测过线概率 | 预测线 | 实际线 | 实际过线 | 说明 |")

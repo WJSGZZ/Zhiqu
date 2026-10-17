@@ -208,10 +208,26 @@ class RetroSample(unittest.TestCase):
 class RetroJudge(unittest.TestCase):
     def judge(self, cuts, rank=100):
         import retro_judge
-        idx = {("A", f"m{k}"): [c] for k, c in enumerate(cuts) if c != "missing"}
+        idx = {("A", f"m{k}"): [(c, "")] for k, c in enumerate(cuts) if c != "missing"}
         result = {"list": [{"order": k + 1, "id": f"A-m{k}", "code": "A", "name": f"m{k}", "p_clear": .5, "utility": 50}
                            for k in range(len(cuts))]}
         return retro_judge.judge(result, idx, rank, "major")
+
+    def test_name_key_for_provinces_that_renumber_codes(self):
+        import retro_judge
+        idx = {("甲校", "计算机"): [(150, "")]}
+        result = {"list": [{"order": 1, "id": "0142-计算机", "code": "0142", "name": "甲校·计算机", "p_clear": .5, "utility": 50}]}
+        out = retro_judge.judge(result, idx, 100, "major", school="name")
+        self.assertEqual((out["status"], out["landing_order"]), ("投档", 1))
+
+    def test_group_with_changed_requirement_is_not_compared(self):
+        import retro_judge
+        idx = {("A", "01"): [(150, "化学")], ("A", "02"): [(150, "不限")]}
+        result = {"list": [{"order": k + 1, "id": f"A-0{k + 1}", "code": "A", "group": f"0{k + 1}", "name": f"A·0{k + 1}组",
+                            "p_clear": .5, "utility": 50} for k in range(2)]}
+        out = retro_judge.judge(result, idx, 100, "group", requirement={"A-01": "化学和生物", "A-02": "不限"})
+        self.assertEqual((out["status"], out["blocker_order"]), ("无法判定", 1))
+        self.assertIn("选科要求变了", out["rows"][0]["note"])
 
     def test_first_cleared_entry_is_landing(self):
         out = self.judge([90, 120, 200])

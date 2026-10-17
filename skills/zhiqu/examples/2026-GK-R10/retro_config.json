@@ -1,0 +1,78 @@
+{
+ "note": "案例库事前登记（2026-10-17，运行判定前写入并提交）：模拟考生雨桐，只用 2023—2025 年官方数据出表，再用 2026 年官方投档表判定。打分规则在运行前写定，规则没覆盖的候选会报错而不是临时打分。",
+ "province": "hubei",
+ "series": "physics",
+ "key": "group",
+ "data_years": [
+  2023,
+  2024,
+  2025
+ ],
+ "target_year": 2026,
+ "score": 590,
+ "yfyd": "data/hubei/yfyd_physics_2026.csv",
+ "band": [
+  0.36,
+  2.1
+ ],
+ "public": true,
+ "in_provinces": "湖北省,湖南省,江苏省,浙江省,上海市,北京市,广东省,河南省,陕西省,重庆市,四川省",
+ "scales": {
+  "school": {
+   "range": [
+    3,
+    10
+   ],
+   "adjust": [
+    [
+     "师范",
+     1.5,
+     "师范院校，本人想当老师"
+    ]
+   ]
+  },
+  "major": [
+   [
+    ".*",
+    6,
+    "A",
+    "专业组（组内专业以 2026 年招生计划为准，本案例未逐组核对）"
+   ]
+  ],
+  "city": {
+   "武汉市": 10,
+   "长沙市": 7.5,
+   "南京市": 7.5,
+   "上海市": 7.5,
+   "杭州市": 7.5,
+   "北京市": 7,
+   "广州市": 7,
+   "_本省": 7,
+   "_外省": 5.5
+  },
+  "home": "湖北省"
+ },
+ "outlook_default": {
+  "A": 7
+ },
+ "direction_names": {
+  "A": "专业组"
+ },
+ "persona_config": "examples/2026-GK-R10/preferences_config.json",
+ "scenario": "student",
+ "predict": {
+  "drift": "auto",
+  "sigma_scale": 1.0,
+  "min_p": 0.02
+ },
+ "optimize": {
+  "slots": 45,
+  "u_fall": -100,
+  "max_fall": 0.005
+ },
+ "retake": {
+  "score_2025": 560,
+  "rank_2025": 36962,
+  "yfyd_2025": "data/hubei/yfyd_physics_2025.csv"
+ }
+}
