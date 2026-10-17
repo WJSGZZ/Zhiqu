@@ -23,17 +23,17 @@ import time
 E = html.escape
 
 CSS = r"""
-@page { size: A4; margin: 20mm 18mm 20mm 18mm; background: #FBF6E6;
-  @top-left { content: "__TOPLEFT__"; font: 8pt "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; color: #8C8472; }
-  @top-right { content: "__RUNHEAD__"; font: 8pt "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; color: #8C8472; }
-  @bottom-right { content: counter(page) " / " counter(pages); font: 8pt "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; color: #8C8472; }
-  @bottom-left { content: "仅供参考 · 以当年官方招生信息为准"; font: 8pt "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; color: #A39B87; }
+@page { size: A4; margin: 20mm 18mm 20mm 18mm; background: #EEE9DC;
+  @top-left { content: "__TOPLEFT__"; font: 8pt "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; color: #6E776E; }
+  @top-right { content: "__RUNHEAD__"; font: 8pt "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; color: #6E776E; }
+  @bottom-right { content: counter(page) " / " counter(pages); font: 8pt "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; color: #6E776E; }
+  @bottom-left { content: "仅供参考 · 以当年官方文件为准"; font: 8pt "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; color: #9CA197; }
 }
 @page cover { margin: 0; @top-left { content: none; } @top-right { content: none; } @bottom-right { content: none; } @bottom-left { content: none; } }
-:root { --sans: "PingFang SC","Source Han Sans SC","Noto Sans SC","Hiragino Sans GB","Microsoft YaHei",sans-serif; --ink:#161616; --soft:#3B3832; --muted:#66604F; --rule:#D9CFB4; --rule2:#BFB294;
-  --accent:#21473E; --accent2:#34685D; --pale:#EFE7D0; --amber:#9A6B1F; --red:#9B3B2E; --green:#2F6B4F; }
+:root { --sans: "PingFang SC","Source Han Sans SC","Noto Sans SC","Hiragino Sans GB","Microsoft YaHei",sans-serif; --ink:#222A26; --soft:#454E48; --muted:#6E776E; --rule:#D3CCB8; --rule2:#B5AD98;
+  --accent:#21473E; --accent2:#34685D; --pale:#E3DDCB; --amber:#A8772B; --red:#9B3B2E; --green:#34685D; }
 * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-html, body { background: #FBF6E6; }
+html, body { background: #EEE9DC; }
 body { margin: 0; color: var(--ink); font: 10pt/1.75 "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; font-feature-settings: "lnum"; }
 h1,h2,h3 { font-family: "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; font-weight: 700; color: var(--ink); }
 h2 { font-size: 18pt; letter-spacing: .5pt; margin: 0 0 4.5mm; padding-bottom: 2.5mm; border-bottom: 1.2pt solid var(--accent); break-after: avoid; }
@@ -51,18 +51,18 @@ svg.chart { width: 100%; height: auto; display: block; }
 .url { display: block; font: 7pt/1.35 var(--sans); color: var(--muted); word-break: break-all; margin-top: .6mm; }
 
 /* cover */
-.cover { page: cover; width: 210mm; height: 296mm; overflow: hidden; padding: 0; position: relative; background: #FBF6E6; break-after: page; }
-.cover .band { background: var(--accent); color: #F5EFDD; padding: 20mm 22mm 10mm; }
+.cover { page: cover; width: 210mm; height: 296mm; overflow: hidden; padding: 0; position: relative; background: #EEE9DC; break-after: page; }
+.cover .band { background: var(--accent); color: #F2EFE6; padding: 20mm 22mm 10mm; }
 .cover .kicker { font-size: 9pt; letter-spacing: 3pt; opacity: .85; }
-.cover h1 { color: #FBF6E6; font-size: 30pt; margin: 6mm 0 3mm; letter-spacing: 1pt; }
+.cover h1 { color: #EEE9DC; font-size: 30pt; margin: 6mm 0 3mm; letter-spacing: 1pt; }
 .cover .sub { font-size: 11pt; opacity: .9; }
 .cover .motto { margin-top: 6mm; font-size: 10.5pt; letter-spacing: 4pt; opacity: .78; display: flex; align-items: center; gap: 4mm; }
-.cover .motto::before { content: ""; width: 8mm; height: .6pt; background: #F5EFDD; opacity: .7; }
+.cover .motto::before { content: ""; width: 8mm; height: .6pt; background: #F2EFE6; opacity: .7; }
 .cover .meta { padding: 8mm 22mm 0; display: grid; grid-template-columns: repeat(3,1fr); gap: 4mm 8mm; }
 .cover .meta div { border-top: .8pt solid var(--rule2); padding-top: 2mm; }
 .cover .meta b { display:block; font-size: 8pt; color: var(--muted); font-weight: 500; letter-spacing: 1pt; }
 .cover .meta span { font-size: 12pt; }
-.cover .verdict { margin: 9mm 22mm 0; padding: 6mm 8mm; background: #FFFDF6; border-left: 3pt solid var(--accent); }
+.cover .verdict { margin: 9mm 22mm 0; padding: 6mm 8mm; background: #FAF7EE; border-left: 3pt solid var(--accent); }
 .cover .verdict b { display:block; font-size: 8pt; color: var(--accent); letter-spacing: 2pt; margin-bottom: 2mm; }
 .cover .verdict p { font-size: 14pt; line-height: 1.6; margin: 0; }
 .cover .verdict.long p { font-size: 11pt; line-height: 1.55; }
@@ -80,7 +80,7 @@ svg.chart { width: 100%; height: auto; display: block; }
 .kpis em { display:block; font: normal 7.8pt/1.5 var(--sans); color: var(--soft); margin-top: .5mm; }
 
 /* boxes */
-.box { background: #FFFDF6; border: .6pt solid var(--rule); padding: 4mm 5mm; margin: 3mm 0 4mm; }
+.box { background: #FAF7EE; border: .6pt solid var(--rule); padding: 4mm 5mm; margin: 3mm 0 4mm; }
 .box.key { border-left: 2.5pt solid var(--accent); }
 .box.warn { border-left: 2.5pt solid var(--amber); }
 .box h4 { margin: 0 0 1.5mm; font: 600 8.5pt var(--sans); letter-spacing: 1pt; color: var(--accent); }
@@ -101,7 +101,7 @@ tbody td { border-bottom: .4pt solid var(--rule); padding: 1.5mm 2mm; vertical-a
 tbody tr { break-inside: avoid; }
 td.r, th.r { text-align: right; font-variant-numeric: tabular-nums; }
 td.c, th.c { text-align: center; }
-tr.hl td { background: #F3EBD2; }
+tr.hl td { background: #E7EDE8; }
 .tag { display: inline-block; min-width: 7mm; text-align: center; font: 600 7.5pt/1.5 var(--sans); padding: .2mm 1.5mm; border-radius: .8mm; color: #fff; }
 .tag.冲 { background: var(--red); } .tag.稳 { background: var(--amber); } .tag.保 { background: var(--green); }
 
@@ -110,7 +110,7 @@ tr.hl td { background: #F3EBD2; }
 .grid2.wide { grid-template-columns: 1fr; }
 .card table { font-size: 8.3pt; margin: 2.5mm 0 0; }
 .card table thead th { border-top: .6pt solid var(--rule2); }
-.card { background: #FFFDF6; border-top: 1.6pt solid var(--accent2); padding: 4mm 5mm 3mm; }
+.card { background: #FAF7EE; border-top: 1.6pt solid var(--accent2); padding: 4mm 5mm 3mm; }
 .card h3 { margin: 0 0 1mm; }
 .card .fit { font: 600 7.8pt var(--sans); color: var(--accent); letter-spacing: 1pt; }
 .card dl { margin: 2mm 0 0; }
@@ -121,7 +121,7 @@ tr.hl td { background: #F3EBD2; }
 .fig .ttl { font: 600 8.8pt var(--sans); margin-bottom: 1.5mm; color: var(--soft); }
 .glossary dt { font-weight: 600; margin-top: 1.5mm; } .glossary dd { margin: 0 0 1mm; color: var(--soft); }
 ul.asklist { list-style: none; padding: 0; margin: 0 0 3mm; }
-ul.asklist li { padding: 2mm 0 2mm 4mm; border-left: 2pt solid var(--rule2); margin: 0 0 2mm; background: #FFFDF6; break-inside: avoid; }
+ul.asklist li { padding: 2mm 0 2mm 4mm; border-left: 2pt solid var(--rule2); margin: 0 0 2mm; background: #FAF7EE; break-inside: avoid; }
 ul.asklist li b { font-weight: 600; } ul.asklist li span { display: block; font-size: 8.5pt; color: var(--muted); margin-top: .5mm; }
 .toc { margin-top: 2mm; columns: 2; column-gap: 10mm; } .toc div { display: flex; border-bottom: .4pt dotted var(--rule2); padding: .8mm 0; break-inside: avoid; }
 .toc div span:first-child { width: 10mm; color: var(--accent); font-weight: 600; }
@@ -201,10 +201,10 @@ def bars_h(items, width=640, bar_h=13, gap=6, label_w=170, color="#34685D", fmt=
         y = i * (bar_h + gap) + 2
         bw = max(0.5, w_plot * v / vmax)
         lab = lab if len(lab) <= 16 else lab[:15] + "…"
-        out.append(f'<text x="{label_w - 6}" y="{y + bar_h - 3}" text-anchor="end" fill="#4A4740">{E(lab)}</text>')
-        out.append(f'<rect x="{label_w}" y="{y}" width="{w_plot}" height="{bar_h}" fill="#EFE7D0"/>')
+        out.append(f'<text x="{label_w - 6}" y="{y + bar_h - 3}" text-anchor="end" fill="#454E48">{E(lab)}</text>')
+        out.append(f'<rect x="{label_w}" y="{y}" width="{w_plot}" height="{bar_h}" fill="#E3DDCB"/>')
         out.append(f'<rect x="{label_w}" y="{y}" width="{bw:.1f}" height="{bar_h}" fill="{color}"/>')
-        out.append(f'<text x="{label_w + bw + 4:.1f}" y="{y + bar_h - 3}" fill="#1B1B1B">{E(fmt(v))}</text>')
+        out.append(f'<text x="{label_w + bw + 4:.1f}" y="{y + bar_h - 3}" fill="#222A26">{E(fmt(v))}</text>')
     out.append("</svg>")
     return "".join(out)
 
@@ -221,14 +221,14 @@ def strategy_chart(rows, width=640, fmt=None):
     for i, (n, eu, pf, hl) in enumerate(rows):
         y = i * (bar_h + gap) + 3
         bw = max(28, w_plot * max(eu, 0) / vmax)
-        col = "#21473E" if hl else "#C9BB98"
-        txt = "#FBF6E6" if hl else "#3B3832"
-        out.append(f'<text x="{label_w - 8}" y="{y + bar_h - 6}" text-anchor="end" fill="#1B1B1B" font-weight="{600 if hl else 400}">{E(n)}</text>')
-        out.append(f'<rect x="{label_w}" y="{y}" width="{w_plot}" height="{bar_h}" fill="#F1EAD6"/>')
+        col = "#21473E" if hl else "#CEC6B1"
+        txt = "#EEE9DC" if hl else "#454E48"
+        out.append(f'<text x="{label_w - 8}" y="{y + bar_h - 6}" text-anchor="end" fill="#222A26" font-weight="{600 if hl else 400}">{E(n)}</text>')
+        out.append(f'<rect x="{label_w}" y="{y}" width="{w_plot}" height="{bar_h}" fill="#E3DDCB"/>')
         out.append(f'<rect x="{label_w}" y="{y}" width="{bw:.1f}" height="{bar_h}" fill="{col}"/>')
         out.append(f'<text x="{label_w + bw - 6:.1f}" y="{y + bar_h - 6}" text-anchor="end" fill="{txt}" font-weight="600">{eu:.1f}</text>')
         fall = fmt(pf) if fmt else f"{pf:.1%}"
-        out.append(f'<text x="{width - 4}" y="{y + bar_h - 6}" text-anchor="end" fill="{"#9B3B2E" if pf > 0.01 else "#66604F"}">滑档 {E(fall)}</text>')
+        out.append(f'<text x="{width - 4}" y="{y + bar_h - 6}" text-anchor="end" fill="{"#9B3B2E" if pf > 0.01 else "#6E776E"}">滑档 {E(fall)}</text>')
     out.append("</svg>")
     return "".join(out)
 
@@ -254,8 +254,8 @@ def outcome_strip(items, pfall, width=640, fmt=None):
             col = strong[k % len(strong)]
             k += 1
         else:
-            col = "#D8CFB6"
-        out.append(f'<rect x="{x:.1f}" y="0" width="{w:.1f}" height="{h}" fill="{col}" stroke="#FBF6E6" stroke-width="1"/>')
+            col = "#CEC6B1"
+        out.append(f'<rect x="{x:.1f}" y="0" width="{w:.1f}" height="{h}" fill="{col}" stroke="#EEE9DC" stroke-width="1"/>')
         pl = f"{p:.0%}" if fmt is None else fmt(p)
         tail = f" · {pl}" if pl else ""
         # 从长到短取第一个放得下的标签，窄段不把字截断
@@ -263,7 +263,7 @@ def outcome_strip(items, pfall, width=640, fmt=None):
         if fits:
             out.append(f'<text x="{x + 6:.1f}" y="{h / 2 + 3.5:.1f}" fill="#fff" font-weight="600">{fits[0]}</text>')
         elif w > 14:
-            ink = "#fff" if p >= 0.05 else "#3B3832"
+            ink = "#fff" if p >= 0.05 else "#454E48"
             out.append(f'<text x="{x + w / 2:.1f}" y="{h / 2 + 3.5:.1f}" fill="{ink}" text-anchor="middle">{i + 1}</text>')
         x += w
     if pfall > 0:
@@ -598,7 +598,7 @@ def build(rep, opt):
                   ("批次", m.get("batch", "–")), ("分数", m.get("score", "–")), ("全省位次", m.get("rank", "–")), ("报告日期", m.get("date", "–"))]
                  + ([("报告编号", m["case_id"])] if m.get("case_id") else []) + ([("生成日期", m["generated_on"])] if m.get("generated_on") else []))
     dense = " dense" if len(meta_rows) > 6 else ""  # 封面信息超过两行时收紧间距，避免目录压到页脚
-    cover = (f'<div class="cover{dense}"><div class="band"><div class="kicker">知 衢 · 志 愿 填 报 决 策 报 告</div>'
+    cover = (f'<div class="cover{dense}"><div class="band"><div class="kicker">知 衢 · 决 策 报 告</div>'
              f'<h1>{E(m.get("title", "志愿填报决策报告"))}</h1><div class="sub">{E(m.get("subtitle", ""))}</div>'
              '<div class="motto">知其所往，方行其衢。</div></div>'
              '<div class="meta">'

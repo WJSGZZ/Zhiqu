@@ -1,15 +1,15 @@
 <!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>读研，怎样让这几年值得</title><style>
-@page { size: A4; margin: 20mm 18mm 20mm 18mm; background: #FBF6E6;
-  @top-left { content: "知衢 · 读研，怎样让这几年值得"; font: 8pt "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; color: #8C8472; }
-  @top-right { content: "小林 · 读研版"; font: 8pt "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; color: #8C8472; }
-  @bottom-right { content: counter(page) " / " counter(pages); font: 8pt "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; color: #8C8472; }
-  @bottom-left { content: "仅供参考 · 以当年官方招生信息为准"; font: 8pt "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; color: #A39B87; }
+@page { size: A4; margin: 20mm 18mm 20mm 18mm; background: #EEE9DC;
+  @top-left { content: "知衢 · 读研，怎样让这几年值得"; font: 8pt "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; color: #6E776E; }
+  @top-right { content: "小林 · 读研版"; font: 8pt "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; color: #6E776E; }
+  @bottom-right { content: counter(page) " / " counter(pages); font: 8pt "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; color: #6E776E; }
+  @bottom-left { content: "仅供参考 · 以当年官方文件为准"; font: 8pt "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; color: #9CA197; }
 }
 @page cover { margin: 0; @top-left { content: none; } @top-right { content: none; } @bottom-right { content: none; } @bottom-left { content: none; } }
-:root { --sans: "PingFang SC","Source Han Sans SC","Noto Sans SC","Hiragino Sans GB","Microsoft YaHei",sans-serif; --ink:#161616; --soft:#3B3832; --muted:#66604F; --rule:#D9CFB4; --rule2:#BFB294;
-  --accent:#21473E; --accent2:#34685D; --pale:#EFE7D0; --amber:#9A6B1F; --red:#9B3B2E; --green:#2F6B4F; }
+:root { --sans: "PingFang SC","Source Han Sans SC","Noto Sans SC","Hiragino Sans GB","Microsoft YaHei",sans-serif; --ink:#222A26; --soft:#454E48; --muted:#6E776E; --rule:#D3CCB8; --rule2:#B5AD98;
+  --accent:#21473E; --accent2:#34685D; --pale:#E3DDCB; --amber:#A8772B; --red:#9B3B2E; --green:#34685D; }
 * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-html, body { background: #FBF6E6; }
+html, body { background: #EEE9DC; }
 body { margin: 0; color: var(--ink); font: 10pt/1.75 "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; font-feature-settings: "lnum"; }
 h1,h2,h3 { font-family: "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; font-weight: 700; color: var(--ink); }
 h2 { font-size: 18pt; letter-spacing: .5pt; margin: 0 0 4.5mm; padding-bottom: 2.5mm; border-bottom: 1.2pt solid var(--accent); break-after: avoid; }
@@ -27,18 +27,18 @@ svg.chart { width: 100%; height: auto; display: block; }
 .url { display: block; font: 7pt/1.35 var(--sans); color: var(--muted); word-break: break-all; margin-top: .6mm; }
 
 /* cover */
-.cover { page: cover; width: 210mm; height: 296mm; overflow: hidden; padding: 0; position: relative; background: #FBF6E6; break-after: page; }
-.cover .band { background: var(--accent); color: #F5EFDD; padding: 20mm 22mm 10mm; }
+.cover { page: cover; width: 210mm; height: 296mm; overflow: hidden; padding: 0; position: relative; background: #EEE9DC; break-after: page; }
+.cover .band { background: var(--accent); color: #F2EFE6; padding: 20mm 22mm 10mm; }
 .cover .kicker { font-size: 9pt; letter-spacing: 3pt; opacity: .85; }
-.cover h1 { color: #FBF6E6; font-size: 30pt; margin: 6mm 0 3mm; letter-spacing: 1pt; }
+.cover h1 { color: #EEE9DC; font-size: 30pt; margin: 6mm 0 3mm; letter-spacing: 1pt; }
 .cover .sub { font-size: 11pt; opacity: .9; }
 .cover .motto { margin-top: 6mm; font-size: 10.5pt; letter-spacing: 4pt; opacity: .78; display: flex; align-items: center; gap: 4mm; }
-.cover .motto::before { content: ""; width: 8mm; height: .6pt; background: #F5EFDD; opacity: .7; }
+.cover .motto::before { content: ""; width: 8mm; height: .6pt; background: #F2EFE6; opacity: .7; }
 .cover .meta { padding: 8mm 22mm 0; display: grid; grid-template-columns: repeat(3,1fr); gap: 4mm 8mm; }
 .cover .meta div { border-top: .8pt solid var(--rule2); padding-top: 2mm; }
 .cover .meta b { display:block; font-size: 8pt; color: var(--muted); font-weight: 500; letter-spacing: 1pt; }
 .cover .meta span { font-size: 12pt; }
-.cover .verdict { margin: 9mm 22mm 0; padding: 6mm 8mm; background: #FFFDF6; border-left: 3pt solid var(--accent); }
+.cover .verdict { margin: 9mm 22mm 0; padding: 6mm 8mm; background: #FAF7EE; border-left: 3pt solid var(--accent); }
 .cover .verdict b { display:block; font-size: 8pt; color: var(--accent); letter-spacing: 2pt; margin-bottom: 2mm; }
 .cover .verdict p { font-size: 14pt; line-height: 1.6; margin: 0; }
 .cover .verdict.long p { font-size: 11pt; line-height: 1.55; }
@@ -56,7 +56,7 @@ svg.chart { width: 100%; height: auto; display: block; }
 .kpis em { display:block; font: normal 7.8pt/1.5 var(--sans); color: var(--soft); margin-top: .5mm; }
 
 /* boxes */
-.box { background: #FFFDF6; border: .6pt solid var(--rule); padding: 4mm 5mm; margin: 3mm 0 4mm; }
+.box { background: #FAF7EE; border: .6pt solid var(--rule); padding: 4mm 5mm; margin: 3mm 0 4mm; }
 .box.key { border-left: 2.5pt solid var(--accent); }
 .box.warn { border-left: 2.5pt solid var(--amber); }
 .box h4 { margin: 0 0 1.5mm; font: 600 8.5pt var(--sans); letter-spacing: 1pt; color: var(--accent); }
@@ -77,7 +77,7 @@ tbody td { border-bottom: .4pt solid var(--rule); padding: 1.5mm 2mm; vertical-a
 tbody tr { break-inside: avoid; }
 td.r, th.r { text-align: right; font-variant-numeric: tabular-nums; }
 td.c, th.c { text-align: center; }
-tr.hl td { background: #F3EBD2; }
+tr.hl td { background: #E7EDE8; }
 .tag { display: inline-block; min-width: 7mm; text-align: center; font: 600 7.5pt/1.5 var(--sans); padding: .2mm 1.5mm; border-radius: .8mm; color: #fff; }
 .tag.冲 { background: var(--red); } .tag.稳 { background: var(--amber); } .tag.保 { background: var(--green); }
 
@@ -86,7 +86,7 @@ tr.hl td { background: #F3EBD2; }
 .grid2.wide { grid-template-columns: 1fr; }
 .card table { font-size: 8.3pt; margin: 2.5mm 0 0; }
 .card table thead th { border-top: .6pt solid var(--rule2); }
-.card { background: #FFFDF6; border-top: 1.6pt solid var(--accent2); padding: 4mm 5mm 3mm; }
+.card { background: #FAF7EE; border-top: 1.6pt solid var(--accent2); padding: 4mm 5mm 3mm; }
 .card h3 { margin: 0 0 1mm; }
 .card .fit { font: 600 7.8pt var(--sans); color: var(--accent); letter-spacing: 1pt; }
 .card dl { margin: 2mm 0 0; }
@@ -97,7 +97,7 @@ tr.hl td { background: #F3EBD2; }
 .fig .ttl { font: 600 8.8pt var(--sans); margin-bottom: 1.5mm; color: var(--soft); }
 .glossary dt { font-weight: 600; margin-top: 1.5mm; } .glossary dd { margin: 0 0 1mm; color: var(--soft); }
 ul.asklist { list-style: none; padding: 0; margin: 0 0 3mm; }
-ul.asklist li { padding: 2mm 0 2mm 4mm; border-left: 2pt solid var(--rule2); margin: 0 0 2mm; background: #FFFDF6; break-inside: avoid; }
+ul.asklist li { padding: 2mm 0 2mm 4mm; border-left: 2pt solid var(--rule2); margin: 0 0 2mm; background: #FAF7EE; break-inside: avoid; }
 ul.asklist li b { font-weight: 600; } ul.asklist li span { display: block; font-size: 8.5pt; color: var(--muted); margin-top: .5mm; }
 .toc { margin-top: 2mm; columns: 2; column-gap: 10mm; } .toc div { display: flex; border-bottom: .4pt dotted var(--rule2); padding: .8mm 0; break-inside: avoid; }
 .toc div span:first-child { width: 10mm; color: var(--accent); font-weight: 600; }
