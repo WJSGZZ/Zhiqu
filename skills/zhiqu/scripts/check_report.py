@@ -207,8 +207,9 @@ def check_sections(rep, result=None):
     if result is not None:
         notes = rep.get('list_notes', {})
         n = len(result.get('list', []))
-        if len(notes) < max(10, n // 4):
-            errs.append(f'list_notes 至少覆盖 {max(10, n // 4)} 个志愿（现有 {len(notes)}）')
+        need = min(n, max(10, n // 4))  # 志愿表不足 10 条时，逐条都要说明
+        if len(notes) < need:
+            errs.append(f'list_notes 至少覆盖 {need} 个志愿（现有 {len(notes)}）')
         unknown = set(notes) - {x['name'] for x in result.get('list', [])}
         if unknown:
             errs.append('list_notes 含不在志愿表中的名称：' + '、'.join(sorted(unknown)[:3]))

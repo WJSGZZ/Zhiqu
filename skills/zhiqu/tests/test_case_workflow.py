@@ -319,28 +319,45 @@ if __name__ == "__main__":
 
 
 class CaseLibrary(unittest.TestCase):
-    """案例库（examples/2026-GK-R02…）：报告里写的真实结果与最可能去向，必须和计算文件一致。"""
+    """案例库（examples/2026-GK-R02…）：完整版报告由计算结果与手写内容生成；同样的输入必须得到同样的报告。"""
 
-    def test_reports_match_hindsight(self):
+    def cases(self):
         import glob
-        cases = [d for d in sorted(glob.glob(os.path.join(ROOT, "examples", "2026-GK-R*")))
-                 if os.path.exists(os.path.join(d, "report.md"))]
+        return [d for d in sorted(glob.glob(os.path.join(ROOT, "examples", "2026-GK-R*")))
+                if os.path.exists(os.path.join(d, "narrative.json"))]
+
+    def test_reports_regenerate_identically(self):
+        sys.path.insert(0, os.path.join(ROOT, "scripts"))
+        import case_report
+        cases = self.cases()
         self.assertGreaterEqual(len(cases), 11)
-        clean = lambda s: s.replace("[公办]", "").replace("[民办]", "")
         for d in cases:
+            with self.subTest(case=os.path.basename(d)):
+                with open(os.path.join(d, "report.json"), encoding="utf-8") as f:
+                    saved = json.load(f)
+                self.assertEqual(case_report.build(d, render=False), saved)
+
+    def test_no_markup_leaks_into_prose(self):
+        """手写内容里不能混进简版报告的排版标记（::: 卡片、表格竖线、** 粗体）。"""
+        for d in self.cases():
+            with open(os.path.join(d, "report.json"), encoding="utf-8") as f:
+                rep = json.load(f)
+            texts = [rep["summary"]["headline"]] + rep["summary"]["points"] + rep["summary"]["after_the_fact"] + rep["why"]
+            for t in texts:
+                self.assertNotRegex(t, r":::|\*\*|\s\|\s", f"{os.path.basename(d)}：{t[:40]}")
+
+    def test_reports_state_the_real_outcome(self):
+        import glob
+        for d in self.cases():
             run = glob.glob(os.path.join(d, "retro_ranks", "*"))[0]
             with open(os.path.join(run, "hindsight.json"), encoding="utf-8") as f:
                 h = json.load(f)
-            with open(os.path.join(run, "result.json"), encoding="utf-8") as f:
-                r = json.load(f)
-            with open(os.path.join(d, "report.md"), encoding="utf-8") as f:
-                text = f.read()
-            top = max(r["list"], key=lambda x: x["p_land"])
-            self.assertIn(f"{clean(top['name'])} | 概率约 {top['p_land']:.0%}", text, d)
-            if h["status"] == "投档":
-                self.assertIn(f"第 {h['landing_order']} 志愿 · {clean(h['landing'])}", text, d)
-            else:
-                self.assertIn("无法判定", text, d)
+            with open(os.path.join(d, "report.json"), encoding="utf-8") as f:
+                rep = json.load(f)
+            notes = " ".join(rep["hindsight"]["notes"])
+            self.assertIn(h["status"], notes, d)
+            if h["landing"]:
+                self.assertIn(h["landing"].replace("[公办]", "").replace("[民办]", ""), notes, d)
 
 
 class ScoreTable(unittest.TestCase):

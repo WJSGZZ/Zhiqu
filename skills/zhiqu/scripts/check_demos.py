@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
-"""Validate the three simulated 2027 planning demos and reproduce their numbers.
+"""Validate the simulated 2027 grad and career planning demos and reproduce their numbers.
 
 Run from any directory. --write updates calculations.json from explicit scenario
 assumptions; without it saved outputs must match. Each demo also has a clearly
-labelled simulated follow-up stage (模拟出分后 / 模拟初试成绩 / 模拟offer):
-the gaokao optimizer runs are re-executed and must reproduce the saved results,
-offer take-home pay is recomputed from explicit tax and contribution rules, and
-the grad score reference must carry official statistics. No model is changed.
+labelled simulated follow-up stage (模拟初试成绩 / 模拟offer): offer take-home pay
+is recomputed from explicit tax and contribution rules, and the grad score
+reference must carry official statistics. No model is changed. Gaokao examples
+are the case library (examples/2026-GK-R*), checked by retro_run.py and
+case_report.py instead.
 """
 import argparse
 import json
@@ -19,7 +20,6 @@ from decision_evidence import validate_evidence
 
 SKILLS = Path(__file__).resolve().parents[2]
 DEMO_PATHS = (
-    SKILLS / 'zhiqu/examples/demo_2027_gaokao',
     SKILLS / 'zhiqu-grad/examples/demo_2027',
     SKILLS / 'zhiqu-career/examples/demo_2027',
 )
@@ -185,7 +185,7 @@ def main():
     for path in DEMO_PATHS:
         name, result = check(path, args.write)
         print(name + ': ' + json.dumps(result, ensure_ascii=False))
-    print('3 simulated demos: birth recalculation, timeline, evidence scope, budgets and simulated follow-ups passed.')
+    print(f'{len(DEMO_PATHS)} simulated demos: birth recalculation, timeline, evidence scope, budgets and simulated follow-ups passed.')
 
 
 if __name__ == '__main__':

@@ -103,7 +103,7 @@ cd "$DEST/zhiqu"
 python3 scripts/optimize.py examples/candidates_demo.csv --rank 30000 --slots 12 --u-fall -60
 ```
 
-输出一张探索用志愿表后，再运行 `python3 scripts/check_demos.py`，验证三版示例及八字依赖。`check_family.py` 是仓库级检查，需在含问卷的完整仓库中运行。正式填报须使用已核实资格证据与 `--decision-mode formal --target-year 年份`；示例只演示计算。更新时先 `git pull`，删除旧的四技能及共用目录后重新复制。
+输出一张探索用志愿表后，再运行 `python3 scripts/check_demos.py`，验证读研、求职示例及八字依赖。`check_family.py` 是仓库级检查，需在含问卷的完整仓库中运行。正式填报须使用已核实资格证据与 `--decision-mode formal --target-year 年份`；示例只演示计算。更新时先 `git pull`，删除旧的四技能及共用目录后重新复制。
 
 ### 2. 填写问卷
 
@@ -186,7 +186,7 @@ AGENTS.md           贡献者（含 AI Agent）工作规范
 ```bash
 python3 -m unittest discover -s skills/zhiqu/tests    # 单元测试
 python3 skills/zhiqu/scripts/check_family.py          # 引用、问卷节名、报告结构、复核期限
-python3 skills/zhiqu/scripts/check_demos.py           # 复现三个示例的排盘与计算
+python3 skills/zhiqu/scripts/check_demos.py           # 复现读研、求职示例的排盘与计算
 python3 skills/zhiqu/scripts/validate_data.py         # 数据校验
 ```
 

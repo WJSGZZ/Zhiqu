@@ -9,7 +9,7 @@ python3 scripts/optimize.py 候选池.csv --rank <位次> --slots <志愿数> --
 python3 scripts/report.py report.json --opt result.json --out 志愿填报决策报告.pdf
 ```
 
-`report.py` 用本机的 Chrome 或 Edge 打印 PDF（浅黄底、黑字、A4、带页眉页码）。找不到浏览器时会输出 HTML，用浏览器"打印 → 存储为 PDF"，并勾选"背景图形"。完整示例见 `examples/report_demo.json`。
+`report.py` 用本机的 Chrome 或 Edge 打印 PDF（宣纸底色、A4、带页眉页码）。找不到浏览器时会输出 HTML，用浏览器"打印 → 存储为 PDF"，并勾选"背景图形"。完整示例见 `examples/report_demo.json`。
 
 ## 写作规矩
 
@@ -53,7 +53,7 @@ python3 scripts/report.py report.json --opt result.json --out 志愿填报决策
 
 01 摘要 · 02 你的画像 · 03 专业方向 · 04 志愿表 · 05 为什么这样排 · 06 院校调研 · 07 填报前核对清单 · 08 填报单 · 09 追问清单 · 10 方法与假设 · 11 事后回看 · 12 数据来源与声明
 
-**第 08 节**：出分后的正式报告是填报单，行动路线（门槛、顺序、里程碑、切换条件、检查点）并入第 03 节末尾的 `roadmap`；出分前的规划阶段没有志愿表，第 08 节用于行动路线（见 `examples/demo_2027_gaokao`）。目录标题与顺序由 `check_family.py` 对照本节、`report.py` 和各示例核对。
+**第 08 节**：填报单。行动路线（门槛、顺序、里程碑、切换条件、检查点）并入第 03 节末尾的 `roadmap`。知衢不单独出“出分前”的报告：出分前只做方向的确定，写进完整版的第 03 节，出分后再排志愿表。
 
 某一节确实没有内容时，不删节，在 `omitted` 里写明原因（键为 `directions` `list` `research` `todo` `ask_me` `hindsight`），报告会在该节显示这句说明；没写原因时 `report.py` 会在终端提醒。"事后回看"在事前报告里默认提示考生放榜后回来对照。
 

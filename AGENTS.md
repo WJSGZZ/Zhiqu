@@ -34,7 +34,7 @@
 
 ## 三、安装与使用
 
-按 README 的"快速开始"安装四个技能（同层放置）并验证。使用时问清是高考、读研还是求职，请用户填问卷、发来画像，按对应 `SKILL.md` 工作。三个完整示例在各技能的 `examples/demo_2027*/`，报告结构以它们为准。
+按 README 的"快速开始"安装四个技能（同层放置）并验证。使用时问清是高考、读研还是求职，请用户填问卷、发来画像，按对应 `SKILL.md` 工作。高考报告只有一种完整版，示例是 `skills/zhiqu/examples/2026-GK-R*`（R12 为主展示，全部案例见 [CASES.md](CASES.md)）；读研、求职的示例在各自技能的 `examples/demo_2027/`。报告结构以它们为准。
 
 ## 四、改进项目：开工前
 
@@ -49,7 +49,7 @@
 ```bash
 python3 -m unittest discover -s skills/zhiqu/tests     # 全部测试
 python3 skills/zhiqu/scripts/check_family.py           # 引用、问卷节名、报告目录、复核期限、重复与体积；须 0 错误
-python3 skills/zhiqu/scripts/check_demos.py            # 三个示例：重新排盘、重跑优化、重算 offer 与预算
+python3 skills/zhiqu/scripts/check_demos.py            # 读研、求职示例：重新排盘、重算 offer 与预算
 python3 skills/zhiqu/scripts/validate_data.py          # 改了数据时
 ```
 
