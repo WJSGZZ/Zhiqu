@@ -89,6 +89,8 @@ ol.tight li, ul.tight li { margin: .6mm 0; }
 /* tables */
 table { width: 100%; border-collapse: collapse; margin: 2mm 0 4mm; font-size: 8.8pt; font-variant-numeric: tabular-nums; }
 thead th { white-space: nowrap; text-align: left; font: 600 7.8pt var(--sans); color: var(--soft); letter-spacing: .3pt; border-top: 1pt solid var(--ink); border-bottom: .6pt solid var(--ink); padding: 1.6mm 2mm; }
+table.vt { table-layout: fixed; }
+table.vt thead th { white-space: normal; }
 table.vt td:nth-child(2) { font-weight: 600; }
 table.vt td .small { font-weight: 400; }
 table.vt td.note { font-size: 8pt; line-height: 1.6; }
@@ -425,8 +427,9 @@ def build(rep, opt):
                 + '<div class="cap">' + STRIP_CAP + '</div></div>')
         prob_cols = "<th class='r'>单独过线</th><th class='r'>最终录取</th>" if numeric else ""
         rank_col = "预测位次" if grade == "A" else "预测位次（80% 区间）"
-        cols = ("<colgroup><col style='width:5%'><col style='width:25%'><col style='width:7%'><col style='width:7%'>"
-                + ("<col style='width:9%'><col style='width:9%'>" if numeric else "") + "<col style='width:15%'><col></colgroup>")
+        # 固定列宽：自动布局下表头不换行会把“说明”栏挤到很窄，一行拉得很高，整张表要占四五页
+        cols = ("<colgroup><col style='width:4%'><col style='width:22%'><col style='width:6%'><col style='width:6%'>"
+                + ("<col style='width:8%'><col style='width:8%'>" if numeric else "") + "<col style='width:13%'><col></colgroup>")
         body += ("<table class='vt'>" + cols + "<thead><tr><th class='c'>序</th><th>志愿</th><th class='c'>类型</th><th class='r'>偏好</th>"
                  f"{prob_cols}<th class='r'>{rank_col}</th><th>说明</th></tr></thead><tbody>")
         for x in lst:
