@@ -99,6 +99,7 @@ class TestSelectedUniversitiesData(unittest.TestCase):
                         patch.object(validate_data, "DATA", str(data)), \
                         patch.object(validate_data, "CAREER_DATA", self.tmp.name), \
                         patch.object(validate_data, "check_after_entry_file", return_value=([], [])), \
+                        patch.object(validate_data, "check_competition_file", return_value=([], [])), \
                         patch.object(validate_data, "check_file") as admission_checker, \
                         patch.object(sys, "argv", ["validate_data.py", *provinces]), \
                         redirect_stdout(io.StringIO()) as output:
@@ -161,3 +162,30 @@ class TestSelectedUniversitiesData(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestCivilServiceCompetition(unittest.TestCase):
+    path = ROOT.parent / "zhiqu-career" / "data" / "civil-service-competition-2026.csv"
+
+    def test_repository_table(self):
+        issues, _ = validate_data.check_competition_file(self.path)
+        self.assertEqual(issues, [])
+
+    def test_rejects_non_monotone_quantiles(self):
+        with self.path.open(encoding="utf-8-sig", newline="") as f:
+            rows = list(csv.DictReader(f))
+        rows[0]["p25"] = str(float(rows[0]["p75"]) + 1)
+        with tempfile.TemporaryDirectory() as tmp:
+            bad = Path(tmp) / "c.csv"
+            with bad.open("w", encoding="utf-8", newline="") as f:
+                w = csv.DictWriter(f, fieldnames=list(rows[0]))
+                w.writeheader()
+                w.writerows(rows)
+            issues, _ = validate_data.check_competition_file(bad)
+        self.assertTrue(any("分位数没有递增" in x for x in issues))
+
+    def test_no_row_level_job_data(self):
+        with self.path.open(encoding="utf-8-sig", newline="") as f:
+            rows = list(csv.DictReader(f))
+        self.assertLess(len(rows), 50)
+        self.assertNotIn("job_code", rows[0])
