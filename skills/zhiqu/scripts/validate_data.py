@@ -17,6 +17,7 @@ usage: python3 scripts/validate_data.py [省份目录名 ...]   # 不给则检�
 """
 import argparse
 import csv
+import datetime
 from datetime import date
 import os
 import random
@@ -91,6 +92,53 @@ def check_after_entry_file(path):
         if len(dates) == 2 and dates["review_deadline"] < dates["verified_date"]:
             issues.append(f"第 {line} 行复核期限早于核实日期")
     notes.append(f"{len(rows)} 行，{len({(row.get('school') or '').strip() for row in rows})} 所学校")
+    return issues, notes
+
+
+COMPETITION_FIELDS = (
+    "province", "year", "measure", "unit", "group_type", "group", "n_jobs",
+    "p10", "p25", "p50", "p75", "p90", "share_below_10", "share_100_plus",
+    "scope", "source_url", "published_date", "retrieved_date", "review_deadline",
+)
+
+
+def check_competition_file(path):
+    """校验公务员竞争汇总表：分位数要递增，比例在 0—1，日期为真实日期。"""
+    issues, notes = [], []
+    if not os.path.isfile(path):
+        return ["竞争汇总表不存在"], notes
+    with open(path, encoding="utf-8-sig", newline="") as f:
+        reader = csv.DictReader(f)
+        missing = [x for x in COMPETITION_FIELDS if x not in (reader.fieldnames or [])]
+        if missing:
+            return [f"表头缺少必要列：{', '.join(missing)}"], notes
+        rows = list(reader)
+    if not rows:
+        return ["空文件"], notes
+    for i, r in enumerate(rows, start=2):
+        where = f"第 {i} 行"
+        if not re.match(r"^https?://", r["source_url"].strip()):
+            issues.append(f"{where}：source_url 不是网址")
+        for k in ("retrieved_date", "review_deadline") + (("published_date",) if r["published_date"].strip() else ()):
+            try:
+                datetime.date.fromisoformat(r[k].strip())
+            except ValueError:
+                issues.append(f"{where}：{k} 不是真实日期")
+        try:
+            n = int(r["n_jobs"])
+            qs = [float(r[k]) for k in ("p10", "p25", "p50", "p75", "p90")]
+        except ValueError:
+            issues.append(f"{where}：n_jobs 或分位数不是数字")
+            continue
+        if n <= 0:
+            issues.append(f"{where}：n_jobs 必须为正")
+        if qs != sorted(qs):
+            issues.append(f"{where}：分位数没有递增")
+        for k in ("share_below_10", "share_100_plus"):
+            v = r[k].strip()
+            if v and not 0 <= float(v) <= 1:
+                issues.append(f"{where}：{k} 不在 0—1")
+    notes.append(f"{len(rows)} 行")
     return issues, notes
 
 
@@ -225,6 +273,11 @@ def main():
         n_issue += 1
     issues, notes = check_selected_universities_file(os.path.join(CAREER_DATA, "selected-universities-2027.csv"))
     print(f"## selected-universities-2027.csv：{'；'.join(notes) or '—'}")
+    for issue in issues:
+        print(f"    ⚠ {issue}")
+        n_issue += 1
+    issues, notes = check_competition_file(os.path.join(CAREER_DATA, "civil-service-competition-2026.csv"))
+    print(f"## civil-service-competition-2026.csv：{'；'.join(notes) or '—'}")
     for issue in issues:
         print(f"    ⚠ {issue}")
         n_issue += 1
