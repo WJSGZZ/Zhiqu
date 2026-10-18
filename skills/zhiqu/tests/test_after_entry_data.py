@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 import validate_data
 
-COMPLETED_PROVINCES = ("江苏省",)
+COMPLETED_PROVINCES = ("江苏省", "浙江省")
 
 
 def source_omission_conflicts(rows):
