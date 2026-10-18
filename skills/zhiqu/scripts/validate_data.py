@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""校验 data/ 下各省投档 CSV：每年 7 月加入新数据后先跑一遍。
+"""校验 data/ 下各省投档 CSV 和入学后的机会表。
 
 检查：
 1. 表头是否包含 code, name 和 score / rank 之一；
@@ -9,21 +9,31 @@
 4. 年份覆盖（中间缺年）；
 5. 代码数值在教育部高校名单（data/schools.csv）的出现率，不证明同一学校，须核对校名；
 6. 同一院校代码在同一文件里出现多个校名（括号注释除外）——多半是 PDF 水印字或识别噪声混进了校名
-   （如江苏的"育南京大学"、上海的"市华东师大"、湖北的"北京化 工大学信"）。
+   （如江苏的"育南京大学"、上海的"市华东师大"、湖北的"北京化 工大学信"）；
+7. 入学后的机会表：必要列、证据状态、来源网址、真实日期与复核先后顺序。
 
 usage: python3 scripts/validate_data.py [省份目录名 ...]   # 不给则检查全部
 """
 import argparse
 import csv
+from datetime import date
 import os
 import random
 import re
 import sys
+from urllib.parse import urlsplit
 
 DATA = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data")
 SKIP_DIRS = {"civil_service", "calibration", "purchased"}  # purchased 是本地内部库，不提交
 MAX_SCORE = 750
 VIOLATION_WARN = 0.02
+AFTER_ENTRY_FIELDS = (
+    "school", "province", "opportunity_type", "project_name", "eligibility",
+    "selection_time", "selection_method", "seats", "available_majors",
+    "extra_fees", "applicable_year", "source_url", "verified_date",
+    "review_deadline", "status", "notes",
+)
+AFTER_ENTRY_STATUSES = {"verified", "not_found", "unretrieved"}
 
 
 def num(v):
@@ -32,6 +42,50 @@ def num(v):
         return float(v)
     except ValueError:
         return None
+
+
+def check_after_entry_file(path):
+    """校验机会表的来源地址与复核时间；不把格式合格当作内容已核实。"""
+    issues, notes = [], []
+    if not os.path.isfile(path):
+        return ["入学后的机会表不存在"], notes
+    with open(path, encoding="utf-8-sig", newline="") as f:
+        reader = csv.DictReader(f)
+        header = reader.fieldnames or []
+        missing = [field for field in AFTER_ENTRY_FIELDS if field not in header]
+        if missing:
+            return [f"表头缺少必要列：{', '.join(missing)}"], notes
+        rows = list(reader)
+    if not rows:
+        return ["空文件"], notes
+    for line, row in enumerate(rows, start=2):
+        for field in ("school", "province", "opportunity_type", "status"):
+            if not (row.get(field) or "").strip():
+                issues.append(f"第 {line} 行 {field} 不能为空")
+        status = (row.get("status") or "").strip()
+        if status and status not in AFTER_ENTRY_STATUSES:
+            issues.append(f"第 {line} 行 status 未知：{status}")
+        source = (row.get("source_url") or "").strip()
+        try:
+            parsed = urlsplit(source)
+            valid_source = parsed.scheme in {"http", "https"} and bool(parsed.hostname)
+        except ValueError:
+            valid_source = False
+        if not valid_source:
+            issues.append(f"第 {line} 行 source_url 必须是非空的 http/https 网址")
+        dates = {}
+        for field in ("verified_date", "review_deadline"):
+            value = (row.get(field) or "").strip()
+            try:
+                if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", value):
+                    raise ValueError
+                dates[field] = date.fromisoformat(value)
+            except ValueError:
+                issues.append(f"第 {line} 行 {field} 必须是真实的 YYYY-MM-DD 日期：{value}")
+        if len(dates) == 2 and dates["review_deadline"] < dates["verified_date"]:
+            issues.append(f"第 {line} 行复核期限早于核实日期")
+    notes.append(f"{len(rows)} 行，{len({(row.get('school') or '').strip() for row in rows})} 所学校")
+    return issues, notes
 
 
 def check_file(path, codes):
@@ -95,7 +149,7 @@ def check_file(path, codes):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="校验投档 CSV：重复键、位次与分数、年份覆盖和院校代码")
+    parser = argparse.ArgumentParser(description="校验投档 CSV 和入学后的机会表：投档一致性、来源地址和复核时间")
     parser.add_argument("provinces", nargs="*", help="data 下的省份目录；默认全部省份")
     args = parser.parse_args()
     with open(os.path.join(DATA, "schools.csv"), encoding="utf-8") as f:
@@ -105,6 +159,11 @@ def main():
         if province not in os.listdir(DATA) or not os.path.isdir(os.path.join(DATA, province)):
             parser.error(f"未知省份目录：{province}")
     n_issue = 0
+    issues, notes = check_after_entry_file(os.path.join(DATA, "after-entry-opportunities.csv"))
+    print(f"## after-entry-opportunities.csv：{'；'.join(notes) or '—'}")
+    for issue in issues:
+        print(f"    ⚠ {issue}")
+        n_issue += 1
     for p in provs:
         files = sorted(fn for fn in os.listdir(os.path.join(DATA, p)) if fn.endswith(".csv") and not fn.startswith(("yfyd", "early")))
         series = {}
