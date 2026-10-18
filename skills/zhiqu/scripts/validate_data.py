@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""校验 data/ 下各省投档 CSV 和入学后的机会表。
+"""校验各省投档 CSV、入学后的机会表和求职版选调高校范围表。
 
 检查：
 1. 表头是否包含 code, name 和 score / rank 之一；
@@ -10,7 +10,8 @@
 5. 代码数值在教育部高校名单（data/schools.csv）的出现率，不证明同一学校，须核对校名；
 6. 同一院校代码在同一文件里出现多个校名（括号注释除外）——多半是 PDF 水印字或识别噪声混进了校名
    （如江苏的"育南京大学"、上海的"市华东师大"、湖北的"北京化 工大学信"）；
-7. 入学后的机会表：必要列、证据状态、来源网址、真实日期与复核先后顺序。
+7. 入学后的机会表：必要列、证据状态、来源网址、真实日期与复核先后顺序；
+8. 选调高校范围表：必要列、2027 年份、来源定位、日期与复核先后顺序、重复条目。
 
 usage: python3 scripts/validate_data.py [省份目录名 ...]   # 不给则检查全部
 """
@@ -24,6 +25,7 @@ import sys
 from urllib.parse import urlsplit
 
 DATA = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data")
+CAREER_DATA = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "zhiqu-career", "data")
 SKIP_DIRS = {"civil_service", "calibration", "purchased"}  # purchased 是本地内部库，不提交
 MAX_SCORE = 750
 VIOLATION_WARN = 0.02
@@ -34,6 +36,10 @@ AFTER_ENTRY_FIELDS = (
     "review_deadline", "status", "notes",
 )
 AFTER_ENTRY_STATUSES = {"verified", "not_found", "unretrieved"}
+SELECTED_UNIVERSITIES_FIELDS = (
+    "province", "year", "category", "school", "major_restriction", "source_url",
+    "published_date", "retrieved_date", "review_deadline", "source_locator", "notes",
+)
 
 
 def num(v):
@@ -85,6 +91,59 @@ def check_after_entry_file(path):
         if len(dates) == 2 and dates["review_deadline"] < dates["verified_date"]:
             issues.append(f"第 {line} 行复核期限早于核实日期")
     notes.append(f"{len(rows)} 行，{len({(row.get('school') or '').strip() for row in rows})} 所学校")
+    return issues, notes
+
+
+def check_selected_universities_file(path):
+    """校验选调高校范围表；来源定位供人工回到官方附件复核。"""
+    issues, notes = [], []
+    if not os.path.isfile(path):
+        return ["选调高校范围表不存在"], notes
+    with open(path, encoding="utf-8-sig", newline="") as f:
+        reader = csv.DictReader(f)
+        missing = [field for field in SELECTED_UNIVERSITIES_FIELDS if field not in (reader.fieldnames or [])]
+        if missing:
+            return [f"表头缺少必要列：{', '.join(missing)}"], notes
+        rows = list(reader)
+    if not rows:
+        return ["空文件"], notes
+    seen = {}
+    required = set(SELECTED_UNIVERSITIES_FIELDS) - {"major_restriction", "notes"}
+    for line, row in enumerate(rows, start=2):
+        values = {field: (row.get(field) or "").strip() for field in SELECTED_UNIVERSITIES_FIELDS}
+        for field in SELECTED_UNIVERSITIES_FIELDS:
+            if field in required and not values[field]:
+                issues.append(f"第 {line} 行 {field} 不能为空")
+        if values["year"] != "2027":
+            issues.append(f"第 {line} 行 year 必须是整数 2027：{values['year']}")
+        source = values["source_url"]
+        try:
+            parsed = urlsplit(source)
+            valid_source = (parsed.scheme in {"http", "https"} and bool(parsed.hostname)
+                            and not re.search(r"\s", source))
+            parsed.port  # 非数字或超范围端口也不是合法网址
+        except ValueError:
+            valid_source = False
+        if not valid_source:
+            issues.append(f"第 {line} 行 source_url 必须是非空的 http/https 网址")
+        dates = {}
+        for field in ("published_date", "retrieved_date", "review_deadline"):
+            value = values[field]
+            try:
+                if not re.fullmatch(r"[0-9]{4}-[0-9]{2}-[0-9]{2}", value):
+                    raise ValueError
+                dates[field] = date.fromisoformat(value)
+            except ValueError:
+                issues.append(f"第 {line} 行 {field} 必须是真实的 YYYY-MM-DD 日期：{value}")
+        if ("review_deadline" in dates and "retrieved_date" in dates
+                and dates["review_deadline"] < dates["retrieved_date"]):
+            issues.append(f"第 {line} 行复核期限早于取得日期")
+        key = tuple(values[field] for field in ("province", "year", "category", "school", "major_restriction"))
+        if key in seen:
+            issues.append(f"第 {line} 行与第 {seen[key]} 行重复：province/year/category/school/major_restriction")
+        else:
+            seen[key] = line
+    notes.append(f"{len(rows)} 行，{len({row.get('school') for row in rows})} 个原文校名")
     return issues, notes
 
 
@@ -149,7 +208,7 @@ def check_file(path, codes):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="校验投档 CSV 和入学后的机会表：投档一致性、来源地址和复核时间")
+    parser = argparse.ArgumentParser(description="校验投档 CSV、入学后的机会表和选调高校范围表")
     parser.add_argument("provinces", nargs="*", help="data 下的省份目录；默认全部省份")
     args = parser.parse_args()
     with open(os.path.join(DATA, "schools.csv"), encoding="utf-8") as f:
@@ -161,6 +220,11 @@ def main():
     n_issue = 0
     issues, notes = check_after_entry_file(os.path.join(DATA, "after-entry-opportunities.csv"))
     print(f"## after-entry-opportunities.csv：{'；'.join(notes) or '—'}")
+    for issue in issues:
+        print(f"    ⚠ {issue}")
+        n_issue += 1
+    issues, notes = check_selected_universities_file(os.path.join(CAREER_DATA, "selected-universities-2027.csv"))
+    print(f"## selected-universities-2027.csv：{'；'.join(notes) or '—'}")
     for issue in issues:
         print(f"    ⚠ {issue}")
         n_issue += 1
