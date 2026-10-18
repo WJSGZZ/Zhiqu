@@ -1,5 +1,6 @@
 """入学后机会表的来源与复核日期校验。"""
 import csv
+from collections import defaultdict
 import io
 from pathlib import Path
 import sys
@@ -11,6 +12,37 @@ from contextlib import redirect_stdout
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 import validate_data
+
+COMPLETED_PROVINCES = ("江苏省",)
+
+
+def source_omission_conflicts(rows):
+    """提示同一原文被拆行后的信息遗漏，不判断不同项目的政策范围。"""
+    by_source = defaultdict(list)
+    for line, row in enumerate(rows, 2):
+        if row["status"] == "verified":
+            by_source[row["source_url"]].append((line, row))
+    conflicts = []
+    for source, group in by_source.items():
+        for field in ("seats", "selection_time", "eligibility"):
+            unknown = [(line, row) for line, row in group
+                       if row[field].strip() in {"原文未说明", "未取到"}]
+            specific = [(line, row) for line, row in group
+                        if row[field].strip() not in {"原文未说明", "未取到", "未查到", ""}
+                        and not ("未取" in row[field] or "见附件" in row[field])]
+            if unknown and specific:
+                conflicts.append({
+                    "source_url": source, "field": field,
+                    "generic_unknown": [{"line": line, "school": row["school"],
+                                         "type": row["opportunity_type"],
+                                         "project": row["project_name"], "value": row[field]}
+                                        for line, row in unknown],
+                    "specific": [{"line": line, "school": row["school"],
+                                  "type": row["opportunity_type"],
+                                  "project": row["project_name"], "value": row[field]}
+                                 for line, row in specific],
+                })
+    return conflicts
 
 
 class TestAfterEntryData(unittest.TestCase):
@@ -99,23 +131,34 @@ class TestAfterEntryData(unittest.TestCase):
             with self.subTest(placeholder=placeholder):
                 self.assertFalse(placeholder in text, f"机会表仍含调研占位内容：{placeholder}")
 
-    def test_jiangsu_public_undergraduate_coverage_and_four_categories(self):
+    def test_completed_provinces_public_undergraduate_coverage_and_four_categories(self):
         with (ROOT / "data" / "schools.csv").open(encoding="utf-8-sig", newline="") as f:
+            schools = list(csv.DictReader(f))
+        with (ROOT / "data" / "after-entry-opportunities.csv").open(encoding="utf-8-sig", newline="") as f:
+            rows = list(csv.DictReader(f))
+        categories = {"二次选拔", "大类分流", "转专业", "贯通与双学位"}
+        for province in COMPLETED_PROVINCES:
             expected = {
-                row["name"] for row in csv.DictReader(f)
-                if row["province"] == "江苏省" and row["level"] == "本科"
+                row["name"] for row in schools
+                if row["province"] == province and row["level"] == "本科"
                 and not any(label in (row.get("note") or "")
                             for label in ("民办", "独立学院", "合作办学"))
             }
+            province_rows = [row for row in rows if row["province"] == province]
+            with self.subTest(province=province):
+                self.assertTrue(expected, "已完成省份须能从学校基表筛出公办本科")
+                self.assertEqual({row["school"] for row in province_rows}, expected)
+            for school in sorted(expected):
+                with self.subTest(province=province, school=school):
+                    self.assertEqual({row["opportunity_type"] for row in province_rows
+                                      if row["school"] == school}, categories)
+
+    def test_same_source_does_not_mix_specific_rules_with_generic_unknowns(self):
         with (ROOT / "data" / "after-entry-opportunities.csv").open(encoding="utf-8-sig", newline="") as f:
-            rows = list(csv.DictReader(f))
-        jiangsu = [row for row in rows if row["province"] == "江苏省"]
-        self.assertEqual({row["school"] for row in jiangsu}, expected)
-        categories = {"二次选拔", "大类分流", "转专业", "贯通与双学位"}
-        for school in sorted(expected):
-            with self.subTest(school=school):
-                self.assertEqual({row["opportunity_type"] for row in jiangsu if row["school"] == school},
-                                 categories)
+            conflicts = source_omission_conflicts(list(csv.DictReader(f)))
+        self.assertEqual(conflicts, [],
+                         "同一来源已有具体值时须复核精确的‘原文未说明/未取到’；"
+                         "若属不同项目，请在字段里写清所指项目与未说明范围")
 
     def test_unknown_evidence_has_search_scope_or_retrieval_reason(self):
         with (ROOT / "data" / "after-entry-opportunities.csv").open(encoding="utf-8-sig", newline="") as f:
@@ -130,8 +173,8 @@ class TestAfterEntryData(unittest.TestCase):
                     self.assertRegex(notes, r"已查[：:]\s*[^；）]{3,}",
                                      "未查到必须说明实际查过的页面或栏目")
                 else:
-                    self.assertIn("未取到", notes)
-                    self.assertRegex(notes, r"超时|验证码|HTTP|HTTPS|SSL|TLS|连接|拒绝|拦截|正文[（(]\d{3}[）)]|无法解析|需登录|空壳|下载失败",
+                    self.assertRegex(notes, r"未取到|等待手动取文")
+                    self.assertRegex(notes, r"超时|验证码|HTTP|HTTPS|SSL|TLS|连接|拒绝|拦截|正文[（(]\d{3}[）)]|无法解析|需登录|空壳|下载失败|打不开|空白页|空响应|HTML",
                                      "未取到必须说明正文未能取得的具体原因")
                 self.assertNotRegex(notes, r"(?:^|[；。])(?:该校|学校)?(?:没有|不存在|不提供)",
                                     "未查到或未取到不能直接写成学校没有该机会")
