@@ -28,7 +28,7 @@
     <p>同样是"读个研"，统考、境外申请、国内的中外合作项目，规则、花费、拿到的证书都不一样；有些路一旦错过报名时间，就要再等一年。所以这份问卷先问你为什么读、现在在哪、能投入什么，再谈去哪里。</p>
     <hr class="rule">
     <p>问卷共十一节，其中「方向与状态」「性格与传统视角」两节可选，每节开头有一句"<b>为什么问这个</b>"。<b>有些题会随你的选择追问</b>，比如勾了"境外读研"，下面会问预算和语言。不确定的可以留空。</p>
-    <p><span class="how">最后一步</span>点击"生成我的画像"，复制那段文字发回即可。保研（推免）是另一套流程，这份问卷暂不涉及；如果你已经有推免机会，在第四节注明就好。</p>
+    <p><span class="how">最后一步</span>点击"生成我的画像"，复制那段文字发回即可。想争取保研或已经有推免机会的，在「路径与打算」一节勾选，会有几道追问。</p>
   </div>
 
   <div class="timeline">
@@ -209,6 +209,7 @@
           <label class="opt"><input type="checkbox" name="route" value="中外合作办学"><span class="box">国内的中外合作办学 / 境内读境外学位</span></label>
           <label class="opt"><input type="checkbox" name="route" value="先工作"><span class="box">先工作，以后再说</span></label>
           <label class="opt"><input type="checkbox" name="route" value="考公"><span class="box">考公考编</span></label>
+          <label class="opt"><input type="checkbox" name="route" value="想争取保研"><span class="box">想争取保研（推免）</span></label>
           <label class="opt"><input type="checkbox" name="route" value="已有推免机会"><span class="box">我已经有推免（保研）机会</span></label>
           <label class="opt"><input type="checkbox" name="route" value="还没想好"><span class="box">还没想好</span></label>
         </div></div>
@@ -334,6 +335,22 @@
         <span class="ftag">追问 · 考公</span>
         <div class="q"><div class="q-label">目标省份和岗位类型；知道这些岗位对学历、专业的要求吗？</div>
           <input type="text" id="gk_plan" placeholder="例如：广东省考，税务类；不清楚是否要求硕士"></div>
+      </div>
+
+      <div class="followup" data-when="route=想争取保研">
+        <span class="ftag">追问 · 保研</span>
+        <div class="q"><div class="q-label">有没有挂过科</div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="tm_fail" value="没有"><span class="box">没有</span></label>
+          <label class="opt"><input type="radio" name="tm_fail" value="挂过，已重修通过"><span class="box">挂过，已重修通过</span></label>
+          <label class="opt"><input type="radio" name="tm_fail" value="挂过，还没通过"><span class="box">挂过，还没通过</span></label>
+        </div></div>
+        <div class="q"><div class="q-label">你知道本专业去年有多少人保研吗</div>
+          <input type="text" id="tm_quota" placeholder="例如：去年本专业 120 人里保研 12 人；不知道就写不知道"></div>
+        <div class="q"><div class="q-label">科研、竞赛经历</div>
+          <input type="text" id="tm_research" placeholder="例如：大创项目负责人；数学建模省二等奖；没有就写没有"></div>
+        <div class="q"><div class="q-label">想去的学校，或打算参加的夏令营</div>
+          <input type="text" id="tm_camp" placeholder="例如：南京大学计算机，打算报 7 月的夏令营"></div>
       </div>
 
       <div class="followup" data-when="route=已有推免机会">
@@ -656,8 +673,8 @@
   function refreshFollowups(){
     document.querySelectorAll('.followup').forEach(function(fu){
       var cond=fu.getAttribute('data-when'); // name=value
-      var eq=cond.indexOf('='); var name=cond.slice(0,eq), value=cond.slice(eq+1);
-      var on=!!document.querySelector('input[name="'+name+'"][value="'+value+'"]:checked');
+      var eq=cond.indexOf('='); var name=cond.slice(0,eq), values=cond.slice(eq+1).split('|');
+      var on=values.some(function(value){ return !!document.querySelector('input[name="'+name+'"][value="'+value+'"]:checked'); });
       if(on){ fu.classList.add('show'); }
       else if(fu.classList.contains('show')){
         fu.classList.remove('show');

@@ -1,6 +1,6 @@
 ---
 name: zhiqu-career
-description: 知衢 · 职业方向规划。读取「知衢 · 求职版」问卷生成的画像（专科、本科、硕士、博士均适用），找出工作内容、收入、城市、节奏都合适的职业方向，比较手里的 offer 或跳槽选项，标出时间窗口和检查点。只做规划和选择，不做简历、面试或投递辅导。Use when a user pastes a 知衢求职版 / 求职自我盘点 profile, or asks about 找什么工作、职业方向、秋招春招、offer 比较、薪资到手、五险一金、试用期、三方协议、跳槽、考编还是进企业. Not for gaokao (zhiqu) or graduate school choices (zhiqu-grad).
+description: 知衢 · 职业方向规划。读取「知衢 · 求职版」问卷生成的画像（专科、本科、硕士、博士均适用），找出工作内容、收入、城市、节奏都合适的职业方向，比较手里的 offer 或跳槽选项，标出时间窗口和检查点。只做规划和选择，不做简历、面试或投递辅导。Use when a user pastes a 知衢求职版 / 求职自我盘点 profile, or asks about 找什么工作、职业方向、秋招春招、offer 比较、薪资到手、五险一金、试用期、三方协议、跳槽、考编还是进企业、考公、选调生、事业单位、教师编、国家电网、南方电网、银行校招、军队文职、三支一扶、西部计划. Not for gaokao (zhiqu) or graduate school choices (zhiqu-grad).
 ---
 
 # 知衢 · 求职版
@@ -27,6 +27,7 @@ description: 知衢 · 职业方向规划。读取「知衢 · 求职版」问�
 3. **找方向**：按 `references/fit.md`，从兴趣、能力、价值和约束给出 3—6 个**具体的职业方向**，写清每个方向的日常内容、入门要求、收入区间及来源、进入路径和前景（写成条件句）。
    - 「方向与状态」一节有作答时，读读研版的 `../zhiqu-shared/references/direction-and-state.md`，用同样的方法判断卡在哪、给小步骤。
    - 画像里有八字（「性格与传统视角」一节）时，按 `../zhiqu-shared/references/bazi-lens.md` 处理：它是传统视角，只做三方对照，不打分、不排除。
+   - 本人或家里提到考公、考编、选调、国企（含电网、银行）、军队文职或基层项目时，读 `references/public-sector.md`：先逐项对照资格，再排时间、估竞争，给每条可行路线写路线卡，与企业路线一起比较。
    - 全国就业形势读 `../zhiqu-shared/references/job-market.md`，每次先更新数字。专业和行业的有条件前景读 `../zhiqu-shared/references/outlook.md`。
 4. **确定方向后再收集数据**（`references/job-search.md` 的数据来源）：
    - 目标城市的人力资源市场工资价位；

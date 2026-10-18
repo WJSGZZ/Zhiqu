@@ -182,6 +182,50 @@
           <label class="opt"><input type="checkbox" name="org_type" value="还没想好"><span class="box">还没想好</span></label>
         </div></div>
 
+      <div class="followup" data-when="org_type=公务员|事业单位（学校、医院等）|国企央企">
+        <span class="ftag">追问 · 体制内与国企</span>
+        <div class="q"><div class="q-label">具体想走哪几条<span class="opt-note">（可多选）</span></div>
+        <div class="opts stack">
+          <label class="opt"><input type="checkbox" name="ps_route" value="国考"><span class="box">国考</span></label>
+          <label class="opt"><input type="checkbox" name="ps_route" value="省考"><span class="box">省考</span></label>
+          <label class="opt"><input type="checkbox" name="ps_route" value="选调生"><span class="box">选调生</span></label>
+          <label class="opt"><input type="checkbox" name="ps_route" value="事业单位统一招聘"><span class="box">事业单位统一招聘</span></label>
+          <label class="opt"><input type="checkbox" name="ps_route" value="中小学教师"><span class="box">中小学教师</span></label>
+          <label class="opt"><input type="checkbox" name="ps_route" value="医院等卫生单位"><span class="box">医院等卫生单位</span></label>
+          <label class="opt"><input type="checkbox" name="ps_route" value="国家电网或南方电网"><span class="box">国家电网或南方电网</span></label>
+          <label class="opt"><input type="checkbox" name="ps_route" value="银行"><span class="box">银行</span></label>
+          <label class="opt"><input type="checkbox" name="ps_route" value="其他国企央企"><span class="box">其他国企央企</span></label>
+          <label class="opt"><input type="checkbox" name="ps_route" value="军队文职"><span class="box">军队文职</span></label>
+          <label class="opt"><input type="checkbox" name="ps_route" value="三支一扶、西部计划、特岗等基层项目"><span class="box">三支一扶、西部计划、特岗等基层项目</span></label>
+          <label class="opt"><input type="checkbox" name="ps_route" value="还不清楚"><span class="box">还不清楚</span></label>
+        </div></div>
+        <div class="q"><div class="q-label">你的学历是全日制统招吗</div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="ps_fulltime" value="是"><span class="box">是</span></label>
+          <label class="opt"><input type="radio" name="ps_fulltime" value="不是（非全日制、自考、成人教育等）"><span class="box">不是（非全日制、自考、成人教育等）</span></label>
+          <label class="opt"><input type="radio" name="ps_fulltime" value="不确定"><span class="box">不确定</span></label>
+        </div></div>
+        <div class="q"><div class="q-label">在校当过学生干部吗</div>
+        <div class="opts stack">
+          <label class="opt"><input type="radio" name="ps_cadre" value="没有"><span class="box">没有</span></label>
+          <label class="opt"><input type="radio" name="ps_cadre" value="班委或团支部委员，满一学年"><span class="box">班委或团支部委员，满一学年</span></label>
+          <label class="opt"><input type="radio" name="ps_cadre" value="院系学生会、团委中层副职及以上"><span class="box">院系学生会、团委中层副职及以上</span></label>
+          <label class="opt"><input type="radio" name="ps_cadre" value="校级学生组织骨干"><span class="box">校级学生组织骨干</span></label>
+        </div></div>
+        <div class="q"><div class="q-label">获得过校级及以上综合表彰或奖学金吗</div>
+          <input type="text" id="ps_award" placeholder="例如：校一等奖学金、校三好学生；没有就写没有"></div>
+        <div class="q"><div class="q-label">成绩在班级或专业的排名</div>
+          <input type="text" id="ps_rank" placeholder="例如：班级 8/40；专业前 30%"></div>
+        <div class="q"><div class="q-label">做过行测、申论或企业笔试的模考吗</div>
+          <input type="text" id="ps_mock" placeholder="例如：行测 65、申论 60；没做过就写没做过"></div>
+        <div class="q"><div class="q-label">能接受先在县、乡镇基层工作几年吗</div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="ps_grassroots" value="能接受"><span class="box">能接受</span></label>
+          <label class="opt"><input type="radio" name="ps_grassroots" value="看具体地方"><span class="box">看具体地方</span></label>
+          <label class="opt"><input type="radio" name="ps_grassroots" value="不能接受"><span class="box">不能接受</span></label>
+        </div></div>
+      </div>
+
       <div class="q req"><div class="q-label">能接受的加班程度</div>
         <div class="opts">
           <label class="opt"><input type="radio" name="overtime" value="基本不加班"><span class="box">基本不加班</span></label>
@@ -507,8 +551,8 @@
   function refreshFollowups(){
     document.querySelectorAll('.followup').forEach(function(fu){
       var cond=fu.getAttribute('data-when'); // name=value
-      var eq=cond.indexOf('='); var name=cond.slice(0,eq), value=cond.slice(eq+1);
-      var on=!!document.querySelector('input[name="'+name+'"][value="'+value+'"]:checked');
+      var eq=cond.indexOf('='); var name=cond.slice(0,eq), values=cond.slice(eq+1).split('|');
+      var on=values.some(function(value){ return !!document.querySelector('input[name="'+name+'"][value="'+value+'"]:checked'); });
       if(on){ fu.classList.add('show'); }
       else if(fu.classList.contains('show')){
         fu.classList.remove('show');
