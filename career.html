@@ -205,13 +205,16 @@
           <label class="opt"><input type="radio" name="ps_fulltime" value="不是（非全日制、自考、成人教育等）"><span class="box">不是（非全日制、自考、成人教育等）</span></label>
           <label class="opt"><input type="radio" name="ps_fulltime" value="不确定"><span class="box">不确定</span></label>
         </div></div>
-        <div class="q"><div class="q-label">在校当过学生干部吗</div>
+        <div class="q"><div class="q-label">在校当过哪些学生干部<span class="opt-note">（可多选；选调对职务级别有要求）</span></div>
         <div class="opts stack">
-          <label class="opt"><input type="radio" name="ps_cadre" value="没有"><span class="box">没有</span></label>
-          <label class="opt"><input type="radio" name="ps_cadre" value="班委或团支部委员，满一学年"><span class="box">班委或团支部委员，满一学年</span></label>
-          <label class="opt"><input type="radio" name="ps_cadre" value="院系学生会、团委中层副职及以上"><span class="box">院系学生会、团委中层副职及以上</span></label>
-          <label class="opt"><input type="radio" name="ps_cadre" value="校级学生组织骨干"><span class="box">校级学生组织骨干</span></label>
-        </div></div>
+          <label class="opt"><input type="checkbox" name="ps_cadre" value="没有"><span class="box">没有</span></label>
+          <label class="opt"><input type="checkbox" name="ps_cadre" value="班委或团支部委员"><span class="box">班委或团支部委员</span></label>
+          <label class="opt"><input type="checkbox" name="ps_cadre" value="班长或团支部书记"><span class="box">班长或团支部书记</span></label>
+          <label class="opt"><input type="checkbox" name="ps_cadre" value="院系学生会或团委中层副职"><span class="box">院系学生会或团委中层副职</span></label>
+          <label class="opt"><input type="checkbox" name="ps_cadre" value="院系学生会或团委中层正职"><span class="box">院系学生会或团委中层正职</span></label>
+          <label class="opt"><input type="checkbox" name="ps_cadre" value="校学生会或团委中层副职及以上"><span class="box">校学生会或团委中层副职及以上</span></label>
+        </div>
+          <input class="mt" type="text" id="ps_cadre_time" placeholder="各职务当了多久，例如：班长两学年；院学生会部长一学年"></div>
         <div class="q"><div class="q-label">获得过校级及以上综合表彰或奖学金吗</div>
           <input type="text" id="ps_award" placeholder="例如：校一等奖学金、校三好学生；没有就写没有"></div>
         <div class="q"><div class="q-label">成绩在班级或专业的排名</div>
