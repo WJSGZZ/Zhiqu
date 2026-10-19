@@ -14,10 +14,14 @@ Markdown 格式：
   可选的 YAML 风格前言（两行 `---` 之间），支持字段：
     title      报告标题
     subtitle   副标题
-    person     考生/本人，如"虚构示例 · 小周"
+    person     对象，如"小林（模拟）"
     date       报告日期
     edition    版本，如"读研版"/"求职版"
-    note       封面备注
+    id         报告编号（不可省略于正式交付）
+    stage      版本/当前阶段，限32字以内
+    region     地区或学校，限32字以内
+    data_asof  数据截至日期
+    conclusion 一句话结论；旧note仅兼容，正式交付用conclusion
 
   正文：`## 01 摘要` … `## 12 ...` 为一级小节（对应 report.py 里的
   section），`### ` 为小节内小标题；支持段落、**加粗**、*斜体*、`代码`、
@@ -31,6 +35,19 @@ Markdown 格式：
     落点条：`::: strip 标题` 与 `:::` 之间每行 `- 志愿名 | 概率`（如 73.3%），
            可加一行 `- 滑档 | 概率`；按志愿顺序画“最终会被哪里录取”的色条。
     表格里内容恰为“冲”“稳”“保”的格子自动画成彩色标签。
+
+  新组件（均调用report.py，无另一套CSS）：
+    ::: bars 图题 / ::: interval 图题 / ::: timeline 图题 / ::: matrix 图题
+    元信息行：caption: 读图说明；source: 1,2（对应sources登记顺序）
+    bars可加unit: 元、max: 数字；数据行 - 标签 | 数值 | 冲/稳/保/主 | 显示值（后两项可省）
+    interval数据行 - 标签 | 区间下界 | 上界 | 对照点；缺值留空或写未取到，不画假零值。
+    timeline数据行 - 月份 | 任务 | 截止日 | 检查点（普通点末列留空），横轴每行最多4节点。
+    matrix另写columns: 维度A | 维度B；数据行 - 选项 | ✓短语 | △短语（或✗）。
+    ::: route 路线名：恰好四行 - 门槛 | ... / - 时间窗口 | ... / - 投入 | ... / - 切换条件 | ...
+    ::: evidence：每行 - 官方/多人一致/单人说法/推测 | 说明。
+    ::: sources：放第12节，每行 - 来源标题 | 完整URL（个人/计算来源可空） | 发布/核实日期。
+    所有块都以单独一行:::结束。bars/interval/timeline/matrix必须有图题、caption和source；
+    网址只在sources中显示；正文链接和裸网址统一转为尾注。缺图题/来源的SVG拒绝生成。
 
 找不到浏览器时会只输出 HTML，并提示用浏览器"打印 → 存储为 PDF"（与
 report.py 行为一致）。
@@ -56,19 +73,11 @@ def _load_report_module():
     return mod
 
 
-try:
-    _report = _load_report_module()
-    CSS = _report.CSS
-    find_browser = _report.find_browser
-    outcome_strip = _report.outcome_strip
-    STRIP_CAP = _report.STRIP_CAP
-except Exception:  # pragma: no cover - 极端情况下 report.py 缺失或加载失败
-    CSS = ""
-    outcome_strip = None
-    STRIP_CAP = ""
-
-    def find_browser():
-        return None
+_report = _load_report_module()
+CSS = _report.CSS
+find_browser = _report.find_browser
+outcome_strip = _report.outcome_strip
+STRIP_CAP = _report.STRIP_CAP
 
 
 EXPECTED_SECTION_NUMBERS = [f"{i:02d}" for i in range(1, 13)]
@@ -142,7 +151,7 @@ _OL_RE = re.compile(r"^(\s*)\d+[.)]\s+(.*)$")
 _HR_RE = re.compile(r"^\s*(---+|\*\*\*+|___+)\s*$")
 _QUOTE_RE = re.compile(r"^>\s?(.*)$")
 _TABLE_SEP_RE = re.compile(r"^\s*\|?\s*:?-{2,}:?\s*(\|\s*:?-{2,}:?\s*)*\|?\s*$")
-_FENCE_RE = re.compile(r"^:::\s*(kpi|strip)\s*(.*)$")
+_FENCE_RE = re.compile(r"^:::\s*(kpi|strip|bars|interval|timeline|matrix|route|evidence|sources)\s*(.*)$")
 _CALLOUT_RE = re.compile(r"^\[!(key|warn|note)\]\s*(.*)$")
 _TAGS = ("冲", "稳", "保")
 
@@ -157,27 +166,44 @@ def _pct(text):
     return float(m.group(1)) / 100 if m else 0.0
 
 
-def render_fence(kind, title, lines):
-    """渲染 `::: kpi` 数字卡与 `::: strip` 落点条（与 report.py 摘要页同款）。"""
-    items = _fence_items(lines)
-    if kind == "kpi":
-        cards = []
-        for row in items[:4]:
-            label, value, note = (row + ["", "", ""])[:3]
-            # 数字为主的短值用大字；汉字多的（如去向、方向）用小一号，免得在窄卡里折行
-            cjk = sum(ord(c) > 0x2E80 for c in value)
-            big = ' class="num"' if cjk <= 4 and len(value) <= 12 else ' style="font-size:11pt"'
-            cards.append(f"<div><b>{render_inline(label)}</b><span{big}>{render_inline(value)}</span>"
-                         + (f"<em>{render_inline(note)}</em>" if note else "") + "</div>")
-        return f'<div class="kpis" style="grid-template-columns:repeat({max(len(cards), 1)},1fr)">' + "".join(cards) + "</div>"
-    if outcome_strip is None:
-        return ""
-    pairs = [(r[0], _pct(r[1] if len(r) > 1 else "")) for r in items]
-    pfall = sum(p for name, p in pairs if name == "滑档")
-    pairs = [(name, p) for name, p in pairs if name != "滑档"]
-    cap = STRIP_CAP + "浅色是最终录取概率不到 5% 的志愿" + ("；红色是滑档" if pfall else "") + "。"
-    return (f'<div class="fig"><div class="ttl">{render_inline(title or "你最终会被哪里录取")}</div>'
-            + outcome_strip(pairs, pfall) + f'<div class="cap">{E(cap)}</div></div>')
+def render_fence(kind, title, lines, notes=None):
+    """只解析Markdown参数；组件函数与CSS全部调用report.py。"""
+    opts, data = {}, []
+    for line in lines:
+        if not line.strip(): continue
+        if re.match(r'^\s*[-*+]\s+',line): data.append(line)
+        elif ':' in line:
+            key, _, value = line.partition(':'); opts[key.strip()] = value.strip()
+        else: raise ValueError(f'组件{kind}行格式错误：{line}')
+    items = _fence_items(data)
+    if kind == 'sources': return '__SOURCE_NOTES__'
+    if kind == 'kpi': return _report.kpi_cards(items, render_inline)
+    if kind == 'evidence':
+        return ''.join('<p>'+_report.evidence_badge(r[0])+' '+render_inline(r[1] if len(r)>1 else '')+'</p>' for r in items)
+    if kind == 'route':
+        mapping = {r[0]:r[1] for r in items if len(r)>1}
+        return _report.route_card(title,[mapping.get(k,'待核') for k in ('门槛','时间窗口','投入','切换条件')])
+    source = opts.get('source','')
+    caption = opts.get('caption','')
+    if kind == 'strip':
+        pairs = [(r[0],_pct(r[1])) for r in items]
+        pfall = sum(v for n,v in pairs if n=='滑档')
+        content = _report.outcome_strip([(n,v) for n,v in pairs if n!='滑档'],pfall)
+        caption = caption or STRIP_CAP+'浅色是最终录取概率不到5%的志愿'+('；红色是滑档' if pfall else '')+'。'
+        title = title or '你最终会被哪里录取'
+    elif kind == 'bars':
+        content = _report.bar_chart([[r[0],float(r[1].replace(',','')),*(r[2:])] for r in items],opts.get('unit',''),float(opts['max']) if 'max' in opts else None)
+    elif kind == 'interval':
+        number = lambda s: float(s.replace(',','')) if s and s!='未取到' else None
+        content = _report.interval_chart([[r[0],*[number(x) for x in (r[1:]+['','',''])[:3]]] for r in items],opts.get('unit','分'))
+    elif kind == 'timeline': content = _report.timeline(items)
+    elif kind == 'matrix':
+        if 'columns' not in opts: raise ValueError('matrix须有columns，按|分隔维度')
+        columns = [v.strip() for v in opts['columns'].split('|')]
+        if any(len(r)!=len(columns)+1 for r in items): raise ValueError('matrix列数与columns不一致')
+        content = _report.comparison_matrix(columns,items)
+    else: raise ValueError('未知报告组件：'+kind)
+    return _report.figure(title,content,caption,source)
 
 
 def _cell(text):
@@ -251,7 +277,7 @@ def _render_list_items(items):
     return "".join(parts)
 
 
-def markdown_to_html(body):
+def markdown_to_html(body, notes=None):
     """把 Markdown 正文转成 HTML 片段，同时返回按 `##` 划分的小节列表
     [(number_or_None, title, html)]，number 取标题里开头的两位数字（若有）。"""
     lines = body.split("\n")
@@ -283,7 +309,7 @@ def markdown_to_html(body):
                 num_m = re.match(r"^(\d{2})\s+(.*)$", title)
                 num = num_m.group(1) if num_m else None
                 disp_title = num_m.group(2) if num_m else title
-                out.append(f'<section><h2>{f"<span class=\'no\'>{E(num)}</span>" if num else ""}{render_inline(disp_title)}</h2>')
+                out.append(f'<section data-section="{E(num or '')}"><h2>{f"<span class=\'no\'>{E(num)}</span>" if num else ""}{render_inline(disp_title)}</h2>')
                 cur_section_out = (num, disp_title, len(out) - 1)
             else:
                 tag = f"h{min(level, 3) if level != 2 else 3}"
@@ -301,7 +327,7 @@ def markdown_to_html(body):
                 buf.append(lines[i])
                 i += 1
             i += 1
-            out.append(render_fence(fm.group(1), fm.group(2).strip(), buf))
+            out.append(render_fence(fm.group(1), fm.group(2).strip(), buf, notes))
             continue
 
         if _HR_RE.match(line):
@@ -318,7 +344,7 @@ def markdown_to_html(body):
                 i += 1
             cm = _CALLOUT_RE.match(buf[0].strip())
             if cm:
-                inner, _ = markdown_to_html("\n".join(buf[1:]))
+                inner, _ = markdown_to_html("\n".join(buf[1:]), notes)
                 cls = "" if cm.group(1) == "note" else " " + cm.group(1)
                 out.append(f'<div class="box{cls}"><h4>{render_inline(cm.group(2))}</h4>{inner}</div>')
                 continue
@@ -383,47 +409,28 @@ def validate_sections(sections):
 # 整页组装（复用 report.py 的封面/目录风格）
 # ---------------------------------------------------------------------------
 
-def build_html(meta, body_html, sections):
-    title = meta.get("title", "决策报告")
-    subtitle = meta.get("subtitle", "")
-    person = meta.get("person", "–")
-    date = meta.get("date", "–")
-    edition = meta.get("edition", "")
-    note = meta.get("note", "")
-
-    toc = "".join(
-        f"<div><span>{E(num)}</span><span>{E(t)}</span></div>"
-        for num, t, _ in sections if num is not None
-    )
-    meta_rows = [("本人", person), ("版本", edition or "–"), ("报告日期", date)]
-    cover = (
-        '<div class="cover"><div class="band">'
-        '<div class="kicker">知 衢 · 决 策 报 告</div>'
-        f'<h1>{E(title)}</h1><div class="sub">{E(subtitle)}</div>'
-        '<div class="motto">知其所往，方行其衢。</div></div>'
-        '<div class="meta">'
-        + "".join(f"<div><b>{E(a)}</b><span>{E(str(b))}</span></div>" for a, b in meta_rows)
-        + "</div>"
-        + (f'<div class="verdict"><b>备注</b><p>{E(note)}</p></div>' if note else "")
-        + f'<div class="verdict" style="background:transparent;border-left-color:var(--rule2)"><b>目录</b><div class="toc">{toc}</div></div>'
-        + '<div class="foot">本报告由「知衢」生成，供本人决策参考；数据来源、假设与局限见"方法与假设"和"数据来源与声明"两节。</div></div>'
-    )
-
-    body_parts = []
-    for idx, (num, t, sec_html) in enumerate(sections):
-        # 有编号的小节沿用 report.py 的 <span class="no">编号</span> 结构（已在渲染时写入）；
-        # 每个 `##` 小节各占一个 <section>。只有首节另起一页（封面之后），其余接着排，
-        # 小节内允许跨页，避免整节被推到下一页而留下大片空白（CSS 见 report.py）。
-        cls = ' class="newpage"' if idx == 0 else ""
-        sec_html = sec_html.replace("<section>", f"<section{cls}>", 1) if idx == 0 else sec_html
-        body_parts.append(sec_html + "</section>")
-
-    runhead = f"{person} · {edition}".replace('"', "")
-    css = CSS.replace("__RUNHEAD__", runhead).replace("__TOPLEFT__", "知衢 · " + (title or "决策报告").replace('"', "")) if CSS else ""
-    doc = (
-        f'<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>{E(title)}</title>'
-        f'<style>{css}</style></head><body>{cover}{"".join(body_parts)}</body></html>'
-    )
+def build_html(meta, body_html, sections, notes=None):
+    notes = notes or _report.SourceNotes()
+    title = meta.get('title','决策报告')
+    person = meta.get('person','本人')
+    edition = meta.get('edition','决策').removesuffix('版')
+    report_id = meta.get('id','待编号')
+    cover = _report.cover_html(title,meta.get('subtitle',''),person,
+                              meta.get('stage',edition+'版'),meta.get('region','待核'),report_id,
+                              meta.get('date','待核'),meta.get('data_asof','待核'),
+                              meta.get('conclusion',meta.get('note','')),[(num,t) for num,t,_ in sections if num])
+    parts = []
+    for idx,(num,t,sec_html) in enumerate(sections):
+        if idx==0: sec_html = sec_html.replace('<section ', '<section class="newpage" ',1)
+        if num != '12': sec_html = notes.compact(_report.section_lead(sec_html))
+        else: sec_html = _report.section_lead(sec_html)
+        parts.append(sec_html+'</section>')
+    body = ''.join(parts)
+    if '__SOURCE_NOTES__' in body: body = body.replace('__SOURCE_NOTES__',notes.render())
+    elif notes.entries:
+        end = body.rfind('</section>'); body=body[:end]+notes.render()+body[end:]
+    doc = _report.document_html(title,cover,body,person,edition,report_id)
+    _report.publication_gate(doc)
     return doc
 
 
@@ -431,9 +438,14 @@ def render(markdown_text):
     """返回 (html_document, sections)。sections 供测试和调用方检查用。"""
     meta, body = split_front_matter(markdown_text)
     body = re.sub(r"[ \t]*<!--.*?-->", "", body, flags=re.S)  # 核实/复核期限等注释只给维护者看，不进报告
-    body_html, sections = markdown_to_html(body)
+    notes = _report.SourceNotes()
+    for match in re.finditer(r'^::: sources[^\n]*\n(.*?)^:::\s*$',body,re.M|re.S):
+        for row in _fence_items(match[1].splitlines()):
+            label, url, when = (row+['','',''])[:3]
+            notes.add(label,url,when)
+    body_html, sections = markdown_to_html(body, notes)
     validate_sections(sections)
-    doc = build_html(meta, body_html, sections)
+    doc = build_html(meta, body_html, sections, notes)
     return doc, sections
 
 
@@ -488,23 +500,8 @@ def _print_pdf(doc, out_path):
 
 
 def layout_gate(pdf):
-    """生成 PDF 后必做的版面自检；表格挤成一字一行、数字拆行等问题直接报错。"""
-    try:
-        from check_layout import check_pdf
-    except ImportError:
-        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-        from check_layout import check_pdf
-    try:
-        issues = check_pdf(pdf)
-    except ImportError:
-        print("⚠ 未安装 PyMuPDF，没有做版面自检；请 pip install pymupdf 后重新生成，或逐页查看 PDF。")
-        return
-    if issues:
-        print("✗ 版面自检没通过：", file=sys.stderr)
-        for msg in issues:
-            print("    " + msg, file=sys.stderr)
-        sys.exit("请修好版式后重新生成；不要交付这份 PDF。")
-    print("版面自检通过")
+    return _report.layout_gate(pdf)
+
 
 def main():
     ap = argparse.ArgumentParser(description="知衢 · 把固定 12 节结构的 Markdown 报告渲染成 PDF/HTML")

@@ -25,6 +25,29 @@ class DemoIntegrity(unittest.TestCase):
             with self.subTest(path=path):
                 check_demos.check(path)
 
+    def test_added_grad_evidence_recomputes_without_replacing_old_budget(self):
+        values = check_demos.calculate(self.case)
+        self.assertEqual(values['annual_cost'], 25200)
+        self.assertEqual(values['gdut_fee_reference']['annual_cost'], 29200)
+        self.assertEqual(values['gdut_fee_reference']['annual_margin_if_living_plus_200'], -1600)
+        self.assertEqual(values['gdut_2026_retest']['initial_increment_contribution'], 1)
+        self.assertEqual(values['gdut_2026_retest']['retest_increment_contribution'], 1)
+        stats = values['gdut_2026_first_choice_retest_scores']
+        self.assertEqual(stats, {'n': 86, 'min': 350, 'q1': 357, 'median': 368, 'q3': 383, 'max': 437})
+
+    def test_retest_population_cannot_silently_include_special_plan(self):
+        changed = copy.deepcopy(self.case)
+        changed['additional_scenarios']['gdut_2026_first_choice_retest_scores']['excluded_soldier_rows'] = 0
+        with self.assertRaisesRegex(ValueError, 'population and exclusions'):
+            check_demos.calculate(changed)
+
+    def test_anonymous_histogram_rejects_invalid_counts(self):
+        for invalid in (-1, 0, 1.5, True):
+            changed = copy.deepcopy(self.case)
+            changed['additional_scenarios']['gdut_2026_first_choice_retest_scores']['score_histogram']['350'] = invalid
+            with self.assertRaisesRegex(ValueError, 'histogram'):
+                check_demos.calculate(changed)
+
     def test_future_result_cannot_become_fact(self):
         for field in ('personal_success_probability', 'official_2027_score', 'official_offer'):
             with self.subTest(field=field):

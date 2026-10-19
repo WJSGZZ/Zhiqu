@@ -33,9 +33,8 @@
       "candidate": "广东工业大学电气工程专业学位",
       "status": "pending",
       "source": "https://automation.gdut.edu.cn/info/1044/8869.htm",
-      "verified_scope": "2025培养方案确认专业与三年学制；2027年招生简章已于2026-09-30发布，尚未逐项核对电气工程的统考名额、科目、费用或报考限制",
+      "verified_scope": "2027简章及自动化学院085801目录已核：101、204英语二、302数学二、808电路理论；同等学力加试另列。2026第一志愿全日制复试普通考生成绩匿名频数已核、不是拟录取分布；2026收费与复试办法已取，2027收费、净统考名额与最终资格仍待核。",
       "unresolved": [
-        "2027招生目录与考试科目",
         "统考计划",
         "费用与奖助",
         "就业岗位资格"
@@ -44,8 +43,8 @@
       "hard_conditions": [
         {
           "name": "2027招生目录与考试科目",
-          "status": "unknown",
-          "source": "https://yzw.gdut.edu.cn/info/1017/3865.htm"
+          "status": "met",
+          "source": "https://yzw.gdut.edu.cn/fujian2027nianshuoshiyanjiushengzhaoshengzhuanyemuluMEdiaU.pdf"
         },
         {
           "name": "统考计划",
@@ -62,7 +61,8 @@
           "status": "unknown",
           "source": "https://automation.gdut.edu.cn/info/1044/8869.htm"
         }
-      ]
+      ],
+      "verified_on": "2026-10-19"
     },
     {
       "candidate": "华南理工大学电气工程（专硕）",
@@ -206,5 +206,88 @@
       "cost_unit": "CNY",
       "utility_unit": "separate_confirmed_scale"
     }
-  ]
+  ],
+  "additional_scenarios": {
+    "gdut_fee_reference": {
+      "applicable_cohort": 2026,
+      "target_cohort": 2027,
+      "official_tuition": 12000,
+      "years": 3,
+      "annual_housing_assumption": 1600,
+      "monthly_living_assumption": 1300,
+      "living_months": 12,
+      "annual_limit": 30000,
+      "source": "https://yzw.gdut.edu.cn/info/1019/1304.htm",
+      "verified_on": "2026-10-19",
+      "scope": "2026全日制非定向电气工程学费；2027学费尚未取得，住宿1600仅为统一压力测试假设，不是广工官方住宿费；不扣奖助"
+    },
+    "gdut_2026_retest": {
+      "source": "https://automation.gdut.edu.cn/info/1081/10510.htm",
+      "verified_on": "2026-10-19",
+      "initial_max": 500,
+      "retest_max": 100,
+      "initial_weight": 0.5,
+      "retest_weight": 0.5,
+      "initial_increment": 10,
+      "retest_increment": 2,
+      "scope": "仅解释2026自动化学院合成规则，不承诺2027沿用"
+    },
+    "gdut_2026_first_choice_retest_scores": {
+      "source": "https://automation.gdut.edu.cn/info/1081/10524.htm",
+      "attachment_url": "https://automation.gdut.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1834785635&wbfileid=42BE6D8259506231F80666CA218909E2",
+      "source_sha256": "db7046e139a4d1b5d6c414e9569c3ac0566dca5688c3ff80425e7d2da45e36da",
+      "verified_on": "2026-10-19",
+      "population": "2026自动化学院085801全日制第一志愿复试成绩公示，剔除退役士兵专项后的86人；不是拟录取名单，也不是全部报考者",
+      "full_time_rows": 93,
+      "excluded_soldier_rows": 7,
+      "score_histogram": {
+        "350": 2,
+        "351": 2,
+        "352": 2,
+        "353": 5,
+        "354": 2,
+        "355": 3,
+        "356": 5,
+        "357": 2,
+        "358": 4,
+        "359": 2,
+        "361": 4,
+        "363": 1,
+        "364": 3,
+        "365": 2,
+        "366": 2,
+        "368": 3,
+        "369": 1,
+        "370": 1,
+        "371": 2,
+        "372": 3,
+        "373": 2,
+        "374": 1,
+        "375": 3,
+        "379": 1,
+        "381": 2,
+        "382": 2,
+        "383": 4,
+        "384": 2,
+        "388": 2,
+        "389": 2,
+        "390": 1,
+        "391": 1,
+        "396": 2,
+        "402": 1,
+        "404": 1,
+        "406": 1,
+        "407": 1,
+        "408": 2,
+        "417": 1,
+        "429": 1,
+        "432": 1,
+        "437": 1
+      },
+      "quantile_method": "inclusive_linear_type7",
+      "privacy": "仅分数频数，无姓名、考生编号或原始名单",
+      "admitted_distribution_status": "unretrieved_complete_population",
+      "scope": "全校拟录取表与学院成绩表尚未完整对应，不把匹配子集用于拟录取分布"
+    }
+  }
 }

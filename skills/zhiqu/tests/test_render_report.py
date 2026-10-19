@@ -159,6 +159,7 @@ class TestReportElements(unittest.TestCase):
         ":::",
         "",
         "::: strip",
+        "source: 1",
         "- 甲校 | 20%",
         "- 乙校 | 79.5%",
         "- 滑档 | 0.5%",
@@ -229,7 +230,7 @@ class TestFullRender(unittest.TestCase):
         doc, sections = rr.render(SAMPLE_MD)
         self.assertIn("知其所往，方行其衢。", doc)
         self.assertIn("虚构示例报告", doc)
-        self.assertIn("虚构示例 · 小周", doc)
+        self.assertIn("小周（模拟）", doc)
         self.assertIn('class="toc"', doc)
         self.assertIn("<style>", doc)
         # CSS 应来自 report.py（颜色、封面等复用）
@@ -238,7 +239,7 @@ class TestFullRender(unittest.TestCase):
 
     def test_maintainer_comments_are_not_rendered(self):
         doc, _ = rr.render(SAMPLE_MD.replace("内容占位。", "学费 8000 元 <!-- 核实：2026-10-17；复核期限：2027-07-01 -->", 1))
-        self.assertIn("学费 8000 元", doc)
+        self.assertIn("学费 8,000 元", doc)
         self.assertNotIn("复核期限", doc)
 
     def test_render_html_via_cli(self):
