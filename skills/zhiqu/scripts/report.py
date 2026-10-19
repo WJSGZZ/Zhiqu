@@ -93,10 +93,13 @@ ol.tight li, ul.tight li, .box > ol li, .box > ul li { margin: .6mm 0; }
 table { width: 100%; border-collapse: collapse; margin: 2mm 0 4mm; font-size: 8.8pt; font-variant-numeric: tabular-nums; }
 thead th { white-space: nowrap; text-align: left; font: 600 7.8pt var(--sans); color: var(--soft); letter-spacing: .3pt; border-top: 1pt solid var(--ink); border-bottom: .6pt solid var(--ink); padding: 1.6mm 2mm; }
 table.vt { table-layout: fixed; }
+table.rt { table-layout: fixed; }
+td { overflow-wrap: anywhere; }
 table.vt thead th { white-space: normal; }
 table.vt td:nth-child(2) { font-weight: 600; }
 table.vt td .small { font-weight: 400; }
 table.vt td.note { font-size: 8pt; line-height: 1.6; }
+table.vt td.c, table.vt th.c { white-space: nowrap; }
 tbody td { border-bottom: .4pt solid var(--rule); padding: 1.5mm 2mm; vertical-align: top; }
 tbody tr { break-inside: avoid; }
 td.r, th.r { text-align: right; font-variant-numeric: tabular-nums; }
@@ -440,7 +443,7 @@ def build(rep, opt):
         prob_cols = "<th class='r'>单独过线</th><th class='r'>最终录取</th>" if numeric else ""
         rank_col = "预测位次" if grade == "A" else "预测位次（80% 区间）"
         # 固定列宽：自动布局下表头不换行会把“说明”栏挤到很窄，一行拉得很高，整张表要占四五页
-        cols = ("<colgroup><col style='width:4%'><col style='width:22%'><col style='width:6%'><col style='width:6%'>"
+        cols = ("<colgroup><col style='width:6%'><col style='width:28%'><col style='width:7%'><col style='width:6%'>"
                 + ("<col style='width:8%'><col style='width:8%'>" if numeric else "") + "<col style='width:13%'><col></colgroup>")
         body += ("<table class='vt'>" + cols + "<thead><tr><th class='c'>序</th><th>志愿</th><th class='c'>类型</th><th class='r'>偏好</th>"
                  f"{prob_cols}<th class='r'>{rank_col}</th><th>说明</th></tr></thead><tbody>")
@@ -489,8 +492,8 @@ def build(rep, opt):
     if rs or qs:
         body = '<p class="lead">以下是对排名靠前学校的升学和就业调研。每条信息都注明了证据等级：官方文件 &gt; 多人一致 &gt; 单人说法 &gt; 推测。</p>'
         for r in rs:
-            body += f"<h3>{E(r['school'])}</h3><table><thead><tr><th style='width:26%'>方面</th><th>发现</th><th style='width:18%'>证据等级</th></tr></thead><tbody>" + "".join(
-                f"<tr><td>{E(a)}</td><td>{E(b)}</td><td class='small'>{E(c)}</td></tr>" for a, b, c in r.get("items", [])) + "</tbody></table>" + (
+            body += f"<h3>{E(r['school'])}</h3><table class='rt'><colgroup><col style='width:14%'><col><col style='width:24%'></colgroup><thead><tr><th>方面</th><th>发现</th><th>证据等级</th></tr></thead><tbody>" + "".join(
+                f"<tr><td>{E(a)}</td><td>{E(b)}</td><td class='small' style='word-break:break-all'>{E(c)}</td></tr>" for a, b, c in r.get("items", [])) + "</tbody></table>" + (
                 "<p class='small' style='word-break:break-all'>来源：" + "；".join(E(u) for u in r["sources"]) + "</p>" if r.get("sources") else "")
         if qs:
             body += ('<div class="box key"><h4>请你亲自去问学长学姐的问题</h4><p class="small">开头先说明：每条回答请标"确认 / 听说 / 不知道"，不确定就说不知道。最好问两个以上、不同年级的人。</p><ol class="tight">'
