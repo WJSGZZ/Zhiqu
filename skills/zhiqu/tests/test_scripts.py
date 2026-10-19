@@ -134,6 +134,31 @@ class TestOtherScripts(unittest.TestCase):
                 self.assertIn(title, html)
             self.assertIn("知其所往，方行其衢。", html)
 
+    def test_research_table_fixed_layout_with_long_urls(self):
+        """调研表的长网址不能把“发现”栏挤成一字一行（2026-10-19 旗舰报告的问题）。"""
+        with tempfile.TemporaryDirectory() as d:
+            res = os.path.join(d, "r.json")
+            run("scripts/optimize.py", "examples/candidates_demo.csv", "--rank", "22000", "--slots", "6", "--u-fall", "-60", "--json", res)
+            with open(os.path.join(ROOT, "examples/report_demo.json"), encoding="utf-8") as f:
+                rep = json.load(f)
+            long_url = "https://www.example.edu.cn/__local/D/67/01/" + "A" * 80 + ".pdf"
+            rep["research"] = [{"school": "示例大学", "sources": [long_url],
+                                "items": [["转专业", "一年级可申请，接收不超过该专业人数的10%。", f"官方原文（{long_url}）"]]}]
+            src = os.path.join(d, "rep.json")
+            with open(src, "w", encoding="utf-8") as f:
+                json.dump(rep, f, ensure_ascii=False)
+            out = os.path.join(d, "r.html")
+            code, _, err = run("scripts/report.py", src, "--opt", res, "--out", out)
+            self.assertEqual(code, 0, err)
+            with open(out, encoding="utf-8") as f:
+                html = f.read()
+            i = html.index("<h3>示例大学</h3>")
+            table = html[i:html.index("</table>", i)]
+            self.assertIn("class='rt'", table)
+            self.assertIn("<colgroup>", table)
+            self.assertIn("word-break:break-all", table)
+            self.assertRegex(html, r"table\.rt \{ table-layout: fixed; \}")
+
     def test_limits_shown_in_report(self):
         with tempfile.TemporaryDirectory() as d:
             src = os.path.join(d, "c.csv")
