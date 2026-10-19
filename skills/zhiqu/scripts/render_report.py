@@ -483,7 +483,28 @@ def _print_pdf(doc, out_path):
         sys.exit("PDF 生成失败：请改用 --out 报告.html，再用浏览器打印为 PDF。")
     os.unlink(tmp.name)
     print(f"已生成 {out}")
+    layout_gate(out)
 
+
+
+def layout_gate(pdf):
+    """生成 PDF 后必做的版面自检；表格挤成一字一行、数字拆行等问题直接报错。"""
+    try:
+        from check_layout import check_pdf
+    except ImportError:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        from check_layout import check_pdf
+    try:
+        issues = check_pdf(pdf)
+    except ImportError:
+        print("⚠ 未安装 PyMuPDF，没有做版面自检；请 pip install pymupdf 后重新生成，或逐页查看 PDF。")
+        return
+    if issues:
+        print("✗ 版面自检没通过：", file=sys.stderr)
+        for msg in issues:
+            print("    " + msg, file=sys.stderr)
+        sys.exit("请修好版式后重新生成；不要交付这份 PDF。")
+    print("版面自检通过")
 
 def main():
     ap = argparse.ArgumentParser(description="知衢 · 把固定 12 节结构的 Markdown 报告渲染成 PDF/HTML")

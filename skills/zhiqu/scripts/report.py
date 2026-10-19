@@ -13,6 +13,7 @@ from check_report import check_report
 import html
 import json
 import os
+import re
 import shutil
 import math
 import subprocess
@@ -21,6 +22,14 @@ import tempfile
 import time
 
 E = html.escape
+NUM_CELL = re.compile(r"[\d,.\s%~～+\-–—<>≥≤/]+|(?:不到|超过|约)\s?[\d,.]+%?")
+
+
+def td(c):
+    """表格单元格：纯数字（位次、分数、百分比、序号）不换行，避免被拆成两行。"""
+    s = str(c)
+    cls = " class='num'" if NUM_CELL.fullmatch(s.strip()) else ""
+    return f"<td{cls}>{E(s)}</td>"
 
 CSS = r"""
 @page { size: A4; margin: 20mm 18mm 20mm 18mm; background: #EEE9DC;
@@ -94,6 +103,7 @@ table { width: 100%; border-collapse: collapse; margin: 2mm 0 4mm; font-size: 8.
 thead th { white-space: nowrap; text-align: left; font: 600 7.8pt var(--sans); color: var(--soft); letter-spacing: .3pt; border-top: 1pt solid var(--ink); border-bottom: .6pt solid var(--ink); padding: 1.6mm 2mm; }
 table.vt { table-layout: fixed; }
 table.rt { table-layout: fixed; }
+td.num { white-space: nowrap; font-variant-numeric: tabular-nums; }
 td { overflow-wrap: anywhere; }
 table.vt thead th { white-space: normal; }
 table.vt td:nth-child(2) { font-weight: 600; }
@@ -547,7 +557,7 @@ def build(rep, opt):
         html = f"<h3>{E(b['title'])}</h3>" + "".join(f"<p>{E(x)}</p>" for x in b.get("paras", []))
         if b.get("rows"):
             html += ("<table><thead><tr>" + "".join(f"<th>{E(c)}</th>" for c in b.get("columns", [])) + "</tr></thead><tbody>"
-                     + "".join("<tr>" + "".join(f"<td>{E(str(c))}</td>" for c in row) + "</tr>" for row in b["rows"]) + "</tbody></table>")
+                     + "".join("<tr>" + "".join(td(c) for c in row) + "</tr>" for row in b["rows"]) + "</tbody></table>")
         return html + "".join(f'<p class="small">{E(x)}</p>' for x in b.get("notes", []))
 
     # 08 方法与假设（可用术语）
@@ -578,7 +588,7 @@ def build(rep, opt):
         body = '<p class="lead">' + E(h.get("intro", "")) + "</p>"
         if h.get("table"):
             body += "<table><thead><tr>" + "".join(f"<th>{E(c)}</th>" for c in h["columns"]) + "</tr></thead><tbody>" + "".join(
-                "<tr>" + "".join(f"<td>{E(str(c))}</td>" for c in row) + "</tr>" for row in h["table"]) + "</tbody></table>"
+                "<tr>" + "".join(td(c) for c in row) + "</tr>" for row in h["table"]) + "</tbody></table>"
         body += "".join(f"<p>{E(x)}</p>" for x in h.get("notes", []))
         body += "".join(block(b) for b in h.get("extra", []))
         sec("事后回看", body)
@@ -637,6 +647,26 @@ def find_browser():
     return next((c for c in cands if c and os.path.exists(c)), None)
 
 
+
+def layout_gate(pdf):
+    """生成 PDF 后必做的版面自检；表格挤成一字一行、数字拆行等问题直接报错。"""
+    try:
+        from check_layout import check_pdf
+    except ImportError:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        from check_layout import check_pdf
+    try:
+        issues = check_pdf(pdf)
+    except ImportError:
+        print("⚠ 未安装 PyMuPDF，没有做版面自检；请 pip install pymupdf 后重新生成，或逐页查看 PDF。")
+        return
+    if issues:
+        print("✗ 版面自检没通过：", file=sys.stderr)
+        for msg in issues:
+            print("    " + msg, file=sys.stderr)
+        sys.exit("请修好版式后重新生成；不要交付这份 PDF。")
+    print("版面自检通过")
+
 def main():
     ap = argparse.ArgumentParser(description="知衢 · 生成志愿填报决策报告（PDF/HTML）")
     ap.add_argument("report", help="报告内容 JSON（字段见 references/report-guide.md）")
@@ -691,6 +721,7 @@ def main():
         sys.exit("PDF 生成失败：请改用 --out 报告.html，再用浏览器打印为 PDF。")
     os.unlink(tmp.name)
     print(f"已生成 {out}")
+    layout_gate(out)
 
 
 if __name__ == "__main__":
