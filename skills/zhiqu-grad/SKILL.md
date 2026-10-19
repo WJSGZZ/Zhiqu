@@ -18,6 +18,8 @@ description: 知衢 · 读研规划。读取「知衢 · 硕士版」问卷生�
 
 ## 工作流程
 
+完整读研个案须留存哪些阶段文件，见 [case-workflow.md](references/case-workflow.md)；各节组件登记在 [report-contract.json](references/report-contract.json)。T10目前完成规格，新门槛、自动组装仍待工具接入，不能由现有渲染成功推定已执行新流程。
+
 1. **确认时间坐标**。先问清几件事：
    - 今天是哪年哪月；
    - 学生读到几年级，哪年毕业；

@@ -71,3 +71,11 @@ python3 scripts/case_check.py <案例目录> --stage N    # 检查 0..N 阶段�
 ```
 
 `pitfalls` 的 `item` 依次为：没查到写成不存在、群体数字当个人概率、经验帖数字做决定、按编号引用问卷、同一事实写两处、会过期的事实、八字越界、委派判断类任务、取页摘要当原文。
+
+## 五、T10 补充：操控者核查与评分（规格）
+
+现有九阶段、参数、计算与报告内容保持；本节是阶段一规格，操控者单生成与评分门槛须待阶段二工具接入后才执行。共用规则只在[报告工作流总纲](../../zhiqu-shared/references/report-workflow.md)维护，各图清单见[内容合同](report-contract.json)。
+
+- 报告阶段自动生成 `<案例目录>/operator_check.md`，只读适配已有规则、调研和计算来源，不修改 report.json / result.json。挑出非官方或等级未标、未取原文、临期/过期、影响主结论的条目，列“核什么、去哪里核、核完填什么”；缺个人信息请本人补充。它是给Xik的独立清单，不附进客户报告。
+- 复核阶段在既有 review.json 新增 rubric 和 snapshot，保留原 independent、reviewer、date、pitfalls、sampled_sources。十项评分及门槛以总纲为准；制作会话的 self_assessment 不等于新会话复核，不假填Xik已核。
+- 高考现有数值和评级规则优先；新增核查项不可借机调整概率、位次、志愿顺序或结论。任何依赖变更都使对应核查与复核失效，需对当前报告快照重核。

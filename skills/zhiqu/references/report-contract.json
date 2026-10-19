@@ -1,0 +1,218 @@
+{
+  "schema_version": 1,
+  "kind": "gaokao",
+  "implementation_status": "legacy_inventory",
+  "shared_rules": "../../zhiqu-shared/references/report-workflow.md",
+  "legacy_gate_authority": [
+    "case_check.py:0..8",
+    "check_report.py:check_sections",
+    "check_report.py:check_grade"
+  ],
+  "preserve_report_and_result_json": true,
+  "section_count": 12,
+  "sections": [
+    {
+      "id": "01",
+      "role": "摘要",
+      "default_title": "摘要",
+      "title_override_allowed": false,
+      "legacy_content_checks": "check_report.py:check_sections",
+      "slots": []
+    },
+    {
+      "id": "02",
+      "role": "你的画像",
+      "default_title": "你的画像",
+      "title_override_allowed": false,
+      "legacy_content_checks": "check_report.py:check_sections",
+      "slots": []
+    },
+    {
+      "id": "03",
+      "role": "专业方向",
+      "default_title": "专业方向",
+      "title_override_allowed": false,
+      "legacy_content_checks": "check_report.py:check_sections",
+      "slots": [
+        {
+          "key": "directions_matrix",
+          "component": "comparison_matrix",
+          "min": 1,
+          "max": 1,
+          "from": [
+            {
+              "file": "report.json",
+              "pointer": "/directions"
+            }
+          ],
+          "source_required": true,
+          "condition": "always",
+          "rules": [
+            "interest_threshold_employment_city_family",
+            "existing_evidence_only"
+          ],
+          "count_by": "components"
+        }
+      ]
+    },
+    {
+      "id": "04",
+      "role": "志愿表",
+      "default_title": "志愿表",
+      "title_override_allowed": false,
+      "legacy_content_checks": "check_report.py:check_sections",
+      "slots": [
+        {
+          "key": "landing",
+          "component": "strip",
+          "min": 1,
+          "max": 1,
+          "from": [
+            {
+              "file": "result.json",
+              "pointer": "/list"
+            },
+            {
+              "file": "result.json",
+              "pointer": "/p_fall"
+            }
+          ],
+          "source_required": true,
+          "condition": "always",
+          "rules": [
+            "existing_grade_controls_probability_precision"
+          ],
+          "count_by": "components"
+        },
+        {
+          "key": "single_clear",
+          "component": "bars",
+          "min": 1,
+          "max": null,
+          "from": [
+            {
+              "file": "result.json",
+              "pointer": "/list"
+            }
+          ],
+          "source_required": true,
+          "condition": "always",
+          "rules": [
+            "source_p_clear_unchanged",
+            "grade_A_B_numeric_only",
+            "grade_C_D_qualitative_band_or_unavailable_explanation_no_precise_probabilities"
+          ],
+          "count_by": "components"
+        }
+      ]
+    },
+    {
+      "id": "05",
+      "role": "为什么这样排",
+      "default_title": "为什么这样排",
+      "title_override_allowed": false,
+      "legacy_content_checks": "check_report.py:check_sections",
+      "slots": []
+    },
+    {
+      "id": "06",
+      "role": "院校调研",
+      "default_title": "院校调研",
+      "title_override_allowed": false,
+      "legacy_content_checks": "check_report.py:check_sections",
+      "slots": []
+    },
+    {
+      "id": "07",
+      "role": "填报前核对清单",
+      "default_title": "填报前核对清单",
+      "title_override_allowed": false,
+      "legacy_content_checks": "check_report.py:check_sections",
+      "slots": []
+    },
+    {
+      "id": "08",
+      "role": "填报单",
+      "default_title": "填报单",
+      "title_override_allowed": false,
+      "legacy_content_checks": "check_report.py:check_sections",
+      "slots": []
+    },
+    {
+      "id": "09",
+      "role": "追问清单",
+      "default_title": "追问清单",
+      "title_override_allowed": false,
+      "legacy_content_checks": "check_report.py:check_sections",
+      "slots": []
+    },
+    {
+      "id": "10",
+      "role": "方法与假设",
+      "default_title": "方法与假设",
+      "title_override_allowed": false,
+      "legacy_content_checks": "check_report.py:check_sections",
+      "slots": [
+        {
+          "key": "history_appendix",
+          "component": "history_table",
+          "min": 1,
+          "max": 1,
+          "from": [
+            {
+              "file": "result.json",
+              "pointer": "/list"
+            }
+          ],
+          "source_required": true,
+          "condition": "always",
+          "rules": [
+            "existing_history_and_plan_sources",
+            "before_hindsight"
+          ],
+          "count_by": "components"
+        }
+      ]
+    },
+    {
+      "id": "11",
+      "role": "事后回看",
+      "default_title": "事后回看",
+      "title_override_allowed": false,
+      "legacy_content_checks": "check_report.py:check_sections",
+      "slots": []
+    },
+    {
+      "id": "12",
+      "role": "数据来源与声明",
+      "default_title": "数据来源与声明",
+      "title_override_allowed": false,
+      "legacy_content_checks": "check_report.py:check_sections",
+      "slots": [
+        {
+          "key": "sources",
+          "component": "source_endnotes",
+          "min": 1,
+          "max": 1,
+          "from": [
+            {
+              "file": "report.json",
+              "pointer": "/sources"
+            }
+          ],
+          "source_required": true,
+          "condition": "always",
+          "rules": [
+            "urls_only_here"
+          ],
+          "count_by": "components"
+        }
+      ]
+    }
+  ],
+  "additional_non_customer_artifacts": [
+    "operator_check.md",
+    "review.json:rubric"
+  ],
+  "note": "仅登记现有内容角色与必备图；不重定义高考门槛、模型、概率显示权限或数量下限。"
+}
