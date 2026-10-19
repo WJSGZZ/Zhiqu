@@ -2,7 +2,7 @@
   "schema_version": 1,
   "case_id": "2027-QZ-S01",
   "source_sha256": {
-    "case.json": "bbb2992c594d9349bfb8b018ad90b4e51dd6086abab779d64c5942e0fa9ad511",
+    "case.json": "0aa19667c54cb5761a66d4815ce15ad9fa8d003781cef41aa1fc67c2956b76be",
     "profile_parse.json": "55e1a5c44c20bd2a16afa97bef3497bfdb153e472eed6347733a440634fcb33e",
     "directions.json": "6f799d567cc51a1d860a40f8d9bbbf4c16f3bfcd2af58b999cc1db8c54f2761e",
     "rules_check.json": "bda48a6be3aff5fdb6d27f0800903873b37d636b4444a9ed460b302c5d5b08f9",
@@ -15,13 +15,13 @@
   },
   "contract_sha256": "affc47ff0df415d88221ddee76feb600856414b92cdd1c56130f86938e5cd381",
   "tool_sha256": {
-    "planning_report.py": "d5fb8e474580bc6e20ff79e1bbeeab9375593b133ebefdd534d2bc5255854ed5",
-    "planning_workflow.py": "e9b9514d1331e1817290d4535cf804a22983cba951079df8c1b2c2c93ffc5f76",
+    "planning_report.py": "8d698258e1450570ac3f4691a9aff48661c260da9138f06c343803d821c74995",
+    "planning_workflow.py": "11717f0a5a3da33cc870959d127b86a952ce4390741dfce2f3953870498c632f",
     "operator_check.py": "a6552c0b63a8a6b5d15c9a1057fbc2884fb85435b1b102fbf4a48dd74c4e7ebb",
     "check_demos.py": "fc8e1625f9e052373756160514ad5c73db1e8451c233425918edb5bc839d9f63",
-    "report.py": "08bb83a85f3de379e6a05f1e6e80b2d85c525324f4112b63b2ea36f1cec5ccf3",
-    "render_report.py": "8cb49efa61bba9985354966096a6645ff4fd6ad7a04683cdc8aeb766db42344c",
-    "profile_store.py": "398b79c55fe2413320cd6020f787c00cae881bce7bea2a5dcd239427597d838f"
+    "report.py": "db42052c76611d2fa4005fc887bd2149ae30c03290101dd2dfc28b052ec631ec",
+    "render_report.py": "e85ed74d89613ce9ba1017680c14ef385624b5892151b1c1ce472ef4e1748676",
+    "profile_store.py": "1cfd828583598a65cf719a46447cb3112ef0170eb1a638b89ab023cb47a04e7f"
   },
   "numeric_refs": [
     {
@@ -1193,12 +1193,178 @@
       "ref": "{{k:/target_year}}",
       "value": 2027,
       "display": "2027"
+    },
+    {
+      "location": "appendix",
+      "ref": "{{e:E1001#/value}}",
+      "value": 2024,
+      "display": "2024"
+    },
+    {
+      "location": "appendix",
+      "ref": "{{e:E1000#/value}}",
+      "value": "2025-07-07",
+      "display": "2025-07-07"
+    },
+    {
+      "location": "appendix",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "appendix",
+      "ref": "{{e:E1002#/value}}",
+      "value": "万",
+      "display": "万"
+    },
+    {
+      "location": "appendix",
+      "ref": "{{e:E1005#/value}}",
+      "value": 2025,
+      "display": "2025"
+    },
+    {
+      "location": "appendix",
+      "ref": "{{e:E1006#/value|comma}}",
+      "value": 2330,
+      "display": "2,330"
+    },
+    {
+      "location": "appendix",
+      "ref": "{{e:E1007#/value|comma}}",
+      "value": 2200,
+      "display": "2,200"
+    },
+    {
+      "location": "appendix",
+      "ref": "{{e:E1008#/value}}",
+      "value": 2026,
+      "display": "2026"
+    },
+    {
+      "location": "appendix",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "appendix",
+      "ref": "{{c:/report_parameters/hypothetical_followup__offers__1__months}}",
+      "value": 13,
+      "display": "13"
+    },
+    {
+      "location": "appendix",
+      "ref": "{{c:/report_parameters/hypothetical_followup__offers__1__months}}",
+      "value": 13,
+      "display": "13"
+    },
+    {
+      "location": "appendix",
+      "ref": "{{e:E1019#/value}}",
+      "value": 2026,
+      "display": "2026"
+    },
+    {
+      "location": "appendix",
+      "ref": "{{e:E1020#/value|comma}}",
+      "value": 4699,
+      "display": "4,699"
+    },
+    {
+      "location": "appendix",
+      "ref": "{{e:E1021#/value|comma}}",
+      "value": 23493,
+      "display": "23,493"
+    },
+    {
+      "location": "appendix",
+      "ref": "{{e:E1019#/value}}",
+      "value": 2026,
+      "display": "2026"
+    },
+    {
+      "location": "appendix",
+      "ref": "{{c:/report_parameters/hypothetical_followup__ss_personal_rate_assumption|percent1}}",
+      "value": 0.104,
+      "display": "10.4%"
+    },
+    {
+      "location": "appendix",
+      "ref": "{{e:E1022#/value}}",
+      "value": "0.4%",
+      "display": "0.4%"
+    },
+    {
+      "location": "appendix",
+      "ref": "{{e:E1023#/value}}",
+      "value": 2025,
+      "display": "2025"
+    },
+    {
+      "location": "appendix",
+      "ref": "{{e:E1019#/value}}",
+      "value": 2026,
+      "display": "2026"
+    },
+    {
+      "location": "appendix",
+      "ref": "{{e:E2085#/value|yuan}}",
+      "value": "六万元",
+      "display": "60,000"
+    },
+    {
+      "location": "appendix",
+      "ref": "{{c:/report_constants/months_per_year}}",
+      "value": 12,
+      "display": "12"
+    },
+    {
+      "location": "appendix",
+      "ref": "{{e:E1024#/value|arabic}}",
+      "value": "七",
+      "display": "7"
+    },
+    {
+      "location": "appendix",
+      "ref": "{{e:E1025#/value|arabic}}",
+      "value": "十",
+      "display": "10"
+    },
+    {
+      "location": "appendix",
+      "ref": "{{e:E1026#/value}}",
+      "value": "一",
+      "display": "一"
+    },
+    {
+      "location": "appendix",
+      "ref": "{{e:E1027#/value|arabic}}",
+      "value": "二十七",
+      "display": "27"
+    },
+    {
+      "location": "appendix",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
     }
   ],
   "artifacts": {
     "report.md": "77f566208464a0aae4ba61541e137a2803636efa1e1fbd7dad365992e34fe792",
-    "report.html": "a0d53699b4d049e3b2c4bac87a7d83670cd9081832ac29efdd4e855ef9f0b53b",
-    "report.pdf": "7ebf5cfe03376a3a8e5bb9ee0cac3e1d1f6d03f01c3067b8b9b4c4d749a8f3ea"
+    "report.html": "38e8fc1ebe16d59229b4c6b39c4a14ffad04d414bb5aa7e136f1a1edfe84b869",
+    "report.pdf": "e9d8a0a48a916ba42a77d22f7432c3a2161b6c1d1039afdfe150427bd9801e3a"
   },
-  "delivery_status": "awaiting_operator_and_independent_review"
+  "delivery_status": "awaiting_operator_and_independent_review",
+  "report_profile": {
+    "file": "profile_snapshot.json",
+    "sha256": "0a6cb6835c42b9e3a0e18679bd40d3c99c433453287f9e2a231e357647a858d9",
+    "filled_at": null,
+    "form": null
+  },
+  "verification_tools_sha256": {
+    "verify_report.py": "cfdb2a1486226a91d60aadd1047f6e3e4d76a4a5a2052aac26cf51e38fdcff3b",
+    "verification_calculations.py": "9ac916e796eab7676a4054b27d40674a25a0e78f8a5a9837f32ab9941381dea9"
+  }
 }

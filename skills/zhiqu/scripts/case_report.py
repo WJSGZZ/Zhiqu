@@ -9,7 +9,7 @@
 数据或方法更新后的顺序（技能目录）：
   python3 scripts/retro_run.py examples/<案例>          # 重算候选池、志愿表与对照
   python3 scripts/retro_sensitivity.py examples/<案例>  # 重算敏感性
-  python3 scripts/case_report.py examples/<案例>        # 重新生成报告；会列出 narrative.json 里带数字的句子，提醒人工复查
+  python3 scripts/case_report.py examples/<案例> --profile-version profile.txt  # 重新生成报告；会列出 narrative.json 里带数字的句子，提醒人工复查
 首次建院校调研：--import-research <目录>，从逐校 JSON 里按 narrative.json 的 research_schools 挑选写入 research.json。
 """
 import csv
@@ -137,8 +137,10 @@ def import_opportunities(case_dir, path):
     rp.write_text(json.dumps(research, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
 
 
-def build(case_dir, research_dir=None, opportunities=None, render=True):
+def build(case_dir, research_dir=None, opportunities=None, render=True, profile_version=None):
     """render=False 时只返回 report.json 的内容，不写文件、不出 PDF（测试“同样输入得到同样报告”用）。"""
+    if render and not profile_version:
+        raise ValueError("生成报告必须明确指定 profile_version / --profile-version")
     d = Path(case_dir).resolve()
     case = d.name
     cfg = json.loads((d / "retro_config.json").read_text(encoding="utf-8"))
@@ -359,7 +361,7 @@ def build(case_dir, research_dir=None, opportunities=None, render=True):
     rel = lambda p: str(Path(p).relative_to(SKILL))
     for ext in ("pdf", "html"):
         out = subprocess.run([sys.executable, "scripts/report.py", rel(d / "report.json"), "--opt", rel(run / "result.json"),
-                              "--out", rel(d / f"report.{ext}")], cwd=SKILL, capture_output=True, text=True)
+                              "--out", rel(d / f"report.{ext}"), "--profile-version", str(profile_version)], cwd=SKILL, capture_output=True, text=True)
         if out.returncode:
             print(case, ext, out.stderr[-800:])
             if ext == "pdf":
@@ -488,12 +490,13 @@ def main():
     ap.add_argument("cases", nargs="+", help="案例目录，如 examples/2026-GK-R12")
     ap.add_argument("--import-research", help="逐校调研 JSON 所在目录（首次建 research.json 时用）")
     ap.add_argument("--import-opportunities", help="逐校“入学后的机会” JSON（学校名 → finding/grade/sources），并入 research.json")
+    ap.add_argument("--profile-version", required=True, help="明确指定每个案例内实际所用画像文件或存档版本")
     ap.add_argument("--quiet", action="store_true", help="不列出 narrative.json 里带数字的句子")
     a = ap.parse_args()
     bad = 0
     for cs in a.cases:
         path = (SKILL / cs) if not Path(cs).is_absolute() else Path(cs)
-        msg, errs, digits = build(path, a.import_research, a.import_opportunities)
+        msg, errs, digits = build(path, a.import_research, a.import_opportunities, profile_version=a.profile_version)
         print(f"{path.name}：{msg.splitlines()[0] if msg else ''}")
         for e in errs:
             print(f"  ✗ {e}")

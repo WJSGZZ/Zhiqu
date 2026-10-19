@@ -103,6 +103,45 @@ class ProfileStore(unittest.TestCase):
             store.ingest(self.root, self.case, changed)
         self.assertEqual(store.latest(self.root, self.case)[1], original)
 
+    def test_windows_safe_archive_names_preserve_offset_and_fraction(self):
+        for stamp, expected in (
+            ('2026-10-19T22:37:22+08:00','2026-10-19T22-37-22+0800.json'),
+            ('2026-10-19T22:37:22.123456Z','2026-10-19T22-37-22.123456+0000.json'),
+            ('2026-10-19T22:37:22-05:30','2026-10-19T22-37-22-0530.json'),
+        ):
+            with self.subTest(stamp=stamp):
+                name = store.archive_filename(stamp)
+                self.assertEqual(name, expected)
+                self.assertNotIn(':', name)
+                self.assertEqual(store.timestamp(store.parse_filename_stamp(name)), store.timestamp(stamp))
+        info = store.ingest(self.root, self.case, profile())
+        self.assertNotIn(':', Path(info['file']).name)
+
+    def test_legacy_colon_archive_read_and_reingest_do_not_duplicate(self):
+        raw = profile();folder = self.folder();archive = folder/'profiles';archive.mkdir()
+        old = archive/'2026-10-19T12:00:00+08:00.json';old.write_text(raw)
+        info, current = store.latest(self.root, self.case)
+        self.assertEqual(current, raw)
+        self.assertEqual(info['file'], 'profiles/'+old.name)
+        self.assertEqual(store.ingest(self.root, self.case, raw)['file'], info['file'])
+        self.assertEqual(len(list(archive.glob('*.json'))), 1)
+        new = store.ingest(self.root, self.case, profile(stamp='2026-10-20T12:00:00+08:00', items=[{'id':'major','q':'专业','a':'数学'}]))
+        result = store.diff(self.root, self.case, old=old.name, new=new['file'])
+        self.assertIn('major', result['modified'])
+        # ISO selectors stay accepted even though new archive names are now safe.
+        self.assertEqual(result, store.diff(self.root, self.case, old='2026-10-19T12:00:00+08:00', new='2026-10-20T12:00:00+08:00'))
+
+    def test_safe_and_legacy_text_archive_latest_preserves_timestamp(self):
+        store.ingest(self.root, self.case, profile())
+        info = store.ingest(self.root, self.case, HEADERS['grad']+'\n旧文字', now=datetime(2026,10,20,tzinfo=timezone.utc))
+        self.assertNotIn(':', Path(info['file']).name)
+        latest, raw = store.latest(self.root, self.case)
+        self.assertEqual(latest['filled_at'], info['filled_at'])
+        path = self.snapshot_path(info);old = path.with_name(info['filled_at']+'.txt');path.rename(old)
+        self.assertEqual(store.latest(self.root,self.case)[1],raw)
+        self.assertEqual(store.diff(self.root,self.case)['new_text'], raw)
+        with self.assertRaises(ValueError):store.parse_filename_stamp('not-a-timestamp.json')
+
     def test_reject_nonignored_repository_destination(self):
         repo = Path(__file__).resolve().parents[3]
         with self.assertRaisesRegex(ValueError, '忽略目录|本机|入库'):

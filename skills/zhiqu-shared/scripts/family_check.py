@@ -520,7 +520,105 @@ def check_persona_names(root):
     return issues
 
 
+def check_case_registry(root):
+    """Public example IDs are a closed registry; private cases are never scanned."""
+    from pathlib import Path
+    import hashlib
+    root = Path(root).resolve()
+    registry_path = root / 'skills/zhiqu-shared/references/cases.json'
+    directories = {p.parent for p in root.glob('skills/*/examples/**/case.json')}
+    directories.update(p.parent for p in root.glob('skills/*/examples/**/report.json') if (p.parent / 'report.pdf').exists())
+    if not directories and not registry_path.exists():return []
+    rel = str(registry_path.relative_to(root));issues = []
+    def error(message, file=rel):issues.append((ERROR, file, 1, message))
+    try:
+        registry = json.loads(registry_path.read_text(encoding='utf-8'))
+        records = registry['cases']
+        if registry.get('schema') != 1 or not isinstance(records, list):raise ValueError('需要 schema=1 与 cases 数组')
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        error('公开案例总登记不可读：' + str(exc));return issues
+    by_id = {};by_dir = {}
+    for record in records:
+        if not isinstance(record, dict):error('案例登记必须是对象');continue
+        cid = record.get('case_id');directory = record.get('directory')
+        if not isinstance(cid, str) or not re.fullmatch(r'\d{4}-(?:GK|YJ|QZ)-(?:[A-Z]\d{2}|\d{4})', cid):error('案例登记缺号或编号无效：' + str(cid));continue
+        if cid in by_id:error('案例登记重号：' + cid)
+        by_id[cid] = record
+        if not isinstance(directory, str) or Path(directory).is_absolute():error('案例目录须为仓库相对路径：' + cid);continue
+        target = (root / directory).resolve()
+        if not target.is_relative_to(root / 'skills') or 'examples' not in target.parts:
+            error('案例目录必须位于公开 examples 内：' + cid);continue
+        if target in by_dir:error('同一案例目录重复登记：' + directory)
+        by_dir[target] = record
+        if not target.is_dir() or target not in directories:error('案例登记指向不存在的案例文件：' + directory)
+        reports = record.get('reports', [])
+        if not isinstance(reports, list):error('reports 须为文件列表：' + cid);continue
+        for report in reports:
+            if not isinstance(report, str):error('报告路径须为字符串：' + cid);continue
+            path = (root / report).resolve()
+            if not path.is_relative_to(target) or not path.is_file():error('登记报告不存在或越出案例目录：' + report)
+    seen = {}
+    for directory in sorted(directories):
+        file = str(directory.relative_to(root));case = {};report = {}
+        try:
+            if (directory / 'case.json').exists():case = json.loads((directory / 'case.json').read_text())
+            if (directory / 'report.json').exists():report = json.loads((directory / 'report.json').read_text())
+        except (ValueError, OSError) as exc:error('案例文件不可读：' + str(exc), file);continue
+        cid = case.get('case_id') or report.get('meta', {}).get('case_id')
+        if not cid:error('公开案例缺少 case_id', file);continue
+        if cid in seen and seen[cid] != directory:error('不同案例目录使用同一案例号：' + cid, file)
+        seen[cid] = directory
+        record = by_dir.get(directory)
+        if not record:error('公开案例未登记：' + cid, file);continue
+        if record['case_id'] != cid:error('案例号与总登记不一致：' + cid, file)
+        report_id = report.get('meta', {}).get('case_id')
+        if report_id and report_id != cid:error('报告与案例号不一致', file)
+        reports = record.get('reports', [])
+        reports = reports if isinstance(reports, list) else []
+        if reports and not isinstance(case.get('report_profile'), dict):
+            error('已交付报告必须绑定 case.report_profile', file)
+        profile = case.get('report_profile') or case.get('profile')
+        if profile:
+            if not isinstance(profile, dict):error('画像绑定须为对象', file);continue
+            bound = record.get('profile')
+            if bound is not None and any(bound.get(key) != profile.get(key) for key in ('file','sha256','filled_at')):error('总登记与案例的画像绑定不一致', file)
+            source = profile.get('file')
+            if source:
+                path = (directory / source).resolve()
+                if not path.is_relative_to(directory) or not path.is_file():error('绑定画像不存在或越出案例目录', file)
+                elif profile.get('sha256') and hashlib.sha256(path.read_bytes()).hexdigest() != profile['sha256']:error('绑定画像指纹与原文件不一致', file)
+        if reports:
+            versions = record.get('report_versions')
+            if not isinstance(versions, list):
+                error('已交付报告缺 report_versions 版本登记', file);continue
+            by_report = {}
+            for version in versions:
+                if not isinstance(version, dict):error('报告版本登记须为对象', file);continue
+                name = version.get('file')
+                if not isinstance(name, str):error('报告版本缺文件名', file);continue
+                if name in by_report:error('同一报告重复登记版本：' + name, file)
+                by_report[name] = version
+                if name not in reports:error('报告版本未列入 reports：' + name, file)
+                required = ('file','generated_at','version','sha256','profile_sha256')
+                if any(key not in version or version[key] is None or str(version[key]).strip()=='' for key in required):
+                    error('报告版本缺字段：' + name, file);continue
+                try:
+                    generated = datetime.fromisoformat(version['generated_at'].replace('Z','+00:00'))
+                    if generated.tzinfo is None:raise ValueError()
+                except (AttributeError, TypeError, ValueError):error('报告生成时间须含时区：' + name, file)
+                path = (root / name).resolve()
+                if path.is_relative_to(directory) and path.is_file():
+                    if hashlib.sha256(path.read_bytes()).hexdigest() != version['sha256']:
+                        error('报告文件指纹与版本登记不一致：' + name, file)
+                if not isinstance(case.get('report_profile'), dict) or version['profile_sha256'] != case['report_profile'].get('sha256'):
+                    error('报告版本画像指纹与 report_profile 不一致：' + name, file)
+            for name in reports:
+                if isinstance(name, str) and name not in by_report:error('报告缺版本登记：' + name, file)
+    return issues
+
+
 CHECKS = [
+    ("公开案例编号与画像绑定", check_case_registry),
     ("案例人物姓名与唯一性", check_persona_names),
     ("引用的文件存在", check_links),
     ("问卷节名引用", check_section_names),

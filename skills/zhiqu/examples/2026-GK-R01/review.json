@@ -324,7 +324,7 @@
   },
   "snapshot": {
     "report.json": "c6ff515d098c0cbf03e5db6e78d7e2f00ff2300b7adaf409be9ce3a3200e591e",
-    "report.pdf": "c717fbf21833c5e1c9daf2ddebbbe69f1a1e1b2552b529525d5387c09520c390",
+    "report.pdf": "861c25a2c2308f9822ff03a75cef3fc1a96972a57bc3cc5172cc5c236d4c55dc",
     "operator_check.md": "2eb799f9adbcca548e1f987d1bd7e5ebcbdd2d902441820a25050d388070a6e1",
     "result.json": "178b8219f95f1a0f6f131bd29456209a170afce250aa05898694b3d1d9e1f63d",
     "retro_ranks/10000/result.json": "da4c3af0f0c9708f12a75058fdca87239d6c31987d4fb7aef1612ec8a9d135f1",
@@ -332,7 +332,11 @@
     "retro_ranks/50000/result.json": "0bb4b66cdc5018b05a50da758085b90705dca7ea0cab6dba884f7e37e7ab71a3",
     "retro_ranks/80000/result.json": "47b6b774b64a23d96d0a1a78500839421c26618682fbeddfef1a9dfde7312d05",
     "retro_ranks/33000/result.json": "94c3bc1c7b0b6da6469fb128ca24802c2d0fe1bdb6c3155d9645de15eede9b24",
-    "case.json": "43c8bb642207a3b7fe3f6014e4d80d92491d1bb485f3477b70f65c35694838c5"
+    "case.json": "0e0ef3fd3e87f08167bcc9ec676ac81e7f391e57fbd1ac154def904303789286",
+    "profile_snapshot.json": "b254ae60024560fa43d950f6c3de5677df5f291a9afc77268bb7a0f28c11baae"
   },
-  "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。"
+  "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。",
+  "self_assessment": {
+    "verification_scope": "本轮更新为附核对材料的PDF，自评和机器核对通过后仍等待独立审核；未补造官方原文和独立批准。"
+  }
 }

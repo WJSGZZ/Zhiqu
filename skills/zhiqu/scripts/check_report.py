@@ -271,12 +271,18 @@ class Metrics(HTMLParser):
     def __init__(self):
         super().__init__()
         self.depth, self.cell, self.values = 0, None, []
+        self.cell_depth = 0
+        self.stack = []
 
     def handle_starttag(self, tag, attrs):
         if tag == 'div' and (self.depth or dict(attrs).get('class') == 'kpis'):
             self.depth += 1
-        elif self.depth and tag in ('span', 'em'):
-            self.cell = []
+        elif self.depth and tag in ('span', 'em') and (self.cell is not None or (self.stack and self.stack[-1] == 'div')):
+            if self.cell is None:
+                self.cell = []
+                self.cell_depth = 0
+            self.cell_depth += 1
+        self.stack.append(tag)
 
     def handle_data(self, data):
         if self.cell is not None:
@@ -284,10 +290,14 @@ class Metrics(HTMLParser):
 
     def handle_endtag(self, tag):
         if self.depth and tag in ('span', 'em') and self.cell is not None:
-            self.values.append(''.join(self.cell).strip())
-            self.cell = None
+            self.cell_depth -= 1
+            if not self.cell_depth:
+                self.values.append(''.join(self.cell).strip())
+                self.cell = None
         elif self.depth and tag == 'div':
             self.depth -= 1
+        if self.stack:
+            self.stack.pop()
 
 
 class Tables(HTMLParser):
@@ -353,7 +363,7 @@ class PublicationHTML(HTMLParser):
 
     def handle_data(self, text):
         if self.in_title and self.svg is not None: self.svg['title'] += text
-        if not self.hidden and self.section != '12': self.text_parts.append(text)
+        if not self.hidden and self.section not in ('12','appendix'): self.text_parts.append(text)
 
     def check_urls(self):
         text = ''.join(self.text_parts)

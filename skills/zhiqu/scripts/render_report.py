@@ -7,7 +7,7 @@ skills/zhiqu-career/references/report-guide.md），本脚本把它渲染成与�
 report.py 相同视觉风格的 HTML/PDF。
 
 用法：
-  python3 scripts/render_report.py report.md --out report.pdf
+  python3 scripts/render_report.py report.md --out report.pdf --profile-version profile.txt
   python3 scripts/render_report.py report.md --out report.html   # 只要 HTML
 
 Markdown 格式：
@@ -346,7 +346,13 @@ def markdown_to_html(body, notes=None):
             if cm:
                 inner, _ = markdown_to_html("\n".join(buf[1:]), notes)
                 cls = "" if cm.group(1) == "note" else " " + cm.group(1)
-                out.append(f'<div class="box{cls}"><h4>{render_inline(cm.group(2))}</h4>{inner}</div>')
+                if cm.group(1) == 'key' and cm.group(2).strip() == '核心结论':
+                    # The callout body is a flat bullet list; the common component owns its style.
+                    items = re.findall(r'<li>(.*?)</li>', inner, re.S)
+                    out.append(_report.core_conclusions(items, rendered=True) if items else
+                               _report.core_conclusions([inner], rendered=True))
+                else:
+                    out.append(f'<div class="box{cls}"><h4>{render_inline(cm.group(2))}</h4>{inner}</div>')
                 continue
             para = " ".join(x for x in buf if x is not None).strip()
             out.append(f"<blockquote><p>{render_inline(para)}</p></blockquote>")
@@ -507,6 +513,7 @@ def main():
     ap = argparse.ArgumentParser(description="知衢 · 把固定 12 节结构的 Markdown 报告渲染成 PDF/HTML")
     ap.add_argument("report", help="报告正文 Markdown（前言字段见脚本顶部说明）")
     ap.add_argument("--out", required=True, help="输出文件，.pdf 或 .html")
+    ap.add_argument("--profile-version", help="明确指定案例内画像版本；输出PDF必填")
     a = ap.parse_args()
     with open(a.report, encoding="utf-8") as f:
         text = f.read()
@@ -516,7 +523,14 @@ def main():
             f.write(doc)
         print(f"已生成 {a.out}")
         return
-    _print_pdf(doc, a.out)
+    if not a.profile_version:ap.error('交付PDF必须明确指定 --profile-version')
+    from planning_report import generate
+    from pathlib import Path
+    import shutil
+    root=Path(a.report).resolve().parent
+    if not (root/'case.json').exists():ap.error('交付PDF必须由已登记的阶段文件生成；请先完成案例工作流')
+    generated=generate(root,profile_version=a.profile_version)
+    if Path(a.out).resolve()!=generated.resolve():shutil.copyfile(generated,a.out)
 
 
 if __name__ == "__main__":

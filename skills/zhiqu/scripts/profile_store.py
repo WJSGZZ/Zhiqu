@@ -63,6 +63,23 @@ def timestamp(value):
     return datetime.fromisoformat(value.replace('Z','+00:00'))
 
 
+def archive_filename(stamp, suffix='.json'):
+    """Filesystem-safe timestamp; preserve fractions and offset, accept legacy ISO input."""
+    timestamp(stamp)
+    if suffix not in ('.json', '.txt'):raise ValueError('画像存档只允许 JSON 或文字')
+    stamp=stamp.replace('Z','+00:00')
+    return stamp[:10]+'T'+stamp[11:19].replace(':','-')+stamp[19:].replace(':','')+suffix
+
+
+def parse_filename_stamp(name):
+    """Read both historical ISO filenames and Windows-safe archive filenames."""
+    stem=Path(name).stem
+    if re.fullmatch(r'\d{4}-\d\d-\d\dT\d\d-\d\d-\d\d(?:\.\d+)?[+-]\d{4}',stem):
+        stem=stem[:10]+'T'+stem[11:19].replace('-',':')+stem[19:-5]+stem[-5:-2]+':'+stem[-2:]
+    timestamp(stem)
+    return stem
+
+
 def valid_answer(value):
     if isinstance(value,str):return bool(value.strip())
     if isinstance(value,list):return bool(value) and all(isinstance(x,str) and x.strip() for x in value) and len(value)==len(set(value))
@@ -267,7 +284,7 @@ def snapshots(folder):
     for path in (folder/'profiles').glob('*.json'):
         if path.is_symlink():raise ValueError('快照不能是符号链接')
         raw=path.read_text(encoding='utf-8');data=parse_profile(raw)
-        if data and path.stem!=data['filled_at']:raise ValueError('画像文件名与 filled_at 不一致')
+        if data and timestamp(parse_filename_stamp(path.name))!=timestamp(data['filled_at']):raise ValueError('画像文件名与 filled_at 不一致')
         registry_path=folder.parent/'cases.json'
         if registry_path.exists():
             record=json.loads(registry_path.read_text()).get('cases',{}).get(folder.name,{})
@@ -293,13 +310,17 @@ def ingest(root,case_id,raw,now=None,private_key=None):
         if case.get('case_id')!=case_id or case.get('kind',kind)!=kind:raise ValueError('案例登记与画像类型不一致')
         entry=register(reg,case_id,case.get('mode','formal'),datetime.now(timezone.utc).isoformat())
         is_json=raw.lstrip('\ufeff \n\r').startswith('{')
-        suffix='.json' if is_json else '.txt';path=archive/(filled+suffix)
+        suffix='.json' if is_json else '.txt';path=archive/archive_filename(filled,suffix)
+        # Reuse an old filename for the same instant; never create a second version.
+        for prior in archive.glob('*'+suffix):
+            if timestamp(parse_filename_stamp(prior.name))==timestamp(filled):
+                path=prior;break
         if path.exists() and (path.is_symlink() or path.read_text(encoding='utf-8')!=raw):raise ValueError('同一 filled_at 已有不同画像，拒绝覆盖')
         if not path.exists():
             with path.open('x',encoding='utf-8') as out:out.write(raw)
             path.chmod(0o600)
         if data and not is_json:
-            converted=archive/(filled+'.json')
+            converted=archive/archive_filename(filled)
             if converted.exists() and parse_profile(converted.read_text())!=data:raise ValueError('转换版已存在且不同，拒绝覆盖')
             if not converted.exists():dump(converted,data)
             path=converted
@@ -314,9 +335,9 @@ def latest(root,case_id):
     folder=folder_for(root,case_id);versions=snapshots(folder)
     # Legacy text without parseable data remains an explicit manual gap.
     texts=list((folder/'profiles').glob('*.txt'))
-    latest_text=max(texts,key=lambda p:timestamp(p.stem),default=None)
-    if latest_text and (not versions or timestamp(latest_text.stem)>versions[-1][0]):
-        raw=latest_text.read_text();return {'case_id':case_id,'file':'profiles/'+latest_text.name,'filled_at':latest_text.stem,'form':None,'sha256':sha(raw),'status':'无数据，需人工解析'},raw
+    latest_text=max(texts,key=lambda p:timestamp(parse_filename_stamp(p.name)),default=None)
+    if latest_text and (not versions or timestamp(parse_filename_stamp(latest_text.name))>versions[-1][0]):
+        raw=latest_text.read_text();return {'case_id':case_id,'file':'profiles/'+latest_text.name,'filled_at':parse_filename_stamp(latest_text.name),'form':None,'sha256':sha(raw),'status':'无数据，需人工解析'},raw
     if not versions:
         if (folder/'profile.json').exists():
             path=folder/'profile.json';raw=path.read_text();data=parse_profile(raw)
@@ -332,11 +353,11 @@ def items(data):return {item['id']:item for sec in data['sections'] for item in 
 def diff(root,case_id,old=None,new=None):
     versions=snapshots(folder_for(root,case_id))
     texts=list((folder_for(root,case_id)/'profiles').glob('*.txt'))
-    newest=max(texts,key=lambda p:timestamp(p.stem),default=None)
-    if newest and versions and timestamp(newest.stem)>versions[-1][0] and not old and not new:
+    newest=max(texts,key=lambda p:timestamp(parse_filename_stamp(p.name)),default=None)
+    if newest and versions and timestamp(parse_filename_stamp(newest.name))>versions[-1][0] and not old and not new:
         return {'case_id':case_id,'warnings':['无数据，需人工解析；旧文字只提供原文对照，不推断删除作答'],'added':{},'modified':{},'deleted':{},'old_text':versions[-1][3],'new_text':newest.read_text()}
     if len(versions)<2:raise ValueError('至少需要两版 JSON 画像才能比较；旧文字需人工对照')
-    by={v[1]:v for v in versions};by.update({Path(v[1]).stem:v for v in versions});by.update({'profiles/'+v[1]:v for v in versions})
+    by={parse_profile(v[3])['filled_at']:v for v in versions};by.update({v[1]:v for v in versions});by.update({Path(v[1]).stem:v for v in versions});by.update({'profiles/'+v[1]:v for v in versions})
     try:a=by[old] if old else versions[-2];b=by[new] if new else versions[-1]
     except KeyError as exc:raise ValueError('指定快照不属于这个案例') from exc
     if a[1]==b[1]:raise ValueError('请选择两版不同画像')

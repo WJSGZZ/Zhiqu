@@ -41,6 +41,13 @@ class WorkflowTests(unittest.TestCase):
         tampered = html.replace('概率约 ', '概率错 ', 1)
         self.assertTrue(check_report(self.rep, self.result, tampered))
 
+    def test_summary_nested_numeric_spans_still_check_value(self):
+        html = report.build(self.rep, self.result)
+        self.assertIn('class="number-run"', html)
+        self.assertEqual(check_report(self.rep, self.result, html), [])
+        changed = html.replace('概率约 ', '概率错 ', 1)
+        self.assertTrue(check_report(self.rep, self.result, changed))
+
     def test_claim_percent_scaling_and_invalid_tolerance(self):
         rep = copy.deepcopy(self.rep)
         rep['summary']['headline'] = f'滑档概率 {100*self.result["p_fall"]:.2f}%'

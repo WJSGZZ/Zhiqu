@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "case_id": "2026-GK-R03",
+  "report_profile": {
+    "file": "profile_snapshot.json",
+    "sha256": "0e678552defdace5dd04b99bfe4532498c9ec6d905d0ba647518242630a1d6f8",
+    "filled_at": null,
+    "form": null
+  },
+  "numeric_claims": [
+    {
+      "report_path": "summary.points.4",
+      "number_index": 1,
+      "result_path": "expected_utility",
+      "tolerance": 0.05
+    }
+  ],
+  "source_sha256": {
+    "case.json": "a8cb46469b95322e0775ed3c6576b438c649ee69cf4624af8abdf4b5dd98a1d8",
+    "report.json": "b341bda74adab5d53ee3ba75ccab3fc32065c555553e2765bc410794b8d7a3a6",
+    "result.json": "ffafceffaf2381b0f36365e8815cd8d6936452c960d55d8177e79c2ffa7d331a"
+  },
+  "artifacts": {
+    "report.pdf": "1e9c940a227624902bf0efaa21d65b59bea3b6841db1ca38f7697931d6cfeef5"
+  }
+}

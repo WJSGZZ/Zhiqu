@@ -91,10 +91,11 @@
     "limitations": [
       "不是独立批准；操控者核查单待亲自填写。",
       "原件抽查与新会话评阅尚未在独立复核区完成。"
-    ]
+    ],
+    "verification_scope": "本轮更新为附核对材料的PDF，自评和机器核对通过后仍等待独立审核；未补造官方原文和独立批准。"
   },
   "snapshot": {
-    "case.json": "e601a9bf31c188d643b0f873b38f7b814b6d176b5473f897aab69c2b52023061",
+    "case.json": "13d8346632d6b85a4e61e714871a15af524d33910c7a5428b25190be7554590a",
     "profile_parse.json": "a5a7b96085411943644dcaae76616a0affb32a79a07fd3020505d28d88c8b1a8",
     "directions.json": "2b68a53951ab4a8de52d7edcbabdf32d24e4570392cd70ac212c62342430a3b2",
     "rules_check.json": "7b0a58159b98a98e96a17d877674c57bf2d59988aefd37a2f57d94f82580f5c2",
@@ -105,10 +106,11 @@
     "narrative.json": "25e3ff88fd2d4313731ad5429e11bfd2b4063d11fbe5779087ea7db0c3f99efa",
     "profile.txt": "2be92b9770f7a4a877386334b958c096198b948c89c5eabca030d4f557e29457",
     "report.md": "10dbee42ff513d6cd8b0cd4b9742fa792d68860a95a9d816e8c221b15f5f6195",
-    "report.html": "cbb433e3ecf3e3179f17e9bd32388cf89355ffcf01703705d7851326da63ba55",
-    "report.pdf": "8acbe3ecef85b1377394a1139a50795a32b5639d28817bf333ab4a0e2a24be56",
-    "report_trace.json": "f078f0b266d3d2460df6932d80d2979bc274c3a8396f4e7e2d3d7f793bc88a49",
-    "operator_check.md": "312f3a475a4e0f077e830c97da739b121a358dda8c330abdac211f3e5933d741"
+    "report.html": "e6a15957919a61366ba8a809d6de93f1d4001e771b0bfdcda52c48b507e0bfc6",
+    "report.pdf": "3f21f3ba70919165c2220d5e0b03aeff071cff36b7dd4fe36d7361e3f9f51bc0",
+    "report_trace.json": "30267995bca93f1866d719e862367ce4df9dbb2a25a043bddcb6826b1f4aa5aa",
+    "operator_check.md": "312f3a475a4e0f077e830c97da739b121a358dda8c330abdac211f3e5933d741",
+    "profile_snapshot.json": "432626de4888a0d461edc284e9c475796e8d96ce33683030143dcd3f896be032"
   },
   "checklist_update_note": "仅核查单表述及核查工具记录更新；报告与计算原件未改。保留历史复核记录，当前仍等待独立审核，不是重新批准。",
   "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。"

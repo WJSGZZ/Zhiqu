@@ -585,6 +585,8 @@ class PlanningCase:
         tools=('planning_report.py','planning_workflow.py','operator_check.py','check_demos.py','report.py','render_report.py','profile_store.py')
         if set(trace.get('tool_sha256',{}))!=set(tools):errors.append('report_trace.json：缺算法/渲染器快照')
         elif any(sha(Path(__file__).with_name(f))!=h for f,h in trace['tool_sha256'].items()):errors.append('report_trace.json：算法或渲染器已变更，须重生成')
+        for f,h in trace.get('verification_tools_sha256',{}).items():
+            if f not in ('verify_report.py','verification_calculations.py') or sha(Path(__file__).with_name(f))!=h:errors.append('report_trace.json：核对材料工具已变更，须重生成')
         for f,h in {**trace.get('source_sha256',{}),**trace.get('artifacts',{})}.items():
             if Path(f).name!=f or not (self.root/f).is_file() or sha(self.root/f)!=h:errors.append('report_trace.json：已过期 '+f)
         return errors

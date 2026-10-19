@@ -161,10 +161,11 @@
     "limitations": [
       "操控者尚未填写确认，未独立审核，不符合真实交付门槛。",
       "具体项目或职位条件尚待核；候选和未来日历不是承诺。"
-    ]
+    ],
+    "verification_scope": "本轮更新为附核对材料的PDF，自评和机器核对通过后仍等待独立审核；未补造官方原文和独立批准。"
   },
   "snapshot": {
-    "case.json": "f49b833f5998fd7b6b1305eebdf50a0db480ba93fffedf732ce01cd57067551e",
+    "case.json": "167bdabeba2c92d9ba2eb4edc098e16c188cb50fad22f4dfe229810bd74b63c7",
     "profile_parse.json": "1ba7bfd4bbb2bb0e54318c5ff1008c1f577e406d5ac5c88a6fa37c3e4dabc6e5",
     "directions.json": "e11eb75bac9a1378195f15ef805daf0ffe3d0a4c2306d317d6d9944265b8008b",
     "rules_check.json": "248a80156349f8bee1d5de049d1153408fc4548108e5895abb5bba17d5c7cb03",
@@ -174,9 +175,9 @@
     "judgment.json": "38eed4d2e7e0e329c1beb9d7b029069ef4907552ad2ae15cf9019bd5bc4f9add",
     "narrative.json": "cdaf672fa9a3877e1e9b218b516cf5eee06ef7887fddb6a4d1367480e15222a4",
     "report.md": "5a822a3b5cceeb541ade0af4c833e696abd8ec4cffb3fcfd5fa3e72db9e115c6",
-    "report.html": "3586b80f1c74f9289f5f0c4ecb2a64cbe96dc955d1615179299d9d6b04f0572e",
-    "report.pdf": "a72e80c84bc59889d6a0e4dd44cd38ccfab2e6ede6465b4c2973a2b1fafa4585",
-    "report_trace.json": "bfc970357de340a194149b22a36ab205bd1cf67837c336d89330e94316155933",
+    "report.html": "b3274ac85f152d5b230bcddb9d309a5ba510fdcbac1dc983c0f44b030cebe564",
+    "report.pdf": "4f3f506e82d2ba8993c7b85c497b4d48e66082e1de237f979abacc98474012a5",
+    "report_trace.json": "34666b19068d2a6269f5b1682a3e63195122f97a079976661b0b717329252082",
     "operator_check.md": "fa8cc559781a105e060e1101da37e2cbe7836dd40b76217663ad777316c8b01c",
     "profile.json": "b04770d7a2589f2dbe7b35a80efaad8953b8db8666a26db85875f82cfc9eaf72",
     "profile-supplement.txt": "6d3fe85c4f5f9393a284253436e9dd3ae7a719f9ff73222d052dc7224a274e0f"

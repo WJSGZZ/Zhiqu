@@ -301,25 +301,30 @@ class PlanningWorkflowTests(unittest.TestCase):
         text=node_markdown({'type':'dated_actions','content':{'items':[{'text':'核对资格','date':'2026-10-21'}]}},str,{})
         self.assertIn('2026-10-21',text)
 
+    def test_generate_without_selected_profile_is_rejected_before_publication(self):
+        root=self.roots['grad'];before=(root/'case.json').read_bytes()
+        with self.assertRaisesRegex(ValueError,'明确指定'):
+            generate(root,html_only=True)
+        self.assertEqual((root/'case.json').read_bytes(),before)
+
     def test_failed_content_or_render_gate_does_not_replace_previous_outputs(self):
         root=self.roots['grad'];names=('report.md','report.html','report.pdf','report_trace.json','operator_check.md');before={n:(root/n).read_bytes() for n in names}
         with patch('render_report.render',side_effect=ValueError('渲染故障')):
-            with self.assertRaises(ValueError):generate(root,html_only=True)
+            with self.assertRaises(ValueError):generate(root,html_only=True,profile_version="profile.txt")
         self.assertEqual(before,{n:(root/n).read_bytes() for n in names})
         self.mutate_node(root,'lead',lambda n:n['content'].update(text='学费999999元'))
-        with self.assertRaises(ValueError):generate(root,html_only=True)
+        with self.assertRaises(ValueError):generate(root,html_only=True,profile_version="profile.txt")
         self.assertEqual(before,{n:(root/n).read_bytes() for n in names})
 
     def test_pdf_layout_and_operator_failure_do_not_publish_partial_files(self):
-        from types import SimpleNamespace
         root=self.roots['career'];names=('report.md','report.html','report.pdf','report_trace.json','operator_check.md');before={n:(root/n).read_bytes() for n in names}
-        def render_pdf(cmd,**kw):
-            Path(cmd[-1]).write_bytes(b'prepared-only');return SimpleNamespace(returncode=0,stdout='',stderr='')
-        with patch('subprocess.run',side_effect=render_pdf),patch('check_layout.check_pdf',return_value=['版面挤压']):
-            with self.assertRaises(ValueError):generate(root)
+        def render_pdf(document,path):
+            Path(path).write_bytes(b'prepared-only')
+        with patch('render_report._print_pdf',side_effect=render_pdf),patch('check_layout.check_pdf',return_value=['版面挤压']):
+            with self.assertRaises(ValueError):generate(root,profile_version="profile.txt")
         self.assertEqual(before,{n:(root/n).read_bytes() for n in names})
         with patch('operator_check.generate',side_effect=ValueError('核查单生成失败')):
-            with self.assertRaises(ValueError):generate(root,html_only=True)
+            with self.assertRaises(ValueError):generate(root,html_only=True,profile_version="profile.txt")
         self.assertEqual(before,{n:(root/n).read_bytes() for n in names})
 
     def test_filesystem_replacement_failure_rolls_back(self):
@@ -331,7 +336,7 @@ class PlanningWorkflowTests(unittest.TestCase):
             if len(calls)==2:raise OSError('磁盘写入失败')
             return replace(a,b)
         with patch('planning_report.os.replace',side_effect=fail_second):
-            with self.assertRaises(OSError):generate(root,html_only=True)
+            with self.assertRaises(OSError):generate(root,html_only=True,profile_version="profile.txt")
         self.assertEqual(before,{n:(root/n).read_bytes() for n in names})
 
     def test_only_human_completed_items_can_pass_completion(self):
@@ -341,14 +346,14 @@ class PlanningWorkflowTests(unittest.TestCase):
         p.write_text(text.replace('：确认；','：仍未知；',1));self.assertTrue(validate_operator(root,True))
 
     def test_html_generation_records_hashes_and_detects_stale_inputs(self):
-        root=self.roots['career'];generate(root,html_only=True)
+        root=self.roots['career'];generate(root,html_only=True,profile_version="profile.txt")
         c=PlanningCase(root);self.assertEqual(c.trace_errors(),[])
         self.change(root,'case.json',lambda x:x.update(version='变更'))
         self.assertTrue(PlanningCase(root).trace_errors())
 
     def test_self_assessment_passes_without_claiming_delivery_approval(self):
         from planning_workflow import RUBRIC,review_errors
-        root=self.roots['grad'];generate(root,html_only=True)
+        root=self.roots['grad'];generate(root,html_only=True,profile_version="profile.txt")
         files=(*FILES,'profile.txt','report.md','report.html','report.pdf','report_trace.json','operator_check.md')
         review={'status':'awaiting_independent_review','independent':False,
                 'self_assessment':{'rubric':{'items':[{'id':key,'score':1 if key=='traceability' else 2,'reason':'测试用自评理由'} for key in RUBRIC]}},

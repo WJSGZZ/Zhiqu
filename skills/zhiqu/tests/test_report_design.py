@@ -1,5 +1,6 @@
 """Shared print components and publication gates: reject missing evidence, preserve values."""
 import sys
+import re
 import unittest
 from pathlib import Path
 
@@ -93,6 +94,53 @@ unit: 元
         with self.assertRaises(ValueError): render_report.render('---\nperson: 小林\n---\n'+sections.replace('source: 1','source: 9'))
         with self.assertRaises(ValueError): render_report.render('---\nperson: 小林\n---\n'+sections.replace('source: 1',''))
 
+
+class UnifiedReportStyleTests(unittest.TestCase):
+    def test_core_conclusions_keep_text_and_unify_bullets(self):
+        output = report.core_conclusions(['费用：每年 8,000 元。', '按原口径保留 37% 结论。'])
+        self.assertIn('<ul class="tight">', output)
+        self.assertNotIn('<ol', output)
+        self.assertIn('<strong>费用：</strong>每年 8,000 元。', output)
+        self.assertIn('<strong>判断：</strong>按原口径保留 37% 结论。', output)
+
+    def test_markdown_core_conclusions_use_same_component(self):
+        output, _ = render_report.markdown_to_html('> [!key] 核心结论\n> - **费用**：8,000 元。\n> - 预算有限。')
+        self.assertEqual(output, report.core_conclusions(['<strong>费用</strong>：8,000 元。', '预算有限。'], rendered=True))
+
+    def test_appendix_has_extractable_escaped_evidence(self):
+        output = report.verification_appendix_html({
+            'case_info': [('案例号', '2027-YJ-S01')],
+            'personal_inputs': [{'label': '预算', 'value': 30000, 'sections': '第 1 节'}],
+            'numbers': [{'label': '学费', 'value': 8000, 'sections': '第 9 节',
+                         'institution': '学校', 'url': 'https://school.edu.cn/fee', 'excerpt': '学费 8000 元/年。'}],
+            'limitations': [{'claim': '<待核>', 'reason': '费用可能调整'}],
+            'gaps': [{'label': '目录', 'reason': '验证码'}]})
+        for text in ('本 PDF 附带数据文件', '学费 8000 元/年。', 'https://school.edu.cn/fee', '验证码', '&lt;待核&gt;'):
+            self.assertIn(text, output)
+        self.assertIn('data-section="appendix"', output)
+        self.assertNotIn('<svg', output)
+
+    def test_style_checker_rejects_drift(self):
+        from check_report_styles import normalized_css
+        rendered = report.CSS.replace('__TOPLEFT__', '知衢 · 高考决策报告').replace('__RUNHEAD__', '小明 · 2027-GK-S01')
+        self.assertEqual(normalized_css(rendered), normalized_css(report.CSS))
+        self.assertNotEqual(normalized_css(rendered.replace('font: 10pt/1.75', 'font: 11pt/1.75')), normalized_css(report.CSS))
+
+
+
+class NumericRuns(unittest.TestCase):
+    def test_numeric_prose_stays_whole_without_changing_text_or_link_targets(self):
+        from html import unescape
+        source='<section data-section="06"><p>2024—2025 学年，92.32%，447 人。</p><a href="https://example.edu.cn/2025">入口</a></section>'
+        result=report.keep_numeric_runs(source)
+        self.assertIn('<span class="number-run">2025</span>',result)
+        self.assertIn('<span class="number-run">92.32%</span>',result)
+        self.assertIn('href="https://example.edu.cn/2025"',result)
+        self.assertEqual(re.sub('<[^>]+>','',unescape(source)),re.sub('<[^>]+>','',unescape(result)))
+
+    def test_source_urls_and_svg_keep_their_own_print_rules(self):
+        source='<svg><text x="20">2025</text></svg><section data-section="12">https://example.edu.cn/2025</section>'
+        self.assertEqual(report.keep_numeric_runs(source),source)
 
 if __name__ == '__main__':
     unittest.main()

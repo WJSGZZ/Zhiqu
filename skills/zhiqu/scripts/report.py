@@ -2,7 +2,7 @@
 """知衢 · 志愿填报决策报告生成器（仅用 Python 标准库；PDF 由本机 Chrome/Edge 无头模式打印）。
 
 用法：
-  python3 report.py report.json --opt result.json --out 报告.pdf
+  python3 report.py report.json --opt result.json --out 报告.pdf --profile-version profile.txt
   python3 report.py report.json --opt result.json --out 报告.html   # 只要 HTML
 
 report.json 的字段见 references/report-guide.md；result.json 是 optimize.py --json 的输出。
@@ -20,6 +20,7 @@ import subprocess
 import sys
 import tempfile
 import time
+from pathlib import Path
 
 E = html.escape
 NUM_CELL = re.compile(r"[\d,.\s%~～+\-–—<>≥≤/]+|(?:不到|超过|约)\s?[\d,.]+%?")
@@ -103,6 +104,7 @@ table { width: 100%; border-collapse: collapse; margin: 2mm 0 4mm; font-size: 8.
 thead th { white-space: nowrap; text-align: left; font: 600 7.8pt var(--sans); color: var(--soft); letter-spacing: .3pt; border-top: 1pt solid var(--ink); border-bottom: .6pt solid var(--ink); padding: 1.6mm 2mm; }
 table.vt { table-layout: fixed; }
 table.rt { table-layout: fixed; }
+.number-run { white-space:nowrap; }
 td.num { white-space: nowrap; font-variant-numeric: tabular-nums; }
 td { overflow-wrap: anywhere; }
 table.vt thead th { white-space: normal; }
@@ -183,6 +185,23 @@ section[data-section="12"] { margin-top:6mm; }
 .source-notes .url { display:inline; margin-left:1.5mm; line-height:1.35; }
 table.vt th { white-space:normal; }
 table.vt td .row-note { display:block;white-space:nowrap;font-size:7.8pt;font-weight:400;color:var(--muted); }
+/* 核对材料继承正文色板与字号；每条证据可独立分页，长网址不撑开页面。 */
+.verification-appendix { break-before:page; margin-top:0; font-size:9pt; }
+.verification-appendix h3 { font-size:11pt; }
+.verification-appendix .audit-item { border-bottom:.4pt solid var(--rule); padding:2mm 0; }
+.verification-appendix .audit-item p { margin:0 0 .5mm; line-height:1.4; }
+.verification-appendix .audit-item { break-inside:avoid; }
+.verification-appendix .audit-numbers { font-size:8pt; line-height:1.35; }
+.verification-appendix .audit-numbers th:nth-child(1){width:13%;}
+.verification-appendix .audit-numbers th:nth-child(2){width:15%;}
+.verification-appendix .audit-numbers th:nth-child(3){width:72%;}
+.verification-appendix .audit-numbers td { padding:3.5pt 4pt; line-height:1.3; font-size:8pt; overflow-wrap:anywhere; word-break:normal; white-space:normal; }
+.verification-appendix .audit-url { font-size:7.5pt; overflow-wrap:anywhere; word-break:break-all; }
+.verification-appendix dl { margin:2mm 0; }
+.verification-appendix dt { font-weight:600; color:var(--accent); }
+.verification-appendix dd { margin:0 0 2mm; overflow-wrap:anywhere; }
+.verification-appendix blockquote { margin:1mm 0 2mm 3mm; color:var(--soft); }
+
 """
 
 
@@ -236,10 +255,90 @@ def cover_html(title, subtitle, person, stage, region, report_id, generated, dat
             '<div class="foot">仅供本人决策参考；依据、假设与局限见正文及第 12 节。</div></div>')
 
 
+def core_conclusions(items, rendered=False):
+    """三版唯一核心结论样式：圆点列表与粗体短标题，保留原句全部信息。"""
+    rows = []
+    for item in items:
+        text = str(item)
+        if rendered and re.match(r"^<(?:strong|b)>", text):
+            content = text
+        elif not rendered and re.match(r"^[^：:。；，]{1,12}[：:]", text):
+            heading, detail = re.split(r"[：:]", text, maxsplit=1)
+            content = f"<strong>{E(heading)}：</strong>{E(detail)}"
+        else:
+            content = '<strong>判断：</strong>' + (text if rendered else E(text))
+        rows.append('<li>' + content + '</li>')
+    return '<div class="box key core-conclusions"><h4>核心结论</h4><ul class="tight">' + ''.join(rows) + '</ul></div>'
+
+
+def verification_appendix_html(materials):
+    """核对附录的唯一打印组件。输入为可读字段，不接收未转义HTML。"""
+    def val(value):
+        if isinstance(value, (dict, list, tuple)):
+            value = json.dumps(value, ensure_ascii=False)
+        if isinstance(value,float):value=format(value,'.10g')
+        return E(str(value if value is not None else '未登记'))
+    def line(label, value):
+        return f'<p><b>{E(label)}：</b>{val(value)}</p>' if value not in (None, '', [], {}) else ''
+    def source(row):
+        return line('来源机构', row.get('institution')) + (f'<p class="audit-url">来源网址：{val(row["url"])}</p>' if row.get('url') else '')
+    body = '<section class="verification-appendix" data-section="appendix"><h2>附录：核对材料</h2><p>本 PDF 附带数据文件，可用 PDF 阅读器的附件面板取出。</p>'
+    body += '<h3>案例信息</h3><dl>'
+    case_info = materials.get('case_info', [])
+    if isinstance(case_info, dict):
+        case_info = case_info.items()
+    body += ''.join(f'<dt>{val(label)}</dt><dd>{val(value)}</dd>' for label, value in case_info) + '</dl>'
+    body += '<h3>分析用到的本人信息</h3>'
+    for row in materials.get('personal_inputs', []):
+        body += '<div class="audit-item">' + line(row.get('label', '本人输入'), row.get('value')) + line('用于', row.get('sections')) + '</div>'
+    body += '<h3>数字核对表</h3><p>标为“旧资料待核”的项目保留旧报告的对应片段，便于定位；它不是官方原文，不表示事实已经核实。请结合第12节的官方来源与附件逐项核对。计算项按登记输入复算，原始统计未留存时不宣称复算原始名单。</p><table class="audit-numbers"><thead><tr><th>值</th><th>正文位置</th><th>事项、出处与核对依据</th></tr></thead><tbody>'
+    for row in materials.get('numbers', []):
+        if row.get('provenance_status')=='legacy_unmapped':
+            detail = '<b>旧资料待核：</b>'+val(row.get('excerpt','').replace('旧报告片段（非官方原文）：',''))
+        else:detail = '<b>'+val(row.get('label','核对项'))+'</b>' + source(row)
+        for key, label in [('excerpt', '摘录或归档说明'), ('inputs', '计算输入'), ('formula', '公式'), ('result', '计算结果'), ('verification_limit', '核对范围')]:
+            if not (row.get('provenance_status')=='legacy_unmapped' and key=='excerpt'):detail += line(label,row.get(key))
+        body += '<tr><td>'+val(row.get('value'))+'</td><td>'+val(row.get('sections'))+'</td><td>'+detail+'</td></tr>'
+    body += '</tbody></table>'
+    body += '<h3>反证与限制</h3>'
+    for row in materials.get('limitations', []):
+        body += '<div class="audit-item">' + line('限制', row.get('claim')) + line('结论适用条件', row.get('reason')) + line('应当改判的条件', row.get('change_if')) + source(row) + '</div>'
+    body += '<h3>未取到的信息和原因</h3>'
+    for row in materials.get('gaps', []):
+        body += '<div class="audit-item">' + line('信息', row.get('label')) + line('原因', row.get('reason')) + source(row) + '</div>'
+    if not materials.get('gaps'):
+        body += '<p>未登记额外取文缺口；已知限制见上节。</p>'
+    return body + '</section>'
+
+
+def keep_numeric_runs(fragment):
+    """Chinese prose may wrap a year mid-number; preserve each visible run.
+
+    Work on text nodes only. URLs in the source list and SVG markup retain their
+    own wrapping/coordinate rules; no attributes or data values are rewritten.
+    """
+    out=[];svg=0;sources=False
+    for chunk in re.split(r'(<[^>]+>)',fragment):
+        if chunk.startswith('<'):
+            if re.match(r'<svg(?:\s|>)',chunk):svg+=1
+            if chunk.startswith('</svg'):svg-=1
+            if chunk.startswith('<section') and re.search(r'data-section=["\']12["\']',chunk):sources=True
+            if chunk.startswith('</section'):sources=False
+            out.append(chunk);continue
+        if svg or sources:out.append(chunk);continue
+        text=html.unescape(chunk);pos=0
+        for match in re.finditer(r'\d[\d,]*(?:\.\d+)?(?:%|％)?',text):
+            out.append(E(text[pos:match.start()]))
+            out.append('<span class="number-run">'+E(match[0])+'</span>');pos=match.end()
+        out.append(E(text[pos:]))
+    return ''.join(out)
+
+
 def document_html(title, cover, body, person, edition, report_id):
     runhead = f'{simulated_name(person)} · {edition} · {report_id}'
     safe = lambda s: str(s).replace('\\', '\\\\').replace('"', '\\"').replace('\n', ' ')
     css = CSS.replace('__RUNHEAD__', safe(runhead)).replace('__TOPLEFT__', safe('知衢 · ' + edition + '决策报告'))
+    cover,body=keep_numeric_runs(cover),keep_numeric_runs(body)
     return f'<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>{E(title)}</title><style>{css}</style></head><body>{cover}{body}</body></html>'
 
 
@@ -667,13 +766,11 @@ def build(rep, opt):
                  + (f'<div><b>滑档风险</b><span class="num">{fall_txt(pfall)}</span><em>录取线整体大波动时 {fall_txt(stress.get("p_fall"))}</em></div>' if grade == "A" or pfall else
                     f'<div><b>滑档风险</b><span class="num">未出现</span><em>{sims:,} 次模拟中没有出现滑档；录取线整体大波动时{"也没有" if not stress.get("p_fall") else "：" + fall_txt(stress.get("p_fall"))}</em></div>')
                  + '</div>')
-    if m.get('date') and not re.fullmatch(r'\d{4}-\d{2}-\d{2}', str(m['date'])):
-        body += f'<div class="box"><h4>报告口径</h4><p>{E(m["date"])}</p></div>'
     if lst:
         body += figure('你最终会被哪里录取', outcome_strip([(x['name'], x['p_land']) for x in lst], pfall or 0, fmt=strip_fmt),
                        STRIP_CAP + ('浅色为最终录取不到5%的志愿；红色为滑档。' if numeric else '仅作定性示意，本省评级不显示百分比。'), model_ref)
     if s.get("points"):
-        body += '<div class="box key"><h4>核心结论</h4><ol class="tight">' + "".join(f"<li>{E(x)}</li>" for x in s["points"]) + "</ol></div>"
+        body += core_conclusions(s["points"] + (["报告口径：" + str(m["date"])] if m.get("date") and not re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(m["date"])) else []))
     if s.get("after_the_fact"):  # 回溯样板：目标年真实结果，只有事后才知道，不能混进事前结论
         body += ('<div class="box"><h4>事后才知道的结果（填报时不可能知道，不参与上面的结论）</h4><ul class="tight">'
                  + "".join(f"<li>{E(x)}</li>" for x in s["after_the_fact"]) + "</ul></div>")
@@ -960,6 +1057,7 @@ def main():
     ap.add_argument("--opt", help="optimize.py --json 的输出")
     ap.add_argument("--out", required=True, help="输出文件，.pdf 或 .html")
     ap.add_argument("--sheet", help="另存填报单 CSV（序、院校代码、院校、专业组、专业代码、组内专业顺序、服从调剂），与报告里的填报单一致")
+    ap.add_argument("--profile-version", help="明确指定案例内所用画像文件或存档版本；正式输出必填")
     a = ap.parse_args()
     rep = json.load(open(a.report, encoding="utf-8"))
     opt = json.load(open(a.opt, encoding="utf-8")) if a.opt else None
@@ -969,7 +1067,21 @@ def main():
             ap.error("报告数字核验失败：" + "；".join(errors))
     if a.sheet:
         write_sheet(opt, a.sheet)
+    if (Path(a.report).resolve().parent/'case.json').exists():
+        from datetime import datetime
+        rep.setdefault('meta',{})['generated_on']=datetime.now().strftime('%Y-%m-%d')
     doc = build(rep, opt)
+    binding = materials = None
+    root = Path(a.report).resolve().parent
+    if (root/'case.json').exists():
+        if not a.profile_version:ap.error('生成有案例号的报告必须指定 --profile-version')
+        from verify_report import bind_profile, gaokao_materials, append_html, require_analysis_profile
+        binding, profile, warning = bind_profile(root,a.profile_version,require_analysis=True)
+        if warning:print(warning,file=sys.stderr)
+        materials=gaokao_materials(root,rep,opt,binding,warning)
+        doc=append_html(doc,materials)
+    elif not a.out.lower().endswith('.html'):
+        ap.error('交付PDF须有case.json并明确指定 --profile-version；无登记仅能预览HTML')
     publication_gate(doc)
     if a.out.lower().endswith(".html"):
         open(a.out, "w", encoding="utf-8").write(doc)
@@ -1009,7 +1121,21 @@ def main():
         sys.exit("PDF 生成失败：请改用 --out 报告.html，再用浏览器打印为 PDF。")
     os.unlink(tmp.name)
     print(f"已生成 {out}")
+    if binding:
+        from verify_report import gaokao_files, attach_pdf, read, json_bytes, digest
+        files = gaokao_files(root,rep,opt,binding,a.opt)
+        attach_pdf(out,files,materials,read(root/'case.json'),binding,doc)
+        trace = json.loads(files['report_trace.json'])
+        trace['artifacts']={'report.pdf':digest(Path(out).read_bytes())}
+        (root/'report_trace.json').write_bytes(json_bytes(trace))
     layout_gate(out)
+    if binding:
+        from verify_report import verify
+        result=verify(out)
+        if not result['ok']:sys.exit('PDF核对失败，不能交付：'+'；'.join(result['errors']))
+    if binding:
+        from verify_report import record_generation
+        record_generation(root,out)
 
 
 if __name__ == "__main__":
