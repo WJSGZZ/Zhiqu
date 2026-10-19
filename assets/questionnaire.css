@@ -169,7 +169,7 @@ textarea{resize:vertical;min-height:84px;}
 .landing .choice{display:grid;grid-template-columns:1fr auto;grid-template-areas:"eb go" "h2 go" "p go";column-gap:24px;align-items:center;padding:22px 26px;}
 .landing .choice .c-eyebrow{grid-area:eb;margin:0 0 4px;}
 .landing .choice h2{grid-area:h2;font-size:24px;margin:0 0 6px;}
-.landing .choice p:not(.c-eyebrow){grid-area:p;margin:0;font-size:14px;line-height:1.65;}
+.landing .choice p:not(.c-eyebrow){grid-area:p;margin:0;font-size:14px;line-height:1.65;text-wrap:pretty;}
 .landing .choice .c-go{grid-area:go;}
 @media (min-width:1600px) and (min-height:900px){
   .landing-wrap{max-width:1360px;}
@@ -200,7 +200,8 @@ textarea{resize:vertical;min-height:84px;}
   .wordmark{gap:8px;}
   .landing .brand-title{font-size:46px;letter-spacing:10px;padding-left:0;}
   .landing .hero .tag{font-size:15px;}
-  .landing .choice{grid-template-columns:1fr auto;grid-template-areas:"eb go" "h2 go" "p p";padding:20px;}
+  .landing .choice{column-gap:12px;padding:20px 16px 20px 20px;}
+  .landing .choice h2{font-size:22px;}
   .landing .choice .c-go svg{width:18px;height:30px;}
 }
 @media (max-width:560px){
