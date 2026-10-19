@@ -129,7 +129,7 @@ python3 scripts/pipeline.py examples/pipeline_demo/config.json --out-dir /tmp/zh
 
 ## 自动核验报告数字
 
-`report.py --opt` 在生成前自动检查封面位次、志愿位数、压力倍数与显式数字声明。可另外核验 HTML 的摘要指标和整张志愿表：
+`report.py --opt` 在生成前自动检查封面位次、志愿位数、压力倍数与显式数字声明。生成 PDF 后还会自动做版面自检（[check_layout.py](../scripts/check_layout.py)：表格某栏被挤成一字一行、数字被拆成两行、中文被挤成窄条），没通过就报错退出，不能交付。可另外核验 HTML 的摘要指标和整张志愿表：
 
 ```bash
 python3 scripts/check_report.py report.json --opt result.json --html report.html

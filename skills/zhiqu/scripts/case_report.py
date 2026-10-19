@@ -362,6 +362,8 @@ def build(case_dir, research_dir=None, opportunities=None, render=True):
                               "--out", rel(d / f"report.{ext}")], cwd=SKILL, capture_output=True, text=True)
         if out.returncode:
             print(case, ext, out.stderr[-800:])
+            if ext == "pdf":
+                sys.exit(f"{case}：PDF 没有通过生成步骤（见上），不要交付")
     chk = subprocess.run([sys.executable, "scripts/check_report.py", rel(d / "report.json"), "--opt", rel(run / "result.json"),
                           "--html", rel(d / "report.html")], cwd=SKILL, capture_output=True, text=True)
     sys.path.insert(0, str(SKILL / "scripts"))

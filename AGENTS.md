@@ -51,11 +51,12 @@ python3 -m unittest discover -s skills/zhiqu/tests     # 全部测试
 python3 skills/zhiqu/scripts/check_family.py           # 引用、问卷节名、报告目录、复核期限、重复与体积；须 0 错误
 python3 skills/zhiqu/scripts/check_demos.py            # 读研、求职示例：重新排盘、重算 offer 与预算
 python3 skills/zhiqu/scripts/validate_data.py          # 改了数据时
+python3 skills/zhiqu/scripts/check_layout.py 报告.pdf  # 版面自检（生成 PDF 时已自动运行，失败即报错）
 ```
 
 - 改了计算逻辑：重跑受影响的示例，核对报告数字，更新测试基准。
 - 改了模型规则：必须在**该省**的留出年份上证明误差下降，否则只写成定性提示。
-- 生成的 PDF 要实际打开看版面和数字。
+- 生成的 PDF 要实际打开看版面和数字。报告只能用 `report.py`（高考）或 `render_report.py`（读研、求职）生成，样式只在 `report.py` 一处定义；生成时自动做版面自检（表格挤成一字一行、数字拆行、中文被挤成窄条），没通过就报错，这份 PDF 不能交付。改了版式要重新生成全部示例并全部通过。
 
 ## 六、协作与合并
 
