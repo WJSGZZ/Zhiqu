@@ -43,15 +43,16 @@ def check_report(rep, result, html=None):
         except (KeyError, IndexError, TypeError, ValueError) as exc:
             errors.append(f'numeric_claims[{i}] 无效: {exc}')
     if html is not None:
+        errors += check_publication_html(html)
         parser = Tables()
         parser.feed(html)
         from html import unescape
-        from report import UTILITY_SCALE, interval80, prob_formatter
+        from report import UTILITY_SCALE, interval80, prob_formatter, public_text
         grade = rep.get('meta', {}).get('prob_grade', 'A')
         fmt = prob_formatter(grade)
         numeric = grade in ('A', 'B')
-        rank_head = '预测位次' if grade == 'A' else '预测位次（80% 区间）'
-        head = ['序', '志愿', '类型', '偏好'] + (['单独过线', '最终录取'] if numeric else []) + [rank_head, '说明']
+        rank_head = '预测位次'
+        head = ['序', '志愿', '类型', '偏好', '单独过线', '最终录取', rank_head]
         tables = [t for t in parser.tables if t and t[0] == head]
         if len(tables) != 1:
             errors.append('HTML 须有且仅有一张完整志愿表')
@@ -61,11 +62,11 @@ def check_report(rep, result, html=None):
                 errors.append('HTML 志愿行数与 result 不一致')
             for i, (cells, item) in enumerate(zip(rows, result['list'])):
                 rank_cell = f'{item["expected_cut_rank"]:,}' + ('' if grade == 'A' else interval80(item))
-                probs = [unescape(fmt(item['p_clear'])), unescape(fmt(item['p_land'], 1))] if numeric else []
+                probs = [unescape(fmt(item['p_clear'])), unescape(fmt(item['p_land'], 1))] if numeric else ['按分档', '不显示百分比']
                 expected = [str(item['order']), item['tag'], f'{item["utility"]:.1f}'] + probs + [rank_cell]
-                idx = (0, 2, 3) + ((4, 5, 6) if numeric else (4,))
+                idx = (0, 2, 3, 4, 5, 6)
                 actual = [cells[j] for j in idx] if len(cells) == len(head) else []
-                if actual != expected or not cells[1].startswith(item['name']):
+                if actual != [public_text(v) for v in expected] or not cells[1].startswith(public_text(item['name'])):
                     errors.append(f'HTML 志愿表第 {i+1} 行与 result 不一致')
         metrics = Metrics()
         metrics.feed(html)
@@ -92,7 +93,7 @@ def check_report(rep, result, html=None):
             else:
                 tail = ['未出现', f'{sims:,} 次模拟中没有出现滑档；录取线整体大波动时' + ('也没有' if not sp else '：' + fall(sp))]
             expected = head4 + mid + tail
-            if metrics.values != expected:
+            if metrics.values != [public_text(v) for v in expected]:
                 errors.append('HTML 摘要指标与 result 不一致')
     return errors
 
@@ -308,6 +309,64 @@ class Tables(HTMLParser):
         elif tag == 'table' and self.table is not None:
             self.tables.append(self.table)
             self.table = None
+
+
+class PublicationHTML(HTMLParser):
+    """查最终HTML的可见正文，不把链接目标当成印在报告上的长网址。"""
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.section = None
+        self.hidden = 0
+        self.urls = []
+        self.svgs = []
+        self.svg = None
+        self.in_title = False
+        self.text_parts = []
+        self.source_ids = set()
+
+    def handle_starttag(self, tag, attrs):
+        a = dict(attrs)
+        if tag == 'section': self.section = a.get('data-section')
+        if tag in ('style','script'): self.hidden += 1
+        if a.get('id','').startswith('source-'): self.source_ids.add(a['id'][7:])
+        if tag == 'svg':
+            self.svg = {'title':'', 'sources':re.findall(r'\d+', a.get('data-source-refs',''))}
+        if tag == 'title' and self.svg is not None: self.in_title = True
+
+    def handle_endtag(self, tag):
+        if tag == 'section':
+            self.check_urls(); self.section = None
+        if tag in ('p','td','li','div'): self.check_urls()
+        if tag in ('style','script'): self.hidden -= 1
+        if tag == 'title': self.in_title = False
+        if tag == 'svg' and self.svg is not None:
+            self.svgs.append(self.svg); self.svg = None
+
+    def handle_data(self, text):
+        if self.in_title and self.svg is not None: self.svg['title'] += text
+        if not self.hidden and self.section != '12': self.text_parts.append(text)
+
+    def check_urls(self):
+        text = ''.join(self.text_parts)
+        self.urls += [u for u in re.findall(r'https?://[^\s<>，；。）、]+',text) if len(u)>40]
+        self.text_parts = []
+
+
+def check_publication_html(document):
+    """两个发布门禁：非来源节的长网址；每张SVG的图题与真实尾注编号。"""
+    parser = PublicationHTML(); parser.feed(document); parser.check_urls()
+    errors = [f'第12节以外出现超过40字符的网址：{url[:55]}…' for url in parser.urls]
+    for i, svg in enumerate(parser.svgs,1):
+        if not svg['title'].strip(): errors.append(f'图{i}（SVG）缺少标题')
+        if not svg['sources']: errors.append(f'图{i}（SVG）缺少来源编号')
+        elif any(n not in parser.source_ids for n in svg['sources']):
+            errors.append(f'图{i}（SVG）来源编号没有对应尾注')
+    return errors
+
+
+def publication_gate(document):
+    errors = check_publication_html(document)
+    if errors: raise ValueError('报告呈现检查失败：'+'；'.join(errors))
 
 
 def main():

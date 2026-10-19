@@ -53,6 +53,14 @@ class TestCheckLayout(unittest.TestCase):
         rows = [(56, 130 + 15 * k, ch) for k, ch in enumerate("培养方案")]
         self.assertTrue(any("一字一行" in x for x in self.issues(rows)))
 
+    def test_complete_percent_labels_in_compact_chart_are_not_split_digits(self):
+        rows = [(460,130+14*k,t) for k,t in enumerate(['2%','3%','9%','2%'])]
+        self.assertEqual(self.issues(rows), [])
+
+    def test_approx_percent_column_is_not_squeezed_prose(self):
+        rows = [(460,130+14*k,'约 20%') for k in range(10)]
+        self.assertEqual(self.issues(rows), [])
+
     def test_split_number_fails(self):
         rows = [(56, 130, "1"), (56, 145, "6"), (80, 130, "华中农业大学-05组")]
         self.assertTrue(any("数字被拆成两行" in x for x in self.issues(rows)))

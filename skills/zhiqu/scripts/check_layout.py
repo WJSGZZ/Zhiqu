@@ -9,6 +9,7 @@ import re
 import sys
 from collections import defaultdict
 
+COMPLETE_NUMBER = re.compile(r"(?:约|不到|超过|<|>|≤|≥)?\s*\d+(?:[,.]\d+)*\s*%?")
 CJK_OR_DIGIT = re.compile(r"^[一-鿿0-9%（）()·\-–—.,，。、：:；;/]+$")
 
 
@@ -49,7 +50,7 @@ def check_page(page):
     issues = []
     lines = _lines(page)
     # 一栏被挤成一两个字一行（中文或数字），连续 3 行以上
-    for run in _chains(lines, lambda d: len(d["t"]) <= 2 and CJK_OR_DIGIT.match(d["t"])):
+    for run in _chains(lines, lambda d: len(d["t"]) <= 2 and CJK_OR_DIGIT.match(d["t"]) and not re.fullmatch(r"\d{1,2}%", d["t"])):
         if len(run) >= 3:
             issues.append(f"有一栏被挤成一字一行（{''.join(d['t'] for d in run)[:12]}…）")
     # 数字被拆成两行：上下相邻的两个单独数字
@@ -57,7 +58,7 @@ def check_page(page):
         if len(run) >= 2:
             issues.append(f"数字被拆成两行（{''.join(d['t'] for d in run)}）")
     # 窄栏：连续 6 行以上、每行很短很窄，正文被挤成细条
-    for run in _chains(lines, lambda d: d["w"] < 80 and len(d["t"]) <= 10 and not re.fullmatch(r"[\d,.%\s]+", d["t"])):
+    for run in _chains(lines, lambda d: d["w"] < 80 and len(d["t"]) <= 10 and not COMPLETE_NUMBER.fullmatch(d["t"])):
         if len(run) >= 8:
             issues.append(f"有一栏过窄，文字被挤成细条（{''.join(d['t'] for d in run)[:12]}…）")
     # 中文正文被挤进很窄的一栏：同一格里连续 15 行以上、每行不到约 12 个字宽（网址换行不算）

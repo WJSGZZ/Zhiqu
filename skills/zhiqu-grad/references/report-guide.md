@@ -18,3 +18,5 @@
 | 12 数据来源与声明 | 每条数据的来源、年份、查询日期、可信度等级；声明不保证录取，一切以官方为准 | 见 `data-sources.md` |
 
 备考、申请与就业备选的路线结构见[共用规则](../../zhiqu-shared/references/shared-rules.md)。
+
+三版共用的封面、图表、来源尾注与统一术语见[统一呈现与术语](../../zhiqu/references/report-guide.md#统一呈现与术语)，组件写法见[报告渲染器说明](../../zhiqu/scripts/render_report.py)。本版固定12节与节名保持不变；图表缺原始依据时标未取到，不用个人概率补空。

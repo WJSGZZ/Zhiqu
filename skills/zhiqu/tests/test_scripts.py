@@ -152,11 +152,13 @@ class TestOtherScripts(unittest.TestCase):
             self.assertEqual(code, 0, err)
             with open(out, encoding="utf-8") as f:
                 html = f.read()
-            i = html.index("<h3>示例大学</h3>")
+            i = html.index("<h3>本案大学</h3>")
             table = html[i:html.index("</table>", i)]
-            self.assertIn("class='rt'", table)
+            self.assertRegex(table, r'class=[\"\']rt[\"\']')
             self.assertIn("<colgroup>", table)
-            self.assertIn("word-break:break-all", table)
+            self.assertNotIn(long_url, table)
+            self.assertIn("source-ref", table)
+            self.assertIn(long_url, html[html.index('data-section="12"'):])
             self.assertRegex(html, r"table\.rt \{ table-layout: fixed; \}")
 
     def test_limits_shown_in_report(self):
