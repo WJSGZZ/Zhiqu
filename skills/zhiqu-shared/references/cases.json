@@ -1,0 +1,453 @@
+{
+  "schema": 1,
+  "cases": [
+    {
+      "case_id": "2026-GK-R01",
+      "directory": "skills/zhiqu/examples/2026-GK-R01",
+      "reports": [
+        "skills/zhiqu/examples/2026-GK-R01/report.pdf"
+      ],
+      "profile": {
+        "file": "profile_snapshot.json",
+        "sha256": "b254ae60024560fa43d950f6c3de5677df5f291a9afc77268bb7a0f28c11baae",
+        "filled_at": null,
+        "form": null
+      },
+      "report_versions": [
+        {
+          "file": "skills/zhiqu/examples/2026-GK-R01/report.pdf",
+          "generated_at": "2026-10-20T00:14:13+08:00",
+          "version": "1",
+          "sha256": "73c6656fee1379aff1f8a79c403a95c826778418fcd69a555f9420aa88137407",
+          "profile_sha256": "b254ae60024560fa43d950f6c3de5677df5f291a9afc77268bb7a0f28c11baae"
+        }
+      ]
+    },
+    {
+      "case_id": "2026-GK-R02",
+      "directory": "skills/zhiqu/examples/2026-GK-R02",
+      "reports": [
+        "skills/zhiqu/examples/2026-GK-R02/report.pdf"
+      ],
+      "profile": {
+        "file": "profile_snapshot.json",
+        "sha256": "8d7e6f0cacacd2242473cff64bafdb7dedf04ffbb25c1d194374ee0b0cf3f5a0",
+        "filled_at": null,
+        "form": null
+      },
+      "report_versions": [
+        {
+          "file": "skills/zhiqu/examples/2026-GK-R02/report.pdf",
+          "generated_at": "2026-10-20T00:13:30+08:00",
+          "version": "1",
+          "sha256": "691daf61b4a5ef13980c919138c74cfea96b40c29a3a9eb79835b3f63a31f879",
+          "profile_sha256": "8d7e6f0cacacd2242473cff64bafdb7dedf04ffbb25c1d194374ee0b0cf3f5a0"
+        }
+      ]
+    },
+    {
+      "case_id": "2026-GK-R03",
+      "directory": "skills/zhiqu/examples/2026-GK-R03",
+      "reports": [
+        "skills/zhiqu/examples/2026-GK-R03/report.pdf"
+      ],
+      "profile": {
+        "file": "profile_snapshot.json",
+        "sha256": "0e678552defdace5dd04b99bfe4532498c9ec6d905d0ba647518242630a1d6f8",
+        "filled_at": null,
+        "form": null
+      },
+      "report_versions": [
+        {
+          "file": "skills/zhiqu/examples/2026-GK-R03/report.pdf",
+          "generated_at": "2026-10-20T00:13:35+08:00",
+          "version": "1",
+          "sha256": "ccd989c94bc4a8ed3cb7252ef7a7eef75c17f40ab245fd886feaa56a9e6cbf7f",
+          "profile_sha256": "0e678552defdace5dd04b99bfe4532498c9ec6d905d0ba647518242630a1d6f8"
+        }
+      ]
+    },
+    {
+      "case_id": "2026-GK-R04",
+      "directory": "skills/zhiqu/examples/2026-GK-R04",
+      "reports": [
+        "skills/zhiqu/examples/2026-GK-R04/report.pdf"
+      ],
+      "profile": {
+        "file": "profile_snapshot.json",
+        "sha256": "2d93d2fc0a04b6f0b09a583e1178b582ed9ee493aba93b2e2169efd4de770253",
+        "filled_at": null,
+        "form": null
+      },
+      "report_versions": [
+        {
+          "file": "skills/zhiqu/examples/2026-GK-R04/report.pdf",
+          "generated_at": "2026-10-20T00:13:38+08:00",
+          "version": "1",
+          "sha256": "94a99a59bb51ba55589a7b592467aab86098e4345f834655df42414e976ac248",
+          "profile_sha256": "2d93d2fc0a04b6f0b09a583e1178b582ed9ee493aba93b2e2169efd4de770253"
+        }
+      ]
+    },
+    {
+      "case_id": "2026-GK-R05",
+      "directory": "skills/zhiqu/examples/2026-GK-R05",
+      "reports": [
+        "skills/zhiqu/examples/2026-GK-R05/report.pdf"
+      ],
+      "profile": {
+        "file": "profile_snapshot.json",
+        "sha256": "41aeb243ef47acb6d65b4c998d0a1b308eb82affb95537bb173000764c18b064",
+        "filled_at": null,
+        "form": null
+      },
+      "report_versions": [
+        {
+          "file": "skills/zhiqu/examples/2026-GK-R05/report.pdf",
+          "generated_at": "2026-10-20T00:13:41+08:00",
+          "version": "1",
+          "sha256": "c349866e811054cf9850443c709c247f62722eaab3ea8935e0d31208acd9d5cf",
+          "profile_sha256": "41aeb243ef47acb6d65b4c998d0a1b308eb82affb95537bb173000764c18b064"
+        }
+      ]
+    },
+    {
+      "case_id": "2026-GK-R06",
+      "directory": "skills/zhiqu/examples/2026-GK-R06",
+      "reports": [
+        "skills/zhiqu/examples/2026-GK-R06/report.pdf"
+      ],
+      "profile": {
+        "file": "profile_snapshot.json",
+        "sha256": "ecea5465503e65626d941d1f8a7ca53011a8c18fbe86b4b6eb5ffee25159d414",
+        "filled_at": null,
+        "form": null
+      },
+      "report_versions": [
+        {
+          "file": "skills/zhiqu/examples/2026-GK-R06/report.pdf",
+          "generated_at": "2026-10-20T00:13:44+08:00",
+          "version": "1",
+          "sha256": "ebf2f2d1e21c44bb8244177fad50fdb7445f8cfa3e9f7bea44003c247e1a1e98",
+          "profile_sha256": "ecea5465503e65626d941d1f8a7ca53011a8c18fbe86b4b6eb5ffee25159d414"
+        }
+      ]
+    },
+    {
+      "case_id": "2026-GK-R07",
+      "directory": "skills/zhiqu/examples/2026-GK-R07",
+      "reports": [
+        "skills/zhiqu/examples/2026-GK-R07/report.pdf"
+      ],
+      "profile": {
+        "file": "profile_snapshot.json",
+        "sha256": "01281d8679abb7443186c360418d8d0b1838ea7d5e643a439b5ec9ca423fea98",
+        "filled_at": null,
+        "form": null
+      },
+      "report_versions": [
+        {
+          "file": "skills/zhiqu/examples/2026-GK-R07/report.pdf",
+          "generated_at": "2026-10-20T00:13:48+08:00",
+          "version": "1",
+          "sha256": "1043b77b96da2b8be8d76bdab3eaeee18db3d14553719436abee0cf6fa29a1a4",
+          "profile_sha256": "01281d8679abb7443186c360418d8d0b1838ea7d5e643a439b5ec9ca423fea98"
+        }
+      ]
+    },
+    {
+      "case_id": "2026-GK-R08",
+      "directory": "skills/zhiqu/examples/2026-GK-R08",
+      "reports": [
+        "skills/zhiqu/examples/2026-GK-R08/report.pdf"
+      ],
+      "profile": {
+        "file": "profile_snapshot.json",
+        "sha256": "22d4d59ee175e8fab75568b9fa91d72299324961e02f0014ca9cd6989142fcbe",
+        "filled_at": null,
+        "form": null
+      },
+      "report_versions": [
+        {
+          "file": "skills/zhiqu/examples/2026-GK-R08/report.pdf",
+          "generated_at": "2026-10-20T00:13:52+08:00",
+          "version": "1",
+          "sha256": "68c5dcea9d04dde2f0a15bf6f88ca8772eea058a8d0636793ee1f4bfe19aae38",
+          "profile_sha256": "22d4d59ee175e8fab75568b9fa91d72299324961e02f0014ca9cd6989142fcbe"
+        }
+      ]
+    },
+    {
+      "case_id": "2026-GK-R09",
+      "directory": "skills/zhiqu/examples/2026-GK-R09",
+      "reports": [
+        "skills/zhiqu/examples/2026-GK-R09/report.pdf"
+      ],
+      "profile": {
+        "file": "profile_snapshot.json",
+        "sha256": "975b41e234548ffea4f9c170e3ebbe4fa7f50efe3193daa3205c23b1177604c6",
+        "filled_at": null,
+        "form": null
+      },
+      "report_versions": [
+        {
+          "file": "skills/zhiqu/examples/2026-GK-R09/report.pdf",
+          "generated_at": "2026-10-20T00:13:56+08:00",
+          "version": "1",
+          "sha256": "e12b9fa0623e949cd7352efb66ed5e3486e0da49f03bb0237240063e8f2d03f8",
+          "profile_sha256": "975b41e234548ffea4f9c170e3ebbe4fa7f50efe3193daa3205c23b1177604c6"
+        }
+      ]
+    },
+    {
+      "case_id": "2026-GK-R10",
+      "directory": "skills/zhiqu/examples/2026-GK-R10",
+      "reports": [
+        "skills/zhiqu/examples/2026-GK-R10/report.pdf"
+      ],
+      "profile": {
+        "file": "profile_snapshot.json",
+        "sha256": "774d76add4dc6ba1ba43217669a3755a6e15329ca9ee5bf7399727138348649a",
+        "filled_at": null,
+        "form": null
+      },
+      "report_versions": [
+        {
+          "file": "skills/zhiqu/examples/2026-GK-R10/report.pdf",
+          "generated_at": "2026-10-20T00:14:01+08:00",
+          "version": "1",
+          "sha256": "f8b592eab27601cad3a84fcdebe1d59dd7e02d245e52131809b54b05f69f4253",
+          "profile_sha256": "774d76add4dc6ba1ba43217669a3755a6e15329ca9ee5bf7399727138348649a"
+        }
+      ]
+    },
+    {
+      "case_id": "2026-GK-R11",
+      "directory": "skills/zhiqu/examples/2026-GK-R11",
+      "reports": [
+        "skills/zhiqu/examples/2026-GK-R11/report.pdf"
+      ],
+      "profile": {
+        "file": "profile_snapshot.json",
+        "sha256": "dacaba20a7c8f837563365d2fef9a814f4de9c721b40417da907716e9b99dcce",
+        "filled_at": null,
+        "form": null
+      },
+      "report_versions": [
+        {
+          "file": "skills/zhiqu/examples/2026-GK-R11/report.pdf",
+          "generated_at": "2026-10-20T00:14:06+08:00",
+          "version": "1",
+          "sha256": "04791a737480c7a18ad66ccb76131d5526e578633b45b99f4f1a82ae3026203c",
+          "profile_sha256": "dacaba20a7c8f837563365d2fef9a814f4de9c721b40417da907716e9b99dcce"
+        }
+      ]
+    },
+    {
+      "case_id": "2026-GK-R12",
+      "directory": "skills/zhiqu/examples/2026-GK-R12",
+      "reports": [
+        "skills/zhiqu/examples/2026-GK-R12/report.pdf"
+      ],
+      "profile": {
+        "file": "profile_snapshot.json",
+        "sha256": "b12cc2cb12ceee8e620e0713627a0d604f3c190bd09a36519433d0ab18c4e2af",
+        "filled_at": null,
+        "form": null
+      },
+      "report_versions": [
+        {
+          "file": "skills/zhiqu/examples/2026-GK-R12/report.pdf",
+          "generated_at": "2026-10-20T00:14:10+08:00",
+          "version": "1",
+          "sha256": "7fb8442d5f7eed02c4153d8ead27fad3855764e02c58f0f506cbb68e664d9f09",
+          "profile_sha256": "b12cc2cb12ceee8e620e0713627a0d604f3c190bd09a36519433d0ab18c4e2af"
+        }
+      ]
+    },
+    {
+      "case_id": "2027-GK-S01",
+      "directory": "skills/zhiqu/examples/2027-GK-S01",
+      "reports": [
+        "skills/zhiqu/examples/2027-GK-S01/report.pdf"
+      ],
+      "profile": {
+        "file": "profile_snapshot.json",
+        "sha256": "b254ae60024560fa43d950f6c3de5677df5f291a9afc77268bb7a0f28c11baae",
+        "filled_at": null,
+        "form": null
+      },
+      "report_versions": [
+        {
+          "file": "skills/zhiqu/examples/2027-GK-S01/report.pdf",
+          "generated_at": "2026-10-20T00:14:17+08:00",
+          "version": "1",
+          "sha256": "a3d7ba2fc4bb81a2532a97c3f4adda603ac7a917ad4060a2439439474d4075ac",
+          "profile_sha256": "b254ae60024560fa43d950f6c3de5677df5f291a9afc77268bb7a0f28c11baae"
+        }
+      ]
+    },
+    {
+      "case_id": "2027-QZ-S02",
+      "directory": "skills/zhiqu-career/examples/2027-QZ-S02",
+      "reports": [
+        "skills/zhiqu-career/examples/2027-QZ-S02/report.pdf"
+      ],
+      "profile": {
+        "file": "profile.json",
+        "sha256": "e985adff4dc5eb31443eef9a859f0e7955f84936dd8dab27a61b56e4b2e50d29",
+        "filled_at": "2026-10-19T16:00:00+08:00",
+        "form": "ab439b1f"
+      },
+      "report_versions": [
+        {
+          "file": "skills/zhiqu-career/examples/2027-QZ-S02/report.pdf",
+          "generated_at": "2026-10-20T00:14:34+08:00",
+          "version": "1",
+          "sha256": "3a56dbdb69baf5a502a9cefaf8d44f5b50064346b9e528cd3f17bc6c04193cc3",
+          "profile_sha256": "e985adff4dc5eb31443eef9a859f0e7955f84936dd8dab27a61b56e4b2e50d29"
+        }
+      ]
+    },
+    {
+      "case_id": "2027-QZ-S03",
+      "directory": "skills/zhiqu-career/examples/2027-QZ-S03",
+      "reports": [],
+      "profile": {
+        "case_id": "2027-QZ-S03",
+        "file": "profile.json",
+        "filled_at": "2026-10-19T16:00:00+08:00",
+        "form": "ab439b1f",
+        "sha256": "ba10c41ff6ff6b541ba93f315dcdfa9a0b0d458b4fb851c889f0c1776ca4c92d",
+        "status": "有数据"
+      }
+    },
+    {
+      "case_id": "2027-QZ-S04",
+      "directory": "skills/zhiqu-career/examples/2027-QZ-S04",
+      "reports": [],
+      "profile": {
+        "case_id": "2027-QZ-S04",
+        "file": "profile.json",
+        "filled_at": "2026-10-19T16:00:00+08:00",
+        "form": "ab439b1f",
+        "sha256": "08e591c0f7761ce9e01a644135b29ef677e4a48af2b038fd06b338e9510e8164",
+        "status": "有数据"
+      }
+    },
+    {
+      "case_id": "2027-QZ-S01",
+      "directory": "skills/zhiqu-career/examples/demo_2027",
+      "reports": [
+        "skills/zhiqu-career/examples/demo_2027/report.pdf"
+      ],
+      "profile": {
+        "file": "profile_snapshot.json",
+        "sha256": "0a6cb6835c42b9e3a0e18679bd40d3c99c433453287f9e2a231e357647a858d9",
+        "filled_at": null,
+        "form": null
+      },
+      "report_versions": [
+        {
+          "file": "skills/zhiqu-career/examples/demo_2027/report.pdf",
+          "generated_at": "2026-10-20T00:14:28+08:00",
+          "version": "1",
+          "sha256": "61ae6ad65a4b31d2307285c4d5fd53fbe337a2b120606366d087b84d4b238e23",
+          "profile_sha256": "0a6cb6835c42b9e3a0e18679bd40d3c99c433453287f9e2a231e357647a858d9"
+        }
+      ]
+    },
+    {
+      "case_id": "2027-YJ-S03",
+      "directory": "skills/zhiqu-grad/examples/2027-YJ-S03",
+      "reports": [],
+      "profile": {
+        "case_id": "2027-YJ-S03",
+        "file": "profile.json",
+        "filled_at": "2026-10-19T16:00:00+08:00",
+        "form": "8bcf0611",
+        "sha256": "820007d587fbc609bfafef72c97fe3a8bdbdfed8cd31f4c8b2aa9fb075262dc9",
+        "status": "有数据"
+      }
+    },
+    {
+      "case_id": "2027-YJ-S04",
+      "directory": "skills/zhiqu-grad/examples/2027-YJ-S04",
+      "reports": [],
+      "profile": {
+        "case_id": "2027-YJ-S04",
+        "file": "profile.json",
+        "filled_at": "2026-10-19T16:00:00+08:00",
+        "form": "8bcf0611",
+        "sha256": "a00ef7fcc89e492581b4a0e7915f901029eeadb6294de99992222910b3396d32",
+        "status": "有数据"
+      }
+    },
+    {
+      "case_id": "2028-YJ-S02",
+      "directory": "skills/zhiqu-grad/examples/2028-YJ-S02",
+      "reports": [
+        "skills/zhiqu-grad/examples/2028-YJ-S02/report.pdf"
+      ],
+      "profile": {
+        "file": "profile.json",
+        "sha256": "b04770d7a2589f2dbe7b35a80efaad8953b8db8666a26db85875f82cfc9eaf72",
+        "filled_at": "2026-10-19T16:00:00+08:00",
+        "form": "8bcf0611"
+      },
+      "report_versions": [
+        {
+          "file": "skills/zhiqu-grad/examples/2028-YJ-S02/report.pdf",
+          "generated_at": "2026-10-20T00:14:32+08:00",
+          "version": "1",
+          "sha256": "88d9fcd33452aeec5f29aefa04362bed69932730a15e3b556cab62ec3fe0658b",
+          "profile_sha256": "b04770d7a2589f2dbe7b35a80efaad8953b8db8666a26db85875f82cfc9eaf72"
+        }
+      ]
+    },
+    {
+      "case_id": "2027-YJ-S01",
+      "directory": "skills/zhiqu-grad/examples/demo_2027",
+      "reports": [
+        "skills/zhiqu-grad/examples/demo_2027/report.pdf"
+      ],
+      "profile": {
+        "file": "profile_snapshot.json",
+        "sha256": "432626de4888a0d461edc284e9c475796e8d96ce33683030143dcd3f896be032",
+        "filled_at": null,
+        "form": null
+      },
+      "report_versions": [
+        {
+          "file": "skills/zhiqu-grad/examples/demo_2027/report.pdf",
+          "generated_at": "2026-10-20T00:14:24+08:00",
+          "version": "1",
+          "sha256": "5a4cba0416919d7ce03b2883ffd97faec1b9151ac212fb841c5c9b4a02a20434",
+          "profile_sha256": "432626de4888a0d461edc284e9c475796e8d96ce33683030143dcd3f896be032"
+        }
+      ]
+    },
+    {
+      "case_id": "2027-GK-C01",
+      "directory": "skills/zhiqu/examples/case_c_guangdong_e2e",
+      "reports": [
+        "skills/zhiqu/examples/case_c_guangdong_e2e/report.pdf"
+      ],
+      "profile": {
+        "file": "profile_snapshot.json",
+        "sha256": "05357e9d7c77baf4b132978319ea870ae6805a200e09f63f759015b176649f95",
+        "filled_at": null,
+        "form": null
+      },
+      "report_versions": [
+        {
+          "file": "skills/zhiqu/examples/case_c_guangdong_e2e/report.pdf",
+          "generated_at": "2026-10-20T00:14:22+08:00",
+          "version": "1",
+          "sha256": "06475f884ebd3f0cf254cc40a9f04692ac498870243f0b544d8a23d41eadb423",
+          "profile_sha256": "05357e9d7c77baf4b132978319ea870ae6805a200e09f63f759015b176649f95"
+        }
+      ]
+    }
+  ]
+}

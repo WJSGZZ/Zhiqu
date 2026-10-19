@@ -338,6 +338,28 @@ class CaseLibrary(unittest.TestCase):
                     saved = json.load(f)
                 self.assertEqual(case_report.build(d, render=False), saved)
 
+    def test_render_requires_explicit_profile_and_forwards_selected_version(self):
+        from pathlib import Path
+        from types import SimpleNamespace
+        from unittest.mock import patch
+        import case_report
+        # Missing selection must stop before any case files are read or written.
+        with self.assertRaisesRegex(ValueError,'明确指定'):
+            case_report.build('/does-not-exist',render=True)
+        source=Path(ROOT)/'examples/2026-GK-R02'
+        with tempfile.TemporaryDirectory() as tmp:
+            skill=Path(tmp).resolve();folder=skill/'examples'/source.name
+            shutil.copytree(source,folder)
+            (skill/'data').symlink_to(Path(ROOT)/'data',target_is_directory=True)
+            before=(source/'report.json').read_bytes()
+            result=SimpleNamespace(returncode=0,stdout='passed',stderr='')
+            with patch.object(case_report,'SKILL',skill),patch('case_report.subprocess.run',return_value=result) as invoke,patch('operator_check.generate'):
+                case_report.build(folder,render=True,profile_version='profile_snapshot.json')
+            calls=[args.args[0] for args in invoke.call_args_list if args.args[0][1]=='scripts/report.py']
+            self.assertEqual(len(calls),2)
+            self.assertTrue(all(cmd[cmd.index('--profile-version')+1]=='profile_snapshot.json' for cmd in calls))
+            self.assertEqual((source/'report.json').read_bytes(),before)
+
     def test_no_markup_leaks_into_prose(self):
         """手写内容里不能混进简版报告的排版标记（::: 卡片、表格竖线、** 粗体）。"""
         for d in self.cases():

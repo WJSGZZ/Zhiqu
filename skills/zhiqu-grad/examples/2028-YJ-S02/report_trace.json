@@ -2,7 +2,7 @@
   "schema_version": 1,
   "case_id": "2028-YJ-S02",
   "source_sha256": {
-    "case.json": "f49b833f5998fd7b6b1305eebdf50a0db480ba93fffedf732ce01cd57067551e",
+    "case.json": "167bdabeba2c92d9ba2eb4edc098e16c188cb50fad22f4dfe229810bd74b63c7",
     "profile_parse.json": "1ba7bfd4bbb2bb0e54318c5ff1008c1f577e406d5ac5c88a6fa37c3e4dabc6e5",
     "directions.json": "e11eb75bac9a1378195f15ef805daf0ffe3d0a4c2306d317d6d9944265b8008b",
     "rules_check.json": "248a80156349f8bee1d5de049d1153408fc4548108e5895abb5bba17d5c7cb03",
@@ -16,13 +16,13 @@
   },
   "contract_sha256": "662996a705c5bb1fa0d70686f3e824b223c8d0b8c422cd5053773157e3a3dbc0",
   "tool_sha256": {
-    "planning_report.py": "d5fb8e474580bc6e20ff79e1bbeeab9375593b133ebefdd534d2bc5255854ed5",
-    "planning_workflow.py": "e9b9514d1331e1817290d4535cf804a22983cba951079df8c1b2c2c93ffc5f76",
+    "planning_report.py": "8d698258e1450570ac3f4691a9aff48661c260da9138f06c343803d821c74995",
+    "planning_workflow.py": "11717f0a5a3da33cc870959d127b86a952ce4390741dfce2f3953870498c632f",
     "operator_check.py": "a6552c0b63a8a6b5d15c9a1057fbc2884fb85435b1b102fbf4a48dd74c4e7ebb",
     "check_demos.py": "fc8e1625f9e052373756160514ad5c73db1e8451c233425918edb5bc839d9f63",
-    "report.py": "08bb83a85f3de379e6a05f1e6e80b2d85c525324f4112b63b2ea36f1cec5ccf3",
-    "render_report.py": "8cb49efa61bba9985354966096a6645ff4fd6ad7a04683cdc8aeb766db42344c",
-    "profile_store.py": "398b79c55fe2413320cd6020f787c00cae881bce7bea2a5dcd239427597d838f"
+    "report.py": "3be91d1e72908678c4291e198b7414823fb4b752b0874232c62cc7b320785e5d",
+    "render_report.py": "e85ed74d89613ce9ba1017680c14ef385624b5892151b1c1ce472ef4e1748676",
+    "profile_store.py": "1cfd828583598a65cf719a46447cb3112ef0170eb1a638b89ab023cb47a04e7f"
   },
   "numeric_refs": [
     {
@@ -412,8 +412,18 @@
   ],
   "artifacts": {
     "report.md": "5a822a3b5cceeb541ade0af4c833e696abd8ec4cffb3fcfd5fa3e72db9e115c6",
-    "report.html": "3586b80f1c74f9289f5f0c4ecb2a64cbe96dc955d1615179299d9d6b04f0572e",
-    "report.pdf": "a72e80c84bc59889d6a0e4dd44cd38ccfab2e6ede6465b4c2973a2b1fafa4585"
+    "report.html": "08de5022589a810f826a474c3d0df33d9956405f77154d63eb8397ac27db2a97",
+    "report.pdf": "88d9fcd33452aeec5f29aefa04362bed69932730a15e3b556cab62ec3fe0658b"
   },
-  "delivery_status": "awaiting_operator_and_independent_review"
+  "delivery_status": "awaiting_operator_and_independent_review",
+  "report_profile": {
+    "file": "profile.json",
+    "sha256": "b04770d7a2589f2dbe7b35a80efaad8953b8db8666a26db85875f82cfc9eaf72",
+    "filled_at": "2026-10-19T16:00:00+08:00",
+    "form": "8bcf0611"
+  },
+  "verification_tools_sha256": {
+    "verify_report.py": "f2956275f3d7da63daca855782729e5c9864db03bb4c9c3d84989744c1baf453",
+    "verification_calculations.py": "9ac916e796eab7676a4054b27d40674a25a0e78f8a5a9837f32ab9941381dea9"
+  }
 }

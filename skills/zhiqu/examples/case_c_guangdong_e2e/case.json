@@ -1,0 +1,16 @@
+{
+  "case_id": "2027-GK-C01",
+  "product": "gaokao",
+  "mode": "simulation",
+  "candidate": "小杰（模拟）",
+  "province": "广东",
+  "year": 2027,
+  "data_commit": "旧案例未记录数据提交号",
+  "note": "旧案例补登记；数字和结论保留。画像摘自该案例既有report.json/profile，是已有登记输入，不补造问卷。",
+  "report_profile": {
+    "file": "profile_snapshot.json",
+    "sha256": "05357e9d7c77baf4b132978319ea870ae6805a200e09f63f759015b176649f95",
+    "filled_at": null,
+    "form": null
+  }
+}

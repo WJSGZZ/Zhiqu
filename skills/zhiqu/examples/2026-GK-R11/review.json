@@ -82,10 +82,14 @@
   },
   "snapshot": {
     "report.json": "5efdf519ec0416854e95b24a17d605d13b25632689bff2f3a8e515adf1448aeb",
-    "report.pdf": "07adeab7f12eadd76d8d3234462045bf1f88f72b74009f54860e767fd4e9a8b8",
+    "report.pdf": "0210b10db73c0d8687f3d6b67d57ea9c2f6c7d98af4fc76ea29f8035c37b1a60",
     "operator_check.md": "6f2ed434ce63f3b6a4d2fa8b287e09c3b8bc17bcf608b7fe78d426c0f22eb4be",
     "retro_ranks/103352/result.json": "ce2b1514171aa7250e98421b83a8c1c317f3c9fe556a382dde19a8e6232b2511",
-    "case.json": "e9aae73390177189d8aef6332265b0ee7aa21c1e421613558aebb87859ba0d94"
+    "case.json": "bb858dbf4b9af3edda8c0727b5363ec849c0af618407c66006e6ab799b66c9e8",
+    "profile_snapshot.json": "dacaba20a7c8f837563365d2fef9a814f4de9c721b40417da907716e9b99dcce"
   },
-  "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。"
+  "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。",
+  "self_assessment": {
+    "verification_scope": "本轮更新为附核对材料的PDF，自评和机器核对通过后仍等待独立审核；未补造官方原文和独立批准。"
+  }
 }

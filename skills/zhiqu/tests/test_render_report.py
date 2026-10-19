@@ -191,7 +191,7 @@ class TestReportElements(unittest.TestCase):
         self.assertIn("红色是滑档", self.html)
 
     def test_callout_boxes(self):
-        self.assertIn('<div class="box key"><h4>核心结论</h4><ol><li>第一条</li>', self.html)
+        self.assertIn('<div class="box key core-conclusions"><h4>核心结论</h4><ul class="tight"><li><strong>判断：</strong>第一条</li>', self.html)
         self.assertIn('<div class="box warn"><h4>下一个检查点</h4><p>出分后重算。</p></div>', self.html)
         self.assertNotIn("[!key]", self.html)
 
@@ -239,7 +239,7 @@ class TestFullRender(unittest.TestCase):
 
     def test_maintainer_comments_are_not_rendered(self):
         doc, _ = rr.render(SAMPLE_MD.replace("内容占位。", "学费 8000 元 <!-- 核实：2026-10-17；复核期限：2027-07-01 -->", 1))
-        self.assertIn("学费 8,000 元", doc)
+        self.assertIn("学费 8,000 元", rr.re.sub(r"<[^>]+>", "", doc))
         self.assertNotIn("复核期限", doc)
 
     def test_render_html_via_cli(self):

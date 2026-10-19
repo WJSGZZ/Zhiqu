@@ -161,10 +161,11 @@
     "limitations": [
       "操控者尚未填写确认，未独立审核，不符合真实交付门槛。",
       "具体项目或职位条件尚待核；候选和未来日历不是承诺。"
-    ]
+    ],
+    "verification_scope": "本轮更新为附核对材料的PDF，自评和机器核对通过后仍等待独立审核；未补造官方原文和独立批准。"
   },
   "snapshot": {
-    "case.json": "44b3eb65a6590bcdb58571b0be32ff91dd1573d82e50e9f0b8e4a79949206d89",
+    "case.json": "beb234ee2cb27be282d5b9d41df681f5ec07d3c79dfff783a5d0c71be7c648f5",
     "profile_parse.json": "c0912865115b3aaf5e1ddacc5454b9f3f0c087fbcb0041b4de3658dcf24578d6",
     "directions.json": "5b2397e7ee4e80db6b8b1b6bf0834869aabbf282dcfecc6f23c4c706d476cc76",
     "rules_check.json": "d887941488483a7992cfbe1fb174550f3fdb3083d8c597a1cdcc43f1eee9d198",
@@ -174,12 +175,24 @@
     "judgment.json": "f26d3e35c9315c71694d0bc08ced1924309304526546300264a7df3bc4abd8cc",
     "narrative.json": "b214b62fffffce27ee435ab86d6ffe0af186e4ee426b73c31912075dfcb34660",
     "report.md": "21453d34410b026363848376fe5206b0761fac2ec0c0c414f7e43b7093637657",
-    "report.html": "fad9572c07bd33652906b32cfebe07ce5d2249170c8a9bdc9debf2460aa8b502",
-    "report.pdf": "17003519749eadd56d47b8e923c37208cdbb533932f77359d801c5b0efd00db1",
-    "report_trace.json": "b13f87ba7da356ac2bfe59d08da0806b0b03c645cf5c312cb5d9c7fd7389c32f",
+    "report.html": "a76d66aa5c74987ca993ef86cd8020162be1e4b5dc371036378e3b7458060bf8",
+    "report.pdf": "3a56dbdb69baf5a502a9cefaf8d44f5b50064346b9e528cd3f17bc6c04193cc3",
+    "report_trace.json": "2d269b4d2bc7337eee8b7d856eb32eb2b0b484d6ded93320b53420a17c13d593",
     "operator_check.md": "89816ba4b1c7df7969cb9be755db95b916217a01c211b9cbd6881497233c6ce6",
     "profile.json": "e985adff4dc5eb31443eef9a859f0e7955f84936dd8dab27a61b56e4b2e50d29",
     "profile-supplement.txt": "7ae0beb59e74158ec5ff869bb796f5cf3352fb7fa5c9ab7172ee930e91c93360"
   },
-  "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。"
+  "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。",
+  "snapshot_refreshes": [
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "核对附录改为紧凑排版后重新生成；正文 report.md 与全部输入文件未变，自评结论不受影响。"
+    }
+  ]
 }

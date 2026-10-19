@@ -6,10 +6,10 @@
 
 ```bash
 python3 scripts/optimize.py 候选池.csv --rank <位次> --slots <志愿数> --u-fall <滑档效用> --json result.json
-python3 scripts/report.py report.json --opt result.json --out 志愿填报决策报告.pdf
+python3 scripts/report.py report.json --opt result.json --out 志愿填报决策报告.pdf --profile-version profile.txt
 ```
 
-`report.py` 用本机的 Chrome 或 Edge 打印 PDF（宣纸底色、A4、带页眉页码）。找不到浏览器时会输出 HTML，用浏览器"打印 → 存储为 PDF"，并勾选"背景图形"。完整示例见 `examples/report_demo.json`。
+`report.py` 用本机的 Chrome 或 Edge 打印 PDF（宣纸底色、A4、带页眉页码）。找不到浏览器时会输出 HTML，用浏览器"打印 → 存储为 PDF"，并勾选"背景图形"。工具字段输入见 `examples/report_demo.json`（只作HTML预览）；交付示例以案例目录为准，须有 `case.json` 并明确选定画像版本。PDF附核对材料和数据附件，离线核对及联网复核的方法见仓库 `AGENTS.md` 的「如何只凭一份报告核对」。
 
 ## 写作规矩
 

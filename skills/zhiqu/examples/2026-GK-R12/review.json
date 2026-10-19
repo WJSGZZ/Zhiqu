@@ -82,9 +82,13 @@
   },
   "snapshot": {
     "report.json": "9cc1b976a7f5a1b0b2edd2ebe9aafca063bfed49985eac3166f66d5f5aa30038",
-    "report.pdf": "508a7f4d292bb4d680042005afb4f376e2d6f9c70a1a30c8589febcf8b85e082",
+    "report.pdf": "b98fd0788854ee7cd8f70d86c81e61c121778a7cb578de620997480eaa2307d2",
     "operator_check.md": "2dc37a6aba94c9db9c4e75e3ebdb1ce763947ca68184724d555a4edad0fc5b69",
     "retro_ranks/135253/result.json": "85969677c047dcc860dab9a01f6a50b07fff1f317f7f9e6ac2fc583acb17249a",
-    "case.json": "5267c77f9660325c47e28180847127dbfcad1e2af55fc5d38238b7335afdfae4"
+    "case.json": "e1babfaa0725685325bb554f29c2666dceef0868fd15a0caa6e4648c489aa832",
+    "profile_snapshot.json": "b12cc2cb12ceee8e620e0713627a0d604f3c190bd09a36519433d0ab18c4e2af"
+  },
+  "self_assessment": {
+    "verification_scope": "本轮更新为附核对材料的PDF，自评和机器核对通过后仍等待独立审核；未补造官方原文和独立批准。"
   }
 }

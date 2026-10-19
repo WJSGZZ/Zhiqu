@@ -208,11 +208,15 @@ review.json 复用高考既有 `independent`、`reviewer`、`date`、`pitfalls`�
 
 ```bash
 python3 skills/zhiqu/scripts/case_check.py <案例目录> --stage 7
-python3 skills/zhiqu/scripts/planning_report.py <案例目录>
+python3 skills/zhiqu/scripts/planning_report.py <案例目录> --profile-version <所用画像文件>
 python3 skills/zhiqu/scripts/case_check.py <案例目录> --stage 9
 # 操控者核查完成、新会话填写复核记录后才可检查真实交付
 python3 skills/zhiqu/scripts/case_check.py <案例目录> --stage 10 --delivery
 ```
+
+`case.json.report_input_usage` 逐条登记本次结论实际依赖的本人输入（`pointer` 指向 `profile_parse.json` 的本人值、`sections` 列使用节、`reason` 说明用途），不能把全问卷塞进附录。`case.json.report_profile` 保存明确选定版本的文件、填写时间、题目指纹与完整SHA256，生成时核对它与解析来源一致；旧文字原样封装为JSON，未知填写时间不补造。
+
+`--profile-version` 必须明确选择分析所用的画像文件或 `profiles/` 中的某一版，不能只改标签来绑定另一份画像；有更新版本时附录会提示“报告基于旧画像”。PDF在12节后附可提取核对材料，并嵌入输入、证据、计算和追踪附件；生成成功后同步公开模拟登记或已有的本机总登记。仅凭PDF核对的方法见仓库 `AGENTS.md` 的「如何只凭一份报告核对」。
 
 `planning_report.py` 自动检查前置阶段与内容合同，调用共用渲染器和版面/来源门禁；全部成功才替换报告、来源快照和核查单，失败保留旧件。`--html-only` 仅产生供检查的HTML稿，不是PDF交付。阶段检查逐级累计，阶段9允许核查单待填写，阶段10自评与`--delivery`的独立批准分开检查。
 
