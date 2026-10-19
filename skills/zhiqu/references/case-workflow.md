@@ -34,7 +34,7 @@ python3 scripts/case_check.py <案例目录> --stage N    # 检查 0..N 阶段�
 | 阶段 | 文件 | 门槛（`case_check.py` 检查） |
 |---|---|---|
 | 0 登记 | `case.json` | 案例号与目录名一致；`mode`（formal / simulation）；准备日；`data_commit`；省份层文件存在；位次与志愿数 |
-| 1 画像 | `profile.txt`、`profile_parse.json` | 画像开头正确；九个关键字段都有状态（given / inferred / unknown）；推断值已向本人确认；未知项列入 `missing` |
+| 1 画像 | `profile.json`（旧版 `profile.txt`）、`profile_parse.json` | JSON 的 zhiqu=gaokao，或有效旧文字；九个关键字段都有状态（given / inferred / unknown）；推断值已向本人确认；未知项列入 `missing` |
 | 2 方向 | `directions.json` | 2–4 个方向，各有支持、反证、怎么验证 |
 | 3 本省规则 | `rules_check.json` | 所有 `volatile` 规则本次已复核（≤ 30 天内）；缺的数据项写明处理办法；历年数据文件齐全 |
 | 4 筛选与候选池 | `screening.json`、`pool.csv`、可选 `excluded*.csv` | **账对得上**：起点 = 源表实际行数，每步 `after` = 下步 `before`，终点 = 候选池行数；人工剔除逐条有原因；池 ≥ 志愿位 2 倍，否则写原因；每行有资格证据和来源等级；formal 模式要求逐项 verified |
@@ -46,6 +46,13 @@ python3 scripts/case_check.py <案例目录> --stage N    # 检查 0..N 阶段�
 阶段 4 的筛选链用 `pool.py` 的参数（位次段、方向匹配、排除词）逐步缩小，每一步记一行。门槛脚本自己数源表行数，所以起点不能随手写。
 
 调用已有工具，不重写：`pool.py`、`rank.py`、`preferences.py`、`optimize.py`、`decision_evidence.py`（资格证据）、`check_report.py`、`report.py`。
+
+
+### 登记与画像字段
+
+关键字段仍是年份、省份、位次、选科、批次、体检、学费上限、调剂态度、优先级。问卷已直接记录高考年份；先分普通类与艺术、体育、分类考试等路径，分别记录出分/估分、单科与加分口径，不从特殊路径意向推定批次。户籍及专项条件只记录本人事实，敏感项拒答保留未知。费用分年度学费与全程预算；复读、最低可接受结果、学制和入学后机会分别保留。家长代填要注明孩子是否核对；最终偏好不能默认等同家长期望。
+
+高考画像先按题号读取年份、选科与分数口径，再核批次和规则；不从题目收起推断已出分。 JSON 和旧文字兼容、存档与版本对比见 [画像输入与存档](../../zhiqu-shared/references/report-workflow.md#画像输入与存档)；新作答采用最新版本，登记其文件与题目指纹。
 
 ## 三、个案取数清单（现取现核）
 

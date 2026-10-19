@@ -13,6 +13,7 @@ import sys
 import tempfile
 from pathlib import Path
 from planning_workflow import PlanningCase, FILES, dump, sha
+from profile_store import source_files
 
 
 def table(columns, rows):
@@ -87,7 +88,7 @@ def assemble(case):
 
 
 def input_snapshot(case):
-    return {f:sha(case.root/f) for f in (*FILES,'profile.txt')}
+    return {f:sha(case.root/f) for f in (*FILES,*source_files(case.root))}
 
 
 def generate(root, html_only=False):
@@ -114,7 +115,7 @@ def generate(root, html_only=False):
         operator_generate(case.root,output=tmp/'operator_check.md')
         manifest={'schema_version':1,'case_id':case.case['case_id'],'source_sha256':input_snapshot(case),
                   'contract_sha256':sha(case.contract_path()),
-                  'tool_sha256':{f:sha(Path(__file__).with_name(f)) for f in ('planning_report.py','planning_workflow.py','operator_check.py','check_demos.py','report.py','render_report.py')},
+                  'tool_sha256':{f:sha(Path(__file__).with_name(f)) for f in ('planning_report.py','planning_workflow.py','operator_check.py','check_demos.py','report.py','render_report.py','profile_store.py')},
                   'numeric_refs':trace,'artifacts':{n:sha(tmp/n) for n in names if n not in ('report_trace.json','operator_check.md')},'delivery_status':'awaiting_operator_and_independent_review'}
         dump(tmp/'report_trace.json',manifest)
         previous={name:(case.root/name).read_bytes() if (case.root/name).exists() else None for name in names}

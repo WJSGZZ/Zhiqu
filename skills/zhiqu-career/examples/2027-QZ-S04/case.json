@@ -54,5 +54,13 @@
     "region": "湖北",
     "data_asof": "{{k:/context/as_of}}",
     "conclusion": "以企业技术岗位为主线，电网按条件保留，公职不盲目并行。"
+  },
+  "profile": {
+    "case_id": "2027-QZ-S04",
+    "file": "profile.json",
+    "filled_at": "2026-10-19T16:00:00+08:00",
+    "form": "ab439b1f",
+    "sha256": "08e591c0f7761ce9e01a644135b29ef677e4a48af2b038fd06b338e9510e8164",
+    "status": "有数据"
   }
 }

@@ -270,5 +270,412 @@
         "E001"
       ]
     }
-  }
+  },
+  "source": {
+    "kind": "grad",
+    "form": "8bcf0611",
+    "filled_at": "2026-10-19T16:00:00+08:00",
+    "raw_sha256": "b04770d7a2589f2dbe7b35a80efaad8953b8db8666a26db85875f82cfc9eaf72"
+  },
+  "questionnaire_fields": [
+    {
+      "field": "年级",
+      "category": "fact",
+      "status": "given",
+      "value": "大三",
+      "quote": "{\"grade\": \"大三\"}",
+      "locator": "画像 JSON 题目：grade",
+      "confirmed": false,
+      "answer_refs": [
+        "grade"
+      ]
+    },
+    {
+      "field": "专业",
+      "category": "fact",
+      "status": "given",
+      "value": "交通工程",
+      "quote": "{\"major\": \"交通工程\"}",
+      "locator": "画像 JSON 题目：major",
+      "confirmed": false,
+      "answer_refs": [
+        "major"
+      ]
+    },
+    {
+      "field": "院校层次",
+      "category": "fact",
+      "status": "given",
+      "value": "普通公办本科",
+      "quote": "{\"school_tier\": \"普通公办本科\"}",
+      "locator": "画像 JSON 题目：school_tier",
+      "confirmed": false,
+      "answer_refs": [
+        "school_tier"
+      ]
+    },
+    {
+      "field": "均分或排名",
+      "category": "fact",
+      "status": "given",
+      "value": {
+        "gpa": "均分大概 86.1，满分口径未提供。",
+        "rank_in_major": "教务系统专业学习成绩第 7/62；班委综合表第 9/60。"
+      },
+      "quote": "{\"gpa\": \"均分大概 86.1，满分口径未提供。\", \"rank_in_major\": \"教务系统专业学习成绩第 7/62；班委综合表第 9/60。\"}",
+      "locator": "画像 JSON 题目：gpa, rank_in_major",
+      "confirmed": false,
+      "answer_refs": [
+        "gpa",
+        "rank_in_major"
+      ]
+    },
+    {
+      "field": "英语",
+      "category": "fact",
+      "status": "given",
+      "value": {
+        "四级": "487",
+        "六级": "还没过"
+      },
+      "quote": "{\"eng\": {\"四级\": \"487\", \"六级\": \"还没过\"}}",
+      "locator": "画像 JSON 题目：eng",
+      "confirmed": false,
+      "answer_refs": [
+        "eng"
+      ]
+    },
+    {
+      "field": "数学基础",
+      "category": "fact",
+      "status": "given",
+      "value": "数学还跟得上，具体课程和成绩没有提供。",
+      "quote": "{\"math_courses\": \"数学还跟得上，具体课程和成绩没有提供。\"}",
+      "locator": "画像 JSON 题目：math_courses",
+      "confirmed": false,
+      "answer_refs": [
+        "math_courses"
+      ]
+    },
+    {
+      "field": "读研动机",
+      "category": "self_judgment",
+      "status": "given",
+      "value": "比较喜欢交通调查和模型分析，想试试研究生，也承认找工作心里没底。",
+      "quote": "{\"why_main\": \"比较喜欢交通调查和模型分析，想试试研究生，也承认找工作心里没底。\"}",
+      "locator": "画像 JSON 题目：why_main",
+      "confirmed": false,
+      "answer_refs": [
+        "why_main"
+      ]
+    },
+    {
+      "field": "目标方向",
+      "category": "preference",
+      "status": "given",
+      "value": "交通规划、交通数据分析，比纯施工更吸引我。",
+      "quote": "{\"dir_want\": \"交通规划、交通数据分析，比纯施工更吸引我。\"}",
+      "locator": "画像 JSON 题目：dir_want",
+      "confirmed": false,
+      "answer_refs": [
+        "dir_want"
+      ]
+    },
+    {
+      "field": "预算",
+      "category": "constraint",
+      "status": "given",
+      "value": {
+        "money": "2—4万元",
+        "finance_note": "每年总支出最多 32000 元，未确认奖助不提前扣；生活费每月估 1500 元，换地方可能 1900 元，另留 4000 元应急。学费住宿未查。"
+      },
+      "quote": "{\"money\": \"2—4万元\", \"finance_note\": \"每年总支出最多 32000 元，未确认奖助不提前扣；生活费每月估 1500 元，换地方可能 1900 元，另留 4000 元应急。学费住宿未查。\"}",
+      "locator": "画像 JSON 题目：money, finance_note",
+      "confirmed": false,
+      "answer_refs": [
+        "money",
+        "finance_note"
+      ]
+    },
+    {
+      "field": "能否二战",
+      "category": "constraint",
+      "status": "unknown",
+      "value": null,
+      "quote": "",
+      "locator": "画像 JSON 题目：",
+      "confirmed": false,
+      "answer_refs": []
+    },
+    {
+      "field": "目标地区",
+      "category": "preference",
+      "status": "given",
+      "value": {
+        "city_pref": "只在本省",
+        "home_province": "江苏"
+      },
+      "quote": "{\"city_pref\": \"只在本省\", \"home_province\": \"江苏\"}",
+      "locator": "画像 JSON 题目：city_pref, home_province",
+      "confirmed": false,
+      "answer_refs": [
+        "city_pref",
+        "home_province"
+      ]
+    }
+  ],
+  "questionnaire": {
+    "zhiqu": "grad",
+    "schema": 1,
+    "问卷": "知衢 · 读研 · 自我盘点",
+    "form": "8bcf0611",
+    "filled_at": "2026-10-19T16:00:00+08:00",
+    "sections": [
+      {
+        "title": "你现在的位置",
+        "items": [
+          {
+            "id": "name",
+            "q": "怎么称呼你？（可留空）",
+            "a": "小明（模拟）"
+          },
+          {
+            "id": "grade",
+            "q": "你现在是？",
+            "a": "大三"
+          },
+          {
+            "id": "entry_year",
+            "q": "想哪一年入学读研？",
+            "a": "2028"
+          },
+          {
+            "id": "stage",
+            "q": "你现在处在哪个阶段？",
+            "a": "还在考虑要不要读研"
+          },
+          {
+            "id": "school_tier",
+            "q": "本科学校的层次",
+            "a": "普通公办本科"
+          },
+          {
+            "id": "major",
+            "q": "本科专业",
+            "a": "交通工程"
+          },
+          {
+            "id": "degree_status",
+            "q": "目前的学历、学位与取得时间",
+            "a": "2024 年入学，预计 2028 年 6 月本科毕业；尚未毕业。"
+          }
+        ]
+      },
+      {
+        "title": "学业与语言",
+        "items": [
+          {
+            "id": "gpa",
+            "q": "均分或绩点（写清满分）",
+            "a": "均分大概 86.1，满分口径未提供。"
+          },
+          {
+            "id": "rank_in_major",
+            "q": "专业排名（知道就写）",
+            "a": "教务系统专业学习成绩第 7/62；班委综合表第 9/60。"
+          },
+          {
+            "id": "rank_scope",
+            "q": "排名分母按哪个范围算？",
+            "a": "不清楚"
+          },
+          {
+            "id": "rank_basis",
+            "q": "排名按什么口径算？",
+            "a": "不清楚"
+          },
+          {
+            "id": "rank_attempt",
+            "q": "排名用首考成绩还是含重修成绩？",
+            "a": "不清楚"
+          },
+          {
+            "id": "fail",
+            "q": "有没有挂科？",
+            "a": "没有"
+          },
+          {
+            "id": "eng",
+            "q": "英语成绩（可多选）",
+            "a": {
+              "四级": "487",
+              "六级": "还没过"
+            }
+          },
+          {
+            "id": "math_courses",
+            "q": "高数、线代、概率学过哪些，成绩如何？（选填）",
+            "a": "数学还跟得上，具体课程和成绩没有提供。"
+          }
+        ]
+      },
+      {
+        "title": "为什么读研",
+        "items": [
+          {
+            "id": "why_main",
+            "q": "如果只能留一个，最主要的原因是？（选填）",
+            "a": "比较喜欢交通调查和模型分析，想试试研究生，也承认找工作心里没底。"
+          },
+          {
+            "id": "job_need",
+            "q": "你想去的岗位，真的要求硕士吗？",
+            "a": "没有调查过目标岗位到底需不需要硕士。"
+          }
+        ]
+      },
+      {
+        "title": "路径与打算",
+        "items": [
+          {
+            "id": "route",
+            "q": "你在考虑哪些路？（可多选）",
+            "a": [
+              "国内考研",
+              "想争取保研"
+            ]
+          },
+          {
+            "id": "ky_target",
+            "q": "已经想好的学校或专业（选填）",
+            "a": "本校和江苏省内相关方向都能接受，尚未定具体院校。",
+            "followup_of": "route"
+          },
+          {
+            "id": "ky_prep",
+            "q": "复习进度和每天能投入的时间",
+            "a": "每周课外稳定约 12 小时，需兼顾课程、英语和数学。",
+            "followup_of": "route"
+          },
+          {
+            "id": "mock_detail",
+            "q": "有可比的真题或完整模考吗？",
+            "a": "没有做过完整考研卷。",
+            "followup_of": "route"
+          },
+          {
+            "id": "tm_quota_status",
+            "q": "本专业有推免名额吗？",
+            "a": "有，知道往年人数",
+            "followup_of": "route"
+          },
+          {
+            "id": "tm_quota",
+            "q": "往年约几人？注明年份（选填）",
+            "a": "老师提到上一届交通工程推荐 6 人，我没核过正式名单。",
+            "followup_of": "tm_quota_status"
+          },
+          {
+            "id": "tm_research",
+            "q": "科研、竞赛经历",
+            "a": "还没有竞赛获奖；想报建模比赛，未弄清本校加分规则。",
+            "followup_of": "route"
+          },
+          {
+            "id": "tm_camp",
+            "q": "想去的学校，或打算参加的夏令营",
+            "a": "拿到推免资格后再了解接收学校。",
+            "followup_of": "route"
+          }
+        ]
+      },
+      {
+        "title": "专业方向",
+        "items": [
+          {
+            "id": "dir_want",
+            "q": "想读的方向",
+            "a": "交通规划、交通数据分析，比纯施工更吸引我。"
+          },
+          {
+            "id": "dir_tried",
+            "q": "对想读的方向，你真正接触过吗？",
+            "a": "上过相关课"
+          }
+        ]
+      },
+      {
+        "title": "方向与状态（可选）",
+        "items": [
+          {
+            "id": "mood",
+            "q": "最近两周，你的睡眠、情绪和精力怎么样？",
+            "a": "有些压力，但能应付"
+          }
+        ]
+      },
+      {
+        "title": "现实约束",
+        "items": [
+          {
+            "id": "money",
+            "q": "读研期间每年能落实的总支出（学费加生活费；选填）",
+            "a": "2—4万元"
+          },
+          {
+            "id": "finance_note",
+            "q": "可补充落实的预算和固定支出（选填）",
+            "a": "每年总支出最多 32000 元，未确认奖助不提前扣；生活费每月估 1500 元，换地方可能 1900 元，另留 4000 元应急。学费住宿未查。"
+          },
+          {
+            "id": "city_pref",
+            "q": "城市偏好",
+            "a": "只在本省"
+          },
+          {
+            "id": "home_province",
+            "q": "本省是哪里？",
+            "a": "江苏",
+            "followup_of": "city_pref"
+          },
+          {
+            "id": "family",
+            "q": "家里对你读研的期望（选填，不想说可留空）",
+            "a": "支持读研，希望别为了名校换到不喜欢的方向。"
+          }
+        ]
+      },
+      {
+        "title": "心里话",
+        "items": [
+          {
+            "id": "worry",
+            "q": "现在最纠结、最想弄明白的一件事（选填）",
+            "a": "现在该争保研到什么程度，什么时候把精力转向考研。"
+          },
+          {
+            "id": "more",
+            "q": "还有什么想让顾问知道的？（选填）",
+            "a": "二战不能现在承诺，要看当时预算和状态；优先专业方向与学习内容，其次费用、省内生活、学校名气，无百分比权重。"
+          }
+        ]
+      }
+    ],
+    "rank": [],
+    "derived": {},
+    "未填的必答题": [
+      "最高学历的取得方式",
+      "目标方向考哪门数学？",
+      "你想读研的原因（可多选）",
+      "读完之后，你最可能去做什么？",
+      "本专业还是跨专业？",
+      "学硕还是专硕？",
+      "一志愿没考上，能接受调剂吗？",
+      "你对本科专业的感觉",
+      "名校和稳妥之间，你更偏向？",
+      "如果这一年什么都没成，最坏你能接受什么？（可多选）",
+      "按重要程度，依次点选下面七项（先点最重要的）"
+    ]
+  },
+  "migration_note": "既有字段保留计算引用；新增问卷字段按题号直接读取。旧字段原话见问卷之外的补充，须和问卷一起核对。"
 }

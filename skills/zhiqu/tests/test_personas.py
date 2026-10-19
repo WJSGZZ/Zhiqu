@@ -9,7 +9,7 @@ from pathlib import Path
 
 SCRIPTS=Path(__file__).resolve().parents[1]/'scripts'
 sys.path.insert(0,str(SCRIPTS))
-from check_personas import CASES,LIBRARY,profiles,check
+from check_personas import CASES,LIBRARY,profiles,check,profile_errors,questionnaire_questions
 from planning_workflow import PlanningCase,SKILLS,read,dump,sha
 from operator_check import readable_locator,report_locations,sync_checklist_tool_snapshot,generate,checklist_groups
 
@@ -17,11 +17,40 @@ class PersonaTests(unittest.TestCase):
     def test_library_and_declared_stage_regression(self):
         self.assertEqual(check(),[])
 
-    def test_profiles_are_derived_and_duplicates_are_rejected(self):
+    def test_persona_source_links_are_unique_and_duplicates_are_rejected(self):
         text=LIBRARY.read_text();items=profiles(text)
         self.assertEqual(len(items),len(CASES))
         first=text[text.index('## 2028-YJ-S02 · '):].split('\n## 2027-YJ-S03',1)[0]
         with self.assertRaisesRegex(ValueError,'重复'):profiles(text+'\n'+first)
+
+    def test_json_profiles_use_real_question_ids_and_preserve_oral_context(self):
+        for kind,cid,_ in CASES:
+            root=SKILLS/f'zhiqu-{kind}/examples'/cid
+            data=read(root/'profile.json')
+            questions=questionnaire_questions(SKILLS.parent/(kind+'.html'))
+            self.assertEqual(profile_errors(data,questions,kind),[])
+            self.assertIn('模拟',json.dumps(data,ensure_ascii=False))
+            supplement=(root/'profile-supplement.txt').read_text()
+            self.assertTrue(supplement.startswith('问卷之外的补充（模拟）\n'))
+            self.assertIn('【读研 · 自我盘点】' if kind=='grad' else '【求职 · 自我盘点】',supplement)
+            self.assertFalse((root/'profile.txt').exists())
+            self.assertTrue(data['未填的必答题'])
+
+    def test_unknown_question_changed_wording_and_empty_answers_are_rejected(self):
+        root=SKILLS/'zhiqu-grad/examples/2028-YJ-S02'
+        questions=questionnaire_questions(SKILLS.parent/'grad.html')
+        original=read(root/'profile.json')
+        self.assertTrue(profile_errors([],questions,'grad'))
+        for change in ({'id':'made_up_question'},{'q':'改写过的问题'},{'a':None},{'followup_of':'missing_parent'}):
+            data=copy.deepcopy(original);data['sections'][0]['items'][0].update(change)
+            self.assertTrue(profile_errors(data,questions,'grad'))
+
+    def test_library_rejects_missing_sources_and_duplicated_answer_prose(self):
+        text=LIBRARY.read_text()
+        with self.assertRaisesRegex(ValueError,'缺'):
+            profiles(text.replace('profile.json)','missing.json)',1))
+        with self.assertRaisesRegex(ValueError,'重复维护'):
+            profiles(text.replace('### 阶段产物','### 问卷回答\n\n### 阶段产物',1))
 
     def test_unknown_qualification_stays_pending(self):
         for kind,cid,_ in CASES:

@@ -10,6 +10,11 @@
 | 读研 | [阶段表](../../zhiqu-grad/references/case-workflow.md) | [合同](../../zhiqu-grad/references/report-contract.json)、[指南](../../zhiqu-grad/references/report-guide.md) |
 | 求职 | [阶段表](../../zhiqu-career/references/case-workflow.md) | [合同](../../zhiqu-career/references/report-contract.json)、[指南](../../zhiqu-career/references/report-guide.md) |
 
+
+## 画像输入与存档
+
+JSON 格式、旧文字兼容和本机版本库统一见 [画像输入与本机存档](profile-input.md)。
+
 ## 一、顺序、产物与通过条件
 
 | 通用阶段 | 目的 | 读研、求职产物 | 通过条件 |
@@ -217,6 +222,6 @@ python3 skills/zhiqu/scripts/case_check.py <案例目录> --stage 10 --delivery
 
 [模拟人物库](sim-personas.md)集中维护问卷回答和覆盖边界；案例中的 `profile.txt` 由它提取，不能分别改写。已有的小林、小宁仍以原案例画像为准。人物只检验流程，不构成真实录取、录用或方法有效性的证据。
 
-修改流程后运行 `python3 skills/zhiqu/scripts/check_personas.py`：完整案例检查至自评，前半程案例只检查画像、方向、规则和候选，并禁止出现报告产物；它同时检查问卷节名和派生画像一致。需要更新派生画像时加 `--extract`，随后仍须重新计算、生成及复核受影响的报告，提取动作本身不更新报告快照。核查单只改措辞时，工具会先确认输入、报告和其他生成工具哈希未变，才更新核查工具记录；其他变动仍按原流程重生成并复核。
+修改流程后运行 `python3 skills/zhiqu/scripts/check_personas.py`：完整案例检查至自评，前半程案例只检查画像、方向、规则和候选，并禁止出现报告产物；它同时检查 JSON 画像的稳定题号、题干、节名和缺项；问卷之外的口语材料另放补充文件。修改作答后仍须重新核对分析、计算与报告快照，不能从人物库的介绍文字反向生成答案。核查单只改措辞时，工具会先确认输入、报告和其他生成工具哈希未变，才更新核查工具记录；其他变动仍按原流程重生成并复核。
 
 图表没有可画的数据时，用同一内容槽的 `data_gap` 代替，内容只写 missing（缺什么）、source（去哪取，网址留来源节）、expected_by（预计补齐的日期引用），输出为一行缺口说明，不生成空SVG。部分数据已取得时，可以画有依据的部分，但不得把缺值画成零或猜测点。

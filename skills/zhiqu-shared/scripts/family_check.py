@@ -334,10 +334,19 @@ def check_portrait_consistency(root):
             continue
         with open(p, encoding="utf-8") as f:
             text = f.read()
-        if marker not in text:
-            issues.append((ERROR, html, 1, f"未找到画像开头标记：{marker}"))
-        if marker not in readme:
-            issues.append((ERROR, "README.md", 1, f"未找到画像开头标记：{marker}"))
+        kind = html.removesuffix('.html')
+        shared = os.path.join(root, 'assets/questionnaire.js')
+        serializer = '\n'.join(read_lines(root, 'assets/questionnaire.js')) if os.path.isfile(shared) else ''
+        if re.search(r"zhiquCopy\(zhiquProfile\(['\"]" + re.escape(kind) + r"['\"]\)\)", text):
+            if not re.search(r'schema\s*:\s*1', serializer) or 'function zhiquProfile(' not in serializer:
+                issues.append((ERROR, html, 1, '缺共用 schema=1 JSON 画像生成器'))
+            if 'zhiqu' not in readme or 'JSON' not in readme:
+                issues.append((ERROR, 'README.md', 1, '问卷说明须同步 JSON 画像格式'))
+        else:
+            if marker not in text:
+                issues.append((ERROR, html, 1, f"未找到画像开头标记：{marker}，也未接入 JSON 画像"))
+            if marker not in readme:
+                issues.append((ERROR, "README.md", 1, f"未找到画像开头标记：{marker}"))
         m = _STORE_KEY_RE.search(text)
         if not m:
             issues.append((ERROR, html, 1, "未找到 STORE_KEY"))
@@ -516,7 +525,7 @@ CHECKS = [
     ("引用的文件存在", check_links),
     ("问卷节名引用", check_section_names),
     ("报告目录完整", check_report_guide),
-    ("画像开头一致", check_portrait_consistency),
+    ("画像输入一致", check_portrait_consistency),
     ("复核期限", check_review_deadline),
     ("重复段落", check_duplicate_paragraphs),
     ("体积", check_file_size),

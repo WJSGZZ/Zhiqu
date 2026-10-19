@@ -260,7 +260,7 @@ def checklist_groups(root, rep=None):
         if f['status']=='given':
             for path,value in walk(f['value']):profile.append(f['field']+path+' = '+str(value)+' → '+(compact_places(loc.get('p:/fields/'+str(i)+'/value'+path,[])) or '第 2 节画像与判断输入'))
     for item in c.data['profile_parse.json'].get('missing',[]):profile.append('尚缺 '+item['field']+'：'+item.get('question',item['field']))
-    personal=dict(id='PROFILE',title='和客户确认画像',source={'locator':'profile.txt 对应节名；profile_parse.json.fields 的 quote/value'},items=c.data['profile_parse.json']['fields'],reasons=['本人登记与缺项'],checks=profile,scope='只确认本人提供的信息，不把报告情景当真实成绩、录取或offer')
+    personal=dict(id='PROFILE',title='和客户确认画像',source={'locator':('profile.json 的题目与 profile-supplement.txt 的补充原话' if (c.root/'profile.json').exists() else 'profile.txt 对应节名')+'；profile_parse.json.fields 的 quote/value'},items=c.data['profile_parse.json']['fields'],reasons=['本人登记与缺项'],checks=profile,scope='只确认本人提供的信息，不把报告情景当真实成绩、录取或offer')
     assumptions=[]
     for key,spec in c.case['calculation_plan'].get('display_inputs',{}).items():
         if spec['role']=='declared_scenario':

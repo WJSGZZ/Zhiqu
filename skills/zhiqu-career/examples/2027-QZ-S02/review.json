@@ -164,8 +164,8 @@
     ]
   },
   "snapshot": {
-    "case.json": "8122f0a0e52e6daac9b5d976cb918e5abbbbbbf8d29d77fc3f5a6527dddbf3fc",
-    "profile_parse.json": "fa360e6197c0c48f2684460988fc03cfb47827660e2ca152c188ef67e99044b4",
+    "case.json": "44b3eb65a6590bcdb58571b0be32ff91dd1573d82e50e9f0b8e4a79949206d89",
+    "profile_parse.json": "c0912865115b3aaf5e1ddacc5454b9f3f0c087fbcb0041b4de3658dcf24578d6",
     "directions.json": "5b2397e7ee4e80db6b8b1b6bf0834869aabbf282dcfecc6f23c4c706d476cc76",
     "rules_check.json": "d887941488483a7992cfbe1fb174550f3fdb3083d8c597a1cdcc43f1eee9d198",
     "candidates.json": "e2d7abe22fb7375e3190e21a8f801c264fbed4b7fdaab066193cc48a35ff98f1",
@@ -173,12 +173,13 @@
     "calculations.json": "8e8135c7483b79dbc2d7ed702e1d9add2628ccf852da45c3d957f1e3f05d98f5",
     "judgment.json": "f26d3e35c9315c71694d0bc08ced1924309304526546300264a7df3bc4abd8cc",
     "narrative.json": "b214b62fffffce27ee435ab86d6ffe0af186e4ee426b73c31912075dfcb34660",
-    "profile.txt": "ca23e4236d0b3eaa0028f580e835d05693b844db90f60fcea3d840e219061e8f",
     "report.md": "21453d34410b026363848376fe5206b0761fac2ec0c0c414f7e43b7093637657",
     "report.html": "fad9572c07bd33652906b32cfebe07ce5d2249170c8a9bdc9debf2460aa8b502",
     "report.pdf": "17003519749eadd56d47b8e923c37208cdbb533932f77359d801c5b0efd00db1",
-    "report_trace.json": "3f4ed97f0b1ee82b756278f51e154c39268a1e6b23014e204ec57c943e4fc045",
-    "operator_check.md": "b3d42960244ed3d941232d40a0ff58d46f62bed3cd8b786601bfc2bb8e6c5d25"
+    "report_trace.json": "9373826ec4ef1bdc335e8871aac2a7f985725a0f6da50735cb82118041f81e32",
+    "operator_check.md": "89816ba4b1c7df7969cb9be755db95b916217a01c211b9cbd6881497233c6ce6",
+    "profile.json": "e985adff4dc5eb31443eef9a859f0e7955f84936dd8dab27a61b56e4b2e50d29",
+    "profile-supplement.txt": "7ae0beb59e74158ec5ff869bb796f5cf3352fb7fa5c9ab7172ee930e91c93360"
   },
   "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。"
 }

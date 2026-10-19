@@ -103,9 +103,16 @@ class Gate:
 
     # 阶段 1：画像与缺项
     def stage1(self):
-        path = self.need(1, 'profile.txt')
-        if path and not path.read_text(encoding='utf-8').lstrip().startswith(PROFILE_HEAD):
-            self.err(1, f'profile.txt 须以 {PROFILE_HEAD} 开头')
+        from profile_store import active_profile, parse_profile
+        try:
+            raw = active_profile(self.dir)
+            structured = parse_profile(raw)
+            if structured is not None and structured['zhiqu'] != 'gaokao':
+                self.err(1, '画像 JSON 须为 gaokao 类型')
+            elif structured is None and not raw.lstrip().startswith(PROFILE_HEAD):
+                self.err(1, f'旧文字画像须以 {PROFILE_HEAD} 开头')
+        except (OSError, ValueError) as exc:
+            self.err(1, '画像读取失败：'+str(exc))
         parse = self.json(1, 'profile_parse.json')
         if parse is None:
             return
@@ -340,6 +347,9 @@ def run(case_dir, stage, delivery=False):
         gate = PlanningCase(case_dir)
         gate.notes = []
         gate.check(stage, delivery)
+        if stage >= 1:
+            from profile_store import alignment_errors
+            gate.errors.extend(alignment_errors(case_dir))
         return gate
     if stage > 8:
         raise ValueError('高考阶段保持0..8')
@@ -348,6 +358,9 @@ def run(case_dir, stage, delivery=False):
         getattr(gate, f'stage{n}')()
         if n == 0 and gate.errors:
             break
+    if stage >= 1:
+        from profile_store import alignment_errors
+        gate.errors.extend(alignment_errors(case_dir))
     return gate
 
 
@@ -356,8 +369,16 @@ def main():
     ap.add_argument('case_dir')
     ap.add_argument('--stage', type=int, required=True, choices=range(0, 11), help='检查 0..N 阶段')
     ap.add_argument('--delivery', action='store_true', help='检查操控者和新会话批准交付状态')
+    ap.add_argument('--parse-profile', action='store_true', help='检查前按最新画像数据生成字段；文字画像沿用人工解析')
+    ap.add_argument('--replace-profile', action='store_true', help='与 --parse-profile 同用，确认重做已有画像解析')
     args = ap.parse_args()
-    try:gate = run(args.case_dir, args.stage, args.delivery)
+    try:
+        if args.replace_profile and not args.parse_profile:
+            raise ValueError('--replace-profile 须与 --parse-profile 同用')
+        if args.parse_profile:
+            from profile_store import prepare
+            print(prepare(args.case_dir, args.replace_profile)['status'])
+        gate = run(args.case_dir, args.stage, args.delivery)
     except (ValueError,KeyError,TypeError,OSError) as exc:ap.exit(1,str(exc)+'\n未通过阶段检查。\n')
     for note in gate.notes:
         print(note)

@@ -20,7 +20,8 @@ description: 知衢 · 读研规划。读取「知衢 · 硕士版」问卷生�
 
 完整读研个案须留存哪些阶段文件，见 [case-workflow.md](references/case-workflow.md)；各节组件登记在 [report-contract.json](references/report-contract.json)。 阶段文件由共用 `planning_report.py` 组装，操作见[总纲的工具用法](../zhiqu-shared/references/report-workflow.md#使用工具)。
 
-1. **确认时间坐标**。先问清几件事：
+0. **登记并选择最新画像**。新画像按 `zhiqu="grad"`、`schema=1` 识别；校验 JSON 后，用 `profile_store.py` 按操控者（交付报告前亲自核查关键信息的人）给的案例号存到本机案例目录，`case.json` 记录当前画像文件和题目指纹 `form`。同一案例以 `latest` 返回的最新一版为准，用 `diff` 核对作答变化；真实画像与总登记不提交到仓库。格式和操作见[画像输入与存档](../zhiqu-shared/references/report-workflow.md#画像输入与存档)。
+1. **确认时间坐标**。有 JSON 时按 `sections[].items[].id` 直接生成 `profile_parse.json` 的对应字段，保留题目原文、节名与作答定位；缺项再问，不从题目表述推断作答。旧版文字画像沿用逐节解析，缺数据标“无数据，需人工解析”。先核对几件事：
    - 今天是哪年哪月；
    - 学生读到几年级，哪年毕业；
    - 想哪年入学。

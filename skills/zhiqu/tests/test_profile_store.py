@@ -1,0 +1,332 @@
+"""Fake, local-only JSON questionnaire archives and backwards-compatible profiles."""
+from concurrent.futures import ThreadPoolExecutor
+from datetime import datetime, timezone
+import hashlib
+import json
+from pathlib import Path
+import sys
+import tempfile
+import unittest
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
+import profile_store as store
+
+
+HEADERS = {'gaokao': '【高考志愿 · 自我盘点】', 'grad': '【读研 · 自我盘点】', 'career': '【求职 · 自我盘点】'}
+
+
+def document(kind='grad', stamp='2026-10-19T12:00:00+08:00', form='a1', items=None, rank=None):
+    """A fictional questionnaire, including explicit unknown and declined answers."""
+    return {
+        'zhiqu': kind, 'schema': 1, '问卷': HEADERS[kind], 'form': form,
+        'filled_at': stamp,
+        'sections': [{'title': '模拟登记', 'items': items if items is not None else [
+            {'id': 'major', 'q': '专业', 'a': '计算机（模拟）'},
+            {'id': 'grade', 'q': '目前年级', 'a': '大三'},
+        ]}],
+        'rank': rank if rank is not None else [], 'derived': {}, '未填的必答题': [],
+    }
+
+
+def profile(**kwargs):
+    # Preserve formatting too: archive must not reserialize the user's original JSON.
+    return json.dumps(document(**kwargs), ensure_ascii=False, indent=2) + '\n'
+
+
+def legacy_profile(kind='grad', stamp='2026-10-19T12:00:00+08:00', answers=None):
+    data = {'zhiqu': kind, 'form': 'legacy', 'filled_at': stamp,
+            'answers': answers or {'text': {'major': '数学（模拟）'}, 'radio': {}, 'check': {}, 'rank': []}}
+    return HEADERS[kind] + '\n模拟旧版画像\n' + json.dumps(data, ensure_ascii=False)
+
+
+class ProfileStore(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+        self.case = '2027-YJ-0001'
+
+    def tearDown(self):
+        self.temp.cleanup()
+
+    def snapshot_path(self, info):
+        """Metadata may expose an absolute path, relative path, or just basename."""
+        path = Path(info['file'])
+        if path.is_absolute():
+            return path
+        direct = self.root / path
+        if direct.exists():
+            return direct
+        return self.root / self.case / 'profiles' / path.name
+
+    def folder(self, kind='grad', case_id=None):
+        folder = self.root / (case_id or self.case)
+        folder.mkdir(exist_ok=True)
+        (folder / 'case.json').write_text(json.dumps({'kind': kind}), encoding='utf-8')
+        return folder
+
+    def test_ingest_json_preserves_exact_original_private_and_idempotent(self):
+        raw = profile()
+        info = store.ingest(self.root, self.case, raw)
+        self.assertTrue({'case_id', 'file', 'filled_at', 'form', 'sha256', 'status'} <= set(info))
+        self.assertEqual(info['case_id'], self.case)
+        self.assertEqual(info['form'], 'a1')
+        self.assertEqual(info['sha256'], hashlib.sha256(raw.encode()).hexdigest())
+        path = self.snapshot_path(info)
+        self.assertEqual(path.suffix, '.json')
+        self.assertEqual(path.parent, self.root / self.case / 'profiles')
+        self.assertEqual(path.read_text(encoding='utf-8'), raw)
+        self.assertEqual(path.stat().st_mode & 0o777, 0o600)
+        self.assertEqual(store.latest(self.root, self.case), (info, raw))
+        self.assertEqual(store.ingest(self.root, self.case, raw), info)
+        self.assertEqual(len(list(path.parent.iterdir())), 1)
+        self.assertEqual(list(path.parent.glob('*.txt')), [])
+
+    def test_ingest_plain_keeps_text_without_guessing_or_forging_answers(self):
+        raw = HEADERS['grad'] + '\n模拟：可能想换专业，没有承诺任何成绩。'
+        info = store.ingest(self.root, self.case, raw, now=datetime(2026, 10, 19, tzinfo=timezone.utc))
+        self.assertIn('无数据', info['status'])
+        self.assertIn('人工解析', info['status'])
+        self.assertEqual(store.latest(self.root, self.case)[1], raw)
+        self.assertIsNone(store.parse_profile(raw))
+
+    def test_reject_case_path_kind_invalid_time_and_filename_collision(self):
+        for cid in ('../../secret', '2027-YJ-1', '2027-YJ-0001/../../secret', '2027-GK-0001'):
+            with self.subTest(case_id=cid), self.assertRaises(ValueError):
+                store.ingest(self.root, cid, profile())
+        for stamp in ('2026-02-30T00:00:00Z', '2026-10-19', '2026-10-19T12:00:00', 123):
+            with self.subTest(stamp=stamp), self.assertRaises(ValueError):
+                store.ingest(self.root, self.case, profile(stamp=stamp))
+        original = profile()
+        store.ingest(self.root, self.case, original)
+        changed = profile(items=[{'id': 'major', 'q': '专业', 'a': '不同的模拟专业'}])
+        with self.assertRaisesRegex(ValueError, '覆盖|冲突|已有'):
+            store.ingest(self.root, self.case, changed)
+        self.assertEqual(store.latest(self.root, self.case)[1], original)
+
+    def test_reject_nonignored_repository_destination(self):
+        repo = Path(__file__).resolve().parents[3]
+        with self.assertRaisesRegex(ValueError, '忽略目录|本机|入库'):
+            store.ingest(repo / 'skills', self.case, profile())
+
+    def test_latest_uses_filled_at_instant_not_arrival_or_timezone_text(self):
+        store.ingest(self.root, self.case, profile(stamp='2026-10-19T06:00:00Z'))
+        store.ingest(self.root, self.case, profile(stamp='2026-10-19T12:00:00+08:00'))
+        self.assertEqual(store.latest(self.root, self.case)[0]['filled_at'], '2026-10-19T06:00:00Z')
+        with self.assertRaisesRegex(ValueError, '还没有|没有画像|不存在'):
+            store.latest(self.root, '2027-YJ-0002')
+
+    def test_diff_uses_stable_item_id_and_warns_on_form_change(self):
+        old = store.ingest(self.root, self.case, profile(items=[
+            {'id': 'major', 'q': '原来的专业题干', 'a': '数学'},
+            {'id': 'gone', 'q': '删去的题', 'a': '模拟旧回答'},
+        ]))
+        new = store.ingest(self.root, self.case, profile(stamp='2026-10-20T12:00:00+08:00', form='b2', items=[
+            {'id': 'major', 'q': '措辞改了，稳定编号未改', 'a': '统计'},
+            {'id': 'new_item', 'q': '新增题', 'a': '模拟新回答', 'followup_of': 'major'},
+        ]))
+        result = store.diff(self.root, self.case)
+        self.assertEqual(result['added'], {'new_item': '模拟新回答'})
+        self.assertEqual(result['deleted'], {'gone': '模拟旧回答'})
+        self.assertEqual(result['modified'], {'major': {'old': '数学', 'new': '统计'}})
+        self.assertTrue(any('题目版本不同，部分题可能对不上' in x for x in result['warnings']))
+        # Explicit archive filenames can select versions; no traversal or other case allowed.
+        self.assertEqual(store.diff(self.root, self.case, old=old['file'], new=new['file'])['modified'], result['modified'])
+        with self.assertRaises(ValueError):
+            store.diff(self.root, self.case, old='../another-case/profile.json')
+
+    def test_same_answers_rephrased_questions_do_not_become_modified(self):
+        store.ingest(self.root, self.case, profile(items=[{'id': 'major', 'q': '专业', 'a': '数学'}]))
+        store.ingest(self.root, self.case, profile(stamp='2026-10-20T12:00:00+08:00', form='b2', items=[
+            {'id': 'major', 'q': '你的主修专业是什么', 'a': '数学'},
+        ]))
+        result = store.diff(self.root, self.case)
+        self.assertEqual(result['added'], {})
+        self.assertEqual(result['deleted'], {})
+        self.assertEqual(result['modified'], {})
+
+    def test_diff_rank_change_keeps_the_exact_order(self):
+        store.ingest(self.root, self.case, profile(rank=['费用', '城市']))
+        store.ingest(self.root, self.case, profile(stamp='2026-10-20T12:00:00+08:00', rank=['城市', '费用']))
+        result = store.diff(self.root, self.case)
+        self.assertEqual(result['modified']['rank'], {'old': ['费用', '城市'], 'new': ['城市', '费用']})
+
+    def test_diff_requires_two_versions_and_does_not_infer_plain_deleted_answers(self):
+        store.ingest(self.root, self.case, profile())
+        with self.assertRaisesRegex(ValueError, '至少|两版'):
+            store.diff(self.root, self.case)
+        store.ingest(self.root, self.case, HEADERS['grad'] + '\n模拟旧文字', now=datetime(2026, 10, 20, tzinfo=timezone.utc))
+        result = store.diff(self.root, self.case)
+        self.assertFalse(result['deleted'])
+        self.assertTrue(any('人工解析' in x for x in result['warnings']))
+
+    def test_parse_json_returns_exact_data_and_supports_old_data_line(self):
+        data = document(items=[{'id': 'money', 'q': '年度预算', 'a': '不想说'}])
+        data['derived'] = {'bazi': '模拟排盘文字，不用于现实资格'}
+        self.assertEqual(store.parse_profile(json.dumps(data, ensure_ascii=False)), data)
+        old = legacy_profile()
+        parsed = store.parse_profile(old)
+        self.assertEqual(next(i['a'] for sec in parsed['sections'] for i in sec['items'] if i['id']=='major'), '数学（模拟）')
+        self.assertIsNone(store.parse_profile(HEADERS['grad'] + '\n模拟旧画像，无数据行'))
+
+    def test_parse_rejects_damaged_wrong_types_duplicate_ids_and_ambiguous_lines(self):
+        damaged = [profile()[:-5], '{"zhiqu":', legacy_profile() + '\n' + legacy_profile().splitlines()[-1]]
+        for raw in damaged:
+            with self.subTest(raw=raw), self.assertRaises(ValueError):
+                store.parse_profile(raw)
+        modifications = [
+            ('zhiqu', 'unknown'), ('schema', 2), ('form', ''), ('form', 123),
+            ('filled_at', '2026-10-19T12:00:00'), ('sections', {}),
+        ]
+        for key, value in modifications:
+            bad = document(); bad[key] = value
+            with self.subTest(key=key, value=value), self.assertRaises(ValueError):
+                store.parse_profile(json.dumps(bad, ensure_ascii=False))
+        bad_items = [
+            [{'id': '../../secret', 'q': '模拟题', 'a': '值'}],
+            [{'id': 'major', 'q': ['不是题干字符串'], 'a': '值'}],
+            [{'id': 'same', 'q': '模拟题一', 'a': '值'}, {'id': 'same', 'q': '模拟题二', 'a': '值'}],
+        ]
+        for items in bad_items:
+            with self.subTest(items=items), self.assertRaises(ValueError):
+                store.parse_profile(profile(items=items))
+
+    def test_prepare_preserves_given_values_and_unknowns_without_negative_inference(self):
+        folder = self.folder()
+        raw = profile(items=[{'id': 'major', 'q': '专业', 'a': '数学'},
+                             {'id': 'rank_in_major', 'q': '专业名次与人数', 'a': '10/100'},
+                             {'id': 'new_question', 'q': '模拟敏感题', 'a': '不想说'}])
+        store.ingest(self.root, self.case, raw)
+        self.assertTrue(store.alignment_errors(folder))
+        store.prepare(folder)
+        self.assertFalse(store.alignment_errors(folder))
+        parsed = json.loads((folder / 'profile_parse.json').read_text(encoding='utf-8'))
+        fields = {row['field']: row for row in parsed['fields']}
+        self.assertEqual(fields['专业']['value'], '数学')
+        self.assertEqual(fields['专业']['status'], 'given')
+        self.assertEqual(fields['均分或排名']['value'], '10/100')
+        self.assertEqual(fields['预算']['status'], 'unknown')
+        self.assertIsNone(fields['预算']['value'])
+        self.assertIn('不想说', json.dumps(parsed, ensure_ascii=False))
+        self.assertEqual(store.latest(self.root, self.case)[1], raw)
+
+    def test_prepare_latest_and_alignment_reject_stale_or_forged_fields(self):
+        folder = self.folder()
+        store.ingest(self.root, self.case, profile())
+        store.prepare(folder)
+        (folder / 'directions.json').write_text('unchanged', encoding='utf-8')
+        with self.assertRaisesRegex(ValueError, '已有|覆盖'):
+            store.prepare(folder)
+        store.ingest(self.root, self.case, profile(stamp='2026-10-20T12:00:00+08:00', items=[
+            {'id': 'major', 'q': '专业', 'a': '统计'},
+        ]))
+        self.assertTrue(any('画像已更新' in x or '最新' in x for x in store.alignment_errors(folder)))
+        store.prepare(folder, replace=True)
+        self.assertFalse(store.alignment_errors(folder))
+        self.assertEqual((folder / 'directions.json').read_text(encoding='utf-8'), 'unchanged')
+        path = folder / 'profile_parse.json'
+        parsed = json.loads(path.read_text(encoding='utf-8'))
+        next(f for f in parsed['fields'] if f['field'] == '专业')['value'] = '伪造专业'
+        path.write_text(json.dumps(parsed, ensure_ascii=False), encoding='utf-8')
+        self.assertTrue(any('不一致' in x or '伪造' in x for x in store.alignment_errors(folder)))
+
+    def test_alignment_rejects_making_an_unknown_field_look_given(self):
+        folder = self.folder()
+        store.ingest(self.root, self.case, profile())
+        store.prepare(folder)
+        path = folder / 'profile_parse.json'
+        parsed = json.loads(path.read_text(encoding='utf-8'))
+        budget = next(f for f in parsed['fields'] if f['field'] == '预算')
+        self.assertEqual(budget['status'], 'unknown')
+        budget['value'] = '凭空编出的预算'
+        budget['status'] = 'given'
+        path.write_text(json.dumps(parsed, ensure_ascii=False), encoding='utf-8')
+        self.assertTrue(store.alignment_errors(folder))
+
+    def test_prepare_plain_returns_manual_and_preserves_existing_sources(self):
+        folder = self.folder()
+        raw = HEADERS['grad'] + '\n模拟旧画像：没有可用的结构化作答。'
+        (folder / 'profile.txt').write_text(raw, encoding='utf-8')
+        prior = '{"manual":true,"note":"模拟人工解析"}'
+        (folder / 'profile_parse.json').write_text(prior, encoding='utf-8')
+        self.assertIn('人工解析', store.prepare(folder)['status'])
+        self.assertEqual((folder / 'profile.txt').read_text(encoding='utf-8'), raw)
+        self.assertEqual((folder / 'profile_parse.json').read_text(encoding='utf-8'), prior)
+        self.assertFalse(store.alignment_errors(folder))
+
+    def test_tampering_and_symlink_are_rejected(self):
+        info = store.ingest(self.root, self.case, profile())
+        path = self.snapshot_path(info)
+        data = json.loads(path.read_text(encoding='utf-8'))
+        data['sections'][0]['items'][0]['a'] = '改动后的模拟回答'
+        path.write_text(json.dumps(data, ensure_ascii=False), encoding='utf-8')
+        with self.assertRaisesRegex(ValueError, '不一致|摘要|损坏'):
+            store.latest(self.root, self.case)
+        (self.root / '2027-YJ-0002').symlink_to(self.root / self.case)
+        with self.assertRaisesRegex(ValueError, '符号链接'):
+            store.ingest(self.root, '2027-YJ-0002', profile())
+
+    def test_new_id_reserves_unique_numbers_in_one_total_registry(self):
+        first = store.new_id(self.root, 'grad', 2027)
+        second = store.new_id(self.root, 'grad', 2027)
+        career = store.new_id(self.root, 'career', 2027)
+        self.assertEqual(first, '2027-YJ-0001')
+        self.assertEqual(second, '2027-YJ-0002')
+        self.assertEqual(career, '2027-QZ-0001')
+        registry = self.root / 'cases.json'
+        self.assertTrue(registry.is_file())
+        text = registry.read_text(encoding='utf-8')
+        for case_id in (first, second, career):
+            self.assertIn(case_id, text)
+        self.assertEqual(registry.stat().st_mode & 0o777, 0o600)
+        for kind, year, mode in [('unknown', 2027, 'formal'), ('grad', 'bad', 'formal'), ('grad', 2027, 'unknown')]:
+            with self.subTest(kind=kind, year=year, mode=mode), self.assertRaises(ValueError):
+                store.new_id(self.root, kind, year, mode=mode)
+
+    def test_new_id_atomic_reservations_do_not_duplicate(self):
+        with ThreadPoolExecutor(max_workers=4) as pool:
+            ids = list(pool.map(lambda _: store.new_id(self.root, 'grad', 2027), range(8)))
+        self.assertEqual(len(set(ids)), 8)
+        self.assertEqual(set(ids), {f'2027-YJ-{n:04d}' for n in range(1, 9)})
+        json.loads((self.root / 'cases.json').read_text(encoding='utf-8'))
+
+    def test_report_versions_record_hashes_and_do_not_mutate_profiles(self):
+        case_id = store.new_id(self.root, 'grad', 2027)
+        raw = profile()
+        store.ingest(self.root, case_id, raw)
+        folder = self.root / case_id
+        path = folder / 'report.pdf'
+        first = b'%PDF-1.4\nfictional report version one\n'
+        second = b'%PDF-1.4\nfictional report version two\n'
+        path.write_bytes(first)
+        store.record_report(self.root, case_id, path, now=datetime(2026, 10, 20, tzinfo=timezone.utc))
+        path.write_bytes(second)
+        store.record_report(self.root, case_id, path, now=datetime(2026, 10, 21, tzinfo=timezone.utc))
+        registry = (self.root / 'cases.json').read_text(encoding='utf-8')
+        self.assertIn(hashlib.sha256(first).hexdigest(), registry)
+        self.assertIn(hashlib.sha256(second).hexdigest(), registry)
+        self.assertIn('report.pdf', registry)
+        self.assertEqual(store.latest(self.root, case_id)[1], raw)
+        with self.assertRaises((ValueError, FileNotFoundError)):
+            store.record_report(self.root, case_id, folder / 'missing.pdf')
+
+    def test_declined_multiselect_is_unknown_not_a_known_health_constraint(self):
+        data = store.build_parse(profile(kind='gaokao', items=[{'id':'body','q':'身体条件','a':['不想说']}]), 'gaokao')
+        body = next(f for f in data['fields'] if f['field']=='体检')
+        self.assertEqual(body['status'], 'unknown')
+        self.assertIsNone(body['value'])
+        self.assertIn('不想说', body['quote'])
+
+    def test_all_three_questionnaires_roundtrip_without_guessing(self):
+        for kind, code in [('gaokao', 'GK'), ('grad', 'YJ'), ('career', 'QZ')]:
+            with self.subTest(kind=kind):
+                case_id = f'2027-{code}-0001'
+                raw = profile(kind=kind, items=[{'id': 'money', 'q': '费用预算', 'a': '不想说'}])
+                store.ingest(self.root, case_id, raw)
+                self.assertEqual(store.latest(self.root, case_id)[1], raw)
+                data = store.parse_profile(raw)
+                self.assertEqual(data['sections'][0]['items'][0]['a'], '不想说')
+                self.assertEqual(data['derived'], {})
+
+
+if __name__ == '__main__':
+    unittest.main()

@@ -1,7 +1,7 @@
 
-  function val(id){var el=document.getElementById(id);return el&&el.value?el.value.trim():'';}
-  function radio(name){var el=document.querySelector('input[name="'+name+'"]:checked');return el?el.value:'';}
-  function checks(name){var n=document.querySelectorAll('input[name="'+name+'"]:checked'),o=[];for(var i=0;i<n.length;i++)o.push(n[i].value);return o.join('、');}
+  function val(id){var el=document.getElementById(id);return el&&isVisible(el)&&el.value?el.value.trim():'';}
+  function radio(name){var el=document.querySelector('input[name="'+name+'"]:checked');return el&&isVisible(el)?el.value:'';}
+  function checks(name){var n=document.querySelectorAll('input[name="'+name+'"]:checked'),o=[];for(var i=0;i<n.length;i++)if(isVisible(n[i]))o.push(n[i].value);return o.join('、');}
   function f(v){return(v&&v.length)?v:'（未填）';}
   function isVisible(el){return !!(el&&el.offsetParent!==null);}
 
@@ -93,8 +93,15 @@
   /* ===== 按阶段收起不用填的题 =====
      data-hide-when="name=值|值"：条件成立时收起（并清空其中作答）；data-show-when 相反，只在条件成立时显示。 */
   function condOn(cond){
-    var eq=cond.indexOf('='),name=cond.slice(0,eq);
-    return cond.slice(eq+1).split('|').some(function(v){return !!document.querySelector('input[name="'+name+'"][value="'+v+'"]:checked');});
+    // 分号连接不同题的“或”；竖线连接同题可触发的值。只读当前可见的选择。
+    return cond.split(';').some(function(group){
+      var eq=group.indexOf('='),name=group.slice(0,eq).trim();
+      if(eq<1) return false;
+      var values=group.slice(eq+1).split('|');
+      return Array.prototype.some.call(document.querySelectorAll('input'),function(el){
+        return el.name===name&&el.checked&&values.indexOf(el.value)>=0&&isVisible(el);
+      });
+    });
   }
   function clearInside(el){
     el.querySelectorAll('input').forEach(function(i){ if(i.type==='radio'||i.type==='checkbox') i.checked=false; else i.value=''; });
@@ -109,41 +116,138 @@
     document.querySelectorAll('[data-show-when]').forEach(function(el){ el.hidden=!condOn(el.getAttribute('data-show-when')); });
   }
 
-  /* ===== 复制我的画像：文字 + 一行数据 =====
-     文字给人和 AI 读；数据给工具读，用于存档、比较前后两版和回测。
+  /* ===== 复制我的画像：一个包含题目原文的 JSON =====
+     只输出 JSON，供人和工具读取、存档与按题比较。
      form 是题目结构的指纹：题目或选项一改，指纹就变，旧答卷能对上旧题。编号由顾问登记时给，网页不生成。 */
-  function zhiquAnswers(){
-    var d={text:{},radio:{},check:{}};
-    document.querySelectorAll('input[type=text],input[type=number],input[type=date],input[type=time],textarea').forEach(function(el){ if(el.id&&el.id!=='summary'&&el.value.trim()) d.text[el.id]=el.value.trim(); });
-    document.querySelectorAll('input[type=radio]:checked').forEach(function(el){ if(el.name) d.radio[el.name]=el.value; });
-    document.querySelectorAll('input[type=checkbox]:checked').forEach(function(el){ if(el.name){ (d.check[el.name]=d.check[el.name]||[]).push(el.value); } });
-    if(typeof rankOrder!=='undefined') d.rank=rankOrder.slice();
-    return d;
-  }
   function zhiquFormHash(){
     var keys=[];
-    document.querySelectorAll('input,textarea').forEach(function(el){
-      if(el.id==='summary') return;
-      keys.push((el.name||el.id)+(el.type==='radio'||el.type==='checkbox'?'='+el.value:''));
+    document.querySelectorAll('.section').forEach(function(sec){keys.push('section='+sec.getAttribute('data-title'));});
+    document.querySelectorAll('.q').forEach(function(q){
+      keys.push('q='+q.getAttribute('data-profile-id')+'='+zhiquQuestionText(q)+(q.classList.contains('req')?':required':':optional'));
     });
-    document.querySelectorAll('.rank-item').forEach(function(it){ keys.push('rank='+it.getAttribute('data-id')); });
-    keys.sort(); var s=keys.join('\n'),h=5381;
-    for(var i=0;i<s.length;i++){ h=((h<<5)+h+s.charCodeAt(i))>>>0; }
+    document.querySelectorAll('input,textarea,select').forEach(function(el){
+      if(el.id==='summary') return;
+      keys.push((el.name||el.id)+':'+el.type+(el.type==='radio'||el.type==='checkbox'?'='+el.value+'='+((el.closest('label')||el).textContent||'').trim():'')+'='+zhiquPartLabel(el));
+    });
+    document.querySelectorAll('[data-when],[data-hide-when],[data-show-when]').forEach(function(el){keys.push('when='+[el.getAttribute('data-when'),el.getAttribute('data-hide-when'),el.getAttribute('data-show-when')].join(';'));});
+    document.querySelectorAll('.rank-item').forEach(function(it){keys.push('rank='+it.getAttribute('data-id')+'='+it.lastElementChild.textContent.trim());});
+    var s=keys.join('\n'),h=5381;
+    for(var i=0;i<s.length;i++){h=((h<<5)+h+s.charCodeAt(i))>>>0;}
     return ('00000000'+h.toString(16)).slice(-8);
   }
   function localStamp(){
     var d=new Date(),p=function(n){return (n<10?'0':'')+n;},o=-d.getTimezoneOffset(),sign=o>=0?'+':'-';o=Math.abs(o);
     return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())+'T'+p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds())+sign+p(Math.floor(o/60))+':'+p(o%60);
   }
-  function zhiquCopy(text,kind){
-    var data={zhiqu:kind,form:zhiquFormHash(),filled_at:localStamp(),answers:zhiquAnswers()};
-    var full=text+'\n\n【以下是给 AI 读的数据，请原样保留】\n'+JSON.stringify(data);
+  // A question's id is declared in HTML. Visible wording is kept verbatim in q.
+  function zhiquControls(q){
+    return Array.prototype.filter.call(q.querySelectorAll('input,textarea,select'),function(el){
+      return el.closest('.q')===q&&isVisible(el)&&el.id!=='summary';
+    });
+  }
+  function zhiquQuestionText(q){
+    var label=q.querySelector('.q-label');
+    return label?label.textContent.trim().replace(/\s+/g,' '):q.getAttribute('data-label')||'';
+  }
+  function zhiquPartLabel(el){
+    if(el.getAttribute('data-profile-label')) return el.getAttribute('data-profile-label');
+    var label=el.id&&document.querySelector('label[for="'+el.id+'"]');
+    if(label) return label.textContent.trim();
+    if(el.getAttribute('aria-label')) return el.getAttribute('aria-label');
+    var prev=el.previousElementSibling;
+    if(prev&&(prev.classList.contains('minilabel')||prev.classList.contains('q-label')||prev.tagName==='LABEL')) return prev.textContent.trim();
+    if(el.getAttribute('placeholder')) return el.getAttribute('placeholder');
+    return el.type==='radio'?'选择':el.type==='checkbox'?'多选':'填写';
+  }
+  function zhiquQuestionAnswer(q){
+    if(q.querySelector('.rank')) return typeof rankOrder!=='undefined'&&rankOrder.length?rankOrder.slice():null;
+    var controls=zhiquControls(q),groups=[],seen={};
+    controls.forEach(function(el){
+      var key=(el.type==='radio'||el.type==='checkbox')?el.name:el.id;
+      if(!key||seen[key]) return;
+      seen[key]=true;
+      var items=controls.filter(function(x){return (x.name||x.id)===key;});
+      var answer;
+      if(el.type==='radio'){
+        var chosen=items.filter(function(x){return x.checked;}); answer=chosen.length?chosen[0].value:null;
+      } else if(el.type==='checkbox'){
+        answer=items.filter(function(x){return x.checked;}).map(function(x){return x.value;});
+        if(!answer.length) answer=null;
+      } else answer=el.value.trim()||null;
+      groups.push({key:key,label:zhiquPartLabel(el),a:answer});
+    });
+    var answered=groups.filter(function(x){return x.a!==null;});
+    if(!answered.length) return null;
+    if(groups.length===1) return answered[0].a;
+    var result={},counts={};
+    answered.forEach(function(x){
+      var key=x.label; counts[key]=(counts[key]||0)+1;
+      if(counts[key]>1) key+='（'+counts[key]+'）';
+      result[key]=x.a;
+    });
+    return result;
+  }
+  function zhiquParentQuestion(q){
+    var wrapper=q.parentElement.closest('[data-when],[data-show-when]');
+    if(!wrapper) return null;
+    var cond=wrapper.getAttribute('data-when')||wrapper.getAttribute('data-show-when');
+    var result=null;
+    cond.split(';').some(function(group){
+      var eq=group.indexOf('='),name=group.slice(0,eq).trim(),values=group.slice(eq+1).split('|');
+      if(['grade','stage','stage_now'].indexOf(name)>=0) return false;
+      return Array.prototype.some.call(document.querySelectorAll('input'),function(el){
+        if(el.name===name&&el.checked&&isVisible(el)&&values.indexOf(el.value)>=0){
+          var parent=el.closest('.q');
+          if(parent&&parent!==q){ result=parent.getAttribute('data-profile-id');return true; }
+        }
+        return false;
+      });
+    });
+    return result;
+  }
+  function zhiquProfile(kind){
+    var labels={gaokao:'高考志愿',grad:'读研',career:'求职'};
+    var profile={zhiqu:kind,schema:1,'问卷':'知衢 · '+labels[kind]+' · 自我盘点',form:zhiquFormHash(),filled_at:localStamp(),sections:[],rank:typeof rankOrder!=='undefined'?rankOrder.slice():[],derived:{},'未填的必答题':[]};
+    document.querySelectorAll('.section').forEach(function(sec){
+      var section={title:sec.getAttribute('data-title'),items:[]};
+      sec.querySelectorAll('.q').forEach(function(q){
+        if(!isVisible(q)||!q.getAttribute('data-profile-id')) return;
+        var text=zhiquQuestionText(q),answer=zhiquQuestionAnswer(q);
+        if(answer!==null){
+          var item={id:q.getAttribute('data-profile-id'),q:text,a:answer},parent=zhiquParentQuestion(q);
+          if(parent) item.followup_of=parent;
+          section.items.push(item);
+        }
+        if(q.classList.contains('req')&&typeof isAnswered==='function'&&!isAnswered(q)) profile['未填的必答题'].push(text);
+      });
+      if(section.items.length) profile.sections.push(section);
+    });
+    // Attach follow-ups to their answered parent even when the page places the
+    // triggering choice later. Grade/stage visibility is not a follow-up.
+    var all={},children={};
+    profile.sections.forEach(function(sec){sec.items.forEach(function(item){all[item.id]=item;});});
+    profile.sections.forEach(function(sec){sec.items.forEach(function(item){
+      if(item.followup_of&&all[item.followup_of]) (children[item.followup_of]=children[item.followup_of]||[]).push(item);
+      else delete item.followup_of;
+    });});
+    var emitted={};
+    function emit(item,list){if(emitted[item.id])return;emitted[item.id]=true;list.push(item);(children[item.id]||[]).forEach(function(child){emit(child,list);});}
+    profile.sections.forEach(function(sec){var ordered=[];sec.items.forEach(function(item){if(!item.followup_of)emit(item,ordered);});sec.items=ordered;});
+    profile.sections=profile.sections.filter(function(sec){return sec.items.length;});
+    var birth=val('birthdate');
+    if(birth){
+      profile.derived.bazi=computeBaziBlock(birth,val('birthtime'),val('birthplace'),radio('bz_sex')||radio('sex')).lines.join('\n');
+    }
+    return profile;
+  }
+  function zhiquCopy(profile){
+    var full=JSON.stringify(profile,null,2);
     var msg=document.getElementById('copyDone'),out=document.getElementById('output'),ta=document.getElementById('summary');
     out.classList.remove('show'); ta.value=full;
     var done=function(){ msg.textContent='已复制 ✓ 直接粘贴发回去就行'; msg.classList.add('show'); };
     var fail=function(){
       msg.textContent=''; msg.classList.remove('show');
-      out.classList.add('show'); out.scrollIntoView({behavior:'smooth',block:'start'});
+      out.classList.add('show'); out.scrollIntoView({block:'start'});
     };
     if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(full).then(done).catch(function(){
       try{ ta.removeAttribute('readonly'); ta.select(); if(document.execCommand('copy')){ ta.setAttribute('readonly','readonly'); done(); return; } }catch(e){}

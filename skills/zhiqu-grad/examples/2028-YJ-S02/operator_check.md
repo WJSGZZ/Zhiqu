@@ -60,7 +60,7 @@
   定位：报告第 9、11 节；全年月份口径。
   核完填：核查人：___；核查日期：___；结果（确认/不符/仍未知）：___；原文依据与范围：___；对建议的处理：___。
 
-<!-- operator-item {"id": "PROFILE", "fingerprint": "8475332616651e7d7b00c29e424ce290e61bcd0aaf7c3b33979e3c38fb1281ce"} -->
+<!-- operator-item {"id": "PROFILE", "fingerprint": "dab663af57b4707e0d4e5106776c174d38b0db263d44fae1bd39373eb1d0b5a8"} -->
 - [ ] PROFILE｜和客户确认画像｜本人登记与缺项
   核什么：
   - 年级 = 大三上 → 第 2 节画像与判断输入
@@ -87,7 +87,7 @@
   - 排名待核/cet4 = 487 → 第 2 节：哪些是本人提供的事实、比较表（四级 487 分）
   - 尚缺 能否二战：请补充能否二战
   适用范围：只确认本人提供的信息，不把报告情景当真实成绩、录取或offer。
-  去哪里核：profile.txt 对应节名；profile_parse.json.fields 的 quote/value
+  去哪里核：profile.json 的题目与 profile-supplement.txt 的补充原话；profile_parse.json.fields 的 quote/value
   定位：按上列登记字段逐项核对。
   核完填：核查人：___；核查日期：___；结果（确认/不符/仍未知）：___；原文依据与范围：___；对建议的处理：___。
 

@@ -17,12 +17,14 @@
 
 四个技能，同一个仓库，分开加载：
 
-| 技能 | 用途 | 问卷 | 画像开头 |
+| 技能 | 用途 | 问卷 | 画像 JSON 的类型字段 |
 |---|---|---|---|
-| `skills/zhiqu` | 高考志愿，也是**高考计算层** | `gaokao.html` | `【高考志愿 · 自我盘点】` |
-| `skills/zhiqu-grad` | 读研规划（考研、境外、中外合作办学、先工作、考公） | `grad.html` | `【读研 · 自我盘点】` |
-| `skills/zhiqu-career` | 求职方向（专科到博士） | `career.html` | `【求职 · 自我盘点】` |
+| `skills/zhiqu` | 高考志愿，也是**高考计算层** | `gaokao.html` | `"zhiqu":"gaokao"` |
+| `skills/zhiqu-grad` | 读研规划（考研、境外、中外合作办学、先工作、考公） | `grad.html` | `"zhiqu":"grad"` |
+| `skills/zhiqu-career` | 求职方向（专科到博士） | `career.html` | `"zhiqu":"career"` |
 | `skills/bazi` | 八字：独立使用，或作为前三者的"传统视角" | 三份问卷都有可选的出生信息 | — |
+
+问卷复制一份包含题目与作答的 JSON，以 `zhiqu` 字段选择技能；旧版以“自我盘点”标题开头的文字画像仍可使用。格式、按案例存档与版本选择见[画像输入与存档](skills/zhiqu-shared/references/report-workflow.md#画像输入与存档)。
 
 共用的规则和资料放在 `skills/zhiqu-shared/references/`：
 - `shared-rules.md`：骨架、原则、防误伤、交付前自查、纠错流程、写作纪律。**每次交付报告前都要按它自查。**

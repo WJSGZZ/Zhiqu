@@ -37,106 +37,184 @@
       <div class="sec-head"><div class="badge">一</div><div class="sec-title">你现在的位置</div></div>
       <p class="sec-why">学历、阶段和城市决定了能投哪些岗位、现在最该做什么。</p>
 
-      <div class="q"><div class="q-label">怎么称呼你？<span class="opt-note">（可留空）</span></div>
+      <div data-profile-id="name" class="q"><div class="q-label">怎么称呼你？<span class="opt-note">（可留空）</span></div>
         <input type="text" id="name" placeholder="昵称即可"></div>
 
-      <div class="q req"><div class="q-label">最高学历</div>
-        <div class="opts">
-          <label class="opt"><input type="radio" name="degree" value="专科"><span class="box">专科</span></label>
+      <div data-profile-id="degree" class="q req" ><div class="q-label">最高学历</div><div class="opts stack"><label class="opt"><input type="radio" name="degree" value="专科"><span class="box">专科</span></label>
           <label class="opt"><input type="radio" name="degree" value="本科"><span class="box">本科</span></label>
           <label class="opt"><input type="radio" name="degree" value="硕士"><span class="box">硕士</span></label>
           <label class="opt"><input type="radio" name="degree" value="博士"><span class="box">博士</span></label>
-          <label class="opt"><input type="radio" name="degree" value="其他"><span class="box">其他</span></label>
-        </div>
-        <input class="mt" type="text" id="school_major" placeholder="学校名与专业（选填）"></div>
+          <label class="opt"><input type="radio" name="degree" value="其他"><span class="box">其他</span></label></div></div>
+      <div data-show-when="degree=其他"><div data-profile-id="degree_other" class="q" ><div class="q-label">其他学历是什么<span class="opt-note">（选填）</span></div>
+        <input type="text" id="degree_other"></div></div>
+      <div data-profile-id="school_major" class="q" ><div class="q-label">学校名称<span class="opt-note">（选填）</span></div>
+        <input type="text" id="school_major" placeholder="只填学校名；专业在下面单独填写"></div>
+      <div data-profile-id="major_name" class="q req"><div class="q-label">主修专业全名</div>
+        <input type="text" id="major_name" placeholder="毕业证上的专业全名"></div>
+<div data-profile-id="major_code" class="q"><div class="q-label">专业代码、辅修与双学位<span class="opt-note">（选填）</span></div>
+        <input data-profile-label="专业代码或学科门类" type="text" id="major_code" placeholder="专业代码或学科门类；不清楚可留空"><input data-profile-label="辅修专业" type="text" id="minor_major" placeholder="辅修专业（没有可留空）"><input data-profile-label="双学位专业" type="text" id="dual_major" placeholder="双学位专业（没有可留空）"></div>
+      <div data-profile-id="degree_status" class="q" ><div class="q-label">学位能否拿到<span class="opt-note">（选填）</span></div><div class="opts stack"><label class="opt"><input type="radio" name="degree_status" value="已取得"><span class="box">已取得</span></label>
+          <label class="opt"><input type="radio" name="degree_status" value="预计按期取得"><span class="box">预计按期取得</span></label>
+          <label class="opt"><input type="radio" name="degree_status" value="可能拿不到"><span class="box">可能拿不到</span></label>
+          <label class="opt"><input type="radio" name="degree_status" value="不授学位"><span class="box">不授学位</span></label>
+          <label class="opt"><input type="radio" name="degree_status" value="不清楚"><span class="box">不清楚</span></label></div></div>
 
-      <div class="q req"><div class="q-label">学校层次</div>
-        <div class="opts">
-          <label class="opt"><input type="radio" name="school_tier" value="985"><span class="box">985</span></label>
+      <div data-profile-id="school_tier" class="q req" ><div class="q-label">学校层次</div><div class="opts stack"><label class="opt"><input type="radio" name="school_tier" value="985"><span class="box">985</span></label>
           <label class="opt"><input type="radio" name="school_tier" value="211"><span class="box">211</span></label>
-          <label class="opt"><input type="radio" name="school_tier" value="双一流（非985/211）"><span class="box">双一流（非 985/211）</span></label>
+          <label class="opt"><input type="radio" name="school_tier" value="双一流（非985/211）"><span class="box">双一流（非985/211）</span></label>
           <label class="opt"><input type="radio" name="school_tier" value="普通公办本科"><span class="box">普通公办本科</span></label>
           <label class="opt"><input type="radio" name="school_tier" value="民办或独立学院"><span class="box">民办或独立学院</span></label>
-          <label class="opt"><input type="radio" name="school_tier" value="高职专科（含双高院校）"><span class="box">高职专科（含"双高"院校）</span></label>
-          <label class="opt"><input type="radio" name="school_tier" value="境外或中外合作"><span class="box">境外或中外合作</span></label>
-        </div></div>
+          <label class="opt"><input type="radio" name="school_tier" value="高职专科（含双高院校）"><span class="box">高职专科（含双高院校）</span></label>
+          <label class="opt"><input type="radio" name="school_tier" value="境外高校"><span class="box">境外高校</span></label>
+          <label class="opt"><input type="radio" name="school_tier" value="中外合作办学"><span class="box">中外合作办学</span></label>
+          <label class="opt"><input type="radio" name="school_tier" value="开放大学或成人高校"><span class="box">开放大学或成人高校</span></label>
+          <label class="opt"><input type="radio" name="school_tier" value="不清楚"><span class="box">不清楚</span></label></div></div>
+      <div data-show-when="school_tier=境外高校|中外合作办学"><div data-profile-id="degree_country" class="q" ><div class="q-label">境外或合作项目的学历信息<span class="opt-note">（选填）</span></div>
+        <input type="text" id="degree_country" placeholder="学位授予国家或地区"><input type="text" id="degree_duration" placeholder="学制，例如 1 年、2 年"><div class="minilabel">项目毕业年月</div>
+        <input type="month" id="overseas_grad_month"><div class="minilabel">项目学位取得年月</div>
+        <input type="month" id="overseas_degree_month"><div class="minilabel">留学服务中心学历学位认证</div><div class="opts stack"><label class="opt"><input type="radio" name="degree_auth" value="已认证"><span class="box">已认证</span></label>
+          <label class="opt"><input type="radio" name="degree_auth" value="办理中"><span class="box">办理中</span></label>
+          <label class="opt"><input type="radio" name="degree_auth" value="未办理"><span class="box">未办理</span></label>
+          <label class="opt"><input type="radio" name="degree_auth" value="不清楚"><span class="box">不清楚</span></label></div></div></div>
+      <div data-show-when="degree=硕士|博士"><div data-profile-id="bachelor_tier" class="q" ><div class="q-label">第一学历的本科情况<span class="opt-note">（选填）</span></div><div class="minilabel">本科学校层次</div>
+        <div class="opts stack"><label class="opt"><input type="radio" name="bachelor_tier" value="985"><span class="box">985</span></label><label class="opt"><input type="radio" name="bachelor_tier" value="211"><span class="box">211</span></label><label class="opt"><input type="radio" name="bachelor_tier" value="双一流（非985/211）"><span class="box">双一流（非985/211）</span></label><label class="opt"><input type="radio" name="bachelor_tier" value="普通公办本科"><span class="box">普通公办本科</span></label><label class="opt"><input type="radio" name="bachelor_tier" value="民办或独立学院"><span class="box">民办或独立学院</span></label><label class="opt"><input type="radio" name="bachelor_tier" value="境外或中外合作"><span class="box">境外或中外合作</span></label><label class="opt"><input type="radio" name="bachelor_tier" value="开放大学或成人高校"><span class="box">开放大学或成人高校</span></label><label class="opt"><input type="radio" name="bachelor_tier" value="没有本科经历"><span class="box">没有本科经历</span></label><label class="opt"><input type="radio" name="bachelor_tier" value="不清楚"><span class="box">不清楚</span></label></div><div class="minilabel">本科专业</div>
+        <input type="text" id="bachelor_major" placeholder="本科专业全名"><div class="minilabel">本科是否全日制统招</div><div class="opts stack"><label class="opt"><input type="radio" name="bachelor_fulltime" value="是，全日制统招"><span class="box">是，全日制统招</span></label>
+          <label class="opt"><input type="radio" name="bachelor_fulltime" value="不是全日制统招"><span class="box">不是全日制统招</span></label>
+          <label class="opt"><input type="radio" name="bachelor_fulltime" value="不清楚"><span class="box">不清楚</span></label></div><div class="minilabel">本科是否专升本</div><div class="opts stack"><label class="opt"><input type="radio" name="bachelor_upgrade" value="普通专升本"><span class="box">普通专升本</span></label>
+          <label class="opt"><input type="radio" name="bachelor_upgrade" value="不是专升本"><span class="box">不是专升本</span></label>
+          <label class="opt"><input type="radio" name="bachelor_upgrade" value="不清楚"><span class="box">不清楚</span></label></div></div></div>
 
-      <div class="q"><div class="q-label">毕业时间<span class="opt-note">（选填）</span></div>
-        <input type="text" id="grad_time" placeholder="例如：2027 年 6 月；已毕业 2 年"><p class="hint">应届身份、校招时间、选调和不少国企岗位都看毕业年份。</p></div>
+      <div data-profile-id="grad_time" class="q req" ><div class="q-label">毕业证取得或预计取得年月</div>
+        <input type="month" id="grad_time"></div>
+      <div data-profile-id="degree_time" class="q" ><div class="q-label">学位证取得或预计取得年月<span class="opt-note">（选填）</span></div>
+        <input data-profile-label="学位证取得或预计年月" type="month" id="degree_time"><div class="opts stack"><label class="opt"><input data-profile-label="学位证状态" type="radio" name="degree_time_status" value="已明确年月"><span class="box">已明确年月</span></label>
+          <label class="opt"><input data-profile-label="学位证状态" type="radio" name="degree_time_status" value="不授学位"><span class="box">不授学位</span></label>
+          <label class="opt"><input data-profile-label="学位证状态" type="radio" name="degree_time_status" value="不清楚"><span class="box">不清楚</span></label></div></div>
 
-      <div class="q"><div class="q-label">学历取得方式与教育经历<span class="opt-note">（选填）</span></div>
+      <div data-profile-id="education_path" class="q"><div class="q-label">学历取得方式与教育经历<span class="opt-note">（选填）</span></div>
         <input type="text" id="education_path" placeholder="例如：普通高考本科；普通专升本；自考；境外学历。多段学历请写各段专业、学位与获证时间，不确定可留空"></div>
+<div data-profile-id="further_study" class="q" data-show-when="degree=本科|硕士|博士"><div class="q-label">是否同时考虑继续读书<span class="opt-note">（选填）</span></div><div class="opts stack"><label class="opt"><input type="radio" name="further_study" value="不考虑"><span class="box">不考虑</span></label>
+          <label class="opt"><input type="radio" name="further_study" value="准备考研或保研"><span class="box">准备考研或保研</span></label>
+          <label class="opt"><input type="radio" name="further_study" value="在申请出国"><span class="box">在申请出国</span></label>
+          <label class="opt"><input type="radio" name="further_study" value="已录取在犹豫"><span class="box">已录取在犹豫</span></label>
+          <label class="opt"><input type="radio" name="further_study" value="想比较再决定"><span class="box">想比较再决定</span></label></div></div>
 
-        <div class="q"><div class="q-label">你的学历是全日制统招吗</div>
+        <div data-profile-id="ps_fulltime" class="q"><div class="q-label">你的学历是全日制统招吗</div>
         <div class="opts">
           <label class="opt"><input type="radio" name="ps_fulltime" value="是"><span class="box">是</span></label>
           <label class="opt"><input type="radio" name="ps_fulltime" value="不是（非全日制、自考、成人教育等）"><span class="box">不是（非全日制、自考、成人教育等）</span></label>
           <label class="opt"><input type="radio" name="ps_fulltime" value="不确定"><span class="box">不确定</span></label>
         </div></div>
-      <div class="q"><div class="q-label">签约、实际工作和参保情况<span class="opt-note">（选填）</span></div>
-        <textarea id="employment_history" placeholder="分别写签过三方/劳动合同的时间、实习或正式工作的起止、是否实际入职、单位职工社保或其他参保类型及月份；没有或不清楚也可写。不填证件号，不上传记录。"></textarea>
-        <p class="hint">这些是不同事实；应届资格要看每次招聘公告，不能只凭交没交社保判断。</p></div>
+      <div data-profile-id="tripartite" class="q" ><div class="q-label">签过三方协议吗<span class="opt-note">（选填）</span></div><div class="opts stack"><label class="opt"><input type="radio" name="tripartite" value="是"><span class="box">是</span></label>
+          <label class="opt"><input type="radio" name="tripartite" value="否"><span class="box">否</span></label>
+          <label class="opt"><input type="radio" name="tripartite" value="不清楚"><span class="box">不清楚</span></label></div></div>
+      <div data-show-when="tripartite=是"><div data-profile-id="tripartite_start" class="q" ><div class="q-label">签过三方协议吗的起止年月<span class="opt-note">（选填）</span></div><div class="minilabel">开始年月</div>
+        <input type="month" id="tripartite_start"><div class="minilabel">结束年月；仍持续可留空</div>
+        <input type="month" id="tripartite_end"></div></div>
+      <div data-profile-id="labor_work" class="q" ><div class="q-label">签过劳动合同或已全职入职吗<span class="opt-note">（选填）</span></div><div class="opts stack"><label class="opt"><input type="radio" name="labor_work" value="是"><span class="box">是</span></label>
+          <label class="opt"><input type="radio" name="labor_work" value="否"><span class="box">否</span></label>
+          <label class="opt"><input type="radio" name="labor_work" value="不清楚"><span class="box">不清楚</span></label></div></div>
+      <div data-show-when="labor_work=是"><div data-profile-id="labor_work_start" class="q" ><div class="q-label">签过劳动合同或已全职入职吗的起止年月<span class="opt-note">（选填）</span></div><div class="minilabel">开始年月</div>
+        <input type="month" id="labor_work_start"><div class="minilabel">结束年月；仍持续可留空</div>
+        <input type="month" id="labor_work_end"></div></div>
+      <div data-profile-id="employee_insurance" class="q" ><div class="q-label">缴过单位职工社保吗<span class="opt-note">（选填）</span></div><div class="opts stack"><label class="opt"><input type="radio" name="employee_insurance" value="是"><span class="box">是</span></label>
+          <label class="opt"><input type="radio" name="employee_insurance" value="否"><span class="box">否</span></label>
+          <label class="opt"><input type="radio" name="employee_insurance" value="不清楚"><span class="box">不清楚</span></label></div></div>
+      <div data-show-when="employee_insurance=是"><div data-profile-id="employee_insurance_start" class="q" ><div class="q-label">缴过单位职工社保吗的起止年月<span class="opt-note">（选填）</span></div><div class="minilabel">开始年月</div>
+        <input type="month" id="employee_insurance_start"><div class="minilabel">结束年月；仍持续可留空</div>
+        <input type="month" id="employee_insurance_end"></div></div>
+      <div data-profile-id="employment_history" class="q" ><div class="q-label">签约、工作和参保需要补充的情况<span class="opt-note">（选填）</span></div><textarea id="employment_history" placeholder="补充协议是否生效、实际入职与实习的区别、参保种类；不填证件或账户号。"></textarea></div>
 
-      <div class="q"><div class="q-label">档案与组织关系目前在哪里<span class="opt-note">（选填）</span></div>
-        <input type="text" id="archive_status" placeholder="例如：仍在学校、在公共人才服务机构；不清楚。不填详细地址或档案编号"></div>
+      <div data-profile-id="archive_status" class="q" data-show-when="stage_now=已毕业离校后未落实工作|已毕业正在工作|已毕业工作过现在没工作"><div class="q-label">档案与组织关系目前在哪里<span class="opt-note">（选填）</span></div><div class="opts stack"><label class="opt"><input type="radio" name="archive_status" value="仍在学校"><span class="box">仍在学校</span></label>
+          <label class="opt"><input type="radio" name="archive_status" value="公共人才服务机构"><span class="box">公共人才服务机构</span></label>
+          <label class="opt"><input type="radio" name="archive_status" value="工作单位"><span class="box">工作单位</span></label>
+          <label class="opt"><input type="radio" name="archive_status" value="不清楚"><span class="box">不清楚</span></label>
+          <label class="opt"><input type="radio" name="archive_status" value="不想说"><span class="box">不想说</span></label></div></div>
 
-      <div class="q"><div class="q-label">最早到岗时间与可用于实习、招聘或考试的时间<span class="opt-note">（选填）</span></div>
+      <div data-profile-id="availability" class="q"><div class="q-label">最早到岗时间与可用于实习、招聘或考试的时间<span class="opt-note">（选填）</span></div>
         <textarea id="availability" placeholder="例如：明年毕业后可全职；目前每周可实习3天、持续到某月；每周能准备多久；有哪些课程、实习或考试冲突"></textarea></div>
 
       <div class="followup" data-when="degree=专科">
         <span class="ftag">追问 · 专科路径</span>
-        <div class="q"><div class="q-label">是否考虑专升本<span class="opt-note">（选填）</span></div>
+        <div data-profile-id="upgrade_plan" class="q"><div class="q-label">是否考虑专升本<span class="opt-note">（选填）</span></div>
           <div class="opts">
             <label class="opt"><input type="radio" name="upgrade_plan" value="考虑升本"><span class="box">考虑升本</span></label>
             <label class="opt"><input type="radio" name="upgrade_plan" value="先工作"><span class="box">先工作</span></label>
             <label class="opt"><input type="radio" name="upgrade_plan" value="想比较再决定"><span class="box">想比较再决定</span></label>
           </div></div>
-        <div class="q"><div class="q-label">升本想打开什么岗位，以及可投入的时间和费用<span class="opt-note">（选填）</span></div>
+        <div data-profile-id="upgrade_detail" class="q"><div class="q-label">升本想打开什么岗位，以及可投入的时间和费用<span class="opt-note">（选填）</span></div>
           <textarea id="upgrade_detail" placeholder="写所在省、预计毕业年月、想报的升本类型/专业、目标岗位、能离开工作多久及费用上限；未知可留空，不用先查完整资料"></textarea></div>
       </div>
 
-      <div class="q"><div class="q-label">政治面貌<span class="opt-note">（选填）</span></div>
-        <div class="opts"><label class="opt"><input type="radio" name="political" value="中共党员（含预备）"><span class="box">中共党员（含预备）</span></label><label class="opt"><input type="radio" name="political" value="共青团员"><span class="box">共青团员</span></label><label class="opt"><input type="radio" name="political" value="群众"><span class="box">群众</span></label><label class="opt"><input type="radio" name="political" value="其他"><span class="box">其他</span></label></div>
-        <p class="hint">部分选调生、机关和国企岗位要求党员，报考前要知道。</p></div>
+      <div data-profile-id="political" class="q" ><div class="q-label">政治面貌<span class="opt-note">（选填）</span></div><div class="opts stack"><label class="opt"><input type="radio" name="political" value="正式党员"><span class="box">正式党员</span></label>
+          <label class="opt"><input type="radio" name="political" value="预备党员"><span class="box">预备党员</span></label>
+          <label class="opt"><input type="radio" name="political" value="入党积极分子或已递交申请"><span class="box">入党积极分子或已递交申请</span></label>
+          <label class="opt"><input type="radio" name="political" value="共青团员"><span class="box">共青团员</span></label>
+          <label class="opt"><input type="radio" name="political" value="群众"><span class="box">群众</span></label>
+          <label class="opt"><input type="radio" name="political" value="民主党派"><span class="box">民主党派</span></label>
+          <label class="opt"><input type="radio" name="political" value="不想说"><span class="box">不想说</span></label></div></div>
+      <div data-show-when="political=预备党员"><div data-profile-id="party_regular_month" class="q" ><div class="q-label">预计转正年月<span class="opt-note">（选填）</span></div>
+        <input type="month" id="party_regular_month"></div></div>
 
-      <div class="q"><div class="q-label">户籍所在省份<span class="opt-note">（选填）</span></div>
-        <input type="text" id="hukou" placeholder="例如：四川；户口在学校集体户"><p class="hint">有的考编岗位限本地户籍或生源，落户政策也和户籍有关。</p></div>
+      <div data-profile-id="hukou_disclosure" class="q" ><div class="q-label">户籍与生源地信息<span class="opt-note">（选填）</span></div><div class="opts stack"><label class="opt"><input type="radio" name="hukou_disclosure" value="愿意填写"><span class="box">愿意填写</span></label>
+          <label class="opt"><input type="radio" name="hukou_disclosure" value="不想说"><span class="box">不想说</span></label></div></div>
+      <div data-show-when="hukou_disclosure=愿意填写"><div data-profile-id="hukou" class="q" ><div class="q-label">户籍所在省市<span class="opt-note">（选填）</span></div>
+        <input type="text" id="hukou" placeholder="省、市即可，不填详细地址"></div>
+      <div data-profile-id="origin_province" class="q" ><div class="q-label">生源地<span class="opt-note">（选填）</span></div>
+        <input type="text" id="origin_province" placeholder="参加高考时的省份"></div>
+      <div data-profile-id="hukou_location" class="q" ><div class="q-label">户口目前在哪里<span class="opt-note">（选填）</span></div><div class="opts stack"><label class="opt"><input type="radio" name="hukou_location" value="家里"><span class="box">家里</span></label>
+          <label class="opt"><input type="radio" name="hukou_location" value="学校集体户"><span class="box">学校集体户</span></label>
+          <label class="opt"><input type="radio" name="hukou_location" value="人才机构集体户"><span class="box">人才机构集体户</span></label>
+          <label class="opt"><input type="radio" name="hukou_location" value="工作单位"><span class="box">工作单位</span></label>
+          <label class="opt"><input type="radio" name="hukou_location" value="不清楚"><span class="box">不清楚</span></label></div></div></div>
 
-      <div class="q req"><div class="q-label">你现在是？</div>
-        <div class="opts stack">
-          <label class="opt"><input type="radio" name="stage_now" value="在校，明年毕业"><span class="box">在校，明年毕业</span></label>
-          <label class="opt"><input type="radio" name="stage_now" value="应届毕业生"><span class="box">应届毕业生</span></label>
-          <label class="opt"><input type="radio" name="stage_now" value="毕业1—3年"><span class="box">毕业 1—3 年</span></label>
-          <label class="opt"><input type="radio" name="stage_now" value="工作3年以上"><span class="box">工作 3 年以上</span></label>
-          <label class="opt"><input type="radio" name="stage_now" value="目前没有工作"><span class="box">目前没有工作</span></label>
-        </div></div>
+      <div data-profile-id="stage_now" class="q req" ><div class="q-label">你现在是？</div><div class="opts stack"><label class="opt"><input type="radio" name="stage_now" value="在校本学年毕业"><span class="box">在校本学年毕业</span></label>
+          <label class="opt"><input type="radio" name="stage_now" value="在校还要一年以上"><span class="box">在校还要一年以上</span></label>
+          <label class="opt"><input type="radio" name="stage_now" value="已毕业离校后未落实工作"><span class="box">已毕业离校后未落实工作</span></label>
+          <label class="opt"><input type="radio" name="stage_now" value="已毕业正在工作"><span class="box">已毕业正在工作</span></label>
+          <label class="opt"><input type="radio" name="stage_now" value="已毕业工作过现在没工作"><span class="box">已毕业工作过现在没工作</span></label>
+          <label class="opt"><input type="radio" name="stage_now" value="其他"><span class="box">其他</span></label></div></div>
+      <div data-show-when="stage_now=其他"><div data-profile-id="stage_other" class="q" ><div class="q-label">现在的其他状态<span class="opt-note">（选填）</span></div>
+        <input type="text" id="stage_other"></div></div>
 
-      <div class="q req"><div class="q-label">求职进行到哪一步？</div>
-        <div class="opts stack">
-          <label class="opt"><input type="radio" name="job_stage" value="还没开始"><span class="box">还没开始</span></label>
+      <div data-profile-id="job_stage" class="q req" ><div class="q-label">求职进行到哪一步？</div><div class="opts stack"><label class="opt"><input type="radio" name="job_stage" value="还没开始"><span class="box">还没开始</span></label>
           <label class="opt"><input type="radio" name="job_stage" value="正在准备简历和投递"><span class="box">正在准备简历和投递</span></label>
           <label class="opt"><input type="radio" name="job_stage" value="已经在面试"><span class="box">已经在面试</span></label>
-          <label class="opt"><input type="radio" name="job_stage" value="手里有offer在比较"><span class="box">手里有 offer 在比较</span></label>
+          <label class="opt"><input type="radio" name="job_stage" value="手里有offer在比较"><span class="box">手里有offer在比较</span></label>
           <label class="opt"><input type="radio" name="job_stage" value="在职，考虑跳槽"><span class="box">在职，考虑跳槽</span></label>
-        </div></div>
+          <label class="opt"><input type="radio" name="job_stage" value="在准备或参加考公考编国企笔试"><span class="box">在准备或参加考公考编国企笔试</span></label>
+          <label class="opt"><input type="radio" name="job_stage" value="已签约在考虑解约"><span class="box">已签约在考虑解约</span></label></div></div>
+      <div data-show-when="job_stage=正在准备简历和投递|已经在面试"><div data-profile-id="applied_roles" class="q" ><div class="q-label">投递和面试到哪一步了<span class="opt-note">（选填）</span></div>
+        <input type="text" id="applied_roles" placeholder="投过哪几类岗位，约多少个"><div class="opts stack"><label class="opt"><input type="radio" name="application_farthest" value="已投递等回复"><span class="box">已投递等回复</span></label>
+          <label class="opt"><input type="radio" name="application_farthest" value="笔试或测评"><span class="box">笔试或测评</span></label>
+          <label class="opt"><input type="radio" name="application_farthest" value="初面"><span class="box">初面</span></label>
+          <label class="opt"><input type="radio" name="application_farthest" value="后续面试"><span class="box">后续面试</span></label>
+          <label class="opt"><input type="radio" name="application_farthest" value="终面"><span class="box">终面</span></label>
+          <label class="opt"><input type="radio" name="application_farthest" value="背景调查或谈薪"><span class="box">背景调查或谈薪</span></label></div>
+        <input type="text" id="rejection_reason" placeholder="已知的明确拒绝原因；不知道可留空"></div></div>
 
-      <div class="followup" data-when="job_stage=手里有offer在比较|在职，考虑跳槽">
+      <div class="followup" data-when="job_stage=手里有offer在比较|在职，考虑跳槽|已签约在考虑解约">
         <span class="ftag">追问 · 比较 offer</span>
-        <div class="q"><div class="q-label">已有 offer 的细节<span class="opt-note">（选填；尚无 offer 可留空）</span></div>
-          <textarea id="offers_list" placeholder="逐个写税前固定工资、保证月数、绩效/奖金条件、试用工资和期限、工作时间、社保公积金的城市/基数/个人与单位比例、到岗条件和答复日；不知道的写待问，不只写总包。"></textarea></div>
+        <div data-profile-id="offers_list" class="q" ><div class="q-label">已有 offer 的细节<span class="opt-note">（选填）</span></div><textarea data-profile-label="录用条件" id="offers_list" placeholder="逐个写：合同甲方全称、实际工作地点、税前固定工资、保证月数、奖金条件、试用工资和期限、工时、社保公积金城市/基数/比例、是否已签三方或劳动合同、违约金和答复截止日；未知写待问。"></textarea>
+        <div class="opts stack"><label class="opt"><input data-profile-label="用工形式" type="radio" name="offer_employment" value="直签"><span class="box">直签</span></label>
+          <label class="opt"><input data-profile-label="用工形式" type="radio" name="offer_employment" value="劳务派遣"><span class="box">劳务派遣</span></label>
+          <label class="opt"><input data-profile-label="用工形式" type="radio" name="offer_employment" value="外包驻场"><span class="box">外包驻场</span></label>
+          <label class="opt"><input data-profile-label="用工形式" type="radio" name="offer_employment" value="编外合同"><span class="box">编外合同</span></label>
+          <label class="opt"><input data-profile-label="用工形式" type="radio" name="offer_employment" value="事业编制"><span class="box">事业编制</span></label>
+          <label class="opt"><input data-profile-label="用工形式" type="radio" name="offer_employment" value="不清楚"><span class="box">不清楚</span></label></div><p class="hint">多份 offer 请在上面的文字里分别标明用工形式，不能把不同公司的条件拼在一起。</p></div>
       </div>
 
-      <div class="followup" data-when="job_stage=在职，考虑跳槽|手里有offer在比较">
+      <div class="followup" data-when="job_stage=在职，考虑跳槽|手里有offer在比较|已签约在考虑解约">
         <span class="ftag">追问 · 留下与走（有工作经历时填）</span>
-        <div class="q"><div class="q-label">现在或最近的工作（行业、岗位、税前月薪、工作年限）<span class="opt-note">（选填）</span></div>
+        <div data-profile-id="current_job" class="q"><div class="q-label">现在或最近的工作（行业、岗位、税前月薪、工作年限）<span class="opt-note">（选填）</span></div>
           <input type="text" id="current_job" placeholder="例如：教育行业，课程顾问，税前 8K，做了 2 年"></div>
-        <div class="q"><div class="q-label">想离开或继续找的主要原因<span class="opt-note">（选填）</span></div>
+        <div data-profile-id="leave_reason" class="q"><div class="q-label">想离开或继续找的主要原因<span class="opt-note">（选填）</span></div>
           <textarea id="leave_reason" placeholder="例如：加班太多；看不到晋升空间；薪资涨不动"></textarea></div>
-        <div class="q"><div class="q-label">内部改善的结果，以及离职时要考虑的约定<span class="opt-note">（选填）</span></div>
+        <div data-profile-id="current_terms" class="q"><div class="q-label">内部改善的结果，以及离职时要考虑的约定<span class="opt-note">（选填）</span></div>
           <textarea id="current_terms" placeholder="是否谈过调岗/加薪、对方答复和复盘时间；当前工时、保证/浮动收入、奖金兑现日、服务期或竞业约定、交接时间。只写必要情况，不贴保密材料。"></textarea></div>
       </div>
 
-      <div class="q"><div class="q-label">是否考虑换行业或换岗位<span class="opt-note">（选填）</span></div>
+      <div data-profile-id="change_plan" class="q"><div class="q-label">是否考虑换行业或换岗位<span class="opt-note">（选填）</span></div>
         <div class="opts stack">
           <label class="opt"><input type="radio" name="change_plan" value="暂不考虑"><span class="box">暂不考虑</span></label>
           <label class="opt"><input type="radio" name="change_plan" value="换行业但不换岗位"><span class="box">换行业但不换岗位</span></label>
@@ -146,11 +224,11 @@
         </div></div>
       <div class="followup" data-when="change_plan=换行业但不换岗位|换岗位但不换行业|行业和岗位都换|还不清楚">
         <span class="ftag">追问 · 换方向</span>
-        <div class="q"><div class="q-label">想转到哪里、验证过什么、能接受多大代价<span class="opt-note">（选填）</span></div>
+        <div data-profile-id="transition_detail" class="q"><div class="q-label">想转到哪里、验证过什么、能接受多大代价<span class="opt-note">（选填）</span></div>
           <textarea id="transition_detail" placeholder="目标行业/岗位、已有技能和成果、读过的招聘要求或体验；能接受的降薪/职级变化、每周学习时间、学习费用上限；没想好也可写卡在哪里"></textarea></div>
       </div>
 
-      <div class="q req"><div class="q-label">现在所在城市</div>
+      <div data-profile-id="city_now" class="q req"><div class="q-label">现在所在城市</div>
         <input type="text" id="city_now" placeholder="例如：武汉"></div>
     </div></section>
 
@@ -158,12 +236,10 @@
       <div class="sec-head"><div class="badge">二</div><div class="sec-title">能力与经历</div></div>
       <p class="sec-why">招聘看的是你做过什么、会什么；你擅长的事，也往往是你做得久、做得开心的事。</p>
 
-      <div class="q req"><div class="q-label">实习或工作经历</div>
+      <div data-profile-id="work_exp" class="q req"><div class="q-label">实习或工作经历</div>
         <textarea id="work_exp" placeholder="写最有代表性的一两段：在哪、做什么、结果如何；没有就写“没有”"></textarea></div>
 
-      <div class="q"><div class="q-label">证书与技能<span class="opt-note">（选填，可多选）</span></div>
-        <div class="opts">
-          <label class="opt"><input type="checkbox" name="certs" value="计算机等级或编程"><span class="box">计算机等级或编程</span></label>
+      <div data-profile-id="certs" class="q" ><div class="q-label">证书与技能（可多选）<span class="opt-note">（选填）</span></div><div class="opts stack"><label class="opt"><input type="checkbox" name="certs" value="计算机等级或编程"><span class="box">计算机等级或编程</span></label>
           <label class="opt"><input type="checkbox" name="certs" value="外语（四六级、雅思等）"><span class="box">外语（四六级、雅思等）</span></label>
           <label class="opt"><input type="checkbox" name="certs" value="会计或财经类证书"><span class="box">会计或财经类证书</span></label>
           <label class="opt"><input type="checkbox" name="certs" value="教师资格证"><span class="box">教师资格证</span></label>
@@ -171,11 +247,74 @@
           <label class="opt"><input type="checkbox" name="certs" value="职业技能等级证书"><span class="box">职业技能等级证书</span></label>
           <label class="opt"><input type="checkbox" name="certs" value="法律职业资格"><span class="box">法律职业资格</span></label>
           <label class="opt"><input type="checkbox" name="certs" value="医护类执业资格"><span class="box">医护类执业资格</span></label>
-          <label class="opt"><input type="checkbox" name="certs" value="暂时没有"><span class="box">暂时没有</span></label>
-        </div>
-        <input class="mt" type="text" id="certs_detail" placeholder="具体名称或等级（选填）"></div>
+          <label class="opt"><input type="checkbox" name="certs" value="普通话等级"><span class="box">普通话等级</span></label>
+          <label class="opt"><input type="checkbox" name="certs" value="特种作业操作证"><span class="box">特种作业操作证</span></label>
+          <label class="opt"><input type="checkbox" name="certs" value="专业技术资格或职称"><span class="box">专业技术资格或职称</span></label>
+          <label class="opt"><input type="checkbox" name="certs" value="其他"><span class="box">其他</span></label>
+          <label class="opt"><input type="checkbox" name="certs" value="暂时没有"><span class="box">暂时没有</span></label></div>
+        <input data-profile-label="证书补充" type="text" id="certs_detail" placeholder="其他已有证书：逐项写名称、等级、已取得/在考/计划、取得或预计年月"></div>
+<div data-show-when="certs=医护类执业资格"><div data-profile-id="cert_medical_detail" class="q" ><div class="q-label">医护类执业资格情况<span class="opt-note">（选填）</span></div>
+        <input type="text" id="cert_medical_detail" placeholder="证书名称与等级"><div class="opts stack"><label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_medical_status" value="已取得"><span class="box">已取得</span></label>
+          <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_medical_status" value="在考"><span class="box">在考</span></label>
+          <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_medical_status" value="计划"><span class="box">计划</span></label></div>
+        <input data-profile-label="取得或预计年月" type="month" id="cert_medical_month"></div></div>
+<div data-show-when="certs=法律职业资格"><div data-profile-id="cert_law_detail" class="q" ><div class="q-label">法律职业资格情况<span class="opt-note">（选填）</span></div>
+        <input type="text" id="cert_law_detail" placeholder="证书名称与等级"><div class="opts stack"><label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_law_status" value="已取得"><span class="box">已取得</span></label>
+          <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_law_status" value="在考"><span class="box">在考</span></label>
+          <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_law_status" value="计划"><span class="box">计划</span></label></div>
+        <input data-profile-label="取得或预计年月" type="month" id="cert_law_month"></div></div>
+<div data-show-when="certs=职业技能等级证书"><div data-profile-id="cert_vocational_detail" class="q" ><div class="q-label">职业技能等级证书情况<span class="opt-note">（选填）</span></div>
+        <input type="text" id="cert_vocational_detail" placeholder="证书名称与等级"><div class="opts stack"><label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_vocational_status" value="已取得"><span class="box">已取得</span></label>
+          <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_vocational_status" value="在考"><span class="box">在考</span></label>
+          <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_vocational_status" value="计划"><span class="box">计划</span></label></div>
+        <input data-profile-label="取得或预计年月" type="month" id="cert_vocational_month"></div></div>
+<div data-show-when="certs=驾驶证"><div data-profile-id="cert_driving_detail" class="q" ><div class="q-label">驾驶证情况<span class="opt-note">（选填）</span></div>
+        <input type="text" id="cert_driving_detail" placeholder="证书名称与等级"><div class="opts stack"><label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_driving_status" value="已取得"><span class="box">已取得</span></label>
+          <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_driving_status" value="在考"><span class="box">在考</span></label>
+          <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_driving_status" value="计划"><span class="box">计划</span></label></div>
+        <input data-profile-label="取得或预计年月" type="month" id="cert_driving_month"></div></div>
+<div data-show-when="certs=会计或财经类证书"><div data-profile-id="cert_finance_detail" class="q" ><div class="q-label">会计或财经类证书情况<span class="opt-note">（选填）</span></div>
+        <input type="text" id="cert_finance_detail" placeholder="证书名称与等级"><div class="opts stack"><label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_finance_status" value="已取得"><span class="box">已取得</span></label>
+          <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_finance_status" value="在考"><span class="box">在考</span></label>
+          <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_finance_status" value="计划"><span class="box">计划</span></label></div>
+        <input data-profile-label="取得或预计年月" type="month" id="cert_finance_month"></div></div>
+<div data-show-when="certs=计算机等级或编程"><div data-profile-id="cert_computing_detail" class="q" ><div class="q-label">计算机等级或编程情况<span class="opt-note">（选填）</span></div>
+        <input type="text" id="cert_computing_detail" placeholder="证书名称与等级"><div class="opts stack"><label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_computing_status" value="已取得"><span class="box">已取得</span></label>
+          <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_computing_status" value="在考"><span class="box">在考</span></label>
+          <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_computing_status" value="计划"><span class="box">计划</span></label></div>
+        <input data-profile-label="取得或预计年月" type="month" id="cert_computing_month"></div></div>
+      <div data-show-when="certs=普通话等级"><div data-profile-id="cert_mandarin_detail" class="q" ><div class="q-label">普通话等级详情<span class="opt-note">（选填）</span></div>
+        <input type="text" id="cert_mandarin_detail" placeholder="名称、等级；教师资格请写学段和学科"><div class="opts stack"><label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_mandarin_status" value="已取得"><span class="box">已取得</span></label>
+          <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_mandarin_status" value="在考"><span class="box">在考</span></label>
+          <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_mandarin_status" value="计划"><span class="box">计划</span></label></div><div class="minilabel">取得或预计取得年月</div>
+        <input data-profile-label="取得或预计年月" type="month" id="cert_mandarin_month"></div></div>
+      <div data-show-when="certs=特种作业操作证"><div data-profile-id="cert_special_work_detail" class="q" ><div class="q-label">特种作业操作证详情<span class="opt-note">（选填）</span></div>
+        <input type="text" id="cert_special_work_detail" placeholder="名称、等级；教师资格请写学段和学科"><div class="opts stack"><label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_special_work_status" value="已取得"><span class="box">已取得</span></label>
+          <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_special_work_status" value="在考"><span class="box">在考</span></label>
+          <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_special_work_status" value="计划"><span class="box">计划</span></label></div><div class="minilabel">取得或预计取得年月</div>
+        <input data-profile-label="取得或预计年月" type="month" id="cert_special_work_month"></div></div>
+      <div data-show-when="certs=专业技术资格或职称"><div data-profile-id="cert_professional_detail" class="q" ><div class="q-label">专业技术资格或职称详情<span class="opt-note">（选填）</span></div>
+        <input type="text" id="cert_professional_detail" placeholder="名称、等级；教师资格请写学段和学科"><div class="opts stack"><label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_professional_status" value="已取得"><span class="box">已取得</span></label>
+          <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_professional_status" value="在考"><span class="box">在考</span></label>
+          <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_professional_status" value="计划"><span class="box">计划</span></label></div><div class="minilabel">取得或预计取得年月</div>
+        <input data-profile-label="取得或预计年月" type="month" id="cert_professional_month"></div></div>
+      <div data-show-when="certs=教师资格证"><div data-profile-id="cert_teacher_detail" class="q" ><div class="q-label">教师资格证详情<span class="opt-note">（选填）</span></div>
+        <input type="text" id="cert_teacher_detail" placeholder="名称、等级；教师资格请写学段和学科"><div class="opts stack"><label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_teacher_status" value="已取得"><span class="box">已取得</span></label>
+          <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_teacher_status" value="在考"><span class="box">在考</span></label>
+          <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_teacher_status" value="计划"><span class="box">计划</span></label></div><div class="minilabel">取得或预计取得年月</div>
+        <input data-profile-label="取得或预计年月" type="month" id="cert_teacher_month"></div></div>
+      <div data-show-when="certs=其他"><div data-profile-id="cert_other_detail" class="q" ><div class="q-label">其他详情<span class="opt-note">（选填）</span></div>
+        <input type="text" id="cert_other_detail" placeholder="名称、等级；教师资格请写学段和学科"><div class="opts stack"><label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_other_status" value="已取得"><span class="box">已取得</span></label>
+          <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_other_status" value="在考"><span class="box">在考</span></label>
+          <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_other_status" value="计划"><span class="box">计划</span></label></div><div class="minilabel">取得或预计取得年月</div>
+        <input data-profile-label="取得或预计年月" type="month" id="cert_other_month"></div></div>
+      <div data-show-when="certs=外语（四六级、雅思等）"><div data-profile-id="cet4_score" class="q" ><div class="q-label">外语成绩与考试计划<span class="opt-note">（选填）</span></div>
+        <input type="text" id="cet4_score" placeholder="四级分数；未考留空"><input type="text" id="cet6_score" placeholder="六级分数；未考留空"><input type="text" id="other_language" placeholder="其他语言考试及分数"><div class="opts stack"><label class="opt"><input type="radio" name="language_status" value="已取得"><span class="box">已取得</span></label>
+          <label class="opt"><input type="radio" name="language_status" value="在考"><span class="box">在考</span></label>
+          <label class="opt"><input type="radio" name="language_status" value="计划"><span class="box">计划</span></label></div>
+        <input type="month" id="language_month"></div></div>
 
-      <div class="q req"><div class="q-label">你比较擅长的事<span class="opt-note">（可多选）</span></div>
+      <div data-profile-id="strength" class="q req"><div class="q-label">你比较擅长的事<span class="opt-note">（可多选）</span></div>
         <div class="opts stack">
           <label class="opt"><input type="checkbox" name="strength" value="和人沟通、说服别人"><span class="box">和人沟通、说服别人</span></label>
           <label class="opt"><input type="checkbox" name="strength" value="写作和表达"><span class="box">写作和表达</span></label>
@@ -188,7 +327,7 @@
           <label class="opt"><input type="checkbox" name="strength" value="按流程把事情做细"><span class="box">按流程把事情做细</span></label>
         </div></div>
 
-      <div class="q"><div class="q-label">明显不擅长或不想做的事<span class="opt-note">（选填）</span></div>
+      <div data-profile-id="weakness" class="q"><div class="q-label">明显不擅长或不想做的事<span class="opt-note">（选填）</span></div>
         <input type="text" id="weakness" placeholder="例如：不擅长和陌生人打交道；不想做重复性录入工作"></div>
     </div></section>
 
@@ -196,7 +335,7 @@
       <div class="sec-head"><div class="badge">三</div><div class="sec-title">想做什么样的工作</div></div>
       <p class="sec-why">工资只是一部分。每天具体在做什么、和什么样的人打交道、节奏快慢，决定了你能不能做得久。</p>
 
-      <div class="q req"><div class="q-label">你更喜欢哪类工作内容<span class="opt-note">（可多选）</span></div>
+      <div data-profile-id="content_pref" class="q req"><div class="q-label">你更喜欢哪类工作内容<span class="opt-note">（可多选）</span></div>
         <div class="opts stack">
           <label class="opt"><input type="checkbox" name="content_pref" value="动手做东西、操作设备、户外或现场"><span class="box">动手做东西、操作设备、户外或现场</span></label>
           <label class="opt"><input type="checkbox" name="content_pref" value="研究、分析、解决复杂问题"><span class="box">研究、分析、解决复杂问题</span></label>
@@ -206,7 +345,7 @@
           <label class="opt"><input type="checkbox" name="content_pref" value="按规则处理数据、文件、流程"><span class="box">按规则处理数据、文件、流程</span></label>
         </div></div>
 
-      <div class="q req"><div class="q-label">更喜欢的工作场所</div>
+      <div data-profile-id="workplace" class="q req"><div class="q-label">更喜欢的工作场所</div>
         <div class="opts">
           <label class="opt"><input type="radio" name="workplace" value="办公室"><span class="box">办公室</span></label>
           <label class="opt"><input type="radio" name="workplace" value="工厂或现场"><span class="box">工厂或现场</span></label>
@@ -216,7 +355,7 @@
           <label class="opt"><input type="radio" name="workplace" value="都可以"><span class="box">都可以</span></label>
         </div></div>
 
-      <div class="q req"><div class="q-label">你想进哪类单位<span class="opt-note">（可多选）</span></div>
+      <div data-profile-id="org_type" class="q req"><div class="q-label">你想进哪类单位<span class="opt-note">（可多选）</span></div>
         <div class="opts stack">
           <label class="opt"><input type="checkbox" name="org_type" value="公务员"><span class="box">公务员</span></label>
           <label class="opt"><input type="checkbox" name="org_type" value="事业单位（学校、医院等）"><span class="box">事业单位（学校、医院等）</span></label>
@@ -229,12 +368,42 @@
           <label class="opt"><input type="checkbox" name="org_type" value="自己创业或自由职业"><span class="box">自己创业或自由职业</span></label>
           <label class="opt"><input type="checkbox" name="org_type" value="还没想好"><span class="box">还没想好</span></label>
         </div></div>
+<div data-profile-id="accept_dispatch" class="q" ><div class="q-label">能接受劳务派遣吗<span class="opt-note">（选填）</span></div><div class="opts stack"><label class="opt"><input type="radio" name="accept_dispatch" value="能接受"><span class="box">能接受</span></label>
+          <label class="opt"><input type="radio" name="accept_dispatch" value="看条件"><span class="box">看条件</span></label>
+          <label class="opt"><input type="radio" name="accept_dispatch" value="不能接受"><span class="box">不能接受</span></label>
+          <label class="opt"><input type="radio" name="accept_dispatch" value="不了解"><span class="box">不了解</span></label></div></div>
+      <div data-profile-id="accept_outsource" class="q" ><div class="q-label">能接受外包驻场吗<span class="opt-note">（选填）</span></div><div class="opts stack"><label class="opt"><input type="radio" name="accept_outsource" value="能接受"><span class="box">能接受</span></label>
+          <label class="opt"><input type="radio" name="accept_outsource" value="看条件"><span class="box">看条件</span></label>
+          <label class="opt"><input type="radio" name="accept_outsource" value="不能接受"><span class="box">不能接受</span></label>
+          <label class="opt"><input type="radio" name="accept_outsource" value="不了解"><span class="box">不了解</span></label></div></div>
+      <div data-profile-id="accept_offstaff" class="q" ><div class="q-label">能接受编外合同制吗<span class="opt-note">（选填）</span></div><div class="opts stack"><label class="opt"><input type="radio" name="accept_offstaff" value="能接受"><span class="box">能接受</span></label>
+          <label class="opt"><input type="radio" name="accept_offstaff" value="看条件"><span class="box">看条件</span></label>
+          <label class="opt"><input type="radio" name="accept_offstaff" value="不能接受"><span class="box">不能接受</span></label>
+          <label class="opt"><input type="radio" name="accept_offstaff" value="不了解"><span class="box">不了解</span></label></div></div>
+      <div data-profile-id="accept_intern" class="q" ><div class="q-label">能接受先实习再定转正吗<span class="opt-note">（选填）</span></div><div class="opts stack"><label class="opt"><input type="radio" name="accept_intern" value="能接受"><span class="box">能接受</span></label>
+          <label class="opt"><input type="radio" name="accept_intern" value="看条件"><span class="box">看条件</span></label>
+          <label class="opt"><input type="radio" name="accept_intern" value="不能接受"><span class="box">不能接受</span></label>
+          <label class="opt"><input type="radio" name="accept_intern" value="不了解"><span class="box">不了解</span></label></div></div>
+<div data-profile-id="family_org" class="q" ><div class="q-label">家里希望你进哪类单位<span class="opt-note">（选填）</span></div><div class="opts stack"><label class="opt"><input type="checkbox" name="family_org" value="公务员"><span class="box">公务员</span></label>
+          <label class="opt"><input type="checkbox" name="family_org" value="事业单位（学校、医院等）"><span class="box">事业单位（学校、医院等）</span></label>
+          <label class="opt"><input type="checkbox" name="family_org" value="国企央企"><span class="box">国企央企</span></label>
+          <label class="opt"><input type="checkbox" name="family_org" value="军队文职或基层项目"><span class="box">军队文职或基层项目</span></label>
+          <label class="opt"><input type="checkbox" name="family_org" value="大型民企"><span class="box">大型民企</span></label>
+          <label class="opt"><input type="checkbox" name="family_org" value="中小企业"><span class="box">中小企业</span></label>
+          <label class="opt"><input type="checkbox" name="family_org" value="外企"><span class="box">外企</span></label>
+          <label class="opt"><input type="checkbox" name="family_org" value="创业公司"><span class="box">创业公司</span></label>
+          <label class="opt"><input type="checkbox" name="family_org" value="自己创业或自由职业"><span class="box">自己创业或自由职业</span></label>
+          <label class="opt"><input type="checkbox" name="family_org" value="还没想好"><span class="box">还没想好</span></label>
+          <label class="opt"><input type="checkbox" name="family_org" value="家里没有具体要求"><span class="box">家里没有具体要求</span></label>
+          <label class="opt"><input type="checkbox" name="family_org" value="不想说"><span class="box">不想说</span></label></div></div>
 
-      <div class="followup" data-when="org_type=公务员|事业单位（学校、医院等）|国企央企|军队文职或基层项目">
+      <div data-show-when="org_type=公务员|事业单位（学校、医院等）|国企央企|军队文职或基层项目;family_org=公务员|事业单位（学校、医院等）|国企央企|军队文职或基层项目">
         <span class="ftag">追问 · 体制内与国企</span>
-        <div class="q"><div class="q-label">出生年月与报考可能涉及的经历<span class="opt-note">（选填）</span></div>
-          <textarea id="ps_eligibility" placeholder="只写出生年月，不用具体生日或证件号；如有基层项目/退役/相关工作经历，写类型、起止、是否期满及考核情况；没有可写没有"></textarea></div>
-        <div class="q"><div class="q-label">具体想走哪几条<span class="opt-note">（可多选）</span></div>
+        <div data-profile-id="birth_month_disclosure" class="q" ><div class="q-label">出生年月<span class="opt-note">（选填）</span></div><div class="opts stack"><label class="opt"><input data-profile-label="出生年月填写意愿" type="radio" name="birth_month_disclosure" value="愿意填写"><span class="box">愿意填写</span></label>
+          <label class="opt"><input data-profile-label="出生年月填写意愿" type="radio" name="birth_month_disclosure" value="不想说"><span class="box">不想说</span></label></div>
+      <div data-show-when="birth_month_disclosure=愿意填写"><input data-profile-label="出生年月" type="month" id="ps_birth_month"></div></div>
+      <div data-profile-id="ps_eligibility" class="q" ><div class="q-label">报考可能涉及的经历<span class="opt-note">（选填）</span></div><textarea id="ps_eligibility" placeholder="基层项目、退役或相关工作：类型、起止、是否期满及考核；没有可写没有，不填证件号。"></textarea></div>
+        <div data-profile-id="ps_route" class="q"><div class="q-label">具体想走哪几条<span class="opt-note">（可多选）</span></div>
         <div class="opts stack">
           <label class="opt"><input type="checkbox" name="ps_route" value="国考"><span class="box">国考</span></label>
           <label class="opt"><input type="checkbox" name="ps_route" value="省考"><span class="box">省考</span></label>
@@ -249,7 +418,14 @@
           <label class="opt"><input type="checkbox" name="ps_route" value="三支一扶、西部计划、特岗等基层项目"><span class="box">三支一扶、西部计划、特岗等基层项目</span></label>
           <label class="opt"><input type="checkbox" name="ps_route" value="还不清楚"><span class="box">还不清楚</span></label>
         </div></div>
-        <div class="q"><div class="q-label">在校当过哪些学生干部<span class="opt-note">（可多选；选调对职务级别有要求）</span></div>
+<div data-show-when="ps_route=中小学教师"><div data-profile-id="teacher_normal" class="q" ><div class="q-label">是否师范专业<span class="opt-note">（选填）</span></div><div class="opts stack"><label class="opt"><input type="radio" name="teacher_normal" value="是"><span class="box">是</span></label>
+          <label class="opt"><input type="radio" name="teacher_normal" value="不是"><span class="box">不是</span></label>
+          <label class="opt"><input type="radio" name="teacher_normal" value="不清楚"><span class="box">不清楚</span></label></div></div>
+      <div data-profile-id="teacher_status" class="q" ><div class="q-label">教资与普通话<span class="opt-note">（选填）</span></div><div class="opts stack"><label class="opt"><input type="radio" name="teacher_status" value="已取得教师资格"><span class="box">已取得教师资格</span></label>
+          <label class="opt"><input type="radio" name="teacher_status" value="笔试已过"><span class="box">笔试已过</span></label>
+          <label class="opt"><input type="radio" name="teacher_status" value="未考"><span class="box">未考</span></label></div>
+        <input type="text" id="teacher_subject" placeholder="学段与学科"><input type="text" id="teacher_mandarin" placeholder="普通话等级"></div></div>
+        <div data-profile-id="ps_cadre" class="q"><div class="q-label">在校当过哪些学生干部<span class="opt-note">（可多选；选调对职务级别有要求）</span></div>
         <div class="opts stack">
           <label class="opt"><input type="checkbox" name="ps_cadre" value="没有"><span class="box">没有</span></label>
           <label class="opt"><input type="checkbox" name="ps_cadre" value="班委或团支部委员"><span class="box">班委或团支部委员</span></label>
@@ -258,75 +434,105 @@
           <label class="opt"><input type="checkbox" name="ps_cadre" value="院系学生会或团委中层正职"><span class="box">院系学生会或团委中层正职</span></label>
           <label class="opt"><input type="checkbox" name="ps_cadre" value="校学生会或团委中层副职及以上"><span class="box">校学生会或团委中层副职及以上</span></label>
         </div>
-          <input class="mt" type="text" id="ps_cadre_time" placeholder="各职务当了多久，例如：班长两学年；院学生会部长一学年"></div>
-        <div class="q"><div class="q-label">获得过校级及以上综合表彰或奖学金吗</div>
+          <input data-profile-label="学生干部任职时长" class="mt" type="text" id="ps_cadre_time" placeholder="各职务当了多久，例如：班长两学年；院学生会部长一学年"></div>
+        <div data-profile-id="ps_award" class="q"><div class="q-label">获得过校级及以上综合表彰或奖学金吗</div>
           <input type="text" id="ps_award" placeholder="例如：校一等奖学金、校三好学生；没有就写没有"></div>
-        <div class="q"><div class="q-label">成绩在班级或专业的排名</div>
+        <div data-profile-id="ps_rank" class="q"><div class="q-label">成绩在班级或专业的排名</div>
           <input type="text" id="ps_rank" placeholder="例如：班级 8/40；专业前 30%"></div>
-        <div class="q"><div class="q-label">做过行测、申论或企业笔试的模考吗</div>
+        <div data-profile-id="ps_mock" class="q"><div class="q-label">做过行测、申论或企业笔试的模考吗</div>
           <input type="text" id="ps_mock" placeholder="例如：行测 65、申论 60；没做过就写没做过"></div>
-        <div class="q"><div class="q-label">能接受先在县、乡镇基层工作几年吗</div>
+        <div data-profile-id="ps_grassroots" class="q"><div class="q-label">能接受先在县、乡镇基层工作几年吗</div>
         <div class="opts">
           <label class="opt"><input type="radio" name="ps_grassroots" value="能接受"><span class="box">能接受</span></label>
           <label class="opt"><input type="radio" name="ps_grassroots" value="看具体地方"><span class="box">看具体地方</span></label>
           <label class="opt"><input type="radio" name="ps_grassroots" value="不能接受"><span class="box">不能接受</span></label>
         </div></div>
+<div data-profile-id="ps_service" class="q" ><div class="q-label">能接受服务期内不能调动吗<span class="opt-note">（选填）</span></div><div class="opts stack"><label class="opt"><input type="radio" name="ps_service" value="能接受"><span class="box">能接受</span></label>
+          <label class="opt"><input type="radio" name="ps_service" value="看年限和地点"><span class="box">看年限和地点</span></label>
+          <label class="opt"><input type="radio" name="ps_service" value="不能接受"><span class="box">不能接受</span></label></div></div>
       </div>
 
-      <div class="q req"><div class="q-label">能接受的加班程度</div>
+      <div data-profile-id="overtime" class="q req"><div class="q-label">能接受的加班程度</div>
         <div class="opts">
           <label class="opt"><input type="radio" name="overtime" value="基本不加班"><span class="box">基本不加班</span></label>
           <label class="opt"><input type="radio" name="overtime" value="偶尔加班"><span class="box">偶尔加班</span></label>
           <label class="opt"><input type="radio" name="overtime" value="经常加班也行，只要回报高"><span class="box">经常加班也行，只要回报高</span></label>
         </div></div>
+<div data-profile-id="night_shift" class="q" ><div class="q-label">能接受倒班或夜班吗<span class="opt-note">（选填）</span></div><div class="opts stack"><label class="opt"><input type="radio" name="night_shift" value="能接受"><span class="box">能接受</span></label>
+          <label class="opt"><input type="radio" name="night_shift" value="偶尔可以"><span class="box">偶尔可以</span></label>
+          <label class="opt"><input type="radio" name="night_shift" value="不能长期"><span class="box">不能长期</span></label>
+          <label class="opt"><input type="radio" name="night_shift" value="不能接受"><span class="box">不能接受</span></label></div></div>
+      <div data-profile-id="sales_target" class="q" ><div class="q-label">能接受有业绩指标或营销任务的岗位吗<span class="opt-note">（选填）</span></div><div class="opts stack"><label class="opt"><input type="radio" name="sales_target" value="能接受"><span class="box">能接受</span></label>
+          <label class="opt"><input type="radio" name="sales_target" value="底薪够就能"><span class="box">底薪够就能</span></label>
+          <label class="opt"><input type="radio" name="sales_target" value="不能接受"><span class="box">不能接受</span></label></div></div>
 
-      <div class="q"><div class="q-label">能接受出差或外派吗</div>
+      <div data-profile-id="travel" class="q"><div class="q-label">能接受出差或外派吗</div>
         <div class="opts">
           <label class="opt"><input type="radio" name="travel" value="能"><span class="box">能</span></label>
           <label class="opt"><input type="radio" name="travel" value="偶尔可以"><span class="box">偶尔可以</span></label>
           <label class="opt"><input type="radio" name="travel" value="不能"><span class="box">不能</span></label>
         </div></div>
 
-      <div class="q"><div class="q-label">有没有已经想投的岗位或公司<span class="opt-note">（选填）</span></div>
-        <input type="text" id="target_job" placeholder="例如：某公司的市场专员岗位"></div>
+
     </div></section>
 
     <section class="section" data-title="钱与城市"><div class="card">
       <div class="sec-head"><div class="badge">四</div><div class="sec-title">钱与城市</div></div>
       <p class="sec-why">同样的月薪，在不同城市、不同的五险一金和年终奖下，到手和能攒下的钱差别很大。先说出你的底线。</p>
 
-      <div class="q req"><div class="q-label">能接受的最低月薪（税前，元）</div>
-        <input type="text" id="min_salary" placeholder="例如：6000"></div>
+      <div data-profile-id="salary_known" class="q" ><div class="q-label">最低到手月薪<span class="opt-note">（选填）</span></div><div class="opts stack"><label class="opt"><input type="radio" name="salary_known" value="有大致底线"><span class="box">有大致底线</span></label>
+          <label class="opt"><input type="radio" name="salary_known" value="不确定，请帮我算"><span class="box">不确定，请帮我算</span></label>
+          <label class="opt"><input type="radio" name="salary_known" value="不想说"><span class="box">不想说</span></label></div>
+      <div data-show-when="salary_known=有大致底线"><input data-profile-label="最低到手月薪" type="text" id="min_salary" placeholder="每月到手至少多少元，可写范围"></div></div>
+      <div data-profile-id="expense_disclosure" class="q" ><div class="q-label">每月必要支出<span class="opt-note">（选填）</span></div><div class="opts stack"><label class="opt"><input type="radio" name="expense_disclosure" value="愿意填写"><span class="box">愿意填写</span></label>
+          <label class="opt"><input type="radio" name="expense_disclosure" value="不想说"><span class="box">不想说</span></label></div></div>
+      <div data-show-when="expense_disclosure=愿意填写"><div data-profile-id="rent_cost" class="q" ><div class="q-label">房租、其他生活、债务或给家里的钱<span class="opt-note">（选填）</span></div><div class="minilabel">房租</div>
+        <input type="text" id="rent_cost" placeholder="房租：元/月，可写范围"><div class="minilabel">其他生活支出</div>
+        <input type="text" id="living_cost" placeholder="其他生活支出：元/月，可写范围"><div class="minilabel">债务或给家里的钱</div>
+        <input type="text" id="debt_family_cost" placeholder="债务或给家里的钱：元/月，可写范围"></div></div>
 
-      <div class="q"><div class="q-label">期望月薪（税前，元）<span class="opt-note">（选填）</span></div>
+      <div data-profile-id="target_salary" class="q"><div class="q-label">期望月薪（税前，元）<span class="opt-note">（选填）</span></div>
         <input type="text" id="target_salary" placeholder="例如：8000—10000"></div>
 
-      <div class="q req"><div class="q-label">钱和稳定之间你更看重</div>
+      <div data-profile-id="money_vs_stable" class="q req"><div class="q-label">钱和稳定之间你更看重</div>
         <div class="opts stack">
           <label class="opt"><input type="radio" name="money_vs_stable" value="现金收入高，波动大也行"><span class="box">现金收入高，波动大也行</span></label>
           <label class="opt"><input type="radio" name="money_vs_stable" value="两者之间"><span class="box">两者之间</span></label>
           <label class="opt"><input type="radio" name="money_vs_stable" value="稳定、福利好，钱少一点也行"><span class="box">稳定、福利好，钱少一点也行</span></label>
         </div></div>
 
-      <div class="q req"><div class="q-label">城市打算</div>
-        <div class="opts stack">
-          <label class="opt"><input type="radio" name="city_plan" value="留在现在的城市"><span class="box">留在现在的城市</span></label>
+      <div data-profile-id="city_plan" class="q req" ><div class="q-label">城市打算</div><div class="opts stack"><label class="opt"><input type="radio" name="city_plan" value="留在现在的城市"><span class="box">留在现在的城市</span></label>
           <label class="opt"><input type="radio" name="city_plan" value="回家乡或离家近"><span class="box">回家乡或离家近</span></label>
           <label class="opt"><input type="radio" name="city_plan" value="去一线或新一线城市"><span class="box">去一线或新一线城市</span></label>
-          <label class="opt"><input type="radio" name="city_plan" value="哪里机会好去哪里"><span class="box">哪里机会好去哪里</span></label>
-        </div>
-        <input class="mt" type="text" id="city_specific" placeholder="具体城市（选填）"></div>
+          <label class="opt"><input type="radio" name="city_plan" value="哪里机会好去哪里"><span class="box">哪里机会好去哪里</span></label></div></div>
+      <div data-profile-id="city_first" class="q" ><div class="q-label">可接受城市，最多三个，按顺序填<span class="opt-note">（选填）</span></div>
+        <input type="text" id="city_first" placeholder="第一选择"><input type="text" id="city_second" placeholder="第二选择（可留空）"><input type="text" id="city_third" placeholder="第三选择（可留空）"><input type="text" id="city_exclude" placeholder="明确不去的地方（可留空）"></div>
+      <div data-profile-id="city_any_county" class="q" ><div class="q-label">能接受分配到省内任意县区吗<span class="opt-note">（选填）</span></div><div class="opts stack"><label class="opt"><input type="radio" name="city_any_county" value="能接受"><span class="box">能接受</span></label>
+          <label class="opt"><input type="radio" name="city_any_county" value="看具体地方"><span class="box">看具体地方</span></label>
+          <label class="opt"><input type="radio" name="city_any_county" value="不能接受"><span class="box">不能接受</span></label>
+          <label class="opt"><input type="radio" name="city_any_county" value="不清楚"><span class="box">不清楚</span></label></div></div>
+<div data-profile-id="care_constraint" class="q" ><div class="q-label">城市选择受伴侣工作地或照顾老人孩子影响吗<span class="opt-note">（选填）</span></div><div class="opts stack"><label class="opt"><input type="radio" name="care_constraint" value="没有"><span class="box">没有</span></label>
+          <label class="opt"><input type="radio" name="care_constraint" value="有"><span class="box">有</span></label>
+          <label class="opt"><input type="radio" name="care_constraint" value="不想说"><span class="box">不想说</span></label></div></div>
+      <div data-show-when="care_constraint=有"><div data-profile-id="care_city" class="q" ><div class="q-label">需要兼顾的城市和年限<span class="opt-note">（选填）</span></div>
+        <input type="text" id="care_city" placeholder="只写城市与预计几年，不用写家人个人信息"></div></div>
+      <div data-profile-id="housing" class="q" ><div class="q-label">打算住在哪里<span class="opt-note">（选填）</span></div><div class="opts stack"><label class="opt"><input type="radio" name="housing" value="住家里"><span class="box">住家里</span></label>
+          <label class="opt"><input type="radio" name="housing" value="单位宿舍"><span class="box">单位宿舍</span></label>
+          <label class="opt"><input type="radio" name="housing" value="租房"><span class="box">租房</span></label>
+          <label class="opt"><input type="radio" name="housing" value="已有房"><span class="box">已有房</span></label></div></div>
+      <div data-show-when="housing=租房"><div data-profile-id="rent_max" class="q" ><div class="q-label">每月可承受租金<span class="opt-note">（选填）</span></div>
+        <input type="text" id="rent_max" placeholder="元/月，可写范围"></div></div>
 
-      <div class="q"><div class="q-label">有没有落户需求</div>
+      <div data-profile-id="settle_hukou" class="q"><div class="q-label">有没有落户需求</div>
         <div class="opts">
-          <label class="opt"><input type="radio" name="hukou" value="需要"><span class="box">需要</span></label>
-          <label class="opt"><input type="radio" name="hukou" value="最好有"><span class="box">最好有</span></label>
-          <label class="opt"><input type="radio" name="hukou" value="不需要"><span class="box">不需要</span></label>
-          <label class="opt"><input type="radio" name="hukou" value="不清楚"><span class="box">不清楚</span></label>
+          <label class="opt"><input type="radio" name="settle_hukou" value="需要"><span class="box">需要</span></label>
+          <label class="opt"><input type="radio" name="settle_hukou" value="最好有"><span class="box">最好有</span></label>
+          <label class="opt"><input type="radio" name="settle_hukou" value="不需要"><span class="box">不需要</span></label>
+          <label class="opt"><input type="radio" name="settle_hukou" value="不清楚"><span class="box">不清楚</span></label>
         </div></div>
-      <div class="followup" data-when="hukou=需要|最好有|不清楚">
+      <div class="followup" data-when="settle_hukou=需要|最好有|不清楚">
         <span class="ftag">追问 · 城市政策</span>
-        <div class="q"><div class="q-label">落户或人才政策要解决什么、最晚何时需要<span class="opt-note">（选填）</span></div>
+        <div data-profile-id="city_policy_need" class="q"><div class="q-label">落户或人才政策要解决什么、最晚何时需要<span class="opt-note">（选填）</span></div>
           <textarea id="city_policy_need" placeholder="目标城市/区、落户是必须还是偏好、最晚时间、已了解的政策与单位说法；本人的就业参保时间在前面填写，不清楚可以写待查"></textarea></div>
       </div>
 
@@ -336,27 +542,42 @@
       <div class="sec-head"><div class="badge">五</div><div class="sec-title">现实约束</div></div>
       <p class="sec-why">家里的经济情况、健康和家人的期望，常常比兴趣更早决定你能等多久、能冒多大的险。</p>
 
-      <div class="q req"><div class="q-label">你多快需要有收入</div>
-        <div class="opts stack">
-          <label class="opt"><input type="radio" name="urgency" value="马上，越快越好"><span class="box">马上，越快越好</span></label>
-          <label class="opt"><input type="radio" name="urgency" value="几个月内"><span class="box">几个月内</span></label>
-          <label class="opt"><input type="radio" name="urgency" value="可以等半年以上，找到合适的再说"><span class="box">可以等半年以上，找到合适的再说</span></label>
-        </div></div>
+      <div data-profile-id="income_deadline_status" class="q" ><div class="q-label">最晚哪个月必须开始有稳定收入<span class="opt-note">（选填）</span></div><div class="opts stack"><label class="opt"><input type="radio" name="income_deadline_status" value="有明确月份"><span class="box">有明确月份</span></label>
+          <label class="opt"><input type="radio" name="income_deadline_status" value="不确定"><span class="box">不确定</span></label>
+          <label class="opt"><input type="radio" name="income_deadline_status" value="不想说"><span class="box">不想说</span></label></div>
+      <div data-show-when="income_deadline_status=有明确月份"><input data-profile-label="最晚稳定收入年月" type="month" id="income_deadline"></div></div>
 
-      <div class="q"><div class="q-label">必要支出与可用于等待、升本或转行的钱<span class="opt-note">（选填）</span></div>
-        <textarea id="cash_buffer" placeholder="写每月必要生活/债务或家庭支出、可用缓冲金额或可支撑多久、要预留的钱和一次性搬迁成本。范围即可，不填账户信息；不想说可留空。"></textarea></div>
+      <div data-profile-id="buffer_disclosure" class="q" ><div class="q-label">可用于等待、升本或转行的钱<span class="opt-note">（选填）</span></div><div class="opts stack"><label class="opt"><input type="radio" name="buffer_disclosure" value="愿意填写"><span class="box">愿意填写</span></label>
+          <label class="opt"><input type="radio" name="buffer_disclosure" value="不想说"><span class="box">不想说</span></label></div></div>
+      <div data-show-when="buffer_disclosure=愿意填写"><div data-profile-id="cash_buffer" class="q" ><div class="q-label">可用缓冲与搬迁成本<span class="opt-note">（选填）</span></div><textarea id="cash_buffer" placeholder="可用缓冲金额范围、能支撑多久、要预留的钱和一次性搬迁成本；不填账户信息。"></textarea></div></div>
 
-      <div class="q"><div class="q-label">身体或其他方面的限制<span class="opt-note">（选填）</span></div>
-        <input type="text" id="limitation" placeholder="例如：不能久站；不能频繁出差"></div>
+      <div data-profile-id="limitation" class="q" ><div class="q-label">身体条件对岗位可能有哪些限制（可多选）<span class="opt-note">（选填）</span></div><div class="opts stack"><label class="opt"><input type="checkbox" name="limitation" value="色觉异常"><span class="box">色觉异常</span></label>
+          <label class="opt"><input type="checkbox" name="limitation" value="视力需矫正"><span class="box">视力需矫正</span></label>
+          <label class="opt"><input type="checkbox" name="limitation" value="不能久站或体力活"><span class="box">不能久站或体力活</span></label>
+          <label class="opt"><input type="checkbox" name="limitation" value="不能登高或下现场"><span class="box">不能登高或下现场</span></label>
+          <label class="opt"><input type="checkbox" name="limitation" value="其他"><span class="box">其他</span></label>
+          <label class="opt"><input type="checkbox" name="limitation" value="以上没有"><span class="box">以上没有</span></label>
+          <label class="opt"><input type="checkbox" name="limitation" value="不清楚"><span class="box">不清楚</span></label>
+          <label class="opt"><input type="checkbox" name="limitation" value="不想说"><span class="box">不想说</span></label></div><p class="hint">这里只用于提醒核对岗位体检标准，不据此判定能不能录用。</p></div>
+      <div data-show-when="limitation=其他"><div data-profile-id="limitation_other" class="q" ><div class="q-label">其他身体限制<span class="opt-note">（选填）</span></div>
+        <input type="text" id="limitation_other"></div></div>
 
-      <div class="q"><div class="q-label">家里对你工作的期望<span class="opt-note">（选填）</span></div>
+      <div data-profile-id="family_expect" class="q"><div class="q-label">家里对你工作的期望<span class="opt-note">（选填）</span></div>
         <textarea id="family_expect" placeholder="如果和你的想法不一样，也请如实写。"></textarea></div>
 
-      <div class="q"><div class="q-label">家里最担心的是什么？<span class="opt-note">（可多选）</span></div>
-        <div class="opts stack"><label class="opt"><input type="checkbox" name="fam_worry" value="收入不稳定"><span class="box">收入不稳定</span></label><label class="opt"><input type="checkbox" name="fam_worry" value="钱不够花"><span class="box">钱不够花</span></label><label class="opt"><input type="checkbox" name="fam_worry" value="离家太远"><span class="box">离家太远</span></label><label class="opt"><input type="checkbox" name="fam_worry" value="学历或单位不够体面"><span class="box">学历或单位不够体面</span></label><label class="opt"><input type="checkbox" name="fam_worry" value="和别人家比"><span class="box">和别人家比</span></label><label class="opt"><input type="checkbox" name="fam_worry" value="年龄不等人"><span class="box">年龄不等人</span></label><label class="opt"><input type="checkbox" name="fam_worry" value="身体和压力"><span class="box">身体和压力</span></label><label class="opt"><input type="checkbox" name="fam_worry" value="没什么特别担心"><span class="box">没什么特别担心</span></label></div>
+
+      <div data-profile-id="fam_worry" class="q"><div class="q-label">家里最担心的是什么？<span class="opt-note">（可多选）</span></div>
+        <div class="opts stack"><label class="opt"><input type="checkbox" name="fam_worry" value="收入不稳定"><span class="box">收入不稳定</span></label>
+          <label class="opt"><input type="checkbox" name="fam_worry" value="钱不够花"><span class="box">钱不够花</span></label>
+          <label class="opt"><input type="checkbox" name="fam_worry" value="离家太远"><span class="box">离家太远</span></label>
+          <label class="opt"><input type="checkbox" name="fam_worry" value="学历或单位不够体面"><span class="box">学历或单位不够体面</span></label>
+          <label class="opt"><input type="checkbox" name="fam_worry" value="和别人家比"><span class="box">和别人家比</span></label>
+          <label class="opt"><input type="checkbox" name="fam_worry" value="年龄不等人"><span class="box">年龄不等人</span></label>
+          <label class="opt"><input type="checkbox" name="fam_worry" value="身体和压力"><span class="box">身体和压力</span></label>
+          <label class="opt"><input type="checkbox" name="fam_worry" value="没什么特别担心"><span class="box">没什么特别担心</span></label><label class="opt"><input type="checkbox" name="fam_worry" value="不想说"><span class="box">不想说</span></label></div>
         <p class="hint">家里的“担心”和他们给的“办法”是两回事。把担心说清楚，常常能找到你和家里都能接受的路。</p></div>
 
-      <div class="q"><div class="q-label">家里给的具体办法是什么？你自己怎么看？<span class="opt-note">（选填）</span></div>
+      <div data-profile-id="fam_plan" class="q"><div class="q-label">家里给的具体办法是什么？你自己怎么看？<span class="opt-note">（选填）</span></div>
         <textarea id="fam_plan" placeholder="例如：家里希望我考编或者进国企；我觉得……"></textarea></div>
     </div></section>
 
@@ -364,37 +585,37 @@
       <div class="sec-head"><div class="badge">六</div><div class="sec-title">方向与状态 <span class="opt-note">（可选）</span></div></div>
       <p class="sec-why">很多人手里已经有几个想投的公司或岗位，却说不清为什么；也有人投了很多没有回音，越来越没底。这一节帮你看清卡在哪：大多是很普通的烦恼，不代表你有什么问题。整节都可以跳过。作答只保存在你自己的浏览器里，发不发给 AI 由你决定。</p>
 
-      <div class="q"><div class="q-label">已经有的目标岗位或公司（最多三个），分别是谁提出的？</div>
-        <input type="text" id="tgt1" placeholder="目标 1：公司与岗位">
+      <div data-profile-id="tgt1" class="q"><div class="q-label">已经有的目标岗位或公司（最多三个），分别是谁提出的？</div>
+        <input data-profile-label="公司与岗位" type="text" id="tgt1" placeholder="目标 1：公司与岗位">
         <div class="opts mt">
-          <label class="opt"><input type="checkbox" name="tgt1_by" value="自己"><span class="box">自己</span></label>
-          <label class="opt"><input type="checkbox" name="tgt1_by" value="父母"><span class="box">父母</span></label>
-          <label class="opt"><input type="checkbox" name="tgt1_by" value="老师或学长"><span class="box">老师 / 学长</span></label>
-          <label class="opt"><input type="checkbox" name="tgt1_by" value="看名气"><span class="box">看名气</span></label>
-          <label class="opt"><input type="checkbox" name="tgt1_by" value="同学都投"><span class="box">同学都投</span></label>
+          <label class="opt"><input data-profile-label="谁提出的" type="checkbox" name="tgt1_by" value="自己"><span class="box">自己</span></label>
+          <label class="opt"><input data-profile-label="谁提出的" type="checkbox" name="tgt1_by" value="父母"><span class="box">父母</span></label>
+          <label class="opt"><input data-profile-label="谁提出的" type="checkbox" name="tgt1_by" value="老师或学长"><span class="box">老师 / 学长</span></label>
+          <label class="opt"><input data-profile-label="谁提出的" type="checkbox" name="tgt1_by" value="看名气"><span class="box">看名气</span></label>
+          <label class="opt"><input data-profile-label="谁提出的" type="checkbox" name="tgt1_by" value="同学都投"><span class="box">同学都投</span></label>
         </div></div>
-      <div class="q"><div class="q-label">目标 2</div>
-        <input type="text" id="tgt2" placeholder="公司与岗位（选填）">
+      <div data-profile-id="tgt2" class="q"><div class="q-label">目标 2</div>
+        <input data-profile-label="公司与岗位" type="text" id="tgt2" placeholder="公司与岗位（选填）">
         <div class="opts mt">
-          <label class="opt"><input type="checkbox" name="tgt2_by" value="自己"><span class="box">自己</span></label>
-          <label class="opt"><input type="checkbox" name="tgt2_by" value="父母"><span class="box">父母</span></label>
-          <label class="opt"><input type="checkbox" name="tgt2_by" value="老师或学长"><span class="box">老师 / 学长</span></label>
-          <label class="opt"><input type="checkbox" name="tgt2_by" value="看名气"><span class="box">看名气</span></label>
-          <label class="opt"><input type="checkbox" name="tgt2_by" value="同学都投"><span class="box">同学都投</span></label>
+          <label class="opt"><input data-profile-label="谁提出的" type="checkbox" name="tgt2_by" value="自己"><span class="box">自己</span></label>
+          <label class="opt"><input data-profile-label="谁提出的" type="checkbox" name="tgt2_by" value="父母"><span class="box">父母</span></label>
+          <label class="opt"><input data-profile-label="谁提出的" type="checkbox" name="tgt2_by" value="老师或学长"><span class="box">老师 / 学长</span></label>
+          <label class="opt"><input data-profile-label="谁提出的" type="checkbox" name="tgt2_by" value="看名气"><span class="box">看名气</span></label>
+          <label class="opt"><input data-profile-label="谁提出的" type="checkbox" name="tgt2_by" value="同学都投"><span class="box">同学都投</span></label>
         </div></div>
-      <div class="q"><div class="q-label">目标 3</div>
-        <input type="text" id="tgt3" placeholder="公司与岗位（选填）">
+      <div data-profile-id="tgt3" class="q"><div class="q-label">目标 3</div>
+        <input data-profile-label="公司与岗位" type="text" id="tgt3" placeholder="公司与岗位（选填）">
         <div class="opts mt">
-          <label class="opt"><input type="checkbox" name="tgt3_by" value="自己"><span class="box">自己</span></label>
-          <label class="opt"><input type="checkbox" name="tgt3_by" value="父母"><span class="box">父母</span></label>
-          <label class="opt"><input type="checkbox" name="tgt3_by" value="老师或学长"><span class="box">老师 / 学长</span></label>
-          <label class="opt"><input type="checkbox" name="tgt3_by" value="看名气"><span class="box">看名气</span></label>
-          <label class="opt"><input type="checkbox" name="tgt3_by" value="同学都投"><span class="box">同学都投</span></label>
+          <label class="opt"><input data-profile-label="谁提出的" type="checkbox" name="tgt3_by" value="自己"><span class="box">自己</span></label>
+          <label class="opt"><input data-profile-label="谁提出的" type="checkbox" name="tgt3_by" value="父母"><span class="box">父母</span></label>
+          <label class="opt"><input data-profile-label="谁提出的" type="checkbox" name="tgt3_by" value="老师或学长"><span class="box">老师 / 学长</span></label>
+          <label class="opt"><input data-profile-label="谁提出的" type="checkbox" name="tgt3_by" value="看名气"><span class="box">看名气</span></label>
+          <label class="opt"><input data-profile-label="谁提出的" type="checkbox" name="tgt3_by" value="同学都投"><span class="box">同学都投</span></label>
         </div></div>
-      <div class="q"><div class="q-label">这些目标，你最看中的是什么？<span class="opt-note">（选填）</span></div>
+      <div data-profile-id="tgt_why" class="q"><div class="q-label">这些目标，你最看中的是什么？<span class="opt-note">（选填）</span></div>
         <input type="text" id="tgt_why" placeholder="例如：名气；离家近；钱多；说不上来"></div>
 
-      <div class="q"><div class="q-label">你觉得自己卡在哪？<span class="opt-note">（可多选）</span></div>
+      <div data-profile-id="stuck" class="q"><div class="q-label">你觉得自己卡在哪？<span class="opt-note">（可多选）</span></div>
         <div class="opts stack">
           <label class="opt"><input type="checkbox" name="stuck" value="不知道自己想要什么"><span class="box">不知道自己想要什么</span></label>
           <label class="opt"><input type="checkbox" name="stuck" value="不了解工作实际内容"><span class="box">不了解这些工作每天实际在做什么</span></label>
@@ -415,7 +636,7 @@
           <label class="opt"><input type="checkbox" name="stuck" value="其实不太迷茫"><span class="box">其实不太迷茫</span></label>
         </div></div>
 
-      <div class="q"><div class="q-label">下面四句话，哪些符合你？<span class="opt-note">（可多选）</span></div>
+      <div data-profile-id="adapt" class="q"><div class="q-label">下面四句话，哪些符合你？<span class="opt-note">（可多选）</span></div>
         <div class="opts stack">
           <label class="opt"><input type="checkbox" name="adapt" value="我会想几年后的自己"><span class="box">我会想几年后的自己会在做什么</span></label>
           <label class="opt"><input type="checkbox" name="adapt" value="我觉得这条路我能做主"><span class="box">我觉得这条路我自己能做主</span></label>
@@ -423,16 +644,16 @@
           <label class="opt"><input type="checkbox" name="adapt" value="我相信需要的东西我学得会"><span class="box">我相信需要的东西我学得会</span></label>
         </div></div>
 
-      <div class="q"><div class="q-label">不考虑钱和别人的看法，三年后一个普通的工作日，你希望自己在做什么？<span class="opt-note">（选填）</span></div>
+      <div data-profile-id="future_day" class="q"><div class="q-label">不考虑钱和别人的看法，三年后一个普通的工作日，你希望自己在做什么？<span class="opt-note">（选填）</span></div>
         <textarea id="future_day" placeholder="越具体越好：在哪、和谁、做什么事"></textarea></div>
 
-      <div class="q"><div class="q-label">最近一次做到忘了时间的事是什么？<span class="opt-note">（选填）</span></div>
+      <div data-profile-id="flow" class="q"><div class="q-label">最近一次做到忘了时间的事是什么？<span class="opt-note">（选填）</span></div>
         <input type="text" id="flow" placeholder="学习、工作、爱好都算"></div>
 
-      <div class="q"><div class="q-label">你最怕的结果是什么？一直拖着没决定，真正的原因是什么？<span class="opt-note">（选填）</span></div>
+      <div data-profile-id="fear" class="q"><div class="q-label">你最怕的结果是什么？一直拖着没决定，真正的原因是什么？<span class="opt-note">（选填）</span></div>
         <textarea id="fear" placeholder="写给自己看的，可以很直白"></textarea></div>
 
-      <div class="q"><div class="q-label">最近两周，你的睡眠、情绪和精力怎么样？</div>
+      <div data-profile-id="mood" class="q"><div class="q-label">最近两周，你的睡眠、情绪和精力怎么样？</div>
         <div class="opts stack">
           <label class="opt"><input type="radio" name="mood" value="基本正常"><span class="box">基本正常</span></label>
           <label class="opt"><input type="radio" name="mood" value="有些压力，但能应付"><span class="box">有些压力，但能应付</span></label>
@@ -449,21 +670,21 @@
       <div class="sec-head"><div class="badge">七</div><div class="sec-title">性格与传统视角 <span class="opt-note">（可选）</span></div></div>
       <p class="sec-why">你是什么样的人，会影响你适合什么样的路。前半部分是性格自评；后半部分是一个传统视角——八字，只用来对照和自我反思，不参与任何打分和排序。整节都可以跳过。</p>
 
-      <div class="q"><div class="q-label">你更喜欢和什么打交道？</div>
+      <div data-profile-id="people" class="q"><div class="q-label">你更喜欢和什么打交道？</div>
         <div class="opts">
           <label class="opt"><input type="radio" name="people" value="和人打交道"><span class="box">和人打交道</span></label>
           <label class="opt"><input type="radio" name="people" value="和物/数/代码打交道"><span class="box">和物/数/代码打交道</span></label>
           <label class="opt"><input type="radio" name="people" value="都还行"><span class="box">都还行</span></label>
         </div></div>
 
-      <div class="q"><div class="q-label">面对问题，你更喜欢哪一种？</div>
+      <div data-profile-id="answer" class="q"><div class="q-label">面对问题，你更喜欢哪一种？</div>
         <div class="opts">
           <label class="opt"><input type="radio" name="answer" value="有标准答案"><span class="box">有标准答案、清晰的对错</span></label>
           <label class="opt"><input type="radio" name="answer" value="开放探索"><span class="box">开放探索、没有唯一解</span></label>
           <label class="opt"><input type="radio" name="answer" value="看情况"><span class="box">看情况</span></label>
         </div></div>
 
-      <div class="q"><div class="q-label">下面哪些性格更像你？<span class="opt-note">（可多选）</span></div>
+      <div data-profile-id="trait" class="q"><div class="q-label">下面哪些性格更像你？<span class="opt-note">（可多选）</span></div>
         <div class="opts">
           <label class="opt"><input type="checkbox" name="trait" value="偏内向爱钻研"><span class="box">偏内向，爱独处钻研</span></label>
           <label class="opt"><input type="checkbox" name="trait" value="偏外向需社交"><span class="box">偏外向，需要社交变化</span></label>
@@ -477,38 +698,38 @@
           <label class="opt"><input type="checkbox" name="trait" value="爱动脑思考"><span class="box">爱动脑思考</span></label>
         </div></div>
 
-      <div class="q"><div class="q-label">你的自律程度更接近？</div>
+      <div data-profile-id="selfdiscipline" class="q"><div class="q-label">你的自律程度更接近？</div>
         <div class="opts">
           <label class="opt"><input type="radio" name="selfdiscipline" value="很自律"><span class="box">很自律，能管住自己</span></label>
           <label class="opt"><input type="radio" name="selfdiscipline" value="中等"><span class="box">中等</span></label>
           <label class="opt"><input type="radio" name="selfdiscipline" value="容易拖延"><span class="box">容易拖延，需要被推着</span></label>
         </div></div>
-      <div class="q"><div class="q-label">面对全新的环境（异地、陌生人圈子），你？</div>
+      <div data-profile-id="newenv" class="q"><div class="q-label">面对全新的环境（异地、陌生人圈子），你？</div>
         <div class="opts">
           <label class="opt"><input type="radio" name="newenv" value="乐于拥抱"><span class="box">兴奋、乐于拥抱</span></label>
           <label class="opt"><input type="radio" name="newenv" value="慢慢适应"><span class="box">慢慢就能适应</span></label>
           <label class="opt"><input type="radio" name="newenv" value="比较抗拒"><span class="box">比较抗拒、有压力</span></label>
         </div></div>
-      <div class="q"><div class="q-label">做一件事，你更习惯哪一种？</div>
+      <div data-profile-id="planstyle" class="q"><div class="q-label">做一件事，你更习惯哪一种？</div>
         <div class="opts stack">
           <label class="opt"><input type="radio" name="planstyle" value="提前规划"><span class="box">提前规划好，一步步来</span></label>
           <label class="opt"><input type="radio" name="planstyle" value="边走边看"><span class="box">边走边看，灵活调整</span></label>
           <label class="opt"><input type="radio" name="planstyle" value="看情况"><span class="box">看情况</span></label>
         </div></div>
-      <div class="q"><div class="q-label">做选择时，你更依赖什么？</div>
+      <div data-profile-id="decidebasis" class="q"><div class="q-label">做选择时，你更依赖什么？</div>
         <div class="opts stack">
           <label class="opt"><input type="radio" name="decidebasis" value="理性分析"><span class="box">理性分析、权衡利弊</span></label>
           <label class="opt"><input type="radio" name="decidebasis" value="感受价值观"><span class="box">感受与价值观，在意对人的影响</span></label>
           <label class="opt"><input type="radio" name="decidebasis" value="两者都有"><span class="box">两者都有</span></label>
         </div></div>
-      <div class="q"><div class="q-label">下面哪种更像你？</div>
+      <div data-profile-id="depthbreadth" class="q"><div class="q-label">下面哪种更像你？</div>
         <div class="opts stack">
           <label class="opt"><input type="radio" name="depthbreadth" value="钻深"><span class="box">钻一件事，越钻越深</span></label>
           <label class="opt"><input type="radio" name="depthbreadth" value="涉广"><span class="box">接触多样，不断尝新</span></label>
           <label class="opt"><input type="radio" name="depthbreadth" value="两者皆可"><span class="box">两者皆可</span></label>
         </div></div>
 
-      <div class="q" data-bazi="1"><div class="q-label">出生信息 · 八字参考<span class="opt-note">（选填，多一个认识自己的角度）</span></div>
+      <div data-profile-id="birthdate" class="q" data-bazi="1"><div class="q-label">出生信息 · 八字参考<span class="opt-note">（选填，多一个认识自己的角度）</span></div>
         <div class="pair">
           <div><div class="minilabel">出生日期（公历/阳历）</div><input type="date" id="birthdate"></div>
           <div><div class="minilabel">出生时间（选填）</div><input type="time" id="birthtime"></div>
@@ -527,8 +748,8 @@
       <div class="sec-head"><div class="badge">八</div><div class="sec-title">优先级排序</div></div>
       <p class="sec-why">这是整份问卷的题眼。几样都想要的时候，排序决定取舍；后面比较岗位和 offer 就按这个顺序定权重。</p>
 
-      <div class="q req" id="rankq"><div class="q-label">按重要程度，依次点选下面七项（先点最重要的）</div>
-        <p class="hint" style="margin-top:0;margin-bottom:11px;">点一下 = 排上序号；再点一下 = 取消。</p>
+      <div data-profile-id="priority" class="q req" id="rankq"><div class="q-label">按重要程度，依次点选下面七项（先点最重要的）</div>
+        <p class="hint">点一下 = 排上序号；再点一下 = 取消。</p>
         <div class="rank" id="rank">
           <button type="button" class="rank-item" data-id="收入"><span class="rank-num">–</span><span>收入</span></button>
           <button type="button" class="rank-item" data-id="工作内容"><span class="rank-num">–</span><span>工作内容 · 做得开心</span></button>
@@ -540,19 +761,26 @@
         </div>
         <button type="button" class="rank-reset" id="rankReset">清空重排</button>
       </div>
+<div data-profile-id="hard_limits" class="q" ><div class="q-label">哪几项是不能让步的底线（可多选，也可以不选）<span class="opt-note">（选填）</span></div><div class="opts stack"><label class="opt"><input type="checkbox" name="hard_limits" value="到手收入底线"><span class="box">到手收入底线</span></label>
+          <label class="opt"><input type="checkbox" name="hard_limits" value="工作内容"><span class="box">工作内容</span></label>
+          <label class="opt"><input type="checkbox" name="hard_limits" value="稳定性"><span class="box">稳定性</span></label>
+          <label class="opt"><input type="checkbox" name="hard_limits" value="成长与前景"><span class="box">成长与前景</span></label>
+          <label class="opt"><input type="checkbox" name="hard_limits" value="城市"><span class="box">城市</span></label>
+          <label class="opt"><input type="checkbox" name="hard_limits" value="工作与生活平衡"><span class="box">工作与生活平衡</span></label>
+          <label class="opt"><input type="checkbox" name="hard_limits" value="单位名气"><span class="box">单位名气</span></label></div></div>
     </div></section>
 
     <section class="section" data-title="心里话"><div class="card">
       <div class="sec-head"><div class="badge">九</div><div class="sec-title">你心里的话</div></div>
       <p class="sec-why">数据算不出你真正在乎什么。下面几句越实在越好。</p>
 
-      <div class="q"><div class="q-label">现在最纠结、最想弄明白的一件事<span class="opt-note">（选填）</span></div>
+      <div data-profile-id="worry" class="q"><div class="q-label">现在最纠结、最想弄明白的一件事<span class="opt-note">（选填）</span></div>
         <textarea id="worry" placeholder="例如：到底该去大厂做销售，还是回老家考编？"></textarea></div>
 
-      <div class="q"><div class="q-label">已经听到的建议或消息<span class="opt-note">（选填）</span></div>
+      <div data-profile-id="advice" class="q"><div class="q-label">已经听到的建议或消息<span class="opt-note">（选填）</span></div>
         <textarea id="advice" placeholder="例如：朋友说某行业很赚钱；某机构说交钱包就业……我们会逐条核实。"></textarea></div>
 
-      <div class="q"><div class="q-label">还有什么想让顾问知道的？<span class="opt-note">（选填）</span></div>
+      <div data-profile-id="more" class="q"><div class="q-label">还有什么想让顾问知道的？<span class="opt-note">（选填）</span></div>
         <textarea id="more" placeholder="任何你觉得重要的信息。"></textarea></div>
     </div></section>
 
@@ -575,7 +803,7 @@
     <p class="copy-done" id="copyDone" role="status"></p>
 
     <div id="output">
-      <p class="out-head">没能自动复制。请长按下面的文字，全选后复制，发回去就行 ↓</p>
+      <p class="out-head">没能自动复制。请长按全选复制下面的 JSON。</p>
       <textarea id="summary" readonly></textarea>
       <div class="copy-row">
         <button class="copy-btn" type="button" onclick="copySummary()">再试一次复制</button>
@@ -609,8 +837,7 @@
   function refreshFollowups(){
     document.querySelectorAll('.followup').forEach(function(fu){
       var cond=fu.getAttribute('data-when'); // name=value
-      var eq=cond.indexOf('='); var name=cond.slice(0,eq), values=cond.slice(eq+1).split('|');
-      var on=values.some(function(value){ return !!document.querySelector('input[name="'+name+'"][value="'+value+'"]:checked'); });
+      var on=condOn(cond);
       if(on){ fu.classList.add('show'); }
       else if(fu.classList.contains('show')){
         fu.classList.remove('show');
@@ -619,6 +846,7 @@
         fu.querySelectorAll('textarea').forEach(function(t){ t.value=''; });
       }
     });
+    applyStageVisibility();
   }
 
   /* ----- ranking ----- */
@@ -646,7 +874,7 @@
     if(rad.length) return !!q.querySelector('input[type=radio]:checked');
     var chk=q.querySelectorAll('input[type=checkbox]');
     if(chk.length) return !!q.querySelector('input[type=checkbox]:checked');
-    var txt=q.querySelectorAll('input[type=text],input[type=number],textarea');
+    var txt=q.querySelectorAll('input[type=text],input[type=number],input[type=month],textarea');
     if(txt.length){ for(var i=0;i<txt.length;i++){ if(!txt[i].value.trim()) return false; } return true; }
     return true;
   }
@@ -675,11 +903,11 @@
     markSections();
   }
   /* ----- 本地缓存：填了就存，刷新/重开页面自动读回 ----- */
-  var STORE_KEY='zhiqu_career_v1';
+  var STORE_KEY='zhiqu_career_v2';
   function saveState(){
     try{
       var d={text:{},radio:{},check:{},rank:rankOrder};
-      document.querySelectorAll('input[type=text],input[type=number],input[type=date],input[type=time],textarea').forEach(function(el){ if(el.id&&el.value) d.text[el.id]=el.value; });
+      document.querySelectorAll('input[type=text],input[type=number],input[type=date],input[type=time],input[type=month],textarea').forEach(function(el){ if(el.id&&el.value) d.text[el.id]=el.value; });
       document.querySelectorAll('input[type=radio]:checked').forEach(function(el){ if(el.name) d.radio[el.name]=el.value; });
       document.querySelectorAll('input[type=checkbox]:checked').forEach(function(el){ if(el.name){ (d.check[el.name]=d.check[el.name]||[]).push(el.value); } });
       localStorage.setItem(STORE_KEY, JSON.stringify(d));
@@ -710,10 +938,10 @@
   function showRestoredNotice(){
     if(document.getElementById('restoredBar')) return;
     var bar=document.createElement('div'); bar.id='restoredBar';
-    bar.style.cssText='max-width:680px;margin:14px auto 0;padding:10px 15px;background:var(--green-pale);border:1px solid var(--green);border-radius:4px;color:var(--green-deep);font-size:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;line-height:1.5;';
+    bar.className='restored-bar';
     var txt=document.createElement('span'); txt.textContent='已为你恢复上次填写的内容，接着填就好。';
     var btn=document.createElement('button'); btn.type='button'; btn.textContent='清空重填';
-    btn.style.cssText='border:1px solid var(--green);background:transparent;color:var(--green-deep);border-radius:4px;padding:5px 13px;font-size:13px;cursor:pointer;white-space:nowrap;';
+    btn.className='restored-reset';
     btn.addEventListener('click',function(){ if(confirm('确定清空已填写的内容、从头开始吗？此操作无法撤销。')){ clearState(); location.reload(); } });
     bar.appendChild(txt); bar.appendChild(btn);
     var top=document.querySelector('.topbar');
@@ -746,40 +974,9 @@
   function hideWarn(){ document.getElementById('warn').classList.remove('show'); }
 
 
-  function answerOf(q){
-    if(q.querySelector('#rank')) return rankOrder.length?rankText():'';
-    if(q.dataset.bazi){
-      var bdt=val('birthdate'),btm=val('birthtime'),bpl=val('birthplace');
-      if(!bdt) return '';
-      var bz=computeBaziBlock(bdt,btm,bpl,radio('bz_sex'));
-      return (bdt?'公历'+bdt:'')+(btm?'　'+btm:'')+'\n'+bz.lines.join('\n');
-    }
-    var parts=[];
-    var r=q.querySelector('input[type=radio]:checked'); if(r) parts.push(r.value);
-    var c=q.querySelectorAll('input[type=checkbox]:checked');
-    if(c.length){ var a=[]; c.forEach(function(x){a.push(x.value);}); parts.push(a.join('、')); }
-    q.querySelectorAll('input[type=text],input[type=number],textarea').forEach(function(t){ if(t.value.trim()) parts.push(t.value.trim()); });
-    return parts.join('；');
-  }
   function doGenerate(){
     hideWarn();
-    var L=['【求职 · 自我盘点】'], nm=['一','二','三','四','五','六','七','八','九'];
-    document.querySelectorAll('.section').forEach(function(sec,i){
-      L.push(''); L.push('— '+nm[i]+'、'+sec.getAttribute('data-title')+' —');
-      var lastFu=null;
-      sec.querySelectorAll('.q').forEach(function(q){
-        if(!isVisible(q)) return;
-        var fu=q.closest('.followup');
-        if(fu&&fu!==lastFu){ var tag=fu.querySelector('.ftag'); L.push('［'+(tag?tag.textContent.trim():'追问')+'］'); }
-        lastFu=fu;
-        var a=answerOf(q);
-        if(!a && !q.classList.contains('req')) return;
-        L.push((fu?'  · ':'')+getLabel(q)+'：'+(a||'（未填）'));
-      });
-    });
-    L.push('');
-    L.push('（本表由「知衢 · 求职版」问卷生成，填写日期 '+new Date().toISOString().slice(0,10)+'。薪资、政策以用人单位书面文件和官方发布为准；AI 会出错，请交叉核实；最终决策权在本人。）');
-    zhiquCopy(L.join('\n'),'career');
+    zhiquCopy(zhiquProfile('career'));
   }
 
   function copySummary(){
