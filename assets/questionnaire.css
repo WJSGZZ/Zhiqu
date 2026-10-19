@@ -156,13 +156,14 @@ textarea{resize:vertical;min-height:84px;}
 .landing-wrap{width:100%;max-width:1120px;padding:clamp(24px,6vh,64px) 48px;}
 .split{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(40px,6vw,88px);align-items:center;}
 .landing .hero{padding:0;overflow:visible;}
-.lockup{display:flex;align-items:center;gap:14px;margin:0 0 18px -10px;}
+.lockup{display:flex;align-items:center;gap:18px;margin:0 0 0 -10px;}
+.wordmark{display:flex;flex-direction:column;gap:12px;}
 .landing .hero-logo{display:block;flex:none;width:124px;height:124px;margin:0;}
 .landing .brand-title{font-size:76px;letter-spacing:16px;line-height:1;margin:0;}
-.landing .motto{font-size:18px;letter-spacing:5px;margin:0;}
-.landing .motto::after{content:'';display:block;width:40px;height:2px;margin:26px 0 24px;border-radius:2px;background:var(--amber);}
+.landing .motto{font-size:17px;letter-spacing:4px;margin:0;white-space:nowrap;}
+.brand-rule{width:40px;height:2px;margin:28px 0 24px;border:0;border-radius:2px;background:var(--amber);}
 .landing .hero .tag{font-size:16px;line-height:1.85;margin:0;max-width:none;}
-.landing .vow{margin:28px 0 0;padding:0;border:0;font-size:12.5px;line-height:1.8;max-width:30em;text-wrap:pretty;}
+.landing .vow{margin:28px 0 0;padding:0;border:0;font-size:12.5px;line-height:1.8;max-width:26em;text-wrap:pretty;}
 .landing .choices{display:flex;flex-direction:column;gap:14px;margin:0;}
 .landing .choice{display:grid;grid-template-columns:1fr auto;grid-template-areas:"eb go" "h2 go" "p go";column-gap:24px;align-items:center;padding:22px 26px;}
 .landing .choice .c-eyebrow{grid-area:eb;margin:0 0 4px;}
@@ -173,7 +174,7 @@ textarea{resize:vertical;min-height:84px;}
   .landing-wrap{max-width:1360px;}
   .landing .hero-logo{width:148px;height:148px;}
   .landing .brand-title{font-size:92px;letter-spacing:20px;}
-  .landing .motto{font-size:21px;}
+  .landing .motto{font-size:20px;letter-spacing:5px;}
   .landing .hero .tag{font-size:18px;}
   .landing .vow{font-size:13.5px;}
   .landing .choices{gap:18px;}
@@ -185,14 +186,17 @@ textarea{resize:vertical;min-height:84px;}
 @media (max-width:900px){
   .split{grid-template-columns:1fr;gap:32px;}
   .landing .hero{text-align:center;}
-  .lockup{justify-content:center;margin:0 0 16px;}
-  .landing .motto::after{margin:20px auto 18px;}
+  .lockup{justify-content:center;margin:0;}
+  .brand-rule{margin:22px auto 18px;}
+  .wordmark{align-items:flex-start;text-align:left;}
   .landing .vow{margin:20px auto 0;}
 }
 @media (max-width:560px){
   .landing-wrap{padding:40px 16px 32px;}
   .landing .hero-logo{width:76px;height:76px;}
-  .lockup{gap:10px;}
+  .lockup{gap:12px;}
+  .landing .motto{font-size:15px;letter-spacing:3px;}
+  .wordmark{gap:8px;}
   .landing .brand-title{font-size:46px;letter-spacing:10px;padding-left:0;}
   .landing .hero .tag{font-size:15px;}
   .landing .choice{grid-template-columns:1fr auto;grid-template-areas:"eb go" "h2 go" "p p";padding:20px;}
