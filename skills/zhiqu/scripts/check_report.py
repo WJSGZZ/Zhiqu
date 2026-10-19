@@ -349,6 +349,8 @@ class PublicationHTML(HTMLParser):
     def check_urls(self):
         text = ''.join(self.text_parts)
         self.urls += [u for u in re.findall(r'https?://[^\s<>，；。）、]+',text) if len(u)>40]
+        # 去掉 http 前缀后显示的网址（如 www.xxx.cn/NewsInfo.aspx?...）也算
+        self.urls += [u for u in re.findall(r'(?<![/A-Za-z0-9_.])(?:www\.)?[a-z0-9-]+(?:\.[a-z0-9-]+)*\.(?:cn|com|org|net|gov|edu)(?:\.cn)?/[^\s<>，；。）、]+',text) if len(u)>40]
         self.text_parts = []
 
 

@@ -561,13 +561,15 @@ def outcome_strip(items, pfall, width=640, fmt=None):
     return "".join(out)
 
 
-def source_cell(text):
-    """来源格：机构名正常排，网址缩成一行小字，避免在窄栏里从中间断开。"""
+def source_cell(text, refs=None):
+    """来源格：只写机构名和尾注编号 [n]，完整网址统一列在第 12 节。"""
     import re as _re
     urls = _re.findall(r"https?://\S+", text or "")
     name = _re.sub(r"https?://\S+", "", text or "").strip(" ；;，,")
-    short = [_re.sub(r"^https?://(www\.)?", "", u) for u in urls]
-    return E(name or "—") + "".join(f"<span class='url'>{E(u)}</span>" for u in short)
+    if refs is None:
+        return E(name or "—")
+    marks = "".join(f"<sup class=\"source-ref\">[{refs.add(name or '来源', u)}]</sup>" for u in urls)
+    return E(name or "—") + marks
 
 
 def unprefix(text, label):
@@ -725,7 +727,7 @@ def build(rep, opt):
         if rep.get("news"):
             body += ("<h3>近期报道与政策</h3><p class='small'>前景和录取线都会受社会情况影响。下表是填报前查到的相关报道，影响一栏是本报告的判断。</p>"
                      "<table><thead><tr><th>事件</th><th style='width:12%'>日期</th><th style='width:22%'>来源</th><th style='width:30%'>对本报告的影响</th></tr></thead><tbody>"
-                     + "".join(f"<tr><td>{E(a)}</td><td class='small'>{E(b)}</td><td class='small'>{source_cell(c)}</td><td>{E(d)}</td></tr>" for a, b, c, d in rep["news"])
+                     + "".join(f"<tr><td>{E(a)}</td><td class='small'>{E(b)}</td><td class='small'>{source_cell(c, refs)}</td><td>{E(d)}</td></tr>" for a, b, c, d in rep["news"])
                      + "</tbody></table>")
         sec("专业方向", body)
     else:

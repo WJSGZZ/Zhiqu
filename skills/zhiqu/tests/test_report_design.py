@@ -17,6 +17,11 @@ class PublicationGateTests(unittest.TestCase):
             self.assertTrue(any('40字符' in x for x in issues))
         self.assertEqual(check_publication_html('<section data-section="12"><p>'+url+'</p></section>'), [])
 
+    def test_scheme_less_long_url_after_chinese_is_rejected(self):
+        """网址去掉 http 前缀、紧跟在中文机构名后面，也算正文长网址（2026-10-19 新闻表的问题）。"""
+        doc = "<section data-section='03'><td>山东省教育招生考试院<span class='url'>sdzk.cn/NewsInfo.aspx?NewsID=7251&amp;BCID=1149&amp;CID=1120</span></td></section>"
+        self.assertTrue(any("网址" in e for e in check_publication_html(doc)))
+
     def test_svg_needs_title_source_and_resolved_footnote(self):
         for svg in ('<svg></svg>', '<svg><title>图题</title></svg>',
                     '<svg data-source-refs="3"><title>图题</title></svg>'):
