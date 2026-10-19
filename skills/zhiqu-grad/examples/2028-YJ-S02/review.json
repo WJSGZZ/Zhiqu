@@ -175,12 +175,24 @@
     "judgment.json": "38eed4d2e7e0e329c1beb9d7b029069ef4907552ad2ae15cf9019bd5bc4f9add",
     "narrative.json": "cdaf672fa9a3877e1e9b218b516cf5eee06ef7887fddb6a4d1367480e15222a4",
     "report.md": "5a822a3b5cceeb541ade0af4c833e696abd8ec4cffb3fcfd5fa3e72db9e115c6",
-    "report.html": "b3274ac85f152d5b230bcddb9d309a5ba510fdcbac1dc983c0f44b030cebe564",
-    "report.pdf": "4f3f506e82d2ba8993c7b85c497b4d48e66082e1de237f979abacc98474012a5",
-    "report_trace.json": "34666b19068d2a6269f5b1682a3e63195122f97a079976661b0b717329252082",
+    "report.html": "08de5022589a810f826a474c3d0df33d9956405f77154d63eb8397ac27db2a97",
+    "report.pdf": "88d9fcd33452aeec5f29aefa04362bed69932730a15e3b556cab62ec3fe0658b",
+    "report_trace.json": "b60784ef280e35c02c386eb85399faf381bf12bc7e2c33e897a464eeae9a7aac",
     "operator_check.md": "fa8cc559781a105e060e1101da37e2cbe7836dd40b76217663ad777316c8b01c",
     "profile.json": "b04770d7a2589f2dbe7b35a80efaad8953b8db8666a26db85875f82cfc9eaf72",
     "profile-supplement.txt": "6d3fe85c4f5f9393a284253436e9dd3ae7a719f9ff73222d052dc7224a274e0f"
   },
-  "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。"
+  "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。",
+  "snapshot_refreshes": [
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "核对附录改为紧凑排版后重新生成；正文 report.md 与全部输入文件未变，自评结论不受影响。"
+    }
+  ]
 }

@@ -185,19 +185,23 @@ section[data-section="12"] { margin-top:6mm; }
 .source-notes .url { display:inline; margin-left:1.5mm; line-height:1.35; }
 table.vt th { white-space:normal; }
 table.vt td .row-note { display:block;white-space:nowrap;font-size:7.8pt;font-weight:400;color:var(--muted); }
-/* 核对材料继承正文色板与字号；每条证据可独立分页，长网址不撑开页面。 */
-.verification-appendix { break-before:page; margin-top:0; font-size:9pt; }
-.verification-appendix h3 { font-size:11pt; }
-.verification-appendix .audit-item { border-bottom:.4pt solid var(--rule); padding:2mm 0; }
-.verification-appendix .audit-item p { margin:0 0 .5mm; line-height:1.4; }
-.verification-appendix .audit-item { break-inside:avoid; }
-.verification-appendix .audit-numbers { font-size:8pt; line-height:1.35; }
-.verification-appendix .audit-numbers th:nth-child(1){width:13%;}
-.verification-appendix .audit-numbers th:nth-child(2){width:15%;}
-.verification-appendix .audit-numbers th:nth-child(3){width:72%;}
-.verification-appendix .audit-numbers td { padding:3.5pt 4pt; line-height:1.3; font-size:8pt; overflow-wrap:anywhere; word-break:normal; white-space:normal; }
-.verification-appendix .audit-url { font-size:7.5pt; overflow-wrap:anywhere; word-break:break-all; }
-.verification-appendix dl { margin:2mm 0; }
+/* 核对材料：紧凑排版，同一出处只印一次；长网址可断行。 */
+.verification-appendix { break-before:page; margin-top:0; font-size:8.6pt; line-height:1.45; }
+.verification-appendix h3 { font-size:10.5pt; margin:5mm 0 2mm; }
+.verification-appendix p { margin:0 0 1mm; }
+.verification-appendix table { width:100%; border-collapse:collapse; margin:1mm 0 2mm; font-size:8pt; table-layout:auto; }
+.verification-appendix th, .verification-appendix td { padding:2.5pt 4pt; border-bottom:.4pt solid var(--rule); vertical-align:top; text-align:left; line-height:1.35; overflow-wrap:anywhere; }
+.verification-appendix thead th { color:var(--muted); font-weight:600; }
+.verification-appendix .audit-kv th { width:30%; color:var(--muted); font-weight:400; }
+.verification-appendix .audit-sec { white-space:nowrap; color:var(--muted); }
+.verification-appendix .audit-source { border-bottom:.4pt solid var(--rule); padding:1.5mm 0 2mm; }
+.verification-appendix .audit-ev, .verification-appendix .audit-src-head { break-inside:avoid; }
+.verification-appendix .audit-src-head { break-after:avoid; }
+.verification-appendix .audit-claim { margin-top:1.2mm; }
+.verification-appendix .audit-excerpt { color:var(--soft); }
+.verification-appendix .audit-vals { color:var(--accent); }
+.verification-appendix .audit-item { border-bottom:.4pt solid var(--rule); padding:1.5mm 0; break-inside:avoid; }
+.verification-appendix .audit-url { font-size:7.2pt; color:var(--muted); overflow-wrap:anywhere; word-break:break-all; }
 .verification-appendix dt { font-weight:600; color:var(--accent); }
 .verification-appendix dd { margin:0 0 2mm; overflow-wrap:anywhere; }
 .verification-appendix blockquote { margin:1mm 0 2mm 3mm; color:var(--soft); }
@@ -272,40 +276,124 @@ def core_conclusions(items, rendered=False):
 
 
 def verification_appendix_html(materials):
-    """核对附录的唯一打印组件。输入为可读字段，不接收未转义HTML。"""
+    """核对附录的唯一打印组件。输入为可读字段，不接收未转义HTML。
+
+    同一出处、同一摘录、同一计算项只印一次，下面列出它支撑的全部数字与所在节；
+    每个数字的原值都留在可提取的文字里，供 verify_report.py 与其他读者逐项核对。
+    """
     def val(value):
         if isinstance(value, (dict, list, tuple)):
             value = json.dumps(value, ensure_ascii=False)
         if isinstance(value,float):value=format(value,'.10g')
         return E(str(value if value is not None else '未登记'))
-    def line(label, value):
-        return f'<p><b>{E(label)}：</b>{val(value)}</p>' if value not in (None, '', [], {}) else ''
-    def source(row):
-        return line('来源机构', row.get('institution')) + (f'<p class="audit-url">来源网址：{val(row["url"])}</p>' if row.get('url') else '')
-    body = '<section class="verification-appendix" data-section="appendix"><h2>附录：核对材料</h2><p>本 PDF 附带数据文件，可用 PDF 阅读器的附件面板取出。</p>'
-    body += '<h3>案例信息</h3><dl>'
+    def secs(text):
+        text=str(text or '').strip()
+        return E(text) if text else '—'
+    numbers=materials.get('numbers', [])
+    registered=('本人','本报告设置','报告登记')
+    evidence=[r for r in numbers if r.get('evidence_id')]
+    registry=[r for r in numbers if not r.get('evidence_id') and str(r.get('institution','')).startswith(registered)]
+    model=[r for r in numbers if not r.get('evidence_id') and '：' in str(r.get('label','')) and str(r.get('institution','')).startswith('录取线模型')]
+    calc_refs={r['calculation_path']:r for r in numbers if r.get('calculation_path')}
+    formulas=[r for r in numbers if r.get('path') and r.get('formula') is not None]
+    used=set(map(id,evidence+registry+model+formulas))|{id(r) for r in calc_refs.values()}
+    rest=[r for r in numbers if id(r) not in used]
+
+    body = '<section class="verification-appendix" data-section="appendix"><h2>附录：核对材料</h2><p>本 PDF 附带数据文件，可用 PDF 阅读器的附件面板取出。下面按出处列出报告里的数字：同一出处、同一段原文只印一次，后面跟着它支撑的数字和所在章节。</p>'
     case_info = materials.get('case_info', [])
     if isinstance(case_info, dict):
         case_info = case_info.items()
-    body += ''.join(f'<dt>{val(label)}</dt><dd>{val(value)}</dd>' for label, value in case_info) + '</dl>'
-    body += '<h3>分析用到的本人信息</h3>'
-    for row in materials.get('personal_inputs', []):
-        body += '<div class="audit-item">' + line(row.get('label', '本人输入'), row.get('value')) + line('用于', row.get('sections')) + '</div>'
-    body += '<h3>数字核对表</h3><p>标为“旧资料待核”的项目保留旧报告的对应片段，便于定位；它不是官方原文，不表示事实已经核实。请结合第12节的官方来源与附件逐项核对。计算项按登记输入复算，原始统计未留存时不宣称复算原始名单。</p><table class="audit-numbers"><thead><tr><th>值</th><th>正文位置</th><th>事项、出处与核对依据</th></tr></thead><tbody>'
-    for row in materials.get('numbers', []):
-        if row.get('provenance_status')=='legacy_unmapped':
-            detail = '<b>旧资料待核：</b>'+val(row.get('excerpt','').replace('旧报告片段（非官方原文）：',''))
-        else:detail = '<b>'+val(row.get('label','核对项'))+'</b>' + source(row)
-        for key, label in [('excerpt', '摘录或归档说明'), ('inputs', '计算输入'), ('formula', '公式'), ('result', '计算结果'), ('verification_limit', '核对范围')]:
-            if not (row.get('provenance_status')=='legacy_unmapped' and key=='excerpt'):detail += line(label,row.get(key))
-        body += '<tr><td>'+val(row.get('value'))+'</td><td>'+val(row.get('sections'))+'</td><td>'+detail+'</td></tr>'
-    body += '</tbody></table>'
-    body += '<h3>反证与限制</h3>'
+    body += '<h3>案例信息</h3><table class="audit-kv"><tbody>' + ''.join(f'<tr><th>{val(k)}</th><td>{val(v)}</td></tr>' for k, v in case_info) + '</tbody></table>'
+
+    personal=materials.get('personal_inputs', [])
+    if personal:
+        body += '<h3>分析用到的本人信息</h3><table class="audit-grid"><thead><tr><th>项目</th><th>本人填写</th><th>用于</th></tr></thead><tbody>'
+        body += ''.join(f'<tr><td>{val(r.get("label","本人输入"))}</td><td>{val(r.get("value"))}</td><td class="audit-sec">{secs(r.get("sections"))}</td></tr>' for r in personal)
+        body += '</tbody></table>'
+
+    if evidence:
+        body += '<h3>官方出处与数字</h3>'
+        groups={}
+        for r in evidence:
+            groups.setdefault((r.get('institution',''),r.get('url','')),{}).setdefault(r['evidence_id'],[]).append(r)
+        for (inst,url),items in groups.items():
+            body += f'<div class="audit-source"><p class="audit-src-head"><b>{val(inst or "出处")}</b></p>'
+            if url:body += f'<p class="audit-url">{val(url)}</p>'
+            for eid,rows in items.items():
+                first=rows[0]
+                body += f'<div class="audit-ev"><p class="audit-claim">{val(first.get("label","核对项"))}</p>'
+                if first.get('excerpt'):body += f'<p class="audit-excerpt">原文：{val(first["excerpt"])}</p>'
+                body += '<p class="audit-vals">' + '；'.join(f'{val(r.get("value"))}（{secs(r.get("sections"))}）' for r in rows) + '</p></div>'
+            body += '</div>'
+
+    if formulas or calc_refs:
+        body += '<h3>计算项</h3><p>按登记输入复算；长文字依据和原始数值在附件 calculations.json 里。</p><table class="audit-grid"><thead><tr><th>项目</th><th>结果</th><th>算法</th><th>所在节</th></tr></thead><tbody>'
+        seen=set()
+        for r in formulas:
+            ref=calc_refs.get(r['path']);shown=[]
+            if ref is not None:shown.append(ref.get('value'));seen.add(r['path'])
+            nums={k:v for k,v in (r.get('inputs') or {}).items() if isinstance(v,(int,float)) and not isinstance(v,bool)} if isinstance(r.get('inputs'),dict) else {}
+            inputs=('；输入 '+'，'.join(f'{E(str(k))}={val(v)}' for k,v in nums.items())) if nums else ''
+            result=val(r.get('result', r.get('value')))
+            display=('（正文显示 '+'、'.join(val(x) for x in shown)+'）') if shown else ''
+            body += f'<tr><td>{val(r.get("label",r["path"]))}</td><td>{result}{display}</td><td>{val(r.get("formula"))}{inputs}</td><td class="audit-sec">{secs(r.get("sections"))}</td></tr>'
+        for path,ref in calc_refs.items():
+            if path in seen:continue
+            body += f'<tr><td>{val(path)}</td><td>{val(ref.get("value"))}</td><td>参数登记，见附件 calculations.json</td><td class="audit-sec">{secs(ref.get("sections"))}</td></tr>'
+        body += '</tbody></table>'
+
+    if model:
+        body += ('<h3>志愿计算结果</h3><p>概率是 0—1 之间的小数，由录取线模型模拟得出：单独过线 = 该志愿过线的模拟次数 ÷ 总模拟次数；最终录取 = 此前志愿都未录取、本志愿录取的次数 ÷ 总模拟次数。'
+                 '预测位次 = 历史位次按登记漂移调整后，近期加权的对数均值。偏好分来自本人排序和登记评分。原序候选表 candidates.csv 和结果 result.json 都在附件里，可逐项复算。</p>')
+        cols=['单独过线','最终录取','预测位次','偏好分'];table={}
+        for r in model:
+            name,_,field=str(r['label']).rpartition('：')
+            table.setdefault(name,{})[field]=r
+        body += '<table class="audit-grid"><thead><tr><th>志愿</th>' + ''.join(f'<th>{c}</th>' for c in cols) + '</tr></thead><tbody>'
+        for name,fields in table.items():
+            body += f'<tr><td>{val(name)}</td>' + ''.join(f'<td class="num">{val(fields[c].get("value")) if c in fields else "—"}</td>' for c in cols) + '</tr>'
+        body += '</tbody></table>'
+
+    if registry:
+        body += '<h3>登记值</h3><p>本人画像、报告设置的个人检查点和费用情景，不是官方数据。</p><table class="audit-grid"><thead><tr><th>值</th><th>登记项</th><th>所在节</th></tr></thead><tbody>'
+        body += ''.join(f'<tr><td>{val(r.get("value"))}</td><td>{val(r.get("label"))}</td><td class="audit-sec">{secs(r.get("sections"))}</td></tr>' for r in registry)
+        body += '</tbody></table>'
+
+    if rest:
+        body += '<h3>其他核对项</h3>'
+        for r in rest:
+            how='；'.join(str(r.get(k)) for k in ('inputs','formula','verification_limit') if r.get(k) not in (None,'',[],{}))
+            body += (f'<div class="audit-item"><p><b>{val(r.get("label","核对项"))}</b>：{val(r.get("value"))}（{secs(r.get("sections"))}）</p>'
+                     + (f'<p>出处：{val(r["institution"])}</p>' if r.get('institution') else '')
+                     + (f'<p class="audit-excerpt">原文：{val(r["excerpt"])}</p>' if r.get('excerpt') else '')
+                     + (f'<p class="audit-excerpt">核对方式：{E(how)}</p>' if how else '')
+                     + (f'<p class="audit-url">{val(r["url"])}</p>' if r.get('url') else '') + '</div>')
+
+    limits=[];seen_limits=set()
     for row in materials.get('limitations', []):
-        body += '<div class="audit-item">' + line('限制', row.get('claim')) + line('结论适用条件', row.get('reason')) + line('应当改判的条件', row.get('change_if')) + source(row) + '</div>'
+        key=(str(row.get('claim')),str(row.get('reason')),str(row.get('change_if')),str(row.get('url')))
+        if key in seen_limits:continue
+        seen_limits.add(key);limits.append(row)
+    def plain(value):
+        if isinstance(value,(list,tuple)):return '；'.join(map(str,value))
+        text=str(value)
+        if text.startswith('[') and text.endswith(']'):
+            try:
+                items=json.loads(text)
+                if isinstance(items,list):return '；'.join(map(str,items))
+            except ValueError:pass
+        return text
+    if limits:
+        body += '<h3>反证与限制</h3>'
+        for row in limits:
+            body += '<div class="audit-item"><p><b>限制：</b>' + val(row.get('claim')) + '</p>'
+            if row.get('reason'):body += '<p>适用条件：' + val(row.get('reason')) + '</p>'
+            if row.get('change_if'):body += '<p>出现以下情况要改判：' + E(plain(row.get('change_if'))) + '</p>'
+            if row.get('url'):body += '<p class="audit-url">' + val(row['url']) + '</p>'
+            body += '</div>'
     body += '<h3>未取到的信息和原因</h3>'
     for row in materials.get('gaps', []):
-        body += '<div class="audit-item">' + line('信息', row.get('label')) + line('原因', row.get('reason')) + source(row) + '</div>'
+        body += '<div class="audit-item"><p><b>' + val(row.get('label')) + '</b>：' + val(row.get('reason')) + '</p>' + (f'<p class="audit-url">{val(row["url"])}</p>' if row.get('url') else '') + '</div>'
     if not materials.get('gaps'):
         body += '<p>未登记额外取文缺口；已知限制见上节。</p>'
     return body + '</section>'

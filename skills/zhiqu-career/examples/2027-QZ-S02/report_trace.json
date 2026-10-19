@@ -20,7 +20,7 @@
     "planning_workflow.py": "11717f0a5a3da33cc870959d127b86a952ce4390741dfce2f3953870498c632f",
     "operator_check.py": "a6552c0b63a8a6b5d15c9a1057fbc2884fb85435b1b102fbf4a48dd74c4e7ebb",
     "check_demos.py": "fc8e1625f9e052373756160514ad5c73db1e8451c233425918edb5bc839d9f63",
-    "report.py": "db42052c76611d2fa4005fc887bd2149ae30c03290101dd2dfc28b052ec631ec",
+    "report.py": "3be91d1e72908678c4291e198b7414823fb4b752b0874232c62cc7b320785e5d",
     "render_report.py": "e85ed74d89613ce9ba1017680c14ef385624b5892151b1c1ce472ef4e1748676",
     "profile_store.py": "1cfd828583598a65cf719a46447cb3112ef0170eb1a638b89ab023cb47a04e7f"
   },
@@ -426,84 +426,12 @@
       "ref": "{{c:/all_cash_months|1f}}",
       "value": 3.6,
       "display": "3.6"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{p:/fields/15/value}}",
-      "value": 10,
-      "display": "10"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{p:/fields/14/value/cash|comma}}",
-      "value": 9000,
-      "display": "9,000"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{p:/fields/14/value/reserve|comma}}",
-      "value": 4000,
-      "display": "4,000"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{c:/spendable|comma}}",
-      "value": 5000,
-      "display": "5,000"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{p:/fields/14/value/housing|comma}}",
-      "value": 800,
-      "display": "800"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{p:/fields/14/value/other|comma}}",
-      "value": 1700,
-      "display": "1,700"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{c:/monthly_cost|comma}}",
-      "value": 2500,
-      "display": "2,500"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{c:/buffer_months|1f}}",
-      "value": 2.0,
-      "display": "2.0"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{p:/fields/14/value/higher_housing|comma}}",
-      "value": 1300,
-      "display": "1,300"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{c:/high_monthly_cost|comma}}",
-      "value": 3000,
-      "display": "3,000"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{c:/higher_rent_months|1f}}",
-      "value": 1.7,
-      "display": "1.7"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{c:/all_cash_months|1f}}",
-      "value": 3.6,
-      "display": "3.6"
     }
   ],
   "artifacts": {
     "report.md": "21453d34410b026363848376fe5206b0761fac2ec0c0c414f7e43b7093637657",
-    "report.html": "ae48b207e6c34e12aecbe46b4368edfde42abcf6648b291a09a9335c42ad8749",
-    "report.pdf": "e8fea6a0c95ee7203936e2b814ea21642ea51cce7a0114793a1986edce4f1579"
+    "report.html": "a76d66aa5c74987ca993ef86cd8020162be1e4b5dc371036378e3b7458060bf8",
+    "report.pdf": "3a56dbdb69baf5a502a9cefaf8d44f5b50064346b9e528cd3f17bc6c04193cc3"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "report_profile": {
@@ -513,7 +441,7 @@
     "form": "ab439b1f"
   },
   "verification_tools_sha256": {
-    "verify_report.py": "cfdb2a1486226a91d60aadd1047f6e3e4d76a4a5a2052aac26cf51e38fdcff3b",
+    "verify_report.py": "f2956275f3d7da63daca855782729e5c9864db03bb4c9c3d84989744c1baf453",
     "verification_calculations.py": "9ac916e796eab7676a4054b27d40674a25a0e78f8a5a9837f32ab9941381dea9"
   }
 }

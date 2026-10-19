@@ -192,7 +192,8 @@ def planning_materials(case,trace,binding,warning=None):
     for sid in ('04','09','10'):
         for entry in case.nodes()[sid]:
             node=case.get_node(entry['ref'])
-            if node['type'] not in ('scenario_table','unknown_explanation','analysis','assumption_table'):continue
+            # 正文分析段落已在报告里，附录只收情景表、假设表和缺口说明，避免整段重复。
+            if node['type'] not in ('scenario_table','unknown_explanation','assumption_table'):continue
             content=node.get('content',{})
             if node['type']=='analysis' and content.get('kind')=='heading':continue
             source=[evidence[e]['source'] for e in node.get('evidence_refs',[]) if e in evidence]
@@ -222,29 +223,10 @@ def gaokao_materials(root,rep,result,binding,warning=None):
     personal=[{'label':label,'value':value,'sections':'02；03—09（方向与选择约束）'} for label,value in rep.get('profile',{}).get('facts',[])]
     personal += [{'label':'优先级：'+label,'value':value,'sections':'02、03、05、10'} for label,value in rep.get('profile',{}).get('priorities',[])]
     personal += [{'label':'本人约束','value':v,'sections':'02、04—09'} for v in rep.get('profile',{}).get('constraints',[])]
-    numbers=[];gaps=[];seen_facts={}
-    # Legacy report authored claims did not carry field-level source references.
-    # Keep that limitation explicit instead of assigning a URL by numerical coincidence.
-    mapping={'summary':'01','profile':'02','directions':'03','roadmap':'04','news':'04','why':'05','list_notes':'05','research':'06','questions':'07','todo':'08','ask_me':'09','assumptions':'10','backtest':'10','methods':'10','hindsight':'11'}
-    for key,sid in mapping.items():
-        for path,value in leaves(rep.get(key,{})):
-            if isinstance(value,bool) or value is None:continue
-            tokens=NUMBER.findall(str(value))
-            if not tokens:continue
-            matches=list(NUMBER.finditer(str(value)))
-            for index,token in enumerate(tokens):
-                match=matches[index]
-                # Digits inside addresses are identifiers, not factual quantities.
-                if any(a.start()<=match.start()<a.end() for a in re.finditer(r'https?://[^\s；，。]+',str(value))):continue
-                fact=(str(value),token)
-                if fact in seen_facts:
-                    row=seen_facts[fact]
-                    if sid not in row['sections'].split('、'):row['sections']+='、'+sid
-                    continue
-                short=str(value)[max(0,match.start()-16):min(len(str(value)),match.end()+16)]
-                row={'label':'正文数字（旧资料待原文核对）','value':token,'sections':sid,'url':'','excerpt':'旧报告片段（非官方原文）：'+short,'provenance_status':'legacy_unmapped','report_pointer':'/'+key+path,'token_index':index}
-                numbers.append(row);seen_facts[fact]=row
-    if any(r.get('provenance_status')=='legacy_unmapped' for r in numbers):gaps.append({'label':'旧高考报告的部分文字数字缺逐项原文绑定','reason':'旧资料仅保留整理表、调研文字与来源清单，没有逐项原文摘录。上述“旧报告原句”不是官方原文，不应当作官方已核；须按第12节官网和附件整理表逐项复查。','url':''})
+    numbers=[]
+    # 旧高考报告的文字数字没有逐项绑定原文；只抄报告原句不能帮助核对，所以不列入核对表，
+    # 只如实说明。正文数字是否被改动由逐页文字校验和 body_numbers 覆盖。
+    gaps=[{'label':'正文文字里的院校、分数线等数字没有逐项原文摘录','reason':'这些数字来自第12节列出的官方原表和附件 report.json 的整理表，生成时没有逐条保存官方原句。核对时请按第12节官网逐项查；概率、位次和偏好分可用附件 candidates.csv、result.json 复算。','url':''}]
     for item in result.get('list',[]):
         for field,label in [('p_clear','单独过线'),('p_land','最终录取'),('expected_cut_rank','预测位次'),('utility','偏好分')]:
             numbers.append({'label':item['name']+'：'+label,'value':item[field],'sections':'01、05、10','institution':'录取线模型计算（群体回测口径）','formula':{'p_clear':f'{round(item[field]*result["params"]["sims"])} ÷ {result["params"]["sims"]}（单独过线事件数/模拟次数）' if field=='p_clear' else '', 'p_land':f'{round(item[field]*result["params"]["sims"])} ÷ {result["params"]["sims"]}（此前均未命中、本项命中事件数/模拟次数）' if field=='p_land' else '', 'expected_cut_rank':'历史位次先按登记漂移调整，再对数近期加权求均值，取exp并取整；参数见第10节，原序候选表见附件。', 'utility':'本人优先级和登记评分；专业组按专业事件效用加权。完整操作数在附件，复算给定序列，不证明组合最优。'}[field],'result':item[field]})

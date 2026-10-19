@@ -20,7 +20,7 @@
     "planning_workflow.py": "11717f0a5a3da33cc870959d127b86a952ce4390741dfce2f3953870498c632f",
     "operator_check.py": "a6552c0b63a8a6b5d15c9a1057fbc2884fb85435b1b102fbf4a48dd74c4e7ebb",
     "check_demos.py": "fc8e1625f9e052373756160514ad5c73db1e8451c233425918edb5bc839d9f63",
-    "report.py": "db42052c76611d2fa4005fc887bd2149ae30c03290101dd2dfc28b052ec631ec",
+    "report.py": "3be91d1e72908678c4291e198b7414823fb4b752b0874232c62cc7b320785e5d",
     "render_report.py": "e85ed74d89613ce9ba1017680c14ef385624b5892151b1c1ce472ef4e1748676",
     "profile_store.py": "1cfd828583598a65cf719a46447cb3112ef0170eb1a638b89ab023cb47a04e7f"
   },
@@ -408,66 +408,12 @@
       "ref": "{{c:/reserve_ceiling|comma}}",
       "value": 10000,
       "display": "10,000"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{p:/fields/12/value/living|comma}}",
-      "value": 1500,
-      "display": "1,500"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{e:E020#/value}}",
-      "value": 12,
-      "display": "12"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{c:/known_living|comma}}",
-      "value": 18000,
-      "display": "18,000"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{c:/nonliving_ceiling|comma}}",
-      "value": 14000,
-      "display": "14,000"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{p:/fields/12/value/higher_living|comma}}",
-      "value": 1900,
-      "display": "1,900"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{c:/higher_living|comma}}",
-      "value": 22800,
-      "display": "22,800"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{c:/higher_living_ceiling|comma}}",
-      "value": 9200,
-      "display": "9,200"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{p:/fields/12/value/reserve|comma}}",
-      "value": 4000,
-      "display": "4,000"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{c:/reserve_ceiling|comma}}",
-      "value": 10000,
-      "display": "10,000"
     }
   ],
   "artifacts": {
     "report.md": "5a822a3b5cceeb541ade0af4c833e696abd8ec4cffb3fcfd5fa3e72db9e115c6",
-    "report.html": "b3274ac85f152d5b230bcddb9d309a5ba510fdcbac1dc983c0f44b030cebe564",
-    "report.pdf": "4f3f506e82d2ba8993c7b85c497b4d48e66082e1de237f979abacc98474012a5"
+    "report.html": "08de5022589a810f826a474c3d0df33d9956405f77154d63eb8397ac27db2a97",
+    "report.pdf": "88d9fcd33452aeec5f29aefa04362bed69932730a15e3b556cab62ec3fe0658b"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "report_profile": {
@@ -477,7 +423,7 @@
     "form": "8bcf0611"
   },
   "verification_tools_sha256": {
-    "verify_report.py": "cfdb2a1486226a91d60aadd1047f6e3e4d76a4a5a2052aac26cf51e38fdcff3b",
+    "verify_report.py": "f2956275f3d7da63daca855782729e5c9864db03bb4c9c3d84989744c1baf453",
     "verification_calculations.py": "9ac916e796eab7676a4054b27d40674a25a0e78f8a5a9837f32ab9941381dea9"
   }
 }

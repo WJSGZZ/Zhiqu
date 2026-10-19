@@ -19,7 +19,7 @@
     "planning_workflow.py": "11717f0a5a3da33cc870959d127b86a952ce4390741dfce2f3953870498c632f",
     "operator_check.py": "a6552c0b63a8a6b5d15c9a1057fbc2884fb85435b1b102fbf4a48dd74c4e7ebb",
     "check_demos.py": "fc8e1625f9e052373756160514ad5c73db1e8451c233425918edb5bc839d9f63",
-    "report.py": "db42052c76611d2fa4005fc887bd2149ae30c03290101dd2dfc28b052ec631ec",
+    "report.py": "3be91d1e72908678c4291e198b7414823fb4b752b0874232c62cc7b320785e5d",
     "render_report.py": "e85ed74d89613ce9ba1017680c14ef385624b5892151b1c1ce472ef4e1748676",
     "profile_store.py": "1cfd828583598a65cf719a46447cb3112ef0170eb1a638b89ab023cb47a04e7f"
   },
@@ -1715,144 +1715,12 @@
       "ref": "{{k:/target_year}}",
       "value": 2027,
       "display": "2027"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{p:/fields/3/value/mean|1f}}",
-      "value": 80.2,
-      "display": "80.2"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{k:/target_year}}",
-      "value": 2027,
-      "display": "2027"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{e:E1002#/value}}",
-      "value": "0858",
-      "display": "0858"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{e:E0008#/value|comma}}",
-      "value": 8000,
-      "display": "8,000"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{e:E1001#/value}}",
-      "value": 3,
-      "display": "3"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{e:E1028#/value}}",
-      "value": 600,
-      "display": "600"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{e:E1029#/value|comma}}",
-      "value": 1400,
-      "display": "1,400"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{c:/report_parameters/budget__annual_housing|comma}}",
-      "value": 1600,
-      "display": "1,600"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{e:E1023#/value}}",
-      "value": 2026,
-      "display": "2026"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{e:E1017#/value}}",
-      "value": "085801",
-      "display": "085801"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{e:E1030#/value|comma}}",
-      "value": 12000,
-      "display": "12,000"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{e:E1031#/value}}",
-      "value": 3,
-      "display": "3"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{e:E1032#/value|comma}}",
-      "value": 15000,
-      "display": "15,000"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{k:/budget/annual_limit|comma}}",
-      "value": 30000,
-      "display": "30,000"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{k:/target_year}}",
-      "value": 2027,
-      "display": "2027"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{e:E1023#/value}}",
-      "value": 2026,
-      "display": "2026"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{k:/target_year}}",
-      "value": 2027,
-      "display": "2027"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{k:/target_year}}",
-      "value": 2027,
-      "display": "2027"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{k:/target_year}}",
-      "value": 2027,
-      "display": "2027"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{e:E1033#/value|comma}}",
-      "value": 5000,
-      "display": "5,000"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{e:E1034#/value}}",
-      "value": "100%",
-      "display": "100%"
-    },
-    {
-      "location": "appendix",
-      "ref": "{{e:E1035#/value|comma}}",
-      "value": 6000,
-      "display": "6,000"
     }
   ],
   "artifacts": {
     "report.md": "10dbee42ff513d6cd8b0cd4b9742fa792d68860a95a9d816e8c221b15f5f6195",
-    "report.html": "e6a15957919a61366ba8a809d6de93f1d4001e771b0bfdcda52c48b507e0bfc6",
-    "report.pdf": "3f21f3ba70919165c2220d5e0b03aeff071cff36b7dd4fe36d7361e3f9f51bc0"
+    "report.html": "5ccc67d1c31eedbe48d6a265afb46eae7bf60085433b525b3268b77b2039eaae",
+    "report.pdf": "5a4cba0416919d7ce03b2883ffd97faec1b9151ac212fb841c5c9b4a02a20434"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "report_profile": {
@@ -1862,7 +1730,7 @@
     "form": null
   },
   "verification_tools_sha256": {
-    "verify_report.py": "cfdb2a1486226a91d60aadd1047f6e3e4d76a4a5a2052aac26cf51e38fdcff3b",
+    "verify_report.py": "f2956275f3d7da63daca855782729e5c9864db03bb4c9c3d84989744c1baf453",
     "verification_calculations.py": "9ac916e796eab7676a4054b27d40674a25a0e78f8a5a9837f32ab9941381dea9"
   }
 }

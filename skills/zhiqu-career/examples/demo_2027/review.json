@@ -106,12 +106,24 @@
     "narrative.json": "68bcf0b7ceed018f59f25d5985f288cf82b031288c786c0fd13f24d102cf2e48",
     "profile.txt": "69dfeb57cf005a4ace3990e51a96b3b821e9de0c130dd1f8eae5b2088f5bef5e",
     "report.md": "77f566208464a0aae4ba61541e137a2803636efa1e1fbd7dad365992e34fe792",
-    "report.html": "38e8fc1ebe16d59229b4c6b39c4a14ffad04d414bb5aa7e136f1a1edfe84b869",
-    "report.pdf": "e9d8a0a48a916ba42a77d22f7432c3a2161b6c1d1039afdfe150427bd9801e3a",
-    "report_trace.json": "768cdb8f2b4451e296f806bf6f34748be6f1a5b00434194529d8d680956293b0",
+    "report.html": "6056301aff49aeed606e8a065b740ac14aba24b79301355b812c4db00ebb94f2",
+    "report.pdf": "61ae6ad65a4b31d2307285c4d5fd53fbe337a2b120606366d087b84d4b238e23",
+    "report_trace.json": "6f6b9b7583acf67675066459c9b6dbac29d5274324dd0dd1316611f4fce10d9e",
     "operator_check.md": "23683bf5d5e842b4c525b3fe92e602a0ca7d863b845d554d9e8adc094d56d9d5",
     "profile_snapshot.json": "0a6cb6835c42b9e3a0e18679bd40d3c99c433453287f9e2a231e357647a858d9"
   },
   "checklist_update_note": "仅核查单表述及核查工具记录更新；报告与计算原件未改。保留历史复核记录，当前仍等待独立审核，不是重新批准。",
-  "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。"
+  "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。",
+  "snapshot_refreshes": [
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "核对附录改为紧凑排版后重新生成；正文 report.md 与全部输入文件未变，自评结论不受影响。"
+    }
+  ]
 }

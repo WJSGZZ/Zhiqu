@@ -17,10 +17,10 @@
   ],
   "source_sha256": {
     "case.json": "0e0ef3fd3e87f08167bcc9ec676ac81e7f391e57fbd1ac154def904303789286",
-    "report.json": "6628e8723a08c0ececf67b028656fa2c2726b3c4bdf75f910201a223f60ac38e",
+    "report.json": "cc217bd836019762807b46d16e92f427ef382f715d4d74cec1ee3a7226265a7d",
     "result.json": "5fa876a2a849387436850578e4d7d680e753376b1d436c24337bd6a80c9ada3e"
   },
   "artifacts": {
-    "report.pdf": "861c25a2c2308f9822ff03a75cef3fc1a96972a57bc3cc5172cc5c236d4c55dc"
+    "report.pdf": "73c6656fee1379aff1f8a79c403a95c826778418fcd69a555f9420aa88137407"
   }
 }

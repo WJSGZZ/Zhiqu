@@ -34,7 +34,8 @@ class WorkflowTests(unittest.TestCase):
     def test_html_table_detects_changed_probability_and_missing_rows(self):
         html = report.build(self.rep, self.result)
         self.assertEqual(check_report(self.rep, self.result, html), [])
-        changed = re.sub(r"<td class=[\"\']r[\"\']>[^<]*\d+%</td>", "<td class='r'>999%</td>", html, count=1)
+        # 数字外有防断行的 number-run 包装；改动其中一个概率值。
+        changed = re.sub(r"(<td class=[\"\']r[\"\']>[^<]*<span class=\"number-run\">)\d+%(</span>)", r"\g<1>999%\2", html, count=1)
         self.assertNotEqual(changed, html)
         self.assertTrue(check_report(self.rep, self.result, changed))
         self.assertTrue(check_report(self.rep, self.result, '<html></html>'))
