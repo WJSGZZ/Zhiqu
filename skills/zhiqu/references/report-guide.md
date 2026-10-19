@@ -189,4 +189,4 @@ python3 scripts/audit_skill.py --external
 
 读研、求职的Markdown组件及来源尾注写法见`../scripts/render_report.py`顶部说明。区间点图缺数据时明确“未取到”，不画假零值；比较矩阵用✓/△/✗分别表示已支持、待核/有条件、已不符，不能只凭样式替本人下结论。路线卡固定门槛、时间窗口、投入、切换条件四栏。新增计算须写入对应calculations并能由检查程序重算。
 
-T10 的高考[内容合同清单](report-contract.json)只登记既有12节及落点条、单独过线图、方向矩阵，数量和概率权限仍由现有 check_sections / check_grade 决定；不替换原门槛。C/D级单独过线只允许分档/区间说明，不绘精确概率条。操控者核查与共用评分见[工作流总纲](../../zhiqu-shared/references/report-workflow.md)；当前为规格，工具接入另行验收。
+高考[内容合同清单](report-contract.json)只登记既有12节及落点条、单独过线图、方向矩阵，数量和概率权限仍由现有 check_sections / check_grade 决定；不替换原门槛。C/D级单独过线只允许分档/区间说明，不绘精确概率条。操控者核查与共用评分见[工作流总纲](../../zhiqu-shared/references/report-workflow.md)。

@@ -1,1158 +1,1902 @@
 {
-  "schema_version": 1,
-  "implementation_status": "specification_pending_tools",
-  "shared_rules": "../../zhiqu-shared/references/report-workflow.md",
-  "narrative_policy": {
-    "only_registered_keys": true,
-    "no_handwritten_markdown_report": true,
-    "numeric_tokens": [
-      "{{e:E001#/value}}",
-      "{{c:/annual_cost}}"
-    ]
-  },
-  "publication_gates": [
-    "contract",
-    "numeric_trace",
-    "render",
-    "layout",
-    "long_urls",
-    "svg_title_and_source"
-  ],
-  "trace_policy": {
-    "evidence_file": "evidence.json",
-    "calculation_file": "calculations.json",
-    "trace_file": "report_trace.json",
-    "semantic_numbers_require_refs": true,
-    "structural_numbers": [
-      "section_number",
-      "source_number",
-      "page_number",
-      "report_id"
-    ],
-    "urls_only_in_section": "12"
-  },
-  "matrix_policy": {
-    "min_options": 3,
-    "min_dimensions": 4,
-    "unknown_ratio_explanation_above": 0.7,
-    "unknown_explanation_fields": [
-      "missing_information",
-      "retrieval_plan",
-      "decision_changes"
-    ]
-  },
-  "figure_policy": {
-    "required": [
-      "title",
-      "caption",
-      "source_refs"
-    ],
-    "missing_data": "explicit_unavailable_or_not_applicable_no_zero_or_invented_points"
-  },
-  "source_numbering": "stable_evidence_ids_in_first_use_order",
-  "review_policy": "shared_rules#六复核与评分",
-  "kind": "career",
-  "section_count": 12,
-  "context_fields": [
-    "offer_basis",
-    "as_of"
-  ],
-  "sections": [
-    {
-      "id": "01",
-      "role": "summary",
-      "default_title": "摘要",
-      "title_override_allowed": true,
-      "slots": [
-        {
-          "key": "lead",
-          "component": "conclusion_sentence",
-          "min": 1,
-          "max": 1,
-          "from": [
-            {
-              "file": "narrative.json",
-              "pointer": "/sections/01/lead"
-            }
-          ],
-          "source_required": true,
-          "condition": "always",
-          "rules": [
-            "one_sentence",
-            "bold",
-            "matches_judgment"
-          ],
-          "narrative_key": "01.lead",
-          "count_by": "components"
-        },
-        {
-          "key": "kpis",
-          "component": "kpi",
-          "min": 3,
-          "max": 4,
-          "from": [
-            {
-              "file": "judgment.json",
-              "pointer": "/kpis"
-            },
-            {
-              "file": "evidence.json",
-              "pointer": "/items"
-            },
-            {
-              "file": "calculations.json",
-              "pointer": ""
-            }
-          ],
-          "source_required": true,
-          "condition": "always",
-          "rules": [
-            "label_value_interpretation",
-            "each_value_has_ref",
-            "unknown_value_needs_reason"
-          ],
-          "count_by": "items"
-        },
-        {
-          "key": "core_points",
-          "component": "titled_points",
-          "min": 3,
-          "max": 5,
-          "from": [
-            {
-              "file": "narrative.json",
-              "pointer": "/sections/01/core_points"
-            },
-            {
-              "file": "judgment.json",
-              "pointer": "/recommendation"
-            }
-          ],
-          "source_required": true,
-          "condition": "always",
-          "rules": [
-            "title_and_one_sentence_per_item",
-            "links_judgment_ids"
-          ],
-          "narrative_key": "01.core_points",
-          "count_by": "items"
-        },
-        {
-          "key": "actions",
-          "component": "dated_actions",
-          "min": 3,
-          "max": 3,
-          "from": [
-            {
-              "file": "judgment.json",
-              "pointer": "/actions"
-            }
-          ],
-          "source_required": true,
-          "condition": "always",
-          "rules": [
-            "each_has_action_and_date",
-            "date_ref_resolves",
-            "official_or_personal_checkpoint_distinguished"
-          ],
-          "count_by": "items"
-        },
-        {
-          "key": "checkpoint",
-          "component": "checkpoint",
-          "min": 1,
-          "max": 1,
-          "from": [
-            {
-              "file": "judgment.json",
-              "pointer": "/checkpoint"
-            }
-          ],
-          "source_required": true,
-          "condition": "always",
-          "rules": [
-            "date_and_trigger"
-          ],
-          "count_by": "components"
-        }
-      ]
-    },
-    {
-      "id": "02",
-      "role": "profile",
-      "default_title": "你的画像",
-      "title_override_allowed": true,
-      "slots": [
-        {
-          "key": "lead",
-          "component": "conclusion_sentence",
-          "min": 1,
-          "max": 1,
-          "from": [
-            {
-              "file": "narrative.json",
-              "pointer": "/sections/02/lead"
-            }
-          ],
-          "source_required": true,
-          "condition": "always",
-          "rules": [
-            "one_sentence",
-            "bold",
-            "matches_judgment"
-          ],
-          "narrative_key": "02.lead",
-          "count_by": "components"
-        },
-        {
-          "key": "profile",
-          "component": "profile_table",
-          "min": 1,
-          "max": 1,
-          "from": [
-            {
-              "file": "profile_parse.json",
-              "pointer": "/fields"
-            },
-            {
-              "file": "profile_parse.json",
-              "pointer": "/missing"
-            }
-          ],
-          "source_required": true,
-          "condition": "always",
-          "rules": [
-            "four_categories",
-            "given_inferred_unknown",
-            "quote_and_section_locator",
-            "missing_information_visible"
-          ],
-          "count_by": "components"
-        },
-        {
-          "key": "analysis",
-          "component": "analysis",
-          "min": 1,
-          "max": 8,
-          "from": [
-            {
-              "file": "narrative.json",
-              "pointer": "/sections/02/analysis"
-            }
-          ],
-          "source_required": true,
-          "condition": "always",
-          "rules": [
-            "fact_numbers_use_reference_tokens",
-            "claims_link_evidence_or_judgment"
-          ],
-          "narrative_key": "02.analysis",
-          "count_by": "items"
-        }
-      ]
-    },
-    {
-      "id": "03",
-      "role": "decision_problem",
-      "default_title": "你看重什么、卡在哪",
-      "title_override_allowed": true,
-      "slots": [
-        {
-          "key": "lead",
-          "component": "conclusion_sentence",
-          "min": 1,
-          "max": 1,
-          "from": [
-            {
-              "file": "narrative.json",
-              "pointer": "/sections/03/lead"
-            }
-          ],
-          "source_required": true,
-          "condition": "always",
-          "rules": [
-            "one_sentence",
-            "bold",
-            "matches_judgment"
-          ],
-          "narrative_key": "03.lead",
-          "count_by": "components"
-        },
-        {
-          "key": "questions",
-          "component": "decision_questions",
-          "min": 1,
-          "max": 3,
-          "from": [
-            {
-              "file": "directions.json",
-              "pointer": "/questions"
-            }
-          ],
-          "source_required": true,
-          "condition": "always",
-          "rules": [],
-          "count_by": "items"
-        },
-        {
-          "key": "analysis",
-          "component": "analysis",
-          "min": 1,
-          "max": 8,
-          "from": [
-            {
-              "file": "narrative.json",
-              "pointer": "/sections/03/analysis"
-            }
-          ],
-          "source_required": true,
-          "condition": "always",
-          "rules": [
-            "fact_numbers_use_reference_tokens",
-            "claims_link_evidence_or_judgment"
-          ],
-          "narrative_key": "03.analysis",
-          "count_by": "items"
-        }
-      ]
-    },
-    {
-      "id": "04",
-      "role": "directions",
-      "default_title": "候选方向",
-      "title_override_allowed": true,
-      "slots": [
-        {
-          "key": "lead",
-          "component": "conclusion_sentence",
-          "min": 1,
-          "max": 1,
-          "from": [
-            {
-              "file": "narrative.json",
-              "pointer": "/sections/04/lead"
-            }
-          ],
-          "source_required": true,
-          "condition": "always",
-          "rules": [
-            "one_sentence",
-            "bold",
-            "matches_judgment"
-          ],
-          "narrative_key": "04.lead",
-          "count_by": "components"
-        },
-        {
-          "key": "directions",
-          "component": "direction_cards",
-          "min": 2,
-          "max": 4,
-          "from": [
-            {
-              "file": "directions.json",
-              "pointer": "/directions"
-            }
-          ],
-          "source_required": true,
-          "condition": "always",
-          "rules": [
-            "support",
-            "counter",
-            "verification",
-            "entry_requirements",
-            "conditional_outlook"
-          ],
-          "count_by": "items"
-        },
-        {
-          "key": "analysis",
-          "component": "analysis",
-          "min": 1,
-          "max": 8,
-          "from": [
-            {
-              "file": "narrative.json",
-              "pointer": "/sections/04/analysis"
-            }
-          ],
-          "source_required": true,
-          "condition": "always",
-          "rules": [
-            "fact_numbers_use_reference_tokens",
-            "claims_link_evidence_or_judgment"
-          ],
-          "narrative_key": "04.analysis",
-          "count_by": "items"
-        }
-      ]
-    },
-    {
-      "id": "05",
-      "role": "comparison",
-      "default_title": "方向比较",
-      "title_override_allowed": true,
-      "slots": [
-        {
-          "key": "lead",
-          "component": "conclusion_sentence",
-          "min": 1,
-          "max": 1,
-          "from": [
-            {
-              "file": "narrative.json",
-              "pointer": "/sections/05/lead"
-            }
-          ],
-          "source_required": true,
-          "condition": "always",
-          "rules": [
-            "one_sentence",
-            "bold",
-            "matches_judgment"
-          ],
-          "narrative_key": "05.lead",
-          "count_by": "components"
-        },
-        {
-          "key": "matrix",
-          "component": "comparison_matrix",
-          "min": 1,
-          "max": 1,
-          "from": [
-            {
-              "file": "judgment.json",
-              "pointer": "/matrix"
-            },
-            {
-              "file": "candidates.json",
-              "pointer": "/job_types"
-            }
-          ],
-          "source_required": true,
-          "condition": "always",
-          "rules": [
-            "matrix_policy",
-            "four_or_more_dimensions",
-            "unknown_cells_keep_status"
-          ],
-          "count_by": "components",
-          "narrative_key": "05.matrix_text",
-          "narrative_type": "figure_text"
-        },
-        {
-          "key": "analysis",
-          "component": "analysis",
-          "min": 1,
-          "max": 8,
-          "from": [
-            {
-              "file": "narrative.json",
-              "pointer": "/sections/05/analysis"
-            }
-          ],
-          "source_required": true,
-          "condition": "always",
-          "rules": [
-            "fact_numbers_use_reference_tokens",
-            "claims_link_evidence_or_judgment"
-          ],
-          "narrative_key": "05.analysis",
-          "count_by": "items"
-        },
-        {
-          "key": "unknown_explanation",
-          "component": "unknown_explanation",
-          "min": 1,
-          "max": 1,
-          "from": [
-            {
-              "file": "narrative.json",
-              "pointer": "/sections/05/unknown_explanation"
-            }
-          ],
-          "source_required": true,
-          "condition": "matrix_unknown_ratio_gt_0_7",
-          "rules": [
-            "matrix_policy.unknown_explanation_fields"
-          ],
-          "narrative_key": "05.unknown_explanation",
-          "otherwise": "omit_explanation_only_when_threshold_not_exceeded",
-          "count_by": "components"
-        }
-      ]
-    },
-    {
-      "id": "06",
-      "role": "candidates",
-      "default_title": "目标岗位清单",
-      "title_override_allowed": true,
-      "slots": [
-        {
-          "key": "lead",
-          "component": "conclusion_sentence",
-          "min": 1,
-          "max": 1,
-          "from": [
-            {
-              "file": "narrative.json",
-              "pointer": "/sections/06/lead"
-            }
-          ],
-          "source_required": true,
-          "condition": "always",
-          "rules": [
-            "one_sentence",
-            "bold",
-            "matches_judgment"
-          ],
-          "narrative_key": "06.lead",
-          "count_by": "components"
-        },
-        {
-          "key": "candidates",
-          "component": "candidate_table",
-          "min": 3,
-          "max": null,
-          "from": [
-            {
-              "file": "candidates.json",
-              "pointer": ""
-            },
-            {
-              "file": "judgment.json",
-              "pointer": "/candidates"
-            }
-          ],
-          "source_required": true,
-          "condition": "always",
-          "rules": [
-            "supports",
-            "counters",
-            "costs",
-            "fallback",
-            "hard_conditions_and_evidence",
-            "three_distinct_job_types",
-            "no_job_ad_is_not_a_verified_vacancy"
-          ],
-          "count_by": "items"
-        },
-        {
-          "key": "analysis",
-          "component": "analysis",
-          "min": 1,
-          "max": 8,
-          "from": [
-            {
-              "file": "narrative.json",
-              "pointer": "/sections/06/analysis"
-            }
-          ],
-          "source_required": true,
-          "condition": "always",
-          "rules": [
-            "fact_numbers_use_reference_tokens",
-            "claims_link_evidence_or_judgment"
-          ],
-          "narrative_key": "06.analysis",
-          "count_by": "items"
-        }
-      ]
-    },
-    {
-      "id": "07",
-      "role": "timeline",
-      "default_title": "时间窗口与检查点",
-      "title_override_allowed": true,
-      "slots": [
-        {
-          "key": "lead",
-          "component": "conclusion_sentence",
-          "min": 1,
-          "max": 1,
-          "from": [
-            {
-              "file": "narrative.json",
-              "pointer": "/sections/07/lead"
-            }
-          ],
-          "source_required": true,
-          "condition": "always",
-          "rules": [
-            "one_sentence",
-            "bold",
-            "matches_judgment"
-          ],
-          "narrative_key": "07.lead",
-          "count_by": "components"
-        },
-        {
-          "key": "timeline",
-          "component": "timeline",
-          "min": 1,
-          "max": 1,
-          "from": [
-            {
-              "file": "judgment.json",
-              "pointer": "/timeline"
-            }
-          ],
-          "source_required": true,
-          "condition": "always",
-          "rules": [
-            "month_axis",
-            "task_and_deadline",
-            "checkpoint_markers",
-            "dates_ref_resolve",
-            "official_and_personal_dates_distinguished"
-          ],
-          "count_by": "components",
-          "narrative_key": "07.timeline_text",
-          "narrative_type": "figure_text"
-        },
-        {
-          "key": "analysis",
-          "component": "analysis",
-          "min": 1,
-          "max": 8,
-          "from": [
-            {
-              "file": "narrative.json",
-              "pointer": "/sections/07/analysis"
-            }
-          ],
-          "source_required": true,
-          "condition": "always",
-          "rules": [
-            "fact_numbers_use_reference_tokens",
-            "claims_link_evidence_or_judgment"
-          ],
-          "narrative_key": "07.analysis",
-          "count_by": "items"
-        }
-      ]
-    },
-    {
-      "id": "08",
-      "role": "routes",
-      "default_title": "行动路线",
-      "title_override_allowed": true,
-      "slots": [
-        {
-          "key": "lead",
-          "component": "conclusion_sentence",
-          "min": 1,
-          "max": 1,
-          "from": [
-            {
-              "file": "narrative.json",
-              "pointer": "/sections/08/lead"
-            }
-          ],
-          "source_required": true,
-          "condition": "always",
-          "rules": [
-            "one_sentence",
-            "bold",
-            "matches_judgment"
-          ],
-          "narrative_key": "08.lead",
-          "count_by": "components"
-        },
-        {
-          "key": "routes",
-          "component": "route_cards",
-          "min": 1,
-          "max": null,
-          "from": [
-            {
-              "file": "judgment.json",
-              "pointer": "/routes"
-            },
-            {
-              "file": "candidates.json",
-              "pointer": ""
-            }
-          ],
-          "source_required": true,
-          "condition": "always",
-          "rules": [
-            "one_per_action_path",
-            "four_fields:threshold,time_window,investment,switch_condition",
-            "links_candidate_ids"
-          ],
-          "count_by": "items"
-        },
-        {
-          "key": "analysis",
-          "component": "analysis",
-          "min": 1,
-          "max": 8,
-          "from": [
-            {
-              "file": "narrative.json",
-              "pointer": "/sections/08/analysis"
-            }
-          ],
-          "source_required": true,
-          "condition": "always",
-          "rules": [
-            "fact_numbers_use_reference_tokens",
-            "claims_link_evidence_or_judgment"
-          ],
-          "narrative_key": "08.analysis",
-          "count_by": "items"
-        }
-      ]
-    },
-    {
-      "id": "09",
-      "role": "offer_comparison",
-      "default_title": "offer 比较",
-      "title_override_allowed": true,
-      "slots": [
-        {
-          "key": "lead",
-          "component": "conclusion_sentence",
-          "min": 1,
-          "max": 1,
-          "from": [
-            {
-              "file": "narrative.json",
-              "pointer": "/sections/09/lead"
-            }
-          ],
-          "source_required": true,
-          "condition": "always",
-          "rules": [
-            "one_sentence",
-            "bold",
-            "matches_judgment"
-          ],
-          "narrative_key": "09.lead",
-          "count_by": "components"
-        },
-        {
-          "key": "offers",
-          "component": "offer_table",
-          "min": 1,
-          "max": 1,
-          "from": [
-            {
-              "file": "calculations.json",
-              "pointer": ""
-            },
-            {
-              "file": "evidence.json",
-              "pointer": "/items"
-            }
-          ],
-          "source_required": true,
-          "condition": "offer_basis_actual_or_scenario",
-          "rules": [
-            "basis_actual_or_scenario_visible",
-            "same_year_and_months",
-            "no_real_offer_without_evidence"
-          ],
-          "otherwise": "explicit_no_offer_and_input_gaps",
-          "count_by": "components"
-        },
-        {
-          "key": "annual_income",
-          "component": "bars",
-          "min": 1,
-          "max": 1,
-          "from": [
-            {
-              "file": "calculations.json",
-              "pointer": ""
-            },
-            {
-              "file": "evidence.json",
-              "pointer": "/items"
-            }
-          ],
-          "source_required": true,
-          "condition": "offer_basis_actual_or_scenario",
-          "rules": [
-            "annual_take_home_cash",
-            "not_gross_or_housing_fund"
-          ],
-          "otherwise": "explicit_no_offer_and_input_gaps",
-          "count_by": "components",
-          "narrative_key": "09.annual_income_text",
-          "narrative_type": "figure_text"
-        },
-        {
-          "key": "hourly_income",
-          "component": "bars",
-          "min": 1,
-          "max": 1,
-          "from": [
-            {
-              "file": "calculations.json",
-              "pointer": ""
-            },
-            {
-              "file": "evidence.json",
-              "pointer": "/items"
-            }
-          ],
-          "source_required": true,
-          "condition": "offer_basis_actual_or_scenario",
-          "rules": [
-            "cash_divided_by_actual_hours"
-          ],
-          "otherwise": "explicit_no_offer_and_input_gaps",
-          "count_by": "components",
-          "narrative_key": "09.hourly_income_text",
-          "narrative_type": "figure_text"
-        },
-        {
-          "key": "monthly_balance",
-          "component": "bars",
-          "min": 1,
-          "max": 1,
-          "from": [
-            {
-              "file": "calculations.json",
-              "pointer": ""
-            },
-            {
-              "file": "evidence.json",
-              "pointer": "/items"
-            }
-          ],
-          "source_required": true,
-          "condition": "offer_basis_actual_or_scenario",
-          "rules": [
-            "subtract_housing_and_necessary_costs",
-            "ordinary_month_if_bonus_averaged"
-          ],
-          "otherwise": "explicit_no_offer_and_input_gaps",
-          "count_by": "components",
-          "narrative_key": "09.monthly_balance_text",
-          "narrative_type": "figure_text"
-        },
-        {
-          "key": "analysis",
-          "component": "analysis",
-          "min": 1,
-          "max": 8,
-          "from": [
-            {
-              "file": "narrative.json",
-              "pointer": "/sections/09/analysis"
-            }
-          ],
-          "source_required": true,
-          "condition": "always",
-          "rules": [
-            "fact_numbers_use_reference_tokens",
-            "claims_link_evidence_or_judgment"
-          ],
-          "narrative_key": "09.analysis",
-          "count_by": "items"
-        }
-      ]
-    },
-    {
-      "id": "10",
-      "role": "risks",
-      "default_title": "风险与权益",
-      "title_override_allowed": true,
-      "slots": [
-        {
-          "key": "lead",
-          "component": "conclusion_sentence",
-          "min": 1,
-          "max": 1,
-          "from": [
-            {
-              "file": "narrative.json",
-              "pointer": "/sections/10/lead"
-            }
-          ],
-          "source_required": true,
-          "condition": "always",
-          "rules": [
-            "one_sentence",
-            "bold",
-            "matches_judgment"
-          ],
-          "narrative_key": "10.lead",
-          "count_by": "components"
-        },
-        {
-          "key": "risks",
-          "component": "scenario_table",
-          "min": 3,
-          "max": null,
-          "from": [
-            {
-              "file": "judgment.json",
-              "pointer": "/risks"
-            }
-          ],
-          "source_required": true,
-          "condition": "always",
-          "rules": [
-            "trigger_and_response",
-            "fallback_or_switch",
-            "observable_not_probability"
-          ],
-          "count_by": "items"
-        },
-        {
-          "key": "analysis",
-          "component": "analysis",
-          "min": 1,
-          "max": 8,
-          "from": [
-            {
-              "file": "narrative.json",
-              "pointer": "/sections/10/analysis"
-            }
-          ],
-          "source_required": true,
-          "condition": "always",
-          "rules": [
-            "fact_numbers_use_reference_tokens",
-            "claims_link_evidence_or_judgment"
-          ],
-          "narrative_key": "10.analysis",
-          "count_by": "items"
-        }
-      ]
-    },
-    {
-      "id": "11",
-      "role": "questions",
-      "default_title": "追问清单",
-      "title_override_allowed": true,
-      "slots": [
-        {
-          "key": "lead",
-          "component": "conclusion_sentence",
-          "min": 1,
-          "max": 1,
-          "from": [
-            {
-              "file": "narrative.json",
-              "pointer": "/sections/11/lead"
-            }
-          ],
-          "source_required": true,
-          "condition": "always",
-          "rules": [
-            "one_sentence",
-            "bold",
-            "matches_judgment"
-          ],
-          "narrative_key": "11.lead",
-          "count_by": "components"
-        },
-        {
-          "key": "questions",
-          "component": "question_table",
-          "min": 1,
-          "max": null,
-          "from": [
-            {
-              "file": "judgment.json",
-              "pointer": "/questions"
-            },
-            {
-              "file": "profile_parse.json",
-              "pointer": "/missing"
-            }
-          ],
-          "source_required": true,
-          "condition": "always",
-          "rules": [
-            "personalized_question",
-            "where_to_check",
-            "how_answer_changes_decision"
-          ],
-          "count_by": "items"
-        },
-        {
-          "key": "analysis",
-          "component": "analysis",
-          "min": 1,
-          "max": 8,
-          "from": [
-            {
-              "file": "narrative.json",
-              "pointer": "/sections/11/analysis"
-            }
-          ],
-          "source_required": true,
-          "condition": "always",
-          "rules": [
-            "fact_numbers_use_reference_tokens",
-            "claims_link_evidence_or_judgment"
-          ],
-          "narrative_key": "11.analysis",
-          "count_by": "items"
-        }
-      ]
-    },
-    {
-      "id": "12",
-      "role": "methods_and_sources",
-      "default_title": "方法、数据来源与声明",
-      "title_override_allowed": true,
-      "slots": [
-        {
-          "key": "lead",
-          "component": "conclusion_sentence",
-          "min": 1,
-          "max": 1,
-          "from": [
-            {
-              "file": "narrative.json",
-              "pointer": "/sections/12/lead"
-            }
-          ],
-          "source_required": true,
-          "condition": "always",
-          "rules": [
-            "one_sentence",
-            "bold",
-            "matches_judgment"
-          ],
-          "narrative_key": "12.lead",
-          "count_by": "components"
-        },
-        {
-          "key": "assumptions",
-          "component": "assumption_table",
-          "min": 1,
-          "max": null,
-          "from": [
-            {
-              "file": "judgment.json",
-              "pointer": "/assumptions"
-            },
-            {
-              "file": "calculations.json",
-              "pointer": ""
-            },
-            {
-              "file": "evidence.json",
-              "pointer": "/items"
-            }
-          ],
-          "source_required": true,
-          "condition": "always",
-          "rules": [
-            "key_inputs",
-            "scope",
-            "uncertainty",
-            "observable_switch_conditions"
-          ],
-          "count_by": "items"
-        },
-        {
-          "key": "evidence_levels",
-          "component": "evidence_legend",
-          "min": 1,
-          "max": 1,
-          "from": [
-            {
-              "file": "evidence.json",
-              "pointer": "/items"
-            }
-          ],
-          "source_required": false,
-          "condition": "always",
-          "rules": [
-            "four_grades",
-            "actual_evidence_scope"
-          ],
-          "count_by": "components"
-        },
-        {
-          "key": "terms",
-          "component": "term_table",
-          "min": 1,
-          "max": 1,
-          "from": [
-            {
-              "file": "judgment.json",
-              "pointer": "/terms"
-            }
-          ],
-          "source_required": false,
-          "condition": "always",
-          "rules": [
-            "one_quantity_one_name"
-          ],
-          "count_by": "components"
-        },
-        {
-          "key": "analysis",
-          "component": "analysis",
-          "min": 1,
-          "max": 8,
-          "from": [
-            {
-              "file": "narrative.json",
-              "pointer": "/sections/12/analysis"
-            }
-          ],
-          "source_required": true,
-          "condition": "always",
-          "rules": [
-            "fact_numbers_use_reference_tokens",
-            "claims_link_evidence_or_judgment"
-          ],
-          "narrative_key": "12.analysis",
-          "count_by": "items"
-        },
-        {
-          "key": "sources",
-          "component": "source_endnotes",
-          "min": 1,
-          "max": 1,
-          "from": [
-            {
-              "file": "evidence.json",
-              "pointer": "/items"
-            }
-          ],
-          "source_required": true,
-          "condition": "always",
-          "rules": [
-            "all_used_ids",
-            "numbered",
-            "organization_url_dates_method_scope",
-            "no_private_paths"
-          ],
-          "count_by": "components"
-        },
-        {
-          "key": "disclaimer",
-          "component": "disclaimer",
-          "min": 1,
-          "max": 1,
-          "from": [
-            {
-              "file": "narrative.json",
-              "pointer": "/sections/12/disclaimer"
-            }
-          ],
-          "source_required": false,
-          "condition": "always",
-          "rules": [
-            "no_guaranteed_admission_or_employment",
-            "final_choice_remains_person"
-          ],
-          "narrative_key": "12.disclaimer",
-          "count_by": "components"
-        }
-      ]
-    }
+ "schema_version": 1,
+ "shared_rules": "../../zhiqu-shared/references/report-workflow.md",
+ "narrative_policy": {
+  "only_registered_keys": true,
+  "no_handwritten_markdown_report": true,
+  "numeric_tokens": [
+   "{{e:E001#/value}}",
+   "{{c:/annual_cost}}",
+   "{{k:/target_year}}",
+   "{{p:/fields/0/value}}"
   ]
+ },
+ "publication_gates": [
+  "contract",
+  "numeric_trace",
+  "render",
+  "layout",
+  "long_urls",
+  "svg_title_and_source"
+ ],
+ "trace_policy": {
+  "evidence_file": "evidence.json",
+  "calculation_file": "calculations.json",
+  "trace_file": "report_trace.json",
+  "semantic_numbers_require_refs": true,
+  "structural_numbers": [
+   "section_number",
+   "source_number",
+   "page_number",
+   "report_id"
+  ],
+  "urls_only_in_section": "12",
+  "registration_files": [
+   "case.json",
+   "profile_parse.json"
+  ],
+  "exempt": [
+   "section_number",
+   "source_number",
+   "page_number",
+   "report_id",
+   "report_count",
+   "ordinal",
+   "list_number"
+  ]
+ },
+ "matrix_policy": {
+  "min_options": 3,
+  "min_dimensions": 4,
+  "unknown_ratio_explanation_above": 0.7,
+  "unknown_explanation_fields": [
+   "missing_information",
+   "retrieval_plan",
+   "decision_changes"
+  ]
+ },
+ "figure_policy": {
+  "required": [
+   "title",
+   "caption",
+   "source_refs"
+  ],
+  "missing_data": "explicit_unavailable_or_not_applicable_no_zero_or_invented_points"
+ },
+ "source_numbering": "stable_evidence_ids_in_first_use_order",
+ "review_policy": "shared_rules#六复核与评分",
+ "kind": "career",
+ "section_count": 12,
+ "context_fields": [
+  "offer_basis",
+  "as_of"
+ ],
+ "sections": [
+  {
+   "id": "01",
+   "role": "summary",
+   "default_title": "摘要",
+   "title_override_allowed": true,
+   "slots": [
+    {
+     "key": "lead",
+     "component": "conclusion_sentence",
+     "min": 1,
+     "max": 1,
+     "from": [
+      {
+       "file": "narrative.json",
+       "pointer": "/sections/01/lead"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "one_sentence",
+      "bold",
+      "matches_judgment"
+     ],
+     "narrative_key": "01.lead",
+     "count_by": "components",
+     "node_types": [
+      "conclusion_sentence"
+     ]
+    },
+    {
+     "key": "kpis",
+     "component": "kpi",
+     "min": 3,
+     "max": 4,
+     "from": [
+      {
+       "file": "judgment.json",
+       "pointer": "/kpis"
+      },
+      {
+       "file": "evidence.json",
+       "pointer": "/items"
+      },
+      {
+       "file": "calculations.json",
+       "pointer": ""
+      },
+      {
+       "file": "judgment.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "evidence.json",
+       "pointer": "/report_blocks"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "label_value_interpretation",
+      "each_value_has_ref",
+      "unknown_value_needs_reason"
+     ],
+     "count_by": "items",
+     "node_types": [
+      "kpi"
+     ]
+    },
+    {
+     "key": "core_points",
+     "component": "titled_points",
+     "min": 3,
+     "max": 5,
+     "from": [
+      {
+       "file": "narrative.json",
+       "pointer": "/sections/01/core_points"
+      },
+      {
+       "file": "judgment.json",
+       "pointer": "/recommendation"
+      },
+      {
+       "file": "judgment.json",
+       "pointer": "/report_blocks"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "title_and_one_sentence_per_item",
+      "links_judgment_ids"
+     ],
+     "narrative_key": "01.core_points",
+     "count_by": "items",
+     "node_types": [
+      "titled_points"
+     ]
+    },
+    {
+     "key": "actions",
+     "component": "dated_actions",
+     "min": 3,
+     "max": 3,
+     "from": [
+      {
+       "file": "judgment.json",
+       "pointer": "/actions"
+      },
+      {
+       "file": "judgment.json",
+       "pointer": "/report_blocks"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "each_has_action_and_date",
+      "date_ref_resolves",
+      "official_or_personal_checkpoint_distinguished"
+     ],
+     "count_by": "items",
+     "node_types": [
+      "dated_actions"
+     ],
+     "heading": "接下来三件事"
+    },
+    {
+     "key": "checkpoint",
+     "component": "checkpoint",
+     "min": 1,
+     "max": 1,
+     "from": [
+      {
+       "file": "judgment.json",
+       "pointer": "/checkpoint"
+      },
+      {
+       "file": "judgment.json",
+       "pointer": "/report_blocks"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "date_and_trigger"
+     ],
+     "count_by": "components",
+     "node_types": [
+      "checkpoint"
+     ]
+    },
+    {
+     "key": "analysis",
+     "component": "analysis",
+     "min": 0,
+     "max": null,
+     "count_by": "items",
+     "from": [
+      {
+       "file": "narrative.json",
+       "pointer": "/sections/01/analysis"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "narrative_key": "01.analysis",
+     "node_types": [
+      "analysis"
+     ],
+     "rules": [
+      "claims_link_evidence_or_judgment"
+     ]
+    },
+    {
+     "key": "details",
+     "component": "data_table",
+     "min": 0,
+     "max": null,
+     "count_by": "components",
+     "from": [
+      {
+       "file": "profile_parse.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "directions.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "candidates.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "judgment.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "evidence.json",
+       "pointer": "/report_blocks"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "structured_stage_data_only"
+     ],
+     "node_types": [
+      "data_table"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "02",
+   "role": "profile",
+   "default_title": "你的画像",
+   "title_override_allowed": true,
+   "slots": [
+    {
+     "key": "lead",
+     "component": "conclusion_sentence",
+     "min": 1,
+     "max": 1,
+     "from": [
+      {
+       "file": "narrative.json",
+       "pointer": "/sections/02/lead"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "one_sentence",
+      "bold",
+      "matches_judgment"
+     ],
+     "narrative_key": "02.lead",
+     "count_by": "components",
+     "node_types": [
+      "conclusion_sentence"
+     ]
+    },
+    {
+     "key": "profile",
+     "component": "profile_table",
+     "min": 1,
+     "max": 1,
+     "from": [
+      {
+       "file": "profile_parse.json",
+       "pointer": "/fields"
+      },
+      {
+       "file": "profile_parse.json",
+       "pointer": "/missing"
+      },
+      {
+       "file": "profile_parse.json",
+       "pointer": "/report_blocks"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "four_categories",
+      "given_inferred_unknown",
+      "quote_and_section_locator",
+      "missing_information_visible"
+     ],
+     "count_by": "components",
+     "node_types": [
+      "profile_table"
+     ]
+    },
+    {
+     "key": "analysis",
+     "component": "analysis",
+     "min": 1,
+     "max": null,
+     "from": [
+      {
+       "file": "narrative.json",
+       "pointer": "/sections/02/analysis"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "fact_numbers_use_reference_tokens",
+      "claims_link_evidence_or_judgment"
+     ],
+     "narrative_key": "02.analysis",
+     "count_by": "items",
+     "node_types": [
+      "analysis"
+     ]
+    },
+    {
+     "key": "details",
+     "component": "data_table",
+     "min": 0,
+     "max": null,
+     "count_by": "components",
+     "from": [
+      {
+       "file": "profile_parse.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "directions.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "candidates.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "judgment.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "evidence.json",
+       "pointer": "/report_blocks"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "structured_stage_data_only"
+     ],
+     "node_types": [
+      "data_table"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "03",
+   "role": "decision_problem",
+   "default_title": "你看重什么、卡在哪",
+   "title_override_allowed": true,
+   "slots": [
+    {
+     "key": "lead",
+     "component": "conclusion_sentence",
+     "min": 1,
+     "max": 1,
+     "from": [
+      {
+       "file": "narrative.json",
+       "pointer": "/sections/03/lead"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "one_sentence",
+      "bold",
+      "matches_judgment"
+     ],
+     "narrative_key": "03.lead",
+     "count_by": "components",
+     "node_types": [
+      "conclusion_sentence"
+     ]
+    },
+    {
+     "key": "questions",
+     "component": "decision_questions",
+     "min": 1,
+     "max": 3,
+     "from": [
+      {
+       "file": "directions.json",
+       "pointer": "/questions"
+      },
+      {
+       "file": "directions.json",
+       "pointer": "/report_blocks"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [],
+     "count_by": "items",
+     "node_types": [
+      "decision_questions"
+     ]
+    },
+    {
+     "key": "analysis",
+     "component": "analysis",
+     "min": 1,
+     "max": null,
+     "from": [
+      {
+       "file": "narrative.json",
+       "pointer": "/sections/03/analysis"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "fact_numbers_use_reference_tokens",
+      "claims_link_evidence_or_judgment"
+     ],
+     "narrative_key": "03.analysis",
+     "count_by": "items",
+     "node_types": [
+      "analysis"
+     ]
+    },
+    {
+     "key": "details",
+     "component": "data_table",
+     "min": 0,
+     "max": null,
+     "count_by": "components",
+     "from": [
+      {
+       "file": "profile_parse.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "directions.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "candidates.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "judgment.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "evidence.json",
+       "pointer": "/report_blocks"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "structured_stage_data_only"
+     ],
+     "node_types": [
+      "data_table"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "04",
+   "role": "directions",
+   "default_title": "候选方向",
+   "title_override_allowed": true,
+   "slots": [
+    {
+     "key": "lead",
+     "component": "conclusion_sentence",
+     "min": 1,
+     "max": 1,
+     "from": [
+      {
+       "file": "narrative.json",
+       "pointer": "/sections/04/lead"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "one_sentence",
+      "bold",
+      "matches_judgment"
+     ],
+     "narrative_key": "04.lead",
+     "count_by": "components",
+     "node_types": [
+      "conclusion_sentence"
+     ]
+    },
+    {
+     "key": "directions",
+     "component": "direction_cards",
+     "min": 2,
+     "max": 4,
+     "from": [
+      {
+       "file": "directions.json",
+       "pointer": "/directions"
+      },
+      {
+       "file": "directions.json",
+       "pointer": "/report_blocks"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "support",
+      "counter",
+      "verification",
+      "entry_requirements",
+      "conditional_outlook"
+     ],
+     "count_by": "items",
+     "node_types": [
+      "direction_cards"
+     ]
+    },
+    {
+     "key": "analysis",
+     "component": "analysis",
+     "min": 1,
+     "max": null,
+     "from": [
+      {
+       "file": "narrative.json",
+       "pointer": "/sections/04/analysis"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "fact_numbers_use_reference_tokens",
+      "claims_link_evidence_or_judgment"
+     ],
+     "narrative_key": "04.analysis",
+     "count_by": "items",
+     "node_types": [
+      "analysis"
+     ]
+    },
+    {
+     "key": "details",
+     "component": "data_table",
+     "min": 0,
+     "max": null,
+     "count_by": "components",
+     "from": [
+      {
+       "file": "profile_parse.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "directions.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "candidates.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "judgment.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "evidence.json",
+       "pointer": "/report_blocks"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "structured_stage_data_only"
+     ],
+     "node_types": [
+      "data_table"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "05",
+   "role": "comparison",
+   "default_title": "方向比较",
+   "title_override_allowed": true,
+   "slots": [
+    {
+     "key": "lead",
+     "component": "conclusion_sentence",
+     "min": 1,
+     "max": 1,
+     "from": [
+      {
+       "file": "narrative.json",
+       "pointer": "/sections/05/lead"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "one_sentence",
+      "bold",
+      "matches_judgment"
+     ],
+     "narrative_key": "05.lead",
+     "count_by": "components",
+     "node_types": [
+      "conclusion_sentence"
+     ]
+    },
+    {
+     "key": "matrix",
+     "component": "comparison_matrix",
+     "min": 1,
+     "max": 1,
+     "from": [
+      {
+       "file": "judgment.json",
+       "pointer": "/matrix"
+      },
+      {
+       "file": "candidates.json",
+       "pointer": "/job_types"
+      },
+      {
+       "file": "judgment.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "candidates.json",
+       "pointer": "/report_blocks"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "matrix_policy",
+      "four_or_more_dimensions",
+      "unknown_cells_keep_status"
+     ],
+     "count_by": "components",
+     "narrative_key": "05.matrix_text",
+     "narrative_type": "figure_text",
+     "node_types": [
+      "comparison_matrix"
+     ]
+    },
+    {
+     "key": "analysis",
+     "component": "analysis",
+     "min": 1,
+     "max": null,
+     "from": [
+      {
+       "file": "narrative.json",
+       "pointer": "/sections/05/analysis"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "fact_numbers_use_reference_tokens",
+      "claims_link_evidence_or_judgment"
+     ],
+     "narrative_key": "05.analysis",
+     "count_by": "items",
+     "node_types": [
+      "analysis"
+     ]
+    },
+    {
+     "key": "unknown_explanation",
+     "component": "unknown_explanation",
+     "min": 1,
+     "max": 1,
+     "from": [
+      {
+       "file": "narrative.json",
+       "pointer": "/sections/05/unknown_explanation"
+      }
+     ],
+     "source_required": true,
+     "condition": "matrix_unknown_ratio_gt_0_7",
+     "rules": [
+      "matrix_policy.unknown_explanation_fields"
+     ],
+     "narrative_key": "05.unknown_explanation",
+     "otherwise": "omit_explanation_only_when_threshold_not_exceeded",
+     "count_by": "components",
+     "node_types": [
+      "unknown_explanation"
+     ]
+    },
+    {
+     "key": "details",
+     "component": "data_table",
+     "min": 0,
+     "max": null,
+     "count_by": "components",
+     "from": [
+      {
+       "file": "profile_parse.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "directions.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "candidates.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "judgment.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "evidence.json",
+       "pointer": "/report_blocks"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "structured_stage_data_only"
+     ],
+     "node_types": [
+      "data_table"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "06",
+   "role": "candidates",
+   "default_title": "目标岗位清单",
+   "title_override_allowed": true,
+   "slots": [
+    {
+     "key": "lead",
+     "component": "conclusion_sentence",
+     "min": 1,
+     "max": 1,
+     "from": [
+      {
+       "file": "narrative.json",
+       "pointer": "/sections/06/lead"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "one_sentence",
+      "bold",
+      "matches_judgment"
+     ],
+     "narrative_key": "06.lead",
+     "count_by": "components",
+     "node_types": [
+      "conclusion_sentence"
+     ]
+    },
+    {
+     "key": "candidates",
+     "component": "candidate_table",
+     "min": 3,
+     "max": null,
+     "from": [
+      {
+       "file": "candidates.json",
+       "pointer": ""
+      },
+      {
+       "file": "judgment.json",
+       "pointer": "/candidates"
+      },
+      {
+       "file": "candidates.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "judgment.json",
+       "pointer": "/report_blocks"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "supports",
+      "counters",
+      "costs",
+      "fallback",
+      "hard_conditions_and_evidence",
+      "three_distinct_job_types",
+      "no_job_ad_is_not_a_verified_vacancy"
+     ],
+     "count_by": "items",
+     "node_types": [
+      "candidate_table"
+     ]
+    },
+    {
+     "key": "analysis",
+     "component": "analysis",
+     "min": 1,
+     "max": null,
+     "from": [
+      {
+       "file": "narrative.json",
+       "pointer": "/sections/06/analysis"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "fact_numbers_use_reference_tokens",
+      "claims_link_evidence_or_judgment"
+     ],
+     "narrative_key": "06.analysis",
+     "count_by": "items",
+     "node_types": [
+      "analysis"
+     ]
+    },
+    {
+     "key": "details",
+     "component": "data_table",
+     "min": 0,
+     "max": null,
+     "count_by": "components",
+     "from": [
+      {
+       "file": "profile_parse.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "directions.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "candidates.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "judgment.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "evidence.json",
+       "pointer": "/report_blocks"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "structured_stage_data_only"
+     ],
+     "node_types": [
+      "data_table"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "07",
+   "role": "timeline",
+   "default_title": "时间窗口与检查点",
+   "title_override_allowed": true,
+   "slots": [
+    {
+     "key": "lead",
+     "component": "conclusion_sentence",
+     "min": 1,
+     "max": 1,
+     "from": [
+      {
+       "file": "narrative.json",
+       "pointer": "/sections/07/lead"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "one_sentence",
+      "bold",
+      "matches_judgment"
+     ],
+     "narrative_key": "07.lead",
+     "count_by": "components",
+     "node_types": [
+      "conclusion_sentence"
+     ]
+    },
+    {
+     "key": "timeline",
+     "component": "timeline",
+     "min": 1,
+     "max": 1,
+     "from": [
+      {
+       "file": "judgment.json",
+       "pointer": "/timeline"
+      },
+      {
+       "file": "judgment.json",
+       "pointer": "/report_blocks"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "month_axis",
+      "task_and_deadline",
+      "checkpoint_markers",
+      "dates_ref_resolve",
+      "official_and_personal_dates_distinguished"
+     ],
+     "count_by": "components",
+     "narrative_key": "07.timeline_text",
+     "narrative_type": "figure_text",
+     "node_types": [
+      "timeline"
+     ]
+    },
+    {
+     "key": "analysis",
+     "component": "analysis",
+     "min": 1,
+     "max": null,
+     "from": [
+      {
+       "file": "narrative.json",
+       "pointer": "/sections/07/analysis"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "fact_numbers_use_reference_tokens",
+      "claims_link_evidence_or_judgment"
+     ],
+     "narrative_key": "07.analysis",
+     "count_by": "items",
+     "node_types": [
+      "analysis"
+     ]
+    },
+    {
+     "key": "details",
+     "component": "data_table",
+     "min": 0,
+     "max": null,
+     "count_by": "components",
+     "from": [
+      {
+       "file": "profile_parse.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "directions.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "candidates.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "judgment.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "evidence.json",
+       "pointer": "/report_blocks"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "structured_stage_data_only"
+     ],
+     "node_types": [
+      "data_table"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "08",
+   "role": "routes",
+   "default_title": "行动路线",
+   "title_override_allowed": true,
+   "slots": [
+    {
+     "key": "lead",
+     "component": "conclusion_sentence",
+     "min": 1,
+     "max": 1,
+     "from": [
+      {
+       "file": "narrative.json",
+       "pointer": "/sections/08/lead"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "one_sentence",
+      "bold",
+      "matches_judgment"
+     ],
+     "narrative_key": "08.lead",
+     "count_by": "components",
+     "node_types": [
+      "conclusion_sentence"
+     ]
+    },
+    {
+     "key": "routes",
+     "component": "route_cards",
+     "min": 1,
+     "max": null,
+     "from": [
+      {
+       "file": "judgment.json",
+       "pointer": "/routes"
+      },
+      {
+       "file": "candidates.json",
+       "pointer": ""
+      },
+      {
+       "file": "judgment.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "candidates.json",
+       "pointer": "/report_blocks"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "one_per_action_path",
+      "four_fields:threshold,time_window,investment,switch_condition",
+      "links_candidate_ids"
+     ],
+     "count_by": "items",
+     "node_types": [
+      "route_cards"
+     ]
+    },
+    {
+     "key": "analysis",
+     "component": "analysis",
+     "min": 1,
+     "max": null,
+     "from": [
+      {
+       "file": "narrative.json",
+       "pointer": "/sections/08/analysis"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "fact_numbers_use_reference_tokens",
+      "claims_link_evidence_or_judgment"
+     ],
+     "narrative_key": "08.analysis",
+     "count_by": "items",
+     "node_types": [
+      "analysis"
+     ]
+    },
+    {
+     "key": "details",
+     "component": "data_table",
+     "min": 0,
+     "max": null,
+     "count_by": "components",
+     "from": [
+      {
+       "file": "profile_parse.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "directions.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "candidates.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "judgment.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "evidence.json",
+       "pointer": "/report_blocks"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "structured_stage_data_only"
+     ],
+     "node_types": [
+      "data_table"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "09",
+   "role": "offer_comparison",
+   "default_title": "offer 比较",
+   "title_override_allowed": true,
+   "slots": [
+    {
+     "key": "lead",
+     "component": "conclusion_sentence",
+     "min": 1,
+     "max": 1,
+     "from": [
+      {
+       "file": "narrative.json",
+       "pointer": "/sections/09/lead"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "one_sentence",
+      "bold",
+      "matches_judgment"
+     ],
+     "narrative_key": "09.lead",
+     "count_by": "components",
+     "node_types": [
+      "conclusion_sentence"
+     ]
+    },
+    {
+     "key": "offers",
+     "component": "offer_table",
+     "min": 1,
+     "max": 1,
+     "from": [
+      {
+       "file": "calculations.json",
+       "pointer": ""
+      },
+      {
+       "file": "evidence.json",
+       "pointer": "/items"
+      },
+      {
+       "file": "judgment.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "evidence.json",
+       "pointer": "/report_blocks"
+      }
+     ],
+     "source_required": true,
+     "condition": "offer_basis_actual_or_scenario",
+     "rules": [
+      "basis_actual_or_scenario_visible",
+      "same_year_and_months",
+      "no_real_offer_without_evidence"
+     ],
+     "otherwise": "explicit_no_offer_and_input_gaps",
+     "count_by": "components",
+     "node_types": [
+      "offer_table"
+     ]
+    },
+    {
+     "key": "annual_income",
+     "component": "bars",
+     "min": 1,
+     "max": 1,
+     "from": [
+      {
+       "file": "calculations.json",
+       "pointer": ""
+      },
+      {
+       "file": "evidence.json",
+       "pointer": "/items"
+      },
+      {
+       "file": "evidence.json",
+       "pointer": "/report_blocks"
+      }
+     ],
+     "source_required": true,
+     "condition": "offer_basis_actual_or_scenario",
+     "rules": [
+      "annual_take_home_cash",
+      "not_gross_or_housing_fund"
+     ],
+     "otherwise": "explicit_no_offer_and_input_gaps",
+     "count_by": "components",
+     "narrative_key": "09.annual_income_text",
+     "narrative_type": "figure_text",
+     "node_types": [
+      "bars"
+     ]
+    },
+    {
+     "key": "hourly_income",
+     "component": "bars",
+     "min": 1,
+     "max": 1,
+     "from": [
+      {
+       "file": "calculations.json",
+       "pointer": ""
+      },
+      {
+       "file": "evidence.json",
+       "pointer": "/items"
+      },
+      {
+       "file": "evidence.json",
+       "pointer": "/report_blocks"
+      }
+     ],
+     "source_required": true,
+     "condition": "offer_basis_actual_or_scenario",
+     "rules": [
+      "cash_divided_by_actual_hours"
+     ],
+     "otherwise": "explicit_no_offer_and_input_gaps",
+     "count_by": "components",
+     "narrative_key": "09.hourly_income_text",
+     "narrative_type": "figure_text",
+     "node_types": [
+      "bars"
+     ]
+    },
+    {
+     "key": "monthly_balance",
+     "component": "bars",
+     "min": 1,
+     "max": 1,
+     "from": [
+      {
+       "file": "calculations.json",
+       "pointer": ""
+      },
+      {
+       "file": "evidence.json",
+       "pointer": "/items"
+      },
+      {
+       "file": "evidence.json",
+       "pointer": "/report_blocks"
+      }
+     ],
+     "source_required": true,
+     "condition": "offer_basis_actual_or_scenario",
+     "rules": [
+      "subtract_housing_and_necessary_costs",
+      "ordinary_month_if_bonus_averaged"
+     ],
+     "otherwise": "explicit_no_offer_and_input_gaps",
+     "count_by": "components",
+     "narrative_key": "09.monthly_balance_text",
+     "narrative_type": "figure_text",
+     "node_types": [
+      "bars"
+     ]
+    },
+    {
+     "key": "analysis",
+     "component": "analysis",
+     "min": 1,
+     "max": null,
+     "from": [
+      {
+       "file": "narrative.json",
+       "pointer": "/sections/09/analysis"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "fact_numbers_use_reference_tokens",
+      "claims_link_evidence_or_judgment"
+     ],
+     "narrative_key": "09.analysis",
+     "count_by": "items",
+     "node_types": [
+      "analysis"
+     ]
+    },
+    {
+     "key": "details",
+     "component": "data_table",
+     "min": 0,
+     "max": null,
+     "count_by": "components",
+     "from": [
+      {
+       "file": "profile_parse.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "directions.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "candidates.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "judgment.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "evidence.json",
+       "pointer": "/report_blocks"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "structured_stage_data_only"
+     ],
+     "node_types": [
+      "data_table"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "10",
+   "role": "risks",
+   "default_title": "风险与权益",
+   "title_override_allowed": true,
+   "slots": [
+    {
+     "key": "lead",
+     "component": "conclusion_sentence",
+     "min": 1,
+     "max": 1,
+     "from": [
+      {
+       "file": "narrative.json",
+       "pointer": "/sections/10/lead"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "one_sentence",
+      "bold",
+      "matches_judgment"
+     ],
+     "narrative_key": "10.lead",
+     "count_by": "components",
+     "node_types": [
+      "conclusion_sentence"
+     ]
+    },
+    {
+     "key": "risks",
+     "component": "scenario_table",
+     "min": 3,
+     "max": null,
+     "from": [
+      {
+       "file": "judgment.json",
+       "pointer": "/risks"
+      },
+      {
+       "file": "judgment.json",
+       "pointer": "/report_blocks"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "trigger_and_response",
+      "fallback_or_switch",
+      "observable_not_probability"
+     ],
+     "count_by": "items",
+     "node_types": [
+      "scenario_table"
+     ]
+    },
+    {
+     "key": "analysis",
+     "component": "analysis",
+     "min": 1,
+     "max": null,
+     "from": [
+      {
+       "file": "narrative.json",
+       "pointer": "/sections/10/analysis"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "fact_numbers_use_reference_tokens",
+      "claims_link_evidence_or_judgment"
+     ],
+     "narrative_key": "10.analysis",
+     "count_by": "items",
+     "node_types": [
+      "analysis"
+     ]
+    },
+    {
+     "key": "details",
+     "component": "data_table",
+     "min": 0,
+     "max": null,
+     "count_by": "components",
+     "from": [
+      {
+       "file": "profile_parse.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "directions.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "candidates.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "judgment.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "evidence.json",
+       "pointer": "/report_blocks"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "structured_stage_data_only"
+     ],
+     "node_types": [
+      "data_table"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "11",
+   "role": "questions",
+   "default_title": "追问清单",
+   "title_override_allowed": true,
+   "slots": [
+    {
+     "key": "lead",
+     "component": "conclusion_sentence",
+     "min": 1,
+     "max": 1,
+     "from": [
+      {
+       "file": "narrative.json",
+       "pointer": "/sections/11/lead"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "one_sentence",
+      "bold",
+      "matches_judgment"
+     ],
+     "narrative_key": "11.lead",
+     "count_by": "components",
+     "node_types": [
+      "conclusion_sentence"
+     ]
+    },
+    {
+     "key": "questions",
+     "component": "question_table",
+     "min": 1,
+     "max": null,
+     "from": [
+      {
+       "file": "judgment.json",
+       "pointer": "/questions"
+      },
+      {
+       "file": "profile_parse.json",
+       "pointer": "/missing"
+      },
+      {
+       "file": "judgment.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "profile_parse.json",
+       "pointer": "/report_blocks"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "personalized_question",
+      "where_to_check",
+      "how_answer_changes_decision"
+     ],
+     "count_by": "components",
+     "node_types": [
+      "question_table"
+     ]
+    },
+    {
+     "key": "analysis",
+     "component": "analysis",
+     "min": 1,
+     "max": null,
+     "from": [
+      {
+       "file": "narrative.json",
+       "pointer": "/sections/11/analysis"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "fact_numbers_use_reference_tokens",
+      "claims_link_evidence_or_judgment"
+     ],
+     "narrative_key": "11.analysis",
+     "count_by": "items",
+     "node_types": [
+      "analysis"
+     ]
+    },
+    {
+     "key": "details",
+     "component": "data_table",
+     "min": 0,
+     "max": null,
+     "count_by": "components",
+     "from": [
+      {
+       "file": "profile_parse.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "directions.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "candidates.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "judgment.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "evidence.json",
+       "pointer": "/report_blocks"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "structured_stage_data_only"
+     ],
+     "node_types": [
+      "data_table"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "12",
+   "role": "methods_and_sources",
+   "default_title": "方法、数据来源与声明",
+   "title_override_allowed": true,
+   "slots": [
+    {
+     "key": "lead",
+     "component": "conclusion_sentence",
+     "min": 1,
+     "max": 1,
+     "from": [
+      {
+       "file": "narrative.json",
+       "pointer": "/sections/12/lead"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "one_sentence",
+      "bold",
+      "matches_judgment"
+     ],
+     "narrative_key": "12.lead",
+     "count_by": "components",
+     "node_types": [
+      "conclusion_sentence"
+     ]
+    },
+    {
+     "key": "assumptions",
+     "component": "assumption_table",
+     "min": 1,
+     "max": null,
+     "from": [
+      {
+       "file": "judgment.json",
+       "pointer": "/assumptions"
+      },
+      {
+       "file": "calculations.json",
+       "pointer": ""
+      },
+      {
+       "file": "evidence.json",
+       "pointer": "/items"
+      },
+      {
+       "file": "judgment.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "evidence.json",
+       "pointer": "/report_blocks"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "key_inputs",
+      "scope",
+      "uncertainty",
+      "observable_switch_conditions"
+     ],
+     "count_by": "items",
+     "node_types": [
+      "assumption_table"
+     ]
+    },
+    {
+     "key": "evidence_levels",
+     "component": "evidence_legend",
+     "min": 1,
+     "max": 1,
+     "from": [
+      {
+       "file": "evidence.json",
+       "pointer": ""
+      },
+      {
+       "file": "evidence.json",
+       "pointer": "/report_blocks"
+      }
+     ],
+     "source_required": false,
+     "condition": "always",
+     "rules": [
+      "four_grades",
+      "actual_evidence_scope"
+     ],
+     "count_by": "components",
+     "node_types": [
+      "evidence_legend"
+     ]
+    },
+    {
+     "key": "terms",
+     "component": "term_table",
+     "min": 1,
+     "max": 1,
+     "from": [
+      {
+       "file": "judgment.json",
+       "pointer": "/terms"
+      },
+      {
+       "file": "judgment.json",
+       "pointer": "/report_blocks"
+      }
+     ],
+     "source_required": false,
+     "condition": "always",
+     "rules": [
+      "one_quantity_one_name"
+     ],
+     "count_by": "components",
+     "node_types": [
+      "term_table"
+     ]
+    },
+    {
+     "key": "analysis",
+     "component": "analysis",
+     "min": 1,
+     "max": null,
+     "from": [
+      {
+       "file": "narrative.json",
+       "pointer": "/sections/12/analysis"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "fact_numbers_use_reference_tokens",
+      "claims_link_evidence_or_judgment"
+     ],
+     "narrative_key": "12.analysis",
+     "count_by": "items",
+     "node_types": [
+      "analysis"
+     ]
+    },
+    {
+     "key": "sources",
+     "component": "source_endnotes",
+     "min": 1,
+     "max": 1,
+     "from": [
+      {
+       "file": "evidence.json",
+       "pointer": ""
+      },
+      {
+       "file": "evidence.json",
+       "pointer": "/report_blocks"
+      }
+     ],
+     "source_required": false,
+     "condition": "always",
+     "rules": [
+      "all_used_ids",
+      "numbered",
+      "organization_url_dates_method_scope",
+      "no_private_paths"
+     ],
+     "count_by": "components",
+     "node_types": [
+      "source_endnotes"
+     ]
+    },
+    {
+     "key": "disclaimer",
+     "component": "disclaimer",
+     "min": 1,
+     "max": 1,
+     "from": [
+      {
+       "file": "narrative.json",
+       "pointer": "/sections/12/disclaimer"
+      }
+     ],
+     "source_required": false,
+     "condition": "always",
+     "rules": [
+      "no_guaranteed_admission_or_employment",
+      "final_choice_remains_person"
+     ],
+     "narrative_key": "12.disclaimer",
+     "count_by": "components",
+     "node_types": [
+      "disclaimer"
+     ]
+    },
+    {
+     "key": "details",
+     "component": "data_table",
+     "min": 0,
+     "max": null,
+     "count_by": "components",
+     "from": [
+      {
+       "file": "profile_parse.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "directions.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "candidates.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "judgment.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "evidence.json",
+       "pointer": "/report_blocks"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "structured_stage_data_only"
+     ],
+     "node_types": [
+      "data_table"
+     ]
+    }
+   ]
+  }
+ ],
+ "workflow_limits": {
+  "questions_min": 1,
+  "questions_max": 3,
+  "directions_min": 2,
+  "directions_max": 4,
+  "scenarios_min": 2,
+  "school_programs_min_if_kaoyan": 3,
+  "job_types_min": 3,
+  "rule_fresh_days": 30,
+  "operator_due_days": 30,
+  "review_samples_min": 5,
+  "review_score_min": 16
+ }
 }

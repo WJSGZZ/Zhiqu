@@ -1,249 +1,337 @@
 {
- "independent": true,
- "reviewer": "Claude Opus 5.5（claude-opus-5-5），阶段 8 第二次独立复核会话；未参与本案分析、出稿与第一次复核后的修改，由主会话 local_d8f454c5 发起",
- "date": "2026-10-17",
- "scope": "通读 report.json 与生成的 HTML/PDF；重跑 run.json 中全部 optimize.py（基准 + 7 组敏感性）、retro_judge.py、retro_run.py（五档）、category_shift.py（2022→2026 逐年）、check_report.py、case_check.py；用 curl 取浙江省教育考试院与浙工大原文逐字核对；对照仓库官方转存表 data/zhejiang/general_2022—2026.csv、data/calibration/*.csv；未下载 xls/rar 附件",
- "verdict": "通过。计算逐位可复现（基准、敏感性、事后判定的 JSON 除输出路径外完全相同；retro_run.py 重跑后五档文件逐字节不变）；第一次复核的 13 条问题全部改好；抽查 14 条数字与事实全部一致；9 项坑全部 pass。本次直接改了 1 处文字（电子信息类“约 8.7%”统一为“约 8%”）、生成日期与志愿表版面（模板列宽），均不涉及计算与结论。剩余 3 条低级别事项不影响对外展示，见 remaining。",
- "pitfalls": [
-  {
-   "item": "没查到写成不存在",
-   "result": "pass",
-   "note": "取不到的一律写“未取到/未查到”并给原因（中国计量官网验证、杭电 VPN 与图片章程）；上海应用技术 2026 年写“没有同名条目”并给出改名后的条目；国网人数写“未按专业公布”。"
+  "independent": true,
+  "reviewer": "Claude Opus 5.5（claude-opus-5-5），阶段 8 第二次独立复核会话；未参与本案分析、出稿与第一次复核后的修改，由主会话 local_d8f454c5 发起",
+  "date": "2026-10-17",
+  "scope": "通读 report.json 与生成的 HTML/PDF；重跑 run.json 中全部 optimize.py（基准 + 7 组敏感性）、retro_judge.py、retro_run.py（五档）、category_shift.py（2022→2026 逐年）、check_report.py、case_check.py；用 curl 取浙江省教育考试院与浙工大原文逐字核对；对照仓库官方转存表 data/zhejiang/general_2022—2026.csv、data/calibration/*.csv；未下载 xls/rar 附件",
+  "verdict": "通过。计算逐位可复现（基准、敏感性、事后判定的 JSON 除输出路径外完全相同；retro_run.py 重跑后五档文件逐字节不变）；第一次复核的 13 条问题全部改好；抽查 14 条数字与事实全部一致；9 项坑全部 pass。本次直接改了 1 处文字（电子信息类“约 8.7%”统一为“约 8%”）、生成日期与志愿表版面（模板列宽），均不涉及计算与结论。剩余 3 条低级别事项不影响对外展示，见 remaining。",
+  "pitfalls": [
+    {
+      "item": "没查到写成不存在",
+      "result": "pass",
+      "note": "取不到的一律写“未取到/未查到”并给原因（中国计量官网验证、杭电 VPN 与图片章程）；上海应用技术 2026 年写“没有同名条目”并给出改名后的条目；国网人数写“未按专业公布”。"
+    },
+    {
+      "item": "群体数字当个人概率",
+      "result": "pass",
+      "note": "第 10 节写明过线概率不是录取率、也不是本人上岸率；深造率、去向落实率、失业率都标全校/学院/全国口径，未换算成个人机会。"
+    },
+    {
+      "item": "经验帖数字做决定",
+      "result": "pass",
+      "note": "亲戚“电气好进国网”标单人说法、未证实；宁大学院“考研录取率约 25%”标学院自述；决策只用官方投档表。"
+    },
+    {
+      "item": "按编号引用问卷",
+      "result": "pass",
+      "note": "模板已改为节名；重新生成的 HTML 中检索“第[一—十]节”“问卷第”均为 0 处；check_family 已覆盖模板与样板正文。"
+    },
+    {
+      "item": "同一事实写两处",
+      "result": "pass",
+      "note": "评级说明只用 2018—2025 检验年，数字与 province_health.csv 一致（按 n 加权复算合并覆盖 79.79%、失败 6.06%）；第 10 节逐年表与 model_review_2026.csv 一致，两套口径的差别已在评级说明里写明；打分计数 102/12/2/1 与 attributes.csv 的 basis 一致；同分规则与 rules.json 一致。"
+    },
+    {
+      "item": "会过期的事实",
+      "result": "pass",
+      "note": "回溯报告以 2026 年填报时点为准，章程、规则、失业率都写年份或日期；check_family 复核期限 0 提醒。"
+    },
+    {
+      "item": "八字越界",
+      "result": "pass",
+      "note": "未使用八字视角，正文无相关内容。"
+    },
+    {
+      "item": "委派判断类任务",
+      "result": "pass",
+      "note": "案例文件与提交记录无子代理分工；本次复核也未委派（只能就文件记录判断）。"
+    },
+    {
+      "item": "取页摘要当原文",
+      "result": "pass",
+      "note": "规则类事实（志愿数、投档比例、同分规则、填报时间、选考要求适用版本）全部用 curl 取原文逐字核对一致；第一次复核指出的同分规则转述已改对（第 18 问定位次、第 42 问定投档顺序）。"
+    }
+  ],
+  "sampled_sources": [
+    {
+      "claim": "2026 年普通类第一段最多 80 个专业平行志愿、投档比例 1:1",
+      "source": "https://www.zjzs.net/art/2026/6/17/art_45_12386.html",
+      "matches": true,
+      "note": "curl 原文：“考生每次可填报不超过80个志愿”“投档比例为1:1”。"
+    },
+    {
+      "claim": "总分相同时依次比较文化总分、语文数学总分等确定位次，同位次按志愿顺序投档，全部相同者一并投档",
+      "source": "https://www.zjzs.net/art/2026/6/17/art_45_12386.html",
+      "matches": true,
+      "note": "原文第 18 问：总分相同时先后按文化总分、语文数学总分、语文或数学单科、外语单科、选考科目单科排序，全部相同者为同位次；第 42 问：依据位次、志愿顺序投档，全部相同者一并投档。"
+    },
+    {
+      "claim": "第一段填报 6 月 29 日 8:30 至 30 日 17:30",
+      "source": "https://www.zjzs.net/art/2026/6/13/art_45_12375.html",
+      "matches": true,
+      "note": "curl 原文“6月29日8:30—30日17:30 普通类第一段平行志愿填报”。"
+    },
+    {
+      "claim": "2025、2026 年考生仍以 2024 版选考要求为参考；2027 年起用 2025-02-20 发布的新版",
+      "source": "https://www.zjzs.net/col/col369/index.html",
+      "matches": true,
+      "note": "原文第 2 条逐字一致。"
+    },
+    {
+      "claim": "2024 版选考要求在 col173 页面",
+      "source": "https://www.zjzs.net/col/col173/index.html",
+      "matches": true,
+      "note": "页面标题“2024年普通高校招生专业选考科目要求”，发布 2024-05-06。"
+    },
+    {
+      "claim": "浙工大 2026 章程：工科类 6,000 元/学年、住宿不超过 1,600、朝晖与屏峰校区、全面放开转专业、色觉限制不含电气类",
+      "source": "https://zs.zjut.edu.cn/html/n2553.html",
+      "matches": true,
+      "note": "curl 原文逐条一致；色觉限制列健行实验班（分子化学工程）、化工与制药类等，无电气。"
+    },
+    {
+      "claim": "杭电·电气 2022—2025 年最低位次 30,519、26,411、28,947、27,814",
+      "source": "https://www.zjzs.net/art/2025/7/21/art_45_11467.html",
+      "matches": true,
+      "note": "对照仓库官方转存表 data/zhejiang/general_2022—2025.csv。"
+    },
+    {
+      "claim": "中国计量·电气 2023—2025 年 50,051、52,018、48,765（4 年中 3 年有记录）；浙工大·电气类 31,055、27,668、29,455、27,271",
+      "source": "data/zhejiang/general_2022—2025.csv（浙江省教育考试院投档表转存）",
+      "matches": true,
+      "note": "2022 年中国计量只有“自动化类”，无电气条目。"
+    },
+    {
+      "claim": "第 11 节 2026 年实际线（杭电 25,051、浙工大 23,833、中国计量 42,838、上海海事 32,639、南工大 25,274、南京工程 19,359、扬大 28,475、上海海洋 31,696、温大 51,572、计量自动化 43,329、城市学院 62,136；上海应用技术改为卓越班 36,138）",
+      "source": "https://www.zjzs.net/art/2026/7/21/art_45_12550.html",
+      "matches": true,
+      "note": "对照 data/zhejiang/general_2026.csv，11 条与改名条目全部一致。"
+    },
+    {
+      "claim": "11 条可对应志愿中 9 条专业代码 2026 年变化（杭电 007→010 等）",
+      "source": "data/zhejiang/general_2025.csv、general_2026.csv",
+      "matches": true,
+      "note": "9 处逐个核对一致；另见中国计量 2026 年代码 002 已改给“自动化(量新拔尖人才创新班)”，照旧代码录入会填到别的专业。"
+    },
+    {
+      "claim": "电气类相对全省：2022→23 −0.096、23→24 +0.062、24→25 −0.032；2026 年电气 −0.085（94% 变热）、自动化 −0.102、电子信息类 −0.087",
+      "source": "scripts/category_shift.py 对浙江 2022—2026 投档表",
+      "matches": true,
+      "note": "逐年复算：全省中位 +0.023/+0.028/+0.019/−0.002，电气 −0.073/+0.090/−0.013/−0.085。"
+    },
+    {
+      "claim": "电子信息类相对全省 2022→23 变热约 7%、2023→24 变冷约 9%（第 03 节）",
+      "source": "scripts/category_shift.py",
+      "matches": true,
+      "note": "−0.050−0.023=−0.073；+0.118−0.028=+0.090。"
+    },
+    {
+      "claim": "评级说明：2018—2025 除改版年覆盖 76.8%—98.8%、失败 0.4%—6.1%；2024 年 42.4%、23.0%；合并约 79.8%、6.1%，评 B",
+      "source": "skills/zhiqu/data/calibration/province_health.csv",
+      "matches": true,
+      "note": "逐年行一致；按 n 加权复算合并 79.79%/6.06%；按 province_health.py 的 grade 规则：最差一年 23% > 15% 不到 A，满足 B。"
+    },
+    {
+      "claim": "第 10 节逐年选参表：2023 倍数 1.0 98.4%/0.1%；2024 0.7、0.027 46.5%/18.5%；2025 1.0、0.025 90.2%/1.1%；2026 1.0、0.023",
+      "source": "skills/zhiqu/data/calibration/model_review_2026.csv",
+      "matches": true
+    }
+  ],
+  "recomputation": {
+    "base_result": "optimize.py 重跑：期望效用 77.195、12 个志愿、落点概率（杭电 14.8%、浙工大 10.3%、中国计量 74.9%）与 result.json 完全一致（除 params.json 输出路径外逐字段相同）。",
+    "sensitivity": "7 组全部逐字段相同；文字核对：rho 0.1/0.5 为 77.24/77.16；变热 drift −0.073：75.89、19 个、中国计量 0.94、杭电 0.035、浙工大 0.017；变冷 +0.083：79.16、杭电 0.357、浙工大 0.18；前景悲观 70.68、前 8 位不变。",
+    "hindsight": "retro_judge.py 重跑与 hindsight.json 完全相同。",
+    "five_ranks": "retro_run.py 重跑五档后 git status 无变化（候选池、打分、志愿表、判定、retro_ranks.csv 逐字节相同），第一次复核的“四档不可复算”已解决。",
+    "error_decomposition": "复算 2025 年位次 1.2 万—7 万的电气条目 2025→26 中位 −0.114（我按院校代码+专业名匹配得 99 条，报告 97 条，差别来自同名重复条目处理），与报告 −0.115 一致。",
+    "gates": "check_report.py 通过；case_check.py 阶段 0—7 通过。"
   },
-  {
-   "item": "群体数字当个人概率",
-   "result": "pass",
-   "note": "第 10 节写明过线概率不是录取率、也不是本人上岸率；深造率、去向落实率、失业率都标全校/学院/全国口径，未换算成个人机会。"
+  "first_review_followup": [
+    {
+      "issue": "高：变热情景未事前登记、幅度不按历年最大",
+      "status": "已改好",
+      "evidence": "drift −0.073（全省 0.023 + 电气历年最大 −0.096），第 05、10 节、摘要、追问、第 11 节均写明“出稿时加入、非事前登记”，第 10 节还写了选择做这个情景本身受事后信息影响。"
+    },
+    {
+      "issue": "高：评级说明混入 2026 年、覆盖率写错",
+      "status": "已改好",
+      "evidence": "现只用 2018—2025（十省体检补数据后重跑的口径），数字与 province_health.csv 一致。"
+    },
+    {
+      "issue": "中：同分规则转述错误",
+      "status": "已改好",
+      "evidence": "见 sampled_sources 第 2 条。"
+    },
+    {
+      "issue": "中：问卷按编号引用",
+      "status": "已改好",
+      "evidence": "模板与 HTML 中 0 处；check_family 覆盖。"
+    },
+    {
+      "issue": "中：另外四档不可复算",
+      "status": "已改好",
+      "evidence": "retro_ranks/<位次>/ 与 retro_run.py，重跑逐字节一致。"
+    },
+    {
+      "issue": "中：误差分解第三项是余项",
+      "status": "已改好",
+      "evidence": "改写为余项并给出可识别的两块。"
+    },
+    {
+      "issue": "中：打分计数与前景默认值偏离",
+      "status": "已改好",
+      "evidence": "102/12/2/1 与 basis 一致；偏离写进第 10 节与 README。"
+    },
+    {
+      "issue": "中：漏报专业代码大面积变化",
+      "status": "已改好",
+      "evidence": "第 11 节与摘要事后框都写了 9 条代码变化。"
+    },
+    {
+      "issue": "中低：回溯结果出现在核心结论",
+      "status": "已改好",
+      "evidence": "摘要里单独成框，标“事后才知道的结果（填报时不可能知道，不参与上面的结论）”。"
+    },
+    {
+      "issue": "低：col173 链接与 6/13 来源",
+      "status": "已改好",
+      "evidence": "核对清单改链 col173；第 12 节补 6/13 通知。"
+    },
+    {
+      "issue": "低：家长可读性（偏好四位小数、100 分定义、对比图注、压力测试解释）",
+      "status": "已改好",
+      "evidence": "偏好一位小数；“100 分 = 你的梦校（浙大电气，不在候选中）”；图注按数字生成；压力情景期望高于基准时自动加解释。"
+    },
+    {
+      "issue": "低：概率写法不一",
+      "status": "已改好",
+      "evidence": "B 级两端统一“< 5% / > 95%”，路线图不再写“≈100%”。"
+    },
+    {
+      "issue": "低：权重、引文与数值表述",
+      "status": "已改好",
+      "evidence": "权重写全 [1, 0.15, 0.05, 0.02, 0.01]；引 Haeringer & Klijn 2009 并给出一句论证；改为“0.9—1.4 个标准差”“约 8%”。"
+    }
+  ],
+  "new_content_check": {
+    "grade_note": "与 province_health.csv 逐年一致，只用 2025 年及以前的检验年，未混入 2026。",
+    "sensitivity": "七组情景与 sensitivity/*.json 一致；方向集中的志愿表按 report-guide 做了“该方向整体变热”情景，幅度取历年最大值。",
+    "visuals": "ec87b8c 只改样式与图表排版，数字均来自同一 result.json；PDF 实际打开逐页看过。发现志愿表“说明”栏被挤到很窄（自动列宽下表头不换行），12 个志愿占 5 页、每页 2—3 行，本次改为固定列宽，报告 26 → 24 页。"
   },
-  {
-   "item": "经验帖数字做决定",
-   "result": "pass",
-   "note": "亲戚“电气好进国网”标单人说法、未证实；宁大学院“考研录取率约 25%”标学院自述；决策只用官方投档表。"
+  "fixed_in_this_review": [
+    "第 11 节：电子信息类“约 8.7%”改为“约 8%”（对数 −0.087，与同句“电气约 8%（对数 −0.085）”换算一致）。",
+    "生成日期 2026-10-16 → 2026-10-17（本次重新生成 PDF/HTML）。",
+    "scripts/report.py：志愿表改为固定列宽、表头可换行，“说明”栏由约 15% 宽变为约 33%；不改任何数字。",
+    "README 第 8 阶段改为本次复核结论。"
+  ],
+  "remaining": [
+    {
+      "severity": "低",
+      "item": "敏感性表“变冷 drift +0.083”与“全省 0.023 + 历年相对变冷 0.062 = 0.085”差 0.002",
+      "note": "情景标的是“约 6%”，不影响结论；下次重跑可统一。"
+    },
+    {
+      "severity": "低",
+      "item": "第 10 节“相当于共同因子约 0.9—1.4 个标准差”",
+      "note": "取决于用哪一个 σ；按本表电气候选的中位 σ 0.141 复算约 0.8—1.2。量级一致，属近似表述。"
+    },
+    {
+      "severity": "低",
+      "item": "证据等级表“中国计量·电气接受物化技：目前无证据”",
+      "note": "如实：2024 版选考要求未入库、未逐专业核对。2027 版表要求物理、化学；若补入 2024 版表可升级。读者看到保底志愿资格“无证据”可能疑虑，正文已把它列为第一件要做的事。"
+    }
+  ],
+  "previous_reviews": [
+    {
+      "date": "2026-10-16",
+      "verdict": "不通过",
+      "summary": "9 项坑 3 项 fail（按编号引用问卷、同一事实写两处、取页摘要当原文），抽查 1 条与原文不符；计算可复现。13 条问题已在 2415adf 等提交中修改，逐条核对见 first_review_followup。原文见 git 历史。"
+    }
+  ],
+  "status": "awaiting_independent_review",
+  "rubric": {
+    "status": "pending",
+    "items": [
+      {
+        "id": "clarity",
+        "score": null,
+        "reason": "此项尚未按共用评分表复核；原复核内容另行保留",
+        "evidence_refs": [],
+        "report_location": null
+      },
+      {
+        "id": "traceability",
+        "score": null,
+        "reason": "此项尚未按共用评分表复核；原复核内容另行保留",
+        "evidence_refs": [],
+        "report_location": null
+      },
+      {
+        "id": "reasoning",
+        "score": null,
+        "reason": "此项尚未按共用评分表复核；原复核内容另行保留",
+        "evidence_refs": [],
+        "report_location": null
+      },
+      {
+        "id": "consistency",
+        "score": null,
+        "reason": "此项尚未按共用评分表复核；原复核内容另行保留",
+        "evidence_refs": [],
+        "report_location": null
+      },
+      {
+        "id": "timeliness",
+        "score": null,
+        "reason": "此项尚未按共用评分表复核；原复核内容另行保留",
+        "evidence_refs": [],
+        "report_location": null
+      },
+      {
+        "id": "personalization",
+        "score": null,
+        "reason": "此项尚未按共用评分表复核；原复核内容另行保留",
+        "evidence_refs": [],
+        "report_location": null
+      },
+      {
+        "id": "actionability",
+        "score": null,
+        "reason": "此项尚未按共用评分表复核；原复核内容另行保留",
+        "evidence_refs": [],
+        "report_location": null
+      },
+      {
+        "id": "boundaries",
+        "score": null,
+        "reason": "此项尚未按共用评分表复核；原复核内容另行保留",
+        "evidence_refs": [],
+        "report_location": null
+      },
+      {
+        "id": "summary_access",
+        "score": null,
+        "reason": "此项尚未按共用评分表复核；原复核内容另行保留",
+        "evidence_refs": [],
+        "report_location": null
+      },
+      {
+        "id": "layout",
+        "score": null,
+        "reason": "此项尚未按共用评分表复核；原复核内容另行保留",
+        "evidence_refs": [],
+        "report_location": null
+      }
+    ]
   },
-  {
-   "item": "按编号引用问卷",
-   "result": "pass",
-   "note": "模板已改为节名；重新生成的 HTML 中检索“第[一—十]节”“问卷第”均为 0 处；check_family 已覆盖模板与样板正文。"
-  },
-  {
-   "item": "同一事实写两处",
-   "result": "pass",
-   "note": "评级说明只用 2018—2025 检验年，数字与 province_health.csv 一致（按 n 加权复算合并覆盖 79.79%、失败 6.06%）；第 10 节逐年表与 model_review_2026.csv 一致，两套口径的差别已在评级说明里写明；打分计数 102/12/2/1 与 attributes.csv 的 basis 一致；同分规则与 rules.json 一致。"
-  },
-  {
-   "item": "会过期的事实",
-   "result": "pass",
-   "note": "回溯报告以 2026 年填报时点为准，章程、规则、失业率都写年份或日期；check_family 复核期限 0 提醒。"
-  },
-  {
-   "item": "八字越界",
-   "result": "pass",
-   "note": "未使用八字视角，正文无相关内容。"
-  },
-  {
-   "item": "委派判断类任务",
-   "result": "pass",
-   "note": "案例文件与提交记录无子代理分工；本次复核也未委派（只能就文件记录判断）。"
-  },
-  {
-   "item": "取页摘要当原文",
-   "result": "pass",
-   "note": "规则类事实（志愿数、投档比例、同分规则、填报时间、选考要求适用版本）全部用 curl 取原文逐字核对一致；第一次复核指出的同分规则转述已改对（第 18 问定位次、第 42 问定投档顺序）。"
+  "snapshot": {
+    "report.json": "c6ff515d098c0cbf03e5db6e78d7e2f00ff2300b7adaf409be9ce3a3200e591e",
+    "report.pdf": "c717fbf21833c5e1c9daf2ddebbbe69f1a1e1b2552b529525d5387c09520c390",
+    "operator_check.md": "2f6e71238f4263510affd4be94f3a2a9dec2fa79697f680cb71d584a07406cd0",
+    "result.json": "178b8219f95f1a0f6f131bd29456209a170afce250aa05898694b3d1d9e1f63d",
+    "retro_ranks/10000/result.json": "da4c3af0f0c9708f12a75058fdca87239d6c31987d4fb7aef1612ec8a9d135f1",
+    "retro_ranks/20000/result.json": "a1413370da6a0d5c30ed862047263de565c1bcff17d126fcdb93c61a10435783",
+    "retro_ranks/50000/result.json": "0bb4b66cdc5018b05a50da758085b90705dca7ea0cab6dba884f7e37e7ab71a3",
+    "retro_ranks/80000/result.json": "47b6b774b64a23d96d0a1a78500839421c26618682fbeddfef1a9dfde7312d05",
+    "retro_ranks/33000/result.json": "94c3bc1c7b0b6da6469fb128ca24802c2d0fe1bdb6c3155d9645de15eede9b24",
+    "case.json": "f48447a58ac2d8a6d540a75cd8b7e42cb4ec544eb56d72b47191998e1094c0b7"
   }
- ],
- "sampled_sources": [
-  {
-   "claim": "2026 年普通类第一段最多 80 个专业平行志愿、投档比例 1:1",
-   "source": "https://www.zjzs.net/art/2026/6/17/art_45_12386.html",
-   "matches": true,
-   "note": "curl 原文：“考生每次可填报不超过80个志愿”“投档比例为1:1”。"
-  },
-  {
-   "claim": "总分相同时依次比较文化总分、语文数学总分等确定位次，同位次按志愿顺序投档，全部相同者一并投档",
-   "source": "https://www.zjzs.net/art/2026/6/17/art_45_12386.html",
-   "matches": true,
-   "note": "原文第 18 问：总分相同时先后按文化总分、语文数学总分、语文或数学单科、外语单科、选考科目单科排序，全部相同者为同位次；第 42 问：依据位次、志愿顺序投档，全部相同者一并投档。"
-  },
-  {
-   "claim": "第一段填报 6 月 29 日 8:30 至 30 日 17:30",
-   "source": "https://www.zjzs.net/art/2026/6/13/art_45_12375.html",
-   "matches": true,
-   "note": "curl 原文“6月29日8:30—30日17:30 普通类第一段平行志愿填报”。"
-  },
-  {
-   "claim": "2025、2026 年考生仍以 2024 版选考要求为参考；2027 年起用 2025-02-20 发布的新版",
-   "source": "https://www.zjzs.net/col/col369/index.html",
-   "matches": true,
-   "note": "原文第 2 条逐字一致。"
-  },
-  {
-   "claim": "2024 版选考要求在 col173 页面",
-   "source": "https://www.zjzs.net/col/col173/index.html",
-   "matches": true,
-   "note": "页面标题“2024年普通高校招生专业选考科目要求”，发布 2024-05-06。"
-  },
-  {
-   "claim": "浙工大 2026 章程：工科类 6,000 元/学年、住宿不超过 1,600、朝晖与屏峰校区、全面放开转专业、色觉限制不含电气类",
-   "source": "https://zs.zjut.edu.cn/html/n2553.html",
-   "matches": true,
-   "note": "curl 原文逐条一致；色觉限制列健行实验班（分子化学工程）、化工与制药类等，无电气。"
-  },
-  {
-   "claim": "杭电·电气 2022—2025 年最低位次 30,519、26,411、28,947、27,814",
-   "source": "https://www.zjzs.net/art/2025/7/21/art_45_11467.html",
-   "matches": true,
-   "note": "对照仓库官方转存表 data/zhejiang/general_2022—2025.csv。"
-  },
-  {
-   "claim": "中国计量·电气 2023—2025 年 50,051、52,018、48,765（4 年中 3 年有记录）；浙工大·电气类 31,055、27,668、29,455、27,271",
-   "source": "data/zhejiang/general_2022—2025.csv（浙江省教育考试院投档表转存）",
-   "matches": true,
-   "note": "2022 年中国计量只有“自动化类”，无电气条目。"
-  },
-  {
-   "claim": "第 11 节 2026 年实际线（杭电 25,051、浙工大 23,833、中国计量 42,838、上海海事 32,639、南工大 25,274、南京工程 19,359、扬大 28,475、上海海洋 31,696、温大 51,572、计量自动化 43,329、城市学院 62,136；上海应用技术改为卓越班 36,138）",
-   "source": "https://www.zjzs.net/art/2026/7/21/art_45_12550.html",
-   "matches": true,
-   "note": "对照 data/zhejiang/general_2026.csv，11 条与改名条目全部一致。"
-  },
-  {
-   "claim": "11 条可对应志愿中 9 条专业代码 2026 年变化（杭电 007→010 等）",
-   "source": "data/zhejiang/general_2025.csv、general_2026.csv",
-   "matches": true,
-   "note": "9 处逐个核对一致；另见中国计量 2026 年代码 002 已改给“自动化(量新拔尖人才创新班)”，照旧代码录入会填到别的专业。"
-  },
-  {
-   "claim": "电气类相对全省：2022→23 −0.096、23→24 +0.062、24→25 −0.032；2026 年电气 −0.085（94% 变热）、自动化 −0.102、电子信息类 −0.087",
-   "source": "scripts/category_shift.py 对浙江 2022—2026 投档表",
-   "matches": true,
-   "note": "逐年复算：全省中位 +0.023/+0.028/+0.019/−0.002，电气 −0.073/+0.090/−0.013/−0.085。"
-  },
-  {
-   "claim": "电子信息类相对全省 2022→23 变热约 7%、2023→24 变冷约 9%（第 03 节）",
-   "source": "scripts/category_shift.py",
-   "matches": true,
-   "note": "−0.050−0.023=−0.073；+0.118−0.028=+0.090。"
-  },
-  {
-   "claim": "评级说明：2018—2025 除改版年覆盖 76.8%—98.8%、失败 0.4%—6.1%；2024 年 42.4%、23.0%；合并约 79.8%、6.1%，评 B",
-   "source": "skills/zhiqu/data/calibration/province_health.csv",
-   "matches": true,
-   "note": "逐年行一致；按 n 加权复算合并 79.79%/6.06%；按 province_health.py 的 grade 规则：最差一年 23% > 15% 不到 A，满足 B。"
-  },
-  {
-   "claim": "第 10 节逐年选参表：2023 倍数 1.0 98.4%/0.1%；2024 0.7、0.027 46.5%/18.5%；2025 1.0、0.025 90.2%/1.1%；2026 1.0、0.023",
-   "source": "skills/zhiqu/data/calibration/model_review_2026.csv",
-   "matches": true
-  }
- ],
- "recomputation": {
-  "base_result": "optimize.py 重跑：期望效用 77.195、12 个志愿、落点概率（杭电 14.8%、浙工大 10.3%、中国计量 74.9%）与 result.json 完全一致（除 params.json 输出路径外逐字段相同）。",
-  "sensitivity": "7 组全部逐字段相同；文字核对：rho 0.1/0.5 为 77.24/77.16；变热 drift −0.073：75.89、19 个、中国计量 0.94、杭电 0.035、浙工大 0.017；变冷 +0.083：79.16、杭电 0.357、浙工大 0.18；前景悲观 70.68、前 8 位不变。",
-  "hindsight": "retro_judge.py 重跑与 hindsight.json 完全相同。",
-  "five_ranks": "retro_run.py 重跑五档后 git status 无变化（候选池、打分、志愿表、判定、retro_ranks.csv 逐字节相同），第一次复核的“四档不可复算”已解决。",
-  "error_decomposition": "复算 2025 年位次 1.2 万—7 万的电气条目 2025→26 中位 −0.114（我按院校代码+专业名匹配得 99 条，报告 97 条，差别来自同名重复条目处理），与报告 −0.115 一致。",
-  "gates": "check_report.py 通过；case_check.py 阶段 0—7 通过。"
- },
- "first_review_followup": [
-  {
-   "issue": "高：变热情景未事前登记、幅度不按历年最大",
-   "status": "已改好",
-   "evidence": "drift −0.073（全省 0.023 + 电气历年最大 −0.096），第 05、10 节、摘要、追问、第 11 节均写明“出稿时加入、非事前登记”，第 10 节还写了选择做这个情景本身受事后信息影响。"
-  },
-  {
-   "issue": "高：评级说明混入 2026 年、覆盖率写错",
-   "status": "已改好",
-   "evidence": "现只用 2018—2025（十省体检补数据后重跑的口径），数字与 province_health.csv 一致。"
-  },
-  {
-   "issue": "中：同分规则转述错误",
-   "status": "已改好",
-   "evidence": "见 sampled_sources 第 2 条。"
-  },
-  {
-   "issue": "中：问卷按编号引用",
-   "status": "已改好",
-   "evidence": "模板与 HTML 中 0 处；check_family 覆盖。"
-  },
-  {
-   "issue": "中：另外四档不可复算",
-   "status": "已改好",
-   "evidence": "retro_ranks/<位次>/ 与 retro_run.py，重跑逐字节一致。"
-  },
-  {
-   "issue": "中：误差分解第三项是余项",
-   "status": "已改好",
-   "evidence": "改写为余项并给出可识别的两块。"
-  },
-  {
-   "issue": "中：打分计数与前景默认值偏离",
-   "status": "已改好",
-   "evidence": "102/12/2/1 与 basis 一致；偏离写进第 10 节与 README。"
-  },
-  {
-   "issue": "中：漏报专业代码大面积变化",
-   "status": "已改好",
-   "evidence": "第 11 节与摘要事后框都写了 9 条代码变化。"
-  },
-  {
-   "issue": "中低：回溯结果出现在核心结论",
-   "status": "已改好",
-   "evidence": "摘要里单独成框，标“事后才知道的结果（填报时不可能知道，不参与上面的结论）”。"
-  },
-  {
-   "issue": "低：col173 链接与 6/13 来源",
-   "status": "已改好",
-   "evidence": "核对清单改链 col173；第 12 节补 6/13 通知。"
-  },
-  {
-   "issue": "低：家长可读性（偏好四位小数、100 分定义、对比图注、压力测试解释）",
-   "status": "已改好",
-   "evidence": "偏好一位小数；“100 分 = 你的梦校（浙大电气，不在候选中）”；图注按数字生成；压力情景期望高于基准时自动加解释。"
-  },
-  {
-   "issue": "低：概率写法不一",
-   "status": "已改好",
-   "evidence": "B 级两端统一“< 5% / > 95%”，路线图不再写“≈100%”。"
-  },
-  {
-   "issue": "低：权重、引文与数值表述",
-   "status": "已改好",
-   "evidence": "权重写全 [1, 0.15, 0.05, 0.02, 0.01]；引 Haeringer & Klijn 2009 并给出一句论证；改为“0.9—1.4 个标准差”“约 8%”。"
-  }
- ],
- "new_content_check": {
-  "grade_note": "与 province_health.csv 逐年一致，只用 2025 年及以前的检验年，未混入 2026。",
-  "sensitivity": "七组情景与 sensitivity/*.json 一致；方向集中的志愿表按 report-guide 做了“该方向整体变热”情景，幅度取历年最大值。",
-  "visuals": "ec87b8c 只改样式与图表排版，数字均来自同一 result.json；PDF 实际打开逐页看过。发现志愿表“说明”栏被挤到很窄（自动列宽下表头不换行），12 个志愿占 5 页、每页 2—3 行，本次改为固定列宽，报告 26 → 24 页。"
- },
- "fixed_in_this_review": [
-  "第 11 节：电子信息类“约 8.7%”改为“约 8%”（对数 −0.087，与同句“电气约 8%（对数 −0.085）”换算一致）。",
-  "生成日期 2026-10-16 → 2026-10-17（本次重新生成 PDF/HTML）。",
-  "scripts/report.py：志愿表改为固定列宽、表头可换行，“说明”栏由约 15% 宽变为约 33%；不改任何数字。",
-  "README 第 8 阶段改为本次复核结论。"
- ],
- "remaining": [
-  {
-   "severity": "低",
-   "item": "敏感性表“变冷 drift +0.083”与“全省 0.023 + 历年相对变冷 0.062 = 0.085”差 0.002",
-   "note": "情景标的是“约 6%”，不影响结论；下次重跑可统一。"
-  },
-  {
-   "severity": "低",
-   "item": "第 10 节“相当于共同因子约 0.9—1.4 个标准差”",
-   "note": "取决于用哪一个 σ；按本表电气候选的中位 σ 0.141 复算约 0.8—1.2。量级一致，属近似表述。"
-  },
-  {
-   "severity": "低",
-   "item": "证据等级表“中国计量·电气接受物化技：目前无证据”",
-   "note": "如实：2024 版选考要求未入库、未逐专业核对。2027 版表要求物理、化学；若补入 2024 版表可升级。读者看到保底志愿资格“无证据”可能疑虑，正文已把它列为第一件要做的事。"
-  }
- ],
- "previous_reviews": [
-  {
-   "date": "2026-10-16",
-   "verdict": "不通过",
-   "summary": "9 项坑 3 项 fail（按编号引用问卷、同一事实写两处、取页摘要当原文），抽查 1 条与原文不符；计算可复现。13 条问题已在 2415adf 等提交中修改，逐条核对见 first_review_followup。原文见 git 历史。"
-  }
- ]
 }

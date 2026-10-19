@@ -252,6 +252,15 @@ def check_sections(rep, result=None):
     return errs
 
 
+def check_planning_contract(case_dir):
+    """Check graduate/career components, provenance and dated summary actions."""
+    from planning_workflow import PlanningCase
+    try:
+        return PlanningCase(case_dir).contract_errors()
+    except (ValueError, KeyError, TypeError, OSError) as exc:
+        return [str(exc)]
+
+
 def percentage(value, decimals=0):
     if decimals == 0 and 0 < value < 0.01:
         decimals = 1

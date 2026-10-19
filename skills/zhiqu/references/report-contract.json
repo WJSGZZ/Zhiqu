@@ -1,7 +1,6 @@
 {
   "schema_version": 1,
   "kind": "gaokao",
-  "implementation_status": "legacy_inventory",
   "shared_rules": "../../zhiqu-shared/references/report-workflow.md",
   "legacy_gate_authority": [
     "case_check.py:0..8",
@@ -214,5 +213,33 @@
     "operator_check.md",
     "review.json:rubric"
   ],
-  "note": "仅登记现有内容角色与必备图；不重定义高考门槛、模型、概率显示权限或数量下限。"
+  "note": "仅登记现有内容角色与必备图；不重定义高考门槛、模型、概率显示权限或数量下限。",
+  "workflow_limits": {
+    "questions_min": 1,
+    "questions_max": 3,
+    "directions_min": 2,
+    "directions_max": 4,
+    "scenarios_min": 2,
+    "school_programs_min_if_kaoyan": 3,
+    "job_types_min": 3,
+    "rule_fresh_days": 30,
+    "operator_due_days": 30,
+    "review_samples_min": 5,
+    "review_score_min": 16
+  },
+  "trace_policy": {
+    "registration_files": [
+      "case.json",
+      "profile_parse.json"
+    ],
+    "exempt": [
+      "section_number",
+      "source_number",
+      "page_number",
+      "report_id",
+      "report_count",
+      "ordinal",
+      "list_number"
+    ]
+  }
 }

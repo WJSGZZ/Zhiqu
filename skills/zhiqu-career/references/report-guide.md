@@ -21,4 +21,4 @@
 
 求职报告采用同一套封面和图表规范，术语口径统一见[统一呈现与术语](../../zhiqu/references/report-guide.md#统一呈现与术语)，组件写法见[报告渲染器说明](../../zhiqu/scripts/render_report.py)。本版沿用上表的12节角色，默认题名不变；个人化题名不能省略角色内容。岗位资格或图表数据尚无原件时，应明确缺口；不能补一个个人录用概率。
 
-求职完整流程按[阶段表](case-workflow.md)留文件，每节组件与数据输入按[内容合同](report-contract.json)登记；交付前的操控者核查和独立复核标准链接[总纲](../../zhiqu-shared/references/report-workflow.md)。T10新增规格尚待工具实现，现有渲染过程不会自动执行新合同。
+求职完整流程按[阶段表](case-workflow.md)留文件，每节组件与数据输入按[内容合同](report-contract.json)登记；交付前的操控者核查和独立复核标准链接[总纲](../../zhiqu-shared/references/report-workflow.md)。

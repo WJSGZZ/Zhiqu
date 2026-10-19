@@ -16,7 +16,7 @@ description: 知衢 · 职业方向规划。读取「知衢 · 求职版」问�
 
 ## 工作流程
 
-求职报告的阶段产物在 [case-workflow.md](references/case-workflow.md) 逐步列出，必备内容由 [report-contract.json](references/report-contract.json) 登记。当前是T10规格阶段；工具接入前，仍须区分旧渲染器已运行与新门槛尚未执行。
+求职报告的阶段产物在 [case-workflow.md](references/case-workflow.md) 逐步列出，必备内容由 [report-contract.json](references/report-contract.json) 登记。 阶段文件由共用 `planning_report.py` 组装，操作见[总纲的工具用法](../zhiqu-shared/references/report-workflow.md#使用工具)。
 
 1. **确认阶段与时间**。问清今天的日期、学历取得方式、毕业与获证时间、最早到岗、求职进度及必须有收入的时点；已有工作/三方/合同/参保经历分别记，不从“应届”自称推定资格（`references/labor-rules.md`）。报告重点按阶段决定：
    - **还没开始 / 准备投递**：找方向、定目标岗位清单、按时间线准备。

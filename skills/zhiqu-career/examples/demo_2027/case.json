@@ -205,5 +205,118 @@
       "本人逐属性评分、完整锚点与优先级尚未确认，当前不算效用"
     ],
     "housing_fund_cash_factor": null
+  },
+  "schema_version": 1,
+  "case_id": "2027-QZ-S01",
+  "mode": "simulation",
+  "prepared_on": "2026-10-19",
+  "version": "1.1",
+  "decision_stage": "还没开始",
+  "target_year": 2027,
+  "legacy_directory": true,
+  "data_commit": "096e810aec0108fa4d1d67f7e95aa39a5042ca86",
+  "education": {
+    "year_level": "大三",
+    "major": "大数据与会计",
+    "school_level": "普通高职",
+    "expected_graduation": "2027-06-30"
+  },
+  "context": {
+    "as_of": "2026-10-19",
+    "takes_kaoyan": false,
+    "offer_basis": "scenario",
+    "personal_dates": {
+      "action0": "2026-10-23",
+      "action1": "2026-10-26",
+      "action2": "2026-10-30"
+    }
+  },
+  "report_meta": {
+    "title": "求职方向决策报告",
+    "subtitle": "四川 · 高职大数据与会计 · 2027 年毕业目标",
+    "person": "小宁（模拟）",
+    "edition": "求职版",
+    "date": "{{k:/context/as_of}}",
+    "id": "2027-QZ-S01",
+    "stage": "求职版 · 毕业前",
+    "region": "四川",
+    "data_asof": "{{k:/context/as_of}}",
+    "conclusion": "先落实基础财务岗位，再按现金流与资格判断专升本。"
+  },
+  "deadlines": [
+    {
+      "id": "checkpoint",
+      "label": "个人检查点",
+      "date": "2026-10-26",
+      "kind": "personal_checkpoint"
+    }
+  ],
+  "calculation_plan": {
+    "engine": "legacy_demo",
+    "scenarios": [
+      {
+        "id": "housing",
+        "changed_inputs": {
+          "monthly_housing_assumption": 1200
+        },
+        "why": "住房费用增加的压力测试",
+        "output_ref": "{{c:/monthly_remaining_if_housing_plus_600}}"
+      },
+      {
+        "id": "contract_city",
+        "changed_inputs": {
+          "offer": "B",
+          "contract": "派遣",
+          "housing": 400
+        },
+        "why": "改变合同、工资及居住条件，比较同口径现金结余",
+        "output_ref": "{{c:/hypothetical_offers/1/monthly_remaining_cash}}"
+      }
+    ],
+    "inputs": {
+      "/budget/take_home_assumption": "{{k:/budget/take_home_assumption}}",
+      "/budget/monthly_housing_assumption": "{{k:/budget/monthly_housing_assumption}}",
+      "/budget/monthly_other_expenses_assumption": "{{k:/budget/monthly_other_expenses_assumption}}",
+      "/hypothetical_followup/ss_personal_rate_assumption": "{{e:E0111#/value/~1hypothetical_followup~1ss_personal_rate_assumption}}",
+      "/hypothetical_followup/offers/0/monthly_gross": "{{e:E0112#/value/~1hypothetical_followup~1offers~10~1monthly_gross}}",
+      "/hypothetical_followup/offers/0/months": "{{e:E0112#/value/~1hypothetical_followup~1offers~10~1months}}",
+      "/hypothetical_followup/offers/0/hf_rate": "{{e:E0112#/value/~1hypothetical_followup~1offers~10~1hf_rate}}",
+      "/hypothetical_followup/offers/0/extra_hours_per_month": "{{e:E0112#/value/~1hypothetical_followup~1offers~10~1extra_hours_per_month}}",
+      "/hypothetical_followup/offers/0/monthly_rent": "{{e:E0112#/value/~1hypothetical_followup~1offers~10~1monthly_rent}}",
+      "/hypothetical_followup/offers/0/monthly_other": "{{e:E0112#/value/~1hypothetical_followup~1offers~10~1monthly_other}}",
+      "/hypothetical_followup/offers/0/minimum_wage_tier": "{{e:E0113#/value/~1hypothetical_followup~1offers~10~1minimum_wage_tier}}",
+      "/hypothetical_followup/offers/1/monthly_gross": "{{e:E0112#/value/~1hypothetical_followup~1offers~11~1monthly_gross}}",
+      "/hypothetical_followup/offers/1/months": "{{e:E0112#/value/~1hypothetical_followup~1offers~11~1months}}",
+      "/hypothetical_followup/offers/1/hf_rate": "{{e:E0112#/value/~1hypothetical_followup~1offers~11~1hf_rate}}",
+      "/hypothetical_followup/offers/1/extra_hours_per_month": "{{e:E0112#/value/~1hypothetical_followup~1offers~11~1extra_hours_per_month}}",
+      "/hypothetical_followup/offers/1/monthly_rent": "{{e:E0112#/value/~1hypothetical_followup~1offers~11~1monthly_rent}}",
+      "/hypothetical_followup/offers/1/monthly_other": "{{e:E0112#/value/~1hypothetical_followup~1offers~11~1monthly_other}}",
+      "/hypothetical_followup/offers/1/minimum_wage_tier": "{{e:E0113#/value/~1hypothetical_followup~1offers~11~1minimum_wage_tier}}",
+      "/hypothetical_followup/standard_hours_per_year": "{{e:E0114#/value/~1hypothetical_followup~1standard_hours_per_year}}",
+      "/hypothetical_followup/reference_wages/会计专业人员/p10": "{{e:E0115#/value/~1hypothetical_followup~1reference_wages~1会计专业人员~1p10}}",
+      "/hypothetical_followup/reference_wages/会计专业人员/p25": "{{e:E0115#/value/~1hypothetical_followup~1reference_wages~1会计专业人员~1p25}}",
+      "/hypothetical_followup/reference_wages/会计专业人员/p50": "{{e:E0115#/value/~1hypothetical_followup~1reference_wages~1会计专业人员~1p50}}",
+      "/hypothetical_followup/reference_wages/会计专业人员/p75": "{{e:E0115#/value/~1hypothetical_followup~1reference_wages~1会计专业人员~1p75}}",
+      "/hypothetical_followup/reference_wages/会计专业人员/p90": "{{e:E0115#/value/~1hypothetical_followup~1reference_wages~1会计专业人员~1p90}}",
+      "/hypothetical_followup/reference_wages/大学专科学历/p10": "{{e:E0115#/value/~1hypothetical_followup~1reference_wages~1大学专科学历~1p10}}",
+      "/hypothetical_followup/reference_wages/大学专科学历/p25": "{{e:E0115#/value/~1hypothetical_followup~1reference_wages~1大学专科学历~1p25}}",
+      "/hypothetical_followup/reference_wages/大学专科学历/p50": "{{e:E0115#/value/~1hypothetical_followup~1reference_wages~1大学专科学历~1p50}}",
+      "/hypothetical_followup/reference_wages/大学专科学历/p75": "{{e:E0115#/value/~1hypothetical_followup~1reference_wages~1大学专科学历~1p75}}",
+      "/hypothetical_followup/reference_wages/大学专科学历/p90": "{{e:E0115#/value/~1hypothetical_followup~1reference_wages~1大学专科学历~1p90}}",
+      "/hypothetical_followup/reference_wages/工龄0~01年（不分职业）/p10": "{{e:E0115#/value/~1hypothetical_followup~1reference_wages~1工龄0~001年（不分职业）~1p10}}",
+      "/hypothetical_followup/reference_wages/工龄0~01年（不分职业）/p25": "{{e:E0115#/value/~1hypothetical_followup~1reference_wages~1工龄0~001年（不分职业）~1p25}}",
+      "/hypothetical_followup/reference_wages/工龄0~01年（不分职业）/p50": "{{e:E0115#/value/~1hypothetical_followup~1reference_wages~1工龄0~001年（不分职业）~1p50}}",
+      "/hypothetical_followup/reference_wages/工龄0~01年（不分职业）/p75": "{{e:E0115#/value/~1hypothetical_followup~1reference_wages~1工龄0~001年（不分职业）~1p75}}",
+      "/hypothetical_followup/reference_wages/工龄0~01年（不分职业）/p90": "{{e:E0115#/value/~1hypothetical_followup~1reference_wages~1工龄0~001年（不分职业）~1p90}}",
+      "/hypothetical_followup/minimum_wage/tier1": "{{e:E0116#/value/~1hypothetical_followup~1minimum_wage~1tier1}}",
+      "/hypothetical_followup/minimum_wage/tier2": "{{e:E0116#/value/~1hypothetical_followup~1minimum_wage~1tier2}}",
+      "/hypothetical_followup/minimum_wage/proposal/tier1": "{{e:E0117#/value/~1hypothetical_followup~1minimum_wage~1proposal~1tier1}}",
+      "/hypothetical_followup/minimum_wage/proposal/tier2": "{{e:E0117#/value/~1hypothetical_followup~1minimum_wage~1proposal~1tier2}}",
+      "/hypothetical_followup/ss_base_limits/lower": "{{e:E0118#/value/~1hypothetical_followup~1ss_base_limits~1lower}}",
+      "/hypothetical_followup/ss_base_limits/upper": "{{e:E0118#/value/~1hypothetical_followup~1ss_base_limits~1upper}}"
+    },
+    "dependencies": {
+      "*": "all_inputs"
+    }
   }
 }

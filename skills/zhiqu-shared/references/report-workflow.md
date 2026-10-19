@@ -1,5 +1,7 @@
 # 报告工作流：从本人信息到可交付报告
 
+操控者是交付报告前亲自核查关键信息的人。
+
 本总纲约定三版共用的证据、数字、操控者核查与复核方法；业务阶段和各节内容只在下表的对应文件定义。
 
 | 版本 | 阶段表 | 内容合同与写作指南 |
@@ -8,31 +10,29 @@
 | 读研 | [阶段表](../../zhiqu-grad/references/case-workflow.md) | [合同](../../zhiqu-grad/references/report-contract.json)、[指南](../../zhiqu-grad/references/report-guide.md) |
 | 求职 | [阶段表](../../zhiqu-career/references/case-workflow.md) | [合同](../../zhiqu-career/references/report-contract.json)、[指南](../../zhiqu-career/references/report-guide.md) |
 
-**实现状态：这是 T10 阶段一的规格。** 当前高考门槛和报告生成仍按已有工具执行；读研、求职的新门槛、组装与操控者核查生成器须在阶段二实现并测试后启用。文档和 JSON 合同存在，不代表脚本已经执行了这些检查。四个新案例在后续阶段试跑，不提前声称完成。
-
 ## 一、顺序、产物与通过条件
 
 | 通用阶段 | 目的 | 读研、求职产物 | 通过条件 |
 |---|---|---|---|
 | 0 登记 | 确定这次替谁、在哪个阶段回答什么 | `case.json` | 编号、版本、准备日期、目标年份、当前业务阶段、截止及数据版本齐；真实案例仅本机留存 |
 | 1 画像 | 分清事实、偏好、约束、本人的判断 | `profile.txt`、`profile_parse.json` | 关键字段逐个 given / inferred / unknown；推断未确认不算事实；未知列 missing |
-| 2 问题与方向 | 收敛到需要做的选择 | `directions.json` | 决策问题 1—3 个，方向 2—4 个，各有支持、反证和验证办法 |
-| 3 规则复核 | 确认当届规则能用于本案 | `rules_check.json` | 每条规则有来源、日期、期限与 verified / unretrieved；会变规则在出稿基准日之前 30 天内重核 |
-| 4 候选 | 区分可进入、待调查和已剔除 | `candidates.json` | 每个硬条件 met / unknown / failed 并关联证据；剔除逐项解释；候选数量按本版阶段表 |
+| 2 问题与方向 | 收敛到需要做的选择 | `directions.json` | 决策问题和方向数量按本版合同，各有支持、反证和验证办法 |
+| 3 规则复核 | 确认当届规则能用于本案 | `rules_check.json` | 每条规则有来源、日期、期限与 verified / unretrieved；会变规则在本版合同规定的时限内重核 |
+| 4 候选 | 区分可进入、待调查和已剔除 | `candidates.json` | 每个硬条件 met / unknown / failed 并关联证据；剔除逐项解释；候选数量按本版合同 |
 | 5 证据 | 建立说法与原件的对应 | `evidence.json` | ID 唯一、适用人群年份清楚；所有阶段引用存在；取得原文才支持肯定事实，缺口说明影响 |
-| 6 计算 | 用明确输入算预算、收入与条件情景 | `calculations.json` | 输入可追溯、算法可复算；基准之外至少两个改动关键假设的情景；不覆盖原有结果 |
+| 6 计算 | 用明确输入算预算、收入与条件情景 | `calculations.json` | 输入可追溯、算法可复算；基准之外有合同规定的敏感性情景；不覆盖原有结果 |
 | 7 判断 | 把支持、反对、成本及切换条件摊开 | `judgment.json` | 维度/权重有本人依据，未知不造分；主路径、保险路径、每候选改判条件和检查点完整 |
 | 8 报告 | 从前述文件组装一致内容 | `narrative.json` → `<案例目录>/report.md` → `report.html`、`report.pdf`；自动产生 `report_trace.json` | 内容合同、数字溯源、渲染、版面、长网址/SVG 门禁全过，才发布新生成件 |
-| 9 操控者核查 | 让 Xik 检查影响交付的事实 | 自动生成 `<案例目录>/operator_check.md` | 自动选项不漏，核查人/日期/结果/依据可回读；未解决的主结论条件不标为已满足 |
-| 10 复核 | 用新会话复查判断和表达 | `review.json` | 九项坑均 pass、随机 5 条原文核对、评分无 0 且 ≥ 16；独立复核与操控者核查均完成才可交付 |
+| 9 操控者核查 | 让操控者检查影响交付的事实 | 自动生成 `<案例目录>/operator_check.md` | 自动选项不漏，核查人/日期/结果/依据可回读；未解决的主结论条件不标为已满足 |
+| 10 复核 | 用新会话复查判断和表达 | `review.json` | 各项坑均 pass、按合同抽查原文、评分满足共用标准；独立复核与操控者核查均完成才可交付 |
 
-高考仍使用 0—8 阶段；上述目的映射进现有产物，不强迫它新增读研、求职的分析文件。阶段二仅在原报告阶段增加操控者核查单、在原复核记录增加评分字段。高考生成器只读适配既有 rules、research、report 与 result 的来源/计算字段为内存核查条目，保留原文件指针和哈希，不另存一套 evidence 或反写报告数据；旧记录缺等级/日期时明确待分类并入核查，不能按域名猜成官方。复核快照绑定既有 report/result 与 PDF 哈希。
+高考仍使用 0—8 阶段；上述目的映射进现有产物，不强迫它新增读研、求职的分析文件。在原报告阶段增加操控者核查单、在原复核记录增加评分字段。高考生成器只读适配既有 report.json 的 sources 为内存核查条目，保留原文件指针和哈希，不另存一套 evidence 或反写报告数据；旧记录缺等级/日期时明确待分类并入核查，不能按域名猜成官方。复核快照绑定既有 report/result 与 PDF 哈希。
 
 ### 门槛与版本
 
 - 检查阶段 N 时同时检查 0…N。文件存在只是第一步，还要核字段、引用、数字、适用范围与依赖。错误须报文件名、字段路径、实际值及期望条件，例如 `candidates.json.items[2].hard_conditions[0].evidence_refs：E009 不存在`。
-- `case.json.prepared_on` 是开工日；出稿/交付用明确的 `as_of` 日期判断时效，不能靠早先准备日掩盖今天已过期的证据。核实日期不得晚于 as_of，复核期限不得早于核实日期；会变规则须满足 `0 ≤ as_of − verified_on ≤ 30天` 且未过复核期限。
-- 证据登记是累积的：阶段 3、4 可先向 evidence.json 登记已使用的条目；阶段 5 再检查整个证据集合和全部引用，避免“规则先用、证据还没有”的断链。画像数值可先记录本人输入，进入报告前仍须登记对应证据。
+- `case.json.prepared_on` 是开工日；出稿/交付用明确的 `as_of` 日期判断时效，不能靠早先准备日掩盖今天已过期的证据。核实日期不得晚于 as_of，复核期限不得早于核实日期；会变规则须满足 本版合同的 `workflow_limits.rule_fresh_days` 且未过复核期限。
+- 证据登记是累积的：阶段 3、4 可先向 evidence.json 登记已使用的条目；阶段 5 再检查整个证据集合和全部引用，避免“规则先用、证据还没有”的断链。本人登记数值可直接引用画像，不必重复登记证据。
 - 缺口可以带到后续调查，但必须附影响、负责人/查询入口与下一检查点。unknown 不算 met，unretrieved 不算原文已核；不能通过编数、冒充已确认或删除候选绕过门槛。
 - 阶段文件变更后，后续结果视为过期，按依赖重算/重生成。`report_trace.json` 保存输入文件与合同的 SHA-256、数字引用、报告文件哈希；核查与复核均绑定这份快照。改后不能沿用旧勾选或旧评分。
 - 真实案例存本机 `cases/`，不提交；公开样例用 simulation 且人物完全模拟。`mode` 不影响证据/算术/内容门槛，只影响是否在介绍页标示样例、是否还需要现实本人确认。
@@ -53,9 +53,9 @@
 | curl | curl | 官方原页/附件 URL、原件定位、日期；使用脚本取文也归此类并记脚本方式 |
 | browser | 浏览器 | 正常打开原页面的正文/附件、URL、日期；不以搜索摘要代替 |
 | provided | 本人提供 | 画像节名/原话定位，或本机附件与原始官方 URL；不把私人文件路径放进客户报告 |
-| operator_check | 操控者核查 | Xik 实际核查的日期、原件入口、结论与依据；不能由 Agent 代填“Xik已核” |
+| operator_check | 操控者核查 | 操控者实际核查的日期、原件入口、结论与依据；不能由 Agent 代填“操控者已核” |
 
-官方取文按本机 xik-crawler 规则；HTTP 优先，必要时正常内置浏览器回退。遇到登录/验证码等不绕过。取不到写“未取到”及原因；找过没找到写已查页面，不写“没有”。取文方式不会抬高证据等级：操控者看过经验帖，仍不是官方规则。
+官方页面和附件取原文核对；遇到登录、验证码或人机验证不绕过，记为未取到并写明原因。找过没找到写已查页面，不写“没有”。取文方式不会抬高证据等级：操控者看过经验帖，仍不是官方规则。
 
 ### evidence.json 的最小结构
 
@@ -78,7 +78,7 @@
 
 ## 三、报告数字的追溯与计算
 
-**报告里每个事实性数字，必须能追到 evidence.json 的条目或 calculations.json 的键。** 年份、日期、专业代码、计划数、价格、比例和情景点都包括。章节号、来源编号、页码等纯排版编号不当事实数字；报告 ID 是登记标识，不当成绩或统计量。
+**事实性数字须能追溯；登记输入可直接引用，报告自己的计数无需另立证据。** 节号、尾注号、页码、报告编号、序数、列表编号及“三件事”“两条路”“第1个志愿”等报告计数豁免。目标年份、年级、毕业年份、本人填写的预算或分数可直接引用case.json或profile_parse.json，不必另建证据。其余计划数、学费、分数线、工资、比例、官方日期及规则中的数字，必须追到evidence.json条目或calculations.json键。
 
 ### 统一引用写法
 
@@ -86,15 +86,16 @@
 
 - `{{e:E001#/value}}`：按稳定证据 ID 找条目，再用 JSON Pointer 找值。
 - `{{c:/annual_cost}}`：取 calculations.json 中对应键；保留两份旧示例原有计算键和数值。
-- 日期和代码也用证据引用；格式通过组件的 `format`（number / money / percent / date / code）声明，不能手改引用展开后的数字。
+- `{{k:/target_year}}`、`{{p:/fields/0/value}}`：直接引用case.json登记值或profile_parse.json本人字段；官方规则数字不得借登记字段洗成个人输入。
+- 官方日期和代码用证据引用；引用可用 `|comma`、`|1f`、`|percent0`、`|percent1` 指定显示格式；不指定时保留原值，不能手改引用展开后的数字。
 - 段落中的定性事实与判断用 `evidence_refs`、`candidate_refs`、`judgment_refs` 表明依据。只在句尾写一个编号但与数字不符，不算溯源。
 
-`report_trace.json` 由工具生成，逐个记录语义数字的章节/组件/文本位置、引用、未格式化值、显示值、格式和依赖；不手写。正文中没绑定的数值、悬空引用、单位错用、随手改写的日期或百分比必须报错。来源表中发布日期等元数据由 evidence 直接生成，同样可定位。
+`report_trace.json` 由工具生成，逐个记录语义数字的章节/组件/文本位置、引用、未格式化值、显示值、格式和依赖；不手写。正文中没绑定的数值、悬空引用、随手改写的日期或百分比必须报错；单位与原文语义的对应由复核核对。来源表中发布日期等元数据由 evidence 直接生成，同样可定位。
 
 ### calculations.json
 
 - 计算输入给 `evidence_refs` 或已存在计算键，写明单位、适用人群、取整方式和关键假设。只能由已注册的确定性算法计算；说明中的公式是文字，不执行来自 JSON 的任意 Python/表达式。
-- 记录算法 ID、输入映射、基准输出、至少两个敏感性情景；每情景写 changed_inputs、why、outputs、对建议是否有影响。至少一个关键输入与基准不同，两次跑同一组参数不算两个情景。
+- 记录算法 ID、输入映射、基准输出、合同要求的敏感性情景；每情景写 changed_inputs、why、outputs、对建议是否有影响。情景必须改变关键输入；重复跑同一组参数不算新的情景。
 - 预算/净收入/工时/分位数等都能复算；机会成本缺可比工资时写未知及所缺输入，不能填市场平均数冒充本人少挣收入。无实际 offer 时可以计算明确标识的条件情景，不能冒充已获报价。
 - 旧示例 calculations.json 的现有结果逐值保留；新增 inputs / algorithms / scenarios 等放新增键，不把旧结果改名、挪位或重新取整。分数统计仅保留匿名汇总，区分复试/拟录取、普通/专项及不同试卷；不算个人概率。
 - 未取得分数/费用/收入原件时保留空缺；相应图仍提供标题、读图说明、来源及“未取到/不适用”状态，不画零值。缺数据不能以“凑必备图”为由造数。
@@ -123,8 +124,6 @@ judgment.json的字段固定如下，表格和组件直接取这些记录；数�
 
 这里的text是结构化短理由或动作；长分析只在narrative登记位置写。main_conclusion所需的证据要从recommendation及其引用继续追踪，不能漏掉间接影响结果的计算输入。
 
-calculations.json保留既有输出键；新增的inputs按稳定键记录 `{value_ref, unit, assumption_kind, scope}`，value_ref指证据或已算结果。algorithms数组每项 `{id, algorithm, inputs, output_pointer, rounding}`；algorithm只允许工具登记的确定性实现，未知算法报错，禁止eval。scenarios数组每项 `{id, baseline_id, changed_inputs, why, algorithms, outputs, decision_effect}`。changed_inputs的值同样引用已登记的假设证据；输出由算法产生，不能用手填outputs代替复算。至少两个情景各有实际改动且不重复，不要求在没有可比输入时捏造机会成本。
-
 rules_check.json顶层用 `{schema_version, as_of, items}`，每项来源通过evidence_refs唯一定位，volatile布尔、status和日期必须齐。rules_check的as_of与本次出稿基准一致。候选中的每个硬条件要能联合定位适用规则和本人事实，而不是只挂一份学校首页。
 
 ## 四、内容合同与自动组装
@@ -133,41 +132,31 @@ rules_check.json顶层用 `{schema_version, as_of, items}`，每项来源通过e
 
 合同的 `sections` 按 01…12 排列，`role` 固定；`default_title` 沿用本版指南，读研/求职可围绕同一角色个人化标题，不能换名后省略内容，旧示例题名保持。高考保持现有节名。页数不作为内容达标证明。
 
-每个 slot 规定 `component`、`min`、`max`（null 表示随候选数量）、`from`（文件和 JSON Pointer）、`source_required`、`condition` 与 `rules`。from 中 `*` 是数组/对象项通配符；min/max 按 count_by 指定的 items（条目）或 components（组件）计数，不按文字行数；矩阵的行列数另查 matrix_policy。条件为假也要按 slot 的 `otherwise` 输出暂无/不适用说明，不静默删节。
+每个 slot 规定 `component`、`min`、`max`（null 表示随候选数量）、`from`（文件和 JSON Pointer）、`source_required`、`condition` 与 `rules`。from 指定可引用的子树；min/max 按 count_by 指定的 items（条目）或 components（组件）计数，不按文字行数；矩阵的行列数另查 matrix_policy。条件为假时保留该节的暂无/不适用说明；不可把未知值画成零值。
 
-合同条件只用已登记语义：always恒成立；matrix_unknown_ratio_gt_0_7由单元格状态实际计算（`10 × unknown > 7 × 全部格数`，恰好七成不触发）；offer_basis_actual_or_scenario读取case.context.offer_basis并核对应证据/情景输入，不允许手填一个开关绕过。case.context还记出稿as_of；真实交付必须对应实际生成/交付日期，simulation历史快照须明示，不能借回填日期使用已过期规则。读研takes_kaoyan须与实际主/备路径一致，不能填false回避三候选要求。
+合同条件按合同的阈值与阶段数据计算，不能手填开关绕过；case.context记出稿as_of；真实交付必须对应实际生成/交付日期，simulation历史快照须明示，不能借回填日期使用已过期规则。读研takes_kaoyan须与实际主/备路径一致，不能填false回避候选数量要求。
 
 - narrative.json 顶层 `schema_version` 和 `sections`；每节只允许合同登记 `narrative_key` 的文字位置。禁止整章 Markdown、任意表格/:::组件或在叙述中重复填数字表；表格、图、路线卡与来源从阶段数据组装。
 - 结构化阶段文件可有短标签、反证、理由与动作，供表格/卡片直接取用；连贯分析段落和摘要的表述只放在 narrative 对应位置。来源数据变更后从引用重出，不能人工改 report.md 修补数字。
-- 摘要固定一句话结论、3—4 张数字卡、3—5 条带小标题的一句话核心结论、正好三件带日期的事、下一个检查点。主路径与保险路径须能对应 judgment，不能用漂亮表述覆盖未满足条件。
-- 比较矩阵至少 3 行选项、4 列维度；单元格分 supported / conditional / failed / unknown，对应 ✓ / △ / ✗ / △待查。unknown 格数占比严格超过 70% 时，必须列出缺信息、去哪里补、拿到后怎样改判；“有条件”不能成为掩藏未知的标签。
-- 每候选支持、反对、代价、失败去向均不空；每行动路线有固定四栏；风险情景至少三行。无证据的项目明确说明未知，不能用套话填满。
+- 摘要须有结论、数字卡、带小标题的核心结论、带日期的行动和检查点；各项上下限见本版内容合同。主路径与保险路径须能对应 judgment，不能用漂亮表述覆盖未满足条件。
+- 比较矩阵的行列下限见本版合同；单元格分 supported / conditional / failed / unknown，对应 ✓ / △ / ✗ / △待查。unknown 格数占比超过合同阈值时，必须列出缺信息、去哪里补、拿到后怎样改判；“有条件”不能成为掩藏未知的标签。
+- 每候选支持、反对、代价、失败去向均不空；每行动路线有固定四栏；风险情景数量按合同。无证据的项目明确说明未知，不能用套话填满。
 - 每张图都有标题、一句读图说明、有效来源编号；全文来源编号由 evidence ID 确定性映射到第 12 节尾注。第 12 节以外不显示超过 40 字符的网址，也不显示私人缓存路径。
 
-### narrative 的受控位置
+### 组件和叙述的字段
 
-sections 用两位节号作键，合同中的 narrative_key 按点分路径定位（例如 `06.score_ranges_text`）；位置未登记或结构不符就报错。不同位置只接受下列类型，组件的数据行不在 narrative 中填写：
+`judgment.json.presentation` 按节号列出 `{slot, ref}`；ref是 `文件名#/JSON/Pointer`，必须落在合同登记的文件和子树内，不能任意换文件。每个节点采用 `{type, content, evidence_refs, calc_refs, registration_refs}`，只允许该槽的组件类型。
 
-| 位置 | 允许结构 |
-|---|---|
-| lead | `{text, judgment_refs, evidence_refs}`；一句结论，关联本节判断 |
-| analysis | 段落数组，每项 `{heading, text, judgment_refs, evidence_refs}`；小标题可空，不写 Markdown 标题/表格/组件 |
-| core_points | `{title, text, judgment_refs, evidence_refs}` 数组，每条一句话 |
-| unknown_explanation | `{missing_information, retrieval_plan, decision_changes, evidence_refs}`；缺信息、补法、改判三项不空 |
-| figure_text | `{title, caption, evidence_refs}`；仅图名和读图说明，行值/标签/点仍从阶段文件取 |
-| disclaimer | `{text}`；按本版适用边界声明，不承诺结果 |
+- `narrative.json.sections` 按节号存受控的 `lead`、`analysis`、`core_points`、`unknown_explanation`、`disclaimer`。lead和disclaimer的content为`{text}`；analysis节点可为paragraph、heading、list或callout，内容分别为text、items或title+items；核心结论用items数组，每项title+text；未知说明的content有missing_information、retrieval_plan、decision_changes。禁止正文嵌入整章标题、表格和组件代码。
+- 表格、图、路线卡、日期行动等是结构化节点，放在合同登记的对应阶段 `report_blocks` 内，不能放进叙述。表格content用columns+rows；图另含title、caption、unit及有效来源。行动节点content.items每项text+date；日期允许引用登记检查点或官方证据。图名与读图说明随图节点保存，避免另一份文稿重复维护。
+- 阶段业务记录保留候选、硬条件、判断与依据；presentation只决定如何展示这些记录，不得另填相反的资格或数值。组装器检查类型、来源位置、数量和引用，语义是否被准确概括仍由复核确认。
+- 现有计算保留原键；`case.json.calculation_plan` 登记engine、inputs、dependencies与scenarios。旧案例使用已注册的legacy_demo算法，inputs逐个指向既有case字段的证据或本人输入，必须与实际计算值一致；dependencies记录计算键的证据依赖。通用算法仅支持已注册的sum/product/difference/ratio，operations写inputs引用和output键，不接受任意表达式。情景记录changed_inputs、why、output_ref及decision_effect，由已注册算法复算，不能以手填说明替代算术。
 
-文字内的数字仍须用前述占位符。来源编号由 evidence_refs 自动分配，不让作者手写编号；“有日期”要解析到日期证据，不能只检查字符串像日期。摘要行动和路线正文取 judgment 的结构化动作，不再在 narrative 另写第二套。
-
-### 输出边界
-
-阶段 8 先在临时目录组装并检查合同与数字引用，再渲染与过版面/长网址/SVG 门禁；全部通过才原子更新 report.md、HTML、PDF 与 trace。失败保留诊断，不发布半套新报告，旧交付件标为旧快照。检查通过也只是可核查草稿；阶段 9、10 未过，不能标可交付。
-
-客户报告按真实交付标准写；“模拟”只放封面、页眉姓名后，人物说明放案例介绍。工具名、中间文件名、复现/演示等开发语言不进正文。操控者单和 review 留在案例目录，不附在客户 PDF。
+组装器产物是供核查的报告；`case_check.py --stage 10 --delivery` 才检查操控者完成和独立批准，生成成功不等于获准向真实客户交付。
 
 ## 五、操控者核查单
 
-自动生成 operator_check.md，按 evidence ID 去重，**并集**选出：非官方等级；unretrieved；已过期或距期限 0—30 天；影响主结论。影响主结论还要沿 judgment → calculations 输入 → evidence 反向追踪，不能只靠手填 main_conclusion；失效/缺日期的项也列出原因。
+自动生成 operator_check.md，按 evidence ID 去重，**并集**选出：非官方等级；unretrieved；已过期或在本版合同的临期窗口内；影响主结论。影响主结论还要沿 judgment → calculations 输入 → evidence 反向追踪，不能只靠手填 main_conclusion；失效/缺日期的项也列出原因。
 
 每项保留全部入选原因，写明“核什么、去哪里核、核完填什么”，至少含：
 
@@ -178,9 +167,9 @@ sections 用两位节号作键，合同中的 narrative_key 按点分路径定�
   核完填：核查人___；日期___；结果（确认/不符/仍未知）___；原文依据与适用范围___；对建议的处理___。
 ```
 
-生成器保存稳定 ID 与证据快照标记。重生成只保留相同 ID、相同原文/值/范围/期限快照的填写；变动项重新待核，不用原勾选。勾框本身不等于完成，须结果与依据齐全，且 trace 对应当前报告。Xik 核了非官方体验后仍保留其原等级；核到官方规则时更新 evidence 再重生成，不在核查单里另立一份矛盾数值。
+生成器保存稳定 ID 与证据快照标记。重生成只保留相同 ID、相同原文/值/范围/期限快照的填写；变动项重新待核，不用原勾选。勾框本身不等于完成，须结果与依据齐全，且 trace 对应当前报告。操控者核了非官方体验后仍保留其原等级；核到官方规则时更新 evidence 再重生成，不在核查单里另立一份矛盾数值。
 
-个人信息缺失按 profile_parse.missing 单独列“请本人补充”，不改问卷；推断未确认的也进入。核查由 Xik 亲自做，Agent 可以准备问题和入口，不能代勾或假称已经核查。simulation 也保留未核标记，不伪造现实操控者操作。
+个人信息缺失按 profile_parse.missing 单独列“请本人补充”，不改问卷；推断未确认的也进入。核查由操控者亲自做，Agent 可以准备问题和入口，不能代勾或假称已经核查。simulation 也保留未核标记，不伪造现实操控者操作。
 
 ## 六、复核与评分
 
@@ -198,24 +187,32 @@ review.json 复用高考既有 `independent`、`reviewer`、`date`、`pitfalls`�
 | consistency | 数字前后一致 | 冲突或复算失败 | 数字正确但单位/取整说明不清 | 数字复算且全篇口径一致 |
 | timeliness | 时效 | 规则过期却按有效采用 | 已注明缺口但部分时间点待核 | 用到的有效规则均在期内，旧年仅作明示参照 |
 | personalization | 个性化 | 可套给任何人 | 引用了画像但未影响取舍 | 有本人原话、矛盾与其对取舍的具体作用 |
-| actionability | 可行动 | 无下一步或日期 | 有日期，部分动作/入口不清 | 三件事及路线的日期、入口、检查点与切换明确 |
+| actionability | 可行动 | 无下一步或日期 | 有日期，部分动作/入口不清 | 行动事项及路线的日期、入口、检查点与切换明确 |
 | boundaries | 不越界 | 编概率/保证结果/代决策 | 无硬越界，个别表述仍易误解 | 事实、假设、偏好与结果边界均清楚 |
-| summary_access | 家长只读摘要也能看懂 | 术语或数字堆叠，无法知道做什么 | 大致懂，仍需翻正文找关键限制 | 摘要能理解理由、边界和三件事，无须先学术语 |
+| summary_access | 家长只读摘要也能看懂 | 术语或数字堆叠，无法知道做什么 | 大致懂，仍需翻正文找关键限制 | 摘要能理解理由、边界和行动事项，无须先学术语 |
 | layout | 版式无问题 | 门禁失败或可见挤压/断图 | 门禁过但视觉仍有不影响阅读的瑕疵 | 机械门禁和逐页视觉检查均过 |
 
-**评分通过：十项齐、无 0 分、总分 ≥ 16。** 任一硬门禁失败、九项坑有 fail、主结论引用未核的规则、操控者必核项未完成，都不能靠其他高分抵消。制作会话按事实自评，不给自己满分；独立复核不能靠复制自评分冒充审阅。
+**评分通过：项目完整、各项无零分，总分下限按本版[内容合同](../../zhiqu-grad/references/report-contract.json)的 `workflow_limits.review_score_min`（[求职](../../zhiqu-career/references/report-contract.json)、[高考](../../zhiqu/references/report-contract.json)同字段）。** 任一硬门禁失败、九项坑有 fail、主结论引用未核的规则、操控者必核项未完成，都不能靠其他高分抵消。制作会话按事实自评，不给自己满分；独立复核不能靠复制自评分冒充审阅。
 
 ### review 的其余门槛
 
 - 九项坑沿用 AGENTS 的名称：没查到写成不存在、群体数字当个人概率、经验帖数字做决定、按编号引用问卷、同一事实写两处、会过期的事实、八字越界、委派判断类任务、取页摘要当原文。逐条 pass / fail + 说明和报告位置。
-- 从当前用于报告的官方原文证据 ID 集合中随机取 5 条（不足 5 条不能声称完成该门槛），记录候选集合、种子、选中 ID、主张、URL、原文定位/关键句、取文方式、日期及 matches。必须真的打开/读取原文；本机已保存原件可凭哈希核对，过期规则需重新取文。
+- 从当前用于报告的官方原文证据 ID 集合中按合同抽查（数量不足不能声称完成该门槛），记录候选集合、种子、选中 ID、主张、URL、原文定位/关键句、取文方式、日期及 matches。必须真的打开/读取原文；本机已保存原件可凭哈希核对，过期规则需重新取文。
 - 抽查之外发现的主要错误同样阻断；未取到的不能记 matches=true。随机抽查不能代替所有主结论来源核查。
 - `status` 区分 draft / self_assessed / awaiting_independent_review / approved / changes_required；自评可通过评分，但正式交付必须 independent=true 且 status=approved。机器只能查字段、算分和哈希，不能证明是新会话或本人真实操作，操控者确认身份与实际核查。
 
-## 七、阶段二与试跑的验收边界
+## 使用工具
 
-工具必须提供正常例与应拦反例：两版缺必备组件、数字无引用、摘要动作无日期；四类操控者入选原因（非官方/未取到/临期/主结论）；过期依赖、错误引用与未知矩阵比例等。不能只写会报错、不测试应当通过的写法。
+在仓库根目录运行；四个技能及共用目录须同层安装：
 
-两个旧示例先迁移阶段文件，逐节核内容不减少、原计算键和值完全不变。小林若仍走考研，补足三个真实调查候选及条件分档，不能把就业路径假装成第三所考研院校。四个新模拟案例走同样门槛，保留实际遇到的缺口；制作会话完成自评后等待新会话，不伪造独立审核以凑“全流程通过”。 simulation试跑检查可验证自评完整、评分达标以及awaiting_independent_review状态，输出明确为“试跑自评通过、未获交付批准”；这与正式交付门槛分开，不能跳过独立复核或操控者核查。
+```bash
+python3 skills/zhiqu/scripts/case_check.py <案例目录> --stage 7
+python3 skills/zhiqu/scripts/planning_report.py <案例目录>
+python3 skills/zhiqu/scripts/case_check.py <案例目录> --stage 9
+# 操控者核查完成、新会话填写复核记录后才可检查真实交付
+python3 skills/zhiqu/scripts/case_check.py <案例目录> --stage 10 --delivery
+```
 
-高考原 12 个案例与两个样例的 report.json、result.json 开工前后逐值一致；工具补核查单、review补字段；版式修正只改呈现，不反写数据。每阶段运行 AGENTS 规定检查。最终全部 20 份报告逐页看图，状态、页数、证据、发现与提交记录在本机 ROADMAP，不进入客户报告。
+`planning_report.py` 自动检查前置阶段与内容合同，调用共用渲染器和版面/来源门禁；全部成功才替换报告、来源快照和核查单，失败保留旧件。`--html-only` 仅产生供检查的HTML稿，不是PDF交付。阶段检查逐级累计，阶段9允许核查单待填写，阶段10自评与`--delivery`的独立批准分开检查。
+
+需要单独更新核查单时运行 `python3 skills/zhiqu/scripts/operator_check.py <案例目录>`。高考继续运行原来的 `case_report.py`，生成时附带核查单；对旧报告可用同一个核查单命令只读补单，原报告与结果不变。核查单变更后重新复核快照，不能沿用失效的批准。

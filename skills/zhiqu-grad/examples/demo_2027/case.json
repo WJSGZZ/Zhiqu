@@ -289,5 +289,168 @@
       "admitted_distribution_status": "unretrieved_complete_population",
       "scope": "全校拟录取表与学院成绩表尚未完整对应，不把匹配子集用于拟录取分布"
     }
+  },
+  "schema_version": 1,
+  "case_id": "2027-YJ-S01",
+  "mode": "simulation",
+  "prepared_on": "2026-10-19",
+  "version": "1.1",
+  "decision_stage": "备考中",
+  "target_year": 2027,
+  "legacy_directory": true,
+  "data_commit": "096e810aec0108fa4d1d67f7e95aa39a5042ca86",
+  "education": {
+    "year_level": "大四",
+    "major": "电气工程及其自动化",
+    "school_level": "普通公办本科",
+    "expected_graduation": "2027-06-30"
+  },
+  "context": {
+    "as_of": "2026-10-19",
+    "takes_kaoyan": true,
+    "offer_basis": "none",
+    "personal_dates": {
+      "action0": "2026-10-21",
+      "action1": "2026-10-22",
+      "action2": "2026-10-23"
+    }
+  },
+  "report_meta": {
+    "title": "读研路径决策报告",
+    "subtitle": "广东 · 电气工程及其自动化本科 · 2027 年入学目标",
+    "person": "小林（模拟）",
+    "edition": "读研版",
+    "date": "{{k:/context/as_of}}",
+    "id": "2027-YJ-S01",
+    "stage": "读研版 · 初试前",
+    "region": "广东",
+    "data_asof": "{{k:/context/as_of}}",
+    "conclusion": "继续准备电气方向，同时落实可接受的就业备选。"
+  },
+  "deadlines": [
+    {
+      "id": "checkpoint",
+      "label": "个人检查点",
+      "date": "2026-10-21",
+      "kind": "personal_checkpoint"
+    }
+  ],
+  "calculation_plan": {
+    "engine": "legacy_demo",
+    "scenarios": [
+      {
+        "id": "living",
+        "changed_inputs": {
+          "monthly_living_assumption": 1500
+        },
+        "why": "生活成本提高的压力测试",
+        "output_ref": "{{c:/annual_cost_if_living_plus_200}}"
+      },
+      {
+        "id": "other_fee",
+        "changed_inputs": {
+          "tuition_reference": "广工旧年收费"
+        },
+        "why": "同口径换学费参照；不当2027最终报价",
+        "output_ref": "{{c:/gdut_fee_reference/annual_cost}}"
+      }
+    ],
+    "inputs": {
+      "/budget/annual_limit": "{{k:/budget/annual_limit}}",
+      "/budget/annual_tuition": "{{e:E0169#/value/~1budget~1annual_tuition}}",
+      "/budget/annual_housing": "{{e:E0170#/value/~1budget~1annual_housing}}",
+      "/budget/monthly_living_assumption": "{{k:/budget/monthly_living_assumption}}",
+      "/budget/living_months": "{{e:E0171#/value/~1budget~1living_months}}",
+      "/budget/years": "{{e:E0172#/value/~1budget~1years}}",
+      "/additional_scenarios/gdut_fee_reference/applicable_cohort": "{{e:E0173#/value/~1additional_scenarios~1gdut_fee_reference~1applicable_cohort}}",
+      "/additional_scenarios/gdut_fee_reference/target_cohort": "{{e:E0174#/value/~1additional_scenarios~1gdut_fee_reference~1target_cohort}}",
+      "/additional_scenarios/gdut_fee_reference/official_tuition": "{{e:E0173#/value/~1additional_scenarios~1gdut_fee_reference~1official_tuition}}",
+      "/additional_scenarios/gdut_fee_reference/years": "{{e:E0173#/value/~1additional_scenarios~1gdut_fee_reference~1years}}",
+      "/additional_scenarios/gdut_fee_reference/annual_housing_assumption": "{{e:E0174#/value/~1additional_scenarios~1gdut_fee_reference~1annual_housing_assumption}}",
+      "/additional_scenarios/gdut_fee_reference/monthly_living_assumption": "{{e:E0174#/value/~1additional_scenarios~1gdut_fee_reference~1monthly_living_assumption}}",
+      "/additional_scenarios/gdut_fee_reference/living_months": "{{e:E0174#/value/~1additional_scenarios~1gdut_fee_reference~1living_months}}",
+      "/additional_scenarios/gdut_fee_reference/annual_limit": "{{e:E0174#/value/~1additional_scenarios~1gdut_fee_reference~1annual_limit}}",
+      "/additional_scenarios/gdut_2026_retest/initial_max": "{{e:E0175#/value/~1additional_scenarios~1gdut_2026_retest~1initial_max}}",
+      "/additional_scenarios/gdut_2026_retest/retest_max": "{{e:E0175#/value/~1additional_scenarios~1gdut_2026_retest~1retest_max}}",
+      "/additional_scenarios/gdut_2026_retest/initial_weight": "{{e:E0175#/value/~1additional_scenarios~1gdut_2026_retest~1initial_weight}}",
+      "/additional_scenarios/gdut_2026_retest/retest_weight": "{{e:E0175#/value/~1additional_scenarios~1gdut_2026_retest~1retest_weight}}",
+      "/additional_scenarios/gdut_2026_retest/initial_increment": "{{e:E0176#/value/~1additional_scenarios~1gdut_2026_retest~1initial_increment}}",
+      "/additional_scenarios/gdut_2026_retest/retest_increment": "{{e:E0176#/value/~1additional_scenarios~1gdut_2026_retest~1retest_increment}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/full_time_rows": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1full_time_rows}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/excluded_soldier_rows": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1excluded_soldier_rows}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/350": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1350}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/351": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1351}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/352": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1352}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/353": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1353}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/354": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1354}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/355": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1355}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/356": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1356}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/357": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1357}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/358": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1358}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/359": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1359}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/361": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1361}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/363": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1363}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/364": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1364}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/365": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1365}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/366": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1366}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/368": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1368}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/369": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1369}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/370": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1370}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/371": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1371}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/372": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1372}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/373": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1373}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/374": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1374}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/375": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1375}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/379": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1379}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/381": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1381}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/382": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1382}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/383": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1383}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/384": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1384}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/388": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1388}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/389": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1389}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/390": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1390}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/391": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1391}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/396": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1396}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/402": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1402}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/404": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1404}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/406": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1406}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/407": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1407}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/408": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1408}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/417": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1417}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/429": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1429}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/432": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1432}}",
+      "/additional_scenarios/gdut_2026_first_choice_retest_scores/score_histogram/437": "{{e:E0177#/value/~1additional_scenarios~1gdut_2026_first_choice_retest_scores~1score_histogram~1437}}",
+      "/hypothetical_followup/score_scenarios/0": "{{e:E0178#/value/~1hypothetical_followup~1score_scenarios~10}}",
+      "/hypothetical_followup/score_scenarios/1": "{{e:E0178#/value/~1hypothetical_followup~1score_scenarios~11}}",
+      "/hypothetical_followup/score_scenarios/2": "{{e:E0178#/value/~1hypothetical_followup~1score_scenarios~12}}",
+      "/hypothetical_followup/score_scenarios/3": "{{e:E0178#/value/~1hypothetical_followup~1score_scenarios~13}}",
+      "/hypothetical_followup/official_stats/2026_普通计划与基地计划/n": "{{e:E0179#/value/~1hypothetical_followup~1official_stats~12026_普通计划与基地计划~1n}}",
+      "/hypothetical_followup/official_stats/2026_普通计划与基地计划/min": "{{e:E0179#/value/~1hypothetical_followup~1official_stats~12026_普通计划与基地计划~1min}}",
+      "/hypothetical_followup/official_stats/2026_普通计划与基地计划/q1": "{{e:E0179#/value/~1hypothetical_followup~1official_stats~12026_普通计划与基地计划~1q1}}",
+      "/hypothetical_followup/official_stats/2026_普通计划与基地计划/median": "{{e:E0179#/value/~1hypothetical_followup~1official_stats~12026_普通计划与基地计划~1median}}",
+      "/hypothetical_followup/official_stats/2026_普通计划与基地计划/q3": "{{e:E0179#/value/~1hypothetical_followup~1official_stats~12026_普通计划与基地计划~1q3}}",
+      "/hypothetical_followup/official_stats/2026_普通计划与基地计划/max": "{{e:E0179#/value/~1hypothetical_followup~1official_stats~12026_普通计划与基地计划~1max}}",
+      "/hypothetical_followup/official_stats/2026_普通计划/n": "{{e:E0179#/value/~1hypothetical_followup~1official_stats~12026_普通计划~1n}}",
+      "/hypothetical_followup/official_stats/2026_普通计划/min": "{{e:E0179#/value/~1hypothetical_followup~1official_stats~12026_普通计划~1min}}",
+      "/hypothetical_followup/official_stats/2026_普通计划/q1": "{{e:E0179#/value/~1hypothetical_followup~1official_stats~12026_普通计划~1q1}}",
+      "/hypothetical_followup/official_stats/2026_普通计划/median": "{{e:E0179#/value/~1hypothetical_followup~1official_stats~12026_普通计划~1median}}",
+      "/hypothetical_followup/official_stats/2026_普通计划/q3": "{{e:E0179#/value/~1hypothetical_followup~1official_stats~12026_普通计划~1q3}}",
+      "/hypothetical_followup/official_stats/2026_普通计划/max": "{{e:E0179#/value/~1hypothetical_followup~1official_stats~12026_普通计划~1max}}",
+      "/hypothetical_followup/official_stats/2026_基地计划/n": "{{e:E0179#/value/~1hypothetical_followup~1official_stats~12026_基地计划~1n}}",
+      "/hypothetical_followup/official_stats/2026_基地计划/min": "{{e:E0179#/value/~1hypothetical_followup~1official_stats~12026_基地计划~1min}}",
+      "/hypothetical_followup/official_stats/2026_基地计划/q1": "{{e:E0179#/value/~1hypothetical_followup~1official_stats~12026_基地计划~1q1}}",
+      "/hypothetical_followup/official_stats/2026_基地计划/median": "{{e:E0179#/value/~1hypothetical_followup~1official_stats~12026_基地计划~1median}}",
+      "/hypothetical_followup/official_stats/2026_基地计划/q3": "{{e:E0179#/value/~1hypothetical_followup~1official_stats~12026_基地计划~1q3}}",
+      "/hypothetical_followup/official_stats/2026_基地计划/max": "{{e:E0179#/value/~1hypothetical_followup~1official_stats~12026_基地计划~1max}}",
+      "/hypothetical_followup/official_stats/2025_普通计划/n": "{{e:E0180#/value/~1hypothetical_followup~1official_stats~12025_普通计划~1n}}",
+      "/hypothetical_followup/official_stats/2025_普通计划/min": "{{e:E0180#/value/~1hypothetical_followup~1official_stats~12025_普通计划~1min}}",
+      "/hypothetical_followup/official_stats/2025_普通计划/q1": "{{e:E0180#/value/~1hypothetical_followup~1official_stats~12025_普通计划~1q1}}",
+      "/hypothetical_followup/official_stats/2025_普通计划/median": "{{e:E0180#/value/~1hypothetical_followup~1official_stats~12025_普通计划~1median}}",
+      "/hypothetical_followup/official_stats/2025_普通计划/q3": "{{e:E0180#/value/~1hypothetical_followup~1official_stats~12025_普通计划~1q3}}",
+      "/hypothetical_followup/official_stats/2025_普通计划/max": "{{e:E0180#/value/~1hypothetical_followup~1official_stats~12025_普通计划~1max}}"
+    },
+    "dependencies": {
+      "*": "all_inputs"
+    }
   }
 }

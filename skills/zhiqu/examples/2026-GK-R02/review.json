@@ -1,0 +1,90 @@
+{
+  "independent": false,
+  "reviewer": null,
+  "date": null,
+  "pitfalls": [],
+  "sampled_sources": [],
+  "status": "awaiting_independent_review",
+  "rubric": {
+    "status": "pending",
+    "items": [
+      {
+        "id": "clarity",
+        "score": null,
+        "reason": "此项尚未按共用评分表复核；原复核内容另行保留",
+        "evidence_refs": [],
+        "report_location": null
+      },
+      {
+        "id": "traceability",
+        "score": null,
+        "reason": "此项尚未按共用评分表复核；原复核内容另行保留",
+        "evidence_refs": [],
+        "report_location": null
+      },
+      {
+        "id": "reasoning",
+        "score": null,
+        "reason": "此项尚未按共用评分表复核；原复核内容另行保留",
+        "evidence_refs": [],
+        "report_location": null
+      },
+      {
+        "id": "consistency",
+        "score": null,
+        "reason": "此项尚未按共用评分表复核；原复核内容另行保留",
+        "evidence_refs": [],
+        "report_location": null
+      },
+      {
+        "id": "timeliness",
+        "score": null,
+        "reason": "此项尚未按共用评分表复核；原复核内容另行保留",
+        "evidence_refs": [],
+        "report_location": null
+      },
+      {
+        "id": "personalization",
+        "score": null,
+        "reason": "此项尚未按共用评分表复核；原复核内容另行保留",
+        "evidence_refs": [],
+        "report_location": null
+      },
+      {
+        "id": "actionability",
+        "score": null,
+        "reason": "此项尚未按共用评分表复核；原复核内容另行保留",
+        "evidence_refs": [],
+        "report_location": null
+      },
+      {
+        "id": "boundaries",
+        "score": null,
+        "reason": "此项尚未按共用评分表复核；原复核内容另行保留",
+        "evidence_refs": [],
+        "report_location": null
+      },
+      {
+        "id": "summary_access",
+        "score": null,
+        "reason": "此项尚未按共用评分表复核；原复核内容另行保留",
+        "evidence_refs": [],
+        "report_location": null
+      },
+      {
+        "id": "layout",
+        "score": null,
+        "reason": "此项尚未按共用评分表复核；原复核内容另行保留",
+        "evidence_refs": [],
+        "report_location": null
+      }
+    ]
+  },
+  "snapshot": {
+    "report.json": "2dcb216fc1572c076f9564821449659a0861f61ad99f3324a89c37fdb4460942",
+    "report.pdf": "7bdc116e09134a0b49166d42544d06b92d9e4724ff6e78a553e4b4a83f6fca3a",
+    "operator_check.md": "37fa054a4ec33090a527a809e95d302d000b5a4b759366d07d3ea9ef3482ae8e",
+    "retro_ranks/58000/result.json": "de51b44a437b1e370221b1275c312c16cf5d3974d70af1df23990c3cb653adad",
+    "case.json": "961dcd5b6a736af7423b6f1ea7e8da658d1083d622c6916b1da20f7b48cda25b"
+  }
+}

@@ -1,0 +1,1914 @@
+{
+  "schema_version": 1,
+  "preferences": {
+    "questionnaire_section": "优先级排序",
+    "quote": "优先级：工作内容与毕业去向 > 上岸可行性 > 总费用 > 城市 > 学校名气。",
+    "profile_refs": [
+      "本人画像/优先级排序"
+    ],
+    "method": "ordinal",
+    "weights": null,
+    "confirmed": false
+  },
+  "matrix": {
+    "options": [
+      "P1",
+      "P2",
+      "P3",
+      "P4",
+      "P5"
+    ],
+    "dimensions": [
+      {
+        "id": "M0",
+        "label": "资格",
+        "preference_ref": "本人优先级"
+      },
+      {
+        "id": "M1",
+        "label": "时间",
+        "preference_ref": "本人优先级"
+      },
+      {
+        "id": "M2",
+        "label": "花费",
+        "preference_ref": "本人优先级"
+      },
+      {
+        "id": "M3",
+        "label": "可行性",
+        "preference_ref": "本人优先级"
+      },
+      {
+        "id": "M4",
+        "label": "本人接受度",
+        "preference_ref": "本人优先级"
+      }
+    ],
+    "cells": [
+      {
+        "candidate_id": "P1",
+        "dimension_id": "M0",
+        "status": "unknown",
+        "text": "△应届本科条件须审核",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "P1",
+        "dimension_id": "M1",
+        "status": "supported",
+        "text": "✓本轮网报已开放",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "P1",
+        "dimension_id": "M2",
+        "status": "unknown",
+        "text": "△华工预算可比",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "P1",
+        "dimension_id": "M3",
+        "status": "unknown",
+        "text": "△模考与单科未知",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "P1",
+        "dimension_id": "M4",
+        "status": "supported",
+        "text": "✓愿意继续电气",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "P2",
+        "dimension_id": "M0",
+        "status": "unknown",
+        "text": "△本校资格未提供",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "P2",
+        "dimension_id": "M1",
+        "status": "unknown",
+        "text": "△须核本轮接收状态",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "P2",
+        "dimension_id": "M2",
+        "status": "unknown",
+        "text": "△录取项目另核",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "P2",
+        "dimension_id": "M3",
+        "status": "unknown",
+        "text": "△不能临时凭均分判断",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "P2",
+        "dimension_id": "M4",
+        "status": "unknown",
+        "text": "△尚未说明",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "P3",
+        "dimension_id": "M0",
+        "status": "unknown",
+        "text": "△语言与项目未核",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "P3",
+        "dimension_id": "M1",
+        "status": "unknown",
+        "text": "△逐项目看截止",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "P3",
+        "dimension_id": "M2",
+        "status": "unknown",
+        "text": "△总费用未取到",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "P3",
+        "dimension_id": "M3",
+        "status": "unknown",
+        "text": "△资金与认可均待核",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "P3",
+        "dimension_id": "M4",
+        "status": "unknown",
+        "text": "△尚未确认",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "P4",
+        "dimension_id": "M0",
+        "status": "unknown",
+        "text": "△岗位资格逐条核",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "P4",
+        "dimension_id": "M1",
+        "status": "unknown",
+        "text": "△各公告独立截止",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "P4",
+        "dimension_id": "M2",
+        "status": "unknown",
+        "text": "△有收入才比较净额",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "P4",
+        "dimension_id": "M3",
+        "status": "unknown",
+        "text": "△暂无真实通知",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "P4",
+        "dimension_id": "M4",
+        "status": "supported",
+        "text": "✓愿意留备选",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "P5",
+        "dimension_id": "M0",
+        "status": "unknown",
+        "text": "△职位与资格待核",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "P5",
+        "dimension_id": "M1",
+        "status": "unknown",
+        "text": "△看当年正式公告",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "P5",
+        "dimension_id": "M2",
+        "status": "unknown",
+        "text": "△备考挤占主线",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "P5",
+        "dimension_id": "M3",
+        "status": "unknown",
+        "text": "△未验证公共服务意愿",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "P5",
+        "dimension_id": "M4",
+        "status": "unknown",
+        "text": "△不能只为避险",
+        "evidence_refs": [
+          "E0001"
+        ]
+      }
+    ]
+  },
+  "candidates": [
+    {
+      "id": "JC1",
+      "candidate_id": "C1",
+      "supports": [
+        "本人兴趣、专业或备选需求支持调查"
+      ],
+      "counters": [
+        "资格、费用或真实岗位尚有缺口"
+      ],
+      "costs": [
+        "时间与资金取舍待具体对象确认"
+      ],
+      "fallback": "若不成立，比较已登记的其他路径",
+      "switch_conditions": [
+        "官方条件或本人输入改变后重评"
+      ],
+      "checkpoint": "2026-10-21"
+    },
+    {
+      "id": "JC2",
+      "candidate_id": "C2",
+      "supports": [
+        "本人兴趣、专业或备选需求支持调查"
+      ],
+      "counters": [
+        "资格、费用或真实岗位尚有缺口"
+      ],
+      "costs": [
+        "时间与资金取舍待具体对象确认"
+      ],
+      "fallback": "若不成立，比较已登记的其他路径",
+      "switch_conditions": [
+        "官方条件或本人输入改变后重评"
+      ],
+      "checkpoint": "2026-10-21"
+    },
+    {
+      "id": "JC3",
+      "candidate_id": "C3",
+      "supports": [
+        "本人兴趣、专业或备选需求支持调查"
+      ],
+      "counters": [
+        "资格、费用或真实岗位尚有缺口"
+      ],
+      "costs": [
+        "时间与资金取舍待具体对象确认"
+      ],
+      "fallback": "若不成立，比较已登记的其他路径",
+      "switch_conditions": [
+        "官方条件或本人输入改变后重评"
+      ],
+      "checkpoint": "2026-10-21"
+    },
+    {
+      "id": "JP1",
+      "candidate_id": "P1",
+      "supports": [
+        "本人兴趣、专业或备选需求支持调查"
+      ],
+      "counters": [
+        "资格、费用或真实岗位尚有缺口"
+      ],
+      "costs": [
+        "时间与资金取舍待具体对象确认"
+      ],
+      "fallback": "若不成立，比较已登记的其他路径",
+      "switch_conditions": [
+        "官方条件或本人输入改变后重评"
+      ],
+      "checkpoint": "2026-10-21"
+    },
+    {
+      "id": "JP2",
+      "candidate_id": "P2",
+      "supports": [
+        "本人兴趣、专业或备选需求支持调查"
+      ],
+      "counters": [
+        "资格、费用或真实岗位尚有缺口"
+      ],
+      "costs": [
+        "时间与资金取舍待具体对象确认"
+      ],
+      "fallback": "若不成立，比较已登记的其他路径",
+      "switch_conditions": [
+        "官方条件或本人输入改变后重评"
+      ],
+      "checkpoint": "2026-10-21"
+    },
+    {
+      "id": "JP3",
+      "candidate_id": "P3",
+      "supports": [
+        "本人兴趣、专业或备选需求支持调查"
+      ],
+      "counters": [
+        "资格、费用或真实岗位尚有缺口"
+      ],
+      "costs": [
+        "时间与资金取舍待具体对象确认"
+      ],
+      "fallback": "若不成立，比较已登记的其他路径",
+      "switch_conditions": [
+        "官方条件或本人输入改变后重评"
+      ],
+      "checkpoint": "2026-10-21"
+    },
+    {
+      "id": "JP4",
+      "candidate_id": "P4",
+      "supports": [
+        "本人兴趣、专业或备选需求支持调查"
+      ],
+      "counters": [
+        "资格、费用或真实岗位尚有缺口"
+      ],
+      "costs": [
+        "时间与资金取舍待具体对象确认"
+      ],
+      "fallback": "若不成立，比较已登记的其他路径",
+      "switch_conditions": [
+        "官方条件或本人输入改变后重评"
+      ],
+      "checkpoint": "2026-10-21"
+    },
+    {
+      "id": "JP5",
+      "candidate_id": "P5",
+      "supports": [
+        "本人兴趣、专业或备选需求支持调查"
+      ],
+      "counters": [
+        "资格、费用或真实岗位尚有缺口"
+      ],
+      "costs": [
+        "时间与资金取舍待具体对象确认"
+      ],
+      "fallback": "若不成立，比较已登记的其他路径",
+      "switch_conditions": [
+        "官方条件或本人输入改变后重评"
+      ],
+      "checkpoint": "2026-10-21"
+    }
+  ],
+  "recommendation": {
+    "primary": [
+      "P1"
+    ],
+    "backup": [
+      "P4"
+    ],
+    "conditions": [
+      "资格、费用、本人接受度成立才继续"
+    ],
+    "evidence_refs": []
+  },
+  "checkpoint": {
+    "date": "2026-10-21",
+    "trigger": "新的模考、正式岗位或当届政策出现"
+  },
+  "presentation": {
+    "01": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/01/lead"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/01/analysis/0"
+      },
+      {
+        "slot": "kpis",
+        "ref": "judgment.json#/report_blocks/01_2"
+      },
+      {
+        "slot": "core_points",
+        "ref": "narrative.json#/sections/01/core_points"
+      },
+      {
+        "slot": "actions",
+        "ref": "judgment.json#/report_blocks/01_4"
+      },
+      {
+        "slot": "checkpoint",
+        "ref": "judgment.json#/report_blocks/01_5"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/01/analysis/1"
+      }
+    ],
+    "02": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/02/lead"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/02/analysis/0"
+      },
+      {
+        "slot": "profile",
+        "ref": "profile_parse.json#/report_blocks/02_2"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/02/analysis/1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/02/analysis/2"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/02/analysis/3"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/02/analysis/4"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/02/analysis/5"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/02/analysis/6"
+      },
+      {
+        "slot": "details",
+        "ref": "judgment.json#/report_blocks/02_9"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/02/analysis/7"
+      }
+    ],
+    "03": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/03/lead"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/03/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/03/analysis/1"
+      },
+      {
+        "slot": "details",
+        "ref": "judgment.json#/report_blocks/03_3"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/03/analysis/2"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/03/analysis/3"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/03/analysis/4"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/03/analysis/5"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/03/analysis/6"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/03/analysis/7"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/03/analysis/8"
+      },
+      {
+        "slot": "questions",
+        "ref": "directions.json#/report_blocks/03_11"
+      }
+    ],
+    "04": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/04/lead"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/04/analysis/0"
+      },
+      {
+        "slot": "matrix",
+        "ref": "judgment.json#/report_blocks/04_2"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/04/analysis/1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/04/analysis/2"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/04/analysis/3"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/04/analysis/4"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/04/analysis/5"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/04/analysis/6"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/04/analysis/7"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/04/analysis/8"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/04/analysis/9"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/04/analysis/10"
+      },
+      {
+        "slot": "unknown_explanation",
+        "ref": "narrative.json#/sections/04/unknown_explanation"
+      }
+    ],
+    "05": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/05/lead"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/05/analysis/0"
+      },
+      {
+        "slot": "details",
+        "ref": "judgment.json#/report_blocks/05_2"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/05/analysis/1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/05/analysis/2"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/05/analysis/3"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/05/analysis/4"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/05/analysis/5"
+      },
+      {
+        "slot": "details",
+        "ref": "judgment.json#/report_blocks/05_8"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/05/analysis/6"
+      },
+      {
+        "slot": "directions",
+        "ref": "directions.json#/report_blocks/05_10"
+      }
+    ],
+    "06": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/06/lead"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/06/analysis/0"
+      },
+      {
+        "slot": "candidates",
+        "ref": "candidates.json#/report_blocks/06_2"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/06/analysis/1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/06/analysis/2"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/06/analysis/3"
+      },
+      {
+        "slot": "details",
+        "ref": "judgment.json#/report_blocks/06_6"
+      },
+      {
+        "slot": "score_ranges",
+        "ref": "evidence.json#/report_blocks/06_7"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/06/analysis/4"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/06/analysis/5"
+      },
+      {
+        "slot": "score_ranges",
+        "ref": "evidence.json#/report_blocks/06_10"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/06/analysis/6"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/06/analysis/7"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/06/analysis/8"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/06/analysis/9"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/06/analysis/10"
+      },
+      {
+        "slot": "details",
+        "ref": "judgment.json#/report_blocks/06_16"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/06/analysis/11"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/06/analysis/12"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/06/analysis/13"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/06/analysis/14"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/06/analysis/15"
+      },
+      {
+        "slot": "details",
+        "ref": "candidates.json#/report_blocks/06_22"
+      }
+    ],
+    "07": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/07/lead"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/07/analysis/0"
+      },
+      {
+        "slot": "timeline",
+        "ref": "judgment.json#/report_blocks/07_2"
+      },
+      {
+        "slot": "details",
+        "ref": "judgment.json#/report_blocks/07_3"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/07/analysis/1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/07/analysis/2"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/07/analysis/3"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/07/analysis/4"
+      }
+    ],
+    "08": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/08/lead"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/08/analysis/0"
+      },
+      {
+        "slot": "routes",
+        "ref": "judgment.json#/report_blocks/08_2"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/08/analysis/1"
+      },
+      {
+        "slot": "routes",
+        "ref": "judgment.json#/report_blocks/08_4"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/08/analysis/2"
+      },
+      {
+        "slot": "routes",
+        "ref": "judgment.json#/report_blocks/08_6"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/08/analysis/3"
+      },
+      {
+        "slot": "routes",
+        "ref": "judgment.json#/report_blocks/08_8"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/08/analysis/4"
+      }
+    ],
+    "09": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/09/lead"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/09/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/09/analysis/1"
+      },
+      {
+        "slot": "details",
+        "ref": "judgment.json#/report_blocks/09_3"
+      },
+      {
+        "slot": "budget_chart",
+        "ref": "evidence.json#/report_blocks/09_4"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/09/analysis/2"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/09/analysis/3"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/09/analysis/4"
+      },
+      {
+        "slot": "details",
+        "ref": "judgment.json#/report_blocks/09_8"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/09/analysis/5"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/09/analysis/6"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/09/analysis/7"
+      },
+      {
+        "slot": "risks",
+        "ref": "judgment.json#/report_blocks/09_12"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/09/analysis/8"
+      }
+    ],
+    "10": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/10/lead"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/10/analysis/0"
+      },
+      {
+        "slot": "questions",
+        "ref": "judgment.json#/report_blocks/10_2"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/10/analysis/1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/10/analysis/2"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/10/analysis/3"
+      }
+    ],
+    "11": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/11/lead"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/11/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/11/analysis/1"
+      },
+      {
+        "slot": "evidence_levels",
+        "ref": "evidence.json#/report_blocks/11_3"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/11/analysis/2"
+      },
+      {
+        "slot": "terms",
+        "ref": "judgment.json#/report_blocks/11_5"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/11/analysis/3"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/11/analysis/4"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/11/analysis/5"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/11/analysis/6"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/11/analysis/7"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/11/analysis/8"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/11/analysis/9"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/11/analysis/10"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/11/analysis/11"
+      },
+      {
+        "slot": "assumptions",
+        "ref": "judgment.json#/report_blocks/11_15"
+      }
+    ],
+    "12": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/12/lead"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/12/analysis/0"
+      },
+      {
+        "slot": "sources",
+        "ref": "evidence.json#/report_blocks/12_2"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/12/analysis/1"
+      },
+      {
+        "slot": "disclaimer",
+        "ref": "narrative.json#/sections/12/disclaimer"
+      }
+    ]
+  },
+  "report_blocks": {
+    "01_2": {
+      "type": "kpi",
+      "content": {
+        "rows": [
+          [
+            "主路径",
+            "电气相关考研",
+            "先核对专业代码、学院和考试科目"
+          ],
+          [
+            "年度费用",
+            "{{c:/annual_cost|comma}} 元",
+            "华工非定向全日制口径，含本人生活费假设"
+          ],
+          [
+            "年度余量",
+            "{{c:/annual_margin|comma}} 元",
+            "对照家庭 {{k:/budget/annual_limit|comma}} 元预算，未计水电等额外支出"
+          ],
+          [
+            "最近硬截止",
+            "{{e:E0018#/value}} 月 {{e:E0019#/value}} 日",
+            "{{e:E0020#/value}} 年网报截止，当日 {{e:E0021#/value}}:{{e:E0022#/value}} 结束"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E0001",
+        "E0018",
+        "E0019",
+        "E0020",
+        "E0021",
+        "E0022"
+      ]
+    },
+    "01_4": {
+      "type": "dated_actions",
+      "content": {
+        "items": [
+          {
+            "text": "**{{e:E0018#/value}} 月 {{e:E0023#/value}} 日前（个人检查点）**：确认两校的学院、专业代码、学习方式和考试科目，带回同科目完整模考的总分、单科与完成情况；不能用其他学校的自命题成绩直接换算。",
+            "date": "{{k:/context/personal_dates/action0}}"
+          },
+          {
+            "text": "**{{e:E0018#/value}} 月 {{e:E0021#/value}} 日前（个人检查点）**：与家庭确认每年 {{k:/budget/annual_limit|comma}} 元支持是否连续三年有效，列出水电、交通、设备等额外支出；不能先把奖助学金当已到账收入。",
+            "date": "{{k:/context/personal_dates/action1}}"
+          },
+          {
+            "text": "**{{e:E0018#/value}} 月 {{e:E0024#/value}} 日前（个人检查点）**：核对网报与报考点通知，保留愿意去的少量技术岗位公告。报名的官方硬截止仍是 {{e:E0018#/value}} 月 {{e:E0019#/value}} 日 {{e:E0021#/value}}:{{e:E0022#/value}}，不等到最后时刻才处理资格疑问。[2][3]",
+            "date": "{{k:/context/personal_dates/action2}}"
+          }
+        ]
+      },
+      "evidence_refs": [
+        "E0001",
+        "E0018",
+        "E0023",
+        "E0021",
+        "E0024",
+        "E0019",
+        "E0022"
+      ]
+    },
+    "01_5": {
+      "type": "checkpoint",
+      "content": {
+        "kind": "paragraph",
+        "text": "**下一个检查点是 {{e:E0020#/value}} 年 {{e:E0018#/value}} 月 {{e:E0023#/value}} 日。** 上一次计划中的 {{e:E0018#/value}} 月 {{e:E0025#/value}} 日已过去，本报告没有收到完成记录，因此不把它当作已完成。到下一检查点，若仍无模考或费用证据，就缩小判断范围，明确哪些问题未解决；不能用主观乐观替代信息。"
+      },
+      "evidence_refs": [
+        "E0001",
+        "E0020",
+        "E0018",
+        "E0023",
+        "E0025"
+      ]
+    },
+    "02_9": {
+      "type": "data_table",
+      "content": {
+        "columns": [
+          "反思主题",
+          "传统结构的描述",
+          "与现实怎样对照"
+        ],
+        "rows": [
+          [
+            "支持与压力",
+            "甲木帮身、癸水透出，申酉金并见",
+            "可讨论哪些家庭支持可兑现，哪些考试压力来自实际门槛；不判断考试吉凶"
+          ],
+          [
+            "合作与竞争",
+            "年、月两见甲木",
+            "对照小组项目中的合作方式；不由此推断相对排名"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E0001"
+      ]
+    },
+    "03_3": {
+      "type": "data_table",
+      "content": {
+        "columns": [
+          "想解决的问题",
+          "应看什么信息",
+          "若证据成立怎样判断"
+        ],
+        "rows": [
+          [
+            "希望做更深入的电气技术工作",
+            "目标岗位的正式招聘条件、实际任务和所需工具",
+            "如果硕士是硬门槛或研究训练确实相关，就提高读研优先级"
+          ],
+          [
+            "希望进入某类企业",
+            "当年校招学历、专业、学校范围和工作地点",
+            "如果本科也能竞争合适岗位，就同时比较本科就业，不能假定必须读研"
+          ],
+          [
+            "希望补足理论与项目能力",
+            "研究生培养方案、课题方向、实践与毕业要求",
+            "如果内容是本人愿意投入的，再比较不同学校；不只比较名称"
+          ],
+          [
+            "暂时不知道做什么",
+            "两类具体岗位的一天、培养方案的一组真实任务",
+            "如果没有任何方向证据，先做低成本核对，不用新增一个学历掩盖问题"
+          ],
+          [
+            "希望未来生活更稳定",
+            "用工性质、地域、工时、收入与长期支出",
+            "如果稳定主要来自岗位与城市，不能把学校层次当作稳定承诺"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E0001"
+      ]
+    },
+    "04_2": {
+      "type": "comparison_matrix",
+      "content": {
+        "title": "五条路径放在同一张表里看",
+        "caption": "先看资格和本人接受度，再看时间与费用；符号只表示当前证据，不表示成功概率。费用未知的项目保持待核。",
+        "rows": [
+          [
+            "考研",
+            "△应届本科条件须审核",
+            "✓本轮网报已开放",
+            "△华工预算可比",
+            "△模考与单科未知",
+            "✓愿意继续电气"
+          ],
+          [
+            "保研",
+            "△本校资格未提供",
+            "△须核本轮接收状态",
+            "△录取项目另核",
+            "△不能临时凭均分判断",
+            "△尚未说明"
+          ],
+          [
+            "境外",
+            "△语言与项目未核",
+            "△逐项目看截止",
+            "△总费用未取到",
+            "△资金与认可均待核",
+            "△尚未确认"
+          ],
+          [
+            "先工作",
+            "△岗位资格逐条核",
+            "△各公告独立截止",
+            "△有收入才比较净额",
+            "△暂无真实通知",
+            "✓愿意留备选"
+          ],
+          [
+            "考公",
+            "△职位与资格待核",
+            "△看当年正式公告",
+            "△备考挤占主线",
+            "△未验证公共服务意愿",
+            "△不能只为避险"
+          ]
+        ],
+        "columns": [
+          "资格",
+          "时间",
+          "花费",
+          "可行性",
+          "本人接受度"
+        ]
+      },
+      "evidence_refs": [
+        "E0001",
+        "E0002",
+        "E0003",
+        "E0005"
+      ]
+    },
+    "05_2": {
+      "type": "data_table",
+      "content": {
+        "columns": [
+          "方向线索",
+          "可能吸引小林的部分",
+          "需要检验的能力或接受条件",
+          "暂时怎样放置"
+        ],
+        "rows": [
+          [
+            "电机与控制相关训练",
+            "能看到具体装置、参数与实验反馈",
+            "是否愿意补数学模型、反复验证与记录",
+            "优先调查，不因喜欢动手就认定适合"
+          ],
+          [
+            "电气系统分析与设备技术",
+            "与本科知识及设备问题较接近",
+            "理论、电路基础与现场条件是否能接受",
+            "保留，与真实岗位任务相互核对"
+          ],
+          [
+            "现场调试、测试或技术支持",
+            "问题具体，有机会积累工程经验",
+            "工作地点、出差、倒班、安全职责",
+            "作为就业方向核对，不推断都有同样待遇"
+          ],
+          [
+            "纯粹为了校名而跨到陌生方向",
+            "可能满足平台期待",
+            "专业课重学、复试证据与职业出口都未确认",
+            "本轮不因校名临时扩大范围"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E0001"
+      ]
+    },
+    "05_8": {
+      "type": "data_table",
+      "content": {
+        "columns": [
+          "要问的问题",
+          "希望得到的具体信息",
+          "避免怎样的问法"
+        ],
+        "rows": [
+          [
+            "最近一周主要做了哪些任务",
+            "课程、实验、数据处理、写作各自的实际占用",
+            "只问“这个方向好不好”"
+          ],
+          [
+            "入学后最常卡在哪",
+            "需要补的理论、工具和沟通方式",
+            "只收集最低录取分或“很容易”评价"
+          ],
+          [
+            "培养地点如何安排",
+            "校内、基地、企业实践与通勤情况",
+            "默认同校所有项目都在同一校区"
+          ],
+          [
+            "毕业去向与本人选择如何相关",
+            "具体岗位及其学历、能力要求",
+            "让单个学长代表所有毕业生"
+          ],
+          [
+            "现场岗位的一天是什么样",
+            "工时、出差、安全责任和成长路径",
+            "只比较单位名气与招聘宣传"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E0001"
+      ]
+    },
+    "06_6": {
+      "type": "data_table",
+      "content": {
+        "columns": [
+          "年份与计划",
+          "人数",
+          "最低分",
+          "{{e:E0072#/value}} 分位",
+          "中位数",
+          "{{e:E0073#/value}} 分位",
+          "最高分"
+        ],
+        "rows": [
+          [
+            "{{e:E0051#/value}} 普通与基地合计",
+            "{{e:E0052#/value}}",
+            "{{e:E0053#/value}}",
+            "{{e:E0054#/value}}",
+            "{{e:E0055#/value}}",
+            "{{e:E0056#/value}}",
+            "{{e:E0057#/value}}"
+          ],
+          [
+            "{{e:E0051#/value}} 普通计划",
+            "{{e:E0058#/value}}",
+            "{{e:E0053#/value}}",
+            "{{e:E0059#/value}}",
+            "{{e:E0055#/value}}",
+            "{{e:E0060#/value}}",
+            "{{e:E0061#/value}}"
+          ],
+          [
+            "{{e:E0051#/value}} 基地计划",
+            "{{e:E0062#/value}}",
+            "{{e:E0053#/value}}",
+            "{{e:E0063#/value}}",
+            "{{e:E0055#/value}}",
+            "{{e:E0064#/value}}",
+            "{{e:E0057#/value}}"
+          ],
+          [
+            "{{e:E0065#/value}} 普通计划",
+            "{{e:E0066#/value}}",
+            "{{e:E0067#/value}}",
+            "{{e:E0068#/value}}",
+            "{{e:E0069#/value}}",
+            "{{e:E0070#/value}}",
+            "{{e:E0071#/value}}"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E0001",
+        "E0072",
+        "E0073",
+        "E0051",
+        "E0052",
+        "E0053",
+        "E0054",
+        "E0055",
+        "E0056",
+        "E0057",
+        "E0058",
+        "E0059",
+        "E0060",
+        "E0061",
+        "E0062",
+        "E0063",
+        "E0064",
+        "E0065",
+        "E0066",
+        "E0067",
+        "E0068",
+        "E0069",
+        "E0070",
+        "E0071"
+      ]
+    },
+    "06_16": {
+      "type": "data_table",
+      "content": {
+        "columns": [
+          "假如华工同科目初试总分",
+          "{{e:E0020#/value}} 年录取者中的相对位置",
+          "{{e:E0104#/value}} 年录取者中的相对位置",
+          "决策含义"
+        ],
+        "rows": [
+          [
+            "{{e:E0099#/value}} 分",
+            "等于观察到的最低分",
+            "低于观察到的最低分",
+            "只能说明某年曾有这个分数录取；不能说明本人能进复试或复试有余地"
+          ],
+          [
+            "{{e:E0100#/value}} 分",
+            "低于合计样本的 {{e:E0072#/value}} 分位",
+            "低于观察到的最低分",
+            "需要更认真核对单科、净名额和备选，不自动判定必败，也不默认调剂存在"
+          ],
+          [
+            "{{e:E0101#/value}} 分",
+            "接近合计样本中位数 {{e:E0102#/value}} 分",
+            "在 {{e:E0072#/value}} 分位与中位数之间",
+            "在已录取者中有参照位置；仍未知未录取者、复试与本人单科"
+          ],
+          [
+            "{{e:E0103#/value}} 分",
+            "接近合计样本 {{e:E0073#/value}} 分位",
+            "高于 {{e:E0073#/value}} 分位",
+            "不能据此说“初试已不是问题”；单科、复试资格和规则仍需同时成立"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E0001",
+        "E0020",
+        "E0104",
+        "E0099",
+        "E0100",
+        "E0072",
+        "E0101",
+        "E0102",
+        "E0103",
+        "E0073"
+      ]
+    },
+    "07_2": {
+      "type": "timeline",
+      "content": {
+        "title": "从报名到入学的关键节点",
+        "caption": "横轴按时间顺序阅读；琥珀菱形为个人检查点，圆点为流程节点。未发布的具体日期保持未发布，不用往年日期冒充当年安排。",
+        "rows": [
+          [
+            "{{e:E0110#/value}}",
+            "科目、模考与预算核对",
+            "{{e:E0018#/value}}-{{e:E0023#/value}} 个人检查点",
+            "检查点"
+          ],
+          [
+            "{{e:E0110#/value}}",
+            "完成网报并核对信息",
+            "{{e:E0018#/value}}-{{e:E0019#/value}} {{e:E0021#/value}}:{{e:E0022#/value}} 官方截止",
+            ""
+          ],
+          [
+            "{{e:E0111#/value}}",
+            "参加初试",
+            "{{e:E0025#/value}}-{{e:E0112#/value/E0112}}—{{e:E0025#/value}}-{{e:E0112#/value/E0113}} 官方日期",
+            ""
+          ],
+          [
+            "{{e:E0105#/value}} 成绩后",
+            "总分、单科与候选重评",
+            "公布后个人检查点",
+            "检查点"
+          ],
+          [
+            "{{e:E0105#/value}} 复试期",
+            "核复试、调剂和确认",
+            "具体日程未发布",
+            ""
+          ],
+          [
+            "{{e:E0105#/value}} 毕业前",
+            "比较录取与真实就业条件",
+            "按各方确认期限",
+            "检查点"
+          ],
+          [
+            "{{e:E0105#/value}} 入学前",
+            "核毕业、费用与报到",
+            "以录取与报到通知为准",
+            ""
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E0001",
+        "E0002",
+        "E0003",
+        "E0005",
+        "E0110",
+        "E0018",
+        "E0023",
+        "E0019",
+        "E0021",
+        "E0022",
+        "E0111",
+        "E0025",
+        "E0112",
+        "E0105"
+      ]
+    },
+    "07_3": {
+      "type": "data_table",
+      "content": {
+        "columns": [
+          "节点",
+          "现在应当看什么",
+          "触发什么更新"
+        ],
+        "rows": [
+          [
+            "当前至网报截止",
+            "学校简章、专业目录、报考点公告和本人材料",
+            "若资格或科目不符，先解决报考选择，不用名校偏好盖过硬条件"
+          ],
+          [
+            "网上确认",
+            "所选报考点对材料、时间和补件的正式要求",
+            "目前没有选定报考点，不能统一填一个日期；错过材料补交可能影响报名"
+          ],
+          [
+            "初试之前",
+            "准考证、考试安排与本人状态",
+            "变更生活安排时保留考试要求，不因传闻调整官方时间"
+          ],
+          [
+            "成绩与复试规则公布后",
+            "实际单科、总分、当年学校与学院要求、净计划",
+            "判断是否有复试资格；用实际数据替换情景，不延用备考阶段结论"
+          ],
+          [
+            "调剂阶段",
+            "研招网系统的余额、条件和学校公告",
+            "只在资格符合且本人接受的项目中筛选，不把可能有余额当作已录取"
+          ],
+          [
+            "录取确认与毕业前",
+            "录取条件、就业通知期限、毕业证与其他材料",
+            "比较真实的选择及退出责任，避免同时确认互斥安排"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E0001"
+      ]
+    },
+    "08_2": {
+      "type": "route_cards",
+      "content": {
+        "title": "电气相关考研：先核对，再定层次",
+        "门槛": "应届本科资格、毕业条件和各校科目逐项成立；本人需有同科目完整模考与单科记录。",
+        "时间窗口": "{{e:E0018#/value}} 月 {{e:E0023#/value}} 日核对差距，{{e:E0018#/value}} 月 {{e:E0019#/value}} 日 {{e:E0021#/value}}:{{e:E0022#/value}} 前完成网报；确认按报考点，初试 {{e:E0025#/value}} 月 {{e:E0112#/value/E0112}}—{{e:E0112#/value/E0113}} 日。[2][3][5]",
+        "投入": "当前以可持续的有效投入评估；费用先按已核实的华工非定向全日制口径，其他项目另算。",
+        "切换条件": "资格、科目或预算不成立就换目标；成绩公布后按实际单科、总分和当年规则重评，不拿往年最低分保证录取。"
+      },
+      "evidence_refs": [
+        "E0001",
+        "E0018",
+        "E0023",
+        "E0019",
+        "E0021",
+        "E0022",
+        "E0025",
+        "E0112"
+      ]
+    },
+    "08_4": {
+      "type": "route_cards",
+      "content": {
+        "title": "就业备选：形成能实际比较的选择",
+        "门槛": "只保留本人愿意做且可能符合学历、专业条件的电气技术岗位；出差、倒班、地点与安全责任逐项核。",
+        "时间窗口": "各公告分别记录截止，有限投递与备考并行；取得第一份有效反馈或真实工作通知时重评。",
+        "投入": "使用已有实践材料证明具体任务，不为增加选择而大量投不愿意去的岗位；目前无实际工资，暂不编净收入。",
+        "切换条件": "无录取、预算变化或实际工作更符合目标时比较；没有收到正式条件之前，不把就业写成已保底。"
+      },
+      "evidence_refs": [
+        "E0001"
+      ]
+    },
+    "08_6": {
+      "type": "route_cards",
+      "content": {
+        "title": "调剂：先准备筛选边界，再看余额",
+        "门槛": "成绩与单科满足当年规定，符合调入专业要求；初试科目、专业相关性和专项条件逐校核。[2]",
+        "时间窗口": "出分后先整理可接受学校、学习方式与费用；具体系统开放、余额和复试日期待当年公布。",
+        "投入": "只查愿意去的项目；使用学校公开联系方式询问具体条件，保留系统与公告记录，不购买“内部名额”。",
+        "切换条件": "无资格、无余额或不能接受费用与培养安排就停止该候选；获得实际复试或待录取状态后再按期限判断。"
+      },
+      "evidence_refs": [
+        "E0001"
+      ]
+    },
+    "08_8": {
+      "type": "route_cards",
+      "content": {
+        "title": "无录取后的选择：就业与二战重新比较",
+        "门槛": "明确失败原因、下一年可改变的条件、可持续状态、家庭支持与真实就业选项，缺任何关键项先补证据。",
+        "时间窗口": "当轮录取结束或已有明确结果后，与就业确认期限一起比较；不在当前就默认下一年继续。",
+        "投入": "另列一年生活、备考和少挣收入，不能沿用三年读研学费当作二战成本；本案尚无足够输入计算该数。",
+        "切换条件": "若失败主要条件无法改变、资金或状态不允许，就优先可接受的就业；若变化有证据且本人愿意，再讨论下一轮。"
+      },
+      "evidence_refs": [
+        "E0001"
+      ]
+    },
+    "09_3": {
+      "type": "data_table",
+      "content": {
+        "columns": [
+          "预算项目",
+          "采用的数值",
+          "依据和边界"
+        ],
+        "rows": [
+          [
+            "学费",
+            "{{e:E0124#/value}} 元／学年",
+            "华工 {{e:E0105#/value}} 非定向全日制能源动力 {{e:E0125#/value/E0125}}，学制 {{e:E0125#/value/E0126}} 年；不能外推到定向或广工"
+          ],
+          [
+            "住宿预留",
+            "{{e:E0127#/value}} 元／学年",
+            "华工 {{e:E0020#/value}} 全校收费公示的最高档作保守预留，不是小林已分配宿舍的价格"
+          ],
+          [
+            "生活费",
+            "{{e:E0128#/value}} 元／月",
+            "本人预算假设，按 {{e:E0025#/value}} 个月计，不含另列的水电与突发支出"
+          ],
+          [
+            "年费用",
+            "{{c:/annual_cost|comma}} 元",
+            "上述三项合计，未扣奖助；家庭年度预算 {{k:/budget/annual_limit|comma}} 元"
+          ],
+          [
+            "年余量",
+            "{{c:/annual_margin|comma}} 元",
+            "是可用于额外支出的余额，不是保证节省下来的钱"
+          ],
+          [
+            "三年合计",
+            "{{c:/total_cost_over_program|comma}} 元",
+            "学费、住宿和生活费口径保持不变；不含少挣收入"
+          ],
+          [
+            "生活费每月多 {{e:E0129#/value}} 元",
+            "年费用 {{c:/annual_cost_if_living_plus_200|comma}} 元，余量 {{c:/annual_margin_if_living_plus_200|comma}} 元",
+            "单独改变生活费的敏感性比较，其他输入不变"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E0001",
+        "E0124",
+        "E0105",
+        "E0125",
+        "E0127",
+        "E0020",
+        "E0128",
+        "E0025",
+        "E0129"
+      ]
+    },
+    "09_8": {
+      "type": "data_table",
+      "content": {
+        "columns": [
+          "同口径条件测试",
+          "华工原预算",
+          "广工旧年学费参照",
+          "对决定的影响"
+        ],
+        "rows": [
+          [
+            "学费依据",
+            "{{e:E0105#/value}} 非定向全日制，每年 {{e:E0124#/value}} 元",
+            "{{e:E0020#/value}} 同类型，每年 {{e:E0142#/value}} 元；{{e:E0105#/value}} 待核",
+            "年份不同，不能称最终费用排名"
+          ],
+          [
+            "住宿与生活",
+            "每年住宿预留 {{e:E0135#/value}} 元、每月生活 {{e:E0128#/value}} 元",
+            "暂用同样假设；不是广工官方住宿费",
+            "固定其他输入，先看学费变化的影响"
+          ],
+          [
+            "年费用／年余量",
+            "{{c:/annual_cost|comma}} 元／{{c:/annual_margin|comma}} 元",
+            "{{c:/gdut_fee_reference/annual_cost|comma}} 元／{{c:/gdut_fee_reference/annual_margin}} 元",
+            "广工参照情景的额外支出空间更小"
+          ],
+          [
+            "生活费每月多 {{e:E0129#/value}} 元",
+            "年费用 {{c:/annual_cost_if_living_plus_200|comma}} 元，余量 {{c:/annual_margin_if_living_plus_200|comma}} 元",
+            "年费用 {{c:/gdut_fee_reference/annual_cost_if_living_plus_200|comma}} 元，超出上限 {{e:E0127#/value}} 元",
+            "若实际达到这一水平，就需补资金或改方案"
+          ],
+          [
+            "三年同口径费用",
+            "{{c:/total_cost_over_program|comma}} 元",
+            "{{c:/gdut_fee_reference/total_cost|comma}} 元",
+            "都不含水电、交通、突发开支及少挣收入"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E0001",
+        "E0105",
+        "E0124",
+        "E0020",
+        "E0142",
+        "E0135",
+        "E0128",
+        "E0129",
+        "E0127"
+      ]
+    },
+    "09_12": {
+      "type": "scenario_table",
+      "content": {
+        "columns": [
+          "风险信号或触发条件",
+          "怎样判断",
+          "应对与备选"
+        ],
+        "rows": [
+          [
+            "完整模考显示某单科持续缺口",
+            "与同一套科目和目标当年要求核对，不只看总分",
+            "调整候选与投入；保留就业，不能靠往年低总分掩盖单科问题"
+          ],
+          [
+            "统考净计划与目录预期不同",
+            "用正式公布的推免、统考与专项口径复核",
+            "重看竞争范围，分开普通与基地，不直接以总拟招数定把握"
+          ],
+          [
+            "培养地点或研究内容不能接受",
+            "读正式培养安排，再由本人核对日常",
+            "删去不接受的项目，不把所有基地计划当成同样体验"
+          ],
+          [
+            "家庭支持减少或额外支出超过余量",
+            "用实际费用与剩余支持年限重新核算",
+            "先调项目与生活方案；仍不成立就比较先就业，不依赖未确认奖助"
+          ],
+          [
+            "无复试资格或无可接受录取",
+            "同时看当年单科、总分、规则和实际余额",
+            "启动已筛选的就业或调剂路线，二战另评，不无限延长等待"
+          ],
+          [
+            "持续无法维持学习或正常生活",
+            "与原有状态相比，确认压力来源与现实支持",
+            "降低非必要任务、寻求校内支持；路径可调整，不用学历评价本人"
+          ],
+          [
+            "招聘确认期限与录取冲突",
+            "核书面协议、退出责任和学校安排",
+            "由本人确认选择，不在未知条款时替本人承诺同时接受"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E0001"
+      ]
+    },
+    "10_2": {
+      "type": "question_table",
+      "content": {
+        "columns": [
+          "需要问清的事",
+          "问谁或查哪里",
+          "回答怎样影响选择"
+        ],
+        "rows": [
+          [
+            "应届本科毕业资格是否确定，材料是否有缺",
+            "本校教务与学籍记录、所选报考点公告",
+            "若不成立，先处理资格，不继续用应届路径推算"
+          ],
+          [
+            "两校最终选哪套科目，有无完整模考",
+            "本人作答、官方目录及考试大纲",
+            "用同科目差距调整目标，拒绝在不同试卷间平移分数"
+          ],
+          [
+            "华工基地计划的地点、任务和导师安排",
+            "章程、目录、学院正式答复",
+            "若生活或训练内容不可接受，不能只因名额多保留"
+          ],
+          [
+            "广工 {{e:E0105#/value}} 学费、住宿与完整拟录取统计何时核清",
+            "研招网收费通知、学院复试与公示",
+            "旧年复试统计已补；新收费和住宿决定预算能否成立，不把匹配子集当全部录取"
+          ],
+          [
+            "本人喜欢调试中的哪一环",
+            "回顾具体实验、向在读生问一周任务",
+            "若喜欢的是现场操作而非研究，应提高本科就业的比较权重"
+          ],
+          [
+            "每天 {{e:E0028#/value/E0028}} 小时是空余时间还是实际有效时间",
+            "本人已有完成记录与状态",
+            "根据可持续条件判断，避免以理想投入作唯一前提"
+          ],
+          [
+            "家庭每年 {{k:/budget/annual_limit|comma}} 元能支持多久",
+            "本人与家庭确认总额、条件及应急安排",
+            "若年度够而持续年限不足，三年路径仍需重谈"
+          ],
+          [
+            "哪些技术岗位真的愿意去",
+            "当年正式公告、本人对工时与地点的确认",
+            "让就业成为可启动的备选，而非一句安慰"
+          ],
+          [
+            "若最终先工作，是否仍想在职读研",
+            "本人工作目标、雇主安排、具体招生项目",
+            "工作后再核学习方式与费用，不把现在的全日制预算沿用"
+          ],
+          [
+            "本轮未录取，哪些条件下一年能改变",
+            "当轮成绩、复试反馈、资金与状态",
+            "条件可变且本人愿意才讨论二战，沉没投入不构成理由"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E0001",
+        "E0105",
+        "E0028"
+      ]
+    },
+    "11_5": {
+      "type": "term_table",
+      "content": {
+        "columns": [
+          "术语",
+          "本报告中的含义",
+          "不能怎样使用"
+        ],
+        "rows": [
+          [
+            "候选",
+            "精确到学校、学院、代码、学习方式的一个选择",
+            "不能把同校不同学院或全日制与非全日制合并"
+          ],
+          [
+            "统考净名额",
+            "按当年正式口径扣除推免等后适用于统考的计划",
+            "不能拿目录含推免的拟招数直接代替"
+          ],
+          [
+            "复试分数要求",
+            "当年进入相应复试范围的总分与单科等条件",
+            "不能与往年最低拟录取分混为一谈"
+          ],
+          [
+            "四分位区间",
+            "已录取者初试分数排序后中间一半的范围",
+            "不代表中间一半报考者，也不代表录取概率"
+          ],
+          [
+            "情景点",
+            "假如初试考到给定总分，用于读图",
+            "不是小林已有成绩，也不是未来承诺"
+          ],
+          [
+            "年余量",
+            "家庭年预算减已列年费用",
+            "不等于额外开支已被覆盖，更不等于可自由支配收入"
+          ],
+          [
+            "就业备选",
+            "本人愿意核对并能实际启动的工作路径",
+            "没有正式条件前，不写成已经保底"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E0001"
+      ]
+    },
+    "11_15": {
+      "type": "assumption_table",
+      "content": {
+        "columns": [
+          "假设",
+          "适用条件",
+          "改判条件"
+        ],
+        "rows": [
+          [
+            "预算按已知输入计算",
+            "实际收费、生活与支持额度需本人确认",
+            "输入改变就重算"
+          ],
+          [
+            "本人偏好尚未量化",
+            "用本人原画像优先级作条件比较",
+            "本人确认排序或改变约束后重评"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E0001"
+      ]
+    }
+  },
+  "main_evidence_dependencies": [
+    "E0169",
+    "E0170",
+    "E0171",
+    "E0172",
+    "E0173",
+    "E0174",
+    "E0175",
+    "E0176",
+    "E0177",
+    "E0178",
+    "E0179",
+    "E0180"
+  ]
+}

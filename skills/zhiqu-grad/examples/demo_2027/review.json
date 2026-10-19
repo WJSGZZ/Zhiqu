@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "status": "awaiting_independent_review",
+  "independent": false,
+  "reviewer": null,
+  "date": null,
+  "rubric": {
+    "status": "pending",
+    "items": []
+  },
+  "pitfalls": [],
+  "sampled_sources": [],
+  "self_assessment": {
+    "reviewer": "制作会话自评",
+    "date": "2026-10-19",
+    "status": "complete",
+    "rubric": {
+      "items": [
+        {
+          "id": "clarity",
+          "score": 2,
+          "reason": "摘要明确主路径、备选和适用条件；待核候选不宣称已可报名或录用。",
+          "report_location": "01 / 03—11",
+          "evidence_refs": []
+        },
+        {
+          "id": "traceability",
+          "score": 1,
+          "reason": "数字均有证据/计算/登记定位；沿用的部分原件只保留来源和待核主张，仍需操控者对原件逐条核查。",
+          "report_location": "全文",
+          "evidence_refs": []
+        },
+        {
+          "id": "reasoning",
+          "score": 1,
+          "reason": "每个候选有支持、反证、成本和切换条件；当前能力与资格缺口使部分比较只能条件化。",
+          "report_location": "01 / 03—11",
+          "evidence_refs": []
+        },
+        {
+          "id": "consistency",
+          "score": 2,
+          "reason": "既有计算逐值及文件字节不变；逐节内容对照未丢失原正文、表格和图中数据。",
+          "report_location": "全文",
+          "evidence_refs": []
+        },
+        {
+          "id": "timeliness",
+          "score": 2,
+          "reason": "原报告的复核期限未延长；当届与历史材料分开，旧年规则不写成未来承诺。",
+          "report_location": "全文",
+          "evidence_refs": []
+        },
+        {
+          "id": "personalization",
+          "score": 2,
+          "reason": "保留本人原话、学业/经历和资金约束，并在方向和反证中说明作用。",
+          "report_location": "01 / 03—11",
+          "evidence_refs": []
+        },
+        {
+          "id": "actionability",
+          "score": 1,
+          "reason": "行动有个人检查日期、入口和切换；尚缺本人补充及真实岗位/模考，不能直接替本人确认。",
+          "report_location": "01 / 03—11",
+          "evidence_refs": []
+        },
+        {
+          "id": "boundaries",
+          "score": 2,
+          "reason": "无个人上岸或录用概率，无录取、录用或收入保证；未知和条件情景保留。",
+          "report_location": "全文",
+          "evidence_refs": []
+        },
+        {
+          "id": "summary_access",
+          "score": 2,
+          "reason": "摘要同时给出核心判断、关键限制及近期行动；术语在后文解释。",
+          "report_location": "01 / 03—11",
+          "evidence_refs": []
+        },
+        {
+          "id": "layout",
+          "score": 1,
+          "reason": "版面门禁通过并逐页审看；提示框加粗等既有共用视觉问题仍留待统一处理。",
+          "report_location": "全文",
+          "evidence_refs": []
+        }
+      ]
+    },
+    "limitations": [
+      "不是独立批准；操控者核查单待亲自填写。",
+      "原件抽查与新会话评阅尚未在独立复核区完成。"
+    ]
+  },
+  "snapshot": {
+    "case.json": "89061621208092013a2db2bde982d4975b93fa85072e55b04b66fdc46cb5646e",
+    "profile_parse.json": "76a74c00ad7ccbfc8cda835e8e0d579714db845cc2abb7ddb364e2250b4c7c67",
+    "directions.json": "2b68a53951ab4a8de52d7edcbabdf32d24e4570392cd70ac212c62342430a3b2",
+    "rules_check.json": "7b0a58159b98a98e96a17d877674c57bf2d59988aefd37a2f57d94f82580f5c2",
+    "candidates.json": "eaee46be9fe013fd50959465ca9f7c85591d65e1da838836f19793ee48c862f9",
+    "evidence.json": "38d976425479ccee1ca23b5f7345972a11bc2fef2fb7fe0c76b1433218b559fd",
+    "calculations.json": "dfef0423c9ef1e6fdaffe4ee014d2b6ab6d2146ca44191c7e291ef675e738dd6",
+    "judgment.json": "c2c5490d9215f307714cc9632312f2787db3504cb5eeee26079544b1a53ab9f6",
+    "narrative.json": "4ea832b76514793e4da70e79db01f806174b54d25c25720ce875094245453019",
+    "profile.txt": "2be92b9770f7a4a877386334b958c096198b948c89c5eabca030d4f557e29457",
+    "report.md": "999676e5a2cb34fde71a579562a4e29c2b5576e57cc96a3cffdf6f62d6e1c2a6",
+    "report.html": "0af40f6969d72cfb2adb33f7978f5f9b6ffcb10174c765d246b8481fef02c7ae",
+    "report.pdf": "73b29fb37eed31b8153164f9c5502c09b7496e19ac8e9a183d9f702027a5d441",
+    "report_trace.json": "6a49285b9f4d7f49f55533696c02ab7b0f176307a5c82f53996bc4c290a0fda9",
+    "operator_check.md": "d81205fb4a0b0e7d4ba216bc04eadd030d10c8392b722648d9538725bd47b908"
+  }
+}

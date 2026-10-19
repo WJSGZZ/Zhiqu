@@ -205,6 +205,10 @@ def check(path, write=False):
         out.write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     elif json.loads(out.read_text(encoding='utf-8')) != result:
         raise ValueError(f'{path}: saved budget differs from scenario inputs')
+    if case.get('schema_version') and case['kind'] in ('grad','career'):
+        from planning_workflow import PlanningCase
+        errors=PlanningCase(path).check(9)
+        if errors:raise ValueError('\n'.join(errors))
     return case['person'], result
 
 
