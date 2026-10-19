@@ -89,3 +89,65 @@
       return {lines:['八字（传统视角，选填）：'+errTxt],preview:errTxt};
     }
   }
+
+  /* ===== 按阶段收起不用填的题 =====
+     data-hide-when="name=值|值"：条件成立时收起（并清空其中作答）；data-show-when 相反，只在条件成立时显示。 */
+  function condOn(cond){
+    var eq=cond.indexOf('='),name=cond.slice(0,eq);
+    return cond.slice(eq+1).split('|').some(function(v){return !!document.querySelector('input[name="'+name+'"][value="'+v+'"]:checked');});
+  }
+  function clearInside(el){
+    el.querySelectorAll('input').forEach(function(i){ if(i.type==='radio'||i.type==='checkbox') i.checked=false; else i.value=''; });
+    el.querySelectorAll('textarea').forEach(function(t){ t.value=''; });
+  }
+  function applyStageVisibility(){
+    document.querySelectorAll('[data-hide-when]').forEach(function(el){
+      var h=condOn(el.getAttribute('data-hide-when'));
+      if(h&&!el.hidden) clearInside(el);
+      el.hidden=h;
+    });
+    document.querySelectorAll('[data-show-when]').forEach(function(el){ el.hidden=!condOn(el.getAttribute('data-show-when')); });
+  }
+
+  /* ===== 复制我的画像：文字 + 一行数据 =====
+     文字给人和 AI 读；数据给工具读，用于存档、比较前后两版和回测。
+     form 是题目结构的指纹：题目或选项一改，指纹就变，旧答卷能对上旧题。编号由顾问登记时给，网页不生成。 */
+  function zhiquAnswers(){
+    var d={text:{},radio:{},check:{}};
+    document.querySelectorAll('input[type=text],input[type=number],input[type=date],input[type=time],textarea').forEach(function(el){ if(el.id&&el.id!=='summary'&&el.value.trim()) d.text[el.id]=el.value.trim(); });
+    document.querySelectorAll('input[type=radio]:checked').forEach(function(el){ if(el.name) d.radio[el.name]=el.value; });
+    document.querySelectorAll('input[type=checkbox]:checked').forEach(function(el){ if(el.name){ (d.check[el.name]=d.check[el.name]||[]).push(el.value); } });
+    if(typeof rankOrder!=='undefined') d.rank=rankOrder.slice();
+    return d;
+  }
+  function zhiquFormHash(){
+    var keys=[];
+    document.querySelectorAll('input,textarea').forEach(function(el){
+      if(el.id==='summary') return;
+      keys.push((el.name||el.id)+(el.type==='radio'||el.type==='checkbox'?'='+el.value:''));
+    });
+    document.querySelectorAll('.rank-item').forEach(function(it){ keys.push('rank='+it.getAttribute('data-id')); });
+    keys.sort(); var s=keys.join('\n'),h=5381;
+    for(var i=0;i<s.length;i++){ h=((h<<5)+h+s.charCodeAt(i))>>>0; }
+    return ('00000000'+h.toString(16)).slice(-8);
+  }
+  function localStamp(){
+    var d=new Date(),p=function(n){return (n<10?'0':'')+n;},o=-d.getTimezoneOffset(),sign=o>=0?'+':'-';o=Math.abs(o);
+    return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())+'T'+p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds())+sign+p(Math.floor(o/60))+':'+p(o%60);
+  }
+  function zhiquCopy(text,kind){
+    var data={zhiqu:kind,form:zhiquFormHash(),filled_at:localStamp(),answers:zhiquAnswers()};
+    var full=text+'\n\n【以下是给 AI 读的数据，请原样保留】\n'+JSON.stringify(data);
+    var msg=document.getElementById('copyDone'),out=document.getElementById('output'),ta=document.getElementById('summary');
+    out.classList.remove('show'); ta.value=full;
+    var done=function(){ msg.textContent='已复制 ✓ 直接粘贴发回去就行'; msg.classList.add('show'); };
+    var fail=function(){
+      msg.textContent=''; msg.classList.remove('show');
+      out.classList.add('show'); out.scrollIntoView({behavior:'smooth',block:'start'});
+    };
+    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(full).then(done).catch(function(){
+      try{ ta.removeAttribute('readonly'); ta.select(); if(document.execCommand('copy')){ ta.setAttribute('readonly','readonly'); done(); return; } }catch(e){}
+      ta.setAttribute('readonly','readonly'); fail();
+    }); }
+    else { fail(); }
+  }

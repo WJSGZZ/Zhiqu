@@ -28,7 +28,7 @@
     <p>同样是"读个研"，统考、境外申请、国内的中外合作项目，规则、花费、拿到的证书都不一样；有些路一旦错过报名时间，就要再等一年。所以这份问卷先问你为什么读、现在在哪、能投入什么，再谈去哪里。</p>
     <hr class="rule">
     <p>问卷共十一节，其中「方向与状态」「性格与传统视角」两节可选，每节开头有一句"<b>为什么问这个</b>"。<b>有些题会随你的选择追问</b>，比如勾了"境外读研"，下面会问预算和语言。不确定的可以留空。</p>
-    <p><span class="how">最后一步</span>点击"生成我的画像"，复制那段文字发回即可。想争取保研或已经有推免机会的，在「路径与打算」一节勾选，会有几道追问。</p>
+    <p><span class="how">最后一步</span>填完点“复制我的画像”，直接粘贴发回即可。想争取保研或已经有推免机会的，在「路径与打算」一节勾选，会有几道追问。</p>
   </div>
 
   <div class="timeline">
@@ -42,13 +42,23 @@
 
       <div class="q req"><div class="q-label">你现在是？</div>
         <div class="opts">
-          <label class="opt"><input type="radio" name="grade" value="大一或大二"><span class="box">大一 / 大二</span></label>
+          <label class="opt"><input type="radio" name="grade" value="大一"><span class="box">大一</span></label>
+          <label class="opt"><input type="radio" name="grade" value="大二"><span class="box">大二</span></label>
           <label class="opt"><input type="radio" name="grade" value="大三"><span class="box">大三</span></label>
           <label class="opt"><input type="radio" name="grade" value="大四"><span class="box">大四</span></label>
+          <label class="opt"><input type="radio" name="grade" value="大五（五年制）"><span class="box">大五（五年制）</span></label>
           <label class="opt"><input type="radio" name="grade" value="已毕业3年内"><span class="box">已毕业 3 年内</span></label>
           <label class="opt"><input type="radio" name="grade" value="已毕业3年以上"><span class="box">已毕业 3 年以上</span></label>
           <label class="opt"><input type="radio" name="grade" value="硕士在读或已毕业"><span class="box">硕士在读 / 已毕业</span></label>
         </div></div>
+
+      <div class="q"><div class="q-label">本科学制<span class="opt-note">（选填）</span></div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="years" value="四年制"><span class="box">四年制</span></label>
+          <label class="opt"><input type="radio" name="years" value="五年制"><span class="box">五年制（如临床医学、口腔、建筑）</span></label>
+          <label class="opt"><input type="radio" name="years" value="其他学制"><span class="box">其他（专升本两年、本硕连读等）</span></label>
+        </div>
+        <p class="hint">保研和考研都按“毕业前一年”算时间。五年制的大四还不是毕业前一年，学制不同，时间表就要整体往后挪。</p></div>
 
       <div class="q req"><div class="q-label">想哪一年入学读研？</div>
         <input type="text" id="entry_year" placeholder="例如：2027 年秋季；还不确定就写大概"></div>
@@ -666,7 +676,7 @@
   </div><!-- /timeline -->
 
   <div class="finish">
-    <button class="gen-btn" type="button" onclick="clickGenerate()">生成我的画像</button>
+    <button class="gen-btn" type="button" onclick="clickGenerate()">复制我的画像</button>
 
     <div class="warn" id="warn">
       <h3>等一下，有几处还没填</h3>
@@ -674,15 +684,17 @@
       <div class="warn-list" id="warnList"></div>
       <div class="warn-actions">
         <button class="btn-back" type="button" onclick="hideWarn()">返回补填</button>
-        <button class="btn-force" type="button" onclick="doGenerate()">未填的留空，仍要生成</button>
+        <button class="btn-force" type="button" onclick="doGenerate()">未填的留空，仍要复制</button>
       </div>
     </div>
 
+    <p class="copy-done" id="copyDone" role="status"></p>
+
     <div id="output">
-      <p class="out-head">这段就是你的"画像"。复制它，发回去就行 ↓</p>
+      <p class="out-head">没能自动复制。请长按下面的文字，全选后复制，发回去就行 ↓</p>
       <textarea id="summary" readonly></textarea>
       <div class="copy-row">
-        <button class="copy-btn" type="button" onclick="copySummary()">一键复制</button>
+        <button class="copy-btn" type="button" onclick="copySummary()">再试一次复制</button>
         <span class="copied" id="copiedMsg"></span>
       </div>
     </div>
@@ -834,7 +846,7 @@
   }
   function showWarn(miss){
     var warn=document.getElementById('warn');
-    document.getElementById('warnMsg').textContent='你还有 '+miss.length+' 处没填。可以点下面任意一项跳过去补填；如果就是不想填，点"仍要生成"，这些会留空，不影响后续分析。';
+    document.getElementById('warnMsg').textContent='你还有 '+miss.length+' 处没填。可以点下面任意一项跳过去补填；如果就是不想填，点"仍要复制"，这些会留空，不影响后续分析。';
     var list=document.getElementById('warnList'); list.innerHTML='';
     miss.forEach(function(q){
       var chip=document.createElement('div'); chip.className='warn-chip'; chip.textContent=getLabel(q);
@@ -883,10 +895,7 @@
     });
     L.push('');
     L.push('（本表由「知衢 · 硕士版」问卷生成，填写日期 '+new Date().toISOString().slice(0,10)+'。一切以教育部当年规定、研招网、各校与项目官网为准；AI 会出错，请交叉核实；最终决策权在本人。）');
-    var ta=document.getElementById('summary'); ta.value=L.join('\n');
-    document.getElementById('output').classList.add('show');
-    document.getElementById('copiedMsg').textContent='';
-    document.getElementById('output').scrollIntoView({behavior:'smooth',block:'start'});
+    zhiquCopy(L.join('\n'),'grad');
   }
 
   function copySummary(){

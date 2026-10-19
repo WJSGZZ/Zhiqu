@@ -28,7 +28,7 @@
     <p>是找内容、收入、节奏、城市都合适、自己也做得好的位置；同样的月薪，在不同城市、不同单位、不同岗位上，过的日子完全不一样。所以这份问卷先问你现在在哪、擅长什么、想要什么样的生活，再谈具体投哪些岗位。</p>
     <hr class="rule">
     <p>问卷多在求职开始前或进行中填；到了关键节点（开始投递、拿到 offer、想跳槽），可以回来改几处、重新生成。问卷共九节，其中「方向与状态」「性格与传统视角」两节可选，每节开头有一句"<b>为什么问这个</b>"。<b>有些题会随你的选择追问</b>，比如手里有多个 offer 在比较，下面会问每个 offer 的细节。不确定的可以留空。</p>
-    <p><span class="how">最后一步</span>点击"生成我的画像"，复制那段文字，发给装了知衢的 AI 即可。</p>
+    <p><span class="how">最后一步</span>填完点“复制我的画像”，直接粘贴发回即可。</p>
   </div>
 
   <div class="timeline">
@@ -560,7 +560,7 @@
   </div><!-- /timeline -->
 
   <div class="finish">
-    <button class="gen-btn" type="button" onclick="clickGenerate()">生成我的画像</button>
+    <button class="gen-btn" type="button" onclick="clickGenerate()">复制我的画像</button>
 
     <div class="warn" id="warn">
       <h3>等一下，有几处还没填</h3>
@@ -568,15 +568,17 @@
       <div class="warn-list" id="warnList"></div>
       <div class="warn-actions">
         <button class="btn-back" type="button" onclick="hideWarn()">返回补填</button>
-        <button class="btn-force" type="button" onclick="doGenerate()">未填的留空，仍要生成</button>
+        <button class="btn-force" type="button" onclick="doGenerate()">未填的留空，仍要复制</button>
       </div>
     </div>
 
+    <p class="copy-done" id="copyDone" role="status"></p>
+
     <div id="output">
-      <p class="out-head">这段就是你的"画像"。复制它，发回去就行 ↓</p>
+      <p class="out-head">没能自动复制。请长按下面的文字，全选后复制，发回去就行 ↓</p>
       <textarea id="summary" readonly></textarea>
       <div class="copy-row">
-        <button class="copy-btn" type="button" onclick="copySummary()">一键复制</button>
+        <button class="copy-btn" type="button" onclick="copySummary()">再试一次复制</button>
         <span class="copied" id="copiedMsg"></span>
       </div>
     </div>
@@ -728,7 +730,7 @@
   }
   function showWarn(miss){
     var warn=document.getElementById('warn');
-    document.getElementById('warnMsg').textContent='你还有 '+miss.length+' 处没填。可以点下面任意一项跳过去补填；如果就是不想填，点"仍要生成"，这些会留空，不影响后续分析。';
+    document.getElementById('warnMsg').textContent='你还有 '+miss.length+' 处没填。可以点下面任意一项跳过去补填；如果就是不想填，点"仍要复制"，这些会留空，不影响后续分析。';
     var list=document.getElementById('warnList'); list.innerHTML='';
     miss.forEach(function(q){
       var chip=document.createElement('div'); chip.className='warn-chip'; chip.textContent=getLabel(q);
@@ -777,10 +779,7 @@
     });
     L.push('');
     L.push('（本表由「知衢 · 求职版」问卷生成，填写日期 '+new Date().toISOString().slice(0,10)+'。薪资、政策以用人单位书面文件和官方发布为准；AI 会出错，请交叉核实；最终决策权在本人。）');
-    var ta=document.getElementById('summary'); ta.value=L.join('\n');
-    document.getElementById('output').classList.add('show');
-    document.getElementById('copiedMsg').textContent='';
-    document.getElementById('output').scrollIntoView({behavior:'smooth',block:'start'});
+    zhiquCopy(L.join('\n'),'career');
   }
 
   function copySummary(){
