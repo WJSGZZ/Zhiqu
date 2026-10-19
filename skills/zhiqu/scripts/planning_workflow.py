@@ -22,7 +22,7 @@ PROFILE_FIELDS = {
  'career': ('学历','专业','毕业时间','求职阶段','经历','证书','目标岗位','收入底线','城市','单位类型偏好','户籍','政治面貌','多快需要收入')}
 REF = re.compile(r'\{\{(e|c|k|p):([^{}|]+?)(?:\|([^{}]+))?\}\}')
 NUMBER = re.compile(r'(?<![A-Za-z])\d[\d,]*(?:\.\d+)?(?:%|％)?')
-CHINESE_QUANTITY = re.compile(r'[零〇一二两三四五六七八九十百千万]+(?=\s*(?:元|分(?!位|制)|人|名|个月|万元|%))')
+CHINESE_QUANTITY = re.compile(r'[零〇一二两三四五六七八九十百千万]+(?=\s*(?:元|分(?!位|制|比)|人|名|个月|万元|%))')
 DATE = re.compile(r'^\d{4}-\d{2}-\d{2}$')
 
 
@@ -58,6 +58,21 @@ def walk(obj, path=''):
 def day(value):
     if not isinstance(value, str) or not DATE.fullmatch(value): raise ValueError('日期须为YYYY-MM-DD')
     return date.fromisoformat(value)
+
+
+def excerpt_contains(value, excerpt):
+    """Compare exact values allowing typographic commas/spaces and Chinese date notation."""
+    def clean(text):return re.sub(r'[\s,，]','',str(text))
+    needle=clean(value);haystack=clean(excerpt).replace('：',':')
+    if not needle:return False
+    if re.fullmatch(r'\d{4}-\d\d-\d\d(?:[ T]\d\d:\d\d(?::\d\d)?)?',str(value)):
+        from datetime import datetime
+        d=datetime.fromisoformat(str(value));parts=[str(d.year),f'{d.month}月{d.day}日']
+        if 'T' in str(value) or ' ' in str(value):parts.append(d.strftime('%H:%M').lstrip('0'))
+        return needle in haystack or all(p in haystack for p in parts) or (str(d.year) in haystack and f'{d.month}月' in haystack and f'{d.day}日' in haystack and (len(parts)<3 or parts[-1] in haystack))
+    if isinstance(value,(float,int)) or re.fullmatch(r'\d+(?:\.\d+)?%?',needle):
+        return bool(re.search(r'(?<![\d.])'+re.escape(needle)+(r'0*' if '.' in needle else r'(?:\.0+)?')+r'(?![\d.])',str(excerpt).replace(',', '').replace('，', '')))
+    return needle in haystack
 
 
 class PlanningCase:
@@ -107,11 +122,80 @@ class PlanningCase:
         if value is None: return '未取到'
         if isinstance(value, (dict,list)): raise ValueError('引用必须定位到单个可显示值')
         if not fmt or fmt=='text': return str(int(value)) if isinstance(value,float) and value.is_integer() else str(value)
+        if fmt in ('md','md_short','md_hm','ymd_cn','ym','ym_cn','year','month','day','datetime','hm'):
+            from datetime import datetime
+            parsed=datetime.fromisoformat(str(value))
+            return {'md':f'{parsed.month} 月 {parsed.day} 日','md_short':f'{parsed.month:02d}-{parsed.day:02d}','md_hm':f'{parsed.month:02d}-{parsed.day:02d} '+parsed.strftime('%H:%M'),
+                    'ymd_cn':f'{parsed.year} 年 {parsed.month} 月 {parsed.day} 日','ym':f'{parsed.year}.{parsed.month:02d}',
+                    'ym_cn':f'{parsed.year} 年 {parsed.month} 月','day':str(parsed.day),'month':str(parsed.month),'year':str(parsed.year),'datetime':parsed.strftime('%Y-%m-%d %H:%M'), 'hm':parsed.strftime('%H:%M')}[fmt]
+        if fmt in ('yuan','arabic'):
+            label=str(value).removesuffix('元')
+            digits={ch:i for i,ch in enumerate('零一二三四五六七八九')};digits.update({'〇':0,'两':2})
+            total=section=number=0
+            for ch in label:
+                if ch in digits:number=digits[ch]
+                elif ch in '十百千':section+=(number or 1)*{'十':10,'百':100,'千':1000}[ch];number=0
+                elif ch in '万亿':total+=(section+number)*{'万':10000,'亿':100000000}[ch];section=number=0
+                else:raise ValueError('不支持的中文数值')
+            value=total+section+number
+            return f'{value:,}' if fmt=='yuan' else str(value)
+        if fmt == 'chinese':
+            number=int(value)
+            if number!=float(value) or not 0<=number<100:raise ValueError('中文计数显示仅支持非负两位整数')
+            digits='零一二三四五六七八九'
+            if number<10:return digits[number]
+            tens,ones=divmod(number,10)
+            return (digits[tens] if tens>1 else '')+'十'+(digits[ones] if ones else '')
+        if fmt == 'abs_comma': return f'{abs(float(value)):,.0f}'
         if fmt == 'comma': return f'{float(value):,.0f}'
         if fmt == '1f': return f'{float(value):.1f}'
         if fmt == 'percent0': return f'{float(value):.0%}'
         if fmt == 'percent1': return f'{float(value):.1%}'
         raise ValueError('未知显示格式：'+fmt)
+
+    def personal_inputs(self):
+        """Return exact registration pointers, never infer provenance from equal numbers."""
+        return [{'id':e['id'],'value':e.get('value'),'registration_ref':e.get('registration_ref')}
+                for e in self.evidence.values() if e.get('publication_status')=='personal_input']
+
+    def evidence_integrity_errors(self):
+        errors=[]
+        report=(self.root/'report.md').read_text() if (self.root/'report.md').exists() else ''
+        sentences={re.sub(r'[*`\s]','',x).strip('。！？') for x in re.split(r'[。！？\n]',report)}
+        cited=set()
+        for sid,entries in self.nodes().items():
+            for entry in entries:
+                for _,value in walk(self.get_node(entry['ref']).get('content',{})):
+                    if isinstance(value,str):
+                        cited.update(m[2].split('#')[0] for m in REF.finditer(value) if m[1]=='e')
+        # Numeric inputs also matter when only their calculated result is displayed.
+        for file,obj in self.data.items():
+            if file=='evidence.json':obj=obj.get('report_blocks',{})
+            for _,value in walk(obj):
+                if isinstance(value,str):cited.update(m[2].split('#')[0] for m in REF.finditer(value) if m[1]=='e')
+        for e in self.evidence.values():
+            where='evidence.json.items.'+e['id'];value=e.get('value');claim=e.get('claim','')
+            if isinstance(value,(dict,list)):errors.append(where+'.value：证据只允许单个值，不得用字典或列表')
+            normalized=re.sub(r'[*`\s]','',claim).strip('。！？')
+            if normalized and (normalized in sentences or re.search(r'\{\{|\*\*|\n|\[\d+\]',claim)):
+                errors.append(where+'.claim：须用原子事实标签，不能复制报告原句或模板')
+            if e.get('publication_status')=='personal_input':
+                source=e.get('source',{})
+                if source.get('url') or re.search(r'大学|学院|教育部|政府|人社|招生办|考试院|税务|司法部|公务员局|组织部|财政部|国家电网|南方电网',source.get('organization','')+' '+claim):
+                    errors.append(where+'.source：personal_input不得带官方网址或官方机构名')
+                try:
+                    file,sep,path=e.get('registration_ref','').partition('#')
+                    if not sep or file not in ('case.json','profile_parse.json'):raise ValueError('缺登记字段')
+                    if file=='case.json' and not self.registration_allowed(path):raise ValueError('不是客户登记字段')
+                    if file=='profile_parse.json':
+                        self.resolve('p',path)
+                    actual=pointer(self.data[file],path)
+                    if value is None or isinstance(actual,(dict,list)) or type(actual)!=type(value) or actual!=value:raise ValueError('登记值不一致')
+                except (ValueError,KeyError,IndexError,TypeError):errors.append(where+'.registration_ref：personal_input的值必须精确对应登记字段')
+            if e.get('grade')=='官方' and e.get('status')=='verified' and e['id'] in cited:
+                if value is None or not excerpt_contains(value,e.get('excerpt','')):errors.append(where+'.excerpt：报告引用的官方值未出现在原文摘录中')
+                if e.get('excerpt')==claim or len(e.get('excerpt','').splitlines())>2:errors.append(where+'.excerpt：须为不超过两行的原文摘录，不能用claim代替')
+        return errors
 
     def expand(self, text, location=''):
         def sub(m):
@@ -289,6 +373,7 @@ class PlanningCase:
 
     def stage5(self):
         items=self.need('evidence.json').get('items',[])
+        self.errors.extend(self.evidence_integrity_errors())
         if len(self.evidence)!=len(items):self.err('evidence.json','items','ID重复')
         now=day(self.case['context']['as_of'])
         required=('id','claim','unit','source','published_on','retrieved_on','retrieval_method','grade','scope','review_due','candidate_ids','status')
@@ -329,6 +414,23 @@ class PlanningCase:
         if plan.get('engine')=='legacy_demo':
             from check_demos import calculate
             if calculate(self.case)!=saved:self.err('calculations.json','','既有计算不能复算')
+            for key,spec in plan.get('display_inputs',{}).items():
+                role=spec.get('role');where='calculation_plan.display_inputs.'+key
+                if role not in ('declared_scenario','anonymous_aggregate','derived_rule_parameter'):
+                    self.err('case.json',where,'必须区分情景、匿名加工和官方规则换算')
+                if role=='declared_scenario' and spec.get('source_group')!=1:
+                    self.err('case.json',where,'情景不能冒充官方输入')
+                if role=='derived_rule_parameter':
+                    refs=spec.get('evidence_refs',[]);values=spec.get('source_values',[])
+                    def raw_number(eid):
+                        e=self.evidence[eid]
+                        if e.get('grade')!='官方' or e.get('status')!='verified' or not excerpt_contains(e.get('value'),e.get('excerpt','')):raise ValueError('不是已核官方数值')
+                        return float(str(e['value']).rstrip('%'))
+                    try:
+                        if len(refs)!=len(values) or [raw_number(eid) for eid in refs]!=values:raise ValueError('原值不符')
+                        if spec.get('algorithm') not in ('sum','percent_to_ratio'):raise ValueError('换算算法未登记')
+                        if pointer(saved,'/report_parameters/'+key)!=pointer(self.case,spec['case_pointer']):raise ValueError('结果与输入不符')
+                    except (ValueError,KeyError,TypeError):self.err('case.json',where,'官方参数换算缺正确原文/输入/算法')
             expected={path for section in ('budget','additional_scenarios','hypothetical_followup')
                       for path,v in walk(self.case.get(section,{}),'/'+section)
                       if isinstance(v,(int,float)) and not isinstance(v,bool)}

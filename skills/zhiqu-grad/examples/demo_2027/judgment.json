@@ -1031,18 +1031,15 @@
           ],
           [
             "最近硬截止",
-            "{{e:E0018#/value}} 月 {{e:E0019#/value}} 日",
-            "{{e:E0020#/value}} 年网报截止，当日 {{e:E0021#/value}}:{{e:E0022#/value}} 结束"
+            "{{e:E2079#/value|md}}",
+            "{{e:E2079#/value|year}} 年网报截止，当日 {{e:E2086#/value}} 结束"
           ]
         ]
       },
       "evidence_refs": [
         "E0001",
-        "E0018",
-        "E0019",
-        "E0020",
-        "E0021",
-        "E0022"
+        "E2079",
+        "E2086"
       ]
     },
     "01_4": {
@@ -1050,41 +1047,34 @@
       "content": {
         "items": [
           {
-            "text": "**{{e:E0018#/value}} 月 {{e:E0023#/value}} 日前（个人检查点）**：确认两校的学院、专业代码、学习方式和考试科目，带回同科目完整模考的总分、单科与完成情况；不能用其他学校的自命题成绩直接换算。",
+            "text": "**{{k:/context/personal_dates/action0|md}}前（个人检查点）**：确认两校的学院、专业代码、学习方式和考试科目，带回同科目完整模考的总分、单科与完成情况；不能用其他学校的自命题成绩直接换算。",
             "date": "{{k:/context/personal_dates/action0}}"
           },
           {
-            "text": "**{{e:E0018#/value}} 月 {{e:E0021#/value}} 日前（个人检查点）**：与家庭确认每年 {{k:/budget/annual_limit|comma}} 元支持是否连续三年有效，列出水电、交通、设备等额外支出；不能先把奖助学金当已到账收入。",
+            "text": "**{{k:/context/personal_dates/action1|md}}前（个人检查点）**：与家庭确认每年 {{k:/budget/annual_limit|comma}} 元支持是否连续三年有效，列出水电、交通、设备等额外支出；不能先把奖助学金当已到账收入。",
             "date": "{{k:/context/personal_dates/action1}}"
           },
           {
-            "text": "**{{e:E0018#/value}} 月 {{e:E0024#/value}} 日前（个人检查点）**：核对网报与报考点通知，保留愿意去的少量技术岗位公告。报名的官方硬截止仍是 {{e:E0018#/value}} 月 {{e:E0019#/value}} 日 {{e:E0021#/value}}:{{e:E0022#/value}}，不等到最后时刻才处理资格疑问。[2][3]",
+            "text": "**{{k:/context/personal_dates/action2|md}}前（个人检查点）**：核对网报与报考点通知，保留愿意去的少量技术岗位公告。报名的官方硬截止仍是 {{e:E2079#/value|md}} {{e:E2086#/value}}，不等到最后时刻才处理资格疑问。[2][3]",
             "date": "{{k:/context/personal_dates/action2}}"
           }
         ]
       },
       "evidence_refs": [
         "E0001",
-        "E0018",
-        "E0023",
-        "E0021",
-        "E0024",
-        "E0019",
-        "E0022"
+        "E0002",
+        "E2079",
+        "E2086"
       ]
     },
     "01_5": {
       "type": "checkpoint",
       "content": {
         "kind": "paragraph",
-        "text": "**下一个检查点是 {{e:E0020#/value}} 年 {{e:E0018#/value}} 月 {{e:E0023#/value}} 日。** 上一次计划中的 {{e:E0018#/value}} 月 {{e:E0025#/value}} 日已过去，本报告没有收到完成记录，因此不把它当作已完成。到下一检查点，若仍无模考或费用证据，就缩小判断范围，明确哪些问题未解决；不能用主观乐观替代信息。"
+        "text": "**下一个检查点是 {{k:/context/personal_dates/checkpoint|ymd_cn}}。** 上一次计划中的 {{k:/context/personal_dates/previous|md}}已过去，本报告没有收到完成记录，因此不把它当作已完成。到下一检查点，若仍无模考或费用证据，就缩小判断范围，明确哪些问题未解决；不能用主观乐观替代信息。"
       },
       "evidence_refs": [
-        "E0001",
-        "E0020",
-        "E0018",
-        "E0023",
-        "E0025"
+        "E0001"
       ]
     },
     "02_9": {
@@ -1301,75 +1291,56 @@
           "年份与计划",
           "人数",
           "最低分",
-          "{{e:E0072#/value}} 分位",
+          "{{c:/report_constants/q1_label}} 分位",
           "中位数",
-          "{{e:E0073#/value}} 分位",
+          "{{c:/report_constants/q3_label}} 分位",
           "最高分"
         ],
         "rows": [
           [
-            "{{e:E0051#/value}} 普通与基地合计",
-            "{{e:E0052#/value}}",
-            "{{e:E0053#/value}}",
-            "{{e:E0054#/value}}",
-            "{{e:E0055#/value}}",
-            "{{e:E0056#/value}}",
-            "{{e:E0057#/value}}"
+            "{{e:E1018#/value}} 普通与基地合计",
+            "{{c:/scut_reference_statistics/2026_普通计划与基地计划/n}}",
+            "{{c:/scut_reference_statistics/2026_普通计划与基地计划/min}}",
+            "{{c:/scut_reference_statistics/2026_普通计划与基地计划/q1}}",
+            "{{c:/scut_reference_statistics/2026_普通计划与基地计划/median}}",
+            "{{c:/scut_reference_statistics/2026_普通计划与基地计划/q3}}",
+            "{{c:/scut_reference_statistics/2026_普通计划与基地计划/max}}"
           ],
           [
-            "{{e:E0051#/value}} 普通计划",
-            "{{e:E0058#/value}}",
-            "{{e:E0053#/value}}",
-            "{{e:E0059#/value}}",
-            "{{e:E0055#/value}}",
-            "{{e:E0060#/value}}",
-            "{{e:E0061#/value}}"
+            "{{e:E1018#/value}} 普通计划",
+            "{{c:/scut_reference_statistics/2026_普通计划/n}}",
+            "{{c:/scut_reference_statistics/2026_普通计划与基地计划/min}}",
+            "{{c:/scut_reference_statistics/2026_普通计划/q1}}",
+            "{{c:/scut_reference_statistics/2026_普通计划与基地计划/median}}",
+            "{{c:/scut_reference_statistics/2026_普通计划/q3}}",
+            "{{c:/scut_reference_statistics/2026_普通计划/max}}"
           ],
           [
-            "{{e:E0051#/value}} 基地计划",
-            "{{e:E0062#/value}}",
-            "{{e:E0053#/value}}",
-            "{{e:E0063#/value}}",
-            "{{e:E0055#/value}}",
-            "{{e:E0064#/value}}",
-            "{{e:E0057#/value}}"
+            "{{e:E1018#/value}} 基地计划",
+            "{{c:/scut_reference_statistics/2026_基地计划/n}}",
+            "{{c:/scut_reference_statistics/2026_普通计划与基地计划/min}}",
+            "{{c:/scut_reference_statistics/2026_基地计划/q1}}",
+            "{{c:/scut_reference_statistics/2026_普通计划与基地计划/median}}",
+            "{{c:/scut_reference_statistics/2026_基地计划/q3}}",
+            "{{c:/scut_reference_statistics/2026_普通计划与基地计划/max}}"
           ],
           [
-            "{{e:E0065#/value}} 普通计划",
-            "{{e:E0066#/value}}",
-            "{{e:E0067#/value}}",
-            "{{e:E0068#/value}}",
-            "{{e:E0069#/value}}",
-            "{{e:E0070#/value}}",
-            "{{e:E0071#/value}}"
+            "{{e:E1019#/value}} 普通计划",
+            "{{c:/scut_reference_statistics/2025_普通计划/n}}",
+            "{{c:/scut_reference_statistics/2025_普通计划/min}}",
+            "{{c:/scut_reference_statistics/2025_普通计划/q1}}",
+            "{{c:/scut_reference_statistics/2025_普通计划/median}}",
+            "{{c:/scut_reference_statistics/2025_普通计划/q3}}",
+            "{{c:/scut_reference_statistics/2025_普通计划/max}}"
           ]
         ]
       },
       "evidence_refs": [
         "E0001",
-        "E0072",
-        "E0073",
-        "E0051",
-        "E0052",
-        "E0053",
-        "E0054",
-        "E0055",
-        "E0056",
-        "E0057",
-        "E0058",
-        "E0059",
-        "E0060",
-        "E0061",
-        "E0062",
-        "E0063",
-        "E0064",
-        "E0065",
-        "E0066",
-        "E0067",
-        "E0068",
-        "E0069",
-        "E0070",
-        "E0071"
+        "E0007",
+        "E0012",
+        "E1018",
+        "E1019"
       ]
     },
     "06_16": {
@@ -1377,48 +1348,41 @@
       "content": {
         "columns": [
           "假如华工同科目初试总分",
-          "{{e:E0020#/value}} 年录取者中的相对位置",
-          "{{e:E0104#/value}} 年录取者中的相对位置",
+          "{{e:E1043#/value}} 年录取者中的相对位置",
+          "{{e:E1019#/value}} 年录取者中的相对位置",
           "决策含义"
         ],
         "rows": [
           [
-            "{{e:E0099#/value}} 分",
+            "{{c:/report_parameters/hypothetical_followup__score_scenarios__0}} 分",
             "等于观察到的最低分",
             "低于观察到的最低分",
             "只能说明某年曾有这个分数录取；不能说明本人能进复试或复试有余地"
           ],
           [
-            "{{e:E0100#/value}} 分",
-            "低于合计样本的 {{e:E0072#/value}} 分位",
+            "{{c:/report_parameters/hypothetical_followup__score_scenarios__1}} 分",
+            "低于合计样本的 {{c:/report_constants/q1_label}} 分位",
             "低于观察到的最低分",
             "需要更认真核对单科、净名额和备选，不自动判定必败，也不默认调剂存在"
           ],
           [
-            "{{e:E0101#/value}} 分",
-            "接近合计样本中位数 {{e:E0102#/value}} 分",
-            "在 {{e:E0072#/value}} 分位与中位数之间",
+            "{{c:/report_parameters/hypothetical_followup__score_scenarios__2}} 分",
+            "接近合计样本中位数 {{c:/scut_reference_statistics/2026_普通计划与基地计划/median}} 分",
+            "在 {{c:/report_constants/q1_label}} 分位与中位数之间",
             "在已录取者中有参照位置；仍未知未录取者、复试与本人单科"
           ],
           [
-            "{{e:E0103#/value}} 分",
-            "接近合计样本 {{e:E0073#/value}} 分位",
-            "高于 {{e:E0073#/value}} 分位",
+            "{{c:/report_parameters/hypothetical_followup__score_scenarios__3}} 分",
+            "接近合计样本 {{c:/report_constants/q3_label}} 分位",
+            "高于 {{c:/report_constants/q3_label}} 分位",
             "不能据此说“初试已不是问题”；单科、复试资格和规则仍需同时成立"
           ]
         ]
       },
       "evidence_refs": [
         "E0001",
-        "E0020",
-        "E0104",
-        "E0099",
-        "E0100",
-        "E0072",
-        "E0101",
-        "E0102",
-        "E0103",
-        "E0073"
+        "E1043",
+        "E1019"
       ]
     },
     "07_2": {
@@ -1428,43 +1392,43 @@
         "caption": "横轴按时间顺序阅读；琥珀菱形为个人检查点，圆点为流程节点。未发布的具体日期保持未发布，不用往年日期冒充当年安排。",
         "rows": [
           [
-            "{{e:E0110#/value}}",
+            "{{k:/context/personal_dates/action0|ym}}",
             "科目、模考与预算核对",
-            "{{e:E0018#/value}}-{{e:E0023#/value}} 个人检查点",
+            "{{k:/context/personal_dates/action0|md_short}} 个人检查点",
             "检查点"
           ],
           [
-            "{{e:E0110#/value}}",
+            "{{k:/context/personal_dates/action0|ym}}",
             "完成网报并核对信息",
-            "{{e:E0018#/value}}-{{e:E0019#/value}} {{e:E0021#/value}}:{{e:E0022#/value}} 官方截止",
+            "{{e:E2079#/value|md_short}} {{e:E2086#/value}} 官方截止",
             ""
           ],
           [
-            "{{e:E0111#/value}}",
+            "{{k:/context/personal_dates/exam_month|ym}}",
             "参加初试",
-            "{{e:E0025#/value}}-{{e:E0112#/value/E0112}}—{{e:E0025#/value}}-{{e:E0112#/value/E0113}} 官方日期",
+            "{{e:E2083#/value|md_short}}—{{e:E2084#/value|md_short}} 官方日期",
             ""
           ],
           [
-            "{{e:E0105#/value}} 成绩后",
+            "{{k:/target_year}} 成绩后",
             "总分、单科与候选重评",
             "公布后个人检查点",
             "检查点"
           ],
           [
-            "{{e:E0105#/value}} 复试期",
+            "{{k:/target_year}} 复试期",
             "核复试、调剂和确认",
             "具体日程未发布",
             ""
           ],
           [
-            "{{e:E0105#/value}} 毕业前",
+            "{{k:/target_year}} 毕业前",
             "比较录取与真实就业条件",
             "按各方确认期限",
             "检查点"
           ],
           [
-            "{{e:E0105#/value}} 入学前",
+            "{{k:/target_year}} 入学前",
             "核毕业、费用与报到",
             "以录取与报到通知为准",
             ""
@@ -1476,16 +1440,10 @@
         "E0002",
         "E0003",
         "E0005",
-        "E0110",
-        "E0018",
-        "E0023",
-        "E0019",
-        "E0021",
-        "E0022",
-        "E0111",
-        "E0025",
-        "E0112",
-        "E0105"
+        "E2079",
+        "E2086",
+        "E2083",
+        "E2084"
       ]
     },
     "07_3": {
@@ -1538,19 +1496,16 @@
       "content": {
         "title": "电气相关考研：先核对，再定层次",
         "门槛": "应届本科资格、毕业条件和各校科目逐项成立；本人需有同科目完整模考与单科记录。",
-        "时间窗口": "{{e:E0018#/value}} 月 {{e:E0023#/value}} 日核对差距，{{e:E0018#/value}} 月 {{e:E0019#/value}} 日 {{e:E0021#/value}}:{{e:E0022#/value}} 前完成网报；确认按报考点，初试 {{e:E0025#/value}} 月 {{e:E0112#/value/E0112}}—{{e:E0112#/value/E0113}} 日。[2][3][5]",
+        "时间窗口": "{{k:/context/personal_dates/action0|md}}核对差距，{{e:E2079#/value|md}} {{e:E2086#/value}} 前完成网报；确认按报考点，初试 {{e:E2083#/value|month}} 月 {{e:E2083#/value|day}}—{{e:E2084#/value|day}} 日。[2][3][5]",
         "投入": "当前以可持续的有效投入评估；费用先按已核实的华工非定向全日制口径，其他项目另算。",
         "切换条件": "资格、科目或预算不成立就换目标；成绩公布后按实际单科、总分和当年规则重评，不拿往年最低分保证录取。"
       },
       "evidence_refs": [
         "E0001",
-        "E0018",
-        "E0023",
-        "E0019",
-        "E0021",
-        "E0022",
-        "E0025",
-        "E0112"
+        "E2079",
+        "E2086",
+        "E2083",
+        "E2084"
       ]
     },
     "08_4": {
@@ -1603,18 +1558,18 @@
         "rows": [
           [
             "学费",
-            "{{e:E0124#/value}} 元／学年",
-            "华工 {{e:E0105#/value}} 非定向全日制能源动力 {{e:E0125#/value/E0125}}，学制 {{e:E0125#/value/E0126}} 年；不能外推到定向或广工"
+            "{{e:E0008#/value|comma}} 元／学年",
+            "华工 {{k:/target_year}} 非定向全日制能源动力 {{e:E1002#/value}}，学制 {{e:E1001#/value}} 年；不能外推到定向或广工"
           ],
           [
             "住宿预留",
-            "{{e:E0127#/value}} 元／学年",
-            "华工 {{e:E0020#/value}} 全校收费公示的最高档作保守预留，不是小林已分配宿舍的价格"
+            "{{c:/report_parameters/budget__annual_housing|comma}} 元／学年",
+            "华工 {{e:E1043#/value}} 全校收费公示的最高档作保守预留，不是小林已分配宿舍的价格"
           ],
           [
             "生活费",
-            "{{e:E0128#/value}} 元／月",
-            "本人预算假设，按 {{e:E0025#/value}} 个月计，不含另列的水电与突发支出"
+            "{{k:/budget/monthly_living_assumption|comma}} 元／月",
+            "本人预算假设，按 {{c:/report_constants/months_per_year}} 个月计，不含另列的水电与突发支出"
           ],
           [
             "年费用",
@@ -1632,7 +1587,7 @@
             "学费、住宿和生活费口径保持不变；不含少挣收入"
           ],
           [
-            "生活费每月多 {{e:E0129#/value}} 元",
+            "生活费每月多 {{c:/report_constants/living_increment}} 元",
             "年费用 {{c:/annual_cost_if_living_plus_200|comma}} 元，余量 {{c:/annual_margin_if_living_plus_200|comma}} 元",
             "单独改变生活费的敏感性比较，其他输入不变"
           ]
@@ -1640,14 +1595,11 @@
       },
       "evidence_refs": [
         "E0001",
-        "E0124",
-        "E0105",
-        "E0125",
-        "E0127",
-        "E0020",
-        "E0128",
-        "E0025",
-        "E0129"
+        "E0008",
+        "E0008",
+        "E1002",
+        "E1001",
+        "E1043"
       ]
     },
     "09_8": {
@@ -1662,13 +1614,13 @@
         "rows": [
           [
             "学费依据",
-            "{{e:E0105#/value}} 非定向全日制，每年 {{e:E0124#/value}} 元",
-            "{{e:E0020#/value}} 同类型，每年 {{e:E0142#/value}} 元；{{e:E0105#/value}} 待核",
+            "{{k:/target_year}} 非定向全日制，每年 {{e:E0008#/value|comma}} 元",
+            "{{e:E1043#/value}} 同类型，每年 {{e:E1030#/value|comma}} 元；{{k:/target_year}} 待核",
             "年份不同，不能称最终费用排名"
           ],
           [
             "住宿与生活",
-            "每年住宿预留 {{e:E0135#/value}} 元、每月生活 {{e:E0128#/value}} 元",
+            "每年住宿预留 {{c:/report_parameters/budget__annual_housing|comma}} 元、每月生活 {{k:/budget/monthly_living_assumption|comma}} 元",
             "暂用同样假设；不是广工官方住宿费",
             "固定其他输入，先看学费变化的影响"
           ],
@@ -1679,9 +1631,9 @@
             "广工参照情景的额外支出空间更小"
           ],
           [
-            "生活费每月多 {{e:E0129#/value}} 元",
+            "生活费每月多 {{c:/report_constants/living_increment}} 元",
             "年费用 {{c:/annual_cost_if_living_plus_200|comma}} 元，余量 {{c:/annual_margin_if_living_plus_200|comma}} 元",
-            "年费用 {{c:/gdut_fee_reference/annual_cost_if_living_plus_200|comma}} 元，超出上限 {{e:E0127#/value}} 元",
+            "年费用 {{c:/gdut_fee_reference/annual_cost_if_living_plus_200|comma}} 元，超出上限 {{c:/gdut_fee_reference/annual_margin_if_living_plus_200|abs_comma}} 元",
             "若实际达到这一水平，就需补资金或改方案"
           ],
           [
@@ -1694,14 +1646,11 @@
       },
       "evidence_refs": [
         "E0001",
-        "E0105",
-        "E0124",
-        "E0020",
-        "E0142",
-        "E0135",
-        "E0128",
-        "E0129",
-        "E0127"
+        "E0008",
+        "E0009",
+        "E0008",
+        "E1043",
+        "E1030"
       ]
     },
     "09_12": {
@@ -1779,7 +1728,7 @@
             "若生活或训练内容不可接受，不能只因名额多保留"
           ],
           [
-            "广工 {{e:E0105#/value}} 学费、住宿与完整拟录取统计何时核清",
+            "广工 {{k:/target_year}} 学费、住宿与完整拟录取统计何时核清",
             "研招网收费通知、学院复试与公示",
             "旧年复试统计已补；新收费和住宿决定预算能否成立，不把匹配子集当全部录取"
           ],
@@ -1789,7 +1738,7 @@
             "若喜欢的是现场操作而非研究，应提高本科就业的比较权重"
           ],
           [
-            "每天 {{e:E0028#/value/E0028}} 小时是空余时间还是实际有效时间",
+            "每天 {{c:/illustrative_parameters/daily_hours_ceiling}} 小时是空余时间还是实际有效时间",
             "本人已有完成记录与状态",
             "根据可持续条件判断，避免以理想投入作唯一前提"
           ],
@@ -1816,9 +1765,7 @@
         ]
       },
       "evidence_refs": [
-        "E0001",
-        "E0105",
-        "E0028"
+        "E0001"
       ]
     },
     "11_5": {

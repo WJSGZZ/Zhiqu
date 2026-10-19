@@ -43,6 +43,90 @@ class PlanningWorkflowTests(unittest.TestCase):
             fn(pointer(obj,path))
         self.change(root,f,update)
 
+    def test_personal_input_without_official_source_is_allowed(self):
+        for root in self.roots.values():
+            self.assertFalse(any('personal_input' in e for e in PlanningCase(root).evidence_integrity_errors()))
+
+    def test_personal_input_official_url_is_rejected(self):
+        root=self.roots['grad']
+        self.change(root,'evidence.json',lambda e:next(x for x in e['items'] if x['id']=='E0901')['source'].update(url='https://www.moe.gov.cn/notice'))
+        self.assertTrue(any('不得带官方网址' in e for e in PlanningCase(root).evidence_integrity_errors()))
+
+    def test_personal_input_official_institution_is_rejected(self):
+        root=self.roots['career']
+        self.change(root,'evidence.json',lambda e:next(x for x in e['items'] if x['id']=='E0901')['source'].update(organization='教育部'))
+        self.assertTrue(any('不得带官方网址' in e for e in PlanningCase(root).evidence_integrity_errors()))
+
+    def test_scalar_evidence_value_is_allowed(self):
+        c=PlanningCase(self.roots['grad'])
+        self.assertEqual(c.evidence['E0008']['value'],8000)
+        self.assertFalse(any('单个值' in e for e in c.evidence_integrity_errors()))
+
+    def test_dictionary_and_list_evidence_values_are_rejected(self):
+        for value in ({'fee':8000},[8000]):
+            root=self.roots['grad']
+            self.change(root,'evidence.json',lambda e:next(x for x in e['items'] if x['id']=='E0008').update(value=value))
+            self.assertTrue(any('单个值' in e for e in PlanningCase(root).evidence_integrity_errors()))
+
+    def test_registered_personal_input_has_exact_pointer(self):
+        c=PlanningCase(self.roots['grad'])
+        self.assertEqual(next(e for e in c.personal_inputs() if e['id']=='E0901')['registration_ref'],'profile_parse.json#/fields/8/value')
+        self.assertFalse(any('必须精确对应' in e for e in c.evidence_integrity_errors()))
+
+    def test_unregistered_or_mismatched_personal_value_is_rejected(self):
+        root=self.roots['grad']
+        for changes in ({'value':30001},{'registration_ref':'case.json#/budget/annual_tuition'},{'registration_ref':'profile_parse.json#/fields/999/value'}):
+            self.change(root,'evidence.json',lambda e:next(x for x in e['items'] if x['id']=='E0901').update(**changes))
+            self.assertTrue(any('必须精确对应' in e for e in PlanningCase(root).evidence_integrity_errors()))
+
+    def test_atomic_claim_is_allowed(self):
+        for root in self.roots.values():
+            self.assertFalse(any('.claim' in e for e in PlanningCase(root).evidence_integrity_errors()))
+
+    def test_report_sentence_cannot_be_an_evidence_claim(self):
+        root=self.roots['grad'];sentence=next(line for line in (root/'report.md').read_text().splitlines() if line.startswith('**'))
+        self.change(root,'evidence.json',lambda e:next(x for x in e['items'] if x['id']=='E0901').update(claim=sentence))
+        self.assertTrue(any('不能复制报告原句' in e for e in PlanningCase(root).evidence_integrity_errors()))
+
+    def test_official_value_in_original_excerpt_is_allowed(self):
+        for root in self.roots.values():
+            self.assertFalse(any('.excerpt' in e for e in PlanningCase(root).evidence_integrity_errors()))
+
+    def test_official_value_missing_from_excerpt_is_rejected(self):
+        root=self.roots['grad']
+        self.change(root,'evidence.json',lambda e:next(x for x in e['items'] if x['id']=='E0008').update(excerpt='学校另行公布学费。'))
+        self.assertTrue(any('未出现在原文摘录' in e for e in PlanningCase(root).evidence_integrity_errors()))
+
+    def test_personal_date_is_one_registered_value(self):
+        c=PlanningCase(self.roots['grad'])
+        self.assertEqual(c.expand('{{k:/context/personal_dates/action0|md}}'),'10 月 21 日')
+        self.assertEqual(c.numeric_errors('{{k:/context/personal_dates/action0|md}}前核对科目。'),[])
+
+    def test_checklist_groups_sources_and_profiles_with_report_positions(self):
+        from operator_check import checklist_groups
+        for root in self.roots.values():
+            groups,_,_=checklist_groups(root)
+            self.assertTrue(15<=len(groups)<=25)
+            self.assertEqual(sum(g['id']=='PROFILE' for g in groups),1)
+            urls=[g['source'].get('url') for g in groups if g['source'].get('url')]
+            self.assertEqual(len(urls),len(set(urls)))
+            self.assertTrue(any('第 9 节' in check for g in groups for check in g['checks']))
+
+    def test_checklist_program_length_does_not_claim_to_feed_annual_cost(self):
+        from operator_check import checklist_groups
+        groups,_,_=checklist_groups(self.roots['grad'])
+        fee=next(g for g in groups if g['id']=='E0008')
+        duration=next(check for check in fee['checks'] if check.startswith('华工非定向全日制能源动力学制'))
+        self.assertNotIn('年度费用',duration)
+        tuition=next(check for check in fee['checks'] if check.startswith('华工非定向全日制能源动力年度学费'))
+        self.assertIn('第 1 节',tuition);self.assertIn('年度费用',tuition)
+
+    def test_ordinary_month_and_wage_conversion_are_calculations(self):
+        c=PlanningCase(self.roots['career'])
+        self.assertEqual(c.data['calculations.json']['offer_b_ordinary_month']['remaining_cash'],1967)
+        self.assertEqual(c.data['calculations.json']['reference_wages_cny']['会计专业人员']['p10'],42000)
+        self.assertFalse(any(e.get('value') in (1967,42000,'1,967','42,000') for e in c.evidence.values()))
+
     def test_complete_cases_and_existing_calculations_pass(self):
         for kind,root in self.roots.items():
             with self.subTest(kind=kind):
@@ -190,6 +274,16 @@ class PlanningWorkflowTests(unittest.TestCase):
     def test_operator_detects_removed_required_item(self):
         root=self.roots['career'];p=checklist(root);text=p.read_text();m=next(MARKER.finditer(text));p.write_text(text[:m.start()]+text[m.end():])
         self.assertTrue(validate_operator(root))
+
+    def test_gaokao_checklist_keeps_each_official_file_and_report_position(self):
+        from operator_check import checklist_groups
+        root=Path(self.temp.name)/'legacy';root.mkdir()
+        report={'sources':[['规则','https://example.edu.cn/a；https://example.edu.cn/b']],
+                'news':[['计划 20 人','2026-10-19','https://example.edu.cn/b','待核']]}
+        dump(root/'report.json',report)
+        groups,_,_=checklist_groups(root)
+        self.assertEqual({g['source']['url'] for g in groups},{'https://example.edu.cn/a','https://example.edu.cn/b'})
+        self.assertTrue(any('计划 20 人 → 第 8 节' in check for g in groups for check in g['checks']))
 
     def test_gaokao_adapter_never_changes_existing_inputs(self):
         root=Path(self.temp.name)/'gaokao';root.mkdir();report={'sources':[['规则','https://example.edu.cn/rule']]}

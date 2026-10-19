@@ -23,7 +23,7 @@
 | 6 计算 | 用明确输入算预算、收入与条件情景 | `calculations.json` | 输入可追溯、算法可复算；基准之外有合同规定的敏感性情景；不覆盖原有结果 |
 | 7 判断 | 把支持、反对、成本及切换条件摊开 | `judgment.json` | 维度/权重有本人依据，未知不造分；主路径、保险路径、每候选改判条件和检查点完整 |
 | 8 报告 | 从前述文件组装一致内容 | `narrative.json` → `<案例目录>/report.md` → `report.html`、`report.pdf`；自动产生 `report_trace.json` | 内容合同、数字溯源、渲染、版面、长网址/SVG 门禁全过，才发布新生成件 |
-| 9 操控者核查 | 让操控者检查影响交付的事实 | 自动生成 `<案例目录>/operator_check.md` | 自动选项不漏，核查人/日期/结果/依据可回读；未解决的主结论条件不标为已满足 |
+| 9 操控者核查 | 让操控者检查影响交付的事实 | 自动生成 `<案例目录>/operator_check.md` | 按同一来源文件合并，逐个值列明报告节次和表格位置；客户画像合并确认，情景另核，影响主结论的排在前面；核查人/日期/结果/依据可回读；未解决的主结论条件不标为已满足 |
 | 10 复核 | 用新会话复查判断和表达 | `review.json` | 各项坑均 pass、按合同抽查原文、评分满足共用标准；独立复核与操控者核查均完成才可交付 |
 
 高考仍使用 0—8 阶段；上述目的映射进现有产物，不强迫它新增读研、求职的分析文件。在原报告阶段增加操控者核查单、在原复核记录增加评分字段。高考生成器只读适配既有 report.json 的 sources 为内存核查条目，保留原文件指针和哈希，不另存一套 evidence 或反写报告数据；旧记录缺等级/日期时明确待分类并入核查，不能按域名猜成官方。复核快照绑定既有 report/result 与 PDF 哈希。
@@ -64,14 +64,14 @@
 | 字段 | 约束 |
 |---|---|
 | `id`、`claim` | 本案例内稳定唯一 ID（如 E001），一条原子说法；同一原文可关联多候选，不复制成矛盾事实 |
-| `value`、`unit` | 原始数值/数组/日期/专业代码，原单位；纯定性或未取到用 null 并说明，不能填 0。本人登记值允许用 `value_ref` 指向 case.json 或 profile_parse.json 的唯一输入，避免双写数值 |
+| `value`、`unit` | 单个原始数值、字符串、日期或专业代码；不得用字典或列表，原单位；纯定性或未取到用 null 并说明，不能填 0。`personal_input` 必须另有 `registration_ref`（如 `profile_parse.json#/fields/8/value`）精确指向本人 given 值；值和类型一致，且不得带官方网址或官方机构名 |
 | `source.organization`、`source.url`、`source.locator` | 官方事实须有可定位的 http/https 官方 URL 与页码/表行/段落；个人输入的 URL 可为空，但须有画像节名或本机原件定位 |
 | `availability` | available / not_published / not_found / blocked；后二类说明已查入口和失败原因，不把未查到说成不存在 |
 | `published_on`、`publication_status` | 有日期填 YYYY-MM-DD；原页未署日期填 null + undated，不从 URL 猜日期；未发布与未取到分别在 availability 中说明 |
 | `retrieved_on`、`retrieval_method`、`verified_on`、`review_due` | 日期 YYYY-MM-DD，取文方式用上表枚举；未取到也记本次尝试日期及下次核对期限 |
 | `grade`、`status`、`scope` | 上表等级；status 为 verified / unretrieved；scope 明确年份、学校/学院/岗位、计划和学习方式等适用边界 |
 | `candidate_ids`、`rule_ids` | 关联候选/规则 ID 数组，无对应对象时空数组并说明公共用途 |
-| `excerpt`、`original_locator` | 已取原文留关键一两句或个人原话、原件定位；原始个人名单不落盘，只存匿名统计及加工范围 |
+| `excerpt`、`original_locator` | 已取原文留不超过两行的关键原句或个人原话、原件定位；报告实际引用的官方单值必须包含在 excerpt 中，claim 只写原子标签，不复制报告原句；原始个人名单不落盘，只存匿名统计及加工范围 |
 | `main_conclusion`、`gap` | 是否影响主结论；未取到时 gap 写原因、影响、查询入口、下一检查点 |
 
 这里 verified 表示所列依据已取得并核对，不表示“推测已证明为真”。肯定某个硬条件还要联合官方适用规则与本人条件证据；经验或推测不能单独认证资格。原件可在本机缓存，仓库只留必要摘录/匿名汇总和来源，不复制付费知识库内容。
@@ -87,10 +87,10 @@
 - `{{e:E001#/value}}`：按稳定证据 ID 找条目，再用 JSON Pointer 找值。
 - `{{c:/annual_cost}}`：取 calculations.json 中对应键；保留两份旧示例原有计算键和数值。
 - `{{k:/target_year}}`、`{{p:/fields/0/value}}`：直接引用case.json登记值或profile_parse.json本人字段；官方规则数字不得借登记字段洗成个人输入。
-- 官方日期和代码用证据引用；引用可用 `|comma`、`|1f`、`|percent0`、`|percent1` 指定显示格式；不指定时保留原值，不能手改引用展开后的数字。
+- 个人检查点用 `{{k:/context/personal_dates/action0|md}}`，整体输出“10 月 21 日”，不拆月日证据。官方日期和代码用证据引用；引用可用 `|comma`、`|1f`、`|percent0`、`|percent1` 指定显示格式；不指定时保留原值，不能手改引用展开后的数字。
 - 段落中的定性事实与判断用 `evidence_refs`、`candidate_refs`、`judgment_refs` 表明依据。只在句尾写一个编号但与数字不符，不算溯源。
 
-`report_trace.json` 由工具生成，逐个记录语义数字的章节/组件/文本位置、引用、未格式化值、显示值、格式和依赖；不手写。正文中没绑定的数值、悬空引用、随手改写的日期或百分比必须报错；单位与原文语义的对应由复核核对。来源表中发布日期等元数据由 evidence 直接生成，同样可定位。
+`report_trace.json` 由工具生成，逐个记录语义数字的章节/组件/文本位置、引用、未格式化值、显示值、格式和依赖；不手写。正文中没绑定的数值、悬空引用、随手改写的日期或百分比必须报错；单位与原文语义的对应由复核核对。来源表中发布日期等元数据由 evidence 直接生成，同样可定位。计算结果使用 c 引用；单位换算、匿名统计与普通月份收入必须保留原单位、加工口径和可复算算法；明示情景输入与官方原值分开登记，不能把二者改称本人输入。
 
 ### calculations.json
 
@@ -109,19 +109,15 @@ judgment.json的字段固定如下，表格和组件直接取这些记录；数�
 | 字段 | 项的最小结构 |
 |---|---|
 | preferences | questionnaire_section、quote、profile_refs、method（numeric/ordinal/unconfirmed）、dimensions、weights、confirmed；无确认数值权重时weights=null，不算综合分 |
-| kpis | id、label、value_ref、unit、interpretation；value_ref解析证据/计算，无值则reason，不用0代空缺 |
-| matrix | options（候选ID数组）、dimensions（id/label/preference_ref）、cells（candidate_id/dimension_id/status/text/evidence_refs/calc_refs）；每对行列恰有一格 |
-| candidates | id（J类）、candidate_id、supports、counters、costs、fallback、switch_conditions、checkpoint；理由项text及引用，任何一项未知写原因和下一核对办法 |
-| recommendation | primary、backup（候选/路径ID数组）、judgment_refs、evidence_refs、calc_refs、conditions；无符合硬门槛的对象时仅作调查优先级，不写已可报名/签约 |
-| actions | id、action、date_ref、deadline_kind、destination、judgment_refs；日期解析后为YYYY-MM-DD，官方或个人检查点区分 |
-| checkpoint | date_ref、trigger、required_updates；每候选checkpoint与全局检查点可不同，但不得互相矛盾 |
-| timeline | id、month_ref、task、deadline_ref、kind（milestone/checkpoint）、evidence_refs；未知官方日须有unknown_reason，不填过去一届的日期 |
-| routes | id、candidate_ids、threshold、time_window、investment、switch_condition、evidence_refs/calc_refs；四栏完整且能对应实际行动路径 |
-| risks | id、trigger、response、fallback_candidate_ids、evidence_refs/judgment_refs；触发条件可观察，不能是八字吉凶或个人概率 |
-| assumptions | id、label、value_ref或unknown_reason、scope、basis、switch_condition；事实依据和压力测试假设分开 |
-| questions | id、question、destination、reason、decision_effect、profile_refs；针对本人缺口，不附私人联系方式 |
-| terms | term、definition、scope；定义不另立一套会变的政策数字 |
+| matrix | options、dimensions、cells；每格有 candidate_id、dimension_id、status、text 及引用；每对行列恰有一格 |
+| candidates | id（J类）、candidate_id、supports、counters、costs、fallback、switch_conditions、checkpoint；支持、反对和改判条件分别登记 |
+| recommendation | primary、backup、judgment_refs、evidence_refs、calc_refs、conditions；资格不明只作调查优先级 |
+| checkpoint | date、trigger；全局与每个候选的检查点保持一致 |
+| presentation | 按节号保存有序 `{slot, ref}` 数组；slot 来自本版合同，ref 是阶段文件名加 JSON Pointer，例如 `judgment.json#/report_blocks/01_1` |
+| report_blocks | 以稳定键保存 `{type, content, evidence_refs}`；数字卡、行动、时间线、路线卡、风险、假设等组件放在合同指定的阶段文件 `report_blocks`，不另造同名顶层数组 |
+| main_evidence_dependencies | 主结论所依赖的候选、证据和计算引用；用于继续追踪间接输入 |
 
+连贯分析放 `narrative.json.sections` 对应的 lead、analysis、core_points 等登记位置；画像表放 `profile_parse.json.report_blocks`，候选表放 `candidates.json.report_blocks`，数据图与来源放 `evidence.json.report_blocks`。每个节点统一使用 type/content/evidence_refs；具体允许的位置与组件类型以合同的 from/node_types 为准。
 这里的text是结构化短理由或动作；长分析只在narrative登记位置写。main_conclusion所需的证据要从recommendation及其引用继续追踪，不能漏掉间接影响结果的计算输入。
 
 rules_check.json顶层用 `{schema_version, as_of, items}`，每项来源通过evidence_refs唯一定位，volatile布尔、status和日期必须齐。rules_check的as_of与本次出稿基准一致。候选中的每个硬条件要能联合定位适用规则和本人事实，而不是只挂一份学校首页。

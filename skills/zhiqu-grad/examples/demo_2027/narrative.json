@@ -56,13 +56,13 @@
             },
             {
               "title": "费用",
-              "text": "华工每年约 {{c:/annual_cost|comma}} 元；广工按 {{e:E0020#/value}} 年学费测算约 {{c:/gdut_fee_reference/annual_cost|comma}} 元，只余 {{c:/gdut_fee_reference/annual_margin}} 元。广工 {{k:/target_year}} 年学费和住宿费待核。[1][16]"
+              "text": "华工每年约 {{c:/annual_cost|comma}} 元；广工按 {{e:E1043#/value}} 年学费测算约 {{c:/gdut_fee_reference/annual_cost|comma}} 元，只余 {{c:/gdut_fee_reference/annual_margin}} 元。广工 {{k:/target_year}} 年学费和住宿费待核。[1][16]"
             }
           ]
         },
         "evidence_refs": [
           "E0001",
-          "E0020"
+          "E1043"
         ]
       }
     },
@@ -142,12 +142,10 @@
           "type": "analysis",
           "content": {
             "kind": "paragraph",
-            "text": "出生资料为 {{e:E0031#/value}}，湖南省；只知道省份，按北京时间排盘。结果为甲申、甲戌、乙酉、癸未，日主乙木；{{e:E0032#/value}} 年起运，逆行；{{k:/target_year}} 年在壬申运。[1]"
+            "text": "出生资料为 {{k:/birth_datetime|datetime}}，湖南省；只知道省份，按北京时间排盘。结果为甲申、甲戌、乙酉、癸未，日主乙木；{{c:/luck_start_year}} 年起运，逆行；{{k:/target_year}} 年在壬申运。[1]"
           },
           "evidence_refs": [
-            "E0001",
-            "E0031",
-            "E0032"
+            "E0001"
           ]
         },
         {
@@ -385,11 +383,10 @@
           "type": "analysis",
           "content": {
             "kind": "paragraph",
-            "text": "全日制、非全日制与定向、非定向是不同维度。广工 {{e:E0033#/value}} 简章写明，原则上非全日制招收在职定向就业人员；小林当前的备考情境不能直接套成适合非全日制。华工非定向全日制预算也不能用于定向或其他项目。若改为先工作再读，要重新核对劳动安排、上课地点、学费与合同，而不是沿用当前费用表。[3][5][8]"
+            "text": "全日制、非全日制与定向、非定向是不同维度。广工 {{k:/target_year}} 简章写明，原则上非全日制招收在职定向就业人员；小林当前的备考情境不能直接套成适合非全日制。华工非定向全日制预算也不能用于定向或其他项目。若改为先工作再读，要重新核对劳动安排、上课地点、学费与合同，而不是沿用当前费用表。[3][5][8]"
           },
           "evidence_refs": [
-            "E0008",
-            "E0033"
+            "E0008"
           ]
         }
       ],
@@ -461,11 +458,11 @@
           "type": "analysis",
           "content": {
             "kind": "paragraph",
-            "text": "培养地点同样影响生活。华工 {{e:E0034#/value}} 章程涉及联合培养基地，目录中的基地计划不只是数字变多。小林应问清校内与基地阶段在哪里、培养任务、导师联系和费用奖助如何安排。官方已经说明的制度可作为边界，在读生的体验只能补日常信息，不能取代正式培养安排。[3]"
+            "text": "培养地点同样影响生活。华工 {{k:/target_year}} 章程涉及联合培养基地，目录中的基地计划不只是数字变多。小林应问清校内与基地阶段在哪里、培养任务、导师联系和费用奖助如何安排。官方已经说明的制度可作为边界，在读生的体验只能补日常信息，不能取代正式培养安排。[3]"
           },
           "evidence_refs": [
             "E0003",
-            "E0034"
+            "E0005"
           ]
         },
         {
@@ -506,11 +503,10 @@
           "type": "analysis",
           "content": {
             "kind": "paragraph",
-            "text": "华工和广工的英语、数学与自命题科目不同，不能把总分直接横向排序，也不能把同一个 {{e:E0035#/value}} 分情景点放到两套试卷上比较难度。[3][4][5][6][7]"
+            "text": "华工和广工的英语、数学与自命题科目不同，不能把总分直接横向排序，也不能把同一个 {{c:/report_parameters/hypothetical_followup__score_scenarios__2}} 分情景点放到两套试卷上比较难度。[3][4][5][6][7]"
           },
           "evidence_refs": [
-            "E0007",
-            "E0035"
+            "E0007"
           ]
         },
         {
@@ -557,22 +553,12 @@
           "type": "analysis",
           "content": {
             "kind": "paragraph",
-            "text": "学院 {{e:E0077#/value}} 年第一志愿复试成绩公示中，{{e:E0078#/value}} 全日制共有 {{e:E0079#/value}} 人，剔除备注为退役士兵专项的 {{e:E0080#/value}} 人，普通考生 {{e:E0081#/value}} 人。其初试分为最低 {{e:E0082#/value}} 分、{{e:E0083#/value}} 分位 {{e:E0084#/value}} 分、中位数 {{e:E0085#/value}} 分、{{e:E0086#/value}} 分位 {{e:E0087#/value}} 分、最高 {{e:E0088#/value}} 分。只保存分数频数并计算统计，不保存姓名与考生编号。[14]"
+            "text": "学院 {{e:E1020#/value}} 年第一志愿复试成绩公示中，{{e:E1003#/value}} 全日制共有 {{c:/report_parameters/additional_scenarios__gdut_2026_first_choice_retest_scores__full_time_rows}} 人，剔除备注为退役士兵专项的 {{c:/report_parameters/additional_scenarios__gdut_2026_first_choice_retest_scores__excluded_soldier_rows}} 人，普通考生 {{c:/gdut_2026_first_choice_retest_scores/n}} 人。其初试分为最低 {{c:/gdut_2026_first_choice_retest_scores/min}} 分、{{c:/report_constants/q1_label}} 分位 {{c:/gdut_2026_first_choice_retest_scores/q1}} 分、中位数 {{c:/gdut_2026_first_choice_retest_scores/median}} 分、{{c:/report_constants/q3_label}} 分位 {{c:/gdut_2026_first_choice_retest_scores/q3}} 分、最高 {{c:/gdut_2026_first_choice_retest_scores/max}} 分。只保存分数频数并计算统计，不保存姓名与考生编号。[14]"
           },
           "evidence_refs": [
             "E0014",
-            "E0077",
-            "E0078",
-            "E0079",
-            "E0080",
-            "E0081",
-            "E0082",
-            "E0083",
-            "E0084",
-            "E0085",
-            "E0086",
-            "E0087",
-            "E0088"
+            "E1020",
+            "E1003"
           ]
         },
         {
@@ -599,29 +585,26 @@
           "type": "analysis",
           "content": {
             "kind": "paragraph",
-            "text": "广工自动化学院 {{e:E0090#/value}} 年办法规定：总成绩按初试折成百分制后占 {{e:E0091#/value}}、复试占 {{e:E0091#/value}}；复试低于 {{e:E0092#/value}} 分不予录取。复试中外语考核 {{e:E0093#/value}} 分、专业知识 {{e:E0094#/value}} 分、综合素质 {{e:E0094#/value}} 分；{{e:E0095#/value}} 专业知识列电力系统分析、电力电子技术，任选一门且须为初试未选考科目。这是旧年学院办法，{{k:/target_year}} 年仍要查新文件。[15]"
+            "text": "广工自动化学院 {{e:E1021#/value}} 年办法规定：总成绩按初试折成百分制后占 {{e:E1024#/value}}、复试占 {{e:E1024#/value}}；复试低于 {{e:E1025#/value}} 分不予录取。复试中外语考核 {{e:E1026#/value}} 分、专业知识 {{e:E1027#/value}} 分、综合素质 {{e:E1027#/value}} 分；{{e:E1016#/value}} 专业知识列电力系统分析、电力电子技术，任选一门且须为初试未选考科目。这是旧年学院办法，{{k:/target_year}} 年仍要查新文件。[15]"
           },
           "evidence_refs": [
             "E0015",
-            "E0090",
-            "E0091",
-            "E0092",
-            "E0093",
-            "E0094",
-            "E0095"
+            "E1021",
+            "E1024",
+            "E1025",
+            "E1026",
+            "E1027",
+            "E1016"
           ]
         },
         {
           "type": "analysis",
           "content": {
             "kind": "paragraph",
-            "text": "在这套旧年规则下，初试多 {{e:E0096#/value}} 分与复试多 {{e:E0097#/value}} 分，对百分制总成绩都增加 {{e:E0098#/value}} 分。这个换算只解释权重，不预测小林的复试表现。它说明：若初试总分相近，应认真核对专业知识与本科项目理解，不能把复试当手续；若复试不合格，初试较高也不能补过硬条件。小林若保留广工，应先查自己能解释的电气知识和实验，不能把同等学力加试内容误当人人必考的初试。[1][15]"
+            "text": "在这套旧年规则下，初试多 {{c:/report_parameters/additional_scenarios__gdut_2026_retest__initial_increment}} 分与复试多 {{c:/report_parameters/additional_scenarios__gdut_2026_retest__retest_increment}} 分，对百分制总成绩都增加 {{c:/gdut_2026_retest/initial_increment_contribution}} 分。这个换算只解释权重，不预测小林的复试表现。它说明：若初试总分相近，应认真核对专业知识与本科项目理解，不能把复试当手续；若复试不合格，初试较高也不能补过硬条件。小林若保留广工，应先查自己能解释的电气知识和实验，不能把同等学力加试内容误当人人必考的初试。[1][15]"
           },
           "evidence_refs": [
-            "E0015",
-            "E0096",
-            "E0097",
-            "E0098"
+            "E0015"
           ]
         },
         {
@@ -638,13 +621,11 @@
           "type": "analysis",
           "content": {
             "kind": "paragraph",
-            "text": "两年的中位数接近，但最低分和计划结构变化明显。{{e:E0020#/value}} 年加入基地录取，不能把 {{e:E0099#/value}} 分外推成后续年份底线。{{e:E0105#/value}} 目录继续列基地计划，也不意味着按目录人数就能知道统考最终规模。先核对正式分配与推免情况，再用当年规则更新比较。"
+            "text": "两年的中位数接近，但最低分和计划结构变化明显。{{e:E1043#/value}} 年加入基地录取，不能把 {{c:/report_parameters/hypothetical_followup__score_scenarios__0}} 分外推成后续年份底线。{{k:/target_year}} 目录继续列基地计划，也不意味着按目录人数就能知道统考最终规模。先核对正式分配与推免情况，再用当年规则更新比较。"
           },
           "evidence_refs": [
             "E0001",
-            "E0020",
-            "E0099",
-            "E0105"
+            "E1043"
           ]
         },
         {
@@ -671,22 +652,22 @@
           "type": "analysis",
           "content": {
             "kind": "paragraph",
-            "text": "若更换到广工，应按其英语二、数学二与 {{e:E0106#/value/E0106}} 电路理论重新核对训练差距，不拿华工的 {{e:E0106#/value/E0107}} 分数平移。即使两门专业课都叫“电路”，范围、题型和评分也可能不同。完整模考能暴露差距，不能消除下一年命题与评分不确定性。"
+            "text": "若更换到广工，应按其英语二、数学二与 {{e:E1015#/value}} 电路理论重新核对训练差距，不拿华工的 {{e:E1009#/value}} 分数平移。即使两门专业课都叫“电路”，范围、题型和评分也可能不同。完整模考能暴露差距，不能消除下一年命题与评分不确定性。"
           },
           "evidence_refs": [
             "E0001",
-            "E0106"
+            "E1015",
+            "E1009"
           ]
         },
         {
           "type": "analysis",
           "content": {
             "kind": "paragraph",
-            "text": "本轮不提供个人上岸{{e:E0108#/value}}分比，也不建立一个假精确的综合分。只有录取者的分布，缺全部报考者、未录取者和本人未来表现，无法推算从现在到录取的个人概率。最低拟录取分、复试分数线和国家线是不同概念，不能互相替换。"
+            "text": "本轮不提供个人上岸百分比，也不建立一个假精确的综合分。只有录取者的分布，缺全部报考者、未录取者和本人未来表现，无法推算从现在到录取的个人概率。最低拟录取分、复试分数线和国家线是不同概念，不能互相替换。"
           },
           "evidence_refs": [
-            "E0001",
-            "E0108"
+            "E0001"
           ]
         }
       ]
@@ -707,31 +688,29 @@
           "type": "analysis",
           "content": {
             "kind": "paragraph",
-            "text": "{{k:/target_year}} 年入学对应 {{e:E0109#/value}} 年秋季报名、初试，以及 {{k:/target_year}} 年的复试、毕业和入学。不能只看到“{{k:/target_year}} 年”就误以为现在还无需行动。[2][3][5]"
+            "text": "{{k:/target_year}} 年入学对应 {{e:E1022#/value}} 年秋季报名、初试，以及 {{k:/target_year}} 年的复试、毕业和入学。不能只看到“{{k:/target_year}} 年”就误以为现在还无需行动。[2][3][5]"
           },
           "evidence_refs": [
             "E0005",
-            "E0109"
+            "E1022"
           ]
         },
         {
           "type": "analysis",
           "content": {
             "kind": "paragraph",
-            "text": "全国网报为 {{e:E0114#/value}} 至 {{e:E0115#/value}}-{{e:E0116#/value}}，每日 {{e:E0117#/value}}:{{e:E0118#/value}}—{{e:E0119#/value}}:{{e:E0118#/value}}；初试为 {{e:E0120#/value}}-{{e:E0121#/value}} 至 {{e:E0120#/value}}-{{e:E0122#/value}}。预报名 {{e:E0115#/value}}-{{e:E0123#/value}} 至 {{e:E0115#/value}}-{{e:E0120#/value}} 已经过期，不能当作当前仍可办理的入口。网上确认由所选报考点另行安排，不能用学校报名日期替代确认日期。[2][3][5]"
+            "text": "全国网报为 {{e:E2080#/value}} 至 {{e:E2079#/value|md_short}}，每日 {{e:E2085#/value}}—{{e:E2086#/value}}；初试为 {{e:E2083#/value|md_short}} 至 {{e:E2084#/value|md_short}}。预报名 {{e:E2081#/value|md_short}} 至 {{e:E2082#/value|md_short}} 已经过期，不能当作当前仍可办理的入口。网上确认由所选报考点另行安排，不能用学校报名日期替代确认日期。[2][3][5]"
           },
           "evidence_refs": [
             "E0005",
-            "E0114",
-            "E0115",
-            "E0116",
-            "E0117",
-            "E0118",
-            "E0119",
-            "E0120",
-            "E0121",
-            "E0122",
-            "E0123"
+            "E2080",
+            "E2079",
+            "E2085",
+            "E2086",
+            "E2083",
+            "E2084",
+            "E2081",
+            "E2082"
           ]
         },
         {
@@ -748,13 +727,10 @@
           "type": "analysis",
           "content": {
             "kind": "paragraph",
-            "text": "第一次是个人的 {{e:E0018#/value}} 月 {{e:E0023#/value}} 日检查点：若科目表、模考和预算都已清楚，就用同一口径比较；若资料还缺，明确缺口，不凭空填满。第二次是实际成绩公布后：由总分、单科和当年规则判断复试或备选，不继续讨论“假如 {{e:E0101#/value}} 分”。第三次是出现真实录取或工作条件时：把培养安排、净支出、工作性质和本人意愿一起比较。"
+            "text": "第一次是个人的 {{k:/context/personal_dates/action0|md}}检查点：若科目表、模考和预算都已清楚，就用同一口径比较；若资料还缺，明确缺口，不凭空填满。第二次是实际成绩公布后：由总分、单科和当年规则判断复试或备选，不继续讨论“假如 {{c:/report_parameters/hypothetical_followup__score_scenarios__2}} 分”。第三次是出现真实录取或工作条件时：把培养安排、净支出、工作性质和本人意愿一起比较。"
           },
           "evidence_refs": [
-            "E0001",
-            "E0018",
-            "E0023",
-            "E0101"
+            "E0001"
           ]
         },
         {
@@ -869,16 +845,16 @@
           "type": "analysis",
           "content": {
             "kind": "paragraph",
-            "text": "官方附件将华工 {{e:E0130#/value}} 非定向全日制学费列为每年 {{e:E0131#/value}} 元、{{e:E0132#/value}} 年。住宿收费按楼栋和条件分档，部分研究生宿舍为每年 {{e:E0133#/value}}—{{e:E0134#/value}} 元，多数不含水电；本案预留 {{e:E0135#/value}} 元并不等于承诺会住到某一楼栋。改变项目或培养地点后，应重新核费用，不能继续沿用这个总数。[8][9]"
+            "text": "官方附件将华工 {{e:E1002#/value}} 非定向全日制学费列为每年 {{e:E0008#/value|comma}} 元、{{e:E1001#/value}} 年。住宿收费按楼栋和条件分档，部分研究生宿舍为每年 {{e:E1028#/value}}—{{e:E1029#/value|comma}} 元，多数不含水电；本案预留 {{c:/report_parameters/budget__annual_housing|comma}} 元并不等于承诺会住到某一楼栋。改变项目或培养地点后，应重新核费用，不能继续沿用这个总数。[8][9]"
           },
           "evidence_refs": [
             "E0009",
-            "E0130",
-            "E0131",
-            "E0132",
-            "E0133",
-            "E0134",
-            "E0135"
+            "E0008",
+            "E1002",
+            "E0008",
+            "E1001",
+            "E1028",
+            "E1029"
           ]
         },
         {
@@ -895,41 +871,39 @@
           "type": "analysis",
           "content": {
             "kind": "paragraph",
-            "text": "广工 {{e:E0136#/value}} 级收费表中，{{e:E0137#/value}} 电气工程全日制非定向为每年 {{e:E0138#/value}} 元、学制 {{e:E0139#/value}} 年；同表定向为每年 {{e:E0140#/value}} 元，非全日制定向为每年 {{k:/budget/annual_limit|comma}} 元。小林当前比较的是第一种，不能把不同学习方式的价格混用。{{e:E0141#/value}} 简章让考生另查收费通知，本次取得的是 {{e:E0136#/value}} 表，不能当作 {{e:E0141#/value}} 已定价。[5][16]"
+            "text": "广工 {{e:E1023#/value}} 级收费表中，{{e:E1017#/value}} 电气工程全日制非定向为每年 {{e:E1030#/value|comma}} 元、学制 {{e:E1031#/value}} 年；同表定向为每年 {{e:E1032#/value|comma}} 元，非全日制定向为每年 {{k:/budget/annual_limit|comma}} 元。小林当前比较的是第一种，不能把不同学习方式的价格混用。{{k:/target_year}} 简章让考生另查收费通知，本次取得的是 {{e:E1023#/value}} 表，不能当作 {{k:/target_year}} 已定价。[5][16]"
           },
           "evidence_refs": [
             "E0016",
-            "E0136",
-            "E0137",
-            "E0138",
-            "E0139",
-            "E0140",
-            "E0141"
+            "E1023",
+            "E1017",
+            "E1030",
+            "E1031",
+            "E1032"
           ]
         },
         {
           "type": "analysis",
           "content": {
             "kind": "paragraph",
-            "text": "**因此，优先调查广工的理由是专业衔接与本人接受度，不是已经证实它更省钱或更容易。** 若 {{e:E0034#/value}} 收费与住宿核对后仍能留出家庭可接受的应急空间，才继续作为可承担候选；否则先重谈支持范围或比较就业，不能用尚未到账的奖助抹平缺口。[1][16]"
+            "text": "**因此，优先调查广工的理由是专业衔接与本人接受度，不是已经证实它更省钱或更容易。** 若 {{k:/target_year}} 收费与住宿核对后仍能留出家庭可接受的应急空间，才继续作为可承担候选；否则先重谈支持范围或比较就业，不能用尚未到账的奖助抹平缺口。[1][16]"
           },
           "evidence_refs": [
             "E0016",
-            "E0034"
+            "E0005"
           ]
         },
         {
           "type": "analysis",
           "content": {
             "kind": "paragraph",
-            "text": "广工 {{e:E0034#/value}} 简章对符合条件的非定向全日制列有奖助：统考新生学业奖学金每年 {{e:E0143#/value}} 元，原文为“原则上{{e:E0144#/value}}覆盖”；国家助学金每年 {{e:E0145#/value}} 元、覆盖全体适用研究生。次年学业奖分档并有覆盖比例，不能沿用新生金额。应再核对象、评定、发放时点和是否有条件，入学前需要支付的款项仍单列，不把原则性覆盖写成小林已获得或可立即支用。[5]"
+            "text": "广工 {{k:/target_year}} 简章对符合条件的非定向全日制列有奖助：统考新生学业奖学金每年 {{e:E1033#/value|comma}} 元，原文为“原则上{{e:E1034#/value}}覆盖”；国家助学金每年 {{e:E1035#/value|comma}} 元、覆盖全体适用研究生。次年学业奖分档并有覆盖比例，不能沿用新生金额。应再核对象、评定、发放时点和是否有条件，入学前需要支付的款项仍单列，不把原则性覆盖写成小林已获得或可立即支用。[5]"
           },
           "evidence_refs": [
             "E0005",
-            "E0034",
-            "E0143",
-            "E0144",
-            "E0145"
+            "E1033",
+            "E1034",
+            "E1035"
           ]
         },
         {
@@ -1054,19 +1028,13 @@
           "type": "analysis",
           "content": {
             "kind": "paragraph",
-            "text": "{{e:E0051#/value}} 年华工统计只含普通与基地计划，合计 {{e:E0052#/value}} 人；{{e:E0074#/value}} 年扫描名单中电力学院 {{e:E0146#/value}} 共 {{e:E0147#/value}} 行，核对后排除少数民族骨干 {{e:E0148#/value}} 人、退役士兵 {{e:E0149#/value}} 人、联合培养 {{e:E0150#/value}} 人，普通计划 {{e:E0151#/value}} 人。不同计划与年份的分布分开列，不能合成一个不分条件的“华工电气门槛”。原始名单中的姓名和编号不进入报告。[7]"
+            "text": "{{e:E1018#/value}} 年华工统计只含普通与基地计划，合计 {{c:/scut_reference_statistics/2026_普通计划与基地计划/n}} 人；{{e:E1019#/value}} 年扫描名单中电力学院 {{e:E1003#/value}} 共 {{c:/sample_reconciliation_2025/total}} 行，核对后排除少数民族骨干 {{c:/sample_reconciliation_2025/minority}} 人、退役士兵 {{c:/sample_reconciliation_2025/soldier}} 人、联合培养 {{c:/sample_reconciliation_2025/joint}} 人，普通计划 {{c:/sample_reconciliation_2025/ordinary}} 人。不同计划与年份的分布分开列，不能合成一个不分条件的“华工电气门槛”。原始名单中的姓名和编号不进入报告。[7]"
           },
           "evidence_refs": [
             "E0007",
-            "E0051",
-            "E0052",
-            "E0074",
-            "E0146",
-            "E0147",
-            "E0148",
-            "E0149",
-            "E0150",
-            "E0151"
+            "E1018",
+            "E1019",
+            "E1003"
           ]
         },
         {
@@ -1083,62 +1051,46 @@
           "type": "analysis",
           "content": {
             "kind": "paragraph",
-            "text": "预算为 {{e:E0152#/value}} + {{e:E0153#/value}} + {{e:E0154#/value}} × {{e:E0120#/value}} = {{e:E0155#/value}} 元／年；{{k:/budget/annual_limit|comma}} − {{e:E0155#/value}} = {{e:E0156#/value}} 元；三年 {{e:E0155#/value}} × {{e:E0157#/value}} = {{e:E0158#/value}} 元。生活费每月增加 {{e:E0159#/value}} 元时，年费用 {{e:E0160#/value}} 元，余量 {{e:E0161#/value}} 元。这里没有扣奖助，也没有把少挣工资算成已知金额；它们不是零，而是缺输入。"
+            "text": "预算为 {{e:E0008#/value|comma}} + {{c:/report_parameters/budget__annual_housing|comma}} + {{k:/budget/monthly_living_assumption|comma}} × {{c:/report_constants/months_per_year}} = {{c:/annual_cost|comma}} 元／年；{{k:/budget/annual_limit|comma}} − {{c:/annual_cost|comma}} = {{c:/annual_margin|comma}} 元；三年 {{c:/annual_cost|comma}} × {{e:E1001#/value}} = {{c:/total_cost_over_program|comma}} 元。生活费每月增加 {{c:/report_constants/living_increment}} 元时，年费用 {{c:/annual_cost_if_living_plus_200|comma}} 元，余量 {{c:/annual_margin_if_living_plus_200|comma}} 元。这里没有扣奖助，也没有把少挣工资算成已知金额；它们不是零，而是缺输入。"
           },
           "evidence_refs": [
             "E0001",
-            "E0152",
-            "E0153",
-            "E0154",
-            "E0120",
-            "E0155",
-            "E0156",
-            "E0157",
-            "E0158",
-            "E0159",
-            "E0160",
-            "E0161"
+            "E0008",
+            "E0005",
+            "E0008",
+            "E1001"
           ]
         },
         {
           "type": "analysis",
           "content": {
             "kind": "paragraph",
-            "text": "没有实际模考就不提供“本人分数区间”，图中只画明示的 {{e:E0101#/value}} 分情景；广工图只画已核的复试人群，完整拟录取分布仍保留缺口。跨学校考试科目不同，跨年命题与计划也会变化。即使数据完整，也必须保留这些可比性限制。"
+            "text": "没有实际模考就不提供“本人分数区间”，图中只画明示的 {{c:/report_parameters/hypothetical_followup__score_scenarios__2}} 分情景；广工图只画已核的复试人群，完整拟录取分布仍保留缺口。跨学校考试科目不同，跨年命题与计划也会变化。即使数据完整，也必须保留这些可比性限制。"
           },
           "evidence_refs": [
-            "E0001",
-            "E0101"
+            "E0001"
           ]
         },
         {
           "type": "analysis",
           "content": {
             "kind": "paragraph",
-            "text": "本报告没有建立个人录取概率，不能用录取者的中位数、复试录取比例或整体就业率推导个人{{e:E0108#/value}}分比。判断只在已说明条件下成立：资格符合、本人愿意、投入与费用可承受。任何一项变化，都需要重新比较，不沿用原结论。"
+            "text": "本报告没有建立个人录取概率，不能用录取者的中位数、复试录取比例或整体就业率推导个人百分比。判断只在已说明条件下成立：资格符合、本人愿意、投入与费用可承受。任何一项变化，都需要重新比较，不沿用原结论。"
           },
           "evidence_refs": [
-            "E0001",
-            "E0108"
+            "E0001"
           ]
         },
         {
           "type": "analysis",
           "content": {
             "kind": "paragraph",
-            "text": "华工费用依据已核的 {{e:E0141#/value}} 收费，广工费用只作旧年参照，两者分开记录。广工匿名频数共 {{e:E0162#/value}} 条观测，按排序位置线性插值计算四分位（含端点的线性插值）；{{e:E0163#/value}} 名全日制复试者减 {{e:E0164#/value}} 名专项等于 {{e:E0162#/value}}，不能把非全日制或专项拼入。统计可从匿名频数重新计算；最低 {{e:E0165#/value}} 分只属于这份复试公示，不自动等于下一年的学院线。广工年费用测试为 {{e:E0138#/value}} + {{e:E0135#/value}} + {{e:E0166#/value}} × {{e:E0167#/value}}，住宿是比较假设，学费是旧年事实；两者的证据等级不同。[1][14][16]"
+            "text": "华工费用依据已核的 {{k:/target_year}} 收费，广工费用只作旧年参照，两者分开记录。广工匿名频数共 {{c:/gdut_2026_first_choice_retest_scores/n}} 条观测，按排序位置线性插值计算四分位（含端点的线性插值）；{{c:/report_parameters/additional_scenarios__gdut_2026_first_choice_retest_scores__full_time_rows}} 名全日制复试者减 {{c:/report_parameters/additional_scenarios__gdut_2026_first_choice_retest_scores__excluded_soldier_rows}} 名专项等于 {{c:/gdut_2026_first_choice_retest_scores/n}}，不能把非全日制或专项拼入。统计可从匿名频数重新计算；最低 {{c:/gdut_2026_first_choice_retest_scores/min}} 分只属于这份复试公示，不自动等于下一年的学院线。广工年费用测试为 {{e:E1030#/value|comma}} + {{c:/report_parameters/budget__annual_housing|comma}} + {{k:/budget/monthly_living_assumption|comma}} × {{c:/report_constants/months_per_year}}，住宿是比较假设，学费是旧年事实；两者的证据等级不同。[1][14][16]"
           },
           "evidence_refs": [
             "E0016",
-            "E0141",
-            "E0162",
-            "E0163",
-            "E0164",
-            "E0165",
-            "E0138",
-            "E0135",
-            "E0166",
-            "E0167"
+            "E0009",
+            "E1030"
           ]
         },
         {

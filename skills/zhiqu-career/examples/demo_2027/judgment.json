@@ -970,7 +970,7 @@
           ],
           [
             "收入时间边界",
-            "毕业后 {{e:E0018#/value}} 个月",
+            "毕业后 {{e:E0901#/value}} 个月",
             "需要持续收入，等待考试要有资金方案"
           ],
           [
@@ -981,14 +981,13 @@
           [
             "B 情景月结余",
             "{{c:/hypothetical_offers/1/monthly_remaining_cash|comma}} 元",
-            "含第 {{e:E0019#/value/E0019}} 个月的全年平均，普通月约 {{e:E0019#/value/E0020}} 元"
+            "含第 {{c:/report_parameters/hypothetical_followup__offers__1__months}} 个月的全年平均，普通月约 {{c:/offer_b_ordinary_month/remaining_cash|comma}} 元"
           ]
         ]
       },
       "evidence_refs": [
         "E0001",
-        "E0018",
-        "E0019"
+        "E0901"
       ]
     },
     "01_4": {
@@ -996,36 +995,31 @@
       "content": {
         "items": [
           {
-            "text": "**{{e:E0021#/value}} 月 {{c:/hypothetical_offers/1/hourly_cash}} 日前（个人检查点）**：把短期实习中真正做过的一项核对任务写清输入、步骤、复核与结果，不带出原单位敏感材料；选定愿意调查的岗位类型。",
+            "text": "**{{k:/context/personal_dates/action0|md}}前（个人检查点）**：把短期实习中真正做过的一项核对任务写清输入、步骤、复核与结果，不带出原单位敏感材料；选定愿意调查的岗位类型。",
             "date": "{{k:/context/personal_dates/action0}}"
           },
           {
-            "text": "**{{e:E0021#/value}} 月 {{e:E0022#/value}} 日前（个人检查点）**：本人核对少量正式岗位原文中的学历、职责、到岗和合同主体；家里提到的“国企”也要落实到公告。没有公告就仍是线索。",
+            "text": "**{{k:/context/personal_dates/action1|md}}前（个人检查点）**：本人核对少量正式岗位原文中的学历、职责、到岗和合同主体；家里提到的“国企”也要落实到公告。没有公告就仍是线索。",
             "date": "{{k:/context/personal_dates/action1}}"
           },
           {
-            "text": "**{{e:E0021#/value}} 月 {{e:E0023#/value}} 日前（个人检查点）**：确认毕业后最晚需要收入的时间、可用资金与升本支持；{{k:/target_year}} 年专升本资格以正式通告为准，不按往年日期直接报名。[5]",
+            "text": "**{{k:/context/personal_dates/action2|md}}前（个人检查点）**：确认毕业后最晚需要收入的时间、可用资金与升本支持；{{k:/target_year}} 年专升本资格以正式通告为准，不按往年日期直接报名。[5]",
             "date": "{{k:/context/personal_dates/action2}}"
           }
         ]
       },
       "evidence_refs": [
-        "E0001",
-        "E0021",
-        "E0022",
-        "E0023"
+        "E0001"
       ]
     },
     "01_5": {
       "type": "checkpoint",
       "content": {
         "kind": "paragraph",
-        "text": "**下一次更新在第一份有效面试反馈、正式录用条件或 {{k:/target_year}} 年专升本通告出现时；个人检查点先设为 {{e:E0021#/value}} 月 {{e:E0022#/value}} 日。** 若到时仍无目标单位原文，就先解决信息入口，而不是开始大规模投递或只准备一场不知道能否报名的考试。"
+        "text": "**下一次更新在第一份有效面试反馈、正式录用条件或 {{k:/target_year}} 年专升本通告出现时；个人检查点先设为 {{k:/context/personal_dates/action1|md}}。** 若到时仍无目标单位原文，就先解决信息入口，而不是开始大规模投递或只准备一场不知道能否报名的考试。"
       },
       "evidence_refs": [
-        "E0001",
-        "E0021",
-        "E0022"
+        "E0001"
       ]
     },
     "02_11": {
@@ -1143,62 +1137,44 @@
       "content": {
         "columns": [
           "调查人群",
-          "{{e:E0051#/value}} 分位",
-          "{{e:E0052#/value}} 分位",
+          "{{c:/report_constants/p10_label}} 分位",
+          "{{c:/report_constants/q1_label}} 分位",
           "中位数",
-          "{{e:E0053#/value}} 分位",
-          "{{e:E0054#/value}} 分位"
+          "{{c:/report_constants/q3_label}} 分位",
+          "{{c:/report_constants/p90_label}} 分位"
         ],
         "rows": [
           [
             "会计专业人员",
-            "{{e:E0034#/value}} 元",
-            "{{e:E0035#/value}} 元",
-            "{{e:E0036#/value}} 元",
-            "{{e:E0037#/value}} 元",
-            "{{e:E0038#/value}} 元"
+            "{{c:/reference_wages_cny/会计专业人员/p10|comma}} 元",
+            "{{c:/reference_wages_cny/会计专业人员/p25|comma}} 元",
+            "{{c:/reference_wages_cny/会计专业人员/p50|comma}} 元",
+            "{{c:/reference_wages_cny/会计专业人员/p75|comma}} 元",
+            "{{c:/reference_wages_cny/会计专业人员/p90|comma}} 元"
           ],
           [
             "大学专科学历（不分职业）",
-            "{{e:E0039#/value}} 元",
-            "{{e:E0040#/value}} 元",
-            "{{e:E0041#/value}} 元",
-            "{{e:E0042#/value}} 元",
-            "{{e:E0043#/value}} 元"
+            "{{c:/reference_wages_cny/大学专科学历/p10|comma}} 元",
+            "{{c:/reference_wages_cny/大学专科学历/p25|comma}} 元",
+            "{{c:/reference_wages_cny/大学专科学历/p50|comma}} 元",
+            "{{c:/reference_wages_cny/大学专科学历/p75|comma}} 元",
+            "{{c:/reference_wages_cny/大学专科学历/p90|comma}} 元"
           ],
           [
-            "工龄 {{e:E0044#/value}}—{{e:E0045#/value}} 年（不分职业）",
-            "{{e:E0046#/value}} 元",
-            "{{e:E0047#/value}} 元",
-            "{{e:E0048#/value}} 元",
-            "{{e:E0049#/value}} 元",
-            "{{e:E0050#/value}} 元"
+            "工龄 {{e:E1003#/value}}—{{e:E1004#/value}} 年（不分职业）",
+            "{{c:/reference_wages_cny/工龄0~01年（不分职业）/p10|comma}} 元",
+            "{{c:/reference_wages_cny/工龄0~01年（不分职业）/p25|comma}} 元",
+            "{{c:/reference_wages_cny/工龄0~01年（不分职业）/p50|comma}} 元",
+            "{{c:/reference_wages_cny/工龄0~01年（不分职业）/p75|comma}} 元",
+            "{{c:/reference_wages_cny/工龄0~01年（不分职业）/p90|comma}} 元"
           ]
         ]
       },
       "evidence_refs": [
         "E0001",
-        "E0051",
-        "E0052",
-        "E0053",
-        "E0054",
-        "E0034",
-        "E0035",
-        "E0036",
-        "E0037",
-        "E0038",
-        "E0039",
-        "E0040",
-        "E0041",
-        "E0042",
-        "E0043",
-        "E0044",
-        "E0045",
-        "E0046",
-        "E0047",
-        "E0048",
-        "E0049",
-        "E0050"
+        "E0002",
+        "E1003",
+        "E1004"
       ]
     },
     "05_2": {
@@ -1269,20 +1245,20 @@
         ],
         "rows": [
           [
-            "天健四川分所，财务审计（{{e:E0030#/value}} 校招）；川大就业网 {{e:E0060#/value}} 发布",
-            "{{e:E0030#/value}} 应届本科及以上；财会、审计等相关专业；适应高强度工作与经常出差",
+            "天健四川分所，财务审计（{{k:/target_year}} 校招）；川大就业网 {{e:E1009#/value}} 发布",
+            "{{k:/target_year}} 应届本科及以上；财会、审计等相关专业；适应高强度工作与经常出差",
             "✗ 当前专科不符本科硬门槛；出差接受度也未确认",
             "不列为本轮可报名候选，不用相关专业或实习经历补过学历"
           ],
           [
-            "四川能投建工所属项目部，核算会计实习；轻化工就业网 {{e:E0061#/value}} 发布",
+            "四川能投建工所属项目部，核算会计实习；轻化工就业网 {{e:E1010#/value}} 发布",
             "顶部学历栏写“专科及以上”，正文写“{{k:/target_year}} 年毕业的本科及以上”",
             "△ 同页原文冲突，不能自行选择较宽的一句",
             "先向招聘方确认学历口径、是否仍招与具体项目；目前不认定能报"
           ],
           [
             "同一能投招聘的天府学院就业网页",
-            "核算会计实习明确写 {{e:E0062#/value}} 毕业本科及以上；另有工程类岗位接受大专",
+            "核算会计实习明确写 {{k:/target_year}} 毕业本科及以上；另有工程类岗位接受大专",
             "✗ 若按此财会条款，当前学历不符；工程岗位条件不能借来",
             "不把别的岗位大专要求套到财会岗，也不合并不同发布版本的名额"
           ]
@@ -1290,10 +1266,10 @@
       },
       "evidence_refs": [
         "E0001",
-        "E0030",
-        "E0060",
-        "E0061",
-        "E0062"
+        "E0015",
+        "E0017",
+        "E1009",
+        "E1010"
       ]
     },
     "06_13": {
@@ -1326,7 +1302,7 @@
           ],
           [
             "偏好与约束",
-            "不爱推销、希望近家，毕业后约{{e:E0026#/value}}个月内要收入",
+            "不爱推销、希望近家，毕业后约{{e:E0901#/value|chinese}}个月内要收入",
             "不是法定资格，但会影响本人是否愿意以及能否等",
             "核真实项目位置、出差、销售指标、到岗与首笔工资日期"
           ]
@@ -1334,47 +1310,47 @@
       },
       "evidence_refs": [
         "E0001",
-        "E0026"
+        "E0901"
       ]
     },
     "07_2": {
       "type": "timeline",
       "content": {
         "title": "小宁的毕业与求职窗口",
-        "caption": "按时间顺序看，琥珀菱形为个人检查点；圆点为阶段。适用小宁的 {{e:E0059#/value}} 招聘、升本报名和考试日期尚未确认，均以各正式通知为准。",
+        "caption": "按时间顺序看，琥珀菱形为个人检查点；圆点为阶段。适用小宁的 {{k:/target_year}} 招聘、升本报名和考试日期尚未确认，均以各正式通知为准。",
         "rows": [
           [
-            "{{e:E0068#/value}}",
+            "{{k:/context/personal_dates/action1|ym}}",
             "任务证据与岗位原文",
-            "{{e:E0021#/value}}-{{e:E0022#/value}} 个人检查点",
+            "{{k:/context/personal_dates/action1|md_short}} 个人检查点",
             "检查点"
           ],
           [
-            "{{e:E0068#/value}}",
+            "{{k:/context/personal_dates/action1|ym}}",
             "家庭资金与升本边界",
-            "{{e:E0021#/value}}-{{e:E0023#/value}} 个人检查点",
+            "{{k:/context/personal_dates/action2|md_short}} 个人检查点",
             "检查点"
           ],
           [
-            "{{e:E0069#/value}} 年底",
-            "留意 {{e:E0059#/value}} 升本通告",
+            "{{k:/context/personal_dates/year_end|year}} 年底",
+            "留意 {{k:/target_year}} 升本通告",
             "当届截止待取得",
             ""
           ],
           [
-            "{{e:E0059#/value}} 春季",
+            "{{k:/target_year}} 春季",
             "春招与升本冲突核对",
             "按单位及省通告",
             ""
           ],
           [
-            "{{e:E0070#/value}}",
+            "{{k:/graduation_date|ym}}",
             "核毕业与实际到岗",
             "以学校、单位安排为准",
             ""
           ],
           [
-            "毕业后 {{e:E0018#/value}} 个月内",
+            "毕业后 {{e:E0901#/value}} 个月内",
             "需要持续收入",
             "本人约束，非统一政策",
             "检查点"
@@ -1390,14 +1366,7 @@
       "evidence_refs": [
         "E0001",
         "E0005",
-        "E0059",
-        "E0068",
-        "E0021",
-        "E0022",
-        "E0023",
-        "E0069",
-        "E0070",
-        "E0018"
+        "E0901"
       ]
     },
     "07_3": {
@@ -1420,7 +1389,7 @@
             "优先处理会关闭且本人愿意去的机会，不等所有单位都发布再开始"
           ],
           [
-            "{{e:E0059#/value}} 升本通告发布时",
+            "{{k:/target_year}} 升本通告发布时",
             "报名、专业对应、考试、录取、费用与报到",
             "与春招、实习和签约期限一起看；往年日历只用于提醒复查"
           ],
@@ -1442,8 +1411,7 @@
         ]
       },
       "evidence_refs": [
-        "E0001",
-        "E0059"
+        "E0001"
       ]
     },
     "08_2": {
@@ -1451,14 +1419,12 @@
       "content": {
         "title": "基础财务企业岗：先找能进入的真实工作",
         "门槛": "核学历、专业、证书与到岗；用真实录入、核对和复核任务证明已有能力，不包装完整账务经验。",
-        "时间窗口": "{{e:E0021#/value}} 月 {{e:E0022#/value}} 日个人检查点带回少量岗位原文；各单位关闭、笔试、答复和到岗分别记，未取到就待查。",
+        "时间窗口": "{{k:/context/personal_dates/action1|md}}个人检查点带回少量岗位原文；各单位关闭、笔试、答复和到岗分别记，未取到就待查。",
         "投入": "对照岗位补最影响入门的一项技能，保留学业与实习边界；先核工资、工时、甲方和带教，不为找工作付保证录用费。",
         "切换条件": "若资格明确不符或内容是本人拒绝的推销就换岗位；若无反馈，先查状态与缺口，再调整单位或地点范围。"
       },
       "evidence_refs": [
-        "E0001",
-        "E0021",
-        "E0022"
+        "E0001"
       ]
     },
     "08_4": {
@@ -1478,43 +1444,39 @@
       "type": "route_cards",
       "content": {
         "title": "国企工作地点的派遣岗：把甲方与用工方分开",
-        "门槛": "查派遣公司资质、实际用工单位、岗位条件、派遣期限和责任；第 {{e:E0027#/value}} 节 B 只是收入情景，非现实招聘证据。",
+        "门槛": "查派遣公司资质、实际用工单位、岗位条件、派遣期限和责任；第 09 节 B 只是收入情景，非现实招聘证据。",
         "时间窗口": "面试与答复看派遣方本批公告，签前拿完整合同；何时到岗、换项目或退回后如何安排都要确认。",
         "投入": "考试或技能核验按实际招聘通知；合同通常在派遣单位，工资、社保与管理责任逐项问。口头“以后转直签”不计保证收益。[7]",
         "切换条件": "若主体、待遇或退回安排不清，先停下核；若本人不能接受派遣性质就不保留，不因工作地点是国企而改变名称。"
       },
       "evidence_refs": [
-        "E0001",
-        "E0027"
+        "E0001"
       ]
     },
     "08_8": {
       "type": "route_cards",
       "content": {
         "title": "事业单位财务相关招聘：先判能报，再决定备考",
-        "门槛": "核省市人社/主管部门正式公告及岗位表中的学历学位、专业、证书、年龄、毕业时点；当前未取适用 {{e:E0059#/value}} 岗位，不能写已符合。",
-        "时间窗口": "当届报名、缴费、笔试、资格复审与聘用分别核。{{e:E0069#/value}} 四川人大直属事业单位公告只作流程参照，不是仍开放的机会。[6]",
-        "投入": "该 {{e:E0069#/value}} 公告笔试为公共基础知识与综合能力测试；其他单位与 {{e:E0059#/value}} 科目另核。编制、聘用/备案、合同或编外性质逐条确认，不因公立单位就默认在编。[6]",
+        "门槛": "核省市人社/主管部门正式公告及岗位表中的学历学位、专业、证书、年龄、毕业时点；当前未取适用 {{k:/target_year}} 岗位，不能写已符合。",
+        "时间窗口": "当届报名、缴费、笔试、资格复审与聘用分别核。{{k:/context/personal_dates/year_end|year}} 四川人大直属事业单位公告只作流程参照，不是仍开放的机会。[6]",
+        "投入": "该 {{k:/context/personal_dates/year_end|year}} 公告笔试为公共基础知识与综合能力测试；其他单位与 {{k:/target_year}} 科目另核。编制、聘用/备案、合同或编外性质逐条确认，不因公立单位就默认在编。[6]",
         "切换条件": "无适用资格或无资金等到实际聘用，就保留企业就业；考录日期冲突时按本人优先级取舍，不同时默认所有路线都可兼顾。"
       },
       "evidence_refs": [
-        "E0001",
-        "E0059",
-        "E0069"
+        "E0001"
       ]
     },
     "08_10": {
       "type": "route_cards",
       "content": {
         "title": "专升本：为了具体门槛而比较",
-        "门槛": "先核 {{e:E0059#/value}} 省通告、本人学校与专业、获证和可选本科；再核目标单位是否接受该学历、专业及学位路径。",
-        "时间窗口": "当届报名缴费前核资格和成本，录取缴费前再核资金与目标门槛；{{e:E0059#/value}} 具体日期尚未取到，不按上一届直接排。",
+        "门槛": "先核 {{k:/target_year}} 省通告、本人学校与专业、获证和可选本科；再核目标单位是否接受该学历、专业及学位路径。",
+        "时间窗口": "当届报名缴费前核资格和成本，录取缴费前再核资金与目标门槛；{{k:/target_year}} 具体日期尚未取到，不按上一届直接排。",
         "投入": "列学费、住宿、生活、学习年限与推迟收入；尚无完整金额，不算本科工资溢价或回本年限。",
         "切换条件": "家庭无法覆盖无全职工资阶段，或升本仍不解除目标限制，就优先可接受就业；学习可另查适用方式，不默认各本科路径等效。"
       },
       "evidence_refs": [
-        "E0001",
-        "E0059"
+        "E0001"
       ]
     },
     "09_3": {
@@ -1533,28 +1495,28 @@
           ],
           [
             "税前固定工资",
-            "{{c:/hypothetical_offers/0/social_insurance_base|comma}} 元 × {{e:E0087#/value}} 个月",
-            "{{e:E0088#/value}} 元 × {{e:E0019#/value/E0019}} 个月；假设第 {{e:E0019#/value/E0019}} 个月明确保证且满足发放条件"
+            "{{c:/hypothetical_offers/0/social_insurance_base|comma}} 元 × {{c:/report_parameters/hypothetical_followup__offers__0__months}} 个月",
+            "{{c:/report_parameters/hypothetical_followup__offers__1__monthly_gross|comma}} 元 × {{c:/report_parameters/hypothetical_followup__offers__1__months}} 个月；假设第 {{c:/report_parameters/hypothetical_followup__offers__1__months}} 个月明确保证且满足发放条件"
           ],
           [
             "个人社保假设",
-            "缴费基数 {{c:/hypothetical_offers/0/social_insurance_base|comma}} 元，比例 {{e:E0089#/value}}",
-            "基数按 {{e:E0069#/value}} 下限 {{c:/hypothetical_offers/1/social_insurance_base|comma}} 元，比例 {{e:E0089#/value}}"
+            "缴费基数 {{c:/hypothetical_offers/0/social_insurance_base|comma}} 元，比例 {{c:/report_parameters/hypothetical_followup__ss_personal_rate_assumption|percent1}}",
+            "基数按 {{k:/context/personal_dates/year_end|year}} 下限 {{c:/hypothetical_offers/1/social_insurance_base|comma}} 元，比例 {{c:/report_parameters/hypothetical_followup__ss_personal_rate_assumption|percent1}}"
           ],
           [
             "公积金假设",
-            "输入暂为 {{e:E0090#/value}}，原因与合规依据未核",
-            "按工资 {{e:E0091#/value}}，个人和单位同额，完整年度按 {{e:E0087#/value}} 个月缴存"
+            "输入暂为 {{c:/report_parameters/hypothetical_followup__offers__0__hf_rate}}，原因与合规依据未核",
+            "按工资 {{c:/report_parameters/hypothetical_followup__offers__1__hf_rate|percent0}}，个人和单位同额，完整年度按 {{c:/report_parameters/hypothetical_followup__offers__0__months}} 个月缴存"
           ],
           [
             "工时假设",
-            "基准年工时 {{c:/hypothetical_offers/1/hours_per_year|comma}} 小时，另每月 {{e:E0021#/value}} 小时，无额外加班费计入",
+            "基准年工时 {{c:/hypothetical_offers/1/hours_per_year|comma}} 小时，另每月 {{c:/report_parameters/hypothetical_followup__offers__0__extra_hours_per_month}} 小时，无额外加班费计入",
             "年工时 {{c:/hypothetical_offers/1/hours_per_year|comma}} 小时，无额外加班计入"
           ],
           [
             "房租与其他支出",
-            "每月 {{e:E0092#/value/E0092}} + {{e:E0092#/value/E0093}} 元",
-            "每月给家里 {{e:E0094#/value}} 元，其他 {{e:E0092#/value/E0092}} 元"
+            "每月 {{c:/report_parameters/hypothetical_followup__offers__0__monthly_rent|comma}} + {{c:/report_parameters/hypothetical_followup__offers__0__monthly_other|comma}} 元",
+            "每月给家里 {{c:/report_parameters/hypothetical_followup__offers__1__monthly_rent}} 元，其他 {{c:/report_parameters/hypothetical_followup__offers__0__monthly_rent|comma}} 元"
           ],
           [
             "重要限制",
@@ -1564,17 +1526,7 @@
         ]
       },
       "evidence_refs": [
-        "E0001",
-        "E0087",
-        "E0088",
-        "E0019",
-        "E0089",
-        "E0069",
-        "E0090",
-        "E0091",
-        "E0021",
-        "E0092",
-        "E0094"
+        "E0001"
       ]
     },
     "09_6": {
@@ -1598,18 +1550,18 @@
           ],
           [
             "年个人公积金",
-            "{{e:E0090#/value}} 元（待核情景）",
+            "{{c:/report_parameters/hypothetical_followup__offers__0__hf_rate}} 元（待核情景）",
             "{{c:/hypothetical_offers/1/personal_housing_fund|comma}} 元"
           ],
           [
             "公积金账户年增加",
-            "{{e:E0090#/value}} 元（待核）",
+            "{{c:/report_parameters/hypothetical_followup__offers__0__hf_rate}} 元（待核）",
             "{{c:/hypothetical_offers/1/housing_fund_account_total|comma}} 元，含个人与单位，不属于到手现金"
           ],
           [
             "年度个税",
-            "{{e:E0090#/value}} 元",
-            "{{e:E0090#/value}} 元"
+            "{{c:/report_parameters/hypothetical_followup__offers__0__hf_rate}} 元",
+            "{{c:/report_parameters/hypothetical_followup__offers__0__hf_rate}} 元"
           ],
           [
             "**年到手现金**",
@@ -1619,7 +1571,7 @@
           [
             "平均每月到手",
             "{{c:/hypothetical_offers/0/monthly_take_home_cash|comma}} 元",
-            "{{c:/hypothetical_offers/1/monthly_take_home_cash|comma}} 元，含第 {{e:E0019#/value/E0019}} 个月；普通月约 {{e:E0095#/value}} 元"
+            "{{c:/hypothetical_offers/1/monthly_take_home_cash|comma}} 元，含第 {{c:/report_parameters/hypothetical_followup__offers__1__months}} 个月；普通月约 {{c:/offer_b_ordinary_month/take_home_cash|comma}} 元"
           ],
           [
             "年工作小时",
@@ -1639,15 +1591,12 @@
           [
             "**平均月生活结余**",
             "**{{c:/hypothetical_offers/0/monthly_remaining_cash|comma}} 元**",
-            "**{{c:/hypothetical_offers/1/monthly_remaining_cash|comma}} 元，普通月约 {{e:E0019#/value/E0020}} 元**"
+            "**{{c:/hypothetical_offers/1/monthly_remaining_cash|comma}} 元，普通月约 {{c:/offer_b_ordinary_month/remaining_cash|comma}} 元**"
           ]
         ]
       },
       "evidence_refs": [
-        "E0001",
-        "E0090",
-        "E0019",
-        "E0095"
+        "E0001"
       ]
     },
     "09_18": {
@@ -1660,9 +1609,9 @@
         ],
         "rows": [
           [
-            "B 第 {{e:E0019#/value/E0019}} 个月有考核或在职条件，不能保证",
+            "B 第 {{c:/report_parameters/hypothetical_followup__offers__1__months}} 个月有考核或在职条件，不能保证",
             "年现金与全年平均结余",
-            "不当保证收入；普通月约 {{e:E0019#/value/E0020}} 元另列，不用年平均掩盖当月现金"
+            "不当保证收入；普通月约 {{c:/offer_b_ordinary_month/remaining_cash|comma}} 元另列，不用年平均掩盖当月现金"
           ],
           [
             "A 应有公积金或实际有加班费",
@@ -1670,7 +1619,7 @@
             "先取得当地缴存、工时和单位书面条件，再更新输入；不能以少缴当收益"
           ],
           [
-            "B 的 {{e:E0091#/value}} 或基数与实际规定不同",
+            "B 的 {{c:/report_parameters/hypothetical_followup__offers__1__hf_rate|percent0}} 或基数与实际规定不同",
             "到手与账户增加额",
             "查具体城市缴存通知与单位书面基数，不按“都有一金”猜比例"
           ],
@@ -1680,17 +1629,14 @@
             "收到实际班次、租约和家庭需求后重算，不能沿用近家低成本假设"
           ],
           [
-            "毕业首年不足完整 {{e:E0087#/value}} 个月",
+            "毕业首年不足完整 {{c:/report_parameters/hypothetical_followup__offers__0__months}} 个月",
             "首年能用的现金",
             "按实际到岗、试用与奖金条件另算，不直接拿全年值比较首年生活"
           ]
         ]
       },
       "evidence_refs": [
-        "E0001",
-        "E0019",
-        "E0091",
-        "E0087"
+        "E0001"
       ]
     },
     "10_3": {
@@ -1778,7 +1724,7 @@
             "区分子公司、派遣、外包和直签，改正名称与保障判断"
           ],
           [
-            "第 {{e:E0019#/value/E0019}} 个月是保证还是目标，何时发",
+            "第 {{c:/report_parameters/hypothetical_followup__offers__1__months}} 个月是保证还是目标，何时发",
             "薪酬条款、考核和在职条件",
             "未保证时不按全年平均结余当保证收入"
           ],
@@ -1804,7 +1750,7 @@
           ],
           [
             "升本到底打开哪一类机会",
-            "{{e:E0059#/value}} 教育考试院通告、院校章程和目标招聘条件",
+            "{{k:/target_year}} 教育考试院通告、院校章程和目标招聘条件",
             "若不能解除目标门槛，重新比较支出与延后收入"
           ],
           [
@@ -1820,9 +1766,7 @@
         ]
       },
       "evidence_refs": [
-        "E0001",
-        "E0019",
-        "E0059"
+        "E0001"
       ]
     },
     "12_13": {

@@ -39,5 +39,58 @@
       "monthly_remaining_cash": 2326,
       "above_local_minimum_wage": true
     }
-  ]
+  ],
+  "report_parameters": {
+    "hypothetical_followup__offers__1__months": 13,
+    "hypothetical_followup__offers__0__months": 12,
+    "hypothetical_followup__offers__1__monthly_gross": 4300,
+    "hypothetical_followup__ss_personal_rate_assumption": 0.104,
+    "hypothetical_followup__offers__0__hf_rate": 0.0,
+    "hypothetical_followup__offers__1__hf_rate": 0.08,
+    "hypothetical_followup__offers__0__monthly_rent": 1100,
+    "hypothetical_followup__offers__0__monthly_other": 1500,
+    "hypothetical_followup__offers__1__monthly_rent": 400,
+    "hypothetical_followup__offers__0__monthly_gross": 4800,
+    "hypothetical_followup__offers__0__extra_hours_per_month": 10,
+    "hypothetical_followup__offers__1__extra_hours_per_month": 0,
+    "hypothetical_followup__offers__1__monthly_other": 1100,
+    "hypothetical_followup__standard_hours_per_year": 2000
+  },
+  "report_constants": {
+    "months_per_year": 12,
+    "q1_label": "25%",
+    "q3_label": "75%",
+    "p10_label": "10%",
+    "p90_label": "90%",
+    "living_increment": 200
+  },
+  "luck_start_year": 2011,
+  "illustrative_parameters": {},
+  "reference_wages_cny": {
+    "会计专业人员": {
+      "p10": 42000,
+      "p25": 52800,
+      "p50": 68000,
+      "p75": 91700,
+      "p90": 129400
+    },
+    "大学专科学历": {
+      "p10": 38400,
+      "p25": 49700,
+      "p50": 67900,
+      "p75": 98000,
+      "p90": 142000
+    },
+    "工龄0~1年（不分职业）": {
+      "p10": 29300,
+      "p25": 37000,
+      "p50": 51600,
+      "p75": 76900,
+      "p90": 108100
+    }
+  },
+  "offer_b_ordinary_month": {
+    "take_home_cash": 3467,
+    "remaining_cash": 1967
+  }
 }

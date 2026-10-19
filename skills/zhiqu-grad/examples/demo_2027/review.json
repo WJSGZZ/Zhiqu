@@ -26,7 +26,7 @@
         {
           "id": "traceability",
           "score": 1,
-          "reason": "数字均有证据/计算/登记定位；沿用的部分原件只保留来源和待核主张，仍需操控者对原件逐条核查。",
+          "reason": "实际使用的官方数值附原文短句；本人输入精确对应登记字段；加工结果和条件情景分开。长沙理工目录仍未取到；匿名统计仍待操控者按原名单重核。",
           "report_location": "全文",
           "evidence_refs": []
         },
@@ -40,7 +40,7 @@
         {
           "id": "consistency",
           "score": 2,
-          "reason": "既有计算逐值及文件字节不变；逐节内容对照未丢失原正文、表格和图中数据。",
+          "reason": "旧计算键逐值和类型不变；12节逐节显示数字及顺序完全一致；新增键单独复算。",
           "report_location": "全文",
           "evidence_refs": []
         },
@@ -94,20 +94,20 @@
     ]
   },
   "snapshot": {
-    "case.json": "89061621208092013a2db2bde982d4975b93fa85072e55b04b66fdc46cb5646e",
-    "profile_parse.json": "76a74c00ad7ccbfc8cda835e8e0d579714db845cc2abb7ddb364e2250b4c7c67",
+    "case.json": "e601a9bf31c188d643b0f873b38f7b814b6d176b5473f897aab69c2b52023061",
+    "profile_parse.json": "a5a7b96085411943644dcaae76616a0affb32a79a07fd3020505d28d88c8b1a8",
     "directions.json": "2b68a53951ab4a8de52d7edcbabdf32d24e4570392cd70ac212c62342430a3b2",
     "rules_check.json": "7b0a58159b98a98e96a17d877674c57bf2d59988aefd37a2f57d94f82580f5c2",
-    "candidates.json": "eaee46be9fe013fd50959465ca9f7c85591d65e1da838836f19793ee48c862f9",
-    "evidence.json": "38d976425479ccee1ca23b5f7345972a11bc2fef2fb7fe0c76b1433218b559fd",
-    "calculations.json": "dfef0423c9ef1e6fdaffe4ee014d2b6ab6d2146ca44191c7e291ef675e738dd6",
-    "judgment.json": "c2c5490d9215f307714cc9632312f2787db3504cb5eeee26079544b1a53ab9f6",
-    "narrative.json": "4ea832b76514793e4da70e79db01f806174b54d25c25720ce875094245453019",
+    "candidates.json": "9155f2bd7dd201c895739c706eebdca2d3363f6e5ba0d1e2ed5130a2b482c2f5",
+    "evidence.json": "51ed06bd23e71530e9c0bf1e43fba3f2a74af69d27bbd91e12fbfee320924cbe",
+    "calculations.json": "cec5b3577a8d62196c2dfd606cfab91b31c421feb52a97cbdd3a5cfafcd5daf7",
+    "judgment.json": "b6828bbfb01711fdc11e3ad92d393a014548621fd54774933f83476921906343",
+    "narrative.json": "5e556acc3f0e842702dc02dd624762207adc20c3d2867670f37e553dc766964f",
     "profile.txt": "2be92b9770f7a4a877386334b958c096198b948c89c5eabca030d4f557e29457",
-    "report.md": "999676e5a2cb34fde71a579562a4e29c2b5576e57cc96a3cffdf6f62d6e1c2a6",
-    "report.html": "0af40f6969d72cfb2adb33f7978f5f9b6ffcb10174c765d246b8481fef02c7ae",
-    "report.pdf": "73b29fb37eed31b8153164f9c5502c09b7496e19ac8e9a183d9f702027a5d441",
-    "report_trace.json": "6a49285b9f4d7f49f55533696c02ab7b0f176307a5c82f53996bc4c290a0fda9",
-    "operator_check.md": "d81205fb4a0b0e7d4ba216bc04eadd030d10c8392b722648d9538725bd47b908"
+    "report.md": "75953b10afdb852eab8841705bff6ad4d1dba05076a026898fa35ccb60a26ab3",
+    "report.html": "12280b56efc0f212d15537ebe9a002694407e1c3f4d17d6a92d3f2db02f74355",
+    "report.pdf": "884d3b5fb35c2e336e072215e4cf05833ed7c140e51315b85ecaaee7cb4a4030",
+    "report_trace.json": "805296cc9612a46b08b45da608ee9e38c52f6dce5ba67329cebfac125a21cfd7",
+    "operator_check.md": "65f950f84fcfecc28513fdd2085af2a9358246a24313259e0c9245324c703864"
   }
 }
