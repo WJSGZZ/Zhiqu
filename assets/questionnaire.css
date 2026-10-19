@@ -54,10 +54,11 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opac
 .timeline{position:relative;margin-top:32px;}
 .section{margin:0 0 18px;}
 .sec-head{display:flex;align-items:center;gap:13px;margin:0 0 7px;}
-.badge{flex:none;width:34px;height:34px;border-radius:9px;background:var(--card);border:1.5px solid var(--line-strong);color:var(--ink-soft);font-family:var(--serif);font-size:17px;font-weight:600;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 2px rgba(34,42,38,.05);transition:background .4s ease,color .4s ease,border-color .4s ease,box-shadow .4s ease;}
+.badge{flex:none;width:38px;height:34px;white-space:nowrap;border-radius:9px;background:var(--card);border:1.5px solid var(--line-strong);color:var(--ink-soft);font-family:var(--serif);font-size:17px;font-weight:600;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 2px rgba(34,42,38,.05);transition:background .4s ease,color .4s ease,border-color .4s ease,box-shadow .4s ease;}
+.badge.two{font-size:14px;letter-spacing:-1px;}
 .badge.done{background:var(--green-deep);border-color:var(--green-deep);color:#F2EFE6;box-shadow:0 4px 12px -3px rgba(33,71,62,.55);}
 @media (prefers-reduced-motion: no-preference){.badge.done{animation:stamp .38s cubic-bezier(.34,1.4,.5,1) both;}}
-@media (max-width:560px){.badge{width:30px;height:30px;font-size:15px;border-radius:8px;}}
+@media (max-width:560px){.badge{width:34px;height:30px;font-size:15px;border-radius:8px;}.badge.two{font-size:12.5px;}}
 
 .card{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:23px 24px 20px;box-shadow:0 1px 2px rgba(34,42,38,.035),0 18px 38px -30px rgba(34,42,38,.2);}
 .sec-title{font-family:var(--serif);font-size:22px;font-weight:600;color:var(--green-deep);margin:0;line-height:1.3;letter-spacing:1px;}
