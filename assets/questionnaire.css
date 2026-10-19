@@ -153,18 +153,18 @@ textarea{resize:vertical;min-height:84px;}
 .landing{min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;}
 .landing-wrap{width:100%;max-width:1060px;padding:clamp(20px,5vh,56px) 40px;}
 .landing .hero{text-align:center;overflow:visible;padding:0;}
-.landing .hero-logo{display:block;width:88px;height:88px;margin:0 auto 14px;}
+.landing .hero-logo{display:block;width:112px;height:112px;margin:0 auto 6px;}
 .landing .brand-title{font-size:52px;letter-spacing:12px;margin:0 0 10px;padding-left:12px;}
 .landing .motto{margin:0 0 18px;}
 .landing .motto::after{content:'';display:block;width:32px;height:2px;margin:18px auto 0;border-radius:2px;background:var(--amber);}
-.landing .hero .tag{margin:0 auto;max-width:31em;text-wrap:balance;}
+.landing .hero .tag{margin:0 auto;}
 .landing .choices{margin:clamp(24px,4.5vh,44px) 0 0;}
 .landing .vow{text-align:center;margin-top:clamp(16px,3.5vh,32px);border-top:0;padding-top:0;}
 @media (max-width:860px){.choices{grid-template-columns:1fr;}.landing .choices{gap:12px;margin-top:28px;}}
 @media (max-width:560px){
   .landing-wrap{padding:40px 16px 32px;}
   .landing .choice{padding:22px 20px 20px;}
-  .landing .hero-logo{width:64px;height:64px;margin-bottom:10px;}
+  .landing .hero-logo{width:88px;height:88px;margin-bottom:8px;}
   .landing .brand-title{font-size:40px;letter-spacing:8px;padding-left:8px;}
   .landing .vow{font-size:12px;margin-top:22px;}
 }
