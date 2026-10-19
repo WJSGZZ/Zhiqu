@@ -1,0 +1,6 @@
+// Public recipient only. Keep the private key outside the repository.
+window.ZHIQU_RECIPIENT = {
+  "name": "知衢顾问",
+  "hostname": "wjsgzz.github.io",
+  "spki": "MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAtO813Nz5tilJcuEl3DyAc/WP/aJTpZ6uHHCOphKBMTl3B2TdyTh3O5CATFkS88DrfHNtbWtMot/Kk34+RUl56PYTR8bcxMExjUBp6e1Es3nkC+nmQ9akJ4TtrSNUamPdTJRoQvxvaanxxbQ4SB+4ofbfQPrWHFbXIX9mrSrCUNH06YR5ErtjmNxcSoUI7nIX2PPA6js/B/ksqySuTESSrkg4LJRAhQD+KervB/mWVfXDH8ZHpnr0QDsj8eLDeppO0mB7LldED6KNIiWBECagiqFABDjy+xCFaCfAmpEWW7E6JwxWkxzmJj76a/Jr5DBp5B4Uxbi5q+V2emkzrIth85OXNLmvnnR7htQPDrL6sUO6K1l3QxGzxk8kOlvvDmGY/hXSQEEeCzGBja9xgiLTSTXQmthMF9PDFlgt4RufzfFVRTP5mporWo0ZovXqk81ekAI9bD0m7int6poZtqpuzwtpjQw1Jr6Jf+hrhsw26ZIeDDtKHes9VUla8v5a7ItbAgMBAAE="
+};

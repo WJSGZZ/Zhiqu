@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>高考志愿 · 自我盘点</title>
 <script src="https://cdn.jsdelivr.net/npm/lunar-javascript@1.7.7/lunar.js" defer></script>
-<link rel="stylesheet" href="assets/questionnaire.css">
+<link rel="stylesheet" href="assets/questionnaire.css?v=20261019b">
 </head>
-<body>
+<body data-profile-kind="gaokao">
 
 <div class="topbar"><div class="topbar-inner">
   <div class="seal-sm">知衢</div>
@@ -73,13 +73,13 @@
 
       <div data-profile-id="province" class="q req"><div class="q-label">你是哪个省（市/自治区）的考生？</div>
         <input type="text" id="province" placeholder="例如：河南、四川、广东……"></div>
-      <div data-profile-id="hukou_privacy" class="q"><div class="q-label">户籍与居住地（选填，不需要详细地址）</div><div class="opts stack"><label class="opt"><input type="radio" name="hukou_privacy" value="愿意填写"><span class="box">愿意填写</span></label><label class="opt"><input type="radio" name="hukou_privacy" value="不想说"><span class="box">不想说</span></label></div><div data-show-when="hukou_privacy=愿意填写"><label for="hukou_city">户籍所在市</label><input type="text" id="hukou_city" placeholder="户籍所在市"><label for="hukou_county">户籍县或区</label><input type="text" id="hukou_county" placeholder="户籍县或区"><label for="home_city">家住市，与户籍不同时填</label><input type="text" id="home_city" placeholder="家住市，与户籍不同时填"><div class="opts stack"><label class="opt"><input data-profile-label="户籍省与报考省关系" type="radio" name="hukou_exam" value="户籍省与报考省一致"><span class="box">户籍省与报考省一致</span></label><label class="opt"><input data-profile-label="户籍省与报考省关系" type="radio" name="hukou_exam" value="随迁子女异地高考"><span class="box">随迁子女异地高考</span></label><label class="opt"><input data-profile-label="户籍省与报考省关系" type="radio" name="hukou_exam" value="不清楚"><span class="box">不清楚</span></label></div></div></div>
+      <div data-profile-id="hukou_privacy" class="q"><div class="q-label">户籍与居住地（选填，不需要详细地址）</div><div class="opts"><label class="opt"><input type="radio" name="hukou_privacy" value="愿意填写"><span class="box">愿意填写</span></label><label class="opt"><input type="radio" name="hukou_privacy" value="不想说"><span class="box">不想说</span></label></div><div data-show-when="hukou_privacy=愿意填写"><label for="hukou_city">户籍所在市</label><input type="text" id="hukou_city" placeholder="户籍所在市"><label for="hukou_county">户籍县或区</label><input type="text" id="hukou_county" placeholder="户籍县或区"><label for="home_city">家住市，与户籍不同时填</label><input type="text" id="home_city" placeholder="家住市，与户籍不同时填"><div class="opts stack"><label class="opt"><input data-profile-label="户籍省与报考省关系" type="radio" name="hukou_exam" value="户籍省与报考省一致"><span class="box">户籍省与报考省一致</span></label><label class="opt"><input data-profile-label="户籍省与报考省关系" type="radio" name="hukou_exam" value="随迁子女异地高考"><span class="box">随迁子女异地高考</span></label><label class="opt"><input data-profile-label="户籍省与报考省关系" type="radio" name="hukou_exam" value="不清楚"><span class="box">不清楚</span></label></div></div></div>
 
       <div data-profile-id="score" class="q req" data-label="② 高考分与全省位次" data-show-when="stage=已经出分"><div class="pair">
         <div><div class="q-label">高考总分（投档分）</div><input data-profile-label="高考分（投档分）" type="number" id="score" placeholder="含政策加分"></div>
         <div><div class="q-label">全省位次</div><input data-profile-label="全省位次" type="number" id="rank" placeholder="比分数更关键"></div>
       </div><p class="hint">不知道位次？拿你省的"一分一段表"按分数一查就有。还没出分也没关系，能填多少填多少。</p></div>
-      <div data-profile-id="bonus" class="q" data-show-when="stage=已经出分"><div class="q-label">政策加分（选填）</div><div class="opts stack"><label class="opt"><input type="radio" name="bonus" value="无"><span class="box">无</span></label><label class="opt"><input type="radio" name="bonus" value="有"><span class="box">有</span></label><label class="opt"><input type="radio" name="bonus" value="不想说"><span class="box">不想说</span></label></div><div class="followup" data-when="bonus=有"><span class="ftag">追问</span><div data-profile-id="bonus_type" class="q"><div class="q-label">加分类型、分值与适用范围</div><label for="bonus_type">加分类型</label><input type="text" id="bonus_type" placeholder="加分类型"><label for="bonus_points">加分分值</label><input type="number" id="bonus_points" placeholder="加分分值"><div class="opts stack"><label class="opt"><input type="radio" name="bonus_scope" value="全部院校"><span class="box">全部院校</span></label><label class="opt"><input type="radio" name="bonus_scope" value="仅本省属院校"><span class="box">仅本省属院校</span></label><label class="opt"><input type="radio" name="bonus_scope" value="仅专项"><span class="box">仅专项</span></label><label class="opt"><input type="radio" name="bonus_scope" value="不清楚"><span class="box">不清楚</span></label></div><label for="raw_score">不含加分的高考分数</label><input type="number" id="raw_score" placeholder="不含加分的高考分数"></div></div></div>
+      <div data-profile-id="bonus" class="q" data-show-when="stage=已经出分"><div class="q-label">政策加分（选填）</div><div class="opts"><label class="opt"><input type="radio" name="bonus" value="无"><span class="box">无</span></label><label class="opt"><input type="radio" name="bonus" value="有"><span class="box">有</span></label><label class="opt"><input type="radio" name="bonus" value="不想说"><span class="box">不想说</span></label></div><div class="followup" data-when="bonus=有"><span class="ftag">追问</span><div data-profile-id="bonus_type" class="q"><div class="q-label">加分类型、分值与适用范围</div><label for="bonus_type">加分类型</label><input type="text" id="bonus_type" placeholder="加分类型"><label for="bonus_points">加分分值</label><input type="number" id="bonus_points" placeholder="加分分值"><div class="opts stack"><label class="opt"><input type="radio" name="bonus_scope" value="全部院校"><span class="box">全部院校</span></label><label class="opt"><input type="radio" name="bonus_scope" value="仅本省属院校"><span class="box">仅本省属院校</span></label><label class="opt"><input type="radio" name="bonus_scope" value="仅专项"><span class="box">仅专项</span></label><label class="opt"><input type="radio" name="bonus_scope" value="不清楚"><span class="box">不清楚</span></label></div><label for="raw_score">不含加分的高考分数</label><input type="number" id="raw_score" placeholder="不含加分的高考分数"></div></div></div>
       <div data-show-when="stage=高三上学期|高三下学期，还没高考|已考完，正在估分、等出分"><div data-profile-id="estimate_low" class="q"><div class="q-label">未出分时的估分范围与联考位次（能填多少填多少）</div><div class="pair"><label for="estimate_low">估分最低</label><input type="number" id="estimate_low" placeholder="估分最低"><label for="estimate_high">估分最高</label><input type="number" id="estimate_high" placeholder="估分最高"></div><label for="joint_ranks">最近几次省/市联考名次、参考人数或换算省位次</label><input type="text" id="joint_ranks" placeholder="最近几次省/市联考名次、参考人数或换算省位次"><div class="pair"><label for="joint_best">最好一次位次</label><input type="number" id="joint_best" placeholder="最好一次位次"><label for="joint_worst">最差一次位次</label><input type="number" id="joint_worst" placeholder="最差一次位次"></div></div></div>
 
       <div data-profile-id="kelei" class="q req"><div class="q-label">你的科类 / 选科是？</div>
@@ -130,7 +130,7 @@
           <label class="opt"><input type="radio" name="goal" value="还没想好"><span class="box">还没想好（那我们会帮你留足转弯余地）</span></label>
         </div>
       </div>
-      <div data-profile-id="goal_second" class="q"><div class="q-label">毕业后的第二意向（选填）</div><div class="opts stack"><label class="opt"><input type="radio" name="goal_second" value="直接就业"><span class="box">直接就业</span></label><label class="opt"><input type="radio" name="goal_second" value="读研考研"><span class="box">读研考研</span></label><label class="opt"><input type="radio" name="goal_second" value="争取保研"><span class="box">争取保研</span></label><label class="opt"><input type="radio" name="goal_second" value="考公考编"><span class="box">考公考编</span></label><label class="opt"><input type="radio" name="goal_second" value="出国留学"><span class="box">出国留学</span></label><label class="opt"><input type="radio" name="goal_second" value="参军军警"><span class="box">参军军警</span></label><label class="opt"><input type="radio" name="goal_second" value="还没想好"><span class="box">还没想好</span></label></div></div>
+      <div data-profile-id="goal_second" class="q"><div class="q-label">毕业后的第二意向（选填）</div><div class="opts"><label class="opt"><input type="radio" name="goal_second" value="直接就业"><span class="box">直接就业</span></label><label class="opt"><input type="radio" name="goal_second" value="读研考研"><span class="box">读研考研</span></label><label class="opt"><input type="radio" name="goal_second" value="争取保研"><span class="box">争取保研</span></label><label class="opt"><input type="radio" name="goal_second" value="考公考编"><span class="box">考公考编</span></label><label class="opt"><input type="radio" name="goal_second" value="出国留学"><span class="box">出国留学</span></label><label class="opt"><input type="radio" name="goal_second" value="参军军警"><span class="box">参军军警</span></label><label class="opt"><input type="radio" name="goal_second" value="还没想好"><span class="box">还没想好</span></label></div></div>
 
       <!-- 就业 -->
       <div class="followup" data-when="goal=直接就业">
@@ -213,7 +213,7 @@
             <label class="opt"><input type="radio" name="gk_xuandiao" value="一般"><span class="box">一般</span></label>
             <label class="opt"><input type="radio" name="gk_xuandiao" value="不了解"><span class="box">不了解</span></label>
           </div><p class="hint">很多省份的定向选调，只认特定高校名单，这会直接影响"该报哪所学校"。</p></div>
-        <div data-profile-id="gk_province_state" class="q"><div class="q-label">想在哪个省考公？（填 1—2 个，或选还没定）</div><div class="opts stack"><label class="opt"><input type="radio" name="gk_province_state" value="有目标省份"><span class="box">有目标省份</span></label><label class="opt"><input type="radio" name="gk_province_state" value="还没定"><span class="box">还没定</span></label></div><div class="followup" data-when="gk_province_state=有目标省份"><span class="ftag">追问</span><div data-profile-id="gk_provinces" class="q"><div class="q-label">目标省份</div><label for="gk_provinces">最多两个省</label><input type="text" id="gk_provinces" placeholder="最多两个省"></div></div></div>
+        <div data-profile-id="gk_province_state" class="q"><div class="q-label">想在哪个省考公？（填 1—2 个，或选还没定）</div><div class="opts"><label class="opt"><input type="radio" name="gk_province_state" value="有目标省份"><span class="box">有目标省份</span></label><label class="opt"><input type="radio" name="gk_province_state" value="还没定"><span class="box">还没定</span></label></div><div class="followup" data-when="gk_province_state=有目标省份"><span class="ftag">追问</span><div data-profile-id="gk_provinces" class="q"><div class="q-label">目标省份</div><label for="gk_provinces">最多两个省</label><input type="text" id="gk_provinces" placeholder="最多两个省"></div></div></div>
       </div>
 
       <!-- 出国 -->
@@ -514,7 +514,7 @@
         </div></div>
 
       <div data-profile-id="pace" class="q req"><div class="q-label">大城市的高压快节奏，和二三线的宜居慢生活，你更倾向？</div>
-        <div class="opts stack">
+        <div class="opts">
           <label class="opt"><input type="radio" name="pace" value="大城市拼搏"><span class="box">大城市拼搏</span></label>
           <label class="opt"><input type="radio" name="pace" value="二三线宜居"><span class="box">二三线宜居</span></label>
           <label class="opt"><input type="radio" name="pace" value="看发展机会"><span class="box">看发展机会</span></label>
@@ -544,7 +544,7 @@
 
 
 
-      <div data-profile-id="longterm_state" class="q"><div class="q-label">毕业后打算在哪长期工作生活？</div><div class="opts stack"><label class="opt"><input type="radio" name="longterm_state" value="有大致方向"><span class="box">有大致方向</span></label><label class="opt"><input type="radio" name="longterm_state" value="还没想"><span class="box">还没想</span></label></div><div class="followup" data-when="longterm_state=有大致方向"><span class="ftag">追问</span><div data-profile-id="longterm_places" class="q"><div class="q-label">省或城市，最多两个</div><label for="longterm_places">例如：江苏、浙江</label><input type="text" id="longterm_places" placeholder="例如：江苏、浙江"></div></div></div>
+      <div data-profile-id="longterm_state" class="q"><div class="q-label">毕业后打算在哪长期工作生活？</div><div class="opts"><label class="opt"><input type="radio" name="longterm_state" value="有大致方向"><span class="box">有大致方向</span></label><label class="opt"><input type="radio" name="longterm_state" value="还没想"><span class="box">还没想</span></label></div><div class="followup" data-when="longterm_state=有大致方向"><span class="ftag">追问</span><div data-profile-id="longterm_places" class="q"><div class="q-label">省或城市，最多两个</div><label for="longterm_places">例如：江苏、浙江</label><input type="text" id="longterm_places" placeholder="例如：江苏、浙江"></div></div></div>
       <div data-profile-id="family_resource" class="q"><div class="q-label">家里在某些城市或行业，有资源、人脉吗？<span class="opt-note">（选填，但很有用）</span></div>
         <input type="text" id="family_resource" placeholder="例如：亲戚在某城市、家里熟悉某行业……如实写或留空"></div>
     </div></section>
@@ -681,7 +681,7 @@
       <p class="sec-why">这几样能“一票否决”一个志愿：色盲、视力、单科分数、学费……宁可现在花一分钟问清，也别等录取了才发现根本报不了。没有的项，跳过就好。</p>
 
       <div data-profile-id="body" class="q"><div class="q-label">身体条件有以下情况吗？（选填，可多选）</div><div class="opts stack"><label class="opt"><input type="checkbox" name="body" value="色盲"><span class="box">色盲</span></label><label class="opt"><input type="checkbox" name="body" value="色弱"><span class="box">色弱</span></label><label class="opt"><input type="checkbox" name="body" value="单色识别不能"><span class="box">单色识别不能</span></label><label class="opt"><input type="checkbox" name="body" value="矫正视力低于 4.8"><span class="box">矫正视力低于 4.8</span></label><label class="opt"><input type="checkbox" name="body" value="嗅觉迟钝"><span class="box">嗅觉迟钝</span></label><label class="opt"><input type="checkbox" name="body" value="听力障碍"><span class="box">听力障碍</span></label><label class="opt"><input type="checkbox" name="body" value="口吃、斜视或面部明显缺陷"><span class="box">口吃、斜视或面部明显缺陷</span></label><label class="opt"><input type="checkbox" name="body" value="肢体残疾或持残疾证"><span class="box">肢体残疾或持残疾证</span></label><label class="opt"><input type="checkbox" name="body" value="需长期治疗的慢性病"><span class="box">需长期治疗的慢性病</span></label><label class="opt"><input type="checkbox" name="body" value="其他"><span class="box">其他</span></label><label class="opt"><input type="checkbox" name="body" value="以上都没有"><span class="box">以上都没有</span></label><label class="opt"><input type="checkbox" name="body" value="不清楚没查过"><span class="box">不清楚没查过</span></label><label class="opt"><input type="checkbox" name="body" value="不想说"><span class="box">不想说</span></label></div><div class="followup" data-when="body=其他"><span class="ftag">追问</span><div data-profile-id="bodyNote" class="q"><div class="q-label">其他需要核对的身体条件（选填）</div><label for="bodyNote">简单说明即可</label><input type="text" id="bodyNote" placeholder="简单说明即可"></div></div><label for="height_cm">身高（厘米，选填）</label><input type="number" id="height_cm" placeholder="身高（厘米，选填）"></div>
-      <div data-show-when="goal=参军军警;special=军校/警校|招飞（空军/海军/民航）"><div data-profile-id="mil_body_privacy" class="q"><div class="q-label">军警或招飞体检补充（选填，不采集政审信息）</div><p class="hint">身高已在上题填写。以下只记录本人知道的情况，报考资格还要核当年体检标准；不想说可不填。</p><div class="opts stack"><label class="opt"><input type="radio" name="mil_body_privacy" value="愿意补充"><span class="box">愿意补充</span></label><label class="opt"><input type="radio" name="mil_body_privacy" value="不想说"><span class="box">不想说</span></label></div><div data-show-when="mil_body_privacy=愿意补充"><label for="weight_kg">体重（千克）</label><input type="number" id="weight_kg" placeholder="体重（千克）"><div class="opts stack"><label class="opt"><input type="radio" name="tattoo" value="有纹身"><span class="box">有纹身</span></label><label class="opt"><input type="radio" name="tattoo" value="无纹身"><span class="box">无纹身</span></label><label class="opt"><input type="radio" name="tattoo" value="不清楚"><span class="box">不清楚</span></label></div><div class="opts stack"><label class="opt"><input type="radio" name="glasses" value="戴眼镜"><span class="box">戴眼镜</span></label><label class="opt"><input type="radio" name="glasses" value="不戴眼镜"><span class="box">不戴眼镜</span></label><label class="opt"><input type="radio" name="glasses" value="不清楚"><span class="box">不清楚</span></label></div></div></div></div>
+      <div data-show-when="goal=参军军警;special=军校/警校|招飞（空军/海军/民航）"><div data-profile-id="mil_body_privacy" class="q"><div class="q-label">军警或招飞体检补充（选填，不采集政审信息）</div><p class="hint">身高已在上题填写。以下只记录本人知道的情况，报考资格还要核当年体检标准；不想说可不填。</p><div class="opts"><label class="opt"><input type="radio" name="mil_body_privacy" value="愿意补充"><span class="box">愿意补充</span></label><label class="opt"><input type="radio" name="mil_body_privacy" value="不想说"><span class="box">不想说</span></label></div><div data-show-when="mil_body_privacy=愿意补充"><label for="weight_kg">体重（千克）</label><input type="number" id="weight_kg" placeholder="体重（千克）"><div class="opts"><label class="opt"><input type="radio" name="tattoo" value="有纹身"><span class="box">有纹身</span></label><label class="opt"><input type="radio" name="tattoo" value="无纹身"><span class="box">无纹身</span></label><label class="opt"><input type="radio" name="tattoo" value="不清楚"><span class="box">不清楚</span></label></div><div class="opts"><label class="opt"><input type="radio" name="glasses" value="戴眼镜"><span class="box">戴眼镜</span></label><label class="opt"><input type="radio" name="glasses" value="不戴眼镜"><span class="box">不戴眼镜</span></label><label class="opt"><input type="radio" name="glasses" value="不清楚"><span class="box">不清楚</span></label></div></div></div></div>
 
       <div data-profile-id="eyesurgery" class="q"><div class="q-label">视力的具体情况<span class="opt-note">（选填；招飞、军校、警校、航海等体检会查）</span></div>
         <div class="opts"><label class="opt"><input type="radio" name="eyesurgery" value="做过近视手术或戴过OK镜"><span class="box">做过近视手术或戴过 OK 镜</span></label><label class="opt"><input type="radio" name="eyesurgery" value="没有"><span class="box">没有</span></label><label class="opt"><input type="radio" name="eyesurgery" value="不清楚"><span class="box">不清楚</span></label><label class="opt"><input type="radio" name="eyesurgery" value="不想说"><span class="box">不想说</span></label></div>
@@ -784,7 +784,7 @@
 
 
 
-      <div data-profile-id="repeat" class="q req"><div class="q-label">如果这一轮没有被录取，实际准备怎么办？</div><div class="opts stack"><label class="opt"><input type="radio" name="repeat" value="参加征集志愿"><span class="box">参加征集志愿</span></label><label class="opt"><input type="radio" name="repeat" value="接受下一批次"><span class="box">接受下一批次</span></label><label class="opt"><input type="radio" name="repeat" value="可能会复读"><span class="box">可能会复读</span></label><label class="opt"><input type="radio" name="repeat" value="宁可复读"><span class="box">宁可复读</span></label><label class="opt"><input type="radio" name="repeat" value="不确定"><span class="box">不确定</span></label></div></div><div class="followup" data-when="attempt=复读（之前参加过高考）;repeat=可能会复读|宁可复读"><span class="ftag">追问</span><div data-profile-id="repeat_rank" class="q"><div class="q-label">这次（或预估）位次与最近几次联考相比</div><div class="opts stack"><label class="opt"><input type="radio" name="repeat_rank" value="明显低于平时"><span class="box">明显低于平时</span></label><label class="opt"><input type="radio" name="repeat_rank" value="差不多"><span class="box">差不多</span></label><label class="opt"><input type="radio" name="repeat_rank" value="高于平时"><span class="box">高于平时</span></label></div></div><div data-profile-id="repeat_loss" class="q"><div class="q-label">能说清哪科、哪部分丢分吗？（选填）</div><label for="repeat_loss">科目、知识部分或考试状态</label><input type="text" id="repeat_loss" placeholder="科目、知识部分或考试状态"></div><div data-profile-id="repeat_by" class="q"><div class="q-label">复读主要是谁的想法？</div><div class="opts stack"><label class="opt"><input type="radio" name="repeat_by" value="自己"><span class="box">自己</span></label><label class="opt"><input type="radio" name="repeat_by" value="家里"><span class="box">家里</span></label><label class="opt"><input type="radio" name="repeat_by" value="一起"><span class="box">一起</span></label></div></div></div>
+      <div data-profile-id="repeat" class="q req"><div class="q-label">如果这一轮没有被录取，实际准备怎么办？</div><div class="opts stack"><label class="opt"><input type="radio" name="repeat" value="参加征集志愿"><span class="box">参加征集志愿</span></label><label class="opt"><input type="radio" name="repeat" value="接受下一批次"><span class="box">接受下一批次</span></label><label class="opt"><input type="radio" name="repeat" value="可能会复读"><span class="box">可能会复读</span></label><label class="opt"><input type="radio" name="repeat" value="宁可复读"><span class="box">宁可复读</span></label><label class="opt"><input type="radio" name="repeat" value="不确定"><span class="box">不确定</span></label></div></div><div class="followup" data-when="attempt=复读（之前参加过高考）;repeat=可能会复读|宁可复读"><span class="ftag">追问</span><div data-profile-id="repeat_rank" class="q"><div class="q-label">这次（或预估）位次与最近几次联考相比</div><div class="opts stack"><label class="opt"><input type="radio" name="repeat_rank" value="明显低于平时"><span class="box">明显低于平时</span></label><label class="opt"><input type="radio" name="repeat_rank" value="差不多"><span class="box">差不多</span></label><label class="opt"><input type="radio" name="repeat_rank" value="高于平时"><span class="box">高于平时</span></label></div></div><div data-profile-id="repeat_loss" class="q"><div class="q-label">能说清哪科、哪部分丢分吗？（选填）</div><label for="repeat_loss">科目、知识部分或考试状态</label><input type="text" id="repeat_loss" placeholder="科目、知识部分或考试状态"></div><div data-profile-id="repeat_by" class="q"><div class="q-label">复读主要是谁的想法？</div><div class="opts"><label class="opt"><input type="radio" name="repeat_by" value="自己"><span class="box">自己</span></label><label class="opt"><input type="radio" name="repeat_by" value="家里"><span class="box">家里</span></label><label class="opt"><input type="radio" name="repeat_by" value="一起"><span class="box">一起</span></label></div></div></div>
 
       <div data-profile-id="tiaoji" class="q req"><div class="q-label">对"服从专业调剂"，你目前的态度是？</div>
         <div class="opts stack">
@@ -878,6 +878,7 @@
 
   <div class="finish">
     <button class="gen-btn" type="button" onclick="clickGenerate()">复制我的画像</button>
+    <p class="copy-privacy" id="copyPrivacy"></p>
 
     <div class="warn" id="warn">
       <h3>等一下，有几处还没填</h3>
@@ -892,7 +893,7 @@
     <p class="copy-done" id="copyDone" role="status"></p>
 
     <div id="output">
-      <p class="out-head">没能自动复制。请长按全选复制下面的 JSON。</p>
+      <p class="out-head">没能自动复制。请长按全选复制下面的内容。</p>
       <textarea id="summary" readonly></textarea>
       <div class="copy-row">
         <button class="copy-btn" type="button" onclick="copySummary()">再试一次复制</button>
@@ -909,7 +910,8 @@
   </div>
 </div>
 
-<script src="assets/questionnaire.js"></script>
+<script src="assets/profile-recipient.js?v=20261019b"></script>
+<script src="assets/questionnaire.js?v=20261019b"></script>
 <script>
   function updateBaziPreview(){
     var el=document.getElementById('baziPreview'); if(!el) return;
@@ -1074,5 +1076,6 @@
     if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(ta.value).then(done).catch(fb);}else{fb();}
   }
 </script>
+<script>zhiquCopyNotice();</script>
 </body>
 </html>

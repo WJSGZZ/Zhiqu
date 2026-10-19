@@ -11,6 +11,11 @@ new-id grad 2027 --mode formal       分配并占用案例号
 各命令可用 --root 指定本机案例根目录；真实资料不得进入受版本管理的目录。
 """
 import argparse
+import base64
+import gzip
+import io
+import os
+import hmac
 from contextlib import contextmanager
 from datetime import datetime, timezone
 import fcntl
@@ -65,25 +70,113 @@ def valid_answer(value):
     return False
 
 
+INTEGRITY_ERROR = '画像可能被改动或不完整，请让对方重新复制'
+MAX_PROFILE_BYTES = 8 * 1024 * 1024
+
+
+def canonical(data):
+    """Sorted UTF-16 keys, compact UTF-8, JSON primitives (matching the webpage)."""
+    def ordered(value):
+        if isinstance(value, dict):return {k:ordered(value[k]) for k in sorted(value,key=lambda k:k.encode('utf-16-be'))}
+        if isinstance(value, list):return [ordered(v) for v in value]
+        return value
+    return json.dumps(ordered(data),ensure_ascii=False,separators=(',',':'),allow_nan=False)
+
+
+def checksum(data):
+    return sha(canonical({k:v for k,v in data.items() if k!='checksum'}))
+
+
+def integrity(data):
+    if 'checksum' not in data:
+        # Current-shaped messages must not downgrade to unchecked by deleting the hash.
+        if any(k in data for k in ('counts','collapsed')) or any('status' in i for sec in data.get('sections',[]) for i in sec.get('items',[])):
+            raise ValueError(INTEGRITY_ERROR)
+        return '无校验'
+    try:
+        if not isinstance(data['checksum'],str) or not hmac.compare_digest(data['checksum'],checksum(data)):raise ValueError()
+        entries=[i for sec in data['sections'] for i in sec['items']]
+        if any(i.get('status') not in ('已答','未填') for i in entries):raise ValueError()
+        if any(('a' not in i or not valid_answer(i['a'])) if i['status']=='已答' else 'a' in i for i in entries):raise ValueError()
+        counts=data['counts']
+        if set(counts)!={'visible','answered'} or any(type(v) is not int for v in counts.values()):raise ValueError()
+        if counts!={'visible':len(entries),'answered':sum(i['status']=='已答' for i in entries)}:raise ValueError()
+        ids=[i['id'] for i in entries];hidden=data['collapsed']
+        if not isinstance(hidden,list) or any(not isinstance(x,str) or not ID.fullmatch(x) for x in hidden) or len(set(hidden))!=len(hidden) or set(ids)&set(hidden):raise ValueError()
+        if any('required' in i and i['required'] is not True for i in entries):raise ValueError()
+    except (KeyError,TypeError,ValueError,AttributeError) as exc:raise ValueError(INTEGRITY_ERROR) from exc
+    return '校验通过'
+
+
+def crypto_modules():
+    try:
+        from cryptography.hazmat.primitives import hashes, serialization
+        from cryptography.hazmat.primitives.asymmetric import padding, rsa
+        from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+    except ImportError as exc:raise ValueError('接收密文或生成钥匙需要 cryptography，请运行 python3 -m pip install cryptography') from exc
+    return hashes,serialization,padding,rsa,AESGCM
+
+
+def keygen(private_key,public_config,recipient_name='知衢顾问',hostname='wjsgzz.github.io'):
+    private_key=Path(private_key).expanduser().resolve();public_config=Path(public_config)
+    if private_key.is_relative_to(REPO):raise ValueError('私钥必须放在仓库以外')
+    if private_key.exists():raise ValueError('私钥已存在，拒绝覆盖；更换钥匙前先备份旧钥匙')
+    if not re.fullmatch(r'[a-zA-Z0-9.-]+',hostname):raise ValueError('hostname 只填域名，不带协议和路径')
+    hashes,serialization,padding,rsa,AESGCM=crypto_modules()
+    key=rsa.generate_private_key(public_exponent=65537,key_size=3072)
+    pem=key.private_bytes(serialization.Encoding.PEM,serialization.PrivateFormat.PKCS8,serialization.NoEncryption())
+    private_key.parent.mkdir(parents=True,exist_ok=True,mode=0o700)
+    fd=os.open(private_key,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600)
+    with os.fdopen(fd,'wb') as out:out.write(pem)
+    public=key.public_key().public_bytes(serialization.Encoding.DER,serialization.PublicFormat.SubjectPublicKeyInfo)
+    config={'name':recipient_name,'hostname':hostname.lower(),'spki':base64.b64encode(public).decode()}
+    public_config.parent.mkdir(parents=True,exist_ok=True)
+    public_config.write_text('// Public recipient only. Keep the private key outside the repository.\nwindow.ZHIQU_RECIPIENT = '+json.dumps(config,ensure_ascii=False,indent=2)+';\n')
+    return {'private_key':str(private_key),'public_config':str(public_config),'notice':'请立即把私钥备份到安全的离线位置；丢失后未解密消息无法恢复。'}
+
+
+def decrypt_profile(raw,private_key=None):
+    hashes,serialization,padding,rsa,AESGCM=crypto_modules()
+    path=private_key or os.environ.get('ZHIQU_PRIVATE_KEY')
+    if not path:raise ValueError('请用 --private-key 或 ZHIQU_PRIVATE_KEY 指定仓库外私钥')
+    try:
+        encoded=raw.strip()[4:]
+        if len(encoded)>MAX_PROFILE_BYTES or not re.fullmatch(r'[A-Za-z0-9_-]+',encoded):raise ValueError()
+        blob=base64.urlsafe_b64decode(encoded+'='*(-len(encoded)%4));n=int.from_bytes(blob[:2],'big')
+        if n not in (256,384,512) or len(blob)<2+n+12+16:raise ValueError()
+        key=serialization.load_pem_private_key(Path(path).expanduser().read_bytes(),password=None)
+        secret=key.decrypt(blob[2:2+n],padding.OAEP(mgf=padding.MGF1(hashes.SHA256()),algorithm=hashes.SHA256(),label=None))
+        zipped=AESGCM(secret).decrypt(blob[2+n:14+n],blob[14+n:],b'ZQ1')
+        with gzip.GzipFile(fileobj=io.BytesIO(zipped)) as stream:plain=stream.read(MAX_PROFILE_BYTES+1)
+        if len(plain)>MAX_PROFILE_BYTES:raise ValueError()
+        text=plain.decode('utf-8');data=json.loads(text)
+        if not isinstance(data,dict) or 'checksum' not in data:raise ValueError()
+        validate(data)
+        return text
+    except Exception as exc:raise ValueError(INTEGRITY_ERROR+'（解密或解压失败，请核对私钥）') from exc
+
+
 def validate(data):
+    if isinstance(data,dict):integrity(data)
     if not isinstance(data,dict) or data.get('schema')!=1 or data.get('zhiqu') not in HEADERS:raise ValueError('画像须为含 zhiqu、schema=1 的 JSON 对象')
     if not isinstance(data.get('问卷'),str) or not data['问卷'].strip():raise ValueError('缺问卷名称')
     if LABELS[data['zhiqu']].replace('志愿','') not in data['问卷']:raise ValueError('问卷名称与类型不一致')
     if not isinstance(data.get('form'),str) or not data['form'].strip():raise ValueError('缺题目指纹 form')
     timestamp(data.get('filled_at'))
     if not isinstance(data.get('sections'),list):raise ValueError('sections 须为列表')
+    checked='checksum' in data
     seen=set()
     for section in data['sections']:
         if not isinstance(section,dict) or not isinstance(section.get('title'),str) or not isinstance(section.get('items'),list):raise ValueError('节名或 items 格式错误')
         for item in section['items']:
             if not isinstance(item,dict) or not isinstance(item.get('id'),str) or not ID.fullmatch(item['id']) or item['id'] in seen:raise ValueError('题目 id 须为不重复的稳定英文名')
-            if not isinstance(item.get('q'),str) or not item['q'].strip() or not valid_answer(item.get('a')):raise ValueError('题目须有原文与已作答答案')
+            if not isinstance(item.get('q'),str) or not item['q'].strip() or (not checked or item.get('status')=='已答') and not valid_answer(item.get('a')):raise ValueError('题目须有原文与已作答答案')
             if item.get('followup_of') and item['followup_of'] not in seen:raise ValueError('追问须跟在所属题后面，followup_of 须已出现')
             seen.add(item['id'])
     if not isinstance(data.get('rank'),list) or not all(isinstance(x,str) for x in data['rank']) or len(data['rank'])!=len(set(data['rank'])):raise ValueError('rank 须为无重复字符串列表')
     if not isinstance(data.get('derived'),dict) or set(data['derived'])-{'bazi'} or ('bazi' in data['derived'] and not isinstance(data['derived']['bazi'],str)):raise ValueError('derived 只接受排盘文字 bazi')
-    if not isinstance(data.get('未填的必答题'),list) or not all(isinstance(x,str) for x in data['未填的必答题']):raise ValueError('未填的必答题须为题目原文列表')
-    priority=next((i['a'] for sec in data['sections'] for i in sec['items'] if i['id']=='priority'),data['rank'])
+    if not checked and not isinstance(data.get('未填的必答题'),list) or not checked and not all(isinstance(x,str) for x in data['未填的必答题']):raise ValueError('未填的必答题须为题目原文列表')
+    priority=next((i.get('a',[]) for sec in data['sections'] for i in sec['items'] if i['id']=='priority'),data['rank'])
     if priority!=data['rank']:raise ValueError('排序题与 rank 不一致')
     return data
 
@@ -92,7 +185,7 @@ def parse_profile(raw):
     text=raw.lstrip('\ufeff \n\r')
     if text.startswith('{'):
         try:return validate(json.loads(text))
-        except json.JSONDecodeError as exc:raise ValueError('画像 JSON 损坏，需重新粘贴完整内容') from exc
+        except json.JSONDecodeError as exc:raise ValueError(INTEGRITY_ERROR) from exc
     kind=next((k for k,h in HEADERS.items() if text.startswith(h)),None)
     if not kind:raise ValueError('画像须为 JSON 或旧版自我盘点文字')
     # Compatibility for the short-lived prose + answers data-line format.
@@ -166,7 +259,7 @@ def new_id(root,kind,year,mode='formal'):
 
 
 def snapshot_info(path,raw,data,case_id):
-    return {'case_id':case_id,'file':'profiles/'+path.name,'filled_at':data['filled_at'],'form':data['form'],'sha256':sha(raw),'status':'有数据'}
+    return {'case_id':case_id,'file':'profiles/'+path.name,'filled_at':data['filled_at'],'form':data['form'],'sha256':sha(raw),'status':'有数据','integrity':'校验通过' if 'checksum' in data else '无校验'}
 
 
 def snapshots(folder):
@@ -185,7 +278,8 @@ def snapshots(folder):
     return sorted(versions,key=lambda x:(x[0],x[1]))
 
 
-def ingest(root,case_id,raw,now=None):
+def ingest(root,case_id,raw,now=None,private_key=None):
+    if raw.lstrip().startswith('ZQ1:'):raw=decrypt_profile(raw.lstrip(),private_key)
     kind=check_id(case_id);data=parse_profile(raw)
     if data and data['zhiqu']!=kind:raise ValueError('案例号与画像类型不一致')
     if data is None and not raw.lstrip('\ufeff \n\r').startswith(HEADERS[kind]):raise ValueError('案例号与文字画像类型不一致')
@@ -246,7 +340,7 @@ def diff(root,case_id,old=None,new=None):
     try:a=by[old] if old else versions[-2];b=by[new] if new else versions[-1]
     except KeyError as exc:raise ValueError('指定快照不属于这个案例') from exc
     if a[1]==b[1]:raise ValueError('请选择两版不同画像')
-    da,db=parse_profile(a[3]),parse_profile(b[3]);fa={k:v['a'] for k,v in items(da).items()};fb={k:v['a'] for k,v in items(db).items()}
+    da,db=parse_profile(a[3]),parse_profile(b[3]);fa={k:v['a'] for k,v in items(da).items() if 'a' in v};fb={k:v['a'] for k,v in items(db).items() if 'a' in v}
     modified={k:{'old':fa[k],'new':fb[k]} for k in sorted(fa.keys()&fb.keys()) if fa[k]!=fb[k]}
     if da['rank']!=db['rank']:modified['rank']={'old':da['rank'],'new':db['rank']}
     return {'case_id':case_id,'old':a[1],'new':b[1],'warnings':['题目版本不同，部分题可能对不上'] if da['form']!=db['form'] else [],'added':{k:fb[k] for k in sorted(fb.keys()-fa.keys())},'modified':modified,'deleted':{k:fa[k] for k in sorted(fa.keys()-fb.keys())}}
@@ -272,7 +366,7 @@ def build_parse(raw,kind):
     mapping=QuestionMap();mapping.feed((REPO/(kind+'.html')).read_text())
     given=items(data);fields=[];missing=[]
     for name,category,*keys in FIELD_MAP[kind]:
-        refs=list(dict.fromkeys(mapping.mapping.get(k,k) for k in keys));values={k:given[k]['a'] for k in refs if k in given}
+        refs=list(dict.fromkeys(mapping.mapping.get(k,k) for k in keys));values={k:given[k]['a'] for k in refs if k in given and 'a' in given[k]}
         if name=='优先级' and data['rank']:values={'priority':data['rank']}
         # A refused/unknown answer is retained verbatim but cannot become a known constraint.
         unknown={'不想说','不清楚','不确定','还没想','还没想好','不知道','不了解','还没定','还没和家里谈','要和家里商量','不确定，请帮我算'}
@@ -338,7 +432,7 @@ def alignment_errors(case_dir):
             if fields.get(f['field'],{}).get('value')!=f['value'] or fields.get(f['field'],{}).get('status')!=f['status']:return ['结构化画像字段与原始作答不一致：'+f['field']]
         if case.get('profile'):
             info,_=latest(folder.parent,folder.name)
-            if case['profile']!=info:return ['case.json 当前画像版本与最新存档不一致']
+            if {k:v for k,v in case['profile'].items() if k!='integrity'}!={k:v for k,v in info.items() if k!='integrity'}:return ['case.json 当前画像版本与最新存档不一致']
         return []
     except FileNotFoundError:return [] # Original stage checks identify missing inputs.
     except (ValueError,KeyError,TypeError,OSError) as exc:return ['画像版本/数据错误：'+str(exc)]
@@ -362,10 +456,13 @@ def main():
         if cmd in ('ingest','report'):p.add_argument('file',type=Path)
         if cmd=='diff':p.add_argument('--old');p.add_argument('--new')
     p=sub.add_parser('parse');p.add_argument('case_dir',type=Path);p.add_argument('--replace',action='store_true')
+    p=sub.add_parser('keygen');p.add_argument('--private-key',type=Path,required=True);p.add_argument('--public-config',type=Path,required=True);p.add_argument('--recipient-name',default='知衢顾问');p.add_argument('--hostname',default='wjsgzz.github.io')
+    sub.choices['ingest'].add_argument('--private-key',type=Path)
     args=parser.parse_args()
     try:
-        if args.command=='new-id':result=new_id(args.root,args.kind,args.year,args.mode)
-        elif args.command=='ingest':result=ingest(args.root,args.case_id,args.file.read_text(encoding='utf-8'))
+        if args.command=='keygen':result=keygen(args.private_key,args.public_config,args.recipient_name,args.hostname)
+        elif args.command=='new-id':result=new_id(args.root,args.kind,args.year,args.mode)
+        elif args.command=='ingest':result=ingest(args.root,args.case_id,args.file.read_text(encoding='utf-8'),private_key=args.private_key)
         elif args.command=='latest':info,raw=latest(args.root,args.case_id);result={**info,'raw':raw}
         elif args.command=='diff':result=diff(args.root,args.case_id,args.old,args.new)
         elif args.command=='report':result=record_report(args.root,args.case_id,args.file)

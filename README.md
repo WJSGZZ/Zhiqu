@@ -7,7 +7,6 @@
 <p align="center">
   <a href="https://wjsgzz.github.io/Zhiqu/"><img src="assets/readme/badges/questionnaire.svg" alt="在线问卷"></a>
   <img src="assets/readme/badges/python.svg" alt="Python 3.10+">
-  <img src="assets/readme/badges/stdlib.svg" alt="仅标准库">
   <img src="assets/readme/badges/agents.svg" alt="Claude Code · Codex">
   <a href="LICENSE"><img src="assets/readme/badges/license.svg" alt="MIT License"></a>
 </p>
@@ -75,7 +74,7 @@
 
 ### 1. 安装
 
-需要 Python 3.10 或更高版本；生成 PDF 需要本机安装 Chrome、Edge 或 Chromium（没有时输出 HTML）。脚本只用 Python 标准库，无需 `pip install`。
+需要 Python 3.10 或更高版本；生成 PDF 需要本机安装 Chrome、Edge 或 Chromium（没有时输出 HTML）。日常规划脚本只用 Python 标准库；接收加密画像时，另需安装 `cryptography`（见下方接收说明）。
 
 ```bash
 git clone --depth 1 https://github.com/WJSGZZ/Zhiqu.git
@@ -107,7 +106,9 @@ python3 scripts/optimize.py examples/candidates_demo.csv --rank 30000 --slots 12
 
 ### 2. 填写问卷
 
-打开[在线问卷](https://wjsgzz.github.io/Zhiqu/)，选择高考、读研或求职。完成后点击“复制我的画像”，把得到的整份 JSON 原样发给 Agent。里面按节保留题目和作答，`zhiqu` 字段区分高考（`gaokao`）、读研（`grad`）、求职（`career`）；填写时间和题目指纹用于比较前后两次作答。作答保存在浏览器本地，由你决定是否发出。旧版文字画像仍可使用。
+打开[在线问卷](https://wjsgzz.github.io/Zhiqu/)，选择高考、读研或求职。**自己交给 AI 分析时，点主按钮下方的“复制未加密版本”**，把整份 JSON 原样发给 Agent。主按钮“复制我的画像”在已配置的所属网址上复制以 `ZQ1:` 开头的加密串，只有持有对应私钥的知衢顾问能打开；其他网址或本地副本默认复制明文，并在按钮下说明。剪贴板不可用时，备用文本框显示相同内容，可长按全选复制。
+
+画像按节保留所有可见题目的题干、已答／未填状态与作答，`zhiqu` 字段区分高考（`gaokao`）、读研（`grad`）、求职（`career`）；题目指纹用于比较两次作答，校验值用于检查传输完整性。作答保存在浏览器本地，由你决定是否发出。旧版文字画像仍可使用。
 
 操控者（交付报告前亲自核查关键信息的人）可用 `profile_store.py` 将画像按案例号存到本机，更新后比较两版，并以最新一版继续工作；真实画像和总登记不提交到仓库。格式与操作见[画像输入与存档](skills/zhiqu-shared/references/report-workflow.md#画像输入与存档)。
 
@@ -118,16 +119,37 @@ python3 scripts/optimize.py examples/candidates_demo.csv --rank 30000 --slots 12
 ```text
 这是我的知衢画像。我是 2027 年浙江考生，已出分，位次 58000。
 请核实当年招生计划与选考要求，先让我确认专业偏好和调剂态度，再计算志愿表。
-（在这里粘贴“复制我的画像”得到的完整 JSON。）
+（在这里粘贴“复制未加密版本”得到的完整 JSON。）
 ```
 
-画像的简短结构示意如下；这是虚构作答，实际使用时粘贴问卷复制出的完整内容：
+画像的简短结构示意如下（省略自动生成的 `checksum`）；这是虚构作答，实际使用时粘贴问卷复制出的完整内容，不要手工删改：
 
 ```json
-{"zhiqu":"grad","schema":1,"问卷":"知衢 · 读研 · 自我盘点","form":"1234abcd","filled_at":"2026-10-19T12:00:00+08:00","sections":[{"title":"你现在的位置","items":[{"id":"grade","q":"你现在是？","a":"大三"}]}],"rank":[],"derived":{},"未填的必答题":[]}
+{"zhiqu":"grad","schema":1,"问卷":"知衢 · 读研 · 自我盘点","form":"1234abcd","filled_at":"2026-10-19T12:00:00+08:00","sections":[{"title":"你现在的位置","items":[{"id":"grade","q":"你现在是？","status":"已答","required":true,"a":"大三"}]}],"rank":[],"derived":{},"collapsed":[],"counts":{"visible":1,"answered":1}}
 ```
 
 Agent 会追问影响结论的缺项，查询官方数据，输出 HTML 与 PDF 报告。报告第一页是结论和下一步。
+
+### 接收加密画像
+
+接单的人先在仓库外生成并备份私钥，再把公钥和自己的所属网址写入配置：
+
+```bash
+python3 -m pip install cryptography
+python3 skills/zhiqu/scripts/profile_store.py keygen \
+  --private-key /绝对路径/仓库外/recipient-private.pem \
+  --public-config assets/profile-recipient.js \
+  --recipient-name "你的顾问名称" --hostname your-name.github.io
+```
+
+把公钥配置随问卷发布，私钥只放本机，不进仓库。收到 `ZQ1:` 文本后，将它存为文本文件，再解密存档：
+
+```bash
+python3 skills/zhiqu/scripts/profile_store.py ingest 2027-YJ-0001 received.txt \
+  --private-key /绝对路径/仓库外/recipient-private.pem
+```
+
+也可用环境变量 `ZHIQU_PRIVATE_KEY` 指定私钥路径。工具解密、解压并校验后，沿用案例目录存为明文 JSON；普通明文画像不需要解密依赖。校验失败会停止存档，旧版未带校验值的 JSON 标为“无校验”。私钥备份到自己控制的加密存储中；丢失私钥只影响尚未解密的消息，已经存档的明文不受影响。换钥匙前保留旧私钥，用于处理旧公钥加密的消息。配置与完整格式见[画像输入与存档](skills/zhiqu-shared/references/profile-input.md)。
 
 ## 部署问卷
 
