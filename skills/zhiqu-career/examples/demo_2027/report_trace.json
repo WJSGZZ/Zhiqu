@@ -13,11 +13,11 @@
     "narrative.json": "68bcf0b7ceed018f59f25d5985f288cf82b031288c786c0fd13f24d102cf2e48",
     "profile.txt": "69dfeb57cf005a4ace3990e51a96b3b821e9de0c130dd1f8eae5b2088f5bef5e"
   },
-  "contract_sha256": "dfbb1427a20890eaff597983c15b8fb2115e4bcfa14fcc01ffa39c697e5abcb9",
+  "contract_sha256": "affc47ff0df415d88221ddee76feb600856414b92cdd1c56130f86938e5cd381",
   "tool_sha256": {
-    "planning_report.py": "06444a030796fd91bd4c88571a7b6667d56a9e797142a6b898791db03d669d3a",
-    "planning_workflow.py": "d75883142ef2be518c25659673ef4609f0bbc971f635cd5471474c025824e696",
-    "operator_check.py": "3c5b54da5848c64b6e113d0c3136f307cf919a0ef345baa81a58ceb18939e797",
+    "planning_report.py": "10014cadb94d65575913a75e662a560c6eac938aa345c1bb918185748b520622",
+    "planning_workflow.py": "501f84f04b3d98e35f0894f71d23e7725dc61ebd76b37e61172dcecbeb71ef48",
+    "operator_check.py": "de98dc2c68caed42efbd29013f2b9bb58a6317cde39fa1e8c9404285c99fb43c",
     "check_demos.py": "fc8e1625f9e052373756160514ad5c73db1e8451c233425918edb5bc839d9f63",
     "report.py": "08bb83a85f3de379e6a05f1e6e80b2d85c525324f4112b63b2ea36f1cec5ccf3",
     "render_report.py": "8cb49efa61bba9985354966096a6645ff4fd6ad7a04683cdc8aeb766db42344c"
@@ -1197,7 +1197,7 @@
   "artifacts": {
     "report.md": "77f566208464a0aae4ba61541e137a2803636efa1e1fbd7dad365992e34fe792",
     "report.html": "a0d53699b4d049e3b2c4bac87a7d83670cd9081832ac29efdd4e855ef9f0b53b",
-    "report.pdf": "de450c88b3ca48fff9d5074c58774f5c58ef88bda77a45fdcb6952b1d9227cb9"
+    "report.pdf": "7ebf5cfe03376a3a8e5bb9ee0cac3e1d1f6d03f01c3067b8b9b4c4d749a8f3ea"
   },
   "delivery_status": "awaiting_operator_and_independent_review"
 }

@@ -264,5 +264,32 @@ class TestRealRepo(unittest.TestCase):
             self.assertEqual(errors, [], f"{name} 不应有错误，实际：{errors}")
 
 
+
+class TestPersonaNames(unittest.TestCase):
+    def record(self,tmp,cid,name,**extra):
+        import json
+        write(os.path.join(tmp,'skills/zhiqu/examples',cid,'case.json'),
+              json.dumps({'case_id':cid,'candidate':name+'（模拟）',**extra},ensure_ascii=False))
+
+    def test_distinct_short_names_pass(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            self.record(tmp,'A','小明');self.record(tmp,'B','小红')
+            self.assertEqual(cf.check_persona_names(tmp),[])
+
+    def test_duplicate_or_long_names_fail(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            self.record(tmp,'A','小明');self.record(tmp,'B','小明');self.record(tmp,'C','小明明')
+            issues=cf.check_persona_names(tmp)
+            self.assertTrue(any('不同人物重名' in x[3] for x in issues))
+            self.assertTrue(any('一个汉字' in x[3] for x in issues))
+
+    def test_same_person_scenarios_need_explicit_valid_reference(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            self.record(tmp,'A','小明');self.record(tmp,'B','小明',persona_ref='../A/case.json')
+            self.assertEqual(cf.check_persona_names(tmp),[])
+            self.record(tmp,'B','小红',persona_ref='../A/case.json')
+            self.assertTrue(any('场景姓名不一致' in x[3] for x in cf.check_persona_names(tmp)))
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "items": [
+    {
+      "id": "R01",
+      "claim": "报考专业与工作经验",
+      "evidence_refs": [
+        "E002"
+      ],
+      "status": "verified",
+      "scope": "仅限列举专业学位",
+      "volatile": true,
+      "verified_on": "2026-10-19",
+      "review_due": "2026-11-18",
+      "gap": null
+    },
+    {
+      "id": "R02",
+      "claim": "具体专业课程与资格",
+      "evidence_refs": [
+        "E003"
+      ],
+      "status": "unretrieved",
+      "scope": "",
+      "volatile": true,
+      "verified_on": "2026-10-19",
+      "review_due": "2026-11-18",
+      "gap": "先定专业类型再按需取目录"
+    }
+  ],
+  "as_of": "2026-10-19"
+}

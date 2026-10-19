@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "kind": "grad",
+  "case_id": "2028-YJ-S02",
+  "mode": "simulation",
+  "prepared_on": "2026-10-19",
+  "version": "1.0",
+  "decision_stage": "还在考虑",
+  "target_year": 2028,
+  "data_commit": "ba939f5",
+  "education": {
+    "school_level": "普通公办本科",
+    "year_level": "大三上",
+    "major": "交通工程",
+    "expected_graduation": "2028-06-30"
+  },
+  "context": {
+    "as_of": "2026-10-19",
+    "takes_kaoyan": true,
+    "offer_basis": "none",
+    "personal_dates": {
+      "action0": "2026-10-21",
+      "action1": "2026-10-22",
+      "action2": "2026-10-23",
+      "checkpoint": "2026-10-23",
+      "term_end": "2027-01-15",
+      "spring": "2027-03-15",
+      "summer": "2027-06-20",
+      "recommend": "2027-09-15",
+      "graduate": "2028-06-30",
+      "entry": "2028-09-01",
+      "winter": "2026-12-10"
+    }
+  },
+  "deadlines": [
+    {
+      "label": "个人复核点",
+      "date": "2026-10-23",
+      "kind": "personal_checkpoint"
+    },
+    {
+      "label": "当届学校或职位具体截止",
+      "unknown_reason": "未选定项目或具体公告尚未取得，不用往年日期替代"
+    }
+  ],
+  "report_meta": {
+    "title": "读研路径决策报告",
+    "subtitle": "江苏 · 交通工程本科 · {{k:/target_year}} 年入学目标",
+    "person": "小明（模拟）",
+    "edition": "读研版",
+    "date": "{{k:/context/as_of}}",
+    "id": "2028-YJ-S02",
+    "stage": "读研版 · 大三上",
+    "region": "江苏",
+    "data_asof": "{{k:/context/as_of}}",
+    "conclusion": "保留推免和考研，先统一排名口径；不为加分透支主课。"
+  },
+  "budget": {
+    "annual_limit": 32000,
+    "monthly_living_assumption": 1500
+  },
+  "calculation_plan": {
+    "engine": "registered_operations",
+    "inputs": {},
+    "operations": [
+      {
+        "output": "known_living",
+        "algorithm": "product",
+        "inputs": [
+          "{{p:/fields/12/value/living}}",
+          "{{e:E020#/value}}"
+        ],
+        "label": "全年生活费估计",
+        "rounding": 0
+      },
+      {
+        "output": "higher_living",
+        "algorithm": "product",
+        "inputs": [
+          "{{p:/fields/12/value/higher_living}}",
+          "{{e:E020#/value}}"
+        ],
+        "label": "异地生活费压力",
+        "rounding": 0
+      },
+      {
+        "output": "after_reserve",
+        "algorithm": "difference",
+        "inputs": [
+          "{{p:/fields/12/value/annual}}",
+          "{{p:/fields/12/value/reserve}}"
+        ],
+        "label": "扣除拟留应急后的预算",
+        "rounding": 0
+      },
+      {
+        "output": "nonliving_ceiling",
+        "algorithm": "difference",
+        "inputs": [
+          "{{p:/fields/12/value/annual}}",
+          "{{c:/known_living}}"
+        ],
+        "label": "未留应急时其他费用上限",
+        "rounding": 0
+      }
+    ],
+    "scenarios": [
+      {
+        "baseline_output": "nonliving_ceiling",
+        "changed_inputs": {
+          "{{c:/known_living}}": "{{c:/higher_living}}"
+        },
+        "why": "生活成本提高，其他费用可用空间减少",
+        "output_ref": "{{c:/higher_living_ceiling}}"
+      },
+      {
+        "baseline_output": "nonliving_ceiling",
+        "changed_inputs": {
+          "{{p:/fields/12/value/annual}}": "{{c:/after_reserve}}"
+        },
+        "why": "按本人意愿预留应急金再看费用承受空间",
+        "output_ref": "{{c:/reserve_ceiling}}"
+      }
+    ]
+  }
+}

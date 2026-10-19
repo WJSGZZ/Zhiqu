@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "status": "awaiting_independent_review",
+  "status_label": "试跑自评通过、等待独立审核",
+  "independent": false,
+  "reviewer": null,
+  "date": null,
+  "rubric": {
+    "items": []
+  },
+  "pitfalls": [],
+  "sampled_sources": [],
+  "self_assessment": {
+    "reviewer": "本制作会话",
+    "date": "2026-10-19",
+    "status": "complete",
+    "rubric": {
+      "items": [
+        {
+          "id": "clarity",
+          "score": 2,
+          "reason": "摘要明确主线、备选、关键条件和个人复核点；未以未知资格代替否定。"
+        },
+        {
+          "id": "traceability",
+          "score": 1,
+          "reason": "已用规则附官方原句与适用届别；具体项目或职位、收费和部分细目尚未取到，保留缺口。"
+        },
+        {
+          "id": "reasoning",
+          "score": 2,
+          "reason": "逐候选写支持、反证、代价与改判条件，人物意愿和现实限制决定投入顺序。"
+        },
+        {
+          "id": "consistency",
+          "score": 2,
+          "reason": "所有预算与现金结果由登记输入复算；报告数字按证据、画像或计算引用，情景分开。"
+        },
+        {
+          "id": "timeliness",
+          "score": 2,
+          "reason": "取文及复核时间在登记范围内；旧年只作调查参照，未来日历未用旧届硬套。"
+        },
+        {
+          "id": "personalization",
+          "score": 2,
+          "reason": "排名口径、家庭与本人偏好、可用时间及资金确实改变建议，没有编权重。"
+        },
+        {
+          "id": "actionability",
+          "score": 1,
+          "reason": "下一步和日期明确，但部分候选仍只是调查对象，需原件后才可进入具体报名或申请。"
+        },
+        {
+          "id": "boundaries",
+          "score": 2,
+          "reason": "无个人上岸概率、保证结果或代报名；本次为制作会话自评，不是独立批准。"
+        },
+        {
+          "id": "summary_access",
+          "score": 2,
+          "reason": "摘要能看懂为什么保留或暂停路线、当前边界及下一步，不必先学术语。"
+        },
+        {
+          "id": "layout",
+          "score": 1,
+          "reason": "版面门禁通过且逐页看图；无挤压断图，少量表格自然跨页，保留待独立视觉复核。"
+        }
+      ],
+      "total": 17
+    },
+    "pitfalls": [
+      {
+        "item": "没查到写成不存在",
+        "result": "pass",
+        "note": "候选、规则与报告第6节均保留pending/待核；当届项目或岗位未取到不写没有机会。"
+      },
+      {
+        "item": "群体数字当个人概率",
+        "result": "pass",
+        "note": "读研第6节拒绝从旧年名额和分数推个人概率；求职第5、11节只说同职位同阶段竞争口径，不算个人录用率。"
+      },
+      {
+        "item": "经验帖数字做决定",
+        "result": "pass",
+        "note": "数字只用本人登记、官方原句及复算；教师提到的历史名额回学院原文核对，未采用经验帖。"
+      },
+      {
+        "item": "按编号引用问卷",
+        "result": "pass",
+        "note": "画像和核查来源均按问卷节名，不依赖问卷节次；报告节号仅定位当前报告。"
+      },
+      {
+        "item": "同一事实写两处",
+        "result": "pass",
+        "note": "profile.txt由人物库提取，报告数值经K/P/E/C引用；旧年名额、实际人数与当届承诺未混用。"
+      },
+      {
+        "item": "会过期的事实",
+        "result": "pass",
+        "note": "evidence/rules记录取文与复核期限；旧届规则明示年度，当届未知不套用旧日期。"
+      },
+      {
+        "item": "八字越界",
+        "result": "pass",
+        "note": "人物未提供出生信息，没有生成排盘或以传统视角排除路径。"
+      },
+      {
+        "item": "委派判断类任务",
+        "result": "pass",
+        "note": "画像、取证、判断、出稿与本次自评由同一制作会话完成，尚未另会话独立审核。"
+      },
+      {
+        "item": "取页摘要当原文",
+        "result": "pass",
+        "note": "官方规则从curl正文或正常浏览器可见原文摘录；自评抽读记录在同文件，未取到的没有记为核实通过。"
+      }
+    ],
+    "sampled_sources": [
+      {
+        "id": "E006",
+        "source_url": "https://jttm.ntu.edu.cn/2026/0906/c5262a298205/page.htm",
+        "matches": true,
+        "original_sha256": "15d4fb8b5f2480e6010672853221c6ae115381201101172326528365b0195f19",
+        "excerpt": "学生在某一方面中有多项加分情况时，原则上只取一项，",
+        "method": "本次取到的官方原文/浏览器逐字取文回执复读；不是搜索摘要"
+      },
+      {
+        "id": "E002",
+        "source_url": "https://yz.chsi.com.cn/tm/tjbf/detail?schCode=10304&zsgsId=3545859828",
+        "matches": true,
+        "original_sha256": "6532cd901fa172ffd31b151a20965a196135be2547b57347b14f85f6bffc44de",
+        "excerpt": "前三学年（五年制前四学年）本科阶段学业综合成绩排名须位于本专业本年级前 1/3 。",
+        "method": "本次取到的官方原文/浏览器逐字取文回执复读；不是搜索摘要"
+      },
+      {
+        "id": "E003",
+        "source_url": "https://yz.chsi.com.cn/tm/tjbf/detail?schCode=10304&zsgsId=3545859828",
+        "matches": true,
+        "original_sha256": "6532cd901fa172ffd31b151a20965a196135be2547b57347b14f85f6bffc44de",
+        "excerpt": "大学英语四级考试成绩达到 425 分及以上（外语类专业要求 TEM-4 成绩 60 分及以上）。",
+        "method": "本次取到的官方原文/浏览器逐字取文回执复读；不是搜索摘要"
+      },
+      {
+        "id": "E005",
+        "source_url": "https://jttm.ntu.edu.cn/2026/0906/c5262a298205/page.htm",
+        "matches": true,
+        "original_sha256": "15d4fb8b5f2480e6010672853221c6ae115381201101172326528365b0195f19",
+        "excerpt": "3. 交通工程专业： 6 个",
+        "method": "本次取到的官方原文/浏览器逐字取文回执复读；不是搜索摘要"
+      },
+      {
+        "id": "E004",
+        "source_url": "https://yz.chsi.com.cn/tm/tjbf/detail?schCode=10304&zsgsId=3545859828",
+        "matches": true,
+        "original_sha256": "6532cd901fa172ffd31b151a20965a196135be2547b57347b14f85f6bffc44de",
+        "excerpt": "已被接收为推免生的学生，不得再报名参加当年硕士、博士研究生考试招生，否则取消其推免录取资格；不得再申请出国留学、参加就业派遣等，否则由学生自行承担违约责任。",
+        "method": "本次取到的官方原文/浏览器逐字取文回执复读；不是搜索摘要"
+      }
+    ],
+    "limitations": [
+      "操控者尚未填写确认，未独立审核，不符合真实交付门槛。",
+      "具体项目或职位条件尚待核；候选和未来日历不是承诺。"
+    ]
+  },
+  "snapshot": {
+    "case.json": "8603ad6afcab1aaa8bc26ec042fad14882ea4431f1387198ac21a526da4b0822",
+    "profile_parse.json": "ba3a2d29770f06f71b171f19730753ec8cc05f08285be1656a51968a014a3526",
+    "directions.json": "e11eb75bac9a1378195f15ef805daf0ffe3d0a4c2306d317d6d9944265b8008b",
+    "rules_check.json": "248a80156349f8bee1d5de049d1153408fc4548108e5895abb5bba17d5c7cb03",
+    "candidates.json": "1f9f3703275d1799b96d638988fd5c11a27d5f2c4ef9209db44868be66817183",
+    "evidence.json": "a5f3a6fd7928b3f9c8507d7919f59e6a0fd3c6e2f7df4fdedb63638e5e8c44f4",
+    "calculations.json": "00e5087c418c579371b17558494a9c4c1f865b0b051ef63fc1a3c9a51a89cd87",
+    "judgment.json": "38eed4d2e7e0e329c1beb9d7b029069ef4907552ad2ae15cf9019bd5bc4f9add",
+    "narrative.json": "cdaf672fa9a3877e1e9b218b516cf5eee06ef7887fddb6a4d1367480e15222a4",
+    "profile.txt": "42b5ea0bf1077f942533d2d14ec5b48d04f8b7085f7a8452d3d9d33f34b1d8f4",
+    "report.md": "5a822a3b5cceeb541ade0af4c833e696abd8ec4cffb3fcfd5fa3e72db9e115c6",
+    "report.html": "3586b80f1c74f9289f5f0c4ecb2a64cbe96dc955d1615179299d9d6b04f0572e",
+    "report.pdf": "a72e80c84bc59889d6a0e4dd44cd38ccfab2e6ede6465b4c2973a2b1fafa4585",
+    "report_trace.json": "802fe6dbd6dba25782e7d621ef58c9d825c5343da232569f8cff4ae61d1432f3",
+    "operator_check.md": "9e7daaa95ef3172f536d89bc5facfde196fa62f3ed2d06a4cb02cca193105c69"
+  },
+  "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。"
+}

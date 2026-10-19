@@ -62,6 +62,12 @@ def dependencies_for(case):
         for path,value in walk(case.data['calculations.json']):
             if isinstance(value,(int,float)) and not isinstance(value,bool):deps['c:'+path]=list(plan.get('inputs',{}).values())
     else:
+        for op in plan.get('operations',[]):deps['c:/'+op['output']]=op['inputs']
+        from planning_workflow import REF
+        for scenario in plan.get('scenarios',[]):
+            op=next((x for x in plan.get('operations',[]) if x['output']==scenario['baseline_output']),None)
+            m=REF.fullmatch(scenario['output_ref'])
+            if op and m:deps['c:'+m[2]]=[scenario['changed_inputs'].get(v,v) for v in op['inputs']]
         for path,refs in plan.get('dependencies',{}).items():deps['c:'+path]=refs
     return deps
 
@@ -80,14 +86,51 @@ def legacy_evidence(root, rep=None):
     return items
 
 
+def readable_locator(item):
+    """Use the factual label when a legacy locator contains implementation keys."""
+    locator=item.get('original_locator') or item.get('source',{}).get('locator','')
+    if re.search(r'[A-Za-z]{3,}[-_][A-Za-z0-9_-]+|prestart|preend|examstart|examend|register_|#/|/fields|/budget|计算输入：/',locator):
+        locator=item.get('claim','原文对应条款')
+    replacements={'masters-2027-http':'教育部硕士招生规定','scut-2027':'华工招生章程','gdut-2027':'广工招生简章',
+                  'prestart':'预报名开始日','preend':'预报名截止日','examstart':'初试首日','examend':'初试末日',
+                  'register_start':'网报开始日','register_end':'网报截止日'}
+    for key,value in replacements.items():locator=locator.replace(key,value)
+    if re.search(r'[A-Za-z]{3,}[-_][A-Za-z0-9_-]+|#/|/fields|/budget',locator):
+        locator='原文中“'+str(item.get('value') if item.get('value') is not None else '适用对象与资格条件')+'”所在条款或表行'
+    return locator
+
+
+def sync_checklist_tool_snapshot(root):
+    """Refresh only checklist-tool provenance after unchanged inputs/PDFs are proven.
+
+    A checklist wording edit does not render the customer report. Other tool or
+    input changes still require the normal report generation gate.
+    """
+    root=Path(root);path=root/'report_trace.json'
+    if not path.exists():return False
+    trace=read(path);current=Path(__file__)
+    tools=trace.get('tool_sha256',{})
+    if not tools or 'operator_check.py' not in tools:return False
+    expected={**trace.get('source_sha256',{}),**trace.get('artifacts',{})}
+    if not expected or any(Path(f).name!=f or not (root/f).is_file() or sha(root/f)!=h for f,h in expected.items()):return False
+    if any(not current.with_name(f).is_file() or sha(current.with_name(f))!=h for f,h in tools.items() if f!='operator_check.py'):return False
+    tools['operator_check.py']=sha(current)
+    from planning_workflow import dump
+    dump(path,trace);return True
+
+
 def report_locations(case):
     """Return human-readable section/table positions for each provenance reference."""
     from planning_workflow import REF, walk
     locations={}
-    for sid, entries in case.nodes().items():
+    for sid, entries in sorted(case.nodes().items()):
+        heading=None
         for block_index,entry in enumerate(entries):
             node=case.get_node(entry['ref']);content=node.get('content',{})
-            labels={'analysis':'正文第 '+str(block_index+1)+' 块','kpis':'摘要数字卡','details':'比较表','actions':'接下来三件事','lead':'节首结论','core_points':'核心结论','profile':'本人画像','questions':'待核问题','assumptions':'费用与假设表'}
+            if node['type']=='analysis' and content.get('kind')=='heading':heading=case.expand(content.get('text',''))
+            first=case.expand(content.get('text',content.get('title','')))
+            first=re.sub(r'[*`\[\]]','',first).split('。')[0][:18]
+            labels={'analysis':heading or '段落“'+first+'…”','kpis':'摘要数字卡','details':'比较表','actions':'接下来三件事','lead':'节首结论','core_points':'核心结论','profile':'本人画像','questions':'待核问题','assumptions':'费用与假设表','checkpoint':'下次检查点','matrix':'路径比较','directions':'方向判断','candidates':'候选清单','score_ranges':'分数区间','timeline':'时间线','routes':'行动路线','budget_chart':'预算比较','risks':'风险与备选','offers':'录用条件比较','annual_income':'年度收入','hourly_income':'每小时收入','monthly_balance':'月结余','evidence_levels':'证据等级','terms':'术语说明','sources':'来源尾注','disclaimer':'声明'}
             title=content.get('title') or content.get('heading') or labels.get(entry['slot'],entry['slot'])
             for path,value in walk(content):
                 if not isinstance(value,str):continue
@@ -155,11 +198,27 @@ def checklist_groups(root, rep=None):
             extra=[e['id'] for e in c.evidence.values() if e['source_group']==11 and e.get('unit')=='元/年']
         ids=list(extra)
         for path in paths:
-            binding=c.case['calculation_plan']['inputs'].get(path,'');m=REF.fullmatch(binding)
+            binding=c.case['calculation_plan'].get('inputs',{}).get(path,'');m=REF.fullmatch(binding)
             if m and m[1]=='e':ids.append(m[2].split('#')[0])
         for eid in ids:
             target=loc.setdefault('e:'+eid+'#/value',[])
             target.extend(p for p in places if p not in target)
+    # Generic calculations follow their own operation inputs, rather than demo-specific keys.
+    dependencies=dependencies_for(c)
+    def input_evidence(key,seen=None):
+        seen=set() if seen is None else seen
+        if key in seen:return set()
+        seen.add(key);result=set()
+        for value in dependencies.get(key,[]):
+            for m in REF.finditer(value):
+                if m[1]=='e':result.add(m[2].split('#')[0])
+                elif m[1]=='c':result.update(input_evidence('c:'+m[2],seen))
+        return result
+    for key,places in list(loc.items()):
+        if key.startswith('c:') and c.case.get('calculation_plan',{}).get('engine')!='legacy_demo':
+            for eid in input_evidence(key):
+                target=loc.setdefault('e:'+eid+'#/value',[])
+                target.extend(p for p in places if p not in target)
     reasons_by={e['id']:r for e,r in selected_evidence(list(c.evidence.values()),c.case['context']['as_of'],c.data['judgment.json'],c.limits['operator_due_days'],dependencies_for(c))}
     for e in c.evidence.values():
         if e.get('source_group')==1:continue
@@ -169,7 +228,7 @@ def checklist_groups(root, rep=None):
         places=loc.get('e:'+e['id']+'#/value',[])
         if e.get('value') is not None:
             text=e['claim']+' = '+str(e['value'])+((' '+e['unit']) if e.get('unit') else '')
-            if not places:places=['计算输入；case.json 的 calculation_plan.inputs']
+            if not places:places=['原文条件核对（报告未单独展示该值）']
             group['checks'].append(text+' → '+compact_places(places))
         elif e.get('status')=='unretrieved':group['checks'].append('未取到：'+e.get('gap','原文不可用')+' → 候选清单与相关结论的资格缺口')
     def source_group_for_calc(path):
@@ -190,10 +249,10 @@ def checklist_groups(root, rep=None):
     for g in groups.values():
         if not g['checks']:
             # Qualitative rules retain precise original-file locations instead of repeating the report sentence.
-            e=g['items'][0];g['checks']=[e.get('original_locator') or e['source']['locator']]
+            e=g['items'][0];g['checks']=[readable_locator(e)]
         # Include a compact location for qualitative source files too.
         sections=[]
-        for sid,entries in c.nodes().items():
+        for sid,entries in sorted(c.nodes().items()):
             if any(any(eid in {e['id'] for e in g['items']} for eid in c.get_node(entry['ref']).get('evidence_refs',[])) for entry in entries):sections.append(str(int(sid)))
         g['report_sections']='、'.join(sections)
     profile=[]
@@ -206,6 +265,9 @@ def checklist_groups(root, rep=None):
     for key,spec in c.case['calculation_plan'].get('display_inputs',{}).items():
         if spec['role']=='declared_scenario':
             assumptions.append(spec['description']+' = '+str(pointer(c.case,spec['case_pointer']))+' → '+(compact_places(loc.get('c:/report_parameters/'+key,[])) or '计算输入与敏感性情景'))
+    for op in c.case['calculation_plan'].get('operations',[]):
+        label=op.get('label','费用或现金流核算')
+        assumptions.append(label+' = '+c.format(c.data['calculations.json'][op['output']])+' → '+(compact_places(loc.get('c:/'+op['output'],[])) or '预算与方法说明'))
     scenario=dict(id='SCENARIO',title='确认条件情景与计算口径',source={'locator':'case.json 的 budget / hypothetical_followup / additional_scenarios；calculations.json'},items={'inputs':c.case['calculation_plan'],'outputs':c.data['calculations.json']},reasons=['假设与加工不等于本人事实'],checks=assumptions,scope='确认前提、单位、取整和压力测试；复算通过不等于现实中已取得该结果')
     ordered=sorted(groups.values(),key=lambda g:('影响主结论' not in g['reasons'],'原文未取到' not in g['reasons'],g['id']))
     return ordered+[personal,scenario],c.case['context']['as_of'],c.case
@@ -220,14 +282,17 @@ def generate(root, rep=None, output=None):
     for g in groups:
         marker={'id':g['id'],'fingerprint':fingerprint(g)};out.append('<!-- operator-item '+json.dumps(marker,ensure_ascii=False)+' -->')
         old=previous.get((g['id'],marker['fingerprint']))
-        if old:out.extend([old.rstrip(),'']);continue
-        out.extend([f'- [ ] {g["id"]}｜{g["title"]}｜'+ ' / '.join(g['reasons']), '  核什么：'])
+        if old and not re.search(r'正文第\s*\d+\s*块|(?m:^\s*定位：[^\n]*(?:[A-Za-z]{3,}[-_][A-Za-z0-9_-]+|prestart|preend|examstart|examend|#\/|\.json\.))',old):
+            out.extend([old.rstrip(),'']);continue
+        out.extend([f'- [{"x" if old and "- [x]" in old.lower() else " "}] {g["id"]}｜{g["title"]}｜'+ ' / '.join(g['reasons']), '  核什么：'])
         out.extend('  - '+text for text in dict.fromkeys(g['checks']))
         source=g['source'];out.extend(['  适用范围：'+g.get('scope','只核本报告对应省份、年份、计划和对象；不外推')+'。',
             '  去哪里核：'+(source.get('url') or source.get('locator','原画像')),
-            '  定位：'+('报告第 '+g['report_sections']+' 节；' if g.get('report_sections') else '')+('；'.join(dict.fromkeys(e.get('original_locator') or '相关表行/条款' for e in g['items'] if e.get('value') is not None or e.get('status')=='unretrieved'))[:600] or '原文件标题、适用对象及报告所引条款')+'。' if isinstance(g['items'],list) and g['items'] and isinstance(g['items'][0],dict) and 'source' in g['items'][0] else '  定位：按上列登记字段逐项核对。',
-            '  核完填：核查人：___；核查日期：___；结果（确认/不符/仍未知）：___；原文依据与范围：___；对建议的处理：___。',''])
-    destination=Path(output) if output else path;destination.write_text('\n'.join(out),encoding='utf-8');return destination
+            '  定位：'+('报告第 '+g['report_sections']+' 节；' if g.get('report_sections') else '')+('；'.join(dict.fromkeys(readable_locator(e) or '相关表行/条款' for e in g['items'] if e.get('value') is not None or e.get('status')=='unretrieved'))[:600] or '原文件标题、适用对象及报告所引条款')+'。' if isinstance(g['items'],list) and g['items'] and isinstance(g['items'][0],dict) and 'source' in g['items'][0] else '  定位：按上列登记字段逐项核对。',
+            next((line for line in (old or '').splitlines() if line.strip().startswith('核完填：')), '  核完填：核查人：___；核查日期：___；结果（确认/不符/仍未知）：___；原文依据与范围：___；对建议的处理：___。'),''])
+    destination=Path(output) if output else path;destination.write_text('\n'.join(out),encoding='utf-8')
+    if output is None:sync_checklist_tool_snapshot(root)
+    return destination
 
 
 def validate_operator(root,require_completed=False):

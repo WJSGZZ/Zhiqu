@@ -1,0 +1,964 @@
+{
+  "schema_version": 1,
+  "presentation": {
+    "02": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/02/lead"
+      },
+      {
+        "slot": "profile",
+        "ref": "profile_parse.json#/report_blocks/02_profile_1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/02/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/02/analysis/1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/02/analysis/2"
+      },
+      {
+        "slot": "details",
+        "ref": "profile_parse.json#/report_blocks/02_details_20"
+      }
+    ],
+    "03": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/03/lead"
+      },
+      {
+        "slot": "questions",
+        "ref": "directions.json#/report_blocks/03_questions_2"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/03/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/03/analysis/1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/03/analysis/2"
+      }
+    ],
+    "04": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/04/lead"
+      },
+      {
+        "slot": "directions",
+        "ref": "directions.json#/report_blocks/04_directions_3"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/04/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/04/analysis/1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/04/analysis/2"
+      },
+      {
+        "slot": "details",
+        "ref": "profile_parse.json#/report_blocks/04_details_29"
+      }
+    ],
+    "11": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/11/lead"
+      },
+      {
+        "slot": "questions",
+        "ref": "judgment.json#/report_blocks/11_questions_4"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/11/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/11/analysis/1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/11/analysis/2"
+      }
+    ],
+    "12": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/12/lead"
+      },
+      {
+        "slot": "assumptions",
+        "ref": "judgment.json#/report_blocks/12_assumptions_73"
+      },
+      {
+        "slot": "evidence_levels",
+        "ref": "evidence.json#/report_blocks/12_evidence_levels_6"
+      },
+      {
+        "slot": "terms",
+        "ref": "judgment.json#/report_blocks/12_terms_5"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/12/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/12/analysis/1"
+      },
+      {
+        "slot": "sources",
+        "ref": "evidence.json#/report_blocks/12_sources_7"
+      },
+      {
+        "slot": "disclaimer",
+        "ref": "narrative.json#/sections/12/disclaimer"
+      }
+    ],
+    "01": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/01/lead"
+      },
+      {
+        "slot": "kpis",
+        "ref": "judgment.json#/report_blocks/01_kpis_12"
+      },
+      {
+        "slot": "core_points",
+        "ref": "narrative.json#/sections/01/core_points"
+      },
+      {
+        "slot": "actions",
+        "ref": "judgment.json#/report_blocks/01_actions_14"
+      },
+      {
+        "slot": "checkpoint",
+        "ref": "judgment.json#/report_blocks/01_checkpoint_15"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/01/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/01/analysis/1"
+      }
+    ],
+    "05": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/05/lead"
+      },
+      {
+        "slot": "matrix",
+        "ref": "judgment.json#/report_blocks/05_matrix_34"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/05/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/05/analysis/1"
+      },
+      {
+        "slot": "unknown_explanation",
+        "ref": "narrative.json#/sections/05/unknown_explanation"
+      }
+    ],
+    "06": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/06/lead"
+      },
+      {
+        "slot": "candidates",
+        "ref": "candidates.json#/report_blocks/06_candidates_40"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/06/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/06/analysis/1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/06/analysis/2"
+      }
+    ],
+    "07": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/07/lead"
+      },
+      {
+        "slot": "timeline",
+        "ref": "judgment.json#/report_blocks/07_timeline_45"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/07/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/07/analysis/1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/07/analysis/2"
+      }
+    ],
+    "08": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/08/lead"
+      },
+      {
+        "slot": "routes",
+        "ref": "judgment.json#/report_blocks/08_routes_50"
+      },
+      {
+        "slot": "routes",
+        "ref": "judgment.json#/report_blocks/08_routes_51"
+      },
+      {
+        "slot": "routes",
+        "ref": "judgment.json#/report_blocks/08_routes_52"
+      },
+      {
+        "slot": "routes",
+        "ref": "judgment.json#/report_blocks/08_routes_53"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/08/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/08/analysis/1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/08/analysis/2"
+      }
+    ],
+    "09": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/09/lead"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/09/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/09/analysis/1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/09/analysis/2"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/09/analysis/3"
+      },
+      {
+        "slot": "details",
+        "ref": "profile_parse.json#/report_blocks/09_details_59"
+      }
+    ],
+    "10": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/10/lead"
+      },
+      {
+        "slot": "risks",
+        "ref": "judgment.json#/report_blocks/10_risks_64"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/10/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/10/analysis/1"
+      }
+    ]
+  },
+  "report_blocks": {
+    "11_questions_4": {
+      "type": "question_table",
+      "content": {
+        "columns": [
+          "要问什么",
+          "去哪里确认",
+          "核完怎样改变决定"
+        ],
+        "rows": [
+          [
+            "最关键资格与可报范围",
+            "本人登记材料与当届正式公告；有疑问用公开咨询渠道",
+            "有明确不符则排除具体项；没有答复保持待核"
+          ],
+          [
+            "实际学习或工作内容",
+            "培养方案、正式岗位职责；相关人员只补任务线索",
+            "愿意长期做且能力可补才进入候选，不凭名称判断"
+          ],
+          [
+            "费用和家庭支持",
+            "正式收费表或书面薪酬条件；与家庭确认支持边界",
+            "不能持续承担就调学校、地点或时间，不预支未确定资助"
+          ],
+          [
+            "冲突节点与退出条件",
+            "官方确认安排、单位通知和本人课程责任",
+            "发生冲突时保主线，记录放弃什么，避免默认全部兼得"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E001"
+      ]
+    },
+    "12_terms_5": {
+      "type": "term_table",
+      "content": {
+        "columns": [
+          "术语",
+          "本报告中的意思"
+        ],
+        "rows": [
+          [
+            "硬条件",
+            "决定能否进入正式申请的要求，不等于竞争实力"
+          ],
+          [
+            "待核",
+            "关键原文或本人材料未取得，不能写成没有机会"
+          ],
+          [
+            "条件情景",
+            "只改变明确输入后的计算，不是现实已发生"
+          ],
+          [
+            "主线与备选",
+            "先后投入顺序，不是结果保证"
+          ],
+          [
+            "证据等级",
+            "官方规则、他人经验与本人偏好承担不同作用，不相互替代"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E001"
+      ]
+    },
+    "01_kpis_12": {
+      "type": "kpi",
+      "content": {
+        "rows": [
+          [
+            "主线",
+            "企业技术岗位",
+            "测试、调试与技术支持，逐项核职责"
+          ],
+          [
+            "可动求职现金",
+            "{{c:/spendable|comma}} 元",
+            "先留本人希望保留的应急金"
+          ],
+          [
+            "静态支撑时间",
+            "{{c:/buffer_months|1f}} 个月",
+            "假定未就业、支出不变；未计搬家费"
+          ],
+          [
+            "最近个人复核",
+            "{{k:/context/personal_dates/checkpoint|md}}",
+            "先于国考申请截止完成取舍"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E001"
+      ]
+    },
+    "01_actions_14": {
+      "type": "dated_actions",
+      "content": {
+        "items": [
+          {
+            "text": "列少量愿意做的企业职责，逐条对照已有任务与缺口；把税前期望与到手底线分开。",
+            "date": "{{k:/context/personal_dates/action0}}"
+          },
+          {
+            "text": "用国考具体职位核专业、学历学位、应届和基层经历；若没有明确可报且愿去的职位，不因怕错过而报名。",
+            "date": "{{k:/context/personal_dates/action1}}"
+          },
+          {
+            "text": "与家庭确认短期支持和应急金边界；复核电网单位公告窗口，确定主线及可承受的考试准备。",
+            "date": "{{k:/context/personal_dates/action2}}"
+          }
+        ]
+      },
+      "evidence_refs": [
+        "E001"
+      ]
+    },
+    "01_checkpoint_15": {
+      "type": "checkpoint",
+      "content": {
+        "text": "下一个个人检查点：{{k:/context/personal_dates/checkpoint|ymd_cn}}。国考注册认证另有 {{e:E005#/value|md_hm}} 截止，提交申请为 {{e:E003#/value|md_hm}} 截止；不等到最后才处理资格。只有存在本人愿做且能核资格的职位，才讨论是否投入。[2]"
+      },
+      "evidence_refs": [
+        "E001",
+        "E003",
+        "E005"
+      ]
+    },
+    "05_matrix_34": {
+      "type": "comparison_matrix",
+      "content": {
+        "title": "企业、电网与公职的条件比较",
+        "caption": "✓是已表达的意愿或已有的入口信息，△是待核；资格未知不当没有机会，单位身份不直接等于稳定收入。",
+        "columns": [
+          "资格",
+          "准备与时间",
+          "现金与收入",
+          "本人接受度"
+        ],
+        "rows": [
+          [
+            "企业技术岗",
+            "△具体职位未取得",
+            "△按岗位截止；技术任务优先",
+            "△无真实报价或首薪日期",
+            "✓本人主偏好"
+          ],
+          [
+            "电网浙江单位",
+            "△等省公司具体条件",
+            "△总部有计划，单位另核",
+            "△薪酬与合同未取得",
+            "✓不排斥，先看任务"
+          ],
+          [
+            "国考",
+            "△需核一个实际职位",
+            "△公共科目另需准备",
+            "△等待结果需现金支持",
+            "△未验证实际工作意愿"
+          ],
+          [
+            "浙江省考",
+            "△当届公告与职位未取得",
+            "△不套用上一年度时间",
+            "△备考与等待成本待核",
+            "△不因父母期待默认接受"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E001",
+        "E002",
+        "E006",
+        "E008",
+        "E010",
+        "E011",
+        "E012"
+      ]
+    },
+    "07_timeline_45": {
+      "type": "timeline",
+      "content": {
+        "title": "到毕业的关键窗口与个人复核",
+        "caption": "琥珀为个人复核点；国考日期为已核公告，电网笔试为暂定安排。省考和具体岗位期限仍待核，不作统一日期。",
+        "rows": [
+          [
+            "{{k:/context/personal_dates/checkpoint|ym}}",
+            "核职位与本人取舍",
+            "{{k:/context/personal_dates/checkpoint|md_short}} 个人复核",
+            "检查点"
+          ],
+          [
+            "{{e:E003#/value|ym}}",
+            "国考提交申请",
+            "{{e:E003#/value|md_hm}} 官方截止",
+            ""
+          ],
+          [
+            "{{e:E004#/value|ym}}",
+            "国考公共科目",
+            "{{e:E004#/value|md_short}} 公告日期",
+            ""
+          ],
+          [
+            "{{e:E007#/value|ym}}",
+            "电网首批笔试",
+            "{{e:E007#/value|md_short}} 暂定",
+            ""
+          ],
+          [
+            "{{k:/context/personal_dates/spring|ym}}",
+            "复核招聘与毕业安排",
+            "各岗位独立截止",
+            "检查点"
+          ],
+          [
+            "{{k:/context/personal_dates/graduate|ym}}",
+            "比较正式录用条件",
+            "本人收入时限前核首薪",
+            "检查点"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E001",
+        "E003",
+        "E004",
+        "E006",
+        "E007"
+      ]
+    },
+    "08_routes_50": {
+      "type": "route_cards",
+      "content": {
+        "title": "企业技术岗位：先做本人主线",
+        "门槛": "学历专业、真实职责和本人任务证据相符；独立责任、指导与地点逐项核。",
+        "时间窗口": "按每份正式岗位截止；收到通知后核确认期限、入职与首薪。",
+        "投入": "以已有技术基础补岗位差距，不伪造经历；合同与薪资未取到。",
+        "切换条件": "岗位实为长期纯销售、地点或职责不接受时退出；无反馈则先改目标匹配而非盲目增量。"
+      },
+      "evidence_refs": [
+        "E001",
+        "E012"
+      ]
+    },
+    "08_routes_51": {
+      "type": "route_cards",
+      "content": {
+        "title": "电网：省公司公告决定能否进入",
+        "门槛": "具体浙江单位要求待核；不能仅凭电气本科、预计毕业或总部公告认定可报。",
+        "时间窗口": "总部首批公告计划 {{e:E006#/value}}，首批笔试暂定 {{e:E007#/value|md}}；单位截止另核。",
+        "投入": "按当届电工类大纲和单位安排准备笔试、面试；合同性质、单位与薪酬仍待书面确认。",
+        "切换条件": "如硬条件不符只退出该单位项目；若本人不接受任务或地点，不能因父母偏好继续投入。"
+      },
+      "evidence_refs": [
+        "E001",
+        "E006",
+        "E007",
+        "E008",
+        "E009",
+        "E010"
+      ]
+    },
+    "08_routes_52": {
+      "type": "route_cards",
+      "content": {
+        "title": "国考：具体职位核完才讨论报名",
+        "门槛": "学历学位、专业、应届、经历、政治面貌及其他条件逐一对原文；无职位就不认证能报。",
+        "时间窗口": "注册认证截止 {{e:E005#/value|md_hm}}，申请截止 {{e:E003#/value|md_hm}}；公共科目 {{e:E004#/value|md}}。",
+        "投入": "通用考试主要是行测、申论；特殊职位专业考试另核。录用性质按正式公告，非企业劳动报价。",
+        "切换条件": "无本人愿做且资格可核的职位，或新增准备挤压主线，就暂停；竞争比不作个人概率。"
+      },
+      "evidence_refs": [
+        "E001",
+        "E002",
+        "E003",
+        "E004",
+        "E005"
+      ]
+    },
+    "08_routes_53": {
+      "type": "route_cards",
+      "content": {
+        "title": "浙江省考：保持条件入口",
+        "门槛": "适用本届公告和具体职位条件未取得，不用旧年规则写可报。",
+        "时间窗口": "当届报名、笔试与面试安排待正式公告核，不把往年月份当硬期限。",
+        "投入": "先确认是否愿意做相关工作及是否承担新增考试准备，再按公告核科目；合同或录用关系不凭印象写。",
+        "切换条件": "若本人没有具体职位意愿，先不新增备考；以后有适用职位与资源再重评。"
+      },
+      "evidence_refs": [
+        "E001",
+        "E011"
+      ]
+    },
+    "10_risks_64": {
+      "type": "scenario_table",
+      "content": {
+        "columns": [
+          "触发条件",
+          "应对",
+          "再看什么"
+        ],
+        "rows": [
+          [
+            "电网专业或获证条件不符",
+            "退出具体单位项目，保企业主线",
+            "其他正式岗位是否另有条件；不推成全行业没机会"
+          ],
+          [
+            "公职没有愿做且符合条件的职位",
+            "不为赶窗口报一个不愿做的岗位",
+            "真实职责、报名资格与准备投入"
+          ],
+          [
+            "企业主要是销售或不接受的现场安排",
+            "按本人边界排除或重谈条件",
+            "职责、地点与考核，不只看职位名"
+          ],
+          [
+            "现金或支持不足以等待",
+            "缩短等待、调整生活地点与选择范围",
+            "搬家费、首薪日、实际支出与可兑现支持"
+          ],
+          [
+            "毕业或课程与准备冲突",
+            "先保毕业责任，暂停低优先考试投入",
+            "本人总时间和已有反馈"
+          ],
+          [
+            "收到真实 offer",
+            "按合同、到手收入、工时与生活口径再算",
+            "接受期限、合同主体、首薪和退出责任"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E001"
+      ]
+    },
+    "12_assumptions_73": {
+      "type": "assumption_table",
+      "content": {
+        "columns": [
+          "输入或运算",
+          "本案取值",
+          "适用边界"
+        ],
+        "rows": [
+          [
+            "住房与其他支出",
+            "{{p:/fields/14/value/housing|comma}} + {{p:/fields/14/value/other|comma}} = {{c:/monthly_cost|comma}} 元/月",
+            "本人估计；非地区平均消费"
+          ],
+          [
+            "可动现金",
+            "{{p:/fields/14/value/cash|comma}} — {{p:/fields/14/value/reserve|comma}} = {{c:/spendable|comma}} 元",
+            "保留本人应急意愿"
+          ],
+          [
+            "静态支撑",
+            "{{c:/spendable|comma}} ÷ {{c:/monthly_cost|comma}} ≈ {{c:/buffer_months|1f}} 个月",
+            "无收入；未计搬家等新增开支"
+          ],
+          [
+            "住房提高",
+            "{{c:/higher_rent_months|1f}} 个月",
+            "仅改住房，不动其他前提"
+          ],
+          [
+            "全部现金边界",
+            "{{c:/all_cash_months|1f}} 个月",
+            "牺牲应急缓冲；不是默认建议"
+          ],
+          [
+            "招聘安排",
+            "国考为公告时间，电网首批为暂定",
+            "省公司和具体岗位需另核"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E001"
+      ]
+    }
+  },
+  "preferences": {
+    "method": "ordinal",
+    "confirmed": false,
+    "weights": null,
+    "quote": "我先看实际工作和能不能学到技术，再看省内地点与能否按期有收入，再看稳定，最后才是单位身份。还没给任何数值权重。",
+    "profile_refs": [
+      "profile_parse.json#/fields/13"
+    ]
+  },
+  "candidates": [
+    {
+      "id": "P1",
+      "supports": [
+        "电气背景相关，本人不排斥，父母重视稳定"
+      ],
+      "counters": [
+        "省公司条件与实际任务未取得，相关专业不等于可报"
+      ],
+      "costs": [
+        "电工考试与面试准备占时间，等待录用也占现金"
+      ],
+      "fallback": "保企业任务调查与毕业安排；未有正式录用，不承诺其他路径能接住",
+      "switch_conditions": "浙江公告后逐项核资格、任务、地点与合同；任何硬条件明确不符就排该项",
+      "checkpoint": "{{k:/context/personal_dates/checkpoint}}",
+      "evidence_refs": [
+        "E008"
+      ]
+    },
+    {
+      "id": "P2",
+      "supports": [
+        "官方总公告已取到，可据实际职位检查是否存在可选入口"
+      ],
+      "counters": [
+        "无具体职位且没有同类考试表现，基层经历为零不能报要求该经历的岗位"
+      ],
+      "costs": [
+        "行测申论新增准备挤占企业主线；等待结果没有现金保证"
+      ],
+      "fallback": "保企业任务调查与毕业安排；未有正式录用，不承诺其他路径能接住",
+      "switch_conditions": "只在本人愿做、职位条件核对成立且投入可承受时进入报名决策",
+      "checkpoint": "{{k:/context/personal_dates/checkpoint}}",
+      "evidence_refs": [
+        "E002"
+      ]
+    },
+    {
+      "id": "P3",
+      "supports": [
+        "本人愿了解，浙江地点偏好提供调查理由"
+      ],
+      "counters": [
+        "未取得适用本届具体公告与职位，不能套用旧年"
+      ],
+      "costs": [
+        "新增公共科目准备和等待会占用现金与毕业任务资源"
+      ],
+      "fallback": "保企业任务调查与毕业安排；未有正式录用，不承诺其他路径能接住",
+      "switch_conditions": "先确认本人职业意愿；适用公告和具体职位到位且资源可承受才保留",
+      "checkpoint": "{{k:/context/personal_dates/checkpoint}}",
+      "evidence_refs": [
+        "E011"
+      ]
+    },
+    {
+      "id": "J1",
+      "supports": [
+        "看过电路图、接线与简单测试，符合本人技术任务兴趣"
+      ],
+      "counters": [
+        "没有独立诊断或真实岗位条件，安全职责和培训边界未知"
+      ],
+      "costs": [
+        "技术问答与材料准备占用有限课外时间"
+      ],
+      "fallback": "保企业任务调查与毕业安排；未有正式录用，不承诺其他路径能接住",
+      "switch_conditions": "若实际职责是长期销售或要求独立承担尚不具备的责任，排具体岗位",
+      "checkpoint": "{{k:/context/personal_dates/checkpoint}}",
+      "evidence_refs": [
+        "E012"
+      ]
+    },
+    {
+      "id": "J2",
+      "supports": [
+        "本人愿到现场并希望做应用调试"
+      ],
+      "counters": [
+        "出差、响应时段和销售占比未取得"
+      ],
+      "costs": [
+        "可能增加通勤、差旅与生活安排成本"
+      ],
+      "fallback": "保企业任务调查与毕业安排；未有正式录用，不承诺其他路径能接住",
+      "switch_conditions": "若现场安排或职责不接受则退出；能核指导、地点与任务后继续",
+      "checkpoint": "{{k:/context/personal_dates/checkpoint}}",
+      "evidence_refs": [
+        "E012"
+      ]
+    },
+    {
+      "id": "J3",
+      "supports": [
+        "电气基础与设备方向相接，可用已有记录说明任务"
+      ],
+      "counters": [
+        "生产经验和实际岗位培养未知，不能以课程设计代替"
+      ],
+      "costs": [
+        "值班、安全责任与工作地点可能改变成本"
+      ],
+      "fallback": "保企业任务调查与毕业安排；未有正式录用，不承诺其他路径能接住",
+      "switch_conditions": "核职责与值班；超出本人接受范围时移出，不因同专业强留",
+      "checkpoint": "{{k:/context/personal_dates/checkpoint}}",
+      "evidence_refs": [
+        "E012"
+      ]
+    }
+  ],
+  "checkpoint": {
+    "date": "{{k:/context/personal_dates/checkpoint}}",
+    "required": [
+      "补齐具体硬条件",
+      "更新费用或现金边界",
+      "重定主线与备选"
+    ]
+  },
+  "recommendation": {
+    "primary": [
+      "J1",
+      "J2"
+    ],
+    "backup": [
+      "P1"
+    ],
+    "conditions": [
+      "只在正式资格、本人接受和费用边界同时成立时进入具体申请",
+      "未知条件不当没有机会；条件不符只排该项目，不外推整条路"
+    ]
+  },
+  "matrix": {
+    "options": [
+      "J1",
+      "P1",
+      "P2",
+      "P3"
+    ],
+    "dimensions": [
+      {
+        "id": "资格",
+        "name": "资格"
+      },
+      {
+        "id": "准备与时间",
+        "name": "准备与时间"
+      },
+      {
+        "id": "现金与收入",
+        "name": "现金与收入"
+      },
+      {
+        "id": "本人接受度",
+        "name": "本人接受度"
+      }
+    ],
+    "cells": [
+      {
+        "candidate_id": "J1",
+        "dimension_id": "资格",
+        "status": "unknown",
+        "note": "具体条件未核；本人态度见画像"
+      },
+      {
+        "candidate_id": "J1",
+        "dimension_id": "准备与时间",
+        "status": "unknown",
+        "note": "具体条件未核；本人态度见画像"
+      },
+      {
+        "candidate_id": "J1",
+        "dimension_id": "现金与收入",
+        "status": "unknown",
+        "note": "具体条件未核；本人态度见画像"
+      },
+      {
+        "candidate_id": "J1",
+        "dimension_id": "本人接受度",
+        "status": "supported",
+        "note": "具体条件未核；本人态度见画像"
+      },
+      {
+        "candidate_id": "P1",
+        "dimension_id": "资格",
+        "status": "unknown",
+        "note": "具体条件未核；本人态度见画像"
+      },
+      {
+        "candidate_id": "P1",
+        "dimension_id": "准备与时间",
+        "status": "unknown",
+        "note": "具体条件未核；本人态度见画像"
+      },
+      {
+        "candidate_id": "P1",
+        "dimension_id": "现金与收入",
+        "status": "unknown",
+        "note": "具体条件未核；本人态度见画像"
+      },
+      {
+        "candidate_id": "P1",
+        "dimension_id": "本人接受度",
+        "status": "supported",
+        "note": "具体条件未核；本人态度见画像"
+      },
+      {
+        "candidate_id": "P2",
+        "dimension_id": "资格",
+        "status": "unknown",
+        "note": "具体条件未核；本人态度见画像"
+      },
+      {
+        "candidate_id": "P2",
+        "dimension_id": "准备与时间",
+        "status": "unknown",
+        "note": "具体条件未核；本人态度见画像"
+      },
+      {
+        "candidate_id": "P2",
+        "dimension_id": "现金与收入",
+        "status": "unknown",
+        "note": "具体条件未核；本人态度见画像"
+      },
+      {
+        "candidate_id": "P2",
+        "dimension_id": "本人接受度",
+        "status": "supported",
+        "note": "具体条件未核；本人态度见画像"
+      },
+      {
+        "candidate_id": "P3",
+        "dimension_id": "资格",
+        "status": "unknown",
+        "note": "具体条件未核；本人态度见画像"
+      },
+      {
+        "candidate_id": "P3",
+        "dimension_id": "准备与时间",
+        "status": "unknown",
+        "note": "具体条件未核；本人态度见画像"
+      },
+      {
+        "candidate_id": "P3",
+        "dimension_id": "现金与收入",
+        "status": "unknown",
+        "note": "具体条件未核；本人态度见画像"
+      },
+      {
+        "candidate_id": "P3",
+        "dimension_id": "本人接受度",
+        "status": "supported",
+        "note": "具体条件未核；本人态度见画像"
+      }
+    ]
+  }
+}

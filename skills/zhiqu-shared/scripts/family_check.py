@@ -9,6 +9,7 @@ level 为 "错误" 或 "提醒"，file 是相对仓库根目录的路径。
 """
 import argparse
 import glob
+import json
 import os
 import re
 import sys
@@ -458,7 +459,60 @@ def check_file_size(root):
 # 汇总与输出
 # ---------------------------------------------------------------------------
 
+def check_persona_names(root):
+    """Collect registered identities; a documented multi-scenario person is one identity."""
+    from pathlib import Path
+    root = Path(root).resolve()
+    directories = {p.parent for pattern in ('skills/*/examples/*/case.json', 'skills/*/examples/*/report.json')
+                   for p in root.glob(pattern)}
+    records = {}; issues = []; by_id = {}
+    clean = lambda name: re.sub(r'（(?:模拟|虚构)）$', '', str(name)).strip()
+    for directory in sorted(directories):
+        case_path = directory / 'case.json'; report_path = directory / 'report.json'
+        try:
+            case = json.loads(case_path.read_text()) if case_path.exists() else {}
+            report = json.loads(report_path.read_text()) if report_path.exists() else {}
+        except (ValueError, OSError) as exc:
+            issues.append((ERROR, str(directory.relative_to(root)), 1, '人物登记不可读：' + str(exc))); continue
+        names = [clean(x) for x in (case.get('person'), case.get('candidate'),
+                 case.get('report_meta', {}).get('person'), report.get('meta', {}).get('candidate')) if x]
+        file = case_path if case_path.exists() else report_path
+        rel = str(file.relative_to(root))
+        if not names or any(not re.fullmatch(r'小[一-鿿]', name) for name in names):
+            issues.append((ERROR, rel, 1, '案例人物名须为“小+一个汉字”：' + '、'.join(names)))
+        if len(set(names)) > 1: issues.append((ERROR, rel, 1, '案例登记与报告姓名不一致'))
+        identity = file.resolve()
+        records[directory] = {'name': names[0] if names else '', 'identity': identity, 'case': case, 'file': rel}
+        by_id[case.get('case_id', directory.name)] = records[directory]
+    def identity_for(directory, seen):
+        item = records[directory]; ref = item['case'].get('persona_ref')
+        if not ref: return item['identity']
+        target = (directory / ref).resolve()
+        if target.parent not in records or target.name != 'case.json' or target.parent in seen:
+            raise ValueError('同一人物引用无效或循环')
+        if records[target.parent]['name'] != item['name']: raise ValueError('同一人物的场景姓名不一致')
+        return identity_for(target.parent, seen | {directory})
+    owners = {}
+    for directory, item in records.items():
+        try: identity = identity_for(directory, set())
+        except ValueError as exc:
+            issues.append((ERROR, item['file'], 1, str(exc))); identity = item['identity']
+        name = item['name']
+        if name in owners and owners[name] != identity:
+            issues.append((ERROR, item['file'], 1, '不同人物重名：' + name))
+        owners[name] = identity
+    library = root / 'skills/zhiqu-shared/references/sim-personas.md'
+    if library.exists():
+        seen_ids = set()
+        for cid, name in re.findall(r'^## (\d{4}-(?:YJ|QZ)-S\d{2}) · (.+?)（模拟）$', library.read_text(), re.M):
+            if cid in seen_ids or cid not in by_id or by_id[cid]['name'] != name:
+                issues.append((ERROR, str(library.relative_to(root)), 1, '人物库与案例登记不同步：' + cid))
+            seen_ids.add(cid)
+    return issues
+
+
 CHECKS = [
+    ("案例人物姓名与唯一性", check_persona_names),
     ("引用的文件存在", check_links),
     ("问卷节名引用", check_section_names),
     ("报告目录完整", check_report_guide),

@@ -81,10 +81,11 @@
     ]
   },
   "snapshot": {
-    "report.json": "5af65cfb720c15a817f00779ffec5e3736b2ee0736704e45b8a0dece71da3f2b",
-    "report.pdf": "ebc69c66172f6e3dd9e9c4d91b11ce8eba19324d2790d9aa8459f826e52b4cb1",
-    "operator_check.md": "e31b2c3a8b64e10a870f5ee542238d646409dcf8697d7c2c544d32de5b9ef05c",
+    "report.json": "5adfe9fbc04bcf66d7d52d0c16397f7c946bf3e58ea294791023682068d7c49b",
+    "report.pdf": "a244921a73780326cb0c6e4ebf547c5506d4d28d903d1f652a3b4bb44c8a5e9a",
+    "operator_check.md": "f9dbc7dcb401499ff61b9a772fcd61b404db1a4a58f56ffbbbe1751f73114138",
     "retro_ranks/4538/result.json": "2e55b25bf25c0ce3a0b81ca7c66d4746979686fea2d67e2d097f4420fa265711",
-    "case.json": "e7c098053d3f9062842afe42518c83384f68d99df8cf7dd73a56ef462bfe2099"
-  }
+    "case.json": "52f81454679a7c2a3876051d18ca6858022ddfbe50996df4cc8c996503421a4f"
+  },
+  "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。"
 }

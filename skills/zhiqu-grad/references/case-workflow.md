@@ -12,7 +12,7 @@
 | 1 画像 | `profile.txt`、`profile_parse.json` | 以【读研 · 自我盘点】开头；11个关键字段逐个 given/inferred/unknown，按事实/偏好/约束/本人判断分类，unknown 与未确认推断列入 missing |
 | 2 问题与方向 | `directions.json` | questions与directions数量按合同，各有 id/name/support/counter/verify，关联画像或已登记证据，不把“家里要求”直接当本人愿望 |
 | 3 规则复核 | `rules_check.json` | items 逐条含 id、claim、evidence_refs、volatile、verified_on、review_due、status、scope；会变规则合同规定的有效窗口内核；规则未取到说明影响及替代调查，不能认证为满足 |
-| 4 候选 | `candidates.json` | paths 与 school_programs 分开；走考研时 school_programs 中合同要求的调查候选，覆盖相对稳妥/够一够/冒险三档，每档有条件与依据；每个候选硬条件 met/unknown/failed 关联证据，剔除有原因；待核不能叫已合格 |
+| 4 候选 | `candidates.json` | paths 与 school_programs 分开；走考研时 school_programs 中合同要求的调查候选，有同科目完整模考证据才要求个人条件分档；没有时只列调查对象并记录取得模考后的定档检查点；每个候选硬条件 met/unknown/failed 关联证据，剔除有原因；待核不能叫已合格 |
 | 5 证据 | `evidence.json` | 按总纲全字段；与 rules、候选、画像、判断引用逐项对上；考试科目/普通专项/复试拟录取/学习方式/年份不混；个人名单只在内存处理，保留匿名统计 |
 | 6 计算 | `calculations.json` | 基准预算、至少2个改关键假设的情景，输入/算法/输出及单位可复算；分数情景、机会成本有输入才算，无数据明确空缺，不给个人上岸率 |
 | 7 判断 | `judgment.json` | 资格先行；偏好维度和权重有问卷「优先级排序」依据；每候选支持/反对/代价/失败去向/改判条件/检查点齐；主路径与保险路径可对应候选及证据 |
@@ -42,7 +42,8 @@ candidates 顶层 `{schema_version, paths, school_programs, excluded}`。路径�
 
 - id、path_id、学校、学院、专业代码、学位类型、学习方式、计划类别、适用年份、考试科目、培养地点；不把同校不同学院合成一个候选。
 - hard_conditions 每条 id/name/status/evidence_refs；candidate.status 沿用 verified / pending / ineligible。unknown 导致pending，failed 导致ineligible并登记excluded；已剔除项仍可在对照表说明原因，不作正式推荐。
-- tier 仅限相对稳妥/够一够/冒险，附 tier_basis、conditions、unknowns。它比较同科目能力差距、规则与本人投入，**不是个人上岸概率**；初试未出时必须条件化，不凭校名定档。
+- 有本人同科目完整模考证据时，tier 仅限相对稳妥/够一够/冒险，附依据、条件和未知项；它比较能力差距、规则与本人投入，不是个人上岸概率。没有模考时不填 tier；官方复试线或拟录取分布只能说明学校或项目之间的差异，不能写成本人的把握。
+- `personal_difficulty.mock_exam` 没有资料时为 null；有资料时登记 complete、same_subjects、subjects、exam_date、evidence_refs、score_ref，成绩从已核证据或本人登记字段读取，条目须明确是本人模考，证据分值单位为“分”，不能拿学费或本科均分充当。操控者仍须核试卷、科目、单科和完成条件。`personal_difficulty.checkpoint` 写日期引用与动作：拿到同科目完整模考后在哪个个人检查点定档，届时仍无证据就继续不定档。
 - 判断所需的 supports、counters、costs、fallback、switch_conditions 和 checkpoint 在 judgment 中按 candidate_id 保存，引用候选/证据，不再抄一套成绩数字。
 
 
@@ -50,7 +51,7 @@ candidates 顶层 `{schema_version, paths, school_programs, excluded}`。路径�
 
 预算把学费事实、住宿收费或假设、生活假设、未确认奖助分开；合同要求的敏感性情景可分别改变生活费与支持金额/学费参照，但须说明改变依据，不能仅改情景名字。没取到当届收费时可用最近官方旧年参照，年份和条件写清，不能称当届已定价。未来就业工资未知，机会成本保留未知。
 
-分数情景图由已核群体分布和明确的情景输入生成；本人实际模考与条件点分别标识。没有可比数据时保留点图组件的缺口状态和查询计划，不画假点；推免阶段也不能把排名直接当考研分数。均分、排名、竞赛加分都回本校规则与口径，不把培养方案当招生承诺。
+分数情景图由已核群体分布和明确的情景输入生成；本人实际模考与条件点分别标识。没有可比数据时用一行缺口说明代替图，写缺什么、去哪里取、预计何时补，不保留空图或假点；推免阶段也不能把排名直接当考研分数。均分、排名、竞赛加分都回本校规则与口径，不把培养方案当招生承诺。
 
 judgment含 preferences（问卷原话/排序/确认状态）、matrix（选项、维度、逐格依据）、candidates（逐候选判断）、recommendation（primary/backup与理由依据）、actions（行动与日期）、checkpoint、timeline、routes、risks、assumptions。未确认数值权重则用ordinal或unconfirmed，不算加权总分。矩阵未知比例触发合同阈值时的说明、数字引用与图表细则统一按总纲和合同，不在本文件另设阈值。
 

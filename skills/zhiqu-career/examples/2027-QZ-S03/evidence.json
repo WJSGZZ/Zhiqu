@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "items": [
+    {
+      "id": "E001",
+      "claim": "个人优先级与尚待补齐的信息",
+      "value": null,
+      "unit": "",
+      "source": {
+        "organization": "本人画像与分析口径",
+        "url": "",
+        "locator": "个人优先级与尚待补齐的信息"
+      },
+      "published_on": null,
+      "retrieved_on": "2026-10-19",
+      "retrieval_method": "provided",
+      "verified_on": "2026-10-19",
+      "grade": "单人说法",
+      "scope": "只用于本人意愿；不得据此认证学校、岗位、收入或考试资格",
+      "review_due": "2026-11-18",
+      "candidate_ids": [],
+      "rule_ids": [],
+      "status": "verified",
+      "source_group": 1,
+      "excerpt": "先岗位内容和带教，再地点，再生活能否自立，单位名气往后。",
+      "original_locator": "个人优先级与尚待补齐的信息",
+      "main_conclusion": true,
+      "publication_status": "context"
+    },
+    {
+      "id": "E002",
+      "claim": "具体岗位条件待核",
+      "value": null,
+      "unit": "",
+      "source": {
+        "organization": "具体岗位条件待核",
+        "url": "https://www.ncss.cn/",
+        "locator": "具体岗位条件待核"
+      },
+      "published_on": null,
+      "retrieved_on": "2026-10-19",
+      "retrieval_method": "curl",
+      "verified_on": null,
+      "grade": "官方",
+      "scope": "按具体招聘方发布的学历、职责、地点和合同核",
+      "review_due": "2026-11-18",
+      "candidate_ids": [],
+      "rule_ids": [],
+      "status": "unretrieved",
+      "source_group": 2,
+      "excerpt": "",
+      "original_locator": "具体岗位条件待核",
+      "main_conclusion": true,
+      "publication_status": "unretrieved",
+      "gap": "本人尚未指定企业或招聘公告；先把岗位任务分开，不批量抓取职位。"
+    }
+  ],
+  "source_groups": [
+    {
+      "title": "本人画像与分析口径",
+      "url": "",
+      "metadata": "2026-10-19 登记；个人计划不是官方日期；预算估计不是收费报价"
+    },
+    {
+      "title": "具体岗位条件待核",
+      "url": "https://www.ncss.cn/",
+      "metadata": "取文：2026-10-19；仅限本案，未取到项见备注"
+    }
+  ]
+}

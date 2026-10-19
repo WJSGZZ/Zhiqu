@@ -247,6 +247,49 @@ class PlanningCase:
             return bool(cells) and sum(x.get('status')=='unknown' for x in cells)/len(cells)>self.contract['matrix_policy']['unknown_ratio_explanation_above']
         raise ValueError('合同条件未实现：'+cond)
 
+    def has_complete_mock(self):
+        """The record must identify a complete comparable mock and a real score reference.
+
+        This validates the declared record, not the authenticity of a person's exam.
+        The operator still checks the paper, subjects and completion conditions.
+        """
+        assessment=self.data.get('candidates.json',{}).get('personal_difficulty',{})
+        mock=assessment.get('mock_exam')
+        if not mock:return False
+        try:
+            if mock.get('complete') is not True or mock.get('same_subjects') is not True:return False
+            if not isinstance(mock.get('subjects'),list) or not mock['subjects'] or any(not isinstance(v,str) or not v.strip() for v in mock['subjects']):return False
+            if not mock.get('evidence_refs'):return False
+            if any(eid not in self.evidence or self.evidence[eid].get('status')!='verified' for eid in mock['evidence_refs']):return False
+            if day(mock['exam_date'])>day(self.case['context']['as_of']):return False
+            match=REF.fullmatch(mock['score_ref'])
+            if not match or match[1] not in ('p','e'):return False
+            if match[1]=='e':
+                eid=match[2].split('#')[0]
+                if eid not in mock['evidence_refs']:return False
+                e=self.evidence[eid]
+                if e.get('unit')!='分' or not re.search(r'模考|模拟考试',e.get('claim','')+' '+e.get('scope','')):return False
+            else:
+                field=pointer(self.data['profile_parse.json'],'/'+ '/'.join(match[2].lstrip('/').split('/')[:2]))
+                if not re.search(r'模考|模拟考试',field.get('field','')+' '+field.get('quote','')):return False
+            score=self.resolve(match[1],match[2])
+            return isinstance(score,(int,float)) and not isinstance(score,bool) and score>=0
+        except (KeyError,ValueError,TypeError,IndexError):return False
+
+    def figure_has_data(self, typ, content):
+        rows=content.get('rows',[])
+        def number(value):
+            try:
+                import math
+                result=float(self.expand(value).replace(',',''))
+                return result if math.isfinite(result) else None
+            except (TypeError,ValueError,KeyError,IndexError):return None
+        if typ=='interval':
+            return any(len(row)>=3 and number(row[1]) is not None and number(row[2]) is not None
+                       and number(row[1])<=number(row[2]) for row in rows)
+        if typ=='bars':return any(len(row)>=2 and number(row[1]) is not None for row in rows)
+        return bool(rows)
+
     def contract_errors(self):
         errs=[]; narrative=self.data.get('narrative.json',{}).get('sections',{})
         if set(narrative)!=set(s['id'] for s in self.contract['sections']): errs.append('narrative.json.sections：须逐节覆盖内容合同')
@@ -267,7 +310,13 @@ class PlanningCase:
                     refs=node.get('evidence_refs',[])
                     if any(eid not in self.evidence for eid in refs): errs.append(where+'：来源ID不存在')
                     errs.extend(self.numeric_tree(node.get('content',{}),where+'.content'))
+                    if typ=='data_gap':
+                        if not all(content.get(k) for k in ('missing','source','expected_by')):errs.append(where+'：图表缺口须写缺什么、去哪取、预计何时补')
+                        else:
+                            try:day(self.expand(content['expected_by']))
+                            except (ValueError,KeyError,TypeError):errs.append(where+'：图表缺口预计补齐日期无效')
                     if typ in ('bars','interval','timeline','comparison_matrix'):
+                        if not self.figure_has_data(typ,content):errs.append(where+'：没有可画数据，须改为一行缺口说明')
                         if not all(node.get('content',{}).get(k) for k in ('title','caption')): errs.append(where+'：图缺标题或读图说明')
                     if typ=='dated_actions':
                         for action in node.get('content',{}).get('items',[]):
@@ -358,7 +407,18 @@ class PlanningCase:
         c=self.need('candidates.json');pool=c.get('school_programs',[]) if self.kind=='grad' else c.get('job_types',[])
         minimum=self.limits['school_programs_min_if_kaoyan'] if self.kind=='grad' and self.case['context'].get('takes_kaoyan') else self.limits['job_types_min'] if self.kind=='career' else 1
         if len(pool)<minimum:self.err('candidates.json','','候选少于合同要求')
-        if self.kind=='grad' and self.case['context'].get('takes_kaoyan') and {x.get('tier') for x in pool}!={'相对稳妥','够一够','冒险'}:self.err('candidates.json','school_programs','缺条件三档')
+        if self.kind=='grad' and self.case['context'].get('takes_kaoyan'):
+            assessment=c.get('personal_difficulty',{});mock=assessment.get('mock_exam')
+            if mock and not self.has_complete_mock():self.err('candidates.json','personal_difficulty','模考记录不完整、不同科目或缺有效成绩证据')
+            if self.has_complete_mock():
+                if {x.get('tier') for x in pool}!={'相对稳妥','够一够','冒险'}:self.err('candidates.json','school_programs','有同科目完整模考证据后须分个人条件档')
+            else:
+                if any(x.get('tier') for x in pool):self.err('candidates.json','school_programs','无同科目完整模考证据，不得标个人难度档')
+                checkpoint=assessment.get('checkpoint',{})
+                try:
+                    day(self.expand(checkpoint['date']))
+                    if not checkpoint.get('action'):raise ValueError('缺取得模考后的定档动作')
+                except (KeyError,ValueError,TypeError):self.err('candidates.json','personal_difficulty.checkpoint','无模考时须明确取得同科目完整模考后的定档检查点')
         for candidate in pool+c.get('paths',[])+c.get('jobs',[]):
             if not candidate.get('hard_conditions'):self.err('candidates.json',candidate.get('id','?'),'硬条件为空')
             for hc in candidate.get('hard_conditions',[]):

@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "kind": "grad",
+  "case_id": "2027-YJ-S03",
+  "mode": "simulation",
+  "prepared_on": "2026-10-19",
+  "version": "1.0",
+  "decision_stage": "还在考虑",
+  "target_year": 2027,
+  "data_commit": "ba939f5",
+  "education": {
+    "school_level": "普通公办本科",
+    "year_level": "大四",
+    "major": "新闻学",
+    "expected_graduation": "2027-06-30"
+  },
+  "context": {
+    "as_of": "2026-10-19",
+    "takes_kaoyan": true,
+    "offer_basis": "none",
+    "personal_dates": {
+      "action0": "2026-10-21",
+      "action1": "2026-10-22",
+      "action2": "2026-10-23",
+      "checkpoint": "2026-10-23",
+      "term_end": "2027-01-15",
+      "spring": "2027-03-15",
+      "summer": "2027-06-20",
+      "recommend": "2027-09-15",
+      "graduate": "2027-06-30",
+      "entry": "2027-09-01",
+      "winter": "2026-12-10"
+    }
+  },
+  "deadlines": [
+    {
+      "label": "个人复核点",
+      "date": "2026-10-23",
+      "kind": "personal_checkpoint"
+    },
+    {
+      "label": "当届学校或职位具体截止",
+      "unknown_reason": "未选定项目或具体公告尚未取得，不用往年日期替代"
+    }
+  ],
+  "report_meta": {
+    "title": "读研路径决策报告",
+    "subtitle": "山东 · 推免边缘与考研准备",
+    "person": "小安（模拟）",
+    "edition": "读研版",
+    "date": "{{k:/context/as_of}}",
+    "id": "2027-YJ-S03",
+    "stage": "读研版 · 路径核对",
+    "region": "山东",
+    "data_asof": "{{k:/context/as_of}}",
+    "conclusion": "保留推免和考研，先统一排名口径；不为加分透支主课。"
+  }
+}

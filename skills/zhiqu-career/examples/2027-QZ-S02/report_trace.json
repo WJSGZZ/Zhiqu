@@ -1,0 +1,435 @@
+{
+  "schema_version": 1,
+  "case_id": "2027-QZ-S02",
+  "source_sha256": {
+    "case.json": "8122f0a0e52e6daac9b5d976cb918e5abbbbbbf8d29d77fc3f5a6527dddbf3fc",
+    "profile_parse.json": "fa360e6197c0c48f2684460988fc03cfb47827660e2ca152c188ef67e99044b4",
+    "directions.json": "5b2397e7ee4e80db6b8b1b6bf0834869aabbf282dcfecc6f23c4c706d476cc76",
+    "rules_check.json": "d887941488483a7992cfbe1fb174550f3fdb3083d8c597a1cdcc43f1eee9d198",
+    "candidates.json": "e2d7abe22fb7375e3190e21a8f801c264fbed4b7fdaab066193cc48a35ff98f1",
+    "evidence.json": "c728cb3d1ed7fa40510ac2dd56c113a5374c76b7f8b243a7bf435a2d4876ddc0",
+    "calculations.json": "8e8135c7483b79dbc2d7ed702e1d9add2628ccf852da45c3d957f1e3f05d98f5",
+    "judgment.json": "f26d3e35c9315c71694d0bc08ced1924309304526546300264a7df3bc4abd8cc",
+    "narrative.json": "b214b62fffffce27ee435ab86d6ffe0af186e4ee426b73c31912075dfcb34660",
+    "profile.txt": "ca23e4236d0b3eaa0028f580e835d05693b844db90f60fcea3d840e219061e8f"
+  },
+  "contract_sha256": "affc47ff0df415d88221ddee76feb600856414b92cdd1c56130f86938e5cd381",
+  "tool_sha256": {
+    "planning_report.py": "10014cadb94d65575913a75e662a560c6eac938aa345c1bb918185748b520622",
+    "planning_workflow.py": "501f84f04b3d98e35f0894f71d23e7725dc61ebd76b37e61172dcecbeb71ef48",
+    "operator_check.py": "de98dc2c68caed42efbd29013f2b9bb58a6317cde39fa1e8c9404285c99fb43c",
+    "check_demos.py": "fc8e1625f9e052373756160514ad5c73db1e8451c233425918edb5bc839d9f63",
+    "report.py": "08bb83a85f3de379e6a05f1e6e80b2d85c525324f4112b63b2ea36f1cec5ccf3",
+    "render_report.py": "8cb49efa61bba9985354966096a6645ff4fd6ad7a04683cdc8aeb766db42344c"
+  },
+  "numeric_refs": [
+    {
+      "location": "meta.subtitle",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "meta.date",
+      "ref": "{{k:/context/as_of}}",
+      "value": "2026-10-19",
+      "display": "2026-10-19"
+    },
+    {
+      "location": "meta.data_asof",
+      "ref": "{{k:/context/as_of}}",
+      "value": "2026-10-19",
+      "display": "2026-10-19"
+    },
+    {
+      "location": "01.kpis.1",
+      "ref": "{{c:/spendable|comma}}",
+      "value": 5000,
+      "display": "5,000"
+    },
+    {
+      "location": "01.kpis.1",
+      "ref": "{{c:/buffer_months|1f}}",
+      "value": 2.0,
+      "display": "2.0"
+    },
+    {
+      "location": "01.kpis.1",
+      "ref": "{{k:/context/personal_dates/checkpoint|md}}",
+      "value": "2026-10-23",
+      "display": "10 月 23 日"
+    },
+    {
+      "location": "01.actions.3",
+      "ref": "{{k:/context/personal_dates/action0}}",
+      "value": "2026-10-21",
+      "display": "2026-10-21"
+    },
+    {
+      "location": "01.actions.3",
+      "ref": "{{k:/context/personal_dates/action1}}",
+      "value": "2026-10-22",
+      "display": "2026-10-22"
+    },
+    {
+      "location": "01.actions.3",
+      "ref": "{{k:/context/personal_dates/action2}}",
+      "value": "2026-10-23",
+      "display": "2026-10-23"
+    },
+    {
+      "location": "01.checkpoint.4",
+      "ref": "{{k:/context/personal_dates/checkpoint|ymd_cn}}",
+      "value": "2026-10-23",
+      "display": "2026 年 10 月 23 日"
+    },
+    {
+      "location": "01.checkpoint.4",
+      "ref": "{{e:E005#/value|md_hm}}",
+      "value": "2026-10-23T18:00",
+      "display": "10-23 18:00"
+    },
+    {
+      "location": "01.checkpoint.4",
+      "ref": "{{e:E003#/value|md_hm}}",
+      "value": "2026-10-24T18:00",
+      "display": "10-24 18:00"
+    },
+    {
+      "location": "02.profile.1",
+      "ref": "{{k:/education/year_level}}",
+      "value": "大四",
+      "display": "大四"
+    },
+    {
+      "location": "02.profile.1",
+      "ref": "{{k:/education/major}}",
+      "value": "电气工程及其自动化",
+      "display": "电气工程及其自动化"
+    },
+    {
+      "location": "02.profile.1",
+      "ref": "{{p:/fields/13/value}}",
+      "value": "我先看实际工作和能不能学到技术，再看省内地点与能否按期有收入，再看稳定，最后才是单位身份。还没给任何数值权重。",
+      "display": "我先看实际工作和能不能学到技术，再看省内地点与能否按期有收入，再看稳定，最后才是单位身份。还没给任何数值权重。"
+    },
+    {
+      "location": "02.profile.1",
+      "ref": "{{p:/fields/12/value}}",
+      "value": "毕业后三个月内",
+      "display": "毕业后三个月内"
+    },
+    {
+      "location": "02.analysis.4",
+      "ref": "{{p:/fields/16/value|comma}}",
+      "value": 6000,
+      "display": "6,000"
+    },
+    {
+      "location": "04.analysis.4",
+      "ref": "{{p:/fields/15/value}}",
+      "value": 10,
+      "display": "10"
+    },
+    {
+      "location": "07.timeline.1",
+      "ref": "{{k:/context/personal_dates/checkpoint|ym}}",
+      "value": "2026-10-23",
+      "display": "2026.10"
+    },
+    {
+      "location": "07.timeline.1",
+      "ref": "{{k:/context/personal_dates/checkpoint|md_short}}",
+      "value": "2026-10-23",
+      "display": "10-23"
+    },
+    {
+      "location": "07.timeline.1",
+      "ref": "{{e:E003#/value|ym}}",
+      "value": "2026-10-24T18:00",
+      "display": "2026.10"
+    },
+    {
+      "location": "07.timeline.1",
+      "ref": "{{e:E003#/value|md_hm}}",
+      "value": "2026-10-24T18:00",
+      "display": "10-24 18:00"
+    },
+    {
+      "location": "07.timeline.1",
+      "ref": "{{e:E004#/value|ym}}",
+      "value": "2026-11-29",
+      "display": "2026.11"
+    },
+    {
+      "location": "07.timeline.1",
+      "ref": "{{e:E004#/value|md_short}}",
+      "value": "2026-11-29",
+      "display": "11-29"
+    },
+    {
+      "location": "07.timeline.1",
+      "ref": "{{e:E007#/value|ym}}",
+      "value": "2026-12-06",
+      "display": "2026.12"
+    },
+    {
+      "location": "07.timeline.1",
+      "ref": "{{e:E007#/value|md_short}}",
+      "value": "2026-12-06",
+      "display": "12-06"
+    },
+    {
+      "location": "07.timeline.1",
+      "ref": "{{k:/context/personal_dates/spring|ym}}",
+      "value": "2027-03-15",
+      "display": "2027.03"
+    },
+    {
+      "location": "07.timeline.1",
+      "ref": "{{k:/context/personal_dates/graduate|ym}}",
+      "value": "2027-06-30",
+      "display": "2027.06"
+    },
+    {
+      "location": "07.analysis.2",
+      "ref": "{{e:E004#/value|ymd_cn}}",
+      "value": "2026-11-29",
+      "display": "2026 年 11 月 29 日"
+    },
+    {
+      "location": "07.analysis.2",
+      "ref": "{{e:E007#/value|ymd_cn}}",
+      "value": "2026-12-06",
+      "display": "2026 年 12 月 6 日"
+    },
+    {
+      "location": "07.analysis.2",
+      "ref": "{{e:E006#/value}}",
+      "value": "2026年11月中旬",
+      "display": "2026年11月中旬"
+    },
+    {
+      "location": "08.routes.2",
+      "ref": "{{e:E006#/value}}",
+      "value": "2026年11月中旬",
+      "display": "2026年11月中旬"
+    },
+    {
+      "location": "08.routes.2",
+      "ref": "{{e:E007#/value|md}}",
+      "value": "2026-12-06",
+      "display": "12 月 6 日"
+    },
+    {
+      "location": "08.routes.3",
+      "ref": "{{e:E005#/value|md_hm}}",
+      "value": "2026-10-23T18:00",
+      "display": "10-23 18:00"
+    },
+    {
+      "location": "08.routes.3",
+      "ref": "{{e:E003#/value|md_hm}}",
+      "value": "2026-10-24T18:00",
+      "display": "10-24 18:00"
+    },
+    {
+      "location": "08.routes.3",
+      "ref": "{{e:E004#/value|md}}",
+      "value": "2026-11-29",
+      "display": "11 月 29 日"
+    },
+    {
+      "location": "09.analysis.1",
+      "ref": "{{p:/fields/14/value/cash|comma}}",
+      "value": 9000,
+      "display": "9,000"
+    },
+    {
+      "location": "09.analysis.1",
+      "ref": "{{p:/fields/14/value/reserve|comma}}",
+      "value": 4000,
+      "display": "4,000"
+    },
+    {
+      "location": "09.analysis.1",
+      "ref": "{{c:/spendable|comma}}",
+      "value": 5000,
+      "display": "5,000"
+    },
+    {
+      "location": "09.analysis.1",
+      "ref": "{{p:/fields/14/value/housing|comma}}",
+      "value": 800,
+      "display": "800"
+    },
+    {
+      "location": "09.analysis.1",
+      "ref": "{{p:/fields/14/value/other|comma}}",
+      "value": 1700,
+      "display": "1,700"
+    },
+    {
+      "location": "09.analysis.1",
+      "ref": "{{c:/monthly_cost|comma}}",
+      "value": 2500,
+      "display": "2,500"
+    },
+    {
+      "location": "09.analysis.1",
+      "ref": "{{c:/buffer_months|1f}}",
+      "value": 2.0,
+      "display": "2.0"
+    },
+    {
+      "location": "09.analysis.2",
+      "ref": "{{p:/fields/14/value/higher_housing|comma}}",
+      "value": 1300,
+      "display": "1,300"
+    },
+    {
+      "location": "09.analysis.2",
+      "ref": "{{c:/high_monthly_cost|comma}}",
+      "value": 3000,
+      "display": "3,000"
+    },
+    {
+      "location": "09.analysis.2",
+      "ref": "{{c:/higher_rent_months|1f}}",
+      "value": 1.7,
+      "display": "1.7"
+    },
+    {
+      "location": "09.analysis.2",
+      "ref": "{{c:/all_cash_months|1f}}",
+      "value": 3.6,
+      "display": "3.6"
+    },
+    {
+      "location": "09.details.5",
+      "ref": "{{c:/monthly_cost|comma}}",
+      "value": 2500,
+      "display": "2,500"
+    },
+    {
+      "location": "09.details.5",
+      "ref": "{{c:/spendable|comma}}",
+      "value": 5000,
+      "display": "5,000"
+    },
+    {
+      "location": "09.details.5",
+      "ref": "{{c:/buffer_months|1f}}",
+      "value": 2.0,
+      "display": "2.0"
+    },
+    {
+      "location": "09.details.5",
+      "ref": "{{c:/high_monthly_cost|comma}}",
+      "value": 3000,
+      "display": "3,000"
+    },
+    {
+      "location": "09.details.5",
+      "ref": "{{c:/spendable|comma}}",
+      "value": 5000,
+      "display": "5,000"
+    },
+    {
+      "location": "09.details.5",
+      "ref": "{{c:/higher_rent_months|1f}}",
+      "value": 1.7,
+      "display": "1.7"
+    },
+    {
+      "location": "09.details.5",
+      "ref": "{{c:/monthly_cost|comma}}",
+      "value": 2500,
+      "display": "2,500"
+    },
+    {
+      "location": "09.details.5",
+      "ref": "{{p:/fields/14/value/cash|comma}}",
+      "value": 9000,
+      "display": "9,000"
+    },
+    {
+      "location": "09.details.5",
+      "ref": "{{c:/all_cash_months|1f}}",
+      "value": 3.6,
+      "display": "3.6"
+    },
+    {
+      "location": "12.assumptions.1",
+      "ref": "{{p:/fields/14/value/housing|comma}}",
+      "value": 800,
+      "display": "800"
+    },
+    {
+      "location": "12.assumptions.1",
+      "ref": "{{p:/fields/14/value/other|comma}}",
+      "value": 1700,
+      "display": "1,700"
+    },
+    {
+      "location": "12.assumptions.1",
+      "ref": "{{c:/monthly_cost|comma}}",
+      "value": 2500,
+      "display": "2,500"
+    },
+    {
+      "location": "12.assumptions.1",
+      "ref": "{{p:/fields/14/value/cash|comma}}",
+      "value": 9000,
+      "display": "9,000"
+    },
+    {
+      "location": "12.assumptions.1",
+      "ref": "{{p:/fields/14/value/reserve|comma}}",
+      "value": 4000,
+      "display": "4,000"
+    },
+    {
+      "location": "12.assumptions.1",
+      "ref": "{{c:/spendable|comma}}",
+      "value": 5000,
+      "display": "5,000"
+    },
+    {
+      "location": "12.assumptions.1",
+      "ref": "{{c:/spendable|comma}}",
+      "value": 5000,
+      "display": "5,000"
+    },
+    {
+      "location": "12.assumptions.1",
+      "ref": "{{c:/monthly_cost|comma}}",
+      "value": 2500,
+      "display": "2,500"
+    },
+    {
+      "location": "12.assumptions.1",
+      "ref": "{{c:/buffer_months|1f}}",
+      "value": 2.0,
+      "display": "2.0"
+    },
+    {
+      "location": "12.assumptions.1",
+      "ref": "{{c:/higher_rent_months|1f}}",
+      "value": 1.7,
+      "display": "1.7"
+    },
+    {
+      "location": "12.assumptions.1",
+      "ref": "{{c:/all_cash_months|1f}}",
+      "value": 3.6,
+      "display": "3.6"
+    }
+  ],
+  "artifacts": {
+    "report.md": "21453d34410b026363848376fe5206b0761fac2ec0c0c414f7e43b7093637657",
+    "report.html": "fad9572c07bd33652906b32cfebe07ce5d2249170c8a9bdc9debf2460aa8b502",
+    "report.pdf": "17003519749eadd56d47b8e923c37208cdbb533932f77359d801c5b0efd00db1"
+  },
+  "delivery_status": "awaiting_operator_and_independent_review"
+}

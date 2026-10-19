@@ -669,6 +669,15 @@
           "evidence_refs": [
             "E0001"
           ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "text": "往年分布只说明各项目已有样本；科目或计划口径不同，不能直接按分值排学校难度，也不表示本人的把握。取得目标同科目完整模考的总分、单科及完成记录后，在 {{k:/context/personal_dates/checkpoint|ymd_cn}} 的个人检查点定档；届时仍没有有效记录，就继续不定个人难度档。"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
         }
       ]
     },

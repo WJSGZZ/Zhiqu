@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "items": [
+    {
+      "id": "R01",
+      "claim": "岗位要求与实际匹配",
+      "evidence_refs": [
+        "E002"
+      ],
+      "status": "unretrieved",
+      "scope": "",
+      "volatile": true,
+      "verified_on": "2026-10-19",
+      "review_due": "2026-11-18",
+      "gap": "没有岗位原文；学历是本人信息，不能由专业名称直接断定能报"
+    }
+  ],
+  "as_of": "2026-10-19"
+}

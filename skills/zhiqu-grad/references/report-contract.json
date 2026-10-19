@@ -61,7 +61,7 @@
    "caption",
    "source_refs"
   ],
-  "missing_data": "explicit_unavailable_or_not_applicable_no_zero_or_invented_points"
+  "missing_data": "one_line_gap_with_missing_source_and_expected_date_no_empty_figures"
  },
  "source_numbering": "stable_evidence_ids_in_first_use_order",
  "review_policy": "shared_rules#六复核与评分",
@@ -583,13 +583,15 @@
      "rules": [
       "matrix_policy",
       "four_or_more_dimensions",
-      "unknown_cells_keep_status"
+      "unknown_cells_keep_status",
+      "missing_data_uses_one_line_gap_not_empty_figure"
      ],
      "count_by": "components",
      "narrative_key": "04.matrix_text",
      "narrative_type": "figure_text",
      "node_types": [
-      "comparison_matrix"
+      "comparison_matrix",
+      "data_gap"
      ]
     },
     {
@@ -858,7 +860,7 @@
       "costs",
       "fallback",
       "scope",
-      "three_school_programs_and_three_conditional_tiers_if_kaoyan"
+      "school_candidates_if_kaoyan_personal_tiers_only_with_complete_comparable_mock"
      ],
      "count_by": "items",
      "node_types": [
@@ -891,13 +893,15 @@
       "same_papers_only",
       "no_personal_probability",
       "point_is_actual_or_conditional",
-      "missing_data_policy"
+      "missing_data_policy",
+      "missing_data_uses_one_line_gap_not_empty_figure"
      ],
      "count_by": "components",
      "narrative_key": "06.score_ranges_text",
      "narrative_type": "figure_text",
      "node_types": [
-      "interval"
+      "interval",
+      "data_gap"
      ]
     },
     {
@@ -1014,13 +1018,15 @@
       "task_and_deadline",
       "checkpoint_markers",
       "dates_ref_resolve",
-      "official_and_personal_dates_distinguished"
+      "official_and_personal_dates_distinguished",
+      "missing_data_uses_one_line_gap_not_empty_figure"
      ],
      "count_by": "components",
      "narrative_key": "07.timeline_text",
      "narrative_type": "figure_text",
      "node_types": [
-      "timeline"
+      "timeline",
+      "data_gap"
      ]
     },
     {
@@ -1266,13 +1272,15 @@
      "rules": [
       "budget_reference_scope",
       "assumptions_separate",
-      "not_promised_grants"
+      "not_promised_grants",
+      "missing_data_uses_one_line_gap_not_empty_figure"
      ],
      "count_by": "components",
      "narrative_key": "09.budget_chart_text",
      "narrative_type": "figure_text",
      "node_types": [
-      "bars"
+      "bars",
+      "data_gap"
      ]
     },
     {
@@ -1829,5 +1837,17 @@
   "operator_due_days": 30,
   "review_samples_min": 5,
   "review_score_min": 16
+ },
+ "personal_difficulty_policy": {
+  "mock_record": "candidates.json#/personal_difficulty/mock_exam",
+  "requires": [
+   "complete",
+   "same_subjects",
+   "subjects",
+   "exam_date",
+   "evidence_refs",
+   "score_ref"
+  ],
+  "without_mock": "no_personal_tier; school_comparison_is_not_personal_confidence; declare_checkpoint_for_tiering_after_complete_comparable_mock"
  }
 }

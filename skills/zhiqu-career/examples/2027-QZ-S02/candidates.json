@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "paths": [
+    {
+      "id": "P1",
+      "name": "电网浙江单位",
+      "status": "pending",
+      "hard_conditions": [
+        {
+          "condition": "专业、学籍、年龄、获证期限和岗位地点待单位公告",
+          "status": "unknown",
+          "evidence_refs": [
+            "E008",
+            "E010"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P2",
+      "name": "国考具体职位",
+      "status": "pending",
+      "hard_conditions": [
+        {
+          "condition": "学历与专业目录、应届、政治面貌等逐岗核；无基层经验不能报要求该经历的岗位",
+          "status": "unknown",
+          "evidence_refs": [
+            "E002"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P3",
+      "name": "浙江省考",
+      "status": "pending",
+      "hard_conditions": [
+        {
+          "condition": "当届公告、户籍口径、专业目录和职位条件未取得",
+          "status": "unknown",
+          "evidence_refs": [
+            "E011"
+          ]
+        }
+      ]
+    }
+  ],
+  "job_types": [
+    {
+      "id": "J1",
+      "name": "设备测试与调试辅助",
+      "status": "pending",
+      "hard_conditions": [
+        {
+          "condition": "未取得岗位原文；学历、任务、地点、合同与收入要求待核",
+          "status": "unknown",
+          "evidence_refs": [
+            "E012"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "J2",
+      "name": "应用或现场技术支持",
+      "status": "pending",
+      "hard_conditions": [
+        {
+          "condition": "未取得岗位原文；学历、任务、地点、合同与收入要求待核",
+          "status": "unknown",
+          "evidence_refs": [
+            "E012"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "J3",
+      "name": "企业设备维护与工艺支持",
+      "status": "pending",
+      "hard_conditions": [
+        {
+          "condition": "未取得岗位原文；学历、任务、地点、合同与收入要求待核",
+          "status": "unknown",
+          "evidence_refs": [
+            "E012"
+          ]
+        }
+      ]
+    }
+  ],
+  "jobs": [],
+  "report_blocks": {
+    "06_candidates_40": {
+      "type": "candidate_table",
+      "content": {
+        "columns": [
+          "岗位类型",
+          "门槛需核",
+          "本人目前匹配",
+          "暂定处理"
+        ],
+        "rows": [
+          [
+            "设备测试与调试辅助",
+            "学历专业、工具、安全职责、是否有指导",
+            "△接线、简单测试与记录；独立诊断不足",
+            "企业主线，先取具体原文"
+          ],
+          [
+            "应用或现场技术支持",
+            "现场比例、出差、沟通与销售任务",
+            "△愿现场；专业问答与独立任务待验证",
+            "与测试并行调查，排长期纯销售"
+          ],
+          [
+            "设备维护或工艺支持",
+            "值班、地点、训练与责任边界",
+            "△电气基础相关；生产经验未核",
+            "有具体职责再决定，不凭岗位名"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E001"
+      ]
+    }
+  }
+}

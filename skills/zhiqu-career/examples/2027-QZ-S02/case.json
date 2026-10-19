@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "kind": "career",
+  "case_id": "2027-QZ-S02",
+  "mode": "simulation",
+  "prepared_on": "2026-10-19",
+  "version": "1.0",
+  "decision_stage": "投递中",
+  "target_year": 2027,
+  "data_commit": "ba939f5",
+  "education": {
+    "school_level": "普通公办本科",
+    "year_level": "大四",
+    "major": "电气工程及其自动化",
+    "expected_graduation": "2027-06-30"
+  },
+  "context": {
+    "as_of": "2026-10-19",
+    "takes_kaoyan": false,
+    "offer_basis": "none",
+    "personal_dates": {
+      "action0": "2026-10-21",
+      "action1": "2026-10-22",
+      "action2": "2026-10-23",
+      "checkpoint": "2026-10-23",
+      "term_end": "2027-01-15",
+      "spring": "2027-03-15",
+      "summer": "2027-06-20",
+      "recommend": "2027-09-15",
+      "graduate": "2027-06-30",
+      "entry": "2027-09-01",
+      "winter": "2026-12-10"
+    }
+  },
+  "deadlines": [
+    {
+      "label": "个人复核点",
+      "date": "2026-10-23",
+      "kind": "personal_checkpoint"
+    },
+    {
+      "label": "当届学校或职位具体截止",
+      "unknown_reason": "未选定项目或具体公告尚未取得，不用往年日期替代"
+    }
+  ],
+  "report_meta": {
+    "title": "求职方向决策报告",
+    "subtitle": "浙江 · 电气本科 · {{k:/target_year}} 届应届求职",
+    "person": "小美（模拟）",
+    "edition": "求职版",
+    "date": "{{k:/context/as_of}}",
+    "id": "2027-QZ-S02",
+    "stage": "求职版 · 应届探索",
+    "region": "浙江",
+    "data_asof": "{{k:/context/as_of}}",
+    "conclusion": "以企业技术岗位为主线，电网按条件保留，公职不盲目并行。"
+  },
+  "calculation_plan": {
+    "engine": "registered_operations",
+    "inputs": {},
+    "operations": [
+      {
+        "output": "monthly_cost",
+        "algorithm": "sum",
+        "inputs": [
+          "{{p:/fields/14/value/housing}}",
+          "{{p:/fields/14/value/other}}"
+        ],
+        "label": "每月必要支出",
+        "rounding": 0
+      },
+      {
+        "output": "high_monthly_cost",
+        "algorithm": "sum",
+        "inputs": [
+          "{{p:/fields/14/value/higher_housing}}",
+          "{{p:/fields/14/value/other}}"
+        ],
+        "label": "住房上涨后每月支出",
+        "rounding": 0
+      },
+      {
+        "output": "spendable",
+        "algorithm": "difference",
+        "inputs": [
+          "{{p:/fields/14/value/cash}}",
+          "{{p:/fields/14/value/reserve}}"
+        ],
+        "label": "预留应急后的可动现金",
+        "rounding": 0
+      },
+      {
+        "output": "buffer_months",
+        "algorithm": "ratio",
+        "inputs": [
+          "{{c:/spendable}}",
+          "{{c:/monthly_cost}}"
+        ],
+        "label": "未就业静态现金可支撑月数",
+        "rounding": 1
+      }
+    ],
+    "scenarios": [
+      {
+        "baseline_output": "buffer_months",
+        "changed_inputs": {
+          "{{c:/monthly_cost}}": "{{c:/high_monthly_cost}}"
+        },
+        "why": "只有住房提高，其他输入不动",
+        "output_ref": "{{c:/higher_rent_months}}"
+      },
+      {
+        "baseline_output": "buffer_months",
+        "changed_inputs": {
+          "{{c:/spendable}}": "{{p:/fields/14/value/cash}}"
+        },
+        "why": "动用全部应急现金的风险边界，不是支出建议",
+        "output_ref": "{{c:/all_cash_months}}"
+      }
+    ]
+  }
+}

@@ -758,6 +758,10 @@
       {
         "slot": "details",
         "ref": "candidates.json#/report_blocks/06_22"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/06/analysis/16"
       }
     ],
     "07": [

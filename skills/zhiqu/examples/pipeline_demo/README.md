@@ -1,6 +1,6 @@
 # 一键流程演示（完全虚构）
 
-本目录用合成数据演示 `pool → predict → optimize → report`，不是实际志愿方案。三份 `admissions_年份.csv` 由上一级 `candidates_demo.csv` 拆分；`preferences.csv` 保留原演示效用与调剂偏好，`id` 改为 pool 的“院校代码-专业名”键。空历史保持为空，演示学校不会匹配教育部名单。
+人物称为“小东（模拟）”。本目录用合成数据演示 `pool → predict → optimize → report`，不是实际志愿方案。三份 `admissions_年份.csv` 由上一级 `candidates_demo.csv` 拆分；`preferences.csv` 保留原演示效用与调剂偏好，`id` 改为 pool 的“院校代码-专业名”键。空历史保持为空，演示学校不会匹配教育部名单。
 
 在技能目录运行：
 

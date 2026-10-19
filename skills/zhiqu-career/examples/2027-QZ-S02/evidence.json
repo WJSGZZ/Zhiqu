@@ -1,0 +1,382 @@
+{
+  "schema_version": 1,
+  "items": [
+    {
+      "id": "E001",
+      "claim": "个人优先级与尚待补齐的信息",
+      "value": null,
+      "unit": "",
+      "source": {
+        "organization": "本人画像与分析口径",
+        "url": "",
+        "locator": "个人优先级与尚待补齐的信息"
+      },
+      "published_on": null,
+      "retrieved_on": "2026-10-19",
+      "retrieval_method": "provided",
+      "verified_on": "2026-10-19",
+      "grade": "单人说法",
+      "scope": "只用于本人意愿；不得据此认证学校、岗位、收入或考试资格",
+      "review_due": "2026-11-18",
+      "candidate_ids": [],
+      "rule_ids": [],
+      "status": "verified",
+      "source_group": 1,
+      "excerpt": "我先看实际工作和能不能学到技术，再看省内地点与能否按期有收入，再看稳定，最后才是单位身份。还没给任何数值权重。",
+      "original_locator": "个人优先级与尚待补齐的信息",
+      "main_conclusion": true,
+      "publication_status": "context"
+    },
+    {
+      "id": "E002",
+      "claim": "国考职位另有资格条件",
+      "value": null,
+      "unit": "",
+      "source": {
+        "organization": "中央机关考试录用公告（官方转载）",
+        "url": "https://shanghai.chinatax.gov.cn/xxgk/rsxx/202610/t481763.html",
+        "locator": "一、报考条件第八项"
+      },
+      "published_on": "2026-10-15",
+      "retrieved_on": "2026-10-19",
+      "retrieval_method": "curl",
+      "verified_on": "2026-10-19",
+      "grade": "官方",
+      "scope": "2027国考；总公告不是具体岗位可报证明",
+      "review_due": "2026-11-18",
+      "candidate_ids": [],
+      "rule_ids": [],
+      "status": "verified",
+      "source_group": 2,
+      "excerpt": "（八）具备中央公务员主管部门规定的拟任职位所要求的其他资格条件。",
+      "original_locator": "一、报考条件第八项",
+      "main_conclusion": true,
+      "publication_status": "published"
+    },
+    {
+      "id": "E003",
+      "claim": "国考报考申请截止",
+      "value": "2026-10-24T18:00",
+      "unit": "",
+      "source": {
+        "organization": "中央机关考试录用公告（官方转载）",
+        "url": "https://shanghai.chinatax.gov.cn/xxgk/rsxx/202610/t481763.html",
+        "locator": "二、报考程序：报名和提交申请"
+      },
+      "published_on": "2026-10-15",
+      "retrieved_on": "2026-10-19",
+      "retrieval_method": "curl",
+      "verified_on": "2026-10-19",
+      "grade": "官方",
+      "scope": "2027国考，注册认证另有更早截止，不能只盯申请末日",
+      "review_due": "2026-11-18",
+      "candidate_ids": [],
+      "rule_ids": [],
+      "status": "verified",
+      "source_group": 2,
+      "excerpt": "报名和提交报考申请时间为2026年10月15日8:00至10月24日18:00，每次只能选报1个职位。",
+      "original_locator": "二、报考程序：报名和提交申请",
+      "main_conclusion": true,
+      "publication_status": "published"
+    },
+    {
+      "id": "E004",
+      "claim": "国考公共科目笔试日",
+      "value": "2026-11-29",
+      "unit": "",
+      "source": {
+        "organization": "中央机关考试录用公告（官方转载）",
+        "url": "https://shanghai.chinatax.gov.cn/xxgk/rsxx/202610/t481763.html",
+        "locator": "三、考试内容时间：公共科目"
+      },
+      "published_on": "2026-10-15",
+      "retrieved_on": "2026-10-19",
+      "retrieval_method": "curl",
+      "verified_on": "2026-10-19",
+      "grade": "官方",
+      "scope": "2027国考公共科目；特殊职位另核专业科目",
+      "review_due": "2026-11-18",
+      "candidate_ids": [],
+      "rule_ids": [],
+      "status": "verified",
+      "source_group": 2,
+      "excerpt": "公共科目笔试时间为： 2026年11月29日上午9:00—11:00 行政职业能力测验 2026年11月29日下午14:00—17:00 申论",
+      "original_locator": "三、考试内容时间：公共科目",
+      "main_conclusion": true,
+      "publication_status": "published"
+    },
+    {
+      "id": "E005",
+      "claim": "国考注册认证截止",
+      "value": "2026-10-23T18:00",
+      "unit": "",
+      "source": {
+        "organization": "中央机关考试录用公告（官方转载）",
+        "url": "https://shanghai.chinatax.gov.cn/xxgk/rsxx/202610/t481763.html",
+        "locator": "二、注册认证"
+      },
+      "published_on": "2026-10-15",
+      "retrieved_on": "2026-10-19",
+      "retrieval_method": "curl",
+      "verified_on": "2026-10-19",
+      "grade": "官方",
+      "scope": "同篇2027公告注册认证环节；提前于提交申请",
+      "review_due": "2026-11-18",
+      "candidate_ids": [],
+      "rule_ids": [],
+      "status": "verified",
+      "source_group": 2,
+      "excerpt": "注册认证的时间为2026年10月14日8:00至10月23日18:00，注册认证确有困难的，可以拨打010-12370咨询。",
+      "original_locator": "二、注册认证",
+      "main_conclusion": true,
+      "publication_status": "published"
+    },
+    {
+      "id": "E006",
+      "claim": "电网首批公告计划窗口",
+      "value": "2026年11月中旬",
+      "unit": "",
+      "source": {
+        "organization": "国家电网高校毕业生招聘总公告",
+        "url": "https://zhaopin.sgcc.com.cn/sgcchr/static/unitPart.html?bullet_id=dcefb56d04714dc4b488d0a7a204bf76",
+        "locator": "三、发布招聘公告"
+      },
+      "published_on": "2026-10-17",
+      "retrieved_on": "2026-10-19",
+      "retrieval_method": "browser",
+      "verified_on": "2026-10-19",
+      "grade": "官方",
+      "scope": "2027总部计划，不代替浙江单位公告或报名截止",
+      "review_due": "2026-11-18",
+      "candidate_ids": [],
+      "rule_ids": [],
+      "status": "verified",
+      "source_group": 3,
+      "excerpt": "各批次招聘公告发布时间分别为：国调网调及北京电力交易中心提前批2026年10月17日、第一批2026年11月中旬、第二批2027年3月前、第三批2027年5月前（如受不可抗力影响，发布时间另行通知）。",
+      "original_locator": "三、发布招聘公告",
+      "main_conclusion": true,
+      "publication_status": "published"
+    },
+    {
+      "id": "E007",
+      "claim": "电网首批笔试暂定日",
+      "value": "2026-12-06",
+      "unit": "",
+      "source": {
+        "organization": "国家电网高校毕业生招聘总公告",
+        "url": "https://zhaopin.sgcc.com.cn/sgcchr/static/unitPart.html?bullet_id=dcefb56d04714dc4b488d0a7a204bf76",
+        "locator": "三、组织招聘笔试"
+      },
+      "published_on": "2026-10-17",
+      "retrieved_on": "2026-10-19",
+      "retrieval_method": "browser",
+      "verified_on": "2026-10-19",
+      "grade": "官方",
+      "scope": "2027首批暂定安排，可能调整；不是邀请考试证明",
+      "review_due": "2026-11-18",
+      "candidate_ids": [],
+      "rule_ids": [],
+      "status": "verified",
+      "source_group": 3,
+      "excerpt": "1.按批次组织统一笔试。时间初定为国调网调及北京电力交易中心提前批2026年10月31日、第一批2026年12月6日、第二批2027年3月、第三批2027年5月（时间如有调整，以招聘平台发布的考试公告为准）。",
+      "original_locator": "三、组织招聘笔试",
+      "main_conclusion": true,
+      "publication_status": "published"
+    },
+    {
+      "id": "E008",
+      "claim": "电网招聘条件由单位公告确定",
+      "value": null,
+      "unit": "",
+      "source": {
+        "organization": "国家电网高校毕业生招聘总公告",
+        "url": "https://zhaopin.sgcc.com.cn/sgcchr/static/unitPart.html?bullet_id=dcefb56d04714dc4b488d0a7a204bf76",
+        "locator": "二、招聘批次"
+      },
+      "published_on": "2026-10-17",
+      "retrieved_on": "2026-10-19",
+      "retrieval_method": "browser",
+      "verified_on": "2026-10-19",
+      "grade": "官方",
+      "scope": "本案浙江单位条件待核，不能把全国总公告当省公司资格",
+      "review_due": "2026-11-18",
+      "candidate_ids": [],
+      "rule_ids": [],
+      "status": "verified",
+      "source_group": 3,
+      "excerpt": "各批次招聘单位范围由各单位根据招聘需求确定，以各单位招聘公告为准。",
+      "original_locator": "二、招聘批次",
+      "main_conclusion": true,
+      "publication_status": "published"
+    },
+    {
+      "id": "E009",
+      "claim": "电网笔试与面试范围入口",
+      "value": null,
+      "unit": "",
+      "source": {
+        "organization": "国家电网高校毕业生招聘总公告",
+        "url": "https://zhaopin.sgcc.com.cn/sgcchr/static/unitPart.html?bullet_id=dcefb56d04714dc4b488d0a7a204bf76",
+        "locator": "三、组织招聘笔试：考试大纲及电工类附件"
+      },
+      "published_on": "2026-10-17",
+      "retrieved_on": "2026-10-19",
+      "retrieval_method": "browser",
+      "verified_on": "2026-10-19",
+      "grade": "官方",
+      "scope": "电工类须回2027版附件逐项核；本报告不凭旧年大纲填知识比例",
+      "review_due": "2026-11-18",
+      "candidate_ids": [],
+      "rule_ids": [],
+      "status": "verified",
+      "source_group": 3,
+      "excerpt": "2.笔试范围详见各科目考试大纲。",
+      "original_locator": "三、组织招聘笔试：考试大纲及电工类附件",
+      "main_conclusion": true,
+      "publication_status": "published"
+    },
+    {
+      "id": "E010",
+      "claim": "浙江电网具体招聘条件",
+      "value": null,
+      "unit": "",
+      "source": {
+        "organization": "国家电网高校毕业生招聘总公告",
+        "url": "https://zhaopin.sgcc.com.cn/sgcchr/static/unitPart.html?bullet_id=dcefb56d04714dc4b488d0a7a204bf76",
+        "locator": "浙江电网具体招聘条件"
+      },
+      "published_on": null,
+      "retrieved_on": "2026-10-19",
+      "retrieval_method": "curl",
+      "verified_on": null,
+      "grade": "官方",
+      "scope": "只保留条件路线，不作已可报或已录用判断",
+      "review_due": "2026-11-18",
+      "candidate_ids": [],
+      "rule_ids": [],
+      "status": "unretrieved",
+      "source_group": 3,
+      "excerpt": "",
+      "original_locator": "浙江电网具体招聘条件",
+      "main_conclusion": true,
+      "publication_status": "unretrieved",
+      "gap": "本案未取得浙江单位2027首批公告；总公告计划在后续窗口发布，专业、学籍、年龄、获证期限、工作地点及合同待核。"
+    },
+    {
+      "id": "E011",
+      "claim": "浙江省考岗位与当届条件",
+      "value": null,
+      "unit": "",
+      "source": {
+        "organization": "浙江省考岗位与当届条件",
+        "url": "http://gwy.zjks.gov.cn/",
+        "locator": "浙江省考岗位与当届条件"
+      },
+      "published_on": null,
+      "retrieved_on": "2026-10-19",
+      "retrieval_method": "curl",
+      "verified_on": null,
+      "grade": "官方",
+      "scope": "只保留条件路线，不作已可报或已录用判断",
+      "review_due": "2026-11-18",
+      "candidate_ids": [],
+      "rule_ids": [],
+      "status": "unretrieved",
+      "source_group": 4,
+      "excerpt": "",
+      "original_locator": "浙江省考岗位与当届条件",
+      "main_conclusion": true,
+      "publication_status": "unretrieved",
+      "gap": "本案未取得适用本届的具体岗位公告和职位表，不用2026岗位代替当前可报资格。"
+    },
+    {
+      "id": "E012",
+      "claim": "企业具体岗位与工资条件",
+      "value": null,
+      "unit": "",
+      "source": {
+        "organization": "企业具体岗位与工资条件",
+        "url": "https://www.ncss.cn/",
+        "locator": "企业具体岗位与工资条件"
+      },
+      "published_on": null,
+      "retrieved_on": "2026-10-19",
+      "retrieval_method": "curl",
+      "verified_on": null,
+      "grade": "官方",
+      "scope": "只保留条件路线，不作已可报或已录用判断",
+      "review_due": "2026-11-18",
+      "candidate_ids": [],
+      "rule_ids": [],
+      "status": "unretrieved",
+      "source_group": 5,
+      "excerpt": "",
+      "original_locator": "企业具体岗位与工资条件",
+      "main_conclusion": true,
+      "publication_status": "unretrieved",
+      "gap": "尚未选定具体企业岗位，岗位任务、地点、合同、工资、工时及到岗日均未取得。"
+    }
+  ],
+  "source_groups": [
+    {
+      "title": "本人画像与分析口径",
+      "url": "",
+      "metadata": "2026-10-19 登记；个人计划不是官方日期；预算估计不是收费报价"
+    },
+    {
+      "title": "中央机关考试录用公告（官方转载）",
+      "url": "https://shanghai.chinatax.gov.cn/xxgk/rsxx/202610/t481763.html",
+      "metadata": "发布：2026-10-15；取文：2026-10-19；方式：curl；仅2027国考"
+    },
+    {
+      "title": "国家电网高校毕业生招聘总公告",
+      "url": "https://zhaopin.sgcc.com.cn/sgcchr/static/unitPart.html?bullet_id=dcefb56d04714dc4b488d0a7a204bf76",
+      "metadata": "发布：2026-10-17；取文：2026-10-19；方式：浏览器（curl412）；仅总体安排"
+    },
+    {
+      "title": "浙江省考岗位与当届条件",
+      "url": "http://gwy.zjks.gov.cn/",
+      "metadata": "取文：2026-10-19；仅限本案，未取到项见备注"
+    },
+    {
+      "title": "企业具体岗位与工资条件",
+      "url": "https://www.ncss.cn/",
+      "metadata": "取文：2026-10-19；仅限本案，未取到项见备注"
+    }
+  ],
+  "report_blocks": {
+    "12_evidence_levels_6": {
+      "type": "evidence_legend",
+      "content": {
+        "rows": [
+          [
+            "官方",
+            "只证明所引年份、对象与条款"
+          ],
+          [
+            "多人一致",
+            "本案未以此认证数字和资格"
+          ],
+          [
+            "单人说法",
+            "本人描述只用于画像与意愿"
+          ],
+          [
+            "推测",
+            "分析条件及换算口径，不能冒充官方结果"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E001"
+      ]
+    },
+    "12_sources_7": {
+      "type": "source_endnotes",
+      "content": {},
+      "evidence_refs": [
+        "E001"
+      ]
+    }
+  }
+}

@@ -61,7 +61,7 @@
    "caption",
    "source_refs"
   ],
-  "missing_data": "explicit_unavailable_or_not_applicable_no_zero_or_invented_points"
+  "missing_data": "one_line_gap_with_missing_source_and_expected_date_no_empty_figures"
  },
  "source_numbering": "stable_evidence_ids_in_first_use_order",
  "review_policy": "shared_rules#六复核与评分",
@@ -704,13 +704,15 @@
      "rules": [
       "matrix_policy",
       "four_or_more_dimensions",
-      "unknown_cells_keep_status"
+      "unknown_cells_keep_status",
+      "missing_data_uses_one_line_gap_not_empty_figure"
      ],
      "count_by": "components",
      "narrative_key": "05.matrix_text",
      "narrative_type": "figure_text",
      "node_types": [
-      "comparison_matrix"
+      "comparison_matrix",
+      "data_gap"
      ]
     },
     {
@@ -981,13 +983,15 @@
       "task_and_deadline",
       "checkpoint_markers",
       "dates_ref_resolve",
-      "official_and_personal_dates_distinguished"
+      "official_and_personal_dates_distinguished",
+      "missing_data_uses_one_line_gap_not_empty_figure"
      ],
      "count_by": "components",
      "narrative_key": "07.timeline_text",
      "narrative_type": "figure_text",
      "node_types": [
-      "timeline"
+      "timeline",
+      "data_gap"
      ]
     },
     {
@@ -1268,14 +1272,16 @@
      "condition": "offer_basis_actual_or_scenario",
      "rules": [
       "annual_take_home_cash",
-      "not_gross_or_housing_fund"
+      "not_gross_or_housing_fund",
+      "missing_data_uses_one_line_gap_not_empty_figure"
      ],
      "otherwise": "explicit_no_offer_and_input_gaps",
      "count_by": "components",
      "narrative_key": "09.annual_income_text",
      "narrative_type": "figure_text",
      "node_types": [
-      "bars"
+      "bars",
+      "data_gap"
      ]
     },
     {
@@ -1300,14 +1306,16 @@
      "source_required": true,
      "condition": "offer_basis_actual_or_scenario",
      "rules": [
-      "cash_divided_by_actual_hours"
+      "cash_divided_by_actual_hours",
+      "missing_data_uses_one_line_gap_not_empty_figure"
      ],
      "otherwise": "explicit_no_offer_and_input_gaps",
      "count_by": "components",
      "narrative_key": "09.hourly_income_text",
      "narrative_type": "figure_text",
      "node_types": [
-      "bars"
+      "bars",
+      "data_gap"
      ]
     },
     {
@@ -1333,14 +1341,16 @@
      "condition": "offer_basis_actual_or_scenario",
      "rules": [
       "subtract_housing_and_necessary_costs",
-      "ordinary_month_if_bonus_averaged"
+      "ordinary_month_if_bonus_averaged",
+      "missing_data_uses_one_line_gap_not_empty_figure"
      ],
      "otherwise": "explicit_no_offer_and_input_gaps",
      "count_by": "components",
      "narrative_key": "09.monthly_balance_text",
      "narrative_type": "figure_text",
      "node_types": [
-      "bars"
+      "bars",
+      "data_gap"
      ]
     },
     {

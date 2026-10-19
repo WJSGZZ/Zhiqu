@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "paths": [
+    {
+      "id": "P1",
+      "name": "管理类专业学位",
+      "status": "ineligible",
+      "hard_conditions": [
+        {
+          "condition": "2027工商管理专业学位：本科2025毕业，至2027入学不足要求工作年限",
+          "status": "failed",
+          "evidence_refs": [
+            "E002"
+          ]
+        }
+      ],
+      "excluded_reason": "2027工商管理专业学位：本科2025毕业，至2027入学不足要求工作年限"
+    },
+    {
+      "id": "P2",
+      "name": "学术或相关技术方向",
+      "status": "pending",
+      "hard_conditions": [
+        {
+          "condition": "目标项目目录未选定，不把管理专业条件外推",
+          "status": "unknown",
+          "evidence_refs": [
+            "E003"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P3",
+      "name": "先工作或继续工作",
+      "status": "pending",
+      "hard_conditions": [
+        {
+          "condition": "具体职责与本人接受条件待核",
+          "status": "unknown",
+          "evidence_refs": [
+            "E001"
+          ]
+        }
+      ]
+    }
+  ],
+  "school_programs": [
+    {
+      "id": "S1",
+      "name": "待选：内容贴近现有基础",
+      "status": "pending",
+      "hard_conditions": [
+        {
+          "condition": "具体学校、代码、科目未选；标签不等于难度结论",
+          "status": "unknown",
+          "evidence_refs": [
+            "E003"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S2",
+      "name": "待选：需要补一部分课程",
+      "status": "pending",
+      "hard_conditions": [
+        {
+          "condition": "具体学校、代码、科目未选；标签不等于难度结论",
+          "status": "unknown",
+          "evidence_refs": [
+            "E003"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S3",
+      "name": "待选：跨越较多基础的方向",
+      "status": "pending",
+      "hard_conditions": [
+        {
+          "condition": "具体学校、代码、科目未选；标签不等于难度结论",
+          "status": "unknown",
+          "evidence_refs": [
+            "E003"
+          ]
+        }
+      ]
+    }
+  ],
+  "personal_difficulty": {
+    "mock_exam": null,
+    "checkpoint": {
+      "date": "{{k:/context/personal_dates/checkpoint}}",
+      "action": "取得目标同科目完整模考（总分、单科及完成情况），在此个人检查点定档；届时无有效证据就继续不定档。"
+    }
+  }
+}

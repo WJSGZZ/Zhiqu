@@ -82,9 +82,6 @@
       "id": "C1",
       "name": "华南理工大学电气工程",
       "path_id": "P1",
-      "tier": "冒险",
-      "tier_status": "conditional_investigation_only",
-      "tier_basis": "调查分档仅在同科目模考、费用及本人接受度核清后成立；当前不宣称哪校更易录取",
       "status": "pending",
       "hard_conditions": [
         {
@@ -101,9 +98,6 @@
       "id": "C2",
       "name": "广东工业大学电气工程",
       "path_id": "P1",
-      "tier": "够一够",
-      "tier_status": "conditional_investigation_only",
-      "tier_basis": "调查分档仅在同科目模考、费用及本人接受度核清后成立；当前不宣称哪校更易录取",
       "status": "pending",
       "hard_conditions": [
         {
@@ -120,9 +114,6 @@
       "id": "C3",
       "name": "长沙理工大学电气方向（当年目录待核）",
       "path_id": "P1",
-      "tier": "相对稳妥",
-      "tier_status": "conditional_investigation_only",
-      "tier_basis": "调查分档仅在同科目模考、费用及本人接受度核清后成立；当前不宣称哪校更易录取",
       "status": "pending",
       "hard_conditions": [
         {
@@ -201,13 +192,20 @@
           [
             "长沙理工大学电气方向（当年目录待核）",
             "已取到当年招生简章，专业目录附件需验证码",
-            "仅占相对稳妥的条件调查位；科目、费用与完整模考未核，档位未成立，不作为保底"
+            "仅为待核调查对象；科目、费用与完整模考未核，不分个人难度，不作为保底"
           ]
         ]
       },
       "evidence_refs": [
         "E0017"
       ]
+    }
+  },
+  "personal_difficulty": {
+    "mock_exam": null,
+    "checkpoint": {
+      "date": "{{k:/context/personal_dates/checkpoint}}",
+      "action": "取得目标同科目完整模考（总分、单科及完成情况），在此个人检查点定档；届时无有效证据就继续不定档。"
     }
   }
 }
