@@ -27,7 +27,6 @@ body{margin:0;color:var(--ink);font-family:var(--sans);font-size:16px;line-heigh
 /* ---- 版心与开头 ---- */
 .wrap{max-width:780px;margin:0 auto;padding:56px 24px 88px;}
 .hero{position:relative;overflow:hidden;padding:0 2px 6px;}
-.hero-logo{display:block;width:64px;height:64px;margin:0 0 18px -4px;}
 .eyebrow{font-size:13px;letter-spacing:4px;color:var(--amber);font-weight:600;margin:0 0 16px;display:flex;align-items:center;gap:12px;}
 .eyebrow::before{content:'';width:28px;height:3px;border-radius:2px;background:var(--amber);}
 .hero h1{font-family:var(--serif);font-weight:700;font-size:40px;line-height:1.2;letter-spacing:1px;margin:0 0 14px;color:var(--green-deep);}
@@ -154,13 +153,12 @@ textarea{resize:vertical;min-height:84px;}
 .landing{min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;}
 .landing-wrap{width:100%;max-width:1060px;padding:clamp(20px,5vh,56px) 40px;}
 .landing .hero{text-align:center;overflow:visible;padding:0;}
-.landing .hero > :not(.hero-mark){position:relative;z-index:1;}
-.hero-mark{position:absolute;left:50%;top:50%;transform:translate(-50%,-52%);z-index:0;font-family:var(--serif);font-size:300px;line-height:1;color:var(--green-deep);opacity:.045;pointer-events:none;user-select:none;}
-.landing .hero-logo{margin:0 auto 12px;}
-.landing .eyebrow{justify-content:center;}
-.landing .hero .tag{margin:0 auto;}
+.landing .hero-logo{display:block;width:88px;height:88px;margin:0 auto 14px;}
+.landing .brand-title{font-size:52px;letter-spacing:12px;margin:0 0 10px;padding-left:12px;}
+.landing .motto{margin:0 0 18px;}
+.landing .motto::after{content:'';display:block;width:32px;height:2px;margin:18px auto 0;border-radius:2px;background:var(--amber);}
+.landing .hero .tag{margin:0 auto;max-width:31em;text-wrap:balance;}
 .landing .choices{margin:clamp(24px,4.5vh,44px) 0 0;}
-.landing .eyebrow::before{display:none;}
 .landing .vow{text-align:center;margin-top:clamp(16px,3.5vh,32px);border-top:0;padding-top:0;}
 @media (max-width:860px){.choices{grid-template-columns:1fr;}.landing .choices{gap:12px;margin-top:28px;}}
 @media (max-width:860px){
@@ -170,8 +168,8 @@ textarea{resize:vertical;min-height:84px;}
 }
 @media (max-width:560px){
   .landing-wrap{padding:28px 16px;}
-  .landing .hero-logo{width:48px;height:48px;margin-bottom:10px;}
-  .hero-mark{font-size:200px;}
+  .landing .hero-logo{width:64px;height:64px;margin-bottom:10px;}
+  .landing .brand-title{font-size:40px;letter-spacing:8px;padding-left:8px;}
   .landing .vow{font-size:12px;margin-top:22px;}
 }
 @media (max-width:560px){
@@ -179,7 +177,6 @@ textarea{resize:vertical;min-height:84px;}
   .wrap{padding:36px 16px 64px;}
   .topbar-inner{padding:10px 16px;}
   .hero h1{font-size:30px;}
-  .hero-logo{width:52px;height:52px;margin-bottom:14px;}
   .intro{padding:22px 20px 20px;}
   .intro .lede{font-size:19px;}
   .card{padding:24px 18px 22px;border-radius:12px;}
