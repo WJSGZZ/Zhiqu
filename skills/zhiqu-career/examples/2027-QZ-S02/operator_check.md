@@ -44,7 +44,7 @@
   定位：报告第 1、5、7、8 节；二、报考程序：报名和提交申请；三、考试内容时间：公共科目；二、注册认证。
   核完填：核查人：___；核查日期：___；结果（确认/不符/仍未知）：___；原文依据与范围：___；对建议的处理：___。
 
-<!-- operator-item {"id": "PROFILE", "fingerprint": "9ca4cc405abbac0bbdb70387e2a2da2eb5ad2259a6e046ff872b7a446a55602d"} -->
+<!-- operator-item {"id": "PROFILE", "fingerprint": "6e428f1930d50c391baec8026c6936d75b59b263345814aaabefd30239aeaef0"} -->
 - [ ] PROFILE｜和客户确认画像｜本人登记与缺项
   核什么：
   - 学历 = 本科在读 → 第 2 节画像与判断输入
@@ -69,7 +69,7 @@
   - 本人税前期望 = 6000 → 第 2 节：段落“本人税前期望为每月 6,000 元，…”
   - 尚缺 收入底线：请补充收入底线
   适用范围：只确认本人提供的信息，不把报告情景当真实成绩、录取或offer。
-  去哪里核：profile.txt 对应节名；profile_parse.json.fields 的 quote/value
+  去哪里核：profile.json 的题目与 profile-supplement.txt 的补充原话；profile_parse.json.fields 的 quote/value
   定位：按上列登记字段逐项核对。
   核完填：核查人：___；核查日期：___；结果（确认/不符/仍未知）：___；原文依据与范围：___；对建议的处理：___。
 

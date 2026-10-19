@@ -149,6 +149,60 @@ class TestCheckReportGuide(unittest.TestCase):
 
 
 class TestCheckPortrait(unittest.TestCase):
+    def _json_repo(self, tmp):
+        """新问卷只复制 JSON，不再靠旧文字标题识别。"""
+        make_min_repo(tmp)
+        for kind in ("grad", "career", "gaokao"):
+            write(os.path.join(tmp, kind + ".html"),
+                  "<script>STORE_KEY='zhiqu_" + kind + "_v1';"
+                  "zhiquCopy(zhiquProfile('" + kind + "'));</script>\n")
+        write(os.path.join(tmp, "assets/questionnaire.js"),
+              "function zhiquProfile(kind){return {zhiqu:kind,schema:1};}\n")
+        write(os.path.join(tmp, "README.md"),
+              '问卷复制 JSON，以 "zhiqu" 字段识别高考、读研或求职。\n')
+
+    def test_pass_json_profiles_with_shared_generator(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            self._json_repo(tmp)
+            self.assertEqual(cf.check_portrait_consistency(tmp), [])
+
+    def test_fail_json_profile_wrong_type(self):
+        for kind, wrong_kind in (("grad", "career"), ("career", "gaokao"),
+                                 ("gaokao", "grad")):
+            with self.subTest(kind=kind), tempfile.TemporaryDirectory() as tmp:
+                self._json_repo(tmp)
+                write(os.path.join(tmp, kind + ".html"),
+                      "<script>STORE_KEY='zhiqu_" + kind + "_v1';"
+                      "zhiquCopy(zhiquProfile('" + wrong_kind + "'));</script>\n")
+                issues = cf.check_portrait_consistency(tmp)
+                self.assertTrue(any(i[0] == cf.ERROR and i[1] == kind + ".html"
+                                    and "未接入 JSON 画像" in i[3] for i in issues))
+
+    def test_fail_json_profile_missing_shared_generator(self):
+        for serializer in (None, "function anotherProfile(){return {schema:1};}",
+                           "function zhiquProfile(kind){return {schema:2};}"):
+            with self.subTest(serializer=serializer), tempfile.TemporaryDirectory() as tmp:
+                self._json_repo(tmp)
+                shared = os.path.join(tmp, "assets/questionnaire.js")
+                if serializer is None:
+                    os.remove(shared)
+                else:
+                    write(shared, serializer)
+                issues = cf.check_portrait_consistency(tmp)
+                self.assertEqual({i[1] for i in issues if i[0] == cf.ERROR
+                                  and "缺共用 schema=1 JSON 画像生成器" in i[3]},
+                                 {"gaokao.html", "grad.html", "career.html"})
+
+    def test_fail_json_profile_readme_still_uses_old_format(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            self._json_repo(tmp)
+            write(os.path.join(tmp, "README.md"),
+                  "画像以【读研 · 自我盘点】【求职 · 自我盘点】"
+                  "【高考志愿 · 自我盘点】开头。\n")
+            issues = cf.check_portrait_consistency(tmp)
+            self.assertTrue(any(i[0] == cf.ERROR and i[1] == "README.md"
+                                and "须同步 JSON 画像格式" in i[3] for i in issues))
+
     def test_pass(self):
         with tempfile.TemporaryDirectory() as tmp:
             make_min_repo(tmp)
@@ -256,10 +310,10 @@ class TestCheckFileSize(unittest.TestCase):
 
 class TestRealRepo(unittest.TestCase):
     def test_no_hard_errors_on_real_repo(self):
-        """真实仓库：引用文件存在、报告目录完整、画像开头一致 三项检查不应有错误。
+        """真实仓库：引用文件存在、报告目录完整、画像输入一致 三项检查不应有错误。
         问卷节名引用、复核期限 这两项目前允许有错误/提醒（文档待作者本人修订）。"""
         result = cf.run_all(REPO_ROOT, date(2026, 9, 30))
-        for name in ("引用的文件存在", "报告目录完整", "画像开头一致"):
+        for name in ("引用的文件存在", "报告目录完整", "画像输入一致"):
             errors = [i for i in result[name] if i[0] == cf.ERROR]
             self.assertEqual(errors, [], f"{name} 不应有错误，实际：{errors}")
 

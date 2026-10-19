@@ -122,5 +122,13 @@
         "output_ref": "{{c:/reserve_ceiling}}"
       }
     ]
+  },
+  "profile": {
+    "case_id": "2028-YJ-S02",
+    "file": "profile.json",
+    "filled_at": "2026-10-19T16:00:00+08:00",
+    "form": "8bcf0611",
+    "sha256": "b04770d7a2589f2dbe7b35a80efaad8953b8db8666a26db85875f82cfc9eaf72",
+    "status": "有数据"
   }
 }

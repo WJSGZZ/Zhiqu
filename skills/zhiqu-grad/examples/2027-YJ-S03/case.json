@@ -54,5 +54,13 @@
     "region": "山东",
     "data_asof": "{{k:/context/as_of}}",
     "conclusion": "保留推免和考研，先统一排名口径；不为加分透支主课。"
+  },
+  "profile": {
+    "case_id": "2027-YJ-S03",
+    "file": "profile.json",
+    "filled_at": "2026-10-19T16:00:00+08:00",
+    "form": "8bcf0611",
+    "sha256": "820007d587fbc609bfafef72c97fe3a8bdbdfed8cd31f4c8b2aa9fb075262dc9",
+    "status": "有数据"
   }
 }

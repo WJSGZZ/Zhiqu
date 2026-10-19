@@ -145,5 +145,296 @@
       "locator": "「优先级排序」一节",
       "confirmed": true
     }
-  ]
+  ],
+  "source": {
+    "kind": "career",
+    "form": "ab439b1f",
+    "filled_at": "2026-10-19T16:00:00+08:00",
+    "raw_sha256": "ba10c41ff6ff6b541ba93f315dcdfa9a0b0d458b4fb851c889f0c1776ca4c92d"
+  },
+  "questionnaire_fields": [
+    {
+      "field": "学历",
+      "category": "fact",
+      "status": "given",
+      "value": "本科",
+      "quote": "{\"degree\": \"本科\"}",
+      "locator": "画像 JSON 题目：degree",
+      "confirmed": false,
+      "answer_refs": [
+        "degree"
+      ]
+    },
+    {
+      "field": "专业",
+      "category": "fact",
+      "status": "given",
+      "value": "物流管理",
+      "quote": "{\"major_name\": \"物流管理\"}",
+      "locator": "画像 JSON 题目：major_name",
+      "confirmed": false,
+      "answer_refs": [
+        "major_name"
+      ]
+    },
+    {
+      "field": "毕业时间",
+      "category": "fact",
+      "status": "given",
+      "value": "2027-06",
+      "quote": "{\"grad_time\": \"2027-06\"}",
+      "locator": "画像 JSON 题目：grad_time",
+      "confirmed": false,
+      "answer_refs": [
+        "grad_time"
+      ]
+    },
+    {
+      "field": "求职阶段",
+      "category": "fact",
+      "status": "given",
+      "value": "还没开始",
+      "quote": "{\"job_stage\": \"还没开始\"}",
+      "locator": "画像 JSON 题目：job_stage",
+      "confirmed": false,
+      "answer_refs": [
+        "job_stage"
+      ]
+    },
+    {
+      "field": "经历",
+      "category": "fact",
+      "status": "given",
+      "value": "没有正式实习，社团普通成员；库存管理课程作业，用过 Excel 透视表。",
+      "quote": "{\"work_exp\": \"没有正式实习，社团普通成员；库存管理课程作业，用过 Excel 透视表。\"}",
+      "locator": "画像 JSON 题目：work_exp",
+      "confirmed": false,
+      "answer_refs": [
+        "work_exp"
+      ]
+    },
+    {
+      "field": "证书",
+      "category": "fact",
+      "status": "unknown",
+      "value": null,
+      "quote": "",
+      "locator": "画像 JSON 题目：",
+      "confirmed": false,
+      "answer_refs": []
+    },
+    {
+      "field": "目标岗位",
+      "category": "preference",
+      "status": "unknown",
+      "value": null,
+      "quote": "",
+      "locator": "画像 JSON 题目：",
+      "confirmed": false,
+      "answer_refs": []
+    },
+    {
+      "field": "收入底线",
+      "category": "constraint",
+      "status": "unknown",
+      "value": null,
+      "quote": "{\"salary_known\": \"不确定，请帮我算\"}",
+      "locator": "画像 JSON 题目：salary_known",
+      "confirmed": false,
+      "answer_refs": [
+        "salary_known"
+      ]
+    },
+    {
+      "field": "城市",
+      "category": "preference",
+      "status": "given",
+      "value": "河北省内，是否能住家里取决实际地点。",
+      "quote": "{\"city_first\": \"河北省内，是否能住家里取决实际地点。\"}",
+      "locator": "画像 JSON 题目：city_first",
+      "confirmed": false,
+      "answer_refs": [
+        "city_first"
+      ]
+    },
+    {
+      "field": "单位类型偏好",
+      "category": "preference",
+      "status": "unknown",
+      "value": null,
+      "quote": "",
+      "locator": "画像 JSON 题目：",
+      "confirmed": false,
+      "answer_refs": []
+    },
+    {
+      "field": "户籍",
+      "category": "fact",
+      "status": "unknown",
+      "value": null,
+      "quote": "",
+      "locator": "画像 JSON 题目：",
+      "confirmed": false,
+      "answer_refs": []
+    },
+    {
+      "field": "政治面貌",
+      "category": "fact",
+      "status": "unknown",
+      "value": null,
+      "quote": "",
+      "locator": "画像 JSON 题目：",
+      "confirmed": false,
+      "answer_refs": []
+    },
+    {
+      "field": "多快需要收入",
+      "category": "constraint",
+      "status": "unknown",
+      "value": null,
+      "quote": "",
+      "locator": "画像 JSON 题目：",
+      "confirmed": false,
+      "answer_refs": []
+    }
+  ],
+  "questionnaire": {
+    "zhiqu": "career",
+    "schema": 1,
+    "问卷": "知衢 · 求职 · 自我盘点",
+    "form": "ab439b1f",
+    "filled_at": "2026-10-19T16:00:00+08:00",
+    "sections": [
+      {
+        "title": "你现在的位置",
+        "items": [
+          {
+            "id": "name",
+            "q": "怎么称呼你？（可留空）",
+            "a": "小平（模拟）"
+          },
+          {
+            "id": "degree",
+            "q": "最高学历",
+            "a": "本科"
+          },
+          {
+            "id": "major_name",
+            "q": "主修专业全名",
+            "a": "物流管理"
+          },
+          {
+            "id": "school_tier",
+            "q": "学校层次",
+            "a": "普通公办本科"
+          },
+          {
+            "id": "grad_time",
+            "q": "毕业证取得或预计取得年月",
+            "a": "2027-06"
+          },
+          {
+            "id": "stage_now",
+            "q": "你现在是？",
+            "a": "在校本学年毕业"
+          },
+          {
+            "id": "job_stage",
+            "q": "求职进行到哪一步？",
+            "a": "还没开始"
+          }
+        ]
+      },
+      {
+        "title": "能力与经历",
+        "items": [
+          {
+            "id": "work_exp",
+            "q": "实习或工作经历",
+            "a": "没有正式实习，社团普通成员；库存管理课程作业，用过 Excel 透视表。"
+          },
+          {
+            "id": "weakness",
+            "q": "明显不擅长或不想做的事（选填）",
+            "a": "不愿长期高压销售。"
+          }
+        ]
+      },
+      {
+        "title": "想做什么样的工作",
+        "items": [
+          {
+            "id": "content_pref",
+            "q": "你更喜欢哪类工作内容（可多选）",
+            "a": [
+              "按规则处理数据、文件、流程"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "钱与城市",
+        "items": [
+          {
+            "id": "salary_known",
+            "q": "最低到手月薪（选填）",
+            "a": "不确定，请帮我算"
+          },
+          {
+            "id": "city_first",
+            "q": "可接受城市，最多三个，按顺序填（选填）",
+            "a": "河北省内，是否能住家里取决实际地点。"
+          }
+        ]
+      },
+      {
+        "title": "现实约束",
+        "items": [
+          {
+            "id": "family_expect",
+            "q": "家里对你工作的期望（选填）",
+            "a": "先找能学东西的工作。"
+          }
+        ]
+      },
+      {
+        "title": "方向与状态（可选）",
+        "items": [
+          {
+            "id": "mood",
+            "q": "最近两周，你的睡眠、情绪和精力怎么样？",
+            "a": "基本正常"
+          }
+        ]
+      },
+      {
+        "title": "心里话",
+        "items": [
+          {
+            "id": "worry",
+            "q": "现在最纠结、最想弄明白的一件事（选填）",
+            "a": "不因无实习就限定只能销售，也不把课程作业包装成工作经验。"
+          },
+          {
+            "id": "more",
+            "q": "还有什么想让顾问知道的？（选填）",
+            "a": "户籍、政治面貌没填，具体问到再说。家里可支持多少钱、毕业后能等多久没谈过。先岗位内容和带教，再地点、生活自立，单位名气靠后。"
+          }
+        ]
+      }
+    ],
+    "rank": [],
+    "derived": {},
+    "未填的必答题": [
+      "现在所在城市",
+      "你比较擅长的事（可多选）",
+      "更喜欢的工作场所",
+      "你想进哪类单位（可多选）",
+      "能接受的加班程度",
+      "钱和稳定之间你更看重",
+      "城市打算",
+      "按重要程度，依次点选下面七项（先点最重要的）"
+    ]
+  },
+  "migration_note": "既有字段保留计算引用；新增问卷字段按题号直接读取。旧字段原话见问卷之外的补充，须和问卷一起核对。"
 }

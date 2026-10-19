@@ -9,6 +9,7 @@ import json
 import re
 from datetime import date
 from pathlib import Path
+from profile_store import active_profile, parse_profile, source_files, alignment_errors
 
 SKILLS = Path(__file__).resolve().parents[2]
 FILES = ('case.json', 'profile_parse.json', 'directions.json', 'rules_check.json',
@@ -373,7 +374,12 @@ class PlanningCase:
 
     def stage1(self):
         header='【读研 · 自我盘点】' if self.kind=='grad' else '【求职 · 自我盘点】'
-        if not (self.root/'profile.txt').read_text().startswith(header): self.err('profile.txt','','画像开头错误')
+        raw=active_profile(self.root)
+        structured=parse_profile(raw)
+        if structured is not None:
+            if structured['zhiqu']!=self.kind:self.err('profile.json','','画像类型与登记不一致')
+        elif not raw.startswith(header):self.err('profile.txt','','画像开头错误')
+        if structured is not None:self.errors.extend(alignment_errors(self.root))
         p=self.need('profile_parse.json');fields={x['field']:x for x in p.get('fields',[])};missing={x['field'] for x in p.get('missing',[])}
         for name in PROFILE_FIELDS[self.kind]:
             f=fields.get(name,{})
@@ -573,10 +579,10 @@ class PlanningCase:
         path=self.root/'report_trace.json'
         if not path.exists():return ['report_trace.json：缺生成快照']
         trace=read(path);errors=[]
-        expected=set((*FILES,'profile.txt'))
+        expected=set((*FILES,*source_files(self.root)))
         if set(trace.get('source_sha256',{}))!=expected:errors.append('report_trace.json：输入快照不全')
         if trace.get('contract_sha256')!=sha(self.contract_path()):errors.append('report_trace.json：内容合同已变更，须重生成')
-        tools=('planning_report.py','planning_workflow.py','operator_check.py','check_demos.py','report.py','render_report.py')
+        tools=('planning_report.py','planning_workflow.py','operator_check.py','check_demos.py','report.py','render_report.py','profile_store.py')
         if set(trace.get('tool_sha256',{}))!=set(tools):errors.append('report_trace.json：缺算法/渲染器快照')
         elif any(sha(Path(__file__).with_name(f))!=h for f,h in trace['tool_sha256'].items()):errors.append('report_trace.json：算法或渲染器已变更，须重生成')
         for f,h in {**trace.get('source_sha256',{}),**trace.get('artifacts',{})}.items():
@@ -607,7 +613,7 @@ def review_errors(root, delivery=False, limits=None):
         if len(rev.get('sampled_sources',[]))<lim['review_samples_min'] or any(x.get('matches') is not True for x in rev.get('sampled_sources',[])):errors.append('review.json.sampled_sources：抽查未通过')
         from operator_check import validate_operator
         errors.extend(validate_operator(root,True))
-    required=({'report.json','report.pdf'} | {str(p.relative_to(root)) for p in root.rglob('result*.json')}) if (root/'report.json').exists() else set((*FILES,'profile.txt','report.md','report.html','report.pdf','report_trace.json'))
+    required=({'report.json','report.pdf'} | {str(p.relative_to(root)) for p in root.rglob('result*.json')}) if (root/'report.json').exists() else set((*FILES,*source_files(root),'report.md','report.html','report.pdf','report_trace.json'))
     required.add('operator_check.md')
     snapshot=rev.get('snapshot',{})
     if not required<=set(snapshot):errors.append('review.json.snapshot：缺完整输入/报告快照')

@@ -118,5 +118,13 @@
         "output_ref": "{{c:/all_cash_months}}"
       }
     ]
+  },
+  "profile": {
+    "case_id": "2027-QZ-S02",
+    "file": "profile.json",
+    "filled_at": "2026-10-19T16:00:00+08:00",
+    "form": "ab439b1f",
+    "sha256": "e985adff4dc5eb31443eef9a859f0e7955f84936dd8dab27a61b56e4b2e50d29",
+    "status": "有数据"
   }
 }

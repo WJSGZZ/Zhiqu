@@ -9,7 +9,7 @@
 | 阶段 | 文件 | 门槛 |
 |---|---|---|
 | 0 登记 | `case.json` | case_id、kind=grad、mode=formal/simulation、prepared_on、version、decision_stage、target_year、education、deadlines、data_commit 均有；日期和编号正确；mode 与人物说明一致 |
-| 1 画像 | `profile.txt`、`profile_parse.json` | 以【读研 · 自我盘点】开头；11个关键字段逐个 given/inferred/unknown，按事实/偏好/约束/本人判断分类，unknown 与未确认推断列入 missing |
+| 1 画像 | `profile.json`（旧版 `profile.txt`）、`profile_parse.json` | JSON 的 zhiqu=grad，旧文字保留原开头；11个关键字段逐个 given/inferred/unknown，按事实/偏好/约束/本人判断分类，unknown 与未确认推断列入 missing |
 | 2 问题与方向 | `directions.json` | questions与directions数量按合同，各有 id/name/support/counter/verify，关联画像或已登记证据，不把“家里要求”直接当本人愿望 |
 | 3 规则复核 | `rules_check.json` | items 逐条含 id、claim、evidence_refs、volatile、verified_on、review_due、status、scope；会变规则合同规定的有效窗口内核；规则未取到说明影响及替代调查，不能认证为满足 |
 | 4 候选 | `candidates.json` | paths 与 school_programs 分开；走考研时 school_programs 中合同要求的调查候选，有同科目完整模考证据才要求个人条件分档；没有时只列调查对象并记录取得模考后的定档检查点；每个候选硬条件 met/unknown/failed 关联证据，剔除有原因；待核不能叫已合格 |
@@ -23,6 +23,10 @@
 规则、候选与证据的处理顺序见总纲“门槛与版本”；阶段3可先登记证据，阶段5做全量一致性检查。simulation 同样查原文、计算和内容，不允许为样例捏造未来分数线或奖学金。
 
 ## 登记与画像字段
+
+读研画像先读取年级、排名口径和路径；未给的推免资格与模考保留未知。 JSON 和旧文字兼容、存档与版本对比见 [画像输入与存档](../../zhiqu-shared/references/report-workflow.md#画像输入与存档)；新作答采用最新版本，登记其文件与题目指纹。
+
+排名含分母、学业/综测口径、首考/重修与覆盖学期；学历取得方式、毕业年月、在职经历、数学科目及可比模考分别登记。最坏退路、年度可落实预算和收入期限分开；拒答不作为不具资格。年级决定是否追问推免、初试、调剂或博士；问卷细分阶段需人工映射到登记的决策阶段，不能只按字面套用。
 
 
 - `decision_stage`：还在考虑 / 备考中 / 初试已出分 / 已有录取；`target_year` 是计划入学年份，不混成考前报名年份。

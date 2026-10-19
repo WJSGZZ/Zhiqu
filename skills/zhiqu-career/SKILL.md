@@ -18,7 +18,8 @@ description: 知衢 · 职业方向规划。读取「知衢 · 求职版」问�
 
 求职报告的阶段产物在 [case-workflow.md](references/case-workflow.md) 逐步列出，必备内容由 [report-contract.json](references/report-contract.json) 登记。 阶段文件由共用 `planning_report.py` 组装，操作见[总纲的工具用法](../zhiqu-shared/references/report-workflow.md#使用工具)。
 
-1. **确认阶段与时间**。问清今天的日期、学历取得方式、毕业与获证时间、最早到岗、求职进度及必须有收入的时点；已有工作/三方/合同/参保经历分别记，不从“应届”自称推定资格（`references/labor-rules.md`）。报告重点按阶段决定：
+0. **登记并选择最新画像**。新画像按 `zhiqu="career"`、`schema=1` 识别；校验 JSON 后，用 `profile_store.py` 按操控者（交付报告前亲自核查关键信息的人）给的案例号存到本机案例目录，`case.json` 记录当前画像文件和题目指纹 `form`。同一案例以 `latest` 返回的最新一版为准，用 `diff` 核对作答变化；真实画像与总登记不提交到仓库。格式和操作见[画像输入与存档](../zhiqu-shared/references/report-workflow.md#画像输入与存档)。
+1. **确认阶段与时间**。有 JSON 时按 `sections[].items[].id` 直接生成 `profile_parse.json` 的对应字段，保留题目原文、节名与作答定位；旧版文字画像沿用逐节解析，缺数据标“无数据，需人工解析”。只对会改变结论的缺项补问，选填拒答保留。核对今天的日期、学历取得方式、毕业与获证时间、最早到岗、求职进度及必须有收入的时点；已有工作/三方/合同/参保经历分别记，不从“应届”自称推定资格（`references/labor-rules.md`）。报告重点按阶段决定：
    - **还没开始 / 准备投递**：找方向、定目标岗位清单、按时间线准备。
    - **已经在投递、面试**：结果和预期明显不符时，检查方向和目标层次是否与自身条件匹配（`references/job-search.md` “没有回音、面试受挫与状态”部分）；简历和面试技巧不在范围内。
    - **有 offer 在比较**：按 `references/offer-compare.md` 算清收入和条件，再按优先级比较；付款、签约由本人操作。

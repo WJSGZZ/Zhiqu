@@ -107,7 +107,9 @@ python3 scripts/optimize.py examples/candidates_demo.csv --rank 30000 --slots 12
 
 ### 2. 填写问卷
 
-打开[在线问卷](https://wjsgzz.github.io/Zhiqu/)，选择高考、读研或求职。完成后点击"生成我的画像"并复制。画像以 `【高考志愿 · 自我盘点】`、`【读研 · 自我盘点】` 或 `【求职 · 自我盘点】` 开头，Agent 据此选择技能。作答只保存在浏览器本地。
+打开[在线问卷](https://wjsgzz.github.io/Zhiqu/)，选择高考、读研或求职。完成后点击“复制我的画像”，把得到的整份 JSON 原样发给 Agent。里面按节保留题目和作答，`zhiqu` 字段区分高考（`gaokao`）、读研（`grad`）、求职（`career`）；填写时间和题目指纹用于比较前后两次作答。作答保存在浏览器本地，由你决定是否发出。旧版文字画像仍可使用。
+
+操控者（交付报告前亲自核查关键信息的人）可用 `profile_store.py` 将画像按案例号存到本机，更新后比较两版，并以最新一版继续工作；真实画像和总登记不提交到仓库。格式与操作见[画像输入与存档](skills/zhiqu-shared/references/report-workflow.md#画像输入与存档)。
 
 ### 3. 生成报告
 
@@ -116,8 +118,13 @@ python3 scripts/optimize.py examples/candidates_demo.csv --rank 30000 --slots 12
 ```text
 这是我的知衢画像。我是 2027 年浙江考生，已出分，位次 58000。
 请核实当年招生计划与选考要求，先让我确认专业偏好和调剂态度，再计算志愿表。
-【高考志愿 · 自我盘点】
-……
+（在这里粘贴“复制我的画像”得到的完整 JSON。）
+```
+
+画像的简短结构示意如下；这是虚构作答，实际使用时粘贴问卷复制出的完整内容：
+
+```json
+{"zhiqu":"grad","schema":1,"问卷":"知衢 · 读研 · 自我盘点","form":"1234abcd","filled_at":"2026-10-19T12:00:00+08:00","sections":[{"title":"你现在的位置","items":[{"id":"grade","q":"你现在是？","a":"大三"}]}],"rank":[],"derived":{},"未填的必答题":[]}
 ```
 
 Agent 会追问影响结论的缺项，查询官方数据，输出 HTML 与 PDF 报告。报告第一页是结论和下一步。

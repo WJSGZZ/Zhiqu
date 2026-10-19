@@ -9,7 +9,7 @@
 | 阶段 | 文件 | 门槛 |
 |---|---|---|
 | 0 登记 | `case.json` | case_id、kind=career、mode=formal/simulation、prepared_on、version、decision_stage、target_year、education、deadlines、data_commit完整；日期、编号、现实/情景阶段不混 |
-| 1 画像 | `profile.txt`、`profile_parse.json` | 以【求职 · 自我盘点】开头；关键字段 given/inferred/unknown，四类分开；缺项和未确认推断进missing，不反向编经历或收入底线 |
+| 1 画像 | `profile.json`（旧版 `profile.txt`）、`profile_parse.json` | JSON 的 zhiqu=career，旧文字保留原开头；关键字段 given/inferred/unknown，四类分开；缺项和未确认推断进missing，不反向编经历或收入底线 |
 | 2 问题与方向 | `directions.json` | questions与directions数量按合同，每个支持/反证/怎么验证齐；用本人问题界定范围，不先按学历或行业名气排序 |
 | 3 规则复核 | `rules_check.json` | 用到的招录/应届/劳动/社保/公积金/税等逐条有来源、核实日、期限、范围与verified/unretrieved；会变的规则合同规定的有效窗口内复核；全国规则不能替代本地缴费条件 |
 | 4 候选 | `candidates.json` | 合同要求的不同岗位或职业方向；每个具体机会硬条件met/unknown/failed指证据，candidate.status为verified/pending/ineligible；不符者剔除有原因，不用品牌代替合同或资格 |
@@ -23,6 +23,10 @@
 阶段3可先登记证据，阶段5检查全量关系，见总纲。simulation同样核官方原文、真实计算和内容，不能为画像安排不存在的资格或工资。
 
 ## 登记与画像字段
+
+求职画像先读取学历取得日期、本人意愿和家庭期待；户籍拒答不作资格否定。 JSON 和旧文字兼容、存档与版本对比见 [画像输入与存档](../../zhiqu-shared/references/report-workflow.md#画像输入与存档)；新作答采用最新版本，登记其文件与题目指纹。
+
+毕业证与学位证的年月、专业全名/代码及辅修、学历取得方式、境外认证分别登记。三方、劳动关系、社保不混同；户籍与生源不混同；本人单位偏好与家里期待分开。收入底线、必要支出、最晚收入月、合同甲方和用工形式、可接受地点与服务期逐项保留；不从某一题直接判定应届资格。
 
 case.json新增字段和旧stage并存，原budget、hypothetical_followup、出生输入和已有计算结果不删不改：
 
