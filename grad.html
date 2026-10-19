@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>读研 · 自我盘点</title>
 <script src="https://cdn.jsdelivr.net/npm/lunar-javascript@1.7.7/lunar.js" defer></script>
-<link rel="stylesheet" href="assets/questionnaire.css">
+<link rel="stylesheet" href="assets/questionnaire.css?v=20261019b">
 </head>
-<body>
+<body data-profile-kind="grad">
 
 <div class="topbar"><div class="topbar-inner">
   <div class="seal-sm">知衢</div>
@@ -90,13 +90,13 @@
             <label class="opt"><input type="radio" name="line_status" value="没过国家线"><span class="box">没过国家线</span></label>
           </div></div>
 <div data-profile-id="exam_degree" class="q"><div class="q-label">这次报考的学位类别</div>
-<div class="opts stack">
+<div class="opts">
 <label class="opt"><input type="radio" name="exam_degree" value="学硕"><span class="box">学硕</span></label>
 <label class="opt"><input type="radio" name="exam_degree" value="专硕"><span class="box">专硕</span></label>
 <label class="opt"><input type="radio" name="exam_degree" value="不清楚"><span class="box">不清楚</span></label>
 </div>
 </div><div data-profile-id="exam_mode" class="q"><div class="q-label">这次报考的学习方式</div>
-<div class="opts stack">
+<div class="opts">
 <label class="opt"><input type="radio" name="exam_mode" value="全日制"><span class="box">全日制</span></label>
 <label class="opt"><input type="radio" name="exam_mode" value="非全日制"><span class="box">非全日制</span></label>
 <label class="opt"><input type="radio" name="exam_mode" value="不清楚"><span class="box">不清楚</span></label>
@@ -167,7 +167,7 @@
 <div data-show-when="grade=已毕业3年内|已毕业3年以上|硕士在读或已毕业"><div data-profile-id="graduated_month" class="q"><div class="q-label">本科毕业年月（选填）</div>
 <input type="month" id="graduated_month" placeholder="">
 </div><div data-profile-id="grad_status" class="q"><div class="q-label">目前状态</div>
-<div class="opts stack">
+<div class="opts">
 <label class="opt"><input type="radio" name="grad_status" value="在职"><span class="box">在职</span></label>
 <label class="opt"><input type="radio" name="grad_status" value="全职备考"><span class="box">全职备考</span></label>
 <label class="opt"><input type="radio" name="grad_status" value="待业"><span class="box">待业</span></label>
@@ -192,7 +192,7 @@
       <div data-profile-id="rank_in_major" class="q"><div class="q-label">专业排名<span class="opt-note">（知道就写）</span></div>
         <input type="text" id="rank_in_major" placeholder="例如：12/120"></div>
 <div data-profile-id="rank_scope" class="q"><div class="q-label">排名分母按哪个范围算？</div>
-<div class="opts stack">
+<div class="opts">
 <label class="opt"><input type="radio" name="rank_scope" value="班级"><span class="box">班级</span></label>
 <label class="opt"><input type="radio" name="rank_scope" value="专业"><span class="box">专业</span></label>
 <label class="opt"><input type="radio" name="rank_scope" value="年级"><span class="box">年级</span></label>
@@ -200,13 +200,13 @@
 <label class="opt"><input type="radio" name="rank_scope" value="不清楚"><span class="box">不清楚</span></label>
 </div>
 </div><div data-profile-id="rank_basis" class="q"><div class="q-label">排名按什么口径算？</div>
-<div class="opts stack">
+<div class="opts">
 <label class="opt"><input type="radio" name="rank_basis" value="学业成绩"><span class="box">学业成绩</span></label>
 <label class="opt"><input type="radio" name="rank_basis" value="综合测评"><span class="box">综合测评</span></label>
 <label class="opt"><input type="radio" name="rank_basis" value="不清楚"><span class="box">不清楚</span></label>
 </div>
 </div><div data-profile-id="rank_attempt" class="q"><div class="q-label">排名用首考成绩还是含重修成绩？</div>
-<div class="opts stack">
+<div class="opts">
 <label class="opt"><input type="radio" name="rank_attempt" value="首考"><span class="box">首考</span></label>
 <label class="opt"><input type="radio" name="rank_attempt" value="含重修"><span class="box">含重修</span></label>
 <label class="opt"><input type="radio" name="rank_attempt" value="不清楚"><span class="box">不清楚</span></label>
@@ -237,7 +237,7 @@
         <input data-profile-label="英语分数" class="mt" type="text" id="eng_score" placeholder="分数，例如：六级 520；雅思 6.5（小分 6）"></div>
 
       <div data-profile-id="math" class="q req"><div class="q-label">目标方向考哪门数学？</div>
-<div class="opts stack">
+<div class="opts">
 <label class="opt"><input type="radio" name="math" value="数学一"><span class="box">数学一</span></label>
 <label class="opt"><input type="radio" name="math" value="数学二"><span class="box">数学二</span></label>
 <label class="opt"><input type="radio" name="math" value="数学三"><span class="box">数学三</span></label>
@@ -420,7 +420,7 @@
             <label class="opt"><input type="radio" name="ab_len" value="都可以"><span class="box">都可以</span></label>
           </div></div>
 <div data-profile-id="language_chances" class="q"><div class="q-label">申请截止前，语言考试最多还能考几次？</div>
-<div class="opts stack">
+<div class="opts">
 <label class="opt"><input type="radio" name="language_chances" value="已达标"><span class="box">已达标</span></label>
 <label class="opt"><input type="radio" name="language_chances" value="1次"><span class="box">1次</span></label>
 <label class="opt"><input type="radio" name="language_chances" value="2次以上"><span class="box">2次以上</span></label>
@@ -462,7 +462,7 @@
         <div data-profile-id="ab_return_plan" class="q req"><div class="q-label">这个学位准备怎样使用，毕业时间能衔接吗？</div>
           <textarea id="ab_return_plan" placeholder="目标国家/城市、工作或考公选调/国企岗位；项目全称、学习方式、预计获学位时间；是否核过认证及岗位要求。还没定就写最在意的用途和未知项。"></textarea></div>
 <div data-profile-id="ab_cross" class="q"><div class="q-label">境外或合作项目是否打算换方向？</div>
-<div class="opts stack">
+<div class="opts">
 <label class="opt"><input type="radio" name="ab_cross" value="是"><span class="box">是</span></label>
 <label class="opt"><input type="radio" name="ab_cross" value="否"><span class="box">否</span></label>
 <label class="opt"><input type="radio" name="ab_cross" value="还不确定"><span class="box">还不确定</span></label>
@@ -511,7 +511,7 @@
 <label class="opt"><input type="radio" name="politics" value="不想说"><span class="box">不想说</span></label>
 </div>
 </div><div data-profile-id="student_cadre" class="q"><div class="q-label">是否担任过学生干部？（选填）</div>
-<div class="opts stack">
+<div class="opts">
 <label class="opt"><input type="radio" name="student_cadre" value="是"><span class="box">是</span></label>
 <label class="opt"><input type="radio" name="student_cadre" value="否"><span class="box">否</span></label>
 <label class="opt"><input type="radio" name="student_cadre" value="不清楚"><span class="box">不清楚</span></label>
@@ -535,7 +535,7 @@
 </div><div class="followup" data-when="tm_quota_status=有，知道往年人数"><span class="ftag">追问 · 推免名额</span><div data-profile-id="tm_quota" class="q"><div class="q-label">往年约几人？注明年份（选填）</div>
 <input type="text" id="tm_quota" placeholder="例如：2026届约8人；只作往年线索">
 </div></div><div data-profile-id="tm_external" class="q"><div class="q-label">推免名额能报外校吗？</div>
-<div class="opts stack">
+<div class="opts">
 <label class="opt"><input type="radio" name="tm_external" value="能"><span class="box">能</span></label>
 <label class="opt"><input type="radio" name="tm_external" value="只能留本校"><span class="box">只能留本校</span></label>
 <label class="opt"><input type="radio" name="tm_external" value="不知道"><span class="box">不知道</span></label>
@@ -682,7 +682,7 @@
 <label class="opt"><input type="radio" name="money" value="不想说"><span class="box">不想说</span></label>
 </div>
 </div><div data-profile-id="aid_need" class="q"><div class="q-label">是否必须靠奖助或助学贷款？（选填）</div>
-<div class="opts stack">
+<div class="opts">
 <label class="opt"><input type="radio" name="aid_need" value="是"><span class="box">是</span></label>
 <label class="opt"><input type="radio" name="aid_need" value="最好有"><span class="box">最好有</span></label>
 <label class="opt"><input type="radio" name="aid_need" value="不需要"><span class="box">不需要</span></label>
@@ -703,7 +703,7 @@
 </div></div>
 
       <div data-profile-id="city_pref" class="q req"><div class="q-label">城市偏好</div>
-<div class="opts stack">
+<div class="opts">
 <label class="opt"><input type="radio" name="city_pref" value="不限"><span class="box">不限</span></label>
 <label class="opt"><input type="radio" name="city_pref" value="只在本省"><span class="box">只在本省</span></label>
 <label class="opt"><input type="radio" name="city_pref" value="指定几个省"><span class="box">指定几个省</span></label>
@@ -870,6 +870,7 @@
 
   <div class="finish">
     <button class="gen-btn" type="button" onclick="clickGenerate()">复制我的画像</button>
+    <p class="copy-privacy" id="copyPrivacy"></p>
 
     <div class="warn" id="warn">
       <h3>等一下，有几处还没填</h3>
@@ -884,7 +885,7 @@
     <p class="copy-done" id="copyDone" role="status"></p>
 
     <div id="output">
-      <p class="out-head">没能自动复制。请长按全选复制下面的 JSON。</p>
+      <p class="out-head">没能自动复制。请长按全选复制下面的内容。</p>
       <textarea id="summary" readonly></textarea>
       <div class="copy-row">
         <button class="copy-btn" type="button" onclick="copySummary()">再试一次复制</button>
@@ -901,7 +902,8 @@
   </div>
 </div>
 
-<script src="assets/questionnaire.js"></script>
+<script src="assets/profile-recipient.js?v=20261019b"></script>
+<script src="assets/questionnaire.js?v=20261019b"></script>
 <script>
   function updateBaziPreview(){
     var el=document.getElementById('baziPreview'); if(!el) return;
@@ -1066,5 +1068,6 @@
     if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(ta.value).then(done).catch(fb);}else{fb();}
   }
 </script>
+<script>zhiquCopyNotice();</script>
 </body>
 </html>

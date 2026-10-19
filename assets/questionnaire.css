@@ -163,3 +163,7 @@ textarea{resize:vertical;min-height:84px;}
 .q > input + input,.q > input + .opts,.q > textarea + .opts{margin-top:12px;}
 .pair > label{flex:1 0 100%;margin-top:10px;}
 .pair > input{flex:1 1 100%;}
+
+/* Copy modes share one quiet note beneath the primary action. */
+.copy-privacy{font-size:13px;line-height:1.7;color:var(--muted);margin:10px 2px 18px;text-align:center;overflow-wrap:anywhere;}
+.plain-copy{appearance:none;background:none;border:0;padding:0 0 0 3px;font:inherit;color:var(--green-deep);text-decoration:underline;text-underline-offset:3px;cursor:pointer;}

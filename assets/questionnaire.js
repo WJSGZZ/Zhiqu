@@ -214,18 +214,18 @@
   }
   function zhiquProfile(kind){
     var labels={gaokao:'高考志愿',grad:'读研',career:'求职'};
-    var profile={zhiqu:kind,schema:1,'问卷':'知衢 · '+labels[kind]+' · 自我盘点',form:zhiquFormHash(),filled_at:localStamp(),sections:[],rank:typeof rankOrder!=='undefined'?rankOrder.slice():[],derived:{},'未填的必答题':[]};
+    var profile={zhiqu:kind,schema:1,'问卷':'知衢 · '+labels[kind]+' · 自我盘点',form:zhiquFormHash(),filled_at:localStamp(),sections:[],rank:typeof rankOrder!=='undefined'?rankOrder.slice():[],derived:{},collapsed:[],counts:{visible:0,answered:0}};
     document.querySelectorAll('.section').forEach(function(sec){
       var section={title:secTitle(sec),items:[]};
       sec.querySelectorAll('.q').forEach(function(q){
-        if(!isVisible(q)||!q.getAttribute('data-profile-id')) return;
+        if(!q.getAttribute('data-profile-id')) return;
+        if(!isVisible(q)){profile.collapsed.push(q.getAttribute('data-profile-id'));return;}
         var text=zhiquQuestionText(q),answer=zhiquQuestionAnswer(q);
-        if(answer!==null){
-          var item={id:q.getAttribute('data-profile-id'),q:text,a:answer},parent=zhiquParentQuestion(q);
-          if(parent) item.followup_of=parent;
-          section.items.push(item);
-        }
-        if(q.classList.contains('req')&&typeof isAnswered==='function'&&!isAnswered(q)) profile['未填的必答题'].push(text);
+        var item={id:q.getAttribute('data-profile-id'),q:text,status:answer!==null?'已答':'未填'},parent=zhiquParentQuestion(q);
+        if(answer!==null){item.a=answer;profile.counts.answered++;}
+        if(q.classList.contains('req'))item.required=true;
+        if(parent)item.followup_of=parent;
+        section.items.push(item);profile.counts.visible++;
       });
       if(section.items.length) profile.sections.push(section);
     });
@@ -247,18 +247,62 @@
     }
     return profile;
   }
-  function zhiquCopy(profile){
-    var full=JSON.stringify(profile,null,2);
+  // Canonical UTF-8 JSON: recursively sort object keys, preserve array order.
+  function zhiquCanonical(value){
+    if(Array.isArray(value))return '['+value.map(zhiquCanonical).join(',')+']';
+    if(value!==null&&typeof value==='object')return '{'+Object.keys(value).sort().map(function(k){return JSON.stringify(k)+':'+zhiquCanonical(value[k]);}).join(',')+'}';
+    return JSON.stringify(value);
+  }
+  async function zhiquSeal(profile){
+    delete profile.checksum;
+    var digest=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(zhiquCanonical(profile)));
+    profile.checksum=Array.from(new Uint8Array(digest)).map(function(n){return n.toString(16).padStart(2,'0');}).join('');
+    return profile;
+  }
+  function zhiquRecipient(){
+    var c=typeof window!=='undefined'&&window.ZHIQU_RECIPIENT;
+    return c&&c.name&&c.spki&&c.hostname&&location.hostname.toLowerCase()===c.hostname.toLowerCase()?c:null;
+  }
+  function zhiquBase64(bytes){
+    var str='';for(var i=0;i<bytes.length;i++)str+=String.fromCharCode(bytes[i]);
+    return btoa(str).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+  }
+  async function zhiquEncrypt(text,recipient){
+    var zipped=new Uint8Array(await new Response(new Blob([text]).stream().pipeThrough(new CompressionStream('gzip'))).arrayBuffer());
+    var publicKey=await crypto.subtle.importKey('spki',Uint8Array.from(atob(recipient.spki),function(c){return c.charCodeAt(0);}),{name:'RSA-OAEP',hash:'SHA-256'},false,['encrypt']);
+    var aes=await crypto.subtle.generateKey({name:'AES-GCM',length:256},true,['encrypt']);
+    var iv=crypto.getRandomValues(new Uint8Array(12));
+    var wrapped=new Uint8Array(await crypto.subtle.encrypt({name:'RSA-OAEP'},publicKey,await crypto.subtle.exportKey('raw',aes)));
+    var ciphertext=new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM',iv:iv,additionalData:new TextEncoder().encode('ZQ1'),tagLength:128},aes,zipped));
+    var bytes=new Uint8Array(2+wrapped.length+iv.length+ciphertext.length);
+    bytes[0]=wrapped.length>>8;bytes[1]=wrapped.length&255;bytes.set(wrapped,2);bytes.set(iv,2+wrapped.length);bytes.set(ciphertext,14+wrapped.length);
+    return 'ZQ1:'+zhiquBase64(bytes);
+  }
+  function zhiquCopyNotice(){
+    var note=document.getElementById('copyPrivacy');if(!note)return;
+    if(zhiquRecipient()){
+      note.textContent='加密后只有'+zhiquRecipient().name+'能打开。想自己交给 AI 分析？';
+      var button=document.createElement('button');button.type='button';button.className='plain-copy';button.textContent='复制未加密版本';
+      button.addEventListener('click',function(){zhiquCopy(zhiquProfile(document.body.getAttribute('data-profile-kind')),true);});note.appendChild(button);
+    }else note.textContent='尚未配置接收人公钥，复制的是未加密画像';
+  }
+  async function zhiquCopy(profile,plain){
     var msg=document.getElementById('copyDone'),out=document.getElementById('output'),ta=document.getElementById('summary');
-    out.classList.remove('show'); ta.value=full;
-    var done=function(){ msg.textContent='已复制 ✓ 直接粘贴发回去就行'; msg.classList.add('show'); };
-    var fail=function(){
-      msg.textContent=''; msg.classList.remove('show');
-      out.classList.add('show'); out.scrollIntoView({block:'start'});
-    };
-    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(full).then(done).catch(function(){
-      try{ ta.removeAttribute('readonly'); ta.select(); if(document.execCommand('copy')){ ta.setAttribute('readonly','readonly'); done(); return; } }catch(e){}
-      ta.setAttribute('readonly','readonly'); fail();
-    }); }
-    else { fail(); }
+    try{
+      await zhiquSeal(profile);
+      var full=JSON.stringify(profile,null,2),recipient=zhiquRecipient();
+      if(recipient&&!plain)full=await zhiquEncrypt(full,recipient);
+      out.classList.remove('show');ta.value=full;
+      var done=function(){msg.textContent='已复制 ✓ 直接粘贴发回去就行';msg.classList.add('show');};
+      var fail=function(){msg.textContent='没能自动复制，请长按全选复制';msg.classList.add('show');out.classList.add('show');out.scrollIntoView({block:'start'});};
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        try{await navigator.clipboard.writeText(full);done();}
+        catch(e){fail();}
+      }else fail();
+      return full;
+    }catch(e){
+      // Never silently send cleartext when encryption was selected.
+      ta.value='';out.classList.remove('show');msg.textContent='未能生成画像，请使用支持安全加密的最新版浏览器并重试。';msg.classList.add('show');
+      return null;
+    }
   }

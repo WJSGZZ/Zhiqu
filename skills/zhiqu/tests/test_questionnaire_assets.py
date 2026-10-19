@@ -2,6 +2,7 @@
 from collections import Counter
 from html.parser import HTMLParser
 import json
+import hashlib
 from pathlib import Path
 import re
 import shutil
@@ -65,6 +66,8 @@ class Elements(HTMLParser):
 NODE_DOM = r'''
 const fs = require('fs');
 const vm = require('vm');
+const {webcrypto}=require('crypto');
+const {TextEncoder}=require('util');
 class Element {
   constructor(tag, attrs={}, text='') {
     this.tagName=tag.toUpperCase(); this.attrs=attrs; this._text=text;
@@ -76,6 +79,7 @@ class Element {
   append(...elements){elements.forEach(e=>{e.previousElementSibling=this.children.at(-1)||null;e.parentElement=this;this.children.push(e);});return this;}
   get textContent(){return this._text+this.children.map(e=>e.textContent).join('');}
   set textContent(value){this._text=value;this.children=[];}
+  scrollIntoView(){}
   get lastElementChild(){return this.children.at(-1)||null;}
   get offsetParent(){return this.hidden||this.parentElement&&this.parentElement.offsetParent===null?null:{};}
   getAttribute(key){return this.attrs[key]??null;}
@@ -114,9 +118,11 @@ rank.append(E('button',{class:'rank-item','data-id':'收入'}).append(rankNumber
 rank.append(E('button',{class:'rank-item','data-id':'城市'}).append(E('span',{class:'rank-num'},'–'),E('span',{},'城市')));
 section.append(question('priority','按重要程度排序',[rank]));
 const missingQ=question('missing','尚未填写的核心题',[E('input',{id:'missing',type:'text'})],{class:'q req'});section.append(missingQ);
-const context={document:{querySelectorAll:s=>root.querySelectorAll(s),querySelector:s=>root.querySelector(s),getElementById:id=>root.querySelectorAll('input,textarea,select,div').find(e=>e.id===id)||null},navigator:{clipboard:{writeText:value=>{clipboardText=value;return {then:fn=>{fn();return {catch:()=>{}};}};}}},rankOrder:[],isAnswered:q=>q.querySelectorAll('input,textarea,select').some(e=>e.type==='radio'||e.type==='checkbox'?e.checked:!!e.value.trim())};
+const context={document:{querySelectorAll:s=>root.querySelectorAll(s),querySelector:s=>root.querySelector(s),getElementById:id=>root.querySelectorAll('input,textarea,select,div').find(e=>e.id===id)||null},navigator:{clipboard:{writeText:value=>{clipboardText=value;return process.argv[2]==='fallback'?Promise.reject(new Error('clipboard denied')):Promise.resolve();}}},rankOrder:[],isAnswered:q=>q.querySelectorAll('input,textarea,select').some(e=>e.type==='radio'||e.type==='checkbox'?e.checked:!!e.value.trim())};
+Object.assign(context,{crypto:webcrypto,TextEncoder,Blob,Response,CompressionStream,location:{hostname:'localhost'},window:{ZHIQU_RECIPIENT:{name:'知衢顾问',hostname:'wjsgzz.github.io',spki:'unused-off-host'}}});
 vm.createContext(context);
 vm.runInContext(fs.readFileSync(process.argv[1],'utf8'),context);
+(async()=>{
 const initialHash=context.zhiquFormHash();
 month.value='2027-06';
 const answerHash=context.zhiquFormHash();
@@ -128,8 +134,9 @@ monthQ.querySelector('.q-label').textContent='毕业年月（必答）';
 section.attrs['data-title']='修改后的节名';
 const sectionHash=context.zhiquFormHash();section.attrs['data-title']='模拟基本信息';
 const data=context.zhiquProfile('career');
-context.zhiquCopy(data);
-console.log(JSON.stringify({initialHash,answerHash,rankHash,wordingHash,sectionHash,data,clipboardText,summaryText:context.document.getElementById('summary').value}));
+await context.zhiquCopy(data);
+console.log(JSON.stringify({initialHash,answerHash,rankHash,wordingHash,sectionHash,data,clipboardText,summaryText:context.document.getElementById('summary').value,notice:context.document.getElementById('copyDone').textContent,recipient:context.zhiquRecipient()}));
+})().catch(error=>{console.error(error);process.exitCode=1;});
 '''
 
 
@@ -139,10 +146,10 @@ class QuestionnaireAssets(unittest.TestCase):
             with self.subTest(name=name):
                 p = Elements(); p.feed((ROOT / (name + '.html')).read_text(encoding='utf-8'))
                 self.assertFalse([key for key, n in Counter(p.ids).items() if n > 1])
-                self.assertIn('assets/questionnaire.css', p.assets)
-                self.assertIn('assets/questionnaire.js', p.assets)
+                for asset in ('questionnaire.css', 'questionnaire.js', 'profile-recipient.js'):
+                    self.assertTrue(any(re.fullmatch(r'assets/' + re.escape(asset) + r'\?v=[A-Za-z0-9._-]+', target) for target in p.assets))
                 for target in p.assets:
-                    self.assertTrue((ROOT / target).is_file())
+                    self.assertTrue((ROOT / target.split('?', 1)[0]).is_file())
 
     def test_stable_question_ids_and_shared_json_copy_only(self):
         for name in PAGES:
@@ -195,11 +202,11 @@ class QuestionnaireAssets(unittest.TestCase):
                     for key in ('offers', 'work_offer'):
                         self.assertNotIn(key, by_id)
 
-    def node_result(self):
+    def node_result(self, mode='normal'):
         node = shutil.which('node')
         if node is None:
             self.skipTest('Node.js unavailable; static questionnaire guards still run')
-        result = subprocess.run([node, '-e', NODE_DOM, str(ROOT / 'assets/questionnaire.js')],
+        result = subprocess.run([node, '-e', NODE_DOM, str(ROOT / 'assets/questionnaire.js'), mode],
                                 check=True, capture_output=True, text=True, timeout=15)
         return json.loads(result.stdout)
 
@@ -216,6 +223,14 @@ class QuestionnaireAssets(unittest.TestCase):
         self.assertEqual(result['summaryText'], result['clipboardText'])
         self.assertTrue(result['clipboardText'].lstrip().startswith('{'))
         self.assertNotIn('【以下是给 AI 读的数据', result['clipboardText'])
+
+    def test_off_host_defaults_to_plaintext_and_clipboard_failure_keeps_identical_text(self):
+        result = self.node_result('fallback')
+        self.assertIsNone(result['recipient'])
+        self.assertTrue(result['clipboardText'].startswith('{'))
+        self.assertEqual(result['summaryText'], result['clipboardText'])
+        self.assertIn('长按全选复制', result['notice'])
+        self.assertEqual(json.loads(result['summaryText']), result['data'])
 
     def test_shared_serializer_includes_month_and_omits_hidden_answers(self):
         data = self.node_result()['data']
@@ -234,7 +249,17 @@ class QuestionnaireAssets(unittest.TestCase):
         self.assertEqual([x['id'] for x in items].index('detail'), [x['id'] for x in items].index('route') + 1)
         self.assertEqual(data['rank'], ['城市', '收入'])
         self.assertEqual(by_id['priority']['a'], ['城市', '收入'])
-        self.assertEqual(data['未填的必答题'], ['尚未填写的核心题'])
+        self.assertNotIn('未填的必答题', data)
+        self.assertEqual(by_id['missing']['status'], '未填')
+        self.assertTrue(by_id['missing']['required'])
+        self.assertNotIn('a', by_id['missing'])
+        self.assertEqual(by_id['grad_time']['status'], '已答')
+        self.assertEqual(data['collapsed'], ['hidden_question'])
+        self.assertEqual(data['counts'], {'visible': len(items), 'answered': sum(item['status'] == '已答' for item in items)})
+        self.assertRegex(data['checksum'], r'^[0-9a-f]{64}$')
+        content = {key: value for key, value in data.items() if key != 'checksum'}
+        normalized = json.dumps(content, sort_keys=True, ensure_ascii=False, separators=(',', ':'))
+        self.assertEqual(data['checksum'], hashlib.sha256(normalized.encode()).hexdigest())
         self.assertEqual(data['derived'], {})
 
 
