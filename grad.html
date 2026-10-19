@@ -47,6 +47,7 @@
           <label class="opt"><input type="radio" name="grade" value="大四"><span class="box">大四</span></label>
           <label class="opt"><input type="radio" name="grade" value="已毕业3年内"><span class="box">已毕业 3 年内</span></label>
           <label class="opt"><input type="radio" name="grade" value="已毕业3年以上"><span class="box">已毕业 3 年以上</span></label>
+          <label class="opt"><input type="radio" name="grade" value="硕士在读或已毕业"><span class="box">硕士在读 / 已毕业</span></label>
         </div></div>
 
       <div class="q req"><div class="q-label">想哪一年入学读研？</div>
@@ -97,6 +98,8 @@
 
       <div class="q req"><div class="q-label">本科专业</div>
         <input type="text" id="major" placeholder="例如：汉语言文学、电气工程及其自动化"></div>
+      <div class="q req"><div class="q-label">目前的学历、学位与取得时间</div>
+        <input type="text" id="degree_status" placeholder="例如：本科在读，预计 2027 年 6 月获毕业证和学士学位；专科毕业、尚无学士学位；已有硕士也请注明"></div>
     </div></section>
 
     <section class="section" data-title="学业与语言"><div class="card">
@@ -149,7 +152,7 @@
 
     <section class="section" data-title="为什么读研"><div class="card">
       <div class="sec-head"><div class="badge">三</div><div class="sec-title">为什么读研</div></div>
-      <p class="sec-why">这是最重要的一节。为了"岗位要硕士"而读，和为了"再想想"而读，该走的路完全不同。后一种情况，先工作几年常常更划算，这不是失败。</p>
+      <p class="sec-why">这是最重要的一节。为了"岗位要硕士"而读，和为了"再想想"而读，该走的路完全不同。如果暂时没有明确用途，就把先工作、探索方向和读研一起比较。</p>
 
       <div class="q req"><div class="q-label">你想读研的原因<span class="opt-note">（可多选）</span></div>
         <div class="opts stack">
@@ -200,7 +203,7 @@
 
     <section class="section" data-title="路径与打算"><div class="card">
       <div class="sec-head"><div class="badge">四</div><div class="sec-title">路径与打算</div></div>
-      <p class="sec-why">考研一年只能报一所学校，失败靠调剂；申请可以同时投很多个；中外合作项目有的走统考、有的只发外方学位。勾选你在考虑的所有路，每条会追问几句。</p>
+      <p class="sec-why">考研一志愿只能选一个招生单位的一个专业；未录取时还要看是否符合调剂条件。境外申请可比较多个项目；中外合作项目有的走统考、有的只发外方学位。勾选你在考虑的所有路，每条会追问几句。</p>
 
       <div class="q req"><div class="q-label">你在考虑哪些路？<span class="opt-note">（可多选）</span></div>
         <div class="opts stack">
@@ -209,6 +212,8 @@
           <label class="opt"><input type="checkbox" name="route" value="中外合作办学"><span class="box">国内的中外合作办学 / 境内读境外学位</span></label>
           <label class="opt"><input type="checkbox" name="route" value="先工作"><span class="box">先工作，以后再说</span></label>
           <label class="opt"><input type="checkbox" name="route" value="考公"><span class="box">考公考编</span></label>
+          <label class="opt"><input type="checkbox" name="route" value="在职读研"><span class="box">在职读研</span></label>
+          <label class="opt"><input type="checkbox" name="route" value="读博或直博"><span class="box">读博 / 直博 / 硕博连读</span></label>
           <label class="opt"><input type="checkbox" name="route" value="想争取保研"><span class="box">想争取保研（推免）</span></label>
           <label class="opt"><input type="checkbox" name="route" value="已有推免机会"><span class="box">我已经有推免（保研）机会</span></label>
           <label class="opt"><input type="checkbox" name="route" value="还没想好"><span class="box">还没想好</span></label>
@@ -224,8 +229,8 @@
           </div></div>
         <div class="q req"><div class="q-label">学硕还是专硕？</div>
           <div class="opts">
-            <label class="opt"><input type="radio" name="ky_type" value="学硕"><span class="box">学硕（偏科研）</span></label>
-            <label class="opt"><input type="radio" name="ky_type" value="专硕"><span class="box">专硕（偏就业）</span></label>
+            <label class="opt"><input type="radio" name="ky_type" value="学硕"><span class="box">学术学位（学硕）</span></label>
+            <label class="opt"><input type="radio" name="ky_type" value="专硕"><span class="box">专业学位（专硕）</span></label>
             <label class="opt"><input type="radio" name="ky_type" value="都可以"><span class="box">都可以</span></label>
             <label class="opt"><input type="radio" name="ky_type" value="不了解区别"><span class="box">不了解区别</span></label>
           </div></div>
@@ -239,12 +244,20 @@
           <input type="text" id="ky_target" placeholder="例如：某大学 计算机技术（专硕）"></div>
         <div class="q req"><div class="q-label">复习进度和每天能投入的时间</div>
           <input type="text" id="ky_prep" placeholder="例如：还没开始，每天能学 6 小时；数学一轮过半"></div>
+        <div class="q"><div class="q-label">考过几次、成绩与这次准备改变什么？<span class="opt-note">（首次备考可写首次）</span></div>
+          <textarea id="ky_history" placeholder="考过的年份、学校专业、总分与单科、是否进复试及反馈；这次能改变的原因和验证办法。尚未考过就写首次备考。"></textarea></div>
+        <div class="followup" data-when="ky_cross=跨专业">
+          <span class="ftag">追问 · 跨专业</span>
+          <div class="q req"><div class="q-label">跨考的先修基础与资格核实情况</div>
+            <textarea id="ky_cross_basis" placeholder="目标代码与考试科目；上过哪些相关课、做过什么项目、哪些基础还没学；是否查过本科专业或加试限制。不知道的直接写不知道。"></textarea></div>
+        </div>
         <div class="q req"><div class="q-label">一志愿没考上，能接受调剂吗？</div>
           <div class="opts">
             <label class="opt"><input type="radio" name="ky_tj" value="能，去哪都行"><span class="box">能，去哪都行</span></label>
             <label class="opt"><input type="radio" name="ky_tj" value="只接受部分城市或层次"><span class="box">只接受部分城市或层次</span></label>
             <label class="opt"><input type="radio" name="ky_tj" value="不接受"><span class="box">不接受</span></label>
-          </div></div>
+          </div>
+          <input class="mt" type="text" id="ky_tj_limits" placeholder="调剂底线（选填）：不能接受的专业/城市、费用、学习方式，以及现有复试或确认期限"></div>
         <div class="q req"><div class="q-label">能接受二战吗？</div>
           <div class="opts">
             <label class="opt"><input type="radio" name="ky_again" value="能"><span class="box">能</span></label>
@@ -331,6 +344,30 @@
           <input type="text" id="work_plan" placeholder="例如：做产品，工作 2—3 年后申请在职或境外项目"></div>
       </div>
 
+      <div class="followup" data-when="route=境外读研|中外合作办学">
+        <span class="ftag">追问 · 学位用途与时间</span>
+        <div class="q req"><div class="q-label">这个学位准备怎样使用，毕业时间能衔接吗？</div>
+          <textarea id="ab_return_plan" placeholder="目标国家/城市、工作或考公选调/国企岗位；项目全称、学习方式、预计获学位时间；是否核过认证及岗位要求。还没定就写最在意的用途和未知项。"></textarea></div>
+      </div>
+
+      <div class="followup" data-when="route=在职读研">
+        <span class="ftag">追问 · 在职读研</span>
+        <div class="q req"><div class="q-label">工作与学习能否安排得开？</div>
+          <textarea id="work_study_context" placeholder="目前是否工作、毕业后工作多久；能否离岗/请假、上课通勤与照护限制；单位是否支持定向。无需写单位全称或精确收入。"></textarea></div>
+        <div class="q req"><div class="q-label">在职读研需要获得什么？</div>
+          <div class="opts stack">
+            <label class="opt"><input type="radio" name="work_degree_goal" value="需要研究生学历和硕士学位"><span class="box">需要研究生学历和硕士学位</span></label>
+            <label class="opt"><input type="radio" name="work_degree_goal" value="只需要硕士学位，已核目标用途"><span class="box">只需要硕士学位，已核目标用途</span></label>
+            <label class="opt"><input type="radio" name="work_degree_goal" value="还不清楚证书区别"><span class="box">还不清楚证书区别</span></label>
+          </div></div>
+      </div>
+
+      <div class="followup" data-when="route=读博或直博">
+        <span class="ftag">追问 · 博士路径</span>
+        <div class="q req"><div class="q-label">为什么想读博，体验过怎样的研究？</div>
+          <textarea id="doctoral_basis" placeholder="目标职业是否需要博士；做过的研究及本人贡献、想研究的问题；现在是本科还是硕士；能承担的投入和退出底线。未体验过研究也请如实写。"></textarea></div>
+      </div>
+
       <div class="followup" data-when="route=考公">
         <span class="ftag">追问 · 考公</span>
         <div class="q"><div class="q-label">目标省份和岗位类型；知道这些岗位对学历、专业的要求吗？</div>
@@ -347,6 +384,8 @@
         </div></div>
         <div class="q"><div class="q-label">你知道本专业去年有多少人保研吗</div>
           <input type="text" id="tm_quota" placeholder="例如：去年本专业 120 人里保研 12 人；不知道就写不知道"></div>
+        <div class="q"><div class="q-label">本校推免的排序口径与当届规则<span class="opt-note">（选填）</span></div>
+          <input type="text" id="tm_rule_basis" placeholder="排名是学业还是综合、首考还是含重修；当届名额/外语门槛与官方出处；未公布请注明"></div>
         <div class="q"><div class="q-label">科研、竞赛经历</div>
           <input type="text" id="tm_research" placeholder="例如：大创项目负责人；数学建模省二等奖；没有就写没有"></div>
         <div class="q"><div class="q-label">想去的学校，或打算参加的夏令营</div>
@@ -478,7 +517,8 @@
           <label class="opt"><input type="radio" name="money" value="2—3年"><span class="box">2—3 年</span></label>
           <label class="opt"><input type="radio" name="money" value="3年以上"><span class="box">3 年以上</span></label>
           <label class="opt"><input type="radio" name="money" value="希望我尽快工作"><span class="box">希望我尽快工作</span></label>
-        </div></div>
+          </div>
+          <input class="mt" type="text" id="finance_note" placeholder="选填：可落实的总预算、每月固定支出、最迟何时必须有收入。填愿意透露的范围即可。"></div>
 
       <div class="q"><div class="q-label">城市偏好<span class="opt-note">（选填）</span></div>
         <input type="text" id="city" placeholder="例如：想留在长三角；必须离家近"></div>
