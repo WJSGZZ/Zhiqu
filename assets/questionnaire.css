@@ -160,9 +160,9 @@ textarea{resize:vertical;min-height:84px;}
 .split > .choices{grid-area:choices;}
 .split > .vow{grid-area:vow;align-self:start;}
 .landing .hero{padding:0;overflow:visible;}
-.lockup{display:flex;align-items:center;gap:18px;margin:0 0 19px -10px;}
+.lockup{display:flex;align-items:center;gap:18px;margin:0 0 9px -10px;}
 /* 视觉对齐：logo 墨量偏下、文字块重量集中在上方大字，几何居中时文字显得偏高，整块下移 */
-.wordmark{display:flex;flex-direction:column;gap:12px;position:relative;top:19px;}
+.wordmark{display:flex;flex-direction:column;gap:6px;position:relative;top:9px;}
 .landing .hero-logo{display:block;flex:none;width:124px;height:124px;margin:0;}
 .landing .brand-title{font-size:76px;letter-spacing:16px;line-height:1;margin:0;}
 .landing .motto{font-size:17px;letter-spacing:4px;margin:0;white-space:nowrap;}
@@ -178,8 +178,8 @@ textarea{resize:vertical;min-height:84px;}
 @media (min-width:1600px) and (min-height:900px){
   .landing-wrap{max-width:1360px;}
   .landing .hero-logo{width:148px;height:148px;}
-  .wordmark{top:23px;}
-  .lockup{margin-bottom:23px;}
+  .wordmark{top:11px;gap:8px;}
+  .lockup{margin-bottom:11px;}
   .landing .brand-title{font-size:92px;letter-spacing:20px;}
   .landing .motto{font-size:20px;letter-spacing:5px;}
   .landing .hero .tag{font-size:18px;}
@@ -194,7 +194,7 @@ textarea{resize:vertical;min-height:84px;}
   .split{grid-template-columns:1fr;grid-template-areas:"hero" "choices" "vow";row-gap:28px;}
   .split > .hero,.split > .vow{align-self:auto;}
   .landing .hero{text-align:center;}
-  .lockup{justify-content:center;margin:0 0 19px;}
+  .lockup{justify-content:center;margin:0 0 9px;}
   .brand-rule{margin:22px auto 18px;}
   .wordmark{align-items:flex-start;text-align:left;}
   .landing .vow{margin:20px auto 0;}
@@ -203,10 +203,10 @@ textarea{resize:vertical;min-height:84px;}
   .landing-wrap{padding:40px 16px 32px;}
   .landing .hero-logo{width:76px;height:76px;}
   .lockup{gap:12px;}
-  .wordmark{top:11px;}
-  .lockup{margin-bottom:11px;}
+  .wordmark{top:5px;}
+  .lockup{margin-bottom:5px;}
   .landing .motto{font-size:15px;letter-spacing:3px;}
-  .wordmark{gap:8px;}
+  .wordmark{gap:4px;}
   .landing .brand-title{font-size:46px;letter-spacing:10px;padding-left:0;}
   .landing .hero .tag{font-size:15px;}
   .landing .choice{column-gap:12px;padding:20px 16px 20px 20px;}
