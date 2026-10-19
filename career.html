@@ -789,18 +789,6 @@
     var fb=function(){ta.removeAttribute('readonly');ta.focus();ta.select();try{document.execCommand('copy');done();}catch(e){msg.textContent='请长按文本框手动复制';}ta.setAttribute('readonly','readonly');};
     if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(ta.value).then(done).catch(fb);}else{fb();}
   }
-(function(){
-  if(!('IntersectionObserver' in window)) return;
-  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var secs=document.querySelectorAll('.section'); if(!secs.length) return;
-  document.documentElement.classList.add('reveal-on');
-  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px',threshold:0.04});
-  secs.forEach(function(el){io.observe(el);});
-  // 从锚点跳转、打印或恢复滚动位置时，确保内容可见
-  window.addEventListener('beforeprint',function(){secs.forEach(function(el){el.classList.add('in');});});
-  var fill=document.getElementById('fill');
-  if(fill) new MutationObserver(function(){fill.parentNode.classList.toggle('full',fill.style.width==='100%');}).observe(fill,{attributes:true,attributeFilter:['style']});
-})();
 </script>
 </body>
 </html>
