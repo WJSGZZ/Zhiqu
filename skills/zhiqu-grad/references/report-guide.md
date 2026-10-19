@@ -19,4 +19,6 @@
 
 备考、申请与就业备选的路线结构见[共用规则](../../zhiqu-shared/references/shared-rules.md)。
 
-三版共用的封面、图表、来源尾注与统一术语见[统一呈现与术语](../../zhiqu/references/report-guide.md#统一呈现与术语)，组件写法见[报告渲染器说明](../../zhiqu/scripts/render_report.py)。本版固定12节与节名保持不变；图表缺原始依据时标未取到，不用个人概率补空。
+三版共用的封面、图表、来源尾注与统一术语见[统一呈现与术语](../../zhiqu/references/report-guide.md#统一呈现与术语)，组件写法见[报告渲染器说明](../../zhiqu/scripts/render_report.py)。本版保留12节角色，默认题名沿用上表，个人化题名不能省略角色内容；图表缺原始依据时标未取到，不用个人概率补空。
+
+读研各步留下的文件见[阶段表](case-workflow.md)；本版组件的数量和输入位置统一以[内容合同](report-contract.json)为准。[工作流总纲](../../zhiqu-shared/references/report-workflow.md)说明证据、操控者核查及评分。

@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """个案门槛检查：按阶段核对案例目录里的中间产物，上一步不全或对不上账就不能进下一步。
 
-用法：python3 scripts/case_check.py <案例目录> --stage N   （N=0..8，会检查 0..N 的全部阶段）
+用法：python3 scripts/case_check.py <案例目录> --stage N
+高考 N=0..8；读研、求职 N=0..10；均检查 0..N。--delivery 核正式交付批准。
 阶段与文件见 references/case-workflow.md。脚本只能保证"步骤做全、账对得上、数字有出处"，
-不能证明判断正确或来源真的这么写，那一步靠独立复核（阶段 8）和人。
+不能证明判断正确或来源真的这么写，那一步靠独立复核和操控者核查。
 """
 import argparse
 import csv
@@ -325,9 +326,23 @@ class Gate:
             if not (s.get('claim') and s.get('source') and s.get('matches') is True):
                 self.err(8, f'抽查来源未通过或不完整：{s.get("claim", "?")}')
                 break
+        from planning_workflow import review_errors
+        self.errors.extend(review_errors(self.dir, delivery=False))
+        from operator_check import validate_operator
+        self.errors.extend(validate_operator(self.dir, require_completed=True))
 
 
-def run(case_dir, stage):
+def run(case_dir, stage, delivery=False):
+    case_path = Path(case_dir) / 'case.json'
+    if case_path.is_file() and load_json(case_path).get('kind') in ('grad', 'career'):
+        if delivery and stage!=10:raise ValueError('--delivery须检查读研/求职阶段10')
+        from planning_workflow import PlanningCase
+        gate = PlanningCase(case_dir)
+        gate.notes = []
+        gate.check(stage, delivery)
+        return gate
+    if stage > 8:
+        raise ValueError('高考阶段保持0..8')
     gate = Gate(case_dir)
     for n in range(stage + 1):
         getattr(gate, f'stage{n}')()
@@ -339,9 +354,11 @@ def run(case_dir, stage):
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('case_dir')
-    ap.add_argument('--stage', type=int, required=True, choices=range(0, 9), help='检查 0..N 阶段')
+    ap.add_argument('--stage', type=int, required=True, choices=range(0, 11), help='检查 0..N 阶段')
+    ap.add_argument('--delivery', action='store_true', help='检查操控者和新会话批准交付状态')
     args = ap.parse_args()
-    gate = run(args.case_dir, args.stage)
+    try:gate = run(args.case_dir, args.stage, args.delivery)
+    except (ValueError,KeyError,TypeError,OSError) as exc:ap.exit(1,str(exc)+'\n未通过阶段检查。\n')
     for note in gate.notes:
         print(note)
     if gate.errors:

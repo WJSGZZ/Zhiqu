@@ -1,0 +1,1830 @@
+{
+  "schema_version": 1,
+  "preferences": {
+    "questionnaire_section": "优先级排序",
+    "quote": "优先级：能胜任且有收入 > 费用后的结余 > 合同与稳定性 > 离家距离 > 成长 > 单位名气。",
+    "profile_refs": [
+      "本人画像/优先级排序"
+    ],
+    "method": "ordinal",
+    "weights": null,
+    "confirmed": false
+  },
+  "matrix": {
+    "options": [
+      "C1",
+      "C2",
+      "C3",
+      "C4"
+    ],
+    "dimensions": [
+      {
+        "id": "M0",
+        "label": "兴趣",
+        "preference_ref": "本人优先级"
+      },
+      {
+        "id": "M1",
+        "label": "能力匹配",
+        "preference_ref": "本人优先级"
+      },
+      {
+        "id": "M2",
+        "label": "收入",
+        "preference_ref": "本人优先级"
+      },
+      {
+        "id": "M3",
+        "label": "稳定性",
+        "preference_ref": "本人优先级"
+      },
+      {
+        "id": "M4",
+        "label": "城市",
+        "preference_ref": "本人优先级"
+      },
+      {
+        "id": "M5",
+        "label": "家庭接受度",
+        "preference_ref": "本人优先级"
+      }
+    ],
+    "cells": [
+      {
+        "candidate_id": "C1",
+        "dimension_id": "M0",
+        "status": "supported",
+        "text": "✓愿核数字",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "C1",
+        "dimension_id": "M1",
+        "status": "unknown",
+        "text": "△基础任务线索",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "C1",
+        "dimension_id": "M2",
+        "status": "unknown",
+        "text": "△实际报价待查",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "C1",
+        "dimension_id": "M3",
+        "status": "unknown",
+        "text": "△合同与业务待查",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "C1",
+        "dimension_id": "M4",
+        "status": "unknown",
+        "text": "△省会或近家",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "C1",
+        "dimension_id": "M5",
+        "status": "unknown",
+        "text": "△需看具体单位",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "C2",
+        "dimension_id": "M0",
+        "status": "supported",
+        "text": "✓偏好流程",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "C2",
+        "dimension_id": "M1",
+        "status": "unknown",
+        "text": "△资金权限需核",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "C2",
+        "dimension_id": "M2",
+        "status": "unknown",
+        "text": "△实际报价待查",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "C2",
+        "dimension_id": "M3",
+        "status": "unknown",
+        "text": "△复核与甲方待查",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "C2",
+        "dimension_id": "M4",
+        "status": "unknown",
+        "text": "△工作地待查",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "C2",
+        "dimension_id": "M5",
+        "status": "unknown",
+        "text": "△不能只认招牌",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "C3",
+        "dimension_id": "M0",
+        "status": "supported",
+        "text": "✓账款与数据",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "C3",
+        "dimension_id": "M1",
+        "status": "unknown",
+        "text": "△业务沟通需补",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "C3",
+        "dimension_id": "M2",
+        "status": "unknown",
+        "text": "△实际报价待查",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "C3",
+        "dimension_id": "M3",
+        "status": "unknown",
+        "text": "△业务与工时待查",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "C3",
+        "dimension_id": "M4",
+        "status": "unknown",
+        "text": "△工作地待查",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "C3",
+        "dimension_id": "M5",
+        "status": "unknown",
+        "text": "△需本人家人沟通",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "C4",
+        "dimension_id": "M0",
+        "status": "unknown",
+        "text": "△目标需具体",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "C4",
+        "dimension_id": "M1",
+        "status": "unknown",
+        "text": "△考试基础待核",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "C4",
+        "dimension_id": "M2",
+        "status": "unknown",
+        "text": "△推迟全职收入",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "C4",
+        "dimension_id": "M3",
+        "status": "unknown",
+        "text": "△不保证未来岗位",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "C4",
+        "dimension_id": "M4",
+        "status": "unknown",
+        "text": "△院校与就业待查",
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      {
+        "candidate_id": "C4",
+        "dimension_id": "M5",
+        "status": "unknown",
+        "text": "△资金支持待确认",
+        "evidence_refs": [
+          "E0001"
+        ]
+      }
+    ]
+  },
+  "candidates": [
+    {
+      "id": "JC1",
+      "candidate_id": "C1",
+      "supports": [
+        "本人兴趣、专业或备选需求支持调查"
+      ],
+      "counters": [
+        "资格、费用或真实岗位尚有缺口"
+      ],
+      "costs": [
+        "时间与资金取舍待具体对象确认"
+      ],
+      "fallback": "若不成立，比较已登记的其他路径",
+      "switch_conditions": [
+        "官方条件或本人输入改变后重评"
+      ],
+      "checkpoint": "2026-10-26"
+    },
+    {
+      "id": "JC2",
+      "candidate_id": "C2",
+      "supports": [
+        "本人兴趣、专业或备选需求支持调查"
+      ],
+      "counters": [
+        "资格、费用或真实岗位尚有缺口"
+      ],
+      "costs": [
+        "时间与资金取舍待具体对象确认"
+      ],
+      "fallback": "若不成立，比较已登记的其他路径",
+      "switch_conditions": [
+        "官方条件或本人输入改变后重评"
+      ],
+      "checkpoint": "2026-10-26"
+    },
+    {
+      "id": "JC3",
+      "candidate_id": "C3",
+      "supports": [
+        "本人兴趣、专业或备选需求支持调查"
+      ],
+      "counters": [
+        "资格、费用或真实岗位尚有缺口"
+      ],
+      "costs": [
+        "时间与资金取舍待具体对象确认"
+      ],
+      "fallback": "若不成立，比较已登记的其他路径",
+      "switch_conditions": [
+        "官方条件或本人输入改变后重评"
+      ],
+      "checkpoint": "2026-10-26"
+    },
+    {
+      "id": "JC4",
+      "candidate_id": "C4",
+      "supports": [
+        "本人兴趣、专业或备选需求支持调查"
+      ],
+      "counters": [
+        "资格、费用或真实岗位尚有缺口"
+      ],
+      "costs": [
+        "时间与资金取舍待具体对象确认"
+      ],
+      "fallback": "若不成立，比较已登记的其他路径",
+      "switch_conditions": [
+        "官方条件或本人输入改变后重评"
+      ],
+      "checkpoint": "2026-10-26"
+    }
+  ],
+  "recommendation": {
+    "primary": [
+      "C1",
+      "C2",
+      "C3"
+    ],
+    "backup": [
+      "C4"
+    ],
+    "conditions": [
+      "资格、费用、本人接受度成立才继续"
+    ],
+    "evidence_refs": []
+  },
+  "checkpoint": {
+    "date": "2026-10-26",
+    "trigger": "新的模考、正式岗位或当届政策出现"
+  },
+  "presentation": {
+    "01": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/01/lead"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/01/analysis/0"
+      },
+      {
+        "slot": "kpis",
+        "ref": "judgment.json#/report_blocks/01_2"
+      },
+      {
+        "slot": "core_points",
+        "ref": "narrative.json#/sections/01/core_points"
+      },
+      {
+        "slot": "actions",
+        "ref": "judgment.json#/report_blocks/01_4"
+      },
+      {
+        "slot": "checkpoint",
+        "ref": "judgment.json#/report_blocks/01_5"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/01/analysis/1"
+      }
+    ],
+    "02": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/02/lead"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/02/analysis/0"
+      },
+      {
+        "slot": "profile",
+        "ref": "profile_parse.json#/report_blocks/02_2"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/02/analysis/1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/02/analysis/2"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/02/analysis/3"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/02/analysis/4"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/02/analysis/5"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/02/analysis/6"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/02/analysis/7"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/02/analysis/8"
+      },
+      {
+        "slot": "details",
+        "ref": "judgment.json#/report_blocks/02_11"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/02/analysis/9"
+      }
+    ],
+    "03": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/03/lead"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/03/analysis/0"
+      },
+      {
+        "slot": "details",
+        "ref": "judgment.json#/report_blocks/03_2"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/03/analysis/1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/03/analysis/2"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/03/analysis/3"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/03/analysis/4"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/03/analysis/5"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/03/analysis/6"
+      },
+      {
+        "slot": "questions",
+        "ref": "directions.json#/report_blocks/03_9"
+      }
+    ],
+    "04": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/04/lead"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/04/analysis/0"
+      },
+      {
+        "slot": "details",
+        "ref": "judgment.json#/report_blocks/04_2"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/04/analysis/1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/04/analysis/2"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/04/analysis/3"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/04/analysis/4"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/04/analysis/5"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/04/analysis/6"
+      },
+      {
+        "slot": "details",
+        "ref": "judgment.json#/report_blocks/04_9"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/04/analysis/7"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/04/analysis/8"
+      },
+      {
+        "slot": "directions",
+        "ref": "directions.json#/report_blocks/04_12"
+      }
+    ],
+    "05": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/05/lead"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/05/analysis/0"
+      },
+      {
+        "slot": "matrix",
+        "ref": "judgment.json#/report_blocks/05_2"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/05/analysis/1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/05/analysis/2"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/05/analysis/3"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/05/analysis/4"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/05/analysis/5"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/05/analysis/6"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/05/analysis/7"
+      },
+      {
+        "slot": "unknown_explanation",
+        "ref": "narrative.json#/sections/05/unknown_explanation"
+      }
+    ],
+    "06": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/06/lead"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/06/analysis/0"
+      },
+      {
+        "slot": "candidates",
+        "ref": "candidates.json#/report_blocks/06_2"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/06/analysis/1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/06/analysis/2"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/06/analysis/3"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/06/analysis/4"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/06/analysis/5"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/06/analysis/6"
+      },
+      {
+        "slot": "details",
+        "ref": "judgment.json#/report_blocks/06_9"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/06/analysis/7"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/06/analysis/8"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/06/analysis/9"
+      },
+      {
+        "slot": "details",
+        "ref": "judgment.json#/report_blocks/06_13"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/06/analysis/10"
+      }
+    ],
+    "07": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/07/lead"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/07/analysis/0"
+      },
+      {
+        "slot": "timeline",
+        "ref": "judgment.json#/report_blocks/07_2"
+      },
+      {
+        "slot": "details",
+        "ref": "judgment.json#/report_blocks/07_3"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/07/analysis/1"
+      }
+    ],
+    "08": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/08/lead"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/08/analysis/0"
+      },
+      {
+        "slot": "routes",
+        "ref": "judgment.json#/report_blocks/08_2"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/08/analysis/1"
+      },
+      {
+        "slot": "routes",
+        "ref": "judgment.json#/report_blocks/08_4"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/08/analysis/2"
+      },
+      {
+        "slot": "routes",
+        "ref": "judgment.json#/report_blocks/08_6"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/08/analysis/3"
+      },
+      {
+        "slot": "routes",
+        "ref": "judgment.json#/report_blocks/08_8"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/08/analysis/4"
+      },
+      {
+        "slot": "routes",
+        "ref": "judgment.json#/report_blocks/08_10"
+      }
+    ],
+    "09": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/09/lead"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/09/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/09/analysis/1"
+      },
+      {
+        "slot": "offers",
+        "ref": "judgment.json#/report_blocks/09_3"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/09/analysis/2"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/09/analysis/3"
+      },
+      {
+        "slot": "details",
+        "ref": "judgment.json#/report_blocks/09_6"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/09/analysis/4"
+      },
+      {
+        "slot": "annual_income",
+        "ref": "evidence.json#/report_blocks/09_8"
+      },
+      {
+        "slot": "hourly_income",
+        "ref": "evidence.json#/report_blocks/09_9"
+      },
+      {
+        "slot": "monthly_balance",
+        "ref": "evidence.json#/report_blocks/09_10"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/09/analysis/5"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/09/analysis/6"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/09/analysis/7"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/09/analysis/8"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/09/analysis/9"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/09/analysis/10"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/09/analysis/11"
+      },
+      {
+        "slot": "details",
+        "ref": "judgment.json#/report_blocks/09_18"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/09/analysis/12"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/09/analysis/13"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/09/analysis/14"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/09/analysis/15"
+      }
+    ],
+    "10": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/10/lead"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/10/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/10/analysis/1"
+      },
+      {
+        "slot": "risks",
+        "ref": "judgment.json#/report_blocks/10_3"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/10/analysis/2"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/10/analysis/3"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/10/analysis/4"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/10/analysis/5"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/10/analysis/6"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/10/analysis/7"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/10/analysis/8"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/10/analysis/9"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/10/analysis/10"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/10/analysis/11"
+      }
+    ],
+    "11": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/11/lead"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/11/analysis/0"
+      },
+      {
+        "slot": "questions",
+        "ref": "judgment.json#/report_blocks/11_2"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/11/analysis/1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/11/analysis/2"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/11/analysis/3"
+      }
+    ],
+    "12": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/12/lead"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/12/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/12/analysis/1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/12/analysis/2"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/12/analysis/3"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/12/analysis/4"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/12/analysis/5"
+      },
+      {
+        "slot": "evidence_levels",
+        "ref": "evidence.json#/report_blocks/12_7"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/12/analysis/6"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/12/analysis/7"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/12/analysis/8"
+      },
+      {
+        "slot": "assumptions",
+        "ref": "judgment.json#/report_blocks/12_13"
+      },
+      {
+        "slot": "terms",
+        "ref": "judgment.json#/report_blocks/12_14"
+      },
+      {
+        "slot": "sources",
+        "ref": "evidence.json#/report_blocks/12_12"
+      },
+      {
+        "slot": "disclaimer",
+        "ref": "narrative.json#/sections/12/disclaimer"
+      }
+    ]
+  },
+  "report_blocks": {
+    "01_2": {
+      "type": "kpi",
+      "content": {
+        "rows": [
+          [
+            "当前阶段",
+            "毕业前",
+            "暂无真实 offer，先查资格与实际任务"
+          ],
+          [
+            "收入时间边界",
+            "毕业后 {{e:E0901#/value}} 个月",
+            "需要持续收入，等待考试要有资金方案"
+          ],
+          [
+            "A 情景年到手",
+            "{{c:/hypothetical_offers/0/annual_take_home_cash|comma}} 元",
+            "直签、省会；公积金缺项尚待核，不是推荐"
+          ],
+          [
+            "B 情景月结余",
+            "{{c:/hypothetical_offers/1/monthly_remaining_cash|comma}} 元",
+            "含第 {{c:/report_parameters/hypothetical_followup__offers__1__months}} 个月的全年平均，普通月约 {{c:/offer_b_ordinary_month/remaining_cash|comma}} 元"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E0001",
+        "E0901"
+      ]
+    },
+    "01_4": {
+      "type": "dated_actions",
+      "content": {
+        "items": [
+          {
+            "text": "**{{k:/context/personal_dates/action0|md}}前（个人检查点）**：把短期实习中真正做过的一项核对任务写清输入、步骤、复核与结果，不带出原单位敏感材料；选定愿意调查的岗位类型。",
+            "date": "{{k:/context/personal_dates/action0}}"
+          },
+          {
+            "text": "**{{k:/context/personal_dates/action1|md}}前（个人检查点）**：本人核对少量正式岗位原文中的学历、职责、到岗和合同主体；家里提到的“国企”也要落实到公告。没有公告就仍是线索。",
+            "date": "{{k:/context/personal_dates/action1}}"
+          },
+          {
+            "text": "**{{k:/context/personal_dates/action2|md}}前（个人检查点）**：确认毕业后最晚需要收入的时间、可用资金与升本支持；{{k:/target_year}} 年专升本资格以正式通告为准，不按往年日期直接报名。[5]",
+            "date": "{{k:/context/personal_dates/action2}}"
+          }
+        ]
+      },
+      "evidence_refs": [
+        "E0001"
+      ]
+    },
+    "01_5": {
+      "type": "checkpoint",
+      "content": {
+        "kind": "paragraph",
+        "text": "**下一次更新在第一份有效面试反馈、正式录用条件或 {{k:/target_year}} 年专升本通告出现时；个人检查点先设为 {{k:/context/personal_dates/action1|md}}。** 若到时仍无目标单位原文，就先解决信息入口，而不是开始大规模投递或只准备一场不知道能否报名的考试。"
+      },
+      "evidence_refs": [
+        "E0001"
+      ]
+    },
+    "02_11": {
+      "type": "data_table",
+      "content": {
+        "columns": [
+          "反思主题",
+          "传统结构描述",
+          "对照现实的限度"
+        ],
+        "rows": [
+          [
+            "规则与责任",
+            "丙火正官透出，午月巳火并见",
+            "可以对照本人对流程与责任的偏好；不能推断做财务必然合适"
+          ],
+          [
+            "表达与输出",
+            "时干癸水食神透出",
+            "可问工作沟通在哪些任务上卡住；不能据此排除销售或断定沟通能力"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E0001"
+      ]
+    },
+    "03_2": {
+      "type": "data_table",
+      "content": {
+        "columns": [
+          "想要的东西",
+          "转成什么可核对的问题",
+          "怎样影响选择"
+        ],
+        "rows": [
+          [
+            "有持续收入",
+            "固定工资、发放日、到岗条件、试用待遇，多久能收到第一笔工资",
+            "若收入来不及覆盖毕业后的生活，就不能只等理想考试结果"
+          ],
+          [
+            "工作稳定",
+            "谁签合同、岗位是否依赖单个项目、合同期与退出安排",
+            "直签、派遣、编外或事业聘用分别看，不用品牌代替合同"
+          ],
+          [
+            "离家近",
+            "实际工作地、是否调岗、通勤与住房费用",
+            "近不只是心理感受，也会改变现金结余；是否愿意住家里由本人确认"
+          ],
+          [
+            "能学到东西",
+            "日常产出、带教与复核、轮岗及可承担任务",
+            "若长期只有杂务且无学习空间，名气不能弥补内容不合适"
+          ],
+          [
+            "父母认可",
+            "父母担心的是收入、失业还是社会评价",
+            "先回应具体担心，再比较实际保障，不简单服从或反向排斥"
+          ],
+          [
+            "以后能继续学习",
+            "资格、上课方式、资金与工作时间",
+            "保留可查路径，但不承诺工作后一定能升本或得到同等招录资格"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E0001"
+      ]
+    },
+    "04_2": {
+      "type": "data_table",
+      "content": {
+        "columns": [
+          "方向",
+          "可能的日常任务",
+          "小宁已有支持",
+          "必须查清的差距"
+        ],
+        "rows": [
+          [
+            "会计助理",
+            "单据、凭证、基础记账、对账与资料",
+            "做过录入整理，愿意核数字",
+            "是否有人带与复核、是否接受专科、是否要求证书、工作是否兼销售"
+          ],
+          [
+            "出纳",
+            "收付款、现金或账户记录、凭证与资金核对",
+            "细致、愿意按流程办事",
+            "权限与审批、交接、职责分离、证书要求；不能把资金责任看成简单文员"
+          ],
+          [
+            "应收应付文员",
+            "发票、账款、账期与跨部门核对",
+            "对规则和数据流程有兴趣",
+            "Excel 与业务沟通、是否催收或营销、月末工时和实际甲方"
+          ],
+          [
+            "升本后再就业",
+            "先完成学历与课程，再找对应岗位",
+            "仍有学习意愿，想拓宽入口",
+            "当年资格、可选专业、年限费用及岗位是否接受该学历路径"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E0001"
+      ]
+    },
+    "04_9": {
+      "type": "data_table",
+      "content": {
+        "columns": [
+          "调查人群",
+          "{{c:/report_constants/p10_label}} 分位",
+          "{{c:/report_constants/q1_label}} 分位",
+          "中位数",
+          "{{c:/report_constants/q3_label}} 分位",
+          "{{c:/report_constants/p90_label}} 分位"
+        ],
+        "rows": [
+          [
+            "会计专业人员",
+            "{{c:/reference_wages_cny/会计专业人员/p10|comma}} 元",
+            "{{c:/reference_wages_cny/会计专业人员/p25|comma}} 元",
+            "{{c:/reference_wages_cny/会计专业人员/p50|comma}} 元",
+            "{{c:/reference_wages_cny/会计专业人员/p75|comma}} 元",
+            "{{c:/reference_wages_cny/会计专业人员/p90|comma}} 元"
+          ],
+          [
+            "大学专科学历（不分职业）",
+            "{{c:/reference_wages_cny/大学专科学历/p10|comma}} 元",
+            "{{c:/reference_wages_cny/大学专科学历/p25|comma}} 元",
+            "{{c:/reference_wages_cny/大学专科学历/p50|comma}} 元",
+            "{{c:/reference_wages_cny/大学专科学历/p75|comma}} 元",
+            "{{c:/reference_wages_cny/大学专科学历/p90|comma}} 元"
+          ],
+          [
+            "工龄 {{e:E1003#/value}}—{{e:E1004#/value}} 年（不分职业）",
+            "{{c:/reference_wages_cny/工龄0~01年（不分职业）/p10|comma}} 元",
+            "{{c:/reference_wages_cny/工龄0~01年（不分职业）/p25|comma}} 元",
+            "{{c:/reference_wages_cny/工龄0~01年（不分职业）/p50|comma}} 元",
+            "{{c:/reference_wages_cny/工龄0~01年（不分职业）/p75|comma}} 元",
+            "{{c:/reference_wages_cny/工龄0~01年（不分职业）/p90|comma}} 元"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E0001",
+        "E0002",
+        "E1003",
+        "E1004"
+      ]
+    },
+    "05_2": {
+      "type": "comparison_matrix",
+      "content": {
+        "title": "方向与本人条件的匹配",
+        "caption": "看每行是否有不能接受的条件，再比较优势；符号表示当前证据状态，不是录用把握。收入未知的岗位不按市场平均数填满。",
+        "rows": [
+          [
+            "会计助理",
+            "✓愿核数字",
+            "△基础任务线索",
+            "△实际报价待查",
+            "△合同与业务待查",
+            "△省会或近家",
+            "△需看具体单位"
+          ],
+          [
+            "出纳",
+            "✓偏好流程",
+            "△资金权限需核",
+            "△实际报价待查",
+            "△复核与甲方待查",
+            "△工作地待查",
+            "△不能只认招牌"
+          ],
+          [
+            "应收应付",
+            "✓账款与数据",
+            "△业务沟通需补",
+            "△实际报价待查",
+            "△业务与工时待查",
+            "△工作地待查",
+            "△需本人家人沟通"
+          ],
+          [
+            "升本后就业",
+            "△目标需具体",
+            "△考试基础待核",
+            "△推迟全职收入",
+            "△不保证未来岗位",
+            "△院校与就业待查",
+            "△资金支持待确认"
+          ]
+        ],
+        "columns": [
+          "兴趣",
+          "能力匹配",
+          "收入",
+          "稳定性",
+          "城市",
+          "家庭接受度"
+        ]
+      },
+      "evidence_refs": [
+        "E0001",
+        "E0002"
+      ]
+    },
+    "06_9": {
+      "type": "data_table",
+      "content": {
+        "columns": [
+          "岗位与信息时点",
+          "原文中的关键条件",
+          "小宁对照",
+          "当前处理"
+        ],
+        "rows": [
+          [
+            "天健四川分所，财务审计（{{k:/target_year}} 校招）；川大就业网 {{e:E1009#/value}} 发布",
+            "{{k:/target_year}} 应届本科及以上；财会、审计等相关专业；适应高强度工作与经常出差",
+            "✗ 当前专科不符本科硬门槛；出差接受度也未确认",
+            "不列为本轮可报名候选，不用相关专业或实习经历补过学历"
+          ],
+          [
+            "四川能投建工所属项目部，核算会计实习；轻化工就业网 {{e:E1010#/value}} 发布",
+            "顶部学历栏写“专科及以上”，正文写“{{k:/target_year}} 年毕业的本科及以上”",
+            "△ 同页原文冲突，不能自行选择较宽的一句",
+            "先向招聘方确认学历口径、是否仍招与具体项目；目前不认定能报"
+          ],
+          [
+            "同一能投招聘的天府学院就业网页",
+            "核算会计实习明确写 {{k:/target_year}} 毕业本科及以上；另有工程类岗位接受大专",
+            "✗ 若按此财会条款，当前学历不符；工程岗位条件不能借来",
+            "不把别的岗位大专要求套到财会岗，也不合并不同发布版本的名额"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E0001",
+        "E0015",
+        "E0017",
+        "E1009",
+        "E1010"
+      ]
+    },
+    "06_13": {
+      "type": "data_table",
+      "content": {
+        "columns": [
+          "判断层次",
+          "本案证据",
+          "为什么要分开",
+          "接下来核什么"
+        ],
+        "rows": [
+          [
+            "硬门槛",
+            "天健当届写本科，小宁当前专科",
+            "不会因 Excel 更熟练、证书更多就自动解除",
+            "若考虑升本，查未来届别与目标岗位是否接受对应学历路径"
+          ],
+          [
+            "信息冲突",
+            "能投顶部与正文学历不一致",
+            "无法靠主观选择一条原文判断符合",
+            "向招聘主体问清，保留原文版本和答复；未确认前不计可报机会"
+          ],
+          [
+            "能力差距",
+            "录入整理经历，不足以证明熟练掌握财务流程与税务知识",
+            "有相关专业不等于独立胜任；可由任务证据和带教补充",
+            "对照实际职责，说明做过哪一段、谁复核、哪些还没做过"
+          ],
+          [
+            "偏好与约束",
+            "不爱推销、希望近家，毕业后约{{e:E0901#/value|chinese}}个月内要收入",
+            "不是法定资格，但会影响本人是否愿意以及能否等",
+            "核真实项目位置、出差、销售指标、到岗与首笔工资日期"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E0001",
+        "E0901"
+      ]
+    },
+    "07_2": {
+      "type": "timeline",
+      "content": {
+        "title": "小宁的毕业与求职窗口",
+        "caption": "按时间顺序看，琥珀菱形为个人检查点；圆点为阶段。适用小宁的 {{k:/target_year}} 招聘、升本报名和考试日期尚未确认，均以各正式通知为准。",
+        "rows": [
+          [
+            "{{k:/context/personal_dates/action1|ym}}",
+            "任务证据与岗位原文",
+            "{{k:/context/personal_dates/action1|md_short}} 个人检查点",
+            "检查点"
+          ],
+          [
+            "{{k:/context/personal_dates/action1|ym}}",
+            "家庭资金与升本边界",
+            "{{k:/context/personal_dates/action2|md_short}} 个人检查点",
+            "检查点"
+          ],
+          [
+            "{{k:/context/personal_dates/year_end|year}} 年底",
+            "留意 {{k:/target_year}} 升本通告",
+            "当届截止待取得",
+            ""
+          ],
+          [
+            "{{k:/target_year}} 春季",
+            "春招与升本冲突核对",
+            "按单位及省通告",
+            ""
+          ],
+          [
+            "{{k:/graduation_date|ym}}",
+            "核毕业与实际到岗",
+            "以学校、单位安排为准",
+            ""
+          ],
+          [
+            "毕业后 {{e:E0901#/value}} 个月内",
+            "需要持续收入",
+            "本人约束，非统一政策",
+            "检查点"
+          ],
+          [
+            "首份工资时",
+            "工资、工时与缴存复核",
+            "实际记录出现时",
+            "检查点"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E0001",
+        "E0005",
+        "E0901"
+      ]
+    },
+    "07_3": {
+      "type": "data_table",
+      "content": {
+        "columns": [
+          "何时看",
+          "看什么",
+          "若条件冲突怎样处理"
+        ],
+        "rows": [
+          [
+            "秋季岗位开放时",
+            "毕业届别、能否提前实习、到岗时长、课程与实习规定",
+            "若无法同时满足学业与到岗，问能否延期；未书面确认前不假定都能保留"
+          ],
+          [
+            "每份公告截止之前",
+            "资格、材料、笔试面试、答复与到岗",
+            "优先处理会关闭且本人愿意去的机会，不等所有单位都发布再开始"
+          ],
+          [
+            "{{k:/target_year}} 升本通告发布时",
+            "报名、专业对应、考试、录取、费用与报到",
+            "与春招、实习和签约期限一起看；往年日历只用于提醒复查"
+          ],
+          [
+            "有第一份有效反馈或通知时",
+            "反馈内容、工资合同、前置条件、答复期限",
+            "判断缺的是资格、任务能力还是信息；不从无回应猜原因"
+          ],
+          [
+            "毕业和实际入职之前",
+            "获证时间、学校协议、合同、租房及第一笔工资时间",
+            "现金不能衔接就先谈到岗和生活安排，不以年总包掩盖等待期"
+          ],
+          [
+            "入职后第一份工资与记录",
+            "固定工资、扣款、实际工时、社保公积金",
+            "与书面承诺不一致就核对证据，重新评估，不悄悄改原假设"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E0001"
+      ]
+    },
+    "08_2": {
+      "type": "route_cards",
+      "content": {
+        "title": "基础财务企业岗：先找能进入的真实工作",
+        "门槛": "核学历、专业、证书与到岗；用真实录入、核对和复核任务证明已有能力，不包装完整账务经验。",
+        "时间窗口": "{{k:/context/personal_dates/action1|md}}个人检查点带回少量岗位原文；各单位关闭、笔试、答复和到岗分别记，未取到就待查。",
+        "投入": "对照岗位补最影响入门的一项技能，保留学业与实习边界；先核工资、工时、甲方和带教，不为找工作付保证录用费。",
+        "切换条件": "若资格明确不符或内容是本人拒绝的推销就换岗位；若无反馈，先查状态与缺口，再调整单位或地点范围。"
+      },
+      "evidence_refs": [
+        "E0001"
+      ]
+    },
+    "08_4": {
+      "type": "route_cards",
+      "content": {
+        "title": "国企直签：以实际招聘主体和岗位为准",
+        "门槛": "先取得集团与实际子公司当届岗位表，核专科/专业/毕业窗口/证书；目前已核能投实习存在学历冲突；不是确认可报的正式工作，不能据此填“能报”。[16][17]",
+        "时间窗口": "公告、笔试确认、面试、获证和签约分别核；不能把所有国企合成统一秋招日历。",
+        "投入": "考什么按单位本批公告及大纲，未取到不猜通用笔试；核实际岗位任务、轮岗、地点及合同甲方，不承诺企业直签等于事业编制。",
+        "切换条件": "若硬条件不符，转其他可进入岗位或核升本能否解除门槛；若长期等不到合适公告，不能超过本人收入等待边界。"
+      },
+      "evidence_refs": [
+        "E0001"
+      ]
+    },
+    "08_6": {
+      "type": "route_cards",
+      "content": {
+        "title": "国企工作地点的派遣岗：把甲方与用工方分开",
+        "门槛": "查派遣公司资质、实际用工单位、岗位条件、派遣期限和责任；第 09 节 B 只是收入情景，非现实招聘证据。",
+        "时间窗口": "面试与答复看派遣方本批公告，签前拿完整合同；何时到岗、换项目或退回后如何安排都要确认。",
+        "投入": "考试或技能核验按实际招聘通知；合同通常在派遣单位，工资、社保与管理责任逐项问。口头“以后转直签”不计保证收益。[7]",
+        "切换条件": "若主体、待遇或退回安排不清，先停下核；若本人不能接受派遣性质就不保留，不因工作地点是国企而改变名称。"
+      },
+      "evidence_refs": [
+        "E0001"
+      ]
+    },
+    "08_8": {
+      "type": "route_cards",
+      "content": {
+        "title": "事业单位财务相关招聘：先判能报，再决定备考",
+        "门槛": "核省市人社/主管部门正式公告及岗位表中的学历学位、专业、证书、年龄、毕业时点；当前未取适用 {{k:/target_year}} 岗位，不能写已符合。",
+        "时间窗口": "当届报名、缴费、笔试、资格复审与聘用分别核。{{k:/context/personal_dates/year_end|year}} 四川人大直属事业单位公告只作流程参照，不是仍开放的机会。[6]",
+        "投入": "该 {{k:/context/personal_dates/year_end|year}} 公告笔试为公共基础知识与综合能力测试；其他单位与 {{k:/target_year}} 科目另核。编制、聘用/备案、合同或编外性质逐条确认，不因公立单位就默认在编。[6]",
+        "切换条件": "无适用资格或无资金等到实际聘用，就保留企业就业；考录日期冲突时按本人优先级取舍，不同时默认所有路线都可兼顾。"
+      },
+      "evidence_refs": [
+        "E0001"
+      ]
+    },
+    "08_10": {
+      "type": "route_cards",
+      "content": {
+        "title": "专升本：为了具体门槛而比较",
+        "门槛": "先核 {{k:/target_year}} 省通告、本人学校与专业、获证和可选本科；再核目标单位是否接受该学历、专业及学位路径。",
+        "时间窗口": "当届报名缴费前核资格和成本，录取缴费前再核资金与目标门槛；{{k:/target_year}} 具体日期尚未取到，不按上一届直接排。",
+        "投入": "列学费、住宿、生活、学习年限与推迟收入；尚无完整金额，不算本科工资溢价或回本年限。",
+        "切换条件": "家庭无法覆盖无全职工资阶段，或升本仍不解除目标限制，就优先可接受就业；学习可另查适用方式，不默认各本科路径等效。"
+      },
+      "evidence_refs": [
+        "E0001"
+      ]
+    },
+    "09_3": {
+      "type": "offer_table",
+      "content": {
+        "columns": [
+          "项目",
+          "A：代理记账公司会计助理",
+          "B：国企下属用工单位出纳"
+        ],
+        "rows": [
+          [
+            "合同情景",
+            "与公司直签，省会",
+            "与派遣公司签，离家近；不等于国企直签"
+          ],
+          [
+            "税前固定工资",
+            "{{c:/hypothetical_offers/0/social_insurance_base|comma}} 元 × {{c:/report_parameters/hypothetical_followup__offers__0__months}} 个月",
+            "{{c:/report_parameters/hypothetical_followup__offers__1__monthly_gross|comma}} 元 × {{c:/report_parameters/hypothetical_followup__offers__1__months}} 个月；假设第 {{c:/report_parameters/hypothetical_followup__offers__1__months}} 个月明确保证且满足发放条件"
+          ],
+          [
+            "个人社保假设",
+            "缴费基数 {{c:/hypothetical_offers/0/social_insurance_base|comma}} 元，比例 {{c:/report_parameters/hypothetical_followup__ss_personal_rate_assumption|percent1}}",
+            "基数按 {{k:/context/personal_dates/year_end|year}} 下限 {{c:/hypothetical_offers/1/social_insurance_base|comma}} 元，比例 {{c:/report_parameters/hypothetical_followup__ss_personal_rate_assumption|percent1}}"
+          ],
+          [
+            "公积金假设",
+            "输入暂为 {{c:/report_parameters/hypothetical_followup__offers__0__hf_rate}}，原因与合规依据未核",
+            "按工资 {{c:/report_parameters/hypothetical_followup__offers__1__hf_rate|percent0}}，个人和单位同额，完整年度按 {{c:/report_parameters/hypothetical_followup__offers__0__months}} 个月缴存"
+          ],
+          [
+            "工时假设",
+            "基准年工时 {{c:/hypothetical_offers/1/hours_per_year|comma}} 小时，另每月 {{c:/report_parameters/hypothetical_followup__offers__0__extra_hours_per_month}} 小时，无额外加班费计入",
+            "年工时 {{c:/hypothetical_offers/1/hours_per_year|comma}} 小时，无额外加班计入"
+          ],
+          [
+            "房租与其他支出",
+            "每月 {{c:/report_parameters/hypothetical_followup__offers__0__monthly_rent|comma}} + {{c:/report_parameters/hypothetical_followup__offers__0__monthly_other|comma}} 元",
+            "每月给家里 {{c:/report_parameters/hypothetical_followup__offers__1__monthly_rent}} 元，其他 {{c:/report_parameters/hypothetical_followup__offers__0__monthly_rent|comma}} 元"
+          ],
+          [
+            "重要限制",
+            "未计公积金与加班费不是合规认可；补齐前不能当优势",
+            "实际医保、奖金、工时、派遣与福利均须书面核对"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E0001"
+      ]
+    },
+    "09_6": {
+      "type": "data_table",
+      "content": {
+        "columns": [
+          "计算项目",
+          "A",
+          "B"
+        ],
+        "rows": [
+          [
+            "年税前现金",
+            "{{c:/hypothetical_offers/0/annual_gross|comma}} 元",
+            "{{c:/hypothetical_offers/1/annual_gross|comma}} 元"
+          ],
+          [
+            "年个人社保",
+            "{{c:/hypothetical_offers/0/personal_social_insurance|comma}} 元",
+            "{{c:/hypothetical_offers/1/personal_social_insurance|comma}} 元"
+          ],
+          [
+            "年个人公积金",
+            "{{c:/report_parameters/hypothetical_followup__offers__0__hf_rate}} 元（待核情景）",
+            "{{c:/hypothetical_offers/1/personal_housing_fund|comma}} 元"
+          ],
+          [
+            "公积金账户年增加",
+            "{{c:/report_parameters/hypothetical_followup__offers__0__hf_rate}} 元（待核）",
+            "{{c:/hypothetical_offers/1/housing_fund_account_total|comma}} 元，含个人与单位，不属于到手现金"
+          ],
+          [
+            "年度个税",
+            "{{c:/report_parameters/hypothetical_followup__offers__0__hf_rate}} 元",
+            "{{c:/report_parameters/hypothetical_followup__offers__0__hf_rate}} 元"
+          ],
+          [
+            "**年到手现金**",
+            "**{{c:/hypothetical_offers/0/annual_take_home_cash|comma}} 元**",
+            "**{{c:/hypothetical_offers/1/annual_take_home_cash|comma}} 元**"
+          ],
+          [
+            "平均每月到手",
+            "{{c:/hypothetical_offers/0/monthly_take_home_cash|comma}} 元",
+            "{{c:/hypothetical_offers/1/monthly_take_home_cash|comma}} 元，含第 {{c:/report_parameters/hypothetical_followup__offers__1__months}} 个月；普通月约 {{c:/offer_b_ordinary_month/take_home_cash|comma}} 元"
+          ],
+          [
+            "年工作小时",
+            "{{c:/hypothetical_offers/0/hours_per_year|comma}} 小时",
+            "{{c:/hypothetical_offers/1/hours_per_year|comma}} 小时"
+          ],
+          [
+            "**每小时到手现金**",
+            "**{{c:/hypothetical_offers/0/hourly_cash|1f}} 元**",
+            "**{{c:/hypothetical_offers/1/hourly_cash|1f}} 元**"
+          ],
+          [
+            "全额计入公积金的小时价值",
+            "{{c:/hypothetical_offers/0/hourly_cash|1f}} 元",
+            "{{c:/hypothetical_offers/1/hourly_if_housing_fund_counted|1f}} 元，仅福利价值情景，不是现金时薪"
+          ],
+          [
+            "**平均月生活结余**",
+            "**{{c:/hypothetical_offers/0/monthly_remaining_cash|comma}} 元**",
+            "**{{c:/hypothetical_offers/1/monthly_remaining_cash|comma}} 元，普通月约 {{c:/offer_b_ordinary_month/remaining_cash|comma}} 元**"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E0001"
+      ]
+    },
+    "09_18": {
+      "type": "data_table",
+      "content": {
+        "columns": [
+          "条件变化",
+          "影响哪里",
+          "现在怎样处理"
+        ],
+        "rows": [
+          [
+            "B 第 {{c:/report_parameters/hypothetical_followup__offers__1__months}} 个月有考核或在职条件，不能保证",
+            "年现金与全年平均结余",
+            "不当保证收入；普通月约 {{c:/offer_b_ordinary_month/remaining_cash|comma}} 元另列，不用年平均掩盖当月现金"
+          ],
+          [
+            "A 应有公积金或实际有加班费",
+            "到手、福利与小时收入",
+            "先取得当地缴存、工时和单位书面条件，再更新输入；不能以少缴当收益"
+          ],
+          [
+            "B 的 {{c:/report_parameters/hypothetical_followup__offers__1__hf_rate|percent0}} 或基数与实际规定不同",
+            "到手与账户增加额",
+            "查具体城市缴存通知与单位书面基数，不按“都有一金”猜比例"
+          ],
+          [
+            "工时、租房或家庭支出变化",
+            "时薪与月结余",
+            "收到实际班次、租约和家庭需求后重算，不能沿用近家低成本假设"
+          ],
+          [
+            "毕业首年不足完整 {{c:/report_parameters/hypothetical_followup__offers__0__months}} 个月",
+            "首年能用的现金",
+            "按实际到岗、试用与奖金条件另算，不直接拿全年值比较首年生活"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E0001"
+      ]
+    },
+    "10_3": {
+      "type": "scenario_table",
+      "content": {
+        "columns": [
+          "触发条件",
+          "先核什么",
+          "应对与备选"
+        ],
+        "rows": [
+          [
+            "招聘品牌与合同甲方不同",
+            "子公司、派遣或外包关系，谁发薪、缴费、排班与考核",
+            "确认实际性质再比较；不接受该关系就退出，而不是继续叫“国企正式岗”"
+          ],
+          [
+            "工资只给总包或口头承诺",
+            "固定、绩效、多薪、试用、到账月份和条件",
+            "未保证部分单列，必要支出用可确认现金覆盖；不拿上限作日常预算"
+          ],
+          [
+            "要押金、扣证件或贷款培训后安排",
+            "收款方、公告依据、合同和退款条件",
+            "先停止交付财物与签署，保留证据；官方考试收费另看公告，不能一概混同"
+          ],
+          [
+            "A 公积金缺项或岗位加班不清",
+            "当地规定、书面基数比例、工时制度与加班事实",
+            "不以高到手掩盖问题；补齐再算，必要时由本人向人社/公积金经办部门确认"
+          ],
+          [
+            "B 承诺以后转直签",
+            "对应公开制度、名额、条件、期限和未转入安排",
+            "未取得就不算保证收益，不为此放弃其他可接受机会"
+          ],
+          [
+            "升本等待与收入边界冲突",
+            "家庭可支付总额、各项支出和到岗节点",
+            "没有资金方案就优先可接受就业，学习路线另核；不预设兼职一定补足"
+          ],
+          [
+            "同类岗位持续没有有效反馈",
+            "开放状态、硬条件和可验证能力差距",
+            "分清信息、资格与任务问题，调整范围；不从无回应判断本人不适合就业"
+          ],
+          [
+            "工作与预期不同",
+            "任务、工时、工资、缴费与原承诺的差异",
+            "先收集记录与沟通；当前是毕业前，不提前替本人作离职决定"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E0001"
+      ]
+    },
+    "11_2": {
+      "type": "question_table",
+      "content": {
+        "columns": [
+          "要问清的问题",
+          "问谁、要什么材料",
+          "回答怎样影响决定"
+        ],
+        "rows": [
+          [
+            "学历、专业与毕业时间是否符合本岗位",
+            "招聘原文、岗位表及招聘方正式答复",
+            "硬条件不符合就换岗位，口径不明保持待确认"
+          ],
+          [
+            "实际做哪些财务任务，有没有销售指标",
+            "HR 与实际主管，岗位职责",
+            "主任务若是本人拒绝的营销，就不因“会计”名称保留"
+          ],
+          [
+            "谁带、谁复核、多久承担哪些权限",
+            "主管与岗位流程",
+            "有具体安排才计成长，不能从单位类型猜"
+          ],
+          [
+            "合同甲方、发薪、缴费和管理是谁",
+            "完整合同与主体材料",
+            "区分子公司、派遣、外包和直签，改正名称与保障判断"
+          ],
+          [
+            "第 {{c:/report_parameters/hypothetical_followup__offers__1__months}} 个月是保证还是目标，何时发",
+            "薪酬条款、考核和在职条件",
+            "未保证时不按全年平均结余当保证收入"
+          ],
+          [
+            "公积金为何为零、何时开始缴",
+            "单位书面条件与当地经办规则",
+            "A缺项未核清前不作推荐；补齐后重新算到手与福利"
+          ],
+          [
+            "是否加班、如何记录和支付",
+            "工时制度、班次与计薪约定",
+            "实际小时与保证收入变动就重算时薪"
+          ],
+          [
+            "国企派遣是否真的有转入制度",
+            "用工单位公开制度与实际适用条件",
+            "没有对应证据就不算转直签收益"
+          ],
+          [
+            "考编具体是哪类岗位、是否符合",
+            "省市人社/主管单位当届公告与岗位表",
+            "先资格后考试；不以父母愿望代替可报名条件"
+          ],
+          [
+            "升本到底打开哪一类机会",
+            "{{k:/target_year}} 教育考试院通告、院校章程和目标招聘条件",
+            "若不能解除目标门槛，重新比较支出与延后收入"
+          ],
+          [
+            "家庭能支持多少、多久，住家里有何条件",
+            "本人与家庭确认资金、支出和生活安排",
+            "B低住房费与升本支持均非无限期，改变时要重算"
+          ],
+          [
+            "第一份工作不合适时如何退出",
+            "实际合同、学校协议与交接要求",
+            "先核责任与下份机会，不把离职当一句简单建议"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E0001"
+      ]
+    },
+    "12_13": {
+      "type": "assumption_table",
+      "content": {
+        "columns": [
+          "假设",
+          "适用条件",
+          "改判条件"
+        ],
+        "rows": [
+          [
+            "预算按已知输入计算",
+            "实际收费、生活与支持额度需本人确认",
+            "输入改变就重算"
+          ],
+          [
+            "本人偏好尚未量化",
+            "用本人原画像优先级作条件比较",
+            "本人确认排序或改变约束后重评"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E0001"
+      ]
+    },
+    "12_14": {
+      "type": "term_table",
+      "content": {
+        "columns": [
+          "术语",
+          "口径"
+        ],
+        "rows": [
+          [
+            "到手现金",
+            "扣个人缴费与税后的可用现金"
+          ],
+          [
+            "月结余",
+            "到手现金扣住房和必要生活支出"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E0001"
+      ]
+    }
+  },
+  "main_evidence_dependencies": [
+    "E0111",
+    "E0112",
+    "E0113",
+    "E0114",
+    "E0115",
+    "E0116",
+    "E0117",
+    "E0118"
+  ]
+}

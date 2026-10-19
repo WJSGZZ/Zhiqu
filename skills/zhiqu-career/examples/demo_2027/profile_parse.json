@@ -1,0 +1,197 @@
+{
+  "schema_version": 1,
+  "fields": [
+    {
+      "field": "学历",
+      "category": "fact",
+      "status": "given",
+      "value": "普通高职",
+      "quote": "四川省普通高职，大数据与会计；2024年9月入学，三年制，预计2027年6月毕业。",
+      "locator": "本人画像相应节名：兴趣、动机与状态 / 岗位、生活与约束",
+      "confirmed": false
+    },
+    {
+      "field": "专业",
+      "category": "fact",
+      "status": "given",
+      "value": "大数据与会计",
+      "quote": "四川省普通高职，大数据与会计；2024年9月入学，三年制，预计2027年6月毕业。",
+      "locator": "本人画像相应节名：兴趣、动机与状态 / 岗位、生活与约束",
+      "confirmed": false
+    },
+    {
+      "field": "毕业时间",
+      "category": "fact",
+      "status": "given",
+      "value": "2027-06-30",
+      "quote": "四川省普通高职，大数据与会计；2024年9月入学，三年制，预计2027年6月毕业。",
+      "locator": "本人画像相应节名：兴趣、动机与状态 / 岗位、生活与约束",
+      "confirmed": false
+    },
+    {
+      "field": "求职阶段",
+      "category": "fact",
+      "status": "given",
+      "value": "准备实习与校招，无正式offer",
+      "quote": "当前准备实习与校招，暂无正式offer；需要2027年毕业后约三个月内取得持续收入。",
+      "locator": "本人画像相应节名：兴趣、动机与状态 / 岗位、生活与约束",
+      "confirmed": false
+    },
+    {
+      "field": "经历",
+      "category": "fact",
+      "status": "given",
+      "value": "财务室实习六周，凭证录入与资料整理",
+      "quote": "能力：Excel基础操作、凭证录入，曾在小型企业财务室实习六周；能核对细节，但复杂账务需他人指导。",
+      "locator": "本人画像相应节名：兴趣、动机与状态 / 岗位、生活与约束",
+      "confirmed": false
+    },
+    {
+      "field": "证书",
+      "category": "fact",
+      "status": "given",
+      "value": "初级会计尚未通过",
+      "quote": "证书：初级会计考试尚未通过；没有“证书在手”或独立报税能力。",
+      "locator": "本人画像相应节名：兴趣、动机与状态 / 岗位、生活与约束",
+      "confirmed": false
+    },
+    {
+      "field": "目标岗位",
+      "category": "preference",
+      "status": "given",
+      "value": "会计助理、出纳、应收应付文员",
+      "quote": "方向：会计助理、出纳、应收应付文员；愿意从中小企业基础岗位开始。",
+      "locator": "本人画像相应节名：兴趣、动机与状态 / 岗位、生活与约束",
+      "confirmed": false
+    },
+    {
+      "field": "收入底线",
+      "category": "constraint",
+      "status": "unknown",
+      "value": null,
+      "quote": "收入：期望税前4500—5500元，底线取决于食宿、社保与工时，不把期望当市场价。",
+      "locator": "本人画像相应节名：兴趣、动机与状态 / 岗位、生活与约束",
+      "confirmed": false
+    },
+    {
+      "field": "城市",
+      "category": "preference",
+      "status": "given",
+      "value": "四川省内，近家优先",
+      "quote": "地点：四川省内；离家近最好，省会也可以接受；通勤与租房成本要一起算。",
+      "locator": "本人画像相应节名：兴趣、动机与状态 / 岗位、生活与约束",
+      "confirmed": false
+    },
+    {
+      "field": "单位类型偏好",
+      "category": "preference",
+      "status": "given",
+      "value": "父母希望国企/考编；本人需按具体条件确认",
+      "quote": "父母希望考编或进国企；本人也想稳定，但未核实具体岗位是否招专科。",
+      "locator": "本人画像相应节名：兴趣、动机与状态 / 岗位、生活与约束",
+      "confirmed": false
+    },
+    {
+      "field": "户籍",
+      "category": "fact",
+      "status": "unknown",
+      "value": null,
+      "quote": "本人未提供",
+      "locator": "本人画像相应节名：兴趣、动机与状态 / 岗位、生活与约束",
+      "confirmed": false
+    },
+    {
+      "field": "政治面貌",
+      "category": "fact",
+      "status": "unknown",
+      "value": null,
+      "quote": "本人未提供",
+      "locator": "本人画像相应节名：兴趣、动机与状态 / 岗位、生活与约束",
+      "confirmed": false
+    },
+    {
+      "field": "多快需要收入",
+      "category": "constraint",
+      "status": "given",
+      "value": 3,
+      "quote": "当前准备实习与校招，暂无正式offer；需要2027年毕业后约三个月内取得持续收入。",
+      "locator": "本人画像相应节名：兴趣、动机与状态 / 岗位、生活与约束",
+      "confirmed": false
+    }
+  ],
+  "missing": [
+    {
+      "field": "收入底线",
+      "question": "请本人补充收入底线",
+      "impact": "影响资格、投入或岗位取舍"
+    },
+    {
+      "field": "户籍",
+      "question": "请本人补充户籍",
+      "impact": "影响资格、投入或岗位取舍"
+    },
+    {
+      "field": "政治面貌",
+      "question": "请本人补充政治面貌",
+      "impact": "影响资格、投入或岗位取舍"
+    }
+  ],
+  "report_blocks": {
+    "02_2": {
+      "type": "profile_table",
+      "content": {
+        "columns": [
+          "类别",
+          "已知情况",
+          "选择时怎样使用"
+        ],
+        "rows": [
+          [
+            "学业事实",
+            "{{k:/education_entry|year}} 年入读三年制高职，大数据与会计，预计 {{k:/target_year}} 年 {{k:/graduation_date|month}} 月毕业",
+            "逐岗核专科、专业和毕业窗口；不能把专业名称接近当自动符合"
+          ],
+          [
+            "实践线索",
+            "短期实习做过凭证录入、资料整理",
+            "可用于说明完成过的任务；不外推为已掌握完整记账、申报与资金管理"
+          ],
+          [
+            "技能状态",
+            "Excel 基础，初级会计尚未通过",
+            "区分岗位“必须”“优先”和实际任务所需；不把尚未获得的证书写成已具备"
+          ],
+          [
+            "兴趣与性格",
+            "细致、慢热，喜欢把数字对上，不想推销，有时怕问不会的事",
+            "优先查规则与数据流程岗位；沟通是具体工作任务，不由性格标签排除"
+          ],
+          [
+            "地域偏好",
+            "四川，离家近优先，省会也可比较",
+            "房租、通勤与家庭联系要同时算，不能只比税前工资"
+          ],
+          [
+            "收入约束",
+            "毕业后约{{e:E0901#/value|chinese}}个月内需要持续收入",
+            "等待招考、升本或长期无薪实习必须有现金来源，不能无限等"
+          ],
+          [
+            "家庭期待",
+            "父母希望国企、考编",
+            "作为家庭偏好讨论，不当作本人同意或已经符合资格"
+          ],
+          [
+            "当前结果",
+            "暂无正式录用通知，具体岗位尚未审核",
+            "不给录用概率，不给最终单位排名；第 09 节仅为条件情景"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E0001",
+        "E0901"
+      ]
+    }
+  }
+}

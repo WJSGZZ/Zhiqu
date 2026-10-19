@@ -1,0 +1,1719 @@
+{
+  "schema_version": 1,
+  "case_id": "2027-YJ-S01",
+  "source_sha256": {
+    "case.json": "e601a9bf31c188d643b0f873b38f7b814b6d176b5473f897aab69c2b52023061",
+    "profile_parse.json": "a5a7b96085411943644dcaae76616a0affb32a79a07fd3020505d28d88c8b1a8",
+    "directions.json": "2b68a53951ab4a8de52d7edcbabdf32d24e4570392cd70ac212c62342430a3b2",
+    "rules_check.json": "7b0a58159b98a98e96a17d877674c57bf2d59988aefd37a2f57d94f82580f5c2",
+    "candidates.json": "9155f2bd7dd201c895739c706eebdca2d3363f6e5ba0d1e2ed5130a2b482c2f5",
+    "evidence.json": "51ed06bd23e71530e9c0bf1e43fba3f2a74af69d27bbd91e12fbfee320924cbe",
+    "calculations.json": "cec5b3577a8d62196c2dfd606cfab91b31c421feb52a97cbdd3a5cfafcd5daf7",
+    "judgment.json": "b6828bbfb01711fdc11e3ad92d393a014548621fd54774933f83476921906343",
+    "narrative.json": "5e556acc3f0e842702dc02dd624762207adc20c3d2867670f37e553dc766964f",
+    "profile.txt": "2be92b9770f7a4a877386334b958c096198b948c89c5eabca030d4f557e29457"
+  },
+  "contract_sha256": "fbe1370914328820e7c67e5152583e8e4d382e61693fe244f2aa563b46e779c1",
+  "tool_sha256": {
+    "planning_report.py": "06444a030796fd91bd4c88571a7b6667d56a9e797142a6b898791db03d669d3a",
+    "planning_workflow.py": "d75883142ef2be518c25659673ef4609f0bbc971f635cd5471474c025824e696",
+    "operator_check.py": "3c5b54da5848c64b6e113d0c3136f307cf919a0ef345baa81a58ceb18939e797",
+    "check_demos.py": "fc8e1625f9e052373756160514ad5c73db1e8451c233425918edb5bc839d9f63",
+    "report.py": "08bb83a85f3de379e6a05f1e6e80b2d85c525324f4112b63b2ea36f1cec5ccf3",
+    "render_report.py": "8cb49efa61bba9985354966096a6645ff4fd6ad7a04683cdc8aeb766db42344c"
+  },
+  "numeric_refs": [
+    {
+      "location": "meta.date",
+      "ref": "{{k:/context/as_of}}",
+      "value": "2026-10-19",
+      "display": "2026-10-19"
+    },
+    {
+      "location": "meta.data_asof",
+      "ref": "{{k:/context/as_of}}",
+      "value": "2026-10-19",
+      "display": "2026-10-19"
+    },
+    {
+      "location": "01.kpis.2",
+      "ref": "{{c:/annual_cost|comma}}",
+      "value": 25200,
+      "display": "25,200"
+    },
+    {
+      "location": "01.kpis.2",
+      "ref": "{{c:/annual_margin|comma}}",
+      "value": 4800,
+      "display": "4,800"
+    },
+    {
+      "location": "01.kpis.2",
+      "ref": "{{k:/budget/annual_limit|comma}}",
+      "value": 30000,
+      "display": "30,000"
+    },
+    {
+      "location": "01.kpis.2",
+      "ref": "{{e:E2079#/value|md}}",
+      "value": "2026-10-24",
+      "display": "10 月 24 日"
+    },
+    {
+      "location": "01.kpis.2",
+      "ref": "{{e:E2079#/value|year}}",
+      "value": "2026-10-24",
+      "display": "2026"
+    },
+    {
+      "location": "01.kpis.2",
+      "ref": "{{e:E2086#/value}}",
+      "value": "22:00",
+      "display": "22:00"
+    },
+    {
+      "location": "01.core_points.3",
+      "ref": "{{p:/fields/3/value/mean|1f}}",
+      "value": 80.2,
+      "display": "80.2"
+    },
+    {
+      "location": "01.core_points.3",
+      "ref": "{{c:/annual_cost|comma}}",
+      "value": 25200,
+      "display": "25,200"
+    },
+    {
+      "location": "01.core_points.3",
+      "ref": "{{e:E1043#/value}}",
+      "value": 2026,
+      "display": "2026"
+    },
+    {
+      "location": "01.core_points.3",
+      "ref": "{{c:/gdut_fee_reference/annual_cost|comma}}",
+      "value": 29200,
+      "display": "29,200"
+    },
+    {
+      "location": "01.core_points.3",
+      "ref": "{{c:/gdut_fee_reference/annual_margin}}",
+      "value": 800,
+      "display": "800"
+    },
+    {
+      "location": "01.core_points.3",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "01.actions.4",
+      "ref": "{{k:/context/personal_dates/action0|md}}",
+      "value": "2026-10-21",
+      "display": "10 月 21 日"
+    },
+    {
+      "location": "01.actions.4",
+      "ref": "{{k:/context/personal_dates/action0}}",
+      "value": "2026-10-21",
+      "display": "2026-10-21"
+    },
+    {
+      "location": "01.actions.4",
+      "ref": "{{k:/context/personal_dates/action1|md}}",
+      "value": "2026-10-22",
+      "display": "10 月 22 日"
+    },
+    {
+      "location": "01.actions.4",
+      "ref": "{{k:/budget/annual_limit|comma}}",
+      "value": 30000,
+      "display": "30,000"
+    },
+    {
+      "location": "01.actions.4",
+      "ref": "{{k:/context/personal_dates/action1}}",
+      "value": "2026-10-22",
+      "display": "2026-10-22"
+    },
+    {
+      "location": "01.actions.4",
+      "ref": "{{k:/context/personal_dates/action2|md}}",
+      "value": "2026-10-23",
+      "display": "10 月 23 日"
+    },
+    {
+      "location": "01.actions.4",
+      "ref": "{{e:E2079#/value|md}}",
+      "value": "2026-10-24",
+      "display": "10 月 24 日"
+    },
+    {
+      "location": "01.actions.4",
+      "ref": "{{e:E2086#/value}}",
+      "value": "22:00",
+      "display": "22:00"
+    },
+    {
+      "location": "01.actions.4",
+      "ref": "{{k:/context/personal_dates/action2}}",
+      "value": "2026-10-23",
+      "display": "2026-10-23"
+    },
+    {
+      "location": "01.checkpoint.5",
+      "ref": "{{k:/context/personal_dates/checkpoint|ymd_cn}}",
+      "value": "2026-10-21",
+      "display": "2026 年 10 月 21 日"
+    },
+    {
+      "location": "01.checkpoint.5",
+      "ref": "{{k:/context/personal_dates/previous|md}}",
+      "value": "2026-10-12",
+      "display": "10 月 12 日"
+    },
+    {
+      "location": "02.profile.2",
+      "ref": "{{k:/education_entry|year}}",
+      "value": "2023-09-01",
+      "display": "2023"
+    },
+    {
+      "location": "02.profile.2",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "02.profile.2",
+      "ref": "{{k:/graduation_date|month}}",
+      "value": "2027-06-30",
+      "display": "6"
+    },
+    {
+      "location": "02.profile.2",
+      "ref": "{{p:/fields/3/value/mean|1f}}",
+      "value": 80.2,
+      "display": "80.2"
+    },
+    {
+      "location": "02.profile.2",
+      "ref": "{{p:/fields/4/value/cet4}}",
+      "value": 465,
+      "display": "465"
+    },
+    {
+      "location": "02.profile.2",
+      "ref": "{{k:/budget/annual_limit|comma}}",
+      "value": 30000,
+      "display": "30,000"
+    },
+    {
+      "location": "02.profile.2",
+      "ref": "{{c:/illustrative_parameters/daily_hours_ceiling}}",
+      "value": 8,
+      "display": "8"
+    },
+    {
+      "location": "02.profile.2",
+      "ref": "{{p:/fields/11/value/sustainable_low}}",
+      "value": 4,
+      "display": "4"
+    },
+    {
+      "location": "02.profile.2",
+      "ref": "{{p:/fields/11/value/sustainable_high}}",
+      "value": 5,
+      "display": "5"
+    },
+    {
+      "location": "02.analysis.8",
+      "ref": "{{k:/birth_datetime|datetime}}",
+      "value": "2004-11-02T14:20:00",
+      "display": "2004-11-02 14:20"
+    },
+    {
+      "location": "02.analysis.8",
+      "ref": "{{c:/luck_start_year}}",
+      "value": 2013,
+      "display": "2013"
+    },
+    {
+      "location": "02.analysis.8",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "04.analysis.7",
+      "ref": "{{p:/fields/3/value/mean|1f}}",
+      "value": 80.2,
+      "display": "80.2"
+    },
+    {
+      "location": "04.analysis.12",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "05.analysis.6",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "06.analysis.1",
+      "ref": "{{c:/report_parameters/hypothetical_followup__score_scenarios__2}}",
+      "value": 380,
+      "display": "380"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{e:E1003#/value}}",
+      "value": "085801",
+      "display": "085801"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{e:E1004#/value}}",
+      "value": 236,
+      "display": "236"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{e:E1005#/value}}",
+      "value": 160,
+      "display": "160"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{e:E1006#/value}}",
+      "value": 101,
+      "display": "101"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{e:E1007#/value}}",
+      "value": 201,
+      "display": "201"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{e:E1008#/value}}",
+      "value": 301,
+      "display": "301"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{e:E1009#/value}}",
+      "value": 812,
+      "display": "812"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{e:E1010#/value}}",
+      "value": "F26",
+      "display": "F26"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{e:E1011#/value}}",
+      "value": "085801",
+      "display": "085801"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{e:E1012#/value}}",
+      "value": 101,
+      "display": "101"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{e:E1013#/value}}",
+      "value": 204,
+      "display": "204"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{e:E1014#/value}}",
+      "value": 302,
+      "display": "302"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{e:E1015#/value}}",
+      "value": 808,
+      "display": "808"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{c:/report_constants/q1_label}}",
+      "value": "25%",
+      "display": "25%"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{c:/report_constants/q3_label}}",
+      "value": "75%",
+      "display": "75%"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{e:E1018#/value}}",
+      "value": 2026,
+      "display": "2026"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{c:/scut_reference_statistics/2026_普通计划与基地计划/n}}",
+      "value": 120,
+      "display": "120"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{c:/scut_reference_statistics/2026_普通计划与基地计划/min}}",
+      "value": 330,
+      "display": "330"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{c:/scut_reference_statistics/2026_普通计划与基地计划/q1}}",
+      "value": 365,
+      "display": "365"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{c:/scut_reference_statistics/2026_普通计划与基地计划/median}}",
+      "value": 382,
+      "display": "382"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{c:/scut_reference_statistics/2026_普通计划与基地计划/q3}}",
+      "value": 401,
+      "display": "401"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{c:/scut_reference_statistics/2026_普通计划与基地计划/max}}",
+      "value": 440,
+      "display": "440"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{e:E1018#/value}}",
+      "value": 2026,
+      "display": "2026"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{c:/scut_reference_statistics/2026_普通计划/n}}",
+      "value": 22,
+      "display": "22"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{c:/scut_reference_statistics/2026_普通计划与基地计划/min}}",
+      "value": 330,
+      "display": "330"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{c:/scut_reference_statistics/2026_普通计划/q1}}",
+      "value": 356,
+      "display": "356"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{c:/scut_reference_statistics/2026_普通计划与基地计划/median}}",
+      "value": 382,
+      "display": "382"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{c:/scut_reference_statistics/2026_普通计划/q3}}",
+      "value": 404,
+      "display": "404"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{c:/scut_reference_statistics/2026_普通计划/max}}",
+      "value": 422,
+      "display": "422"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{e:E1018#/value}}",
+      "value": 2026,
+      "display": "2026"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{c:/scut_reference_statistics/2026_基地计划/n}}",
+      "value": 98,
+      "display": "98"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{c:/scut_reference_statistics/2026_普通计划与基地计划/min}}",
+      "value": 330,
+      "display": "330"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{c:/scut_reference_statistics/2026_基地计划/q1}}",
+      "value": 366,
+      "display": "366"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{c:/scut_reference_statistics/2026_普通计划与基地计划/median}}",
+      "value": 382,
+      "display": "382"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{c:/scut_reference_statistics/2026_基地计划/q3}}",
+      "value": 400,
+      "display": "400"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{c:/scut_reference_statistics/2026_普通计划与基地计划/max}}",
+      "value": 440,
+      "display": "440"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{e:E1019#/value}}",
+      "value": 2025,
+      "display": "2025"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{c:/scut_reference_statistics/2025_普通计划/n}}",
+      "value": 59,
+      "display": "59"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{c:/scut_reference_statistics/2025_普通计划/min}}",
+      "value": 365,
+      "display": "365"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{c:/scut_reference_statistics/2025_普通计划/q1}}",
+      "value": 374,
+      "display": "374"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{c:/scut_reference_statistics/2025_普通计划/median}}",
+      "value": 383,
+      "display": "383"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{c:/scut_reference_statistics/2025_普通计划/q3}}",
+      "value": 392,
+      "display": "392"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{c:/scut_reference_statistics/2025_普通计划/max}}",
+      "value": 420,
+      "display": "420"
+    },
+    {
+      "location": "06.score_ranges.7",
+      "ref": "{{c:/report_parameters/hypothetical_followup__score_scenarios__2}}",
+      "value": 380,
+      "display": "380"
+    },
+    {
+      "location": "06.score_ranges.7",
+      "ref": "{{c:/report_parameters/hypothetical_followup__score_scenarios__2}}",
+      "value": 380,
+      "display": "380"
+    },
+    {
+      "location": "06.score_ranges.7",
+      "ref": "{{e:E1018#/value}}",
+      "value": 2026,
+      "display": "2026"
+    },
+    {
+      "location": "06.score_ranges.7",
+      "ref": "{{c:/scut_reference_statistics/2026_普通计划与基地计划/q1}}",
+      "value": 365,
+      "display": "365"
+    },
+    {
+      "location": "06.score_ranges.7",
+      "ref": "{{c:/scut_reference_statistics/2026_普通计划与基地计划/q3}}",
+      "value": 401,
+      "display": "401"
+    },
+    {
+      "location": "06.score_ranges.7",
+      "ref": "{{c:/report_parameters/hypothetical_followup__score_scenarios__2}}",
+      "value": 380,
+      "display": "380"
+    },
+    {
+      "location": "06.score_ranges.7",
+      "ref": "{{e:E1018#/value}}",
+      "value": 2026,
+      "display": "2026"
+    },
+    {
+      "location": "06.score_ranges.7",
+      "ref": "{{c:/scut_reference_statistics/2026_普通计划/q1}}",
+      "value": 356,
+      "display": "356"
+    },
+    {
+      "location": "06.score_ranges.7",
+      "ref": "{{c:/scut_reference_statistics/2026_普通计划/q3}}",
+      "value": 404,
+      "display": "404"
+    },
+    {
+      "location": "06.score_ranges.7",
+      "ref": "{{c:/report_parameters/hypothetical_followup__score_scenarios__2}}",
+      "value": 380,
+      "display": "380"
+    },
+    {
+      "location": "06.score_ranges.7",
+      "ref": "{{e:E1018#/value}}",
+      "value": 2026,
+      "display": "2026"
+    },
+    {
+      "location": "06.score_ranges.7",
+      "ref": "{{c:/scut_reference_statistics/2026_基地计划/q1}}",
+      "value": 366,
+      "display": "366"
+    },
+    {
+      "location": "06.score_ranges.7",
+      "ref": "{{c:/scut_reference_statistics/2026_基地计划/q3}}",
+      "value": 400,
+      "display": "400"
+    },
+    {
+      "location": "06.score_ranges.7",
+      "ref": "{{c:/report_parameters/hypothetical_followup__score_scenarios__2}}",
+      "value": 380,
+      "display": "380"
+    },
+    {
+      "location": "06.score_ranges.7",
+      "ref": "{{e:E1019#/value}}",
+      "value": 2025,
+      "display": "2025"
+    },
+    {
+      "location": "06.score_ranges.7",
+      "ref": "{{c:/scut_reference_statistics/2025_普通计划/q1}}",
+      "value": 374,
+      "display": "374"
+    },
+    {
+      "location": "06.score_ranges.7",
+      "ref": "{{c:/scut_reference_statistics/2025_普通计划/q3}}",
+      "value": 392,
+      "display": "392"
+    },
+    {
+      "location": "06.score_ranges.7",
+      "ref": "{{c:/report_parameters/hypothetical_followup__score_scenarios__2}}",
+      "value": 380,
+      "display": "380"
+    },
+    {
+      "location": "06.analysis.9",
+      "ref": "{{e:E1020#/value}}",
+      "value": 2026,
+      "display": "2026"
+    },
+    {
+      "location": "06.analysis.9",
+      "ref": "{{e:E1003#/value}}",
+      "value": "085801",
+      "display": "085801"
+    },
+    {
+      "location": "06.analysis.9",
+      "ref": "{{c:/report_parameters/additional_scenarios__gdut_2026_first_choice_retest_scores__full_time_rows}}",
+      "value": 93,
+      "display": "93"
+    },
+    {
+      "location": "06.analysis.9",
+      "ref": "{{c:/report_parameters/additional_scenarios__gdut_2026_first_choice_retest_scores__excluded_soldier_rows}}",
+      "value": 7,
+      "display": "7"
+    },
+    {
+      "location": "06.analysis.9",
+      "ref": "{{c:/gdut_2026_first_choice_retest_scores/n}}",
+      "value": 86,
+      "display": "86"
+    },
+    {
+      "location": "06.analysis.9",
+      "ref": "{{c:/gdut_2026_first_choice_retest_scores/min}}",
+      "value": 350,
+      "display": "350"
+    },
+    {
+      "location": "06.analysis.9",
+      "ref": "{{c:/report_constants/q1_label}}",
+      "value": "25%",
+      "display": "25%"
+    },
+    {
+      "location": "06.analysis.9",
+      "ref": "{{c:/gdut_2026_first_choice_retest_scores/q1}}",
+      "value": 357.0,
+      "display": "357"
+    },
+    {
+      "location": "06.analysis.9",
+      "ref": "{{c:/gdut_2026_first_choice_retest_scores/median}}",
+      "value": 368.0,
+      "display": "368"
+    },
+    {
+      "location": "06.analysis.9",
+      "ref": "{{c:/report_constants/q3_label}}",
+      "value": "75%",
+      "display": "75%"
+    },
+    {
+      "location": "06.analysis.9",
+      "ref": "{{c:/gdut_2026_first_choice_retest_scores/q3}}",
+      "value": 383.0,
+      "display": "383"
+    },
+    {
+      "location": "06.analysis.9",
+      "ref": "{{c:/gdut_2026_first_choice_retest_scores/max}}",
+      "value": 437,
+      "display": "437"
+    },
+    {
+      "location": "06.score_ranges.10",
+      "ref": "{{e:E1020#/value}}",
+      "value": 2026,
+      "display": "2026"
+    },
+    {
+      "location": "06.score_ranges.10",
+      "ref": "{{c:/gdut_2026_first_choice_retest_scores/n}}",
+      "value": 86,
+      "display": "86"
+    },
+    {
+      "location": "06.score_ranges.10",
+      "ref": "{{c:/report_parameters/hypothetical_followup__score_scenarios__2}}",
+      "value": 380,
+      "display": "380"
+    },
+    {
+      "location": "06.score_ranges.10",
+      "ref": "{{c:/gdut_2026_first_choice_retest_scores/q1}}",
+      "value": 357.0,
+      "display": "357"
+    },
+    {
+      "location": "06.score_ranges.10",
+      "ref": "{{c:/gdut_2026_first_choice_retest_scores/q3}}",
+      "value": 383.0,
+      "display": "383"
+    },
+    {
+      "location": "06.analysis.13",
+      "ref": "{{e:E1021#/value}}",
+      "value": 2026,
+      "display": "2026"
+    },
+    {
+      "location": "06.analysis.13",
+      "ref": "{{e:E1024#/value}}",
+      "value": "50%",
+      "display": "50%"
+    },
+    {
+      "location": "06.analysis.13",
+      "ref": "{{e:E1024#/value}}",
+      "value": "50%",
+      "display": "50%"
+    },
+    {
+      "location": "06.analysis.13",
+      "ref": "{{e:E1025#/value}}",
+      "value": 60,
+      "display": "60"
+    },
+    {
+      "location": "06.analysis.13",
+      "ref": "{{e:E1026#/value}}",
+      "value": 20,
+      "display": "20"
+    },
+    {
+      "location": "06.analysis.13",
+      "ref": "{{e:E1027#/value}}",
+      "value": 40,
+      "display": "40"
+    },
+    {
+      "location": "06.analysis.13",
+      "ref": "{{e:E1027#/value}}",
+      "value": 40,
+      "display": "40"
+    },
+    {
+      "location": "06.analysis.13",
+      "ref": "{{e:E1016#/value}}",
+      "value": "085801",
+      "display": "085801"
+    },
+    {
+      "location": "06.analysis.13",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "06.analysis.14",
+      "ref": "{{c:/report_parameters/additional_scenarios__gdut_2026_retest__initial_increment}}",
+      "value": 10,
+      "display": "10"
+    },
+    {
+      "location": "06.analysis.14",
+      "ref": "{{c:/report_parameters/additional_scenarios__gdut_2026_retest__retest_increment}}",
+      "value": 2,
+      "display": "2"
+    },
+    {
+      "location": "06.analysis.14",
+      "ref": "{{c:/gdut_2026_retest/initial_increment_contribution}}",
+      "value": 1.0,
+      "display": "1"
+    },
+    {
+      "location": "06.details.16",
+      "ref": "{{e:E1043#/value}}",
+      "value": 2026,
+      "display": "2026"
+    },
+    {
+      "location": "06.details.16",
+      "ref": "{{e:E1019#/value}}",
+      "value": 2025,
+      "display": "2025"
+    },
+    {
+      "location": "06.details.16",
+      "ref": "{{c:/report_parameters/hypothetical_followup__score_scenarios__0}}",
+      "value": 330,
+      "display": "330"
+    },
+    {
+      "location": "06.details.16",
+      "ref": "{{c:/report_parameters/hypothetical_followup__score_scenarios__1}}",
+      "value": 355,
+      "display": "355"
+    },
+    {
+      "location": "06.details.16",
+      "ref": "{{c:/report_constants/q1_label}}",
+      "value": "25%",
+      "display": "25%"
+    },
+    {
+      "location": "06.details.16",
+      "ref": "{{c:/report_parameters/hypothetical_followup__score_scenarios__2}}",
+      "value": 380,
+      "display": "380"
+    },
+    {
+      "location": "06.details.16",
+      "ref": "{{c:/scut_reference_statistics/2026_普通计划与基地计划/median}}",
+      "value": 382,
+      "display": "382"
+    },
+    {
+      "location": "06.details.16",
+      "ref": "{{c:/report_constants/q1_label}}",
+      "value": "25%",
+      "display": "25%"
+    },
+    {
+      "location": "06.details.16",
+      "ref": "{{c:/report_parameters/hypothetical_followup__score_scenarios__3}}",
+      "value": 400,
+      "display": "400"
+    },
+    {
+      "location": "06.details.16",
+      "ref": "{{c:/report_constants/q3_label}}",
+      "value": "75%",
+      "display": "75%"
+    },
+    {
+      "location": "06.details.16",
+      "ref": "{{c:/report_constants/q3_label}}",
+      "value": "75%",
+      "display": "75%"
+    },
+    {
+      "location": "06.analysis.17",
+      "ref": "{{e:E1043#/value}}",
+      "value": 2026,
+      "display": "2026"
+    },
+    {
+      "location": "06.analysis.17",
+      "ref": "{{c:/report_parameters/hypothetical_followup__score_scenarios__0}}",
+      "value": 330,
+      "display": "330"
+    },
+    {
+      "location": "06.analysis.17",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "06.analysis.20",
+      "ref": "{{e:E1015#/value}}",
+      "value": 808,
+      "display": "808"
+    },
+    {
+      "location": "06.analysis.20",
+      "ref": "{{e:E1009#/value}}",
+      "value": 812,
+      "display": "812"
+    },
+    {
+      "location": "07.analysis.1",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "07.analysis.1",
+      "ref": "{{e:E1022#/value}}",
+      "value": 2026,
+      "display": "2026"
+    },
+    {
+      "location": "07.analysis.1",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "07.analysis.1",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "07.timeline.2",
+      "ref": "{{k:/context/personal_dates/action0|ym}}",
+      "value": "2026-10-21",
+      "display": "2026.10"
+    },
+    {
+      "location": "07.timeline.2",
+      "ref": "{{k:/context/personal_dates/action0|md_short}}",
+      "value": "2026-10-21",
+      "display": "10-21"
+    },
+    {
+      "location": "07.timeline.2",
+      "ref": "{{k:/context/personal_dates/action0|ym}}",
+      "value": "2026-10-21",
+      "display": "2026.10"
+    },
+    {
+      "location": "07.timeline.2",
+      "ref": "{{e:E2079#/value|md_short}}",
+      "value": "2026-10-24",
+      "display": "10-24"
+    },
+    {
+      "location": "07.timeline.2",
+      "ref": "{{e:E2086#/value}}",
+      "value": "22:00",
+      "display": "22:00"
+    },
+    {
+      "location": "07.timeline.2",
+      "ref": "{{k:/context/personal_dates/exam_month|ym}}",
+      "value": "2026-12-19",
+      "display": "2026.12"
+    },
+    {
+      "location": "07.timeline.2",
+      "ref": "{{e:E2083#/value|md_short}}",
+      "value": "2026-12-19",
+      "display": "12-19"
+    },
+    {
+      "location": "07.timeline.2",
+      "ref": "{{e:E2084#/value|md_short}}",
+      "value": "2026-12-20",
+      "display": "12-20"
+    },
+    {
+      "location": "07.timeline.2",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "07.timeline.2",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "07.timeline.2",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "07.timeline.2",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "07.analysis.4",
+      "ref": "{{e:E2080#/value}}",
+      "value": "2026-10-15",
+      "display": "2026-10-15"
+    },
+    {
+      "location": "07.analysis.4",
+      "ref": "{{e:E2079#/value|md_short}}",
+      "value": "2026-10-24",
+      "display": "10-24"
+    },
+    {
+      "location": "07.analysis.4",
+      "ref": "{{e:E2085#/value}}",
+      "value": "9:00",
+      "display": "9:00"
+    },
+    {
+      "location": "07.analysis.4",
+      "ref": "{{e:E2086#/value}}",
+      "value": "22:00",
+      "display": "22:00"
+    },
+    {
+      "location": "07.analysis.4",
+      "ref": "{{e:E2083#/value|md_short}}",
+      "value": "2026-12-19",
+      "display": "12-19"
+    },
+    {
+      "location": "07.analysis.4",
+      "ref": "{{e:E2084#/value|md_short}}",
+      "value": "2026-12-20",
+      "display": "12-20"
+    },
+    {
+      "location": "07.analysis.4",
+      "ref": "{{e:E2081#/value|md_short}}",
+      "value": "2026-10-09",
+      "display": "10-09"
+    },
+    {
+      "location": "07.analysis.4",
+      "ref": "{{e:E2082#/value|md_short}}",
+      "value": "2026-10-12",
+      "display": "10-12"
+    },
+    {
+      "location": "07.analysis.6",
+      "ref": "{{k:/context/personal_dates/action0|md}}",
+      "value": "2026-10-21",
+      "display": "10 月 21 日"
+    },
+    {
+      "location": "07.analysis.6",
+      "ref": "{{c:/report_parameters/hypothetical_followup__score_scenarios__2}}",
+      "value": 380,
+      "display": "380"
+    },
+    {
+      "location": "08.routes.2",
+      "ref": "{{k:/context/personal_dates/action0|md}}",
+      "value": "2026-10-21",
+      "display": "10 月 21 日"
+    },
+    {
+      "location": "08.routes.2",
+      "ref": "{{e:E2079#/value|md}}",
+      "value": "2026-10-24",
+      "display": "10 月 24 日"
+    },
+    {
+      "location": "08.routes.2",
+      "ref": "{{e:E2086#/value}}",
+      "value": "22:00",
+      "display": "22:00"
+    },
+    {
+      "location": "08.routes.2",
+      "ref": "{{e:E2083#/value|month}}",
+      "value": "2026-12-19",
+      "display": "12"
+    },
+    {
+      "location": "08.routes.2",
+      "ref": "{{e:E2083#/value|day}}",
+      "value": "2026-12-19",
+      "display": "19"
+    },
+    {
+      "location": "08.routes.2",
+      "ref": "{{e:E2084#/value|day}}",
+      "value": "2026-12-20",
+      "display": "20"
+    },
+    {
+      "location": "09.details.3",
+      "ref": "{{e:E0008#/value|comma}}",
+      "value": 8000,
+      "display": "8,000"
+    },
+    {
+      "location": "09.details.3",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "09.details.3",
+      "ref": "{{e:E1002#/value}}",
+      "value": "0858",
+      "display": "0858"
+    },
+    {
+      "location": "09.details.3",
+      "ref": "{{e:E1001#/value}}",
+      "value": 3,
+      "display": "3"
+    },
+    {
+      "location": "09.details.3",
+      "ref": "{{c:/report_parameters/budget__annual_housing|comma}}",
+      "value": 1600,
+      "display": "1,600"
+    },
+    {
+      "location": "09.details.3",
+      "ref": "{{e:E1043#/value}}",
+      "value": 2026,
+      "display": "2026"
+    },
+    {
+      "location": "09.details.3",
+      "ref": "{{k:/budget/monthly_living_assumption|comma}}",
+      "value": 1300,
+      "display": "1,300"
+    },
+    {
+      "location": "09.details.3",
+      "ref": "{{c:/report_constants/months_per_year}}",
+      "value": 12,
+      "display": "12"
+    },
+    {
+      "location": "09.details.3",
+      "ref": "{{c:/annual_cost|comma}}",
+      "value": 25200,
+      "display": "25,200"
+    },
+    {
+      "location": "09.details.3",
+      "ref": "{{k:/budget/annual_limit|comma}}",
+      "value": 30000,
+      "display": "30,000"
+    },
+    {
+      "location": "09.details.3",
+      "ref": "{{c:/annual_margin|comma}}",
+      "value": 4800,
+      "display": "4,800"
+    },
+    {
+      "location": "09.details.3",
+      "ref": "{{c:/total_cost_over_program|comma}}",
+      "value": 75600,
+      "display": "75,600"
+    },
+    {
+      "location": "09.details.3",
+      "ref": "{{c:/report_constants/living_increment}}",
+      "value": 200,
+      "display": "200"
+    },
+    {
+      "location": "09.details.3",
+      "ref": "{{c:/annual_cost_if_living_plus_200|comma}}",
+      "value": 27600,
+      "display": "27,600"
+    },
+    {
+      "location": "09.details.3",
+      "ref": "{{c:/annual_margin_if_living_plus_200|comma}}",
+      "value": 2400,
+      "display": "2,400"
+    },
+    {
+      "location": "09.budget_chart.4",
+      "ref": "{{c:/report_constants/living_increment}}",
+      "value": 200,
+      "display": "200"
+    },
+    {
+      "location": "09.budget_chart.4",
+      "ref": "{{k:/budget/annual_limit|comma}}",
+      "value": 30000,
+      "display": "30,000"
+    },
+    {
+      "location": "09.budget_chart.4",
+      "ref": "{{k:/budget/annual_limit}}",
+      "value": 30000,
+      "display": "30000"
+    },
+    {
+      "location": "09.budget_chart.4",
+      "ref": "{{c:/annual_cost}}",
+      "value": 25200,
+      "display": "25200"
+    },
+    {
+      "location": "09.budget_chart.4",
+      "ref": "{{c:/annual_cost|comma}}",
+      "value": 25200,
+      "display": "25,200"
+    },
+    {
+      "location": "09.budget_chart.4",
+      "ref": "{{c:/annual_cost_if_living_plus_200}}",
+      "value": 27600,
+      "display": "27600"
+    },
+    {
+      "location": "09.budget_chart.4",
+      "ref": "{{c:/annual_cost_if_living_plus_200|comma}}",
+      "value": 27600,
+      "display": "27,600"
+    },
+    {
+      "location": "09.analysis.5",
+      "ref": "{{e:E1002#/value}}",
+      "value": "0858",
+      "display": "0858"
+    },
+    {
+      "location": "09.analysis.5",
+      "ref": "{{e:E0008#/value|comma}}",
+      "value": 8000,
+      "display": "8,000"
+    },
+    {
+      "location": "09.analysis.5",
+      "ref": "{{e:E1001#/value}}",
+      "value": 3,
+      "display": "3"
+    },
+    {
+      "location": "09.analysis.5",
+      "ref": "{{e:E1028#/value}}",
+      "value": 600,
+      "display": "600"
+    },
+    {
+      "location": "09.analysis.5",
+      "ref": "{{e:E1029#/value|comma}}",
+      "value": 1400,
+      "display": "1,400"
+    },
+    {
+      "location": "09.analysis.5",
+      "ref": "{{c:/report_parameters/budget__annual_housing|comma}}",
+      "value": 1600,
+      "display": "1,600"
+    },
+    {
+      "location": "09.analysis.7",
+      "ref": "{{e:E1023#/value}}",
+      "value": 2026,
+      "display": "2026"
+    },
+    {
+      "location": "09.analysis.7",
+      "ref": "{{e:E1017#/value}}",
+      "value": "085801",
+      "display": "085801"
+    },
+    {
+      "location": "09.analysis.7",
+      "ref": "{{e:E1030#/value|comma}}",
+      "value": 12000,
+      "display": "12,000"
+    },
+    {
+      "location": "09.analysis.7",
+      "ref": "{{e:E1031#/value}}",
+      "value": 3,
+      "display": "3"
+    },
+    {
+      "location": "09.analysis.7",
+      "ref": "{{e:E1032#/value|comma}}",
+      "value": 15000,
+      "display": "15,000"
+    },
+    {
+      "location": "09.analysis.7",
+      "ref": "{{k:/budget/annual_limit|comma}}",
+      "value": 30000,
+      "display": "30,000"
+    },
+    {
+      "location": "09.analysis.7",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "09.analysis.7",
+      "ref": "{{e:E1023#/value}}",
+      "value": 2026,
+      "display": "2026"
+    },
+    {
+      "location": "09.analysis.7",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "09.details.8",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "09.details.8",
+      "ref": "{{e:E0008#/value|comma}}",
+      "value": 8000,
+      "display": "8,000"
+    },
+    {
+      "location": "09.details.8",
+      "ref": "{{e:E1043#/value}}",
+      "value": 2026,
+      "display": "2026"
+    },
+    {
+      "location": "09.details.8",
+      "ref": "{{e:E1030#/value|comma}}",
+      "value": 12000,
+      "display": "12,000"
+    },
+    {
+      "location": "09.details.8",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "09.details.8",
+      "ref": "{{c:/report_parameters/budget__annual_housing|comma}}",
+      "value": 1600,
+      "display": "1,600"
+    },
+    {
+      "location": "09.details.8",
+      "ref": "{{k:/budget/monthly_living_assumption|comma}}",
+      "value": 1300,
+      "display": "1,300"
+    },
+    {
+      "location": "09.details.8",
+      "ref": "{{c:/annual_cost|comma}}",
+      "value": 25200,
+      "display": "25,200"
+    },
+    {
+      "location": "09.details.8",
+      "ref": "{{c:/annual_margin|comma}}",
+      "value": 4800,
+      "display": "4,800"
+    },
+    {
+      "location": "09.details.8",
+      "ref": "{{c:/gdut_fee_reference/annual_cost|comma}}",
+      "value": 29200,
+      "display": "29,200"
+    },
+    {
+      "location": "09.details.8",
+      "ref": "{{c:/gdut_fee_reference/annual_margin}}",
+      "value": 800,
+      "display": "800"
+    },
+    {
+      "location": "09.details.8",
+      "ref": "{{c:/report_constants/living_increment}}",
+      "value": 200,
+      "display": "200"
+    },
+    {
+      "location": "09.details.8",
+      "ref": "{{c:/annual_cost_if_living_plus_200|comma}}",
+      "value": 27600,
+      "display": "27,600"
+    },
+    {
+      "location": "09.details.8",
+      "ref": "{{c:/annual_margin_if_living_plus_200|comma}}",
+      "value": 2400,
+      "display": "2,400"
+    },
+    {
+      "location": "09.details.8",
+      "ref": "{{c:/gdut_fee_reference/annual_cost_if_living_plus_200|comma}}",
+      "value": 31600,
+      "display": "31,600"
+    },
+    {
+      "location": "09.details.8",
+      "ref": "{{c:/gdut_fee_reference/annual_margin_if_living_plus_200|abs_comma}}",
+      "value": -1600,
+      "display": "1,600"
+    },
+    {
+      "location": "09.details.8",
+      "ref": "{{c:/total_cost_over_program|comma}}",
+      "value": 75600,
+      "display": "75,600"
+    },
+    {
+      "location": "09.details.8",
+      "ref": "{{c:/gdut_fee_reference/total_cost|comma}}",
+      "value": 87600,
+      "display": "87,600"
+    },
+    {
+      "location": "09.analysis.9",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "09.analysis.10",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "09.analysis.10",
+      "ref": "{{e:E1033#/value|comma}}",
+      "value": 5000,
+      "display": "5,000"
+    },
+    {
+      "location": "09.analysis.10",
+      "ref": "{{e:E1034#/value}}",
+      "value": "100%",
+      "display": "100%"
+    },
+    {
+      "location": "09.analysis.10",
+      "ref": "{{e:E1035#/value|comma}}",
+      "value": 6000,
+      "display": "6,000"
+    },
+    {
+      "location": "10.questions.2",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "10.questions.2",
+      "ref": "{{c:/illustrative_parameters/daily_hours_ceiling}}",
+      "value": 8,
+      "display": "8"
+    },
+    {
+      "location": "10.questions.2",
+      "ref": "{{k:/budget/annual_limit|comma}}",
+      "value": 30000,
+      "display": "30,000"
+    },
+    {
+      "location": "11.analysis.6",
+      "ref": "{{e:E1018#/value}}",
+      "value": 2026,
+      "display": "2026"
+    },
+    {
+      "location": "11.analysis.6",
+      "ref": "{{c:/scut_reference_statistics/2026_普通计划与基地计划/n}}",
+      "value": 120,
+      "display": "120"
+    },
+    {
+      "location": "11.analysis.6",
+      "ref": "{{e:E1019#/value}}",
+      "value": 2025,
+      "display": "2025"
+    },
+    {
+      "location": "11.analysis.6",
+      "ref": "{{e:E1003#/value}}",
+      "value": "085801",
+      "display": "085801"
+    },
+    {
+      "location": "11.analysis.6",
+      "ref": "{{c:/sample_reconciliation_2025/total}}",
+      "value": 66,
+      "display": "66"
+    },
+    {
+      "location": "11.analysis.6",
+      "ref": "{{c:/sample_reconciliation_2025/minority}}",
+      "value": 4,
+      "display": "4"
+    },
+    {
+      "location": "11.analysis.6",
+      "ref": "{{c:/sample_reconciliation_2025/soldier}}",
+      "value": 1,
+      "display": "1"
+    },
+    {
+      "location": "11.analysis.6",
+      "ref": "{{c:/sample_reconciliation_2025/joint}}",
+      "value": 2,
+      "display": "2"
+    },
+    {
+      "location": "11.analysis.6",
+      "ref": "{{c:/sample_reconciliation_2025/ordinary}}",
+      "value": 59,
+      "display": "59"
+    },
+    {
+      "location": "11.analysis.8",
+      "ref": "{{e:E0008#/value|comma}}",
+      "value": 8000,
+      "display": "8,000"
+    },
+    {
+      "location": "11.analysis.8",
+      "ref": "{{c:/report_parameters/budget__annual_housing|comma}}",
+      "value": 1600,
+      "display": "1,600"
+    },
+    {
+      "location": "11.analysis.8",
+      "ref": "{{k:/budget/monthly_living_assumption|comma}}",
+      "value": 1300,
+      "display": "1,300"
+    },
+    {
+      "location": "11.analysis.8",
+      "ref": "{{c:/report_constants/months_per_year}}",
+      "value": 12,
+      "display": "12"
+    },
+    {
+      "location": "11.analysis.8",
+      "ref": "{{c:/annual_cost|comma}}",
+      "value": 25200,
+      "display": "25,200"
+    },
+    {
+      "location": "11.analysis.8",
+      "ref": "{{k:/budget/annual_limit|comma}}",
+      "value": 30000,
+      "display": "30,000"
+    },
+    {
+      "location": "11.analysis.8",
+      "ref": "{{c:/annual_cost|comma}}",
+      "value": 25200,
+      "display": "25,200"
+    },
+    {
+      "location": "11.analysis.8",
+      "ref": "{{c:/annual_margin|comma}}",
+      "value": 4800,
+      "display": "4,800"
+    },
+    {
+      "location": "11.analysis.8",
+      "ref": "{{c:/annual_cost|comma}}",
+      "value": 25200,
+      "display": "25,200"
+    },
+    {
+      "location": "11.analysis.8",
+      "ref": "{{e:E1001#/value}}",
+      "value": 3,
+      "display": "3"
+    },
+    {
+      "location": "11.analysis.8",
+      "ref": "{{c:/total_cost_over_program|comma}}",
+      "value": 75600,
+      "display": "75,600"
+    },
+    {
+      "location": "11.analysis.8",
+      "ref": "{{c:/report_constants/living_increment}}",
+      "value": 200,
+      "display": "200"
+    },
+    {
+      "location": "11.analysis.8",
+      "ref": "{{c:/annual_cost_if_living_plus_200|comma}}",
+      "value": 27600,
+      "display": "27,600"
+    },
+    {
+      "location": "11.analysis.8",
+      "ref": "{{c:/annual_margin_if_living_plus_200|comma}}",
+      "value": 2400,
+      "display": "2,400"
+    },
+    {
+      "location": "11.analysis.9",
+      "ref": "{{c:/report_parameters/hypothetical_followup__score_scenarios__2}}",
+      "value": 380,
+      "display": "380"
+    },
+    {
+      "location": "11.analysis.11",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "11.analysis.11",
+      "ref": "{{c:/gdut_2026_first_choice_retest_scores/n}}",
+      "value": 86,
+      "display": "86"
+    },
+    {
+      "location": "11.analysis.11",
+      "ref": "{{c:/report_parameters/additional_scenarios__gdut_2026_first_choice_retest_scores__full_time_rows}}",
+      "value": 93,
+      "display": "93"
+    },
+    {
+      "location": "11.analysis.11",
+      "ref": "{{c:/report_parameters/additional_scenarios__gdut_2026_first_choice_retest_scores__excluded_soldier_rows}}",
+      "value": 7,
+      "display": "7"
+    },
+    {
+      "location": "11.analysis.11",
+      "ref": "{{c:/gdut_2026_first_choice_retest_scores/n}}",
+      "value": 86,
+      "display": "86"
+    },
+    {
+      "location": "11.analysis.11",
+      "ref": "{{c:/gdut_2026_first_choice_retest_scores/min}}",
+      "value": 350,
+      "display": "350"
+    },
+    {
+      "location": "11.analysis.11",
+      "ref": "{{e:E1030#/value|comma}}",
+      "value": 12000,
+      "display": "12,000"
+    },
+    {
+      "location": "11.analysis.11",
+      "ref": "{{c:/report_parameters/budget__annual_housing|comma}}",
+      "value": 1600,
+      "display": "1,600"
+    },
+    {
+      "location": "11.analysis.11",
+      "ref": "{{k:/budget/monthly_living_assumption|comma}}",
+      "value": 1300,
+      "display": "1,300"
+    },
+    {
+      "location": "11.analysis.11",
+      "ref": "{{c:/report_constants/months_per_year}}",
+      "value": 12,
+      "display": "12"
+    },
+    {
+      "location": "11.analysis.13",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    }
+  ],
+  "artifacts": {
+    "report.md": "75953b10afdb852eab8841705bff6ad4d1dba05076a026898fa35ccb60a26ab3",
+    "report.html": "12280b56efc0f212d15537ebe9a002694407e1c3f4d17d6a92d3f2db02f74355",
+    "report.pdf": "884d3b5fb35c2e336e072215e4cf05833ed7c140e51315b85ecaaee7cb4a4030"
+  },
+  "delivery_status": "awaiting_operator_and_independent_review"
+}

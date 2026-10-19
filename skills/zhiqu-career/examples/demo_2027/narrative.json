@@ -1,0 +1,1200 @@
+{
+  "schema_version": 1,
+  "sections": {
+    "01": {
+      "title": "摘要",
+      "lead": {
+        "type": "conclusion_sentence",
+        "content": {
+          "text": "先落实能胜任、收入可持续的基础财务岗位，再按具体门槛与家庭现金支持判断专升本。"
+        },
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      "analysis": [
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "会计助理、出纳、应收应付文员都值得调查。已核到两类当届岗位原文，但尚无确认适用小宁的岗位或真实录用通知；不能把方向清单当作已经能进入的岗位。[1]"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "收入图均为完整工作年度的条件计算，不是小宁已经拿到的报价，也不是 {{k:/target_year}} 年实际工资单。社保比例、医保基数、奖金与实际工时未最终核实，因此图用于看清比较方法和敏感条件，不用于宣布哪个岗位一定更好。"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        }
+      ],
+      "core_points": {
+        "type": "titled_points",
+        "content": {
+          "items": [
+            {
+              "title": "方向",
+              "text": "先找基础账务、收付款和对账岗位。小宁细致、喜欢流程和数字，有短期实习经历，但还不是能独立做完整账务的会计。"
+            },
+            {
+              "title": "短板",
+              "text": "没通过的证书和 Excel 基础水平，要对照具体岗位的要求逐条判断。"
+            },
+            {
+              "title": "国企和考编",
+              "text": "可以继续了解，但“国企”说的是单位，“直签”“派遣”说的是合同，“事业编”是另一套招考。先确认具体岗位和签约单位。"
+            },
+            {
+              "title": "收入",
+              "text": "税前高不等于结余多。B 离家近、开销低，但派遣身份和第 {{c:/report_parameters/hypothetical_followup__offers__1__months}} 个月工资要看书面约定；A 现金多，但这个情景没有计入公积金，合规和待遇还有缺口，不能只看现金就选 A。"
+            }
+          ]
+        },
+        "evidence_refs": [
+          "E0001"
+        ]
+      }
+    },
+    "02": {
+      "title": "你的画像",
+      "lead": {
+        "type": "conclusion_sentence",
+        "content": {
+          "text": "小宁具备基础财务方向的兴趣与入门经历，当前主要缺口是可展示的任务能力、具体资格和真实岗位信息。"
+        },
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      "analysis": [
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "这些可以逐项补证，不应被“专科没机会”或“进国企就稳”两种笼统判断覆盖。[1]"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "heading",
+            "text": "已有经历能证明到哪里"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "如果小宁能解释某次核对的原始信息、为什么这样核、发现了什么差异以及谁复核，就能提供有限但有用的能力证据。若只能说“实习过”“用过 Excel”，还不足以证明独立胜任。报告不替他新增经历，也不把短期实习贬成无用。"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "当前需要的不是把所有软件学一遍，而是先读实际岗位任务，再选择最影响入门的一项缺口。若岗位重基础核对，就验证查找、筛选、汇总和差异定位；若岗位要求税务申报或资金权限，就先确认是否提供带教、谁审核、哪些职责不能未经训练独立承担。"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "heading",
+            "text": "性格与工作沟通"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "慢热不等于不能做财务，细致也不等于不会出错。判断应看任务是否能完成、遇到不确定事项是否会按流程求证、能否保留复核记录。若小宁因为怕问而自行猜测数字来源，这是工作风险，需要改变处理方式；若只是在人多时不愿发言，则不能由此判断不适合整个方向。"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "本人可以先向主管或学校指导老师确认什么情况必须停下提问、哪些差异要升级复核。这里给的是工作选择和能力判断，不提供逐句面试训练。状态持续影响日常生活时，先减少非必要任务并使用校内支持，不把一次拒信解释成人格评价。"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "heading",
+            "text": "传统视角：八字（可选，不参与判断）"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "出生资料为 {{k:/birth_datetime|datetime}}，四川省；只知道省份，按北京时间排盘。结果为丙戌、甲午、辛巳、癸巳，日主辛金；{{c:/luck_start_year}} 年起运，顺行；{{k:/target_year}} 年在丙申运。[1]"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "这一视角未经现实预测验证，不参与资格、收入、方向排序和时间选择。删除它，正式判断不变。"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        }
+      ]
+    },
+    "03": {
+      "title": "你看重什么、卡在哪",
+      "lead": {
+        "type": "conclusion_sentence",
+        "content": {
+          "text": "小宁要先把“稳定”拆成能核对的条件，再与成长、结余和离家距离比较。"
+        },
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      "analysis": [
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "目前本人没有确认完整的偏好权重，因此不制造一个综合分来替他做决定。[1]"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "heading",
+            "text": "家庭分歧怎样落到同一组事实"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "父母说国企好，可能是在担心私人公司欠薪、工作太累或没有保障；小宁想先就业，也可能主要是希望减轻家庭负担。先把这些担心写清楚，再一起看甲方、保证收入、工时、社保和成长。若B只是派遣，应该直接说明；若A是直签，也要承认其待遇和业务风险尚未知，不能用“市场化成长快”补齐证据。"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "若家庭无法承担升本期间无全职工资，必须先解决资金；若能够承担，且目标岗位确实需要相应本科，就应认真比较升本。两种条件都不能由“别人都升本”代替。本次核到的天健 {{k:/target_year}} 财务审计要求本科，说明学历会限制某些具体入口；但将来升本后的毕业年份、专业、学位和当届条件还要重核，不能说升本就能进入这一批。完整费用与家庭支持尚未确认，因此保留条件选项。[15]"
+          },
+          "evidence_refs": [
+            "E0015"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "heading",
+            "text": "就业信息对本人意味着什么"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "官方工资调查提供市场背景，但没有本案可直接采用的应届会计起薪。它包含不同工龄与单位，不能从会计低分位推导小宁“应该拿多少钱”。岗位筛选可能涉及学历、证书、经历和工作地点，只有拿到对应原文与反馈，才能判断哪一项真正限制选择。[2]"
+          },
+          "evidence_refs": [
+            "E0002"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "目前没有投递和面试结果，不需要先解释为何失败。以后若没有回应，应先查职位是否开放、硬条件是否满足、申请状态是否有效；原因未知时保持未知。多次反馈如果明确卡在同一门槛，再讨论补资格或改目标，而不是从拒信数量推算个人录用率。"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        }
+      ]
+    },
+    "04": {
+      "title": "候选方向",
+      "lead": {
+        "type": "conclusion_sentence",
+        "content": {
+          "text": "先保留三类基础财务方向，升本作为解决具体学历门槛的条件路线；所有方向都要回到日常任务。"
+        },
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      "analysis": [
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "名称相同的岗位也可能一个做真实财务，一个主要做销售或催收，不能只看“会计”两个字。[1]"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "heading",
+            "text": "怎样验证最值得保留的方向"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "若有清楚带教、工作内容真实、资格可能符合，基础财务岗可以进入调查；若岗位要求独立负责整套复杂账务，而本人没有相应证据，就标能力差距，不因为名称是“助理”就默认入门。若岗位的主要产出是拉客户或售课，且本人不接受推销，就退出该具体岗位。"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "若出纳工作有明确审批和复核，且岗位提供与本人基础相符的训练，可以保留；若要求个人垫款、借用个人账户收付单位款项或权限责任说不清，就先停下核对，不以“积累经验”为由接受。这里识别的是待核风险，最终法律判断还需实际材料。"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "应收应付并非完全不用沟通。核账期、差异和业务依据都可能需要向其他部门确认。小宁若愿意就事实开展工作沟通，而不愿营销，两者并不冲突。只有取得岗位任务与反馈后，才判断沟通缺口是否影响胜任。"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "heading",
+            "text": "官方收入参照及其限制"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "四川省 {{e:E1001#/value}} 年人力资源市场工资价位于 {{e:E1000#/value}} 发布，反映企业从业人员全年工资，不含机关事业单位。下表只作背景，不是 {{k:/target_year}} 年起薪，也不是某个正在招聘的单位报价；原表以{{e:E1002#/value}}元／年列示，这里统一换算为元／年。[2]"
+          },
+          "evidence_refs": [
+            "E0002",
+            "E1001",
+            "E1000",
+            "E1002"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "三个分组不能交叉相乘或拼成“专科应届会计”的工资分布。会计专业人员包括多年工作者，工龄组又不限职业；即使数字相近，也不能证明小宁应该拿到某一数额。本轮不沿用“会计低分位就是应届工资”的推断；可比报价缺失时，起薪保持待查。"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "最低工资同样不等于起薪。已有四川正式标准为 {{e:E1005#/value}} 年起第一档 {{e:E1006#/value|comma}} 元、第二档 {{e:E1007#/value|comma}} 元，各市州选择执行档次；{{e:E1008#/value}} 年官方征求意见稿不能当生效文件。具体城市档次与最新生效情况仍须在真实工作比较时核对，本报告不据两份条件报价宣布合同合规。[3][4]"
+          },
+          "evidence_refs": [
+            "E0004",
+            "E1005",
+            "E1006",
+            "E1007",
+            "E1008"
+          ]
+        }
+      ]
+    },
+    "05": {
+      "title": "方向比较",
+      "lead": {
+        "type": "conclusion_sentence",
+        "content": {
+          "text": "当前调查顺序是基础财务岗位并行、升本条件随后核实；没有足够证据排出唯一岗位。"
+        },
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      "analysis": [
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "✓ 表示已有支持，△ 表示有条件或待查，✗ 只用于明确冲突；空缺不打中间分，也不计总分。[1]"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "heading",
+            "text": "什么情况会改变顺序"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "若找到明确接受本人学历、有真实带教、保证现金可覆盖必要支出的岗位，就应进入实质比较；若工作只是无学习空间的杂务或本人不愿的推销，即使单位名气大，也不因为“第一份工作”而自动接受。若岗位所有硬门槛满足，只缺偏好条件，可以保留尝试，但不承诺进入面试。"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "若目标岗位多数明确要求可取得的本科和学位，且家庭资金、当届资格、学习内容都成立，升本优先级可以提高；若本科路径仍不满足目标的教育经历要求，升本不能被写成已经解决门槛。也不能用“平均本科工资更高”替个人计算回本年限。"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "若父母把稳定性放在第一位，应让他们看到国企派遣与直签的差别，再看具体岗位是否能承担生活；若小宁把成长放在第一位，也必须拿到带教和任务信息。直签不自动带来完整账务训练，派遣也不自动没有成长。缺信息时保留问题，不能给双方各编一个理由求平衡。"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "heading",
+            "text": "收入与成长的敏感性"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "一份工作若税前高但住房和工时明显增加，可能不符合小宁的结余与生活偏好；另一份工作若近家、结余高但任务长期单一，也可能不符合长期目标。第 09 节把钱单独算清，非金钱条件继续待核。本人优先级未确认，因此不写“两者综合得分接近”这类没有评分依据的结论。"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "如果最重要的两项互换顺序，选择就翻转，应把取舍交回本人：更重离家与当下结余时，B 情景值得深入核；更重合同甲方与可验证的训练时，需要先取得A的具体带教与待遇证据。两者都不能在信息不足时直接选定。"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        }
+      ],
+      "unknown_explanation": {
+        "type": "unknown_explanation",
+        "content": {
+          "missing_information": "小宁尚无真实offer、本人收入底线、户籍与政治面貌；实际岗位学历、职责、合同及当地扣款仍缺。",
+          "retrieval_plan": "请本人补画像缺项，再核正式招聘公告和合同。已取得的天健公告有本科门槛，能投页面学历字段冲突，不能直接当成适用岗位，见[15][16][17]。",
+          "decision_changes": "硬资格不符就剔除；职责或合同不能接受就换岗位；实际现金结余不足就先重估住房与收入条件。矩阵待查格不当成可行，也不算综合分。"
+        },
+        "evidence_refs": [
+          "E0001"
+        ]
+      }
+    },
+    "06": {
+      "title": "目标岗位清单",
+      "lead": {
+        "type": "conclusion_sentence",
+        "content": {
+          "text": "目前列出的是调查目标类型，具体可报名单位清单仍为空；每个岗位必须通过资格与内容核对。"
+        },
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      "analysis": [
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "学校就业推荐、亲友介绍和集团名称都是线索，不能替代当届公告、甲方和职责证据。[1]"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "heading",
+            "text": "同一个条件怎样下结论"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "若岗位原文写“须取得本科及学位”，而小宁计划以当前专科学历申请，就应写该岗位当前明确不符，不能用技能或兴趣高分补过去。若原文写“财会相关专业”却未给目录，小宁应带专业全名向招聘方确认，结论是待确认，不是直接认定符合。"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "若要求证书在报名时取得，小宁尚未通过就不能承诺入职前补；若明确允许入职前取得，则按原文时点核。没有写证书的岗位，不由报告自行加一个“必须初级会计”；有写的硬要求，也不能因这是入门岗而忽略。"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "本轮已取的具体岗位尚不能作为确认可报的退路，因而不设“冲稳保”，不把国企、事业单位或亲友介绍当保底。真正的退路必须是本人愿意去、有适用资格、能在需要收入的时点启动的机会。"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "heading",
+            "text": "两个具体岗位怎样逐项判断"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "**正式岗位样本能说明具体门槛，不能代表整个行业的招聘分布。** 本次只为小宁核对财务相关的两个岗位、三个官方高校就业网页；高校发布或转载说明信息出处，不等于招聘方已确认小宁资格，也不等于名额仍有余额。[15][16][17]"
+          },
+          "evidence_refs": [
+            "E0017"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "天健页面本身也有时间差异：职位有效期写 {{e:E2079#/value}}，正文网申写至 {{e:E2080#/value|md_short}}。两处不一致时，不给一个假确定的最后时刻；若未来核对这一机会，应提前处理，并以雇主官网当前岗位及招聘方答复为准。对小宁而言，本轮首先卡在学历，不应先为这一批笔试或测评投入。[15]"
+          },
+          "evidence_refs": [
+            "E0015",
+            "E2079",
+            "E2080"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "能投实习详情列每周五天、{{e:E1011#/value}}个月以上、转正机会面议，正文要求适应施工项目一线、愿长期扎根基层。工作地点为项目部所在地，不能把公司在成都等同于一直在成都办公室。页面的实习日薪与转正面议也不能换成年薪，更不能替代毕业后持续收入。小宁只有在学历口径、课业时间、项目地点与正式转正条件都核清后，才有资格比较这条线。[16][17]"
+          },
+          "evidence_refs": [
+            "E0017",
+            "E1011"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "heading",
+            "text": "区分不能报、能力差距和偏好冲突"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "因此，保留基础财务方向有本人兴趣与经历支持；不直接推荐上述单位，则是因为资格、冲突或实际工作条件还不成立。下一轮应找少量明确接受当前学历、任务可验证的岗位，不能只在大品牌校招里反复碰同一个门槛，也不能由这两个样本推出“专科没有财务工作”。[1][15][16][17]"
+          },
+          "evidence_refs": [
+            "E0017"
+          ]
+        }
+      ]
+    },
+    "07": {
+      "title": "时间窗口与检查点",
+      "lead": {
+        "type": "conclusion_sentence",
+        "content": {
+          "text": "按每个机会的实际截止排时间，个人检查点用来提前处理资格、资金与冲突。"
+        },
+        "evidence_refs": [
+          "E0005"
+        ]
+      },
+      "analysis": [
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "下图从当前到入职后的核对，月份是规划窗口；没有当年公告的考试或招聘不填假日期。[1][5]"
+          },
+          "evidence_refs": [
+            "E0005"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "四川 {{e:E1013#/value}} 年普通专升本通告在 {{e:E1014#/value}} 年 {{e:E1015#/value}} 月发布，考试为 {{e:E1012#/value}} 至 {{e:E2084#/value|md_short}}，报名考试费 {{e:E1016#/value}} 元。这些是上一届事实，不能平移成 {{k:/target_year}} 年时间、费用或本人资格；本案尚未取得 {{k:/target_year}} 年正式通告。[5]"
+          },
+          "evidence_refs": [
+            "E0005",
+            "E1013",
+            "E1014",
+            "E1015",
+            "E1012",
+            "E2084",
+            "E1016"
+          ]
+        }
+      ]
+    },
+    "08": {
+      "title": "行动路线",
+      "lead": {
+        "type": "conclusion_sentence",
+        "content": {
+          "text": "先用实际任务和公告筛选入口，父母关心的路线单独核资格、考试与用工性质。"
+        },
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      "analysis": [
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "路线卡中的“投入”包括无收入等待，不只包括报名或备考费用。招聘和报考均由本人处理。[1]"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "先完成一项可以解释的核对任务，再决定补什么工具。若岗位需要业务沟通，任务证据中要能说明向谁核对、怎么记录差异，而不是只展示一张美观表格。若工作需要独立承担资金或申报责任，要核带教、授权和复核，不能把“愿意学”当现成能力。"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "国企路线可以调查，但目前没有证据证明某家单位接受小宁，也没有证据证明所有国企都不接受专科。两种说法都过度。家里提供单位名称后，先到官网查具体主体、当届公告和职位，再讨论是否值得准备，而不是先购买某种通用考试课程。"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "《劳动合同法》第 {{e:E1017#/value|arabic}} 条将派遣单位列为用人单位，并规定劳动合同应载明用工单位、派遣期限与岗位等内容。第 {{e:E1018#/value|arabic}} 条规定同工同酬，不能由此推出个人享有用工单位全部身份或保证转直签。是否接受派遣，要看具体保障、工作与生活条件，不简单贴“稳定”或“骗局”标签。[7]"
+          },
+          "evidence_refs": [
+            "E0007",
+            "E1017",
+            "E1018"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "上述历史公告报名为 {{e:E2081#/value}} 至 {{e:E2082#/value|md_hm}}，笔试为 {{e:E2083#/value|md_short}}，已过期。它能说明公告、岗位表、考试与资格复审分别在哪里看，不能证明 {{k:/target_year}} 年有专科财务岗位。尚未核到的编制与待遇也不能按这份通知推给全部事业单位。[6]"
+          },
+          "evidence_refs": [
+            "E0006",
+            "E2081",
+            "E2082",
+            "E2083"
+          ]
+        }
+      ]
+    },
+    "09": {
+      "title": "offer 比较",
+      "lead": {
+        "type": "conclusion_sentence",
+        "content": {
+          "text": "现在没有真实 offer；下列两个完整工作年度的情景只用来拆清钱、工时和居住成本。"
+        },
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      "analysis": [
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "A 税前与年到手更高，B 在当前住房与保证多薪假设下结余更多；两者合同、成长与合规缺项都不能被图表抹去。[1]"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "heading",
+            "text": "输入必须先说清"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "两者都按完整年度持续在职，不是 {{k:/target_year}} 年毕业后首个自然年的收入。首年有几个月工资、试用薪酬是否变化、奖金是否按在职月份折算，都还未知，因此不把完整年数额当毕业当年能花的钱。B 的第 {{c:/report_parameters/hypothetical_followup__offers__1__months}} 个月不属于每个普通月的工资。"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "heading",
+            "text": "按同一口径比较收入"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "金额为按上述输入计算后的四舍五入值，不能用已取整的月数再倒算年总额。社保等假设不完整时，表内的算术正确也不意味着实际工资单正确。"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "heading",
+            "text": "钱以外怎样决定"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "目前不能认定A一定更有成长。代理记账公司可能有不同客户、任务与带教安排，要由具体岗位证明；B也不能因为在国企工作地点就认定稳定。A直签与B派遣是合同结构上的差别，最终还要看待遇、业务、任务与退出条件。"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "若小宁更在意离家与普通月结余，B情景值得优先问清，但第 {{c:/report_parameters/hypothetical_followup__offers__1__months}} 个月、派遣退回与实际岗位必须核；若更在意直接合同与训练机会，A需要先补公积金、加班和带教证据。没有偏好权重和完整条件，不给总分、不宣布最终排序。"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "heading",
+            "text": "为什么现金更多，结余反而更少"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "A 情景的到手现金高于 B，但住房和其他生活支出也更高，所以全年平均结余排序反过来。这里的判断链是：先确认保证收入和依法应缴部分，再扣本人必要支出，最后结合工时与非现金待遇。若只比较税前月薪，就会漏掉生活成本；若只比较全年平均结余，又会漏掉 B 的奖金时点与普通月压力。[1]"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "若本人最看重近家与当下可用现金，应重点核 B 的普通月收支、派遣合同和奖金条件；若更看重直接用工关系与训练，应重点核 A 的带教、客户任务、工时和公积金。两条都属于有条件的调查优先级，不能在真实合同缺失时变成最终选择。任何真实报价到来，都先替换假设再比较，不把学校网页薪资区间当成小宁的个人报价。"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "heading",
+            "text": "哪些假设最容易改变结果"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "heading",
+            "text": "扣款依据与尚未核实的部分"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "四川 {{e:E1019#/value}} 年养老、失业、工伤缴费基数下限 {{e:E1020#/value|comma}} 元、上限 {{e:E1021#/value|comma}} 元，是{{e:E1019#/value}}年的官方参数，本案用它作下一年条件估算。医保基数另由医保部门规定，不能证明与上述相同。{{c:/report_parameters/hypothetical_followup__ss_personal_rate_assumption|percent1}} 是保留的个人综合比例假设；其中旧文件失业个人 {{e:E1022#/value}} 执行至 {{e:E1023#/value}} 年底，{{e:E1019#/value}} 以后延续文件未取到，不能写成当前全国统一法定比例。[10][13]"
+          },
+          "evidence_refs": [
+            "E0013",
+            "E1019",
+            "E1020",
+            "E1021",
+            "E1022",
+            "E1023"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "个税按居民综合所得的年度规则，两份情景年税前均低于 {{e:E2085#/value|yuan}} 元基本减除费用，在所列条件下年度税额为零；这不替代本人其他收入、奖金计税与每月预扣核对。[11]"
+          },
+          "evidence_refs": [
+            "E0011",
+            "E2085"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "公积金需要按实际城市、基数、比例和起算核。现行条例对新参加工作者起算和比例有规定，A的零输入若无适用依据就不能当合规报价；B按全年{{c:/report_constants/months_per_year}}个月计，是完整年度比较，不能套首年。上述缺项未解前，保留数值用于条件比较，不进入最终推荐。[12]"
+          },
+          "evidence_refs": [
+            "E0012"
+          ]
+        }
+      ]
+    },
+    "10": {
+      "title": "风险与权益",
+      "lead": {
+        "type": "conclusion_sentence",
+        "content": {
+          "text": "先把主体、条件和退出责任看清，再谈签约；单位名气不能代替合同保障。"
+        },
+        "evidence_refs": [
+          "E0012"
+        ]
+      },
+      "analysis": [
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "本报告没有审核任何真实合同，因此只列核对点，不宣布具体安排合法或违法。[7][8][9][12]"
+          },
+          "evidence_refs": [
+            "E0012"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "heading",
+            "text": "哪种变化应当触发重新判断"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "heading",
+            "text": "录用通知、三方与劳动合同"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "录用通知要核发出主体、工作地点、工资、入职时间和获证、体检等前提；有前提时仍可能不是已落实入职。学校就业协议与劳动合同也不是同一文件。签前看完整文本和补充约定，特别是继续升学、考录、退出和违约如何处理；不能默认“签了随时可以换”或“学校模板一定没有问题”。"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "《劳动合同法》第 {{e:E1024#/value|arabic}} 条规定自用工之日起建立劳动关系，第 {{e:E1025#/value|arabic}} 条要求建立劳动关系应订立书面合同，未同时订立的应在用工起{{e:E1026#/value}}个月内订立。不能说没有签劳动合同就没有权益。尚未实际用工的就业协议如何适用，要看文本与履行，不由报告直接判定责任。[7][9]"
+          },
+          "evidence_refs": [
+            "E0009",
+            "E1024",
+            "E1025",
+            "E1026"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "heading",
+            "text": "试用、派遣与实际缴费"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "试用长度与工资有法定边界，但本案没有真实合同期限、工时制度和计薪基数，不套一个统一“试用八折”。收到合同后应连同当地最低工资与适用规则逐条核，不能把试用期当免社保期，也不能因单位要求先实习就默认没有劳动关系。[7][8]"
+          },
+          "evidence_refs": [
+            "E0008"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "派遣与外包不能只看名称。谁签、谁发薪、谁管理、在哪工作要分别写；若名义外包但按派遣形式用工，《劳务派遣暂行规定》第 {{e:E1027#/value|arabic}} 条有相应适用要求。最终关系需看实际材料，报告不据“驻场”二字自行判案。[14]"
+          },
+          "evidence_refs": [
+            "E0014",
+            "E1027"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "参保、缴存与工资应在首份实际记录出现时对照。A输入没有公积金，不代表可以自愿放弃法定权益；B有公积金，也不代表账户金额可以随时当现金取出。未批准的补贴、未来转直签和口头年终奖，不列为确定收益。"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "heading",
+            "text": "应届身份逐机会判断"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "小宁预计 {{k:/target_year}} 年毕业，但企业校招、国考、省考、事业单位和升本的资格口径各不相同。以后签三方、实习、实际工作与参保的时间应如实记录，不能一律说“交了社保就没了应届身份”，也不能说“不交就能一直保留”。"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "遇到目标机会时，逐字取毕业窗口、初次就业或未落实单位、档案与认定时点等条件，由本人向有权招录方确认。不能为了保留某个传言中的资格要求单位不依法参保，更不能伪造未就业情况。当前没有具体目标规则，报告不承诺某项身份一定保得住。"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        }
+      ]
+    },
+    "11": {
+      "title": "追问清单",
+      "lead": {
+        "type": "conclusion_sentence",
+        "content": {
+          "text": "下一轮的问题应能改变资格、工作内容或现金判断，不再只问“这个单位好不好”。"
+        },
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      "analysis": [
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "问询由小宁本人进行，不代投、代联系或代签。[1]"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "heading",
+            "text": "问不到或回答含糊时"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "若只得到“都有”“差不多”“以后能转”之类答复，关键待遇仍列未确认，不替对方补一份完整承诺。若公告与口头答复矛盾，先核是否同一年度、主体和岗位；必要时本人要求对具体条款说明。关键未知没有解除前，不能以截止将近为由随意填入乐观值。"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "如果没有正式岗位或任何有效反馈，先从学校就业处、单位招聘官网和官方公共就业服务入口定位本人能进入的机会；无需为凑清单大量收集无关招聘。进入具体比较后，再按本人所在地和年份取必要规则与金额。"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        }
+      ]
+    },
+    "12": {
+      "title": "方法、数据来源与声明",
+      "lead": {
+        "type": "conclusion_sentence",
+        "content": {
+          "text": "先筛硬门槛，再看胜任与满意，最后比较钱和非金钱条件；当前不算个人录用概率或综合排序。"
+        },
+        "evidence_refs": [
+          "E0001"
+        ]
+      },
+      "analysis": [
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "胜任指能用已有任务证明满足要求，满意指工作能否满足本人看重的收入、地点、内容与保障，两者不能互相补偿。"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "heading",
+            "text": "计算口径与边界"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "基础生活预算保留到手 {{k:/budget/take_home_assumption|comma}} 元、住房 {{k:/budget/monthly_housing_assumption|comma}} 元、其他 {{k:/budget/monthly_other_expenses_assumption|comma}} 元的条件：必要支出 {{c:/monthly_expenses|comma}} 元，月余 {{c:/monthly_remaining|comma}} 元；住房每月多 {{k:/budget/monthly_housing_assumption|comma}} 元时，余量 {{c:/monthly_remaining_if_housing_plus_600|comma}} 元。它不是A或B实际收入，不能与两份情景重复相加。[1]"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "A、B计算按上述完整年度假设：税前现金减个人社保、公积金与年度个税；现金时薪用同期间到手除工作小时；结余再扣住房与必要生活。公积金账户增加额单列，不重复加进现金。单位缴费不能再从个人税前工资扣一次，年平均也不等于普通月工资单。"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "{{c:/report_parameters/hypothetical_followup__ss_personal_rate_assumption|percent1}}个人社保、统一医保基数、全年工时、保证第{{c:/report_parameters/hypothetical_followup__offers__1__months}}个月和固定住房支出都是待实际验证的条件，不是已确认的{{k:/target_year}}标准。没有完整的当地参数、首年月份和真实合同，就只画情景，不宣布实际到手或收入优势。图表均按上述输入计算；真实工资单和工作条件取得后，需要据实更新。"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "heading",
+            "text": "哪些内容是事实，哪些是判断"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "具体岗位和资格仍待核，不给单位排名或应届起薪估值。传统视角不参与判断。"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "heading",
+            "text": "来源尾注"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        },
+        {
+          "type": "analysis",
+          "content": {
+            "kind": "paragraph",
+            "text": "下列原文按本案所需核对，旧年公告只作流程参照。法律争议需完整材料及有权部门确认。"
+          },
+          "evidence_refs": [
+            "E0001"
+          ]
+        }
+      ],
+      "disclaimer": {
+        "type": "disclaimer",
+        "content": {
+          "text": "知衢不保证录用、收入、考试结果或未来转直签，不代投、代联系或代签。关键资格、合同和政策条件以当年官方文件及实际书面材料为准，重要变化后更新画像再判断。"
+        },
+        "evidence_refs": [
+          "E0001"
+        ]
+      }
+    }
+  }
+}

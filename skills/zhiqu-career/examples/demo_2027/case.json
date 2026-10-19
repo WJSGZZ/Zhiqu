@@ -205,5 +205,207 @@
       "本人逐属性评分、完整锚点与优先级尚未确认，当前不算效用"
     ],
     "housing_fund_cash_factor": null
+  },
+  "schema_version": 1,
+  "case_id": "2027-QZ-S01",
+  "mode": "simulation",
+  "prepared_on": "2026-10-19",
+  "version": "1.1",
+  "decision_stage": "还没开始",
+  "target_year": 2027,
+  "legacy_directory": true,
+  "data_commit": "096e810aec0108fa4d1d67f7e95aa39a5042ca86",
+  "education": {
+    "year_level": "大三",
+    "major": "大数据与会计",
+    "school_level": "普通高职",
+    "expected_graduation": "2027-06-30"
+  },
+  "context": {
+    "as_of": "2026-10-19",
+    "takes_kaoyan": false,
+    "offer_basis": "scenario",
+    "personal_dates": {
+      "action0": "2026-10-23",
+      "action1": "2026-10-26",
+      "action2": "2026-10-30",
+      "previous": "2026-10-05",
+      "checkpoint": "2026-10-26",
+      "year_end": "2026-12-31"
+    }
+  },
+  "report_meta": {
+    "title": "求职方向决策报告",
+    "subtitle": "四川 · 高职大数据与会计 · 2027 年毕业目标",
+    "person": "小宁（模拟）",
+    "edition": "求职版",
+    "date": "{{k:/context/as_of}}",
+    "id": "2027-QZ-S01",
+    "stage": "求职版 · 毕业前",
+    "region": "四川",
+    "data_asof": "{{k:/context/as_of}}",
+    "conclusion": "先落实基础财务岗位，再按现金流与资格判断专升本。"
+  },
+  "deadlines": [
+    {
+      "id": "checkpoint",
+      "label": "个人检查点",
+      "date": "2026-10-26",
+      "kind": "personal_checkpoint"
+    }
+  ],
+  "calculation_plan": {
+    "engine": "legacy_demo",
+    "scenarios": [
+      {
+        "id": "housing",
+        "changed_inputs": {
+          "monthly_housing_assumption": 1200
+        },
+        "why": "住房费用增加的压力测试",
+        "output_ref": "{{c:/monthly_remaining_if_housing_plus_600}}"
+      },
+      {
+        "id": "contract_city",
+        "changed_inputs": {
+          "offer": "B",
+          "contract": "派遣",
+          "housing": 400
+        },
+        "why": "改变合同、工资及居住条件，比较同口径现金结余",
+        "output_ref": "{{c:/hypothetical_offers/1/monthly_remaining_cash}}"
+      }
+    ],
+    "inputs": {
+      "/budget/take_home_assumption": "{{k:/budget/take_home_assumption}}",
+      "/budget/monthly_housing_assumption": "{{k:/budget/monthly_housing_assumption}}",
+      "/budget/monthly_other_expenses_assumption": "{{k:/budget/monthly_other_expenses_assumption}}",
+      "/hypothetical_followup/ss_personal_rate_assumption": "{{c:/report_parameters/hypothetical_followup__ss_personal_rate_assumption}}",
+      "/hypothetical_followup/offers/0/monthly_gross": "{{c:/report_parameters/hypothetical_followup__offers__0__monthly_gross}}",
+      "/hypothetical_followup/offers/0/months": "{{c:/report_parameters/hypothetical_followup__offers__0__months}}",
+      "/hypothetical_followup/offers/0/hf_rate": "{{c:/report_parameters/hypothetical_followup__offers__0__hf_rate}}",
+      "/hypothetical_followup/offers/0/extra_hours_per_month": "{{c:/report_parameters/hypothetical_followup__offers__0__extra_hours_per_month}}",
+      "/hypothetical_followup/offers/0/monthly_rent": "{{c:/report_parameters/hypothetical_followup__offers__0__monthly_rent}}",
+      "/hypothetical_followup/offers/0/monthly_other": "{{c:/report_parameters/hypothetical_followup__offers__0__monthly_other}}",
+      "/hypothetical_followup/offers/0/minimum_wage_tier": "{{e:E1006#/value}}",
+      "/hypothetical_followup/offers/1/monthly_gross": "{{c:/report_parameters/hypothetical_followup__offers__1__monthly_gross}}",
+      "/hypothetical_followup/offers/1/months": "{{c:/report_parameters/hypothetical_followup__offers__1__months}}",
+      "/hypothetical_followup/offers/1/hf_rate": "{{c:/report_parameters/hypothetical_followup__offers__1__hf_rate}}",
+      "/hypothetical_followup/offers/1/extra_hours_per_month": "{{c:/report_parameters/hypothetical_followup__offers__1__extra_hours_per_month}}",
+      "/hypothetical_followup/offers/1/monthly_rent": "{{c:/report_parameters/hypothetical_followup__offers__1__monthly_rent}}",
+      "/hypothetical_followup/offers/1/monthly_other": "{{c:/report_parameters/hypothetical_followup__offers__1__monthly_other}}",
+      "/hypothetical_followup/offers/1/minimum_wage_tier": "{{e:E1006#/value}}",
+      "/hypothetical_followup/standard_hours_per_year": "{{c:/report_parameters/hypothetical_followup__standard_hours_per_year}}",
+      "/hypothetical_followup/reference_wages/会计专业人员/p10": "{{e:E1028#/value}}",
+      "/hypothetical_followup/reference_wages/会计专业人员/p25": "{{e:E1029#/value}}",
+      "/hypothetical_followup/reference_wages/会计专业人员/p50": "{{e:E1030#/value}}",
+      "/hypothetical_followup/reference_wages/会计专业人员/p75": "{{e:E1031#/value}}",
+      "/hypothetical_followup/reference_wages/会计专业人员/p90": "{{e:E1032#/value}}",
+      "/hypothetical_followup/reference_wages/大学专科学历/p10": "{{e:E1033#/value}}",
+      "/hypothetical_followup/reference_wages/大学专科学历/p25": "{{e:E1034#/value}}",
+      "/hypothetical_followup/reference_wages/大学专科学历/p50": "{{e:E1035#/value}}",
+      "/hypothetical_followup/reference_wages/大学专科学历/p75": "{{e:E1036#/value}}",
+      "/hypothetical_followup/reference_wages/大学专科学历/p90": "{{e:E1037#/value}}",
+      "/hypothetical_followup/reference_wages/工龄0~01年（不分职业）/p10": "{{e:E1038#/value}}",
+      "/hypothetical_followup/reference_wages/工龄0~01年（不分职业）/p25": "{{e:E1039#/value}}",
+      "/hypothetical_followup/reference_wages/工龄0~01年（不分职业）/p50": "{{e:E1040#/value}}",
+      "/hypothetical_followup/reference_wages/工龄0~01年（不分职业）/p75": "{{e:E1041#/value}}",
+      "/hypothetical_followup/reference_wages/工龄0~01年（不分职业）/p90": "{{e:E1042#/value}}",
+      "/hypothetical_followup/minimum_wage/tier1": "{{e:E1006#/value}}",
+      "/hypothetical_followup/minimum_wage/tier2": "{{e:E1007#/value}}",
+      "/hypothetical_followup/minimum_wage/proposal/tier1": "{{e:E1043#/value}}",
+      "/hypothetical_followup/minimum_wage/proposal/tier2": "{{e:E1044#/value}}",
+      "/hypothetical_followup/ss_base_limits/lower": "{{e:E1020#/value}}",
+      "/hypothetical_followup/ss_base_limits/upper": "{{e:E1021#/value}}"
+    },
+    "dependencies": {
+      "*": "all_inputs"
+    },
+    "display_inputs": {
+      "hypothetical_followup__offers__1__months": {
+        "case_pointer": "/hypothetical_followup/offers/1/months",
+        "role": "declared_scenario",
+        "description": "/hypothetical_followup/offers/1/months",
+        "source_group": 1
+      },
+      "hypothetical_followup__offers__0__months": {
+        "case_pointer": "/hypothetical_followup/offers/0/months",
+        "role": "declared_scenario",
+        "description": "/hypothetical_followup/offers/0/months",
+        "source_group": 1
+      },
+      "hypothetical_followup__offers__1__monthly_gross": {
+        "case_pointer": "/hypothetical_followup/offers/1/monthly_gross",
+        "role": "declared_scenario",
+        "description": "/hypothetical_followup/offers/1/monthly_gross",
+        "source_group": 1
+      },
+      "hypothetical_followup__ss_personal_rate_assumption": {
+        "case_pointer": "/hypothetical_followup/ss_personal_rate_assumption",
+        "role": "declared_scenario",
+        "description": "/hypothetical_followup/ss_personal_rate_assumption",
+        "source_group": 1
+      },
+      "hypothetical_followup__offers__0__hf_rate": {
+        "case_pointer": "/hypothetical_followup/offers/0/hf_rate",
+        "role": "declared_scenario",
+        "description": "/hypothetical_followup/offers/0/hf_rate",
+        "source_group": 1
+      },
+      "hypothetical_followup__offers__1__hf_rate": {
+        "case_pointer": "/hypothetical_followup/offers/1/hf_rate",
+        "role": "declared_scenario",
+        "description": "/hypothetical_followup/offers/1/hf_rate",
+        "source_group": 1
+      },
+      "hypothetical_followup__offers__0__monthly_rent": {
+        "case_pointer": "/hypothetical_followup/offers/0/monthly_rent",
+        "role": "declared_scenario",
+        "description": "/hypothetical_followup/offers/0/monthly_rent",
+        "source_group": 1
+      },
+      "hypothetical_followup__offers__0__monthly_other": {
+        "case_pointer": "/hypothetical_followup/offers/0/monthly_other",
+        "role": "declared_scenario",
+        "description": "/hypothetical_followup/offers/0/monthly_other",
+        "source_group": 1
+      },
+      "hypothetical_followup__offers__1__monthly_rent": {
+        "case_pointer": "/hypothetical_followup/offers/1/monthly_rent",
+        "role": "declared_scenario",
+        "description": "/hypothetical_followup/offers/1/monthly_rent",
+        "source_group": 1
+      },
+      "hypothetical_followup__offers__0__monthly_gross": {
+        "case_pointer": "/hypothetical_followup/offers/0/monthly_gross",
+        "role": "declared_scenario",
+        "description": "/hypothetical_followup/offers/0/monthly_gross",
+        "source_group": 1
+      },
+      "hypothetical_followup__offers__0__extra_hours_per_month": {
+        "case_pointer": "/hypothetical_followup/offers/0/extra_hours_per_month",
+        "role": "declared_scenario",
+        "description": "/hypothetical_followup/offers/0/extra_hours_per_month",
+        "source_group": 1
+      },
+      "hypothetical_followup__offers__1__extra_hours_per_month": {
+        "case_pointer": "/hypothetical_followup/offers/1/extra_hours_per_month",
+        "role": "declared_scenario",
+        "description": "/hypothetical_followup/offers/1/extra_hours_per_month",
+        "source_group": 1
+      },
+      "hypothetical_followup__offers__1__monthly_other": {
+        "case_pointer": "/hypothetical_followup/offers/1/monthly_other",
+        "role": "declared_scenario",
+        "description": "/hypothetical_followup/offers/1/monthly_other",
+        "source_group": 1
+      },
+      "hypothetical_followup__standard_hours_per_year": {
+        "case_pointer": "/hypothetical_followup/standard_hours_per_year",
+        "role": "declared_scenario",
+        "description": "/hypothetical_followup/standard_hours_per_year",
+        "source_group": 1
+      }
+    }
   }
 }

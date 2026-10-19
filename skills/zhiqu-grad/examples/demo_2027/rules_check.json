@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-10-19",
+  "items": [
+    {
+      "id": "R1",
+      "claim": "教育部《2027 年全国硕士研究生招生工作管理规定》",
+      "evidence_refs": [
+        "E0002"
+      ],
+      "volatile": true,
+      "verified_on": "2026-10-19",
+      "review_due": "2027-08-31",
+      "status": "verified",
+      "scope": "2026-09-23 发布；2026-10-19 核对本机已取原文；报名、初试与调剂按当年文件"
+    },
+    {
+      "id": "R2",
+      "claim": "华南理工大学 2027 年硕士招生章程",
+      "evidence_refs": [
+        "E0003"
+      ],
+      "volatile": true,
+      "verified_on": "2026-10-19",
+      "review_due": "2027-08-31",
+      "status": "verified",
+      "scope": "2026-09-30 发布；2026-10-19 curl 取原文，核报名、考试、培养与费用入口"
+    },
+    {
+      "id": "R3",
+      "claim": "广东工业大学 2027 年硕士招生简章",
+      "evidence_refs": [
+        "E0005"
+      ],
+      "volatile": true,
+      "verified_on": "2026-10-19",
+      "review_due": "2027-08-31",
+      "status": "verified",
+      "scope": "2026-09-30 发布；2026-10-19 curl 取原文，核应届资格、学习方式、报名与考试"
+    },
+    {
+      "id": "R4",
+      "claim": "广东工业大学自动化学院 2026 复试工作方案",
+      "evidence_refs": [
+        "E0015"
+      ],
+      "volatile": true,
+      "verified_on": "2026-10-19",
+      "review_due": "2027-08-31",
+      "status": "verified",
+      "scope": "2026-03-16 发布；2026-10-19 curl 核原文，权重、合格线、科目与分学习方式排序；不承诺2027沿用"
+    },
+    {
+      "id": "R5",
+      "claim": "广东工业大学 2026 级学制与学费标准及附件",
+      "evidence_refs": [
+        "E0016"
+      ],
+      "volatile": true,
+      "verified_on": "2026-10-19",
+      "review_due": "2027-08-31",
+      "status": "verified",
+      "scope": "2025-10-11 发布；2026-10-19 curl 核两页原PDF，085801全日制非定向12,000元、3年；非2027最终收费"
+    },
+    {
+      "id": "R6",
+      "claim": "长沙理工大学2027年硕士研究生招生简章",
+      "evidence_refs": [
+        "E0017"
+      ],
+      "volatile": true,
+      "verified_on": "2026-10-19",
+      "review_due": "2027-08-31",
+      "status": "verified",
+      "scope": "2026-09-30发布；2026-10-19 curl取原文；专业目录附件要求验证码，未绕过，具体电气专业科目待核"
+    }
+  ]
+}

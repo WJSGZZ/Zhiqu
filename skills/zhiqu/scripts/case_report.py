@@ -370,6 +370,8 @@ def build(case_dir, research_dir=None, opportunities=None, render=True):
     import check_report
     errs = check_report.check_sections(rep, res) + check_report.check_grade(rep, res)
     digits = [t for t in walk(c) if re.search(r"\d", t)]
+    from operator_check import generate as generate_operator_check
+    generate_operator_check(d, rep)
     return chk.stdout.strip() + chk.stderr.strip(), errs, digits
 
 

@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "fields": [
+    {
+      "field": "年级",
+      "category": "fact",
+      "status": "given",
+      "value": "大四",
+      "quote": "希望2027年秋季读全日制硕士；当前大四备考阶段，2026年参加初试，不是2027年才开始备考。",
+      "locator": "本人画像相应节名：兴趣、动机与状态 / 岗位、生活与约束",
+      "confirmed": false
+    },
+    {
+      "field": "专业",
+      "category": "fact",
+      "status": "given",
+      "value": "电气工程及其自动化",
+      "quote": "广东省普通公办本科，电气工程及其自动化；2023年9月入学，预计2027年6月毕业。",
+      "locator": "本人画像相应节名：兴趣、动机与状态 / 岗位、生活与约束",
+      "confirmed": false
+    },
+    {
+      "field": "院校层次",
+      "category": "fact",
+      "status": "given",
+      "value": "普通公办本科",
+      "quote": "广东省普通公办本科，电气工程及其自动化；2023年9月入学，预计2027年6月毕业。",
+      "locator": "本人画像相应节名：兴趣、动机与状态 / 岗位、生活与约束",
+      "confirmed": false
+    },
+    {
+      "field": "均分或排名",
+      "category": "fact",
+      "status": "given",
+      "value": {
+        "mean": 80.2,
+        "scale": 100
+      },
+      "quote": "均分：80.2/100；无挂科；排名尚未取得正式证明。",
+      "locator": "本人画像相应节名：兴趣、动机与状态 / 岗位、生活与约束",
+      "confirmed": false
+    },
+    {
+      "field": "英语",
+      "category": "fact",
+      "status": "given",
+      "value": {
+        "cet4": 465
+      },
+      "quote": "英语：四级465，六级未通过；数学基础一般，模拟卷常有做不完的情况。",
+      "locator": "本人画像相应节名：兴趣、动机与状态 / 岗位、生活与约束",
+      "confirmed": false
+    },
+    {
+      "field": "数学基础",
+      "category": "self_judgment",
+      "status": "given",
+      "value": "基础一般，完整试卷常做不完",
+      "quote": "英语：四级465，六级未通过；数学基础一般，模拟卷常有做不完的情况。",
+      "locator": "本人画像相应节名：兴趣、动机与状态 / 岗位、生活与约束",
+      "confirmed": false
+    },
+    {
+      "field": "读研动机",
+      "category": "self_judgment",
+      "status": "given",
+      "value": "改善技术岗位选择，也担心直接就业",
+      "quote": "读研动机：改善技术岗位选择，同时怕直接就业找不到合适工作；父母希望学历更高。",
+      "locator": "本人画像相应节名：兴趣、动机与状态 / 岗位、生活与约束",
+      "confirmed": false
+    },
+    {
+      "field": "目标方向",
+      "category": "preference",
+      "status": "given",
+      "value": "电气、电机控制或电力系统",
+      "quote": "想继续电气、电机控制或电力系统，但不了解不同岗位的真实日常。",
+      "locator": "本人画像相应节名：兴趣、动机与状态 / 岗位、生活与约束",
+      "confirmed": false
+    },
+    {
+      "field": "预算",
+      "category": "constraint",
+      "status": "given",
+      "value": 30000,
+      "quote": "预算：家庭每年最多支持30000元总支出；奖学金、兼职收入不能当作确定来源。",
+      "locator": "本人画像相应节名：兴趣、动机与状态 / 岗位、生活与约束",
+      "confirmed": false
+    },
+    {
+      "field": "能否二战",
+      "category": "constraint",
+      "status": "given",
+      "value": "不能无期限支持，须另核预算和本人同意",
+      "quote": "二战：家庭不愿无期限支持；若考虑必须先拿到可执行预算和本人明确同意。",
+      "locator": "本人画像相应节名：兴趣、动机与状态 / 岗位、生活与约束",
+      "confirmed": false
+    },
+    {
+      "field": "目标地区",
+      "category": "preference",
+      "status": "given",
+      "value": "广东或湖南",
+      "quote": "地点：广东或湖南城市，普通地级市可接受；不以必须留珠三角为硬约束。",
+      "locator": "本人画像相应节名：兴趣、动机与状态 / 岗位、生活与约束",
+      "confirmed": false
+    },
+    {
+      "field": "可投入时间",
+      "category": "self_judgment",
+      "status": "given",
+      "value": {
+        "sustainable_low": 4,
+        "sustainable_high": 5
+      },
+      "quote": "每天能够有效学习约4—5小时，毕业设计和课程也要占用时间；“全天学8小时”不是已证实能力。",
+      "locator": "profile.txt：投入与状态",
+      "confirmed": false
+    }
+  ],
+  "missing": [],
+  "report_blocks": {
+    "02_2": {
+      "type": "profile_table",
+      "content": {
+        "columns": [
+          "信息类别",
+          "目前知道什么",
+          "对选择的实际影响"
+        ],
+        "rows": [
+          [
+            "学业事实",
+            "广东普通公办本科，电气工程及其自动化；{{k:/education_entry|year}} 年入学，预计 {{k:/target_year}} 年 {{k:/graduation_date|month}} 月毕业；无挂科",
+            "先按应届本科通道核对资格；毕业条件仍须本人确认"
+          ],
+          [
+            "成绩事实",
+            "均分 {{p:/fields/3/value/mean|1f}}，四级 {{p:/fields/4/value/cet4}}，六级未通过",
+            "与初试考查并非同一尺度，不能用均分或四级分数折算初试总分"
+          ],
+          [
+            "兴趣线索",
+            "愿意调试设备，课程实验和短期见习中能完成有步骤的任务",
+            "适合优先调查设备、控制和电气系统相关训练；不直接等于适合科研"
+          ],
+          [
+            "地域偏好",
+            "广东、湖南都可以",
+            "应在可接受地区内比较岗位内容与培养条件，不先被单一城市锁住"
+          ],
+          [
+            "资金边界",
+            "家庭每年预算 {{k:/budget/annual_limit|comma}} 元",
+            "必须把学费、住宿、生活和额外支出一起看；没有确认的收入不抵扣费用"
+          ],
+          [
+            "时间边界",
+            "以每天最多可安排 {{c:/illustrative_parameters/daily_hours_ceiling}} 小时作上限情景，画像自述有效投入约 {{p:/fields/11/value/sustainable_low}}—{{p:/fields/11/value/sustainable_high}} 小时待核",
+            "以已经能维持的状态评估报考差距，不能把上限当作每天实际完成量"
+          ],
+          [
+            "路径边界",
+            "不接受无限期二战，希望保留就业",
+            "报名决策同时写清无录取时的去向；二战须重新判断，不能自动续期"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E0001"
+      ]
+    }
+  }
+}

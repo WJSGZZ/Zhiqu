@@ -115,6 +115,30 @@ def calculate(case):
         f = case.get('hypothetical_followup')
         if f:
             result['hypothetical_offers'] = [offer_numbers(o, f) for o in f['offers']]
+    # Display inputs retain their original role: declared scenario parameters,
+    # anonymous source aggregates, and deterministic transformations are separate.
+    if case.get('calculation_plan', {}).get('display_inputs'):
+        from planning_workflow import pointer
+        plan = case['calculation_plan']
+        result['report_parameters'] = {key: (sum(spec['source_values']) if spec.get('algorithm')=='sum' else spec['source_values'][0]/100 if spec.get('algorithm')=='percent_to_ratio' else pointer(case, spec['case_pointer']))
+                                       for key, spec in plan['display_inputs'].items()}
+        result['report_constants'] = {'months_per_year': 12, 'q1_label': '25%', 'q3_label': '75%',
+                                      'p10_label': '10%', 'p90_label': '90%', 'living_increment': 200}
+        result['luck_start_year'] = int(case['luck_start'][:4])
+        result['illustrative_parameters'] = {key: item['value'] for key,item in plan.get('illustrative_parameters',{}).items()}
+        if case['kind'] == 'grad':
+            result['scut_reference_statistics'] = case['hypothetical_followup']['official_stats']
+            counts=case['source_aggregates']['scut_2025_reconciliation']
+            result['sample_reconciliation_2025'] = {k:counts[k] for k in ('total','minority','soldier','joint')}
+            result['sample_reconciliation_2025']['ordinary'] = counts['total']-counts['minority']-counts['soldier']-counts['joint']
+        else:
+            f = case['hypothetical_followup']
+            result['reference_wages_cny'] = {group: {p: round(v * 10000) for p, v in values.items()}
+                                             for group, values in f['reference_wages'].items() if isinstance(values, dict)}
+            monthly_offer = dict(f['offers'][1], months=12)
+            ordinary = offer_numbers(monthly_offer, f)
+            result['offer_b_ordinary_month'] = {'take_home_cash': ordinary['monthly_take_home_cash'],
+                                               'remaining_cash': ordinary['monthly_remaining_cash']}
     return result
 
 
@@ -205,6 +229,10 @@ def check(path, write=False):
         out.write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     elif json.loads(out.read_text(encoding='utf-8')) != result:
         raise ValueError(f'{path}: saved budget differs from scenario inputs')
+    if case.get('schema_version') and case['kind'] in ('grad','career'):
+        from planning_workflow import PlanningCase
+        errors=PlanningCase(path).check(9)
+        if errors:raise ValueError('\n'.join(errors))
     return case['person'], result
 
 

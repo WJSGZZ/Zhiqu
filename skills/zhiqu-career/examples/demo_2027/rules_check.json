@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-10-19",
+  "items": [
+    {
+      "id": "R1",
+      "claim": "四川 2026 年普通高校专升本考试报名通告",
+      "evidence_refs": [
+        "E0005"
+      ],
+      "volatile": true,
+      "verified_on": "2026-10-19",
+      "review_due": "2026-11-30",
+      "status": "verified",
+      "scope": "2025 年 12 月发布；2026-10-17 已核上一届日期与费用；本案未取得 2027 通告"
+    },
+    {
+      "id": "R2",
+      "claim": "四川人大直属事业单位 2026 上半年招聘公告",
+      "evidence_refs": [
+        "E0006"
+      ],
+      "volatile": true,
+      "verified_on": "2026-10-19",
+      "review_due": "2026-11-30",
+      "status": "verified",
+      "scope": "正文落款 2026-03-12；2026-10-19 curl 取原文，核报名与笔试；不证明本案适用资格或2027计划"
+    },
+    {
+      "id": "R3",
+      "claim": "《劳动合同法》，北京政府网转载 2012 年修订文本",
+      "evidence_refs": [
+        "E0007"
+      ],
+      "volatile": true,
+      "verified_on": "2026-10-19",
+      "review_due": "2026-11-30",
+      "status": "verified",
+      "scope": "2026-10-19 curl 原文核第7、9、10、58、63条等，主体与派遣边界"
+    },
+    {
+      "id": "R4",
+      "claim": "《劳动合同法实施条例》，北京政府网转载",
+      "evidence_refs": [
+        "E0008"
+      ],
+      "volatile": true,
+      "verified_on": "2026-10-19",
+      "review_due": "2026-11-30",
+      "status": "verified",
+      "scope": "2026-10-19 已核官方原文；试用工资结合合同与当地条件判断"
+    },
+    {
+      "id": "R5",
+      "claim": "《民法典》，最高检转载",
+      "evidence_refs": [
+        "E0009"
+      ],
+      "volatile": true,
+      "verified_on": "2026-10-19",
+      "review_due": "2026-11-30",
+      "status": "verified",
+      "scope": "2026-10-19 curl 取原文，第495、585条仅为协议判断入口，不直接判个人违约责任"
+    },
+    {
+      "id": "R6",
+      "claim": "四川 2026 年社保缴费基数上下限通知",
+      "evidence_refs": [
+        "E0010"
+      ],
+      "volatile": true,
+      "verified_on": "2026-10-19",
+      "review_due": "2026-11-30",
+      "status": "verified",
+      "scope": "2026-09-07 发布；2026-10-19 curl 取原文，4,699—23,493 元；医保基数另核，不代表2027标准"
+    },
+    {
+      "id": "R7",
+      "claim": "《个人所得税法》，上海税务转载",
+      "evidence_refs": [
+        "E0011"
+      ],
+      "volatile": true,
+      "verified_on": "2026-10-19",
+      "review_due": "2026-11-30",
+      "status": "verified",
+      "scope": "2026-10-19 curl 核第6条，居民综合所得年度费用扣除60,000元"
+    },
+    {
+      "id": "R8",
+      "claim": "《住房公积金管理条例》，司法部现行文本",
+      "evidence_refs": [
+        "E0012"
+      ],
+      "volatile": true,
+      "verified_on": "2026-10-19",
+      "review_due": "2026-11-30",
+      "status": "verified",
+      "scope": "2026-10-19 curl 核第16—20条；具体城市、比例、基数与首年起算另核"
+    },
+    {
+      "id": "R9",
+      "claim": "《劳务派遣暂行规定》，北京政府网转载",
+      "evidence_refs": [
+        "E0014"
+      ],
+      "volatile": true,
+      "verified_on": "2026-10-19",
+      "review_due": "2026-11-30",
+      "status": "verified",
+      "scope": "2026-10-19 curl 原文核第27条，外包名称不能替代实际用工形式"
+    }
+  ]
+}

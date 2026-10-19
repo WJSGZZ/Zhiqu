@@ -22,13 +22,22 @@
 | case.json 中的 hypothetical_followup | 两个模拟 offer 的全部输入、四川工资价位与最低工资 |
 | calculations.json | check_demos.py 算出的预算和 offer 数字 |
 | birth_input.json / birth_chart.json | 出生资料（只到省份，按北京时间）与排盘工具的实际输出 |
+| profile_parse.json / directions.json / rules_check.json / candidates.json | 画像字段、问题方向、规则与候选硬条件 |
+| evidence.json / judgment.json / narrative.json | 唯一证据记录、结构化判断与受控文字 |
+| operator_check.md / review.json / report_trace.json | 交付前核查、复核和输入与产物快照 |
 | report.md / report.html / report.pdf | 同一份 12 节报告的正文、网页与打印版 |
 
 ## 复现（仓库根目录）
 
 ```bash
+python3 skills/zhiqu/scripts/case_check.py skills/zhiqu-career/examples/demo_2027 --stage 7
+python3 skills/zhiqu/scripts/planning_report.py skills/zhiqu-career/examples/demo_2027
 python3 skills/zhiqu/scripts/check_demos.py
-python3 skills/zhiqu/scripts/render_report.py skills/zhiqu-career/examples/demo_2027/report.md --out /tmp/demo_2027.pdf
+python3 skills/zhiqu/scripts/case_check.py skills/zhiqu-career/examples/demo_2027 --stage 10
 ```
 
-`check_demos.py` 会重新排盘、重算费用和 offer 数字，并按 case.json 记录的参数重跑高考优化器，结果必须和保存的一致。修改 case.json 里的假设后，用 `--write` 更新 calculations.json，再同步报告文字。
+阶段文件逐项记录画像解析、问题方向、规则、候选、证据、计算输入及判断；`narrative.json`只放受控的分析文字。组装器按[内容合同](../../references/report-contract.json)生成报告，随后核版面、来源和数字。修改输入后须更新来源绑定并重算，再由组装器生成；不手改生成的正文。
+
+[操控者核查单](operator_check.md)单独列出核什么、去哪里核、核完填什么；操控者是交付报告前亲自核查关键信息的人。本例全部勾选待实际核查。[复核记录](review.json)保留制作自评并等待独立审核，检查步骤通过不代表已获准真实交付；`--delivery`会继续检查本人核查与独立批准。
+
+`check_demos.py`重新排盘、复算既有预算及条件情景，并检查工作流和生成快照。没有真实录取或offer，不把条件情景当成已经获得的选择。
