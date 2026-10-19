@@ -155,10 +155,14 @@ textarea{resize:vertical;min-height:84px;}
 /* 入口页：左品牌、右问卷，一屏居中；手机上下排列，可滚动 */
 .landing{min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;}
 .landing-wrap{width:100%;max-width:1120px;padding:clamp(24px,6vh,64px) 48px;}
-.split{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(40px,6vw,88px);align-items:center;}
+.split{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);grid-template-areas:"hero choices" "vow choices";column-gap:clamp(40px,6vw,88px);row-gap:0;align-items:center;}
+.split > .hero{grid-area:hero;align-self:end;}
+.split > .choices{grid-area:choices;}
+.split > .vow{grid-area:vow;align-self:start;}
 .landing .hero{padding:0;overflow:visible;}
 .lockup{display:flex;align-items:center;gap:18px;margin:0 0 0 -10px;}
-.wordmark{display:flex;flex-direction:column;gap:12px;}
+/* 视觉对齐：logo 的火焰尖向上挑，几何居中时文字显得偏低，整块上提约 logo 高度的 9% */
+.wordmark{display:flex;flex-direction:column;gap:12px;position:relative;top:-11px;}
 .landing .hero-logo{display:block;flex:none;width:124px;height:124px;margin:0;}
 .landing .brand-title{font-size:76px;letter-spacing:16px;line-height:1;margin:0;}
 .landing .motto{font-size:17px;letter-spacing:4px;margin:0;white-space:nowrap;}
@@ -174,6 +178,7 @@ textarea{resize:vertical;min-height:84px;}
 @media (min-width:1600px) and (min-height:900px){
   .landing-wrap{max-width:1360px;}
   .landing .hero-logo{width:148px;height:148px;}
+  .wordmark{top:-13px;}
   .landing .brand-title{font-size:92px;letter-spacing:20px;}
   .landing .motto{font-size:20px;letter-spacing:5px;}
   .landing .hero .tag{font-size:18px;}
@@ -185,7 +190,8 @@ textarea{resize:vertical;min-height:84px;}
   .landing .choice p:not(.c-eyebrow){font-size:15.5px;}
 }
 @media (max-width:900px){
-  .split{grid-template-columns:1fr;gap:32px;}
+  .split{grid-template-columns:1fr;grid-template-areas:"hero" "choices" "vow";row-gap:28px;}
+  .split > .hero,.split > .vow{align-self:auto;}
   .landing .hero{text-align:center;}
   .lockup{justify-content:center;margin:0;}
   .brand-rule{margin:22px auto 18px;}
@@ -196,6 +202,7 @@ textarea{resize:vertical;min-height:84px;}
   .landing-wrap{padding:40px 16px 32px;}
   .landing .hero-logo{width:76px;height:76px;}
   .lockup{gap:12px;}
+  .wordmark{top:-7px;}
   .landing .motto{font-size:15px;letter-spacing:3px;}
   .wordmark{gap:8px;}
   .landing .brand-title{font-size:46px;letter-spacing:10px;padding-left:0;}
