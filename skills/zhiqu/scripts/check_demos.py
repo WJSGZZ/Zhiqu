@@ -14,6 +14,7 @@ import json
 import re
 import subprocess
 import sys
+import statistics
 from datetime import date
 from pathlib import Path
 from decision_evidence import validate_evidence
@@ -77,6 +78,35 @@ def calculate(case):
                       annual_margin_if_living_plus_200=b['annual_limit'] - annual - 200 * b['living_months'])
         if case['kind'] == 'grad':
             result['total_cost_over_program'] = annual * b['years']
+            extra = case.get('additional_scenarios', {})
+            if 'gdut_fee_reference' in extra:
+                g = extra['gdut_fee_reference']
+                cost = g['official_tuition'] + g['annual_housing_assumption'] + g['monthly_living_assumption'] * g['living_months']
+                result['gdut_fee_reference'] = {
+                    'annual_cost': cost, 'annual_margin': g['annual_limit'] - cost,
+                    'total_cost': cost * g['years'],
+                    'annual_cost_if_living_plus_200': cost + 200 * g['living_months'],
+                    'annual_margin_if_living_plus_200': g['annual_limit'] - cost - 200 * g['living_months']}
+            if 'gdut_2026_retest' in extra:
+                g = extra['gdut_2026_retest']
+                result['gdut_2026_retest'] = {
+                    'initial_increment_contribution': g['initial_increment'] / g['initial_max'] * 100 * g['initial_weight'],
+                    'retest_increment_contribution': g['retest_increment'] / g['retest_max'] * 100 * g['retest_weight']}
+            if 'gdut_2026_first_choice_retest_scores' in extra:
+                g = extra['gdut_2026_first_choice_retest_scores']
+                if g['quantile_method'] != 'inclusive_linear_type7':
+                    raise ValueError('unsupported quantile method')
+                scores = []
+                for score, count in g['score_histogram'].items():
+                    if not score.isdigit() or not 0 <= int(score) <= 500 or type(count) is not int or count <= 0:
+                        raise ValueError('invalid anonymous score histogram')
+                    scores.extend([int(score)] * count)
+                if len(scores) != g['full_time_rows'] - g['excluded_soldier_rows']:
+                    raise ValueError('retest population and exclusions do not reconcile')
+                q1, med, q3 = statistics.quantiles(scores, n=4, method='inclusive')
+                result['gdut_2026_first_choice_retest_scores'] = {
+                    'n': len(scores), 'min': min(scores), 'q1': q1,
+                    'median': med, 'q3': q3, 'max': max(scores)}
     else:
         expenses = b['monthly_housing_assumption'] + b['monthly_other_expenses_assumption']
         result.update(monthly_expenses=expenses,
