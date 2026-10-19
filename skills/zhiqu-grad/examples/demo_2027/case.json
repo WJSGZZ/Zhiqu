@@ -33,9 +33,8 @@
       "candidate": "广东工业大学电气工程专业学位",
       "status": "pending",
       "source": "https://automation.gdut.edu.cn/info/1044/8869.htm",
-      "verified_scope": "2025培养方案确认专业与三年学制；2027年招生简章已于2026-09-30发布，尚未逐项核对电气工程的统考名额、科目、费用或报考限制",
+      "verified_scope": "2025培养方案确认专业与三年学制；2026-10-19取到2027简章及目录，自动化学院085801全日制初试101、204英语二、302数学二、808电路理论；自控原理与信号与系统为同等学力加试。净统考名额、适用费用与本人最终资格仍待核；2026全校拟录取公示无初试成绩列。",
       "unresolved": [
-        "2027招生目录与考试科目",
         "统考计划",
         "费用与奖助",
         "就业岗位资格"
@@ -44,8 +43,8 @@
       "hard_conditions": [
         {
           "name": "2027招生目录与考试科目",
-          "status": "unknown",
-          "source": "https://yzw.gdut.edu.cn/info/1017/3865.htm"
+          "status": "met",
+          "source": "https://yzw.gdut.edu.cn/fujian2027nianshuoshiyanjiushengzhaoshengzhuanyemuluMEdiaU.pdf"
         },
         {
           "name": "统考计划",
@@ -62,7 +61,8 @@
           "status": "unknown",
           "source": "https://automation.gdut.edu.cn/info/1044/8869.htm"
         }
-      ]
+      ],
+      "verified_on": "2026-10-19"
     },
     {
       "candidate": "华南理工大学电气工程（专硕）",

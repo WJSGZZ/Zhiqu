@@ -196,8 +196,8 @@ URL_RE = re.compile(r'https?://[^\s<>"\'，；。）、（【】]+')
 def display_text(value):
     """只规范显示，不回写数据；编号/日期/专业代码不转换。"""
     text = str(value)
-    text = re.sub(r'(?<![\w,])(\d{4,})(?=\s*(?:元|名|人|位|小时))', lambda m: f'{int(m[1]):,}', text)
-    return re.sub(r'(\d)(?=(?:万|亿)?(?:元|分|名|人|小时)(?![\w]))', r'\1 ', text)
+    text = re.sub(r'(?<![A-Za-z0-9_,.])(\d{4,})(?=\s*(?:元|名|人|位|小时))', lambda m: f'{int(m[1]):,}', text)
+    return re.sub(r'(\d)(?=(?:万|亿)?(?:元|分(?!位)|名|人|小时))', r'\1 ', text)
 
 
 def public_text(text):
@@ -211,7 +211,7 @@ def public_text(text):
         text = text.replace(old,new)
     for old,new in [('预测过线','单独过线'),('过线概率','单独过线'),('落点概率','最终录取'),('最终录取概率','最终录取'),('预测线','预测位次')]:
         text = text.replace(old,new)
-    return text.replace('–','—')
+    return display_text(text.replace('–','—'))
 
 
 def simulated_name(name):
@@ -231,7 +231,7 @@ def cover_html(title, subtitle, person, stage, region, report_id, generated, dat
             f'<h1>{E(title)}</h1><div class="sub">{E(subtitle)}</div>'
             '<div class="motto">知其所往，方行其衢。</div></div><div class="meta">'
             + ''.join(f'<div><b>{a}</b><span>{E(str(b))}</span></div>' for a, b in rows)
-            + '</div>' + (f'<div class="verdict long"><b>一句话结论</b><p>{E(conclusion)}</p></div>' if conclusion else '')
+            + '</div>' + (f'<div class="verdict long"><b>一句话结论</b><p>{E(public_text(conclusion))}</p></div>' if conclusion else '')
             + f'<div class="cover-toc"><b>目录</b><div class="toc">{toc}</div></div>'
             '<div class="foot">仅供本人决策参考；依据、假设与局限见正文及第 12 节。</div></div>')
 

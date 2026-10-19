@@ -50,6 +50,10 @@ class PublicationGateTests(unittest.TestCase):
         self.assertEqual(len(notes.entries),1)
         self.assertIn(url,notes.render())
 
+    def test_number_typography_preserves_dates_codes_and_percentiles(self):
+        self.assertEqual(report.public_text('预算25200元；530分可比较；120人；085801；2026-10-19；25%分位'),
+                         '预算25,200 元；530 分可比较；120 人；085801；2026-10-19；25%分位')
+
     def test_readable_source_url_keeps_reserved_escapes(self):
         url='https://school.edu.cn/%E5%AD%A6%E8%B4%B9%2F2027.pdf'
         self.assertEqual(report.readable_url(url),'https://school.edu.cn/学费%2F2027.pdf')
@@ -58,10 +62,12 @@ class PublicationGateTests(unittest.TestCase):
         self.assertIn('学费%2F2027.pdf',notes.render())
 
     def test_cover_has_exactly_six_cells_and_one_name_mark(self):
-        cover=report.cover_html('读研路径决策报告','广东 · 2027','小林（模拟）','读研版 · 初试前','广东','2027-YJ-S01','2026-10-19','2026-10-19','先核资格再比较',[(i,str(i)) for i in range(1,13)])
+        cover=report.cover_html('读研路径决策报告','广东 · 2027','小林（模拟）','读研版 · 初试前','广东','2027-YJ-S01','2026-10-19','2026-10-19','4,000 次模拟中未出现滑档',[(i,str(i)) for i in range(1,13)])
         self.assertEqual(cover.count('<span>'),30)  # 6 metadata + 24 TOC cells
         self.assertEqual(cover.count('（模拟）'),1)
         self.assertIn('一句话结论',cover)
+        self.assertNotIn('次模拟',cover)
+        self.assertIn('次试算',cover)
         self.assertNotIn('备注',cover)
         with self.assertRaises(ValueError):
             report.cover_html('报告','','本人','说明'*20,'广东','1','2026-10-19','2026-10-19','结论',[])
