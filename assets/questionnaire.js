@@ -1,3 +1,10 @@
+  /* 节名：优先 data-title，没有就读页面上的节标题（去掉“（可选）”这类小注） */
+  function secTitle(sec){
+    var t=sec.getAttribute('data-title'); if(t) return t;
+    var el=sec.querySelector('.sec-title'); if(!el) return '';
+    var c=el.cloneNode(true); c.querySelectorAll('.opt-note').forEach(function(n){n.remove();});
+    return c.textContent.replace(/\s+/g,' ').trim();
+  }
 
   function val(id){var el=document.getElementById(id);return el&&isVisible(el)&&el.value?el.value.trim():'';}
   function radio(name){var el=document.querySelector('input[name="'+name+'"]:checked');return el&&isVisible(el)?el.value:'';}
@@ -121,7 +128,7 @@
      form 是题目结构的指纹：题目或选项一改，指纹就变，旧答卷能对上旧题。编号由顾问登记时给，网页不生成。 */
   function zhiquFormHash(){
     var keys=[];
-    document.querySelectorAll('.section').forEach(function(sec){keys.push('section='+sec.getAttribute('data-title'));});
+    document.querySelectorAll('.section').forEach(function(sec){keys.push('section='+secTitle(sec));});
     document.querySelectorAll('.q').forEach(function(q){
       keys.push('q='+q.getAttribute('data-profile-id')+'='+zhiquQuestionText(q)+(q.classList.contains('req')?':required':':optional'));
     });
@@ -209,7 +216,7 @@
     var labels={gaokao:'高考志愿',grad:'读研',career:'求职'};
     var profile={zhiqu:kind,schema:1,'问卷':'知衢 · '+labels[kind]+' · 自我盘点',form:zhiquFormHash(),filled_at:localStamp(),sections:[],rank:typeof rankOrder!=='undefined'?rankOrder.slice():[],derived:{},'未填的必答题':[]};
     document.querySelectorAll('.section').forEach(function(sec){
-      var section={title:sec.getAttribute('data-title'),items:[]};
+      var section={title:secTitle(sec),items:[]};
       sec.querySelectorAll('.q').forEach(function(q){
         if(!isVisible(q)||!q.getAttribute('data-profile-id')) return;
         var text=zhiquQuestionText(q),answer=zhiquQuestionAnswer(q);
