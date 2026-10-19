@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "missing": [
+    {
+      "field": "能否二战",
+      "question": "请补充能否二战"
+    },
+    {
+      "field": "目标地区",
+      "question": "请补充目标地区"
+    }
+  ],
+  "fields": [
+    {
+      "field": "年级",
+      "value": "在职",
+      "category": "fact",
+      "status": "given",
+      "quote": "叫我小乔，浙江普通本科化学专业，2025年6月毕业。现在做检测相关工作，想2027年入学，仍在考虑，不准备直接辞职。",
+      "locator": "「你现在的位置」一节",
+      "confirmed": true
+    },
+    {
+      "field": "专业",
+      "value": "化学",
+      "category": "fact",
+      "status": "given",
+      "quote": "叫我小乔，浙江普通本科化学专业，2025年6月毕业。现在做检测相关工作，想2027年入学，仍在考虑，不准备直接辞职。",
+      "locator": "「你现在的位置」一节",
+      "confirmed": true
+    },
+    {
+      "field": "院校层次",
+      "value": "普通公办本科",
+      "category": "fact",
+      "status": "given",
+      "quote": "叫我小乔，浙江普通本科化学专业，2025年6月毕业。现在做检测相关工作，想2027年入学，仍在考虑，不准备直接辞职。",
+      "locator": "「你现在的位置」一节",
+      "confirmed": true
+    },
+    {
+      "field": "均分或排名",
+      "value": "本科均分81，四级442，没有挂科；毕业后英语用得少，数学需要恢复。排名没留下证明。",
+      "category": "fact",
+      "status": "given",
+      "quote": "本科均分81，四级442，没有挂科；毕业后英语用得少，数学需要恢复。排名没留下证明。",
+      "locator": "「学业与语言」一节",
+      "confirmed": true
+    },
+    {
+      "field": "英语",
+      "value": "本科均分81，四级442，没有挂科；毕业后英语用得少，数学需要恢复。排名没留下证明。",
+      "category": "fact",
+      "status": "given",
+      "quote": "本科均分81，四级442，没有挂科；毕业后英语用得少，数学需要恢复。排名没留下证明。",
+      "locator": "「学业与语言」一节",
+      "confirmed": true
+    },
+    {
+      "field": "数学基础",
+      "value": "本科均分81，四级442，没有挂科；毕业后英语用得少，数学需要恢复。排名没留下证明。",
+      "category": "self_judgment",
+      "status": "given",
+      "quote": "本科均分81，四级442，没有挂科；毕业后英语用得少，数学需要恢复。排名没留下证明。",
+      "locator": "「学业与语言」一节",
+      "confirmed": true
+    },
+    {
+      "field": "读研动机",
+      "value": "想看看能否转到技术管理或更深入的检测工作，听同事说在职硕士能加分，但没问清单位对哪个学位有用。",
+      "category": "self_judgment",
+      "status": "given",
+      "quote": "想看看能否转到技术管理或更深入的检测工作，听同事说在职硕士能加分，但没问清单位对哪个学位有用。",
+      "locator": "「为什么读研」一节",
+      "confirmed": true
+    },
+    {
+      "field": "目标方向",
+      "value": "希望工作还能用上现有化学基础，也想了解管理方向，但不喜欢为了换学历完全丢掉已经积累的技术。",
+      "category": "preference",
+      "status": "given",
+      "quote": "希望工作还能用上现有化学基础，也想了解管理方向，但不喜欢为了换学历完全丢掉已经积累的技术。",
+      "locator": "「专业方向」一节",
+      "confirmed": true
+    },
+    {
+      "field": "预算",
+      "value": "本人能承担每年20000元总支出，暂不指望家里追加；每月生活费约1800元。能不能请假、单位是否支持，都没确认。",
+      "category": "constraint",
+      "status": "given",
+      "quote": "本人能承担每年20000元总支出，暂不指望家里追加；每月生活费约1800元。能不能请假、单位是否支持，都没确认。",
+      "locator": "「现实约束」一节",
+      "confirmed": true
+    },
+    {
+      "field": "能否二战",
+      "value": null,
+      "category": "constraint",
+      "status": "unknown",
+      "quote": "",
+      "locator": "「风险与心态」一节",
+      "confirmed": false
+    },
+    {
+      "field": "目标地区",
+      "value": null,
+      "category": "preference",
+      "status": "unknown",
+      "quote": "",
+      "locator": "「路径与打算」一节",
+      "confirmed": false
+    },
+    {
+      "field": "优先级原话",
+      "value": "先保住工作和现金流，再确认学位对目标岗位有用，再看时间安排和学校。",
+      "category": "preference",
+      "status": "given",
+      "quote": "先保住工作和现金流，再确认学位对目标岗位有用，再看时间安排和学校。",
+      "locator": "「优先级排序」一节",
+      "confirmed": true
+    }
+  ]
+}

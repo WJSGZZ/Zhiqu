@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "missing": [
+    {
+      "field": "收入底线",
+      "question": "请补充收入底线"
+    },
+    {
+      "field": "户籍",
+      "question": "请补充户籍"
+    },
+    {
+      "field": "政治面貌",
+      "question": "请补充政治面貌"
+    }
+  ],
+  "fields": [
+    {
+      "field": "学历",
+      "value": "专科在读",
+      "category": "fact",
+      "status": "given",
+      "quote": "叫我小澄，湖北公办高职机电一体化，大三，预计2027年6月毕业。还没开始正式求职，也在考虑普通专升本。",
+      "locator": "「你现在的位置」一节",
+      "confirmed": true
+    },
+    {
+      "field": "专业",
+      "value": "机电一体化技术",
+      "category": "fact",
+      "status": "given",
+      "quote": "叫我小澄，湖北公办高职机电一体化，大三，预计2027年6月毕业。还没开始正式求职，也在考虑普通专升本。",
+      "locator": "「你现在的位置」一节",
+      "confirmed": true
+    },
+    {
+      "field": "毕业时间",
+      "value": "2027年6月",
+      "category": "fact",
+      "status": "given",
+      "quote": "叫我小澄，湖北公办高职机电一体化，大三，预计2027年6月毕业。还没开始正式求职，也在考虑普通专升本。",
+      "locator": "「你现在的位置」一节",
+      "confirmed": true
+    },
+    {
+      "field": "求职阶段",
+      "value": "还没开始",
+      "category": "fact",
+      "status": "given",
+      "quote": "叫我小澄，湖北公办高职机电一体化，大三，预计2027年6月毕业。还没开始正式求职，也在考虑普通专升本。",
+      "locator": "「你现在的位置」一节",
+      "confirmed": true
+    },
+    {
+      "field": "经历",
+      "value": "做过PLC和设备拆装实训，能按要求完成，出了新故障还需要老师带；没有独立维修经验，也没有电工证，不能写成已持证。",
+      "category": "fact",
+      "status": "given",
+      "quote": "做过PLC和设备拆装实训，能按要求完成，出了新故障还需要老师带；没有独立维修经验，也没有电工证，不能写成已持证。",
+      "locator": "「能力与经历」一节",
+      "confirmed": true
+    },
+    {
+      "field": "证书",
+      "value": "做过PLC和设备拆装实训，能按要求完成，出了新故障还需要老师带；没有独立维修经验，也没有电工证，不能写成已持证。",
+      "category": "fact",
+      "status": "given",
+      "quote": "做过PLC和设备拆装实训，能按要求完成，出了新故障还需要老师带；没有独立维修经验，也没有电工证，不能写成已持证。",
+      "locator": "「能力与经历」一节",
+      "confirmed": true
+    },
+    {
+      "field": "目标岗位",
+      "value": "想做设备装调、工艺辅助或设备维护学徒，能接受现场，最好别长期夜班。听说有些国企也招专科，但没看到具体本批公告。",
+      "category": "preference",
+      "status": "given",
+      "quote": "想做设备装调、工艺辅助或设备维护学徒，能接受现场，最好别长期夜班。听说有些国企也招专科，但没看到具体本批公告。",
+      "locator": "「想做什么样的工作」一节",
+      "confirmed": true
+    },
+    {
+      "field": "收入底线",
+      "value": null,
+      "category": "constraint",
+      "status": "unknown",
+      "quote": "",
+      "locator": "「钱与城市」一节",
+      "confirmed": false
+    },
+    {
+      "field": "城市",
+      "value": "湖北省内优先",
+      "category": "preference",
+      "status": "given",
+      "quote": "湖北省内优先，愿看不同地点。月薪希望税前4500元左右，尚未算到手底线和住宿成本。",
+      "locator": "「钱与城市」一节",
+      "confirmed": true
+    },
+    {
+      "field": "单位类型偏好",
+      "value": "先真实工作内容与安全带教，再稳定收入，再省内生活；夜班是否接受要具体谈。",
+      "category": "preference",
+      "status": "given",
+      "quote": "先真实工作内容与安全带教，再稳定收入，再省内生活；夜班是否接受要具体谈。",
+      "locator": "「优先级排序」一节",
+      "confirmed": true
+    },
+    {
+      "field": "户籍",
+      "value": null,
+      "category": "fact",
+      "status": "unknown",
+      "quote": "",
+      "locator": "「想做什么样的工作」一节",
+      "confirmed": false
+    },
+    {
+      "field": "政治面貌",
+      "value": null,
+      "category": "fact",
+      "status": "unknown",
+      "quote": "",
+      "locator": "「能力与经历」一节",
+      "confirmed": false
+    },
+    {
+      "field": "多快需要收入",
+      "value": "毕业后两个月内",
+      "category": "constraint",
+      "status": "given",
+      "quote": "家里普通，没有特殊困难，毕业后两个月左右想开始挣钱。若升本还需要几年支持、能支持多少，没谈好，不想默认家里会全包。",
+      "locator": "「现实约束」一节",
+      "confirmed": true
+    },
+    {
+      "field": "优先级原话",
+      "value": "先真实工作内容与安全带教，再稳定收入，再省内生活；夜班是否接受要具体谈。",
+      "category": "preference",
+      "status": "given",
+      "quote": "先真实工作内容与安全带教，再稳定收入，再省内生活；夜班是否接受要具体谈。",
+      "locator": "「优先级排序」一节",
+      "confirmed": true
+    }
+  ]
+}

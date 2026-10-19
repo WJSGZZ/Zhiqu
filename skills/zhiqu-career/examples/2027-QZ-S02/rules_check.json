@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "items": [
+    {
+      "id": "R01",
+      "claim": "国考具体岗位另核",
+      "evidence_refs": [
+        "E002"
+      ],
+      "status": "verified",
+      "scope": "总公告与职位要求分开",
+      "volatile": true,
+      "verified_on": "2026-10-19",
+      "review_due": "2026-11-18",
+      "gap": null
+    },
+    {
+      "id": "R02",
+      "claim": "国考报名与考试日历",
+      "evidence_refs": [
+        "E003",
+        "E004",
+        "E005"
+      ],
+      "status": "verified",
+      "scope": "2027国考",
+      "volatile": true,
+      "verified_on": "2026-10-19",
+      "review_due": "2026-11-18",
+      "gap": null
+    },
+    {
+      "id": "R03",
+      "claim": "电网总部安排",
+      "evidence_refs": [
+        "E006",
+        "E007",
+        "E008",
+        "E009"
+      ],
+      "status": "verified",
+      "scope": "2027招聘总安排",
+      "volatile": true,
+      "verified_on": "2026-10-19",
+      "review_due": "2026-11-18",
+      "gap": null
+    },
+    {
+      "id": "R04",
+      "claim": "省公司、省考与企业逐岗资格",
+      "evidence_refs": [
+        "E010",
+        "E011",
+        "E012"
+      ],
+      "status": "unretrieved",
+      "scope": "",
+      "volatile": true,
+      "verified_on": "2026-10-19",
+      "review_due": "2026-11-18",
+      "gap": "具体岗位尚未定，不做批量抓取；按候选核查"
+    }
+  ],
+  "as_of": "2026-10-19"
+}

@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "kind": "career",
+  "case_id": "2027-QZ-S04",
+  "mode": "simulation",
+  "prepared_on": "2026-10-19",
+  "version": "1.0",
+  "decision_stage": "还没开始",
+  "target_year": 2027,
+  "data_commit": "ba939f5",
+  "education": {
+    "school_level": "公办高职",
+    "year_level": "大三",
+    "major": "机电一体化技术",
+    "expected_graduation": "2027-06-30"
+  },
+  "context": {
+    "as_of": "2026-10-19",
+    "takes_kaoyan": false,
+    "offer_basis": "none",
+    "personal_dates": {
+      "action0": "2026-10-21",
+      "action1": "2026-10-22",
+      "action2": "2026-10-23",
+      "checkpoint": "2026-10-23",
+      "term_end": "2027-01-15",
+      "spring": "2027-03-15",
+      "summer": "2027-06-20",
+      "recommend": "2027-09-15",
+      "graduate": "2027-06-30",
+      "entry": "2027-09-01",
+      "winter": "2026-12-10"
+    }
+  },
+  "deadlines": [
+    {
+      "label": "个人复核点",
+      "date": "2026-10-23",
+      "kind": "personal_checkpoint"
+    },
+    {
+      "label": "当届学校或职位具体截止",
+      "unknown_reason": "未选定项目或具体公告尚未取得，不用往年日期替代"
+    }
+  ],
+  "report_meta": {
+    "title": "求职方向决策报告",
+    "subtitle": "湖北 · 企业与公共部门路线比较",
+    "person": "小澄（模拟）",
+    "edition": "求职版",
+    "date": "{{k:/context/as_of}}",
+    "id": "2027-QZ-S04",
+    "stage": "求职版 · 应届探索",
+    "region": "湖北",
+    "data_asof": "{{k:/context/as_of}}",
+    "conclusion": "以企业技术岗位为主线，电网按条件保留，公职不盲目并行。"
+  }
+}

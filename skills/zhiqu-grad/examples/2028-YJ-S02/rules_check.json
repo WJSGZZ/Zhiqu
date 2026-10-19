@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "items": [
+    {
+      "id": "R01",
+      "claim": "旧年学业与英语申请资格",
+      "evidence_refs": [
+        "E002",
+        "E003"
+      ],
+      "status": "verified",
+      "scope": "2027届原文，仅用于调查2028要核哪些项目",
+      "volatile": true,
+      "verified_on": "2026-10-19",
+      "review_due": "2026-11-18",
+      "gap": null
+    },
+    {
+      "id": "R02",
+      "claim": "旧年计划及竞赛约束",
+      "evidence_refs": [
+        "E005",
+        "E006"
+      ],
+      "status": "verified",
+      "scope": "2027届原文，仅用于调查2028要核哪些项目",
+      "volatile": true,
+      "verified_on": "2026-10-19",
+      "review_due": "2026-11-18",
+      "gap": null
+    },
+    {
+      "id": "R03",
+      "claim": "接收与统考互斥",
+      "evidence_refs": [
+        "E004"
+      ],
+      "status": "verified",
+      "scope": "2027届原文，仅用于调查2028要核哪些项目",
+      "volatile": true,
+      "verified_on": "2026-10-19",
+      "review_due": "2026-11-18",
+      "gap": null
+    },
+    {
+      "id": "R04",
+      "claim": "当届最终资格与配额",
+      "evidence_refs": [
+        "E007"
+      ],
+      "status": "unretrieved",
+      "scope": "",
+      "volatile": true,
+      "verified_on": "2026-10-19",
+      "review_due": "2026-11-18",
+      "gap": "当届文件与最终排名待核"
+    }
+  ],
+  "as_of": "2026-10-19"
+}

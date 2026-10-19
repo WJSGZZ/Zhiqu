@@ -1,0 +1,914 @@
+{
+  "schema_version": 1,
+  "presentation": {
+    "02": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/02/lead"
+      },
+      {
+        "slot": "profile",
+        "ref": "profile_parse.json#/report_blocks/02_profile_1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/02/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/02/analysis/1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/02/analysis/2"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/02/analysis/3"
+      },
+      {
+        "slot": "details",
+        "ref": "profile_parse.json#/report_blocks/02_details_22"
+      }
+    ],
+    "03": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/03/lead"
+      },
+      {
+        "slot": "questions",
+        "ref": "directions.json#/report_blocks/03_questions_2"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/03/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/03/analysis/1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/03/analysis/2"
+      }
+    ],
+    "05": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/05/lead"
+      },
+      {
+        "slot": "directions",
+        "ref": "directions.json#/report_blocks/05_directions_3"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/05/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/05/analysis/1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/05/analysis/2"
+      },
+      {
+        "slot": "details",
+        "ref": "profile_parse.json#/report_blocks/05_details_37"
+      }
+    ],
+    "10": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/10/lead"
+      },
+      {
+        "slot": "questions",
+        "ref": "judgment.json#/report_blocks/10_questions_4"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/10/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/10/analysis/1"
+      }
+    ],
+    "11": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/11/lead"
+      },
+      {
+        "slot": "assumptions",
+        "ref": "judgment.json#/report_blocks/11_assumptions_70"
+      },
+      {
+        "slot": "evidence_levels",
+        "ref": "evidence.json#/report_blocks/11_evidence_levels_6"
+      },
+      {
+        "slot": "terms",
+        "ref": "judgment.json#/report_blocks/11_terms_5"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/11/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/11/analysis/1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/11/analysis/2"
+      }
+    ],
+    "12": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/12/lead"
+      },
+      {
+        "slot": "sources",
+        "ref": "evidence.json#/report_blocks/12_sources_7"
+      },
+      {
+        "slot": "disclaimer",
+        "ref": "narrative.json#/sections/12/disclaimer"
+      }
+    ],
+    "01": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/01/lead"
+      },
+      {
+        "slot": "kpis",
+        "ref": "judgment.json#/report_blocks/01_kpis_12"
+      },
+      {
+        "slot": "core_points",
+        "ref": "narrative.json#/sections/01/core_points"
+      },
+      {
+        "slot": "actions",
+        "ref": "judgment.json#/report_blocks/01_actions_14"
+      },
+      {
+        "slot": "checkpoint",
+        "ref": "judgment.json#/report_blocks/01_checkpoint_15"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/01/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/01/analysis/1"
+      }
+    ],
+    "04": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/04/lead"
+      },
+      {
+        "slot": "matrix",
+        "ref": "judgment.json#/report_blocks/04_matrix_31"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/04/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/04/analysis/1"
+      },
+      {
+        "slot": "unknown_explanation",
+        "ref": "narrative.json#/sections/04/unknown_explanation"
+      }
+    ],
+    "06": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/06/lead"
+      },
+      {
+        "slot": "candidates",
+        "ref": "candidates.json#/report_blocks/06_candidates_42"
+      },
+      {
+        "slot": "score_ranges",
+        "ref": "evidence.json#/report_blocks/06_score_ranges_43"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/06/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/06/analysis/1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/06/analysis/2"
+      }
+    ],
+    "07": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/07/lead"
+      },
+      {
+        "slot": "timeline",
+        "ref": "judgment.json#/report_blocks/07_timeline_48"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/07/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/07/analysis/1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/07/analysis/2"
+      }
+    ],
+    "08": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/08/lead"
+      },
+      {
+        "slot": "routes",
+        "ref": "judgment.json#/report_blocks/08_routes_53"
+      },
+      {
+        "slot": "routes",
+        "ref": "judgment.json#/report_blocks/08_routes_54"
+      },
+      {
+        "slot": "routes",
+        "ref": "judgment.json#/report_blocks/08_routes_55"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/08/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/08/analysis/1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/08/analysis/2"
+      }
+    ],
+    "09": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/09/lead"
+      },
+      {
+        "slot": "budget_chart",
+        "ref": "evidence.json#/report_blocks/09_budget_chart_60"
+      },
+      {
+        "slot": "risks",
+        "ref": "judgment.json#/report_blocks/09_risks_61"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/09/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/09/analysis/1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/09/analysis/2"
+      }
+    ]
+  },
+  "report_blocks": {
+    "10_questions_4": {
+      "type": "question_table",
+      "content": {
+        "columns": [
+          "要问什么",
+          "去哪里确认",
+          "核完怎样改变决定"
+        ],
+        "rows": [
+          [
+            "最关键资格与可报范围",
+            "本人登记材料与当届正式公告；有疑问用公开咨询渠道",
+            "有明确不符则排除具体项；没有答复保持待核"
+          ],
+          [
+            "实际学习或工作内容",
+            "培养方案、正式岗位职责；相关人员只补任务线索",
+            "愿意长期做且能力可补才进入候选，不凭名称判断"
+          ],
+          [
+            "费用和家庭支持",
+            "正式收费表或书面薪酬条件；与家庭确认支持边界",
+            "不能持续承担就调学校、地点或时间，不预支未确定资助"
+          ],
+          [
+            "冲突节点与退出条件",
+            "官方确认安排、单位通知和本人课程责任",
+            "发生冲突时保主线，记录放弃什么，避免默认全部兼得"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E001"
+      ]
+    },
+    "11_terms_5": {
+      "type": "term_table",
+      "content": {
+        "columns": [
+          "术语",
+          "本报告中的意思"
+        ],
+        "rows": [
+          [
+            "硬条件",
+            "决定能否进入正式申请的要求，不等于竞争实力"
+          ],
+          [
+            "待核",
+            "关键原文或本人材料未取得，不能写成没有机会"
+          ],
+          [
+            "条件情景",
+            "只改变明确输入后的计算，不是现实已发生"
+          ],
+          [
+            "主线与备选",
+            "先后投入顺序，不是结果保证"
+          ],
+          [
+            "证据等级",
+            "官方规则、他人经验与本人偏好承担不同作用，不相互替代"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E001"
+      ]
+    },
+    "01_kpis_12": {
+      "type": "kpi",
+      "content": {
+        "rows": [
+          [
+            "学业排名待核",
+            "{{p:/fields/14/value/academic_rank}} / {{p:/fields/14/value/academic_count}}",
+            "综合表另列 {{p:/fields/14/value/comprehensive_rank}} / {{p:/fields/14/value/comprehensive_count}}，不得混算"
+          ],
+          [
+            "旧年专业计划",
+            "{{e:E005#/value}} 个",
+            "只限旧届计划，可能调整；非当届承诺"
+          ],
+          [
+            "年度总预算",
+            "{{k:/budget/annual_limit|comma}} 元",
+            "学费、住宿尚未核，不扣未确认奖助"
+          ],
+          [
+            "可用课外时间",
+            "{{p:/fields/13/value}} 小时/周",
+            "先保课程，再看边际投入"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E001",
+        "E005"
+      ]
+    },
+    "01_actions_14": {
+      "type": "dated_actions",
+      "content": {
+        "items": [
+          {
+            "text": "向教务核学业与综合排名的分母、课程、首考与统计时点；保留原表，不先自行换算。",
+            "date": "{{k:/context/personal_dates/action0}}"
+          },
+          {
+            "text": "读学院现有细则并列当届待核项；向家庭确认年度上限与应急金是否独立预留。",
+            "date": "{{k:/context/personal_dates/action1}}"
+          },
+          {
+            "text": "选一组交通方向培养任务核兴趣，并记录一轮同科目诊断需求；确定下次何时重评。",
+            "date": "{{k:/context/personal_dates/action2}}"
+          }
+        ]
+      },
+      "evidence_refs": [
+        "E001"
+      ]
+    },
+    "01_checkpoint_15": {
+      "type": "checkpoint",
+      "content": {
+        "text": "下一个个人检查点：{{k:/context/personal_dates/checkpoint|ymd_cn}}。若仍没有同口径排名，就维持并行，不写最终资格；若课程负担已挤压基础，再缩减额外项目。"
+      },
+      "evidence_refs": [
+        "E001"
+      ]
+    },
+    "04_matrix_31": {
+      "type": "comparison_matrix",
+      "content": {
+        "title": "路径放在同一组条件下比较",
+        "caption": "✓为本人已表达的接受，△为条件未核，✗为当前明确不纳入；符号不是成功概率，准备时间不代表报名资格。",
+        "columns": [
+          "资格",
+          "时间与投入",
+          "费用",
+          "本人接受度"
+        ],
+        "rows": [
+          [
+            "推免",
+            "△当届推荐及接收待核",
+            "△基础可共享，申请另占时间",
+            "△项目收费待核",
+            "✓愿争取"
+          ],
+          [
+            "统考",
+            "△当届目录与成绩待核",
+            "△先补共同基础",
+            "△项目收费待核",
+            "✓愿保留"
+          ],
+          [
+            "本科就业",
+            "△岗位条件待核",
+            "△可先核任务，不当已保底",
+            "△收入未取得",
+            "△可接受但了解不足"
+          ],
+          [
+            "境外",
+            "△未选项目",
+            "△不启动申请",
+            "△无自费支持意愿",
+            "✗当前不考虑"
+          ],
+          [
+            "考公",
+            "△无具体职位",
+            "△会新增考试投入",
+            "△机会成本待核",
+            "△未形成职业动机"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E001",
+        "E002",
+        "E003",
+        "E007"
+      ]
+    },
+    "07_timeline_48": {
+      "type": "timeline",
+      "content": {
+        "title": "从当前到入学：个人检查点",
+        "caption": "琥珀标记为个人复核点；未取得的官方报名、推荐与接收日期不画成确定截止。",
+        "rows": [
+          [
+            "{{k:/context/personal_dates/checkpoint|ym}}",
+            "统一排名口径",
+            "{{k:/context/personal_dates/checkpoint|md_short}} 个人复核",
+            "检查点"
+          ],
+          [
+            "{{k:/context/personal_dates/term_end|ym}}",
+            "看课程与基础负担",
+            "{{k:/context/personal_dates/term_end|md_short}} 个人复核",
+            "检查点"
+          ],
+          [
+            "{{k:/context/personal_dates/summer|ym}}",
+            "核夏令营与培养任务",
+            "按各校正式通知；本人复评",
+            "检查点"
+          ],
+          [
+            "{{k:/context/personal_dates/recommend|ym}}",
+            "核当届推荐及接收",
+            "官方具体日程未取得",
+            ""
+          ],
+          [
+            "{{k:/context/personal_dates/graduate|ym}}",
+            "确认毕业与选择",
+            "依正式录取、就业期限",
+            ""
+          ],
+          [
+            "{{k:/context/personal_dates/entry|ym}}",
+            "核报到与费用",
+            "依正式报到通知",
+            ""
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E001",
+        "E004",
+        "E007"
+      ]
+    },
+    "08_routes_53": {
+      "type": "route_cards",
+      "content": {
+        "title": "推免：先核本校再核接收",
+        "门槛": "当届基本条件、同口径排名、综合评价与正式名额；接收学校另审。",
+        "时间窗口": "先按个人检查点补材料；夏令营、预推免、接收按当届正式通知。",
+        "投入": "保课程与可解释的已有任务；额外竞赛先核计分与负担。",
+        "切换条件": "若当届明确不符则转统考；若取得资格也不能直接当接收成功。"
+      },
+      "evidence_refs": [
+        "E001",
+        "E002",
+        "E003",
+        "E005",
+        "E006",
+        "E007"
+      ]
+    },
+    "08_routes_54": {
+      "type": "route_cards",
+      "content": {
+        "title": "统考：共享基础、逐步缩候选",
+        "门槛": "本科资格、当届学院目录、考试科目与本人完整诊断。",
+        "时间窗口": "正式报名、确认和考试日程尚未取得，个人时间表不能替代。",
+        "投入": "与课程共享基础，先看差距能否补，不从本科均分推初试。",
+        "切换条件": "正式科目或预算不合就换具体对象；若已被推免接收，核当年统考限制。"
+      },
+      "evidence_refs": [
+        "E001",
+        "E004",
+        "E008",
+        "E009",
+        "E010"
+      ]
+    },
+    "08_routes_55": {
+      "type": "route_cards",
+      "content": {
+        "title": "就业：用任务验证读研价值",
+        "门槛": "具体岗位职责、学历条件、地点与本人接受度。",
+        "时间窗口": "按少量岗位公告查截止；有真实录用条件时再与升学比较。",
+        "投入": "整理自己能解释的调查与数据处理任务，不伪造项目贡献。",
+        "切换条件": "若研究内容不适合或预算不可持续，提高本科就业优先级，仍不承诺能录用。"
+      },
+      "evidence_refs": [
+        "E001"
+      ]
+    },
+    "09_risks_61": {
+      "type": "scenario_table",
+      "content": {
+        "columns": [
+          "触发条件",
+          "为什么改变判断",
+          "采取什么应对"
+        ],
+        "rows": [
+          [
+            "当届推荐资格明确不符",
+            "失去的是该届校内推荐入口",
+            "转统考主线；不把整个读研机会写没了"
+          ],
+          [
+            "仍无同口径排名",
+            "不能比较本人位置与名额",
+            "保持两路基础，不追加未经证实的竞赛投入"
+          ],
+          [
+            "课程负担影响首考与成绩",
+            "共享基础正在受损",
+            "先缩额外活动，再评准备强度"
+          ],
+          [
+            "正式费用超过可承受空间",
+            "预算约束实际成立",
+            "改项目或时间；不预支奖助"
+          ],
+          [
+            "没有推荐且统考基础薄弱",
+            "两边都需要重排投入",
+            "根据真实诊断缩候选；不默认二战获支持"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E001"
+      ]
+    },
+    "11_assumptions_70": {
+      "type": "assumption_table",
+      "content": {
+        "columns": [
+          "量或规则",
+          "输入与口径",
+          "结论边界"
+        ],
+        "rows": [
+          [
+            "年度支持",
+            "{{k:/budget/annual_limit|comma}} 元",
+            "本人预算上限；支持持续性待确认"
+          ],
+          [
+            "全年生活费",
+            "{{p:/fields/12/value/living|comma}} × {{e:E020#/value}} = {{c:/known_living|comma}} 元",
+            "含全年；不含学费住宿等"
+          ],
+          [
+            "其他费用上限",
+            "{{c:/nonliving_ceiling|comma}} 元",
+            "预算减已知占用；不是净盈余"
+          ],
+          [
+            "生活提高情景",
+            "{{c:/higher_living_ceiling|comma}} 元",
+            "其他费用上限；单独改变生活费"
+          ],
+          [
+            "预留应急情景",
+            "{{c:/reserve_ceiling|comma}} 元",
+            "另一个独立情景，不同时叠加"
+          ],
+          [
+            "旧年规则与名额",
+            "旧届资格和专业计划",
+            "仅作待核项目清单；不当当届承诺"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E001",
+        "E005",
+        "E020"
+      ]
+    }
+  },
+  "preferences": {
+    "method": "ordinal",
+    "confirmed": false,
+    "weights": null,
+    "quote": "先专业方向和学习内容，再费用可承受，再省内生活，最后是学校名气。没有百分比权重。",
+    "profile_refs": [
+      "profile_parse.json#/fields/11"
+    ]
+  },
+  "candidates": [
+    {
+      "id": "P1",
+      "supports": [
+        "本人想争取且旧年条件有调查价值；现有学业记录值得核实"
+      ],
+      "counters": [
+        "两张排名口径不同，尚未完成第三学年，当届配额未知"
+      ],
+      "costs": [
+        "额外竞赛会占用课程与统考基础"
+      ],
+      "fallback": "保留课程、数学与英语基础；尚未取得结果，不称其他路径为保底",
+      "switch_conditions": "若正式资格不符，明确转统考；若名额与同口径排序相配，提高推荐优先级",
+      "checkpoint": "{{k:/context/personal_dates/checkpoint}}",
+      "evidence_refs": [
+        "E002"
+      ]
+    },
+    {
+      "id": "P2",
+      "supports": [
+        "交通专业基础可与课程和推荐准备共享"
+      ],
+      "counters": [
+        "无完整模考、具体科目和当届目录，不能认定够得上任何学校"
+      ],
+      "costs": [
+        "学校科目改变可能新增补课；收费尚未核算"
+      ],
+      "fallback": "保留课程、数学与英语基础；尚未取得结果，不称其他路径为保底",
+      "switch_conditions": "先取目录及同科目诊断；差距不可补或超预算时改具体目标",
+      "checkpoint": "{{k:/context/personal_dates/checkpoint}}",
+      "evidence_refs": [
+        "E008"
+      ]
+    },
+    {
+      "id": "P3",
+      "supports": [
+        "本人没有排斥本科就业，可用任务验证读研必要性"
+      ],
+      "counters": [
+        "没有具体岗位原文与录用条件，不是失败后的已得保底"
+      ],
+      "costs": [
+        "调查时间与升学准备竞争，但现阶段可少量核任务"
+      ],
+      "fallback": "保留课程、数学与英语基础；尚未取得结果，不称其他路径为保底",
+      "switch_conditions": "若不接受研究任务或预算不可持续，提高就业调查优先级",
+      "checkpoint": "{{k:/context/personal_dates/checkpoint}}",
+      "evidence_refs": [
+        "E001"
+      ]
+    },
+    {
+      "id": "S1",
+      "supports": [
+        "本校官方入口可作为省内调查起点，本人接受省内方向"
+      ],
+      "counters": [
+        "当届具体项目、学院代码和科目都未核，不能给学校排难度"
+      ],
+      "costs": [
+        "项目若跨科目或培养内容不合，比较成本会增加；费用不能沿用别校"
+      ],
+      "fallback": "保留课程、数学与英语基础；尚未取得结果，不称其他路径为保底",
+      "switch_conditions": "目录核实有合适项目、同科目差距可补且费用可承受才进入真正候选，否则移出调查清单",
+      "checkpoint": "{{k:/context/personal_dates/checkpoint}}",
+      "evidence_refs": [
+        "E008"
+      ]
+    },
+    {
+      "id": "S2",
+      "supports": [
+        "江苏大学官方入口可作为省内调查起点，本人接受省内方向"
+      ],
+      "counters": [
+        "当届具体项目、学院代码和科目都未核，不能给学校排难度"
+      ],
+      "costs": [
+        "项目若跨科目或培养内容不合，比较成本会增加；费用不能沿用别校"
+      ],
+      "fallback": "保留课程、数学与英语基础；尚未取得结果，不称其他路径为保底",
+      "switch_conditions": "目录核实有合适项目、同科目差距可补且费用可承受才进入真正候选，否则移出调查清单",
+      "checkpoint": "{{k:/context/personal_dates/checkpoint}}",
+      "evidence_refs": [
+        "E009"
+      ]
+    },
+    {
+      "id": "S3",
+      "supports": [
+        "南京林业大学官方入口可作为省内调查起点，本人接受省内方向"
+      ],
+      "counters": [
+        "当届具体项目、学院代码和科目都未核，不能给学校排难度"
+      ],
+      "costs": [
+        "项目若跨科目或培养内容不合，比较成本会增加；费用不能沿用别校"
+      ],
+      "fallback": "保留课程、数学与英语基础；尚未取得结果，不称其他路径为保底",
+      "switch_conditions": "目录核实有合适项目、同科目差距可补且费用可承受才进入真正候选，否则移出调查清单",
+      "checkpoint": "{{k:/context/personal_dates/checkpoint}}",
+      "evidence_refs": [
+        "E010"
+      ]
+    }
+  ],
+  "checkpoint": {
+    "date": "{{k:/context/personal_dates/checkpoint}}",
+    "required": [
+      "补齐具体硬条件",
+      "更新费用或现金边界",
+      "重定主线与备选"
+    ]
+  },
+  "recommendation": {
+    "primary": [
+      "P1",
+      "P2"
+    ],
+    "backup": [
+      "P3"
+    ],
+    "conditions": [
+      "只在正式资格、本人接受和费用边界同时成立时进入具体申请",
+      "未知条件不当没有机会；条件不符只排该项目，不外推整条路"
+    ]
+  },
+  "matrix": {
+    "options": [
+      "P1",
+      "P2",
+      "P3"
+    ],
+    "dimensions": [
+      {
+        "id": "资格",
+        "name": "资格"
+      },
+      {
+        "id": "时间与投入",
+        "name": "时间与投入"
+      },
+      {
+        "id": "费用",
+        "name": "费用"
+      },
+      {
+        "id": "本人接受度",
+        "name": "本人接受度"
+      }
+    ],
+    "cells": [
+      {
+        "candidate_id": "P1",
+        "dimension_id": "资格",
+        "status": "unknown",
+        "note": "等待对应原件或本人反馈"
+      },
+      {
+        "candidate_id": "P1",
+        "dimension_id": "时间与投入",
+        "status": "unknown",
+        "note": "等待对应原件或本人反馈"
+      },
+      {
+        "candidate_id": "P1",
+        "dimension_id": "费用",
+        "status": "unknown",
+        "note": "等待对应原件或本人反馈"
+      },
+      {
+        "candidate_id": "P1",
+        "dimension_id": "本人接受度",
+        "status": "unknown",
+        "note": "等待对应原件或本人反馈"
+      },
+      {
+        "candidate_id": "P2",
+        "dimension_id": "资格",
+        "status": "unknown",
+        "note": "等待对应原件或本人反馈"
+      },
+      {
+        "candidate_id": "P2",
+        "dimension_id": "时间与投入",
+        "status": "unknown",
+        "note": "等待对应原件或本人反馈"
+      },
+      {
+        "candidate_id": "P2",
+        "dimension_id": "费用",
+        "status": "unknown",
+        "note": "等待对应原件或本人反馈"
+      },
+      {
+        "candidate_id": "P2",
+        "dimension_id": "本人接受度",
+        "status": "unknown",
+        "note": "等待对应原件或本人反馈"
+      },
+      {
+        "candidate_id": "P3",
+        "dimension_id": "资格",
+        "status": "unknown",
+        "note": "等待对应原件或本人反馈"
+      },
+      {
+        "candidate_id": "P3",
+        "dimension_id": "时间与投入",
+        "status": "unknown",
+        "note": "等待对应原件或本人反馈"
+      },
+      {
+        "candidate_id": "P3",
+        "dimension_id": "费用",
+        "status": "unknown",
+        "note": "等待对应原件或本人反馈"
+      },
+      {
+        "candidate_id": "P3",
+        "dimension_id": "本人接受度",
+        "status": "unknown",
+        "note": "等待对应原件或本人反馈"
+      }
+    ]
+  }
+}

@@ -1,0 +1,445 @@
+{
+  "schema_version": 1,
+  "items": [
+    {
+      "id": "E001",
+      "claim": "个人优先级与尚待补齐的信息",
+      "value": null,
+      "unit": "",
+      "source": {
+        "organization": "本人画像与分析口径",
+        "url": "",
+        "locator": "个人优先级与尚待补齐的信息"
+      },
+      "published_on": null,
+      "retrieved_on": "2026-10-19",
+      "retrieval_method": "provided",
+      "verified_on": "2026-10-19",
+      "grade": "单人说法",
+      "scope": "只用于本人意愿；不得据此认证学校、岗位、收入或考试资格",
+      "review_due": "2026-11-18",
+      "candidate_ids": [],
+      "rule_ids": [],
+      "status": "verified",
+      "source_group": 1,
+      "excerpt": "先专业方向和学习内容，再费用可承受，再省内生活，最后是学校名气。没有百分比权重。",
+      "original_locator": "个人优先级与尚待补齐的信息",
+      "main_conclusion": true,
+      "publication_status": "context"
+    },
+    {
+      "id": "E002",
+      "claim": "校级学业排名门槛",
+      "value": "1/3",
+      "unit": "",
+      "source": {
+        "organization": "南通大学推荐办法",
+        "url": "https://yz.chsi.com.cn/tm/tjbf/detail?schCode=10304&zsgsId=3545859828",
+        "locator": "基本条件：学业综合成绩"
+      },
+      "published_on": "2026-09-03",
+      "retrieved_on": "2026-10-19",
+      "retrieval_method": "browser",
+      "verified_on": "2026-10-19",
+      "grade": "官方",
+      "scope": "2027届南通大学推荐申请资格；不是最终名额线",
+      "review_due": "2026-11-18",
+      "candidate_ids": [],
+      "rule_ids": [],
+      "status": "verified",
+      "source_group": 2,
+      "excerpt": "前三学年（五年制前四学年）本科阶段学业综合成绩排名须位于本专业本年级前 1/3 。",
+      "original_locator": "基本条件：学业综合成绩",
+      "main_conclusion": true,
+      "publication_status": "published"
+    },
+    {
+      "id": "E003",
+      "claim": "校级四级分数门槛",
+      "value": 425,
+      "unit": "分",
+      "source": {
+        "organization": "南通大学推荐办法",
+        "url": "https://yz.chsi.com.cn/tm/tjbf/detail?schCode=10304&zsgsId=3545859828",
+        "locator": "基本条件：外语"
+      },
+      "published_on": "2026-09-03",
+      "retrieved_on": "2026-10-19",
+      "retrieval_method": "browser",
+      "verified_on": "2026-10-19",
+      "grade": "官方",
+      "scope": "2027届南通大学非外语类推荐申请条件",
+      "review_due": "2026-11-18",
+      "candidate_ids": [],
+      "rule_ids": [],
+      "status": "verified",
+      "source_group": 2,
+      "excerpt": "大学英语四级考试成绩达到 425 分及以上（外语类专业要求 TEM-4 成绩 60 分及以上）。",
+      "original_locator": "基本条件：外语",
+      "main_conclusion": true,
+      "publication_status": "published"
+    },
+    {
+      "id": "E004",
+      "claim": "推免接收后统考限制",
+      "value": null,
+      "unit": "",
+      "source": {
+        "organization": "南通大学推荐办法",
+        "url": "https://yz.chsi.com.cn/tm/tjbf/detail?schCode=10304&zsgsId=3545859828",
+        "locator": "工作要求：接收后限制"
+      },
+      "published_on": "2026-09-03",
+      "retrieved_on": "2026-10-19",
+      "retrieval_method": "browser",
+      "verified_on": "2026-10-19",
+      "grade": "官方",
+      "scope": "2027届已被接收者；仅准备两条路线不等于已被接收",
+      "review_due": "2026-11-18",
+      "candidate_ids": [],
+      "rule_ids": [],
+      "status": "verified",
+      "source_group": 2,
+      "excerpt": "已被接收为推免生的学生，不得再报名参加当年硕士、博士研究生考试招生，否则取消其推免录取资格；不得再申请出国留学、参加就业派遣等，否则由学生自行承担违约责任。",
+      "original_locator": "工作要求：接收后限制",
+      "main_conclusion": true,
+      "publication_status": "published"
+    },
+    {
+      "id": "E005",
+      "claim": "交通工程历史推荐计划",
+      "value": 6,
+      "unit": "个",
+      "source": {
+        "organization": "南通大学交通与土木工程学院推荐细则",
+        "url": "https://jttm.ntu.edu.cn/2026/0906/c5262a298205/page.htm",
+        "locator": "一、推免名额：交通工程专业行"
+      },
+      "published_on": "2026-09-06",
+      "retrieved_on": "2026-10-19",
+      "retrieval_method": "curl",
+      "verified_on": "2026-10-19",
+      "grade": "官方",
+      "scope": "2027届学院专业计划，原文注明可调整；不是实际录取人数，也不是2028计划",
+      "review_due": "2026-11-18",
+      "candidate_ids": [],
+      "rule_ids": [],
+      "status": "verified",
+      "source_group": 3,
+      "excerpt": "3. 交通工程专业： 6 个",
+      "original_locator": "一、推免名额：交通工程专业行",
+      "main_conclusion": true,
+      "publication_status": "published"
+    },
+    {
+      "id": "E006",
+      "claim": "同方面多项加分限制",
+      "value": null,
+      "unit": "",
+      "source": {
+        "organization": "南通大学交通与土木工程学院推荐细则",
+        "url": "https://jttm.ntu.edu.cn/2026/0906/c5262a298205/page.htm",
+        "locator": "综合评价：特殊学术专长"
+      },
+      "published_on": "2026-09-06",
+      "retrieved_on": "2026-10-19",
+      "retrieval_method": "curl",
+      "verified_on": "2026-10-19",
+      "grade": "官方",
+      "scope": "2027学院细则；未取得当届评分明细不能估算新竞赛能加多少",
+      "review_due": "2026-11-18",
+      "candidate_ids": [],
+      "rule_ids": [],
+      "status": "verified",
+      "source_group": 3,
+      "excerpt": "学生在某一方面中有多项加分情况时，原则上只取一项，",
+      "original_locator": "综合评价：特殊学术专长",
+      "main_conclusion": true,
+      "publication_status": "published"
+    },
+    {
+      "id": "E007",
+      "claim": "当届推荐办法与排名口径",
+      "value": null,
+      "unit": "",
+      "source": {
+        "organization": "南通大学交通与土木工程学院推荐细则",
+        "url": "https://jttm.ntu.edu.cn/2026/0906/c5262a298205/page.htm",
+        "locator": "当届推荐办法与排名口径"
+      },
+      "published_on": null,
+      "retrieved_on": "2026-10-19",
+      "retrieval_method": "curl",
+      "verified_on": null,
+      "grade": "官方",
+      "scope": "2028届本专业，未知不判无资格",
+      "review_due": "2026-11-18",
+      "candidate_ids": [],
+      "rule_ids": [],
+      "status": "unretrieved",
+      "source_group": 3,
+      "excerpt": "",
+      "original_locator": "当届推荐办法与排名口径",
+      "main_conclusion": true,
+      "publication_status": "unretrieved",
+      "gap": "尚未取得2028届推荐办法；现有两份个人排名口径未向教务确认，不能把旧年名额外推。"
+    },
+    {
+      "id": "E008",
+      "claim": "南通大学研究生招生入口",
+      "value": null,
+      "unit": "",
+      "source": {
+        "organization": "南通大学研究生招生入口",
+        "url": "https://yjs.ntu.edu.cn/2026/0910/c7673a298559/page.htm",
+        "locator": "南通大学研究生招生入口"
+      },
+      "published_on": null,
+      "retrieved_on": "2026-10-19",
+      "retrieval_method": "curl",
+      "verified_on": null,
+      "grade": "官方",
+      "scope": "只列待调查学校，不认证该校当届一定有对应招生项目",
+      "review_due": "2026-11-18",
+      "candidate_ids": [],
+      "rule_ids": [],
+      "status": "unretrieved",
+      "source_group": 4,
+      "excerpt": "",
+      "original_locator": "南通大学研究生招生入口",
+      "main_conclusion": true,
+      "publication_status": "unretrieved",
+      "gap": "已打开官方入口或旧届办法；未取得2028具体学院、代码、科目、费用与完整可比分数。"
+    },
+    {
+      "id": "E009",
+      "claim": "江苏大学研究生招生入口",
+      "value": null,
+      "unit": "",
+      "source": {
+        "organization": "江苏大学研究生招生入口",
+        "url": "https://yz.ujs.edu.cn/",
+        "locator": "江苏大学研究生招生入口"
+      },
+      "published_on": null,
+      "retrieved_on": "2026-10-19",
+      "retrieval_method": "curl",
+      "verified_on": null,
+      "grade": "官方",
+      "scope": "只列待调查学校，不认证该校当届一定有对应招生项目",
+      "review_due": "2026-11-18",
+      "candidate_ids": [],
+      "rule_ids": [],
+      "status": "unretrieved",
+      "source_group": 5,
+      "excerpt": "",
+      "original_locator": "江苏大学研究生招生入口",
+      "main_conclusion": true,
+      "publication_status": "unretrieved",
+      "gap": "已打开官方入口或旧届办法；未取得2028具体学院、代码、科目、费用与完整可比分数。"
+    },
+    {
+      "id": "E010",
+      "claim": "南京林业大学研究生招生入口",
+      "value": null,
+      "unit": "",
+      "source": {
+        "organization": "南京林业大学研究生招生入口",
+        "url": "https://yz.njfu.edu.cn/",
+        "locator": "南京林业大学研究生招生入口"
+      },
+      "published_on": null,
+      "retrieved_on": "2026-10-19",
+      "retrieval_method": "curl",
+      "verified_on": null,
+      "grade": "官方",
+      "scope": "只列待调查学校，不认证该校当届一定有对应招生项目",
+      "review_due": "2026-11-18",
+      "candidate_ids": [],
+      "rule_ids": [],
+      "status": "unretrieved",
+      "source_group": 6,
+      "excerpt": "",
+      "original_locator": "南京林业大学研究生招生入口",
+      "main_conclusion": true,
+      "publication_status": "unretrieved",
+      "gap": "已打开官方入口或旧届办法；未取得2028具体学院、代码、科目、费用与完整可比分数。"
+    },
+    {
+      "id": "E020",
+      "claim": "全年月份口径",
+      "value": 12,
+      "unit": "个月",
+      "source": {
+        "organization": "年度预算换算口径",
+        "url": "",
+        "locator": "全年月份口径"
+      },
+      "published_on": null,
+      "retrieved_on": "2026-10-19",
+      "retrieval_method": "provided",
+      "verified_on": "2026-10-19",
+      "grade": "推测",
+      "scope": "仅用于月生活费换算年度生活费",
+      "review_due": "2026-11-18",
+      "candidate_ids": [],
+      "rule_ids": [],
+      "status": "verified",
+      "source_group": 7,
+      "excerpt": "年度预算按全年十二个月计算；这是统一单位，不是学制或学校收费。",
+      "original_locator": "全年月份口径",
+      "main_conclusion": true,
+      "publication_status": "context"
+    }
+  ],
+  "source_groups": [
+    {
+      "title": "本人画像与分析口径",
+      "url": "",
+      "metadata": "2026-10-19 登记；个人计划不是官方日期；预算估计不是收费报价"
+    },
+    {
+      "title": "南通大学推荐办法",
+      "url": "https://yz.chsi.com.cn/tm/tjbf/detail?schCode=10304&zsgsId=3545859828",
+      "metadata": "发布：2026-09-03；取文：2026-10-19；方式：浏览器；适用2027届，非2028承诺"
+    },
+    {
+      "title": "南通大学交通与土木工程学院推荐细则",
+      "url": "https://jttm.ntu.edu.cn/2026/0906/c5262a298205/page.htm",
+      "metadata": "发布：2026-09-06；取文：2026-10-19；方式：curl；2027届专业分配计划可调整"
+    },
+    {
+      "title": "南通大学研究生招生入口",
+      "url": "https://yjs.ntu.edu.cn/2026/0910/c7673a298559/page.htm",
+      "metadata": "取文：2026-10-19；仅限本案，未取到项见备注"
+    },
+    {
+      "title": "江苏大学研究生招生入口",
+      "url": "https://yz.ujs.edu.cn/",
+      "metadata": "取文：2026-10-19；仅限本案，未取到项见备注"
+    },
+    {
+      "title": "南京林业大学研究生招生入口",
+      "url": "https://yz.njfu.edu.cn/",
+      "metadata": "取文：2026-10-19；仅限本案，未取到项见备注"
+    },
+    {
+      "title": "年度预算换算口径",
+      "url": "",
+      "metadata": "2026-10-19 制作口径；属于单位换算，非客户陈述或学校收费"
+    }
+  ],
+  "report_blocks": {
+    "11_evidence_levels_6": {
+      "type": "evidence_legend",
+      "content": {
+        "rows": [
+          [
+            "官方",
+            "只证明所引年份、对象与条款"
+          ],
+          [
+            "多人一致",
+            "本案未以此认证数字和资格"
+          ],
+          [
+            "单人说法",
+            "本人描述只用于画像与意愿"
+          ],
+          [
+            "推测",
+            "分析条件及换算口径，不能冒充官方结果"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E001"
+      ]
+    },
+    "12_sources_7": {
+      "type": "source_endnotes",
+      "content": {},
+      "evidence_refs": [
+        "E001"
+      ]
+    },
+    "06_score_ranges_43": {
+      "type": "interval",
+      "content": {
+        "title": "分数区间：证据空缺仍然可见",
+        "caption": "没有可比原件就不画区间，没有本人模考就不画位置点；空缺不代表成绩下限，也不代表该校没有机会。",
+        "unit": "分",
+        "rows": [
+          [
+            "南通大学",
+            "未取到",
+            "未取到",
+            ""
+          ],
+          [
+            "江苏大学",
+            "未取到",
+            "未取到",
+            ""
+          ],
+          [
+            "南京林业大学",
+            "未取到",
+            "未取到",
+            ""
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E001",
+        "E008",
+        "E009",
+        "E010"
+      ]
+    },
+    "09_budget_chart_60": {
+      "type": "bars",
+      "content": {
+        "title": "预算边界：只比较已知占用与上限",
+        "caption": "绿色为本人年度支持上限，其余为已知生活支出或剩余承受空间；不是实际学校报价，也不是可以相加的收入。",
+        "unit": "元",
+        "rows": [
+          [
+            "年度支持上限",
+            "{{k:/budget/annual_limit}}",
+            "主",
+            "{{k:/budget/annual_limit|comma}} 元"
+          ],
+          [
+            "原生活支出",
+            "{{c:/known_living}}",
+            "主",
+            "{{c:/known_living|comma}} 元"
+          ],
+          [
+            "其他费用上限",
+            "{{c:/nonliving_ceiling}}",
+            "稳",
+            "{{c:/nonliving_ceiling|comma}} 元"
+          ],
+          [
+            "生活费提高后上限",
+            "{{c:/higher_living_ceiling}}",
+            "冲",
+            "{{c:/higher_living_ceiling|comma}} 元"
+          ],
+          [
+            "先留应急后上限",
+            "{{c:/reserve_ceiling}}",
+            "保",
+            "{{c:/reserve_ceiling|comma}} 元"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E001",
+        "E020"
+      ]
+    }
+  }
+}

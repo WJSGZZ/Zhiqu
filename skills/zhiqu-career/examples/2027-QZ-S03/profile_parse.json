@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "missing": [
+    {
+      "field": "收入底线",
+      "question": "请补充收入底线"
+    },
+    {
+      "field": "户籍",
+      "question": "请补充户籍"
+    },
+    {
+      "field": "政治面貌",
+      "question": "请补充政治面貌"
+    },
+    {
+      "field": "多快需要收入",
+      "question": "请补充多快需要收入"
+    }
+  ],
+  "fields": [
+    {
+      "field": "学历",
+      "value": "本科在读",
+      "category": "fact",
+      "status": "given",
+      "quote": "我是小谦，河北普通公办本科物流管理，大四，2027年6月毕业。刚开始看岗位，还没正式投递，也没有offer。",
+      "locator": "「你现在的位置」一节",
+      "confirmed": true
+    },
+    {
+      "field": "专业",
+      "value": "物流管理",
+      "category": "fact",
+      "status": "given",
+      "quote": "我是小谦，河北普通公办本科物流管理，大四，2027年6月毕业。刚开始看岗位，还没正式投递，也没有offer。",
+      "locator": "「你现在的位置」一节",
+      "confirmed": true
+    },
+    {
+      "field": "毕业时间",
+      "value": "2027年6月",
+      "category": "fact",
+      "status": "given",
+      "quote": "我是小谦，河北普通公办本科物流管理，大四，2027年6月毕业。刚开始看岗位，还没正式投递，也没有offer。",
+      "locator": "「你现在的位置」一节",
+      "confirmed": true
+    },
+    {
+      "field": "求职阶段",
+      "value": "还没开始",
+      "category": "fact",
+      "status": "given",
+      "quote": "我是小谦，河北普通公办本科物流管理，大四，2027年6月毕业。刚开始看岗位，还没正式投递，也没有offer。",
+      "locator": "「你现在的位置」一节",
+      "confirmed": true
+    },
+    {
+      "field": "经历",
+      "value": "做过库存管理课程作业，用过Excel透视表；没有正式实习，社团只做过普通成员。证书没有特别的。",
+      "category": "fact",
+      "status": "given",
+      "quote": "做过库存管理课程作业，用过Excel透视表；没有正式实习，社团只做过普通成员。证书没有特别的。",
+      "locator": "「能力与经历」一节",
+      "confirmed": true
+    },
+    {
+      "field": "证书",
+      "value": "做过库存管理课程作业，用过Excel透视表；没有正式实习，社团只做过普通成员。证书没有特别的。",
+      "category": "fact",
+      "status": "given",
+      "quote": "做过库存管理课程作业，用过Excel透视表；没有正式实习，社团只做过普通成员。证书没有特别的。",
+      "locator": "「能力与经历」一节",
+      "confirmed": true
+    },
+    {
+      "field": "目标岗位",
+      "value": "想看物流运营、供应链助理或数据整理岗位，不想长期高压销售。对考编不反对，但没看过岗位表。户籍和政治面貌这次没填，具体问到再说。",
+      "category": "preference",
+      "status": "given",
+      "quote": "想看物流运营、供应链助理或数据整理岗位，不想长期高压销售。对考编不反对，但没看过岗位表。户籍和政治面貌这次没填，具体问到再说。",
+      "locator": "「想做什么样的工作」一节",
+      "confirmed": true
+    },
+    {
+      "field": "收入底线",
+      "value": null,
+      "category": "constraint",
+      "status": "unknown",
+      "quote": "",
+      "locator": "「钱与城市」一节",
+      "confirmed": false
+    },
+    {
+      "field": "城市",
+      "value": "河北省内优先",
+      "category": "preference",
+      "status": "given",
+      "quote": "先看河北省内，薪资期望还没想好，也没算到手底线。是否能先住家里要看实际地点。",
+      "locator": "「钱与城市」一节",
+      "confirmed": true
+    },
+    {
+      "field": "单位类型偏好",
+      "value": "先岗位内容和带教，再地点，再生活能否自立，单位名气往后。",
+      "category": "preference",
+      "status": "given",
+      "quote": "先岗位内容和带教，再地点，再生活能否自立，单位名气往后。",
+      "locator": "「优先级排序」一节",
+      "confirmed": true
+    },
+    {
+      "field": "户籍",
+      "value": null,
+      "category": "fact",
+      "status": "unknown",
+      "quote": "",
+      "locator": "「想做什么样的工作」一节",
+      "confirmed": false
+    },
+    {
+      "field": "政治面貌",
+      "value": null,
+      "category": "fact",
+      "status": "unknown",
+      "quote": "",
+      "locator": "「能力与经历」一节",
+      "confirmed": false
+    },
+    {
+      "field": "多快需要收入",
+      "value": null,
+      "category": "constraint",
+      "status": "unknown",
+      "quote": "",
+      "locator": "「现实约束」一节",
+      "confirmed": false
+    },
+    {
+      "field": "优先级原话",
+      "value": "先岗位内容和带教，再地点，再生活能否自立，单位名气往后。",
+      "category": "preference",
+      "status": "given",
+      "quote": "先岗位内容和带教，再地点，再生活能否自立，单位名气往后。",
+      "locator": "「优先级排序」一节",
+      "confirmed": true
+    }
+  ]
+}

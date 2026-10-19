@@ -107,7 +107,8 @@
     "report.md": "75953b10afdb852eab8841705bff6ad4d1dba05076a026898fa35ccb60a26ab3",
     "report.html": "12280b56efc0f212d15537ebe9a002694407e1c3f4d17d6a92d3f2db02f74355",
     "report.pdf": "884d3b5fb35c2e336e072215e4cf05833ed7c140e51315b85ecaaee7cb4a4030",
-    "report_trace.json": "805296cc9612a46b08b45da608ee9e38c52f6dce5ba67329cebfac125a21cfd7",
-    "operator_check.md": "65f950f84fcfecc28513fdd2085af2a9358246a24313259e0c9245324c703864"
-  }
+    "report_trace.json": "3f147065a5686b1adb4b14fb5c7692766be7d45a0ee66a4fb8895e3780f7c1b3",
+    "operator_check.md": "312f3a475a4e0f077e830c97da739b121a358dda8c330abdac211f3e5933d741"
+  },
+  "checklist_update_note": "仅核查单表述及核查工具记录更新；报告与计算原件未改。保留历史复核记录，当前仍等待独立审核，不是重新批准。"
 }

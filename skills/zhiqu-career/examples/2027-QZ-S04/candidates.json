@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "paths": [
+    {
+      "id": "P1",
+      "name": "专升本备选",
+      "status": "pending",
+      "hard_conditions": [
+        {
+          "condition": "具体学历或招生条件、时间和支持预算待核",
+          "status": "unknown",
+          "evidence_refs": [
+            "E002"
+          ]
+        }
+      ]
+    }
+  ],
+  "job_types": [
+    {
+      "id": "J1",
+      "name": "设备装配与调试辅助",
+      "status": "pending",
+      "hard_conditions": [
+        {
+          "condition": "未取得岗位原文；学历、任务、地点、合同与收入要求待核",
+          "status": "unknown",
+          "evidence_refs": [
+            "E002"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "J2",
+      "name": "工艺或生产技术助理",
+      "status": "pending",
+      "hard_conditions": [
+        {
+          "condition": "未取得岗位原文；学历、任务、地点、合同与收入要求待核",
+          "status": "unknown",
+          "evidence_refs": [
+            "E002"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "J3",
+      "name": "设备维护学徒",
+      "status": "pending",
+      "hard_conditions": [
+        {
+          "condition": "未取得岗位原文；学历、任务、地点、合同与收入要求待核",
+          "status": "unknown",
+          "evidence_refs": [
+            "E002"
+          ]
+        }
+      ]
+    }
+  ],
+  "jobs": []
+}

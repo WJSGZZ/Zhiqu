@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "items": [
+    {
+      "id": "E001",
+      "claim": "个人优先级与尚待补齐的信息",
+      "value": null,
+      "unit": "",
+      "source": {
+        "organization": "本人画像与分析口径",
+        "url": "",
+        "locator": "个人优先级与尚待补齐的信息"
+      },
+      "published_on": null,
+      "retrieved_on": "2026-10-19",
+      "retrieval_method": "provided",
+      "verified_on": "2026-10-19",
+      "grade": "单人说法",
+      "scope": "只用于本人意愿；不得据此认证学校、岗位、收入或考试资格",
+      "review_due": "2026-11-18",
+      "candidate_ids": [],
+      "rule_ids": [],
+      "status": "verified",
+      "source_group": 1,
+      "excerpt": "先保住工作和现金流，再确认学位对目标岗位有用，再看时间安排和学校。",
+      "original_locator": "个人优先级与尚待补齐的信息",
+      "main_conclusion": true,
+      "publication_status": "context"
+    },
+    {
+      "id": "E002",
+      "claim": "管理类本科工作经验门槛",
+      "value": 3,
+      "unit": "年",
+      "source": {
+        "organization": "教育部硕士研究生招生管理规定",
+        "url": "https://www.moe.gov.cn/srcsite/A15/moe_778/s3261/202609/t20260923_1451734.html",
+        "locator": "第十六条第二款工作经验"
+      },
+      "published_on": "2026-09-24",
+      "retrieved_on": "2026-10-18",
+      "retrieval_method": "curl",
+      "verified_on": "2026-10-19",
+      "grade": "官方",
+      "scope": "2027工商管理、公共管理等第十六条列出的专业学位；不外推所有学术专业或非全日制",
+      "review_due": "2026-11-18",
+      "candidate_ids": [],
+      "rule_ids": [],
+      "status": "verified",
+      "source_group": 2,
+      "excerpt": "本科毕业后有3年以上工作经验；或获得国家承认的高职（专科）毕业学历或本科结业后，符合招生单位提出的相关学业要求，达到本科毕业同等学力并有5年以上工作经验；或获得硕士、博士研究生学历或学位后有2年以上工作经验。",
+      "original_locator": "第十六条第二款工作经验",
+      "main_conclusion": true,
+      "publication_status": "published"
+    },
+    {
+      "id": "E003",
+      "claim": "具体院校专业目录待核",
+      "value": null,
+      "unit": "",
+      "source": {
+        "organization": "具体院校专业目录待核",
+        "url": "https://yz.chsi.com.cn/",
+        "locator": "具体院校专业目录待核"
+      },
+      "published_on": null,
+      "retrieved_on": "2026-10-19",
+      "retrieval_method": "curl",
+      "verified_on": null,
+      "grade": "官方",
+      "scope": "目标院校具体专业",
+      "review_due": "2026-11-18",
+      "candidate_ids": [],
+      "rule_ids": [],
+      "status": "unretrieved",
+      "source_group": 3,
+      "excerpt": "",
+      "original_locator": "具体院校专业目录待核",
+      "main_conclusion": true,
+      "publication_status": "unretrieved",
+      "gap": "尚未选定学校和具体专业代码，不能由公共管理或非全日制标签推定资格。"
+    }
+  ],
+  "source_groups": [
+    {
+      "title": "本人画像与分析口径",
+      "url": "",
+      "metadata": "2026-10-19 登记；个人计划不是官方日期；预算估计不是收费报价"
+    },
+    {
+      "title": "教育部硕士研究生招生管理规定",
+      "url": "https://www.moe.gov.cn/srcsite/A15/moe_778/s3261/202609/t20260923_1451734.html",
+      "metadata": "发布：2026-09-24；本机原文复读：2026-10-19；原件curl；只限2027招生规则"
+    },
+    {
+      "title": "具体院校专业目录待核",
+      "url": "https://yz.chsi.com.cn/",
+      "metadata": "取文：2026-10-19；仅限本案，未取到项见备注"
+    }
+  ]
+}

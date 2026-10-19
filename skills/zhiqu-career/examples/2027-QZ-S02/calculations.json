@@ -1,0 +1,8 @@
+{
+  "monthly_cost": 2500,
+  "high_monthly_cost": 3000,
+  "spendable": 5000,
+  "buffer_months": 2.0,
+  "higher_rent_months": 1.7,
+  "all_cash_months": 3.6
+}

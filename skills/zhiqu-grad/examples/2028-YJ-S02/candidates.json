@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "paths": [
+    {
+      "id": "P1",
+      "name": "本校推荐后申请接收",
+      "status": "pending",
+      "hard_conditions": [
+        {
+          "condition": "当届推荐资格、同口径最终排名与接收考核都待核",
+          "status": "unknown",
+          "evidence_refs": [
+            "E002",
+            "E003",
+            "E007"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P2",
+      "name": "交通相关统考",
+      "status": "pending",
+      "hard_conditions": [
+        {
+          "condition": "当届本科资格、目录和个人成绩待核",
+          "status": "unknown",
+          "evidence_refs": [
+            "E008"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P3",
+      "name": "本科就业调查",
+      "status": "pending",
+      "hard_conditions": [
+        {
+          "condition": "岗位和本人工作偏好尚未核实",
+          "status": "unknown",
+          "evidence_refs": [
+            "E001"
+          ]
+        }
+      ]
+    }
+  ],
+  "school_programs": [
+    {
+      "id": "S1",
+      "name": "南通大学交通相关方向（具体项目待核）",
+      "status": "pending",
+      "hard_conditions": [
+        {
+          "condition": "当届学院、专业、代码、科目、费用与同科目成绩未取得",
+          "status": "unknown",
+          "evidence_refs": [
+            "E008"
+          ]
+        }
+      ],
+      "tier": "相对稳妥",
+      "tier_status": "conditional_investigation_only",
+      "tier_basis": "只为保留三种未来条件分支，当前无证据认定难度，报告不按此分档"
+    },
+    {
+      "id": "S2",
+      "name": "江苏大学交通相关方向（具体项目待核）",
+      "status": "pending",
+      "hard_conditions": [
+        {
+          "condition": "当届学院、专业、代码、科目、费用与同科目成绩未取得",
+          "status": "unknown",
+          "evidence_refs": [
+            "E009"
+          ]
+        }
+      ],
+      "tier": "够一够",
+      "tier_status": "conditional_investigation_only",
+      "tier_basis": "只为保留三种未来条件分支，当前无证据认定难度，报告不按此分档"
+    },
+    {
+      "id": "S3",
+      "name": "南京林业大学交通相关方向（具体项目待核）",
+      "status": "pending",
+      "hard_conditions": [
+        {
+          "condition": "当届学院、专业、代码、科目、费用与同科目成绩未取得",
+          "status": "unknown",
+          "evidence_refs": [
+            "E010"
+          ]
+        }
+      ],
+      "tier": "冒险",
+      "tier_status": "conditional_investigation_only",
+      "tier_basis": "只为保留三种未来条件分支，当前无证据认定难度，报告不按此分档"
+    }
+  ],
+  "report_blocks": {
+    "06_candidates_42": {
+      "type": "candidate_table",
+      "content": {
+        "columns": [
+          "调查对象",
+          "已知范围",
+          "必须补齐",
+          "当前处理"
+        ],
+        "rows": [
+          [
+            "南通大学交通相关方向（具体项目待核）",
+            "仅核官方入口或旧届文件",
+            "当届学院、专业、代码、科目、收费与成绩",
+            "待核；不分难度"
+          ],
+          [
+            "江苏大学交通相关方向（具体项目待核）",
+            "仅核官方入口或旧届文件",
+            "当届学院、专业、代码、科目、收费与成绩",
+            "待核；不分难度"
+          ],
+          [
+            "南京林业大学交通相关方向（具体项目待核）",
+            "仅核官方入口或旧届文件",
+            "当届学院、专业、代码、科目、收费与成绩",
+            "待核；不分难度"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E001",
+        "E008",
+        "E009",
+        "E010"
+      ]
+    }
+  }
+}

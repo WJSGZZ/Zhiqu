@@ -1,0 +1,183 @@
+{
+  "schema_version": 1,
+  "status": "awaiting_independent_review",
+  "status_label": "试跑自评通过、等待独立审核",
+  "independent": false,
+  "reviewer": null,
+  "date": null,
+  "rubric": {
+    "items": []
+  },
+  "pitfalls": [],
+  "sampled_sources": [],
+  "self_assessment": {
+    "reviewer": "本制作会话",
+    "date": "2026-10-19",
+    "status": "complete",
+    "rubric": {
+      "items": [
+        {
+          "id": "clarity",
+          "score": 2,
+          "reason": "摘要明确主线、备选、关键条件和个人复核点；未以未知资格代替否定。"
+        },
+        {
+          "id": "traceability",
+          "score": 1,
+          "reason": "已用规则附官方原句与适用届别；具体项目或职位、收费和部分细目尚未取到，保留缺口。"
+        },
+        {
+          "id": "reasoning",
+          "score": 2,
+          "reason": "逐候选写支持、反证、代价与改判条件，人物意愿和现实限制决定投入顺序。"
+        },
+        {
+          "id": "consistency",
+          "score": 2,
+          "reason": "所有预算与现金结果由登记输入复算；报告数字按证据、画像或计算引用，情景分开。"
+        },
+        {
+          "id": "timeliness",
+          "score": 2,
+          "reason": "取文及复核时间在登记范围内；旧年只作调查参照，未来日历未用旧届硬套。"
+        },
+        {
+          "id": "personalization",
+          "score": 2,
+          "reason": "排名口径、家庭与本人偏好、可用时间及资金确实改变建议，没有编权重。"
+        },
+        {
+          "id": "actionability",
+          "score": 1,
+          "reason": "下一步和日期明确，但部分候选仍只是调查对象，需原件后才可进入具体报名或申请。"
+        },
+        {
+          "id": "boundaries",
+          "score": 2,
+          "reason": "无个人上岸概率、保证结果或代报名；本次为制作会话自评，不是独立批准。"
+        },
+        {
+          "id": "summary_access",
+          "score": 2,
+          "reason": "摘要能看懂为什么保留或暂停路线、当前边界及下一步，不必先学术语。"
+        },
+        {
+          "id": "layout",
+          "score": 1,
+          "reason": "版面门禁通过且逐页看图；无挤压断图，少量表格自然跨页，保留待独立视觉复核。"
+        }
+      ],
+      "total": 17
+    },
+    "pitfalls": [
+      {
+        "item": "没查到写成不存在",
+        "result": "pass",
+        "note": "候选、规则与报告第6节均保留pending/待核；当届项目或岗位未取到不写没有机会。"
+      },
+      {
+        "item": "群体数字当个人概率",
+        "result": "pass",
+        "note": "读研第6节拒绝从旧年名额和分数推个人概率；求职第5、11节只说同职位同阶段竞争口径，不算个人录用率。"
+      },
+      {
+        "item": "经验帖数字做决定",
+        "result": "pass",
+        "note": "数字只用本人登记、官方原句及复算；教师提到的历史名额回学院原文核对，未采用经验帖。"
+      },
+      {
+        "item": "按编号引用问卷",
+        "result": "pass",
+        "note": "画像和核查来源均按问卷节名，不依赖问卷节次；报告节号仅定位当前报告。"
+      },
+      {
+        "item": "同一事实写两处",
+        "result": "pass",
+        "note": "profile.txt由人物库提取，报告数值经K/P/E/C引用；旧年名额、实际人数与当届承诺未混用。"
+      },
+      {
+        "item": "会过期的事实",
+        "result": "pass",
+        "note": "evidence/rules记录取文与复核期限；旧届规则明示年度，当届未知不套用旧日期。"
+      },
+      {
+        "item": "八字越界",
+        "result": "pass",
+        "note": "人物未提供出生信息，没有生成排盘或以传统视角排除路径。"
+      },
+      {
+        "item": "委派判断类任务",
+        "result": "pass",
+        "note": "画像、取证、判断、出稿与本次自评由同一制作会话完成，尚未另会话独立审核。"
+      },
+      {
+        "item": "取页摘要当原文",
+        "result": "pass",
+        "note": "官方规则从curl正文或正常浏览器可见原文摘录；自评抽读记录在同文件，未取到的没有记为核实通过。"
+      }
+    ],
+    "sampled_sources": [
+      {
+        "id": "E006",
+        "source_url": "https://zhaopin.sgcc.com.cn/sgcchr/static/unitPart.html?bullet_id=dcefb56d04714dc4b488d0a7a204bf76",
+        "matches": true,
+        "original_sha256": "33e64cfd7ffe06f79394f34d623d998cb45e95e02272334a316849d9247d159c",
+        "excerpt": "各批次招聘公告发布时间分别为：国调网调及北京电力交易中心提前批2026年10月17日、第一批2026年11月中旬、第二批2027年3月前、第三批2027年5月前（如受不可抗力影响，发布时间另行通知）。",
+        "method": "本次取到的官方原文/浏览器逐字取文回执复读；不是搜索摘要"
+      },
+      {
+        "id": "E008",
+        "source_url": "https://zhaopin.sgcc.com.cn/sgcchr/static/unitPart.html?bullet_id=dcefb56d04714dc4b488d0a7a204bf76",
+        "matches": true,
+        "original_sha256": "33e64cfd7ffe06f79394f34d623d998cb45e95e02272334a316849d9247d159c",
+        "excerpt": "各批次招聘单位范围由各单位根据招聘需求确定，以各单位招聘公告为准。",
+        "method": "本次取到的官方原文/浏览器逐字取文回执复读；不是搜索摘要"
+      },
+      {
+        "id": "E009",
+        "source_url": "https://zhaopin.sgcc.com.cn/sgcchr/static/unitPart.html?bullet_id=dcefb56d04714dc4b488d0a7a204bf76",
+        "matches": true,
+        "original_sha256": "33e64cfd7ffe06f79394f34d623d998cb45e95e02272334a316849d9247d159c",
+        "excerpt": "2.笔试范围详见各科目考试大纲。",
+        "method": "本次取到的官方原文/浏览器逐字取文回执复读；不是搜索摘要"
+      },
+      {
+        "id": "E004",
+        "source_url": "https://shanghai.chinatax.gov.cn/xxgk/rsxx/202610/t481763.html",
+        "matches": true,
+        "original_sha256": "2a4b1a9814325db3d7ac8b876075d4c4817abb850572883f35b8fbfb7afb87c0",
+        "excerpt": "公共科目笔试时间为： 2026年11月29日上午9:00—11:00 行政职业能力测验 2026年11月29日下午14:00—17:00 申论",
+        "method": "本次取到的官方原文/浏览器逐字取文回执复读；不是搜索摘要"
+      },
+      {
+        "id": "E005",
+        "source_url": "https://shanghai.chinatax.gov.cn/xxgk/rsxx/202610/t481763.html",
+        "matches": true,
+        "original_sha256": "2a4b1a9814325db3d7ac8b876075d4c4817abb850572883f35b8fbfb7afb87c0",
+        "excerpt": "注册认证的时间为2026年10月14日8:00至10月23日18:00，注册认证确有困难的，可以拨打010-12370咨询。",
+        "method": "本次取到的官方原文/浏览器逐字取文回执复读；不是搜索摘要"
+      }
+    ],
+    "limitations": [
+      "操控者尚未填写确认，未独立审核，不符合真实交付门槛。",
+      "具体项目或职位条件尚待核；候选和未来日历不是承诺。"
+    ]
+  },
+  "snapshot": {
+    "case.json": "78fb122d86bb0bad5718867fd12df1afd8434187063b060089914f5e02694468",
+    "profile_parse.json": "6ff283296a8b12377d946d95f943622d1ca1f4114c278e10679151e50809237d",
+    "directions.json": "5b2397e7ee4e80db6b8b1b6bf0834869aabbf282dcfecc6f23c4c706d476cc76",
+    "rules_check.json": "d887941488483a7992cfbe1fb174550f3fdb3083d8c597a1cdcc43f1eee9d198",
+    "candidates.json": "e2d7abe22fb7375e3190e21a8f801c264fbed4b7fdaab066193cc48a35ff98f1",
+    "evidence.json": "c728cb3d1ed7fa40510ac2dd56c113a5374c76b7f8b243a7bf435a2d4876ddc0",
+    "calculations.json": "8e8135c7483b79dbc2d7ed702e1d9add2628ccf852da45c3d957f1e3f05d98f5",
+    "judgment.json": "f26d3e35c9315c71694d0bc08ced1924309304526546300264a7df3bc4abd8cc",
+    "narrative.json": "c1773cc030c6aaf0e4aee03879ce1a1b9b2a76c6fd715fc39c3895423b13494b",
+    "profile.txt": "5123d6e41b12560a21cda170e98cc921a02e7123e6b5607fc381a95dbb009358",
+    "report.md": "93e1f1220d6d52545a5563750adcd165c18d35b92d809479e77317321cae6706",
+    "report.html": "11781c616fc207096084fdd9798e99dc297906db03267fb5957ac3964fd4f762",
+    "report.pdf": "d2186c08d61f8c6448f71037c8b40d15103aec891166ecf121010da5f0f5672b",
+    "report_trace.json": "368a3c955e0379b35580fd09d33d594bf41ae7fa6df1103ca7986d48172a2dcc",
+    "operator_check.md": "9483878524be480afe1d47aa50286de120e80281c11ca9335853e6a426c56e26"
+  }
+}

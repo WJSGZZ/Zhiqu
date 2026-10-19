@@ -1,0 +1,8 @@
+{
+  "known_living": 18000,
+  "higher_living": 22800,
+  "after_reserve": 28000,
+  "nonliving_ceiling": 14000,
+  "higher_living_ceiling": 9200,
+  "reserve_ceiling": 10000
+}
