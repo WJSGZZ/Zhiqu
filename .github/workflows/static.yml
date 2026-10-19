@@ -17,7 +17,7 @@ permissions:
 
 # 新的发布排在后面时，跳过中间已过时的那些，只发最新一版
 concurrency:
-  group: "pages"
+  group: "zhiqu-site"
   cancel-in-progress: true
 
 jobs:
