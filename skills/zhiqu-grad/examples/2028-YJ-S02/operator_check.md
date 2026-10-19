@@ -60,7 +60,7 @@
   定位：报告第 9、11 节；全年月份口径。
   核完填：核查人：___；核查日期：___；结果（确认/不符/仍未知）：___；原文依据与范围：___；对建议的处理：___。
 
-<!-- operator-item {"id": "PROFILE", "fingerprint": "6af2c26c507e18360793cac85b0cf7c3de39146034bd53480a1487fa96b6bcb0"} -->
+<!-- operator-item {"id": "PROFILE", "fingerprint": "8475332616651e7d7b00c29e424ce290e61bcd0aaf7c3b33979e3c38fb1281ce"} -->
 - [ ] PROFILE｜和客户确认画像｜本人登记与缺项
   核什么：
   - 年级 = 大三上 → 第 2 节画像与判断输入

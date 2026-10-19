@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compatibility entrypoint for the shared family checker."""
+"""Compatibility entrypoint for the shared family checker, including registered persona names."""
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'zhiqu-shared/scripts'))

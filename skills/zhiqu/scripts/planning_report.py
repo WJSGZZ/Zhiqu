@@ -41,6 +41,7 @@ def node_markdown(node, expand, numbers):
             lines.append('> - '+text)
         return '> [!warn] '+x.get('heading','接下来要做的事')+'\n'+'\n'.join(lines)
     if typ=='checkpoint':return t(x['text'])
+    if typ=='data_gap':return '缺口：'+t(x['missing'])+'；去哪里取：'+t(x['source'])+'；预计 '+t(x['expected_by'])+' 复核补齐，届时未取得仍保留待核。'
     if typ in ('data_table','candidate_table','profile_table','assumption_table','term_table','question_table','offer_table'):
         return table([t(v) for v in x['columns']],[[t(v) for v in r] for r in x['rows']])
     if typ in ('decision_questions','direction_cards'):

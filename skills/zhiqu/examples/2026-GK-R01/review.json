@@ -332,6 +332,7 @@
     "retro_ranks/50000/result.json": "0bb4b66cdc5018b05a50da758085b90705dca7ea0cab6dba884f7e37e7ab71a3",
     "retro_ranks/80000/result.json": "47b6b774b64a23d96d0a1a78500839421c26618682fbeddfef1a9dfde7312d05",
     "retro_ranks/33000/result.json": "94c3bc1c7b0b6da6469fb128ca24802c2d0fe1bdb6c3155d9645de15eede9b24",
-    "case.json": "f48447a58ac2d8a6d540a75cd8b7e42cb4ec544eb56d72b47191998e1094c0b7"
-  }
+    "case.json": "43c8bb642207a3b7fe3f6014e4d80d92491d1bb485f3477b70f65c35694838c5"
+  },
+  "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。"
 }

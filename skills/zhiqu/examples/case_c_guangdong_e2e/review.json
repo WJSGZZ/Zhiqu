@@ -81,9 +81,10 @@
     ]
   },
   "snapshot": {
-    "report.json": "dd50b0d924fbe80bd106990fc8548b4d05240a679c59379297e84221f61eada8",
-    "report.pdf": "e45483d15e014780f936e3da3a1c3f6d4707ceb18cb529c635f160fadba86c7c",
-    "operator_check.md": "618fa9461441c832c63388b411d8ecaccdd492097dba2b9c58f558e943e48519",
+    "report.json": "1243d4b12375b8a43d6108f905b183f5148db93c17057be49ab2c590067b35a1",
+    "report.pdf": "e79a651ee73b18ecc4624f4782e4f927a5ec13866c396b5de7b83dbfbf9056da",
+    "operator_check.md": "ccb070b7261ee86357d92aa1125f3ea1a6a0356501eed2b05e01175a7e38cde6",
     "result.json": "98e1ca504a93a3b25fcd72be5eff65f37aaa10399f4ba6549a56a18925710c6f"
-  }
+  },
+  "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。"
 }

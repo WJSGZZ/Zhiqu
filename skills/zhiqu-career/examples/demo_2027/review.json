@@ -106,9 +106,10 @@
     "profile.txt": "69dfeb57cf005a4ace3990e51a96b3b821e9de0c130dd1f8eae5b2088f5bef5e",
     "report.md": "77f566208464a0aae4ba61541e137a2803636efa1e1fbd7dad365992e34fe792",
     "report.html": "a0d53699b4d049e3b2c4bac87a7d83670cd9081832ac29efdd4e855ef9f0b53b",
-    "report.pdf": "de450c88b3ca48fff9d5074c58774f5c58ef88bda77a45fdcb6952b1d9227cb9",
-    "report_trace.json": "b88948fd19efa6dca13e791878629e68092356c36c8f1b526bf74ce264b0a15d",
+    "report.pdf": "7ebf5cfe03376a3a8e5bb9ee0cac3e1d1f6d03f01c3067b8b9b4c4d749a8f3ea",
+    "report_trace.json": "3abb52e22f0020f3005287120b4525359c545dbc34c999020e132baf361f4323",
     "operator_check.md": "23683bf5d5e842b4c525b3fe92e602a0ca7d863b845d554d9e8adc094d56d9d5"
   },
-  "checklist_update_note": "仅核查单表述及核查工具记录更新；报告与计算原件未改。保留历史复核记录，当前仍等待独立审核，不是重新批准。"
+  "checklist_update_note": "仅核查单表述及核查工具记录更新；报告与计算原件未改。保留历史复核记录，当前仍等待独立审核，不是重新批准。",
+  "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。"
 }

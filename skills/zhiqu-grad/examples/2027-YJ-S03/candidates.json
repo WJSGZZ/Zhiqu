@@ -58,9 +58,7 @@
             "E003"
           ]
         }
-      ],
-      "tier": "相对稳妥",
-      "tier_status": "conditional_investigation_only"
+      ]
     },
     {
       "id": "S2",
@@ -74,9 +72,7 @@
             "E003"
           ]
         }
-      ],
-      "tier": "够一够",
-      "tier_status": "conditional_investigation_only"
+      ]
     },
     {
       "id": "S3",
@@ -90,9 +86,14 @@
             "E003"
           ]
         }
-      ],
-      "tier": "冒险",
-      "tier_status": "conditional_investigation_only"
+      ]
     }
-  ]
+  ],
+  "personal_difficulty": {
+    "mock_exam": null,
+    "checkpoint": {
+      "date": "{{k:/context/personal_dates/checkpoint}}",
+      "action": "取得目标同科目完整模考（总分、单科及完成情况），在此个人检查点定档；届时无有效证据就继续不定档。"
+    }
+  }
 }

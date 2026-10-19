@@ -98,17 +98,18 @@
     "profile_parse.json": "a5a7b96085411943644dcaae76616a0affb32a79a07fd3020505d28d88c8b1a8",
     "directions.json": "2b68a53951ab4a8de52d7edcbabdf32d24e4570392cd70ac212c62342430a3b2",
     "rules_check.json": "7b0a58159b98a98e96a17d877674c57bf2d59988aefd37a2f57d94f82580f5c2",
-    "candidates.json": "9155f2bd7dd201c895739c706eebdca2d3363f6e5ba0d1e2ed5130a2b482c2f5",
+    "candidates.json": "c9c5db84e727dde6ec750e534d023b4e15e7dd85e5bd1bc77110b14166f9d8ad",
     "evidence.json": "51ed06bd23e71530e9c0bf1e43fba3f2a74af69d27bbd91e12fbfee320924cbe",
     "calculations.json": "cec5b3577a8d62196c2dfd606cfab91b31c421feb52a97cbdd3a5cfafcd5daf7",
-    "judgment.json": "b6828bbfb01711fdc11e3ad92d393a014548621fd54774933f83476921906343",
-    "narrative.json": "5e556acc3f0e842702dc02dd624762207adc20c3d2867670f37e553dc766964f",
+    "judgment.json": "ffae2d16952ca87f41b2deb3a2bce409a0713503f4c334d8f38ab10a116bf84e",
+    "narrative.json": "25e3ff88fd2d4313731ad5429e11bfd2b4063d11fbe5779087ea7db0c3f99efa",
     "profile.txt": "2be92b9770f7a4a877386334b958c096198b948c89c5eabca030d4f557e29457",
-    "report.md": "75953b10afdb852eab8841705bff6ad4d1dba05076a026898fa35ccb60a26ab3",
-    "report.html": "12280b56efc0f212d15537ebe9a002694407e1c3f4d17d6a92d3f2db02f74355",
-    "report.pdf": "884d3b5fb35c2e336e072215e4cf05833ed7c140e51315b85ecaaee7cb4a4030",
-    "report_trace.json": "3f147065a5686b1adb4b14fb5c7692766be7d45a0ee66a4fb8895e3780f7c1b3",
+    "report.md": "10dbee42ff513d6cd8b0cd4b9742fa792d68860a95a9d816e8c221b15f5f6195",
+    "report.html": "cbb433e3ecf3e3179f17e9bd32388cf89355ffcf01703705d7851326da63ba55",
+    "report.pdf": "8acbe3ecef85b1377394a1139a50795a32b5639d28817bf333ab4a0e2a24be56",
+    "report_trace.json": "d5d62adfe7e16c863c027d31767b41e110c0353466741c5dd689da3cbbf76dce",
     "operator_check.md": "312f3a475a4e0f077e830c97da739b121a358dda8c330abdac211f3e5933d741"
   },
-  "checklist_update_note": "仅核查单表述及核查工具记录更新；报告与计算原件未改。保留历史复核记录，当前仍等待独立审核，不是重新批准。"
+  "checklist_update_note": "仅核查单表述及核查工具记录更新；报告与计算原件未改。保留历史复核记录，当前仍等待独立审核，不是重新批准。",
+  "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。"
 }

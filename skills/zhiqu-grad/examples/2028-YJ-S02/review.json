@@ -164,20 +164,21 @@
     ]
   },
   "snapshot": {
-    "case.json": "5b8f6e2ea40a33cf6351a54cf6c7c46709f8e2f82bedee5a491557339802d8ba",
-    "profile_parse.json": "388a002a27ffc131a4195fc83cfca2df488fb23c3f865be7f99527e335138988",
+    "case.json": "8603ad6afcab1aaa8bc26ec042fad14882ea4431f1387198ac21a526da4b0822",
+    "profile_parse.json": "ba3a2d29770f06f71b171f19730753ec8cc05f08285be1656a51968a014a3526",
     "directions.json": "e11eb75bac9a1378195f15ef805daf0ffe3d0a4c2306d317d6d9944265b8008b",
     "rules_check.json": "248a80156349f8bee1d5de049d1153408fc4548108e5895abb5bba17d5c7cb03",
-    "candidates.json": "0e2da2cd58561fdc995e0922eb447d25ff628ebd044ba6041a4df8239983a3a7",
-    "evidence.json": "40af4923f2d333b7c1514b29e0caee9ca87c80db3fb96f9886b9f28a47ce7a11",
+    "candidates.json": "1f9f3703275d1799b96d638988fd5c11a27d5f2c4ef9209db44868be66817183",
+    "evidence.json": "a5f3a6fd7928b3f9c8507d7919f59e6a0fd3c6e2f7df4fdedb63638e5e8c44f4",
     "calculations.json": "00e5087c418c579371b17558494a9c4c1f865b0b051ef63fc1a3c9a51a89cd87",
     "judgment.json": "38eed4d2e7e0e329c1beb9d7b029069ef4907552ad2ae15cf9019bd5bc4f9add",
-    "narrative.json": "be5253f5ca62da90af5f467513f2daffa17a5cd4a0b604fad885ebf13affe860",
-    "profile.txt": "3698684319247650b930f923cf0c323c2905df69bdf3db1aee7e686c7745b64d",
-    "report.md": "573ddd334ec428150d504799cf574545bd720ca7cba5b1c3ac12273617ec1354",
-    "report.html": "f80ab2bfec761c6241c7b8cd178ff92717ef28252a793bf79850362af47eb19d",
-    "report.pdf": "77474ec02a2e5818f4948b74bee428373f07bb5cf9b14abe0c88393bdcf37aa5",
-    "report_trace.json": "64700eade2560326b6c08e9c365c296fb02aaed49e25ec70d52cdd71a9e5c654",
-    "operator_check.md": "4b31ec231285130b2440def4e379f4dc0881d13975a3afb43924e9968cc3b5c5"
-  }
+    "narrative.json": "cdaf672fa9a3877e1e9b218b516cf5eee06ef7887fddb6a4d1367480e15222a4",
+    "profile.txt": "42b5ea0bf1077f942533d2d14ec5b48d04f8b7085f7a8452d3d9d33f34b1d8f4",
+    "report.md": "5a822a3b5cceeb541ade0af4c833e696abd8ec4cffb3fcfd5fa3e72db9e115c6",
+    "report.html": "3586b80f1c74f9289f5f0c4ecb2a64cbe96dc955d1615179299d9d6b04f0572e",
+    "report.pdf": "a72e80c84bc59889d6a0e4dd44cd38ccfab2e6ede6465b4c2973a2b1fafa4585",
+    "report_trace.json": "802fe6dbd6dba25782e7d621ef58c9d825c5343da232569f8cff4ae61d1432f3",
+    "operator_check.md": "9e7daaa95ef3172f536d89bc5facfde196fa62f3ed2d06a4cb02cca193105c69"
+  },
+  "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。"
 }

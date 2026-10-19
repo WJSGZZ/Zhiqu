@@ -49,7 +49,8 @@ class PersonaTests(unittest.TestCase):
 
     def test_condition_tiers_are_not_presented_as_school_difficulty(self):
         c=PlanningCase(SKILLS/'zhiqu-grad/examples/2028-YJ-S02')
-        self.assertTrue(all(x['tier_status']=='conditional_investigation_only' for x in c.data['candidates.json']['school_programs']))
+        self.assertTrue(all('tier' not in x for x in c.data['candidates.json']['school_programs']))
+        self.assertIsNone(c.data['candidates.json']['personal_difficulty']['mock_exam'])
         md=(c.root/'report.md').read_text()
         self.assertIn('当前不对学校分难度',md)
         self.assertNotIn('个人上岸率',md)
