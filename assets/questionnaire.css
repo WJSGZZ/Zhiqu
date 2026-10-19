@@ -161,13 +161,9 @@ textarea{resize:vertical;min-height:84px;}
 .landing .choices{margin:clamp(24px,4.5vh,44px) 0 0;}
 .landing .vow{text-align:center;margin-top:clamp(16px,3.5vh,32px);border-top:0;padding-top:0;}
 @media (max-width:860px){.choices{grid-template-columns:1fr;}.landing .choices{gap:12px;margin-top:28px;}}
-@media (max-width:860px){
-  .landing .choice{display:grid;grid-template-columns:1fr auto;align-items:center;padding:16px 20px;}
-  .landing .choice .c-eyebrow,.landing .choice p:not(.c-eyebrow){display:none;}
-  .landing .choice h2{font-size:21px;margin:0;}
-}
 @media (max-width:560px){
-  .landing-wrap{padding:28px 16px;}
+  .landing-wrap{padding:40px 16px 32px;}
+  .landing .choice{padding:22px 20px 20px;}
   .landing .hero-logo{width:64px;height:64px;margin-bottom:10px;}
   .landing .brand-title{font-size:40px;letter-spacing:8px;padding-left:8px;}
   .landing .vow{font-size:12px;margin-top:22px;}
