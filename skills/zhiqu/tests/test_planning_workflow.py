@@ -359,7 +359,7 @@ class PlanningWorkflowTests(unittest.TestCase):
     def test_self_assessment_passes_without_claiming_delivery_approval(self):
         from planning_workflow import RUBRIC,review_errors
         root=self.roots['grad'];generate(root,html_only=True,profile_version="profile.txt")
-        files=(*FILES,'profile.txt','report.md','report.html','2027-YJ-S01-report.pdf','report_trace.json','operator_check.md')
+        files=(*FILES,'profile.txt','report.md','report.html','2027-YJ-S01-report.pdf','report_trace.json','operator_check.md','claim_check.json')
         review={'status':'awaiting_independent_review','independent':False,
                 'self_assessment':{'rubric':{'items':[{'id':key,'score':1 if key=='traceability' else 2,'reason':'测试用自评理由'} for key in RUBRIC]}},
                 'snapshot':{f:sha(root/f) for f in files}}

@@ -350,7 +350,8 @@ class AppendixReadability(unittest.TestCase):
         html_ = report.verification_appendix_html({'numbers': rows, 'gaps': []})
         self.assertNotIn('正文显示 500', html_)
         self.assertNotIn('正文显示', html_)
-        self.assertIn('<td>0.6</td>', html_)
+        self.assertIn('<td>60%</td>', html_)
+        self.assertNotIn('<td>0.6</td>', html_)
 
 
 class ReaderFacingReportCorrections(unittest.TestCase):
@@ -373,11 +374,27 @@ class ReaderFacingReportCorrections(unittest.TestCase):
         html_ = report.verification_appendix_html({'numbers': [
             {'path': '/years', 'result': 3, 'formula': '36 ÷ 12', 'label': '学制'},
             {'calculation_path': '/years', 'value': '3.0（正文另写作3）', 'label': '学制'}]})
-        self.assertIn('<td>3</td>', html_)
+        self.assertIn('<td>3.0</td>', html_)
         self.assertNotIn('正文显示', html_)
         self.assertNotIn('正文另写作', html_)
         self.assertNotIn('calculations.json', html_)
         self.assertIn('PDF 附带的计算明细', html_)
+
+    def test_negative_budget_gap_keeps_sign_despite_absolute_body_format(self):
+        rendered=report.verification_appendix_html({'numbers':[
+            {'path':'/gap','result':-1600,'formula':'30000 - 31600','label':'预算余量'},
+            {'calculation_path':'/gap','value':'1,600','label':'缺口大小'}]})
+        self.assertIn('<td>-1600</td>',rendered)
+        self.assertNotIn('<td>1,600</td>',rendered)
+
+    def test_rounded_quartile_uses_single_registered_display(self):
+        from verify_report import calculation_display_values
+        rows=[{'path':'/q1','result':347.75,'value':347.75,'formula':'linear interpolation'},
+              {'calculation_path':'/q1','value':'347.8'}]
+        self.assertEqual(calculation_display_values(rows)['/q1'],'347.8')
+        rendered=report.verification_appendix_html({'numbers':rows})
+        self.assertEqual(rendered.count('<td>347.8</td>'),1)
+        self.assertNotIn('<td>347.75</td>',rendered)
 
     def test_case_information_uses_reader_facing_version_label(self):
         import verify_report

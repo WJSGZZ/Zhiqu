@@ -212,6 +212,30 @@ def date_usage(case):
     return names
 
 
+def calculation_display_values(numbers):
+    """One readable display per calculation; exact results remain in attachments.
+
+    This only selects registered display variants. It does not alter arithmetic.
+    Preserve a negative budget balance even when prose describes its absolute gap.
+    """
+    values={}
+    def rank(value):
+        text=str(value)
+        return (any(sign in text for sign in ('%','％')),len(text))
+    for row in numbers:
+        path=row.get('calculation_path')
+        if path:
+            value=row.get('value')
+            if isinstance(value,str):value=re.sub(r'（正文(?:另写作|显示)[^（）]*）','',value)
+            previous=values.get(path)
+            if previous is None or rank(value)>rank(previous):values[path]=value
+    for row in numbers:
+        if row.get('path') and row.get('formula') is not None:
+            raw=row.get('result',row.get('value'))
+            if row['path'] not in values or type(raw) in (int,float) and raw<0:values[row['path']]=raw
+    return values
+
+
 def planning_materials(case,trace,binding,warning=None):
     """Only explicit references determine provenance; never match by equal values."""
     from planning_workflow import REF
@@ -538,9 +562,11 @@ def verify(pdf,extract=None):
             if Counter(expected)-counts:errors.append('正文数字与生成输入不一致：第'+sid+'节')
         evidence=json.loads(files['evidence.json']);calculations=json.loads(files['calculations.json'])
         lookup={e['id']:e for e in evidence.get('items',[])}
+        displays=calculation_display_values(manifest['materials']['numbers'])
         for row in manifest['materials']['numbers']:
+            shown=displays.get(row.get('calculation_path') or row.get('path'),row['value'])
             # 千分位只是写法：25,200 与 25200 视为同一个数（核对表只印一次）
-            if norm(visible(row['value'])).replace(',','') not in appendix.replace(',',''):errors.append('核对表缺数字：'+str(row['label']))
+            if norm(visible(shown)).replace(',','') not in appendix.replace(',',''):errors.append('核对表缺数字：'+str(row['label']))
             if row.get('provenance_status')=='legacy_unmapped':
                 rep=json.loads(files['report.json']);raw=ptr(rep,row['report_pointer'])
                 tokens=NUMBER.findall(str(raw))

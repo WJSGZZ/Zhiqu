@@ -282,7 +282,7 @@ def experiment(output, variants=10, seed=20261020, resume=False):
         for row in rows:
             for key in ('variant', 'seed'):
                 row[key] = int(row[key])
-            for key in ('semantic_intercepted', 'snapshot_intercepted', 'generation_intercepted',
+            for key in ('semantic_intercepted', 'claim_coverage_intercepted', 'snapshot_intercepted', 'generation_intercepted',
                         'content_or_integrity_intercepted', 'end_to_end_original_snapshot_intercepted',
                         'escaped_publication_checks'):
                 row[key] = row[key] == 'True'
@@ -309,8 +309,11 @@ def experiment(output, variants=10, seed=20261020, resume=False):
                 semantic = [str(n)+': '+e for n in range(9) for e in stages.get(str(n), [])]
                 # Newly introduced unreviewed claims are a coverage gate. Generic
                 # stale artifact hashes remain separately counted as before (v3).
+                source_semantic_intercepted=bool(semantic)
+                coverage=[]
                 if category=='unsupported_qualitative':
-                    semantic += ['9: '+e for e in stages.get('9',[]) if '句子/组件/引用摘录清单不完整' in e]
+                    coverage=['9: '+e for e in stages.get('9',[]) if '句子/组件/引用摘录清单不完整' in e]
+                    semantic += coverage
                 snapshot = [str(n)+': '+e for n in (9, 10) for e in stages.get(str(n), [])]
                 generation_errors = []
                 unit_pdf_confirmed = False
@@ -349,7 +352,7 @@ def experiment(output, variants=10, seed=20261020, resume=False):
                        'generation_status': 'not_applicable_post_generation_tamper' if pdf_only else 'executed',
                        'workflow_status': 'not_applicable_gaokao' if kind == 'gaokao' else 'executed_0_to_10',
                        'workflow_stages': json.dumps(stages, ensure_ascii=False),
-                       'semantic_intercepted': bool(semantic), 'snapshot_intercepted': bool(snapshot),
+                       'semantic_intercepted': source_semantic_intercepted, 'claim_coverage_intercepted': bool(coverage), 'snapshot_intercepted': bool(snapshot),
                        'generation_intercepted': bool(generation_errors),
                        'generation_errors': json.dumps(generation_errors, ensure_ascii=False),
                        'downstream_status': downstream, 'layout_errors': json.dumps(layout, ensure_ascii=False),
@@ -407,7 +410,7 @@ def summarize(output, rows, variants, seed):
             lines.append('- '+CATEGORIES[category]+'：'+str(len(missed))+' 个；示例 '+r['base']+' / '+str(r['variant'])+'，字段 '+detail['field']+'，注入后 '+json.dumps(after, ensure_ascii=False))
     lines += ['', '## 局限及建议', '',
               '这是一批有意构造的有限变体，不能外推为真实使用错误率，也不是十个独立来源场景的随机抽样。相同规则的文字改写存在相关性，不给伪精确的总体置信区间。三份底本均为模拟用户，不涉及真实名单。', '',
-              '本实验不在线访问来源，因此官方域名、取文真实性、摘录与主张是否语义相符均不能被离线完整性证明。单位字段与数值/显示单位的关联、review_due 是否早于报告 as_of、第三方内容冒充官方和中文自然语言的个人概率表述，须按实际漏网结果补充检查。建议增加官方来源身份白名单与原文取文凭据、结构化量纲、逐条有效期核对、主张及概率边界的人工复核。这里只记录建议，未改既有门禁。', '',
+              '本实验不在线访问来源，因此官方域名、取文真实性、摘录与主张是否语义相符均不能被离线完整性证明。单位字段与数值/显示单位的关联、review_due 是否早于报告 as_of、第三方内容冒充官方和中文自然语言的个人概率表述，须按实际漏网结果补充检查。本分支已加入官方身份清单、指纹格式、结构化单位族、逐条有效期及概率边界检查；网址和指纹本身不证明取文或语义支持。新增定性句由逐句清单覆盖门禁拦截，脚本不自动判语义，支持程度仍须独立会话填写。', '',
               'PDF 完整性实验只测试正文/附件单边改动；没有测试同时重做正文、所有附件和哈希的协同伪造。原工具未作数字签名，不能据此证明作者身份或官方事实。', '',
               '临时案例、变体 PDF 与渲染缓存随每个试验删除；留存结果 CSV、基线和统计 JSON。脚本不启动后台任务，渲染器负责终止其 Chrome 子进程。']
     (output/'README.md').write_text('\n'.join(lines)+'\n')

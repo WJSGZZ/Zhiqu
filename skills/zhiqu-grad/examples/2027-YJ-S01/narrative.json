@@ -1094,7 +1094,7 @@
           "type": "analysis",
           "content": {
             "kind": "paragraph",
-            "text": "华工费用按现有收费公示估算，广工费用按旧届收费表参照，两者分开记录；实际入学费用仍须核对。广工匿名频数共 {{c:/gdut_2026_first_choice_retest_scores/n}} 人观测，按排序位置线性插值计算四分位（含端点的线性插值）；{{c:/report_parameters/additional_scenarios__gdut_2026_first_choice_retest_scores__full_time_rows}} 名全日制复试者减 {{c:/report_parameters/additional_scenarios__gdut_2026_first_choice_retest_scores__excluded_soldier_rows}} 名专项等于 {{c:/gdut_2026_first_choice_retest_scores/n}}，不能把非全日制或专项拼入。统计可从匿名频数重新计算；最低 {{c:/gdut_2026_first_choice_retest_scores/min}} 分只属于这份复试公示，不自动等于下一年的学院线。广工年费用测试为 {{e:E1030#/value|comma}} + {{c:/report_parameters/budget__annual_housing|comma}} + {{k:/budget/monthly_living_assumption|comma}} × {{c:/report_constants/months_per_year}}，住宿是比较假设，学费是旧年事实；两者的证据等级不同。[1][14][16]"
+            "text": "华工费用依据已核的 {{k:/target_year}} 收费，广工费用只作旧年参照，两者分开记录。广工匿名频数共 {{c:/gdut_2026_first_choice_retest_scores/n}} 人观测，按排序位置线性插值计算四分位（含端点的线性插值）；{{c:/report_parameters/additional_scenarios__gdut_2026_first_choice_retest_scores__full_time_rows}} 名全日制复试者减 {{c:/report_parameters/additional_scenarios__gdut_2026_first_choice_retest_scores__excluded_soldier_rows}} 名专项等于 {{c:/gdut_2026_first_choice_retest_scores/n}}，不能把非全日制或专项拼入。统计可从匿名频数重新计算；最低 {{c:/gdut_2026_first_choice_retest_scores/min}} 分只属于这份复试公示，不自动等于下一年的学院线。广工年费用测试为 {{e:E1030#/value|comma}} + {{c:/report_parameters/budget__annual_housing|comma}} + {{k:/budget/monthly_living_assumption|comma}} × {{c:/report_constants/months_per_year}}，住宿是比较假设，学费是旧年事实；两者的证据等级不同。[1][14][16]"
           },
           "evidence_refs": [
             "E0016",

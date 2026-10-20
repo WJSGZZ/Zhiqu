@@ -350,8 +350,10 @@ def verification_appendix_html(materials):
     registry=[r for r in numbers if not r.get('evidence_id') and str(r.get('institution','')).startswith(registered)]
     model=[r for r in numbers if not r.get('evidence_id') and '：' in str(r.get('label','')) and str(r.get('institution','')).startswith('录取线模型')]
     calc_refs={r['calculation_path']:r for r in numbers if r.get('calculation_path')}
+    from verify_report import calculation_display_values
+    calc_displays=calculation_display_values(numbers)
     formulas=[r for r in numbers if r.get('path') and r.get('formula') is not None]
-    used=set(map(id,evidence+registry+model+formulas))|{id(r) for r in calc_refs.values()}
+    used=set(map(id,evidence+registry+model+formulas))|{id(r) for r in numbers if r.get('calculation_path')}
     rest=[r for r in numbers if id(r) not in used]
 
     body = (f'<div class="verification-appendix"><h3>{VERIFY_MARK}</h3><p>本 PDF 附带数据文件，可用 PDF 阅读器的附件面板取出。'
@@ -405,12 +407,12 @@ def verification_appendix_html(materials):
             if ref is not None:seen.add(r['path'])
             nums={k:v for k,v in (r.get('inputs') or {}).items() if isinstance(v,(int,float)) and not isinstance(v,bool)} if isinstance(r.get('inputs'),dict) else {}
             inputs=('；输入 '+'，'.join(f'{E(str(k))}={val(v)}' for k,v in nums.items())) if nums else ''
-            result=val(r.get('result', r.get('value')))
-            # 计算明细只印登记结果，避免把正文的格式变体再次嵌套到结果中。
+            result=val(calc_displays[r['path']])
+            # 仅印一种已登记显示值（如10.4%），原始0.104仍在计算附件中。
             body += f'<tr><td>{val(r.get("label",r["path"]))}</td><td>{result}</td><td>{val(r.get("formula"))}{inputs}</td><td class="audit-sec">{secs(r.get("sections"))}</td></tr>'
         for path,ref in calc_refs.items():
             if path in seen:continue
-            body += f'<tr><td>{val(ref.get("label") or "参数登记项")}</td><td>{val(ref.get("value"))}</td><td>参数登记，见 PDF 附带的计算明细</td><td class="audit-sec">{secs(ref.get("sections"))}</td></tr>'
+            body += f'<tr><td>{val(ref.get("label") or "参数登记项")}</td><td>{val(calc_displays[path])}</td><td>参数登记，见 PDF 附带的计算明细</td><td class="audit-sec">{secs(ref.get("sections"))}</td></tr>'
         body += '</tbody></table>'
 
     if model:
