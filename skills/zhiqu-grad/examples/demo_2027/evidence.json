@@ -961,7 +961,7 @@
     },
     {
       "id": "E1015",
-      "claim": "gdut-directory-retry：808",
+      "claim": "广工电气初试专业课代码",
       "value": 808,
       "unit": "",
       "source": {
@@ -989,7 +989,7 @@
     },
     {
       "id": "E1016",
-      "claim": "gdut-retest：085801",
+      "claim": "广工复试科目适用的专业代码",
       "value": "085801",
       "unit": "",
       "source": {
@@ -1017,7 +1017,7 @@
     },
     {
       "id": "E1017",
-      "claim": "gdut-fees-2026-pdf：085801",
+      "claim": "广工收费表中的电气专业代码",
       "value": "085801",
       "unit": "",
       "source": {
@@ -1213,7 +1213,7 @@
     },
     {
       "id": "E1024",
-      "claim": "gdut-retest：50%",
+      "claim": "广工复试成绩占招生考试总成绩的权重",
       "value": "50%",
       "unit": "",
       "source": {
@@ -1269,7 +1269,7 @@
     },
     {
       "id": "E1026",
-      "claim": "gdut-retest：20",
+      "claim": "广工复试外语能力测试满分",
       "value": 20,
       "unit": "",
       "source": {
@@ -1297,7 +1297,7 @@
     },
     {
       "id": "E1027",
-      "claim": "gdut-retest：40",
+      "claim": "广工复试专业知识考核满分",
       "value": 40,
       "unit": "",
       "source": {
@@ -1325,7 +1325,7 @@
     },
     {
       "id": "E1028",
-      "claim": "scut-housing-fees：600",
+      "claim": "华工研三普通学生宿舍住宿费（元/学年）",
       "value": 600,
       "unit": "",
       "source": {

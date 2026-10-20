@@ -332,8 +332,10 @@ def verification_appendix_html(materials):
     每个数字的原值都留在可提取的文字里，供 verify_report.py 与其他读者逐项核对。
     """
     def val(value):
-        if isinstance(value, (dict, list, tuple)):
-            value = json.dumps(value, ensure_ascii=False)
+        if isinstance(value, dict):  # 不印 JSON：只列取值
+            value = '；'.join(str(v) for v in value.values() if v not in (None, ''))
+        elif isinstance(value, (list, tuple)):
+            value = '；'.join(map(str, value))
         if isinstance(value,float):value=format(value,'.10g')
         return E(str(value if value is not None else '未登记'))
     def secs(text):
@@ -382,6 +384,16 @@ def verification_appendix_html(materials):
                 body += '</div>'
             body += '</div>'
 
+    qualitative=materials.get('qualitative', [])
+    if qualitative:
+        body += '<h4>非数字依据</h4><p>正文判断用到、但不以数字出现的官方原文。每条依次是：说法、原文摘录、出处与链接、所在节。</p>'
+        for r in qualitative:
+            body += (f'<div class="audit-item"><p><b>{val(r.get("label"))}</b>（{secs(r.get("sections"))}）</p>'
+                     f'<p class="audit-excerpt">原文：{E(str(r.get("excerpt","")))}</p>'
+                     + (f'<p>适用范围：{val(process_words(r["scope"]))}</p>' if r.get('scope') else '')
+                     + f'<p>出处：{val(r.get("institution") or "出处")}</p>'
+                     + (f'<p class="audit-url">{val(r["url"])}</p>' if r.get('url') else '') + '</div>')
+
     if formulas or calc_refs:
         body += '<h4>计算项</h4><p>按登记输入复算；长文字依据和原始数值在附件 calculations.json 里。</p><table class="audit-grid"><thead><tr><th>项目</th><th>结果</th><th>算法</th><th>所在节</th></tr></thead><tbody>'
         seen=set()
@@ -391,11 +403,13 @@ def verification_appendix_html(materials):
             nums={k:v for k,v in (r.get('inputs') or {}).items() if isinstance(v,(int,float)) and not isinstance(v,bool)} if isinstance(r.get('inputs'),dict) else {}
             inputs=('；输入 '+'，'.join(f'{E(str(k))}={val(v)}' for k,v in nums.items())) if nums else ''
             result=val(r.get('result', r.get('value')))
+            # 只有正文写法与结果不同（0.6 与 60%）才注明正文显示
+            shown=[x for x in shown if str(x).replace(',','')!=str(r.get('result', r.get('value'))).replace(',','')]
             display=('（正文显示 '+'、'.join(val(x) for x in shown)+'）') if shown else ''
             body += f'<tr><td>{val(r.get("label",r["path"]))}</td><td>{result}{display}</td><td>{val(r.get("formula"))}{inputs}</td><td class="audit-sec">{secs(r.get("sections"))}</td></tr>'
         for path,ref in calc_refs.items():
             if path in seen:continue
-            body += f'<tr><td>{val(path)}</td><td>{val(ref.get("value"))}</td><td>参数登记，见附件 calculations.json</td><td class="audit-sec">{secs(ref.get("sections"))}</td></tr>'
+            body += f'<tr><td>{val(ref.get("label") or "参数登记项")}</td><td>{val(ref.get("value"))}</td><td>参数登记，见附件 calculations.json</td><td class="audit-sec">{secs(ref.get("sections"))}</td></tr>'
         body += '</tbody></table>'
 
     if model:
@@ -427,7 +441,7 @@ def verification_appendix_html(materials):
 
     limits=[];seen_limits=set()
     for row in materials.get('limitations', []):
-        key=(str(row.get('claim')),str(row.get('reason')),str(row.get('change_if')),str(row.get('url')))
+        key=(str(row.get('kind')),str(row.get('name')),str(row.get('pairs')),str(row.get('claim')),str(row.get('reason')),str(row.get('change_if')),str(row.get('url')))
         if key in seen_limits:continue
         seen_limits.add(key);limits.append(row)
     def plain(value):
@@ -439,12 +453,33 @@ def verification_appendix_html(materials):
                 if isinstance(items,list):return '；'.join(map(str,items))
             except ValueError:pass
         return text
+    shared=materials.get('shared_conditions', [])
+    typed=[r for r in limits if r.get('kind')]
+    limits=[r for r in limits if not r.get('kind')]
+    if typed or shared:
+        body += '<h4>反证与限制</h4>'
+        if shared:
+            body += '<div class="audit-item"><p><b>所有候选共同的前提</b>（任何一条不成立，下列判断都要重看）：</p><ul class="audit-list">' + ''.join('<li>' + val(c) + '</li>' for c in shared) + '</ul></div>'
+        for r in typed:
+            if r['kind'] == 'candidate':
+                body += (f'<div class="audit-item"><p><b>{val(r.get("name"))}</b></p>'
+                         + (f'<p>不利的一面：{val(r.get("claim"))}</p>' if r.get('claim') else '')
+                         + (f'<p>支持的一面：{val(r.get("reason"))}</p>' if r.get('reason') else '')
+                         + (f'<p>出现以下情况要改判：{val(r.get("change_if"))}</p>' if r.get('change_if') else ''))
+            else:
+                pairs=[(k, v) for k, v in r.get('pairs', []) if v]
+                head, rest = (pairs[0], pairs[1:]) if pairs else (('', ''), [])
+                body += (f'<div class="audit-item"><p><b>第 {secs(r.get("section"))} 节 · {val(head[0]) + "：" if head[0] else ""}{val(head[1])}</b></p>'
+                         + ''.join(f'<p>{val(k)}：{val(v)}</p>' for k, v in rest))
+            if r.get('url'):
+                body += ''.join(f'<p class="audit-url">{val(u)}</p>' for u in str(r['url']).split('；') if u)
+            body += '</div>'
     if limits:
         # 适用条件和改判条件相同的限制合成一条：条件只印一次，下面列出各项。
         grouped={}
         for row in limits:
             grouped.setdefault((str(row.get('reason') or ''),plain(row.get('change_if') or '')),[]).append(row)
-        body += '<h4>反证与限制</h4>'
+        if not (typed or shared):body += '<h4>反证与限制</h4>'
         for (reason,change),rows in grouped.items():
             if len(rows)==1:
                 body += '<div class="audit-item"><p><b>限制：</b>' + val(rows[0].get('claim')) + '</p>'
@@ -459,7 +494,32 @@ def verification_appendix_html(materials):
         body += '<div class="audit-item"><p><b>' + val(row.get('label')) + '</b>：' + val(row.get('reason')) + '</p>' + (f'<p class="audit-url">{val(row["url"])}</p>' if row.get('url') else '') + '</div>'
     if not materials.get('gaps'):
         body += '<p>未登记额外取文缺口；已知限制见上节。</p>'
-    return body + '</div>'
+    body += '</div>'
+    leaks = appendix_leaks(body)
+    if leaks:
+        raise ValueError('核对附录出现未翻译的字段名或路径：' + '、'.join(leaks[:5]))
+    return body
+
+
+PROCESS_WORDS = [('HTTP为动态壳，内置浏览器核正文', '网页为动态页面，用浏览器打开核对正文'), ('在内存核原', '核对原'), ('curl', '直接下载')]
+
+
+def process_words(text):
+    """取文工具名等内部过程词换成读者能懂的说法。"""
+    text = str(text)
+    for a, b in PROCESS_WORDS:
+        text = text.replace(a, b)
+    return text
+
+
+def appendix_leaks(fragment):
+    """核对附录是给人和 AI 逐条核对的：不许出现 /education/xxx 这类字段路径、meta 或 fail_count 这类英文键名。网址不算。"""
+    text = re.sub(r'<[^>]+>', ' ', fragment)
+    text = re.sub(r'(?:https?://|www\.)\S+|\b[\w.-]+\.(?:cn|com|hk|mo|org|edu|net|gov)(?:/\S*)?', ' ', html.unescape(text))
+    text = re.sub(r'\b[\w-]+\.(?:json|csv|pdf|txt)\b', ' ', text)  # 附件文件名可以出现
+    found = re.findall(r'(?<![\w.])/[A-Za-z_][\w]*(?:/[\w~]+)+', text)
+    found += re.findall(r'\bmeta\b|\bcurl\b|\b[a-z]+(?:_[a-z0-9]+)+\b|\b[a-z]+(?:-[a-z0-9]+)+\b', text)
+    return list(dict.fromkeys(found))
 
 
 def keep_numeric_runs(fragment):
@@ -508,6 +568,7 @@ class SourceNotes:
         self.entries = []
 
     def add(self, label, url='', date=''):
+        date = str(date).replace('方式：curl', '方式：直接下载官网原文')  # 不印工具名
         for i, entry in enumerate(self.entries, 1):
             if (url and entry[1] == url) or (not url and entry == (label, url, date)):
                 return i
@@ -632,9 +693,10 @@ def _legend(items, y, x=0):
     """图例：[(图形SVG片段生成函数(x, y), 文字)]，从左往右排，返回 (svg, 结束x)。"""
     out = []
     for draw, text in items:
-        out.append(draw(x + 5, y - 3.5))
-        out.append(f'<text x="{x + 14:.1f}" y="{y:.1f}" font-size="{FS_SMALL}" fill="{MUTED}">{E(text)}</text>')
-        x += 14 + _text_width(text, FS_SMALL) + 14
+        # 图标中心离起点 8 个单位：最宽的图标（菱形半宽 7、描边 1）也不出 viewBox 左缘（2026-10-20 流程图图例被裁）
+        out.append(draw(x + 8, y - 3.5))
+        out.append(f'<text x="{x + 17:.1f}" y="{y:.1f}" font-size="{FS_SMALL}" fill="{MUTED}">{E(text)}</text>')
+        x += 17 + _text_width(text, FS_SMALL) + 14
     return ''.join(out), x
 
 
@@ -1010,9 +1072,9 @@ def facts(rows, inline=E):
         if state not in FACT_STATES: raise ValueError('现状一览的状态只能是：已知、待确认、未知')
         cls = FACT_STATES[state]
         shown = inline(str(value)) if str(value).strip() and cls != 'unknown' else ('未填' if cls == 'unknown' else '待确认')
-        if cls == 'unknown' and str(value).strip(): shown = '未填（' + inline(str(value)) + '）'
+        if cls == 'unknown' and str(value).strip(): shown = inline(str(value))  # 写了缺什么就直接写，虚线框已表示未知
         cells.append(f'<div class="fact {cls}"><b>{E(str(label))}</b><span>{shown}</span></div>')
-    key = '　'.join(f'<i class="fk {k}"></i>{v}' for k, v in (('known', '已知'), ('pending', '待确认'), ('unknown', '未知（未填）')))
+    key = '　'.join(f'<i class="fk {k}"></i>{v}' for k, v in (('known', '已知'), ('pending', '待确认'), ('unknown', '未知或未填')))
     return f'<div class="facts">{"".join(cells)}</div><p class="matrix-key">{key}</p>'
 
 
@@ -1402,19 +1464,20 @@ def outcome_strip(items, pfall, width=640, fmt=None, fall_text=None):
     h = 24
     numeric = fmt is None or bool(fmt(0.5))
     fmt = fmt or (lambda p: f"{p:.0%}")
+    inner = width - 2  # 左右各留 1 个单位：0% 与 100% 刻度线的描边不出画布
     out = []
-    x = 0.0
+    x = 1.0
     strong = ["#21473E", "#34685D"]
     k = 0
     seps, narrow, narrow_p = [], [], 0.0
     for i, (lab, p) in enumerate(items):
-        w = width * p
+        w = inner * p
         if w <= 0:
             continue
         col = strong[k % 2] if p >= 0.05 else "#CEC6B1"
         k += p >= 0.05
         out.append(f'<rect x="{x:.2f}" y="0" width="{w:.2f}" height="{h}" fill="{col}"/>')
-        if x > 0 and w >= 1.5:
+        if x > 1 and w >= 1.5:
             seps.append(x)
         pl = fmt(p)
         tail = f" · {pl}" if pl else ""
@@ -1428,11 +1491,11 @@ def outcome_strip(items, pfall, width=640, fmt=None, fall_text=None):
             narrow.append(i + 1); narrow_p += p
         x += w
     if pfall > 0:
-        out.append(f'<rect x="{x:.2f}" y="0" width="{width * pfall:.2f}" height="{h}" fill="#9B3B2E"/>')
+        out.append(f'<rect x="{x:.2f}" y="0" width="{inner * pfall:.2f}" height="{h}" fill="#9B3B2E"/>')
     out.extend(f'<line x1="{sx:.2f}" x2="{sx:.2f}" y1="0" y2="{h}" stroke="#EEE9DC" stroke-width="1"/>' for sx in seps)
     y = h
     if numeric:
-        scale = lambda v: v * width
+        scale = lambda v: 1 + v * inner
         out.append(_x_axis([0, .25, .5, .75, 1], scale, h + 2, lambda v: f"{v:.0%}"))
         out[-1] = out[-1].replace('text-anchor="middle">100%', 'text-anchor="end">100%')
         y = h + 18
@@ -1445,7 +1508,7 @@ def outcome_strip(items, pfall, width=640, fmt=None, fall_text=None):
     right = ''
     if pfall > 0:
         right = '红色：滑档 ' + (fall_text if fall_text else (f"{pfall:.1%}" if pfall >= .001 else "不到 0.1%"))
-        if width * pfall < 1:
+        if inner * pfall < 1:
             right += '（宽度不足 1 个单位，按比例几乎看不见）'
     if notes or right:
         y += 13

@@ -96,20 +96,20 @@
   },
   "snapshot": {
     "case.json": "cbbe6940fb076d24378e740b979fd888344e6dadf5e3d1501d897e0821af9f34",
-    "profile_parse.json": "856e00c93e3205dc0bdd6de0d31a2cd384a7f2df5c3a727a9a1a20b0ab6c0f23",
+    "profile_parse.json": "ec01d04e9f24802ce85fc5d2a069ee8532f7911604e9cdfe9a3a47191baec990",
     "directions.json": "6f799d567cc51a1d860a40f8d9bbbf4c16f3bfcd2af58b999cc1db8c54f2761e",
     "rules_check.json": "bda48a6be3aff5fdb6d27f0800903873b37d636b4444a9ed460b302c5d5b08f9",
     "candidates.json": "b329d6b94fb2773f31a8fd1051b70615ec9ac6d839308567df09645186b5b392",
-    "evidence.json": "fc88e845f3eb5707da8eaa7fa6d75901946c9f7920eaca254cdcbc5bb0f0b902",
+    "evidence.json": "8d8fb496df28321d81c7f6d4ae0c2c3cdfd4b2dc01b6f38989037894bfe57348",
     "calculations.json": "c9f6ffdadaa69063d1698e768de5b96dbfb4f2cafdd9a803a0a136e2d4ee2bae",
-    "judgment.json": "de8695a4c6f213ce27eecd3e8035ae49d73b5c480e5325ff219fe6ed9dfc6117",
+    "judgment.json": "680971960a93a9a2b3bc6c4c63eb3396497035dc0f6ae7d6dbd5740352ef96f7",
     "narrative.json": "265288c7a1dad477f1f110b65b017c4a9301b8950af8e5d9f5ac83c38bdf5e4d",
     "profile.txt": "69dfeb57cf005a4ace3990e51a96b3b821e9de0c130dd1f8eae5b2088f5bef5e",
-    "report.md": "c20ce5df58936eb70937fcefb92bf42d36d11ffc3816781108670ead79f2b4e8",
-    "report.html": "fde5500249fd5b7ba1966749cdd1c6559fc1a1db87bc5381f9709bdb8a9acea4",
-    "report.pdf": "7b81d86e110603fe658a13da23feb8c996037c7284a660025f92105bda5284fd",
-    "report_trace.json": "f6c481520d4f3662cb94b0a4047ac4f4b1021ebe907112991319353766764022",
-    "operator_check.md": "0658dd0d4af77621602c452498747c74586cd3f12b72248df915baeaf65faeef",
+    "report.md": "56865889da5bd4655b01c6a8d3a256e905ab49e4ffbd3cf4442f6f0e444e478c",
+    "report.html": "19bb3b6d9fcf49299281d7fb07613dae5b5d1520958918ea85c75f2545b90dbc",
+    "report.pdf": "0d20ca434e96cf5e727c7b2a98ed653faf758c0ad25828b2ac6d3ae9ed46e3d4",
+    "report_trace.json": "71d78366582cb92ad16b5d6ea7e687c6822157af07a3ca4795b0b88c4edb499f",
+    "operator_check.md": "d93856cd7151715936ddc759a6949f4b879c955e474922c12f5ece921e110dcc",
     "profile_snapshot.json": "0a6cb6835c42b9e3a0e18679bd40d3c99c433453287f9e2a231e357647a858d9"
   },
   "checklist_update_note": "仅核查单表述及核查工具记录更新；报告与计算原件未改。保留历史复核记录，当前仍等待独立审核，不是重新批准。",
@@ -204,6 +204,21 @@
         "report_trace.json"
       ],
       "reason": "图表按科研插图标准重画（条形图加刻度，顺序时间线改为单行，修复版面自检把时间线短行误判为窄栏）；新增“现状一览”和岗位两道判断流程图；矩阵说明改用图形名称。数字全部引用原有画像、证据与计算，结论不变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "evidence.json",
+        "judgment.json",
+        "operator_check.md",
+        "profile_parse.json",
+        "report.html",
+        "report.md",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "第 12 节核对附录改为逐条可读：本人复合答案写成中文、同题不重复列；登记项、计算项和输入全部中文名（不再出现字段路径、英文键名和取文工具名）；同一数字的不同写法合为一条；候选共同前提只写一次；风险表逐条写成情况、为什么改判、怎么应对；新增非数字依据的原文摘录。新增 03 节卡点状态图；证据条目名改为中文（只改名称，原值与摘录未变）。结论不变。"
     }
   ]
 }

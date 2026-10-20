@@ -455,6 +455,10 @@
         "ref": "narrative.json#/sections/03/lead"
       },
       {
+        "slot": "figure",
+        "ref": "profile_parse.json#/report_blocks/03_blockers"
+      },
+      {
         "slot": "analysis",
         "ref": "narrative.json#/sections/03/analysis/0"
       },

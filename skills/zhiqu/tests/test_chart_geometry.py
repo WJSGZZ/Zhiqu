@@ -88,13 +88,13 @@ class StripGeometry(unittest.TestCase):
         widths = [r['width'] for r in rects(svg) if r.get('y') == 0]
         self.assertEqual(len(widths), 4)
         for w, (_, p) in zip(widths, items):
-            self.assertAlmostEqual(w, 640 * p, places=1)
+            self.assertAlmostEqual(w, 638 * p, places=1)   # 画布 640，左右各留 1
         self.assertIn('太窄未标号：第 3 志愿', svg)
 
     def test_tiny_fall_risk_is_exact_and_annotated(self):
         svg = report.outcome_strip([('a', .9995)], .0005, fall_text='0.1%')
         red = rects(svg, '#9B3B2E')[0]
-        self.assertAlmostEqual(red['width'], 640 * .0005, places=2)
+        self.assertAlmostEqual(red['width'], 638 * .0005, places=2)
         self.assertIn('红色：滑档 0.1%', svg)
 
 
@@ -229,3 +229,95 @@ class Fences(unittest.TestCase):
         self.assertIn('fact unknown', out)
         self.assertIn('未取到', out)
         self.assertIn('要核实的判断', out)
+
+
+def _extent_errors(svg):
+    """每个图形元素（含描边一半）和每段文字（按估算宽度）都在 viewBox 内。"""
+    W, H = map(float, re.search(r'viewBox="0 0 ' + NUM + ' ' + NUM + '"', svg).groups())
+    body = re.sub(r'<title>.*?</title>', '', svg)
+    errs = []
+    def check(x0, y0, x1, y1, what):
+        if x0 < -0.01 or y0 < -0.01 or x1 > W + 0.01 or y1 > H + 0.01:
+            errs.append(f'{what} 出界：({x0:.1f},{y0:.1f})—({x1:.1f},{y1:.1f})，画布 {W}×{H}')
+    for tag, attrs in re.findall(r'<(rect|circle|line|path|text)\b([^>]*)>', body):
+        a = dict(re.findall(r'([\w-]+)="([^"]*)"', attrs))
+        sw = float(a.get('stroke-width', 1 if a.get('stroke') not in (None, 'none') else 0)) / 2
+        f = lambda k: float(a[k])
+        if tag == 'rect':
+            check(f('x') - sw, f('y') - sw, f('x') + f('width') + sw, f('y') + f('height') + sw, 'rect')
+        elif tag == 'circle':
+            r = f('r') + sw; check(f('cx') - r, f('cy') - r, f('cx') + r, f('cy') + r, 'circle')
+        elif tag == 'line':  # 平头线：描边只向线的两侧扩，不沿线方向伸长
+            sx = sw if f('x1') == f('x2') else 0; sy = sw if f('y1') == f('y2') else 0
+            check(min(f('x1'), f('x2')) - sx, min(f('y1'), f('y2')) - sy, max(f('x1'), f('x2')) + sx, max(f('y1'), f('y2')) + sy, 'line')
+        elif tag == 'path':
+            pts = [float(v) for v in re.findall(NUM, a.get('d', ''))]
+            xs, ys = pts[0::2], pts[1::2]
+            check(min(xs) - sw, min(ys) - sw, max(xs) + sw, max(ys) + sw, 'path')
+        elif tag == 'text':
+            size = float(a.get('font-size', 10))
+            m = re.search(r'<text\b' + re.escape(attrs) + r'>(.*?)</text>', body)
+            content = re.sub(r'<[^>]+>', '', m[1]) if m else ''
+            w = report._text_width(content, size); x = f('x')
+            x0 = {'start': x, 'middle': x - w / 2, 'end': x - w}[a.get('text-anchor', 'start')]
+            check(x0, f('y') - size * .8, x0 + w, f('y') + size * .25, 'text「' + content[:8] + '」')
+    return errs
+
+
+class InsideViewBox(unittest.TestCase):
+    def test_every_chart_keeps_marks_and_strokes_inside(self):
+        charts = {
+            'bar': report.bar_chart([['甲', 3, '冲'], ['乙', None], ['丙', 7, '保']], '元', legend={'冲': '冲', '保': '保'}, palette=report.CERTAINTY),
+            'interval': report.interval_chart([['甲', 1, 2, 1.5, 0, 3, 1.4, 1.2], ['乙', 1, 2, 1.7]]),
+            'interval_common': report.interval_chart([['甲', 360, 400, 380], ['乙', 370, 395, 380]]),
+            'strategy': report.strategy_chart([('甲', 50, 0, True), ('乙', 100, .02, False)], fmt=lambda p: f'{p:.1%}'),
+            'strip': report.outcome_strip([('a', .5), ('b', .3), ('c', .002), ('d', .197)], .001, fall_text='0.1%'),
+            'timeline': report.timeline([['2026.10', '甲', '说明', '检查点'], ['2026.10', '乙', '说明', ''], ['2027.06', '丙', '说明', '']]),
+            'sequence': report.timeline([['2026 年底', '甲', '说明', '检查点'], ['毕业后', '乙', '说明', '']]),
+            'flow': report.flow(NewComponents.FLOW),
+            'stack': report.stack([['三单元', [('政治', 100), ('外语', 100), ('专业课', 300)]]], '分'),
+            'grid': report.evidence_grid([('甲大学', [('收费', '官方'), ('就业', '未取到')])]),
+            'cost': report.bar_chart([['港', 183960, '主', '183,960 港币'], ['国内', None]], '港币'),
+        }
+        for name, svg in charts.items():
+            self.assertEqual(_extent_errors(svg), [], name)
+
+
+class AppendixReadability(unittest.TestCase):
+    """第 12 节核对附录是给人和 AI 逐条核对的：不印 JSON、字段路径、英文键名和工具名。"""
+    def test_leaks_are_detected_but_urls_and_attachments_are_not(self):
+        bad = '<p>/education/expected_graduation；所在节 meta；挂科（fail_count）；gdut-retest：50%；方式：curl</p>'
+        self.assertEqual(set(report.appendix_leaks(bad)), {'/education/expected_graduation', 'expected_graduation', 'meta', 'curl', 'fail_count', 'gdut-retest'})
+        ok = '<p>https://yz.chsi.com.cn/zsml/a_b/c；附件 calculations.json；IELTS；CET-6；SHA256</p>'
+        self.assertEqual(report.appendix_leaks(ok), [])
+
+    def test_appendix_refuses_untranslated_labels(self):
+        with self.assertRaises(ValueError):
+            report.verification_appendix_html({'personal_inputs': [{'label': '/education/expected_graduation', 'value': '2029-06-30', 'sections': '02'}]})
+
+    def test_compound_answers_read_as_chinese(self):
+        import verify_report
+        self.assertEqual(verify_report.readable_value({'fail': '有，尚未通过', 'fail_count': '1'}), '有，尚未通过；1 门')
+        self.assertEqual(verify_report.section_names({'01', 'meta', '07'}), '01、07、封面')
+
+    def test_shared_conditions_and_table_rows_print_once_each(self):
+        html_ = report.verification_appendix_html({
+            'shared_conditions': ['挂科先处理'],
+            'limitations': [{'kind': 'candidate', 'name': '甲路', 'claim': '不利', 'reason': '支持', 'change_if': '改判'},
+                            {'kind': 'candidate', 'name': '乙路', 'claim': '不利', 'reason': '支持', 'change_if': '改判'},
+                            {'kind': 'table', 'section': '09', 'pairs': [('如果发生', '没过'), ('为什么改变判断', '影响毕业'), ('怎么应对', '先保毕业')]},
+                            {'kind': 'table', 'section': '09', 'pairs': [('如果发生', '没钱'), ('为什么改变判断', '前提没了'), ('怎么应对', '退出')]}],
+            'gaps': []})
+        self.assertEqual(html_.count('挂科先处理'), 1)
+        self.assertIn('第 09 节 · 如果发生：没过', html_)
+        self.assertIn('第 09 节 · 如果发生：没钱', html_)
+        self.assertIn('<p>怎么应对：先保毕业</p>', html_)
+
+    def test_calculation_display_only_when_it_differs(self):
+        rows = [{'path': '/a', 'label': '合计', 'result': 500, 'formula': '100 + 400', 'sections': '11'},
+                {'calculation_path': '/a', 'value': '500', 'label': '合计'},
+                {'path': '/b', 'label': '占比', 'result': 0.6, 'formula': '300 ÷ 500', 'sections': '01'},
+                {'calculation_path': '/b', 'value': '60%', 'label': '占比'}]
+        html_ = report.verification_appendix_html({'numbers': rows, 'gaps': []})
+        self.assertNotIn('正文显示 500', html_)
+        self.assertIn('正文显示 60%', html_)

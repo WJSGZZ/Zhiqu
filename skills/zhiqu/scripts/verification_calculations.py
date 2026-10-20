@@ -112,7 +112,7 @@ def _registered(case, profile, evidence):
         if key in computed: raise ValueError('情景输出重复')
         value, inputs, formula = calculate(op, changes)
         computed[key] = value
-        rows.append(_row('/' + key, scenario.get('why', key), value, inputs, formula))
+        rows.append(_row('/' + key, scenario.get('label') or scenario.get('why', key), value, inputs, formula))
     return computed, rows
 
 
@@ -162,7 +162,7 @@ def _offer_description(offer, followup, key):
     hours = f['standard_hours_per_year'] + o['extra_hours_per_month'] * 12
     formulas = {
         'annual_gross': f'{o["monthly_gross"]} × {o["months"]}',
-        'social_insurance_base': f'min(max({o["monthly_gross"]}, {f["ss_base_limits"]["lower"]}), {f["ss_base_limits"]["upper"]})',
+        'social_insurance_base': f'月薪 {o["monthly_gross"]}，不低于下限 {f["ss_base_limits"]["lower"]}、不高于上限 {f["ss_base_limits"]["upper"]}',
         'personal_social_insurance': f'{base} × {f["ss_personal_rate_assumption"]} × 12',
         'personal_housing_fund': f'{o["monthly_gross"]} × {o["hf_rate"]} × 12',
         'housing_fund_account_total': f'({o["monthly_gross"]} × {o["hf_rate"]} × 12) × 2（单位与个人等额情景）',
@@ -254,7 +254,12 @@ WORDS = {'additional_scenarios':'补充情景', 'hypothetical_followup':'假设�
          'take_home_cash':'到手现金', 'offer_b_ordinary_month':'offer B 普通月', 'social_insurance_base':'社保基数', 'total_cost':'总费用',
          'hypothetical_offers':'假设 offer', 'illustrative_parameters':'示意参数', 'scut_reference_statistics':'华工录取统计',
          'buffer_months':'预留应急后可支撑月数', 'higher_rent_months':'房租提高后可支撑月数', 'all_cash_months':'动用全部现金可支撑月数',
-         'spendable':'可动用现金', 'monthly_cost':'每月支出', 'high_monthly_cost':'房租提高后每月支出', 'report_parameters':'', 'report_constants':''}
+         'spendable':'可动用现金', 'monthly_cost':'每月支出', 'high_monthly_cost':'房租提高后每月支出', 'report_parameters':'', 'report_constants':'',
+         'annual_margin':'年度预算余量', 'annual_cost':'年度总费用', 'q1_label':'下四分位的标注', 'q3_label':'上四分位的标注',
+         'p10_label':'第 10 百分位的标注', 'p90_label':'第 90 百分位的标注', 'n':'人数', 'min':'最低分', 'q1':'下四分位', 'median':'中位数',
+         'q3':'上四分位', 'max':'最高分', 'official_stats':'官方统计', 'official_tuition':'官方学费', 'tuition_reference':'学费参照',
+         'annual_tuition':'年学费', 'take_home_assumption':'到手月收入假设', 'monthly_housing_assumption':'每月住房费假设',
+         'monthly_other_expenses_assumption':'每月其他支出假设', 'years':'学制年数', 'family_reserve_needed':'家庭需预留金额', 'retest_max':'复试满分', 'applicable_cohort':'适用年级', 'source_group':'来源编号'}
 
 
 def cn_label(path, fallback):

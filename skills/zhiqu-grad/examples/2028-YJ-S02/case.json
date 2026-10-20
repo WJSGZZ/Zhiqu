@@ -111,7 +111,8 @@
           "{{c:/known_living}}": "{{c:/higher_living}}"
         },
         "why": "生活成本提高，其他费用可用空间减少",
-        "output_ref": "{{c:/higher_living_ceiling}}"
+        "output_ref": "{{c:/higher_living_ceiling}}",
+        "label": "生活费提高后其他费用上限"
       },
       {
         "baseline_output": "nonliving_ceiling",
@@ -119,7 +120,8 @@
           "{{p:/fields/12/value/annual}}": "{{c:/after_reserve}}"
         },
         "why": "按本人意愿预留应急金再看费用承受空间",
-        "output_ref": "{{c:/reserve_ceiling}}"
+        "output_ref": "{{c:/reserve_ceiling}}",
+        "label": "先留应急金后其他费用上限"
       }
     ]
   },

@@ -129,17 +129,44 @@ def case_info(case,binding,warning=None):
     generated=datetime.now(timezone(timedelta(hours=8))).isoformat(timespec='seconds')
     return [('案例号',case['case_id']),('报告版本',case.get('report_version','1')),('生成时间',generated),
             ('所用画像时间',binding.get('filled_at') or '旧画像未记录填写时间'),('画像SHA256（前12位）',binding['sha256'][:12]),
-            ('数据快照（data_commit）',case.get('data_commit','未记录')),('画像版本提示',warning or '生成时未发现更新版本')]
+            ('数据快照版本',case.get('data_commit','未记录')),('画像版本提示',warning or '生成时未发现更新版本')]
 
 
 
 # 核对表里给人看的名称：不显示 /target_year 这类程序字段路径。
-CASE_LABELS={'/context/as_of':'报告基准日','/education/major':'专业','/education/year_level':'年级','/education/level':'学历','/education/school_type':'院校类型','/target_year':'目标年份','/education_entry':'入学时间','/graduation_date':'毕业时间','/birth_datetime':'出生时间',
+CASE_LABELS={'/context/as_of':'报告基准日','/education/expected_graduation':'预计毕业时间','/education/school_level':'院校层次',
+             '/budget/take_home_assumption':'到手月收入假设','/budget/monthly_other_expenses_assumption':'每月其他支出假设','/education/major':'专业','/education/year_level':'年级','/education/level':'学历','/education/school_type':'院校类型','/target_year':'目标年份','/education_entry':'入学时间','/graduation_date':'毕业时间','/birth_datetime':'出生时间',
              '/budget/annual_limit':'年度预算上限','/budget/monthly_living_assumption':'每月生活费假设','/budget/monthly_housing_assumption':'每月住房费假设'}
 DATE_LABELS={'checkpoint':'下一个个人检查点','previous':'上一次检查点','action0':'第 1 件事的日期','action1':'第 2 件事的日期','action2':'第 3 件事的日期',
              'year_end':'年底复核','exam_month':'考试月份','graduate':'毕业时间','term_end':'学期末','summer':'暑假','spring':'春季','recommend':'推免时间','entry':'入学时间'}
 SUB_LABELS={'reserve':'备用金','other':'其他','housing':'住房','higher_housing':'较高住房情景','cash':'现金','living':'生活费','higher_living':'较高生活费情景',
-            'mean':'均分','cet4':'四级','comprehensive_rank':'综合排名','comprehensive_count':'综合排名总人数','academic_rank':'学业排名','academic_count':'学业排名总人数'}
+            'mean':'均分','cet4':'四级','comprehensive_rank':'综合排名','comprehensive_count':'综合排名总人数','academic_rank':'学业排名','academic_count':'学业排名总人数',
+            'fail':'挂科情况','fail_count':'没过的门数','scale':'满分','annual':'年度预算','sustainable_low':'可持续投入下限','sustainable_high':'可持续投入上限'}
+# 本人填写的复合答案印成一句中文，不印 JSON（2026-10-20 小洋报告把挂科印成了 {"fail": …}）。
+VALUE_FORMATS={'fail_count':'{} 门','cet4':'四级 {}','mean':'均分 {}','scale':'满分 {}','annual':'每年 {} 元','cash':'现金 {} 元','reserve':'应急金 {} 元',
+               'housing':'住房 {} 元/月','higher_housing':'住房提高到 {} 元/月','other':'其他 {} 元/月','living':'生活费 {} 元/月','higher_living':'生活费提高到 {} 元/月',
+               'sustainable_low':'每天至少 {} 小时','sustainable_high':'最多 {} 小时','academic_rank':'学业排名第 {}','academic_count':'共 {} 人',
+               'comprehensive_rank':'综合排名第 {}','comprehensive_count':'共 {} 人'}
+SECTION_NAMES={'meta':'封面'}
+
+
+def readable_value(value):
+    """字典、列表答案转成可读中文；键名不进报告。"""
+    if isinstance(value,dict):
+        parts=[]
+        for k,v in value.items():
+            if v in (None,''):continue
+            shown=readable_value(v)
+            parts.append(VALUE_FORMATS[k].format(shown) if k in VALUE_FORMATS else (shown if k in ('fail','value','text') else SUB_LABELS.get(k,'其他')+' '+shown))
+        return '；'.join(parts)
+    if isinstance(value,(list,tuple)):return '；'.join(readable_value(v) for v in value)
+    if isinstance(value,float):return format(value,'.10g')
+    return '未填' if value is None else str(value)
+
+
+def section_names(ids):
+    """节号列表 → 可读：数字节号原样，meta 写“封面”。"""
+    return '、'.join(dict.fromkeys(SECTION_NAMES.get(x,x) for x in sorted(ids, key=lambda x:(not x.isdigit(), x))))
 
 
 def readable_path(case, kind, path):
@@ -152,8 +179,35 @@ def readable_path(case, kind, path):
         tail=[SUB_LABELS.get(x,x) for x in parts[3:]] if len(parts)>3 else []
         return name+('（'+'，'.join(tail)+'）' if tail else '')
     if path in CASE_LABELS:return CASE_LABELS[path]
-    if path.startswith('/context/personal_dates/'):return DATE_LABELS.get(path.rsplit('/',1)[-1],path)
-    return path
+    if path.startswith('/context/personal_dates/'):
+        key=path.rsplit('/',1)[-1]
+        # 只有含义固定的键（几件事、检查点）用通用名；其余按本案时间线里这一行的事项命名，避免“春季”这类错配。
+        if key in FIXED_DATE_KEYS:return DATE_LABELS[key]
+        named=date_usage(case).get(key)
+        if named:return named
+        if key in DATE_LABELS:return DATE_LABELS[key]
+    raise ValueError('核对表登记项缺中文名：'+path)
+
+
+FIXED_DATE_KEYS={'checkpoint','previous','action0','action1','action2','graduate','entry'}
+
+
+def date_usage(case):
+    """个人日期键 → 本案时间线里引用它的那一行事项（如“一学期验证结束”）。"""
+    from planning_workflow import REF
+    names={}
+    for entries in case.nodes().values():
+        for entry in entries:
+            node=case.get_node(entry['ref'])
+            if node.get('type')=='data_gap':
+                for m in REF.finditer(str(node.get('content',{}).get('expected_by',''))):
+                    if m[1]=='k' and m[2].startswith('/context/personal_dates/'):names.setdefault(m[2].rsplit('/',1)[-1],'缺口预计补齐、复核的日期')
+            if node.get('type')!='timeline':continue
+            for row in node.get('content',{}).get('rows',[]):
+                for m in REF.finditer(str(row[0])):
+                    if m[1]=='k' and m[2].startswith('/context/personal_dates/'):
+                        names[m[2].rsplit('/',1)[-1]]=case.expand(str(row[1]))  # 时间线里的事项名优先
+    return names
 
 
 def planning_materials(case,trace,binding,warning=None):
@@ -172,15 +226,24 @@ def planning_materials(case,trace,binding,warning=None):
                         if kind in ('p','k'):registrations.setdefault((kind,reference),set()).add(sid)
                         if kind=='e':used.setdefault(reference.split('#')[0],set()).add(sid)
             for eid in node.get('evidence_refs',[]):used.setdefault(eid,set()).add(sid)
+    # 同一引用在正文里有几种写法（174000 与 174,000、2028-09-30 与 2028 年 9 月）时合成一条：
+    # 数值相同只留带千分位的写法；日期等不同写法用“ / ”并列，所在节合并。
     groups={}
     for item in trace:
-        groups.setdefault((item['ref'],str(item['display'])),[]).append(item['location'])
+        groups.setdefault(REF.sub(lambda m:'{{'+m[1]+':'+m[2]+'}}',item['ref']),{}).setdefault(str(item['display']),[]).append(item['location'])
     numbers=[]
-    for (reference,shown),locations in groups.items():
-        if not NUMBER.search(shown):continue
+    for reference,shows in groups.items():
+        shows={k:v for k,v in shows.items() if NUMBER.search(k)}
+        if not shows:continue
         match=REF.fullmatch(reference)
         if not match:continue
-        kind,path,_=match.groups();sids=sorted(set(x.split('.')[0] for x in locations));row={'label':reference,'value':shown,'sections':'、'.join(sids),'reference':reference}
+        distinct={}
+        for k in shows:distinct.setdefault(k.replace(',','').replace(' ',''),[]).append(k)
+        forms=[max(v,key=lambda t:(',' in t,len(t))) for v in distinct.values()]
+        forms.sort(key=len,reverse=True)  # 最完整的写法在前，其余注明“正文另写作”
+        shown=forms[0]+('（正文另写作 '+'、'.join(forms[1:])+'）' if len(forms)>1 else '')
+        locations=[x for v in shows.values() for x in v]
+        kind,path,_=match.groups();sids=section_names(set(x.split('.')[0] for x in locations));row={'label':reference,'value':shown,'sections':sids,'reference':reference}
         if kind=='e':
             e=evidence[path.split('#')[0]];source=e['source'];row.update(label=e['claim'],institution=source['organization'],url=source.get('url',''),excerpt=e.get('excerpt',''),evidence_id=e['id'],raw_value=e.get('value'),scope=e.get('scope',''))
         elif kind in ('p','k'):
@@ -189,19 +252,24 @@ def planning_materials(case,trace,binding,warning=None):
             elif kind=='k' and 'assumption' in path:
                 role='报告登记的费用或收入情景（不是已核实支或雇主报价）'
             else:role='本人画像或案例登记；未作官方认证'
-            row.update(label=role+'：'+readable_path(case,kind,path),institution=role,excerpt='登记值：'+visible(case.resolve(kind,path)),raw_value=case.resolve(kind,path))
-        else:row.update(label='计算或参数登记项：'+path,institution='本报告计算/参数登记；核对方式见下列公式',calculation_path=path)
+            row.update(label=role+'：'+readable_path(case,kind,path),institution=role,excerpt='登记值：'+readable_value(case.resolve(kind,path)),raw_value=case.resolve(kind,path))
+        else:row.update(label=None,institution='本报告计算/参数登记；核对方式见下列公式',calculation_path=path)
         numbers.append(row)
     personal=[]
     if not case.case.get('report_input_usage'):raise ValueError('缺报告实际依赖的本人输入登记 report_input_usage')
     for use in case.case['report_input_usage']:
         field=ptr(case.data['profile_parse.json'],'/'+'/'.join(use['pointer'].lstrip('/').split('/')[:2]))
         if field.get('status')!='given':raise ValueError('未确认输入不能登记为报告已知条件')
-        personal.append({'label':field['field'],'value':ptr(case.data['profile_parse.json'],use['pointer']),'sections':'、'.join(use['sections'])})
+        personal.append({'label':field['field'],'value':readable_value(ptr(case.data['profile_parse.json'],use['pointer'])),'sections':'、'.join(use['sections']),
+                         'field':'/'.join(use['pointer'].lstrip('/').split('/')[:2])})
+    covered={r['field']:r for r in personal}
     for (kind,path),sids in registrations.items():
         if kind=='k' and (path.startswith('/context/') or 'assumption' in path):continue
+        field='/'.join(path.split('|')[0].lstrip('/').split('/')[:2]) if kind=='p' else None
+        if field in covered:  # 同一题已经整题列出：只合并所在节，不再拆出“挂科（fail_count）”一行
+            old=covered[field];old['sections']='、'.join(sorted(set(old['sections'].split('、'))|set(sids)));continue
         label=readable_path(case,kind,path)
-        personal.append({'label':label,'value':case.resolve(kind,path),'sections':'、'.join(sorted(sids))})
+        personal.append({'label':label,'value':readable_value(case.resolve(kind,path)),'sections':'、'.join(sorted(sids))})
     for eid,sids in used.items():
         e=evidence[eid]
         if e.get('publication_status')=='personal_input':personal.append({'label':e['claim'],'value':e['value'],'sections':'、'.join(sorted(sids))})
@@ -214,30 +282,66 @@ def planning_materials(case,trace,binding,warning=None):
             elif not row['label'].startswith('/') and row['label'] not in old['label'].split(' / '):old['label']+=' / '+row['label']
             old['sections']='、'.join(sorted(set(old['sections'].split('、')+row['sections'].split('、'))))
         else:dedup[key]=dict(row)
-    personal=list(dedup.values())
+    personal=[{k:v for k,v in r.items() if k!='field'} for r in dedup.values()]
     limitations=[]
+    cands=case.data.get('candidates.json',{})
+    names={c.get('id'):c for k in ('paths','school_programs','job_types','jobs') for c in cands.get(k,[]) if isinstance(c,dict)}
     for candidate in case.data['judgment.json'].get('candidates',[]):
         src=[evidence[e]['source'] for e in candidate.get('evidence_refs',[]) if e in evidence]
-        limitations.append({'claim':'；'.join(candidate.get('counters',[])),'reason':'支持条件：'+'；'.join(candidate.get('supports',[]))+'；仍须满足：'+'；'.join(case.data['judgment.json'].get('recommendation',{}).get('conditions',[])),'change_if':visible(candidate.get('switch_conditions','条件改变则重评')),'url':'；'.join(dict.fromkeys(s.get('url','') for s in src if s.get('url')))})
+        base=names.get(candidate.get('candidate_id') or candidate.get('id'),{})
+        limitations.append({'kind':'candidate','name':base.get('name') or base.get('title') or '候选 '+str(candidate.get('id','')),
+                            'claim':'；'.join(candidate.get('counters',[])),'reason':'；'.join(candidate.get('supports',[])),
+                            'change_if':readable_value(candidate.get('switch_conditions','条件改变则重评')),'url':'；'.join(dict.fromkeys(s.get('url','') for s in src if s.get('url')))})
     for sid in ('04','09','10'):
         for entry in case.nodes()[sid]:
             node=case.get_node(entry['ref'])
             # 正文分析段落已在报告里，附录只收情景表、假设表和缺口说明，避免整段重复。
             if node['type'] not in ('scenario_table','unknown_explanation','assumption_table'):continue
             content=node.get('content',{})
-            if node['type']=='analysis' and content.get('kind')=='heading':continue
             source=[evidence[e]['source'] for e in node.get('evidence_refs',[]) if e in evidence]
-            text='；'.join(case.expand(v,'appendix') for _,v in leaves(content) if isinstance(v,str))
-            if not text:continue
-            limitations.append({'claim':text,'reason':'结论仅在正文列明的资格、预算和本人接受条件内适用；第 '+sid+' 节原条件见本条。','change_if':'出现本条触发条件或补充信息与当前依据不符时，按第 09 节备选重新判断。','url':'；'.join(dict.fromkeys(s.get('url','') for s in source if s.get('url')))})
-    gaps=[{'label':e['claim'],'reason':e.get('excerpt') or e.get('source',{}).get('locator','未取到原文'),'url':e.get('source',{}).get('url','')} for e in evidence.values() if e.get('status') in ('unretrieved','not_found') or e.get('publication_status')=='unpublished']
+            url='；'.join(dict.fromkeys(s.get('url','') for s in source if s.get('url')))
+            x=lambda v:case.expand(v,'appendix')
+            if node['type'] in ('scenario_table','assumption_table'):
+                # 表格逐行成条：列名作小标签，不把表头和各行压成一串。
+                cols=[x(c) for c in content.get('columns',[])]
+                for row in content.get('rows',[]):
+                    limitations.append({'kind':'table','section':sid,'pairs':[(cols[i] if i<len(cols) else '',x(v)) for i,v in enumerate(row)],'url':url})
+            else:
+                pairs=[(lab,x(content[k])) for k,lab in (('missing_information','还缺什么'),('retrieval_plan','怎么补'),('decision_changes','补到后怎么改判')) if content.get(k)]
+                if pairs:limitations.append({'kind':'table','section':sid,'pairs':pairs,'url':url})
+    gaps=[{'label':e['claim'],'reason':e.get('gap') or e.get('excerpt') or e.get('source',{}).get('locator','未取到原文'),'url':e.get('source',{}).get('url','')} for e in evidence.values() if e.get('status') in ('unretrieved','not_found') or e.get('publication_status')=='unpublished']
+    # 非数字依据：正文判断用到、但不以数字出现的官方原文（如“看本科 GPA”），逐条给说法、原文、出处和所在节。
+    numeric_ids={r.get('evidence_id') for r in numbers if r.get('evidence_id')}
+    qualitative=[{'label':e['claim'],'excerpt':e.get('excerpt',''),'institution':e['source'].get('organization',''),'url':e['source'].get('url',''),
+                  'scope':e.get('scope',''),'sections':section_names(sids),'evidence_id':eid}
+                 for eid,sids in used.items() for e in [evidence[eid]]
+                 if eid not in numeric_ids and e.get('status')=='verified' and e.get('excerpt') and e['source'].get('url')
+                 and e.get('publication_status')!='personal_input']  # 本人说法已在“本人信息”里，不当官方原文
     formulas=calculation_rows(case.case,case.data['profile_parse.json'],case.data['evidence.json'],case.data['calculations.json'])
     calc_locations={}
     for item in trace:
         m=REF.fullmatch(item['ref'])
         if m and m[1]=='c':calc_locations.setdefault(m[2],set()).add(item['location'].split('.')[0])
-    formulas=[dict(row,sections='、'.join(sorted(calc_locations.get(row.get('path',''),{'计算依赖；附录'})))) for row in formulas if row.get('path') in calc_locations]
-    return {'case_info':case_info(case.case,binding,warning),'personal_inputs':personal,'numbers':numbers+formulas,'limitations':limitations,'gaps':gaps}
+    from verification_calculations import cn_label
+    def cn_inputs(inputs):  # 输入的键若是登记路径，换成中文名；翻不出来就报错，不把路径印进报告
+        if not isinstance(inputs,dict):return inputs
+        out={}
+        for k,v in inputs.items():
+            if not (isinstance(v,(int,float)) and not isinstance(v,bool)):out[k]=v;continue  # 非数值输入不印在核对表里，只留在附件
+            name=cn_label('/'+str(k).lstrip('/'),'') if re.fullmatch(r'/?[A-Za-z_][\w/]*',str(k)) else k
+            if not name:raise ValueError('核对表计算输入缺中文名：'+str(k))
+            out[name]=v
+        return out
+    all_labels={row.get('path'):row.get('label') for row in formulas}
+    for row in numbers:
+        if row.get('calculation_path') and not row.get('label'):
+            name=all_labels.get(row['calculation_path']) or cn_label(row['calculation_path'],'')
+            if not name or name.startswith('/'):raise ValueError('核对表计算项缺中文名：'+row['calculation_path'])
+            row['label']=name
+    formulas=[dict(row,sections=section_names(calc_locations[row['path']]),inputs=cn_inputs(row.get('inputs'))) for row in formulas if row.get('path') in calc_locations]
+    shared=case.data['judgment.json'].get('recommendation',{}).get('conditions',[])
+    return {'case_info':case_info(case.case,binding,warning),'personal_inputs':personal,'numbers':numbers+formulas,'limitations':limitations,'gaps':gaps,
+            'shared_conditions':[str(c) for c in shared],'qualitative':qualitative}
 
 
 def candidate_file(root,result):
@@ -273,8 +377,12 @@ def gaokao_materials(root,rep,result,binding,warning=None):
     eu=sum(p*u for p,u in terms)
 
     numbers += [{'label':'总概率核对','value':land+result['p_fall'],'sections':'01、05','inputs':f'各志愿最终录取概率之和 {land}；滑档 {result["p_fall"]}','formula':'各志愿最终录取概率之和 + 滑档概率 = 1（浮点误差除外）','result':land+result['p_fall']}, {'label':'平均满意度核对','value':result['expected_utility'],'sections':'01、05','inputs':'；'.join(f'{p} × {u}' for p,u in terms),'formula':'Σ（各实际专业落点概率 × 该专业效用）+ Σ（调剂概率 × 调剂效用）+ 滑档概率 × 滑档效用；显示值按正文精度取整','result':eu}]
-    limits=[{'claim':v,'reason':'只在本条所列数据与资格范围内有效。','change_if':'目标年招生计划、资格、本人排序或可承受风险变化时重新出表。','url':''} for v in [rep.get('backtest',''),*rep.get('profile',{}).get('tensions',[])] if v]
-    for r in rep.get('assumptions',[]):limits.append({'claim':'：'.join(map(str,r)),'reason':'这是正文第10节已披露的适用条件。','change_if':'数据或该项假设变化后重算；原结果不再自动适用。','url':''})
+    import report as _report
+    def readable(text):  # 与正文同样的发布层清理，并去掉参数英文名、内部文件名
+        text=_report.public_text(str(text)).replace('profile-analysis.md','画像分析的默认表')
+        return re.sub(r'\s*(?:--)?\b(?:sigma-floor|sigma-scale|sigma-single|sigma-rule|rank-sd)\b','',text)
+    limits=[{'claim':readable(v),'reason':'只在本条所列数据与资格范围内有效。','change_if':'目标年招生计划、资格、本人排序或可承受风险变化时重新出表。','url':''} for v in [rep.get('backtest',''),*rep.get('profile',{}).get('tensions',[])] if v]
+    for r in rep.get('assumptions',[]):limits.append({'claim':readable('：'.join(map(str,r))),'reason':'这是正文第10节已披露的适用条件。','change_if':'数据或该项假设变化后重算；原结果不再自动适用。','url':''})
     return {'case_info':case_info(case,binding,warning),'personal_inputs':personal,'numbers':numbers,'limitations':limits,'gaps':gaps}
 
 
@@ -428,7 +536,8 @@ def verify(pdf,extract=None):
         evidence=json.loads(files['evidence.json']);calculations=json.loads(files['calculations.json'])
         lookup={e['id']:e for e in evidence.get('items',[])}
         for row in manifest['materials']['numbers']:
-            if norm(visible(row['value'])) not in appendix:errors.append('核对表缺数字：'+row['label'])
+            # 千分位只是写法：25,200 与 25200 视为同一个数（核对表只印一次）
+            if norm(visible(row['value'])).replace(',','') not in appendix.replace(',',''):errors.append('核对表缺数字：'+str(row['label']))
             if row.get('provenance_status')=='legacy_unmapped':
                 rep=json.loads(files['report.json']);raw=ptr(rep,row['report_pointer'])
                 tokens=NUMBER.findall(str(raw))

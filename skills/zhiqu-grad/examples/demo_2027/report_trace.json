@@ -3,23 +3,23 @@
   "case_id": "2027-YJ-S01",
   "source_sha256": {
     "case.json": "67ca8684a8e7865960b8c8d553f30f425de93ccfe7edf60d0d4e24efc0169ef4",
-    "profile_parse.json": "6a57befaf14ccbf7a8bce5c55ab2cc92ef27ca6fc44a0b095a67e665d5cff763",
+    "profile_parse.json": "a9eee1981e639d511390eedec704012149c76ecf08348ddc03a5c9a8e32de7e9",
     "directions.json": "2b68a53951ab4a8de52d7edcbabdf32d24e4570392cd70ac212c62342430a3b2",
     "rules_check.json": "7b0a58159b98a98e96a17d877674c57bf2d59988aefd37a2f57d94f82580f5c2",
     "candidates.json": "c9c5db84e727dde6ec750e534d023b4e15e7dd85e5bd1bc77110b14166f9d8ad",
-    "evidence.json": "089139cd06ff70af31d361cab73a80968c9899ca924d5d0f31802fd6b6262a0a",
+    "evidence.json": "1b58cfaff77ed6b90879e7dba530aae8a6e90a620f4abe76763c76515e48c949",
     "calculations.json": "cec5b3577a8d62196c2dfd606cfab91b31c421feb52a97cbdd3a5cfafcd5daf7",
-    "judgment.json": "81e93d48140973e24e8a7d981e9816f035868deb0f14c1c725fd4274f5fc08ea",
+    "judgment.json": "37be058d4e45aa1d481ef16d4f7b7816e2b79d33257fc3937e730e28836b7453",
     "narrative.json": "c8367bbda892a637559085198bd56f36d467199b2410f2773fcf2c02331fdb81",
     "profile.txt": "2be92b9770f7a4a877386334b958c096198b948c89c5eabca030d4f557e29457"
   },
-  "contract_sha256": "1dfacccc00957294fff83bef5b55850545564d8c0b1b76bb04b2af4adc7b31bf",
+  "contract_sha256": "b805904d0c51a3684ce92ee68d71e57f416749bf20fbf6c5ef0604747f005a07",
   "tool_sha256": {
     "planning_report.py": "e50d03231e1eed2f3960a114150b3e5557764365966703a5bbb599ee71720be1",
     "planning_workflow.py": "557c3108d3dbb1e8cc8ce81b999b3938b056a3a990ab3f5bbeaeba8e9a8b6b80",
     "operator_check.py": "97965475c2c8b6efe5dbf2747511526d1729a540f55a16b54fa282e2a810fdc7",
     "check_demos.py": "fc8e1625f9e052373756160514ad5c73db1e8451c233425918edb5bc839d9f63",
-    "report.py": "de09e0df5360699ccadd5243f9e551e7811c338b3b1b6850a5fc3fc61ac52338",
+    "report.py": "f1207f4951276b8f0676dbe464f147e7980dfee59b8fde557f236df1d777a614",
     "render_report.py": "a6ba0669516b5a6aba7444c0c3d8815d0d1695c13c4d7a67ba1f44fbbf254f33",
     "profile_store.py": "1cfd828583598a65cf719a46447cb3112ef0170eb1a638b89ab023cb47a04e7f"
   },
@@ -323,6 +323,18 @@
       "ref": "{{k:/target_year}}",
       "value": 2027,
       "display": "2027"
+    },
+    {
+      "location": "03.figure.1",
+      "ref": "{{p:/fields/8/value|comma}}",
+      "value": 30000,
+      "display": "30,000"
+    },
+    {
+      "location": "03.figure.1",
+      "ref": "{{p:/fields/9/value}}",
+      "value": "不能无期限支持，须另核预算和本人同意",
+      "display": "不能无期限支持，须另核预算和本人同意"
     },
     {
       "location": "04.analysis.8",
@@ -1814,9 +1826,9 @@
     }
   ],
   "artifacts": {
-    "report.md": "3e86bbaad7b5f5cf7c97a7faa816dde044b8340c822ffffe5d1a4fffed7f93ca",
-    "report.html": "96d226e7ac9af1bb09ab0359c1dce581ad63d4732a5114f2938d88589ba42a3a",
-    "report.pdf": "8f416aa891a5201592cbadc0915cd7dde4e7e0cc92cf7b63136285ccf45ffe39"
+    "report.md": "beb0f1dd31d787c421cc0d1adf9ad49c7859d1c5e4e815aa2a9b807c8c780cb3",
+    "report.html": "cdbc9816101b983536e31aee989aa0aaf7b4e2771a1f7e6772fa7bf1adf010a2",
+    "report.pdf": "4cb9b18aeab767c90621c9ba23a1400bb7e1ff246154694cbc3b4e57074f4270"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "report_profile": {
@@ -1826,7 +1838,7 @@
     "form": null
   },
   "verification_tools_sha256": {
-    "verify_report.py": "91021d58224fc869e871cff611ec92ba60943ca89da60635f55cd4a8c6048a01",
-    "verification_calculations.py": "1a5cc43f8df9494e3baaa1b1ca83a4ec471718c5ce21344275b526758dde0c3c"
+    "verify_report.py": "1bda48fac71a082456ffc371216c6e3edb26d178dead1356bc65736a14b0d4b9",
+    "verification_calculations.py": "503bf1c73c4f9db451e141a12724e43b715fbc25be5f88c5393828f1523b8336"
   }
 }
