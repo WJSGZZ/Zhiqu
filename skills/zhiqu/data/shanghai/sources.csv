@@ -1,7 +1,7 @@
-source_id,grade,publisher,title,url,landing_url,published,retrieved,method,note
-shanghai-2024-general-cutoff,官方,上海市教育考试院,,https://www.shmeea.edu.cn/download/20240719/198.pdf,,,2026-09-28,PDF 表格抽取，按同代码干净简称去水印字,本科普通批次平行志愿院校专业组投档分数线
-shanghai-2025-general-cutoff,官方,上海市教育考试院,,https://www.shmeea.edu.cn/download/20250719/186.pdf,,,2026-09-28,PDF 表格抽取，按同代码干净简称去水印字,本科普通批次平行志愿院校专业组投档分数线
-shanghai-2026-general-cutoff,官方,上海市教育考试院,,https://cdn.shmeea.edu.cn/resource/upload/www/20260706/53767.pdf,,,2026-09-28,PDF 表格抽取，按同代码干净简称去水印字,本科普通批次平行志愿院校专业组投档分数线
-shanghai-2026-general-yfyd,官方,上海市教育考试院,考生高考成绩分布表（本科录取控制分数线上考生）,,https://www.shmeea.edu.cn/page/02200/20260623/20375.html,,2026-09-30,文本 PDF 抽取,文本 PDF（附件 0.pdf）
-shanghai-2025-general-yfyd,官方,上海市教育考试院,考生高考成绩分布表（本科录取控制分数线上考生）,,https://www.shmeea.edu.cn/page/09000/20250623/19549.html,,2026-09-30,扫描件 OCR 识别，累计单调确认或相邻插值,扫描件（附件 0.pdf）
-shanghai-2024-general-yfyd,官方,上海市教育考试院,考生高考成绩分布表（本科录取控制分数线上考生）,,https://www.shmeea.edu.cn/page/02200/20240623/18612.html,,2026-09-30,文本 PDF 抽取,文本 PDF（附件 00.pdf）
+source_id,grade,publisher,title,landing_url,file_url,published,retrieved,method,archive_sha256,archive_path,archive_status,wayback_url,note
+shanghai-2024-general-cutoff,官方,上海市教育考试院,,,https://www.shmeea.edu.cn/download/20240719/198.pdf,,2026-09-28,PDF 表格抽取，按同代码干净简称去水印字,,,未取到,,本科普通批次平行志愿院校专业组投档分数线；历史原始路径=shanghai/sources.csv；本轮未存原件：['普通DNS与HTTPS解析均未能核实公网地址：请求保护暂停（site_busy）；最早重试：2026-10-20T10:35:53.619260+00:00']
+shanghai-2025-general-cutoff,官方,上海市教育考试院,,,https://www.shmeea.edu.cn/download/20250719/186.pdf,,2026-09-28,PDF 表格抽取，按同代码干净简称去水印字,,,未取到,,本科普通批次平行志愿院校专业组投档分数线；历史原始路径=shanghai/sources.csv；本轮未存原件：['普通DNS与HTTPS解析均未能核实公网地址：请求保护暂停（site_busy）；最早重试：2026-10-20T10:35:53.619260+00:00']
+shanghai-2026-general-cutoff,官方,上海市教育考试院,,,https://cdn.shmeea.edu.cn/resource/upload/www/20260706/53767.pdf,,2026-09-28,PDF 表格抽取，按同代码干净简称去水印字,,,未取到,,本科普通批次平行志愿院校专业组投档分数线；历史原始路径=shanghai/sources.csv；本轮未存原件：['普通DNS与HTTPS解析均未能核实公网地址：请求保护暂停（site_busy）；最早重试：2026-10-20T10:35:53.619260+00:00']
+shanghai-2026-general-yfyd,官方,上海市教育考试院,考生高考成绩分布表（本科录取控制分数线上考生）,https://www.shmeea.edu.cn/page/02200/20260623/20375.html,,,2026-09-30,文本 PDF 抽取,,,未取到,,文本 PDF（附件 0.pdf）；历史原始路径=shanghai/sources.csv；本轮未存原件：['普通DNS与HTTPS解析均未能核实公网地址：请求保护暂停（site_busy）；最早重试：2026-10-20T10:35:53.619260+00:00']
+shanghai-2025-general-yfyd,官方,上海市教育考试院,考生高考成绩分布表（本科录取控制分数线上考生）,https://www.shmeea.edu.cn/page/09000/20250623/19549.html,,,2026-09-30,扫描件 OCR 识别，累计单调确认或相邻插值,,,未取到,,扫描件（附件 0.pdf）；历史原始路径=shanghai/sources.csv；本轮未存原件：['普通DNS与HTTPS解析均未能核实公网地址：请求保护暂停（site_busy）；最早重试：2026-10-20T10:35:53.619260+00:00']
+shanghai-2024-general-yfyd,官方,上海市教育考试院,考生高考成绩分布表（本科录取控制分数线上考生）,https://www.shmeea.edu.cn/page/02200/20240623/18612.html,,,2026-09-30,文本 PDF 抽取,,,未取到,,文本 PDF（附件 00.pdf）；历史原始路径=shanghai/sources.csv；本轮未存原件：['普通DNS与HTTPS解析均未能核实公网地址：请求保护暂停（site_busy）；最早重试：2026-10-20T10:35:53.619260+00:00']

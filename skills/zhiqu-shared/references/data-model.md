@@ -16,7 +16,7 @@
 - **列名**用英文 snake_case，值可以是中文；年份为整数，日期 ISO（YYYY-MM-DD），分数为数值，原文写法另存 `*_raw`。
 - **学校身份**：以教育部《全国普通高等学校名单》的 10 位标识码为主键 `institution_id`（见 `skills/zhiqu/data/schools.csv` 的 `id`）；各种校名写法、曾用名、各省招生代码、研招单位代码都进别名表，不在业务表里用校名做连接。对不上的列入问题表，不猜。
 - **专业身份**：本科用《普通高等学校本科专业目录》代码，研究生用《研究生教育学科专业目录》代码（门类 2 位、一级学科／专业学位类别 4 位、专业 6 位），各自一张字典表。
-- **来源**：每条数据都带 `source_id` 和 `src_row`（原件里的行或页）。`source` 表记：等级（与报告证据等级同名：官方、第三方整理）、发布机构、网址、文件名、sha256、发布日期、取得日期、取得方式。
+- **来源**：每条数据都带 `source_id` 和原始 `src_row`；PDF/图片另带 `src_page`、`src_table`。字段与原件保留规则见下文「来源与原件」，不以整理CSV的行号冒称原件页行。
 - **核对**：与官方原文抽查的结果统一记在 `check_sample`，结论只用四种：一致、不一致、口径不同、未取到。
 - **可直接使用的视图** `v_usable_*`：官方数据优先；第三方与官方不一致时用官方值并注明；没核对过的标“第三方整理，未核”。报告和模型只读这些视图。
 
@@ -54,3 +54,17 @@
 - 高考库已按本规范迁移：公开层各省目录配 `sources.csv`，每行带 `source_id`（`validate_data.py` 检查）；本机库新增 `source`、`institution`、`institution_alias`、`discipline`（本科专业目录，[undergrad_majors.csv](../../zhiqu/data/undergrad_majors.csv)），官方表 `official_cutoff`、`official_yfyd` 带 `source_id` 和 `institution_id`，`check_sample` 结论统一为四种。原有表名、视图名不变，原有列只增不删。
 - 高考本机库重建：`python3 skills/zhiqu/data/purchased/ingest.py rebuild`（先快照，再按公开层与原件重算官方层、共用表与核对表，最后自检）；查询用同目录 `query.py`。
 - 学校身份按校名、曾用名对上教育部名单；对不上的（军队、港澳院校，学校下属医学院，名单外的旧校名、简称和识别错字）记入 `ingest_issue`，不按招生代码猜。补全曾用名在 [school-name-changes.csv](../../zhiqu/data/school-name-changes.csv)。
+
+## 七、来源与原件
+
+`source` 与公开层 `sources.csv` 使用同一顺序的14列：`source_id`、`grade`、`publisher`、`title`、`landing_url`（公告页）、`file_url`（原件附件直链，无则空）、`published`、`retrieved`、`method`、`archive_sha256`、`archive_path`、`archive_status`、`wayback_url`（可空）、`note`。等级仍只用官方／第三方整理，发布单位与等级分开。旧url按实际类型迁移，旧文件名、SHA及其他元数据在本机 `source_legacy` 原样保留；此表是迁移凭据，不是原件。官方来源至少有公告页或附件网址；栏目、首页只作为入口，不证明数字已取得。
+
+`archive_status` 仅用「已存原件」「原链接失效·存档副本」「未取到」。指纹必须对实际保存的完整字节计算，不能用整理表、摘要、收据或网页标题冒充原件。未取到可以保留历史指纹，但路径为空；已存状态必须有可读文件且SHA一致。DNS、限额、302预算不足与验证码都不能证明原链接已失效。采用官方其他入口或Wayback时，note保留旧网址→发现入口→存档网址、正文适用年份及核对情况，wayback_url只记实际取得的存档，不猜。
+
+公开官方原件且不超过5,000,000字节的，保存到 `skills/zhiqu-shared/originals/<sha前2位>/<sha>.<扩展名>`，进Git，逐字节原样保存，不重新打包。index.csv记录sha256、size、media_type、source_url、retrieved、source_id；同一字节可关联多个来源，(sha256,source_id)不重复。该目录sources.csv是两库已存公开官方原件的可分发来源目录，解决未安装本机库时的离线索引校验；重复source_id须与公开层声明兼容。单个原件可直接容纳未来从既有ZIP释放的成员，必须先核字节指纹、官方身份与隐私，不以ZIP自身指纹代替成员。超过上限的官方原件、所有购买原件，只存本机 purchased/originals/同样指纹路径，不进Git。含考生身份信息的名单不进入公开原件库。
+
+业务 `src_row` 原样保留，`src_page` 是原件物理页（从1起），`src_table` 为工作表名/表名/图表标识，`locator_method` 包括「读图」；无法定位页表就留空并用 `locator_status` 记缺口。整理CSV行只辅助检索，不能伪造为原件行。多原件汇编或分位数来源应注明原文件成员、工作表及统计范围；原件已删的历史数据仍显示缺口。query每个数字分别输出值、等级、发布单位、公告页、附件直链、指纹、原件路径、页／表／行；官方替换只能追溯该字段实际匹配的官方行，非唯一时列候选，不把其他字段一并升级。
+
+抽查在check_sample逐项记录实际库值、原文值、source_id、页表行及一致／不一致／口径不同／未取到，不修改业务数字。下载成功不等于数字一致，扫描件需实际读图或核实OCR；没有可靠原文时不能仅因出现相同数字就判一致。check_links.py按需经本机爬虫限额体检，各URL结果写link_check：source_id、checked、http_status、final_url、body_matches_archive，另记具体URL、状态与原因；无两端指纹时一致性为空，不用HTTP200替代正文核验，不自动定时运行。
+
+每次入库先快照，写独立候选库，核对全部原业务字段/行数与原库一致、外键与完整性检查通过后fsync并原子替换。两库的datapackage.json采用Frictionless Data Package格式，记录schema/列说明/单位/实际主外键/来源列表/数据库SHA及版本；已知业务连接但未定义SQL外键的另作说明，不伪造约束。README数据字典从该文件生成，CHANGELOG按实际入库SHA记录批次，同库指纹重跑不重复写日志。公开CSV校验同时检查14列与原件索引，默认离线运行。

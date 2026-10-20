@@ -19,7 +19,8 @@ class TestSourcesCheck(unittest.TestCase):
         self.addCleanup(self.tmp.cleanup)
         self.dir = Path(self.tmp.name)
         self.source = dict(source_id="demo-2025-physics-cutoff", grade="官方", publisher="某省教育考试院", title="投档情况",
-                           url="https://example.gov.cn/a.pdf", landing_url="", published="", retrieved="2026-10-20",
+                           file_url="https://example.gov.cn/a.pdf", landing_url="", published="", retrieved="2026-10-20",
+                           archive_sha256="", archive_path="", archive_status="未取到", wayback_url="",
                            method="PDF 表格抽取", note="")
 
     def write(self, sources, rows):
