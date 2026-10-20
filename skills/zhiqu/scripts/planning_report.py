@@ -43,11 +43,14 @@ def node_markdown(node, expand, numbers):
         return '> [!warn] '+x.get('heading','接下来要做的事')+'\n'+'\n'.join(lines)
     if typ=='checkpoint':return t(x['text'])
     if typ=='data_gap':return '缺口：'+t(x['missing'])+'；去哪里取：'+t(x['source'])+'；预计 '+t(x['expected_by'])+' 复核补齐，届时未取得仍保留待核。'
-    if typ in ('data_table','candidate_table','profile_table','assumption_table','term_table','question_table','offer_table'):
+    if typ in ('question_table','scenario_table'):
+        # 追问和风险触发画成卡片（与高考报告同一组件），不再是三列表格。
+        kind={'question_table':'questions','scenario_table':'scenarios'}[typ]
+        return '\n'.join(['::: '+kind,'columns: '+' | '.join(t(v) for v in x['columns']),*['- '+' | '.join(t(v) for v in r) for r in x['rows']],':::'])
+    if typ in ('data_table','candidate_table','profile_table','assumption_table','term_table','offer_table'):
         return table([t(v) for v in x['columns']],[[t(v) for v in r] for r in x['rows']])
     if typ in ('decision_questions','direction_cards'):
         return '\n'.join('- '+t(v['text'] if isinstance(v,dict) else v) for v in x['items'])
-    if typ=='scenario_table':return table([t(v) for v in x['columns']],[[t(v) for v in r] for r in x['rows']])
     if typ in ('bars','interval','timeline','comparison_matrix'):
         tag={'comparison_matrix':'matrix'}.get(typ,typ)
         refs=','.join(dict.fromkeys(str(numbers[e]) for e in node['evidence_refs']))

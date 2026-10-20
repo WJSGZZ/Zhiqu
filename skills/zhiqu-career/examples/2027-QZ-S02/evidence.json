@@ -377,6 +377,37 @@
       "evidence_refs": [
         "E001"
       ]
+    },
+    "09_runway": {
+      "type": "bars",
+      "content": {
+        "title": "不找到工作的话，现金能撑多久",
+        "caption": "都假设没有任何新收入。黛绿为原估计；琥珀为住房提高到每月 {{c:/high_monthly_cost|comma}} 元；红色为连应急金也全部动用，是风险边界，不建议默认这样做。",
+        "rows": [
+          [
+            "原估计（每月 {{c:/monthly_cost|comma}} 元）",
+            "{{c:/buffer_months}}",
+            "主",
+            "{{c:/buffer_months|1f}} 个月"
+          ],
+          [
+            "住房提高（每月 {{c:/high_monthly_cost|comma}} 元）",
+            "{{c:/higher_rent_months}}",
+            "稳",
+            "{{c:/higher_rent_months|1f}} 个月"
+          ],
+          [
+            "连应急金也动用",
+            "{{c:/all_cash_months}}",
+            "冲",
+            "{{c:/all_cash_months|1f}} 个月"
+          ]
+        ],
+        "unit": "个月"
+      },
+      "evidence_refs": [
+        "E001"
+      ]
     }
   }
 }

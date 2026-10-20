@@ -141,7 +141,13 @@ tr.hl td { background: #E7EDE8; }
 .glossary dt { font-weight: 600; margin-top: 1.5mm; } .glossary dd { margin: 0 0 1mm; color: var(--soft); }
 ul.asklist { list-style: none; padding: 0; margin: 0 0 3mm; }
 ul.asklist li { padding: 2mm 0 2mm 4mm; border-left: 2pt solid var(--rule2); margin: 0 0 2mm; background: #FAF7EE; break-inside: avoid; }
-ul.asklist li b { font-weight: 600; } ul.asklist li span { display: block; font-size: 8.5pt; color: var(--muted); margin-top: .5mm; }
+ul.asklist li b { font-weight: 600; }
+.ask-line { font-size: 8.5pt; line-height: 1.55; color: var(--soft); margin-top: .6mm; }
+.ask-line em { font: normal 600 7.6pt var(--sans); color: var(--accent2); margin-right: 2mm; }
+.trigger-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; margin: 2mm 0 4mm; }
+.trigger { background: #FAF7EE; border-left: 2pt solid var(--amber); padding: 2.5mm 3.5mm; break-inside: avoid; }
+.trigger .if { font-weight: 600; font-size: 9.2pt; margin-bottom: .8mm; }
+.trigger .if em { font: normal 600 7.6pt var(--sans); color: var(--amber); margin-right: 2mm; }
 .toc { margin-top: 2mm; columns: 2; column-gap: 10mm; } .toc div { display: flex; border-bottom: .4pt dotted var(--rule2); padding: .8mm 0; break-inside: avoid; }
 .toc div span:first-child { width: 10mm; color: var(--accent); font-weight: 600; }
 
@@ -161,9 +167,14 @@ figure { margin-left:0; margin-right:0; }
 .matrix { table-layout:fixed; font-size:8.3pt; }
 .matrix th { white-space:normal; }
 .matrix th:first-child { width:17%; }
-.matrix td.yes { color:var(--accent); }
-.matrix td.no { color:var(--red); }
-.matrix td.pending { color:var(--soft); }
+.matrix td { font-size:8pt; line-height:1.45; }
+.matrix td.opt { font-weight:600; }
+i.dot { display:inline-block; width:3.6mm; height:3.6mm; line-height:3.3mm; text-align:center; border-radius:50%; margin-right:1.4mm; vertical-align:-.6mm;
+  border:.8pt solid; font:normal 600 6.5pt var(--sans); }
+i.dot.yes { background:var(--accent); border-color:var(--accent); color:#fff; }
+i.dot.pending { background:#FAF7EE; border-color:var(--amber); color:var(--amber); }
+i.dot.no { background:var(--red); border-color:var(--red); color:#fff; }
+.matrix-key { font:7.6pt var(--sans); color:var(--muted); margin:-2mm 0 3mm; }
 .timeline { margin:4mm 0; }
 .timeline-row { display:flex; gap:3mm; margin:0 0 4mm; border-top:1.2pt solid var(--rule2); }
 .milestone { flex:1; padding:3mm 2mm 0; position:relative; font-size:8pt; }
@@ -596,15 +607,47 @@ def timeline(rows):
     return ''.join(out)+'</div>'
 
 
-def comparison_matrix(columns, rows):
+SYMBOL = {"yes": "✓", "pending": "△", "no": "✗"}
+
+
+def comparison_matrix(columns, rows, inline=E):
+    """比较矩阵：每格一个状态点加短说明。实心黛绿＝有支持，空心琥珀＝未核实或要补，红＝当前不满足。"""
     out = ['<table class="matrix"><thead><tr><th>选项</th>' + ''.join(f'<th>{E(c)}</th>' for c in columns) + '</tr></thead><tbody>']
     for row in rows:
-        out.append('<tr><td>'+E(str(row[0]))+'</td>')
+        out.append('<tr><td class="opt">'+inline(str(row[0]))+'</td>')
         for value in row[1:]:
-            val = str(value); state = 'yes' if val.startswith('✓') else ('no' if val.startswith('✗') else 'pending')
-            out.append(f'<td class="{state}">{E(val)}</td>')
+            val = str(value).strip()
+            state = 'yes' if val.startswith('✓') else ('no' if val.startswith('✗') else 'pending')
+            text = val[1:].strip() if val[:1] in '✓✗△' else val
+            mark = {'yes': '有支持', 'no': '不满足', 'pending': '待核'}[state]
+            out.append(f'<td class="{state}"><i class="dot {state}" title="{mark}">{SYMBOL[state]}</i>{inline(text)}</td>')
         out.append('</tr>')
-    return ''.join(out)+'</tbody></table>'
+    out.append('</tbody></table><p class="matrix-key"><i class="dot yes">✓</i>有支持　<i class="dot pending">△</i>待核或要补　<i class="dot no">✗</i>当前不满足</p>')
+    return ''.join(out)
+
+
+def question_cards(rows, labels=None, inline=E):
+    """追问卡：问题加引号作标题，其余各列写成带小标签的行；三类报告同一画法。"""
+    labels = labels or []
+    out = ['<ul class="asklist">']
+    for row in rows:
+        q, rest = row[0], row[1:]
+        out.append(f'<li><b>“{inline(str(q).strip("“”"))}”</b>')
+        for i, text in enumerate(rest):
+            label = labels[i] if i < len(labels) else ''
+            out.append(f'<div class="ask-line">' + (f'<em>{E(label)}</em>' if label else '') + f'{inline(str(text))}</div>')
+        out.append('</li>')
+    return ''.join(out) + '</ul>'
+
+
+def scenario_cards(columns, rows, inline=E):
+    """风险触发卡：“如果……”作标题，其余各列写成带小标签的行，两张一排。"""
+    out = ['<div class="trigger-grid">']
+    for row in rows:
+        out.append(f'<div class="trigger"><div class="if"><em>如果</em>{inline(str(row[0]))}</div>'
+                   + ''.join(f'<div class="ask-line"><em>{E(c)}</em>{inline(str(v))}</div>' for c, v in zip(columns[1:], row[1:]))
+                   + '</div>')
+    return ''.join(out) + '</div>'
 
 
 def route_card(title, rows):
@@ -641,9 +684,14 @@ def school_card(r):
     name = str(r['school']); note = ''
     m = re.match(r'(.+?)（(.+)）$', name)
     if m: name, note = m.groups()
-    cells = ''.join(f'<div><div class="aspect"><span>{E(a)}</span>{evidence_badge(grade_of(c))}</div>'
-                    f'<p>{E(r["brief"].get(a, "见第 12 节完整调研。"))}</p></div>' for a, b, c in r.get('items', []))
-    return f'<div class="school-card"><h3>{E(name)}' + (f'<small>{E(note)}</small>' if note else '') + f'</h3><div class="school-grid">{cells}</div></div>'
+    return info_card(name, [(a, r["brief"].get(a, "见第 12 节完整调研。"), evidence_badge(grade_of(c))) for a, b, c in r.get('items', [])], note)
+
+
+def info_card(title, cells, note=''):
+    """信息卡：标题加两栏小格，每格一个小标签、一段话，可带右上角徽章。院校调研、高考路线图共用。"""
+    body = ''.join(f'<div><div class="aspect"><span>{E(label)}</span>{badge}</div><p>{E(text)}</p></div>'
+                   for label, text, *rest in cells for badge in [rest[0] if rest else ''])
+    return f'<div class="school-card"><h3>{E(title)}' + (f'<small>{E(note)}</small>' if note else '') + f'</h3><div class="school-grid">{body}</div></div>'
 
 
 def research_table(r, level='h3'):
@@ -952,8 +1000,7 @@ def build(rep, opt):
         body += "</div>"
         # 不再放全是“△ 见下文”的方向比较表：每格都没有信息，只占版面（2026-10-20）。
         if rep.get("roadmap"):
-            body += ("<h3>路线图：门槛、顺序、里程碑与切换条件</h3><table><thead><tr><th style='width:20%'>核对项</th><th>安排</th></tr></thead><tbody>"
-                     + "".join(f"<tr><td>{E(a)}</td><td>{E(b)}</td></tr>" for a, b in rep["roadmap"]) + "</tbody></table>")
+            body += info_card("路线图：门槛、顺序、里程碑与切换条件", rep["roadmap"])
         if rep.get("news"):
             body += ("<h3>近期报道与政策</h3><p class='small'>前景和录取线都会受社会情况影响。下表是填报前查到的相关报道，影响一栏是本报告的判断。</p>"
                      "<table><thead><tr><th>事件</th><th style='width:12%'>日期</th><th style='width:22%'>来源</th><th style='width:30%'>对本报告的影响</th></tr></thead><tbody>"
@@ -1070,8 +1117,7 @@ def build(rep, opt):
     if rep.get("ask_me"):
         body = ('<p class="lead">' + E(rep.get("ask_me_intro", "这份报告是和 AI 一起做出来的。看不懂的地方、想换个假设算一算，都可以直接回去问它。下面是根据你的情况预备的问题，挑感兴趣的问就行。")) + "</p>")
         for grp in rep["ask_me"]:
-            body += f'<h3>{E(grp["topic"])}</h3><ul class="asklist">' + "".join(
-                f'<li><b>“{E(q["q"])}”</b>' + (f'<span>{E(q["why"])}</span>' if q.get("why") else "") + "</li>" for q in grp["items"]) + "</ul>"
+            body += f'<h3>{E(grp["topic"])}</h3>' + question_cards([[q["q"]] + ([q["why"]] if q.get("why") else []) for q in grp["items"]])
         body += '<p class="small">提问时可以直接说"按报告志愿表的第 3 个志愿……"，AI 会接着这份报告的数据回答；它不知道的会说不知道。</p>'
         sec("追问清单", body)
     else:

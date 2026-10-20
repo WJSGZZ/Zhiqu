@@ -133,7 +133,7 @@ def case_info(case,binding,warning=None):
 
 
 # 核对表里给人看的名称：不显示 /target_year 这类程序字段路径。
-CASE_LABELS={'/context/as_of':'报告基准日','/target_year':'目标年份','/education_entry':'入学时间','/graduation_date':'毕业时间','/birth_datetime':'出生时间',
+CASE_LABELS={'/context/as_of':'报告基准日','/education/major':'专业','/education/year_level':'年级','/education/level':'学历','/education/school_type':'院校类型','/target_year':'目标年份','/education_entry':'入学时间','/graduation_date':'毕业时间','/birth_datetime':'出生时间',
              '/budget/annual_limit':'年度预算上限','/budget/monthly_living_assumption':'每月生活费假设','/budget/monthly_housing_assumption':'每月住房费假设'}
 DATE_LABELS={'checkpoint':'下一个个人检查点','previous':'上一次检查点','action0':'第 1 件事的日期','action1':'第 2 件事的日期','action2':'第 3 件事的日期',
              'year_end':'年底复核','exam_month':'考试月份','graduate':'毕业时间','term_end':'学期末','summer':'暑假','spring':'春季','recommend':'推免时间','entry':'入学时间'}
@@ -208,7 +208,10 @@ def planning_materials(case,trace,binding,warning=None):
     for row in personal:
         key=json.dumps(row['value'],ensure_ascii=False,sort_keys=True)
         if key in dedup:
-            old=dedup[key];old['label']+=' / '+row['label'];old['sections']='、'.join(sorted(set(old['sections'].split('、')+row['sections'].split('、'))))
+            old=dedup[key]
+            if old['label'].startswith('/'):old['label']=row['label']
+            elif not row['label'].startswith('/') and row['label'] not in old['label'].split(' / '):old['label']+=' / '+row['label']
+            old['sections']='、'.join(sorted(set(old['sections'].split('、')+row['sections'].split('、'))))
         else:dedup[key]=dict(row)
     personal=list(dedup.values())
     limitations=[]

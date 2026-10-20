@@ -1214,6 +1214,34 @@
      ]
     },
     {
+     "key": "runway",
+     "component": "bars",
+     "min": 1,
+     "max": 1,
+     "from": [
+      {
+       "file": "calculations.json",
+       "pointer": ""
+      },
+      {
+       "file": "evidence.json",
+       "pointer": "/report_blocks"
+      }
+     ],
+     "source_required": true,
+     "condition": "offer_basis_none",
+     "rules": [
+      "no_offer_shows_how_long_spendable_cash_lasts",
+      "no_new_income_assumed",
+      "emergency_reserve_is_risk_boundary"
+     ],
+     "count_by": "components",
+     "node_types": [
+      "bars",
+      "data_gap"
+     ]
+    },
+    {
      "key": "offers",
      "component": "offer_table",
      "min": 1,
