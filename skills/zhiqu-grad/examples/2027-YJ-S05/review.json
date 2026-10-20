@@ -24,8 +24,8 @@
         },
         {
           "id": "traceability",
-          "score": 2,
-          "reason": "返工前扣分处：苏大名单只说“读图”，没写两次独立读图；未取到的项只写原因、没列试过的入口（原 p12）。返工后：E042/E044 范围与第 12 节写明图片版名单两次独立读图统计一致（p14 首段、来源组元信息）；第 12 节加“没取到的资料和试过的入口”表（p14），复核时又试了南航简章目录栏、南邮学院两个栏目、江大附件带来源页重试；官方摘录全部对本机原件逐字命中，统计由附件匿名分数复算。",
+          "score": 1,
+          "reason": "官方数字都有原文摘录、链接与定位，统计由附件匿名分数复算，未取到的写了试过的入口（p14）；但苏大拟录取名单是无文字层的图片版，初试分靠读图得来，虽两次独立读图一致，核对者仍无法像文字版那样对原文逐字复核，所以扣 1 分。",
           "report_location": "p14、附录"
         },
         {
@@ -77,7 +77,7 @@
           "report_location": "p2、p7、p8"
         }
       ],
-      "total": 20
+      "total": 19
     },
     "pitfalls": [
       {
@@ -281,14 +281,14 @@
     "candidates.json": "63777e211bd6d4babb4e05a4f0038127bb4e81270399bc3c9eecdf83c9e40e7e",
     "evidence.json": "de338cc972b0360842391182344949a6fca30ed9979af69ec065f94a324bd4dd",
     "calculations.json": "a529584576aa1515c8a7cce9cc3cc3949f40c9c024ba4f60a979bd1c5cd16f35",
-    "judgment.json": "5bfea749988de77be09167a8f015cad007c477b14ea7e30bb6d12ce2c91505ca",
-    "narrative.json": "c37c43362d9670a4cd76263f46041df9d346fee8f54e51f675835d0565346da7",
+    "judgment.json": "39fa4b2230293b2817ad6a81d2ea43ed60229010bd071999ad36e8506d944100",
+    "narrative.json": "b38ed2fdd37780ee59e3f4c39ab1bec5284bf4a1a2f258a7a24ca1f3afbf4e8f",
     "profile.json": "af232e95b42de1286681d5b04d706bbd8d16d3dd86cfe304a7d87e5a6bfcab88",
     "profile-supplement.txt": "952368202eeb2cd031c6c0d52212442dca0faaadcd6c99828f951e50ba15d704",
-    "report.md": "8fafdbff958f3eab5c956544de18b0d80994469953905e935038562e8a434d48",
-    "report.html": "96ebed1616d6983adc5b590b728827ddc93c398a8725ea66aa14aff080d5487f",
-    "report.pdf": "9b1048c9ee950c0198daa978c19617f2b299806907f79ba422147feb3f81794a",
-    "report_trace.json": "fcbad06dbd2d68057b464db179c2fe45a893219dfafe156f4567e60dc1ac73fb",
-    "operator_check.md": "24ba4ccbafa762be2621e1d449d64d64985cf1ac74539fa537f854e6e6ec3fd4"
+    "report.md": "79df2b702505c8617f76cc94808855a4ecc0bdccfe14b9cde70ee8dc57e53c64",
+    "report.html": "b22b59bbe57eded1c399f63b382d0aa86d85dc8c19934139c54a498fbea5da6e",
+    "report.pdf": "e3d90d9869045d0423ba871f1c99aff4fd7d359f15a3d4807fa3775403b4656d",
+    "report_trace.json": "370eb54f4425820a5dbd64f3d173630780df38b0347d0121bea78fe9054b4061",
+    "operator_check.md": "07cc403e5d0975fae0dfad4c5c020e866deab831ae12cb97bda19d86dea4f429"
   }
 }

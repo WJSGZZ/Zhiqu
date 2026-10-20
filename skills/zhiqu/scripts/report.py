@@ -944,8 +944,14 @@ def flow(rows):
                 if sd in exits: raise ValueError('判断的同一侧只能引出一条分支')
                 exits.add(sd)
                 vx = n['cx'] + sd * n['w'] / 2
+                side_x = c['cx'] - sd * c['w'] / 2
+                top_taken = any(q != n['id'] and abs(nodes[q]['cx'] - c['cx']) <= 1 for q in c['parents'])
                 if t in side:
-                    pts = [(vx, n['cy']), (c['cx'] - sd * c['w'] / 2, n['cy'])]
+                    pts = [(vx, n['cy']), (side_x, n['cy'])]
+                elif top_taken and c['cy'] > n['cy'] + 1 and sd * (side_x - vx) >= 16:
+                    # 目标的上方入口已被正上方的父节点占用：从朝向本节点的侧边进入，各自带箭头，不在线段中途汇合。
+                    ex = side_x - sd * 10
+                    pts = [(vx, n['cy']), (ex, n['cy']), (ex, c['cy']), (side_x, c['cy'])]
                 elif sd * (c['cx'] - vx) >= 6:
                     pts = [(vx, n['cy']), (c['cx'], n['cy']), (c['cx'], top)]
                 else:

@@ -179,6 +179,33 @@ class NewComponents(unittest.TestCase):
                 self.assertFalse(b1[0] < b2[0] + b2[2] and b2[0] < b1[0] + b1[2] and b1[1] < b2[1] + b2[3] and b2[1] < b1[1] + b1[3], (n1, n2))
         self.assertIn('要核实的判断', svg)
 
+    MERGE = [['A', '步骤', '报名', '>B'], ['B', '判断', '过院线？', '过了>D', '没过>E'],
+             ['D', '步骤', '准备复试', '>H'], ['E', '判断', '过国家线？', '过了>F', '没过>G'],
+             ['H', '判断', '复试通过？', '通过>I', '没通过>F'], ['I', '结果', '拟录取'],
+             ['F', '备选', '调剂或春招'], ['G', '备选', '春招']]
+
+    def test_flow_two_parents_enter_target_separately_with_arrows(self):
+        svg = report.flow(self.MERGE)
+        boxes = {m[5]: (float(m[1]), float(m[2]), float(m[3]), float(m[4])) for m in re.finditer(
+            r'<rect x="' + NUM + '" y="' + NUM + '" width="' + NUM + '" height="' + NUM + r'"[^>]*/><text[^>]*>([^<]*)</text>', svg)}
+        x, y, w, h = boxes['调剂或春招']
+        tips = [(float(m[1]), float(m[2])) for m in re.finditer(r'L' + NUM + ' ' + NUM + r'Z" fill', svg)]
+        on_top = [p for p in tips if abs(p[1] - y) < 0.6 and x - 0.6 <= p[0] <= x + w + 0.6]
+        on_side = [p for p in tips if abs(p[0] - x) < 0.6 and y - 0.6 <= p[1] <= y + h + 0.6]
+        self.assertEqual(len(on_top), 1)      # 正上方的父节点从顶边进入
+        self.assertEqual(len(on_side), 1)     # 另一条从左侧边进入，各自带箭头
+        # 两条入边的折线互不重合：侧入那条的竖段在方框左外侧，不与顶入竖线共线
+        legs = [m for m in re.finditer(r'<path d="M([^"]+)" fill="none"', svg)]
+        verticals = set()
+        for m in legs:
+            pts = [tuple(map(float, s.strip().split())) for s in m[1].split('L')]
+            for (x1, y1), (x2, y2) in zip(pts, pts[1:]):
+                if abs(x1 - x2) < 0.01:
+                    seg = (round(x1, 1), min(y1, y2), max(y1, y2))
+                    for v in verticals:
+                        if v[0] == seg[0]: self.assertFalse(v[1] < seg[2] - 0.5 and seg[1] < v[2] - 0.5, '两条连线在中途重合')
+                    verticals.add(seg)
+
     def test_flow_rejects_cycles_and_unknown_targets(self):
         with self.assertRaises(ValueError):
             report.flow([['A', '步骤', '甲', '>B'], ['B', '步骤', '乙', '>A']])

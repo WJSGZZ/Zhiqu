@@ -9,8 +9,8 @@
     "candidates.json": "63777e211bd6d4babb4e05a4f0038127bb4e81270399bc3c9eecdf83c9e40e7e",
     "evidence.json": "de338cc972b0360842391182344949a6fca30ed9979af69ec065f94a324bd4dd",
     "calculations.json": "a529584576aa1515c8a7cce9cc3cc3949f40c9c024ba4f60a979bd1c5cd16f35",
-    "judgment.json": "5bfea749988de77be09167a8f015cad007c477b14ea7e30bb6d12ce2c91505ca",
-    "narrative.json": "c37c43362d9670a4cd76263f46041df9d346fee8f54e51f675835d0565346da7",
+    "judgment.json": "39fa4b2230293b2817ad6a81d2ea43ed60229010bd071999ad36e8506d944100",
+    "narrative.json": "b38ed2fdd37780ee59e3f4c39ab1bec5284bf4a1a2f258a7a24ca1f3afbf4e8f",
     "profile.json": "af232e95b42de1286681d5b04d706bbd8d16d3dd86cfe304a7d87e5a6bfcab88",
     "profile-supplement.txt": "952368202eeb2cd031c6c0d52212442dca0faaadcd6c99828f951e50ba15d704"
   },
@@ -20,7 +20,7 @@
     "planning_workflow.py": "6877e27e01e475f4fef8dc9ef01b95929b6f536e2af6110bc9cd267c9e212925",
     "operator_check.py": "97965475c2c8b6efe5dbf2747511526d1729a540f55a16b54fa282e2a810fdc7",
     "check_demos.py": "fc8e1625f9e052373756160514ad5c73db1e8451c233425918edb5bc839d9f63",
-    "report.py": "5ca9d4dd41806233ea94c4b1450c99b2e0ee3ef9853d8298f0fb9260e512f186",
+    "report.py": "350444bb232ed5df04fbf8244f3e4d5db80f340c764b6f6d52a5572ff76287a0",
     "render_report.py": "f1fec10064d7ce24d58dccbf7963cc2012c1ef098806e3ead881d9bbea239e92",
     "profile_store.py": "1cfd828583598a65cf719a46447cb3112ef0170eb1a638b89ab023cb47a04e7f"
   },
@@ -60,6 +60,24 @@
       "ref": "{{k:/context/personal_dates/action1|md}}",
       "value": "2026-10-23",
       "display": "10 月 23 日"
+    },
+    {
+      "location": "01.figure.1",
+      "ref": "{{k:/context/personal_dates/action1|md}}",
+      "value": "2026-10-23",
+      "display": "10 月 23 日"
+    },
+    {
+      "location": "01.figure.1",
+      "ref": "{{e:E010#/value|md}}",
+      "value": "2026-10-24",
+      "display": "10 月 24 日"
+    },
+    {
+      "location": "01.figure.1",
+      "ref": "{{e:E017#/value}}",
+      "value": "22:00",
+      "display": "22:00"
     },
     {
       "location": "01.figure.1",
@@ -1329,9 +1347,9 @@
     }
   ],
   "artifacts": {
-    "report.md": "8fafdbff958f3eab5c956544de18b0d80994469953905e935038562e8a434d48",
-    "report.html": "96ebed1616d6983adc5b590b728827ddc93c398a8725ea66aa14aff080d5487f",
-    "report.pdf": "9b1048c9ee950c0198daa978c19617f2b299806907f79ba422147feb3f81794a"
+    "report.md": "79df2b702505c8617f76cc94808855a4ecc0bdccfe14b9cde70ee8dc57e53c64",
+    "report.html": "b22b59bbe57eded1c399f63b382d0aa86d85dc8c19934139c54a498fbea5da6e",
+    "report.pdf": "e3d90d9869045d0423ba871f1c99aff4fd7d359f15a3d4807fa3775403b4656d"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "report_profile": {
