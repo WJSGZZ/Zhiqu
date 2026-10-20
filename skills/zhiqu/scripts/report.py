@@ -213,7 +213,7 @@ i.fk.unknown { border:.8pt dashed var(--rule2); }
 .school-card { background:#FFFDF8; border-top:1.6pt solid var(--accent2); padding:3.5mm 5mm 1mm; margin:0 0 5mm; break-inside:avoid; }
 .school-card h3 { margin:0 0 2.5mm; font-size:11.5pt; }
 /* 长信息卡（高考路线图）可在格与格之间换页，格内不拆、标题不落单：整块卡挤到下一页会在节中间留下大半页空白（2026-10-20 版面空白检查）。 */
-.school-card.breakable { break-inside:auto; } .school-card.breakable h3 { break-after:avoid; } .school-card.breakable .school-grid > div { break-inside:avoid; }
+.school-card.breakable { break-inside:auto; -webkit-box-decoration-break:clone; box-decoration-break:clone; } .school-card.breakable h3 { break-after:avoid; } .school-card.breakable .school-grid > div { break-inside:avoid; }
 .school-card h3 small { font:400 8pt var(--sans); color:var(--muted); margin-left:2mm; }
 .school-grid { display:grid; grid-template-columns:1fr 1fr; gap:0 7mm; }
 .school-grid > div { border-top:.4pt solid var(--rule); padding:1.8mm 0 2.2mm; }

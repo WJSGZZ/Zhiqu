@@ -72,7 +72,7 @@ def check_page(page):
 
 MM = 72 / 25.4
 PAGE_MARGIN = 20 * MM   # 与 report.py 的 @page 上下边距 20mm 一致：版心是去掉页眉页脚边距后的区域
-BLANK_RATIO = 0.35      # 连续空白超过版心高度的这个比例就报错
+BLANK_RATIO = 0.30      # 连续空白超过版心高度的这个比例就报错（2026-10-20：33% 的空白肉眼已明显，从 0.35 收紧）
 
 
 def _blank_info(page):
