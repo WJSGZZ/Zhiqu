@@ -473,7 +473,10 @@ class PlanningCase:
         for e in items:
             for k in required:
                 if k not in e:self.err('evidence.json',e.get('id','?')+'.'+k,'缺字段')
-            if e.get('grade') not in ('官方','多人一致','单人说法','推测'):self.err('evidence.json',e['id'],'等级错误')
+            if e.get('grade') not in ('官方','多人一致','第三方整理','单人说法','推测'):self.err('evidence.json',e['id'],'等级错误')
+            if e.get('grade')=='第三方整理':
+                if not e.get('cross_check'):self.err('evidence.json',e['id'],'第三方整理须写 cross_check（与官方原文抽样核对的范围与结果）')
+                if e.get('main_conclusion'):self.err('evidence.json',e['id'],'第三方整理不能单独支撑主结论，须有官方原文')
             if e.get('retrieval_method') not in ('curl','browser','provided','operator_check'):self.err('evidence.json',e['id'],'取文方式错误')
             if e.get('grade')=='官方' and not re.match(r'https?://',e.get('source',{}).get('url','')):self.err('evidence.json',e['id'],'官方网址为空')
             if day(e['retrieved_on'])>now or day(e['review_due'])<day(e['retrieved_on']):self.err('evidence.json',e['id'],'日期前后错误')

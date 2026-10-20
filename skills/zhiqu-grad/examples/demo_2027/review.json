@@ -106,9 +106,9 @@
     "narrative.json": "c8367bbda892a637559085198bd56f36d467199b2410f2773fcf2c02331fdb81",
     "profile.txt": "2be92b9770f7a4a877386334b958c096198b948c89c5eabca030d4f557e29457",
     "report.md": "beb0f1dd31d787c421cc0d1adf9ad49c7859d1c5e4e815aa2a9b807c8c780cb3",
-    "report.html": "eaa85cb01a094ad80923cc318d38b26ff06850503fbe85ba384261a91a4ddc14",
-    "report.pdf": "69b00745341c391219b3254c11e22e39f42af7714a2c3ce541f3631031422fbb",
-    "report_trace.json": "9423a28789f4045d2da94ea1e2fd5f00267874387a6d5459d7a88eb84466b84d",
+    "report.html": "418d89688c151a59edbc6a22f591cf65302f772202cf9b60e167c5516d221f5b",
+    "report.pdf": "f64d905f054f5a161710d4067cb627f207a8fe738db6c7200237cb9d2809726e",
+    "report_trace.json": "8f1872dde2c71c3121d1af98798165bc95fd777da9b237314892e1e1dce4700e",
     "operator_check.md": "d0eb523a7228070bca05cca14a16c5ca3ecccb92301fcd20ca36128d979ea9a7",
     "profile_snapshot.json": "432626de4888a0d461edc284e9c475796e8d96ce33683030143dcd3f896be032"
   },
@@ -232,6 +232,17 @@
         "report_trace.json"
       ],
       "reason": "报告底色改为与网页问卷一致的浅米色；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.md",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "新增“第三方整理”证据等级样式；内容未变。"
     }
   ]
 }

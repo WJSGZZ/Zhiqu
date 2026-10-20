@@ -208,6 +208,7 @@ i.fk.unknown { border:.8pt dashed var(--rule2); }
 .evidence.single { background:var(--pale);color:var(--ink); }
 .evidence.inference { background:transparent;color:var(--muted); }
 .evidence.missing { background:transparent;color:var(--muted);border-style:dashed; }
+.evidence.compiled { background:transparent;color:var(--amber);border-color:var(--amber); }
 /* 院校卡片：一格一个方面、一句结论；完整调研在第 12 节。 */
 .school-card { background:#FFFDF8; border-top:1.6pt solid var(--accent2); padding:3.5mm 5mm 1mm; margin:0 0 5mm; break-inside:avoid; }
 .school-card h3 { margin:0 0 2.5mm; font-size:11.5pt; }
@@ -1028,9 +1029,9 @@ def stack(rows, unit='', percent=False):
     return _svg_open(height) + ''.join(out) + '</svg>'
 
 
-EVIDENCE_STYLE = {  # 与证据徽章同色：官方黛绿、多人一致石绿、单人说法浅色、推测空心、未取到虚线
+EVIDENCE_STYLE = {  # 与证据徽章同色：官方黛绿、多人一致石绿、单人说法浅色、推测空心、第三方整理琥珀框、未取到虚线
     '官方': ('#21473E', 'none', '#FFFFFF', ''), '多人一致': ('#34685D', 'none', '#FFFFFF', ''),
-    '单人说法': ('#E3DDCB', 'none', INK, ''), '推测': ('none', '#B5AD98', MUTED, ''), '未取到': ('none', '#B5AD98', MUTED, '3 2')}
+    '单人说法': ('#E3DDCB', 'none', INK, ''), '推测': ('none', '#B5AD98', MUTED, ''), '第三方整理': ('none', '#A8772B', '#A8772B', ''), '未取到': ('none', '#B5AD98', MUTED, '3 2')}
 
 
 def evidence_grid(rows):
@@ -1281,7 +1282,7 @@ def kpi_cards(items, inline=E):
 
 
 def evidence_badge(level):
-    names = {'官方': 'official', '多人一致': 'corroborated', '单人说法': 'single', '推测': 'inference', '未取到': 'missing'}
+    names = {'官方': 'official', '多人一致': 'corroborated', '单人说法': 'single', '推测': 'inference', '第三方整理': 'compiled', '未取到': 'missing'}
     if level not in names: raise ValueError('未知证据等级')
     return f'<span class="evidence {names[level]}">{level}</span>'
 
@@ -1290,7 +1291,7 @@ def grade_of(text):
     """调研证据等级文字 → 徽章等级；以“未取到”开头的不冒充推测。"""
     text = str(text)
     if text.startswith('未取到'): return '未取到'
-    return next((g for g in ('官方', '多人一致', '单人说法', '推测') if g in text), '推测')
+    return next((g for g in ('官方', '多人一致', '第三方整理', '单人说法', '推测') if g in text), '推测')
 
 
 def school_card(r):
