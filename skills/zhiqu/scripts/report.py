@@ -171,17 +171,29 @@ figure { margin-left:0; margin-right:0; }
 .matrix th:first-child { width:17%; }
 .matrix td { font-size:8pt; line-height:1.45; }
 .matrix td.opt { font-weight:600; }
-i.dot { display:inline-block; width:3.6mm; height:3.6mm; line-height:3.3mm; text-align:center; border-radius:50%; margin-right:1.4mm; vertical-align:-.6mm;
-  border:.8pt solid; font:normal 600 6.5pt var(--sans); }
-i.dot.yes { background:var(--accent); border-color:var(--accent); color:#fff; }
-i.dot.pending { background:#FAF7EE; border-color:var(--amber); color:var(--amber); }
-i.dot.no { background:var(--red); border-color:var(--red); color:#fff; }
+i.dot { display:inline-block; width:3.6mm; height:3.6mm; margin-right:1.4mm; vertical-align:-.7mm; font-style:normal; }
+i.dot svg { display:block; width:100%; height:100%; }
+i.checkbox { display:inline-block; width:3.2mm; height:3.2mm; border:.8pt solid var(--rule2); border-radius:.6mm; background:#FAF7EE; vertical-align:-.5mm; }
 .matrix-key { font:7.6pt var(--sans); color:var(--muted); margin:-2mm 0 3mm; }
+.facts { display:grid; grid-template-columns:repeat(3,1fr); gap:2mm; margin:1mm 0 3mm; }
+.fact { padding:1.8mm 2.6mm; background:#FAF7EE; border-left:2.2pt solid var(--accent); break-inside:avoid; }
+.fact.pending { border-left-color:var(--amber); background:#F5ECD9; }
+.fact.unknown { background:transparent; border:.8pt dashed var(--rule2); }
+.fact b { display:block; font:600 7.6pt var(--sans); color:var(--muted); letter-spacing:.3pt; }
+.fact span { display:block; font-size:9.4pt; line-height:1.45; }
+.fact.unknown span { color:var(--muted); }
+i.fk { display:inline-block; width:3.4mm; height:2.6mm; margin-right:1.2mm; vertical-align:-.3mm; }
+i.fk.known { background:#FAF7EE; border-left:2.2pt solid var(--accent); }
+i.fk.pending { background:#F5ECD9; border-left:2.2pt solid var(--amber); }
+i.fk.unknown { border:.8pt dashed var(--rule2); }
+.fig .matrix-key { margin:1mm 0 0; }
+.panel-ttl { font:600 7.8pt var(--sans); color:var(--accent); margin:2mm 0 .5mm; }
 .timeline { margin:4mm 0; }
 .timeline-row { display:flex; gap:3mm; margin:0 0 4mm; border-top:1.2pt solid var(--rule2); }
 .milestone { flex:1; padding:3mm 2mm 0; position:relative; font-size:8pt; }
-.milestone::before { content:'●'; color:var(--accent2); position:absolute; top:-3.5mm; }
-.milestone.checkpoint::before { content:'◆'; color:var(--amber); }
+.milestone::before { content:''; position:absolute; top:-1.55mm; left:2mm; width:2.6mm; height:2.6mm; border-radius:50%;
+  background:var(--accent2); }
+.milestone.checkpoint::before { border-radius:.3mm; transform:rotate(45deg); background:var(--amber); }
 .milestone b, .milestone strong, .milestone span { display:block; }
 .milestone b { color:var(--accent); margin-bottom:1mm; }
 .milestone span { color:var(--muted); margin-top:1mm; }
@@ -269,14 +281,16 @@ def public_text(text):
     return display_text(text.replace('–','—'))
 
 
-def simulated_name(name):
+def simulated_name(name, simulated=True):
+    """示例报告在名字后标“（模拟）”；正式案例（真实客户）不标。"""
     name = re.sub(r'^(?:虚构示例|模拟用户|示例)\s*[·：]?\s*', '', str(name)).replace('（虚构）','')
+    if not simulated: return name.replace('（模拟）','')
     return name if '（模拟）' in name else name + '（模拟）'
 
 
-def cover_html(title, subtitle, person, stage, region, report_id, generated, data_asof, conclusion, sections):
+def cover_html(title, subtitle, person, stage, region, report_id, generated, data_asof, conclusion, sections, simulated=True):
     """三版唯一封面：固定六格；长说明移到摘要，调用方负责保留。"""
-    rows = [('对象', simulated_name(person)), ('版本或阶段', stage), ('地区或学校', region),
+    rows = [('对象', simulated_name(person, simulated)), ('版本或阶段', stage), ('地区或学校', region),
             ('报告编号', report_id), ('生成日期', generated), ('数据截至', data_asof)]
     for key, value in rows:
         if _text_width(str(value),11)>280 or len(str(value))>32 or '\n' in str(value):
@@ -471,8 +485,8 @@ def keep_numeric_runs(fragment):
     return ''.join(out)
 
 
-def document_html(title, cover, body, person, edition, report_id):
-    runhead = f'{simulated_name(person)} · {edition} · {report_id}'
+def document_html(title, cover, body, person, edition, report_id, simulated=True):
+    runhead = f'{simulated_name(person, simulated)} · {edition} · {report_id}'
     safe = lambda s: str(s).replace('\\', '\\\\').replace('"', '\\"').replace('\n', ' ')
     css = CSS.replace('__RUNHEAD__', safe(runhead)).replace('__TOPLEFT__', safe('知衢 · ' + edition + '决策报告'))
     cover,body=keep_numeric_runs(cover),keep_numeric_runs(body)
@@ -551,65 +565,598 @@ def figure(title, content, caption, sources):
             '、'.join(f'[{n}]' for n in re.findall(r'\d+', refs)) + '</figcaption></figure>')
 
 
-def bar_chart(rows, unit='', maximum=None, palette=None):
-    """rows=[label,value,tag?,display?]，不改数值；负值/缺失不伪装成0。"""
+# ---- 图表共用几何（科研插图标准）-----------------------------------------------------------
+# 所有 SVG 图宽 640 个单位，印到 A4 版心（174mm）时 1 单位约 0.77pt；最小字号 9.5 单位≈7.3pt。
+# 同一套左右栏：标签栏 0—206，绘图区 PLOT_L—PLOT_R，数值栏右对齐到 VALUE_R。条形、区间、策略图共用，
+# 换图时左边距和数值列对齐。数值轴一律画刻度和单位；条形从 0 起；缺数据写“未取到”、画虚线框，不画成 0。
+CHART_W = 640
+CHART_SANS = "PingFang SC, Source Han Sans SC, Noto Sans SC, sans-serif"
+LABEL_W, PLOT_L, PLOT_R, VALUE_R = 206, 214, 540, 638
+FS, FS_SMALL = 10.5, 9.5
+INK, SOFT, MUTED, RULE, GRID = '#222A26', '#454E48', '#6E776E', '#B5AD98', '#D3CCB8'
+
+
+def _svg_open(height, cls='chart'):
+    return (f'<svg class="{cls}" viewBox="0 0 {CHART_W} {height:.0f}" xmlns="http://www.w3.org/2000/svg" '
+            f'font-family="{CHART_SANS}" font-size="{FS}">')
+
+
+def _fit_text(text, width, size=FS):
+    """按估算宽度截断，截断处加省略号；不在半个括号处硬切。"""
+    text = str(text)
+    if _text_width(text, size) <= width:
+        return text
+    while text and _text_width(text + '…', size) > width:
+        text = text[:-1]
+    return text.rstrip('(（[【·- ') + '…'
+
+
+def _num(v):
+    """刻度数字：整数加千分位，小数去掉多余的 0。"""
+    v = float(v)
+    if abs(v - round(v)) < 1e-9:
+        return f'{int(round(v)):,}'
+    return f'{v:,.6g}'
+
+
+def nice_ticks(lo, hi, target=5):
+    """覆盖 [lo, hi] 的整齐刻度：步长取 1、2、2.5、5 乘 10 的幂。返回刻度列表（首尾包住数据）。"""
+    lo, hi = float(lo), float(hi)
+    if hi <= lo:
+        hi = lo + 1
+    raw = (hi - lo) / max(target, 1)
+    mag = 10 ** math.floor(math.log10(raw))
+    step = next(m * mag for m in (1, 2, 2.5, 5, 10) if m * mag >= raw - 1e-12)
+    first = math.floor(lo / step + 1e-9) * step
+    last = math.ceil(hi / step - 1e-9) * step
+    n = int(round((last - first) / step))
+    return [round(first + i * step, 10) for i in range(n + 1)]
+
+
+def _x_axis(ticks, scale, y, fmt=_num, unit='', grid_top=None):
+    """横向数值轴：轴线、刻度、刻度值；单位写在最后一个刻度值后面。grid_top 给出时画浅色竖向网格。"""
+    out = []
+    for i, t in enumerate(ticks):
+        x = scale(t)
+        if grid_top is not None:
+            out.append(f'<line x1="{x:.2f}" x2="{x:.2f}" y1="{grid_top:.1f}" y2="{y:.1f}" stroke="{GRID}" stroke-width=".6"/>')
+        out.append(f'<line x1="{x:.2f}" x2="{x:.2f}" y1="{y:.1f}" y2="{y + 3:.1f}" stroke="{MUTED}" stroke-width=".8"/>')
+        label = fmt(t) + (' ' + unit if unit and i == len(ticks) - 1 else '')
+        anchor = 'start' if i == 0 and x - _text_width(label, FS_SMALL) / 2 < 0 else 'middle'
+        out.append(f'<text x="{x:.2f}" y="{y + 13:.1f}" font-size="{FS_SMALL}" fill="{MUTED}" text-anchor="{anchor}">{E(label)}</text>')
+    out.insert(0, f'<line x1="{scale(ticks[0]):.2f}" x2="{scale(ticks[-1]):.2f}" y1="{y:.1f}" y2="{y:.1f}" stroke="{MUTED}" stroke-width=".8"/>')
+    return ''.join(out)
+
+
+def _legend(items, y, x=0):
+    """图例：[(图形SVG片段生成函数(x, y), 文字)]，从左往右排，返回 (svg, 结束x)。"""
+    out = []
+    for draw, text in items:
+        out.append(draw(x + 5, y - 3.5))
+        out.append(f'<text x="{x + 14:.1f}" y="{y:.1f}" font-size="{FS_SMALL}" fill="{MUTED}">{E(text)}</text>')
+        x += 14 + _text_width(text, FS_SMALL) + 14
+    return ''.join(out), x
+
+
+def _swatch(color):
+    return lambda x, y: f'<rect x="{x - 5:.1f}" y="{y - 4.5:.1f}" width="10" height="9" fill="{color}"/>'
+
+
+def bar_chart(rows, unit='', maximum=None, palette=None, legend=None, tick_fmt=None):
+    """水平条形图。rows=[label,value,tag?,display?]，不改数值；负值不收，缺失写“未取到”不画成 0。
+
+    条从 0 起，长度严格与数值成比例；轴的上界取 maximum（给了时），否则取覆盖最大值的整齐刻度。
+    轴下有刻度值，单位写在最后一个刻度后。legend={tag: 说明} 时在图顶画色块图例（多种颜色时应给，或在图注写明）。
+    """
     rows = [list(r) for r in rows]
     vals = [float(r[1]) for r in rows if r[1] is not None]
-    vmax = float(maximum or max(vals, default=1) or 1)
     if any(v < 0 or not math.isfinite(v) for v in vals):
         raise ValueError('条形图只接受有限非负数；负结余应在情景表中明确披露')
-    width, label_w, plot_w, row_h = 640, 215, 330, 18
-    out = [f'<svg class="chart" viewBox="0 0 {width} {len(rows)*row_h+8}" xmlns="http://www.w3.org/2000/svg" font-size="10.5" font-family="PingFang SC, Noto Sans SC, sans-serif">']
+    if maximum is not None and any(v > float(maximum) for v in vals):
+        raise ValueError('条形图数值超出上界')
+    pal = palette or PALETTE
+    ticks = nice_ticks(0, float(maximum) if maximum else (max(vals, default=0) or 1))
+    if maximum:
+        ticks = [t for t in ticks if t <= float(maximum) + 1e-9]
+        if abs(ticks[-1] - float(maximum)) > 1e-9:
+            ticks.append(float(maximum))
+    vmax = ticks[-1]
+    scale = lambda v: PLOT_L + (PLOT_R - PLOT_L) * float(v) / vmax
+    row_h, bar_h = 18, 12
+    top = 18 if legend else 2
+    axis_y = top + len(rows) * row_h + 3
+    out = [_svg_open(axis_y + (18 if vals else 0))]
+    if legend:
+        present = {(r[2] if len(r) > 2 and r[2] else '主') for r in rows}
+        used = [t for t in legend if t in present]
+        out.append(_legend([(_swatch(pal.get(t, PALETTE['主'])), legend[t]) for t in used], 10, PLOT_L)[0])
+    if vals:  # 一个数都没取到时不画数轴：没有可比的量，画一条 0—1 的轴只会误导
+        out.append(_x_axis(ticks, scale, axis_y, tick_fmt or _num, unit, grid_top=top))
     for i, row in enumerate(rows):
-        label, value = row[:2]; tag = row[2] if len(row) > 2 else '主'; y = i*row_h+3
-        out.append(f'<text x="0" y="{y+15}" fill="#454E48">{E(label)}</text>')
-        out.append(f'<rect x="{label_w}" y="{y+2}" width="{plot_w}" height="13" fill="#E3DDCB"/>')
+        label, value = row[:2]
+        tag = row[2] if len(row) > 2 and row[2] else '主'
+        y = top + i * row_h + 3
+        out.append(f'<text x="0" y="{y + 10:.1f}" fill="{SOFT}">{E(_fit_text(label, LABEL_W))}</text>')
         if value is None:
+            out.append(f'<rect x="{PLOT_L}" y="{y:.1f}" width="{PLOT_R - PLOT_L}" height="{bar_h}" fill="none" stroke="{RULE}" stroke-width=".8" stroke-dasharray="3 2"/>')
             display = '未取到'
         else:
-            if float(value) > vmax: raise ValueError('条形图数值超出上界')
-            bw = plot_w*float(value)/vmax
-            out.append(f'<rect x="{label_w}" y="{y+2}" width="{bw:.2f}" height="13" fill="{(palette or PALETTE).get(tag, PALETTE["主"])}"/>')
-            display = row[3] if len(row) > 3 and row[3] else f'{float(value):,.1f}'.removesuffix('.0') + (' '+unit if unit else '')
-        out.append(f'<text x="635" y="{y+15}" text-anchor="end" fill="#222A26">{E(str(display))}</text>')
-    out.append('</svg>'); return ''.join(out)
+            bw = scale(value) - PLOT_L
+            out.append(f'<rect x="{PLOT_L}" y="{y:.1f}" width="{bw:.2f}" height="{bar_h}" fill="{pal.get(tag, PALETTE["主"])}"/>')
+            display = row[3] if len(row) > 3 and row[3] else _num(value) + (' ' + unit if unit else '')
+        out.append(f'<text x="{VALUE_R}" y="{y + 10:.1f}" text-anchor="end" fill="{INK}">{E(str(display))}</text>')
+    if vals:
+        out.append(f'<line x1="{PLOT_L}" x2="{PLOT_L}" y1="{top:.1f}" y2="{axis_y:.1f}" stroke="{MUTED}" stroke-width=".8"/>')
+    out.append('</svg>')
+    return ''.join(out)
+
+
+def _interval_marks():
+    return {
+        'iqr': (lambda x, y: f'<line x1="{x - 6:.1f}" x2="{x + 6:.1f}" y1="{y:.1f}" y2="{y:.1f}" stroke="#34685D" stroke-width="7"/>', '中间一半（25%—75% 分位）'),
+        'range': (lambda x, y: f'<line x1="{x - 6:.1f}" x2="{x + 6:.1f}" y1="{y:.1f}" y2="{y:.1f}" stroke="#34685D" stroke-width="1.2"/>', '最低—最高'),
+        'median': (lambda x, y: f'<line x1="{x:.1f}" x2="{x:.1f}" y1="{y - 6:.1f}" y2="{y + 6:.1f}" stroke="#21473E" stroke-width="2"/>', '中位数'),
+        'line': (lambda x, y: f'<line x1="{x:.1f}" x2="{x:.1f}" y1="{y - 7:.1f}" y2="{y + 7:.1f}" stroke="{INK}" stroke-width="1" stroke-dasharray="2 1.5"/>', '复试线'),
+        'point': (lambda x, y: f'<circle cx="{x:.1f}" cy="{y:.1f}" r="3.6" fill="#A8772B"/>', '对照分'),
+    }
 
 
 def interval_chart(rows, unit='分'):
-    """rows=[label,lo,hi,point]；缺资料明确显示；每行保持原统计口径。"""
-    vals = [float(v) for r in rows for v in r[1:4] if v is not None]
-    low, high = (min(vals)-10, max(vals)+10) if vals else (0, 100)
-    scale = lambda v: 225 + (float(v)-low)/max(high-low,1)*320
-    out = [f'<svg class="chart" viewBox="0 0 640 {len(rows)*37+28}" xmlns="http://www.w3.org/2000/svg" font-size="10.5" font-family="PingFang SC, Noto Sans SC, sans-serif">']
-    for i, (label, lo, hi, point) in enumerate(rows):
-        y = 17+i*37
-        out.append(f'<text x="0" y="{y+4}" fill="#454E48">{E(label)}</text>')
+    """分数分布图。rows=[label, Q1, Q3, 对照点, 最低?, 最高?, 中位数?, 复试线?]；后四项可省，缺资料明确显示。
+
+    粗石绿段＝中间一半（Q1—Q3），细线＝最低到最高，黛绿短竖线＝中位数，虚线短竖线＝复试线，
+    琥珀点＝对照分（本人模考或明示的情景分）。每行保持原统计口径，不跨口径合并。
+    下方是带刻度的分数轴（不从 0 起：这是位置图，不比长度），图例只列出图里实际出现的标记。
+    各行对照分相同时画一条贯穿各行的琥珀虚线并只标一次数值。
+    """
+    rows = [list(r) + [None] * (8 - len(r)) for r in rows]
+    vals = [float(v) for r in rows for v in r[1:8] if v is not None]
+    for label, lo, hi, point, vmin, vmax, med, line in rows:
+        if vmin is not None and vmax is not None and vmin > vmax: raise ValueError('最低分不可大于最高分')
+        if lo is not None and hi is not None and lo > hi: raise ValueError('区间下界不可大于上界')
+    points = {r[3] for r in rows if r[3] is not None}
+    common = len(rows) > 1 and len(points) == 1 and all(r[3] is not None for r in rows)
+    row_h = 30 if any(r[4] is not None and r[5] is not None for r in rows) or (points and not common) else 24
+    top = 16 if common else 4
+    axis_y = top + len(rows) * row_h + 2
+    if vals:
+        ticks = nice_ticks(min(vals) - 1, max(vals) + 1, 6)
+        scale = lambda v: PLOT_L + (float(v) - ticks[0]) / (ticks[-1] - ticks[0]) * (PLOT_R - PLOT_L)
+    used = []
+    body = []
+    marks = _interval_marks()
+    for i, (label, lo, hi, point, vmin, vmax, med, line) in enumerate(rows):
+        y = top + i * row_h + 10
+        body.append(f'<text x="0" y="{y + 3.5:.1f}" fill="{SOFT}">{E(_fit_text(label, LABEL_W))}</text>')
+        detail = []
+        if vmin is not None and vmax is not None:
+            body.append(f'<line x1="{scale(vmin):.2f}" x2="{scale(vmax):.2f}" y1="{y}" y2="{y}" stroke="#34685D" stroke-width="1.2"/>')
+            used.append('range'); detail.append(f'全距 {vmin:g}—{vmax:g}')
         if lo is not None and hi is not None:
-            if lo > hi: raise ValueError('区间下界不可大于上界')
-            out.append(f'<line x1="{scale(lo):.1f}" x2="{scale(hi):.1f}" y1="{y}" y2="{y}" stroke="#34685D" stroke-width="6"/>')
-            out.append(f'<text x="225" y="{y+18}" fill="#6E776E">{lo:g}—{hi:g} {E(unit)}</text>')
+            body.append(f'<line x1="{scale(lo):.2f}" x2="{scale(hi):.2f}" y1="{y}" y2="{y}" stroke="#34685D" stroke-width="7"/>')
+            used.append('iqr')
+            body.append(f'<text x="{VALUE_R}" y="{y + 3.5:.1f}" text-anchor="end" fill="{INK}">{lo:g}—{hi:g} {E(unit)}</text>')
         else:
-            out.append(f'<text x="225" y="{y+4}" fill="#6E776E">区间未取到</text>')
+            body.append(f'<rect x="{PLOT_L}" y="{y - 6}" width="{PLOT_R - PLOT_L}" height="12" fill="none" stroke="{RULE}" stroke-width=".8" stroke-dasharray="3 2"/>'
+                        f'<text x="{PLOT_L + 6}" y="{y + 3.5:.1f}" font-size="{FS_SMALL}" fill="{MUTED}">区间未取到</text>'
+                        f'<text x="{VALUE_R}" y="{y + 3.5:.1f}" text-anchor="end" fill="{MUTED}">未取到</text>')
+        if med is not None:
+            body.append(marks['median'][0](scale(med), y)); used.append('median')
+        if line is not None:
+            body.append(marks['line'][0](scale(line), y)); used.append('line'); detail.append(f'复试线 {line:g}')
         if point is not None:
-            out.append(f'<circle cx="{scale(point):.1f}" cy="{y}" r="4" fill="#A8772B"/><text x="630" y="{y+4}" text-anchor="end" fill="#222A26">对照 {point:g}</text>')
-    out.append('</svg>'); return ''.join(out)
+            body.append(marks['point'][0](scale(point), y)); used.append('point')
+            if not common: detail.append(f'对照 {point:g}')
+        if detail:
+            body.append(f'<text x="{VALUE_R}" y="{y + 15:.1f}" text-anchor="end" font-size="{FS_SMALL}" fill="{MUTED}">{E("；".join(detail))}</text>')
+    out = []
+    height = axis_y + (20 if vals else 0)
+    used = [k for k in ('iqr', 'range', 'median', 'line', 'point') if k in used]
+    if used:
+        height += 16
+    out.append(_svg_open(height))
+    if vals:
+        out.append(_x_axis(ticks, scale, axis_y, _num, unit, grid_top=top))
+    if common:
+        pv = next(iter(points)); xp = scale(pv)
+        out.append(f'<line x1="{xp:.2f}" x2="{xp:.2f}" y1="{top - 2}" y2="{axis_y}" stroke="#A8772B" stroke-width=".9" stroke-dasharray="3 2"/>'
+                   f'<text x="{xp:.2f}" y="{top - 5}" text-anchor="middle" font-size="{FS_SMALL}" fill="#A8772B">对照 {pv:g} {E(unit)}</text>')
+    out.extend(body)
+    if used:
+        out.append(_legend([marks[k] for k in used], height - 5, 0)[0])
+    out.append('</svg>')
+    return ''.join(out)
+
+
+def _wrap(text, width, size=FS):
+    """按估算宽度折行（中文逐字、英文数字整词），各行长度大致相等，不留一两个字的尾行。"""
+    total = _text_width(str(text), size)
+    if total > width:
+        width = min(width, total / math.ceil(total / width) + size)
+    lines, cur = [], ''
+    for tok in re.findall(r'[A-Za-z0-9.,%/+\-]+|\s+|.', str(text)):
+        if cur and _text_width(cur + tok, size) > width and tok not in '，。、；：？！）”’':  # 标点不放行首
+            lines.append(cur.rstrip()); cur = tok.lstrip()
+        else:
+            cur += tok
+    if cur.strip():
+        lines.append(cur.rstrip())
+    # 标点不单独起一行（“？”“。”挂到上一行末尾）
+    while len(lines) > 1 and re.fullmatch(r'[，。、；：？！）”’,.;:?!)]+', lines[-1]):
+        tail = lines.pop()
+        lines[-1] += tail
+    return lines or ['']
+
+
+FLOW_SHAPES = {'步骤': 'step', '判断': 'decision', '结果': 'main', '备选': 'alt'}
+
+
+def flow(rows):
+    """决策流程图。rows=[节点ID, 形状, 文字, 去向...]；形状：步骤（方框）、判断（菱形）、结果（主线去向，深色）、备选（浅色）。
+    去向写“标签>目标ID”或“>目标ID”。主线一直向下；判断的第一个去向向下、第二个向右（三个去向时左、下、右）；
+    向两侧去、且不再往下走的去向和菱形放在同一高度，用横向箭头连。连线不穿过其他方框，放不下就报错。
+    只画流程和条件，不打分；判断条件应能由本人核实。
+    """
+    nodes, order = {}, []
+    for row in rows:
+        nid, shape, text, *edges = [str(c).strip() for c in row]
+        if shape not in FLOW_SHAPES: raise ValueError('流程图形状只能是：' + '、'.join(FLOW_SHAPES))
+        if nid in nodes: raise ValueError('流程图节点重复：' + nid)
+        out = []
+        for e in edges:
+            if not e: continue
+            if '>' not in e: raise ValueError('流程图去向写成“标签>目标ID”：' + e)
+            label, _, target = e.rpartition('>')
+            out.append((label.strip(), target.strip()))
+        nodes[nid] = dict(id=nid, kind=FLOW_SHAPES[shape], text=text, edges=out, parents=[])
+        order.append(nid)
+    for n in nodes.values():
+        for _, t in n['edges']:
+            if t not in nodes: raise ValueError('流程图去向不存在：' + t)
+            nodes[t]['parents'].append(n['id'])
+    for n in nodes.values():  # 尺寸：方框文字最宽 160；菱形里文字最宽 120，菱形宽高取文字框的两倍
+        if n['kind'] == 'decision':
+            n['lines'] = _wrap(n['text'], 120, 10)
+            tw = max(_text_width(l, 10) for l in n['lines']); th = 13 * len(n['lines'])
+            n['w'], n['h'] = 2 * tw + 16, 2 * th + 10
+        else:
+            n['lines'] = _wrap(n['text'], 160, 10)
+            n['w'] = max(_text_width(l, 10) for l in n['lines']) + 22; n['h'] = 13 * len(n['lines']) + 14
+    col, side = {}, set()
+    for nid in order:
+        n = nodes[nid]; col.setdefault(nid, 0)
+        kids = [t for _, t in n['edges']]
+        offs = ([-1, 0, 1] if len(kids) == 3 else list(range(len(kids)))) if n['kind'] == 'decision' else list(range(len(kids)))
+        for t, o in zip(kids, offs):
+            col.setdefault(t, col[nid] + o)
+            if n['kind'] == 'decision' and o != 0 and not nodes[t]['edges'] and len(nodes[t]['parents']) == 1:
+                side.add(t)  # 侧向的终点：和菱形同一高度
+    layer = {}
+    def depth(nid, seen=()):
+        if nid in seen: raise ValueError('流程图不能有回路')
+        if nid not in layer:
+            ps = nodes[nid]['parents']
+            layer[nid] = depth(ps[0], seen + (nid,)) if nid in side else max([depth(q, seen + (nid,)) + 1 for q in ps] or [0])
+        return layer[nid]
+    for nid in order: depth(nid)
+    cols = sorted(set(col.values()))
+    widths = {c: max(n['w'] for n in nodes.values() if col[n['id']] == c) for c in cols}
+    total = sum(widths.values()) + 28 * (len(cols) - 1)
+    if total > CHART_W:
+        raise ValueError('流程图分支太多或文字太长，放不下；请拆图或缩短文字')
+    x = (CHART_W - total) / 2; cx = {}
+    for c in cols:
+        cx[c] = x + widths[c] / 2; x += widths[c] + 28
+    layers = {}
+    for nid in order:
+        nodes[nid]['cx'] = cx[col[nid]]
+        layers.setdefault(layer[nid], []).append(nodes[nid])
+    gap_y, y = 32, 4
+    for k in sorted(layers):
+        row = layers[k]
+        if len({col[n['id']] for n in row}) < len(row):
+            raise ValueError('流程图同一层有两个节点落在同一列；请调整去向顺序')
+        hmax = max(n['h'] for n in row)
+        for n in row: n['cy'] = y + hmax / 2
+        y += hmax + gap_y
+    height = y - gap_y + 26
+    boxes = [(n['cx'] - n['w'] / 2, n['cy'] - n['h'] / 2, n['cx'] + n['w'] / 2, n['cy'] + n['h'] / 2, n['id']) for n in nodes.values()]
+    def clear(x1, y1, x2, y2, skip):
+        lo_x, hi_x, lo_y, hi_y = min(x1, x2), max(x1, x2), min(y1, y2), max(y1, y2)
+        for bx1, by1, bx2, by2, nid in boxes:
+            if nid in skip: continue
+            if lo_x < bx2 + 2 and hi_x > bx1 - 2 and lo_y < by2 + 2 and hi_y > by1 - 2:
+                raise ValueError('流程图连线穿过其他方框；请调整节点顺序或拆图')
+    out, labels, used = [], [], set()
+    for n in (nodes[i] for i in order):
+        exits = set()
+        for label, t in n['edges']:
+            c = nodes[t]; top = c['cy'] - c['h'] / 2; skip = {n['id'], t}
+            dx = c['cx'] - n['cx']
+            if n['kind'] == 'decision' and abs(dx) > 1:
+                sd = -1 if dx < 0 else 1
+                if sd in exits: raise ValueError('判断的同一侧只能引出一条分支')
+                exits.add(sd)
+                vx = n['cx'] + sd * n['w'] / 2
+                if t in side:
+                    pts = [(vx, n['cy']), (c['cx'] - sd * c['w'] / 2, n['cy'])]
+                elif sd * (c['cx'] - vx) >= 6:
+                    pts = [(vx, n['cy']), (c['cx'], n['cy']), (c['cx'], top)]
+                else:
+                    ox = vx + sd * 10; mid = n['cy'] + n['h'] / 2 + gap_y / 2
+                    pts = [(vx, n['cy']), (ox, n['cy']), (ox, mid), (c['cx'], mid), (c['cx'], top)]
+                lab = (vx + sd * 5, n['cy'] - 5, 'end' if sd < 0 else 'start')
+            else:
+                if n['kind'] == 'decision':
+                    if 0 in exits: raise ValueError('判断的下方只能引出一条分支')
+                    exits.add(0)
+                bottom = n['cy'] + n['h'] / 2
+                if abs(dx) <= 1:
+                    pts = [(c['cx'], bottom), (c['cx'], top)]
+                else:
+                    mid = bottom + gap_y / 2
+                    pts = [(n['cx'], bottom), (n['cx'], mid), (c['cx'], mid), (c['cx'], top)]
+                lab = (pts[0][0] + 5, bottom + 12, 'start')
+            for (x1, y1), (x2, y2) in zip(pts, pts[1:]): clear(x1, y1, x2, y2, skip)
+            (ax, ay), (bx, by) = pts[-2], pts[-1]
+            ux, uy = (bx > ax) - (bx < ax), (by > ay) - (by < ay)   # 最后一段的方向：箭头沿它画
+            tip = (bx, by); base = (bx - ux * 6, by - uy * 6)
+            d = 'M' + ' L'.join(f'{px:.1f} {py:.1f}' for px, py in pts[:-1]) + f' L{base[0]:.1f} {base[1]:.1f}'
+            wing = ((-uy * 3.5, ux * 3.5), (uy * 3.5, -ux * 3.5))
+            out.append(f'<path d="{d}" fill="none" stroke="{MUTED}" stroke-width="1"/>'
+                       f'<path d="M{base[0] + wing[0][0]:.1f} {base[1] + wing[0][1]:.1f}L{base[0] + wing[1][0]:.1f} {base[1] + wing[1][1]:.1f}L{tip[0]:.1f} {tip[1]:.1f}Z" fill="{MUTED}"/>')
+            if label:
+                labels.append(f'<text x="{lab[0]:.1f}" y="{lab[1]:.1f}" text-anchor="{lab[2]}" font-size="{FS_SMALL}" font-weight="600" fill="{SOFT}">{E(label)}</text>')
+    style = {'step': ('#FAF7EE', '#21473E', INK), 'decision': ('#FAF7EE', '#A8772B', INK),
+             'main': ('#21473E', '#21473E', '#FFFFFF'), 'alt': ('#E3DDCB', '#B5AD98', INK)}
+    for n in (nodes[i] for i in order):
+        fill, stroke, ink = style[n['kind']]; used.add(n['kind'])
+        x0, y0 = n['cx'] - n['w'] / 2, n['cy'] - n['h'] / 2
+        if n['kind'] == 'decision':
+            out.append(f'<path d="M{n["cx"]:.1f} {y0:.1f}L{x0 + n["w"]:.1f} {n["cy"]:.1f}L{n["cx"]:.1f} {y0 + n["h"]:.1f}L{x0:.1f} {n["cy"]:.1f}Z" fill="{fill}" stroke="{stroke}" stroke-width="1.2"/>')
+        else:
+            out.append(f'<rect x="{x0:.1f}" y="{y0:.1f}" width="{n["w"]:.1f}" height="{n["h"]:.1f}" rx="2" fill="{fill}" stroke="{stroke}" stroke-width="1"/>')
+        first = n['cy'] - 13 * (len(n['lines']) - 1) / 2 + 3.6
+        for i, line in enumerate(n['lines']):
+            out.append(f'<text x="{n["cx"]:.1f}" y="{first + 13 * i:.1f}" text-anchor="middle" font-size="10" fill="{ink}"'
+                       + (' font-weight="600"' if n['kind'] in ('main', 'decision') else '') + f'>{E(line)}</text>')
+    key = {'step': (lambda x, y: f'<rect x="{x - 6:.1f}" y="{y - 4.5:.1f}" width="12" height="9" rx="1.5" fill="#FAF7EE" stroke="#21473E"/>', '要做的事'),
+           'decision': (lambda x, y: f'<path d="M{x:.1f} {y - 5.5:.1f}L{x + 7:.1f} {y:.1f}L{x:.1f} {y + 5.5:.1f}L{x - 7:.1f} {y:.1f}Z" fill="#FAF7EE" stroke="#A8772B"/>', '要核实的判断'),
+           'main': (_swatch('#21473E'), '主线去向'), 'alt': (_swatch('#E3DDCB'), '备选去向')}
+    legend = _legend([key[k] for k in ('step', 'decision', 'main', 'alt') if k in used], height - 6, 0)[0]
+    return _svg_open(height) + ''.join(out) + ''.join(labels) + legend + '</svg>'
+
+
+STACK_COLORS = [('#21473E', '#FFFFFF'), ('#34685D', '#FFFFFF'), ('#CEC6B1', INK), ('#E3DDCB', INK)]
+
+
+def stack(rows, unit='', percent=False):
+    """构成条：rows=[标签, [(分项, 数值), ...]]。各行共用一条从 0 起的数轴（percent=True 时各行按 100% 画），
+    分段宽度严格按数值；颜色按段的位置深浅交替，只为分开相邻段；段内写“名称 数值”，放不下时写在条下；右侧写合计。"""
+    for _, segs in rows:
+        for name, v in segs:
+            if v is None or float(v) < 0: raise ValueError('构成条的分项须为非负数值；缺的分项不画进构成条')
+    totals = [sum(float(v) for _, v in segs) for _, segs in rows]
+    ticks = [0, .25, .5, .75, 1] if percent else nice_ticks(0, max(totals) or 1)
+    scale = lambda v: PLOT_L + (PLOT_R - PLOT_L) * float(v) / ticks[-1]
+    row_h, bar_h = 34, 18
+    axis_y = len(rows) * row_h + 2
+    out = [_x_axis(ticks, scale, axis_y, (lambda v: f'{v:.0%}') if percent else _num, '' if percent else unit, grid_top=0)]
+    notes = []
+    for i, ((label, segs), total) in enumerate(zip(rows, totals)):
+        y = i * row_h + 4; x = 0.0
+        out.append(f'<text x="0" y="{y + 13:.1f}" fill="{SOFT}">{E(_fit_text(label, LABEL_W))}</text>')
+        for j, (name, v) in enumerate(segs):
+            share = float(v) / total if percent and total else float(v)
+            x0 = scale(x); x1 = scale(x + share); w = x1 - x0
+            fill, ink = STACK_COLORS[j % len(STACK_COLORS)]  # 按位置着色只为分开相邻段；分项名写在段内
+            out.append(f'<rect x="{x0:.2f}" y="{y}" width="{w:.2f}" height="{bar_h}" fill="{fill}"/>')
+            if x > 0: out.append(f'<line x1="{x0:.2f}" x2="{x0:.2f}" y1="{y}" y2="{y + bar_h}" stroke="#EEE9DC" stroke-width="1.2"/>')
+            text = next((t for t in (f'{name} {_num(v)}', _num(v)) if _text_width(t, FS_SMALL) + 8 <= w), None)
+            if text:
+                out.append(f'<text x="{x0 + w / 2:.2f}" y="{y + 12.5:.1f}" text-anchor="middle" font-size="{FS_SMALL}" fill="{ink}">{E(text)}</text>')
+            else:
+                notes.append(f'{label}：{name} {_num(v)}')
+            x += share
+        out.append(f'<text x="{VALUE_R}" y="{y + 13:.1f}" text-anchor="end" fill="{INK}">合计 {_num(total)}{(" " + E(unit)) if unit else ""}</text>')
+    height = axis_y + 18
+    if notes:
+        height += 13
+        out.append(f'<text x="0" y="{height - 4:.1f}" font-size="{FS_SMALL}" fill="{MUTED}">放不下的分段：{E("；".join(notes))}</text>')
+    return _svg_open(height) + ''.join(out) + '</svg>'
+
+
+EVIDENCE_STYLE = {  # 与证据徽章同色：官方黛绿、多人一致石绿、单人说法浅色、推测空心、未取到虚线
+    '官方': ('#21473E', 'none', '#FFFFFF', ''), '多人一致': ('#34685D', 'none', '#FFFFFF', ''),
+    '单人说法': ('#E3DDCB', 'none', INK, ''), '推测': ('none', '#B5AD98', MUTED, ''), '未取到': ('none', '#B5AD98', MUTED, '3 2')}
+
+
+def evidence_grid(rows):
+    """调研证据一览：rows=[学校, [(方面, 证据等级), ...]]。每格写证据等级，颜色同证据徽章，没调研的方面留空并写“未查”。
+    只表示“这条信息有多可靠”，不是学校好坏的评分。"""
+    aspects = list(dict.fromkeys(a for _, cells in rows for a, _ in cells))
+    if not aspects: raise ValueError('证据一览没有任何方面')
+    for _, cells in rows:
+        for _, g in cells:
+            if g not in EVIDENCE_STYLE: raise ValueError('未知证据等级：' + str(g))
+    cw = (VALUE_R - PLOT_L) / len(aspects); row_h, head = 22, 16
+    out = [f'<text x="{PLOT_L + cw * (i + .5):.1f}" y="11" text-anchor="middle" font-size="{FS_SMALL}" fill="{MUTED}">{E(_fit_text(a, cw - 4, FS_SMALL))}</text>' for i, a in enumerate(aspects)]
+    for r, (school, cells) in enumerate(rows):
+        y = head + r * row_h; got = dict(cells)
+        out.append(f'<text x="0" y="{y + 14:.1f}" fill="{SOFT}">{E(_fit_text(school, LABEL_W))}</text>')
+        for i, a in enumerate(aspects):
+            x = PLOT_L + cw * i + 2; w = cw - 4
+            g = got.get(a)
+            if g is None:
+                out.append(f'<text x="{x + w / 2:.1f}" y="{y + 14:.1f}" text-anchor="middle" font-size="{FS_SMALL}" fill="{MUTED}">未查</text>')
+                continue
+            fill, stroke, ink, dash = EVIDENCE_STYLE[g]
+            out.append(f'<rect x="{x:.1f}" y="{y + 2}" width="{w:.1f}" height="{row_h - 5}" fill="{fill}"'
+                       + (f' stroke="{stroke}" stroke-width=".8"' if stroke != 'none' else '') + (f' stroke-dasharray="{dash}"' if dash else '') + '/>'
+                       f'<text x="{x + w / 2:.1f}" y="{y + 14:.1f}" text-anchor="middle" font-size="{FS_SMALL}" fill="{ink}">{E(g)}</text>')
+    height = head + len(rows) * row_h + 4
+    return _svg_open(height) + ''.join(out) + '</svg>'
+
+
+FACT_STATES = {'已知': 'known', '待确认': 'pending', '未知': 'unknown'}
+
+
+def facts(rows, inline=E):
+    """现状一览：rows=[项目, 内容, 状态]，状态为已知、待确认或未知。已知实心、待确认琥珀边、未知虚线框写“未填”，
+    一眼看出还缺什么。只列本人给出或明确缺失的信息，不估值。"""
+    cells = []
+    for row in rows:
+        label, value, state = (list(row) + ['', '', ''])[:3]
+        if state not in FACT_STATES: raise ValueError('现状一览的状态只能是：已知、待确认、未知')
+        cls = FACT_STATES[state]
+        shown = inline(str(value)) if str(value).strip() and cls != 'unknown' else ('未填' if cls == 'unknown' else '待确认')
+        if cls == 'unknown' and str(value).strip(): shown = '未填（' + inline(str(value)) + '）'
+        cells.append(f'<div class="fact {cls}"><b>{E(str(label))}</b><span>{shown}</span></div>')
+    key = '　'.join(f'<i class="fk {k}"></i>{v}' for k, v in (('known', '已知'), ('pending', '待确认'), ('unknown', '未知（未填）')))
+    return f'<div class="facts">{"".join(cells)}</div><p class="matrix-key">{key}</p>'
+
+
+def cost_chart(rows):
+    """费用对比：rows=[项目, 数值或 None, 币种/单位, 显示?]。同一币种共用一条数轴；不同币种分开画、各自刻度，
+    不按汇率折算；没取到的项画虚线空框并写“未取到”，不画成 0。"""
+    groups = {}
+    for row in rows:
+        label, value, cur, *rest = list(row) + [None] * (3 - len(row))
+        groups.setdefault(str(cur or '未注明单位'), []).append([label, value, '主', rest[0] if rest and rest[0] else None])
+    panels = []
+    for cur, items in groups.items():
+        panels.append(f'<div class="panel-ttl">{E(cur)}</div>' + bar_chart(items, cur))
+    if len(groups) > 1:
+        panels.append(f'<p class="matrix-key">不同币种各用自己的刻度，没有按汇率折算；条长只在同一币种内可比。虚线框为未取到。</p>')
+    return '<div class="cost">' + ''.join(panels) + '</div>'
+
+
+TIMELINE_MONTH = re.compile(r'^\s*(\d{4})\s*[.\-/年]\s*(\d{1,2})\s*月?\s*$')
+
+
+def _timeline_marker(x, y, checkpoint):
+    if checkpoint:
+        return f'<path d="M{x:.1f} {y-4.6:.1f}L{x+4.6:.1f} {y:.1f}L{x:.1f} {y+4.6:.1f}L{x-4.6:.1f} {y:.1f}Z" fill="#A8772B"/>'
+    return f'<circle cx="{x:.1f}" cy="{y:.1f}" r="3.6" fill="#34685D"/>'
 
 
 def timeline(rows):
-    """横向月份轴，每段最多4节点，超出续行；rows=[月,任务,截止日,检查点?]。"""
-    out = ['<div class="timeline">']
-    for start in range(0, len(rows), 4):
-        chunk = rows[start:start+4]
-        out.append('<div class="timeline-row">')
-        for row in chunk:
-            month, task, deadline, *rest = row
-            cls = ' checkpoint' if rest and rest[0] not in ('', '普通', False) else ''
-            out.append(f'<div class="milestone{cls}"><b>{E(month)}</b><strong>{E(task)}</strong><span>截止：{E(deadline)}</span></div>')
-        out.append('</div>')
-    return ''.join(out)+'</div>'
+    """时间线。rows=[时间, 事项, 说明, 检查点?]。
+
+    时间全是“年.月”时画等比例横轴：每个节点落在它的月份上，轴下是年份刻度和半年短刻度，
+    标签在轴上方分层避让、用引线连到节点。只要有一个时间是“2027 春季”“毕业后 3 个月内”这类模糊说法，
+    就改画纵向顺序图，并注明间距不代表时长，不把模糊时间画成精确位置。
+    """
+    sans = "PingFang SC, Source Han Sans SC, Noto Sans SC, sans-serif"
+    items = []
+    for row in rows:
+        when, task, note, *rest = list(row) + [''] * (3 - len(row))
+        cp = bool(rest and rest[0] not in ('', '普通', False))
+        m = TIMELINE_MONTH.match(str(when))
+        items.append(dict(when=str(when).strip(), task=str(task).strip(), note=str(note).strip(), cp=cp,
+                          month=(int(m[1]) * 12 + int(m[2]) - 1) if m and 1 <= int(m[2]) <= 12 else None))
+    legend_y_pad = 22
+    same_month = False
+    def legend(y, scaled):
+        tail = ('横轴按月份等比例' + ('；同月事项在该月内按先后错开' if same_month else '')) if scaled else '按先后排列，间距不代表时长'
+        return (f'{_timeline_marker(6, y-3.5, True)}<text x="16" y="{y}" fill="#6E776E">个人检查点</text>'
+                f'{_timeline_marker(86, y-3.5, False)}<text x="96" y="{y}" fill="#6E776E">流程节点</text>'
+                f'<text x="640" y="{y}" text-anchor="end" fill="#6E776E">{tail}</text>')
+    if items and all(i['month'] is not None for i in items):
+        lo = min(i['month'] for i in items) - 1; hi = max(i['month'] for i in items) + 1
+        x = lambda m: 20 + (m + .5 - lo) / max(hi - lo + 1, 1) * 600
+        # 标签都在轴上方分层，轴下只放年份刻度。用回溯找层数最少的摆法，约束：
+        # 同层标签不重叠；较高层节点的引线不穿过较低层的标签。标签可在引线右侧或左侧展开。
+        band = 600 / max(hi - lo + 1, 1)
+        groups = {}
+        for it in items:
+            groups.setdefault(it['month'], []).append(it)
+        for group in groups.values():
+            # 同一个月的几项：都留在这个月的格子里，按输入先后左右错开，标记不互相盖住。
+            gap = min(10.0, band * .9 / len(group))
+            for j, it in enumerate(group):
+                it['cx'] = x(it['month']) + (j - (len(group) - 1) / 2) * gap
+            same_month = same_month or len(group) > 1
+        for it in items:
+            it['w'] = max(_text_width(f"{it['when']}  {it['task']}", 10), _text_width(it['note'], FS_SMALL)) + 4
+            it['opts'] = sorted({min(max(a, 0), 640 - it['w']) for a in (it['cx'] - 3, it['cx'] + 3 - it['w'])},
+                                key=lambda l, c=it['cx']: abs(l - (c - 3)))
+        def ok(a, ka, la, b, kb, lb):
+            if ka == kb: return la > lb + b['w'] + 10 or la + a['w'] + 10 < lb
+            lo_it, lo_l, hi_it = (a, la, b) if ka < kb else (b, lb, a)
+            return not (lo_l - 4 <= hi_it['cx'] <= lo_l + lo_it['w'] + 4)
+        def solve(top):
+            chosen = []
+            def dfs(n):
+                if n == len(items): return True
+                for k in range(1, top + 1):
+                    for l in items[n]['opts']:
+                        if all(ok(items[n], k, l, items[m], km, lm) for m, (km, lm) in enumerate(chosen)):
+                            chosen.append((k, l))
+                            if dfs(n + 1): return True
+                            chosen.pop()
+                return False
+            return chosen if dfs(0) else None
+        for top in range(1, 7):
+            plan = solve(top)
+            if plan: break
+        else:
+            raise ValueError('时间线节点过密，标签放不下；请合并同月事项')
+        for it, (k, l) in zip(items, plan): it.update(lv=('up', k), left=l)
+        up = max([i['lv'][1] for i in items if i['lv'][0] == 'up'] or [0])
+        down = max([i['lv'][1] for i in items if i['lv'][0] == 'down'] or [0])
+        step = 34; axis = 8 + up * step + 6
+        height = axis + 18 + down * step + legend_y_pad
+        out = [f'<svg class="chart timeline-chart" viewBox="0 0 640 {height:.0f}" xmlns="http://www.w3.org/2000/svg" font-family="{sans}" font-size="10">',
+               f'<line x1="14" x2="626" y1="{axis}" y2="{axis}" stroke="#B5AD98" stroke-width="1.2"/>']
+        for m in range(lo, hi + 1):
+            if m % 12 == 0:
+                out.append(f'<line x1="{x(m)-.5*600/max(hi-lo+1,1):.1f}" x2="{x(m)-.5*600/max(hi-lo+1,1):.1f}" y1="{axis-5}" y2="{axis+5}" stroke="#6E776E" stroke-width="1"/>'
+                           f'<text x="{x(m)-.5*600/max(hi-lo+1,1)+3:.1f}" y="{axis+14}" font-size="{FS_SMALL}" fill="#6E776E">{m // 12} 年</text>')
+            elif m % 12 != 6 and hi - lo <= 36:  # 月刻度：只是极短的点，帮助数月份
+                out.append(f'<line x1="{x(m)-.5*600/max(hi-lo+1,1):.1f}" x2="{x(m)-.5*600/max(hi-lo+1,1):.1f}" y1="{axis}" y2="{axis+3}" stroke="#B5AD98" stroke-width=".7"/>')
+            elif m % 12 == 6:
+                out.append(f'<line x1="{x(m)-.5*600/max(hi-lo+1,1):.1f}" x2="{x(m)-.5*600/max(hi-lo+1,1):.1f}" y1="{axis-2.5}" y2="{axis+2.5}" stroke="#B5AD98" stroke-width="1"/>')
+        for it in items:
+            side, k = it['lv']
+            ty = axis - 8 - (k - 1) * step - 13 if side == 'up' else axis + 18 + (k - 1) * step + 10
+            ly = ty + (16 if it['note'] else 5)  # 引线停在标签下方，不碰文字
+            out.append(f'<line x1="{it["cx"]:.1f}" x2="{it["cx"]:.1f}" y1="{axis}" y2="{ly:.1f}" stroke="#B5AD98" stroke-width=".8"/>')
+            out.append(f'<text x="{it["left"]:.1f}" y="{ty:.1f}"><tspan font-weight="600" fill="#21473E">{E(it["when"])}</tspan>'
+                       f'<tspan dx="5" font-weight="600" fill="#222A26">{E(it["task"])}</tspan></text>')
+            if it['note']:
+                out.append(f'<text x="{it["left"]:.1f}" y="{ty+12:.1f}" font-size="{FS_SMALL}" fill="#6E776E">{E(it["note"])}</text>')
+        for it in items:
+            out.append(_timeline_marker(it['cx'], axis, it['cp']))
+        out.append(legend(height - 6, True))
+        return ''.join(out) + '</svg>'
+    # 顺序图每项一行：事项和说明写在同一行（说明用小一号灰字），行距固定。
+    # 两行写法会让 PDF 里出现一串短行，被版面自检当成“被挤窄的栏”（2026-10-20）。
+    row_h = 24; height = 8 + len(items) * row_h + legend_y_pad
+    out = [f'<svg class="chart timeline-chart" viewBox="0 0 640 {height}" xmlns="http://www.w3.org/2000/svg" font-family="{sans}" font-size="10">',
+           f'<line x1="110" x2="110" y1="{8 + row_h/2}" y2="{8 + (len(items)-.5)*row_h}" stroke="#B5AD98" stroke-width="1.2"/>']
+    for n, it in enumerate(items):
+        y = 8 + (n + .5) * row_h
+        out.append(f'<text x="96" y="{y+3.5:.1f}" text-anchor="end" font-weight="600" fill="#21473E">{E(_fit_text(it["when"], 94, 10))}</text>')
+        out.append(_timeline_marker(110, y, it['cp']))
+        task = _fit_text(it['task'], 516, 10)
+        note = _fit_text(it['note'], 516 - _text_width(task, 10) - 12, FS_SMALL) if it['note'] else ''
+        out.append(f'<text x="124" y="{y+3.5:.1f}"><tspan font-weight="600" fill="#222A26">{E(task)}</tspan>'
+                   + (f'<tspan dx="12" font-size="{FS_SMALL}" fill="#6E776E">{E(note)}</tspan>' if note else '') + '</text>')
+    out.append(legend(height - 6, False))
+    return ''.join(out) + '</svg>'
 
 
-SYMBOL = {"yes": "✓", "pending": "△", "no": "✗"}
+# 状态图标用 SVG 画，不用字符：字符随字体变形、对不齐（2026-10-20 被指出）。
+# 有支持＝黛绿实心圆＋勾；待核＝琥珀圆环、左半填色（“只确认了一半”）；不满足＝红色实心圆＋叉。
+SYMBOL = {
+    "yes": '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7.5" fill="#21473E"/>'
+           '<path d="M4.6 8.3 7 10.6 11.6 5.6" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    "pending": '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.8" fill="#FAF7EE" stroke="#A8772B" stroke-width="1.4"/>'
+               '<path d="M8 3.6a4.4 4.4 0 0 0 0 8.8z" fill="#A8772B"/></svg>',
+    "no": '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7.5" fill="#9B3B2E"/>'
+          '<path d="M5.4 5.4 10.6 10.6M10.6 5.4 5.4 10.6" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>',
+}
 
 
 def comparison_matrix(columns, rows, inline=E):
@@ -619,12 +1166,14 @@ def comparison_matrix(columns, rows, inline=E):
         out.append('<tr><td class="opt">'+inline(str(row[0]))+'</td>')
         for value in row[1:]:
             val = str(value).strip()
-            state = 'yes' if val.startswith('✓') else ('no' if val.startswith('✗') else 'pending')
-            text = val[1:].strip() if val[:1] in '✓✗△' else val
+            if val[:1] not in '✓✗△':
+                raise ValueError(f'比较矩阵每格须以 ✓、△ 或 ✗ 开头标明状态，不默认当作待核：{val[:12]}')
+            state = {'✓': 'yes', '✗': 'no', '△': 'pending'}[val[:1]]
+            text = val[1:].strip()
             mark = {'yes': '有支持', 'no': '不满足', 'pending': '待核'}[state]
             out.append(f'<td class="{state}"><i class="dot {state}" title="{mark}">{SYMBOL[state]}</i>{inline(text)}</td>')
         out.append('</tr>')
-    out.append('</tbody></table><p class="matrix-key"><i class="dot yes">✓</i>有支持　<i class="dot pending">△</i>待核或要补　<i class="dot no">✗</i>当前不满足</p>')
+    out.append('</tbody></table><p class="matrix-key">' + '　'.join(f'<i class="dot {k}">{SYMBOL[k]}</i>{v}' for k, v in (('yes', '有支持'), ('pending', '待核或要补'), ('no', '当前不满足'))) + '</p>')
     return ''.join(out)
 
 
@@ -662,8 +1211,9 @@ def kpi_cards(items, inline=E):
     cards = []
     for row in items[:4]:
         label, value, note = (list(row)+['','',''])[:3]
+        # 同类同字号：含数字的短值（金额、日期、名次）一律大号数字；纯文字的值（阶段、方向名）一律 11pt。
         cjk = sum(ord(c)>0x2E80 for c in value)
-        big = ' class="num"' if cjk<=4 and len(value)<=12 else ' style="font-size:11pt"'
+        big = ' class="num"' if re.search(r'\d', value) and cjk <= 4 and len(value) <= 12 else ' style="font-size:11pt"'
         cards.append(f'<div><b>{inline(label)}</b><span{big}>{inline(value)}</span>'+(f'<em>{inline(note)}</em>' if note else '')+'</div>')
     return f'<div class="kpis" style="grid-template-columns:repeat({max(len(cards),1)},1fr)">'+''.join(cards)+'</div>'
 
@@ -719,6 +1269,9 @@ def pct(x, d=0):
         return "–"
     if d == 0 and 0 < x < 0.01:
         d = 1  # 小于 1% 时保留一位小数，避免把 0.5% 显示成 0%
+    if x >= 1 - 0.5 * 10 ** -(d + 2):
+        # 模型估计不写成“100%”：四舍五入到 100% 的写成“超过 99%”（一位小数时“超过 99.9%”），与正文一致。
+        return "&gt; " + ("99%" if d == 0 else f"{100 - 10 ** -d:.{d}f}%")
     return f"{x * 100:.{d}f}%"
 
 
@@ -741,7 +1294,7 @@ def prob_formatter(grade):
             if x <= 0:
                 return "0%"
             if x >= 1:
-                return "100%"
+                return "&gt; 95%"
             if x < 0.05:  # 取整到 5% 后两端会写成“约 0%”“约 100%”，与“有可能但很小”的含义不符
                 return "&lt; 5%"
             if x > 0.95:
@@ -751,22 +1304,33 @@ def prob_formatter(grade):
     return f
 
 
-STRIP_CAP = '从左到右按志愿顺序排列，色块越宽，最终被该志愿录取的可能越大；数字是志愿序号，对应“志愿表”一节。'
+STRIP_CAP = '从左到右按志愿顺序排列，色块宽度等于最终被该志愿录取的可能；数字是志愿序号，对应“志愿表”一节，深浅交替只为分开相邻两段。'
 UTILITY_SCALE = "100 分 = 候选中你最想去的"
 
 
-def strategy_caption(eu, pfall, top, safe):
-    """按实际数字写策略图的图注，不预设“只挑最想去的一定滑档”。"""
+def strategy_caption(eu, pfall, top, safe, fall_fmt=None):
+    """按实际数字写策略图的图注，不预设“只挑最想去的一定滑档”。
+
+    比较按图上显示的精度做（满意度一位小数、滑档按正文格式）：显示出来一样的，不说谁高谁低。
+    """
+    fall_fmt = fall_fmt or (lambda p: f"{p:.1%}")
+    shown = lambda r: (f"{r[0]:.1f}", fall_fmt(r[1]))
+    mine = (eu or 0, pfall or 0)
     parts = ["条越长越好；滑档概率越低越好。"]
     if top:
-        if abs(top[0] - (eu or 0)) < 0.05 and abs(top[1] - (pfall or 0)) < 1e-9:
+        if abs(top[0] - mine[0]) < 0.05 and abs(top[1] - mine[1]) < 1e-9:
             parts.append("只挑最想去的，在本案和本报告的方案结果相同：你最想去的几个里已经有够稳的保底。")
-        elif top[1] > (pfall or 0):
+        elif shown(top) == shown(mine):
+            parts.append("只挑最想去的，与本报告方案在图上显示的精度内相同，差别小到不足以区分。")
+        elif fall_fmt(top[1]) != fall_fmt(mine[1]) and top[1] > mine[1]:
             parts.append("只挑最想去的，滑档风险更高。")
-        elif top[0] < (eu or 0):
+        elif f"{top[0]:.1f}" != f"{mine[0]:.1f}" and top[0] < mine[0]:
             parts.append("只挑最想去的，滑档风险没有更高，但期望效用更低：前段太集中，落空后没有中间档接住。")
-    if safe and safe[0] < (eu or 0):
-        parts.append("只挑最稳的，几乎不会滑档，但浪费了分数。")
+    if safe:
+        if shown(safe) == shown(mine):
+            parts.append("只挑最稳的，结果也在显示精度内相同。")
+        elif f"{safe[0]:.1f}" != f"{mine[0]:.1f}" and safe[0] < mine[0]:
+            parts.append("只挑最稳的，几乎不会滑档，但浪费了分数。")
     return "".join(parts)
 
 
@@ -779,29 +1343,34 @@ def interval80(x):
 
 def bars_h(items, fmt=lambda v: f"{v:.0%}", vmax=None):
     """水平条形图：items = [(label, value)]；与 bar_chart 同一画法（同字体、行高、底条和数值位置）。"""
-    return bar_chart([[lab, v, '次', fmt(v)] for lab, v in items], maximum=vmax or max((v for _, v in items), default=1) or 1)
+    return bar_chart([[lab, v, '次', fmt(v)] for lab, v in items], maximum=vmax or max((v for _, v in items), default=1) or 1, tick_fmt=fmt)
 
 
 def strategy_chart(rows, width=640, fmt=None):
-    """策略对比：期望效用条 + 右侧固定栏写滑档概率。rows = [(name, eu, pfall, highlight)]
-    右侧留出固定宽度，期望值写在条内末端，长短都不会与滑档文字重叠。"""
-    vmax = max(r[1] for r in rows) or 1
-    label_w, bar_h, gap, right_w = 120, 20, 9, 150
-    h = len(rows) * (bar_h + gap) + 6
-    w_plot = width - label_w - right_w - 12
-    sans = "PingFang SC, Source Han Sans SC, Noto Sans SC, sans-serif"
-    out = [f'<svg class="chart" viewBox="0 0 {width} {h}" xmlns="http://www.w3.org/2000/svg" font-family="{sans}" font-size="10.5">']
+    """策略对比：rows = [(name, eu, pfall, highlight)]。
+
+    满意度轴固定 0—100（与“100 分 = 候选中你最想去的”同一量尺），条从 0 起、长度严格按数值；
+    右侧两列分别写满意度和滑档概率，列头说明含义。fmt 把滑档概率写成与正文相同的精度。
+    """
+    if any(not 0 <= float(r[1]) <= 100 for r in rows):
+        raise ValueError('平均满意度须在 0—100 之间')
+    eu_r, fall_r, plot_r = 548, VALUE_R, 470
+    bar_h, gap, head = 18, 9, 14
+    scale = lambda v: PLOT_L + (plot_r - PLOT_L) * float(v) / 100
+    axis_y = head + len(rows) * (bar_h + gap) - gap + 4
+    out = [_svg_open(axis_y + 18),
+           f'<text x="{eu_r}" y="9" text-anchor="end" font-size="{FS_SMALL}" fill="{MUTED}">平均满意度</text>'
+           f'<text x="{fall_r}" y="9" text-anchor="end" font-size="{FS_SMALL}" fill="{MUTED}">滑档概率</text>']
+    out.append(_x_axis([0, 20, 40, 60, 80, 100], scale, axis_y, _num, '分', grid_top=head))
     for i, (n, eu, pf, hl) in enumerate(rows):
-        y = i * (bar_h + gap) + 3
-        bw = max(28, w_plot * max(eu, 0) / vmax)
+        y = head + i * (bar_h + gap)
         col = "#21473E" if hl else "#CEC6B1"
-        txt = "#EEE9DC" if hl else "#454E48"
-        out.append(f'<text x="{label_w - 8}" y="{y + bar_h - 6}" text-anchor="end" fill="#222A26" font-weight="{600 if hl else 400}">{E(n)}</text>')
-        out.append(f'<rect x="{label_w}" y="{y}" width="{w_plot}" height="{bar_h}" fill="#E3DDCB"/>')
-        out.append(f'<rect x="{label_w}" y="{y}" width="{bw:.1f}" height="{bar_h}" fill="{col}"/>')
-        out.append(f'<text x="{label_w + bw - 6:.1f}" y="{y + bar_h - 6}" text-anchor="end" fill="{txt}" font-weight="600">{eu:.1f}</text>')
-        fall = fmt(pf) if fmt else f"{pf:.1%}"
-        out.append(f'<text x="{width - 4}" y="{y + bar_h - 6}" text-anchor="end" fill="{"#9B3B2E" if pf > 0.01 else "#6E776E"}">滑档 {E(fall)}</text>')
+        out.append(f'<text x="0" y="{y + bar_h - 5}" fill="{INK}" font-weight="{600 if hl else 400}">{E(_fit_text(n, LABEL_W))}</text>')
+        out.append(f'<rect x="{PLOT_L}" y="{y}" width="{scale(eu) - PLOT_L:.2f}" height="{bar_h}" fill="{col}"/>')
+        out.append(f'<text x="{eu_r}" y="{y + bar_h - 5}" text-anchor="end" fill="{INK}" font-weight="{600 if hl else 400}">{eu:.1f}</text>')
+        fall = html.unescape(fmt(pf)) if fmt else f"{pf:.1%}"
+        out.append(f'<text x="{fall_r}" y="{y + bar_h - 5}" text-anchor="end" fill="{"#9B3B2E" if pf > 0.01 else MUTED}">{E(fall)}</text>')
+    out.append(f'<line x1="{PLOT_L}" x2="{PLOT_L}" y1="{head}" y2="{axis_y}" stroke="{MUTED}" stroke-width=".8"/>')
     out.append("</svg>")
     return "".join(out)
 
@@ -811,39 +1380,82 @@ def _text_width(text, size=9):
     return sum(size if ord(c) > 0x2E80 else size * 0.62 for c in text)
 
 
-def outcome_strip(items, pfall, width=640, fmt=None):
-    """结局分布：一条 100% 堆积条，按志愿顺序着色，展示“最可能落在哪里”。图注由调用处写在条下。"""
-    h = 26
-    sans = "PingFang SC, Source Han Sans SC, Noto Sans SC, sans-serif"
-    out = [f'<svg class="chart" viewBox="0 0 {width} {h}" xmlns="http://www.w3.org/2000/svg" font-family="{sans}" font-size="10.5">']
+def _ranges(nums):
+    """[5,6,7,9] → '5—7、9'。"""
+    out, run = [], []
+    for n in nums:
+        if run and n == run[-1] + 1:
+            run.append(n)
+        else:
+            if run: out.append(run)
+            run = [n]
+    if run: out.append(run)
+    return '、'.join(f'{r[0]}—{r[-1]}' if len(r) > 2 else '、'.join(map(str, r)) for r in out)
+
+
+def outcome_strip(items, pfall, width=640, fmt=None, fall_text=None):
+    """结局分布：一条 100% 堆积条，按志愿顺序排列，每段宽度严格等于最终录取概率（不设最小宽度）。
+
+    ≥5% 的段黛绿、石绿交替（只为分开相邻两段），<5% 的段浅色，滑档红色。放不下序号的窄段在条下写明是哪几个志愿；
+    能显示百分比时条下有 0—100% 刻度。fmt 返回空串表示本省评级不给百分比（只作定性示意，不画刻度）。
+    """
+    h = 24
+    numeric = fmt is None or bool(fmt(0.5))
+    fmt = fmt or (lambda p: f"{p:.0%}")
+    out = []
     x = 0.0
-    strong = ["#21473E", "#5E8C7F", "#34685D", "#7FA597"]  # 主要去向（≥5%）按出现顺序交替深浅
+    strong = ["#21473E", "#34685D"]
     k = 0
+    seps, narrow, narrow_p = [], [], 0.0
     for i, (lab, p) in enumerate(items):
         w = width * p
         if w <= 0:
             continue
-        if p >= 0.05:
-            col = strong[k % len(strong)]
-            k += 1
-        else:
-            col = "#CEC6B1"
-        out.append(f'<rect x="{x:.1f}" y="0" width="{w:.1f}" height="{h}" fill="{col}" stroke="#EEE9DC" stroke-width="1"/>')
-        pl = f"{p:.0%}" if fmt is None else fmt(p)
+        col = strong[k % 2] if p >= 0.05 else "#CEC6B1"
+        k += p >= 0.05
+        out.append(f'<rect x="{x:.2f}" y="0" width="{w:.2f}" height="{h}" fill="{col}"/>')
+        if x > 0 and w >= 1.5:
+            seps.append(x)
+        pl = fmt(p)
         tail = f" · {pl}" if pl else ""
-        # 从长到短取第一个放得下的标签，窄段不把字截断
-        fits = [t for t in (f"第 {i + 1} 志愿{tail}", f"{i + 1}{tail}") if _text_width(t) + 12 <= w]
+        fits = [t for t in (f"第 {i + 1} 志愿{tail}", f"{i + 1}{tail}") if _text_width(t, FS) + 12 <= w]
         if fits:
-            out.append(f'<text x="{x + 6:.1f}" y="{h / 2 + 3.5:.1f}" fill="#fff" font-weight="600">{fits[0]}</text>')
-        elif w > 14:
-            ink = "#fff" if p >= 0.05 else "#454E48"
-            out.append(f'<text x="{x + w / 2:.1f}" y="{h / 2 + 3.5:.1f}" fill="{ink}" text-anchor="middle">{i + 1}</text>')
+            out.append(f'<text x="{x + 6:.1f}" y="{h / 2 + 3.6:.1f}" fill="#fff" font-weight="600">{fits[0]}</text>')
+        elif _text_width(str(i + 1), FS) + 4 <= w:
+            ink = "#fff" if p >= 0.05 else SOFT
+            out.append(f'<text x="{x + w / 2:.1f}" y="{h / 2 + 3.6:.1f}" fill="{ink}" text-anchor="middle">{i + 1}</text>')
+        else:
+            narrow.append(i + 1); narrow_p += p
         x += w
     if pfall > 0:
-        w = max(1.5, width * pfall)
-        out.append(f'<rect x="{x:.1f}" y="0" width="{w:.1f}" height="{h}" fill="#9B3B2E"/>')
-    out.append("</svg>")
-    return "".join(out)
+        out.append(f'<rect x="{x:.2f}" y="0" width="{width * pfall:.2f}" height="{h}" fill="#9B3B2E"/>')
+    out.extend(f'<line x1="{sx:.2f}" x2="{sx:.2f}" y1="0" y2="{h}" stroke="#EEE9DC" stroke-width="1"/>' for sx in seps)
+    y = h
+    if numeric:
+        scale = lambda v: v * width
+        out.append(_x_axis([0, .25, .5, .75, 1], scale, h + 2, lambda v: f"{v:.0%}"))
+        out[-1] = out[-1].replace('text-anchor="middle">100%', 'text-anchor="end">100%')
+        y = h + 18
+    notes = []
+    if narrow:
+        total = fmt(narrow_p) if numeric else ''
+        if numeric and total in ('0%', ''):
+            total = '不到 1%'
+        notes.append(f'太窄未标号：第 {_ranges(narrow)} 志愿' + (f'，合计 {total}' if total else ''))
+    right = ''
+    if pfall > 0:
+        right = '红色：滑档 ' + (fall_text if fall_text else (f"{pfall:.1%}" if pfall >= .001 else "不到 0.1%"))
+        if width * pfall < 1:
+            right += '（宽度不足 1 个单位，按比例几乎看不见）'
+    if notes or right:
+        y += 13
+        if notes:
+            out.append(f'<text x="0" y="{y:.1f}" font-size="{FS_SMALL}" fill="{MUTED}">{E(notes[0])}</text>')
+        if right:
+            if notes and _text_width(notes[0], FS_SMALL) + _text_width(right, FS_SMALL) + 20 > width:
+                y += 13  # 两条注记放不下一行时分两行，不叠字
+            out.append(f'<text x="{width}" y="{y:.1f}" font-size="{FS_SMALL}" fill="#9B3B2E" text-anchor="end">{E(right)}</text>')
+    return _svg_open(y + 4) + "".join(out) + "</svg>"
 
 
 def source_cell(text, refs=None):
@@ -888,6 +1500,7 @@ def build(rep, opt):
         for url in urls or ['']:
             refs.add(label + ('；' + URL_RE.sub('', source) if not urls else ''), url.rstrip('.,;)'), date)
     model_ref = refs.add('本报告志愿组合计算；与本次志愿表相同的位次、概率及顺序')
+    research_ref = refs.add('本报告院校调研记录；各方面的发现、出处与证据等级见第 12 节') if rep.get('research') else None
     profile_ref = refs.add('本人画像、优先级与家庭约束；个人陈述及本报告的条件判断')
     lst = (opt or {}).get("list", [])
     eu = (opt or {}).get("expected_utility")
@@ -943,14 +1556,14 @@ def build(rep, opt):
         tiers = " / ".join(f"{t} {sum(x['tag'] == t for x in lst)}" for t in ("冲", "稳", "保"))
         body += ('<div class="kpis">'
                  f'<div><b>推荐志愿数</b><span class="num">{len(lst)}</span><em>本批次可填 {E(str(m.get("slots", "–")))} 个；{tiers}</em></div>'
-                 f'<div><b>最可能的去向</b><span style="font-size:11pt">{E(likely_name)}</span><em>{"概率" + ("" if grade == "B" else "约 ") + fmt(likely_p) if numeric else "落点最集中的志愿（本省评级不给精确概率）"}</em></div>'
+                 f'<div><b>最可能的去向</b><span style="font-size:11pt">{E(likely_name)}</span><em>{"概率" + ("" if grade == "B" or fmt(likely_p).startswith("&") else "约 ") + fmt(likely_p) if numeric else "落点最集中的志愿（本省评级不给精确概率）"}</em></div>'
                  + (f'<div><b>平均满意度（0—100）</b><span class="num">{eu:.1f} 分</span><em>表里最高的志愿 {max(x["utility"] for x in lst):.0f} 分。{E(m.get("utility_scale", UTILITY_SCALE))}</em></div>' if numeric and eu is not None else
                     f'<div><b>平均满意度（0—100）</b><span class="num">不估算</span><em>本省概率评级 {E(grade)}，概率不可信，按概率加权的满意度也不算；表里最高的志愿 {max(x["utility"] for x in lst):.0f} 分。</em></div>')
                  + (f'<div><b>滑档风险</b><span class="num">{fall_txt(pfall)}</span><em>录取线整体大波动时 {fall_txt(stress.get("p_fall"))}</em></div>' if grade == "A" or pfall else
                     f'<div><b>滑档风险</b><span class="num">未出现</span><em>{sims:,} 次模拟中没有出现滑档；录取线整体大波动时{"也没有" if not stress.get("p_fall") else "：" + fall_txt(stress.get("p_fall"))}</em></div>')
                  + '</div>')
     if lst:
-        body += figure('你最终会被哪里录取', outcome_strip([(x['name'], x['p_land']) for x in lst], pfall or 0, fmt=strip_fmt),
+        body += figure('你最终会被哪里录取', outcome_strip([(x['name'], x['p_land']) for x in lst], pfall or 0, fmt=strip_fmt, fall_text=html.unescape(fall_txt(pfall or 0))),
                        STRIP_CAP + ('浅色为最终录取不到5%的志愿；红色为滑档。' if numeric else '仅作定性示意，本省评级不显示百分比。'), model_ref)
     if s.get("points"):
         body += core_conclusions(s["points"] + (["报告口径：" + str(m["date"])] if m.get("date") and not re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(m["date"])) else []))
@@ -1018,9 +1631,10 @@ def build(rep, opt):
             for start in range(0, len(lst), 10):
                 part = lst[start:start+10]
                 body += figure('各志愿的单独过线' + (f'（{start+1}—{start+len(part)}）' if len(lst)>10 else ''),
-                               bar_chart([[f"{x['order']:02d} {x['name'][:17]}", x['p_clear'], x['tag'], html.unescape(fmt(x['p_clear']))] for x in part], maximum=1, palette=CERTAINTY),
+                               bar_chart([[f"{x['order']:02d} {x['name']}", x['p_clear'], x['tag'], html.unescape(fmt(x['p_clear']))] for x in part], maximum=1, palette=CERTAINTY,
+                                         legend={'冲': '冲', '稳': '稳', '保': '保'}, tick_fmt=lambda v: f'{v:.0%}'),
                                '琥珀为冲、石绿为稳、黛绿为保；条长为单独过线，精度同主表。', model_ref)
-        body += figure('你最终会被哪里录取', outcome_strip([(x['name'], x['p_land']) for x in lst], pfall or 0, fmt=strip_fmt), STRIP_CAP, model_ref)
+        body += figure('你最终会被哪里录取', outcome_strip([(x['name'], x['p_land']) for x in lst], pfall or 0, fmt=strip_fmt, fall_text=html.unescape(fall_txt(pfall or 0))), STRIP_CAP, model_ref)
         cols = "<colgroup><col style='width:5%'><col style='width:35%'><col style='width:7%'><col style='width:8%'><col style='width:12%'><col style='width:12%'><col style='width:21%'></colgroup>"
         body += "<table class='vt'>"+cols+"<thead><tr><th>序</th><th>志愿</th><th>类型</th><th>偏好</th><th>单独过线</th><th>最终录取</th><th>预测位次</th></tr></thead><tbody>"
         for x in lst:
@@ -1040,6 +1654,7 @@ def build(rep, opt):
         sec("志愿表", body)
 
         # 05 为什么这样排
+        fall_shown = lambda p: html.unescape(fall_txt(p) if p == 0 or numeric else '有')
         rows = [("本报告的方案", eu, pfall, True)]
         bu, bs = opt.get("baseline_top_utility"), opt.get("baseline_safest")
         if bu:
@@ -1047,8 +1662,8 @@ def build(rep, opt):
         if bs:
             rows.append(("只挑最稳的", bs[0], bs[1], False))
         body = '<p class="lead">本方案兼顾偏好与落空代价；下图与其他两种填法使用同一组数据和假设。</p>'
-        body += figure('三种填法的对比', strategy_chart(rows, fmt=(None if grade=='A' else (lambda p: fall_txt(p) if p==0 or numeric else '有'))),
-                       strategy_caption(eu, pfall, bu, bs) + '深绿为本报告方案，浅色为对照填法。', model_ref)
+        body += figure('三种填法的对比', strategy_chart(rows, fmt=fall_shown),
+                       strategy_caption(eu, pfall, bu, bs, fall_shown) + '深绿为本报告方案，浅色为对照填法。', model_ref)
         if rep.get("why"):
             body += "".join(f"<p>{E(x)}</p>" for x in rep["why"])
         if stress:
@@ -1074,6 +1689,10 @@ def build(rep, opt):
                     '完整调研原文和出处在第 12 节。</p>')
         else:
             body = '<p class="lead">以下是对排名靠前学校的升学和就业调研。每条信息都注明了证据等级：官方文件 &gt; 多人一致 &gt; 单人说法 &gt; 推测。</p>'
+        if any(r.get('items') for r in rs):
+            body += figure('排在前面的学校，各方面查到了多少', evidence_grid([(r['school'], [(x[0], grade_of(x[2])) for x in r.get('items', [])]) for r in rs]),
+                           '每格是这一方面信息的证据等级，颜色同下方徽章：深色为官方，石绿为多人一致，浅色为单人说法，空心为推测，虚线为没取到。只表示信息有多可靠，不是给学校打分。',
+                           research_ref)
         for r in rs:
             body += school_card(r) if r.get('brief') else research_table(r)
         if qs:
@@ -1085,8 +1704,8 @@ def build(rep, opt):
 
     # 07 待核实
     if rep.get("todo"):
-        body = ('<p class="lead">以下事项会直接影响能不能报、报了能不能录，请在正式填报前逐一核对。</p><table><thead><tr><th class="c" style="width:8%">✓</th><th>事项</th><th style="width:30%">去哪里查</th></tr></thead><tbody>'
-                + "".join(f"<tr><td class='c'>□</td><td>{E(a)}</td><td class='small'>{E(b)}</td></tr>" for a, b in rep["todo"]) + "</tbody></table>")
+        body = ('<p class="lead">以下事项会直接影响能不能报、报了能不能录，请在正式填报前逐一核对。</p><table><thead><tr><th class="c" style="width:8%">核对</th><th>事项</th><th style="width:30%">去哪里查</th></tr></thead><tbody>'
+                + "".join(f"<tr><td class='c'><i class='checkbox'></i></td><td>{E(a)}</td><td class='small'>{E(b)}</td></tr>" for a, b in rep["todo"]) + "</tbody></table>")
         sec("填报前核对清单", body)
     else:
         blank("todo", "填报前核对清单", "本次没有列出待核对事项。")
@@ -1100,7 +1719,7 @@ def build(rep, opt):
             ms = "、".join(f"{i}. {m['name']}" for i, m in enumerate(x.get("majors") or [], 1))
             rows_html += (f"<tr><td class='c num'>{x['order']}</td><td class='num'>{E(code) or '＿＿＿'}</td><td>{E(x['name'].split('（')[0].split('·')[0] if x.get('group') else x['name'].split('（')[0])}</td>"
                           f"<td class='num'>{E(sub) or '＿＿'}</td><td class='small'>{E(ms) or '—'}{limit_line(x)}</td>"
-                          f"<td class='c'>{('是' if x.get('obey', True) else '<b>否</b>') if x.get('group') else '—'}</td><td class='c'>□</td></tr>")
+                          f"<td class='c'>{('是' if x.get('obey', True) else '<b>否</b>') if x.get('group') else '—'}</td><td class='c'><i class='checkbox'></i></td></tr>")
         body = ('<p class="lead">这一页用来照着录入志愿填报系统。录错一个代码，前面算得再准也没用，所以请逐格核对。</p>'
                 '<div class="box warn"><h4>录入前必读</h4><ol class="tight">'
                 '<li>院校代码、专业组或专业代码<b>每年可能变</b>：表中代码来自往年数据，必须按今年的招生计划或专业目录逐个核对、改正。</li>'
@@ -1191,10 +1810,10 @@ def build(rep, opt):
     subtitle = ' · '.join(part.strip() for part in m.get('subtitle','').split('·') if not re.search(r'样板|模拟|虚构|实际生成|回溯版|案例',part))
     cover = cover_html(m.get('title','高考志愿填报决策报告'), subtitle, m.get('candidate','本人'),
                        m.get('stage','高考版 · 填报决策'), m.get('province','待核'), report_id, generated, asof,
-                       s.get('headline',''), [(i,t) for i,t,_ in secs])
+                       s.get('headline',''), [(i,t) for i,t,_ in secs], simulated=m.get('mode')!='formal')
     if missing:
         print('提醒：以下各节没有内容：'+'、'.join(dict.fromkeys(missing)),file=sys.stderr)
-    return document_html(m.get('title','高考志愿填报决策报告'),cover,''.join(b for _,_,b in secs),m.get('candidate','本人'),'高考',report_id)
+    return document_html(m.get('title','高考志愿填报决策报告'),cover,''.join(b for _,_,b in secs),m.get('candidate','本人'),'高考',report_id,simulated=m.get('mode')!='formal')
 
 
 def write_sheet(opt, path):

@@ -41,7 +41,7 @@ class PublicationGateTests(unittest.TestCase):
     def test_bars_keep_display_precision_and_reject_bad_scale(self):
         svg = report.bar_chart([['B省',.943,'保','约 95%']],maximum=1)
         self.assertIn('约 95%',svg)
-        self.assertIn('311.19',svg)  # actual value .943, never rounded before plotting
+        self.assertIn('307.42',svg)  # (540-214)×.943: actual value, never rounded before plotting
         with self.assertRaises(ValueError): report.bar_chart([['负数',-2]])
         with self.assertRaises(ValueError): report.bar_chart([['超界',200]],maximum=100)
 

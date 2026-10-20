@@ -82,7 +82,7 @@
   },
   "snapshot": {
     "report.json": "6bebc2939fa5ae465e53b0d4f28942a758a20e9ffa3689a26576227252032230",
-    "report.pdf": "4870b0f1cd545d2d1870e9cf70254e30a8adaad100663d13903d97ea5c812896",
+    "report.pdf": "45beee3b73968b05837be6fb5664992123183c1cebd2d7d9e314881b83e32de8",
     "operator_check.md": "0b2f47c5ac319298923b3e1fb805a80a351069501f96b6dd1a3cdc933a1a5be4",
     "retro_ranks/135253/result.json": "85969677c047dcc860dab9a01f6a50b07fff1f317f7f9e6ac2fc583acb17249a",
     "case.json": "e1babfaa0725685325bb554f29c2666dceef0868fd15a0caa6e4648c489aa832",
@@ -117,6 +117,34 @@
         "report.pdf"
       ],
       "reason": "摘要四张卡固定为同一格式（推荐志愿数含冲稳保、最可能的去向、平均满意度、滑档风险），评级 C/D 的满意度卡写“不估算”；志愿、概率和结论不变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "共用 report.py 改为 SVG 状态图标与图形时间线标记；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "核对框改为图形；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.pdf"
+      ],
+      "reason": "图表按科研插图标准重画：条形图加从 0 起的刻度轴、图例与按宽度截断的标签；落点条宽度严格等于概率并注明未标号的窄段和滑档；三种填法图用 0—100 固定刻度、滑档与摘要同精度；新增院校调研证据一览图。显示层：≥99.5% 的概率写“> 99%”不再写 100%，策略图注按显示精度比较。志愿、概率和结论不变。"
     }
   ]
 }

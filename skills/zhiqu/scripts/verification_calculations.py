@@ -33,12 +33,24 @@ def numeric(value):
     return type(value) in (int, float) and math.isfinite(value)
 
 
+def _quantile(sorted_values, q):
+    """含端点的线性插值（与 numpy 默认 linear 相同）：位置 = (n−1)·q。"""
+    pos = (len(sorted_values) - 1) * q
+    lo = math.floor(pos); hi = math.ceil(pos)
+    return sorted_values[lo] + (sorted_values[hi] - sorted_values[lo]) * (pos - lo)
+
+
+STATS = {'min': lambda v: v[0], 'max': lambda v: v[-1], 'median': lambda v: _quantile(v, .5),
+         'q1': lambda v: _quantile(v, .25), 'q3': lambda v: _quantile(v, .75), 'count': len}
+STAT_NAMES = {'min': '最低', 'max': '最高', 'median': '中位数', 'q1': '下四分位', 'q3': '上四分位', 'count': '人数'}
+
+
 def _registered(case, profile, evidence):
     computed = {}; rows = []
     items = evidence.get('items', []) if isinstance(evidence, dict) and 'items' in evidence else evidence
     entries = {row['id']: row for row in items} if isinstance(items, list) else items
 
-    def resolve(value):
+    def resolve(value, allow_list=False):
         if numeric(value): return value
         match = REF.fullmatch(str(value))
         if not match: raise ValueError('计算输入必须为数值或完整登记引用：' + str(value))
@@ -48,13 +60,23 @@ def _registered(case, profile, evidence):
             value = pointer(entries[eid], subpath if sep else '/value')
         else:
             value = pointer({'k': case, 'p': profile, 'c': computed}[kind], path)
+        if allow_list and isinstance(value, list) and value and all(numeric(v) for v in value): return value
         if not numeric(value): raise ValueError('计算输入不是有限数值：' + str(value))
         return value
 
     def calculate(op, replacements=None):
         inputs = [(replacements or {}).get(v, v) for v in op['inputs']]
-        values = [resolve(v) for v in inputs]
         algorithm = op['algorithm']
+        if algorithm in STATS:
+            # 匿名分数表（如拟录取初试总分，不含姓名编号）→ 分布统计；输入是一个数值列表或若干数值。
+            raw = [resolve(v, allow_list=True) for v in inputs]
+            values = [x for v in raw for x in (v if isinstance(v, list) else [v])]
+            if not values: raise ValueError('计算输入为空')
+            value = STATS[algorithm](sorted(values))
+            formula = f'{len(values)} 个分数排序后取{STAT_NAMES[algorithm]}（四分位按含端点的线性插值）'
+            if not numeric(value): raise ValueError('计算结果不是有限数值')
+            return value, [len(values)], formula
+        values = [resolve(v) for v in inputs]
         if not values: raise ValueError('计算输入为空')
         if algorithm == 'sum': value = sum(values); formula = ' + '.join(map(str, values))
         elif algorithm == 'product': value = math.prod(values); formula = ' × '.join(map(str, values))

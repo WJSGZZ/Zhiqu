@@ -3,24 +3,24 @@
   "case_id": "2027-YJ-S01",
   "source_sha256": {
     "case.json": "67ca8684a8e7865960b8c8d553f30f425de93ccfe7edf60d0d4e24efc0169ef4",
-    "profile_parse.json": "a5a7b96085411943644dcaae76616a0affb32a79a07fd3020505d28d88c8b1a8",
+    "profile_parse.json": "6a57befaf14ccbf7a8bce5c55ab2cc92ef27ca6fc44a0b095a67e665d5cff763",
     "directions.json": "2b68a53951ab4a8de52d7edcbabdf32d24e4570392cd70ac212c62342430a3b2",
     "rules_check.json": "7b0a58159b98a98e96a17d877674c57bf2d59988aefd37a2f57d94f82580f5c2",
     "candidates.json": "c9c5db84e727dde6ec750e534d023b4e15e7dd85e5bd1bc77110b14166f9d8ad",
-    "evidence.json": "51ed06bd23e71530e9c0bf1e43fba3f2a74af69d27bbd91e12fbfee320924cbe",
+    "evidence.json": "089139cd06ff70af31d361cab73a80968c9899ca924d5d0f31802fd6b6262a0a",
     "calculations.json": "cec5b3577a8d62196c2dfd606cfab91b31c421feb52a97cbdd3a5cfafcd5daf7",
-    "judgment.json": "8b73bca83ff62c0733a11877d494d551885c3de35e30c6bcfc71c6cd072b35b0",
-    "narrative.json": "25e3ff88fd2d4313731ad5429e11bfd2b4063d11fbe5779087ea7db0c3f99efa",
+    "judgment.json": "81e93d48140973e24e8a7d981e9816f035868deb0f14c1c725fd4274f5fc08ea",
+    "narrative.json": "c8367bbda892a637559085198bd56f36d467199b2410f2773fcf2c02331fdb81",
     "profile.txt": "2be92b9770f7a4a877386334b958c096198b948c89c5eabca030d4f557e29457"
   },
-  "contract_sha256": "e781c97093c55d81424be0d6ab395190a6eebb25009367f9bf1d68bbdd05eb6c",
+  "contract_sha256": "1dfacccc00957294fff83bef5b55850545564d8c0b1b76bb04b2af4adc7b31bf",
   "tool_sha256": {
-    "planning_report.py": "77d252c484065f3fe298fc87166069cb600898e0182cc06cadab52bbfaa34436",
-    "planning_workflow.py": "ee2d438232e89d2abbaef38ac668fdcd6cc6aea42f554b44408e67fdd7186d13",
-    "operator_check.py": "a6552c0b63a8a6b5d15c9a1057fbc2884fb85435b1b102fbf4a48dd74c4e7ebb",
+    "planning_report.py": "e50d03231e1eed2f3960a114150b3e5557764365966703a5bbb599ee71720be1",
+    "planning_workflow.py": "557c3108d3dbb1e8cc8ce81b999b3938b056a3a990ab3f5bbeaeba8e9a8b6b80",
+    "operator_check.py": "97965475c2c8b6efe5dbf2747511526d1729a540f55a16b54fa282e2a810fdc7",
     "check_demos.py": "fc8e1625f9e052373756160514ad5c73db1e8451c233425918edb5bc839d9f63",
-    "report.py": "5743337eb5044bd6e205d3dd2353fc70281c77a4f27def8bd133268425107a42",
-    "render_report.py": "707d4a3dd6780cc249ddd5620f37152d525313c3a64de75c676758eef11fb5c8",
+    "report.py": "de09e0df5360699ccadd5243f9e551e7811c338b3b1b6850a5fc3fc61ac52338",
+    "render_report.py": "a6ba0669516b5a6aba7444c0c3d8815d0d1695c13c4d7a67ba1f44fbbf254f33",
     "profile_store.py": "1cfd828583598a65cf719a46447cb3112ef0170eb1a638b89ab023cb47a04e7f"
   },
   "numeric_refs": [
@@ -193,85 +193,145 @@
       "display": "10 月 12 日"
     },
     {
-      "location": "02.profile.2",
-      "ref": "{{k:/education_entry|year}}",
-      "value": "2023-09-01",
-      "display": "2023"
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/0/value}}",
+      "value": "大四",
+      "display": "大四"
     },
     {
-      "location": "02.profile.2",
-      "ref": "{{k:/target_year}}",
-      "value": 2027,
-      "display": "2027"
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/1/value}}",
+      "value": "电气工程及其自动化",
+      "display": "电气工程及其自动化"
     },
     {
-      "location": "02.profile.2",
-      "ref": "{{k:/graduation_date|month}}",
-      "value": "2027-06-30",
-      "display": "6"
-    },
-    {
-      "location": "02.profile.2",
-      "ref": "{{p:/fields/3/value/mean|1f}}",
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/3/value/mean}}",
       "value": 80.2,
       "display": "80.2"
     },
     {
-      "location": "02.profile.2",
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/3/value/scale}}",
+      "value": 100,
+      "display": "100"
+    },
+    {
+      "location": "02.figure.1",
       "ref": "{{p:/fields/4/value/cet4}}",
       "value": 465,
       "display": "465"
     },
     {
-      "location": "02.profile.2",
-      "ref": "{{k:/budget/annual_limit|comma}}",
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/8/value|comma}}",
       "value": 30000,
       "display": "30,000"
     },
     {
-      "location": "02.profile.2",
-      "ref": "{{c:/illustrative_parameters/daily_hours_ceiling}}",
-      "value": 8,
-      "display": "8"
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/9/value}}",
+      "value": "不能无期限支持，须另核预算和本人同意",
+      "display": "不能无期限支持，须另核预算和本人同意"
     },
     {
-      "location": "02.profile.2",
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/5/value}}",
+      "value": "基础一般，完整试卷常做不完",
+      "display": "基础一般，完整试卷常做不完"
+    },
+    {
+      "location": "02.figure.1",
       "ref": "{{p:/fields/11/value/sustainable_low}}",
       "value": 4,
       "display": "4"
     },
     {
-      "location": "02.profile.2",
+      "location": "02.figure.1",
       "ref": "{{p:/fields/11/value/sustainable_high}}",
       "value": 5,
       "display": "5"
     },
     {
-      "location": "02.analysis.7",
-      "ref": "{{k:/birth_datetime|datetime}}",
-      "value": "2004-11-02T14:20:00",
-      "display": "2004-11-02 14:20"
+      "location": "02.profile.3",
+      "ref": "{{k:/education_entry|year}}",
+      "value": "2023-09-01",
+      "display": "2023"
     },
     {
-      "location": "02.analysis.7",
-      "ref": "{{c:/luck_start_year}}",
-      "value": 2013,
-      "display": "2013"
-    },
-    {
-      "location": "02.analysis.7",
+      "location": "02.profile.3",
       "ref": "{{k:/target_year}}",
       "value": 2027,
       "display": "2027"
     },
     {
-      "location": "04.analysis.7",
+      "location": "02.profile.3",
+      "ref": "{{k:/graduation_date|month}}",
+      "value": "2027-06-30",
+      "display": "6"
+    },
+    {
+      "location": "02.profile.3",
       "ref": "{{p:/fields/3/value/mean|1f}}",
       "value": 80.2,
       "display": "80.2"
     },
     {
-      "location": "04.analysis.12",
+      "location": "02.profile.3",
+      "ref": "{{p:/fields/4/value/cet4}}",
+      "value": 465,
+      "display": "465"
+    },
+    {
+      "location": "02.profile.3",
+      "ref": "{{k:/budget/annual_limit|comma}}",
+      "value": 30000,
+      "display": "30,000"
+    },
+    {
+      "location": "02.profile.3",
+      "ref": "{{c:/illustrative_parameters/daily_hours_ceiling}}",
+      "value": 8,
+      "display": "8"
+    },
+    {
+      "location": "02.profile.3",
+      "ref": "{{p:/fields/11/value/sustainable_low}}",
+      "value": 4,
+      "display": "4"
+    },
+    {
+      "location": "02.profile.3",
+      "ref": "{{p:/fields/11/value/sustainable_high}}",
+      "value": 5,
+      "display": "5"
+    },
+    {
+      "location": "02.analysis.8",
+      "ref": "{{k:/birth_datetime|datetime}}",
+      "value": "2004-11-02T14:20:00",
+      "display": "2004-11-02 14:20"
+    },
+    {
+      "location": "02.analysis.8",
+      "ref": "{{c:/luck_start_year}}",
+      "value": 2013,
+      "display": "2013"
+    },
+    {
+      "location": "02.analysis.8",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "04.analysis.8",
+      "ref": "{{p:/fields/3/value/mean|1f}}",
+      "value": 80.2,
+      "display": "80.2"
+    },
+    {
+      "location": "04.analysis.13",
       "ref": "{{k:/target_year}}",
       "value": 2027,
       "display": "2027"
@@ -779,6 +839,24 @@
       "ref": "{{c:/gdut_2026_first_choice_retest_scores/q3}}",
       "value": 383.0,
       "display": "383"
+    },
+    {
+      "location": "06.score_ranges.10",
+      "ref": "{{c:/gdut_2026_first_choice_retest_scores/min}}",
+      "value": 350,
+      "display": "350"
+    },
+    {
+      "location": "06.score_ranges.10",
+      "ref": "{{c:/gdut_2026_first_choice_retest_scores/max}}",
+      "value": 437,
+      "display": "437"
+    },
+    {
+      "location": "06.score_ranges.10",
+      "ref": "{{c:/gdut_2026_first_choice_retest_scores/median}}",
+      "value": 368.0,
+      "display": "368"
     },
     {
       "location": "06.analysis.13",
@@ -1736,9 +1814,9 @@
     }
   ],
   "artifacts": {
-    "report.md": "1350c5395ecc58db78d751c3dbba456caa3579d246202ba516c534f1a1909c0d",
-    "report.html": "ff09dd77051a539a60ba0d855fa58553ea2adccfa257f481cbb23042fdd70a31",
-    "report.pdf": "95133e931e0b597d0222251b1a91056c5875c09628492f487120740501626750"
+    "report.md": "3e86bbaad7b5f5cf7c97a7faa816dde044b8340c822ffffe5d1a4fffed7f93ca",
+    "report.html": "96d226e7ac9af1bb09ab0359c1dce581ad63d4732a5114f2938d88589ba42a3a",
+    "report.pdf": "8f416aa891a5201592cbadc0915cd7dde4e7e0cc92cf7b63136285ccf45ffe39"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "report_profile": {
@@ -1748,7 +1826,7 @@
     "form": null
   },
   "verification_tools_sha256": {
-    "verify_report.py": "ebcf0825e96d349585935e4d76e29fa6d0aa51e402c3a3968b3dd673045f0856",
-    "verification_calculations.py": "fc02d9890d3a82a98fd381df093114d3b59b66aeb020a818c64bddb52b7482ff"
+    "verify_report.py": "91021d58224fc869e871cff611ec92ba60943ca89da60635f55cd4a8c6048a01",
+    "verification_calculations.py": "1a5cc43f8df9494e3baaa1b1ca83a4ec471718c5ce21344275b526758dde0c3c"
   }
 }

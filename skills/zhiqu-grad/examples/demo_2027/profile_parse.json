@@ -169,6 +169,70 @@
       "evidence_refs": [
         "E0001"
       ]
+    },
+    "02_facts": {
+      "type": "facts",
+      "content": {
+        "title": "小林的现状一览：哪些已知，哪些还缺",
+        "caption": "深绿边是本人已经给出的事实；琥珀底是本人自述、还要用记录核对的；虚线框是还没有的信息。只列画像原话，不替本人估。",
+        "rows": [
+          [
+            "年级",
+            "{{p:/fields/0/value}}",
+            "已知"
+          ],
+          [
+            "专业",
+            "{{p:/fields/1/value}}",
+            "已知"
+          ],
+          [
+            "均分",
+            "{{p:/fields/3/value/mean}}（满分 {{p:/fields/3/value/scale}}）",
+            "已知"
+          ],
+          [
+            "英语",
+            "四级 {{p:/fields/4/value/cet4}}，六级未通过",
+            "已知"
+          ],
+          [
+            "年度预算",
+            "{{p:/fields/8/value|comma}} 元",
+            "已知"
+          ],
+          [
+            "能否二战",
+            "{{p:/fields/9/value}}",
+            "已知"
+          ],
+          [
+            "数学基础",
+            "{{p:/fields/5/value}}",
+            "待确认"
+          ],
+          [
+            "每天有效投入",
+            "自述约 {{p:/fields/11/value/sustainable_low}}—{{p:/fields/11/value/sustainable_high}} 小时",
+            "待确认"
+          ],
+          [
+            "同科目完整模考",
+            "还没做",
+            "未知"
+          ],
+          [
+            "推免资格",
+            "本校资格未提供",
+            "未知"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E0901",
+        "E0902",
+        "E0903"
+      ]
     }
   }
 }

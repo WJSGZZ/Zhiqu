@@ -21,6 +21,8 @@ RUBRIC = ('clarity', 'traceability', 'reasoning', 'consistency', 'timeliness', '
 PROFILE_FIELDS = {
  'grad': ('年级','专业','院校层次','均分或排名','英语','数学基础','读研动机','目标方向','预算','能否二战','目标地区'),
  'career': ('学历','专业','毕业时间','求职阶段','经历','证书','目标岗位','收入底线','城市','单位类型偏好','户籍','政治面貌','多快需要收入')}
+# 报告里画成图的组件：都必须有图题、读图说明和来源；没数据时改成一行缺口说明。
+FIGURE_TYPES = ('bars','interval','timeline','comparison_matrix','flow','stack','facts','cost')
 REF = re.compile(r'\{\{(e|c|k|p):([^{}|]+?)(?:\|([^{}]+))?\}\}')
 NUMBER = re.compile(r'(?<![A-Za-z])\d[\d,]*(?:\.\d+)?(?:%|％)?')
 CHINESE_QUANTITY = re.compile(r'[零〇一二两三四五六七八九十百千万]+(?=\s*(?:元|分(?!位|制|比)|人|名|个月|万元|%))')
@@ -61,8 +63,30 @@ def day(value):
     return date.fromisoformat(value)
 
 
+CN_DIGITS={c:i for i,c in enumerate('零一二三四五六七八九')}|{'〇':0,'两':2,'兩':2}
+CN_UNITS={'十':10,'拾':10,'百':100,'佰':100,'千':1000,'仟':1000}
+
+
+def cn_number(text):
+    """“十八萬三千九百六十” -> 183960；官方页面常用中文大写金额。"""
+    total=section=digit=0
+    for ch in text:
+        if ch in CN_DIGITS:digit=CN_DIGITS[ch]
+        elif ch in CN_UNITS:section+=(digit or 1)*CN_UNITS[ch];digit=0
+        elif ch in '萬万':total+=(section+digit)*10000;section=digit=0
+        elif ch in '億亿':total=(total+section+digit)*100000000;section=digit=0
+    return total+section+digit
+
+
+def with_arabic(text):
+    """在摘录后附上中文数字的阿拉伯写法，供数值比对；原摘录不改。"""
+    runs=re.findall(r'[零〇一二两兩三四五六七八九十拾百佰千仟萬万億亿]{2,}',str(text))
+    return str(text)+''.join(' '+str(cn_number(r)) for r in runs)
+
+
 def excerpt_contains(value, excerpt):
-    """Compare exact values allowing typographic commas/spaces and Chinese date notation."""
+    """Compare exact values allowing typographic commas/spaces, Chinese date notation and Chinese numerals."""
+    excerpt=with_arabic(excerpt)
     def clean(text):return re.sub(r'[\s,，]','',str(text))
     needle=clean(value);haystack=clean(excerpt).replace('：',':')
     if not needle:return False
@@ -290,6 +314,8 @@ class PlanningCase:
             return any(len(row)>=3 and number(row[1]) is not None and number(row[2]) is not None
                        and number(row[1])<=number(row[2]) for row in rows)
         if typ=='bars':return any(len(row)>=2 and number(row[1]) is not None for row in rows)
+        if typ=='stack':return any(len(row)>=2 for row in rows)
+        if typ=='cost':return any(len(row)>=3 for row in rows)
         return bool(rows)
 
     def contract_errors(self):
@@ -317,7 +343,7 @@ class PlanningCase:
                         else:
                             try:day(self.expand(content['expected_by']))
                             except (ValueError,KeyError,TypeError):errs.append(where+'：图表缺口预计补齐日期无效')
-                    if typ in ('bars','interval','timeline','comparison_matrix'):
+                    if typ in FIGURE_TYPES:
                         if not self.figure_has_data(typ,content):errs.append(where+'：没有可画数据，须改为一行缺口说明')
                         if not all(node.get('content',{}).get(k) for k in ('title','caption')): errs.append(where+'：图缺标题或读图说明')
                     if typ=='dated_actions':
@@ -509,30 +535,9 @@ class PlanningCase:
                     if not match or self.resolve(match[1],match[2])!=pointer(self.case,path):raise ValueError('输入与来源值不一致')
                 except (KeyError,ValueError,TypeError):self.err('case.json','calculation_plan.inputs'+path,'输入与来源值不一致')
         else:
-            computed={}
-            def compute(op, replacements=None):
-                values=[float(self.expand((replacements or {}).get(v,v))) for v in op['inputs']]
-                alg=op['algorithm']
-                if alg=='sum':v=sum(values)
-                elif alg=='product':
-                    import math
-                    v=math.prod(values)
-                elif alg=='difference':v=values[0]-values[1]
-                elif alg=='ratio':v=values[0]/values[1]
-                else:raise ValueError('未注册算法：'+str(alg))
-                return round(v,op['rounding']) if op.get('rounding') is not None else v
-            operations={op['output']:op for op in plan.get('operations',[])}
-            if not operations:raise ValueError('缺已注册算法及输入')
-            for op in operations.values():
-                v=compute(op)
-                computed[op['output']]=v
-            for scenario in plan.get('scenarios',[]):
-                op=operations[scenario['baseline_output']];changed=scenario['changed_inputs']
-                if not changed or any(k not in op['inputs'] or self.expand(k)==self.expand(v) for k,v in changed.items()):
-                    self.err('case.json','calculation_plan.scenarios','关键计算输入没有实际变化')
-                match=REF.fullmatch(scenario['output_ref'])
-                if not match or match[1]!='c' or not re.fullmatch(r'/[^/]+',match[2]):raise ValueError('情景输出须指顶层计算键')
-                computed[match[2][1:]]=compute(op,changed)
+            # 与核对工具同一份实现（verification_calculations），算法清单只维护一处。
+            from verification_calculations import _registered
+            computed,_=_registered(self.case,self.data['profile_parse.json'],self.data['evidence.json'])
             if computed!=saved:self.err('calculations.json','','计算结果与已登记算法不一致')
         scenarios=plan.get('scenarios',[])
         if len(scenarios)<self.limits['scenarios_min']:self.err('case.json','calculation_plan.scenarios','情景不足')

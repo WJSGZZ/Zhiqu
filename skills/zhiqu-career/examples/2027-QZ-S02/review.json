@@ -166,19 +166,19 @@
   },
   "snapshot": {
     "case.json": "a9718f60b403172e958aca4fb446e6e924f19867427563d439e28c41e6e84f73",
-    "profile_parse.json": "c0912865115b3aaf5e1ddacc5454b9f3f0c087fbcb0041b4de3658dcf24578d6",
+    "profile_parse.json": "2debcaaebbd0933ce629911dc8e523fbfe415db2a129d3942139f5866d91d556",
     "directions.json": "5b2397e7ee4e80db6b8b1b6bf0834869aabbf282dcfecc6f23c4c706d476cc76",
     "rules_check.json": "d887941488483a7992cfbe1fb174550f3fdb3083d8c597a1cdcc43f1eee9d198",
     "candidates.json": "e2d7abe22fb7375e3190e21a8f801c264fbed4b7fdaab066193cc48a35ff98f1",
     "evidence.json": "92ac60740f28924a3b80ffef547bde799e0c51e6b0d591361ffca72b2dfc94e2",
     "calculations.json": "8e8135c7483b79dbc2d7ed702e1d9add2628ccf852da45c3d957f1e3f05d98f5",
-    "judgment.json": "5c913bab47c7220eb52e9c907187a8bbcaf45fc3710cee9d675c28ceff68af57",
+    "judgment.json": "e745ba80a3b9201978ce86a51cbeb31485b71e92b09f116e031136ab9be027a6",
     "narrative.json": "cbfcc57d7627dd98c04dc98826b0bb4968862aa318b31708b2598ed39e47f121",
-    "report.md": "afe724fa82a785357068aabc8775b235756414d53aff86946b348d49e95908b6",
-    "report.html": "49c759f5085de168c1cc03bb8d9de16edf599869fb4e8216a65409c0b3f97582",
-    "report.pdf": "f915e562cfe4600d0d67c6d9d3e6a99120eb75e17c4abcb1f85ad8c6df1b6a48",
-    "report_trace.json": "9dc665202903404d60e232241a68762ab94f0ba141527e4d547c6bf96024ea0e",
-    "operator_check.md": "e9c6f250861eb7ab99db2b659d77a73ace9d087b23a656666cc9707877c2b258",
+    "report.md": "5726e5db3e8706fdbe3bfedfdc6c7105a911b58265bc552d59c4522cfeb26613",
+    "report.html": "161bd6d731eb84108ab6291484b4efed8199231c8b8fa4dc2b138b12f96c999f",
+    "report.pdf": "020768241ea2c568de084cd8332a5b9d75379111d07a3f7be0b020493d5239ff",
+    "report_trace.json": "93d7ade3c86de0c3e77e9dc2fe73219481b0b9a221c571ea3f69803eb2596d5d",
+    "operator_check.md": "1245f6ce989225d6e83824f464ed0d13f904657fc77be354f7990a7aa1cfaf84",
     "profile.json": "e985adff4dc5eb31443eef9a859f0e7955f84936dd8dab27a61b56e4b2e50d29",
     "profile-supplement.txt": "7ae0beb59e74158ec5ff869bb796f5cf3352fb7fa5c9ab7172ee930e91c93360"
   },
@@ -240,6 +240,42 @@
         "report_trace.json"
       ],
       "reason": "共用的 report.py 改了高考摘要卡，读研求职报告随工具指纹重新生成；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.md",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "共用 report.py 改为 SVG 状态图标与图形时间线标记；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.md",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "核对框改为图形；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "judgment.json",
+        "operator_check.md",
+        "profile_parse.json",
+        "report.html",
+        "report.md",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "图表按科研插图标准重画（条形图加刻度，时间线同月事项错开、字号不小于 7pt）；新增“现状一览”和企业、电网、国考分路流程图；矩阵说明改用图形名称。数字全部引用原有画像、证据与计算，结论不变。"
     }
   ]
 }

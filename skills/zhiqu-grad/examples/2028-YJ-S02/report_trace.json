@@ -3,25 +3,25 @@
   "case_id": "2028-YJ-S02",
   "source_sha256": {
     "case.json": "ef1afebd889d71eb59526b74be04ec617e08cbf4124b50f2d0585833193cddea",
-    "profile_parse.json": "1ba7bfd4bbb2bb0e54318c5ff1008c1f577e406d5ac5c88a6fa37c3e4dabc6e5",
+    "profile_parse.json": "b104d455c0a961c2f0154f97973b65de83288093dd2d83b3d1573af305696b1d",
     "directions.json": "e11eb75bac9a1378195f15ef805daf0ffe3d0a4c2306d317d6d9944265b8008b",
     "rules_check.json": "248a80156349f8bee1d5de049d1153408fc4548108e5895abb5bba17d5c7cb03",
     "candidates.json": "1f9f3703275d1799b96d638988fd5c11a27d5f2c4ef9209db44868be66817183",
-    "evidence.json": "a5f3a6fd7928b3f9c8507d7919f59e6a0fd3c6e2f7df4fdedb63638e5e8c44f4",
+    "evidence.json": "e9e692bd54a65df7fb3aaac7c2e7ddb924037dc9ffc8d6aae0ddf140d27dd766",
     "calculations.json": "00e5087c418c579371b17558494a9c4c1f865b0b051ef63fc1a3c9a51a89cd87",
-    "judgment.json": "38eed4d2e7e0e329c1beb9d7b029069ef4907552ad2ae15cf9019bd5bc4f9add",
+    "judgment.json": "4b3f132b90331450a6bf26bc8429d12c32752ba346779a891f0597c1572af4ee",
     "narrative.json": "cdaf672fa9a3877e1e9b218b516cf5eee06ef7887fddb6a4d1367480e15222a4",
     "profile.json": "b04770d7a2589f2dbe7b35a80efaad8953b8db8666a26db85875f82cfc9eaf72",
     "profile-supplement.txt": "6d3fe85c4f5f9393a284253436e9dd3ae7a719f9ff73222d052dc7224a274e0f"
   },
-  "contract_sha256": "e781c97093c55d81424be0d6ab395190a6eebb25009367f9bf1d68bbdd05eb6c",
+  "contract_sha256": "1dfacccc00957294fff83bef5b55850545564d8c0b1b76bb04b2af4adc7b31bf",
   "tool_sha256": {
-    "planning_report.py": "77d252c484065f3fe298fc87166069cb600898e0182cc06cadab52bbfaa34436",
-    "planning_workflow.py": "ee2d438232e89d2abbaef38ac668fdcd6cc6aea42f554b44408e67fdd7186d13",
-    "operator_check.py": "a6552c0b63a8a6b5d15c9a1057fbc2884fb85435b1b102fbf4a48dd74c4e7ebb",
+    "planning_report.py": "e50d03231e1eed2f3960a114150b3e5557764365966703a5bbb599ee71720be1",
+    "planning_workflow.py": "557c3108d3dbb1e8cc8ce81b999b3938b056a3a990ab3f5bbeaeba8e9a8b6b80",
+    "operator_check.py": "97965475c2c8b6efe5dbf2747511526d1729a540f55a16b54fa282e2a810fdc7",
     "check_demos.py": "fc8e1625f9e052373756160514ad5c73db1e8451c233425918edb5bc839d9f63",
-    "report.py": "5743337eb5044bd6e205d3dd2353fc70281c77a4f27def8bd133268425107a42",
-    "render_report.py": "707d4a3dd6780cc249ddd5620f37152d525313c3a64de75c676758eef11fb5c8",
+    "report.py": "de09e0df5360699ccadd5243f9e551e7811c338b3b1b6850a5fc3fc61ac52338",
+    "render_report.py": "a6ba0669516b5a6aba7444c0c3d8815d0d1695c13c4d7a67ba1f44fbbf254f33",
     "profile_store.py": "1cfd828583598a65cf719a46447cb3112ef0170eb1a638b89ab023cb47a04e7f"
   },
   "numeric_refs": [
@@ -122,79 +122,139 @@
       "display": "2026 年 10 月 23 日"
     },
     {
-      "location": "02.profile.1",
-      "ref": "{{k:/education/year_level}}",
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/0/value}}",
       "value": "大三上",
       "display": "大三上"
     },
     {
-      "location": "02.profile.1",
-      "ref": "{{k:/education/major}}",
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/1/value}}",
       "value": "交通工程",
       "display": "交通工程"
     },
     {
-      "location": "02.profile.1",
-      "ref": "{{p:/fields/11/value}}",
-      "value": "先专业方向和学习内容，再费用可承受，再省内生活，最后是学校名气。没有百分比权重。",
-      "display": "先专业方向和学习内容，再费用可承受，再省内生活，最后是学校名气。没有百分比权重。"
-    },
-    {
-      "location": "02.profile.1",
-      "ref": "{{k:/budget/annual_limit|comma}}",
-      "value": 32000,
-      "display": "32,000"
-    },
-    {
-      "location": "02.analysis.3",
+      "location": "02.figure.1",
       "ref": "{{p:/fields/14/value/mean}}",
       "value": 86.1,
       "display": "86.1"
     },
     {
-      "location": "02.analysis.3",
+      "location": "02.figure.1",
       "ref": "{{p:/fields/14/value/cet4}}",
       "value": 487,
       "display": "487"
     },
     {
-      "location": "02.details.6",
+      "location": "02.figure.1",
       "ref": "{{p:/fields/14/value/academic_rank}}",
       "value": 7,
       "display": "7"
     },
     {
-      "location": "02.details.6",
+      "location": "02.figure.1",
       "ref": "{{p:/fields/14/value/academic_count}}",
       "value": 62,
       "display": "62"
     },
     {
-      "location": "02.details.6",
+      "location": "02.figure.1",
       "ref": "{{p:/fields/14/value/comprehensive_rank}}",
       "value": 9,
       "display": "9"
     },
     {
-      "location": "02.details.6",
+      "location": "02.figure.1",
       "ref": "{{p:/fields/14/value/comprehensive_count}}",
       "value": 60,
       "display": "60"
     },
     {
-      "location": "02.details.6",
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/12/value/annual|comma}}",
+      "value": 32000,
+      "display": "32,000"
+    },
+    {
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/13/value}}",
+      "value": 12,
+      "display": "12"
+    },
+    {
+      "location": "02.profile.2",
+      "ref": "{{k:/education/year_level}}",
+      "value": "大三上",
+      "display": "大三上"
+    },
+    {
+      "location": "02.profile.2",
+      "ref": "{{k:/education/major}}",
+      "value": "交通工程",
+      "display": "交通工程"
+    },
+    {
+      "location": "02.profile.2",
+      "ref": "{{p:/fields/11/value}}",
+      "value": "先专业方向和学习内容，再费用可承受，再省内生活，最后是学校名气。没有百分比权重。",
+      "display": "先专业方向和学习内容，再费用可承受，再省内生活，最后是学校名气。没有百分比权重。"
+    },
+    {
+      "location": "02.profile.2",
+      "ref": "{{k:/budget/annual_limit|comma}}",
+      "value": 32000,
+      "display": "32,000"
+    },
+    {
+      "location": "02.analysis.4",
+      "ref": "{{p:/fields/14/value/mean}}",
+      "value": 86.1,
+      "display": "86.1"
+    },
+    {
+      "location": "02.analysis.4",
       "ref": "{{p:/fields/14/value/cet4}}",
       "value": 487,
       "display": "487"
     },
     {
-      "location": "02.details.6",
+      "location": "02.details.7",
+      "ref": "{{p:/fields/14/value/academic_rank}}",
+      "value": 7,
+      "display": "7"
+    },
+    {
+      "location": "02.details.7",
+      "ref": "{{p:/fields/14/value/academic_count}}",
+      "value": 62,
+      "display": "62"
+    },
+    {
+      "location": "02.details.7",
+      "ref": "{{p:/fields/14/value/comprehensive_rank}}",
+      "value": 9,
+      "display": "9"
+    },
+    {
+      "location": "02.details.7",
+      "ref": "{{p:/fields/14/value/comprehensive_count}}",
+      "value": 60,
+      "display": "60"
+    },
+    {
+      "location": "02.details.7",
+      "ref": "{{p:/fields/14/value/cet4}}",
+      "value": 487,
+      "display": "487"
+    },
+    {
+      "location": "02.details.7",
       "ref": "{{e:E003#/value}}",
       "value": 425,
       "display": "425"
     },
     {
-      "location": "02.details.6",
+      "location": "02.details.7",
       "ref": "{{e:E002#/value}}",
       "value": "1/3",
       "display": "1/3"
@@ -423,9 +483,9 @@
     }
   ],
   "artifacts": {
-    "report.md": "ae34007d0976fbf6249a44b1d8a5192b84136e93ccb022dd7be92fdd4b09c131",
-    "report.html": "5e5907c6ab95a2c914506ec135622b48c680e25bde88494eba182817c89364bc",
-    "report.pdf": "29d132e11c89d0817f0bcd214793b12a4ca68dd7cbc4da9ca682a6188f141e4a"
+    "report.md": "86fc591663a913b3caa02ea0ad99c89108b9120711099e41b4b8df180c904062",
+    "report.html": "d213eee8dfe28c2712f688c773ff9748c0ff7f4111c2b2440d77445585e1892c",
+    "report.pdf": "dbdd4e4b18f36322099cab6f9fa888b1ac7593a4919c1575257f7abca8af6795"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "report_profile": {
@@ -435,7 +495,7 @@
     "form": "8bcf0611"
   },
   "verification_tools_sha256": {
-    "verify_report.py": "ebcf0825e96d349585935e4d76e29fa6d0aa51e402c3a3968b3dd673045f0856",
-    "verification_calculations.py": "fc02d9890d3a82a98fd381df093114d3b59b66aeb020a818c64bddb52b7482ff"
+    "verify_report.py": "91021d58224fc869e871cff611ec92ba60943ca89da60635f55cd4a8c6048a01",
+    "verification_calculations.py": "1a5cc43f8df9494e3baaa1b1ca83a4ec471718c5ce21344275b526758dde0c3c"
   }
 }

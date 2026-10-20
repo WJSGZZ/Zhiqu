@@ -99,7 +99,28 @@
       "default_title": "院校调研",
       "title_override_allowed": false,
       "legacy_content_checks": "check_report.py:check_sections",
-      "slots": []
+      "slots": [
+        {
+          "key": "evidence_overview",
+          "component": "evidence_grid",
+          "min": 0,
+          "max": 1,
+          "from": [
+            {
+              "file": "research.json",
+              "pointer": ""
+            }
+          ],
+          "source_required": true,
+          "condition": "research_present",
+          "rules": [
+            "grade_from_research_items_unchanged",
+            "evidence_level_not_school_score",
+            "unresearched_aspect_marked_not_blank"
+          ],
+          "count_by": "components"
+        }
+      ]
     },
     {
       "id": "07",

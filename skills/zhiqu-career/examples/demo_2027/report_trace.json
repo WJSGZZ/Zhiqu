@@ -3,24 +3,24 @@
   "case_id": "2027-QZ-S01",
   "source_sha256": {
     "case.json": "cbbe6940fb076d24378e740b979fd888344e6dadf5e3d1501d897e0821af9f34",
-    "profile_parse.json": "55e1a5c44c20bd2a16afa97bef3497bfdb153e472eed6347733a440634fcb33e",
+    "profile_parse.json": "856e00c93e3205dc0bdd6de0d31a2cd384a7f2df5c3a727a9a1a20b0ab6c0f23",
     "directions.json": "6f799d567cc51a1d860a40f8d9bbbf4c16f3bfcd2af58b999cc1db8c54f2761e",
     "rules_check.json": "bda48a6be3aff5fdb6d27f0800903873b37d636b4444a9ed460b302c5d5b08f9",
     "candidates.json": "b329d6b94fb2773f31a8fd1051b70615ec9ac6d839308567df09645186b5b392",
     "evidence.json": "fc88e845f3eb5707da8eaa7fa6d75901946c9f7920eaca254cdcbc5bb0f0b902",
     "calculations.json": "c9f6ffdadaa69063d1698e768de5b96dbfb4f2cafdd9a803a0a136e2d4ee2bae",
-    "judgment.json": "c039742d81d5330a832be829fcdd81a8da0396df7bf177fe3f799e6c163287a8",
-    "narrative.json": "68bcf0b7ceed018f59f25d5985f288cf82b031288c786c0fd13f24d102cf2e48",
+    "judgment.json": "de8695a4c6f213ce27eecd3e8035ae49d73b5c480e5325ff219fe6ed9dfc6117",
+    "narrative.json": "265288c7a1dad477f1f110b65b017c4a9301b8950af8e5d9f5ac83c38bdf5e4d",
     "profile.txt": "69dfeb57cf005a4ace3990e51a96b3b821e9de0c130dd1f8eae5b2088f5bef5e"
   },
-  "contract_sha256": "afacb35fd00373a1e89752eab86bd1ec000b374028216c571e2131ad99e8e821",
+  "contract_sha256": "7a9e3aa553b7d424696a66d3b4499a66dfb3f139e5f426ab750fd3f90005cc9a",
   "tool_sha256": {
-    "planning_report.py": "77d252c484065f3fe298fc87166069cb600898e0182cc06cadab52bbfaa34436",
-    "planning_workflow.py": "ee2d438232e89d2abbaef38ac668fdcd6cc6aea42f554b44408e67fdd7186d13",
-    "operator_check.py": "a6552c0b63a8a6b5d15c9a1057fbc2884fb85435b1b102fbf4a48dd74c4e7ebb",
+    "planning_report.py": "e50d03231e1eed2f3960a114150b3e5557764365966703a5bbb599ee71720be1",
+    "planning_workflow.py": "557c3108d3dbb1e8cc8ce81b999b3938b056a3a990ab3f5bbeaeba8e9a8b6b80",
+    "operator_check.py": "97965475c2c8b6efe5dbf2747511526d1729a540f55a16b54fa282e2a810fdc7",
     "check_demos.py": "fc8e1625f9e052373756160514ad5c73db1e8451c233425918edb5bc839d9f63",
-    "report.py": "5743337eb5044bd6e205d3dd2353fc70281c77a4f27def8bd133268425107a42",
-    "render_report.py": "707d4a3dd6780cc249ddd5620f37152d525313c3a64de75c676758eef11fb5c8",
+    "report.py": "de09e0df5360699ccadd5243f9e551e7811c338b3b1b6850a5fc3fc61ac52338",
+    "render_report.py": "a6ba0669516b5a6aba7444c0c3d8815d0d1695c13c4d7a67ba1f44fbbf254f33",
     "profile_store.py": "1cfd828583598a65cf719a46447cb3112ef0170eb1a638b89ab023cb47a04e7f"
   },
   "numeric_refs": [
@@ -133,43 +133,79 @@
       "display": "2027"
     },
     {
-      "location": "02.profile.2",
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/0/value}}",
+      "value": "普通高职",
+      "display": "普通高职"
+    },
+    {
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/1/value}}",
+      "value": "大数据与会计",
+      "display": "大数据与会计"
+    },
+    {
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/2/value|ym_cn}}",
+      "value": "2027-06-30",
+      "display": "2027 年 6 月"
+    },
+    {
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/4/value}}",
+      "value": "财务室实习六周，凭证录入与资料整理",
+      "display": "财务室实习六周，凭证录入与资料整理"
+    },
+    {
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/12/value}}",
+      "value": 3,
+      "display": "3"
+    },
+    {
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/5/value}}",
+      "value": "初级会计尚未通过",
+      "display": "初级会计尚未通过"
+    },
+    {
+      "location": "02.profile.3",
       "ref": "{{k:/education_entry|year}}",
       "value": "2024-09-01",
       "display": "2024"
     },
     {
-      "location": "02.profile.2",
+      "location": "02.profile.3",
       "ref": "{{k:/target_year}}",
       "value": 2027,
       "display": "2027"
     },
     {
-      "location": "02.profile.2",
+      "location": "02.profile.3",
       "ref": "{{k:/graduation_date|month}}",
       "value": "2027-06-30",
       "display": "6"
     },
     {
-      "location": "02.profile.2",
+      "location": "02.profile.3",
       "ref": "{{e:E0901#/value|chinese}}",
       "value": 3,
       "display": "三"
     },
     {
-      "location": "02.analysis.10",
+      "location": "02.analysis.11",
       "ref": "{{k:/birth_datetime|datetime}}",
       "value": "2006-06-21T10:20:00",
       "display": "2006-06-21 10:20"
     },
     {
-      "location": "02.analysis.10",
+      "location": "02.analysis.11",
       "ref": "{{c:/luck_start_year}}",
       "value": 2011,
       "display": "2011"
     },
     {
-      "location": "02.analysis.10",
+      "location": "02.analysis.11",
       "ref": "{{k:/target_year}}",
       "value": 2027,
       "display": "2027"
@@ -1196,9 +1232,9 @@
     }
   ],
   "artifacts": {
-    "report.md": "b4ead48c52211c27745170c8a1cbb4745236255808f3177ba5a533bafe98398b",
-    "report.html": "47eb4f367ce3aa640808187127261d64427281bd70435bac3180c4e631155f77",
-    "report.pdf": "dff60fa171ca17e70983c1eb0fe93720880f2c520f58f5e3bf647137c364b8a2"
+    "report.md": "c20ce5df58936eb70937fcefb92bf42d36d11ffc3816781108670ead79f2b4e8",
+    "report.html": "fde5500249fd5b7ba1966749cdd1c6559fc1a1db87bc5381f9709bdb8a9acea4",
+    "report.pdf": "7b81d86e110603fe658a13da23feb8c996037c7284a660025f92105bda5284fd"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "report_profile": {
@@ -1208,7 +1244,7 @@
     "form": null
   },
   "verification_tools_sha256": {
-    "verify_report.py": "ebcf0825e96d349585935e4d76e29fa6d0aa51e402c3a3968b3dd673045f0856",
-    "verification_calculations.py": "fc02d9890d3a82a98fd381df093114d3b59b66aeb020a818c64bddb52b7482ff"
+    "verify_report.py": "91021d58224fc869e871cff611ec92ba60943ca89da60635f55cd4a8c6048a01",
+    "verification_calculations.py": "1a5cc43f8df9494e3baaa1b1ca83a4ec471718c5ce21344275b526758dde0c3c"
   }
 }

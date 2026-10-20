@@ -472,6 +472,10 @@
         "ref": "narrative.json#/sections/02/lead"
       },
       {
+        "slot": "figure",
+        "ref": "profile_parse.json#/report_blocks/02_facts"
+      },
+      {
         "slot": "analysis",
         "ref": "narrative.json#/sections/02/analysis/0"
       },
@@ -554,6 +558,10 @@
       {
         "slot": "lead",
         "ref": "narrative.json#/sections/04/lead"
+      },
+      {
+        "slot": "figure",
+        "ref": "judgment.json#/report_blocks/04_flow"
       },
       {
         "slot": "analysis",
@@ -1345,7 +1353,7 @@
       "type": "timeline",
       "content": {
         "title": "从报名到入学的关键节点",
-        "caption": "横轴按时间顺序阅读；琥珀菱形为个人检查点，圆点为流程节点。未发布的具体日期保持未发布，不用往年日期冒充当年安排。",
+        "caption": "按时间先后从上往下读；琥珀菱形为个人检查点，圆点为流程节点。未发布的具体日期保持未发布，不用往年日期冒充当年安排。",
         "rows": [
           [
             "{{k:/context/personal_dates/action0|ym}}",
@@ -1797,6 +1805,65 @@
       },
       "evidence_refs": [
         "E0001"
+      ]
+    },
+    "04_flow": {
+      "type": "flow",
+      "content": {
+        "title": "继续考研之前要过的三道判断",
+        "caption": "方框是要做的事，菱形是要本人核实的判断，深色是主线，浅色是备选。图里只有先后和条件，不代表录取概率；任何一道判断改了，都要说明是哪项条件变了。",
+        "rows": [
+          [
+            "A",
+            "步骤",
+            "做一套同科目完整模考，核对两校当届科目",
+            ">B"
+          ],
+          [
+            "B",
+            "判断",
+            "愿意做研究训练里的真实任务？",
+            "是>C",
+            "否>H"
+          ],
+          [
+            "C",
+            "判断",
+            "差距能在本轮投入内补上？",
+            "是>D",
+            "否>F"
+          ],
+          [
+            "H",
+            "备选",
+            "先比较就业，读研暂缓"
+          ],
+          [
+            "D",
+            "判断",
+            "费用在家庭年度预算内？",
+            "是>E",
+            "否>G"
+          ],
+          [
+            "F",
+            "备选",
+            "调整学校层次或科目范围"
+          ],
+          [
+            "E",
+            "结果",
+            "继续电气相关考研"
+          ],
+          [
+            "G",
+            "备选",
+            "缩小或切换候选学校"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E0901"
       ]
     }
   },

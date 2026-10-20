@@ -397,6 +397,10 @@
         "ref": "narrative.json#/sections/02/lead"
       },
       {
+        "slot": "figure",
+        "ref": "profile_parse.json#/report_blocks/02_facts"
+      },
+      {
         "slot": "analysis",
         "ref": "narrative.json#/sections/02/analysis/0"
       },
@@ -545,6 +549,10 @@
       {
         "slot": "lead",
         "ref": "narrative.json#/sections/05/lead"
+      },
+      {
+        "slot": "figure",
+        "ref": "judgment.json#/report_blocks/05_flow"
       },
       {
         "slot": "analysis",
@@ -1814,6 +1822,53 @@
       },
       "evidence_refs": [
         "E0001"
+      ]
+    },
+    "05_flow": {
+      "type": "flow",
+      "content": {
+        "title": "一个岗位要过的两道判断",
+        "caption": "方框是要做的事，菱形是要本人核实的判断，深色是主线，浅色是备选。图里只有先后和条件，不代表录用把握；单位名气不在判断里。",
+        "rows": [
+          [
+            "A",
+            "步骤",
+            "找接受高职学历的真实岗位，核职责、带教与合同",
+            ">B"
+          ],
+          [
+            "B",
+            "判断",
+            "硬门槛满足，职责与合同能接受？",
+            "是>C",
+            "否>F"
+          ],
+          [
+            "C",
+            "判断",
+            "到手现金够覆盖必要支出？",
+            "是>D",
+            "否>G"
+          ],
+          [
+            "F",
+            "备选",
+            "换岗位继续核；多数要本科时再评估升本"
+          ],
+          [
+            "D",
+            "结果",
+            "进入实质比较，和家人一起看直签与派遣"
+          ],
+          [
+            "G",
+            "备选",
+            "先重估住房与收入条件"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E0901"
       ]
     }
   },
