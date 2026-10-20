@@ -47,4 +47,29 @@ class ReaderLanguage(unittest.TestCase):
         issue=language.check_fragments([language.Fragment('演示结果。','04','PDF',page=5)])[0]
         self.assertEqual(issue['page'],5)
 
+class BeforeCleanupTests(unittest.TestCase):
+    def case(self):
+        import sys
+        sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
+        from planning_workflow import PlanningCase
+        return PlanningCase(Path(__file__).resolve().parents[2]/'zhiqu-grad/examples/2027-YJ-S01')
+
+    def test_source_terms_are_rejected_before_legacy_replacement(self):
+        from reader_language import check_planning_source
+        import render_report
+        from planning_report import assemble
+        for term in ('演示','复现','脚本','worker.py'):
+            with self.subTest(term=term):
+                case=self.case()
+                case.data['narrative.json']['sections']['01']['analysis'][0]['content']['text']+=' 这是'+term+'结果。'
+                # Existing presentation substitutions cannot hide invalid source prose.
+                self.assertTrue(any(x['code']=='development_language' for x in check_planning_source(case)))
+                self.assertTrue(any('正文出现开发用语' in e for e in case.check(8)))
+
+    def test_source_check_leaves_current_examples_and_section_twelve_alone(self):
+        from reader_language import check_planning_source
+        case=self.case();self.assertEqual(check_planning_source(case),[])
+        case.data['narrative.json']['sections']['12']['analysis'][0]['content']['text']+=' 附件worker.py和快照。'
+        self.assertEqual(check_planning_source(case),[])
+
 if __name__=='__main__':unittest.main()

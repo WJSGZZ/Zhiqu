@@ -155,6 +155,39 @@ def glossary_from_html(raw):
 
 def check_html(raw):return check_fragments(html_fragments(raw),glossary=glossary_from_html(raw))
 
+def check_planning_source(case):
+    """Check active authored components before presentation word substitutions.
+
+    public_text can replace developer terms with reader-facing wording; that must
+    not silently turn an invalid authored paragraph into a successful publication.
+    """
+    fragments=[];glossary={}
+    def walk(value,path,sid):
+        if isinstance(value,str):
+            try:text=case.expand(value)
+            except (KeyError,ValueError,IndexError,TypeError):text=REF.sub('',value)
+            fragments.append(Fragment(text,sid,path,role='label' if path.endswith(('/title','/heading','/label')) or '/columns/' in path else 'text'))
+        elif isinstance(value,list):
+            for i,item in enumerate(value):walk(item,path+'/'+str(i),sid)
+        elif isinstance(value,dict):
+            for key,item in value.items():
+                if key!='kind':walk(item,path+'/'+key,sid)
+    for sid,entries in case.nodes().items():
+        if not sid.isdigit() or not 1<=int(sid)<=11:continue
+        section=next(s for s in case.contract['sections'] if s['id']==sid)
+        for entry in entries:
+            slot=next(s for s in section['slots'] if s['key']==entry['slot'])
+            if not case.active(slot):continue
+            node=case.get_node(entry['ref']);content=node.get('content',{})
+            if node.get('type') in ('source_endnotes','evidence_legend') or node.get('type')=='analysis' and content.get('kind')=='comment':continue
+            if node.get('type')=='term_table':
+                for row in content.get('rows',[]):
+                    if len(row)>=2:
+                        for term in re.split('[、，/]',str(row[0])):glossary[term.strip()]=str(row[1])
+            walk(content,entry['ref']+'/content',sid)
+    return check_fragments(fragments,glossary=glossary)
+
+
 def check_case(root):
     root=Path(root);issues=[]
     html=root/'report.html'

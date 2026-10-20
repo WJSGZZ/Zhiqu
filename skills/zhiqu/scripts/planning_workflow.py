@@ -608,7 +608,8 @@ class PlanningCase:
 
     def stage8(self):
         self.need('narrative.json');self.errors.extend(self.contract_errors())
-        from reader_language import check_html
+        from reader_language import check_html,check_planning_source
+        self.errors.extend('第'+x['section']+'节 '+x['location']+'：'+x['message']+'（'+x['term']+'）' for x in check_planning_source(self))
         from planning_report import assemble
         import render_report
         if 'narrative.json' in self.data:
