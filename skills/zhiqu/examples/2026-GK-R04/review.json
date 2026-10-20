@@ -82,7 +82,7 @@
   },
   "snapshot": {
     "report.json": "4a19af6190fc6ee4c54cb4e93932ec86ca92d0af1cd52969cfbee751a8c9b723",
-    "report.pdf": "469b99461d2dd2eb65f37d4a373cc2f59c38366064fafe7a8b5d41fdc730c98a",
+    "report.pdf": "4d137e1b9485fe8eafc1ebc5144001f09e9e6bfdadeaf6e562f2242bcb2d62f9",
     "operator_check.md": "a857e6745d92814d45243bcb12ce80ef75a5de6105e2ae0064152ae885ad87b2",
     "retro_ranks/98917/result.json": "e61e8c4c4ac892b04d4d320ea6c885e89579b87897e2d162db33410d3b1d9e92",
     "case.json": "028b76526cfcc9381fe4eb71d334b010d5cdc53bec79f37f0eca5997e6ab85a2",
@@ -109,6 +109,14 @@
         "report.pdf"
       ],
       "reason": "摘要卡“满意度 70 分以上的概率”改为“平均满意度”（期望满意度与表里最高志愿分），因为固定 70 分门槛对位次靠后的考生会显示 0%、读成注定不满意；志愿、概率和结论不变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.pdf"
+      ],
+      "reason": "摘要四张卡固定为同一格式（推荐志愿数含冲稳保、最可能的去向、平均满意度、滑档风险），评级 C/D 的满意度卡写“不估算”；志愿、概率和结论不变。"
     }
   ]
 }

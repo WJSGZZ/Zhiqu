@@ -938,12 +938,14 @@ def build(rep, opt):
     s = rep.get("summary", {})
     body = f'<p class="lead">{E(s.get("headline", ""))}</p>'
     if lst:
+        # 摘要四张卡格式固定，三类评级都一样：推荐志愿数（含冲稳保）、最可能的去向、平均满意度、滑档风险。
+        # 不用“满意度 70 分以上的概率”这类固定门槛：100 分是理想组合，位次靠后的考生整张表都到不了 70，会显示 0%、读成判决（R07）。
+        tiers = " / ".join(f"{t} {sum(x['tag'] == t for x in lst)}" for t in ("冲", "稳", "保"))
         body += ('<div class="kpis">'
-                 f'<div><b>推荐志愿数</b><span class="num">{len(lst)}</span><em>本批次可填 {E(str(m.get("slots", "–")))} 个</em></div>'
+                 f'<div><b>推荐志愿数</b><span class="num">{len(lst)}</span><em>本批次可填 {E(str(m.get("slots", "–")))} 个；{tiers}</em></div>'
                  f'<div><b>最可能的去向</b><span style="font-size:11pt">{E(likely_name)}</span><em>{"概率" + ("" if grade == "B" else "约 ") + fmt(likely_p) if numeric else "落点最集中的志愿（本省评级不给精确概率）"}</em></div>'
-                 # 平均满意度而不是“70 分以上的概率”：100 分是理想组合，位次靠后的考生整张表都到不了 70，固定门槛会读成“注定不满意”（R07 实测为 0%）。
                  + (f'<div><b>平均满意度（0—100）</b><span class="num">{eu:.1f} 分</span><em>表里最高的志愿 {max(x["utility"] for x in lst):.0f} 分。{E(m.get("utility_scale", UTILITY_SCALE))}</em></div>' if numeric and eu is not None else
-                    f'<div><b>冲 / 稳 / 保</b><span class="num">{" / ".join(str(sum(x["tag"] == t for x in lst)) for t in ("冲", "稳", "保"))}</span><em>按模型过线可能性分档，不给百分比</em></div>')
+                    f'<div><b>平均满意度（0—100）</b><span class="num">不估算</span><em>本省概率评级 {E(grade)}，概率不可信，按概率加权的满意度也不算；表里最高的志愿 {max(x["utility"] for x in lst):.0f} 分。</em></div>')
                  + (f'<div><b>滑档风险</b><span class="num">{fall_txt(pfall)}</span><em>录取线整体大波动时 {fall_txt(stress.get("p_fall"))}</em></div>' if grade == "A" or pfall else
                     f'<div><b>滑档风险</b><span class="num">未出现</span><em>{sims:,} 次模拟中没有出现滑档；录取线整体大波动时{"也没有" if not stress.get("p_fall") else "：" + fall_txt(stress.get("p_fall"))}</em></div>')
                  + '</div>')

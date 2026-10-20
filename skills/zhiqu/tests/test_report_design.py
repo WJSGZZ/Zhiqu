@@ -144,3 +144,22 @@ class NumericRuns(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+class GaokaoKpiFormatTests(unittest.TestCase):
+    """摘要四张卡格式固定（2026-10-20）：不再出现“满意度 70 分以上的概率”这类固定门槛，评级 C/D 也同一排法。"""
+    LABELS = ['推荐志愿数', '最可能的去向', '平均满意度（0—100）', '滑档风险']
+
+    def test_every_gaokao_example_uses_the_fixed_four_cards(self):
+        root = Path(__file__).resolve().parents[1] / 'examples'
+        checked = 0
+        for path in sorted(root.glob('*/report.html')):
+            html = path.read_text(encoding='utf-8')
+            block = re.search(r'<div class="kpis">(.*?)</div></div>(?=<figure|<div class="box)', html, re.S)
+            if not block:
+                continue
+            labels = [re.sub(r'<[^>]+>', '', x) for x in re.findall(r'<b>(.*?)</b>', block[1])]
+            self.assertEqual(labels, self.LABELS, path.parent.name)
+            self.assertNotIn('70 分以上', html, path.parent.name)
+            checked += 1
+        self.assertGreaterEqual(checked, 10)
