@@ -44,10 +44,30 @@ class KaoyanPositionTests(unittest.TestCase):
         self.assertIsNone(place(MOCK, program(dist(340, 350), subjects=['政治', '英语二', '数学二', '自命题']))['tier'])
         self.assertIsNone(place(dict(MOCK, complete=False), program(dist(340, 350)))['tier'])
 
-    def test_small_cohort_is_flagged(self):
-        r = place(MOCK, program(dist(355, 365, n=6), dist(352, 360, n=5)))
-        self.assertTrue(any('分布不稳' in x for x in r['reasons']))
+    def test_n3_in_any_reference_year_gives_no_tier(self):
+        r = place(MOCK, program(dist(330, 340, n=3), dist(330, 340, n=40)))
+        self.assertIsNone(r['tier'])
+        self.assertEqual(r['untiered_reason'], '样本太少')
 
+    def test_n5_caps_relatively_safe_at_reach(self):
+        r = place(MOCK, program(dist(355, 365, n=5), dist(352, 360, n=40)))
+        self.assertEqual(r['tier'], '够一够')
+        self.assertTrue(any('样本小，只作定性' in x for x in r['reasons']))
+
+    def test_n9_still_capped_and_flagged(self):
+        r = place(MOCK, program(dist(355, 365, n=40), dist(352, 360, n=9)))
+        self.assertEqual(r['tier'], '够一够')
+        self.assertTrue(any('样本小，只作定性' in x for x in r['reasons']))
+        r = place(MOCK, program(dist(380, 392, n=9), dist(378, 390, n=9)))
+        self.assertEqual(r['tier'], '冒险')
+        self.assertTrue(any('样本小，只作定性' in x for x in r['reasons']))
+
+    def test_untiered_reasons_are_enumerated(self):
+        self.assertEqual(place(MOCK, program(dist(340, 350), subjects=['政治', '英语二', '数学二', '408']))['untiered_reason'], '科目不同')
+        p = program(dist(340, 350)); p['years']['2026'].pop('admitted')
+        self.assertEqual(place(MOCK, p)['untiered_reason'], '分布缺失')
+        p['subjects'] = []
+        self.assertEqual(place(MOCK, p)['untiered_reason'], '分布缺失')
 
 if __name__ == '__main__':
     unittest.main()

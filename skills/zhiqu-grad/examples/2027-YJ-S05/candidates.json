@@ -106,7 +106,11 @@
           ]
         }
       ],
-      "status": "pending"
+      "status": "pending",
+      "why_listed": {
+        "quote": "苏州大学 计算机——学长推荐的",
+        "profile_ref": "profile_parse.json#/fields/16"
+      }
     },
     {
       "id": "S2",
@@ -127,7 +131,7 @@
       ],
       "location": "江苏南京",
       "tier": "冒险",
-      "tier_basis": "模考低于上一届录取者下四分位（也低于上一届最低分和复试线）；复试线一年涨幅大、统考计划减半",
+      "tier_basis": "模考低于上一届录取者下四分位（也低于上一届最低分和复试线）；复试线一年涨幅大、统考计划减半；上一届只录九人，样本小，只作定性",
       "comparison_years": [
         "2025",
         "2026"
@@ -152,7 +156,11 @@
           ]
         }
       ],
-      "status": "pending"
+      "status": "pending",
+      "why_listed": {
+        "quote": "河海大学 计算机——同学说分数不高",
+        "profile_ref": "profile_parse.json#/fields/16"
+      }
     },
     {
       "id": "S3",
@@ -173,7 +181,7 @@
       ],
       "location": "江苏南京（联合培养单位待核）",
       "tier": "够一够",
-      "tier_basis": "模考高于上一届录取者上四分位，但该方向只录了五人，只作定性提示；只有一届可比分布；单独排名、单独划线",
+      "tier_basis": "模考高于上一届录取者上四分位，但该方向只录了五人：样本小，只作定性，最高只给“够一够”；单独排名、单独划线",
       "comparison_years": [
         "2026"
       ],
@@ -206,106 +214,27 @@
           ]
         }
       ],
-      "status": "pending"
+      "status": "pending",
+      "why_listed": {
+        "quote": "河海大学 计算机——同学说分数不高",
+        "profile_ref": "profile_parse.json#/fields/16"
+      }
     },
-    {
-      "id": "S4",
-      "name": "河海大学 软件工程（学硕）",
-      "path_id": "P1",
-      "school": "河海大学",
-      "college": "计算机与软件学院",
-      "code": "083500",
-      "degree_type": "学术学位",
-      "study_mode": "全日制",
-      "plan_type": "普通计划（非定向）",
-      "year": 2027,
-      "subjects": [
-        "思想政治理论",
-        "英语一",
-        "数学一",
-        "计算机学科专业基础"
-      ],
-      "location": "江苏南京",
-      "tier": "相对稳妥",
-      "tier_basis": "模考两届都不低于录取者中位数；但上一届一志愿只录三人、前一届十人，分布很不稳，只作定性提示；当届目录未取到",
-      "comparison_years": [
-        "2025",
-        "2026"
-      ],
-      "hard_conditions": [
-        {
-          "id": "eligibility",
-          "name": "应届本科报名资格（由报考点和招生单位审核）",
-          "status": "unknown",
-          "evidence_refs": [
-            "E010"
-          ]
-        },
-        {
-          "id": "subjects",
-          "name": "当届初试科目（当届目录未取到，按上一届）",
-          "status": "unknown",
-          "evidence_refs": [
-            "E057",
-            "E072",
-            "E002"
-          ]
-        }
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "S5",
-      "name": "苏州大学 软件工程（学硕）",
-      "path_id": "P1",
-      "school": "苏州大学",
-      "college": "计算机科学与技术学院",
-      "code": "083500",
-      "degree_type": "学术学位",
-      "study_mode": "全日制",
-      "plan_type": "普通计划（非定向）",
-      "year": 2027,
-      "subjects": [
-        "思想政治理论",
-        "英语一",
-        "数学一",
-        "计算机学科专业基础"
-      ],
-      "location": "江苏苏州",
-      "tier": "够一够",
-      "tier_basis": "模考与上一届录取者中位数持平；只有一届分布，不给“相对稳妥”",
-      "comparison_years": [
-        "2026"
-      ],
-      "hard_conditions": [
-        {
-          "id": "eligibility",
-          "name": "应届本科报名资格（由报考点和招生单位审核）",
-          "status": "unknown",
-          "evidence_refs": [
-            "E010"
-          ]
-        },
-        {
-          "id": "subjects",
-          "name": "当届初试科目与本人模考相同",
-          "status": "met",
-          "evidence_refs": [
-            "E035",
-            "E002"
-          ]
-        }
-      ],
-      "status": "pending"
-    }
-  ],
-  "survey_programs": [
     {
       "id": "V1",
       "name": "苏州大学 计算机技术（专硕）",
       "path_id": "P1",
-      "tier": null,
-      "untiered_reason": "当届考英语二、数学二，和模考不同卷，不定档",
+      "school": "苏州大学",
+      "code": "085404",
+      "degree_type": "专业学位",
+      "study_mode": "全日制",
+      "tier": "不定档",
+      "untiered_reason": "科目不同",
+      "tier_basis": "当届考英语二、数学二，和模考不是同一张卷",
+      "why_listed": {
+        "quote": "苏州大学 计算机——学长推荐的",
+        "profile_ref": "profile_parse.json#/fields/16"
+      },
       "hard_conditions": [
         {
           "id": "eligibility",
@@ -330,8 +259,17 @@
       "id": "V2",
       "name": "河海大学 电子信息（专硕，计算机学院）",
       "path_id": "P1",
-      "tier": null,
-      "untiered_reason": "上一届考英语二、数学二，和模考不同卷；当届目录未取到；不定档",
+      "school": "河海大学",
+      "code": "085400",
+      "degree_type": "专业学位",
+      "study_mode": "全日制",
+      "tier": "不定档",
+      "untiered_reason": "科目不同",
+      "tier_basis": "上一届考英语二、数学二，和模考不是同一张卷；当届目录未取到",
+      "why_listed": {
+        "quote": "河海大学 计算机——同学说分数不高",
+        "profile_ref": "profile_parse.json#/fields/16"
+      },
       "hard_conditions": [
         {
           "id": "eligibility",
@@ -357,8 +295,17 @@
       "id": "V3",
       "name": "南京航空航天大学 计算机科学与技术（学硕）",
       "path_id": "P1",
-      "tier": null,
-      "untiered_reason": "当届科目未取到，没有录取者分布，只有复试线；不定档",
+      "school": "南京航空航天大学",
+      "code": "081200",
+      "degree_type": "学术学位",
+      "study_mode": "全日制",
+      "tier": "不定档",
+      "untiered_reason": "分布缺失",
+      "tier_basis": "只取到复试线；录取者分布和当届科目都没取到",
+      "why_listed": {
+        "quote": "南京航空航天大学 计算机（学硕专硕都行）——自己定的，觉得名气大",
+        "profile_ref": "profile_parse.json#/fields/16"
+      },
       "hard_conditions": [
         {
           "id": "eligibility",
@@ -384,8 +331,17 @@
       "id": "V4",
       "name": "南京航空航天大学 计算机技术（专硕）",
       "path_id": "P1",
-      "tier": null,
-      "untiered_reason": "同上；不定档",
+      "school": "南京航空航天大学",
+      "code": "085404",
+      "degree_type": "专业学位",
+      "study_mode": "全日制",
+      "tier": "不定档",
+      "untiered_reason": "分布缺失",
+      "tier_basis": "同上",
+      "why_listed": {
+        "quote": "南京航空航天大学 计算机（学硕专硕都行）——自己定的，觉得名气大",
+        "profile_ref": "profile_parse.json#/fields/16"
+      },
       "hard_conditions": [
         {
           "id": "eligibility",
@@ -411,8 +367,18 @@
       "id": "V5",
       "name": "南京邮电大学 计算机科学与技术（学硕）",
       "path_id": "P1",
-      "tier": null,
-      "untiered_reason": "当届科目未取到，没有录取者分布；不定档",
+      "school": "南京邮电大学",
+      "code": "081200",
+      "degree_type": "学术学位",
+      "study_mode": "全日制",
+      "tier": "不定档",
+      "untiered_reason": "分布缺失",
+      "tier_basis": "只取到复试线；录取者分布和当届科目没取到",
+      "why_listed": {
+        "quote": "城市偏好：只在本省（江苏）；家里支持我考，希望离家近一点，别去外省。",
+        "profile_ref": "profile_parse.json#/fields/10",
+        "note": "江苏省内计算机类同层次学校，按本人“只在本省”列入比较"
+      },
       "hard_conditions": [
         {
           "id": "eligibility",
@@ -437,8 +403,18 @@
       "id": "V6",
       "name": "南京邮电大学 计算机技术（专硕）",
       "path_id": "P1",
-      "tier": null,
-      "untiered_reason": "同上；不定档",
+      "school": "南京邮电大学",
+      "code": "085404",
+      "degree_type": "专业学位",
+      "study_mode": "全日制",
+      "tier": "不定档",
+      "untiered_reason": "分布缺失",
+      "tier_basis": "同上",
+      "why_listed": {
+        "quote": "城市偏好：只在本省（江苏）；家里支持我考，希望离家近一点，别去外省。",
+        "profile_ref": "profile_parse.json#/fields/10",
+        "note": "江苏省内计算机类同层次学校，按本人“只在本省”列入比较"
+      },
       "hard_conditions": [
         {
           "id": "eligibility",
@@ -463,8 +439,18 @@
       "id": "V7",
       "name": "江南大学 计算机科学与技术（学硕）",
       "path_id": "P1",
-      "tier": null,
-      "untiered_reason": "当届科目未取到，没有录取者分布；不定档",
+      "school": "江南大学",
+      "code": "081200",
+      "degree_type": "学术学位",
+      "study_mode": "全日制",
+      "tier": "不定档",
+      "untiered_reason": "分布缺失",
+      "tier_basis": "只取到复试线；录取者分布和当届科目没取到",
+      "why_listed": {
+        "quote": "城市偏好：只在本省（江苏）；家里支持我考，希望离家近一点，别去外省。",
+        "profile_ref": "profile_parse.json#/fields/10",
+        "note": "江苏省内计算机类同层次学校，按本人“只在本省”列入比较"
+      },
       "hard_conditions": [
         {
           "id": "eligibility",
@@ -489,8 +475,18 @@
       "id": "V8",
       "name": "江南大学 计算机技术（专硕）",
       "path_id": "P1",
-      "tier": null,
-      "untiered_reason": "同上；不定档",
+      "school": "江南大学",
+      "code": "085404",
+      "degree_type": "专业学位",
+      "study_mode": "全日制",
+      "tier": "不定档",
+      "untiered_reason": "分布缺失",
+      "tier_basis": "同上",
+      "why_listed": {
+        "quote": "城市偏好：只在本省（江苏）；家里支持我考，希望离家近一点，别去外省。",
+        "profile_ref": "profile_parse.json#/fields/10",
+        "note": "江苏省内计算机类同层次学校，按本人“只在本省”列入比较"
+      },
       "hard_conditions": [
         {
           "id": "eligibility",
@@ -515,8 +511,18 @@
       "id": "V9",
       "name": "南京理工大学 计算机科学与技术（学硕）",
       "path_id": "P1",
-      "tier": null,
-      "untiered_reason": "只有两届前的复试线，科目与分布都没取到；不定档",
+      "school": "南京理工大学",
+      "code": "081200",
+      "degree_type": "学术学位",
+      "study_mode": "全日制",
+      "tier": "不定档",
+      "untiered_reason": "分布缺失",
+      "tier_basis": "只取到两届前的复试线",
+      "why_listed": {
+        "quote": "城市偏好：只在本省（江苏）；家里支持我考，希望离家近一点，别去外省。",
+        "profile_ref": "profile_parse.json#/fields/10",
+        "note": "江苏省内计算机类同层次学校，按本人“只在本省”列入比较"
+      },
       "hard_conditions": [
         {
           "id": "eligibility",
@@ -541,8 +547,18 @@
       "id": "V10",
       "name": "南京理工大学 计算机技术（专硕）",
       "path_id": "P1",
-      "tier": null,
-      "untiered_reason": "同上；不定档",
+      "school": "南京理工大学",
+      "code": "085404",
+      "degree_type": "专业学位",
+      "study_mode": "全日制",
+      "tier": "不定档",
+      "untiered_reason": "分布缺失",
+      "tier_basis": "同上",
+      "why_listed": {
+        "quote": "城市偏好：只在本省（江苏）；家里支持我考，希望离家近一点，别去外省。",
+        "profile_ref": "profile_parse.json#/fields/10",
+        "note": "江苏省内计算机类同层次学校，按本人“只在本省”列入比较"
+      },
       "hard_conditions": [
         {
           "id": "eligibility",
@@ -588,6 +604,7 @@
         "id": "S1",
         "name": "S1",
         "tier": "够一够",
+        "untiered_reason": null,
         "reasons": [
           "不低于 2026 年录取者下四分位（只有一年分布，不给“相对稳妥”）"
         ],
@@ -608,9 +625,10 @@
         "id": "S2",
         "name": "S2",
         "tier": "冒险",
+        "untiered_reason": null,
         "reasons": [
           "低于 2026 年录取者下四分位",
-          "2026 年只录取 9 人，分布不稳，只作定性提示"
+          "2026 年只录取 9 人，样本小，只作定性"
         ],
         "positions": {
           "2026": "低于录取最低分 350",
@@ -637,9 +655,10 @@
         "id": "S3",
         "name": "S3",
         "tier": "够一够",
+        "untiered_reason": null,
         "reasons": [
           "不低于 2026 年录取者下四分位（只有一年分布，不给“相对稳妥”）",
-          "2026 年只录取 5 人，分布不稳，只作定性提示"
+          "2026 年只录取 5 人，样本小，只作定性"
         ],
         "positions": {
           "2026": "高于上四分位 346"
@@ -655,58 +674,21 @@
         }
       },
       {
-        "id": "S4",
-        "name": "S4",
-        "tier": "相对稳妥",
-        "reasons": [
-          "最近两年都不低于录取者中位数",
-          "2026 年只录取 3 人，分布不稳，只作定性提示"
-        ],
-        "positions": {
-          "2026": "高于上四分位 348",
-          "2025": "高于上四分位 337"
-        },
-        "gaps": {
-          "2026": {
-            "min": 44,
-            "q1": 35.0,
-            "median": 26.0,
-            "q3": 1.0,
-            "retest_total": 63
-          },
-          "2025": {
-            "min": 61,
-            "q1": 55.0,
-            "median": 36.5,
-            "q3": 12.0,
-            "retest_total": 61
-          }
-        }
-      },
-      {
-        "id": "S5",
-        "name": "S5",
-        "tier": "够一够",
-        "reasons": [
-          "不低于 2026 年录取者下四分位（只有一年分布，不给“相对稳妥”）"
-        ],
-        "positions": {
-          "2026": "在中位数与上四分位 361 之间"
-        },
-        "gaps": {
-          "2026": {
-            "min": 21,
-            "q1": 15.0,
-            "median": 0.0,
-            "q3": -12.0,
-            "retest_total": 23
-          }
-        }
-      },
-      {
         "id": "V1",
         "name": "V1",
         "tier": null,
+        "untiered_reason": "科目不同",
+        "reasons": [
+          "初试科目和模考不同（思想政治理论、英语二、数学二、计算机学科专业基础），分数不能直接对照，不定档"
+        ],
+        "positions": {},
+        "gaps": {}
+      },
+      {
+        "id": "V2",
+        "name": "V2",
+        "tier": null,
+        "untiered_reason": "科目不同",
         "reasons": [
           "初试科目和模考不同（思想政治理论、英语二、数学二、计算机学科专业基础），分数不能直接对照，不定档"
         ],
@@ -717,8 +699,86 @@
         "id": "V3",
         "name": "V3",
         "tier": null,
+        "untiered_reason": "分布缺失",
         "reasons": [
-          "初试科目和模考不同（），分数不能直接对照，不定档"
+          "当届初试科目未取到，也没有录取者分布，只有复试线，不定档"
+        ],
+        "positions": {},
+        "gaps": {}
+      },
+      {
+        "id": "V4",
+        "name": "V4",
+        "tier": null,
+        "untiered_reason": "分布缺失",
+        "reasons": [
+          "当届初试科目未取到，也没有录取者分布，只有复试线，不定档"
+        ],
+        "positions": {},
+        "gaps": {}
+      },
+      {
+        "id": "V5",
+        "name": "V5",
+        "tier": null,
+        "untiered_reason": "分布缺失",
+        "reasons": [
+          "当届初试科目未取到，也没有录取者分布，只有复试线，不定档"
+        ],
+        "positions": {},
+        "gaps": {}
+      },
+      {
+        "id": "V6",
+        "name": "V6",
+        "tier": null,
+        "untiered_reason": "分布缺失",
+        "reasons": [
+          "当届初试科目未取到，也没有录取者分布，只有复试线，不定档"
+        ],
+        "positions": {},
+        "gaps": {}
+      },
+      {
+        "id": "V7",
+        "name": "V7",
+        "tier": null,
+        "untiered_reason": "分布缺失",
+        "reasons": [
+          "当届初试科目未取到，也没有录取者分布，只有复试线，不定档"
+        ],
+        "positions": {},
+        "gaps": {}
+      },
+      {
+        "id": "V8",
+        "name": "V8",
+        "tier": null,
+        "untiered_reason": "分布缺失",
+        "reasons": [
+          "当届初试科目未取到，也没有录取者分布，只有复试线，不定档"
+        ],
+        "positions": {},
+        "gaps": {}
+      },
+      {
+        "id": "V9",
+        "name": "V9",
+        "tier": null,
+        "untiered_reason": "分布缺失",
+        "reasons": [
+          "当届初试科目未取到，也没有录取者分布，只有复试线，不定档"
+        ],
+        "positions": {},
+        "gaps": {}
+      },
+      {
+        "id": "V10",
+        "name": "V10",
+        "tier": null,
+        "untiered_reason": "分布缺失",
+        "reasons": [
+          "当届初试科目未取到，也没有录取者分布，只有复试线，不定档"
         ],
         "positions": {},
         "gaps": {}
@@ -729,6 +789,12 @@
       "action": "第二次全程模考后按同一工具重看位置；报名已截止，只调整复习重点和调剂清单，不改一志愿。"
     }
   },
+  "removed_after_review": [
+    {
+      "name": "苏州大学、河海大学 软件工程（学硕）",
+      "reason": "画像里没有接受软件工程方向的原话（想做后端或数据开发、人工智能也行），按复核要求不列入；补问后再考虑"
+    }
+  ],
   "report_blocks": {
     "06_candidates": {
       "type": "candidate_table",
@@ -749,23 +815,9 @@
             "只有一届分布；当届计划比上一届少 {{c:/suda_plan_drop}} 人；复试机考编程占一半分"
           ],
           [
-            "苏大 软件学硕",
-            "与中位数 {{c:/suda26_0835_median}} 持平；比复试线 {{e:E031#/value}} 高",
-            "够一够",
-            "同科目、同学院、同一套复试；当届公开招考 {{e:E039#/value}} 人",
-            "只有一届分布；软件工程方向偏软件理论与测试，和后端开发要对一对"
-          ],
-          [
-            "河海 软件学硕",
-            "高于两届录取者中位数（{{e:E020#/published_on|year}} 年 {{c:/hhu26_0835_median}}，{{e:E054#/published_on|year}} 年 {{c:/hhu25_0835_median|1f}}）",
-            "相对稳妥（样本极小）",
-            "在南京；两届复试线都在 {{e:E052#/value}}—{{e:E055#/value}} 分",
-            "上一届一志愿只录 {{c:/hhu26_0835_count}} 人，统考计划 {{e:E062#/value}} 人；当届目录未取到"
-          ],
-          [
             "河海 计算机学硕·联培",
             "高于上四分位；上一届只录 {{c:/hhu26_0812j_count}} 人",
-            "够一够（只作定性）",
+            "够一够（样本小，只作定性）",
             "单独排名、复试线 {{e:E051#/value}} 分，远低于普通方向",
             "和中国科学院大学南京学院联合培养，培养地点和学位怎么授予要先问清；你接不接受还没说"
           ],
@@ -781,94 +833,86 @@
       "evidence_refs": [
         "E002",
         "E030",
-        "E031",
         "E038",
-        "E039",
         "E042",
-        "E043",
         "E050",
         "E051",
-        "E052",
         "E054",
-        "E055",
         "E060",
-        "E062",
         "E064",
         "E065",
-        "E066",
-        "E067",
-        "E070"
+        "E066"
       ]
     },
     "06_untiered": {
       "type": "data_table",
       "content": {
         "columns": [
-          "调查对象（不定档）",
-          "为什么不定档",
-          "已知的官方数字",
-          "报名前怎么补"
+          "不定档的候选",
+          "原因",
+          "具体情况",
+          "已知的官方复试线"
         ],
         "rows": [
           [
             "苏大 计算机专硕",
-            "当届考英语二、数学二，和模考不同卷",
-            "复试线 {{e:E032#/value}}（{{e:E020#/published_on|year}}）；当届公开招考 {{e:E040#/value}} 人",
-            "默认不改科目"
+            "科目不同",
+            "当届考英语二、数学二",
+            "{{e:E032#/value}}（{{e:E020#/published_on|year}}）；当届公开招考 {{e:E040#/value}} 人"
           ],
           [
             "河海 电子信息专硕",
+            "科目不同",
             "考英语二、数学二；当届目录未取到",
-            "复试线 {{e:E053#/value}}（{{e:E020#/published_on|year}}）、{{e:E056#/value}}（{{e:E054#/published_on|year}}）",
-            "默认不改科目"
+            "{{e:E053#/value}}（{{e:E020#/published_on|year}}）、{{e:E056#/value}}（{{e:E054#/published_on|year}}）"
           ],
           [
             "南航 计算机学硕",
-            "当届科目、录取者分布都没取到",
-            "复试线 {{e:E080#/value}}（{{e:E020#/published_on|year}}）、{{e:E082#/value}}（{{e:E054#/published_on|year}}）",
-            "研招网目录查科目；只有线不能定档"
+            "分布缺失",
+            "录取者分数、当届科目都没取到",
+            "{{e:E080#/value}}（{{e:E020#/published_on|year}}）、{{e:E082#/value}}（{{e:E054#/published_on|year}}）"
           ],
           [
             "南航 计算机专硕",
+            "分布缺失",
             "同上",
-            "复试线 {{e:E081#/value}}（{{e:E020#/published_on|year}}）、{{e:E083#/value}}（{{e:E054#/published_on|year}}）",
-            "同上"
+            "{{e:E081#/value}}（{{e:E020#/published_on|year}}）、{{e:E083#/value}}（{{e:E054#/published_on|year}}）"
           ],
           [
             "南邮 计算机学硕",
-            "科目、分布未取到",
-            "复试线 {{e:E090#/value}}（{{e:E020#/published_on|year}}）、{{e:E092#/value}}（{{e:E054#/published_on|year}}）",
-            "研招网目录查科目"
+            "分布缺失",
+            "录取者分数、当届科目没取到",
+            "{{e:E090#/value}}（{{e:E020#/published_on|year}}）、{{e:E092#/value}}（{{e:E054#/published_on|year}}）"
           ],
           [
             "南邮 计算机专硕",
+            "分布缺失",
             "同上",
-            "复试线 {{e:E091#/value}}（{{e:E020#/published_on|year}}）",
-            "同上"
+            "{{e:E091#/value}}（{{e:E020#/published_on|year}}）"
           ],
           [
             "江大 计算机学硕",
-            "科目、分布未取到",
-            "复试线 {{e:E100#/value}}（{{e:E020#/published_on|year}}）、{{e:E102#/value}}（{{e:E054#/published_on|year}}）",
-            "研招网目录查科目"
+            "分布缺失",
+            "录取者分数、当届科目没取到",
+            "{{e:E100#/value}}（{{e:E020#/published_on|year}}）、{{e:E102#/value}}（{{e:E054#/published_on|year}}）"
           ],
           [
             "江大 计算机专硕",
+            "分布缺失",
             "同上",
-            "复试线 {{e:E101#/value}}（{{e:E020#/published_on|year}}）",
-            "同上"
+            "{{e:E101#/value}}（{{e:E020#/published_on|year}}）"
           ],
           [
             "南理工 计算机学硕",
-            "只有两届前的线，其余没取到",
-            "复试线 {{e:E110#/value}}（{{e:E054#/published_on|year}}）",
-            "研招网目录查科目"
+            "分布缺失",
+            "只取到两届前的线",
+            "{{e:E110#/value}}（{{e:E054#/published_on|year}}）"
           ],
           [
             "南理工 计算机专硕",
+            "分布缺失",
             "同上",
-            "复试线 {{e:E111#/value}}（{{e:E054#/published_on|year}}）",
-            "同上"
+            "{{e:E111#/value}}（{{e:E054#/published_on|year}}）"
           ]
         ]
       },
@@ -896,6 +940,62 @@
         "E110",
         "E111",
         "E112"
+      ]
+    },
+    "12_gaps": {
+      "type": "data_table",
+      "content": {
+        "columns": [
+          "没取到的",
+          "试过的入口",
+          "影响"
+        ],
+        "rows": [
+          [
+            "河海当届招生目录",
+            "研究生院“硕士研究生招生”栏目（最新一条是网报公告）",
+            "河海三项按上一届科目看"
+          ],
+          [
+            "南航当届目录",
+            "研究生院“简章目录”栏目的当届专业目录页（只给出动态查询网址）；动态查询页本身",
+            "南航两项不定档"
+          ],
+          [
+            "南航上一届拟录取名单",
+            "计算机学院“研究生培养”栏目",
+            "同上"
+          ],
+          [
+            "南邮当届目录与上一届名单",
+            "研究生招生网目录页（表格由脚本加载）；计算机学院“研究生招生”与通知栏目",
+            "南邮两项不定档"
+          ],
+          [
+            "江大当届目录与上一届名单",
+            "研究生招生网目录附件（带来源页重试仍返回网页）；学院旧名单链接（已失效）",
+            "江大两项不定档"
+          ],
+          [
+            "南理工上一届线、当届目录与名单",
+            "研究生院招生页（需要登录，不绕过）；学院站（有人机验证，不绕过）",
+            "南理工两项不定档"
+          ],
+          [
+            "各校学费",
+            "河海简章（只写按物价部门标准收费）",
+            "预算图不画学费"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E072",
+        "E085",
+        "E086",
+        "E095",
+        "E103",
+        "E112",
+        "E121"
       ]
     }
   }

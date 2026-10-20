@@ -2,22 +2,22 @@
   "schema_version": 1,
   "case_id": "2027-YJ-S05",
   "source_sha256": {
-    "case.json": "ac97a7080641f40a08c48e9f3a41393c64473d0e47b2186e5110a27e228e32b7",
+    "case.json": "655f1d50c312a51954513032151789638f5f891a6ca2dec3a570ac2d20ed5d1d",
     "profile_parse.json": "20107f71f9c2ed1d7b7198ad470d1be169109141f501371ea2c7181282f25078",
-    "directions.json": "134d36a4b46e85c3133f25930399b3c693bf31c86039657d748621fbc30ce162",
-    "rules_check.json": "edbd0b8ae2d25a74695b1216e34e7cdc7cc1608edc8575c5895c26ffe937b55a",
-    "candidates.json": "e79ae221ecdeeceba968baf7e5e93307ca88928534f6154ad320294b499ad673",
-    "evidence.json": "663e09dc265b94b2d2452e210296f0d3911424269dbdcc7f9dd6429c8e1bb4c3",
-    "calculations.json": "558d67aa8b70aa6b4e4b39c92038e0bc8de89fba82e577266752e2d5a75a6dce",
-    "judgment.json": "40f89552007be27b13653498965660eecf820e8fae4699a4b6af461325e33808",
-    "narrative.json": "2d91c4c1b7b92471faddfaa29b25a16761b536a5f7940d724e59323e44749f3c",
+    "directions.json": "8ad0808073c7627967e3dc5571f965b22443af0eec6580e9176ef2c65bf0a585",
+    "rules_check.json": "70e1603a31f07b3ac7607e26ebf615ee80e88a50cd37a8c0683116f96fa963ff",
+    "candidates.json": "63777e211bd6d4babb4e05a4f0038127bb4e81270399bc3c9eecdf83c9e40e7e",
+    "evidence.json": "de338cc972b0360842391182344949a6fca30ed9979af69ec065f94a324bd4dd",
+    "calculations.json": "a529584576aa1515c8a7cce9cc3cc3949f40c9c024ba4f60a979bd1c5cd16f35",
+    "judgment.json": "5bfea749988de77be09167a8f015cad007c477b14ea7e30bb6d12ce2c91505ca",
+    "narrative.json": "c37c43362d9670a4cd76263f46041df9d346fee8f54e51f675835d0565346da7",
     "profile.json": "af232e95b42de1286681d5b04d706bbd8d16d3dd86cfe304a7d87e5a6bfcab88",
     "profile-supplement.txt": "952368202eeb2cd031c6c0d52212442dca0faaadcd6c99828f951e50ba15d704"
   },
   "contract_sha256": "b805904d0c51a3684ce92ee68d71e57f416749bf20fbf6c5ef0604747f005a07",
   "tool_sha256": {
     "planning_report.py": "e50d03231e1eed2f3960a114150b3e5557764365966703a5bbb599ee71720be1",
-    "planning_workflow.py": "db73cf106f6604f74c7eeefb7ccc357435eb4601c9824ef388b956d1636b5b06",
+    "planning_workflow.py": "6877e27e01e475f4fef8dc9ef01b95929b6f536e2af6110bc9cd267c9e212925",
     "operator_check.py": "97965475c2c8b6efe5dbf2747511526d1729a540f55a16b54fa282e2a810fdc7",
     "check_demos.py": "fc8e1625f9e052373756160514ad5c73db1e8451c233425918edb5bc839d9f63",
     "report.py": "5ca9d4dd41806233ea94c4b1450c99b2e0ee3ef9853d8298f0fb9260e512f186",
@@ -62,12 +62,6 @@
       "display": "10 月 23 日"
     },
     {
-      "location": "01.lead.0",
-      "ref": "{{k:/context/personal_dates/action1|md}}",
-      "value": "2026-10-23",
-      "display": "10 月 23 日"
-    },
-    {
       "location": "01.figure.1",
       "ref": "{{k:/context/personal_dates/action1|md}}",
       "value": "2026-10-23",
@@ -84,24 +78,6 @@
       "ref": "{{c:/gap_suda0812_median|1f}}",
       "value": 8.5,
       "display": "8.5"
-    },
-    {
-      "location": "01.kpis.2",
-      "ref": "{{c:/hhu_line_jump}}",
-      "value": 42,
-      "display": "42"
-    },
-    {
-      "location": "01.kpis.2",
-      "ref": "{{e:E050#/value}}",
-      "value": 350,
-      "display": "350"
-    },
-    {
-      "location": "01.kpis.2",
-      "ref": "{{c:/gap_hhu0812n_line}}",
-      "value": 1,
-      "display": "1"
     },
     {
       "location": "01.kpis.2",
@@ -387,150 +363,6 @@
     },
     {
       "location": "06.score_ranges.1",
-      "ref": "{{c:/suda26_0835_q1}}",
-      "value": 334.0,
-      "display": "334"
-    },
-    {
-      "location": "06.score_ranges.1",
-      "ref": "{{c:/suda26_0835_q3}}",
-      "value": 361.0,
-      "display": "361"
-    },
-    {
-      "location": "06.score_ranges.1",
-      "ref": "{{c:/mock_total}}",
-      "value": 349,
-      "display": "349"
-    },
-    {
-      "location": "06.score_ranges.1",
-      "ref": "{{c:/suda26_0835_min}}",
-      "value": 328,
-      "display": "328"
-    },
-    {
-      "location": "06.score_ranges.1",
-      "ref": "{{c:/suda26_0835_max}}",
-      "value": 384,
-      "display": "384"
-    },
-    {
-      "location": "06.score_ranges.1",
-      "ref": "{{c:/suda26_0835_median}}",
-      "value": 349.0,
-      "display": "349"
-    },
-    {
-      "location": "06.score_ranges.1",
-      "ref": "{{e:E031#/value}}",
-      "value": 326,
-      "display": "326"
-    },
-    {
-      "location": "06.score_ranges.1",
-      "ref": "{{e:E020#/published_on|year}}",
-      "value": "2026-02-28",
-      "display": "2026"
-    },
-    {
-      "location": "06.score_ranges.1",
-      "ref": "{{c:/hhu26_0835_q1}}",
-      "value": 314.0,
-      "display": "314"
-    },
-    {
-      "location": "06.score_ranges.1",
-      "ref": "{{c:/hhu26_0835_q3}}",
-      "value": 348.0,
-      "display": "348"
-    },
-    {
-      "location": "06.score_ranges.1",
-      "ref": "{{c:/mock_total}}",
-      "value": 349,
-      "display": "349"
-    },
-    {
-      "location": "06.score_ranges.1",
-      "ref": "{{c:/hhu26_0835_min}}",
-      "value": 305,
-      "display": "305"
-    },
-    {
-      "location": "06.score_ranges.1",
-      "ref": "{{c:/hhu26_0835_max}}",
-      "value": 373,
-      "display": "373"
-    },
-    {
-      "location": "06.score_ranges.1",
-      "ref": "{{c:/hhu26_0835_median}}",
-      "value": 323.0,
-      "display": "323"
-    },
-    {
-      "location": "06.score_ranges.1",
-      "ref": "{{e:E052#/value}}",
-      "value": 286,
-      "display": "286"
-    },
-    {
-      "location": "06.score_ranges.1",
-      "ref": "{{e:E054#/published_on|year}}",
-      "value": "2025-03-16",
-      "display": "2025"
-    },
-    {
-      "location": "06.score_ranges.1",
-      "ref": "{{c:/hhu25_0835_q1}}",
-      "value": 294.0,
-      "display": "294"
-    },
-    {
-      "location": "06.score_ranges.1",
-      "ref": "{{c:/hhu25_0835_q3}}",
-      "value": 337.0,
-      "display": "337"
-    },
-    {
-      "location": "06.score_ranges.1",
-      "ref": "{{c:/mock_total}}",
-      "value": 349,
-      "display": "349"
-    },
-    {
-      "location": "06.score_ranges.1",
-      "ref": "{{c:/hhu25_0835_min}}",
-      "value": 288,
-      "display": "288"
-    },
-    {
-      "location": "06.score_ranges.1",
-      "ref": "{{c:/hhu25_0835_max}}",
-      "value": 376,
-      "display": "376"
-    },
-    {
-      "location": "06.score_ranges.1",
-      "ref": "{{c:/hhu25_0835_median|1f}}",
-      "value": 312.5,
-      "display": "312.5"
-    },
-    {
-      "location": "06.score_ranges.1",
-      "ref": "{{e:E055#/value}}",
-      "value": 288,
-      "display": "288"
-    },
-    {
-      "location": "06.score_ranges.1",
-      "ref": "{{e:E020#/published_on|year}}",
-      "value": "2026-02-28",
-      "display": "2026"
-    },
-    {
-      "location": "06.score_ranges.1",
       "ref": "{{c:/hhu26_0812j_q1}}",
       "value": 329.0,
       "display": "329"
@@ -702,72 +534,6 @@
       "ref": "{{c:/suda_plan_drop}}",
       "value": 2,
       "display": "2"
-    },
-    {
-      "location": "06.candidates.2",
-      "ref": "{{c:/suda26_0835_median}}",
-      "value": 349.0,
-      "display": "349"
-    },
-    {
-      "location": "06.candidates.2",
-      "ref": "{{e:E031#/value}}",
-      "value": 326,
-      "display": "326"
-    },
-    {
-      "location": "06.candidates.2",
-      "ref": "{{e:E039#/value}}",
-      "value": 10,
-      "display": "10"
-    },
-    {
-      "location": "06.candidates.2",
-      "ref": "{{e:E020#/published_on|year}}",
-      "value": "2026-02-28",
-      "display": "2026"
-    },
-    {
-      "location": "06.candidates.2",
-      "ref": "{{c:/hhu26_0835_median}}",
-      "value": 323.0,
-      "display": "323"
-    },
-    {
-      "location": "06.candidates.2",
-      "ref": "{{e:E054#/published_on|year}}",
-      "value": "2025-03-16",
-      "display": "2025"
-    },
-    {
-      "location": "06.candidates.2",
-      "ref": "{{c:/hhu25_0835_median|1f}}",
-      "value": 312.5,
-      "display": "312.5"
-    },
-    {
-      "location": "06.candidates.2",
-      "ref": "{{e:E052#/value}}",
-      "value": 286,
-      "display": "286"
-    },
-    {
-      "location": "06.candidates.2",
-      "ref": "{{e:E055#/value}}",
-      "value": 288,
-      "display": "288"
-    },
-    {
-      "location": "06.candidates.2",
-      "ref": "{{c:/hhu26_0835_count}}",
-      "value": 3,
-      "display": "3"
-    },
-    {
-      "location": "06.candidates.2",
-      "ref": "{{e:E062#/value}}",
-      "value": 6,
-      "display": "6"
     },
     {
       "location": "06.candidates.2",
@@ -1028,6 +794,18 @@
       "display": "335"
     },
     {
+      "location": "06.score_ranges.5",
+      "ref": "{{e:E054#/published_on|year}}",
+      "value": "2025-03-16",
+      "display": "2025"
+    },
+    {
+      "location": "06.score_ranges.5",
+      "ref": "{{e:E111#/value}}",
+      "value": 340,
+      "display": "340"
+    },
+    {
       "location": "06.details.6",
       "ref": "{{e:E032#/value}}",
       "value": 340,
@@ -1281,6 +1059,12 @@
     },
     {
       "location": "07.timeline.1",
+      "ref": "{{e:E018#/value}}",
+      "value": "4月底",
+      "display": "4月底"
+    },
+    {
+      "location": "07.timeline.1",
       "ref": "{{k:/context/personal_dates/graduate|ym}}",
       "value": "2027-06-30",
       "display": "2027.06"
@@ -1356,6 +1140,18 @@
       "ref": "{{e:E022#/value}}",
       "value": 53,
       "display": "53"
+    },
+    {
+      "location": "08.routes.2",
+      "ref": "{{e:E018#/value}}",
+      "value": "4月底",
+      "display": "4月底"
+    },
+    {
+      "location": "08.routes.3",
+      "ref": "{{e:E013#/value|md}}",
+      "value": "2026-12-20",
+      "display": "12 月 20 日"
     },
     {
       "location": "09.budget_chart.1",
@@ -1533,9 +1329,9 @@
     }
   ],
   "artifacts": {
-    "report.md": "8b1375407187419a4f3d21bd895946408f7f0f506f7504265d08d935b4e56f0d",
-    "report.html": "ee2b1c3262dea77f48498f766d10cd8d8bd289ea15f9f3c0ce55678c18c6a8fb",
-    "report.pdf": "f2de2313c0de422aa8146af531fbb9d8429ea8b1130b0f419066b8fe732a25ca"
+    "report.md": "8fafdbff958f3eab5c956544de18b0d80994469953905e935038562e8a434d48",
+    "report.html": "96ebed1616d6983adc5b590b728827ddc93c398a8725ea66aa14aff080d5487f",
+    "report.pdf": "9b1048c9ee950c0198daa978c19617f2b299806907f79ba422147feb3f81794a"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "report_profile": {

@@ -433,37 +433,6 @@
       "main_conclusion": true
     },
     {
-      "id": "E031",
-      "claim": "苏大软件工程学硕上一届复试线",
-      "value": 326,
-      "unit": "分",
-      "source": {
-        "organization": "苏州大学计算机科学与技术学院 2026年硕士研究生复试录取实施细则",
-        "url": "https://scst.suda.edu.cn/8d/97/c29555a691607/page.htm",
-        "locator": "细则一、1. 复试分数线表"
-      },
-      "availability": "available",
-      "published_on": "2026-03-19",
-      "publication_status": "published",
-      "retrieved_on": "2026-10-20",
-      "retrieval_method": "curl",
-      "verified_on": "2026-10-20",
-      "review_due": "2026-11-19",
-      "grade": "官方",
-      "status": "verified",
-      "scope": "2026年；苏州大学计算机科学与技术学院；全日制公开招考",
-      "candidate_ids": [
-        "S5"
-      ],
-      "rule_ids": [
-        "R05"
-      ],
-      "source_group": 4,
-      "excerpt": "083500 软件工程 326 10",
-      "original_locator": "细则一、1. 复试分数线表",
-      "main_conclusion": true
-    },
-    {
       "id": "E032",
       "claim": "苏大计算机技术专硕上一届复试线",
       "value": 340,
@@ -515,8 +484,7 @@
       "status": "verified",
       "scope": "2026年苏州大学计算机科学与技术学院复试；2027年办法未发布",
       "candidate_ids": [
-        "S1",
-        "S5"
+        "S1"
       ],
       "rule_ids": [
         "R05"
@@ -547,8 +515,7 @@
       "status": "verified",
       "scope": "2026年苏州大学计算机科学与技术学院复试",
       "candidate_ids": [
-        "S1",
-        "S5"
+        "S1"
       ],
       "rule_ids": [
         "R05"
@@ -579,8 +546,7 @@
       "status": "verified",
       "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制",
       "candidate_ids": [
-        "S1",
-        "S5"
+        "S1"
       ],
       "rule_ids": [
         "R06"
@@ -642,8 +608,7 @@
       "status": "verified",
       "scope": "2027年苏州大学计算机科学与技术学院复试科目",
       "candidate_ids": [
-        "S1",
-        "S5"
+        "S1"
       ],
       "rule_ids": [
         "R06"
@@ -681,37 +646,6 @@
       ],
       "source_group": 7,
       "excerpt": "018 计算机科学与技术学院 081200 计算机科学与技术 全日制 10",
-      "original_locator": "招生计划表 018 学院行",
-      "main_conclusion": true
-    },
-    {
-      "id": "E039",
-      "claim": "苏大软件工程学硕当届公开招考计划",
-      "value": 10,
-      "unit": "人",
-      "source": {
-        "organization": "苏州大学 2027年硕士研究生招生计划（公开招考）",
-        "url": "https://yjs.suda.edu.cn/ea/62/c8386a715362/page.htm",
-        "locator": "招生计划表 018 学院行"
-      },
-      "availability": "available",
-      "published_on": "2026-10-06",
-      "publication_status": "published",
-      "retrieved_on": "2026-10-20",
-      "retrieval_method": "curl",
-      "verified_on": "2026-10-20",
-      "review_due": "2026-11-19",
-      "grade": "官方",
-      "status": "verified",
-      "scope": "2027年；公开招考（不含推免）",
-      "candidate_ids": [
-        "S5"
-      ],
-      "rule_ids": [
-        "R06"
-      ],
-      "source_group": 7,
-      "excerpt": "018 计算机科学与技术学院 083500 软件工程 全日制 10",
       "original_locator": "招生计划表 018 学院行",
       "main_conclusion": true
     },
@@ -796,7 +730,7 @@
       "review_due": "2026-11-19",
       "grade": "官方",
       "status": "verified",
-      "scope": "2026年；苏州大学计算机科学与技术学院 081200；全国统考、全日制、非定向；名单不含推免",
+      "scope": "2026年；苏州大学计算机科学与技术学院 081200；全国统考、全日制、非定向；名单不含推免；图片版名单（PDF无文字层），两次独立读图（项目首次取数时一次、本报告制作时一次）统计一致",
       "candidate_ids": [
         "S1"
       ],
@@ -822,52 +756,7 @@
         396
       ],
       "anonymous_unit": "初试总分（满分500）",
-      "processing": "只在内存读名单，按代码与方向筛选后保存初试总分；不存姓名、考生编号。value 为摘录样例行的初试总分，仅供原文对照。"
-    },
-    {
-      "id": "E043",
-      "claim": "苏大软件工程学硕上一届拟录取初试分",
-      "value": 361,
-      "unit": "分",
-      "source": {
-        "organization": "苏州大学计算机科学与技术学院 2026年硕士研究生招生拟录取名单公示",
-        "url": "https://scst.suda.edu.cn/92/1a/c29555a692762/page.htm",
-        "locator": "拟录取名单第1页 083500 各行"
-      },
-      "availability": "available",
-      "published_on": "2026-04-01",
-      "publication_status": "published",
-      "retrieved_on": "2026-10-20",
-      "retrieval_method": "curl",
-      "verified_on": "2026-10-20",
-      "review_due": "2026-11-19",
-      "grade": "官方",
-      "status": "verified",
-      "scope": "2026年；苏州大学 083500；全国统考、全日制、非定向",
-      "candidate_ids": [
-        "S5"
-      ],
-      "rule_ids": [
-        "R07"
-      ],
-      "source_group": 5,
-      "excerpt": "083500 软件工程 … 全国统考 学术学位 全日制 非定向 361 277.8 638.8",
-      "original_locator": "拟录取名单第1页 083500 各行",
-      "main_conclusion": true,
-      "anonymous_values": [
-        328,
-        332,
-        334,
-        334,
-        348,
-        350,
-        361,
-        361,
-        375,
-        384
-      ],
-      "anonymous_unit": "初试总分（满分500）",
-      "processing": "只在内存读名单，按代码与方向筛选后保存初试总分；不存姓名、考生编号。value 为摘录样例行的初试总分，仅供原文对照。"
+      "processing": "图片版名单（PDF无文字层），两次独立读图（项目首次取数时一次、本报告制作时一次）统计一致；只保存初试总分，不存姓名、考生编号。value 为摘录样例行的初试总分，仅供原文对照。"
     },
     {
       "id": "E044",
@@ -888,7 +777,7 @@
       "review_due": "2026-11-19",
       "grade": "官方",
       "status": "verified",
-      "scope": "2026年；苏州大学 085404；全国统考、全日制、非定向；考英语二、数学二",
+      "scope": "2026年；苏州大学 085404；全国统考、全日制、非定向；考英语二、数学二；图片版名单（PDF无文字层），两次独立读图（项目首次取数时一次、本报告制作时一次）统计一致",
       "candidate_ids": [
         "V1"
       ],
@@ -912,7 +801,7 @@
         423
       ],
       "anonymous_unit": "初试总分（满分500）",
-      "processing": "只在内存读名单，按代码与方向筛选后保存初试总分；不存姓名、考生编号。value 为摘录样例行的初试总分，仅供原文对照。"
+      "processing": "图片版名单（PDF无文字层），两次独立读图（项目首次取数时一次、本报告制作时一次）统计一致；只保存初试总分，不存姓名、考生编号。value 为摘录样例行的初试总分，仅供原文对照。"
     },
     {
       "id": "E050",
@@ -973,37 +862,6 @@
       ],
       "source_group": 8,
       "excerpt": "081200 计算机科学与技术（01 方向） 学术学位 303",
-      "original_locator": "基本要求表 计算机与软件学院行",
-      "main_conclusion": true
-    },
-    {
-      "id": "E052",
-      "claim": "河海软件工程学硕上一届复试线",
-      "value": 286,
-      "unit": "分",
-      "source": {
-        "organization": "河海大学 2026年硕士研究生进入复试成绩基本要求",
-        "url": "https://gs.hhu.edu.cn/2026/0323/c17366a327227/page.htm",
-        "locator": "基本要求表 计算机与软件学院行"
-      },
-      "availability": "available",
-      "published_on": "2026-05-21",
-      "publication_status": "published",
-      "retrieved_on": "2026-10-20",
-      "retrieval_method": "curl",
-      "verified_on": "2026-10-20",
-      "review_due": "2026-11-19",
-      "grade": "官方",
-      "status": "verified",
-      "scope": "2026年；083500",
-      "candidate_ids": [
-        "S4"
-      ],
-      "rule_ids": [
-        "R08"
-      ],
-      "source_group": 8,
-      "excerpt": "083500 软件工程 学术学位 286",
       "original_locator": "基本要求表 计算机与软件学院行",
       "main_conclusion": true
     },
@@ -1070,37 +928,6 @@
       "main_conclusion": true
     },
     {
-      "id": "E055",
-      "claim": "河海软件工程学硕前一届复试线",
-      "value": 288,
-      "unit": "分",
-      "source": {
-        "organization": "河海大学 2025年硕士研究生进入复试成绩基本要求",
-        "url": "https://gs.hhu.edu.cn/2025/0316/c17366a303969/page.htm",
-        "locator": "基本要求表 计算机与软件学院行"
-      },
-      "availability": "available",
-      "published_on": "2025-03-16",
-      "publication_status": "published",
-      "retrieved_on": "2026-10-20",
-      "retrieval_method": "curl",
-      "verified_on": "2026-10-20",
-      "review_due": "2026-11-19",
-      "grade": "官方",
-      "status": "verified",
-      "scope": "2025年；083500",
-      "candidate_ids": [
-        "S4"
-      ],
-      "rule_ids": [
-        "R08"
-      ],
-      "source_group": 9,
-      "excerpt": "083500 软件工程 学术学位 288",
-      "original_locator": "基本要求表 计算机与软件学院行",
-      "main_conclusion": true
-    },
-    {
       "id": "E056",
       "claim": "河海电子信息专硕前一届复试线",
       "value": 346,
@@ -1153,8 +980,7 @@
       "scope": "2026年目录；081200 与 083500 科目相同；2027年目录未取到",
       "candidate_ids": [
         "S2",
-        "S3",
-        "S4"
+        "S3"
       ],
       "rule_ids": [
         "R09"
@@ -1290,37 +1116,6 @@
       "main_conclusion": true
     },
     {
-      "id": "E062",
-      "claim": "河海软件工程学硕上一届统考计划",
-      "value": 6,
-      "unit": "人",
-      "source": {
-        "organization": "河海大学计算机与软件学院 2026年硕士研究生复试录取工作细则",
-        "url": "https://cies.hhu.edu.cn/2026/0324/c4093a323909/page.htm",
-        "locator": "细则二、招生计划表 第3行"
-      },
-      "availability": "available",
-      "published_on": "2026-03-24",
-      "publication_status": "published",
-      "retrieved_on": "2026-10-20",
-      "retrieval_method": "curl",
-      "verified_on": "2026-10-20",
-      "review_due": "2026-11-19",
-      "grade": "官方",
-      "status": "verified",
-      "scope": "2026年；083500",
-      "candidate_ids": [
-        "S4"
-      ],
-      "rule_ids": [
-        "R09"
-      ],
-      "source_group": 11,
-      "excerpt": "3 083500 软件工程 6",
-      "original_locator": "细则二、招生计划表 第3行",
-      "main_conclusion": true
-    },
-    {
       "id": "E063",
       "claim": "河海计算机学院复试满分",
       "value": 350,
@@ -1342,8 +1137,7 @@
       "scope": "2026年河海大学计算机与软件学院复试",
       "candidate_ids": [
         "S2",
-        "S3",
-        "S4"
+        "S3"
       ],
       "rule_ids": [
         "R09"
@@ -1464,44 +1258,6 @@
         342,
         346,
         352
-      ],
-      "anonymous_unit": "初试总分（满分500）",
-      "processing": "只在内存读名单，按代码与方向筛选后保存初试总分；不存姓名、考生编号。value 为摘录样例行的初试总分，仅供原文对照。"
-    },
-    {
-      "id": "E067",
-      "claim": "河海软件工程学硕上一届一志愿建议录取初试分",
-      "value": 373,
-      "unit": "分",
-      "source": {
-        "organization": "河海大学计算机与软件学院 2026年硕士研究生建议录取名单公示",
-        "url": "https://cies.hhu.edu.cn/2026/0403/c4093a324246/page.htm",
-        "locator": "建议录取名单 083500 各行"
-      },
-      "availability": "available",
-      "published_on": "2026-04-03",
-      "publication_status": "published",
-      "retrieved_on": "2026-10-20",
-      "retrieval_method": "curl",
-      "verified_on": "2026-10-20",
-      "review_due": "2026-11-19",
-      "grade": "官方",
-      "status": "verified",
-      "scope": "2026年；083500；只有3人，分布不稳",
-      "candidate_ids": [
-        "S4"
-      ],
-      "rule_ids": [
-        "R07"
-      ],
-      "source_group": 13,
-      "excerpt": "计算机与软件学院 083500 软件工程（03 智能软件与 大数据技术) 全日制 … 373 228.20 601.20",
-      "original_locator": "建议录取名单 083500 各行",
-      "main_conclusion": true,
-      "anonymous_values": [
-        305,
-        323,
-        373
       ],
       "anonymous_unit": "初试总分（满分500）",
       "processing": "只在内存读名单，按代码与方向筛选后保存初试总分；不存姓名、考生编号。value 为摘录样例行的初试总分，仅供原文对照。"
@@ -1631,51 +1387,6 @@
         354,
         355,
         358
-      ],
-      "anonymous_unit": "初试总分（满分500）",
-      "processing": "只在内存读名单，按代码与方向筛选后保存初试总分；不存姓名、考生编号。value 为摘录样例行的初试总分，仅供原文对照。"
-    },
-    {
-      "id": "E070",
-      "claim": "河海软件工程学硕前一届一志愿建议录取初试分",
-      "value": 376,
-      "unit": "分",
-      "source": {
-        "organization": "河海大学计算机与软件学院 2025年硕士研究生建议录取名单公示",
-        "url": "https://cies.hhu.edu.cn/2025/0327/c4093a300228/page.htm",
-        "locator": "建议录取名单 083500 各行"
-      },
-      "availability": "available",
-      "published_on": "2025-03-27",
-      "publication_status": "published",
-      "retrieved_on": "2026-10-20",
-      "retrieval_method": "curl",
-      "verified_on": "2026-10-20",
-      "review_due": "2026-11-19",
-      "grade": "官方",
-      "status": "verified",
-      "scope": "2025年；083500；名单无备注列",
-      "candidate_ids": [
-        "S4"
-      ],
-      "rule_ids": [
-        "R07"
-      ],
-      "source_group": 14,
-      "excerpt": "计算机与软件学院 083500 软件工程 全日制 … 376 259.70 635.70",
-      "original_locator": "建议录取名单 083500 各行",
-      "main_conclusion": true,
-      "anonymous_values": [
-        288,
-        291,
-        293,
-        297,
-        305,
-        320,
-        334,
-        338,
-        351,
-        376
       ],
       "anonymous_unit": "初试总分（满分500）",
       "processing": "只在内存读名单，按代码与方向筛选后保存初试总分；不存姓名、考生编号。value 为摘录样例行的初试总分，仅供原文对照。"
@@ -1824,7 +1535,6 @@
       "candidate_ids": [
         "S2",
         "S3",
-        "S4",
         "V2"
       ],
       "rule_ids": [
@@ -2051,7 +1761,7 @@
       "excerpt": "2027年硕士招生目录查询页为动态查询系统，HTTP 只取到页面框架，没有表格内容",
       "original_locator": "目录查询页",
       "main_conclusion": true,
-      "gap": "原因：查询页由脚本加载，按规则不绕过；影响：不知道南航计算机是否考408、数学几，模考不能对照，不定档；入口：研招网硕士专业目录查询（本人登录后可查）；下一检查点：报名前一天"
+      "gap": "原因：动态查询页由脚本加载，按规则不绕过；复核时又查了研究生院“简章目录”栏目的当届专业目录页（2026-09-28），正文只给出这个查询网址，没有附件；影响：不知道南航计算机当届考哪四门，不能确认和模考同卷，不定档；入口：研招网硕士专业目录查询（本人登录后可查）；下一检查点：报名前一天"
     },
     {
       "id": "E086",
@@ -2084,7 +1794,7 @@
       "excerpt": "学院站“研究生培养”栏目（2026年1—10月）未见拟录取名单公告",
       "original_locator": "cs.nuaa.edu.cn 栏目列表",
       "main_conclusion": true,
-      "gap": "原因：栏目里没找到，可能在别的栏目；影响：只有复试线，没有录取者分布，不能看模考在录取者里的位置；入口：南航研究生院、计算机学院网站；下一检查点：出分后如考虑调剂再查"
+      "gap": "原因：计算机学院“研究生培养”栏目2026年1—10月未见拟录取名单；影响：没有录取者分布，只有复试线，不定档；入口：南航研究生院、计算机学院网站；下一检查点：出分后如考虑调剂再查"
     },
     {
       "id": "E090",
@@ -2272,7 +1982,7 @@
       "excerpt": "2027年专业目录页的表格由脚本加载，HTTP 取不到；2026年拟录取公告在研究生招生网与学院站均未发现",
       "original_locator": "目录页",
       "main_conclusion": true,
-      "gap": "原因：表格动态加载，按规则不绕过；拟录取公告未找到；影响：科目不明、没有分布，不定档；入口：研招网目录查询；下一检查点：报名前一天"
+      "gap": "原因：研究生招生网目录表格由脚本加载，按规则不绕过；复核时又查了计算机学院“研究生招生”栏目和学院通知栏目，只见推免细则和两年前的目录预告；影响：科目不明、没有分布，不定档；入口：研招网目录查询；下一检查点：报名前一天"
     },
     {
       "id": "E100",
@@ -2398,7 +2108,7 @@
       "excerpt": "2027年招生专业目录为PDF附件，下载接口返回网页（约3.8KB，非PDF）；2026年建议录取名单旧链接返回404",
       "original_locator": "目录页附件",
       "main_conclusion": true,
-      "gap": "原因：附件下载失败、名单链接失效；影响：科目不明、没有分布，不定档；入口：研招网目录查询；下一检查点：报名前一天"
+      "gap": "原因：当届目录附件下载返回网页（复核时带来源页再试一次，仍不是PDF）；上一届建议录取名单旧链接返回404；影响：科目不明、没有分布，不定档；入口：研招网目录查询；下一检查点：报名前一天"
     },
     {
       "id": "E110",
@@ -2493,7 +2203,7 @@
       "excerpt": "研究生院2026年页面在HTTP下无限重定向，浏览器打开后显示需要登录的提示页",
       "original_locator": "研究生院招生页面",
       "main_conclusion": true,
-      "gap": "原因：需登录，按规则不绕过；影响：只有两届前的线，科目与分布都缺，不定档；入口：研招网目录查询、南理工研究生院；下一检查点：报名前一天"
+      "gap": "原因：研究生院招生页需要登录、学院站有人机验证，按规则都不绕过（复核时未再请求）；影响：只有两届前的线，科目与分布都缺，不定档；入口：研招网目录查询、南理工研究生院；下一检查点：报名前一天"
     },
     {
       "id": "E121",
@@ -2554,6 +2264,35 @@
       "excerpt": "报考与中国科学院大学南京学院联合培养请选择01 方向，01 方向单独排名，招生计划为11 人，其中推免计划6 人。",
       "original_locator": "专业目录 081200 备注栏",
       "main_conclusion": true
+    },
+    {
+      "id": "E018",
+      "claim": "录取工作一般完成时间",
+      "value": "4月底",
+      "unit": "",
+      "source": {
+        "organization": "教育部《2027年全国硕士研究生招生工作管理规定》",
+        "url": "http://www.moe.gov.cn/srcsite/A15/moe_778/s3261/202609/t20260923_1451734.html",
+        "locator": "第六十五条"
+      },
+      "availability": "available",
+      "published_on": "2026-09-23",
+      "publication_status": "published",
+      "retrieved_on": "2026-10-20",
+      "retrieval_method": "curl",
+      "verified_on": "2026-10-20",
+      "review_due": "2026-11-19",
+      "grade": "官方",
+      "status": "verified",
+      "scope": "2027年硕士招生；各招生单位具体日程另看通知",
+      "candidate_ids": [],
+      "rule_ids": [
+        "R01"
+      ],
+      "source_group": 2,
+      "excerpt": "招生单位录取工作一般应在录取当年4月底前完成。",
+      "original_locator": "第六十五条",
+      "main_conclusion": true
     }
   ],
   "source_groups": [
@@ -2580,7 +2319,7 @@
     {
       "title": "苏州大学计算机科学与技术学院 2026年硕士研究生招生拟录取名单公示",
       "url": "https://scst.suda.edu.cn/92/1a/c29555a692762/page.htm",
-      "metadata": "发布：2026-04-01；取文：2026-10-20；方式：curl（PDF附件，无文字层，读图抄录初试分）；只存匿名分数"
+      "metadata": "发布：2026-04-01；取文：2026-10-20；方式：curl（PDF附件）；图片版名单（无文字层），两次独立读图（项目首次取数时一次、本报告制作时一次）统计一致；只存匿名初试分"
     },
     {
       "title": "苏州大学 2027年硕士研究生招生专业目录",
@@ -2655,7 +2394,7 @@
     {
       "title": "南京航空航天大学 2027年硕士招生目录查询",
       "url": "http://yzsbm.nuaa.edu.cn/sszsml/index.html",
-      "metadata": "取文：2026-10-20；未取到：动态查询页，表格由脚本加载"
+      "metadata": "取文：2026-10-20；未取到：动态查询页，表格由脚本加载；另查研究生院“简章目录”栏目的当届目录页（2026-09-28），只给出这个查询网址"
     },
     {
       "title": "南京邮电大学 2026年硕士研究生复试基本分数线",
@@ -2737,8 +2476,8 @@
     "06_same": {
       "type": "interval",
       "content": {
-        "title": "同科目的五个候选：上一届录取者考了多少，你的模考落在哪",
-        "caption": "每行一个学校、一个方向、一年，口径不混：粗条是录取者中间一半，细线是最低到最高，短竖线是中位数，虚线是复试线，琥珀竖线是你十月的模考。名单只数一志愿统考录取者；这是录取者的分布，不是报考者的，也不是你的上岸概率。",
+        "title": "同科目的三个候选：上一届录取者考了多少，你的模考落在哪",
+        "caption": "每行一个学校、一个方向、一年，口径不混：粗条是录取者里分数居中的一半人，细线是最低到最高，短竖线是正中间那个人的分，虚线是复试线，琥珀竖线是你十月的模考。河海两个方向上一届都不到十个人，只作定性。这是录取者的分数，不是你的上岸概率。",
         "unit": "分",
         "rows": [
           [
@@ -2750,36 +2489,6 @@
             "{{c:/suda26_0812_max}}",
             "{{c:/suda26_0812_median|1f}}",
             "{{e:E030#/value}}"
-          ],
-          [
-            "苏大软件学硕 {{e:E020#/published_on|year}}",
-            "{{c:/suda26_0835_q1}}",
-            "{{c:/suda26_0835_q3}}",
-            "{{c:/mock_total}}",
-            "{{c:/suda26_0835_min}}",
-            "{{c:/suda26_0835_max}}",
-            "{{c:/suda26_0835_median}}",
-            "{{e:E031#/value}}"
-          ],
-          [
-            "河海软件学硕 {{e:E020#/published_on|year}}",
-            "{{c:/hhu26_0835_q1}}",
-            "{{c:/hhu26_0835_q3}}",
-            "{{c:/mock_total}}",
-            "{{c:/hhu26_0835_min}}",
-            "{{c:/hhu26_0835_max}}",
-            "{{c:/hhu26_0835_median}}",
-            "{{e:E052#/value}}"
-          ],
-          [
-            "河海软件学硕 {{e:E054#/published_on|year}}",
-            "{{c:/hhu25_0835_q1}}",
-            "{{c:/hhu25_0835_q3}}",
-            "{{c:/mock_total}}",
-            "{{c:/hhu25_0835_min}}",
-            "{{c:/hhu25_0835_max}}",
-            "{{c:/hhu25_0835_median|1f}}",
-            "{{e:E055#/value}}"
           ],
           [
             "河海计算机联培 {{e:E020#/published_on|year}}",
@@ -2816,26 +2525,20 @@
       "evidence_refs": [
         "E002",
         "E030",
-        "E031",
         "E042",
-        "E043",
         "E050",
         "E051",
-        "E052",
         "E054",
-        "E055",
         "E065",
         "E066",
-        "E067",
-        "E069",
-        "E070"
+        "E069"
       ]
     },
     "06_other": {
       "type": "interval",
       "content": {
         "title": "不定档的十项：科目不同或只有复试线",
-        "caption": "专硕两行考英语二、数学二，和你的模考不是同一张卷，所以不画你的分数点；其余各行只取到复试线（虚线），录取者分布没取到，画成虚线框写“区间未取到”，不是没有分数。线高不等于更难考上，线低也不等于好考。",
+        "caption": "专硕三行考英语二、数学二，和你的模考不是同一张卷，所以不画你的分数点；其余各行只取到复试线（虚线），录取者分布没取到，画成虚线框写“区间未取到”，不是没有分数。线高不等于更难考上，线低也不等于好考。",
         "unit": "分",
         "rows": [
           [
@@ -2937,6 +2640,16 @@
             "",
             "",
             "{{e:E110#/value}}"
+          ],
+          [
+            "南理工计算机专硕 {{e:E054#/published_on|year}}",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "{{e:E111#/value}}"
           ]
         ]
       },
@@ -2959,6 +2672,7 @@
         "E101",
         "E103",
         "E110",
+        "E111",
         "E112"
       ]
     },

@@ -46,7 +46,7 @@ candidates 顶层 `{schema_version, paths, school_programs, excluded}`。路径�
 
 - id、path_id、学校、学院、专业代码、学位类型、学习方式、计划类别、适用年份、考试科目、培养地点；不把同校不同学院合成一个候选。
 - hard_conditions 每条 id/name/status/evidence_refs；candidate.status 沿用 verified / pending / ineligible。unknown 导致pending，failed 导致ineligible并登记excluded；已剔除项仍可在对照表说明原因，不作正式推荐。
-- 有本人同科目完整模考证据时，tier 仅限相对稳妥/够一够/冒险，附依据、条件和未知项；它比较能力差距、规则与本人投入，不是个人上岸概率。没有模考时不填 tier；官方复试线或拟录取分布只能说明学校或项目之间的差异，不能写成本人的把握。
+- 有本人同科目完整模考证据时，每个学校候选的 tier 为相对稳妥/够一够/冒险之一，或写“不定档”并在 untiered_reason 填科目不同、分布缺失、样本太少、口径不一致之一，附依据、条件和未知项；三档不要求齐，没有“相对稳妥”时 judgment.json 的 fallback_paths 须逐条写保底路径（path_id）、触发条件（trigger）和时间（timing）；它比较能力差距、规则与本人投入，不是个人上岸概率。没有模考时不填 tier；官方复试线或拟录取分布只能说明学校或项目之间的差异，不能写成本人的把握。
 - `personal_difficulty.mock_exam` 没有资料时为 null；有资料时登记 complete、same_subjects、subjects、exam_date、evidence_refs、score_ref，成绩从已核证据或本人登记字段读取，条目须明确是本人模考，证据分值单位为“分”，不能拿学费或本科均分充当。操控者仍须核试卷、科目、单科和完成条件。`personal_difficulty.checkpoint` 写日期引用与动作：拿到同科目完整模考后在哪个个人检查点定档，届时仍无证据就继续不定档。
 - 判断所需的 supports、counters、costs、fallback、switch_conditions 和 checkpoint 在 judgment 中按 candidate_id 保存，引用候选/证据，不再抄一套成绩数字。
 

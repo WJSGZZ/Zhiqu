@@ -19,65 +19,65 @@
         {
           "id": "clarity",
           "score": 2,
-          "reason": "封面和第 1 节写明：一志愿建议苏大计算机学硕（够一够）、同科目替代（苏大软件学硕）、退路（调剂、春招）和三件带日期的事；流程图给出出分后的分路。",
-          "report_location": "封面、01"
+          "reason": "封面和第 1 节写明：一志愿苏大计算机学硕（够一够）；六校没有数据可靠的稳妥档，保底是出分后调剂和春招，触发条件和时间写在第 8、9 节；流程图补了“复试通过？”分支。",
+          "report_location": "封面、p2、p9—p10"
         },
         {
           "id": "traceability",
-          "score": 1,
-          "reason": "官方数字均有原文摘录、链接与定位，录取者统计由附件匿名分数按登记算法复算；但河海2027目录、南航等四校当届科目与名单未取到，苏大名单为图片版靠看图抄录，统计只能核到抄录值。",
-          "report_location": "06、12、附录"
+          "score": 2,
+          "reason": "返工前扣分处：苏大名单只说“读图”，没写两次独立读图；未取到的项只写原因、没列试过的入口（原 p12）。返工后：E042/E044 范围与第 12 节写明图片版名单两次独立读图统计一致（p14 首段、来源组元信息）；第 12 节加“没取到的资料和试过的入口”表（p14），复核时又试了南航简章目录栏、南邮学院两个栏目、江大附件带来源页重试；官方摘录全部对本机原件逐字命中，统计由附件匿名分数复算。",
+          "report_location": "p14、附录"
         },
         {
           "id": "reasoning",
           "score": 2,
-          "reason": "每个候选有支持、反对、代价和可观察的改判条件（第二次模考位置、当届目录科目是否变化、联培地点是否接受、出分过线情况）。",
+          "reason": "每个候选有支持、反对、代价和可观察的改判条件；没有稳妥档时单独写保底路径的触发条件与时间（judgment.fallback_paths 与第 8 节路线卡）。",
           "report_location": "04、06、08、09"
         },
         {
           "id": "consistency",
           "score": 2,
-          "reason": "模考总分、分位数、差值、预算均由登记算法复算；verify_report 通过；同一数字全篇由同一引用展开。",
+          "reason": "模考总分、分位数、差值、预算均由登记算法复算；定档与 kaoyan_position.py 输出逐项断言一致；verify_report ok。",
           "report_location": "01、06、09、11"
         },
         {
           "id": "timeliness",
-          "score": 1,
-          "reason": "报名与初试规则为当届文件且在期内；复试线、名单、国家线只有上一届或前一届，已逐处标“上一届/前一届”；河海当届目录未取到。",
-          "report_location": "06、07、11"
+          "score": 2,
+          "reason": "返工前扣分处：复试线、名单、国家线只有上一届或前一届，原报告只在图表行标年份，没有集中说明怎么用、何时重算（原 p12 方法表）。返工后：方法表新增“数据年份”一行（p12），写明旧年数字只看位置、当届线公布后用新问卷重算；当届规则（报名、初试、差额复试、调剂、录取 4 月底前完成）都取自当届管理规定且在复核期内；河海当届目录未取到已标为待核，不作已核。",
+          "report_location": "p12、p9、p14"
         },
         {
           "id": "personalization",
           "score": 2,
-          "reason": "模考四科决定了哪些项目能定档；只留江苏决定了候选范围；“河海分数线不高”“南航名气大”等本人说法被逐条用官方原件核对；调剂与非全前后不一致列入追问。",
+          "reason": "模考四科决定哪些项目能定档；只留江苏决定候选范围；“河海分数线不高”等本人说法逐条用官方原件核对；软件工程学硕因画像里没有接受该方向的原话而不列入；调剂与非全前后不一致列入追问。",
           "report_location": "02、03、04、06、10"
         },
         {
           "id": "actionability",
           "score": 2,
-          "reason": "报名前三件事有日期与入口（研招网目录查科目、定志愿缴费、第二次模考与上机）；路线卡有门槛、时间窗口、投入和切换条件。",
-          "report_location": "01、07、08、10"
+          "reason": "报名前三件事有日期与入口；路线卡四栏齐；保底路线写明触发条件（过国家线没过苏大线或复试没过 → 调剂；没过国家线或无愿去余额 → 春招）和时间（国家线公布后到 4 月底；初试后即准备简历）。",
+          "report_location": "01、07、08"
         },
         {
           "id": "boundaries",
           "score": 2,
-          "reason": "档位注明是“模考在上一届录取者里的位置”，不是概率；不同卷不画对照点；只有复试线的不定档；不代报名、不代联系学校。",
+          "reason": "档位注明是“模考在上一届录取者里的位置”，不是概率；不同卷不画对照点；只有复试线、样本不足五人的不定档；五到九人最高“够一够”。",
           "report_location": "01、06、11、12"
         },
         {
           "id": "summary_access",
-          "score": 1,
-          "reason": "摘要能读懂建议和理由；但“下四分位”“中位数”仍需看第 11 节术语表，核心结论条目偏长。",
-          "report_location": "01"
+          "score": 2,
+          "reason": "返工前扣分处：p2 核心结论用“下四分位”“中位数”等术语、五条偏长，数字卡第三张是专业说法。返工后：核心结论改为四条，用“分数靠后那一段的人”“正中间那个人”这类说法；数字卡第三张改为“稳妥档：六校都没有”；摘要首句直接写一志愿、没有稳妥档、保底靠什么。",
+          "report_location": "p2"
         },
         {
           "id": "layout",
-          "score": 1,
-          "reason": "版面门禁通过、逐页速览已看；数字卡第三张标签偏长，不定档表中年份括号偶有换行；待独立视觉复核。",
-          "report_location": "01、06"
+          "score": 2,
+          "reason": "返工前扣分处：p2 数字卡“一年涨 42 分”折行、p8 不定档表年份括号把“2025 年”拆在两行、p6 的第 6 节导语跨页。返工后：数字卡换成短值；表格年份改为“（2026）”不再折行；逐页速览 25 页已看，版面门禁通过，无空页、无挤压。",
+          "report_location": "p2、p7、p8"
         }
       ],
-      "total": 16
+      "total": 20
     },
     "pitfalls": [
       {
@@ -128,74 +128,74 @@
     ],
     "limitations": [
       "操控者尚未填写核查单，未经独立复核，不能据此交付真实客户。",
-      "苏大2026拟录取名单是无文字层的图片版，初试分为看图抄录；条数与学院计划数一致，但仍建议独立复核再看一遍原图。",
-      "内容合同要求有完整模考时所有学校候选都要定档且三档齐全，不定档的十项放在 candidates.json 的 survey_programs（工具不检查），请主审确认这种放法是否合适。",
-      "河海软件学硕“相对稳妥”只因两届中位数都低于模考，但上一届一志愿只录三人，样本极小，判断里没有把它作为首选。"
+      "苏大2026拟录取名单是无文字层的图片版，初试分为看图抄录，两次独立读图一致；仍建议独立复核再看一遍原图。",
+      "南航、南邮、江大、南理工的当届科目与录取名单换入口后仍未取到，八项维持不定档。",
+      "软件工程学硕两项按复核意见移除（画像无接受该方向的原话）；若本人补充愿意读软件工程，再按新规则加回定档。"
     ],
     "sampled_sources": [
       {
-        "id": "E013",
-        "claim": "全国初试末日",
-        "source_url": "http://www.moe.gov.cn/srcsite/A15/moe_778/s3261/202609/t20260923_1451734.html",
-        "locator": "第三十六条",
-        "excerpt": "第三十六条 初试方式均为笔试。初试时间为2026年12月19日至20日。",
+        "id": "E040",
+        "claim": "苏大计算机技术专硕当届公开招考计划",
+        "source_url": "https://yjs.suda.edu.cn/ea/62/c8386a715362/page.htm",
+        "locator": "招生计划表 018 学院行",
+        "excerpt": "018 计算机科学与技术学院 085404 计算机技术 全日制 10",
         "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；图片版名单逐行看图核对；不是搜索摘要",
-        "original_sha256": "33a54508d6f870ec8445a2c5ba66511f9c461f0b795dec29dfa85a8e6cfffc2d",
+        "original_sha256": "2c50edae0ee681c39de96c5011bb2d6b36b6d7495ea1b28158f45cc70d2fcb2b",
         "retrieved_on": "2026-10-20",
         "matches": true
       },
       {
-        "id": "E051",
-        "claim": "河海计算机学硕联培方向上一届复试线",
-        "source_url": "https://gs.hhu.edu.cn/2026/0323/c17366a327227/page.htm",
-        "locator": "基本要求表 计算机与软件学院行",
-        "excerpt": "081200 计算机科学与技术（01 方向） 学术学位 303",
+        "id": "E057",
+        "claim": "河海计算机学硕上一届初试数学科目",
+        "source_url": "https://gs.hhu.edu.cn/2025/0930/c17279a308103/page.htm",
+        "locator": "专业目录 计算机与软件学院",
+        "excerpt": "081200 ▲●计算机科学与技术（学术学位）…初试科目：①101 思想政治理论 ②201 英语（一） ③301 数学（一） ④408 计算机学科专业基础",
         "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；图片版名单逐行看图核对；不是搜索摘要",
-        "original_sha256": "0a955ed925444038470e8409f5767bc15596752fe65a504c7e1303c3645c797e",
+        "original_sha256": "84246307e8b581ca65f32aed437bfe6d9711b21a02560629c0d75edbb0914374",
         "retrieved_on": "2026-10-20",
         "matches": true
       },
       {
-        "id": "E054",
-        "claim": "河海计算机学硕普通方向前一届复试线",
-        "source_url": "https://gs.hhu.edu.cn/2025/0316/c17366a303969/page.htm",
-        "locator": "基本要求表 计算机与软件学院行",
-        "excerpt": "081200 计算机科学与技术（01-04 方向） 学术学位 308",
+        "id": "E073",
+        "claim": "河海报考点报名费支付截止",
+        "source_url": "https://gs.hhu.edu.cn/2026/1008/c17279a335919/page.htm",
+        "locator": "公告二、网上报名 3",
+        "excerpt": "选择河海大学报考点的考生，提交报考信息后，须在2026年10月24日22:00前网上支付报名考试费，否则报名无效。",
         "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；图片版名单逐行看图核对；不是搜索摘要",
-        "original_sha256": "3fc13461a0dcf714c1a1d0694ff56a58334578d8fdb6aa5b8943e70e719517f6",
+        "original_sha256": "9864341627b399e38a733278d5198d8c968eb6a0d386a9728d4e25868ea0ea38",
         "retrieved_on": "2026-10-20",
         "matches": true
       },
       {
-        "id": "E064",
-        "claim": "河海计算机学硕普通方向前一届统考计划",
-        "source_url": "https://cies.hhu.edu.cn/2025/0317/c4093a299663/page.htm",
-        "locator": "细则二、招生计划表 第1行",
-        "excerpt": "1 081200 计算机科学与技术（01 数据与知识工程，02 分布式计算与安全，03 智能信息处理，04 计算机视觉与领域建模） 18",
+        "id": "E090",
+        "claim": "南邮计算机学硕上一届复试线",
+        "source_url": "https://yzb.njupt.edu.cn/_t632/2026/0319/c7797a298050/page.htm",
+        "locator": "复试基本分数线表 计算机学院行",
+        "excerpt": "计算机学院/软件学院/网络空间安全学院 081200 计算机科学与技术 学术学位 全日制 303",
         "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；图片版名单逐行看图核对；不是搜索摘要",
-        "original_sha256": "2fce2f0de0e524975b73d4d26d202109d648675f3de51465f560d8cac6a5ad4d",
+        "original_sha256": "49ba82b8ab0e82620086b4856407200d5c15024ad82bcbd1ec041a71e762e6ad",
         "retrieved_on": "2026-10-20",
         "matches": true
       },
       {
-        "id": "E065",
-        "claim": "河海计算机学硕普通方向上一届一志愿建议录取初试分",
-        "source_url": "https://cies.hhu.edu.cn/2026/0403/c4093a324246/page.htm",
-        "locator": "建议录取名单 081200 02—05方向各行（初试成绩列）",
-        "excerpt": "计算机与软件学院 081200 计算机科学与技术（02 数 据与知识工程) 全日制 … 392 270.90 662.90",
-        "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；图片版名单逐行看图核对；不是搜索摘要",
-        "original_sha256": "6c52e61c00657317868796932d35e8ef579e9078d29a479dfbd021a25c5d1c45",
-        "retrieved_on": "2026-10-20",
-        "matches": true
-      },
-      {
-        "id": "E094",
-        "claim": "南邮计算机学硕前一届录取人数",
+        "id": "E092",
+        "claim": "南邮计算机学硕前一届复试线",
         "source_url": "https://yzb.njupt.edu.cn/2025/0526/c7813a284312/page.htm",
         "locator": "报考录取情况表 004 学院行",
         "excerpt": "004 计算机学院 081200 计算机科学与技术 学术型 全日制 253 104 289 17 1 50",
         "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；图片版名单逐行看图核对；不是搜索摘要",
         "original_sha256": "ac18c1fa6d0ae22e82dd54c81bef419fb13f58cbf75c93996e405b32bb7f20c5",
+        "retrieved_on": "2026-10-20",
+        "matches": true
+      },
+      {
+        "id": "E100",
+        "claim": "江大计算机学硕上一届复试线",
+        "source_url": "https://yz.jiangnan.edu.cn/info/1075/3747.htm",
+        "locator": "复试基本分数线表 学院行",
+        "excerpt": "人工智能与计算机学院 081200 计算机科学与技术 326 35 53",
+        "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；图片版名单逐行看图核对；不是搜索摘要",
+        "original_sha256": "9fca36e2da5f7918934abe07df3d1d1d21d806ff953ec8466205533be92c5532",
         "retrieved_on": "2026-10-20",
         "matches": true
       }
@@ -212,11 +212,11 @@
       "E015",
       "E016",
       "E017",
+      "E018",
       "E020",
       "E021",
       "E022",
       "E030",
-      "E031",
       "E032",
       "E033",
       "E034",
@@ -224,33 +224,26 @@
       "E036",
       "E037",
       "E038",
-      "E039",
       "E040",
       "E041",
       "E042",
-      "E043",
       "E044",
       "E050",
       "E051",
-      "E052",
       "E053",
       "E054",
-      "E055",
       "E056",
       "E057",
       "E058",
       "E059",
       "E060",
       "E061",
-      "E062",
       "E063",
       "E064",
       "E065",
       "E066",
-      "E067",
       "E068",
       "E069",
-      "E070",
       "E071",
       "E073",
       "E080",
@@ -272,30 +265,30 @@
       "E122"
     ],
     "picked": [
-      "E013",
-      "E051",
-      "E054",
-      "E064",
-      "E065",
-      "E094"
+      "E040",
+      "E057",
+      "E073",
+      "E090",
+      "E092",
+      "E100"
     ]
   },
   "snapshot": {
-    "case.json": "ac97a7080641f40a08c48e9f3a41393c64473d0e47b2186e5110a27e228e32b7",
+    "case.json": "655f1d50c312a51954513032151789638f5f891a6ca2dec3a570ac2d20ed5d1d",
     "profile_parse.json": "20107f71f9c2ed1d7b7198ad470d1be169109141f501371ea2c7181282f25078",
-    "directions.json": "134d36a4b46e85c3133f25930399b3c693bf31c86039657d748621fbc30ce162",
-    "rules_check.json": "edbd0b8ae2d25a74695b1216e34e7cdc7cc1608edc8575c5895c26ffe937b55a",
-    "candidates.json": "e79ae221ecdeeceba968baf7e5e93307ca88928534f6154ad320294b499ad673",
-    "evidence.json": "663e09dc265b94b2d2452e210296f0d3911424269dbdcc7f9dd6429c8e1bb4c3",
-    "calculations.json": "558d67aa8b70aa6b4e4b39c92038e0bc8de89fba82e577266752e2d5a75a6dce",
-    "judgment.json": "40f89552007be27b13653498965660eecf820e8fae4699a4b6af461325e33808",
-    "narrative.json": "2d91c4c1b7b92471faddfaa29b25a16761b536a5f7940d724e59323e44749f3c",
+    "directions.json": "8ad0808073c7627967e3dc5571f965b22443af0eec6580e9176ef2c65bf0a585",
+    "rules_check.json": "70e1603a31f07b3ac7607e26ebf615ee80e88a50cd37a8c0683116f96fa963ff",
+    "candidates.json": "63777e211bd6d4babb4e05a4f0038127bb4e81270399bc3c9eecdf83c9e40e7e",
+    "evidence.json": "de338cc972b0360842391182344949a6fca30ed9979af69ec065f94a324bd4dd",
+    "calculations.json": "a529584576aa1515c8a7cce9cc3cc3949f40c9c024ba4f60a979bd1c5cd16f35",
+    "judgment.json": "5bfea749988de77be09167a8f015cad007c477b14ea7e30bb6d12ce2c91505ca",
+    "narrative.json": "c37c43362d9670a4cd76263f46041df9d346fee8f54e51f675835d0565346da7",
     "profile.json": "af232e95b42de1286681d5b04d706bbd8d16d3dd86cfe304a7d87e5a6bfcab88",
     "profile-supplement.txt": "952368202eeb2cd031c6c0d52212442dca0faaadcd6c99828f951e50ba15d704",
-    "report.md": "8b1375407187419a4f3d21bd895946408f7f0f506f7504265d08d935b4e56f0d",
-    "report.html": "ee2b1c3262dea77f48498f766d10cd8d8bd289ea15f9f3c0ce55678c18c6a8fb",
-    "report.pdf": "f2de2313c0de422aa8146af531fbb9d8429ea8b1130b0f419066b8fe732a25ca",
-    "report_trace.json": "8af50bcfeb2e38b68daa29d1aa493381a675314ddb179bc5db342003b22e6ec6",
-    "operator_check.md": "b3826e9576a2fba96dcb7853493cd97bd6231fa5cf8725460c39c99d643ada70"
+    "report.md": "8fafdbff958f3eab5c956544de18b0d80994469953905e935038562e8a434d48",
+    "report.html": "96ebed1616d6983adc5b590b728827ddc93c398a8725ea66aa14aff080d5487f",
+    "report.pdf": "9b1048c9ee950c0198daa978c19617f2b299806907f79ba422147feb3f81794a",
+    "report_trace.json": "fcbad06dbd2d68057b464db179c2fe45a893219dfafe156f4567e60dc1ac73fb",
+    "operator_check.md": "24ba4ccbafa762be2621e1d449d64d64985cf1ac74539fa537f854e6e6ec3fd4"
   }
 }
