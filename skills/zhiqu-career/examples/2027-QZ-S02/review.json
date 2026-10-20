@@ -170,15 +170,15 @@
     "directions.json": "5b2397e7ee4e80db6b8b1b6bf0834869aabbf282dcfecc6f23c4c706d476cc76",
     "rules_check.json": "d887941488483a7992cfbe1fb174550f3fdb3083d8c597a1cdcc43f1eee9d198",
     "candidates.json": "e2d7abe22fb7375e3190e21a8f801c264fbed4b7fdaab066193cc48a35ff98f1",
-    "evidence.json": "c728cb3d1ed7fa40510ac2dd56c113a5374c76b7f8b243a7bf435a2d4876ddc0",
+    "evidence.json": "92ac60740f28924a3b80ffef547bde799e0c51e6b0d591361ffca72b2dfc94e2",
     "calculations.json": "8e8135c7483b79dbc2d7ed702e1d9add2628ccf852da45c3d957f1e3f05d98f5",
-    "judgment.json": "f26d3e35c9315c71694d0bc08ced1924309304526546300264a7df3bc4abd8cc",
-    "narrative.json": "b214b62fffffce27ee435ab86d6ffe0af186e4ee426b73c31912075dfcb34660",
-    "report.md": "21453d34410b026363848376fe5206b0761fac2ec0c0c414f7e43b7093637657",
-    "report.html": "63150c350c792476a6f39812890b23314e74c1abe801481c92c45df8aefb50a3",
-    "report.pdf": "1b85b8d33cd1c26de60510f975e90e6064cf66977279fcaf57134e60f9b3da75",
-    "report_trace.json": "ee76a1a513d3f7295301fe6eb4c22fd435163e79e698e944142b8cb2ef255e95",
-    "operator_check.md": "89816ba4b1c7df7969cb9be755db95b916217a01c211b9cbd6881497233c6ce6",
+    "judgment.json": "5c913bab47c7220eb52e9c907187a8bbcaf45fc3710cee9d675c28ceff68af57",
+    "narrative.json": "cbfcc57d7627dd98c04dc98826b0bb4968862aa318b31708b2598ed39e47f121",
+    "report.md": "4c2faff37c2d52fff6e9db85111b2bd4dbb034bc846444ec2c561915bb51b8fd",
+    "report.html": "35b109de4247ba44d2183739d363ee2b6fb9da9d6a67155b2344883ec978e03a",
+    "report.pdf": "cb427e30a2df0641e98ff2ee66579b1d7b55c4b49e5ab13e6c49c2a1481f61da",
+    "report_trace.json": "1538d243078804b31e36afc2661b74969084d3078a71e19e6296f39b4fa1a2a2",
+    "operator_check.md": "e9c6f250861eb7ab99db2b659d77a73ace9d087b23a656666cc9707877c2b258",
     "profile.json": "e985adff4dc5eb31443eef9a859f0e7955f84936dd8dab27a61b56e4b2e50d29",
     "profile-supplement.txt": "7ae0beb59e74158ec5ff869bb796f5cf3352fb7fa5c9ab7172ee930e91c93360"
   },
@@ -203,6 +203,21 @@
         "report_trace.json"
       ],
       "reason": "修正数字防拆行标记被其他样式套用（封面编号拆行、摘要卡里数字变大）后重新生成；正文 report.md 与全部输入文件未变，自评结论不受影响。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "evidence.json",
+        "judgment.json",
+        "narrative.json",
+        "report.md",
+        "report.html",
+        "report.pdf",
+        "report_trace.json",
+        "operator_check.md"
+      ],
+      "reason": "报告改版（2026-10-20）：正文给读者、第 12 节“核对与来源”给核对；比较矩阵、追问、风险改为三类报告共用的卡片和标记，图表配色统一。 没有 offer：第 09 节改名“现金能撑多久”，加一张可支撑月数条形图，数据全部取自已有 calculations.json（evidence.json 新增图块、judgment.json 登记、narrative.json 只改节标题）；结论不变。"
     }
   ]
 }

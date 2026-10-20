@@ -14,13 +14,13 @@
     "profile.json": "e985adff4dc5eb31443eef9a859f0e7955f84936dd8dab27a61b56e4b2e50d29",
     "profile-supplement.txt": "7ae0beb59e74158ec5ff869bb796f5cf3352fb7fa5c9ab7172ee930e91c93360"
   },
-  "contract_sha256": "f7d65b60e54e2cbb4bbfeaf5eb22e59512075cd6e0890a84be64533b9edbec18",
+  "contract_sha256": "afacb35fd00373a1e89752eab86bd1ec000b374028216c571e2131ad99e8e821",
   "tool_sha256": {
     "planning_report.py": "c081861d47fc087bac49bbcf976859252378789e4de94c0e05cdb96b7302ee09",
     "planning_workflow.py": "ee2d438232e89d2abbaef38ac668fdcd6cc6aea42f554b44408e67fdd7186d13",
     "operator_check.py": "a6552c0b63a8a6b5d15c9a1057fbc2884fb85435b1b102fbf4a48dd74c4e7ebb",
     "check_demos.py": "fc8e1625f9e052373756160514ad5c73db1e8451c233425918edb5bc839d9f63",
-    "report.py": "d7450ba7b17718edafa23682f42db265af31cc0bb1f64521510b9ce4545f996e",
+    "report.py": "be60413e446a8dc53f68f14351a681811bfc49ed47c480a3a4281a1dc7274d94",
     "render_report.py": "707d4a3dd6780cc249ddd5620f37152d525313c3a64de75c676758eef11fb5c8",
     "profile_store.py": "1cfd828583598a65cf719a46447cb3112ef0170eb1a638b89ab023cb47a04e7f"
   },
@@ -484,8 +484,8 @@
   ],
   "artifacts": {
     "report.md": "4c2faff37c2d52fff6e9db85111b2bd4dbb034bc846444ec2c561915bb51b8fd",
-    "report.html": "eccc6bb17050dee1b1fa96a31ebd95d1dc27b1a7327901969c96eef2dc194758",
-    "report.pdf": "ffb2416e16aed217752c32174f48d2247a4bef8e2f732903ba790812a037cb66"
+    "report.html": "35b109de4247ba44d2183739d363ee2b6fb9da9d6a67155b2344883ec978e03a",
+    "report.pdf": "cb427e30a2df0641e98ff2ee66579b1d7b55c4b49e5ab13e6c49c2a1481f61da"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "report_profile": {
@@ -496,6 +496,6 @@
   },
   "verification_tools_sha256": {
     "verify_report.py": "ebcf0825e96d349585935e4d76e29fa6d0aa51e402c3a3968b3dd673045f0856",
-    "verification_calculations.py": "9ac916e796eab7676a4054b27d40674a25a0e78f8a5a9837f32ab9941381dea9"
+    "verification_calculations.py": "fc02d9890d3a82a98fd381df093114d3b59b66aeb020a818c64bddb52b7482ff"
   }
 }

@@ -212,6 +212,49 @@ def _legacy_description(case, path):
     raise ValueError('计算核对说明尚未覆盖：' + path)
 
 
+
+# 核对表里的计算项名称：把登记路径翻成中文，读者和其他 AI 不用猜英文字段名。
+WORDS = {'additional_scenarios':'补充情景', 'hypothetical_followup':'假设情景', 'gdut_2026_first_choice_retest_scores':'广工 2026 一志愿复试成绩',
+         'excluded_soldier_rows':'剔除的退役士兵专项人数', 'full_time_rows':'全日制复试人数', 'score_histogram':'分数频数',
+         'gdut_2026_retest':'广工复试换算', 'initial_increment':'初试加分', 'initial_max':'初试满分', 'initial_weight':'初试权重',
+         'retest_increment':'复试加分', 'retest_weight':'复试权重', 'gdut_fee_reference':'广工费用参照', 'annual_housing_assumption':'年住宿假设',
+         'annual_limit':'年度预算上限', 'living_months':'生活月数', 'monthly_living_assumption':'每月生活费假设', 'target_cohort':'目标年级',
+         'annual_cost_if_living_plus_200':'生活费每月多 200 元时的年费用', 'annual_margin_if_living_plus_200':'生活费每月多 200 元时的预算余量',
+         'budget':'预算', 'annual_housing':'年住宿', 'daily_hours_ceiling':'每日工时上限', 'hourly_if_housing_fund_counted':'计入公积金的时薪',
+         'hours_per_year':'年工时', 'housing_fund_account_total':'公积金账户年合计', 'offers':'offer', 'extra_hours_per_month':'每月加班小时',
+         'hf_rate':'公积金比例', 'monthly_gross':'税前月薪', 'monthly_other':'每月其他支出', 'monthly_rent':'每月房租', 'months':'发薪月数',
+         'score_scenarios':'分数情景', 'ss_personal_rate_assumption':'个人社保比例假设', 'standard_hours_per_year':'标准年工时',
+         'initial_increment_contribution':'初试加分对总成绩的贡献', 'retest_increment_contribution':'复试加分对总成绩的贡献',
+         'sample_reconciliation_2025':'2025 名单核对', 'joint':'联合培养人数', 'minority':'少数民族骨干人数', 'ordinary':'普通计划人数',
+         'soldier':'退役士兵人数', 'total':'合计', 'living_increment':'生活费增量', 'luck_start_year':'起运年份',
+         'monthly_remaining_if_housing_plus_600':'房租多 600 元时每月结余', 'months_per_year':'每年月数', 'reference_wages_cny':'工资价位参考',
+         'p10':'第 10 百分位', 'p25':'下四分位', 'p50':'中位数', 'p75':'上四分位', 'p90':'第 90 百分位', 'remaining_cash':'结余',
+         'take_home_cash':'到手现金', 'offer_b_ordinary_month':'offer B 普通月', 'social_insurance_base':'社保基数', 'total_cost':'总费用',
+         'hypothetical_offers':'假设 offer', 'illustrative_parameters':'示意参数', 'scut_reference_statistics':'华工录取统计',
+         'buffer_months':'预留应急后可支撑月数', 'higher_rent_months':'房租提高后可支撑月数', 'all_cash_months':'动用全部现金可支撑月数',
+         'spendable':'可动用现金', 'monthly_cost':'每月支出', 'high_monthly_cost':'房租提高后每月支出', 'report_parameters':'', 'report_constants':''}
+
+
+def cn_label(path, fallback):
+    """登记路径 → 中文名；有不认识的片段时退回原名，不猜。"""
+    parts = []
+    for segment in path.strip('/').split('/'):
+        pieces = segment.split('__')
+        for i, piece in enumerate(pieces):
+            prev = pieces[i-1] if i else (parts and None)
+            if piece.isdigit():
+                n = int(piece)
+                if i and pieces[i-1] == 'score_histogram': parts.append(f'{n} 分人数')
+                elif i and pieces[i-1] == 'offers' or segment == piece and path.startswith('/hypothetical_offers/'): parts.append('ABCDEFGH'[n] if n < 8 else str(n + 1))
+                else: parts.append(f'第 {n + 1} 个')
+                continue
+            if piece in WORDS:
+                if WORDS[piece]: parts.append(WORDS[piece])
+            elif any('\u4e00' <= ch <= '\u9fff' for ch in piece): parts.append(piece)
+            else: return fallback
+    return '·'.join(parts) or fallback
+
+
 def calculation_rows(case, profile, evidence, calculations):
     """Describe each numeric leaf. Caller maps paths to actual report sections."""
     fresh = recompute(case, profile, evidence, calculations)
@@ -231,7 +274,7 @@ def calculation_rows(case, profile, evidence, calculations):
         if not numeric(value): continue
         inputs, formula = _legacy_description(case, path)
         key = path.rsplit('/',1)[-1]
-        row = _row(path, labels.get(key, key), value, inputs, formula)
+        row = _row(path, labels.get(key) or cn_label(path, key), value, inputs, formula)
         if path.startswith('/scut_reference_statistics/') or (path.startswith('/report_parameters/') and
                 '/official_stats/' in case['calculation_plan']['display_inputs'][key].get('case_pointer', '')):
             row['verification_limit'] = '未附原始名单，只能复核与登记的官方匿名统计一致，不能从原始名单独立重算分位数或人数。'

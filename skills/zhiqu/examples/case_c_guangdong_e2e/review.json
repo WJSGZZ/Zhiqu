@@ -81,8 +81,8 @@
     ]
   },
   "snapshot": {
-    "report.json": "1243d4b12375b8a43d6108f905b183f5148db93c17057be49ab2c590067b35a1",
-    "report.pdf": "6982155aa7b93b5549251327f84649f6fe8254c734c2f14e2291a956331a5f55",
+    "report.json": "736cdff47255f4cdea4800bec54905e61368b944aa746621f4d1be160132c3fb",
+    "report.pdf": "c9ed7a9a4e39eaa8ed7312e35933d9d6ae0af31deffaa5ab05876c37496c8cf3",
     "operator_check.md": "ccb070b7261ee86357d92aa1125f3ea1a6a0356501eed2b05e01175a7e38cde6",
     "result.json": "98e1ca504a93a3b25fcd72be5eff65f37aaa10399f4ba6549a56a18925710c6f",
     "case.json": "32c9030dc02b30600366e0a75c7b730af2ddb153e42cea3706bb3f93d998c542",
@@ -91,5 +91,16 @@
   "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。",
   "self_assessment": {
     "verification_scope": "本轮更新为附核对材料的PDF，自评和机器核对通过后仍等待独立审核；未补造官方原文和独立批准。"
-  }
+  },
+  "snapshot_refreshes": [
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.json",
+        "report.pdf"
+      ],
+      "reason": "报告改版（2026-10-20）：正文给读者、第 12 节“核对与来源”给核对；比较矩阵、追问、风险改为三类报告共用的卡片和标记，图表配色统一。 院校调研加了每个方面一句话的卡片（brief，只概括原调研“发现”，不加新事实或数字），原表移到第 12 节。志愿、概率、排序和结论不变。"
+    }
+  ]
 }

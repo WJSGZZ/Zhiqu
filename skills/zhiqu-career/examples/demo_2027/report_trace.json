@@ -13,14 +13,14 @@
     "narrative.json": "68bcf0b7ceed018f59f25d5985f288cf82b031288c786c0fd13f24d102cf2e48",
     "profile.txt": "69dfeb57cf005a4ace3990e51a96b3b821e9de0c130dd1f8eae5b2088f5bef5e"
   },
-  "contract_sha256": "affc47ff0df415d88221ddee76feb600856414b92cdd1c56130f86938e5cd381",
+  "contract_sha256": "afacb35fd00373a1e89752eab86bd1ec000b374028216c571e2131ad99e8e821",
   "tool_sha256": {
-    "planning_report.py": "8d698258e1450570ac3f4691a9aff48661c260da9138f06c343803d821c74995",
-    "planning_workflow.py": "11717f0a5a3da33cc870959d127b86a952ce4390741dfce2f3953870498c632f",
+    "planning_report.py": "c081861d47fc087bac49bbcf976859252378789e4de94c0e05cdb96b7302ee09",
+    "planning_workflow.py": "ee2d438232e89d2abbaef38ac668fdcd6cc6aea42f554b44408e67fdd7186d13",
     "operator_check.py": "a6552c0b63a8a6b5d15c9a1057fbc2884fb85435b1b102fbf4a48dd74c4e7ebb",
     "check_demos.py": "fc8e1625f9e052373756160514ad5c73db1e8451c233425918edb5bc839d9f63",
-    "report.py": "042c41525bca5901b3f738028bb74a0d12b33f77baf5e883897582bed39c7180",
-    "render_report.py": "e85ed74d89613ce9ba1017680c14ef385624b5892151b1c1ce472ef4e1748676",
+    "report.py": "be60413e446a8dc53f68f14351a681811bfc49ed47c480a3a4281a1dc7274d94",
+    "render_report.py": "707d4a3dd6780cc249ddd5620f37152d525313c3a64de75c676758eef11fb5c8",
     "profile_store.py": "1cfd828583598a65cf719a46447cb3112ef0170eb1a638b89ab023cb47a04e7f"
   },
   "numeric_refs": [
@@ -1196,9 +1196,9 @@
     }
   ],
   "artifacts": {
-    "report.md": "77f566208464a0aae4ba61541e137a2803636efa1e1fbd7dad365992e34fe792",
-    "report.html": "bf3ac23613bdf323523a2be42679e85d66c22effdf5ae21fd1a03c235105611f",
-    "report.pdf": "18cf14940162dab2483d76385e08a71e3cf59a5cf1971c856b44d0335a9bc12c"
+    "report.md": "af9705f1edb0290ca839eed6e765fc4c5e4fc3a285fbefa5724953e5c1de77f9",
+    "report.html": "3c3169762aecc4f9c5a4ec40b35d18f3d0ffae22dcfa4e53706b6863967510f9",
+    "report.pdf": "1b66515fac12f74dd2d194e4de0b91531c8c63ce455ccbbd2465960b5a712ec5"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "report_profile": {
@@ -1208,7 +1208,7 @@
     "form": null
   },
   "verification_tools_sha256": {
-    "verify_report.py": "f2956275f3d7da63daca855782729e5c9864db03bb4c9c3d84989744c1baf453",
-    "verification_calculations.py": "9ac916e796eab7676a4054b27d40674a25a0e78f8a5a9837f32ab9941381dea9"
+    "verify_report.py": "ebcf0825e96d349585935e4d76e29fa6d0aa51e402c3a3968b3dd673045f0856",
+    "verification_calculations.py": "fc02d9890d3a82a98fd381df093114d3b59b66aeb020a818c64bddb52b7482ff"
   }
 }

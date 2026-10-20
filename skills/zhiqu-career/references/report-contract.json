@@ -1216,7 +1216,7 @@
     {
      "key": "runway",
      "component": "bars",
-     "min": 1,
+     "min": 0,
      "max": 1,
      "from": [
       {
@@ -1233,7 +1233,8 @@
      "rules": [
       "no_offer_shows_how_long_spendable_cash_lasts",
       "no_new_income_assumed",
-      "emergency_reserve_is_risk_boundary"
+      "emergency_reserve_is_risk_boundary",
+      "optional_only_when_cash_and_spending_inputs_exist"
      ],
      "count_by": "components",
      "node_types": [

@@ -81,14 +81,26 @@
     ]
   },
   "snapshot": {
-    "report.json": "2dcb216fc1572c076f9564821449659a0861f61ad99f3324a89c37fdb4460942",
-    "report.pdf": "b037d177d50955d5c91101566ef67ba1a0f0d07da6dd8ae6a0fd0ecdf7acd2c3",
-    "operator_check.md": "19f029a727cafc9d0e74404e352899f5a08f2201617f09b88803c20d4c55af5d",
+    "report.json": "2c77664a1638690c3dd18afc58b70c358c9d3b04f92a70ccaa17b2a83ce06eb2",
+    "report.pdf": "618e5abce9188af85909ff460792f76ce90b26e89a9a312c8adcdc9e8f9e81df",
+    "operator_check.md": "a229b3c1008b803f4058d7ea7d4fe908a7a913c9b1a3e4531b53a9a261f43df9",
     "retro_ranks/58000/result.json": "de51b44a437b1e370221b1275c312c16cf5d3974d70af1df23990c3cb653adad",
     "case.json": "48bb5302cbe1c2c44fa52d6d725484a4a18a213705250594f70ffce97f9e4421",
     "profile_snapshot.json": "8d7e6f0cacacd2242473cff64bafdb7dedf04ffbb25c1d194374ee0b0cf3f5a0"
   },
   "self_assessment": {
     "verification_scope": "本轮更新为附核对材料的PDF，自评和机器核对通过后仍等待独立审核；未补造官方原文和独立批准。"
-  }
+  },
+  "snapshot_refreshes": [
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.json",
+        "report.pdf",
+        "operator_check.md"
+      ],
+      "reason": "报告改版（2026-10-20）：正文给读者、第 12 节“核对与来源”给核对；比较矩阵、追问、风险改为三类报告共用的卡片和标记，图表配色统一。 院校调研加了每个方面一句话的卡片（brief，只概括原调研“发现”，不加新事实或数字），原表移到第 12 节。志愿、概率、排序和结论不变。"
+    }
+  ]
 }

@@ -174,10 +174,10 @@ class ReportSections(unittest.TestCase):
 
 
     def test_only_cover_forces_page_break(self):
-        # 文中强制分页会让上一节剩一两行独占一页，留下大片空白；只允许封面之后分页一次
+        # 文中强制分页会让上一节剩一两行独占一页，留下大片空白；只允许封面之后、第 12 节“核对与来源”之前各分页一次
         with open(os.path.join(SAMPLE, "report.html"), encoding="utf-8") as f:
             html = f.read()
-        self.assertEqual(len(re.findall(r'<section class="newpage"(?: data-section="\d+")?>',html)), 1)
+        self.assertEqual(re.findall(r'<section class="newpage"(?: data-section="(\d+)")?>',html), ["01", "12"])
         self.assertNotIn("avoid-page", html)
 
 RETRO = os.path.join(ROOT, "examples", "2026-GK-R01")

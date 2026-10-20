@@ -52,6 +52,8 @@ h3 { font-size: 12pt; margin: 6mm 0 2mm; break-after: avoid; }
 p { margin: 0 0 2.6mm; }
 section { margin-top: 12mm; }
 section.newpage { break-before: page; margin-top: 0; }
+/* 节标题和第一句不单独留在页底：跟着下面的内容走。 */
+h2 + p, h2 + .lead { break-after: avoid; }
 p, li, dd { orphans: 3; widows: 3; }
 h4, dt { break-after: avoid; }
 svg.chart { width: 100%; height: auto; display: block; }
