@@ -106,9 +106,9 @@
     "narrative.json": "c8367bbda892a637559085198bd56f36d467199b2410f2773fcf2c02331fdb81",
     "profile.txt": "2be92b9770f7a4a877386334b958c096198b948c89c5eabca030d4f557e29457",
     "report.md": "beb0f1dd31d787c421cc0d1adf9ad49c7859d1c5e4e815aa2a9b807c8c780cb3",
-    "report.html": "cdbc9816101b983536e31aee989aa0aaf7b4e2771a1f7e6772fa7bf1adf010a2",
-    "report.pdf": "4cb9b18aeab767c90621c9ba23a1400bb7e1ff246154694cbc3b4e57074f4270",
-    "report_trace.json": "2e22fbdcacc6bdf068145c62ae28e85112dc104aa12c135e19a0ee1c7ec5ad5f",
+    "report.html": "eaa85cb01a094ad80923cc318d38b26ff06850503fbe85ba384261a91a4ddc14",
+    "report.pdf": "69b00745341c391219b3254c11e22e39f42af7714a2c3ce541f3631031422fbb",
+    "report_trace.json": "9423a28789f4045d2da94ea1e2fd5f00267874387a6d5459d7a88eb84466b84d",
     "operator_check.md": "d0eb523a7228070bca05cca14a16c5ca3ecccb92301fcd20ca36128d979ea9a7",
     "profile_snapshot.json": "432626de4888a0d461edc284e9c475796e8d96ce33683030143dcd3f896be032"
   },
@@ -221,6 +221,17 @@
         "report_trace.json"
       ],
       "reason": "第 12 节核对附录改为逐条可读：本人复合答案写成中文、同题不重复列；登记项、计算项和输入全部中文名（不再出现字段路径、英文键名和取文工具名）；同一数字的不同写法合为一条；候选共同前提只写一次；风险表逐条写成情况、为什么改判、怎么应对；新增非数字依据的原文摘录。新增 03 节卡点状态图；证据条目名改为中文（只改名称，原值与摘录未变）。结论不变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.md",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "报告底色改为与网页问卷一致的浅米色；内容未变。"
     }
   ]
 }
