@@ -1277,20 +1277,20 @@
           [
             "{{e:E1018#/value}} 普通计划",
             "{{c:/scut_reference_statistics/2026_普通计划/n}}",
-            "{{c:/scut_reference_statistics/2026_普通计划与基地计划/min}}",
+            "{{c:/scut_reference_statistics/2026_普通计划/min}}",
             "{{c:/scut_reference_statistics/2026_普通计划/q1}}",
-            "{{c:/scut_reference_statistics/2026_普通计划与基地计划/median}}",
+            "{{c:/scut_reference_statistics/2026_普通计划/median}}",
             "{{c:/scut_reference_statistics/2026_普通计划/q3}}",
             "{{c:/scut_reference_statistics/2026_普通计划/max}}"
           ],
           [
             "{{e:E1018#/value}} 基地计划",
             "{{c:/scut_reference_statistics/2026_基地计划/n}}",
-            "{{c:/scut_reference_statistics/2026_普通计划与基地计划/min}}",
+            "{{c:/scut_reference_statistics/2026_基地计划/min}}",
             "{{c:/scut_reference_statistics/2026_基地计划/q1}}",
-            "{{c:/scut_reference_statistics/2026_普通计划与基地计划/median}}",
+            "{{c:/scut_reference_statistics/2026_基地计划/median}}",
             "{{c:/scut_reference_statistics/2026_基地计划/q3}}",
-            "{{c:/scut_reference_statistics/2026_普通计划与基地计划/max}}"
+            "{{c:/scut_reference_statistics/2026_基地计划/max}}"
           ],
           [
             "{{e:E1019#/value}} 普通计划",
@@ -1316,7 +1316,7 @@
       "content": {
         "columns": [
           "假如华工同科目初试总分",
-          "{{e:E1043#/value}} 年录取者中的相对位置",
+          "{{e:E1018#/value}} 年录取者中的相对位置",
           "{{e:E1019#/value}} 年录取者中的相对位置",
           "决策含义"
         ],
@@ -1527,12 +1527,12 @@
           [
             "学费",
             "{{e:E0008#/value|comma}} 元／学年",
-            "华工 {{k:/target_year}} 非定向全日制能源动力 {{e:E1002#/value}}，学制 {{e:E1001#/value}} 年；不能外推到定向或广工"
+            "华工现有收费公示的非定向全日制能源动力 {{e:E1002#/value}}，学制 {{e:E1001#/value}} 年；不能外推到定向或广工"
           ],
           [
             "住宿预留",
             "{{c:/report_parameters/budget__annual_housing|comma}} 元／学年",
-            "华工 {{e:E1043#/value}} 全校收费公示的最高档作保守预留，不是小林已分配宿舍的价格"
+            "华工现有全校收费公示的最高档作保守预留，不是小林已分配宿舍的价格"
           ],
           [
             "生活费",
@@ -1582,8 +1582,8 @@
         "rows": [
           [
             "学费依据",
-            "{{k:/target_year}} 非定向全日制，每年 {{e:E0008#/value|comma}} 元",
-            "{{e:E1043#/value}} 同类型，每年 {{e:E1030#/value|comma}} 元；{{k:/target_year}} 待核",
+            "现有收费公示的非定向全日制，每年 {{e:E0008#/value|comma}} 元",
+            "{{e:E1023#/value}} 同类型，每年 {{e:E1030#/value|comma}} 元；{{k:/target_year}} 待核",
             "年份不同，不能称最终费用排名"
           ],
           [

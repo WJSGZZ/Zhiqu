@@ -276,5 +276,17 @@
       ],
       "reason": "用于正文对应的资格、方向、时间或承受条件判断；保留本人原话，不作官方认证。"
     }
-  ]
+  ],
+  "authoring": {
+    "model": "未记录"
+  },
+  "reference_units": {
+    "k:/budget/annual_limit": "元/年",
+    "c:/known_living": "元/年",
+    "c:/nonliving_ceiling": "元/年",
+    "c:/higher_living_ceiling": "元/年",
+    "c:/reserve_ceiling": "元/年",
+    "k:/target_year": "年份",
+    "c:/higher_living": "元/年"
+  }
 }

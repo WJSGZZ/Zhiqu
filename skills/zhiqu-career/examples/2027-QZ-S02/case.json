@@ -290,5 +290,16 @@
       ],
       "reason": "用于正文对应的资格、方向、时间或承受条件判断；保留本人原话，不作官方认证。"
     }
-  ]
+  ],
+  "authoring": {
+    "model": "未记录"
+  },
+  "reference_units": {
+    "c:/spendable": "元",
+    "c:/buffer_months": "月",
+    "c:/monthly_cost": "元/月",
+    "c:/higher_rent_months": "月",
+    "c:/all_cash_months": "月",
+    "c:/high_monthly_cost": "元/月"
+  }
 }

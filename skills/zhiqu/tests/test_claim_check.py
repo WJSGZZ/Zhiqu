@@ -85,4 +85,13 @@ class ClaimCheckTests(unittest.TestCase):
  def test_nonrendered_analysis_comment_is_excluded(self):
   self.node('学校必须采用999分。',kind='comment');self.assertEqual(cc.extract(FixtureCase(self.root)),[])
 
+ def test_rewritten_sentence_requires_different_effective_reviewer(self):
+  d=self.review();r=d['items'][0]['review'];r['author_session_id']='rewrite-session';r['reviewer']={'session_id':'rewrite-session','model':'model','independent':True};self.put('claim_check.json',d)
+  self.assertTrue(any('不能复核自己的句子' in x for x in self.errors()))
+  r['reviewer']['session_id']='cross-review-session';self.put('claim_check.json',d);self.assertEqual(self.errors(),[])
+
+ def test_rebuild_preserves_cross_reviewer_record_without_forging_coverage(self):
+  data=self.review();record={'session_id':'cross-session','model':'cross-model','independent':True,'manifest_sha256':data['manifest_sha256'],'claim_ids':[data['items'][0]['claim_id']]};data['cross_reviewers']=[record];self.put('claim_check.json',data)
+  self.node('学校要求初试总分达到300分，并参加面试。');rebuilt=self.manifest();self.assertEqual(rebuilt.get('cross_reviewers'),[record]);self.assertNotEqual(rebuilt['manifest_sha256'],record['manifest_sha256'])
+
 if __name__=='__main__':unittest.main()

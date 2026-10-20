@@ -28,5 +28,8 @@
     "sha256": "b12cc2cb12ceee8e620e0713627a0d604f3c190bd09a36519433d0ab18c4e2af",
     "filled_at": null,
     "form": null
+  },
+  "authoring": {
+    "model": "未记录"
   }
 }

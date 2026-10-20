@@ -35,7 +35,8 @@
       "source": {
         "organization": "中央机关考试录用公告（官方转载）",
         "url": "https://shanghai.chinatax.gov.cn/xxgk/rsxx/202610/t481763.html",
-        "locator": "一、报考条件第八项"
+        "locator": "一、报考条件第八项",
+        "sha256": "448e392f2748594e1a65a2990c2ac1971c406fe830dba611c03ae1647cb79e98"
       },
       "published_on": "2026-10-15",
       "retrieved_on": "2026-10-19",
@@ -61,7 +62,8 @@
       "source": {
         "organization": "中央机关考试录用公告（官方转载）",
         "url": "https://shanghai.chinatax.gov.cn/xxgk/rsxx/202610/t481763.html",
-        "locator": "二、报考程序：报名和提交申请"
+        "locator": "二、报考程序：报名和提交申请",
+        "sha256": "448e392f2748594e1a65a2990c2ac1971c406fe830dba611c03ae1647cb79e98"
       },
       "published_on": "2026-10-15",
       "retrieved_on": "2026-10-19",
@@ -87,7 +89,8 @@
       "source": {
         "organization": "中央机关考试录用公告（官方转载）",
         "url": "https://shanghai.chinatax.gov.cn/xxgk/rsxx/202610/t481763.html",
-        "locator": "三、考试内容时间：公共科目"
+        "locator": "三、考试内容时间：公共科目",
+        "sha256": "448e392f2748594e1a65a2990c2ac1971c406fe830dba611c03ae1647cb79e98"
       },
       "published_on": "2026-10-15",
       "retrieved_on": "2026-10-19",
@@ -113,7 +116,8 @@
       "source": {
         "organization": "中央机关考试录用公告（官方转载）",
         "url": "https://shanghai.chinatax.gov.cn/xxgk/rsxx/202610/t481763.html",
-        "locator": "二、注册认证"
+        "locator": "二、注册认证",
+        "sha256": "448e392f2748594e1a65a2990c2ac1971c406fe830dba611c03ae1647cb79e98"
       },
       "published_on": "2026-10-15",
       "retrieved_on": "2026-10-19",
@@ -139,7 +143,9 @@
       "source": {
         "organization": "国家电网高校毕业生招聘总公告",
         "url": "https://zhaopin.sgcc.com.cn/sgcchr/static/unitPart.html?bullet_id=dcefb56d04714dc4b488d0a7a204bf76",
-        "locator": "三、发布招聘公告"
+        "locator": "三、发布招聘公告",
+        "sha256": "7df871773cab12d563a4143f70aece32746d7b895683155f85a49551f90c5b7a",
+        "sha256_scope": "浏览器逐字节选（非原始HTML）"
       },
       "published_on": "2026-10-17",
       "retrieved_on": "2026-10-19",
@@ -165,7 +171,9 @@
       "source": {
         "organization": "国家电网高校毕业生招聘总公告",
         "url": "https://zhaopin.sgcc.com.cn/sgcchr/static/unitPart.html?bullet_id=dcefb56d04714dc4b488d0a7a204bf76",
-        "locator": "三、组织招聘笔试"
+        "locator": "三、组织招聘笔试",
+        "sha256": "7df871773cab12d563a4143f70aece32746d7b895683155f85a49551f90c5b7a",
+        "sha256_scope": "浏览器逐字节选（非原始HTML）"
       },
       "published_on": "2026-10-17",
       "retrieved_on": "2026-10-19",
@@ -191,7 +199,9 @@
       "source": {
         "organization": "国家电网高校毕业生招聘总公告",
         "url": "https://zhaopin.sgcc.com.cn/sgcchr/static/unitPart.html?bullet_id=dcefb56d04714dc4b488d0a7a204bf76",
-        "locator": "二、招聘批次"
+        "locator": "二、招聘批次",
+        "sha256": "7df871773cab12d563a4143f70aece32746d7b895683155f85a49551f90c5b7a",
+        "sha256_scope": "浏览器逐字节选（非原始HTML）"
       },
       "published_on": "2026-10-17",
       "retrieved_on": "2026-10-19",
@@ -217,7 +227,9 @@
       "source": {
         "organization": "国家电网高校毕业生招聘总公告",
         "url": "https://zhaopin.sgcc.com.cn/sgcchr/static/unitPart.html?bullet_id=dcefb56d04714dc4b488d0a7a204bf76",
-        "locator": "三、组织招聘笔试：考试大纲及电工类附件"
+        "locator": "三、组织招聘笔试：考试大纲及电工类附件",
+        "sha256": "7df871773cab12d563a4143f70aece32746d7b895683155f85a49551f90c5b7a",
+        "sha256_scope": "浏览器逐字节选（非原始HTML）"
       },
       "published_on": "2026-10-17",
       "retrieved_on": "2026-10-19",
@@ -297,7 +309,8 @@
       "source": {
         "organization": "企业具体岗位与工资条件",
         "url": "https://www.ncss.cn/",
-        "locator": "企业具体岗位与工资条件"
+        "locator": "企业具体岗位与工资条件",
+        "sha256": "e494441abecb9ba24352197911b3f3172eb1d212a368014280c1e1f8bed097d4"
       },
       "published_on": null,
       "retrieved_on": "2026-10-19",
@@ -382,7 +395,7 @@
       "type": "bars",
       "content": {
         "title": "不找到工作的话，现金能撑多久",
-        "caption": "都假设没有任何新收入。黛绿为原估计；琥珀为住房提高到每月 {{c:/high_monthly_cost|comma}} 元；红色为连应急金也全部动用，是风险边界，不建议默认这样做。",
+        "caption": "都假设没有任何新收入。黛绿为原估计；琥珀为住房提高后总月支出为 {{c:/high_monthly_cost|comma}} 元；红色为连应急金也全部动用，是风险边界，不建议默认这样做。",
         "rows": [
           [
             "原估计（每月 {{c:/monthly_cost|comma}} 元）",

@@ -5,7 +5,7 @@
       "id": "E0901",
       "claim": "毕业后需要收入的月数",
       "value": 3,
-      "unit": "",
+      "unit": "月",
       "source": {
         "organization": "客户本人",
         "url": "",
@@ -67,7 +67,8 @@
       "source": {
         "organization": "四川省 2024 年人力资源市场工资价位和行业人工成本信息",
         "url": "https://rst.sc.gov.cn/rst/gsgg/2025/7/7/770dc72520ef42c493044cfb1f8c404f.shtml",
-        "locator": "四川省 2024 年人力资源市场工资价位和行业人工成本信息；2025-07-07 发布；2026-10-19 curl 取正文与附件，按职业、学历、工龄分组，不是应届起薪"
+        "locator": "四川省 2024 年人力资源市场工资价位和行业人工成本信息；2025-07-07 发布；2026-10-19 curl 取正文与附件，按职业、学历、工龄分组，不是应届起薪",
+        "sha256": "95a4d8ac0e33f336813b6f0ebdb6bbd3f90f7699804125a1e6a39ffce1981971"
       },
       "published_on": "2025-07-07",
       "publication_status": "dated",
@@ -95,7 +96,8 @@
       "source": {
         "organization": "四川最低工资正式通知，川府规〔2024〕4号",
         "url": "https://www.sc.gov.cn/10462/zfwjts/2025/1/2/60841bcf38d844fb80ad1ea0b2d74e24.shtml",
-        "locator": "四川最低工资正式通知，川府规〔2024〕4号；2025-01-01 起实施；2026-10-17 已核，具体市州与后续生效调整待实际岗位核对"
+        "locator": "四川最低工资正式通知，川府规〔2024〕4号；2025-01-01 起实施；2026-10-17 已核，具体市州与后续生效调整待实际岗位核对",
+        "sha256": "7af5b831dd3dc9d4e430eeec86aabd70b8a5bd9d5a2df18a627efc75400b5758"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -108,7 +110,7 @@
       "review_due": "2026-11-30",
       "candidate_ids": [],
       "rule_ids": [],
-      "excerpt": "四川省人民政府关于调整全省最低工资标准的通知 中央政府门户网 | 繁 | 简 | English | 无障碍 | 智能问答 | 个人中心 | 适老版 首页 | 政府领导 | 机构职能 | 政",
+      "excerpt": "各市（州）应尽快重新选择适合本地实际的具体标准档次，经当地政府确定后于10日内报人力资源社会保障厅备案。全省各级相关部门应加大监管力度，确保最低工资标准得到贯彻落实。 本通知自2025年1月1日起实施，有效期3年。",
       "excerpt_type": "verbatim",
       "original_locator": "四川最低工资正式通知，川府规〔2024〕4号；2025-01-01 起实施；2026-10-17 已核，具体市州与后续生效调整待实际岗位核对",
       "source_group": 3,
@@ -123,7 +125,8 @@
       "source": {
         "organization": "四川最低工资调整征求意见的官方报道",
         "url": "https://www.sc.gov.cn/10462/10464/10797/2026/5/10/a1c660174d83443ab23cc74b7cf6bbfd.shtml",
-        "locator": "四川最低工资调整征求意见的官方报道；2026-05-10 刊登；2026-10-17 已核，仅证明征求意见，不能当现行标准"
+        "locator": "四川最低工资调整征求意见的官方报道；2026-05-10 刊登；2026-10-17 已核，仅证明征求意见，不能当现行标准",
+        "sha256": "26c85d8a36d53d6363ef7512a399b9fe9d8fc542553f0a7a2c92b30adff630e3"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -151,7 +154,8 @@
       "source": {
         "organization": "四川 2026 年普通高校专升本考试报名通告",
         "url": "https://www.sceea.cn/Html/202512/Newsdetail_4595.html",
-        "locator": "四川 2026 年普通高校专升本考试报名通告；2025 年 12 月发布；2026-10-17 已核上一届日期与费用；本案未取得 2027 通告"
+        "locator": "四川 2026 年普通高校专升本考试报名通告；2025 年 12 月发布；2026-10-17 已核上一届日期与费用；本案未取得 2027 通告",
+        "sha256": "137ebbd6ea7a723102d6afd343f86698024a8e0a14e7058eafc7ea293e116c78"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -179,7 +183,8 @@
       "source": {
         "organization": "四川人大直属事业单位 2026 上半年招聘公告",
         "url": "https://www.scspc.gov.cn/tzgg/202603/156174.html",
-        "locator": "四川人大直属事业单位 2026 上半年招聘公告；正文落款 2026-03-12；2026-10-19 curl 取原文，核报名与笔试；不证明本案适用资格或2027计划"
+        "locator": "四川人大直属事业单位 2026 上半年招聘公告；正文落款 2026-03-12；2026-10-19 curl 取原文，核报名与笔试；不证明本案适用资格或2027计划",
+        "sha256": "7da59232ab61c8d57d7d56fb63e7b3b5704943e71e5f79ca168d8a1db6f521b6"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -192,7 +197,7 @@
       "review_due": "2026-11-30",
       "candidate_ids": [],
       "rule_ids": [],
-      "excerpt": "四川省人大常委会办公厅关于直属事业单位2026年上半年公开考试招聘工作人员公告_四川人大网 当前的位置： 四川人大网 > 常用链接 > 通知公示 四川省人大常委会办公厅关于直属事业单位202",
+      "excerpt": "笔试科目为《公共基础知识》和《综合能力测试》两科，每科卷面满分100分",
       "excerpt_type": "verbatim",
       "original_locator": "四川人大直属事业单位 2026 上半年招聘公告；正文落款 2026-03-12；2026-10-19 curl 取原文，核报名与笔试；不证明本案适用资格或2027计划",
       "source_group": 6,
@@ -207,7 +212,8 @@
       "source": {
         "organization": "《劳动合同法》，北京政府网转载 2012 年修订文本",
         "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/qtwj/201307/t20130701_780700.html",
-        "locator": "《劳动合同法》，北京政府网转载 2012 年修订文本；2026-10-19 curl 原文核第7、9、10、58、63条等，主体与派遣边界"
+        "locator": "《劳动合同法》，北京政府网转载 2012 年修订文本；2026-10-19 curl 原文核第7、9、10、58、63条等，主体与派遣边界",
+        "sha256": "d524819106ca789c597c1d7ea7f0f76dfe6e0f2189fdc1ce4154d0e2d5ae3225"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -220,7 +226,7 @@
       "review_due": "2026-11-30",
       "candidate_ids": [],
       "rule_ids": [],
-      "excerpt": "中华人民共和国劳动合同法_其他文件_首都之窗_北京市人民政府门户网站 政务公开 > 政策服务 > 政策文件 > 其他文件 [发文字号] 中华人民共和国主席令第 〔〕 73号 [发文机构] 全",
+      "excerpt": "第五十八条 劳务派遣单位是本法所称用人单位，应当履行用人单位对劳动者的义务。劳务派遣单位与被派遣劳动者订立的劳动合同，除应当载明本法第十七条规定的事项外，还应当载明被派遣劳动者的用工单位以及派遣期限、工作岗位等情况。\n第十九条 劳动合同期限三个月以上不满一年的，试用期不得超过一个月；劳动合同期限一年以上不满三年的，试用期不得超过二个月；三年以上固定期限和无固定期限的劳动合同，试用期不得超过六个月。 同一用人单位与同一劳动者只能约定一次试用期。 以完成一定工作任务为期限的劳动合同或者劳动合同期限不满三个月的，不得约定试用期。 试用期包含在劳动合同期限内。",
       "excerpt_type": "verbatim",
       "original_locator": "《劳动合同法》，北京政府网转载 2012 年修订文本；2026-10-19 curl 原文核第7、9、10、58、63条等，主体与派遣边界",
       "source_group": 7,
@@ -235,7 +241,8 @@
       "source": {
         "organization": "《劳动合同法实施条例》，北京政府网转载",
         "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/qtwj/201105/t20110506_780976.html",
-        "locator": "《劳动合同法实施条例》，北京政府网转载；2026-10-19 已核官方原文；试用工资结合合同与当地条件判断"
+        "locator": "《劳动合同法实施条例》，北京政府网转载；2026-10-19 已核官方原文；试用工资结合合同与当地条件判断",
+        "sha256": "d39944b4602e7a2083f7629ede13d71d97c4f483db824c5a0468a0a9c4f30fa5"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -248,7 +255,7 @@
       "review_due": "2026-11-30",
       "candidate_ids": [],
       "rule_ids": [],
-      "excerpt": "中华人民共和国劳动合同法实施条例_其他文件_首都之窗_北京市人民政府门户网站 政务公开 > 政策服务 > 政策文件 > 其他文件 [发文字号] 国令第 〔〕 535号 [发文机构] 国务院 ",
+      "excerpt": "第十五条 劳动者在试用期的工资不得低于本单位相同岗位最低档工资的80%或者不得低于劳动合同约定工资的80%，并不得低于用人单位所在地的最低工资标准。",
       "excerpt_type": "verbatim",
       "original_locator": "《劳动合同法实施条例》，北京政府网转载；2026-10-19 已核官方原文；试用工资结合合同与当地条件判断",
       "source_group": 8,
@@ -263,7 +270,8 @@
       "source": {
         "organization": "《民法典》，最高检转载",
         "url": "https://www.spp.gov.cn/zdgz/202006/t20200602_463886.shtml",
-        "locator": "《民法典》，最高检转载；2026-10-19 curl 取原文，第495、585条仅为协议判断入口，不直接判个人违约责任"
+        "locator": "《民法典》，最高检转载；2026-10-19 curl 取原文，第495、585条仅为协议判断入口，不直接判个人违约责任",
+        "sha256": "baf60cd0e4f3e3ffc2ca6533731fc8faa246db0b47b694ef00fa0053cf56b462"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -291,7 +299,8 @@
       "source": {
         "organization": "四川 2026 年社保缴费基数上下限通知",
         "url": "https://rst.sc.gov.cn/rst/gsgg/2026/9/7/8b8edb37d4cd43ed995a0055f46b7705.shtml",
-        "locator": "四川 2026 年社保缴费基数上下限通知；2026-09-07 发布；2026-10-19 curl 取原文，4,699—23,493 元；医保基数另核，不代表2027标准"
+        "locator": "四川 2026 年社保缴费基数上下限通知；2026-09-07 发布；2026-10-19 curl 取原文，4,699—23,493 元；医保基数另核，不代表2027标准",
+        "sha256": "2b8210c797ec001ba3f0795e6119ebc50baa62d979ee5262ddcf3663c796cd97"
       },
       "published_on": "2026-09-07",
       "publication_status": "dated",
@@ -319,7 +328,8 @@
       "source": {
         "organization": "《个人所得税法》，上海税务转载",
         "url": "https://shanghai.chinatax.gov.cn/zcfw/zcfgk/grsds/201809/t441789.html",
-        "locator": "《个人所得税法》，上海税务转载；2026-10-19 curl 核第6条，居民综合所得年度费用扣除60,000元"
+        "locator": "《个人所得税法》，上海税务转载；2026-10-19 curl 核第6条，居民综合所得年度费用扣除60,000元",
+        "sha256": "a9e29cd2e4ad78b1af03f58a1309de9e9146d002ab6e318e0111023515c9078e"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -347,7 +357,8 @@
       "source": {
         "organization": "《住房公积金管理条例》，司法部现行文本",
         "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=1822",
-        "locator": "《住房公积金管理条例》，司法部现行文本；2026-10-19 curl 核第16—20条；具体城市、比例、基数与首年起算另核"
+        "locator": "《住房公积金管理条例》，司法部现行文本；2026-10-19 curl 核第16—20条；具体城市、比例、基数与首年起算另核",
+        "sha256": "d3038a976b4fef25620b73ee1e916496959088ec18025bf996d6aeb7356aa0a8"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -360,7 +371,7 @@
       "review_due": "2026-11-30",
       "candidate_ids": [],
       "rule_ids": [],
-      "excerpt": "国家行政法规库 首页 首页 > 正文阅读 下载Word 下载PDF 扫码下载 住房公积金管理条例 历史沿革 收起 1999-04-03 2002-03-24 2019-03-24 2026-",
+      "excerpt": "第十七条 新参加工作的职工从参加工作的第二个月开始缴存住房公积金，月缴存额为职工本人当月工资乘以职工住房公积金缴存比例。 单位 新调入的职工从调入单位发放工资之日起缴存住房公积金，月缴存额为职工本人当月工资乘以职工 住房公积金缴存比 例。 第十八条 职工和单位住房公积金的缴存比例均不得低于职工上一年度月平均工资的5%，不得高于国家规定的最高缴存比例。具体缴存比例由住房公积金管理委员会拟订，经本级人民政府审核后，报省、自治区、直辖市人民政府批准。",
       "excerpt_type": "verbatim",
       "original_locator": "《住房公积金管理条例》，司法部现行文本；2026-10-19 curl 核第16—20条；具体城市、比例、基数与首年起算另核",
       "source_group": 12,
@@ -375,7 +386,8 @@
       "source": {
         "organization": "四川转发失业保险阶段性费率政策的旧通知",
         "url": "https://www.sc.gov.cn/10462/10778/10876/2024/7/9/8546d58ad39a491ab56ef7ae7580b7ab.shtml",
-        "locator": "四川转发失业保险阶段性费率政策的旧通知；2024-07-09 刊登；2026-10-17 已核执行至2025年底；2026以后延续文件未取到，0.4%不作为现行已证实比例"
+        "locator": "四川转发失业保险阶段性费率政策的旧通知；2024-07-09 刊登；2026-10-17 已核执行至2025年底；2026以后延续文件未取到，0.4%不作为现行已证实比例",
+        "sha256": "a47f892098d4b8a04e7268624b0456ffc84314b47c0fd0d0709c992c57d3dc0e"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -403,7 +415,8 @@
       "source": {
         "organization": "《劳务派遣暂行规定》，北京政府网转载",
         "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/qtwj/201403/t20140301_781261.html",
-        "locator": "《劳务派遣暂行规定》，北京政府网转载；2026-10-19 curl 原文核第27条，外包名称不能替代实际用工形式"
+        "locator": "《劳务派遣暂行规定》，北京政府网转载；2026-10-19 curl 原文核第27条，外包名称不能替代实际用工形式",
+        "sha256": "ad8014636b591865c4f85ac93b4bc82eb698a8a873b558c9df526e9332107de1"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -431,7 +444,8 @@
       "source": {
         "organization": "天健四川分所财务审计（2027 校招），四川大学就业网发布",
         "url": "https://jy.scu.edu.cn/index/index/employjobdetail.html?data=MDAwMDAwMDAwMJG6n3_Ed6imi4qQtLh4Y5WKzrbWynbddricp9CWi5qikaeWacSdqLqGfaK2w4iil5C4zNbGiL-E",
-        "locator": "天健四川分所财务审计（2027 校招），四川大学就业网发布；2026-09-21 发布；2026-10-19 curl 核正文，本科门槛、经常出差；有效期与正文截止差一天，未替招聘方消除冲突"
+        "locator": "天健四川分所财务审计（2027 校招），四川大学就业网发布；2026-09-21 发布；2026-10-19 curl 核正文，本科门槛、经常出差；有效期与正文截止差一天，未替招聘方消除冲突",
+        "sha256": "37c7efd8418a730465629098328c66985089c889688cce3a00e9727b060abff1"
       },
       "published_on": "2026-09-21",
       "publication_status": "dated",
@@ -444,7 +458,7 @@
       "review_due": "2026-11-30",
       "candidate_ids": [],
       "rule_ids": [],
-      "excerpt": "四川大学就业指导中心 首页 学院风采 服务指南 毕业生数据 学习园地 下载中心 就业学习平台 中心介绍 中心介绍 机构设置 教师登录 | 学生登录 | 单位注册/单位登录 首页 学院风采 服",
+      "excerpt": "本岗位面向2027年应届本科及以上毕业生； 2. 学习成绩优秀，英语四级以上或口语成绩优秀优先考虑； 3. 财务会计、国际会计、审计、计算机审计、信息管理系统等相关专业者，辅修财会专业或有财务等相关专业基础的其他经济类专业或理工科专业，成绩优异者； 4. CPA等（国外相应资质如ACCA、CGA）执业资格考试通过若干门者优先考虑； 5. 具备良好的沟通能力及团队合作精神，富有责任心和毅力。吃苦耐劳，适应高强度工作及经常性出差。",
       "excerpt_type": "verbatim",
       "original_locator": "天健四川分所财务审计（2027 校招），四川大学就业网发布；2026-09-21 发布；2026-10-19 curl 核正文，本科门槛、经常出差；有效期与正文截止差一天，未替招聘方消除冲突",
       "source_group": 15,
@@ -459,7 +473,9 @@
       "source": {
         "organization": "四川能投建工核算会计实习，四川轻化工大学就业网详情",
         "url": "https://job.suse.edu.cn/Zhaopin/zhiweiDetail.html?jobtype=2&id=e221f3ff-0c7c-2882-3f36-04f5e4dfb81e",
-        "locator": "四川能投建工核算会计实习，四川轻化工大学就业网详情；2026-05-12 发布；2026-10-19 HTTP为动态壳，内置浏览器核正文；顶部专科、正文本科冲突，五天/周、五个月以上、转正面议，不确认当前余额"
+        "locator": "四川能投建工核算会计实习，四川轻化工大学就业网详情；2026-05-12 发布；2026-10-19 HTTP为动态壳，内置浏览器核正文；顶部专科、正文本科冲突，五天/周、五个月以上、转正面议，不确认当前余额",
+        "sha256": "6c887a0ca8efd471d1be3ad1a123928ea52b801da7284a5eae4bd09bb8c247ef",
+        "sha256_scope": "浏览器逐字取文记录（含逐字节选，非原始HTML）"
       },
       "published_on": "2026-05-12",
       "publication_status": "dated",
@@ -487,7 +503,8 @@
       "source": {
         "organization": "四川能投建工招聘，西南财经大学天府学院就业网发布",
         "url": "https://jy.tfswufe.edu.cn/home/index/employDetail/mcit/MDAwMDAwMDAwMJG6n3_Ed6imi4qQsMOen5uK0NSyypzRoslkzdGLeKKvjqaBh8WefduOpIyww6Bs1ZC6mdOzhtGnsnOeow.html",
-        "locator": "四川能投建工招聘，西南财经大学天府学院就业网发布；页面未署发布日期，条款面向2027实习生；2026-10-19 curl 核正文，财会本科与工程岗位大专要求分开，不确认当前余额"
+        "locator": "四川能投建工招聘，西南财经大学天府学院就业网发布；页面未署发布日期，条款面向2027实习生；2026-10-19 curl 核正文，财会本科与工程岗位大专要求分开，不确认当前余额",
+        "sha256": "d3a36d0a4cb7bd8818cd8dc8410d209d53cfce7ec92c32c0d4c952c92f6b95e7"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -500,7 +517,7 @@
       "review_due": "2026-11-30",
       "candidate_ids": [],
       "rule_ids": [],
-      "excerpt": "西南财经大学天府学院-晨云智慧就业管理服务系统 登录 学生 教师 用人单位 学校官网 新闻动态 重要通知 招聘信息 招聘信息 校友招聘专区 招聘会 专场招聘会 校外招聘会 政策法规 四川大学",
+      "excerpt": "核算会计岗 2人 1.实习生：普通高等院校 2027年毕业的本科及以上学历在校生； 2.财务管理、会计学、金融、等相关专业； 3.熟练掌握财务、会计知识、财务管理流程；熟悉税务、审计知识和财税法律法规、政策； 4.了解建筑企业的运营和项目的运作；熟练应用财务软件和办公软件者优先； 5.抗压能力强，吃苦耐劳； 6.品学兼优、遵纪守法、身心健康，中共党员、学生干部、社团干部优先； 7.具备良好的沟通协调能力、学习能力和抗压能力，热爱施工行业，认同企业文化，能够适应施工项目一线工作环境，愿意长期扎根基层岗位发展。\n工程造价岗 14人 1.实习生：普通高等院校 2027年毕业的大专及以上学历在校生；",
       "excerpt_type": "verbatim",
       "original_locator": "四川能投建工招聘，西南财经大学天府学院就业网发布；页面未署发布日期，条款面向2027实习生；2026-10-19 curl 核正文，财会本科与工程岗位大专要求分开，不确认当前余额",
       "source_group": 17,
@@ -515,7 +532,8 @@
       "source": {
         "organization": "四川省 2024 年人力资源市场工资价位和行业人工成本信息",
         "url": "https://rst.sc.gov.cn/rst/gsgg/2025/7/7/770dc72520ef42c493044cfb1f8c404f.shtml",
-        "locator": "四川省 2024 年人力资源市场工资价位和行业人工成本信息；2025-07-07 发布；2026-10-19 curl 取正文与附件，按职业、学历、工龄分组，不是应届起薪；sc-wages：2025-07-07"
+        "locator": "四川省 2024 年人力资源市场工资价位和行业人工成本信息；2025-07-07 发布；2026-10-19 curl 取正文与附件，按职业、学历、工龄分组，不是应届起薪；sc-wages：2025-07-07",
+        "sha256": "95a4d8ac0e33f336813b6f0ebdb6bbd3f90f7699804125a1e6a39ffce1981971"
       },
       "published_on": "2025-07-07",
       "publication_status": "dated",
@@ -539,11 +557,12 @@
       "id": "E1001",
       "claim": "四川工资价位统计年度",
       "value": 2024,
-      "unit": "",
+      "unit": "年份",
       "source": {
         "organization": "四川省 2024 年人力资源市场工资价位和行业人工成本信息",
         "url": "https://rst.sc.gov.cn/rst/gsgg/2025/7/7/770dc72520ef42c493044cfb1f8c404f.shtml",
-        "locator": "四川省 2024 年人力资源市场工资价位和行业人工成本信息；2025-07-07 发布；2026-10-19 curl 取正文与附件，按职业、学历、工龄分组，不是应届起薪；sc-wages：2024"
+        "locator": "四川省 2024 年人力资源市场工资价位和行业人工成本信息；2025-07-07 发布；2026-10-19 curl 取正文与附件，按职业、学历、工龄分组，不是应届起薪；sc-wages：2024",
+        "sha256": "95a4d8ac0e33f336813b6f0ebdb6bbd3f90f7699804125a1e6a39ffce1981971"
       },
       "published_on": "2025-07-07",
       "publication_status": "dated",
@@ -571,7 +590,8 @@
       "source": {
         "organization": "四川省 2024 年人力资源市场工资价位和行业人工成本信息",
         "url": "https://rst.sc.gov.cn/rst/gsgg/2025/7/7/770dc72520ef42c493044cfb1f8c404f.shtml",
-        "locator": "四川省 2024 年人力资源市场工资价位和行业人工成本信息；2025-07-07 发布；2026-10-19 curl 取正文与附件，按职业、学历、工龄分组，不是应届起薪；sc-wages：万"
+        "locator": "四川省 2024 年人力资源市场工资价位和行业人工成本信息；2025-07-07 发布；2026-10-19 curl 取正文与附件，按职业、学历、工龄分组，不是应届起薪；sc-wages：万",
+        "sha256": "95a4d8ac0e33f336813b6f0ebdb6bbd3f90f7699804125a1e6a39ffce1981971"
       },
       "published_on": "2025-07-07",
       "publication_status": "dated",
@@ -595,11 +615,12 @@
       "id": "E1003",
       "claim": "工资价位工龄组下界",
       "value": "0",
-      "unit": "",
+      "unit": "年",
       "source": {
         "organization": "四川省 2024 年人力资源市场工资价位和行业人工成本信息",
         "url": "https://rst.sc.gov.cn/rst/gsgg/2025/7/7/770dc72520ef42c493044cfb1f8c404f.shtml",
-        "locator": "四川省 2024 年人力资源市场工资价位和行业人工成本信息；2025-07-07 发布；2026-10-19 curl 取正文与附件，按职业、学历、工龄分组，不是应届起薪；sc-wages：0"
+        "locator": "四川省 2024 年人力资源市场工资价位和行业人工成本信息；2025-07-07 发布；2026-10-19 curl 取正文与附件，按职业、学历、工龄分组，不是应届起薪；sc-wages：0",
+        "sha256": "95a4d8ac0e33f336813b6f0ebdb6bbd3f90f7699804125a1e6a39ffce1981971"
       },
       "published_on": "2025-07-07",
       "publication_status": "dated",
@@ -627,7 +648,8 @@
       "source": {
         "organization": "四川省 2024 年人力资源市场工资价位和行业人工成本信息",
         "url": "https://rst.sc.gov.cn/rst/gsgg/2025/7/7/770dc72520ef42c493044cfb1f8c404f.shtml",
-        "locator": "四川省 2024 年人力资源市场工资价位和行业人工成本信息；2025-07-07 发布；2026-10-19 curl 取正文与附件，按职业、学历、工龄分组，不是应届起薪；sc-wages：1"
+        "locator": "四川省 2024 年人力资源市场工资价位和行业人工成本信息；2025-07-07 发布；2026-10-19 curl 取正文与附件，按职业、学历、工龄分组，不是应届起薪；sc-wages：1",
+        "sha256": "95a4d8ac0e33f336813b6f0ebdb6bbd3f90f7699804125a1e6a39ffce1981971"
       },
       "published_on": "2025-07-07",
       "publication_status": "dated",
@@ -651,11 +673,12 @@
       "id": "E1005",
       "claim": "四川最低工资标准实施年份",
       "value": 2025,
-      "unit": "",
+      "unit": "年份",
       "source": {
         "organization": "四川最低工资正式通知，川府规〔2024〕4号",
         "url": "https://www.sc.gov.cn/10462/zfwjts/2025/1/2/60841bcf38d844fb80ad1ea0b2d74e24.shtml",
-        "locator": "四川最低工资正式通知，川府规〔2024〕4号；2025-01-01 起实施；2026-10-17 已核，具体市州与后续生效调整待实际岗位核对；career-source-3：2025"
+        "locator": "四川最低工资正式通知，川府规〔2024〕4号；2025-01-01 起实施；2026-10-17 已核，具体市州与后续生效调整待实际岗位核对；career-source-3：2025",
+        "sha256": "7af5b831dd3dc9d4e430eeec86aabd70b8a5bd9d5a2df18a627efc75400b5758"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -668,7 +691,7 @@
       "review_due": "2026-11-30",
       "candidate_ids": [],
       "rule_ids": [],
-      "excerpt": "务公开 > 政策文件 收藏 索 引 号 ： 008282882/2025-00003 公文种类： 通知 发布机构： 四川省人民政府 成文日期： 2024-12-30 发布日期： 2025-01-02 文",
+      "excerpt": "本通知自2025年1月1日起实施，有效期3年。",
       "excerpt_type": "verbatim",
       "original_locator": "career-source-3：2025",
       "source_group": 3,
@@ -679,11 +702,12 @@
       "id": "E1006",
       "claim": "四川月最低工资第一档",
       "value": 2330,
-      "unit": "",
+      "unit": "元/月",
       "source": {
         "organization": "四川最低工资正式通知，川府规〔2024〕4号",
         "url": "https://www.sc.gov.cn/10462/zfwjts/2025/1/2/60841bcf38d844fb80ad1ea0b2d74e24.shtml",
-        "locator": "四川最低工资正式通知，川府规〔2024〕4号；2025-01-01 起实施；2026-10-17 已核，具体市州与后续生效调整待实际岗位核对；career-source-3：2330"
+        "locator": "四川最低工资正式通知，川府规〔2024〕4号；2025-01-01 起实施；2026-10-17 已核，具体市州与后续生效调整待实际岗位核对；career-source-3：2330",
+        "sha256": "7af5b831dd3dc9d4e430eeec86aabd70b8a5bd9d5a2df18a627efc75400b5758"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -707,11 +731,12 @@
       "id": "E1007",
       "claim": "四川月最低工资第二档",
       "value": 2200,
-      "unit": "",
+      "unit": "元/月",
       "source": {
         "organization": "四川最低工资正式通知，川府规〔2024〕4号",
         "url": "https://www.sc.gov.cn/10462/zfwjts/2025/1/2/60841bcf38d844fb80ad1ea0b2d74e24.shtml",
-        "locator": "四川最低工资正式通知，川府规〔2024〕4号；2025-01-01 起实施；2026-10-17 已核，具体市州与后续生效调整待实际岗位核对；career-source-3：2200"
+        "locator": "四川最低工资正式通知，川府规〔2024〕4号；2025-01-01 起实施；2026-10-17 已核，具体市州与后续生效调整待实际岗位核对；career-source-3：2200",
+        "sha256": "7af5b831dd3dc9d4e430eeec86aabd70b8a5bd9d5a2df18a627efc75400b5758"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -735,11 +760,12 @@
       "id": "E1008",
       "claim": "四川最低工资征求意见稿年份",
       "value": 2026,
-      "unit": "",
+      "unit": "年份",
       "source": {
         "organization": "四川最低工资调整征求意见的官方报道",
         "url": "https://www.sc.gov.cn/10462/10464/10797/2026/5/10/a1c660174d83443ab23cc74b7cf6bbfd.shtml",
-        "locator": "四川最低工资调整征求意见的官方报道；2026-05-10 刊登；2026-10-17 已核，仅证明征求意见，不能当现行标准；career-source-4：2026"
+        "locator": "四川最低工资调整征求意见的官方报道；2026-05-10 刊登；2026-10-17 已核，仅证明征求意见，不能当现行标准；career-source-4：2026",
+        "sha256": "26c85d8a36d53d6363ef7512a399b9fe9d8fc542553f0a7a2c92b30adff630e3"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -767,7 +793,8 @@
       "source": {
         "organization": "天健四川分所财务审计（2027 校招），四川大学就业网发布",
         "url": "https://jy.scu.edu.cn/index/index/employjobdetail.html?data=MDAwMDAwMDAwMJG6n3_Ed6imi4qQtLh4Y5WKzrbWynbddricp9CWi5qikaeWacSdqLqGfaK2w4iil5C4zNbGiL-E",
-        "locator": "天健四川分所财务审计（2027 校招），四川大学就业网发布；2026-09-21 发布；2026-10-19 curl 核正文，本科门槛、经常出差；有效期与正文截止差一天，未替招聘方消除冲突；tianjian-2027：2026-09-21"
+        "locator": "天健四川分所财务审计（2027 校招），四川大学就业网发布；2026-09-21 发布；2026-10-19 curl 核正文，本科门槛、经常出差；有效期与正文截止差一天，未替招聘方消除冲突；tianjian-2027：2026-09-21",
+        "sha256": "37c7efd8418a730465629098328c66985089c889688cce3a00e9727b060abff1"
       },
       "published_on": "2026-09-21",
       "publication_status": "dated",
@@ -795,7 +822,8 @@
       "source": {
         "organization": "四川能投建工核算会计实习，四川轻化工大学就业网详情",
         "url": "https://job.suse.edu.cn/Zhaopin/zhiweiDetail.html?jobtype=2&id=e221f3ff-0c7c-2882-3f36-04f5e4dfb81e",
-        "locator": "四川能投建工核算会计实习，四川轻化工大学就业网详情；2026-05-12 发布；2026-10-19 HTTP为动态壳，内置浏览器核正文；顶部专科、正文本科冲突，五天/周、五个月以上、转正面议，不确认当前余额"
+        "locator": "四川能投建工核算会计实习，四川轻化工大学就业网详情；2026-05-12 发布；2026-10-19 HTTP为动态壳，内置浏览器核正文；顶部专科、正文本科冲突，五天/周、五个月以上、转正面议，不确认当前余额",
+        "sha256": "0df5bfd7ae0114fb0c30ee859e88298ea902dd4b837efafad5c551175b2fdf37"
       },
       "published_on": "2026-05-12",
       "publication_status": "dated",
@@ -823,7 +851,8 @@
       "source": {
         "organization": "四川能投建工核算会计实习，四川轻化工大学就业网详情",
         "url": "https://job.suse.edu.cn/Zhaopin/zhiweiDetail.html?jobtype=2&id=e221f3ff-0c7c-2882-3f36-04f5e4dfb81e",
-        "locator": "四川能投建工核算会计实习，四川轻化工大学就业网详情；2026-05-12 发布；2026-10-19 HTTP为动态壳，内置浏览器核正文；顶部专科、正文本科冲突，五天/周、五个月以上、转正面议，不确认当前余额；suse：五"
+        "locator": "四川能投建工核算会计实习，四川轻化工大学就业网详情；2026-05-12 发布；2026-10-19 HTTP为动态壳，内置浏览器核正文；顶部专科、正文本科冲突，五天/周、五个月以上、转正面议，不确认当前余额；suse：五",
+        "sha256": "0df5bfd7ae0114fb0c30ee859e88298ea902dd4b837efafad5c551175b2fdf37"
       },
       "published_on": "2026-05-12",
       "publication_status": "dated",
@@ -851,7 +880,8 @@
       "source": {
         "organization": "四川 2026 年普通高校专升本考试报名通告",
         "url": "https://www.sceea.cn/Html/202512/Newsdetail_4595.html",
-        "locator": "四川 2026 年普通高校专升本考试报名通告；2025 年 12 月发布；2026-10-17 已核上一届日期与费用；本案未取得 2027 通告；career-source-5：2026-04-16"
+        "locator": "四川 2026 年普通高校专升本考试报名通告；2025 年 12 月发布；2026-10-17 已核上一届日期与费用；本案未取得 2027 通告；career-source-5：2026-04-16",
+        "sha256": "137ebbd6ea7a723102d6afd343f86698024a8e0a14e7058eafc7ea293e116c78"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -875,11 +905,12 @@
       "id": "E1013",
       "claim": "四川专升本通告适用届别",
       "value": 2026,
-      "unit": "",
+      "unit": "年份",
       "source": {
         "organization": "四川 2026 年普通高校专升本考试报名通告",
         "url": "https://www.sceea.cn/Html/202512/Newsdetail_4595.html",
-        "locator": "四川 2026 年普通高校专升本考试报名通告；2025 年 12 月发布；2026-10-17 已核上一届日期与费用；本案未取得 2027 通告；career-source-5：2026"
+        "locator": "四川 2026 年普通高校专升本考试报名通告；2025 年 12 月发布；2026-10-17 已核上一届日期与费用；本案未取得 2027 通告；career-source-5：2026",
+        "sha256": "137ebbd6ea7a723102d6afd343f86698024a8e0a14e7058eafc7ea293e116c78"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -903,11 +934,12 @@
       "id": "E1014",
       "claim": "四川专升本通告发布年份",
       "value": 2025,
-      "unit": "",
+      "unit": "年份",
       "source": {
         "organization": "四川 2026 年普通高校专升本考试报名通告",
         "url": "https://www.sceea.cn/Html/202512/Newsdetail_4595.html",
-        "locator": "四川 2026 年普通高校专升本考试报名通告；2025 年 12 月发布；2026-10-17 已核上一届日期与费用；本案未取得 2027 通告；career-source-5：2025"
+        "locator": "四川 2026 年普通高校专升本考试报名通告；2025 年 12 月发布；2026-10-17 已核上一届日期与费用；本案未取得 2027 通告；career-source-5：2025",
+        "sha256": "137ebbd6ea7a723102d6afd343f86698024a8e0a14e7058eafc7ea293e116c78"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -931,11 +963,12 @@
       "id": "E1015",
       "claim": "四川专升本通告发布月份",
       "value": 12,
-      "unit": "",
+      "unit": "月",
       "source": {
         "organization": "四川 2026 年普通高校专升本考试报名通告",
         "url": "https://www.sceea.cn/Html/202512/Newsdetail_4595.html",
-        "locator": "四川 2026 年普通高校专升本考试报名通告；2025 年 12 月发布；2026-10-17 已核上一届日期与费用；本案未取得 2027 通告；career-source-5：12"
+        "locator": "四川 2026 年普通高校专升本考试报名通告；2025 年 12 月发布；2026-10-17 已核上一届日期与费用；本案未取得 2027 通告；career-source-5：12",
+        "sha256": "137ebbd6ea7a723102d6afd343f86698024a8e0a14e7058eafc7ea293e116c78"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -959,11 +992,12 @@
       "id": "E1016",
       "claim": "四川专升本报名考试费",
       "value": 80,
-      "unit": "",
+      "unit": "元",
       "source": {
         "organization": "四川 2026 年普通高校专升本考试报名通告",
         "url": "https://www.sceea.cn/Html/202512/Newsdetail_4595.html",
-        "locator": "四川 2026 年普通高校专升本考试报名通告；2025 年 12 月发布；2026-10-17 已核上一届日期与费用；本案未取得 2027 通告；career-source-5：80"
+        "locator": "四川 2026 年普通高校专升本考试报名通告；2025 年 12 月发布；2026-10-17 已核上一届日期与费用；本案未取得 2027 通告；career-source-5：80",
+        "sha256": "137ebbd6ea7a723102d6afd343f86698024a8e0a14e7058eafc7ea293e116c78"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -987,11 +1021,12 @@
       "id": "E1017",
       "claim": "《劳动合同法》派遣单位义务条款序号",
       "value": "五十八",
-      "unit": "",
+      "unit": "条",
       "source": {
         "organization": "《劳动合同法》，北京政府网转载 2012 年修订文本",
         "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/qtwj/201307/t20130701_780700.html",
-        "locator": "《劳动合同法》，北京政府网转载 2012 年修订文本；2026-10-19 curl 原文核第7、9、10、58、63条等，主体与派遣边界；labor-bj：58"
+        "locator": "《劳动合同法》，北京政府网转载 2012 年修订文本；2026-10-19 curl 原文核第7、9、10、58、63条等，主体与派遣边界；labor-bj：58",
+        "sha256": "d524819106ca789c597c1d7ea7f0f76dfe6e0f2189fdc1ce4154d0e2d5ae3225"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -1015,11 +1050,12 @@
       "id": "E1018",
       "claim": "《劳动合同法》同工同酬条款序号",
       "value": "六十三",
-      "unit": "",
+      "unit": "条",
       "source": {
         "organization": "《劳动合同法》，北京政府网转载 2012 年修订文本",
         "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/qtwj/201307/t20130701_780700.html",
-        "locator": "《劳动合同法》，北京政府网转载 2012 年修订文本；2026-10-19 curl 原文核第7、9、10、58、63条等，主体与派遣边界；labor-bj：63"
+        "locator": "《劳动合同法》，北京政府网转载 2012 年修订文本；2026-10-19 curl 原文核第7、9、10、58、63条等，主体与派遣边界；labor-bj：63",
+        "sha256": "d524819106ca789c597c1d7ea7f0f76dfe6e0f2189fdc1ce4154d0e2d5ae3225"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -1043,11 +1079,12 @@
       "id": "E1019",
       "claim": "四川社保基数适用年度",
       "value": 2026,
-      "unit": "",
+      "unit": "年份",
       "source": {
         "organization": "四川 2026 年社保缴费基数上下限通知",
         "url": "https://rst.sc.gov.cn/rst/gsgg/2026/9/7/8b8edb37d4cd43ed995a0055f46b7705.shtml",
-        "locator": "四川 2026 年社保缴费基数上下限通知；2026-09-07 发布；2026-10-19 curl 取原文，4,699—23,493 元；医保基数另核，不代表2027标准；sc-base：2026"
+        "locator": "四川 2026 年社保缴费基数上下限通知；2026-09-07 发布；2026-10-19 curl 取原文，4,699—23,493 元；医保基数另核，不代表2027标准；sc-base：2026",
+        "sha256": "2b8210c797ec001ba3f0795e6119ebc50baa62d979ee5262ddcf3663c796cd97"
       },
       "published_on": "2026-09-07",
       "publication_status": "dated",
@@ -1071,11 +1108,12 @@
       "id": "E1020",
       "claim": "四川养老失业工伤缴费基数下限",
       "value": 4699,
-      "unit": "",
+      "unit": "元/月",
       "source": {
         "organization": "四川 2026 年社保缴费基数上下限通知",
         "url": "https://rst.sc.gov.cn/rst/gsgg/2026/9/7/8b8edb37d4cd43ed995a0055f46b7705.shtml",
-        "locator": "四川 2026 年社保缴费基数上下限通知；2026-09-07 发布；2026-10-19 curl 取原文，4,699—23,493 元；医保基数另核，不代表2027标准；sc-base：4699"
+        "locator": "四川 2026 年社保缴费基数上下限通知；2026-09-07 发布；2026-10-19 curl 取原文，4,699—23,493 元；医保基数另核，不代表2027标准；sc-base：4699",
+        "sha256": "2b8210c797ec001ba3f0795e6119ebc50baa62d979ee5262ddcf3663c796cd97"
       },
       "published_on": "2026-09-07",
       "publication_status": "dated",
@@ -1099,11 +1137,12 @@
       "id": "E1021",
       "claim": "四川养老失业工伤缴费基数上限",
       "value": 23493,
-      "unit": "",
+      "unit": "元/月",
       "source": {
         "organization": "四川 2026 年社保缴费基数上下限通知",
         "url": "https://rst.sc.gov.cn/rst/gsgg/2026/9/7/8b8edb37d4cd43ed995a0055f46b7705.shtml",
-        "locator": "四川 2026 年社保缴费基数上下限通知；2026-09-07 发布；2026-10-19 curl 取原文，4,699—23,493 元；医保基数另核，不代表2027标准；sc-base：23493"
+        "locator": "四川 2026 年社保缴费基数上下限通知；2026-09-07 发布；2026-10-19 curl 取原文，4,699—23,493 元；医保基数另核，不代表2027标准；sc-base：23493",
+        "sha256": "2b8210c797ec001ba3f0795e6119ebc50baa62d979ee5262ddcf3663c796cd97"
       },
       "published_on": "2026-09-07",
       "publication_status": "dated",
@@ -1127,11 +1166,12 @@
       "id": "E1022",
       "claim": "旧年失业保险个人缴费费率",
       "value": "0.4%",
-      "unit": "",
+      "unit": "%",
       "source": {
         "organization": "四川转发失业保险阶段性费率政策的旧通知",
         "url": "https://www.sc.gov.cn/10462/10778/10876/2024/7/9/8546d58ad39a491ab56ef7ae7580b7ab.shtml",
-        "locator": "四川转发失业保险阶段性费率政策的旧通知；2024-07-09 刊登；2026-10-17 已核执行至2025年底；2026以后延续文件未取到，0.4%不作为现行已证实比例；career-source-13：0.4%"
+        "locator": "四川转发失业保险阶段性费率政策的旧通知；2024-07-09 刊登；2026-10-17 已核执行至2025年底；2026以后延续文件未取到，0.4%不作为现行已证实比例；career-source-13：0.4%",
+        "sha256": "a47f892098d4b8a04e7268624b0456ffc84314b47c0fd0d0709c992c57d3dc0e"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -1155,11 +1195,12 @@
       "id": "E1023",
       "claim": "旧年失业保险费率执行截止年份",
       "value": 2025,
-      "unit": "",
+      "unit": "年份",
       "source": {
         "organization": "四川转发失业保险阶段性费率政策的旧通知",
         "url": "https://www.sc.gov.cn/10462/10778/10876/2024/7/9/8546d58ad39a491ab56ef7ae7580b7ab.shtml",
-        "locator": "四川转发失业保险阶段性费率政策的旧通知；2024-07-09 刊登；2026-10-17 已核执行至2025年底；2026以后延续文件未取到，0.4%不作为现行已证实比例；career-source-13：2025"
+        "locator": "四川转发失业保险阶段性费率政策的旧通知；2024-07-09 刊登；2026-10-17 已核执行至2025年底；2026以后延续文件未取到，0.4%不作为现行已证实比例；career-source-13：2025",
+        "sha256": "a47f892098d4b8a04e7268624b0456ffc84314b47c0fd0d0709c992c57d3dc0e"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -1183,11 +1224,12 @@
       "id": "E1024",
       "claim": "《劳动合同法》建立劳动关系条款序号",
       "value": "七",
-      "unit": "",
+      "unit": "条",
       "source": {
         "organization": "《劳动合同法》，北京政府网转载 2012 年修订文本",
         "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/qtwj/201307/t20130701_780700.html",
-        "locator": "《劳动合同法》，北京政府网转载 2012 年修订文本；2026-10-19 curl 原文核第7、9、10、58、63条等，主体与派遣边界；labor-bj：7"
+        "locator": "《劳动合同法》，北京政府网转载 2012 年修订文本；2026-10-19 curl 原文核第7、9、10、58、63条等，主体与派遣边界；labor-bj：7",
+        "sha256": "d524819106ca789c597c1d7ea7f0f76dfe6e0f2189fdc1ce4154d0e2d5ae3225"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -1211,11 +1253,12 @@
       "id": "E1025",
       "claim": "《劳动合同法》书面劳动合同条款序号",
       "value": "十",
-      "unit": "",
+      "unit": "条",
       "source": {
         "organization": "《劳动合同法》，北京政府网转载 2012 年修订文本",
         "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/qtwj/201307/t20130701_780700.html",
-        "locator": "《劳动合同法》，北京政府网转载 2012 年修订文本；2026-10-19 curl 原文核第7、9、10、58、63条等，主体与派遣边界；labor-bj：10"
+        "locator": "《劳动合同法》，北京政府网转载 2012 年修订文本；2026-10-19 curl 原文核第7、9、10、58、63条等，主体与派遣边界；labor-bj：10",
+        "sha256": "d524819106ca789c597c1d7ea7f0f76dfe6e0f2189fdc1ce4154d0e2d5ae3225"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -1243,7 +1286,8 @@
       "source": {
         "organization": "《劳动合同法》，北京政府网转载 2012 年修订文本",
         "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/qtwj/201307/t20130701_780700.html",
-        "locator": "《劳动合同法》，北京政府网转载 2012 年修订文本；2026-10-19 curl 原文核第7、9、10、58、63条等，主体与派遣边界；labor-bj：一"
+        "locator": "《劳动合同法》，北京政府网转载 2012 年修订文本；2026-10-19 curl 原文核第7、9、10、58、63条等，主体与派遣边界；labor-bj：一",
+        "sha256": "d524819106ca789c597c1d7ea7f0f76dfe6e0f2189fdc1ce4154d0e2d5ae3225"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -1267,11 +1311,12 @@
       "id": "E1027",
       "claim": "《劳务派遣暂行规定》以外包名义派遣条款序号",
       "value": "二十七",
-      "unit": "",
+      "unit": "条",
       "source": {
         "organization": "《劳务派遣暂行规定》，北京政府网转载",
         "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/qtwj/201403/t20140301_781261.html",
-        "locator": "《劳务派遣暂行规定》，北京政府网转载；2026-10-19 curl 原文核第27条，外包名称不能替代实际用工形式；dispatch：27"
+        "locator": "《劳务派遣暂行规定》，北京政府网转载；2026-10-19 curl 原文核第27条，外包名称不能替代实际用工形式；dispatch：27",
+        "sha256": "ad8014636b591865c4f85ac93b4bc82eb698a8a873b558c9df526e9332107de1"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -1299,7 +1344,8 @@
       "source": {
         "organization": "四川省 2024 年人力资源市场工资价位和行业人工成本信息",
         "url": "https://rst.sc.gov.cn/rst/gsgg/2025/7/7/770dc72520ef42c493044cfb1f8c404f.shtml",
-        "locator": "工资价位附件，单位万元/年：会计专业人员"
+        "locator": "工资价位附件，单位万元/年：会计专业人员",
+        "sha256": "95a4d8ac0e33f336813b6f0ebdb6bbd3f90f7699804125a1e6a39ffce1981971"
       },
       "published_on": "2025-07-07",
       "publication_status": "dated",
@@ -1327,7 +1373,8 @@
       "source": {
         "organization": "四川省 2024 年人力资源市场工资价位和行业人工成本信息",
         "url": "https://rst.sc.gov.cn/rst/gsgg/2025/7/7/770dc72520ef42c493044cfb1f8c404f.shtml",
-        "locator": "工资价位附件，单位万元/年：会计专业人员"
+        "locator": "工资价位附件，单位万元/年：会计专业人员",
+        "sha256": "95a4d8ac0e33f336813b6f0ebdb6bbd3f90f7699804125a1e6a39ffce1981971"
       },
       "published_on": "2025-07-07",
       "publication_status": "dated",
@@ -1355,7 +1402,8 @@
       "source": {
         "organization": "四川省 2024 年人力资源市场工资价位和行业人工成本信息",
         "url": "https://rst.sc.gov.cn/rst/gsgg/2025/7/7/770dc72520ef42c493044cfb1f8c404f.shtml",
-        "locator": "工资价位附件，单位万元/年：会计专业人员"
+        "locator": "工资价位附件，单位万元/年：会计专业人员",
+        "sha256": "95a4d8ac0e33f336813b6f0ebdb6bbd3f90f7699804125a1e6a39ffce1981971"
       },
       "published_on": "2025-07-07",
       "publication_status": "dated",
@@ -1383,7 +1431,8 @@
       "source": {
         "organization": "四川省 2024 年人力资源市场工资价位和行业人工成本信息",
         "url": "https://rst.sc.gov.cn/rst/gsgg/2025/7/7/770dc72520ef42c493044cfb1f8c404f.shtml",
-        "locator": "工资价位附件，单位万元/年：会计专业人员"
+        "locator": "工资价位附件，单位万元/年：会计专业人员",
+        "sha256": "95a4d8ac0e33f336813b6f0ebdb6bbd3f90f7699804125a1e6a39ffce1981971"
       },
       "published_on": "2025-07-07",
       "publication_status": "dated",
@@ -1411,7 +1460,8 @@
       "source": {
         "organization": "四川省 2024 年人力资源市场工资价位和行业人工成本信息",
         "url": "https://rst.sc.gov.cn/rst/gsgg/2025/7/7/770dc72520ef42c493044cfb1f8c404f.shtml",
-        "locator": "工资价位附件，单位万元/年：会计专业人员"
+        "locator": "工资价位附件，单位万元/年：会计专业人员",
+        "sha256": "95a4d8ac0e33f336813b6f0ebdb6bbd3f90f7699804125a1e6a39ffce1981971"
       },
       "published_on": "2025-07-07",
       "publication_status": "dated",
@@ -1439,7 +1489,8 @@
       "source": {
         "organization": "四川省 2024 年人力资源市场工资价位和行业人工成本信息",
         "url": "https://rst.sc.gov.cn/rst/gsgg/2025/7/7/770dc72520ef42c493044cfb1f8c404f.shtml",
-        "locator": "工资价位附件，单位万元/年：大学专科（高职、大专、高技）"
+        "locator": "工资价位附件，单位万元/年：大学专科（高职、大专、高技）",
+        "sha256": "95a4d8ac0e33f336813b6f0ebdb6bbd3f90f7699804125a1e6a39ffce1981971"
       },
       "published_on": "2025-07-07",
       "publication_status": "dated",
@@ -1467,7 +1518,8 @@
       "source": {
         "organization": "四川省 2024 年人力资源市场工资价位和行业人工成本信息",
         "url": "https://rst.sc.gov.cn/rst/gsgg/2025/7/7/770dc72520ef42c493044cfb1f8c404f.shtml",
-        "locator": "工资价位附件，单位万元/年：大学专科（高职、大专、高技）"
+        "locator": "工资价位附件，单位万元/年：大学专科（高职、大专、高技）",
+        "sha256": "95a4d8ac0e33f336813b6f0ebdb6bbd3f90f7699804125a1e6a39ffce1981971"
       },
       "published_on": "2025-07-07",
       "publication_status": "dated",
@@ -1495,7 +1547,8 @@
       "source": {
         "organization": "四川省 2024 年人力资源市场工资价位和行业人工成本信息",
         "url": "https://rst.sc.gov.cn/rst/gsgg/2025/7/7/770dc72520ef42c493044cfb1f8c404f.shtml",
-        "locator": "工资价位附件，单位万元/年：大学专科（高职、大专、高技）"
+        "locator": "工资价位附件，单位万元/年：大学专科（高职、大专、高技）",
+        "sha256": "95a4d8ac0e33f336813b6f0ebdb6bbd3f90f7699804125a1e6a39ffce1981971"
       },
       "published_on": "2025-07-07",
       "publication_status": "dated",
@@ -1523,7 +1576,8 @@
       "source": {
         "organization": "四川省 2024 年人力资源市场工资价位和行业人工成本信息",
         "url": "https://rst.sc.gov.cn/rst/gsgg/2025/7/7/770dc72520ef42c493044cfb1f8c404f.shtml",
-        "locator": "工资价位附件，单位万元/年：大学专科（高职、大专、高技）"
+        "locator": "工资价位附件，单位万元/年：大学专科（高职、大专、高技）",
+        "sha256": "95a4d8ac0e33f336813b6f0ebdb6bbd3f90f7699804125a1e6a39ffce1981971"
       },
       "published_on": "2025-07-07",
       "publication_status": "dated",
@@ -1551,7 +1605,8 @@
       "source": {
         "organization": "四川省 2024 年人力资源市场工资价位和行业人工成本信息",
         "url": "https://rst.sc.gov.cn/rst/gsgg/2025/7/7/770dc72520ef42c493044cfb1f8c404f.shtml",
-        "locator": "工资价位附件，单位万元/年：大学专科（高职、大专、高技）"
+        "locator": "工资价位附件，单位万元/年：大学专科（高职、大专、高技）",
+        "sha256": "95a4d8ac0e33f336813b6f0ebdb6bbd3f90f7699804125a1e6a39ffce1981971"
       },
       "published_on": "2025-07-07",
       "publication_status": "dated",
@@ -1579,7 +1634,8 @@
       "source": {
         "organization": "四川省 2024 年人力资源市场工资价位和行业人工成本信息",
         "url": "https://rst.sc.gov.cn/rst/gsgg/2025/7/7/770dc72520ef42c493044cfb1f8c404f.shtml",
-        "locator": "工资价位附件，单位万元/年：0~1年"
+        "locator": "工资价位附件，单位万元/年：0~1年",
+        "sha256": "95a4d8ac0e33f336813b6f0ebdb6bbd3f90f7699804125a1e6a39ffce1981971"
       },
       "published_on": "2025-07-07",
       "publication_status": "dated",
@@ -1607,7 +1663,8 @@
       "source": {
         "organization": "四川省 2024 年人力资源市场工资价位和行业人工成本信息",
         "url": "https://rst.sc.gov.cn/rst/gsgg/2025/7/7/770dc72520ef42c493044cfb1f8c404f.shtml",
-        "locator": "工资价位附件，单位万元/年：0~1年"
+        "locator": "工资价位附件，单位万元/年：0~1年",
+        "sha256": "95a4d8ac0e33f336813b6f0ebdb6bbd3f90f7699804125a1e6a39ffce1981971"
       },
       "published_on": "2025-07-07",
       "publication_status": "dated",
@@ -1635,7 +1692,8 @@
       "source": {
         "organization": "四川省 2024 年人力资源市场工资价位和行业人工成本信息",
         "url": "https://rst.sc.gov.cn/rst/gsgg/2025/7/7/770dc72520ef42c493044cfb1f8c404f.shtml",
-        "locator": "工资价位附件，单位万元/年：0~1年"
+        "locator": "工资价位附件，单位万元/年：0~1年",
+        "sha256": "95a4d8ac0e33f336813b6f0ebdb6bbd3f90f7699804125a1e6a39ffce1981971"
       },
       "published_on": "2025-07-07",
       "publication_status": "dated",
@@ -1663,7 +1721,8 @@
       "source": {
         "organization": "四川省 2024 年人力资源市场工资价位和行业人工成本信息",
         "url": "https://rst.sc.gov.cn/rst/gsgg/2025/7/7/770dc72520ef42c493044cfb1f8c404f.shtml",
-        "locator": "工资价位附件，单位万元/年：0~1年"
+        "locator": "工资价位附件，单位万元/年：0~1年",
+        "sha256": "95a4d8ac0e33f336813b6f0ebdb6bbd3f90f7699804125a1e6a39ffce1981971"
       },
       "published_on": "2025-07-07",
       "publication_status": "dated",
@@ -1691,7 +1750,8 @@
       "source": {
         "organization": "四川省 2024 年人力资源市场工资价位和行业人工成本信息",
         "url": "https://rst.sc.gov.cn/rst/gsgg/2025/7/7/770dc72520ef42c493044cfb1f8c404f.shtml",
-        "locator": "工资价位附件，单位万元/年：0~1年"
+        "locator": "工资价位附件，单位万元/年：0~1年",
+        "sha256": "95a4d8ac0e33f336813b6f0ebdb6bbd3f90f7699804125a1e6a39ffce1981971"
       },
       "published_on": "2025-07-07",
       "publication_status": "dated",
@@ -1719,7 +1779,8 @@
       "source": {
         "organization": "四川最低工资调整征求意见的官方报道",
         "url": "https://www.sc.gov.cn/10462/10464/10797/2026/5/10/a1c660174d83443ab23cc74b7cf6bbfd.shtml",
-        "locator": "四川最低工资调整征求意见的官方报道；2026-05-10 刊登；2026-10-17 已核，仅证明征求意见，不能当现行标准；计算输入：/hypothetical_followup/minimum_wage/proposal/tier1"
+        "locator": "四川最低工资调整征求意见的官方报道；2026-05-10 刊登；2026-10-17 已核，仅证明征求意见，不能当现行标准；计算输入：/hypothetical_followup/minimum_wage/proposal/tier1",
+        "sha256": "26c85d8a36d53d6363ef7512a399b9fe9d8fc542553f0a7a2c92b30adff630e3"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -1747,7 +1808,8 @@
       "source": {
         "organization": "四川最低工资调整征求意见的官方报道",
         "url": "https://www.sc.gov.cn/10462/10464/10797/2026/5/10/a1c660174d83443ab23cc74b7cf6bbfd.shtml",
-        "locator": "四川最低工资调整征求意见的官方报道；2026-05-10 刊登；2026-10-17 已核，仅证明征求意见，不能当现行标准；计算输入：/hypothetical_followup/minimum_wage/proposal/tier2"
+        "locator": "四川最低工资调整征求意见的官方报道；2026-05-10 刊登；2026-10-17 已核，仅证明征求意见，不能当现行标准；计算输入：/hypothetical_followup/minimum_wage/proposal/tier2",
+        "sha256": "26c85d8a36d53d6363ef7512a399b9fe9d8fc542553f0a7a2c92b30adff630e3"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -1775,7 +1837,8 @@
       "source": {
         "organization": "天健四川分所财务审计（2027 校招），四川大学就业网发布",
         "url": "https://jy.scu.edu.cn/index/index/employjobdetail.html?data=MDAwMDAwMDAwMJG6n3_Ed6imi4qQtLh4Y5WKzrbWynbddricp9CWi5qikaeWacSdqLqGfaK2w4iil5C4zNbGiL-E",
-        "locator": "天健四川分所财务审计（2027 校招），四川大学就业网发布；2026-09-21 发布；2026-10-19 curl 核正文，本科门槛、经常出差；有效期与正文截止差一天，未替招聘方消除冲突"
+        "locator": "天健四川分所财务审计（2027 校招），四川大学就业网发布；2026-09-21 发布；2026-10-19 curl 核正文，本科门槛、经常出差；有效期与正文截止差一天，未替招聘方消除冲突",
+        "sha256": "37c7efd8418a730465629098328c66985089c889688cce3a00e9727b060abff1"
       },
       "published_on": "2026-09-21",
       "publication_status": "dated",
@@ -1803,7 +1866,8 @@
       "source": {
         "organization": "天健四川分所财务审计（2027 校招），四川大学就业网发布",
         "url": "https://jy.scu.edu.cn/index/index/employjobdetail.html?data=MDAwMDAwMDAwMJG6n3_Ed6imi4qQtLh4Y5WKzrbWynbddricp9CWi5qikaeWacSdqLqGfaK2w4iil5C4zNbGiL-E",
-        "locator": "天健四川分所财务审计（2027 校招），四川大学就业网发布；2026-09-21 发布；2026-10-19 curl 核正文，本科门槛、经常出差；有效期与正文截止差一天，未替招聘方消除冲突"
+        "locator": "天健四川分所财务审计（2027 校招），四川大学就业网发布；2026-09-21 发布；2026-10-19 curl 核正文，本科门槛、经常出差；有效期与正文截止差一天，未替招聘方消除冲突",
+        "sha256": "37c7efd8418a730465629098328c66985089c889688cce3a00e9727b060abff1"
       },
       "published_on": "2026-09-21",
       "publication_status": "dated",
@@ -1831,7 +1895,8 @@
       "source": {
         "organization": "四川人大直属事业单位 2026 上半年招聘公告",
         "url": "https://www.scspc.gov.cn/tzgg/202603/156174.html",
-        "locator": "四川人大直属事业单位 2026 上半年招聘公告；正文落款 2026-03-12；2026-10-19 curl 取原文，核报名与笔试；不证明本案适用资格或2027计划"
+        "locator": "四川人大直属事业单位 2026 上半年招聘公告；正文落款 2026-03-12；2026-10-19 curl 取原文，核报名与笔试；不证明本案适用资格或2027计划",
+        "sha256": "7da59232ab61c8d57d7d56fb63e7b3b5704943e71e5f79ca168d8a1db6f521b6"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -1859,7 +1924,8 @@
       "source": {
         "organization": "四川人大直属事业单位 2026 上半年招聘公告",
         "url": "https://www.scspc.gov.cn/tzgg/202603/156174.html",
-        "locator": "四川人大直属事业单位 2026 上半年招聘公告；正文落款 2026-03-12；2026-10-19 curl 取原文，核报名与笔试；不证明本案适用资格或2027计划"
+        "locator": "四川人大直属事业单位 2026 上半年招聘公告；正文落款 2026-03-12；2026-10-19 curl 取原文，核报名与笔试；不证明本案适用资格或2027计划",
+        "sha256": "7da59232ab61c8d57d7d56fb63e7b3b5704943e71e5f79ca168d8a1db6f521b6"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -1887,7 +1953,8 @@
       "source": {
         "organization": "四川人大直属事业单位 2026 上半年招聘公告",
         "url": "https://www.scspc.gov.cn/tzgg/202603/156174.html",
-        "locator": "四川人大直属事业单位 2026 上半年招聘公告；正文落款 2026-03-12；2026-10-19 curl 取原文，核报名与笔试；不证明本案适用资格或2027计划"
+        "locator": "四川人大直属事业单位 2026 上半年招聘公告；正文落款 2026-03-12；2026-10-19 curl 取原文，核报名与笔试；不证明本案适用资格或2027计划",
+        "sha256": "7da59232ab61c8d57d7d56fb63e7b3b5704943e71e5f79ca168d8a1db6f521b6"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -1915,7 +1982,8 @@
       "source": {
         "organization": "四川 2026 年普通高校专升本考试报名通告",
         "url": "https://www.sceea.cn/Html/202512/Newsdetail_4595.html",
-        "locator": "四川 2026 年普通高校专升本考试报名通告；2025 年 12 月发布；2026-10-17 已核上一届日期与费用；本案未取得 2027 通告"
+        "locator": "四川 2026 年普通高校专升本考试报名通告；2025 年 12 月发布；2026-10-17 已核上一届日期与费用；本案未取得 2027 通告",
+        "sha256": "137ebbd6ea7a723102d6afd343f86698024a8e0a14e7058eafc7ea293e116c78"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -1943,7 +2011,8 @@
       "source": {
         "organization": "《个人所得税法》，上海税务转载",
         "url": "https://shanghai.chinatax.gov.cn/zcfw/zcfgk/grsds/201809/t441789.html",
-        "locator": "《个人所得税法》，上海税务转载；2026-10-19 curl 核第6条，居民综合所得年度费用扣除60,000元"
+        "locator": "《个人所得税法》，上海税务转载；2026-10-19 curl 核第6条，居民综合所得年度费用扣除60,000元",
+        "sha256": "a9e29cd2e4ad78b1af03f58a1309de9e9146d002ab6e318e0111023515c9078e"
       },
       "published_on": null,
       "publication_status": "undated",

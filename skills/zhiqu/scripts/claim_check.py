@@ -88,7 +88,7 @@ def build(root,bind=False):
    item['review']=prior[item['claim_id']]['review']
   else:item['review']=None
  manifest=digest([{k:v for k,v in x.items() if k!='review'} for x in items])
- result=dict(schema_version=SCHEMA,case_id=case.case['case_id'],manifest_sha256=manifest,source_sha256=content_snapshot(case),items=items,reviewer=old.get('reviewer'),reviewed_manifest_sha256=old.get('reviewed_manifest_sha256'),retired=old.get('retired',[]))
+ result=dict(schema_version=SCHEMA,case_id=case.case['case_id'],manifest_sha256=manifest,source_sha256=content_snapshot(case),items=items,reviewer=old.get('reviewer'),reviewed_manifest_sha256=old.get('reviewed_manifest_sha256'),retired=old.get('retired',[]),cross_reviewers=old.get('cross_reviewers',[]))
  current={x['claim_id'] for x in items}
  for x in old.get('items',[]):
   if x['claim_id'] not in current and x.get('review') and x['review'].get('decision') in ('部分支持','不支持'):
@@ -124,6 +124,10 @@ def errors(root,require_review=True,require_report=True):
  if data.get('reviewed_manifest_sha256')!=data.get('manifest_sha256'):problems.append('claim_check.json：独立复核未覆盖当前句子清单')
  for item in data.get('items',[]):
   review=item.get('review') or {};where='claim_check.json.'+str(item.get('claim_id'))
+  effective=review.get('reviewer') or reviewer
+  writer=review.get('author_session_id') or author
+  if effective.get('independent') is not True or not effective.get('session_id') or not effective.get('model'):problems.append(where+'：缺独立复核会话和模型')
+  if writer and effective.get('session_id')==writer:problems.append(where+'：写作/改写会话不能复核自己的句子')
   if review.get('decision') not in DECISIONS or review.get('kind') not in KINDS or not str(review.get('reason') or '').strip():problems.append(where+'：缺支持/部分支持/不支持判定、类型或具体理由');continue
   if review['decision']=='不支持':
    # Marking as inference must be visible in the current sentence itself.

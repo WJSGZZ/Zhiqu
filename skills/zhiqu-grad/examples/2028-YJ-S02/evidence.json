@@ -35,7 +35,8 @@
       "source": {
         "organization": "南通大学推荐办法",
         "url": "https://yz.chsi.com.cn/tm/tjbf/detail?schCode=10304&zsgsId=3545859828",
-        "locator": "基本条件：学业综合成绩"
+        "locator": "基本条件：学业综合成绩",
+        "sha256": "548c47869afdefccb03e12132afa8bbdeff2b5e9b3678f4469f34645d00257d3"
       },
       "published_on": "2026-09-03",
       "retrieved_on": "2026-10-19",
@@ -61,7 +62,8 @@
       "source": {
         "organization": "南通大学推荐办法",
         "url": "https://yz.chsi.com.cn/tm/tjbf/detail?schCode=10304&zsgsId=3545859828",
-        "locator": "基本条件：外语"
+        "locator": "基本条件：外语",
+        "sha256": "548c47869afdefccb03e12132afa8bbdeff2b5e9b3678f4469f34645d00257d3"
       },
       "published_on": "2026-09-03",
       "retrieved_on": "2026-10-19",
@@ -87,7 +89,8 @@
       "source": {
         "organization": "南通大学推荐办法",
         "url": "https://yz.chsi.com.cn/tm/tjbf/detail?schCode=10304&zsgsId=3545859828",
-        "locator": "工作要求：接收后限制"
+        "locator": "工作要求：接收后限制",
+        "sha256": "548c47869afdefccb03e12132afa8bbdeff2b5e9b3678f4469f34645d00257d3"
       },
       "published_on": "2026-09-03",
       "retrieved_on": "2026-10-19",
@@ -113,7 +116,8 @@
       "source": {
         "organization": "南通大学交通与土木工程学院推荐细则",
         "url": "https://jttm.ntu.edu.cn/2026/0906/c5262a298205/page.htm",
-        "locator": "一、推免名额：交通工程专业行"
+        "locator": "一、推免名额：交通工程专业行",
+        "sha256": "d25afce0c5ced8378baf53d8947ba118f6ed783831851cb33aaf314ac49de5fb"
       },
       "published_on": "2026-09-06",
       "retrieved_on": "2026-10-19",
@@ -139,7 +143,8 @@
       "source": {
         "organization": "南通大学交通与土木工程学院推荐细则",
         "url": "https://jttm.ntu.edu.cn/2026/0906/c5262a298205/page.htm",
-        "locator": "综合评价：特殊学术专长"
+        "locator": "综合评价：特殊学术专长",
+        "sha256": "d25afce0c5ced8378baf53d8947ba118f6ed783831851cb33aaf314ac49de5fb"
       },
       "published_on": "2026-09-06",
       "retrieved_on": "2026-10-19",
@@ -165,7 +170,8 @@
       "source": {
         "organization": "南通大学交通与土木工程学院推荐细则",
         "url": "https://jttm.ntu.edu.cn/2026/0906/c5262a298205/page.htm",
-        "locator": "当届推荐办法与排名口径"
+        "locator": "当届推荐办法与排名口径",
+        "sha256": "d25afce0c5ced8378baf53d8947ba118f6ed783831851cb33aaf314ac49de5fb"
       },
       "published_on": null,
       "retrieved_on": "2026-10-19",
@@ -192,7 +198,8 @@
       "source": {
         "organization": "南通大学研究生招生入口",
         "url": "https://yjs.ntu.edu.cn/2026/0910/c7673a298559/page.htm",
-        "locator": "南通大学研究生招生入口"
+        "locator": "南通大学研究生招生入口",
+        "sha256": "69abe53127a05feaa6b974988dd06515e198ee8e3c4c2bfb22d5fee8de58bebe"
       },
       "published_on": null,
       "retrieved_on": "2026-10-19",
@@ -219,7 +226,8 @@
       "source": {
         "organization": "江苏大学研究生招生入口",
         "url": "https://yz.ujs.edu.cn/",
-        "locator": "江苏大学研究生招生入口"
+        "locator": "江苏大学研究生招生入口",
+        "sha256": "212599fbbe2bb52ddeee1a6294ceff9407bfdf98da118223cabee2f0418d05d3"
       },
       "published_on": null,
       "retrieved_on": "2026-10-19",
@@ -246,7 +254,8 @@
       "source": {
         "organization": "南京林业大学研究生招生入口",
         "url": "https://yz.njfu.edu.cn/",
-        "locator": "南京林业大学研究生招生入口"
+        "locator": "南京林业大学研究生招生入口",
+        "sha256": "48e6cc65f8fc7dece803ab6c2385e31901d66ee46b55cacda2658c2047ade238"
       },
       "published_on": null,
       "retrieved_on": "2026-10-19",

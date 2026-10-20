@@ -127,7 +127,8 @@
       "source": {
         "organization": "教育部《2027 年全国硕士研究生招生工作管理规定》",
         "url": "https://www.moe.gov.cn/srcsite/A15/moe_778/s3261/202609/t20260923_1451734.html",
-        "locator": "教育部《2027 年全国硕士研究生招生工作管理规定》；2026-09-23 发布；2026-10-19 核对本机已取原文；报名、初试与调剂按当年文件"
+        "locator": "教育部《2027 年全国硕士研究生招生工作管理规定》；2026-09-23 发布；2026-10-19 核对本机已取原文；报名、初试与调剂按当年文件",
+        "sha256": "4faca92bb6e174084bd397c0c2f3540f14b173e31d1551d58dcc0a360bbbcb99"
       },
       "published_on": "2026-09-23",
       "publication_status": "dated",
@@ -155,7 +156,8 @@
       "source": {
         "organization": "华南理工大学 2027 年硕士招生章程",
         "url": "https://yz.scut.edu.cn/2026/0930/c30381a636831/page.htm",
-        "locator": "华南理工大学 2027 年硕士招生章程；2026-09-30 发布；2026-10-19 curl 取原文，核报名、考试、培养与费用入口"
+        "locator": "华南理工大学 2027 年硕士招生章程；2026-09-30 发布；2026-10-19 curl 取原文，核报名、考试、培养与费用入口",
+        "sha256": "a32c2daf9d5ed049914d3976f10df619f6db8f9c68ce38e485e8b5614868378b"
       },
       "published_on": "2026-09-30",
       "publication_status": "dated",
@@ -183,7 +185,8 @@
       "source": {
         "organization": "华南理工大学 2027 年招生专业目录",
         "url": "https://yanzhao.scut.edu.cn/open/Master/Zsml_view.aspx",
-        "locator": "华南理工大学 2027 年招生专业目录；2026-10-17 已核电力学院 085801 的计划与科目；2026-10-19 入口可取，动态筛选未重取；相关数值沿用前次核对"
+        "locator": "华南理工大学 2027 年招生专业目录；2026-10-17 已核电力学院 085801 的计划与科目；2026-10-19 入口可取，动态筛选未重取；相关数值沿用前次核对",
+        "sha256": "6255b5ad1648d5685435e11d95dcb58b32607759dc2d4823f2799e8a876af67a"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -211,7 +214,8 @@
       "source": {
         "organization": "广东工业大学 2027 年硕士招生简章",
         "url": "https://yzw.gdut.edu.cn/info/1017/3865.htm",
-        "locator": "广东工业大学 2027 年硕士招生简章；2026-09-30 发布；2026-10-19 curl 取原文，核应届资格、学习方式、报名与考试"
+        "locator": "广东工业大学 2027 年硕士招生简章；2026-09-30 发布；2026-10-19 curl 取原文，核应届资格、学习方式、报名与考试",
+        "sha256": "831c0051f738826624bf5b40d0799a1c33561912d2e847e01d9ae6670b6f9d86"
       },
       "published_on": "2026-09-30",
       "publication_status": "dated",
@@ -239,7 +243,8 @@
       "source": {
         "organization": "广东工业大学 2027 年招生专业目录",
         "url": "https://yzw.gdut.edu.cn/fujian2027nianshuoshiyanjiushengzhaoshengzhuanyemuluMEdiaU.pdf",
-        "locator": "广东工业大学 2027 年招生专业目录；随 2027 简章发布；2026-10-19 curl 取原件，核自动化学院 085801 的初试与同等学力加试栏"
+        "locator": "广东工业大学 2027 年招生专业目录；随 2027 简章发布；2026-10-19 curl 取原件，核自动化学院 085801 的初试与同等学力加试栏",
+        "sha256": "525f76faaa2b1e06fe2ce0bd778ecb71747f1932f58f059a8485bc7dcb36689c"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -267,7 +272,8 @@
       "source": {
         "organization": "华南理工大学电力学院 2026 年统考拟录取及 2025 年全校拟录取统计",
         "url": "https://www2.scut.edu.cn/ep/2026/0408/c5226a623127/page.htm",
-        "locator": "华南理工大学电力学院 2026 年统考拟录取及 2025 年全校拟录取统计；2026-04-08 发布；2026-10-17 已核统计；2025 原件见 [12]。只保留匿名统计"
+        "locator": "华南理工大学电力学院 2026 年统考拟录取及 2025 年全校拟录取统计；2026-04-08 发布；2026-10-17 已核统计；2025 原件见 [12]。只保留匿名统计",
+        "sha256": "625d0a1c73e4cc2afa3fd579d4168bbb2ef39a55b08f67dd8ecd578f2bc30061"
       },
       "published_on": "2026-04-08",
       "publication_status": "dated",
@@ -295,7 +301,8 @@
       "source": {
         "organization": "华南理工大学 2026 年教育收费公示",
         "url": "https://xxgk.scut.edu.cn/2026/0724/c132a49401/page.htm",
-        "locator": "华南理工大学 2026 年教育收费公示；页面标注 2026-08-12；2026-10-19 curl 取正文及住宿附件，按楼栋分档，不等于已分配宿舍"
+        "locator": "华南理工大学 2026 年教育收费公示；页面标注 2026-08-12；2026-10-19 curl 取正文及住宿附件，按楼栋分档，不等于已分配宿舍",
+        "sha256": "b925048f9c863e632336a18c0ca963efed3859c4477e864ce7045bab4e8aa2a6"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -323,7 +330,8 @@
       "source": {
         "organization": "广东工业大学 2026 年全校拟录取公示",
         "url": "https://yzw.gdut.edu.cn/info/1020/3825.htm",
-        "locator": "广东工业大学 2026 年全校拟录取公示；2026-05-06 发布；2026-10-19 curl 取通知，附件仅在内存核对，无初试分数列；与学院复试表尚未完整对应，不保存个人记录"
+        "locator": "广东工业大学 2026 年全校拟录取公示；2026-05-06 发布；2026-10-19 curl 取通知，附件仅在内存核对，无初试分数列；与学院复试表尚未完整对应，不保存个人记录",
+        "sha256": "4c4d460946fe708f08b736f34033f01619d0ff0ff520affb506c43ef2b597502"
       },
       "published_on": "2026-05-06",
       "publication_status": "dated",
@@ -351,7 +359,8 @@
       "source": {
         "organization": "广东工业大学电气工程培养方案",
         "url": "https://automation.gdut.edu.cn/info/1044/8869.htm",
-        "locator": "广东工业大学电气工程培养方案；2025 版；2026-09-30 已核培养方向与学制，只支持培养范围，不代替 2027 招生要求"
+        "locator": "广东工业大学电气工程培养方案；2025 版；2026-09-30 已核培养方向与学制，只支持培养范围，不代替 2027 招生要求",
+        "sha256": "53e71cd97722a4c65a6d6dd3f070a588a5960c9e10cb5f06c51c9243edf67633"
       },
       "published_on": "2025-09-01",
       "publication_status": "dated",
@@ -379,7 +388,8 @@
       "source": {
         "organization": "华南理工大学 2025 年拟录取名单",
         "url": "https://yz.scut.edu.cn/2025/0523/c30111a592029/page.htm",
-        "locator": "华南理工大学 2025 年拟录取名单；2025-05-23 发布；2026-10-17 逐页核对电力学院 085801，保留匿名统计"
+        "locator": "华南理工大学 2025 年拟录取名单；2025-05-23 发布；2026-10-17 逐页核对电力学院 085801，保留匿名统计",
+        "sha256": "a73639d9f2f0c3f5eb9e5af2c9b7f27e99999f14c64e1d6fbc214524027ea579"
       },
       "published_on": "2025-05-23",
       "publication_status": "dated",
@@ -407,7 +417,8 @@
       "source": {
         "organization": "广东工业大学自动化学院 2026 年复试成绩公示（二）",
         "url": "https://automation.gdut.edu.cn/info/1081/10565.htm",
-        "locator": "广东工业大学自动化学院 2026 年复试成绩公示（二）；公示期 2026-04-11 至 04-17；2026-10-19 curl 取正文，电气为非全日制调剂，不用于本案全日制初试分布"
+        "locator": "广东工业大学自动化学院 2026 年复试成绩公示（二）；公示期 2026-04-11 至 04-17；2026-10-19 curl 取正文，电气为非全日制调剂，不用于本案全日制初试分布",
+        "sha256": "568edf9093b7d4369e867b5f6f9c4b10f1dd003c055578f39f81e7cd83243dda"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -435,7 +446,8 @@
       "source": {
         "organization": "广东工业大学自动化学院 2026 第一志愿复试成绩公示（一）及附件",
         "url": "https://automation.gdut.edu.cn/info/1081/10524.htm",
-        "locator": "广东工业大学自动化学院 2026 第一志愿复试成绩公示（一）及附件；2026-03-29 发布；2026-10-19 curl 在内存核原 PDF 25 页，仅保存085801全日制普通考生匿名频数，复试人群不是拟录取人群"
+        "locator": "广东工业大学自动化学院 2026 第一志愿复试成绩公示（一）及附件；2026-03-29 发布；2026-10-19 curl 在内存核原 PDF 25 页，仅保存085801全日制普通考生匿名频数，复试人群不是拟录取人群",
+        "sha256": "859727d5dc13f90c108f77bf7978586ae9db276ac6662b0db347dde52517f3be"
       },
       "published_on": "2026-03-29",
       "publication_status": "dated",
@@ -463,7 +475,8 @@
       "source": {
         "organization": "广东工业大学自动化学院 2026 复试工作方案",
         "url": "https://automation.gdut.edu.cn/info/1081/10510.htm",
-        "locator": "广东工业大学自动化学院 2026 复试工作方案；2026-03-16 发布；2026-10-19 curl 核原文，权重、合格线、科目与分学习方式排序；不承诺2027沿用"
+        "locator": "广东工业大学自动化学院 2026 复试工作方案；2026-03-16 发布；2026-10-19 curl 核原文，权重、合格线、科目与分学习方式排序；不承诺2027沿用",
+        "sha256": "9be717d8a1acce4501b9f854ad7deb2c19d3c59e833da178ea464dfcbbf5375c"
       },
       "published_on": "2026-03-16",
       "publication_status": "dated",
@@ -491,7 +504,8 @@
       "source": {
         "organization": "广东工业大学 2026 级学制与学费标准及附件",
         "url": "https://yzw.gdut.edu.cn/info/1019/1304.htm",
-        "locator": "广东工业大学 2026 级学制与学费标准及附件；2025-10-11 发布；2026-10-19 curl 核两页原PDF，085801全日制非定向12,000元、3年；非2027最终收费"
+        "locator": "广东工业大学 2026 级学制与学费标准及附件；2025-10-11 发布；2026-10-19 curl 核两页原PDF，085801全日制非定向12,000元、3年；非2027最终收费",
+        "sha256": "c535fb576ca4bd0cf00d9d532d66654a621b1e255664452342cff5305ccfa583"
       },
       "published_on": "2025-10-11",
       "publication_status": "dated",
@@ -519,7 +533,8 @@
       "source": {
         "organization": "长沙理工大学2027年硕士研究生招生简章",
         "url": "https://www.csust.edu.cn/yjsy/info/1116/11846.htm",
-        "locator": "长沙理工大学2027年硕士研究生招生简章；2026-09-30发布；2026-10-19 curl取原文；专业目录附件要求验证码，未绕过，具体电气专业科目待核"
+        "locator": "长沙理工大学2027年硕士研究生招生简章；2026-09-30发布；2026-10-19 curl取原文；专业目录附件要求验证码，未绕过，具体电气专业科目待核",
+        "sha256": "ae70064be1c1b4f615d79a4542bc935365284204b34f154dedfc70c2de40445a"
       },
       "published_on": "2026-09-30",
       "publication_status": "dated",
@@ -547,7 +562,8 @@
       "source": {
         "organization": "华南理工大学 2027 年收费与学制附件",
         "url": "https://yz.scut.edu.cn/_upload/article/files/dc/e6/b85326154456b4afe48408aa927d/67823094-80a0-403f-99aa-1b7a747762a9.pdf",
-        "locator": "华南理工大学 2027 年收费与学制附件；随 2027 章程发布；2026-10-19 curl 取原件，第 1 页 0858 非定向全日制学费 8,000 元、3 年；2.1.13"
+        "locator": "华南理工大学 2027 年收费与学制附件；随 2027 章程发布；2026-10-19 curl 取原件，第 1 页 0858 非定向全日制学费 8,000 元、3 年；2.1.13",
+        "sha256": "6b5904a7662beea2766025f78685169d54ba30449b6f6696eb98405f61acc39d"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -575,7 +591,8 @@
       "source": {
         "organization": "华南理工大学 2027 年收费与学制附件",
         "url": "https://yz.scut.edu.cn/_upload/article/files/dc/e6/b85326154456b4afe48408aa927d/67823094-80a0-403f-99aa-1b7a747762a9.pdf",
-        "locator": "华南理工大学 2027 年收费与学制附件；随 2027 章程发布；2026-10-19 curl 取原件，第 1 页 0858 非定向全日制学费 8,000 元、3 年；2.1.13"
+        "locator": "华南理工大学 2027 年收费与学制附件；随 2027 章程发布；2026-10-19 curl 取原件，第 1 页 0858 非定向全日制学费 8,000 元、3 年；2.1.13",
+        "sha256": "6b5904a7662beea2766025f78685169d54ba30449b6f6696eb98405f61acc39d"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -599,11 +616,12 @@
       "id": "E1002",
       "claim": "华工收费表专业类别代码",
       "value": "0858",
-      "unit": "",
+      "unit": "代码",
       "source": {
         "organization": "华南理工大学 2027 年收费与学制附件",
         "url": "https://yz.scut.edu.cn/_upload/article/files/dc/e6/b85326154456b4afe48408aa927d/67823094-80a0-403f-99aa-1b7a747762a9.pdf",
-        "locator": "华南理工大学 2027 年收费与学制附件；随 2027 章程发布；2026-10-19 curl 取原件，第 1 页 0858 非定向全日制学费 8,000 元、3 年；2.1.13"
+        "locator": "华南理工大学 2027 年收费与学制附件；随 2027 章程发布；2026-10-19 curl 取原件，第 1 页 0858 非定向全日制学费 8,000 元、3 年；2.1.13",
+        "sha256": "6b5904a7662beea2766025f78685169d54ba30449b6f6696eb98405f61acc39d"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -627,11 +645,12 @@
       "id": "E1003",
       "claim": "华工电气专业代码",
       "value": "085801",
-      "unit": "",
+      "unit": "代码",
       "source": {
         "organization": "华南理工大学 2027 年招生专业目录",
         "url": "https://yanzhao.scut.edu.cn/open/Master/Zsml_view.aspx",
-        "locator": "2027 / 105|电力学院 / 全日制 / 085801专业行和考试科目行；scut-browser：085801"
+        "locator": "2027 / 105|电力学院 / 全日制 / 085801专业行和考试科目行；scut-browser：085801",
+        "sha256": "6255b5ad1648d5685435e11d95dcb58b32607759dc2d4823f2799e8a876af67a"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -655,11 +674,12 @@
       "id": "E1004",
       "claim": "华工电气目录总计划（含推免）",
       "value": 236,
-      "unit": "",
+      "unit": "人",
       "source": {
         "organization": "华南理工大学 2027 年招生专业目录",
         "url": "https://yanzhao.scut.edu.cn/open/Master/Zsml_view.aspx",
-        "locator": "2027 / 105|电力学院 / 全日制 / 085801专业行和考试科目行；scut-browser：236"
+        "locator": "2027 / 105|电力学院 / 全日制 / 085801专业行和考试科目行；scut-browser：236",
+        "sha256": "6255b5ad1648d5685435e11d95dcb58b32607759dc2d4823f2799e8a876af67a"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -683,11 +703,12 @@
       "id": "E1005",
       "claim": "华工电气目录基地计划",
       "value": 160,
-      "unit": "",
+      "unit": "人",
       "source": {
         "organization": "华南理工大学 2027 年招生专业目录",
         "url": "https://yanzhao.scut.edu.cn/open/Master/Zsml_view.aspx",
-        "locator": "2027 / 105|电力学院 / 全日制 / 085801专业行和考试科目行；scut-browser：160"
+        "locator": "2027 / 105|电力学院 / 全日制 / 085801专业行和考试科目行；scut-browser：160",
+        "sha256": "6255b5ad1648d5685435e11d95dcb58b32607759dc2d4823f2799e8a876af67a"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -711,11 +732,12 @@
       "id": "E1006",
       "claim": "华工初试政治代码",
       "value": 101,
-      "unit": "",
+      "unit": "代码",
       "source": {
         "organization": "华南理工大学 2027 年招生专业目录",
         "url": "https://yanzhao.scut.edu.cn/open/Master/Zsml_view.aspx",
-        "locator": "2027 / 105|电力学院 / 全日制 / 085801专业行和考试科目行；scut-browser：101"
+        "locator": "2027 / 105|电力学院 / 全日制 / 085801专业行和考试科目行；scut-browser：101",
+        "sha256": "6255b5ad1648d5685435e11d95dcb58b32607759dc2d4823f2799e8a876af67a"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -739,11 +761,12 @@
       "id": "E1007",
       "claim": "华工初试英语代码",
       "value": 201,
-      "unit": "",
+      "unit": "代码",
       "source": {
         "organization": "华南理工大学 2027 年招生专业目录",
         "url": "https://yanzhao.scut.edu.cn/open/Master/Zsml_view.aspx",
-        "locator": "2027 / 105|电力学院 / 全日制 / 085801专业行和考试科目行；scut-browser：201"
+        "locator": "2027 / 105|电力学院 / 全日制 / 085801专业行和考试科目行；scut-browser：201",
+        "sha256": "6255b5ad1648d5685435e11d95dcb58b32607759dc2d4823f2799e8a876af67a"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -767,11 +790,12 @@
       "id": "E1008",
       "claim": "华工初试数学代码",
       "value": 301,
-      "unit": "",
+      "unit": "代码",
       "source": {
         "organization": "华南理工大学 2027 年招生专业目录",
         "url": "https://yanzhao.scut.edu.cn/open/Master/Zsml_view.aspx",
-        "locator": "2027 / 105|电力学院 / 全日制 / 085801专业行和考试科目行；scut-browser：301"
+        "locator": "2027 / 105|电力学院 / 全日制 / 085801专业行和考试科目行；scut-browser：301",
+        "sha256": "6255b5ad1648d5685435e11d95dcb58b32607759dc2d4823f2799e8a876af67a"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -795,11 +819,12 @@
       "id": "E1009",
       "claim": "华工初试专业课代码",
       "value": 812,
-      "unit": "",
+      "unit": "代码",
       "source": {
         "organization": "华南理工大学 2027 年招生专业目录",
         "url": "https://yanzhao.scut.edu.cn/open/Master/Zsml_view.aspx",
-        "locator": "2027 / 105|电力学院 / 全日制 / 085801专业行和考试科目行；scut-browser：812"
+        "locator": "2027 / 105|电力学院 / 全日制 / 085801专业行和考试科目行；scut-browser：812",
+        "sha256": "6255b5ad1648d5685435e11d95dcb58b32607759dc2d4823f2799e8a876af67a"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -827,7 +852,8 @@
       "source": {
         "organization": "华南理工大学 2027 年招生专业目录",
         "url": "https://yanzhao.scut.edu.cn/open/Master/Zsml_view.aspx",
-        "locator": "2027 / 105|电力学院 / 全日制 / 085801专业行和考试科目行；华工复试科目代码"
+        "locator": "2027 / 105|电力学院 / 全日制 / 085801专业行和考试科目行；华工复试科目代码",
+        "sha256": "6255b5ad1648d5685435e11d95dcb58b32607759dc2d4823f2799e8a876af67a"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -851,11 +877,12 @@
       "id": "E1011",
       "claim": "广工电气专业代码",
       "value": "085801",
-      "unit": "",
+      "unit": "代码",
       "source": {
         "organization": "广东工业大学 2027 年招生专业目录",
         "url": "https://yzw.gdut.edu.cn/fujian2027nianshuoshiyanjiushengzhaoshengzhuanyemuluMEdiaU.pdf",
-        "locator": "广东工业大学 2027 年招生专业目录；随 2027 简章发布；2026-10-19 curl 取原件，核自动化学院 085801 的初试与同等学力加试栏；gdut-directory-retry：085801"
+        "locator": "广东工业大学 2027 年招生专业目录；随 2027 简章发布；2026-10-19 curl 取原件，核自动化学院 085801 的初试与同等学力加试栏；gdut-directory-retry：085801",
+        "sha256": "525f76faaa2b1e06fe2ce0bd778ecb71747f1932f58f059a8485bc7dcb36689c"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -879,11 +906,12 @@
       "id": "E1012",
       "claim": "广工电气初试政治代码",
       "value": 101,
-      "unit": "",
+      "unit": "代码",
       "source": {
         "organization": "广东工业大学 2027 年招生专业目录",
         "url": "https://yzw.gdut.edu.cn/fujian2027nianshuoshiyanjiushengzhaoshengzhuanyemuluMEdiaU.pdf",
-        "locator": "广东工业大学 2027 年招生专业目录；随 2027 简章发布；2026-10-19 curl 取原件，核自动化学院 085801 的初试与同等学力加试栏；gdut-directory-retry：101"
+        "locator": "广东工业大学 2027 年招生专业目录；随 2027 简章发布；2026-10-19 curl 取原件，核自动化学院 085801 的初试与同等学力加试栏；gdut-directory-retry：101",
+        "sha256": "525f76faaa2b1e06fe2ce0bd778ecb71747f1932f58f059a8485bc7dcb36689c"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -907,11 +935,12 @@
       "id": "E1013",
       "claim": "广工电气初试英语代码",
       "value": 204,
-      "unit": "",
+      "unit": "代码",
       "source": {
         "organization": "广东工业大学 2027 年招生专业目录",
         "url": "https://yzw.gdut.edu.cn/fujian2027nianshuoshiyanjiushengzhaoshengzhuanyemuluMEdiaU.pdf",
-        "locator": "广东工业大学 2027 年招生专业目录；随 2027 简章发布；2026-10-19 curl 取原件，核自动化学院 085801 的初试与同等学力加试栏；gdut-directory-retry：204"
+        "locator": "广东工业大学 2027 年招生专业目录；随 2027 简章发布；2026-10-19 curl 取原件，核自动化学院 085801 的初试与同等学力加试栏；gdut-directory-retry：204",
+        "sha256": "525f76faaa2b1e06fe2ce0bd778ecb71747f1932f58f059a8485bc7dcb36689c"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -935,11 +964,12 @@
       "id": "E1014",
       "claim": "广工电气初试数学代码",
       "value": 302,
-      "unit": "",
+      "unit": "代码",
       "source": {
         "organization": "广东工业大学 2027 年招生专业目录",
         "url": "https://yzw.gdut.edu.cn/fujian2027nianshuoshiyanjiushengzhaoshengzhuanyemuluMEdiaU.pdf",
-        "locator": "广东工业大学 2027 年招生专业目录；随 2027 简章发布；2026-10-19 curl 取原件，核自动化学院 085801 的初试与同等学力加试栏；gdut-directory-retry：302"
+        "locator": "广东工业大学 2027 年招生专业目录；随 2027 简章发布；2026-10-19 curl 取原件，核自动化学院 085801 的初试与同等学力加试栏；gdut-directory-retry：302",
+        "sha256": "525f76faaa2b1e06fe2ce0bd778ecb71747f1932f58f059a8485bc7dcb36689c"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -963,11 +993,12 @@
       "id": "E1015",
       "claim": "广工电气初试专业课代码",
       "value": 808,
-      "unit": "",
+      "unit": "代码",
       "source": {
         "organization": "广东工业大学 2027 年招生专业目录",
         "url": "https://yzw.gdut.edu.cn/fujian2027nianshuoshiyanjiushengzhaoshengzhuanyemuluMEdiaU.pdf",
-        "locator": "广东工业大学 2027 年招生专业目录；随 2027 简章发布；2026-10-19 curl 取原件，核自动化学院 085801 的初试与同等学力加试栏；gdut-directory-retry：808"
+        "locator": "广东工业大学 2027 年招生专业目录；随 2027 简章发布；2026-10-19 curl 取原件，核自动化学院 085801 的初试与同等学力加试栏；gdut-directory-retry：808",
+        "sha256": "525f76faaa2b1e06fe2ce0bd778ecb71747f1932f58f059a8485bc7dcb36689c"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -991,11 +1022,12 @@
       "id": "E1016",
       "claim": "广工复试科目适用的专业代码",
       "value": "085801",
-      "unit": "",
+      "unit": "代码",
       "source": {
         "organization": "广东工业大学自动化学院 2026 复试工作方案",
         "url": "https://automation.gdut.edu.cn/info/1081/10510.htm",
-        "locator": "广东工业大学自动化学院 2026 复试工作方案；2026-03-16 发布；2026-10-19 curl 核原文，权重、合格线、科目与分学习方式排序；不承诺2027沿用；gdut-retest：085801"
+        "locator": "广东工业大学自动化学院 2026 复试工作方案；2026-03-16 发布；2026-10-19 curl 核原文，权重、合格线、科目与分学习方式排序；不承诺2027沿用；gdut-retest：085801",
+        "sha256": "9be717d8a1acce4501b9f854ad7deb2c19d3c59e833da178ea464dfcbbf5375c"
       },
       "published_on": "2026-03-16",
       "publication_status": "dated",
@@ -1019,11 +1051,12 @@
       "id": "E1017",
       "claim": "广工收费表中的电气专业代码",
       "value": "085801",
-      "unit": "",
+      "unit": "代码",
       "source": {
         "organization": "广东工业大学 2026 级学制与学费标准及附件",
         "url": "https://yzw.gdut.edu.cn/info/1019/1304.htm",
-        "locator": "广东工业大学 2026 级学制与学费标准及附件；2025-10-11 发布；2026-10-19 curl 核两页原PDF，085801全日制非定向12,000元、3年；非2027最终收费；gdut-fees-2026-pdf：085801"
+        "locator": "广东工业大学 2026 级学制与学费标准及附件；2025-10-11 发布；2026-10-19 curl 核两页原PDF，085801全日制非定向12,000元、3年；非2027最终收费；gdut-fees-2026-pdf：085801",
+        "sha256": "c535fb576ca4bd0cf00d9d532d66654a621b1e255664452342cff5305ccfa583"
       },
       "published_on": "2025-10-11",
       "publication_status": "dated",
@@ -1051,7 +1084,8 @@
       "source": {
         "organization": "华南理工大学电力学院 2026 年统考拟录取及 2025 年全校拟录取统计",
         "url": "https://www2.scut.edu.cn/ep/2026/0408/c5226a623127/page.htm",
-        "locator": "华南理工大学电力学院 2026 年统考拟录取及 2025 年全校拟录取统计；2026-04-08 发布；2026-10-17 已核统计；2025 原件见 [12]。只保留匿名统计；scut-2026-scores：2026"
+        "locator": "华南理工大学电力学院 2026 年统考拟录取及 2025 年全校拟录取统计；2026-04-08 发布；2026-10-17 已核统计；2025 原件见 [12]。只保留匿名统计；scut-2026-scores：2026",
+        "sha256": "625d0a1c73e4cc2afa3fd579d4168bbb2ef39a55b08f67dd8ecd578f2bc30061"
       },
       "published_on": "2026-04-08",
       "publication_status": "dated",
@@ -1079,7 +1113,8 @@
       "source": {
         "organization": "华南理工大学 2025 年拟录取名单",
         "url": "https://yz.scut.edu.cn/2025/0523/c30111a592029/page.htm",
-        "locator": "华南理工大学 2025 年拟录取名单；2025-05-23 发布；2026-10-17 逐页核对电力学院 085801，保留匿名统计；scut-2025：2025"
+        "locator": "华南理工大学 2025 年拟录取名单；2025-05-23 发布；2026-10-17 逐页核对电力学院 085801，保留匿名统计；scut-2025：2025",
+        "sha256": "a73639d9f2f0c3f5eb9e5af2c9b7f27e99999f14c64e1d6fbc214524027ea579"
       },
       "published_on": "2025-05-23",
       "publication_status": "dated",
@@ -1107,7 +1142,8 @@
       "source": {
         "organization": "广东工业大学自动化学院 2026 第一志愿复试成绩公示（一）及附件",
         "url": "https://automation.gdut.edu.cn/info/1081/10524.htm",
-        "locator": "广东工业大学自动化学院 2026 第一志愿复试成绩公示（一）及附件；2026-03-29 发布；2026-10-19 curl 在内存核原 PDF 25 页，仅保存085801全日制普通考生匿名频数，复试人群不是拟录取人群；gdut-first-result：2026"
+        "locator": "广东工业大学自动化学院 2026 第一志愿复试成绩公示（一）及附件；2026-03-29 发布；2026-10-19 curl 在内存核原 PDF 25 页，仅保存085801全日制普通考生匿名频数，复试人群不是拟录取人群；gdut-first-result：2026",
+        "sha256": "859727d5dc13f90c108f77bf7978586ae9db276ac6662b0db347dde52517f3be"
       },
       "published_on": "2026-03-29",
       "publication_status": "dated",
@@ -1135,7 +1171,8 @@
       "source": {
         "organization": "广东工业大学自动化学院 2026 复试工作方案",
         "url": "https://automation.gdut.edu.cn/info/1081/10510.htm",
-        "locator": "广东工业大学自动化学院 2026 复试工作方案；2026-03-16 发布；2026-10-19 curl 核原文，权重、合格线、科目与分学习方式排序；不承诺2027沿用；gdut-retest：2026"
+        "locator": "广东工业大学自动化学院 2026 复试工作方案；2026-03-16 发布；2026-10-19 curl 核原文，权重、合格线、科目与分学习方式排序；不承诺2027沿用；gdut-retest：2026",
+        "sha256": "9be717d8a1acce4501b9f854ad7deb2c19d3c59e833da178ea464dfcbbf5375c"
       },
       "published_on": "2026-03-16",
       "publication_status": "dated",
@@ -1163,7 +1200,8 @@
       "source": {
         "organization": "华南理工大学 2027 年硕士招生章程",
         "url": "https://yz.scut.edu.cn/2026/0930/c30381a636831/page.htm",
-        "locator": "华南理工大学 2027 年硕士招生章程；2026-09-30 发布；2026-10-19 curl 取原文，核报名、考试、培养与费用入口；scut-2027：2026"
+        "locator": "华南理工大学 2027 年硕士招生章程；2026-09-30 发布；2026-10-19 curl 取原文，核报名、考试、培养与费用入口；scut-2027：2026",
+        "sha256": "a32c2daf9d5ed049914d3976f10df619f6db8f9c68ce38e485e8b5614868378b"
       },
       "published_on": "2026-09-30",
       "publication_status": "dated",
@@ -1191,7 +1229,8 @@
       "source": {
         "organization": "广东工业大学 2026 级学制与学费标准及附件",
         "url": "https://yzw.gdut.edu.cn/info/1019/1304.htm",
-        "locator": "广东工业大学 2026 级学制与学费标准及附件；2025-10-11 发布；2026-10-19 curl 核两页原PDF，085801全日制非定向12,000元、3年；非2027最终收费；gdut-fees-2026-pdf：2026"
+        "locator": "广东工业大学 2026 级学制与学费标准及附件；2025-10-11 发布；2026-10-19 curl 核两页原PDF，085801全日制非定向12,000元、3年；非2027最终收费；gdut-fees-2026-pdf：2026",
+        "sha256": "c535fb576ca4bd0cf00d9d532d66654a621b1e255664452342cff5305ccfa583"
       },
       "published_on": "2025-10-11",
       "publication_status": "dated",
@@ -1215,11 +1254,12 @@
       "id": "E1024",
       "claim": "广工复试成绩占招生考试总成绩的权重",
       "value": "50%",
-      "unit": "",
+      "unit": "%",
       "source": {
         "organization": "广东工业大学自动化学院 2026 复试工作方案",
         "url": "https://automation.gdut.edu.cn/info/1081/10510.htm",
-        "locator": "广东工业大学自动化学院 2026 复试工作方案；2026-03-16 发布；2026-10-19 curl 核原文，权重、合格线、科目与分学习方式排序；不承诺2027沿用；gdut-retest：50%"
+        "locator": "广东工业大学自动化学院 2026 复试工作方案；2026-03-16 发布；2026-10-19 curl 核原文，权重、合格线、科目与分学习方式排序；不承诺2027沿用；gdut-retest：50%",
+        "sha256": "9be717d8a1acce4501b9f854ad7deb2c19d3c59e833da178ea464dfcbbf5375c"
       },
       "published_on": "2026-03-16",
       "publication_status": "dated",
@@ -1247,7 +1287,8 @@
       "source": {
         "organization": "广东工业大学自动化学院 2026 复试工作方案",
         "url": "https://automation.gdut.edu.cn/info/1081/10510.htm",
-        "locator": "广东工业大学自动化学院 2026 复试工作方案；2026-03-16 发布；2026-10-19 curl 核原文，权重、合格线、科目与分学习方式排序；不承诺2027沿用；gdut-retest：60"
+        "locator": "广东工业大学自动化学院 2026 复试工作方案；2026-03-16 发布；2026-10-19 curl 核原文，权重、合格线、科目与分学习方式排序；不承诺2027沿用；gdut-retest：60",
+        "sha256": "9be717d8a1acce4501b9f854ad7deb2c19d3c59e833da178ea464dfcbbf5375c"
       },
       "published_on": "2026-03-16",
       "publication_status": "dated",
@@ -1271,11 +1312,12 @@
       "id": "E1026",
       "claim": "广工复试外语能力测试满分",
       "value": 20,
-      "unit": "",
+      "unit": "分",
       "source": {
         "organization": "广东工业大学自动化学院 2026 复试工作方案",
         "url": "https://automation.gdut.edu.cn/info/1081/10510.htm",
-        "locator": "广东工业大学自动化学院 2026 复试工作方案；2026-03-16 发布；2026-10-19 curl 核原文，权重、合格线、科目与分学习方式排序；不承诺2027沿用；gdut-retest：20"
+        "locator": "广东工业大学自动化学院 2026 复试工作方案；2026-03-16 发布；2026-10-19 curl 核原文，权重、合格线、科目与分学习方式排序；不承诺2027沿用；gdut-retest：20",
+        "sha256": "9be717d8a1acce4501b9f854ad7deb2c19d3c59e833da178ea464dfcbbf5375c"
       },
       "published_on": "2026-03-16",
       "publication_status": "dated",
@@ -1299,11 +1341,12 @@
       "id": "E1027",
       "claim": "广工复试专业知识考核满分",
       "value": 40,
-      "unit": "",
+      "unit": "分",
       "source": {
         "organization": "广东工业大学自动化学院 2026 复试工作方案",
         "url": "https://automation.gdut.edu.cn/info/1081/10510.htm",
-        "locator": "广东工业大学自动化学院 2026 复试工作方案；2026-03-16 发布；2026-10-19 curl 核原文，权重、合格线、科目与分学习方式排序；不承诺2027沿用；gdut-retest：40"
+        "locator": "广东工业大学自动化学院 2026 复试工作方案；2026-03-16 发布；2026-10-19 curl 核原文，权重、合格线、科目与分学习方式排序；不承诺2027沿用；gdut-retest：40",
+        "sha256": "9be717d8a1acce4501b9f854ad7deb2c19d3c59e833da178ea464dfcbbf5375c"
       },
       "published_on": "2026-03-16",
       "publication_status": "dated",
@@ -1327,11 +1370,12 @@
       "id": "E1028",
       "claim": "华工研三普通学生宿舍住宿费（元/学年）",
       "value": 600,
-      "unit": "",
+      "unit": "元/年",
       "source": {
         "organization": "华南理工大学 2026 年教育收费公示",
         "url": "https://xxgk.scut.edu.cn/2026/0724/c132a49401/page.htm",
-        "locator": "华南理工大学 2026 年教育收费公示；页面标注 2026-08-12；2026-10-19 curl 取正文及住宿附件，按楼栋分档，不等于已分配宿舍；scut-housing-fees：600"
+        "locator": "华南理工大学 2026 年教育收费公示；页面标注 2026-08-12；2026-10-19 curl 取正文及住宿附件，按楼栋分档，不等于已分配宿舍；scut-housing-fees：600",
+        "sha256": "b925048f9c863e632336a18c0ca963efed3859c4477e864ce7045bab4e8aa2a6"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -1359,7 +1403,8 @@
       "source": {
         "organization": "华南理工大学 2026 年教育收费公示",
         "url": "https://xxgk.scut.edu.cn/2026/0724/c132a49401/page.htm",
-        "locator": "华南理工大学 2026 年教育收费公示；页面标注 2026-08-12；2026-10-19 curl 取正文及住宿附件，按楼栋分档，不等于已分配宿舍；scut-housing-fees：1400"
+        "locator": "华南理工大学 2026 年教育收费公示；页面标注 2026-08-12；2026-10-19 curl 取正文及住宿附件，按楼栋分档，不等于已分配宿舍；scut-housing-fees：1400",
+        "sha256": "b925048f9c863e632336a18c0ca963efed3859c4477e864ce7045bab4e8aa2a6"
       },
       "published_on": null,
       "publication_status": "undated",
@@ -1387,7 +1432,8 @@
       "source": {
         "organization": "广东工业大学 2026 级学制与学费标准及附件",
         "url": "https://yzw.gdut.edu.cn/info/1019/1304.htm",
-        "locator": "广东工业大学 2026 级学制与学费标准及附件；2025-10-11 发布；2026-10-19 curl 核两页原PDF，085801全日制非定向12,000元、3年；非2027最终收费；gdut-fees-2026-pdf：12000"
+        "locator": "广东工业大学 2026 级学制与学费标准及附件；2025-10-11 发布；2026-10-19 curl 核两页原PDF，085801全日制非定向12,000元、3年；非2027最终收费；gdut-fees-2026-pdf：12000",
+        "sha256": "c535fb576ca4bd0cf00d9d532d66654a621b1e255664452342cff5305ccfa583"
       },
       "published_on": "2025-10-11",
       "publication_status": "dated",
@@ -1415,7 +1461,8 @@
       "source": {
         "organization": "广东工业大学 2026 级学制与学费标准及附件",
         "url": "https://yzw.gdut.edu.cn/info/1019/1304.htm",
-        "locator": "广东工业大学 2026 级学制与学费标准及附件；2025-10-11 发布；2026-10-19 curl 核两页原PDF，085801全日制非定向12,000元、3年；非2027最终收费；gdut-fees-2026-pdf：3"
+        "locator": "广东工业大学 2026 级学制与学费标准及附件；2025-10-11 发布；2026-10-19 curl 核两页原PDF，085801全日制非定向12,000元、3年；非2027最终收费；gdut-fees-2026-pdf：3",
+        "sha256": "c535fb576ca4bd0cf00d9d532d66654a621b1e255664452342cff5305ccfa583"
       },
       "published_on": "2025-10-11",
       "publication_status": "dated",
@@ -1443,7 +1490,8 @@
       "source": {
         "organization": "广东工业大学 2026 级学制与学费标准及附件",
         "url": "https://yzw.gdut.edu.cn/info/1019/1304.htm",
-        "locator": "广东工业大学 2026 级学制与学费标准及附件；2025-10-11 发布；2026-10-19 curl 核两页原PDF，085801全日制非定向12,000元、3年；非2027最终收费；gdut-fees-2026-pdf：15000"
+        "locator": "广东工业大学 2026 级学制与学费标准及附件；2025-10-11 发布；2026-10-19 curl 核两页原PDF，085801全日制非定向12,000元、3年；非2027最终收费；gdut-fees-2026-pdf：15000",
+        "sha256": "c535fb576ca4bd0cf00d9d532d66654a621b1e255664452342cff5305ccfa583"
       },
       "published_on": "2025-10-11",
       "publication_status": "dated",
@@ -1471,7 +1519,8 @@
       "source": {
         "organization": "广东工业大学 2027 年硕士招生简章",
         "url": "https://yzw.gdut.edu.cn/info/1017/3865.htm",
-        "locator": "广东工业大学 2027 年硕士招生简章；2026-09-30 发布；2026-10-19 curl 取原文，核应届资格、学习方式、报名与考试；gdut-2027：5000"
+        "locator": "广东工业大学 2027 年硕士招生简章；2026-09-30 发布；2026-10-19 curl 取原文，核应届资格、学习方式、报名与考试；gdut-2027：5000",
+        "sha256": "831c0051f738826624bf5b40d0799a1c33561912d2e847e01d9ae6670b6f9d86"
       },
       "published_on": "2026-09-30",
       "publication_status": "dated",
@@ -1495,11 +1544,12 @@
       "id": "E1034",
       "claim": "广工新生学业奖学金原则覆盖率",
       "value": "100%",
-      "unit": "",
+      "unit": "%",
       "source": {
         "organization": "广东工业大学 2027 年硕士招生简章",
         "url": "https://yzw.gdut.edu.cn/info/1017/3865.htm",
-        "locator": "广东工业大学 2027 年硕士招生简章；2026-09-30 发布；2026-10-19 curl 取原文，核应届资格、学习方式、报名与考试；gdut-2027：100%"
+        "locator": "广东工业大学 2027 年硕士招生简章；2026-09-30 发布；2026-10-19 curl 取原文，核应届资格、学习方式、报名与考试；gdut-2027：100%",
+        "sha256": "831c0051f738826624bf5b40d0799a1c33561912d2e847e01d9ae6670b6f9d86"
       },
       "published_on": "2026-09-30",
       "publication_status": "dated",
@@ -1527,7 +1577,8 @@
       "source": {
         "organization": "广东工业大学 2027 年硕士招生简章",
         "url": "https://yzw.gdut.edu.cn/info/1017/3865.htm",
-        "locator": "广东工业大学 2027 年硕士招生简章；2026-09-30 发布；2026-10-19 curl 取原文，核应届资格、学习方式、报名与考试；gdut-2027：6000"
+        "locator": "广东工业大学 2027 年硕士招生简章；2026-09-30 发布；2026-10-19 curl 取原文，核应届资格、学习方式、报名与考试；gdut-2027：6000",
+        "sha256": "831c0051f738826624bf5b40d0799a1c33561912d2e847e01d9ae6670b6f9d86"
       },
       "published_on": "2026-09-30",
       "publication_status": "dated",
@@ -1555,7 +1606,8 @@
       "source": {
         "organization": "广东工业大学自动化学院 2026 复试工作方案",
         "url": "https://automation.gdut.edu.cn/info/1081/10510.htm",
-        "locator": "广东工业大学自动化学院 2026 复试工作方案；2026-03-16 发布；2026-10-19 curl 核原文，权重、合格线、科目与分学习方式排序；不承诺2027沿用；计算输入：/additional_scenarios/gdut_2026_retest/retest_max"
+        "locator": "广东工业大学自动化学院 2026 复试工作方案；2026-03-16 发布；2026-10-19 curl 核原文，权重、合格线、科目与分学习方式排序；不承诺2027沿用；计算输入：/additional_scenarios/gdut_2026_retest/retest_max",
+        "sha256": "9be717d8a1acce4501b9f854ad7deb2c19d3c59e833da178ea464dfcbbf5375c"
       },
       "published_on": "2026-03-16",
       "publication_status": "dated",
@@ -1583,7 +1635,8 @@
       "source": {
         "organization": "教育部《2027 年全国硕士研究生招生工作管理规定》",
         "url": "https://www.moe.gov.cn/srcsite/A15/moe_778/s3261/202609/t20260923_1451734.html",
-        "locator": "教育部《2027 年全国硕士研究生招生工作管理规定》；2026-09-23 发布；2026-10-19 核对本机已取原文；报名、初试与调剂按当年文件；masters-2027-http：2026"
+        "locator": "教育部《2027 年全国硕士研究生招生工作管理规定》；2026-09-23 发布；2026-10-19 核对本机已取原文；报名、初试与调剂按当年文件；masters-2027-http：2026",
+        "sha256": "4faca92bb6e174084bd397c0c2f3540f14b173e31d1551d58dcc0a360bbbcb99"
       },
       "published_on": "2026-09-23",
       "publication_status": "dated",
@@ -1611,7 +1664,8 @@
       "source": {
         "organization": "教育部《2027 年全国硕士研究生招生工作管理规定》",
         "url": "https://www.moe.gov.cn/srcsite/A15/moe_778/s3261/202609/t20260923_1451734.html",
-        "locator": "教育部《2027 年全国硕士研究生招生工作管理规定》；2026-09-23 发布；2026-10-19 核对本机已取原文；报名、初试与调剂按当年文件"
+        "locator": "教育部《2027 年全国硕士研究生招生工作管理规定》；2026-09-23 发布；2026-10-19 核对本机已取原文；报名、初试与调剂按当年文件",
+        "sha256": "4faca92bb6e174084bd397c0c2f3540f14b173e31d1551d58dcc0a360bbbcb99"
       },
       "published_on": "2026-09-23",
       "publication_status": "dated",
@@ -1639,7 +1693,8 @@
       "source": {
         "organization": "教育部《2027 年全国硕士研究生招生工作管理规定》",
         "url": "https://www.moe.gov.cn/srcsite/A15/moe_778/s3261/202609/t20260923_1451734.html",
-        "locator": "教育部《2027 年全国硕士研究生招生工作管理规定》；2026-09-23 发布；2026-10-19 核对本机已取原文；报名、初试与调剂按当年文件"
+        "locator": "教育部《2027 年全国硕士研究生招生工作管理规定》；2026-09-23 发布；2026-10-19 核对本机已取原文；报名、初试与调剂按当年文件",
+        "sha256": "4faca92bb6e174084bd397c0c2f3540f14b173e31d1551d58dcc0a360bbbcb99"
       },
       "published_on": "2026-09-23",
       "publication_status": "dated",
@@ -1667,7 +1722,8 @@
       "source": {
         "organization": "教育部《2027 年全国硕士研究生招生工作管理规定》",
         "url": "https://www.moe.gov.cn/srcsite/A15/moe_778/s3261/202609/t20260923_1451734.html",
-        "locator": "教育部《2027 年全国硕士研究生招生工作管理规定》；2026-09-23 发布；2026-10-19 核对本机已取原文；报名、初试与调剂按当年文件"
+        "locator": "教育部《2027 年全国硕士研究生招生工作管理规定》；2026-09-23 发布；2026-10-19 核对本机已取原文；报名、初试与调剂按当年文件",
+        "sha256": "4faca92bb6e174084bd397c0c2f3540f14b173e31d1551d58dcc0a360bbbcb99"
       },
       "published_on": "2026-09-23",
       "publication_status": "dated",
@@ -1695,7 +1751,8 @@
       "source": {
         "organization": "教育部《2027 年全国硕士研究生招生工作管理规定》",
         "url": "https://www.moe.gov.cn/srcsite/A15/moe_778/s3261/202609/t20260923_1451734.html",
-        "locator": "教育部《2027 年全国硕士研究生招生工作管理规定》；2026-09-23 发布；2026-10-19 核对本机已取原文；报名、初试与调剂按当年文件"
+        "locator": "教育部《2027 年全国硕士研究生招生工作管理规定》；2026-09-23 发布；2026-10-19 核对本机已取原文；报名、初试与调剂按当年文件",
+        "sha256": "4faca92bb6e174084bd397c0c2f3540f14b173e31d1551d58dcc0a360bbbcb99"
       },
       "published_on": "2026-09-23",
       "publication_status": "dated",
@@ -1723,7 +1780,8 @@
       "source": {
         "organization": "教育部《2027 年全国硕士研究生招生工作管理规定》",
         "url": "https://www.moe.gov.cn/srcsite/A15/moe_778/s3261/202609/t20260923_1451734.html",
-        "locator": "教育部《2027 年全国硕士研究生招生工作管理规定》；2026-09-23 发布；2026-10-19 核对本机已取原文；报名、初试与调剂按当年文件"
+        "locator": "教育部《2027 年全国硕士研究生招生工作管理规定》；2026-09-23 发布；2026-10-19 核对本机已取原文；报名、初试与调剂按当年文件",
+        "sha256": "4faca92bb6e174084bd397c0c2f3540f14b173e31d1551d58dcc0a360bbbcb99"
       },
       "published_on": "2026-09-23",
       "publication_status": "dated",
@@ -1751,7 +1809,8 @@
       "source": {
         "organization": "教育部《2027 年全国硕士研究生招生工作管理规定》",
         "url": "https://www.moe.gov.cn/srcsite/A15/moe_778/s3261/202609/t20260923_1451734.html",
-        "locator": "教育部《2027 年全国硕士研究生招生工作管理规定》；2026-09-23 发布；2026-10-19 核对本机已取原文；报名、初试与调剂按当年文件"
+        "locator": "教育部《2027 年全国硕士研究生招生工作管理规定》；2026-09-23 发布；2026-10-19 核对本机已取原文；报名、初试与调剂按当年文件",
+        "sha256": "4faca92bb6e174084bd397c0c2f3540f14b173e31d1551d58dcc0a360bbbcb99"
       },
       "published_on": "2026-09-23",
       "publication_status": "dated",
@@ -1779,7 +1838,8 @@
       "source": {
         "organization": "教育部《2027 年全国硕士研究生招生工作管理规定》",
         "url": "https://www.moe.gov.cn/srcsite/A15/moe_778/s3261/202609/t20260923_1451734.html",
-        "locator": "教育部《2027 年全国硕士研究生招生工作管理规定》；2026-09-23 发布；2026-10-19 核对本机已取原文；报名、初试与调剂按当年文件"
+        "locator": "教育部《2027 年全国硕士研究生招生工作管理规定》；2026-09-23 发布；2026-10-19 核对本机已取原文；报名、初试与调剂按当年文件",
+        "sha256": "4faca92bb6e174084bd397c0c2f3540f14b173e31d1551d58dcc0a360bbbcb99"
       },
       "published_on": "2026-09-23",
       "publication_status": "dated",
@@ -1807,7 +1867,8 @@
       "source": {
         "organization": "教育部《2027 年全国硕士研究生招生工作管理规定》",
         "url": "https://www.moe.gov.cn/srcsite/A15/moe_778/s3261/202609/t20260923_1451734.html",
-        "locator": "教育部《2027 年全国硕士研究生招生工作管理规定》；2026-09-23 发布；2026-10-19 核对本机已取原文；报名、初试与调剂按当年文件"
+        "locator": "教育部《2027 年全国硕士研究生招生工作管理规定》；2026-09-23 发布；2026-10-19 核对本机已取原文；报名、初试与调剂按当年文件",
+        "sha256": "4faca92bb6e174084bd397c0c2f3540f14b173e31d1551d58dcc0a360bbbcb99"
       },
       "published_on": "2026-09-23",
       "publication_status": "dated",
@@ -1835,7 +1896,8 @@
       "source": {
         "organization": "广东工业大学 2027 年硕士招生简章",
         "url": "https://yzw.gdut.edu.cn/info/1017/3865.htm",
-        "locator": "广东工业大学 2027 年硕士招生简章；2026-09-30 发布；2026-10-19 curl 取原文，核应届资格、学习方式、报名与考试"
+        "locator": "广东工业大学 2027 年硕士招生简章；2026-09-30 发布；2026-10-19 curl 取原文，核应届资格、学习方式、报名与考试",
+        "sha256": "831c0051f738826624bf5b40d0799a1c33561912d2e847e01d9ae6670b6f9d86"
       },
       "published_on": "2026-09-30",
       "publication_status": "dated",
@@ -1863,7 +1925,8 @@
       "source": {
         "organization": "广东工业大学 2027 年硕士招生简章",
         "url": "https://yzw.gdut.edu.cn/info/1017/3865.htm",
-        "locator": "广东工业大学 2027 年硕士招生简章；2026-09-30 发布；2026-10-19 curl 取原文，核应届资格、学习方式、报名与考试"
+        "locator": "广东工业大学 2027 年硕士招生简章；2026-09-30 发布；2026-10-19 curl 取原文，核应届资格、学习方式、报名与考试",
+        "sha256": "831c0051f738826624bf5b40d0799a1c33561912d2e847e01d9ae6670b6f9d86"
       },
       "published_on": "2026-09-30",
       "publication_status": "dated",
@@ -1891,7 +1954,8 @@
       "source": {
         "organization": "长沙理工大学2027年硕士研究生招生简章",
         "url": "https://www.csust.edu.cn/yjsy/info/1116/11846.htm",
-        "locator": "招生简章附件“招生专业目录”：https://www.csust.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1385679088&wbfileid=11807780；验证码处停止，核电气专业代码、科目、计划、费用和学习方式"
+        "locator": "招生简章附件“招生专业目录”：https://www.csust.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1385679088&wbfileid=11807780；验证码处停止，核电气专业代码、科目、计划、费用和学习方式",
+        "sha256": "ae70064be1c1b4f615d79a4542bc935365284204b34f154dedfc70c2de40445a"
       },
       "published_on": "2026-09-30",
       "publication_status": "dated",

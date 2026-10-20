@@ -35,7 +35,8 @@
       "source": {
         "organization": "教育部硕士研究生招生管理规定",
         "url": "https://www.moe.gov.cn/srcsite/A15/moe_778/s3261/202609/t20260923_1451734.html",
-        "locator": "第十六条第二款工作经验"
+        "locator": "第十六条第二款工作经验",
+        "sha256": "4faca92bb6e174084bd397c0c2f3540f14b173e31d1551d58dcc0a360bbbcb99"
       },
       "published_on": "2026-09-24",
       "retrieved_on": "2026-10-18",

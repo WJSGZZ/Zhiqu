@@ -1128,5 +1128,23 @@
       ],
       "reason": "用于正文对应的资格、方向、时间或承受条件判断；保留本人原话，不作官方认证。"
     }
-  ]
+  ],
+  "authoring": {
+    "model": "未记录"
+  },
+  "reference_units": {
+    "k:/target_year": "年份",
+    "k:/budget/annual_limit": "元/年",
+    "c:/report_parameters/hypothetical_followup__score_scenarios__0": "分",
+    "c:/report_parameters/hypothetical_followup__score_scenarios__1": "分",
+    "c:/report_parameters/hypothetical_followup__score_scenarios__2": "分",
+    "c:/report_parameters/hypothetical_followup__score_scenarios__3": "分",
+    "k:/budget/monthly_living_assumption": "元/月",
+    "c:/illustrative_parameters/daily_hours_ceiling": "小时/日",
+    "c:/report_parameters/additional_scenarios__gdut_2026_first_choice_retest_scores__full_time_rows": "人",
+    "c:/report_parameters/additional_scenarios__gdut_2026_first_choice_retest_scores__excluded_soldier_rows": "人",
+    "c:/report_parameters/additional_scenarios__gdut_2026_retest__initial_increment": "分",
+    "c:/report_parameters/additional_scenarios__gdut_2026_retest__retest_increment": "分",
+    "c:/report_parameters/budget__annual_housing": "元/年"
+  }
 }

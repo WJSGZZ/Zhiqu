@@ -35,7 +35,8 @@
       "source": {
         "organization": "具体岗位条件待核",
         "url": "https://www.ncss.cn/",
-        "locator": "具体岗位条件待核"
+        "locator": "具体岗位条件待核",
+        "sha256": "e494441abecb9ba24352197911b3f3172eb1d212a368014280c1e1f8bed097d4"
       },
       "published_on": null,
       "retrieved_on": "2026-10-19",

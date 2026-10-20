@@ -235,7 +235,7 @@
   },
   "report_meta": {
     "title": "求职方向决策报告",
-    "subtitle": "四川 · 高职大数据与会计 · 2027 年毕业目标",
+    "subtitle": "四川 · 高职{{p:/fields/1/value}} · {{k:/target_year}} 年毕业目标",
     "person": "小宁（模拟）",
     "edition": "求职版",
     "date": "{{k:/context/as_of}}",
@@ -243,7 +243,7 @@
     "stage": "求职版 · 毕业前",
     "region": "四川",
     "data_asof": "{{k:/context/as_of}}",
-    "conclusion": "你在四川读高职会计，毕业后三个月内要有收入，家里能给的支持有限。建议先找基础账务、收付款和对账岗位，专升本按具体门槛和家里能给的现金再判断。两个 offer 里，B 离家近、开销低但签的是派遣，A 到手现金多但这个情景没算公积金；先核合同主体和书面待遇再选。"
+    "conclusion": "你在四川读高职会计，毕业后{{p:/fields/12/value|chinese}}个月内要有收入，家里能给的支持有限。建议先找基础账务、收付款和对账岗位，专升本按具体门槛和家里能给的现金再判断。两个 offer 里，B 离家近、开销低但签的是派遣，A 到手现金多但这个情景没算公积金；先核合同主体和书面待遇再选。"
   },
   "deadlines": [
     {
@@ -511,5 +511,27 @@
       ],
       "reason": "用于正文对应的资格、方向、时间或承受条件判断；保留本人原话，不作官方认证。"
     }
-  ]
+  ],
+  "authoring": {
+    "model": "未记录"
+  },
+  "reference_units": {
+    "k:/target_year": "年份",
+    "c:/report_parameters/hypothetical_followup__offers__1__months": "月",
+    "c:/report_parameters/hypothetical_followup__offers__0__months": "月",
+    "c:/report_parameters/hypothetical_followup__offers__1__monthly_gross": "元/月",
+    "c:/report_parameters/hypothetical_followup__ss_personal_rate_assumption": "比率",
+    "c:/report_parameters/hypothetical_followup__offers__0__hf_rate": "比率",
+    "c:/report_parameters/hypothetical_followup__offers__1__hf_rate": "比率",
+    "c:/report_parameters/hypothetical_followup__offers__0__extra_hours_per_month": "小时/月",
+    "c:/report_parameters/hypothetical_followup__offers__0__monthly_rent": "元/月",
+    "c:/report_parameters/hypothetical_followup__offers__0__monthly_other": "元/月",
+    "c:/report_parameters/hypothetical_followup__offers__1__monthly_rent": "元/月",
+    "k:/budget/take_home_assumption": "元/月",
+    "k:/budget/monthly_housing_assumption": "元/月",
+    "k:/budget/monthly_other_expenses_assumption": "元/月",
+    "c:/report_parameters/hypothetical_followup__offers__0__monthly_gross": "元/月",
+    "c:/report_parameters/hypothetical_followup__standard_hours_per_year": "小时/年",
+    "c:/report_parameters/hypothetical_followup__offers__1__monthly_other": "元/月"
+  }
 }

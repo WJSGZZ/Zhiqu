@@ -1186,7 +1186,23 @@
         "E0001",
         "E0002",
         "E1003",
-        "E1004"
+        "E1004",
+        "E1002",
+        "E1028",
+        "E1029",
+        "E1030",
+        "E1031",
+        "E1032",
+        "E1033",
+        "E1034",
+        "E1035",
+        "E1036",
+        "E1037",
+        "E1038",
+        "E1039",
+        "E1040",
+        "E1041",
+        "E1042"
       ]
     },
     "05_2": {
@@ -1281,7 +1297,8 @@
         "E0015",
         "E0017",
         "E1009",
-        "E1010"
+        "E1010",
+        "E0016"
       ]
     },
     "06_13": {
@@ -1322,7 +1339,10 @@
       },
       "evidence_refs": [
         "E0001",
-        "E0901"
+        "E0901",
+        "E0015",
+        "E0016",
+        "E0017"
       ]
     },
     "07_2": {
@@ -1462,7 +1482,9 @@
         "切换条件": "若主体、待遇或退回安排不清，先停下核；若本人不能接受派遣性质就不保留，不因工作地点是国企而改变名称。"
       },
       "evidence_refs": [
-        "E0001"
+        "E0001",
+        "E0007",
+        "E1017"
       ]
     },
     "08_8": {
@@ -1470,12 +1492,13 @@
       "content": {
         "title": "事业单位财务相关招聘：先判能报，再决定备考",
         "门槛": "核省市人社/主管部门正式公告及岗位表中的学历学位、专业、证书、年龄、毕业时点；当前未取适用 {{k:/target_year}} 岗位，不能写已符合。",
-        "时间窗口": "当届报名、缴费、笔试、资格复审与聘用分别核。{{k:/context/personal_dates/year_end|year}} 四川人大直属事业单位公告只作流程参照，不是仍开放的机会。[6]",
-        "投入": "该 {{k:/context/personal_dates/year_end|year}} 公告笔试为公共基础知识与综合能力测试；其他单位与 {{k:/target_year}} 科目另核。编制、聘用/备案、合同或编外性质逐条确认，不因公立单位就默认在编。[6]",
+        "时间窗口": "当届报名、缴费、笔试、资格复审与聘用分别核。{{e:E2081#/value|year}} 四川人大直属事业单位公告只作流程参照，不是仍开放的机会。[6]",
+        "投入": "该 {{e:E2081#/value|year}} 公告笔试为公共基础知识与综合能力测试；其他单位与 {{k:/target_year}} 科目另核。编制、聘用/备案、合同或编外性质逐条确认，不因公立单位就默认在编。[6]",
         "切换条件": "无适用资格或无资金等到实际聘用，就保留企业就业；考录日期冲突时按本人优先级取舍，不同时默认所有路线都可兼顾。"
       },
       "evidence_refs": [
-        "E0001"
+        "E0001",
+        "E0006"
       ]
     },
     "08_10": {
@@ -1507,28 +1530,28 @@
           ],
           [
             "税前固定工资",
-            "{{c:/hypothetical_offers/0/social_insurance_base|comma}} 元 × {{c:/report_parameters/hypothetical_followup__offers__0__months}} 个月",
+            "{{c:/report_parameters/hypothetical_followup__offers__0__monthly_gross|comma}} 元 × {{c:/report_parameters/hypothetical_followup__offers__0__months}} 个月",
             "{{c:/report_parameters/hypothetical_followup__offers__1__monthly_gross|comma}} 元 × {{c:/report_parameters/hypothetical_followup__offers__1__months}} 个月；假设第 {{c:/report_parameters/hypothetical_followup__offers__1__months}} 个月明确保证且满足发放条件"
           ],
           [
             "个人社保假设",
             "缴费基数 {{c:/hypothetical_offers/0/social_insurance_base|comma}} 元，比例 {{c:/report_parameters/hypothetical_followup__ss_personal_rate_assumption|percent1}}",
-            "基数按 {{k:/context/personal_dates/year_end|year}} 下限 {{c:/hypothetical_offers/1/social_insurance_base|comma}} 元，比例 {{c:/report_parameters/hypothetical_followup__ss_personal_rate_assumption|percent1}}"
+            "基数按 {{e:E1019#/value}} 下限 {{c:/hypothetical_offers/1/social_insurance_base|comma}} 元，比例 {{c:/report_parameters/hypothetical_followup__ss_personal_rate_assumption|percent1}}"
           ],
           [
             "公积金假设",
             "输入暂为 {{c:/report_parameters/hypothetical_followup__offers__0__hf_rate}}，原因与合规依据未核",
-            "按工资 {{c:/report_parameters/hypothetical_followup__offers__1__hf_rate|percent0}}，个人和单位同额，完整年度按 {{c:/report_parameters/hypothetical_followup__offers__0__months}} 个月缴存"
+            "按工资 {{c:/report_parameters/hypothetical_followup__offers__1__hf_rate|percent0}}，个人和单位同额，完整年度按 {{c:/report_constants/months_per_year}} 个月缴存"
           ],
           [
             "工时假设",
-            "基准年工时 {{c:/hypothetical_offers/1/hours_per_year|comma}} 小时，另每月 {{c:/report_parameters/hypothetical_followup__offers__0__extra_hours_per_month}} 小时，无额外加班费计入",
+            "基准年工时 {{c:/report_parameters/hypothetical_followup__standard_hours_per_year|comma}} 小时，另每月 {{c:/report_parameters/hypothetical_followup__offers__0__extra_hours_per_month}} 小时，无额外加班费计入",
             "年工时 {{c:/hypothetical_offers/1/hours_per_year|comma}} 小时，无额外加班计入"
           ],
           [
             "房租与其他支出",
             "每月 {{c:/report_parameters/hypothetical_followup__offers__0__monthly_rent|comma}} + {{c:/report_parameters/hypothetical_followup__offers__0__monthly_other|comma}} 元",
-            "每月给家里 {{c:/report_parameters/hypothetical_followup__offers__1__monthly_rent}} 元，其他 {{c:/report_parameters/hypothetical_followup__offers__0__monthly_rent|comma}} 元"
+            "每月给家里 {{c:/report_parameters/hypothetical_followup__offers__1__monthly_rent}} 元，其他 {{c:/report_parameters/hypothetical_followup__offers__1__monthly_other|comma}} 元"
           ],
           [
             "重要限制",
@@ -1538,7 +1561,9 @@
         ]
       },
       "evidence_refs": [
-        "E0001"
+        "E0001",
+        "E1019",
+        "E1020"
       ]
     },
     "09_6": {
@@ -1562,18 +1587,18 @@
           ],
           [
             "年个人公积金",
-            "{{c:/report_parameters/hypothetical_followup__offers__0__hf_rate}} 元（待核情景）",
+            "{{c:/hypothetical_offers/0/personal_housing_fund|comma}} 元（待核情景）",
             "{{c:/hypothetical_offers/1/personal_housing_fund|comma}} 元"
           ],
           [
             "公积金账户年增加",
-            "{{c:/report_parameters/hypothetical_followup__offers__0__hf_rate}} 元（待核）",
+            "{{c:/hypothetical_offers/0/housing_fund_account_total|comma}} 元（待核）",
             "{{c:/hypothetical_offers/1/housing_fund_account_total|comma}} 元，含个人与单位，不属于到手现金"
           ],
           [
             "年度个税",
-            "{{c:/report_parameters/hypothetical_followup__offers__0__hf_rate}} 元",
-            "{{c:/report_parameters/hypothetical_followup__offers__0__hf_rate}} 元"
+            "{{c:/hypothetical_offers/0/tax|comma}} 元",
+            "{{c:/hypothetical_offers/1/tax|comma}} 元"
           ],
           [
             "**年到手现金**",
@@ -1597,7 +1622,7 @@
           ],
           [
             "全额计入公积金的小时价值",
-            "{{c:/hypothetical_offers/0/hourly_cash|1f}} 元",
+            "{{c:/hypothetical_offers/0/hourly_if_housing_fund_counted|1f}} 元",
             "{{c:/hypothetical_offers/1/hourly_if_housing_fund_counted|1f}} 元，仅福利价值情景，不是现金时薪"
           ],
           [

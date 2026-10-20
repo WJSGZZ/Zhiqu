@@ -4021,5 +4021,32 @@
       ],
       "reason": "已投企业数决定“再投一批”而不是“第一批”"
     }
-  ]
+  ],
+  "authoring": {
+    "model": "未记录"
+  },
+  "reference_units": {
+    "c:/fa_ok_count": "岗",
+    "c:/fa_ok_vs_all": "倍",
+    "c:/city_months": "月",
+    "c:/home_months": "月",
+    "c:/monthly_cost": "元/月",
+    "c:/spendable": "元",
+    "c:/after_move_months": "月",
+    "c:/floor_balance": "元/月",
+    "c:/fa_count": "岗",
+    "c:/fa_fail_count": "岗",
+    "c:/fa_unk_count": "岗",
+    "c:/fc_count": "岗",
+    "c:/fc_fail_count": "岗",
+    "c:/fc_unk_count": "岗",
+    "c:/fc_ok_count": "岗",
+    "c:/fb_count": "岗",
+    "c:/fb_fail_count": "岗",
+    "c:/anya_count": "岗",
+    "c:/anya_ok_count": "岗",
+    "c:/major_any_count": "岗",
+    "c:/major_any_ok_count": "岗",
+    "c:/all_cash_months": "月"
+  }
 }
