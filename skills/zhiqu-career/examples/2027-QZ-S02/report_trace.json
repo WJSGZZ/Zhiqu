@@ -20,7 +20,7 @@
     "planning_workflow.py": "11717f0a5a3da33cc870959d127b86a952ce4390741dfce2f3953870498c632f",
     "operator_check.py": "a6552c0b63a8a6b5d15c9a1057fbc2884fb85435b1b102fbf4a48dd74c4e7ebb",
     "check_demos.py": "fc8e1625f9e052373756160514ad5c73db1e8451c233425918edb5bc839d9f63",
-    "report.py": "3be91d1e72908678c4291e198b7414823fb4b752b0874232c62cc7b320785e5d",
+    "report.py": "042c41525bca5901b3f738028bb74a0d12b33f77baf5e883897582bed39c7180",
     "render_report.py": "e85ed74d89613ce9ba1017680c14ef385624b5892151b1c1ce472ef4e1748676",
     "profile_store.py": "1cfd828583598a65cf719a46447cb3112ef0170eb1a638b89ab023cb47a04e7f"
   },
@@ -430,8 +430,8 @@
   ],
   "artifacts": {
     "report.md": "21453d34410b026363848376fe5206b0761fac2ec0c0c414f7e43b7093637657",
-    "report.html": "a76d66aa5c74987ca993ef86cd8020162be1e4b5dc371036378e3b7458060bf8",
-    "report.pdf": "3a56dbdb69baf5a502a9cefaf8d44f5b50064346b9e528cd3f17bc6c04193cc3"
+    "report.html": "63150c350c792476a6f39812890b23314e74c1abe801481c92c45df8aefb50a3",
+    "report.pdf": "1b85b8d33cd1c26de60510f975e90e6064cf66977279fcaf57134e60f9b3da75"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "report_profile": {

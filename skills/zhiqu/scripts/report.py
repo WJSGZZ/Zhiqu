@@ -104,7 +104,11 @@ table { width: 100%; border-collapse: collapse; margin: 2mm 0 4mm; font-size: 8.
 thead th { white-space: nowrap; text-align: left; font: 600 7.8pt var(--sans); color: var(--soft); letter-spacing: .3pt; border-top: 1pt solid var(--ink); border-bottom: .6pt solid var(--ink); padding: 1.6mm 2mm; }
 table.vt { table-layout: fixed; }
 table.rt { table-layout: fixed; }
-.number-run { white-space:nowrap; }
+/* 正文里每个数字都套 .number-run 防止拆行。它只负责不拆行，外观一律跟随所在文字；
+   其他规则里的 "xx span" 不能改到它（曾把封面编号拆成三行、把问句里的 2.5 变成独立一行）。 */
+.number-run { white-space:nowrap !important; display:inline !important; font:inherit !important; color:inherit !important;
+  margin:0 !important; padding:0 !important; border:0 !important; background:none !important; min-height:0 !important;
+  width:auto !important; letter-spacing:inherit !important; }
 td.num { white-space: nowrap; font-variant-numeric: tabular-nums; }
 td { overflow-wrap: anywhere; }
 table.vt thead th { white-space: normal; }
