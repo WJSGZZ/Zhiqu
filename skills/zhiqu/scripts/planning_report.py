@@ -12,7 +12,7 @@ import subprocess
 import sys
 import tempfile
 from pathlib import Path
-from planning_workflow import PlanningCase, FILES, FIGURE_TYPES, dump, sha
+from planning_workflow import PlanningCase, FILES, FIGURE_TYPES, GENERATION_TOOLS, POLICY_FILES, SKILLS, dump, sha
 from profile_store import source_files
 
 
@@ -67,6 +67,18 @@ def node_markdown(node, expand, numbers):
     raise ValueError('未实现的组件：'+str(typ))
 
 
+def offer_gap_notice(case, sid):
+    section=next(s for s in case.contract['sections'] if s['id']==sid)
+    if not any(not case.active(s) and s.get('otherwise')=='explicit_no_offer_and_input_gaps' for s in section['slots']):
+        return ''
+    # Suppress only when the existing paragraph already covers both the missing
+    # offer and the need to establish comparable income conditions.
+    visible=' '.join(str(case.get_node(e['ref']).get('content',{})) for e in case.nodes()[sid])
+    if re.search(r'没有|暂无|尚无|还没|未拿到',visible) and re.search(r'offer|录用|工作',visible,re.I) and re.search(r'工资|薪|收入|工时|生活.*支出',visible):
+        return ''
+    return '你还没有拿到工作录用通知；先问清工资、工时、社保公积金和生活开销，再比较能存下多少钱。'
+
+
 def assemble(case):
     case.trace=[]
     groups=case.data['evidence.json']['source_groups'];numbers={}
@@ -83,8 +95,8 @@ def assemble(case):
                 import copy
                 node=copy.deepcopy(node);node['content']['heading']=slot['heading']
             out.append(node_markdown(node,lambda text:case.expand(text,where),numbers));out.append('')
-        inactive=[s for s in section['slots'] if not case.active(s) and s.get('otherwise')=='explicit_no_offer_and_input_gaps']
-        if inactive:out.extend(['当前没有真实offer或具备输入依据的收入情景；应先取得工资、工时、缴存与生活支出条件，再比较收入。',''])
+        notice=offer_gap_notice(case,sid)
+        if notice:out.extend([notice,''])
     source='::: sources\n'+'\n'.join('- '+g['title']+' | '+g.get('url','')+' | '+g['metadata'] for g in groups)+'\n:::'
     markdown='\n'.join(out).replace('__STAGED_SOURCES__',source)
     return '\n'.join(line.rstrip() for line in markdown.splitlines()).rstrip()+'\n',case.trace
@@ -126,8 +138,11 @@ def generate(root, html_only=False, profile_version=None):
         operator_generate(case.root,output=tmp/'operator_check.md')
         manifest={'schema_version':1,'case_id':case.case['case_id'],'source_sha256':input_snapshot(case),
                   'contract_sha256':sha(case.contract_path()),
-                  'tool_sha256':{f:sha(Path(__file__).with_name(f)) for f in ('planning_report.py','planning_workflow.py','operator_check.py','check_demos.py','report.py','render_report.py','profile_store.py')},
+                  'tool_sha256':{f:sha(Path(__file__).with_name(f)) for f in GENERATION_TOOLS},
                   'numeric_refs':trace,'artifacts':{n:sha(tmp/n) for n in names if n not in ('report_trace.json','operator_check.md')},'delivery_status':'awaiting_operator_and_independent_review'}
+        from authoring_metadata import trace_metadata
+        manifest.update(trace_metadata(case.case,[Path(__file__).with_name(f) for f in ('planning_report.py','render_report.py','report.py')]))
+        manifest['policy_sha256']={f:sha(SKILLS/f) for f in POLICY_FILES}
         manifest['report_profile']=binding
         manifest['verification_tools_sha256']={f:sha(Path(__file__).with_name(f)) for f in ('verify_report.py','verification_calculations.py')}
         dump(tmp/'report_trace.json',manifest)
@@ -150,6 +165,8 @@ def generate(root, html_only=False, profile_version=None):
                 if body is None:p.unlink(missing_ok=True)
                 else:p.write_bytes(body)
             raise
+    from claim_check import build as build_claims
+    build_claims(case.root,bind=True)
     if not html_only:
         from verify_report import record_generation
         record_generation(case.root,case.root/pdf_name)

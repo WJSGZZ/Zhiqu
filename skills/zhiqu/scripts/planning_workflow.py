@@ -8,10 +8,15 @@ import hashlib
 import json
 import re
 from datetime import date
+from claim_guards import personal_probability_errors
+from source_authentication import official_source_errors
+from unit_validation import errors as unit_errors
 from pathlib import Path
 from profile_store import active_profile, parse_profile, source_files, alignment_errors
 
 SKILLS = Path(__file__).resolve().parents[2]
+GENERATION_TOOLS=('planning_report.py','planning_workflow.py','operator_check.py','check_demos.py','report.py','render_report.py','profile_store.py','claim_guards.py','source_authentication.py','official_source_audit.py','unit_validation.py','reader_language.py','claim_check.py','check_report.py','authoring_metadata.py')
+POLICY_FILES=('zhiqu-shared/references/official-domains.csv','zhiqu-shared/references/unit-families.json','zhiqu-shared/references/reader-language.json','zhiqu/references/report-guide.md')
 FILES = ('case.json', 'profile_parse.json', 'directions.json', 'rules_check.json',
          'candidates.json', 'evidence.json', 'calculations.json', 'judgment.json', 'narrative.json')
 PITFALLS = ('没查到写成不存在', '群体数字当个人概率', '经验帖数字做决定', '按编号引用问卷',
@@ -234,7 +239,10 @@ class PlanningCase:
 
     def numeric_errors(self, text, location=''):
         errors=[]
-        try: self.expand(text,location)
+        errors.extend(unit_errors(self,text,location))
+        try:
+            expanded=self.expand(text,location)
+            errors.extend(personal_probability_errors(expanded,location))
         except (KeyError,IndexError,ValueError,TypeError) as exc: errors.append(f'{location}：引用无法解析：{exc}')
         plain=REF.sub('',str(text))
         plain=re.sub(r'\[\d+(?:,\d+)*\]', '',plain)
@@ -384,6 +392,8 @@ class PlanningCase:
 
     def stage0(self):
         c=self.need('case.json')
+        from authoring_metadata import authoring_errors
+        self.errors.extend(authoring_errors(c))
         for key in ('case_id','mode','prepared_on','version','decision_stage','target_year','education','deadlines','data_commit','context','report_meta'):
             if c.get(key) in (None,'',[]): self.err('case.json',key,'缺登记信息')
         code='YJ' if self.kind=='grad' else 'QZ'
@@ -476,7 +486,7 @@ class PlanningCase:
         items=self.need('evidence.json').get('items',[])
         self.errors.extend(self.evidence_integrity_errors())
         if len(self.evidence)!=len(items):self.err('evidence.json','items','ID重复')
-        now=day(self.case['context']['as_of'])
+        now=day(self.case.get('context',{}).get('as_of') or date.today().isoformat())
         required=('id','claim','unit','source','published_on','retrieved_on','retrieval_method','grade','scope','review_due','candidate_ids','status')
         for e in items:
             for k in required:
@@ -486,8 +496,10 @@ class PlanningCase:
                 if not e.get('cross_check'):self.err('evidence.json',e['id'],'第三方整理须写 cross_check（与官方原文抽样核对的范围与结果）')
                 if e.get('main_conclusion'):self.err('evidence.json',e['id'],'第三方整理不能单独支撑主结论，须有官方原文')
             if e.get('retrieval_method') not in ('curl','browser','provided','operator_check'):self.err('evidence.json',e['id'],'取文方式错误')
+            self.errors.extend(official_source_errors(e,self.root))
             if e.get('grade')=='官方' and not re.match(r'https?://',e.get('source',{}).get('url','')):self.err('evidence.json',e['id'],'官方网址为空')
             if day(e['retrieved_on'])>now or day(e['review_due'])<day(e['retrieved_on']):self.err('evidence.json',e['id'],'日期前后错误')
+            if day(e['review_due'])<now:self.err('evidence.json',e['id'],'证据复核期限早于报告as_of，已过期')
             if e.get('status')=='unretrieved' and not e.get('gap'):self.err('evidence.json',e['id'],'未取到缺原因')
             if e.get('status') not in ('verified','unretrieved'):self.err('evidence.json',e['id'],'证据状态错误')
             if e.get('status')=='verified' and not e.get('excerpt'):self.err('evidence.json',e['id'],'缺原文定位/关键摘录')
@@ -596,11 +608,18 @@ class PlanningCase:
 
     def stage8(self):
         self.need('narrative.json');self.errors.extend(self.contract_errors())
+        from reader_language import check_html
+        from planning_report import assemble
+        import render_report
+        if 'narrative.json' in self.data:
+            self.errors.extend('第'+x['section']+'节：'+x['message']+'（'+x['term']+'）' for x in check_html(render_report.render(assemble(self)[0])[0]))
 
     def stage9(self):
         from operator_check import validate_operator
         self.errors.extend(validate_operator(self.root, require_completed=False))
         self.errors.extend(self.trace_errors())
+        from claim_check import errors as claim_errors
+        self.errors.extend(claim_errors(self.root))
 
     def trace_errors(self):
         path=self.root/'report_trace.json'
@@ -609,7 +628,8 @@ class PlanningCase:
         expected=set((*FILES,*source_files(self.root)))
         if set(trace.get('source_sha256',{}))!=expected:errors.append('report_trace.json：输入快照不全')
         if trace.get('contract_sha256')!=sha(self.contract_path()):errors.append('report_trace.json：内容合同已变更，须重生成')
-        tools=('planning_report.py','planning_workflow.py','operator_check.py','check_demos.py','report.py','render_report.py','profile_store.py')
+        tools=GENERATION_TOOLS
+        if trace.get('policy_sha256')!={f:sha(SKILLS/f) for f in POLICY_FILES}:errors.append('report_trace.json：来源域名/单位族规则已变更，须重生成')
         if set(trace.get('tool_sha256',{}))!=set(tools):errors.append('report_trace.json：缺算法/渲染器快照')
         elif any(sha(Path(__file__).with_name(f))!=h for f,h in trace['tool_sha256'].items()):errors.append('report_trace.json：算法或渲染器已变更，须重生成')
         for f,h in trace.get('verification_tools_sha256',{}).items():
@@ -619,6 +639,8 @@ class PlanningCase:
         return errors
 
     def stage10(self, delivery=False):
+        from claim_check import errors as claim_errors
+        self.errors.extend(claim_errors(self.root))
         if delivery and self.case.get('mode')=='formal' and self.case['context']['as_of']!=date.today().isoformat():self.err('case.json','context.as_of','正式交付须按当天核有效期并重生成')
         self.errors.extend(review_errors(self.root,delivery,self.limits))
 
@@ -626,7 +648,10 @@ class PlanningCase:
 def review_errors(root, delivery=False, limits=None):
     root=Path(root);errors=[];p=root/'review.json'
     if not p.exists():return ['review.json：缺复核记录']
-    rev=read(p);lim=limits or read(SKILLS/'zhiqu/references/report-contract.json')['workflow_limits']
+    rev=read(p)
+    if 'status' in rev and rev['status'] not in ('draft','self_assessed','awaiting_independent_review','approved','changes_required'):
+        errors.append('review.json.status：只能为draft/self_assessed/awaiting_independent_review/approved/changes_required')
+    lim=limits or read(SKILLS/'zhiqu/references/report-contract.json')['workflow_limits']
     score=rev.get('rubric',{}) if delivery else rev.get('self_assessment',{}).get('rubric',rev.get('rubric',{}));items=score.get('items',[])
     if {x.get('id') for x in items}!=set(RUBRIC) or len(items)!=len(RUBRIC):errors.append('review.json.rubric：评分项不齐/重复')
     if any(type(x.get('score')) is not int or x['score'] not in (0,1,2) or not x.get('reason') for x in items):errors.append('review.json.rubric：须有分值与扣分理由')
@@ -645,6 +670,7 @@ def review_errors(root, delivery=False, limits=None):
     pdf=read(root/'case.json')['case_id']+'-report.pdf' if (root/'case.json').exists() else 'report.pdf'
     required=({'report.json',pdf} | {str(p.relative_to(root)) for p in root.rglob('result*.json')}) if (root/'report.json').exists() else set((*FILES,*source_files(root),'report.md','report.html',pdf,'report_trace.json'))
     required.add('operator_check.md')
+    if not (root/'report.json').exists():required.add('claim_check.json')
     snapshot=rev.get('snapshot',{})
     if not required<=set(snapshot):errors.append('review.json.snapshot：缺完整输入/报告快照')
     if any(Path(f).is_absolute() or '..' in Path(f).parts or not (root/f).is_file() or sha(root/f)!=h for f,h in snapshot.items()):errors.append('review.json.snapshot：报告/输入变更，复核已失效')

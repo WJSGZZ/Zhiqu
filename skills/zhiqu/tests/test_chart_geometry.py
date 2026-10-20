@@ -326,6 +326,8 @@ class AppendixReadability(unittest.TestCase):
         import verify_report
         self.assertEqual(verify_report.readable_value({'fail': '有，尚未通过', 'fail_count': '1'}), '有，尚未通过；1 门')
         self.assertEqual(verify_report.section_names({'01', 'meta', '07'}), '01、07、封面')
+        self.assertEqual(verify_report.readable_value({'四级': 518, '六级': 446}), '四级 518；六级 446')
+        self.assertEqual(verify_report.readable_value({'unknown_english_key': 5}), '其他 5')
 
     def test_shared_conditions_and_table_rows_print_once_each(self):
         html_ = report.verification_appendix_html({
@@ -340,11 +342,61 @@ class AppendixReadability(unittest.TestCase):
         self.assertIn('第 09 节 · 如果发生：没钱', html_)
         self.assertIn('<p>怎么应对：先保毕业</p>', html_)
 
-    def test_calculation_display_only_when_it_differs(self):
+    def test_calculation_prints_only_registered_result(self):
         rows = [{'path': '/a', 'label': '合计', 'result': 500, 'formula': '100 + 400', 'sections': '11'},
                 {'calculation_path': '/a', 'value': '500', 'label': '合计'},
                 {'path': '/b', 'label': '占比', 'result': 0.6, 'formula': '300 ÷ 500', 'sections': '01'},
                 {'calculation_path': '/b', 'value': '60%', 'label': '占比'}]
         html_ = report.verification_appendix_html({'numbers': rows, 'gaps': []})
         self.assertNotIn('正文显示 500', html_)
-        self.assertIn('正文显示 60%', html_)
+        self.assertNotIn('正文显示', html_)
+        self.assertIn('<td>0.6</td>', html_)
+
+
+class ReaderFacingReportCorrections(unittest.TestCase):
+    def test_diagram_text_is_at_least_body_small_size_when_printed(self):
+        import xml.etree.ElementTree as ET
+        drawings = [report.flow([['a', '步骤', '核实条件', '>b'], ['b', '结果', '保留主线']]),
+                    report.timeline([['2027.01', '核实条件', '本人检查', '检查点'], ['2027.06', '再作比较', '核实费用']]),
+                    report.timeline([['毕业前', '核实条件', '本人检查', '检查点']])]
+        for svg in drawings:
+            root = ET.fromstring(svg)
+            def walk(node, inherited=report.FS):
+                size = float(node.attrib.get('font-size', inherited))
+                if node.tag.rsplit('}', 1)[-1] in ('text', 'tspan'):
+                    # 174mm is the actual A4 content width; the diagrams use 640 SVG units.
+                    self.assertGreaterEqual(size * 174 / 25.4 * 72 / 640, 8.5)
+                for child in node:walk(child, size)
+            walk(root)
+
+    def test_nested_numeric_display_is_not_repeated_in_appendix(self):
+        html_ = report.verification_appendix_html({'numbers': [
+            {'path': '/years', 'result': 3, 'formula': '36 ÷ 12', 'label': '学制'},
+            {'calculation_path': '/years', 'value': '3.0（正文另写作3）', 'label': '学制'}]})
+        self.assertIn('<td>3</td>', html_)
+        self.assertNotIn('正文显示', html_)
+        self.assertNotIn('正文另写作', html_)
+        self.assertNotIn('calculations.json', html_)
+        self.assertIn('PDF 附带的计算明细', html_)
+
+    def test_case_information_uses_reader_facing_version_label(self):
+        import verify_report
+        info = dict(verify_report.case_info({'case_id': 'fixture', 'data_commit': 'test-v1'}, {'sha256': '0' * 64}))
+        self.assertEqual(info['所用资料版本'], 'test-v1')
+        self.assertNotIn('数据快照版本', info)
+
+
+class DiagramWrappingAtReaderFont(unittest.TestCase):
+    def test_three_column_branch_reflows_without_smaller_type(self):
+        rows=[['A','步骤','先找少量愿做的企业技术岗位，取招聘原文','>B'],
+              ['B','判断','有愿做且符合条件的具体岗位？','是>C','否>D'],
+              ['C','结果','比较工作内容与按期到手的现金'],
+              ['D','判断','电网浙江单位或国考有具体可报职位？','是>E','否>F'],
+              ['E','备选','按该职位准备，同时算好等待期现金'],
+              ['F','备选','暂停新增投入，重核方向']]
+        svg=report.flow(rows)
+        self.assertIn('viewBox="0 0 640',svg)
+        import xml.etree.ElementTree as ET
+        text=''.join(ET.fromstring(svg).itertext())
+        for row in rows:self.assertIn(row[2],text)
+        self.assertTrue(all(value>=report.DIAGRAM_SMALL for value in font_sizes(svg)[1:]))

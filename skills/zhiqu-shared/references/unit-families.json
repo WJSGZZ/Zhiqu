@@ -1,0 +1,340 @@
+{
+  "schema_version": 1,
+  "notes": [
+    "Display checks do not infer source units from surrounding prose.",
+    "Scale and currency must agree. A display may omit the source period, but an explicit month/year period must agree.",
+    "No implicit FX, yuan/wan-yuan, ratio/percent, or monthly/annual conversion. Percent formats are the only registered scale conversion.",
+    "Legacy fallbacks apply only to the legacy_demo engine and the exact output schema patterns listed here."
+  ],
+  "units": [
+    {
+      "aliases": [
+        "元",
+        "人民币",
+        "人民币元",
+        "CNY",
+        "RMB",
+        "¥",
+        "￥"
+      ],
+      "family": "money",
+      "currency": "CNY",
+      "scale": 1
+    },
+    {
+      "aliases": [
+        "万元",
+        "人民币万元"
+      ],
+      "family": "money",
+      "currency": "CNY",
+      "scale": 10000
+    },
+    {
+      "aliases": [
+        "美元",
+        "美金",
+        "USD",
+        "US$",
+        "$"
+      ],
+      "family": "money",
+      "currency": "USD",
+      "scale": 1
+    },
+    {
+      "aliases": [
+        "万美元"
+      ],
+      "family": "money",
+      "currency": "USD",
+      "scale": 10000
+    },
+    {
+      "aliases": [
+        "港元",
+        "港币",
+        "HKD",
+        "HK$"
+      ],
+      "family": "money",
+      "currency": "HKD",
+      "scale": 1
+    },
+    {
+      "aliases": [
+        "万港元",
+        "万港币"
+      ],
+      "family": "money",
+      "currency": "HKD",
+      "scale": 10000
+    },
+    {
+      "aliases": [
+        "澳门元",
+        "澳门币",
+        "澳門元",
+        "MOP",
+        "MOP$"
+      ],
+      "family": "money",
+      "currency": "MOP",
+      "scale": 1
+    },
+    {
+      "aliases": [
+        "万澳门元",
+        "万澳门币"
+      ],
+      "family": "money",
+      "currency": "MOP",
+      "scale": 10000
+    },
+    {
+      "aliases": [
+        "%",
+        "％",
+        "百分比",
+        "百分率"
+      ],
+      "family": "ratio",
+      "scale": 0.01
+    },
+    {
+      "aliases": [
+        "比率",
+        "比例",
+        "ratio",
+        "1",
+        "无量纲",
+        "缴费人数÷招录人数",
+        "报名人数÷招录人数",
+        "人/岗",
+        "人/职位",
+        "倍",
+        "人/名额",
+        "缴费人数/招录人数"
+      ],
+      "family": "ratio",
+      "scale": 1
+    },
+    {
+      "aliases": [
+        "分"
+      ],
+      "family": "score",
+      "scale": 1
+    },
+    {
+      "aliases": [
+        "人",
+        "名",
+        "位",
+        "个人"
+      ],
+      "family": "people",
+      "scale": 1
+    },
+    {
+      "aliases": [
+        "个",
+        "条",
+        "项",
+        "所",
+        "门",
+        "岗"
+      ],
+      "family": "count",
+      "scale": 1
+    },
+    {
+      "aliases": [
+        "年",
+        "学年"
+      ],
+      "family": "duration_year",
+      "scale": 1
+    },
+    {
+      "aliases": [
+        "月",
+        "个月"
+      ],
+      "family": "duration_month",
+      "scale": 1
+    },
+    {
+      "aliases": [
+        "天",
+        "日"
+      ],
+      "family": "duration_day",
+      "scale": 1
+    },
+    {
+      "aliases": [
+        "小时",
+        "时"
+      ],
+      "family": "duration_hour",
+      "scale": 1
+    },
+    {
+      "aliases": [
+        "岁",
+        "周岁"
+      ],
+      "family": "age",
+      "scale": 1
+    },
+    {
+      "aliases": [
+        "年份"
+      ],
+      "family": "duration_year",
+      "scale": 1
+    },
+    {
+      "aliases": [
+        "日期",
+        "时间"
+      ],
+      "family": "date",
+      "scale": 1
+    },
+    {
+      "aliases": [
+        "个百分点"
+      ],
+      "family": "percentage_point",
+      "scale": 1
+    },
+    {
+      "aliases": [
+        "代码",
+        "编号"
+      ],
+      "family": "identifier",
+      "scale": 1
+    }
+  ],
+  "period_aliases": {
+    "年": "year",
+    "学年": "year",
+    "年度": "year",
+    "月": "month",
+    "个月": "month",
+    "天": "day",
+    "日": "day",
+    "小时": "hour",
+    "时": "hour"
+  },
+  "prefix_currency_aliases": [
+    "HK$",
+    "MOP$",
+    "US$",
+    "HKD",
+    "MOP",
+    "USD",
+    "CNY",
+    "RMB",
+    "人民币",
+    "港币",
+    "澳门币",
+    "美元",
+    "¥",
+    "￥",
+    "$"
+  ],
+  "legacy_demo_output_schema": [
+    {
+      "path_regex": "^/(age_at_decision|age_at_target)$",
+      "unit": "岁"
+    },
+    {
+      "path_regex": "^/luck_start_year$",
+      "unit": "年份"
+    },
+    {
+      "path_regex": "^/(annual_cost|annual_margin|annual_cost_if_living_plus_200|annual_margin_if_living_plus_200)$",
+      "unit": "元/年"
+    },
+    {
+      "path_regex": "^/total_cost_over_program$",
+      "unit": "元"
+    },
+    {
+      "path_regex": "^/gdut_fee_reference/(annual_cost|annual_margin|annual_cost_if_living_plus_200|annual_margin_if_living_plus_200)$",
+      "unit": "元/年"
+    },
+    {
+      "path_regex": "^/gdut_fee_reference/total_cost$",
+      "unit": "元"
+    },
+    {
+      "path_regex": "^/gdut_2026_retest/(initial_increment_contribution|retest_increment_contribution)$",
+      "unit": "分"
+    },
+    {
+      "path_regex": "^/gdut_2026_first_choice_retest_scores/(min|q1|median|q3|max)$",
+      "unit": "分"
+    },
+    {
+      "path_regex": "^/gdut_2026_first_choice_retest_scores/n$",
+      "unit": "人"
+    },
+    {
+      "path_regex": "^/sample_reconciliation_2025/(total|minority|soldier|joint|ordinary)$",
+      "unit": "人"
+    },
+    {
+      "path_regex": "^/(monthly_expenses|monthly_remaining|monthly_remaining_if_housing_plus_600)$",
+      "unit": "元/月"
+    },
+    {
+      "path_regex": "^/hypothetical_offers/[0-9]+/(annual_gross|personal_social_insurance|personal_housing_fund|housing_fund_account_total|tax|annual_take_home_cash)$",
+      "unit": "元/年"
+    },
+    {
+      "path_regex": "^/hypothetical_offers/[0-9]+/(social_insurance_base|monthly_take_home_cash|monthly_remaining_cash)$",
+      "unit": "元/月"
+    },
+    {
+      "path_regex": "^/hypothetical_offers/[0-9]+/(hourly_cash|hourly_if_housing_fund_counted)$",
+      "unit": "元/小时"
+    },
+    {
+      "path_regex": "^/hypothetical_offers/[0-9]+/hours_per_year$",
+      "unit": "小时/年"
+    },
+    {
+      "path_regex": "^/offer_b_ordinary_month/(take_home_cash|remaining_cash)$",
+      "unit": "元/月"
+    },
+    {
+      "path_regex": "^/reference_wages_cny/[^/]+/(p10|p25|p50|p75|p90)$",
+      "unit": "元/年"
+    },
+    {
+      "path_regex": "^/scut_reference_statistics/[^/]+/(min|q1|median|q3|max)$",
+      "unit": "分"
+    },
+    {
+      "path_regex": "^/scut_reference_statistics/[^/]+/n$",
+      "unit": "人"
+    },
+    {
+      "path_regex": "^/report_constants/(q1_label|q3_label|p10_label|p90_label)$",
+      "unit": "%"
+    },
+    {
+      "path_regex": "^/report_constants/months_per_year$",
+      "unit": "月/年"
+    },
+    {
+      "path_regex": "^/report_constants/living_increment$",
+      "unit": "元/月"
+    }
+  ]
+}

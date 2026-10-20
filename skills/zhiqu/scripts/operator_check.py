@@ -114,6 +114,8 @@ def sync_checklist_tool_snapshot(root):
     expected={**trace.get('source_sha256',{}),**trace.get('artifacts',{})}
     if not expected or any(Path(f).name!=f or not (root/f).is_file() or sha(root/f)!=h for f,h in expected.items()):return False
     if any(not current.with_name(f).is_file() or sha(current.with_name(f))!=h for f,h in tools.items() if f!='operator_check.py'):return False
+    from planning_workflow import POLICY_FILES,SKILLS
+    if trace.get('policy_sha256')!={f:sha(SKILLS/f) for f in POLICY_FILES}:return False
     tools['operator_check.py']=sha(current)
     from planning_workflow import dump
     dump(path,trace);return True

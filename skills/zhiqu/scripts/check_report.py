@@ -385,6 +385,8 @@ def check_publication_html(document):
         if not svg['sources']: errors.append(f'图{i}（SVG）缺少来源编号')
         elif any(n not in parser.source_ids for n in svg['sources']):
             errors.append(f'图{i}（SVG）来源编号没有对应尾注')
+    from reader_language import check_html
+    errors.extend('第'+x['section']+'节：'+x['message']+'（'+x['term']+'）' for x in check_html(document))
     return errors
 
 

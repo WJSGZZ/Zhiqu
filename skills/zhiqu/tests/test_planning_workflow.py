@@ -349,6 +349,10 @@ class PlanningWorkflowTests(unittest.TestCase):
     def test_html_generation_records_hashes_and_detects_stale_inputs(self):
         root=self.roots['career'];generate(root,html_only=True,profile_version="profile.txt")
         c=PlanningCase(root);self.assertEqual(c.trace_errors(),[])
+        trace=read(root/'report_trace.json')
+        self.assertEqual(trace['authoring'],{'model':'未记录'})
+        self.assertIn('render_report.py',trace['renderer']['files_sha256'])
+        self.assertTrue(trace['renderer']['version'].startswith('sha256:'))
         self.change(root,'case.json',lambda x:x.update(version='变更'))
         self.assertTrue(PlanningCase(root).trace_errors())
 
@@ -379,7 +383,8 @@ class PlanningWorkflowTests(unittest.TestCase):
         root=self.roots['career'];c=PlanningCase(root);c.case['context']['offer_basis']='none'
         text,_=assemble(c)
         self.assertNotIn('::: bars',text)
-        self.assertIn('当前没有真实offer',text)
+        self.assertNotIn('当前没有真实offer',text)
+        self.assertTrue('尚无' in text or '还没有拿到工作录用通知' in text)
         # Changing the real input case this way would be rejected by the stage gate.
         self.change(root,'case.json',lambda x:x['context'].update(offer_basis='none'))
         self.assertTrue(any('跳过收入图' in e for e in run(root,0).errors))

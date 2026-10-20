@@ -131,7 +131,7 @@ def case_info(case,binding,warning=None):
     generated=datetime.now(timezone(timedelta(hours=8))).isoformat(timespec='seconds')
     return [('案例号',case['case_id']),('报告版本',case.get('report_version','1')),('生成时间',generated),
             ('所用画像时间',binding.get('filled_at') or '旧画像未记录填写时间'),('画像SHA256（前12位）',binding['sha256'][:12]),
-            ('数据快照版本',case.get('data_commit','未记录')),('画像版本提示',warning or '生成时未发现更新版本')]
+            ('所用资料版本',case.get('data_commit','未记录')),('画像版本提示',warning or '生成时未发现更新版本')]
 
 
 
@@ -153,13 +153,13 @@ SECTION_NAMES={'meta':'封面'}
 
 
 def readable_value(value):
-    """字典、列表答案转成可读中文；键名不进报告。"""
+    """字典、列表答案转成可读中文；保留本人填写的中文标签。"""
     if isinstance(value,dict):
         parts=[]
         for k,v in value.items():
             if v in (None,''):continue
             shown=readable_value(v)
-            parts.append(VALUE_FORMATS[k].format(shown) if k in VALUE_FORMATS else (shown if k in ('fail','value','text') else SUB_LABELS.get(k,'其他')+' '+shown))
+            parts.append(VALUE_FORMATS[k].format(shown) if k in VALUE_FORMATS else (shown if k in ('fail','value','text') else SUB_LABELS.get(k,k if re.search(r'[\u3400-\u9fff]',str(k)) else '其他')+' '+shown))
         return '；'.join(parts)
     if isinstance(value,(list,tuple)):return '；'.join(readable_value(v) for v in value)
     if isinstance(value,float):return format(value,'.10g')
@@ -229,7 +229,7 @@ def planning_materials(case,trace,binding,warning=None):
                         if kind=='e':used.setdefault(reference.split('#')[0],set()).add(sid)
             for eid in node.get('evidence_refs',[]):used.setdefault(eid,set()).add(sid)
     # 同一引用在正文里有几种写法（174000 与 174,000、2028-09-30 与 2028 年 9 月）时合成一条：
-    # 数值相同只留带千分位的写法；日期等不同写法用“ / ”并列，所在节合并。
+    # 数值相同优先带千分位的写法；其他格式只印一种完整写法，所在节合并。
     groups={}
     for item in trace:
         groups.setdefault(REF.sub(lambda m:'{{'+m[1]+':'+m[2]+'}}',item['ref']),{}).setdefault(str(item['display']),[]).append(item['location'])
@@ -242,8 +242,8 @@ def planning_materials(case,trace,binding,warning=None):
         distinct={}
         for k in shows:distinct.setdefault(k.replace(',','').replace(' ',''),[]).append(k)
         forms=[max(v,key=lambda t:(',' in t,len(t))) for v in distinct.values()]
-        forms.sort(key=len,reverse=True)  # 最完整的写法在前，其余注明“正文另写作”
-        shown=forms[0]+('（正文另写作 '+'、'.join(forms[1:])+'）' if len(forms)>1 else '')
+        forms.sort(key=len,reverse=True)  # 打印一种完整写法；其他写法仍保留在引用记录中
+        shown=forms[0]
         locations=[x for v in shows.values() for x in v]
         kind,path,_=match.groups();sids=section_names(set(x.split('.')[0] for x in locations));row={'label':reference,'value':shown,'sections':sids,'reference':reference}
         if kind=='e':
@@ -396,6 +396,8 @@ def gaokao_files(root,rep,result,binding,result_path):
     evidence={'schema_version':1,'items':[],'source_groups':groups,'archive_gap':'旧文字中的数字未逐项留存官方原文，见附录待核清单；不得以报告自身原句充作官方摘录。'}
     calculations={'engine':'gaokao_result','expected_utility':result['expected_utility'],'p_fall':result['p_fall'],'stress':result.get('stress',{})}
     trace={'schema_version':1,'case_id':case['case_id'],'report_profile':binding,'numeric_claims':rep.get('numeric_claims',[]),'source_sha256':{'case.json':digest((root/'case.json').read_bytes()),'report.json':digest(json_bytes(rep)),'result.json':digest(json_bytes(result))}}
+    from authoring_metadata import trace_metadata
+    trace.update(trace_metadata(case,[Path(__file__).with_name('report.py')]))
     files={'case.json':(root/'case.json').read_bytes(),'profile.json':(root/binding['file']).read_bytes(),'report.json':json_bytes(rep),'result.json':json_bytes(result),'evidence.json':json_bytes(evidence),'calculations.json':json_bytes(calculations),'report_trace.json':json_bytes(trace)}
     files['candidates.csv']=candidate_file(root,result).read_bytes()
     return files

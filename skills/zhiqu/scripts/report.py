@@ -398,21 +398,19 @@ def verification_appendix_html(materials):
                      + (f'<p class="audit-url">{val(r["url"])}</p>' if r.get('url') else '') + '</div>')
 
     if formulas or calc_refs:
-        body += '<h4>计算项</h4><p>按登记输入复算；长文字依据和原始数值在附件 calculations.json 里。</p><table class="audit-grid"><thead><tr><th>项目</th><th>结果</th><th>算法</th><th>所在节</th></tr></thead><tbody>'
+        body += '<h4>计算项</h4><p>按登记输入复算；详细依据和原始数值见 PDF 附带的计算明细。</p><table class="audit-grid"><thead><tr><th>项目</th><th>结果</th><th>算法</th><th>所在节</th></tr></thead><tbody>'
         seen=set()
         for r in formulas:
-            ref=calc_refs.get(r['path']);shown=[]
-            if ref is not None:shown.append(ref.get('value'));seen.add(r['path'])
+            ref=calc_refs.get(r['path'])
+            if ref is not None:seen.add(r['path'])
             nums={k:v for k,v in (r.get('inputs') or {}).items() if isinstance(v,(int,float)) and not isinstance(v,bool)} if isinstance(r.get('inputs'),dict) else {}
             inputs=('；输入 '+'，'.join(f'{E(str(k))}={val(v)}' for k,v in nums.items())) if nums else ''
             result=val(r.get('result', r.get('value')))
-            # 只有正文写法与结果不同（0.6 与 60%）才注明正文显示
-            shown=[x for x in shown if str(x).replace(',','')!=str(r.get('result', r.get('value'))).replace(',','')]
-            display=('（正文显示 '+'、'.join(val(x) for x in shown)+'）') if shown else ''
-            body += f'<tr><td>{val(r.get("label",r["path"]))}</td><td>{result}{display}</td><td>{val(r.get("formula"))}{inputs}</td><td class="audit-sec">{secs(r.get("sections"))}</td></tr>'
+            # 计算明细只印登记结果，避免把正文的格式变体再次嵌套到结果中。
+            body += f'<tr><td>{val(r.get("label",r["path"]))}</td><td>{result}</td><td>{val(r.get("formula"))}{inputs}</td><td class="audit-sec">{secs(r.get("sections"))}</td></tr>'
         for path,ref in calc_refs.items():
             if path in seen:continue
-            body += f'<tr><td>{val(ref.get("label") or "参数登记项")}</td><td>{val(ref.get("value"))}</td><td>参数登记，见附件 calculations.json</td><td class="audit-sec">{secs(ref.get("sections"))}</td></tr>'
+            body += f'<tr><td>{val(ref.get("label") or "参数登记项")}</td><td>{val(ref.get("value"))}</td><td>参数登记，见 PDF 附带的计算明细</td><td class="audit-sec">{secs(ref.get("sections"))}</td></tr>'
         body += '</tbody></table>'
 
     if model:
@@ -637,6 +635,8 @@ CHART_W = 640
 CHART_SANS = "PingFang SC, Source Han Sans SC, Noto Sans SC, sans-serif"
 LABEL_W, PLOT_L, PLOT_R, VALUE_R = 206, 214, 540, 638
 FS, FS_SMALL = 10.5, 9.5
+# 640 单位铺满 A4 正文 174mm：11.2 单位约 8.63pt，高于正文小号 8.5pt。
+DIAGRAM_FONT, DIAGRAM_SMALL = 12, 11.2
 INK, SOFT, MUTED, RULE, GRID = '#222A26', '#454E48', '#6E776E', '#B5AD98', '#D3CCB8'
 
 
@@ -692,14 +692,14 @@ def _x_axis(ticks, scale, y, fmt=_num, unit='', grid_top=None):
     return ''.join(out)
 
 
-def _legend(items, y, x=0):
+def _legend(items, y, x=0, font_size=FS_SMALL):
     """图例：[(图形SVG片段生成函数(x, y), 文字)]，从左往右排，返回 (svg, 结束x)。"""
     out = []
     for draw, text in items:
         # 图标中心离起点 8 个单位：最宽的图标（菱形半宽 7、描边 1）也不出 viewBox 左缘（2026-10-20 流程图图例被裁）
         out.append(draw(x + 8, y - 3.5))
-        out.append(f'<text x="{x + 17:.1f}" y="{y:.1f}" font-size="{FS_SMALL}" fill="{MUTED}">{E(text)}</text>')
-        x += 17 + _text_width(text, FS_SMALL) + 14
+        out.append(f'<text x="{x + 17:.1f}" y="{y:.1f}" font-size="{font_size}" fill="{MUTED}">{E(text)}</text>')
+        x += 17 + _text_width(text, font_size) + 14
     return ''.join(out), x
 
 
@@ -884,12 +884,12 @@ def flow(rows):
             nodes[t]['parents'].append(n['id'])
     for n in nodes.values():  # 尺寸：方框文字最宽 160；菱形里文字最宽 120，菱形宽高取文字框的两倍
         if n['kind'] == 'decision':
-            n['lines'] = _wrap(n['text'], 120, 10)
-            tw = max(_text_width(l, 10) for l in n['lines']); th = 13 * len(n['lines'])
+            n['lines'] = _wrap(n['text'], 120, DIAGRAM_FONT)
+            tw = max(_text_width(l, DIAGRAM_FONT) for l in n['lines']); th = 16 * len(n['lines'])
             n['w'], n['h'] = 2 * tw + 16, 2 * th + 10
         else:
-            n['lines'] = _wrap(n['text'], 160, 10)
-            n['w'] = max(_text_width(l, 10) for l in n['lines']) + 22; n['h'] = 13 * len(n['lines']) + 14
+            n['lines'] = _wrap(n['text'], 160, DIAGRAM_FONT)
+            n['w'] = max(_text_width(l, DIAGRAM_FONT) for l in n['lines']) + 22; n['h'] = 16 * len(n['lines']) + 14
     col, side = {}, set()
     for nid in order:
         n = nodes[nid]; col.setdefault(nid, 0)
@@ -910,6 +910,16 @@ def flow(rows):
     cols = sorted(set(col.values()))
     widths = {c: max(n['w'] for n in nodes.values() if col[n['id']] == c) for c in cols}
     total = sum(widths.values()) + 28 * (len(cols) - 1)
+    if total > CHART_W:
+        # 字号不能为适应分支而缩小；先把完整文字换成较短的行并增加框高。
+        for n in nodes.values():
+            limit=90 if n['kind']=='decision' else 140
+            n['lines']=_wrap(n['text'],limit,DIAGRAM_FONT)
+            tw=max(_text_width(line,DIAGRAM_FONT) for line in n['lines'])
+            th=16*len(n['lines'])
+            n['w'],n['h']=(2*tw+16,2*th+10) if n['kind']=='decision' else (tw+22,th+14)
+        widths={c:max(n['w'] for n in nodes.values() if col[n['id']]==c) for c in cols}
+        total=sum(widths.values())+28*(len(cols)-1)
     if total > CHART_W:
         raise ValueError('流程图分支太多或文字太长，放不下；请拆图或缩短文字')
     x = (CHART_W - total) / 2; cx = {}
@@ -980,7 +990,7 @@ def flow(rows):
             out.append(f'<path d="{d}" fill="none" stroke="{MUTED}" stroke-width="1"/>'
                        f'<path d="M{base[0] + wing[0][0]:.1f} {base[1] + wing[0][1]:.1f}L{base[0] + wing[1][0]:.1f} {base[1] + wing[1][1]:.1f}L{tip[0]:.1f} {tip[1]:.1f}Z" fill="{MUTED}"/>')
             if label:
-                labels.append(f'<text x="{lab[0]:.1f}" y="{lab[1]:.1f}" text-anchor="{lab[2]}" font-size="{FS_SMALL}" font-weight="600" fill="{SOFT}">{E(label)}</text>')
+                labels.append(f'<text x="{lab[0]:.1f}" y="{lab[1]:.1f}" text-anchor="{lab[2]}" font-size="{DIAGRAM_SMALL}" font-weight="600" fill="{SOFT}">{E(label)}</text>')
     style = {'step': ('#FFFDF8', '#21473E', INK), 'decision': ('#FFFDF8', '#A8772B', INK),
              'main': ('#21473E', '#21473E', '#FFFFFF'), 'alt': ('#E3DDCB', '#B5AD98', INK)}
     for n in (nodes[i] for i in order):
@@ -990,14 +1000,14 @@ def flow(rows):
             out.append(f'<path d="M{n["cx"]:.1f} {y0:.1f}L{x0 + n["w"]:.1f} {n["cy"]:.1f}L{n["cx"]:.1f} {y0 + n["h"]:.1f}L{x0:.1f} {n["cy"]:.1f}Z" fill="{fill}" stroke="{stroke}" stroke-width="1.2"/>')
         else:
             out.append(f'<rect x="{x0:.1f}" y="{y0:.1f}" width="{n["w"]:.1f}" height="{n["h"]:.1f}" rx="2" fill="{fill}" stroke="{stroke}" stroke-width="1"/>')
-        first = n['cy'] - 13 * (len(n['lines']) - 1) / 2 + 3.6
+        first = n['cy'] - 16 * (len(n['lines']) - 1) / 2 + 3.6
         for i, line in enumerate(n['lines']):
-            out.append(f'<text x="{n["cx"]:.1f}" y="{first + 13 * i:.1f}" text-anchor="middle" font-size="10" fill="{ink}"'
+            out.append(f'<text x="{n["cx"]:.1f}" y="{first + 16 * i:.1f}" text-anchor="middle" font-size="{DIAGRAM_FONT}" fill="{ink}"'
                        + (' font-weight="600"' if n['kind'] in ('main', 'decision') else '') + f'>{E(line)}</text>')
     key = {'step': (lambda x, y: f'<rect x="{x - 6:.1f}" y="{y - 4.5:.1f}" width="12" height="9" rx="1.5" fill="#FFFDF8" stroke="#21473E"/>', '要做的事'),
            'decision': (lambda x, y: f'<path d="M{x:.1f} {y - 5.5:.1f}L{x + 7:.1f} {y:.1f}L{x:.1f} {y + 5.5:.1f}L{x - 7:.1f} {y:.1f}Z" fill="#FFFDF8" stroke="#A8772B"/>', '要核实的判断'),
            'main': (_swatch('#21473E'), '主线去向'), 'alt': (_swatch('#E3DDCB'), '备选去向')}
-    legend = _legend([key[k] for k in ('step', 'decision', 'main', 'alt') if k in used], height - 6, 0)[0]
+    legend = _legend([key[k] for k in ('step', 'decision', 'main', 'alt') if k in used], height - 6, 0, DIAGRAM_SMALL)[0]
     return _svg_open(height) + ''.join(out) + ''.join(labels) + legend + '</svg>'
 
 
@@ -1152,7 +1162,7 @@ def timeline(rows):
                 it['cx'] = x(it['month']) + (j - (len(group) - 1) / 2) * gap
             same_month = same_month or len(group) > 1
         for it in items:
-            it['w'] = max(_text_width(f"{it['when']}  {it['task']}", 10), _text_width(it['note'], FS_SMALL)) + 4
+            it['w'] = max(_text_width(f"{it['when']}  {it['task']}", DIAGRAM_FONT), _text_width(it['note'], DIAGRAM_SMALL)) + 4
             it['opts'] = sorted({min(max(a, 0), 640 - it['w']) for a in (it['cx'] - 3, it['cx'] + 3 - it['w'])},
                                 key=lambda l, c=it['cx']: abs(l - (c - 3)))
         def ok(a, ka, la, b, kb, lb):
@@ -1179,14 +1189,14 @@ def timeline(rows):
         for it, (k, l) in zip(items, plan): it.update(lv=('up', k), left=l)
         up = max([i['lv'][1] for i in items if i['lv'][0] == 'up'] or [0])
         down = max([i['lv'][1] for i in items if i['lv'][0] == 'down'] or [0])
-        step = 34; axis = 8 + up * step + 6
+        step = 40; axis = 8 + up * step + 6
         height = axis + 18 + down * step + legend_y_pad
-        out = [f'<svg class="chart timeline-chart" viewBox="0 0 640 {height:.0f}" xmlns="http://www.w3.org/2000/svg" font-family="{sans}" font-size="10">',
+        out = [f'<svg class="chart timeline-chart" viewBox="0 0 640 {height:.0f}" xmlns="http://www.w3.org/2000/svg" font-family="{sans}" font-size="{DIAGRAM_FONT}">',
                f'<line x1="14" x2="626" y1="{axis}" y2="{axis}" stroke="#B5AD98" stroke-width="1.2"/>']
         for m in range(lo, hi + 1):
             if m % 12 == 0:
                 out.append(f'<line x1="{x(m)-.5*600/max(hi-lo+1,1):.1f}" x2="{x(m)-.5*600/max(hi-lo+1,1):.1f}" y1="{axis-5}" y2="{axis+5}" stroke="#6E776E" stroke-width="1"/>'
-                           f'<text x="{x(m)-.5*600/max(hi-lo+1,1)+3:.1f}" y="{axis+14}" font-size="{FS_SMALL}" fill="#6E776E">{m // 12} 年</text>')
+                           f'<text x="{x(m)-.5*600/max(hi-lo+1,1)+3:.1f}" y="{axis+14}" font-size="{DIAGRAM_SMALL}" fill="#6E776E">{m // 12} 年</text>')
             elif m % 12 != 6 and hi - lo <= 36:  # 月刻度：只是极短的点，帮助数月份
                 out.append(f'<line x1="{x(m)-.5*600/max(hi-lo+1,1):.1f}" x2="{x(m)-.5*600/max(hi-lo+1,1):.1f}" y1="{axis}" y2="{axis+3}" stroke="#B5AD98" stroke-width=".7"/>')
             elif m % 12 == 6:
@@ -1199,24 +1209,24 @@ def timeline(rows):
             out.append(f'<text x="{it["left"]:.1f}" y="{ty:.1f}"><tspan font-weight="600" fill="#21473E">{E(it["when"])}</tspan>'
                        f'<tspan dx="5" font-weight="600" fill="#222A26">{E(it["task"])}</tspan></text>')
             if it['note']:
-                out.append(f'<text x="{it["left"]:.1f}" y="{ty+12:.1f}" font-size="{FS_SMALL}" fill="#6E776E">{E(it["note"])}</text>')
+                out.append(f'<text x="{it["left"]:.1f}" y="{ty+15:.1f}" font-size="{DIAGRAM_SMALL}" fill="#6E776E">{E(it["note"])}</text>')
         for it in items:
             out.append(_timeline_marker(it['cx'], axis, it['cp']))
         out.append(legend(height - 6, True))
         return ''.join(out) + '</svg>'
     # 顺序图每项一行：事项和说明写在同一行（说明用小一号灰字），行距固定。
     # 两行写法会让 PDF 里出现一串短行，被版面自检当成“被挤窄的栏”（2026-10-20）。
-    row_h = 24; height = 8 + len(items) * row_h + legend_y_pad
-    out = [f'<svg class="chart timeline-chart" viewBox="0 0 640 {height}" xmlns="http://www.w3.org/2000/svg" font-family="{sans}" font-size="10">',
+    row_h = 28; height = 8 + len(items) * row_h + legend_y_pad
+    out = [f'<svg class="chart timeline-chart" viewBox="0 0 640 {height}" xmlns="http://www.w3.org/2000/svg" font-family="{sans}" font-size="{DIAGRAM_FONT}">',
            f'<line x1="110" x2="110" y1="{8 + row_h/2}" y2="{8 + (len(items)-.5)*row_h}" stroke="#B5AD98" stroke-width="1.2"/>']
     for n, it in enumerate(items):
         y = 8 + (n + .5) * row_h
-        out.append(f'<text x="96" y="{y+3.5:.1f}" text-anchor="end" font-weight="600" fill="#21473E">{E(_fit_text(it["when"], 94, 10))}</text>')
+        out.append(f'<text x="96" y="{y+3.5:.1f}" text-anchor="end" font-weight="600" fill="#21473E">{E(_fit_text(it["when"], 94, DIAGRAM_FONT))}</text>')
         out.append(_timeline_marker(110, y, it['cp']))
-        task = _fit_text(it['task'], 516, 10)
-        note = _fit_text(it['note'], 516 - _text_width(task, 10) - 12, FS_SMALL) if it['note'] else ''
+        task = _fit_text(it['task'], 516, DIAGRAM_FONT)
+        note = _fit_text(it['note'], 516 - _text_width(task, DIAGRAM_FONT) - 12, DIAGRAM_SMALL) if it['note'] else ''
         out.append(f'<text x="124" y="{y+3.5:.1f}"><tspan font-weight="600" fill="#222A26">{E(task)}</tspan>'
-                   + (f'<tspan dx="12" font-size="{FS_SMALL}" fill="#6E776E">{E(note)}</tspan>' if note else '') + '</text>')
+                   + (f'<tspan dx="12" font-size="{DIAGRAM_SMALL}" fill="#6E776E">{E(note)}</tspan>' if note else '') + '</text>')
     out.append(legend(height - 6, False))
     return ''.join(out) + '</svg>'
 
@@ -1955,6 +1965,9 @@ def main():
     binding = materials = None
     root = Path(a.report).resolve().parent
     if (root/'case.json').exists():
+        from authoring_metadata import authoring_errors
+        errors=authoring_errors(json.load(open(root/'case.json',encoding='utf-8')))
+        if errors:ap.error('；'.join(errors))
         if not a.profile_version:ap.error('生成有案例号的报告必须指定 --profile-version')
         from verify_report import report_pdf_name
         expected = report_pdf_name(json.load(open(root/'case.json', encoding='utf-8'))['case_id'])
