@@ -197,7 +197,7 @@ textarea{resize:vertical;min-height:84px;}
   .lockup{justify-content:center;margin:0 0 9px;}
   .brand-rule{margin:22px auto 18px;}
   .wordmark{align-items:flex-start;text-align:left;}
-  .landing .vow{margin:20px auto 0;}
+  .landing .vow{margin:20px auto 0;text-align:center;}
 }
 @media (max-width:560px){
   .landing-wrap{padding:40px 16px 32px;}
