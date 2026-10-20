@@ -14,6 +14,7 @@ import json
 import math
 from pathlib import Path
 import re
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -352,6 +353,9 @@ def _record_generation(root,pdf):
         if registry.exists() and case['case_id'] in read(registry).get('cases',{}):
             from profile_store import record_report
             record_report(root.parent,case['case_id'],pdf)
+        # 交付用副本：以报告号命名，发给客户时不会和别人的 report.pdf 混在一起
+        delivery=root/f"{case['case_id']}-report.pdf"
+        if pdf!=delivery:shutil.copyfile(pdf,delivery)
 
 
 def record_generation(root,pdf):

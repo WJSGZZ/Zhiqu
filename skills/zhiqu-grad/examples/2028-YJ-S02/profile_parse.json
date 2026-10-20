@@ -269,6 +269,63 @@
       "evidence_refs": [
         "E001"
       ]
+    },
+    "02_facts": {
+      "type": "facts",
+      "content": {
+        "title": "小明的现状一览：哪些已知，哪些还缺",
+        "caption": "深绿边是本人已经给出的；琥珀底是给了但口径还要核的；虚线框是还没有的信息。只列画像原话，不替本人估。",
+        "rows": [
+          [
+            "年级",
+            "{{p:/fields/0/value}}",
+            "已知"
+          ],
+          [
+            "专业",
+            "{{p:/fields/1/value}}",
+            "已知"
+          ],
+          [
+            "均分与英语",
+            "均分 {{p:/fields/14/value/mean}}，四级 {{p:/fields/14/value/cet4}}，六级还没过",
+            "已知"
+          ],
+          [
+            "排名",
+            "教务表 {{p:/fields/14/value/academic_rank}} / {{p:/fields/14/value/academic_count}}，综合表 {{p:/fields/14/value/comprehensive_rank}} / {{p:/fields/14/value/comprehensive_count}}，口径不同",
+            "待确认"
+          ],
+          [
+            "研究经历",
+            "课程设计做过一小段调查数据清理，不能独立科研",
+            "已知"
+          ],
+          [
+            "年度预算",
+            "最多 {{p:/fields/12/value/annual|comma}} 元，未确认奖助不扣",
+            "已知"
+          ],
+          [
+            "每周可用时间",
+            "{{p:/fields/13/value}} 小时",
+            "已知"
+          ],
+          [
+            "能否二战",
+            "",
+            "未知"
+          ],
+          [
+            "目标岗位要不要硕士",
+            "还没调查过",
+            "未知"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E001"
+      ]
     }
   },
   "source": {

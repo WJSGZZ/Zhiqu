@@ -3,25 +3,25 @@
   "case_id": "2027-QZ-S02",
   "source_sha256": {
     "case.json": "a9718f60b403172e958aca4fb446e6e924f19867427563d439e28c41e6e84f73",
-    "profile_parse.json": "c0912865115b3aaf5e1ddacc5454b9f3f0c087fbcb0041b4de3658dcf24578d6",
+    "profile_parse.json": "2debcaaebbd0933ce629911dc8e523fbfe415db2a129d3942139f5866d91d556",
     "directions.json": "5b2397e7ee4e80db6b8b1b6bf0834869aabbf282dcfecc6f23c4c706d476cc76",
     "rules_check.json": "d887941488483a7992cfbe1fb174550f3fdb3083d8c597a1cdcc43f1eee9d198",
     "candidates.json": "e2d7abe22fb7375e3190e21a8f801c264fbed4b7fdaab066193cc48a35ff98f1",
     "evidence.json": "92ac60740f28924a3b80ffef547bde799e0c51e6b0d591361ffca72b2dfc94e2",
     "calculations.json": "8e8135c7483b79dbc2d7ed702e1d9add2628ccf852da45c3d957f1e3f05d98f5",
-    "judgment.json": "5c913bab47c7220eb52e9c907187a8bbcaf45fc3710cee9d675c28ceff68af57",
+    "judgment.json": "e745ba80a3b9201978ce86a51cbeb31485b71e92b09f116e031136ab9be027a6",
     "narrative.json": "cbfcc57d7627dd98c04dc98826b0bb4968862aa318b31708b2598ed39e47f121",
     "profile.json": "e985adff4dc5eb31443eef9a859f0e7955f84936dd8dab27a61b56e4b2e50d29",
     "profile-supplement.txt": "7ae0beb59e74158ec5ff869bb796f5cf3352fb7fa5c9ab7172ee930e91c93360"
   },
-  "contract_sha256": "afacb35fd00373a1e89752eab86bd1ec000b374028216c571e2131ad99e8e821",
+  "contract_sha256": "7a9e3aa553b7d424696a66d3b4499a66dfb3f139e5f426ab750fd3f90005cc9a",
   "tool_sha256": {
-    "planning_report.py": "77d252c484065f3fe298fc87166069cb600898e0182cc06cadab52bbfaa34436",
-    "planning_workflow.py": "ee2d438232e89d2abbaef38ac668fdcd6cc6aea42f554b44408e67fdd7186d13",
-    "operator_check.py": "a6552c0b63a8a6b5d15c9a1057fbc2884fb85435b1b102fbf4a48dd74c4e7ebb",
+    "planning_report.py": "e50d03231e1eed2f3960a114150b3e5557764365966703a5bbb599ee71720be1",
+    "planning_workflow.py": "557c3108d3dbb1e8cc8ce81b999b3938b056a3a990ab3f5bbeaeba8e9a8b6b80",
+    "operator_check.py": "97965475c2c8b6efe5dbf2747511526d1729a540f55a16b54fa282e2a810fdc7",
     "check_demos.py": "fc8e1625f9e052373756160514ad5c73db1e8451c233425918edb5bc839d9f63",
-    "report.py": "5743337eb5044bd6e205d3dd2353fc70281c77a4f27def8bd133268425107a42",
-    "render_report.py": "707d4a3dd6780cc249ddd5620f37152d525313c3a64de75c676758eef11fb5c8",
+    "report.py": "de09e0df5360699ccadd5243f9e551e7811c338b3b1b6850a5fc3fc61ac52338",
+    "render_report.py": "a6ba0669516b5a6aba7444c0c3d8815d0d1695c13c4d7a67ba1f44fbbf254f33",
     "profile_store.py": "1cfd828583598a65cf719a46447cb3112ef0170eb1a638b89ab023cb47a04e7f"
   },
   "numeric_refs": [
@@ -110,31 +110,85 @@
       "display": "10-24 18:00"
     },
     {
-      "location": "02.profile.1",
-      "ref": "{{k:/education/year_level}}",
-      "value": "大四",
-      "display": "大四"
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/0/value}}",
+      "value": "本科在读",
+      "display": "本科在读"
     },
     {
-      "location": "02.profile.1",
-      "ref": "{{k:/education/major}}",
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/1/value}}",
       "value": "电气工程及其自动化",
       "display": "电气工程及其自动化"
     },
     {
-      "location": "02.profile.1",
-      "ref": "{{p:/fields/13/value}}",
-      "value": "我先看实际工作和能不能学到技术，再看省内地点与能否按期有收入，再看稳定，最后才是单位身份。还没给任何数值权重。",
-      "display": "我先看实际工作和能不能学到技术，再看省内地点与能否按期有收入，再看稳定，最后才是单位身份。还没给任何数值权重。"
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/2/value}}",
+      "value": "2027年6月",
+      "display": "2027年6月"
     },
     {
-      "location": "02.profile.1",
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/10/value}}",
+      "value": "浙江",
+      "display": "浙江"
+    },
+    {
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/11/value}}",
+      "value": "共青团员",
+      "display": "共青团员"
+    },
+    {
+      "location": "02.figure.1",
       "ref": "{{p:/fields/12/value}}",
       "value": "毕业后三个月内",
       "display": "毕业后三个月内"
     },
     {
-      "location": "02.analysis.4",
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/14/value/cash|comma}}",
+      "value": 9000,
+      "display": "9,000"
+    },
+    {
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/14/value/reserve|comma}}",
+      "value": 4000,
+      "display": "4,000"
+    },
+    {
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/16/value|comma}}",
+      "value": 6000,
+      "display": "6,000"
+    },
+    {
+      "location": "02.profile.2",
+      "ref": "{{k:/education/year_level}}",
+      "value": "大四",
+      "display": "大四"
+    },
+    {
+      "location": "02.profile.2",
+      "ref": "{{k:/education/major}}",
+      "value": "电气工程及其自动化",
+      "display": "电气工程及其自动化"
+    },
+    {
+      "location": "02.profile.2",
+      "ref": "{{p:/fields/13/value}}",
+      "value": "我先看实际工作和能不能学到技术，再看省内地点与能否按期有收入，再看稳定，最后才是单位身份。还没给任何数值权重。",
+      "display": "我先看实际工作和能不能学到技术，再看省内地点与能否按期有收入，再看稳定，最后才是单位身份。还没给任何数值权重。"
+    },
+    {
+      "location": "02.profile.2",
+      "ref": "{{p:/fields/12/value}}",
+      "value": "毕业后三个月内",
+      "display": "毕业后三个月内"
+    },
+    {
+      "location": "02.analysis.5",
       "ref": "{{p:/fields/16/value|comma}}",
       "value": 6000,
       "display": "6,000"
@@ -495,9 +549,9 @@
     }
   ],
   "artifacts": {
-    "report.md": "afe724fa82a785357068aabc8775b235756414d53aff86946b348d49e95908b6",
-    "report.html": "49c759f5085de168c1cc03bb8d9de16edf599869fb4e8216a65409c0b3f97582",
-    "report.pdf": "f915e562cfe4600d0d67c6d9d3e6a99120eb75e17c4abcb1f85ad8c6df1b6a48"
+    "report.md": "5726e5db3e8706fdbe3bfedfdc6c7105a911b58265bc552d59c4522cfeb26613",
+    "report.html": "161bd6d731eb84108ab6291484b4efed8199231c8b8fa4dc2b138b12f96c999f",
+    "report.pdf": "020768241ea2c568de084cd8332a5b9d75379111d07a3f7be0b020493d5239ff"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "report_profile": {
@@ -507,7 +561,7 @@
     "form": "ab439b1f"
   },
   "verification_tools_sha256": {
-    "verify_report.py": "ebcf0825e96d349585935e4d76e29fa6d0aa51e402c3a3968b3dd673045f0856",
-    "verification_calculations.py": "fc02d9890d3a82a98fd381df093114d3b59b66aeb020a818c64bddb52b7482ff"
+    "verify_report.py": "91021d58224fc869e871cff611ec92ba60943ca89da60635f55cd4a8c6048a01",
+    "verification_calculations.py": "1a5cc43f8df9494e3baaa1b1ca83a4ec471718c5ce21344275b526758dde0c3c"
   }
 }

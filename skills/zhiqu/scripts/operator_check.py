@@ -130,7 +130,7 @@ def report_locations(case):
             if node['type']=='analysis' and content.get('kind')=='heading':heading=case.expand(content.get('text',''))
             first=case.expand(content.get('text',content.get('title','')))
             first=re.sub(r'[*`\[\]]','',first).split('。')[0][:18]
-            labels={'analysis':heading or '段落“'+first+'…”','kpis':'摘要数字卡','details':'比较表','actions':'接下来三件事','lead':'节首结论','core_points':'核心结论','profile':'本人画像','questions':'待核问题','assumptions':'费用与假设表','checkpoint':'下次检查点','matrix':'路径比较','directions':'方向判断','candidates':'候选清单','score_ranges':'分数区间','timeline':'时间线','routes':'行动路线','budget_chart':'预算比较','risks':'风险与备选','offers':'录用条件比较','annual_income':'年度收入','hourly_income':'每小时收入','monthly_balance':'月结余','evidence_levels':'证据等级','terms':'术语说明','sources':'来源尾注','disclaimer':'声明'}
+            labels={'analysis':heading or '段落“'+first+'…”','kpis':'摘要数字卡','details':'比较表','actions':'接下来三件事','lead':'节首结论','core_points':'核心结论','profile':'本人画像','questions':'待核问题','assumptions':'费用与假设表','checkpoint':'下次检查点','matrix':'路径比较','directions':'方向判断','candidates':'候选清单','score_ranges':'分数区间','timeline':'时间线','routes':'行动路线','budget_chart':'预算比较','risks':'风险与备选','offers':'录用条件比较','annual_income':'年度收入','hourly_income':'每小时收入','monthly_balance':'月结余','evidence_levels':'证据等级','terms':'术语说明','sources':'来源尾注','disclaimer':'声明','figure':'图'}
             title=content.get('title') or content.get('heading') or labels.get(entry['slot'],entry['slot'])
             for path,value in walk(content):
                 if not isinstance(value,str):continue

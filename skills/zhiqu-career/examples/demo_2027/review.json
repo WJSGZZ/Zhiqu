@@ -96,20 +96,20 @@
   },
   "snapshot": {
     "case.json": "cbbe6940fb076d24378e740b979fd888344e6dadf5e3d1501d897e0821af9f34",
-    "profile_parse.json": "55e1a5c44c20bd2a16afa97bef3497bfdb153e472eed6347733a440634fcb33e",
+    "profile_parse.json": "856e00c93e3205dc0bdd6de0d31a2cd384a7f2df5c3a727a9a1a20b0ab6c0f23",
     "directions.json": "6f799d567cc51a1d860a40f8d9bbbf4c16f3bfcd2af58b999cc1db8c54f2761e",
     "rules_check.json": "bda48a6be3aff5fdb6d27f0800903873b37d636b4444a9ed460b302c5d5b08f9",
     "candidates.json": "b329d6b94fb2773f31a8fd1051b70615ec9ac6d839308567df09645186b5b392",
     "evidence.json": "fc88e845f3eb5707da8eaa7fa6d75901946c9f7920eaca254cdcbc5bb0f0b902",
     "calculations.json": "c9f6ffdadaa69063d1698e768de5b96dbfb4f2cafdd9a803a0a136e2d4ee2bae",
-    "judgment.json": "c039742d81d5330a832be829fcdd81a8da0396df7bf177fe3f799e6c163287a8",
-    "narrative.json": "68bcf0b7ceed018f59f25d5985f288cf82b031288c786c0fd13f24d102cf2e48",
+    "judgment.json": "de8695a4c6f213ce27eecd3e8035ae49d73b5c480e5325ff219fe6ed9dfc6117",
+    "narrative.json": "265288c7a1dad477f1f110b65b017c4a9301b8950af8e5d9f5ac83c38bdf5e4d",
     "profile.txt": "69dfeb57cf005a4ace3990e51a96b3b821e9de0c130dd1f8eae5b2088f5bef5e",
-    "report.md": "b4ead48c52211c27745170c8a1cbb4745236255808f3177ba5a533bafe98398b",
-    "report.html": "47eb4f367ce3aa640808187127261d64427281bd70435bac3180c4e631155f77",
-    "report.pdf": "dff60fa171ca17e70983c1eb0fe93720880f2c520f58f5e3bf647137c364b8a2",
-    "report_trace.json": "e7dd7853ffcd1dfd049f0bc4f748d8ea729c825a4a50530cdc8ea2bb24c2f597",
-    "operator_check.md": "23683bf5d5e842b4c525b3fe92e602a0ca7d863b845d554d9e8adc094d56d9d5",
+    "report.md": "c20ce5df58936eb70937fcefb92bf42d36d11ffc3816781108670ead79f2b4e8",
+    "report.html": "fde5500249fd5b7ba1966749cdd1c6559fc1a1db87bc5381f9709bdb8a9acea4",
+    "report.pdf": "7b81d86e110603fe658a13da23feb8c996037c7284a660025f92105bda5284fd",
+    "report_trace.json": "f6c481520d4f3662cb94b0a4047ac4f4b1021ebe907112991319353766764022",
+    "operator_check.md": "0658dd0d4af77621602c452498747c74586cd3f12b72248df915baeaf65faeef",
     "profile_snapshot.json": "0a6cb6835c42b9e3a0e18679bd40d3c99c433453287f9e2a231e357647a858d9"
   },
   "checklist_update_note": "仅核查单表述及核查工具记录更新；报告与计算原件未改。保留历史复核记录，当前仍等待独立审核，不是重新批准。",
@@ -167,6 +167,43 @@
         "report_trace.json"
       ],
       "reason": "共用的 report.py 改了高考摘要卡，读研求职报告随工具指纹重新生成；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.md",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "共用 report.py 改为 SVG 状态图标与图形时间线标记；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.md",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "核对框改为图形；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "judgment.json",
+        "narrative.json",
+        "operator_check.md",
+        "profile_parse.json",
+        "report.html",
+        "report.md",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "图表按科研插图标准重画（条形图加刻度，顺序时间线改为单行，修复版面自检把时间线短行误判为窄栏）；新增“现状一览”和岗位两道判断流程图；矩阵说明改用图形名称。数字全部引用原有画像、证据与计算，结论不变。"
     }
   ]
 }

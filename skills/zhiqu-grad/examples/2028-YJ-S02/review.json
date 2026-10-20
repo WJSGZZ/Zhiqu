@@ -166,19 +166,19 @@
   },
   "snapshot": {
     "case.json": "ef1afebd889d71eb59526b74be04ec617e08cbf4124b50f2d0585833193cddea",
-    "profile_parse.json": "1ba7bfd4bbb2bb0e54318c5ff1008c1f577e406d5ac5c88a6fa37c3e4dabc6e5",
+    "profile_parse.json": "b104d455c0a961c2f0154f97973b65de83288093dd2d83b3d1573af305696b1d",
     "directions.json": "e11eb75bac9a1378195f15ef805daf0ffe3d0a4c2306d317d6d9944265b8008b",
     "rules_check.json": "248a80156349f8bee1d5de049d1153408fc4548108e5895abb5bba17d5c7cb03",
     "candidates.json": "1f9f3703275d1799b96d638988fd5c11a27d5f2c4ef9209db44868be66817183",
-    "evidence.json": "a5f3a6fd7928b3f9c8507d7919f59e6a0fd3c6e2f7df4fdedb63638e5e8c44f4",
+    "evidence.json": "e9e692bd54a65df7fb3aaac7c2e7ddb924037dc9ffc8d6aae0ddf140d27dd766",
     "calculations.json": "00e5087c418c579371b17558494a9c4c1f865b0b051ef63fc1a3c9a51a89cd87",
-    "judgment.json": "38eed4d2e7e0e329c1beb9d7b029069ef4907552ad2ae15cf9019bd5bc4f9add",
+    "judgment.json": "4b3f132b90331450a6bf26bc8429d12c32752ba346779a891f0597c1572af4ee",
     "narrative.json": "cdaf672fa9a3877e1e9b218b516cf5eee06ef7887fddb6a4d1367480e15222a4",
-    "report.md": "ae34007d0976fbf6249a44b1d8a5192b84136e93ccb022dd7be92fdd4b09c131",
-    "report.html": "5e5907c6ab95a2c914506ec135622b48c680e25bde88494eba182817c89364bc",
-    "report.pdf": "29d132e11c89d0817f0bcd214793b12a4ca68dd7cbc4da9ca682a6188f141e4a",
-    "report_trace.json": "48e1323cae5aecdaf8e8fe19f6fd076ecda37ae54731437ace143fabe22cfb4d",
-    "operator_check.md": "fa8cc559781a105e060e1101da37e2cbe7836dd40b76217663ad777316c8b01c",
+    "report.md": "86fc591663a913b3caa02ea0ad99c89108b9120711099e41b4b8df180c904062",
+    "report.html": "d213eee8dfe28c2712f688c773ff9748c0ff7f4111c2b2440d77445585e1892c",
+    "report.pdf": "dbdd4e4b18f36322099cab6f9fa888b1ac7593a4919c1575257f7abca8af6795",
+    "report_trace.json": "57dc8ee3fc09a921a5485ec81420e8977557af1b385f99e07e1a8fa81ec36b8e",
+    "operator_check.md": "0bdddf490bab9c7f61fdc0488ad32b03626dfdd06d1f68f73d7a664e5d13ed54",
     "profile.json": "b04770d7a2589f2dbe7b35a80efaad8953b8db8666a26db85875f82cfc9eaf72",
     "profile-supplement.txt": "6d3fe85c4f5f9393a284253436e9dd3ae7a719f9ff73222d052dc7224a274e0f"
   },
@@ -236,6 +236,43 @@
         "report_trace.json"
       ],
       "reason": "共用的 report.py 改了高考摘要卡，读研求职报告随工具指纹重新生成；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.md",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "共用 report.py 改为 SVG 状态图标与图形时间线标记；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.md",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "核对框改为图形；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "evidence.json",
+        "judgment.json",
+        "operator_check.md",
+        "profile_parse.json",
+        "report.html",
+        "report.md",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "图表按科研插图标准重画（条形图加刻度，时间线字号与同月错开）；预算图配色按含义改为上限、已知支出、情景上限三类并在图注说明；新增“现状一览”和推免与统考分路流程图；矩阵说明改用图形名称。数字全部引用原有画像、证据与计算，结论不变。"
     }
   ]
 }

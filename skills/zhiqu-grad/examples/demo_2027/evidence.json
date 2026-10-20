@@ -2047,13 +2047,16 @@
       "type": "interval",
       "content": {
         "title": "广工：{{e:E1020#/value}} 第一志愿普通复试考生",
-        "caption": "绿色线段为 {{c:/gdut_2026_first_choice_retest_scores/n}} 名普通复试考生中间一半的初试分数；不是拟录取分布。该试卷与华工不同，不放华工 {{c:/report_parameters/hypothetical_followup__score_scenarios__2}} 分情景点，也不据图判断哪所更容易。",
+        "caption": "粗线段为 {{c:/gdut_2026_first_choice_retest_scores/n}} 名普通复试考生中间一半的初试分数，细线为最低到最高，短竖线为中位数；不是拟录取分布。该试卷与华工不同，不放华工 {{c:/report_parameters/hypothetical_followup__score_scenarios__2}} 分情景点，也不据图判断哪所更容易。",
         "rows": [
           [
             "自动化学院电气全日制复试",
             "{{c:/gdut_2026_first_choice_retest_scores/q1}}",
             "{{c:/gdut_2026_first_choice_retest_scores/q3}}",
-            ""
+            "",
+            "{{c:/gdut_2026_first_choice_retest_scores/min}}",
+            "{{c:/gdut_2026_first_choice_retest_scores/max}}",
+            "{{c:/gdut_2026_first_choice_retest_scores/median}}"
           ]
         ],
         "unit": "分"

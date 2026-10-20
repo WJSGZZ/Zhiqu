@@ -43,6 +43,10 @@ Markdown 格式：
     interval数据行 - 标签 | 区间下界 | 上界 | 对照点；缺值留空或写未取到，不画假零值。
     timeline数据行 - 月份 | 任务 | 截止日 | 检查点（普通点末列留空），横轴每行最多4节点。
     matrix另写columns: 维度A | 维度B；数据行 - 选项 | ✓短语 | △短语（或✗）。
+    ::: flow 图题：每行 - 节点ID | 步骤/判断/结果/备选 | 文字 | 标签>目标ID | …（决策流程图，自上而下）
+    ::: stack 图题：每行 - 标签 | 分项 数值 | 分项 数值 | …；可加 unit:、percent: 是（构成条，合计写在右侧）
+    ::: facts 图题：每行 - 项目 | 内容 | 已知/待确认/未知（现状一览，未知画虚线框写“未填”）
+    ::: cost 图题：每行 - 项目 | 数值或未取到 | 币种 | 显示值（同币种共轴，不同币种分开画、不折算）
     ::: route 路线名：恰好四行 - 门槛 | ... / - 时间窗口 | ... / - 投入 | ... / - 切换条件 | ...
     ::: evidence：每行 - 官方/多人一致/单人说法/推测 | 说明。
     ::: questions / ::: scenarios：columns: 列名 | 列名 | …，每行 - 各列内容；画成追问卡、风险触发卡。
@@ -152,7 +156,7 @@ _OL_RE = re.compile(r"^(\s*)\d+[.)]\s+(.*)$")
 _HR_RE = re.compile(r"^\s*(---+|\*\*\*+|___+)\s*$")
 _QUOTE_RE = re.compile(r"^>\s?(.*)$")
 _TABLE_SEP_RE = re.compile(r"^\s*\|?\s*:?-{2,}:?\s*(\|\s*:?-{2,}:?\s*)*\|?\s*$")
-_FENCE_RE = re.compile(r"^:::\s*(kpi|strip|bars|interval|timeline|matrix|route|evidence|sources|questions|scenarios)\s*(.*)$")
+_FENCE_RE = re.compile(r"^:::\s*(kpi|strip|bars|interval|timeline|matrix|flow|stack|facts|cost|route|evidence|sources|questions|scenarios)\s*(.*)$")
 _CALLOUT_RE = re.compile(r"^\[!(key|warn|note)\]\s*(.*)$")
 _TAGS = ("冲", "稳", "保")
 
@@ -203,6 +207,17 @@ def render_fence(kind, title, lines, notes=None):
         number = lambda s: float(s.replace(',','')) if s and s.strip() and s!='未取到' else None
         content = _report.interval_chart([[r[0],*[number(x) for x in (r[1:]+['']*7)[:7]]] for r in items],opts.get('unit','分'))
     elif kind == 'timeline': content = _report.timeline(items)
+    elif kind == 'flow': content = _report.flow(items)
+    elif kind == 'stack':
+        def seg(text):
+            m = re.match(r'^(.*?)\s*([\d,]+(?:\.\d+)?)\s*$', text)
+            if not m: raise ValueError('stack分项须写成“名称 数值”：'+text)
+            return (m[1].strip(), float(m[2].replace(',','')))
+        content = _report.stack([[r[0],[seg(x) for x in r[1:] if x.strip()]] for r in items],opts.get('unit',''),opts.get('percent','') in ('是','true','1'))
+    elif kind == 'facts': content = _report.facts(items, render_inline)
+    elif kind == 'cost':
+        number = lambda s: float(s.replace(',','')) if s and s.strip() and s.strip()!='未取到' else None
+        content = _report.cost_chart([[r[0],number(r[1] if len(r)>1 else ''),*(r[2:])] for r in items])
     elif kind == 'matrix':
         if 'columns' not in opts: raise ValueError('matrix须有columns，按|分隔维度')
         columns = [v.strip() for v in opts['columns'].split('|')]
@@ -427,10 +442,11 @@ def build_html(meta, body_html, sections, notes=None):
     person = meta.get('person','本人')
     edition = meta.get('edition','决策').removesuffix('版')
     report_id = meta.get('id','待编号')
+    simulated = meta.get('mode','simulation')!='formal'
     cover = _report.cover_html(title,meta.get('subtitle',''),person,
                               meta.get('stage',edition+'版'),meta.get('region','待核'),report_id,
                               meta.get('date','待核'),meta.get('data_asof','待核'),
-                              meta.get('conclusion',meta.get('note','')),[(num,t) for num,t,_ in sections if num])
+                              meta.get('conclusion',meta.get('note','')),[(num,t) for num,t,_ in sections if num],simulated=simulated)
     parts = []
     for idx,(num,t,sec_html) in enumerate(sections):
         if idx==0 or num=='12': sec_html = sec_html.replace('<section ', '<section class="newpage" ',1)
@@ -441,7 +457,7 @@ def build_html(meta, body_html, sections, notes=None):
     if '__SOURCE_NOTES__' in body: body = body.replace('__SOURCE_NOTES__',notes.render())
     elif notes.entries:
         end = body.rfind('</section>'); body=body[:end]+notes.render()+body[end:]
-    doc = _report.document_html(title,cover,body,person,edition,report_id)
+    doc = _report.document_html(title,cover,body,person,edition,report_id,simulated=simulated)
     _report.publication_gate(doc)
     return doc
 

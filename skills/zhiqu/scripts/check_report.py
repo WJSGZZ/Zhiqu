@@ -84,7 +84,8 @@ def check_report(rep, result, html=None):
             tiers = ' / '.join(f"{t} {sum(x['tag'] == t for x in items)}" for t in ('冲', '稳', '保'))
             head4 = [str(len(items)), f'本批次可填 {rep.get("meta", {}).get("slots", "–")} 个；{tiers}', name]
             if grade == 'A':
-                mid = ['概率约 ' + percentage(probability)] + satisfaction
+                shown = unescape(fmt(probability))  # ≥99.5% 写“> 99%”，不加“约”
+                mid = ['概率' + ('' if shown.startswith('>') else '约 ') + shown] + satisfaction
             elif numeric:
                 mid = ['概率' + unescape(fmt(probability))] + satisfaction
             else:

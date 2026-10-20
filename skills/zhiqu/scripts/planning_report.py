@@ -12,7 +12,7 @@ import subprocess
 import sys
 import tempfile
 from pathlib import Path
-from planning_workflow import PlanningCase, FILES, dump, sha
+from planning_workflow import PlanningCase, FILES, FIGURE_TYPES, dump, sha
 from profile_store import source_files
 
 
@@ -51,11 +51,11 @@ def node_markdown(node, expand, numbers):
         return table([t(v) for v in x['columns']],[[t(v) for v in r] for r in x['rows']])
     if typ in ('decision_questions','direction_cards'):
         return '\n'.join('- '+t(v['text'] if isinstance(v,dict) else v) for v in x['items'])
-    if typ in ('bars','interval','timeline','comparison_matrix'):
+    if typ in FIGURE_TYPES:
         tag={'comparison_matrix':'matrix'}.get(typ,typ)
         refs=','.join(dict.fromkeys(str(numbers[e]) for e in node['evidence_refs']))
         opts=['::: '+tag+' '+t(x['title']),'caption: '+t(x['caption']),'source: '+refs]
-        for k in ('unit','max'):
+        for k in ('unit','max','percent'):
             if x.get(k):opts.append(k+': '+t(x[k]))
         if 'columns' in x:opts.append('columns: '+' | '.join(t(v) for v in x['columns']))
         return '\n'.join([*opts,*['- '+' | '.join(t(v) for v in r) for r in x['rows']],':::'])
@@ -71,7 +71,7 @@ def assemble(case):
     case.trace=[]
     groups=case.data['evidence.json']['source_groups'];numbers={}
     for eid,item in case.evidence.items(): numbers[eid]=item['source_group']
-    meta=case.case['report_meta'];out=['---',*[k+': '+case.expand(v,'meta.'+k) for k,v in meta.items()],'---','']
+    meta=case.case['report_meta'];out=['---',*[k+': '+case.expand(v,'meta.'+k) for k,v in meta.items()],'mode: '+case.case.get('mode','simulation'),'---','']
     for section in case.contract['sections']:
         sid=section['id'];title=case.data['narrative.json']['sections'][sid].get('title',section['default_title']) if section.get('title_override_allowed',True) else section['default_title']
         out.append('## '+sid+' '+title);out.append('')
