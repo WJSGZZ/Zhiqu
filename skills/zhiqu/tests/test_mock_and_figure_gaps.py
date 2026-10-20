@@ -35,10 +35,34 @@ class MockAndGapTests(unittest.TestCase):
     def test_complete_comparable_mock_requires_personal_tiers(self):
         c=self.case();c.data['candidates.json']['personal_difficulty']['mock_exam']=self.mock(c)
         self.assertTrue(c.has_complete_mock());c.stage4()
-        self.assertTrue(any('须分个人条件档' in e for e in c.errors))
+        self.assertTrue(any('须定档' in e for e in c.errors))
         c.errors=[]
         for row,tier in zip(c.data['candidates.json']['school_programs'],['相对稳妥','够一够','冒险']):row['tier']=tier
         c.stage4();self.assertEqual(c.errors,[])
+
+    def test_untiered_candidate_needs_enumerated_reason(self):
+        c=self.case();c.data['candidates.json']['personal_difficulty']['mock_exam']=self.mock(c)
+        rows=c.data['candidates.json']['school_programs']
+        for row,tier in zip(rows,['够一够','冒险','不定档']):row['tier']=tier
+        c.stage4();self.assertTrue(any('不定档原因' in e for e in c.errors))
+        c.errors=[];rows[2]['untiered_reason']='感觉不准';c.stage4()
+        self.assertTrue(any('不定档原因' in e for e in c.errors))
+        c.errors=[];rows[2]['untiered_reason']='样本太少';c.stage4()
+        self.assertEqual(c.errors,[])
+
+    def test_without_relatively_safe_tier_fallback_paths_are_required(self):
+        c=self.case();c.data['candidates.json']['personal_difficulty']['mock_exam']=self.mock(c)
+        rows=c.data['candidates.json']['school_programs']
+        for row,tier in zip(rows,['够一够','冒险','不定档']):row['tier']=tier
+        rows[2]['untiered_reason']='分布缺失'
+        c.data['judgment.json'].pop('fallback_paths',None);c.stage7()
+        self.assertTrue(any('保底路径' in e for e in c.errors))
+        c.errors=[];c.data['judgment.json']['fallback_paths']=[{'path_id':'P3','trigger':'出分未过国家线','timing':'次年三月'}];c.stage7()
+        self.assertFalse(any('保底' in e for e in c.errors))
+        c.errors=[];c.data['judgment.json']['fallback_paths']=[{'path_id':'P9','trigger':'','timing':''}];c.stage7()
+        self.assertTrue(any('保底路径须对应' in e for e in c.errors))
+        c.errors=[];rows[0]['tier']='相对稳妥';c.data['judgment.json'].pop('fallback_paths');c.stage7()
+        self.assertFalse(any('保底' in e for e in c.errors))
 
     def test_incomplete_different_subject_or_unbacked_mock_rejected(self):
         for changes in ({'complete':False},{'same_subjects':False},{'evidence_refs':[]},{'score_ref':'{{e:missing#/value}}'},{'exam_date':'2028-01-01'}):

@@ -11,8 +11,10 @@
 方法依据见 skills/zhiqu-grad/references/kaoyan.md「择校」：
 - 资格与可比性先行：科目不同、模考不完整时不定档，只写原因；
 - 单科低于最近一年复试单科线 → 冒险（单科风险），不看总分；
+- 参考年份（最近两年有分布的年份）里任一年拟录取人数 n<5 → 不定档（样本太少）；
 - 最近两年都 ≥ 录取者中位数 → 相对稳妥（按分数位置）；≥ 最近一年下四分位 → 够一够；否则冒险；
-- 录取人数少于 10 人时只作定性提示。
+- 参考年份里有 5≤n<10 → 最高只到“够一够”，并注明“样本小，只作定性”。
+不定档时 untiered_reason 取枚举值：科目不同、分布缺失、样本太少（“口径不一致”由调用方按方向/专项判断后填写）。
 这里给的是“按分数位置的建议档”，不是个人上岸概率；最终档还要看名额口径、复试准备和年度变化，在 judgment.json 里定。
 """
 import argparse
@@ -35,14 +37,21 @@ def position(total, admitted):
 
 def place(mock, program):
     years = sorted(program.get('years', {}), reverse=True)
-    out = {'id': program['id'], 'name': program['name'], 'tier': None, 'reasons': [], 'positions': {}, 'gaps': {}}
+    out = {'id': program['id'], 'name': program['name'], 'tier': None, 'untiered_reason': None, 'reasons': [], 'positions': {}, 'gaps': {}}
     if not mock.get('complete'):
         out['reasons'].append('没有完整模考，不定档；只列院校之间的官方资料差异')
         return out
+    if not program.get('subjects'):
+        has_dist = any((program.get('years', {})[y] or {}).get('admitted') for y in years)
+        out['untiered_reason'] = '科目不同' if has_dist else '分布缺失'
+        out['reasons'].append('当届初试科目未取到' + ('，不能确认和模考同卷' if has_dist else '，也没有录取者分布，只有复试线') + '，不定档')
+        return out
     if list(program.get('subjects', [])) != list(mock.get('subjects', [])):
-        out['reasons'].append('初试科目和模考不同（' + '、'.join(program.get('subjects', [])) + '），分数不能直接对照，不定档')
+        out['untiered_reason'] = '科目不同'
+        out['reasons'].append('初试科目和模考不同（' + ('、'.join(program.get('subjects', [])) or '科目未取到') + '），分数不能直接对照，不定档')
         return out
     if not years:
+        out['untiered_reason'] = '分布缺失'
         out['reasons'].append('没有取到往年复试线或拟录取分布，不定档')
         return out
     latest = program['years'][years[0]]
@@ -63,9 +72,17 @@ def place(mock, program):
         return out
     adm_years = [y for y in years[:2] if program['years'][y].get('admitted')]
     if not adm_years:
+        out['untiered_reason'] = '分布缺失'
         line = retest.get('total')
         out['reasons'].append('只有复试线、没有拟录取分布：' + (f'总分比 {years[0]} 年复试线高 {mock["total"] - line:g} 分' if line is not None else '复试线也未取到') + '；只作参照，不定档')
         return out
+    sizes = {y: program['years'][y]['admitted'].get('n') for y in adm_years}
+    tiny = [y for y, n in sizes.items() if n is not None and n < 5]
+    if tiny:
+        out['untiered_reason'] = '样本太少'
+        out['reasons'].append('、'.join(f'{y} 年只录取 {sizes[y]:g} 人' for y in tiny) + '，样本太少，不定档')
+        return out
+    small = [y for y, n in sizes.items() if n is not None and n < 10]
     latest_adm = program['years'][adm_years[0]]['admitted']
     if all(mock['total'] >= program['years'][y]['admitted']['median'] for y in adm_years) and len(adm_years) == 2:
         out['tier'] = '相对稳妥'
@@ -76,8 +93,11 @@ def place(mock, program):
     else:
         out['tier'] = '冒险'
         out['reasons'].append(f'低于 {adm_years[0]} 年录取者下四分位')
-    if latest_adm.get('n') is not None and latest_adm['n'] < 10:
-        out['reasons'].append(f"{adm_years[0]} 年只录取 {latest_adm['n']} 人，分布不稳，只作定性提示")
+    if small:
+        if out['tier'] == '相对稳妥':
+            out['tier'] = '够一够'
+            out['reasons'].append('按位置可到“相对稳妥”，但样本小，最高只给“够一够”')
+        out['reasons'].append('、'.join(f'{y} 年只录取 {sizes[y]:g} 人' for y in small) + '，样本小，只作定性')
     return out
 
 

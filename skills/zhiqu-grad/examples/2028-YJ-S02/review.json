@@ -175,9 +175,9 @@
     "judgment.json": "a9dd41f886f0c6f554dcbfa124510778365a5a732f3490e40d1499b0ff24c03b",
     "narrative.json": "cdaf672fa9a3877e1e9b218b516cf5eee06ef7887fddb6a4d1367480e15222a4",
     "report.md": "118291654c7491b6d6c738645540e50d56cc9bd54663e2bc1c0c1cd7cf06d0ba",
-    "report.html": "40901659fd5ddfb6b994fed6fd23820f90cde8e53ece61810e81e14756b8c1e8",
-    "report.pdf": "eff235fdd6bd975a611b0d11e8e39607cf8c2717eed94a9ddcc369dda71caf46",
-    "report_trace.json": "05660aff15f4364305621670d7de71fd5ffda14fc6774be528a3b1408407ad76",
+    "report.html": "65178f0782a580bd4a5fb9fe76323460bf2205f1761c5521743d099d2be951b3",
+    "report.pdf": "460dbba65ef984591374b8be585917d7a7be0421d655717caca6a75d898ad655",
+    "report_trace.json": "89c621379a83fbe5244a37e10ce69d1056641f1a84cab63bdae4945121be0e4d",
     "operator_check.md": "a6d9377fe6a1209359e4a03886371aa3bcaa2bbc727bfc702d38c4343e07c19d",
     "profile.json": "b04770d7a2589f2dbe7b35a80efaad8953b8db8666a26db85875f82cfc9eaf72",
     "profile-supplement.txt": "6d3fe85c4f5f9393a284253436e9dd3ae7a719f9ff73222d052dc7224a274e0f"
@@ -321,6 +321,16 @@
         "report_trace.json"
       ],
       "reason": "区间图数字格式统一；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "共用检查工具（planning_workflow 定档规则）更新后按原输入重出；report.md 与输入文件未变，内容未变。"
     }
   ]
 }
