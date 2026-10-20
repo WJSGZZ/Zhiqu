@@ -286,9 +286,22 @@
     "profile.json": "af232e95b42de1286681d5b04d706bbd8d16d3dd86cfe304a7d87e5a6bfcab88",
     "profile-supplement.txt": "952368202eeb2cd031c6c0d52212442dca0faaadcd6c99828f951e50ba15d704",
     "report.md": "79df2b702505c8617f76cc94808855a4ecc0bdccfe14b9cde70ee8dc57e53c64",
-    "report.html": "b22b59bbe57eded1c399f63b382d0aa86d85dc8c19934139c54a498fbea5da6e",
-    "report.pdf": "e3d90d9869045d0423ba871f1c99aff4fd7d359f15a3d4807fa3775403b4656d",
-    "report_trace.json": "370eb54f4425820a5dbd64f3d173630780df38b0347d0121bea78fe9054b4061",
+    "report.html": "b70ecc9de09da93ed0eb12634cea677787e210e8a9ee4d414ea4a6755d913c32",
+    "report.pdf": "5778c79de6314c42c0be7806f7783d3560a8299ac57a6fa54e7d41489690c1f7",
+    "report_trace.json": "cc44e7c1420fa243334116eb57e33436cb7ac798cf4a84d3b9f3d6c4282d6862",
     "operator_check.md": "07cc403e5d0975fae0dfad4c5c020e866deab831ae12cb97bda19d86dea4f429"
-  }
+  },
+  "snapshot_refreshes": [
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.md",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "合入两份旗舰后共用版面与核对工具更新；内容未变。"
+    }
+  ]
 }

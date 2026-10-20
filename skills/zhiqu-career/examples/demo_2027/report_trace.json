@@ -16,10 +16,10 @@
   "contract_sha256": "8efe50a42837daeec7a83de34e595fd7eeb88a8cfeff1a26afc20699fd951d76",
   "tool_sha256": {
     "planning_report.py": "e50d03231e1eed2f3960a114150b3e5557764365966703a5bbb599ee71720be1",
-    "planning_workflow.py": "db73cf106f6604f74c7eeefb7ccc357435eb4601c9824ef388b956d1636b5b06",
+    "planning_workflow.py": "6877e27e01e475f4fef8dc9ef01b95929b6f536e2af6110bc9cd267c9e212925",
     "operator_check.py": "97965475c2c8b6efe5dbf2747511526d1729a540f55a16b54fa282e2a810fdc7",
     "check_demos.py": "fc8e1625f9e052373756160514ad5c73db1e8451c233425918edb5bc839d9f63",
-    "report.py": "5ca9d4dd41806233ea94c4b1450c99b2e0ee3ef9853d8298f0fb9260e512f186",
+    "report.py": "dda8cc764b3017e62bff9444a40e073b11171a5eccb5b81972cccf7225474e55",
     "render_report.py": "f1fec10064d7ce24d58dccbf7963cc2012c1ef098806e3ead881d9bbea239e92",
     "profile_store.py": "1cfd828583598a65cf719a46447cb3112ef0170eb1a638b89ab023cb47a04e7f"
   },
@@ -1257,8 +1257,8 @@
   ],
   "artifacts": {
     "report.md": "56865889da5bd4655b01c6a8d3a256e905ab49e4ffbd3cf4442f6f0e444e478c",
-    "report.html": "767d33f73205e9b31d1d58b43ea48c9c396ad49848b08803140c56c5e24b844e",
-    "report.pdf": "afea2199c28e899b4ba711220ee2aedaa6424f772f15f1ba38dd4b04cb7f384a"
+    "report.html": "e33e384c4fe730fe781a6e57a6ef173f4d27936b48c87f6f6347c0b1245b0f32",
+    "report.pdf": "6308dc38471abb4bec3a168f0a29521f58c84769f8f6b79bcba6baac9681cd6a"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "report_profile": {
@@ -1269,6 +1269,6 @@
   },
   "verification_tools_sha256": {
     "verify_report.py": "1bda48fac71a082456ffc371216c6e3edb26d178dead1356bc65736a14b0d4b9",
-    "verification_calculations.py": "503bf1c73c4f9db451e141a12724e43b715fbc25be5f88c5393828f1523b8336"
+    "verification_calculations.py": "80e4fb8e0d247582ade885655be5f30e0c2d1cc9e19ebf59c39f3fa83823a54b"
   }
 }

@@ -338,9 +338,9 @@
     "profile.json": "f8c7a4b076a64c168d303710ea8836b70a79ffe5d53ce7521045bfe4ae4c2d1f",
     "profile-supplement.txt": "247f31f22f4c9a6c33394b5b25e3b37ef21c19fd3b9c12a70a83839f7976b026",
     "report.md": "98c7ca073db34621115287b6e389b58cb2d214b803b3402fbbcfcd4bc0f70d82",
-    "report.html": "7ba6986056086caf32456c07059612fa30db4dfa71ca1d0c197b6c25d04a9930",
-    "report.pdf": "7a3b13ecd90d9c43aa4b14d5d3f60280260dd53a273c356ccb5707478b024802",
-    "report_trace.json": "f3938f98804c50fa256eae0a8afd9f690b98ba034d0a200591efac4bc3800ce4",
+    "report.html": "fb890e517e6618e562ee481fedcc441e640cd9d83814190dd26a20d50b0699a1",
+    "report.pdf": "8ead24886b77b8d33c7874fcbeee3b575a3d0e9b7dc72468f442a1a42acce2a7",
+    "report_trace.json": "39fd9a1a903e91e696b0feb5055f8597d9627ccd62ef726af3e1ca0ed9c89b84",
     "operator_check.md": "cc7f6d9cda237c1014b8a7e7f57ade126c4cd4e150a50158d430038ea522eccd"
   },
   "snapshot_refreshes": [
@@ -373,6 +373,17 @@
         "operator_check.md"
       ],
       "reason": "按主模型返工单修改：省考竞争比改为 case.json.anonymous_data 匿名列表 + 计算项，evidence 只登记两张原表；“只写大类”口径改为恰有类名“工商管理类”（98 个，旧缓存 104 多算 6 个只写具体专业“工商管理”的职位）并加本科专业目录证据；国网三条证据 2026-10-20 浏览器重新逐字核对；初级会计“两科都要考”改登记为推测等级并写依据；新增税务系统 2027 专业参考目录、安永目标人群、国网不收费与财务会计类大纲；第 5 节把解读竞争图的段落移到矩阵前，减少换页空白。共用 verification_calculations.py 统计说明、report.py 路线图卡片分页、check_layout.py 空白检查同时变更，故重新生成并重做自评快照；自评分不变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.md",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "合入两份旗舰后共用版面与核对工具更新；内容未变。"
     }
   ]
 }

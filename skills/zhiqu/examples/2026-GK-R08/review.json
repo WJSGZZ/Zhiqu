@@ -82,7 +82,7 @@
   },
   "snapshot": {
     "report.json": "d7662bb3aaa83d7e58b3d781590e0d81314fd8e1f28f67f4f968f28e15e3953f",
-    "report.pdf": "de12c1cb72cabfe0c7784f3bc9338b7b20afdda75fd23d7f10c48d861fd8427e",
+    "report.pdf": "be64d1ce1c46ff99e4e7e4ac9c10329c1a15c78764fb668c1185d42f770ac43e",
     "operator_check.md": "4762fc525d16460f3c23bd377d4ed1f6090535883cff48ef473e43794bfee680",
     "retro_ranks/284930/result.json": "1bb1e1404ff28d6c9e8beec4aad27ee47e62f09081a3328930254ab88a0063e7",
     "case.json": "4b808dbf1cc998fe4e6bbadd2d7753055d7c7b5a718c28961f58f03fdf4c64fd",
@@ -184,6 +184,16 @@
         "report_trace.json"
       ],
       "reason": "区间图数字格式统一；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "合入两份旗舰后共用版面与核对工具更新；内容未变。"
     }
   ]
 }

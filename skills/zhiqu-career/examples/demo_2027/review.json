@@ -106,9 +106,9 @@
     "narrative.json": "265288c7a1dad477f1f110b65b017c4a9301b8950af8e5d9f5ac83c38bdf5e4d",
     "profile.txt": "69dfeb57cf005a4ace3990e51a96b3b821e9de0c130dd1f8eae5b2088f5bef5e",
     "report.md": "56865889da5bd4655b01c6a8d3a256e905ab49e4ffbd3cf4442f6f0e444e478c",
-    "report.html": "767d33f73205e9b31d1d58b43ea48c9c396ad49848b08803140c56c5e24b844e",
-    "report.pdf": "afea2199c28e899b4ba711220ee2aedaa6424f772f15f1ba38dd4b04cb7f384a",
-    "report_trace.json": "c8b539c172515c81ad3ad0eb97db74b719b1c387b61b444699c6bb516ff8404f",
+    "report.html": "e33e384c4fe730fe781a6e57a6ef173f4d27936b48c87f6f6347c0b1245b0f32",
+    "report.pdf": "6308dc38471abb4bec3a168f0a29521f58c84769f8f6b79bcba6baac9681cd6a",
+    "report_trace.json": "0aa2387d4dc35baccd8d95600179df441e9271d7f8b970505a76668f4e3447ad",
     "operator_check.md": "d93856cd7151715936ddc759a6949f4b879c955e474922c12f5ece921e110dcc",
     "profile_snapshot.json": "0a6cb6835c42b9e3a0e18679bd40d3c99c433453287f9e2a231e357647a858d9"
   },
@@ -252,6 +252,17 @@
         "report_trace.json"
       ],
       "reason": "区间图数字格式统一；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.md",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "合入两份旗舰后共用版面与核对工具更新；内容未变。"
     }
   ]
 }
