@@ -81,13 +81,14 @@ def check_report(rep, result, html=None):
             satisfaction = [f'{eu:.1f} 分', f'表里最高的志愿 {max(x["utility"] for x in items):.0f} 分。' + rep.get('meta', {}).get('utility_scale', UTILITY_SCALE)] if eu is not None else []
             sims = params.get('sims', 4000)
             fall = lambda p: (f'< {100/sims:.2g}%' if grade == 'A' else '模拟中未出现') if p == 0 else (unescape(fmt(p, 1)) if numeric else '有风险，见第 05 节')
-            head4 = [str(len(items)), f'本批次可填 {rep.get("meta", {}).get("slots", "–")} 个', name]
+            tiers = ' / '.join(f"{t} {sum(x['tag'] == t for x in items)}" for t in ('冲', '稳', '保'))
+            head4 = [str(len(items)), f'本批次可填 {rep.get("meta", {}).get("slots", "–")} 个；{tiers}', name]
             if grade == 'A':
                 mid = ['概率约 ' + percentage(probability)] + satisfaction
             elif numeric:
                 mid = ['概率' + unescape(fmt(probability))] + satisfaction
             else:
-                mid = ['落点最集中的志愿（本省评级不给精确概率）', ' / '.join(str(sum(x['tag'] == t for x in items)) for t in ('冲', '稳', '保')), '按模型过线可能性分档，不给百分比']
+                mid = ['落点最集中的志愿（本省评级不给精确概率）', '不估算', f'本省概率评级 {grade}，概率不可信，按概率加权的满意度也不算；表里最高的志愿 {max(x["utility"] for x in items):.0f} 分。']
             sp = result['stress']['p_fall']
             if grade == 'A' or result['p_fall']:
                 tail = [fall(result['p_fall']), '录取线整体大波动时 ' + fall(sp)]

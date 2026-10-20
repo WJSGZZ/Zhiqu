@@ -106,9 +106,9 @@
     "narrative.json": "25e3ff88fd2d4313731ad5429e11bfd2b4063d11fbe5779087ea7db0c3f99efa",
     "profile.txt": "2be92b9770f7a4a877386334b958c096198b948c89c5eabca030d4f557e29457",
     "report.md": "1350c5395ecc58db78d751c3dbba456caa3579d246202ba516c534f1a1909c0d",
-    "report.html": "cb087f856d3dfe1cd4ace0c94ad23d0e5b1b6d46d38d49d76552a528f580db0e",
-    "report.pdf": "c67371484f7c849adffa260f5398cc14f36752a8502afd8ed4cb4aadbe271e4b",
-    "report_trace.json": "8520a6b29ec9aa8d01ca4ab321b6917714c9c76e21a03808a7feb408a4fa5199",
+    "report.html": "ff09dd77051a539a60ba0d855fa58553ea2adccfa257f481cbb23042fdd70a31",
+    "report.pdf": "95133e931e0b597d0222251b1a91056c5875c09628492f487120740501626750",
+    "report_trace.json": "13d96179ddefbb329eeea1e2b9a573688b5091d093e41cf6521c99a5e2ea0865",
     "operator_check.md": "312f3a475a4e0f077e830c97da739b121a358dda8c330abdac211f3e5933d741",
     "profile_snapshot.json": "432626de4888a0d461edc284e9c475796e8d96ce33683030143dcd3f896be032"
   },
@@ -158,6 +158,16 @@
         "report_trace.json"
       ],
       "reason": "封面一句话结论按高考同款写法重写为两三句（本人情况、建议及关键数字、先做什么），数字均为登记引用；正文与结论不变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "共用的 report.py 改了高考摘要卡，读研求职报告随工具指纹重新生成；内容未变。"
     }
   ]
 }
