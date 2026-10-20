@@ -10,8 +10,8 @@
 
 | 编号／人物（均模拟） | 地区 | 学校／家庭 | 学历与节点 | 主路径 | 关键差异 | 验证范围 |
 |---|---|---|---|---|---|---|
-| [2027-YJ-S01 小林](../../zhiqu-grad/examples/demo_2027/case.json) | 广东 | 普通公办本科／普通家庭 | 本科大四、初试前 | 电气考研 | 无实际模考、费用约束 | 已有完整报告 |
-| [2027-QZ-S01 小宁](../../zhiqu-career/examples/demo_2027/case.json) | 四川 | 普通高职／普通家庭 | 专科大三、未有offer | 基础财务岗位 | 专科资格、现金收入与派遣 | 已有完整报告 |
+| [2027-YJ-S01 小林](../../zhiqu-grad/examples/2027-YJ-S01/case.json) | 广东 | 普通公办本科／普通家庭 | 本科大四、初试前 | 电气考研 | 无实际模考、费用约束 | 已有完整报告 |
+| [2027-QZ-S01 小宁](../../zhiqu-career/examples/2027-QZ-S01/case.json) | 四川 | 普通高职／普通家庭 | 专科大三、未有offer | 基础财务岗位 | 专科资格、现金收入与派遣 | 已有完整报告 |
 | 2028-YJ-S02 小明 | 江苏 | 省属公办本科／普通双职工家庭 | 大三上、2028年毕业 | 推免与考研并行 | 班级/专业、学业/综合口径不一致 | 完整报告 |
 | 2027-YJ-S03 小安 | 山东 | 普通公办本科／普通工薪家庭 | 大四、2027年毕业 | 跨专业考研或先工作 | 专业名称相近但报考条件不同 | 阶段 0—4 |
 | 2027-YJ-S04 小文 | 浙江 | 普通公办本科／普通家庭、本人已有工资 | 2025本科毕业、在职 | 在职读研或继续工作 | 报考年限与学习方式混淆 | 阶段 0—4 |
@@ -37,7 +37,7 @@
 
 ### 阶段产物
 
-[阶段登记](../../zhiqu-grad/examples/2028-YJ-S02/case.json)；[JSON 画像](../../zhiqu-grad/examples/2028-YJ-S02/profile.json)；[口语补充](../../zhiqu-grad/examples/2028-YJ-S02/profile-supplement.txt)。[完整报告](../../zhiqu-grad/examples/2028-YJ-S02/report.pdf)；[操控者核查单](../../zhiqu-grad/examples/2028-YJ-S02/operator_check.md)。
+[阶段登记](../../zhiqu-grad/examples/2028-YJ-S02/case.json)；[JSON 画像](../../zhiqu-grad/examples/2028-YJ-S02/profile.json)；[口语补充](../../zhiqu-grad/examples/2028-YJ-S02/profile-supplement.txt)。[完整报告](../../zhiqu-grad/examples/2028-YJ-S02/2028-YJ-S02-report.pdf)；[操控者核查单](../../zhiqu-grad/examples/2028-YJ-S02/operator_check.md)。
 
 ## 2027-YJ-S03 · 小安（模拟）
 
@@ -79,7 +79,7 @@
 
 ### 阶段产物
 
-[阶段登记](../../zhiqu-career/examples/2027-QZ-S02/case.json)；[JSON 画像](../../zhiqu-career/examples/2027-QZ-S02/profile.json)；[口语补充](../../zhiqu-career/examples/2027-QZ-S02/profile-supplement.txt)。[完整报告](../../zhiqu-career/examples/2027-QZ-S02/report.pdf)；[操控者核查单](../../zhiqu-career/examples/2027-QZ-S02/operator_check.md)。
+[阶段登记](../../zhiqu-career/examples/2027-QZ-S02/case.json)；[JSON 画像](../../zhiqu-career/examples/2027-QZ-S02/profile.json)；[口语补充](../../zhiqu-career/examples/2027-QZ-S02/profile-supplement.txt)。[完整报告](../../zhiqu-career/examples/2027-QZ-S02/2027-QZ-S02-report.pdf)；[操控者核查单](../../zhiqu-career/examples/2027-QZ-S02/operator_check.md)。
 
 ## 2027-QZ-S03 · 小平（模拟）
 
@@ -121,7 +121,7 @@
 
 ### 阶段产物
 
-[阶段登记](../../zhiqu-career/examples/2027-QZ-S05/case.json)；[JSON 画像](../../zhiqu-career/examples/2027-QZ-S05/profile.json)；[口语补充](../../zhiqu-career/examples/2027-QZ-S05/profile-supplement.txt)。[完整报告](../../zhiqu-career/examples/2027-QZ-S05/report.pdf)；[操控者核查单](../../zhiqu-career/examples/2027-QZ-S05/operator_check.md)。
+[阶段登记](../../zhiqu-career/examples/2027-QZ-S05/case.json)；[JSON 画像](../../zhiqu-career/examples/2027-QZ-S05/profile.json)；[口语补充](../../zhiqu-career/examples/2027-QZ-S05/profile-supplement.txt)。[完整报告](../../zhiqu-career/examples/2027-QZ-S05/2027-QZ-S05-report.pdf)；[操控者核查单](../../zhiqu-career/examples/2027-QZ-S05/operator_check.md)。
 
 ## 2027-YJ-S05 · 小舟（模拟）
 
@@ -135,4 +135,4 @@
 
 ### 阶段产物
 
-[阶段登记](../../zhiqu-grad/examples/2027-YJ-S05/case.json)；[JSON 画像](../../zhiqu-grad/examples/2027-YJ-S05/profile.json)；[口语补充](../../zhiqu-grad/examples/2027-YJ-S05/profile-supplement.txt)。[完整报告](../../zhiqu-grad/examples/2027-YJ-S05/report.pdf)；[操控者核查单](../../zhiqu-grad/examples/2027-YJ-S05/operator_check.md)。
+[阶段登记](../../zhiqu-grad/examples/2027-YJ-S05/case.json)；[JSON 画像](../../zhiqu-grad/examples/2027-YJ-S05/profile.json)；[口语补充](../../zhiqu-grad/examples/2027-YJ-S05/profile-supplement.txt)。[完整报告](../../zhiqu-grad/examples/2027-YJ-S05/2027-YJ-S05-report.pdf)；[操控者核查单](../../zhiqu-grad/examples/2027-YJ-S05/operator_check.md)。

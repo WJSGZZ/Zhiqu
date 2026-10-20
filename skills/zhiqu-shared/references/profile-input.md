@@ -22,7 +22,7 @@ python3 skills/zhiqu/scripts/profile_store.py ingest 2027-YJ-0001 received.txt -
 python3 skills/zhiqu/scripts/profile_store.py latest 2027-YJ-0001
 python3 skills/zhiqu/scripts/profile_store.py diff 2027-YJ-0001
 python3 skills/zhiqu/scripts/case_check.py cases/2027-YJ-0001 --stage 1 --parse-profile
-python3 skills/zhiqu/scripts/profile_store.py report 2027-YJ-0001 cases/2027-YJ-0001/report.pdf
+python3 skills/zhiqu/scripts/profile_store.py report 2027-YJ-0001 cases/2027-YJ-0001/2027-YJ-0001-report.pdf
 ```
 
 案例号由 `new-id` 在带锁的本机总登记表 `cases.json`（位于本机 cases 目录） 中分配，不重复使用。登记表保存类型、真实/模拟模式、建立时间、各版画像与报告的时间和指纹。明文 JSON 原样保留；加密输入解密后以明文 JSON 保留在 `cases/<编号>/profiles/<安全时间戳>.json`，文件名使用 `2026-10-19T22-37-22+0800.json` 这类无冒号格式（保留小数秒），兼容 Windows；旧的含冒号文件名仍能读取。同一时间已有不同内容则拒绝覆盖。`case.json.profile` 记录当前采用文件与题目指纹；最新填写时间优先，不按文件修改时间选。工具默认只写本机忽略目录，文件权限仅限当前用户；不上传这些案例或登记表。报告指纹用 `report` 登记，不改变报告内容。

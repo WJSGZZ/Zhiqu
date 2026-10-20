@@ -1,0 +1,208 @@
+{
+  "independent": false,
+  "reviewer": null,
+  "date": null,
+  "pitfalls": [],
+  "sampled_sources": [],
+  "status": "awaiting_independent_review",
+  "rubric": {
+    "status": "pending",
+    "items": [
+      {
+        "id": "clarity",
+        "score": null,
+        "reason": "此项尚未按共用评分表复核；原复核内容另行保留",
+        "evidence_refs": [],
+        "report_location": null
+      },
+      {
+        "id": "traceability",
+        "score": null,
+        "reason": "此项尚未按共用评分表复核；原复核内容另行保留",
+        "evidence_refs": [],
+        "report_location": null
+      },
+      {
+        "id": "reasoning",
+        "score": null,
+        "reason": "此项尚未按共用评分表复核；原复核内容另行保留",
+        "evidence_refs": [],
+        "report_location": null
+      },
+      {
+        "id": "consistency",
+        "score": null,
+        "reason": "此项尚未按共用评分表复核；原复核内容另行保留",
+        "evidence_refs": [],
+        "report_location": null
+      },
+      {
+        "id": "timeliness",
+        "score": null,
+        "reason": "此项尚未按共用评分表复核；原复核内容另行保留",
+        "evidence_refs": [],
+        "report_location": null
+      },
+      {
+        "id": "personalization",
+        "score": null,
+        "reason": "此项尚未按共用评分表复核；原复核内容另行保留",
+        "evidence_refs": [],
+        "report_location": null
+      },
+      {
+        "id": "actionability",
+        "score": null,
+        "reason": "此项尚未按共用评分表复核；原复核内容另行保留",
+        "evidence_refs": [],
+        "report_location": null
+      },
+      {
+        "id": "boundaries",
+        "score": null,
+        "reason": "此项尚未按共用评分表复核；原复核内容另行保留",
+        "evidence_refs": [],
+        "report_location": null
+      },
+      {
+        "id": "summary_access",
+        "score": null,
+        "reason": "此项尚未按共用评分表复核；原复核内容另行保留",
+        "evidence_refs": [],
+        "report_location": null
+      },
+      {
+        "id": "layout",
+        "score": null,
+        "reason": "此项尚未按共用评分表复核；原复核内容另行保留",
+        "evidence_refs": [],
+        "report_location": null
+      }
+    ]
+  },
+  "snapshot": {
+    "report.json": "736cdff47255f4cdea4800bec54905e61368b944aa746621f4d1be160132c3fb",
+    "2027-GK-C01-report.pdf": "39f8379e3184d9af217ed4304857c933163281db145c16c33e554185ca426b25",
+    "operator_check.md": "2d997634d981b6fae51111ecb28e3b5ef16f10c3246c319ee01e0870fa844d45",
+    "result.json": "bbc6c54712a33b3c41f00e62c37a27002f2d2a3b87208f25cc503d5d09460582",
+    "case.json": "32c9030dc02b30600366e0a75c7b730af2ddb153e42cea3706bb3f93d998c542",
+    "profile_snapshot.json": "05357e9d7c77baf4b132978319ea870ae6805a200e09f63f759015b176649f95"
+  },
+  "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。",
+  "self_assessment": {
+    "verification_scope": "本轮更新为附核对材料的PDF，自评和机器核对通过后仍等待独立审核；未补造官方原文和独立批准。"
+  },
+  "snapshot_refreshes": [
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.json",
+        "report.pdf"
+      ],
+      "reason": "报告改版（2026-10-20）：正文给读者、第 12 节“核对与来源”给核对；比较矩阵、追问、风险改为三类报告共用的卡片和标记，图表配色统一。 院校调研加了每个方面一句话的卡片（brief，只概括原调研“发现”，不加新事实或数字），原表移到第 12 节。志愿、概率、排序和结论不变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.pdf"
+      ],
+      "reason": "摘要卡“满意度 70 分以上的概率”改为“平均满意度”（期望满意度与表里最高志愿分），因为固定 70 分门槛对位次靠后的考生会显示 0%、读成注定不满意；志愿、概率和结论不变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.pdf"
+      ],
+      "reason": "摘要四张卡固定为同一格式（推荐志愿数含冲稳保、最可能的去向、平均满意度、滑档风险），评级 C/D 的满意度卡写“不估算”；志愿、概率和结论不变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "共用 report.py 改为 SVG 状态图标与图形时间线标记；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "核对框改为图形；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.pdf"
+      ],
+      "reason": "图表按科研插图标准重画：条形图加从 0 起的刻度轴、图例与按宽度截断的标签；落点条宽度严格等于概率并注明未标号的窄段和滑档；三种填法图用 0—100 固定刻度、滑档与摘要同精度；新增院校调研证据一览图。显示层：≥99.5% 的概率写“> 99%”不再写 100%，策略图注按显示精度比较。志愿、概率和结论不变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.pdf"
+      ],
+      "reason": "第 12 节核对附录改为逐条可读：不印 JSON 与英文字段名，计算项只在正文写法不同才注明，同一数字不同写法合为一条；图例图标离画布左缘留足边距。志愿、概率和结论不变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "报告底色改为与网页问卷一致的浅米色；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "新增“第三方整理”证据等级样式；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "区间图数字格式统一；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "合入两份旗舰后共用版面与核对工具更新；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude（报告命名统一）",
+      "files": [
+        "2027-GK-C01-report.pdf",
+        "operator_check.md",
+        "result.json"
+      ],
+      "reason": "仅改文件名，正文逐字未变。另：result.json 里记录的命令参数路径随目录改名；operator_check.md 里的案例目录名随改名更新。",
+      "comparison": "改名前后各抽取 PDF 全文（14 页）逐行比对：唯一差异是第 12 节“生成时间”（2026-10-20T17:24:13+08:00 → 2026-10-20T18:45:37+08:00）；页数、标题、案例号与画像指纹不变。"
+    }
+  ]
+}

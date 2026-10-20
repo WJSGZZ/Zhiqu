@@ -122,7 +122,7 @@ def check(root=SKILLS,library=LIBRARY):
             case=PlanningCase(path);errors.extend(cid+'：'+e for e in case.check(stage))
             if case.case.get('mode')!='simulation':errors.append(cid+'：必须明确为模拟')
             if stage==4:
-                for f in ('calculations.json','judgment.json','narrative.json','report.md','report.html','report.pdf','review.json','operator_check.md'):
+                for f in ('calculations.json','judgment.json','narrative.json','report.md','report.html',cid+'-report.pdf','review.json','operator_check.md'):
                     if (path/f).exists():errors.append(cid+'：前半程人物出现超出范围的产物 '+f)
             else:
                 review=json.loads((path/'review.json').read_text())

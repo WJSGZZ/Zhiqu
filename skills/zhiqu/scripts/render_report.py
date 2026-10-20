@@ -7,7 +7,7 @@ skills/zhiqu-career/references/report-guide.md），本脚本把它渲染成与�
 report.py 相同视觉风格的 HTML/PDF。
 
 用法：
-  python3 scripts/render_report.py report.md --out report.pdf --profile-version profile.txt
+  python3 scripts/render_report.py report.md --out 2027-YJ-0001-report.pdf --profile-version profile.txt  # PDF 名须为 <报告号>-report.pdf
   python3 scripts/render_report.py report.md --out report.html   # 只要 HTML
 
 Markdown 格式：
@@ -548,11 +548,13 @@ def main():
     if not a.profile_version:ap.error('交付PDF必须明确指定 --profile-version')
     from planning_report import generate
     from pathlib import Path
-    import shutil
     root=Path(a.report).resolve().parent
     if not (root/'case.json').exists():ap.error('交付PDF必须由已登记的阶段文件生成；请先完成案例工作流')
-    generated=generate(root,profile_version=a.profile_version)
-    if Path(a.out).resolve()!=generated.resolve():shutil.copyfile(generated,a.out)
+    from verify_report import report_pdf_name
+    import json
+    expected=root/report_pdf_name(json.loads((root/'case.json').read_text())['case_id'])
+    if Path(a.out).resolve()!=expected:ap.error(f'交付 PDF 一律以报告号命名，生成在案例目录：--out 须为 {expected}')
+    generate(root,profile_version=a.profile_version)
 
 
 if __name__ == "__main__":

@@ -527,7 +527,7 @@ def check_case_registry(root):
     root = Path(root).resolve()
     registry_path = root / 'skills/zhiqu-shared/references/cases.json'
     directories = {p.parent for p in root.glob('skills/*/examples/**/case.json')}
-    directories.update(p.parent for p in root.glob('skills/*/examples/**/report.json') if (p.parent / 'report.pdf').exists())
+    directories.update(p.parent for p in root.glob('skills/*/examples/**/report.json') if any(p.parent.glob('*.pdf')))
     if not directories and not registry_path.exists():return []
     rel = str(registry_path.relative_to(root));issues = []
     def error(message, file=rel):issues.append((ERROR, file, 1, message))
@@ -557,6 +557,8 @@ def check_case_registry(root):
             if not isinstance(report, str):error('报告路径须为字符串：' + cid);continue
             path = (root / report).resolve()
             if not path.is_relative_to(target) or not path.is_file():error('登记报告不存在或越出案例目录：' + report)
+    for pdf in sorted(root.glob('skills/*/examples/**/report.pdf')):
+        error('示例里不许出现 report.pdf，交付 PDF 一律叫 <报告号>-report.pdf：' + str(pdf.relative_to(root)))
     seen = {}
     for directory in sorted(directories):
         file = str(directory.relative_to(root));case = {};report = {}
@@ -568,6 +570,10 @@ def check_case_registry(root):
         if not cid:error('公开案例缺少 case_id', file);continue
         if cid in seen and seen[cid] != directory:error('不同案例目录使用同一案例号：' + cid, file)
         seen[cid] = directory
+        # 示例与真实报告同一命名：目录名、交付 PDF 名都等于报告号
+        if directory.name != cid:error('案例目录名须等于报告号：' + cid, file)
+        for pdf in sorted(directory.rglob('*.pdf')):
+            if pdf.name != cid + '-report.pdf':error('报告 PDF 须命名为 ' + cid + '-report.pdf：' + str(pdf.relative_to(root)), file)
         record = by_dir.get(directory)
         if not record:error('公开案例未登记：' + cid, file);continue
         if record['case_id'] != cid:error('案例号与总登记不一致：' + cid, file)

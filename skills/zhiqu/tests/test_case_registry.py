@@ -14,7 +14,7 @@ class PublicRegistry(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory();self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
-        self.folder = self.root / 'skills/zhiqu-grad/examples/demo'
+        self.folder = self.root / 'skills/zhiqu-grad/examples/2027-YJ-S01'
         self.folder.mkdir(parents=True)
         self.case = {'case_id':'2027-YJ-S01'}
         self.record = {'case_id':'2027-YJ-S01','directory':str(self.folder.relative_to(self.root)), 'reports':[]}
@@ -40,7 +40,7 @@ class PublicRegistry(unittest.TestCase):
         raw=b'{"fictional":true}';(self.folder/'profile.json').write_bytes(raw)
         binding={'file':'profile.json','sha256':hashlib.sha256(raw).hexdigest(),'filled_at':None}
         self.case['report_profile']=binding;self.record['profile']=dict(binding)
-        pdf=self.folder/'report.pdf';pdf.write_bytes(b'fictional-pdf-bytes-for-hash-check-only')
+        pdf=self.folder/'2027-YJ-S01-report.pdf';pdf.write_bytes(b'fictional-pdf-bytes-for-hash-check-only')
         name=str(pdf.relative_to(self.root));self.record['reports']=[name]
         self.record['report_versions']=[{'file':name,'generated_at':'2026-10-19T12:00:00+08:00','version':'1',
             'sha256':hashlib.sha256(pdf.read_bytes()).hexdigest(),'profile_sha256':binding['sha256']}]
@@ -116,6 +116,20 @@ class PublicRegistry(unittest.TestCase):
         pipeline = self.folder.parent / 'pipeline';pipeline.mkdir()
         (pipeline/'report.json').write_text('{"meta":{}}')
         self.assertEqual(check_case_registry(self.root), [])
+
+    def test_report_and_directory_names_must_equal_case_id(self):
+        self.deliverable();self.assertEqual(check_case_registry(self.root), [])
+        (self.folder/'report.pdf').write_bytes(b'legacy-name')
+        messages = [x[3] for x in check_case_registry(self.root)]
+        self.assertTrue(any('不许出现 report.pdf' in x for x in messages))
+        self.assertTrue(any('须命名为 2027-YJ-S01-report.pdf' in x for x in messages))
+        (self.folder/'report.pdf').unlink();(self.folder/'2027-YJ-S09-report.pdf').write_bytes(b'wrong-id')
+        self.assertTrue(any('须命名为' in x[3] for x in check_case_registry(self.root)))
+        (self.folder/'2027-YJ-S09-report.pdf').unlink()
+        moved = self.folder.parent/'demo_2027';self.folder.rename(moved);self.folder = moved
+        self.record['directory'] = str(moved.relative_to(self.root));self.record['reports'] = []
+        self.record.pop('report_versions', None);self.write()
+        self.assertTrue(any('目录名须等于报告号' in x[3] for x in check_case_registry(self.root)))
 
 
 if __name__ == '__main__':unittest.main()

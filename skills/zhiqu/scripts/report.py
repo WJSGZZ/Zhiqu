@@ -2,7 +2,7 @@
 """知衢 · 志愿填报决策报告生成器（仅用 Python 标准库；PDF 由本机 Chrome/Edge 无头模式打印）。
 
 用法：
-  python3 report.py report.json --opt result.json --out 报告.pdf --profile-version profile.txt
+  python3 report.py report.json --opt result.json --out <报告号>-report.pdf --profile-version profile.txt
   python3 report.py report.json --opt result.json --out 报告.html   # 只要 HTML
 
 report.json 的字段见 references/report-guide.md；result.json 是 optimize.py --json 的输出。
@@ -1956,6 +1956,10 @@ def main():
     root = Path(a.report).resolve().parent
     if (root/'case.json').exists():
         if not a.profile_version:ap.error('生成有案例号的报告必须指定 --profile-version')
+        from verify_report import report_pdf_name
+        expected = report_pdf_name(json.load(open(root/'case.json', encoding='utf-8'))['case_id'])
+        if not a.out.lower().endswith('.html') and Path(a.out).name != expected:
+            ap.error(f'交付 PDF 一律以报告号命名：--out 须为 {expected}')
         from verify_report import bind_profile, gaokao_materials, append_html, require_analysis_profile
         binding, profile, warning = bind_profile(root,a.profile_version,require_analysis=True)
         if warning:print(warning,file=sys.stderr)
@@ -2007,7 +2011,7 @@ def main():
         files = gaokao_files(root,rep,opt,binding,a.opt)
         attach_pdf(out,files,materials,read(root/'case.json'),binding,doc)
         trace = json.loads(files['report_trace.json'])
-        trace['artifacts']={'report.pdf':digest(Path(out).read_bytes())}
+        trace['artifacts']={Path(out).name:digest(Path(out).read_bytes())}
         (root/'report_trace.json').write_bytes(json_bytes(trace))
     layout_gate(out)
     if binding:

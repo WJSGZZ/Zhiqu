@@ -21,8 +21,8 @@ from decision_evidence import validate_evidence
 
 SKILLS = Path(__file__).resolve().parents[2]
 DEMO_PATHS = (
-    SKILLS / 'zhiqu-grad/examples/demo_2027',
-    SKILLS / 'zhiqu-career/examples/demo_2027',
+    SKILLS / 'zhiqu-grad/examples/2027-YJ-S01',
+    SKILLS / 'zhiqu-career/examples/2027-QZ-S01',
 )
 
 

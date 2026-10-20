@@ -302,8 +302,9 @@ class Gate:
         html = self.dir / 'report.html'
         for msg in check_report(rep, res, html.read_text(encoding='utf-8') if html.is_file() else None):
             self.err(7, msg)
-        if not html.is_file() and not (self.dir / 'report.pdf').is_file():
-            self.err(7, '缺 report.html 或 report.pdf')
+        pdf = f"{self.case.get('case_id')}-report.pdf"
+        if not html.is_file() and not (self.dir / pdf).is_file():
+            self.err(7, f'缺 report.html 或 {pdf}')
         if sheet is not None:
             if len(sheet) != len(res.get('list', [])):
                 self.err(7, f'填报单 {len(sheet)} 行 ≠ result 志愿数 {len(res.get("list", []))}')

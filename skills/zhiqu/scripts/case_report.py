@@ -359,9 +359,11 @@ def build(case_dir, research_dir=None, opportunities=None, render=True, profile_
         return rep
     (d / "report.json").write_text(json.dumps(rep, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     rel = lambda p: str(Path(p).relative_to(SKILL))
+    # 交付 PDF 一律叫 <报告号>-report.pdf；网页版仍叫 report.html
+    pdf_name = json.loads((d / "case.json").read_text(encoding="utf-8"))["case_id"] + "-report.pdf"
     for ext in ("pdf", "html"):
         out = subprocess.run([sys.executable, "scripts/report.py", rel(d / "report.json"), "--opt", rel(run / "result.json"),
-                              "--out", rel(d / f"report.{ext}"), "--profile-version", str(profile_version)], cwd=SKILL, capture_output=True, text=True)
+                              "--out", rel(d / (pdf_name if ext == "pdf" else "report.html")), "--profile-version", str(profile_version)], cwd=SKILL, capture_output=True, text=True)
         if out.returncode:
             print(case, ext, out.stderr[-800:])
             if ext == "pdf":

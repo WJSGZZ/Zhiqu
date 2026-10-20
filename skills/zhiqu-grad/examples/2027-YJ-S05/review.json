@@ -288,9 +288,9 @@
     "profile.json": "af232e95b42de1286681d5b04d706bbd8d16d3dd86cfe304a7d87e5a6bfcab88",
     "profile-supplement.txt": "952368202eeb2cd031c6c0d52212442dca0faaadcd6c99828f951e50ba15d704",
     "report.md": "3744b45ae20e5a751404b07bc2c0448e08fb836180dd9af2a1e5375d44b4e729",
-    "report.html": "d7f2e2dd0574c614baa78e027e0b621d1db9a801589ece042d94587a0829c521",
-    "report.pdf": "ceef13064f46888a4793544952243c62a6f5575fb4916488665cc2cda7967e8a",
-    "report_trace.json": "2a8ce4c2b7f30a1eff7fcf435872741cbaea59467f8224efc296b5e558b32343",
+    "report.html": "96cfaddef842d34d7d32c529a0c8100a59860eb2a5ed5a763b3052df3b5dc6bb",
+    "2027-YJ-S05-report.pdf": "643361f407e52941a67e983fafe164292300ce8c159d314f2db54217ac7a4474",
+    "report_trace.json": "95ae5320c5aeb2db5f0cc86ccda6dd8d5a4c4e77ecda31fd0c3cdc9b5e64eb57",
     "operator_check.md": "18222aa2fc943944c390b8e138dae191fee4b04a418c4dcd94ab2e6b845f2a36"
   },
   "snapshot_refreshes": [
@@ -373,6 +373,17 @@
         "operator_check.md"
       ],
       "reason": "按第 3 轮独立复核：E034/E037 摘录补全、删去面向读者的开发用语、河海软件工程“上一届一志愿只录 3 人”；第 3 轮复核挪入 review_history。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude（报告命名统一）",
+      "files": [
+        "report.html",
+        "2027-YJ-S05-report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "仅改文件名，正文逐字未变。",
+      "comparison": "改名前后各抽取 PDF 全文（28 页）逐行比对：唯一差异是第 12 节“生成时间”（2026-10-20T18:15:48+08:00 → 2026-10-20T18:45:20+08:00）；页数、标题、案例号与画像指纹不变。"
     }
   ],
   "review_history": [

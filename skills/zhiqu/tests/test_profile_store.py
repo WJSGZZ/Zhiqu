@@ -333,7 +333,7 @@ class ProfileStore(unittest.TestCase):
         raw = profile()
         store.ingest(self.root, case_id, raw)
         folder = self.root / case_id
-        path = folder / 'report.pdf'
+        path = folder / f'{case_id}-report.pdf'
         first = b'%PDF-1.4\nfictional report version one\n'
         second = b'%PDF-1.4\nfictional report version two\n'
         path.write_bytes(first)
@@ -343,7 +343,7 @@ class ProfileStore(unittest.TestCase):
         registry = (self.root / 'cases.json').read_text(encoding='utf-8')
         self.assertIn(hashlib.sha256(first).hexdigest(), registry)
         self.assertIn(hashlib.sha256(second).hexdigest(), registry)
-        self.assertIn('report.pdf', registry)
+        self.assertIn(f'{case_id}-report.pdf', registry)
         self.assertEqual(store.latest(self.root, case_id)[1], raw)
         with self.assertRaises((ValueError, FileNotFoundError)):
             store.record_report(self.root, case_id, folder / 'missing.pdf')
