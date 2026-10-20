@@ -165,20 +165,20 @@
     "verification_scope": "本轮更新为附核对材料的PDF，自评和机器核对通过后仍等待独立审核；未补造官方原文和独立批准。"
   },
   "snapshot": {
-    "case.json": "a9718f60b403172e958aca4fb446e6e924f19867427563d439e28c41e6e84f73",
-    "profile_parse.json": "2debcaaebbd0933ce629911dc8e523fbfe415db2a129d3942139f5866d91d556",
+    "case.json": "34bca596ab9786cf44c01e13fa5103f2b678941de0d447e621a255f6560a3eb7",
+    "profile_parse.json": "e6126661c4ebd218a8c9907aa61456cb5a4252603b8189a352a4398cd2307fcc",
     "directions.json": "5b2397e7ee4e80db6b8b1b6bf0834869aabbf282dcfecc6f23c4c706d476cc76",
     "rules_check.json": "d887941488483a7992cfbe1fb174550f3fdb3083d8c597a1cdcc43f1eee9d198",
     "candidates.json": "e2d7abe22fb7375e3190e21a8f801c264fbed4b7fdaab066193cc48a35ff98f1",
     "evidence.json": "92ac60740f28924a3b80ffef547bde799e0c51e6b0d591361ffca72b2dfc94e2",
     "calculations.json": "8e8135c7483b79dbc2d7ed702e1d9add2628ccf852da45c3d957f1e3f05d98f5",
-    "judgment.json": "e745ba80a3b9201978ce86a51cbeb31485b71e92b09f116e031136ab9be027a6",
+    "judgment.json": "d086c2dd722fbf20d7377781dea8905b90d261f512a7b172d34cd0c175f3ab86",
     "narrative.json": "cbfcc57d7627dd98c04dc98826b0bb4968862aa318b31708b2598ed39e47f121",
-    "report.md": "5726e5db3e8706fdbe3bfedfdc6c7105a911b58265bc552d59c4522cfeb26613",
-    "report.html": "161bd6d731eb84108ab6291484b4efed8199231c8b8fa4dc2b138b12f96c999f",
-    "report.pdf": "020768241ea2c568de084cd8332a5b9d75379111d07a3f7be0b020493d5239ff",
-    "report_trace.json": "93d7ade3c86de0c3e77e9dc2fe73219481b0b9a221c571ea3f69803eb2596d5d",
-    "operator_check.md": "1245f6ce989225d6e83824f464ed0d13f904657fc77be354f7990a7aa1cfaf84",
+    "report.md": "dd966e28cc32932fe9c26c09486afd457b119862a531c9886cb5b98d0947ad5f",
+    "report.html": "b13a70e2102a1a5a4a07bbe1ff3f9bf6ca329381acde292821f685a3a8cadec0",
+    "report.pdf": "ced6bb4659f6efd5d635ab0a8d0cf9f4ff7525aa8653ec0f7e6fe4fc71a1d2df",
+    "report_trace.json": "006408bf42f7abcdfc890568a87c33b1a591d7177c3242353ed9d9d10da94331",
+    "operator_check.md": "2d4b156c7f8321de9e645977d10d72b48f5ef7ba6d264e2d3dda4cb2f2bb7c9e",
     "profile.json": "e985adff4dc5eb31443eef9a859f0e7955f84936dd8dab27a61b56e4b2e50d29",
     "profile-supplement.txt": "7ae0beb59e74158ec5ff869bb796f5cf3352fb7fa5c9ab7172ee930e91c93360"
   },
@@ -276,6 +276,21 @@
         "report_trace.json"
       ],
       "reason": "图表按科研插图标准重画（条形图加刻度，时间线同月事项错开、字号不小于 7pt）；新增“现状一览”和企业、电网、国考分路流程图；矩阵说明改用图形名称。数字全部引用原有画像、证据与计算，结论不变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "case.json",
+        "judgment.json",
+        "operator_check.md",
+        "profile_parse.json",
+        "report.html",
+        "report.md",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "第 12 节核对附录改为逐条可读：本人复合答案写成中文、同题不重复列；登记项、计算项和输入全部中文名（不再出现字段路径、英文键名和取文工具名）；同一数字的不同写法合为一条；候选共同前提只写一次；风险表逐条写成情况、为什么改判、怎么应对；新增非数字依据的原文摘录。新增 03 节卡点状态图；证据条目名改为中文（只改名称，原值与摘录未变）。结论不变。"
     }
   ]
 }

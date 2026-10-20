@@ -107,7 +107,8 @@
           "{{c:/monthly_cost}}": "{{c:/high_monthly_cost}}"
         },
         "why": "只有住房提高，其他输入不动",
-        "output_ref": "{{c:/higher_rent_months}}"
+        "output_ref": "{{c:/higher_rent_months}}",
+        "label": "住房提高后现金可支撑月数"
       },
       {
         "baseline_output": "buffer_months",
@@ -115,7 +116,8 @@
           "{{c:/spendable}}": "{{p:/fields/14/value/cash}}"
         },
         "why": "动用全部应急现金的风险边界，不是支出建议",
-        "output_ref": "{{c:/all_cash_months}}"
+        "output_ref": "{{c:/all_cash_months}}",
+        "label": "动用全部现金时可支撑月数（风险边界）"
       }
     ]
   },

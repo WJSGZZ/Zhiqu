@@ -1970,6 +1970,61 @@
      ]
     },
     {
+     "key": "figure",
+     "component": "flow",
+     "min": 0,
+     "max": null,
+     "from": [
+      {
+       "file": "profile_parse.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "directions.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "candidates.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "judgment.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "evidence.json",
+       "pointer": "/report_blocks"
+      },
+      {
+       "file": "calculations.json",
+       "pointer": ""
+      },
+      {
+       "file": "evidence.json",
+       "pointer": "/items"
+      }
+     ],
+     "source_required": true,
+     "condition": "always",
+     "rules": [
+      "reader_first_figure_after_lead",
+      "numbers_bound_to_refs",
+      "no_scores_without_numeric_basis",
+      "missing_data_drawn_as_missing_not_zero"
+     ],
+     "count_by": "components",
+     "node_types": [
+      "flow",
+      "stack",
+      "facts",
+      "cost",
+      "bars",
+      "interval",
+      "timeline",
+      "comparison_matrix"
+     ]
+    },
+    {
      "key": "risks",
      "component": "scenario_table",
      "min": 3,

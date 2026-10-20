@@ -324,7 +324,7 @@
   },
   "snapshot": {
     "report.json": "bd7a38a056ef74b02bfbe48f0a2607206b19b75226896cfb7f0a5526d9d67789",
-    "report.pdf": "397f603ceb0bb1096c4ca7cf5302b828fa685368935b2448cd7bc70e533fc86c",
+    "report.pdf": "2125d783c02e259fd58859e98f6979d5e7a7d63381dc234a09e0b5daebf17ee8",
     "operator_check.md": "2eb799f9adbcca548e1f987d1bd7e5ebcbdd2d902441820a25050d388070a6e1",
     "result.json": "178b8219f95f1a0f6f131bd29456209a170afce250aa05898694b3d1d9e1f63d",
     "retro_ranks/10000/result.json": "da4c3af0f0c9708f12a75058fdca87239d6c31987d4fb7aef1612ec8a9d135f1",
@@ -391,6 +391,14 @@
         "report.pdf"
       ],
       "reason": "图表按科研插图标准重画：条形图加从 0 起的刻度轴、图例与按宽度截断的标签；落点条宽度严格等于概率并注明未标号的窄段和滑档；三种填法图用 0—100 固定刻度、滑档与摘要同精度；新增院校调研证据一览图。显示层：≥99.5% 的概率写“> 99%”不再写 100%，策略图注按显示精度比较。志愿、概率和结论不变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.pdf"
+      ],
+      "reason": "第 12 节核对附录改为逐条可读：不印 JSON 与英文字段名，计算项只在正文写法不同才注明，同一数字不同写法合为一条；图例图标离画布左缘留足边距。志愿、概率和结论不变。"
     }
   ]
 }
