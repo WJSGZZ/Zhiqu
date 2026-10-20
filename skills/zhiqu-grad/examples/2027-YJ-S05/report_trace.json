@@ -2,15 +2,15 @@
   "schema_version": 1,
   "case_id": "2027-YJ-S05",
   "source_sha256": {
-    "case.json": "a8904d522166a91216961101d610694c84c1d31f4281defb7e0e868e312eec75",
+    "case.json": "0b735e9e8241d015309ca8d36518e8c83d6ed57fccfe8637cf7b79d46d14d68b",
     "profile_parse.json": "20107f71f9c2ed1d7b7198ad470d1be169109141f501371ea2c7181282f25078",
     "directions.json": "e0f392566f46366346e27a144c0011736d32860b9fb6b1826636ae7b561b071d",
-    "rules_check.json": "02f914057e78d3919082a6947d513e501d6d2181274c457ff07ae6092429fab3",
-    "candidates.json": "7e8ad61e602000a9e474ba3f83a35ce033453275ac8b0336134e53abdb4dfaa2",
-    "evidence.json": "3d440b1454f224052f2d771605500cb86f92f596e19f6813a584f1c3d10f5b8f",
-    "calculations.json": "e902d15c08cd406e874045147eef48e8bffca9ccd4d1197c008dc67cf9d74f0f",
-    "judgment.json": "fc5c5d9b4f4b8af9fb79710f8cadad28ce684c9075c2697efbe70df9457494cf",
-    "narrative.json": "2094a80ec2fa929d01a2ad0a43eab8252e58ee4d9b40c268231babf66aae3528",
+    "rules_check.json": "c1d6d9f0f558110862a780d5074b67a0db12a8ae2c8d00874c49af851cb49b66",
+    "candidates.json": "27df56ddf8bb58990dd7899d25701ea130941536d14ebfbaec13ace23e1adb3f",
+    "evidence.json": "d549a89f8ddef75e8e0a36ac4df16b571766f60188d7a77ad82356083629498f",
+    "calculations.json": "d9da96c3e2546b239e866d1f561370c589b48febf5532f68a88226d2ccc1c368",
+    "judgment.json": "ea2c913effcd942a8385576dcdbe1447c06c09263e90a51f58b03eb773703972",
+    "narrative.json": "aedad3711d2321b9e6179068d7b7cf7305b43c096ece2c3028c64343fe19d74f",
     "profile.json": "af232e95b42de1286681d5b04d706bbd8d16d3dd86cfe304a7d87e5a6bfcab88",
     "profile-supplement.txt": "952368202eeb2cd031c6c0d52212442dca0faaadcd6c99828f951e50ba15d704"
   },
@@ -48,12 +48,6 @@
       "ref": "{{c:/mock_total}}",
       "value": 349,
       "display": "349"
-    },
-    {
-      "location": "meta.conclusion",
-      "ref": "{{c:/hhu_line_jump}}",
-      "value": 42,
-      "display": "42"
     },
     {
       "location": "meta.conclusion",
@@ -279,6 +273,12 @@
     },
     {
       "location": "03.figure.1",
+      "ref": "{{e:E020#/value}}",
+      "value": 264,
+      "display": "264"
+    },
+    {
+      "location": "03.figure.1",
       "ref": "{{p:/fields/11/value/政治}}",
       "value": 63,
       "display": "63"
@@ -336,6 +336,12 @@
       "ref": "{{e:E017#/value}}",
       "value": "22:00",
       "display": "22:00"
+    },
+    {
+      "location": "03.analysis.5",
+      "ref": "{{c:/math_to_full}}",
+      "value": 45,
+      "display": "45"
     },
     {
       "location": "06.score_ranges.1",
@@ -651,6 +657,12 @@
     },
     {
       "location": "06.score_ranges.6",
+      "ref": "{{c:/mock_total}}",
+      "value": 349,
+      "display": "349"
+    },
+    {
+      "location": "06.score_ranges.6",
       "ref": "{{c:/hhu26_0812j_min}}",
       "value": 320,
       "display": "320"
@@ -690,6 +702,12 @@
       "ref": "{{c:/hhu25_0812j_q3}}",
       "value": 314.0,
       "display": "314"
+    },
+    {
+      "location": "06.score_ranges.6",
+      "ref": "{{c:/mock_total}}",
+      "value": 349,
+      "display": "349"
     },
     {
       "location": "06.score_ranges.6",
@@ -735,6 +753,12 @@
     },
     {
       "location": "06.score_ranges.6",
+      "ref": "{{c:/mock_total}}",
+      "value": 349,
+      "display": "349"
+    },
+    {
+      "location": "06.score_ranges.6",
       "ref": "{{c:/hhu26_0835_min}}",
       "value": 305,
       "display": "305"
@@ -774,6 +798,12 @@
       "ref": "{{c:/hhu25_0835_q3}}",
       "value": 337.0,
       "display": "337"
+    },
+    {
+      "location": "06.score_ranges.6",
+      "ref": "{{c:/mock_total}}",
+      "value": 349,
+      "display": "349"
     },
     {
       "location": "06.score_ranges.6",
@@ -1328,6 +1358,12 @@
       "display": "9"
     },
     {
+      "location": "08.routes.1",
+      "ref": "{{c:/math_to_full}}",
+      "value": 45,
+      "display": "45"
+    },
+    {
       "location": "08.routes.2",
       "ref": "{{e:E020#/value}}",
       "value": 264,
@@ -1350,6 +1386,18 @@
       "ref": "{{e:E018#/value}}",
       "value": "4月底",
       "display": "4月底"
+    },
+    {
+      "location": "08.routes.2",
+      "ref": "{{e:E067#/value}}",
+      "value": 6,
+      "display": "6"
+    },
+    {
+      "location": "08.routes.2",
+      "ref": "{{c:/hhu26_0835_count}}",
+      "value": 3,
+      "display": "3"
     },
     {
       "location": "08.routes.3",
@@ -1533,9 +1581,9 @@
     }
   ],
   "artifacts": {
-    "report.md": "60cdb06dd24b148475b39f8dd75f654556e962f38f891de11a9402a05c6e9177",
-    "report.html": "8a412d08ee961dc7147194d37fda4128a0aa99e36f72496d0cc2f2e2ccd39988",
-    "report.pdf": "11a7925292fc98b814bfc2a6ddde7cb2fbe05d2a4174a5c5ca128fe9d0d89a21"
+    "report.md": "696dcb6834cc6ce39ea40a2dd15ff4f99e9f8b89af906ea1cc2fc8eead9aaff5",
+    "report.html": "2cdf4007c70549dcd132ff54b62613c5f6845a3355b254f629a046c20738c386",
+    "report.pdf": "8e5aabba5d86bb6b99da627537c1465c92d887c046e420c491421b19d910ee86"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "report_profile": {
