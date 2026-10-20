@@ -33,7 +33,7 @@ def td(c):
     return f"<td{cls}>{E(s)}</td>"
 
 CSS = r"""
-@page { size: A4; margin: 20mm 18mm 20mm 18mm; background: #EEE9DC;
+@page { size: A4; margin: 20mm 18mm 20mm 18mm; background: #F2EEE3;
   @top-left { content: "__TOPLEFT__"; font: 8pt "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; color: #6E776E; }
   @top-right { content: "__RUNHEAD__"; font: 8pt "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; color: #6E776E; }
   @bottom-right { content: counter(page) " / " counter(pages); font: 8pt "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; color: #6E776E; }
@@ -43,7 +43,7 @@ CSS = r"""
 :root { --sans: "PingFang SC","Source Han Sans SC","Noto Sans SC","Hiragino Sans GB","Microsoft YaHei",sans-serif; --ink:#222A26; --soft:#454E48; --muted:#6E776E; --rule:#D3CCB8; --rule2:#B5AD98;
   --accent:#21473E; --accent2:#34685D; --pale:#E3DDCB; --amber:#A8772B; --red:#9B3B2E; --green:#34685D; }
 * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-html, body { background: #EEE9DC; }
+html, body { background: #F2EEE3; }
 body { margin: 0; color: var(--ink); font: 10pt/1.75 "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; font-feature-settings: "lnum"; }
 h1,h2,h3 { font-family: "PT Serif","Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif; font-weight: 700; color: var(--ink); }
 h2 { font-size: 18pt; letter-spacing: .5pt; margin: 0 0 4.5mm; padding-bottom: 2.5mm; border-bottom: 1.2pt solid var(--accent); break-after: avoid; }
@@ -63,10 +63,10 @@ svg.chart { width: 100%; height: auto; display: block; }
 .url { display: block; font: 7pt/1.35 var(--sans); color: var(--muted); word-break: break-all; margin-top: .6mm; }
 
 /* cover */
-.cover { page: cover; width: 210mm; height: 296mm; overflow: hidden; padding: 0; position: relative; background: #EEE9DC; break-after: page; }
+.cover { page: cover; width: 210mm; height: 296mm; overflow: hidden; padding: 0; position: relative; background: #F2EEE3; break-after: page; }
 .cover .band { background: var(--accent); color: #F2EFE6; padding: 20mm 22mm 10mm; }
 .cover .kicker { font-size: 9pt; letter-spacing: 3pt; opacity: .85; }
-.cover h1 { color: #EEE9DC; font-size: 30pt; margin: 6mm 0 3mm; letter-spacing: 1pt; }
+.cover h1 { color: #F2EEE3; font-size: 30pt; margin: 6mm 0 3mm; letter-spacing: 1pt; }
 .cover .sub { font-size: 11pt; opacity: .9; }
 .cover .motto { margin-top: 6mm; font-size: 10.5pt; letter-spacing: 4pt; opacity: .78; display: flex; align-items: center; gap: 4mm; }
 .cover .motto::before { content: ""; width: 8mm; height: .6pt; background: #F2EFE6; opacity: .7; }
@@ -74,7 +74,7 @@ svg.chart { width: 100%; height: auto; display: block; }
 .cover .meta div { border-top: .8pt solid var(--rule2); padding-top: 2mm; }
 .cover .meta b { display:block; font-size: 8pt; color: var(--muted); font-weight: 500; letter-spacing: 1pt; }
 .cover .meta span { font-size: 12pt; }
-.cover .verdict { margin: 9mm 22mm 0; padding: 6mm 8mm; background: #FAF7EE; border-left: 3pt solid var(--accent); }
+.cover .verdict { margin: 9mm 22mm 0; padding: 6mm 8mm; background: #FFFDF8; border-left: 3pt solid var(--accent); }
 .cover .verdict b { display:block; font-size: 8pt; color: var(--accent); letter-spacing: 2pt; margin-bottom: 2mm; }
 .cover .verdict p { font-size: 14pt; line-height: 1.6; margin: 0; }
 .cover .verdict.long p { font-size: 11pt; line-height: 1.55; }
@@ -92,7 +92,7 @@ svg.chart { width: 100%; height: auto; display: block; }
 .kpis em { display:block; font: normal 7.8pt/1.5 var(--sans); color: var(--soft); margin-top: .5mm; }
 
 /* boxes */
-.box { background: #FAF7EE; border: .6pt solid var(--rule); padding: 4mm 5mm; margin: 3mm 0 4mm; }
+.box { background: #FFFDF8; border: .6pt solid var(--rule); padding: 4mm 5mm; margin: 3mm 0 4mm; }
 .box.key { border-left: 2.5pt solid var(--accent); }
 .box.warn { border-left: 2.5pt solid var(--amber); }
 .box h4 { margin: 0 0 1.5mm; font: 600 8.5pt var(--sans); letter-spacing: 1pt; color: var(--accent); }
@@ -131,7 +131,7 @@ tr.hl td { background: #E7EDE8; }
 .grid2.wide { grid-template-columns: 1fr; }
 .card table { font-size: 8.3pt; margin: 2.5mm 0 0; }
 .card table thead th { border-top: .6pt solid var(--rule2); }
-.card { background: #FAF7EE; border-top: 1.6pt solid var(--accent2); padding: 4mm 5mm 3mm; }
+.card { background: #FFFDF8; border-top: 1.6pt solid var(--accent2); padding: 4mm 5mm 3mm; }
 .card h3 { margin: 0 0 1mm; }
 .card .fit { font: 600 7.8pt var(--sans); color: var(--accent); letter-spacing: 1pt; }
 .card dl { margin: 2mm 0 0; }
@@ -142,12 +142,12 @@ tr.hl td { background: #E7EDE8; }
 .fig .ttl { font: 600 8.8pt var(--sans); margin-bottom: 1.5mm; color: var(--soft); }
 .glossary dt { font-weight: 600; margin-top: 1.5mm; } .glossary dd { margin: 0 0 1mm; color: var(--soft); }
 ul.asklist { list-style: none; padding: 0; margin: 0 0 3mm; }
-ul.asklist li { padding: 2mm 0 2mm 4mm; border-left: 2pt solid var(--rule2); margin: 0 0 2mm; background: #FAF7EE; break-inside: avoid; }
+ul.asklist li { padding: 2mm 0 2mm 4mm; border-left: 2pt solid var(--rule2); margin: 0 0 2mm; background: #FFFDF8; break-inside: avoid; }
 ul.asklist li b { font-weight: 600; }
 .ask-line { font-size: 8.5pt; line-height: 1.55; color: var(--soft); margin-top: .6mm; }
 .ask-line em { font: normal 600 7.6pt var(--sans); color: var(--accent2); margin-right: 2mm; }
 .trigger-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; margin: 2mm 0 4mm; }
-.trigger { background: #FAF7EE; border-left: 2pt solid var(--amber); padding: 2.5mm 3.5mm; break-inside: avoid; }
+.trigger { background: #FFFDF8; border-left: 2pt solid var(--amber); padding: 2.5mm 3.5mm; break-inside: avoid; }
 .trigger .if { font-weight: 600; font-size: 9.2pt; margin-bottom: .8mm; }
 .trigger .if em { font: normal 600 7.6pt var(--sans); color: var(--amber); margin-right: 2mm; }
 .toc { margin-top: 2mm; columns: 2; column-gap: 10mm; } .toc div { display: flex; border-bottom: .4pt dotted var(--rule2); padding: .8mm 0; break-inside: avoid; }
@@ -173,17 +173,17 @@ figure { margin-left:0; margin-right:0; }
 .matrix td.opt { font-weight:600; }
 i.dot { display:inline-block; width:3.6mm; height:3.6mm; margin-right:1.4mm; vertical-align:-.7mm; font-style:normal; }
 i.dot svg { display:block; width:100%; height:100%; }
-i.checkbox { display:inline-block; width:3.2mm; height:3.2mm; border:.8pt solid var(--rule2); border-radius:.6mm; background:#FAF7EE; vertical-align:-.5mm; }
+i.checkbox { display:inline-block; width:3.2mm; height:3.2mm; border:.8pt solid var(--rule2); border-radius:.6mm; background:#FFFDF8; vertical-align:-.5mm; }
 .matrix-key { font:7.6pt var(--sans); color:var(--muted); margin:-2mm 0 3mm; }
 .facts { display:grid; grid-template-columns:repeat(3,1fr); gap:2mm; margin:1mm 0 3mm; }
-.fact { padding:1.8mm 2.6mm; background:#FAF7EE; border-left:2.2pt solid var(--accent); break-inside:avoid; }
+.fact { padding:1.8mm 2.6mm; background:#FFFDF8; border-left:2.2pt solid var(--accent); break-inside:avoid; }
 .fact.pending { border-left-color:var(--amber); background:#F5ECD9; }
 .fact.unknown { background:transparent; border:.8pt dashed var(--rule2); }
 .fact b { display:block; font:600 7.6pt var(--sans); color:var(--muted); letter-spacing:.3pt; }
 .fact span { display:block; font-size:9.4pt; line-height:1.45; }
 .fact.unknown span { color:var(--muted); }
 i.fk { display:inline-block; width:3.4mm; height:2.6mm; margin-right:1.2mm; vertical-align:-.3mm; }
-i.fk.known { background:#FAF7EE; border-left:2.2pt solid var(--accent); }
+i.fk.known { background:#FFFDF8; border-left:2.2pt solid var(--accent); }
 i.fk.pending { background:#F5ECD9; border-left:2.2pt solid var(--amber); }
 i.fk.unknown { border:.8pt dashed var(--rule2); }
 .fig .matrix-key { margin:1mm 0 0; }
@@ -197,7 +197,7 @@ i.fk.unknown { border:.8pt dashed var(--rule2); }
 .milestone b, .milestone strong, .milestone span { display:block; }
 .milestone b { color:var(--accent); margin-bottom:1mm; }
 .milestone span { color:var(--muted); margin-top:1mm; }
-.route-card { border: .6pt solid var(--rule); border-left:2.5pt solid var(--accent); padding:4mm; margin:3mm 0 5mm; background:#FAF7EE; }
+.route-card { border: .6pt solid var(--rule); border-left:2.5pt solid var(--accent); padding:4mm; margin:3mm 0 5mm; background:#FFFDF8; }
 .route-card h3 { margin:0 0 2mm; }
 .route-card dl { display:grid; grid-template-columns:repeat(4,1fr); margin:0; gap:4mm; font-size:8.8pt; }
 .route-card dt { color:var(--accent); font:600 8pt var(--sans); margin-bottom:1mm; }
@@ -209,7 +209,7 @@ i.fk.unknown { border:.8pt dashed var(--rule2); }
 .evidence.inference { background:transparent;color:var(--muted); }
 .evidence.missing { background:transparent;color:var(--muted);border-style:dashed; }
 /* 院校卡片：一格一个方面、一句结论；完整调研在第 12 节。 */
-.school-card { background:#FAF7EE; border-top:1.6pt solid var(--accent2); padding:3.5mm 5mm 1mm; margin:0 0 5mm; break-inside:avoid; }
+.school-card { background:#FFFDF8; border-top:1.6pt solid var(--accent2); padding:3.5mm 5mm 1mm; margin:0 0 5mm; break-inside:avoid; }
 .school-card h3 { margin:0 0 2.5mm; font-size:11.5pt; }
 .school-card h3 small { font:400 8pt var(--sans); color:var(--muted); margin-left:2mm; }
 .school-grid { display:grid; grid-template-columns:1fr 1fr; gap:0 7mm; }
@@ -969,7 +969,7 @@ def flow(rows):
                        f'<path d="M{base[0] + wing[0][0]:.1f} {base[1] + wing[0][1]:.1f}L{base[0] + wing[1][0]:.1f} {base[1] + wing[1][1]:.1f}L{tip[0]:.1f} {tip[1]:.1f}Z" fill="{MUTED}"/>')
             if label:
                 labels.append(f'<text x="{lab[0]:.1f}" y="{lab[1]:.1f}" text-anchor="{lab[2]}" font-size="{FS_SMALL}" font-weight="600" fill="{SOFT}">{E(label)}</text>')
-    style = {'step': ('#FAF7EE', '#21473E', INK), 'decision': ('#FAF7EE', '#A8772B', INK),
+    style = {'step': ('#FFFDF8', '#21473E', INK), 'decision': ('#FFFDF8', '#A8772B', INK),
              'main': ('#21473E', '#21473E', '#FFFFFF'), 'alt': ('#E3DDCB', '#B5AD98', INK)}
     for n in (nodes[i] for i in order):
         fill, stroke, ink = style[n['kind']]; used.add(n['kind'])
@@ -982,8 +982,8 @@ def flow(rows):
         for i, line in enumerate(n['lines']):
             out.append(f'<text x="{n["cx"]:.1f}" y="{first + 13 * i:.1f}" text-anchor="middle" font-size="10" fill="{ink}"'
                        + (' font-weight="600"' if n['kind'] in ('main', 'decision') else '') + f'>{E(line)}</text>')
-    key = {'step': (lambda x, y: f'<rect x="{x - 6:.1f}" y="{y - 4.5:.1f}" width="12" height="9" rx="1.5" fill="#FAF7EE" stroke="#21473E"/>', '要做的事'),
-           'decision': (lambda x, y: f'<path d="M{x:.1f} {y - 5.5:.1f}L{x + 7:.1f} {y:.1f}L{x:.1f} {y + 5.5:.1f}L{x - 7:.1f} {y:.1f}Z" fill="#FAF7EE" stroke="#A8772B"/>', '要核实的判断'),
+    key = {'step': (lambda x, y: f'<rect x="{x - 6:.1f}" y="{y - 4.5:.1f}" width="12" height="9" rx="1.5" fill="#FFFDF8" stroke="#21473E"/>', '要做的事'),
+           'decision': (lambda x, y: f'<path d="M{x:.1f} {y - 5.5:.1f}L{x + 7:.1f} {y:.1f}L{x:.1f} {y + 5.5:.1f}L{x - 7:.1f} {y:.1f}Z" fill="#FFFDF8" stroke="#A8772B"/>', '要核实的判断'),
            'main': (_swatch('#21473E'), '主线去向'), 'alt': (_swatch('#E3DDCB'), '备选去向')}
     legend = _legend([key[k] for k in ('step', 'decision', 'main', 'alt') if k in used], height - 6, 0)[0]
     return _svg_open(height) + ''.join(out) + ''.join(labels) + legend + '</svg>'
@@ -1013,7 +1013,7 @@ def stack(rows, unit='', percent=False):
             x0 = scale(x); x1 = scale(x + share); w = x1 - x0
             fill, ink = STACK_COLORS[j % len(STACK_COLORS)]  # 按位置着色只为分开相邻段；分项名写在段内
             out.append(f'<rect x="{x0:.2f}" y="{y}" width="{w:.2f}" height="{bar_h}" fill="{fill}"/>')
-            if x > 0: out.append(f'<line x1="{x0:.2f}" x2="{x0:.2f}" y1="{y}" y2="{y + bar_h}" stroke="#EEE9DC" stroke-width="1.2"/>')
+            if x > 0: out.append(f'<line x1="{x0:.2f}" x2="{x0:.2f}" y1="{y}" y2="{y + bar_h}" stroke="#F2EEE3" stroke-width="1.2"/>')
             text = next((t for t in (f'{name} {_num(v)}', _num(v)) if _text_width(t, FS_SMALL) + 8 <= w), None)
             if text:
                 out.append(f'<text x="{x0 + w / 2:.2f}" y="{y + 12.5:.1f}" text-anchor="middle" font-size="{FS_SMALL}" fill="{ink}">{E(text)}</text>')
@@ -1214,7 +1214,7 @@ def timeline(rows):
 SYMBOL = {
     "yes": '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7.5" fill="#21473E"/>'
            '<path d="M4.6 8.3 7 10.6 11.6 5.6" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-    "pending": '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.8" fill="#FAF7EE" stroke="#A8772B" stroke-width="1.4"/>'
+    "pending": '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.8" fill="#FFFDF8" stroke="#A8772B" stroke-width="1.4"/>'
                '<path d="M8 3.6a4.4 4.4 0 0 0 0 8.8z" fill="#A8772B"/></svg>',
     "no": '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7.5" fill="#9B3B2E"/>'
           '<path d="M5.4 5.4 10.6 10.6M10.6 5.4 5.4 10.6" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>',
@@ -1492,7 +1492,7 @@ def outcome_strip(items, pfall, width=640, fmt=None, fall_text=None):
         x += w
     if pfall > 0:
         out.append(f'<rect x="{x:.2f}" y="0" width="{inner * pfall:.2f}" height="{h}" fill="#9B3B2E"/>')
-    out.extend(f'<line x1="{sx:.2f}" x2="{sx:.2f}" y1="0" y2="{h}" stroke="#EEE9DC" stroke-width="1"/>' for sx in seps)
+    out.extend(f'<line x1="{sx:.2f}" x2="{sx:.2f}" y1="0" y2="{h}" stroke="#F2EEE3" stroke-width="1"/>' for sx in seps)
     y = h
     if numeric:
         scale = lambda v: 1 + v * inner

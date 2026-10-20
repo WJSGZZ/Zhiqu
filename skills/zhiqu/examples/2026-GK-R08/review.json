@@ -82,7 +82,7 @@
   },
   "snapshot": {
     "report.json": "d7662bb3aaa83d7e58b3d781590e0d81314fd8e1f28f67f4f968f28e15e3953f",
-    "report.pdf": "23f0d28499ffee5cbcda170a105e2e477aa82a7f1ca73d677b5023242d98499e",
+    "report.pdf": "85a1625378176cb041604affb904e19f896a047562e617745a6f580e0ada9ffd",
     "operator_check.md": "4762fc525d16460f3c23bd377d4ed1f6090535883cff48ef473e43794bfee680",
     "retro_ranks/284930/result.json": "1bb1e1404ff28d6c9e8beec4aad27ee47e62f09081a3328930254ab88a0063e7",
     "case.json": "4b808dbf1cc998fe4e6bbadd2d7753055d7c7b5a718c28961f58f03fdf4c64fd",
@@ -154,6 +154,16 @@
         "report.pdf"
       ],
       "reason": "第 12 节核对附录改为逐条可读：不印 JSON 与英文字段名，计算项只在正文写法不同才注明，同一数字不同写法合为一条；图例图标离画布左缘留足边距。志愿、概率和结论不变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "报告底色改为与网页问卷一致的浅米色；内容未变。"
     }
   ]
 }
