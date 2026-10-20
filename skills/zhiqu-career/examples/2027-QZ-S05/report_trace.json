@@ -2,15 +2,15 @@
   "schema_version": 1,
   "case_id": "2027-QZ-S05",
   "source_sha256": {
-    "case.json": "c40887c16346ff5962ac83192e30279765d24557713da36a03d4fc4b7807c564",
+    "case.json": "f02013f44bae765233f8cee770ab97345193ffb08c0aea3f3c77a7ea836a0ffc",
     "profile_parse.json": "ca28989bbe8fae3f6def3dcc789a8b04dd9101d78bd065fd815788b92197d604",
     "directions.json": "e622eebd36fd6ffa1be8b5b60c49b7773f68d6c28e896e0ce18a7c85bc9a7453",
     "rules_check.json": "aadb64ede706f87480d8eafb6dda580b32616981dae8d3c860b4536970ee3bf0",
     "candidates.json": "8a701d7da74663c7c1462df150c68fecc1954716aa81726d7c91601968ae070f",
-    "evidence.json": "ab6d32269aa1411d0ddce04d258fd31a2cbba3a83f72286729f4d93fe5960a08",
-    "calculations.json": "6438b6d9fa3dc1498284a32e49f09e98c80c1e8570d780d0f5d4d1adb48887d1",
-    "judgment.json": "5b68d3ebb5a1e5ca1d58508f16270cbb0ef207ceb5a6da3689198c9afe9b2e7b",
-    "narrative.json": "69bb3538f36c01274572565194a84272574817c022f2fa4c14b18592b7b9cf9b",
+    "evidence.json": "51c186b946518769c6879b538f18a94dad89127266b4d55b4575de936a706217",
+    "calculations.json": "642c2e8cccb60935fa3033bfbc25d48c68292d146c6df5aa584f67aa0ab843eb",
+    "judgment.json": "0235c5713240354f8bb44318241569eb6a4ba1cc4b3e71d470686aabd97a0fd7",
+    "narrative.json": "91f9fdc48cc73d3926a8b88c66c52af834782235d9078d45e5c464aa36caca93",
     "profile.json": "f8c7a4b076a64c168d303710ea8836b70a79ffe5d53ce7521045bfe4ae4c2d1f",
     "profile-supplement.txt": "247f31f22f4c9a6c33394b5b25e3b37ef21c19fd3b9c12a70a83839f7976b026"
   },
@@ -652,14 +652,14 @@
     {
       "location": "06.analysis.3",
       "ref": "{{c:/anya_ok_count}}",
-      "value": 47,
-      "display": "47"
+      "value": 44,
+      "display": "44"
     },
     {
       "location": "06.analysis.3",
       "ref": "{{c:/anya_ok_median}}",
-      "value": 198.0,
-      "display": "198"
+      "value": 206.5,
+      "display": "206.5"
     },
     {
       "location": "06.analysis.3",
@@ -670,8 +670,8 @@
     {
       "location": "06.analysis.3",
       "ref": "{{c:/major_any_ok_count}}",
-      "value": 12,
-      "display": "12"
+      "value": 5,
+      "display": "5"
     },
     {
       "location": "07.lead.0",
@@ -1221,9 +1221,9 @@
     }
   ],
   "artifacts": {
-    "report.md": "e20d82cf5f5e49e17f8cb896e91741fa9d4725ce5412bee38b6ee8610a153d36",
-    "report.html": "6a7831cd9bd2335d9f8d22696cba376d269d2ff06d9be0a65ea92f004cf2833f",
-    "report.pdf": "88ae1736bc213a98aaeca18a3620f9733c30788963a5d86bba3454492950db08"
+    "report.md": "dc2181d226cda92dbdf4f1e6ec55266cae830954bab961cff7a5b3991c29727a",
+    "report.html": "efc13ef4b9005ca42da29eb82eb771268d457b6c275c9e4605aabbf91ee909c0",
+    "report.pdf": "75db1315d2c50dea2e5dacac967dc9b0031e7fbf202f8762a0bbfb9fd5d97ab9"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "report_profile": {
