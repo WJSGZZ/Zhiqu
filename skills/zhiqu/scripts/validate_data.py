@@ -11,7 +11,9 @@
 6. 同一院校代码在同一文件里出现多个校名（括号注释除外）——多半是 PDF 水印字或识别噪声混进了校名
    （如江苏的"育南京大学"、上海的"市华东师大"、湖北的"北京化 工大学信"）；
 7. 入学后的机会表：必要列、证据状态、来源网址、真实日期与复核先后顺序；
-8. 选调高校范围表：必要列、2027 年份、来源定位、日期与复核先后顺序、重复条目。
+8. 选调高校范围表：必要列、2027 年份、来源定位、日期与复核先后顺序、重复条目；
+9. 来源（data-model.md）：每个省份目录有 sources.csv，目录里每个 CSV 的每一行都带 source_id 且能在 sources.csv 找到；
+   data/ 根目录的 schools.csv、undergrad_majors.csv 对应 data/sources.csv。
 
 usage: python3 scripts/validate_data.py [省份目录名 ...]   # 不给则检查全部
 """
@@ -37,6 +39,9 @@ AFTER_ENTRY_FIELDS = (
     "review_deadline", "status", "notes",
 )
 AFTER_ENTRY_STATUSES = {"verified", "not_found", "unretrieved"}
+SOURCE_FIELDS = ("source_id", "grade", "publisher", "title", "url", "landing_url", "published", "retrieved", "method", "note")
+SOURCE_GRADES = {"官方", "第三方整理"}
+ROOT_SOURCED = ("schools.csv", "undergrad_majors.csv")
 SELECTED_UNIVERSITIES_FIELDS = (
     "province", "year", "category", "school", "major_restriction", "source_url",
     "published_date", "retrieved_date", "review_deadline", "source_locator", "notes",
@@ -195,6 +200,59 @@ def check_selected_universities_file(path):
     return issues, notes
 
 
+def check_sources(folder, files):
+    """sources.csv 的格式，以及 files 里每行 source_id 都已登记；只查登记是否完整，不证明来源内容正确。"""
+    issues, notes = [], []
+    path = os.path.join(folder, "sources.csv")
+    if not os.path.isfile(path):
+        return ["缺少 sources.csv"], notes
+    with open(path, encoding="utf-8", newline="") as f:
+        reader = csv.DictReader(f)
+        if tuple(reader.fieldnames or ()) != SOURCE_FIELDS:
+            return [f"sources.csv 列应为 {','.join(SOURCE_FIELDS)}"], notes
+        rows = list(reader)
+    ids = {}
+    for line, r in enumerate(rows, 2):
+        sid = r["source_id"] or ""
+        if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", sid):
+            issues.append(f"sources.csv 第 {line} 行 source_id 只能用小写字母、数字和连字符：{sid!r}")
+        if sid in ids:
+            issues.append(f"sources.csv 第 {line} 行 source_id 与第 {ids[sid]} 行重复：{sid}")
+        ids[sid] = line
+        if r["grade"] not in SOURCE_GRADES:
+            issues.append(f"sources.csv 第 {line} 行 grade 只能是 {'、'.join(sorted(SOURCE_GRADES))}：{r['grade']!r}")
+        if not r["publisher"]:
+            issues.append(f"sources.csv 第 {line} 行缺 publisher")
+        for field in ("published", "retrieved"):
+            v = r[field]
+            try:
+                if v and not (re.fullmatch(r"[0-9]{4}-[0-9]{2}-[0-9]{2}", v) and date.fromisoformat(v)):
+                    raise ValueError
+            except ValueError:
+                issues.append(f"sources.csv 第 {line} 行 {field} 须为 YYYY-MM-DD：{v}")
+        for field in ("url", "landing_url"):
+            if r[field] and urlsplit(r[field]).scheme not in ("http", "https"):
+                issues.append(f"sources.csv 第 {line} 行 {field} 不是网址：{r[field]}")
+    used = set()
+    for fn in files:
+        with open(os.path.join(folder, fn), encoding="utf-8-sig", newline="") as f:
+            reader = csv.DictReader(f)
+            if "source_id" not in (reader.fieldnames or []):
+                issues.append(f"{fn} 缺 source_id 列")
+                continue
+            bad = []
+            for line, r in enumerate(reader, 2):
+                if r.get("source_id") in ids:
+                    used.add(r["source_id"])
+                else:
+                    bad.append((line, r.get("source_id")))
+        if bad:
+            issues.append(f"{fn} 有 {len(bad)} 行 source_id 为空或未在 sources.csv 登记（如第 {bad[0][0]} 行 {bad[0][1]!r}）")
+    unused = sorted(set(ids) - used)
+    notes.append(f"来源 {len(ids)} 条" + (f"，未被引用 {len(unused)} 条：{', '.join(unused[:3])}" if unused else ""))
+    return issues, notes
+
+
 def check_file(path, codes):
     issues, notes = [], []
     with open(path, encoding="utf-8-sig") as f:
@@ -281,8 +339,14 @@ def main():
     for issue in issues:
         print(f"    ⚠ {issue}")
         n_issue += 1
+    issues, notes = check_sources(DATA, [fn for fn in ROOT_SOURCED if os.path.isfile(os.path.join(DATA, fn))])
+    print(f"## data/sources.csv：{'；'.join(notes) or '—'}")
+    for issue in issues:
+        print(f"    ⚠ {issue}")
+        n_issue += 1
     for p in provs:
-        files = sorted(fn for fn in os.listdir(os.path.join(DATA, p)) if fn.endswith(".csv") and not fn.startswith(("yfyd", "early")))
+        every = sorted(fn for fn in os.listdir(os.path.join(DATA, p)) if fn.endswith(".csv") and fn != "sources.csv")
+        files = [fn for fn in every if not fn.startswith(("yfyd", "early"))]
         series = {}
         for fn in files:
             m = re.match(r"(.+)_(\d{4})\.csv$", fn)
@@ -292,6 +356,11 @@ def main():
         for name, ys in series.items():
             gaps = [y for y in range(min(ys), max(ys) + 1) if y not in ys]
             print(f"- {name}：{min(ys)}–{max(ys)}" + (f"，缺 {gaps}" if gaps else ""))
+        issues, notes = check_sources(os.path.join(DATA, p), every)
+        print(f"  sources.csv：{'；'.join(notes) or '—'}")
+        for i in issues:
+            print(f"    ⚠ {i}")
+            n_issue += 1
         for fn in files:
             issues, notes = check_file(os.path.join(DATA, p, fn), codes)
             print(f"  {fn}：{'；'.join(notes) or '—'}")

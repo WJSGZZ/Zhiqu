@@ -1,29 +1,16 @@
 # 江苏 · 普通类本科批次平行志愿投档线（物理等科目类，院校专业组，只公布分数）
 
-| 年份 | 来源页面 |
-|---|---|
-| 2023 | <https://www.jseea.cn/webfile/index/index_zkxx/2023-07-18/7086888854866628608.html> |
-| 2024 | <https://www.jseea.cn/webfile/index/index_zkxx/2024-07-18/7219509116052443136.html> |
-| 2025 | <https://www.jseea.cn/webfile/index/index_zkxx/2025-07-18/7351781448019349504.html> |
-| 2026 | <https://www.jseea.cn/webfile/index/index_zkxx/2026-07-18/7484048378054053888.html> |
+各文件的来源（发布机构、原件链接、取得日期、整理方式）见同目录 sources.csv，每行数据的 source_id 指向其中一条。
 
-下载日期：2026-09-28。列：`code, name, group, major, plan, admit, score, rank`（缺的留空）。
+列：`code, name, group, major, plan, admit, score, rank`（缺的留空）。
 
-- 来源：江苏省教育考试院，2023—2024 年 xls，2025—2026 年 PDF。
 - 2025—2026 年 PDF 抽取时，页面水印"江苏省教育考试院"的单字混进了约 14% 行的校名开头（如"育南京大学""江东南大学"）；2026-09-30 按"同一院校代码的干净校名"去掉，共改 907 行，分数、组号等其他列未动。
 - `group` 为专业组号，`major` 列存再选科目要求。组号每年重编，按"学校 + 选科要求"匹配（`--key major`）更可靠。
 
 
 ## 本科提前批次（`early_physics.csv`）
 
-列：`year, type, code, name, group, subjects, region, score`（`region` 为定向地区）。物理等科目类，官方 xls，下载日期 2026-09-29：
-
-| 年份 | 来源 |
-|---|---|
-| 2026 | <https://www.jseea.cn/webfile/index/index_zkxx/2026-07-08/7480462685813870592.html> |
-| 2025 | <https://www.jseea.cn/webfile/index/index_zkxx/2025-07-08/7348163942021074944.html> |
-| 2024 | <https://www.jseea.cn/webfile/index/index_zkxx/2024-07-08/7215906858794487808.html> |
-| 2023 | <https://www.jseea.cn/webfile/index/index_zkxx/2023-07-08/7083248582249156608.html> |
+列：`year, type, code, name, group, subjects, region, score`（`region` 为定向地区）。物理等科目类，官方 xls。
 
 2023 年"军事"已统一记为"军队"。2026 年分类改为"专项计划"（约 100 所院校），不再单列地方专项计划和乡村教师计划。
 
@@ -32,23 +19,23 @@
 
 `physics_<年份>.csv` 的 `rank` 列由同年官方逐分段统计表换算：位次 = 该投档最低分对应的累计人数。统计表只以图片发布，整理为 `yfyd_physics_<年份>.csv`（`score,count,cum,source`）：
 
-| 年份 | 来源 | 分数范围 | 双重确认的行 |
-|---|---|---|---|
-| 2026 | <https://www.jseea.cn/webfile/index/index_zkxx/2026-06-24/7475494421979467776.html> | 689—456 | 174 / 234 |
-| 2025 | <https://www.jseea.cn/webfile/index/index_zkxx/2025-06-24/7343234265133355008.html> | 683—463 | 195 / 221 |
-| 2024 | <https://www.jseea.cn/webfile/index/index_zkxx/2024-06-24/7210960924591525888.html> | 689—462 | 215 / 228 |
-| 2023 | <https://www.jseea.cn/webfile/index/index_zkxx/2023-06-24/7078350479809318912.html> | 687—448 | 214 / 240 |
+| 年份 | 分数范围 | 双重确认的行 |
+|---|---|---|
+| 2026 | 689—456 | 174 / 234 |
+| 2025 | 683—463 | 195 / 221 |
+| 2024 | 689—462 | 215 / 228 |
+| 2023 | 687—448 | 214 / 240 |
 
 识别方法：分数按行位置推算（粗体分数常被误读），人数与累计由 OCR 读取；`source` 列标明每行的可信度——"确认"= 人数与累计互相吻合，"累计"= 累计与上下行单调一致，"人数"= 只读到人数、由上一行累计推出，"插值"= 该行未读到、在相邻两行之间线性插值。低于表内最低分的投档记录（共 15 条）不补位次。
 
 
 ## 普通类本科批历史类投档线（2026-09-30）
 
-| 文件 | 年份 | 官方来源 | 完整表数据行数 | 空分数 |
-|---|---:|---|---:|---:|
-| `history_2024.csv` | 2024 | [江苏省教育考试院本科批投档线（附件：历史等科目类 XLS）](https://www.jseea.cn/webfile/index/index_zkxx/2024-07-18/7219509116052443136.html) | 1238 | 0 |
-| `history_2025.csv` | 2025 | [江苏省教育考试院历史等科目类 PDF](https://www.jseea.cn/webfile/index/index_zkxx/2025-07-18/7351781284785426432.html) | 1290 | 0 |
-| `history_2026.csv` | 2026 | [江苏省教育考试院历史等科目类 PDF](https://www.jseea.cn/webfile/index/index_zkxx/2026-07-18/7484047541940523008.html) | 1424 | 0 |
+| 文件 | 年份 | 完整表数据行数 | 空分数 |
+|---|---:|---:|---:|
+| `history_2024.csv` | 2024 | 1238 | 0 |
+| `history_2025.csv` | 2025 | 1290 | 0 |
+| `history_2026.csv` | 2026 | 1424 | 0 |
 
 列与物理类文件相同：`code,name,group,major,plan,admit,score,rank`。代码、校名、专业组、选科要求和最低投档分来自官方表；PDF 的同分排序列不录入本 schema。原表没有计划数、投档人数及位次，故 `plan/admit/rank` 留空，未用一分一段表换算 rank。2025、2026 PDF 的长组名跨行文本已与后续分数字段拼接；逐页解析共计1290/1424条，与表内院校专业组记录数一致。下载与整理日期：2026-09-30。
 
@@ -75,13 +62,15 @@
 - `history_{2024..2026}.csv` 的 `rank` 现已按同一方法填入（2024 年 1234 行，2025 年 1287 行，2026 年 1421 行；分数不在表内的 4、3、3 行留空）。口径核对：外购库 2025 年江苏投档最低排位落在官方累计区间内的比例，历史类 1381/1492（92.6%）、物理类 3252/3381（96.2%），两科口径相同；不一致的行多为外购库自身位次偏差。
 ## 2022 年与 2023 年历史类补齐（2026-10-16）
 
-| 文件 | 官方来源 | 行数 | rank 空 |
-|---|---|---:|---:|
-| `history_2023.csv` | [2023 年普通类本科批次平行志愿投档线](https://www.jseea.cn/webfile/index/index_zkxx/2023-07-18/7086888854866628608.html)（附件 [历史等科目类 xls](https://www.jseea.cn/webfile/upload/2023/07-18/10-05-510148-1404562985.xls)） | 1,208 | 3 |
-| `physics_2022.csv` | [2022 年普通类本科批次平行志愿投档线](https://www.jseea.cn/webfile/index/index_zkxx/2022-07-18/6954602408571834368.html)（附件 [物理等科目类 xls](https://www.jseea.cn/webfile/upload/2022/07-18/10-13-220557-1564262335.xls)） | 2,364 | 4 |
-| `history_2022.csv` | 同上页（附件 [历史等科目类 xls](https://www.jseea.cn/webfile/upload/2022/07-18/10-13-2205431605348519.xls)） | 1,245 | 5 |
-| `yfyd_physics_2022.csv` | [2022 年普通高考逐分段统计表](https://www.jseea.cn/webfile/index/index_zkxx/2022-06-24/28577.html)（JPG） | 242（670 及以上—429） | |
-| `yfyd_history_2022.csv` | 同上页 | 156（626 及以上—471） | |
+| 文件 | 行数 | rank 空 |
+|---|---:|---:|
+| `history_2023.csv` | 1,208 | 3 |
+| `physics_2022.csv` | 2,364 | 4 |
+| `history_2022.csv` | 1,245 | 5 |
+| `yfyd_physics_2022.csv` | 242（670 及以上—429） | |
+| `yfyd_history_2022.csv` | 156（626 及以上—471） | |
+
+来源：2023 年历史类和 2022 年投档表为官方 xls 附件，2022 年逐分段统计表为 JPG。
 
 - 2022 年页面用旧式编号，不在“招考信息”列表里，顺着已知 2022-07 页面的上一篇/下一篇找到。
 - 投档表三份与 xls 行数一致、逐行反推一致；`rank` 空的都是投档分高于逐分段表合并档。
@@ -92,10 +81,12 @@
 
 ## 2021 年（新高考首年）补齐（2026-10-16）
 
-| 文件 | 官方来源 | 行数 |
-|---|---|---:|
-| `physics_2021.csv` | [江苏省2021年普通类本科批次投档线（物理等科目类）](https://www.jseea.cn/webfile/index/index_zkxx/2021-07-17/24917.html)（[xls](https://www.jseea.cn/webfile/upload/2021/07-17/08-29-090127-590704577.xls)） | 2,241 |
-| `history_2021.csv` | [同上（历史等科目类）](https://www.jseea.cn/webfile/index/index_zkxx/2021-07-17/24909.html)（[xls](https://www.jseea.cn/webfile/upload/2021/07-17/08-27-520336-1227001500.xls)） | 1,179 |
-| `yfyd_physics_2021.csv`、`yfyd_history_2021.csv` | [江苏省2021年普通高考逐分段统计表](https://www.jseea.cn/webfile/index/index_zkxx/2021-06-24/24407.html)（JPG，识别） | 245、157 |
+| 文件 | 行数 |
+|---|---:|
+| `physics_2021.csv` | 2,241 |
+| `history_2021.csv` | 1,179 |
+| `yfyd_physics_2021.csv`、`yfyd_history_2021.csv` | 245、157 |
+
+来源：投档表为官方 xls 附件，逐分段统计表为 JPG（识别）。
 
 投档表与 xls 逐行一致，`rank` 空各 4 行（投档分高于合并档）。逐分段表逐行递推一致，与外购 402 / 402 行相同；投档分与外购一致 99.9%，3 处差异回官方 xls 确认为外购错。

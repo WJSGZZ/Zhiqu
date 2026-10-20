@@ -887,12 +887,12 @@
  "sources": [
   [
    "浙江 2022—2025 年投档表（排表所用全部位次）",
-   "浙江省教育考试院 https://www.zjzs.net/；各年原表链接见 data/zhejiang/README.md",
+   "浙江省教育考试院 https://www.zjzs.net/；各年原表链接见 data/zhejiang/sources.csv",
    "2026-09-28"
   ],
   [
    "浙江 2026 年投档表（只用于第 11 节对照）",
-   "浙江省教育考试院 https://www.zjzs.net/；链接见 data/zhejiang/README.md",
+   "浙江省教育考试院 https://www.zjzs.net/；链接见 data/zhejiang/sources.csv",
    "2026-09-28"
   ],
   [

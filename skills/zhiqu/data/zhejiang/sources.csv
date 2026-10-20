@@ -1,0 +1,21 @@
+source_id,grade,publisher,title,url,landing_url,published,retrieved,method,note
+zhejiang-2017-general-cutoff,官方,浙江省教育考试院,浙江省普通高校招生投档及专业录取情况（2017 年）,,https://www.zjzs.net/art/2020/7/26/art_45_7312.html,,2026-10-16,官方书表格整理，取一段最低分 > 0 的行,站点无单独 2017 投档表页面；取自官方书，一、二、三段同表；plan 为各段合计录取人数；782 行在二段或三段也有录取，rank 留空
+zhejiang-2018-general-cutoff,官方,浙江省教育考试院,浙江省2018年普通高校招生普通类平行投档（一段）分数线,,https://www.zjzs.net/art/2018/7/17/art_45_7211.html,,2026-10-16,xls 转换，行数与原表一致；原表 0 改为空位次,
+zhejiang-2019-general-cutoff,官方,浙江省教育考试院,浙江省2019年普通高校招生普通类平行投档（一段）分数线,,https://www.zjzs.net/art/2019/7/17/art_45_7207.html,,2026-10-16,xls 转换，行数与原表一致；原表 0 改为空位次,
+zhejiang-2020-general-cutoff,官方,浙江省教育考试院,浙江省2020年普通高校招生普通类第一段平行投档分数线表,,https://www.zjzs.net/art/2020/8/19/art_45_7200.html,,2026-10-16,xls 转换，行数与原表一致；原表 0 改为空位次,
+zhejiang-2021-general-cutoff,官方,浙江省教育考试院,浙江省2021年普通高校招生普通类第一段平行投档分数线表,,https://www.zjzs.net/art/2021/7/19/art_45_7191.html,,2026-10-16,xls 转换，行数与原表一致,同文页面 art_155_7768
+zhejiang-2022-general-cutoff,官方,浙江省教育考试院,浙江省2022年普通高校招生普通类第一段平行投档分数线表,,https://www.zjzs.net/art/2022/7/19/art_155_7241.html,,2026-09-28,rar 内 xls 转换,附件 rar 内 xls
+zhejiang-2023-general-cutoff,官方,浙江省教育考试院,浙江省2023年普通高校招生普通类第一段平行投档分数线表,,https://www.zjzs.net/art/2023/7/19/art_45_2052.html,,2026-09-28,xls 转换,
+zhejiang-2024-general-cutoff,官方,浙江省教育考试院,浙江省2024年普通高校招生普通类第一段平行投档分数线表,,https://www.zjzs.net/art/2024/7/21/art_45_9899.html,,2026-09-28,xls 转换,
+zhejiang-2025-general-cutoff,官方,浙江省教育考试院,浙江省2025年普通高校招生普通类第一段平行投档分数线表,,https://www.zjzs.net/art/2025/7/21/art_45_11467.html,,2026-09-28,xls 转换,
+zhejiang-2026-general-cutoff,官方,浙江省教育考试院,浙江省2026年普通高校招生普通类第一段平行投档分数线表,,https://www.zjzs.net/art/2026/7/21/art_45_12550.html,,2026-09-28,xls 转换,
+zhejiang-2025-general-early,官方,浙江省教育考试院,浙江省普通高校招生投档及专业录取情况（2023—2025 年）,,https://www.zjzs.net/art/2026/6/22/art_45_12416.html,,2026-09-29,PDF 文本提取,取“普通类提前录取各专业录取情况”一节，覆盖 2023—2025 年；不含有政审、面试、三位一体、综合评价、定向等特殊要求的提前录取
+zhejiang-2018-general-yfyd,官方,浙江省教育考试院,浙江省 2018 年普通高校招生成绩分数段表（总分）,,https://www.zjzs.net/art/2018/6/23/art_45_3307.html,,2026-10-16,文字版 PDF 抽取,只印到 344 分
+zhejiang-2019-general-yfyd,官方,浙江省教育考试院,浙江省 2019 年普通高校招生成绩分数段表（总分）,,https://www.zjzs.net/art/2019/6/23/art_45_5421.html,,2026-10-16,文字版 PDF 抽取,首行原表人数栏与累计不等，照原表保留
+zhejiang-2020-general-yfyd,官方,浙江省教育考试院,浙江省 2020 年普通高校招生成绩分数段表（总分）,,https://www.zjzs.net/art/2020/7/26/art_45_7308.html,,2026-10-16,文字版 PDF 抽取,
+zhejiang-2021-general-yfyd,官方,浙江省教育考试院,浙江省 2021 年普通高校招生成绩分数段表（总分）,,https://www.zjzs.net/art/2021/6/26/art_45_7289.html,,2026-10-16,文字版 PDF 抽取,
+zhejiang-2022-general-yfyd,官方,浙江省教育考试院,浙江省 2022 年普通高校招生成绩分数段表（总分）,,https://www.zjzs.net/art/2022/6/26/art_45_6960.html,,,Word 文档经 macOS textutil 转文本后整理,Word 文档；408 行，687↑ 到 280 分
+zhejiang-2023-general-yfyd,官方,浙江省教育考试院,浙江省 2023 年普通高校招生成绩分数段表（总分）,,https://www.zjzs.net/art/2023/6/26/art_45_6936.html,,2026-10-16,文字版 PDF 抽取,首行原表人数栏与累计不等，照原表保留
+zhejiang-2024-general-yfyd,官方,浙江省教育考试院,浙江省 2024 年普通高校招生成绩分数段表（总分）,,https://www.zjzs.net/art/2024/6/26/art_155_9758.html,,2026-10-07,文字版 PDF 抽取,
+zhejiang-2025-general-yfyd,官方,浙江省教育考试院,浙江省 2025 年普通高校招生成绩分数段表（总分）,,https://www.zjzs.net/art/2025/6/25/art_45_11373.html,,2026-10-07,文字版 PDF 抽取,
+zhejiang-2026-general-yfyd,官方,浙江省教育考试院,浙江省 2026 年普通高校招生成绩分数段表（总分）,,https://www.zjzs.net/art/2026/6/26/art_45_12452.html,,2026-10-07,文字版 PDF 抽取,

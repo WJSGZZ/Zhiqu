@@ -90,8 +90,11 @@ class TestSelectedUniversitiesData(unittest.TestCase):
     def test_main_always_checks_career_table_separately(self):
         data = Path(self.tmp.name) / "gaokao"
         data.mkdir()
-        (data / "schools.csv").write_text("code,name\n10001,模拟大学\n", encoding="utf-8")
+        (data / "schools.csv").write_text("code,name,source_id\n10001,模拟大学,demo-source\n", encoding="utf-8")
         (data / "jiangsu").mkdir()
+        src = ",".join(validate_data.SOURCE_FIELDS) + "\ndemo-source,官方,教育部,,,,,,,\n"
+        for folder in (data, data / "jiangsu"):
+            (folder / "sources.csv").write_text(src, encoding="utf-8")
         for provinces in ([], ["jiangsu"]):
             for valid in (True, False):
                 self.write([dict(self.row, year="2027" if valid else "NaN")])

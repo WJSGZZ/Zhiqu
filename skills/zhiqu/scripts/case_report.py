@@ -334,8 +334,8 @@ def build(case_dir, research_dir=None, opportunities=None, render=True, profile_
     hindsight = hindsight_block(cfg, P, hind, L, pool, R)
 
     # ---------- sources
-    sources = [[f"{P['name']} {yrs} 年投档表（排表所用全部位次）", f"{P['auth']} {P['home']}；各年原表链接见 data/{cfg['province']}/README.md", P["tdate"]],
-               [f"{P['name']} 2026 年投档表（只用于第 11 节对照）", f"{P['auth']} {P['home']}；链接见 data/{cfg['province']}/README.md", P["tdate"]],
+    sources = [[f"{P['name']} {yrs} 年投档表（排表所用全部位次）", f"{P['auth']} {P['home']}；各年原表链接见 data/{cfg['province']}/sources.csv", P["tdate"]],
+               [f"{P['name']} 2026 年投档表（只用于第 11 节对照）", f"{P['auth']} {P['home']}；链接见 data/{cfg['province']}/sources.csv", P["tdate"]],
                [f"{P['name']} 2026 年一分一段表（分数换位次）", f"{P['auth']} {P['yurl']}", P["ydate"]],
                ["本省志愿个数与投档方式", f"{P['auth']} {rules['slots']['source']}", rules["slots"]["verified"]],
                ["同分排序规则", f"{P['auth']} {rules['tie_break']['source']}", rules["tie_break"]["verified"]],

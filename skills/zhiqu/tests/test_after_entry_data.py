@@ -108,8 +108,11 @@ class TestAfterEntryData(unittest.TestCase):
 
     def test_cli_includes_table_even_with_explicit_province(self):
         data = Path(self.tmp.name)
-        (data / "schools.csv").write_text("code,name\n10001,模拟大学\n", encoding="utf-8")
+        (data / "schools.csv").write_text("code,name,source_id\n10001,模拟大学,demo-source\n", encoding="utf-8")
         (data / "jiangsu").mkdir()
+        src = ",".join(validate_data.SOURCE_FIELDS) + "\ndemo-source,官方,教育部,,,,,,,\n"
+        for folder in (data, data / "jiangsu"):
+            (folder / "sources.csv").write_text(src, encoding="utf-8")
         self.write(dict(self.row, source_url=""))
         for provinces in ([], ["jiangsu"]):
             with self.subTest(provinces=provinces), patch.object(validate_data, "DATA", str(data)), \

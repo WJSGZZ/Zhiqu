@@ -1,0 +1,25 @@
+source_id,grade,publisher,title,url,landing_url,published,retrieved,method,note
+hebei-2021-physics-cutoff,官方,河北省教育考试院,,,http://www.hebeea.edu.cn/c/2021-07-24/488945.html,,2026-09-28,xlsx 表格整理,物理科目组合；rank 为用同年一分一段表推算
+hebei-2022-physics-cutoff,官方,河北省教育考试院,,,http://www.hebeea.edu.cn/c/2022-07-25/488817.html,,2026-09-28,xlsx 表格整理,物理科目组合；rank 为用同年一分一段表推算
+hebei-2023-physics-cutoff,官方,河北省教育考试院,,,http://www.hebeea.edu.cn/c/2023-07-25/489286.html,,2026-09-28,xlsx 表格整理,物理科目组合；rank 为用同年一分一段表推算
+hebei-2024-physics-cutoff,官方,河北省教育考试院,,,http://www.hebeea.edu.cn/c/2024-07-22/489446.html,,2026-09-28,xlsx 表格整理,物理科目组合；rank 为用同年一分一段表推算
+hebei-2025-physics-cutoff,官方,河北省教育考试院,,,http://www.hebeea.edu.cn/c/2025-07-23/489213.html,,2026-09-28,xlsx 表格整理,物理科目组合；rank 为用同年一分一段表推算
+hebei-2026-physics-cutoff,官方,河北省教育考试院,,,http://www.hebeea.edu.cn/c/2026-07-22/493236.html,,2026-09-28,xlsx 表格整理,物理科目组合；rank 为用同年一分一段表推算
+hebei-2021-history-cutoff,官方,河北省教育考试院,,https://file.hebeea.edu.cn/files/article/2021/07/20210723173636_871.xlsx,http://www.hebeea.edu.cn/c/2021-07-24/488945.html,,2026-10-16,xlsx 表格整理,历史科目组合（含优惠分）；与物理科目组合共用同一发布页
+hebei-2022-history-cutoff,官方,河北省教育考试院,,https://file.hebeea.edu.cn/files/article/2022/07/20220724165119_634.xlsx,http://www.hebeea.edu.cn/c/2022-07-25/488817.html,,2026-10-16,xlsx 表格整理,历史科目组合（含优惠分）；与物理科目组合共用同一发布页
+hebei-2023-history-cutoff,官方,河北省教育考试院,,https://file.hebeea.edu.cn/files/article/2023/07/20230725082954_71.xlsx,http://www.hebeea.edu.cn/c/2023-07-25/489286.html,,2026-10-16,xlsx 表格整理,历史科目组合（含优惠分）；与物理科目组合共用同一发布页
+hebei-2024-history-cutoff,官方,河北省教育考试院,,https://file.hebeea.edu.cn/files/article/2024/07/20240722163024_223.xlsx,https://www.hebeea.edu.cn/c/2024-07-22/489446.html,,,xlsx 表格整理,历史科目组合（含优惠分）；与物理科目组合共用同一发布页
+hebei-2025-history-cutoff,官方,河北省教育考试院,,https://file.hebeea.edu.cn/files/article/2025/07/20250722214851_332.xlsx,https://www.hebeea.edu.cn/c/2025-07-23/489213.html,,,xlsx 表格整理,历史科目组合（含优惠分）；与物理科目组合共用同一发布页
+hebei-2026-history-cutoff,官方,河北省教育考试院,,https://file.hebeea.edu.cn/upload/resources/file/2026/09/09/27410.xlsx,https://www.hebeea.edu.cn/c/2026-07-22/493236.html,,,xlsx 表格整理,历史科目组合（含优惠分）；与物理科目组合共用同一发布页
+hebei-2021-physics-yfyd,官方,河北省教育考试院,普通高校招生物理科目组合、历史科目组合考生成绩统计表,https://file.hebeea.edu.cn/files/article/2021/06/20210624223319_605.pdf,http://www.hebeea.edu.cn/c/2021-06-24/488536.html,,2026-10-16,扫描 PDF 多遍识别、逐位投票，累计递推核对,PDF 18 页；物理、历史两科共用同一 PDF
+hebei-2021-history-yfyd,官方,河北省教育考试院,普通高校招生物理科目组合、历史科目组合考生成绩统计表,https://file.hebeea.edu.cn/files/article/2021/06/20210624223319_605.pdf,http://www.hebeea.edu.cn/c/2021-06-24/488536.html,,2026-10-16,扫描 PDF 多遍识别、逐位投票，累计递推核对,PDF 18 页；物理、历史两科共用同一 PDF
+hebei-2022-physics-yfyd,官方,河北省教育考试院,普通高校招生物理科目组合、历史科目组合考生成绩统计表,https://file.hebeea.edu.cn/files/article/2022/06/20220624193322_799.pdf,http://www.hebeea.edu.cn/c/2022-06-24/489265.html,,2026-10-16,扫描 PDF 多遍识别、逐位投票，累计递推核对,PDF 17 页；物理、历史两科共用同一 PDF
+hebei-2022-history-yfyd,官方,河北省教育考试院,普通高校招生物理科目组合、历史科目组合考生成绩统计表,https://file.hebeea.edu.cn/files/article/2022/06/20220624193322_799.pdf,http://www.hebeea.edu.cn/c/2022-06-24/489265.html,,2026-10-16,扫描 PDF 多遍识别、逐位投票，累计递推核对,PDF 17 页；物理、历史两科共用同一 PDF
+hebei-2023-physics-yfyd,官方,河北省教育考试院,普通高校招生物理科目组合、历史科目组合考生成绩统计表,https://file.hebeea.edu.cn/files/article/2023/06/20230624203549_178.pdf,http://www.hebeea.edu.cn/c/2023-06-24/488564.html,,2026-10-16,扫描 PDF 多遍识别、逐位投票，累计递推核对,PDF 18 页；物理、历史两科共用同一 PDF
+hebei-2023-history-yfyd,官方,河北省教育考试院,普通高校招生物理科目组合、历史科目组合考生成绩统计表,https://file.hebeea.edu.cn/files/article/2023/06/20230624203549_178.pdf,http://www.hebeea.edu.cn/c/2023-06-24/488564.html,,2026-10-16,扫描 PDF 多遍识别、逐位投票，累计递推核对,PDF 18 页；物理、历史两科共用同一 PDF
+hebei-2024-physics-yfyd,官方,河北省教育考试院,普通高校招生物理科目组合、历史科目组合考生成绩统计表,https://file.hebeea.edu.cn/files/article/2024/06/20240624195327_41.pdf,,,2026-10-07,扫描 PDF 多遍识别、逐位投票，累计递推核对,PDF 18 页；物理、历史两科共用同一 PDF
+hebei-2024-history-yfyd,官方,河北省教育考试院,普通高校招生物理科目组合、历史科目组合考生成绩统计表,https://file.hebeea.edu.cn/files/article/2024/06/20240624195327_41.pdf,,,2026-10-07,扫描 PDF 多遍识别、逐位投票，累计递推核对,PDF 18 页；物理、历史两科共用同一 PDF
+hebei-2025-physics-yfyd,官方,河北省教育考试院,普通高校招生物理科目组合、历史科目组合考生成绩统计表,https://file.hebeea.edu.cn/files/article/2025/06/20250624193800_658.pdf,,,2026-10-07,扫描 PDF 多遍识别、逐位投票，累计递推核对,PDF 18 页；物理、历史两科共用同一 PDF
+hebei-2025-history-yfyd,官方,河北省教育考试院,普通高校招生物理科目组合、历史科目组合考生成绩统计表,https://file.hebeea.edu.cn/files/article/2025/06/20250624193800_658.pdf,,,2026-10-07,扫描 PDF 多遍识别、逐位投票，累计递推核对,PDF 18 页；物理、历史两科共用同一 PDF
+hebei-2026-physics-yfyd,官方,河北省教育考试院,普通高校招生物理科目组合、历史科目组合考生成绩统计表,https://file.hebeea.edu.cn/upload/resources/file/2026/06/24/27144.pdf,,,2026-10-07,扫描 PDF 多遍识别、逐位投票，累计递推核对,PDF 18 页；物理、历史两科共用同一 PDF
+hebei-2026-history-yfyd,官方,河北省教育考试院,普通高校招生物理科目组合、历史科目组合考生成绩统计表,https://file.hebeea.edu.cn/upload/resources/file/2026/06/24/27144.pdf,,,2026-10-07,扫描 PDF 多遍识别、逐位投票，累计递推核对,PDF 18 页；物理、历史两科共用同一 PDF
