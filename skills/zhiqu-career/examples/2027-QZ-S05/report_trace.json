@@ -2,15 +2,15 @@
   "schema_version": 1,
   "case_id": "2027-QZ-S05",
   "source_sha256": {
-    "case.json": "747db87c1436b7df11654bf351dd05084434bc0fd26d4a55ffad2397d2f8358f",
+    "case.json": "05cf7f944cdc718196d9f0a98dfe8e456cd7a42104d8ec260d598d5c116b8eef",
     "profile_parse.json": "bef4c373f4f3e2c4c29f5382f4899cbfa2055bf7848b6e6efc4bb06542b6d4dc",
     "directions.json": "c596542a75e4d5caa51814b26c579c39025f30f53abb8a6e495db95c50c781b2",
-    "rules_check.json": "0a03cb3f10d3f0eb1eb5d392722877bfd4fe437ce3fdc44f70a305444e00502e",
-    "candidates.json": "0fc093040e4475d0111f18d3c46caa7478fa0e87d449e2496e849dc327c1ae49",
-    "evidence.json": "cb594054511798e445f81f15d4fac94ac4e3b9cbbd6dc0cf65d6722167cce7ce",
+    "rules_check.json": "97d370958806925e975acac686272114fc6e0a8c331ab3ede958c87edb4ca240",
+    "candidates.json": "25cd8c14aca6037ea7a7059de5fb2ffac815e9251911ab2e330f87f27d22d5d3",
+    "evidence.json": "5ee87b6aa1c50db703154ae05c7ae28fa153d7c440cd0f376363ee25c0a62048",
     "calculations.json": "d4d64f9635fb2d2fcd3e532e7f3f1fdd8ba8f2602919bd0097a645e10133934b",
-    "judgment.json": "4ad9f2393566232d6c6e9697057230ca61b517ab936ee63f9063ca0171380ced",
-    "narrative.json": "28e6cb7c99a6a7c6fca83c4e3494fa6d34e452d7f4c35432309fc26eaf8f8f98",
+    "judgment.json": "59baed266dba9e951803f02cc90f9a62c64b6a61b1fa803d514dc74447a28131",
+    "narrative.json": "15c1d32fde373113162744c4163aa467c43f580eec16616b858b831e858ee80a",
     "profile.json": "f8c7a4b076a64c168d303710ea8836b70a79ffe5d53ce7521045bfe4ae4c2d1f",
     "profile-supplement.txt": "247f31f22f4c9a6c33394b5b25e3b37ef21c19fd3b9c12a70a83839f7976b026"
   },
@@ -20,7 +20,7 @@
     "planning_workflow.py": "db73cf106f6604f74c7eeefb7ccc357435eb4601c9824ef388b956d1636b5b06",
     "operator_check.py": "97965475c2c8b6efe5dbf2747511526d1729a540f55a16b54fa282e2a810fdc7",
     "check_demos.py": "fc8e1625f9e052373756160514ad5c73db1e8451c233425918edb5bc839d9f63",
-    "report.py": "5ca9d4dd41806233ea94c4b1450c99b2e0ee3ef9853d8298f0fb9260e512f186",
+    "report.py": "048a7fcbe0dfb946d22ff5cc000dedd0cb83f1e2e5e139211519650f9b781fe9",
     "render_report.py": "f1fec10064d7ce24d58dccbf7963cc2012c1ef098806e3ead881d9bbea239e92",
     "profile_store.py": "1cfd828583598a65cf719a46447cb3112ef0170eb1a638b89ab023cb47a04e7f"
   },
@@ -99,9 +99,15 @@
     },
     {
       "location": "01.kpis.2",
-      "ref": "{{e:E005#/value|md_hm}}",
+      "ref": "{{e:E005#/value|md}}",
       "value": "2026-10-23T18:00",
-      "display": "10-23 18:00"
+      "display": "10 月 23 日"
+    },
+    {
+      "location": "01.kpis.2",
+      "ref": "{{e:E005#/value|hm}}",
+      "value": "2026-10-23T18:00",
+      "display": "18:00"
     },
     {
       "location": "01.kpis.2",
@@ -404,37 +410,37 @@
       "display": "177"
     },
     {
-      "location": "05.analysis.3",
+      "location": "05.analysis.2",
       "ref": "{{c:/fa_median|1f}}",
       "value": 54.5,
       "display": "54.5"
     },
     {
-      "location": "05.analysis.3",
+      "location": "05.analysis.2",
       "ref": "{{c:/fa_q1|1f}}",
       "value": 39.0,
       "display": "39.0"
     },
     {
-      "location": "05.analysis.3",
+      "location": "05.analysis.2",
       "ref": "{{c:/fa_q3|1f}}",
       "value": 75.0,
       "display": "75.0"
     },
     {
-      "location": "05.analysis.3",
+      "location": "05.analysis.2",
       "ref": "{{c:/all_median|1f}}",
       "value": 29.0,
       "display": "29.0"
     },
     {
-      "location": "05.analysis.3",
+      "location": "05.analysis.2",
       "ref": "{{c:/fa_vs_all|1f}}",
       "value": 1.9,
       "display": "1.9"
     },
     {
-      "location": "05.analysis.3",
+      "location": "05.analysis.2",
       "ref": "{{c:/anya_median|1f}}",
       "value": 177.0,
       "display": "177.0"
@@ -951,9 +957,9 @@
     }
   ],
   "artifacts": {
-    "report.md": "7b76cb178eb5bb605d3c62e933a4b4c43f703753396371b602b033af90c52f0e",
-    "report.html": "ba1694e2bce599950ca2420c8887f4d4e30a055ca6ee44e8864851f3b637b29c",
-    "report.pdf": "21993ec40744b93c7adb2bf50c0771e3a8e8cefeec9ef1ff54637e5ece4672d3"
+    "report.md": "98c7ca073db34621115287b6e389b58cb2d214b803b3402fbbcfcd4bc0f70d82",
+    "report.html": "7ba6986056086caf32456c07059612fa30db4dfa71ca1d0c197b6c25d04a9930",
+    "report.pdf": "7a3b13ecd90d9c43aa4b14d5d3f60280260dd53a273c356ccb5707478b024802"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "report_profile": {
@@ -964,6 +970,6 @@
   },
   "verification_tools_sha256": {
     "verify_report.py": "1bda48fac71a082456ffc371216c6e3edb26d178dead1356bc65736a14b0d4b9",
-    "verification_calculations.py": "503bf1c73c4f9db451e141a12724e43b715fbc25be5f88c5393828f1523b8336"
+    "verification_calculations.py": "80e4fb8e0d247582ade885655be5f30e0c2d1cc9e19ebf59c39f3fa83823a54b"
   }
 }

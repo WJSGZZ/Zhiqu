@@ -6,7 +6,7 @@ import sys
 import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
-from verification_calculations import calculation_rows, recompute, walk, numeric
+from verification_calculations import calculation_rows, recompute, walk, numeric, _registered
 
 SKILLS = Path(__file__).resolve().parents[2]
 
@@ -17,6 +17,24 @@ def load_case(path):
 
 
 class VerificationCalculationTests(unittest.TestCase):
+    def test_list_statistics_are_named_by_their_data_item_not_scores(self):
+        case = {'anonymous_data': {'x': {'values': [3, 9, 1, 5]}}, 'calculation_plan': {'operations': [
+            {'output': 'n', 'algorithm': 'count', 'inputs': ['{{k:/anonymous_data/x/values}}'], 'item_name': '职位'},
+            {'output': 'mid', 'algorithm': 'median', 'inputs': ['{{k:/anonymous_data/x/values}}'],
+             'item_name': '职位的竞争比', 'unit': '缴费人数÷招录人数'},
+            {'output': 'top', 'algorithm': 'max', 'inputs': ['{{k:/anonymous_data/x/values}}']}]}}
+        computed, rows = _registered(case, {}, {'items': []})
+        self.assertEqual(computed, {'n': 4, 'mid': 4.0, 'top': 9})
+        formulas = {r['path']: r['formula'] for r in rows}
+        self.assertEqual(formulas['/n'], '数出 4 个职位')
+        self.assertIn('4 个职位的竞争比（单位：缴费人数÷招录人数）排序后取中位数', formulas['/mid'])
+        self.assertEqual(formulas['/top'], '4 个数值排序后取最高')
+        self.assertFalse(any('分数' in f for f in formulas.values()))
+
+    def test_flagship_career_example_recomputes(self):
+        args = load_case(SKILLS / 'zhiqu-career/examples/2027-QZ-S05')
+        self.assertEqual(recompute(*args), args[-1])
+
     def test_four_complete_examples_recompute_and_describe_every_number(self):
         for name in ('zhiqu-grad/examples/demo_2027', 'zhiqu-career/examples/demo_2027',
                      'zhiqu-grad/examples/2028-YJ-S02', 'zhiqu-career/examples/2027-QZ-S02'):
