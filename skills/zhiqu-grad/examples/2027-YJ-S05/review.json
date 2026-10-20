@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "status": "changes_required",
-  "status_label": "第 3 轮独立复核：须修改后重审（总分 19，无 0 分，九项坑全过；E034 摘录在 PDF p16 仍印出 300=150+50，且正文有“返工”开发用语，均为一两行的小改）",
+  "status": "awaiting_independent_review",
+  "status_label": "等待独立复核（第 1—3 轮独立复核结论：须修改后重审，见 review_history）",
   "self_assessment": {
     "reviewer": "本制作会话（自评，不是独立复核）",
     "date": "2026-10-20",
@@ -18,7 +18,7 @@
         {
           "id": "traceability",
           "score": 1,
-          "reason": "E033 摘录补全为原件逐字“…+综合素质考核（100 分）”；新增 E019（管理规定第三十二条业务课满分 150）支撑“数学一离满分 45 分”。扣 1 分：苏大软件工程学硕 10 个分数仍只读图一次；附录本人信息的“其他”前缀来自共用代码，未改。",
+          "reason": "E033、E034 摘录按原件补成整句（复试 300 分 = 机考 150 + 外语听说 50 + 综合素质 100），E037 在原件续写处加省略号；逐条对照原件文字层扫过全部官方摘录，未见其他在换行处截断。苏大软件工程学硕 10 个分数两次独立读图一致。扣 1 分：附录本人信息的“其他”前缀、“数据快照版本”“calculations.json”等用语来自共用代码，本案例改不了。",
           "report_location": "p13、附录",
           "evidence_refs": []
         },
@@ -280,18 +280,18 @@
     "profile_parse.json": "20107f71f9c2ed1d7b7198ad470d1be169109141f501371ea2c7181282f25078",
     "directions.json": "e0f392566f46366346e27a144c0011736d32860b9fb6b1826636ae7b561b071d",
     "rules_check.json": "c1d6d9f0f558110862a780d5074b67a0db12a8ae2c8d00874c49af851cb49b66",
-    "candidates.json": "27df56ddf8bb58990dd7899d25701ea130941536d14ebfbaec13ace23e1adb3f",
-    "evidence.json": "d549a89f8ddef75e8e0a36ac4df16b571766f60188d7a77ad82356083629498f",
+    "candidates.json": "763385ade499d0f08163b29594397f045a28e0add3cad1f2924b9db613a570cd",
+    "evidence.json": "b0519db8d224fa34627a9bbcd2af1df9e9fe500f7993cfeb89fc846d05143d07",
     "calculations.json": "d9da96c3e2546b239e866d1f561370c589b48febf5532f68a88226d2ccc1c368",
     "judgment.json": "ea2c913effcd942a8385576dcdbe1447c06c09263e90a51f58b03eb773703972",
-    "narrative.json": "aedad3711d2321b9e6179068d7b7cf7305b43c096ece2c3028c64343fe19d74f",
+    "narrative.json": "dc35149e66ae20b9fd6b40a18f2e65b6cc63b07c3df1e1957dcf8f26085f75dc",
     "profile.json": "af232e95b42de1286681d5b04d706bbd8d16d3dd86cfe304a7d87e5a6bfcab88",
     "profile-supplement.txt": "952368202eeb2cd031c6c0d52212442dca0faaadcd6c99828f951e50ba15d704",
-    "report.md": "696dcb6834cc6ce39ea40a2dd15ff4f99e9f8b89af906ea1cc2fc8eead9aaff5",
-    "report.html": "2cdf4007c70549dcd132ff54b62613c5f6845a3355b254f629a046c20738c386",
-    "report.pdf": "8e5aabba5d86bb6b99da627537c1465c92d887c046e420c491421b19d910ee86",
-    "report_trace.json": "946a4242a64e067857e174e5dcec66d8b4b64c93fabdb4aa2557622ad4932b09",
-    "operator_check.md": "ba1385e406d6dd5ed38803432aa2b42446b4cb639944c1c93c7a4e971f13d140"
+    "report.md": "3744b45ae20e5a751404b07bc2c0448e08fb836180dd9af2a1e5375d44b4e729",
+    "report.html": "d7f2e2dd0574c614baa78e027e0b621d1db9a801589ece042d94587a0829c521",
+    "report.pdf": "ceef13064f46888a4793544952243c62a6f5575fb4916488665cc2cda7967e8a",
+    "report_trace.json": "2a8ce4c2b7f30a1eff7fcf435872741cbaea59467f8224efc296b5e558b32343",
+    "operator_check.md": "18222aa2fc943944c390b8e138dae191fee4b04a418c4dcd94ab2e6b845f2a36"
   },
   "snapshot_refreshes": [
     {
@@ -350,6 +350,29 @@
         "operator_check.md"
       ],
       "reason": "按第 2 轮独立复核 required_changes：河海软件工程定性提示与图注统一、E033 摘录补全、封面三句、p4 图注、下四分位说法、数学一离满分写法；第 2 轮复核挪入 review_history。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude（制作会话第四次修改）",
+      "files": [
+        "case.json",
+        "profile_parse.json",
+        "directions.json",
+        "rules_check.json",
+        "candidates.json",
+        "evidence.json",
+        "calculations.json",
+        "judgment.json",
+        "narrative.json",
+        "profile.json",
+        "profile-supplement.txt",
+        "report.md",
+        "report.html",
+        "report.pdf",
+        "report_trace.json",
+        "operator_check.md"
+      ],
+      "reason": "按第 3 轮独立复核：E034/E037 摘录补全、删去面向读者的开发用语、河海软件工程“上一届一志愿只录 3 人”；第 3 轮复核挪入 review_history。"
     }
   ],
   "review_history": [
@@ -862,265 +885,272 @@
         "【轻】附录“分析用到的本人信息”去掉“其他”前缀（英语、均分或排名、本人十月模考三行），改成“四级 518、六级 446”“政治 63……填写日期 2026-10-11”这类可读写法。",
         "【轻】p5、p9“数学一和英语一离满分最远，先补”：英语一离满分 38、政治 37 几乎相同，离满分距离也不等于最容易提分；改成“数学一离满分最远（45 分）；英语一、政治差不多，按你自己的错题情况定”。"
       ]
-    }
-  ],
-  "independent": true,
-  "reviewer": "独立复核会话（Claude，第三轮，未参与制作）",
-  "date": "2026-10-20",
-  "rubric": {
-    "items": [
-      {
-        "id": "clarity",
-        "score": 2,
-        "reason": "封面压到三句：位置判断、默认一志愿苏大计算机学硕且接受软件工程可改报同校软件工程学硕、保底调剂与春招；p2 首句、流程图、p7 档位句与第 8、9 节触发条件一致。",
-        "evidence_refs": [],
-        "report_location": "封面、p2—p3、p7、p9—p11"
+    },
+    {
+      "round": 3,
+      "result": "changes_required",
+      "score": 19,
+      "status_label": "第 3 轮独立复核：须修改后重审（总分 19，无 0 分，九项坑全过；E034 摘录在 PDF p16 仍印出 300=150+50，且正文有“返工”开发用语，均为一两行的小改）",
+      "independent": true,
+      "reviewer": "独立复核会话（Claude，第三轮，未参与制作）",
+      "date": "2026-10-20",
+      "rubric": {
+        "items": [
+          {
+            "id": "clarity",
+            "score": 2,
+            "reason": "封面压到三句：位置判断、默认一志愿苏大计算机学硕且接受软件工程可改报同校软件工程学硕、保底调剂与春招；p2 首句、流程图、p7 档位句与第 8、9 节触发条件一致。",
+            "evidence_refs": [],
+            "report_location": "封面、p2—p3、p7、p9—p11"
+          },
+          {
+            "id": "traceability",
+            "score": 1,
+            "reason": "抽查 4 条 + 必核 E033、E019 及河海软件工程数字，原件哈希与取文回执一致，逐字命中。E033 已补全。扣 1 分：同一句原文的 E034（机考 150 分）摘录仍截在“外语听说能力测试（50 分）”且无省略号，PDF p16 紧接 E033 下方仍印出“复试成绩（300 分）=机考（150 分）+外语听说能力测试（50 分）”，第二轮要求的“p16 不再出现 150+50=300 的假象”只改了一半。附录“其他 518；其他 446”前缀为已登记的共用代码问题，本轮不扣分。",
+            "evidence_refs": [
+              "E033",
+              "E034"
+            ],
+            "report_location": "p16、p15"
+          },
+          {
+            "id": "reasoning",
+            "score": 2,
+            "reason": "河海软件工程学硕已按 kaoyan.md 给定性提示：p3、p6 写明模考高于两届录取者大多数、人数太少只作定性；p8 图画出模考点并改图注，与 p7 不再矛盾；p12 追问第 1 条改成三者比较；p10 调剂卡点名为“线索不是余额”。每候选有支持、反对、改判条件（p24—p26）。",
+            "evidence_refs": [
+              "E067",
+              "E074",
+              "E076",
+              "E062",
+              "E052"
+            ],
+            "report_location": "p3、p6—p8、p10、p12、p24—p26"
+          },
+          {
+            "id": "consistency",
+            "score": 2,
+            "reason": "封面、摘要、第 4、6 节、附录档位与数字一致；本复核用原件重算河海软件工程 2025 十人（最低 288、下四分位 294、中位 312.5、上四分位 337、最高 376）、2026 三人（305/323/373）、河海普通 2025 十八人（308/326/335/344/358），与报告一致；13 个录取者中 10 个低于 349 属实；verify_report ok。",
+            "evidence_refs": [],
+            "report_location": "p7—p8、p21—p23"
+          },
+          {
+            "id": "timeliness",
+            "score": 2,
+            "reason": "报名、初试、调剂、录取用 2027 管理规定，核实 2026-10-20、复核期限 2026-11-19，在期内；旧年线与名单逐行标年份，当届线公布后重算写明；河海当届目录、四校当届科目标未取到并给入口。",
+            "evidence_refs": [],
+            "report_location": "p9、p13、p26—p27"
+          },
+          {
+            "id": "personalization",
+            "score": 2,
+            "reason": "模考四科决定可比范围，只留江苏决定候选，优先级按原话排序；“计算机”原话决定默认项、接不接受软件工程交本人；听来的三句话逐条用原件核对；调剂/非全矛盾与二战分歧列入追问。",
+            "evidence_refs": [],
+            "report_location": "p2—p5、p12"
+          },
+          {
+            "id": "actionability",
+            "score": 2,
+            "reason": "三件事有日期（10-22、10-23、11-15）与入口；四张路线卡门槛、时间窗、投入、切换条件齐；调剂卡给出先查的同科目线索；出分后回填问卷的检查点明确。",
+            "evidence_refs": [],
+            "report_location": "p3、p9—p12"
+          },
+          {
+            "id": "boundaries",
+            "score": 2,
+            "reason": "不写个人概率，档位反复注明是位置不是概率；河海软件工程只作定性、不替代苏大；软件工程与否交本人；四校“没取到不等于不考”；报考点做法只作参照。",
+            "evidence_refs": [],
+            "report_location": "p2、p6—p8、p13、p28"
+          },
+          {
+            "id": "summary_access",
+            "score": 2,
+            "reason": "封面三句，家长能抓住“报哪、为什么、没考上怎么办”；p2 数字卡和流程图好懂；p4 图注写明“合计 176 是四科单科线之和，不是总分线（上一届总分线 264 分）”；p5 数学一离满分 45、英语政治按错题定，说法已准确。“录取者里最低一档（按人数分四档）的最高分”仍稍绕，但术语表有解释，不扣分。",
+            "evidence_refs": [],
+            "report_location": "封面、p2、p4—p5"
+          },
+          {
+            "id": "layout",
+            "score": 2,
+            "reason": "check_layout 通过；本复核看了 28 页缩略图并放大 p4、p8，无挤压、拆行、断图、大片空白。正文用词问题记在必须修改里。",
+            "evidence_refs": [],
+            "report_location": "全篇"
+          }
+        ]
       },
-      {
-        "id": "traceability",
-        "score": 1,
-        "reason": "抽查 4 条 + 必核 E033、E019 及河海软件工程数字，原件哈希与取文回执一致，逐字命中。E033 已补全。扣 1 分：同一句原文的 E034（机考 150 分）摘录仍截在“外语听说能力测试（50 分）”且无省略号，PDF p16 紧接 E033 下方仍印出“复试成绩（300 分）=机考（150 分）+外语听说能力测试（50 分）”，第二轮要求的“p16 不再出现 150+50=300 的假象”只改了一半。附录“其他 518；其他 446”前缀为已登记的共用代码问题，本轮不扣分。",
-        "evidence_refs": [
-          "E033",
-          "E034"
-        ],
-        "report_location": "p16、p15"
-      },
-      {
-        "id": "reasoning",
-        "score": 2,
-        "reason": "河海软件工程学硕已按 kaoyan.md 给定性提示：p3、p6 写明模考高于两届录取者大多数、人数太少只作定性；p8 图画出模考点并改图注，与 p7 不再矛盾；p12 追问第 1 条改成三者比较；p10 调剂卡点名为“线索不是余额”。每候选有支持、反对、改判条件（p24—p26）。",
-        "evidence_refs": [
+      "pitfalls": [
+        {
+          "item": "没查到写成不存在",
+          "result": "pass",
+          "note": "p2“南航、南邮、江大、南理工当届考什么没取到，不知道是否同科目”；p7、p14、p26—p27 写明“没取到不等于没有/不考”。",
+          "location": "p2、p7、p14、p26—p27"
+        },
+        {
+          "item": "群体数字当个人概率",
+          "result": "pass",
+          "note": "分布只用于看模考位置；图注、术语表、免责声明均写“不是上岸概率”；河海软件工程“高于大多数”只作定性，未换成概率。",
+          "location": "p7—p8、p13、p28"
+        },
+        {
+          "item": "经验帖数字做决定",
+          "result": "pass",
+          "note": "“河海线不高”“苏大不看本科”“南航竞争大”只作线索，分别用复试线原件核对或注明无法核对。",
+          "location": "p3、p5"
+        },
+        {
+          "item": "按编号引用问卷",
+          "result": "pass",
+          "note": "引用画像按原话或内容，未见“第几节”。",
+          "location": "p3—p4、p15"
+        },
+        {
+          "item": "同一事实写两处",
+          "result": "pass",
+          "note": "数字由证据与计算引用展开，同一量全篇单值；E033/E034 同一句原文分别支撑 300 与 150，不是矛盾值（但 E034 摘录截断，见可追溯项）。",
+          "location": "全篇"
+        },
+        {
+          "item": "会过期的事实",
+          "result": "pass",
+          "note": "证据与规则核实 2026-10-20、复核期限 2026-11-19，在期内；旧年数据逐行标年份。",
+          "location": "p13、p14—p27"
+        },
+        {
+          "item": "八字越界",
+          "result": "pass",
+          "note": "人物未给出生信息，无八字内容。",
+          "location": "全篇"
+        },
+        {
+          "item": "委派判断类任务",
+          "result": "pass",
+          "note": "本复核读原件、重算、判断均由本会话自己完成，未委派。",
+          "location": "review.json"
+        },
+        {
+          "item": "取页摘要当原文",
+          "result": "pass",
+          "note": "抽查摘录均在本机原件（curl 取文，哈希与回执一致）用 pymupdf/去标签文本逐字命中；E034 是原文截断而非摘要改写，记入可追溯项。",
+          "location": "p15—p21"
+        }
+      ],
+      "sampled_sources": [
+        {
+          "id": "E067",
+          "claim": "河海软件工程学硕 2026 统考计划 6",
+          "source_url": "https://cies.hhu.edu.cn/2026/0324/c4093a323909/page.htm",
+          "original": ".cache/t13-grad-programs/raw/hhu_cies_fushi_rule.pdf",
+          "locator": "细则二、招生计划表 第3行",
+          "excerpt": "3 083500 软件工程 6 /",
+          "method": "本机原件 pymupdf 取文字逐字检索，原件 SHA256 与取文回执一致",
+          "retrieved_on": "2026-10-20",
+          "matches": true
+        },
+        {
+          "id": "E060",
+          "claim": "河海计算机学硕普通方向 2026 统考计划 9",
+          "source_url": "https://cies.hhu.edu.cn/2026/0324/c4093a323909/page.htm",
+          "original": ".cache/t13-grad-programs/raw/hhu_cies_fushi_rule.pdf",
+          "locator": "细则二、招生计划表 第2行",
+          "excerpt": "2 081200 计算机科学与技术（02 数据与知识工程，03 分布式计算与安全，04 智能信息处理，05 计算机视觉与领域建模） 9",
+          "method": "本机原件 pymupdf 取文字逐字检索，原件 SHA256 与取文回执一致",
+          "retrieved_on": "2026-10-20",
+          "matches": true
+        },
+        {
+          "id": "E043",
+          "claim": "苏大软件工程学硕 2026 复试线 326",
+          "source_url": "https://scst.suda.edu.cn/8d/97/c29555a691607/page.htm",
+          "original": ".cache/t13-grad-programs/raw/suda_cs_2026_rule.pdf",
+          "locator": "一、1. 复试分数线表",
+          "excerpt": "083500 软件工程 326 10",
+          "method": "本机原件 pymupdf 取文字逐字检索，原件 SHA256 与取文回执一致",
+          "retrieved_on": "2026-10-20",
+          "matches": true
+        },
+        {
+          "id": "E069",
+          "claim": "河海计算机学硕普通方向 2025 一志愿建议录取初试分（最高 358）",
+          "source_url": "https://cies.hhu.edu.cn/2025/0327/c4093a300228/page.htm",
+          "original": ".cache/t13-grad-programs/raw/hhu_2025_lu.pdf",
+          "locator": "建议录取名单 081200 各行",
+          "excerpt": "计算机与软件学院 081200 计算机科学与技术 全日制 … 358 246.20 604.20",
+          "method": "本机原件 pymupdf 取文字逐字检索，原件 SHA256 与取文回执一致",
+          "retrieved_on": "2026-10-20",
+          "matches": true,
+          "note": "01—04 方向 18 行，最高 358、最低 308；05 联培 1 行 314 另计，与 E075 一致。"
+        },
+        {
+          "id": "E033",
+          "claim": "苏大计算机学院复试满分 300",
+          "source_url": "https://scst.suda.edu.cn/8d/97/c29555a691607/page.htm",
+          "original": ".cache/t13-grad-programs/raw/suda_cs_2026_rule.pdf",
+          "locator": "二、3",
+          "excerpt": "3. 复试成绩（300 分）=机考（150 分）+外语听说能力测试（50 分）+综合素质考核（100 分）",
+          "method": "本机原件 pymupdf 取文字逐字检索，原件 SHA256 与取文回执一致（必核）",
+          "retrieved_on": "2026-10-20",
+          "matches": true,
+          "note": "已补全，与原件一致。同句的 E034 摘录仍截断，见 required_changes。"
+        },
+        {
+          "id": "E019",
+          "claim": "初试业务课单元满分 150",
+          "source_url": "http://www.moe.gov.cn/srcsite/A15/moe_778/s3261/202609/t20260923_1451734.html",
+          "original": ".cache/t17-grad-xiaozhou/raw/moe_2027_rules.html",
+          "locator": "第三十二条",
+          "excerpt": "第三十二条 初试一般设置四个单元考试科目，即思想政治理论、外国语、业务课（一）和业务课（二），满分分别为100分、100分、150分、150分。",
+          "method": "本机原件 HTML 去标签逐字检索，SHA256 与回执一致（必核）",
+          "retrieved_on": "2026-10-20",
+          "matches": true,
+          "note": "支撑“数学一离满分 45 分”（150−105）。"
+        }
+      ],
+      "sampling_independent": {
+        "round": 3,
+        "seed": 31020,
+        "method": "python random.Random(31020).sample(候选,4)；候选为 evidence.json 中 grade=官方、status=verified、且被 judgment/candidates/narrative/calculations/case/directions/rules_check/report_trace 引用的 73 条，去掉必核的 E033、E019",
+        "pool_size": 73,
+        "picked": [
           "E067",
-          "E074",
-          "E076",
-          "E062",
-          "E052"
+          "E060",
+          "E043",
+          "E069"
         ],
-        "report_location": "p3、p6—p8、p10、p12、p24—p26"
+        "mandatory": [
+          "E033",
+          "E019"
+        ],
+        "extra_main_conclusion_checks": [
+          "河海软件工程复试线：hhu_2026_line.pdf（回执哈希一致，来源页 c17366a327227）“083500 软件工程 学术学位 286”；hhu_2025_line.pdf（来源页 c17366a303969）“083500 软件工程 学术学位 288”。一致。",
+          "河海软件工程 2026 一志愿建议录取：hhu_cies_lu_2026.pdf（4 月 3 日名单，调剂名单另于 4 月 16 日公示）083500 共 3 行，初试 373、323、305；统考计划 6（E067）。“一志愿只录 3 人、计划 6 人”属实。",
+          "河海软件工程 2025：hhu_2025_lu.pdf 083500 共 10 行，初试 376、351、334、338、320、305、288、291、297、293；含端点线性插值得下四分位 294、中位 312.5、上四分位 337，与报告一致。",
+          "“13 个录取者里 10 个低于 349”：2026 年 3 人中 2 人低于 349，2025 年 10 人中 8 人低于 349，合计 10/13，属实；报告写“高于两届录取者的大多数”准确。",
+          "河海普通方向 2025 十八人重算：308/326/335/344/358（最低/下四分位/中位/上四分位/最高），与 p23 一致。"
+        ],
+        "checks_run": {
+          "case_check --stage 10": "阶段 0–10 通过",
+          "check_layout": "通过",
+          "verify_report --json": "ok: true，errors 空",
+          "preview_report": "28 页速览图逐页看过，放大 p4、p8",
+          "snapshot": "review.json.snapshot 16 个文件哈希与当前文件全部一致；report.pdf 8e5aabba5d86…"
+        },
+        "round2_followup": {
+          "河海软件工程学硕定性位置": "已改好（p3、p6、p7、p8 图与图注、p10 调剂卡、p12 追问第 1 条）",
+          "E033 摘录截断": "只改好一半：E033 已补全；同句 E034 摘录仍截断，p16 仍印出 300=150+50",
+          "封面太长与“合计 176 分”": "已改好：封面三句；p4 保留合计但图注写明是单科线之和、不是总分线 264",
+          "附录“其他”前缀": "未改，属已登记的共用代码问题，本轮不扣分",
+          "“英语离满分最远”": "已改好：p5、p9 写“数学一离满分最远（45 分），英语一和政治差不多，按错题情况定”"
+        }
       },
-      {
-        "id": "consistency",
-        "score": 2,
-        "reason": "封面、摘要、第 4、6 节、附录档位与数字一致；本复核用原件重算河海软件工程 2025 十人（最低 288、下四分位 294、中位 312.5、上四分位 337、最高 376）、2026 三人（305/323/373）、河海普通 2025 十八人（308/326/335/344/358），与报告一致；13 个录取者中 10 个低于 349 属实；verify_report ok。",
-        "evidence_refs": [],
-        "report_location": "p7—p8、p21—p23"
-      },
-      {
-        "id": "timeliness",
-        "score": 2,
-        "reason": "报名、初试、调剂、录取用 2027 管理规定，核实 2026-10-20、复核期限 2026-11-19，在期内；旧年线与名单逐行标年份，当届线公布后重算写明；河海当届目录、四校当届科目标未取到并给入口。",
-        "evidence_refs": [],
-        "report_location": "p9、p13、p26—p27"
-      },
-      {
-        "id": "personalization",
-        "score": 2,
-        "reason": "模考四科决定可比范围，只留江苏决定候选，优先级按原话排序；“计算机”原话决定默认项、接不接受软件工程交本人；听来的三句话逐条用原件核对；调剂/非全矛盾与二战分歧列入追问。",
-        "evidence_refs": [],
-        "report_location": "p2—p5、p12"
-      },
-      {
-        "id": "actionability",
-        "score": 2,
-        "reason": "三件事有日期（10-22、10-23、11-15）与入口；四张路线卡门槛、时间窗、投入、切换条件齐；调剂卡给出先查的同科目线索；出分后回填问卷的检查点明确。",
-        "evidence_refs": [],
-        "report_location": "p3、p9—p12"
-      },
-      {
-        "id": "boundaries",
-        "score": 2,
-        "reason": "不写个人概率，档位反复注明是位置不是概率；河海软件工程只作定性、不替代苏大；软件工程与否交本人；四校“没取到不等于不考”；报考点做法只作参照。",
-        "evidence_refs": [],
-        "report_location": "p2、p6—p8、p13、p28"
-      },
-      {
-        "id": "summary_access",
-        "score": 2,
-        "reason": "封面三句，家长能抓住“报哪、为什么、没考上怎么办”；p2 数字卡和流程图好懂；p4 图注写明“合计 176 是四科单科线之和，不是总分线（上一届总分线 264 分）”；p5 数学一离满分 45、英语政治按错题定，说法已准确。“录取者里最低一档（按人数分四档）的最高分”仍稍绕，但术语表有解释，不扣分。",
-        "evidence_refs": [],
-        "report_location": "封面、p2、p4—p5"
-      },
-      {
-        "id": "layout",
-        "score": 2,
-        "reason": "check_layout 通过；本复核看了 28 页缩略图并放大 p4、p8，无挤压、拆行、断图、大片空白。正文用词问题记在必须修改里。",
-        "evidence_refs": [],
-        "report_location": "全篇"
-      }
-    ]
-  },
-  "pitfalls": [
-    {
-      "item": "没查到写成不存在",
-      "result": "pass",
-      "note": "p2“南航、南邮、江大、南理工当届考什么没取到，不知道是否同科目”；p7、p14、p26—p27 写明“没取到不等于没有/不考”。",
-      "location": "p2、p7、p14、p26—p27"
-    },
-    {
-      "item": "群体数字当个人概率",
-      "result": "pass",
-      "note": "分布只用于看模考位置；图注、术语表、免责声明均写“不是上岸概率”；河海软件工程“高于大多数”只作定性，未换成概率。",
-      "location": "p7—p8、p13、p28"
-    },
-    {
-      "item": "经验帖数字做决定",
-      "result": "pass",
-      "note": "“河海线不高”“苏大不看本科”“南航竞争大”只作线索，分别用复试线原件核对或注明无法核对。",
-      "location": "p3、p5"
-    },
-    {
-      "item": "按编号引用问卷",
-      "result": "pass",
-      "note": "引用画像按原话或内容，未见“第几节”。",
-      "location": "p3—p4、p15"
-    },
-    {
-      "item": "同一事实写两处",
-      "result": "pass",
-      "note": "数字由证据与计算引用展开，同一量全篇单值；E033/E034 同一句原文分别支撑 300 与 150，不是矛盾值（但 E034 摘录截断，见可追溯项）。",
-      "location": "全篇"
-    },
-    {
-      "item": "会过期的事实",
-      "result": "pass",
-      "note": "证据与规则核实 2026-10-20、复核期限 2026-11-19，在期内；旧年数据逐行标年份。",
-      "location": "p13、p14—p27"
-    },
-    {
-      "item": "八字越界",
-      "result": "pass",
-      "note": "人物未给出生信息，无八字内容。",
-      "location": "全篇"
-    },
-    {
-      "item": "委派判断类任务",
-      "result": "pass",
-      "note": "本复核读原件、重算、判断均由本会话自己完成，未委派。",
-      "location": "review.json"
-    },
-    {
-      "item": "取页摘要当原文",
-      "result": "pass",
-      "note": "抽查摘录均在本机原件（curl 取文，哈希与回执一致）用 pymupdf/去标签文本逐字命中；E034 是原文截断而非摘要改写，记入可追溯项。",
-      "location": "p15—p21"
+      "required_changes": [
+        "【中】E034 摘录补全为与 E033 相同的整句“3. 复试成绩（300 分）=机考（150 分）+外语听说能力测试（50 分）+综合素质考核（100 分）”（或在截断处加“…”），重新生成后核对 PDF p16“苏大计算机学院复试机考分值：150”下方原文不再出现 300=150+50。顺带查一遍 evidence.json 其他摘录有没有同样在原件换行处被截断的。",
+        "【轻】删去面向读者的开发用语“返工”：p14 第 12 节导语“软件工程学硕是这次返工新读的，只按放大图逐行读了一次”和 p18 E045 适用范围“本次返工看图逐行读出10行”，改成“软件工程学硕名单逐行看图读出 10 行，与学院公布的拟公开招考人数一致”这类说法（shared-rules 第一节：报告不出现开发用语）。第二轮复核已独立重读该图并一致，如登记为第二次读图，可同时改为“两次读图一致”。"
+      ],
+      "optional_improvements": [
+        "附录“分析用到的本人信息”去掉“其他”前缀（共用代码问题，已另行登记）。",
+        "p6“一志愿只录了个位数的人”只对 2026 年（3 人）成立，2025 年是 10 人；可改成“上一届一志愿只录 3 人”。",
+        "p2 数字卡“高于录取者里最低一档（按人数分四档）的最高分”仍稍绕，可直接写“高于录取者里分数靠后那四分之一”。"
+      ]
     }
   ],
-  "sampled_sources": [
-    {
-      "id": "E067",
-      "claim": "河海软件工程学硕 2026 统考计划 6",
-      "source_url": "https://cies.hhu.edu.cn/2026/0324/c4093a323909/page.htm",
-      "original": ".cache/t13-grad-programs/raw/hhu_cies_fushi_rule.pdf",
-      "locator": "细则二、招生计划表 第3行",
-      "excerpt": "3 083500 软件工程 6 /",
-      "method": "本机原件 pymupdf 取文字逐字检索，原件 SHA256 与取文回执一致",
-      "retrieved_on": "2026-10-20",
-      "matches": true
-    },
-    {
-      "id": "E060",
-      "claim": "河海计算机学硕普通方向 2026 统考计划 9",
-      "source_url": "https://cies.hhu.edu.cn/2026/0324/c4093a323909/page.htm",
-      "original": ".cache/t13-grad-programs/raw/hhu_cies_fushi_rule.pdf",
-      "locator": "细则二、招生计划表 第2行",
-      "excerpt": "2 081200 计算机科学与技术（02 数据与知识工程，03 分布式计算与安全，04 智能信息处理，05 计算机视觉与领域建模） 9",
-      "method": "本机原件 pymupdf 取文字逐字检索，原件 SHA256 与取文回执一致",
-      "retrieved_on": "2026-10-20",
-      "matches": true
-    },
-    {
-      "id": "E043",
-      "claim": "苏大软件工程学硕 2026 复试线 326",
-      "source_url": "https://scst.suda.edu.cn/8d/97/c29555a691607/page.htm",
-      "original": ".cache/t13-grad-programs/raw/suda_cs_2026_rule.pdf",
-      "locator": "一、1. 复试分数线表",
-      "excerpt": "083500 软件工程 326 10",
-      "method": "本机原件 pymupdf 取文字逐字检索，原件 SHA256 与取文回执一致",
-      "retrieved_on": "2026-10-20",
-      "matches": true
-    },
-    {
-      "id": "E069",
-      "claim": "河海计算机学硕普通方向 2025 一志愿建议录取初试分（最高 358）",
-      "source_url": "https://cies.hhu.edu.cn/2025/0327/c4093a300228/page.htm",
-      "original": ".cache/t13-grad-programs/raw/hhu_2025_lu.pdf",
-      "locator": "建议录取名单 081200 各行",
-      "excerpt": "计算机与软件学院 081200 计算机科学与技术 全日制 … 358 246.20 604.20",
-      "method": "本机原件 pymupdf 取文字逐字检索，原件 SHA256 与取文回执一致",
-      "retrieved_on": "2026-10-20",
-      "matches": true,
-      "note": "01—04 方向 18 行，最高 358、最低 308；05 联培 1 行 314 另计，与 E075 一致。"
-    },
-    {
-      "id": "E033",
-      "claim": "苏大计算机学院复试满分 300",
-      "source_url": "https://scst.suda.edu.cn/8d/97/c29555a691607/page.htm",
-      "original": ".cache/t13-grad-programs/raw/suda_cs_2026_rule.pdf",
-      "locator": "二、3",
-      "excerpt": "3. 复试成绩（300 分）=机考（150 分）+外语听说能力测试（50 分）+综合素质考核（100 分）",
-      "method": "本机原件 pymupdf 取文字逐字检索，原件 SHA256 与取文回执一致（必核）",
-      "retrieved_on": "2026-10-20",
-      "matches": true,
-      "note": "已补全，与原件一致。同句的 E034 摘录仍截断，见 required_changes。"
-    },
-    {
-      "id": "E019",
-      "claim": "初试业务课单元满分 150",
-      "source_url": "http://www.moe.gov.cn/srcsite/A15/moe_778/s3261/202609/t20260923_1451734.html",
-      "original": ".cache/t17-grad-xiaozhou/raw/moe_2027_rules.html",
-      "locator": "第三十二条",
-      "excerpt": "第三十二条 初试一般设置四个单元考试科目，即思想政治理论、外国语、业务课（一）和业务课（二），满分分别为100分、100分、150分、150分。",
-      "method": "本机原件 HTML 去标签逐字检索，SHA256 与回执一致（必核）",
-      "retrieved_on": "2026-10-20",
-      "matches": true,
-      "note": "支撑“数学一离满分 45 分”（150−105）。"
-    }
-  ],
-  "sampling_independent": {
-    "round": 3,
-    "seed": 31020,
-    "method": "python random.Random(31020).sample(候选,4)；候选为 evidence.json 中 grade=官方、status=verified、且被 judgment/candidates/narrative/calculations/case/directions/rules_check/report_trace 引用的 73 条，去掉必核的 E033、E019",
-    "pool_size": 73,
-    "picked": [
-      "E067",
-      "E060",
-      "E043",
-      "E069"
-    ],
-    "mandatory": [
-      "E033",
-      "E019"
-    ],
-    "extra_main_conclusion_checks": [
-      "河海软件工程复试线：hhu_2026_line.pdf（回执哈希一致，来源页 c17366a327227）“083500 软件工程 学术学位 286”；hhu_2025_line.pdf（来源页 c17366a303969）“083500 软件工程 学术学位 288”。一致。",
-      "河海软件工程 2026 一志愿建议录取：hhu_cies_lu_2026.pdf（4 月 3 日名单，调剂名单另于 4 月 16 日公示）083500 共 3 行，初试 373、323、305；统考计划 6（E067）。“一志愿只录 3 人、计划 6 人”属实。",
-      "河海软件工程 2025：hhu_2025_lu.pdf 083500 共 10 行，初试 376、351、334、338、320、305、288、291、297、293；含端点线性插值得下四分位 294、中位 312.5、上四分位 337，与报告一致。",
-      "“13 个录取者里 10 个低于 349”：2026 年 3 人中 2 人低于 349，2025 年 10 人中 8 人低于 349，合计 10/13，属实；报告写“高于两届录取者的大多数”准确。",
-      "河海普通方向 2025 十八人重算：308/326/335/344/358（最低/下四分位/中位/上四分位/最高），与 p23 一致。"
-    ],
-    "checks_run": {
-      "case_check --stage 10": "阶段 0–10 通过",
-      "check_layout": "通过",
-      "verify_report --json": "ok: true，errors 空",
-      "preview_report": "28 页速览图逐页看过，放大 p4、p8",
-      "snapshot": "review.json.snapshot 16 个文件哈希与当前文件全部一致；report.pdf 8e5aabba5d86…"
-    },
-    "round2_followup": {
-      "河海软件工程学硕定性位置": "已改好（p3、p6、p7、p8 图与图注、p10 调剂卡、p12 追问第 1 条）",
-      "E033 摘录截断": "只改好一半：E033 已补全；同句 E034 摘录仍截断，p16 仍印出 300=150+50",
-      "封面太长与“合计 176 分”": "已改好：封面三句；p4 保留合计但图注写明是单科线之和、不是总分线 264",
-      "附录“其他”前缀": "未改，属已登记的共用代码问题，本轮不扣分",
-      "“英语离满分最远”": "已改好：p5、p9 写“数学一离满分最远（45 分），英语一和政治差不多，按错题情况定”"
-    }
-  },
-  "required_changes": [
-    "【中】E034 摘录补全为与 E033 相同的整句“3. 复试成绩（300 分）=机考（150 分）+外语听说能力测试（50 分）+综合素质考核（100 分）”（或在截断处加“…”），重新生成后核对 PDF p16“苏大计算机学院复试机考分值：150”下方原文不再出现 300=150+50。顺带查一遍 evidence.json 其他摘录有没有同样在原件换行处被截断的。",
-    "【轻】删去面向读者的开发用语“返工”：p14 第 12 节导语“软件工程学硕是这次返工新读的，只按放大图逐行读了一次”和 p18 E045 适用范围“本次返工看图逐行读出10行”，改成“软件工程学硕名单逐行看图读出 10 行，与学院公布的拟公开招考人数一致”这类说法（shared-rules 第一节：报告不出现开发用语）。第二轮复核已独立重读该图并一致，如登记为第二次读图，可同时改为“两次读图一致”。"
-  ],
-  "optional_improvements": [
-    "附录“分析用到的本人信息”去掉“其他”前缀（共用代码问题，已另行登记）。",
-    "p6“一志愿只录了个位数的人”只对 2026 年（3 人）成立，2025 年是 10 人；可改成“上一届一志愿只录 3 人”。",
-    "p2 数字卡“高于录取者里最低一档（按人数分四档）的最高分”仍稍绕，可直接写“高于录取者里分数靠后那四分之一”。"
-  ]
+  "independent": false
 }

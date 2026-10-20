@@ -6,11 +6,11 @@
     "profile_parse.json": "20107f71f9c2ed1d7b7198ad470d1be169109141f501371ea2c7181282f25078",
     "directions.json": "e0f392566f46366346e27a144c0011736d32860b9fb6b1826636ae7b561b071d",
     "rules_check.json": "c1d6d9f0f558110862a780d5074b67a0db12a8ae2c8d00874c49af851cb49b66",
-    "candidates.json": "27df56ddf8bb58990dd7899d25701ea130941536d14ebfbaec13ace23e1adb3f",
-    "evidence.json": "d549a89f8ddef75e8e0a36ac4df16b571766f60188d7a77ad82356083629498f",
+    "candidates.json": "763385ade499d0f08163b29594397f045a28e0add3cad1f2924b9db613a570cd",
+    "evidence.json": "b0519db8d224fa34627a9bbcd2af1df9e9fe500f7993cfeb89fc846d05143d07",
     "calculations.json": "d9da96c3e2546b239e866d1f561370c589b48febf5532f68a88226d2ccc1c368",
     "judgment.json": "ea2c913effcd942a8385576dcdbe1447c06c09263e90a51f58b03eb773703972",
-    "narrative.json": "aedad3711d2321b9e6179068d7b7cf7305b43c096ece2c3028c64343fe19d74f",
+    "narrative.json": "dc35149e66ae20b9fd6b40a18f2e65b6cc63b07c3df1e1957dcf8f26085f75dc",
     "profile.json": "af232e95b42de1286681d5b04d706bbd8d16d3dd86cfe304a7d87e5a6bfcab88",
     "profile-supplement.txt": "952368202eeb2cd031c6c0d52212442dca0faaadcd6c99828f951e50ba15d704"
   },
@@ -342,6 +342,12 @@
       "ref": "{{c:/math_to_full}}",
       "value": 45,
       "display": "45"
+    },
+    {
+      "location": "04.analysis.4",
+      "ref": "{{c:/hhu26_0835_count}}",
+      "value": 3,
+      "display": "3"
     },
     {
       "location": "06.score_ranges.1",
@@ -1581,9 +1587,9 @@
     }
   ],
   "artifacts": {
-    "report.md": "696dcb6834cc6ce39ea40a2dd15ff4f99e9f8b89af906ea1cc2fc8eead9aaff5",
-    "report.html": "2cdf4007c70549dcd132ff54b62613c5f6845a3355b254f629a046c20738c386",
-    "report.pdf": "8e5aabba5d86bb6b99da627537c1465c92d887c046e420c491421b19d910ee86"
+    "report.md": "3744b45ae20e5a751404b07bc2c0448e08fb836180dd9af2a1e5375d44b4e729",
+    "report.html": "d7f2e2dd0574c614baa78e027e0b621d1db9a801589ece042d94587a0829c521",
+    "report.pdf": "ceef13064f46888a4793544952243c62a6f5575fb4916488665cc2cda7967e8a"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "report_profile": {
