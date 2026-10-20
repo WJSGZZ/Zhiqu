@@ -43,8 +43,9 @@ AFTER_ENTRY_FIELDS = (
 AFTER_ENTRY_STATUSES = {"verified", "not_found", "unretrieved"}
 SOURCE_FIELDS = ("source_id", "grade", "publisher", "title", "landing_url", "file_url", "published", "retrieved", "method", "archive_sha256", "archive_path", "archive_status", "wayback_url", "note", "citation", "license", "producer_revision")
 LEGACY_SOURCE_FIELDS = ("source_id", "grade", "publisher", "title", "url", "landing_url", "published", "retrieved", "method", "note")
-ARCHIVE_STATUSES = {"已存原件", "原链接失效·存档副本", "未取到"}
-STORED_STATUSES = ARCHIVE_STATUSES - {"未取到"}
+STORED_STATUSES = {"已存原件", "原链接失效·存档副本"}
+DELETED_STATUSES = {"已核后删除（有指纹）", "已删除（有指纹，核对见记录）"}
+ARCHIVE_STATUSES = STORED_STATUSES | DELETED_STATUSES | {"未取到"}
 ORIGINAL_INDEX_FIELDS = ("sha256", "size", "media_type", "source_url", "retrieved", "source_id")
 REPO_ROOT = Path(__file__).resolve().parents[3]
 ORIGINALS_RELATIVE = Path("skills/zhiqu-shared/originals")
@@ -327,6 +328,11 @@ def check_sources(folder, files, repository_root=None):
                 _, error = _archive_file(root, archive, sha)
                 if error:
                     issues.append(f"{where} {error}")
+        elif status in DELETED_STATUSES:
+            if not re.fullmatch(r"[0-9a-f]{64}", sha):
+                issues.append(f"{where} 已删除原件必须有64位 archive_sha256")
+            if archive:
+                issues.append(f"{where} 已删除原件不得填写 archive_path")
         elif status == "未取到" and archive:
             issues.append(f"{where} 未取到不得填写 archive_path 或声称已存原件")
     used = set()
@@ -359,6 +365,18 @@ def check_originals_index(repository_root=None, index_path=None, source_paths=No
     directory = root / ORIGINALS_RELATIVE
     path = Path(index_path) if index_path else directory / "index.csv"
     issues, notes = [], []
+    if not directory.exists() and index_path is None:
+        # Current policy retains fingerprints/locators, then deletes originals.
+        # Absence of the legacy directory is valid; provenance rows still must
+        # satisfy the same URL, grade, date, status, hash and path invariants.
+        paths = list(source_paths) if source_paths is not None else [
+            p for p in root.glob("skills/*/data/**/sources.csv") if "purchased" not in p.parts]
+        for source_path in paths:
+            metadata_issues, _ = check_sources(Path(source_path).parent, [], root)
+            relative = str(Path(source_path).relative_to(root))
+            issues.extend(relative + "：" + issue for issue in metadata_issues)
+        notes.append(f"原件按删除政策不留存；已校验 {len(paths)} 份来源元数据")
+        return issues, notes
     if not path.is_file():
         return ["公开原件库缺 index.csv"], notes
     with path.open(encoding="utf-8-sig", newline="") as f:
