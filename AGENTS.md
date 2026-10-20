@@ -31,6 +31,7 @@
 - `job-market.md`：全国就业形势；
 - `outlook.md`：专业与行业前景；
 - `bazi-lens.md`：八字怎么用、用到哪一层。
+- `data-model.md`：高考、考研数据库的共同格式（学校身份、来源、核对、可直接使用的视图）。
 
 读研版和求职版共用 `skills/zhiqu-shared/references/direction-and-state.md`（迷茫与状态）。技能之间用相对路径互相引用，所以**四个技能和 `zhiqu-shared` 共用目录要同层安装**。
 
