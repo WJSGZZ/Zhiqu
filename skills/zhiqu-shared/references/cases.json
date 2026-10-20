@@ -350,9 +350,9 @@
       "report_versions": [
         {
           "file": "skills/zhiqu-career/examples/2027-QZ-S05/report.pdf",
-          "generated_at": "2026-10-20T17:53:12+08:00",
+          "generated_at": "2026-10-20T18:08:48+08:00",
           "version": "1",
-          "sha256": "01ab60b5ba5d2c6f90db59e733a6a5af5d145a40a11a3af40a8a18d8412e7076",
+          "sha256": "88ae1736bc213a98aaeca18a3620f9733c30788963a5d86bba3454492950db08",
           "profile_sha256": "f8c7a4b076a64c168d303710ea8836b70a79ffe5d53ce7521045bfe4ae4c2d1f"
         }
       ]
