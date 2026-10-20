@@ -1,6 +1,7 @@
 """公开层来源登记：sources.csv 格式与逐行 source_id（data-model.md）。"""
 import csv
 import os
+import re
 from pathlib import Path
 import sys
 import tempfile
@@ -44,6 +45,33 @@ class TestSourcesCheck(unittest.TestCase):
         self.assertTrue(any("grade" in i for i in issues))
         self.assertTrue(any("retrieved" in i for i in issues))
         self.assertTrue(any("重复" in i for i in issues))
+
+    def test_repository_public_sources_follow_deletion_policy(self):
+        for path in sorted(DATA.rglob('sources.csv')):
+            if 'purchased' in path.parts:
+                continue
+            with path.open(encoding='utf-8-sig', newline='') as f:
+                rows=list(csv.DictReader(f))
+            for row in rows:
+                with self.subTest(path=path, source_id=row['source_id']):
+                    self.assertIn(row['archive_status'], validate_data.DELETED_STATUSES | {'未取到'})
+                    self.assertEqual(row['archive_path'], '')
+                    self.assertNotIn('skills/zhiqu-shared/originals/', row['note'])
+                    self.assertNotIn('skills/zhiqu/data/purchased/originals/', row['note'])
+                    if row['archive_status'] in validate_data.DELETED_STATUSES:
+                        self.assertRegex(row['archive_sha256'], r'^[0-9a-f]{64}$')
+    def test_public_citation_uses_available_publication_or_title_year(self):
+        for path in sorted(DATA.rglob('sources.csv')):
+            if 'purchased' in path.parts:
+                continue
+            with path.open(encoding='utf-8-sig', newline='') as f:
+                rows=list(csv.DictReader(f))
+            for row in rows:
+                years=re.findall(r'(?<!\d)(?:19|20)\d{2}(?!\d)',row['published'] or row['title'])
+                if years:
+                    with self.subTest(path=path,source_id=row['source_id']):
+                        self.assertNotIn('年份未注明',row['citation'])
+                        self.assertTrue(any(year in row['citation'] for year in years))
 
     def test_repository_layer_fully_sourced(self):
         provinces = [d for d in sorted(os.listdir(DATA)) if (DATA / d).is_dir() and d not in validate_data.SKIP_DIRS]

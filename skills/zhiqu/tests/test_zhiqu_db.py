@@ -1,0 +1,138 @@
+import contextlib
+import hashlib
+import importlib.util
+import io
+import json
+from pathlib import Path
+import sqlite3
+import tempfile
+import unittest
+from unittest import mock
+
+SCRIPT=Path(__file__).resolve().parents[2]/'zhiqu-shared/scripts/zhiqu_db.py'
+spec=importlib.util.spec_from_file_location('zhiqu_db',SCRIPT);db=importlib.util.module_from_spec(spec);spec.loader.exec_module(db)
+
+class UnifiedQueries(unittest.TestCase):
+ def setUp(self):
+  self.temp=tempfile.TemporaryDirectory();self.path=Path(self.temp.name)/'fixture.sqlite';c=sqlite3.connect(self.path)
+  c.executescript('''
+CREATE TABLE institution(institution_id TEXT,name TEXT,moe_code TEXT,province TEXT,status TEXT,established TEXT,closed TEXT,successor_id TEXT);
+CREATE TABLE institution_alias(institution_id TEXT,alias TEXT,province TEXT,year INTEGER,year_from INTEGER,year_to INTEGER);
+CREATE TABLE institution_event(institution_id TEXT,name_before TEXT,name_after TEXT,effective TEXT,status TEXT,successor_id TEXT,source_id TEXT);
+CREATE TABLE source(source_id TEXT,grade TEXT,publisher TEXT,title TEXT,landing_url TEXT,file_url TEXT,archive_sha256 TEXT,archive_path TEXT,archive_status TEXT,retrieved TEXT);
+CREATE TABLE ky_retest_line(record_id TEXT,institution_id TEXT,year INTEGER,college TEXT,program_code TEXT,program_name TEXT,total REAL,english REAL,politics REAL,direction TEXT,joint_program TEXT,special_plan TEXT,admission_route TEXT,study_mode TEXT,source_id TEXT,value_status TEXT,quarantine_reason TEXT,note TEXT,verification_status TEXT,src_locator TEXT,excerpt_locator_json TEXT);
+CREATE VIEW ky_v_retest_line AS SELECT * FROM ky_retest_line WHERE quarantine_reason IS NULL;
+CREATE TABLE gk_official_cutoff(institution_id TEXT,province TEXT,year INTEGER,major_code TEXT,plan_type TEXT,score REAL,source_id TEXT,value_status TEXT);
+CREATE TABLE institution_profile(institution_id TEXT,year INTEGER,recommend_rate TEXT,n_master TEXT,n_phd TEXT,source_id TEXT,value_status TEXT,year_status TEXT);
+CREATE TABLE comparability(scope TEXT,effective_year INTEGER,change TEXT,impact TEXT,source_id TEXT);
+CREATE TABLE job_summary(position_id TEXT,region TEXT,year INTEGER,major_clause TEXT,headcount INTEGER,paid_applicants INTEGER,paid_per_seat REAL,source_id TEXT,application_source_id TEXT,value_status TEXT,excerpt TEXT,excerpt_kind TEXT);
+CREATE TABLE wage_stat(region TEXT,year INTEGER,"group" TEXT,p50 REAL,unit TEXT,source_id TEXT,value_status TEXT,excerpt TEXT,excerpt_kind TEXT);
+CREATE TABLE competition_stat(province TEXT,year INTEGER,"group" TEXT,n_jobs INTEGER,share_below_10 REAL,unit TEXT,source_id TEXT,value_status TEXT);
+CREATE TABLE civil_major_summary(region TEXT,year INTEGER,major_name TEXT,share TEXT,source_major_code TEXT,source_id TEXT,value_status TEXT);
+''')
+  c.executemany('INSERT INTO institution VALUES (?,?,?,?,?,?,?,?)',[('1','甲大学','10001','江苏','在办',None,None,None),('2','旧学院','10002','江苏','转设','1999','2025','3'),('3','新大学','10003','江苏','在办','2026',None,None),('4','同名学校','10004','北京','在办',None,None,None),('5','同名学校','10005','上海','在办',None,None,None)])
+  c.executemany('INSERT INTO institution_alias VALUES (?,?,?,?,?,?)',[('1','甲大','',None,None,None),('1','10001','',None,None,None),('1','旧甲大','',None,None,2025),('2','旧学院','',None,None,2025),('3','新大学','',None,2026,None),('4','同名','',None,None,None),('5','同名','',None,None,None)])
+  c.execute("INSERT INTO institution_event VALUES ('2','旧学院','新大学','2025-07','转设','3','s')")
+  c.executemany('INSERT INTO source VALUES (?,?,?,?,?,?,?,?,?,?)',[('s','官方','甲大学研究生院','复试线','https://a.edu.cn/notice','https://a.edu.cn/a.pdf','abc','original.pdf','已存原件','2026-01-02'),('v','第三方整理','购买汇编','学校概况','','','','','未取到','2026-01-02')])
+  for i,(year,code,total,direction,special,quarantine) in enumerate([(2025,'085404',310,'01','普通',None),(2026,'085404',320,'02','联培',None),(2026,'085410',330,'03','退役',None),(2026,'085404',999,'04','普通','隔离错误')]):
+   c.execute('INSERT INTO ky_retest_line VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',(str(i),'1',year,'计算机学院',code,'具体专业',total,None,None,direction,'联合单位' if special=='联培' else '无',special,'一志愿','全日制','s',json.dumps({'total':{'status':'官方原值'},'english':{'status':'原件缺失','reason':'未取得单科原文'}}),quarantine,'第1门政治/管理综合，未强配','未逐行核准','PDF第2页表1第3行','{}'))
+  c.executemany('INSERT INTO gk_official_cutoff VALUES (?,?,?,?,?,?,?,?)',[('1','山东',2026,'0854','普通',600,'s','{}'),('1','山东',2026,'0854','中外合作',550,'s','{}')])
+  c.execute("INSERT INTO institution_profile VALUES ('1',NULL,'0.586','10','2','v','{}','年份未记录')")
+  c.execute("INSERT INTO comparability VALUES ('甲大学',2026,'考试科目改革','跨年分数不可直接比较','s')")
+  c.execute('INSERT INTO job_summary VALUES (?,?,?,?,?,?,?,?,?,?,?,?)',('j','浙江',2026,'计算机科学与技术',2,20,10,'s','v','{}','原表匿名岗位单元格','原表单元格摘录'))
+  c.execute('INSERT INTO wage_stat VALUES (?,?,?,?,?,?,?,?,?)',('浙江·杭州',2022,'计算机专业人员',95000,'元/年','s','{"p50":"官方原值"}','{"原整理列":"95000"}','既有整理CSV逐字记录，非官网原文摘录'))
+  c.execute('INSERT INTO competition_stat VALUES (?,?,?,?,?,?,?,?)',('浙江',2026,'计算机',100,.16,'缴费人数/招录人数','s','{"share_below_10":"推算"}'))
+  c.execute('INSERT INTO civil_major_summary VALUES (?,?,?,?,?,?,?)',('广东',2026,'计算机科学与技术','30.7%','B080901','s','{"share":"推算"}'))
+  c.commit();c.close()
+ def tearDown(self):self.temp.cleanup()
+ def school(self,*args,**kw):return db.query_school(*args,db=self.path,**kw)
+ def program(self,*args,**kw):return db.query_program(*args,db=self.path,**kw)
+ def test_alias_and_admission_code(self):
+  self.assertEqual(self.school('甲大')['identity']['institution_id'],'1');self.assertEqual(self.school('10001')['identity']['institution_id'],'1')
+ def test_ambiguous_never_picks_one(self):
+  with self.assertRaises(db.QueryError):self.school('同名')
+  self.assertEqual(self.school('同名',province='北京')['identity']['institution_id'],'4')
+ def test_transfer_wrong_year_not_current_dictionary_bypass(self):
+  with self.assertRaises(db.QueryError):self.school('旧学院',year=2026)
+  with self.assertRaises(db.QueryError):self.school('新大学',year=2025)
+  self.assertIn('旧学院',db.render_text(self.school('旧学院',year=2025)))
+ def test_direct_id_terminal_year_guard(self):
+  with self.assertRaises(db.QueryError):self.school('2',year=2026)
+ def test_old_alias_no_year_filters_actual_business_year(self):
+  r=self.program('旧甲大','0854');years={x['context']['year'] for s in r['sections'] for x in s['rows']};self.assertEqual(years,{2025})
+ def test_program_prefix_preserves_scopes_and_excludes_quarantine(self):
+  r=self.program('甲大','0854');rows=[x for s in r['sections'] for x in s['rows']];self.assertEqual(len(rows),3);self.assertEqual({x['context']['program_code'] for x in rows},{'085404','085410'});self.assertEqual({x['context']['direction'] for x in rows},{'01','02','03'});self.assertNotIn(999,{x['values']['total']['value'] for x in rows})
+ def test_undergraduate_code_not_joined_to_postgraduate_code(self):
+  r=self.program('甲大','0854');self.assertTrue(all(s['table'].startswith('ky_') for s in r['sections']))
+ def test_plan_types_and_candidate_province_preserved(self):
+  r=self.school('甲大',province='山东');s=next(x for x in r['sections'] if x['table']=='gk_official_cutoff');self.assertEqual(s['total'],2);self.assertEqual({x['context']['plan_type'] for x in s['rows']},{'普通','中外合作'})
+ def test_every_value_has_grade_origin_id_status(self):
+  r=self.program('甲大','0854');v=r['sections'][0]['rows'][0]['values']['total'];self.assertEqual((v['grade'],v['publisher'],v['source_id']),('官方','甲大学研究生院','s'));self.assertEqual(v['value_status']['status'],'官方原值')
+ def test_null_missing_original_not_unpublished(self):
+  text=db.render_text(self.program('甲大','0854'));self.assertIn('原件缺失〔官方',text);self.assertNotIn('：未公布',text)
+ def test_pagination_explicit_and_exact_total(self):
+  r=self.program('甲大','0854',limit=1,offset=1);s=r['sections'][0];self.assertEqual((s['total'],s['returned'],s['truncated'],s['offset']),(3,1,1,1));self.assertIn('后续1行未显示',db.render_text(r))
+ def test_comparability_warning(self):self.assertTrue(any('跨年口径' in x for x in self.program('甲大','0854')['warnings']))
+ def test_third_party_ratio_not_auto_integer_or_probability(self):
+  r=self.school('甲大');s=next(x for x in r['sections'] if x['table']=='institution_profile');v=s['rows'][0]['values']['recommend_rate'];self.assertEqual(v['value'],'0.586');self.assertEqual(v['grade'],'第三方整理');self.assertIn('0.586',db.render_text(r))
+ def test_source_detail_and_excerpt_kind(self):
+  r=db.query_source('s',db=self.path);text=db.render_text(r);self.assertIn('https://a.edu.cn/a.pdf',text);self.assertIn('abc',text);self.assertIn('2026-01-02',text);self.assertIn('PDF第2页',text)
+ def test_jobs_regions_units_and_not_person_probability(self):
+  r=db.query_jobs(region='浙江',major='计算机',db=self.path);text=db.render_text(r);self.assertIn('元/年',text);self.assertIn('非个人',text);self.assertIn('在岗',text);self.assertNotIn('录用概率为',text)
+ def test_percent_string_preserved(self):
+  r=db.query_jobs(region='广东',major='计算机',db=self.path);v=r['sections'][0]['rows'][0]['values']['share'];self.assertEqual(v['value'],'30.7%')
+ def test_readonly_bytes_unchanged_and_query_only(self):
+  before=hashlib.sha256(self.path.read_bytes()).digest();self.school('甲大');db.query_jobs(db=self.path)
+  with db._open('education',self.path) as (c,p):
+   with self.assertRaises(sqlite3.OperationalError):c.execute('DELETE FROM data.source')
+  self.assertEqual(before,hashlib.sha256(self.path.read_bytes()).digest())
+ def test_cli_default_table_and_explicit_json(self):
+  out=io.StringIO()
+  with contextlib.redirect_stdout(out):db.main(['program','甲大','0854','--db',str(self.path),'--limit','1'])
+  self.assertIn('适用范围 | 数值',out.getvalue());self.assertFalse(out.getvalue().startswith('{'))
+  out=io.StringIO()
+  with contextlib.redirect_stdout(out):db.main(['program','甲大','0854','--db',str(self.path),'--json'])
+  self.assertEqual(json.loads(out.getvalue())['query'],'program')
+ def test_unclosed_location_excluded_and_counted(self):
+  c=sqlite3.connect(self.path);c.execute("UPDATE ky_retest_line SET verification_status='原文定位未闭合' WHERE record_id='2'");c.commit();c.close()
+  r=self.program('甲大','0854');self.assertEqual(r['sections'][0]['total'],2);self.assertTrue(any('未闭合 1 行' in x for x in r['warnings']))
+ def test_ordinary_rename_same_id_shows_chain(self):
+  c=sqlite3.connect(self.path);c.execute("INSERT INTO institution_event VALUES ('1','旧甲大','甲大学','2026-01','更名','1','s')");c.commit();c.close()
+  r=self.school('旧甲大',year=2026);self.assertEqual(r['identity']['institution_id'],'1');self.assertTrue(any('历史名称' in x for x in r['warnings']))
+ def test_source_compiled_excerpt_marked_not_original(self):
+  text=db.render_text(db.query_source('s',db=self.path,domain='employment',limit=10));self.assertIn('非官网原文摘录',text)
+ def test_paid_ratio_names_both_input_sources(self):
+  r=db.query_jobs(region='浙江',major='计算机',db=self.path);v=r['sections'][0]['rows'][0]['values']['paid_per_seat'];self.assertEqual(v['source_id'],'s + v');self.assertEqual(v['grade'],'第三方整理')
+ def test_legacy_generic_subjects_not_called_politics_or_math(self):
+  c=sqlite3.connect(self.path);c.execute("UPDATE ky_retest_line SET note='原表单科=100/单科>100，不区分政治英语',politics=35,english=35 WHERE record_id='1'");c.commit();c.close()
+  r=self.program('甲大','0854',year=2026);v=next(x for x in r['sections'][0]['rows'] if x['record_id']=='1')['values'];self.assertEqual(v['politics']['value'],35);self.assertIn('历史槽位',v['politics']['display_label']);text=db.render_text(r);self.assertNotIn('原列政治/首科（须核口径）：35',text)
+ def test_postgraduate_warning_does_not_use_gaokao_reform(self):
+  c=sqlite3.connect(self.path);c.execute('ALTER TABLE comparability ADD COLUMN domain TEXT');c.execute("UPDATE comparability SET domain='高考'");c.commit();c.close()
+  self.assertFalse(any('跨年口径' in x for x in self.program('甲大','0854')['warnings']))
+ def test_admission_province_not_school_location_disambiguation(self):
+  c=sqlite3.connect(self.path);c.execute('ALTER TABLE institution_alias ADD COLUMN kind TEXT');c.executemany('INSERT INTO institution_alias VALUES (?,?,?,?,?,?,?)',[('1','8888','江苏',2025,None,None,'省招生代码'),('4','8888','江苏',2026,None,None,'省招生代码')]);c.commit();c.close()
+  with self.assertRaises(db.QueryError):self.school('8888',province='江苏')
+  self.assertEqual(self.school('8888',province='江苏',year=2026)['identity']['institution_id'],'4')
+ def test_continuation_actual_quote_and_hash_binding(self):
+  root=Path(self.temp.name);folder=root/'shared/data';folder.mkdir(parents=True)
+  evidence={'canonical_row_sha256':'bound','continuation_actual_evidence':{'field_excerpt':{'header':['学院','专业','总分'],'raw_row':['甲学院','085404','320']}}}
+  path=folder/'line_evidence.jsonl';path.write_text(json.dumps(evidence,ensure_ascii=False)+'\n')
+  loc={'path':'shared/data/line_evidence.jsonl','jsonl_line':1,'sha256':'bound'}
+  with mock.patch.object(db,'ROOT',root),mock.patch.object(db,'SHARED',root/'shared'):
+   self.assertEqual(db._original_excerpt(loc)['continuation_actual_evidence'],evidence['continuation_actual_evidence'])
+   self.assertIn('指纹不符',db._original_excerpt(dict(loc,sha256='wrong'))['摘录状态'])
+ def test_default_text_displays_verified_image_locator(self):
+  refs={'root_verified_image_references':[{'method':'读图','locator':'第2页表1','sha256':'image-real-sha','source_id':'image-source'}]}
+  c=sqlite3.connect(self.path);c.execute('UPDATE ky_retest_line SET excerpt_locator_json=? WHERE record_id=?',(json.dumps(refs,ensure_ascii=False),'1'));c.commit();c.close()
+  text=db.render_text(self.program('甲大','0854',year=2026));self.assertIn('读图定位',text);self.assertIn('image-real-sha',text);self.assertIn('第2页表1',text)
+ def test_tuition_raw_is_not_unit_or_currency_inference(self):
+  self.assertNotIn('5460',db._unit('gk_plan_entry','tuition',{'tuition_raw':'5460'}))
+  self.assertIn('币种与计费周期未标明',db._unit('gk_plan_entry','tuition',{'tuition_raw':'5460'}))
+ def test_unknown_null_not_mislabeled_source_omission(self):
+  v={'value':None,'value_status':{'status':'未标记（待核）'},'grade':'官方','publisher':'甲大','source_id':'s'}
+  self.assertNotIn('来源未提供',db._value_text(v))
+ def test_invalid_pagination_and_code_rejected(self):
+  with self.assertRaises(db.QueryError):self.school('甲大',limit=0)
+  with self.assertRaises(db.QueryError):self.program('甲大',"0854';DELETE")
+
+if __name__=='__main__':unittest.main()
