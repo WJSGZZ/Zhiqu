@@ -2,15 +2,15 @@
   "schema_version": 1,
   "case_id": "2027-QZ-S05",
   "source_sha256": {
-    "case.json": "05cf7f944cdc718196d9f0a98dfe8e456cd7a42104d8ec260d598d5c116b8eef",
-    "profile_parse.json": "bef4c373f4f3e2c4c29f5382f4899cbfa2055bf7848b6e6efc4bb06542b6d4dc",
-    "directions.json": "c596542a75e4d5caa51814b26c579c39025f30f53abb8a6e495db95c50c781b2",
-    "rules_check.json": "97d370958806925e975acac686272114fc6e0a8c331ab3ede958c87edb4ca240",
-    "candidates.json": "25cd8c14aca6037ea7a7059de5fb2ffac815e9251911ab2e330f87f27d22d5d3",
-    "evidence.json": "5ee87b6aa1c50db703154ae05c7ae28fa153d7c440cd0f376363ee25c0a62048",
-    "calculations.json": "d4d64f9635fb2d2fcd3e532e7f3f1fdd8ba8f2602919bd0097a645e10133934b",
-    "judgment.json": "59baed266dba9e951803f02cc90f9a62c64b6a61b1fa803d514dc74447a28131",
-    "narrative.json": "15c1d32fde373113162744c4163aa467c43f580eec16616b858b831e858ee80a",
+    "case.json": "718f6879c7ea5f74099322688a55e99056cfac30fa36248ca5151cb4a137e155",
+    "profile_parse.json": "ca28989bbe8fae3f6def3dcc789a8b04dd9101d78bd065fd815788b92197d604",
+    "directions.json": "d3369a37d4e78632f8f33292439606e85b7248196454452eb40eded886aac9a1",
+    "rules_check.json": "aadb64ede706f87480d8eafb6dda580b32616981dae8d3c860b4536970ee3bf0",
+    "candidates.json": "fddd4f4cdfbb30329f9192067abdc4a3440e47333ceae4f5becf4a7e6975947c",
+    "evidence.json": "5e70cfa2ad76bc09b8ed9b9737029ad5c53cf281676fcc6ee4d272542a58d9b5",
+    "calculations.json": "896c085db52b861b364d5c8d47de04b87f565fdd5875520c260ebabc4a75a8f6",
+    "judgment.json": "5176c2023bab7907afc0c29b40b0d584a1272041ff280d04baa343a85c5f594f",
+    "narrative.json": "10631eb91b5286559d4c24e7c24d466a9f2368b7ee348265d2187df89ba81ebd",
     "profile.json": "f8c7a4b076a64c168d303710ea8836b70a79ffe5d53ce7521045bfe4ae4c2d1f",
     "profile-supplement.txt": "247f31f22f4c9a6c33394b5b25e3b37ef21c19fd3b9c12a70a83839f7976b026"
   },
@@ -45,21 +45,9 @@
     },
     {
       "location": "meta.conclusion",
-      "ref": "{{k:/target_year}}",
-      "value": 2027,
-      "display": "2027"
-    },
-    {
-      "location": "meta.conclusion",
-      "ref": "{{c:/fa_median|1f}}",
-      "value": 54.5,
-      "display": "54.5"
-    },
-    {
-      "location": "meta.conclusion",
-      "ref": "{{c:/fa_vs_all|1f}}",
-      "value": 1.9,
-      "display": "1.9"
+      "ref": "{{c:/fa_ok_median|1f}}",
+      "value": 64.5,
+      "display": "64.5"
     },
     {
       "location": "meta.conclusion",
@@ -74,16 +62,22 @@
       "display": "10 月 31 日"
     },
     {
-      "location": "01.kpis.2",
-      "ref": "{{c:/fa_median|1f}}",
-      "value": 54.5,
-      "display": "54.5"
+      "location": "meta.conclusion",
+      "ref": "{{k:/context/personal_dates/checkpoint|md}}",
+      "value": "2026-11-01",
+      "display": "11 月 1 日"
     },
     {
       "location": "01.kpis.2",
-      "ref": "{{c:/fa_vs_all|1f}}",
-      "value": 1.9,
-      "display": "1.9"
+      "ref": "{{c:/fa_ok_median|1f}}",
+      "value": 64.5,
+      "display": "64.5"
+    },
+    {
+      "location": "01.kpis.2",
+      "ref": "{{c:/fa_ok_vs_all|1f}}",
+      "value": 2.2,
+      "display": "2.2"
     },
     {
       "location": "01.kpis.2",
@@ -117,9 +111,9 @@
     },
     {
       "location": "01.core_points.3",
-      "ref": "{{c:/fa_median|1f}}",
-      "value": 54.5,
-      "display": "54.5"
+      "ref": "{{c:/fa_ok_median|1f}}",
+      "value": 64.5,
+      "display": "64.5"
     },
     {
       "location": "01.core_points.3",
@@ -147,6 +141,12 @@
     },
     {
       "location": "01.actions.4",
+      "ref": "{{p:/fields/27/value}}",
+      "value": 5,
+      "display": "5"
+    },
+    {
+      "location": "01.actions.4",
       "ref": "{{k:/context/personal_dates/action1}}",
       "value": "2026-10-31",
       "display": "2026-10-31"
@@ -154,20 +154,44 @@
     {
       "location": "01.actions.4",
       "ref": "{{k:/context/personal_dates/action2|md}}",
-      "value": "2026-11-10",
-      "display": "11 月 10 日"
+      "value": "2026-10-31",
+      "display": "10 月 31 日"
     },
     {
       "location": "01.actions.4",
       "ref": "{{k:/context/personal_dates/action2}}",
-      "value": "2026-11-10",
-      "display": "2026-11-10"
+      "value": "2026-10-31",
+      "display": "2026-10-31"
     },
     {
       "location": "01.checkpoint.5",
       "ref": "{{k:/context/personal_dates/checkpoint|ymd_cn}}",
-      "value": "2026-11-15",
-      "display": "2026 年 11 月 15 日"
+      "value": "2026-11-01",
+      "display": "2026 年 11 月 1 日"
+    },
+    {
+      "location": "01.checkpoint.5",
+      "ref": "{{e:E006#/value|md}}",
+      "value": "2025-11-06",
+      "display": "11 月 6 日"
+    },
+    {
+      "location": "01.checkpoint.5",
+      "ref": "{{e:E054#/value|md}}",
+      "value": "2025-11-11",
+      "display": "11 月 11 日"
+    },
+    {
+      "location": "01.checkpoint.5",
+      "ref": "{{e:E029#/value}}",
+      "value": "2026年11月中旬",
+      "display": "2026年11月中旬"
+    },
+    {
+      "location": "01.analysis.7",
+      "ref": "{{c:/fa_ok_count}}",
+      "value": 84,
+      "display": "84"
     },
     {
       "location": "02.figure.1",
@@ -189,7 +213,19 @@
     },
     {
       "location": "02.figure.1",
+      "ref": "{{p:/fields/25/value}}",
+      "value": "女",
+      "display": "女"
+    },
+    {
+      "location": "02.figure.1",
       "ref": "{{p:/fields/10/value}}",
+      "value": "浙江",
+      "display": "浙江"
+    },
+    {
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/26/value}}",
       "value": "浙江",
       "display": "浙江"
     },
@@ -326,6 +362,12 @@
       "display": "162899"
     },
     {
+      "location": "04.directions.2",
+      "ref": "{{c:/fa_ok_count}}",
+      "value": 84,
+      "display": "84"
+    },
+    {
       "location": "04.analysis.4",
       "ref": "{{e:E018#/value|comma}}",
       "value": 95000,
@@ -354,6 +396,24 @@
       "ref": "{{e:E021#/value|comma}}",
       "value": 169320,
       "display": "169,320"
+    },
+    {
+      "location": "05.figure.1",
+      "ref": "{{c:/fa_ok_q1}}",
+      "value": 48.0,
+      "display": "48"
+    },
+    {
+      "location": "05.figure.1",
+      "ref": "{{c:/fa_ok_q3}}",
+      "value": 90.0,
+      "display": "90"
+    },
+    {
+      "location": "05.figure.1",
+      "ref": "{{c:/fa_ok_median}}",
+      "value": 64.5,
+      "display": "64.5"
     },
     {
       "location": "05.figure.1",
@@ -411,21 +471,27 @@
     },
     {
       "location": "05.analysis.2",
-      "ref": "{{c:/fa_median|1f}}",
-      "value": 54.5,
-      "display": "54.5"
+      "ref": "{{c:/fa_ok_count}}",
+      "value": 84,
+      "display": "84"
     },
     {
       "location": "05.analysis.2",
-      "ref": "{{c:/fa_q1|1f}}",
-      "value": 39.0,
-      "display": "39.0"
+      "ref": "{{c:/fa_ok_median|1f}}",
+      "value": 64.5,
+      "display": "64.5"
     },
     {
       "location": "05.analysis.2",
-      "ref": "{{c:/fa_q3|1f}}",
-      "value": 75.0,
-      "display": "75.0"
+      "ref": "{{c:/fa_ok_q1|1f}}",
+      "value": 48.0,
+      "display": "48.0"
+    },
+    {
+      "location": "05.analysis.2",
+      "ref": "{{c:/fa_ok_q3|1f}}",
+      "value": 90.0,
+      "display": "90.0"
     },
     {
       "location": "05.analysis.2",
@@ -435,9 +501,21 @@
     },
     {
       "location": "05.analysis.2",
-      "ref": "{{c:/fa_vs_all|1f}}",
-      "value": 1.9,
-      "display": "1.9"
+      "ref": "{{c:/fa_ok_vs_all|1f}}",
+      "value": 2.2,
+      "display": "2.2"
+    },
+    {
+      "location": "05.analysis.2",
+      "ref": "{{c:/fa_count}}",
+      "value": 133,
+      "display": "133"
+    },
+    {
+      "location": "05.analysis.2",
+      "ref": "{{c:/fa_median|1f}}",
+      "value": 54.5,
+      "display": "54.5"
     },
     {
       "location": "05.analysis.2",
@@ -447,15 +525,39 @@
     },
     {
       "location": "06.figure.1",
-      "ref": "{{c:/fa_count}}",
-      "value": 133,
-      "display": "133"
+      "ref": "{{c:/fa_ok_count}}",
+      "value": 84,
+      "display": "84"
     },
     {
       "location": "06.figure.1",
-      "ref": "{{c:/fa_count}}",
-      "value": 133,
-      "display": "133"
+      "ref": "{{c:/fa_ok_count}}",
+      "value": 84,
+      "display": "84"
+    },
+    {
+      "location": "06.figure.1",
+      "ref": "{{c:/fa_unk_count}}",
+      "value": 13,
+      "display": "13"
+    },
+    {
+      "location": "06.figure.1",
+      "ref": "{{c:/fa_unk_count}}",
+      "value": 13,
+      "display": "13"
+    },
+    {
+      "location": "06.figure.1",
+      "ref": "{{c:/fa_fail_count}}",
+      "value": 36,
+      "display": "36"
+    },
+    {
+      "location": "06.figure.1",
+      "ref": "{{c:/fa_fail_count}}",
+      "value": 36,
+      "display": "36"
     },
     {
       "location": "06.figure.1",
@@ -489,21 +591,69 @@
     },
     {
       "location": "06.analysis.3",
+      "ref": "{{c:/fa_fail_count}}",
+      "value": 36,
+      "display": "36"
+    },
+    {
+      "location": "06.analysis.3",
+      "ref": "{{c:/fa_unk_count}}",
+      "value": 13,
+      "display": "13"
+    },
+    {
+      "location": "06.analysis.3",
+      "ref": "{{c:/fa_ok_count}}",
+      "value": 84,
+      "display": "84"
+    },
+    {
+      "location": "06.analysis.3",
       "ref": "{{c:/fc_count}}",
       "value": 98,
       "display": "98"
     },
     {
       "location": "06.analysis.3",
+      "ref": "{{c:/fc_fail_count}}",
+      "value": 39,
+      "display": "39"
+    },
+    {
+      "location": "06.analysis.3",
+      "ref": "{{c:/fc_unk_count}}",
+      "value": 19,
+      "display": "19"
+    },
+    {
+      "location": "06.analysis.3",
       "ref": "{{c:/fb_count}}",
       "value": 44,
       "display": "44"
+    },
+    {
+      "location": "06.analysis.3",
+      "ref": "{{c:/fb_fail_count}}",
+      "value": 17,
+      "display": "17"
     },
     {
       "location": "07.lead.0",
       "ref": "{{e:E005#/value|md_hm}}",
       "value": "2026-10-23T18:00",
       "display": "10-23 18:00"
+    },
+    {
+      "location": "07.lead.0",
+      "ref": "{{e:E006#/value|md}}",
+      "value": "2025-11-06",
+      "display": "11 月 6 日"
+    },
+    {
+      "location": "07.lead.0",
+      "ref": "{{k:/context/personal_dates/checkpoint|md}}",
+      "value": "2026-11-01",
+      "display": "11 月 1 日"
     },
     {
       "location": "07.timeline.1",
@@ -519,21 +669,39 @@
     },
     {
       "location": "07.timeline.1",
-      "ref": "{{e:E005#/value|md_hm}}",
+      "ref": "{{k:/context/personal_dates/action1|md_short}}",
+      "value": "2026-10-31",
+      "display": "10-31"
+    },
+    {
+      "location": "07.timeline.1",
+      "ref": "{{e:E005#/value|md_short}}",
       "value": "2026-10-23T18:00",
-      "display": "10-23 18:00"
+      "display": "10-23"
     },
     {
       "location": "07.timeline.1",
       "ref": "{{k:/context/personal_dates/checkpoint|ym}}",
-      "value": "2026-11-15",
+      "value": "2026-11-01",
       "display": "2026.11"
     },
     {
       "location": "07.timeline.1",
       "ref": "{{k:/context/personal_dates/checkpoint|md_short}}",
-      "value": "2026-11-15",
-      "display": "11-15"
+      "value": "2026-11-01",
+      "display": "11-01"
+    },
+    {
+      "location": "07.timeline.1",
+      "ref": "{{e:E006#/value|md_short}}",
+      "value": "2025-11-06",
+      "display": "11-06"
+    },
+    {
+      "location": "07.timeline.1",
+      "ref": "{{e:E054#/value|md_short}}",
+      "value": "2025-11-11",
+      "display": "11-11"
     },
     {
       "location": "07.timeline.1",
@@ -561,6 +729,30 @@
     },
     {
       "location": "07.timeline.1",
+      "ref": "{{k:/context/personal_dates/cert_signup|ym}}",
+      "value": "2027-01-05",
+      "display": "2027.01"
+    },
+    {
+      "location": "07.timeline.1",
+      "ref": "{{e:E055#/value|md_short}}",
+      "value": "2026-01-05",
+      "display": "01-05"
+    },
+    {
+      "location": "07.timeline.1",
+      "ref": "{{e:E036#/value|md_short}}",
+      "value": "2026-01-27",
+      "display": "01-27"
+    },
+    {
+      "location": "07.timeline.1",
+      "ref": "{{e:E037#/value|md_short}}",
+      "value": "2026-05-16",
+      "display": "05-16"
+    },
+    {
+      "location": "07.timeline.1",
       "ref": "{{k:/context/personal_dates/spring|ym}}",
       "value": "2027-03-15",
       "display": "2027.03"
@@ -570,18 +762,6 @@
       "ref": "{{k:/context/personal_dates/spring|md_short}}",
       "value": "2027-03-15",
       "display": "03-15"
-    },
-    {
-      "location": "07.timeline.1",
-      "ref": "{{k:/context/personal_dates/cert|ym}}",
-      "value": "2027-05-15",
-      "display": "2027.05"
-    },
-    {
-      "location": "07.timeline.1",
-      "ref": "{{k:/context/personal_dates/cert|md_short}}",
-      "value": "2027-05-15",
-      "display": "05-15"
     },
     {
       "location": "07.timeline.1",
@@ -621,9 +801,21 @@
     },
     {
       "location": "07.analysis.3",
+      "ref": "{{e:E054#/value|md}}",
+      "value": "2025-11-11",
+      "display": "11 月 11 日"
+    },
+    {
+      "location": "07.analysis.3",
       "ref": "{{e:E007#/value|ymd_cn}}",
       "value": "2025-12-07",
       "display": "2025 年 12 月 7 日"
+    },
+    {
+      "location": "07.analysis.3",
+      "ref": "{{k:/context/personal_dates/checkpoint|md}}",
+      "value": "2026-11-01",
+      "display": "11 月 1 日"
     },
     {
       "location": "07.analysis.3",
@@ -669,9 +861,21 @@
     },
     {
       "location": "08.routes.2",
+      "ref": "{{e:E054#/value|md}}",
+      "value": "2025-11-11",
+      "display": "11 月 11 日"
+    },
+    {
+      "location": "08.routes.2",
       "ref": "{{e:E007#/value|md}}",
       "value": "2025-12-07",
       "display": "12 月 7 日"
+    },
+    {
+      "location": "08.routes.2",
+      "ref": "{{k:/context/personal_dates/checkpoint|md}}",
+      "value": "2026-11-01",
+      "display": "11 月 1 日"
     },
     {
       "location": "08.routes.2",
@@ -699,6 +903,12 @@
     },
     {
       "location": "08.routes.4",
+      "ref": "{{e:E055#/value|md}}",
+      "value": "2026-01-05",
+      "display": "1 月 5 日"
+    },
+    {
+      "location": "08.routes.4",
       "ref": "{{e:E036#/value|md}}",
       "value": "2026-01-27",
       "display": "1 月 27 日"
@@ -711,6 +921,12 @@
     },
     {
       "location": "08.routes.4",
+      "ref": "{{k:/context/personal_dates/year_end|md}}",
+      "value": "2026-12-31",
+      "display": "12 月 31 日"
+    },
+    {
+      "location": "08.routes.4",
       "ref": "{{e:E040#/value|md}}",
       "value": "2026-07-20",
       "display": "7 月 20 日"
@@ -720,6 +936,12 @@
       "ref": "{{p:/fields/15/value}}",
       "value": 12,
       "display": "12"
+    },
+    {
+      "location": "08.analysis.6",
+      "ref": "{{e:E055#/value|md}}",
+      "value": "2026-01-05",
+      "display": "1 月 5 日"
     },
     {
       "location": "08.analysis.6",
@@ -957,9 +1179,9 @@
     }
   ],
   "artifacts": {
-    "report.md": "98c7ca073db34621115287b6e389b58cb2d214b803b3402fbbcfcd4bc0f70d82",
-    "report.html": "fb890e517e6618e562ee481fedcc441e640cd9d83814190dd26a20d50b0699a1",
-    "report.pdf": "8ead24886b77b8d33c7874fcbeee3b575a3d0e9b7dc72468f442a1a42acce2a7"
+    "report.md": "a6992bc57053eeb6a9c5b14f0c4b52da64ea6be4942836e4ab2eba409b9bfb70",
+    "report.html": "d30fc4ebac589c5ca451c78e78405ddf719164d8bc4430e37e8e2db9ff4acef2",
+    "report.pdf": "01ab60b5ba5d2c6f90db59e733a6a5af5d145a40a11a3af40a8a18d8412e7076"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "report_profile": {

@@ -236,6 +236,33 @@
       "locator": "「心里话」一节",
       "status": "given",
       "confirmed": true
+    },
+    {
+      "field": "性别",
+      "value": "女",
+      "category": "fact",
+      "quote": "爸妈希望我考公务员，考不上就去银行或者国企，觉得女孩子稳定最重要。",
+      "locator": "「现实约束」一节",
+      "status": "given",
+      "confirmed": true
+    },
+    {
+      "field": "生源地",
+      "value": "浙江",
+      "category": "fact",
+      "quote": "生源地：浙江",
+      "locator": "「你现在的位置」一节",
+      "status": "given",
+      "confirmed": true
+    },
+    {
+      "field": "已投企业数",
+      "value": 5,
+      "category": "fact",
+      "quote": "投了5家企业的财务岗，2家没回音，3家还没消息。",
+      "locator": "「心里话」一节",
+      "status": "given",
+      "confirmed": true
     }
   ],
   "missing": [
@@ -1089,8 +1116,8 @@
             "已知"
           ],
           [
-            "户籍与政治面貌",
-            "{{p:/fields/10/value}}；{{p:/fields/11/value}}",
+            "性别、户籍与政治面貌",
+            "{{p:/fields/25/value}}；{{p:/fields/10/value}}户籍、{{p:/fields/26/value}}生源；{{p:/fields/11/value}}",
             "已知"
           ],
           [
