@@ -486,9 +486,9 @@
       "report_versions": [
         {
           "file": "skills/zhiqu-grad/examples/2027-YJ-S05/report.pdf",
-          "generated_at": "2026-10-20T17:24:26+08:00",
+          "generated_at": "2026-10-20T17:52:10+08:00",
           "version": "1",
-          "sha256": "5778c79de6314c42c0be7806f7783d3560a8299ac57a6fa54e7d41489690c1f7",
+          "sha256": "11a7925292fc98b814bfc2a6ddde7cb2fbe05d2a4174a5c5ca128fe9d0d89a21",
           "profile_sha256": "af232e95b42de1286681d5b04d706bbd8d16d3dd86cfe304a7d87e5a6bfcab88"
         }
       ]

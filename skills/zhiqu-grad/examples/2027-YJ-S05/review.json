@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "status": "changes_required",
-  "status_label": "独立复核：须修改后重审（任务单写作 changes_requested，按工作流枚举记为 changes_required）",
+  "status": "awaiting_independent_review",
+  "status_label": "等待独立复核（上一版独立复核结论：须修改后重审，见 rubric、pitfalls、required_changes，原样保留）",
   "independent": true,
   "reviewer": "独立复核会话（Claude，未参与制作）",
   "date": "2026-10-20",
@@ -227,62 +227,72 @@
         {
           "id": "clarity",
           "score": 2,
-          "reason": "封面和第 1 节写明：一志愿苏大计算机学硕（够一够）；六校没有数据可靠的稳妥档，保底是出分后调剂和春招，触发条件和时间写在第 8、9 节；流程图补了“复试通过？”分支。",
-          "report_location": "封面、p2、p9—p10"
+          "reason": "封面与第 1 节写明：一志愿默认苏大计算机学硕（够一够）；若本人接受软件工程，改报同校软件工程学硕（同科目、位置更好，也是够一够）；六校无稳妥档，保底为出分后调剂和春招，流程图与第 8、9 节给出触发条件。",
+          "report_location": "封面、p2—p3、p9—p11",
+          "evidence_refs": []
         },
         {
           "id": "traceability",
           "score": 1,
-          "reason": "官方数字都有原文摘录、链接与定位，统计由附件匿名分数复算，未取到的写了试过的入口（p14）；但苏大拟录取名单是无文字层的图片版，初试分靠读图得来，虽两次独立读图一致，核对者仍无法像文字版那样对原文逐字复核，所以扣 1 分。",
-          "report_location": "p14、附录"
+          "reason": "官方数字都有原文摘录、链接与定位，统计由附件匿名分数复算；本次新增苏大083500（E043/E045/E046/E039/E047）、河海083500（E052/E062/E067/E074/E076）、河海2025联培（E055/E070/E075）均对本机原件核过；E036/E035 改为印刷页34、PDF第36页，E110/E111 学院名改为“计算机科学与工程学院”。扣 1 分：苏大名单是图片版，其中软件工程学硕10个分数只由本会话读图一次，尚无第二次独立读图。",
+          "report_location": "p7—p8、p14、附录",
+          "evidence_refs": []
         },
         {
           "id": "reasoning",
-          "score": 2,
-          "reason": "每个候选有支持、反对、代价和可观察的改判条件；没有稳妥档时单独写保底路径的触发条件与时间（judgment.fallback_paths 与第 8 节路线卡）。",
-          "report_location": "04、06、08、09"
+          "score": 1,
+          "reason": "每个候选有支持、反对、代价、改判条件；软件工程学硕放回并定档，河海联培两年数据都入工具后改为不定档（样本太少），河海软件工程不定档；一志愿比较正面写了软件工程位置更好、默认仍写计算机的唯一理由（本人只写过“计算机”、未表态接受软件工程）。扣 1 分：默认选择依赖一个待问的偏好，需复核是否表述得当。",
+          "report_location": "p2—p3、p5—p8",
+          "evidence_refs": []
         },
         {
           "id": "consistency",
           "score": 2,
-          "reason": "模考总分、分位数、差值、预算均由登记算法复算；定档与 kaoyan_position.py 输出逐项断言一致；verify_report ok。",
-          "report_location": "01、06、09、11"
+          "reason": "封面、摘要、第 4、6 节档位一致（苏大两项够一够、河海普通冒险、其余十二项不定档）；追问清单导语“报名前五件、出分前两件”与七条对应；统计与差值由 calculations 复算，verify_report ok。",
+          "report_location": "封面、p2、p6—p8、p12",
+          "evidence_refs": []
         },
         {
           "id": "timeliness",
           "score": 2,
-          "reason": "返工前扣分处：复试线、名单、国家线只有上一届或前一届，原报告只在图表行标年份，没有集中说明怎么用、何时重算（原 p12 方法表）。返工后：方法表新增“数据年份”一行（p12），写明旧年数字只看位置、当届线公布后用新问卷重算；当届规则（报名、初试、差额复试、调剂、录取 4 月底前完成）都取自当届管理规定且在复核期内；河海当届目录未取到已标为待核，不作已核。",
-          "report_location": "p12、p9、p14"
+          "reason": "当届规则取自2027管理规定且在复核期内；旧年线与名单逐行标年份，方法表写明当届线公布后重算；河海当届目录、南航等四校当届科目仍标未取到。",
+          "report_location": "p8、p13、p14",
+          "evidence_refs": []
         },
         {
           "id": "personalization",
           "score": 2,
-          "reason": "模考四科决定哪些项目能定档；只留江苏决定候选范围；“河海分数线不高”等本人说法逐条用官方原件核对；软件工程学硕因画像里没有接受该方向的原话而不列入；调剂与非全前后不一致列入追问。",
-          "report_location": "02、03、04、06、10"
+          "reason": "模考四科决定同科目范围；只留江苏决定候选；本人只写过“计算机”、目标后端或数据开发，这一点决定默认推荐，并把“接不接受软件工程”列为第一条追问而不替他决定；听来的说法逐条用原件核对。",
+          "report_location": "p2—p6、p12",
+          "evidence_refs": []
         },
         {
           "id": "actionability",
           "score": 2,
-          "reason": "报名前三件事有日期与入口；路线卡四栏齐；保底路线写明触发条件（过国家线没过苏大线或复试没过 → 调剂；没过国家线或无愿去余额 → 春招）和时间（国家线公布后到 4 月底；初试后即准备简历）。",
-          "report_location": "01、07、08"
+          "reason": "三件事有日期：10-22 先定是否接受软件工程并查四校科目，10-23 报名缴费，11-15 二次模考；路线卡四栏齐，保底路线写触发条件与时间。",
+          "report_location": "p3、p9—p10、p12",
+          "evidence_refs": []
         },
         {
           "id": "boundaries",
           "score": 2,
-          "reason": "档位注明是“模考在上一届录取者里的位置”，不是概率；不同卷不画对照点；只有复试线、样本不足五人的不定档；五到九人最高“够一够”。",
-          "report_location": "01、06、11、12"
+          "reason": "删去“只有苏大、河海的计算机学硕考这四门”；南航等四校写“当届科目未取到，不知道是否同科目”；软件工程学硕不再静默删除，作为候选保留并列入追问；档位注明不是概率；“同卷”改“同科目”，术语表注明不是同一份卷子。",
+          "report_location": "p2、p6—p8、p13",
+          "evidence_refs": []
         },
         {
           "id": "summary_access",
-          "score": 2,
-          "reason": "返工前扣分处：p2 核心结论用“下四分位”“中位数”等术语、五条偏长，数字卡第三张是专业说法。返工后：核心结论改为四条，用“分数靠后那一段的人”“正中间那个人”这类说法；数字卡第三张改为“稳妥档：六校都没有”；摘要首句直接写一志愿、没有稳妥档、保底靠什么。",
-          "report_location": "p2"
+          "score": 1,
+          "reason": "摘要改用“录取者平分四档后最低一档的最高分”这一种大白话，术语表同步说明它大致就是下四分位；“同一张卷”改为“同科目”。扣 1 分：摘要信息量增加（苏大两项、默认理由），家长仍需细读两遍。",
+          "report_location": "p2—p3、p13",
+          "evidence_refs": []
         },
         {
           "id": "layout",
           "score": 2,
-          "reason": "返工前扣分处：p2 数字卡“一年涨 42 分”折行、p8 不定档表年份括号把“2025 年”拆在两行、p6 的第 6 节导语跨页。返工后：数字卡换成短值；表格年份改为“（2026）”不再折行；逐页速览 25 页已看，版面门禁通过，无空页、无挤压。",
-          "report_location": "p2、p7、p8"
+          "reason": "调整内容顺序与合并：第 6 节说明段移到不定档图前；只有复试线的八行不再画空区间框，改由下表列出，四校学硕专硕各并一行；第 11 节段落提前；第 9、10、6 节导语缩短避免跨页。check_layout 通过，28 页逐页速览，原 p13 大片空白与 p6 下部空白已消除。",
+          "report_location": "全篇",
+          "evidence_refs": []
         }
       ],
       "total": 19
@@ -291,7 +301,7 @@
       {
         "item": "没查到写成不存在",
         "result": "pass",
-        "note": "河海2027目录、南航目录与名单、南邮和江大目录、南理工2026页均记“未取到”及原因，不当作没有；相应项目不定档。"
+        "note": "删去 p2“只有苏大、河海的计算机学硕考这四门”；南航、南邮、江大、南理工当届科目写“未取到，不知道是否同科目”；苏大、河海软件工程学硕经原件核实同科目，放回候选，不再静默删除。"
       },
       {
         "item": "群体数字当个人概率",
@@ -336,9 +346,9 @@
     ],
     "limitations": [
       "操控者尚未填写核查单，未经独立复核，不能据此交付真实客户。",
-      "苏大2026拟录取名单是无文字层的图片版，初试分为看图抄录，两次独立读图一致；仍建议独立复核再看一遍原图。",
+      "苏大2026拟录取名单是无文字层的图片版：计算机学硕与专硕两次独立读图一致；软件工程学硕10个分数只读图一次（200dpi 放大逐行），请独立复核再看一遍原图。",
       "南航、南邮、江大、南理工的当届科目与录取名单换入口后仍未取到，八项维持不定档。",
-      "软件工程学硕两项按复核意见移除（画像无接受该方向的原话）；若本人补充愿意读软件工程，再按新规则加回定档。"
+      "画像没有本人是否接受软件工程的原话；默认推荐计算机学硕，软件工程学硕作为同校可改报项，已列为追问第一条。"
     ],
     "sampled_sources": [
       {
@@ -501,22 +511,22 @@
     }
   },
   "snapshot": {
-    "case.json": "655f1d50c312a51954513032151789638f5f891a6ca2dec3a570ac2d20ed5d1d",
+    "case.json": "a8904d522166a91216961101d610694c84c1d31f4281defb7e0e868e312eec75",
     "profile_parse.json": "20107f71f9c2ed1d7b7198ad470d1be169109141f501371ea2c7181282f25078",
-    "directions.json": "8ad0808073c7627967e3dc5571f965b22443af0eec6580e9176ef2c65bf0a585",
-    "rules_check.json": "70e1603a31f07b3ac7607e26ebf615ee80e88a50cd37a8c0683116f96fa963ff",
-    "candidates.json": "63777e211bd6d4babb4e05a4f0038127bb4e81270399bc3c9eecdf83c9e40e7e",
-    "evidence.json": "de338cc972b0360842391182344949a6fca30ed9979af69ec065f94a324bd4dd",
-    "calculations.json": "a529584576aa1515c8a7cce9cc3cc3949f40c9c024ba4f60a979bd1c5cd16f35",
-    "judgment.json": "39fa4b2230293b2817ad6a81d2ea43ed60229010bd071999ad36e8506d944100",
-    "narrative.json": "b38ed2fdd37780ee59e3f4c39ab1bec5284bf4a1a2f258a7a24ca1f3afbf4e8f",
+    "directions.json": "e0f392566f46366346e27a144c0011736d32860b9fb6b1826636ae7b561b071d",
+    "rules_check.json": "02f914057e78d3919082a6947d513e501d6d2181274c457ff07ae6092429fab3",
+    "candidates.json": "7e8ad61e602000a9e474ba3f83a35ce033453275ac8b0336134e53abdb4dfaa2",
+    "evidence.json": "3d440b1454f224052f2d771605500cb86f92f596e19f6813a584f1c3d10f5b8f",
+    "calculations.json": "e902d15c08cd406e874045147eef48e8bffca9ccd4d1197c008dc67cf9d74f0f",
+    "judgment.json": "fc5c5d9b4f4b8af9fb79710f8cadad28ce684c9075c2697efbe70df9457494cf",
+    "narrative.json": "2094a80ec2fa929d01a2ad0a43eab8252e58ee4d9b40c268231babf66aae3528",
     "profile.json": "af232e95b42de1286681d5b04d706bbd8d16d3dd86cfe304a7d87e5a6bfcab88",
     "profile-supplement.txt": "952368202eeb2cd031c6c0d52212442dca0faaadcd6c99828f951e50ba15d704",
-    "report.md": "79df2b702505c8617f76cc94808855a4ecc0bdccfe14b9cde70ee8dc57e53c64",
-    "report.html": "b70ecc9de09da93ed0eb12634cea677787e210e8a9ee4d414ea4a6755d913c32",
-    "report.pdf": "5778c79de6314c42c0be7806f7783d3560a8299ac57a6fa54e7d41489690c1f7",
-    "report_trace.json": "cc44e7c1420fa243334116eb57e33436cb7ac798cf4a84d3b9f3d6c4282d6862",
-    "operator_check.md": "07cc403e5d0975fae0dfad4c5c020e866deab831ae12cb97bda19d86dea4f429"
+    "report.md": "60cdb06dd24b148475b39f8dd75f654556e962f38f891de11a9402a05c6e9177",
+    "report.html": "8a412d08ee961dc7147194d37fda4128a0aa99e36f72496d0cc2f2e2ccd39988",
+    "report.pdf": "11a7925292fc98b814bfc2a6ddde7cb2fbe05d2a4174a5c5ca128fe9d0d89a21",
+    "report_trace.json": "f3a8f80c6034c2897e6cc4b65650ae60ff0d450ab1acc7172ed9be0533a5b649",
+    "operator_check.md": "584d1dc78090a769d043aeda1e96f548301d56c2eec4a3b40bde2ba5d9d9eabc"
   },
   "snapshot_refreshes": [
     {
@@ -529,6 +539,29 @@
         "report_trace.json"
       ],
       "reason": "合入两份旗舰后共用版面与核对工具更新；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude（制作会话第二次返工）",
+      "files": [
+        "case.json",
+        "profile_parse.json",
+        "directions.json",
+        "rules_check.json",
+        "candidates.json",
+        "evidence.json",
+        "calculations.json",
+        "judgment.json",
+        "narrative.json",
+        "profile.json",
+        "profile-supplement.txt",
+        "report.md",
+        "report.html",
+        "report.pdf",
+        "report_trace.json",
+        "operator_check.md"
+      ],
+      "reason": "按独立复核 required_changes 返工：放回苏大/河海软件工程学硕并重新定档、河海联培两年入工具改不定档、封面与摘要用词、追问清单计数、E036/E035/E110/E111 定位、版面空白；内容已变，上一版独立复核结论不适用于本快照。"
     }
   ],
   "required_changes": [
