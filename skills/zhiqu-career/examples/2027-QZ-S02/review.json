@@ -165,7 +165,7 @@
     "verification_scope": "本轮更新为附核对材料的PDF，自评和机器核对通过后仍等待独立审核；未补造官方原文和独立批准。"
   },
   "snapshot": {
-    "case.json": "beb234ee2cb27be282d5b9d41df681f5ec07d3c79dfff783a5d0c71be7c648f5",
+    "case.json": "a9718f60b403172e958aca4fb446e6e924f19867427563d439e28c41e6e84f73",
     "profile_parse.json": "c0912865115b3aaf5e1ddacc5454b9f3f0c087fbcb0041b4de3658dcf24578d6",
     "directions.json": "5b2397e7ee4e80db6b8b1b6bf0834869aabbf282dcfecc6f23c4c706d476cc76",
     "rules_check.json": "d887941488483a7992cfbe1fb174550f3fdb3083d8c597a1cdcc43f1eee9d198",
@@ -174,10 +174,10 @@
     "calculations.json": "8e8135c7483b79dbc2d7ed702e1d9add2628ccf852da45c3d957f1e3f05d98f5",
     "judgment.json": "5c913bab47c7220eb52e9c907187a8bbcaf45fc3710cee9d675c28ceff68af57",
     "narrative.json": "cbfcc57d7627dd98c04dc98826b0bb4968862aa318b31708b2598ed39e47f121",
-    "report.md": "4c2faff37c2d52fff6e9db85111b2bd4dbb034bc846444ec2c561915bb51b8fd",
-    "report.html": "35b109de4247ba44d2183739d363ee2b6fb9da9d6a67155b2344883ec978e03a",
-    "report.pdf": "cb427e30a2df0641e98ff2ee66579b1d7b55c4b49e5ab13e6c49c2a1481f61da",
-    "report_trace.json": "1538d243078804b31e36afc2661b74969084d3078a71e19e6296f39b4fa1a2a2",
+    "report.md": "afe724fa82a785357068aabc8775b235756414d53aff86946b348d49e95908b6",
+    "report.html": "9106bfd1071e92fa700fb7008f0db708717fcc4bfb314347c140e2b6c4d4a5bd",
+    "report.pdf": "779854c7e55e326f81f2a94617ca87a0ebe2e72b76900fe752a37999b73f205f",
+    "report_trace.json": "c4b368d86b309d2bba3af5f3b8d5de4793f4d05cc3dfa0d2dd93724a0e3dbf7f",
     "operator_check.md": "e9c6f250861eb7ab99db2b659d77a73ace9d087b23a656666cc9707877c2b258",
     "profile.json": "e985adff4dc5eb31443eef9a859f0e7955f84936dd8dab27a61b56e4b2e50d29",
     "profile-supplement.txt": "7ae0beb59e74158ec5ff869bb796f5cf3352fb7fa5c9ab7172ee930e91c93360"
@@ -218,6 +218,18 @@
         "operator_check.md"
       ],
       "reason": "报告改版（2026-10-20）：正文给读者、第 12 节“核对与来源”给核对；比较矩阵、追问、风险改为三类报告共用的卡片和标记，图表配色统一。 没有 offer：第 09 节改名“现金能撑多久”，加一张可支撑月数条形图，数据全部取自已有 calculations.json（evidence.json 新增图块、judgment.json 登记、narrative.json 只改节标题）；结论不变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "case.json",
+        "report.html",
+        "report.md",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "封面一句话结论按高考同款写法重写为两三句（本人情况、建议及关键数字、先做什么），数字均为登记引用；正文与结论不变。"
     }
   ]
 }

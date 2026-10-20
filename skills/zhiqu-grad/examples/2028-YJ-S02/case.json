@@ -53,7 +53,7 @@
     "stage": "读研版 · 大三上",
     "region": "江苏",
     "data_asof": "{{k:/context/as_of}}",
-    "conclusion": "保留推免和考研，先统一排名口径；不为加分透支主课。"
+    "conclusion": "你读交通工程大三，喜欢交通调查和模型分析，推免和考研都想试；但教务表第 {{p:/fields/14/value/academic_rank}} 名、班委表第 {{p:/fields/14/value/comprehensive_rank}} 名，两张排名口径还没核清。建议两条路都保留，先向教务核清排名口径和推免规则，再决定投入多少；课程、英语和数学两边都用得上，没确认的竞赛加分不要挤占主课。"
   },
   "budget": {
     "annual_limit": 32000,

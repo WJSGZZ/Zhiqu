@@ -284,7 +284,7 @@
   },
   "snapshot": {
     "report.json": "5a49a8833e089f79a1f50a0c75b500affa09ccae795e2fea524db613ef4d40f2",
-    "report.pdf": "9b64b6c459ce6c8fab87629d21a9433978446ba7817ac3613b1a1021b26601de",
+    "report.pdf": "76eedf3e0174a0fc4344e71072c0757c71caa4d97790e083ca6a0ba24cfca1ed",
     "operator_check.md": "acd105857db055023ea4efd471df19850b7061cb5f3cbf446be9cccf9e3a97f1",
     "result.json": "c3bab0852cebaf29ac71b12573555bb4ee93b54f48cb37fe3cfadf5c0f0eb844",
     "case.json": "de59c1629505cf111abfb196b02acdac09045906e4382c36f3aff3c462e7fe45",
@@ -302,6 +302,14 @@
         "report.pdf"
       ],
       "reason": "报告改版（2026-10-20）：正文给读者、第 12 节“核对与来源”给核对；比较矩阵、追问、风险改为三类报告共用的卡片和标记，图表配色统一。 院校调研加了每个方面一句话的卡片（brief，只概括原调研“发现”，不加新事实或数字），原表移到第 12 节。志愿、概率、排序和结论不变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.pdf"
+      ],
+      "reason": "摘要卡“满意度 70 分以上的概率”改为“平均满意度”（期望满意度与表里最高志愿分），因为固定 70 分门槛对位次靠后的考生会显示 0%、读成注定不满意；志愿、概率和结论不变。"
     }
   ]
 }

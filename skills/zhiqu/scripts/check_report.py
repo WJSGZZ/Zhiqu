@@ -77,14 +77,15 @@ def check_report(rep, result, html=None):
             if likely.get('majors'):
                 major = max(likely['majors'], key=lambda major: major['p'])
                 name, probability = name.split('·')[0] + '·' + major['name'], major['p']
-            good = sum(sum(m['p'] for m in x['majors'] if m['utility'] >= 70) if x.get('majors') else (x['p_land'] - x.get('p_adjusted', 0) if x['utility'] >= 70 else 0) for x in items)
+            eu = result.get('expected_utility')
+            satisfaction = [f'{eu:.1f} 分', f'表里最高的志愿 {max(x["utility"] for x in items):.0f} 分。' + rep.get('meta', {}).get('utility_scale', UTILITY_SCALE)] if eu is not None else []
             sims = params.get('sims', 4000)
             fall = lambda p: (f'< {100/sims:.2g}%' if grade == 'A' else '模拟中未出现') if p == 0 else (unescape(fmt(p, 1)) if numeric else '有风险，见第 05 节')
             head4 = [str(len(items)), f'本批次可填 {rep.get("meta", {}).get("slots", "–")} 个', name]
             if grade == 'A':
-                mid = ['概率约 ' + percentage(probability), percentage(good), rep.get('meta', {}).get('utility_scale', UTILITY_SCALE)]
+                mid = ['概率约 ' + percentage(probability)] + satisfaction
             elif numeric:
-                mid = ['概率' + unescape(fmt(probability)), unescape(fmt(good)), rep.get('meta', {}).get('utility_scale', UTILITY_SCALE)]
+                mid = ['概率' + unescape(fmt(probability))] + satisfaction
             else:
                 mid = ['落点最集中的志愿（本省评级不给精确概率）', ' / '.join(str(sum(x['tag'] == t for x in items)) for t in ('冲', '稳', '保')), '按模型过线可能性分档，不给百分比']
             sp = result['stress']['p_fall']

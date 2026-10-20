@@ -329,7 +329,7 @@
     "stage": "读研版 · 初试前",
     "region": "广东",
     "data_asof": "{{k:/context/as_of}}",
-    "conclusion": "继续准备电气方向，同时落实可接受的就业备选。"
+    "conclusion": "你喜欢设备调试，本科也是电气，想考电气专硕；家里每年最多支持 {{k:/budget/annual_limit|comma}} 元。建议继续准备电气考研：华工每年约 {{c:/annual_cost|comma}} 元，在预算内；广工按旧年学费测算每年只余 {{c:/gdut_fee_reference/annual_margin|comma}} 元，要先核新收费。报哪所等同科目的完整模考出来再定，同时保留一个真能启动的就业备选。"
   },
   "deadlines": [
     {

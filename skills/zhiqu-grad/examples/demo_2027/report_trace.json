@@ -2,7 +2,7 @@
   "schema_version": 1,
   "case_id": "2027-YJ-S01",
   "source_sha256": {
-    "case.json": "13d8346632d6b85a4e61e714871a15af524d33910c7a5428b25190be7554590a",
+    "case.json": "67ca8684a8e7865960b8c8d553f30f425de93ccfe7edf60d0d4e24efc0169ef4",
     "profile_parse.json": "a5a7b96085411943644dcaae76616a0affb32a79a07fd3020505d28d88c8b1a8",
     "directions.json": "2b68a53951ab4a8de52d7edcbabdf32d24e4570392cd70ac212c62342430a3b2",
     "rules_check.json": "7b0a58159b98a98e96a17d877674c57bf2d59988aefd37a2f57d94f82580f5c2",
@@ -15,11 +15,11 @@
   },
   "contract_sha256": "e781c97093c55d81424be0d6ab395190a6eebb25009367f9bf1d68bbdd05eb6c",
   "tool_sha256": {
-    "planning_report.py": "c081861d47fc087bac49bbcf976859252378789e4de94c0e05cdb96b7302ee09",
+    "planning_report.py": "77d252c484065f3fe298fc87166069cb600898e0182cc06cadab52bbfaa34436",
     "planning_workflow.py": "ee2d438232e89d2abbaef38ac668fdcd6cc6aea42f554b44408e67fdd7186d13",
     "operator_check.py": "a6552c0b63a8a6b5d15c9a1057fbc2884fb85435b1b102fbf4a48dd74c4e7ebb",
     "check_demos.py": "fc8e1625f9e052373756160514ad5c73db1e8451c233425918edb5bc839d9f63",
-    "report.py": "be60413e446a8dc53f68f14351a681811bfc49ed47c480a3a4281a1dc7274d94",
+    "report.py": "e3a85bf877d81d622512947383eb16b4ea3a9f351945c47f9ea2ba615558c02a",
     "render_report.py": "707d4a3dd6780cc249ddd5620f37152d525313c3a64de75c676758eef11fb5c8",
     "profile_store.py": "1cfd828583598a65cf719a46447cb3112ef0170eb1a638b89ab023cb47a04e7f"
   },
@@ -35,6 +35,24 @@
       "ref": "{{k:/context/as_of}}",
       "value": "2026-10-19",
       "display": "2026-10-19"
+    },
+    {
+      "location": "meta.conclusion",
+      "ref": "{{k:/budget/annual_limit|comma}}",
+      "value": 30000,
+      "display": "30,000"
+    },
+    {
+      "location": "meta.conclusion",
+      "ref": "{{c:/annual_cost|comma}}",
+      "value": 25200,
+      "display": "25,200"
+    },
+    {
+      "location": "meta.conclusion",
+      "ref": "{{c:/gdut_fee_reference/annual_margin|comma}}",
+      "value": 800,
+      "display": "800"
     },
     {
       "location": "01.kpis.2",
@@ -1718,9 +1736,9 @@
     }
   ],
   "artifacts": {
-    "report.md": "cddf391a96a5e2df544e0667c6a03951bf61c85a159124328dd713a64fe71ea3",
-    "report.html": "65f5f79482c6305096070883b3c65931d277de05ad74a92878ddbd7fc25b175f",
-    "report.pdf": "aee10b51ca4f4e5ecd11d9b06fcd8353050b0a5c1fc0d3e5895595d4d66e84e7"
+    "report.md": "1350c5395ecc58db78d751c3dbba456caa3579d246202ba516c534f1a1909c0d",
+    "report.html": "cb087f856d3dfe1cd4ace0c94ad23d0e5b1b6d46d38d49d76552a528f580db0e",
+    "report.pdf": "c67371484f7c849adffa260f5398cc14f36752a8502afd8ed4cb4aadbe271e4b"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "report_profile": {

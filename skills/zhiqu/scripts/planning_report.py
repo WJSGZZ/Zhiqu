@@ -103,6 +103,9 @@ def generate(root, html_only=False, profile_version=None):
     binding, profile, warning=bind_profile(root,profile_version,require_analysis=True)
     if warning:print(warning,file=sys.stderr)
     case=PlanningCase(root);errors=case.check(8)
+    # 只在出报告时要求：只做到前几个阶段的案例，封面结论还是占位。
+    if len(re.sub(r'\{\{[^}]*\}\}','0',case.case.get('report_meta',{}).get('conclusion','')))<60:
+        errors.append('case.json report_meta.conclusion：封面一句话结论太短；写清本人情况与在乎什么、建议是什么（带关键数字）、先做什么，两三句')
     if errors:raise ValueError('\n'.join(errors))
     markdown,trace=assemble(case)
     document=render_report.render(markdown)[0]
