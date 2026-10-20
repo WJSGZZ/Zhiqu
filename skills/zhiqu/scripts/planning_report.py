@@ -70,7 +70,7 @@ def assemble(case):
     for eid,item in case.evidence.items(): numbers[eid]=item['source_group']
     meta=case.case['report_meta'];out=['---',*[k+': '+case.expand(v,'meta.'+k) for k,v in meta.items()],'---','']
     for section in case.contract['sections']:
-        sid=section['id'];title=case.data['narrative.json']['sections'][sid].get('title',section['default_title'])
+        sid=section['id'];title=case.data['narrative.json']['sections'][sid].get('title',section['default_title']) if section.get('title_override_allowed',True) else section['default_title']
         out.append('## '+sid+' '+title);out.append('')
         for index,entry in enumerate(case.nodes()[sid]):
             node=case.get_node(entry['ref']);where=f'{sid}.{entry["slot"]}.{index}'

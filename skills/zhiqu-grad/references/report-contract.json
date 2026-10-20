@@ -1685,8 +1685,8 @@
   {
    "id": "12",
    "role": "sources",
-   "default_title": "数据来源与声明",
-   "title_override_allowed": true,
+   "default_title": "核对与来源",
+   "title_override_allowed": false,
    "slots": [
     {
      "key": "lead",

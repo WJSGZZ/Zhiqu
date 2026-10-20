@@ -1664,8 +1664,8 @@
   {
    "id": "12",
    "role": "methods_and_sources",
-   "default_title": "方法、数据来源与声明",
-   "title_override_allowed": true,
+   "default_title": "核对与来源",
+   "title_override_allowed": false,
    "slots": [
     {
      "key": "lead",

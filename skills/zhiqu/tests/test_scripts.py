@@ -130,7 +130,7 @@ class TestOtherScripts(unittest.TestCase):
             self.assertEqual(code, 0, err)
             with open(out, encoding="utf-8") as f:
                 html = f.read()
-            for title in ("摘要", "志愿表", "填报单", "追问清单", "数据来源与声明"):
+            for title in ("摘要", "志愿表", "填报单", "追问清单", "核对与来源"):
                 self.assertIn(title, html)
             self.assertIn("知其所往，方行其衢。", html)
 

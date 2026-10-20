@@ -122,7 +122,7 @@ td.r, th.r { text-align: right; font-variant-numeric: tabular-nums; }
 td.c, th.c { text-align: center; }
 tr.hl td { background: #E7EDE8; }
 .tag { display: inline-block; min-width: 7mm; text-align: center; font: 600 7.5pt/1.5 var(--sans); padding: .2mm 1.5mm; border-radius: .8mm; color: #fff; }
-.tag.冲 { background: var(--red); } .tag.稳 { background: var(--amber); } .tag.保 { background: var(--green); }
+.tag.冲 { background: var(--amber); } .tag.稳 { background: var(--accent2); } .tag.保 { background: var(--accent); }
 
 /* two columns / cards */
 .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
@@ -182,6 +182,17 @@ figure { margin-left:0; margin-right:0; }
 .evidence.corroborated { background:var(--accent2);color:#fff; }
 .evidence.single { background:var(--pale);color:var(--ink); }
 .evidence.inference { background:transparent;color:var(--muted); }
+.evidence.missing { background:transparent;color:var(--muted);border-style:dashed; }
+/* 院校卡片：一格一个方面、一句结论；完整调研在第 12 节。 */
+.school-card { background:#FAF7EE; border-top:1.6pt solid var(--accent2); padding:3.5mm 5mm 1mm; margin:0 0 5mm; break-inside:avoid; }
+.school-card h3 { margin:0 0 2.5mm; font-size:11.5pt; }
+.school-card h3 small { font:400 8pt var(--sans); color:var(--muted); margin-left:2mm; }
+.school-grid { display:grid; grid-template-columns:1fr 1fr; gap:0 7mm; }
+.school-grid > div { border-top:.4pt solid var(--rule); padding:1.8mm 0 2.2mm; }
+.school-grid .aspect { display:flex; justify-content:space-between; align-items:center; font:600 8.2pt var(--sans); color:var(--accent); margin-bottom:.8mm; }
+.school-grid p { margin:0; font-size:9pt; line-height:1.6; }
+section[data-section="12"] h3 { font-size:11pt; }
+section[data-section="12"] h4 { font:600 9.5pt var(--sans); color:var(--accent); margin:4mm 0 1.5mm; }
 .source-ref { color:var(--accent);font-size:7.5pt; }
 .source-notes { list-style:none; padding:0; font-size:7.8pt; line-height:1.35; }
 .source-notes li { margin:0 0 .6mm; break-inside:avoid; }
@@ -190,8 +201,9 @@ section[data-section="12"] { margin-top:6mm; }
 table.vt th { white-space:normal; }
 table.vt td .row-note { display:block;white-space:nowrap;font-size:7.8pt;font-weight:400;color:var(--muted); }
 /* 核对材料：紧凑排版，同一出处只印一次；长网址可断行。 */
-.verification-appendix { break-before:page; margin-top:0; font-size:8.6pt; line-height:1.45; }
-.verification-appendix h3 { font-size:10.5pt; margin:5mm 0 2mm; }
+.verification-appendix { font-size:8.6pt; line-height:1.45; }
+.verification-appendix h4 { font:600 9.5pt var(--sans); color:var(--accent); margin:5mm 0 2mm; break-after:avoid; }
+.verification-appendix .audit-list { margin:.5mm 0 1mm; padding-left:5mm; }
 .verification-appendix p { margin:0 0 1mm; }
 .verification-appendix table { width:100%; border-collapse:collapse; margin:1mm 0 2mm; font-size:8pt; table-layout:auto; }
 .verification-appendix th, .verification-appendix td { padding:2.5pt 4pt; border-bottom:.4pt solid var(--rule); vertical-align:top; text-align:left; line-height:1.35; overflow-wrap:anywhere; }
@@ -201,7 +213,7 @@ table.vt td .row-note { display:block;white-space:nowrap;font-size:7.8pt;font-we
 .verification-appendix .audit-source { border-bottom:.4pt solid var(--rule); padding:1.5mm 0 2mm; }
 .verification-appendix .audit-ev, .verification-appendix .audit-src-head { break-inside:avoid; }
 .verification-appendix .audit-src-head { break-after:avoid; }
-.verification-appendix .audit-claim { margin-top:1.2mm; }
+.verification-appendix .audit-claim { margin-top:1.2mm; margin-bottom:0; }
 .verification-appendix .audit-excerpt { color:var(--soft); }
 .verification-appendix .audit-vals { color:var(--accent); }
 .verification-appendix .audit-item { border-bottom:.4pt solid var(--rule); padding:1.5mm 0; break-inside:avoid; }
@@ -216,7 +228,10 @@ table.vt td .row-note { display:block;white-space:nowrap;font-size:7.8pt;font-we
 # 三版打印规范：A4/既有字体与色板；正文10pt/1.75，节标题18pt，
 # 小标题12pt；图内文字10.5 SVG单位（640宽映射174mm，实际约8pt），最低7pt。
 # 千分位数字、中文量词前空格、区间用“—”；概率精度仍由prob_formatter控制。
-PALETTE = {'冲': '#9B3B2E', '稳': '#A8772B', '保': '#34685D', '主': '#21473E'}
+# 颜色只有一套含义：黛绿 = 主选／本方案，石绿 = 一般数据，琥珀 = 提醒或对照情景，红 = 风险（滑档、超预算）。
+PALETTE = {'冲': '#9B3B2E', '稳': '#A8772B', '保': '#34685D', '主': '#21473E', '次': '#34685D'}
+# 高考志愿的冲／稳／保按把握程度由浅到深：冲要留意（琥珀），稳（石绿），保（黛绿）；红色留给滑档。
+CERTAINTY = {'冲': '#A8772B', '稳': '#34685D', '保': '#21473E'}
 URL_RE = re.compile(r'https?://[^\s<>"\'，；。）、（【】]+')
 
 
@@ -279,6 +294,10 @@ def core_conclusions(items, rendered=False):
     return '<div class="box key core-conclusions"><h4>核心结论</h4><ul class="tight">' + ''.join(rows) + '</ul></div>'
 
 
+VERIFY_MARK = '逐项核对材料'  # verify_report.py 以此分开正文与核对材料；全文只出现一次
+VERIFY_SLOT = '<!--ZQ-VERIFY-->'
+
+
 def verification_appendix_html(materials):
     """核对附录的唯一打印组件。输入为可读字段，不接收未转义HTML。
 
@@ -303,35 +322,41 @@ def verification_appendix_html(materials):
     used=set(map(id,evidence+registry+model+formulas))|{id(r) for r in calc_refs.values()}
     rest=[r for r in numbers if id(r) not in used]
 
-    body = '<section class="verification-appendix" data-section="appendix"><h2>附录：核对材料</h2><p>本 PDF 附带数据文件，可用 PDF 阅读器的附件面板取出。下面按出处列出报告里的数字：同一出处、同一段原文只印一次，后面跟着它支撑的数字和所在章节。</p>'
+    body = (f'<div class="verification-appendix"><h3>{VERIFY_MARK}</h3><p>本 PDF 附带数据文件，可用 PDF 阅读器的附件面板取出。'
+            '下面按出处列出报告里的数字：同一出处、同一段原文只印一次，后面跟着它支撑的数字和所在章节。</p>')
     case_info = materials.get('case_info', [])
     if isinstance(case_info, dict):
         case_info = case_info.items()
-    body += '<h3>案例信息</h3><table class="audit-kv"><tbody>' + ''.join(f'<tr><th>{val(k)}</th><td>{val(v)}</td></tr>' for k, v in case_info) + '</tbody></table>'
+    body += '<h4>案例信息</h4><table class="audit-kv"><tbody>' + ''.join(f'<tr><th>{val(k)}</th><td>{val(v)}</td></tr>' for k, v in case_info) + '</tbody></table>'
 
     personal=materials.get('personal_inputs', [])
     if personal:
-        body += '<h3>分析用到的本人信息</h3><table class="audit-grid"><thead><tr><th>项目</th><th>本人填写</th><th>用于</th></tr></thead><tbody>'
+        body += '<h4>分析用到的本人信息</h4><table class="audit-grid"><thead><tr><th>项目</th><th>本人填写</th><th>用于</th></tr></thead><tbody>'
         body += ''.join(f'<tr><td>{val(r.get("label","本人输入"))}</td><td>{val(r.get("value"))}</td><td class="audit-sec">{secs(r.get("sections"))}</td></tr>' for r in personal)
         body += '</tbody></table>'
 
     if evidence:
-        body += '<h3>官方出处与数字</h3>'
+        body += '<h4>官方出处与数字</h4>'
         groups={}
         for r in evidence:
             groups.setdefault((r.get('institution',''),r.get('url','')),{}).setdefault(r['evidence_id'],[]).append(r)
         for (inst,url),items in groups.items():
             body += f'<div class="audit-source"><p class="audit-src-head"><b>{val(inst or "出处")}</b></p>'
             if url:body += f'<p class="audit-url">{val(url)}</p>'
-            for eid,rows in items.items():
-                first=rows[0]
-                body += f'<div class="audit-ev"><p class="audit-claim">{val(first.get("label","核对项"))}</p>'
-                if first.get('excerpt'):body += f'<p class="audit-excerpt">原文：{val(first["excerpt"])}</p>'
-                body += '<p class="audit-vals">' + '；'.join(f'{val(r.get("value"))}（{secs(r.get("sections"))}）' for r in rows) + '</p></div>'
+            # 同一出处里摘录相同的几条合在一起：原文只印一次，下面逐条列出核对项和数字。
+            by_excerpt={}
+            for eid,rows in items.items():by_excerpt.setdefault(str(rows[0].get('excerpt') or ''),[]).append(rows)
+            for excerpt,claims in by_excerpt.items():
+                body += '<div class="audit-ev">'
+                for rows in claims:
+                    body += (f'<p class="audit-claim">{val(rows[0].get("label","核对项"))}：<span class="audit-vals">'
+                             + '；'.join(f'{val(r.get("value"))}（{secs(r.get("sections"))}）' for r in rows) + '</span></p>')
+                if excerpt:body += f'<p class="audit-excerpt">原文：{E(excerpt)}</p>'
+                body += '</div>'
             body += '</div>'
 
     if formulas or calc_refs:
-        body += '<h3>计算项</h3><p>按登记输入复算；长文字依据和原始数值在附件 calculations.json 里。</p><table class="audit-grid"><thead><tr><th>项目</th><th>结果</th><th>算法</th><th>所在节</th></tr></thead><tbody>'
+        body += '<h4>计算项</h4><p>按登记输入复算；长文字依据和原始数值在附件 calculations.json 里。</p><table class="audit-grid"><thead><tr><th>项目</th><th>结果</th><th>算法</th><th>所在节</th></tr></thead><tbody>'
         seen=set()
         for r in formulas:
             ref=calc_refs.get(r['path']);shown=[]
@@ -347,7 +372,7 @@ def verification_appendix_html(materials):
         body += '</tbody></table>'
 
     if model:
-        body += ('<h3>志愿计算结果</h3><p>概率是 0—1 之间的小数，由录取线模型模拟得出：单独过线 = 该志愿过线的模拟次数 ÷ 总模拟次数；最终录取 = 此前志愿都未录取、本志愿录取的次数 ÷ 总模拟次数。'
+        body += ('<h4>志愿计算结果</h4><p>概率是 0—1 之间的小数，由录取线模型模拟得出：单独过线 = 该志愿过线的模拟次数 ÷ 总模拟次数；最终录取 = 此前志愿都未录取、本志愿录取的次数 ÷ 总模拟次数。'
                  '预测位次 = 历史位次按登记漂移调整后，近期加权的对数均值。偏好分来自本人排序和登记评分。原序候选表 candidates.csv 和结果 result.json 都在附件里，可逐项复算。</p>')
         cols=['单独过线','最终录取','预测位次','偏好分'];table={}
         for r in model:
@@ -359,12 +384,12 @@ def verification_appendix_html(materials):
         body += '</tbody></table>'
 
     if registry:
-        body += '<h3>登记值</h3><p>本人画像、报告设置的个人检查点和费用情景，不是官方数据。</p><table class="audit-grid"><thead><tr><th>值</th><th>登记项</th><th>所在节</th></tr></thead><tbody>'
+        body += '<h4>登记值</h4><p>本人画像、报告设置的个人检查点和费用情景，不是官方数据。</p><table class="audit-grid"><thead><tr><th>值</th><th>登记项</th><th>所在节</th></tr></thead><tbody>'
         body += ''.join(f'<tr><td>{val(r.get("value"))}</td><td>{val(r.get("label"))}</td><td class="audit-sec">{secs(r.get("sections"))}</td></tr>' for r in registry)
         body += '</tbody></table>'
 
     if rest:
-        body += '<h3>其他核对项</h3>'
+        body += '<h4>其他核对项</h4>'
         for r in rest:
             how='；'.join(str(r.get(k)) for k in ('inputs','formula','verification_limit') if r.get(k) not in (None,'',[],{}))
             body += (f'<div class="audit-item"><p><b>{val(r.get("label","核对项"))}</b>：{val(r.get("value"))}（{secs(r.get("sections"))}）</p>'
@@ -388,19 +413,26 @@ def verification_appendix_html(materials):
             except ValueError:pass
         return text
     if limits:
-        body += '<h3>反证与限制</h3>'
+        # 适用条件和改判条件相同的限制合成一条：条件只印一次，下面列出各项。
+        grouped={}
         for row in limits:
-            body += '<div class="audit-item"><p><b>限制：</b>' + val(row.get('claim')) + '</p>'
-            if row.get('reason'):body += '<p>适用条件：' + val(row.get('reason')) + '</p>'
-            if row.get('change_if'):body += '<p>出现以下情况要改判：' + E(plain(row.get('change_if'))) + '</p>'
-            if row.get('url'):body += '<p class="audit-url">' + val(row['url']) + '</p>'
+            grouped.setdefault((str(row.get('reason') or ''),plain(row.get('change_if') or '')),[]).append(row)
+        body += '<h4>反证与限制</h4>'
+        for (reason,change),rows in grouped.items():
+            if len(rows)==1:
+                body += '<div class="audit-item"><p><b>限制：</b>' + val(rows[0].get('claim')) + '</p>'
+            else:
+                body += '<div class="audit-item"><p><b>限制（以下 ' + str(len(rows)) + ' 项条件相同）：</b></p><ul class="audit-list">' + ''.join('<li>' + val(r.get('claim')) + '</li>' for r in rows) + '</ul>'
+            if reason:body += '<p>适用条件：' + E(reason) + '</p>'
+            if change:body += '<p>出现以下情况要改判：' + E(change) + '</p>'
+            for url in dict.fromkeys(r.get('url') for r in rows if r.get('url')):body += '<p class="audit-url">' + val(url) + '</p>'
             body += '</div>'
-    body += '<h3>未取到的信息和原因</h3>'
+    body += '<h4>未取到的信息和原因</h4>'
     for row in materials.get('gaps', []):
         body += '<div class="audit-item"><p><b>' + val(row.get('label')) + '</b>：' + val(row.get('reason')) + '</p>' + (f'<p class="audit-url">{val(row["url"])}</p>' if row.get('url') else '') + '</div>'
     if not materials.get('gaps'):
         body += '<p>未登记额外取文缺口；已知限制见上节。</p>'
-    return body + '</section>'
+    return body + '</div>'
 
 
 def keep_numeric_runs(fragment):
@@ -506,7 +538,7 @@ def figure(title, content, caption, sources):
             '、'.join(f'[{n}]' for n in re.findall(r'\d+', refs)) + '</figcaption></figure>')
 
 
-def bar_chart(rows, unit='', maximum=None):
+def bar_chart(rows, unit='', maximum=None, palette=None):
     """rows=[label,value,tag?,display?]，不改数值；负值/缺失不伪装成0。"""
     rows = [list(r) for r in rows]
     vals = [float(r[1]) for r in rows if r[1] is not None]
@@ -524,7 +556,7 @@ def bar_chart(rows, unit='', maximum=None):
         else:
             if float(value) > vmax: raise ValueError('条形图数值超出上界')
             bw = plot_w*float(value)/vmax
-            out.append(f'<rect x="{label_w}" y="{y+2}" width="{bw:.2f}" height="13" fill="{PALETTE.get(tag, PALETTE["主"])}"/>')
+            out.append(f'<rect x="{label_w}" y="{y+2}" width="{bw:.2f}" height="13" fill="{(palette or PALETTE).get(tag, PALETTE["主"])}"/>')
             display = row[3] if len(row) > 3 and row[3] else f'{float(value):,.1f}'.removesuffix('.0') + (' '+unit if unit else '')
         out.append(f'<text x="635" y="{y+15}" text-anchor="end" fill="#222A26">{E(str(display))}</text>')
     out.append('</svg>'); return ''.join(out)
@@ -592,9 +624,34 @@ def kpi_cards(items, inline=E):
 
 
 def evidence_badge(level):
-    names = {'官方': 'official', '多人一致': 'corroborated', '单人说法': 'single', '推测': 'inference'}
+    names = {'官方': 'official', '多人一致': 'corroborated', '单人说法': 'single', '推测': 'inference', '未取到': 'missing'}
     if level not in names: raise ValueError('未知证据等级')
     return f'<span class="evidence {names[level]}">{level}</span>'
+
+
+def grade_of(text):
+    """调研证据等级文字 → 徽章等级；以“未取到”开头的不冒充推测。"""
+    text = str(text)
+    if text.startswith('未取到'): return '未取到'
+    return next((g for g in ('官方', '多人一致', '单人说法', '推测') if g in text), '推测')
+
+
+def school_card(r):
+    """一所学校一张卡：每个方面一句结论（brief）加证据等级；没有 brief 的方面写“见第 12 节”。"""
+    name = str(r['school']); note = ''
+    m = re.match(r'(.+?)（(.+)）$', name)
+    if m: name, note = m.groups()
+    cells = ''.join(f'<div><div class="aspect"><span>{E(a)}</span>{evidence_badge(grade_of(c))}</div>'
+                    f'<p>{E(r["brief"].get(a, "见第 12 节完整调研。"))}</p></div>' for a, b, c in r.get('items', []))
+    return f'<div class="school-card"><h3>{E(name)}' + (f'<small>{E(note)}</small>' if note else '') + f'</h3><div class="school-grid">{cells}</div></div>'
+
+
+def research_table(r, level='h3'):
+    """一所学校的完整调研表（发现原文与证据等级）。"""
+    return (f"<{level}>{E(r['school'])}</{level}><table class='rt'><colgroup><col style='width:14%'><col><col style='width:24%'></colgroup><thead><tr><th>方面</th><th>发现</th><th>证据等级</th></tr></thead><tbody>"
+            + "".join(f"<tr><td>{E(a)}</td><td>{E(b)}</td><td class='small' style='word-break:break-all'>{evidence_badge(grade_of(c))} {E(c)}</td></tr>" for a, b, c in r.get("items", []))
+            + "</tbody></table>"
+            + ("<p class='small' style='word-break:break-all'>来源：" + "；".join(E(u) for u in r["sources"]) + "</p>" if r.get("sources") else ""))
 
 
 def section_lead(body):
@@ -670,22 +727,9 @@ def interval80(x):
     return f"{round(lo):,}–{round(hi):,}"
 
 
-def bars_h(items, width=640, bar_h=13, gap=6, label_w=170, color="#34685D", fmt=lambda v: f"{v:.0%}", vmax=None):
-    """水平条形图：items = [(label, value)]"""
-    vmax = vmax or max((v for _, v in items), default=1) or 1
-    h = len(items) * (bar_h + gap) + 4
-    w_plot = width - label_w - 44
-    out = [f'<svg class="chart" viewBox="0 0 {width} {h}" xmlns="http://www.w3.org/2000/svg" font-family="PT Serif, Songti SC, Noto Serif SC, serif" font-size="10.5">']
-    for i, (lab, v) in enumerate(items):
-        y = i * (bar_h + gap) + 2
-        bw = max(0.5, w_plot * v / vmax)
-        lab = lab if len(lab) <= 16 else lab[:15] + "…"
-        out.append(f'<text x="{label_w - 6}" y="{y + bar_h - 3}" text-anchor="end" fill="#454E48">{E(lab)}</text>')
-        out.append(f'<rect x="{label_w}" y="{y}" width="{w_plot}" height="{bar_h}" fill="#E3DDCB"/>')
-        out.append(f'<rect x="{label_w}" y="{y}" width="{bw:.1f}" height="{bar_h}" fill="{color}"/>')
-        out.append(f'<text x="{label_w + bw + 4:.1f}" y="{y + bar_h - 3}" fill="#222A26">{E(fmt(v))}</text>')
-    out.append("</svg>")
-    return "".join(out)
+def bars_h(items, fmt=lambda v: f"{v:.0%}", vmax=None):
+    """水平条形图：items = [(label, value)]；与 bar_chart 同一画法（同字体、行高、底条和数值位置）。"""
+    return bar_chart([[lab, v, '次', fmt(v)] for lab, v in items], maximum=vmax or max((v for _, v in items), default=1) or 1)
 
 
 def strategy_chart(rows, width=640, fmt=None):
@@ -829,7 +873,7 @@ def build(rep, opt):
 
     # 只在封面之后另起一页，其余各节接着排：文中任何强制分页都可能让上一节剩下一两行独占一页、
     # 留下大片空白（2026-10 的样板实测如此）。表格行不拆、表头每页重复，小标题跟着下文走。
-    NEW_PAGE = {"摘要"}
+    NEW_PAGE = {"摘要", "核对与来源"}
 
     def sec(title, body):
         nonlocal n
@@ -906,10 +950,7 @@ def build(rep, opt):
                         + "</tbody></table>" if d.get("paths") else "")
                      + "</div>")
         body += "</div>"
-        matrix_rows = [[d['name'], '△ '+d.get('fit','见方向分析'), '△ 见去向门槛', '△ 见条件前景',
-                        '△ 按学校核对', '△ 见家庭约束'] for d in ds]
-        body += figure('方向比较：先看证据，再核具体学校', comparison_matrix(['兴趣匹配', '门槛', '就业', '城市', '家庭接受度'], matrix_rows),
-                       '△表示须结合下文证据或具体院校继续核实，不表示不匹配；本表不新增评分或改变方向结论。', profile_ref)
+        # 不再放全是“△ 见下文”的方向比较表：每格都没有信息，只占版面（2026-10-20）。
         if rep.get("roadmap"):
             body += ("<h3>路线图：门槛、顺序、里程碑与切换条件</h3><table><thead><tr><th style='width:20%'>核对项</th><th>安排</th></tr></thead><tbody>"
                      + "".join(f"<tr><td>{E(a)}</td><td>{E(b)}</td></tr>" for a, b in rep["roadmap"]) + "</tbody></table>")
@@ -931,8 +972,8 @@ def build(rep, opt):
             for start in range(0, len(lst), 10):
                 part = lst[start:start+10]
                 body += figure('各志愿的单独过线' + (f'（{start+1}—{start+len(part)}）' if len(lst)>10 else ''),
-                               bar_chart([[f"{x['order']:02d} {x['name'][:17]}", x['p_clear'], x['tag'], html.unescape(fmt(x['p_clear']))] for x in part], maximum=1),
-                               '红为冲、琥珀为稳、石绿为保；条长为单独过线，精度同主表。', model_ref)
+                               bar_chart([[f"{x['order']:02d} {x['name'][:17]}", x['p_clear'], x['tag'], html.unescape(fmt(x['p_clear']))] for x in part], maximum=1, palette=CERTAINTY),
+                               '琥珀为冲、石绿为稳、黛绿为保；条长为单独过线，精度同主表。', model_ref)
         body += figure('你最终会被哪里录取', outcome_strip([(x['name'], x['p_land']) for x in lst], pfall or 0, fmt=strip_fmt), STRIP_CAP, model_ref)
         cols = "<colgroup><col style='width:5%'><col style='width:35%'><col style='width:7%'><col style='width:8%'><col style='width:12%'><col style='width:12%'><col style='width:21%'></colgroup>"
         body += "<table class='vt'>"+cols+"<thead><tr><th>序</th><th>志愿</th><th>类型</th><th>偏好</th><th>单独过线</th><th>最终录取</th><th>预测位次</th></tr></thead><tbody>"
@@ -941,7 +982,7 @@ def build(rep, opt):
             probs = f"<td class='r'>{fmt(x['p_clear'])}</td><td class='r'>{fmt(x['p_land'],1)}</td>" if numeric else "<td>按分档</td><td>不显示百分比</td>"
             rank_cell = f"{x['expected_cut_rank']:,}" + (f"<div class='small'>{interval80(x)}</div>" if grade!='A' else '')
             snippets = [v.strip() for v in re.split(r'[。；]', notes.get(x['name'],'')) if v.strip() and not re.search(r'\d',v)]
-            note = snippets[0] if snippets else ('请核章程限制' if x.get('limits') else '历年位次与计划见方法附表')
+            note = snippets[0] if snippets else ('请核章程限制' if x.get('limits') else '历年位次与计划见第 12 节')
             note = note if len(note)<=18 else note[:17]+'…'
             body += (f"<tr{hl}><td class='num'>{x['order']}</td><td>{E(x['name'])}<span class='row-note'>{E(note)}</span></td>"
                      f"<td><span class='tag {E(x['tag'])}'>{E(x['tag'])}</span></td><td class='r'>{x['utility']:.1f}</td>{probs}<td class='r'>{rank_cell}</td></tr>")
@@ -981,11 +1022,14 @@ def build(rep, opt):
     rs = rep.get("research", [])
     qs = rep.get("questions", [])
     if rs or qs:
-        body = '<p class="lead">以下是对排名靠前学校的升学和就业调研。每条信息都注明了证据等级：官方文件 &gt; 多人一致 &gt; 单人说法 &gt; 推测。</p>'
+        carded = [r for r in rs if r.get('brief')]
+        if carded:
+            body = ('<p class="lead">排在前面的几所学校，每个方面只写一句结论，右上角是证据等级：官方 &gt; 多人一致 &gt; 单人说法 &gt; 推测；虚线框表示没取到。'
+                    '完整调研原文和出处在第 12 节。</p>')
+        else:
+            body = '<p class="lead">以下是对排名靠前学校的升学和就业调研。每条信息都注明了证据等级：官方文件 &gt; 多人一致 &gt; 单人说法 &gt; 推测。</p>'
         for r in rs:
-            body += f"<h3>{E(r['school'])}</h3><table class='rt'><colgroup><col style='width:14%'><col><col style='width:24%'></colgroup><thead><tr><th>方面</th><th>发现</th><th>证据等级</th></tr></thead><tbody>" + "".join(
-                f"<tr><td>{E(a)}</td><td>{E(b)}</td><td class='small' style='word-break:break-all'>{evidence_badge(next((g for g in ('官方','多人一致','单人说法','推测') if g in c), '推测'))} {E(c)}</td></tr>" for a, b, c in r.get("items", [])) + "</tbody></table>" + (
-                "<p class='small' style='word-break:break-all'>来源：" + "；".join(E(u) for u in r["sources"]) + "</p>" if r.get("sources") else "")
+            body += school_card(r) if r.get('brief') else research_table(r)
         if qs:
             body += ('<div class="box key"><h4>请你亲自去问学长学姐的问题</h4><p class="small">开头先说明：每条回答请标"确认 / 听说 / 不知道"，不确定就说不知道。最好问两个以上、不同年级的人。</p><ol class="tight">'
                      + "".join(f"<li>{E(x)}</li>" for x in qs) + "</ol></div>")
@@ -1033,38 +1077,39 @@ def build(rep, opt):
     else:
         blank("ask_me", "追问清单", "本次没有预备追问清单。")
 
-    def block(b):
+    def block(b, level='h3'):
         """方法与事后回看的小节：标题、段落、可选表格。"""
-        html = f"<h3>{E(b['title'])}</h3>" + "".join(f"<p>{E(x)}</p>" for x in b.get("paras", []))
+        html = f"<{level}>{E(b['title'])}</{level}>" + "".join(f"<p>{E(x)}</p>" for x in b.get("paras", []))
         if b.get("rows"):
             html += ("<table><thead><tr>" + "".join(f"<th>{E(c)}</th>" for c in b.get("columns", [])) + "</tr></thead><tbody>"
                      + "".join("<tr>" + "".join(td(c) for c in row) + "</tr>" for row in b["rows"]) + "</tbody></table>")
         return html + "".join(f'<p class="small">{E(x)}</p>' for x in b.get("notes", []))
 
-    # 08 方法与假设（可用术语）
-    body = '<p class="lead">这一节写给想了解细节的读者，会用到一些专业术语，术语解释在本节末尾。</p>'
-    if rep.get("assumptions"):
-        body += "<h3>关键假设</h3><table><thead><tr><th style='width:24%'>参数</th><th style='width:14%'>取值</th><th>依据</th></tr></thead><tbody>" + "".join(
-            f"<tr><td>{E(a)}</td><td class='num'>{E(str(b))}</td><td>{E(c)}</td></tr>" for a, b, c in rep["assumptions"]) + "</tbody></table>"
-    body += ("<h3>模型</h3><p>平行志愿按\"分数优先、遵循志愿、一次投档\"投档，考生落到表中第一个\"位次过线\"的志愿，因此表内按效用降序排列是最优的，需要优化的是入选集合。"
-             "各志愿今年的最低录取位次按对数正态分布建模：均值为历年位次对数的近期加权平均（以去年为主）并修正全省漂移，波动取历年离散度与下限的较大者；各志愿通过共同因子相关。"
-             "用蒙特卡洛模拟得到每种志愿组合的期望效用，再用边际改进贪心算法选择组合；基准下已无增益时，在压力情景（波动放大）下继续补位，只接受不降低基准期望的补位。</p>")
-    if rep.get("backtest"):
-        body += f"<h3>本省回测</h3><p>{E(rep['backtest'])}</p>"
+    # 10 方法与假设：正文只留读者需要的（概率可信度、回测、术语）；参数、模型和逐志愿历年数据放第 12 节。
+    body = '<p class="lead">这一节用大白话说明结论靠什么算出来、在什么情况下会不准。参数取值、模型细节和各志愿的历年位次放在第 12 节。</p>'
     if m.get("prob_grade"):
-        body += ("<h3>本报告的概率评级</h3><p><b>" + E(m["prob_grade"]) + " 级。</b>" + E(GRADE_MEANING.get(m["prob_grade"], "")) + "</p>"
+        body += ("<h3>概率能信到什么程度</h3><p><b>" + E(m["prob_grade"]) + " 级。</b>" + E(GRADE_MEANING.get(m["prob_grade"], "")) + "</p>"
                  + (f"<p>{E(m['grade_note'])}</p>" if m.get("grade_note") else ""))
-    body += "".join(block(b) for b in rep.get("methods", []))
+    if rep.get("backtest"):
+        body += f"<h3>用往年检验过吗</h3><p>{E(rep['backtest'])}</p>"
     body += ('<div class="box glossary"><h4>术语解释</h4><dl>'
              "<dt>位次</dt><dd>全省同科类考生中的排名，比分数更能跨年比较。</dd>"
              "<dt>期望效用</dt><dd>各种可能结局的满意度，按发生概率加权后的平均值。</dd>"
              "<dt>蒙特卡洛模拟</dt><dd>按历史波动随机生成几千种\"今年可能的录取线\"，统计各种结局出现的频率。</dd>"
              "<dt>漂移</dt><dd>全省录取位次整体逐年变宽或变紧的趋势。</dd>"
              "<dt>回测</dt><dd>用过去的数据去\"预测\"已经发生的年份，检验方法准不准。</dd></dl></div>")
+    details = ""
+    if rep.get("assumptions"):
+        details += "<h4>关键假设</h4><table><thead><tr><th style='width:24%'>参数</th><th style='width:14%'>取值</th><th>依据</th></tr></thead><tbody>" + "".join(
+            f"<tr><td>{E(a)}</td><td class='num'>{E(str(b))}</td><td>{E(c)}</td></tr>" for a, b, c in rep["assumptions"]) + "</tbody></table>"
+    details += ("<h4>模型</h4><p>平行志愿按\"分数优先、遵循志愿、一次投档\"投档，考生落到表中第一个\"位次过线\"的志愿，因此表内按效用降序排列是最优的，需要优化的是入选集合。"
+                "各志愿今年的最低录取位次按对数正态分布建模：均值为历年位次对数的近期加权平均（以去年为主）并修正全省漂移，波动取历年离散度与下限的较大者；各志愿通过共同因子相关。"
+                "用蒙特卡洛模拟得到每种志愿组合的期望效用，再用边际改进贪心算法选择组合；基准下已无增益时，在压力情景（波动放大）下继续补位，只接受不降低基准期望的补位。</p>")
+    details += "".join(block(b, 'h4') for b in rep.get("methods", []))
     if lst:
-        body += '<h3>各志愿历年位次与计划</h3><p class="small">原主表的历年位次、计划与组内说明集中在此；未公布或未核实的项目不补造数字。</p><table><thead><tr><th style="width:6%">序</th><th style="width:30%">志愿</th><th>历年位次、计划及补充说明</th></tr></thead><tbody>'
-        body += ''.join(f"<tr><td>{x['order']}</td><td>{E(x['name'])}</td><td>{E(rep.get('list_notes',{}).get(x['name'],'未提供历年明细'))}{group_line(x,fmt)}{limit_line(x)}</td></tr>" for x in lst)
-        body += '</tbody></table>'
+        details += '<h4>各志愿历年位次与计划</h4><p class="small">未公布或未核实的项目不补造数字。</p><table><thead><tr><th style="width:6%">序</th><th style="width:30%">志愿</th><th>历年位次、计划及补充说明</th></tr></thead><tbody>'
+        details += ''.join(f"<tr><td>{x['order']}</td><td>{E(x['name'])}</td><td>{E(rep.get('list_notes',{}).get(x['name'],'未提供历年明细'))}{group_line(x,fmt)}{limit_line(x)}</td></tr>" for x in lst)
+        details += '</tbody></table>'
     sec("方法与假设", body)
 
     # 事后回看（仅用于回测案例）
@@ -1080,14 +1125,17 @@ def build(rep, opt):
     else:
         sec("事后回看", '<p class="lead">' + E(omitted.get("hindsight", "录取结果公布后，把真实的投档线和最终去向填进这一节，与本报告的预测逐条对照：哪些判断准、哪些偏了、偏在哪里。这样下一次的判断才会更准。")) + "</p>")
 
-    # 12 来源与声明：完整网址只在此列出。
-    body = '<p><strong>以下来源对应正文编号；个人陈述、模型结果与官方资料分开列明。</strong></p>'
-    body += ('<div class="box warn"><h4>声明</h4><ol class="tight">'
-             "<li>本报告不是官方建议。一切以本省教育考试院当年的填报规则、招生计划和各校当年招生章程为准。</li>"
-             "<li>概率来自历年数据的统计推算，不是录取承诺；AI 与模型都可能出错，请交叉核实。</li>"
-             "<li>最终的决策权和后果，属于考生和家庭。</li></ol></div>")
-    body += refs.render()
-    sec("数据来源与声明", body)
+    # 12 核对与来源：写给要核对的人或 AI。正文给人读，核对用的细节都在这一章；完整网址只在此列出。
+    body = ('<p><strong>这一章写给想核对这份报告的人或 AI。</strong>正文里的数字、出处和计算都能在这里对上；PDF 还附带原始数据文件，可用阅读器的附件面板取出。</p>'
+            '<div class="box warn"><h4>声明</h4><ol class="tight">'
+            "<li>本报告不是官方建议。一切以本省教育考试院当年的填报规则、招生计划和各校当年招生章程为准。</li>"
+            "<li>概率来自历年数据的统计推算，不是录取承诺；AI 与模型都可能出错，请交叉核实。</li>"
+            "<li>最终的决策权和后果，属于考生和家庭。</li></ol></div>")
+    body += "<h3>方法细节</h3>" + details
+    if any(r.get('brief') for r in rs):
+        body += "<h3>院校调研原文</h3>" + "".join(research_table(r, 'h4') for r in rs if r.get('brief'))
+    body += VERIFY_SLOT + "<h3>来源列表</h3><p class='small'>正文方括号里的编号对应下表；个人陈述、模型结果与官方资料分开列明。</p>" + refs.render()
+    sec("核对与来源", body)
 
     from datetime import date
     generated = date.today().isoformat()

@@ -427,7 +427,7 @@ def build_html(meta, body_html, sections, notes=None):
                               meta.get('conclusion',meta.get('note','')),[(num,t) for num,t,_ in sections if num])
     parts = []
     for idx,(num,t,sec_html) in enumerate(sections):
-        if idx==0: sec_html = sec_html.replace('<section ', '<section class="newpage" ',1)
+        if idx==0 or num=='12': sec_html = sec_html.replace('<section ', '<section class="newpage" ',1)
         if num != '12': sec_html = notes.compact(_report.section_lead(sec_html))
         else: sec_html = _report.section_lead(sec_html)
         parts.append(sec_html+'</section>')

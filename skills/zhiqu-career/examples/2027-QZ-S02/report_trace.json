@@ -14,14 +14,14 @@
     "profile.json": "e985adff4dc5eb31443eef9a859f0e7955f84936dd8dab27a61b56e4b2e50d29",
     "profile-supplement.txt": "7ae0beb59e74158ec5ff869bb796f5cf3352fb7fa5c9ab7172ee930e91c93360"
   },
-  "contract_sha256": "affc47ff0df415d88221ddee76feb600856414b92cdd1c56130f86938e5cd381",
+  "contract_sha256": "c55c7922148c63af3f8d3624354398a8ac9b5127254d720da4415fa1c01766ec",
   "tool_sha256": {
-    "planning_report.py": "8d698258e1450570ac3f4691a9aff48661c260da9138f06c343803d821c74995",
+    "planning_report.py": "9209ff5aa469e22190e2ca8b6e93bdbd7d38cf93c84549a234d70eb68b10c5ee",
     "planning_workflow.py": "11717f0a5a3da33cc870959d127b86a952ce4390741dfce2f3953870498c632f",
     "operator_check.py": "a6552c0b63a8a6b5d15c9a1057fbc2884fb85435b1b102fbf4a48dd74c4e7ebb",
     "check_demos.py": "fc8e1625f9e052373756160514ad5c73db1e8451c233425918edb5bc839d9f63",
-    "report.py": "042c41525bca5901b3f738028bb74a0d12b33f77baf5e883897582bed39c7180",
-    "render_report.py": "e85ed74d89613ce9ba1017680c14ef385624b5892151b1c1ce472ef4e1748676",
+    "report.py": "c6d2f40f1a785f6435f76ea4d9556d5185f0b17b563f0411b9ea2af7acd1a6f3",
+    "render_report.py": "4e020d5ce396389dc84c388f1d3c117cff7feb9530c4042ef8f4ac7cfb6c4a9f",
     "profile_store.py": "1cfd828583598a65cf719a46447cb3112ef0170eb1a638b89ab023cb47a04e7f"
   },
   "numeric_refs": [
@@ -429,9 +429,9 @@
     }
   ],
   "artifacts": {
-    "report.md": "21453d34410b026363848376fe5206b0761fac2ec0c0c414f7e43b7093637657",
-    "report.html": "63150c350c792476a6f39812890b23314e74c1abe801481c92c45df8aefb50a3",
-    "report.pdf": "1b85b8d33cd1c26de60510f975e90e6064cf66977279fcaf57134e60f9b3da75"
+    "report.md": "d9ff147d0a40a37117ad7e7133ca97dc9e858b6d8263c18284635388b88bc919",
+    "report.html": "3a9c5bb519e247f47cb87e2ae7c9f08f472e7a3fe9b77cba68362b9e62d355d8",
+    "report.pdf": "c34575b469d83aa53a3287840d0b8946bf8fb41c29cfa1cf0349dc6774a9dc32"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "report_profile": {
@@ -441,7 +441,7 @@
     "form": "ab439b1f"
   },
   "verification_tools_sha256": {
-    "verify_report.py": "f2956275f3d7da63daca855782729e5c9864db03bb4c9c3d84989744c1baf453",
+    "verify_report.py": "3928eb8bf63bf93e46b0a24e9b8f1aa7db3acea564dbc5c4ac38d72954a26595",
     "verification_calculations.py": "9ac916e796eab7676a4054b27d40674a25a0e78f8a5a9837f32ab9941381dea9"
   }
 }
