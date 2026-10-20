@@ -774,6 +774,9 @@ def interval_chart(rows, unit='分'):
     """
     rows = [list(r) + [None] * (8 - len(r)) for r in rows]
     vals = [float(v) for r in rows for v in r[1:8] if v is not None]
+    # 同一张图里数字写法一致：千分位，小数位取全图所需的最多位（最多 1 位）
+    places = 1 if any(abs(v - round(v)) > 1e-9 for v in vals) else 0
+    num = lambda v: f'{float(v):,.{places}f}'
     for label, lo, hi, point, vmin, vmax, med, line in rows:
         if vmin is not None and vmax is not None and vmin > vmax: raise ValueError('最低分不可大于最高分')
         if lo is not None and hi is not None and lo > hi: raise ValueError('区间下界不可大于上界')
@@ -794,11 +797,11 @@ def interval_chart(rows, unit='分'):
         detail = []
         if vmin is not None and vmax is not None:
             body.append(f'<line x1="{scale(vmin):.2f}" x2="{scale(vmax):.2f}" y1="{y}" y2="{y}" stroke="#34685D" stroke-width="1.2"/>')
-            used.append('range'); detail.append(f'全距 {vmin:g}—{vmax:g}')
+            used.append('range'); detail.append(f'全距 {num(vmin)}—{num(vmax)}')
         if lo is not None and hi is not None:
             body.append(f'<line x1="{scale(lo):.2f}" x2="{scale(hi):.2f}" y1="{y}" y2="{y}" stroke="#34685D" stroke-width="7"/>')
             used.append('iqr')
-            body.append(f'<text x="{VALUE_R}" y="{y + 3.5:.1f}" text-anchor="end" fill="{INK}">{lo:g}—{hi:g} {E(unit)}</text>')
+            body.append(f'<text x="{VALUE_R}" y="{y + 3.5:.1f}" text-anchor="end" fill="{INK}">{num(lo)}—{num(hi)} {E(unit)}</text>')
         else:
             body.append(f'<rect x="{PLOT_L}" y="{y - 6}" width="{PLOT_R - PLOT_L}" height="12" fill="none" stroke="{RULE}" stroke-width=".8" stroke-dasharray="3 2"/>'
                         f'<text x="{PLOT_L + 6}" y="{y + 3.5:.1f}" font-size="{FS_SMALL}" fill="{MUTED}">区间未取到</text>'
@@ -806,10 +809,10 @@ def interval_chart(rows, unit='分'):
         if med is not None:
             body.append(marks['median'][0](scale(med), y)); used.append('median')
         if line is not None:
-            body.append(marks['line'][0](scale(line), y)); used.append('line'); detail.append(f'复试线 {line:g}')
+            body.append(marks['line'][0](scale(line), y)); used.append('line'); detail.append(f'复试线 {num(line)}')
         if point is not None:
             body.append(marks['point'][0](scale(point), y)); used.append('point')
-            if not common: detail.append(f'对照 {point:g}')
+            if not common: detail.append(f'对照 {num(point)}')
         if detail:
             body.append(f'<text x="{VALUE_R}" y="{y + 15:.1f}" text-anchor="end" font-size="{FS_SMALL}" fill="{MUTED}">{E("；".join(detail))}</text>')
     out = []
@@ -823,7 +826,7 @@ def interval_chart(rows, unit='分'):
     if common:
         pv = next(iter(points)); xp = scale(pv)
         out.append(f'<line x1="{xp:.2f}" x2="{xp:.2f}" y1="{top - 2}" y2="{axis_y}" stroke="#A8772B" stroke-width=".9" stroke-dasharray="3 2"/>'
-                   f'<text x="{xp:.2f}" y="{top - 5}" text-anchor="middle" font-size="{FS_SMALL}" fill="#A8772B">对照 {pv:g} {E(unit)}</text>')
+                   f'<text x="{xp:.2f}" y="{top - 5}" text-anchor="middle" font-size="{FS_SMALL}" fill="#A8772B">对照 {num(pv)} {E(unit)}</text>')
     out.extend(body)
     if used:
         out.append(_legend([marks[k] for k in used], height - 5, 0)[0])

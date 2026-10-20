@@ -284,7 +284,7 @@
   },
   "snapshot": {
     "report.json": "5a49a8833e089f79a1f50a0c75b500affa09ccae795e2fea524db613ef4d40f2",
-    "report.pdf": "456ff985733de16f7fdc9aeda6b45d533b01cd27e17962f347174773bbffb362",
+    "report.pdf": "02ef8114eeed90a2cad29710b498d0e5cda14377b005a8a04e996f4c31d1b026",
     "operator_check.md": "acd105857db055023ea4efd471df19850b7061cb5f3cbf446be9cccf9e3a97f1",
     "result.json": "c3bab0852cebaf29ac71b12573555bb4ee93b54f48cb37fe3cfadf5c0f0eb844",
     "case.json": "de59c1629505cf111abfb196b02acdac09045906e4382c36f3aff3c462e7fe45",
@@ -373,6 +373,16 @@
         "report_trace.json"
       ],
       "reason": "新增“第三方整理”证据等级样式；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "区间图数字格式统一；内容未变。"
     }
   ]
 }

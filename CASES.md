@@ -87,6 +87,7 @@
 |---|---|---|
 | **小林** · 广东电气大四 · 读研 | 均分 80，六级没过，想考华南理工大学电气专硕；把可能的初试分数放进华工两年的录取分布里看位置 | [报告](skills/zhiqu-grad/examples/demo_2027/report.pdf) · [说明](skills/zhiqu-grad/examples/demo_2027/README.md) |
 | **小宁** · 四川高职会计 · 求职 | 家里支持有限，毕业三个月内要有收入；两个 offer 按个税、社保、公积金算到手收入和每月结余 | [报告](skills/zhiqu-career/examples/demo_2027/report.pdf) · [说明](skills/zhiqu-career/examples/demo_2027/README.md) |
+| **小桐** · 浙江本科财务管理 · 求职 | 还没有 offer，想去企业做财务，父母希望考公、进银行；用省考职位表和缴费人数看对口职位有多挤，用工资分位看大致高低，再定主线、并行和退路 | [报告](skills/zhiqu-career/examples/2027-QZ-S05/report.pdf) · [说明](skills/zhiqu-career/examples/2027-QZ-S05/README.md) |
 
 ## 复现与更新
 

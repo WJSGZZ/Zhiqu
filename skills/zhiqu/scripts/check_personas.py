@@ -14,7 +14,8 @@ from planning_workflow import PlanningCase, SKILLS
 
 LIBRARY=SKILLS/'zhiqu-shared/references/sim-personas.md'
 CASES=(('grad','2028-YJ-S02',10),('grad','2027-YJ-S03',4),('grad','2027-YJ-S04',4),
-       ('career','2027-QZ-S02',10),('career','2027-QZ-S03',4),('career','2027-QZ-S04',4))
+       ('career','2027-QZ-S02',10),('career','2027-QZ-S03',4),('career','2027-QZ-S04',4),
+       ('career','2027-QZ-S05',10))
 
 
 def profiles(text):
@@ -136,5 +137,5 @@ def main():
     if errors:
         for e in errors:print(e)
         raise SystemExit(1)
-    print('模拟人物回归通过：两份完整流程，四份仅阶段 0—4；JSON 画像与问卷题号、题干和节名一致。')
+    print('模拟人物回归通过：三份完整流程，四份仅阶段 0—4；JSON 画像与问卷题号、题干和节名一致。')
 if __name__=='__main__':main()

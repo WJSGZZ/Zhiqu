@@ -106,9 +106,9 @@
     "narrative.json": "265288c7a1dad477f1f110b65b017c4a9301b8950af8e5d9f5ac83c38bdf5e4d",
     "profile.txt": "69dfeb57cf005a4ace3990e51a96b3b821e9de0c130dd1f8eae5b2088f5bef5e",
     "report.md": "56865889da5bd4655b01c6a8d3a256e905ab49e4ffbd3cf4442f6f0e444e478c",
-    "report.html": "caea4ac5e86ab7fa56d8c3747f45d6995e7dff8507db407cffc4bb710df5e2c9",
-    "report.pdf": "11cf2d85af6f7b41d631ba8a9d8fd72a920f14a849c32e5859161d477c1c4ff9",
-    "report_trace.json": "b669ee5c0eb584c8973affaf4d9c3a1142319221554552e2aecc56ca3d81c3f4",
+    "report.html": "767d33f73205e9b31d1d58b43ea48c9c396ad49848b08803140c56c5e24b844e",
+    "report.pdf": "afea2199c28e899b4ba711220ee2aedaa6424f772f15f1ba38dd4b04cb7f384a",
+    "report_trace.json": "c8b539c172515c81ad3ad0eb97db74b719b1c387b61b444699c6bb516ff8404f",
     "operator_check.md": "d93856cd7151715936ddc759a6949f4b879c955e474922c12f5ece921e110dcc",
     "profile_snapshot.json": "0a6cb6835c42b9e3a0e18679bd40d3c99c433453287f9e2a231e357647a858d9"
   },
@@ -241,6 +241,17 @@
         "report_trace.json"
       ],
       "reason": "新增“第三方整理”证据等级样式；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.md",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "区间图数字格式统一；内容未变。"
     }
   ]
 }
