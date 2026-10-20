@@ -1,0 +1,313 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-10-20",
+  "items": [
+    {
+      "id": "R01",
+      "claim": "当届网上报名与初试时间",
+      "evidence_refs": [
+        "E010",
+        "E011",
+        "E012",
+        "E013",
+        "E017",
+        "E018"
+      ],
+      "status": "verified",
+      "scope": "2027年硕士招生全国统考；当届文件",
+      "volatile": true,
+      "verified_on": "2026-10-20",
+      "review_due": "2026-11-19",
+      "gap": null
+    },
+    {
+      "id": "R02",
+      "claim": "差额复试与初试权重的一般规定",
+      "evidence_refs": [
+        "E014",
+        "E015",
+        "E019"
+      ],
+      "status": "verified",
+      "scope": "2027年硕士招生；各校具体办法另核",
+      "volatile": true,
+      "verified_on": "2026-10-20",
+      "review_due": "2026-11-19",
+      "gap": null
+    },
+    {
+      "id": "R03",
+      "claim": "调剂的成绩与科目基本要求",
+      "evidence_refs": [
+        "E016"
+      ],
+      "status": "verified",
+      "scope": "2027年硕士招生调剂",
+      "volatile": true,
+      "verified_on": "2026-10-20",
+      "review_due": "2026-11-19",
+      "gap": null
+    },
+    {
+      "id": "R04",
+      "claim": "上一届工学国家线（只作参照）",
+      "evidence_refs": [
+        "E020",
+        "E021",
+        "E022"
+      ],
+      "status": "verified",
+      "scope": "2026年国家线；2027年国家线出分后才公布",
+      "volatile": true,
+      "verified_on": "2026-10-20",
+      "review_due": "2026-11-19",
+      "gap": null
+    },
+    {
+      "id": "R05",
+      "claim": "苏大计算机学院上一届复试线与复试分值",
+      "evidence_refs": [
+        "E030",
+        "E032",
+        "E033",
+        "E034",
+        "E041",
+        "E043",
+        "E046"
+      ],
+      "status": "verified",
+      "scope": "2026年；2027年复试细则未发布",
+      "volatile": true,
+      "verified_on": "2026-10-20",
+      "review_due": "2026-11-19",
+      "gap": null
+    },
+    {
+      "id": "R06",
+      "claim": "苏大当届目录科目、复试机考与公开招考计划",
+      "evidence_refs": [
+        "E035",
+        "E036",
+        "E037",
+        "E038",
+        "E040",
+        "E039",
+        "E047"
+      ],
+      "status": "verified",
+      "scope": "2027年；计划以教育部下达为准",
+      "volatile": true,
+      "verified_on": "2026-10-20",
+      "review_due": "2026-11-19",
+      "gap": null
+    },
+    {
+      "id": "R07",
+      "claim": "两校上一届和前一届拟录取名单（匿名初试分）",
+      "evidence_refs": [
+        "E042",
+        "E044",
+        "E065",
+        "E066",
+        "E068",
+        "E069",
+        "E071",
+        "E045",
+        "E074",
+        "E075",
+        "E076"
+      ],
+      "status": "verified",
+      "scope": "2025、2026年一志愿统考名单；只存匿名分数",
+      "volatile": true,
+      "verified_on": "2026-10-20",
+      "review_due": "2026-11-19",
+      "gap": null
+    },
+    {
+      "id": "R08",
+      "claim": "河海计算机学院两届复试线",
+      "evidence_refs": [
+        "E050",
+        "E051",
+        "E053",
+        "E054",
+        "E056",
+        "E052",
+        "E055",
+        "E062"
+      ],
+      "status": "verified",
+      "scope": "2025、2026年；不含专项计划",
+      "volatile": true,
+      "verified_on": "2026-10-20",
+      "review_due": "2026-11-19",
+      "gap": null
+    },
+    {
+      "id": "R09",
+      "claim": "河海上一届目录、学院细则与联培说明",
+      "evidence_refs": [
+        "E057",
+        "E058",
+        "E059",
+        "E060",
+        "E061",
+        "E063",
+        "E064",
+        "E121",
+        "E122",
+        "E067",
+        "E070"
+      ],
+      "status": "verified",
+      "scope": "2025、2026年；当届目录未取到",
+      "volatile": true,
+      "verified_on": "2026-10-20",
+      "review_due": "2026-11-19",
+      "gap": null
+    },
+    {
+      "id": "R10",
+      "claim": "南航计算机学院两届复试线与计划数",
+      "evidence_refs": [
+        "E080",
+        "E081",
+        "E082",
+        "E083",
+        "E084"
+      ],
+      "status": "verified",
+      "scope": "2025、2026年",
+      "volatile": true,
+      "verified_on": "2026-10-20",
+      "review_due": "2026-11-19",
+      "gap": null
+    },
+    {
+      "id": "R11",
+      "claim": "南邮计算机学院复试线与报录情况",
+      "evidence_refs": [
+        "E090",
+        "E091",
+        "E092",
+        "E093",
+        "E094"
+      ],
+      "status": "verified",
+      "scope": "2025、2026年",
+      "volatile": true,
+      "verified_on": "2026-10-20",
+      "review_due": "2026-11-19",
+      "gap": null
+    },
+    {
+      "id": "R12",
+      "claim": "江大人工智能与计算机学院复试线",
+      "evidence_refs": [
+        "E100",
+        "E101",
+        "E102"
+      ],
+      "status": "verified",
+      "scope": "2025、2026年",
+      "volatile": true,
+      "verified_on": "2026-10-20",
+      "review_due": "2026-11-19",
+      "gap": null
+    },
+    {
+      "id": "R13",
+      "claim": "南理工计算机学院前一届复试线",
+      "evidence_refs": [
+        "E110",
+        "E111"
+      ],
+      "status": "verified",
+      "scope": "2025年",
+      "volatile": true,
+      "verified_on": "2026-10-20",
+      "review_due": "2026-11-19",
+      "gap": null
+    },
+    {
+      "id": "R14",
+      "claim": "河海当届招生目录",
+      "evidence_refs": [
+        "E072"
+      ],
+      "status": "unretrieved",
+      "scope": "2027年",
+      "volatile": true,
+      "verified_on": "2026-10-20",
+      "review_due": "2026-11-19",
+      "gap": "栏目未见2027目录条目；河海各项按上一届科目看，报名前须本人在研招网目录核一次"
+    },
+    {
+      "id": "R15",
+      "claim": "报考点缴费与审核做法（河海报考点，参照）",
+      "evidence_refs": [
+        "E073"
+      ],
+      "status": "verified",
+      "scope": "只适用于河海报考点；本人报考点另核",
+      "volatile": true,
+      "verified_on": "2026-10-20",
+      "review_due": "2026-11-19",
+      "gap": null
+    },
+    {
+      "id": "R16",
+      "claim": "南航当届科目与拟录取分布",
+      "evidence_refs": [
+        "E085",
+        "E086"
+      ],
+      "status": "unretrieved",
+      "scope": "2026、2027年",
+      "volatile": true,
+      "verified_on": "2026-10-20",
+      "review_due": "2026-11-19",
+      "gap": "动态查询页与栏目未取到；不定档，报名前本人查研招网目录"
+    },
+    {
+      "id": "R17",
+      "claim": "南邮当届科目与拟录取分布",
+      "evidence_refs": [
+        "E095"
+      ],
+      "status": "unretrieved",
+      "scope": "2026、2027年",
+      "volatile": true,
+      "verified_on": "2026-10-20",
+      "review_due": "2026-11-19",
+      "gap": "目录动态加载、名单未找到；不定档"
+    },
+    {
+      "id": "R18",
+      "claim": "江大当届科目与拟录取分布",
+      "evidence_refs": [
+        "E103"
+      ],
+      "status": "unretrieved",
+      "scope": "2026、2027年",
+      "volatile": true,
+      "verified_on": "2026-10-20",
+      "review_due": "2026-11-19",
+      "gap": "附件下载失败、名单链接失效；不定档"
+    },
+    {
+      "id": "R19",
+      "claim": "南理工上一届复试线与当届科目",
+      "evidence_refs": [
+        "E112"
+      ],
+      "status": "unretrieved",
+      "scope": "2026、2027年",
+      "volatile": true,
+      "verified_on": "2026-10-20",
+      "review_due": "2026-11-19",
+      "gap": "页面需登录；不定档"
+    }
+  ]
+}

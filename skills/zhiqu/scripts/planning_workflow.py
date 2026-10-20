@@ -27,6 +27,9 @@ REF = re.compile(r'\{\{(e|c|k|p):([^{}|]+?)(?:\|([^{}]+))?\}\}')
 NUMBER = re.compile(r'(?<![A-Za-z])\d[\d,]*(?:\.\d+)?(?:%|％)?')
 CHINESE_QUANTITY = re.compile(r'[零〇一二两三四五六七八九十百千万]+(?=\s*(?:元|分(?!位|制|比)|人|名|个月|万元|%))')
 DATE = re.compile(r'^\d{4}-\d{2}-\d{2}$')
+TIERS = ('相对稳妥', '够一够', '冒险')
+UNTIERED = '不定档'
+UNTIERED_REASONS = ('科目不同', '分布缺失', '样本太少', '口径不一致')
 
 
 def read(path):
@@ -444,9 +447,14 @@ class PlanningCase:
             assessment=c.get('personal_difficulty',{});mock=assessment.get('mock_exam')
             if mock and not self.has_complete_mock():self.err('candidates.json','personal_difficulty','模考记录不完整、不同科目或缺有效成绩证据')
             if self.has_complete_mock():
-                if {x.get('tier') for x in pool}!={'相对稳妥','够一够','冒险'}:self.err('candidates.json','school_programs','有同科目完整模考证据后须分个人条件档')
+                # 每个候选要么有档，要么明写“不定档”及枚举原因；三档不要求齐（缺“相对稳妥”时由阶段7查保底路径）。
+                for x in pool:
+                    tier=x.get('tier')
+                    if tier in TIERS:continue
+                    if tier!=UNTIERED:self.err('candidates.json',x.get('id','?')+'.tier','有同科目完整模考证据后须定档，或写“不定档”及原因')
+                    elif x.get('untiered_reason') not in UNTIERED_REASONS:self.err('candidates.json',x.get('id','?')+'.untiered_reason','不定档原因须为：'+'、'.join(UNTIERED_REASONS))
             else:
-                if any(x.get('tier') for x in pool):self.err('candidates.json','school_programs','无同科目完整模考证据，不得标个人难度档')
+                if any(x.get('tier') in TIERS for x in pool):self.err('candidates.json','school_programs','无同科目完整模考证据，不得标个人难度档')
                 checkpoint=assessment.get('checkpoint',{})
                 try:
                     day(self.expand(checkpoint['date']))
@@ -569,6 +577,16 @@ class PlanningCase:
         for c in j.get('candidates',[]):
             for key in ('supports','counters','costs','fallback','switch_conditions','checkpoint'):
                 if not c.get(key):self.err('judgment.json',c.get('candidate_id','?')+'.'+key,'缺判断依据')
+        if self.kind=='grad' and self.case.get('context',{}).get('takes_kaoyan') and self.has_complete_mock():
+            pool=self.data.get('candidates.json',{}).get('school_programs',[])
+            if not any(x.get('tier')=='相对稳妥' for x in pool):
+                # 没有数据可靠的稳妥档时，必须写明保底路径和触发条件，不能让一志愿“够一够”冒充有保底。
+                paths={x['id'] for x in self.data.get('candidates.json',{}).get('paths',[])}
+                fallback=j.get('fallback_paths')
+                if not isinstance(fallback,list) or not fallback:self.err('judgment.json','fallback_paths','没有“相对稳妥”档时须写明保底路径（调剂、春招或二战等）及其触发条件')
+                else:
+                    for i,f in enumerate(fallback):
+                        if f.get('path_id') not in paths or not f.get('trigger') or not f.get('timing'):self.err('judgment.json',f'fallback_paths[{i}]','保底路径须对应已登记路径，并写触发条件与时间')
         if not all(j.get('recommendation',{}).get(k) for k in ('primary','backup','conditions')):self.err('judgment.json','recommendation','缺主路径/保险路径/条件')
         known={c['id'] for key in ('school_programs','paths','job_types','jobs') for c in self.data.get('candidates.json',{}).get(key,[])}
         if any(cid not in known for key in ('primary','backup') for cid in j.get('recommendation',{}).get(key,[])):self.err('judgment.json','recommendation','推荐了未登记候选')

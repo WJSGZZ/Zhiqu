@@ -77,6 +77,60 @@ class TestCheckLayout(unittest.TestCase):
         self.assertEqual(self.issues(rows), [])
 
 
+def make_pages(path, pages):
+    """pages: 每页 [(y, 文字, 字号)]；y<56 的行当页眉。"""
+    doc = pymupdf.open()
+    for rows in pages:
+        page = doc.new_page(width=595, height=842)
+        for y, text, size in rows:
+            page.insert_text((56, y), text, fontsize=size, fontname=FONT)
+    doc.save(path)
+
+
+@unittest.skipIf(pymupdf is None, "需要 PyMuPDF")
+class TestBlankPages(unittest.TestCase):
+    HEAD = [(30, "知衢 · 求职决策报告", 8)]
+    BODY = "这是一段正常宽度的说明文字，每行二十多个字，连续写好几行。"
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.path = os.path.join(self.tmp.name, "b.pdf")
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def issues(self, pages):
+        make_pages(self.path, pages)
+        return check_layout.check_pdf(self.path)
+
+    def half(self, until):
+        return self.HEAD + [(80 + 15 * k, self.BODY, 10) for k in range(int((until - 80) / 15))]
+
+    def full(self):
+        return self.half(780)
+
+    def test_mid_section_blank_fails_with_page_and_position(self):
+        out = self.issues([self.half(400), self.HEAD + [(80, "六条路放在一起比", 8.8)] + self.full()[1:]])
+        self.assertEqual(len(out), 1)
+        self.assertIn("第 1 页", out[0])
+        self.assertIn("大片空白", out[0])
+        self.assertRegex(out[0], r"从距页顶 \d+mm 到 \d+mm")
+
+    def test_small_blank_passes(self):
+        self.assertEqual(self.issues([self.half(600), self.full()]), [])
+
+    def test_section_end_page_is_allowed(self):
+        self.assertEqual(self.issues([self.half(300), self.HEAD + [(80, "05 方向比较", 18)] + self.full()[1:]]), [])
+
+    def test_last_page_and_cover_are_allowed(self):
+        cover = [(100, "求职方向决策报告", 30)]
+        self.assertEqual(self.issues([cover, self.full(), self.half(200)]), [])
+
+    def test_table_of_contents_page_is_allowed(self):
+        toc = self.HEAD + [(80, "目录", 10), (100, "01 摘要", 10)]
+        self.assertEqual(self.issues([toc, self.full()]), [])
+
+
 class TestLayoutGate(unittest.TestCase):
     def test_gate_stops_on_issues(self):
         with patch("check_layout.check_pdf", return_value=["第 3 页：数字被拆成两行（16）"]), \

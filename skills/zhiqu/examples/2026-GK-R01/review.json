@@ -324,7 +324,7 @@
   },
   "snapshot": {
     "report.json": "bd7a38a056ef74b02bfbe48f0a2607206b19b75226896cfb7f0a5526d9d67789",
-    "report.pdf": "199578e230f729690ebccd6e38c0cce4df17098da2ccd1dc1acbfd394d5d613e",
+    "report.pdf": "4b63aa5859218bb9e75c965095847d1d23fdafa80c9e34bf6ca8223561bc6e18",
     "operator_check.md": "2eb799f9adbcca548e1f987d1bd7e5ebcbdd2d902441820a25050d388070a6e1",
     "result.json": "178b8219f95f1a0f6f131bd29456209a170afce250aa05898694b3d1d9e1f63d",
     "retro_ranks/10000/result.json": "da4c3af0f0c9708f12a75058fdca87239d6c31987d4fb7aef1612ec8a9d135f1",
@@ -429,6 +429,26 @@
         "report_trace.json"
       ],
       "reason": "区间图数字格式统一；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "新增正文页空白检查命中第 7 页（路线图卡整块换页留下约半页空白）；report.py 让路线图卡可在格与格之间换页（格内不拆、标题不落单）后重新生成；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "合入两份旗舰后共用版面与核对工具更新；内容未变。"
     }
   ]
 }

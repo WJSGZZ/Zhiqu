@@ -212,6 +212,8 @@ i.fk.unknown { border:.8pt dashed var(--rule2); }
 /* 院校卡片：一格一个方面、一句结论；完整调研在第 12 节。 */
 .school-card { background:#FFFDF8; border-top:1.6pt solid var(--accent2); padding:3.5mm 5mm 1mm; margin:0 0 5mm; break-inside:avoid; }
 .school-card h3 { margin:0 0 2.5mm; font-size:11.5pt; }
+/* 长信息卡（高考路线图）可在格与格之间换页，格内不拆、标题不落单：整块卡挤到下一页会在节中间留下大半页空白（2026-10-20 版面空白检查）。 */
+.school-card.breakable { break-inside:auto; -webkit-box-decoration-break:clone; box-decoration-break:clone; } .school-card.breakable h3 { break-after:avoid; } .school-card.breakable .school-grid > div { break-inside:avoid; }
 .school-card h3 small { font:400 8pt var(--sans); color:var(--muted); margin-left:2mm; }
 .school-grid { display:grid; grid-template-columns:1fr 1fr; gap:0 7mm; }
 .school-grid > div { border-top:.4pt solid var(--rule); padding:1.8mm 0 2.2mm; }
@@ -944,8 +946,14 @@ def flow(rows):
                 if sd in exits: raise ValueError('判断的同一侧只能引出一条分支')
                 exits.add(sd)
                 vx = n['cx'] + sd * n['w'] / 2
+                side_x = c['cx'] - sd * c['w'] / 2
+                top_taken = any(q != n['id'] and abs(nodes[q]['cx'] - c['cx']) <= 1 for q in c['parents'])
                 if t in side:
-                    pts = [(vx, n['cy']), (c['cx'] - sd * c['w'] / 2, n['cy'])]
+                    pts = [(vx, n['cy']), (side_x, n['cy'])]
+                elif top_taken and c['cy'] > n['cy'] + 1 and sd * (side_x - vx) >= 16:
+                    # 目标的上方入口已被正上方的父节点占用：从朝向本节点的侧边进入，各自带箭头，不在线段中途汇合。
+                    ex = side_x - sd * 10
+                    pts = [(vx, n['cy']), (ex, n['cy']), (ex, c['cy']), (side_x, c['cy'])]
                 elif sd * (c['cx'] - vx) >= 6:
                     pts = [(vx, n['cy']), (c['cx'], n['cy']), (c['cx'], top)]
                 else:
@@ -1305,11 +1313,13 @@ def school_card(r):
     return info_card(name, [(a, r["brief"].get(a, "见第 12 节完整调研。"), evidence_badge(grade_of(c))) for a, b, c in r.get('items', [])], note)
 
 
-def info_card(title, cells, note=''):
-    """信息卡：标题加两栏小格，每格一个小标签、一段话，可带右上角徽章。院校调研、高考路线图共用。"""
+def info_card(title, cells, note='', breakable=False):
+    """信息卡：标题加两栏小格，每格一个小标签、一段话，可带右上角徽章。院校调研、高考路线图共用。
+    breakable=True 时允许在格与格之间换页（格内不拆），用于路线图这类长卡片。"""
     body = ''.join(f'<div><div class="aspect"><span>{E(label)}</span>{badge}</div><p>{E(text)}</p></div>'
                    for label, text, *rest in cells for badge in [rest[0] if rest else ''])
-    return f'<div class="school-card"><h3>{E(title)}' + (f'<small>{E(note)}</small>' if note else '') + f'</h3><div class="school-grid">{body}</div></div>'
+    cls = 'school-card breakable' if breakable else 'school-card'
+    return f'<div class="{cls}"><h3>{E(title)}' + (f'<small>{E(note)}</small>' if note else '') + f'</h3><div class="school-grid">{body}</div></div>'
 
 
 def research_table(r, level='h3'):
@@ -1679,7 +1689,7 @@ def build(rep, opt):
         body += "</div>"
         # 不再放全是“△ 见下文”的方向比较表：每格都没有信息，只占版面（2026-10-20）。
         if rep.get("roadmap"):
-            body += info_card("路线图：门槛、顺序、里程碑与切换条件", rep["roadmap"])
+            body += info_card("路线图：门槛、顺序、里程碑与切换条件", rep["roadmap"], breakable=True)
         if rep.get("news"):
             body += ("<h3>近期报道与政策</h3><p class='small'>前景和录取线都会受社会情况影响。下表是填报前查到的相关报道，影响一栏是本报告的判断。</p>"
                      "<table><thead><tr><th>事件</th><th style='width:12%'>日期</th><th style='width:22%'>来源</th><th style='width:30%'>对本报告的影响</th></tr></thead><tbody>"

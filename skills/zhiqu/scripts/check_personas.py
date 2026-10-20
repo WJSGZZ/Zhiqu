@@ -15,7 +15,7 @@ from planning_workflow import PlanningCase, SKILLS
 LIBRARY=SKILLS/'zhiqu-shared/references/sim-personas.md'
 CASES=(('grad','2028-YJ-S02',10),('grad','2027-YJ-S03',4),('grad','2027-YJ-S04',4),
        ('career','2027-QZ-S02',10),('career','2027-QZ-S03',4),('career','2027-QZ-S04',4),
-       ('career','2027-QZ-S05',10))
+       ('career','2027-QZ-S05',10),('grad','2027-YJ-S05',10))
 
 
 def profiles(text):
@@ -126,7 +126,9 @@ def check(root=SKILLS,library=LIBRARY):
                     if (path/f).exists():errors.append(cid+'：前半程人物出现超出范围的产物 '+f)
             else:
                 review=json.loads((path/'review.json').read_text())
-                if review.get('status')!='awaiting_independent_review' or review.get('independent') is not False:errors.append(cid+'：不能冒充独立审核通过')
+                approved=review.get('status')=='approved' and review.get('independent') is True and review.get('reviewer') and review.get('date')
+                waiting=review.get('status') in ('awaiting_independent_review','changes_required') and review.get('independent') is not True
+                if not (approved or waiting):errors.append(cid+'：不能冒充独立审核通过')
         except (OSError,KeyError,ValueError,TypeError) as exc:errors.append(cid+'：'+str(exc))
     return errors
 
@@ -137,5 +139,5 @@ def main():
     if errors:
         for e in errors:print(e)
         raise SystemExit(1)
-    print('模拟人物回归通过：三份完整流程，四份仅阶段 0—4；JSON 画像与问卷题号、题干和节名一致。')
+    print('模拟人物回归通过：四份完整流程，四份仅阶段 0—4；JSON 画像与问卷题号、题干和节名一致。')
 if __name__=='__main__':main()

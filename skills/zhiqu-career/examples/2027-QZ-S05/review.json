@@ -1,15 +1,218 @@
 {
   "schema_version": 1,
-  "status": "awaiting_independent_review",
-  "status_label": "试跑自评通过、等待独立审核",
-  "independent": false,
-  "reviewer": null,
-  "date": null,
+  "status": "approved",
+  "status_label": "独立复核第四轮：评分19/20、无0分、九项坑全过；第三轮两处计数已改对，四组数字独立重筛全部一致，批准",
+  "independent": true,
+  "reviewer": "独立复核会话（Claude，第四轮，未参与制作与前三轮复核）",
+  "date": "2026-10-20",
   "rubric": {
-    "items": []
+    "items": [
+      {
+        "id": "clarity",
+        "score": 2,
+        "reason": "封面、第2页流程图和核心结论、第3页三件事说清主线（企业财务）、并行（省考只全力考一次）、看公告再报（国网、银行）和到年底的切换条件；省考专业规则全篇同一句。",
+        "evidence_refs": [],
+        "report_location": "封面、01（第1—3页）"
+      },
+      {
+        "id": "traceability",
+        "score": 2,
+        "reason": "官方数字都附原文摘录、链接、取文方式与适用范围；本轮随机抽4条（E005、E050、E052、E055）加必核E012，五条都对本机原件逐字或逐格对上，哈希与回执一致。省考计数可由附件中的计算项复算。",
+        "evidence_refs": [
+          "E005",
+          "E012",
+          "E050",
+          "E052",
+          "E055"
+        ],
+        "report_location": "12（第15—25页）"
+      },
+      {
+        "id": "reasoning",
+        "score": 2,
+        "reason": "第12节每个候选都有不利一面、支持一面和可观察的改判条件（年底无面试就扩目标、公告无对口职位就不报、笔试不过合格线就收手、岗位有营销指标就不报、合同甲方不是用人单位就降为保底）。",
+        "evidence_refs": [],
+        "report_location": "05、08、10、12（第23—24页）"
+      },
+      {
+        "id": "consistency",
+        "score": 2,
+        "reason": "我按职位表20列和备注逐条独立重筛（不用制作方脚本），全部与报告一致：限应届写明财务管理133＝符合84/待核13/不符36，分位48.0/64.5/90.0；全省限应届2410个中位29.0，倍数64.5÷29.0≈2.2；只写工商管理类98＝38/19/41；只列会计类44（去掉5个“法学（法务会计）”），其中17不符；身份不限写明财务管理61个，未筛分位102/177/241，本人条件也符合44个、中位206.5；专业不限本科能报58个（应届30＋不限28），符合5个（应届1＋不限4）。第三轮指出的畲族2个、初级会计师1个、A类法律职业资格5个都已剔除。现金三情景复算一致。",
+        "evidence_refs": [
+          "E012",
+          "E013"
+        ],
+        "report_location": "01、05、06（第2、7—9页）、12计算项（第21—22页）"
+      },
+      {
+        "id": "timeliness",
+        "score": 1,
+        "reason": "国考、国网、工行用当届原文；省考2027年度公告未出，省考、初级会计、CPA只能用上一届，逐处标“参照”，检查点按上届报名窗口提前到11-01。缺口如实写明，但关键时间点仍要等新公告核实，按标准给1分。",
+        "evidence_refs": [
+          "E054",
+          "E055"
+        ],
+        "report_location": "01、07、08、12"
+      },
+      {
+        "id": "personalization",
+        "score": 2,
+        "reason": "本人排的优先级决定主线；女、共青团员、浙江户籍生源逐岗用于筛职位，没填的民族、市县户籍、视力、出生年月记待核；“不卖理财”“偶尔加班”分别排除银行营销岗和事务所主线；已投5家、每周12小时、¥4,500底线都进入取舍。",
+        "evidence_refs": [],
+        "report_location": "02、03、05、06、09"
+      },
+      {
+        "id": "actionability",
+        "score": 2,
+        "reason": "三件事带日期和入口（10-22国考、10-31投递和谈话、11-01起看省考公告），国考注册10-23 18:00写在首页；初级会计写“5月考、春招简历写初级在考”；年底、春季、毕业三个检查点各有切换条件。",
+        "evidence_refs": [
+          "E005",
+          "E037"
+        ],
+        "report_location": "01、07、08"
+      },
+      {
+        "id": "boundaries",
+        "score": 2,
+        "reason": "竞争比全篇只称热度、写明不是上岸概率；工资分位写明不是应届起薪；推测标“推测”；“本人条件也符合”的定义写明，年龄作为共同待核项单列；最终选择归本人。",
+        "evidence_refs": [],
+        "report_location": "01、05、06、08、12"
+      },
+      {
+        "id": "summary_access",
+        "score": 2,
+        "reason": "前3页能读懂主线、理由、边界和三件事；“每名额约64.5人缴费＝一大群人争一个名额，只说明热度”是白话。封面一句话结论偏长，家长要慢读，但不需先学术语。",
+        "evidence_refs": [],
+        "report_location": "封面、01"
+      },
+      {
+        "id": "layout",
+        "score": 2,
+        "reason": "case_check阶段0—10通过；25页逐页缩略图看过，无挤压、断图、空页。已登记另修的共用代码问题（第12页系统口吻句、附录“3（正文显示3.0…）”叠写、流程图与时间线小字）按约定不扣分；除此之外未见版面瑕疵。",
+        "evidence_refs": [],
+        "report_location": "全篇"
+      }
+    ],
+    "total": 19
   },
-  "pitfalls": [],
-  "sampled_sources": [],
+  "pitfalls": [
+    {
+      "item": "没查到写成不存在",
+      "result": "pass",
+      "note": "省考2027公告、国考职位表、国网浙江公告、企业岗位都写“未见/未取到”及原因；普华永道写“校招页没有写条件”。",
+      "report_location": "07、12未取到（第25页）"
+    },
+    {
+      "item": "群体数字当个人概率",
+      "result": "pass",
+      "note": "缴费人数÷招录人数在数字卡、图注、术语表都写“不是上岸概率”；工资分位写明不是应届起薪。",
+      "report_location": "01、04、05、12"
+    },
+    {
+      "item": "经验帖数字做决定",
+      "result": "pass",
+      "note": "“同学说柜员要卖理财”“协议班不过退费”只作待核线索，落到岗位职责原文和合同条款。",
+      "report_location": "03、10"
+    },
+    {
+      "item": "按编号引用问卷",
+      "result": "pass",
+      "note": "问卷按节名引用（「优先级排序」「现实约束」）；“见第8节”指报告自身章节。",
+      "report_location": "02、12"
+    },
+    {
+      "item": "同一事实写两处",
+      "result": "pass",
+      "note": "省考规则全篇同一句；数字经证据与计算项唯一登记后展开。177（身份不限未筛）与206.5（本人条件筛后）是两个集合，口径都写明。",
+      "report_location": "全篇"
+    },
+    {
+      "item": "会过期的事实",
+      "result": "pass",
+      "note": "证据有核实日与复核期限2026-11-19；上一届规则与日期均标“只作参照”。",
+      "report_location": "07、12"
+    },
+    {
+      "item": "八字越界",
+      "result": "pass",
+      "note": "画像无出生信息，报告未使用八字。",
+      "report_location": "—"
+    },
+    {
+      "item": "委派判断类任务",
+      "result": "pass",
+      "note": "筛职位与判断由制作会话完成；本轮重筛四组数字全部一致，无返工迹象。",
+      "report_location": "06"
+    },
+    {
+      "item": "取页摘要当原文",
+      "result": "pass",
+      "note": "抽查5条都按本机原件逐字核对：HTML去标签后检索、xlsx按单元格；E050为内置浏览器渲染文本（回执已注明，非字节原件）。",
+      "report_location": "12"
+    }
+  ],
+  "sampled_sources": [
+    {
+      "id": "E005",
+      "claim": "国考：注册认证截止 10-23 18:00",
+      "source": "https://shanghai.chinatax.gov.cn/xxgk/rsxx/202610/t481763.html",
+      "local_copy": "/Users/xik/Desktop/Folder/App/Zhiqu/.cache/t13-career-zj/raw3/guokao2027.html",
+      "sha256": "448e392f2748594e1a65a2990c2ac1971c406fe830dba611c03ae1647cb79e98",
+      "locator": "二、报考程序（二）网上报名 1",
+      "method": "本机curl原件，哈希与回执一致；去HTML标签后逐字检索摘录",
+      "retrieved_on": "2026-10-20",
+      "matches": true,
+      "note": "“注册认证的时间为2026年10月14日8:00至10月23日18:00”原文命中。"
+    },
+    {
+      "id": "E055",
+      "claim": "初级会计：上一年度报名 1月5日—1月27日",
+      "source": "http://kjs.mof.gov.cn/gongzuotongzhi/202511/t20251127_3977584.htm",
+      "local_copy": "/Users/xik/Desktop/Folder/App/Zhiqu/.cache/t13-career-zj/raw2/mof_kjs_2026_kaowu.html",
+      "sha256": "e9479b0a933449e1624b05b5ed2952a3f6896f459cf283648dbe839c40840eb5",
+      "locator": "三、报名时间",
+      "method": "本机curl原件，哈希与回执一致；省略号两侧两段分别逐字检索",
+      "retrieved_on": "2026-10-20",
+      "matches": true,
+      "note": "两段都命中；报告标为上一年度、只作参照。"
+    },
+    {
+      "id": "E052",
+      "claim": "税务系统2027：财务管理属工商管理类和财会审计类",
+      "source": "https://shanghai.chinatax.gov.cn/xxgk/rsxx/202610/t481766.html",
+      "local_copy": "/Users/xik/Desktop/Folder/App/Zhiqu/.cache/t13-career-zj/raw3/tax2027_notice.html",
+      "sha256": "b8705dd8953a39a331ffec7ca24279f479e31cb8f52173c35c42406683e0d364",
+      "locator": "职位需求专业参考目录 第17、18行",
+      "method": "本机curl原件，哈希与回执一致；按表格单元格比对",
+      "retrieved_on": "2026-10-20",
+      "matches": true,
+      "note": "原文是表格：序号|类别|包含专业；摘录把单元格连成“17 工商管理类：……”，加了冒号，专业名逐字一致（17行含会计学、财务管理；18行财会审计类七个专业全对）。"
+    },
+    {
+      "id": "E050",
+      "claim": "国网2027设有财务会计类考试大纲",
+      "source": "https://zhaopin.sgcc.com.cn/sgcchr/static/unitPart.html?bullet_id=dcefb56d04714dc4b488d0a7a204bf76",
+      "local_copy": "/Users/xik/Desktop/Folder/App/Zhiqu/.cache/t13-career-zj/raw3/sgcc_2027_notice_browser.txt",
+      "sha256": "7df871773cab12d563a4143f70aece32746d7b895683155f85a49551f90c5b7a",
+      "locator": "附件列表",
+      "method": "内置浏览器渲染文本（站点curl 412，回执已注明），逐字检索",
+      "retrieved_on": "2026-10-20",
+      "matches": true,
+      "note": "“附件:《5.考试大纲-财务会计类（2027版）.pdf》”命中；只证明设有该科目，报告未据此说浙江招财会类。"
+    },
+    {
+      "id": "E012（必核，含职位13311009011000014、13302010014000003）",
+      "claim": "省考上一届职位表：专业与身份要求；第三轮问题行",
+      "source": "http://omwb.oss-cn-beijing.aliyuncs.com/zjgwy2025/4bd42501f1d7525dcd5dcf57b79a1db6",
+      "local_copy": "/Users/xik/Desktop/Folder/App/Zhiqu/.cache/t13-career-zj/raw/zj2026_positions.xlsx",
+      "sha256": "ddce656f025982e522f4597bbed70b67d9d8e301a658939797ccf23493833e6e",
+      "locator": "综合管理类工作表 13301012006000001、13301013022000006、13311009011000014、13302010014000003 行",
+      "method": "openpyxl解析xlsx原件逐格比对",
+      "retrieved_on": "2026-10-20",
+      "matches": true,
+      "note": "E012摘录两行逐格一致。13311009011000014民族要求列“民族要求为畲族”、13302010014000003备注“要求具有初级会计师及以上职称”，报告本轮已不计入“本人条件也符合”。缴费表哈希adc811f7…与E013回执相符。"
+    }
+  ],
   "self_assessment": {
     "reviewer": "本制作会话（自评，不是独立复核）",
     "date": "2026-10-20",
@@ -19,65 +222,65 @@
         {
           "id": "clarity",
           "score": 2,
-          "reason": "封面和第 1 节写明主线（企业财务）、并行（省考只报写明财务管理的职位、考一次）、条件路线（国网、银行看公告和岗位职责）与三件带日期的事。",
-          "report_location": "封面、01"
+          "reason": "摘要、流程图、正文第 6、8、10、11、12 节用同一句省考专业规则：逐字写了财务管理的直接看；只写“工商管理类”的先打职位表上的电话确认；只写会计类的不报；再看限应届、基层经历、性别、政治面貌、户籍或生源。封面压到两句。",
+          "report_location": "封面、01、06、08、10、11、12"
         },
         {
           "id": "traceability",
-          "score": 1,
-          "reason": "官方数字均有原文摘录与链接，省考竞争比附匿名比值可复算；但企业岗位原文、国考2027职位表（验证码）、国网浙江公告、省考2027公告均未取到，工资价位是2022年数据。",
-          "report_location": "12、附录"
+          "score": 2,
+          "reason": "E012 摘录补全该行本科专业名单；新增身份不限与专业不限的计算项；其余同上一版。",
+          "report_location": "06、12、附录"
         },
         {
           "id": "reasoning",
           "score": 2,
-          "reason": "每个候选有支持、反对、代价、退路与可观察的改判条件（如年底无面试、公告无对口职位、岗位有营销指标）。",
+          "reason": "每个候选有支持、反对、代价、退路与可观察的改判条件；省考按本人条件重筛后仍保留“没有对得上的就不报”的切换条件。",
           "report_location": "05、06、08、10"
         },
         {
           "id": "consistency",
           "score": 2,
-          "reason": "现金、竞争比分位、倍数均由登记算法复算；verify_report ok；数字全部经引用展开。",
-          "report_location": "05、06、09、12"
+          "reason": "新增本人条件子集统计为登记计算项（84 个，中位 64.5，是全省应届的 2.2 倍），原 133 个统计保留作对照；verify_report 复算通过，数字全部经引用展开。",
+          "report_location": "01、05、06、12"
         },
         {
           "id": "timeliness",
           "score": 1,
-          "reason": "国考、工行、国网为当届原文且在期内；省考、初级会计、CPA 只有上一年度规则，已逐处标“上一届/上一年度，只作参照”。",
-          "report_location": "07、08"
+          "reason": "国考、工行、国网为当届原文；省考 2027 年度公告 10-20 两站复查仍未见，省考、初级会计、CPA 只有上一届规则，已据上一届报名窗口（11-06—11-11、1-05—1-27）把检查点提前并标“参照”。",
+          "report_location": "01、07、08"
         },
         {
           "id": "personalization",
           "score": 2,
-          "reason": "本人优先级、不出省、不接受销售指标、初级会计只过一科、家里期待和现金估计都实际改变了排序与行动。",
-          "report_location": "02、03、05、08、09"
+          "reason": "本人原话、优先级和底线改变排序；性别、政治面貌、户籍生源实际用于逐岗筛职位，城市级户籍未填的记待核。",
+          "report_location": "02、05、06"
         },
         {
           "id": "actionability",
           "score": 2,
-          "reason": "三件事带日期与入口（国考职位表、企业投递、家庭约谈），时间线和路线卡给出切换条件与检查点。",
+          "reason": "三件事带日期与入口；11-01 起盯省考公告；初级会计按上一届 5 月开考，春招简历写“初级在考”；企业门槛改为看招聘原文是否写初级优先。",
           "report_location": "01、07、08"
         },
         {
           "id": "boundaries",
           "score": 2,
-          "reason": "缴费人数只说拥挤程度，不算上岸概率；工资分位注明不是应届起薪；不代报名、不代签约。",
-          "report_location": "01、04、05"
+          "reason": "职位表每一列和备注逐条对照本人（学历学位、身份、性别、政治面貌、民族、户籍生源、证书职称、工作经历、视力），画像没写的记待核；身份不限的符合 44 个（中位 206.5），专业不限的只 5 个；年龄作为共同待核项单列。",
+          "report_location": "05、06"
         },
         {
           "id": "summary_access",
           "score": 1,
-          "reason": "摘要能读懂主线和理由；但“每名额缴费人数”“中位数”仍需看第 5、12 节的说明，封面结论偏长。",
+          "reason": "摘要数字卡和核心结论加了白话（一大群人争一个名额，只说明热度）；但封面两句仍偏长，家长仍需看核心结论理解规则。",
           "report_location": "封面、01"
         },
         {
           "id": "layout",
           "score": 1,
-          "reason": "版面门禁通过、逐页速览已看；第 6 页因矩阵整体换页留有空白，附录计算项沿用共用工具的“分数/人数”措辞，待独立视觉复核。",
-          "report_location": "06、附录"
+          "reason": "版面门禁通过、逐页速览已看；流程图与时间线字号由共用样式固定，只能缩短文字、合并同月事项；第 10 节按来源拆块后，单张卡片的块占半栏、右侧留白。",
+          "report_location": "01、07、10"
         }
       ],
-      "total": 16
+      "total": 17
     },
     "pitfalls": [
       {
@@ -103,12 +306,12 @@
       {
         "item": "同一事实写两处",
         "result": "pass",
-        "note": "报告数字经 e/c/p/k 引用从同一证据或计算展开；人物设定只在人物库登记。"
+        "note": "省考专业规则只用一句话定义（核心结论），流程图、路线卡、风险、追问、术语表逐字引用同一句；报告数字经 e/c/p/k 引用从同一证据或计算展开。"
       },
       {
         "item": "会过期的事实",
         "result": "pass",
-        "note": "evidence 与 rules_check 均有核实日与复核期限 2026-11-19；上一年度规则逐处标注。"
+        "note": "evidence 与 rules_check 均有核实日与复核期限 2026-11-19；上一届规则逐处标“参照”，并据上一届报名窗口把检查点提前到 11-01。"
       },
       {
         "item": "八字越界",
@@ -123,13 +326,13 @@
       {
         "item": "取页摘要当原文",
         "result": "pass",
-        "note": "所有官方摘录对本机原件（curl 字节原件或浏览器渲染文本）逐字检索命中；工行页面为浏览器渲染文本，已在来源注明。"
+        "note": "所有官方摘录对本机原件（curl 字节原件或浏览器渲染文本）逐字检索命中；工行、国网、普华永道页面为浏览器渲染文本，已在来源注明；国网三条 2026-10-20 重新打开核对。"
       }
     ],
     "limitations": [
       "操控者尚未填写核查单，未经独立复核，不能据此交付真实客户。",
-      "国网三条证据沿用本项目 2026-10-19 浏览器取文，本会话未重新取到原页。",
-      "省考竞争比与工资价位为上一届/2022 年数据，只作相对参照。"
+      "省考竞争比与工资价位为上一届/2022 年数据，只作相对参照；本人条件按职位表筛，年龄（本人未填出生年月）未计入。",
+      "国考2027职位表（需验证码）、国网浙江第一批公告、浙江省考2027年度公告、普华永道报名条件仍未取到。"
     ],
     "sampled_sources": [
       {
@@ -144,57 +347,57 @@
         "matches": true
       },
       {
-        "id": "E016",
-        "claim": "省考上一届：限应届且只写工商管理类等大类职位的竞争比",
-        "source_url": "http://omwb.oss-cn-beijing.aliyuncs.com/zjgwy2026/62329aa17fc3cd317d9b65201ef85e93",
-        "locator": "缴费报名情况一览表：招录人数、缴费人数两列；样例行见摘录",
-        "excerpt": "淳安县乡镇机关 | 工作人员2一级主任科员及以下 | 13301012025000002 | 2 | 48",
-        "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
-        "original_sha256": "adc811f722d903a9ecdafaddcac0d89a7d3d1e8dc2ecd42306a12672fe422d6a",
-        "retrieved_on": "2026-10-20",
-        "matches": true
-      },
-      {
-        "id": "E023",
-        "claim": "杭州工资价位：工龄三年及以下（不分职业） 25%分位",
+        "id": "E019",
+        "claim": "杭州工资价位：会计专业人员 75%分位",
         "source_url": "https://zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/jcms_files/jcms1/web3095/site/attach/0/cdc97ab7d30243db95368bb1c34b4cf3.pdf",
-        "locator": "第23页 工龄三年及以下（不分职业）行 25%分位值",
-        "excerpt": "3（含）年以下 46986 60000 81580 121000 187680（九、分工龄企业从业人员工资价位，单位：元/年）",
+        "locator": "第13页 会计专业人员行 75%分位值",
+        "excerpt": "会计专业人员 52810 69120 95000 138496 213481（单位：元/年；列为10%、25%、50%、75%、90%分位值）",
         "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
         "original_sha256": "7853501ef5272cc5571aff36c7c791b0832d25941ea319095cea28236240ee6d",
         "retrieved_on": "2026-10-20",
         "matches": true
       },
       {
-        "id": "E033",
-        "claim": "工行2027校招：网上报名截止",
-        "source_url": "https://job.icbc.com.cn/pc/index.html#/main/school/announDetail/00000000000010659029",
-        "locator": "三、招聘流程（一）网上报名",
-        "excerpt": "（一）网上报名。时间为2026年9月4日-10月8日。",
+        "id": "E026",
+        "claim": "杭州工资价位：大学本科（不分职业） 25%分位",
+        "source_url": "https://zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/jcms_files/jcms1/web3095/site/attach/0/cdc97ab7d30243db95368bb1c34b4cf3.pdf",
+        "locator": "第24页 大学本科（不分职业）行 25%分位值",
+        "excerpt": "大学本科 64199 97715 162899 264000 408604（十、分学历企业从业人员工资价位，单位：元/年）",
         "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
-        "original_sha256": "d42974b6ade0181499d9b3d81683a0b9280ed6171fab181148d90001531ab13f",
+        "original_sha256": "7853501ef5272cc5571aff36c7c791b0832d25941ea319095cea28236240ee6d",
         "retrieved_on": "2026-10-20",
         "matches": true
       },
       {
-        "id": "E034",
-        "claim": "工行2027校招：条件以各机构公告为准",
-        "source_url": "https://job.icbc.com.cn/pc/index.html#/main/school/announDetail/00000000000010659029",
-        "locator": "一、招聘对象",
-        "excerpt": "主要面向毕业时间为2026年1月至2027年7月的境内外高校毕业生。具体招聘范围及条件以各机构招聘公告为准。",
-        "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
-        "original_sha256": "d42974b6ade0181499d9b3d81683a0b9280ed6171fab181148d90001531ab13f",
-        "retrieved_on": "2026-10-20",
-        "matches": true
-      },
-      {
-        "id": "E035",
-        "claim": "初级会计：须在一个考试年度内通过全部科目",
+        "id": "E036",
+        "claim": "初级会计：上一年度报名截止日",
         "source_url": "http://kjs.mof.gov.cn/gongzuotongzhi/202511/t20251127_3977584.htm",
-        "locator": "二、报名条件与成绩管理",
-        "excerpt": "参加初级会计资格考试的人员，应在1个考试年度内通过全部科目的考试，方可取得初级会计资格证书",
+        "locator": "三、报名时间",
+        "excerpt": "2026年1月5日至1月27日，全国会计人员统一服务管理平台开通初级、高级会计资格考试报名。……考试报名统一在1月27日12:00截止",
         "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
         "original_sha256": "e9479b0a933449e1624b05b5ed2952a3f6896f459cf283648dbe839c40840eb5",
+        "retrieved_on": "2026-10-20",
+        "matches": true
+      },
+      {
+        "id": "E037",
+        "claim": "初级会计：上一年度考试开始日",
+        "source_url": "http://kjs.mof.gov.cn/gongzuotongzhi/202511/t20251127_3977584.htm",
+        "locator": "四、考试时间",
+        "excerpt": "初级会计资格考试于2026年5月16日至18日举行，共6个批次。",
+        "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
+        "original_sha256": "e9479b0a933449e1624b05b5ed2952a3f6896f459cf283648dbe839c40840eb5",
+        "retrieved_on": "2026-10-20",
+        "matches": true
+      },
+      {
+        "id": "E050",
+        "claim": "国网：设有财务会计类考试大纲",
+        "source_url": "https://zhaopin.sgcc.com.cn/sgcchr/static/unitPart.html?bullet_id=dcefb56d04714dc4b488d0a7a204bf76",
+        "locator": "附件列表",
+        "excerpt": "附件:《5.考试大纲-财务会计类（2027版）.pdf》",
+        "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
+        "original_sha256": "7df871773cab12d563a4143f70aece32746d7b895683155f85a49551f90c5b7a",
         "retrieved_on": "2026-10-20",
         "matches": true
       }
@@ -214,9 +417,6 @@
       "E010",
       "E012",
       "E013",
-      "E014",
-      "E015",
-      "E016",
       "E017",
       "E018",
       "E019",
@@ -244,15 +444,20 @@
       "E042",
       "E043",
       "E044",
-      "E045"
+      "E045",
+      "E048",
+      "E049",
+      "E050",
+      "E052",
+      "E053"
     ],
     "picked": [
       "E005",
-      "E016",
-      "E023",
-      "E033",
-      "E034",
-      "E035"
+      "E019",
+      "E026",
+      "E036",
+      "E037",
+      "E050"
     ],
     "results": [
       {
@@ -267,79 +472,79 @@
         "matches": true
       },
       {
-        "id": "E016",
-        "claim": "省考上一届：限应届且只写工商管理类等大类职位的竞争比",
-        "source_url": "http://omwb.oss-cn-beijing.aliyuncs.com/zjgwy2026/62329aa17fc3cd317d9b65201ef85e93",
-        "locator": "缴费报名情况一览表：招录人数、缴费人数两列；样例行见摘录",
-        "excerpt": "淳安县乡镇机关 | 工作人员2一级主任科员及以下 | 13301012025000002 | 2 | 48",
-        "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
-        "original_sha256": "adc811f722d903a9ecdafaddcac0d89a7d3d1e8dc2ecd42306a12672fe422d6a",
-        "retrieved_on": "2026-10-20",
-        "matches": true
-      },
-      {
-        "id": "E023",
-        "claim": "杭州工资价位：工龄三年及以下（不分职业） 25%分位",
+        "id": "E019",
+        "claim": "杭州工资价位：会计专业人员 75%分位",
         "source_url": "https://zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/jcms_files/jcms1/web3095/site/attach/0/cdc97ab7d30243db95368bb1c34b4cf3.pdf",
-        "locator": "第23页 工龄三年及以下（不分职业）行 25%分位值",
-        "excerpt": "3（含）年以下 46986 60000 81580 121000 187680（九、分工龄企业从业人员工资价位，单位：元/年）",
+        "locator": "第13页 会计专业人员行 75%分位值",
+        "excerpt": "会计专业人员 52810 69120 95000 138496 213481（单位：元/年；列为10%、25%、50%、75%、90%分位值）",
         "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
         "original_sha256": "7853501ef5272cc5571aff36c7c791b0832d25941ea319095cea28236240ee6d",
         "retrieved_on": "2026-10-20",
         "matches": true
       },
       {
-        "id": "E033",
-        "claim": "工行2027校招：网上报名截止",
-        "source_url": "https://job.icbc.com.cn/pc/index.html#/main/school/announDetail/00000000000010659029",
-        "locator": "三、招聘流程（一）网上报名",
-        "excerpt": "（一）网上报名。时间为2026年9月4日-10月8日。",
+        "id": "E026",
+        "claim": "杭州工资价位：大学本科（不分职业） 25%分位",
+        "source_url": "https://zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/jcms_files/jcms1/web3095/site/attach/0/cdc97ab7d30243db95368bb1c34b4cf3.pdf",
+        "locator": "第24页 大学本科（不分职业）行 25%分位值",
+        "excerpt": "大学本科 64199 97715 162899 264000 408604（十、分学历企业从业人员工资价位，单位：元/年）",
         "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
-        "original_sha256": "d42974b6ade0181499d9b3d81683a0b9280ed6171fab181148d90001531ab13f",
+        "original_sha256": "7853501ef5272cc5571aff36c7c791b0832d25941ea319095cea28236240ee6d",
         "retrieved_on": "2026-10-20",
         "matches": true
       },
       {
-        "id": "E034",
-        "claim": "工行2027校招：条件以各机构公告为准",
-        "source_url": "https://job.icbc.com.cn/pc/index.html#/main/school/announDetail/00000000000010659029",
-        "locator": "一、招聘对象",
-        "excerpt": "主要面向毕业时间为2026年1月至2027年7月的境内外高校毕业生。具体招聘范围及条件以各机构招聘公告为准。",
-        "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
-        "original_sha256": "d42974b6ade0181499d9b3d81683a0b9280ed6171fab181148d90001531ab13f",
-        "retrieved_on": "2026-10-20",
-        "matches": true
-      },
-      {
-        "id": "E035",
-        "claim": "初级会计：须在一个考试年度内通过全部科目",
+        "id": "E036",
+        "claim": "初级会计：上一年度报名截止日",
         "source_url": "http://kjs.mof.gov.cn/gongzuotongzhi/202511/t20251127_3977584.htm",
-        "locator": "二、报名条件与成绩管理",
-        "excerpt": "参加初级会计资格考试的人员，应在1个考试年度内通过全部科目的考试，方可取得初级会计资格证书",
+        "locator": "三、报名时间",
+        "excerpt": "2026年1月5日至1月27日，全国会计人员统一服务管理平台开通初级、高级会计资格考试报名。……考试报名统一在1月27日12:00截止",
         "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
         "original_sha256": "e9479b0a933449e1624b05b5ed2952a3f6896f459cf283648dbe839c40840eb5",
+        "retrieved_on": "2026-10-20",
+        "matches": true
+      },
+      {
+        "id": "E037",
+        "claim": "初级会计：上一年度考试开始日",
+        "source_url": "http://kjs.mof.gov.cn/gongzuotongzhi/202511/t20251127_3977584.htm",
+        "locator": "四、考试时间",
+        "excerpt": "初级会计资格考试于2026年5月16日至18日举行，共6个批次。",
+        "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
+        "original_sha256": "e9479b0a933449e1624b05b5ed2952a3f6896f459cf283648dbe839c40840eb5",
+        "retrieved_on": "2026-10-20",
+        "matches": true
+      },
+      {
+        "id": "E050",
+        "claim": "国网：设有财务会计类考试大纲",
+        "source_url": "https://zhaopin.sgcc.com.cn/sgcchr/static/unitPart.html?bullet_id=dcefb56d04714dc4b488d0a7a204bf76",
+        "locator": "附件列表",
+        "excerpt": "附件:《5.考试大纲-财务会计类（2027版）.pdf》",
+        "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
+        "original_sha256": "7df871773cab12d563a4143f70aece32746d7b895683155f85a49551f90c5b7a",
         "retrieved_on": "2026-10-20",
         "matches": true
       }
     ]
   },
   "snapshot": {
-    "case.json": "747db87c1436b7df11654bf351dd05084434bc0fd26d4a55ffad2397d2f8358f",
-    "profile_parse.json": "bef4c373f4f3e2c4c29f5382f4899cbfa2055bf7848b6e6efc4bb06542b6d4dc",
-    "directions.json": "c596542a75e4d5caa51814b26c579c39025f30f53abb8a6e495db95c50c781b2",
-    "rules_check.json": "0a03cb3f10d3f0eb1eb5d392722877bfd4fe437ce3fdc44f70a305444e00502e",
-    "candidates.json": "0fc093040e4475d0111f18d3c46caa7478fa0e87d449e2496e849dc327c1ae49",
-    "evidence.json": "cb594054511798e445f81f15d4fac94ac4e3b9cbbd6dc0cf65d6722167cce7ce",
-    "calculations.json": "d4d64f9635fb2d2fcd3e532e7f3f1fdd8ba8f2602919bd0097a645e10133934b",
-    "judgment.json": "4ad9f2393566232d6c6e9697057230ca61b517ab936ee63f9063ca0171380ced",
-    "narrative.json": "28e6cb7c99a6a7c6fca83c4e3494fa6d34e452d7f4c35432309fc26eaf8f8f98",
+    "case.json": "f02013f44bae765233f8cee770ab97345193ffb08c0aea3f3c77a7ea836a0ffc",
+    "profile_parse.json": "ca28989bbe8fae3f6def3dcc789a8b04dd9101d78bd065fd815788b92197d604",
+    "directions.json": "e622eebd36fd6ffa1be8b5b60c49b7773f68d6c28e896e0ce18a7c85bc9a7453",
+    "rules_check.json": "aadb64ede706f87480d8eafb6dda580b32616981dae8d3c860b4536970ee3bf0",
+    "candidates.json": "8a701d7da74663c7c1462df150c68fecc1954716aa81726d7c91601968ae070f",
+    "evidence.json": "51c186b946518769c6879b538f18a94dad89127266b4d55b4575de936a706217",
+    "calculations.json": "642c2e8cccb60935fa3033bfbc25d48c68292d146c6df5aa584f67aa0ab843eb",
+    "judgment.json": "0235c5713240354f8bb44318241569eb6a4ba1cc4b3e71d470686aabd97a0fd7",
+    "narrative.json": "91f9fdc48cc73d3926a8b88c66c52af834782235d9078d45e5c464aa36caca93",
     "profile.json": "f8c7a4b076a64c168d303710ea8836b70a79ffe5d53ce7521045bfe4ae4c2d1f",
     "profile-supplement.txt": "247f31f22f4c9a6c33394b5b25e3b37ef21c19fd3b9c12a70a83839f7976b026",
-    "report.md": "7b76cb178eb5bb605d3c62e933a4b4c43f703753396371b602b033af90c52f0e",
-    "report.html": "ba1694e2bce599950ca2420c8887f4d4e30a055ca6ee44e8864851f3b637b29c",
-    "report.pdf": "21993ec40744b93c7adb2bf50c0771e3a8e8cefeec9ef1ff54637e5ece4672d3",
-    "report_trace.json": "bb510d972caeb53dfa6572be59d2f24a1561f3fcfd8cedf8d0278b7f00051772",
-    "operator_check.md": "d9f6dddad17cd13b9f7817a8f7b7c35d27abc6b6b600088fc4cf457b1ec56cae"
+    "report.md": "dc2181d226cda92dbdf4f1e6ec55266cae830954bab961cff7a5b3991c29727a",
+    "report.html": "efc13ef4b9005ca42da29eb82eb771268d457b6c275c9e4605aabbf91ee909c0",
+    "report.pdf": "75db1315d2c50dea2e5dacac967dc9b0031e7fbf202f8762a0bbfb9fd5d97ab9",
+    "report_trace.json": "9bec6a2c080d07913866111d34625647b30231bccbf110475c8b9cbcb7864a6f",
+    "operator_check.md": "4ff03138485a36d13855e654a8bab902f38d37e10ed01cccb558e31f573d0a7a"
   },
   "snapshot_refreshes": [
     {
@@ -352,6 +557,1114 @@
         "report_trace.json"
       ],
       "reason": "区间图数字格式统一；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "case.json",
+        "candidates.json",
+        "evidence.json",
+        "rules_check.json",
+        "judgment.json",
+        "narrative.json",
+        "calculations.json",
+        "report.md",
+        "report.html",
+        "report.pdf",
+        "report_trace.json",
+        "operator_check.md"
+      ],
+      "reason": "按主模型返工单修改：省考竞争比改为 case.json.anonymous_data 匿名列表 + 计算项，evidence 只登记两张原表；“只写大类”口径改为恰有类名“工商管理类”（98 个，旧缓存 104 多算 6 个只写具体专业“工商管理”的职位）并加本科专业目录证据；国网三条证据 2026-10-20 浏览器重新逐字核对；初级会计“两科都要考”改登记为推测等级并写依据；新增税务系统 2027 专业参考目录、安永目标人群、国网不收费与财务会计类大纲；第 5 节把解读竞争图的段落移到矩阵前，减少换页空白。共用 verification_calculations.py 统计说明、report.py 路线图卡片分页、check_layout.py 空白检查同时变更，故重新生成并重做自评快照；自评分不变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.md",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "合入两份旗舰后共用版面与核对工具更新；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "case.json",
+        "profile_parse.json",
+        "directions.json",
+        "rules_check.json",
+        "candidates.json",
+        "evidence.json",
+        "calculations.json",
+        "judgment.json",
+        "narrative.json",
+        "report.md",
+        "report.html",
+        "report.pdf",
+        "report_trace.json",
+        "operator_check.md"
+      ],
+      "reason": "按独立复核 required_changes 返工：省考检查点提前到 11-01、父母约谈提前到 10-31，时间线标上一届省考与初级会计报名窗口（新增 E054、E055）；省考职位按性别、政治面貌、户籍生源重筛，新增本人条件子集计算项（fa_ok_* 等），原 133 个统计留作对照；省考专业规则统一为一句；审计工资改为企业审计职业；第 10 节风险按来源拆块（新增推测 E056）；E052 摘录补工商管理类；画像解析补性别、生源地、已投企业数。自评重做，独立复核字段未改。 上一轮独立复核（13/20，需修改）整体移入 review_history 第 1 轮，顶层 independent 置 false。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "case.json",
+        "directions.json",
+        "candidates.json",
+        "evidence.json",
+        "calculations.json",
+        "judgment.json",
+        "narrative.json",
+        "report.md",
+        "report.html",
+        "report.pdf",
+        "report_trace.json",
+        "operator_check.md"
+      ],
+      "reason": "按第二轮独立复核（16/20）required_changes 返工：政治面貌“党员或团员”算符合并重算（C 类 38/19/41）；规则句补“身份不限、专业不限也能报”，新增 anya_ok_*、major_any_* 计算项；初级会计路线卡与企业门槛改写；E012 摘录补全；计算项标签改白话。第二轮独立复核整体移入 review_history 第 2 轮。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "case.json",
+        "evidence.json",
+        "calculations.json",
+        "judgment.json",
+        "narrative.json",
+        "report.md",
+        "report.html",
+        "report.pdf",
+        "report_trace.json",
+        "operator_check.md"
+      ],
+      "reason": "按第三轮独立复核（17/20）返工：筛选改为逐列逐条（加民族列、证书职称），所有子集统一重跑；身份不限符合 47→44、中位 198→206.5，专业不限符合 12→5，主集合 84/64.5/2.2 不变；图注、术语表与第 12 节补“民族、证书或职称”。第三轮独立复核整体移入 review_history 第 3 轮。共用代码那句未改。"
     }
-  ]
+  ],
+  "review_history": [
+    {
+      "round": 1,
+      "result": "changes_required",
+      "score": 13,
+      "status": "changes_required",
+      "status_label": "独立复核：需修改后重审（评分 13/20，低于下限 16；一项坑位未过）",
+      "independent": true,
+      "reviewer": "独立复核会话（Claude，未参与制作）",
+      "date": "2026-10-20",
+      "rubric": {
+        "items": [
+          {
+            "id": "clarity",
+            "score": 1,
+            "reason": "封面与第1节（第1—3页）主线、并行、条件路线清楚；但摘要的省考报考规则与正文冲突：第2页核心结论写“只报本科专业名单逐字写了财务管理……的职位”，第3页第3件事和流程图也只说“写明财务管理”，而第8页、第11页、第12页又说只写“工商管理类”的98个职位先打电话确认、能报就放进候选。家长只读摘要会以为这98个都不能报。",
+            "evidence_refs": [
+              "E012",
+              "E048"
+            ],
+            "report_location": "第2、3、8、11、12页"
+          },
+          {
+            "id": "traceability",
+            "score": 1,
+            "reason": "官方数字均有原文摘录与链接，省考统计我按原表复算完全一致；但(1)第6页把工资表“审计专业人员”写成“事务所审计人员”，原表这一行是全部企业的审计职业，不只是事务所；(2)第21页第10节六条风险都挂同样三条链接（省考首页、职位表、工行启事），“协议班退费”“三方协议”“家里能支持多久”与这些来源无关；(3)E052摘录只抄了“财会审计类”一行，正文“也列在工商管理类下”靠原件才能核到。",
+            "evidence_refs": [
+              "E021",
+              "E052"
+            ],
+            "report_location": "第6、8、21页"
+          },
+          {
+            "id": "reasoning",
+            "score": 2,
+            "reason": "第20—21页每个候选都写了不利、支持和可观察的改判条件（年底无面试、公告无对口职位、岗位有营销指标、合同主体不是用人单位）；第5页说明事务所因加班冲突只作对照，理由与画像一致。",
+            "evidence_refs": [],
+            "report_location": "第5、6、20、21页"
+          },
+          {
+            "id": "consistency",
+            "score": 2,
+            "reason": "独立按职位表与缴费表复算：限应届A/B/C档133/44/98个，分位39.0/54.5/75.0，全省限应届2410个的16/29/51.875，身份不限A档102/177/241，倍数54.5÷29=1.88≈1.9，全部一致；现金3.0/11.2/1.0/4.0个月与¥1,500结余复算一致。",
+            "evidence_refs": [
+              "E012",
+              "E013"
+            ],
+            "report_location": "第2、6、7、10、18、19页"
+          },
+          {
+            "id": "timeliness",
+            "score": 1,
+            "reason": "国考、国网、工行用的是当届原文且在期内；省考、初级会计、CPA只有上一届规则，已逐处标“上一届，只作参照”。但没有据上一届日期推出今年的风险：上一届省考报名是11月6日—11日，而本报告的检查点设在11月15日（第3、8页），若今年同期，检查时报名已截止。",
+            "evidence_refs": [
+              "E006"
+            ],
+            "report_location": "第3、8、9页"
+          },
+          {
+            "id": "personalization",
+            "score": 2,
+            "reason": "引用本人原话（“同时准备太多会什么都做不好”“不能接受销售指标”、优先级次序、现金估计），把父母意愿单列为可核条件，取舍确实随画像改变。不足：本人是女生、共青团员，这两条没有用于筛省考/国考职位资格（见boundaries）。",
+            "evidence_refs": [],
+            "report_location": "第2—5、10页"
+          },
+          {
+            "id": "actionability",
+            "score": 1,
+            "reason": "三件事有日期和入口，路线卡有切换条件；但(1)省考的关键动作——11月初起盯公告、在报名窗口内筛职位并报名——没有写，检查点11-15和家庭约谈11-10都可能晚于报名截止；(2)初级会计的真正截止是年初报名（上一年1月5日—27日），时间线第8页只画了5月考试；(3)第3页“投出第一批企业财务岗”忽略了本人已投5家（补充材料）。",
+            "evidence_refs": [
+              "E006",
+              "E036"
+            ],
+            "report_location": "第3、8、9、10页"
+          },
+          {
+            "id": "boundaries",
+            "score": 1,
+            "reason": "不算上岸概率、工资不当起薪，这两条做得好；但第7页图注与第8页正文把133个“写明财务管理”的职位称为“可以报的”。原表里这133个中29个要求男性、12个要求中共党员（本人女、团员），另有12个限某市户籍或生源，至少37个本人不能报。另第3页“毕业后能按期有收入”、第5页“专业对口职位每年都有”（只查了一年）属于把条件说成结果。",
+            "evidence_refs": [
+              "E012"
+            ],
+            "report_location": "第3、5、7、8页"
+          },
+          {
+            "id": "summary_access",
+            "score": 1,
+            "reason": "摘要大体能懂；但封面结论约130字、核心卡片用“每名额约54.5人”“中位数”“1.9倍”而没有一句白话解释（解释在第12节术语表），家长要翻正文才知道这是“报名热度”；且摘要的报考规则与正文不一致（见clarity）。",
+            "evidence_refs": [],
+            "report_location": "封面、第2—3页"
+          },
+          {
+            "id": "layout",
+            "score": 1,
+            "reason": "机械门禁通过；逐页速览未见拆行、断图或空页。小瑕疵：第2页流程图、第8页时间线字号偏小，缩到手机阅读吃力；第12页第11节后约一半空白（新节起页所致）。",
+            "evidence_refs": [],
+            "report_location": "第2、8、12页"
+          }
+        ],
+        "total": 13
+      },
+      "pitfalls": [
+        {
+          "item": "没查到写成不存在",
+          "result": "pass",
+          "note": "省考2027公告、国考职位表、国网浙江公告、企业岗位均标“未取到”及原因（第22页），候选保持待核；普华永道写“校招页没有写条件”只陈述页面，不推断没有条件。"
+        },
+        {
+          "item": "群体数字当个人概率",
+          "result": "pass",
+          "note": "竞争比在图注、卡片、术语表（第2、6、13页）都声明不是上岸概率；工资分位注明不是应届起薪（第5页）。"
+        },
+        {
+          "item": "经验帖数字做决定",
+          "result": "pass",
+          "note": "“柜员要卖理财”“协议班不过退费”只作待核线索（第4、11页）；第三方预测的省考日期未引用。"
+        },
+        {
+          "item": "按编号引用问卷",
+          "result": "pass",
+          "note": "全文以节名或原话引用画像，未见按题号或节号引用问卷。"
+        },
+        {
+          "item": "同一事实写两处",
+          "result": "fail",
+          "note": "同一条“省考哪些职位可报”的规则在报告里写成两个版本：第2页核心结论、第3页三件事与流程图写“只报逐字写了财务管理的”；第8、11、12页写“只写工商管理类的先电话确认，能报就放进候选”。应在一处（judgment/narrative 的单一规则）定义后引用。"
+        },
+        {
+          "item": "会过期的事实",
+          "result": "pass",
+          "note": "evidence与rules_check均有核实日与复核期限2026-11-19；上一届规则逐处标注。（注：没有据上一届报名窗口调整检查点，计入actionability扣分，不在本项。）"
+        },
+        {
+          "item": "八字越界",
+          "result": "pass",
+          "note": "人物未给出生信息，报告无八字内容。"
+        },
+        {
+          "item": "委派判断类任务",
+          "result": "pass",
+          "note": "制作记录称子代理只取原件和逐字摘录，判断由主会话完成；本复核只能核对记录与结果，无法证明过程。"
+        },
+        {
+          "item": "取页摘要当原文",
+          "result": "pass",
+          "note": "抽查6条均对本机原件逐字命中；国网、工行为浏览器渲染文本（非模型摘要），国网文件自注“逐字节选，非字节原件”，来源节已注明方式。"
+        }
+      ],
+      "sampled_sources": [
+        {
+          "id": "E007",
+          "claim": "浙江省考上一届：笔试日 2025-12-07",
+          "source_url": "http://gwy.zjks.com/zjgwy/website/queryDetail.htm?mkxh=2&tzid=16499",
+          "original": ".cache/t13-career-zj/raw/gwy2026_notice.html",
+          "locator": "三、招考程序（四）",
+          "excerpt": "公共科目笔试时间为2025年12月7日。每个科目满分均为100分。",
+          "method": "读取本机原件（.cache/t13-career-zj），去空白后逐字检索；核对原件来源记录的URL与报告一致",
+          "retrieved_on": "2026-10-20",
+          "matches": true,
+          "note": "逐字一致；报告标为上一届参照，范围正确。同一原件还核到报名时间2025年11月6日9时—11月11日17时（E006），据此发现检查点晚于上一届报名截止的问题。",
+          "original_sha256": "faefe882cd3a3fc9e7c3147a48f5589f34c027c9f8eff4b1e40c57eeafa0d30d"
+        },
+        {
+          "id": "E010",
+          "claim": "浙江省考上一届：综合类笔试合格线 105",
+          "source_url": "http://gwy.zjks.com/zjgwy/website/queryDetail.htm?mkxh=1&tzid=16569",
+          "original": ".cache/t13-career-zj/raw/gwy_16569.html",
+          "locator": "二、分数线划定",
+          "excerpt": "全省公务员四级联考综合类职位的笔试合格分数线按公共科目两科总分105分划定",
+          "method": "读取本机原件（.cache/t13-career-zj），去空白后逐字检索；核对原件来源记录的URL与报告一致",
+          "retrieved_on": "2026-10-20",
+          "matches": true,
+          "note": "逐字一致；报告第9页写“只是门槛”，适用范围正确。",
+          "original_sha256": "c8ac1d1561d4524ede79bfc3f0c72b8734f75271f157dc9c55281e6d6c5186d5"
+        },
+        {
+          "id": "E022",
+          "claim": "杭州工资价位：审计专业人员 75%分位 271200",
+          "source_url": "https://zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/jcms_files/jcms1/web3095/site/attach/0/cdc97ab7d30243db95368bb1c34b4cf3.pdf",
+          "original": ".cache/t13-career-zj/raw/hz_wage2023.pdf",
+          "locator": "第13页 审计专业人员行",
+          "excerpt": "审计专业人员 72030 125831 169320 271200 391689",
+          "method": "读取本机原件（.cache/t13-career-zj），去空白后逐字检索；核对原件来源记录的URL与报告一致",
+          "retrieved_on": "2026-10-20",
+          "matches": true,
+          "note": "数字与页码一致；但这一行是全部企业的“审计专业人员”职业，报告第6页称“事务所审计人员”超出原文范围（已列入必须修改）。",
+          "original_sha256": "7853501ef5272cc5571aff36c7c791b0832d25941ea319095cea28236240ee6d"
+        },
+        {
+          "id": "E024",
+          "claim": "杭州工资价位：工龄三年及以下（不分职业）50%分位 81580",
+          "source_url": "https://zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/jcms_files/jcms1/web3095/site/attach/0/cdc97ab7d30243db95368bb1c34b4cf3.pdf",
+          "original": ".cache/t13-career-zj/raw/hz_wage2023.pdf",
+          "locator": "第23页 九、分工龄 3（含）年以下行",
+          "excerpt": "3（含）年以下 46986 60000 81580 121000 187680",
+          "method": "读取本机原件（.cache/t13-career-zj），去空白后逐字检索；核对原件来源记录的URL与报告一致",
+          "retrieved_on": "2026-10-20",
+          "matches": true,
+          "note": "逐字一致；报告注明不分职业、不是起薪。",
+          "original_sha256": "7853501ef5272cc5571aff36c7c791b0832d25941ea319095cea28236240ee6d"
+        },
+        {
+          "id": "E030",
+          "claim": "国网：第一批笔试暂定 2026-12-06",
+          "source_url": "https://zhaopin.sgcc.com.cn/sgcchr/static/unitPart.html?bullet_id=dcefb56d04714dc4b488d0a7a204bf76",
+          "original": ".cache/t13-career-zj/raw3/sgcc_2027_notice_browser.txt（内置浏览器渲染文本的逐字节选，非字节原件）",
+          "locator": "三、组织招聘笔试",
+          "excerpt": "时间初定为国调网调及北京电力交易中心提前批2026年10月31日、第一批2026年12月6日、第二批2027年3月、第三批2027年5月",
+          "method": "读取本机原件（.cache/t13-career-zj），去空白后逐字检索；核对原件来源记录的URL与报告一致",
+          "retrieved_on": "2026-10-20",
+          "matches": true,
+          "note": "与保存的渲染文本逐字一致；原件为页面文本节选而非字节原件（官网curl返回412），本复核未重新打开官网。",
+          "original_sha256": "7df871773cab12d563a4143f70aece32746d7b895683155f85a49551f90c5b7a"
+        },
+        {
+          "id": "E040",
+          "claim": "CPA：应届生学历认证 2026年7月20日起",
+          "source_url": "https://www.cicpa.org.cn/xxfb/tzgg/202603/W020260311354851382981.pdf",
+          "original": ".cache/t13-career-zj/raw2/cicpa_a_W020260311354851382981.pdf",
+          "locator": "报名程序：学历信息认证",
+          "excerpt": "应届毕业生报名人员持国（境）内学历的，应当于2026年7月20日至8月10日通过学信网APP进行学历信息认证授权",
+          "method": "读取本机原件（.cache/t13-career-zj），去空白后逐字检索；核对原件来源记录的URL与报告一致",
+          "retrieved_on": "2026-10-20",
+          "matches": true,
+          "note": "逐字一致；报告标为上一年简章。",
+          "original_sha256": "39bd57e4392fcd964e4972ec89640ede488e0e3453ee436562f04ce4eebf7bf1"
+        }
+      ],
+      "independent_sampling": {
+        "seed": 77052027,
+        "method": "random.Random(77052027).sample(review.json.sampling.pool, 6)；池与制作会话相同（44条当前引用的官方原文证据），种子另取，未参考自评所抽ID",
+        "pool_size": 44,
+        "picked": [
+          "E007",
+          "E010",
+          "E022",
+          "E024",
+          "E030",
+          "E040"
+        ],
+        "extra_checks": [
+          "复算省考统计：按职位代码连接职位表（4004个）与缴费表（4075行，交集3990），限应届A/B/C=133/44/98，分位与倍数全部与报告一致。",
+          "核对E048教育部本科专业目录PDF第26页：1202工商管理类含120204财务管理，一致。",
+          "核对E052税务系统专业参考目录：财务管理同时列在“工商管理类”（第17行）和“财会审计类”（第18行），正文说法成立，但证据摘录只抄了第18行。",
+          "核对2026年度省考公告：全文无“专业类/大类”如何认定的说明，报告“上一届公告没写类名怎么认”成立。",
+          "筛查133个“写明财务管理”的限应届职位的其他条件：29个要求男性、12个要求中共党员、12个限某市户籍或生源、多数有最低服务年限；本人女、共青团员，至少37个不能报。"
+        ]
+      },
+      "required_changes": [
+        {
+          "severity": "高",
+          "location": "第3页三件事与下一个检查点、第8页时间线、第9页",
+          "problem": "上一届省考报名为11月6日—11日，检查点定在11月15日、家庭约谈定在11月10日，若今年同期，检查时报名已截止。",
+          "fix": "加一条动作：11月1日起每1—2天看浙江省公务员考试录用网；公告一出，在报名窗口内按专业、身份、性别、政治面貌筛职位并决定报不报。家庭约谈提前到10月31日前；时间线标出“上一届报名11-06—11-11（参照）”。"
+        },
+        {
+          "severity": "高",
+          "location": "第7页图与图注、第8页正文、第20页",
+          "problem": "把133个“写明财务管理”的职位叫“可以报的”；其中29个要求男性、12个要求中共党员（本人女、团员），12个限某市户籍或生源。",
+          "fix": "改称“专业写明财务管理”，并加一层资格筛（性别、政治面貌、户籍/生源、服务年限），图里分开显示“本人条件也符合”的个数；必要时按本人可报集合重算竞争比分位。第3页国考筛选说明同样加上性别、政治面貌。"
+        },
+        {
+          "severity": "中",
+          "location": "第2页核心结论、第3页第3件事、第2页流程图",
+          "problem": "摘要说“只报逐字写了财务管理的职位”，与第8、11、12页“只写工商管理类的先电话确认、能报就放进候选”冲突（同一规则两个版本）。",
+          "fix": "在一处定义规则：逐字写财务管理的直接看；只写“工商管理类”的先打职位表电话确认；只写会计类的不报。摘要与流程图引用同一表述。"
+        },
+        {
+          "severity": "中",
+          "location": "第6页第一段",
+          "problem": "把工资表“审计专业人员”写成“事务所审计人员的年工资中位数¥169,320”，原表是全部企业的审计职业。",
+          "fix": "改为“杭州企业审计专业人员（不只事务所）”；第5页图题“杭州财会相关人员”也改为能涵盖“不分职业”对照行的名称。"
+        },
+        {
+          "severity": "低",
+          "location": "第8页时间线、第10页初级会计路线卡",
+          "problem": "初级会计真正要抓的是年初报名（上一年1月5日—27日），时间线只画了5月考试。",
+          "fix": "时间线加“初级会计报名（上一年1-05—1-27，参照）”，并给一个个人检查点（如12月31日前看财政部通知）。"
+        },
+        {
+          "severity": "低",
+          "location": "第21页第10节各条",
+          "problem": "六条风险都挂同样三个链接（省考首页、职位表、工行启事），与协议班、三方协议、家里支持等内容无关。",
+          "fix": "每条只挂真正支撑它的来源（如协议班挂国网不收费原文E049），没有官方来源的写“本人信息/建议”。"
+        },
+        {
+          "severity": "低",
+          "location": "第3页、第5页",
+          "problem": "“毕业后能按期有收入”在没有offer时说成了结果；“专业对口职位每年都有”只查了一年；“投出第一批企业财务岗”忽略已投的5家。",
+          "fix": "改为“拿到企业offer就能按期有收入”“上一届有133个”“再投一批（已投5家）”。"
+        }
+      ],
+      "optional_improvements": [
+        "第4页“按规则明年两科都要重考”加“推测”二字，与第10页一致（推测链本身完整：画像写明今年5月实务过、经济法基础未过；规则要求一个考试年度内全部通过）。",
+        "E052摘录补上“工商管理类”一行，使正文说法可直接从摘录核到。",
+        "摘要卡片“每名额约54.5人”后加一句白话（“上一届平均五十多人抢一个位子，只说明热度”）；封面结论压到两句。",
+        "第2页流程图、第8页时间线小字放大。"
+      ]
+    },
+    {
+      "round": 2,
+      "result": "changes_required",
+      "score": 16,
+      "status": "changes_required",
+      "status_label": "独立复核第二轮：评分 16/20 达到下限、九项坑全过，但正文有一个错数、一处时间说法不实、一处筛选口径易误读，改完即可批准",
+      "independent": true,
+      "reviewer": "独立复核会话（Claude，第二轮，未参与制作与第一轮复核）",
+      "date": "2026-10-20",
+      "rubric": {
+        "items": [
+          {
+            "id": "clarity",
+            "score": 2,
+            "reason": "摘要第一句、流程图、核心结论和三件事说清主路径（企业财务）、并行路径（省考只考一次）、看公告再定（国网、银行）及各自条件；省考专业规则全篇一句话。",
+            "evidence_refs": [],
+            "report_location": "封面、01（第1—3页）"
+          },
+          {
+            "id": "traceability",
+            "score": 2,
+            "reason": "官方数字均附原文摘录、链接、取文方式；抽查6条全部逐字对上。小瑕疵：E012摘录在“财务管理；”处截断，原文后面还有“大数据与财务管理、审计学……”，没打省略号。",
+            "evidence_refs": [
+              "E012",
+              "E013"
+            ],
+            "report_location": "12（第17—19页）、附件"
+          },
+          {
+            "id": "reasoning",
+            "score": 2,
+            "reason": "每个候选在第12节有支持、不利与可观察的改判条件（年底无面试就扩目标、公告无对口职位就不报、笔试未进面就收手、岗位有销售指标就不报）。",
+            "evidence_refs": [],
+            "report_location": "05、08、10、12（第21—22页）"
+          },
+          {
+            "id": "consistency",
+            "score": 1,
+            "reason": "84/13/36、分位48.0/64.5/90.0、全省29.0、2.2倍、133/44/98、身份不限177均由我从原表复算一致；但“只写工商管理类”里“限男性或要求中共党员”应为38不是39：职位13310009025000001备注是“要求中共党员（含预备党员）或共青团员”，本人是团员，可以报，被误剔。附录计算表还有“每名额缴费人数（职位数）133”“3（正文显示3.0（正文另写作3））”这类读不懂的标签。",
+            "evidence_refs": [
+              "E012",
+              "E013"
+            ],
+            "report_location": "06（第8页）、12计算项（第20页）"
+          },
+          {
+            "id": "timeliness",
+            "score": 1,
+            "reason": "国考、国网、工行用当届原文；省考2027公告当天两站复查仍未见，省考、初级、CPA只能用上一届并标“只作参照”；工资是2022年数据，已注明。缺口如实，但关键时间点仍待核。",
+            "evidence_refs": [],
+            "report_location": "01、07、08、12"
+          },
+          {
+            "id": "personalization",
+            "score": 2,
+            "reason": "优先级原话决定排序；女、共青团员、浙江户籍生源真正用于逐岗筛职位；“不卖理财”“偶尔加班”分别排除银行营销岗和事务所主线；5家已投、12小时/周、¥4,500底线都进入取舍。",
+            "evidence_refs": [],
+            "report_location": "02、03、05、06、09"
+          },
+          {
+            "id": "actionability",
+            "score": 2,
+            "reason": "三件事带日期与入口；11-01起看省考公告早于上一届报名开始日11-06，父母约谈10-31在公告前；国考注册10-23 18:00写在首页数字卡；年底、春季、毕业三个检查点各有切换条件。",
+            "evidence_refs": [],
+            "report_location": "01、07、08"
+          },
+          {
+            "id": "boundaries",
+            "score": 1,
+            "reason": "不承诺录用、竞争比只说热度、推测有标。但两处易误导：①专业规则写“再逐条看限应届……”，读起来像只有限应届职位能报，其实上一届“身份不限”且写明财务管理的本科职位有61个（本人条件也符合的45个，中位约205人/名额，更挤），另有专业不限的职位，这些她都能报，只是更挤；②初级会计路线卡说“放在省考笔试之后集中准备，正好赶上春招简历”，按上一届日历考试在5月16—18日，春招简历期拿不到证。",
+            "evidence_refs": [],
+            "report_location": "01、08（第10—11页）"
+          },
+          {
+            "id": "summary_access",
+            "score": 2,
+            "reason": "摘要用白话解释“每名额约64.5人缴费＝一大群人争一个名额，只说明热度”，规则、理由和三件事都能在前3页读懂，不需要先学术语；封面一句结论仍偏长。",
+            "evidence_refs": [],
+            "report_location": "封面、01"
+          },
+          {
+            "id": "layout",
+            "score": 1,
+            "reason": "门禁通过，24页逐页缩略图看过无挤压、断图、空页；但流程图和时间线小字偏小（约6磅），第12页顶上孤零零一句系统口吻的话（“当前没有真实offer或具备输入依据的收入情景……”），附录计算表“正文显示……（正文另写作……）”嵌套括号难读。",
+            "evidence_refs": [],
+            "report_location": "02、09、12、20页"
+          }
+        ]
+      },
+      "pitfalls": [
+        {
+          "item": "没查到写成不存在",
+          "result": "pass",
+          "note": "省考2027公告、国考职位表、国网浙江公告、企业岗位均写“未见/未取到”及原因与再查时点；普华永道写“校招页没有写条件”，不是“没有条件”。",
+          "report_location": "07、12未取到"
+        },
+        {
+          "item": "群体数字当个人概率",
+          "result": "pass",
+          "note": "缴费人数÷招录人数只称热度，数字卡、图注、术语表都写“不是上岸概率”；工资分位写明不是应届起薪。",
+          "report_location": "01、04、05、12"
+        },
+        {
+          "item": "经验帖数字做决定",
+          "result": "pass",
+          "note": "“同学说柜员要卖理财”只作待核线索，结论落到岗位职责原文；未用经验帖数字。",
+          "report_location": "03、10"
+        },
+        {
+          "item": "按编号引用问卷",
+          "result": "pass",
+          "note": "问卷按节名引用；“见第8节”指报告自身章节。",
+          "report_location": "02"
+        },
+        {
+          "item": "同一事实写两处",
+          "result": "pass",
+          "note": "省考规则全篇同一句；数字经计算项和证据唯一登记后引用展开。",
+          "report_location": "全篇"
+        },
+        {
+          "item": "会过期的事实",
+          "result": "pass",
+          "note": "证据有核实日与复核期限（2026-11-19）；上一届规则与日期均标“只作参照”。",
+          "report_location": "07、12"
+        },
+        {
+          "item": "八字越界",
+          "result": "pass",
+          "note": "画像无八字，报告未使用。",
+          "report_location": "—"
+        },
+        {
+          "item": "委派判断类任务",
+          "result": "pass",
+          "note": "省考本人条件筛选（判断类）由我从原表独立重做，84/13/36与分位一致；仅发现C类一处误剔，属判断细节，不是委派返工问题。",
+          "report_location": "06"
+        },
+        {
+          "item": "取页摘要当原文",
+          "result": "pass",
+          "note": "抽查6条均为本机原件（curl取文、哈希与回执一致）逐字检索。",
+          "report_location": "12"
+        }
+      ],
+      "sampled_sources": [
+        {
+          "id": "E012",
+          "claim": "浙江省考上一届职位表：职位专业与身份要求",
+          "source": "http://omwb.oss-cn-beijing.aliyuncs.com/zjgwy2025/4bd42501f1d7525dcd5dcf57b79a1db6",
+          "local_copy": "/Users/xik/Desktop/Folder/App/Zhiqu/.cache/t13-career-zj/raw/zj2026_positions.xlsx",
+          "sha256": "ddce656f025982e522f4597bbed70b67d9d8e301a658939797ccf23493833e6e",
+          "locator": "职位代码13301012006000001、13301013022000006所在行",
+          "method": "标准库解析xlsx原件逐格比对",
+          "matches": true,
+          "note": "单位、代码、学历学位、身份、备注“2.要求男性”一致；本科专业名单在“财务管理”后还有“大数据与财务管理、审计学、大数据与审计、内部审计”，摘录截断未加省略号。"
+        },
+        {
+          "id": "E013",
+          "claim": "浙江省考上一届各职位缴费报名人数",
+          "source": "http://omwb.oss-cn-beijing.aliyuncs.com/zjgwy2026/62329aa17fc3cd317d9b65201ef85e93",
+          "local_copy": "/Users/xik/Desktop/Folder/App/Zhiqu/.cache/t13-career-zj/raw/zj2026_paid.xlsx",
+          "sha256": "adc811f722d903a9ecdafaddcac0d89a7d3d1e8dc2ecd42306a12672fe422d6a",
+          "locator": "职位代码13301012006000001行；共4075个职位行",
+          "method": "标准库解析xlsx原件逐格比对",
+          "matches": true,
+          "note": "淳安县教育局｜工作人员一级主任科员及以下｜1｜69，一致；行数4075一致。"
+        },
+        {
+          "id": "E037",
+          "claim": "初级会计：上一年度考试开始日 2026-05-16",
+          "source": "http://kjs.mof.gov.cn/gongzuotongzhi/202511/t20251127_3977584.htm",
+          "local_copy": "/Users/xik/Desktop/Folder/App/Zhiqu/.cache/t13-career-zj/raw2/mof_kjs_2026_kaowu.html",
+          "sha256_prefix": "e9479b0a933449e1",
+          "locator": "四、考试时间",
+          "method": "本机原件逐字检索",
+          "matches": true,
+          "note": "“初级会计资格考试于2026年5月16日至18日举行，共6个批次。”一字不差。"
+        },
+        {
+          "id": "E040",
+          "claim": "CPA：应届生学历认证开始日 7月20日",
+          "source": "https://www.cicpa.org.cn/xxfb/tzgg/202603/W020260311354851382981.pdf",
+          "local_copy": "/Users/xik/Desktop/Folder/App/Zhiqu/.cache/t13-career-zj/raw2/cicpa_a_W020260311354851382981.pdf",
+          "sha256_prefix": "39bd57e4392fcd96",
+          "locator": "报名程序：学历信息认证 第2条",
+          "method": "PDF原件抽文字逐字检索（去换行）",
+          "matches": true,
+          "note": "“应届毕业生报名人员持国（境）内学历的，应当于2026年7月20日至8月10日通过学信网APP进行学历信息认证授权”一致。"
+        },
+        {
+          "id": "E044",
+          "claim": "德勤：专业不限",
+          "source": "https://www.deloitte.com/cn/zh/careers/explore-your-fit/students/graduate-program.html",
+          "local_copy": "/Users/xik/Desktop/Folder/App/Zhiqu/.cache/t13-career-zj/raw2/deloitte_graduate_program.html",
+          "sha256_prefix": "90085ceb01623c7c",
+          "locator": "毕业生招聘页正文",
+          "method": "本机HTML原件逐字检索",
+          "matches": true,
+          "note": "“无论您是什么专业，都能在这里找到适合自己的职业领域。”一致；页面未署日期，报告已注明。"
+        },
+        {
+          "id": "E055",
+          "claim": "初级会计：上一年度报名开始日 2026-01-05",
+          "source": "http://kjs.mof.gov.cn/gongzuotongzhi/202511/t20251127_3977584.htm",
+          "local_copy": "/Users/xik/Desktop/Folder/App/Zhiqu/.cache/t13-career-zj/raw2/mof_kjs_2026_kaowu.html",
+          "sha256_prefix": "e9479b0a933449e1",
+          "locator": "三、报名时间",
+          "method": "本机原件逐字检索",
+          "matches": true,
+          "note": "“2026年1月5日至1月27日……开通初级、高级会计资格考试报名”与“考试报名统一在1月27日12:00截止”两句一致。"
+        }
+      ],
+      "independent_sampling": {
+        "round": 2,
+        "seed": 91020261,
+        "method": "候选集合＝evidence.json中grade=官方、availability=available，且ID出现在report_trace/narrative/judgment/calculations/candidates/directions或evidence.report_blocks中的证据，共43条；random.Random(91020261).sample(池,6)。种子自定，未参考自评与第一轮所抽ID。",
+        "pool": [
+          "E002",
+          "E003",
+          "E004",
+          "E005",
+          "E006",
+          "E007",
+          "E008",
+          "E010",
+          "E012",
+          "E013",
+          "E017",
+          "E018",
+          "E019",
+          "E020",
+          "E021",
+          "E022",
+          "E023",
+          "E024",
+          "E025",
+          "E026",
+          "E027",
+          "E028",
+          "E029",
+          "E030",
+          "E031",
+          "E049",
+          "E050",
+          "E033",
+          "E034",
+          "E035",
+          "E036",
+          "E037",
+          "E038",
+          "E039",
+          "E040",
+          "E043",
+          "E044",
+          "E045",
+          "E048",
+          "E052",
+          "E053",
+          "E054",
+          "E055"
+        ],
+        "picked": [
+          "E012",
+          "E013",
+          "E037",
+          "E040",
+          "E044",
+          "E055"
+        ],
+        "extra_checks": [
+          "重筛省考职位：用标准库读职位表原件（3张表共4004个职位，哈希与回执一致）和缴费表（4075行），按职位代码连接。限2026届应届、学历为本科及以上、本科专业名单逐项（按顿号切分、整词匹配，“大数据与财务管理”不算）出现“财务管理”的有133个；按画像（女、共青团员、浙江户籍与生源但市县未填、出生年月未填）对照“政治面貌要求”列与备注：明确不符36（要求男性24、中共党员12），未知13（限某市县户籍或生源10、视力2、只写“适合男性”1），本人条件也符合84，与报告一致。",
+          "84个子集每名额缴费人数q1/中位/q3＝48.0/64.5/90.0；全省限应届2410个职位中位29.0，倍数2.224→2.2；133个全集39.0/54.5/75.0；身份不限61个102/177/241，均一致。",
+          "只写“工商管理类”98个：我得不符38（要求男性32、中共党员6）、未知19、符合41；报告写不符39。差异来自13310009025000001，备注“要求中共党员（含预备党员）或共青团员”，本人可报，被误记为党员限制。只列会计类44个、不符17一致。",
+          "报告未提的可报范围：身份不限且写明财务管理的本科职位61个，本人条件也符合45个（中位约205人/名额）；限应届专业不限的30个（本人条件也符合且无未知条件的3个）。",
+          "时间线：上一届报名2025-11-06 9时至11-11 17时（公告原件核对）；报告首个省考检查点11-01、父母约谈10-31，均早于上届报名开始日；国考注册认证10-23 18:00写在首页。",
+          "省考公告原文“除专业技术类职位和特殊职位外，报考省级机关单位和杭州、宁波两市市级机关单位的，均须具有2年以上基层工作经历”，报告第8节写“省级和杭甬市级综合类职位”，大意不错。",
+          "case_check --stage 10：阶段0—10通过。--delivery：28项未过，其中复核字段6项（本次填写前）、操控者核查单22项（E002、E006、E010—E013、E017、E029、E032、E033、E035、E039、E043—E048、E052、E053、PROFILE、SCENARIO未填）。",
+          "PDF 24页逐页看缩略图，并放大第9页时间线。"
+        ]
+      },
+      "required_changes": [
+        {
+          "severity": "中",
+          "location": "第8—9页第6节正文、第20页计算项“只写工商管理类、但限男性或要求中共党员的职位数”",
+          "problem": "39应为38：职位13310009025000001备注是“要求中共党员（含预备党员）或共青团员”，本人是共青团员，可以报，被当成党员限制剔掉了（误伤）。",
+          "fix": "筛选时把“党员或共青团员”“共青团员或中共党员”算作本人符合；重算C类不符/未知/符合（应为38/19/41）并更新正文与计算项；在筛选脚本里加这条判断，避免同类再犯。"
+        },
+        {
+          "severity": "中",
+          "location": "第2页核心结论、第3页、第8页、第10页路线卡、第14页术语表、第21—23页（凡出现“再逐条看限应届……”处）",
+          "problem": "规则写成“逐条看限应届、不要基层经历……”，读者会以为只有限应届职位能报。上一届身份不限、写明财务管理的本科职位有61个，本人条件也符合45个；专业不限的职位她也能报，只是更挤（中位约205人/名额）。报告第5节虽给了177的数，但规则句把它们静默排除了。",
+          "fix": "规则句改成“优先看限应届的；身份不限、专业不限的也能报，但上一届更挤（写明财务管理的约177人/名额）”，或在第6节图下加一行“身份不限：本人条件也符合的45个”。不改主结论。"
+        },
+        {
+          "severity": "低",
+          "location": "第11页初级会计路线卡“投入”一栏（judgment.json 路线卡）",
+          "problem": "“放在省考笔试之后集中准备，正好赶上春招简历”不成立：按上一届日历，初级5月16—18日考试，春招简历期还没考。另“初级会计常被写成优先条件”（第10页企业财务门槛）没有任何招聘原文支撑。",
+          "fix": "改为“放在省考笔试之后集中准备，5月考试；春招简历上可写‘初级在考’”；“常被写成优先条件”改成“投递时看招聘原文是否写初级优先”。"
+        },
+        {
+          "severity": "低",
+          "location": "第17页E012摘录",
+          "problem": "本科专业名单在“财务管理”处截断，原文后面还有“大数据与财务管理、审计学、大数据与审计、内部审计”，读者会以为名单到此为止。",
+          "fix": "截断处加“……”，或摘全该行。"
+        },
+        {
+          "severity": "低",
+          "location": "第12页顶部、第19—21页计算项",
+          "problem": "第12页顶上单独一句系统口吻的话；计算项标签“每名额缴费人数（职位数）133”、“3（正文显示3.0（正文另写作3））”难读。",
+          "fix": "把那句并入第9节末段或改成白话（“现在没有offer，等拿到再按合同算”）；计算项标签改为“…职位数：133”，显示值只写一次。"
+        }
+      ],
+      "review_notes": "第一轮7项必须修改均已改好：①检查点提前到11-01、约谈10-31、时间线标上届11-06—11-11；②133改称“专业写明财务管理”，按性别、政治面貌、户籍生源分出84/13/36并重算分位（我复算一致）；③专业规则全篇一句；④审计工资改称企业审计职业（不只事务所），图题改为能涵盖对照行；⑤时间线加初级报名与12-31检查点；⑥第10节每条只挂对应来源，无来源的标推测/本人输入；⑦“按期有收入”“上一届有…个”“再投一批（已投5家）”均已改。可选项中“推测”二字、E052摘录、摘要白话也已做。本轮评分16/20达下限、无0分、九项坑全过，因正文仍有一处错数（误伤一个可报职位）和一处不实的时间说法，定为需修改；改完上列5项、重生成并更新快照后，只需复核这5处即可批准。操控者核查单22项仍未填，交付前须由操控者亲自完成。"
+    },
+    {
+      "round": 3,
+      "result": "changes_required",
+      "score": 17,
+      "status": "changes_required",
+      "status_label": "独立复核第三轮：评分 17/20、无 0 分、九项坑全过；第二轮五项改好四项半，但新加的“身份不限”“专业不限”两组本人条件数没筛民族和证书要求，正文两个数偏多，改完即可批准",
+      "independent": true,
+      "reviewer": "独立复核会话（Claude，第三轮，未参与制作与前两轮复核）",
+      "date": "2026-10-20",
+      "rubric": {
+        "items": [
+          {
+            "id": "clarity",
+            "score": 2,
+            "reason": "封面、摘要流程图、核心结论和三件事说清主线（企业财务）、并行（省考只考一次）、看公告再定（国网、银行）及切换条件；省考专业规则全篇同一句，且已补“身份不限、专业不限也能报但更挤或多数条件对不上”。",
+            "evidence_refs": [],
+            "report_location": "封面、01（第1—3页）"
+          },
+          {
+            "id": "traceability",
+            "score": 2,
+            "reason": "官方数字都附原文摘录、链接和取文方式；本轮随机抽4条加必核E012、职位13310009025000001，全部与本机原件逐字对上。E012摘录已补全到“内部审计”，与原件该行一致。",
+            "evidence_refs": [
+              "E012",
+              "E017",
+              "E026",
+              "E027",
+              "E049"
+            ],
+            "report_location": "12（第17—20页）"
+          },
+          {
+            "id": "reasoning",
+            "score": 2,
+            "reason": "每个候选在第12节有支持、不利和可观察的改判条件（年底无面试就扩目标、公告无对口就不报、笔试未进面就收手、岗位有销售指标就不报）。",
+            "evidence_refs": [],
+            "report_location": "05、08、10、12（第23—24页）"
+          },
+          {
+            "id": "consistency",
+            "score": 1,
+            "reason": "主数字我从原表独立重算全部一致：限应届写明财务管理133＝符合84/待核13/不符36，分位48.0/64.5/90.0，全省29.0，倍数2.2；只写工商管理类98＝38/19/41（团员职位已改对）；只列会计类44、其中17不符；身份不限61、分位102/177/241。但新加的两组“本人条件也符合”数偏多：①身份不限写明财务管理的47个里，2个“民族要求为畲族”（13311009011000014、13311009016000021），1个备注“要求具有初级会计师及以上职称”（13302010014000003，本人初级未拿到），应为符合44、中位约206.5（报告写47、198）；②专业不限、本科能报的58个里写“本人条件也符合12个”，其中5个要求A类法律职业资格证书、2个限畲族，实际符合只有5个。原因是筛选只看了政治面貌列和备注里的性别、户籍、视力，没看“民族要求”列和备注里的证书、职称要求。",
+            "evidence_refs": [
+              "E012",
+              "E013"
+            ],
+            "report_location": "06（第9页正文）、12计算项（第21—22页）"
+          },
+          {
+            "id": "timeliness",
+            "score": 1,
+            "reason": "国考、国网、工行用当届原文；省考2027年度公告未出，省考、初级会计、CPA只能用上一届并逐处标“参照”，检查点已按上届窗口提前到11-01。缺口如实，关键时间点仍待公告核。",
+            "evidence_refs": [
+              "E054",
+              "E055"
+            ],
+            "report_location": "01、07、08、12"
+          },
+          {
+            "id": "personalization",
+            "score": 2,
+            "reason": "优先级原话决定排序；女、共青团员、浙江户籍生源用于逐岗筛职位；“不卖理财”“偶尔加班”分别排除银行营销岗和事务所主线；已投5家、每周12小时、¥4,500底线都进入取舍。",
+            "evidence_refs": [],
+            "report_location": "02、03、05、06、09"
+          },
+          {
+            "id": "actionability",
+            "score": 2,
+            "reason": "三件事带日期和入口（10-22国考、10-31投递和谈话、11-01起看省考公告）；国考10-23 18:00写在首页；初级会计改为“5月考，春招简历写初级在考”，企业门槛改为“看招聘原文是否写初级优先”；年底、春季、毕业三个检查点各有切换条件。",
+            "evidence_refs": [
+              "E005",
+              "E037"
+            ],
+            "report_location": "01、07、08"
+          },
+          {
+            "id": "boundaries",
+            "score": 2,
+            "reason": "第二轮两处易误解已改：规则句写明身份不限、专业不限也能报；初级会计不再说“赶上春招简历”。竞争比全篇只称热度，推测标“推测”，最终选择归本人。上面两个偏多的数属计数错误，记在“数字一致”项，不重复扣。",
+            "evidence_refs": [],
+            "report_location": "01、08（第10—11页）、10"
+          },
+          {
+            "id": "summary_access",
+            "score": 2,
+            "reason": "前3页能读懂主线、理由、边界和三件事；“每名额约64.5人缴费＝一大群人争一个名额，只说明热度”是白话。封面一句话结论和核心结论第二条仍偏长，家长要慢读，但不需先学术语。",
+            "evidence_refs": [],
+            "report_location": "封面、01"
+          },
+          {
+            "id": "layout",
+            "score": 1,
+            "reason": "case_check阶段0—10通过，25页逐页缩略图看过无挤压、断图、空页。瑕疵：第12页第9节末仍有一句系统口吻的话“当前没有真实offer或具备输入依据的收入情景……”（共用代码planning_report.py第87行生成，第二轮已提）；附录计算表“3（正文显示3.0（正文另写作3））”叠写、流程图和时间线小字偏小（这两项已另行登记修复，不作本轮扣分理由）。",
+            "evidence_refs": [],
+            "report_location": "第12页、第21—22页、第2页、第9页"
+          }
+        ]
+      },
+      "pitfalls": [
+        {
+          "item": "没查到写成不存在",
+          "result": "pass",
+          "note": "省考2027公告、国考职位表、国网浙江公告、企业岗位均写“未见/未取到”及原因；普华永道写“校招页没有写条件”，不是“没有条件”。",
+          "report_location": "07、12未取到"
+        },
+        {
+          "item": "群体数字当个人概率",
+          "result": "pass",
+          "note": "缴费人数÷招录人数在数字卡、图注、术语表都写“不是上岸概率”；工资分位写明不是应届起薪。",
+          "report_location": "01、04、05、12"
+        },
+        {
+          "item": "经验帖数字做决定",
+          "result": "pass",
+          "note": "“同学说柜员要卖理财”“协议班不过退费”只作待核线索，落到岗位职责原文和合同条款。",
+          "report_location": "03、10"
+        },
+        {
+          "item": "按编号引用问卷",
+          "result": "pass",
+          "note": "问卷按节名引用；“见第8节”指报告自身章节。",
+          "report_location": "02"
+        },
+        {
+          "item": "同一事实写两处",
+          "result": "pass",
+          "note": "省考规则全篇同一句；数字经证据与计算项唯一登记后展开。身份不限的177（未筛）与198（本人条件筛后）是两个不同集合，都写明了口径。",
+          "report_location": "全篇"
+        },
+        {
+          "item": "会过期的事实",
+          "result": "pass",
+          "note": "证据有核实日与复核期限2026-11-19；上一届规则与日期均标“只作参照”。",
+          "report_location": "07、12"
+        },
+        {
+          "item": "八字越界",
+          "result": "pass",
+          "note": "画像无出生信息，报告未使用八字。",
+          "report_location": "—"
+        },
+        {
+          "item": "委派判断类任务",
+          "result": "pass",
+          "note": "筛职位由制作会话自做；本轮发现的两组计数偏多是筛选口径漏项（民族列、证书职称），不是委派返工问题。",
+          "report_location": "06"
+        },
+        {
+          "item": "取页摘要当原文",
+          "result": "pass",
+          "note": "抽查的6条都按本机原件逐字核对：xlsx按单元格、工资PDF按页面抽文字；E049为内置浏览器渲染文本的逐字节选（非字节原件，回执已注明）。",
+          "report_location": "12"
+        }
+      ],
+      "sampled_sources": [
+        {
+          "id": "E017",
+          "claim": "杭州工资价位：会计专业人员 25%分位 69,120",
+          "source": "https://zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/jcms_files/jcms1/web3095/site/attach/0/cdc97ab7d30243db95368bb1c34b4cf3.pdf",
+          "local_copy": "/Users/xik/Desktop/Folder/App/Zhiqu/.cache/t13-career-zj/raw/hz_wage2023.pdf",
+          "sha256": "7853501ef5272cc5571aff36c7c791b0832d25941ea319095cea28236240ee6d",
+          "locator": "PDF第13页 序号50 会计专业人员行",
+          "method": "PyMuPDF抽取该页文字逐字比对；哈希与证据回执一致",
+          "retrieved_on": "2026-10-20",
+          "matches": true,
+          "note": "“会计专业人员 52810 69120 95000 138496 213481”一致，25%分位为69120。"
+        },
+        {
+          "id": "E026",
+          "claim": "杭州工资价位：大学本科（不分职业）25%分位 97,715",
+          "source": "https://zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/jcms_files/jcms1/web3095/site/attach/0/cdc97ab7d30243db95368bb1c34b4cf3.pdf",
+          "local_copy": "/Users/xik/Desktop/Folder/App/Zhiqu/.cache/t13-career-zj/raw/hz_wage2023.pdf",
+          "sha256": "7853501ef5272cc5571aff36c7c791b0832d25941ea319095cea28236240ee6d",
+          "locator": "PDF第24页“十、分学历企业从业人员工资价位”表 序号2",
+          "method": "PyMuPDF抽取该页文字逐字比对",
+          "retrieved_on": "2026-10-20",
+          "matches": true,
+          "note": "该页有多张表都含“大学本科”行，摘录取的是表头“十、分学历企业从业人员工资价位”下第一张（全体企业），“64199 97715 162899 264000 408604”一致。"
+        },
+        {
+          "id": "E027",
+          "claim": "杭州工资价位：大学本科（不分职业）50%分位 162,899",
+          "source": "https://zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/jcms_files/jcms1/web3095/site/attach/0/cdc97ab7d30243db95368bb1c34b4cf3.pdf",
+          "local_copy": "/Users/xik/Desktop/Folder/App/Zhiqu/.cache/t13-career-zj/raw/hz_wage2023.pdf",
+          "sha256": "7853501ef5272cc5571aff36c7c791b0832d25941ea319095cea28236240ee6d",
+          "locator": "同E026",
+          "method": "PyMuPDF抽取该页文字逐字比对",
+          "retrieved_on": "2026-10-20",
+          "matches": true,
+          "note": "50%分位162899一致。"
+        },
+        {
+          "id": "E049",
+          "claim": "国网：招聘不收费、不组织考前培训",
+          "source": "https://zhaopin.sgcc.com.cn/sgcchr/static/unitPart.html?bullet_id=dcefb56d04714dc4b488d0a7a204bf76",
+          "local_copy": "/Users/xik/Desktop/Folder/App/Zhiqu/.cache/t13-career-zj/raw3/sgcc_2027_notice_browser.txt",
+          "locator": "五、声明（二）（三）",
+          "method": "本机内置浏览器渲染文本逐字检索（curl 412，回执注明为渲染文本节选、非字节原件）",
+          "retrieved_on": "2026-10-20",
+          "matches": true,
+          "note": "（二）（三）两句与报告摘录一字不差。"
+        },
+        {
+          "id": "E012",
+          "claim": "浙江省考上一届职位表：职位专业与身份要求（必核）",
+          "source": "http://omwb.oss-cn-beijing.aliyuncs.com/zjgwy2025/4bd42501f1d7525dcd5dcf57b79a1db6",
+          "local_copy": "/Users/xik/Desktop/Folder/App/Zhiqu/.cache/t13-career-zj/raw/zj2026_positions.xlsx",
+          "sha256": "ddce656f025982e522f4597bbed70b67d9d8e301a658939797ccf23493833e6e",
+          "locator": "综合管理类工作表 13301012006000001、13301013022000006 两行",
+          "method": "标准库解析xlsx原件逐格比对",
+          "retrieved_on": "2026-10-20",
+          "matches": true,
+          "note": "淳安县教育局、本科及以上、学士及以上、2026年应届毕业生一致；本科专业名单到“内部审计”为止，摘录已完整；13301013022000006备注“1.具体工作乡镇由当地组织部门统一分配；2.要求男性。”一致。"
+        },
+        {
+          "id": "E012（职位13310009025000001，必核）",
+          "claim": "团员可报的“只写工商管理类”职位",
+          "source": "http://omwb.oss-cn-beijing.aliyuncs.com/zjgwy2025/4bd42501f1d7525dcd5dcf57b79a1db6",
+          "local_copy": "/Users/xik/Desktop/Folder/App/Zhiqu/.cache/t13-career-zj/raw/zj2026_positions.xlsx",
+          "sha256": "ddce656f025982e522f4597bbed70b67d9d8e301a658939797ccf23493833e6e",
+          "locator": "综合管理类工作表 共青团仙居县委 13310009025000001 行",
+          "method": "标准库解析xlsx原件逐格比对",
+          "retrieved_on": "2026-10-20",
+          "matches": true,
+          "note": "政治面貌要求列“不限”；备注原文“1.要求中共党员（含预备党员）或共青团员；2.参照公务员法管理；3.录用后须在本县服务满5年。”本人共青团员可报；报告已把它算作符合，C类38/19/41与我重算一致。另：该职位年龄要求18至28周岁，本人未填出生年月，与报告“年龄未计入”的说明一致。"
+        }
+      ],
+      "independent_sampling": {
+        "round": 3,
+        "seed": 7310520,
+        "method": "候选集合＝evidence.json中grade=官方、availability=available，且ID出现在report_trace/narrative/judgment/calculations/candidates/directions/case或evidence.report_blocks中的证据，共43条；去掉必核的E012后用random.Random(7310520).sample(池,4)。种子自定，未参考自评与前两轮所抽ID。",
+        "pool": [
+          "E002",
+          "E003",
+          "E004",
+          "E005",
+          "E006",
+          "E007",
+          "E008",
+          "E010",
+          "E012",
+          "E013",
+          "E017",
+          "E018",
+          "E019",
+          "E020",
+          "E021",
+          "E022",
+          "E023",
+          "E024",
+          "E025",
+          "E026",
+          "E027",
+          "E028",
+          "E029",
+          "E030",
+          "E031",
+          "E049",
+          "E050",
+          "E033",
+          "E034",
+          "E035",
+          "E036",
+          "E037",
+          "E038",
+          "E039",
+          "E040",
+          "E043",
+          "E044",
+          "E045",
+          "E048",
+          "E052",
+          "E053",
+          "E054",
+          "E055"
+        ],
+        "picked": [
+          "E017",
+          "E026",
+          "E027",
+          "E049"
+        ],
+        "mandatory": [
+          "E012",
+          "职位13310009025000001备注"
+        ],
+        "extra_checks": [
+          "职位表与缴费表原件哈希与回执一致（ddce656f…、adc811f7…）；职位表3张工作表共4004个职位，缴费表按职位代码连接。",
+          "主数字重算：限应届且本科专业名单逐项含“财务管理”133＝符合84/待核13/不符36；84个分位48.0/64.5/90.0；只写工商管理类98＝不符38/待核19/符合41；只列会计类44、其中不符17；身份不限写明财务管理61、分位102/177/241。全部与报告一致。",
+          "裁定一（身份不限61个里符合47还是45）：两者都不对。差的2个不是“适合男性”那个（13306006002000001，制作方与第二轮复核员都没把它算进符合，算待核还是不符不影响符合数），而是“民族要求”列写“民族要求为畲族”的13311009011000014、13311009016000021——把这2个去掉正好是45个、中位205.0，与第二轮复核员的数完全对上。再去掉备注“要求具有初级会计师及以上职称”的13302010014000003（本人初级未拿到、省考报名时也拿不到），本人条件也符合应为44个、中位206.5；畲族2个可记待核（画像没填民族）。",
+          "裁定二（约205人/名额）：第二轮复核员的“约205”指的是身份不限、写明财务管理、本人条件也符合的45个职位的中位数（第二轮extra_checks原文如此），不是专业不限职位；制作方当成专业不限去复现，自然复现不出。专业不限、本科能报的58个（全部缴费比中位113.0/44.5，按身份不限/限应届分）不能拿205描述。",
+          "专业不限58个：报告称本人条件也符合12个；其中13306005024000003、13308001006000012、13308004023000054、13306005019000001、13311003018000001共5个要求A类法律职业资格证书，13307004023000057、13311009015000020限畲族，实际符合5个。报告“专业不限的多数条件对不上”方向正确，但12这个数偏多一倍以上。",
+          "主集合84个复查：民族列全为“不限”、备注无证书或职称要求，84不受上述漏项影响；只写工商管理类98个同样无民族或证书要求。",
+          "case_check --stage 10：阶段0—10通过。",
+          "PDF 25页逐页缩略图看过，放大第12页；报告PDF哈希88ae1736…与快照一致。"
+        ]
+      },
+      "required_changes": [
+        {
+          "severity": "中",
+          "location": "第9页第6节正文“专业不限、本科能报的 58 个里，本人条件也符合的只有 12 个”；第22页计算项“专业不限、本科能报、本人条件也符合的职位数 12”",
+          "problem": "12个里有5个要求A类法律职业资格证书、2个限畲族，本人（财务管理应届、画像无民族）实际符合的只有5个；把她能报的职位数说多了一倍以上。",
+          "fix": "筛选口径加两条：①看职位表“民族要求”列，非“不限”的记待核（画像没填民族）；②备注里要求法律职业资格、初级会计师等职称或证书的，按本人证书判断（本人没有的记不符）。重算后改为“58个里本人条件也符合的只有5个（另2个限畲族待核）”，计算项同步；结论句“多数条件对不上”不用改。"
+        },
+        {
+          "severity": "低",
+          "location": "第9页第6节正文“本人条件也符合的 47 个……中位数约 198 人”；第21—22页计算项 anya_ok_count、anya_ok_median",
+          "problem": "47个里2个民族要求为畲族、1个要求初级会计师职称，本人条件也符合应为44个，中位约206.5（第二轮复核员的45/205只去掉了畲族两个，也漏了职称那一个）。",
+          "fix": "按上一条同一口径重算，改为“44个（另2个限畲族待核），中位约207人”；第7页图注和第15页术语表“本人条件也符合”的定义补“民族、证书职称要求”。"
+        },
+        {
+          "severity": "低",
+          "location": "第12页第9节末句；共用代码 skills/zhiqu/scripts/planning_report.py 第87行",
+          "problem": "第二轮第5项的计算项标签已改，但“当前没有真实offer或具备输入依据的收入情景；应先取得工资、工时、缴存与生活支出条件，再比较收入。”仍在，系统口吻，和上一段“收到真实offer后，再按合同算到手、工时和住房”重复。",
+          "fix": "改共用代码这一句为白话（如“现在还没有offer，拿到后按合同算到手、工时和住房再比较”），或在本案已有同义段落时不输出；重新生成。"
+        }
+      ],
+      "optional_improvements": [
+        "封面“一句话结论”实际三句、核心结论第二条很长，可再压短，家长读得更快。",
+        "第7页图注已解释177与本人条件筛后数的区别，第9页可在198（改后约207）旁注一句“177是不按本人条件筛的全部61个”，免得读者以为前后矛盾。",
+        "把“民族要求列、备注里的证书/职称”写进 skills/zhiqu-career/references/public-sector.md 第27行的最小事实清单（目前列了证书，没列民族），2027年度职位表出来后按同一口径筛。",
+        "附录计算项叠写“3（正文显示3.0（正文另写作3））”与流程图、时间线小字偏小，按已登记的共用代码修复跟进。"
+      ],
+      "review_notes": "第二轮五项：①团员职位误剔——已改，13310009025000001按“中共党员或共青团员”算符合，C类38/19/41我重算一致；②规则句像“只能报限应届”——已改，全篇同一句补了“身份不限、专业不限也能报”；③初级会计与春招时间——已改，路线卡写5月开考、春招简历写“初级在考”，企业门槛改为“看招聘原文是否写初级优先”；④E012摘录截断——已改，摘全到“内部审计”；⑤第12页系统口吻句与附录标签——标签已改白话，系统口吻句仍在（共用代码生成），算半项。为落实第②项新加的“身份不限47”“专业不限12”两组数漏筛民族列和证书职称要求，正文偏多，列为本轮必须修改。改完上列3项、重生成并更新快照后，只需复核这3处即可批准。操控者核查单仍须操控者本人完成，本复核未代填。"
+    }
+  ],
+  "independent_sampling": {
+    "round": 4,
+    "seed": 2026102004,
+    "method": "候选集合＝evidence.json中grade=官方、availability=available，且ID出现在narrative/calculations/report_trace/candidates/judgment/rules_check中的证据，共45条；排序后用random.Random(2026102004).sample(池,4)，另加必核E012凑足合同要求的5条。种子自定，未参考自评与前几轮所抽ID（E005与自评重合属随机结果）。",
+    "pool": [
+      "E002",
+      "E003",
+      "E004",
+      "E005",
+      "E006",
+      "E007",
+      "E008",
+      "E010",
+      "E012",
+      "E013",
+      "E017",
+      "E018",
+      "E019",
+      "E020",
+      "E021",
+      "E022",
+      "E023",
+      "E024",
+      "E025",
+      "E026",
+      "E027",
+      "E028",
+      "E029",
+      "E030",
+      "E031",
+      "E033",
+      "E034",
+      "E035",
+      "E036",
+      "E037",
+      "E038",
+      "E039",
+      "E040",
+      "E041",
+      "E042",
+      "E043",
+      "E044",
+      "E045",
+      "E048",
+      "E049",
+      "E050",
+      "E052",
+      "E053",
+      "E054",
+      "E055"
+    ],
+    "picked": [
+      "E005",
+      "E055",
+      "E052",
+      "E050"
+    ],
+    "mandatory": [
+      "E012"
+    ]
+  },
+  "independent_screen": {
+    "method": "自写脚本读职位表全部4004行20列与缴费表4075行（按职位代码连接）。本科能报＝学历本科及以下可报、学位学士及以上或不限；专业取“本科所学专业要求”段按顿号切词，含“财务管理”整词为写明，否则含“工商管理类”为类名，否则含会计字样（不含法学（法务会计））为会计类。不符：政治面貌列中共党员、备注要求中共党员（“或共青团员”除外）、限/要求男性、要求初级会计师或会计资格证、要求法律职业资格（“法学类专业的须…”这类条件句对财务管理不适用）；待核：民族列非不限或备注限民族、市县户籍或生源、视力、“适合男性”、人民警察标准；年龄全体待核不计入。分位按含端点线性插值。",
+    "results": {
+      "限应届写明财务管理": "133＝84/13/36，符合者分位48.0/64.5/90.0；全部133分位39/54.5/75",
+      "全省限应届": "2410个，分位16/29/51.875；64.5÷29＝2.22≈2.2",
+      "只写工商管理类": "98＝38不符/19待核/41符合",
+      "只列会计类": "44，其中17不符",
+      "身份不限写明财务管理": "61，未筛分位102/177/241；符合44，中位206.5",
+      "专业不限本科能报": "58（应届30＋不限28），符合5（1＋4）"
+    },
+    "matches_report": true
+  },
+  "required_changes": [],
+  "optional_improvements": [
+    "第16页“官方数字来自……”一段有重复句：“本人条件按职位表‘政治面貌要求’一列和‘备注’逐条对照，职位表每一列和备注里的资格……逐条对照”，前半句是旧口径残留，删掉即可。",
+    "第19页E012“适用范围”仍写“再按‘政治面貌要求’一列和‘备注’对照本人性别、政治面貌、户籍生源”，没提民族列和证书职称，和正文口径不完全一致，可补上。",
+    "封面“一句话结论”实际三句，可再压短。",
+    "共用代码已登记的三项（第12页系统口吻句、附录“3（正文显示3.0…）”叠写、流程图与时间线小字）按登记跟进。"
+  ],
+  "review_notes": "第三轮必须修改的两项：身份不限44/206.5、专业不限58里5个，已改对，计算项同步，我独立重筛一致；第7页图注和第12节术语表也补了“民族、证书或职称”。case_check --stage 10 运行结果：阶段0—10通过。操控者核查单仍须操控者本人完成，本复核未代填；正式交付前还要跑 --delivery。"
 }
