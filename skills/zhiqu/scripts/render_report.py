@@ -200,8 +200,8 @@ def render_fence(kind, title, lines, notes=None):
     elif kind == 'bars':
         content = _report.bar_chart([[r[0],float(r[1].replace(',','')),*(r[2:])] for r in items],opts.get('unit',''),float(opts['max']) if 'max' in opts else None)
     elif kind == 'interval':
-        number = lambda s: float(s.replace(',','')) if s and s!='未取到' else None
-        content = _report.interval_chart([[r[0],*[number(x) for x in (r[1:]+['','',''])[:3]]] for r in items],opts.get('unit','分'))
+        number = lambda s: float(s.replace(',','')) if s and s.strip() and s!='未取到' else None
+        content = _report.interval_chart([[r[0],*[number(x) for x in (r[1:]+['']*7)[:7]]] for r in items],opts.get('unit','分'))
     elif kind == 'timeline': content = _report.timeline(items)
     elif kind == 'matrix':
         if 'columns' not in opts: raise ValueError('matrix须有columns，按|分隔维度')

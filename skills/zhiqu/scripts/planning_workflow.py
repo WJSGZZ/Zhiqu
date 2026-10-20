@@ -509,30 +509,9 @@ class PlanningCase:
                     if not match or self.resolve(match[1],match[2])!=pointer(self.case,path):raise ValueError('输入与来源值不一致')
                 except (KeyError,ValueError,TypeError):self.err('case.json','calculation_plan.inputs'+path,'输入与来源值不一致')
         else:
-            computed={}
-            def compute(op, replacements=None):
-                values=[float(self.expand((replacements or {}).get(v,v))) for v in op['inputs']]
-                alg=op['algorithm']
-                if alg=='sum':v=sum(values)
-                elif alg=='product':
-                    import math
-                    v=math.prod(values)
-                elif alg=='difference':v=values[0]-values[1]
-                elif alg=='ratio':v=values[0]/values[1]
-                else:raise ValueError('未注册算法：'+str(alg))
-                return round(v,op['rounding']) if op.get('rounding') is not None else v
-            operations={op['output']:op for op in plan.get('operations',[])}
-            if not operations:raise ValueError('缺已注册算法及输入')
-            for op in operations.values():
-                v=compute(op)
-                computed[op['output']]=v
-            for scenario in plan.get('scenarios',[]):
-                op=operations[scenario['baseline_output']];changed=scenario['changed_inputs']
-                if not changed or any(k not in op['inputs'] or self.expand(k)==self.expand(v) for k,v in changed.items()):
-                    self.err('case.json','calculation_plan.scenarios','关键计算输入没有实际变化')
-                match=REF.fullmatch(scenario['output_ref'])
-                if not match or match[1]!='c' or not re.fullmatch(r'/[^/]+',match[2]):raise ValueError('情景输出须指顶层计算键')
-                computed[match[2][1:]]=compute(op,changed)
+            # 与核对工具同一份实现（verification_calculations），算法清单只维护一处。
+            from verification_calculations import _registered
+            computed,_=_registered(self.case,self.data['profile_parse.json'],self.data['evidence.json'])
             if computed!=saved:self.err('calculations.json','','计算结果与已登记算法不一致')
         scenarios=plan.get('scenarios',[])
         if len(scenarios)<self.limits['scenarios_min']:self.err('case.json','calculation_plan.scenarios','情景不足')

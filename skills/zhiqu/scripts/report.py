@@ -576,20 +576,33 @@ def bar_chart(rows, unit='', maximum=None, palette=None):
 
 
 def interval_chart(rows, unit='分'):
-    """rows=[label,lo,hi,point]；缺资料明确显示；每行保持原统计口径。"""
-    vals = [float(v) for r in rows for v in r[1:4] if v is not None]
+    """分数分布图。rows=[label, Q1, Q3, 对照点, 最低?, 最高?, 中位数?, 复试线?]；后四项可省，缺资料明确显示。
+
+    粗石绿段＝中间一半（Q1—Q3），细线＝最低到最高，黛绿短竖线＝中位数，虚线短竖线＝复试线，
+    琥珀点＝对照分（本人模考或明示的情景分）。每行保持原统计口径，不跨口径合并。
+    """
+    rows = [list(r) + [None] * (8 - len(r)) for r in rows]
+    vals = [float(v) for r in rows for v in r[1:8] if v is not None]
     low, high = (min(vals)-10, max(vals)+10) if vals else (0, 100)
     scale = lambda v: 225 + (float(v)-low)/max(high-low,1)*320
-    out = [f'<svg class="chart" viewBox="0 0 640 {len(rows)*37+28}" xmlns="http://www.w3.org/2000/svg" font-size="10.5" font-family="PingFang SC, Noto Sans SC, sans-serif">']
-    for i, (label, lo, hi, point) in enumerate(rows):
-        y = 17+i*37
+    out = [f'<svg class="chart" viewBox="0 0 640 {len(rows)*40+28}" xmlns="http://www.w3.org/2000/svg" font-size="10.5" font-family="PingFang SC, Noto Sans SC, sans-serif">']
+    for i, (label, lo, hi, point, vmin, vmax, med, line) in enumerate(rows):
+        y = 17+i*40
         out.append(f'<text x="0" y="{y+4}" fill="#454E48">{E(label)}</text>')
+        if vmin is not None and vmax is not None:
+            if vmin > vmax: raise ValueError('最低分不可大于最高分')
+            out.append(f'<line x1="{scale(vmin):.1f}" x2="{scale(vmax):.1f}" y1="{y}" y2="{y}" stroke="#9FB5AC" stroke-width="1.2"/>')
         if lo is not None and hi is not None:
             if lo > hi: raise ValueError('区间下界不可大于上界')
-            out.append(f'<line x1="{scale(lo):.1f}" x2="{scale(hi):.1f}" y1="{y}" y2="{y}" stroke="#34685D" stroke-width="6"/>')
-            out.append(f'<text x="225" y="{y+18}" fill="#6E776E">{lo:g}—{hi:g} {E(unit)}</text>')
+            out.append(f'<line x1="{scale(lo):.1f}" x2="{scale(hi):.1f}" y1="{y}" y2="{y}" stroke="#34685D" stroke-width="7"/>')
+            span = f'{lo:g}—{hi:g} {E(unit)}' + (f'（全距 {vmin:g}—{vmax:g}）' if vmin is not None and vmax is not None else '')
+            out.append(f'<text x="225" y="{y+19}" fill="#6E776E">{span}</text>')
         else:
             out.append(f'<text x="225" y="{y+4}" fill="#6E776E">区间未取到</text>')
+        if med is not None:
+            out.append(f'<line x1="{scale(med):.1f}" x2="{scale(med):.1f}" y1="{y-6}" y2="{y+6}" stroke="#21473E" stroke-width="2"/>')
+        if line is not None:
+            out.append(f'<line x1="{scale(line):.1f}" x2="{scale(line):.1f}" y1="{y-9}" y2="{y+9}" stroke="#222A26" stroke-width="1" stroke-dasharray="2 1.5"/>')
         if point is not None:
             out.append(f'<circle cx="{scale(point):.1f}" cy="{y}" r="4" fill="#A8772B"/><text x="630" y="{y+4}" text-anchor="end" fill="#222A26">对照 {point:g}</text>')
     out.append('</svg>'); return ''.join(out)
