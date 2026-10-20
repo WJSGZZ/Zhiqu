@@ -336,6 +336,28 @@
       }
     },
     {
+      "case_id": "2027-QZ-S05",
+      "directory": "skills/zhiqu-career/examples/2027-QZ-S05",
+      "reports": [
+        "skills/zhiqu-career/examples/2027-QZ-S05/report.pdf"
+      ],
+      "profile": {
+        "file": "profile.json",
+        "sha256": "f8c7a4b076a64c168d303710ea8836b70a79ffe5d53ce7521045bfe4ae4c2d1f",
+        "filled_at": "2026-10-20T10:30:00+08:00",
+        "form": "ab439b1f"
+      },
+      "report_versions": [
+        {
+          "file": "skills/zhiqu-career/examples/2027-QZ-S05/report.pdf",
+          "generated_at": "2026-10-20T15:42:43+08:00",
+          "version": "1",
+          "sha256": "b198bcda1570ba27e1f72d8674d701e118d8df5526422c64f721756707752801",
+          "profile_sha256": "f8c7a4b076a64c168d303710ea8836b70a79ffe5d53ce7521045bfe4ae4c2d1f"
+        }
+      ]
+    },
+    {
       "case_id": "2027-QZ-S01",
       "directory": "skills/zhiqu-career/examples/demo_2027",
       "reports": [

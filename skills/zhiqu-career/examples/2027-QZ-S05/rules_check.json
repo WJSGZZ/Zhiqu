@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-10-20",
+  "items": [
+    {
+      "id": "R01",
+      "claim": "国考2027报名与笔试日历",
+      "evidence_refs": [
+        "E003",
+        "E004",
+        "E005"
+      ],
+      "status": "verified",
+      "scope": "2027国考",
+      "volatile": true,
+      "verified_on": "2026-10-20",
+      "review_due": "2026-11-19",
+      "gap": null
+    },
+    {
+      "id": "R02",
+      "claim": "国考职位另有资格条件，市地级以下主要招应届",
+      "evidence_refs": [
+        "E002"
+      ],
+      "status": "verified",
+      "scope": "2027国考总公告",
+      "volatile": true,
+      "verified_on": "2026-10-20",
+      "review_due": "2026-11-19",
+      "gap": null
+    },
+    {
+      "id": "R03",
+      "claim": "国网2027总体批次与第一批时间",
+      "evidence_refs": [
+        "E029",
+        "E030",
+        "E031"
+      ],
+      "status": "verified",
+      "scope": "2027国网总公告",
+      "volatile": true,
+      "verified_on": "2026-10-19",
+      "review_due": "2026-11-19",
+      "gap": null
+    },
+    {
+      "id": "R04",
+      "claim": "浙江省考2027年度公告与职位",
+      "evidence_refs": [
+        "E011"
+      ],
+      "status": "unretrieved",
+      "scope": "2027年度",
+      "volatile": true,
+      "verified_on": "2026-10-20",
+      "review_due": "2026-11-19",
+      "gap": "截至取文日未见2027年度公告；上一届规则与竞争数据只作参照，公告发布后重核"
+    },
+    {
+      "id": "R05",
+      "claim": "浙江省考上一届报考条件（基层经历要求）",
+      "evidence_refs": [
+        "E008"
+      ],
+      "status": "verified",
+      "scope": "2026年度（上一届）",
+      "volatile": true,
+      "verified_on": "2026-10-20",
+      "review_due": "2026-11-19",
+      "gap": null
+    },
+    {
+      "id": "R06",
+      "claim": "企业财务具体岗位条件",
+      "evidence_refs": [
+        "E032"
+      ],
+      "status": "unretrieved",
+      "scope": "本人待选定的企业岗位",
+      "volatile": true,
+      "verified_on": "2026-10-20",
+      "review_due": "2026-11-19",
+      "gap": "按投递逐份保存原文；没有原文前不判断可报或工资"
+    },
+    {
+      "id": "R07",
+      "claim": "工行2027校招报名期与招聘对象",
+      "evidence_refs": [
+        "E033",
+        "E034"
+      ],
+      "status": "verified",
+      "scope": "工行全行2027校招",
+      "volatile": true,
+      "verified_on": "2026-10-20",
+      "review_due": "2026-11-19",
+      "gap": null
+    },
+    {
+      "id": "R08",
+      "claim": "初级会计成绩须一个考试年度内全部通过",
+      "evidence_refs": [
+        "E035",
+        "E036",
+        "E037",
+        "E038"
+      ],
+      "status": "verified",
+      "scope": "2026年度考务通知",
+      "volatile": true,
+      "verified_on": "2026-10-20",
+      "review_due": "2026-11-19",
+      "gap": null
+    },
+    {
+      "id": "R09",
+      "claim": "CPA专业阶段报名学历条件与应届生认证",
+      "evidence_refs": [
+        "E039",
+        "E040",
+        "E041",
+        "E042"
+      ],
+      "status": "verified",
+      "scope": "2026年简章",
+      "volatile": true,
+      "verified_on": "2026-10-20",
+      "review_due": "2026-11-19",
+      "gap": null
+    },
+    {
+      "id": "R10",
+      "claim": "国考2027浙江职位与国网浙江公告",
+      "evidence_refs": [
+        "E046",
+        "E047"
+      ],
+      "status": "unretrieved",
+      "scope": "2027",
+      "volatile": true,
+      "verified_on": "2026-10-20",
+      "review_due": "2026-11-19",
+      "gap": "职位表需验证码、国网平台超时；由本人报名前自行核对，公告发布后重核"
+    }
+  ]
+}

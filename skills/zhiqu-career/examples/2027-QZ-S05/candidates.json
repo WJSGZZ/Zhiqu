@@ -1,0 +1,203 @@
+{
+  "schema_version": 1,
+  "job_types": [
+    {
+      "id": "J1",
+      "direction_id": "D1",
+      "name": "企业财务：应收应付、费用核算、总账助理",
+      "status": "pending",
+      "hard_conditions": [
+        {
+          "condition": "学历专业、地点、合同主体与工资待逐份招聘原文核对",
+          "status": "unknown",
+          "evidence_refs": [
+            "E032"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "J2",
+      "direction_id": "D1",
+      "name": "大型企业财务共享中心或财务运营",
+      "status": "pending",
+      "hard_conditions": [
+        {
+          "condition": "岗位职责、考核方式和合同主体待招聘原文核对",
+          "status": "unknown",
+          "evidence_refs": [
+            "E032"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "J3",
+      "direction_id": "D4",
+      "name": "会计师事务所审计助理（对照）",
+      "status": "pending",
+      "hard_conditions": [
+        {
+          "condition": "毕马威写明欢迎取得学士学位的应届生；具体岗位、截止日和忙季工时待网申页核对",
+          "status": "unknown",
+          "evidence_refs": [
+            "E043"
+          ]
+        }
+      ]
+    }
+  ],
+  "paths": [
+    {
+      "id": "P1",
+      "direction_id": "D2",
+      "name": "浙江省考2027（限应届、专业写明财务管理的市县职位）",
+      "status": "pending",
+      "hard_conditions": [
+        {
+          "condition": "2027年度公告与职位表未取得",
+          "status": "unknown",
+          "evidence_refs": [
+            "E011"
+          ]
+        },
+        {
+          "condition": "省级和杭甬市级综合类职位要两年以上基层经历（上一届规则），本人没有；只看市县等不要求经历的职位",
+          "status": "unknown",
+          "evidence_refs": [
+            "E008"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P2",
+      "direction_id": "D2",
+      "name": "国考2027浙江职位",
+      "status": "pending",
+      "hard_conditions": [
+        {
+          "condition": "浙江职位的专业名单、学历、应届与基层经历逐岗核；职位表需本人下载",
+          "status": "unknown",
+          "evidence_refs": [
+            "E002",
+            "E046"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P3",
+      "direction_id": "D3",
+      "name": "国网浙江电力财会类",
+      "status": "pending",
+      "hard_conditions": [
+        {
+          "condition": "浙江单位第一批公告未取得；是否招财会类、专业与学历要求待核",
+          "status": "unknown",
+          "evidence_refs": [
+            "E031",
+            "E047"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P4",
+      "direction_id": "D3",
+      "name": "银行浙江分行（运营、综合类）",
+      "status": "pending",
+      "hard_conditions": [
+        {
+          "condition": "工行今年秋招报名已截止；其他银行或春季补招的岗位职责、营销考核待原文核对",
+          "status": "unknown",
+          "evidence_refs": [
+            "E033"
+          ]
+        }
+      ]
+    }
+  ],
+  "jobs": [],
+  "excluded": [
+    {
+      "id": "X1",
+      "name": "省考只列会计类、不含“财务管理”的职位",
+      "excluded_reason": "职位表按专业名称逐字核对；财务管理专业不在名单内就不能凭“相近专业”报考",
+      "evidence_refs": [
+        "E015"
+      ]
+    },
+    {
+      "id": "X2",
+      "name": "省级机关与杭甬市级机关的综合类职位",
+      "excluded_reason": "上一届公告要求两年以上基层工作经历，本人没有；2027年度以新公告为准",
+      "evidence_refs": [
+        "E008"
+      ]
+    }
+  ],
+  "report_blocks": {
+    "06_candidates": {
+      "type": "candidate_table",
+      "content": {
+        "columns": [
+          "目标",
+          "门槛要核什么",
+          "本人现在匹配",
+          "怎么处理"
+        ],
+        "rows": [
+          [
+            "企业财务（应收应付、费用、总账助理）",
+            "学历专业、职责、合同主体、地点、工资构成",
+            "实习录过凭证、做过申报表；缺大公司系统经验",
+            "主线：投一批，逐份留原文"
+          ],
+          [
+            "财务共享中心、财务运营",
+            "考核方式（是否按单量）、合同主体、晋升路径",
+            "偏好按规则处理数据；实训做过财务共享",
+            "主线并列：问清考核再定"
+          ],
+          [
+            "浙江省考（市县、限应届、写明财务管理）",
+            "专业名单逐字含财务管理；不要求基层经历",
+            "专业对口；行测申论零基础",
+            "并行：只报一次，全力备考"
+          ],
+          [
+            "国考浙江职位",
+            "专业、学历、应届、基层经历逐岗核",
+            "取决于是否有本人愿去的职位",
+            "看职位：有就报，没有不报"
+          ],
+          [
+            "国网浙江财会类",
+            "浙江公告是否招财会类、专业要求",
+            "公告未出",
+            "等公告：符合再报"
+          ],
+          [
+            "银行运营、综合类",
+            "岗位职责里有无营销指标；工行秋招报名已截止",
+            "专业相关；本人不接受销售指标",
+            "看其他行和补招；有指标的不报"
+          ],
+          [
+            "事务所审计（对照）",
+            "忙季加班出差、专业要求",
+            "与“偶尔加班”冲突",
+            "只作对照，不列主线"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E001",
+        "E008",
+        "E011",
+        "E032"
+      ]
+    }
+  }
+}

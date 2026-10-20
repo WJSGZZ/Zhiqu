@@ -1,0 +1,344 @@
+{
+  "schema_version": 1,
+  "status": "awaiting_independent_review",
+  "status_label": "试跑自评通过、等待独立审核",
+  "independent": false,
+  "reviewer": null,
+  "date": null,
+  "rubric": {
+    "items": []
+  },
+  "pitfalls": [],
+  "sampled_sources": [],
+  "self_assessment": {
+    "reviewer": "本制作会话（自评，不是独立复核）",
+    "date": "2026-10-20",
+    "status": "complete",
+    "rubric": {
+      "items": [
+        {
+          "id": "clarity",
+          "score": 2,
+          "reason": "封面和第 1 节写明主线（企业财务）、并行（省考只报写明财务管理的职位、考一次）、条件路线（国网、银行看公告和岗位职责）与三件带日期的事。",
+          "report_location": "封面、01"
+        },
+        {
+          "id": "traceability",
+          "score": 1,
+          "reason": "官方数字均有原文摘录与链接，省考竞争比附匿名比值可复算；但企业岗位原文、国考2027职位表（验证码）、国网浙江公告、省考2027公告均未取到，工资价位是2022年数据。",
+          "report_location": "12、附录"
+        },
+        {
+          "id": "reasoning",
+          "score": 2,
+          "reason": "每个候选有支持、反对、代价、退路与可观察的改判条件（如年底无面试、公告无对口职位、岗位有营销指标）。",
+          "report_location": "05、06、08、10"
+        },
+        {
+          "id": "consistency",
+          "score": 2,
+          "reason": "现金、竞争比分位、倍数均由登记算法复算；verify_report ok；数字全部经引用展开。",
+          "report_location": "05、06、09、12"
+        },
+        {
+          "id": "timeliness",
+          "score": 1,
+          "reason": "国考、工行、国网为当届原文且在期内；省考、初级会计、CPA 只有上一年度规则，已逐处标“上一届/上一年度，只作参照”。",
+          "report_location": "07、08"
+        },
+        {
+          "id": "personalization",
+          "score": 2,
+          "reason": "本人优先级、不出省、不接受销售指标、初级会计只过一科、家里期待和现金估计都实际改变了排序与行动。",
+          "report_location": "02、03、05、08、09"
+        },
+        {
+          "id": "actionability",
+          "score": 2,
+          "reason": "三件事带日期与入口（国考职位表、企业投递、家庭约谈），时间线和路线卡给出切换条件与检查点。",
+          "report_location": "01、07、08"
+        },
+        {
+          "id": "boundaries",
+          "score": 2,
+          "reason": "缴费人数只说拥挤程度，不算上岸概率；工资分位注明不是应届起薪；不代报名、不代签约。",
+          "report_location": "01、04、05"
+        },
+        {
+          "id": "summary_access",
+          "score": 1,
+          "reason": "摘要能读懂主线和理由；但“每名额缴费人数”“中位数”仍需看第 5、12 节的说明，封面结论偏长。",
+          "report_location": "封面、01"
+        },
+        {
+          "id": "layout",
+          "score": 1,
+          "reason": "版面门禁通过、逐页速览已看；第 6 页因矩阵整体换页留有空白，附录计算项沿用共用工具的“分数/人数”措辞，待独立视觉复核。",
+          "report_location": "06、附录"
+        }
+      ],
+      "total": 16
+    },
+    "pitfalls": [
+      {
+        "item": "没查到写成不存在",
+        "result": "pass",
+        "note": "省考2027公告、国考职位表、国网浙江公告、企业岗位均记“未取到/未见”及原因，候选保持待核。"
+      },
+      {
+        "item": "群体数字当个人概率",
+        "result": "pass",
+        "note": "省考只给缴费人数÷招录人数的分位，并在图注、数字卡、术语表声明不是上岸概率；工资分位不当起薪。"
+      },
+      {
+        "item": "经验帖数字做决定",
+        "result": "pass",
+        "note": "本人听到的“协议班不过退费”“柜员要卖理财”只作待核线索；第三方预测的省考日期未引用。"
+      },
+      {
+        "item": "按编号引用问卷",
+        "result": "pass",
+        "note": "画像字段一律按节名定位。"
+      },
+      {
+        "item": "同一事实写两处",
+        "result": "pass",
+        "note": "报告数字经 e/c/p/k 引用从同一证据或计算展开；人物设定只在人物库登记。"
+      },
+      {
+        "item": "会过期的事实",
+        "result": "pass",
+        "note": "evidence 与 rules_check 均有核实日与复核期限 2026-11-19；上一年度规则逐处标注。"
+      },
+      {
+        "item": "八字越界",
+        "result": "pass",
+        "note": "人物未提供出生信息，未排盘。"
+      },
+      {
+        "item": "委派判断类任务",
+        "result": "pass",
+        "note": "子代理只按清单取原件和逐字摘录；摘录由本会话逐字回原件核对，判断与写作由本会话完成。"
+      },
+      {
+        "item": "取页摘要当原文",
+        "result": "pass",
+        "note": "所有官方摘录对本机原件（curl 字节原件或浏览器渲染文本）逐字检索命中；工行页面为浏览器渲染文本，已在来源注明。"
+      }
+    ],
+    "limitations": [
+      "操控者尚未填写核查单，未经独立复核，不能据此交付真实客户。",
+      "国网三条证据沿用本项目 2026-10-19 浏览器取文，本会话未重新取到原页。",
+      "省考竞争比与工资价位为上一届/2022 年数据，只作相对参照。"
+    ],
+    "sampled_sources": [
+      {
+        "id": "E005",
+        "claim": "国考：注册认证截止",
+        "source_url": "https://shanghai.chinatax.gov.cn/xxgk/rsxx/202610/t481763.html",
+        "locator": "二、报考程序（二）网上报名 1",
+        "excerpt": "注册认证的时间为2026年10月14日8:00至10月23日18:00，注册认证确有困难的，可以拨打010-12370咨询。",
+        "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
+        "original_sha256": "448e392f2748594e1a65a2990c2ac1971c406fe830dba611c03ae1647cb79e98",
+        "retrieved_on": "2026-10-20",
+        "matches": true
+      },
+      {
+        "id": "E016",
+        "claim": "省考上一届：限应届且只写工商管理类等大类职位的竞争比",
+        "source_url": "http://omwb.oss-cn-beijing.aliyuncs.com/zjgwy2026/62329aa17fc3cd317d9b65201ef85e93",
+        "locator": "缴费报名情况一览表：招录人数、缴费人数两列；样例行见摘录",
+        "excerpt": "淳安县乡镇机关 | 工作人员2一级主任科员及以下 | 13301012025000002 | 2 | 48",
+        "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
+        "original_sha256": "adc811f722d903a9ecdafaddcac0d89a7d3d1e8dc2ecd42306a12672fe422d6a",
+        "retrieved_on": "2026-10-20",
+        "matches": true
+      },
+      {
+        "id": "E023",
+        "claim": "杭州工资价位：工龄三年及以下（不分职业） 25%分位",
+        "source_url": "https://zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/jcms_files/jcms1/web3095/site/attach/0/cdc97ab7d30243db95368bb1c34b4cf3.pdf",
+        "locator": "第23页 工龄三年及以下（不分职业）行 25%分位值",
+        "excerpt": "3（含）年以下 46986 60000 81580 121000 187680（九、分工龄企业从业人员工资价位，单位：元/年）",
+        "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
+        "original_sha256": "7853501ef5272cc5571aff36c7c791b0832d25941ea319095cea28236240ee6d",
+        "retrieved_on": "2026-10-20",
+        "matches": true
+      },
+      {
+        "id": "E033",
+        "claim": "工行2027校招：网上报名截止",
+        "source_url": "https://job.icbc.com.cn/pc/index.html#/main/school/announDetail/00000000000010659029",
+        "locator": "三、招聘流程（一）网上报名",
+        "excerpt": "（一）网上报名。时间为2026年9月4日-10月8日。",
+        "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
+        "original_sha256": "d42974b6ade0181499d9b3d81683a0b9280ed6171fab181148d90001531ab13f",
+        "retrieved_on": "2026-10-20",
+        "matches": true
+      },
+      {
+        "id": "E034",
+        "claim": "工行2027校招：条件以各机构公告为准",
+        "source_url": "https://job.icbc.com.cn/pc/index.html#/main/school/announDetail/00000000000010659029",
+        "locator": "一、招聘对象",
+        "excerpt": "主要面向毕业时间为2026年1月至2027年7月的境内外高校毕业生。具体招聘范围及条件以各机构招聘公告为准。",
+        "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
+        "original_sha256": "d42974b6ade0181499d9b3d81683a0b9280ed6171fab181148d90001531ab13f",
+        "retrieved_on": "2026-10-20",
+        "matches": true
+      },
+      {
+        "id": "E035",
+        "claim": "初级会计：须在一个考试年度内通过全部科目",
+        "source_url": "http://kjs.mof.gov.cn/gongzuotongzhi/202511/t20251127_3977584.htm",
+        "locator": "二、报名条件与成绩管理",
+        "excerpt": "参加初级会计资格考试的人员，应在1个考试年度内通过全部科目的考试，方可取得初级会计资格证书",
+        "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
+        "original_sha256": "e9479b0a933449e1624b05b5ed2952a3f6896f459cf283648dbe839c40840eb5",
+        "retrieved_on": "2026-10-20",
+        "matches": true
+      }
+    ]
+  },
+  "sampling": {
+    "seed": 20261020,
+    "pool": [
+      "E002",
+      "E003",
+      "E004",
+      "E005",
+      "E006",
+      "E007",
+      "E008",
+      "E009",
+      "E010",
+      "E012",
+      "E013",
+      "E014",
+      "E015",
+      "E016",
+      "E017",
+      "E018",
+      "E019",
+      "E020",
+      "E021",
+      "E022",
+      "E023",
+      "E024",
+      "E025",
+      "E026",
+      "E027",
+      "E028",
+      "E029",
+      "E030",
+      "E031",
+      "E033",
+      "E034",
+      "E035",
+      "E036",
+      "E037",
+      "E038",
+      "E039",
+      "E040",
+      "E041",
+      "E042",
+      "E043",
+      "E044",
+      "E045"
+    ],
+    "picked": [
+      "E005",
+      "E016",
+      "E023",
+      "E033",
+      "E034",
+      "E035"
+    ],
+    "results": [
+      {
+        "id": "E005",
+        "claim": "国考：注册认证截止",
+        "source_url": "https://shanghai.chinatax.gov.cn/xxgk/rsxx/202610/t481763.html",
+        "locator": "二、报考程序（二）网上报名 1",
+        "excerpt": "注册认证的时间为2026年10月14日8:00至10月23日18:00，注册认证确有困难的，可以拨打010-12370咨询。",
+        "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
+        "original_sha256": "448e392f2748594e1a65a2990c2ac1971c406fe830dba611c03ae1647cb79e98",
+        "retrieved_on": "2026-10-20",
+        "matches": true
+      },
+      {
+        "id": "E016",
+        "claim": "省考上一届：限应届且只写工商管理类等大类职位的竞争比",
+        "source_url": "http://omwb.oss-cn-beijing.aliyuncs.com/zjgwy2026/62329aa17fc3cd317d9b65201ef85e93",
+        "locator": "缴费报名情况一览表：招录人数、缴费人数两列；样例行见摘录",
+        "excerpt": "淳安县乡镇机关 | 工作人员2一级主任科员及以下 | 13301012025000002 | 2 | 48",
+        "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
+        "original_sha256": "adc811f722d903a9ecdafaddcac0d89a7d3d1e8dc2ecd42306a12672fe422d6a",
+        "retrieved_on": "2026-10-20",
+        "matches": true
+      },
+      {
+        "id": "E023",
+        "claim": "杭州工资价位：工龄三年及以下（不分职业） 25%分位",
+        "source_url": "https://zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/jcms_files/jcms1/web3095/site/attach/0/cdc97ab7d30243db95368bb1c34b4cf3.pdf",
+        "locator": "第23页 工龄三年及以下（不分职业）行 25%分位值",
+        "excerpt": "3（含）年以下 46986 60000 81580 121000 187680（九、分工龄企业从业人员工资价位，单位：元/年）",
+        "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
+        "original_sha256": "7853501ef5272cc5571aff36c7c791b0832d25941ea319095cea28236240ee6d",
+        "retrieved_on": "2026-10-20",
+        "matches": true
+      },
+      {
+        "id": "E033",
+        "claim": "工行2027校招：网上报名截止",
+        "source_url": "https://job.icbc.com.cn/pc/index.html#/main/school/announDetail/00000000000010659029",
+        "locator": "三、招聘流程（一）网上报名",
+        "excerpt": "（一）网上报名。时间为2026年9月4日-10月8日。",
+        "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
+        "original_sha256": "d42974b6ade0181499d9b3d81683a0b9280ed6171fab181148d90001531ab13f",
+        "retrieved_on": "2026-10-20",
+        "matches": true
+      },
+      {
+        "id": "E034",
+        "claim": "工行2027校招：条件以各机构公告为准",
+        "source_url": "https://job.icbc.com.cn/pc/index.html#/main/school/announDetail/00000000000010659029",
+        "locator": "一、招聘对象",
+        "excerpt": "主要面向毕业时间为2026年1月至2027年7月的境内外高校毕业生。具体招聘范围及条件以各机构招聘公告为准。",
+        "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
+        "original_sha256": "d42974b6ade0181499d9b3d81683a0b9280ed6171fab181148d90001531ab13f",
+        "retrieved_on": "2026-10-20",
+        "matches": true
+      },
+      {
+        "id": "E035",
+        "claim": "初级会计：须在一个考试年度内通过全部科目",
+        "source_url": "http://kjs.mof.gov.cn/gongzuotongzhi/202511/t20251127_3977584.htm",
+        "locator": "二、报名条件与成绩管理",
+        "excerpt": "参加初级会计资格考试的人员，应在1个考试年度内通过全部科目的考试，方可取得初级会计资格证书",
+        "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
+        "original_sha256": "e9479b0a933449e1624b05b5ed2952a3f6896f459cf283648dbe839c40840eb5",
+        "retrieved_on": "2026-10-20",
+        "matches": true
+      }
+    ]
+  },
+  "snapshot": {
+    "case.json": "747db87c1436b7df11654bf351dd05084434bc0fd26d4a55ffad2397d2f8358f",
+    "profile_parse.json": "bef4c373f4f3e2c4c29f5382f4899cbfa2055bf7848b6e6efc4bb06542b6d4dc",
+    "directions.json": "c596542a75e4d5caa51814b26c579c39025f30f53abb8a6e495db95c50c781b2",
+    "rules_check.json": "0a03cb3f10d3f0eb1eb5d392722877bfd4fe437ce3fdc44f70a305444e00502e",
+    "candidates.json": "0fc093040e4475d0111f18d3c46caa7478fa0e87d449e2496e849dc327c1ae49",
+    "evidence.json": "cb594054511798e445f81f15d4fac94ac4e3b9cbbd6dc0cf65d6722167cce7ce",
+    "calculations.json": "d4d64f9635fb2d2fcd3e532e7f3f1fdd8ba8f2602919bd0097a645e10133934b",
+    "judgment.json": "4ad9f2393566232d6c6e9697057230ca61b517ab936ee63f9063ca0171380ced",
+    "narrative.json": "28e6cb7c99a6a7c6fca83c4e3494fa6d34e452d7f4c35432309fc26eaf8f8f98",
+    "profile.json": "f8c7a4b076a64c168d303710ea8836b70a79ffe5d53ce7521045bfe4ae4c2d1f",
+    "profile-supplement.txt": "247f31f22f4c9a6c33394b5b25e3b37ef21c19fd3b9c12a70a83839f7976b026",
+    "report.md": "7b76cb178eb5bb605d3c62e933a4b4c43f703753396371b602b033af90c52f0e",
+    "report.html": "fee6d556ea17a7117ccc7dc672b3223cac36143daa247f5261a4671fb1f2d165",
+    "report.pdf": "b198bcda1570ba27e1f72d8674d701e118d8df5526422c64f721756707752801",
+    "report_trace.json": "2251842bebe10381364df4214d304771676be24255b8ae68b2bdb8a3b59ef3b5",
+    "operator_check.md": "d9f6dddad17cd13b9f7817a8f7b7c35d27abc6b6b600088fc4cf457b1ec56cae"
+  }
+}

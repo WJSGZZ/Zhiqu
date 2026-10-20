@@ -1,0 +1,519 @@
+{
+  "schema_version": 1,
+  "kind": "career",
+  "case_id": "2027-QZ-S05",
+  "mode": "simulation",
+  "prepared_on": "2026-10-20",
+  "version": "1.0",
+  "decision_stage": "投递中",
+  "target_year": 2027,
+  "data_commit": "bb30ed9",
+  "education": {
+    "school_level": "普通公办本科",
+    "year_level": "大四",
+    "major": "财务管理",
+    "expected_graduation": "2027-06-30",
+    "degree": "本科（预计取得学士学位）"
+  },
+  "context": {
+    "as_of": "2026-10-20",
+    "takes_kaoyan": false,
+    "offer_basis": "none",
+    "personal_dates": {
+      "action0": "2026-10-22",
+      "action1": "2026-10-31",
+      "action2": "2026-11-10",
+      "checkpoint": "2026-11-15",
+      "year_end": "2026-12-31",
+      "spring": "2027-03-15",
+      "cert": "2027-05-15",
+      "graduate": "2027-06-30"
+    }
+  },
+  "deadlines": [
+    {
+      "id": "D1",
+      "label": "国考注册认证截止",
+      "date": "2026-10-23",
+      "kind": "official",
+      "evidence_refs": [
+        "E005"
+      ]
+    },
+    {
+      "id": "D2",
+      "label": "国考提交报考申请截止",
+      "date": "2026-10-24",
+      "kind": "official",
+      "evidence_refs": [
+        "E003"
+      ]
+    },
+    {
+      "id": "D3",
+      "label": "个人复核点：看省考、国网公告后定并行路线",
+      "date": "2026-11-15",
+      "kind": "personal_checkpoint",
+      "evidence_refs": [
+        "E001"
+      ]
+    },
+    {
+      "id": "D4",
+      "label": "浙江省考2027年度报名",
+      "kind": "official",
+      "evidence_refs": [
+        "E011"
+      ],
+      "unknown_reason": "2027年度公告截至取文日未见；上一届为11月上旬报名，只作参照"
+    },
+    {
+      "id": "D5",
+      "label": "最晚需要稳定收入的月份",
+      "kind": "personal_checkpoint",
+      "evidence_refs": [
+        "E001"
+      ],
+      "unknown_reason": "本人选“不确定”，家里能支持多久未说清，须补问"
+    }
+  ],
+  "report_meta": {
+    "title": "求职方向决策报告",
+    "subtitle": "浙江 · 财务管理本科 · {{k:/target_year}} 届应届求职",
+    "person": "小桐（模拟）",
+    "edition": "求职版",
+    "date": "{{k:/context/as_of}}",
+    "id": "2027-QZ-S05",
+    "stage": "求职版 · 应届、暂无 offer",
+    "region": "浙江",
+    "data_asof": "{{k:/context/as_of}}",
+    "conclusion": "你是浙江财务管理本科、{{k:/target_year}} 届，想去企业做财务，爸妈希望你考公或进银行、国企；你最看重成长和工作内容，底线是不出浙江。建议以企业财务为主线，省考只报专业写明“财务管理”的应届职位、全力考一次（上一届这类职位每个名额约 {{c:/fa_median|1f}} 人缴费，是全省应届职位的 {{c:/fa_vs_all|1f}} 倍），国网和银行看公告、核清岗位职责再报。先做三件事：{{k:/context/personal_dates/action0|md}}前决定国考报不报，{{k:/context/personal_dates/action1|md}}前投出第一批企业财务岗，和爸妈约好“考一次、定边界”。"
+  },
+  "calculation_plan": {
+    "engine": "registered_operations",
+    "inputs": {},
+    "operations": [
+      {
+        "output": "monthly_cost",
+        "algorithm": "sum",
+        "inputs": [
+          "{{p:/fields/14/value/housing}}",
+          "{{p:/fields/14/value/other}}"
+        ],
+        "label": "去城市合租时每月必要支出",
+        "rounding": 0
+      },
+      {
+        "output": "spendable",
+        "algorithm": "difference",
+        "inputs": [
+          "{{p:/fields/14/value/cash}}",
+          "{{p:/fields/14/value/reserve}}"
+        ],
+        "label": "留出应急金后可动用的现金",
+        "rounding": 0
+      },
+      {
+        "output": "move_left",
+        "algorithm": "difference",
+        "inputs": [
+          "{{c:/spendable}}",
+          "{{p:/fields/22/value}}"
+        ],
+        "label": "付押金和搬家后剩下的可动现金",
+        "rounding": 0
+      },
+      {
+        "output": "city_months",
+        "algorithm": "ratio",
+        "inputs": [
+          "{{c:/spendable}}",
+          "{{c:/monthly_cost}}"
+        ],
+        "label": "合租、没有收入时可支撑月数",
+        "rounding": 1
+      },
+      {
+        "output": "floor_balance",
+        "algorithm": "difference",
+        "inputs": [
+          "{{p:/fields/7/value}}",
+          "{{c:/monthly_cost}}"
+        ],
+        "label": "按到手底线工作、合租后每月结余",
+        "rounding": 0
+      },
+      {
+        "output": "fa_count",
+        "algorithm": "count",
+        "inputs": [
+          "{{e:E012#/anonymous_values}}"
+        ],
+        "label": "限应届且列财务管理职位：每名额缴费人数（职位数）"
+      },
+      {
+        "output": "fa_q1",
+        "algorithm": "q1",
+        "inputs": [
+          "{{e:E012#/anonymous_values}}"
+        ],
+        "label": "限应届且列财务管理职位：每名额缴费人数下四分位"
+      },
+      {
+        "output": "fa_median",
+        "algorithm": "median",
+        "inputs": [
+          "{{e:E012#/anonymous_values}}"
+        ],
+        "label": "限应届且列财务管理职位：每名额缴费人数中位数"
+      },
+      {
+        "output": "fa_q3",
+        "algorithm": "q3",
+        "inputs": [
+          "{{e:E012#/anonymous_values}}"
+        ],
+        "label": "限应届且列财务管理职位：每名额缴费人数上四分位"
+      },
+      {
+        "output": "fa_min",
+        "algorithm": "min",
+        "inputs": [
+          "{{e:E012#/anonymous_values}}"
+        ],
+        "label": "限应届且列财务管理职位：每名额缴费人数最低"
+      },
+      {
+        "output": "fa_max",
+        "algorithm": "max",
+        "inputs": [
+          "{{e:E012#/anonymous_values}}"
+        ],
+        "label": "限应届且列财务管理职位：每名额缴费人数最高"
+      },
+      {
+        "output": "all_count",
+        "algorithm": "count",
+        "inputs": [
+          "{{e:E013#/anonymous_values}}"
+        ],
+        "label": "全省限应届职位：每名额缴费人数（职位数）"
+      },
+      {
+        "output": "all_q1",
+        "algorithm": "q1",
+        "inputs": [
+          "{{e:E013#/anonymous_values}}"
+        ],
+        "label": "全省限应届职位：每名额缴费人数下四分位"
+      },
+      {
+        "output": "all_median",
+        "algorithm": "median",
+        "inputs": [
+          "{{e:E013#/anonymous_values}}"
+        ],
+        "label": "全省限应届职位：每名额缴费人数中位数"
+      },
+      {
+        "output": "all_q3",
+        "algorithm": "q3",
+        "inputs": [
+          "{{e:E013#/anonymous_values}}"
+        ],
+        "label": "全省限应届职位：每名额缴费人数上四分位"
+      },
+      {
+        "output": "anya_count",
+        "algorithm": "count",
+        "inputs": [
+          "{{e:E014#/anonymous_values}}"
+        ],
+        "label": "身份不限且列财务管理职位：每名额缴费人数（职位数）"
+      },
+      {
+        "output": "anya_q1",
+        "algorithm": "q1",
+        "inputs": [
+          "{{e:E014#/anonymous_values}}"
+        ],
+        "label": "身份不限且列财务管理职位：每名额缴费人数下四分位"
+      },
+      {
+        "output": "anya_median",
+        "algorithm": "median",
+        "inputs": [
+          "{{e:E014#/anonymous_values}}"
+        ],
+        "label": "身份不限且列财务管理职位：每名额缴费人数中位数"
+      },
+      {
+        "output": "anya_q3",
+        "algorithm": "q3",
+        "inputs": [
+          "{{e:E014#/anonymous_values}}"
+        ],
+        "label": "身份不限且列财务管理职位：每名额缴费人数上四分位"
+      },
+      {
+        "output": "fb_count",
+        "algorithm": "count",
+        "inputs": [
+          "{{e:E015#/anonymous_values}}"
+        ],
+        "label": "限应届且只列会计类（不含财务管理）职位数"
+      },
+      {
+        "output": "fc_count",
+        "algorithm": "count",
+        "inputs": [
+          "{{e:E016#/anonymous_values}}"
+        ],
+        "label": "限应届且只写工商管理类等大类职位数"
+      },
+      {
+        "output": "fa_vs_all",
+        "algorithm": "ratio",
+        "inputs": [
+          "{{c:/fa_median}}",
+          "{{c:/all_median}}"
+        ],
+        "label": "列财务管理职位中位数是全省应届职位中位数的倍数",
+        "rounding": 1
+      }
+    ],
+    "scenarios": [
+      {
+        "baseline_output": "city_months",
+        "changed_inputs": {
+          "{{c:/monthly_cost}}": "{{p:/fields/23/value}}"
+        },
+        "why": "不去城市租房、先住家里，只改每月支出",
+        "output_ref": "{{c:/home_months}}",
+        "label": "住家里时可支撑月数"
+      },
+      {
+        "baseline_output": "city_months",
+        "changed_inputs": {
+          "{{c:/spendable}}": "{{c:/move_left}}"
+        },
+        "why": "去城市前先付押一付三和搬家费，只改可动现金",
+        "output_ref": "{{c:/after_move_months}}",
+        "label": "付押金搬家后可支撑月数"
+      },
+      {
+        "baseline_output": "city_months",
+        "changed_inputs": {
+          "{{c:/spendable}}": "{{p:/fields/14/value/cash}}"
+        },
+        "why": "连应急金也动用的风险边界，不是建议",
+        "output_ref": "{{c:/all_cash_months}}",
+        "label": "动用全部现金时可支撑月数（风险边界）"
+      }
+    ]
+  },
+  "profile": {
+    "case_id": "2027-QZ-S05",
+    "file": "profile.json",
+    "filled_at": "2026-10-20T10:30:00+08:00",
+    "form": "ab439b1f",
+    "sha256": "f8c7a4b076a64c168d303710ea8836b70a79ffe5d53ce7521045bfe4ae4c2d1f",
+    "status": "有数据"
+  },
+  "report_profile": {
+    "file": "profile.json",
+    "sha256": "f8c7a4b076a64c168d303710ea8836b70a79ffe5d53ce7521045bfe4ae4c2d1f",
+    "filled_at": "2026-10-20T10:30:00+08:00",
+    "form": "ab439b1f"
+  },
+  "report_input_usage": [
+    {
+      "pointer": "/fields/0/value",
+      "sections": [
+        "02",
+        "04",
+        "06"
+      ],
+      "reason": "学历决定可报的职位与岗位范围"
+    },
+    {
+      "pointer": "/fields/1/value",
+      "sections": [
+        "02",
+        "04",
+        "05",
+        "06"
+      ],
+      "reason": "专业名称决定省考、国考职位能否报"
+    },
+    {
+      "pointer": "/fields/2/value",
+      "sections": [
+        "02",
+        "07"
+      ],
+      "reason": "毕业时间决定应届身份与时间线"
+    },
+    {
+      "pointer": "/fields/3/value",
+      "sections": [
+        "02",
+        "03",
+        "08"
+      ],
+      "reason": "已投递情况决定是否调整目标层级"
+    },
+    {
+      "pointer": "/fields/4/value",
+      "sections": [
+        "02",
+        "04",
+        "06"
+      ],
+      "reason": "实习任务对照企业财务岗位职责"
+    },
+    {
+      "pointer": "/fields/5/value",
+      "sections": [
+        "02",
+        "04",
+        "08"
+      ],
+      "reason": "证书差距决定考证顺序"
+    },
+    {
+      "pointer": "/fields/6/value",
+      "sections": [
+        "02",
+        "03",
+        "04"
+      ],
+      "reason": "本人与父母各自提出的目标"
+    },
+    {
+      "pointer": "/fields/7/value",
+      "sections": [
+        "02",
+        "09"
+      ],
+      "reason": "到手底线用于结余计算"
+    },
+    {
+      "pointer": "/fields/8/value",
+      "sections": [
+        "02",
+        "04",
+        "06"
+      ],
+      "reason": "不出省是硬限制"
+    },
+    {
+      "pointer": "/fields/9/value",
+      "sections": [
+        "02",
+        "03",
+        "05"
+      ],
+      "reason": "单位类型偏好与家庭期待分开"
+    },
+    {
+      "pointer": "/fields/10/value",
+      "sections": [
+        "02",
+        "05"
+      ],
+      "reason": "户籍只作逐岗核对的输入"
+    },
+    {
+      "pointer": "/fields/11/value",
+      "sections": [
+        "02",
+        "05"
+      ],
+      "reason": "政治面貌只作逐岗核对的输入"
+    },
+    {
+      "pointer": "/fields/13/value",
+      "sections": [
+        "02",
+        "03",
+        "05"
+      ],
+      "reason": "优先级次序决定比较顺序"
+    },
+    {
+      "pointer": "/fields/14/value",
+      "sections": [
+        "02",
+        "09"
+      ],
+      "reason": "现金与支出估计用于现金能撑多久"
+    },
+    {
+      "pointer": "/fields/15/value",
+      "sections": [
+        "02",
+        "04",
+        "08"
+      ],
+      "reason": "每周可用时间限制并行路线数"
+    },
+    {
+      "pointer": "/fields/16/value",
+      "sections": [
+        "02",
+        "04"
+      ],
+      "reason": "期望月薪与工资参照对比"
+    },
+    {
+      "pointer": "/fields/17/value",
+      "sections": [
+        "02",
+        "03",
+        "05"
+      ],
+      "reason": "家庭期待转成可核条件"
+    },
+    {
+      "pointer": "/fields/18/value",
+      "sections": [
+        "02",
+        "04",
+        "06",
+        "10"
+      ],
+      "reason": "加班与销售底线筛岗位"
+    },
+    {
+      "pointer": "/fields/19/value",
+      "sections": [
+        "03"
+      ],
+      "reason": "卡点决定小步骤"
+    },
+    {
+      "pointer": "/fields/21/value",
+      "sections": [
+        "02",
+        "05",
+        "08"
+      ],
+      "reason": "考试准备基础决定投入"
+    },
+    {
+      "pointer": "/fields/22/value",
+      "sections": [
+        "09"
+      ],
+      "reason": "押金搬家费用于现金情景"
+    },
+    {
+      "pointer": "/fields/23/value",
+      "sections": [
+        "09"
+      ],
+      "reason": "住家里支出用于现金情景"
+    }
+  ]
+}

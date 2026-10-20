@@ -1,0 +1,1419 @@
+{
+  "schema_version": 1,
+  "preferences": {
+    "questionnaire_section": "优先级排序",
+    "method": "ordinal",
+    "confirmed": false,
+    "weights": null,
+    "dimensions": [
+      "成长与前景",
+      "工作内容",
+      "城市",
+      "稳定",
+      "收入",
+      "工作与生活平衡",
+      "单位名气"
+    ],
+    "quote": "按重要程度依次点选：成长与前景、工作内容、城市、稳定、收入、工作与生活平衡、单位名气",
+    "profile_refs": [
+      "profile_parse.json#/fields/13"
+    ]
+  },
+  "matrix": {
+    "options": [
+      "J1",
+      "P1",
+      "P2",
+      "P3",
+      "P4",
+      "J3"
+    ],
+    "dimensions": [
+      {
+        "id": "本人意愿",
+        "name": "本人意愿"
+      },
+      {
+        "id": "资格",
+        "name": "资格能否核"
+      },
+      {
+        "id": "竞争",
+        "name": "竞争数据"
+      },
+      {
+        "id": "准备",
+        "name": "准备投入"
+      },
+      {
+        "id": "收入",
+        "name": "收入依据"
+      },
+      {
+        "id": "家里",
+        "name": "家里接受"
+      }
+    ],
+    "cells": [
+      {
+        "candidate_id": "J1",
+        "dimension_id": "本人意愿",
+        "status": "supported",
+        "text": "本人首选",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      {
+        "candidate_id": "J1",
+        "dimension_id": "资格",
+        "status": "unknown",
+        "text": "逐份核原文",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      {
+        "candidate_id": "J1",
+        "dimension_id": "竞争",
+        "status": "conditional",
+        "text": "没有可比数据",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      {
+        "candidate_id": "J1",
+        "dimension_id": "准备",
+        "status": "supported",
+        "text": "实习可衔接",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      {
+        "candidate_id": "J1",
+        "dimension_id": "收入",
+        "status": "conditional",
+        "text": "工资分位作参照",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      {
+        "candidate_id": "J1",
+        "dimension_id": "家里",
+        "status": "conditional",
+        "text": "要用条件说服",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      {
+        "candidate_id": "P1",
+        "dimension_id": "本人意愿",
+        "status": "conditional",
+        "text": "父母提出，本人可接受",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      {
+        "candidate_id": "P1",
+        "dimension_id": "资格",
+        "status": "unknown",
+        "text": "新公告未出",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      {
+        "candidate_id": "P1",
+        "dimension_id": "竞争",
+        "status": "failed",
+        "text": "对口职位更挤",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      {
+        "candidate_id": "P1",
+        "dimension_id": "准备",
+        "status": "failed",
+        "text": "行测申论零基础",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      {
+        "candidate_id": "P1",
+        "dimension_id": "收入",
+        "status": "unknown",
+        "text": "待公告",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      {
+        "candidate_id": "P1",
+        "dimension_id": "家里",
+        "status": "supported",
+        "text": "父母首选",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      {
+        "candidate_id": "P2",
+        "dimension_id": "本人意愿",
+        "status": "unknown",
+        "text": "看有没有愿去的职位",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      {
+        "candidate_id": "P2",
+        "dimension_id": "资格",
+        "status": "unknown",
+        "text": "逐岗核",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      {
+        "candidate_id": "P2",
+        "dimension_id": "竞争",
+        "status": "unknown",
+        "text": "未统计",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      {
+        "candidate_id": "P2",
+        "dimension_id": "准备",
+        "status": "failed",
+        "text": "与省考同准备",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      {
+        "candidate_id": "P2",
+        "dimension_id": "收入",
+        "status": "unknown",
+        "text": "待职位表",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      {
+        "candidate_id": "P2",
+        "dimension_id": "家里",
+        "status": "supported",
+        "text": "父母认可",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      {
+        "candidate_id": "P3",
+        "dimension_id": "本人意愿",
+        "status": "unknown",
+        "text": "本人未表态",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      {
+        "candidate_id": "P3",
+        "dimension_id": "资格",
+        "status": "unknown",
+        "text": "浙江公告未出",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      {
+        "candidate_id": "P3",
+        "dimension_id": "竞争",
+        "status": "unknown",
+        "text": "未取到",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      {
+        "candidate_id": "P3",
+        "dimension_id": "准备",
+        "status": "conditional",
+        "text": "另需笔试",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      {
+        "candidate_id": "P3",
+        "dimension_id": "收入",
+        "status": "unknown",
+        "text": "未取到",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      {
+        "candidate_id": "P3",
+        "dimension_id": "家里",
+        "status": "supported",
+        "text": "父母认可",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      {
+        "candidate_id": "P4",
+        "dimension_id": "本人意愿",
+        "status": "failed",
+        "text": "可能要卖理财",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      {
+        "candidate_id": "P4",
+        "dimension_id": "资格",
+        "status": "conditional",
+        "text": "工行秋招已截止",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      {
+        "candidate_id": "P4",
+        "dimension_id": "竞争",
+        "status": "unknown",
+        "text": "未取到",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      {
+        "candidate_id": "P4",
+        "dimension_id": "准备",
+        "status": "conditional",
+        "text": "另需笔试",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      {
+        "candidate_id": "P4",
+        "dimension_id": "收入",
+        "status": "unknown",
+        "text": "未取到",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      {
+        "candidate_id": "P4",
+        "dimension_id": "家里",
+        "status": "supported",
+        "text": "父母认可",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      {
+        "candidate_id": "J3",
+        "dimension_id": "本人意愿",
+        "status": "failed",
+        "text": "加班冲突",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      {
+        "candidate_id": "J3",
+        "dimension_id": "资格",
+        "status": "unknown",
+        "text": "逐所核",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      {
+        "candidate_id": "J3",
+        "dimension_id": "竞争",
+        "status": "unknown",
+        "text": "未取到",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      {
+        "candidate_id": "J3",
+        "dimension_id": "准备",
+        "status": "supported",
+        "text": "专业对口",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      {
+        "candidate_id": "J3",
+        "dimension_id": "收入",
+        "status": "supported",
+        "text": "分位较高",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      {
+        "candidate_id": "J3",
+        "dimension_id": "家里",
+        "status": "unknown",
+        "text": "未问",
+        "evidence_refs": [
+          "E001"
+        ]
+      }
+    ]
+  },
+  "candidates": [
+    {
+      "id": "J-J1",
+      "candidate_id": "J1",
+      "supports": [
+        "本人最想做，偏好按规则处理数据；实习录过凭证、做过申报表"
+      ],
+      "counters": [
+        "没有大公司财务系统经验；具体岗位职责、工资未取得"
+      ],
+      "costs": [
+        "投递和笔试面试准备占每周时间；可能要先接受较低起薪"
+      ],
+      "fallback": "春招继续投，同时把目标扩到中小企业财务、代理记账转正",
+      "switch_conditions": "到年底仍没有任何企业面试，就扩大目标层级和城市范围；岗位实为出纳兼销售或长期外包，按底线退出",
+      "checkpoint": "{{k:/context/personal_dates/year_end}}",
+      "evidence_refs": [
+        "E001",
+        "E032"
+      ]
+    },
+    {
+      "id": "J-J2",
+      "candidate_id": "J2",
+      "supports": [
+        "大公司体系化培训，适合按流程把事情做细的人"
+      ],
+      "counters": [
+        "多按单量考核，工作较重复；部分岗位是外包或派遣"
+      ],
+      "costs": [
+        "可能不在本人首选城市"
+      ],
+      "fallback": "转回 J1 的普通企业财务岗",
+      "switch_conditions": "合同甲方不是用人公司本身、或考核只按单量且没有轮岗路径时降为保底",
+      "checkpoint": "{{k:/context/personal_dates/year_end}}",
+      "evidence_refs": [
+        "E032"
+      ]
+    },
+    {
+      "id": "J-J3",
+      "candidate_id": "J3",
+      "supports": [
+        "专业对口，审计人员工资分位明显高于会计"
+      ],
+      "counters": [
+        "忙季加班出差多，与本人偶尔加班的偏好冲突；本人没提出想做"
+      ],
+      "costs": [
+        "忙季几乎没有备考时间"
+      ],
+      "fallback": "不列主线，不影响其他路线",
+      "switch_conditions": "只有本人了解真实工时后主动想试，才投少量事务所岗位",
+      "checkpoint": "{{k:/context/personal_dates/checkpoint}}",
+      "evidence_refs": [
+        "E043",
+        "E020",
+        "E021",
+        "E022"
+      ]
+    },
+    {
+      "id": "J-P1",
+      "candidate_id": "P1",
+      "supports": [
+        "父母最认可；上一届限应届且写明财务管理的职位有一批；本人浙江户籍"
+      ],
+      "counters": [
+        "这类职位每个名额的缴费人数中位数约是全省应届职位的近两倍；行测申论零基础；省级和杭甬市级职位要基层经历"
+      ],
+      "costs": [
+        "从现在到笔试只有约一个多月，要挤占投递时间；报协议班要花钱"
+      ],
+      "fallback": "没上岸就把精力全部转回企业财务春招，不默认再考一年",
+      "switch_conditions": "公告里没有本人愿去、写明财务管理、限应届且不要求经历的职位，就不报；笔试不过合格线就收手",
+      "checkpoint": "{{k:/context/personal_dates/checkpoint}}",
+      "evidence_refs": [
+        "E008",
+        "E011",
+        "E012",
+        "E013"
+      ]
+    },
+    {
+      "id": "J-P2",
+      "candidate_id": "P2",
+      "supports": [
+        "行测申论与省考通用，国考笔试早于省考上一届的笔试日，可当一次真实练兵"
+      ],
+      "counters": [
+        "市地级以下职位主要招应届，但具体有没有写明财务管理的浙江职位要逐岗看；每次只能报一个职位"
+      ],
+      "costs": [
+        "报名截止只剩几天，筛职位要占时间"
+      ],
+      "fallback": "不报国考，不影响省考和企业主线",
+      "switch_conditions": "注册认证截止前找不到本人愿去且条件对得上的浙江职位，就不报；不为“练兵”报一个不愿去的职位",
+      "checkpoint": "{{k:/context/personal_dates/action0}}",
+      "evidence_refs": [
+        "E002",
+        "E003",
+        "E005",
+        "E046"
+      ]
+    },
+    {
+      "id": "J-P3",
+      "candidate_id": "P3",
+      "supports": [
+        "父母认可；国网有统一批次和暂定笔试时间"
+      ],
+      "counters": [
+        "浙江单位公告未出，是否招财会类、要不要电工类专业都未知"
+      ],
+      "costs": [
+        "笔试准备与省考、企业投递叠加"
+      ],
+      "fallback": "不符合就只退出这一项",
+      "switch_conditions": "公告不招财会类或专业名单不含财务管理就放下；符合且本人愿意再报",
+      "checkpoint": "{{k:/context/personal_dates/checkpoint}}",
+      "evidence_refs": [
+        "E029",
+        "E030",
+        "E031",
+        "E047"
+      ]
+    },
+    {
+      "id": "J-P4",
+      "candidate_id": "P4",
+      "supports": [
+        "父母和同学都推荐；专业相关"
+      ],
+      "counters": [
+        "同学说柜员也要卖理财，与本人“不接受销售指标”的底线冲突；岗位职责原文待核"
+      ],
+      "costs": [
+        "统一笔试要准备；营销考核压力可能长期存在"
+      ],
+      "fallback": "只报不带营销指标的岗位，或放弃",
+      "switch_conditions": "岗位职责或面试中确认有理财、存款等营销指标，就按本人底线不接受",
+      "checkpoint": "{{k:/context/personal_dates/checkpoint}}",
+      "evidence_refs": [
+        "E033",
+        "E001"
+      ]
+    }
+  ],
+  "recommendation": {
+    "primary": [
+      "J1",
+      "J2"
+    ],
+    "backup": [
+      "P1",
+      "P3"
+    ],
+    "judgment_refs": [
+      "J-J1",
+      "J-P1"
+    ],
+    "evidence_refs": [
+      "E001",
+      "E008",
+      "E011",
+      "E012",
+      "E013"
+    ],
+    "calc_refs": [
+      "/fa_median",
+      "/all_median",
+      "/city_months"
+    ],
+    "conditions": [
+      "企业财务是主线：本人意愿和经历都接得上，收入能按期开始",
+      "省考只在公告里有限应届、写明财务管理、不要求经历的职位时报一个，全力考一次",
+      "国网、银行看公告：专业对得上、岗位没有销售指标才报",
+      "没有一条路承诺录用；任何一条硬条件不符，只退出那一项"
+    ]
+  },
+  "checkpoint": {
+    "date": "{{k:/context/personal_dates/checkpoint}}",
+    "trigger": "省考2027年度公告或国网浙江第一批公告发布后",
+    "required": [
+      "按专业名单逐字筛职位",
+      "和父母定好考几条、考几次",
+      "复核企业投递反馈"
+    ]
+  },
+  "main_evidence_dependencies": {
+    "candidates": [
+      "J1",
+      "P1"
+    ],
+    "evidence": [
+      "E001",
+      "E008",
+      "E011",
+      "E012",
+      "E013",
+      "E032"
+    ],
+    "calculations": [
+      "/fa_median",
+      "/all_median",
+      "/fa_vs_all",
+      "/city_months"
+    ]
+  },
+  "report_blocks": {
+    "01_flow": {
+      "type": "flow",
+      "content": {
+        "title": "两条线同时走：企业财务不停，省考看公告再报",
+        "caption": "方框是要做的事，菱形是要本人判断的问题，深色是主线，浅色是并行或退路。图只表示先后和条件，不代表录用把握；两条线同时进行，互不等待。",
+        "rows": [
+          [
+            "A",
+            "步骤",
+            "现在投一批浙江企业财务岗，同时等省考公告",
+            ">B"
+          ],
+          [
+            "B",
+            "判断",
+            "省考有限应届、写明财务管理、不要基层经历的职位？",
+            "有>C",
+            "没有>D"
+          ],
+          [
+            "D",
+            "备选",
+            "不报，精力全给企业财务"
+          ],
+          [
+            "C",
+            "步骤",
+            "只报一个，全力考一次；企业投递不停",
+            ">E"
+          ],
+          [
+            "E",
+            "判断",
+            "到年底有没有企业面试或录用？",
+            "有>F",
+            "没有>G"
+          ],
+          [
+            "G",
+            "备选",
+            "春招扩到中小企业、财务共享中心"
+          ],
+          [
+            "F",
+            "结果",
+            "比职责、合同、到手收入；省考结果出来再定"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E001",
+        "E011"
+      ]
+    },
+    "01_kpis": {
+      "type": "kpi",
+      "content": {
+        "rows": [
+          [
+            "主线",
+            "企业财务",
+            "应收应付、费用、总账助理；浙江省内"
+          ],
+          [
+            "省考对口职位有多挤",
+            "每名额约 {{c:/fa_median|1f}} 人",
+            "上一届限应届且写明财务管理的中位数，是全省应届职位的 {{c:/fa_vs_all|1f}} 倍；不是上岸概率"
+          ],
+          [
+            "没收入时能撑多久",
+            "合租约 {{c:/city_months|1f}} 个月",
+            "留出应急金后；住家里约 {{c:/home_months|1f}} 个月"
+          ],
+          [
+            "国考注册认证截止",
+            "{{e:E005#/value|md_hm}}",
+            "提交申请截止 {{e:E003#/value|md_hm}}；只在有愿去的浙江职位时报"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E001",
+        "E003",
+        "E005",
+        "E012",
+        "E013"
+      ]
+    },
+    "01_actions": {
+      "type": "dated_actions",
+      "content": {
+        "heading": "接下来三件事",
+        "items": [
+          {
+            "text": "{{k:/context/personal_dates/action0|md}}前：打开国考职位表，只看工作地点在浙江、本科专业写明财务管理、限应届或不限的职位；有本人愿去的就在注册截止前报一个，没有就不报。",
+            "date": "{{k:/context/personal_dates/action0}}"
+          },
+          {
+            "text": "{{k:/context/personal_dates/action1|md}}前：投出第一批浙江企业财务岗（上市公司、大型民企和国企财务部、财务共享中心），每份保存招聘原文，记下职责、合同签哪家、工作地点。",
+            "date": "{{k:/context/personal_dates/action1}}"
+          },
+          {
+            "text": "{{k:/context/personal_dates/action2|md}}前：和爸妈约一次：省考只报写明财务管理的职位、全力考一次；工行今年秋招报名已经截止，银行改看其他行和春季补招，只报不带销售指标的岗位；再说清家里能支持在家住多久。",
+            "date": "{{k:/context/personal_dates/action2}}"
+          }
+        ]
+      },
+      "evidence_refs": [
+        "E001",
+        "E003",
+        "E005",
+        "E033"
+      ]
+    },
+    "01_checkpoint": {
+      "type": "checkpoint",
+      "content": {
+        "text": "下一个检查点：{{k:/context/personal_dates/checkpoint|ymd_cn}}。到时看浙江省考2027年度公告和国网浙江第一批公告是否已出，按专业名单逐字筛职位，再定并行几条；企业投递反馈一起复盘。"
+      },
+      "evidence_refs": [
+        "E001",
+        "E011",
+        "E029"
+      ]
+    },
+    "05_matrix": {
+      "type": "comparison_matrix",
+      "content": {
+        "title": "六条路放在一起比：愿不愿意、能不能报、挤不挤、要投入多少",
+        "caption": "黛绿勾是有支持，琥珀半圆是待核或有条件，红叉是明显不利。没有给各项打分，也不加总；“家里接受”单列，不替本人决定。",
+        "columns": [
+          "本人意愿",
+          "资格能否核",
+          "竞争数据",
+          "准备投入",
+          "收入依据",
+          "家里接受"
+        ],
+        "rows": [
+          [
+            "企业财务",
+            "✓本人首选",
+            "△逐份核原文",
+            "△没有可比数据",
+            "✓实习可衔接",
+            "△工资分位作参照",
+            "△要用条件说服"
+          ],
+          [
+            "浙江省考",
+            "△父母提出，本人可接受",
+            "△新公告未出",
+            "✗对口职位更挤",
+            "✗行测申论零基础",
+            "△待公告",
+            "✓父母首选"
+          ],
+          [
+            "国考浙江职位",
+            "△看有没有愿去的职位",
+            "△逐岗核",
+            "△未统计",
+            "✗与省考同准备",
+            "△待职位表",
+            "✓父母认可"
+          ],
+          [
+            "国网浙江",
+            "△本人未表态",
+            "△浙江公告未出",
+            "△未取到",
+            "△另需笔试",
+            "△未取到",
+            "✓父母认可"
+          ],
+          [
+            "银行",
+            "✗可能要卖理财",
+            "△工行秋招已截止",
+            "△未取到",
+            "△另需笔试",
+            "△未取到",
+            "✓父母认可"
+          ],
+          [
+            "事务所审计",
+            "✗加班冲突",
+            "△逐所核",
+            "△未取到",
+            "✓专业对口",
+            "✓分位较高",
+            "△未问"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E001",
+        "E008",
+        "E011",
+        "E012",
+        "E013",
+        "E032"
+      ]
+    },
+    "07_timeline": {
+      "type": "timeline",
+      "content": {
+        "title": "从现在到毕业的关键时间点",
+        "caption": "菱形是个人检查点，同月里官方已公布的截止日或考试日写在下方小字；圆点是个人计划。国网第一批公告只说“十一月中旬”，省考2027年度日期未公布，都没有画成具体日子。",
+        "rows": [
+          [
+            "{{k:/context/personal_dates/action0|ym}}",
+            "定国考报不报",
+            "{{k:/context/personal_dates/action0|md_short}} 个人；{{e:E005#/value|md_hm}} 注册截止",
+            "检查点"
+          ],
+          [
+            "{{k:/context/personal_dates/checkpoint|ym}}",
+            "看公告定并行；国考笔试",
+            "{{k:/context/personal_dates/checkpoint|md_short}} 个人；{{e:E004#/value|md_short}} 笔试",
+            "检查点"
+          ],
+          [
+            "{{e:E030#/value|ym}}",
+            "国网笔试（暂定）；秋招复盘",
+            "{{e:E030#/value|md_short}} 暂定；{{k:/context/personal_dates/year_end|md_short}} 个人",
+            "检查点"
+          ],
+          [
+            "{{k:/context/personal_dates/spring|ym}}",
+            "春招与省考结果复盘",
+            "{{k:/context/personal_dates/spring|md_short}} 个人",
+            "检查点"
+          ],
+          [
+            "{{k:/context/personal_dates/cert|ym}}",
+            "初级会计两科重考（按当年公告）",
+            "{{k:/context/personal_dates/cert|md_short}} 个人计划",
+            ""
+          ],
+          [
+            "{{k:/context/personal_dates/graduate|ym}}",
+            "毕业，比较正式录用",
+            "{{k:/context/personal_dates/graduate|md_short}}",
+            "检查点"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E001",
+        "E003",
+        "E004",
+        "E005",
+        "E030"
+      ]
+    },
+    "08_route_J1": {
+      "type": "route_cards",
+      "content": {
+        "title": "企业财务：主线，从现在投到春招",
+        "门槛": "本科财务管理对口；具体看每份招聘原文的职责、地点、合同签哪家；初级会计常被写成优先条件。",
+        "时间窗口": "秋招现在就在进行，春招在明年春季；每家截止日以招聘原文为准。",
+        "投入": "每周 {{p:/fields/15/value}} 小时里拿出大部分做投递和笔面试；补 Excel 函数和一套财务软件操作，把代理记账实习写成具体做过的事。",
+        "切换条件": "到 {{k:/context/personal_dates/year_end|md}} 仍没有任何面试，扩到中小企业、财务共享中心或代理记账转正；岗位实为出纳兼销售就退出。"
+      },
+      "evidence_refs": [
+        "E001",
+        "E032"
+      ]
+    },
+    "08_route_P1": {
+      "type": "route_cards",
+      "content": {
+        "title": "浙江省考：只报一次、全力考",
+        "门槛": "限应届、本科专业名单逐字写了财务管理、不要求基层经历；省级和杭甬市级综合类职位上一届要两年基层经历，本人不能报。",
+        "时间窗口": "2027年度公告未出；上一届 {{e:E006#/value|md}} 开始报名、{{e:E007#/value|md}} 笔试，只作参照。",
+        "投入": "行测申论从零开始，先做一套真题摸底；协议班不是必需，交钱前先看退费条款。上一届综合类笔试合格线是两科总分 {{e:E010#/value}} 分，只是门槛。",
+        "切换条件": "公告里没有对口职位就不报；笔试没进面试就收手，春招全力投企业，不默认再考一年。"
+      },
+      "evidence_refs": [
+        "E006",
+        "E007",
+        "E008",
+        "E010",
+        "E011"
+      ]
+    },
+    "08_route_P3": {
+      "type": "route_cards",
+      "content": {
+        "title": "国网、银行：看公告和岗位职责再报",
+        "门槛": "国网浙江要看第一批公告是否招财会类、专业名单；银行要看岗位职责里有没有营销指标。",
+        "时间窗口": "国网第一批公告计划 {{e:E029#/value}}，笔试暂定 {{e:E030#/value|md}}；工行秋招报名已在 {{e:E033#/value|md}} 截止，其他银行和春季补招看各家公告。",
+        "投入": "各有统一笔试，题型与行测部分重合；只报符合条件且本人愿去的。",
+        "切换条件": "专业不符或岗位要卖理财、拉存款，就按本人底线不报；不因父母认可而硬上。"
+      },
+      "evidence_refs": [
+        "E029",
+        "E030",
+        "E031",
+        "E033",
+        "E034"
+      ]
+    },
+    "08_route_cert": {
+      "type": "route_cards",
+      "content": {
+        "title": "先就业再考证：初级会计先拿下",
+        "门槛": "高中及以上学历即可报，在校生在学籍所在地报；但须在一个考试年度内通过全部科目，今年过的实务不能留到明年。",
+        "时间窗口": "上一年度 {{e:E036#/value|md}} 截止报名、{{e:E037#/value|md}} 开考；今年的通知还没出，上一年度是年初报名。",
+        "投入": "今年过的实务不能留到明年，两科都要重考；放在省考笔试之后集中准备，正好赶上春招简历。",
+        "切换条件": "初级拿下、工作定了再考虑 CPA：上一年简章要求专科以上毕业学历，应届生可先报名、毕业后从 {{e:E040#/value|md}} 起认证学历；不建议毕业前同时开太多考试。"
+      },
+      "evidence_refs": [
+        "E035",
+        "E036",
+        "E037",
+        "E038",
+        "E039",
+        "E040"
+      ]
+    },
+    "10_risks": {
+      "type": "scenario_table",
+      "content": {
+        "columns": [
+          "如果",
+          "就这样应对",
+          "再看什么"
+        ],
+        "rows": [
+          [
+            "到年底还没有任何企业面试",
+            "把目标扩到中小企业、财务共享中心、代理记账转正；请老师或学姐看一遍简历方向",
+            "投递数量、岗位和本人经历是否对得上"
+          ],
+          [
+            "省考公告里没有写明财务管理的应届职位",
+            "不报只写会计类的；只写大类的先打职位表上的咨询电话问清",
+            "不为“报了就有希望”硬报"
+          ],
+          [
+            "银行岗位要卖理财、拉存款",
+            "按本人底线不报，或面试时问清考核再决定",
+            "岗位职责原文与考核方式；工行今年秋招报名已截止，只看其他行和补招"
+          ],
+          [
+            "培训机构推“协议班不过退费”",
+            "先看合同里退费条件和扣费项，不交大额预付；它不是录用保证",
+            "退费条件、机构资质、自己能否先刷真题"
+          ],
+          [
+            "家里能支持的时间比想的短",
+            "缩短等待，春招提前接受条件可以的企业岗位",
+            "家里明确能支持多久、每月多少"
+          ],
+          [
+            "企业要签三方而省考结果未出",
+            "先问清违约金和解约流程，再决定签不签",
+            "三方协议条款与学校就业处的解约规定"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E001",
+        "E011",
+        "E015",
+        "E033"
+      ]
+    },
+    "11_questions": {
+      "type": "question_table",
+      "content": {
+        "columns": [
+          "要问什么",
+          "问谁",
+          "核完怎样改变决定"
+        ],
+        "rows": [
+          [
+            "这个财务岗日常具体做什么、用什么系统、有没有人带？",
+            "企业 HR",
+            "主要是出纳兼销售或纯录单，就降为保底"
+          ],
+          [
+            "合同签哪家公司？是直签还是派遣、外包？试用期多长、社保公积金按什么基数？",
+            "企业 HR",
+            "不是直签先看条件；派遣外包本人还不了解，先问清再定"
+          ],
+          [
+            "这个岗位有没有理财、存款等营销考核？",
+            "银行招聘公告或面试官",
+            "有指标就按本人底线不报"
+          ],
+          [
+            "只写“工商管理类”的职位，财务管理专业能不能报？",
+            "省考职位表上的咨询电话",
+            "能报才放进候选，不能报就排除"
+          ],
+          [
+            "三方协议的违约金、解约流程；毕业后多久内还算应届？",
+            "学校就业指导中心",
+            "决定签企业三方和等考试结果怎么衔接"
+          ],
+          [
+            "能支持在家住多久、每月给多少？“稳定”最担心的是收入、离家远还是名声？",
+            "爸妈",
+            "定等待边界；把担心换成合同、社保、地点等可核条件"
+          ],
+          [
+            "忙季真实加班多少？头两年做什么、涨得怎样？",
+            "在事务所或企业财务工作的学姐",
+            "决定事务所是否值得投少量"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E001"
+      ]
+    },
+    "12_assumptions": {
+      "type": "assumption_table",
+      "content": {
+        "columns": [
+          "输入或运算",
+          "本案取值",
+          "适用边界"
+        ],
+        "rows": [
+          [
+            "合租每月支出",
+            "{{p:/fields/14/value/housing|comma}} + {{p:/fields/14/value/other|comma}} = ¥{{c:/monthly_cost|comma}}",
+            "本人估计，不是城市平均"
+          ],
+          [
+            "可动现金",
+            "{{p:/fields/14/value/cash|comma}} − {{p:/fields/14/value/reserve|comma}} = ¥{{c:/spendable|comma}}",
+            "留出本人想保的应急金"
+          ],
+          [
+            "合租可撑月数",
+            "¥{{c:/spendable|comma}} ÷ ¥{{c:/monthly_cost|comma}} ≈ {{c:/city_months|1f}} 个月",
+            "假设没有收入、家里不另给"
+          ],
+          [
+            "住家里",
+            "只把每月支出换成 ¥{{p:/fields/23/value|comma}}，约 {{c:/home_months|1f}} 个月",
+            "家里管吃住；不算家里的开销"
+          ],
+          [
+            "押金搬家后",
+            "可动现金减 ¥{{p:/fields/22/value|comma}}，约 {{c:/after_move_months|1f}} 个月",
+            "只改一个输入，不叠加其他情景"
+          ],
+          [
+            "到手底线结余",
+            "¥{{p:/fields/7/value|comma}} − ¥{{c:/monthly_cost|comma}} = ¥{{c:/floor_balance|comma}}/月",
+            "本人底线，不是报价"
+          ],
+          [
+            "省考竞争比",
+            "缴费人数 ÷ 招录人数，按职位算后取分位",
+            "上一届数据；缴费不等于到考，不是概率"
+          ],
+          [
+            "工资分位",
+            "杭州全体企业在岗人员年工资",
+            "不是应届起薪，不是全省"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E001"
+      ]
+    },
+    "12_terms": {
+      "type": "term_table",
+      "content": {
+        "columns": [
+          "说法",
+          "本报告里的意思"
+        ],
+        "rows": [
+          [
+            "每名额缴费人数",
+            "某职位缴费报名人数 ÷ 招录人数；说明挤不挤，不是上岸概率"
+          ],
+          [
+            "写明财务管理",
+            "职位表本科专业名单里逐字出现“财务管理”"
+          ],
+          [
+            "分位数",
+            "把一群人的工资从低到高排，排在第几成的那个值；中位数是正中间"
+          ],
+          [
+            "主线、并行、退路",
+            "投入的先后顺序，不是结果保证"
+          ],
+          [
+            "待核",
+            "原文或本人信息还没取得，不能写成没有机会"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E001"
+      ]
+    }
+  },
+  "presentation": {
+    "01": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/01/lead"
+      },
+      {
+        "slot": "figure",
+        "ref": "judgment.json#/report_blocks/01_flow"
+      },
+      {
+        "slot": "kpis",
+        "ref": "judgment.json#/report_blocks/01_kpis"
+      },
+      {
+        "slot": "core_points",
+        "ref": "narrative.json#/sections/01/core_points"
+      },
+      {
+        "slot": "actions",
+        "ref": "judgment.json#/report_blocks/01_actions"
+      },
+      {
+        "slot": "checkpoint",
+        "ref": "judgment.json#/report_blocks/01_checkpoint"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/01/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/01/analysis/1"
+      }
+    ],
+    "02": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/02/lead"
+      },
+      {
+        "slot": "figure",
+        "ref": "profile_parse.json#/report_blocks/02_facts"
+      },
+      {
+        "slot": "profile",
+        "ref": "profile_parse.json#/report_blocks/02_profile_1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/02/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/02/analysis/1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/02/analysis/2"
+      }
+    ],
+    "03": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/03/lead"
+      },
+      {
+        "slot": "figure",
+        "ref": "profile_parse.json#/report_blocks/03_blockers"
+      },
+      {
+        "slot": "questions",
+        "ref": "directions.json#/report_blocks/03_questions"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/03/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/03/analysis/1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/03/analysis/2"
+      }
+    ],
+    "04": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/04/lead"
+      },
+      {
+        "slot": "figure",
+        "ref": "evidence.json#/report_blocks/04_wages"
+      },
+      {
+        "slot": "directions",
+        "ref": "directions.json#/report_blocks/04_directions"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/04/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/04/analysis/1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/04/analysis/2"
+      },
+      {
+        "slot": "details",
+        "ref": "profile_parse.json#/report_blocks/04_details"
+      }
+    ],
+    "05": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/05/lead"
+      },
+      {
+        "slot": "figure",
+        "ref": "evidence.json#/report_blocks/05_competition"
+      },
+      {
+        "slot": "matrix",
+        "ref": "judgment.json#/report_blocks/05_matrix"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/05/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/05/analysis/1"
+      },
+      {
+        "slot": "unknown_explanation",
+        "ref": "narrative.json#/sections/05/unknown_explanation"
+      }
+    ],
+    "06": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/06/lead"
+      },
+      {
+        "slot": "figure",
+        "ref": "evidence.json#/report_blocks/06_counts"
+      },
+      {
+        "slot": "candidates",
+        "ref": "candidates.json#/report_blocks/06_candidates"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/06/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/06/analysis/1"
+      }
+    ],
+    "07": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/07/lead"
+      },
+      {
+        "slot": "timeline",
+        "ref": "judgment.json#/report_blocks/07_timeline"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/07/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/07/analysis/1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/07/analysis/2"
+      }
+    ],
+    "08": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/08/lead"
+      },
+      {
+        "slot": "routes",
+        "ref": "judgment.json#/report_blocks/08_route_J1"
+      },
+      {
+        "slot": "routes",
+        "ref": "judgment.json#/report_blocks/08_route_P1"
+      },
+      {
+        "slot": "routes",
+        "ref": "judgment.json#/report_blocks/08_route_P3"
+      },
+      {
+        "slot": "routes",
+        "ref": "judgment.json#/report_blocks/08_route_cert"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/08/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/08/analysis/1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/08/analysis/2"
+      }
+    ],
+    "09": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/09/lead"
+      },
+      {
+        "slot": "runway",
+        "ref": "evidence.json#/report_blocks/09_runway"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/09/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/09/analysis/1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/09/analysis/2"
+      }
+    ],
+    "10": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/10/lead"
+      },
+      {
+        "slot": "risks",
+        "ref": "judgment.json#/report_blocks/10_risks"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/10/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/10/analysis/1"
+      }
+    ],
+    "11": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/11/lead"
+      },
+      {
+        "slot": "questions",
+        "ref": "judgment.json#/report_blocks/11_questions"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/11/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/11/analysis/1"
+      }
+    ],
+    "12": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/12/lead"
+      },
+      {
+        "slot": "assumptions",
+        "ref": "judgment.json#/report_blocks/12_assumptions"
+      },
+      {
+        "slot": "evidence_levels",
+        "ref": "evidence.json#/report_blocks/12_evidence_levels"
+      },
+      {
+        "slot": "terms",
+        "ref": "judgment.json#/report_blocks/12_terms"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/12/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/12/analysis/1"
+      },
+      {
+        "slot": "sources",
+        "ref": "evidence.json#/report_blocks/12_sources"
+      },
+      {
+        "slot": "disclaimer",
+        "ref": "narrative.json#/sections/12/disclaimer"
+      }
+    ]
+  }
+}
