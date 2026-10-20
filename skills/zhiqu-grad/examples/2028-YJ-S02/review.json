@@ -175,9 +175,9 @@
     "judgment.json": "a9dd41f886f0c6f554dcbfa124510778365a5a732f3490e40d1499b0ff24c03b",
     "narrative.json": "cdaf672fa9a3877e1e9b218b516cf5eee06ef7887fddb6a4d1367480e15222a4",
     "report.md": "118291654c7491b6d6c738645540e50d56cc9bd54663e2bc1c0c1cd7cf06d0ba",
-    "report.html": "5ac4028af89db3b22d1f276d8e2a2216f329202a5fb02f84c870fbeda0c21851",
-    "report.pdf": "4673c3d86ebe9a31994faaf770196b3dd78bcd21a46fd886a9f12bc2f26a2aa1",
-    "report_trace.json": "a2696799202f215ac2bf1214f0a19e8d1054ae644bef739013cc64dd8fe8dee2",
+    "report.html": "3fbe0711e166cb30440ba3740024540fd6608ab157992da0f08e4850ce02e275",
+    "report.pdf": "00e0e680e2ac1bf4ec30755d69d3be8af7c3c9db89af2e1aca2c23697a55c20e",
+    "report_trace.json": "152e14738a43b626ecc34fcd4e7701d58eae1882243c5d55d36690e5da36d684",
     "operator_check.md": "a6d9377fe6a1209359e4a03886371aa3bcaa2bbc727bfc702d38c4343e07c19d",
     "profile.json": "b04770d7a2589f2dbe7b35a80efaad8953b8db8666a26db85875f82cfc9eaf72",
     "profile-supplement.txt": "6d3fe85c4f5f9393a284253436e9dd3ae7a719f9ff73222d052dc7224a274e0f"
@@ -299,6 +299,17 @@
         "report_trace.json"
       ],
       "reason": "报告底色改为与网页问卷一致的浅米色；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.md",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "新增“第三方整理”证据等级样式；内容未变。"
     }
   ]
 }

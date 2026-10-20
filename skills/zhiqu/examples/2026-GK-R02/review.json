@@ -82,7 +82,7 @@
   },
   "snapshot": {
     "report.json": "2c77664a1638690c3dd18afc58b70c358c9d3b04f92a70ccaa17b2a83ce06eb2",
-    "report.pdf": "02f403a67bfc37e72aaed5aaa752b14b0a20abafb8bae700b5e633eb4fc20119",
+    "report.pdf": "31181550b5905276bf7551b092bfc3dddc9400fce9bfccae21f1ebe24b88a366",
     "operator_check.md": "a229b3c1008b803f4058d7ea7d4fe908a7a913c9b1a3e4531b53a9a261f43df9",
     "retro_ranks/58000/result.json": "de51b44a437b1e370221b1275c312c16cf5d3974d70af1df23990c3cb653adad",
     "case.json": "48bb5302cbe1c2c44fa52d6d725484a4a18a213705250594f70ffce97f9e4421",
@@ -163,6 +163,16 @@
         "report_trace.json"
       ],
       "reason": "报告底色改为与网页问卷一致的浅米色；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "新增“第三方整理”证据等级样式；内容未变。"
     }
   ]
 }
