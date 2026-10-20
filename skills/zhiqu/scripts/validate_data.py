@@ -20,6 +20,8 @@ usage: python3 scripts/validate_data.py [省份目录名 ...]   # 不给则检�
 import argparse
 import csv
 import datetime
+import hashlib
+from pathlib import Path, PurePosixPath
 from datetime import date
 import os
 import random
@@ -39,7 +41,16 @@ AFTER_ENTRY_FIELDS = (
     "review_deadline", "status", "notes",
 )
 AFTER_ENTRY_STATUSES = {"verified", "not_found", "unretrieved"}
-SOURCE_FIELDS = ("source_id", "grade", "publisher", "title", "url", "landing_url", "published", "retrieved", "method", "note")
+SOURCE_FIELDS = ("source_id", "grade", "publisher", "title", "landing_url", "file_url", "published", "retrieved", "method", "archive_sha256", "archive_path", "archive_status", "wayback_url", "note", "citation", "license", "producer_revision")
+LEGACY_SOURCE_FIELDS = ("source_id", "grade", "publisher", "title", "url", "landing_url", "published", "retrieved", "method", "note")
+ARCHIVE_STATUSES = {"已存原件", "原链接失效·存档副本", "未取到"}
+STORED_STATUSES = ARCHIVE_STATUSES - {"未取到"}
+ORIGINAL_INDEX_FIELDS = ("sha256", "size", "media_type", "source_url", "retrieved", "source_id")
+REPO_ROOT = Path(__file__).resolve().parents[3]
+ORIGINALS_RELATIVE = Path("skills/zhiqu-shared/originals")
+MAX_ORIGINAL_BYTES = 5_000_000
+LOCAL_ORIGINALS_RELATIVE = (Path("skills/zhiqu/data/purchased/originals"),
+                            Path("skills/zhiqu-grad/data/purchased/originals"))
 SOURCE_GRADES = {"官方", "第三方整理"}
 ROOT_SOURCED = ("schools.csv", "undergrad_majors.csv")
 SELECTED_UNIVERSITIES_FIELDS = (
@@ -200,39 +211,124 @@ def check_selected_universities_file(path):
     return issues, notes
 
 
-def check_sources(folder, files):
-    """sources.csv 的格式，以及 files 里每行 source_id 都已登记；只查登记是否完整，不证明来源内容正确。"""
+def read_sources(path):
+    """Read provenance rows; legacy url is an explicit read-only alias for file_url.
+
+    This helper does not certify the schema. check_sources still rejects a legacy
+    header and all new rows must supply the complete unified provenance fields.
+    """
+    with open(path, encoding="utf-8-sig", newline="") as f:
+        reader = csv.DictReader(f)
+        header = tuple(reader.fieldnames or ())
+        rows = [{k: (v or "").strip() if isinstance(v, str) or v is None else v
+                 for k, v in row.items()} for row in reader]
+    if "url" in header:
+        for row in rows:
+            if not row.get("file_url"):
+                row["file_url"] = row.get("url", "")
+    return rows, header
+
+
+def _valid_source_url(value):
+    try:
+        parsed = urlsplit(value)
+        parsed.port
+        return (parsed.scheme in {"http", "https"} and bool(parsed.hostname)
+                and not parsed.username and not parsed.password
+                and not re.search(r"\s", value))
+    except (ValueError, TypeError):
+        return False
+
+
+def _real_iso_date(value):
+    try:
+        return bool(re.fullmatch(r"[0-9]{4}-[0-9]{2}-[0-9]{2}", value) and date.fromisoformat(value))
+    except (ValueError, TypeError):
+        return False
+
+
+def _archive_file(root, relative, sha):
+    """Resolve only canonical repository-relative, content-addressed originals."""
+    if not isinstance(relative, str) or not relative or "\\" in relative:
+        return None, "archive_path 必须是仓库相对路径"
+    posix = PurePosixPath(relative)
+    if posix.is_absolute() or any(p in (".", "..", "") for p in relative.split("/")):
+        return None, "archive_path 不得为绝对路径或包含路径越界片段"
+    base = None
+    for candidate in (ORIGINALS_RELATIVE, *LOCAL_ORIGINALS_RELATIVE):
+        expected = candidate.as_posix() + "/" + sha[:2] + "/" + sha
+        if re.fullmatch(re.escape(expected) + r"\.[a-z0-9]{1,10}", relative):
+            base = candidate
+            break
+    if base is None:
+        return None, "archive_path 应为公开或两个本机原件库 originals/sha前2位/sha.ext 的完整仓库相对路径"
+    path = (Path(root) / posix).resolve()
+    originals = (Path(root) / base).resolve()
+    if not originals.is_relative_to(Path(root).resolve()) or not path.is_relative_to(originals):
+        return None, "archive_path 路径越界（含符号链接）"
+    if not path.is_file():
+        return None, "archive_path 原件不存在"
+    if base == ORIGINALS_RELATIVE and path.stat().st_size > MAX_ORIGINAL_BYTES:
+        return None, "原件超过 5,000,000 bytes，不得放入公开原件库"
+    digest = hashlib.sha256()
+    with path.open("rb") as original:
+        for chunk in iter(lambda: original.read(1 << 20), b""):
+            digest.update(chunk)
+    if digest.hexdigest() != sha:
+        return None, "archive_sha256 与原件内容不符"
+    return path, None
+
+
+def check_sources(folder, files, repository_root=None):
+    """Validate the strict unified header, original hashes and source_id links."""
     issues, notes = [], []
+    root = Path(repository_root or REPO_ROOT)
     path = os.path.join(folder, "sources.csv")
     if not os.path.isfile(path):
         return ["缺少 sources.csv"], notes
-    with open(path, encoding="utf-8", newline="") as f:
-        reader = csv.DictReader(f)
-        if tuple(reader.fieldnames or ()) != SOURCE_FIELDS:
-            return [f"sources.csv 列应为 {','.join(SOURCE_FIELDS)}"], notes
-        rows = list(reader)
+    rows, header = read_sources(path)
+    if header != SOURCE_FIELDS:
+        legacy = "；旧 url 可兼容读取，但必须迁移到新表头后才通过校验" if "url" in header else ""
+        return [f"sources.csv 列应为 {','.join(SOURCE_FIELDS)}{legacy}"], notes
     ids = {}
     for line, r in enumerate(rows, 2):
-        sid = r["source_id"] or ""
+        where = f"sources.csv 第 {line} 行"
+        if None in r:
+            issues.append(f"{where} CSV数据列数多于统一表头")
+        sid = r["source_id"]
         if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", sid):
-            issues.append(f"sources.csv 第 {line} 行 source_id 只能用小写字母、数字和连字符：{sid!r}")
+            issues.append(f"{where} source_id 只能用小写字母、数字和连字符：{sid!r}")
         if sid in ids:
-            issues.append(f"sources.csv 第 {line} 行 source_id 与第 {ids[sid]} 行重复：{sid}")
+            issues.append(f"{where} source_id 与第 {ids[sid]} 行重复：{sid}")
         ids[sid] = line
         if r["grade"] not in SOURCE_GRADES:
-            issues.append(f"sources.csv 第 {line} 行 grade 只能是 {'、'.join(sorted(SOURCE_GRADES))}：{r['grade']!r}")
+            issues.append(f"{where} grade 只能是 {'、'.join(sorted(SOURCE_GRADES))}：{r['grade']!r}")
         if not r["publisher"]:
-            issues.append(f"sources.csv 第 {line} 行缺 publisher")
+            issues.append(f"{where} 缺 publisher")
         for field in ("published", "retrieved"):
-            v = r[field]
-            try:
-                if v and not (re.fullmatch(r"[0-9]{4}-[0-9]{2}-[0-9]{2}", v) and date.fromisoformat(v)):
-                    raise ValueError
-            except ValueError:
-                issues.append(f"sources.csv 第 {line} 行 {field} 须为 YYYY-MM-DD：{v}")
-        for field in ("url", "landing_url"):
-            if r[field] and urlsplit(r[field]).scheme not in ("http", "https"):
-                issues.append(f"sources.csv 第 {line} 行 {field} 不是网址：{r[field]}")
+            if r[field] and not _real_iso_date(r[field]):
+                issues.append(f"{where} {field} 须为 YYYY-MM-DD：{r[field]}")
+        for field in ("landing_url", "file_url", "wayback_url"):
+            if r[field] and not _valid_source_url(r[field]):
+                issues.append(f"{where} {field} 不是有效的 http/https 网址：{r[field]}")
+        if r["grade"] == "官方" and not (r["landing_url"] or r["file_url"]):
+            issues.append(f"{where} 官方来源至少须有 landing_url 或 file_url")
+        status, sha, archive = r["archive_status"], r["archive_sha256"], r["archive_path"]
+        if status not in ARCHIVE_STATUSES:
+            issues.append(f"{where} archive_status 只能是 {'、'.join(sorted(ARCHIVE_STATUSES))}")
+        if sha and not re.fullmatch(r"[0-9a-f]{64}", sha):
+            issues.append(f"{where} archive_sha256 须为64位小写十六进制")
+        if status in STORED_STATUSES:
+            if r["grade"] != "官方" and archive.startswith(ORIGINALS_RELATIVE.as_posix() + "/"):
+                issues.append(f"{where} 公开原件库仅收官方公开原件")
+            if not re.fullmatch(r"[0-9a-f]{64}", sha):
+                issues.append(f"{where} 声称已存原件必须有 archive_sha256")
+            else:
+                _, error = _archive_file(root, archive, sha)
+                if error:
+                    issues.append(f"{where} {error}")
+        elif status == "未取到" and archive:
+            issues.append(f"{where} 未取到不得填写 archive_path 或声称已存原件")
     used = set()
     for fn in files:
         with open(os.path.join(folder, fn), encoding="utf-8-sig", newline="") as f:
@@ -250,6 +346,166 @@ def check_sources(folder, files):
             issues.append(f"{fn} 有 {len(bad)} 行 source_id 为空或未在 sources.csv 登记（如第 {bad[0][0]} 行 {bad[0][1]!r}）")
     unused = sorted(set(ids) - used)
     notes.append(f"来源 {len(ids)} 条" + (f"，未被引用 {len(unused)} 条：{', '.join(unused[:3])}" if unused else ""))
+    return issues, notes
+
+
+def check_originals_index(repository_root=None, index_path=None, source_paths=None):
+    """Offline cross-check of the public original index and registered source rows.
+
+    “Official/public” means an official row with a public HTTP(S) source URL; this
+    mechanical check does not replace human verification of the publisher.
+    """
+    root = Path(repository_root or REPO_ROOT).resolve()
+    directory = root / ORIGINALS_RELATIVE
+    path = Path(index_path) if index_path else directory / "index.csv"
+    issues, notes = [], []
+    if not path.is_file():
+        return ["公开原件库缺 index.csv"], notes
+    with path.open(encoding="utf-8-sig", newline="") as f:
+        reader = csv.DictReader(f)
+        if tuple(reader.fieldnames or ()) != ORIGINAL_INDEX_FIELDS:
+            return ["原件 index.csv 列应为 " + ",".join(ORIGINAL_INDEX_FIELDS)], notes
+        rows = list(reader)
+    if source_paths is None:
+        source_paths = [p for p in root.glob("skills/*/data/**/sources.csv") if "purchased" not in p.parts]
+    source_paths = list(source_paths)
+    catalog = directory / "sources.csv"
+    if catalog.is_file() and catalog not in source_paths:
+        source_paths.append(catalog)
+    sources = {}
+    catalog_rows = []
+    for source_path in source_paths:
+        source_rows, header = read_sources(source_path)
+        if header != SOURCE_FIELDS:
+            issues.append(str(Path(source_path).relative_to(root)) + " 来源表不是统一新表头")
+        if Path(source_path) == catalog:
+            catalog_issues, _ = check_sources(directory, [], root)
+            issues.extend("原件 canonical catalog：" + issue for issue in catalog_issues)
+            catalog_rows = source_rows
+            partial_ids = set()
+            member_path = directory / "assets.csv"
+            if member_path.exists():
+                with member_path.open(encoding="utf-8-sig", newline="") as f:
+                    partial_ids = {r.get("source_id") for r in csv.DictReader(f)}
+            for row in catalog_rows:
+                partial = row.get("archive_status") == "未取到" and row.get("source_id") in partial_ids
+                if (row.get("grade") != "官方" or (not partial and (row.get("archive_status") not in STORED_STATUSES
+                        or not (row.get("archive_path") or "").startswith(ORIGINALS_RELATIVE.as_posix() + "/")))):
+                    issues.append("原件 canonical catalog 仅允许实际已存的官方公开来源（不能登记本机原件）：" + str(row.get("source_id", "")))
+        for row in source_rows:
+            sources.setdefault(row.get("source_id", ""), []).append(row)
+    # A database-only official source may be registered solely in the tracked
+    # catalog. Repeated public identities must agree instead of silently letting
+    # one catalog row override contradictory public provenance.
+    for row in catalog_rows:
+        sid = row.get("source_id", "")
+        for other in sources.get(sid, []):
+            if other is row:
+                continue
+            fields = ("grade", "archive_sha256", "archive_path", "archive_status")
+            conflicts = [field for field in fields if row.get(field, "") != other.get(field, "")]
+            urls = lambda value: {value.get(k) for k in ("landing_url", "file_url", "wayback_url") if value.get(k)}
+            if not urls(row).intersection(urls(other)):
+                conflicts.append("URL")
+            if conflicts:
+                issues.append("原件 canonical catalog 与公开来源不一致：" + sid + "（" + ",".join(conflicts) + "）")
+    # A source can comprise a landing page plus several actual data images.
+    # Each member is registered explicitly; an arbitrary matching URL/hash is insufficient.
+    assets = {}
+    assets_path = directory / "assets.csv"
+    asset_fields = ("source_id", "sha256", "path", "url", "role", "retrieved")
+    if assets_path.exists():
+        with assets_path.open(encoding="utf-8-sig", newline="") as f:
+            reader = csv.DictReader(f)
+            if tuple(reader.fieldnames or ()) != asset_fields:
+                issues.append("原件 assets.csv 表头不符合逐成员规范")
+            for asset in reader:
+                sid = asset.get("source_id", "")
+                key = (sid, asset.get("sha256", ""))
+                if key in assets:
+                    issues.append("原件成员重复：" + sid)
+                assets[key] = asset
+                if not any(x.get("grade") == "官方" for x in sources.get(sid, [])):
+                    issues.append("原件成员没有官方来源：" + sid)
+                if asset.get("role") not in ("data_image", "attachment", "landing_page"):
+                    issues.append("原件成员role非法：" + sid)
+                if not _valid_source_url(asset.get("url", "")) or not _real_iso_date(asset.get("retrieved", "")):
+                    issues.append("原件成员网址或日期非法：" + sid)
+                _, error = _archive_file(root, asset.get("path", ""), asset.get("sha256", ""))
+                if error:
+                    issues.append("原件成员 " + sid + " " + error)
+    seen, indexed_files = set(), set()
+    for line, row in enumerate(rows, 2):
+        where = f"原件 index.csv 第 {line} 行"
+        sha, sid = row.get("sha256") or "", row.get("source_id") or ""
+        pair = (sha, sid)
+        if pair in seen:
+            issues.append(f"{where} (sha256,source_id) 重复")
+        seen.add(pair)
+        if not re.fullmatch(r"[0-9a-f]{64}", sha):
+            issues.append(f"{where} sha256 须为64位小写十六进制")
+            continue
+        try:
+            size = int(row.get("size", ""))
+            if not 0 < size <= MAX_ORIGINAL_BYTES:
+                raise ValueError
+        except (ValueError, TypeError):
+            issues.append(f"{where} size 必须在1—5,000,000 bytes")
+            size = None
+        media = row.get("media_type") or ""
+        if not re.fullmatch(r"[a-z0-9.+-]+/[a-z0-9.+-]+", media):
+            issues.append(f"{where} media_type 须为明确MIME类型")
+        if not _valid_source_url(row.get("source_url") or ""):
+            issues.append(f"{where} source_url 必须为公开 http/https 网址")
+        if not _real_iso_date(row.get("retrieved") or ""):
+            issues.append(f"{where} retrieved 须为真实 YYYY-MM-DD")
+        candidates = list((directory / sha[:2]).glob(sha + ".*"))
+        if len(candidates) != 1:
+            issues.append(f"{where} sha路径应恰好对应一份原件，实际 {len(candidates)} 份")
+            continue
+        relative = candidates[0].relative_to(root).as_posix()
+        actual, error = _archive_file(root, relative, sha)
+        if error:
+            issues.append(f"{where} {error}")
+        if actual:
+            indexed_files.add(actual)
+            if size is not None and actual.stat().st_size != size:
+                issues.append(f"{where} size 与文件实际大小不符")
+        matching = [s for s in sources.get(sid, []) if s.get("grade") == "官方"
+                    and s.get("archive_status") in STORED_STATUSES
+                    and s.get("archive_sha256") == sha and s.get("archive_path") == relative]
+        asset = assets.get((sid, sha))
+        member_match = asset and asset.get("path") == relative and asset.get("url") == row.get("source_url")
+        if not matching and not member_match:
+            issues.append(f"{where} source_id 未关联同hash/路径的官方已存原件来源或登记成员")
+        elif matching and not member_match and not any(row.get("source_url") in (s.get("landing_url"), s.get("file_url"), s.get("wayback_url")) for s in matching):
+            issues.append(f"{where} source_url 与登记的官方来源链接不符")
+    for sid, source_rows in sources.items():
+        for row in source_rows:
+            if row.get("archive_status") not in STORED_STATUSES:
+                continue
+            sha, relative = row.get("archive_sha256") or "", row.get("archive_path") or ""
+            if not re.fullmatch(r"[0-9a-f]{64}", sha):
+                issues.append(f"来源 {sid} 已存原件缺有效archive_sha256")
+                continue
+            _, error = _archive_file(root, relative, sha)
+            if error:
+                issues.append(f"来源 {sid} {error}")
+            if (relative.startswith(ORIGINALS_RELATIVE.as_posix() + "/")
+                    and (sha, sid) not in seen):
+                issues.append(f"来源 {sid} 声称已存原件但缺原件库索引")
+    for (sid, sha), asset in assets.items():
+        if (sha, sid) not in seen:
+            issues.append("原件成员未登记index：" + sid)
+    attributes = directory / ".gitattributes"
+    if attributes.exists() and attributes.read_bytes() != b"*/* -text -diff -merge\n":
+        issues.append("原件Git属性必须禁止文本转换、文本diff和自动merge，不得配置转换filter")
+    if directory.exists():
+        for candidate in directory.rglob("*"):
+            metadata_files = {directory / "index.csv", directory / "README.md", directory / "sources.csv", directory / ".gitattributes", directory / "assets.csv"}
+            if candidate.is_file() and candidate not in metadata_files and candidate.resolve() not in indexed_files:
+                issues.append("公开原件文件未入index或路径不规范：" + candidate.relative_to(root).as_posix())
+    notes.append(f"原件索引 {len(rows)} 条，{len(indexed_files)} 份去重原件")
     return issues, notes
 
 
@@ -324,6 +580,11 @@ def main():
         if province not in os.listdir(DATA) or not os.path.isdir(os.path.join(DATA, province)):
             parser.error(f"未知省份目录：{province}")
     n_issue = 0
+    issues, notes = check_originals_index()
+    print(f"## 公开原件库：{'；'.join(notes) or '—'}")
+    for issue in issues:
+        print(f"    ⚠ {issue}")
+        n_issue += 1
     issues, notes = check_after_entry_file(os.path.join(DATA, "after-entry-opportunities.csv"))
     print(f"## after-entry-opportunities.csv：{'；'.join(notes) or '—'}")
     for issue in issues:

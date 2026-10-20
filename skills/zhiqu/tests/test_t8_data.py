@@ -92,7 +92,10 @@ class TestSelectedUniversitiesData(unittest.TestCase):
         data.mkdir()
         (data / "schools.csv").write_text("code,name,source_id\n10001,模拟大学,demo-source\n", encoding="utf-8")
         (data / "jiangsu").mkdir()
-        src = ",".join(validate_data.SOURCE_FIELDS) + "\ndemo-source,官方,教育部,,,,,,,\n"
+        source = dict.fromkeys(validate_data.SOURCE_FIELDS, "")
+        source.update(source_id="demo-source", grade="官方", publisher="教育部",
+                      landing_url="https://www.moe.gov.cn/test", archive_status="未取到")
+        src = ",".join(validate_data.SOURCE_FIELDS) + "\n" + ",".join(source[k] for k in validate_data.SOURCE_FIELDS) + "\n"
         for folder in (data, data / "jiangsu"):
             (folder / "sources.csv").write_text(src, encoding="utf-8")
         for provinces in ([], ["jiangsu"]):
@@ -101,6 +104,7 @@ class TestSelectedUniversitiesData(unittest.TestCase):
                 with self.subTest(provinces=provinces, valid=valid), \
                         patch.object(validate_data, "DATA", str(data)), \
                         patch.object(validate_data, "CAREER_DATA", self.tmp.name), \
+                        patch.object(validate_data, "check_originals_index", return_value=([], [])), \
                         patch.object(validate_data, "check_after_entry_file", return_value=([], [])), \
                         patch.object(validate_data, "check_competition_file", return_value=([], [])), \
                         patch.object(validate_data, "check_file") as admission_checker, \

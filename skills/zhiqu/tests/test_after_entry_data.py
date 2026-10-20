@@ -110,12 +110,16 @@ class TestAfterEntryData(unittest.TestCase):
         data = Path(self.tmp.name)
         (data / "schools.csv").write_text("code,name,source_id\n10001,模拟大学,demo-source\n", encoding="utf-8")
         (data / "jiangsu").mkdir()
-        src = ",".join(validate_data.SOURCE_FIELDS) + "\ndemo-source,官方,教育部,,,,,,,\n"
+        source = dict.fromkeys(validate_data.SOURCE_FIELDS, "")
+        source.update(source_id="demo-source", grade="官方", publisher="教育部",
+                      landing_url="https://www.moe.gov.cn/test", archive_status="未取到")
+        src = ",".join(validate_data.SOURCE_FIELDS) + "\n" + ",".join(source[k] for k in validate_data.SOURCE_FIELDS) + "\n"
         for folder in (data, data / "jiangsu"):
             (folder / "sources.csv").write_text(src, encoding="utf-8")
         self.write(dict(self.row, source_url=""))
         for provinces in ([], ["jiangsu"]):
             with self.subTest(provinces=provinces), patch.object(validate_data, "DATA", str(data)), \
+                    patch.object(validate_data, "check_originals_index", return_value=([], [])), \
                     patch.object(sys, "argv", ["validate_data.py", *provinces]), \
                     redirect_stdout(io.StringIO()) as output:
                 with self.assertRaises(SystemExit) as result:
