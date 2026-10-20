@@ -2,7 +2,7 @@
   "schema_version": 1,
   "case_id": "2028-YJ-S02",
   "source_sha256": {
-    "case.json": "167bdabeba2c92d9ba2eb4edc098e16c188cb50fad22f4dfe229810bd74b63c7",
+    "case.json": "ef1afebd889d71eb59526b74be04ec617e08cbf4124b50f2d0585833193cddea",
     "profile_parse.json": "1ba7bfd4bbb2bb0e54318c5ff1008c1f577e406d5ac5c88a6fa37c3e4dabc6e5",
     "directions.json": "e11eb75bac9a1378195f15ef805daf0ffe3d0a4c2306d317d6d9944265b8008b",
     "rules_check.json": "248a80156349f8bee1d5de049d1153408fc4548108e5895abb5bba17d5c7cb03",
@@ -16,11 +16,11 @@
   },
   "contract_sha256": "e781c97093c55d81424be0d6ab395190a6eebb25009367f9bf1d68bbdd05eb6c",
   "tool_sha256": {
-    "planning_report.py": "c081861d47fc087bac49bbcf976859252378789e4de94c0e05cdb96b7302ee09",
+    "planning_report.py": "77d252c484065f3fe298fc87166069cb600898e0182cc06cadab52bbfaa34436",
     "planning_workflow.py": "ee2d438232e89d2abbaef38ac668fdcd6cc6aea42f554b44408e67fdd7186d13",
     "operator_check.py": "a6552c0b63a8a6b5d15c9a1057fbc2884fb85435b1b102fbf4a48dd74c4e7ebb",
     "check_demos.py": "fc8e1625f9e052373756160514ad5c73db1e8451c233425918edb5bc839d9f63",
-    "report.py": "be60413e446a8dc53f68f14351a681811bfc49ed47c480a3a4281a1dc7274d94",
+    "report.py": "e3a85bf877d81d622512947383eb16b4ea3a9f351945c47f9ea2ba615558c02a",
     "render_report.py": "707d4a3dd6780cc249ddd5620f37152d525313c3a64de75c676758eef11fb5c8",
     "profile_store.py": "1cfd828583598a65cf719a46447cb3112ef0170eb1a638b89ab023cb47a04e7f"
   },
@@ -42,6 +42,18 @@
       "ref": "{{k:/context/as_of}}",
       "value": "2026-10-19",
       "display": "2026-10-19"
+    },
+    {
+      "location": "meta.conclusion",
+      "ref": "{{p:/fields/14/value/academic_rank}}",
+      "value": 7,
+      "display": "7"
+    },
+    {
+      "location": "meta.conclusion",
+      "ref": "{{p:/fields/14/value/comprehensive_rank}}",
+      "value": 9,
+      "display": "9"
     },
     {
       "location": "01.kpis.1",
@@ -411,9 +423,9 @@
     }
   ],
   "artifacts": {
-    "report.md": "c2a04b7f5caab38cf5736708b67d1b694aaef8bfae30d6db6b10045a1f5161c5",
-    "report.html": "b0a854d49ea0f62893d8511532f8c92feb033ad2e6ca8fb067e68137b2780558",
-    "report.pdf": "8fafb48aed3874bddc52065d60df3e5bb9e9fa917cd4348ed08104dd28faa027"
+    "report.md": "ae34007d0976fbf6249a44b1d8a5192b84136e93ccb022dd7be92fdd4b09c131",
+    "report.html": "302ce198f2cbbee0afba7b077f17583743ac232d088c417df7e54e01537aad5d",
+    "report.pdf": "27f5f3b70c3abe29c393c3d2cc62866fdbad59a9fd8ca8c61cf60ac314ff9596"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "report_profile": {

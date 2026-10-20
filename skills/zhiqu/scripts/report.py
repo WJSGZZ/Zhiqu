@@ -894,12 +894,6 @@ def build(rep, opt):
     pfall = (opt or {}).get("p_fall")
     stress = (opt or {}).get("stress", {})
     top = [x for x in lst if x["p_land"] >= 0.005]
-    # 以原专业录取、且偏好分 ≥ 70 的概率（被调剂的部分不计入）
-    def good(x):
-        if x.get("majors"):  # 专业组：按组内实际落到的专业计
-            return sum(m["p"] for m in x["majors"] if m["utility"] >= 70)
-        return x["p_land"] - x.get("p_adjusted", 0) if x["utility"] >= 70 else 0.0
-    p_good = sum(good(x) for x in lst) if lst else None
     likely = max(lst, key=lambda x: x["p_land"]) if lst else None
     sims = ((opt or {}).get("params") or {}).get("sims") or 4000
     grade = m.get("prob_grade", "A")
@@ -947,7 +941,8 @@ def build(rep, opt):
         body += ('<div class="kpis">'
                  f'<div><b>推荐志愿数</b><span class="num">{len(lst)}</span><em>本批次可填 {E(str(m.get("slots", "–")))} 个</em></div>'
                  f'<div><b>最可能的去向</b><span style="font-size:11pt">{E(likely_name)}</span><em>{"概率" + ("" if grade == "B" else "约 ") + fmt(likely_p) if numeric else "落点最集中的志愿（本省评级不给精确概率）"}</em></div>'
-                 + (f'<div><b>满意度 70 分以上的概率</b><span class="num">{fmt(p_good)}</span><em>{E(m.get("utility_scale", UTILITY_SCALE))}</em></div>' if numeric else
+                 # 平均满意度而不是“70 分以上的概率”：100 分是理想组合，位次靠后的考生整张表都到不了 70，固定门槛会读成“注定不满意”（R07 实测为 0%）。
+                 + (f'<div><b>平均满意度（0—100）</b><span class="num">{eu:.1f} 分</span><em>表里最高的志愿 {max(x["utility"] for x in lst):.0f} 分。{E(m.get("utility_scale", UTILITY_SCALE))}</em></div>' if numeric and eu is not None else
                     f'<div><b>冲 / 稳 / 保</b><span class="num">{" / ".join(str(sum(x["tag"] == t for x in lst)) for t in ("冲", "稳", "保"))}</span><em>按模型过线可能性分档，不给百分比</em></div>')
                  + (f'<div><b>滑档风险</b><span class="num">{fall_txt(pfall)}</span><em>录取线整体大波动时 {fall_txt(stress.get("p_fall"))}</em></div>' if grade == "A" or pfall else
                     f'<div><b>滑档风险</b><span class="num">未出现</span><em>{sims:,} 次模拟中没有出现滑档；录取线整体大波动时{"也没有" if not stress.get("p_fall") else "：" + fall_txt(stress.get("p_fall"))}</em></div>')

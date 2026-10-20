@@ -53,7 +53,7 @@
     "stage": "求职版 · 应届探索",
     "region": "浙江",
     "data_asof": "{{k:/context/as_of}}",
-    "conclusion": "以企业技术岗位为主线，电网按条件保留，公职不盲目并行。"
+    "conclusion": "你是浙江电气本科、{{k:/target_year}} 届，想做设备测试、调试或技术支持，家里更希望你去电网或考公。建议以企业技术岗为主线，电网按具体岗位条件保留，公职先核具体职位，不同时备所有考试。不找到工作的话，手头可动用的现金约能撑 {{c:/buffer_months|1f}} 个月，等待要设边界。"
   },
   "calculation_plan": {
     "engine": "registered_operations",

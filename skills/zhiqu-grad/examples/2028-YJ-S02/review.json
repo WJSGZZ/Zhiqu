@@ -165,7 +165,7 @@
     "verification_scope": "本轮更新为附核对材料的PDF，自评和机器核对通过后仍等待独立审核；未补造官方原文和独立批准。"
   },
   "snapshot": {
-    "case.json": "167bdabeba2c92d9ba2eb4edc098e16c188cb50fad22f4dfe229810bd74b63c7",
+    "case.json": "ef1afebd889d71eb59526b74be04ec617e08cbf4124b50f2d0585833193cddea",
     "profile_parse.json": "1ba7bfd4bbb2bb0e54318c5ff1008c1f577e406d5ac5c88a6fa37c3e4dabc6e5",
     "directions.json": "e11eb75bac9a1378195f15ef805daf0ffe3d0a4c2306d317d6d9944265b8008b",
     "rules_check.json": "248a80156349f8bee1d5de049d1153408fc4548108e5895abb5bba17d5c7cb03",
@@ -174,10 +174,10 @@
     "calculations.json": "00e5087c418c579371b17558494a9c4c1f865b0b051ef63fc1a3c9a51a89cd87",
     "judgment.json": "38eed4d2e7e0e329c1beb9d7b029069ef4907552ad2ae15cf9019bd5bc4f9add",
     "narrative.json": "cdaf672fa9a3877e1e9b218b516cf5eee06ef7887fddb6a4d1367480e15222a4",
-    "report.md": "c2a04b7f5caab38cf5736708b67d1b694aaef8bfae30d6db6b10045a1f5161c5",
-    "report.html": "b0a854d49ea0f62893d8511532f8c92feb033ad2e6ca8fb067e68137b2780558",
-    "report.pdf": "8fafb48aed3874bddc52065d60df3e5bb9e9fa917cd4348ed08104dd28faa027",
-    "report_trace.json": "8903b47600e9ad5a7329fbadb6be31cafd3f589b19f19814c94b817c86f9d2e9",
+    "report.md": "ae34007d0976fbf6249a44b1d8a5192b84136e93ccb022dd7be92fdd4b09c131",
+    "report.html": "302ce198f2cbbee0afba7b077f17583743ac232d088c417df7e54e01537aad5d",
+    "report.pdf": "27f5f3b70c3abe29c393c3d2cc62866fdbad59a9fd8ca8c61cf60ac314ff9596",
+    "report_trace.json": "08b80a4cd90dc66d087e9e23015b91bc2c00a91c4516cfaaf5b9e3d9d67eaba0",
     "operator_check.md": "fa8cc559781a105e060e1101da37e2cbe7836dd40b76217663ad777316c8b01c",
     "profile.json": "b04770d7a2589f2dbe7b35a80efaad8953b8db8666a26db85875f82cfc9eaf72",
     "profile-supplement.txt": "6d3fe85c4f5f9393a284253436e9dd3ae7a719f9ff73222d052dc7224a274e0f"
@@ -214,6 +214,18 @@
         "report_trace.json"
       ],
       "reason": "报告改版（2026-10-20）：正文给读者、第 12 节“核对与来源”给核对；比较矩阵、追问、风险改为三类报告共用的卡片和标记，图表配色统一。 report.md 只把追问和风险表格换成卡片标记，文字与全部输入未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "case.json",
+        "report.html",
+        "report.md",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "封面一句话结论按高考同款写法重写为两三句（本人情况、建议及关键数字、先做什么），数字均为登记引用；正文与结论不变。"
     }
   ]
 }
