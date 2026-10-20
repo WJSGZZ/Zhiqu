@@ -1,5 +1,7 @@
 # 数据目录与年度更新
 
+数据格式与考研共用一套规范，见 [data-model.md](../../zhiqu-shared/references/data-model.md)。
+
 ## 目录
 
 | 位置 | 内容 |
