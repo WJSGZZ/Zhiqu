@@ -42,7 +42,7 @@ def _quantile(sorted_values, q):
 
 STATS = {'min': lambda v: v[0], 'max': lambda v: v[-1], 'median': lambda v: _quantile(v, .5),
          'q1': lambda v: _quantile(v, .25), 'q3': lambda v: _quantile(v, .75), 'count': len}
-STAT_NAMES = {'min': '最低', 'max': '最高', 'median': '中位数', 'q1': '下四分位', 'q3': '上四分位', 'count': '人数'}
+STAT_NAMES = {'min': '最低', 'max': '最高', 'median': '中位数', 'q1': '下四分位', 'q3': '上四分位', 'count': '个数'}
 
 
 def _registered(case, profile, evidence):
@@ -73,7 +73,12 @@ def _registered(case, profile, evidence):
             values = [x for v in raw for x in (v if isinstance(v, list) else [v])]
             if not values: raise ValueError('计算输入为空')
             value = STATS[algorithm](sorted(values))
-            formula = f'{len(values)} 个分数排序后取{STAT_NAMES[algorithm]}（四分位按含端点的线性插值）'
+            # 说明按数据项命名（计算项自带 item_name、unit），不写死“分数”：同一算法也用于竞争比、工资等匿名列表。
+            item = op.get('item_name') or '数值'; unit = f'（单位：{op["unit"]}）' if op.get('unit') else ''
+            if algorithm == 'count': formula = f'数出 {len(values)} 个{item}'
+            else:
+                formula = f'{len(values)} 个{item}{unit}排序后取{STAT_NAMES[algorithm]}'
+                if algorithm in ('q1', 'median', 'q3'): formula += '（四分位按含端点的线性插值）'
             if not numeric(value): raise ValueError('计算结果不是有限数值')
             return value, [len(values)], formula
         values = [resolve(v) for v in inputs]

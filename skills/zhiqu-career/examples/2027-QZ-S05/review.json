@@ -25,7 +25,7 @@
         {
           "id": "traceability",
           "score": 1,
-          "reason": "官方数字均有原文摘录与链接，省考竞争比附匿名比值可复算；但企业岗位原文、国考2027职位表（验证码）、国网浙江公告、省考2027公告均未取到，工资价位是2022年数据。",
+          "reason": "官方数字均有原文摘录与链接；省考竞争比的匿名比值存于 case.json.anonymous_data，统计量为登记计算项可复算；企业岗位原文、国考2027职位表（验证码）、国网浙江公告、省考2027公告仍未取到，工资价位是2022年数据。",
           "report_location": "12、附录"
         },
         {
@@ -73,7 +73,7 @@
         {
           "id": "layout",
           "score": 1,
-          "reason": "版面门禁通过、逐页速览已看；第 6 页因矩阵整体换页留有空白，附录计算项沿用共用工具的“分数/人数”措辞，待独立视觉复核。",
+          "reason": "版面门禁（含新的正文页空白检查）通过、逐页速览已看；第 6 页改为先放解读段落再放矩阵，空白从版心 33% 降到约 26%，未拆矩阵；附录计算项说明已按数据项命名。",
           "report_location": "06、附录"
         }
       ],
@@ -123,13 +123,13 @@
       {
         "item": "取页摘要当原文",
         "result": "pass",
-        "note": "所有官方摘录对本机原件（curl 字节原件或浏览器渲染文本）逐字检索命中；工行页面为浏览器渲染文本，已在来源注明。"
+        "note": "所有官方摘录对本机原件（curl 字节原件或浏览器渲染文本）逐字检索命中；工行、国网、普华永道页面为浏览器渲染文本，已在来源注明；国网三条 2026-10-20 重新打开核对。"
       }
     ],
     "limitations": [
       "操控者尚未填写核查单，未经独立复核，不能据此交付真实客户。",
-      "国网三条证据沿用本项目 2026-10-19 浏览器取文，本会话未重新取到原页。",
-      "省考竞争比与工资价位为上一届/2022 年数据，只作相对参照。"
+      "省考竞争比与工资价位为上一届/2022 年数据，只作相对参照。",
+      "国考2027职位表（需验证码）、国网浙江第一批公告、普华永道报名条件仍未取到。"
     ],
     "sampled_sources": [
       {
@@ -144,57 +144,57 @@
         "matches": true
       },
       {
-        "id": "E016",
-        "claim": "省考上一届：限应届且只写工商管理类等大类职位的竞争比",
-        "source_url": "http://omwb.oss-cn-beijing.aliyuncs.com/zjgwy2026/62329aa17fc3cd317d9b65201ef85e93",
-        "locator": "缴费报名情况一览表：招录人数、缴费人数两列；样例行见摘录",
-        "excerpt": "淳安县乡镇机关 | 工作人员2一级主任科员及以下 | 13301012025000002 | 2 | 48",
-        "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
-        "original_sha256": "adc811f722d903a9ecdafaddcac0d89a7d3d1e8dc2ecd42306a12672fe422d6a",
-        "retrieved_on": "2026-10-20",
-        "matches": true
-      },
-      {
-        "id": "E023",
-        "claim": "杭州工资价位：工龄三年及以下（不分职业） 25%分位",
+        "id": "E019",
+        "claim": "杭州工资价位：会计专业人员 75%分位",
         "source_url": "https://zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/jcms_files/jcms1/web3095/site/attach/0/cdc97ab7d30243db95368bb1c34b4cf3.pdf",
-        "locator": "第23页 工龄三年及以下（不分职业）行 25%分位值",
-        "excerpt": "3（含）年以下 46986 60000 81580 121000 187680（九、分工龄企业从业人员工资价位，单位：元/年）",
+        "locator": "第13页 会计专业人员行 75%分位值",
+        "excerpt": "会计专业人员 52810 69120 95000 138496 213481（单位：元/年；列为10%、25%、50%、75%、90%分位值）",
         "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
         "original_sha256": "7853501ef5272cc5571aff36c7c791b0832d25941ea319095cea28236240ee6d",
         "retrieved_on": "2026-10-20",
         "matches": true
       },
       {
-        "id": "E033",
-        "claim": "工行2027校招：网上报名截止",
-        "source_url": "https://job.icbc.com.cn/pc/index.html#/main/school/announDetail/00000000000010659029",
-        "locator": "三、招聘流程（一）网上报名",
-        "excerpt": "（一）网上报名。时间为2026年9月4日-10月8日。",
+        "id": "E026",
+        "claim": "杭州工资价位：大学本科（不分职业） 25%分位",
+        "source_url": "https://zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/jcms_files/jcms1/web3095/site/attach/0/cdc97ab7d30243db95368bb1c34b4cf3.pdf",
+        "locator": "第24页 大学本科（不分职业）行 25%分位值",
+        "excerpt": "大学本科 64199 97715 162899 264000 408604（十、分学历企业从业人员工资价位，单位：元/年）",
         "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
-        "original_sha256": "d42974b6ade0181499d9b3d81683a0b9280ed6171fab181148d90001531ab13f",
+        "original_sha256": "7853501ef5272cc5571aff36c7c791b0832d25941ea319095cea28236240ee6d",
         "retrieved_on": "2026-10-20",
         "matches": true
       },
       {
-        "id": "E034",
-        "claim": "工行2027校招：条件以各机构公告为准",
-        "source_url": "https://job.icbc.com.cn/pc/index.html#/main/school/announDetail/00000000000010659029",
-        "locator": "一、招聘对象",
-        "excerpt": "主要面向毕业时间为2026年1月至2027年7月的境内外高校毕业生。具体招聘范围及条件以各机构招聘公告为准。",
-        "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
-        "original_sha256": "d42974b6ade0181499d9b3d81683a0b9280ed6171fab181148d90001531ab13f",
-        "retrieved_on": "2026-10-20",
-        "matches": true
-      },
-      {
-        "id": "E035",
-        "claim": "初级会计：须在一个考试年度内通过全部科目",
+        "id": "E036",
+        "claim": "初级会计：上一年度报名截止日",
         "source_url": "http://kjs.mof.gov.cn/gongzuotongzhi/202511/t20251127_3977584.htm",
-        "locator": "二、报名条件与成绩管理",
-        "excerpt": "参加初级会计资格考试的人员，应在1个考试年度内通过全部科目的考试，方可取得初级会计资格证书",
+        "locator": "三、报名时间",
+        "excerpt": "2026年1月5日至1月27日，全国会计人员统一服务管理平台开通初级、高级会计资格考试报名。……考试报名统一在1月27日12:00截止",
         "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
         "original_sha256": "e9479b0a933449e1624b05b5ed2952a3f6896f459cf283648dbe839c40840eb5",
+        "retrieved_on": "2026-10-20",
+        "matches": true
+      },
+      {
+        "id": "E037",
+        "claim": "初级会计：上一年度考试开始日",
+        "source_url": "http://kjs.mof.gov.cn/gongzuotongzhi/202511/t20251127_3977584.htm",
+        "locator": "四、考试时间",
+        "excerpt": "初级会计资格考试于2026年5月16日至18日举行，共6个批次。",
+        "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
+        "original_sha256": "e9479b0a933449e1624b05b5ed2952a3f6896f459cf283648dbe839c40840eb5",
+        "retrieved_on": "2026-10-20",
+        "matches": true
+      },
+      {
+        "id": "E050",
+        "claim": "国网：设有财务会计类考试大纲",
+        "source_url": "https://zhaopin.sgcc.com.cn/sgcchr/static/unitPart.html?bullet_id=dcefb56d04714dc4b488d0a7a204bf76",
+        "locator": "附件列表",
+        "excerpt": "附件:《5.考试大纲-财务会计类（2027版）.pdf》",
+        "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
+        "original_sha256": "7df871773cab12d563a4143f70aece32746d7b895683155f85a49551f90c5b7a",
         "retrieved_on": "2026-10-20",
         "matches": true
       }
@@ -214,9 +214,6 @@
       "E010",
       "E012",
       "E013",
-      "E014",
-      "E015",
-      "E016",
       "E017",
       "E018",
       "E019",
@@ -244,15 +241,20 @@
       "E042",
       "E043",
       "E044",
-      "E045"
+      "E045",
+      "E048",
+      "E049",
+      "E050",
+      "E052",
+      "E053"
     ],
     "picked": [
       "E005",
-      "E016",
-      "E023",
-      "E033",
-      "E034",
-      "E035"
+      "E019",
+      "E026",
+      "E036",
+      "E037",
+      "E050"
     ],
     "results": [
       {
@@ -267,79 +269,79 @@
         "matches": true
       },
       {
-        "id": "E016",
-        "claim": "省考上一届：限应届且只写工商管理类等大类职位的竞争比",
-        "source_url": "http://omwb.oss-cn-beijing.aliyuncs.com/zjgwy2026/62329aa17fc3cd317d9b65201ef85e93",
-        "locator": "缴费报名情况一览表：招录人数、缴费人数两列；样例行见摘录",
-        "excerpt": "淳安县乡镇机关 | 工作人员2一级主任科员及以下 | 13301012025000002 | 2 | 48",
-        "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
-        "original_sha256": "adc811f722d903a9ecdafaddcac0d89a7d3d1e8dc2ecd42306a12672fe422d6a",
-        "retrieved_on": "2026-10-20",
-        "matches": true
-      },
-      {
-        "id": "E023",
-        "claim": "杭州工资价位：工龄三年及以下（不分职业） 25%分位",
+        "id": "E019",
+        "claim": "杭州工资价位：会计专业人员 75%分位",
         "source_url": "https://zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/jcms_files/jcms1/web3095/site/attach/0/cdc97ab7d30243db95368bb1c34b4cf3.pdf",
-        "locator": "第23页 工龄三年及以下（不分职业）行 25%分位值",
-        "excerpt": "3（含）年以下 46986 60000 81580 121000 187680（九、分工龄企业从业人员工资价位，单位：元/年）",
+        "locator": "第13页 会计专业人员行 75%分位值",
+        "excerpt": "会计专业人员 52810 69120 95000 138496 213481（单位：元/年；列为10%、25%、50%、75%、90%分位值）",
         "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
         "original_sha256": "7853501ef5272cc5571aff36c7c791b0832d25941ea319095cea28236240ee6d",
         "retrieved_on": "2026-10-20",
         "matches": true
       },
       {
-        "id": "E033",
-        "claim": "工行2027校招：网上报名截止",
-        "source_url": "https://job.icbc.com.cn/pc/index.html#/main/school/announDetail/00000000000010659029",
-        "locator": "三、招聘流程（一）网上报名",
-        "excerpt": "（一）网上报名。时间为2026年9月4日-10月8日。",
+        "id": "E026",
+        "claim": "杭州工资价位：大学本科（不分职业） 25%分位",
+        "source_url": "https://zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/jcms_files/jcms1/web3095/site/attach/0/cdc97ab7d30243db95368bb1c34b4cf3.pdf",
+        "locator": "第24页 大学本科（不分职业）行 25%分位值",
+        "excerpt": "大学本科 64199 97715 162899 264000 408604（十、分学历企业从业人员工资价位，单位：元/年）",
         "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
-        "original_sha256": "d42974b6ade0181499d9b3d81683a0b9280ed6171fab181148d90001531ab13f",
+        "original_sha256": "7853501ef5272cc5571aff36c7c791b0832d25941ea319095cea28236240ee6d",
         "retrieved_on": "2026-10-20",
         "matches": true
       },
       {
-        "id": "E034",
-        "claim": "工行2027校招：条件以各机构公告为准",
-        "source_url": "https://job.icbc.com.cn/pc/index.html#/main/school/announDetail/00000000000010659029",
-        "locator": "一、招聘对象",
-        "excerpt": "主要面向毕业时间为2026年1月至2027年7月的境内外高校毕业生。具体招聘范围及条件以各机构招聘公告为准。",
-        "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
-        "original_sha256": "d42974b6ade0181499d9b3d81683a0b9280ed6171fab181148d90001531ab13f",
-        "retrieved_on": "2026-10-20",
-        "matches": true
-      },
-      {
-        "id": "E035",
-        "claim": "初级会计：须在一个考试年度内通过全部科目",
+        "id": "E036",
+        "claim": "初级会计：上一年度报名截止日",
         "source_url": "http://kjs.mof.gov.cn/gongzuotongzhi/202511/t20251127_3977584.htm",
-        "locator": "二、报名条件与成绩管理",
-        "excerpt": "参加初级会计资格考试的人员，应在1个考试年度内通过全部科目的考试，方可取得初级会计资格证书",
+        "locator": "三、报名时间",
+        "excerpt": "2026年1月5日至1月27日，全国会计人员统一服务管理平台开通初级、高级会计资格考试报名。……考试报名统一在1月27日12:00截止",
         "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
         "original_sha256": "e9479b0a933449e1624b05b5ed2952a3f6896f459cf283648dbe839c40840eb5",
+        "retrieved_on": "2026-10-20",
+        "matches": true
+      },
+      {
+        "id": "E037",
+        "claim": "初级会计：上一年度考试开始日",
+        "source_url": "http://kjs.mof.gov.cn/gongzuotongzhi/202511/t20251127_3977584.htm",
+        "locator": "四、考试时间",
+        "excerpt": "初级会计资格考试于2026年5月16日至18日举行，共6个批次。",
+        "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
+        "original_sha256": "e9479b0a933449e1624b05b5ed2952a3f6896f459cf283648dbe839c40840eb5",
+        "retrieved_on": "2026-10-20",
+        "matches": true
+      },
+      {
+        "id": "E050",
+        "claim": "国网：设有财务会计类考试大纲",
+        "source_url": "https://zhaopin.sgcc.com.cn/sgcchr/static/unitPart.html?bullet_id=dcefb56d04714dc4b488d0a7a204bf76",
+        "locator": "附件列表",
+        "excerpt": "附件:《5.考试大纲-财务会计类（2027版）.pdf》",
+        "method": "本机保存的原件（xik-crawl 取文回执）逐字检索；不是搜索摘要",
+        "original_sha256": "7df871773cab12d563a4143f70aece32746d7b895683155f85a49551f90c5b7a",
         "retrieved_on": "2026-10-20",
         "matches": true
       }
     ]
   },
   "snapshot": {
-    "case.json": "747db87c1436b7df11654bf351dd05084434bc0fd26d4a55ffad2397d2f8358f",
+    "case.json": "05cf7f944cdc718196d9f0a98dfe8e456cd7a42104d8ec260d598d5c116b8eef",
     "profile_parse.json": "bef4c373f4f3e2c4c29f5382f4899cbfa2055bf7848b6e6efc4bb06542b6d4dc",
     "directions.json": "c596542a75e4d5caa51814b26c579c39025f30f53abb8a6e495db95c50c781b2",
-    "rules_check.json": "0a03cb3f10d3f0eb1eb5d392722877bfd4fe437ce3fdc44f70a305444e00502e",
-    "candidates.json": "0fc093040e4475d0111f18d3c46caa7478fa0e87d449e2496e849dc327c1ae49",
-    "evidence.json": "cb594054511798e445f81f15d4fac94ac4e3b9cbbd6dc0cf65d6722167cce7ce",
+    "rules_check.json": "97d370958806925e975acac686272114fc6e0a8c331ab3ede958c87edb4ca240",
+    "candidates.json": "25cd8c14aca6037ea7a7059de5fb2ffac815e9251911ab2e330f87f27d22d5d3",
+    "evidence.json": "5ee87b6aa1c50db703154ae05c7ae28fa153d7c440cd0f376363ee25c0a62048",
     "calculations.json": "d4d64f9635fb2d2fcd3e532e7f3f1fdd8ba8f2602919bd0097a645e10133934b",
-    "judgment.json": "4ad9f2393566232d6c6e9697057230ca61b517ab936ee63f9063ca0171380ced",
-    "narrative.json": "28e6cb7c99a6a7c6fca83c4e3494fa6d34e452d7f4c35432309fc26eaf8f8f98",
+    "judgment.json": "59baed266dba9e951803f02cc90f9a62c64b6a61b1fa803d514dc74447a28131",
+    "narrative.json": "15c1d32fde373113162744c4163aa467c43f580eec16616b858b831e858ee80a",
     "profile.json": "f8c7a4b076a64c168d303710ea8836b70a79ffe5d53ce7521045bfe4ae4c2d1f",
     "profile-supplement.txt": "247f31f22f4c9a6c33394b5b25e3b37ef21c19fd3b9c12a70a83839f7976b026",
-    "report.md": "7b76cb178eb5bb605d3c62e933a4b4c43f703753396371b602b033af90c52f0e",
-    "report.html": "ba1694e2bce599950ca2420c8887f4d4e30a055ca6ee44e8864851f3b637b29c",
-    "report.pdf": "21993ec40744b93c7adb2bf50c0771e3a8e8cefeec9ef1ff54637e5ece4672d3",
-    "report_trace.json": "bb510d972caeb53dfa6572be59d2f24a1561f3fcfd8cedf8d0278b7f00051772",
-    "operator_check.md": "d9f6dddad17cd13b9f7817a8f7b7c35d27abc6b6b600088fc4cf457b1ec56cae"
+    "report.md": "98c7ca073db34621115287b6e389b58cb2d214b803b3402fbbcfcd4bc0f70d82",
+    "report.html": "7ba6986056086caf32456c07059612fa30db4dfa71ca1d0c197b6c25d04a9930",
+    "report.pdf": "7a3b13ecd90d9c43aa4b14d5d3f60280260dd53a273c356ccb5707478b024802",
+    "report_trace.json": "f3938f98804c50fa256eae0a8afd9f690b98ba034d0a200591efac4bc3800ce4",
+    "operator_check.md": "cc7f6d9cda237c1014b8a7e7f57ade126c4cd4e150a50158d430038ea522eccd"
   },
   "snapshot_refreshes": [
     {
@@ -352,6 +354,25 @@
         "report_trace.json"
       ],
       "reason": "区间图数字格式统一；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "case.json",
+        "candidates.json",
+        "evidence.json",
+        "rules_check.json",
+        "judgment.json",
+        "narrative.json",
+        "calculations.json",
+        "report.md",
+        "report.html",
+        "report.pdf",
+        "report_trace.json",
+        "operator_check.md"
+      ],
+      "reason": "按主模型返工单修改：省考竞争比改为 case.json.anonymous_data 匿名列表 + 计算项，evidence 只登记两张原表；“只写大类”口径改为恰有类名“工商管理类”（98 个，旧缓存 104 多算 6 个只写具体专业“工商管理”的职位）并加本科专业目录证据；国网三条证据 2026-10-20 浏览器重新逐字核对；初级会计“两科都要考”改登记为推测等级并写依据；新增税务系统 2027 专业参考目录、安永目标人群、国网不收费与财务会计类大纲；第 5 节把解读竞争图的段落移到矩阵前，减少换页空白。共用 verification_calculations.py 统计说明、report.py 路线图卡片分页、check_layout.py 空白检查同时变更，故重新生成并重做自评快照；自评分不变。"
     }
   ]
 }
