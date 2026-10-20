@@ -175,9 +175,9 @@
     "judgment.json": "a9dd41f886f0c6f554dcbfa124510778365a5a732f3490e40d1499b0ff24c03b",
     "narrative.json": "cdaf672fa9a3877e1e9b218b516cf5eee06ef7887fddb6a4d1367480e15222a4",
     "report.md": "118291654c7491b6d6c738645540e50d56cc9bd54663e2bc1c0c1cd7cf06d0ba",
-    "report.html": "21ff49ae47e038ad57255f2d54f7b14d8ef23d73360622463916b667d64098b4",
-    "report.pdf": "fd0d2798e581bdfb61790ee22a3a1cbbe47ecc292761b3b55cf5f5c52827c699",
-    "report_trace.json": "ff0dfb8e33d744f28e71b3d70a2435bf8db4e17ce111d3b68a87a2d459dd5a54",
+    "report.html": "4d14a55c58de69d5d9e491ff1ecabeaacd9c6d107b73c029ef3daea48769995f",
+    "2028-YJ-S02-report.pdf": "196dfa53fb6c9143eab02e2197e4d82ef66cec306cd7537b7e36652bb104149d",
+    "report_trace.json": "f57c09974ccf70231c001f5adae7e0d802d443e81b7c065e99c7c8e93b16bad1",
     "operator_check.md": "a6d9377fe6a1209359e4a03886371aa3bcaa2bbc727bfc702d38c4343e07c19d",
     "profile.json": "b04770d7a2589f2dbe7b35a80efaad8953b8db8666a26db85875f82cfc9eaf72",
     "profile-supplement.txt": "6d3fe85c4f5f9393a284253436e9dd3ae7a719f9ff73222d052dc7224a274e0f"
@@ -342,6 +342,17 @@
         "report_trace.json"
       ],
       "reason": "合入两份旗舰后共用版面与核对工具更新；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude（报告命名统一）",
+      "files": [
+        "report.html",
+        "2028-YJ-S02-report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "仅改文件名，正文逐字未变。",
+      "comparison": "改名前后各抽取 PDF 全文（16 页）逐行比对：唯一差异是第 12 节“生成时间”（2026-10-20T17:24:23+08:00 → 2026-10-20T18:45:21+08:00）；页数、标题、案例号与画像指纹不变。"
     }
   ]
 }

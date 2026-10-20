@@ -1,0 +1,280 @@
+{
+  "schema_version": 1,
+  "status": "awaiting_independent_review",
+  "independent": false,
+  "reviewer": null,
+  "date": null,
+  "rubric": {
+    "status": "pending",
+    "items": []
+  },
+  "pitfalls": [],
+  "sampled_sources": [],
+  "self_assessment": {
+    "reviewer": "制作会话自评",
+    "date": "2026-10-19",
+    "status": "complete",
+    "rubric": {
+      "items": [
+        {
+          "id": "clarity",
+          "score": 2,
+          "reason": "摘要明确主路径、备选和适用条件；待核候选不宣称已可报名或录用。",
+          "report_location": "01 / 03—11",
+          "evidence_refs": []
+        },
+        {
+          "id": "traceability",
+          "score": 1,
+          "reason": "实际使用的官方数值附原文短句；本人输入精确对应登记字段；加工结果和条件情景分开。长沙理工目录仍未取到；匿名统计仍待操控者按原名单重核。",
+          "report_location": "全文",
+          "evidence_refs": []
+        },
+        {
+          "id": "reasoning",
+          "score": 1,
+          "reason": "每个候选有支持、反证、成本和切换条件；当前能力与资格缺口使部分比较只能条件化。",
+          "report_location": "01 / 03—11",
+          "evidence_refs": []
+        },
+        {
+          "id": "consistency",
+          "score": 2,
+          "reason": "旧计算键逐值和类型不变；12节逐节显示数字及顺序完全一致；新增键单独复算。",
+          "report_location": "全文",
+          "evidence_refs": []
+        },
+        {
+          "id": "timeliness",
+          "score": 2,
+          "reason": "原报告的复核期限未延长；当届与历史材料分开，旧年规则不写成未来承诺。",
+          "report_location": "全文",
+          "evidence_refs": []
+        },
+        {
+          "id": "personalization",
+          "score": 2,
+          "reason": "保留本人原话、学业/经历和资金约束，并在方向和反证中说明作用。",
+          "report_location": "01 / 03—11",
+          "evidence_refs": []
+        },
+        {
+          "id": "actionability",
+          "score": 1,
+          "reason": "行动有个人检查日期、入口和切换；尚缺本人补充及真实岗位/模考，不能直接替本人确认。",
+          "report_location": "01 / 03—11",
+          "evidence_refs": []
+        },
+        {
+          "id": "boundaries",
+          "score": 2,
+          "reason": "无个人上岸或录用概率，无录取、录用或收入保证；未知和条件情景保留。",
+          "report_location": "全文",
+          "evidence_refs": []
+        },
+        {
+          "id": "summary_access",
+          "score": 2,
+          "reason": "摘要同时给出核心判断、关键限制及近期行动；术语在后文解释。",
+          "report_location": "01 / 03—11",
+          "evidence_refs": []
+        },
+        {
+          "id": "layout",
+          "score": 1,
+          "reason": "版面门禁通过并逐页审看；提示框加粗等既有共用视觉问题仍留待统一处理。",
+          "report_location": "全文",
+          "evidence_refs": []
+        }
+      ]
+    },
+    "limitations": [
+      "不是独立批准；操控者核查单待亲自填写。",
+      "原件抽查与新会话评阅尚未在独立复核区完成。"
+    ],
+    "verification_scope": "本轮更新为附核对材料的PDF，自评和机器核对通过后仍等待独立审核；未补造官方原文和独立批准。"
+  },
+  "snapshot": {
+    "case.json": "ef4ab0689ac0b39c7db50d990844a2b2d60062df2977b63ada000345fb30e7f0",
+    "profile_parse.json": "ec01d04e9f24802ce85fc5d2a069ee8532f7911604e9cdfe9a3a47191baec990",
+    "directions.json": "6f799d567cc51a1d860a40f8d9bbbf4c16f3bfcd2af58b999cc1db8c54f2761e",
+    "rules_check.json": "bda48a6be3aff5fdb6d27f0800903873b37d636b4444a9ed460b302c5d5b08f9",
+    "candidates.json": "b329d6b94fb2773f31a8fd1051b70615ec9ac6d839308567df09645186b5b392",
+    "evidence.json": "8d8fb496df28321d81c7f6d4ae0c2c3cdfd4b2dc01b6f38989037894bfe57348",
+    "calculations.json": "c9f6ffdadaa69063d1698e768de5b96dbfb4f2cafdd9a803a0a136e2d4ee2bae",
+    "judgment.json": "680971960a93a9a2b3bc6c4c63eb3396497035dc0f6ae7d6dbd5740352ef96f7",
+    "narrative.json": "265288c7a1dad477f1f110b65b017c4a9301b8950af8e5d9f5ac83c38bdf5e4d",
+    "profile.txt": "69dfeb57cf005a4ace3990e51a96b3b821e9de0c130dd1f8eae5b2088f5bef5e",
+    "report.md": "56865889da5bd4655b01c6a8d3a256e905ab49e4ffbd3cf4442f6f0e444e478c",
+    "report.html": "ee286a75faec6cdf249376283c5265447dfec776539597f732a167f1421a0a98",
+    "2027-QZ-S01-report.pdf": "6ca8ff2a358ee3d1a661e4c66c83022fdd56474ada60e097ae7fbecd296f7f0d",
+    "report_trace.json": "78256269b576bd47ec009fdc3a78c7a0f8266c536398f65c53d629764591e5a5",
+    "operator_check.md": "d93856cd7151715936ddc759a6949f4b879c955e474922c12f5ece921e110dcc",
+    "profile_snapshot.json": "0a6cb6835c42b9e3a0e18679bd40d3c99c433453287f9e2a231e357647a858d9"
+  },
+  "checklist_update_note": "仅核查单表述及核查工具记录更新；报告与计算原件未改。保留历史复核记录，当前仍等待独立审核，不是重新批准。",
+  "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。",
+  "snapshot_refreshes": [
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "核对附录改为紧凑排版后重新生成；正文 report.md 与全部输入文件未变，自评结论不受影响。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "修正数字防拆行标记被其他样式套用（封面编号拆行、摘要卡里数字变大）后重新生成；正文 report.md 与全部输入文件未变，自评结论不受影响。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.md",
+        "report.html",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "报告改版（2026-10-20）：正文给读者、第 12 节“核对与来源”给核对；比较矩阵、追问、风险改为三类报告共用的卡片和标记，图表配色统一。 report.md 只把追问和风险表格换成卡片标记，文字与全部输入未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "case.json",
+        "report.html",
+        "report.md",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "封面一句话结论按高考同款写法重写为两三句（本人情况、建议及关键数字、先做什么），数字均为登记引用；正文与结论不变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "共用的 report.py 改了高考摘要卡，读研求职报告随工具指纹重新生成；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.md",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "共用 report.py 改为 SVG 状态图标与图形时间线标记；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.md",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "核对框改为图形；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "judgment.json",
+        "narrative.json",
+        "operator_check.md",
+        "profile_parse.json",
+        "report.html",
+        "report.md",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "图表按科研插图标准重画（条形图加刻度，顺序时间线改为单行，修复版面自检把时间线短行误判为窄栏）；新增“现状一览”和岗位两道判断流程图；矩阵说明改用图形名称。数字全部引用原有画像、证据与计算，结论不变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "evidence.json",
+        "judgment.json",
+        "operator_check.md",
+        "profile_parse.json",
+        "report.html",
+        "report.md",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "第 12 节核对附录改为逐条可读：本人复合答案写成中文、同题不重复列；登记项、计算项和输入全部中文名（不再出现字段路径、英文键名和取文工具名）；同一数字的不同写法合为一条；候选共同前提只写一次；风险表逐条写成情况、为什么改判、怎么应对；新增非数字依据的原文摘录。新增 03 节卡点状态图；证据条目名改为中文（只改名称，原值与摘录未变）。结论不变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.md",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "报告底色改为与网页问卷一致的浅米色；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.md",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "新增“第三方整理”证据等级样式；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.md",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "区间图数字格式统一；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.md",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "合入两份旗舰后共用版面与核对工具更新；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude（报告命名统一）",
+      "files": [
+        "case.json",
+        "report.html",
+        "2027-QZ-S01-report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "仅改文件名，正文逐字未变。另：case.json 删去 legacy_directory 标记（目录已改为报告号）。",
+      "comparison": "改名前后各抽取 PDF 全文（31 页）逐行比对：唯一差异是第 12 节“生成时间”（2026-10-20T17:24:30+08:00 → 2026-10-20T18:45:12+08:00）；页数、标题、案例号与画像指纹不变。"
+    }
+  ]
+}

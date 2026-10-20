@@ -17,14 +17,15 @@ from check_report import check_planning_contract
 from case_check import run
 
 SKILLS=SCRIPTS.parents[1]
+DEMO={'grad':'2027-YJ-S01','career':'2027-QZ-S01'}
 
 class PlanningWorkflowTests(unittest.TestCase):
     def setUp(self):
         self.temp=tempfile.TemporaryDirectory();self.addCleanup(self.temp.cleanup)
         self.roots={}
         for kind in ('grad','career'):
-            dest=Path(self.temp.name)/kind
-            shutil.copytree(SKILLS/f'zhiqu-{kind}/examples/demo_2027',dest)
+            dest=Path(self.temp.name)/DEMO[kind]
+            shutil.copytree(SKILLS/f'zhiqu-{kind}/examples'/DEMO[kind],dest)
             self.roots[kind]=dest
 
     def change(self,root,file,fn):
@@ -308,7 +309,7 @@ class PlanningWorkflowTests(unittest.TestCase):
         self.assertEqual((root/'case.json').read_bytes(),before)
 
     def test_failed_content_or_render_gate_does_not_replace_previous_outputs(self):
-        root=self.roots['grad'];names=('report.md','report.html','report.pdf','report_trace.json','operator_check.md');before={n:(root/n).read_bytes() for n in names}
+        root=self.roots['grad'];names=('report.md','report.html','2027-YJ-S01-report.pdf','report_trace.json','operator_check.md');before={n:(root/n).read_bytes() for n in names}
         with patch('render_report.render',side_effect=ValueError('渲染故障')):
             with self.assertRaises(ValueError):generate(root,html_only=True,profile_version="profile.txt")
         self.assertEqual(before,{n:(root/n).read_bytes() for n in names})
@@ -317,7 +318,7 @@ class PlanningWorkflowTests(unittest.TestCase):
         self.assertEqual(before,{n:(root/n).read_bytes() for n in names})
 
     def test_pdf_layout_and_operator_failure_do_not_publish_partial_files(self):
-        root=self.roots['career'];names=('report.md','report.html','report.pdf','report_trace.json','operator_check.md');before={n:(root/n).read_bytes() for n in names}
+        root=self.roots['career'];names=('report.md','report.html','2027-QZ-S01-report.pdf','report_trace.json','operator_check.md');before={n:(root/n).read_bytes() for n in names}
         def render_pdf(document,path):
             Path(path).write_bytes(b'prepared-only')
         with patch('render_report._print_pdf',side_effect=render_pdf),patch('check_layout.check_pdf',return_value=['版面挤压']):
@@ -354,7 +355,7 @@ class PlanningWorkflowTests(unittest.TestCase):
     def test_self_assessment_passes_without_claiming_delivery_approval(self):
         from planning_workflow import RUBRIC,review_errors
         root=self.roots['grad'];generate(root,html_only=True,profile_version="profile.txt")
-        files=(*FILES,'profile.txt','report.md','report.html','report.pdf','report_trace.json','operator_check.md')
+        files=(*FILES,'profile.txt','report.md','report.html','2027-YJ-S01-report.pdf','report_trace.json','operator_check.md')
         review={'status':'awaiting_independent_review','independent':False,
                 'self_assessment':{'rubric':{'items':[{'id':key,'score':1 if key=='traceability' else 2,'reason':'测试用自评理由'} for key in RUBRIC]}},
                 'snapshot':{f:sha(root/f) for f in files}}

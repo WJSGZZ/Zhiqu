@@ -37,7 +37,7 @@
 
 <img src="assets/readme/case-xiaoya.png" width="780" alt="小雅的报告摘要：最可能落在第 3 志愿，约 76%">
 
-[完整报告](skills/zhiqu/examples/2026-GK-R12/report.pdf) · [画像](skills/zhiqu/examples/2026-GK-R12/profile.txt)
+[完整报告](skills/zhiqu/examples/2026-GK-R12/2026-GK-R12-report.pdf) · [画像](skills/zhiqu/examples/2026-GK-R12/profile.txt)
 
 ### 读研 · 小舟 · 江苏本科计算机
 
@@ -48,7 +48,7 @@
 
 <img src="assets/readme/case-xiaozhou.png" width="780" alt="小舟的报告摘要：从报名到明年春天每一步往哪走">
 
-[完整报告](skills/zhiqu-grad/examples/2027-YJ-S05/report.pdf) · [说明](skills/zhiqu-grad/examples/2027-YJ-S05/README.md)
+[完整报告](skills/zhiqu-grad/examples/2027-YJ-S05/2027-YJ-S05-report.pdf) · [说明](skills/zhiqu-grad/examples/2027-YJ-S05/README.md)
 
 ### 求职 · 小桐 · 浙江本科财务管理
 
@@ -59,7 +59,7 @@
 
 <img src="assets/readme/case-xiaotong.png" width="780" alt="小桐的报告摘要：企业财务为主线，省考看公告再报">
 
-[完整报告](skills/zhiqu-career/examples/2027-QZ-S05/report.pdf) · [说明](skills/zhiqu-career/examples/2027-QZ-S05/README.md)
+[完整报告](skills/zhiqu-career/examples/2027-QZ-S05/2027-QZ-S05-report.pdf) · [说明](skills/zhiqu-career/examples/2027-QZ-S05/README.md)
 
 **[全部案例 →](CASES.md)** 高考共 12 位模拟考生（含小雅），都用 2026 年真实投档线对过答案：能判定的 8 个全部录取、没有滑档，其中 7 个正好落在报告说的最可能那个志愿；另外 4 个因专业组每年重新编号，对不上号，无法判定。读研、求职另有比较两个 offer、把分数情景放进录取分布等示例。
 

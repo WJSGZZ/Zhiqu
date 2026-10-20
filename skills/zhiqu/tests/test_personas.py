@@ -12,6 +12,7 @@ sys.path.insert(0,str(SCRIPTS))
 from check_personas import CASES,LIBRARY,profiles,check,profile_errors,questionnaire_questions
 from planning_workflow import PlanningCase,SKILLS,read,dump,sha
 from operator_check import readable_locator,report_locations,sync_checklist_tool_snapshot,generate,checklist_groups
+DEMO={'grad':'2027-YJ-S01','career':'2027-QZ-S01'}
 
 class PersonaTests(unittest.TestCase):
     def test_library_and_declared_stage_regression(self):
@@ -95,7 +96,7 @@ class ChecklistWordingTests(unittest.TestCase):
 
     def test_report_positions_use_subheadings_or_paragraph_opening(self):
         for kind in ('grad','career'):
-            c=PlanningCase(SKILLS/f'zhiqu-{kind}/examples/demo_2027')
+            c=PlanningCase(SKILLS/f'zhiqu-{kind}/examples'/DEMO[kind])
             positions='\n'.join(x for values in report_locations(c).values() for x in values)
             self.assertNotIn('正文第',positions)
             self.assertTrue('段落“' in positions or '第 9 节' in positions)
@@ -103,7 +104,7 @@ class ChecklistWordingTests(unittest.TestCase):
 
     def copy_demo(self):
         tmp=tempfile.TemporaryDirectory();self.addCleanup(tmp.cleanup)
-        root=Path(tmp.name)/'demo_2027';shutil.copytree(SKILLS/'zhiqu-grad/examples/demo_2027',root)
+        root=Path(tmp.name)/'2027-YJ-S01';shutil.copytree(SKILLS/'zhiqu-grad/examples/2027-YJ-S01',root)
         return root
 
     def test_legacy_position_migrates_without_losing_human_confirmation(self):
@@ -121,13 +122,13 @@ class ChecklistWordingTests(unittest.TestCase):
 
     def test_only_checklist_tool_hash_can_refresh_without_rendering(self):
         root=self.copy_demo();trace=read(root/'report_trace.json');trace['tool_sha256']['operator_check.py']='old-checklist-tool';dump(root/'report_trace.json',trace)
-        before={f:sha(root/f) for f in ('calculations.json','report.md','report.html','report.pdf')}
+        before={f:sha(root/f) for f in ('calculations.json','report.md','report.html','2027-YJ-S01-report.pdf')}
         self.assertTrue(sync_checklist_tool_snapshot(root))
         self.assertEqual(before,{f:sha(root/f) for f in before})
         self.assertEqual(PlanningCase(root).trace_errors(),[])
 
     def test_changed_source_report_or_other_tool_cannot_refresh(self):
-        for field,key in [('source_sha256','case.json'),('artifacts','report.pdf'),('tool_sha256','planning_workflow.py')]:
+        for field,key in [('source_sha256','case.json'),('artifacts','2027-YJ-S01-report.pdf'),('tool_sha256','planning_workflow.py')]:
             root=self.copy_demo();trace=read(root/'report_trace.json');trace['tool_sha256']['operator_check.py']='old-checklist-tool';trace[field][key]='changed';dump(root/'report_trace.json',trace)
             self.assertFalse(sync_checklist_tool_snapshot(root))
             self.assertEqual(read(root/'report_trace.json')['tool_sha256']['operator_check.py'],'old-checklist-tool')

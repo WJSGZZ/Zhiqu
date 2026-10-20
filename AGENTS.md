@@ -37,7 +37,7 @@
 
 ## 三、安装与使用
 
-按 README 的"快速开始"安装四个技能（同层放置）并验证。使用时问清是高考、读研还是求职，请用户填问卷、发来画像，按对应 `SKILL.md` 工作。高考报告只有一种完整版，示例是 `skills/zhiqu/examples/2026-GK-R*`（R12 为主展示，全部案例见 [CASES.md](CASES.md)）；读研、求职的示例在各自技能的 `examples/demo_2027/`。报告结构以它们为准。
+按 README 的"快速开始"安装四个技能（同层放置）并验证。使用时问清是高考、读研还是求职，请用户填问卷、发来画像，按对应 `SKILL.md` 工作。高考报告只有一种完整版，示例是 `skills/zhiqu/examples/2026-GK-R*`（R12 为主展示，全部案例见 [CASES.md](CASES.md)）；读研、求职的示例是 `skills/zhiqu-grad/examples/2027-YJ-S*`、`skills/zhiqu-career/examples/2027-QZ-S*`（S05 为主展示）。报告结构以它们为准。
 
 ## 四、改进项目：开工前
 

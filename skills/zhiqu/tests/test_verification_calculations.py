@@ -36,7 +36,7 @@ class VerificationCalculationTests(unittest.TestCase):
         self.assertEqual(recompute(*args), args[-1])
 
     def test_four_complete_examples_recompute_and_describe_every_number(self):
-        for name in ('zhiqu-grad/examples/demo_2027', 'zhiqu-career/examples/demo_2027',
+        for name in ('zhiqu-grad/examples/2027-YJ-S01', 'zhiqu-career/examples/2027-QZ-S01',
                      'zhiqu-grad/examples/2028-YJ-S02', 'zhiqu-career/examples/2027-QZ-S02'):
             with self.subTest(name=name):
                 args = load_case(SKILLS / name)
@@ -81,7 +81,7 @@ class VerificationCalculationTests(unittest.TestCase):
         with self.assertRaises(KeyError): recompute(case, {}, {'items':[]}, {'x':2})
 
     def test_offer_formulas_use_unrounded_tax_and_original_inputs(self):
-        args = load_case(SKILLS / 'zhiqu-career/examples/demo_2027')
+        args = load_case(SKILLS / 'zhiqu-career/examples/2027-QZ-S01')
         rows = {row['path']:row for row in calculation_rows(*args)}
         row = rows['/offer_b_ordinary_month/remaining_cash']
         self.assertEqual(row['result'],1967)
@@ -92,7 +92,7 @@ class VerificationCalculationTests(unittest.TestCase):
         self.assertIn('60000', row['formula'])
 
     def test_quantile_formula_provides_interpolation_operands(self):
-        args = load_case(SKILLS / 'zhiqu-grad/examples/demo_2027')
+        args = load_case(SKILLS / 'zhiqu-grad/examples/2027-YJ-S01')
         rows = {row['path']:row for row in calculation_rows(*args)}
         row = rows['/gdut_2026_first_choice_retest_scores/q1']
         self.assertIn('Type 7',row['formula'])
@@ -112,7 +112,7 @@ class GaokaoVerificationTests(unittest.TestCase):
     def setUpClass(cls):
         cls.root = SKILLS / 'zhiqu'
         cls.pro = cls.root / 'examples/2026-GK-R01/result.json'
-        cls.group = cls.root / 'examples/case_c_guangdong_e2e/result.json'
+        cls.group = cls.root / 'examples/2027-GK-C01/result.json'
 
     def example(self, path):
         result = json.loads(path.read_text())

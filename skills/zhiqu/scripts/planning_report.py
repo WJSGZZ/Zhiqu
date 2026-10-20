@@ -98,7 +98,7 @@ def generate(root, html_only=False, profile_version=None):
     import render_report
     import check_report
     from check_layout import check_pdf
-    from verify_report import bind_profile, planning_materials, append_html, attach_pdf, require_analysis_profile
+    from verify_report import bind_profile, planning_materials, append_html, attach_pdf, require_analysis_profile, report_pdf_name
     if not profile_version:raise ValueError('生成报告必须明确指定 profile_version / --profile-version')
     binding, profile, warning=bind_profile(root,profile_version,require_analysis=True)
     if warning:print(warning,file=sys.stderr)
@@ -114,12 +114,13 @@ def generate(root, html_only=False, profile_version=None):
     errors=check_report.check_publication_html(document)
     if errors:raise ValueError('\n'.join(errors))
     # Prepare everything before touching any existing output; rollback on replacement error.
-    names=['report.md','report.html','report_trace.json','operator_check.md']+([] if html_only else ['report.pdf'])
+    pdf_name=report_pdf_name(case.case['case_id'])
+    names=['report.md','report.html','report_trace.json','operator_check.md']+([] if html_only else [pdf_name])
     with tempfile.TemporaryDirectory(prefix='.planning-',dir=case.root) as temp:
         tmp=Path(temp);(tmp/'report.md').write_text(markdown);(tmp/'report.html').write_text(document)
         if not html_only:
-            render_report._print_pdf(document,tmp/'report.pdf')
-            errors=check_pdf(str(tmp/'report.pdf'))
+            render_report._print_pdf(document,tmp/pdf_name)
+            errors=check_pdf(str(tmp/pdf_name))
             if errors:raise ValueError('\n'.join(errors))
         from operator_check import generate as operator_generate
         operator_generate(case.root,output=tmp/'operator_check.md')
@@ -134,11 +135,11 @@ def generate(root, html_only=False, profile_version=None):
             files={name:(case.root/name).read_bytes() for name in ('case.json','profile_parse.json','evidence.json','calculations.json')}
             files['profile.json']=(case.root/binding['file']).read_bytes()
             files['report_trace.json']=(tmp/'report_trace.json').read_bytes()
-            attach_pdf(tmp/'report.pdf',files,materials,case.case,binding,document)
+            attach_pdf(tmp/pdf_name,files,materials,case.case,binding,document)
             from verify_report import verify
-            verification=verify(tmp/'report.pdf')
+            verification=verify(tmp/pdf_name)
             if not verification['ok']:raise ValueError('PDF核对失败：'+'；'.join(verification['errors']))
-            manifest['artifacts']['report.pdf']=sha(tmp/'report.pdf')
+            manifest['artifacts'][pdf_name]=sha(tmp/pdf_name)
             dump(tmp/'report_trace.json',manifest)
         previous={name:(case.root/name).read_bytes() if (case.root/name).exists() else None for name in names}
         try:
@@ -151,8 +152,8 @@ def generate(root, html_only=False, profile_version=None):
             raise
     if not html_only:
         from verify_report import record_generation
-        record_generation(case.root,case.root/'report.pdf')
-    return case.root/'report.pdf' if not html_only else case.root/'report.html'
+        record_generation(case.root,case.root/pdf_name)
+    return case.root/pdf_name if not html_only else case.root/'report.html'
 
 
 def main():

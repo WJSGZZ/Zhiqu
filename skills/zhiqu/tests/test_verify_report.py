@@ -25,7 +25,7 @@ def profile(stamp='2026-10-19T12:00:00+08:00'):
 class VerifyDeliveredPDF(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory();self.addCleanup(self.temp.cleanup)
-        self.root = Path(self.temp.name);self.pdf = self.root/'report.pdf'
+        self.root = Path(self.temp.name);self.pdf = self.root/'2027-YJ-S01-report.pdf'
         self.profile = verify.json_bytes(profile())
         self.binding = {'file':'profile.json','sha256':verify.digest(self.profile),
                         'filled_at':profile()['filled_at'],'form':'fixture-form'}
@@ -43,7 +43,7 @@ class VerifyDeliveredPDF(unittest.TestCase):
                       'profile_parse.json':verify.json_bytes({'fields':[]}),
                       'evidence.json':verify.json_bytes(self.evidence),
                       'calculations.json':verify.json_bytes({'remaining':40}),
-                      'report_trace.json':verify.json_bytes({'artifacts':{'report.pdf':'old-pdf-hash'}})}
+                      'report_trace.json':verify.json_bytes({'artifacts':{'2027-YJ-S01-report.pdf':'old-pdf-hash','report.md':'md-hash'}})}
         self.create()
 
     def create(self, files=None, binding=None, materials=None):
@@ -86,7 +86,7 @@ class VerifyDeliveredPDF(unittest.TestCase):
         self.assertTrue(any(r['url']=='https://example.edu.cn/fictional' for r in result['online_sources']))
         self.assertTrue(any('不能证明作者' in s for s in result['limitations']))
         trace = json.loads((target/'report_trace.json').read_text())
-        self.assertNotIn('report.pdf',trace['artifacts'])
+        self.assertEqual(trace['artifacts'],{'report.md':'md-hash'})
 
     def test_svg_paint_order_does_not_change_section_number_reading(self):
         # SVGs can be painted after the next section's heading in the PDF stream.

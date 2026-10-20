@@ -541,9 +541,9 @@
     "profile.json": "f8c7a4b076a64c168d303710ea8836b70a79ffe5d53ce7521045bfe4ae4c2d1f",
     "profile-supplement.txt": "247f31f22f4c9a6c33394b5b25e3b37ef21c19fd3b9c12a70a83839f7976b026",
     "report.md": "dc2181d226cda92dbdf4f1e6ec55266cae830954bab961cff7a5b3991c29727a",
-    "report.html": "efc13ef4b9005ca42da29eb82eb771268d457b6c275c9e4605aabbf91ee909c0",
-    "report.pdf": "75db1315d2c50dea2e5dacac967dc9b0031e7fbf202f8762a0bbfb9fd5d97ab9",
-    "report_trace.json": "9bec6a2c080d07913866111d34625647b30231bccbf110475c8b9cbcb7864a6f",
+    "report.html": "89180538f42a798b0636ce33a11efd8938cedabc4497b77cfe68c8e9d57d69fa",
+    "2027-QZ-S05-report.pdf": "baf19075ed7547b1504504c5ea27d0d1cbf8500fbfe9bdada9a700cc5525e287",
+    "report_trace.json": "c658dfb6f7b55352c5ea0ebda496629dae4ea4afe6135021ed66d82c2b029491",
     "operator_check.md": "4ff03138485a36d13855e654a8bab902f38d37e10ed01cccb558e31f573d0a7a"
   },
   "snapshot_refreshes": [
@@ -644,6 +644,17 @@
         "operator_check.md"
       ],
       "reason": "按第三轮独立复核（17/20）返工：筛选改为逐列逐条（加民族列、证书职称），所有子集统一重跑；身份不限符合 47→44、中位 198→206.5，专业不限符合 12→5，主集合 84/64.5/2.2 不变；图注、术语表与第 12 节补“民族、证书或职称”。第三轮独立复核整体移入 review_history 第 3 轮。共用代码那句未改。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude（报告命名统一）",
+      "files": [
+        "report.html",
+        "2027-QZ-S05-report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "仅改文件名，正文逐字未变。",
+      "comparison": "改名前后各抽取 PDF 全文（25 页）逐行比对：唯一差异是第 12 节“生成时间”（2026-10-20T18:20:09+08:00 → 2026-10-20T18:45:12+08:00）；页数、标题、案例号与画像指纹不变。"
     }
   ],
   "review_history": [

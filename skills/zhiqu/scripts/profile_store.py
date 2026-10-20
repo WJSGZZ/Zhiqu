@@ -6,7 +6,7 @@ new-id grad 2027 --mode formal       分配并占用案例号
  latest 2027-YJ-0001                返回最新版本与原文
  diff 2027-YJ-0001                  按题目 id 对比最近两版
  parse <案例目录> [--replace]        优先 JSON 生成字段；旧文字仍需人工解析
- report 2027-YJ-0001 report.pdf      登记本机报告版本，不生成报告
+ report 2027-YJ-0001 2027-YJ-0001-report.pdf  登记本机报告版本，不生成报告
 
 各命令可用 --root 指定本机案例根目录；真实资料不得进入受版本管理的目录。
 """

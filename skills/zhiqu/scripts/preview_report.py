@@ -2,7 +2,7 @@
 """把报告每一页缩成缩略图拼成速览图，改完报告后看一眼版面。
 
 用法：python3 preview_report.py [报告.pdf ...] [--out 目录]
-不给 PDF 时，取工作区里相对 main 有改动的 report.pdf。
+不给 PDF 时，取工作区里相对 main 有改动的报告 PDF（<报告号>-report.pdf）。
 每张速览图 8 页（4×2），存到 .cache/preview/（不进仓库），打印路径。
 自动检查只能抓到已知的几类错（check_layout.py、check_report_styles.py）；
 数字被套错样式、图表配色不一、整页只剩一行这类问题要靠眼睛看，这张图就是给眼睛看的。
@@ -16,11 +16,11 @@ ROOT = Path(__file__).resolve().parents[3]
 
 
 def changed_reports():
-    out = subprocess.run(['git', 'diff', '--name-only', 'main', '--', '*report.pdf'],
+    out = subprocess.run(['git', 'diff', '--name-only', 'main', '--', '*-report.pdf'],
                          cwd=ROOT, capture_output=True, text=True).stdout.split()
-    out += subprocess.run(['git', 'ls-files', '--others', '--exclude-standard', '--', '*report.pdf'],
+    out += subprocess.run(['git', 'ls-files', '--others', '--exclude-standard', '--', '*-report.pdf'],
                           cwd=ROOT, capture_output=True, text=True).stdout.split()
-    return [ROOT / p for p in dict.fromkeys(out)]
+    return [ROOT / p for p in dict.fromkeys(out) if (ROOT / p).is_file()]
 
 
 def preview(pdf, out_dir, per=8, cols=4, dpi=48):

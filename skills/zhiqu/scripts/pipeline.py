@@ -102,7 +102,11 @@ def main():
         if errors:
             raise ValueError('\n'.join(errors))
         if config.get('pdf', False):
-            run('report.py', [str(report), '--opt', str(result), '--out', str(out / 'report.pdf')], base)
+            case = report.parent / 'case.json'
+            if not case.exists():
+                raise ValueError('出交付 PDF 须有 case.json（PDF 以报告号命名）')
+            name = json.loads(case.read_text(encoding='utf-8'))['case_id'] + '-report.pdf'
+            run('report.py', [str(report), '--opt', str(result), '--out', str(out / name)], base)
         print(f'流程与数字核验完成：{out}\nHTML 摘要与志愿表已核验；正文未标注的数字、敏感性与版式仍须人工复核。')
     except (ValueError, KeyError, OSError, subprocess.CalledProcessError) as exc:
         ap.exit(1, str(exc) + '\n')

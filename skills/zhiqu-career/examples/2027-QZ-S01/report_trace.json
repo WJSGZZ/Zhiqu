@@ -1,0 +1,1274 @@
+{
+  "schema_version": 1,
+  "case_id": "2027-QZ-S01",
+  "source_sha256": {
+    "case.json": "ef4ab0689ac0b39c7db50d990844a2b2d60062df2977b63ada000345fb30e7f0",
+    "profile_parse.json": "ec01d04e9f24802ce85fc5d2a069ee8532f7911604e9cdfe9a3a47191baec990",
+    "directions.json": "6f799d567cc51a1d860a40f8d9bbbf4c16f3bfcd2af58b999cc1db8c54f2761e",
+    "rules_check.json": "bda48a6be3aff5fdb6d27f0800903873b37d636b4444a9ed460b302c5d5b08f9",
+    "candidates.json": "b329d6b94fb2773f31a8fd1051b70615ec9ac6d839308567df09645186b5b392",
+    "evidence.json": "8d8fb496df28321d81c7f6d4ae0c2c3cdfd4b2dc01b6f38989037894bfe57348",
+    "calculations.json": "c9f6ffdadaa69063d1698e768de5b96dbfb4f2cafdd9a803a0a136e2d4ee2bae",
+    "judgment.json": "680971960a93a9a2b3bc6c4c63eb3396497035dc0f6ae7d6dbd5740352ef96f7",
+    "narrative.json": "265288c7a1dad477f1f110b65b017c4a9301b8950af8e5d9f5ac83c38bdf5e4d",
+    "profile.txt": "69dfeb57cf005a4ace3990e51a96b3b821e9de0c130dd1f8eae5b2088f5bef5e"
+  },
+  "contract_sha256": "8efe50a42837daeec7a83de34e595fd7eeb88a8cfeff1a26afc20699fd951d76",
+  "tool_sha256": {
+    "planning_report.py": "397cea049cf8963c3b1cf401ce0f8f530d4bff3a0fef6ee47eaf941a6cf781c5",
+    "planning_workflow.py": "8159eaaa7c817131a52f51b0b52370c66f5fabbcf091ec3ff79d4f5f32f8bab8",
+    "operator_check.py": "97965475c2c8b6efe5dbf2747511526d1729a540f55a16b54fa282e2a810fdc7",
+    "check_demos.py": "67d4edc1cd737beeb6729783a736e667a97c12d8f7de2de673632d9d5c3370b8",
+    "report.py": "99f75d3845c9bacedc0eeb540a6594b58230b6de7540e47159d6e16ce73b0240",
+    "render_report.py": "18f22f904e72e162a9307dfef2a010bbaa5eadd95e08698457177c312bf14a68",
+    "profile_store.py": "a6cebda41b504d6fef84c3c9b0686c055a1d0dc432a94350ba8ca15822d01391"
+  },
+  "numeric_refs": [
+    {
+      "location": "meta.date",
+      "ref": "{{k:/context/as_of}}",
+      "value": "2026-10-19",
+      "display": "2026-10-19"
+    },
+    {
+      "location": "meta.data_asof",
+      "ref": "{{k:/context/as_of}}",
+      "value": "2026-10-19",
+      "display": "2026-10-19"
+    },
+    {
+      "location": "01.kpis.2",
+      "ref": "{{e:E0901#/value}}",
+      "value": 3,
+      "display": "3"
+    },
+    {
+      "location": "01.kpis.2",
+      "ref": "{{c:/hypothetical_offers/0/annual_take_home_cash|comma}}",
+      "value": 51610,
+      "display": "51,610"
+    },
+    {
+      "location": "01.kpis.2",
+      "ref": "{{c:/hypothetical_offers/1/monthly_remaining_cash|comma}}",
+      "value": 2326,
+      "display": "2,326"
+    },
+    {
+      "location": "01.kpis.2",
+      "ref": "{{c:/report_parameters/hypothetical_followup__offers__1__months}}",
+      "value": 13,
+      "display": "13"
+    },
+    {
+      "location": "01.kpis.2",
+      "ref": "{{c:/offer_b_ordinary_month/remaining_cash|comma}}",
+      "value": 1967,
+      "display": "1,967"
+    },
+    {
+      "location": "01.core_points.3",
+      "ref": "{{c:/report_parameters/hypothetical_followup__offers__1__months}}",
+      "value": 13,
+      "display": "13"
+    },
+    {
+      "location": "01.actions.4",
+      "ref": "{{k:/context/personal_dates/action0|md}}",
+      "value": "2026-10-23",
+      "display": "10 月 23 日"
+    },
+    {
+      "location": "01.actions.4",
+      "ref": "{{k:/context/personal_dates/action0}}",
+      "value": "2026-10-23",
+      "display": "2026-10-23"
+    },
+    {
+      "location": "01.actions.4",
+      "ref": "{{k:/context/personal_dates/action1|md}}",
+      "value": "2026-10-26",
+      "display": "10 月 26 日"
+    },
+    {
+      "location": "01.actions.4",
+      "ref": "{{k:/context/personal_dates/action1}}",
+      "value": "2026-10-26",
+      "display": "2026-10-26"
+    },
+    {
+      "location": "01.actions.4",
+      "ref": "{{k:/context/personal_dates/action2|md}}",
+      "value": "2026-10-30",
+      "display": "10 月 30 日"
+    },
+    {
+      "location": "01.actions.4",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "01.actions.4",
+      "ref": "{{k:/context/personal_dates/action2}}",
+      "value": "2026-10-30",
+      "display": "2026-10-30"
+    },
+    {
+      "location": "01.checkpoint.5",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "01.checkpoint.5",
+      "ref": "{{k:/context/personal_dates/action1|md}}",
+      "value": "2026-10-26",
+      "display": "10 月 26 日"
+    },
+    {
+      "location": "01.analysis.6",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/0/value}}",
+      "value": "普通高职",
+      "display": "普通高职"
+    },
+    {
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/1/value}}",
+      "value": "大数据与会计",
+      "display": "大数据与会计"
+    },
+    {
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/2/value|ym_cn}}",
+      "value": "2027-06-30",
+      "display": "2027 年 6 月"
+    },
+    {
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/4/value}}",
+      "value": "财务室实习六周，凭证录入与资料整理",
+      "display": "财务室实习六周，凭证录入与资料整理"
+    },
+    {
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/12/value}}",
+      "value": 3,
+      "display": "3"
+    },
+    {
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/5/value}}",
+      "value": "初级会计尚未通过",
+      "display": "初级会计尚未通过"
+    },
+    {
+      "location": "02.profile.3",
+      "ref": "{{k:/education_entry|year}}",
+      "value": "2024-09-01",
+      "display": "2024"
+    },
+    {
+      "location": "02.profile.3",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "02.profile.3",
+      "ref": "{{k:/graduation_date|month}}",
+      "value": "2027-06-30",
+      "display": "6"
+    },
+    {
+      "location": "02.profile.3",
+      "ref": "{{e:E0901#/value|chinese}}",
+      "value": 3,
+      "display": "三"
+    },
+    {
+      "location": "02.analysis.11",
+      "ref": "{{k:/birth_datetime|datetime}}",
+      "value": "2006-06-21T10:20:00",
+      "display": "2006-06-21 10:20"
+    },
+    {
+      "location": "02.analysis.11",
+      "ref": "{{c:/luck_start_year}}",
+      "value": 2011,
+      "display": "2011"
+    },
+    {
+      "location": "02.analysis.11",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "03.figure.1",
+      "ref": "{{p:/fields/12/value}}",
+      "value": 3,
+      "display": "3"
+    },
+    {
+      "location": "03.figure.1",
+      "ref": "{{p:/fields/8/value}}",
+      "value": "四川省内，近家优先",
+      "display": "四川省内，近家优先"
+    },
+    {
+      "location": "03.figure.1",
+      "ref": "{{p:/fields/9/value}}",
+      "value": "父母希望国企/考编；本人需按具体条件确认",
+      "display": "父母希望国企/考编；本人需按具体条件确认"
+    },
+    {
+      "location": "03.analysis.6",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "04.analysis.8",
+      "ref": "{{e:E1001#/value}}",
+      "value": 2024,
+      "display": "2024"
+    },
+    {
+      "location": "04.analysis.8",
+      "ref": "{{e:E1000#/value}}",
+      "value": "2025-07-07",
+      "display": "2025-07-07"
+    },
+    {
+      "location": "04.analysis.8",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "04.analysis.8",
+      "ref": "{{e:E1002#/value}}",
+      "value": "万",
+      "display": "万"
+    },
+    {
+      "location": "04.details.9",
+      "ref": "{{c:/report_constants/p10_label}}",
+      "value": "10%",
+      "display": "10%"
+    },
+    {
+      "location": "04.details.9",
+      "ref": "{{c:/report_constants/q1_label}}",
+      "value": "25%",
+      "display": "25%"
+    },
+    {
+      "location": "04.details.9",
+      "ref": "{{c:/report_constants/q3_label}}",
+      "value": "75%",
+      "display": "75%"
+    },
+    {
+      "location": "04.details.9",
+      "ref": "{{c:/report_constants/p90_label}}",
+      "value": "90%",
+      "display": "90%"
+    },
+    {
+      "location": "04.details.9",
+      "ref": "{{c:/reference_wages_cny/会计专业人员/p10|comma}}",
+      "value": 42000,
+      "display": "42,000"
+    },
+    {
+      "location": "04.details.9",
+      "ref": "{{c:/reference_wages_cny/会计专业人员/p25|comma}}",
+      "value": 52800,
+      "display": "52,800"
+    },
+    {
+      "location": "04.details.9",
+      "ref": "{{c:/reference_wages_cny/会计专业人员/p50|comma}}",
+      "value": 68000,
+      "display": "68,000"
+    },
+    {
+      "location": "04.details.9",
+      "ref": "{{c:/reference_wages_cny/会计专业人员/p75|comma}}",
+      "value": 91700,
+      "display": "91,700"
+    },
+    {
+      "location": "04.details.9",
+      "ref": "{{c:/reference_wages_cny/会计专业人员/p90|comma}}",
+      "value": 129400,
+      "display": "129,400"
+    },
+    {
+      "location": "04.details.9",
+      "ref": "{{c:/reference_wages_cny/大学专科学历/p10|comma}}",
+      "value": 38400,
+      "display": "38,400"
+    },
+    {
+      "location": "04.details.9",
+      "ref": "{{c:/reference_wages_cny/大学专科学历/p25|comma}}",
+      "value": 49700,
+      "display": "49,700"
+    },
+    {
+      "location": "04.details.9",
+      "ref": "{{c:/reference_wages_cny/大学专科学历/p50|comma}}",
+      "value": 67900,
+      "display": "67,900"
+    },
+    {
+      "location": "04.details.9",
+      "ref": "{{c:/reference_wages_cny/大学专科学历/p75|comma}}",
+      "value": 98000,
+      "display": "98,000"
+    },
+    {
+      "location": "04.details.9",
+      "ref": "{{c:/reference_wages_cny/大学专科学历/p90|comma}}",
+      "value": 142000,
+      "display": "142,000"
+    },
+    {
+      "location": "04.details.9",
+      "ref": "{{e:E1003#/value}}",
+      "value": "0",
+      "display": "0"
+    },
+    {
+      "location": "04.details.9",
+      "ref": "{{e:E1004#/value}}",
+      "value": 1,
+      "display": "1"
+    },
+    {
+      "location": "04.details.9",
+      "ref": "{{c:/reference_wages_cny/工龄0~01年（不分职业）/p10|comma}}",
+      "value": 29300,
+      "display": "29,300"
+    },
+    {
+      "location": "04.details.9",
+      "ref": "{{c:/reference_wages_cny/工龄0~01年（不分职业）/p25|comma}}",
+      "value": 37000,
+      "display": "37,000"
+    },
+    {
+      "location": "04.details.9",
+      "ref": "{{c:/reference_wages_cny/工龄0~01年（不分职业）/p50|comma}}",
+      "value": 51600,
+      "display": "51,600"
+    },
+    {
+      "location": "04.details.9",
+      "ref": "{{c:/reference_wages_cny/工龄0~01年（不分职业）/p75|comma}}",
+      "value": 76900,
+      "display": "76,900"
+    },
+    {
+      "location": "04.details.9",
+      "ref": "{{c:/reference_wages_cny/工龄0~01年（不分职业）/p90|comma}}",
+      "value": 108100,
+      "display": "108,100"
+    },
+    {
+      "location": "04.analysis.11",
+      "ref": "{{e:E1005#/value}}",
+      "value": 2025,
+      "display": "2025"
+    },
+    {
+      "location": "04.analysis.11",
+      "ref": "{{e:E1006#/value|comma}}",
+      "value": 2330,
+      "display": "2,330"
+    },
+    {
+      "location": "04.analysis.11",
+      "ref": "{{e:E1007#/value|comma}}",
+      "value": 2200,
+      "display": "2,200"
+    },
+    {
+      "location": "04.analysis.11",
+      "ref": "{{e:E1008#/value}}",
+      "value": 2026,
+      "display": "2026"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "06.details.9",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "06.details.9",
+      "ref": "{{e:E1009#/value}}",
+      "value": "2026-09-21",
+      "display": "2026-09-21"
+    },
+    {
+      "location": "06.details.9",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "06.details.9",
+      "ref": "{{e:E1010#/value}}",
+      "value": "2026-05-12",
+      "display": "2026-05-12"
+    },
+    {
+      "location": "06.details.9",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "06.details.9",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "06.analysis.10",
+      "ref": "{{e:E2079#/value}}",
+      "value": "2027-04-29 23:59:59",
+      "display": "2027-04-29 23:59:59"
+    },
+    {
+      "location": "06.analysis.10",
+      "ref": "{{e:E2080#/value|md_short}}",
+      "value": "2027-04-30",
+      "display": "04-30"
+    },
+    {
+      "location": "06.analysis.11",
+      "ref": "{{e:E1011#/value}}",
+      "value": "五",
+      "display": "五"
+    },
+    {
+      "location": "06.details.13",
+      "ref": "{{e:E0901#/value|chinese}}",
+      "value": 3,
+      "display": "三"
+    },
+    {
+      "location": "07.timeline.2",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "07.timeline.2",
+      "ref": "{{k:/context/personal_dates/action1|ym}}",
+      "value": "2026-10-26",
+      "display": "2026.10"
+    },
+    {
+      "location": "07.timeline.2",
+      "ref": "{{k:/context/personal_dates/action1|md_short}}",
+      "value": "2026-10-26",
+      "display": "10-26"
+    },
+    {
+      "location": "07.timeline.2",
+      "ref": "{{k:/context/personal_dates/action1|ym}}",
+      "value": "2026-10-26",
+      "display": "2026.10"
+    },
+    {
+      "location": "07.timeline.2",
+      "ref": "{{k:/context/personal_dates/action2|md_short}}",
+      "value": "2026-10-30",
+      "display": "10-30"
+    },
+    {
+      "location": "07.timeline.2",
+      "ref": "{{k:/context/personal_dates/year_end|year}}",
+      "value": "2026-12-31",
+      "display": "2026"
+    },
+    {
+      "location": "07.timeline.2",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "07.timeline.2",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "07.timeline.2",
+      "ref": "{{k:/graduation_date|ym}}",
+      "value": "2027-06-30",
+      "display": "2027.06"
+    },
+    {
+      "location": "07.timeline.2",
+      "ref": "{{e:E0901#/value}}",
+      "value": 3,
+      "display": "3"
+    },
+    {
+      "location": "07.details.3",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "07.analysis.4",
+      "ref": "{{e:E1013#/value}}",
+      "value": 2026,
+      "display": "2026"
+    },
+    {
+      "location": "07.analysis.4",
+      "ref": "{{e:E1014#/value}}",
+      "value": 2025,
+      "display": "2025"
+    },
+    {
+      "location": "07.analysis.4",
+      "ref": "{{e:E1015#/value}}",
+      "value": 12,
+      "display": "12"
+    },
+    {
+      "location": "07.analysis.4",
+      "ref": "{{e:E1012#/value}}",
+      "value": "2026-04-16",
+      "display": "2026-04-16"
+    },
+    {
+      "location": "07.analysis.4",
+      "ref": "{{e:E2084#/value|md_short}}",
+      "value": "2026-04-17",
+      "display": "04-17"
+    },
+    {
+      "location": "07.analysis.4",
+      "ref": "{{e:E1016#/value}}",
+      "value": 80,
+      "display": "80"
+    },
+    {
+      "location": "07.analysis.4",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "07.analysis.4",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "08.routes.2",
+      "ref": "{{k:/context/personal_dates/action1|md}}",
+      "value": "2026-10-26",
+      "display": "10 月 26 日"
+    },
+    {
+      "location": "08.analysis.7",
+      "ref": "{{e:E1017#/value|arabic}}",
+      "value": "五十八",
+      "display": "58"
+    },
+    {
+      "location": "08.analysis.7",
+      "ref": "{{e:E1018#/value|arabic}}",
+      "value": "六十三",
+      "display": "63"
+    },
+    {
+      "location": "08.routes.8",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "08.routes.8",
+      "ref": "{{k:/context/personal_dates/year_end|year}}",
+      "value": "2026-12-31",
+      "display": "2026"
+    },
+    {
+      "location": "08.routes.8",
+      "ref": "{{k:/context/personal_dates/year_end|year}}",
+      "value": "2026-12-31",
+      "display": "2026"
+    },
+    {
+      "location": "08.routes.8",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "08.analysis.9",
+      "ref": "{{e:E2081#/value}}",
+      "value": "2026-03-17 10:00",
+      "display": "2026-03-17 10:00"
+    },
+    {
+      "location": "08.analysis.9",
+      "ref": "{{e:E2082#/value|md_hm}}",
+      "value": "2026-03-24 08:00",
+      "display": "03-24 08:00"
+    },
+    {
+      "location": "08.analysis.9",
+      "ref": "{{e:E2083#/value|md_short}}",
+      "value": "2026-04-26",
+      "display": "04-26"
+    },
+    {
+      "location": "08.analysis.9",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "08.routes.10",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "08.routes.10",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "09.offers.3",
+      "ref": "{{c:/hypothetical_offers/0/social_insurance_base|comma}}",
+      "value": 4800,
+      "display": "4,800"
+    },
+    {
+      "location": "09.offers.3",
+      "ref": "{{c:/report_parameters/hypothetical_followup__offers__0__months}}",
+      "value": 12,
+      "display": "12"
+    },
+    {
+      "location": "09.offers.3",
+      "ref": "{{c:/report_parameters/hypothetical_followup__offers__1__monthly_gross|comma}}",
+      "value": 4300,
+      "display": "4,300"
+    },
+    {
+      "location": "09.offers.3",
+      "ref": "{{c:/report_parameters/hypothetical_followup__offers__1__months}}",
+      "value": 13,
+      "display": "13"
+    },
+    {
+      "location": "09.offers.3",
+      "ref": "{{c:/report_parameters/hypothetical_followup__offers__1__months}}",
+      "value": 13,
+      "display": "13"
+    },
+    {
+      "location": "09.offers.3",
+      "ref": "{{c:/hypothetical_offers/0/social_insurance_base|comma}}",
+      "value": 4800,
+      "display": "4,800"
+    },
+    {
+      "location": "09.offers.3",
+      "ref": "{{c:/report_parameters/hypothetical_followup__ss_personal_rate_assumption|percent1}}",
+      "value": 0.104,
+      "display": "10.4%"
+    },
+    {
+      "location": "09.offers.3",
+      "ref": "{{k:/context/personal_dates/year_end|year}}",
+      "value": "2026-12-31",
+      "display": "2026"
+    },
+    {
+      "location": "09.offers.3",
+      "ref": "{{c:/hypothetical_offers/1/social_insurance_base|comma}}",
+      "value": 4699,
+      "display": "4,699"
+    },
+    {
+      "location": "09.offers.3",
+      "ref": "{{c:/report_parameters/hypothetical_followup__ss_personal_rate_assumption|percent1}}",
+      "value": 0.104,
+      "display": "10.4%"
+    },
+    {
+      "location": "09.offers.3",
+      "ref": "{{c:/report_parameters/hypothetical_followup__offers__0__hf_rate}}",
+      "value": 0.0,
+      "display": "0"
+    },
+    {
+      "location": "09.offers.3",
+      "ref": "{{c:/report_parameters/hypothetical_followup__offers__1__hf_rate|percent0}}",
+      "value": 0.08,
+      "display": "8%"
+    },
+    {
+      "location": "09.offers.3",
+      "ref": "{{c:/report_parameters/hypothetical_followup__offers__0__months}}",
+      "value": 12,
+      "display": "12"
+    },
+    {
+      "location": "09.offers.3",
+      "ref": "{{c:/hypothetical_offers/1/hours_per_year|comma}}",
+      "value": 2000,
+      "display": "2,000"
+    },
+    {
+      "location": "09.offers.3",
+      "ref": "{{c:/report_parameters/hypothetical_followup__offers__0__extra_hours_per_month}}",
+      "value": 10,
+      "display": "10"
+    },
+    {
+      "location": "09.offers.3",
+      "ref": "{{c:/hypothetical_offers/1/hours_per_year|comma}}",
+      "value": 2000,
+      "display": "2,000"
+    },
+    {
+      "location": "09.offers.3",
+      "ref": "{{c:/report_parameters/hypothetical_followup__offers__0__monthly_rent|comma}}",
+      "value": 1100,
+      "display": "1,100"
+    },
+    {
+      "location": "09.offers.3",
+      "ref": "{{c:/report_parameters/hypothetical_followup__offers__0__monthly_other|comma}}",
+      "value": 1500,
+      "display": "1,500"
+    },
+    {
+      "location": "09.offers.3",
+      "ref": "{{c:/report_parameters/hypothetical_followup__offers__1__monthly_rent}}",
+      "value": 400,
+      "display": "400"
+    },
+    {
+      "location": "09.offers.3",
+      "ref": "{{c:/report_parameters/hypothetical_followup__offers__0__monthly_rent|comma}}",
+      "value": 1100,
+      "display": "1,100"
+    },
+    {
+      "location": "09.analysis.4",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "09.analysis.4",
+      "ref": "{{c:/report_parameters/hypothetical_followup__offers__1__months}}",
+      "value": 13,
+      "display": "13"
+    },
+    {
+      "location": "09.details.6",
+      "ref": "{{c:/hypothetical_offers/0/annual_gross|comma}}",
+      "value": 57600,
+      "display": "57,600"
+    },
+    {
+      "location": "09.details.6",
+      "ref": "{{c:/hypothetical_offers/1/annual_gross|comma}}",
+      "value": 55900,
+      "display": "55,900"
+    },
+    {
+      "location": "09.details.6",
+      "ref": "{{c:/hypothetical_offers/0/personal_social_insurance|comma}}",
+      "value": 5990,
+      "display": "5,990"
+    },
+    {
+      "location": "09.details.6",
+      "ref": "{{c:/hypothetical_offers/1/personal_social_insurance|comma}}",
+      "value": 5864,
+      "display": "5,864"
+    },
+    {
+      "location": "09.details.6",
+      "ref": "{{c:/report_parameters/hypothetical_followup__offers__0__hf_rate}}",
+      "value": 0.0,
+      "display": "0"
+    },
+    {
+      "location": "09.details.6",
+      "ref": "{{c:/hypothetical_offers/1/personal_housing_fund|comma}}",
+      "value": 4128,
+      "display": "4,128"
+    },
+    {
+      "location": "09.details.6",
+      "ref": "{{c:/report_parameters/hypothetical_followup__offers__0__hf_rate}}",
+      "value": 0.0,
+      "display": "0"
+    },
+    {
+      "location": "09.details.6",
+      "ref": "{{c:/hypothetical_offers/1/housing_fund_account_total|comma}}",
+      "value": 8256,
+      "display": "8,256"
+    },
+    {
+      "location": "09.details.6",
+      "ref": "{{c:/report_parameters/hypothetical_followup__offers__0__hf_rate}}",
+      "value": 0.0,
+      "display": "0"
+    },
+    {
+      "location": "09.details.6",
+      "ref": "{{c:/report_parameters/hypothetical_followup__offers__0__hf_rate}}",
+      "value": 0.0,
+      "display": "0"
+    },
+    {
+      "location": "09.details.6",
+      "ref": "{{c:/hypothetical_offers/0/annual_take_home_cash|comma}}",
+      "value": 51610,
+      "display": "51,610"
+    },
+    {
+      "location": "09.details.6",
+      "ref": "{{c:/hypothetical_offers/1/annual_take_home_cash|comma}}",
+      "value": 45908,
+      "display": "45,908"
+    },
+    {
+      "location": "09.details.6",
+      "ref": "{{c:/hypothetical_offers/0/monthly_take_home_cash|comma}}",
+      "value": 4301,
+      "display": "4,301"
+    },
+    {
+      "location": "09.details.6",
+      "ref": "{{c:/hypothetical_offers/1/monthly_take_home_cash|comma}}",
+      "value": 3826,
+      "display": "3,826"
+    },
+    {
+      "location": "09.details.6",
+      "ref": "{{c:/report_parameters/hypothetical_followup__offers__1__months}}",
+      "value": 13,
+      "display": "13"
+    },
+    {
+      "location": "09.details.6",
+      "ref": "{{c:/offer_b_ordinary_month/take_home_cash|comma}}",
+      "value": 3467,
+      "display": "3,467"
+    },
+    {
+      "location": "09.details.6",
+      "ref": "{{c:/hypothetical_offers/0/hours_per_year|comma}}",
+      "value": 2120,
+      "display": "2,120"
+    },
+    {
+      "location": "09.details.6",
+      "ref": "{{c:/hypothetical_offers/1/hours_per_year|comma}}",
+      "value": 2000,
+      "display": "2,000"
+    },
+    {
+      "location": "09.details.6",
+      "ref": "{{c:/hypothetical_offers/0/hourly_cash|1f}}",
+      "value": 24.3,
+      "display": "24.3"
+    },
+    {
+      "location": "09.details.6",
+      "ref": "{{c:/hypothetical_offers/1/hourly_cash|1f}}",
+      "value": 23.0,
+      "display": "23.0"
+    },
+    {
+      "location": "09.details.6",
+      "ref": "{{c:/hypothetical_offers/0/hourly_cash|1f}}",
+      "value": 24.3,
+      "display": "24.3"
+    },
+    {
+      "location": "09.details.6",
+      "ref": "{{c:/hypothetical_offers/1/hourly_if_housing_fund_counted|1f}}",
+      "value": 27.1,
+      "display": "27.1"
+    },
+    {
+      "location": "09.details.6",
+      "ref": "{{c:/hypothetical_offers/0/monthly_remaining_cash|comma}}",
+      "value": 1701,
+      "display": "1,701"
+    },
+    {
+      "location": "09.details.6",
+      "ref": "{{c:/hypothetical_offers/1/monthly_remaining_cash|comma}}",
+      "value": 2326,
+      "display": "2,326"
+    },
+    {
+      "location": "09.details.6",
+      "ref": "{{c:/offer_b_ordinary_month/remaining_cash|comma}}",
+      "value": 1967,
+      "display": "1,967"
+    },
+    {
+      "location": "09.annual_income.8",
+      "ref": "{{c:/report_parameters/hypothetical_followup__offers__1__months}}",
+      "value": 13,
+      "display": "13"
+    },
+    {
+      "location": "09.annual_income.8",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "09.annual_income.8",
+      "ref": "{{c:/hypothetical_offers/0/annual_take_home_cash}}",
+      "value": 51610,
+      "display": "51610"
+    },
+    {
+      "location": "09.annual_income.8",
+      "ref": "{{c:/hypothetical_offers/0/annual_take_home_cash|comma}}",
+      "value": 51610,
+      "display": "51,610"
+    },
+    {
+      "location": "09.annual_income.8",
+      "ref": "{{c:/hypothetical_offers/1/annual_take_home_cash}}",
+      "value": 45908,
+      "display": "45908"
+    },
+    {
+      "location": "09.annual_income.8",
+      "ref": "{{c:/hypothetical_offers/1/annual_take_home_cash|comma}}",
+      "value": 45908,
+      "display": "45,908"
+    },
+    {
+      "location": "09.hourly_income.9",
+      "ref": "{{c:/hypothetical_offers/0/hourly_cash|1f}}",
+      "value": 24.3,
+      "display": "24.3"
+    },
+    {
+      "location": "09.hourly_income.9",
+      "ref": "{{c:/hypothetical_offers/0/hourly_cash|1f}}",
+      "value": 24.3,
+      "display": "24.3"
+    },
+    {
+      "location": "09.hourly_income.9",
+      "ref": "{{c:/hypothetical_offers/1/hourly_cash}}",
+      "value": 23.0,
+      "display": "23"
+    },
+    {
+      "location": "09.hourly_income.9",
+      "ref": "{{c:/hypothetical_offers/1/hourly_cash|1f}}",
+      "value": 23.0,
+      "display": "23.0"
+    },
+    {
+      "location": "09.monthly_balance.10",
+      "ref": "{{c:/report_parameters/hypothetical_followup__offers__1__months}}",
+      "value": 13,
+      "display": "13"
+    },
+    {
+      "location": "09.monthly_balance.10",
+      "ref": "{{c:/offer_b_ordinary_month/remaining_cash|comma}}",
+      "value": 1967,
+      "display": "1,967"
+    },
+    {
+      "location": "09.monthly_balance.10",
+      "ref": "{{c:/hypothetical_offers/0/monthly_remaining_cash}}",
+      "value": 1701,
+      "display": "1701"
+    },
+    {
+      "location": "09.monthly_balance.10",
+      "ref": "{{c:/hypothetical_offers/0/monthly_remaining_cash|comma}}",
+      "value": 1701,
+      "display": "1,701"
+    },
+    {
+      "location": "09.monthly_balance.10",
+      "ref": "{{c:/hypothetical_offers/1/monthly_remaining_cash}}",
+      "value": 2326,
+      "display": "2326"
+    },
+    {
+      "location": "09.monthly_balance.10",
+      "ref": "{{c:/hypothetical_offers/1/monthly_remaining_cash|comma}}",
+      "value": 2326,
+      "display": "2,326"
+    },
+    {
+      "location": "09.analysis.13",
+      "ref": "{{c:/report_parameters/hypothetical_followup__offers__1__months}}",
+      "value": 13,
+      "display": "13"
+    },
+    {
+      "location": "09.details.18",
+      "ref": "{{c:/report_parameters/hypothetical_followup__offers__1__months}}",
+      "value": 13,
+      "display": "13"
+    },
+    {
+      "location": "09.details.18",
+      "ref": "{{c:/offer_b_ordinary_month/remaining_cash|comma}}",
+      "value": 1967,
+      "display": "1,967"
+    },
+    {
+      "location": "09.details.18",
+      "ref": "{{c:/report_parameters/hypothetical_followup__offers__1__hf_rate|percent0}}",
+      "value": 0.08,
+      "display": "8%"
+    },
+    {
+      "location": "09.details.18",
+      "ref": "{{c:/report_parameters/hypothetical_followup__offers__0__months}}",
+      "value": 12,
+      "display": "12"
+    },
+    {
+      "location": "09.analysis.20",
+      "ref": "{{e:E1019#/value}}",
+      "value": 2026,
+      "display": "2026"
+    },
+    {
+      "location": "09.analysis.20",
+      "ref": "{{e:E1020#/value|comma}}",
+      "value": 4699,
+      "display": "4,699"
+    },
+    {
+      "location": "09.analysis.20",
+      "ref": "{{e:E1021#/value|comma}}",
+      "value": 23493,
+      "display": "23,493"
+    },
+    {
+      "location": "09.analysis.20",
+      "ref": "{{e:E1019#/value}}",
+      "value": 2026,
+      "display": "2026"
+    },
+    {
+      "location": "09.analysis.20",
+      "ref": "{{c:/report_parameters/hypothetical_followup__ss_personal_rate_assumption|percent1}}",
+      "value": 0.104,
+      "display": "10.4%"
+    },
+    {
+      "location": "09.analysis.20",
+      "ref": "{{e:E1022#/value}}",
+      "value": "0.4%",
+      "display": "0.4%"
+    },
+    {
+      "location": "09.analysis.20",
+      "ref": "{{e:E1023#/value}}",
+      "value": 2025,
+      "display": "2025"
+    },
+    {
+      "location": "09.analysis.20",
+      "ref": "{{e:E1019#/value}}",
+      "value": 2026,
+      "display": "2026"
+    },
+    {
+      "location": "09.analysis.21",
+      "ref": "{{e:E2085#/value|yuan}}",
+      "value": "六万元",
+      "display": "60,000"
+    },
+    {
+      "location": "09.analysis.22",
+      "ref": "{{c:/report_constants/months_per_year}}",
+      "value": 12,
+      "display": "12"
+    },
+    {
+      "location": "10.analysis.6",
+      "ref": "{{e:E1024#/value|arabic}}",
+      "value": "七",
+      "display": "7"
+    },
+    {
+      "location": "10.analysis.6",
+      "ref": "{{e:E1025#/value|arabic}}",
+      "value": "十",
+      "display": "10"
+    },
+    {
+      "location": "10.analysis.6",
+      "ref": "{{e:E1026#/value}}",
+      "value": "一",
+      "display": "一"
+    },
+    {
+      "location": "10.analysis.9",
+      "ref": "{{e:E1027#/value|arabic}}",
+      "value": "二十七",
+      "display": "27"
+    },
+    {
+      "location": "10.analysis.12",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "11.questions.2",
+      "ref": "{{c:/report_parameters/hypothetical_followup__offers__1__months}}",
+      "value": 13,
+      "display": "13"
+    },
+    {
+      "location": "11.questions.2",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "12.analysis.3",
+      "ref": "{{k:/budget/take_home_assumption|comma}}",
+      "value": 4500,
+      "display": "4,500"
+    },
+    {
+      "location": "12.analysis.3",
+      "ref": "{{k:/budget/monthly_housing_assumption|comma}}",
+      "value": 600,
+      "display": "600"
+    },
+    {
+      "location": "12.analysis.3",
+      "ref": "{{k:/budget/monthly_other_expenses_assumption|comma}}",
+      "value": 1700,
+      "display": "1,700"
+    },
+    {
+      "location": "12.analysis.3",
+      "ref": "{{c:/monthly_expenses|comma}}",
+      "value": 2300,
+      "display": "2,300"
+    },
+    {
+      "location": "12.analysis.3",
+      "ref": "{{c:/monthly_remaining|comma}}",
+      "value": 2200,
+      "display": "2,200"
+    },
+    {
+      "location": "12.analysis.3",
+      "ref": "{{k:/budget/monthly_housing_assumption|comma}}",
+      "value": 600,
+      "display": "600"
+    },
+    {
+      "location": "12.analysis.3",
+      "ref": "{{c:/monthly_remaining_if_housing_plus_600|comma}}",
+      "value": 1600,
+      "display": "1,600"
+    },
+    {
+      "location": "12.analysis.5",
+      "ref": "{{c:/report_parameters/hypothetical_followup__ss_personal_rate_assumption|percent1}}",
+      "value": 0.104,
+      "display": "10.4%"
+    },
+    {
+      "location": "12.analysis.5",
+      "ref": "{{c:/report_parameters/hypothetical_followup__offers__1__months}}",
+      "value": 13,
+      "display": "13"
+    },
+    {
+      "location": "12.analysis.5",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    }
+  ],
+  "artifacts": {
+    "report.md": "56865889da5bd4655b01c6a8d3a256e905ab49e4ffbd3cf4442f6f0e444e478c",
+    "report.html": "ee286a75faec6cdf249376283c5265447dfec776539597f732a167f1421a0a98",
+    "2027-QZ-S01-report.pdf": "6ca8ff2a358ee3d1a661e4c66c83022fdd56474ada60e097ae7fbecd296f7f0d"
+  },
+  "delivery_status": "awaiting_operator_and_independent_review",
+  "report_profile": {
+    "file": "profile_snapshot.json",
+    "sha256": "0a6cb6835c42b9e3a0e18679bd40d3c99c433453287f9e2a231e357647a858d9",
+    "filled_at": null,
+    "form": null
+  },
+  "verification_tools_sha256": {
+    "verify_report.py": "491d8cea6a72e86b0cbf987d52f4139cdca0a51c3e46ff3e7fee47589e0bcf60",
+    "verification_calculations.py": "80e4fb8e0d247582ade885655be5f30e0c2d1cc9e19ebf59c39f3fa83823a54b"
+  }
+}

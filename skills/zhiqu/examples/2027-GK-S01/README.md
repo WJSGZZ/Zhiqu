@@ -13,7 +13,7 @@
 | 4 筛选与候选池 | `screening.json`（18,543 → 143，逐步对账）、`excluded_campus.csv`、`pool.csv` |
 | 5 打分 | `attributes.csv`、`preferences_config.json`、`preferences_review.json`、`reviewed.csv` |
 | 6 计算 | `result.json`、`run.json`（全部命令）、`sensitivity/` |
-| 7 报告 | `report.json`、`report.pdf`、`report.html`、`entry_sheet.csv` |
+| 7 报告 | `report.json`、`2027-GK-S01-report.pdf`、`report.html`、`entry_sheet.csv` |
 | 8 复核 | `review.json`：2026-10-16 第一次独立复核不通过（同分规则转述、参数口径不统一、变热情景幅度、100 分定义等），逐条修改后，2026-10-17 第二次独立复核**通过**（计算逐位重现，抽查 12 条来源全部一致；剩余低级别事项见记录） |
 
 这一单暴露并已处理的问题：

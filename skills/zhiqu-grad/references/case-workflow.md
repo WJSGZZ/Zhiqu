@@ -2,7 +2,7 @@
 
 共用的证据字段、数字引用、时效、操控者单和评分只在[报告工作流总纲](../../zhiqu-shared/references/report-workflow.md)维护；本文件定义读研差异，各节数量在[内容合同](report-contract.json)，写法见[报告指南](report-guide.md)。
 
-真实案例仅本机留存；公开样例放 examples，编号为 `YYYY-YJ-四位序号`，样例用 `YYYY-YJ-S01`、S02 等。新案例目录与编号一致；既有 `examples/demo_2027/` 保留，用 case.json 的 `legacy_directory: true` 记录迁移例外，不改它的原有计算和人物。介绍页说明人物为模拟，正文按真实交付标准写。
+真实案例仅本机留存；公开样例放 examples，编号为 `YYYY-YJ-四位序号`，样例用 `YYYY-YJ-S01`、S02 等。目录名与编号一致，交付 PDF 名为 `<编号>-report.pdf`；最早的样例 S01 保留原有计算和人物。介绍页说明人物为模拟，正文按真实交付标准写。
 
 ## 阶段表
 

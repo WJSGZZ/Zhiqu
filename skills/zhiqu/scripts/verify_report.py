@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Inspect a delivered PDF offline; never execute embedded code or fetch URLs.
 
-python3 verify_report.py report.pdf [--extract DIRECTORY] [--json]
+python3 verify_report.py 2027-YJ-0001-report.pdf [--extract DIRECTORY] [--json]
 The checks establish internal consistency, not the truth of an official source.
 """
 import argparse
@@ -14,7 +14,6 @@ import json
 import math
 from pathlib import Path
 import re
-import shutil
 import subprocess
 import sys
 import tempfile
@@ -29,6 +28,9 @@ MAX_ATTACHMENT = 16 * 1024 * 1024
 MARKS=('逐项核对材料','附录：核对材料')
 
 def digest(data):return hashlib.sha256(data).hexdigest()
+def report_pdf_name(case_id):
+    """示例和真实报告同一命名：交付 PDF 一律叫 <报告号>-report.pdf。"""
+    return f'{case_id}-report.pdf'
 def json_bytes(value):return (json.dumps(value,ensure_ascii=False,indent=2)+'\n').encode()
 def read(path):return json.loads(Path(path).read_text())
 def visible(value):
@@ -420,7 +422,9 @@ def attach_pdf(pdf,files,materials,case,binding,body_html):
         if Path(name).name!=name or '\\' in name or ':' in name or not name.endswith(('.json','.csv','.txt')):raise ValueError('不安全的附件名')
         if len(body)>MAX_ATTACHMENT:raise ValueError('附件过大')
         if name=='report_trace.json':
-            trace=json.loads(body);trace.get('artifacts',{}).pop('report.pdf',None);trace['pdf_digest_scope']='最终PDF哈希保存在外部追踪文件；嵌入副本不包含自身哈希，避免循环。';body=json_bytes(trace)
+            trace=json.loads(body);artifacts=trace.get('artifacts',{})
+            for key in [k for k in artifacts if k.endswith('.pdf')]:artifacts.pop(key)
+            trace['pdf_digest_scope']='最终PDF哈希保存在外部追踪文件；嵌入副本不包含自身哈希，避免循环。';body=json_bytes(trace)
         clean[name]=body
     parser=SectionText();parser.feed(body_html)
     manifest={'schema':1,'case_id':case['case_id'],'profile_sha256':binding['sha256'],'materials':materials,
@@ -461,9 +465,6 @@ def _record_generation(root,pdf):
         if registry.exists() and case['case_id'] in read(registry).get('cases',{}):
             from profile_store import record_report
             record_report(root.parent,case['case_id'],pdf)
-        # 交付用副本：以报告号命名，发给客户时不会和别人的 report.pdf 混在一起
-        delivery=root/f"{case['case_id']}-report.pdf"
-        if pdf!=delivery:shutil.copyfile(pdf,delivery)
 
 
 def record_generation(root,pdf):

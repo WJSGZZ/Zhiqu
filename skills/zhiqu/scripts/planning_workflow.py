@@ -388,7 +388,7 @@ class PlanningCase:
             if c.get(key) in (None,'',[]): self.err('case.json',key,'缺登记信息')
         code='YJ' if self.kind=='grad' else 'QZ'
         if not re.fullmatch(r'\d{4}-'+code+r'-(?:\d{4}|S\d{2})',c.get('case_id','')): self.err('case.json','case_id','编号格式不符')
-        if not c.get('legacy_directory') and self.root.name!=c.get('case_id'): self.err('case.json','case_id','与目录名不一致')
+        if self.root.name!=c.get('case_id'): self.err('case.json','case_id','与目录名不一致')
         if c.get('mode') not in ('formal','simulation'): self.err('case.json','mode','非法模式')
         if c.get('mode')=='formal' and '-S' in c.get('case_id',''): self.err('case.json','case_id','正式编号不能用S')
         if day(c['prepared_on'])>day(c['context']['as_of']): self.err('case.json','context.as_of','早于准备日')
@@ -642,7 +642,8 @@ def review_errors(root, delivery=False, limits=None):
         if len(rev.get('sampled_sources',[]))<lim['review_samples_min'] or any(x.get('matches') is not True for x in rev.get('sampled_sources',[])):errors.append('review.json.sampled_sources：抽查未通过')
         from operator_check import validate_operator
         errors.extend(validate_operator(root,True))
-    required=({'report.json','report.pdf'} | {str(p.relative_to(root)) for p in root.rglob('result*.json')}) if (root/'report.json').exists() else set((*FILES,*source_files(root),'report.md','report.html','report.pdf','report_trace.json'))
+    pdf=read(root/'case.json')['case_id']+'-report.pdf' if (root/'case.json').exists() else 'report.pdf'
+    required=({'report.json',pdf} | {str(p.relative_to(root)) for p in root.rglob('result*.json')}) if (root/'report.json').exists() else set((*FILES,*source_files(root),'report.md','report.html',pdf,'report_trace.json'))
     required.add('operator_check.md')
     snapshot=rev.get('snapshot',{})
     if not required<=set(snapshot):errors.append('review.json.snapshot：缺完整输入/报告快照')

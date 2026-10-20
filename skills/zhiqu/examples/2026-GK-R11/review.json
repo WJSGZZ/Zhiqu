@@ -82,7 +82,7 @@
   },
   "snapshot": {
     "report.json": "570be45365808435babe42f8c9d74bd2ac46926898d89500da253919dbcc228a",
-    "report.pdf": "f4cc084098f560bb2b828cef86451da8ae91680fcf7d63ce3154c5cd1686b516",
+    "2026-GK-R11-report.pdf": "fb952cadda78418663f37119046dd3d7a6e8b79864fb528266c93d45c9514732",
     "operator_check.md": "c74f216a7231765403e5ee1bd5f497147634d27f2bdff147ad463ac65051872a",
     "retro_ranks/103352/result.json": "ce2b1514171aa7250e98421b83a8c1c317f3c9fe556a382dde19a8e6232b2511",
     "case.json": "bb858dbf4b9af3edda8c0727b5363ec849c0af618407c66006e6ab799b66c9e8",
@@ -194,6 +194,16 @@
         "report_trace.json"
       ],
       "reason": "合入两份旗舰后共用版面与核对工具更新；内容未变。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude（报告命名统一）",
+      "files": [
+        "2026-GK-R11-report.pdf"
+      ],
+      "reason": "仅改文件名，正文逐字未变。",
+      "comparison": "改名前后各抽取 PDF 全文（24 页）逐行比对：唯一差异是第 12 节“生成时间”（2026-10-20T17:23:59+08:00 → 2026-10-20T18:45:35+08:00）；页数、标题、案例号与画像指纹不变。",
+      "not_refreshed": "report.json、operator_check.md 在改名前（main 134a6a3）已与快照不符，不属于本次改名，未刷新，留待复核处理。"
     }
   ]
 }
