@@ -2,15 +2,15 @@
   "schema_version": 1,
   "case_id": "2027-QZ-S05",
   "source_sha256": {
-    "case.json": "718f6879c7ea5f74099322688a55e99056cfac30fa36248ca5151cb4a137e155",
+    "case.json": "c40887c16346ff5962ac83192e30279765d24557713da36a03d4fc4b7807c564",
     "profile_parse.json": "ca28989bbe8fae3f6def3dcc789a8b04dd9101d78bd065fd815788b92197d604",
-    "directions.json": "d3369a37d4e78632f8f33292439606e85b7248196454452eb40eded886aac9a1",
+    "directions.json": "e622eebd36fd6ffa1be8b5b60c49b7773f68d6c28e896e0ce18a7c85bc9a7453",
     "rules_check.json": "aadb64ede706f87480d8eafb6dda580b32616981dae8d3c860b4536970ee3bf0",
-    "candidates.json": "fddd4f4cdfbb30329f9192067abdc4a3440e47333ceae4f5becf4a7e6975947c",
-    "evidence.json": "5e70cfa2ad76bc09b8ed9b9737029ad5c53cf281676fcc6ee4d272542a58d9b5",
-    "calculations.json": "896c085db52b861b364d5c8d47de04b87f565fdd5875520c260ebabc4a75a8f6",
-    "judgment.json": "5176c2023bab7907afc0c29b40b0d584a1272041ff280d04baa343a85c5f594f",
-    "narrative.json": "10631eb91b5286559d4c24e7c24d466a9f2368b7ee348265d2187df89ba81ebd",
+    "candidates.json": "8a701d7da74663c7c1462df150c68fecc1954716aa81726d7c91601968ae070f",
+    "evidence.json": "ab6d32269aa1411d0ddce04d258fd31a2cbba3a83f72286729f4d93fe5960a08",
+    "calculations.json": "6438b6d9fa3dc1498284a32e49f09e98c80c1e8570d780d0f5d4d1adb48887d1",
+    "judgment.json": "5b68d3ebb5a1e5ca1d58508f16270cbb0ef207ceb5a6da3689198c9afe9b2e7b",
+    "narrative.json": "69bb3538f36c01274572565194a84272574817c022f2fa4c14b18592b7b9cf9b",
     "profile.json": "f8c7a4b076a64c168d303710ea8836b70a79ffe5d53ce7521045bfe4ae4c2d1f",
     "profile-supplement.txt": "247f31f22f4c9a6c33394b5b25e3b37ef21c19fd3b9c12a70a83839f7976b026"
   },
@@ -441,9 +441,9 @@
     },
     {
       "location": "05.figure.1",
-      "ref": "{{c:/all_q3|1f}}",
+      "ref": "{{c:/all_q3}}",
       "value": 51.875,
-      "display": "51.9"
+      "display": "51.875"
     },
     {
       "location": "05.figure.1",
@@ -616,14 +616,20 @@
     {
       "location": "06.analysis.3",
       "ref": "{{c:/fc_fail_count}}",
-      "value": 39,
-      "display": "39"
+      "value": 38,
+      "display": "38"
     },
     {
       "location": "06.analysis.3",
       "ref": "{{c:/fc_unk_count}}",
       "value": 19,
       "display": "19"
+    },
+    {
+      "location": "06.analysis.3",
+      "ref": "{{c:/fc_ok_count}}",
+      "value": 41,
+      "display": "41"
     },
     {
       "location": "06.analysis.3",
@@ -636,6 +642,36 @@
       "ref": "{{c:/fb_fail_count}}",
       "value": 17,
       "display": "17"
+    },
+    {
+      "location": "06.analysis.3",
+      "ref": "{{c:/anya_count}}",
+      "value": 61,
+      "display": "61"
+    },
+    {
+      "location": "06.analysis.3",
+      "ref": "{{c:/anya_ok_count}}",
+      "value": 47,
+      "display": "47"
+    },
+    {
+      "location": "06.analysis.3",
+      "ref": "{{c:/anya_ok_median}}",
+      "value": 198.0,
+      "display": "198"
+    },
+    {
+      "location": "06.analysis.3",
+      "ref": "{{c:/major_any_count}}",
+      "value": 58,
+      "display": "58"
+    },
+    {
+      "location": "06.analysis.3",
+      "ref": "{{c:/major_any_ok_count}}",
+      "value": 12,
+      "display": "12"
     },
     {
       "location": "07.lead.0",
@@ -927,6 +963,12 @@
     },
     {
       "location": "08.routes.4",
+      "ref": "{{e:E037#/value|md}}",
+      "value": "2026-05-16",
+      "display": "5 月 16 日"
+    },
+    {
+      "location": "08.routes.4",
       "ref": "{{e:E040#/value|md}}",
       "value": "2026-07-20",
       "display": "7 月 20 日"
@@ -1179,9 +1221,9 @@
     }
   ],
   "artifacts": {
-    "report.md": "a6992bc57053eeb6a9c5b14f0c4b52da64ea6be4942836e4ab2eba409b9bfb70",
-    "report.html": "d30fc4ebac589c5ca451c78e78405ddf719164d8bc4430e37e8e2db9ff4acef2",
-    "report.pdf": "01ab60b5ba5d2c6f90db59e733a6a5af5d145a40a11a3af40a8a18d8412e7076"
+    "report.md": "e20d82cf5f5e49e17f8cb896e91741fa9d4725ce5412bee38b6ee8610a153d36",
+    "report.html": "6a7831cd9bd2335d9f8d22696cba376d269d2ff06d9be0a65ea92f004cf2833f",
+    "report.pdf": "88ae1736bc213a98aaeca18a3620f9733c30788963a5d86bba3454492950db08"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "report_profile": {
