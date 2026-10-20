@@ -1214,6 +1214,35 @@
      ]
     },
     {
+     "key": "runway",
+     "component": "bars",
+     "min": 0,
+     "max": 1,
+     "from": [
+      {
+       "file": "calculations.json",
+       "pointer": ""
+      },
+      {
+       "file": "evidence.json",
+       "pointer": "/report_blocks"
+      }
+     ],
+     "source_required": true,
+     "condition": "offer_basis_none",
+     "rules": [
+      "no_offer_shows_how_long_spendable_cash_lasts",
+      "no_new_income_assumed",
+      "emergency_reserve_is_risk_boundary",
+      "optional_only_when_cash_and_spending_inputs_exist"
+     ],
+     "count_by": "components",
+     "node_types": [
+      "bars",
+      "data_gap"
+     ]
+    },
+    {
      "key": "offers",
      "component": "offer_table",
      "min": 1,
@@ -1664,8 +1693,8 @@
   {
    "id": "12",
    "role": "methods_and_sources",
-   "default_title": "方法、数据来源与声明",
-   "title_override_allowed": true,
+   "default_title": "核对与来源",
+   "title_override_allowed": false,
    "slots": [
     {
      "key": "lead",

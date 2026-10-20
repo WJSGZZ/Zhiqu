@@ -45,6 +45,7 @@ Markdown 格式：
     matrix另写columns: 维度A | 维度B；数据行 - 选项 | ✓短语 | △短语（或✗）。
     ::: route 路线名：恰好四行 - 门槛 | ... / - 时间窗口 | ... / - 投入 | ... / - 切换条件 | ...
     ::: evidence：每行 - 官方/多人一致/单人说法/推测 | 说明。
+    ::: questions / ::: scenarios：columns: 列名 | 列名 | …，每行 - 各列内容；画成追问卡、风险触发卡。
     ::: sources：放第12节，每行 - 来源标题 | 完整URL（个人/计算来源可空） | 发布/核实日期。
     所有块都以单独一行:::结束。bars/interval/timeline/matrix必须有图题、caption和source；
     网址只在sources中显示；正文链接和裸网址统一转为尾注。缺图题/来源的SVG拒绝生成。
@@ -151,7 +152,7 @@ _OL_RE = re.compile(r"^(\s*)\d+[.)]\s+(.*)$")
 _HR_RE = re.compile(r"^\s*(---+|\*\*\*+|___+)\s*$")
 _QUOTE_RE = re.compile(r"^>\s?(.*)$")
 _TABLE_SEP_RE = re.compile(r"^\s*\|?\s*:?-{2,}:?\s*(\|\s*:?-{2,}:?\s*)*\|?\s*$")
-_FENCE_RE = re.compile(r"^:::\s*(kpi|strip|bars|interval|timeline|matrix|route|evidence|sources)\s*(.*)$")
+_FENCE_RE = re.compile(r"^:::\s*(kpi|strip|bars|interval|timeline|matrix|route|evidence|sources|questions|scenarios)\s*(.*)$")
 _CALLOUT_RE = re.compile(r"^\[!(key|warn|note)\]\s*(.*)$")
 _TAGS = ("冲", "稳", "保")
 
@@ -180,6 +181,11 @@ def render_fence(kind, title, lines, notes=None):
     if kind == 'kpi': return _report.kpi_cards(items, render_inline)
     if kind == 'evidence':
         return ''.join('<p>'+_report.evidence_badge(r[0])+' '+render_inline(r[1] if len(r)>1 else '')+'</p>' for r in items)
+    if kind in ('questions','scenarios'):
+        columns = [v.strip() for v in opts.get('columns','').split('|')]
+        if any(len(r)!=len(columns) for r in items): raise ValueError(kind+'列数与columns不一致')
+        if kind == 'questions': return _report.question_cards(items, columns[1:], render_inline)
+        return _report.scenario_cards(columns, items, render_inline)
     if kind == 'route':
         mapping = {r[0]:r[1] for r in items if len(r)>1}
         return _report.route_card(title,[mapping.get(k,'待核') for k in ('门槛','时间窗口','投入','切换条件')])
@@ -201,7 +207,7 @@ def render_fence(kind, title, lines, notes=None):
         if 'columns' not in opts: raise ValueError('matrix须有columns，按|分隔维度')
         columns = [v.strip() for v in opts['columns'].split('|')]
         if any(len(r)!=len(columns)+1 for r in items): raise ValueError('matrix列数与columns不一致')
-        content = _report.comparison_matrix(columns,items)
+        content = _report.comparison_matrix(columns,items,render_inline)
     else: raise ValueError('未知报告组件：'+kind)
     return _report.figure(title,content,caption,source)
 
@@ -427,7 +433,7 @@ def build_html(meta, body_html, sections, notes=None):
                               meta.get('conclusion',meta.get('note','')),[(num,t) for num,t,_ in sections if num])
     parts = []
     for idx,(num,t,sec_html) in enumerate(sections):
-        if idx==0: sec_html = sec_html.replace('<section ', '<section class="newpage" ',1)
+        if idx==0 or num=='12': sec_html = sec_html.replace('<section ', '<section class="newpage" ',1)
         if num != '12': sec_html = notes.compact(_report.section_lead(sec_html))
         else: sec_html = _report.section_lead(sec_html)
         parts.append(sec_html+'</section>')

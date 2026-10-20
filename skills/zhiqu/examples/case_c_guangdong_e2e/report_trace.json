@@ -46,10 +46,10 @@
   ],
   "source_sha256": {
     "case.json": "32c9030dc02b30600366e0a75c7b730af2ddb153e42cea3706bb3f93d998c542",
-    "report.json": "25e21eaa952a7e99c093707a8b87b4f1c4c1a2f9e1963356b3670e3322e7eea9",
+    "report.json": "15dd190c02217b4ef828470b86b2c8324b6002fe6460391366285ed203f637d8",
     "result.json": "9e53f1f0f8a52944252b298aa1a58997df0c3fc75af06399c9829ae66a6d196a"
   },
   "artifacts": {
-    "report.pdf": "306f6f0ce99ac2a299d73f127acfa20331a31a9f67717059ed8b962761e43b2b"
+    "report.pdf": "c9ed7a9a4e39eaa8ed7312e35933d9d6ae0af31deffaa5ab05876c37496c8cf3"
   }
 }

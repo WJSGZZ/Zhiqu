@@ -244,7 +244,7 @@ def check_section_names(root):
 _ROW_NUM_RE = re.compile(r"^\|\s*(\d{2})\b")
 
 
-GAOKAO_TITLES = ["摘要", "你的画像", "专业方向", "志愿表", "为什么这样排", "院校调研", "填报前核对清单", "填报单", "追问清单", "方法与假设", "事后回看", "数据来源与声明"]
+GAOKAO_TITLES = ["摘要", "你的画像", "专业方向", "志愿表", "为什么这样排", "院校调研", "填报前核对清单", "填报单", "追问清单", "方法与假设", "事后回看", "核对与来源"]
 
 
 def _check_gaokao_toc(root, relpath, lines):

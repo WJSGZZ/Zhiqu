@@ -117,7 +117,7 @@ class UnifiedReportStyleTests(unittest.TestCase):
             'gaps': [{'label': '目录', 'reason': '验证码'}]})
         for text in ('本 PDF 附带数据文件', '学费 8000 元/年。', 'https://school.edu.cn/fee', '验证码', '&lt;待核&gt;'):
             self.assertIn(text, output)
-        self.assertIn('data-section="appendix"', output)
+        self.assertIn('<h3>逐项核对材料</h3>', output)
         self.assertNotIn('<svg', output)
 
     def test_style_checker_rejects_drift(self):

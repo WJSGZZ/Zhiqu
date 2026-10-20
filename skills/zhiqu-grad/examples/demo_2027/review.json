@@ -102,13 +102,13 @@
     "candidates.json": "c9c5db84e727dde6ec750e534d023b4e15e7dd85e5bd1bc77110b14166f9d8ad",
     "evidence.json": "51ed06bd23e71530e9c0bf1e43fba3f2a74af69d27bbd91e12fbfee320924cbe",
     "calculations.json": "cec5b3577a8d62196c2dfd606cfab91b31c421feb52a97cbdd3a5cfafcd5daf7",
-    "judgment.json": "ffae2d16952ca87f41b2deb3a2bce409a0713503f4c334d8f38ab10a116bf84e",
+    "judgment.json": "8b73bca83ff62c0733a11877d494d551885c3de35e30c6bcfc71c6cd072b35b0",
     "narrative.json": "25e3ff88fd2d4313731ad5429e11bfd2b4063d11fbe5779087ea7db0c3f99efa",
     "profile.txt": "2be92b9770f7a4a877386334b958c096198b948c89c5eabca030d4f557e29457",
-    "report.md": "10dbee42ff513d6cd8b0cd4b9742fa792d68860a95a9d816e8c221b15f5f6195",
-    "report.html": "f240510eacb28410b48cc22cf7890685f53160771edc6dd19ce818e2dd9d1ee5",
-    "report.pdf": "b5bc7b4541da9ec94854ec9744a7ad5305f74ce108b2115e4049ff1a11dbb5d5",
-    "report_trace.json": "be5255393311f9073e175664176dae054c95cdf32097e765f550331c74fc335f",
+    "report.md": "cddf391a96a5e2df544e0667c6a03951bf61c85a159124328dd713a64fe71ea3",
+    "report.html": "65f5f79482c6305096070883b3c65931d277de05ad74a92878ddbd7fc25b175f",
+    "report.pdf": "aee10b51ca4f4e5ecd11d9b06fcd8353050b0a5c1fc0d3e5895595d4d66e84e7",
+    "report_trace.json": "0680e3c6eef53c21c567c9ebbfb66ed9a57be2a8a8f4dbb352c5ee1854f54b19",
     "operator_check.md": "312f3a475a4e0f077e830c97da739b121a358dda8c330abdac211f3e5933d741",
     "profile_snapshot.json": "432626de4888a0d461edc284e9c475796e8d96ce33683030143dcd3f896be032"
   },
@@ -134,6 +134,18 @@
         "report_trace.json"
       ],
       "reason": "修正数字防拆行标记被其他样式套用（封面编号拆行、摘要卡里数字变大）后重新生成；正文 report.md 与全部输入文件未变，自评结论不受影响。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "judgment.json",
+        "report.md",
+        "report.html",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "报告改版（2026-10-20）：正文给读者、第 12 节“核对与来源”给核对；比较矩阵、追问、风险改为三类报告共用的卡片和标记，图表配色统一。 judgment.json 的 presentation 删去 12 段与别处重复的说明（不含数字和出处的段落），narrative.json 原文未删；数字与结论不变。"
     }
   ]
 }

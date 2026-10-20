@@ -81,9 +81,9 @@
     ]
   },
   "snapshot": {
-    "report.json": "085719278f8563cddbd76c8a42ac163603cddea6977877be91a600ded9b81ab9",
-    "report.pdf": "2fc1203338865139b66f7f5078e715599505349b2625ad8b1affa5fc5ef805ab",
-    "operator_check.md": "64a3939806f4316d611797d4cec9f6b8a18a1d73c3cd6c77de07cdd3dac5d5ec",
+    "report.json": "c36979da95e263f06e2cd91973a378ddef816ce34f7c9dbde5b3b49db411186e",
+    "report.pdf": "543679b2d47cb47ff2977e3531546fee9abfa9de3fb168ee350636af98569748",
+    "operator_check.md": "79244823a3163bde7926e267a4ecb904915a64ca1b842fbf0ed638d08bcc6f6c",
     "retro_ranks/29895/result.json": "679062fa1c75fb9966e2ea740f24a15f8849dbdbcbc6f35d1aa02989c177bd66",
     "case.json": "fe231ef7a0e6a9741e9d9891f2c7fb95996f0b10b5efcb89a4eafcce2bd23436",
     "profile_snapshot.json": "774d76add4dc6ba1ba43217669a3755a6e15329ca9ee5bf7399727138348649a"
@@ -91,5 +91,17 @@
   "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。",
   "self_assessment": {
     "verification_scope": "本轮更新为附核对材料的PDF，自评和机器核对通过后仍等待独立审核；未补造官方原文和独立批准。"
-  }
+  },
+  "snapshot_refreshes": [
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.json",
+        "report.pdf",
+        "operator_check.md"
+      ],
+      "reason": "报告改版（2026-10-20）：正文给读者、第 12 节“核对与来源”给核对；比较矩阵、追问、风险改为三类报告共用的卡片和标记，图表配色统一。 院校调研加了每个方面一句话的卡片（brief，只概括原调研“发现”，不加新事实或数字），原表移到第 12 节。志愿、概率、排序和结论不变。"
+    }
+  ]
 }

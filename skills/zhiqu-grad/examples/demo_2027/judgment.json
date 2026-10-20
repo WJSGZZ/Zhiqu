@@ -493,10 +493,6 @@
       },
       {
         "slot": "analysis",
-        "ref": "narrative.json#/sections/02/analysis/4"
-      },
-      {
-        "slot": "analysis",
         "ref": "narrative.json#/sections/02/analysis/5"
       },
       {
@@ -528,14 +524,6 @@
       {
         "slot": "details",
         "ref": "judgment.json#/report_blocks/03_3"
-      },
-      {
-        "slot": "analysis",
-        "ref": "narrative.json#/sections/03/analysis/2"
-      },
-      {
-        "slot": "analysis",
-        "ref": "narrative.json#/sections/03/analysis/3"
       },
       {
         "slot": "analysis",
@@ -658,10 +646,6 @@
         "ref": "judgment.json#/report_blocks/05_8"
       },
       {
-        "slot": "analysis",
-        "ref": "narrative.json#/sections/05/analysis/6"
-      },
-      {
         "slot": "directions",
         "ref": "directions.json#/report_blocks/05_10"
       }
@@ -752,10 +736,6 @@
         "ref": "narrative.json#/sections/06/analysis/14"
       },
       {
-        "slot": "analysis",
-        "ref": "narrative.json#/sections/06/analysis/15"
-      },
-      {
         "slot": "details",
         "ref": "candidates.json#/report_blocks/06_22"
       },
@@ -792,10 +772,6 @@
       {
         "slot": "analysis",
         "ref": "narrative.json#/sections/07/analysis/3"
-      },
-      {
-        "slot": "analysis",
-        "ref": "narrative.json#/sections/07/analysis/4"
       }
     ],
     "08": [
@@ -828,16 +804,8 @@
         "ref": "judgment.json#/report_blocks/08_6"
       },
       {
-        "slot": "analysis",
-        "ref": "narrative.json#/sections/08/analysis/3"
-      },
-      {
         "slot": "routes",
         "ref": "judgment.json#/report_blocks/08_8"
-      },
-      {
-        "slot": "analysis",
-        "ref": "narrative.json#/sections/08/analysis/4"
       }
     ],
     "09": [
@@ -892,10 +860,6 @@
       {
         "slot": "risks",
         "ref": "judgment.json#/report_blocks/09_12"
-      },
-      {
-        "slot": "analysis",
-        "ref": "narrative.json#/sections/09/analysis/8"
       }
     ],
     "10": [
@@ -918,10 +882,6 @@
       {
         "slot": "analysis",
         "ref": "narrative.json#/sections/10/analysis/2"
-      },
-      {
-        "slot": "analysis",
-        "ref": "narrative.json#/sections/10/analysis/3"
       }
     ],
     "11": [
@@ -967,10 +927,6 @@
       },
       {
         "slot": "analysis",
-        "ref": "narrative.json#/sections/11/analysis/7"
-      },
-      {
-        "slot": "analysis",
         "ref": "narrative.json#/sections/11/analysis/8"
       },
       {
@@ -980,10 +936,6 @@
       {
         "slot": "analysis",
         "ref": "narrative.json#/sections/11/analysis/10"
-      },
-      {
-        "slot": "analysis",
-        "ref": "narrative.json#/sections/11/analysis/11"
       },
       {
         "slot": "assumptions",

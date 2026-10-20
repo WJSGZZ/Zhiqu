@@ -7,21 +7,21 @@
     "directions.json": "5b2397e7ee4e80db6b8b1b6bf0834869aabbf282dcfecc6f23c4c706d476cc76",
     "rules_check.json": "d887941488483a7992cfbe1fb174550f3fdb3083d8c597a1cdcc43f1eee9d198",
     "candidates.json": "e2d7abe22fb7375e3190e21a8f801c264fbed4b7fdaab066193cc48a35ff98f1",
-    "evidence.json": "c728cb3d1ed7fa40510ac2dd56c113a5374c76b7f8b243a7bf435a2d4876ddc0",
+    "evidence.json": "92ac60740f28924a3b80ffef547bde799e0c51e6b0d591361ffca72b2dfc94e2",
     "calculations.json": "8e8135c7483b79dbc2d7ed702e1d9add2628ccf852da45c3d957f1e3f05d98f5",
-    "judgment.json": "f26d3e35c9315c71694d0bc08ced1924309304526546300264a7df3bc4abd8cc",
-    "narrative.json": "b214b62fffffce27ee435ab86d6ffe0af186e4ee426b73c31912075dfcb34660",
+    "judgment.json": "5c913bab47c7220eb52e9c907187a8bbcaf45fc3710cee9d675c28ceff68af57",
+    "narrative.json": "cbfcc57d7627dd98c04dc98826b0bb4968862aa318b31708b2598ed39e47f121",
     "profile.json": "e985adff4dc5eb31443eef9a859f0e7955f84936dd8dab27a61b56e4b2e50d29",
     "profile-supplement.txt": "7ae0beb59e74158ec5ff869bb796f5cf3352fb7fa5c9ab7172ee930e91c93360"
   },
-  "contract_sha256": "affc47ff0df415d88221ddee76feb600856414b92cdd1c56130f86938e5cd381",
+  "contract_sha256": "afacb35fd00373a1e89752eab86bd1ec000b374028216c571e2131ad99e8e821",
   "tool_sha256": {
-    "planning_report.py": "8d698258e1450570ac3f4691a9aff48661c260da9138f06c343803d821c74995",
-    "planning_workflow.py": "11717f0a5a3da33cc870959d127b86a952ce4390741dfce2f3953870498c632f",
+    "planning_report.py": "c081861d47fc087bac49bbcf976859252378789e4de94c0e05cdb96b7302ee09",
+    "planning_workflow.py": "ee2d438232e89d2abbaef38ac668fdcd6cc6aea42f554b44408e67fdd7186d13",
     "operator_check.py": "a6552c0b63a8a6b5d15c9a1057fbc2884fb85435b1b102fbf4a48dd74c4e7ebb",
     "check_demos.py": "fc8e1625f9e052373756160514ad5c73db1e8451c233425918edb5bc839d9f63",
-    "report.py": "042c41525bca5901b3f738028bb74a0d12b33f77baf5e883897582bed39c7180",
-    "render_report.py": "e85ed74d89613ce9ba1017680c14ef385624b5892151b1c1ce472ef4e1748676",
+    "report.py": "be60413e446a8dc53f68f14351a681811bfc49ed47c480a3a4281a1dc7274d94",
+    "render_report.py": "707d4a3dd6780cc249ddd5620f37152d525313c3a64de75c676758eef11fb5c8",
     "profile_store.py": "1cfd828583598a65cf719a46447cb3112ef0170eb1a638b89ab023cb47a04e7f"
   },
   "numeric_refs": [
@@ -242,121 +242,175 @@
       "display": "11 月 29 日"
     },
     {
-      "location": "09.analysis.1",
-      "ref": "{{p:/fields/14/value/cash|comma}}",
-      "value": 9000,
-      "display": "9,000"
-    },
-    {
-      "location": "09.analysis.1",
-      "ref": "{{p:/fields/14/value/reserve|comma}}",
-      "value": 4000,
-      "display": "4,000"
-    },
-    {
-      "location": "09.analysis.1",
-      "ref": "{{c:/spendable|comma}}",
-      "value": 5000,
-      "display": "5,000"
-    },
-    {
-      "location": "09.analysis.1",
-      "ref": "{{p:/fields/14/value/housing|comma}}",
-      "value": 800,
-      "display": "800"
-    },
-    {
-      "location": "09.analysis.1",
-      "ref": "{{p:/fields/14/value/other|comma}}",
-      "value": 1700,
-      "display": "1,700"
-    },
-    {
-      "location": "09.analysis.1",
-      "ref": "{{c:/monthly_cost|comma}}",
-      "value": 2500,
-      "display": "2,500"
-    },
-    {
-      "location": "09.analysis.1",
-      "ref": "{{c:/buffer_months|1f}}",
-      "value": 2.0,
-      "display": "2.0"
-    },
-    {
-      "location": "09.analysis.2",
-      "ref": "{{p:/fields/14/value/higher_housing|comma}}",
-      "value": 1300,
-      "display": "1,300"
-    },
-    {
-      "location": "09.analysis.2",
+      "location": "09.runway.1",
       "ref": "{{c:/high_monthly_cost|comma}}",
       "value": 3000,
       "display": "3,000"
     },
     {
-      "location": "09.analysis.2",
+      "location": "09.runway.1",
+      "ref": "{{c:/monthly_cost|comma}}",
+      "value": 2500,
+      "display": "2,500"
+    },
+    {
+      "location": "09.runway.1",
+      "ref": "{{c:/buffer_months}}",
+      "value": 2.0,
+      "display": "2"
+    },
+    {
+      "location": "09.runway.1",
+      "ref": "{{c:/buffer_months|1f}}",
+      "value": 2.0,
+      "display": "2.0"
+    },
+    {
+      "location": "09.runway.1",
+      "ref": "{{c:/high_monthly_cost|comma}}",
+      "value": 3000,
+      "display": "3,000"
+    },
+    {
+      "location": "09.runway.1",
+      "ref": "{{c:/higher_rent_months}}",
+      "value": 1.7,
+      "display": "1.7"
+    },
+    {
+      "location": "09.runway.1",
       "ref": "{{c:/higher_rent_months|1f}}",
       "value": 1.7,
       "display": "1.7"
     },
     {
-      "location": "09.analysis.2",
+      "location": "09.runway.1",
+      "ref": "{{c:/all_cash_months}}",
+      "value": 3.6,
+      "display": "3.6"
+    },
+    {
+      "location": "09.runway.1",
       "ref": "{{c:/all_cash_months|1f}}",
       "value": 3.6,
       "display": "3.6"
     },
     {
-      "location": "09.details.5",
-      "ref": "{{c:/monthly_cost|comma}}",
-      "value": 2500,
-      "display": "2,500"
-    },
-    {
-      "location": "09.details.5",
-      "ref": "{{c:/spendable|comma}}",
-      "value": 5000,
-      "display": "5,000"
-    },
-    {
-      "location": "09.details.5",
-      "ref": "{{c:/buffer_months|1f}}",
-      "value": 2.0,
-      "display": "2.0"
-    },
-    {
-      "location": "09.details.5",
-      "ref": "{{c:/high_monthly_cost|comma}}",
-      "value": 3000,
-      "display": "3,000"
-    },
-    {
-      "location": "09.details.5",
-      "ref": "{{c:/spendable|comma}}",
-      "value": 5000,
-      "display": "5,000"
-    },
-    {
-      "location": "09.details.5",
-      "ref": "{{c:/higher_rent_months|1f}}",
-      "value": 1.7,
-      "display": "1.7"
-    },
-    {
-      "location": "09.details.5",
-      "ref": "{{c:/monthly_cost|comma}}",
-      "value": 2500,
-      "display": "2,500"
-    },
-    {
-      "location": "09.details.5",
+      "location": "09.analysis.2",
       "ref": "{{p:/fields/14/value/cash|comma}}",
       "value": 9000,
       "display": "9,000"
     },
     {
-      "location": "09.details.5",
+      "location": "09.analysis.2",
+      "ref": "{{p:/fields/14/value/reserve|comma}}",
+      "value": 4000,
+      "display": "4,000"
+    },
+    {
+      "location": "09.analysis.2",
+      "ref": "{{c:/spendable|comma}}",
+      "value": 5000,
+      "display": "5,000"
+    },
+    {
+      "location": "09.analysis.2",
+      "ref": "{{p:/fields/14/value/housing|comma}}",
+      "value": 800,
+      "display": "800"
+    },
+    {
+      "location": "09.analysis.2",
+      "ref": "{{p:/fields/14/value/other|comma}}",
+      "value": 1700,
+      "display": "1,700"
+    },
+    {
+      "location": "09.analysis.2",
+      "ref": "{{c:/monthly_cost|comma}}",
+      "value": 2500,
+      "display": "2,500"
+    },
+    {
+      "location": "09.analysis.2",
+      "ref": "{{c:/buffer_months|1f}}",
+      "value": 2.0,
+      "display": "2.0"
+    },
+    {
+      "location": "09.analysis.3",
+      "ref": "{{p:/fields/14/value/higher_housing|comma}}",
+      "value": 1300,
+      "display": "1,300"
+    },
+    {
+      "location": "09.analysis.3",
+      "ref": "{{c:/high_monthly_cost|comma}}",
+      "value": 3000,
+      "display": "3,000"
+    },
+    {
+      "location": "09.analysis.3",
+      "ref": "{{c:/higher_rent_months|1f}}",
+      "value": 1.7,
+      "display": "1.7"
+    },
+    {
+      "location": "09.analysis.3",
+      "ref": "{{c:/all_cash_months|1f}}",
+      "value": 3.6,
+      "display": "3.6"
+    },
+    {
+      "location": "09.details.6",
+      "ref": "{{c:/monthly_cost|comma}}",
+      "value": 2500,
+      "display": "2,500"
+    },
+    {
+      "location": "09.details.6",
+      "ref": "{{c:/spendable|comma}}",
+      "value": 5000,
+      "display": "5,000"
+    },
+    {
+      "location": "09.details.6",
+      "ref": "{{c:/buffer_months|1f}}",
+      "value": 2.0,
+      "display": "2.0"
+    },
+    {
+      "location": "09.details.6",
+      "ref": "{{c:/high_monthly_cost|comma}}",
+      "value": 3000,
+      "display": "3,000"
+    },
+    {
+      "location": "09.details.6",
+      "ref": "{{c:/spendable|comma}}",
+      "value": 5000,
+      "display": "5,000"
+    },
+    {
+      "location": "09.details.6",
+      "ref": "{{c:/higher_rent_months|1f}}",
+      "value": 1.7,
+      "display": "1.7"
+    },
+    {
+      "location": "09.details.6",
+      "ref": "{{c:/monthly_cost|comma}}",
+      "value": 2500,
+      "display": "2,500"
+    },
+    {
+      "location": "09.details.6",
+      "ref": "{{p:/fields/14/value/cash|comma}}",
+      "value": 9000,
+      "display": "9,000"
+    },
+    {
+      "location": "09.details.6",
       "ref": "{{c:/all_cash_months|1f}}",
       "value": 3.6,
       "display": "3.6"
@@ -429,9 +483,9 @@
     }
   ],
   "artifacts": {
-    "report.md": "21453d34410b026363848376fe5206b0761fac2ec0c0c414f7e43b7093637657",
-    "report.html": "63150c350c792476a6f39812890b23314e74c1abe801481c92c45df8aefb50a3",
-    "report.pdf": "1b85b8d33cd1c26de60510f975e90e6064cf66977279fcaf57134e60f9b3da75"
+    "report.md": "4c2faff37c2d52fff6e9db85111b2bd4dbb034bc846444ec2c561915bb51b8fd",
+    "report.html": "35b109de4247ba44d2183739d363ee2b6fb9da9d6a67155b2344883ec978e03a",
+    "report.pdf": "cb427e30a2df0641e98ff2ee66579b1d7b55c4b49e5ab13e6c49c2a1481f61da"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "report_profile": {
@@ -441,7 +495,7 @@
     "form": "ab439b1f"
   },
   "verification_tools_sha256": {
-    "verify_report.py": "f2956275f3d7da63daca855782729e5c9864db03bb4c9c3d84989744c1baf453",
-    "verification_calculations.py": "9ac916e796eab7676a4054b27d40674a25a0e78f8a5a9837f32ab9941381dea9"
+    "verify_report.py": "ebcf0825e96d349585935e4d76e29fa6d0aa51e402c3a3968b3dd673045f0856",
+    "verification_calculations.py": "fc02d9890d3a82a98fd381df093114d3b59b66aeb020a818c64bddb52b7482ff"
   }
 }

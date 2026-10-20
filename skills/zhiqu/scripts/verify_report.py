@@ -24,6 +24,9 @@ NUMBER = re.compile(r'(?<![A-Za-z])\d[\d,]*(?:\.\d+)?(?:%|％)?')
 MAX_ATTACHMENT = 16 * 1024 * 1024
 
 
+# 正文与核对材料的分界：新版在第 12 节里用“逐项核对材料”，旧版用独立附录标题。
+MARKS=('逐项核对材料','附录：核对材料')
+
 def digest(data):return hashlib.sha256(data).hexdigest()
 def json_bytes(value):return (json.dumps(value,ensure_ascii=False,indent=2)+'\n').encode()
 def read(path):return json.loads(Path(path).read_text())
@@ -128,6 +131,30 @@ def case_info(case,binding,warning=None):
             ('数据快照（data_commit）',case.get('data_commit','未记录')),('画像版本提示',warning or '生成时未发现更新版本')]
 
 
+
+# 核对表里给人看的名称：不显示 /target_year 这类程序字段路径。
+CASE_LABELS={'/context/as_of':'报告基准日','/education/major':'专业','/education/year_level':'年级','/education/level':'学历','/education/school_type':'院校类型','/target_year':'目标年份','/education_entry':'入学时间','/graduation_date':'毕业时间','/birth_datetime':'出生时间',
+             '/budget/annual_limit':'年度预算上限','/budget/monthly_living_assumption':'每月生活费假设','/budget/monthly_housing_assumption':'每月住房费假设'}
+DATE_LABELS={'checkpoint':'下一个个人检查点','previous':'上一次检查点','action0':'第 1 件事的日期','action1':'第 2 件事的日期','action2':'第 3 件事的日期',
+             'year_end':'年底复核','exam_month':'考试月份','graduate':'毕业时间','term_end':'学期末','summer':'暑假','spring':'春季','recommend':'推免时间','entry':'入学时间'}
+SUB_LABELS={'reserve':'备用金','other':'其他','housing':'住房','higher_housing':'较高住房情景','cash':'现金','living':'生活费','higher_living':'较高生活费情景',
+            'mean':'均分','cet4':'四级','comprehensive_rank':'综合排名','comprehensive_count':'综合排名总人数','academic_rank':'学业排名','academic_count':'学业排名总人数'}
+
+
+def readable_path(case, kind, path):
+    """把画像或案例里的字段路径换成中文名；查不到时才退回路径本身。"""
+    path=path.split('|')[0]
+    if kind=='p':
+        parts=path.lstrip('/').split('/')
+        try:name=ptr(case.data['profile_parse.json'],'/'+'/'.join(parts[:2])).get('field',path)
+        except Exception:name=path
+        tail=[SUB_LABELS.get(x,x) for x in parts[3:]] if len(parts)>3 else []
+        return name+('（'+'，'.join(tail)+'）' if tail else '')
+    if path in CASE_LABELS:return CASE_LABELS[path]
+    if path.startswith('/context/personal_dates/'):return DATE_LABELS.get(path.rsplit('/',1)[-1],path)
+    return path
+
+
 def planning_materials(case,trace,binding,warning=None):
     """Only explicit references determine provenance; never match by equal values."""
     from planning_workflow import REF
@@ -161,7 +188,7 @@ def planning_materials(case,trace,binding,warning=None):
             elif kind=='k' and 'assumption' in path:
                 role='报告登记的费用或收入情景（不是已核实支或雇主报价）'
             else:role='本人画像或案例登记；未作官方认证'
-            row.update(label=role+'：'+path,institution=role,excerpt='登记值：'+visible(case.resolve(kind,path)),raw_value=case.resolve(kind,path))
+            row.update(label=role+'：'+readable_path(case,kind,path),institution=role,excerpt='登记值：'+visible(case.resolve(kind,path)),raw_value=case.resolve(kind,path))
         else:row.update(label='计算或参数登记项：'+path,institution='本报告计算/参数登记；核对方式见下列公式',calculation_path=path)
         numbers.append(row)
     personal=[]
@@ -172,8 +199,7 @@ def planning_materials(case,trace,binding,warning=None):
         personal.append({'label':field['field'],'value':ptr(case.data['profile_parse.json'],use['pointer']),'sections':'、'.join(use['sections'])})
     for (kind,path),sids in registrations.items():
         if kind=='k' and (path.startswith('/context/') or 'assumption' in path):continue
-        label=path
-        if kind=='p':label=ptr(case.data['profile_parse.json'],'/'+ '/'.join(path.lstrip('/').split('/')[:2])).get('field',path)
+        label=readable_path(case,kind,path)
         personal.append({'label':label,'value':case.resolve(kind,path),'sections':'、'.join(sorted(sids))})
     for eid,sids in used.items():
         e=evidence[eid]
@@ -182,7 +208,10 @@ def planning_materials(case,trace,binding,warning=None):
     for row in personal:
         key=json.dumps(row['value'],ensure_ascii=False,sort_keys=True)
         if key in dedup:
-            old=dedup[key];old['label']+=' / '+row['label'];old['sections']='、'.join(sorted(set(old['sections'].split('、')+row['sections'].split('、'))))
+            old=dedup[key]
+            if old['label'].startswith('/'):old['label']=row['label']
+            elif not row['label'].startswith('/') and row['label'] not in old['label'].split(' / '):old['label']+=' / '+row['label']
+            old['sections']='、'.join(sorted(set(old['sections'].split('、')+row['sections'].split('、'))))
         else:dedup[key]=dict(row)
     personal=list(dedup.values())
     limitations=[]
@@ -263,7 +292,12 @@ def gaokao_files(root,rep,result,binding,result_path):
 
 def append_html(document,materials):
     import report
-    return document.replace('</body>',report.keep_numeric_runs(report.verification_appendix_html(materials))+'</body>')
+    block=report.keep_numeric_runs(report.verification_appendix_html(materials))
+    if report.VERIFY_SLOT in document:return document.replace(report.VERIFY_SLOT,block,1)
+    # 读研、求职：放进第 12 节，紧挨在来源列表之前；找不到时放在正文末尾。
+    at=document.rfind('<ol class="source-notes"')
+    if at<0:at=document.rfind('</section>')
+    return document[:at]+block+document[at:] if at>=0 else document.replace('</body>',block+'</body>')
 
 
 def attach_pdf(pdf,files,materials,case,binding,body_html):
@@ -361,8 +395,8 @@ def verify(pdf,extract=None):
         if [digest(t.encode()) for t in texts]!=manifest.get('page_text_sha256'):errors.append('PDF正文或核对表已被改动（逐页文字校验不一致）')
         raw_text=''.join(p.get_text(sort=True) for p in doc)
         index_map=[i for i,ch in enumerate(raw_text) if not ch.isspace() and ch!='\u00ad']
-        whole=norm(raw_text);appendix=''.join(texts).split('附录：核对材料',1)[-1]
-        if '附录：核对材料' not in whole:errors.append('缺可提取文字的核对附录')
+        whole=norm(raw_text);mark=next((m for m in MARKS if m in whole),MARKS[0]);appendix=''.join(texts).split(mark,1)[-1]
+        if mark not in whole:errors.append('缺可提取文字的核对附录')
         # Chromium may paint SVG labels after a following heading, while spatial
         # sorting can interleave text from separate table columns. Take the maximum
         # occurrence count from both readings, never their sum. Per-page full text
@@ -371,7 +405,7 @@ def verify(pdf,extract=None):
         for spatial in (False,True):
             raw=''.join(doc[i].get_text(sort=spatial) for i in range(1,len(doc))) if len(doc)>1 else doc[0].get_text(sort=spatial)
             indices=[i for i,ch in enumerate(raw) if not ch.isspace() and ch!='\u00ad']
-            body=norm(raw).split('附录：核对材料',1)[0];positions={};cursor=0
+            body=norm(raw).split(mark,1)[0];positions={};cursor=0
             for sid,anchor in sorted(manifest.get('section_anchors',{}).items()):
                 start=body.find(anchor,cursor);positions[sid]=start
                 if start>=0:cursor=start+len(anchor)

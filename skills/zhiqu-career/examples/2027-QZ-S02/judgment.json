@@ -267,6 +267,10 @@
         "ref": "narrative.json#/sections/09/lead"
       },
       {
+        "slot": "runway",
+        "ref": "evidence.json#/report_blocks/09_runway"
+      },
+      {
         "slot": "analysis",
         "ref": "narrative.json#/sections/09/analysis/0"
       },

@@ -243,6 +243,7 @@ class PlanningCase:
         cond=slot.get('condition','always')
         if cond=='always': return True
         if cond=='offer_basis_actual_or_scenario': return self.case.get('context',{}).get('offer_basis') in ('actual','scenario')
+        if cond=='offer_basis_none': return self.case.get('context',{}).get('offer_basis')=='none'
         if cond=='matrix_unknown_ratio_gt_0_7':
             matrix=self.data.get('judgment.json',{}).get('matrix',{}); cells=matrix.get('cells',[])
             return bool(cells) and sum(x.get('status')=='unknown' for x in cells)/len(cells)>self.contract['matrix_policy']['unknown_ratio_explanation_above']
