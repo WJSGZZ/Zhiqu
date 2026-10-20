@@ -1,0 +1,1326 @@
+{
+  "schema_version": 1,
+  "preferences": {
+    "method": "ordinal",
+    "confirmed": false,
+    "weights": null,
+    "quote": "按重要程度依次点选：城市、学校层次与平台、毕业去向、专业方向、总花费、培养质量、学制与毕业时间",
+    "profile_refs": [
+      "profile_parse.json#/fields/12"
+    ],
+    "dimensions": [
+      "city",
+      "subjects",
+      "position",
+      "quota",
+      "retest"
+    ]
+  },
+  "matrix": {
+    "options": [
+      "S1",
+      "S5",
+      "S4",
+      "S3",
+      "S2"
+    ],
+    "dimensions": [
+      {
+        "id": "city",
+        "name": "城市与培养"
+      },
+      {
+        "id": "subjects",
+        "name": "科目可比"
+      },
+      {
+        "id": "position",
+        "name": "模考位置"
+      },
+      {
+        "id": "quota",
+        "name": "名额与年度变化"
+      },
+      {
+        "id": "retest",
+        "name": "复试准备"
+      }
+    ],
+    "cells": [
+      {
+        "candidate_id": "S1",
+        "dimension_id": "city",
+        "status": "supported",
+        "text": "苏州，在江苏",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      {
+        "candidate_id": "S1",
+        "dimension_id": "subjects",
+        "status": "supported",
+        "text": "当届目录同科目",
+        "evidence_refs": [
+          "E035"
+        ]
+      },
+      {
+        "candidate_id": "S1",
+        "dimension_id": "position",
+        "status": "conditional",
+        "text": "过下四分位、低于中位数",
+        "evidence_refs": [
+          "E042"
+        ]
+      },
+      {
+        "candidate_id": "S1",
+        "dimension_id": "quota",
+        "status": "conditional",
+        "text": "公开招考比上一届少，只有一届分布",
+        "evidence_refs": [
+          "E038",
+          "E041"
+        ]
+      },
+      {
+        "candidate_id": "S1",
+        "dimension_id": "retest",
+        "status": "conditional",
+        "text": "机考编程占复试一半分",
+        "evidence_refs": [
+          "E033",
+          "E034"
+        ]
+      },
+      {
+        "candidate_id": "S5",
+        "dimension_id": "city",
+        "status": "supported",
+        "text": "苏州，在江苏",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      {
+        "candidate_id": "S5",
+        "dimension_id": "subjects",
+        "status": "supported",
+        "text": "当届目录同科目",
+        "evidence_refs": [
+          "E035"
+        ]
+      },
+      {
+        "candidate_id": "S5",
+        "dimension_id": "position",
+        "status": "conditional",
+        "text": "与中位数持平",
+        "evidence_refs": [
+          "E043"
+        ]
+      },
+      {
+        "candidate_id": "S5",
+        "dimension_id": "quota",
+        "status": "conditional",
+        "text": "只有一届分布",
+        "evidence_refs": [
+          "E039"
+        ]
+      },
+      {
+        "candidate_id": "S5",
+        "dimension_id": "retest",
+        "status": "conditional",
+        "text": "同一套机考",
+        "evidence_refs": [
+          "E033",
+          "E037"
+        ]
+      },
+      {
+        "candidate_id": "S4",
+        "dimension_id": "city",
+        "status": "supported",
+        "text": "南京，在江苏",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      {
+        "candidate_id": "S4",
+        "dimension_id": "subjects",
+        "status": "unknown",
+        "text": "当届目录未取到",
+        "evidence_refs": [
+          "E072"
+        ]
+      },
+      {
+        "candidate_id": "S4",
+        "dimension_id": "position",
+        "status": "supported",
+        "text": "两届都高于中位数，但人数极少",
+        "evidence_refs": [
+          "E067",
+          "E070"
+        ]
+      },
+      {
+        "candidate_id": "S4",
+        "dimension_id": "quota",
+        "status": "conditional",
+        "text": "统考计划少、实录更少",
+        "evidence_refs": [
+          "E062"
+        ]
+      },
+      {
+        "candidate_id": "S4",
+        "dimension_id": "retest",
+        "status": "unknown",
+        "text": "当届复试笔试科目未知",
+        "evidence_refs": [
+          "E072"
+        ]
+      },
+      {
+        "candidate_id": "S3",
+        "dimension_id": "city",
+        "status": "unknown",
+        "text": "联合培养地点、学位待问清",
+        "evidence_refs": [
+          "E122"
+        ]
+      },
+      {
+        "candidate_id": "S3",
+        "dimension_id": "subjects",
+        "status": "unknown",
+        "text": "当届目录未取到",
+        "evidence_refs": [
+          "E072"
+        ]
+      },
+      {
+        "candidate_id": "S3",
+        "dimension_id": "position",
+        "status": "conditional",
+        "text": "高于上四分位，但只录了五个人",
+        "evidence_refs": [
+          "E066"
+        ]
+      },
+      {
+        "candidate_id": "S3",
+        "dimension_id": "quota",
+        "status": "conditional",
+        "text": "统考计划少",
+        "evidence_refs": [
+          "E061"
+        ]
+      },
+      {
+        "candidate_id": "S3",
+        "dimension_id": "retest",
+        "status": "unknown",
+        "text": "当届复试笔试科目未知",
+        "evidence_refs": [
+          "E072"
+        ]
+      },
+      {
+        "candidate_id": "S2",
+        "dimension_id": "city",
+        "status": "supported",
+        "text": "南京，在江苏",
+        "evidence_refs": [
+          "E001"
+        ]
+      },
+      {
+        "candidate_id": "S2",
+        "dimension_id": "subjects",
+        "status": "unknown",
+        "text": "当届目录未取到",
+        "evidence_refs": [
+          "E072"
+        ]
+      },
+      {
+        "candidate_id": "S2",
+        "dimension_id": "position",
+        "status": "failed",
+        "text": "低于上一届最低分和复试线",
+        "evidence_refs": [
+          "E050",
+          "E065"
+        ]
+      },
+      {
+        "candidate_id": "S2",
+        "dimension_id": "quota",
+        "status": "failed",
+        "text": "线一年大涨、计划减半",
+        "evidence_refs": [
+          "E054",
+          "E060",
+          "E064"
+        ]
+      },
+      {
+        "candidate_id": "S2",
+        "dimension_id": "retest",
+        "status": "unknown",
+        "text": "当届复试笔试科目未知",
+        "evidence_refs": [
+          "E072"
+        ]
+      }
+    ]
+  },
+  "candidates": [
+    {
+      "id": "J1",
+      "candidate_id": "S1",
+      "supports": [
+        "当届目录与模考同科目",
+        "模考高于上一届录取者下四分位和复试线",
+        "在苏州，符合只留江苏"
+      ],
+      "counters": [
+        "只有一届分布",
+        "当届公开招考比上一届少两人",
+        "模考低于中位数，复试要追分"
+      ],
+      "costs": [
+        "复试机考编程占一半分，要专门练上机"
+      ],
+      "fallback": "出分后过国家线没过苏大线，转调剂（同科目）；没过国家线，转春招",
+      "switch_conditions": "第二次模考仍低于下四分位：不改志愿（已截止），提前列调剂清单、加练最弱科",
+      "checkpoint": "{{k:/context/personal_dates/checkpoint}}",
+      "evidence_refs": [
+        "E035",
+        "E042",
+        "E030",
+        "E038",
+        "E041",
+        "E033"
+      ]
+    },
+    {
+      "id": "J2",
+      "candidate_id": "S5",
+      "supports": [
+        "同科目、同学院、同一套复试",
+        "模考与上一届中位数持平"
+      ],
+      "counters": [
+        "只有一届分布",
+        "方向偏软件理论与测试，和后端开发是否对口要看导师"
+      ],
+      "costs": [
+        "与苏大计算机学硕同样要练上机"
+      ],
+      "fallback": "同苏大计算机学硕",
+      "switch_conditions": "如果更看重“稳一点”且能接受软件工程方向，可作为一志愿的替代",
+      "checkpoint": "{{k:/context/personal_dates/checkpoint}}",
+      "evidence_refs": [
+        "E035",
+        "E043",
+        "E031",
+        "E039"
+      ]
+    },
+    {
+      "id": "J3",
+      "candidate_id": "S4",
+      "supports": [
+        "模考两届都不低于录取者中位数",
+        "在南京"
+      ],
+      "counters": [
+        "上一届一志愿只录三人，分布极不稳",
+        "当届目录没取到，科目和计划都可能变"
+      ],
+      "costs": [
+        "复试有专业课笔试，科目当届未知"
+      ],
+      "fallback": "同上",
+      "switch_conditions": "报名前查到河海当届目录：科目不变才考虑；变了就不选",
+      "checkpoint": "{{k:/context/personal_dates/checkpoint}}",
+      "evidence_refs": [
+        "E067",
+        "E070",
+        "E052",
+        "E055",
+        "E062",
+        "E072"
+      ]
+    },
+    {
+      "id": "J4",
+      "candidate_id": "S3",
+      "supports": [
+        "单独排名、复试线明显低于普通方向",
+        "模考高于上一届录取者上四分位"
+      ],
+      "counters": [
+        "只录了五人，只作定性提示",
+        "联合培养地点、学位授予、你愿不愿意都没确认"
+      ],
+      "costs": [
+        "可能不在河海本部培养"
+      ],
+      "fallback": "同上",
+      "switch_conditions": "问清培养地点和学位后再决定；不接受就不选",
+      "checkpoint": "{{k:/context/personal_dates/checkpoint}}",
+      "evidence_refs": [
+        "E051",
+        "E066",
+        "E061",
+        "E122"
+      ]
+    },
+    {
+      "id": "J5",
+      "candidate_id": "S2",
+      "supports": [
+        "在南京；前一届复试线不高"
+      ],
+      "counters": [
+        "模考低于上一届最低分和复试线",
+        "复试线一年涨四十多分，统考计划减半"
+      ],
+      "costs": [
+        "冒险档，一志愿押上去失败概率不低（不给数字）"
+      ],
+      "fallback": "同上",
+      "switch_conditions": "只有你更看重河海这块牌子、愿意承担再考一年时才考虑",
+      "checkpoint": "{{k:/context/personal_dates/checkpoint}}",
+      "evidence_refs": [
+        "E050",
+        "E054",
+        "E060",
+        "E064",
+        "E065"
+      ]
+    },
+    {
+      "id": "J6",
+      "candidate_id": "P1",
+      "supports": [
+        "你已从三月备考到现在，四科与学硕一致"
+      ],
+      "counters": [
+        "报名后不能再改一志愿方向"
+      ],
+      "costs": [
+        "初试前每天投入"
+      ],
+      "fallback": "调剂或春招",
+      "switch_conditions": "出分后按线转入复试、调剂或春招",
+      "checkpoint": "{{k:/context/personal_dates/checkpoint}}",
+      "evidence_refs": [
+        "E010",
+        "E002"
+      ]
+    },
+    {
+      "id": "J7",
+      "candidate_id": "P2",
+      "supports": [
+        "考的是统考科目，同科目学校多"
+      ],
+      "counters": [
+        "余额不确定，你又只接受部分城市"
+      ],
+      "costs": [
+        "出分后时间很紧"
+      ],
+      "fallback": "春招",
+      "switch_conditions": "没有合适余额或你不愿去，转春招",
+      "checkpoint": "{{k:/context/personal_dates/checkpoint}}",
+      "evidence_refs": [
+        "E016"
+      ]
+    },
+    {
+      "id": "J8",
+      "candidate_id": "P3",
+      "supports": [
+        "读研本来就是为了做开发，能直接验证"
+      ],
+      "counters": [
+        "没有实习、竞赛，简历弱"
+      ],
+      "costs": [
+        "初试后要补一个项目"
+      ],
+      "fallback": "再考一年（若家里与你都同意）",
+      "switch_conditions": "拿到愿意去的录用就比较，不必等调剂结束",
+      "checkpoint": "{{k:/context/personal_dates/checkpoint}}",
+      "evidence_refs": [
+        "E001"
+      ]
+    },
+    {
+      "id": "J9",
+      "candidate_id": "P4",
+      "supports": [
+        "家里可能支持一年"
+      ],
+      "counters": [
+        "你自己不太想；家里支持的具体条件没说"
+      ],
+      "costs": [
+        "一年时间和生活费"
+      ],
+      "fallback": "工作后再考或不读",
+      "switch_conditions": "到出分后、春招前再定，不现在承诺",
+      "checkpoint": "{{k:/context/personal_dates/checkpoint}}",
+      "evidence_refs": [
+        "E001"
+      ]
+    }
+  ],
+  "recommendation": {
+    "primary": [
+      "P1",
+      "S1"
+    ],
+    "backup": [
+      "P2",
+      "P3"
+    ],
+    "judgment_refs": [
+      "J1",
+      "J6",
+      "J7",
+      "J8"
+    ],
+    "evidence_refs": [
+      "E035",
+      "E042",
+      "E030",
+      "E016"
+    ],
+    "calc_refs": [
+      "/mock_total",
+      "/suda26_0812_q1",
+      "/suda26_0812_median"
+    ],
+    "conditions": [
+      "一志愿苏大计算机学硕是“够一够”，不是稳；不写个人上岸概率",
+      "如果更想求稳且接受软件工程方向，苏大软件学硕是同科目替代",
+      "河海三项要等当届目录确认科目不变；联培方向要先问清培养地点",
+      "出分后按线转复试、调剂或春招；再考一年到时再定"
+    ]
+  },
+  "checkpoint": {
+    "date": "{{k:/context/personal_dates/checkpoint}}",
+    "trigger": "第二次全程模考出分",
+    "required": [
+      "用同一工具重看位置",
+      "定最弱科的补法",
+      "列出调剂候选名单的范围"
+    ]
+  },
+  "main_evidence_dependencies": [
+    "E002",
+    "E030",
+    "E035",
+    "E038",
+    "E041",
+    "E042",
+    "E050",
+    "E054",
+    "E060",
+    "E064",
+    "E065",
+    "E010",
+    "E016"
+  ],
+  "report_blocks": {
+    "01_flow": {
+      "type": "flow",
+      "content": {
+        "title": "从报名到明年春天：每一步看什么、往哪走",
+        "caption": "方框是要做的事，菱形是到时要核的判断，深色是建议的主线，浅色是条件不满足时的去向。图里只有条件，没有把握大小。",
+        "rows": [
+          [
+            "A",
+            "步骤",
+            "{{k:/context/personal_dates/action1|md}}前：一志愿报苏大计算机学硕，缴完费",
+            ">B"
+          ],
+          [
+            "B",
+            "步骤",
+            "初试前：第二次全程模考，补最弱科、练上机",
+            ">C"
+          ],
+          [
+            "C",
+            "判断",
+            "出分后：过苏大复试线和单科线？",
+            "过了>D",
+            "没过>E"
+          ],
+          [
+            "D",
+            "结果",
+            "准备复试：机考编程和面试"
+          ],
+          [
+            "E",
+            "判断",
+            "过国家线？",
+            "过了>F",
+            "没过>G"
+          ],
+          [
+            "F",
+            "备选",
+            "调剂：只找同科目的江苏学校"
+          ],
+          [
+            "G",
+            "备选",
+            "春招找开发岗；再考一年到时再定"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E001",
+        "E010",
+        "E016",
+        "E030"
+      ]
+    },
+    "01_kpis": {
+      "type": "kpi",
+      "content": {
+        "rows": [
+          [
+            "十月模考",
+            "{{c:/mock_total}} 分",
+            "机构全程模考，四科与学硕同卷；不是初试成绩"
+          ],
+          [
+            "苏大计算机学硕",
+            "够一够",
+            "高于上一届录取者下四分位，比中位数低 {{c:/gap_suda0812_median|1f}} 分"
+          ],
+          [
+            "河海计算机普通方向复试线一年涨了",
+            "{{c:/hhu_line_jump}} 分",
+            "上一届 {{e:E050#/value}} 分，比你的模考高 {{c:/gap_hhu0812n_line}} 分；冒险"
+          ],
+          [
+            "报名截止",
+            "{{e:E010#/value|md_short}}",
+            "当天 {{e:E017#/value}} 关闭；缴费以本人报考点公告为准"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E002",
+        "E010",
+        "E017",
+        "E030",
+        "E042",
+        "E050",
+        "E054"
+      ]
+    },
+    "01_actions": {
+      "type": "dated_actions",
+      "content": {
+        "items": [
+          {
+            "text": "在研招网目录里查南航、南邮、江大、南理工计算机学硕和专硕当届考什么、招多少，再查河海当届目录出了没有；查到的写下来。",
+            "date": "{{k:/context/personal_dates/action0}}"
+          },
+          {
+            "text": "定一志愿（建议苏大计算机学硕；想更稳且接受软件方向可选苏大软件学硕），完成报名和缴费，核对报考点。",
+            "date": "{{k:/context/personal_dates/action1}}"
+          },
+          {
+            "text": "做第二次全程模考，用同样方法重看位置；同时限时做一套上机题，记下做出几题。",
+            "date": "{{k:/context/personal_dates/action2}}"
+          }
+        ]
+      },
+      "evidence_refs": [
+        "E010",
+        "E002"
+      ]
+    },
+    "01_checkpoint": {
+      "type": "checkpoint",
+      "content": {
+        "text": "下一个个人检查点：{{k:/context/personal_dates/checkpoint|ymd_cn}}。那时报名已截止，一志愿不再改；看的是最弱科补得怎样、上机能做出几题，以及调剂清单要不要提前放宽。"
+      },
+      "evidence_refs": [
+        "E002"
+      ]
+    },
+    "04_matrix": {
+      "type": "comparison_matrix",
+      "content": {
+        "title": "五个同科目候选，按你在乎的顺序摆在一起",
+        "caption": "列从左到右按你的优先级读：城市排第一。✓ 是官方材料支持，△ 是有条件或要你补信息，△待查 是原件没取到，✗ 是现有证据不利。符号不是分数，也不是上岸把握。",
+        "columns": [
+          "城市与培养",
+          "科目可比",
+          "模考位置",
+          "名额与年度变化",
+          "复试准备"
+        ],
+        "rows": [
+          [
+            "苏大计算机学硕",
+            "✓苏州，在江苏",
+            "✓当届目录同科目",
+            "△过下四分位、低于中位数",
+            "△公开招考比上一届少，只有一届分布",
+            "△机考编程占复试一半分"
+          ],
+          [
+            "苏大软件学硕",
+            "✓苏州，在江苏",
+            "✓当届目录同科目",
+            "△与中位数持平",
+            "△只有一届分布",
+            "△同一套机考"
+          ],
+          [
+            "河海软件学硕",
+            "✓南京，在江苏",
+            "△待查当届目录未取到",
+            "✓两届都高于中位数，但人数极少",
+            "△统考计划少、实录更少",
+            "△待查当届复试笔试科目未知"
+          ],
+          [
+            "河海计算机联培",
+            "△待查联合培养地点、学位待问清",
+            "△待查当届目录未取到",
+            "△高于上四分位，但只录了五个人",
+            "△统考计划少",
+            "△待查当届复试笔试科目未知"
+          ],
+          [
+            "河海计算机普通",
+            "✓南京，在江苏",
+            "△待查当届目录未取到",
+            "✗低于上一届最低分和复试线",
+            "✗线一年大涨、计划减半",
+            "△待查当届复试笔试科目未知"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E001",
+        "E033",
+        "E035",
+        "E038",
+        "E042",
+        "E043",
+        "E050",
+        "E060",
+        "E062",
+        "E066",
+        "E067",
+        "E072",
+        "E122"
+      ]
+    },
+    "07_timeline": {
+      "type": "timeline",
+      "content": {
+        "title": "从现在到入学：官方节点和你自己的检查点",
+        "caption": "圆点是官方或流程节点，琥珀菱形是你自己的检查点。出分、国家线、调剂系统的当届日期还没公布，只写月份，不拿往年日期冒充。",
+        "rows": [
+          [
+            "{{e:E010#/value|ym}}",
+            "报名缴费",
+            "{{k:/context/personal_dates/action1|md_short}} 个人定志愿；{{e:E010#/value|md_short}} {{e:E017#/value}} 官方截止",
+            "检查点"
+          ],
+          [
+            "{{k:/context/personal_dates/checkpoint|ym}}",
+            "第二次全程模考",
+            "{{k:/context/personal_dates/checkpoint|md_short}} 个人检查点",
+            "检查点"
+          ],
+          [
+            "{{e:E012#/value|ym}}",
+            "初试",
+            "{{e:E012#/value|md_short}}—{{e:E013#/value|md_short}} 官方",
+            ""
+          ],
+          [
+            "{{k:/context/personal_dates/score_back|ym}}",
+            "出分、国家线后回来改问卷",
+            "当届日期未公布",
+            "检查点"
+          ],
+          [
+            "{{k:/context/personal_dates/spring|ym}}",
+            "复试或调剂，同时春招",
+            "系统开放时间未公布",
+            ""
+          ],
+          [
+            "{{k:/context/personal_dates/graduate|ym}}",
+            "本科毕业",
+            "以学校通知为准",
+            ""
+          ],
+          [
+            "{{k:/context/personal_dates/entry|ym}}",
+            "入学",
+            "以录取通知为准",
+            ""
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E010",
+        "E012",
+        "E013",
+        "E017",
+        "E020",
+        "E001"
+      ]
+    },
+    "08_route_main": {
+      "type": "route_cards",
+      "content": {
+        "title": "主线：一志愿苏大计算机学硕",
+        "门槛": "当届目录与模考同科目；上一届复试线 {{e:E030#/value}} 分，单科不低于国家线；复试满分 {{e:E033#/value}} 分，其中机考 {{e:E034#/value}} 分",
+        "时间窗口": "报名到 {{e:E010#/value|md}} {{e:E017#/value}}；初试 {{e:E012#/value|md}}—{{e:E013#/value|md}}；复试按学院当届通知",
+        "投入": "每天约 {{p:/fields/15/value}} 小时；数学一和英语一离满分最远，先补；每周留出一次限时上机",
+        "切换条件": "出分后没过苏大线但过国家线，转调剂；没过国家线，转春招"
+      },
+      "evidence_refs": [
+        "E030",
+        "E033",
+        "E034",
+        "E010",
+        "E012",
+        "E013"
+      ]
+    },
+    "08_route_adjust": {
+      "type": "route_cards",
+      "content": {
+        "title": "退路一：出分后调剂",
+        "门槛": "过第一志愿专业的国家线（上一届工学一区总分 {{e:E020#/value}}、单科 {{e:E021#/value}}/{{e:E022#/value}}，只作参照），调入专业科目相同相近",
+        "时间窗口": "国家线公布后；调剂系统当届开放时间未公布",
+        "投入": "初试后就列名单：同科目、江苏优先；只用学校官网公布的联系方式",
+        "切换条件": "没有你愿意去的余额，就不为“有书读”硬去，转春招"
+      },
+      "evidence_refs": [
+        "E016",
+        "E020",
+        "E021",
+        "E022"
+      ]
+    },
+    "08_route_job": {
+      "type": "route_cards",
+      "content": {
+        "title": "退路二：春招找开发岗",
+        "门槛": "岗位写明的学历和技能；本科能投的后端、数据开发岗",
+        "时间窗口": "初试后到毕业前",
+        "投入": "初试后用两周做一个能讲清楚的项目；按岗位要求改简历",
+        "切换条件": "拿到愿意去的录用，就和调剂结果比较，不必干等"
+      },
+      "evidence_refs": [
+        "E001"
+      ]
+    },
+    "08_route_retry": {
+      "type": "route_cards",
+      "content": {
+        "title": "条件路线：全职再考一年",
+        "门槛": "家里支持的具体条件谈清楚，你自己也愿意",
+        "时间窗口": "出分后、春招前决定",
+        "投入": "一整年时间和生活费",
+        "切换条件": "说不出这次失败的具体原因、或家里条件不清，就先工作"
+      },
+      "evidence_refs": [
+        "E001"
+      ]
+    },
+    "09_risks": {
+      "type": "scenario_table",
+      "content": {
+        "columns": [
+          "如果",
+          "为什么要改",
+          "怎么应对"
+        ],
+        "rows": [
+          [
+            "第二次模考仍低于苏大上一届下四分位",
+            "志愿改不了了，只能改复习重点",
+            "把时间压到最弱的一两科；调剂清单提前放宽到更多江苏学校"
+          ],
+          [
+            "出分过国家线，没过苏大复试线",
+            "一志愿这条路关了",
+            "马上按名单找同科目调剂；同时投春招"
+          ],
+          [
+            "总分够、某一科没过单科线",
+            "苏大、河海的单科线就按国家线，单科没过等于没过国家线，复试和调剂都进不去",
+            "转春招；要不要再考一年，和家里谈清条件再定"
+          ],
+          [
+            "进了复试，机考没做好",
+            "苏大复试机考占一半分",
+            "平时每周练一次限时上机；复试没过，还可以看调剂余额"
+          ],
+          [
+            "没过国家线",
+            "不能调剂",
+            "春招找开发岗；要不要再考一年，和家里谈清条件再定"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E016",
+        "E020",
+        "E033",
+        "E034",
+        "E042"
+      ]
+    },
+    "10_questions": {
+      "type": "question_table",
+      "content": {
+        "columns": [
+          "要问什么",
+          "去哪里问",
+          "问完怎样改变决定"
+        ],
+        "rows": [
+          [
+            "南航、南邮、江大、南理工计算机当届考什么、招多少？",
+            "研招网硕士专业目录（登录后查）",
+            "考的不是这四科就不考虑；考这四科也只有线、没分布，仍不定档"
+          ],
+          [
+            "河海当届目录出了没有，计算机和软件学硕科目变没变？",
+            "研招网目录、河海研究生院",
+            "变了，河海三项全部作废"
+          ],
+          [
+            "河海联培方向在哪里上课、学位怎么授？",
+            "河海计算机学院研招电话或邮箱",
+            "你不接受就把联培划掉"
+          ],
+          [
+            "本人报考点什么时候网上审核、要补什么材料？",
+            "就读学校所在地报考点公告",
+            "漏补可能报名无效，按时补"
+          ],
+          [
+            "家里说的“能支持一年”具体是什么？",
+            "和父母当面谈",
+            "决定没考上时先春招还是全职再考"
+          ],
+          [
+            "调剂到底能接受哪些城市和学校？",
+            "你自己写下来",
+            "名单越窄，出分后越要早动"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E072",
+        "E085",
+        "E095",
+        "E103",
+        "E112",
+        "E122",
+        "E073",
+        "E001"
+      ]
+    },
+    "11_assumptions": {
+      "type": "assumption_table",
+      "content": {
+        "columns": [
+          "量或规则",
+          "输入与口径",
+          "结论边界"
+        ],
+        "rows": [
+          [
+            "模考总分",
+            "{{p:/fields/11/value/政治}} + {{p:/fields/11/value/英语一}} + {{p:/fields/11/value/数学一}} + {{p:/fields/11/value/专业课}} = {{c:/mock_total}}",
+            "一次机构卷；难度和真题的关系没核，只看“落在哪一段”"
+          ],
+          [
+            "录取者分布",
+            "一志愿统考建议或拟录取名单的初试总分；按学校、方向、年份分开算；四分位按含端点的线性插值",
+            "是录取者的分数，不是报考者，也不是上岸概率"
+          ],
+          [
+            "建议档",
+            "单科低于复试单科线为冒险；两届都不低于中位数为相对稳妥；不低于最近一届下四分位为够一够；其余冒险",
+            "按项目自己的分布定，不用全国统一的分差；录取不到十个人的只作定性"
+          ],
+          [
+            "单科线",
+            "苏大、河海写明参照国家一区线，用上一届工学 {{e:E021#/value}}/{{e:E022#/value}}",
+            "当届国家线出分后才公布"
+          ],
+          [
+            "全年生活费",
+            "{{p:/fields/8/value/living|comma}} × {{e:E120#/value}} = {{c:/known_living|comma}} 元",
+            "本人估计；不含学费住宿"
+          ],
+          [
+            "留给学费住宿",
+            "{{c:/nonliving_ceiling|comma}} 元；南京租房时 {{c:/higher_living_ceiling|comma}} 元；先留应急金时 {{c:/reserve_ceiling|comma}} 元",
+            "三种情形分别算，不叠加；学费未取到"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E002",
+        "E021",
+        "E022",
+        "E120"
+      ]
+    },
+    "11_terms": {
+      "type": "term_table",
+      "content": {
+        "columns": [
+          "说法",
+          "本报告里的意思"
+        ],
+        "rows": [
+          [
+            "复试线",
+            "学校公布的进入复试的初试最低总分；过线只是能进复试"
+          ],
+          [
+            "国家线",
+            "教育部划的最低线；调剂时看第一志愿专业的国家线"
+          ],
+          [
+            "下四分位、中位数",
+            "把录取者初试分从低到高排好、分成人数相等的四段：最下面一段的上沿叫下四分位，正中间叫中位数"
+          ],
+          [
+            "够一够、相对稳妥、冒险",
+            "按你的模考在该项目录取者里的位置给的建议档，不是概率"
+          ],
+          [
+            "联培",
+            "和别的单位联合培养，单独排名、单独划线，培养地点可能不在本校"
+          ],
+          [
+            "同科目",
+            "政治、英语一、数学一和计算机专业基础综合四门都一样"
+          ]
+        ]
+      },
+      "evidence_refs": [
+        "E001"
+      ]
+    }
+  },
+  "presentation": {
+    "01": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/01/lead"
+      },
+      {
+        "slot": "figure",
+        "ref": "judgment.json#/report_blocks/01_flow"
+      },
+      {
+        "slot": "kpis",
+        "ref": "judgment.json#/report_blocks/01_kpis"
+      },
+      {
+        "slot": "core_points",
+        "ref": "narrative.json#/sections/01/core_points"
+      },
+      {
+        "slot": "actions",
+        "ref": "judgment.json#/report_blocks/01_actions"
+      },
+      {
+        "slot": "checkpoint",
+        "ref": "judgment.json#/report_blocks/01_checkpoint"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/01/analysis/0"
+      }
+    ],
+    "02": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/02/lead"
+      },
+      {
+        "slot": "figure",
+        "ref": "profile_parse.json#/report_blocks/02_facts"
+      },
+      {
+        "slot": "profile",
+        "ref": "profile_parse.json#/report_blocks/02_profile"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/02/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/02/analysis/1"
+      }
+    ],
+    "03": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/03/lead"
+      },
+      {
+        "slot": "figure",
+        "ref": "evidence.json#/report_blocks/03_scores"
+      },
+      {
+        "slot": "questions",
+        "ref": "directions.json#/report_blocks/03_questions"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/03/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/03/analysis/1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/03/analysis/2"
+      }
+    ],
+    "04": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/04/lead"
+      },
+      {
+        "slot": "matrix",
+        "ref": "judgment.json#/report_blocks/04_matrix"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/04/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/04/analysis/1"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/04/analysis/2"
+      }
+    ],
+    "05": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/05/lead"
+      },
+      {
+        "slot": "directions",
+        "ref": "directions.json#/report_blocks/05_directions"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/05/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/05/analysis/1"
+      }
+    ],
+    "06": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/06/lead"
+      },
+      {
+        "slot": "score_ranges",
+        "ref": "evidence.json#/report_blocks/06_same"
+      },
+      {
+        "slot": "candidates",
+        "ref": "candidates.json#/report_blocks/06_candidates"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/06/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/06/analysis/1"
+      },
+      {
+        "slot": "score_ranges",
+        "ref": "evidence.json#/report_blocks/06_other"
+      },
+      {
+        "slot": "details",
+        "ref": "candidates.json#/report_blocks/06_untiered"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/06/analysis/2"
+      }
+    ],
+    "07": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/07/lead"
+      },
+      {
+        "slot": "timeline",
+        "ref": "judgment.json#/report_blocks/07_timeline"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/07/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/07/analysis/1"
+      }
+    ],
+    "08": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/08/lead"
+      },
+      {
+        "slot": "routes",
+        "ref": "judgment.json#/report_blocks/08_route_main"
+      },
+      {
+        "slot": "routes",
+        "ref": "judgment.json#/report_blocks/08_route_adjust"
+      },
+      {
+        "slot": "routes",
+        "ref": "judgment.json#/report_blocks/08_route_job"
+      },
+      {
+        "slot": "routes",
+        "ref": "judgment.json#/report_blocks/08_route_retry"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/08/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/08/analysis/1"
+      }
+    ],
+    "09": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/09/lead"
+      },
+      {
+        "slot": "budget_chart",
+        "ref": "evidence.json#/report_blocks/09_budget"
+      },
+      {
+        "slot": "risks",
+        "ref": "judgment.json#/report_blocks/09_risks"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/09/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/09/analysis/1"
+      }
+    ],
+    "10": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/10/lead"
+      },
+      {
+        "slot": "questions",
+        "ref": "judgment.json#/report_blocks/10_questions"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/10/analysis/0"
+      }
+    ],
+    "11": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/11/lead"
+      },
+      {
+        "slot": "assumptions",
+        "ref": "judgment.json#/report_blocks/11_assumptions"
+      },
+      {
+        "slot": "evidence_levels",
+        "ref": "evidence.json#/report_blocks/11_levels"
+      },
+      {
+        "slot": "terms",
+        "ref": "judgment.json#/report_blocks/11_terms"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/11/analysis/0"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/11/analysis/1"
+      }
+    ],
+    "12": [
+      {
+        "slot": "lead",
+        "ref": "narrative.json#/sections/12/lead"
+      },
+      {
+        "slot": "analysis",
+        "ref": "narrative.json#/sections/12/analysis/0"
+      },
+      {
+        "slot": "sources",
+        "ref": "evidence.json#/report_blocks/12_sources"
+      },
+      {
+        "slot": "disclaimer",
+        "ref": "narrative.json#/sections/12/disclaimer"
+      }
+    ]
+  }
+}

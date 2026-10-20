@@ -1,0 +1,1551 @@
+{
+  "schema_version": 1,
+  "case_id": "2027-YJ-S05",
+  "source_sha256": {
+    "case.json": "ac97a7080641f40a08c48e9f3a41393c64473d0e47b2186e5110a27e228e32b7",
+    "profile_parse.json": "20107f71f9c2ed1d7b7198ad470d1be169109141f501371ea2c7181282f25078",
+    "directions.json": "134d36a4b46e85c3133f25930399b3c693bf31c86039657d748621fbc30ce162",
+    "rules_check.json": "edbd0b8ae2d25a74695b1216e34e7cdc7cc1608edc8575c5895c26ffe937b55a",
+    "candidates.json": "e79ae221ecdeeceba968baf7e5e93307ca88928534f6154ad320294b499ad673",
+    "evidence.json": "663e09dc265b94b2d2452e210296f0d3911424269dbdcc7f9dd6429c8e1bb4c3",
+    "calculations.json": "558d67aa8b70aa6b4e4b39c92038e0bc8de89fba82e577266752e2d5a75a6dce",
+    "judgment.json": "40f89552007be27b13653498965660eecf820e8fae4699a4b6af461325e33808",
+    "narrative.json": "2d91c4c1b7b92471faddfaa29b25a16761b536a5f7940d724e59323e44749f3c",
+    "profile.json": "af232e95b42de1286681d5b04d706bbd8d16d3dd86cfe304a7d87e5a6bfcab88",
+    "profile-supplement.txt": "952368202eeb2cd031c6c0d52212442dca0faaadcd6c99828f951e50ba15d704"
+  },
+  "contract_sha256": "b805904d0c51a3684ce92ee68d71e57f416749bf20fbf6c5ef0604747f005a07",
+  "tool_sha256": {
+    "planning_report.py": "e50d03231e1eed2f3960a114150b3e5557764365966703a5bbb599ee71720be1",
+    "planning_workflow.py": "db73cf106f6604f74c7eeefb7ccc357435eb4601c9824ef388b956d1636b5b06",
+    "operator_check.py": "97965475c2c8b6efe5dbf2747511526d1729a540f55a16b54fa282e2a810fdc7",
+    "check_demos.py": "fc8e1625f9e052373756160514ad5c73db1e8451c233425918edb5bc839d9f63",
+    "report.py": "5ca9d4dd41806233ea94c4b1450c99b2e0ee3ef9853d8298f0fb9260e512f186",
+    "render_report.py": "f1fec10064d7ce24d58dccbf7963cc2012c1ef098806e3ead881d9bbea239e92",
+    "profile_store.py": "1cfd828583598a65cf719a46447cb3112ef0170eb1a638b89ab023cb47a04e7f"
+  },
+  "numeric_refs": [
+    {
+      "location": "meta.subtitle",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "meta.date",
+      "ref": "{{k:/context/as_of}}",
+      "value": "2026-10-20",
+      "display": "2026-10-20"
+    },
+    {
+      "location": "meta.data_asof",
+      "ref": "{{k:/context/as_of}}",
+      "value": "2026-10-20",
+      "display": "2026-10-20"
+    },
+    {
+      "location": "meta.conclusion",
+      "ref": "{{c:/mock_total}}",
+      "value": 349,
+      "display": "349"
+    },
+    {
+      "location": "meta.conclusion",
+      "ref": "{{c:/hhu_line_jump}}",
+      "value": 42,
+      "display": "42"
+    },
+    {
+      "location": "meta.conclusion",
+      "ref": "{{k:/context/personal_dates/action1|md}}",
+      "value": "2026-10-23",
+      "display": "10 月 23 日"
+    },
+    {
+      "location": "01.lead.0",
+      "ref": "{{k:/context/personal_dates/action1|md}}",
+      "value": "2026-10-23",
+      "display": "10 月 23 日"
+    },
+    {
+      "location": "01.figure.1",
+      "ref": "{{k:/context/personal_dates/action1|md}}",
+      "value": "2026-10-23",
+      "display": "10 月 23 日"
+    },
+    {
+      "location": "01.kpis.2",
+      "ref": "{{c:/mock_total}}",
+      "value": 349,
+      "display": "349"
+    },
+    {
+      "location": "01.kpis.2",
+      "ref": "{{c:/gap_suda0812_median|1f}}",
+      "value": 8.5,
+      "display": "8.5"
+    },
+    {
+      "location": "01.kpis.2",
+      "ref": "{{c:/hhu_line_jump}}",
+      "value": 42,
+      "display": "42"
+    },
+    {
+      "location": "01.kpis.2",
+      "ref": "{{e:E050#/value}}",
+      "value": 350,
+      "display": "350"
+    },
+    {
+      "location": "01.kpis.2",
+      "ref": "{{c:/gap_hhu0812n_line}}",
+      "value": 1,
+      "display": "1"
+    },
+    {
+      "location": "01.kpis.2",
+      "ref": "{{e:E010#/value|md_short}}",
+      "value": "2026-10-24",
+      "display": "10-24"
+    },
+    {
+      "location": "01.kpis.2",
+      "ref": "{{e:E017#/value}}",
+      "value": "22:00",
+      "display": "22:00"
+    },
+    {
+      "location": "01.core_points.3",
+      "ref": "{{c:/mock_total}}",
+      "value": 349,
+      "display": "349"
+    },
+    {
+      "location": "01.core_points.3",
+      "ref": "{{c:/gap_suda0812_median|1f}}",
+      "value": 8.5,
+      "display": "8.5"
+    },
+    {
+      "location": "01.core_points.3",
+      "ref": "{{c:/gap_suda0812_line}}",
+      "value": 8,
+      "display": "8"
+    },
+    {
+      "location": "01.core_points.3",
+      "ref": "{{e:E054#/value}}",
+      "value": 308,
+      "display": "308"
+    },
+    {
+      "location": "01.core_points.3",
+      "ref": "{{e:E050#/value}}",
+      "value": 350,
+      "display": "350"
+    },
+    {
+      "location": "01.core_points.3",
+      "ref": "{{e:E064#/value}}",
+      "value": 18,
+      "display": "18"
+    },
+    {
+      "location": "01.core_points.3",
+      "ref": "{{e:E060#/value}}",
+      "value": 9,
+      "display": "9"
+    },
+    {
+      "location": "01.actions.4",
+      "ref": "{{k:/context/personal_dates/action0}}",
+      "value": "2026-10-22",
+      "display": "2026-10-22"
+    },
+    {
+      "location": "01.actions.4",
+      "ref": "{{k:/context/personal_dates/action1}}",
+      "value": "2026-10-23",
+      "display": "2026-10-23"
+    },
+    {
+      "location": "01.actions.4",
+      "ref": "{{k:/context/personal_dates/action2}}",
+      "value": "2026-11-15",
+      "display": "2026-11-15"
+    },
+    {
+      "location": "01.checkpoint.5",
+      "ref": "{{k:/context/personal_dates/checkpoint|ymd_cn}}",
+      "value": "2026-11-15",
+      "display": "2026 年 11 月 15 日"
+    },
+    {
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/0/value}}",
+      "value": "大四",
+      "display": "大四"
+    },
+    {
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/1/value}}",
+      "value": "计算机科学与技术",
+      "display": "计算机科学与技术"
+    },
+    {
+      "location": "02.figure.1",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/11/value/total}}",
+      "value": 349,
+      "display": "349"
+    },
+    {
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/11/value/政治}}",
+      "value": 63,
+      "display": "63"
+    },
+    {
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/11/value/英语一}}",
+      "value": 62,
+      "display": "62"
+    },
+    {
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/11/value/数学一}}",
+      "value": 105,
+      "display": "105"
+    },
+    {
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/11/value/专业课}}",
+      "value": 119,
+      "display": "119"
+    },
+    {
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/4/value/四级}}",
+      "value": 518,
+      "display": "518"
+    },
+    {
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/4/value/六级}}",
+      "value": 446,
+      "display": "446"
+    },
+    {
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/15/value}}",
+      "value": 9,
+      "display": "9"
+    },
+    {
+      "location": "02.figure.1",
+      "ref": "{{p:/fields/8/value/annual|comma}}",
+      "value": 30000,
+      "display": "30,000"
+    },
+    {
+      "location": "02.profile.2",
+      "ref": "{{p:/fields/11/value/total}}",
+      "value": 349,
+      "display": "349"
+    },
+    {
+      "location": "02.profile.2",
+      "ref": "{{p:/fields/8/value/annual|comma}}",
+      "value": 30000,
+      "display": "30,000"
+    },
+    {
+      "location": "02.profile.2",
+      "ref": "{{p:/fields/15/value}}",
+      "value": 9,
+      "display": "9"
+    },
+    {
+      "location": "03.figure.1",
+      "ref": "{{p:/fields/11/value/政治}}",
+      "value": 63,
+      "display": "63"
+    },
+    {
+      "location": "03.figure.1",
+      "ref": "{{p:/fields/11/value/英语一}}",
+      "value": 62,
+      "display": "62"
+    },
+    {
+      "location": "03.figure.1",
+      "ref": "{{p:/fields/11/value/数学一}}",
+      "value": 105,
+      "display": "105"
+    },
+    {
+      "location": "03.figure.1",
+      "ref": "{{p:/fields/11/value/专业课}}",
+      "value": 119,
+      "display": "119"
+    },
+    {
+      "location": "03.figure.1",
+      "ref": "{{e:E021#/value}}",
+      "value": 35,
+      "display": "35"
+    },
+    {
+      "location": "03.figure.1",
+      "ref": "{{e:E021#/value}}",
+      "value": 35,
+      "display": "35"
+    },
+    {
+      "location": "03.figure.1",
+      "ref": "{{e:E022#/value}}",
+      "value": 53,
+      "display": "53"
+    },
+    {
+      "location": "03.figure.1",
+      "ref": "{{e:E022#/value}}",
+      "value": 53,
+      "display": "53"
+    },
+    {
+      "location": "03.questions.2",
+      "ref": "{{e:E010#/value|md}}",
+      "value": "2026-10-24",
+      "display": "10 月 24 日"
+    },
+    {
+      "location": "03.questions.2",
+      "ref": "{{e:E017#/value}}",
+      "value": "22:00",
+      "display": "22:00"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{e:E020#/published_on|year}}",
+      "value": "2026-02-28",
+      "display": "2026"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/suda26_0812_q1|1f}}",
+      "value": 347.75,
+      "display": "347.8"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/suda26_0812_q3}}",
+      "value": 369.0,
+      "display": "369"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/mock_total}}",
+      "value": 349,
+      "display": "349"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/suda26_0812_min}}",
+      "value": 341,
+      "display": "341"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/suda26_0812_max}}",
+      "value": 396,
+      "display": "396"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/suda26_0812_median|1f}}",
+      "value": 357.5,
+      "display": "357.5"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{e:E030#/value}}",
+      "value": 341,
+      "display": "341"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{e:E020#/published_on|year}}",
+      "value": "2026-02-28",
+      "display": "2026"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/suda26_0835_q1}}",
+      "value": 334.0,
+      "display": "334"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/suda26_0835_q3}}",
+      "value": 361.0,
+      "display": "361"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/mock_total}}",
+      "value": 349,
+      "display": "349"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/suda26_0835_min}}",
+      "value": 328,
+      "display": "328"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/suda26_0835_max}}",
+      "value": 384,
+      "display": "384"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/suda26_0835_median}}",
+      "value": 349.0,
+      "display": "349"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{e:E031#/value}}",
+      "value": 326,
+      "display": "326"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{e:E020#/published_on|year}}",
+      "value": "2026-02-28",
+      "display": "2026"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/hhu26_0835_q1}}",
+      "value": 314.0,
+      "display": "314"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/hhu26_0835_q3}}",
+      "value": 348.0,
+      "display": "348"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/mock_total}}",
+      "value": 349,
+      "display": "349"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/hhu26_0835_min}}",
+      "value": 305,
+      "display": "305"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/hhu26_0835_max}}",
+      "value": 373,
+      "display": "373"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/hhu26_0835_median}}",
+      "value": 323.0,
+      "display": "323"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{e:E052#/value}}",
+      "value": 286,
+      "display": "286"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{e:E054#/published_on|year}}",
+      "value": "2025-03-16",
+      "display": "2025"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/hhu25_0835_q1}}",
+      "value": 294.0,
+      "display": "294"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/hhu25_0835_q3}}",
+      "value": 337.0,
+      "display": "337"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/mock_total}}",
+      "value": 349,
+      "display": "349"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/hhu25_0835_min}}",
+      "value": 288,
+      "display": "288"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/hhu25_0835_max}}",
+      "value": 376,
+      "display": "376"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/hhu25_0835_median|1f}}",
+      "value": 312.5,
+      "display": "312.5"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{e:E055#/value}}",
+      "value": 288,
+      "display": "288"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{e:E020#/published_on|year}}",
+      "value": "2026-02-28",
+      "display": "2026"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/hhu26_0812j_q1}}",
+      "value": 329.0,
+      "display": "329"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/hhu26_0812j_q3}}",
+      "value": 346.0,
+      "display": "346"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/mock_total}}",
+      "value": 349,
+      "display": "349"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/hhu26_0812j_min}}",
+      "value": 320,
+      "display": "320"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/hhu26_0812j_max}}",
+      "value": 352,
+      "display": "352"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/hhu26_0812j_median}}",
+      "value": 342.0,
+      "display": "342"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{e:E051#/value}}",
+      "value": 303,
+      "display": "303"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{e:E020#/published_on|year}}",
+      "value": "2026-02-28",
+      "display": "2026"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/hhu26_0812n_q1}}",
+      "value": 352.0,
+      "display": "352"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/hhu26_0812n_q3}}",
+      "value": 365.0,
+      "display": "365"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/mock_total}}",
+      "value": 349,
+      "display": "349"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/hhu26_0812n_min}}",
+      "value": 350,
+      "display": "350"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/hhu26_0812n_max}}",
+      "value": 392,
+      "display": "392"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/hhu26_0812n_median}}",
+      "value": 361.0,
+      "display": "361"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{e:E050#/value}}",
+      "value": 350,
+      "display": "350"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{e:E054#/published_on|year}}",
+      "value": "2025-03-16",
+      "display": "2025"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/hhu25_0812n_q1}}",
+      "value": 326.0,
+      "display": "326"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/hhu25_0812n_q3}}",
+      "value": 344.0,
+      "display": "344"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/mock_total}}",
+      "value": 349,
+      "display": "349"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/hhu25_0812n_min}}",
+      "value": 308,
+      "display": "308"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/hhu25_0812n_max}}",
+      "value": 358,
+      "display": "358"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{c:/hhu25_0812n_median}}",
+      "value": 335.0,
+      "display": "335"
+    },
+    {
+      "location": "06.score_ranges.1",
+      "ref": "{{e:E054#/value}}",
+      "value": 308,
+      "display": "308"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{c:/suda26_0812_q1|1f}}",
+      "value": 347.75,
+      "display": "347.8"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{c:/suda26_0812_median|1f}}",
+      "value": 357.5,
+      "display": "357.5"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{e:E030#/value}}",
+      "value": 341,
+      "display": "341"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{c:/gap_suda0812_line}}",
+      "value": 8,
+      "display": "8"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{e:E038#/value}}",
+      "value": 10,
+      "display": "10"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{c:/suda_plan_drop}}",
+      "value": 2,
+      "display": "2"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{c:/suda26_0835_median}}",
+      "value": 349.0,
+      "display": "349"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{e:E031#/value}}",
+      "value": 326,
+      "display": "326"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{e:E039#/value}}",
+      "value": 10,
+      "display": "10"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{e:E020#/published_on|year}}",
+      "value": "2026-02-28",
+      "display": "2026"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{c:/hhu26_0835_median}}",
+      "value": 323.0,
+      "display": "323"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{e:E054#/published_on|year}}",
+      "value": "2025-03-16",
+      "display": "2025"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{c:/hhu25_0835_median|1f}}",
+      "value": 312.5,
+      "display": "312.5"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{e:E052#/value}}",
+      "value": 286,
+      "display": "286"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{e:E055#/value}}",
+      "value": 288,
+      "display": "288"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{c:/hhu26_0835_count}}",
+      "value": 3,
+      "display": "3"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{e:E062#/value}}",
+      "value": 6,
+      "display": "6"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{c:/hhu26_0812j_count}}",
+      "value": 5,
+      "display": "5"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{e:E051#/value}}",
+      "value": 303,
+      "display": "303"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{c:/hhu26_0812n_min}}",
+      "value": 350,
+      "display": "350"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{e:E050#/value}}",
+      "value": 350,
+      "display": "350"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{e:E054#/value}}",
+      "value": 308,
+      "display": "308"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{c:/hhu_line_jump}}",
+      "value": 42,
+      "display": "42"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{e:E064#/value}}",
+      "value": 18,
+      "display": "18"
+    },
+    {
+      "location": "06.candidates.2",
+      "ref": "{{e:E060#/value}}",
+      "value": 9,
+      "display": "9"
+    },
+    {
+      "location": "06.score_ranges.5",
+      "ref": "{{e:E020#/published_on|year}}",
+      "value": "2026-02-28",
+      "display": "2026"
+    },
+    {
+      "location": "06.score_ranges.5",
+      "ref": "{{c:/suda26_085404_q1|1f}}",
+      "value": 357.5,
+      "display": "357.5"
+    },
+    {
+      "location": "06.score_ranges.5",
+      "ref": "{{c:/suda26_085404_q3|1f}}",
+      "value": 392.75,
+      "display": "392.8"
+    },
+    {
+      "location": "06.score_ranges.5",
+      "ref": "{{c:/suda26_085404_min}}",
+      "value": 340,
+      "display": "340"
+    },
+    {
+      "location": "06.score_ranges.5",
+      "ref": "{{c:/suda26_085404_max}}",
+      "value": 423,
+      "display": "423"
+    },
+    {
+      "location": "06.score_ranges.5",
+      "ref": "{{c:/suda26_085404_median}}",
+      "value": 378.0,
+      "display": "378"
+    },
+    {
+      "location": "06.score_ranges.5",
+      "ref": "{{e:E032#/value}}",
+      "value": 340,
+      "display": "340"
+    },
+    {
+      "location": "06.score_ranges.5",
+      "ref": "{{e:E020#/published_on|year}}",
+      "value": "2026-02-28",
+      "display": "2026"
+    },
+    {
+      "location": "06.score_ranges.5",
+      "ref": "{{c:/hhu26_0854_q1}}",
+      "value": 388.0,
+      "display": "388"
+    },
+    {
+      "location": "06.score_ranges.5",
+      "ref": "{{c:/hhu26_0854_q3}}",
+      "value": 399.0,
+      "display": "399"
+    },
+    {
+      "location": "06.score_ranges.5",
+      "ref": "{{c:/hhu26_0854_min}}",
+      "value": 377,
+      "display": "377"
+    },
+    {
+      "location": "06.score_ranges.5",
+      "ref": "{{c:/hhu26_0854_max}}",
+      "value": 417,
+      "display": "417"
+    },
+    {
+      "location": "06.score_ranges.5",
+      "ref": "{{c:/hhu26_0854_median}}",
+      "value": 391.0,
+      "display": "391"
+    },
+    {
+      "location": "06.score_ranges.5",
+      "ref": "{{e:E053#/value}}",
+      "value": 377,
+      "display": "377"
+    },
+    {
+      "location": "06.score_ranges.5",
+      "ref": "{{e:E054#/published_on|year}}",
+      "value": "2025-03-16",
+      "display": "2025"
+    },
+    {
+      "location": "06.score_ranges.5",
+      "ref": "{{c:/hhu25_0854_q1}}",
+      "value": 354.0,
+      "display": "354"
+    },
+    {
+      "location": "06.score_ranges.5",
+      "ref": "{{c:/hhu25_0854_q3|1f}}",
+      "value": 371.75,
+      "display": "371.8"
+    },
+    {
+      "location": "06.score_ranges.5",
+      "ref": "{{c:/hhu25_0854_min}}",
+      "value": 346,
+      "display": "346"
+    },
+    {
+      "location": "06.score_ranges.5",
+      "ref": "{{c:/hhu25_0854_max}}",
+      "value": 392,
+      "display": "392"
+    },
+    {
+      "location": "06.score_ranges.5",
+      "ref": "{{c:/hhu25_0854_median}}",
+      "value": 365.0,
+      "display": "365"
+    },
+    {
+      "location": "06.score_ranges.5",
+      "ref": "{{e:E056#/value}}",
+      "value": 346,
+      "display": "346"
+    },
+    {
+      "location": "06.score_ranges.5",
+      "ref": "{{e:E020#/published_on|year}}",
+      "value": "2026-02-28",
+      "display": "2026"
+    },
+    {
+      "location": "06.score_ranges.5",
+      "ref": "{{e:E080#/value}}",
+      "value": 340,
+      "display": "340"
+    },
+    {
+      "location": "06.score_ranges.5",
+      "ref": "{{e:E020#/published_on|year}}",
+      "value": "2026-02-28",
+      "display": "2026"
+    },
+    {
+      "location": "06.score_ranges.5",
+      "ref": "{{e:E081#/value}}",
+      "value": 341,
+      "display": "341"
+    },
+    {
+      "location": "06.score_ranges.5",
+      "ref": "{{e:E020#/published_on|year}}",
+      "value": "2026-02-28",
+      "display": "2026"
+    },
+    {
+      "location": "06.score_ranges.5",
+      "ref": "{{e:E090#/value}}",
+      "value": 303,
+      "display": "303"
+    },
+    {
+      "location": "06.score_ranges.5",
+      "ref": "{{e:E020#/published_on|year}}",
+      "value": "2026-02-28",
+      "display": "2026"
+    },
+    {
+      "location": "06.score_ranges.5",
+      "ref": "{{e:E091#/value}}",
+      "value": 339,
+      "display": "339"
+    },
+    {
+      "location": "06.score_ranges.5",
+      "ref": "{{e:E020#/published_on|year}}",
+      "value": "2026-02-28",
+      "display": "2026"
+    },
+    {
+      "location": "06.score_ranges.5",
+      "ref": "{{e:E100#/value}}",
+      "value": 326,
+      "display": "326"
+    },
+    {
+      "location": "06.score_ranges.5",
+      "ref": "{{e:E020#/published_on|year}}",
+      "value": "2026-02-28",
+      "display": "2026"
+    },
+    {
+      "location": "06.score_ranges.5",
+      "ref": "{{e:E101#/value}}",
+      "value": 341,
+      "display": "341"
+    },
+    {
+      "location": "06.score_ranges.5",
+      "ref": "{{e:E054#/published_on|year}}",
+      "value": "2025-03-16",
+      "display": "2025"
+    },
+    {
+      "location": "06.score_ranges.5",
+      "ref": "{{e:E110#/value}}",
+      "value": 335,
+      "display": "335"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{e:E032#/value}}",
+      "value": 340,
+      "display": "340"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{e:E020#/published_on|year}}",
+      "value": "2026-02-28",
+      "display": "2026"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{e:E040#/value}}",
+      "value": 10,
+      "display": "10"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{e:E053#/value}}",
+      "value": 377,
+      "display": "377"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{e:E020#/published_on|year}}",
+      "value": "2026-02-28",
+      "display": "2026"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{e:E056#/value}}",
+      "value": 346,
+      "display": "346"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{e:E054#/published_on|year}}",
+      "value": "2025-03-16",
+      "display": "2025"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{e:E080#/value}}",
+      "value": 340,
+      "display": "340"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{e:E020#/published_on|year}}",
+      "value": "2026-02-28",
+      "display": "2026"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{e:E082#/value}}",
+      "value": 330,
+      "display": "330"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{e:E054#/published_on|year}}",
+      "value": "2025-03-16",
+      "display": "2025"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{e:E081#/value}}",
+      "value": 341,
+      "display": "341"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{e:E020#/published_on|year}}",
+      "value": "2026-02-28",
+      "display": "2026"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{e:E083#/value}}",
+      "value": 341,
+      "display": "341"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{e:E054#/published_on|year}}",
+      "value": "2025-03-16",
+      "display": "2025"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{e:E090#/value}}",
+      "value": 303,
+      "display": "303"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{e:E020#/published_on|year}}",
+      "value": "2026-02-28",
+      "display": "2026"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{e:E092#/value}}",
+      "value": 289,
+      "display": "289"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{e:E054#/published_on|year}}",
+      "value": "2025-03-16",
+      "display": "2025"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{e:E091#/value}}",
+      "value": 339,
+      "display": "339"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{e:E020#/published_on|year}}",
+      "value": "2026-02-28",
+      "display": "2026"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{e:E100#/value}}",
+      "value": 326,
+      "display": "326"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{e:E020#/published_on|year}}",
+      "value": "2026-02-28",
+      "display": "2026"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{e:E102#/value}}",
+      "value": 312,
+      "display": "312"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{e:E054#/published_on|year}}",
+      "value": "2025-03-16",
+      "display": "2025"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{e:E101#/value}}",
+      "value": 341,
+      "display": "341"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{e:E020#/published_on|year}}",
+      "value": "2026-02-28",
+      "display": "2026"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{e:E110#/value}}",
+      "value": 335,
+      "display": "335"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{e:E054#/published_on|year}}",
+      "value": "2025-03-16",
+      "display": "2025"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{e:E111#/value}}",
+      "value": 340,
+      "display": "340"
+    },
+    {
+      "location": "06.details.6",
+      "ref": "{{e:E054#/published_on|year}}",
+      "value": "2025-03-16",
+      "display": "2025"
+    },
+    {
+      "location": "07.timeline.1",
+      "ref": "{{e:E010#/value|ym}}",
+      "value": "2026-10-24",
+      "display": "2026.10"
+    },
+    {
+      "location": "07.timeline.1",
+      "ref": "{{k:/context/personal_dates/action1|md_short}}",
+      "value": "2026-10-23",
+      "display": "10-23"
+    },
+    {
+      "location": "07.timeline.1",
+      "ref": "{{e:E010#/value|md_short}}",
+      "value": "2026-10-24",
+      "display": "10-24"
+    },
+    {
+      "location": "07.timeline.1",
+      "ref": "{{e:E017#/value}}",
+      "value": "22:00",
+      "display": "22:00"
+    },
+    {
+      "location": "07.timeline.1",
+      "ref": "{{k:/context/personal_dates/checkpoint|ym}}",
+      "value": "2026-11-15",
+      "display": "2026.11"
+    },
+    {
+      "location": "07.timeline.1",
+      "ref": "{{k:/context/personal_dates/checkpoint|md_short}}",
+      "value": "2026-11-15",
+      "display": "11-15"
+    },
+    {
+      "location": "07.timeline.1",
+      "ref": "{{e:E012#/value|ym}}",
+      "value": "2026-12-19",
+      "display": "2026.12"
+    },
+    {
+      "location": "07.timeline.1",
+      "ref": "{{e:E012#/value|md_short}}",
+      "value": "2026-12-19",
+      "display": "12-19"
+    },
+    {
+      "location": "07.timeline.1",
+      "ref": "{{e:E013#/value|md_short}}",
+      "value": "2026-12-20",
+      "display": "12-20"
+    },
+    {
+      "location": "07.timeline.1",
+      "ref": "{{k:/context/personal_dates/score_back|ym}}",
+      "value": "2027-02-28",
+      "display": "2027.02"
+    },
+    {
+      "location": "07.timeline.1",
+      "ref": "{{k:/context/personal_dates/spring|ym}}",
+      "value": "2027-03-15",
+      "display": "2027.03"
+    },
+    {
+      "location": "07.timeline.1",
+      "ref": "{{k:/context/personal_dates/graduate|ym}}",
+      "value": "2027-06-30",
+      "display": "2027.06"
+    },
+    {
+      "location": "07.timeline.1",
+      "ref": "{{k:/context/personal_dates/entry|ym}}",
+      "value": "2027-09-01",
+      "display": "2027.09"
+    },
+    {
+      "location": "08.routes.1",
+      "ref": "{{e:E030#/value}}",
+      "value": 341,
+      "display": "341"
+    },
+    {
+      "location": "08.routes.1",
+      "ref": "{{e:E033#/value}}",
+      "value": 300,
+      "display": "300"
+    },
+    {
+      "location": "08.routes.1",
+      "ref": "{{e:E034#/value}}",
+      "value": 150,
+      "display": "150"
+    },
+    {
+      "location": "08.routes.1",
+      "ref": "{{e:E010#/value|md}}",
+      "value": "2026-10-24",
+      "display": "10 月 24 日"
+    },
+    {
+      "location": "08.routes.1",
+      "ref": "{{e:E017#/value}}",
+      "value": "22:00",
+      "display": "22:00"
+    },
+    {
+      "location": "08.routes.1",
+      "ref": "{{e:E012#/value|md}}",
+      "value": "2026-12-19",
+      "display": "12 月 19 日"
+    },
+    {
+      "location": "08.routes.1",
+      "ref": "{{e:E013#/value|md}}",
+      "value": "2026-12-20",
+      "display": "12 月 20 日"
+    },
+    {
+      "location": "08.routes.1",
+      "ref": "{{p:/fields/15/value}}",
+      "value": 9,
+      "display": "9"
+    },
+    {
+      "location": "08.routes.2",
+      "ref": "{{e:E020#/value}}",
+      "value": 264,
+      "display": "264"
+    },
+    {
+      "location": "08.routes.2",
+      "ref": "{{e:E021#/value}}",
+      "value": 35,
+      "display": "35"
+    },
+    {
+      "location": "08.routes.2",
+      "ref": "{{e:E022#/value}}",
+      "value": 53,
+      "display": "53"
+    },
+    {
+      "location": "09.budget_chart.1",
+      "ref": "{{k:/budget/annual_limit}}",
+      "value": 30000,
+      "display": "30000"
+    },
+    {
+      "location": "09.budget_chart.1",
+      "ref": "{{k:/budget/annual_limit|comma}}",
+      "value": 30000,
+      "display": "30,000"
+    },
+    {
+      "location": "09.budget_chart.1",
+      "ref": "{{c:/known_living}}",
+      "value": 18000,
+      "display": "18000"
+    },
+    {
+      "location": "09.budget_chart.1",
+      "ref": "{{c:/known_living|comma}}",
+      "value": 18000,
+      "display": "18,000"
+    },
+    {
+      "location": "09.budget_chart.1",
+      "ref": "{{c:/nonliving_ceiling}}",
+      "value": 12000,
+      "display": "12000"
+    },
+    {
+      "location": "09.budget_chart.1",
+      "ref": "{{c:/nonliving_ceiling|comma}}",
+      "value": 12000,
+      "display": "12,000"
+    },
+    {
+      "location": "09.budget_chart.1",
+      "ref": "{{c:/higher_living_ceiling}}",
+      "value": 8400,
+      "display": "8400"
+    },
+    {
+      "location": "09.budget_chart.1",
+      "ref": "{{c:/higher_living_ceiling|comma}}",
+      "value": 8400,
+      "display": "8,400"
+    },
+    {
+      "location": "09.budget_chart.1",
+      "ref": "{{c:/reserve_ceiling}}",
+      "value": 9000,
+      "display": "9000"
+    },
+    {
+      "location": "09.budget_chart.1",
+      "ref": "{{c:/reserve_ceiling|comma}}",
+      "value": 9000,
+      "display": "9,000"
+    },
+    {
+      "location": "09.analysis.3",
+      "ref": "{{p:/fields/8/value/annual|comma}}",
+      "value": 30000,
+      "display": "30,000"
+    },
+    {
+      "location": "09.analysis.3",
+      "ref": "{{p:/fields/8/value/living|comma}}",
+      "value": 1500,
+      "display": "1,500"
+    },
+    {
+      "location": "09.analysis.3",
+      "ref": "{{c:/known_living|comma}}",
+      "value": 18000,
+      "display": "18,000"
+    },
+    {
+      "location": "09.analysis.3",
+      "ref": "{{c:/nonliving_ceiling|comma}}",
+      "value": 12000,
+      "display": "12,000"
+    },
+    {
+      "location": "09.analysis.3",
+      "ref": "{{c:/higher_living_ceiling|comma}}",
+      "value": 8400,
+      "display": "8,400"
+    },
+    {
+      "location": "09.analysis.3",
+      "ref": "{{c:/reserve_ceiling|comma}}",
+      "value": 9000,
+      "display": "9,000"
+    },
+    {
+      "location": "11.assumptions.1",
+      "ref": "{{p:/fields/11/value/政治}}",
+      "value": 63,
+      "display": "63"
+    },
+    {
+      "location": "11.assumptions.1",
+      "ref": "{{p:/fields/11/value/英语一}}",
+      "value": 62,
+      "display": "62"
+    },
+    {
+      "location": "11.assumptions.1",
+      "ref": "{{p:/fields/11/value/数学一}}",
+      "value": 105,
+      "display": "105"
+    },
+    {
+      "location": "11.assumptions.1",
+      "ref": "{{p:/fields/11/value/专业课}}",
+      "value": 119,
+      "display": "119"
+    },
+    {
+      "location": "11.assumptions.1",
+      "ref": "{{c:/mock_total}}",
+      "value": 349,
+      "display": "349"
+    },
+    {
+      "location": "11.assumptions.1",
+      "ref": "{{e:E021#/value}}",
+      "value": 35,
+      "display": "35"
+    },
+    {
+      "location": "11.assumptions.1",
+      "ref": "{{e:E022#/value}}",
+      "value": 53,
+      "display": "53"
+    },
+    {
+      "location": "11.assumptions.1",
+      "ref": "{{p:/fields/8/value/living|comma}}",
+      "value": 1500,
+      "display": "1,500"
+    },
+    {
+      "location": "11.assumptions.1",
+      "ref": "{{e:E120#/value}}",
+      "value": 12,
+      "display": "12"
+    },
+    {
+      "location": "11.assumptions.1",
+      "ref": "{{c:/known_living|comma}}",
+      "value": 18000,
+      "display": "18,000"
+    },
+    {
+      "location": "11.assumptions.1",
+      "ref": "{{c:/nonliving_ceiling|comma}}",
+      "value": 12000,
+      "display": "12,000"
+    },
+    {
+      "location": "11.assumptions.1",
+      "ref": "{{c:/higher_living_ceiling|comma}}",
+      "value": 8400,
+      "display": "8,400"
+    },
+    {
+      "location": "11.assumptions.1",
+      "ref": "{{c:/reserve_ceiling|comma}}",
+      "value": 9000,
+      "display": "9,000"
+    }
+  ],
+  "artifacts": {
+    "report.md": "8b1375407187419a4f3d21bd895946408f7f0f506f7504265d08d935b4e56f0d",
+    "report.html": "ee2b1c3262dea77f48498f766d10cd8d8bd289ea15f9f3c0ce55678c18c6a8fb",
+    "report.pdf": "f2de2313c0de422aa8146af531fbb9d8429ea8b1130b0f419066b8fe732a25ca"
+  },
+  "delivery_status": "awaiting_operator_and_independent_review",
+  "report_profile": {
+    "file": "profile.json",
+    "sha256": "af232e95b42de1286681d5b04d706bbd8d16d3dd86cfe304a7d87e5a6bfcab88",
+    "filled_at": "2026-10-19T21:30:00+08:00",
+    "form": "8bcf0611"
+  },
+  "verification_tools_sha256": {
+    "verify_report.py": "1bda48fac71a082456ffc371216c6e3edb26d178dead1356bc65736a14b0d4b9",
+    "verification_calculations.py": "503bf1c73c4f9db451e141a12724e43b715fbc25be5f88c5393828f1523b8336"
+  }
+}

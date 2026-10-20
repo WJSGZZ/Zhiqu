@@ -470,6 +470,28 @@
           "profile_sha256": "05357e9d7c77baf4b132978319ea870ae6805a200e09f63f759015b176649f95"
         }
       ]
+    },
+    {
+      "case_id": "2027-YJ-S05",
+      "directory": "skills/zhiqu-grad/examples/2027-YJ-S05",
+      "reports": [
+        "skills/zhiqu-grad/examples/2027-YJ-S05/report.pdf"
+      ],
+      "profile": {
+        "file": "profile.json",
+        "sha256": "af232e95b42de1286681d5b04d706bbd8d16d3dd86cfe304a7d87e5a6bfcab88",
+        "filled_at": "2026-10-19T21:30:00+08:00",
+        "form": "8bcf0611"
+      },
+      "report_versions": [
+        {
+          "file": "skills/zhiqu-grad/examples/2027-YJ-S05/report.pdf",
+          "generated_at": "2026-10-20T16:58:13+08:00",
+          "version": "1",
+          "sha256": "f2de2313c0de422aa8146af531fbb9d8429ea8b1130b0f419066b8fe732a25ca",
+          "profile_sha256": "af232e95b42de1286681d5b04d706bbd8d16d3dd86cfe304a7d87e5a6bfcab88"
+        }
+      ]
     }
   ]
 }
