@@ -57,7 +57,7 @@
 
 ## 七、来源与原件
 
-`source` 与公开层 `sources.csv` 使用同一顺序的14列：`source_id`、`grade`、`publisher`、`title`、`landing_url`（公告页）、`file_url`（原件附件直链，无则空）、`published`、`retrieved`、`method`、`archive_sha256`、`archive_path`、`archive_status`、`wayback_url`（可空）、`note`。等级仍只用官方／第三方整理，发布单位与等级分开。旧url按实际类型迁移，旧文件名、SHA及其他元数据在本机 `source_legacy` 原样保留；此表是迁移凭据，不是原件。官方来源至少有公告页或附件网址；栏目、首页只作为入口，不证明数字已取得。
+`source` 与公开层 `sources.csv` 使用同一顺序的17列：`source_id`、`grade`、`publisher`、`title`、`landing_url`（公告页）、`file_url`（原件附件直链，无则空）、`published`、`retrieved`、`method`、`archive_sha256`、`archive_path`、`archive_status`、`wayback_url`（可空）、`note`、`citation`、`license`、`producer_revision`。等级仍只用官方／第三方整理，发布单位与等级分开。旧url按实际类型迁移，旧文件名、SHA及其他元数据在本机 `source_legacy` 原样保留；此表是迁移凭据，不是原件。官方来源至少有公告页或附件网址；栏目、首页只作为入口，不证明数字已取得。
 
 `archive_status` 仅用「已存原件」「原链接失效·存档副本」「未取到」。指纹必须对实际保存的完整字节计算，不能用整理表、摘要、收据或网页标题冒充原件。未取到可以保留历史指纹，但路径为空；已存状态必须有可读文件且SHA一致。DNS、限额、302预算不足与验证码都不能证明原链接已失效。采用官方其他入口或Wayback时，note保留旧网址→发现入口→存档网址、正文适用年份及核对情况，wayback_url只记实际取得的存档，不猜。
 
@@ -67,4 +67,13 @@
 
 抽查在check_sample逐项记录实际库值、原文值、source_id、页表行及一致／不一致／口径不同／未取到，不修改业务数字。下载成功不等于数字一致，扫描件需实际读图或核实OCR；没有可靠原文时不能仅因出现相同数字就判一致。check_links.py按需经本机爬虫限额体检，各URL结果写link_check：source_id、checked、http_status、final_url、body_matches_archive，另记具体URL、状态与原因；无两端指纹时一致性为空，不用HTTP200替代正文核验，不自动定时运行。
 
-每次入库先快照，写独立候选库，核对全部原业务字段/行数与原库一致、外键与完整性检查通过后fsync并原子替换。两库的datapackage.json采用Frictionless Data Package格式，记录schema/列说明/单位/实际主外键/来源列表/数据库SHA及版本；已知业务连接但未定义SQL外键的另作说明，不伪造约束。README数据字典从该文件生成，CHANGELOG按实际入库SHA记录批次，同库指纹重跑不重复写日志。公开CSV校验同时检查14列与原件索引，默认离线运行。
+每次入库先快照，写独立候选库，核对全部原业务字段/行数与原库一致、外键与完整性检查通过后fsync并原子替换。两库的datapackage.json采用Frictionless Data Package格式，记录schema/列说明/单位/实际主外键/来源列表/数据库SHA及版本；已知业务连接但未定义SQL外键的另作说明，不伪造约束。README数据字典从该文件生成，CHANGELOG按实际入库SHA记录批次，同库指纹重跑不重复写日志。公开CSV校验同时检查17列与原件索引，默认离线运行。
+
+
+本节的扩展约定（两库及公开来源目录共同遵守）：
+
+- **学校存续**：institution增加status（在办／更名／合并入他校／撤销／转设）、successor_id、parent_id、established、closed、status_source_id；只凭教育部原文填写，无原文留NULL。parent只表关系，不合并数据。单一学校码发生更名时successor可以是本码，不新造学校身份；institution_event另记旧名、新名、精确生效日期、继任码、原句和source_id。原学校标识码不同的合并或转设保留两个身份及生效事件，旧年份不回挂新校；按年份查alias并展示事件链，不自动重定向业务数据。只有年份的查询须注明年内时点未判定。
+- **逐值质量**：业务表value_status是JSON映射，每个业务数值字段（含year/plan_year；ID及原件页行等定位键除外）各有status及必要的method/reason，不能只有行级标签。枚举：官方原值、人工更正、推算、第三方整理未核、第三方已核一致、未公布、人数太少未公布、原件缺失。人工更正的原始值、可用视图采用值和correction分开；推算写方法与输入链，核对只升级实际核过的字段。NULL不自动视作未公布或保密抑制，须原文明确；缺失原因未核时用原件缺失并说明尚缺该空值的原文依据。等级、原件可用性、逐值质量是独立维度，query输出完整标记。
+- **多成员原件**：图片承载数字时，HTML只是公告页，不算数字原件已齐。逐张保存图片；原件库assets.csv与本机source_asset记录source_id、sha256、path、url、role、retrieved；index仍按(sha256,source_id)登记每个成员，来源note列出全部成员指纹及期望/已取张数。部分图片未取到时source保持未取到，已取成员单独标清；不得将导航图或验证码页列为数据图。
+- **可比性**：comparability逐条记录domain、scope、field、effective_year、change、impact、source_id及原句，只录实际取得的官方原文。改革前后科类、批次、专业组、专项计划口径和考试科目变化分别确认，不从一省推广全国，不将333可选统考写成强制统考。多年份查询跨过生效年份且省份/学校匹配时显示提示；表中没有记录不代表口径稳定。
+- **引用与修订**：citation完整列发布机构、标题、年份、网址、取得日期；无公开许可填license=未注明，不擅自授予开放许可。producer_revision只记实际更正公告及日期，没有则空。dataset_version保存明确发布事件，不因脚本重跑自动升版：改字段/类型/约束升MAJOR，补数据或资源升MINOR，纠错或描述性元数据修订升PATCH。correction记录table_name、row_key、field、before_value、after_value、reason、affected_rows、source_id、date；迁移旧核对日志须注明历史纠错，并非本轮修改数字。CHANGELOG由持久版本、correction与入库批次自动生成；README字典仅从datapackage生成。Frictionless必须以实际SQL表资源验证，不能仅以二进制文件资源得到VALID就宣称逐表通过。

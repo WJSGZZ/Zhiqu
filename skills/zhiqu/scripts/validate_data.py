@@ -41,7 +41,7 @@ AFTER_ENTRY_FIELDS = (
     "review_deadline", "status", "notes",
 )
 AFTER_ENTRY_STATUSES = {"verified", "not_found", "unretrieved"}
-SOURCE_FIELDS = ("source_id", "grade", "publisher", "title", "landing_url", "file_url", "published", "retrieved", "method", "archive_sha256", "archive_path", "archive_status", "wayback_url", "note")
+SOURCE_FIELDS = ("source_id", "grade", "publisher", "title", "landing_url", "file_url", "published", "retrieved", "method", "archive_sha256", "archive_path", "archive_status", "wayback_url", "note", "citation", "license", "producer_revision")
 LEGACY_SOURCE_FIELDS = ("source_id", "grade", "publisher", "title", "url", "landing_url", "published", "retrieved", "method", "note")
 ARCHIVE_STATUSES = {"已存原件", "原链接失效·存档副本", "未取到"}
 STORED_STATUSES = ARCHIVE_STATUSES - {"未取到"}
@@ -382,9 +382,15 @@ def check_originals_index(repository_root=None, index_path=None, source_paths=No
             catalog_issues, _ = check_sources(directory, [], root)
             issues.extend("原件 canonical catalog：" + issue for issue in catalog_issues)
             catalog_rows = source_rows
+            partial_ids = set()
+            member_path = directory / "assets.csv"
+            if member_path.exists():
+                with member_path.open(encoding="utf-8-sig", newline="") as f:
+                    partial_ids = {r.get("source_id") for r in csv.DictReader(f)}
             for row in catalog_rows:
-                if (row.get("grade") != "官方" or row.get("archive_status") not in STORED_STATUSES
-                        or not (row.get("archive_path") or "").startswith(ORIGINALS_RELATIVE.as_posix() + "/")):
+                partial = row.get("archive_status") == "未取到" and row.get("source_id") in partial_ids
+                if (row.get("grade") != "官方" or (not partial and (row.get("archive_status") not in STORED_STATUSES
+                        or not (row.get("archive_path") or "").startswith(ORIGINALS_RELATIVE.as_posix() + "/")))):
                     issues.append("原件 canonical catalog 仅允许实际已存的官方公开来源（不能登记本机原件）：" + str(row.get("source_id", "")))
         for row in source_rows:
             sources.setdefault(row.get("source_id", ""), []).append(row)
@@ -403,6 +409,31 @@ def check_originals_index(repository_root=None, index_path=None, source_paths=No
                 conflicts.append("URL")
             if conflicts:
                 issues.append("原件 canonical catalog 与公开来源不一致：" + sid + "（" + ",".join(conflicts) + "）")
+    # A source can comprise a landing page plus several actual data images.
+    # Each member is registered explicitly; an arbitrary matching URL/hash is insufficient.
+    assets = {}
+    assets_path = directory / "assets.csv"
+    asset_fields = ("source_id", "sha256", "path", "url", "role", "retrieved")
+    if assets_path.exists():
+        with assets_path.open(encoding="utf-8-sig", newline="") as f:
+            reader = csv.DictReader(f)
+            if tuple(reader.fieldnames or ()) != asset_fields:
+                issues.append("原件 assets.csv 表头不符合逐成员规范")
+            for asset in reader:
+                sid = asset.get("source_id", "")
+                key = (sid, asset.get("sha256", ""))
+                if key in assets:
+                    issues.append("原件成员重复：" + sid)
+                assets[key] = asset
+                if not any(x.get("grade") == "官方" for x in sources.get(sid, [])):
+                    issues.append("原件成员没有官方来源：" + sid)
+                if asset.get("role") not in ("data_image", "attachment", "landing_page"):
+                    issues.append("原件成员role非法：" + sid)
+                if not _valid_source_url(asset.get("url", "")) or not _real_iso_date(asset.get("retrieved", "")):
+                    issues.append("原件成员网址或日期非法：" + sid)
+                _, error = _archive_file(root, asset.get("path", ""), asset.get("sha256", ""))
+                if error:
+                    issues.append("原件成员 " + sid + " " + error)
     seen, indexed_files = set(), set()
     for line, row in enumerate(rows, 2):
         where = f"原件 index.csv 第 {line} 行"
@@ -443,9 +474,11 @@ def check_originals_index(repository_root=None, index_path=None, source_paths=No
         matching = [s for s in sources.get(sid, []) if s.get("grade") == "官方"
                     and s.get("archive_status") in STORED_STATUSES
                     and s.get("archive_sha256") == sha and s.get("archive_path") == relative]
-        if not matching:
-            issues.append(f"{where} source_id 未关联同hash/路径的官方已存原件来源")
-        elif not any(row.get("source_url") in (s.get("landing_url"), s.get("file_url"), s.get("wayback_url")) for s in matching):
+        asset = assets.get((sid, sha))
+        member_match = asset and asset.get("path") == relative and asset.get("url") == row.get("source_url")
+        if not matching and not member_match:
+            issues.append(f"{where} source_id 未关联同hash/路径的官方已存原件来源或登记成员")
+        elif matching and not member_match and not any(row.get("source_url") in (s.get("landing_url"), s.get("file_url"), s.get("wayback_url")) for s in matching):
             issues.append(f"{where} source_url 与登记的官方来源链接不符")
     for sid, source_rows in sources.items():
         for row in source_rows:
@@ -461,12 +494,15 @@ def check_originals_index(repository_root=None, index_path=None, source_paths=No
             if (relative.startswith(ORIGINALS_RELATIVE.as_posix() + "/")
                     and (sha, sid) not in seen):
                 issues.append(f"来源 {sid} 声称已存原件但缺原件库索引")
+    for (sid, sha), asset in assets.items():
+        if (sha, sid) not in seen:
+            issues.append("原件成员未登记index：" + sid)
     attributes = directory / ".gitattributes"
     if attributes.exists() and attributes.read_bytes() != b"*/* -text -diff -merge\n":
         issues.append("原件Git属性必须禁止文本转换、文本diff和自动merge，不得配置转换filter")
     if directory.exists():
         for candidate in directory.rglob("*"):
-            metadata_files = {directory / "index.csv", directory / "README.md", directory / "sources.csv", directory / ".gitattributes"}
+            metadata_files = {directory / "index.csv", directory / "README.md", directory / "sources.csv", directory / ".gitattributes", directory / "assets.csv"}
             if candidate.is_file() and candidate not in metadata_files and candidate.resolve() not in indexed_files:
                 issues.append("公开原件文件未入index或路径不规范：" + candidate.relative_to(root).as_posix())
     notes.append(f"原件索引 {len(rows)} 条，{len(indexed_files)} 份去重原件")

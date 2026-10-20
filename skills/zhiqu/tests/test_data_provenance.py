@@ -40,8 +40,34 @@ class ProvenanceTests(unittest.TestCase):
     def test_git_attributes_cannot_install_a_content_transform(self):
         (self.originals/'.gitattributes').write_text('*/* filter=replace-original\n')
         self.assertTrue(any('Git属性' in x for x in self.check_index()))
+    def image_asset(self, **changes):
+        body=b'\x89PNG public score table';sha=hashlib.sha256(body).hexdigest()
+        relative=(v.ORIGINALS_RELATIVE/sha[:2]/(sha+'.png')).as_posix()
+        path=self.root/relative;path.parent.mkdir(exist_ok=True);path.write_bytes(body)
+        asset=dict(source_id=self.row['source_id'],sha256=sha,path=relative,url='https://www.moe.gov.cn/image.png',role='data_image',retrieved='2026-10-20')
+        asset.update(changes)
+        self.csv(self.originals/'assets.csv',tuple(asset),[asset])
+        member=dict(sha256=sha,size=len(body),media_type='image/png',source_url='https://www.moe.gov.cn/image.png',retrieved='2026-10-20',source_id=self.row['source_id'])
+        self.write(index=[self.index,member]);return asset
+    def test_source_can_register_multiple_exact_data_images(self):
+        self.image_asset();self.assertEqual(self.check_index(),[])
+    def test_data_image_must_have_official_source(self):
+        self.image_asset(source_id='unregistered');self.assertTrue(any('没有官方来源' in x for x in self.check_index()))
+    def test_data_image_membership_does_not_accept_other_url(self):
+        self.image_asset(url='https://www.moe.gov.cn/wrong.png');self.assertTrue(any('未关联' in x for x in self.check_index()))
+    def test_partial_source_keeps_real_members_without_claiming_complete(self):
+        asset=self.image_asset()
+        primary=dict(source_id=self.row['source_id'],sha256=self.sha,path=self.relative,url=self.row['file_url'],role='attachment',retrieved='2026-10-20')
+        self.csv(self.originals/'assets.csv',tuple(asset),[asset,primary])
+        self.row.update(archive_status='未取到',archive_path='')
+        self.csv(self.folder/'sources.csv',v.SOURCE_FIELDS,[self.row])
+        self.csv(self.originals/'sources.csv',v.SOURCE_FIELDS,[self.row])
+        self.assertEqual(self.check_index(),[])
+    def test_data_image_hash_is_checked(self):
+        asset=self.image_asset();(self.root/asset['path']).write_bytes(b'changed')
+        self.assertTrue(any('sha256' in x.lower() or 'size' in x for x in self.check_index()))
     def test_exact_unified_source_fields(self):
-        self.assertEqual(v.SOURCE_FIELDS,('source_id','grade','publisher','title','landing_url','file_url','published','retrieved','method','archive_sha256','archive_path','archive_status','wayback_url','note'))
+        self.assertEqual(v.SOURCE_FIELDS,('source_id','grade','publisher','title','landing_url','file_url','published','retrieved','method','archive_sha256','archive_path','archive_status','wayback_url','note','citation','license','producer_revision'))
     def test_valid_source_and_index(self):
         self.assertEqual(self.check(),[]);self.assertEqual(self.check_index(),[])
     def test_original_unavailable_can_keep_known_hash_without_claiming_stored(self):
