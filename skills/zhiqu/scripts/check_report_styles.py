@@ -68,6 +68,8 @@ def inspect_html(path):
         errors.append('正文目录不是完整的 01—12 节')
     if structure.core_lists != ['ul'] or structure.core_bullets != structure.core_heading:
         errors.append('核心结论须为唯一圆点列表，每项有粗体短标题')
+    if not re.search(r'\.number-run\s*\{[^}]*display:inline !important[^}]*font:inherit !important', css):
+        errors.append('数字防拆行标记缺少外观复位，会被其他 span 样式改成独立一行或大字')
     for token, label in [('__TOPLEFT__','页眉左'), ('__RUNHEAD__','页眉右')]:
         if token in css: errors.append(label+'仍有未替换占位')
     for token, label in [('counter(pages)','页码总数'), ('仅供参考 · 以当年官方文件为准','页脚声明'),

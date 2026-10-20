@@ -106,9 +106,9 @@
     "narrative.json": "68bcf0b7ceed018f59f25d5985f288cf82b031288c786c0fd13f24d102cf2e48",
     "profile.txt": "69dfeb57cf005a4ace3990e51a96b3b821e9de0c130dd1f8eae5b2088f5bef5e",
     "report.md": "77f566208464a0aae4ba61541e137a2803636efa1e1fbd7dad365992e34fe792",
-    "report.html": "6056301aff49aeed606e8a065b740ac14aba24b79301355b812c4db00ebb94f2",
-    "report.pdf": "61ae6ad65a4b31d2307285c4d5fd53fbe337a2b120606366d087b84d4b238e23",
-    "report_trace.json": "6f6b9b7583acf67675066459c9b6dbac29d5274324dd0dd1316611f4fce10d9e",
+    "report.html": "bf3ac23613bdf323523a2be42679e85d66c22effdf5ae21fd1a03c235105611f",
+    "report.pdf": "18cf14940162dab2483d76385e08a71e3cf59a5cf1971c856b44d0335a9bc12c",
+    "report_trace.json": "41d06c4334c529560f4592806b0d1ffdc92468471e9353e0cb4e516bf7b520a2",
     "operator_check.md": "23683bf5d5e842b4c525b3fe92e602a0ca7d863b845d554d9e8adc094d56d9d5",
     "profile_snapshot.json": "0a6cb6835c42b9e3a0e18679bd40d3c99c433453287f9e2a231e357647a858d9"
   },
@@ -124,6 +124,16 @@
         "report_trace.json"
       ],
       "reason": "核对附录改为紧凑排版后重新生成；正文 report.md 与全部输入文件未变，自评结论不受影响。"
+    },
+    {
+      "date": "2026-10-20",
+      "by": "Claude",
+      "files": [
+        "report.html",
+        "report.pdf",
+        "report_trace.json"
+      ],
+      "reason": "修正数字防拆行标记被其他样式套用（封面编号拆行、摘要卡里数字变大）后重新生成；正文 report.md 与全部输入文件未变，自评结论不受影响。"
     }
   ]
 }
