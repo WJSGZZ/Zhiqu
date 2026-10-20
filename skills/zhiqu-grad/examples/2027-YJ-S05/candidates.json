@@ -180,9 +180,10 @@
         "计算机学科专业基础"
       ],
       "location": "江苏南京（联合培养单位待核）",
-      "tier": "够一够",
-      "tier_basis": "模考高于上一届录取者上四分位，但该方向只录了五人：样本小，只作定性，最高只给“够一够”；单独排名、单独划线",
+      "tier": "不定档",
+      "tier_basis": "两年都与模考同科目，但一志愿录取上一届五人、前一届一人：按规则参考年份任一年不到五人就不定档；单独排名、单独划线",
       "comparison_years": [
+        "2025",
         "2026"
       ],
       "hard_conditions": [
@@ -218,7 +219,126 @@
       "why_listed": {
         "quote": "河海大学 计算机——同学说分数不高",
         "profile_ref": "profile_parse.json#/fields/16"
+      },
+      "untiered_reason": "样本太少"
+    },
+    {
+      "id": "S4",
+      "name": "苏州大学 软件工程（学硕）",
+      "path_id": "P1",
+      "school": "苏州大学",
+      "college": "计算机科学与技术学院",
+      "code": "083500",
+      "degree_type": "学术学位",
+      "study_mode": "全日制",
+      "plan_type": "普通计划（非定向）",
+      "year": 2027,
+      "subjects": [
+        "思想政治理论",
+        "英语一",
+        "数学一",
+        "计算机学科专业基础"
+      ],
+      "location": "江苏苏州",
+      "tier": "够一够",
+      "tier_basis": "模考与上一届录取者中位数持平、高于下四分位；只有一届分布，不给“相对稳妥”；当届公开招考计划与上一届相同",
+      "comparison_years": [
+        "2026"
+      ],
+      "hard_conditions": [
+        {
+          "id": "eligibility",
+          "name": "应届本科报名资格（由报考点和招生单位审核）",
+          "status": "unknown",
+          "evidence_refs": [
+            "E010"
+          ]
+        },
+        {
+          "id": "subjects",
+          "name": "当届初试科目与本人模考相同",
+          "status": "met",
+          "evidence_refs": [
+            "E035",
+            "E002"
+          ]
+        },
+        {
+          "id": "direction",
+          "name": "本人是否接受软件工程方向（画像没有原话，待问）",
+          "status": "unknown",
+          "evidence_refs": [
+            "E001",
+            "E047"
+          ]
+        }
+      ],
+      "status": "pending",
+      "why_listed": {
+        "quote": "苏州大学 计算机——学长推荐的",
+        "profile_ref": "profile_parse.json#/fields/16",
+        "note": "同一学院、当届与模考同科目的学硕；本人目标方向是“后端开发或者数据方向”，没说过接不接受软件工程，列入并在追问清单里问"
       }
+    },
+    {
+      "id": "S5",
+      "name": "河海大学 软件工程（学硕）",
+      "path_id": "P1",
+      "school": "河海大学",
+      "college": "计算机与软件学院",
+      "code": "083500",
+      "degree_type": "学术学位",
+      "study_mode": "全日制",
+      "year": 2027,
+      "subjects": [
+        "思想政治理论",
+        "英语一",
+        "数学一",
+        "计算机学科专业基础"
+      ],
+      "location": "江苏南京（联合培养单位待核）",
+      "tier": "不定档",
+      "tier_basis": "上一届目录与模考同科目；一志愿录取上一届三人、前一届十人：任一年不到五人，样本太少，不定档；当届目录未取到",
+      "comparison_years": [
+        "2025",
+        "2026"
+      ],
+      "hard_conditions": [
+        {
+          "id": "eligibility",
+          "name": "应届本科报名资格（由报考点和招生单位审核）",
+          "status": "unknown",
+          "evidence_refs": [
+            "E010"
+          ]
+        },
+        {
+          "id": "subjects",
+          "name": "当届初试科目（当届目录未取到，按上一届）",
+          "status": "unknown",
+          "evidence_refs": [
+            "E057",
+            "E072",
+            "E002"
+          ]
+        },
+        {
+          "id": "direction",
+          "name": "本人是否接受软件工程方向（画像没有原话，待问）",
+          "status": "unknown",
+          "evidence_refs": [
+            "E001"
+          ]
+        }
+      ],
+      "status": "pending",
+      "why_listed": {
+        "quote": "河海大学 计算机——同学说分数不高",
+        "profile_ref": "profile_parse.json#/fields/16",
+        "note": "同一学院、上一届与模考同科目的学硕；是否接受软件工程待问"
+      },
+      "untiered_reason": "样本太少",
+      "plan_type": "普通计划（非定向）"
     },
     {
       "id": "V1",
@@ -230,7 +350,7 @@
       "study_mode": "全日制",
       "tier": "不定档",
       "untiered_reason": "科目不同",
-      "tier_basis": "当届考英语二、数学二，和模考不是同一张卷",
+      "tier_basis": "当届考英语二、数学二，和模考科目不同",
       "why_listed": {
         "quote": "苏州大学 计算机——学长推荐的",
         "profile_ref": "profile_parse.json#/fields/16"
@@ -265,7 +385,7 @@
       "study_mode": "全日制",
       "tier": "不定档",
       "untiered_reason": "科目不同",
-      "tier_basis": "上一届考英语二、数学二，和模考不是同一张卷；当届目录未取到",
+      "tier_basis": "上一届考英语二、数学二，和模考科目不同；当届目录未取到",
       "why_listed": {
         "quote": "河海大学 计算机——同学说分数不高",
         "profile_ref": "profile_parse.json#/fields/16"
@@ -596,7 +716,7 @@
         "E002"
       ],
       "score_ref": "{{p:/fields/11/value/total}}",
-      "note": "机构全程模考，四科、限时、独立完成；与学硕当届或上一届科目相同；与专硕（英语二、数学二）不同卷。试卷难度与真题关系未核。"
+      "note": "机构全程模考，四科、限时、独立完成；与学硕（计算机、软件工程）当届或上一届科目相同；与专硕（英语二、数学二）科目不同。试卷难度与真题关系未核。"
     },
     "position_tool": "skills/zhiqu/scripts/kaoyan_position.py",
     "position_results": [
@@ -654,14 +774,14 @@
       {
         "id": "S3",
         "name": "S3",
-        "tier": "够一够",
-        "untiered_reason": null,
+        "tier": null,
+        "untiered_reason": "样本太少",
         "reasons": [
-          "不低于 2026 年录取者下四分位（只有一年分布，不给“相对稳妥”）",
-          "2026 年只录取 5 人，样本小，只作定性"
+          "2025 年只录取 1 人，样本太少，不定档"
         ],
         "positions": {
-          "2026": "高于上四分位 346"
+          "2026": "高于上四分位 346",
+          "2025": "高于上四分位 314"
         },
         "gaps": {
           "2026": {
@@ -670,6 +790,63 @@
             "median": 7.0,
             "q3": 3.0,
             "retest_total": 46
+          },
+          "2025": {
+            "min": 35,
+            "q1": 35.0,
+            "median": 35.0,
+            "q3": 35.0,
+            "retest_total": 62
+          }
+        }
+      },
+      {
+        "id": "S4",
+        "name": "S4",
+        "tier": "够一够",
+        "untiered_reason": null,
+        "reasons": [
+          "不低于 2026 年录取者下四分位（只有一年分布，不给“相对稳妥”）"
+        ],
+        "positions": {
+          "2026": "在中位数与上四分位 361 之间"
+        },
+        "gaps": {
+          "2026": {
+            "min": 21,
+            "q1": 15.0,
+            "median": 0.0,
+            "q3": -12.0,
+            "retest_total": 23
+          }
+        }
+      },
+      {
+        "id": "S5",
+        "name": "S5",
+        "tier": null,
+        "untiered_reason": "样本太少",
+        "reasons": [
+          "2026 年只录取 3 人，样本太少，不定档"
+        ],
+        "positions": {
+          "2026": "高于上四分位 348",
+          "2025": "高于上四分位 337"
+        },
+        "gaps": {
+          "2026": {
+            "min": 44,
+            "q1": 35.0,
+            "median": 26.0,
+            "q3": 1.0,
+            "retest_total": 63
+          },
+          "2025": {
+            "min": 61,
+            "q1": 55.0,
+            "median": 36.5,
+            "q3": 12.0,
+            "retest_total": 61
           }
         }
       },
@@ -789,12 +966,6 @@
       "action": "第二次全程模考后按同一工具重看位置；报名已截止，只调整复习重点和调剂清单，不改一志愿。"
     }
   },
-  "removed_after_review": [
-    {
-      "name": "苏州大学、河海大学 软件工程（学硕）",
-      "reason": "画像里没有接受软件工程方向的原话（想做后端或数据开发、人工智能也行），按复核要求不列入；补问后再考虑"
-    }
-  ],
   "report_blocks": {
     "06_candidates": {
       "type": "candidate_table",
@@ -815,11 +986,11 @@
             "只有一届分布；当届计划比上一届少 {{c:/suda_plan_drop}} 人；复试机考编程占一半分"
           ],
           [
-            "河海 计算机学硕·联培",
-            "高于上四分位；上一届只录 {{c:/hhu26_0812j_count}} 人",
-            "够一够（样本小，只作定性）",
-            "单独排名、复试线 {{e:E051#/value}} 分，远低于普通方向",
-            "和中国科学院大学南京学院联合培养，培养地点和学位怎么授予要先问清；你接不接受还没说"
+            "苏大 软件工程学硕",
+            "等于中位数 {{c:/suda26_0835_median|comma}}，高于下四分位 {{c:/suda26_0835_q1|comma}}；比复试线 {{e:E043#/value}} 高 {{c:/gap_suda0835_line}} 分",
+            "够一够",
+            "当届目录与模考同科目（和计算机学硕同一格）；在苏州；当届公开招考 {{e:E039#/value}} 人，与上一届相同",
+            "只有一届分布；你没说过接不接受软件工程；方向里有偏理论的；复试同样机考编程占一半分"
           ],
           [
             "河海 计算机学硕·普通方向",
@@ -833,15 +1004,18 @@
       "evidence_refs": [
         "E002",
         "E030",
+        "E035",
         "E038",
+        "E039",
         "E042",
+        "E043",
+        "E045",
+        "E046",
         "E050",
-        "E051",
         "E054",
         "E060",
         "E064",
-        "E065",
-        "E066"
+        "E065"
       ]
     },
     "06_untiered": {
@@ -855,6 +1029,18 @@
         ],
         "rows": [
           [
+            "河海 计算机学硕·联培",
+            "样本太少",
+            "与模考同科目（上一届目录）；一志愿录取：上一届 {{c:/hhu26_0812j_count}} 人、前一届 {{c:/hhu25_0812j_count}} 人；培养地点要先问清",
+            "{{e:E051#/value}}（{{e:E020#/published_on|year}}）、{{e:E055#/value}}（{{e:E054#/published_on|year}}）"
+          ],
+          [
+            "河海 软件工程学硕",
+            "样本太少",
+            "与模考同科目（上一届目录）；一志愿录取：上一届 {{c:/hhu26_0835_count}} 人（统考计划 {{e:E067#/value}} 人）、前一届 {{c:/hhu25_0835_count}} 人",
+            "{{e:E052#/value}}（{{e:E020#/published_on|year}}）、{{e:E062#/value}}（{{e:E054#/published_on|year}}）"
+          ],
+          [
             "苏大 计算机专硕",
             "科目不同",
             "当届考英语二、数学二",
@@ -867,52 +1053,28 @@
             "{{e:E053#/value}}（{{e:E020#/published_on|year}}）、{{e:E056#/value}}（{{e:E054#/published_on|year}}）"
           ],
           [
-            "南航 计算机学硕",
+            "南航 计算机学硕、专硕",
             "分布缺失",
             "录取者分数、当届科目都没取到",
-            "{{e:E080#/value}}（{{e:E020#/published_on|year}}）、{{e:E082#/value}}（{{e:E054#/published_on|year}}）"
+            "学硕 {{e:E080#/value}}（{{e:E020#/published_on|year}}）、{{e:E082#/value}}（{{e:E054#/published_on|year}}）；专硕 {{e:E081#/value}}（{{e:E020#/published_on|year}}）、{{e:E083#/value}}（{{e:E054#/published_on|year}}）"
           ],
           [
-            "南航 计算机专硕",
-            "分布缺失",
-            "同上",
-            "{{e:E081#/value}}（{{e:E020#/published_on|year}}）、{{e:E083#/value}}（{{e:E054#/published_on|year}}）"
-          ],
-          [
-            "南邮 计算机学硕",
+            "南邮 计算机学硕、专硕",
             "分布缺失",
             "录取者分数、当届科目没取到",
-            "{{e:E090#/value}}（{{e:E020#/published_on|year}}）、{{e:E092#/value}}（{{e:E054#/published_on|year}}）"
+            "学硕 {{e:E090#/value}}（{{e:E020#/published_on|year}}）、{{e:E092#/value}}（{{e:E054#/published_on|year}}）；专硕 {{e:E091#/value}}（{{e:E020#/published_on|year}}）"
           ],
           [
-            "南邮 计算机专硕",
-            "分布缺失",
-            "同上",
-            "{{e:E091#/value}}（{{e:E020#/published_on|year}}）"
-          ],
-          [
-            "江大 计算机学硕",
+            "江大 计算机学硕、专硕",
             "分布缺失",
             "录取者分数、当届科目没取到",
-            "{{e:E100#/value}}（{{e:E020#/published_on|year}}）、{{e:E102#/value}}（{{e:E054#/published_on|year}}）"
+            "学硕 {{e:E100#/value}}（{{e:E020#/published_on|year}}）、{{e:E102#/value}}（{{e:E054#/published_on|year}}）；专硕 {{e:E101#/value}}（{{e:E020#/published_on|year}}）"
           ],
           [
-            "江大 计算机专硕",
-            "分布缺失",
-            "同上",
-            "{{e:E101#/value}}（{{e:E020#/published_on|year}}）"
-          ],
-          [
-            "南理工 计算机学硕",
+            "南理工 计算机学硕、专硕",
             "分布缺失",
             "只取到两届前的线",
-            "{{e:E110#/value}}（{{e:E054#/published_on|year}}）"
-          ],
-          [
-            "南理工 计算机专硕",
-            "分布缺失",
-            "同上",
-            "{{e:E111#/value}}（{{e:E054#/published_on|year}}）"
+            "学硕 {{e:E110#/value}}（{{e:E054#/published_on|year}}）；专硕 {{e:E111#/value}}（{{e:E054#/published_on|year}}）"
           ]
         ]
       },
@@ -920,10 +1082,20 @@
         "E032",
         "E036",
         "E040",
+        "E051",
+        "E052",
         "E053",
+        "E055",
         "E056",
+        "E057",
         "E059",
+        "E062",
+        "E066",
+        "E067",
         "E072",
+        "E074",
+        "E075",
+        "E076",
         "E080",
         "E081",
         "E082",
@@ -954,7 +1126,7 @@
           [
             "河海当届招生目录",
             "研究生院“硕士研究生招生”栏目（最新一条是网报公告）",
-            "河海三项按上一届科目看"
+            "河海各项按上一届科目看"
           ],
           [
             "南航当届目录",

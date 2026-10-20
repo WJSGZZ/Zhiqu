@@ -99,7 +99,7 @@
     "stage": "读研版 · 大四备考",
     "region": "江苏",
     "data_asof": "{{k:/context/as_of}}",
-    "conclusion": "你是江苏普通本科计算机大四，只想留在江苏，十月一次机构模考 {{c:/mock_total}} 分（四科与学硕同卷）。放进上一届录取者的分数里看：苏大计算机学硕“够一够”，河海计算机学硕普通方向“冒险”（复试线一年涨了 {{c:/hhu_line_jump}} 分），其余或科目不同、或只有复试线，不定档；六校里目前没有数据可靠的稳妥档，保底靠出分后调剂和春招。建议一志愿报苏大计算机学硕，{{k:/context/personal_dates/action1|md}}前报完名；之后补最弱科、练上机，初试后就列调剂名单、做项目备春招。"
+    "conclusion": "你是江苏普通本科计算机大四，只想留在江苏，十月一次机构模考 {{c:/mock_total}} 分（与学硕同科目）。放进上一届录取者的分数里看：苏大计算机学硕、苏大软件工程学硕都是“够一够”，河海计算机学硕普通方向“冒险”（复试线一年涨了 {{c:/hhu_line_jump}} 分）；河海联培、河海软件工程录取人数太少，南航等四校只有复试线，专硕科目不同，都不定档；六校里没有数据可靠的稳妥档，保底靠出分后调剂和春招。默认建议一志愿报苏大计算机学硕；你若接受软件工程方向，同校软件工程学硕位置更好，可以改报。{{k:/context/personal_dates/action1|md}}前报完名；之后补最弱科、练上机，初试后就列调剂名单、做项目备春招。"
   },
   "budget": {
     "annual_limit": 30000,
@@ -167,6 +167,54 @@
           "{{e:E042#/anonymous_values}}"
         ],
         "label": "苏大计算机学硕上一届拟录取初试分最高分"
+      },
+      {
+        "output": "suda26_0835_count",
+        "algorithm": "count",
+        "inputs": [
+          "{{e:E045#/anonymous_values}}"
+        ],
+        "label": "苏大软件工程学硕上一届拟录取初试分人数"
+      },
+      {
+        "output": "suda26_0835_min",
+        "algorithm": "min",
+        "inputs": [
+          "{{e:E045#/anonymous_values}}"
+        ],
+        "label": "苏大软件工程学硕上一届拟录取初试分最低分"
+      },
+      {
+        "output": "suda26_0835_q1",
+        "algorithm": "q1",
+        "inputs": [
+          "{{e:E045#/anonymous_values}}"
+        ],
+        "label": "苏大软件工程学硕上一届拟录取初试分下四分位"
+      },
+      {
+        "output": "suda26_0835_median",
+        "algorithm": "median",
+        "inputs": [
+          "{{e:E045#/anonymous_values}}"
+        ],
+        "label": "苏大软件工程学硕上一届拟录取初试分中位数"
+      },
+      {
+        "output": "suda26_0835_q3",
+        "algorithm": "q3",
+        "inputs": [
+          "{{e:E045#/anonymous_values}}"
+        ],
+        "label": "苏大软件工程学硕上一届拟录取初试分上四分位"
+      },
+      {
+        "output": "suda26_0835_max",
+        "algorithm": "max",
+        "inputs": [
+          "{{e:E045#/anonymous_values}}"
+        ],
+        "label": "苏大软件工程学硕上一届拟录取初试分最高分"
       },
       {
         "output": "suda26_085404_count",
@@ -313,6 +361,54 @@
         "label": "河海计算机学硕联培方向上一届初试分最高分"
       },
       {
+        "output": "hhu26_0835_count",
+        "algorithm": "count",
+        "inputs": [
+          "{{e:E074#/anonymous_values}}"
+        ],
+        "label": "河海软件工程学硕上一届初试分人数"
+      },
+      {
+        "output": "hhu26_0835_min",
+        "algorithm": "min",
+        "inputs": [
+          "{{e:E074#/anonymous_values}}"
+        ],
+        "label": "河海软件工程学硕上一届初试分最低分"
+      },
+      {
+        "output": "hhu26_0835_q1",
+        "algorithm": "q1",
+        "inputs": [
+          "{{e:E074#/anonymous_values}}"
+        ],
+        "label": "河海软件工程学硕上一届初试分下四分位"
+      },
+      {
+        "output": "hhu26_0835_median",
+        "algorithm": "median",
+        "inputs": [
+          "{{e:E074#/anonymous_values}}"
+        ],
+        "label": "河海软件工程学硕上一届初试分中位数"
+      },
+      {
+        "output": "hhu26_0835_q3",
+        "algorithm": "q3",
+        "inputs": [
+          "{{e:E074#/anonymous_values}}"
+        ],
+        "label": "河海软件工程学硕上一届初试分上四分位"
+      },
+      {
+        "output": "hhu26_0835_max",
+        "algorithm": "max",
+        "inputs": [
+          "{{e:E074#/anonymous_values}}"
+        ],
+        "label": "河海软件工程学硕上一届初试分最高分"
+      },
+      {
         "output": "hhu26_0854_count",
         "algorithm": "count",
         "inputs": [
@@ -409,6 +505,102 @@
         "label": "河海计算机学硕普通方向前一届初试分最高分"
       },
       {
+        "output": "hhu25_0812j_count",
+        "algorithm": "count",
+        "inputs": [
+          "{{e:E075#/anonymous_values}}"
+        ],
+        "label": "河海计算机学硕联培方向前一届初试分人数"
+      },
+      {
+        "output": "hhu25_0812j_min",
+        "algorithm": "min",
+        "inputs": [
+          "{{e:E075#/anonymous_values}}"
+        ],
+        "label": "河海计算机学硕联培方向前一届初试分最低分"
+      },
+      {
+        "output": "hhu25_0812j_q1",
+        "algorithm": "q1",
+        "inputs": [
+          "{{e:E075#/anonymous_values}}"
+        ],
+        "label": "河海计算机学硕联培方向前一届初试分下四分位"
+      },
+      {
+        "output": "hhu25_0812j_median",
+        "algorithm": "median",
+        "inputs": [
+          "{{e:E075#/anonymous_values}}"
+        ],
+        "label": "河海计算机学硕联培方向前一届初试分中位数"
+      },
+      {
+        "output": "hhu25_0812j_q3",
+        "algorithm": "q3",
+        "inputs": [
+          "{{e:E075#/anonymous_values}}"
+        ],
+        "label": "河海计算机学硕联培方向前一届初试分上四分位"
+      },
+      {
+        "output": "hhu25_0812j_max",
+        "algorithm": "max",
+        "inputs": [
+          "{{e:E075#/anonymous_values}}"
+        ],
+        "label": "河海计算机学硕联培方向前一届初试分最高分"
+      },
+      {
+        "output": "hhu25_0835_count",
+        "algorithm": "count",
+        "inputs": [
+          "{{e:E076#/anonymous_values}}"
+        ],
+        "label": "河海软件工程学硕前一届初试分人数"
+      },
+      {
+        "output": "hhu25_0835_min",
+        "algorithm": "min",
+        "inputs": [
+          "{{e:E076#/anonymous_values}}"
+        ],
+        "label": "河海软件工程学硕前一届初试分最低分"
+      },
+      {
+        "output": "hhu25_0835_q1",
+        "algorithm": "q1",
+        "inputs": [
+          "{{e:E076#/anonymous_values}}"
+        ],
+        "label": "河海软件工程学硕前一届初试分下四分位"
+      },
+      {
+        "output": "hhu25_0835_median",
+        "algorithm": "median",
+        "inputs": [
+          "{{e:E076#/anonymous_values}}"
+        ],
+        "label": "河海软件工程学硕前一届初试分中位数"
+      },
+      {
+        "output": "hhu25_0835_q3",
+        "algorithm": "q3",
+        "inputs": [
+          "{{e:E076#/anonymous_values}}"
+        ],
+        "label": "河海软件工程学硕前一届初试分上四分位"
+      },
+      {
+        "output": "hhu25_0835_max",
+        "algorithm": "max",
+        "inputs": [
+          "{{e:E076#/anonymous_values}}"
+        ],
+        "label": "河海软件工程学硕前一届初试分最高分"
+      },
+      {
         "output": "hhu25_0854_count",
         "algorithm": "count",
         "inputs": [
@@ -482,6 +674,33 @@
           "{{e:E030#/value}}"
         ],
         "label": "模考比苏大计算机学硕上一届复试线高多少"
+      },
+      {
+        "output": "gap_suda0835_median",
+        "algorithm": "difference",
+        "inputs": [
+          "{{c:/suda26_0835_median}}",
+          "{{c:/mock_total}}"
+        ],
+        "label": "苏大软件工程学硕上一届中位数比模考高多少"
+      },
+      {
+        "output": "gap_suda0835_line",
+        "algorithm": "difference",
+        "inputs": [
+          "{{c:/mock_total}}",
+          "{{e:E043#/value}}"
+        ],
+        "label": "模考比苏大软件工程学硕上一届复试线高多少"
+      },
+      {
+        "output": "suda_line_gap_0812_0835",
+        "algorithm": "difference",
+        "inputs": [
+          "{{e:E030#/value}}",
+          "{{e:E043#/value}}"
+        ],
+        "label": "苏大计算机学硕与软件工程学硕上一届复试线之差"
       },
       {
         "output": "gap_hhu0812n_line",
