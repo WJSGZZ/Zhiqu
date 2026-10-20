@@ -126,7 +126,9 @@ def check(root=SKILLS,library=LIBRARY):
                     if (path/f).exists():errors.append(cid+'：前半程人物出现超出范围的产物 '+f)
             else:
                 review=json.loads((path/'review.json').read_text())
-                if review.get('status')!='awaiting_independent_review' or review.get('independent') is not False:errors.append(cid+'：不能冒充独立审核通过')
+                approved=review.get('status')=='approved' and review.get('independent') is True and review.get('reviewer') and review.get('date')
+                waiting=review.get('status') in ('awaiting_independent_review','changes_required') and review.get('independent') is not True
+                if not (approved or waiting):errors.append(cid+'：不能冒充独立审核通过')
         except (OSError,KeyError,ValueError,TypeError) as exc:errors.append(cid+'：'+str(exc))
     return errors
 

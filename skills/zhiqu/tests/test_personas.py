@@ -73,7 +73,9 @@ class PersonaTests(unittest.TestCase):
             self.assertEqual(c.personal_inputs(),[])
             self.assertEqual(c.evidence_integrity_errors(),[])
             delivery_errors=c.check(10,delivery=True)
-            self.assertTrue(any('尚未独立批准交付' in e for e in delivery_errors))
+            approved=json.loads((c.root/'review.json').read_text()).get('status')=='approved'
+            if not approved:self.assertTrue(any('尚未独立批准交付' in e for e in delivery_errors))
+            else:self.assertFalse(any('尚未独立批准交付' in e for e in delivery_errors))
             self.assertTrue(any('尚未完成' in e for e in delivery_errors))
 
     def test_condition_tiers_are_not_presented_as_school_difficulty(self):
