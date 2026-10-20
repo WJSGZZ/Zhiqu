@@ -2,26 +2,34 @@
   "schema_version": 1,
   "case_id": "2027-YJ-S01",
   "source_sha256": {
-    "case.json": "201dd6347c352ad4568f69dcc7ee471ba8fda67e2dbf286f7eb09fc4683c2260",
+    "case.json": "3b7e07dfbdad7b43a2d996e35f3c024d006a7f1ef5aa47e2f3206925f1e04d76",
     "profile_parse.json": "a9eee1981e639d511390eedec704012149c76ecf08348ddc03a5c9a8e32de7e9",
     "directions.json": "2b68a53951ab4a8de52d7edcbabdf32d24e4570392cd70ac212c62342430a3b2",
     "rules_check.json": "7b0a58159b98a98e96a17d877674c57bf2d59988aefd37a2f57d94f82580f5c2",
     "candidates.json": "c9c5db84e727dde6ec750e534d023b4e15e7dd85e5bd1bc77110b14166f9d8ad",
-    "evidence.json": "1b58cfaff77ed6b90879e7dba530aae8a6e90a620f4abe76763c76515e48c949",
+    "evidence.json": "931f92b62c754f55ea753be5406aa0c7e8f297aa105c928a105c5fabb58e0c85",
     "calculations.json": "cec5b3577a8d62196c2dfd606cfab91b31c421feb52a97cbdd3a5cfafcd5daf7",
-    "judgment.json": "37be058d4e45aa1d481ef16d4f7b7816e2b79d33257fc3937e730e28836b7453",
-    "narrative.json": "c8367bbda892a637559085198bd56f36d467199b2410f2773fcf2c02331fdb81",
+    "judgment.json": "c5eb44314051a1d85b8307a79757f819c5b69fe03647180bab197757273f26ab",
+    "narrative.json": "d7abb3f0d3c33de4ab5f50e821d67f81bad19bd57592c28c26e2159bb9083294",
     "profile.txt": "2be92b9770f7a4a877386334b958c096198b948c89c5eabca030d4f557e29457"
   },
   "contract_sha256": "b805904d0c51a3684ce92ee68d71e57f416749bf20fbf6c5ef0604747f005a07",
   "tool_sha256": {
-    "planning_report.py": "397cea049cf8963c3b1cf401ce0f8f530d4bff3a0fef6ee47eaf941a6cf781c5",
-    "planning_workflow.py": "8159eaaa7c817131a52f51b0b52370c66f5fabbcf091ec3ff79d4f5f32f8bab8",
-    "operator_check.py": "97965475c2c8b6efe5dbf2747511526d1729a540f55a16b54fa282e2a810fdc7",
+    "planning_report.py": "f2305a63b08addc6b0d98fd9e66e317d39e4eb46411ca46ed4523872cbcefb10",
+    "planning_workflow.py": "9611234df2cbdb0b3f379faeb65ad632c0175b0a9e761eb61234b8efa380dc8a",
+    "operator_check.py": "e69cf811b9d369137e1919efaaf160c78f04ea1e3b739529c77d3ef9d784a4ae",
     "check_demos.py": "67d4edc1cd737beeb6729783a736e667a97c12d8f7de2de673632d9d5c3370b8",
-    "report.py": "99f75d3845c9bacedc0eeb540a6594b58230b6de7540e47159d6e16ce73b0240",
+    "report.py": "1d20cf4882a1184dbf283a45033525e25fbb2107e3f0d55af096794887ecd598",
     "render_report.py": "18f22f904e72e162a9307dfef2a010bbaa5eadd95e08698457177c312bf14a68",
-    "profile_store.py": "a6cebda41b504d6fef84c3c9b0686c055a1d0dc432a94350ba8ca15822d01391"
+    "profile_store.py": "a6cebda41b504d6fef84c3c9b0686c055a1d0dc432a94350ba8ca15822d01391",
+    "claim_guards.py": "54bab4d942fafd148190df73cad34805538662b0a152ec5701c8a960e28dbd1d",
+    "source_authentication.py": "b18201e997e0b4ca33c879979bc03f81deab1ea5edbbbc74cab6bf622821f278",
+    "official_source_audit.py": "c09c40a2c5eec18318fbb1fa52393ee37b4e63f636ec7ea3999084d12ecc0df1",
+    "unit_validation.py": "9f5df89a101dd684231fe35f8fe931e150127fc698f2ab774b628bc3ffdf093c",
+    "reader_language.py": "fac8d66d933db781bb357f4c32f402e154ab44bcf36eb9e398b8f583f089b853",
+    "claim_check.py": "31851ebe4edb18b47bdcbdd65a3921a4aa412b5f65a1e813059251cfa544ceac",
+    "check_report.py": "c44b082a3e3b066acaba2adf4c358c2816b39f28cd646dc81277ec22eee72ed9",
+    "authoring_metadata.py": "9ac0328c9a8bdeec672daede766f49f5e9c94c2761ae64e0ec32e2ed8abf404c"
   },
   "numeric_refs": [
     {
@@ -104,7 +112,7 @@
     },
     {
       "location": "01.core_points.3",
-      "ref": "{{e:E1043#/value}}",
+      "ref": "{{e:E1023#/value}}",
       "value": 2026,
       "display": "2026"
     },
@@ -343,16 +351,10 @@
       "display": "80.2"
     },
     {
-      "location": "04.analysis.13",
-      "ref": "{{k:/target_year}}",
-      "value": 2027,
-      "display": "2027"
-    },
-    {
       "location": "05.analysis.6",
-      "ref": "{{k:/target_year}}",
-      "value": 2027,
-      "display": "2027"
+      "ref": "{{e:E1005#/value}}",
+      "value": 160,
+      "display": "160"
     },
     {
       "location": "06.analysis.1",
@@ -530,7 +532,7 @@
     },
     {
       "location": "06.details.6",
-      "ref": "{{c:/scut_reference_statistics/2026_普通计划与基地计划/min}}",
+      "ref": "{{c:/scut_reference_statistics/2026_普通计划/min}}",
       "value": 330,
       "display": "330"
     },
@@ -542,7 +544,7 @@
     },
     {
       "location": "06.details.6",
-      "ref": "{{c:/scut_reference_statistics/2026_普通计划与基地计划/median}}",
+      "ref": "{{c:/scut_reference_statistics/2026_普通计划/median}}",
       "value": 382,
       "display": "382"
     },
@@ -572,7 +574,7 @@
     },
     {
       "location": "06.details.6",
-      "ref": "{{c:/scut_reference_statistics/2026_普通计划与基地计划/min}}",
+      "ref": "{{c:/scut_reference_statistics/2026_基地计划/min}}",
       "value": 330,
       "display": "330"
     },
@@ -584,7 +586,7 @@
     },
     {
       "location": "06.details.6",
-      "ref": "{{c:/scut_reference_statistics/2026_普通计划与基地计划/median}}",
+      "ref": "{{c:/scut_reference_statistics/2026_基地计划/median}}",
       "value": 382,
       "display": "382"
     },
@@ -596,7 +598,7 @@
     },
     {
       "location": "06.details.6",
-      "ref": "{{c:/scut_reference_statistics/2026_普通计划与基地计划/max}}",
+      "ref": "{{c:/scut_reference_statistics/2026_基地计划/max}}",
       "value": 440,
       "display": "440"
     },
@@ -758,7 +760,7 @@
     },
     {
       "location": "06.analysis.9",
-      "ref": "{{e:E1003#/value}}",
+      "ref": "{{e:E1011#/value}}",
       "value": "085801",
       "display": "085801"
     },
@@ -908,12 +910,6 @@
     },
     {
       "location": "06.analysis.13",
-      "ref": "{{e:E1027#/value}}",
-      "value": 40,
-      "display": "40"
-    },
-    {
-      "location": "06.analysis.13",
       "ref": "{{e:E1016#/value}}",
       "value": "085801",
       "display": "085801"
@@ -944,7 +940,7 @@
     },
     {
       "location": "06.details.16",
-      "ref": "{{e:E1043#/value}}",
+      "ref": "{{e:E1018#/value}}",
       "value": 2026,
       "display": "2026"
     },
@@ -1010,9 +1006,15 @@
     },
     {
       "location": "06.analysis.17",
-      "ref": "{{e:E1043#/value}}",
+      "ref": "{{e:E1018#/value}}",
       "value": 2026,
       "display": "2026"
+    },
+    {
+      "location": "06.analysis.17",
+      "ref": "{{e:E1019#/value}}",
+      "value": 2025,
+      "display": "2025"
     },
     {
       "location": "06.analysis.17",
@@ -1268,12 +1270,6 @@
     },
     {
       "location": "09.details.3",
-      "ref": "{{e:E1043#/value}}",
-      "value": 2026,
-      "display": "2026"
-    },
-    {
-      "location": "09.details.3",
       "ref": "{{k:/budget/monthly_living_assumption|comma}}",
       "value": 1300,
       "display": "1,300"
@@ -1436,12 +1432,6 @@
     },
     {
       "location": "09.analysis.7",
-      "ref": "{{k:/budget/annual_limit|comma}}",
-      "value": 30000,
-      "display": "30,000"
-    },
-    {
-      "location": "09.analysis.7",
       "ref": "{{k:/target_year}}",
       "value": 2027,
       "display": "2027"
@@ -1472,7 +1462,7 @@
     },
     {
       "location": "09.details.8",
-      "ref": "{{e:E1043#/value}}",
+      "ref": "{{e:E1023#/value}}",
       "value": 2026,
       "display": "2026"
     },
@@ -1826,11 +1816,28 @@
     }
   ],
   "artifacts": {
-    "report.md": "beb0f1dd31d787c421cc0d1adf9ad49c7859d1c5e4e815aa2a9b807c8c780cb3",
-    "report.html": "817bbd4954e72b6423f5c7494509475b364cf2887260ec6a5b49d65ecc80385c",
-    "2027-YJ-S01-report.pdf": "be09bf3a5a9b4858b3243a0efbf6691511679411927c49086e86e9e5fcfaf7ea"
+    "report.md": "087c1b146226784d9ee026debb65d16ade1b29ba4401277b42aa2632f4774d45",
+    "report.html": "919bbebfe2cd8c5236be9228fd275e0e93c8df8f5b8771555186f1c459ac0225",
+    "2027-YJ-S01-report.pdf": "6aa74788d703e42ce92e5f8a86444b2c6c74255c81e2510236b641f82010fcbf"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
+  "authoring": {
+    "model": "未记录"
+  },
+  "renderer": {
+    "version": "sha256:d973c62bf0994f790e3e6fdb608502c915845fdb92a55c92bd191ff3fbba5ec5",
+    "files_sha256": {
+      "planning_report.py": "f2305a63b08addc6b0d98fd9e66e317d39e4eb46411ca46ed4523872cbcefb10",
+      "render_report.py": "18f22f904e72e162a9307dfef2a010bbaa5eadd95e08698457177c312bf14a68",
+      "report.py": "1d20cf4882a1184dbf283a45033525e25fbb2107e3f0d55af096794887ecd598"
+    }
+  },
+  "policy_sha256": {
+    "zhiqu-shared/references/official-domains.csv": "0cd0d7be4307fd6e8696eaa2f845726929ddcb264c841fe32293fca58a49c934",
+    "zhiqu-shared/references/unit-families.json": "a535c6ba17dc14fcf1d30d8b5f45691da0ab2f78cb92a30b01a55de41e72c9a0",
+    "zhiqu-shared/references/reader-language.json": "247453b7a5c1d0bf4b5d4997d57ee8d32a1cd70327fff2683322bf4c79e5476d",
+    "zhiqu/references/report-guide.md": "00581d227e2f98b297722d34eb7125818cbf2baa7dd3fe4543348e6d34b01cea"
+  },
   "report_profile": {
     "file": "profile_snapshot.json",
     "sha256": "432626de4888a0d461edc284e9c475796e8d96ce33683030143dcd3f896be032",
@@ -1838,7 +1845,7 @@
     "form": null
   },
   "verification_tools_sha256": {
-    "verify_report.py": "491d8cea6a72e86b0cbf987d52f4139cdca0a51c3e46ff3e7fee47589e0bcf60",
+    "verify_report.py": "008a50716d1c523376018e4c91280469b83fa9957ce8bf755cce961141d0e596",
     "verification_calculations.py": "80e4fb8e0d247582ade885655be5f30e0c2d1cc9e19ebf59c39f3fa83823a54b"
   }
 }

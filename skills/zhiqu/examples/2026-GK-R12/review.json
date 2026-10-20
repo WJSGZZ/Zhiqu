@@ -81,15 +81,19 @@
     ]
   },
   "snapshot": {
-    "report.json": "6bebc2939fa5ae465e53b0d4f28942a758a20e9ffa3689a26576227252032230",
-    "2026-GK-R12-report.pdf": "6cf68ed69a45c8cb22fafc6c59c51fb7135f6c190eb029d245089954512a50a1",
-    "operator_check.md": "0b2f47c5ac319298923b3e1fb805a80a351069501f96b6dd1a3cdc933a1a5be4",
-    "retro_ranks/135253/result.json": "85969677c047dcc860dab9a01f6a50b07fff1f317f7f9e6ac2fc583acb17249a",
-    "case.json": "e1babfaa0725685325bb554f29c2666dceef0868fd15a0caa6e4648c489aa832",
-    "profile_snapshot.json": "b12cc2cb12ceee8e620e0713627a0d604f3c190bd09a36519433d0ab18c4e2af"
+    "2026-GK-R12-report.pdf": "76c5071b11b666a4d61782e465e8b79d30c393b64421a1b9cb68986f8056381e",
+    "case.json": "e90d1b94254275e03b76eb9b8bb4243c8d17de06df3c4f2e6868e91d9d15d12f",
+    "operator_check.md": "efc6add614ed021d627be4b319a5396fa92393366f1d3ca24433b8faa641a267",
+    "profile.txt": "1aa83818b859eee159b40aa28f9e283b2bbbc67cfbeb003fd2c3d789f03567be",
+    "profile_snapshot.json": "b12cc2cb12ceee8e620e0713627a0d604f3c190bd09a36519433d0ab18c4e2af",
+    "report.html": "f3fa50261c8e8aacbcd7ded0bf95ac278c5c2b9f1d07222d3fae2933949f9eb2",
+    "report.json": "73ee7d0394eacbfc45db3358fda95c89bf1b4c1871689d65d0e888432c032f02",
+    "report_trace.json": "d8d42a85f6e66007174e8fa1acd050b4a0db3d5f64cc34347bed89e94126819d",
+    "retro_ranks/135253/result.json": "85969677c047dcc860dab9a01f6a50b07fff1f317f7f9e6ac2fc583acb17249a"
   },
   "self_assessment": {
-    "verification_scope": "本轮更新为附核对材料的PDF，自评和机器核对通过后仍等待独立审核；未补造官方原文和独立批准。"
+    "verification_scope": "本轮更新为附核对材料的PDF，自评和机器核对通过后仍等待独立审核；未补造官方原文和独立批准。",
+    "date": "2026-10-20"
   },
   "snapshot_refreshes": [
     {
@@ -204,5 +208,10 @@
       "comparison": "改名前后各抽取 PDF 全文（26 页）逐行比对：唯一差异是第 12 节“生成时间”（2026-10-20T17:24:02+08:00 → 2026-10-20T18:45:36+08:00）；页数、标题、案例号与画像指纹不变。",
       "not_refreshed": "report.json、operator_check.md 在改名前（main 134a6a3）已与快照不符，不属于本次改名，未刷新，留待复核处理。"
     }
-  ]
+  ],
+  "regeneration": {
+    "date": "2026-10-20",
+    "reason": "移植检查、独立逐句回查修正真实缺口、作者模型及渲染器追踪、附录单一数字写法及图字放大；只刷新当前自评快照，不冒充独立复批",
+    "review_required": true
+  }
 }

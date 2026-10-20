@@ -12,7 +12,7 @@
   "sampled_sources": [],
   "self_assessment": {
     "reviewer": "制作会话自评",
-    "date": "2026-10-19",
+    "date": "2026-10-20",
     "status": "complete",
     "rubric": {
       "items": [
@@ -95,22 +95,23 @@
     "verification_scope": "本轮更新为附核对材料的PDF，自评和机器核对通过后仍等待独立审核；未补造官方原文和独立批准。"
   },
   "snapshot": {
-    "case.json": "201dd6347c352ad4568f69dcc7ee471ba8fda67e2dbf286f7eb09fc4683c2260",
-    "profile_parse.json": "a9eee1981e639d511390eedec704012149c76ecf08348ddc03a5c9a8e32de7e9",
-    "directions.json": "2b68a53951ab4a8de52d7edcbabdf32d24e4570392cd70ac212c62342430a3b2",
-    "rules_check.json": "7b0a58159b98a98e96a17d877674c57bf2d59988aefd37a2f57d94f82580f5c2",
-    "candidates.json": "c9c5db84e727dde6ec750e534d023b4e15e7dd85e5bd1bc77110b14166f9d8ad",
-    "evidence.json": "1b58cfaff77ed6b90879e7dba530aae8a6e90a620f4abe76763c76515e48c949",
+    "2027-YJ-S01-report.pdf": "6aa74788d703e42ce92e5f8a86444b2c6c74255c81e2510236b641f82010fcbf",
     "calculations.json": "cec5b3577a8d62196c2dfd606cfab91b31c421feb52a97cbdd3a5cfafcd5daf7",
-    "judgment.json": "37be058d4e45aa1d481ef16d4f7b7816e2b79d33257fc3937e730e28836b7453",
-    "narrative.json": "c8367bbda892a637559085198bd56f36d467199b2410f2773fcf2c02331fdb81",
+    "candidates.json": "c9c5db84e727dde6ec750e534d023b4e15e7dd85e5bd1bc77110b14166f9d8ad",
+    "case.json": "3b7e07dfbdad7b43a2d996e35f3c024d006a7f1ef5aa47e2f3206925f1e04d76",
+    "claim_check.json": "96de0947c4805fc490f04e30a8a00926ca24872850153bcbf8f900c21d2653b7",
+    "directions.json": "2b68a53951ab4a8de52d7edcbabdf32d24e4570392cd70ac212c62342430a3b2",
+    "evidence.json": "931f92b62c754f55ea753be5406aa0c7e8f297aa105c928a105c5fabb58e0c85",
+    "judgment.json": "c5eb44314051a1d85b8307a79757f819c5b69fe03647180bab197757273f26ab",
+    "narrative.json": "d7abb3f0d3c33de4ab5f50e821d67f81bad19bd57592c28c26e2159bb9083294",
+    "operator_check.md": "32d15fd5f7dfbfd6d6ccffdd3e3b5039356b3a53a2f8e57fc95f112f11907a00",
     "profile.txt": "2be92b9770f7a4a877386334b958c096198b948c89c5eabca030d4f557e29457",
-    "report.md": "beb0f1dd31d787c421cc0d1adf9ad49c7859d1c5e4e815aa2a9b807c8c780cb3",
-    "report.html": "817bbd4954e72b6423f5c7494509475b364cf2887260ec6a5b49d65ecc80385c",
-    "2027-YJ-S01-report.pdf": "be09bf3a5a9b4858b3243a0efbf6691511679411927c49086e86e9e5fcfaf7ea",
-    "report_trace.json": "21951fe297b47db57d59480e0744b39eef563563fe095818a7c9b384e6259c46",
-    "operator_check.md": "d0eb523a7228070bca05cca14a16c5ca3ecccb92301fcd20ca36128d979ea9a7",
-    "profile_snapshot.json": "432626de4888a0d461edc284e9c475796e8d96ce33683030143dcd3f896be032"
+    "profile_parse.json": "a9eee1981e639d511390eedec704012149c76ecf08348ddc03a5c9a8e32de7e9",
+    "profile_snapshot.json": "432626de4888a0d461edc284e9c475796e8d96ce33683030143dcd3f896be032",
+    "report.html": "919bbebfe2cd8c5236be9228fd275e0e93c8df8f5b8771555186f1c459ac0225",
+    "report.md": "087c1b146226784d9ee026debb65d16ade1b29ba4401277b42aa2632f4774d45",
+    "report_trace.json": "59b5bdfd5f9cd0d1fc9a3bf9a8cab571ff71af27117bc74b99468ee642e45d58",
+    "rules_check.json": "7b0a58159b98a98e96a17d877674c57bf2d59988aefd37a2f57d94f82580f5c2"
   },
   "checklist_update_note": "仅核查单表述及核查工具记录更新；报告与计算原件未改。保留历史复核记录，当前仍等待独立审核，不是重新批准。",
   "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。",
@@ -288,5 +289,10 @@
       "reason": "仅改文件名，正文逐字未变。另：case.json 删去 legacy_directory 标记（目录已改为报告号）。",
       "comparison": "改名前后各抽取 PDF 全文（29 页）逐行比对：唯一差异是第 12 节“生成时间”（2026-10-20T17:24:35+08:00 → 2026-10-20T18:45:12+08:00）；页数、标题、案例号与画像指纹不变。"
     }
-  ]
+  ],
+  "regeneration": {
+    "date": "2026-10-20",
+    "reason": "移植检查、独立逐句回查修正真实缺口、作者模型及渲染器追踪、附录单一数字写法及图字放大；只刷新当前自评快照，不冒充独立复批",
+    "review_required": true
+  }
 }

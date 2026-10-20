@@ -12,7 +12,7 @@
   "sampled_sources": [],
   "self_assessment": {
     "reviewer": "本制作会话",
-    "date": "2026-10-19",
+    "date": "2026-10-20",
     "status": "complete",
     "rubric": {
       "items": [
@@ -165,22 +165,23 @@
     "verification_scope": "本轮更新为附核对材料的PDF，自评和机器核对通过后仍等待独立审核；未补造官方原文和独立批准。"
   },
   "snapshot": {
-    "case.json": "aef28645b0388edaffcf1dcad4bfc2a07789f86dce6ce686fdd6f9b39cde5be1",
-    "profile_parse.json": "2dda484ba11b430d3cc4c1db419900cc9517e79bb3b21abf9c9d3bb755c2ea46",
-    "directions.json": "e11eb75bac9a1378195f15ef805daf0ffe3d0a4c2306d317d6d9944265b8008b",
-    "rules_check.json": "248a80156349f8bee1d5de049d1153408fc4548108e5895abb5bba17d5c7cb03",
-    "candidates.json": "1f9f3703275d1799b96d638988fd5c11a27d5f2c4ef9209db44868be66817183",
-    "evidence.json": "e9e692bd54a65df7fb3aaac7c2e7ddb924037dc9ffc8d6aae0ddf140d27dd766",
+    "2028-YJ-S02-report.pdf": "e03721e8638b3c8b4a603d39f4cce13b9c49cfe316d22e111b93c28d9dace3e7",
     "calculations.json": "00e5087c418c579371b17558494a9c4c1f865b0b051ef63fc1a3c9a51a89cd87",
+    "candidates.json": "1f9f3703275d1799b96d638988fd5c11a27d5f2c4ef9209db44868be66817183",
+    "case.json": "0001243d062291f20d005fab27c3bcc9f801dd724d9bd8593487ad013319de45",
+    "claim_check.json": "bf95fce0ecb01cb53c154c7e3f89a00f40b706c6860755566910a1a6afd352e9",
+    "directions.json": "e11eb75bac9a1378195f15ef805daf0ffe3d0a4c2306d317d6d9944265b8008b",
+    "evidence.json": "30d26ab9c1d3ba0f6dfacda08d65343af7e860c66e973ff11895c99349aacba5",
     "judgment.json": "a9dd41f886f0c6f554dcbfa124510778365a5a732f3490e40d1499b0ff24c03b",
-    "narrative.json": "cdaf672fa9a3877e1e9b218b516cf5eee06ef7887fddb6a4d1367480e15222a4",
-    "report.md": "118291654c7491b6d6c738645540e50d56cc9bd54663e2bc1c0c1cd7cf06d0ba",
-    "report.html": "4d14a55c58de69d5d9e491ff1ecabeaacd9c6d107b73c029ef3daea48769995f",
-    "2028-YJ-S02-report.pdf": "196dfa53fb6c9143eab02e2197e4d82ef66cec306cd7537b7e36652bb104149d",
-    "report_trace.json": "f57c09974ccf70231c001f5adae7e0d802d443e81b7c065e99c7c8e93b16bad1",
-    "operator_check.md": "a6d9377fe6a1209359e4a03886371aa3bcaa2bbc727bfc702d38c4343e07c19d",
+    "narrative.json": "0c553b0c818c3903d5da218cf50a10f299a0c06c0d757e6222f4fc2799e36591",
+    "operator_check.md": "f32727b94c40b2ef2de309723accbc4a3429afc806e5b4357930bde15b344d8b",
+    "profile-supplement.txt": "6d3fe85c4f5f9393a284253436e9dd3ae7a719f9ff73222d052dc7224a274e0f",
     "profile.json": "b04770d7a2589f2dbe7b35a80efaad8953b8db8666a26db85875f82cfc9eaf72",
-    "profile-supplement.txt": "6d3fe85c4f5f9393a284253436e9dd3ae7a719f9ff73222d052dc7224a274e0f"
+    "profile_parse.json": "2dda484ba11b430d3cc4c1db419900cc9517e79bb3b21abf9c9d3bb755c2ea46",
+    "report.html": "edc85c5dca4961fc8ae4eb66fe5d45413c296c490fc56ed64e0022acb87e2eb4",
+    "report.md": "7f4b1604f45a4a1c04e4d9816bd07170e88afd0e6cd6b5969568bc906e06b7de",
+    "report_trace.json": "493a722d68e440a41a05452fdb92e5fd85ebf347211160a49c3c8f266c5dd3f0",
+    "rules_check.json": "248a80156349f8bee1d5de049d1153408fc4548108e5895abb5bba17d5c7cb03"
   },
   "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。",
   "snapshot_refreshes": [
@@ -354,5 +355,10 @@
       "reason": "仅改文件名，正文逐字未变。",
       "comparison": "改名前后各抽取 PDF 全文（16 页）逐行比对：唯一差异是第 12 节“生成时间”（2026-10-20T17:24:23+08:00 → 2026-10-20T18:45:21+08:00）；页数、标题、案例号与画像指纹不变。"
     }
-  ]
+  ],
+  "regeneration": {
+    "date": "2026-10-20",
+    "reason": "移植检查、独立逐句回查修正真实缺口、作者模型及渲染器追踪、附录单一数字写法及图字放大；只刷新当前自评快照，不冒充独立复批",
+    "review_required": true
+  }
 }

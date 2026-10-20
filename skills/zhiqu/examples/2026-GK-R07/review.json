@@ -81,16 +81,20 @@
     ]
   },
   "snapshot": {
-    "report.json": "54a786943a347b91293e03993d5a7f7b0112118d01eabc7450d54a180ea432bc",
-    "2026-GK-R07-report.pdf": "ee605e3a157254d10e09fcc3d752c0f50adf9c637d47a95f7451e8ebc8c7d406",
-    "operator_check.md": "bbf93abc98c74ab8e6204a75852e1d8f736ab017d8a8c80f306bd76f41e840df",
-    "retro_ranks/34678/result.json": "1b2bb6328db5cc3d0e17bfea1c0c55ba51a2dedf22dbcd3df5a6713a28c052b0",
-    "case.json": "33e27d159116919f131bbe9c482f473f429ce2514a151fbc1125ab50c804ba4c",
-    "profile_snapshot.json": "01281d8679abb7443186c360418d8d0b1838ea7d5e643a439b5ec9ca423fea98"
+    "2026-GK-R07-report.pdf": "e35c21b4de7078751230331b4ca83786a9cc14ecefb88c998075ffd6ce005b08",
+    "case.json": "b1d8f858f0baeeac939802cdeebc7106b536880c45823c8f6b51c3d7d48f2c1e",
+    "operator_check.md": "77c83e27d81dc404eafffd3281305bf952ab6d089fef50d8db8428b951a8dc7e",
+    "profile.txt": "e436384e804986a0ae5f3bd84b5d34c4e6b06303eac99d0ca080264f1e0c710a",
+    "profile_snapshot.json": "01281d8679abb7443186c360418d8d0b1838ea7d5e643a439b5ec9ca423fea98",
+    "report.html": "945e7b259cff9029c80b8e7a0ce079f48a45d9f3c79f19a4621787c8e76f9f64",
+    "report.json": "0faceb9235c70f4bad5da10d12b39de71cedc956b146dad4dbbdf5548c39e0bf",
+    "report_trace.json": "32da5a0622007aeefcb0a0d9119955870b95ecacf4a7e88d985bacd232eb8e63",
+    "retro_ranks/34678/result.json": "1b2bb6328db5cc3d0e17bfea1c0c55ba51a2dedf22dbcd3df5a6713a28c052b0"
   },
   "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。",
   "self_assessment": {
-    "verification_scope": "本轮更新为附核对材料的PDF，自评和机器核对通过后仍等待独立审核；未补造官方原文和独立批准。"
+    "verification_scope": "本轮更新为附核对材料的PDF，自评和机器核对通过后仍等待独立审核；未补造官方原文和独立批准。",
+    "date": "2026-10-20"
   },
   "snapshot_refreshes": [
     {
@@ -205,5 +209,10 @@
       "comparison": "改名前后各抽取 PDF 全文（40 页）逐行比对：唯一差异是第 12 节“生成时间”（2026-10-20T17:23:40+08:00 → 2026-10-20T18:45:29+08:00）；页数、标题、案例号与画像指纹不变。",
       "not_refreshed": "report.json、operator_check.md 在改名前（main 134a6a3）已与快照不符，不属于本次改名，未刷新，留待复核处理。"
     }
-  ]
+  ],
+  "regeneration": {
+    "date": "2026-10-20",
+    "reason": "移植检查、独立逐句回查修正真实缺口、作者模型及渲染器追踪、附录单一数字写法及图字放大；只刷新当前自评快照，不冒充独立复批",
+    "review_required": true
+  }
 }

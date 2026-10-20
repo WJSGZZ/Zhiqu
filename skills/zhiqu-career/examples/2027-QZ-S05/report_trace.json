@@ -2,27 +2,35 @@
   "schema_version": 1,
   "case_id": "2027-QZ-S05",
   "source_sha256": {
-    "case.json": "f02013f44bae765233f8cee770ab97345193ffb08c0aea3f3c77a7ea836a0ffc",
-    "profile_parse.json": "ca28989bbe8fae3f6def3dcc789a8b04dd9101d78bd065fd815788b92197d604",
-    "directions.json": "e622eebd36fd6ffa1be8b5b60c49b7773f68d6c28e896e0ce18a7c85bc9a7453",
+    "case.json": "db5cd5189a4b11f16d4fb012f526423a14da0af26114666aa709917c3cc3415d",
+    "profile_parse.json": "5ac0a61cf056d64cc425a51ad2031b26050b06f46deb32c8999e15d92cc99a96",
+    "directions.json": "1da6040ad82b905e575e2fe850c417797bb43f969ede4eef297745fc32a24ad9",
     "rules_check.json": "aadb64ede706f87480d8eafb6dda580b32616981dae8d3c860b4536970ee3bf0",
     "candidates.json": "8a701d7da74663c7c1462df150c68fecc1954716aa81726d7c91601968ae070f",
-    "evidence.json": "51c186b946518769c6879b538f18a94dad89127266b4d55b4575de936a706217",
+    "evidence.json": "ff1560e2919c75d42f86a4b2338bf09b86fbb38d0c29b490064ba5ede6215db3",
     "calculations.json": "642c2e8cccb60935fa3033bfbc25d48c68292d146c6df5aa584f67aa0ab843eb",
-    "judgment.json": "0235c5713240354f8bb44318241569eb6a4ba1cc4b3e71d470686aabd97a0fd7",
-    "narrative.json": "91f9fdc48cc73d3926a8b88c66c52af834782235d9078d45e5c464aa36caca93",
+    "judgment.json": "71972b4aaf1aac051ddbb60347eee8e671eee30d725dd4f1b59326392f474655",
+    "narrative.json": "3022eb18365a1e79163f7c0f571ed592b2e19072fc0729b18114010d64d27bd0",
     "profile.json": "f8c7a4b076a64c168d303710ea8836b70a79ffe5d53ce7521045bfe4ae4c2d1f",
     "profile-supplement.txt": "247f31f22f4c9a6c33394b5b25e3b37ef21c19fd3b9c12a70a83839f7976b026"
   },
   "contract_sha256": "8efe50a42837daeec7a83de34e595fd7eeb88a8cfeff1a26afc20699fd951d76",
   "tool_sha256": {
-    "planning_report.py": "397cea049cf8963c3b1cf401ce0f8f530d4bff3a0fef6ee47eaf941a6cf781c5",
-    "planning_workflow.py": "8159eaaa7c817131a52f51b0b52370c66f5fabbcf091ec3ff79d4f5f32f8bab8",
-    "operator_check.py": "97965475c2c8b6efe5dbf2747511526d1729a540f55a16b54fa282e2a810fdc7",
+    "planning_report.py": "f2305a63b08addc6b0d98fd9e66e317d39e4eb46411ca46ed4523872cbcefb10",
+    "planning_workflow.py": "9611234df2cbdb0b3f379faeb65ad632c0175b0a9e761eb61234b8efa380dc8a",
+    "operator_check.py": "e69cf811b9d369137e1919efaaf160c78f04ea1e3b739529c77d3ef9d784a4ae",
     "check_demos.py": "67d4edc1cd737beeb6729783a736e667a97c12d8f7de2de673632d9d5c3370b8",
-    "report.py": "99f75d3845c9bacedc0eeb540a6594b58230b6de7540e47159d6e16ce73b0240",
+    "report.py": "1d20cf4882a1184dbf283a45033525e25fbb2107e3f0d55af096794887ecd598",
     "render_report.py": "18f22f904e72e162a9307dfef2a010bbaa5eadd95e08698457177c312bf14a68",
-    "profile_store.py": "a6cebda41b504d6fef84c3c9b0686c055a1d0dc432a94350ba8ca15822d01391"
+    "profile_store.py": "a6cebda41b504d6fef84c3c9b0686c055a1d0dc432a94350ba8ca15822d01391",
+    "claim_guards.py": "54bab4d942fafd148190df73cad34805538662b0a152ec5701c8a960e28dbd1d",
+    "source_authentication.py": "b18201e997e0b4ca33c879979bc03f81deab1ea5edbbbc74cab6bf622821f278",
+    "official_source_audit.py": "c09c40a2c5eec18318fbb1fa52393ee37b4e63f636ec7ea3999084d12ecc0df1",
+    "unit_validation.py": "9f5df89a101dd684231fe35f8fe931e150127fc698f2ab774b628bc3ffdf093c",
+    "reader_language.py": "fac8d66d933db781bb357f4c32f402e154ab44bcf36eb9e398b8f583f089b853",
+    "claim_check.py": "31851ebe4edb18b47bdcbdd65a3921a4aa412b5f65a1e813059251cfa544ceac",
+    "check_report.py": "c44b082a3e3b066acaba2adf4c358c2816b39f28cd646dc81277ec22eee72ed9",
+    "authoring_metadata.py": "9ac0328c9a8bdeec672daede766f49f5e9c94c2761ae64e0ec32e2ed8abf404c"
   },
   "numeric_refs": [
     {
@@ -1221,11 +1229,28 @@
     }
   ],
   "artifacts": {
-    "report.md": "dc2181d226cda92dbdf4f1e6ec55266cae830954bab961cff7a5b3991c29727a",
-    "report.html": "89180538f42a798b0636ce33a11efd8938cedabc4497b77cfe68c8e9d57d69fa",
-    "2027-QZ-S05-report.pdf": "baf19075ed7547b1504504c5ea27d0d1cbf8500fbfe9bdada9a700cc5525e287"
+    "report.md": "f65c70e811236572b380f198ab7fc243038b0c258fb1b2508dc0dbee117c30dd",
+    "report.html": "f635120b3a08bc46288f00d959471fb059e7d000cfb321d81311f930ee49da23",
+    "2027-QZ-S05-report.pdf": "e8b58de2335d9675ccbd736f1d2e6c7164c38cb86d9a26920c625a3b2f4880de"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
+  "authoring": {
+    "model": "未记录"
+  },
+  "renderer": {
+    "version": "sha256:d973c62bf0994f790e3e6fdb608502c915845fdb92a55c92bd191ff3fbba5ec5",
+    "files_sha256": {
+      "planning_report.py": "f2305a63b08addc6b0d98fd9e66e317d39e4eb46411ca46ed4523872cbcefb10",
+      "render_report.py": "18f22f904e72e162a9307dfef2a010bbaa5eadd95e08698457177c312bf14a68",
+      "report.py": "1d20cf4882a1184dbf283a45033525e25fbb2107e3f0d55af096794887ecd598"
+    }
+  },
+  "policy_sha256": {
+    "zhiqu-shared/references/official-domains.csv": "0cd0d7be4307fd6e8696eaa2f845726929ddcb264c841fe32293fca58a49c934",
+    "zhiqu-shared/references/unit-families.json": "a535c6ba17dc14fcf1d30d8b5f45691da0ab2f78cb92a30b01a55de41e72c9a0",
+    "zhiqu-shared/references/reader-language.json": "247453b7a5c1d0bf4b5d4997d57ee8d32a1cd70327fff2683322bf4c79e5476d",
+    "zhiqu/references/report-guide.md": "00581d227e2f98b297722d34eb7125818cbf2baa7dd3fe4543348e6d34b01cea"
+  },
   "report_profile": {
     "file": "profile.json",
     "sha256": "f8c7a4b076a64c168d303710ea8836b70a79ffe5d53ce7521045bfe4ae4c2d1f",
@@ -1233,7 +1258,7 @@
     "form": "ab439b1f"
   },
   "verification_tools_sha256": {
-    "verify_report.py": "491d8cea6a72e86b0cbf987d52f4139cdca0a51c3e46ff3e7fee47589e0bcf60",
+    "verify_report.py": "008a50716d1c523376018e4c91280469b83fa9957ce8bf755cce961141d0e596",
     "verification_calculations.py": "80e4fb8e0d247582ade885655be5f30e0c2d1cc9e19ebf59c39f3fa83823a54b"
   }
 }

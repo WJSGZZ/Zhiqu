@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "status": "approved",
-  "status_label": "第 4 轮独立复核：批准（总分 19，无 0 分，九项坑全过；第三轮两项已改好）",
+  "status": "awaiting_independent_review",
+  "status_label": "本轮重出后待定向独立复核；此前批准只适用于26ffa7a版本",
   "self_assessment": {
     "reviewer": "本制作会话（自评，不是独立复核）",
     "date": "2026-10-20",
@@ -276,22 +276,23 @@
     ]
   },
   "snapshot": {
-    "case.json": "0b735e9e8241d015309ca8d36518e8c83d6ed57fccfe8637cf7b79d46d14d68b",
-    "profile_parse.json": "20107f71f9c2ed1d7b7198ad470d1be169109141f501371ea2c7181282f25078",
-    "directions.json": "e0f392566f46366346e27a144c0011736d32860b9fb6b1826636ae7b561b071d",
-    "rules_check.json": "c1d6d9f0f558110862a780d5074b67a0db12a8ae2c8d00874c49af851cb49b66",
-    "candidates.json": "763385ade499d0f08163b29594397f045a28e0add3cad1f2924b9db613a570cd",
-    "evidence.json": "b0519db8d224fa34627a9bbcd2af1df9e9fe500f7993cfeb89fc846d05143d07",
+    "2027-YJ-S05-report.pdf": "b41c307c5c6559f4bf3e71f6f07ff138a0ae17fd904eb6639d6f5e62ba1a214b",
     "calculations.json": "d9da96c3e2546b239e866d1f561370c589b48febf5532f68a88226d2ccc1c368",
-    "judgment.json": "ea2c913effcd942a8385576dcdbe1447c06c09263e90a51f58b03eb773703972",
-    "narrative.json": "dc35149e66ae20b9fd6b40a18f2e65b6cc63b07c3df1e1957dcf8f26085f75dc",
-    "profile.json": "af232e95b42de1286681d5b04d706bbd8d16d3dd86cfe304a7d87e5a6bfcab88",
+    "candidates.json": "763385ade499d0f08163b29594397f045a28e0add3cad1f2924b9db613a570cd",
+    "case.json": "16192e89bbfca10874d5d7be5edfcb79ac9d24233a1b67b1f7d249e64eef902c",
+    "claim_check.json": "070f743007ff62b4c326ea614cd6bc3a90314b54ffd253c80b595b0bc9af0cc1",
+    "directions.json": "8713ab9ea021b8a2ffcf616410a5cdff5f2c40fc6a2df7452d524ec7bf4c6221",
+    "evidence.json": "d18087515720f5f77549533439908ead2ed8e5c8e3acf469339d157d9b778caa",
+    "judgment.json": "60d08db01306f5e137f2522fef4ea8ab800672d75fe4d25b02babc4242fc1c06",
+    "narrative.json": "2b9681d6aa6c5cbb8c68638f3bf352721ec8659016829314f28153d260507a1d",
+    "operator_check.md": "daf6432ac12fc8eb6d438121d62e6954350b2f07f2b98f0ab07a116cf9e0de19",
     "profile-supplement.txt": "952368202eeb2cd031c6c0d52212442dca0faaadcd6c99828f951e50ba15d704",
-    "report.md": "3744b45ae20e5a751404b07bc2c0448e08fb836180dd9af2a1e5375d44b4e729",
-    "report.html": "96cfaddef842d34d7d32c529a0c8100a59860eb2a5ed5a763b3052df3b5dc6bb",
-    "2027-YJ-S05-report.pdf": "643361f407e52941a67e983fafe164292300ce8c159d314f2db54217ac7a4474",
-    "report_trace.json": "95ae5320c5aeb2db5f0cc86ccda6dd8d5a4c4e77ecda31fd0c3cdc9b5e64eb57",
-    "operator_check.md": "18222aa2fc943944c390b8e138dae191fee4b04a418c4dcd94ab2e6b845f2a36"
+    "profile.json": "af232e95b42de1286681d5b04d706bbd8d16d3dd86cfe304a7d87e5a6bfcab88",
+    "profile_parse.json": "20107f71f9c2ed1d7b7198ad470d1be169109141f501371ea2c7181282f25078",
+    "report.html": "9687256aaeb1b01d2d601bff410fcdb73bd13aa468e1ac5536932c2b1b638339",
+    "report.md": "6cf26228f34f1ed191a6596ca3b97189842ef0cbc4b3f1833654fcadb896f5a7",
+    "report_trace.json": "4833a10ff833ac962475715aaded0b55fb82e562a1ed4e28f5e27134cc2bb9cd",
+    "rules_check.json": "c1d6d9f0f558110862a780d5074b67a0db12a8ae2c8d00874c49af851cb49b66"
   },
   "snapshot_refreshes": [
     {
@@ -1163,7 +1164,7 @@
       ]
     }
   ],
-  "independent": true,
+  "independent": false,
   "reviewer": "独立复核会话（Claude，第四轮，未参与制作）",
   "date": "2026-10-20",
   "rubric": {
@@ -1415,5 +1416,34 @@
     "第 12 节“未取到的信息”里“复核时又查了…”“复核时带来源页再试一次”“复核时未再请求”，以及苏大名单“项目首次取数时一次、本报告制作时一次”是制作过程用语，可改成“10 月 20 日再查…”“两次独立读图”。",
     "p4 模考条形图第二段补上“英语一”字样（或在段外标注），与其他三段一致。",
     "附录“其他”前缀、“数据快照版本”“calculations.json”按已登记的共用代码问题另修。"
-  ]
+  ],
+  "previous_approval": {
+    "git_ref": "26ffa7a",
+    "status_label": "第 4 轮独立复核：批准（总分 19，无 0 分，九项坑全过；第三轮两项已改好）",
+    "reviewer": "独立复核会话（Claude，第四轮，未参与制作）",
+    "date": "2026-10-20",
+    "snapshot": {
+      "case.json": "0b735e9e8241d015309ca8d36518e8c83d6ed57fccfe8637cf7b79d46d14d68b",
+      "profile_parse.json": "20107f71f9c2ed1d7b7198ad470d1be169109141f501371ea2c7181282f25078",
+      "directions.json": "e0f392566f46366346e27a144c0011736d32860b9fb6b1826636ae7b561b071d",
+      "rules_check.json": "c1d6d9f0f558110862a780d5074b67a0db12a8ae2c8d00874c49af851cb49b66",
+      "candidates.json": "763385ade499d0f08163b29594397f045a28e0add3cad1f2924b9db613a570cd",
+      "evidence.json": "b0519db8d224fa34627a9bbcd2af1df9e9fe500f7993cfeb89fc846d05143d07",
+      "calculations.json": "d9da96c3e2546b239e866d1f561370c589b48febf5532f68a88226d2ccc1c368",
+      "judgment.json": "ea2c913effcd942a8385576dcdbe1447c06c09263e90a51f58b03eb773703972",
+      "narrative.json": "dc35149e66ae20b9fd6b40a18f2e65b6cc63b07c3df1e1957dcf8f26085f75dc",
+      "profile.json": "af232e95b42de1286681d5b04d706bbd8d16d3dd86cfe304a7d87e5a6bfcab88",
+      "profile-supplement.txt": "952368202eeb2cd031c6c0d52212442dca0faaadcd6c99828f951e50ba15d704",
+      "report.md": "3744b45ae20e5a751404b07bc2c0448e08fb836180dd9af2a1e5375d44b4e729",
+      "report.html": "96cfaddef842d34d7d32c529a0c8100a59860eb2a5ed5a763b3052df3b5dc6bb",
+      "2027-YJ-S05-report.pdf": "643361f407e52941a67e983fafe164292300ce8c159d314f2db54217ac7a4474",
+      "report_trace.json": "95ae5320c5aeb2db5f0cc86ccda6dd8d5a4c4e77ecda31fd0c3cdc9b5e64eb57",
+      "operator_check.md": "18222aa2fc943944c390b8e138dae191fee4b04a418c4dcd94ab2e6b845f2a36"
+    }
+  },
+  "regeneration": {
+    "date": "2026-10-20",
+    "reason": "移植检查、独立逐句回查修正真实缺口、作者模型及渲染器追踪、附录单一数字写法及图字放大；只刷新当前自评快照，不冒充独立复批",
+    "review_required": true
+  }
 }

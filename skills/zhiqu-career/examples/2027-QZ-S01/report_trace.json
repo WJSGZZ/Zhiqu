@@ -2,28 +2,48 @@
   "schema_version": 1,
   "case_id": "2027-QZ-S01",
   "source_sha256": {
-    "case.json": "ef4ab0689ac0b39c7db50d990844a2b2d60062df2977b63ada000345fb30e7f0",
+    "case.json": "56c199fd854ba948916bb91afa440ed6d7b72a1c86500cd8d202dda6df921955",
     "profile_parse.json": "ec01d04e9f24802ce85fc5d2a069ee8532f7911604e9cdfe9a3a47191baec990",
     "directions.json": "6f799d567cc51a1d860a40f8d9bbbf4c16f3bfcd2af58b999cc1db8c54f2761e",
     "rules_check.json": "bda48a6be3aff5fdb6d27f0800903873b37d636b4444a9ed460b302c5d5b08f9",
-    "candidates.json": "b329d6b94fb2773f31a8fd1051b70615ec9ac6d839308567df09645186b5b392",
-    "evidence.json": "8d8fb496df28321d81c7f6d4ae0c2c3cdfd4b2dc01b6f38989037894bfe57348",
+    "candidates.json": "3ffc2bc156346f42fbfacce9b243f26199511bb088405c601c9017efa4063c05",
+    "evidence.json": "a70db6ca93962e6761d146b508eb812f5c1cfd0698e02e5e5c927252fa914088",
     "calculations.json": "c9f6ffdadaa69063d1698e768de5b96dbfb4f2cafdd9a803a0a136e2d4ee2bae",
-    "judgment.json": "680971960a93a9a2b3bc6c4c63eb3396497035dc0f6ae7d6dbd5740352ef96f7",
-    "narrative.json": "265288c7a1dad477f1f110b65b017c4a9301b8950af8e5d9f5ac83c38bdf5e4d",
+    "judgment.json": "3f7455fd010637e7b0f16acacce93573a3fc2c7f8045264fdc0a8fad8293417d",
+    "narrative.json": "51db2075140dde2211fff13ba26ab4e06ece9524a87c82178dbb9efdc5c10e49",
     "profile.txt": "69dfeb57cf005a4ace3990e51a96b3b821e9de0c130dd1f8eae5b2088f5bef5e"
   },
   "contract_sha256": "8efe50a42837daeec7a83de34e595fd7eeb88a8cfeff1a26afc20699fd951d76",
   "tool_sha256": {
-    "planning_report.py": "397cea049cf8963c3b1cf401ce0f8f530d4bff3a0fef6ee47eaf941a6cf781c5",
-    "planning_workflow.py": "8159eaaa7c817131a52f51b0b52370c66f5fabbcf091ec3ff79d4f5f32f8bab8",
-    "operator_check.py": "97965475c2c8b6efe5dbf2747511526d1729a540f55a16b54fa282e2a810fdc7",
+    "planning_report.py": "f2305a63b08addc6b0d98fd9e66e317d39e4eb46411ca46ed4523872cbcefb10",
+    "planning_workflow.py": "9611234df2cbdb0b3f379faeb65ad632c0175b0a9e761eb61234b8efa380dc8a",
+    "operator_check.py": "e69cf811b9d369137e1919efaaf160c78f04ea1e3b739529c77d3ef9d784a4ae",
     "check_demos.py": "67d4edc1cd737beeb6729783a736e667a97c12d8f7de2de673632d9d5c3370b8",
-    "report.py": "99f75d3845c9bacedc0eeb540a6594b58230b6de7540e47159d6e16ce73b0240",
+    "report.py": "1d20cf4882a1184dbf283a45033525e25fbb2107e3f0d55af096794887ecd598",
     "render_report.py": "18f22f904e72e162a9307dfef2a010bbaa5eadd95e08698457177c312bf14a68",
-    "profile_store.py": "a6cebda41b504d6fef84c3c9b0686c055a1d0dc432a94350ba8ca15822d01391"
+    "profile_store.py": "a6cebda41b504d6fef84c3c9b0686c055a1d0dc432a94350ba8ca15822d01391",
+    "claim_guards.py": "54bab4d942fafd148190df73cad34805538662b0a152ec5701c8a960e28dbd1d",
+    "source_authentication.py": "b18201e997e0b4ca33c879979bc03f81deab1ea5edbbbc74cab6bf622821f278",
+    "official_source_audit.py": "c09c40a2c5eec18318fbb1fa52393ee37b4e63f636ec7ea3999084d12ecc0df1",
+    "unit_validation.py": "9f5df89a101dd684231fe35f8fe931e150127fc698f2ab774b628bc3ffdf093c",
+    "reader_language.py": "fac8d66d933db781bb357f4c32f402e154ab44bcf36eb9e398b8f583f089b853",
+    "claim_check.py": "31851ebe4edb18b47bdcbdd65a3921a4aa412b5f65a1e813059251cfa544ceac",
+    "check_report.py": "c44b082a3e3b066acaba2adf4c358c2816b39f28cd646dc81277ec22eee72ed9",
+    "authoring_metadata.py": "9ac0328c9a8bdeec672daede766f49f5e9c94c2761ae64e0ec32e2ed8abf404c"
   },
   "numeric_refs": [
+    {
+      "location": "meta.subtitle",
+      "ref": "{{p:/fields/1/value}}",
+      "value": "大数据与会计",
+      "display": "大数据与会计"
+    },
+    {
+      "location": "meta.subtitle",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
     {
       "location": "meta.date",
       "ref": "{{k:/context/as_of}}",
@@ -35,6 +55,12 @@
       "ref": "{{k:/context/as_of}}",
       "value": "2026-10-19",
       "display": "2026-10-19"
+    },
+    {
+      "location": "meta.conclusion",
+      "ref": "{{p:/fields/12/value|chinese}}",
+      "value": 3,
+      "display": "三"
     },
     {
       "location": "01.kpis.2",
@@ -626,14 +652,14 @@
     },
     {
       "location": "08.routes.8",
-      "ref": "{{k:/context/personal_dates/year_end|year}}",
-      "value": "2026-12-31",
+      "ref": "{{e:E2081#/value|year}}",
+      "value": "2026-03-17 10:00",
       "display": "2026"
     },
     {
       "location": "08.routes.8",
-      "ref": "{{k:/context/personal_dates/year_end|year}}",
-      "value": "2026-12-31",
+      "ref": "{{e:E2081#/value|year}}",
+      "value": "2026-03-17 10:00",
       "display": "2026"
     },
     {
@@ -680,7 +706,7 @@
     },
     {
       "location": "09.offers.3",
-      "ref": "{{c:/hypothetical_offers/0/social_insurance_base|comma}}",
+      "ref": "{{c:/report_parameters/hypothetical_followup__offers__0__monthly_gross|comma}}",
       "value": 4800,
       "display": "4,800"
     },
@@ -722,8 +748,8 @@
     },
     {
       "location": "09.offers.3",
-      "ref": "{{k:/context/personal_dates/year_end|year}}",
-      "value": "2026-12-31",
+      "ref": "{{e:E1019#/value}}",
+      "value": 2026,
       "display": "2026"
     },
     {
@@ -752,13 +778,13 @@
     },
     {
       "location": "09.offers.3",
-      "ref": "{{c:/report_parameters/hypothetical_followup__offers__0__months}}",
+      "ref": "{{c:/report_constants/months_per_year}}",
       "value": 12,
       "display": "12"
     },
     {
       "location": "09.offers.3",
-      "ref": "{{c:/hypothetical_offers/1/hours_per_year|comma}}",
+      "ref": "{{c:/report_parameters/hypothetical_followup__standard_hours_per_year|comma}}",
       "value": 2000,
       "display": "2,000"
     },
@@ -794,7 +820,7 @@
     },
     {
       "location": "09.offers.3",
-      "ref": "{{c:/report_parameters/hypothetical_followup__offers__0__monthly_rent|comma}}",
+      "ref": "{{c:/report_parameters/hypothetical_followup__offers__1__monthly_other|comma}}",
       "value": 1100,
       "display": "1,100"
     },
@@ -836,8 +862,8 @@
     },
     {
       "location": "09.details.6",
-      "ref": "{{c:/report_parameters/hypothetical_followup__offers__0__hf_rate}}",
-      "value": 0.0,
+      "ref": "{{c:/hypothetical_offers/0/personal_housing_fund|comma}}",
+      "value": 0,
       "display": "0"
     },
     {
@@ -848,8 +874,8 @@
     },
     {
       "location": "09.details.6",
-      "ref": "{{c:/report_parameters/hypothetical_followup__offers__0__hf_rate}}",
-      "value": 0.0,
+      "ref": "{{c:/hypothetical_offers/0/housing_fund_account_total|comma}}",
+      "value": 0,
       "display": "0"
     },
     {
@@ -860,14 +886,14 @@
     },
     {
       "location": "09.details.6",
-      "ref": "{{c:/report_parameters/hypothetical_followup__offers__0__hf_rate}}",
-      "value": 0.0,
+      "ref": "{{c:/hypothetical_offers/0/tax|comma}}",
+      "value": 0,
       "display": "0"
     },
     {
       "location": "09.details.6",
-      "ref": "{{c:/report_parameters/hypothetical_followup__offers__0__hf_rate}}",
-      "value": 0.0,
+      "ref": "{{c:/hypothetical_offers/1/tax|comma}}",
+      "value": 0,
       "display": "0"
     },
     {
@@ -932,7 +958,7 @@
     },
     {
       "location": "09.details.6",
-      "ref": "{{c:/hypothetical_offers/0/hourly_cash|1f}}",
+      "ref": "{{c:/hypothetical_offers/0/hourly_if_housing_fund_counted|1f}}",
       "value": 24.3,
       "display": "24.3"
     },
@@ -1256,11 +1282,28 @@
     }
   ],
   "artifacts": {
-    "report.md": "56865889da5bd4655b01c6a8d3a256e905ab49e4ffbd3cf4442f6f0e444e478c",
-    "report.html": "ee286a75faec6cdf249376283c5265447dfec776539597f732a167f1421a0a98",
-    "2027-QZ-S01-report.pdf": "6ca8ff2a358ee3d1a661e4c66c83022fdd56474ada60e097ae7fbecd296f7f0d"
+    "report.md": "4023378e675a504af8cd3c6900a962b8cfaba6c5dce5b1b148620ddde284046f",
+    "report.html": "bc57996f65f2b9b9de6d6c9ed0641d5db14234fbd87188c5f6ec283789604e6e",
+    "2027-QZ-S01-report.pdf": "3076f2e63090efe0d9a182f1001dde527637541c7b0a7c6367f75ee55cfa2f9e"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
+  "authoring": {
+    "model": "未记录"
+  },
+  "renderer": {
+    "version": "sha256:d973c62bf0994f790e3e6fdb608502c915845fdb92a55c92bd191ff3fbba5ec5",
+    "files_sha256": {
+      "planning_report.py": "f2305a63b08addc6b0d98fd9e66e317d39e4eb46411ca46ed4523872cbcefb10",
+      "render_report.py": "18f22f904e72e162a9307dfef2a010bbaa5eadd95e08698457177c312bf14a68",
+      "report.py": "1d20cf4882a1184dbf283a45033525e25fbb2107e3f0d55af096794887ecd598"
+    }
+  },
+  "policy_sha256": {
+    "zhiqu-shared/references/official-domains.csv": "0cd0d7be4307fd6e8696eaa2f845726929ddcb264c841fe32293fca58a49c934",
+    "zhiqu-shared/references/unit-families.json": "a535c6ba17dc14fcf1d30d8b5f45691da0ab2f78cb92a30b01a55de41e72c9a0",
+    "zhiqu-shared/references/reader-language.json": "247453b7a5c1d0bf4b5d4997d57ee8d32a1cd70327fff2683322bf4c79e5476d",
+    "zhiqu/references/report-guide.md": "00581d227e2f98b297722d34eb7125818cbf2baa7dd3fe4543348e6d34b01cea"
+  },
   "report_profile": {
     "file": "profile_snapshot.json",
     "sha256": "0a6cb6835c42b9e3a0e18679bd40d3c99c433453287f9e2a231e357647a858d9",
@@ -1268,7 +1311,7 @@
     "form": null
   },
   "verification_tools_sha256": {
-    "verify_report.py": "491d8cea6a72e86b0cbf987d52f4139cdca0a51c3e46ff3e7fee47589e0bcf60",
+    "verify_report.py": "008a50716d1c523376018e4c91280469b83fa9957ce8bf755cce961141d0e596",
     "verification_calculations.py": "80e4fb8e0d247582ade885655be5f30e0c2d1cc9e19ebf59c39f3fa83823a54b"
   }
 }

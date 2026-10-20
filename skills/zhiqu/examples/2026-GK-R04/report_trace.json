@@ -16,11 +16,20 @@
     }
   ],
   "source_sha256": {
-    "case.json": "028b76526cfcc9381fe4eb71d334b010d5cdc53bec79f37f0eca5997e6ab85a2",
+    "case.json": "22db02093a11110d8abd10a9ea7096934771df21d5f70e752e437a434c8589a8",
     "report.json": "37126d00ee9024123f9975399435ee26aea0db9d42a0c0f901f5c9a6e430d5d3",
     "result.json": "ba66fe559f61a8a781b30fca516f2be5cc32bda8d2a96f792ffd6fe4e383a9e7"
   },
+  "authoring": {
+    "model": "未记录"
+  },
+  "renderer": {
+    "version": "sha256:775fa7daf9d58cdf58e1c722e5357c2e4de3d43646981a5a685d9084004aaef6",
+    "files_sha256": {
+      "report.py": "1d20cf4882a1184dbf283a45033525e25fbb2107e3f0d55af096794887ecd598"
+    }
+  },
   "artifacts": {
-    "2026-GK-R04-report.pdf": "fb2d50321f1580d3dca540a533671d4bb0d3500cb2cdec2241b65e8a868a41ef"
+    "2026-GK-R04-report.pdf": "3bf2aac906595ee8c9e4f356754f1914c11f59a11bcf06c78456e6113c07f171"
   }
 }

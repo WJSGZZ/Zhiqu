@@ -81,16 +81,19 @@
     ]
   },
   "snapshot": {
+    "2027-GK-C01-report.pdf": "fe3a9dbd09792da49b52e717804112556f3b86480fb0f3d54aba2ae2291c86b4",
+    "case.json": "eb69064a53f0b6d517293bf2602ee0a507f297764f08aa49250bc18a1f5de10b",
+    "operator_check.md": "4eafc66bd367aec08dfb0419a581ca0e0abc061348fab91761d9e3114a32cf6e",
+    "profile_snapshot.json": "05357e9d7c77baf4b132978319ea870ae6805a200e09f63f759015b176649f95",
+    "report.html": "635547899c456e4e4a4211e0d665de2d4b31d812dac695490673140b50c867c0",
     "report.json": "736cdff47255f4cdea4800bec54905e61368b944aa746621f4d1be160132c3fb",
-    "2027-GK-C01-report.pdf": "39f8379e3184d9af217ed4304857c933163281db145c16c33e554185ca426b25",
-    "operator_check.md": "2d997634d981b6fae51111ecb28e3b5ef16f10c3246c319ee01e0870fa844d45",
-    "result.json": "bbc6c54712a33b3c41f00e62c37a27002f2d2a3b87208f25cc503d5d09460582",
-    "case.json": "32c9030dc02b30600366e0a75c7b730af2ddb153e42cea3706bb3f93d998c542",
-    "profile_snapshot.json": "05357e9d7c77baf4b132978319ea870ae6805a200e09f63f759015b176649f95"
+    "report_trace.json": "8b903fd65e03df5d9d8fae1602e5cf1469a870143b77a44400bdb5d65354d057",
+    "result.json": "bbc6c54712a33b3c41f00e62c37a27002f2d2a3b87208f25cc503d5d09460582"
   },
   "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。",
   "self_assessment": {
-    "verification_scope": "本轮更新为附核对材料的PDF，自评和机器核对通过后仍等待独立审核；未补造官方原文和独立批准。"
+    "verification_scope": "本轮更新为附核对材料的PDF，自评和机器核对通过后仍等待独立审核；未补造官方原文和独立批准。",
+    "date": "2026-10-20"
   },
   "snapshot_refreshes": [
     {
@@ -204,5 +207,10 @@
       "reason": "仅改文件名，正文逐字未变。另：result.json 里记录的命令参数路径随目录改名；operator_check.md 里的案例目录名随改名更新。",
       "comparison": "改名前后各抽取 PDF 全文（14 页）逐行比对：唯一差异是第 12 节“生成时间”（2026-10-20T17:24:13+08:00 → 2026-10-20T18:45:37+08:00）；页数、标题、案例号与画像指纹不变。"
     }
-  ]
+  ],
+  "regeneration": {
+    "date": "2026-10-20",
+    "reason": "移植检查、独立逐句回查修正真实缺口、作者模型及渲染器追踪、附录单一数字写法及图字放大；只刷新当前自评快照，不冒充独立复批",
+    "review_required": true
+  }
 }
