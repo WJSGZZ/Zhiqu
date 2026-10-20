@@ -895,12 +895,12 @@
  "sources": [
   [
    "山东 2022—2025 年投档表（排表所用全部位次）",
-   "山东省教育招生考试院 https://www.sdzk.cn/；各年原表链接见 data/shandong/README.md",
+   "山东省教育招生考试院 https://www.sdzk.cn/；各年原表链接见 data/shandong/sources.csv",
    "2026-09-28"
   ],
   [
    "山东 2026 年投档表（只用于第 11 节对照）",
-   "山东省教育招生考试院 https://www.sdzk.cn/；链接见 data/shandong/README.md",
+   "山东省教育招生考试院 https://www.sdzk.cn/；链接见 data/shandong/sources.csv",
    "2026-09-28"
   ],
   [

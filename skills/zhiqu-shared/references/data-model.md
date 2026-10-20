@@ -51,4 +51,6 @@
 ## 六、现状与迁移
 
 - 考研库按本规范新建。
-- 高考库已有 `plan_entry`、`result`、`check_sample`、`v_usable` 等，结构接近；差距是学校身份按省招生代码、官方数据还在各省 CSV、来源记在各省 README 而非逐行。迁移时先补 `source`、`institution_alias` 和逐行 `source_id`，保留现有视图名，让现有脚本照常运行，再用 11 个高考案例回归，结果不变才算完成。
+- 高考库已按本规范迁移：公开层各省目录配 `sources.csv`，每行带 `source_id`（`validate_data.py` 检查）；本机库新增 `source`、`institution`、`institution_alias`、`discipline`（本科专业目录，[undergrad_majors.csv](../../zhiqu/data/undergrad_majors.csv)），官方表 `official_cutoff`、`official_yfyd` 带 `source_id` 和 `institution_id`，`check_sample` 结论统一为四种。原有表名、视图名不变，原有列只增不删。
+- 高考本机库重建：`python3 skills/zhiqu/data/purchased/ingest.py rebuild`（先快照，再按公开层与原件重算官方层、共用表与核对表，最后自检）；查询用同目录 `query.py`。
+- 学校身份按校名、曾用名对上教育部名单；对不上的（军队、港澳院校，学校下属医学院，名单外的旧校名、简称和识别错字）记入 `ingest_issue`，不按招生代码猜。补全曾用名在 [school-name-changes.csv](../../zhiqu/data/school-name-changes.csv)。

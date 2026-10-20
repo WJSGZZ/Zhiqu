@@ -1,0 +1,25 @@
+source_id,grade,publisher,title,url,landing_url,published,retrieved,method,note
+fujian-2026-physics-yfyd,官方,福建省教育考试院,2026 年高考考生成绩分布（物理科目组）,,https://www.eeafj.cn/gkptgkgsgg/20260625/14699.html,,2026-10-07,macOS Vision 多遍识别（扫描图片，红绿通道二值化），累计差分校验,公示公告栏目页面，内含 4 张图片
+fujian-2026-history-yfyd,官方,福建省教育考试院,2026 年高考考生成绩分布（历史科目组）,,https://www.eeafj.cn/gkptgkgsgg/20260625/14698.html,,2026-10-07,macOS Vision 多遍识别（扫描图片，红绿通道二值化），累计差分校验,公示公告栏目页面，内含 4 张图片
+fujian-2025-physics-yfyd,官方,福建省教育考试院,2025 年高考考生成绩分布（物理科目组）,,https://www.eeafj.cn/gkptgkgsgg/20250625/14056.html,,2026-10-07,macOS Vision 多遍识别（扫描图片，红绿通道二值化），累计差分校验,公示公告栏目页面，内含 4 张图片
+fujian-2025-history-yfyd,官方,福建省教育考试院,2025 年高考考生成绩分布（历史科目组）,,https://www.eeafj.cn/gkptgkgsgg/20250625/14055.html,,2026-10-07,macOS Vision 多遍识别（扫描图片，红绿通道二值化），累计差分校验,公示公告栏目页面，内含 4 张图片
+fujian-2024-physics-yfyd,官方,福建省教育考试院,2024 年高考考生成绩分布（物理科目组）,,https://www.eeafj.cn/gkptgkgsgg/20240625/13485.html,,2026-10-07,macOS Vision 多遍识别（扫描图片，红绿通道二值化），累计差分校验,公示公告栏目页面，内含 4 张图片
+fujian-2024-history-yfyd,官方,福建省教育考试院,2024 年高考考生成绩分布（历史科目组）,,https://www.eeafj.cn/gkptgkgsgg/20240625/13486.html,,2026-10-07,macOS Vision 多遍识别（扫描图片，红绿通道二值化），累计差分校验,公示公告栏目页面，内含 4 张图片
+fujian-2023-physics-yfyd,官方,福建省教育考试院,2023 年高考考生成绩分布（物理科目组）,,https://www.eeafj.cn/gkptgkgsgg/20230625/12913.html,,2026-10-07,macOS Vision 多遍识别（扫描图片，红绿通道二值化），累计差分校验,公示公告栏目页面，内含 4 张图片
+fujian-2023-history-yfyd,官方,福建省教育考试院,2023 年高考考生成绩分布（历史科目组）,,https://www.eeafj.cn/gkptgkgsgg/20230625/12898.html,,2026-10-07,macOS Vision 多遍识别（扫描图片，红绿通道二值化），累计差分校验,公示公告栏目页面，内含 4 张图片
+fujian-2022-physics-yfyd,官方,福建省教育考试院,2022 年高考考生成绩分布（物理科目组）,,https://www.eeafj.cn/gkptgkgsgg/20220625/12121.html,,2026-10-07,macOS Vision 多遍识别（扫描图片，红绿通道二值化），累计差分校验,公示公告栏目页面，内含 4 张图片
+fujian-2022-history-yfyd,官方,福建省教育考试院,2022 年高考考生成绩分布（历史科目组）,,https://www.eeafj.cn/gkptgkgsgg/20220625/12120.html,,2026-10-07,macOS Vision 多遍识别（扫描图片，红绿通道二值化），累计差分校验,公示公告栏目页面，内含 4 张图片
+fujian-2021-physics-yfyd,官方,福建省教育考试院,2021 年高考考生成绩分布（物理科目组）,,https://www.eeafj.cn/gkptgkgsgg/20210627/11250.html,,2026-10-16,macOS Vision 多遍识别（扫描图片），累计递推核对，不符行对原图人工确认,各 4 张约 600×790 带水印图片
+fujian-2021-history-yfyd,官方,福建省教育考试院,2021 年高考考生成绩分布（历史科目组）,,https://www.eeafj.cn/gkptgkgsgg/20210627/11249.html,,2026-10-16,macOS Vision 多遍识别（扫描图片），累计递推核对，不符行对原图人工确认,各 4 张约 600×790 带水印图片
+fujian-2026-physics-cutoff,官方,福建省教育考试院,普通类本科批常规志愿院校专业组投档最低分,,https://www.eeafj.cn/gkptgkgsgg/20260725/14750.html,,2026-10-16,扫描件多遍 OCR，机械检查与外购库对照,ZIP 内扫描 PDF（物理类 117 页）
+fujian-2026-history-cutoff,官方,福建省教育考试院,普通类本科批常规志愿院校专业组投档最低分,,https://www.eeafj.cn/gkptgkgsgg/20260725/14749.html,,2026-10-07,macOS Vision 多遍识别（扫描图片，红绿通道，多缩放），机械检查,ZIP 内扫描 PDF（历史类 48 页）
+fujian-2025-physics-cutoff,官方,福建省教育考试院,普通类本科批常规志愿院校专业组投档最低分,,https://www.eeafj.cn/gkptgkgsgg/20250726/14165.html,,2026-10-07,macOS Vision 多遍识别（扫描图片，红绿通道，多缩放），机械检查,
+fujian-2025-history-cutoff,官方,福建省教育考试院,普通类本科批常规志愿院校专业组投档最低分,,https://www.eeafj.cn/gkptgkgsgg/20250726/14164.html,,2026-10-07,macOS Vision 多遍识别（扫描图片，红绿通道，多缩放），机械检查,
+fujian-2024-physics-cutoff,官方,福建省教育考试院,普通类本科批常规志愿院校专业组投档最低分,,https://www.eeafj.cn/gkptgkgsgg/20240726/13557.html,,2026-10-07,macOS Vision 多遍识别（扫描图片，红绿通道，多缩放），机械检查,
+fujian-2024-history-cutoff,官方,福建省教育考试院,普通类本科批常规志愿院校专业组投档最低分,,https://www.eeafj.cn/gkptgkgsgg/20240726/13541.html,,2026-10-07,macOS Vision 多遍识别（扫描图片，红绿通道，多缩放），机械检查,
+fujian-2023-physics-cutoff,官方,福建省教育考试院,普通类本科批常规志愿院校专业组投档最低分,,https://www.eeafj.cn/gkptgkgsgg/20230728/12994.html,,2026-10-16,扫描件多遍 OCR，机械检查与外购库对照,扫描图片 826×1169，放大识别
+fujian-2023-history-cutoff,官方,福建省教育考试院,普通类本科批常规志愿院校专业组投档最低分,,https://www.eeafj.cn/gkptgkgsgg/20230728/13021.html,,2026-10-16,扫描件多遍 OCR，机械检查与外购库对照,扫描图片 826×1169，放大识别
+fujian-2022-physics-cutoff,官方,福建省教育考试院,普通类本科批常规志愿院校专业组投档最低分,,https://www.eeafj.cn/gkptgkgsgg/20220728/12200.html,,2026-10-16,扫描件多遍 OCR，机械检查与外购库对照,扫描图片 2480×3507
+fujian-2022-history-cutoff,官方,福建省教育考试院,普通类本科批常规志愿院校专业组投档最低分,,https://www.eeafj.cn/gkptgkgsgg/20220728/12199.html,,2026-10-16,扫描件多遍 OCR，机械检查与外购库对照,扫描图片 2480×3507
+fujian-2021-physics-cutoff,官方,福建省教育考试院,普通类本科批常规志愿院校专业组投档最低分,,https://www.eeafj.cn/gkptgkgsgg/20210726/11362.html,,2026-10-16,扫描件多遍 OCR，机械检查与外购库对照,扫描图片 2480×3507
+fujian-2021-history-cutoff,官方,福建省教育考试院,普通类本科批常规志愿院校专业组投档最低分,,https://www.eeafj.cn/gkptgkgsgg/20210726/11363.html,,2026-10-16,扫描件多遍 OCR，机械检查与外购库对照,扫描图片 2480×3507

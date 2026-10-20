@@ -1,0 +1,25 @@
+source_id,grade,publisher,title,url,landing_url,published,retrieved,method,note
+guangdong-2022-physics-cutoff,官方,广东省教育考试院,《广东省2022年本科普通类（物理）投档情况》,,https://eea.gd.gov.cn/zwgk/sjfb/tjsj/content/post_3975483.html,,2026-09-28,PDF 表格自动抽取，清洗水印字符,
+guangdong-2023-physics-cutoff,官方,广东省教育考试院,《广东省2023年本科普通类（物理）投档情况》,,https://eea.gd.gov.cn/ptgk/content/post_4221648.html,,2026-09-28,PDF 表格自动抽取，清洗水印字符,附件压缩包
+guangdong-2024-physics-cutoff,官方,广东省教育考试院,,,https://eea.gd.gov.cn/zwgk/sjfb/tjsj/content/post_4458419.html,,2026-09-28,PDF 表格自动抽取,附件压缩包内 PDF
+guangdong-2025-physics-cutoff,官方,广东省教育考试院,,,https://eea.gd.gov.cn/ptgk/content/post_4746781.html,,2026-09-28,PDF 表格自动抽取,
+guangdong-2026-physics-cutoff,官方,广东省教育考试院,,,https://eea.gd.gov.cn/ptgk/content/post_4926622.html,,2026-09-28,PDF 表格自动抽取,
+guangdong-2022-history-cutoff,官方,广东省教育考试院,《广东省2022年本科普通类（历史）投档情况》,https://eea.gd.gov.cn/attachment/0/494/494062/3975483.pdf,https://eea.gd.gov.cn/gkmlpt/content/3/3975/post_3975480.html,,2026-09-30,PDF 表格网格抽取（pdfplumber extract_tables）,PDF 41 页；官方表另有 2 条边界档（“651以上”“28以内”）
+guangdong-2023-history-cutoff,官方,广东省教育考试院,,https://eea.gd.gov.cn/attachment/0/526/526559/4221648.zip,https://eea.gd.gov.cn/ptgk/content/post_4221648.html,,2026-09-30,PDF 表格网格抽取（pdfplumber extract_tables）,附件 ZIP 内历史类 PDF，33 页
+guangdong-2024-history-cutoff,官方,广东省教育考试院,,https://eea.gd.gov.cn/attachment/0/554/554636/4458419.zip,https://eea.gd.gov.cn/zwgk/sjfb/tjsj/content/post_4458419.html,,2026-09-30,PDF 表格网格抽取（pdfplumber extract_tables）,附件 ZIP 内历史类 PDF，29 页
+guangdong-2025-history-cutoff,官方,广东省教育考试院,《广东省2025年本科普通类（历史）投档情况》,https://eea.gd.gov.cn/attachment/0/585/585885/4746781.pdf,https://eea.gd.gov.cn/ptgk/content/post_4746781.html,,2026-09-30,PDF 表格抽取（既有抽取）,PDF 35 页；README 称此年为既有抽取，仅复核记录数
+guangdong-2026-history-cutoff,官方,广东省教育考试院,,https://eea.gd.gov.cn/attachment/0/620/620024/4926622.pdf,https://eea.gd.gov.cn/ptgk/content/post_4926622.html,,2026-09-30,PDF 表格网格抽取（pdfplumber extract_tables）,PDF 30 页
+guangdong-2022-physics-yfyd,官方,广东省教育考试院,关于公布广东省2022年普通高考成绩各分数段数据的通知（附件）,https://eea.gd.gov.cn/attachment/0/492/492285/3986282.pdf,https://eea.gd.gov.cn/zwgk_tjxx/content/post_3986282.html,,2026-10-16,文本 PDF 直接取文字,取“本科”口径列
+guangdong-2022-history-yfyd,官方,广东省教育考试院,关于公布广东省2022年普通高考成绩各分数段数据的通知（附件）,https://eea.gd.gov.cn/attachment/0/492/492287/3986282.pdf,https://eea.gd.gov.cn/zwgk_tjxx/content/post_3986282.html,,2026-10-16,文本 PDF 直接取文字,取“本科”口径列
+guangdong-2023-physics-yfyd,官方,广东省教育考试院,粤招办普〔2023〕26号（附合并扫描 PDF）,,https://eea.gd.gov.cn/zwgk_tjxx/content/post_4207233.html,,2026-10-16,扫描 PDF 多遍 OCR，累计差补缺,合并扫描 PDF 共 85 页，第 1—14 页历史、第 15—28 页物理；8 行人数由累计差得出
+guangdong-2023-history-yfyd,官方,广东省教育考试院,粤招办普〔2023〕26号（附合并扫描 PDF）,,https://eea.gd.gov.cn/zwgk_tjxx/content/post_4207233.html,,2026-10-16,扫描 PDF 多遍 OCR，累计差补缺,合并扫描 PDF 共 85 页，第 1—14 页历史、第 15—28 页物理；8 行人数由累计差得出
+guangdong-2024-physics-yfyd,官方,广东省教育考试院,关于公布广东省2024年普通高考成绩各分数段数据的通知（附件）,,https://eea.gd.gov.cn/zwgk_tjxx/content/post_4445715.html,,,文本 PDF 抽取,文本 PDF，含“本科”“专科”两套口径，取“本科”列
+guangdong-2024-history-yfyd,官方,广东省教育考试院,关于公布广东省2024年普通高考成绩各分数段数据的通知（附件）,,https://eea.gd.gov.cn/zwgk_tjxx/content/post_4445715.html,,,文本 PDF 抽取,文本 PDF，含“本科”“专科”两套口径，取“本科”列
+guangdong-2025-physics-yfyd,官方,广东省教育考试院,关于公布广东省2025年普通高考成绩各分数段数据的通知（附件）,https://eea.gd.gov.cn/attachment/0/583/583759/4734449.zip,https://eea.gd.gov.cn/ptgk/content/post_4734345.html,,,文本 PDF 抽取,文本 PDF，含“本科”“专科”两套口径，取“本科”列；覆盖量表另列此 ZIP 附件（第 1 项历史、第 2 项物理）
+guangdong-2025-history-yfyd,官方,广东省教育考试院,关于公布广东省2025年普通高考成绩各分数段数据的通知（附件）,https://eea.gd.gov.cn/attachment/0/583/583759/4734449.zip,https://eea.gd.gov.cn/ptgk/content/post_4734345.html,,,文本 PDF 抽取,文本 PDF，含“本科”“专科”两套口径，取“本科”列；覆盖量表另列此 ZIP 附件（第 1 项历史、第 2 项物理）
+guangdong-2026-physics-yfyd,官方,广东省教育考试院,关于公布广东省2026年普通高考成绩各分数段数据的通知（附件）,,https://eea.gd.gov.cn/ptgk/content/post_4916165.html,,,文本 PDF 抽取,文本 PDF，含“本科”“专科”两套口径，取“本科”列
+guangdong-2026-history-yfyd,官方,广东省教育考试院,关于公布广东省2026年普通高考成绩各分数段数据的通知（附件）,,https://eea.gd.gov.cn/ptgk/content/post_4916165.html,,,文本 PDF 抽取,文本 PDF，含“本科”“专科”两套口径，取“本科”列
+guangdong-2026-general-early,官方,广东省教育考试院,,,https://eea.gd.gov.cn/ptgk/content/post_4923339.html,,2026-09-29,官方 PDF 文本提取,另有页面：https://eea.gd.gov.cn/ptgk/content/post_4923886.html 、https://eea.gd.gov.cn/ptgk/content/post_4924250.html（仅物理类）；文件含物理、历史两类，提前批与专项
+guangdong-2025-general-early,官方,广东省教育考试院,,,https://eea.gd.gov.cn/ptgk/content/post_4742803.html,,2026-09-29,官方 PDF 文本提取,另有页面：https://eea.gd.gov.cn/ptgk/content/post_4743597.html 、https://eea.gd.gov.cn/ptgk/content/post_4746199.html（仅物理类）；文件含物理、历史两类，提前批与专项
+guangdong-2024-general-early,官方,广东省教育考试院,,,https://eea.gd.gov.cn/ptgk/content/post_4453920.html,,2026-09-29,官方 PDF 文本提取,另有页面：https://eea.gd.gov.cn/ptgk/content/post_4455004.html（压缩包；非军检表内含教师专项）；文件含物理、历史两类，提前批与专项
+guangdong-2023-general-early,官方,广东省教育考试院,,,https://eea.gd.gov.cn/ptgk/content/post_4217777.html,,2026-09-29,官方 PDF 文本提取,仅非军检院校；军检院校投档页面没有附件，暂缺；文件含物理、历史两类，提前批与专项

@@ -1,0 +1,25 @@
+source_id,grade,publisher,title,url,landing_url,published,retrieved,method,note
+hubei-2023-physics-cutoff,官方,湖北省教育厅,,,http://jyt.hubei.gov.cn/bmdt/ztzl/gxzs/xxgs/202307/t20230721_4763257.shtml,,2026-09-28,文本 PDF 按字符位置重建表格行（2026-10-16 重新解析）,附件文本 PDF P020250627347122820023.pdf
+hubei-2024-physics-cutoff,官方,湖北省教育厅,,,http://jyt.hubei.gov.cn/bmdt/ztzl/gxzs/zszy/zsfw/202407/t20240721_5274253.shtml,,2026-09-28,文本 PDF 按字符位置重建表格行（2026-10-16 重新解析）,附件文本 PDF P020240721672288198677.pdf
+hubei-2025-physics-cutoff,官方,湖北省教育厅,,,https://jyt.hubei.gov.cn/bmdt/ztzl/gxzs/zszy/zsfw/202507/t20250721_5727304.shtml,,2026-09-28,71 张图片去水印后 Vision 多遍识别，字形模板第二读取器互核（2026-10-16 整表重做）,页面为图片
+hubei-2026-physics-cutoff,官方,湖北省教育厅,湖北省2026年本科普通批录取院校（首选物理）平行志愿投档最低分,,https://jyt.hubei.gov.cn/bmdt/ztzl/gxzs/zszy/zsfw/202607/t20260727_5983787.shtml,2026-07-27,2026-10-16,文本 PDF 按字符位置重建表格行，去页面水印,附件文本 PDF
+hubei-2022-physics-cutoff,官方,湖北省教育考试院,,,http://www.hbccks.cn/html/apccglq/2022-07/141503.html,,2026-10-16,文本 PDF 解析,湖北教育考试网（湖北省教育考试院主办）；官方文本 PDF
+hubei-2021-physics-cutoff,官方,湖北招生信息网,,,https://zxh.e21.cn/search/searchbyscore.php,,2026-10-16,查询系统按院校名与“省份×科类×分数窗口”两路查询，合并去重,官方配套查询系统，非原表文件；原表 PDF 发布页 http://www.hbccks.cn/html/apccglq/2021-07/141248.html 的附件（zsxx.e21.cn）已 404；2021 年条数无法与原表核对
+hubei-2026-history-cutoff,官方,湖北省教育厅,,,https://jyt.hubei.gov.cn/bmdt/ztzl/gxzs/zszy/zsfw/202607/t20260727_5983788.shtml,,2026-10-16,文本 PDF 按字符位置重建表格行，去页面水印,附件文本 PDF
+hubei-2025-history-cutoff,官方,湖北省教育厅,,,https://jyt.hubei.gov.cn/bmdt/ztzl/gxzs/zszy/zsfw/202507/t20250721_5727303.shtml,,2026-10-16,图片去水印后 Vision 多遍识别，字形模板第二读取器互核,页面为 JPG 图片
+hubei-2024-history-cutoff,官方,湖北省教育厅,,,https://jyt.hubei.gov.cn/bmdt/ztzl/gxzs/zszy/zsfw/202407/t20240721_5274252.shtml,,2026-10-16,文本 PDF 按字符位置重建表格行,附件文本 PDF
+hubei-2023-history-cutoff,官方,湖北省教育厅,,,https://jyt.hubei.gov.cn/bmdt/ztzl/gxzs/xxgs/202307/t20230721_4763256.shtml,,2026-10-16,文本 PDF 按字符位置重建表格行,附件文本 PDF
+hubei-2022-history-cutoff,官方,湖北省教育考试院,,,http://www.hbccks.cn/html/apccglq/2022-07/141502.html,,2026-10-16,文本 PDF 解析,湖北教育考试网（湖北省教育考试院主办）；官方文本 PDF
+hubei-2021-history-cutoff,官方,湖北招生信息网,,,https://zxh.e21.cn/search/searchbyscore.php,,2026-10-16,查询系统按院校名与“省份×科类×分数窗口”两路查询，合并去重,官方配套查询系统，非原表文件；原表 PDF 发布页 http://www.hbccks.cn/html/apccglq/2021-07/141247.html 的附件（zsxx.e21.cn）已 404；2021 年条数无法与原表核对
+hubei-2026-physics-yfyd,官方,湖北省教育厅,2026 年普通高考总分一分一段统计表（首选物理）,,https://jyt.hubei.gov.cn/,2026-06-25,,PNG 图片多遍 OCR（红绿通道、多缩放阈值）投票，累计差分核对,页面 t20260625_5964816；物理 5 张图；统计人数含政策性加分
+hubei-2026-history-yfyd,官方,湖北省教育厅,2026 年普通高考总分一分一段统计表（首选历史）,,https://jyt.hubei.gov.cn/,2026-06-25,,PNG 图片多遍 OCR（红绿通道、多缩放阈值）投票，累计差分核对,页面 t20260625_5964816；历史 5 张图；统计人数含政策性加分
+hubei-2025-physics-yfyd,官方,湖北省教育厅,,,https://jyt.hubei.gov.cn/bmdt/ztzl/gxzs/zszy/zsfw/202506/t20250625_5706259.shtml,,,文本 PDF 按字符位置解析,附件 P020250625730351882018.pdf
+hubei-2025-history-yfyd,官方,湖北省教育厅,,,https://jyt.hubei.gov.cn/bmdt/ztzl/gxzs/zszy/zsfw/202506/t20250625_5706259.shtml,,,文本 PDF 按字符位置解析,附件 P020250625730351260572.pdf
+hubei-2024-physics-yfyd,官方,湖北省教育厅,,,https://jyt.hubei.gov.cn/bmdt/ztzl/gxzs/zszy/zsfw/202406/t20240626_5250066.shtml,,,图片 OCR，累计差分核对,页面共 9 张图片；物理类图片只到 200 分；667、666 两行人数按累计差分改正
+hubei-2024-history-yfyd,官方,湖北省教育厅,,,https://jyt.hubei.gov.cn/bmdt/ztzl/gxzs/zszy/zsfw/202406/t20240626_5250066.shtml,,,图片 OCR，累计差分核对,页面共 9 张图片；历史类到 150 分
+hubei-2023-physics-yfyd,官方,湖北省高等学校招生委员会办公室（黄石市人民政府网转载）,,,http://www.huangshi.gov.cn/zwct/jy567/gkgz/202312/t20231211_1077892.html,,,图片 OCR，累计差分核对,湖北省教育厅原页本机不可达，改取黄石市政府网转载的同一批图片（带“湖北省高等学校招生委员会办公室”水印）
+hubei-2023-history-yfyd,官方,湖北省高等学校招生委员会办公室（黄石市人民政府网转载）,,,http://www.huangshi.gov.cn/zwct/jy567/gkgz/202312/t20231211_1077893.html,,,图片 OCR，累计差分核对,湖北省教育厅原页本机不可达，改取黄石市政府网转载的同一批图片（带“湖北省高等学校招生委员会办公室”水印）
+hubei-2022-physics-yfyd,官方,湖北省教育考试院,,,,,2026-10-16,图片识别，逐行递推核对,湖北教育考试网一分一段页，README 列出 http://www.hbccks.cn/html/yfyd/2022-06/141466.html 与 http://www.hbccks.cn/html/yfyd/2022-06/141467.html 两页，未标明各对应物理或历史
+hubei-2022-history-yfyd,官方,湖北省教育考试院,,,,,2026-10-16,图片识别，逐行递推核对,湖北教育考试网一分一段页，README 列出 http://www.hbccks.cn/html/yfyd/2022-06/141466.html 与 http://www.hbccks.cn/html/yfyd/2022-06/141467.html 两页，未标明各对应物理或历史
+hubei-2021-physics-yfyd,官方,湖北省教育考试院,,,http://www.hbccks.cn/html/yfyd/2021-06/141231.html,,2026-10-16,图片识别，逐行递推核对,
+hubei-2021-history-yfyd,官方,湖北省教育考试院,,,http://www.hbccks.cn/html/yfyd/2021-06/141230.html,,2026-10-16,图片识别，逐行递推核对,

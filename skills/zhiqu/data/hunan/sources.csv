@@ -1,0 +1,25 @@
+source_id,grade,publisher,title,url,landing_url,published,retrieved,method,note
+hunan-2023-physics-cutoff,官方,湖南省教育考试院,湖南省2023年本科批(普通类)第一次投档分数线,https://www.hneeb.cn/hnxxg/741/742/2023072001.zip,http://jyt.hunan.gov.cn/jyt/sjyt/hnsjyksy/web/ksyzkzx/202307/t20230720_29406553.html,,2026-09-28,xls/xlsx 表格筛选整理,首选物理；文件托管于 hneeb.cn；附件 ZIP 内 xls，物理与历史同一 xls
+hunan-2023-history-cutoff,官方,湖南省教育考试院,湖南省2023年本科批(普通类)第一次投档分数线,https://www.hneeb.cn/hnxxg/741/742/2023072001.zip,http://jyt.hunan.gov.cn/jyt/sjyt/hnsjyksy/web/ksyzkzx/202307/t20230720_29406553.html,,2026-10-16,xls/xlsx 表格筛选整理,普通类(首选历史)；附件 ZIP 内 xls，物理与历史同一 xls
+hunan-2024-physics-cutoff,官方,湖南省教育考试院,本科批第一次投档线,,https://jyt.hunan.gov.cn/jyt/sjyt/hnsjyksy/web/ksyzkzx/202407/t20240720_33360671.html,,2026-09-28,xls/xlsx 表格筛选整理,首选物理；文件托管于 hneeb.cn
+hunan-2024-history-cutoff,官方,湖南省教育考试院,本科批第一次投档线,,https://jyt.hunan.gov.cn/jyt/sjyt/hnsjyksy/web/ksyzkzx/202407/t20240720_33360671.html,,2026-09-30,xls/xlsx 表格筛选整理,普通类(首选历史)
+hunan-2025-physics-cutoff,官方,湖南省教育考试院,本科批第一次投档线,,https://jyt.hunan.gov.cn/jyt/sjyt/hnsjyksy/web/ksyzkzx/202507/t20250720_33744762.html,,2026-09-28,xls/xlsx 表格筛选整理,首选物理；文件托管于 hneeb.cn
+hunan-2025-history-cutoff,官方,湖南省教育考试院,本科批第一次投档线,,https://jyt.hunan.gov.cn/jyt/sjyt/hnsjyksy/web/ksyzkzx/202507/t20250720_33744762.html,,2026-09-30,xls/xlsx 表格筛选整理,普通类(首选历史)
+hunan-2026-physics-cutoff,官方,湖南省教育考试院,本科批第一次投档线,,https://jyt.hunan.gov.cn/jyt/sjyt/hnsjyksy/web/ksyzkzx/202607/t20260719_34029635.html,,2026-09-28,xls/xlsx 表格筛选整理,首选物理；文件托管于 hneeb.cn；2026 年为 Strict OOXML 格式
+hunan-2026-history-cutoff,官方,湖南省教育考试院,本科批第一次投档线,,https://jyt.hunan.gov.cn/jyt/sjyt/hnsjyksy/web/ksyzkzx/202607/t20260719_34029635.html,,2026-09-30,xls/xlsx 表格筛选整理,普通类(首选历史)；2026 年为 Strict OOXML 格式，附件 ZIP 内 XLSX
+hunan-2022-physics-cutoff,官方,湖南省教育考试院,2022 年本科批第一次投档线,,https://www.hneeb.cn/hnxxg/741/742/content_3656.html,,2026-10-16,xls 表格筛选整理,附件 rar 内 xls；物理与历史同一原件
+hunan-2022-history-cutoff,官方,湖南省教育考试院,2022 年本科批第一次投档线,,https://www.hneeb.cn/hnxxg/741/742/content_3656.html,,2026-10-16,xls 表格筛选整理,附件 rar 内 xls；物理与历史同一原件
+hunan-2021-physics-cutoff,官方,湖南省教育考试院,2021 年本科批第一次投档线,,https://www.hneeb.cn/hnxxg/741/742/content_2953.html,,2026-10-16,xls 表格筛选整理,附件 xls；物理与历史同一原件
+hunan-2021-history-cutoff,官方,湖南省教育考试院,2021 年本科批第一次投档线,,https://www.hneeb.cn/hnxxg/741/742/content_2953.html,,2026-10-16,xls 表格筛选整理,附件 xls；物理与历史同一原件
+hunan-2026-physics-yfyd,官方,湖南省教育考试院,2026 年普通高考档分 1 分段统计表（物理科目组合）,,https://jyt.hunan.gov.cn/jyt/sjyt/hnsjyksy/web/ksyzkzx/202606/t20260625_34013125.html,,2026-09-30,网页表格整理,
+hunan-2025-physics-yfyd,官方,湖南省教育考试院,2025 年普通高考档分 1 分段统计表（物理科目组合）,,https://www.hneeb.cn/hnxxg/741/742/content_4434.html,,2026-09-30,网页表格整理,
+hunan-2024-physics-yfyd,官方,湖南省教育考试院,2024 年普通高考档分 1 分段统计表（物理科目组合）,,https://www.hneeb.cn/hnxxg/741/742/content_4207.html,,2026-09-30,网页表格整理,原表并列“含全国性加分”“含全国性和地方性加分”两套人数，分列 count/cum 与 count_all/cum_all
+hunan-2023-physics-yfyd,官方,湖南省教育考试院,2023 年普通高考档分 1 分段统计表（物理科目组合）,,https://www.hneeb.cn/hnxxg/741/742/content_3941.html,,2026-09-30,网页表格整理,原表并列“含全国性加分”“含全国性和地方性加分”两套人数，分列 count/cum 与 count_all/cum_all；与湖南省教育厅网站同名页面核对一致
+hunan-2022-physics-yfyd,官方,湖南省教育考试院,2022 年普通高考档分 1 分段统计表（物理科目组合）,,https://www.hneeb.cn/hnxxg/741/742/content_3609.html,,2026-10-16,网页表格整理,原表并列“含全国性加分”“含全国性和地方性加分”两套人数，分列 count/cum 与 count_all/cum_all
+hunan-2021-physics-yfyd,官方,湖南省教育考试院,2021 年普通高考档分 1 分段统计表（物理科目组合）,,http://jyt.hunan.gov.cn/sjyt/hnsjyksy/web/ksyzkzx/202106/t20210624_22745424.html,,2026-10-16,网页表格整理,原表并列“含全国性加分”“含全国性和地方性加分”两套人数，分列 count/cum 与 count_all/cum_all
+hunan-2026-history-yfyd,官方,湖南省教育考试院,2026 年普通高考档分 1 分段统计表（历史科目组合）,,https://jyt.hunan.gov.cn/jyt/sjyt/hnsjyksy/web/ksyzkzx/202606/t20260625_34013108.html,,2026-09-30,网页表格整理,
+hunan-2025-history-yfyd,官方,湖南省教育考试院,2025 年普通高考档分 1 分段统计表（历史科目组合）,,https://www.hneeb.cn/hnxxg/741/742/content_4433.html,,2026-09-30,网页表格整理,
+hunan-2024-history-yfyd,官方,湖南省教育考试院,2024 年普通高考档分 1 分段统计表（历史科目组合）,,https://www.hneeb.cn/hnxxg/741/742/content_4206.html,,2026-10-16,网页表格整理,原表并列“含全国性加分”“含全国性和地方性加分”两套人数，分列 count/cum 与 count_all/cum_all
+hunan-2023-history-yfyd,官方,湖南省教育考试院,2023 年普通高考档分 1 分段统计表（历史科目组合）,,https://www.hneeb.cn/hnxxg/741/742/content_3940.html,,2026-10-16,网页表格整理,原表并列“含全国性加分”“含全国性和地方性加分”两套人数，分列 count/cum 与 count_all/cum_all
+hunan-2022-history-yfyd,官方,湖南省教育考试院,2022 年普通高考档分 1 分段统计表（历史科目组合）,,https://www.hneeb.cn/hnxxg/741/742/content_3610.html,,2026-10-16,网页表格整理,原表并列“含全国性加分”“含全国性和地方性加分”两套人数，分列 count/cum 与 count_all/cum_all
+hunan-2021-history-yfyd,官方,湖南省教育考试院,2021 年普通高考档分 1 分段统计表（历史科目组合）,,http://jyt.hunan.gov.cn/sjyt/hnsjyksy/web/ksyzkzx/202106/t20210624_22745425.html,,2026-10-16,网页表格整理,原表并列“含全国性加分”“含全国性和地方性加分”两套人数，分列 count/cum 与 count_all/cum_all
