@@ -296,7 +296,16 @@
       ],
       "bindings": [],
       "claim_id": "C7cd30aded0c76b906fdac0c6",
-      "review": null
+      "review": {
+        "kind": "建议",
+        "decision": "支持",
+        "reason": "删去“同科目”后，本句与封面结论句措辞一致，不再含需目录证据的事实。“位置更好”有据：模考 349 等于 E045 十人中位数 349.0、高于其下四分位 334，而 E042 十二人中位数 357.5，模考在其下四分位 347.75 与中位数之间；两项均为“够一够”，与候选档位一致。“没有数据可靠的稳妥档”与第06节定档结果一致；“保底靠出分后调剂”有 E016 第五十九条调剂条件，春招对应本人登记的打算。",
+        "reviewer": {
+          "session_id": "review8-yj-s05-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -117554,7 +117563,7 @@
     "independent": true,
     "method": "未参与本案写作或修改的独立会话；原判定一律不继承，逐条对照 evidence.json 原文摘录与范围、gap 记录、profile.json 与补充说明原话、calculations.json 及 calculation_plan 算式（分布统计由匿名分数独立复算）后人工写出判定和理由；脚本只用于读取、合并、校验格式与统计重复。"
   },
-  "reviewed_manifest_sha256": "25abcb56b048f32530121d907088fef5d0a523af9cc90b8be0b5b7fb2419e870",
+  "reviewed_manifest_sha256": "ddf409d1d2a6d2f48e5e29376d1f1fd9280606de7315c1cf9055e0d6e8e7c667",
   "retired": [
     {
       "claim_id": "Cb343ee6de0918705e9d47bcd",
@@ -118384,6 +118393,16 @@
         "C5133a47d52b4282ef081b243"
       ],
       "scope": "第七轮独立复核：判定 6 条无判定当前项（封面两句删去“同科目”；矩阵两格、候选表一格补 E037；第12节补 E032），并 curl 取苏大 2026 细则 PDF、2027 目录 PDF、名单 PDF 原件核对；抽查 15 条既有判定（6 条带 carried_from）均成立。另发现第01节导语“同校软件工程学硕同科目”未引目录证据，与封面已改掉的问题相同，重判为部分支持，旧判定存入 rejudged_from。其余项保留原会话判定，不冒称重审。"
+    },
+    {
+      "session_id": "review8-yj-s05-20261021",
+      "model": "Claude Opus 5.5",
+      "independent": true,
+      "reviewed_manifest_sha256": "ddf409d1d2a6d2f48e5e29376d1f1fd9280606de7315c1cf9055e0d6e8e7c667",
+      "claim_ids": [
+        "C7cd30aded0c76b906fdac0c6"
+      ],
+      "scope": "第八轮独立复核：判定第01节导语删去“同科目”后的新句；另抽 10 条已判定项复核理由（均成立）。"
     }
   ],
   "report_snapshot": {
