@@ -72,4 +72,21 @@ class BeforeCleanupTests(unittest.TestCase):
         case.data['narrative.json']['sections']['12']['analysis'][0]['content']['text']+=' 附件worker.py和快照。'
         self.assertEqual(check_planning_source(case),[])
 
+    def test_printed_words_match_what_claim_review_reads(self):
+        # 曾把本人原话“没做过完整的上机模拟”印成“上机试算”，“不比较虚构年薪”印成“本案年薪”。
+        from report import public_text
+        for kept in ('没做过完整的上机模拟','做模拟考','模拟面试两次','不比较虚构年薪','他说“这段脚本写得好”'):
+            self.assertEqual(public_text(kept),kept)
+        self.assertEqual(public_text('4000 次模拟中没有出现滑档'),'4000 次试算中没有出现滑档')
+        self.assertEqual(public_text('用蒙特卡洛模拟得到'),'用蒙特卡洛试算得到')
+        self.assertEqual(public_text('全部为虚构数据'),'全部为本案数据')
+        from reader_language import check_planning_source
+        case=self.case()
+        case.data['narrative.json']['sections']['01']['analysis'][0]['content']['text']+=' 用蒙特卡洛模拟得到。'
+        found=[x for x in check_planning_source(case) if x['code']=='rewritten_on_print']
+        self.assertTrue(found and found[0]['section']=='01')
+        case=self.case()
+        case.data['narrative.json']['sections']['01']['analysis'][0]['content']['text']+=' 你说没做过完整的上机模拟。'
+        self.assertFalse([x for x in check_planning_source(case) if x['code']=='rewritten_on_print'])
+
 if __name__=='__main__':unittest.main()

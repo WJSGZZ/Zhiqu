@@ -221,6 +221,23 @@ class NewComponents(unittest.TestCase):
         self.assertAlmostEqual(sum(s['width'] for s in first), sum(s['width'] for s in segs[3:]), places=1)
         self.assertEqual(svg.count('合计 500 分'), 2)
 
+    def test_stack_names_every_narrow_segment(self):
+        # 读研旗舰模考图曾在“英语一”段只写分数，读者对不上科目。
+        svg = report.stack([['十月模考', [('政治', 63), ('英语一', 62), ('数学一', 105), ('专业课', 119)]],
+                            ['单科最低要求', [('政治', 35), ('英语一', 35), ('数学一', 53), ('专业课', 53)]]], '分')
+        texts = re.findall(r'>([^<>]*)</text>', svg)
+        joined = ''.join(texts)
+        for row, segs in (('十月模考', ('政治 63', '英语一 62', '数学一 105', '专业课 119')),
+                          ('单科最低要求', ('政治 35', '英语一 35', '数学一 53', '专业课 53'))):
+            for seg in segs:
+                self.assertIn(seg, joined, (row, seg))
+        self.assertIn('十月模考：左起第2段为 英语一 62', joined)
+        self.assertIn('单科最低要求：从左到右依次为 政治 35、英语一 35、数学一 53、专业课 53', joined)
+        # 写得下的段不重复写进图下说明
+        self.assertNotIn('数学一 105；', joined.split('段内未写全的分项：')[-1])
+        wide = report.stack([['三单元', [('政治', 100), ('外语', 100), ('专业课', 300)]]], '分')
+        self.assertNotIn('段内未写全', wide)
+
     def test_facts_mark_unknown_as_unfilled(self):
         html_ = report.facts([['年级', '大二', '已知'], ['排名', '', '未知'], ['均分', '80', '待确认']])
         self.assertIn('class="fact unknown"><b>排名</b><span>未填</span>', html_)

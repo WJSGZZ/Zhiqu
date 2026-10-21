@@ -16,7 +16,10 @@ from profile_store import active_profile, parse_profile, source_files, alignment
 
 SKILLS = Path(__file__).resolve().parents[2]
 GENERATION_TOOLS=('planning_report.py','planning_workflow.py','operator_check.py','check_demos.py','report.py','render_report.py','profile_store.py','claim_guards.py','source_authentication.py','official_source_audit.py','unit_validation.py','reader_language.py','claim_check.py','check_report.py','authoring_metadata.py')
-POLICY_FILES=('zhiqu-shared/references/official-domains.csv','zhiqu-shared/references/unit-families.json','zhiqu-shared/references/reader-language.json','zhiqu/references/report-guide.md')
+# 规则文件整份哈希进报告追踪；官方域名清单只记本报告证据实际命中的行（见 policy_snapshot），
+# 别的案例新增一个域名不会让这份报告“须重生成”。
+DOMAIN_POLICY='zhiqu-shared/references/official-domains.csv'
+POLICY_FILES=('zhiqu-shared/references/unit-families.json','zhiqu-shared/references/reader-language.json','zhiqu/references/report-guide.md')
 FILES = ('case.json', 'profile_parse.json', 'directions.json', 'rules_check.json',
          'candidates.json', 'evidence.json', 'calculations.json', 'judgment.json', 'narrative.json')
 PITFALLS = ('没查到写成不存在', '群体数字当个人概率', '经验帖数字做决定', '按编号引用问卷',
@@ -35,6 +38,27 @@ DATE = re.compile(r'^\d{4}-\d{2}-\d{2}$')
 TIERS = ('相对稳妥', '够一够', '冒险')
 UNTIERED = '不定档'
 UNTIERED_REASONS = ('科目不同', '分布缺失', '样本太少', '口径不一致')
+
+
+def policy_snapshot(root, domain_csv=None):
+    """报告追踪里的规则快照：规则文件整份哈希；域名清单只取本案证据网址实际命中的行，按行哈希。
+
+    命中集合由当前清单计算：新增一行若恰好命中本案某个网址（或更具体地覆盖原命中），集合随之变化，
+    报告照样须重生成；与本案无关的新增域名不改变快照。"""
+    from official_source_audit import load_official_domains, official_domain_for_url
+    root=Path(root);domains=load_official_domains(domain_csv or SKILLS/DOMAIN_POLICY)
+    evidence=json.loads((root/'evidence.json').read_text()) if (root/'evidence.json').exists() else {}
+    urls=[(item.get('source') or {}).get('url') or (item.get('source') or {}).get('source_url') or '' for item in evidence.get('items',[]) if isinstance(item.get('source'),dict)]
+    urls+=[g.get('url') or '' for g in evidence.get('source_groups',[]) if isinstance(g,dict)]
+    rows={}
+    for url in urls:
+        row=official_domain_for_url(url,domains) if url else None
+        if row:rows[row['domain'].strip().lower().rstrip('.')]=hashlib.sha256(json.dumps(row,ensure_ascii=False,sort_keys=True).encode()).hexdigest()
+    return {'policy_sha256':{f:sha(SKILLS/f) for f in POLICY_FILES},'official_domain_rows':dict(sorted(rows.items()))}
+
+
+def policy_stale(trace, root):
+    return any(trace.get(key)!=value for key,value in policy_snapshot(root).items())
 
 
 def read(path):
@@ -630,7 +654,7 @@ class PlanningCase:
         if set(trace.get('source_sha256',{}))!=expected:errors.append('report_trace.json：输入快照不全')
         if trace.get('contract_sha256')!=sha(self.contract_path()):errors.append('report_trace.json：内容合同已变更，须重生成')
         tools=GENERATION_TOOLS
-        if trace.get('policy_sha256')!={f:sha(SKILLS/f) for f in POLICY_FILES}:errors.append('report_trace.json：来源域名/单位族规则已变更，须重生成')
+        if policy_stale(trace,self.root):errors.append('report_trace.json：本报告用到的官方域名行或单位族/用语规则已变更，须重生成')
         if set(trace.get('tool_sha256',{}))!=set(tools):errors.append('report_trace.json：缺算法/渲染器快照')
         elif any(sha(Path(__file__).with_name(f))!=h for f,h in trace['tool_sha256'].items()):errors.append('report_trace.json：算法或渲染器已变更，须重生成')
         for f,h in trace.get('verification_tools_sha256',{}).items():

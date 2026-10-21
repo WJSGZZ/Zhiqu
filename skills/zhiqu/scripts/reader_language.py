@@ -185,7 +185,24 @@ def check_planning_source(case):
                     if len(row)>=2:
                         for term in re.split('[、，/]',str(row[0])):glossary[term.strip()]=str(row[1])
             walk(content,entry['ref']+'/content',sid)
-    return check_fragments(fragments,glossary=glossary)
+    issues=check_fragments(fragments,glossary=glossary)
+    # 逐句回查看的是这里的源文字；印出来的文字必须与它一致，发布层不能再改字。
+    from report import public_words
+    cover=[]
+    # 封面只有一句话结论经过发布层换词（对象名另由 simulated_name 处理）。
+    for key,value in case.case.get('report_meta',{}).items():
+        if key not in ('conclusion','note') or not isinstance(value,str):continue
+        try:text=case.expand(value)
+        except (KeyError,ValueError,IndexError,TypeError):text=REF.sub('',value)
+        cover.append(Fragment(text,'01','case.json#/report_meta/'+key))
+    for f in [*fragments,*cover]:
+        if not f.section.isdigit() or not 1<=int(f.section)<=11:continue
+        printed=public_words(f.text)
+        if printed!=f.text:
+            changed=next((a for a,b in zip(f.text,printed) if a!=b),'')
+            issues.append({'code':'rewritten_on_print','severity':'error','section':f.section,'location':f.location,'page':None,'term':printed[:40],'text':f.text,
+                           'message':'这句会在印刷时被换词（逐句回查看到的与印出来的不一致）；请在源文件直接写读者用语，或把本人原话放进引号'})
+    return issues
 
 
 def check_case(root):

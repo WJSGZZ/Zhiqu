@@ -12,7 +12,7 @@ import subprocess
 import sys
 import tempfile
 from pathlib import Path
-from planning_workflow import PlanningCase, FILES, FIGURE_TYPES, GENERATION_TOOLS, POLICY_FILES, SKILLS, dump, sha
+from planning_workflow import PlanningCase, FILES, FIGURE_TYPES, GENERATION_TOOLS, SKILLS, dump, policy_snapshot, sha
 from profile_store import source_files
 
 
@@ -131,7 +131,9 @@ def generate(root, html_only=False, profile_version=None):
     with tempfile.TemporaryDirectory(prefix='.planning-',dir=case.root) as temp:
         tmp=Path(temp);(tmp/'report.md').write_text(markdown);(tmp/'report.html').write_text(document)
         if not html_only:
-            render_report._print_pdf(document,tmp/pdf_name)
+            # 打印器可能为孤页收紧某节行距（只加 class）；report.html 与附件用最终打印的这一份。
+            printed=render_report._print_pdf(document,tmp/pdf_name)
+            if isinstance(printed,str) and printed!=document:document=printed;(tmp/'report.html').write_text(document)
             errors=check_pdf(str(tmp/pdf_name))
             if errors:raise ValueError('\n'.join(errors))
         from operator_check import generate as operator_generate
@@ -142,7 +144,7 @@ def generate(root, html_only=False, profile_version=None):
                   'numeric_refs':trace,'artifacts':{n:sha(tmp/n) for n in names if n not in ('report_trace.json','operator_check.md')},'delivery_status':'awaiting_operator_and_independent_review'}
         from authoring_metadata import trace_metadata
         manifest.update(trace_metadata(case.case,[Path(__file__).with_name(f) for f in ('planning_report.py','render_report.py','report.py')]))
-        manifest['policy_sha256']={f:sha(SKILLS/f) for f in POLICY_FILES}
+        manifest.update(policy_snapshot(case.root))
         manifest['report_profile']=binding
         manifest['verification_tools_sha256']={f:sha(Path(__file__).with_name(f)) for f in ('verify_report.py','verification_calculations.py')}
         dump(tmp/'report_trace.json',manifest)

@@ -199,6 +199,59 @@ class TestReportElements(unittest.TestCase):
         self.assertIn("<span class='tag 冲'>冲</span>", self.html)
 
 
+class TestNeutralColorNames(unittest.TestCase):
+    """读研、求职图表的色名不借用高考冲/稳/保：色名会留在 report.md 和 PDF 附件数据里。"""
+
+    def bars(self, tag):
+        return "\n".join(["::: bars 情景", "caption: 说明", "source: 1", f"- 原估计 | 2 | 主 | 2.0 个月", f"- 情景 | 1 | {tag} | 1.0 个月", ":::"])
+
+    def test_neutral_names_render_with_the_same_colors(self):
+        import report
+        for neutral, legacy in (("留意", "稳"), ("不利", "冲")):
+            html_, _ = rr.markdown_to_html(self.bars(neutral))
+            self.assertIn(report.PALETTE[legacy], html_)
+        html_, _ = rr.markdown_to_html(self.bars("次"))
+        self.assertIn(report.PALETTE["保"], html_)
+
+    def test_gaokao_tiers_are_refused_as_chart_colors(self):
+        for tag in ("冲", "稳", "保"):
+            with self.assertRaisesRegex(ValueError, "高考档位"):
+                rr.markdown_to_html(self.bars(tag))
+
+    def test_examples_do_not_carry_gaokao_tier_color_names(self):
+        import glob
+        import json
+        import re
+        skills = os.path.dirname(ROOT)
+        roots = sorted(glob.glob(os.path.join(skills, "zhiqu-grad/examples/*")) + glob.glob(os.path.join(skills, "zhiqu-career/examples/*")))
+        self.assertTrue(roots)
+        found = []
+
+        def walk(obj, where):
+            if isinstance(obj, dict):
+                if obj.get("type") in ("bars",) and isinstance(obj.get("content"), dict):
+                    for row in obj["content"].get("rows", []):
+                        if len(row) > 2 and row[2] in ("冲", "稳", "保"):
+                            found.append((where, row[0], row[2]))
+                for value in obj.values():
+                    walk(value, where)
+            elif isinstance(obj, list):
+                for value in obj:
+                    walk(value, where)
+
+        for root in roots:
+            for path in glob.glob(os.path.join(root, "*.json")):
+                walk(json.load(open(path, encoding="utf-8")), path)
+            md = os.path.join(root, "report.md")
+            if os.path.exists(md):
+                for block in re.findall(r"^::: bars[^\n]*\n(.*?)^:::", open(md, encoding="utf-8").read(), re.M | re.S):
+                    for line in block.splitlines():
+                        cells = [c.strip() for c in re.sub(r"^\s*-\s+", "", line).split("|")] if line.lstrip().startswith("- ") else []
+                        if len(cells) > 2 and cells[2] in ("冲", "稳", "保"):
+                            found.append((md, cells[0], cells[2]))
+        self.assertEqual(found, [])
+
+
 class TestValidation(unittest.TestCase):
     def test_well_ordered_sections_no_warning(self):
         _, sections = rr.markdown_to_html(rr.split_front_matter(SAMPLE_MD)[1])

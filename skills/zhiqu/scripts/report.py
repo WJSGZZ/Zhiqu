@@ -56,6 +56,15 @@ section.newpage { break-before: page; margin-top: 0; }
 h2 + p, h2 + .lead { break-after: avoid; }
 section[data-kind="plan"]:not([data-section="12"]) > h2 + p:has(> strong:first-child) { break-inside: avoid; }
 p, li, dd { orphans: 3; widows: 3; }
+/* 节末只剩一两行掉到新页时（check_layout 的孤页检查），生成器给这一节加 fit / fit2 后重排：
+   只收行距和段距，字号不变；fit2 再紧一档。 */
+section.fit p, section.fit li, section.fit dd { line-height: 1.62; }
+section.fit p { margin-bottom: 1.8mm; } section.fit h3 { margin-top: 4.5mm; }
+section.fit ul.asklist li { padding: 1.5mm 0 1.5mm 4mm; margin-bottom: 1.4mm; }
+section.fit tbody td { padding: 1.2mm 2mm; } section.fit .fig { margin-bottom: 3.5mm; }
+section.fit2 p, section.fit2 li, section.fit2 dd { line-height: 1.52; }
+section.fit2 p { margin-bottom: 1.2mm; } section.fit2 h3 { margin-top: 3.5mm; }
+section.fit2 .box { padding: 3mm 4mm; margin: 2mm 0 3mm; }
 h4, dt { break-after: avoid; }
 svg.chart { width: 100%; height: auto; display: block; }
 .lead { font-size: 11pt; color: var(--soft); break-after: avoid; }
@@ -258,7 +267,11 @@ table.vt td .row-note { display:block;white-space:nowrap;font-size:7.8pt;font-we
 # 小标题12pt；图内文字10.5 SVG单位（640宽映射174mm，实际约8pt），最低7pt。
 # 千分位数字、中文量词前空格、区间用“—”；概率精度仍由prob_formatter控制。
 # 颜色只有一套含义：黛绿 = 主选／本方案，石绿 = 一般数据，琥珀 = 提醒或对照情景，红 = 风险（滑档、超预算）。
-PALETTE = {'冲': '#9B3B2E', '稳': '#A8772B', '保': '#34685D', '主': '#21473E', '次': '#34685D'}
+PALETTE = {'冲': '#9B3B2E', '稳': '#A8772B', '保': '#34685D', '主': '#21473E', '次': '#34685D', '留意': '#A8772B', '不利': '#9B3B2E'}
+# 读研、求职图表只用中性色名（主、次、留意、不利），不借用高考的冲／稳／保：
+# 色名会原样留在 report.md 和 PDF 附件数据里，读者会把“冲”读成“可以冲一冲”。
+NEUTRAL_TAGS = ('主', '次', '留意', '不利')
+GAOKAO_TAGS = ('冲', '稳', '保')
 # 高考志愿的冲／稳／保按把握程度由浅到深：冲要留意（琥珀），稳（石绿），保（黛绿）；红色留给滑档。
 CERTAINTY = {'冲': '#A8772B', '稳': '#34685D', '保': '#21473E'}
 URL_RE = re.compile(r'https?://[^\s<>"\'，；。）、（【】]+')
@@ -271,18 +284,35 @@ def display_text(value):
     return re.sub(r'(\d)(?=(?:万|亿)?(?:元|分(?!位)|名|人|小时))', r'\1 ', text)
 
 
+# 引号里的是原话或原文，发布层不改字。
+QUOTED = re.compile(r'(“[^”]*”|「[^」]*」|『[^』]*』)')
+# “模拟”只在指计算（蒙特卡洛模拟、模拟次数）时改称“试算”；考试和练习里的“模拟”（上机模拟、模拟考、
+# 模拟面试）是本人或原文的说法，照印。曾把本人原话“没做过完整的上机模拟”印成“上机试算”。
+SIMULATION = re.compile(r'(?<!上机)(?<!面试)(?<!笔试)(?<!机考)(?<!全真)(?<!实战)(?<!口语)(?<!考试)模拟(?![考卷题面测训练器联法])')
+
+
+def public_words(text):
+    """发布层的换词（开发措辞→读者用语）；不动引号内的原话。数字格式在 display_text。"""
+    def words(part):
+        part = part.replace('模拟用户','本人').replace('模拟考生','本案考生').replace('虚构考生','本案考生')
+        part = SIMULATION.sub('试算', part)
+        # “虚构”只在开发措辞里换（虚构数据、虚构演示）；“不比较虚构年薪”的“虚构”是读者用语，换成“本案”意思就反了。
+        part = re.sub(r'虚构(?=考生|示例|演示|数据|案例|人物|用户|样例)', '本案', part)
+        for old,new in [('示例','本案'),('演示','对照'),('复现','复核'),('脚本','计算方法')]:
+            part = part.replace(old,new)
+        part = re.sub(r'python3\s+scripts/[^；。]+','按本节记录的方法重新核算',part)
+        part = re.sub(r'(?:skills/zhiqu/)?(?:scripts/|data/calibration/)?[A-Za-z_]+\.py','本省检验方法',part)
+        for old,new in [('retro_ranks/<位次>/','各位次的独立结果'),('retro_ranks.csv','多档位次汇总'),('retro_config.json','事前登记'),('hindsight.json','事后对照记录'),('preferences_review.json','偏好核对记录'),('data/schools.csv','教育部高校名录'),('model_review_2026.csv','年度检验记录'),('README.md','来源说明')]:
+            part = part.replace(old,new)
+        for old,new in [('预测过线','单独过线'),('过线概率','单独过线'),('落点概率','最终录取'),('最终录取概率','最终录取'),('预测线','预测位次')]:
+            part = part.replace(old,new)
+        return part
+    return ''.join(chunk if QUOTED.fullmatch(chunk) else words(chunk) for chunk in QUOTED.split(str(text)))
+
+
 def public_text(text):
     """发布层仅清理开发措辞；输入JSON与结论、数值保持原样。"""
-    text = text.replace('模拟用户','本人').replace('模拟考生','本案考生').replace('虚构考生','本案考生')
-    for old,new in [('模拟','试算'),('示例','本案'),('演示','对照'),('复现','复核'),('脚本','计算方法'),('虚构','本案')]:
-        text = text.replace(old,new)
-    text = re.sub(r'python3\s+scripts/[^；。]+','按本节记录的方法重新核算',text)
-    text = re.sub(r'(?:skills/zhiqu/)?(?:scripts/|data/calibration/)?[A-Za-z_]+\.py','本省检验方法',text)
-    for old,new in [('retro_ranks/<位次>/','各位次的独立结果'),('retro_ranks.csv','多档位次汇总'),('retro_config.json','事前登记'),('hindsight.json','事后对照记录'),('preferences_review.json','偏好核对记录'),('data/schools.csv','教育部高校名录'),('model_review_2026.csv','年度检验记录'),('README.md','来源说明')]:
-        text = text.replace(old,new)
-    for old,new in [('预测过线','单独过线'),('过线概率','单独过线'),('落点概率','最终录取'),('最终录取概率','最终录取'),('预测线','预测位次')]:
-        text = text.replace(old,new)
-    return display_text(text.replace('–','—'))
+    return display_text(public_words(text).replace('–','—'))
 
 
 def simulated_name(name, simulated=True):
@@ -1019,7 +1049,8 @@ STACK_COLORS = [('#21473E', '#FFFFFF'), ('#34685D', '#FFFFFF'), ('#CEC6B1', INK)
 
 def stack(rows, unit='', percent=False):
     """构成条：rows=[标签, [(分项, 数值), ...]]。各行共用一条从 0 起的数轴（percent=True 时各行按 100% 画），
-    分段宽度严格按数值；颜色按段的位置深浅交替，只为分开相邻段；段内写“名称 数值”，放不下时写在条下；右侧写合计。"""
+    分段宽度严格按数值；颜色按段的位置深浅交替，只为分开相邻段；段内写“名称 数值”，
+    段太窄只写得下数值或都写不下时，在图下按行补全“左起第几段为 名称 数值”，保证每段都能对上分项名；右侧写合计。"""
     for _, segs in rows:
         for name, v in segs:
             if v is None or float(v) < 0: raise ValueError('构成条的分项须为非负数值；缺的分项不画进构成条')
@@ -1031,7 +1062,7 @@ def stack(rows, unit='', percent=False):
     out = [_x_axis(ticks, scale, axis_y, (lambda v: f'{v:.0%}') if percent else _num, '' if percent else unit, grid_top=0)]
     notes = []
     for i, ((label, segs), total) in enumerate(zip(rows, totals)):
-        y = i * row_h + 4; x = 0.0
+        y = i * row_h + 4; x = 0.0; missing = []
         out.append(f'<text x="0" y="{y + 13:.1f}" fill="{SOFT}">{E(_fit_text(label, LABEL_W))}</text>')
         for j, (name, v) in enumerate(segs):
             share = float(v) / total if percent and total else float(v)
@@ -1039,17 +1070,29 @@ def stack(rows, unit='', percent=False):
             fill, ink = STACK_COLORS[j % len(STACK_COLORS)]  # 按位置着色只为分开相邻段；分项名写在段内
             out.append(f'<rect x="{x0:.2f}" y="{y}" width="{w:.2f}" height="{bar_h}" fill="{fill}"/>')
             if x > 0: out.append(f'<line x1="{x0:.2f}" x2="{x0:.2f}" y1="{y}" y2="{y + bar_h}" stroke="#F2EEE3" stroke-width="1.2"/>')
-            text = next((t for t in (f'{name} {_num(v)}', _num(v)) if _text_width(t, FS_SMALL) + 8 <= w), None)
+            full = f'{name} {_num(v)}'
+            text = next((t for t in (full, _num(v)) if _text_width(t, FS_SMALL) + 8 <= w), None)
             if text:
                 out.append(f'<text x="{x0 + w / 2:.2f}" y="{y + 12.5:.1f}" text-anchor="middle" font-size="{FS_SMALL}" fill="{ink}">{E(text)}</text>')
-            else:
-                notes.append(f'{label}：{name} {_num(v)}')
+            if text != full:  # 段内只写得下分数或什么都写不下：在图下按“行、左起第几段”补全分项名，每段都能对上
+                missing.append((j, full))
             x += share
+        if missing:
+            notes.append(f'{label}：从左到右依次为 ' + '、'.join(t for _, t in missing) if len(missing) == len(segs)
+                         else f'{label}：' + '、'.join(f'左起第{j + 1}段为 {t}' for j, t in missing))
         out.append(f'<text x="{VALUE_R}" y="{y + 13:.1f}" text-anchor="end" fill="{INK}">合计 {_num(total)}{(" " + E(unit)) if unit else ""}</text>')
     height = axis_y + 18
     if notes:
-        height += 13
-        out.append(f'<text x="0" y="{height - 4:.1f}" font-size="{FS_SMALL}" fill="{MUTED}">放不下的分段：{E("；".join(notes))}</text>')
+        lines, cur = [], '段内未写全的分项：'
+        for k, note in enumerate(notes):
+            piece = note + ('；' if k < len(notes) - 1 else '')
+            if cur and _text_width(cur + piece, FS_SMALL) > VALUE_R:
+                lines.append(cur); cur = ''
+            cur += piece
+        lines.append(cur)
+        for line in lines:
+            height += 13
+            out.append(f'<text x="0" y="{height - 4:.1f}" font-size="{FS_SMALL}" fill="{MUTED}">{E(line)}</text>')
     return _svg_open(height) + ''.join(out) + '</svg>'
 
 
@@ -1927,6 +1970,93 @@ def find_browser():
 
 
 
+def print_pdf(doc, out_path):
+    """用本机 Chrome/Edge 无头模式把 HTML 打印成 PDF；三版共用。找不到浏览器时输出 HTML 并退出。"""
+    br = find_browser()
+    tmp = tempfile.NamedTemporaryFile("w", suffix=".html", delete=False, encoding="utf-8")
+    tmp.write(doc)
+    tmp.close()
+    if not br:
+        html_out = os.path.splitext(str(out_path))[0] + ".html"
+        shutil.copy(tmp.name, html_out)
+        sys.exit(f"没有找到 Chrome/Edge，已输出 {html_out}；请用浏览器打开后\"打印 → 存储为 PDF\"（勾选\"背景图形\"）。")
+    out = os.path.abspath(out_path)
+    if os.path.exists(out):
+        os.unlink(out)
+    with tempfile.TemporaryDirectory() as prof:
+        # 部分环境下 Chrome 打印完不会自行退出：等 PDF 写完且大小稳定后结束进程
+        proc = subprocess.Popen([br, "--headless=new", "--disable-gpu", "--no-pdf-header-footer", f"--user-data-dir={prof}",
+                                 f"--print-to-pdf={out}", "file://" + tmp.name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        last, stable, waited = -1, 0, 0.0
+        while waited < 120 and stable < 3:
+            time.sleep(0.5)
+            waited += 0.5
+            if proc.poll() is not None and os.path.exists(out):
+                break
+            size = os.path.getsize(out) if os.path.exists(out) else -1
+            stable = stable + 1 if size > 0 and size == last else 0
+            last = size
+        if proc.poll() is None:
+            proc.terminate()
+            try:
+                proc.wait(5)
+            except subprocess.TimeoutExpired:
+                proc.kill()
+    if not os.path.exists(out) or os.path.getsize(out) == 0:
+        sys.exit("PDF 生成失败：请改用 --out 报告.html，再用浏览器打印为 PDF。")
+    os.unlink(tmp.name)
+    return out
+
+
+FIT_LEVELS = ('fit', 'fit2')
+
+
+def add_section_class(doc, sid, name):
+    """给 data-section=sid 的小节加 class（已有 class 时追加，替换更低一档的 fit）。"""
+    def repl(m):
+        attrs = m[1]
+        cls = re.search(r'class="([^"]*)"', attrs)
+        if cls:
+            kept = [c for c in cls[1].split() if c not in FIT_LEVELS]
+            return '<section' + attrs.replace(cls[0], 'class="' + ' '.join(kept + [name]) + '"') + '>'
+        return f'<section class="{name}"' + attrs + '>'
+    return re.sub(r'<section((?=[^>]*data-section="' + re.escape(sid) + r'")[^>]*)>', repl, doc, count=1)
+
+
+def print_fitted(doc, out_path, rounds=4):
+    """打印 PDF；节末只剩一两行掉到新页时，收紧那一节（再不行连同上一节）的行距重排。
+
+    返回最终打印所用的 HTML（调用方据此保存 report.html、嵌入附件）。孤页仍在时由 check_layout 报错。"""
+    try:
+        import pymupdf
+        from check_layout import tail_orphans
+    except ImportError:
+        print_pdf(doc, out_path)
+        return doc
+    levels = {}
+    for _ in range(rounds + 1):
+        out = print_pdf(doc, out_path)
+        with pymupdf.open(out) as pdf:
+            orphans = [sid for _, sid, _ in tail_orphans(pdf) if sid]
+        if not orphans or _ == rounds:
+            return doc
+        changed = False
+        for sid in orphans:
+            level = levels.get(sid, -1)
+            target = sid
+            if level + 1 >= len(FIT_LEVELS):  # 本节已收到最紧：再收紧上一节
+                prev = f'{int(sid) - 1:02d}'
+                target, level = prev, levels.get(prev, -1)
+                if level + 1 >= len(FIT_LEVELS) or int(sid) <= 1:
+                    continue
+            levels[target] = level + 1
+            doc = add_section_class(doc, target, FIT_LEVELS[level + 1])
+            changed = True
+        if not changed:
+            return doc
+    return doc
+
+
 def layout_gate(pdf):
     """生成 PDF 后必做的版面自检；表格挤成一字一行、数字拆行等问题直接报错。"""
     try:
@@ -1988,39 +2118,8 @@ def main():
         open(a.out, "w", encoding="utf-8").write(doc)
         print(f"已生成 {a.out}")
         return
-    br = find_browser()
-    tmp = tempfile.NamedTemporaryFile("w", suffix=".html", delete=False, encoding="utf-8")
-    tmp.write(doc)
-    tmp.close()
-    if not br:
-        html_out = os.path.splitext(a.out)[0] + ".html"
-        shutil.copy(tmp.name, html_out)
-        sys.exit(f"没有找到 Chrome/Edge，已输出 {html_out}；请用浏览器打开后\"打印 → 存储为 PDF\"（勾选\"背景图形\"）。")
+    doc = print_fitted(doc, a.out)
     out = os.path.abspath(a.out)
-    if os.path.exists(out):
-        os.unlink(out)
-    with tempfile.TemporaryDirectory() as prof:
-        # 部分环境下 Chrome 打印完不会自行退出：等 PDF 写完且大小稳定后结束进程
-        proc = subprocess.Popen([br, "--headless=new", "--disable-gpu", "--no-pdf-header-footer", f"--user-data-dir={prof}",
-                                 f"--print-to-pdf={out}", "file://" + tmp.name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        last, stable, waited = -1, 0, 0.0
-        while waited < 120 and stable < 3:
-            time.sleep(0.5)
-            waited += 0.5
-            if proc.poll() is not None and os.path.exists(out):
-                break
-            size = os.path.getsize(out) if os.path.exists(out) else -1
-            stable = stable + 1 if size > 0 and size == last else 0
-            last = size
-        if proc.poll() is None:
-            proc.terminate()
-            try:
-                proc.wait(5)
-            except subprocess.TimeoutExpired:
-                proc.kill()
-    if not os.path.exists(out) or os.path.getsize(out) == 0:
-        sys.exit("PDF 生成失败：请改用 --out 报告.html，再用浏览器打印为 PDF。")
-    os.unlink(tmp.name)
     print(f"已生成 {out}")
     if binding:
         from verify_report import gaokao_files, attach_pdf, read, json_bytes, digest

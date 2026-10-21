@@ -39,7 +39,8 @@ Markdown 格式：
   新组件（均调用report.py，无另一套CSS）：
     ::: bars 图题 / ::: interval 图题 / ::: timeline 图题 / ::: matrix 图题
     元信息行：caption: 读图说明；source: 1,2（对应sources登记顺序）
-    bars可加unit: 元、max: 数字；数据行 - 标签 | 数值 | 冲/稳/保/主 | 显示值（后两项可省）
+    bars可加unit: 元、max: 数字；数据行 - 标签 | 数值 | 主/次/留意/不利 | 显示值（后两项可省）；
+      冲/稳/保是高考志愿档位，不能当色名用（会露在 report.md 和附件里）。
     interval数据行 - 标签 | 区间下界 | 上界 | 对照点；缺值留空或写未取到，不画假零值。
     timeline数据行 - 月份 | 任务 | 截止日 | 检查点（普通点末列留空），横轴每行最多4节点。
     matrix另写columns: 维度A | 维度B；数据行 - 选项 | ✓短语 | △短语（或✗）。
@@ -202,6 +203,8 @@ def render_fence(kind, title, lines, notes=None):
         caption = caption or STRIP_CAP+'浅色是最终录取概率不到5%的志愿'+('；红色是滑档' if pfall else '')+'。'
         title = title or '你最终会被哪里录取'
     elif kind == 'bars':
+        bad = sorted({r[2] for r in items if len(r) > 2 and r[2] in _report.GAOKAO_TAGS})
+        if bad: raise ValueError('bars色名不能用高考档位“'+'、'.join(bad)+'”；读研、求职图表改用 '+'、'.join(_report.NEUTRAL_TAGS))
         content = _report.bar_chart([[r[0],float(r[1].replace(',','')),*(r[2:])] for r in items],opts.get('unit',''),float(opts['max']) if 'max' in opts else None)
     elif kind == 'interval':
         number = lambda s: float(s.replace(',','')) if s and s.strip() and s!='未取到' else None
@@ -482,48 +485,11 @@ def render(markdown_text):
 # ---------------------------------------------------------------------------
 
 def _print_pdf(doc, out_path):
-    import shutil
-    import subprocess
-    import tempfile
-    import time
-
-    br = find_browser()
-    tmp = tempfile.NamedTemporaryFile("w", suffix=".html", delete=False, encoding="utf-8")
-    tmp.write(doc)
-    tmp.close()
-    if not br:
-        html_out = os.path.splitext(out_path)[0] + ".html"
-        shutil.copy(tmp.name, html_out)
-        sys.exit(f"没有找到 Chrome/Edge，已输出 {html_out}；请用浏览器打开后\"打印 → 存储为 PDF\"（勾选\"背景图形\"）。")
-    out = os.path.abspath(out_path)
-    if os.path.exists(out):
-        os.unlink(out)
-    with tempfile.TemporaryDirectory() as prof:
-        proc = subprocess.Popen(
-            [br, "--headless=new", "--disable-gpu", "--no-pdf-header-footer", f"--user-data-dir={prof}",
-             f"--print-to-pdf={out}", "file://" + tmp.name],
-            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-        )
-        last, stable, waited = -1, 0, 0.0
-        while waited < 120 and stable < 3:
-            time.sleep(0.5)
-            waited += 0.5
-            if proc.poll() is not None and os.path.exists(out):
-                break
-            size = os.path.getsize(out) if os.path.exists(out) else -1
-            stable = stable + 1 if size > 0 and size == last else 0
-            last = size
-        if proc.poll() is None:
-            proc.terminate()
-            try:
-                proc.wait(5)
-            except subprocess.TimeoutExpired:
-                proc.kill()
-    if not os.path.exists(out) or os.path.getsize(out) == 0:
-        sys.exit("PDF 生成失败：请改用 --out 报告.html，再用浏览器打印为 PDF。")
-    os.unlink(tmp.name)
-    print(f"已生成 {out}")
-    layout_gate(out)
+    """打印 PDF（与高考版同一个打印器）；节末孤页会自动收紧该节重排。返回最终打印所用的 HTML。"""
+    doc = _report.print_fitted(doc, out_path)
+    print(f"已生成 {os.path.abspath(out_path)}")
+    layout_gate(out_path)
+    return doc
 
 
 

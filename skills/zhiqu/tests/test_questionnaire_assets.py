@@ -268,6 +268,9 @@ class QuestionnaireAssets(unittest.TestCase):
                 if 'name="bz_sex"' in raw:
                     gated = raw[raw.index('data-show-when="birthtime=*"'):]
                     self.assertLess(gated.index('name="bz_sex"'), gated.index('</div></div>'))
+                    # The bazi block has several controls; without an explicit label the export key is a generic "选择".
+                    for tag in re.findall(r'<input[^>]*name="bz_sex"[^>]*>', raw):
+                        self.assertIn('data-profile-label="性别（排大运用）"', tag)
                 self.assertIn("document.addEventListener('input',function(){refreshFollowups();", raw)
                 self.assertIn('if(hadSaved){ saveState();', raw)
         career = pages['career']

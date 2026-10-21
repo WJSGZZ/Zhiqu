@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""检查生成的 PDF 报告版面：表格某一栏被挤成一字一行、数字被拆成两行、正文页中间留下大片空白。
+"""检查生成的 PDF 报告版面：表格某一栏被挤成一字一行、数字被拆成两行、正文页中间留下大片空白、
+节末或全文最后一页只剩一两行收尾文字（孤页）。
 
 用法：python3 check_layout.py 报告.pdf [更多.pdf ...]
 发现问题时逐条列出页码和原因，退出码 1；没有问题退出码 0。
@@ -138,6 +139,48 @@ def blank_issues(doc, ratio=BLANK_RATIO):
     return issues
 
 
+TAIL_LINES = 3        # 节末或全文最后一页只剩这么几行正文就算孤页
+TAIL_OCCUPIED = 0.15  # 且这一页内容占版心不到这个比例（整页图表、表格不算孤页）
+SECTION_HEAD = re.compile(r"^(\d{2})\s*\S")
+
+
+def _section_heads(page):
+    """本页出现的一级小节标题编号（标题字号约 18；正文里的“12 个”字号小，不会误认）。"""
+    out = []
+    for b in page.get_text("dict")["blocks"]:
+        for l in b.get("lines", []):
+            text = "".join(s["text"] for s in l["spans"]).strip()
+            if text and max(s["size"] for s in l["spans"]) >= 16 and SECTION_HEAD.match(text):
+                out.append(SECTION_HEAD.match(text)[1])
+    return out
+
+
+def tail_orphans(doc):
+    """节末或全文最后一页只剩一两行收尾文字的页：[(页码, 所在小节编号, 行数)]。
+
+    只查有页眉的正文页；这一页本身不开新节，且下一页开新节或已是全文最后一页。
+    小节编号取这一页之前最近的一级标题，供生成器收紧那一节的行距后重排。
+    """
+    infos = [_blank_info(p) for p in doc]
+    heads = [_section_heads(p) for p in doc]
+    current, owner = None, []
+    for h in heads:
+        owner.append(current if not h else h[0])
+        current = h[-1] if h else current
+    out = []
+    for i, info in enumerate(infos):
+        if i == 0 or not info["header"] or heads[i]:
+            continue
+        if i < len(infos) - 1 and not _starts_section(infos[i + 1]):
+            continue
+        top, bot = PAGE_MARGIN, doc[i].rect.height - PAGE_MARGIN
+        lines = [ln for ln in _lines(doc[i]) if top <= ln["y"] <= bot]
+        used = 1 - sum(b - a for a, b in info["gaps"]) / info["height"]
+        if 0 < len(lines) <= TAIL_LINES and used < TAIL_OCCUPIED:
+            out.append((i + 1, owner[i], len(lines)))
+    return out
+
+
 def check_pdf(path):
     import pymupdf
     doc = pymupdf.open(path)
@@ -147,6 +190,9 @@ def check_pdf(path):
             found.append(f"第 {i + 1} 页：{msg}")
     for page_no, msg in blank_issues(doc):
         found.append(f"第 {page_no} 页：{msg}")
+    for page_no, sid, n in tail_orphans(doc):
+        found.append(f"第 {page_no} 页：节末孤页，只剩 {n} 行收尾文字（{sid or '?'} 节）；"
+                     "生成器已试过收紧该节行距仍放不回上一页，先删短或调整这一节的内容")
     return found
 
 

@@ -389,4 +389,37 @@ class PlanningWorkflowTests(unittest.TestCase):
         self.change(root,'case.json',lambda x:x['context'].update(offer_basis='none'))
         self.assertTrue(any('跳过收入图' in e for e in run(root,0).errors))
 
+
+class DomainPolicySnapshotTests(unittest.TestCase):
+    """报告追踪只记本报告证据命中的域名行：别的案例加域名不让旧报告失效。"""
+    def setUp(self):
+        self.temp=tempfile.TemporaryDirectory();self.addCleanup(self.temp.cleanup)
+        self.root=Path(self.temp.name);self.csv=self.root/'domains.csv'
+        dump(self.root/'evidence.json',{'schema_version':1,'items':[
+            {'id':'E001','source':{'url':'https://yz.example-univ.edu.cn/a.html'}},
+            {'id':'E002','source':{'url':'https://www.unlisted.example.org/b'}}],'source_groups':[]})
+        self.write([('example-univ.edu.cn','示例大学','https://example-univ.edu.cn | 单位：示例大学')])
+
+    def write(self,rows):
+        import csv
+        with self.csv.open('w',encoding='utf-8',newline='') as f:
+            w=csv.writer(f);w.writerow(['domain','organization','evidence']);w.writerows(rows)
+
+    def snap(self):
+        from planning_workflow import policy_snapshot
+        return policy_snapshot(self.root,domain_csv=self.csv)
+
+    def test_unrelated_domain_keeps_snapshot_but_used_or_newly_matching_rows_change_it(self):
+        base=self.snap()
+        self.assertEqual(list(base['official_domain_rows']),['example-univ.edu.cn'])
+        self.assertNotIn('zhiqu-shared/references/official-domains.csv',base['policy_sha256'])
+        hit=('example-univ.edu.cn','示例大学','https://example-univ.edu.cn | 单位：示例大学')
+        self.write([hit,('other-city.gov.cn','别的市政府','https://other-city.gov.cn | 单位：别的市政府')])
+        self.assertEqual(self.snap(),base)
+        self.write([('example-univ.edu.cn','示例大学研究生院','https://example-univ.edu.cn | 单位：示例大学')])
+        self.assertNotEqual(self.snap(),base)
+        # A new row that now classifies one of this report's URLs changes what the report relied on.
+        self.write([hit,('unlisted.example.org','某机构','https://unlisted.example.org | 单位：某机构')])
+        self.assertNotEqual(self.snap(),base)
+
 if __name__=='__main__':unittest.main()

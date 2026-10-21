@@ -365,6 +365,21 @@ class ProfileStore(unittest.TestCase):
             self.assertNotIn(gone, mapping.mapping)
         self.assertEqual(mapping.mapping['has_offer'], 'has_offer')
 
+    def test_career_offer_folds_into_stage_and_cert_note_is_gone(self):
+        self.assertNotIn('certs_detail', json.dumps(store.FIELD_MAP['career'], ensure_ascii=False))
+        raw = profile(kind='career', items=[
+            {'id': 'job_stage', 'q': '求职进行到哪一步？', 'a': '已经在面试'},
+            {'id': 'has_offer', 'q': '手里现在有 offer 吗', 'a': '谈着还没定'},
+            {'id': 'certs', 'q': '证书与技能', 'a': {'多选': ['其他']}},
+        ])
+        fields = {row['field']: row for row in store.build_parse(raw, 'career')['fields']}
+        self.assertEqual(fields['求职阶段']['value'], {'job_stage': '已经在面试', 'has_offer': '谈着还没定'})
+        self.assertEqual(fields['证书']['answer_refs'], ['certs'])
+        # An older profile without the new question keeps the same single value.
+        old = profile(kind='career', items=[{'id': 'job_stage', 'q': '求职进行到哪一步？', 'a': '还没开始'}])
+        fields = {row['field']: row for row in store.build_parse(old, 'career')['fields']}
+        self.assertEqual(fields['求职阶段']['value'], '还没开始')
+
     def test_all_three_questionnaires_roundtrip_without_guessing(self):
         for kind, code in [('gaokao', 'GK'), ('grad', 'YJ'), ('career', 'QZ')]:
             with self.subTest(kind=kind):

@@ -130,6 +130,36 @@ class TestBlankPages(unittest.TestCase):
         toc = self.HEAD + [(80, "目录", 10), (100, "01 摘要", 10)]
         self.assertEqual(self.issues([toc, self.full()]), [])
 
+    def section_start(self, number, title):
+        return self.HEAD + [(80, f"{number} {title}", 18)] + self.full()[2:]
+
+    def test_section_tail_orphan_fails_and_names_the_section(self):
+        # 求职 S02 第 12 页、S05 第 15 页、读研 2028-S02 第 12 页：第 11 节最后两三行掉到第 12 节之前的新页。
+        tail = self.HEAD + [(80, self.BODY, 10), (95, "达到某一阶段的分数。", 10)]
+        pages = [self.section_start("10", "风险"), self.section_start("11", "追问清单"), tail, self.section_start("12", "核对与来源")]
+        out = self.issues(pages)
+        self.assertEqual(len(out), 1, out)
+        self.assertIn("第 3 页", out[0])
+        self.assertIn("孤页", out[0])
+        with pymupdf.open(self.path) as doc:
+            self.assertEqual(check_layout.tail_orphans(doc), [(3, "11", 2)])
+
+    def test_document_last_page_orphan_fails_but_fuller_tails_pass(self):
+        orphan = [self.section_start("11", "追问清单"), self.HEAD + [(80, self.BODY, 10)]]
+        self.assertTrue(any("孤页" in x for x in self.issues(orphan)))
+        # 四行以上的节末页、或这一页自己开了新节，都不算孤页
+        four = self.HEAD + [(80 + 15 * k, self.BODY, 10) for k in range(4)]
+        self.assertEqual(self.issues([self.section_start("11", "追问清单"), four, self.section_start("12", "核对与来源")]), [])
+        self.assertEqual(self.issues([self.full(), self.HEAD + [(80, "12 核对与来源", 18), (110, self.BODY, 10)]]), [])
+
+    def test_fit_class_is_added_once_and_upgraded(self):
+        doc = '<section data-section="10" data-kind="plan"><h2>10</h2></section><section class="newpage" data-section="11"><p>x</p></section>'
+        one = report.add_section_class(doc, "11", "fit")
+        self.assertIn('<section class="newpage fit" data-section="11">', one)
+        two = report.add_section_class(one, "11", "fit2")
+        self.assertIn('<section class="newpage fit2" data-section="11">', two)
+        self.assertIn('<section class="fit" data-section="10" data-kind="plan">', report.add_section_class(doc, "10", "fit"))
+
 
 class TestLayoutGate(unittest.TestCase):
     def test_gate_stops_on_issues(self):
