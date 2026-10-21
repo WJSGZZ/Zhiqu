@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "case_id": "2027-QZ-S05",
-  "manifest_sha256": "4de95a42d761fe03a364174d90cbcfd20af009a57cdf94fde498d9ebfd2d2387",
+  "manifest_sha256": "94ffd13c200a881060d6a98a990cf62098ed9829b909af09a74500a68bae8bfc",
   "source_sha256": {
     "case.json": "79136c0287d7e845b2308724e997d90b3b7a805e4fe2843da189774d6ec93a6e",
     "profile_parse.json": "abe812515ea2a27d78209f08c28c8bdde0a5c10d1672ef0983d66d68c6eece1a",
@@ -11,7 +11,7 @@
     "evidence.json": "a36a1d4072892ffd0e56b0ce2c425c1563b651a7113907892177e9ad2a5ffffe",
     "calculations.json": "89d7a293fd6780b562866f4871846b19130b0d86e79cb9f9c233e572cbae5b5d",
     "judgment.json": "89e67d8e39d0666399d8b470809425420fb18271c756578790e08248301ec3ff",
-    "narrative.json": "9399ea02de1b9d5dc7ffe2260cb93554617e29398a80294993e27a08c718ea84",
+    "narrative.json": "8cecd1ff1956e1331cccd6cbe5ad00cd0a76b61dbe3c3632e44e06c9a2d37e1b",
     "profile.json": "f8c7a4b076a64c168d303710ea8836b70a79ffe5d53ce7521045bfe4ae4c2d1f",
     "profile-supplement.txt": "247f31f22f4c9a6c33394b5b25e3b37ef21c19fd3b9c12a70a83839f7976b026"
   },
@@ -142,7 +142,17 @@
       "review": {
         "decision": "支持",
         "kind": "建议",
-        "reason": "结论句：本人想做企业财务（目标3由“自己”提出）、爸妈盼考公（E001“爸妈希望我考公务员”）均有出处；64.5 是计算项 fa_ok_median，口径为 2026 年度（上一届）缴费人数÷招录人数，并自注“只说明很挤”；其余是行动建议。"
+        "reason": "本人想做企业财务见 profile_parse 第6项“上市公司或者大一点民企的财务——自己”，爸妈盼考公见第17项原话；64.5 绑定计算项 fa_ok_median（上一届对口且条件符合职位的缴费人数÷招录人数中位数），句中自注“只说明很挤”；其余是建议。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "建议",
+          "reason": "结论句：本人想做企业财务（目标3由“自己”提出）、爸妈盼考公（E001“爸妈希望我考公务员”）均有出处；64.5 是计算项 fa_ok_median，口径为 2026 年度（上一届）缴费人数÷招录人数，并自注“只说明很挤”；其余是行动建议。"
+        }
       }
     },
     {
@@ -173,7 +183,17 @@
       "review": {
         "decision": "支持",
         "kind": "建议",
-        "reason": "三件事的日期 10-22、10-31、11-01 是 context.personal_dates 里的个人节点；10-22 早于 E005 国考注册认证截止 10 月 23 日，安排合理，属建议。"
+        "reason": "三个日期都绑定 context.personal_dates（10-22、10-31、11-01），是本报告给的个人行动节点；句子没有陈述任何官方截止日，作为行动安排成立。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "建议",
+          "reason": "三件事的日期 10-22、10-31、11-01 是 context.personal_dates 里的个人节点；10-22 早于 E005 国考注册认证截止 10 月 23 日，安排合理，属建议。"
+        }
       }
     },
     {
@@ -1934,11 +1954,21 @@
       "review": {
         "decision": "支持",
         "kind": "建议",
-        "reason": "G 的退路“春招扩到中小企业、财务共享中心”：财务共享与画像实训经历（字段 4“财务共享的实训课”）相关，属扩大目标的建议，E056 推测条目也记了“到年底仍无面试就扩大目标”。",
+        "reason": "流程图 G 节点（到年底无面试）的退路：财务共享与画像第4项“学校有ERP沙盘和财务共享的实训课”衔接，中小企业是放宽目标，属建议，不需要外部证据。",
         "reviewer": {
-          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "session_id": "claimcheck-s05-r5-20261021",
           "model": "Claude Opus 5.5",
           "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "建议",
+          "reason": "G 的退路“春招扩到中小企业、财务共享中心”：财务共享与画像实训经历（字段 4“财务共享的实训课”）相关，属扩大目标的建议，E056 推测条目也记了“到年底仍无面试就扩大目标”。",
+          "reviewer": {
+            "session_id": "claimcheck-qz-s05-r2-20261021",
+            "model": "Claude Opus 5.5",
+            "independent": true
+          }
         }
       }
     },
@@ -2120,11 +2150,21 @@
       "review": {
         "decision": "支持",
         "kind": "建议",
-        "reason": "F 的动作“比职责、合同、到手收入，再定”，比较项与本人到手底线 4500（字段 7）和 E032 缺口里列的合同主体、工资构成一致。",
+        "reason": "F 节点（有面试或录用）后的比较项：职责对应本人不接受销售指标（第18项），到手收入对应底线“最低到手月薪 4500 左右”（第7项），合同对应劳务派遣一题答“不了解”，是决策建议。",
         "reviewer": {
-          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "session_id": "claimcheck-s05-r5-20261021",
           "model": "Claude Opus 5.5",
           "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "建议",
+          "reason": "F 的动作“比职责、合同、到手收入，再定”，比较项与本人到手底线 4500（字段 7）和 E032 缺口里列的合同主体、工资构成一致。",
+          "reviewer": {
+            "session_id": "claimcheck-qz-s05-r2-20261021",
+            "model": "Claude Opus 5.5",
+            "independent": true
+          }
         }
       }
     },
@@ -3596,11 +3636,21 @@
       "review": {
         "decision": "支持",
         "kind": "建议",
-        "reason": "核心要点里的专业三档规则；“咨询电话”一栏在 E012 原件 20 列表头中确有，E048 目录显示财务管理属工商管理类，故类名职位须先电话确认而不是直接认定。",
+        "reason": "所引 E012 原件摘录里有“咨询电话列”，其专业名单逐字列出“财务管理”，可以按名单逐字比对、遇到只写类名的就打表中电话问；三档处理是保守的报名规则，没有断言工商管理类一定含财务管理。",
         "reviewer": {
-          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "session_id": "claimcheck-s05-r5-20261021",
           "model": "Claude Opus 5.5",
           "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "建议",
+          "reason": "核心要点里的专业三档规则；“咨询电话”一栏在 E012 原件 20 列表头中确有，E048 目录显示财务管理属工商管理类，故类名职位须先电话确认而不是直接认定。",
+          "reviewer": {
+            "session_id": "claimcheck-qz-s05-r2-20261021",
+            "model": "Claude Opus 5.5",
+            "independent": true
+          }
         }
       }
     },
@@ -5054,7 +5104,8 @@
       "text": "小桐想去企业做财务，爸妈希望先考公务员，再是银行、国企。",
       "expanded_text": "小桐想去企业做财务，爸妈希望先考公务员，再是银行、国企。",
       "evidence_refs": [
-        "E001"
+        "E001",
+        "E011"
       ],
       "evidence": [
         {
@@ -5068,14 +5119,28 @@
             "locator": "「优先级排序」「现实约束」两节"
           },
           "scope": "只用于本人意愿与家庭期待；不得据此认证岗位、收入或考试资格"
+        },
+        {
+          "id": "E011",
+          "excerpt": "",
+          "grade": "官方",
+          "status": "unretrieved",
+          "source": {
+            "organization": "浙江省公务员考试录用网首页",
+            "url": "http://gwy.zjks.gov.cn/",
+            "locator": "首页“招考公告”栏"
+          },
+          "scope": "截至取文日首页招考公告栏未见2027年度考试录用公告；不能推定已发布或不再举行"
         }
       ],
       "bindings": [],
-      "claim_id": "C72f9947cf7f2659158757a5b",
+      "claim_id": "C7ff5c4c42c15cddb0fd7d28e",
       "review": {
         "decision": "支持",
         "kind": "个人登记",
-        "reason": "E001 原文“爸妈希望我考公务员，考不上就去银行或者国企”，与“先考公务员，再是银行、国企”一致；“想去企业做财务”见画像「现实约束」。"
+        "reason": "E001 原文“爸妈希望我考公务员，考不上就去银行或者国企”，与“先考公务员，再是银行、国企”一致；“想去企业做财务”见画像「现实约束」。",
+        "carried_from": "C72f9947cf7f2659158757a5b",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E011"
       }
     },
     {
@@ -5084,7 +5149,8 @@
       "text": "这两边不必现在二选一：企业秋招已经在进行，省考2027年度公告截至出稿还没见到，两条线可以同时走，到公告出来、到年底各有一个该做选择的时点。",
       "expanded_text": "这两边不必现在二选一：企业秋招已经在进行，省考2027年度公告截至出稿还没见到，两条线可以同时走，到公告出来、到年底各有一个该做选择的时点。",
       "evidence_refs": [
-        "E001"
+        "E001",
+        "E011"
       ],
       "evidence": [
         {
@@ -5098,15 +5164,23 @@
             "locator": "「优先级排序」「现实约束」两节"
           },
           "scope": "只用于本人意愿与家庭期待；不得据此认证岗位、收入或考试资格"
+        },
+        {
+          "id": "E011",
+          "excerpt": "",
+          "grade": "官方",
+          "status": "unretrieved",
+          "source": {
+            "organization": "浙江省公务员考试录用网首页",
+            "url": "http://gwy.zjks.gov.cn/",
+            "locator": "首页“招考公告”栏"
+          },
+          "scope": "截至取文日首页招考公告栏未见2027年度考试录用公告；不能推定已发布或不再举行"
         }
       ],
       "bindings": [],
-      "claim_id": "C1f337e1dc3d7cba50633bb0f",
-      "review": {
-        "decision": "支持",
-        "kind": "事实",
-        "reason": "本句只引 E001。“省考2027年度公告截至出稿还没见到”与 E011 记录（截至取文日首页未见 2027 年度公告）一致，用“还没见到”而未写成“未发布”；“企业秋招已经在进行”有本人已投 5 家企业财务岗及 E033 工行 9—10 月秋招报名为据；两条证据在同报告其他句已引，本句缺引用但内容成立。"
-      }
+      "claim_id": "C2e6bcdba8b16da55c0ba1d11",
+      "review": null
     },
     {
       "section": "01",
@@ -6941,7 +7015,17 @@
       "review": {
         "decision": "支持",
         "kind": "推测",
-        "reason": "句中自标“推测，见第 8 节”；推理依据 E035“应在1个考试年度内通过全部科目的考试”与画像“实务过了，经济法基础没过”（第8节 E051 写明），推测成立且已标明。"
+        "reason": "“今年只过了实务”是本人原话（第5项“实务过了，经济法基础没过”）；“两科都要重考”句中已标“推测，见第 8 节”，同一考试年度须通过全部科目这一前提放在第8节，本句以推测身份保留符合规则。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "推测",
+          "reason": "句中自标“推测，见第 8 节”；推理依据 E035“应在1个考试年度内通过全部科目的考试”与画像“实务过了，经济法基础没过”（第8节 E051 写明），推测成立且已标明。"
+        }
       }
     },
     {
@@ -8227,7 +8311,17 @@
       "review": {
         "decision": "支持",
         "kind": "建议",
-        "reason": "“直签、交社保、在省内就回应大部分担心”与“偏远乡镇职位未必离家近”都是推理性判断；E012 摘录中确有“具体工作乡镇由当地组织部门统一分配”的职位，与后半句方向一致，句子未断言概率。"
+        "reason": "画像“家里最担心”勾了“收入不稳定”“离家太远”，城市打算写“回家乡或离家近”；直签、社保、在省内分别回应这两项担心，偏远乡镇职位未必离家近是推理，句子用“未必”，没有给概率。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "建议",
+          "reason": "“直签、交社保、在省内就回应大部分担心”与“偏远乡镇职位未必离家近”都是推理性判断；E012 摘录中确有“具体工作乡镇由当地组织部门统一分配”的职位，与后半句方向一致，句子未断言概率。"
+        }
       }
     },
     {
@@ -13817,14 +13911,24 @@
       "review": {
         "decision": "支持",
         "kind": "事实",
-        "reason": "“杭州调查中审计职业工资分位较高”：E020—E022 审计专业人员 25/50/75 分位 125831/169320/271200 元/年，高于 E017—E019 会计专业人员 69120/95000/138496；括注“不只事务所”符合范围注“杭州市家企业在岗人员”。",
+        "reason": "所引 E020 摘录审计专业人员 25／50／75 分位 125831／169320／271200，E017 摘录会计专业人员 69120／95000／138496，审计各分位都更高；E020 范围“杭州市家企业在岗人员”支撑“不只事务所”；加班出差偏好照本人第18项“偶尔加班可以；偶尔可以出差”。",
         "reviewer": {
-          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "session_id": "claimcheck-s05-r5-20261021",
           "model": "Claude Opus 5.5",
           "independent": true
         },
-        "carried_from": "C3b3d87ad12d4566386f3f495",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E031、E034、E047、E051"
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "事实",
+          "reason": "“杭州调查中审计职业工资分位较高”：E020—E022 审计专业人员 25/50/75 分位 125831/169320/271200 元/年，高于 E017—E019 会计专业人员 69120/95000/138496；括注“不只事务所”符合范围注“杭州市家企业在岗人员”。",
+          "reviewer": {
+            "session_id": "claimcheck-qz-s05-r2-20261021",
+            "model": "Claude Opus 5.5",
+            "independent": true
+          },
+          "carried_from": "C3b3d87ad12d4566386f3f495",
+          "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E031、E034、E047、E051"
+        }
       }
     },
     {
@@ -14163,6 +14267,9 @@
         "E017",
         "E018",
         "E019",
+        "E020",
+        "E021",
+        "E022",
         "E024"
       ],
       "evidence": [
@@ -14201,6 +14308,45 @@
             "organization": "2023年杭州市人力资源市场工资价位及行业人工成本信息（杭州市人力资源和社会保障局）",
             "url": "https://zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/jcms_files/jcms1/web3095/site/attach/0/cdc97ab7d30243db95368bb1c34b4cf3.pdf",
             "locator": "第13页 会计专业人员行 75%分位值",
+            "sha256": "7853501ef5272cc5571aff36c7c791b0832d25941ea319095cea28236240ee6d"
+          },
+          "scope": "杭州市家企业在岗人员（数据年2022）；全体工龄合计，不是应届起薪，也不是全省"
+        },
+        {
+          "id": "E020",
+          "excerpt": "审计专业人员 72030 125831 169320 271200 391689（单位：元/年；列为10%、25%、50%、75%、90%分位值）",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "2023年杭州市人力资源市场工资价位及行业人工成本信息（杭州市人力资源和社会保障局）",
+            "url": "https://zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/jcms_files/jcms1/web3095/site/attach/0/cdc97ab7d30243db95368bb1c34b4cf3.pdf",
+            "locator": "第13页 审计专业人员行 25%分位值",
+            "sha256": "7853501ef5272cc5571aff36c7c791b0832d25941ea319095cea28236240ee6d"
+          },
+          "scope": "杭州市家企业在岗人员（数据年2022）；全体工龄合计，不是应届起薪，也不是全省"
+        },
+        {
+          "id": "E021",
+          "excerpt": "审计专业人员 72030 125831 169320 271200 391689（单位：元/年；列为10%、25%、50%、75%、90%分位值）",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "2023年杭州市人力资源市场工资价位及行业人工成本信息（杭州市人力资源和社会保障局）",
+            "url": "https://zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/jcms_files/jcms1/web3095/site/attach/0/cdc97ab7d30243db95368bb1c34b4cf3.pdf",
+            "locator": "第13页 审计专业人员行 50%分位值",
+            "sha256": "7853501ef5272cc5571aff36c7c791b0832d25941ea319095cea28236240ee6d"
+          },
+          "scope": "杭州市家企业在岗人员（数据年2022）；全体工龄合计，不是应届起薪，也不是全省"
+        },
+        {
+          "id": "E022",
+          "excerpt": "审计专业人员 72030 125831 169320 271200 391689（单位：元/年；列为10%、25%、50%、75%、90%分位值）",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "2023年杭州市人力资源市场工资价位及行业人工成本信息（杭州市人力资源和社会保障局）",
+            "url": "https://zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/jcms_files/jcms1/web3095/site/attach/0/cdc97ab7d30243db95368bb1c34b4cf3.pdf",
+            "locator": "第13页 审计专业人员行 75%分位值",
             "sha256": "7853501ef5272cc5571aff36c7c791b0832d25941ea319095cea28236240ee6d"
           },
           "scope": "杭州市家企业在岗人员（数据年2022）；全体工龄合计，不是应届起薪，也不是全省"
@@ -14220,11 +14366,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C6520ebddd7cc1532707d5f1e",
+      "claim_id": "C64d4b7a6b70d9a9cf3c438d9",
       "review": {
         "decision": "支持",
         "kind": "建议",
-        "reason": "“工资只能看大致高低”是读数方法，依据 E017、E024 范围“全体工龄合计，不是应届起薪”。"
+        "reason": "“工资只能看大致高低”是读数方法，依据 E017、E024 范围“全体工龄合计，不是应届起薪”。",
+        "carried_from": "C6520ebddd7cc1532707d5f1e",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E020、E021、E022"
       }
     },
     {
@@ -14236,6 +14384,9 @@
         "E017",
         "E018",
         "E019",
+        "E020",
+        "E021",
+        "E022",
         "E024"
       ],
       "evidence": [
@@ -14274,6 +14425,45 @@
             "organization": "2023年杭州市人力资源市场工资价位及行业人工成本信息（杭州市人力资源和社会保障局）",
             "url": "https://zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/jcms_files/jcms1/web3095/site/attach/0/cdc97ab7d30243db95368bb1c34b4cf3.pdf",
             "locator": "第13页 会计专业人员行 75%分位值",
+            "sha256": "7853501ef5272cc5571aff36c7c791b0832d25941ea319095cea28236240ee6d"
+          },
+          "scope": "杭州市家企业在岗人员（数据年2022）；全体工龄合计，不是应届起薪，也不是全省"
+        },
+        {
+          "id": "E020",
+          "excerpt": "审计专业人员 72030 125831 169320 271200 391689（单位：元/年；列为10%、25%、50%、75%、90%分位值）",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "2023年杭州市人力资源市场工资价位及行业人工成本信息（杭州市人力资源和社会保障局）",
+            "url": "https://zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/jcms_files/jcms1/web3095/site/attach/0/cdc97ab7d30243db95368bb1c34b4cf3.pdf",
+            "locator": "第13页 审计专业人员行 25%分位值",
+            "sha256": "7853501ef5272cc5571aff36c7c791b0832d25941ea319095cea28236240ee6d"
+          },
+          "scope": "杭州市家企业在岗人员（数据年2022）；全体工龄合计，不是应届起薪，也不是全省"
+        },
+        {
+          "id": "E021",
+          "excerpt": "审计专业人员 72030 125831 169320 271200 391689（单位：元/年；列为10%、25%、50%、75%、90%分位值）",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "2023年杭州市人力资源市场工资价位及行业人工成本信息（杭州市人力资源和社会保障局）",
+            "url": "https://zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/jcms_files/jcms1/web3095/site/attach/0/cdc97ab7d30243db95368bb1c34b4cf3.pdf",
+            "locator": "第13页 审计专业人员行 50%分位值",
+            "sha256": "7853501ef5272cc5571aff36c7c791b0832d25941ea319095cea28236240ee6d"
+          },
+          "scope": "杭州市家企业在岗人员（数据年2022）；全体工龄合计，不是应届起薪，也不是全省"
+        },
+        {
+          "id": "E022",
+          "excerpt": "审计专业人员 72030 125831 169320 271200 391689（单位：元/年；列为10%、25%、50%、75%、90%分位值）",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "2023年杭州市人力资源市场工资价位及行业人工成本信息（杭州市人力资源和社会保障局）",
+            "url": "https://zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/jcms_files/jcms1/web3095/site/attach/0/cdc97ab7d30243db95368bb1c34b4cf3.pdf",
+            "locator": "第13页 审计专业人员行 75%分位值",
             "sha256": "7853501ef5272cc5571aff36c7c791b0832d25941ea319095cea28236240ee6d"
           },
           "scope": "杭州市家企业在岗人员（数据年2022）；全体工龄合计，不是应届起薪，也不是全省"
@@ -14314,22 +14504,27 @@
           "value": 81580
         }
       ],
-      "claim_id": "C67f111022e952e50d3f31df7",
+      "claim_id": "Ce1113db9c9fc9aa746c71926",
       "review": {
         "decision": "支持",
         "kind": "事实",
-        "reason": "¥95,000 为 E018 中位数，¥69,120—¥138,496 为 E017/E019 的 25%—75% 分位，¥81,580 为 E024“3（含）年以下”中位数；对象“杭州全体企业在岗”与范围注一致。"
+        "reason": "¥95,000 为 E018 中位数，¥69,120—¥138,496 为 E017/E019 的 25%—75% 分位，¥81,580 为 E024“3（含）年以下”中位数；对象“杭州全体企业在岗”与范围注一致。",
+        "carried_from": "C67f111022e952e50d3f31df7",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E020、E021、E022"
       }
     },
     {
       "section": "04",
       "location": "narrative.json#/sections/04/analysis/1/content/text:sentence3",
-      "text": "这些是各种工龄混在一起的数，不是应届起薪，数据年份也较早，只能说明会计岗位整体不算高、审计明显更高。",
-      "expanded_text": "这些是各种工龄混在一起的数，不是应届起薪，数据年份也较早，只能说明会计岗位整体不算高、审计明显更高。",
+      "text": "这些是各种工龄混在一起的数，不是应届起薪，数据年份也较早，只能说明审计岗位的工资明显高于会计岗位。",
+      "expanded_text": "这些是各种工龄混在一起的数，不是应届起薪，数据年份也较早，只能说明审计岗位的工资明显高于会计岗位。",
       "evidence_refs": [
         "E017",
         "E018",
         "E019",
+        "E020",
+        "E021",
+        "E022",
         "E024"
       ],
       "evidence": [
@@ -14373,6 +14568,45 @@
           "scope": "杭州市家企业在岗人员（数据年2022）；全体工龄合计，不是应届起薪，也不是全省"
         },
         {
+          "id": "E020",
+          "excerpt": "审计专业人员 72030 125831 169320 271200 391689（单位：元/年；列为10%、25%、50%、75%、90%分位值）",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "2023年杭州市人力资源市场工资价位及行业人工成本信息（杭州市人力资源和社会保障局）",
+            "url": "https://zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/jcms_files/jcms1/web3095/site/attach/0/cdc97ab7d30243db95368bb1c34b4cf3.pdf",
+            "locator": "第13页 审计专业人员行 25%分位值",
+            "sha256": "7853501ef5272cc5571aff36c7c791b0832d25941ea319095cea28236240ee6d"
+          },
+          "scope": "杭州市家企业在岗人员（数据年2022）；全体工龄合计，不是应届起薪，也不是全省"
+        },
+        {
+          "id": "E021",
+          "excerpt": "审计专业人员 72030 125831 169320 271200 391689（单位：元/年；列为10%、25%、50%、75%、90%分位值）",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "2023年杭州市人力资源市场工资价位及行业人工成本信息（杭州市人力资源和社会保障局）",
+            "url": "https://zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/jcms_files/jcms1/web3095/site/attach/0/cdc97ab7d30243db95368bb1c34b4cf3.pdf",
+            "locator": "第13页 审计专业人员行 50%分位值",
+            "sha256": "7853501ef5272cc5571aff36c7c791b0832d25941ea319095cea28236240ee6d"
+          },
+          "scope": "杭州市家企业在岗人员（数据年2022）；全体工龄合计，不是应届起薪，也不是全省"
+        },
+        {
+          "id": "E022",
+          "excerpt": "审计专业人员 72030 125831 169320 271200 391689（单位：元/年；列为10%、25%、50%、75%、90%分位值）",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "2023年杭州市人力资源市场工资价位及行业人工成本信息（杭州市人力资源和社会保障局）",
+            "url": "https://zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/jcms_files/jcms1/web3095/site/attach/0/cdc97ab7d30243db95368bb1c34b4cf3.pdf",
+            "locator": "第13页 审计专业人员行 75%分位值",
+            "sha256": "7853501ef5272cc5571aff36c7c791b0832d25941ea319095cea28236240ee6d"
+          },
+          "scope": "杭州市家企业在岗人员（数据年2022）；全体工龄合计，不是应届起薪，也不是全省"
+        },
+        {
           "id": "E024",
           "excerpt": "3（含）年以下 46986 60000 81580 121000 187680（九、分工龄企业从业人员工资价位，单位：元/年）",
           "grade": "官方",
@@ -14387,12 +14621,8 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C67536aa5517a9f0c650e6551",
-      "review": {
-        "decision": "支持",
-        "kind": "事实",
-        "reason": "“工龄混在一起、不是应届起薪、年份较早”与 E017 等范围注一致；“会计整体不算高、审计明显更高”可由同表会计中位数 95000 低于大学本科中位数 162899（E027）、审计中位数 169320（E021）印证，这两条证据在本节其他句已引。"
-      }
+      "claim_id": "C952bb912e106d475d574cc88",
+      "review": null
     },
     {
       "section": "04",
@@ -14694,7 +14924,17 @@
       "review": {
         "decision": "支持",
         "kind": "事实",
-        "reason": "evidence.json 中没有公务员、银行或国网的收入条目（E033/E034 只涉报名时间与对象，E029/E030/E049/E050 只涉公告、笔试、声明、附件），“没有取到可比的官方数据、不编区间”属实。"
+        "reason": "本句讲本案取到了什么：evidence.json 的收入类条目只有杭州工资价位 E017—E028（本句引了 E021），没有公务员、银行、国网的收入条目；所引 E043、E044、E053 只讲招聘对象；句子说“没有取到”而不是“不存在”。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "事实",
+          "reason": "evidence.json 中没有公务员、银行或国网的收入条目（E033/E034 只涉报名时间与对象，E029/E030/E049/E050 只涉公告、笔试、声明、附件），“没有取到可比的官方数据、不编区间”属实。"
+        }
       }
     },
     {
@@ -15161,14 +15401,24 @@
       "review": {
         "decision": "支持",
         "kind": "推测",
-        "reason": "企业财务日常职责一格开头写“一般经验（未取得岗位原文）”，与 E032 未取得状态一致，列出的录凭证等四项是经验描述。",
+        "reason": "格内自标“一般经验（未取得岗位原文）”，是明示的经验推测；本案确无企业财务岗位原文，四项职责与本人实习做过的录凭证、目标“应收应付、费用核算”（第4、6项）同类。",
         "reviewer": {
-          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "session_id": "claimcheck-s05-r5-20261021",
           "model": "Claude Opus 5.5",
           "independent": true
         },
-        "carried_from": "C2a980c70461be502ed6f3b8d",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E047、E050"
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "推测",
+          "reason": "企业财务日常职责一格开头写“一般经验（未取得岗位原文）”，与 E032 未取得状态一致，列出的录凭证等四项是经验描述。",
+          "reviewer": {
+            "session_id": "claimcheck-qz-s05-r2-20261021",
+            "model": "Claude Opus 5.5",
+            "independent": true
+          },
+          "carried_from": "C2a980c70461be502ed6f3b8d",
+          "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E047、E050"
+        }
       }
     },
     {
@@ -18571,14 +18821,24 @@
       "review": {
         "decision": "支持",
         "kind": "事实",
-        "reason": "事务所收入依据是 E020—E022 杭州“审计专业人员”分位，范围注为全体企业在岗人员，图注“不只事务所”与之相符。",
+        "reason": "所引 E021 摘录即“审计专业人员 72030 125831 169320 271200 391689”，范围“杭州市家企业在岗人员”，图注“收入依据是杭州企业审计职业的工资分位，不只事务所”与之一致。",
         "reviewer": {
-          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "session_id": "claimcheck-s05-r5-20261021",
           "model": "Claude Opus 5.5",
           "independent": true
         },
-        "carried_from": "Cedc2639905cf9e6736b1c5c4",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E018、E021"
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "事实",
+          "reason": "事务所收入依据是 E020—E022 杭州“审计专业人员”分位，范围注为全体企业在岗人员，图注“不只事务所”与之相符。",
+          "reviewer": {
+            "session_id": "claimcheck-qz-s05-r2-20261021",
+            "model": "Claude Opus 5.5",
+            "independent": true
+          },
+          "carried_from": "Cedc2639905cf9e6736b1c5c4",
+          "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E018、E021"
+        }
       }
     },
     {
@@ -20863,14 +21123,24 @@
       "review": {
         "decision": "支持",
         "kind": "事实",
-        "reason": "企业财务×收入打半圆“分位作参照”：只有 E017—E019 杭州会计专业人员在岗分位，范围注明不是应届起薪，因此不能打勾。",
+        "reason": "企业财务×收入依据：所引 E018 是杭州会计专业人员分位（中位 95000），范围注明“不是应届起薪”，只能作参照，所以打半圆。",
         "reviewer": {
-          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "session_id": "claimcheck-s05-r5-20261021",
           "model": "Claude Opus 5.5",
           "independent": true
         },
-        "carried_from": "Ca1e756150d5f811898837614",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E018、E021"
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "事实",
+          "reason": "企业财务×收入打半圆“分位作参照”：只有 E017—E019 杭州会计专业人员在岗分位，范围注明不是应届起薪，因此不能打勾。",
+          "reviewer": {
+            "session_id": "claimcheck-qz-s05-r2-20261021",
+            "model": "Claude Opus 5.5",
+            "independent": true
+          },
+          "carried_from": "Ca1e756150d5f811898837614",
+          "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E018、E021"
+        }
       }
     },
     {
@@ -22964,14 +23234,24 @@
       "review": {
         "decision": "支持",
         "kind": "事实",
-        "reason": "国考×资格打半圆“逐岗核”：E046 记招考简章下载需图形验证码未取，职位条件无法替她核。",
+        "reason": "国考×资格能否核：所引 E002 原文要求“具备…拟任职位所要求的其他资格条件”，并按机构层级区分基层经历与应届生，资格随职位而定，只能逐岗核。",
         "reviewer": {
-          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "session_id": "claimcheck-s05-r5-20261021",
           "model": "Claude Opus 5.5",
           "independent": true
         },
-        "carried_from": "Cb039aec3dec74e24427b7c83",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E018、E021"
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "事实",
+          "reason": "国考×资格打半圆“逐岗核”：E046 记招考简章下载需图形验证码未取，职位条件无法替她核。",
+          "reviewer": {
+            "session_id": "claimcheck-qz-s05-r2-20261021",
+            "model": "Claude Opus 5.5",
+            "independent": true
+          },
+          "carried_from": "Cb039aec3dec74e24427b7c83",
+          "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E018、E021"
+        }
       }
     },
     {
@@ -23155,14 +23435,24 @@
       "review": {
         "decision": "支持",
         "kind": "事实",
-        "reason": "国考×竞争打半圆“未统计”：E046 职位表未取得，证据库也无国考报名人数，故无竞争数据。",
+        "reason": "国考×竞争数据：本案的缴费人数只有浙江省考 E013（本矩阵已引），calculations.json 也没有国考竞争比，“未统计”如实。",
         "reviewer": {
-          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "session_id": "claimcheck-s05-r5-20261021",
           "model": "Claude Opus 5.5",
           "independent": true
         },
-        "carried_from": "C7f3fc9711fb0080c9ee89801",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E018、E021"
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "事实",
+          "reason": "国考×竞争打半圆“未统计”：E046 职位表未取得，证据库也无国考报名人数，故无竞争数据。",
+          "reviewer": {
+            "session_id": "claimcheck-qz-s05-r2-20261021",
+            "model": "Claude Opus 5.5",
+            "independent": true
+          },
+          "carried_from": "C7f3fc9711fb0080c9ee89801",
+          "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E018、E021"
+        }
       }
     },
     {
@@ -23346,14 +23636,24 @@
       "review": {
         "decision": "支持",
         "kind": "个人登记",
-        "reason": "国考×准备投入同样打叉“从零备考”：国考笔试也考行测、申论（E004），本人没做过模考。",
+        "reason": "国考×准备投入：画像第21项“做过行测、申论或企业笔试的模考吗：没做过”，所以写“从零备考”；这是本人准备状态，不需要国考科目原文。",
         "reviewer": {
-          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "session_id": "claimcheck-s05-r5-20261021",
           "model": "Claude Opus 5.5",
           "independent": true
         },
-        "carried_from": "C4be37061f737b2cf634989d0",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E018、E021"
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "个人登记",
+          "reason": "国考×准备投入同样打叉“从零备考”：国考笔试也考行测、申论（E004），本人没做过模考。",
+          "reviewer": {
+            "session_id": "claimcheck-qz-s05-r2-20261021",
+            "model": "Claude Opus 5.5",
+            "independent": true
+          },
+          "carried_from": "C4be37061f737b2cf634989d0",
+          "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E018、E021"
+        }
       }
     },
     {
@@ -26020,14 +26320,24 @@
       "review": {
         "decision": "支持",
         "kind": "事实",
-        "reason": "银行×准备投入打半圆“笔试待核”：E033/E034 只取到报名时间与招聘对象，笔试安排未取。",
+        "reason": "银行×准备投入：所引 E033 只摘到工行“网上报名…2026年9月4日-10月8日”，没有笔试安排，所以笔试待核。",
         "reviewer": {
-          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "session_id": "claimcheck-s05-r5-20261021",
           "model": "Claude Opus 5.5",
           "independent": true
         },
-        "carried_from": "C2068ec98a65320e6d96e0afc",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E018、E021"
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "事实",
+          "reason": "银行×准备投入打半圆“笔试待核”：E033/E034 只取到报名时间与招聘对象，笔试安排未取。",
+          "reviewer": {
+            "session_id": "claimcheck-qz-s05-r2-20261021",
+            "model": "Claude Opus 5.5",
+            "independent": true
+          },
+          "carried_from": "C2068ec98a65320e6d96e0afc",
+          "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E018、E021"
+        }
       }
     },
     {
@@ -26975,14 +27285,24 @@
       "review": {
         "decision": "支持",
         "kind": "事实",
-        "reason": "事务所×资格打半圆“逐所核”：E043/E044/E053 只给出学历、专业的概括说法，具体岗位条件以网申页为准。",
+        "reason": "事务所×资格：本矩阵所引证据里没有任何事务所的具体岗位原文，本案只有各所招聘首页的概括说法，资格条件还没逐所核过，半圆表示待核状态。",
         "reviewer": {
-          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "session_id": "claimcheck-s05-r5-20261021",
           "model": "Claude Opus 5.5",
           "independent": true
         },
-        "carried_from": "Cd4e2bc7d0471b3b9aa992d28",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E018、E021"
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "事实",
+          "reason": "事务所×资格打半圆“逐所核”：E043/E044/E053 只给出学历、专业的概括说法，具体岗位条件以网申页为准。",
+          "reviewer": {
+            "session_id": "claimcheck-qz-s05-r2-20261021",
+            "model": "Claude Opus 5.5",
+            "independent": true
+          },
+          "carried_from": "Cd4e2bc7d0471b3b9aa992d28",
+          "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E018、E021"
+        }
       }
     },
     {
@@ -27357,14 +27677,24 @@
       "review": {
         "decision": "支持",
         "kind": "建议",
-        "reason": "事务所×准备投入打勾“专业对口”：财务管理本科，E053 安永面向本科不限专业、E043 毕马威要学士学位，专业不构成额外准备门槛。",
+        "reason": "事务所×准备投入：本人主修财务管理（第1项），所引 E012 那条“从事内部审计工作”的职位专业名单里财务管理与审计学并列，做审计不必先补专业门槛，准备投入一栏打勾成立。",
         "reviewer": {
-          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "session_id": "claimcheck-s05-r5-20261021",
           "model": "Claude Opus 5.5",
           "independent": true
         },
-        "carried_from": "C0d5b1fd86b2ca2f9774bf92b",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E018、E021"
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "建议",
+          "reason": "事务所×准备投入打勾“专业对口”：财务管理本科，E053 安永面向本科不限专业、E043 毕马威要学士学位，专业不构成额外准备门槛。",
+          "reviewer": {
+            "session_id": "claimcheck-qz-s05-r2-20261021",
+            "model": "Claude Opus 5.5",
+            "independent": true
+          },
+          "carried_from": "C0d5b1fd86b2ca2f9774bf92b",
+          "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E018、E021"
+        }
       }
     },
     {
@@ -27866,7 +28196,17 @@
       "review": {
         "decision": "支持",
         "kind": "事实",
-        "reason": "案内唯一的职位级原文 E012 是上一届省考职位表，E032 企业岗位、E046 国考职位表、E047 国网浙江公告均未取得，E033 只是工行总启事；“还没有一份具体的招聘原文、不能说已经能报”成立。"
+        "reason": "本案职位级原文只有上一届省考职位表 E012；当届企业岗位（E032）、国考职位表（E046）、国网浙江公告（E047）都没取到，所以清单只能列类型和待核条件，不说“已经能报”，这是本案资料持有情况。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "事实",
+          "reason": "案内唯一的职位级原文 E012 是上一届省考职位表，E032 企业岗位、E046 国考职位表、E047 国网浙江公告均未取得，E033 只是工行总启事；“还没有一份具体的招聘原文、不能说已经能报”成立。"
+        }
       }
     },
     {
@@ -32769,14 +33109,24 @@
       "review": {
         "decision": "支持",
         "kind": "建议",
-        "reason": "国考门槛逐岗核专业、学历、应届、基层经历、性别、政治面貌；E002 原文“具备……拟任职位所要求的其他资格条件”，且 E046 职位表未取，只能逐岗核。",
+        "reason": "国考门槛：所引 E002 列出“拟任职位所要求的其他资格条件”和基层经历、应届生的区分；性别、政治面貌这类职位级条件在所引 E012 上一届浙江职位表里出现过（备注“要求男性”），逐岗核这几项合理。",
         "reviewer": {
-          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "session_id": "claimcheck-s05-r5-20261021",
           "model": "Claude Opus 5.5",
           "independent": true
         },
-        "carried_from": "Cfdcb0dd40b5ef6e00dc71280",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E002、E031、E033、E034、E047"
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "建议",
+          "reason": "国考门槛逐岗核专业、学历、应届、基层经历、性别、政治面貌；E002 原文“具备……拟任职位所要求的其他资格条件”，且 E046 职位表未取，只能逐岗核。",
+          "reviewer": {
+            "session_id": "claimcheck-qz-s05-r2-20261021",
+            "model": "Claude Opus 5.5",
+            "independent": true
+          },
+          "carried_from": "Cfdcb0dd40b5ef6e00dc71280",
+          "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E002、E031、E033、E034、E047"
+        }
       }
     },
     {
@@ -32946,14 +33296,24 @@
       "review": {
         "decision": "支持",
         "kind": "建议",
-        "reason": "国考匹配一格“取决于是否有本人愿去的职位”，因职位表未取（E046）且本人未选国考路线，条件式表述恰当。",
+        "reason": "画像第6项本人与父母列的目标里没有国考，所以“本人匹配”写成条件句；所引 E002 表明资格按职位定，有没有合适职位要看职位表。",
         "reviewer": {
-          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "session_id": "claimcheck-s05-r5-20261021",
           "model": "Claude Opus 5.5",
           "independent": true
         },
-        "carried_from": "Cf7a51b57305c5dff40543c4c",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E002、E031、E033、E034、E047"
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "建议",
+          "reason": "国考匹配一格“取决于是否有本人愿去的职位”，因职位表未取（E046）且本人未选国考路线，条件式表述恰当。",
+          "reviewer": {
+            "session_id": "claimcheck-qz-s05-r2-20261021",
+            "model": "Claude Opus 5.5",
+            "independent": true
+          },
+          "carried_from": "Cf7a51b57305c5dff40543c4c",
+          "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E002、E031、E033、E034、E047"
+        }
       }
     },
     {
@@ -33300,14 +33660,24 @@
       "review": {
         "decision": "支持",
         "kind": "结构标签",
-        "reason": "候选第 5 行目标“国网浙江财会类”，E050 显示国网设有财务会计类考试大纲。",
+        "reason": "候选第5行名“国网浙江财会类”：所引 E031 范围注“国网浙江是否招财会类、专业要求，须看浙江单位公告”，E047 是国网浙江 2027 第一批公告条目，行名与之对应。",
         "reviewer": {
-          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "session_id": "claimcheck-s05-r5-20261021",
           "model": "Claude Opus 5.5",
           "independent": true
         },
-        "carried_from": "Ccda0a7a8b6ee9db25375a0a3",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E002、E031、E033、E034、E047"
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "结构标签",
+          "reason": "候选第 5 行目标“国网浙江财会类”，E050 显示国网设有财务会计类考试大纲。",
+          "reviewer": {
+            "session_id": "claimcheck-qz-s05-r2-20261021",
+            "model": "Claude Opus 5.5",
+            "independent": true
+          },
+          "carried_from": "Ccda0a7a8b6ee9db25375a0a3",
+          "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E002、E031、E033、E034、E047"
+        }
       }
     },
     {
@@ -33477,14 +33847,24 @@
       "review": {
         "decision": "支持",
         "kind": "建议",
-        "reason": "国网门槛要核“浙江公告是否招财会类、专业要求”，对应 E031“各批次招聘单位范围……以各单位招聘公告为准”和 E050 范围注。",
+        "reason": "所引 E031 原文“各批次招聘单位范围由各单位根据招聘需求确定，以各单位招聘公告为准”，E047 浙江公告尚未取到，所以要核的正是浙江公告招不招财会类、专业要求。",
         "reviewer": {
-          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "session_id": "claimcheck-s05-r5-20261021",
           "model": "Claude Opus 5.5",
           "independent": true
         },
-        "carried_from": "C9018f021667e0eb799989829",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E002、E031、E033、E034、E047"
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "建议",
+          "reason": "国网门槛要核“浙江公告是否招财会类、专业要求”，对应 E031“各批次招聘单位范围……以各单位招聘公告为准”和 E050 范围注。",
+          "reviewer": {
+            "session_id": "claimcheck-qz-s05-r2-20261021",
+            "model": "Claude Opus 5.5",
+            "independent": true
+          },
+          "carried_from": "C9018f021667e0eb799989829",
+          "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E002、E031、E033、E034、E047"
+        }
       }
     },
     {
@@ -34899,14 +35279,24 @@
       "review": {
         "decision": "支持",
         "kind": "建议",
-        "reason": "事务所门槛“忙季加班出差多少、专业要求：逐所核”，与 E043/E053 页面注明具体以网申页为准一致。",
+        "reason": "事务所门槛列的是待问事项：加班出差对应本人只接受“偶尔加班”“偶尔出差”（第18项）和学姐说“四大很累”（第24项），专业要求逐所核是检查动作，句子不陈述某所的具体条件。",
         "reviewer": {
-          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "session_id": "claimcheck-s05-r5-20261021",
           "model": "Claude Opus 5.5",
           "independent": true
         },
-        "carried_from": "Ca368449896101cfb71907dd8",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E002、E031、E033、E034、E047"
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "建议",
+          "reason": "事务所门槛“忙季加班出差多少、专业要求：逐所核”，与 E043/E053 页面注明具体以网申页为准一致。",
+          "reviewer": {
+            "session_id": "claimcheck-qz-s05-r2-20261021",
+            "model": "Claude Opus 5.5",
+            "independent": true
+          },
+          "carried_from": "Ca368449896101cfb71907dd8",
+          "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E002、E031、E033、E034、E047"
+        }
       }
     },
     {
@@ -35793,11 +36183,21 @@
       "review": {
         "decision": "支持",
         "kind": "结构标签",
-        "reason": "“这是上一届的数，今年的职位要等新公告”，提醒年份口径，与 E011 新公告未见一致。",
+        "reason": "所引 E012 范围“2026年度全部 4004 个职位”、E013 范围“2026年度 4075 个职位”，相对 2027 年度目标都是上一届；当年职位只能以新一年度公告为准，这是年份口径提醒。",
         "reviewer": {
-          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "session_id": "claimcheck-s05-r5-20261021",
           "model": "Claude Opus 5.5",
           "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "结构标签",
+          "reason": "“这是上一届的数，今年的职位要等新公告”，提醒年份口径，与 E011 新公告未见一致。",
+          "reviewer": {
+            "session_id": "claimcheck-qz-s05-r2-20261021",
+            "model": "Claude Opus 5.5",
+            "independent": true
+          }
         }
       }
     },
@@ -42923,11 +43323,21 @@
       "review": {
         "decision": "支持",
         "kind": "事实",
-        "reason": "“国网总公告计划第一批招聘公告在 2026年11月中旬 发布”对 E029；“笔试暂定 2026 年 12 月 6 日”对 E030“时间初定……第一批2026年12月6日”；浙江单位待核对 E031。",
+        "reason": "所引 E029 原文“第一批2026年11月中旬”，E030 原文“第一批2026年12月6日”且“时间初定”，句中写“暂定”；E029 范围“2027总部计划，不代替浙江单位公告”，所以括注浙江是否在第一批待核。",
         "reviewer": {
-          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "session_id": "claimcheck-s05-r5-20261021",
           "model": "Claude Opus 5.5",
           "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "事实",
+          "reason": "“国网总公告计划第一批招聘公告在 2026年11月中旬 发布”对 E029；“笔试暂定 2026 年 12 月 6 日”对 E030“时间初定……第一批2026年12月6日”；浙江单位待核对 E031。",
+          "reviewer": {
+            "session_id": "claimcheck-qz-s05-r2-20261021",
+            "model": "Claude Opus 5.5",
+            "independent": true
+          }
         }
       }
     },
@@ -43100,7 +43510,17 @@
       "review": {
         "decision": "支持",
         "kind": "建议",
-        "reason": "年底检查点：看企业面试情况与财政部新通知，是安排建议，与 E056 推理一致。"
+        "reason": "年底检查点：本人已投 5 家、2 家没回音、3 家没消息（第27项），到年底看有无面试再定春招范围；初级会计本人明年还要考（第5项），所以提醒看财政部新一年度通知；都是安排建议。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "建议",
+          "reason": "年底检查点：看企业面试情况与财政部新通知，是安排建议，与 E056 推理一致。"
+        }
       }
     },
     {
@@ -43322,7 +43742,17 @@
       "review": {
         "decision": "支持",
         "kind": "事实",
-        "reason": "本句只引 E001、E032；“秋招现在就在进行”可由 E033 工行 9—10 月报名、E029 国网 10—11 月批次及本人已投 5 家印证，“截止以招聘原文为准”是提醒，内容成立。"
+        "reason": "本人已投 5 家企业财务岗、3 家还没消息（第27项），说明企业秋招正在进行；所引 E032 缺口写具体岗位原文未取得，所以截止日只能以各家招聘原文为准；“春招在明年春季”是招聘季名称本身的含义。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "事实",
+          "reason": "本句只引 E001、E032；“秋招现在就在进行”可由 E033 工行 9—10 月报名、E029 国网 10—11 月批次及本人已投 5 家印证，“截止以招聘原文为准”是提醒，内容成立。"
+        }
       }
     },
     {
@@ -43422,7 +43852,17 @@
       "review": {
         "decision": "支持",
         "kind": "建议",
-        "reason": "切换条件以 12-31 为界（个人节点 year_end），与 E056“到年底仍无面试就扩大目标”一致；“出纳兼销售就退出”对应本人不接受销售指标。"
+        "reason": "切换日绑定个人日期 year_end＝2026-12-31；扩到代理记账转正对应本人在代理记账公司实习六周（第4项），出纳兼销售就退出对应“不能接受有销售指标的岗位”（第18项）；所引 E032 记岗位原文未取，岗位实质要看原文。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "建议",
+          "reason": "切换条件以 12-31 为界（个人节点 year_end），与 E056“到年底仍无面试就扩大目标”一致；“出纳兼销售就退出”对应本人不接受销售指标。"
+        }
       }
     },
     {
@@ -49370,11 +49810,21 @@
       "review": {
         "decision": "支持",
         "kind": "建议",
-        "reason": "“合同签哪家公司？”是核查合同主体的问题，对应 E032 gap 中的“合同主体”。",
+        "reason": "问合同签哪家公司是核实用人主体；画像劳务派遣一题答“不了解”，同格后文接着问直签还是派遣、外包，属待问问题，不是事实断言。",
         "reviewer": {
-          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "session_id": "claimcheck-s05-r5-20261021",
           "model": "Claude Opus 5.5",
           "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "建议",
+          "reason": "“合同签哪家公司？”是核查合同主体的问题，对应 E032 gap 中的“合同主体”。",
+          "reviewer": {
+            "session_id": "claimcheck-qz-s05-r2-20261021",
+            "model": "Claude Opus 5.5",
+            "independent": true
+          }
         }
       }
     },
@@ -49468,11 +49918,21 @@
       "review": {
         "decision": "支持",
         "kind": "建议",
-        "reason": "“试用期多长、社保公积金按什么基数？”对应 E032 gap 中试用期等未取项，是待问问题。",
+        "reason": "问试用期和社保公积金基数，直接关系本人底线“最低到手月薪 4500 左右”（第7项）能否达到；画像“缴过单位职工社保吗”答“否”，本人没有这方面经验，属待问问题。",
         "reviewer": {
-          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "session_id": "claimcheck-s05-r5-20261021",
           "model": "Claude Opus 5.5",
           "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "建议",
+          "reason": "“试用期多长、社保公积金按什么基数？”对应 E032 gap 中试用期等未取项，是待问问题。",
+          "reviewer": {
+            "session_id": "claimcheck-qz-s05-r2-20261021",
+            "model": "Claude Opus 5.5",
+            "independent": true
+          }
         }
       }
     },
@@ -49909,11 +50369,21 @@
       "review": {
         "decision": "支持",
         "kind": "建议",
-        "reason": "问三方违约金、解约流程和毕业后多久仍算应届，对应画像“签过三方协议吗：否”及 E056 推测条目“签三方前先问违约与解约”。",
+        "reason": "画像“签过三方协议吗：否”；所引 E012 上一届职位要求“2026年应届毕业生”，本人 2027-06 毕业（第2项），所以要问毕业后多久仍算应届、三方违约与解约，衔接企业签约与考试结果。",
         "reviewer": {
-          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "session_id": "claimcheck-s05-r5-20261021",
           "model": "Claude Opus 5.5",
           "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "建议",
+          "reason": "问三方违约金、解约流程和毕业后多久仍算应届，对应画像“签过三方协议吗：否”及 E056 推测条目“签三方前先问违约与解约”。",
+          "reviewer": {
+            "session_id": "claimcheck-qz-s05-r2-20261021",
+            "model": "Claude Opus 5.5",
+            "independent": true
+          }
         }
       }
     },
@@ -53082,11 +53552,21 @@
       "review": {
         "decision": "支持",
         "kind": "事实",
-        "reason": "来源清单现已补上 E010 浙江省公务员局笔试成绩公告与 E045 省属事业单位下半年公告；其余对 E002—E005、E006—E013、E029—E031、E033、E017—E028、E035—E042，财政部与中注协标“上一年度”对其 2026 年度文件。",
+        "reason": "本句是来源清单，逐项能在 evidence.json 找到：国考 2027 公告（E002—E005）、浙江 2026 年度公告（E006—E009、E054）、职位表 E012、缴费表 E013、浙江省公务员局笔试成绩公告 E010、省属事业单位 2026 下半年公告 E045、国网 2027 总公告（E029—E031）、工行 2027 启事（E033、E034）、杭州工资价位（E017—E028）、财政部 2026 年度考务通知（E035—E038）、中注协 2026 简章（E039—E042），后两者确是上一年度。",
         "reviewer": {
-          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "session_id": "claimcheck-s05-r5-20261021",
           "model": "Claude Opus 5.5",
           "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "事实",
+          "reason": "来源清单现已补上 E010 浙江省公务员局笔试成绩公告与 E045 省属事业单位下半年公告；其余对 E002—E005、E006—E013、E029—E031、E033、E017—E028、E035—E042，财政部与中注协标“上一年度”对其 2026 年度文件。",
+          "reviewer": {
+            "session_id": "claimcheck-qz-s05-r2-20261021",
+            "model": "Claude Opus 5.5",
+            "independent": true
+          }
         }
       }
     },
@@ -53331,7 +53811,17 @@
       "review": {
         "decision": "支持",
         "kind": "事实",
-        "reason": "工资分位口径与 E017 等范围注一致；省考数据为 E012/E013 的 2026 年度（上一届），以新公告为准。"
+        "reason": "本句交代数据口径：evidence.json 中杭州工资价位各条范围都写“杭州市家企业在岗人员…不是应届起薪，也不是全省”；省考职位与缴费数据 E012、E013 都是 2026 年度，即上一届。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "事实",
+          "reason": "工资分位口径与 E017 等范围注一致；省考数据为 E012/E013 的 2026 年度（上一届），以新公告为准。"
+        }
       }
     },
     {
@@ -53884,6 +54374,46 @@
         "kind": "事实",
         "reason": "所列来源能对上 E002—E005、E006—E008、E012、E013、E029—E031、E033、E017—E028、E035—E042；但官方数字还用到了浙江省属事业单位公告（E045，9 月 19 日笔试）和浙江省公务员局成绩公告（E010，105 分），清单没有列出，表述“官方数字来自……”不完整。"
       }
+    },
+    {
+      "claim_id": "C1f337e1dc3d7cba50633bb0f",
+      "text": "这两边不必现在二选一：企业秋招已经在进行，省考2027年度公告截至出稿还没见到，两条线可以同时走，到公告出来、到年底各有一个该做选择的时点。",
+      "location": "narrative.json#/sections/01/analysis/0/content/text:sentence2",
+      "review": {
+        "decision": "部分支持",
+        "kind": "事实",
+        "reason": "“企业秋招已经在进行”可由本人已投 5 家企业财务岗、3 家还没消息（profile_parse 第27、3项）说明；但“省考2027年度公告截至出稿还没见到”是对外部公告状态的陈述，只有 E011（2026-10-20 两次查浙江省公务员考试录用网未见）能支撑，本句只引了 E001。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "事实",
+          "reason": "本句只引 E001。“省考2027年度公告截至出稿还没见到”与 E011 记录（截至取文日首页未见 2027 年度公告）一致，用“还没见到”而未写成“未发布”；“企业秋招已经在进行”有本人已投 5 家企业财务岗及 E033 工行 9—10 月秋招报名为据；两条证据在同报告其他句已引，本句缺引用但内容成立。"
+        }
+      }
+    },
+    {
+      "claim_id": "C67536aa5517a9f0c650e6551",
+      "text": "这些是各种工龄混在一起的数，不是应届起薪，数据年份也较早，只能说明会计岗位整体不算高、审计明显更高。",
+      "location": "narrative.json#/sections/04/analysis/1/content/text:sentence3",
+      "review": {
+        "decision": "部分支持",
+        "kind": "事实",
+        "reason": "前半句有据：所引 E017—E019 范围注“全体工龄合计，不是应届起薪”、数据年 2022。后半句缺依据：本段只引会计（E017—E019）和工龄三年及以下（E024），会计中位 95000 反比 E024 的 81580 高，看不出“整体不算高”；“审计明显更高”要靠 E020—E022，本段没有引。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "事实",
+          "reason": "“工龄混在一起、不是应届起薪、年份较早”与 E017 等范围注一致；“会计整体不算高、审计明显更高”可由同表会计中位数 95000 低于大学本科中位数 162899（E027）、审计中位数 169320（E021）印证，这两条证据在本节其他句已引。"
+        }
+      }
     }
   ],
   "cross_reviewers": [
@@ -54282,14 +54812,59 @@
         "Cb5dfc62c55652cebc0e379b6"
       ],
       "scope": "第六轮改写后逐句回查：判定 2 条无判定当前项；随机抽查 15 条 carried_from 保留项，其中 1 条（Cb5dfc…）原理由引了本句清单外证据，改用清单内证据重判。其余项保留原会话判定，不冒称重审。"
+    },
+    {
+      "session_id": "claimcheck-s05-r5-20261021",
+      "model": "Claude Opus 5.5",
+      "independent": true,
+      "reviewed_manifest_sha256": "4de95a42d761fe03a364174d90cbcfd20af009a57cdf94fde498d9ebfd2d2387",
+      "claim_ids": [
+        "C4836aa4ba774e37767f99ec1",
+        "Cf671c9bf953b5e7807e896c5",
+        "C211c10997599cf4ed6eedf7a",
+        "C7be1047da976df355aba8274",
+        "C9ddbac3d956fc3199208fea3",
+        "C1f337e1dc3d7cba50633bb0f",
+        "C38a03db0ce20c36998f107a6",
+        "Cc2eb4259c6448652b5c17b7c",
+        "C602dfaabbf877a984593fb85",
+        "C67536aa5517a9f0c650e6551",
+        "C4d979be2a22cdd4cc4f634a9",
+        "C66f333ef6aa1b2fd25ffbfa1",
+        "Cf7f091fa37b29752d892f894",
+        "Cf6d1fb0bea28039960ab18b9",
+        "C7cfcec328695b530d80def80",
+        "Cca8f989d0d9bcc423d7ee338",
+        "C87c039eff1c76873d24d4a1f",
+        "Ceaa20676186b1acf15f8a75f",
+        "C3cbd38b532fc50694cf69a71",
+        "Ca840e4462c8c51368b749f5f",
+        "C9d06cbe804607f2c1324ab56",
+        "C21c88af9c5e159e25fe5e900",
+        "C136c28f600f52af8893be2ee",
+        "C7971fb6d8d82ac5a6a2d6d8f",
+        "Cd2b45a2c8308671c3a8c1580",
+        "C91b0d136d88461929b6535dd",
+        "C50a29a294c2a1a3ee60a5652",
+        "Cfe411c65f95032aa9f0d9f74",
+        "C8c9966f5efb83d1992b4b608",
+        "Cd24c17c9ef809a2713e81e22",
+        "C97ed5825837f7f756198579c",
+        "C001522c97422f570a1a28d38",
+        "C2f349f0e8265c47f1c77314e",
+        "C3c7f97e6ad4aa92136bab876",
+        "Cca8c3a6f4a2e7e4faddc7766",
+        "C6d1a896c0d1d9471b0d6bb52"
+      ],
+      "scope": "第六轮逐句回查：本清单无未判项；用脚本找出原理由引用了本句清单外证据号的 37 条（其中 15 条带 carried_from），Cb5dfc 已由上一轮按清单内 E012 重判、本轮核对 E012 摘录后保留不动，其余 36 条逐条只用本句已引证据重判，旧判定存入 rejudged_from，2 条降为部分支持（第01节省考公告未见缺 E011、第04节审计更高缺 E020—E022）。其余项保留原会话判定，不冒称重审。"
     }
   ],
   "report_snapshot": {
-    "trace_sha256": "b36d2951e02d1be234628b318ddc0b680a118fe61f2fb748692c32a787dffc20",
+    "trace_sha256": "48e5d29e8feca0e8913ae9bc34935b74cdae8b4686ed0d826b0f265b85c0ff2d",
     "artifacts": {
-      "report.md": "e02a23e4695e320cab1b0f912aff7381c68193d80b8ddf56271121191cfdef49",
-      "report.html": "cb374831be70010c8fcfd0f05f71ca094feba76d6a4ec9c5b67961c16db91377",
-      "2027-QZ-S05-report.pdf": "fac7d4ad6604d6f8e7852b331af8dac7c3b48e9997d0446d21073bb681f4a2be"
+      "report.md": "6f6db2bf1c02e59661412571809479cb6f5b3e97078a2a9d1b4feb09b74193e4",
+      "report.html": "cc90e38fa3e9585fd5952317e17f647bd2bd98fcf670fd88ac95593f2b5fc581",
+      "2027-QZ-S05-report.pdf": "baccdd516e13678863c3c24ec655089fb49415fa2f9f1004618f99ec0b994de9"
     }
   }
 }

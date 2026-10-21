@@ -2,15 +2,15 @@
   "schema_version": 1,
   "case_id": "2027-YJ-S05",
   "source_sha256": {
-    "case.json": "8234650be7d95e335a0bb75feae8d45efafc6eabdb2e922a1dbe8d2b3ccde955",
+    "case.json": "5131aec8aea6f2272d34db351b7682340c6f3e40b96f8e6f28399f93531f87b8",
     "profile_parse.json": "26d77c111bb043cbc6cca5e761f0272ae369b77043836f7ff4e039a5759d96d9",
     "directions.json": "141ba17063943d6893342f321196523fd0eaf4c8c102cafee5b91cfc3a254d3a",
     "rules_check.json": "a49b73e4796ddce781c9559fadf72ac99b81b32fdc2d06bf2783d4c160e4b2f0",
-    "candidates.json": "e66ca02aa7d6caf68c08f718b88aa08e3b4e22680319864cec4bebca12c8798d",
+    "candidates.json": "1ceab0cc754836a5224bdbb53307b376792cdb845d79c66c886b6075385daae6",
     "evidence.json": "6ab5d01663521398099dcad192fe8b32f2a268ffebfd5c7043fca1286be6827a",
     "calculations.json": "e78d090f8eaefcc1d16696d737b78ea95ae2dc4301377da12c1126e2b4ddeb23",
-    "judgment.json": "688290b5ab8cf46141d9f8c7a02dd24e7d741fe6afd1e0a19085e15d65ebda34",
-    "narrative.json": "8c625732ad3d2a3564a05f3cc6593ddceb769e1b9ed849fa4efacd8123539256",
+    "judgment.json": "85624b7f49bc7815d5a44cbfcd46ba8f30b88348201fff5b5f63a0c30863e0ef",
+    "narrative.json": "3d557cfc5c7ccc9fb6c6839fa137300ff74f3219eeabdbcb2df1067c2c66cd28",
     "profile.json": "af232e95b42de1286681d5b04d706bbd8d16d3dd86cfe304a7d87e5a6bfcab88",
     "profile-supplement.txt": "952368202eeb2cd031c6c0d52212442dca0faaadcd6c99828f951e50ba15d704"
   },
@@ -1679,9 +1679,9 @@
     }
   ],
   "artifacts": {
-    "report.md": "eb30b2609ff31d55af06a909690b6fede71b6fbcdcac17b5487f5807b0586b85",
-    "report.html": "f12727a08932e2a6866950801faaa3dccc784b06b75eb94ddb1592fdea611f94",
-    "2027-YJ-S05-report.pdf": "cb77e2574655bba93d7de7c6d6b03ef32248656f1bf6c29debf7e9dd793e195f"
+    "report.md": "3c119963a0e8a83b1a64edfd8367369e34280ad40fe84330a9f4c8050350dbd0",
+    "report.html": "217b4f41450174b5ab2bb738ae22671d38fd01443dddcc247282ad1764167afb",
+    "2027-YJ-S05-report.pdf": "8f91917fa10a4586cc385ed818d89197726cf1923894e850f4c116cb28d0c3d2"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "authoring": {

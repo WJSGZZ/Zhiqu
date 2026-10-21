@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
   "case_id": "2027-YJ-S05",
-  "manifest_sha256": "142685615940d3dacefbcd6d8675d7f9ace87c1244664f75d8651b5a8cbb27e9",
+  "manifest_sha256": "25abcb56b048f32530121d907088fef5d0a523af9cc90b8be0b5b7fb2419e870",
   "source_sha256": {
-    "case.json": "8234650be7d95e335a0bb75feae8d45efafc6eabdb2e922a1dbe8d2b3ccde955",
+    "case.json": "5131aec8aea6f2272d34db351b7682340c6f3e40b96f8e6f28399f93531f87b8",
     "profile_parse.json": "26d77c111bb043cbc6cca5e761f0272ae369b77043836f7ff4e039a5759d96d9",
     "directions.json": "141ba17063943d6893342f321196523fd0eaf4c8c102cafee5b91cfc3a254d3a",
     "rules_check.json": "a49b73e4796ddce781c9559fadf72ac99b81b32fdc2d06bf2783d4c160e4b2f0",
-    "candidates.json": "e66ca02aa7d6caf68c08f718b88aa08e3b4e22680319864cec4bebca12c8798d",
+    "candidates.json": "1ceab0cc754836a5224bdbb53307b376792cdb845d79c66c886b6075385daae6",
     "evidence.json": "6ab5d01663521398099dcad192fe8b32f2a268ffebfd5c7043fca1286be6827a",
     "calculations.json": "e78d090f8eaefcc1d16696d737b78ea95ae2dc4301377da12c1126e2b4ddeb23",
-    "judgment.json": "688290b5ab8cf46141d9f8c7a02dd24e7d741fe6afd1e0a19085e15d65ebda34",
-    "narrative.json": "8c625732ad3d2a3564a05f3cc6593ddceb769e1b9ed849fa4efacd8123539256",
+    "judgment.json": "85624b7f49bc7815d5a44cbfcd46ba8f30b88348201fff5b5f63a0c30863e0ef",
+    "narrative.json": "3d557cfc5c7ccc9fb6c6839fa137300ff74f3219eeabdbcb2df1067c2c66cd28",
     "profile.json": "af232e95b42de1286681d5b04d706bbd8d16d3dd86cfe304a7d87e5a6bfcab88",
     "profile-supplement.txt": "952368202eeb2cd031c6c0d52212442dca0faaadcd6c99828f951e50ba15d704"
   },
@@ -70,11 +70,21 @@
       "review": {
         "decision": "支持",
         "kind": "结构标签",
-        "reason": "封面日期取 case.json context.as_of=2026-10-21，与本次出稿日一致；E123、E124 取文日期也是 2026-10-21，没有晚于出稿日的证据。",
+        "reason": "封面日期绑定 k:/context/as_of，值 2026-10-21，只是出稿日期本身，不需要外部证据。",
         "reviewer": {
-          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "session_id": "claimcheck-s05-r5-20261021",
           "model": "Claude Opus 5.5",
           "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "结构标签",
+          "reason": "封面日期取 case.json context.as_of=2026-10-21，与本次出稿日一致；E123、E124 取文日期也是 2026-10-21，没有晚于出稿日的证据。",
+          "reviewer": {
+            "session_id": "claimcheck-yj-s05-r2-20261021",
+            "model": "Claude Opus 5.5",
+            "independent": true
+          }
         }
       }
     },
@@ -111,19 +121,29 @@
       "review": {
         "decision": "支持",
         "kind": "结构标签",
-        "reason": "“数据截至”同样绑定 as_of 2026-10-21；evidence.json 最晚取文日是 E123/E124 的 2026-10-21，其余为 10-20，截至日不早于任何取文日。",
+        "reason": "“数据截至”一栏同样取 k:/context/as_of＝2026-10-21，是整份报告的截止标注；本句不带证据号，也不陈述外部事实。",
         "reviewer": {
-          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "session_id": "claimcheck-s05-r5-20261021",
           "model": "Claude Opus 5.5",
           "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "结构标签",
+          "reason": "“数据截至”同样绑定 as_of 2026-10-21；evidence.json 最晚取文日是 E123/E124 的 2026-10-21，其余为 10-20，截至日不早于任何取文日。",
+          "reviewer": {
+            "session_id": "claimcheck-yj-s05-r2-20261021",
+            "model": "Claude Opus 5.5",
+            "independent": true
+          }
         }
       }
     },
     {
       "section": "00",
       "location": "case.json#/report_meta/conclusion:sentence1",
-      "text": "你十月模考 {{c:/mock_total}} 分（与学硕同科目），放进苏大、河海上一届录取者的分数里看，再对照其余学校能取到的复试线，没有数据可靠的“相对稳妥”档。",
-      "expanded_text": "你十月模考 349 分（与学硕同科目），放进苏大、河海上一届录取者的分数里看，再对照其余学校能取到的复试线，没有数据可靠的“相对稳妥”档。",
+      "text": "你十月模考 {{c:/mock_total}} 分，放进苏大、河海上一届录取者的分数里看，再对照其余学校能取到的复试线，没有数据可靠的“相对稳妥”档。",
+      "expanded_text": "你十月模考 349 分，放进苏大、河海上一届录取者的分数里看，再对照其余学校能取到的复试线，没有数据可靠的“相对稳妥”档。",
       "evidence_refs": [],
       "evidence": [],
       "bindings": [
@@ -133,23 +153,14 @@
           "value": 349
         }
       ],
-      "claim_id": "C6c4bc3b9efc2212b5e78c084",
-      "review": {
-        "decision": "支持",
-        "kind": "计算",
-        "reason": "349 是 mock_total（63+62+105+119）；苏大只有 2026 一届名单（E042/E045），不满足“两届都不低于中位数”，河海普通方向低于 2026 下四分位 352，河海联培与软工人数不足五人不定档，南航等只有复试线，故无“相对稳妥”；“与学硕同科目”在此指苏大 E035、河海 E057 的学硕。",
-        "reviewer": {
-          "session_id": "claimcheck-yj-s05-r2-20261021",
-          "model": "Claude Opus 5.5",
-          "independent": true
-        }
-      }
+      "claim_id": "Cb0064ebc26933090e9254f6b",
+      "review": null
     },
     {
       "section": "00",
       "location": "case.json#/report_meta/conclusion:sentence2",
-      "text": "一志愿默认建议苏大计算机学硕（“够一够”）；你若接受软件工程，同校软件工程学硕同科目、位置更好，可以改报，{{k:/context/personal_dates/action1|md}}前报完名。",
-      "expanded_text": "一志愿默认建议苏大计算机学硕（“够一够”）；你若接受软件工程，同校软件工程学硕同科目、位置更好，可以改报，10 月 23 日前报完名。",
+      "text": "一志愿默认建议苏大计算机学硕（“够一够”）；你若接受软件工程，同校软件工程学硕位置更好，可以改报，{{k:/context/personal_dates/action1|md}}前报完名。",
+      "expanded_text": "一志愿默认建议苏大计算机学硕（“够一够”）；你若接受软件工程，同校软件工程学硕位置更好，可以改报，10 月 23 日前报完名。",
       "evidence_refs": [],
       "evidence": [],
       "bindings": [
@@ -159,12 +170,8 @@
           "value": "2026-10-23"
         }
       ],
-      "claim_id": "C236e821e486a37496efb1687",
-      "review": {
-        "decision": "支持",
-        "kind": "建议",
-        "reason": "默认苏大计算机学硕是建议；“同校软件工程学硕同科目”有 E035 范围注明 081200 与 083500 同一合并单元格，“位置更好”对应计算：软工中位数 349.0 等于模考，计算机中位数 357.5 高 8.5；10 月 23 日是 k 个人日期，早于 E010 截止日。"
-      }
+      "claim_id": "C3ffe77694ec9d09ded15b695",
+      "review": null
     },
     {
       "section": "00",
@@ -178,7 +185,17 @@
       "review": {
         "decision": "支持",
         "kind": "建议",
-        "reason": "保底安排对得上本人输入：work_chance 写“打算春招”，worst 勾了“接受调剂或非全”“直接工作”；调剂在出分后进行也与 E016 调剂以初试成绩为前提一致。"
+        "reason": "保底安排对得上本人输入：画像“最坏能接受”勾了“接受调剂或非全”“直接工作”，工作打算写“打算春招”；调剂要以初试结果为前提，所以放在出分后，句中没有给具体日期或规则数字。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "建议",
+          "reason": "保底安排对得上本人输入：work_chance 写“打算春招”，worst 勾了“接受调剂或非全”“直接工作”；调剂在出分后进行也与 E016 调剂以初试成绩为前提一致。"
+        }
       }
     },
     {
@@ -2618,9 +2635,19 @@
       "review": {
         "decision": "支持",
         "kind": "建议",
-        "reason": "复试准备写机考编程和面试：E033 原文复试由机考150分、外语听说50分、综合素质考核100分组成，E037 机考为编程题；把综合素质考核概括成面试属合理叫法，外语听说未单列但不构成错误。",
-        "carried_from": "Ce4dfa430a199d5e5536aa364",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+        "reason": "本格自己引了 E034 与 E037：E034 摘录“复试成绩（300 分）＝机考（150 分）＋外语听说能力测试（50 分）＋综合素质考核（100 分）”，E037“考试形式：机考编程题”；“机考编程和面试”是对这两项的概括，综合素质考核称面试。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "建议",
+          "reason": "复试准备写机考编程和面试：E033 原文复试由机考150分、外语听说50分、综合素质考核100分组成，E037 机考为编程题；把综合素质考核概括成面试属合理叫法，外语听说未单列但不构成错误。",
+          "carried_from": "Ce4dfa430a199d5e5536aa364",
+          "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+        }
       }
     },
     {
@@ -13788,14 +13815,24 @@
       "review": {
         "decision": "支持",
         "kind": "事实",
-        "reason": "南航有 2026 复试线 340（E080）但无名单（E086），南邮有 2026 线 303（E090），江大有 2026 线 326（E100），南理工只有 2025 线 335（E110），四校都缺录取者分布，依规则不定档。",
+        "reason": "四校在本句引用里各有复试线：南航 E080（340）、南邮 E090（303）、江大 E100（326）、南理工 E110（前一届 335）；不定档原因见所引缺口记录 E085、E095、E103、E112（科目或分布缺失）；“只有复试线”说的是本案取到的数据，evidence.json 中四校都没有可用的分数名单。",
         "reviewer": {
-          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "session_id": "claimcheck-s05-r5-20261021",
           "model": "Claude Opus 5.5",
           "independent": true
         },
-        "carried_from": "C02c08bd8cb05395efbada0db",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E065、E090、E100、E110"
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "事实",
+          "reason": "南航有 2026 复试线 340（E080）但无名单（E086），南邮有 2026 线 303（E090），江大有 2026 线 326（E100），南理工只有 2025 线 335（E110），四校都缺录取者分布，依规则不定档。",
+          "reviewer": {
+            "session_id": "claimcheck-yj-s05-r2-20261021",
+            "model": "Claude Opus 5.5",
+            "independent": true
+          },
+          "carried_from": "C02c08bd8cb05395efbada0db",
+          "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E065、E090、E100、E110"
+        }
       }
     },
     {
@@ -14870,9 +14907,19 @@
       "review": {
         "decision": "支持",
         "kind": "建议",
-        "reason": "补充说明写“没做过完整的上机模拟”，所以建议限时做一套上机题；“用同样方法重看位置”指再把新模考分放进 E042/E045 分布，属方法建议。",
-        "carried_from": "C58b06b00073a9c8597d8cfa3",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E047、E072、E085、E095、E103、E112"
+        "reason": "所引 E002 表明本人只做过一次全程模考；补充说明写“没做过完整的上机模拟”，所以建议再做一次全程模考和一套限时上机题；“同样方法”指第11节假设表的分档规则，是方法建议，不需要名单原文。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "建议",
+          "reason": "补充说明写“没做过完整的上机模拟”，所以建议限时做一套上机题；“用同样方法重看位置”指再把新模考分放进 E042/E045 分布，属方法建议。",
+          "carried_from": "C58b06b00073a9c8597d8cfa3",
+          "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E047、E072、E085、E095、E103、E112"
+        }
       }
     },
     {
@@ -15006,9 +15053,19 @@
       "review": {
         "decision": "支持",
         "kind": "建议",
-        "reason": "行动三日期 2026-11-15 来自 k:/context/personal_dates/action2，与 case.json deadlines D4“个人检查点：第二次全程模考”同日，在 E012 初试 12-19 之前。",
-        "carried_from": "C90cf2b0532ea0110cd9563e6",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E047、E072、E085、E095、E103、E112"
+        "reason": "行动三日期绑定个人日期 action2＝2026-11-15，晚于所引 E010 的报名截止 10 月 24 日，是报名后的自查节点，与第11节“志愿已报”的说法一致。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "建议",
+          "reason": "行动三日期 2026-11-15 来自 k:/context/personal_dates/action2，与 case.json deadlines D4“个人检查点：第二次全程模考”同日，在 E012 初试 12-19 之前。",
+          "carried_from": "C90cf2b0532ea0110cd9563e6",
+          "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E047、E072、E085、E095、E103、E112"
+        }
       }
     },
     {
@@ -15225,14 +15282,24 @@
       "review": {
         "decision": "支持",
         "kind": "事实",
-        "reason": "录取者分数只有苏大（E042/E045）和河海（E065 等）；其余学校只对照复试线；南理工研究生院 2026 页面要登录（E112），只取到 2025 年线 E110，“连上一届的线也没取到”属实。",
+        "reason": "录取者分数只来自所引 E042、E045（苏大）和 E065（河海）；E112 摘录“研究生院2026年页面…显示需要登录的提示页”，缺口写“只有两届前的线”，所以“南理工连上一届的线也没取到”成立；“不估能不能上岸”是报告口径声明。",
         "reviewer": {
-          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "session_id": "claimcheck-s05-r5-20261021",
           "model": "Claude Opus 5.5",
           "independent": true
         },
-        "carried_from": "C6dd0d13ab6d968b8d39592b5",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E012"
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "事实",
+          "reason": "录取者分数只有苏大（E042/E045）和河海（E065 等）；其余学校只对照复试线；南理工研究生院 2026 页面要登录（E112），只取到 2025 年线 E110，“连上一届的线也没取到”属实。",
+          "reviewer": {
+            "session_id": "claimcheck-yj-s05-r2-20261021",
+            "model": "Claude Opus 5.5",
+            "independent": true
+          },
+          "carried_from": "C6dd0d13ab6d968b8d39592b5",
+          "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E012"
+        }
       }
     },
     {
@@ -15588,14 +15655,24 @@
       "review": {
         "decision": "支持",
         "kind": "建议",
-        "reason": "出稿日 2026-10-21 早于 E010 报名截止 2026-10-24，建议截止前确认学校可行；后半句把准备重点放在最弱两科和复试上机，对应 E037 复试机考编程题和本人没做过完整上机模拟，已不含被退回的“报完名不能改学校”。",
+        "reason": "所引 E010 报名截止 2026-10-24，出稿日 10-21 在其前；E002 四科里按失分数学一（45）、英语一（38）最多，按得分率英语一、政治最低，“最弱的两科”可由本人按错题定；“复试上机”依据补充说明“复试要上机…没做过完整的上机模拟”。",
         "reviewer": {
-          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "session_id": "claimcheck-s05-r5-20261021",
           "model": "Claude Opus 5.5",
           "independent": true
         },
-        "carried_from": "C50738bfed760ef0dc575cca6",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E012"
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "建议",
+          "reason": "出稿日 2026-10-21 早于 E010 报名截止 2026-10-24，建议截止前确认学校可行；后半句把准备重点放在最弱两科和复试上机，对应 E037 复试机考编程题和本人没做过完整上机模拟，已不含被退回的“报完名不能改学校”。",
+          "reviewer": {
+            "session_id": "claimcheck-yj-s05-r2-20261021",
+            "model": "Claude Opus 5.5",
+            "independent": true
+          },
+          "carried_from": "C50738bfed760ef0dc575cca6",
+          "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E012"
+        }
       }
     },
     {
@@ -16611,7 +16688,17 @@
       "review": {
         "decision": "支持",
         "kind": "结构标签",
-        "reason": "第6行状态“待确认”，因学费金额本人写了“还没查”，河海 E121 也未列金额。"
+        "reason": "第6行“年度预算”状态标“待确认”，依据是同一行绑定的本人原话里“学费还没查”：只有上限，学费金额未定，状态与原话相符。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "结构标签",
+          "reason": "第6行状态“待确认”，因学费金额本人写了“还没查”，河海 E121 也未列金额。"
+        }
       }
     },
     {
@@ -18036,9 +18123,19 @@
       "review": {
         "decision": "支持",
         "kind": "推测",
-        "reason": "因模考科目与学硕初试一致（E002 对 E035），才能把模考与 E042 等录取分数对照；“同一把尺子”是比喻，难度差异已在第88、154句限定。",
-        "carried_from": "Ca6a3586a8306ca6dafd24322",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E035、E057"
+        "reason": "所引 E002 四科为政治、英语一、数学一、408，与 E035 苏大 081200、E057 河海 081200 的初试科目 101／201／301／408 一一对应，模考因此能与这两校学硕录取者的初试总分直接比；“同一把尺子”是比喻，难度未核另有说明。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "推测",
+          "reason": "因模考科目与学硕初试一致（E002 对 E035），才能把模考与 E042 等录取分数对照；“同一把尺子”是比喻，难度差异已在第88、154句限定。",
+          "carried_from": "Ca6a3586a8306ca6dafd24322",
+          "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E035、E057"
+        }
       }
     },
     {
@@ -18158,7 +18255,17 @@
       "review": {
         "decision": "支持",
         "kind": "建议",
-        "reason": "调剂与二战都发生在出分后（E016 调剂以初试成绩为前提），所以“现在不用定”成立，后半句是建议。"
+        "reason": "“这两件事”指画像里调剂范围前后不一（只接受部分城市或层次，却又勾“接受调剂或非全”）和二战意愿（家里能支持一年、本人不太想）；两者都要等初试结果才用得上，现在不必定，后半句是劝早想清楚。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "建议",
+          "reason": "调剂与二战都发生在出分后（E016 调剂以初试成绩为前提），所以“现在不用定”成立，后半句是建议。"
+        }
       }
     },
     {
@@ -19345,7 +19452,17 @@
       "review": {
         "decision": "支持",
         "kind": "事实",
-        "reason": "数学一满分 150（E019），属满分超过 100 的科目，E022 单科线 53 适用。"
+        "reason": "所引 E022 范围注明适用于“数学、专业基础等满分>100分的科目”，原表工学 A 类该列为 53，所以数学一单科线写 53 不需另引满分规定。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "事实",
+          "reason": "数学一满分 150（E019），属满分超过 100 的科目，E022 单科线 53 适用。"
+        }
       }
     },
     {
@@ -20147,7 +20264,17 @@
       "review": {
         "decision": "支持",
         "kind": "计算",
-        "reason": "四科与上一届单科线比：63 对 35、62 对 35、105 对 53、119 对 53，都高出近一倍；“风险在总分位置”与 E042 分布中模考低于中位数相符。依据是 2026 年线，句中已写“上一届”。"
+        "reason": "E002 四科 63、62、105、119，对所引 E021 单科线 35（政治、英语一）和 E022 的 53（数学一、专业课，E019 满分 150）都高出 27 分以上；单科既无风险，剩下的只有总分位置这一维，句子据此推出，没有引用具体分位值。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "计算",
+          "reason": "四科与上一届单科线比：63 对 35、62 对 35、105 对 53、119 对 53，都高出近一倍；“风险在总分位置”与 E042 分布中模考低于中位数相符。依据是 2026 年线，句中已写“上一届”。"
+        }
       }
     },
     {
@@ -20281,6 +20408,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -20356,6 +20484,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -20658,7 +20799,7 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C29370d0c9d1e2671a7bf6aee",
+      "claim_id": "C062fe93d2686fd368f067008",
       "review": {
         "decision": "支持",
         "kind": "结构标签",
@@ -20668,8 +20809,8 @@
           "model": "Claude Opus 5.5",
           "independent": true
         },
-        "carried_from": "C1d6927729a792bb9882586f0",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        "carried_from": "C29370d0c9d1e2671a7bf6aee",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -20682,6 +20823,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -20757,6 +20899,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -21059,7 +21214,7 @@
         }
       ],
       "bindings": [],
-      "claim_id": "Cde3450b9fb45895a69e67b87",
+      "claim_id": "C46983c53a3de8b8cf875b433",
       "review": {
         "decision": "支持",
         "kind": "结构标签",
@@ -21069,8 +21224,8 @@
           "model": "Claude Opus 5.5",
           "independent": true
         },
-        "carried_from": "C9ad8895cb23b122452d4f3df",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        "carried_from": "Cde3450b9fb45895a69e67b87",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -21083,6 +21238,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -21158,6 +21314,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -21460,13 +21629,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "Cc2b6f7ea6ee6caaa4eb25023",
+      "claim_id": "C385b32d16988dda97356e23f",
       "review": {
         "decision": "支持",
         "kind": "结构标签",
         "reason": "图例定义 ✓、△、△待查、✗ 四种符号，矩阵各格均使用这四种之一。",
-        "carried_from": "Cdaef2ef46ba923ab0a9d8467",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        "carried_from": "Cc2b6f7ea6ee6caaa4eb25023",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -21479,6 +21648,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -21554,6 +21724,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -21856,13 +22039,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C41313fee41d5e7c53570cd7a",
+      "claim_id": "C4bb51e82d2233690635379c9",
       "review": {
         "decision": "支持",
         "kind": "结构标签",
         "reason": "声明符号不是分数或把握，与图注第12句“图里只有条件”口径一致。",
-        "carried_from": "Cf74af4895fdf6bf096eda79b",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        "carried_from": "C41313fee41d5e7c53570cd7a",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -21875,6 +22058,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -21950,6 +22134,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -22252,13 +22449,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "Ce899270870405273dbd58432",
+      "claim_id": "C882fa7658371662cc61c5228",
       "review": {
         "decision": "支持",
         "kind": "结构标签",
         "reason": "矩阵第1列名“城市与培养”。",
-        "carried_from": "Cbd0604df3a1eb1e25fc51e07",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        "carried_from": "Ce899270870405273dbd58432",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -22271,6 +22468,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -22346,6 +22544,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -22648,13 +22859,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "Cca0d90e1d0338c6e04b62cae",
+      "claim_id": "C1f58b91752ec799555d67331",
       "review": {
         "decision": "支持",
         "kind": "结构标签",
         "reason": "矩阵第2列名“科目可比”。",
-        "carried_from": "C475bd561053bebfcc4392446",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        "carried_from": "Cca0d90e1d0338c6e04b62cae",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -22667,6 +22878,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -22742,6 +22954,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -23044,13 +23269,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C08ba38d4c243c46d99d6edcc",
+      "claim_id": "C8c241d0cef1e67f00bd578ab",
       "review": {
         "decision": "支持",
         "kind": "结构标签",
         "reason": "矩阵第3列名“模考位置”。",
-        "carried_from": "C93957c4f8e7f01547b830ea9",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        "carried_from": "C08ba38d4c243c46d99d6edcc",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -23063,6 +23288,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -23138,6 +23364,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -23440,13 +23679,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "Cb0882cc10de393db464a1222",
+      "claim_id": "Cba780220254b49c048068b3a",
       "review": {
         "decision": "支持",
         "kind": "结构标签",
         "reason": "矩阵第4列名“名额与年度变化”。",
-        "carried_from": "C86cbd0cf5915ff6050692945",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        "carried_from": "Cb0882cc10de393db464a1222",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -23459,6 +23698,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -23534,6 +23774,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -23836,13 +24089,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C6ace86829a6a70bd7a3bb559",
+      "claim_id": "C334e8313b6d2950ba78b8f31",
       "review": {
         "decision": "支持",
         "kind": "结构标签",
         "reason": "矩阵第5列名“复试准备”。",
-        "carried_from": "Ca705c3d13acd6154bc385f62",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        "carried_from": "C6ace86829a6a70bd7a3bb559",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -23855,6 +24108,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -23930,6 +24184,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -24232,13 +24499,25 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C00301f8e7892c95fa7317986",
+      "claim_id": "Ca288b31f7a6172d796f92e42",
       "review": {
         "decision": "支持",
         "kind": "结构标签",
-        "reason": "矩阵第1行候选名“苏大计算机学硕”，即 E030 的 081200。",
-        "carried_from": "C621787ea45f19e540598b4bd",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        "reason": "行名“苏大计算机学硕”与所引 E035 的“081200 计算机科学与技术（学术学位）”、E038 苏大计算机学院 081200 当届计划指同一项。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "结构标签",
+          "reason": "矩阵第1行候选名“苏大计算机学硕”，即 E030 的 081200。",
+          "carried_from": "C621787ea45f19e540598b4bd",
+          "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        },
+        "carried_from": "C00301f8e7892c95fa7317986",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -24251,6 +24530,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -24326,6 +24606,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -24628,13 +24921,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C44dbe2189be9dd9d6ebe87fb",
+      "claim_id": "C965adf70eac1a019b19b68dd",
       "review": {
         "decision": "支持",
         "kind": "事实",
         "reason": "苏州大学位于苏州属公共常识（来源网站 suda.edu.cn 为苏州大学官方站），在江苏省内，符合本人“只在本省”。",
-        "carried_from": "Ce5c3b3edf64d05606cb872d9",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        "carried_from": "C44dbe2189be9dd9d6ebe87fb",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -24647,6 +24940,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -24722,6 +25016,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -25024,13 +25331,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C98f47ab64e82e7f26598e0f0",
+      "claim_id": "C63aca21a0be74b5460f9fb17",
       "review": {
         "decision": "支持",
         "kind": "事实",
         "reason": "E035 为 2027 年苏大目录，081200 初试“①101 ②201 英语（一） ③301 数学（一） ④408”，与模考四科相同。",
-        "carried_from": "Cb766a2ccf90e65775dcfb1ac",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        "carried_from": "C98f47ab64e82e7f26598e0f0",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -25043,6 +25350,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -25118,6 +25426,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -25420,13 +25741,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C036e8492c0ebe4b6dd8634db",
+      "claim_id": "Cc7d240665582c136bb4e7643",
       "review": {
         "decision": "支持",
         "kind": "计算",
         "reason": "E042 下四分位 347.75、中位数 357.5，模考 349 处在两者之间，△ 标记与“够一够”一致。",
-        "carried_from": "Cb7dda2b9d90b472b2a26340a",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        "carried_from": "C036e8492c0ebe4b6dd8634db",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -25439,6 +25760,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -25514,6 +25836,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -25816,13 +26151,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "Cbc93f82c98404d269bdd75c1",
+      "claim_id": "C8075f1b5feb5e12f3b483e92",
       "review": {
         "decision": "支持",
         "kind": "事实",
         "reason": "E041 上一届拟公开招考 12 人、E038 当届 10 人，少 2 人（c:/suda_plan_drop）；分数分布只有 2026 年 E042 一届，表述准确。",
-        "carried_from": "Ce6d0f8efffdf2d5e94e8b5f6",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        "carried_from": "Cbc93f82c98404d269bdd75c1",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -25835,6 +26170,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -25910,6 +26246,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -26212,19 +26561,8 @@
         }
       ],
       "bindings": [],
-      "claim_id": "Cfc1f29775879fda65952f8eb",
-      "review": {
-        "decision": "支持",
-        "kind": "事实",
-        "reason": "苏大计算机学院 2026 细则 E033“复试成绩（300 分）=机考（150 分）+…”，150/300 为一半，格内已标“上一届”；“编程”指机考内容，依据 2027 目录 E037“考试形式：机考编程题”，两份文件属同一学院同一复试科目。",
-        "reviewer": {
-          "session_id": "claimcheck-yj-s05-r2-20261021",
-          "model": "Claude Opus 5.5",
-          "independent": true
-        },
-        "carried_from": "C00553b585fbecb6e5b44d790",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
-      }
+      "claim_id": "Cab6ecea5d2c75571e396f99d",
+      "review": null
     },
     {
       "section": "04",
@@ -26236,6 +26574,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -26311,6 +26650,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -26613,13 +26965,25 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C521e1a5466548764d866ad1c",
+      "claim_id": "Cb942773f7b9cb29dcd1cea64",
       "review": {
         "decision": "支持",
         "kind": "结构标签",
-        "reason": "矩阵第2行候选名“苏大软件工程学硕”，即 E043 的 083500。",
-        "carried_from": "C0f1e327ec26db65f7513752e",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        "reason": "行名“苏大软件工程学硕”对应所引 E039“018 计算机科学与技术学院 083500 软件工程”与 E047 的 083500（学术学位）。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "结构标签",
+          "reason": "矩阵第2行候选名“苏大软件工程学硕”，即 E043 的 083500。",
+          "carried_from": "C0f1e327ec26db65f7513752e",
+          "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        },
+        "carried_from": "C521e1a5466548764d866ad1c",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -26632,6 +26996,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -26707,6 +27072,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -27009,13 +27387,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C533d43fb23e9b60f84ff60d4",
+      "claim_id": "Cdfdef35e998b15e84f4970a0",
       "review": {
         "decision": "支持",
         "kind": "事实",
         "reason": "与第1行同校，苏州大学在苏州、属江苏，满足本人城市约束。",
-        "carried_from": "Cd785b24ab57b6b467caa480c",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        "carried_from": "C533d43fb23e9b60f84ff60d4",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -27028,6 +27406,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -27103,6 +27482,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -27405,13 +27797,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C266e0843d33305aa955d9417",
+      "claim_id": "C3d3465d8b14e6dd168ce7849",
       "review": {
         "decision": "支持",
         "kind": "事实",
         "reason": "E047 为 2027 年苏大 083500 方向，范围注明“初试科目与081200共用同一栏”，E035 同样注明合并单元格，故同科目成立；依赖取数者对版式的说明。",
-        "carried_from": "Ce31ca762290b621ea0642e5a",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        "carried_from": "C266e0843d33305aa955d9417",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -27424,6 +27816,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -27499,6 +27892,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -27801,13 +28207,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C378ce46f9db6dadf92bbc838",
+      "claim_id": "Cb4fa16a9d28d3f2dfe0ce6b4",
       "review": {
         "decision": "支持",
         "kind": "计算",
         "reason": "E045 数组中位数 349.0、下四分位 334.0，模考 349 恰等于中位数、高于下四分位。",
-        "carried_from": "Cd1036bbef11b6067d083b586",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        "carried_from": "C378ce46f9db6dadf92bbc838",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -27820,6 +28226,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -27895,6 +28302,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -28197,13 +28617,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C1b107c49ef6bd3211b42fbbe",
+      "claim_id": "Cec1b637309c0d546923209f1",
       "review": {
         "decision": "支持",
         "kind": "事实",
         "reason": "E046 上一届拟公开招考 10 人，E039 当届 10 人，相同；分布只有 E045 一届。",
-        "carried_from": "Cf2af3e6330fe14dfa94433f8",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        "carried_from": "C1b107c49ef6bd3211b42fbbe",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -28216,6 +28636,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -28291,6 +28712,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -28593,19 +29027,8 @@
         }
       ],
       "bindings": [],
-      "claim_id": "Cdfcdcfd3525ed6d6cda79da0",
-      "review": {
-        "decision": "支持",
-        "kind": "事实",
-        "reason": "081200 与 083500 都在苏大计算机科学与技术学院同一份细则里（E030、E043 同出该细则），复试结构相同；机考 150 分占 300 分一半出自 2026 年 E033/E034，已加“上一届”。",
-        "reviewer": {
-          "session_id": "claimcheck-yj-s05-r2-20261021",
-          "model": "Claude Opus 5.5",
-          "independent": true
-        },
-        "carried_from": "Ca0c1050cd3699a60e322c79c",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
-      }
+      "claim_id": "C831875bac093e36897d305df",
+      "review": null
     },
     {
       "section": "04",
@@ -28617,6 +29040,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -28692,6 +29116,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -28994,13 +29431,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C822b0af2e87a1cf58a475802",
+      "claim_id": "C5c8061ceda2c39672e23d101",
       "review": {
         "decision": "支持",
         "kind": "结构标签",
         "reason": "矩阵第3行候选名“河海计算机联培”，对应 E051 的 01 方向。",
-        "carried_from": "Cc1b5d5d8d59a5b2ca608c71b",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        "carried_from": "C822b0af2e87a1cf58a475802",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -29013,6 +29450,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -29088,6 +29526,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -29390,13 +29841,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C4e302a7820fa5ffa07b73f78",
+      "claim_id": "C9613d833d8c8aa7b2deeedf7",
       "review": {
         "decision": "支持",
         "kind": "事实",
         "reason": "E122 范围明写“培养地点与学位授予方式未在此写明”，“地点、学位待问清”与之一致。",
-        "carried_from": "Cc224cee39e68a9cae297d6c8",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        "carried_from": "C4e302a7820fa5ffa07b73f78",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -29409,6 +29860,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -29484,6 +29936,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -29786,13 +30251,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C23da6a6cfc8251c9c3be9429",
+      "claim_id": "C072ed7d97b4021173088e2e6",
       "review": {
         "decision": "支持",
         "kind": "事实",
         "reason": "E072 状态 unretrieved，摘录“未见2027招生简章目录条目”，所以当届目录未取到。",
-        "carried_from": "C96a8ba7ab4620726cd337dba",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        "carried_from": "C23da6a6cfc8251c9c3be9429",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -29805,6 +30270,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -29880,6 +30346,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -30182,13 +30661,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C0ebad49381f275bb6c14f3f8",
+      "claim_id": "C19273aefc5c941edaa25b87e",
       "review": {
         "decision": "支持",
         "kind": "计算",
         "reason": "E066 数组 5 个分数（2026），E075 数组 1 个（2025），样本太少不定档与 c 计数一致。",
-        "carried_from": "Cfbf028348b974b41d857a05f",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        "carried_from": "C0ebad49381f275bb6c14f3f8",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -30201,6 +30680,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -30276,6 +30756,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -30578,13 +31071,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C23b7af4d489e1366779b51a1",
+      "claim_id": "C2c0399081862bd4c26532d6f",
       "review": {
         "decision": "支持",
         "kind": "事实",
         "reason": "E061 上一届联培统考计划 5 人、E070 前一届 7 人，个位数，“统考计划少”成立。",
-        "carried_from": "Ca3238a41aeb685ff91195d56",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        "carried_from": "C23b7af4d489e1366779b51a1",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -30597,6 +31090,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -30672,6 +31166,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -30974,13 +31481,25 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C9fa9e02059ca71c3a09b8581",
+      "claim_id": "Ceb09d6d092c51e3451e90f46",
       "review": {
         "decision": "支持",
         "kind": "事实",
-        "reason": "E063 只给出 2026 年复试含专业课笔试，2027 年河海目录与复试办法未取到（E072），所以当届复试笔试科目未知属实。",
-        "carried_from": "Cd89b2620d5b37dcbf47f6a1d",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        "reason": "河海联培一行：所引 E072 记河海 2027 招生目录未取到，栏目里也没有当届复试办法，当届复试笔试考什么无从得知，“未知”属实；格内没有断言任何具体科目。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "事实",
+          "reason": "E063 只给出 2026 年复试含专业课笔试，2027 年河海目录与复试办法未取到（E072），所以当届复试笔试科目未知属实。",
+          "carried_from": "Cd89b2620d5b37dcbf47f6a1d",
+          "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        },
+        "carried_from": "C9fa9e02059ca71c3a09b8581",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -30993,6 +31512,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -31068,6 +31588,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -31370,13 +31903,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "Cb8f3e9790616db8b9f7af0b6",
+      "claim_id": "C3439616a91ddfa3c0692d90d",
       "review": {
         "decision": "支持",
         "kind": "结构标签",
         "reason": "矩阵第4行候选名“河海计算机普通”，对应 E050 的 02—05 方向。",
-        "carried_from": "C8269c6b5ea7ec954c6d09f88",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        "carried_from": "Cb8f3e9790616db8b9f7af0b6",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -31389,6 +31922,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -31464,6 +31998,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -31766,13 +32313,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C1152975bc112de7382feb94b",
+      "claim_id": "Cef13606d15ed6c93b1dff4b0",
       "review": {
         "decision": "支持",
         "kind": "事实",
         "reason": "河海大学在南京属公共常识，摘录未直接写城市；在江苏省内这一点满足本人约束。",
-        "carried_from": "C100739700841d0f0b81a778a",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        "carried_from": "C1152975bc112de7382feb94b",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -31785,6 +32332,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -31860,6 +32408,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -32162,13 +32723,25 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C2fa95694f72d96ca49d96441",
+      "claim_id": "Cb8c7335c92d0b0daed773896",
       "review": {
         "decision": "支持",
         "kind": "事实",
-        "reason": "普通方向同样受 E072 当届目录未取到影响，科目只能参照 E057 上一届目录。",
-        "carried_from": "C689cc41f352a175768dfed66",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        "reason": "河海普通方向“科目可比”一格：所引 E072 摘录“未见2027招生简章目录条目”，当届目录确实未取到。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "事实",
+          "reason": "普通方向同样受 E072 当届目录未取到影响，科目只能参照 E057 上一届目录。",
+          "carried_from": "C689cc41f352a175768dfed66",
+          "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        },
+        "carried_from": "C2fa95694f72d96ca49d96441",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -32181,6 +32754,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -32256,6 +32830,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -32558,13 +33145,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C891076bc969363ad32b86360",
+      "claim_id": "Ccf44909bd18bf75e329713aa",
       "review": {
         "decision": "支持",
         "kind": "计算",
         "reason": "E065 最低分 350、E050 复试线 350，模考 349 两者都低 1 分（c:/gap_hhu0812n_line=1），✗ 成立。",
-        "carried_from": "C96bd95f101a3dbd1f4816704",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        "carried_from": "C891076bc969363ad32b86360",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -32577,6 +33164,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -32652,6 +33240,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -32954,13 +33555,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C465c4c17a95c038f294648e9",
+      "claim_id": "Cff4d3764ae2705094cc6612b",
       "review": {
         "decision": "支持",
         "kind": "计算",
         "reason": "线 308→350 涨 42（c:/hhu_line_jump），计划 18→9 正好减半（c:/hhu_plan_drop=9），与 E054/E050/E064/E060 一致。",
-        "carried_from": "C9ca8dd529d5398c9d802fbe1",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        "carried_from": "C465c4c17a95c038f294648e9",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -32973,6 +33574,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -33048,6 +33650,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -33350,13 +33965,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "Cb2ad9244440762e7f2f2c16a",
+      "claim_id": "C378683b0d56178e40ad78d5a",
       "review": {
         "decision": "支持",
         "kind": "事实",
         "reason": "普通方向当届复试科目同样未取到，依据仍是 E072 的未取到记录。",
-        "carried_from": "Cbf411ad55b1ecfd06740ceff",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        "carried_from": "Cb2ad9244440762e7f2f2c16a",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -33369,6 +33984,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -33444,6 +34060,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -33746,13 +34375,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C8a87d54d4034c34e95e5474e",
+      "claim_id": "C8e051e9bb6641c68e82d7984",
       "review": {
         "decision": "支持",
         "kind": "结构标签",
         "reason": "矩阵第5行候选名“南航计算机学硕”，对应 E080 的 081200。",
-        "carried_from": "C666b0c9747addc9d66b70163",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        "carried_from": "C8a87d54d4034c34e95e5474e",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -33765,6 +34394,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -33840,6 +34470,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -34142,13 +34785,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C65aa4eff6ab69b1873e0c5b3",
+      "claim_id": "C8cb59a221f8bbf4830e8670f",
       "review": {
         "decision": "支持",
         "kind": "事实",
         "reason": "南京航空航天大学在南京属公共常识（校名已含），在江苏省内。",
-        "carried_from": "C6207a46f06c65d28cbb0da3a",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        "carried_from": "C65aa4eff6ab69b1873e0c5b3",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -34161,6 +34804,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -34236,6 +34880,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -34538,13 +35195,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C95cdc1c1a0ab67a385147c7f",
+      "claim_id": "Cc39192ba2600eebefd282748",
       "review": {
         "decision": "支持",
         "kind": "事实",
         "reason": "E085 状态 unretrieved，摘录说目录查询页“只取到页面框架，没有表格内容”。",
-        "carried_from": "C2a4b66e69a85df873a052769",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        "carried_from": "C95cdc1c1a0ab67a385147c7f",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -34557,6 +35214,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -34632,6 +35290,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -34934,13 +35605,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C0299b4e69804b47b5e270a03",
+      "claim_id": "C7131233e02a07452d1b38100",
       "review": {
         "decision": "支持",
         "kind": "事实",
         "reason": "E086 状态 unretrieved，摘录“未见拟录取名单公告”，所以没有录取者分布。",
-        "carried_from": "C510135d4877e0a7619103e07",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        "carried_from": "C0299b4e69804b47b5e270a03",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -34953,6 +35624,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -35028,6 +35700,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -35330,13 +36015,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "Ce2b1db1a97821a417b927232",
+      "claim_id": "Cf57ca4fec5304bf2b1413223",
       "review": {
         "decision": "支持",
         "kind": "事实",
         "reason": "E084 范围原文“表中‘统考计划数’，是否含推免未明示”，格内意思相同。",
-        "carried_from": "Ced9cdd18ce4473e047cd2a72",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        "carried_from": "Ce2b1db1a97821a417b927232",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -35349,6 +36034,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -35424,6 +36110,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -35726,13 +36425,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C2b22f3e726eadfc3ebe37be6",
+      "claim_id": "C2bc295c630e0b9814437ecbc",
       "review": {
         "decision": "支持",
         "kind": "事实",
         "reason": "evidence.json 里南航只有复试线、计划数和两条未取到记录，没有任何复试办法条目，说“复试办法未取到”与证据清单一致。",
-        "carried_from": "C62f58a1216e585937181d9c9",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        "carried_from": "C2b22f3e726eadfc3ebe37be6",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -36830,9 +37529,19 @@
       "review": {
         "decision": "支持",
         "kind": "事实",
-        "reason": "苏大两项有当届目录 E035/E047、当届计划 E038/E039 各 10 人，上一届名单 E042 十二人、E045 十人，分别等于 E041、E046 公布的拟公开招考人数，“完整”成立；河海缺当届目录，确实不如苏大全。",
-        "carried_from": "C904dccd7082ff30313081a14",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E041、E057"
+        "reason": "所引证据覆盖三项：当届目录 E035（081200 与 083500 同栏）、E047；当届计划 E038、E039 各 10；上一届名单 E042 十二人与 E041 拟公开招考 12 相同，E045 范围自述十行与学院公布人数一致；河海当届目录未取到（E072），所以苏大信息最全。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "事实",
+          "reason": "苏大两项有当届目录 E035/E047、当届计划 E038/E039 各 10 人，上一届名单 E042 十二人、E045 十人，分别等于 E041、E046 公布的拟公开招考人数，“完整”成立；河海缺当届目录，确实不如苏大全。",
+          "carried_from": "C904dccd7082ff30313081a14",
+          "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E041、E057"
+        }
       }
     },
     {
@@ -39215,7 +39924,17 @@
       "review": {
         "decision": "支持",
         "kind": "建议",
-        "reason": "exp 题答“暂时没有”，所以建议初试后做一个能讲清的项目，时间安排在 E012 初试之后，可行。"
+        "reason": "画像“做过哪些事”只选了“暂时没有”，第05节同段也写没有实习、竞赛或科研，所以建议初试后做一个能讲清的项目备春招；句中没有具体日期，不依赖初试日程原文。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "建议",
+          "reason": "exp 题答“暂时没有”，所以建议初试后做一个能讲清的项目，时间安排在 E012 初试之后，可行。"
+        }
       }
     },
     {
@@ -44818,6 +45537,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -44896,6 +45616,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -45068,13 +45801,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C6d4b03b413e4f809e8afc023",
+      "claim_id": "C2c8a50e3423746bf7a62db6e",
       "review": {
         "decision": "支持",
         "kind": "结构标签",
         "reason": "候选表第1列名，限定“与模考同科目”。",
-        "carried_from": "C7cc4530b924387f33a900120",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+        "carried_from": "C6d4b03b413e4f809e8afc023",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -45088,6 +45821,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -45166,6 +45900,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -45338,13 +46085,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C53f1ab03afe776dcc90cef6a",
+      "claim_id": "C43c4beb83889a3f3bfedac94",
       "review": {
         "decision": "支持",
         "kind": "结构标签",
         "reason": "候选表第2列名“模考放进上一届录取者里”。",
-        "carried_from": "C0ec7320cd5369bf5221c402b",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+        "carried_from": "C53f1ab03afe776dcc90cef6a",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -45358,6 +46105,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -45436,6 +46184,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -45608,13 +46369,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "Cfba827408f08be869955e046",
+      "claim_id": "Cfbefa3fffbd35cfc6ace06dd",
       "review": {
         "decision": "支持",
         "kind": "结构标签",
         "reason": "候选表第3列名“建议档”。",
-        "carried_from": "Ca5a0bad73ded7c6892869dde",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+        "carried_from": "Cfba827408f08be869955e046",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -45628,6 +46389,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -45706,6 +46468,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -45878,13 +46653,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C28ae2e21fbc730f04f57d50e",
+      "claim_id": "C8c0e95419bd33ae480926844",
       "review": {
         "decision": "支持",
         "kind": "结构标签",
         "reason": "候选表第4列名“支持”。",
-        "carried_from": "C2a20d2dbc51c4c428b95f002",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+        "carried_from": "C28ae2e21fbc730f04f57d50e",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -45898,6 +46673,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -45976,6 +46752,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -46148,13 +46937,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "Ccaceb8a1277daf5d6f92e2c0",
+      "claim_id": "Cc894e963d8fb7f5671ea7f95",
       "review": {
         "decision": "支持",
         "kind": "结构标签",
         "reason": "候选表第5列名“反对与代价”。",
-        "carried_from": "Cd3fec45b0a06e85a298fd0b5",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+        "carried_from": "Ccaceb8a1277daf5d6f92e2c0",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -46168,6 +46957,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -46246,6 +47036,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -46418,13 +47221,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C876b1b26d43abd783bdb0685",
+      "claim_id": "Cc16153a46e5bd72d66c3341f",
       "review": {
         "decision": "支持",
         "kind": "结构标签",
         "reason": "候选表第1行名称“苏大 计算机学硕”。",
-        "carried_from": "C1c0beafa046f85cc9de456d9",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+        "carried_from": "C876b1b26d43abd783bdb0685",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -46438,6 +47241,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -46516,6 +47320,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -46709,13 +47526,13 @@
           "value": 8
         }
       ],
-      "claim_id": "C9d764f0e712d2d5de0591b00",
+      "claim_id": "C7b55301fcd453ecbfe8517e0",
       "review": {
         "decision": "支持",
         "kind": "计算",
         "reason": "下四分位 347.75 显示为 347.8、中位数 357.5、E030 线 341，349−341=8 与 c:/gap_suda0812_line 一致。",
-        "carried_from": "C7468d13009efd6ff730cf25e",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+        "carried_from": "C9d764f0e712d2d5de0591b00",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -46729,6 +47546,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -46807,6 +47625,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -46979,13 +47810,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "Cf3fffafc2a30bda23d07de1e",
+      "claim_id": "C3a94bd258eb2617efe4d2db3",
       "review": {
         "decision": "支持",
         "kind": "计算",
         "reason": "按第305句规则，349 不低于最近一届下四分位 347.75，又只有一届数据不能稳妥，故“够一够”。",
-        "carried_from": "C558a12d9b04b6f1eec217ec6",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+        "carried_from": "Cf3fffafc2a30bda23d07de1e",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -46999,6 +47830,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -47077,6 +47909,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -47255,13 +48100,13 @@
           "value": 10
         }
       ],
-      "claim_id": "Ca9e13845537daccb36ca1cf5",
+      "claim_id": "C604702461612bedec32e99db",
       "review": {
         "decision": "支持",
         "kind": "事实",
         "reason": "E035 当届同科目；苏州在江苏；E038 原文“081200 计算机科学与技术 全日制 10”，当届公开招考 10 人。",
-        "carried_from": "Ce8deba7a7dfebce1d7b5c3a9",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+        "carried_from": "Ca9e13845537daccb36ca1cf5",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -47275,6 +48120,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -47353,6 +48199,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -47531,19 +48390,8 @@
           "value": 2
         }
       ],
-      "claim_id": "C03934c7f659010ff465dc051",
-      "review": {
-        "decision": "支持",
-        "kind": "计算",
-        "reason": "“只有一届分布”对应苏大只取到 2026 名单 E042；“少 2 人”= 上一届拟公开招考 12（E041）减当届计划 10（E038），即 suda_plan_drop；“上一届复试机考编程占一半分”同 E033/E034 与 E037。",
-        "reviewer": {
-          "session_id": "claimcheck-yj-s05-r2-20261021",
-          "model": "Claude Opus 5.5",
-          "independent": true
-        },
-        "carried_from": "C6665b02d07b042b658265cc6",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
-      }
+      "claim_id": "Cf643445cd68c452ff84a8f8d",
+      "review": null
     },
     {
       "section": "06",
@@ -47556,6 +48404,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -47634,6 +48483,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -47806,13 +48668,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C0e4b28b94d0b3db5032ed3a4",
+      "claim_id": "C316216044b0c0d109dbb3b4a",
       "review": {
         "decision": "支持",
         "kind": "结构标签",
         "reason": "候选表第2行名称“苏大 软件工程学硕”。",
-        "carried_from": "Ca4c5928c09df230ff7683ec8",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+        "carried_from": "C0e4b28b94d0b3db5032ed3a4",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -47826,6 +48688,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -47904,6 +48767,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -48097,13 +48973,13 @@
           "value": 23
         }
       ],
-      "claim_id": "Cd9173c6ade4734f81a24b218",
+      "claim_id": "C4be592c589966e47f6b35936",
       "review": {
         "decision": "支持",
         "kind": "计算",
         "reason": "E045 中位数 349.0、下四分位 334.0；E043 线 326，349−326=23 与 c:/gap_suda0835_line 一致。",
-        "carried_from": "C424dc65c17e427c791af1223",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+        "carried_from": "Cd9173c6ade4734f81a24b218",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -48117,6 +48993,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -48195,6 +49072,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -48367,13 +49257,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "Cc6ab881b1ca2e97f85bde4f0",
+      "claim_id": "Cd9f0e5a44848a56469518e20",
       "review": {
         "decision": "支持",
         "kind": "计算",
         "reason": "349 高于下四分位 334、只有一届数据，按规则为“够一够”。",
-        "carried_from": "C4f8b45836559f9633124469b",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+        "carried_from": "Cc6ab881b1ca2e97f85bde4f0",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -48387,6 +49277,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -48465,6 +49356,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -48643,13 +49547,13 @@
           "value": 10
         }
       ],
-      "claim_id": "C47db2e82971884143f974b3d",
+      "claim_id": "Ce21d8ca18951bb14746bcbb0",
       "review": {
         "decision": "支持",
         "kind": "事实",
         "reason": "E035 范围说 081200 与 083500 是同一合并单元格，即“同一格”；E039 当届 10 人、E046 上一届 10 人，相同。",
-        "carried_from": "Cbbdf50eea629ca2798078998",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+        "carried_from": "C47db2e82971884143f974b3d",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -48663,6 +49567,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -48741,6 +49646,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -48913,7 +49831,7 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C347447c140d5e313b348ba9a",
+      "claim_id": "C0321c432ca6af79d90cb2960",
       "review": {
         "decision": "支持",
         "kind": "事实",
@@ -48923,8 +49841,8 @@
           "model": "Claude Opus 5.5",
           "independent": true
         },
-        "carried_from": "C6d452845e8227b1922c7ffcd",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+        "carried_from": "C347447c140d5e313b348ba9a",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -48938,6 +49856,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -49016,6 +49935,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -49188,13 +50120,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C2852e3a2bf4add8ed0f9d725",
+      "claim_id": "C41acf05a9f2f6e13fe4afd79",
       "review": {
         "decision": "支持",
         "kind": "结构标签",
         "reason": "候选表第3行名称“河海 计算机学硕·普通方向”。",
-        "carried_from": "Cb050db30fd28c88db85b5dd2",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+        "carried_from": "C2852e3a2bf4add8ed0f9d725",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -49208,6 +50140,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -49286,6 +50219,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -49469,13 +50415,13 @@
           "value": 350
         }
       ],
-      "claim_id": "C3ae97ba0654a07fd97d54de6",
+      "claim_id": "C245284039c1bb5cd3d7f8ec3",
       "review": {
         "decision": "支持",
         "kind": "计算",
         "reason": "E065 最低分 350 与 E050 线 350，模考 349 都低 1 分。",
-        "carried_from": "C2cfb827b98781963e997a97f",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+        "carried_from": "C3ae97ba0654a07fd97d54de6",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -49489,6 +50435,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -49567,6 +50514,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -49739,13 +50699,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "Cc9fab81f5f5241d920beaf89",
+      "claim_id": "Cc837d551376e63b0b6ef71d4",
       "review": {
         "decision": "支持",
         "kind": "计算",
         "reason": "低于复试线即为冒险，与第305句规则一致。",
-        "carried_from": "Cd3fec2d9a41f3e6ba80e4ba8",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+        "carried_from": "Cc9fab81f5f5241d920beaf89",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -49759,6 +50719,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -49837,6 +50798,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -50015,13 +50989,13 @@
           "value": 308
         }
       ],
-      "claim_id": "C684092d1b8f9bb8500531bee",
+      "claim_id": "C28d0182af32547a50b3e5d53",
       "review": {
         "decision": "支持",
         "kind": "事实",
         "reason": "河海在南京属公共常识；E054 前一届普通方向线 308，“只有 308”数字对。",
-        "carried_from": "Cddb9e8b4e62ab77f9a348ab7",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+        "carried_from": "C684092d1b8f9bb8500531bee",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -50035,6 +51009,7 @@
         "E033",
         "E034",
         "E035",
+        "E037",
         "E038",
         "E039",
         "E041",
@@ -50113,6 +51088,19 @@
             "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
           },
           "scope": "2027年；苏州大学计算机科学与技术学院 081200 与 083500（同一合并单元格）；全日制"
+        },
+        {
+          "id": "E037",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学 2027年硕士研究生招生专业目录",
+            "url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+            "locator": "专业目录 复试科目参考书目表",
+            "sha256": "6633820da2a93ff466fef0371aee30c16cf5875fb9d43b86bcab93678de633d7"
+          },
+          "scope": "2027年苏州大学计算机科学与技术学院复试科目"
         },
         {
           "id": "E038",
@@ -50301,13 +51289,13 @@
           "value": 9
         }
       ],
-      "claim_id": "Cefc1e2a788c39f3f65487222",
+      "claim_id": "C061b99d2f99ad0a0d6119f9a",
       "review": {
         "decision": "支持",
         "kind": "计算",
         "reason": "350−308=42（c:/hhu_line_jump），E064 18 人、E060 9 人。",
-        "carried_from": "Ceb3033fca56d73fbd1ca561d",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+        "carried_from": "Cefc1e2a788c39f3f65487222",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E037"
       }
     },
     {
@@ -52302,9 +53290,19 @@
       "review": {
         "decision": "支持",
         "kind": "事实",
-        "reason": "南航 E080/E081、南邮 E090/E091、江大 E100/E101、南理工 E110/E111 都只有复试线，没有数组可画区间。",
-        "carried_from": "C3eb4e2c808d821a8f29bdb92",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+        "reason": "所引 E080、E090、E100、E110 分别给出南航、南邮、江大、南理工各一条复试线；06_other 区间图七行只有河海各项和苏大专硕，没有这四校，下方复试线表列出了它们，图注与图表结构相符。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "事实",
+          "reason": "南航 E080/E081、南邮 E090/E091、江大 E100/E101、南理工 E110/E111 都只有复试线，没有数组可画区间。",
+          "carried_from": "C3eb4e2c808d821a8f29bdb92",
+          "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+        }
       }
     },
     {
@@ -92156,7 +93154,17 @@
       "review": {
         "decision": "支持",
         "kind": "推测",
-        "reason": "复试月份写 2027.03 依据上一届节奏：苏大 2026 年复试细则 E030/E033 发布于 2026-03-19、拟录取名单 E042 发布于 2026-04-01；只写月份，属按往年推估。"
+        "reason": "2027.03 这一行是“复试、调剂，同时春招”，按往年节奏推估：所引 E020 上一届国家线 2026-02-28 发布，复试在国家线之后；E018 规定录取一般在 4 月底前完成，复试落在三月前后合理，只写到月份。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "推测",
+          "reason": "复试月份写 2027.03 依据上一届节奏：苏大 2026 年复试细则 E030/E033 发布于 2026-03-19、拟录取名单 E042 发布于 2026-04-01；只写月份，属按往年推估。"
+        }
       }
     },
     {
@@ -95617,7 +96625,16 @@
         }
       ],
       "claim_id": "C72b178fb5550eb57b7b4a84a",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "导语三处数字：suda_fee_left 4000＝留给学费住宿 12000−E124 苏大学硕学费 8000；suda_fee_left_reserve 1000＝4000−本人应急金 3000；“住宿费还没算进去”与 E124 范围“页面只列学费，未见住宿费”一致；“最怕一志愿没够上”对应模考 349 只比 E042 苏大计算机学硕上一届下四分位 347.75 高 1.25 分。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -95684,7 +96701,16 @@
       ],
       "bindings": [],
       "claim_id": "Cc45974c318418984ac47e34c",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "预算图标题只说明图的内容：家里给的年度上限减去生活费后还剩多少，图中五行确是上限、生活费和三种余额，没有新增事实。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -95751,7 +96777,16 @@
       ],
       "bindings": [],
       "claim_id": "C825032282c27193adc59a881",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "图例与 report.py 调色板对应：“主”黛绿 #21473E 为深色、“次”石绿 #34685D 为中间色、“稳”琥珀 #A8772B；三条“稳”分别绑定 nonliving_ceiling、higher_living_ceiling、reserve_ceiling，calculation_plan 两个情景都以 nonliving_ceiling 为基线各改一项，所以“不能相加”成立。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -95818,7 +96853,16 @@
       ],
       "bindings": [],
       "claim_id": "Cc58850baff5cdbff49f0050a",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "画像预算原话只给了平常每月 1500 和“在南京租房可能到 1800”两档，没有苏州的单独估计；苏大所在城市按 1500 算，与 calculation_plan 第78步只用 living 一致。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -95885,7 +96929,16 @@
       ],
       "bindings": [],
       "claim_id": "Cdb8ebe65a3ec14a3cda062fb",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "预算图五行里没有学费行；evidence.json 中带学费金额的只有 E124（苏大），E121 河海简章没写金额，其余学校没有学费条目，“只取到苏大一所”成立；条形从左轴零点画起。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -95952,7 +97005,16 @@
       ],
       "bindings": [],
       "claim_id": "C141ff967c3b7101470abe138",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "单位格“元”：图中上限 30000、生活费 18000、余额 12000／8400／9000 都是人民币元，与画像“3 万”“每月 1500”同一单位。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -96019,7 +97081,16 @@
       ],
       "bindings": [],
       "claim_id": "C232570a39993f429c643f4b3",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第1行行名“家里每年上限”，对应画像预算原话“家里说读研每年学费加生活费最多出 3 万”。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -96092,7 +97163,16 @@
         }
       ],
       "claim_id": "C415a770e210a4aa8fb1c1624",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "第1行数值绑定 case.json budget.annual_limit＝30000，与 profile_parse 第8项 annual＝30000、原话“最多出 3 万”相同。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -96159,7 +97239,16 @@
       ],
       "bindings": [],
       "claim_id": "C75828c917db54c635de23b01",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第1行角色标记“主”，按调色板画成黛绿深色，正是图注“深色是家里说的每年上限”那一条。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -96232,7 +97321,16 @@
         }
       ],
       "claim_id": "C336401bd4ec535ceaedf71f7",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "第1行数值标注“30,000 元”是同一 k:/budget/annual_limit 加千分位和单位，没有另作换算。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -96299,7 +97397,16 @@
       ],
       "bindings": [],
       "claim_id": "Ce73669c59097894805b02bed",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第2行行名“全年生活费”，对应计算项 known_living（第78步标签“全年生活费估计”）。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -96372,7 +97479,16 @@
         }
       ],
       "claim_id": "Ceba6e2ebe544ccfec3958008",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "第2行数值 18000＝本人每月 1500×E120 的 12 个月，与 calculations.json known_living 相同。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -96439,7 +97555,16 @@
       ],
       "bindings": [],
       "claim_id": "Ceb1578fd6c2150932f1c4ca3",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第2行角色“次”画石绿中间色，与图注“中间是按你估的生活费算的全年开支”对应。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -96512,7 +97637,16 @@
         }
       ],
       "claim_id": "Cacfadc7c7cc01ff0492fbd80",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "第2行标注“18,000 元”与 known_living＝18000 是同一个数，只换了显示格式。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -96579,7 +97713,16 @@
       ],
       "bindings": [],
       "claim_id": "Cac0f084a0a5e7da53e6388dd",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第3行行名“留给学费住宿”，对应第79步 nonliving_ceiling 的标签“扣生活费后留给学费、住宿的上限”。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -96652,7 +97795,16 @@
         }
       ],
       "claim_id": "C197d20db768afbc643e3ca86",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "第3行数值 12000＝年度上限 30000−known_living 18000，即 calculations.json nonliving_ceiling。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -96719,7 +97871,16 @@
       ],
       "bindings": [],
       "claim_id": "Cb5d425eda0f34753bd1f5853",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第3行角色“稳”画琥珀色，是图注所说三条余额中“平常”那一条。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -96792,7 +97953,16 @@
         }
       ],
       "claim_id": "C9fb2b845928bf386eaf12dcd",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "第3行标注“12,000 元”就是 nonliving_ceiling 的千分位写法，数值未变。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -96859,7 +98029,16 @@
       ],
       "bindings": [],
       "claim_id": "C20dce0a372defab435fb16ce",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第4行行名“南京租房时”对应情景一，来自本人原话“要是在南京租房可能到 1800”。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -96932,7 +98111,16 @@
         }
       ],
       "claim_id": "C6a32e9a611197b33f84eafe2",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "第4行 8400＝30000−1800×12（21600），是情景一把 known_living 换成 higher_living 后的 higher_living_ceiling。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -96999,7 +98187,16 @@
       ],
       "bindings": [],
       "claim_id": "C72c0b26417846989634310c2",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第4行角色“稳”，是琥珀三条里“在南京租房”一条，与图注列举的第二种情形对应。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -97072,7 +98269,16 @@
         }
       ],
       "claim_id": "C12677a18ab3af61ff66094a2",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "第4行标注“8,400 元”与 higher_living_ceiling＝8400 一致。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -97139,7 +98345,16 @@
       ],
       "bindings": [],
       "claim_id": "Cd9eaa3dc1b5ece1616744b35",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第5行行名“先留应急金时”对应情景二，来自本人原话“想留 3000 应急”。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -97212,7 +98427,16 @@
         }
       ],
       "claim_id": "C6cdc6f16b082fc5da625dd61",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "第5行 9000＝(30000−3000)−18000，即情景二把年度上限换成 after_reserve 27000 后得到的 reserve_ceiling。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -97279,7 +98503,16 @@
       ],
       "bindings": [],
       "claim_id": "C898a97d2f889149ae45f2d32",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第5行角色“稳”，是琥珀三条中最后一条“先留应急金”，与图注第三种情形对应。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -97352,7 +98585,16 @@
         }
       ],
       "claim_id": "C045025e8319034182b45b570",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "第5行标注“9,000 元”是 reserve_ceiling＝9000 的显示形式。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -99818,7 +101060,16 @@
         }
       ],
       "claim_id": "Ca9919823e400de29d11aa98a",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "六个数逐一对上：annual 30000、living 1500 来自 profile_parse 第8项；18000＝1500×12（E120）；12000＝30000−18000；8400＝30000−1800×12；9000＝30000−3000−18000，与 calculations.json 各项相同。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -99885,7 +101136,16 @@
       ],
       "bindings": [],
       "claim_id": "C8509f7f2be54adab4d236e1c",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "本人只说南京租房可能到 1800，没给苏州的估计；苏大在苏州（本会话取回的 E124 财务处页面页脚地址为江苏省苏州市东环路50号），所以按平常生活费算、不分城市是如实交代口径。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -99983,7 +101243,16 @@
         }
       ],
       "claim_id": "Cf04fbe2570c3a14480331639",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E124 原文“学术型硕士研究生（不含中外合作办学） 8000 元/生·年”位于“2027级研究生学费标准”表的全日制栏，与句中“2027 级全日制学术型硕士（不含中外合作办学）每年 8,000 元”逐项一致；本会话 curl 取回页面 sha256 5a517290…与登记相同，全页没有“住宿”二字；4000、1000 两个余额按第82、83步复算无误。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -100050,7 +101319,16 @@
       ],
       "bindings": [],
       "claim_id": "C10b748dc0ff5a4e9d3008651",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "“钱够”指 8000 学费低于留给学费住宿的 12000；“很紧”指扣完学费、再留 3000 应急后只剩 1000 元且住宿费未计，结论由上一句的数直接得出。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -100117,7 +101395,16 @@
       ],
       "bindings": [],
       "claim_id": "Cc26231293ae44eeb981bb731",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "引号内“根据物价部门批准或备案标准收取学费”是 E121 原文中的一段，E121 范围注“未列具体金额”；evidence.json 中除 E124 外没有别校学费条目，“其余学校也没取到”如实。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -100184,7 +101471,16 @@
       ],
       "bindings": [],
       "claim_id": "C91420723a6d813c051d57ce8",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "录取后先查学费、住宿费和学业奖学金覆盖面是行动建议；“没确定的奖助不算进去”照搬本人原话“奖助学金没确定的不算进去”。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -103171,9 +104467,19 @@
       "review": {
         "decision": "支持",
         "kind": "建议",
-        "reason": "E010 范围“应届本科生原则上在就读学校所在省报考”，所以去就读学校所在地报考点公告查，方向正确。",
-        "carried_from": "Ccd98e91171d70aacf67acc71",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E057"
+        "reason": "所引 E073 范围写明“小舟的报考点按其就读学校所在地另行公告，此处只作江苏报考点做法的参照”，所以网上审核、补材料的问题应去就读学校所在地报考点公告查。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "建议",
+          "reason": "E010 范围“应届本科生原则上在就读学校所在省报考”，所以去就读学校所在地报考点公告查，方向正确。",
+          "carried_from": "Ccd98e91171d70aacf67acc71",
+          "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E057"
+        }
       }
     },
     {
@@ -105540,7 +106846,16 @@
       ],
       "bindings": [],
       "claim_id": "C36e998de1011a0dc929ab52d",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "三个触发条件各有依据：E072 记河海 2027 目录未取到，缺口说明写当届科目或方向变了河海档位作废；第二次模考的个人检查点 11-15 晚于 E010 报名截止 10 月 24 日，所以写“志愿已报”；E020 是 2026 年国家线，当届线出来后以当届为准。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -105719,7 +107034,16 @@
       ],
       "bindings": [],
       "claim_id": "C29c16faa68182dae53dcca0d",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "假设表第一列表头“量或规则”，下面六行依次是模考总分、录取者分布、建议档、数据年份、单科线、预算，名实相符。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -105898,7 +107222,16 @@
       ],
       "bindings": [],
       "claim_id": "Cc1a52fdf58a9a7ab781a4476",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第二列表头“输入与口径”，各行此列写的是算式、数据范围或分档规则，表头准确。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -106077,7 +107410,16 @@
       ],
       "bindings": [],
       "claim_id": "Cbd94c67d6beada24ec4fc4bc",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第三列表头“结论边界”，各行此列都是限制说明（如“不是上岸概率”“情形不叠加”），与内容一致。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -106256,7 +107598,16 @@
       ],
       "bindings": [],
       "claim_id": "C6516b5c67c9a5efbcc03ad5a",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "行名“模考总分”指本人十月全程模考的四科合计，即计算项 mock_total。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -106461,7 +107812,16 @@
         }
       ],
       "claim_id": "Cb88f620b801e4683ee1aca28",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "63＋62＋105＋119＝349，四个加数分别绑定 profile_parse 第11项政治、英语一、数学一、专业课，与 E002 原话及 calculation_plan 第0步 sum 结果一致。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -106640,7 +108000,16 @@
       ],
       "bindings": [],
       "claim_id": "Cc8011efb9e7bc4b8d754d9d0",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "E002 原话是“一套考研机构的全程模考”，范围注“试卷难度与真题的关系未核”；补充说明也写“听同学讲比真题难一点，没核过”。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -106819,7 +108188,16 @@
       ],
       "bindings": [],
       "claim_id": "Ce313c750375cb889cf817fea",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "行名“录取者分布”，指第06节用 E042、E045、E065 等名单初试分算出的分位。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -106998,7 +108376,16 @@
       ],
       "bindings": [],
       "claim_id": "C44310257063ca5992d0383e4",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E042／E045 范围是苏大全国统考拟录取名单，E065 范围注明“一志愿统考名单（调剂另有名单）”；计算项按 suda26_0812、hhu26_0812n／0812j 等学校、方向、年份分开命名；q1／q3 由 verification_calculations.py 的含端点线性插值算出，check_demos 用 statistics.quantiles(method='inclusive') 复核。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -107177,7 +108564,16 @@
       ],
       "bindings": [],
       "claim_id": "C968c688b05bc7c5b55988e0e",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "所用数据来自拟录取（E042、E045）和建议录取（E065）名单，只含被录取者，不含落榜的报考者；由此算出的分位不能换成个人录取概率，与 kaoyan.md“不写个人上岸概率”一致。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -107356,7 +108752,16 @@
       ],
       "bindings": [],
       "claim_id": "C2ada6841576eb4bc8813d7ad",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "行名“建议档”，指候选的相对稳妥／够一够／冒险／不定档四种标记。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -107535,7 +108940,16 @@
       ],
       "bindings": [],
       "claim_id": "C61410dfa8cde8577c52904ff",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "规则与 zhiqu-grad/references/kaoyan.md 第5步逐条相同：单科低于复试单科线为冒险、任一年不足 5 人不定档、两届都不低于中位数为相对稳妥、不低于最近一届下四分位为够一够、5—9 人最高够一够；candidates.json 中 S3、S5 标“样本太少”，S1、S4 标“够一够”，符合此规则。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -107714,7 +109128,16 @@
       ],
       "bindings": [],
       "claim_id": "C2a6825140e36e18144e2f5a2",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "“阈值取自该项目自己的录取者分布，不是全国统一分差”和不定档四种原因（科目不同、分布缺失、样本太少、口径不一致）都出自 case-workflow.md 与 kaoyan.md；candidates.json 实际用到了其中三种。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -107893,7 +109316,16 @@
       ],
       "bindings": [],
       "claim_id": "C12b1705804c192f93b68d168",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "行名“数据年份”，该行交代各类数据分别属于哪一年度。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -108072,7 +109504,16 @@
       ],
       "bindings": [],
       "claim_id": "C769ef3cb1dc82a33f2a91c15",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "本格讲报告所用数据各属哪年：所引 E020 国家线、E030／E050 复试线、E042／E045／E065 名单都是 2026 年，河海另有 2025 年的 E054 等；报名日期 E010 出自 2027 年管理规定，初试、复试差额、调剂、录取时间登记在同一文件的 E012—E018；第06节两张区间图每行行名都带年份。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -108251,7 +109692,16 @@
       ],
       "bindings": [],
       "claim_id": "C6feb88802b2f00de7281048b",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "“旧年数字只看位置”是方法提醒；“明年三月前后”有往年先例：所引 E020 上一届国家线发布于 2026-02-28，E030 苏大复试线发布于 2026-03-19。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -108430,7 +109880,16 @@
       ],
       "bindings": [],
       "claim_id": "C58a285428560211aba23dc7d",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "行名“单科线”，指政治、外语与数学、专业课各自的最低分要求。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -108620,7 +110079,16 @@
         }
       ],
       "claim_id": "Ca8211600c6e1e9507a06c9f2",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E030 范围“单科不低于A类国家线”、E050 范围“单科参照国家A类线”，E020 范围说明 A 类即一区、含江苏；35／53 是 E021、E022 的工学 A 类单科线（满分 100 与满分超过 100 的科目）。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -108799,7 +110267,16 @@
       ],
       "bindings": [],
       "claim_id": "C62dbb7066b966d0af0dd1a36",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E020 是 2026 年“考生进入复试的初试成绩基本要求”，即按当年初试成绩划的线，发布于 2026-02-28；E010 显示 2027 年报名到 2026-10-24 才截止，当届初试还没举行，当届国家线只能等出分后才有。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -108978,7 +110455,16 @@
       ],
       "bindings": [],
       "claim_id": "C6bd86463bd530b5d288c1cf5",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "行名“预算”，该行列出生活费、学费与余额的算式。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -109193,7 +110679,16 @@
         }
       ],
       "claim_id": "C6c5dd697b340d970d368e30c",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "1500×12＝18000（E120 定 12 个月）；30000−18000＝12000；12000−8000（E124）＝4000；4000−3000（应急金）＝1000，依次为 known_living、nonliving_ceiling、suda_fee_left、suda_fee_left_reserve。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -109372,7 +110867,16 @@
       ],
       "bindings": [],
       "claim_id": "C27f190d21479c6b1b8e1648c",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "生活费、应急金都是本人在预算一题的估计；calculation_plan 两个情景各自以 nonliving_ceiling 为基线、互不叠加；第82步只扣 E124 学费，E124 页面只列学费、E121 河海无金额，所以苏大住宿费和其余学校学费确实没计入。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -110047,7 +111551,17 @@
       "review": {
         "decision": "支持",
         "kind": "结构标签",
-        "reason": "释义“总分门槛，还须满足单科、资格和复试名单要求”，E080 原表同时列单科线与总分线，可佐证。"
+        "reason": "术语“复试线”的释义：所引 E030 原表“081200 计算机科学与技术 341”是总分线，范围注“单科不低于A类国家线”，E050 范围“单科参照国家A类线”，说明总分之外还有单科要求；“资格和复试名单”是一般性限定。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "结构标签",
+          "reason": "释义“总分门槛，还须满足单科、资格和复试名单要求”，E080 原表同时列单科线与总分线，可佐证。"
+        }
       }
     },
     {
@@ -111798,7 +113312,17 @@
       "review": {
         "decision": "支持",
         "kind": "结构标签",
-        "reason": "数字可追到来源与匿名分数表；没取到的项在缺口表中都写了试过的入口（E072、E085、E086、E095、E103、E112 的 gap 字段），声明属实。"
+        "reason": "本句说明第12节本身：其下缺口表八行每行都填了“试过的入口”，计算项来自附件匿名分数；措辞用“没取到”而不是“不存在”，与表内写法一致。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "结构标签",
+          "reason": "数字可追到来源与匿名分数表；没取到的项在缺口表中都写了试过的入口（E072、E085、E086、E095、E103、E112 的 gap 字段），声明属实。"
+        }
       }
     },
     {
@@ -111807,6 +113331,7 @@
       "text": "核对时请先看附录里的核对表：每个官方数字都附了原文摘录和位置；录取者的中位数、四分位等由附件里的匿名分数按登记算法复算。",
       "expanded_text": "核对时请先看附录里的核对表：每个官方数字都附了原文摘录和位置；录取者的中位数、四分位等由附件里的匿名分数按登记算法复算。",
       "evidence_refs": [
+        "E032",
         "E041",
         "E042",
         "E044",
@@ -111814,6 +113339,19 @@
         "E046"
       ],
       "evidence": [
+        {
+          "id": "E032",
+          "excerpt": "085404 计算机技术 340 10",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学计算机科学与技术学院 2026年硕士研究生复试录取实施细则",
+            "url": "https://scst.suda.edu.cn/8d/97/c29555a691607/page.htm",
+            "locator": "细则一、1. 复试分数线表",
+            "sha256": "b5d93185a664011e185d48033ac942aaa1410a7383a335233ac35a6bf5a56dcc"
+          },
+          "scope": "2026年；苏州大学计算机科学与技术学院；全日制公开招考"
+        },
         {
           "id": "E041",
           "excerpt": "081200 计算机科学与技术 341 12",
@@ -111881,13 +113419,13 @@
         }
       ],
       "bindings": [],
-      "claim_id": "Ccc4e15415533226fd1416dc1",
+      "claim_id": "C1d5773a6091383674a83caad",
       "review": {
         "decision": "支持",
         "kind": "结构标签",
         "reason": "官方数字均带 excerpt 与 original_locator；分布统计在 calculation_plan 登记为 count/min/q1/median/q3/max 算法，可由 anonymous_values 复算。",
-        "carried_from": "C5fc280dd59bbe641ee0954f6",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E041"
+        "carried_from": "Ccc4e15415533226fd1416dc1",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E032"
       }
     },
     {
@@ -111896,6 +113434,7 @@
       "text": "苏大的拟录取名单是图片版（文件里没有文字层），初试分是逐行看图读出的：计算机学硕、软件工程学硕和计算机技术专硕都读过两次，人数、最低、最高、四分位一致，条数与学院公布的拟公开招考人数一致。",
       "expanded_text": "苏大的拟录取名单是图片版（文件里没有文字层），初试分是逐行看图读出的：计算机学硕、软件工程学硕和计算机技术专硕都读过两次，人数、最低、最高、四分位一致，条数与学院公布的拟公开招考人数一致。",
       "evidence_refs": [
+        "E032",
         "E041",
         "E042",
         "E044",
@@ -111903,6 +113442,19 @@
         "E046"
       ],
       "evidence": [
+        {
+          "id": "E032",
+          "excerpt": "085404 计算机技术 340 10",
+          "grade": "官方",
+          "status": "verified",
+          "source": {
+            "organization": "苏州大学计算机科学与技术学院 2026年硕士研究生复试录取实施细则",
+            "url": "https://scst.suda.edu.cn/8d/97/c29555a691607/page.htm",
+            "locator": "细则一、1. 复试分数线表",
+            "sha256": "b5d93185a664011e185d48033ac942aaa1410a7383a335233ac35a6bf5a56dcc"
+          },
+          "scope": "2026年；苏州大学计算机科学与技术学院；全日制公开招考"
+        },
         {
           "id": "E041",
           "excerpt": "081200 计算机科学与技术 341 12",
@@ -111970,14 +113522,8 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C7418fa8cee029bbb675fb4d6",
-      "review": {
-        "decision": "支持",
-        "kind": "事实",
-        "reason": "E042、E044 范围写“两次独立读图…统计一致”，E045 写“两次独立读图一致”；条数 12、10、10 分别等于 E041、E046 和 E032 原文“340 10”中的拟公开招考人数。",
-        "carried_from": "Cfde11dde37f9527cdb5d3d10",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E041"
-      }
+      "claim_id": "C329029ec2ee45a5d54bee0e8",
+      "review": null
     },
     {
       "section": "12",
@@ -112276,7 +113822,16 @@
       ],
       "bindings": [],
       "claim_id": "C5f90682109a8ed0bf29e346a",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "缺口表第一列表头“没取到的”，下列八行都是 evidence.json 中未取到、被拦或没写金额的项目。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -112401,7 +113956,16 @@
       ],
       "bindings": [],
       "claim_id": "Cf0b93718781222edf613fdc2",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第二列表头“试过的入口”，各行此列对应 E072、E085、E086、E095、E103、E112 缺口记录里写的查询页面。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -112526,7 +114090,16 @@
       ],
       "bindings": [],
       "claim_id": "Cc17392eeb8d100767884ba61",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第三列表头“影响”，各行写的是对定档或预算的后果，与各缺口记录“影响”部分对应。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -112651,7 +114224,16 @@
       ],
       "bindings": [],
       "claim_id": "C305de7971612a0a8be856472",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "行名“河海当届招生目录”即 E072（2027 年河海硕士招生目录，状态 not_found）。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -112776,7 +114358,16 @@
       ],
       "bindings": [],
       "claim_id": "Cba4e79c0dd5e1960edfc48d9",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E072 来源为河海研究生院“硕士研究生招生”栏目，摘录“栏目最新：2026-10-08 …网上报名公告；未见2027招生简章目录条目”。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -112901,7 +114492,16 @@
       ],
       "bindings": [],
       "claim_id": "C00614ef1980af397e42cadf7",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E072 缺口说明“河海各项只能按上一届科目和计划看”，本格是同一意思的短写。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -113026,7 +114626,16 @@
       ],
       "bindings": [],
       "claim_id": "C35d2e9908f991a2fb6bbf961",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "行名“南航当届目录”对应 E085（南航 2027 年硕士招生目录查询，状态 blocked）。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -113151,7 +114760,16 @@
       ],
       "bindings": [],
       "claim_id": "C5d4f45ee1b09f5dac14c44b7",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E085 缺口：动态查询页要在浏览器打开才显示，又查了研究生院“简章目录”栏目的当届专业目录页，正文只给出查询网址、没有附件，两个入口与本格一致。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -113276,7 +114894,16 @@
       ],
       "bindings": [],
       "claim_id": "C1cc0ec585bdbf7608e629fd2",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E085 范围是南航 081200、085404 两项，缺口写“不能确认和模考同科目，不定档”；candidates.json V3、V4 都是不定档。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -113401,7 +115028,16 @@
       ],
       "bindings": [],
       "claim_id": "Ce5e67e6c984fd5fd76404664",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "行名“南航上一届拟录取名单”对应 E086（南航 2026 年拟录取名单，状态 not_found）。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -113526,7 +115162,16 @@
       ],
       "bindings": [],
       "claim_id": "C7b300c59e4109aa786ebbd8f",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E086 来源为南航计算机学院“研究生培养”栏目，摘录“2026年1—10月未见拟录取名单公告”。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -113651,7 +115296,16 @@
       ],
       "bindings": [],
       "claim_id": "C95850f83d597580229e6c9d0",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "“同上”即南航两项不定档；E086 缺口写“没有录取者分布，只有复试线，不定档”，与上一行结论相同。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -113776,7 +115430,16 @@
       ],
       "bindings": [],
       "claim_id": "C97d5971e8ec174e1814d08f3",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "行名“南邮当届目录与上一届名单”对应 E095，其登记事项就是“南邮当届计算机初试科目与分布”。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -113901,7 +115564,16 @@
       ],
       "bindings": [],
       "claim_id": "C6816ee7c10586f18f87f7b64",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E095 缺口：研究生招生网目录表格要浏览器打开才显示，另查了计算机学院“研究生招生”栏目和学院通知栏目，与本格所列入口相同。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -114026,7 +115698,16 @@
       ],
       "bindings": [],
       "claim_id": "C0669149bfbe27da62cf6aae4",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E095 范围列南邮 081200、085404 两项，缺口写“科目不明、没有分布，不定档”，candidates.json V5、V6 也是不定档。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -114151,7 +115832,16 @@
       ],
       "bindings": [],
       "claim_id": "Cdc6d060262c895a9d4fa0961",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "行名“江大当届目录与上一届名单”对应 E103（江大当届计算机初试科目与分布，状态 blocked）。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -114276,7 +115966,16 @@
       ],
       "bindings": [],
       "claim_id": "C93e460daea252d81f95694db",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E103 摘录：目录 PDF 下载接口返回约 3.8KB 网页，缺口写带来源页再试仍不是 PDF；上一届建议录取名单旧链接返回 404，即本格说的“已失效”。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -114401,7 +116100,16 @@
       ],
       "bindings": [],
       "claim_id": "Cf888310b62d7ebf2e720f451",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E103 缺口结论“科目不明、没有分布，不定档”；candidates.json 江大 V7、V8 两项都标不定档（分布缺失）。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -114526,7 +116234,16 @@
       ],
       "bindings": [],
       "claim_id": "C4119c91fbbed95a4f878c77f",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "行名“南理工上一届线、当届目录与名单”对应 E112（南理工上一届复试线与当届科目，状态 blocked）。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -114651,7 +116368,16 @@
       ],
       "bindings": [],
       "claim_id": "C295dbe34eb7dde4f7aa199e0",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E112 摘录“浏览器打开后显示需要登录的提示页”，缺口写学院站有人机验证，都按规则不绕过，与本格一致。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -114776,7 +116502,16 @@
       ],
       "bindings": [],
       "claim_id": "Cfb1a039c42b56db176c44d02",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E112 缺口“只有两届前的线，科目与分布都缺，不定档”；candidates.json V9、V10 均为不定档。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -114901,7 +116636,16 @@
       ],
       "bindings": [],
       "claim_id": "C5d1451fc0b71a1c6109b0a84",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "行名“苏大以外各校学费”：evidence.json 里有学费金额的只有 E124 一条，属于苏大。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -115026,7 +116770,16 @@
       ],
       "bindings": [],
       "claim_id": "C38445e6319f0e5da53cdc3e5",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E121 是河海 2026 年简章“五、学制、学费与奖助学金”，原文只说按物价部门批准或备案标准收取学费，范围注“未列具体金额”。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -115151,7 +116904,16 @@
       ],
       "bindings": [],
       "claim_id": "C38868f1b17dece1a6db65ab0",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第09节预算图只有上限、生活费和三条余额，没有学费行，本格如实描述该图。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -115276,7 +117038,16 @@
       ],
       "bindings": [],
       "claim_id": "C5744d084bf0f182a74d7bd1d",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "行名“苏大研究生住宿费”：E124 只给学费，evidence.json 中没有任何住宿费条目。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -115401,7 +117172,16 @@
       ],
       "bindings": [],
       "claim_id": "C7f4aa381bc69d4ed5e690457",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "本会话 curl 取 E124 登记网址，文件 sha256 5a517290…与登记一致；页面“2027级研究生学费标准”表只列各类学费，全文搜不到“住宿”，“只列学费，没有住宿费”准确，旧版“写明不含住宿费”的说法确已去掉。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -115526,7 +117306,16 @@
       ],
       "bindings": [],
       "claim_id": "C7fcc3f768245cbfb6d19f081",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "calculation_plan 第82、83步只减学费和应急金，确实没扣住宿费；“录取后查苏大财务处或后勤公示”是去处建议。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -115715,7 +117504,7 @@
     "independent": true,
     "method": "未参与本案写作或修改的独立会话；原判定一律不继承，逐条对照 evidence.json 原文摘录与范围、gap 记录、profile.json 与补充说明原话、calculations.json 及 calculation_plan 算式（分布统计由匿名分数独立复算）后人工写出判定和理由；脚本只用于读取、合并、校验格式与统计重复。"
   },
-  "reviewed_manifest_sha256": "ac7282a92d9306bda503d409ed93635aa54fd542d38b3acce87876d6225f2ddb",
+  "reviewed_manifest_sha256": "142685615940d3dacefbcd6d8675d7f9ace87c1244664f75d8651b5a8cbb27e9",
   "retired": [
     {
       "claim_id": "Cb343ee6de0918705e9d47bcd",
@@ -116071,6 +117860,154 @@
           "independent": true
         }
       }
+    },
+    {
+      "claim_id": "C6c4bc3b9efc2212b5e78c084",
+      "text": "你十月模考 {{c:/mock_total}} 分（与学硕同科目），放进苏大、河海上一届录取者的分数里看，再对照其余学校能取到的复试线，没有数据可靠的“相对稳妥”档。",
+      "location": "case.json#/report_meta/conclusion:sentence1",
+      "review": {
+        "decision": "部分支持",
+        "kind": "计算",
+        "reason": "349 是 mock_total（63＋62＋105＋119）；“没有相对稳妥档”与 candidates.json 档位一致（最高为 S1、S4 够一够）。但括号“与学硕同科目”是苏大、河海学硕初试科目这一外部事实，本句没有任何证据号（需要 E035／E057 目录原文），只凭本句引用不能确认。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "计算",
+          "reason": "349 是 mock_total（63+62+105+119）；苏大只有 2026 一届名单（E042/E045），不满足“两届都不低于中位数”，河海普通方向低于 2026 下四分位 352，河海联培与软工人数不足五人不定档，南航等只有复试线，故无“相对稳妥”；“与学硕同科目”在此指苏大 E035、河海 E057 的学硕。",
+          "reviewer": {
+            "session_id": "claimcheck-yj-s05-r2-20261021",
+            "model": "Claude Opus 5.5",
+            "independent": true
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "C236e821e486a37496efb1687",
+      "text": "一志愿默认建议苏大计算机学硕（“够一够”）；你若接受软件工程，同校软件工程学硕同科目、位置更好，可以改报，{{k:/context/personal_dates/action1|md}}前报完名。",
+      "location": "case.json#/report_meta/conclusion:sentence2",
+      "review": {
+        "decision": "部分支持",
+        "kind": "建议",
+        "reason": "默认报苏大计算机学硕、档位“够一够”对应 candidates.json S1；“位置更好”有计算：软工中位数 349.0 等于模考，计算机中位数 357.5；10 月 23 日是个人日期。但“同校软件工程学硕同科目”是招生目录事实，本句未引证据（E035 范围注明 081200 与 083500 同一合并单元格），按本句引用无法核实。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "建议",
+          "reason": "默认苏大计算机学硕是建议；“同校软件工程学硕同科目”有 E035 范围注明 081200 与 083500 同一合并单元格，“位置更好”对应计算：软工中位数 349.0 等于模考，计算机中位数 357.5 高 8.5；10 月 23 日是 k 个人日期，早于 E010 截止日。"
+        }
+      }
+    },
+    {
+      "claim_id": "Cfc1f29775879fda65952f8eb",
+      "text": "△上一届机考编程占复试一半分",
+      "location": "judgment.json#/report_blocks/04_matrix/content/rows/0/5:sentence1",
+      "review": {
+        "decision": "部分支持",
+        "kind": "事实",
+        "reason": "“占复试一半分”有据：所引 E034 摘录复试 300 分中机考 150 分，范围为 2026 年，格内写了“上一届”。但“编程”说的是机考内容，本矩阵的引用里没有 E037（“考试形式：机考编程题”），E033／E034 只写“机考”，按本格引用确认不了是编程。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "事实",
+          "reason": "苏大计算机学院 2026 细则 E033“复试成绩（300 分）=机考（150 分）+…”，150/300 为一半，格内已标“上一届”；“编程”指机考内容，依据 2027 目录 E037“考试形式：机考编程题”，两份文件属同一学院同一复试科目。",
+          "reviewer": {
+            "session_id": "claimcheck-yj-s05-r2-20261021",
+            "model": "Claude Opus 5.5",
+            "independent": true
+          },
+          "carried_from": "C00553b585fbecb6e5b44d790",
+          "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        }
+      }
+    },
+    {
+      "claim_id": "Cdfcdcfd3525ed6d6cda79da0",
+      "text": "△同一学院，上一届机考编程占复试一半分",
+      "location": "judgment.json#/report_blocks/04_matrix/content/rows/1/5:sentence1",
+      "review": {
+        "decision": "部分支持",
+        "kind": "事实",
+        "reason": "“同一学院”成立：所引 E038、E039 都是“018 计算机科学与技术学院”；E034 的 2026 年细则给出机考 150／300。缺的仍是“编程”二字的出处：矩阵引用里没有写明机考为编程题的 E037，与第1行同一缺口。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "事实",
+          "reason": "081200 与 083500 都在苏大计算机科学与技术学院同一份细则里（E030、E043 同出该细则），复试结构相同；机考 150 分占 300 分一半出自 2026 年 E033/E034，已加“上一届”。",
+          "reviewer": {
+            "session_id": "claimcheck-yj-s05-r2-20261021",
+            "model": "Claude Opus 5.5",
+            "independent": true
+          },
+          "carried_from": "Ca0c1050cd3699a60e322c79c",
+          "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+        }
+      }
+    },
+    {
+      "claim_id": "C03934c7f659010ff465dc051",
+      "text": "只有一届分布；当届计划比上一届少 {{c:/suda_plan_drop}} 人；上一届复试机考编程占一半分",
+      "location": "candidates.json#/report_blocks/06_candidates/content/rows/0/4:sentence1",
+      "review": {
+        "decision": "部分支持",
+        "kind": "计算",
+        "reason": "“少 2 人”＝所引 E041 上一届拟公开招考 12−E038 当届计划 10，即 suda_plan_drop；“只有一届分布”与所引苏大名单只有 E042 一份相符；机考 150／300 见 E034。但“编程”要靠 E037，这一格的引用里没有。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "计算",
+          "reason": "“只有一届分布”对应苏大只取到 2026 名单 E042；“少 2 人”= 上一届拟公开招考 12（E041）减当届计划 10（E038），即 suda_plan_drop；“上一届复试机考编程占一半分”同 E033/E034 与 E037。",
+          "reviewer": {
+            "session_id": "claimcheck-yj-s05-r2-20261021",
+            "model": "Claude Opus 5.5",
+            "independent": true
+          },
+          "carried_from": "C6665b02d07b042b658265cc6",
+          "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+        }
+      }
+    },
+    {
+      "claim_id": "C7418fa8cee029bbb675fb4d6",
+      "text": "苏大的拟录取名单是图片版（文件里没有文字层），初试分是逐行看图读出的：计算机学硕、软件工程学硕和计算机技术专硕都读过两次，人数、最低、最高、四分位一致，条数与学院公布的拟公开招考人数一致。",
+      "location": "narrative.json#/sections/12/analysis/0/content/text:sentence2",
+      "review": {
+        "decision": "部分支持",
+        "kind": "事实",
+        "reason": "图片版、两次读图一致有据：E042、E044 范围写“PDF无文字层，两次独立读图…统计一致”，E045 写两次读图一致。条数一致对两项学硕成立（E042 计 12 人＝E041 的 12，E045 计 10 人＝E046 的 10）；但计算机技术专硕 10 人与学院公布人数一致，需要 E032 原文“085404 计算机技术 340 10”，本句没有引。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r5-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "事实",
+          "reason": "E042、E044 范围写“两次独立读图…统计一致”，E045 写“两次独立读图一致”；条数 12、10、10 分别等于 E041、E046 和 E032 原文“340 10”中的拟公开招考人数。",
+          "carried_from": "Cfde11dde37f9527cdb5d3d10",
+          "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E041"
+        }
+      }
     }
   ],
   "cross_reviewers": [
@@ -116240,14 +118177,135 @@
         "Cfec65da23b4b65a309989afc"
       ],
       "scope": "第六轮改写后逐句回查：判定 16 条无判定当前项；随机抽查 15 条 carried_from 保留项，其中 1 条（Cfec65…）原理由引了本句清单外证据，改用清单内证据重判；E124 苏大学费页本会话重新取原件，指纹与登记一致。其余项保留原会话判定，不冒称重审。"
+    },
+    {
+      "session_id": "claimcheck-s05-r5-20261021",
+      "model": "Claude Opus 5.5",
+      "independent": true,
+      "reviewed_manifest_sha256": "142685615940d3dacefbcd6d8675d7f9ace87c1244664f75d8651b5a8cbb27e9",
+      "claim_ids": [
+        "Cffa3f24d9e45c30c01612aec",
+        "C38d432d4451ce2ec6f5530b4",
+        "C6c4bc3b9efc2212b5e78c084",
+        "C236e821e486a37496efb1687",
+        "C27835fed04e36765cd744c34",
+        "C83ec21dc19e6db321c5eea06",
+        "C28228473004e538f3ad3e0b7",
+        "C3d62d0aabcea4002263c8cbd",
+        "C8e905a3d83d66fcadd29d121",
+        "C280bf34154eb825bfb460b65",
+        "Cfe1815b2c5f5f78368710e75",
+        "Cfdf34c6dd7d1d40636b20cdd",
+        "C6879729b7722d145a7f84aab",
+        "Cfb1fe36e293ef7bfcc96b5cf",
+        "Ccfb1ae23cfcf64d1c8dec72f",
+        "Ca88bff88876a0b41e2b0c958",
+        "C00301f8e7892c95fa7317986",
+        "Cfc1f29775879fda65952f8eb",
+        "C521e1a5466548764d866ad1c",
+        "Cdfcdcfd3525ed6d6cda79da0",
+        "C9fa9e02059ca71c3a09b8581",
+        "C2fa95694f72d96ca49d96441",
+        "C125fbd89c5d0c9e3c8d98e85",
+        "C6bc993ce3b6982b02145fb03",
+        "C03934c7f659010ff465dc051",
+        "C918ef9b79e59dbbfbb92fc0a",
+        "C621a9acb8fb051275d124e9d",
+        "C72b178fb5550eb57b7b4a84a",
+        "Cc45974c318418984ac47e34c",
+        "C825032282c27193adc59a881",
+        "Cc58850baff5cdbff49f0050a",
+        "Cdb8ebe65a3ec14a3cda062fb",
+        "C141ff967c3b7101470abe138",
+        "C232570a39993f429c643f4b3",
+        "C415a770e210a4aa8fb1c1624",
+        "C75828c917db54c635de23b01",
+        "C336401bd4ec535ceaedf71f7",
+        "Ce73669c59097894805b02bed",
+        "Ceba6e2ebe544ccfec3958008",
+        "Ceb1578fd6c2150932f1c4ca3",
+        "Cacfadc7c7cc01ff0492fbd80",
+        "Cac0f084a0a5e7da53e6388dd",
+        "C197d20db768afbc643e3ca86",
+        "Cb5d425eda0f34753bd1f5853",
+        "C9fb2b845928bf386eaf12dcd",
+        "C20dce0a372defab435fb16ce",
+        "C6a32e9a611197b33f84eafe2",
+        "C72c0b26417846989634310c2",
+        "C12677a18ab3af61ff66094a2",
+        "Cd9eaa3dc1b5ece1616744b35",
+        "C6cdc6f16b082fc5da625dd61",
+        "C898a97d2f889149ae45f2d32",
+        "C045025e8319034182b45b570",
+        "Ca9919823e400de29d11aa98a",
+        "C8509f7f2be54adab4d236e1c",
+        "Cf04fbe2570c3a14480331639",
+        "C10b748dc0ff5a4e9d3008651",
+        "Cc26231293ae44eeb981bb731",
+        "C91420723a6d813c051d57ce8",
+        "C5f4640774f0164cd56f47212",
+        "C36e998de1011a0dc929ab52d",
+        "C29c16faa68182dae53dcca0d",
+        "Cc1a52fdf58a9a7ab781a4476",
+        "Cbd94c67d6beada24ec4fc4bc",
+        "C6516b5c67c9a5efbcc03ad5a",
+        "Cb88f620b801e4683ee1aca28",
+        "Cc8011efb9e7bc4b8d754d9d0",
+        "Ce313c750375cb889cf817fea",
+        "C44310257063ca5992d0383e4",
+        "C968c688b05bc7c5b55988e0e",
+        "C2ada6841576eb4bc8813d7ad",
+        "C61410dfa8cde8577c52904ff",
+        "C2a6825140e36e18144e2f5a2",
+        "C12b1705804c192f93b68d168",
+        "C769ef3cb1dc82a33f2a91c15",
+        "C6feb88802b2f00de7281048b",
+        "C58a285428560211aba23dc7d",
+        "Ca8211600c6e1e9507a06c9f2",
+        "C62dbb7066b966d0af0dd1a36",
+        "C6bd86463bd530b5d288c1cf5",
+        "C6c5dd697b340d970d368e30c",
+        "C27f190d21479c6b1b8e1648c",
+        "C191065c2be84971ada5be31b",
+        "C1cddd3b18bd447526e1a7fe6",
+        "C7418fa8cee029bbb675fb4d6",
+        "C5f90682109a8ed0bf29e346a",
+        "Cf0b93718781222edf613fdc2",
+        "Cc17392eeb8d100767884ba61",
+        "C305de7971612a0a8be856472",
+        "Cba4e79c0dd5e1960edfc48d9",
+        "C00614ef1980af397e42cadf7",
+        "C35d2e9908f991a2fb6bbf961",
+        "C5d4f45ee1b09f5dac14c44b7",
+        "C1cc0ec585bdbf7608e629fd2",
+        "Ce5e67e6c984fd5fd76404664",
+        "C7b300c59e4109aa786ebbd8f",
+        "C95850f83d597580229e6c9d0",
+        "C97d5971e8ec174e1814d08f3",
+        "C6816ee7c10586f18f87f7b64",
+        "C0669149bfbe27da62cf6aae4",
+        "Cdc6d060262c895a9d4fa0961",
+        "C93e460daea252d81f95694db",
+        "Cf888310b62d7ebf2e720f451",
+        "C4119c91fbbed95a4f878c77f",
+        "C295dbe34eb7dde4f7aa199e0",
+        "Cfb1a039c42b56db176c44d02",
+        "C5d1451fc0b71a1c6109b0a84",
+        "C38445e6319f0e5da53cdc3e5",
+        "C38868f1b17dece1a6db65ab0",
+        "C5744d084bf0f182a74d7bd1d",
+        "C7f4aa381bc69d4ed5e690457",
+        "C7fcc3f768245cbfb6d19f081"
+      ],
+      "scope": "第六轮作者改动（第09节导语、第11节补引 E010、第12节住宿费缺口、E124 范围说明）后逐句回查：判定 81 条无判定当前项；用脚本找出原理由引用了本句清单外证据号的 31 条（其中 18 条带 carried_from），逐条只用本句已引证据重判，旧判定存入 rejudged_from，6 条降为部分支持（封面“同科目”2 条、矩阵与候选表“机考编程”3 条、第12节专硕条数 1 条）；E124 苏大财务处页面本会话 curl 重取，sha256 与登记一致，8000 元/生·年属实、全页无住宿费。其余项保留原会话判定，不冒称重审。"
     }
   ],
   "report_snapshot": {
-    "trace_sha256": "e55352f57a12dd297f8460152d16516321474d1e649bbd7d3b009e4819135f74",
+    "trace_sha256": "7458600f0d17ee068e7654df20640ff1e38b3036666030bf40b133497c0ae8fd",
     "artifacts": {
-      "report.md": "eb30b2609ff31d55af06a909690b6fede71b6fbcdcac17b5487f5807b0586b85",
-      "report.html": "f12727a08932e2a6866950801faaa3dccc784b06b75eb94ddb1592fdea611f94",
-      "2027-YJ-S05-report.pdf": "cb77e2574655bba93d7de7c6d6b03ef32248656f1bf6c29debf7e9dd793e195f"
+      "report.md": "3c119963a0e8a83b1a64edfd8367369e34280ad40fe84330a9f4c8050350dbd0",
+      "report.html": "217b4f41450174b5ab2bb738ae22671d38fd01443dddcc247282ad1764167afb",
+      "2027-YJ-S05-report.pdf": "8f91917fa10a4586cc385ed818d89197726cf1923894e850f4c116cb28d0c3d2"
     }
   }
 }

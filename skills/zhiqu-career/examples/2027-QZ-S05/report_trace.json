@@ -10,7 +10,7 @@
     "evidence.json": "a36a1d4072892ffd0e56b0ce2c425c1563b651a7113907892177e9ad2a5ffffe",
     "calculations.json": "89d7a293fd6780b562866f4871846b19130b0d86e79cb9f9c233e572cbae5b5d",
     "judgment.json": "89e67d8e39d0666399d8b470809425420fb18271c756578790e08248301ec3ff",
-    "narrative.json": "9399ea02de1b9d5dc7ffe2260cb93554617e29398a80294993e27a08c718ea84",
+    "narrative.json": "8cecd1ff1956e1331cccd6cbe5ad00cd0a76b61dbe3c3632e44e06c9a2d37e1b",
     "profile.json": "f8c7a4b076a64c168d303710ea8836b70a79ffe5d53ce7521045bfe4ae4c2d1f",
     "profile-supplement.txt": "247f31f22f4c9a6c33394b5b25e3b37ef21c19fd3b9c12a70a83839f7976b026"
   },
@@ -1271,9 +1271,9 @@
     }
   ],
   "artifacts": {
-    "report.md": "e02a23e4695e320cab1b0f912aff7381c68193d80b8ddf56271121191cfdef49",
-    "report.html": "cb374831be70010c8fcfd0f05f71ca094feba76d6a4ec9c5b67961c16db91377",
-    "2027-QZ-S05-report.pdf": "fac7d4ad6604d6f8e7852b331af8dac7c3b48e9997d0446d21073bb681f4a2be"
+    "report.md": "6f6db2bf1c02e59661412571809479cb6f5b3e97078a2a9d1b4feb09b74193e4",
+    "report.html": "cc90e38fa3e9585fd5952317e17f647bd2bd98fcf670fd88ac95593f2b5fc581",
+    "2027-QZ-S05-report.pdf": "baccdd516e13678863c3c24ec655089fb49415fa2f9f1004618f99ec0b994de9"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "authoring": {
