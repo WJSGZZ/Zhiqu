@@ -1,6 +1,7 @@
 """Unified provenance schema and content-addressed public-original invariants."""
 import csv
 import hashlib
+import shutil
 from pathlib import Path
 import sys
 import tempfile
@@ -66,6 +67,40 @@ class ProvenanceTests(unittest.TestCase):
     def test_data_image_hash_is_checked(self):
         asset=self.image_asset();(self.root/asset['path']).write_bytes(b'changed')
         self.assertTrue(any('sha256' in x.lower() or 'size' in x for x in self.check_index()))
+    def test_deleted_statuses_need_hash_and_empty_path_not_a_file(self):
+        shutil.rmtree(self.originals)
+        for status in v.DELETED_STATUSES:
+            self.row.update(archive_status=status,archive_path='')
+            self.csv(self.folder/'sources.csv',v.SOURCE_FIELDS,[self.row])
+            with self.subTest(status=status):
+                self.assertEqual(self.check(),[])
+                self.assertEqual(self.check_index(),[])
+    def test_deleted_status_requires_exact_fingerprint(self):
+        for status in v.DELETED_STATUSES:
+            for fingerprint in ['', 'abc', 'A'*64]:
+                self.row.update(archive_status=status,archive_path='',archive_sha256=fingerprint);self.write()
+                with self.subTest(status=status,fingerprint=fingerprint):
+                    self.assertTrue(any('archive_sha256' in issue for issue in self.check()))
+    def test_deleted_status_cannot_claim_file_path(self):
+        for status in v.DELETED_STATUSES:
+            self.row.update(archive_status=status);self.write()
+            self.assertTrue(any('不得填写 archive_path' in issue for issue in self.check()))
+    def test_absent_original_directory_still_checks_source_metadata(self):
+        shutil.rmtree(self.originals)
+        self.row.update(archive_status='未取到',archive_path='',file_url='',landing_url='',retrieved='2026-02-30')
+        self.csv(self.folder/'sources.csv',v.SOURCE_FIELDS,[self.row])
+        issues=self.check_index()
+        self.assertTrue(any('至少须有' in issue for issue in issues))
+        self.assertTrue(any('retrieved' in issue for issue in issues))
+    def test_absent_directory_does_not_hide_stored_file_claim(self):
+        shutil.rmtree(self.originals)
+        self.assertTrue(any('不存在' in issue for issue in self.check_index()))
+    def test_existing_legacy_directory_still_requires_index(self):
+        (self.originals/'index.csv').unlink()
+        self.assertTrue(any('缺 index.csv' in issue for issue in self.check_index()))
+    def test_explicit_missing_legacy_index_is_not_ignored(self):
+        shutil.rmtree(self.originals)
+        self.assertTrue(any('缺 index.csv' in issue for issue in v.check_originals_index(self.root,index_path=self.originals/'index.csv')[0]))
     def test_exact_unified_source_fields(self):
         self.assertEqual(v.SOURCE_FIELDS,('source_id','grade','publisher','title','landing_url','file_url','published','retrieved','method','archive_sha256','archive_path','archive_status','wayback_url','note','citation','license','producer_revision'))
     def test_valid_source_and_index(self):
@@ -79,7 +114,7 @@ class ProvenanceTests(unittest.TestCase):
     def test_landing_only_official_record_passes(self):
         self.row['file_url']='';self.row.update(archive_status='未取到',archive_path='');self.write()
         self.assertEqual(self.check(),[])
-    def test_three_archive_statuses_are_closed(self):
+    def test_archive_statuses_are_closed_with_legacy_stored_compatibility(self):
         for status in ['','已存','第三方备份']:
             self.row['archive_status']=status;self.write();self.assertTrue(any('archive_status' in s for s in self.check()))
         self.row['archive_status']='原链接失效·存档副本';self.write();self.assertEqual(self.check(),[])
