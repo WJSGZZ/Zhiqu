@@ -2,14 +2,14 @@
   "schema_version": 1,
   "case_id": "2027-QZ-S05",
   "source_sha256": {
-    "case.json": "04a2d01722b5444f1ef0b87e62186b85cbd34710f4533d0b3c918ed03ede5a34",
-    "profile_parse.json": "eb1f4d47e6660eb9097a9050a8cc1c5d588e9e789196ef175e72136f0b5fcd37",
-    "directions.json": "2a2adc61a4db849e95617e304a7922dca9848ca7b5aac3891ae987868808ee9a",
+    "case.json": "79136c0287d7e845b2308724e997d90b3b7a805e4fe2843da189774d6ec93a6e",
+    "profile_parse.json": "abe812515ea2a27d78209f08c28c8bdde0a5c10d1672ef0983d66d68c6eece1a",
+    "directions.json": "2d709b22623617481aefa804b96da5c5d274812758094bb921c173d0466c29df",
     "rules_check.json": "b45b1313cf295a6e320d32afce13a0b93b9b0e54e8b46d8d3cf2d6329732a40b",
-    "candidates.json": "e3804d3fc4f0f221e8172475c39270be5ba71092923a5a2b10004537f1a86e7b",
-    "evidence.json": "ef86bd06bd62a5fc5e74d5988e83505aca985e5c39006fa8918b2b4dbe2abd17",
+    "candidates.json": "ea8bbcb101fc7dc899ec1137e869654c3b9e85d79d8229e4de8115418467aeae",
+    "evidence.json": "a36a1d4072892ffd0e56b0ce2c425c1563b651a7113907892177e9ad2a5ffffe",
     "calculations.json": "89d7a293fd6780b562866f4871846b19130b0d86e79cb9f9c233e572cbae5b5d",
-    "judgment.json": "f49553e55020fe929288a66864844c9ef18ec8de1462daaed026ad875c45e0af",
+    "judgment.json": "89e67d8e39d0666399d8b470809425420fb18271c756578790e08248301ec3ff",
     "narrative.json": "9399ea02de1b9d5dc7ffe2260cb93554617e29398a80294993e27a08c718ea84",
     "profile.json": "f8c7a4b076a64c168d303710ea8836b70a79ffe5d53ce7521045bfe4ae4c2d1f",
     "profile-supplement.txt": "247f31f22f4c9a6c33394b5b25e3b37ef21c19fd3b9c12a70a83839f7976b026"
@@ -1271,9 +1271,9 @@
     }
   ],
   "artifacts": {
-    "report.md": "ce3c91202636c8882c3eace63e2effa98c0f11c4e49c148e6fbdb906b8317f2c",
-    "report.html": "1acc42f3e44a144d157ea9adf240cbd2d6bb6ad62ba2bbc17dd92d27652d43b9",
-    "2027-QZ-S05-report.pdf": "ed8469f02d0ccb73a3a0cba2aaef07f2d73a952f50b2f81400a696ba8f8a679a"
+    "report.md": "e02a23e4695e320cab1b0f912aff7381c68193d80b8ddf56271121191cfdef49",
+    "report.html": "e77b8027c462b4d37a256254f7ac64941f87bbb935e509ea136d39079de537b0",
+    "2027-QZ-S05-report.pdf": "a6a269bab24a25276b61716b852b55db8278305234c10ba5387de892e1123c36"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "authoring": {
