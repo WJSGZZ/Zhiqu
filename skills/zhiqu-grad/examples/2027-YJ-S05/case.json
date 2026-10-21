@@ -15,7 +15,7 @@
     "expected_graduation": "2027-06-30"
   },
   "context": {
-    "as_of": "2026-10-20",
+    "as_of": "2026-10-21",
     "takes_kaoyan": true,
     "offer_basis": "none",
     "personal_dates": {
@@ -99,7 +99,7 @@
     "stage": "读研版 · 大四备考",
     "region": "江苏",
     "data_asof": "{{k:/context/as_of}}",
-    "conclusion": "你十月模考 {{c:/mock_total}} 分（与学硕同科目），放进江苏六校上一届录取者的分数里看，没有数据可靠的“相对稳妥”档。一志愿默认建议苏大计算机学硕（“够一够”）；你若接受软件工程，同校软件工程学硕同科目、位置更好，可以改报，{{k:/context/personal_dates/action1|md}}前报完名。保底靠出分后调剂和春招：初试后就列调剂名单、做项目备春招。"
+    "conclusion": "你十月模考 {{c:/mock_total}} 分（与学硕同科目），放进苏大、河海上一届录取者的分数里看，再对照其余学校能取到的复试线，没有数据可靠的“相对稳妥”档。一志愿默认建议苏大计算机学硕（“够一够”）；你若接受软件工程，同校软件工程学硕同科目、位置更好，可以改报，{{k:/context/personal_dates/action1|md}}前报完名。保底靠出分后调剂和春招：初试后就列调剂名单、做项目备春招。"
   },
   "budget": {
     "annual_limit": 30000,

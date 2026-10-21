@@ -2847,6 +2847,74 @@
       "excerpt": "第三十二条 初试一般设置四个单元考试科目，即思想政治理论、外国语、业务课（一）和业务课（二），满分分别为100分、100分、150分、150分。",
       "original_locator": "第三十二条",
       "main_conclusion": false
+    },
+    {
+      "id": "E123",
+      "claim": "苏大计算机学院上一届拟录取名单的列",
+      "value": null,
+      "unit": "",
+      "source": {
+        "organization": "苏州大学计算机科学与技术学院 2026年硕士研究生招生拟录取名单公示",
+        "url": "https://scst.suda.edu.cn/92/1a/c29555a692762/page.htm",
+        "locator": "拟录取名单第1页表头",
+        "sha256": "8f17e7626778473d950a2c03b13c7c68ad3ffe8b615783b6e2ab0602d7a7d60f"
+      },
+      "availability": "available",
+      "published_on": "2026-04-01",
+      "publication_status": "published",
+      "retrieved_on": "2026-10-21",
+      "retrieval_method": "curl",
+      "verified_on": "2026-10-21",
+      "review_due": "2026-11-20",
+      "grade": "官方",
+      "status": "verified",
+      "scope": "2026年；苏州大学计算机科学与技术学院拟录取名单；图片版名单（PDF无文字层，附件 SHA-256 a1517597b93649fd8f72f7b80dee0f82c124ae027b464bf9a95a848ebcca9ead），看图读出表头共 11 列，没有本科学校或毕业学校一列",
+      "candidate_ids": [
+        "S1",
+        "S4"
+      ],
+      "rule_ids": [
+        "R07"
+      ],
+      "source_group": 5,
+      "excerpt": "拟录取专业代码 拟录取专业名称 考生编号 姓名 考试类别 学位类别 学习方式 录取类别 初试总成绩(A) 复试总成绩(B) 总成绩(A+B)",
+      "original_locator": "拟录取名单第1页表头",
+      "main_conclusion": false,
+      "gap": null
+    },
+    {
+      "id": "E124",
+      "claim": "苏大2027级全日制学术型硕士学费",
+      "value": 8000,
+      "unit": "元/生·年",
+      "source": {
+        "organization": "苏州大学财务处 2027年苏州大学研究生学费收费公示",
+        "url": "https://cwc.suda.edu.cn/ec/4b/c10237a715851/page.htm",
+        "locator": "1. 2027级研究生学费标准 表 全日制·学术型硕士研究生（不含中外合作办学）行",
+        "sha256": "5a517290307e0ae71ae327a0dfe42d1beef7f85bbc56a0899dc92ab42dc2b07c"
+      },
+      "availability": "available",
+      "published_on": "2026-10-10",
+      "publication_status": "published",
+      "retrieved_on": "2026-10-21",
+      "retrieval_method": "curl",
+      "verified_on": "2026-10-21",
+      "review_due": "2026-11-20",
+      "grade": "官方",
+      "status": "verified",
+      "scope": "2027级；苏州大学全日制学术型硕士研究生（不含中外合作办学），苏大计算机、软件工程学硕都属此类；收费依据苏价费〔2014〕196号；不含住宿费；苏大2027年简章写明收费标准按物价部门最新核定为准、见财务处收费公示",
+      "candidate_ids": [
+        "S1",
+        "S4"
+      ],
+      "rule_ids": [
+        "R20"
+      ],
+      "source_group": 30,
+      "excerpt": "学术型硕士研究生（不含中外合作办学） 8000 元/生·年",
+      "original_locator": "1. 2027级研究生学费标准 表第2行",
+      "main_conclusion": false,
+      "gap": null
     }
   ],
   "source_groups": [
@@ -2994,6 +3062,11 @@
       "title": "年度预算换算口径",
       "url": "",
       "metadata": "分析假设：按 12 个月计全年生活费；不是收费标准"
+    },
+    {
+      "title": "苏州大学财务处 2027年苏州大学研究生学费收费公示",
+      "url": "https://cwc.suda.edu.cn/ec/4b/c10237a715851/page.htm",
+      "metadata": "发布：2026-10-10；取文：2026-10-21；方式：curl；2027级研究生学费标准，不含住宿费"
     }
   ],
   "report_blocks": {
@@ -3192,7 +3265,7 @@
       "type": "bars",
       "content": {
         "title": "读研一年的钱：家里给的上限，扣掉生活费还剩多少",
-        "caption": "深色是家里说的每年上限；中间是按你估的生活费算的全年开支；琥珀色三条是留给学费、住宿的空间，分别是平常、在南京租房、先留应急金三种情形，不能相加。苏大在苏州：你只估了南京租房的生活费，苏州按你给的平常生活费算，没有分城市。各校学费还没取到，所以没画学费；条从零起。",
+        "caption": "深色是家里说的每年上限；中间是按你估的生活费算的全年开支；琥珀色三条是留给学费、住宿的空间，分别是平常、在南京租房、先留应急金三种情形，不能相加。苏大在苏州：你只估了南京租房的生活费，苏州按你给的平常生活费算，没有分城市。学费只取到苏大一所，没画进图；条从零起。",
         "unit": "元",
         "rows": [
           [
@@ -3230,7 +3303,8 @@
       "evidence_refs": [
         "E001",
         "E120",
-        "E121"
+        "E121",
+        "E124"
       ]
     },
     "11_levels": {

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "as_of": "2026-10-20",
+  "as_of": "2026-10-21",
   "items": [
     {
       "id": "R01",
@@ -115,7 +115,8 @@
         "E045",
         "E074",
         "E075",
-        "E076"
+        "E076",
+        "E123"
       ],
       "status": "verified",
       "scope": "2025、2026年一志愿统考名单；只存匿名分数",
@@ -308,6 +309,19 @@
       "verified_on": "2026-10-20",
       "review_due": "2026-11-19",
       "gap": "页面需登录；不定档"
+    },
+    {
+      "id": "R20",
+      "claim": "苏大2027级研究生学费",
+      "evidence_refs": [
+        "E124"
+      ],
+      "status": "verified",
+      "scope": "2027级全日制学术型硕士；不含住宿费",
+      "volatile": true,
+      "verified_on": "2026-10-21",
+      "review_due": "2026-11-20",
+      "gap": null
     }
   ]
 }

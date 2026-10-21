@@ -2,15 +2,15 @@
   "schema_version": 1,
   "case_id": "2027-YJ-S05",
   "source_sha256": {
-    "case.json": "16192e89bbfca10874d5d7be5edfcb79ac9d24233a1b67b1f7d249e64eef902c",
-    "profile_parse.json": "20107f71f9c2ed1d7b7198ad470d1be169109141f501371ea2c7181282f25078",
+    "case.json": "1a51301a55f90f0f9050e20e797c2af6d8a6ed6565967e5c1c900354057ba336",
+    "profile_parse.json": "26d77c111bb043cbc6cca5e761f0272ae369b77043836f7ff4e039a5759d96d9",
     "directions.json": "ed1d7e11f2d507ff8507e67a0d3b860efab243cd6ccf34118f18d5a93864ffcb",
-    "rules_check.json": "c1d6d9f0f558110862a780d5074b67a0db12a8ae2c8d00874c49af851cb49b66",
-    "candidates.json": "a9697e7a187786935d234951f363e98c2bbad04b040837797bb4dc782b7c8848",
-    "evidence.json": "d6709e5a7f7b05639040637d27d9bfaba043731cd21db40632f99ecb8c63ad27",
+    "rules_check.json": "cbbb85f76a2388cb4c279d7c299b43f5eb46e7d5ee41846678608dbfb82f5925",
+    "candidates.json": "2bc9dcf3d2e44751d9f4083f94dc72c138ab59890c622509897724ea70ef38c8",
+    "evidence.json": "63ebbc686dedad8a6731f55d400c9ca673d4e93259d36b58536059184f0bd4ca",
     "calculations.json": "d9da96c3e2546b239e866d1f561370c589b48febf5532f68a88226d2ccc1c368",
-    "judgment.json": "1b9f64be1f1a9c6279840f461e616265336cb36129171103f90d588d0ef64030",
-    "narrative.json": "6ef9dbcc40c37686686d5cddd7e2407e1c7deb0119c77a34f44a78fa87036130",
+    "judgment.json": "61738703958ec71ba599c15bdd4052f0edf8875f601d2cab9fbb93118a727e7c",
+    "narrative.json": "7e5d7b4a378f2f5e8bf38dcb8dea0ae04c9265d24e62102161a20b0bb00d1021",
     "profile.json": "af232e95b42de1286681d5b04d706bbd8d16d3dd86cfe304a7d87e5a6bfcab88",
     "profile-supplement.txt": "952368202eeb2cd031c6c0d52212442dca0faaadcd6c99828f951e50ba15d704"
   },
@@ -42,14 +42,14 @@
     {
       "location": "meta.date",
       "ref": "{{k:/context/as_of}}",
-      "value": "2026-10-20",
-      "display": "2026-10-20"
+      "value": "2026-10-21",
+      "display": "2026-10-21"
     },
     {
       "location": "meta.data_asof",
       "ref": "{{k:/context/as_of}}",
-      "value": "2026-10-20",
-      "display": "2026-10-20"
+      "value": "2026-10-21",
+      "display": "2026-10-21"
     },
     {
       "location": "meta.conclusion",
@@ -344,6 +344,18 @@
       "ref": "{{e:E017#/value}}",
       "value": "22:00",
       "display": "22:00"
+    },
+    {
+      "location": "03.analysis.4",
+      "ref": "{{e:E054#/value}}",
+      "value": 308,
+      "display": "308"
+    },
+    {
+      "location": "03.analysis.4",
+      "ref": "{{e:E050#/value}}",
+      "value": 350,
+      "display": "350"
     },
     {
       "location": "03.analysis.5",
@@ -1318,6 +1330,12 @@
       "display": "2027.09"
     },
     {
+      "location": "07.analysis.2",
+      "ref": "{{e:E017#/value}}",
+      "value": "22:00",
+      "display": "22:00"
+    },
+    {
       "location": "08.routes.1",
       "ref": "{{e:E030#/value}}",
       "value": 341,
@@ -1516,6 +1534,18 @@
       "display": "9,000"
     },
     {
+      "location": "09.analysis.3",
+      "ref": "{{k:/target_year}}",
+      "value": 2027,
+      "display": "2027"
+    },
+    {
+      "location": "09.analysis.3",
+      "ref": "{{e:E124#/value|comma}}",
+      "value": 8000,
+      "display": "8,000"
+    },
+    {
       "location": "11.assumptions.3",
       "ref": "{{p:/fields/11/value/政治}}",
       "value": 63,
@@ -1607,9 +1637,9 @@
     }
   ],
   "artifacts": {
-    "report.md": "d7b1b7b618012dcd885268b2f70fcd37fbc72617823e0778b1b8a8db977f8e29",
-    "report.html": "b1089008c15263acfe4e98c2996f780812c4a8b0e0ede42357564ee8e4858e76",
-    "2027-YJ-S05-report.pdf": "c2f14ac15063db9594330be1f0d237c9ae1e1a5f920c15494e08b940e18cd4ce"
+    "report.md": "401d68bcc28b9d965152d2464b0cdcd438e23c6bfc9dbc518837fd29a293124a",
+    "report.html": "e5962b5b0edc42e63618eb063a03c6515e9c1d3ae5697f32ca666b6051f359a1",
+    "2027-YJ-S05-report.pdf": "907e4b5baef61139a79a7e823981a5a60c0b05433c40d308bf1dc55047e869e2"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "authoring": {
