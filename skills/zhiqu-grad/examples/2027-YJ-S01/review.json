@@ -95,11 +95,11 @@
     "verification_scope": "本轮更新为附核对材料的PDF，自评和机器核对通过后仍等待独立审核；未补造官方原文和独立批准。"
   },
   "snapshot": {
-    "2027-YJ-S01-report.pdf": "0bbc537d3a124ded3ef9dea841c94cdcecbcbc98cd9d8dcee09925a5fafea2fc",
+    "2027-YJ-S01-report.pdf": "c70636c53c40ee08a6c685ae2fe3097a6088482efdd8899c55a0506a239b2217",
     "calculations.json": "cec5b3577a8d62196c2dfd606cfab91b31c421feb52a97cbdd3a5cfafcd5daf7",
     "candidates.json": "c9c5db84e727dde6ec750e534d023b4e15e7dd85e5bd1bc77110b14166f9d8ad",
     "case.json": "3b7e07dfbdad7b43a2d996e35f3c024d006a7f1ef5aa47e2f3206925f1e04d76",
-    "claim_check.json": "9627542db02280576830998011af74fd47d90af9567550f6d0b177129f389d31",
+    "claim_check.json": "1675e3d89f1a0bcc20fa5591734e41a8bff8543314e33ca446334991b4da1a11",
     "directions.json": "2b68a53951ab4a8de52d7edcbabdf32d24e4570392cd70ac212c62342430a3b2",
     "evidence.json": "68c102376c2f70ee266da8f295472bdb1cfd743bce3766c206e79b4ba346db27",
     "judgment.json": "c5eb44314051a1d85b8307a79757f819c5b69fe03647180bab197757273f26ab",
@@ -108,9 +108,9 @@
     "profile.txt": "2be92b9770f7a4a877386334b958c096198b948c89c5eabca030d4f557e29457",
     "profile_parse.json": "a9eee1981e639d511390eedec704012149c76ecf08348ddc03a5c9a8e32de7e9",
     "profile_snapshot.json": "432626de4888a0d461edc284e9c475796e8d96ce33683030143dcd3f896be032",
-    "report.html": "99f8e215da1e3387d2679fe498e0b55d74ee0df1be59bbb8daad348ce08ebda6",
+    "report.html": "f5a9d9c3ab5198a65d516abad913651206196b851e3a087720da4374a11f2e36",
     "report.md": "5b32adb9f81133bd864cf2d979f5b6fcb4866562f99022ea7414c67342895c2a",
-    "report_trace.json": "f7b9722ff8b6875a5489b466665f1478921b9839d80fafe9dd9627c7de00a285",
+    "report_trace.json": "6abe32b9e0b39446eb814d112b42ba00607d21e929352126d084cdea0ce6575a",
     "rules_check.json": "7b0a58159b98a98e96a17d877674c57bf2d59988aefd37a2f57d94f82580f5c2"
   },
   "checklist_update_note": "仅核查单表述及核查工具记录更新；报告与计算原件未改。保留历史复核记录，当前仍等待独立审核，不是重新批准。",
@@ -353,6 +353,17 @@
         "claim_check.json"
       ],
       "reason": "图表色名改中性名，19 格经独立会话重判；正文数字与结论未变"
+    },
+    {
+      "date": "2026-10-22",
+      "by": "Claude",
+      "files": [
+        "2027-YJ-S01-report.pdf",
+        "claim_check.json",
+        "report.html",
+        "report_trace.json"
+      ],
+      "reason": "共用 report.py、check_report.py 为高考“需核对报名资格”标记更新，追踪指纹随之重生成；读研/求职正文文字、数字与结论未变（report.md 逐字未变）。"
     }
   ],
   "regeneration": {

@@ -165,11 +165,11 @@
     "verification_scope": "本轮更新为附核对材料的PDF，自评和机器核对通过后仍等待独立审核；未补造官方原文和独立批准。"
   },
   "snapshot": {
-    "2027-QZ-S02-report.pdf": "06a84479614e941b57f6b9e51ec3a2816b720938acbc37e2b80a92c5a8e03094",
+    "2027-QZ-S02-report.pdf": "ba4839b1b2b5140125e3417a12b9364986a41430ed2e68ede3b508ace9eabc85",
     "calculations.json": "8e8135c7483b79dbc2d7ed702e1d9add2628ccf852da45c3d957f1e3f05d98f5",
     "candidates.json": "d741b74ae820c210e0b7d43186496ea83b72584adfe0529440e2a3b7c251d835",
     "case.json": "1266369f01a1fb4ddd7f6d8f6a4f7fcdcc475445fed3cfc9d464a41bbfda2d73",
-    "claim_check.json": "d1944cd349dcc3942f270e6ddb42fa198dedcd227220563431d8ee226e7232c6",
+    "claim_check.json": "3b4d7a5eb9858e3c018e29ad098cbb09c8d058ac9090a89ee452848584cdd741",
     "directions.json": "5b2397e7ee4e80db6b8b1b6bf0834869aabbf282dcfecc6f23c4c706d476cc76",
     "evidence.json": "39819a48f34df9a8ad734daa1ebc55980ea28b5ed46eabaa429b710b898af15d",
     "judgment.json": "6b1a98ce44bf3a24b623518f8bca10d5a21ff18b40d9e7d69cf39b5b605f113d",
@@ -178,9 +178,9 @@
     "profile-supplement.txt": "7ae0beb59e74158ec5ff869bb796f5cf3352fb7fa5c9ab7172ee930e91c93360",
     "profile.json": "e985adff4dc5eb31443eef9a859f0e7955f84936dd8dab27a61b56e4b2e50d29",
     "profile_parse.json": "d34b3c37a261949e9502d03e5eec3b00d0ad8d8f989758bfe8c4509ffae5cfd7",
-    "report.html": "e3df376f9cf7ba5645c049ef902deef847844a663b39764f798c679b95664d25",
+    "report.html": "c09e09376b812953b4bb49bcbbb656b4c14c7ef2092c0418ceb1d8516cc0898c",
     "report.md": "caf501508e4bb94fa89ef30378a716f496ff000289aa508092a9fec6dc852eff",
-    "report_trace.json": "2230a8099e04922b5a08134e975c835138f184b97bac809d4d9cacf103f10296",
+    "report_trace.json": "aa493fa50e22d56b8c7c4edb5214be2695d73aba1c49da7c50d781262e60b7c3",
     "rules_check.json": "d887941488483a7992cfbe1fb174550f3fdb3083d8c597a1cdcc43f1eee9d198"
   },
   "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。",
@@ -412,6 +412,17 @@
         "claim_check.json"
       ],
       "reason": "图表色名改中性名，19 格经独立会话重判；正文数字与结论未变"
+    },
+    {
+      "date": "2026-10-22",
+      "by": "Claude",
+      "files": [
+        "2027-QZ-S02-report.pdf",
+        "claim_check.json",
+        "report.html",
+        "report_trace.json"
+      ],
+      "reason": "共用 report.py、check_report.py 为高考“需核对报名资格”标记更新，追踪指纹随之重生成；读研/求职正文文字、数字与结论未变（report.md 逐字未变）。"
     }
   ],
   "regeneration": {
