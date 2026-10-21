@@ -124,7 +124,7 @@ CREATE TABLE civil_major_summary(region TEXT,year INTEGER,major_name TEXT,share 
  def test_default_text_displays_verified_image_locator(self):
   refs={'root_verified_image_references':[{'method':'读图','locator':'第2页表1','sha256':'image-real-sha','source_id':'image-source'}]}
   c=sqlite3.connect(self.path);c.execute('UPDATE ky_retest_line SET excerpt_locator_json=? WHERE record_id=?',(json.dumps(refs,ensure_ascii=False),'1'));c.commit();c.close()
-  text=db.render_text(self.program('甲大','0854',year=2026));self.assertIn('读图定位',text);self.assertIn('image-real-sha',text);self.assertIn('第2页表1',text)
+  text=db.render_text(self.program('甲大','0854',year=2026),full=True);self.assertIn('读图定位',text);self.assertIn('image-real-sha',text);self.assertIn('第2页表1',text)
  def test_tuition_raw_is_not_unit_or_currency_inference(self):
   self.assertNotIn('5460',db._unit('gk_plan_entry','tuition',{'tuition_raw':'5460'}))
   self.assertIn('币种与计费周期未标明',db._unit('gk_plan_entry','tuition',{'tuition_raw':'5460'}))

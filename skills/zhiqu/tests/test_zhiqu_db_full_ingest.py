@@ -156,7 +156,7 @@ class CorrectedValueOfficialLocations(unittest.TestCase):
 
     def text(self,record):
         return db.render_text({'sections':[{'table':'gk_v_purchased','title':'逐值来源测试',
-            'total':1,'offset':0,'returned':1,'truncated':0,'rows':[record]}]})
+            'total':1,'offset':0,'returned':1,'truncated':0,'rows':[record]}]},full=True)
 
     def test_corrected_fields_use_exact_record_field_and_official_source(self):
         self.check()
@@ -287,7 +287,7 @@ class LeanCandidateReadQueries(unittest.TestCase):
 
     def row(self):return dict(self.c.execute('select * from data.gk_v_purchased').fetchone())
     def record(self,row=None):return db._record(self.c,'gk_v_purchased',self.row() if row is None else row)
-    def render(self,r):return db.render_text({'sections':[{'table':'gk_v_purchased','title':'lean测试','total':1,'offset':0,'returned':1,'truncated':0,'rows':[r]}]})
+    def render(self,r,full=False):return db.render_text({'sections':[{'table':'gk_v_purchased','title':'lean测试','total':1,'offset':0,'returned':1,'truncated':0,'rows':[r]}]},full=full)
     def sample(self,source='primary',raw_id=11,row=102,cells=None):
         import hashlib
         cells={'A':'甲大学','D':0} if cells is None else cells;raw=json.dumps(cells,ensure_ascii=False)
@@ -320,7 +320,7 @@ class LeanCandidateReadQueries(unittest.TestCase):
 
     def test_additional_source_links_include_own_id_and_row_location(self):
         r=self.record();self.assertEqual([x['source_id'] for x in r['additional_sources']],['extra','extra']);self.assertEqual(r['additional_sources'][0]['locator']['src_row'],9);self.assertEqual(r['additional_sources'][1]['locator']['src_page'],4)
-        self.assertNotIn('src_row',r['additional_sources'][1]['locator']);text=self.render(r);self.assertIn('额外来源：extra',text);self.assertIn('附表',text)
+        self.assertNotIn('src_row',r['additional_sources'][1]['locator']);text=self.render(r,full=True);self.assertIn('额外来源：extra',text);self.assertIn('附表',text)
         self.c.execute('insert into data.purchased_observation_source values(7,11)');self.assertEqual(len(self.record()['additional_sources']),2)
 
     def test_extra_gap_retains_explicit_unknown_instead_of_primary_position(self):
@@ -328,7 +328,7 @@ class LeanCandidateReadQueries(unittest.TestCase):
 
     def test_annotation_output_is_separate_from_admission_scope(self):
         r=self.record();self.assertEqual(r['annotation_json'],[['学校城市','南京'],['双一流','原表标签']]);self.assertEqual(r['context']['scope_raw'],'[["专项","原招生范围"]]');self.assertNotIn('annotation_json',r['context'])
-        self.assertEqual(r['annotation_status']['status'],'第三方整理未核');text=self.render(r);self.assertIn('原表背景旁注（第三方整理未核，不作招生范围）',text);self.assertIn('南京',text)
+        self.assertEqual(r['annotation_status']['status'],'第三方整理未核');self.assertNotIn('南京',self.render(r));text=self.render(r,full=True);self.assertIn('原表背景旁注（第三方整理未核，不作招生范围）',text);self.assertIn('南京',text)
 
     def test_primary_observation_source_binding_cannot_be_changed_by_view(self):
         r=self.row();r['source_id']='extra';bad=self.record(r);self.assertIsNone(bad['original_locator']);self.assertIsNone(bad['excerpt'])

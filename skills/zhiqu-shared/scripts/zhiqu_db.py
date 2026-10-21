@@ -8,6 +8,8 @@ with mode=ro to an in-memory connection.
 """
 import argparse
 import contextlib
+import csv
+from functools import lru_cache
 import hashlib
 import json
 import os
@@ -17,6 +19,11 @@ import sqlite3
 import sys
 import unicodedata
 import zlib
+import importlib.util
+
+_storage_spec = importlib.util.spec_from_file_location('zhiqu_db_storage', Path(__file__).with_name('db_storage.py'))
+_storage = importlib.util.module_from_spec(_storage_spec)
+_storage_spec.loader.exec_module(_storage)
 
 SHARED = Path(__file__).resolve().parents[1]
 ROOT = Path(__file__).resolve().parents[3]
@@ -35,10 +42,11 @@ def _open(domain, db=None, education_db=None):
     p = _path(domain, db)
     if not p.is_file():
         raise QueryError('本机数据库未找到：' + str(p))
-    c = sqlite3.connect(':memory:', uri=True)
+    c = sqlite3.connect(':memory:', uri=True, factory=_storage.StorageConnection)
     c.row_factory = sqlite3.Row
     try:
         c.execute('ATTACH DATABASE ? AS data', (p.as_uri() + '?mode=ro',))
+        _storage.install_audit(c, p)
         if education_db:
             ep = _path('education', education_db)
             if not ep.is_file():
@@ -57,7 +65,7 @@ def _ident(s):
 
 
 def _tables(c):
-    return {x[0] for x in c.execute("SELECT name FROM data.sqlite_master WHERE type IN ('table','view')")}
+    return {x[0] for x in c.execute("SELECT name FROM data.sqlite_master WHERE type IN ('table','view')")} | _storage.logical_names(c)
 
 
 def _cols(c, table):
@@ -376,6 +384,76 @@ def _numeric_conflicts(row):
         return [],'冲突字段标记格式未能解析，待核；未推断具体冲突字段'
     return value,None
 
+@lru_cache(maxsize=256)
+def _public_format_record(root, locator):
+    """Read only one publicly versioned CSV record; never an original attachment."""
+    match=re.fullmatch(r'(.+\.csv):(\d+)',str(locator or ''))
+    if not match:return None
+    base=(Path(root)/'skills/zhiqu/data').resolve();path=(base/match[1]).resolve()
+    if not path.is_relative_to(base) or 'purchased' in path.relative_to(base).parts or not path.is_file():return None
+    number=int(match[2])
+    if number<2:return None
+    try:
+        with path.open(encoding='utf-8-sig',newline='') as f:
+            reader=csv.DictReader(f);columns=reader.fieldnames or []
+            for line,item in enumerate(reader,2):
+                if line==number:
+                    # Only scope metadata and format columns are returned, no row copy.
+                    keep=('source_id','code','name','group','major_code','major','batch','type','subjects','subject','region')
+                    return {'columns':columns,'scope':{k:item[k] for k in keep if item.get(k) not in (None,'')},'public_record':match[1]+':'+str(number)}
+    except (OSError,csv.Error,UnicodeError):return None
+    return None
+
+
+def _official_context(c, row):
+    """Only verified original-header evidence establishes field applicability."""
+    context={}
+    if row.get('code') not in (None,''):context['source_school_code']=row['code']
+    if row.get('name') not in (None,''):context['source_school_name']=row['name']
+    if row.get('major_code') not in (None,''):context['source_major_code']=row['major_code']
+    fmt=_public_format_record(str(ROOT),str(row.get('src') or row.get('src_row') or ''))
+    if fmt:
+        raw=fmt['scope']
+        if any(row.get(a) not in (None,'') and raw.get(b) not in (None,'') and str(row[a])!=str(raw[b]) for a,b in [('code','code'),('source_id','source_id')]):fmt=None
+    raw=dict(row)
+    if fmt:
+        raw.update(fmt['scope']);context['source_public_row']=fmt['public_record']
+        context['public_csv_columns']=list(fmt['columns'])
+        for col,key in [('batch','source_batch_raw'),('type','source_type_raw'),('region','source_region_raw')]:
+            if raw.get(col):context[key]=raw[col]
+    reference=None
+    if 'source_format_reference' in _tables(c):
+        found=c.execute('SELECT * FROM data.source_format_reference WHERE source_id=?',(row.get('source_id'),)).fetchone()
+        if found:
+            item=dict(found);fields=_json(item.get('provided_fields'),None);scope=_json(item.get('scope_fields'),None)
+            if isinstance(fields,list) and isinstance(scope,dict) and item.get('excerpt') and item.get('locator'):
+                reference=item;context['source_format_columns']=fields
+                context['source_format_reference']={k:item[k] for k in ('source_id','excerpt','locator')}
+                context['source_format_status']='原格式已核；只将原表应有字段的空值显示为表中空白'
+                for original,key in scope.items():
+                    if isinstance(key,str) and raw.get(original) not in (None,''):context[key]=raw[original]
+                fixed=_json(item.get('scope_values'),{})
+                if isinstance(fixed,dict):context.update({k:v for k,v in fixed.items() if v not in (None,'')})
+    if not reference:context['source_format_status']='原格式未核，空值状态见--full'
+    if context.get('source_public_row') and 'official_cutoff_scope' in _tables(c):
+        found=c.execute('SELECT scope_json,locator_json FROM data.official_cutoff_scope WHERE source_id=? AND public_record=?',(row.get('source_id'),context['source_public_row'])).fetchone()
+        if found:
+            scope=_json(found[0],{});locator=_json(found[1],{})
+            if isinstance(scope,dict):context.update(scope)
+            context['source_scope_locator']=locator
+    grp=context.get('source_group_code') or row.get('grp') or row.get('group')
+    if grp not in (None,'','-','—','--'):
+        context['source_granularity']='院校专业组';context['source_group_code']=grp
+        if row.get('major') not in (None,'') and not context.get('major_name'):context.setdefault('group_scope_raw',row['major'])
+    elif context.get('major_name'):context['source_granularity']='专业'
+    elif row.get('major') not in (None,''):
+        context['source_granularity']='原表项目（含义待核）';context['original_major_raw']=row['major']
+    else:context['source_granularity']='院校/原表记录；未给专业或专业组'
+    if not any(row.get(k) or context.get(k) for k in ('batch','source_batch_raw','source_type_raw')):context['source_batch_status']='当前记录未留批次字段；不能据此认定不同记录属于同一批次'
+    if row.get('_query_record_rowid') is not None:context['source_record_key']='gk_official_cutoff:'+str(row['_query_record_rowid'])
+    return context
+
+
 def _record(c, table, row):
     conflict_fields,conflict_parse_status=_numeric_conflicts(row) if table=='gk_v_purchased' else ([],None)
     sid = row.get('source_id')
@@ -447,6 +525,19 @@ def _record(c, table, row):
     if table == 'employment_major_industry' and 'employment_industry_version' in _tables(c):
         equivalent_sources=[dict(x) for x in c.execute('SELECT * FROM data.employment_industry_version WHERE preferred_source_id=? ORDER BY source_id',(sid,))]
     result = {'table':table,'major_links':major_links,'institution_links':institution_links,'record_id':row.get('record_id',row.get('entry_id',row.get('position_id'))),'field_source_ids':_json(row.get('field_source_ids')) if table == 'gk_v_purchased' else {},'context':{k:row[k] for k in CONTEXT if k in row and row[k] not in (None,'')},'values':values,'source':s,'locator':{k:row[k] for k in ['src_page','src_table','src_sheet','src_row','src_col','src_cell','src_locator','locator','source_locator','locator_method','locator_status'] if k in row},'excerpt':row.get('excerpt') or row.get('field_excerpt') or (original[0] if original else None) or _original_excerpt(_json(row.get('excerpt_locator_json'))),'excerpt_kind':('purchased_row原始单元格' if original else row.get('excerpt_kind') or ('原表摘录或读图定位记录（核验状态另列）' if row.get('excerpt_locator_json') else '原表单元格摘录' if table in ['job_summary','job_position'] else '未取到逐字原文摘录')),'excerpt_locator':_json(row.get('excerpt_locator_json')),'original_locator':original[1] if original else None,'equivalent_sources':equivalent_sources}
+    if table=='gk_official_cutoff':
+        result['context'].update(_official_context(c, row))
+        provided=result['context'].get('source_format_columns')
+        if isinstance(provided,list):
+            for field,value in values.items():
+                if value['value'] in (None,'') and field not in provided:
+                    value['value_status']={'status':'来源未提供','reason':'已核原件格式不设此列；兼容占位，不是原件遗失',
+                                           'applicable_by_format':False,'original_status':value['value_status']}
+        if row.get('src'):result['locator']['public_record']=row['src']
+        if result['context'].get('source_scope_locator'):
+            result['locator']['original_scope']=result['context']['source_scope_locator']
+        if result['context'].get('source_format_reference'):
+            result['locator']['original_format']=result['context']['source_format_reference']
     if table=='gk_v_purchased':
         result.update(additional_sources=additional_sources,annotation_json=annotation,
                       annotation_status={'status':'第三方整理未核','note':'原表背景旁注，不是招生适用范围，不参与数字事实身份'})
@@ -498,8 +589,22 @@ def _section(c, table, where, args, limit, offset):
     totals=c.execute('SELECT '+aggregate+' FROM data.'+_ident(storage)+' t WHERE '+where,args).fetchone()
     total=totals[0];year_range=list(totals[1:]) if yf and totals[1] is not None else []
     order = 'CAST(t.year AS INTEGER) DESC' if 'year' in cols else 't.plan_year DESC' if 'plan_year' in cols else '1'
-    rows = c.execute('SELECT t.* FROM data.' + _ident(storage) + ' t WHERE ' + where + ' ORDER BY ' + order + ' LIMIT ? OFFSET ?', (*args, limit, offset)).fetchall()
-    return {'table':table,'title':TITLES.get(table,table),'year_range':year_range,'total':total,'offset':offset,'returned':len(rows),'truncated':max(total-offset-len(rows),0),'rows':[_record(c,table,dict(r)) for r in rows]}
+    projection='t.*'
+    if table=='gk_official_cutoff' and c.execute("SELECT type FROM data.sqlite_master WHERE name=?",(storage,)).fetchone()[0]=='table':projection='t.rowid AS _query_record_rowid,t.*'
+    rows = c.execute('SELECT '+projection+' FROM data.' + _ident(storage) + ' t WHERE ' + where + ' ORDER BY ' + order + ' LIMIT ? OFFSET ?', (*args, limit, offset)).fetchall()
+    records=[_record(c,table,dict(r)) for r in rows]
+    if table=='gk_official_cutoff':
+        groups={}
+        for record in records:
+            scope={k:v for k,v in record['context'].items() if k not in ('source_record_key','source_public_row','source_format_columns','source_format_status','source_format_reference','public_csv_columns','source_scope_locator')}
+            groups.setdefault(json.dumps(scope,ensure_ascii=False,sort_keys=True),[]).append(record)
+        for duplicates in groups.values():
+            if len(duplicates)>1:
+                for record in duplicates:
+                    ctx=record['context'];ctx['scope_row_disambiguator']=ctx.get('source_public_row') or ctx.get('source_record_key') or _plain(record.get('locator'))
+                    # Identical CSV source rows can still be separate real DB rows.
+                    if sum(r['context'].get('source_public_row')==ctx.get('source_public_row') for r in duplicates)>1 and ctx.get('source_record_key'):ctx['scope_row_disambiguator']+='；'+ctx['source_record_key']
+    return {'table':table,'title':TITLES.get(table,table),'year_range':year_range,'total':total,'offset':offset,'returned':len(rows),'truncated':max(total-offset-len(rows),0),'rows':records}
 
 
 CORE_DELTA_VIEWS=('v_core_delta_number','v_core_delta_attribute')
@@ -595,6 +700,30 @@ def _warnings(c, identity, sections, year):
     return warnings
 
 
+def _official_reference_section(c, identity):
+    if 'v_institution_official_reference' not in _tables(c):
+        return None
+    rows=[]
+    order={'办学所在地':0,'主管部门':1,'办学层次':2,'985工程':3,'211工程':4,'第二轮双一流':5}
+    items=[dict(r) for r in c.execute('SELECT * FROM data.v_institution_official_reference WHERE institution_id=?',(identity['institution_id'],))]
+    for item in sorted(items,key=lambda x:(order.get(x['programme'],99),x['list_id'])):
+        source=_source(c,item['source_id']);programme=item['programme'];state=item['is_member']
+        membership=programme in {'985工程','211工程','第二轮双一流'}
+        status='推算' if membership and state==0 else '来源未提供' if membership and state is None else '官方原值'
+        scope='名单年份：'+str(item['list_year']) if item['list_year'] is not None else '名单截至年未标（页面发布日期不代替名单年份）'
+        value={'value':item['value'],'unit':'','display_label':programme,
+               'grade':'官方','publisher':source.get('publisher','教育部'),'source_id':item['source_id'],
+               'value_status':{'status':status,'method':item['comparison_basis']}}
+        rows.append({'table':'institution_official_reference','record_id':identity['institution_id']+':'+item['programme'],
+                     'context':{'reference_scope':scope},'values':{programme:value},'source':source,
+                     'locator':_json(item['src_locator']),'excerpt':item['excerpt'],
+                     'excerpt_kind':'官方原表；未列入结论由完整名单集合比较得出，不冒充逐校否定原句',
+                     'reference':item})
+    if not rows:return None
+    return {'table':'institution_official_reference','title':'学校官方信息（教育部名单）','year_range':[],
+            'total':len(rows),'offset':0,'returned':len(rows),'truncated':0,'rows':rows}
+
+
 def _school_attribute_section(c, ident, limit, offset):
     """Canonical school facts; paginate fields, keeping every conflicting value together."""
     tables=_tables(c)
@@ -622,7 +751,10 @@ def _school_attribute_section(c, ident, limit, offset):
     grouped={}
     for fact in facts:grouped.setdefault(fact['field_name'],[]).append(fact)
     fields=sorted(grouped,key=lambda f:(priority.index(f) if f in priority else len(priority),f))
-    selected=fields[offset:offset+limit];rows=[]
+    official={r['programme']:dict(r) for r in c.execute('SELECT * FROM data.v_institution_official_reference WHERE institution_id=?',(ident['institution_id'],))} if 'v_institution_official_reference' in tables else {}
+    controlled={'is_985','is_211','school_tags','school_level','school_location','province_of_school','city','affiliation'} if 'v_institution_official_reference' in tables else set()
+    public_fields=[f for f in fields if f not in controlled]
+    selected=public_fields[offset:offset+limit]+[f for f in fields if f in controlled];rows=[]
     for field in selected:
         for fact in grouped[field]:
             aid=fact['attribute_id'];sources=[]
@@ -656,9 +788,28 @@ def _school_attribute_section(c, ident, limit, offset):
             if count_field and len(grouped.get(count_field,[]))==1:
                 raw=grouped[count_field][0]['value']
                 if re.fullmatch(r'[0-9]+',raw.strip()):value['declared_count']=int(raw.strip())
-            rows.append({'table':'school_attribute_fact','record_id':'school-attribute-'+str(aid),'context':{'year_status':'未记录'},'values':{field:value},'sources':sources,
-                         'source_conflict':'来源之间不一致' if len(grouped[field])>1 else None})
-    return {'table':'school_attribute_fact','title':'学校概况（第三方，统计年份未明）','year_range':[],'total':len(fields),'fact_count':len(facts),'excluded_facts':original_fact_count-len(facts),'offset':offset,'returned':len(selected),'truncated':max(len(fields)-offset-len(selected),0),'canonical_fields':fields,'rows':rows}
+            row={'table':'school_attribute_fact','record_id':'school-attribute-'+str(aid),'context':{'year_status':'未记录'},'values':{field:value},'sources':sources,
+                 'source_conflict':'来源之间不一致' if len(grouped[field])>1 else None}
+            if field in controlled:
+                row['default_hidden']=True
+                programme={'is_985':'985工程','is_211':'211工程'}.get(field)
+                ref=official.get(programme)
+                if ref and ref['is_member'] is not None:
+                    raw=str(fact['value']).strip().lower()
+                    parsed=1 if raw in {'是','有','1','1.0','true','yes','√'} else 0 if raw in {'否','无','0','0.0','false','no','×'} else None
+                    row['context']['official_comparison']='与官方名单冲突' if parsed is not None and parsed!=ref['is_member'] else '官方身份以教育部名单为准；此处保留第三方原值'
+                    if parsed is not None and parsed!=ref['is_member']:
+                        value['value_status']['reason']='与官方名单冲突；'+ref['scope_note']
+                elif field in {'school_location','province_of_school','city'} and '办学所在地' in official:
+                    raw=re.sub('[省市\\s]','',str(fact['value']))
+                    prov=re.sub('[省市\\s]','',str(ident.get('province') or ''))
+                    city=re.sub('[省市\\s]','',official['办学所在地']['value'])
+                    compatible=raw in {prov,city,prov+city} or (prov and city and raw==prov+city)
+                    row['source_conflict']=None if compatible else row['source_conflict']
+                    row['context']['official_comparison']='所在地精度不同，采用教育部城市字段' if compatible else '与本版教育部所在地不同；第三方统计时点未标'
+                else:row['context']['official_comparison']='项目标签、主管部门和所在地默认采用官方参考；第三方历史标签保留待核'
+            rows.append(row)
+    return {'table':'school_attribute_fact','title':'学校概况（第三方，统计年份未明）','year_range':[],'total':len(public_fields),'fact_count':len(facts),'excluded_facts':original_fact_count-len(facts),'offset':offset,'returned':len(selected),'truncated':max(len(public_fields)-offset-limit,0),'canonical_fields':fields,'rows':rows}
 
 
 def _query_education(name, program=None, year=None, province=None, db=None, limit=10, offset=0, major=None, subject=None, plan_type=None):
@@ -667,6 +818,8 @@ def _query_education(name, program=None, year=None, province=None, db=None, limi
         raise QueryError('专业代码只能含字母和数字')
     with _open('education', db) as (c,p):
         ident,warnings = _identity(c,name,year,province);tables=_tables(c);sections=[]
+        official=_official_reference_section(c,ident) if program is None else None
+        if official:sections.append(official)
         ky_tables=['ky_v_usable_program' if 'ky_v_usable_program' in tables else 'ky_program_year']+(['ky_v_usable_line'] if 'ky_v_usable_line' in tables else [])+['ky_v_usable']
         candidates = ['institution_profile','gk_plan_entry','gk_official_cutoff','gk_v_usable','gk_v_purchased']+ky_tables if program is None else ['gk_v_purchased']+ky_tables
         canonical=_school_attribute_section(c,ident,limit,offset) if program is None and 'school_attribute_fact' in tables else None
@@ -737,6 +890,12 @@ def _query_education(name, program=None, year=None, province=None, db=None, limi
         exclude_school_fields=tuple(f for f in ('is_985','is_211','school_location') if canonical and f in canonical['canonical_fields'])
         core=_core_delta_section(c,ident,name,program,year,province,major,subject,plan_type,limit,offset,exclude_school_fields=exclude_school_fields)
         if core:sections.append(core)
+        def section_priority(section):
+            if section['table']=='institution_official_reference':return 0
+            if section['table'] in {'gk_official_cutoff','ky_v_usable_line','ky_v_retest_line','ky_retest_line'}:return 1
+            grades=[v.get('grade') for r in section['rows'] for v in r.get('values',{}).values()]
+            return 1 if grades and all(g=='官方' for g in grades) else 2
+        sections.sort(key=section_priority)
         warnings += _warnings(c,ident,sections,year)
         if program:
             warnings.append('旧研究生记录按研究生专业码前缀检索；本轮补录字段按其原专业码前缀检索，二者不作等价连接。' if core else '仅对研究生专业码作前缀检索；逐行保留具体代码，不与本科专业码直接相等连接。')
@@ -797,7 +956,7 @@ def query_source(source_id, *, db=None, domain='education', limit=10, offset=0):
         if s['source_id']=='未登记' or s.get('grade')=='未注明':raise QueryError('未找到来源编号：'+source_id)
         locations=[];counts={}
         for table in sorted(_tables(c)):
-            if table not in set(NUMERIC)|{'institution_event','comparability','selected_university','recruitment_notice'}:continue
+            if table not in set(NUMERIC)|{'institution_event','comparability','selected_university','recruitment_notice','v_institution_official_reference'}:continue
             cols=_cols(c,table)
             if 'source_id' not in cols:continue
             count=c.execute('SELECT count(*) FROM data.'+_ident(table)+' WHERE source_id=?',(source_id,)).fetchone()[0]
@@ -806,21 +965,21 @@ def query_source(source_id, *, db=None, domain='education', limit=10, offset=0):
             rows=c.execute('SELECT * FROM data.'+_ident(table)+' WHERE source_id=? LIMIT ? OFFSET ?',(source_id,limit,offset))
             for row in rows:
                 r=dict(row)
-                if table=='gk_v_purchased':
+                if table in {'gk_v_purchased','gk_official_cutoff'}:
                     detailed=_record(c,table,r)
-                    locations.append({k:detailed[k] for k in ('table','locator','excerpt','excerpt_kind','excerpt_locator','original_locator','additional_sources','annotation_json','annotation_status','numeric_conflict_fields','numeric_conflict_fields_status') if k in detailed})
+                    locations.append({k:detailed[k] for k in ('table','locator','context','excerpt','excerpt_kind','excerpt_locator','original_locator','additional_sources','annotation_json','annotation_status','numeric_conflict_fields','numeric_conflict_fields_status') if k in detailed})
                     continue
                 locations.append({'table':table,'locator':{k:r[k] for k in ['record_id','src_page','src_table','src_sheet','src_row','src_col','src_cell','src_locator','locator'] if k in r},'excerpt':r.get('excerpt') or r.get('field_excerpt') or _original_excerpt(_json(r.get('excerpt_locator_json'))),'excerpt_kind':r.get('excerpt_kind') or ('原表摘录或读图定位记录（核验状态另列）' if r.get('excerpt_locator_json') else '未取到逐字原文摘录'),'excerpt_locator':_json(r.get('excerpt_locator_json'))})
         return {'query':'source','database':str(p),'source':s,'locations':locations,'matching_rows_by_table':counts,'limit_per_table':limit,'offset':offset,'warnings':['未留存逐字摘录时明确显示未取到；结构化整理记录不冒充官网逐字原文。']}
 
 
-def _value_text(v):
+def _value_text(v, *, hide_status=False):
     status=v['value_status'].get('status','未标记（待核）')
     raw=v['value']
     if raw is None or raw=='':
         text='未公布' if status=='未公布' else '人数太少未公布' if status=='人数太少未公布' else '原件缺失' if status=='原件缺失' else '来源未提供' if status=='来源未提供' else status
     else:text=str(raw)+((' '+v['unit']) if v.get('unit') else '')
-    rendered = '%s〔%s｜%s｜%s；%s〕' % (text,v['grade'],v['publisher'],v['source_id'],status)
+    rendered = ('%s〔%s｜%s｜%s〕' % (text,v['grade'],v['publisher'],v['source_id'])) if hide_status else ('%s〔%s｜%s｜%s；%s〕' % (text,v['grade'],v['publisher'],v['source_id'],status))
     if v.get('supplement_warning'):rendered+='；'+v['supplement_warning']
     if 'official_locator' in v:
         if v['official_locator']:
@@ -838,8 +997,11 @@ CONTEXT_LABELS = dict(zip(CONTEXT, ['年份','计划年份','省份','地区','�
 
 CONTEXT_LABELS.update({'industry':'原列就业行业','unit_raw':'原列单位','value_raw':'原格占比','cohort':'原列毕业届别'})
 CONTEXT_LABELS['subjects']='考试科目'
+CONTEXT_LABELS.update({'reference_scope':'官方名单口径','official_comparison':'与官方参考比较'})
 CONTEXT_LABELS.update({'major_full':'专业完整原名','school_group_code':'院校专业组组合代码','old_batch':'原旧批次','duration':'学制原文','comparison_status':'比较口径状态','other_province_raw':'另省份列（原口径未注明）','province_status':'省份依据状态'})
 CONTEXT_LABELS.update({'graduate_cohort':'毕业届别（原表）','graduate_cohort_raw':'届别原文','cohort_status':'届别状态','province_raw':'学校所在省（原表）','city_raw':'学校所在市（原表）','institution_name_raw':'院校名称（原表）','item':'就业项目','item_raw':'项目原文','record_type':'记录类型','dataset_type':'数据类型','school_raw':'院校原名','group_name':'专业组名称','subject_requirements':'选科要求','scope_raw':'原表范围说明'})
+
+CONTEXT_LABELS.update({'source_school_code':'原院校代码','source_school_name':'原院校名','source_region_raw':'原地区','source_batch_status':'批次说明','source_major_code':'原专业代码','source_group_code':'原专业组码','source_granularity':'口径','group_scope_raw':'原组说明','subject_requirements':'选科要求','original_major_raw':'原项目（含义待核）','source_batch_raw':'原批次','source_type_raw':'原类别/批次','scope_row_disambiguator':'记录位置'})
 
 def _plain(obj):
     if isinstance(obj,dict):return '；'.join(globals().get('_SOURCE_LABELS',{}).get(k,globals().get('CONTEXT_LABELS',{}).get(k,str(k)))+'：'+_plain(v) for k,v in obj.items())
@@ -956,6 +1118,13 @@ def _profile_rows(rows):
     return list(by_field.values()) or rows
 
 
+def _locator_text(locator):
+    text=_plain(locator)
+    if isinstance(locator,dict) and locator.get('first_row') is not None:
+        text+='；行边界：'+str(locator['first_row'])+'—'+str(locator.get('last_row',locator['first_row']))+'（可能不连续；匹配'+str(locator.get('matched_rows','未注明'))+'行；完整逐行关联保留在库中，此处未逐行展开）'
+    return text
+
+
 def _source_lines(row, full=False, refs=None):
     lines=[]
     source=row.get('source') or {}
@@ -966,8 +1135,8 @@ def _source_lines(row, full=False, refs=None):
         keys=['source_id','grade','publisher','title','landing_url','file_url','published','retrieved','archive_sha256','archive_status']
         lines.append(prefix(source)+'来源：'+'；'.join(_SOURCE_LABELS[k]+'：'+_short_text(source[k],full) for k in keys if source.get(k) not in (None,'')))
     original=row.get('original_locator')
-    if original:lines.append(prefix(source)+'原始单元格定位：'+_plain(original))
-    elif row.get('locator'):lines.append(prefix(source)+'定位：'+_plain(row['locator']))
+    if original:lines.append(prefix(source)+'原始单元格定位：'+_locator_text(original))
+    elif row.get('locator'):lines.append(prefix(source)+'定位：'+_locator_text(row['locator']))
     for value in row.get('values',{}).values():
         if 'official_locator' in value or value.get('locator'):
             lines.append('逐值出处：'+_value_text(value))
@@ -982,12 +1151,12 @@ def _source_lines(row, full=False, refs=None):
         if extra:lines.append('来源补充：'+_plain(extra))
     if row.get('excerpt_status'):lines.append('摘录状态：'+_short_text(row['excerpt_status'],full))
     for item in row.get('additional_sources',[]):
-        lines.append('额外来源：'+str(item.get('source_id') or '未登记')+'；'+_plain(item.get('locator',{})))
+        lines.append('额外来源：'+str(item.get('source_id') or '未登记')+'；'+_locator_text(item.get('locator',{})))
     for item in row.get('sources',[]):
         if isinstance(item,dict):
             src=item.get('source',item)
             lines.append(prefix(src)+'来源：'+'；'.join(_SOURCE_LABELS.get(k,k)+'：'+_short_text(src[k],full) for k in _SOURCE_LABELS if src.get(k) not in (None,'')))
-            if item.get('locator'):lines.append(prefix(src)+'定位：'+_plain(item['locator']))
+            if item.get('locator'):lines.append(prefix(src)+'定位：'+_locator_text(item['locator']))
             if full:
                 extra={k:v for k,v in src.items() if k not in _SOURCE_LABELS and v not in (None,'')}
                 if extra:lines.append(prefix(src)+'来源补充：'+_plain(extra))
@@ -1011,7 +1180,7 @@ def _compact_source_lines(rows, refs):
         for value in row.get('values',{}).values():
             vid=str(value.get('source_id') or '未登记')
             if vid not in priority:priority.append(vid)
-            add(vid,locator=value.get('locator'))
+            add(vid,{'source_id':vid,'publisher':value.get('publisher')},locator=value.get('locator'))
             if 'official_locator' in value:
                 add(vid,detail='逐值出处：'+_value_text(value))
         if source:add(sid,source,row.get('original_locator') or row.get('locator'))
@@ -1032,35 +1201,22 @@ def _compact_source_lines(rows, refs):
         value=str(value or '').replace('\n',' ')
         if value.lstrip().startswith(('{','[')) or re.search(r'"(?:members|note|citation)"\s*:',value):return '结构化来源标题（--full查看）'
         return value if len(value)<=60 else value[:59]+'…'
-    def location_text(loc):
-        if not isinstance(loc,dict):return _short_text(loc,cap=140)
-        parts=[]
-        for key in ('src_sheet','src_table','src_page','src_col','src_row','src_locator','locator','source_locator','locator_status'):
-            if loc.get(key) not in (None,''):parts.append(_SOURCE_LABELS.get(key,key)+'：'+_short_text(loc[key],cap=100))
-        if loc.get('first_row') is not None:
-            parts.append('行边界：'+str(loc['first_row'])+'—'+str(loc.get('last_row',loc['first_row']))+'（可能不连续；匹配'+str(loc.get('matched_rows','未注明'))+'行，全部逐行关联保留在库中，此处为边界摘要）')
-        return '；'.join(parts)
     lines=[]
     for sid in order[:10]:
         entry=entries[sid];src=entry['source'];ref=refs.get(sid,sid)
-        parts=['['+ref+'] 来源：出处：'+sid]
-        for key in ('publisher','title'):
-            if src.get(key):parts.append(_SOURCE_LABELS[key]+'：'+title_text(src[key]))
-        for key in ('landing_url','file_url'):
-            if src.get(key):parts.append(_SOURCE_LABELS[key]+'：'+_short_text(src[key],cap=240))
-        if src.get('archive_sha256'):parts.append('指纹：'+str(src['archive_sha256']))
-        locations=entry['locations']
-        if locations:parts.append('定位：'+' / '.join(location_text(x) for x in locations[:2]))
-        if len(locations)>2:parts.append('另'+str(len(locations)-2)+'处定位见--full/--json（可能不连续）')
-        parts.extend(entry['details'][:4])
-        if len(entry['details'])>4:parts.append('其他核对信息见--full/--json')
-        lines.append('；'.join(parts).replace('\n',' '))
+        published=re.search(r'(?:19|20)\d{2}',str(src.get('published') or ''))
+        year=published.group(0) if published else next(iter(re.findall(r'(?:19|20)\d{2}',str(src.get('title') or ''))),'未注明')
+        link=src.get('landing_url') or src.get('file_url') or '链接未登记'
+        parts=['['+ref+']',title_text(src.get('publisher') or '发布单位未注明'),title_text(src.get('title') or '标题未注明'),year,_short_text(link,cap=240)]
+        lines.append('｜'.join(parts).replace('\n',' '))
     if len(order)>10:lines.append('另'+str(len(order)-10)+'条来源未展开（含其他值的出处时仍以上方S编号区分；--full或--json查看完整来源和定位）')
     return lines
 
 
 def render_text(result, *, full=False):
-    if result.get('query')=='source':return _render_full_text(result)
+    if result.get('query')=='source':
+        if full:return _render_full_text(result)
+        return _render_full_text(dict(result,locations=[{k:v for k,v in row.items() if k!='annotation_json'} for row in result.get('locations',[])]))
     # Preserve identity/event wording and warnings, with no business rows duplicated.
     header=dict(result,sections=[],warnings=[])
     lines=_render_full_text(header).splitlines()
@@ -1068,15 +1224,43 @@ def render_text(result, *, full=False):
     for sec in result.get('sections',[]):
         original=sec.get('rows',[])
         profile=sec.get('table') in _PROFILE_TABLES
-        rows=_profile_rows(original) if profile else original
+        default_rows=original if full else [r for r in original if not r.get('default_hidden') and not r.get('full_only') and not (profile and r.get('values') and all(k in {'school_location','province_of_school','city','city_tier','school_address'} and v.get('grade')=='第三方整理' for k,v in r['values'].items()))]
+        hidden_on_page=len(original)-len(default_rows)
+        rows=_profile_rows(default_rows) if profile else default_rows
+        if profile and not full:
+            background={'school_tags','school_tag','school_levels','school_level','degree_level','tags','levels','is_985','is_211','affiliation','ownership','school_type','school_rank','school_location','province_of_school','school_city','city_tier'}
+            filtered=[r for r in rows if not all(not v.get('values') and set(v.get('context',{})) and set(v.get('context',{}))<=background for v in r.get('_variants',[r]))]
+            hidden_on_page+=len(rows)-len(filtered);rows=filtered
         visible=rows if full else rows[:10]
         more=max(0,len(rows)-len(visible))+sec.get('truncated',0)
         noun='字段' if profile else '行'
         total_label=str(sec.get('total',len(original)))+noun
         if profile and sec.get('fact_count') is not None:total_label+='（'+str(sec['fact_count'])+'个不同值）'
         lines.extend(['',sec['title']+'：共'+total_label+'；本页'+str(len(visible))+noun+'；后续'+str(more)+'行未显示','适用范围 | 数值与出处','--- | ---'])
+        if hidden_on_page:lines.append('显示说明：本页另有'+str(hidden_on_page)+'条保留记录默认不展开；--full或--json查看。')
         if sec.get('excluded_facts'):
             lines.append('说明：'+str(sec['excluded_facts'])+'个属性无可用来源；已沿用原工作表身份隔离，不纳入概况或冲突判定。')
+        populated=[v for item in visible for variant in item.get('_variants',[item]) for v in variant.get('values',{}).values() if v.get('value') not in (None,'')]
+        collapse_unverified=not full and bool(populated) and all((v.get('value_status',{}).get('status') if isinstance(v.get('value_status'),dict) else v.get('value_status'))=='第三方整理未核' for v in populated)
+        repeated=[]
+        for item in visible:
+            for origin in item.get('_origin_rows',[item]):
+                for key in ('source_format_status','source_batch_status','year_status','province_status'):
+                    value=origin.get('context',{}).get(key)
+                    if value:repeated.append((key,str(value)))
+                for v in origin.get('values',{}).values():
+                    if v.get('supplement_warning'):repeated.append(('supplement_warning',v['supplement_warning']))
+        common={pair for pair in repeated if repeated.count(pair)>1}
+        caveats=[]
+        if not full:
+            if collapse_unverified:caveats.append('本块有值记录均为第三方整理未核；完整逐值状态见--full或--json。')
+            for _,message in dict.fromkeys(pair for pair in repeated if pair in common or pair[0]=='source_format_status'):
+                if message not in caveats:caveats.append(message)
+            if any(isinstance(r.get('context',{}).get('source_format_columns'),list) for r in original):caveats.append('已核原格式未列的空占位仅在--full显示；原表应有字段的空白仍列出。')
+            if any(r.get('excerpt_kind') and '此行未留全文' in r['excerpt_kind'] for r in original):caveats.append('部分记录仅保留定位与抽样，此行未留全文；--full查看逐项核对信息。')
+            values=[v for r in original for v in r.get('values',{}).values()]
+            if any('official_locator' in v and not v.get('official_locator') for v in values):caveats.append('部分字段的官方原文定位未取到或尚未唯一确认；--full查看候选，未借用购买表位置。')
+            if caveats:lines.append('本块说明：'+'；'.join(caveats))
         origins=[]
         refs={}
         for item in visible:
@@ -1086,11 +1270,18 @@ def render_text(result, *, full=False):
                 ids.extend((x.get('source',x) or {}).get('source_id') for x in origin.get('sources',[]) if isinstance(x,dict))
                 for sid in ids:
                     if sid is not None and str(sid) not in refs:refs[str(sid)]='S'+str(len(refs)+1)
+        rendered_scopes={}
         for row in visible:
             variants=row.get('_variants',[row])
             context_parts=[]
             for variant in variants:
                 for k,v in variant.get('context',{}).items():
+                    if not full and k in {'school_tags','school_tag','school_levels','school_level','degree_level','tags','levels','is_985','is_211','affiliation','ownership','school_type','school_rank','school_location','province_of_school','school_city','city_tier'}:continue
+                    if not full and k in {'source_format_columns','source_public_row','source_record_key','public_csv_columns','source_format_reference','source_format_status','source_scope_locator'}:continue
+                    if not full and (k,str(v)) in common:continue
+                    if not full and k=='source_school_name' and str(v)==str((result.get('identity') or {}).get('name')):continue
+                    if not full and k=='grp' and variant.get('context',{}).get('source_group_code'):continue
+                    if not full and k=='group_scope_raw' and v==variant.get('context',{}).get('subject_requirements'):continue
                     if not full and k in {'record_type','dataset_type','school_raw','school','school_name','comparison_status'}:
                         continue
                     if not full and k=='scope_raw':v=_json(v,v)
@@ -1101,30 +1292,48 @@ def render_text(result, *, full=False):
             vals=[]
             missing=[]
             for key,value in [(k,v) for variant in variants for k,v in variant.get('values',{}).items()]:
+                if not full and profile and key in {'school_location','province_of_school','city','city_tier','school_address'} and value.get('grade')=='第三方整理':continue
                 status=value.get('value_status')
                 status=status.get('status') if isinstance(status,dict) else status
-                if not full and value.get('value') is None and status=='来源未提供' and any(v.get('value') is not None for variant in variants for v in variant.get('values',{}).values()):
+                if not full and value.get('value') in (None,'') and 'source_format_status' in row.get('context',{}) and (not isinstance(row['context'].get('source_format_columns'),list) or key not in row['context']['source_format_columns']):
                     continue
                 label=value.get('display_label',('签约人数' if sec['table']=='graduate_destination' and key=='headcount' else '名次' if sec['table']=='graduate_destination' and key=='rank' else LABELS.get(key,key)))
-                if not full and value.get('value') is None and status=='来源未提供':
+                if not full and value.get('value') is None and status=='来源未提供' and 'source_format_status' not in row.get('context',{}):
                     missing.append((label,value))
                     continue
                 copy=dict(value)
                 if not full:
                     copy={k:v for k,v in copy.items() if k not in ('locator','official_locator','official_locator_candidates')}
+                    if ('supplement_warning',str(copy.get('supplement_warning'))) in common:copy.pop('supplement_warning',None)
+                    if copy.get('value') in (None,'') and isinstance(row.get('context',{}).get('source_format_columns'),list) and key in row['context']['source_format_columns']:
+                        copy['value_status']={'status':'表中空白（原因未核）','original_status':value.get('value_status')}
+                    if copy.get('value') in (None,'') and row.get('context',{}).get('source_format_status','').startswith('未核定'):
+                        copy['value_status']={'status':'空值待核（格式未知）','original_status':value.get('value_status')}
                     if isinstance(copy.get('value'),(str,list,dict)):copy['value']=_list_text(key,copy['value'],full,copy.get('declared_count'))
                     copy['publisher']=_short_text(copy.get('publisher','未注明'),cap=60)
                     copy['source_id']=refs.get(str(copy.get('source_id')),str(copy.get('source_id') or '未登记'))
-                vals.append(label+'：'+_value_text(copy))
+                vals.append(label+'：'+_value_text(copy,hide_status=collapse_unverified and value.get('value') not in (None,'')))
             if missing:
                 label='、'.join(x[0] for x in missing[:3])
                 if len(missing)>3:label+='等'+str(len(missing))+'项'
                 copy=dict(missing[0][1]);copy['source_id']=refs.get(str(copy.get('source_id')),str(copy.get('source_id') or '未登记'))
                 vals.append(label+'：'+_value_text(copy))
             if row.get('_conflict') or row.get('source_conflict'):context+='；来源之间不一致'
-            if row.get('annotation_json'):context+='；原表背景旁注（第三方整理未核，不作招生范围）：'+_short_text(row['annotation_json'],full)
+            if full and row.get('annotation_json'):context+='；原表背景旁注（第三方整理未核，不作招生范围）：'+_short_text(row['annotation_json'],full)
             if row.get('numeric_conflict_fields'):context+='；第三方版本冲突字段：'+'、'.join(LABELS.get(k,k) for k in dict.fromkeys(row['numeric_conflict_fields']))+'；'+NUMERIC_CONFLICT_NOTE
             if row.get('numeric_conflict_fields_status'):context+='；'+row['numeric_conflict_fields_status']
+            if sec.get('table')=='gk_official_cutoff':
+                def actual_key(item):
+                    ctx=item.get('context',{})
+                    if ctx.get('scope_row_disambiguator'):return ctx['scope_row_disambiguator']
+                    keys=[ctx[k] for k in ('source_public_row','source_record_key') if ctx.get(k)]
+                    return '；'.join(map(str,keys)) or item.get('record_id') or _plain(item.get('locator') or {})
+                if context in rendered_scopes:
+                    old_index,old_row=rendered_scopes[context]
+                    previous=actual_key(old_row);current=actual_key(row)
+                    if previous and ('；记录位置：'+str(previous)) not in lines[old_index]:lines[old_index]=lines[old_index].replace(' | ','；记录位置：'+str(previous)+' | ',1)
+                    if current:context+='；记录位置：'+str(current)
+                else:rendered_scopes[context]=(len(lines),row)
             lines.append(context+' | '+('；'.join(vals) or '原表文字信息'))
             origins.extend(row.get('_origin_rows',[row]))
         if full:
