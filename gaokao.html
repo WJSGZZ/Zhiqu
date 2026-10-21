@@ -6,7 +6,7 @@
 <title>高考志愿 · 自我盘点</title>
 <script src="https://cdn.jsdelivr.net/npm/lunar-javascript@1.7.7/lunar.js" defer></script>
 <link rel="icon" type="image/png" href="assets/logo-192.png">
-<link rel="stylesheet" href="assets/questionnaire.css?v=20261021a">
+<link rel="stylesheet" href="assets/questionnaire.css?v=20261022a">
 </head>
 <body data-profile-kind="gaokao">
 
@@ -670,7 +670,7 @@
           <div><div class="minilabel">出生日期（公历/阳历）</div><input type="date" id="birthdate"></div>
           <div><div class="minilabel">出生时间（选填）</div><input type="time" id="birthtime"></div>
         </div>
-        <input class="mt" type="text" id="birthplace" placeholder="出生地（选填；填了时间再填，用于真太阳时校正）">
+        <div data-show-when="birthtime=*"><input type="text" id="birthplace" placeholder="出生地（选填；填了时间再填，用于真太阳时校正）"></div>
         <p class="hint">只填日期能排出年、月、日三柱；加上出生时间能排完整四柱；再选性别能排大运。这是可选的传统视角，只作对照参考，不参与任何打分和排序。</p>
         <p class="hint" id="baziPreview"></p></div>
     </div></section>
@@ -908,7 +908,7 @@
 </div>
 
 <script src="assets/profile-recipient.js?v=20261019p"></script>
-<script src="assets/questionnaire.js?v=20261021a"></script>
+<script src="assets/questionnaire.js?v=20261022a"></script>
 <script>
   function updateBaziPreview(){
     var el=document.getElementById('baziPreview'); if(!el) return;
@@ -1005,12 +1005,13 @@
   function clearState(){ try{ localStorage.removeItem(STORE_KEY); }catch(e){} }
 
   document.addEventListener('change',function(){refreshFollowups();updateProgress();saveState();});
-  document.addEventListener('input',function(){updateProgress();saveState();});
+  // 文字格可能是“填了才显示”的触发题，打字时也重算显示条件
+  document.addEventListener('input',function(){refreshFollowups();updateProgress();saveState();});
 
   /* 读回上次内容，再把分支题/排序/进度/印章一起刷新 */
   var hadSaved=restoreState();
   refreshFollowups(); renderRank(); updateProgress();
-  if(hadSaved) showRestoredNotice();
+  if(hadSaved){ saveState(); showRestoredNotice(); } // 读回后立即重存，草稿里不留已收起的旧答案
 
   function showRestoredNotice(){
     if(document.getElementById('restoredBar')) return;

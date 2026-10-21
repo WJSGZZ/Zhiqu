@@ -6,7 +6,7 @@
 <title>求职 · 自我盘点</title>
 <script src="https://cdn.jsdelivr.net/npm/lunar-javascript@1.7.7/lunar.js" defer></script>
 <link rel="icon" type="image/png" href="assets/logo-192.png">
-<link rel="stylesheet" href="assets/questionnaire.css?v=20261021a">
+<link rel="stylesheet" href="assets/questionnaire.css?v=20261022a">
 </head>
 <body data-profile-kind="career">
 
@@ -193,7 +193,10 @@
           <label class="opt"><input type="radio" name="application_farthest" value="背景调查或谈薪"><span class="box">背景调查或谈薪</span></label></div>
         <input type="text" id="rejection_reason" placeholder="已知的明确拒绝原因；不知道可留空"></div></div>
 
-      <div class="followup" data-when="job_stage=手里有offer在比较|在职，考虑跳槽|已签约在考虑解约">
+      <div data-profile-id="has_offer" class="q"><div class="q-label">手里现在有 offer 吗<span class="opt-note">（选填）</span></div><div class="opts"><label class="opt"><input type="radio" name="has_offer" value="有"><span class="box">有</span></label>
+          <label class="opt"><input type="radio" name="has_offer" value="没有"><span class="box">没有</span></label>
+          <label class="opt"><input type="radio" name="has_offer" value="谈着还没定"><span class="box">谈着还没定</span></label></div></div>
+      <div class="followup" data-when="has_offer=有|谈着还没定">
         <span class="ftag">追问 · 比较 offer</span>
         <div data-profile-id="offers_list" class="q" ><div class="q-label">已有 offer 的细节<span class="opt-note">（选填）</span></div><textarea data-profile-label="录用条件" id="offers_list" placeholder="逐个写：合同甲方全称、实际工作地点、税前固定工资、保证月数、奖金条件、试用工资和期限、工时、社保公积金城市/基数/比例、是否已签三方或劳动合同、违约金和答复截止日；未知写待问。"></textarea>
         <div class="opts"><label class="opt"><input data-profile-label="用工形式" type="radio" name="offer_employment" value="直签"><span class="box">直签</span></label>
@@ -251,8 +254,7 @@
           <label class="opt"><input type="checkbox" name="certs" value="特种作业操作证"><span class="box">特种作业操作证</span></label>
           <label class="opt"><input type="checkbox" name="certs" value="专业技术资格或职称"><span class="box">专业技术资格或职称</span></label>
           <label class="opt"><input type="checkbox" name="certs" value="其他"><span class="box">其他</span></label>
-          <label class="opt"><input type="checkbox" name="certs" value="暂时没有"><span class="box">暂时没有</span></label></div>
-        <div data-hide-when="certs=暂时没有"><input data-profile-label="证书补充" type="text" id="certs_detail" placeholder="其他已有证书：逐项写名称、等级、已取得/在考/计划、取得或预计年月"></div></div>
+          <label class="opt"><input type="checkbox" name="certs" value="暂时没有"><span class="box">暂时没有</span></label></div></div>
 <div data-show-when="certs=医护类执业资格"><div data-profile-id="cert_medical_detail" class="q" ><div class="q-label">医护类执业资格情况<span class="opt-note">（选填）</span></div>
         <input type="text" id="cert_medical_detail" placeholder="证书名称与等级"><div class="opts"><label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_medical_status" value="已取得"><span class="box">已取得</span></label>
           <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_medical_status" value="在考"><span class="box">在考</span></label>
@@ -309,10 +311,24 @@
           <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_other_status" value="计划"><span class="box">计划</span></label></div>
         <div data-show-when="cert_other_status=已取得|在考|计划"><div class="minilabel"><span data-show-when="cert_other_status=已取得">取得时间</span><span data-show-when="cert_other_status=在考">预计取得时间</span><span data-show-when="cert_other_status=计划">预计考试时间</span></div><input data-profile-label="取得或预计年月" type="month" id="cert_other_month"></div></div></div>
       <div data-show-when="certs=外语（四六级、雅思等）"><div data-profile-id="cet4_score" class="q" ><div class="q-label">外语成绩与考试计划<span class="opt-note">（选填）</span></div>
-        <input type="text" id="cet4_score" placeholder="四级分数；未考留空"><input type="text" id="cet6_score" placeholder="六级分数；未考留空"><input type="text" id="other_language" placeholder="其他语言考试及分数"><div class="opts"><label class="opt"><input type="radio" name="language_status" value="已取得"><span class="box">已取得</span></label>
-          <label class="opt"><input type="radio" name="language_status" value="在考"><span class="box">在考</span></label>
-          <label class="opt"><input type="radio" name="language_status" value="计划"><span class="box">计划</span></label></div>
-        <div data-show-when="language_status=已取得|在考|计划"><div class="minilabel"><span data-show-when="language_status=已取得">取得时间</span><span data-show-when="language_status=在考">预计取得时间</span><span data-show-when="language_status=计划">预计考试时间</span></div><input data-profile-label="取得或预计年月" type="month" id="language_month"></div></div></div>
+        <label for="cet4_score">四级</label><input data-profile-label="四级分数" type="text" id="cet4_score" placeholder="四级分数；未考留空">
+        <div class="opts">
+          <label class="opt"><input data-profile-label="四级状态" type="radio" name="cet4_status" value="已取得"><span class="box">已取得</span></label>
+          <label class="opt"><input data-profile-label="四级状态" type="radio" name="cet4_status" value="在考"><span class="box">在考</span></label>
+          <label class="opt"><input data-profile-label="四级状态" type="radio" name="cet4_status" value="计划"><span class="box">计划</span></label></div>
+        <div data-show-when="cet4_status=已取得|在考|计划"><div class="minilabel"><span data-show-when="cet4_status=已取得">取得时间</span><span data-show-when="cet4_status=在考">预计取得时间</span><span data-show-when="cet4_status=计划">预计考试时间</span></div><input data-profile-label="四级取得或预计年月" type="month" id="cet4_month"></div>
+        <label for="cet6_score">六级</label><input data-profile-label="六级分数" type="text" id="cet6_score" placeholder="六级分数；未考留空">
+        <div class="opts">
+          <label class="opt"><input data-profile-label="六级状态" type="radio" name="cet6_status" value="已取得"><span class="box">已取得</span></label>
+          <label class="opt"><input data-profile-label="六级状态" type="radio" name="cet6_status" value="在考"><span class="box">在考</span></label>
+          <label class="opt"><input data-profile-label="六级状态" type="radio" name="cet6_status" value="计划"><span class="box">计划</span></label></div>
+        <div data-show-when="cet6_status=已取得|在考|计划"><div class="minilabel"><span data-show-when="cet6_status=已取得">取得时间</span><span data-show-when="cet6_status=在考">预计取得时间</span><span data-show-when="cet6_status=计划">预计考试时间</span></div><input data-profile-label="六级取得或预计年月" type="month" id="cet6_month"></div>
+        <label for="other_language">其他语言考试</label><input data-profile-label="其他语言考试及分数" type="text" id="other_language" placeholder="考试名称及分数，如雅思 6.5">
+        <div class="opts">
+          <label class="opt"><input data-profile-label="其他语言考试状态" type="radio" name="other_language_status" value="已取得"><span class="box">已取得</span></label>
+          <label class="opt"><input data-profile-label="其他语言考试状态" type="radio" name="other_language_status" value="在考"><span class="box">在考</span></label>
+          <label class="opt"><input data-profile-label="其他语言考试状态" type="radio" name="other_language_status" value="计划"><span class="box">计划</span></label></div>
+        <div data-show-when="other_language_status=已取得|在考|计划"><div class="minilabel"><span data-show-when="other_language_status=已取得">取得时间</span><span data-show-when="other_language_status=在考">预计取得时间</span><span data-show-when="other_language_status=计划">预计考试时间</span></div><input data-profile-label="其他语言考试取得或预计年月" type="month" id="other_language_month"></div></div></div>
 
       <div data-profile-id="strength" class="q req"><div class="q-label">你比较擅长的事<span class="opt-note">（可多选）</span></div>
         <div class="opts stack">
@@ -596,22 +612,22 @@
         </div></div>
       <div data-profile-id="tgt2" class="q"><div class="q-label">目标 2</div>
         <input data-profile-label="公司与岗位" type="text" id="tgt2" placeholder="公司与岗位（选填）">
-        <div class="opts mt">
+        <div data-show-when="tgt2=*"><div class="opts">
           <label class="opt"><input data-profile-label="谁提出的" type="checkbox" name="tgt2_by" value="自己"><span class="box">自己</span></label>
           <label class="opt"><input data-profile-label="谁提出的" type="checkbox" name="tgt2_by" value="父母"><span class="box">父母</span></label>
           <label class="opt"><input data-profile-label="谁提出的" type="checkbox" name="tgt2_by" value="老师或学长"><span class="box">老师 / 学长</span></label>
           <label class="opt"><input data-profile-label="谁提出的" type="checkbox" name="tgt2_by" value="看名气"><span class="box">看名气</span></label>
           <label class="opt"><input data-profile-label="谁提出的" type="checkbox" name="tgt2_by" value="同学都投"><span class="box">同学都投</span></label>
-        </div></div>
+        </div></div></div>
       <div data-profile-id="tgt3" class="q"><div class="q-label">目标 3</div>
         <input data-profile-label="公司与岗位" type="text" id="tgt3" placeholder="公司与岗位（选填）">
-        <div class="opts mt">
+        <div data-show-when="tgt3=*"><div class="opts">
           <label class="opt"><input data-profile-label="谁提出的" type="checkbox" name="tgt3_by" value="自己"><span class="box">自己</span></label>
           <label class="opt"><input data-profile-label="谁提出的" type="checkbox" name="tgt3_by" value="父母"><span class="box">父母</span></label>
           <label class="opt"><input data-profile-label="谁提出的" type="checkbox" name="tgt3_by" value="老师或学长"><span class="box">老师 / 学长</span></label>
           <label class="opt"><input data-profile-label="谁提出的" type="checkbox" name="tgt3_by" value="看名气"><span class="box">看名气</span></label>
           <label class="opt"><input data-profile-label="谁提出的" type="checkbox" name="tgt3_by" value="同学都投"><span class="box">同学都投</span></label>
-        </div></div>
+        </div></div></div>
       <div data-profile-id="tgt_why" class="q"><div class="q-label">这些目标，你最看中的是什么？<span class="opt-note">（选填）</span></div>
         <input type="text" id="tgt_why" placeholder="例如：名气；离家近；钱多；说不上来"></div>
 
@@ -734,12 +750,12 @@
           <div><div class="minilabel">出生日期（公历/阳历）</div><input type="date" id="birthdate"></div>
           <div><div class="minilabel">出生时间（选填）</div><input type="time" id="birthtime"></div>
         </div>
-        <input class="mt" type="text" id="birthplace" placeholder="出生地（选填；填了时间再填，用于真太阳时校正）">
-        <div class="opts mt">
+        <div data-show-when="birthtime=*"><input type="text" id="birthplace" placeholder="出生地（选填；填了时间再填，用于真太阳时校正）">
+        <div class="opts">
           <label class="opt"><input type="radio" name="bz_sex" value="男"><span class="box">男</span></label>
           <label class="opt"><input type="radio" name="bz_sex" value="女"><span class="box">女</span></label>
           <label class="opt"><input type="radio" name="bz_sex" value="不排大运"><span class="box">不排大运</span></label>
-        </div>
+        </div></div>
         <p class="hint">只填日期能排出年、月、日三柱；加上出生时间能排完整四柱；再选性别能排大运。这是可选的传统视角，只作对照参考，不参与任何打分和排序。</p>
         <p class="hint" id="baziPreview"></p></div>
     </div></section>
@@ -819,7 +835,7 @@
 </div>
 
 <script src="assets/profile-recipient.js?v=20261019p"></script>
-<script src="assets/questionnaire.js?v=20261021a"></script>
+<script src="assets/questionnaire.js?v=20261022a"></script>
 <script>
   function updateBaziPreview(){
     var el=document.getElementById('baziPreview'); if(!el) return;
@@ -916,12 +932,13 @@
   function clearState(){ try{ localStorage.removeItem(STORE_KEY); }catch(e){} }
 
   document.addEventListener('change',function(){refreshFollowups();updateProgress();saveState();});
-  document.addEventListener('input',function(){updateProgress();saveState();});
+  // 文字格可能是“填了才显示”的触发题，打字时也重算显示条件
+  document.addEventListener('input',function(){refreshFollowups();updateProgress();saveState();});
 
   /* 读回上次内容，再把分支题/排序/进度/印章一起刷新 */
   var hadSaved=restoreState();
   refreshFollowups(); renderRank(); updateProgress();
-  if(hadSaved) showRestoredNotice();
+  if(hadSaved){ saveState(); showRestoredNotice(); } // 读回后立即重存，草稿里不留已收起的旧答案
 
   function showRestoredNotice(){
     if(document.getElementById('restoredBar')) return;

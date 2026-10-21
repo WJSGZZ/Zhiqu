@@ -98,16 +98,21 @@
   }
 
   /* ===== 按阶段收起不用填的题 =====
-     data-hide-when="name=值|值"：条件成立时收起（并清空其中作答）；data-show-when 相反，只在条件成立时显示。 */
+     data-hide-when="name=值|值"：条件成立时收起（并清空其中作答）；data-show-when 相反，只在条件成立时显示。
+     "name=*" 表示“填了才算”：文字、日期、数字格按 id 找，非空即成立；单选、多选按 name 找，任一选中即成立。 */
+  function condHit(el,name,values){
+    var star=values.length===1&&values[0].trim()==='*';
+    var hit=(el.type==='radio'||el.type==='checkbox')?el.name===name&&el.checked&&(star||values.indexOf(el.value)>=0)
+      :star&&el.id===name&&String(el.value||'').trim()!=='';
+    return hit&&isVisible(el);
+  }
   function condOn(cond){
-    // 分号连接不同题的“或”；竖线连接同题可触发的值。只读当前可见的选择。
+    // 分号连接不同题的“或”；竖线连接同题可触发的值。只读当前可见的作答。
     return cond.split(';').some(function(group){
       var eq=group.indexOf('='),name=group.slice(0,eq).trim();
       if(eq<1) return false;
       var values=group.slice(eq+1).split('|');
-      return Array.prototype.some.call(document.querySelectorAll('input'),function(el){
-        return el.name===name&&el.checked&&values.indexOf(el.value)>=0&&isVisible(el);
-      });
+      return Array.prototype.some.call(document.querySelectorAll('input,textarea,select'),function(el){ return condHit(el,name,values); });
     });
   }
   function clearInside(el){
@@ -223,8 +228,8 @@
     cond.split(';').some(function(group){
       var eq=group.indexOf('='),name=group.slice(0,eq).trim(),values=group.slice(eq+1).split('|');
       if(['grade','stage','stage_now'].indexOf(name)>=0) return false;
-      return Array.prototype.some.call(document.querySelectorAll('input'),function(el){
-        if(el.name===name&&el.checked&&isVisible(el)&&values.indexOf(el.value)>=0){
+      return Array.prototype.some.call(document.querySelectorAll('input,textarea,select'),function(el){
+        if(condHit(el,name,values)){
           var parent=el.closest('.q');
           if(parent&&parent!==q){ result=parent.getAttribute('data-profile-id');return true; }
         }

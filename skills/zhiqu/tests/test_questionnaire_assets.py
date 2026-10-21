@@ -178,6 +178,30 @@ console.log(JSON.stringify({first,switched,back}));
 '''
 
 
+# "Filled in" conditions (name=*): text by id, choices by name; collapsing clears
+# dependants and the chain settles even when a trigger is itself conditional.
+FILLED_DOM = CONDITIONS_DOM.split('const E=(t,a)=>new El(t,a);')[0] + r'''
+const E=(t,a)=>new El(t,a);
+const root=E('main');
+const t=E('input',{type:'text',id:'t'}),tw=E('div',{'data-show-when':'t=*'}),tBy=E('input',{type:'checkbox',name:'t_by',value:'自己'});tw.append(tBy);
+const d=E('input',{type:'time',id:'d'}),dw=E('div',{'data-show-when':'d=*'}),dPlace=E('input',{type:'text',id:'p'}),dSex=E('input',{type:'radio',name:'s',value:'男'});dw.append(dPlace,dSex);
+// Chain: a choice made inside the time-gated block gates a further note.
+const cw=E('div',{'data-show-when':'s=*'}),cNote=E('textarea',{id:'c'});cw.append(cNote);
+const spaces=E('input',{type:'text',id:'sp',value:'   '}),sw=E('div',{'data-show-when':'sp=*'});
+const m1=E('input',{type:'checkbox',name:'m',value:'a'}),mw=E('div',{'data-show-when':'m=*'});
+root.append(t,tw,d,dw,cw,spaces,sw,m1,mw);
+const ctx={document:{querySelectorAll:s=>root.querySelectorAll(s),querySelector:s=>root.querySelectorAll(s)[0]||null,getElementById:()=>null}};
+vm.createContext(ctx);vm.runInContext(fs.readFileSync(process.argv[1],'utf8'),ctx);
+const snap=()=>({t:[tw.hidden,tBy.checked],d:[dw.hidden,dPlace.value,dSex.checked],c:[cw.hidden,cNote.value],sp:sw.hidden,m:mw.hidden});
+ctx.refreshConditions();const empty=snap();
+t.value='某公司 产品经理';d.value='08:30';m1.checked=true;ctx.refreshConditions();
+tBy.checked=true;dPlace.value='杭州';dSex.checked=true;ctx.refreshConditions();cNote.value='备注';ctx.refreshConditions();const filled=snap();
+t.value='';d.value='';m1.checked=false;ctx.refreshConditions();const cleared=snap();
+t.value='再填';d.value='09:00';ctx.refreshConditions();const refilled=snap();
+console.log(JSON.stringify({empty,filled,cleared,refilled}));
+'''
+
+
 def condition_groups(cond):
     for group in cond.split(';'):
         name, _, values = group.partition('=')
@@ -194,8 +218,13 @@ class QuestionnaireAssets(unittest.TestCase):
                     choices.setdefault(field, set()).add(value)
                 page = Elements(); page.feed(raw)
                 self.assertTrue(page.conditions)
+                # "name=*" (filled in) may name a text/date/number field by id, or a choice by name.
+                fillable = set(re.findall(r'<(?:input|textarea|select)\b[^>]*?\bid="([^"]+)"', raw)) - set(choices)
                 for cond in page.conditions:
                     for field, values in condition_groups(cond):
+                        if values == ['*']:
+                            self.assertTrue(field in choices or field in fillable, cond)
+                            continue
                         self.assertIn(field, choices, cond)
                         for value in values:
                             self.assertIn(value, choices[field], cond)
@@ -216,6 +245,48 @@ class QuestionnaireAssets(unittest.TestCase):
         # Switching back does not resurrect old answers.
         self.assertEqual(result['back'], {'w': [True, ''], 'f': [True, False],
                                           'g': [True, '', False], 'h': [True, '']})
+
+    def test_filled_in_condition_shows_clears_and_does_not_resurrect(self):
+        node = shutil.which('node')
+        if node is None:
+            self.skipTest('Node.js unavailable')
+        result = json.loads(subprocess.run([node, '-e', FILLED_DOM, str(ROOT / 'assets/questionnaire.js')],
+                                           check=True, capture_output=True, text=True, timeout=15).stdout)
+        # Nothing filled: every gated block is hidden; whitespace does not count as filled.
+        self.assertEqual(result['empty'], {'t': [True, False], 'd': [True, '', False], 'c': [True, ''], 'sp': True, 'm': True})
+        self.assertEqual(result['filled'], {'t': [False, True], 'd': [False, '杭州', True], 'c': [False, '备注'], 'sp': True, 'm': False})
+        # Emptying the trigger collapses the block, its nested chain, and clears all of it.
+        self.assertEqual(result['cleared'], {'t': [True, False], 'd': [True, '', False], 'c': [True, ''], 'sp': True, 'm': True})
+        self.assertEqual(result['refilled'], {'t': [False, False], 'd': [False, '', False], 'c': [True, ''], 'sp': True, 'm': True})
+
+    def test_new_career_and_bazi_gates_are_wired(self):
+        pages = {name: (ROOT / (name + '.html')).read_text(encoding='utf-8') for name in PAGES}
+        for name, raw in pages.items():
+            with self.subTest(name=name):
+                # Birthplace (and the bazi-only sex choice) are only useful once a birth time is given.
+                self.assertRegex(raw, r'<div data-show-when="birthtime=\*"><input type="text" id="birthplace"')
+                if 'name="bz_sex"' in raw:
+                    gated = raw[raw.index('data-show-when="birthtime=*"'):]
+                    self.assertLess(gated.index('name="bz_sex"'), gated.index('</div></div>'))
+                self.assertIn("document.addEventListener('input',function(){refreshFollowups();", raw)
+                self.assertIn('if(hadSaved){ saveState();', raw)
+        career = pages['career']
+        for n in ('2', '3'):
+            self.assertIn(f'<div data-show-when="tgt{n}=*"><div class="opts">', career)
+        self.assertNotIn('certs_detail', career)
+        for gone in ('name="language_status"', 'id="language_month"'):
+            self.assertNotIn(gone, career)
+        for exam in ('cet4', 'cet6', 'other_language'):
+            self.assertIn(f'data-show-when="{exam}_status=已取得|在考|计划"', career)
+            self.assertIn(f'id="{exam}_month"', career)
+        self.assertIn('id="cet4_score"', career)
+        self.assertIn('id="cet6_score"', career)
+        # The offer question is asked of every stage; the details only follow a yes or a pending offer.
+        has = career.index('data-profile-id="has_offer"')
+        self.assertNotIn('data-when', career[career.rfind('<div', 0, has):has])
+        self.assertIn('<div class="followup" data-when="has_offer=有|谈着还没定">', career)
+        gate = career.index('data-when="has_offer=有|谈着还没定"')
+        self.assertLess(gate, career.index('data-profile-id="offers_list"'))
 
     def test_no_duplicate_dom_ids_and_shared_assets_exist(self):
         for name in PAGES:

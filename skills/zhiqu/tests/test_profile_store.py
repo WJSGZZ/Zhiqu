@@ -355,6 +355,16 @@ class ProfileStore(unittest.TestCase):
         self.assertIsNone(body['value'])
         self.assertIn('不想说', body['quote'])
 
+    def test_career_questionnaire_controls_map_to_their_questions(self):
+        mapping = store.QuestionMap(); mapping.feed((store.REPO / 'career.html').read_text(encoding='utf-8'))
+        # Per-exam language controls belong to the one language question; the old shared ones are gone.
+        for key in ('cet4_score', 'cet4_status', 'cet4_month', 'cet6_score', 'cet6_status', 'cet6_month',
+                    'other_language', 'other_language_status', 'other_language_month'):
+            self.assertEqual(mapping.mapping[key], 'cet4_score', key)
+        for gone in ('language_status', 'language_month', 'certs_detail'):
+            self.assertNotIn(gone, mapping.mapping)
+        self.assertEqual(mapping.mapping['has_offer'], 'has_offer')
+
     def test_all_three_questionnaires_roundtrip_without_guessing(self):
         for kind, code in [('gaokao', 'GK'), ('grad', 'YJ'), ('career', 'QZ')]:
             with self.subTest(kind=kind):
