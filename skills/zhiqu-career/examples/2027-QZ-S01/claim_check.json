@@ -35675,7 +35675,16 @@
       ],
       "bindings": [],
       "claim_id": "C4aa9a2b8e664b11642a0758b",
-      "review": null
+      "review": {
+        "kind": "结构标签",
+        "decision": "支持",
+        "reason": "“留意”是“完整工作年度的到手现金”图中B（派遣近家情景）的色名。图注明说绿色A、琥珀B只区分选项、不表示优劣，所以此处不是警告：B年度到手45,908元（含保证的第13个月），A为51,610元，数字与计算项一致，B较低但标签不带优劣判断。",
+        "reviewer": {
+          "session_id": "claimcheck-colors-20261022",
+          "model": "Claude Sonnet 5.5（claude-sonnet-5-5）",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -36111,7 +36120,16 @@
       ],
       "bindings": [],
       "claim_id": "C483e809a5b47aec954450718",
-      "review": null
+      "review": {
+        "kind": "结构标签",
+        "decision": "支持",
+        "reason": "“留意”是“每小时到手现金”图中B的色名，只是第二个选项的配色位。B为23.0元／小时，A为24.3元／小时，两数与计算项一致；这张图的图注未重复“不表示优劣”，读者需沿用上一张图的说明。此处判为支持，但标签本身不含结论，不能读成对B的否定。",
+        "reviewer": {
+          "session_id": "claimcheck-colors-20261022",
+          "model": "Claude Sonnet 5.5（claude-sonnet-5-5）",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -36502,7 +36520,16 @@
       ],
       "bindings": [],
       "claim_id": "Cbc1e7d81f43cabb8d16c6608",
-      "review": null
+      "review": {
+        "kind": "结构标签",
+        "decision": "支持",
+        "reason": "“留意”是“扣住房及必要生活支出后的月结余”图中B的色名，同样是选项配色位。B每月结余2,326元反而高于A的1,701元（B房租400元、A房租1,100元），数字与计算项一致；标签不意味B较差，图注另提醒B含第13个月摊平、普通月仅约1,967元，所以排序要结合该提醒看，判为支持。",
+        "reviewer": {
+          "session_id": "claimcheck-colors-20261022",
+          "model": "Claude Sonnet 5.5（claude-sonnet-5-5）",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -42730,7 +42757,7 @@
     "independent": true,
     "scope": "未参与正文写作；仅根据逐句清单、摘录、登记与计算独立复核"
   },
-  "reviewed_manifest_sha256": "a7d35206352a7fadcca20431b486b401e31779776863d04097ecaa3f40cc1158",
+  "reviewed_manifest_sha256": "35c193a8e3cc2f5783bb33b5573fa32ed0f20d1faf4a962b3c35291175f3afef",
   "retired": [
     {
       "claim_id": "Ce14abf5549468b7e367e9ce5",
@@ -43421,6 +43448,17 @@
         "Ce9f777de54b1baa67b343fc4"
       ],
       "scope": "独立核4处同值不同来源的指针修复，实际数值与年度/情景来由逐条核对，未改正文数字。"
+    },
+    {
+      "session_id": "claimcheck-colors-20261022",
+      "model": "Claude Sonnet 5.5（claude-sonnet-5-5）",
+      "independent": true,
+      "manifest_sha256": "35c193a8e3cc2f5783bb33b5573fa32ed0f20d1faf4a962b3c35291175f3afef",
+      "claim_ids": [
+        "C4aa9a2b8e664b11642a0758b",
+        "C483e809a5b47aec954450718",
+        "Cbc1e7d81f43cabb8d16c6608"
+      ]
     }
   ],
   "report_snapshot": {

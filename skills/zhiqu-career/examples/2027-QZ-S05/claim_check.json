@@ -29066,7 +29066,16 @@
       ],
       "bindings": [],
       "claim_id": "Cbf85a274212a99b3eb204d46",
-      "review": null
+      "review": {
+        "kind": "结构标签",
+        "decision": "支持",
+        "reason": "“留意”标在“省考上一届”图的“写明财务管理，有本人未填的条件”一条，共13个职位。这些职位专业名单逐字写了财务管理，但有民族、户籍或生源、视力等本人没填的条件，需先问清，所以是“留意”；它与同图“不利”条不同，不是已知不符合，计数13与计算项fa_unk_count一致。",
+        "reviewer": {
+          "session_id": "claimcheck-colors-20261022",
+          "model": "Claude Sonnet 5.5（claude-sonnet-5-5）",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -29325,7 +29334,16 @@
       ],
       "bindings": [],
       "claim_id": "C6805b4e7abad03c1278de8c7",
-      "review": null
+      "review": {
+        "kind": "结构标签",
+        "decision": "支持",
+        "reason": "“不利”标在“写明财务管理，但限男性或要党员等”一条，共36个职位。画像是女、共青团员，这些职位限男性、要求中共党员或要职称证书，本人确定不能报，红色标“不利”恰当；数量36与计算项fa_fail_count一致，且与第一条深绿的84个互不重叠。",
+        "reviewer": {
+          "session_id": "claimcheck-colors-20261022",
+          "model": "Claude Sonnet 5.5（claude-sonnet-5-5）",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -29584,7 +29602,16 @@
       ],
       "bindings": [],
       "claim_id": "C516a88e4d852826ca1c1d5d0",
-      "review": null
+      "review": {
+        "kind": "结构标签",
+        "decision": "支持",
+        "reason": "“留意”标在“只写‘工商管理类’（先电话确认）”一条，共98个职位。专业名单只写类名而不写财务管理，本人专业能否对口取决于招录单位，标签括号已写明先电话确认，所以是“留意”而不是“不利”；98与计算项fc_count一致。",
+        "reviewer": {
+          "session_id": "claimcheck-colors-20261022",
+          "model": "Claude Sonnet 5.5（claude-sonnet-5-5）",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -29843,7 +29870,16 @@
       ],
       "bindings": [],
       "claim_id": "C7c6deb38c776937362142079",
-      "review": null
+      "review": {
+        "kind": "结构标签",
+        "decision": "支持",
+        "reason": "“不利”标在“只列会计类（不报）”一条，共44个职位。这些职位的专业名单只有会计类，没有财务管理，本人专业不在其中，标签括号写明不报，红色与之一致；44与计算项fb_count一致，图注也把它归入“不报”。",
+        "reviewer": {
+          "session_id": "claimcheck-colors-20261022",
+          "model": "Claude Sonnet 5.5（claude-sonnet-5-5）",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -47138,7 +47174,16 @@
       ],
       "bindings": [],
       "claim_id": "C536621ca7700e5bdc72bdf72",
-      "review": null
+      "review": {
+        "kind": "结构标签",
+        "decision": "支持",
+        "reason": "“次”标在“没有收入时，自己的钱能撑几个月”图的“去城市合租”一条（石绿）。本人存了约12,000元、想留3,000元应急，可用9,000元，按每月3,000元只能撑3.0个月，与计算项一致；此条是第二选择而非风险边界，故用“次”，较“住家里”（每月800元、11.2个月）明显短。",
+        "reviewer": {
+          "session_id": "claimcheck-colors-20261022",
+          "model": "Claude Sonnet 5.5（claude-sonnet-5-5）",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -47266,7 +47311,16 @@
       ],
       "bindings": [],
       "claim_id": "C835897a12bc3bfeeefb07291",
-      "review": null
+      "review": {
+        "kind": "结构标签",
+        "decision": "支持",
+        "reason": "“留意”标在“合租且先付押金搬家”一条（琥珀）。本人说押一付三加搬家约6,000元，可用9,000元先扣6,000，剩3,000元，按每月3,000元只够1.0个月，与计算项一致；一个月已很紧，用“留意”提示，尚未动用应急金，没有标成“不利”。",
+        "reviewer": {
+          "session_id": "claimcheck-colors-20261022",
+          "model": "Claude Sonnet 5.5（claude-sonnet-5-5）",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -47394,7 +47448,16 @@
       ],
       "bindings": [],
       "claim_id": "C3f8577dd92fdd1b00ecaaf6c",
-      "review": null
+      "review": {
+        "kind": "结构标签",
+        "decision": "支持",
+        "reason": "“不利”标在“连应急金也动用”一条（红色，图注：风险边界，不建议这样做）。本人存款约12,000元，按每月3,000元可撑4.0个月，与计算项一致；这一条把本人想留的3,000元应急金也花掉，红色标的是这个做法而不是月数，与图注一致。",
+        "reviewer": {
+          "session_id": "claimcheck-colors-20261022",
+          "model": "Claude Sonnet 5.5（claude-sonnet-5-5）",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -53921,7 +53984,7 @@
     "independent": true,
     "method": "未参与写作或修改本案；不继承原判定，逐条对照 evidence.json 原文摘录与范围注、profile.json/profile_parse.json 本人输入、calculations.json 与 case.json 计算口径（含 anonymous_data 筛选说明）重新判定；理由逐条手写，脚本只用于读取、合并、校验格式与统计重复。"
   },
-  "reviewed_manifest_sha256": "94ffd13c200a881060d6a98a990cf62098ed9829b909af09a74500a68bae8bfc",
+  "reviewed_manifest_sha256": "4e3d694ad750eab34c8215fa9a8d6da472aa8183d2b382158849c06d9b97f0f7",
   "retired": [
     {
       "claim_id": "C8dadb07045224b9ea2eb36dd",
@@ -54838,6 +54901,21 @@
         "C952bb912e106d475d574cc88"
       ],
       "scope": "第七轮独立复核兼逐句回查：判定第六轮返工后 2 条无判定当前项（第01节省考公告未见、第04节审计与会计工资对比），E020/E017 用 curl 取原件逐数核对；另随机抽 15 条已判项（含 4 条 carried_from、4 条 rejudged_from）复看理由，均同意，未改其判定。其余项保留原会话判定，不冒称重审。"
+    },
+    {
+      "session_id": "claimcheck-colors-20261022",
+      "model": "Claude Sonnet 5.5（claude-sonnet-5-5）",
+      "independent": true,
+      "manifest_sha256": "4e3d694ad750eab34c8215fa9a8d6da472aa8183d2b382158849c06d9b97f0f7",
+      "claim_ids": [
+        "Cbf85a274212a99b3eb204d46",
+        "C6805b4e7abad03c1278de8c7",
+        "C516a88e4d852826ca1c1d5d0",
+        "C7c6deb38c776937362142079",
+        "C536621ca7700e5bdc72bdf72",
+        "C835897a12bc3bfeeefb07291",
+        "C3f8577dd92fdd1b00ecaaf6c"
+      ]
     }
   ],
   "report_snapshot": {

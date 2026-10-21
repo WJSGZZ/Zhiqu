@@ -18610,7 +18610,16 @@
       ],
       "bindings": [],
       "claim_id": "C6ef8a7608e228113f3c4c227",
-      "review": null
+      "review": {
+        "kind": "结构标签",
+        "decision": "支持",
+        "reason": "“留意”标在“不找到工作的话，现金能撑多久”图的“住房提高”一条（琥珀，图注：住房提高后总月支出3,000元）。可用现金5,000元（9,000减保留的4,000应急金），除以3,000得1.7个月，比原估计（2,500元／月，2.0个月）更短但未触及应急金，标“留意”合适，与计算项一致。",
+        "reviewer": {
+          "session_id": "claimcheck-colors-20261022",
+          "model": "Claude Sonnet 5.5（claude-sonnet-5-5）",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -18738,7 +18747,16 @@
       ],
       "bindings": [],
       "claim_id": "C2f29bf82e06f22b654d6d989",
-      "review": null
+      "review": {
+        "kind": "结构标签",
+        "decision": "支持",
+        "reason": "“不利”标在“连应急金也动用”一条（红色，图注：风险边界，不建议默认这样做）。9,000元全部现金按2,500元／月只能撑3.6个月；这一条月数虽然最长，却是以耗尽本人想保留的4,000元应急金为代价，红色标的是这个做法而不是月数，与本人保留应急金的意愿和计算项一致。",
+        "reviewer": {
+          "session_id": "claimcheck-colors-20261022",
+          "model": "Claude Sonnet 5.5（claude-sonnet-5-5）",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -20636,7 +20654,7 @@
     "independent": true,
     "scope": "未参与正文写作；仅根据逐句清单、摘录、登记与计算独立复核"
   },
-  "reviewed_manifest_sha256": "fb4b50f983b36c3507dd5b26c8e2e5d1db2670dab195a1303ba7dc363e535276",
+  "reviewed_manifest_sha256": "fefe283f6cdf3df52f8c157c0d5ebb7c92f1632389d485d070a1b901e55213d5",
   "retired": [
     {
       "claim_id": "C8dfceff781a5c2d7ebf16154",
@@ -20896,6 +20914,16 @@
         "Ca7c57cbad79583a27be18861"
       ],
       "scope": "只交叉审查本轮新增/失效的review=None条目；逐项读新句、证据摘录、绑定与本人画像/计算，原顶层复核会话保留。"
+    },
+    {
+      "session_id": "claimcheck-colors-20261022",
+      "model": "Claude Sonnet 5.5（claude-sonnet-5-5）",
+      "independent": true,
+      "manifest_sha256": "fefe283f6cdf3df52f8c157c0d5ebb7c92f1632389d485d070a1b901e55213d5",
+      "claim_ids": [
+        "C6ef8a7608e228113f3c4c227",
+        "C2f29bf82e06f22b654d6d989"
+      ]
     }
   ],
   "report_snapshot": {

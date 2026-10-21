@@ -169,7 +169,7 @@
     "calculations.json": "8e8135c7483b79dbc2d7ed702e1d9add2628ccf852da45c3d957f1e3f05d98f5",
     "candidates.json": "d741b74ae820c210e0b7d43186496ea83b72584adfe0529440e2a3b7c251d835",
     "case.json": "1266369f01a1fb4ddd7f6d8f6a4f7fcdcc475445fed3cfc9d464a41bbfda2d73",
-    "claim_check.json": "646a23826088ed2c0181fe3d0325068a806ee3ad80aea50cba235cba3ac7698f",
+    "claim_check.json": "d1944cd349dcc3942f270e6ddb42fa198dedcd227220563431d8ee226e7232c6",
     "directions.json": "5b2397e7ee4e80db6b8b1b6bf0834869aabbf282dcfecc6f23c4c706d476cc76",
     "evidence.json": "39819a48f34df9a8ad734daa1ebc55980ea28b5ed46eabaa429b710b898af15d",
     "judgment.json": "6b1a98ce44bf3a24b623518f8bca10d5a21ff18b40d9e7d69cf39b5b605f113d",
@@ -404,6 +404,14 @@
         "report_trace.json"
       ],
       "reason": "共用工具一批修复后统一重生成一次：①读研/求职条形图色名改为中性的主/次/留意/不利（高考仍用冲稳保），颜色本身不变；②构成条的段太窄写不下分项名时，在图下补全“左起第几段为 名称 数值”；③发布层换词收窄：考试练习里的“模拟”、读者用语“虚构”和引号内原话不再改字，并新增检查保证印出文字与逐句回查所见一致；④版面自检新增节末孤页检查，打印器对孤页所在节只收紧行距与段距（字号不变）后重排；⑤报告追踪改为只记本报告证据命中的官方域名行；⑥画像字段映射（has_offer 并入求职阶段、删 certs_detail）不影响本案已有解析。evidence.json 条形图色名 09 节现金图“稳”→“留意”、“冲”→“不利”各 1 处（report.md 同步，仅色名列）；逐句回查中这 2 个色名格因文字变化失去原“支持”判定，待独立会话重判（未代填）。印出文字一处变化：第 09 节导语由“暂不比较本案年薪”恢复为源文件原句“暂不比较虚构年薪”（旧版发布层把“虚构”误换成“本案”，意思反了；逐句回查看到的一直是原句）。第 11 节行距收紧一档，原第 12 页只剩 2 行的孤页消失，全文 17 页→16 页。数字与结论未变。"
+    },
+    {
+      "date": "2026-10-22",
+      "by": "Claude",
+      "files": [
+        "claim_check.json"
+      ],
+      "reason": "图表色名改中性名，19 格经独立会话重判；正文数字与结论未变"
     }
   ],
   "regeneration": {

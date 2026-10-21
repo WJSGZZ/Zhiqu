@@ -97921,7 +97921,16 @@
       ],
       "bindings": [],
       "claim_id": "Cac88feb4ef322c5e99b84672",
-      "review": null
+      "review": {
+        "kind": "结构标签",
+        "decision": "支持",
+        "reason": "“留意”是“读研一年的钱”图中“留给学费住宿”一条的色名（琥珀，图注：平常情形）。该条为12,000元，等于家里上限30,000元减全年生活费18,000元（1,500×12）；学费尚未取到，这一空间能否够用未定，所以是“留意”而非“不利”，与计算和图注相符。",
+        "reviewer": {
+          "session_id": "claimcheck-colors-20261022",
+          "model": "Claude Sonnet 5.5（claude-sonnet-5-5）",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -98228,7 +98237,16 @@
       ],
       "bindings": [],
       "claim_id": "C31630559319b5ce18653b941",
-      "review": null
+      "review": {
+        "kind": "结构标签",
+        "decision": "支持",
+        "reason": "“留意”标在“南京租房时”一条（琥珀，图注：三种情形之一）。本人说在南京租房生活费可能到1,800元，全年21,600元，30,000减去后留给学费住宿8,400元，比平常情形少3,600元；空间收窄但未为负，用“留意”提示变窄，不是“不利”，与登记输入和计算一致。",
+        "reviewer": {
+          "session_id": "claimcheck-colors-20261022",
+          "model": "Claude Sonnet 5.5（claude-sonnet-5-5）",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -98535,7 +98553,16 @@
       ],
       "bindings": [],
       "claim_id": "Ca5b667fe1660d87eba494e40",
-      "review": null
+      "review": {
+        "kind": "结构标签",
+        "decision": "支持",
+        "reason": "“留意”标在“先留应急金时”一条（琥珀，图注：三种情形之一）。本人想留3,000元应急，30,000减18,000再减3,000得9,000元，与计算项一致；这是在平常生活费口径上先扣应急金，数额比平常情形少、比南京租房情形略多，仍为正，故标“留意”不标“不利”，三条不相加的图注也与此吻合。",
+        "reviewer": {
+          "session_id": "claimcheck-colors-20261022",
+          "model": "Claude Sonnet 5.5（claude-sonnet-5-5）",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -117536,7 +117563,7 @@
     "independent": true,
     "method": "未参与本案写作或修改的独立会话；原判定一律不继承，逐条对照 evidence.json 原文摘录与范围、gap 记录、profile.json 与补充说明原话、calculations.json 及 calculation_plan 算式（分布统计由匿名分数独立复算）后人工写出判定和理由；脚本只用于读取、合并、校验格式与统计重复。"
   },
-  "reviewed_manifest_sha256": "ddf409d1d2a6d2f48e5e29376d1f1fd9280606de7315c1cf9055e0d6e8e7c667",
+  "reviewed_manifest_sha256": "17a2640b26c27eeda374745f23395482bdd8c19f382d6fc975479743118a9787",
   "retired": [
     {
       "claim_id": "Cb343ee6de0918705e9d47bcd",
@@ -118376,6 +118403,17 @@
         "C7cd30aded0c76b906fdac0c6"
       ],
       "scope": "第八轮独立复核：判定第01节导语删去“同科目”后的新句；另抽 10 条已判定项复核理由（均成立）。"
+    },
+    {
+      "session_id": "claimcheck-colors-20261022",
+      "model": "Claude Sonnet 5.5（claude-sonnet-5-5）",
+      "independent": true,
+      "manifest_sha256": "17a2640b26c27eeda374745f23395482bdd8c19f382d6fc975479743118a9787",
+      "claim_ids": [
+        "Cac88feb4ef322c5e99b84672",
+        "C31630559319b5ce18653b941",
+        "Ca5b667fe1660d87eba494e40"
+      ]
     }
   ],
   "report_snapshot": {

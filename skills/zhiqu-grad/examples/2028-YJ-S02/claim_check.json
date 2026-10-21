@@ -16850,7 +16850,16 @@
       ],
       "bindings": [],
       "claim_id": "C11396dd55c9d75e37cc36ce7",
-      "review": null
+      "review": {
+        "kind": "结构标签",
+        "decision": "支持",
+        "reason": "“留意”标在“预算边界”图的“其他费用上限”一条（琥珀，图注：三种情景之一）。32,000元年度上限减已知生活支出18,000元（1,500×12）为14,000元，与计算项一致；学费住宿未查，这一空间能否够用尚不知道，所以只提示“留意”，没有把它写成超支或不利。",
+        "reviewer": {
+          "session_id": "claimcheck-colors-20261022",
+          "model": "Claude Sonnet 5.5（claude-sonnet-5-5）",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -17030,7 +17039,16 @@
       ],
       "bindings": [],
       "claim_id": "C978d7251adb1bbbaaf784859",
-      "review": null
+      "review": {
+        "kind": "结构标签",
+        "decision": "支持",
+        "reason": "“留意”标在“生活费提高后上限”一条。本人说换地方生活费可能到1,900元，全年22,800元，32,000减去后剩9,200元，比原情景少4,800元；空间明显收窄但仍为正，用“留意”恰当，不是“不利”，与登记输入和计算一致。",
+        "reviewer": {
+          "session_id": "claimcheck-colors-20261022",
+          "model": "Claude Sonnet 5.5（claude-sonnet-5-5）",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -17210,7 +17228,16 @@
       ],
       "bindings": [],
       "claim_id": "C5bd118e9e261e3b1dbbc1345",
-      "review": null
+      "review": {
+        "kind": "结构标签",
+        "decision": "支持",
+        "reason": "“留意”标在“先留应急后上限”一条。本人另留4,000元应急，32,000减18,000减4,000得10,000元，与计算项一致；是先扣应急金后剩余的空间，数额为正，所以是提示而非“不利”，且图注说明三条情景不能相加。",
+        "reviewer": {
+          "session_id": "claimcheck-colors-20261022",
+          "model": "Claude Sonnet 5.5（claude-sonnet-5-5）",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -18080,7 +18107,7 @@
     "scope": "未参与两案正文写作；只做过元数据及渲染代码。逐句读清单、完整证据摘录、本人画像解析及登记计算；不将机器检查当语义判定。",
     "reviewed_on": "2026-10-20"
   },
-  "reviewed_manifest_sha256": "98c255c893a89b8a51c180bf01b8212f76e96b0394ab66108808e7dbf62d2075",
+  "reviewed_manifest_sha256": "6c3b26fb66be12897903046da93919c29934ba4afc18c8aede96d3e3f0edc6e4",
   "retired": [
     {
       "claim_id": "C7519b8cc255c17b74be11503",
@@ -18115,6 +18142,17 @@
       ],
       "author_session_id": "/root/report_code_fixes",
       "scope": "未参与这些改句写作；逐项阅读新句、对应摘录/绑定，并对照本人原话与登记计算。"
+    },
+    {
+      "session_id": "claimcheck-colors-20261022",
+      "model": "Claude Sonnet 5.5（claude-sonnet-5-5）",
+      "independent": true,
+      "manifest_sha256": "6c3b26fb66be12897903046da93919c29934ba4afc18c8aede96d3e3f0edc6e4",
+      "claim_ids": [
+        "C11396dd55c9d75e37cc36ce7",
+        "C978d7251adb1bbbaaf784859",
+        "C5bd118e9e261e3b1dbbc1345"
+      ]
     }
   ],
   "report_snapshot": {
