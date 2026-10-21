@@ -35,6 +35,8 @@
   "anya_ok_median": 206.5,
   "major_any_count": 58,
   "major_any_ok_count": 5,
+  "major_any_fail_count": 25,
+  "major_any_unk_count": 28,
   "fa_ok_vs_all": 2.2,
   "home_months": 11.2,
   "after_move_months": 1.0,

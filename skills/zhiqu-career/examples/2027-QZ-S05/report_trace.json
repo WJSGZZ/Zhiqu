@@ -2,15 +2,15 @@
   "schema_version": 1,
   "case_id": "2027-QZ-S05",
   "source_sha256": {
-    "case.json": "33e46d1d5c0dce9e324b7c6465411071fe4fedfc8aac8e1002528ae4e3d56d27",
-    "profile_parse.json": "a1226b208297d09c4dbc6667267555d15c89e8571f81969e7b431e05dd1c86bd",
-    "directions.json": "09bb28501b18d29a5b1d6a97a8166f5f84a23f0dfd2f8496f2186a1b62fd6458",
+    "case.json": "04a2d01722b5444f1ef0b87e62186b85cbd34710f4533d0b3c918ed03ede5a34",
+    "profile_parse.json": "eb1f4d47e6660eb9097a9050a8cc1c5d588e9e789196ef175e72136f0b5fcd37",
+    "directions.json": "2a2adc61a4db849e95617e304a7922dca9848ca7b5aac3891ae987868808ee9a",
     "rules_check.json": "b45b1313cf295a6e320d32afce13a0b93b9b0e54e8b46d8d3cf2d6329732a40b",
-    "candidates.json": "ab30cd2cab29b03ddfb5e9554125ae055eba8f43c10371984da65558997c85ef",
-    "evidence.json": "c3cbff82829568350b23d3efe64867a253432df5f74e561238f677ad20778202",
-    "calculations.json": "642c2e8cccb60935fa3033bfbc25d48c68292d146c6df5aa584f67aa0ab843eb",
-    "judgment.json": "49d13b10ec6e33d567e2228b1d4ab4ea4b0b7eb357c1bdeb1f36c545a0294278",
-    "narrative.json": "0a8733cd038b42ca9fd0e6d9a3a54ea7b4c951f4920617ced3d52544859e92a8",
+    "candidates.json": "e3804d3fc4f0f221e8172475c39270be5ba71092923a5a2b10004537f1a86e7b",
+    "evidence.json": "ef86bd06bd62a5fc5e74d5988e83505aca985e5c39006fa8918b2b4dbe2abd17",
+    "calculations.json": "89d7a293fd6780b562866f4871846b19130b0d86e79cb9f9c233e572cbae5b5d",
+    "judgment.json": "f49553e55020fe929288a66864844c9ef18ec8de1462daaed026ad875c45e0af",
+    "narrative.json": "9399ea02de1b9d5dc7ffe2260cb93554617e29398a80294993e27a08c718ea84",
     "profile.json": "f8c7a4b076a64c168d303710ea8836b70a79ffe5d53ce7521045bfe4ae4c2d1f",
     "profile-supplement.txt": "247f31f22f4c9a6c33394b5b25e3b37ef21c19fd3b9c12a70a83839f7976b026"
   },
@@ -592,6 +592,12 @@
       "display": "44"
     },
     {
+      "location": "06.candidates.2",
+      "ref": "{{e:E029#/value}}",
+      "value": "2026年11月中旬",
+      "display": "2026年11月中旬"
+    },
+    {
       "location": "06.analysis.3",
       "ref": "{{c:/fa_count}}",
       "value": 133,
@@ -680,6 +686,18 @@
       "ref": "{{c:/major_any_ok_count}}",
       "value": 5,
       "display": "5"
+    },
+    {
+      "location": "06.analysis.3",
+      "ref": "{{c:/major_any_fail_count}}",
+      "value": 25,
+      "display": "25"
+    },
+    {
+      "location": "06.analysis.3",
+      "ref": "{{c:/major_any_unk_count}}",
+      "value": 28,
+      "display": "28"
     },
     {
       "location": "07.lead.0",
@@ -1253,9 +1271,9 @@
     }
   ],
   "artifacts": {
-    "report.md": "c4e82c78fde2f6264e41e26548a49dc019ea9a7d052f578769657f176638d19c",
-    "report.html": "1ac63bb948b5e70e0c8c6f5f721803be54206ed10621144b955fdb1795d2da66",
-    "2027-QZ-S05-report.pdf": "2e7c8aef1ccf4abcb8268b1a6032df6fc992ca6ddda2228a131e286af66a0542"
+    "report.md": "ce3c91202636c8882c3eace63e2effa98c0f11c4e49c148e6fbdb906b8317f2c",
+    "report.html": "1acc42f3e44a144d157ea9adf240cbd2d6bb6ad62ba2bbc17dd92d27652d43b9",
+    "2027-QZ-S05-report.pdf": "ed8469f02d0ccb73a3a0cba2aaef07f2d73a952f50b2f81400a696ba8f8a679a"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "authoring": {
