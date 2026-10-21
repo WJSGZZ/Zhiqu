@@ -5180,7 +5180,16 @@
       ],
       "bindings": [],
       "claim_id": "C2e6bcdba8b16da55c0ba1d11",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "新引的 E011 是一条“未见”记录：gap 写明 2026-10-20 两次查浙江省公务员考试录用网首页、并查浙江组工网，招考公告栏最新仍是 2026 年度；本句说“截至出稿还没见到”，出稿日 as_of 同为 10-20，只陈述查看结果，没写成“未发布”或“今年不考”，未取到原文不妨碍这种否定式观察成立。前半句“企业秋招已经在进行”靠本人输入：画像「心里话」“投了5家企业的财务岗，2家没回音，3家还没消息”（profile_parse 第27项，report_input_usage 登记用于第01节）；所引 E001 的定位只写「优先级排序」「现实约束」两节，没点到「心里话」，追溯稍绕但能追到。“两条线可以同时走”“各有一个选择时点”是安排建议，与第07节检查点一致。",
+        "reviewer": {
+          "session_id": "review7-qz-s05-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -14622,7 +14631,16 @@
       ],
       "bindings": [],
       "claim_id": "C952bb912e106d475d574cc88",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "我用 curl 重取 2023 年杭州工资价位 PDF（字节哈希 7853501e… 与登记一致），第13页审计专业人员 72030/125831/169320/271200/391689，会计专业人员 52810/69120/95000/138496/213481：25%、50%、75% 三个分位审计分别约是会计的 1.82、1.78、1.96 倍，10% 和 90% 也都更高，“明显高于”有据。本句改引 E020—E022 后补上了上一版缺的审计数；“各种工龄混在一起、不是应届起薪、年份较早”与 E017—E022 范围注（数据年 2022、全体工龄合计）一致，E024 工龄三年及以下中位 81580 用作对照。“只能说明”把结论限在组间工资高低，没推到应届起薪或本人收入；“审计岗位”实指审计这一职业类别，下一句已说明不只事务所。",
+        "reviewer": {
+          "session_id": "review7-qz-s05-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "04",
@@ -53951,7 +53969,7 @@
     "independent": true,
     "method": "未参与写作或修改本案；不继承原判定，逐条对照 evidence.json 原文摘录与范围注、profile.json/profile_parse.json 本人输入、calculations.json 与 case.json 计算口径（含 anonymous_data 筛选说明）重新判定；理由逐条手写，脚本只用于读取、合并、校验格式与统计重复。"
   },
-  "reviewed_manifest_sha256": "4de95a42d761fe03a364174d90cbcfd20af009a57cdf94fde498d9ebfd2d2387",
+  "reviewed_manifest_sha256": "94ffd13c200a881060d6a98a990cf62098ed9829b909af09a74500a68bae8bfc",
   "retired": [
     {
       "claim_id": "C8dadb07045224b9ea2eb36dd",
@@ -54857,6 +54875,17 @@
         "C6d1a896c0d1d9471b0d6bb52"
       ],
       "scope": "第六轮逐句回查：本清单无未判项；用脚本找出原理由引用了本句清单外证据号的 37 条（其中 15 条带 carried_from），Cb5dfc 已由上一轮按清单内 E012 重判、本轮核对 E012 摘录后保留不动，其余 36 条逐条只用本句已引证据重判，旧判定存入 rejudged_from，2 条降为部分支持（第01节省考公告未见缺 E011、第04节审计更高缺 E020—E022）。其余项保留原会话判定，不冒称重审。"
+    },
+    {
+      "session_id": "review7-qz-s05-20261021",
+      "model": "Claude Opus 5.5",
+      "independent": true,
+      "reviewed_manifest_sha256": "94ffd13c200a881060d6a98a990cf62098ed9829b909af09a74500a68bae8bfc",
+      "claim_ids": [
+        "C2e6bcdba8b16da55c0ba1d11",
+        "C952bb912e106d475d574cc88"
+      ],
+      "scope": "第七轮独立复核兼逐句回查：判定第六轮返工后 2 条无判定当前项（第01节省考公告未见、第04节审计与会计工资对比），E020/E017 用 curl 取原件逐数核对；另随机抽 15 条已判项（含 4 条 carried_from、4 条 rejudged_from）复看理由，均同意，未改其判定。其余项保留原会话判定，不冒称重审。"
     }
   ],
   "report_snapshot": {
