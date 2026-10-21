@@ -17,7 +17,7 @@
   ],
   "source_sha256": {
     "case.json": "b1d8f858f0baeeac939802cdeebc7106b536880c45823c8f6b51c3d7d48f2c1e",
-    "report.json": "d462bd904ee5fb1b6bc169dcf3822c7ac92136b7d95121b815571a05f25d3119",
+    "report.json": "f94dbe082b690dbdc18ce05f1f5d8db56df3f9b95753c6a3b789b4aa3266b60d",
     "result.json": "814e18728e378e46888a8bdf8c807a42410831080d8b3c08a139642628e54a19"
   },
   "authoring": {
@@ -30,6 +30,6 @@
     }
   },
   "artifacts": {
-    "2026-GK-R07-report.pdf": "e35c21b4de7078751230331b4ca83786a9cc14ecefb88c998075ffd6ce005b08"
+    "2026-GK-R07-report.pdf": "e4de57132366ef428ee5feb0558831c31c317694940956e9dfa8edf03a5a19ea"
   }
 }

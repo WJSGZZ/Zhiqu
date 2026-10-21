@@ -218,6 +218,19 @@
         "operator_check.md"
       ],
       "reason": "补记提交 849ea85（高考数据层改用 sources.csv）：report.json 两句来源说明的路径由 data/<省>/README.md 改为 data/<省>/sources.csv，operator_check.md 只有对应指纹随之改变；数字、志愿、概率和结论均未变，不需为此重新复核。"
+    },
+    {
+      "date": "2026-10-21",
+      "by": "Claude",
+      "files": [
+        "narrative.json",
+        "report.json",
+        "report.html",
+        "2026-GK-R07-report.pdf",
+        "report_trace.json",
+        "operator_check.md"
+      ],
+      "reason": "改写“保底不够”和法学相关的过头说法，与 R07 数据对齐：摘要首句、要点 1、行动 1、矛盾 1 与 3、志愿说明“法学为什么不在表里”、法学方向证据，由“周边公办几乎找不到稳拿的／法学都不到 2%”改为“本表筛选范围（2025 年位次在本人 2.1 倍以内）内如此”，并列出范围内被校名括号规则剔除的内蒙古大学（八协计划）新闻学、范围外的内蒙古师范大学（八协计划）法学与内蒙古大学（八协计划）社会工作（只引 2024、2025 年位次），注明位次波动大、八协报名资格待核；meta 新增 floor_shortfall（原因与补救），A 级保底检查由此降为警告。志愿表、概率、排序与第 11 节回看均未变。"
     }
   ],
   "regeneration": {

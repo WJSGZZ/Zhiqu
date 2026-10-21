@@ -291,6 +291,25 @@ class GradeWording(unittest.TestCase):
             x["expected_cut_rank"] = int(res["params"]["rank"] * 1.1)
         self.assertTrue(any("保底不足" in e for e in check_report.check_grade(rep, res)))
 
+    def test_a_grade_floor_shortfall_is_warning_only_when_explained(self):
+        rep, res = self.rep("2026-GK-R01"), self.result("2026-GK-R01")
+        rep["meta"]["prob_grade"] = "A"
+        for x in res["list"]:
+            x["p_clear"] = min(x["p_clear"], 0.8)
+        rep["meta"]["floor_shortfall"] = {"reason": "范围内没有单条 95% 的志愿", "remedy": "表尾补民办本科"}
+        rep["summary"]["actions"][0] += "；否则这张表保底不够"
+        warns = []
+        errs = check_report.check_grade(rep, res, warns)
+        self.assertFalse(any("保底不足" in e for e in errs))
+        self.assertTrue(any("保底不足" in w for w in warns))
+        no_remedy = json.loads(json.dumps(rep))
+        no_remedy["meta"]["floor_shortfall"]["remedy"] = " "
+        self.assertTrue(any("保底不足" in e for e in check_report.check_grade(no_remedy, res)))
+        silent = json.loads(json.dumps(rep))
+        silent["summary"]["actions"][0] = silent["summary"]["actions"][0].replace("；否则这张表保底不够", "")
+        self.assertNotIn("保底不", json.dumps({k: v for k, v in silent.items() if k != "meta"}, ensure_ascii=False))
+        self.assertTrue(any("保底不足" in e for e in check_report.check_grade(silent, res)))
+
 class ProvinceHealth(unittest.TestCase):
     def test_grade_thresholds(self):
         import province_health as ph

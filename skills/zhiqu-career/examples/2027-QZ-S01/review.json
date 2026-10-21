@@ -95,11 +95,11 @@
     "verification_scope": "本轮更新为附核对材料的PDF，自评和机器核对通过后仍等待独立审核；未补造官方原文和独立批准。"
   },
   "snapshot": {
-    "2027-QZ-S01-report.pdf": "3076f2e63090efe0d9a182f1001dde527637541c7b0a7c6367f75ee55cfa2f9e",
+    "2027-QZ-S01-report.pdf": "576c466ccdef38259b3076210fc0d8d2a8be6586b5b995454967c3e94b636287",
     "calculations.json": "c9f6ffdadaa69063d1698e768de5b96dbfb4f2cafdd9a803a0a136e2d4ee2bae",
     "candidates.json": "3ffc2bc156346f42fbfacce9b243f26199511bb088405c601c9017efa4063c05",
     "case.json": "56c199fd854ba948916bb91afa440ed6d7b72a1c86500cd8d202dda6df921955",
-    "claim_check.json": "992886238cfacb32ee77f1d22b1531185780c9ec54382f999919edaaa1782bc3",
+    "claim_check.json": "59b2733746d8b2c6cfaf0201b49c77ea57c0b6c45e167cf51380791770cc5a87",
     "directions.json": "6f799d567cc51a1d860a40f8d9bbbf4c16f3bfcd2af58b999cc1db8c54f2761e",
     "evidence.json": "a70db6ca93962e6761d146b508eb812f5c1cfd0698e02e5e5c927252fa914088",
     "judgment.json": "3f7455fd010637e7b0f16acacce93573a3fc2c7f8045264fdc0a8fad8293417d",
@@ -108,9 +108,9 @@
     "profile.txt": "69dfeb57cf005a4ace3990e51a96b3b821e9de0c130dd1f8eae5b2088f5bef5e",
     "profile_parse.json": "ec01d04e9f24802ce85fc5d2a069ee8532f7911604e9cdfe9a3a47191baec990",
     "profile_snapshot.json": "0a6cb6835c42b9e3a0e18679bd40d3c99c433453287f9e2a231e357647a858d9",
-    "report.html": "bc57996f65f2b9b9de6d6c9ed0641d5db14234fbd87188c5f6ec283789604e6e",
+    "report.html": "b384e9fbd2960aabcb6aa75692d6dc73a236ed4f9bab5447ee009c1b1ea83bb6",
     "report.md": "4023378e675a504af8cd3c6900a962b8cfaba6c5dce5b1b148620ddde284046f",
-    "report_trace.json": "6a000a4cae4cae2991fa47df6007b7ae4d300c344849e3234d3050351d6e2c02",
+    "report_trace.json": "62abf15e2329f6e162d5846ca8fb37798f20ba587d645baf52b7ef3d4fd40879",
     "rules_check.json": "bda48a6be3aff5fdb6d27f0800903873b37d636b4444a9ed460b302c5d5b08f9"
   },
   "checklist_update_note": "仅核查单表述及核查工具记录更新；报告与计算原件未改。保留历史复核记录，当前仍等待独立审核，不是重新批准。",
@@ -276,6 +276,17 @@
       ],
       "reason": "仅改文件名，正文逐字未变。另：case.json 删去 legacy_directory 标记（目录已改为报告号）。",
       "comparison": "改名前后各抽取 PDF 全文（31 页）逐行比对：唯一差异是第 12 节“生成时间”（2026-10-20T17:24:30+08:00 → 2026-10-20T18:45:12+08:00）；页数、标题、案例号与画像指纹不变。"
+    },
+    {
+      "date": "2026-10-21",
+      "by": "Claude",
+      "files": [
+        "2027-QZ-S01-report.pdf",
+        "claim_check.json",
+        "report.html",
+        "report_trace.json"
+      ],
+      "reason": "共用 check_report.py、case_report.py 与 report-guide.md 为高考 R07 保底规则更新，读研/求职报告追踪记录随之重生成；正文只有第 12 节生成时间变化，数字、候选与结论未变。"
     }
   ],
   "regeneration": {

@@ -181,6 +181,8 @@ def build(case_dir, research_dir=None, opportunities=None, render=True, profile_
                 slots=cfg["optimize"]["slots"], case_id=case, generated_on="2026-10-17", prob_grade=g,
                 grade_note=grade_note(cfg, g),
                 utility_scale=f"0 分 = 你确认的底线（{prefs['scenarios']['student']['anchors']['low']['name'].split('：', 1)[-1]}），100 分 = 最好的学校、最想读的专业、最想去的城市凑在一起（现实中未必存在）")
+    if c.get("floor_shortfall"):  # 保底达不到评级要求时的原因与补救（check_report.check_grade 的例外）
+        meta["floor_shortfall"] = c["floor_shortfall"]
 
     # ---------- summary
     lead, keys = c["lead"], c["points"]
@@ -372,11 +374,12 @@ def build(case_dir, research_dir=None, opportunities=None, render=True, profile_
                           "--html", rel(d / "report.html")], cwd=SKILL, capture_output=True, text=True)
     sys.path.insert(0, str(SKILL / "scripts"))
     import check_report
-    errs = check_report.check_sections(rep, res) + check_report.check_grade(rep, res)
+    warns = []
+    errs = check_report.check_sections(rep, res, warns)  # check_sections 已含 check_grade
     digits = [t for t in walk(c) if re.search(r"\d", t)]
     from operator_check import generate as generate_operator_check
     generate_operator_check(d, rep)
-    return chk.stdout.strip() + chk.stderr.strip(), errs, digits
+    return chk.stdout.strip() + chk.stderr.strip(), errs, digits, warns
 
 
 def walk(x):
@@ -498,8 +501,10 @@ def main():
     bad = 0
     for cs in a.cases:
         path = (SKILL / cs) if not Path(cs).is_absolute() else Path(cs)
-        msg, errs, digits = build(path, a.import_research, a.import_opportunities, profile_version=a.profile_version)
+        msg, errs, digits, warns = build(path, a.import_research, a.import_opportunities, profile_version=a.profile_version)
         print(f"{path.name}：{msg.splitlines()[0] if msg else ''}")
+        for w in warns:
+            print(f"  ! 警告：{w}")
         for e in errs:
             print(f"  ✗ {e}")
         bad += bool(errs)

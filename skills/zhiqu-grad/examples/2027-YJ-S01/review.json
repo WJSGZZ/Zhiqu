@@ -95,11 +95,11 @@
     "verification_scope": "本轮更新为附核对材料的PDF，自评和机器核对通过后仍等待独立审核；未补造官方原文和独立批准。"
   },
   "snapshot": {
-    "2027-YJ-S01-report.pdf": "6aa74788d703e42ce92e5f8a86444b2c6c74255c81e2510236b641f82010fcbf",
+    "2027-YJ-S01-report.pdf": "6efb2571b6788606cb916d7c5efd0289a764df9b381ba73e0f2c0ee954059d56",
     "calculations.json": "cec5b3577a8d62196c2dfd606cfab91b31c421feb52a97cbdd3a5cfafcd5daf7",
     "candidates.json": "c9c5db84e727dde6ec750e534d023b4e15e7dd85e5bd1bc77110b14166f9d8ad",
     "case.json": "3b7e07dfbdad7b43a2d996e35f3c024d006a7f1ef5aa47e2f3206925f1e04d76",
-    "claim_check.json": "96de0947c4805fc490f04e30a8a00926ca24872850153bcbf8f900c21d2653b7",
+    "claim_check.json": "2fa2369940a7ee2fe966b76aaaa6a75f4641f2950d98a0a8b836f2655549d189",
     "directions.json": "2b68a53951ab4a8de52d7edcbabdf32d24e4570392cd70ac212c62342430a3b2",
     "evidence.json": "931f92b62c754f55ea753be5406aa0c7e8f297aa105c928a105c5fabb58e0c85",
     "judgment.json": "c5eb44314051a1d85b8307a79757f819c5b69fe03647180bab197757273f26ab",
@@ -108,9 +108,9 @@
     "profile.txt": "2be92b9770f7a4a877386334b958c096198b948c89c5eabca030d4f557e29457",
     "profile_parse.json": "a9eee1981e639d511390eedec704012149c76ecf08348ddc03a5c9a8e32de7e9",
     "profile_snapshot.json": "432626de4888a0d461edc284e9c475796e8d96ce33683030143dcd3f896be032",
-    "report.html": "919bbebfe2cd8c5236be9228fd275e0e93c8df8f5b8771555186f1c459ac0225",
+    "report.html": "82fa7ba2db4ca9bcb3e6d5e24bbca63934cf352898786047961a27ab21bfc6b7",
     "report.md": "087c1b146226784d9ee026debb65d16ade1b29ba4401277b42aa2632f4774d45",
-    "report_trace.json": "59b5bdfd5f9cd0d1fc9a3bf9a8cab571ff71af27117bc74b99468ee642e45d58",
+    "report_trace.json": "8eab44a919b0dcc8ba8184c562cf800b1df0a663b72e41dd96944b446df1a2b6",
     "rules_check.json": "7b0a58159b98a98e96a17d877674c57bf2d59988aefd37a2f57d94f82580f5c2"
   },
   "checklist_update_note": "仅核查单表述及核查工具记录更新；报告与计算原件未改。保留历史复核记录，当前仍等待独立审核，不是重新批准。",
@@ -288,6 +288,17 @@
       ],
       "reason": "仅改文件名，正文逐字未变。另：case.json 删去 legacy_directory 标记（目录已改为报告号）。",
       "comparison": "改名前后各抽取 PDF 全文（29 页）逐行比对：唯一差异是第 12 节“生成时间”（2026-10-20T17:24:35+08:00 → 2026-10-20T18:45:12+08:00）；页数、标题、案例号与画像指纹不变。"
+    },
+    {
+      "date": "2026-10-21",
+      "by": "Claude",
+      "files": [
+        "2027-YJ-S01-report.pdf",
+        "claim_check.json",
+        "report.html",
+        "report_trace.json"
+      ],
+      "reason": "共用 check_report.py、case_report.py 与 report-guide.md 为高考 R07 保底规则更新，读研/求职报告追踪记录随之重生成；正文只有第 12 节生成时间变化，数字、候选与结论未变。"
     }
   ],
   "regeneration": {

@@ -2,15 +2,15 @@
   "schema_version": 1,
   "case_id": "2027-QZ-S05",
   "source_sha256": {
-    "case.json": "db5cd5189a4b11f16d4fb012f526423a14da0af26114666aa709917c3cc3415d",
-    "profile_parse.json": "5ac0a61cf056d64cc425a51ad2031b26050b06f46deb32c8999e15d92cc99a96",
-    "directions.json": "1da6040ad82b905e575e2fe850c417797bb43f969ede4eef297745fc32a24ad9",
-    "rules_check.json": "aadb64ede706f87480d8eafb6dda580b32616981dae8d3c860b4536970ee3bf0",
-    "candidates.json": "8a701d7da74663c7c1462df150c68fecc1954716aa81726d7c91601968ae070f",
-    "evidence.json": "ff1560e2919c75d42f86a4b2338bf09b86fbb38d0c29b490064ba5ede6215db3",
+    "case.json": "33e46d1d5c0dce9e324b7c6465411071fe4fedfc8aac8e1002528ae4e3d56d27",
+    "profile_parse.json": "a1226b208297d09c4dbc6667267555d15c89e8571f81969e7b431e05dd1c86bd",
+    "directions.json": "09bb28501b18d29a5b1d6a97a8166f5f84a23f0dfd2f8496f2186a1b62fd6458",
+    "rules_check.json": "b45b1313cf295a6e320d32afce13a0b93b9b0e54e8b46d8d3cf2d6329732a40b",
+    "candidates.json": "ab30cd2cab29b03ddfb5e9554125ae055eba8f43c10371984da65558997c85ef",
+    "evidence.json": "c3cbff82829568350b23d3efe64867a253432df5f74e561238f677ad20778202",
     "calculations.json": "642c2e8cccb60935fa3033bfbc25d48c68292d146c6df5aa584f67aa0ab843eb",
-    "judgment.json": "71972b4aaf1aac051ddbb60347eee8e671eee30d725dd4f1b59326392f474655",
-    "narrative.json": "3022eb18365a1e79163f7c0f571ed592b2e19072fc0729b18114010d64d27bd0",
+    "judgment.json": "49d13b10ec6e33d567e2228b1d4ab4ea4b0b7eb357c1bdeb1f36c545a0294278",
+    "narrative.json": "0a8733cd038b42ca9fd0e6d9a3a54ea7b4c951f4920617ced3d52544859e92a8",
     "profile.json": "f8c7a4b076a64c168d303710ea8836b70a79ffe5d53ce7521045bfe4ae4c2d1f",
     "profile-supplement.txt": "247f31f22f4c9a6c33394b5b25e3b37ef21c19fd3b9c12a70a83839f7976b026"
   },
@@ -29,7 +29,7 @@
     "unit_validation.py": "9f5df89a101dd684231fe35f8fe931e150127fc698f2ab774b628bc3ffdf093c",
     "reader_language.py": "fac8d66d933db781bb357f4c32f402e154ab44bcf36eb9e398b8f583f089b853",
     "claim_check.py": "31851ebe4edb18b47bdcbdd65a3921a4aa412b5f65a1e813059251cfa544ceac",
-    "check_report.py": "c44b082a3e3b066acaba2adf4c358c2816b39f28cd646dc81277ec22eee72ed9",
+    "check_report.py": "1c91f94d58e4e99aca311ae2befe28508b1d1d79cffdb8427f55e49ba2dea485",
     "authoring_metadata.py": "9ac0328c9a8bdeec672daede766f49f5e9c94c2761ae64e0ec32e2ed8abf404c"
   },
   "numeric_refs": [
@@ -276,8 +276,8 @@
     {
       "location": "02.profile.2",
       "ref": "{{p:/fields/18/value}}",
-      "value": "偶尔加班可以；不能接受有销售指标的岗位",
-      "display": "偶尔加班可以；不能接受有销售指标的岗位"
+      "value": "偶尔加班可以；偶尔可以出差；不能接受有销售指标的岗位",
+      "display": "偶尔加班可以；偶尔可以出差；不能接受有销售指标的岗位"
     },
     {
       "location": "02.profile.2",
@@ -1006,6 +1006,30 @@
       "display": "5 月 16 日"
     },
     {
+      "location": "08.analysis.7",
+      "ref": "{{p:/fields/15/value}}",
+      "value": 12,
+      "display": "12"
+    },
+    {
+      "location": "08.analysis.7",
+      "ref": "{{e:E037#/value|md}}",
+      "value": "2026-05-16",
+      "display": "5 月 16 日"
+    },
+    {
+      "location": "08.analysis.7",
+      "ref": "{{e:E041#/value|md}}",
+      "value": "2026-04-07",
+      "display": "4 月 7 日"
+    },
+    {
+      "location": "08.analysis.7",
+      "ref": "{{e:E042#/value|md}}",
+      "value": "2026-08-29",
+      "display": "8 月 29 日"
+    },
+    {
       "location": "09.runway.1",
       "ref": "{{p:/fields/23/value|comma}}",
       "value": 800,
@@ -1229,9 +1253,9 @@
     }
   ],
   "artifacts": {
-    "report.md": "f65c70e811236572b380f198ab7fc243038b0c258fb1b2508dc0dbee117c30dd",
-    "report.html": "f635120b3a08bc46288f00d959471fb059e7d000cfb321d81311f930ee49da23",
-    "2027-QZ-S05-report.pdf": "e8b58de2335d9675ccbd736f1d2e6c7164c38cb86d9a26920c625a3b2f4880de"
+    "report.md": "c4e82c78fde2f6264e41e26548a49dc019ea9a7d052f578769657f176638d19c",
+    "report.html": "1ac63bb948b5e70e0c8c6f5f721803be54206ed10621144b955fdb1795d2da66",
+    "2027-QZ-S05-report.pdf": "2e7c8aef1ccf4abcb8268b1a6032df6fc992ca6ddda2228a131e286af66a0542"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "authoring": {
@@ -1249,7 +1273,7 @@
     "zhiqu-shared/references/official-domains.csv": "0cd0d7be4307fd6e8696eaa2f845726929ddcb264c841fe32293fca58a49c934",
     "zhiqu-shared/references/unit-families.json": "a535c6ba17dc14fcf1d30d8b5f45691da0ab2f78cb92a30b01a55de41e72c9a0",
     "zhiqu-shared/references/reader-language.json": "247453b7a5c1d0bf4b5d4997d57ee8d32a1cd70327fff2683322bf4c79e5476d",
-    "zhiqu/references/report-guide.md": "00581d227e2f98b297722d34eb7125818cbf2baa7dd3fe4543348e6d34b01cea"
+    "zhiqu/references/report-guide.md": "0278c07e521721d96450b8fbc707e88e403e04f725083e872957386d2e007955"
   },
   "report_profile": {
     "file": "profile.json",

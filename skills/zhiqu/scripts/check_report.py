@@ -132,8 +132,17 @@ def province_grade(meta):
     return None
 
 
-def check_grade(rep, result=None):
-    """按本省评级写概率（references/report-guide.md）：评级不比体检更乐观，保底余量够，正文概率写法合规。"""
+def floor_shortfall_ok(rep):
+    """A 级缺单条 ≥95% 志愿时的例外：meta.floor_shortfall 写明原因与补救，正文也老实写了保底不够。"""
+    fs = rep.get("meta", {}).get("floor_shortfall")
+    body = json.dumps({k: v for k, v in rep.items() if k != "meta"}, ensure_ascii=False)
+    return (isinstance(fs, dict) and all(str(fs.get(k) or "").strip() for k in ("reason", "remedy"))
+            and ("保底不够" in body or "保底不足" in body))
+
+
+def check_grade(rep, result=None, warnings=None):
+    """按本省评级写概率（references/report-guide.md）：评级不比体检更乐观，保底余量够，正文概率写法合规。
+    warnings 为列表时，降级为警告的问题追加进去（不阻止生成）。"""
     errs, meta = [], rep.get("meta", {})
     g = meta.get("prob_grade")
     if g not in tuple(GRADES):
@@ -149,7 +158,11 @@ def check_grade(rep, result=None):
         lst, rank = result["list"], float(result.get("params", {}).get("rank") or 0)
         wide = lambda x, k: rank and x.get("expected_cut_rank", 0) >= k * rank
         if g == "A" and not any(x["p_clear"] >= 0.95 for x in lst):
-            errs.append("A 级保底不足：须至少一个志愿单独过线 ≥ 95%")
+            if floor_shortfall_ok(rep):
+                if warnings is not None:
+                    warnings.append("A 级保底不足（已在 meta.floor_shortfall 与正文写明原因和补救）：没有志愿单独过线 ≥ 95%")
+            else:
+                errs.append("A 级保底不足：须至少一个志愿单独过线 ≥ 95%；确实找不到时在 meta.floor_shortfall 写 reason 与 remedy，并在正文写明“保底不够”")
         if g == "B" and not any(x["p_clear"] >= 0.99 and wide(x, 1.2) for x in lst):
             errs.append("B 级保底不足：须至少一个志愿单独过线 ≥ 99% 且预测线比本人位次宽 20% 以上")
         if g in "CD" and sum(bool(wide(x, 1.3)) for x in lst) < 2:
@@ -167,7 +180,7 @@ def check_grade(rep, result=None):
     return errs
 
 
-def check_sections(rep, result=None):
+def check_sections(rep, result=None, warnings=None):
     """付费报告每节的必备内容与篇幅下限（范围写在 references/report-guide.md）。不判断写得好不好，只查有没有、够不够、能不能溯源。"""
     errs = []
     s = rep.get('summary', {})
@@ -251,7 +264,7 @@ def check_sections(rep, result=None):
     bad = set(rep.get('omitted', {})) - {'hindsight'}
     if bad:
         errs.append('付费报告除“事后回看”外不得用 omitted 省略章节：' + '、'.join(sorted(bad)))
-    errs += check_grade(rep, result)
+    errs += check_grade(rep, result, warnings)
     return errs
 
 
