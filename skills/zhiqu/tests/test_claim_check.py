@@ -8,7 +8,7 @@ import claim_check as cc
 
 class FixtureCase:
  def __init__(self,root):
-  self.root=Path(root);self.case=json.loads((self.root/'case.json').read_text());self.evidence={'E1':{'excerpt':'学校要求初试总分达到300分。','grade':'官方','status':'retrieved','source':{'organization':'学校'}}};self.data={};self.contract={'sections':[{'id':'01','slots':[{'key':'body','condition':'always'}]}]}
+  self.root=Path(root);self.case=json.loads((self.root/'case.json').read_text());self.evidence={'E1':{'excerpt':'学校要求初试总分达到300分。','grade':'官方','status':'retrieved','source':{'organization':'学校'}},'E2':{'excerpt':'学校另有复试说明。','grade':'官方','status':'retrieved','source':{'organization':'学校'}}};self.data={};self.contract={'sections':[{'id':'01','slots':[{'key':'body','condition':'always'}]}]}
  def nodes(self):return {'01':[{'slot':'body','ref':'narrative.json#/node'}]}
  def get_node(self,ref):return json.loads((self.root/'narrative.json').read_text())['node']
  def active(self,slot):return True
@@ -35,6 +35,15 @@ class ClaimCheckTests(unittest.TestCase):
   for x in data['items']:x['review']={'decision':decision,'kind':kind,'reason':reason}
   self.put('claim_check.json',data);return data
  def errors(self,**kwargs):return cc.errors(self.root,**kwargs)
+ def test_adding_citation_keeps_supported_verdict_only(self):
+  self.review();self.node('学校要求初试总分达到{{e:E1#/value}}分。',refs=('E1','E2'))
+  item=self.manifest()['items'][0];self.assertEqual(item['review']['decision'],'支持');self.assertIn('E2',item['review']['carried_reason'])
+ def test_adding_citation_does_not_rescue_partial_verdict(self):
+  self.review(decision='部分支持');self.node('学校要求初试总分达到{{e:E1#/value}}分。',refs=('E1','E2'))
+  self.assertIsNone(self.manifest()['items'][0]['review'])
+ def test_citation_swap_or_text_change_still_resets(self):
+  self.node('学校有相关要求。');self.review();self.node('学校有相关要求。',refs=('E2',));self.assertIsNone(self.manifest()['items'][0]['review'])
+  self.review();self.node('学校要求初试总分不低于{{e:E1#/value}}分。',refs=('E1','E2'));self.assertIsNone(self.manifest()['items'][0]['review'])
  def test_valid_independent_complete_manifest(self):
   self.review();self.assertEqual(self.errors(),[])
  def test_missing_manifest_is_error(self):self.assertTrue(any('缺逐句' in x for x in self.errors()))

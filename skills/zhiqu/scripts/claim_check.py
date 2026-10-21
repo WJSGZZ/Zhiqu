@@ -83,9 +83,19 @@ def build(root,bind=False):
  from planning_workflow import PlanningCase
  root=Path(root);case=PlanningCase(root);items=extract(case);path=root/'claim_check.json'
  old=read(path) if path.exists() else {};prior={x['claim_id']:x for x in old.get('items',[])}
+ # Adding a citation cannot make a supported sentence unsupported: keep a "支持" verdict
+ # when the sentence, its bindings and every previously cited excerpt are unchanged and
+ # the new citation list only adds evidence. Anything else loses its verdict as before.
+ by_place={(x['location'],x['text']):x for x in old.get('items',[]) if (x.get('review') or {}).get('decision')=='支持'}
+ def evidence_only_added(prev,item):
+  if prev.get('expanded_text')!=item['expanded_text'] or prev.get('bindings')!=item['bindings']:return False
+  old_ev={e['id']:e for e in prev.get('evidence',[])};new_ev={e['id']:e for e in item['evidence']}
+  return set(old_ev)<set(new_ev) and all(new_ev[k]==v for k,v in old_ev.items())
  for item in items:
   if item['claim_id'] in prior and prior[item['claim_id']].get('review'):
    item['review']=prior[item['claim_id']]['review']
+  elif (prev:=by_place.get((item['location'],item['text']))) and evidence_only_added(prev,item):
+   item['review']=dict(prev['review'],carried_from=prev['claim_id'],carried_reason='只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 '+'、'.join(sorted({e['id'] for e in item['evidence']}-{e['id'] for e in prev.get('evidence',[])})))
   else:item['review']=None
  manifest=digest([{k:v for k,v in x.items() if k!='review'} for x in items])
  result=dict(schema_version=SCHEMA,case_id=case.case['case_id'],manifest_sha256=manifest,source_sha256=content_snapshot(case),items=items,reviewer=old.get('reviewer'),reviewed_manifest_sha256=old.get('reviewed_manifest_sha256'),retired=old.get('retired',[]),cross_reviewers=old.get('cross_reviewers',[]))

@@ -375,7 +375,13 @@
       ],
       "bindings": [],
       "claim_id": "C601775db7c59a465203e2cd8",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "流程图标题“从报名到明年春天”只交代图的时间跨度，覆盖 E010 报名到 E018 四月底录取，不含断言。",
+        "carried_from": "Cce0fe14243625ca43eccccfe",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -485,7 +491,13 @@
       ],
       "bindings": [],
       "claim_id": "Ce161e6fd6e121dc63fd85c1c",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "图例说明方框、菱形和深浅色含义，是排版说明，与下方流程表“步骤/判断/结果/备选”四类节点对应。",
+        "carried_from": "C8f53645cbbbc96a7ca895a0f",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -625,7 +637,13 @@
         }
       ],
       "claim_id": "Cdf8cbb567d783effcdfcbdb9",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E010 原文“报名时间为2026年10月15日至10月24日…每日9:00—22:00”，句中截止 10 月 24 日 22:00 对得上；10 月 23 日是 k:/context/personal_dates/action1，提前一天的说法与两个日期相符。",
+        "carried_from": "Caab19249267839a44c703a49",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -735,7 +753,13 @@
       ],
       "bindings": [],
       "claim_id": "Cc443927a2508a130c7881425",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "核对流程表 A—I 各行，只有“过苏大复试线？”“过国家线？”“复试通过？”这类条件，没有任何百分比或把握程度，图注描述属实。",
+        "carried_from": "C945696e54231a87362b2cb34",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -845,7 +869,13 @@
       ],
       "bindings": [],
       "claim_id": "Ce922a5b9d6befb5858bf4d3c",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "流程第1行节点编号“A”，仅作连线标识。",
+        "carried_from": "Cb32b17d69f0d962107f8d196",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -955,7 +985,13 @@
       ],
       "bindings": [],
       "claim_id": "Cc42857e4f221171dc74a4e5e",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "流程第1行类型列写“步骤”，标明 A 是要做的事，是图的分类标签。",
+        "carried_from": "Ca94acba4d06a67ed04bf2f3f",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -1071,7 +1107,13 @@
         }
       ],
       "claim_id": "Caa41f8b726d4d7fc076d64e6",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "节点 A 的报名动作日期取 k 个人日期 2026-10-23，早于 E010 官方截止 10-24；一志愿选择与报告默认建议一致，括号里的软工改报条件也与第01节一致。",
+        "carried_from": "C838f515e77139ba53f7e1868",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -1181,7 +1223,13 @@
       ],
       "bindings": [],
       "claim_id": "C543792c0bf13883de5e32d9c",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "节点 A 的去向“>B”只是连线，指向第2行节点 B（初试前准备）。",
+        "carried_from": "Cbadb56155001072ea3a9deed",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -1291,7 +1339,13 @@
       ],
       "bindings": [],
       "claim_id": "Cdb3fad7462b2ba039ede95da",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "流程第2行节点编号“B”。",
+        "carried_from": "C929d8dc92061b204c22551c7",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -1401,7 +1455,13 @@
       ],
       "bindings": [],
       "claim_id": "Ced4f7c3d05651d12e6579259",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "流程第2行类型“步骤”，对应 B 为备考动作。",
+        "carried_from": "C576163bc60b8fdd1a6a9329a",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -1511,7 +1571,13 @@
       ],
       "bindings": [],
       "claim_id": "Cf6a4cbe3dc7de16c13fa20b9",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "初试前再做一次全程模考是建议；补充说明里本人第一次机构模考只做了数学和专业课，10 月 11 日是首次四科完整模考，所以这里称“第二次全程模考”可按本人口径理解；“练上机”对应 E037 复试机考编程。",
+        "carried_from": "C83ac4e71a76dd58e6a3090e2",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -1621,7 +1687,13 @@
       ],
       "bindings": [],
       "claim_id": "Cbd43a8b3c6ebd72b0d0082ef",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "节点 B 去向“>C”，连到出分后的判断节点。",
+        "carried_from": "Cb214a914b3ef45f3f4180a0f",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -1731,7 +1803,13 @@
       ],
       "bindings": [],
       "claim_id": "C755874ba661d65ff9d151fc1",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "流程第3行节点编号“C”。",
+        "carried_from": "C9e31c3550c1f985c41fb5b8d",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -1841,7 +1919,13 @@
       ],
       "bindings": [],
       "claim_id": "Cb26b27d5d3db4dc748d2ab1b",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第3行类型“判断”，表明 C 是菱形判断节点。",
+        "carried_from": "C95cb5fe0673e855dc76b1341",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -1951,7 +2035,13 @@
       ],
       "bindings": [],
       "claim_id": "C4f32d6ebfb6155d8b0074682",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "判断条件“过苏大复试线和单科线”与 E030 范围“单科不低于A类国家线”的口径一致，只提出要核的条件，不给结论。",
+        "carried_from": "C2ecfeda9fc77ed6e081467d0",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -2061,7 +2151,13 @@
       ],
       "bindings": [],
       "claim_id": "C0781f7b902c7fe4cf9d5b382",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "节点 C 的“过了>D”分支，指向复试准备。",
+        "carried_from": "C69d9d7cf84f496b553907cba",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -2171,7 +2267,13 @@
       ],
       "bindings": [],
       "claim_id": "C8f01cf90db030cdcdc54d803",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "节点 C 的“没过>E”分支，指向国家线判断。",
+        "carried_from": "C6affd2b262dd617522f6bb1f",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -2281,7 +2383,13 @@
       ],
       "bindings": [],
       "claim_id": "Cee4f9c62643c381b7eeccdd7",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "流程第4行节点编号“D”。",
+        "carried_from": "Ca863b70340f42e43b9241aeb",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -2391,7 +2499,13 @@
       ],
       "bindings": [],
       "claim_id": "C8146f4c7e6ec4fbd16d1cede",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第4行类型“步骤”，D 为复试准备动作。",
+        "carried_from": "Cd24e81ee24518c0d9d8b5a28",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -2501,7 +2615,13 @@
       ],
       "bindings": [],
       "claim_id": "C83ec21dc19e6db321c5eea06",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "复试准备写机考编程和面试：E033 原文复试由机考150分、外语听说50分、综合素质考核100分组成，E037 机考为编程题；把综合素质考核概括成面试属合理叫法，外语听说未单列但不构成错误。",
+        "carried_from": "Ce4dfa430a199d5e5536aa364",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -2611,7 +2731,13 @@
       ],
       "bindings": [],
       "claim_id": "Cdee31e31949fb92490671f30",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "节点 D 去向“>H”，连到复试结果判断。",
+        "carried_from": "C1a2b01e1be7ac5d3247d233c",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -2721,7 +2847,13 @@
       ],
       "bindings": [],
       "claim_id": "C4bbcc3f825b05161a5795a1b",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "流程第5行节点编号“E”。",
+        "carried_from": "C12d8ffd8a129e2d224d8b99d",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -2831,7 +2963,13 @@
       ],
       "bindings": [],
       "claim_id": "C100d630f8e947fa7f2569d07",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第5行类型“判断”，E 是没过苏大线后的分叉。",
+        "carried_from": "Cb4c48c7539f2699443b82111",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -2941,7 +3079,13 @@
       ],
       "bindings": [],
       "claim_id": "C5d24869f85de1827610e76ba",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "判断条件“过国家线？”，对应 E016 调剂须达第一志愿专业在调入地区国家线的前提。",
+        "carried_from": "C25b429e63d49a371a3950c0f",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -3051,7 +3195,13 @@
       ],
       "bindings": [],
       "claim_id": "Cc20969c3742c58c1ecb4e4de",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "节点 E 的“过了>F”，过国家线才进入调剂，与 E016 的成绩要求顺序一致。",
+        "carried_from": "C79361591f44eac8cc0799a39",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -3161,7 +3311,13 @@
       ],
       "bindings": [],
       "claim_id": "C36182e3b87a316259ada9681",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "节点 E 的“没过>G”，未过国家线转向工作或再考。",
+        "carried_from": "C91cf7feddcbed58a1b6e8072",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -3271,7 +3427,13 @@
       ],
       "bindings": [],
       "claim_id": "C2d179223fc4a3797910ad8b5",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "流程第6行节点编号“H”。",
+        "carried_from": "C69ced677b6b80c543060a69b",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -3381,7 +3543,13 @@
       ],
       "bindings": [],
       "claim_id": "C30450aa72c99ceea34a44ea5",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第6行类型“判断”，H 为复试结果分叉。",
+        "carried_from": "C535ffbd92ec3ca195a7efc80",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -3491,7 +3659,13 @@
       ],
       "bindings": [],
       "claim_id": "C69e811b5e40312b76ff2847d",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "判断条件“复试通过？”，只是分叉问题，不估概率。",
+        "carried_from": "C7dbfcfd06cbff4cef065f7b2",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -3601,7 +3775,13 @@
       ],
       "bindings": [],
       "claim_id": "Cd3fdf656c22c6298989f45b5",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "节点 H 的“通过>I”，指向拟录取结果。",
+        "carried_from": "Cc95cd9eb2ffc951e728e7e13",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -3711,7 +3891,13 @@
       ],
       "bindings": [],
       "claim_id": "C8378570b463bed14a760dc18",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "节点 H 的“没通过>F”，复试失败后转调剂，与 E016 调剂制度相容。",
+        "carried_from": "C630de706752b6173e591ab9f",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -3821,7 +4007,13 @@
       ],
       "bindings": [],
       "claim_id": "C87d24204936dc9d7e2de5115",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "流程第7行节点编号“I”。",
+        "carried_from": "Cff00d768b2f33de7e6ac03e4",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -3931,7 +4123,13 @@
       ],
       "bindings": [],
       "claim_id": "Cc3b7c21cd217bb40838cff68",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第7行类型“结果”，I 为终点。",
+        "carried_from": "Cf91864ebcb6d86bfb08edda4",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -4041,7 +4239,13 @@
       ],
       "bindings": [],
       "claim_id": "Cd78f09a425c9861b1e4bfa7b",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E018 原文“招生单位录取工作一般应在录取当年4月底前完成”，节点写“拟录取（四月底前）”时间对得上；“一般”被省略，但作为流程节点的时间提示不改变含义。",
+        "carried_from": "C75953acf8c368705c4b171c8",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -4151,7 +4355,13 @@
       ],
       "bindings": [],
       "claim_id": "Cfed9005c510d998339e79709",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "流程第8行节点编号“F”。",
+        "carried_from": "C11fb0151eada9457f250a368",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -4261,7 +4471,13 @@
       ],
       "bindings": [],
       "claim_id": "Cd02a0ee114a4e5ae1452a610",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第8行类型“备选”，F 为条件不满足时的去向。",
+        "carried_from": "Cc7bf3135d88167fa0546838d",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -4371,7 +4587,13 @@
       ],
       "bindings": [],
       "claim_id": "Cadb5574e16a3a7eca904e416",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "调剂限“同科目江苏学校”对应 E016“初试科目与调入专业相同相近”和本人 city_pref“只在本省”；同时春招对应 work_chance“打算春招”。",
+        "carried_from": "Cb302aa7dd1d4350ab927d922",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -4481,7 +4703,13 @@
       ],
       "bindings": [],
       "claim_id": "C28fb85e2170a833ef5ef400d",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "流程第9行节点编号“G”。",
+        "carried_from": "Ca2994056f08fcdc1bdf1839e",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -4591,7 +4819,13 @@
       ],
       "bindings": [],
       "claim_id": "Cffc17764e0495080544d593f",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第9行类型“备选”，G 是未过国家线时的去向。",
+        "carried_from": "C62a10de6b31bc2f5bd56d1cb",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -4701,7 +4935,13 @@
       ],
       "bindings": [],
       "claim_id": "Cc0f29a16606f2b2cb733bdb9",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "春招找开发岗对应本人 why_main“以后在南京或苏州做开发”；“再考一年到时再定”对应 earning_year“二战家里应该能支持一年，但我自己不太想”，没有替本人拍板。",
+        "carried_from": "Cba79f2ba6ebfb2d2d3e83cf4",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E037"
+      }
     },
     {
       "section": "01",
@@ -4839,7 +5079,13 @@
       ],
       "bindings": [],
       "claim_id": "Cd0ff55d75c6725cc22591ca7",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "指标卡第1行名称“十月模考”，模考日期 E002 为 10 月 11 日，属十月。",
+        "carried_from": "C3c5c10c181b2c726494fa518",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E035、E057"
+      }
     },
     {
       "section": "01",
@@ -4983,7 +5229,13 @@
         }
       ],
       "claim_id": "C944255a7ff05500b2e0bee46",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "349 分 = 政治63+英语一62+数学一105+专业课119，c:/mock_total 复算一致。",
+        "carried_from": "Cddbdc616dc070b7a74b9a20d",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E035、E057"
+      }
     },
     {
       "section": "01",
@@ -5121,7 +5373,13 @@
       ],
       "bindings": [],
       "claim_id": "C3d66dfbc51f128191eacc9b2",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "E002 原文写“考研机构的全程模考，四科都做了，按考试时间限时”，四科与 E035 学硕科目相同；“不是初试成绩”与 E002 范围注明一致。",
+        "carried_from": "C752441d57846edb240b50a80",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E035、E057"
+      }
     },
     {
       "section": "01",
@@ -5259,7 +5517,13 @@
       ],
       "bindings": [],
       "claim_id": "C4646c97b70fc2367de7e9882",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "指标卡第2行名称“苏大两项”，指下文计算机学硕和软件工程学硕两个专业。",
+        "carried_from": "Cf127aac6485b18b86599b2f0",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E035、E057"
+      }
     },
     {
       "section": "01",
@@ -5397,7 +5661,13 @@
       ],
       "bindings": [],
       "claim_id": "C04b559da3d003d94303ed5a1",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "两项都归“够一够”：计算机学硕模考 349 低于中位数 357.5、高于下四分位 347.75；软工学硕 349 恰等于中位数 349.0；两者都不在稳妥区，分档与计算项吻合。",
+        "carried_from": "Cb6370127c6055967e63f3175",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E035、E057"
+      }
     },
     {
       "section": "01",
@@ -5535,7 +5805,13 @@
       ],
       "bindings": [],
       "claim_id": "C4b647b9bd01a1ac7c869f9ef",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E042 数组排序后最低三人为 341、346、347，349 高于这一档最高分；E045 数组中位数 349.0 与模考相同，c:/suda26_0835_median 复算一致。",
+        "carried_from": "C181188a4a0fb524c4a11586e",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E035、E057"
+      }
     },
     {
       "section": "01",
@@ -5673,7 +5949,13 @@
       ],
       "bindings": [],
       "claim_id": "Cb34c45e130a1e3fba18ba14c",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "指标卡第3行名称“稳妥档”，是分档标签。",
+        "carried_from": "C4f8d515847859fd8518928b9",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E035、E057"
+      }
     },
     {
       "section": "01",
@@ -5811,7 +6093,13 @@
       ],
       "bindings": [],
       "claim_id": "C6f190fd3520485cb6fe33d9c",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "“六校都没有”稳妥档：苏大两项都在中位数附近或以下，河海普通方向复试线 350 高于模考，联培和软工人数 5、1、3 不定档，其余四校无分数分布无法定档，结论与各计算项一致。",
+        "carried_from": "C1bd6fd74398ded795a2bfd01",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E035、E057"
+      }
     },
     {
       "section": "01",
@@ -5949,7 +6237,13 @@
       ],
       "bindings": [],
       "claim_id": "C1bdaf8db9a5d9fb18032b3fc",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "说明“数据够可靠的候选里没有相对稳妥”并转向调剂和春招，与第56条分档结果及本人 worst 选项一致，没有新事实。",
+        "carried_from": "C1d89fbe0ffb7296c3305c031",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E035、E057"
+      }
     },
     {
       "section": "01",
@@ -6087,7 +6381,13 @@
       ],
       "bindings": [],
       "claim_id": "Ceb5a4b740ba297cc244c1ec6",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "指标卡第4行名称“报名截止”。",
+        "carried_from": "Cbab4b5ef71ae9ad6e1a1cdb2",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E035、E057"
+      }
     },
     {
       "section": "01",
@@ -6231,7 +6531,13 @@
         }
       ],
       "claim_id": "Cca775bd83394dd9097bf7f0c",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E010 值 2026-10-24，卡片写 10-24，月日一致。",
+        "carried_from": "Ce057bba68026c08cee8c1916",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E035、E057"
+      }
     },
     {
       "section": "01",
@@ -6375,7 +6681,13 @@
         }
       ],
       "claim_id": "Cae84507276a04cecf01e0933",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E017 值 22:00，与 E010 原文“每日9:00—22:00”一致；后半句提前一天报完是建议，与 k 个人日期 10-23 一致。",
+        "carried_from": "C4b8c224cfb39ee631efab428",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E035、E057"
+      }
     },
     {
       "section": "01",
@@ -6779,7 +7091,18 @@
       ],
       "bindings": [],
       "claim_id": "Cd0dc83c0326e32ba5ad5615c",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "要点标题“只和同科目的比”概括下文做法：只把模考与 E035/E057 所列 101/201/301/408 相同的学硕对照，本身不陈述外部数字。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "C4115a738ebc457fb617a9681",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E065、E090、E100、E110"
+      }
     },
     {
       "section": "01",
@@ -7183,7 +7506,18 @@
       ],
       "bindings": [],
       "claim_id": "C2abc053751d79e85ed27c132",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "E002 本人原话列出政治 63、英语一 62、数学一 105、408 119；句中“计算机学科专业基础”就是 408 的官方科目名（E035“④408 计算机学科专业基础”）。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "C10e3fc4b7ae6d9068a8ce53c",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E065、E090、E100、E110"
+      }
     },
     {
       "section": "01",
@@ -7587,7 +7921,18 @@
       ],
       "bindings": [],
       "claim_id": "C71edfe42f1355a58a1343247",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "苏大 081200/083500 同科目见 2027 年目录 E035（范围写明两码同一合并单元格）；河海见 2026 年目录 E057“081200 与 083500 科目相同”；南航 E085、南邮 E095、江大 E103、南理工 E112 当届科目均为未取到，四校名单与句子一致。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "Ce0c6ca52b95655133e09f091",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E065、E090、E100、E110"
+      }
     },
     {
       "section": "01",
@@ -7991,7 +8336,18 @@
       ],
       "bindings": [],
       "claim_id": "C2f29f7d84471355d2b655cea",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "苏大 085404 当届考“②204 英语（二） ③302 数学（二）”（E036），河海计算机学院 085400 上一届目录同样是英语二、数学二（E059），限定为苏大、河海后不再外推到其他学校。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "Cd1d75bccd5c9f57b80bccc10",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E065、E090、E100、E110"
+      }
     },
     {
       "section": "01",
@@ -8395,7 +8751,18 @@
       ],
       "bindings": [],
       "claim_id": "Cdc42a544125e1de0c1c8e072",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "两项都按规则得“够一够”：081200 模考 349 ≥ 下四分位 347.75 但低于中位数 357.5；083500 模考 349 等于中位数、≥ 下四分位 334；两项都只有 2026 一届名单，按 kaoyan_position 规则不能给“相对稳妥”。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "C68631c18afd01920a53bc67d",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E065、E090、E100、E110"
+      }
     },
     {
       "section": "01",
@@ -8810,7 +9177,18 @@
         }
       ],
       "claim_id": "C84141e753f0fc41d4380dbe5",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E042 十二个匿名分按含端点线性插值得下四分位 347.75（第 3、4 个分数 347 与 348 之间），中位数 (357+358)/2=357.5；349 高于 347.75、比 357.5 低 8.5，与 gap_suda0812_median 一致；“最低一档的最高分”即下四分位的通俗说法。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "C9bfc18e183bd61fbcdafa6a5",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E065、E090、E100、E110"
+      }
     },
     {
       "section": "01",
@@ -9220,7 +9598,18 @@
         }
       ],
       "claim_id": "C67859cb8c6525d339a102b53",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E045 十个分数中位数为 (348+350)/2=349，恰等于模考；复试线 E043 326 比 E030 341 低 15 分，对应 suda_line_gap_0812_0835=15。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "Ce2cafc89270da00182d1bb9c",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E065、E090、E100、E110"
+      }
     },
     {
       "section": "01",
@@ -9624,7 +10013,18 @@
       ],
       "bindings": [],
       "claim_id": "Cca93245936f7d518cbe34999",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "小标题“为什么默认还是计算机学硕”只提出下面三句要回答的问题，不含事实或数字。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "Cba0493c80761b339180a65e6",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E065、E090、E100、E110"
+      }
     },
     {
       "section": "01",
@@ -10028,7 +10428,18 @@
       ],
       "bindings": [],
       "claim_id": "Cfc0511e90a671d3e2b59a1fd",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "比较的是位置：软件工程学硕模考与中位数差 0（gap_suda0835_median），计算机学硕差 8.5，比复试线分别高 23 与 8 分，按分数位置软工更靠前，判断由计算项直接得出。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "Cf0148cbc7b83a934bf0f4a24",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E065、E090、E100、E110"
+      }
     },
     {
       "section": "01",
@@ -10432,7 +10843,18 @@
       ],
       "bindings": [],
       "claim_id": "Cb3a6cb672efadf9e1639681f",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "问卷三个目标依次写“南京航空航天大学 计算机”“苏州大学 计算机”“河海大学 计算机”，全卷和补充说明都没提软件工程；把是否接受软工留给本人决定与此相符。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "Cd52dd6bd61ee5d85280a46e3",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E065、E090、E100、E110"
+      }
     },
     {
       "section": "01",
@@ -10836,7 +11258,18 @@
       ],
       "bindings": [],
       "claim_id": "Cdd1f4ea3495f155b39a4bbda",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "“接受就改报软件工程学硕”是条件式建议，前提来自上句本人未表态，且 E035 显示两专业当届同科目，改报不涉及换考试科目。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "C4f8720ace410dea6b5218e2a",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E065、E090、E100、E110"
+      }
     },
     {
       "section": "01",
@@ -11240,7 +11673,18 @@
       ],
       "bindings": [],
       "claim_id": "C0dc2942044b593abd22ad775",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "河海普通方向定为“冒险”：2026 一志愿名单 9 人（E065），模考 349 低于其下四分位 352，也低于最低分 350；9 人处于五到九人区间，最高只能到够一够，这里不到下四分位故为冒险。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "Cba4768be86302c1f6097f501",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E065、E090、E100、E110"
+      }
     },
     {
       "section": "01",
@@ -11665,7 +12109,18 @@
         }
       ],
       "claim_id": "C003e230b97fe915f9483a82b",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "复试线 308（E054，2025 年 01—04 普通方向）到 350（E050，2026 年 02—05 普通方向），统考计划 18 人（E064）到 9 人（E060），模考 349 比 350 低 1 分（gap_hhu0812n_line=1），“在线下”成立。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "C0a2ecf9232190e1c08e37984",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E065、E090、E100、E110"
+      }
     },
     {
       "section": "01",
@@ -12069,7 +12524,18 @@
       ],
       "bindings": [],
       "claim_id": "C78b4b515a9e7e8b6b530f1c9",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "本人原话是“同学说河海去年分数线不高”，按出稿时 2026 年的日历，“去年”公布的线就是 2025 年那一届的 308 分（E054），报告叫“前一届”；引号里压缩成“河海线不高”，意思没变。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "Cda0d8f0e196a77942dd003b1",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E065、E090、E100、E110"
+      }
     },
     {
       "section": "01",
@@ -12473,7 +12939,18 @@
       ],
       "bindings": [],
       "claim_id": "Ce2d3519b714975529cced3a7",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "要点标题“没有稳妥档，保底要提前备”与本节结论一致：各候选没有一个满足两届都不低于中位数，所以保底要另做准备。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "Ccfda179d227bda6dcdd35ea4",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E065、E090、E100、E110"
+      }
     },
     {
       "section": "01",
@@ -12893,7 +13370,18 @@
         }
       ],
       "claim_id": "Cd7426949383e115a03b07e8b",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "联培一志愿录取 2026 年 5 人（E066 五个分数）、2025 年 1 人（E075），软工 2026 年 3 人（E074），低于 5 人门槛不定档；软工模考 349 高于 2026 三人中两人、2025 十人中八人，“大多数”成立；河海 2027 目录未取到见 E072。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "Cee85ff0e2557e71102cc177b",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E065、E090、E100、E110"
+      }
     },
     {
       "section": "01",
@@ -13297,7 +13785,18 @@
       ],
       "bindings": [],
       "claim_id": "C28228473004e538f3ad3e0b7",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "南航有 2026 复试线 340（E080）但无名单（E086），南邮有 2026 线 303（E090），江大有 2026 线 326（E100），南理工只有 2025 线 335（E110），四校都缺录取者分布，依规则不定档。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "C02c08bd8cb05395efbada0db",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E065、E090、E100、E110"
+      }
     },
     {
       "section": "01",
@@ -13701,7 +14200,18 @@
       ],
       "bindings": [],
       "claim_id": "Cf190278e430eef028affce65",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "保底建议依据 E016“初试科目与调入专业初试科目相同相近”的调剂原则，以及本人“只接受部分城市或层次”的调剂意愿与“打算春招”的工作打算；准备时间放在初试后属建议。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "C772e16e636a6a6de048182d4",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E065、E090、E100、E110"
+      }
     },
     {
       "section": "01",
@@ -13825,7 +14335,13 @@
       ],
       "bindings": [],
       "claim_id": "C6fd6ce65cfff1bf44de0a464",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "行动一要求查南航、南邮、江大、南理工当届科目与计划、河海当届目录，正对应 E085/E095/E103/E112/E072 五个未取到项；先看苏大软工方向对应 E047。",
+        "carried_from": "C5ce0974ab6435ddb3e29ec42",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E047、E072、E085、E095、E103、E112"
+      }
     },
     {
       "section": "01",
@@ -13955,7 +14471,13 @@
         }
       ],
       "claim_id": "C655663550813304f6b072829",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "行动一日期 2026-10-22 来自 k:/context/personal_dates/action0，是报告排的个人日程而非官方日期，早于 E010 报名截止 10-24，安排可行。",
+        "carried_from": "C539c981c24cfc83aa3085fbf",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E047、E072、E085、E095、E103、E112"
+      }
     },
     {
       "section": "01",
@@ -14079,7 +14601,13 @@
       ],
       "bindings": [],
       "claim_id": "C2e658f1f24ee3645b0611b8c",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "行动二的志愿选择与第01节默认建议一致；“写下调剂能接受的城市和学校”回应本人 ky_tj“只接受部分城市或层次”尚未具体化，是合理的待办。",
+        "carried_from": "Cc93aaf194c826f8dbbe8165d",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E047、E072、E085、E095、E103、E112"
+      }
     },
     {
       "section": "01",
@@ -14209,7 +14737,13 @@
         }
       ],
       "claim_id": "C873fc47b0a742064b00d5926",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "行动二日期 2026-10-23 取自 k:/context/personal_dates/action1，比 E010 截止 10-24 早一天，是个人安排。",
+        "carried_from": "Cb49f1e14fa68038b114883df",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E047、E072、E085、E095、E103、E112"
+      }
     },
     {
       "section": "01",
@@ -14333,7 +14867,13 @@
       ],
       "bindings": [],
       "claim_id": "C3d62d0aabcea4002263c8cbd",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "补充说明写“没做过完整的上机模拟”，所以建议限时做一套上机题；“用同样方法重看位置”指再把新模考分放进 E042/E045 分布，属方法建议。",
+        "carried_from": "C58b06b00073a9c8597d8cfa3",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E047、E072、E085、E095、E103、E112"
+      }
     },
     {
       "section": "01",
@@ -14463,7 +15003,13 @@
         }
       ],
       "claim_id": "C8e905a3d83d66fcadd29d121",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "行动三日期 2026-11-15 来自 k:/context/personal_dates/action2，与 case.json deadlines D4“个人检查点：第二次全程模考”同日，在 E012 初试 12-19 之前。",
+        "carried_from": "C90cf2b0532ea0110cd9563e6",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E047、E072、E085、E095、E103、E112"
+      }
     },
     {
       "section": "01",
@@ -14509,7 +15055,13 @@
         }
       ],
       "claim_id": "C7d009560a9a238f4d2b99fdc",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "检查点 2026-11-15 来自 k:/context/personal_dates/checkpoint，属个人安排，不冒充官方日期。",
+        "carried_from": "Ce9c27cabb89fc54a8521d29d",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010"
+      }
     },
     {
       "section": "01",
@@ -14549,7 +15101,18 @@
       ],
       "bindings": [],
       "claim_id": "Cc045d7598f5ad6c055417c83",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "检查点为 personal_dates.checkpoint 2026-11-15，而 E010 全国网报截止 2026-10-24，所以“那时报名早已截止”成立；后半句列出检查内容，是建议，不需原文。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "C6ca56326f2d390deae152d36",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010"
+      }
     },
     {
       "section": "01",
@@ -14659,7 +15222,18 @@
       ],
       "bindings": [],
       "claim_id": "C280bf34154eb825bfb460b65",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "录取者分数只有苏大（E042/E045）和河海（E065 等）；其余学校只对照复试线；南理工研究生院 2026 页面要登录（E112），只取到 2025 年线 E110，“连上一届的线也没取到”属实。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "C6dd0d13ab6d968b8d39592b5",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E012"
+      }
     },
     {
       "section": "01",
@@ -14769,7 +15343,18 @@
       ],
       "bindings": [],
       "claim_id": "Ccbe0965dbffb048ec10c725a",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "推测",
+        "reason": "模考日期 2026-10-11（E002），初试 2026-12-19（E012，本句引用未列但在 evidence.json），相隔约十周，“几周”成立；“机构卷难度与真题关系没核过”对应补充说明“听同学讲比真题难一点，没核过”；“分数会变”是合理推断。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "Ca9f7be2bd43225377218b4c0",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E012"
+      }
     },
     {
       "section": "01",
@@ -14879,7 +15464,18 @@
       ],
       "bindings": [],
       "claim_id": "C7a42122ffc9ce9bfe4776746",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "推测",
+        "reason": "“档位只是报名时的参考、不是承诺”由上两句（模考非初试、卷子难度未核）推出，E002 范围也写明“不是初试成绩”，措辞没有超出依据。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "C034f22881ff7e3b78c169427",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E012"
+      }
     },
     {
       "section": "01",
@@ -14989,7 +15585,18 @@
       ],
       "bindings": [],
       "claim_id": "Cfe1815b2c5f5f78368710e75",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "出稿日 2026-10-21 早于 E010 报名截止 2026-10-24，建议截止前确认学校可行；后半句把准备重点放在最弱两科和复试上机，对应 E037 复试机考编程题和本人没做过完整上机模拟，已不含被退回的“报完名不能改学校”。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "C50738bfed760ef0dc575cca6",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E012"
+      }
     },
     {
       "section": "02",
@@ -17366,7 +17973,13 @@
       ],
       "bindings": [],
       "claim_id": "C1ffea9a58b1c89048e1fb4d3",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "E002 原文“四科都做了，按考试时间限时、自己独立做完”；E035 学硕初试为 101、201、301、408，与模考四科相同。",
+        "carried_from": "Cf7a6ac6d0b5c5a6474dbed2d",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E035、E057"
+      }
     },
     {
       "section": "02",
@@ -17420,7 +18033,13 @@
       ],
       "bindings": [],
       "claim_id": "C6879729b7722d145a7f84aab",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "推测",
+        "reason": "因模考科目与学硕初试一致（E002 对 E035），才能把模考与 E042 等录取分数对照；“同一把尺子”是比喻，难度差异已在第88、154句限定。",
+        "carried_from": "Ca6a3586a8306ca6dafd24322",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E035、E057"
+      }
     },
     {
       "section": "02",
@@ -17474,7 +18093,13 @@
       ],
       "bindings": [],
       "claim_id": "C005cec85923f32d84b68ae0c",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "说明均分排名不进初试估分，与第130句和 report_input_usage 用途相同，属口径说明。",
+        "carried_from": "Ca48a9988e8f6c0b11f6d9a83",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E035、E057"
+      }
     },
     {
       "section": "02",
@@ -18878,7 +19503,13 @@
         }
       ],
       "claim_id": "C62eb1bea08d77323727b82cf",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "问题卡第一问引 E010 截止日 10-24 与 E017 每日 22:00，日期时刻无误，本身是待答问题而非结论。",
+        "carried_from": "Cf0b99cdc985dae0d8f1dd646",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E036"
+      }
     },
     {
       "section": "03",
@@ -18946,7 +19577,13 @@
       ],
       "bindings": [],
       "claim_id": "Cad86b8c46fb7aaa457a68526",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第二问指专硕改考英语二、数学二，依据 E036 苏大 085404 的“204 英语（二）302 数学（二）”，提问形式不作断言。",
+        "carried_from": "Cd89ca5bb8848497f438ea4a9",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E036"
+      }
     },
     {
       "section": "03",
@@ -19014,7 +19651,13 @@
       ],
       "bindings": [],
       "claim_id": "Cda044748ec0af806a9136559",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第三问列调剂、春招、再考一年三条退路，对应本人 worst 与 earning_year 两题，属问题清单。",
+        "carried_from": "C9b2efd1fcbc70b137ab83a54",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E036"
+      }
     },
     {
       "section": "03",
@@ -20016,7 +20659,18 @@
       ],
       "bindings": [],
       "claim_id": "C29370d0c9d1e2671a7bf6aee",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "矩阵标题与实际五列（城市与培养、科目可比、模考位置、名额与年度变化、复试准备）相符：先城市，后面是能否考、考得上。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "C1d6927729a792bb9882586f0",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+      }
     },
     {
       "section": "04",
@@ -20406,7 +21060,18 @@
       ],
       "bindings": [],
       "claim_id": "Cde3450b9fb45895a69e67b87",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "图注说第一列是最在乎的城市，本人优先级排序第一项正是“城市”；其余四列都是报考条件，已改掉此前“按优先级从左往右”的说法。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "C9ad8895cb23b122452d4f3df",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+      }
     },
     {
       "section": "04",
@@ -20796,7 +21461,13 @@
       ],
       "bindings": [],
       "claim_id": "Cc2b6f7ea6ee6caaa4eb25023",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "图例定义 ✓、△、△待查、✗ 四种符号，矩阵各格均使用这四种之一。",
+        "carried_from": "Cdaef2ef46ba923ab0a9d8467",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+      }
     },
     {
       "section": "04",
@@ -21186,7 +21857,13 @@
       ],
       "bindings": [],
       "claim_id": "C41313fee41d5e7c53570cd7a",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "声明符号不是分数或把握，与图注第12句“图里只有条件”口径一致。",
+        "carried_from": "Cf74af4895fdf6bf096eda79b",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+      }
     },
     {
       "section": "04",
@@ -21576,7 +22253,13 @@
       ],
       "bindings": [],
       "claim_id": "Ce899270870405273dbd58432",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "矩阵第1列名“城市与培养”。",
+        "carried_from": "Cbd0604df3a1eb1e25fc51e07",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+      }
     },
     {
       "section": "04",
@@ -21966,7 +22649,13 @@
       ],
       "bindings": [],
       "claim_id": "Cca0d90e1d0338c6e04b62cae",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "矩阵第2列名“科目可比”。",
+        "carried_from": "C475bd561053bebfcc4392446",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+      }
     },
     {
       "section": "04",
@@ -22356,7 +23045,13 @@
       ],
       "bindings": [],
       "claim_id": "C08ba38d4c243c46d99d6edcc",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "矩阵第3列名“模考位置”。",
+        "carried_from": "C93957c4f8e7f01547b830ea9",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+      }
     },
     {
       "section": "04",
@@ -22746,7 +23441,13 @@
       ],
       "bindings": [],
       "claim_id": "Cb0882cc10de393db464a1222",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "矩阵第4列名“名额与年度变化”。",
+        "carried_from": "C86cbd0cf5915ff6050692945",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+      }
     },
     {
       "section": "04",
@@ -23136,7 +23837,13 @@
       ],
       "bindings": [],
       "claim_id": "C6ace86829a6a70bd7a3bb559",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "矩阵第5列名“复试准备”。",
+        "carried_from": "Ca705c3d13acd6154bc385f62",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+      }
     },
     {
       "section": "04",
@@ -23526,7 +24233,13 @@
       ],
       "bindings": [],
       "claim_id": "C00301f8e7892c95fa7317986",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "矩阵第1行候选名“苏大计算机学硕”，即 E030 的 081200。",
+        "carried_from": "C621787ea45f19e540598b4bd",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+      }
     },
     {
       "section": "04",
@@ -23916,7 +24629,13 @@
       ],
       "bindings": [],
       "claim_id": "C44dbe2189be9dd9d6ebe87fb",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "苏州大学位于苏州属公共常识（来源网站 suda.edu.cn 为苏州大学官方站），在江苏省内，符合本人“只在本省”。",
+        "carried_from": "Ce5c3b3edf64d05606cb872d9",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+      }
     },
     {
       "section": "04",
@@ -24306,7 +25025,13 @@
       ],
       "bindings": [],
       "claim_id": "C98f47ab64e82e7f26598e0f0",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E035 为 2027 年苏大目录，081200 初试“①101 ②201 英语（一） ③301 数学（一） ④408”，与模考四科相同。",
+        "carried_from": "Cb766a2ccf90e65775dcfb1ac",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+      }
     },
     {
       "section": "04",
@@ -24696,7 +25421,13 @@
       ],
       "bindings": [],
       "claim_id": "C036e8492c0ebe4b6dd8634db",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E042 下四分位 347.75、中位数 357.5，模考 349 处在两者之间，△ 标记与“够一够”一致。",
+        "carried_from": "Cb7dda2b9d90b472b2a26340a",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+      }
     },
     {
       "section": "04",
@@ -25086,7 +25817,13 @@
       ],
       "bindings": [],
       "claim_id": "Cbc93f82c98404d269bdd75c1",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E041 上一届拟公开招考 12 人、E038 当届 10 人，少 2 人（c:/suda_plan_drop）；分数分布只有 2026 年 E042 一届，表述准确。",
+        "carried_from": "Ce6d0f8efffdf2d5e94e8b5f6",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+      }
     },
     {
       "section": "04",
@@ -25476,7 +26213,18 @@
       ],
       "bindings": [],
       "claim_id": "Cfc1f29775879fda65952f8eb",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "苏大计算机学院 2026 细则 E033“复试成绩（300 分）=机考（150 分）+…”，150/300 为一半，格内已标“上一届”；“编程”指机考内容，依据 2027 目录 E037“考试形式：机考编程题”，两份文件属同一学院同一复试科目。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "C00553b585fbecb6e5b44d790",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+      }
     },
     {
       "section": "04",
@@ -25866,7 +26614,13 @@
       ],
       "bindings": [],
       "claim_id": "C521e1a5466548764d866ad1c",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "矩阵第2行候选名“苏大软件工程学硕”，即 E043 的 083500。",
+        "carried_from": "C0f1e327ec26db65f7513752e",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+      }
     },
     {
       "section": "04",
@@ -26256,7 +27010,13 @@
       ],
       "bindings": [],
       "claim_id": "C533d43fb23e9b60f84ff60d4",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "与第1行同校，苏州大学在苏州、属江苏，满足本人城市约束。",
+        "carried_from": "Cd785b24ab57b6b467caa480c",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+      }
     },
     {
       "section": "04",
@@ -26646,7 +27406,13 @@
       ],
       "bindings": [],
       "claim_id": "C266e0843d33305aa955d9417",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E047 为 2027 年苏大 083500 方向，范围注明“初试科目与081200共用同一栏”，E035 同样注明合并单元格，故同科目成立；依赖取数者对版式的说明。",
+        "carried_from": "Ce31ca762290b621ea0642e5a",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+      }
     },
     {
       "section": "04",
@@ -27036,7 +27802,13 @@
       ],
       "bindings": [],
       "claim_id": "C378ce46f9db6dadf92bbc838",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E045 数组中位数 349.0、下四分位 334.0，模考 349 恰等于中位数、高于下四分位。",
+        "carried_from": "Cd1036bbef11b6067d083b586",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+      }
     },
     {
       "section": "04",
@@ -27426,7 +28198,13 @@
       ],
       "bindings": [],
       "claim_id": "C1b107c49ef6bd3211b42fbbe",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E046 上一届拟公开招考 10 人，E039 当届 10 人，相同；分布只有 E045 一届。",
+        "carried_from": "Cf2af3e6330fe14dfa94433f8",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+      }
     },
     {
       "section": "04",
@@ -27816,7 +28594,18 @@
       ],
       "bindings": [],
       "claim_id": "Cdfcdcfd3525ed6d6cda79da0",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "081200 与 083500 都在苏大计算机科学与技术学院同一份细则里（E030、E043 同出该细则），复试结构相同；机考 150 分占 300 分一半出自 2026 年 E033/E034，已加“上一届”。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "Ca0c1050cd3699a60e322c79c",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+      }
     },
     {
       "section": "04",
@@ -28206,7 +28995,13 @@
       ],
       "bindings": [],
       "claim_id": "C822b0af2e87a1cf58a475802",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "矩阵第3行候选名“河海计算机联培”，对应 E051 的 01 方向。",
+        "carried_from": "Cc1b5d5d8d59a5b2ca608c71b",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+      }
     },
     {
       "section": "04",
@@ -28596,7 +29391,13 @@
       ],
       "bindings": [],
       "claim_id": "C4e302a7820fa5ffa07b73f78",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E122 范围明写“培养地点与学位授予方式未在此写明”，“地点、学位待问清”与之一致。",
+        "carried_from": "Cc224cee39e68a9cae297d6c8",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+      }
     },
     {
       "section": "04",
@@ -28986,7 +29787,13 @@
       ],
       "bindings": [],
       "claim_id": "C23da6a6cfc8251c9c3be9429",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E072 状态 unretrieved，摘录“未见2027招生简章目录条目”，所以当届目录未取到。",
+        "carried_from": "C96a8ba7ab4620726cd337dba",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+      }
     },
     {
       "section": "04",
@@ -29376,7 +30183,13 @@
       ],
       "bindings": [],
       "claim_id": "C0ebad49381f275bb6c14f3f8",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E066 数组 5 个分数（2026），E075 数组 1 个（2025），样本太少不定档与 c 计数一致。",
+        "carried_from": "Cfbf028348b974b41d857a05f",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+      }
     },
     {
       "section": "04",
@@ -29766,7 +30579,13 @@
       ],
       "bindings": [],
       "claim_id": "C23b7af4d489e1366779b51a1",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E061 上一届联培统考计划 5 人、E070 前一届 7 人，个位数，“统考计划少”成立。",
+        "carried_from": "Ca3238a41aeb685ff91195d56",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+      }
     },
     {
       "section": "04",
@@ -30156,7 +30975,13 @@
       ],
       "bindings": [],
       "claim_id": "C9fa9e02059ca71c3a09b8581",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E063 只给出 2026 年复试含专业课笔试，2027 年河海目录与复试办法未取到（E072），所以当届复试笔试科目未知属实。",
+        "carried_from": "Cd89b2620d5b37dcbf47f6a1d",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+      }
     },
     {
       "section": "04",
@@ -30546,7 +31371,13 @@
       ],
       "bindings": [],
       "claim_id": "Cb8f3e9790616db8b9f7af0b6",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "矩阵第4行候选名“河海计算机普通”，对应 E050 的 02—05 方向。",
+        "carried_from": "C8269c6b5ea7ec954c6d09f88",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+      }
     },
     {
       "section": "04",
@@ -30936,7 +31767,13 @@
       ],
       "bindings": [],
       "claim_id": "C1152975bc112de7382feb94b",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "河海大学在南京属公共常识，摘录未直接写城市；在江苏省内这一点满足本人约束。",
+        "carried_from": "C100739700841d0f0b81a778a",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+      }
     },
     {
       "section": "04",
@@ -31326,7 +32163,13 @@
       ],
       "bindings": [],
       "claim_id": "C2fa95694f72d96ca49d96441",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "普通方向同样受 E072 当届目录未取到影响，科目只能参照 E057 上一届目录。",
+        "carried_from": "C689cc41f352a175768dfed66",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+      }
     },
     {
       "section": "04",
@@ -31716,7 +32559,13 @@
       ],
       "bindings": [],
       "claim_id": "C891076bc969363ad32b86360",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E065 最低分 350、E050 复试线 350，模考 349 两者都低 1 分（c:/gap_hhu0812n_line=1），✗ 成立。",
+        "carried_from": "C96bd95f101a3dbd1f4816704",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+      }
     },
     {
       "section": "04",
@@ -32106,7 +32955,13 @@
       ],
       "bindings": [],
       "claim_id": "C465c4c17a95c038f294648e9",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "线 308→350 涨 42（c:/hhu_line_jump），计划 18→9 正好减半（c:/hhu_plan_drop=9），与 E054/E050/E064/E060 一致。",
+        "carried_from": "C9ca8dd529d5398c9d802fbe1",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+      }
     },
     {
       "section": "04",
@@ -32496,7 +33351,13 @@
       ],
       "bindings": [],
       "claim_id": "Cb2ad9244440762e7f2f2c16a",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "普通方向当届复试科目同样未取到，依据仍是 E072 的未取到记录。",
+        "carried_from": "Cbf411ad55b1ecfd06740ceff",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+      }
     },
     {
       "section": "04",
@@ -32886,7 +33747,13 @@
       ],
       "bindings": [],
       "claim_id": "C8a87d54d4034c34e95e5474e",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "矩阵第5行候选名“南航计算机学硕”，对应 E080 的 081200。",
+        "carried_from": "C666b0c9747addc9d66b70163",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+      }
     },
     {
       "section": "04",
@@ -33276,7 +34143,13 @@
       ],
       "bindings": [],
       "claim_id": "C65aa4eff6ab69b1873e0c5b3",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "南京航空航天大学在南京属公共常识（校名已含），在江苏省内。",
+        "carried_from": "C6207a46f06c65d28cbb0da3a",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+      }
     },
     {
       "section": "04",
@@ -33666,7 +34539,13 @@
       ],
       "bindings": [],
       "claim_id": "C95cdc1c1a0ab67a385147c7f",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E085 状态 unretrieved，摘录说目录查询页“只取到页面框架，没有表格内容”。",
+        "carried_from": "C2a4b66e69a85df873a052769",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+      }
     },
     {
       "section": "04",
@@ -34056,7 +34935,13 @@
       ],
       "bindings": [],
       "claim_id": "C0299b4e69804b47b5e270a03",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E086 状态 unretrieved，摘录“未见拟录取名单公告”，所以没有录取者分布。",
+        "carried_from": "C510135d4877e0a7619103e07",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+      }
     },
     {
       "section": "04",
@@ -34446,7 +35331,13 @@
       ],
       "bindings": [],
       "claim_id": "Ce2b1db1a97821a417b927232",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E084 范围原文“表中‘统考计划数’，是否含推免未明示”，格内意思相同。",
+        "carried_from": "Ced9cdd18ce4473e047cd2a72",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+      }
     },
     {
       "section": "04",
@@ -34836,7 +35727,13 @@
       ],
       "bindings": [],
       "claim_id": "C2b22f3e726eadfc3ebe37be6",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "evidence.json 里南航只有复试线、计划数和两条未取到记录，没有任何复试办法条目，说“复试办法未取到”与证据清单一致。",
+        "carried_from": "C62f58a1216e585937181d9c9",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E034、E041、E047、E051、E054、E064、E065、E070、E080"
+      }
     },
     {
       "section": "04",
@@ -35107,7 +36004,18 @@
       ],
       "bindings": [],
       "claim_id": "Cd65373e59d864d49395df6e2",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "说明句与图注同义：第一列城市对应本人 priority 首项“城市”，后几列是考试条件；不再声称各列按优先级排列。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "Cda1d292c49c44cecd8f21d7b",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E047"
+      }
     },
     {
       "section": "04",
@@ -35288,7 +36196,13 @@
       ],
       "bindings": [],
       "claim_id": "C58145a50d099538a9f89d17a",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "苏州、南京均在江苏；E122 只说联培需选 01 方向，范围注明培养地点未写明，所以只有联培要先问上课地点。",
+        "carried_from": "Ce34b76aa42d49b06cef5970c",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E047"
+      }
     },
     {
       "section": "04",
@@ -35469,7 +36383,13 @@
       ],
       "bindings": [],
       "claim_id": "C6511e8dcbf0a15086101876d",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "苏大两项有 2027 年目录 E035/E047，河海依据 2026 年目录 E057，南航 E085 未取到，三档说法与证据年份一致。",
+        "carried_from": "C95a1c9ff02770be2e4931b40",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E047"
+      }
     },
     {
       "section": "04",
@@ -35650,7 +36570,13 @@
       ],
       "bindings": [],
       "claim_id": "Cb3fe9e96bb89a93f8d82b3f6",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "对应矩阵第3列：苏大两项 △（软工在中位数、计算机在中位数下）、河海联培 △ 样本 5 与 1、河海普通 ✗ 低于 350、南航 △待查 无 E086 名单，逐项相符。",
+        "carried_from": "Ca726f2c9e84f261f5cb280a8",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E047"
+      }
     },
     {
       "section": "04",
@@ -35901,7 +36827,13 @@
       ],
       "bindings": [],
       "claim_id": "C125fbd89c5d0c9e3c8d98e85",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "苏大两项有当届目录 E035/E047、当届计划 E038/E039 各 10 人，上一届名单 E042 十二人、E045 十人，分别等于 E041、E046 公布的拟公开招考人数，“完整”成立；河海缺当届目录，确实不如苏大全。",
+        "carried_from": "C904dccd7082ff30313081a14",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E041、E057"
+      }
     },
     {
       "section": "04",
@@ -36152,7 +37084,13 @@
       ],
       "bindings": [],
       "claim_id": "C1e2c00fd52d18b339f85f6a9",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "软工模考等于中位数 349.0、复试线 326 低于计算机 341；计算机学硕最低一档最高分 347，349 只高 2 分，“高一点”成立。",
+        "carried_from": "Cd0a4f747e9243c7307bb0bf2",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E041、E057"
+      }
     },
     {
       "section": "04",
@@ -36403,7 +37341,13 @@
       ],
       "bindings": [],
       "claim_id": "C19afaa3c3318e5f59c755de4",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "tgt1—3 都写“计算机”，dir_want“后端开发或者数据方向”，问卷无软件工程字样；E047 列有“现代软件工程技术”“可信软件服务技术”，句子把方向名归为偏工程只是按名称描述，并留给本人决定。",
+        "carried_from": "C38adfdc34dd540778aed9410",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E041、E057"
+      }
     },
     {
       "section": "04",
@@ -36654,7 +37598,13 @@
       ],
       "bindings": [],
       "claim_id": "C3bd801ebc096ec3ae3e855e1",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "两项都处在录取者中位数附近或以下，没有一项高于上四分位（369.0、361.0），“不是稳”成立。",
+        "carried_from": "C9c48fc30aef58ae54c640d49",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E041、E057"
+      }
     },
     {
       "section": "04",
@@ -36911,7 +37861,13 @@
         }
       ],
       "claim_id": "C05f3da7ae315f9eeed3d09f6",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E074 上一届 3 人（305、323、373），模考高于其中 2 人；E076 前一届 10 人中模考高于 8 人；同科目依据 E057 范围说明，E072 当届目录未取到，定性参考的限定得当。",
+        "carried_from": "C5bf69fae8409419c3130e6db",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E041、E057"
+      }
     },
     {
       "section": "04",
@@ -37162,7 +38118,13 @@
       ],
       "bindings": [],
       "claim_id": "C8461ca96ee27dd7159d4f532",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "E066 五人、E075 一人；E122 范围称培养地点与学位授予方式未写明；问卷与补充说明都没提联培，“你也没说愿意”属实，不作备选的理由成立。",
+        "carried_from": "C803b61e151ec26e563451900",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E041、E057"
+      }
     },
     {
       "section": "04",
@@ -37413,7 +38375,13 @@
       ],
       "bindings": [],
       "claim_id": "C43ff6fa96ff7ab7e80f5092a",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "与第56句同一结论：苏大两项在中位数附近、河海普通 ✗、联培和软工样本 5/1/3 不定档、其余四校无分布，没有可算稳妥的候选。",
+        "carried_from": "Cc6a10eb42d7586491637f79d",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E041、E057"
+      }
     },
     {
       "section": "05",
@@ -37594,7 +38562,13 @@
       ],
       "bindings": [],
       "claim_id": "Cbae56917fbc5a8b02b3b73d1",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "支持理由“模考四科就是学硕科目”有 E035；培养方式与学制待核，没有用无证据的结论；下一步读培养方案是建议。",
+        "carried_from": "C244568d8a5b8428ee1441aef",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E012"
+      }
     },
     {
       "section": "05",
@@ -37689,7 +38663,13 @@
       ],
       "bindings": [],
       "claim_id": "Ce91b79696ec5c059f22c2395",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "E047 列出“05 现代软件工程技术”“04 可信软件服务技术”“01 认知软件理论与方法”，句中方向名逐字一致；同科目依 E047 范围；本人未提软工也属实。",
+        "carried_from": "Ccdb5ad7bf8044a61912ce874",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E012"
+      }
     },
     {
       "section": "05",
@@ -37784,7 +38764,13 @@
       ],
       "bindings": [],
       "claim_id": "Cd5e13baae3d6a40cac0d3306",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "专硕科目改为英二数二见 E036；10 月中旬距 E012 初试 12 月 19 日约九周，“只剩几周”成立；默认不改是建议。",
+        "carried_from": "C7a8d8ce607ec98a6f726c26c",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E012"
+      }
     },
     {
       "section": "05",
@@ -37879,7 +38865,13 @@
       ],
       "bindings": [],
       "claim_id": "Cd7a4078b20739fce5544eecf",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "本人 exp 题答“暂时没有”，why_main 目标是做开发，work_chance“打算春招”，所以缺经历、并行春招的判断有依据。",
+        "carried_from": "C735c1475683bf4463c7a5113",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E012"
+      }
     },
     {
       "section": "05",
@@ -44077,7 +45069,13 @@
       ],
       "bindings": [],
       "claim_id": "C6d4b03b413e4f809e8afc023",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "候选表第1列名，限定“与模考同科目”。",
+        "carried_from": "C7cc4530b924387f33a900120",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+      }
     },
     {
       "section": "06",
@@ -44341,7 +45339,13 @@
       ],
       "bindings": [],
       "claim_id": "C53f1ab03afe776dcc90cef6a",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "候选表第2列名“模考放进上一届录取者里”。",
+        "carried_from": "C0ec7320cd5369bf5221c402b",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+      }
     },
     {
       "section": "06",
@@ -44605,7 +45609,13 @@
       ],
       "bindings": [],
       "claim_id": "Cfba827408f08be869955e046",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "候选表第3列名“建议档”。",
+        "carried_from": "Ca5a0bad73ded7c6892869dde",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+      }
     },
     {
       "section": "06",
@@ -44869,7 +45879,13 @@
       ],
       "bindings": [],
       "claim_id": "C28ae2e21fbc730f04f57d50e",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "候选表第4列名“支持”。",
+        "carried_from": "C2a20d2dbc51c4c428b95f002",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+      }
     },
     {
       "section": "06",
@@ -45133,7 +46149,13 @@
       ],
       "bindings": [],
       "claim_id": "Ccaceb8a1277daf5d6f92e2c0",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "候选表第5列名“反对与代价”。",
+        "carried_from": "Cd3fec45b0a06e85a298fd0b5",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+      }
     },
     {
       "section": "06",
@@ -45397,7 +46419,13 @@
       ],
       "bindings": [],
       "claim_id": "C876b1b26d43abd783bdb0685",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "候选表第1行名称“苏大 计算机学硕”。",
+        "carried_from": "C1c0beafa046f85cc9de456d9",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+      }
     },
     {
       "section": "06",
@@ -45682,7 +46710,13 @@
         }
       ],
       "claim_id": "C9d764f0e712d2d5de0591b00",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "下四分位 347.75 显示为 347.8、中位数 357.5、E030 线 341，349−341=8 与 c:/gap_suda0812_line 一致。",
+        "carried_from": "C7468d13009efd6ff730cf25e",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+      }
     },
     {
       "section": "06",
@@ -45946,7 +46980,13 @@
       ],
       "bindings": [],
       "claim_id": "Cf3fffafc2a30bda23d07de1e",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "按第305句规则，349 不低于最近一届下四分位 347.75，又只有一届数据不能稳妥，故“够一够”。",
+        "carried_from": "C558a12d9b04b6f1eec217ec6",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+      }
     },
     {
       "section": "06",
@@ -46216,7 +47256,13 @@
         }
       ],
       "claim_id": "Ca9e13845537daccb36ca1cf5",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E035 当届同科目；苏州在江苏；E038 原文“081200 计算机科学与技术 全日制 10”，当届公开招考 10 人。",
+        "carried_from": "Ce8deba7a7dfebce1d7b5c3a9",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+      }
     },
     {
       "section": "06",
@@ -46486,7 +47532,18 @@
         }
       ],
       "claim_id": "C03934c7f659010ff465dc051",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "“只有一届分布”对应苏大只取到 2026 名单 E042；“少 2 人”= 上一届拟公开招考 12（E041）减当届计划 10（E038），即 suda_plan_drop；“上一届复试机考编程占一半分”同 E033/E034 与 E037。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "C6665b02d07b042b658265cc6",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+      }
     },
     {
       "section": "06",
@@ -46750,7 +47807,13 @@
       ],
       "bindings": [],
       "claim_id": "C0e4b28b94d0b3db5032ed3a4",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "候选表第2行名称“苏大 软件工程学硕”。",
+        "carried_from": "Ca4c5928c09df230ff7683ec8",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+      }
     },
     {
       "section": "06",
@@ -47035,7 +48098,13 @@
         }
       ],
       "claim_id": "Cd9173c6ade4734f81a24b218",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E045 中位数 349.0、下四分位 334.0；E043 线 326，349−326=23 与 c:/gap_suda0835_line 一致。",
+        "carried_from": "C424dc65c17e427c791af1223",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+      }
     },
     {
       "section": "06",
@@ -47299,7 +48368,13 @@
       ],
       "bindings": [],
       "claim_id": "Cc6ab881b1ca2e97f85bde4f0",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "349 高于下四分位 334、只有一届数据，按规则为“够一够”。",
+        "carried_from": "C4f8b45836559f9633124469b",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+      }
     },
     {
       "section": "06",
@@ -47569,7 +48644,13 @@
         }
       ],
       "claim_id": "C47db2e82971884143f974b3d",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E035 范围说 081200 与 083500 是同一合并单元格，即“同一格”；E039 当届 10 人、E046 上一届 10 人，相同。",
+        "carried_from": "Cbbdf50eea629ca2798078998",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+      }
     },
     {
       "section": "06",
@@ -47833,7 +48914,18 @@
       ],
       "bindings": [],
       "claim_id": "C347447c140d5e313b348ba9a",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "只有 E045 一届分布；本人目标与方向题都未提软件工程；E047 列出 083500 方向“01 认知软件理论与方法”，可称偏理论（本人写过不想做纯理论）；复试与计算机学硕同属一份细则，机考 150/300 为 2026 年数值，已标上一届。E047 不在本句引用列表里，但 evidence.json 有原文。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "C6d452845e8227b1922c7ffcd",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+      }
     },
     {
       "section": "06",
@@ -48097,7 +49189,13 @@
       ],
       "bindings": [],
       "claim_id": "C2852e3a2bf4add8ed0f9d725",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "候选表第3行名称“河海 计算机学硕·普通方向”。",
+        "carried_from": "Cb050db30fd28c88db85b5dd2",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+      }
     },
     {
       "section": "06",
@@ -48372,7 +49470,13 @@
         }
       ],
       "claim_id": "C3ae97ba0654a07fd97d54de6",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E065 最低分 350 与 E050 线 350，模考 349 都低 1 分。",
+        "carried_from": "C2cfb827b98781963e997a97f",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+      }
     },
     {
       "section": "06",
@@ -48636,7 +49740,13 @@
       ],
       "bindings": [],
       "claim_id": "Cc9fab81f5f5241d920beaf89",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "低于复试线即为冒险，与第305句规则一致。",
+        "carried_from": "Cd3fec2d9a41f3e6ba80e4ba8",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+      }
     },
     {
       "section": "06",
@@ -48906,7 +50016,13 @@
         }
       ],
       "claim_id": "C684092d1b8f9bb8500531bee",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "河海在南京属公共常识；E054 前一届普通方向线 308，“只有 308”数字对。",
+        "carried_from": "Cddb9e8b4e62ab77f9a348ab7",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+      }
     },
     {
       "section": "06",
@@ -49186,7 +50302,13 @@
         }
       ],
       "claim_id": "Cefc1e2a788c39f3f65487222",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "350−308=42（c:/hhu_line_jump），E064 18 人、E060 9 人。",
+        "carried_from": "Ceb3033fca56d73fbd1ca561d",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E033、E034、E041、E047"
+      }
     },
     {
       "section": "06",
@@ -49283,7 +50405,13 @@
       ],
       "bindings": [],
       "claim_id": "C3837a12358296ac4fd4624d2",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E122 原文“01 方向单独排名”；普通方向线 350（E050）与联培 303（E051）相差 47，“四十多分”对。",
+        "carried_from": "Cef7a08881ee7e1af5fdcd8ad",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E122"
+      }
     },
     {
       "section": "06",
@@ -49380,7 +50508,13 @@
       ],
       "bindings": [],
       "claim_id": "Cfffeb0f2d61c444993e0e9af",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "苏大计算机行粗条左端 347.75，349 在其右侧附近；软工行中位数 349.0 与模考重合；河海普通 2026 最低 350，349 在线段左端外，三处描述都对得上。",
+        "carried_from": "C134cdcb6dbd81b880deaabc1",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E122"
+      }
     },
     {
       "section": "06",
@@ -50513,7 +51647,13 @@
       ],
       "bindings": [],
       "claim_id": "C8e4386f5862abc5cfd8fce59",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "图标题“七行”：联培 2026、联培 2025、软工 2026、软工 2025、苏大 085404、河海 085400 两年，正好七行。",
+        "carried_from": "Cf228db5c6b5d4949b5d33312",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -50833,7 +51973,13 @@
       ],
       "bindings": [],
       "claim_id": "C1a413f5e35329f12ecdd458f",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "联培前一届只有 1 人（E075 数组一个值）；专硕苏大 085404（E036）与河海 085400（E059）考英语二、数学二，与模考科目不同，不画模考点合理。",
+        "carried_from": "Ca5c95644c7277a87cfeca855",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -51153,7 +52299,13 @@
       ],
       "bindings": [],
       "claim_id": "C918ef9b79e59dbbfbb92fc0a",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "南航 E080/E081、南邮 E090/E091、江大 E100/E101、南理工 E110/E111 都只有复试线，没有数组可画区间。",
+        "carried_from": "C3eb4e2c808d821a8f29bdb92",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -51473,7 +52625,13 @@
       ],
       "bindings": [],
       "claim_id": "C9a16939787a773b84025286b",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "推测",
+        "reason": "可由已有数据佐证：苏大计算机线 341 而录取中位数 357.5，河海前一届线 308 而中位数 335，线与实际录取位置差距不一，属合理提醒。",
+        "carried_from": "C20c1ad0702aadd4b5d3673d5",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -51793,7 +52951,13 @@
       ],
       "bindings": [],
       "claim_id": "C69766aa1e361f3c72fb7d4bc",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "不定档图的单位“分”。",
+        "carried_from": "C8d9001c7bff1d4fee91012b5",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -52133,7 +53297,13 @@
         }
       ],
       "claim_id": "Cac78d00f57266da05e0d6b5f",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "行标签“河海计算机联培 2026”，对应 E066 的 2026 年 01 方向名单。",
+        "carried_from": "Cc49dae58d4ba8caaaec48b52",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -52459,7 +53629,13 @@
         }
       ],
       "claim_id": "Cbbdd0c1bcee4c301d8bc6544",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E066 五个分数 320、329、342、346、352，下四分位 329.0。",
+        "carried_from": "C50c176bcb17130c6182075c9",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -52785,7 +53961,13 @@
         }
       ],
       "claim_id": "C615b1e065018460651bfbb72",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E066 上四分位 346.0（第 4 位）。",
+        "carried_from": "C60ae31fdd024ae6b3d7860b3",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -53111,7 +54293,13 @@
         }
       ],
       "claim_id": "C874b731e0b36405a369535b9",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "联培 2026 行模考点 349，同科目所以画出。",
+        "carried_from": "Cdb181bf693c4926bf858d109",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -53437,7 +54625,13 @@
         }
       ],
       "claim_id": "C43bfe9d409f1a44ac81b2053",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E066 最低 320，高于该方向线 303。",
+        "carried_from": "C340c42acf0f9c9187a50d8ac",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -53763,7 +54957,13 @@
         }
       ],
       "claim_id": "C7f35736e388fea0c7b855413",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E066 联培 2026 最高 352，即摘录行“352 281.10 633.10”。",
+        "carried_from": "C5786260cd3e44cd20e5fa34f",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -54089,7 +55289,13 @@
         }
       ],
       "claim_id": "Ceb519be05f64f9be1cba2657",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E066 五人第 3 位 342，中位数 342.0。",
+        "carried_from": "C2386c3c13015c5b7b7b6d0d8",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -54415,7 +55621,13 @@
         }
       ],
       "claim_id": "C69bbd08e8ca2350aafd17ac1",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "联培 2026 复试线 303 来自 E051 原文“（01 方向）学术学位 303”。",
+        "carried_from": "C9fdb4726a50d115c1b49702c",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -54755,7 +55967,13 @@
         }
       ],
       "claim_id": "C5290da61ff9aea7026fb8f4e",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "行标签“河海计算机联培 2025”，对应 E075 的 2025 年 05 方向（当年联培方向）名单。",
+        "carried_from": "Cfe286f9e70940cd0b48cbe83",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -55081,7 +56299,13 @@
         }
       ],
       "claim_id": "Ca0f7360bc90ea18201a1adc7",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E075 只有一个分数 314，下四分位只能是 314.0。",
+        "carried_from": "Cdaa7157b7788dee7f2ca66dd",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -55407,7 +56631,13 @@
         }
       ],
       "claim_id": "C1afa38f97213d38f8339df61",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "同一单值数组，上四分位也是 314.0，图上箱体退化为一点。",
+        "carried_from": "C331b0cd843ec045f508268a3",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -55733,7 +56963,13 @@
         }
       ],
       "claim_id": "C8201f6ca443bbbd4a448097f",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "联培 2025 行模考点 349，高于唯一录取者 314。",
+        "carried_from": "C6ebfa979ed5ff5d4bccd69a6",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -56059,7 +57295,13 @@
         }
       ],
       "claim_id": "C2e8d040c9e414cf5133b3752",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E075 单值，最低分 314。",
+        "carried_from": "Cef4461662fe27035902eeb21",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -56385,7 +57627,13 @@
         }
       ],
       "claim_id": "C114b041a82f22fe1b7c7a77c",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E075 单值，最高分 314，与摘录行“314 250.20 564.20”一致。",
+        "carried_from": "Cf5e55f7414975dca60485fa7",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -56711,7 +57959,13 @@
         }
       ],
       "claim_id": "C6b6d20fccfeb75030daa279c",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E075 单值，中位数 314.0。",
+        "carried_from": "C3c624a84e77051cf52bb4b29",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -57037,7 +58291,13 @@
         }
       ],
       "claim_id": "C943494e10ee863b3302f3194",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E055 原文“（05 仅限与中国科学院大学南京学院联合培养）学术学位 287”，为 2025 年联培线。",
+        "carried_from": "Cca19bd6cb94cf78c4c0a5bac",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -57377,7 +58637,13 @@
         }
       ],
       "claim_id": "C205f7b62dae7bb78349ecab4",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "行标签“河海软件工程学硕 2026”，对应 E074 的 2026 年 083500 名单。",
+        "carried_from": "Cac5878e3b1b8dcd2fbe679bc",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -57703,7 +58969,13 @@
         }
       ],
       "claim_id": "C3762a4d83505b29a9d553ac7",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E074 三个分数 305、323、373，下四分位插值 305+0.5×18=314.0。",
+        "carried_from": "C79bf4a478aacb4fd5fe68f6e",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -58029,7 +59301,13 @@
         }
       ],
       "claim_id": "Ccb213ff948d4abde16964fec",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E074 上四分位插值 323+0.5×50=348.0。",
+        "carried_from": "C7ef8c6dcd7eaf9675673cd77",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -58355,7 +59633,13 @@
         }
       ],
       "claim_id": "Caf97ac73e545055ab554de7d",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "软工 2026 行模考点 349，高于其中两人。",
+        "carried_from": "C20a9781fdb5cd344abaea918",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -58681,7 +59965,13 @@
         }
       ],
       "claim_id": "C0a3ec73a9b4c47847c70748f",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E074 最低 305，高于该年线 286。",
+        "carried_from": "Ce99b2e7254b5b980ce1ba23b",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -59007,7 +60297,13 @@
         }
       ],
       "claim_id": "C92840d8e9a15802b20217591",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E074 最高 373，即摘录行“373 228.20 601.20”。",
+        "carried_from": "C22acd8e187a8b1a8cbdd7946",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -59333,7 +60629,13 @@
         }
       ],
       "claim_id": "C1692d7e76ae099a48232906e",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E074 三人中位数 323.0。",
+        "carried_from": "Cced4c1eb78402268af0ddd31",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -59659,7 +60961,13 @@
         }
       ],
       "claim_id": "C4c43e882271b62f126adb471",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E052 原文“083500 软件工程 学术学位 286”，2026 年线。",
+        "carried_from": "C61717f73ca5342d757a1e306",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -59999,7 +61307,13 @@
         }
       ],
       "claim_id": "Cf0bbf0334764ddc84c1f22cc",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "行标签“河海软件工程学硕 2025”，对应 E076 的 2025 年名单。",
+        "carried_from": "C11d6b9f1aef5b193f2b204b4",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -60325,7 +61639,13 @@
         }
       ],
       "claim_id": "C0bc352918a7d3a28263640a7",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E076 十人下四分位 293+0.25×4=294.0。",
+        "carried_from": "C635959836a6491d0397dc324",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -60651,7 +61971,13 @@
         }
       ],
       "claim_id": "Cd6d3a9f5722d8b9a297ca52c",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E076 上四分位 334+0.75×4=337.0。",
+        "carried_from": "C74044bbc9a73b326ea990ab9",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -60977,7 +62303,13 @@
         }
       ],
       "claim_id": "C3e314bd9e6235f29816a7f05",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "软工 2025 行模考点 349，高于 10 人中的 8 人。",
+        "carried_from": "C3e9d1a4f51d9cbf2b79a7360",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -61303,7 +62635,13 @@
         }
       ],
       "claim_id": "C24758a582589a586f0a7ae8a",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E076 最低 288，等于 E062 当年线。",
+        "carried_from": "C18c2bb53b09f5d12653b185f",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -61629,7 +62967,13 @@
         }
       ],
       "claim_id": "Cfc747525a07a0d3267934222",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E076 最高 376，即摘录行“376 259.70 635.70”。",
+        "carried_from": "C9095bc9bc5bf16e954e4a73b",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -61955,7 +63299,13 @@
         }
       ],
       "claim_id": "C4055495fcc915fd417f3165a",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E076 第 5、6 位为 305、320，中位数 312.5。",
+        "carried_from": "Cad40b481ea162632e858a669",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -62281,7 +63631,13 @@
         }
       ],
       "claim_id": "Ceb6476ae95f01db14d001e04",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E062 原文“083500 软件工程 学术学位 288”，2025 年线。",
+        "carried_from": "C946997ad6152ecd631047494",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -62621,7 +63977,13 @@
         }
       ],
       "claim_id": "Cdc68213cb893baa867814939",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "行标签“苏大计算机专硕 2026”，指 E044 的 085404 计算机技术名单，简称合理。",
+        "carried_from": "Ca1413d088f13087a3be0c6fd",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -62947,7 +64309,13 @@
         }
       ],
       "claim_id": "Cf7a86bc48ff541bd809dae25",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E044 十人下四分位 352+0.25×22=357.5。",
+        "carried_from": "C334eec18066ef9f9024419ac",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -63273,7 +64641,13 @@
         }
       ],
       "claim_id": "Cea9558539d8079dbdad87645",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E044 上四分位 392.75，图中显示 392.8。",
+        "carried_from": "C03b6ff2d8fbcc736f3ccd393",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -63599,7 +64973,13 @@
         }
       ],
       "claim_id": "C7eb84a8f712d5830e830be6d",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E044 最低 340，等于 E032 线。",
+        "carried_from": "C2390a3665c5847b912a25bec",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -63925,7 +65305,13 @@
         }
       ],
       "claim_id": "C3357122db037ee6a272c4cd3",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E044 最高 423；摘录示例行 406 不是最高分，图取数组最大值正确。",
+        "carried_from": "C0615a7496fe1cc7ae6d035cc",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -64251,7 +65637,13 @@
         }
       ],
       "claim_id": "C4452511d3b65731f5b53e312",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E044 第 5、6 位 377、379，中位数 378.0。",
+        "carried_from": "Cc55051bab675ea5fbf04ef7c",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -64577,7 +65969,13 @@
         }
       ],
       "claim_id": "C7b54a46fecd29e1d6d645792",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E032 原文“085404 计算机技术 340 10”。",
+        "carried_from": "Ca0b7ac5c0cdd3a1dff061001",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -64917,7 +66315,13 @@
         }
       ],
       "claim_id": "Ce7e2b99ebb6ea3941d82b212",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "行标签“河海电子信息专硕 2026”，对应 E068 的 085400 名单（已排除专项 5 人）。",
+        "carried_from": "C5bc6540bbb7af2628df97ae3",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -65243,7 +66647,13 @@
         }
       ],
       "claim_id": "Cb0e72e157c1db637d8523569",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E068 四十一人下四分位 388.0。",
+        "carried_from": "Cfad8452b814626f411598bb3",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -65569,7 +66979,13 @@
         }
       ],
       "claim_id": "C2e55910040d5f9697cfc2ff9",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E068 上四分位 399.0。",
+        "carried_from": "Cd47b7d4e0eec6054351b0d9d",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -65895,7 +67311,13 @@
         }
       ],
       "claim_id": "C263b6319ab63ba8c30bbec17",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E068 最低 377，等于 E053 线。",
+        "carried_from": "C06b20ec383fb0e4947051411",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -66221,7 +67643,13 @@
         }
       ],
       "claim_id": "C86e58096de642df0a684f48b",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E068 最高 417，即摘录行“417 282.50 699.50”。",
+        "carried_from": "Caf074cd5d48097a4d8d2d14f",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -66547,7 +67975,13 @@
         }
       ],
       "claim_id": "Cc5b384c8cbd06de336a5e100",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E068 第 21 位 391，中位数 391.0。",
+        "carried_from": "C60659ce0a9184f688e9490e8",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -66873,7 +68307,13 @@
         }
       ],
       "claim_id": "Cc3a46ec10ac5d44746a9c0d1",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E053 原文“085400 电子信息 专业学位 377”。",
+        "carried_from": "C537e5719d377edda42f0741c",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -67213,7 +68653,13 @@
         }
       ],
       "claim_id": "C721465509f7088d81f396104",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "行标签“河海电子信息专硕 2025”，对应 E071 的 2025 年名单。",
+        "carried_from": "Cba0f4d68c0a49b2cbec1b2d7",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -67539,7 +68985,13 @@
         }
       ],
       "claim_id": "C7a80314effa853db4a53f7a9",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E071 八十六人下四分位 354.0。",
+        "carried_from": "C53d5c80b138f7c87f1d8e326",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -67865,7 +69317,13 @@
         }
       ],
       "claim_id": "Ca9ac59f97cd0913dee6ca852",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E071 上四分位 371.75，显示为 371.8。",
+        "carried_from": "Cbfd1faa7ecee74dc23698754",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -68191,7 +69649,13 @@
         }
       ],
       "claim_id": "C7caa4fed59c0d30cce7558e4",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E071 最低 346，等于 E056 线。",
+        "carried_from": "Cb80ca69a70a60daff378ad3b",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -68517,7 +69981,13 @@
         }
       ],
       "claim_id": "C16513bc2f305669690616c52",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E071 最高 392，即摘录行“392 275.00 667.00”。",
+        "carried_from": "Cbb7488d43b3163eadbf2ec2d",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -68843,7 +70313,13 @@
         }
       ],
       "claim_id": "C96718986179483df61742efe",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E071 第 43、44 位均为 365，中位数 365.0。",
+        "carried_from": "Ca499db2640b7720df8062f34",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -69169,7 +70645,13 @@
         }
       ],
       "claim_id": "C01c93e4e3524cda6b767427c",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E056 原文“085400 电子信息 专业学位 346”，2025 年线。",
+        "carried_from": "C5d1d736662ee8a9495342c2c",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E080、E090、E100、E110"
+      }
     },
     {
       "section": "06",
@@ -69685,7 +71167,13 @@
       ],
       "bindings": [],
       "claim_id": "C98e87799165cd02ada11d52c",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "不定档表第1列名“不定档的候选”。",
+        "carried_from": "Ccde3a7a532ccad755a3b6541",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E086、E122"
+      }
     },
     {
       "section": "06",
@@ -70201,7 +71689,13 @@
       ],
       "bindings": [],
       "claim_id": "Ca155481973c2749370410120",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "不定档表第2列名“原因”。",
+        "carried_from": "Ccda9d51f520fe0693f42c5b3",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E086、E122"
+      }
     },
     {
       "section": "06",
@@ -70717,7 +72211,13 @@
       ],
       "bindings": [],
       "claim_id": "Cde29fa08db756a7a19d3b6a0",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "不定档表第3列名“具体情况”。",
+        "carried_from": "Ca0e67026f11405a98c8d950f",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E086、E122"
+      }
     },
     {
       "section": "06",
@@ -71233,7 +72733,13 @@
       ],
       "bindings": [],
       "claim_id": "Ca15a337183ac5edd11d1e6e2",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "不定档表第4列名“已知的官方复试线”。",
+        "carried_from": "Cf87fa422cefb308be603e210",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E086、E122"
+      }
     },
     {
       "section": "06",
@@ -71749,7 +73255,13 @@
       ],
       "bindings": [],
       "claim_id": "Cd3760f0b24f43be3d9778e6c",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "不定档表第1行“河海 计算机学硕·联培”。",
+        "carried_from": "C4550094c2ae09ed5d3d6cd1d",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E086、E122"
+      }
     },
     {
       "section": "06",
@@ -72265,7 +73777,13 @@
       ],
       "bindings": [],
       "claim_id": "C17aa25efff6f199f06f728dc",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "联培两年录取 5 人、1 人，有一年少于 5 人，按第305句规则不定档，“样本太少”成立。",
+        "carried_from": "C1df4a020b219dfcd5e0b9baa",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E086、E122"
+      }
     },
     {
       "section": "06",
@@ -72792,7 +74310,13 @@
         }
       ],
       "claim_id": "C92b7d491df774ebce242e9df",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "同科目依据 E057（2026 年目录），已写“上一届目录”；E066 五人、E075 一人；E122 范围“培养地点未写明”，三点都对。",
+        "carried_from": "Cc90a3c6149a763bd8a758f1b",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E086、E122"
+      }
     },
     {
       "section": "06",
@@ -73357,7 +74881,13 @@
         }
       ],
       "claim_id": "C3ab5b1004f6a871237410f70",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E051 2026 年 303、E055 2025 年 287，年份标注与两份原表对应。",
+        "carried_from": "Cf14760371365b8b41b0ce49b",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E086、E122"
+      }
     },
     {
       "section": "06",
@@ -73873,7 +75403,13 @@
       ],
       "bindings": [],
       "claim_id": "Cd7add9f0e479fd932e58866a",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "不定档表第2行“河海 软件工程学硕”。",
+        "carried_from": "C80af7331f7fa078d39e7c27e",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E086、E122"
+      }
     },
     {
       "section": "06",
@@ -74389,7 +75925,13 @@
       ],
       "bindings": [],
       "claim_id": "C533486676146cd006ed73023",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "软工 2026 年录取仅 3 人，少于 5 人，不定档。",
+        "carried_from": "Ccee11cc0e1eb243971f9068f",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E086、E122"
+      }
     },
     {
       "section": "06",
@@ -74921,7 +76463,13 @@
         }
       ],
       "claim_id": "C3445fa2500287000f0cee01e",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E074 三人、E067 统考计划“083500 软件工程 6”、E076 十人；模考高于 2026 年 2 人和 2025 年 8 人，“大多数”成立；同科目依 E057 范围说明。",
+        "carried_from": "C9ec6687d51d9be881d5c1449",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E086、E122"
+      }
     },
     {
       "section": "06",
@@ -75486,7 +77034,13 @@
         }
       ],
       "claim_id": "Cbfcd5cea744d478c7702df4a",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E052 2026 年 286、E062 2025 年 288，与年份标注一致。",
+        "carried_from": "C69a70bfb298cfdb2f4350be8",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E086、E122"
+      }
     },
     {
       "section": "06",
@@ -76002,7 +77556,13 @@
       ],
       "bindings": [],
       "claim_id": "C47e3891e4abb098b3942d347",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "不定档表第3行“苏大 计算机专硕”（085404 计算机技术）。",
+        "carried_from": "C3f755b0be6c9cf99bf229c4f",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E086、E122"
+      }
     },
     {
       "section": "06",
@@ -76518,7 +78078,13 @@
       ],
       "bindings": [],
       "claim_id": "Caab3c48256bf6dc49a337a8b",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E036 当届专硕考 204 英语（二）、302 数学（二），与模考的英语一、数学一不同。",
+        "carried_from": "C2ee608049d4f9aa4880216d3",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E086、E122"
+      }
     },
     {
       "section": "06",
@@ -77034,7 +78600,13 @@
       ],
       "bindings": [],
       "claim_id": "C3c52125f1c2c2b14659608fa",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E036 是 2027 年目录，原文“②204 英语（二） ③302 数学（二）”，“当届”用词准确。",
+        "carried_from": "Ce6d41afa68572bf409785833",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E086、E122"
+      }
     },
     {
       "section": "06",
@@ -77580,7 +79152,13 @@
         }
       ],
       "claim_id": "Cd546a6525526b1f633110eae",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E032 2026 年线 340；E040 原文“085404 计算机技术 全日制 10”为当届公开招考人数。",
+        "carried_from": "Cdd856fa813a849d3b7d57fc4",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E086、E122"
+      }
     },
     {
       "section": "06",
@@ -78096,7 +79674,13 @@
       ],
       "bindings": [],
       "claim_id": "C5c6cfc8f66f4565a6ed3dbdd",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "不定档表第4行“河海 电子信息专硕”。",
+        "carried_from": "Cb38b5dd965a28b062292a5d9",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E086、E122"
+      }
     },
     {
       "section": "06",
@@ -78612,7 +80196,13 @@
       ],
       "bindings": [],
       "claim_id": "Cf8403d2f3cf68b8800791ed1",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E059 写河海 085400 初试“②204 英语（二） ③302 数学（二）”，与模考科目不同。",
+        "carried_from": "Cc33118cd78f684cd8108cccc",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E086、E122"
+      }
     },
     {
       "section": "06",
@@ -79128,7 +80718,13 @@
       ],
       "bindings": [],
       "claim_id": "Cf67340135d77428a25f6a68e",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "英二数二出自 E059（2026 年目录），紧接着写明当届目录未取到（E072），读者能知道科目来自上一届。",
+        "carried_from": "Ccd09e361eeb115a795ab28f9",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E086、E122"
+      }
     },
     {
       "section": "06",
@@ -79693,7 +81289,13 @@
         }
       ],
       "claim_id": "C25335d7956e116626f4b4d0e",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E053 2026 年 377、E056 2025 年 346，与年份对应。",
+        "carried_from": "Cf1b24417258a212a45fe07c6",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E086、E122"
+      }
     },
     {
       "section": "06",
@@ -80209,7 +81811,13 @@
       ],
       "bindings": [],
       "claim_id": "C563ecd36c228bdd25ee65e94",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "不定档表第5行“南航 计算机学硕、专硕”。",
+        "carried_from": "Cee4516e3b7dc76c380e37d28",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E086、E122"
+      }
     },
     {
       "section": "06",
@@ -80725,7 +82333,13 @@
       ],
       "bindings": [],
       "claim_id": "C6557322f947e6aa66eab3cd4",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E086 未取到拟录取名单，所以分布缺失。",
+        "carried_from": "C6d9f5a52288032ae7d824ed8",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E086、E122"
+      }
     },
     {
       "section": "06",
@@ -81241,7 +82855,13 @@
       ],
       "bindings": [],
       "claim_id": "Cf2315b7b6ccfec56ebe2d3d1",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E086（录取名单未见）与 E085（目录只取到框架）两条未取到记录对应。",
+        "carried_from": "C20833bd04564a808c0b83f5d",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E086、E122"
+      }
     },
     {
       "section": "06",
@@ -81826,7 +83446,13 @@
         }
       ],
       "claim_id": "C5034e43a414a70e43419deaf",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E080 学硕 2026 年 340、E082 2025 年 330、E081 专硕 2026 年 341、E083 2025 年 341；E082 范围说明当年与人工智能学院同一行，表中未混入其他学院。",
+        "carried_from": "Ccd36c05f7ad50b1a548938b3",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E086、E122"
+      }
     },
     {
       "section": "06",
@@ -82342,7 +83968,13 @@
       ],
       "bindings": [],
       "claim_id": "C1a7717d6c491a500859b367b",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "不定档表第6行“南邮 计算机学硕、专硕”。",
+        "carried_from": "Ca3d1711648e323a984289688",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E086、E122"
+      }
     },
     {
       "section": "06",
@@ -82858,7 +84490,13 @@
       ],
       "bindings": [],
       "claim_id": "C20d123e943c8041211e11640",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E095 摘录写 2026 年拟录取公告在两处均未发现，分布缺失属实。",
+        "carried_from": "C934a493c8ce266ca009bae87",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E086、E122"
+      }
     },
     {
       "section": "06",
@@ -83374,7 +85012,13 @@
       ],
       "bindings": [],
       "claim_id": "C41f566243d486a4d13c2e3c5",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E095 同时记录当届目录要浏览器打开才显示、直接取不到，与“当届科目没取到”一致。",
+        "carried_from": "C97c98154d17521b69f4adc1c",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E086、E122"
+      }
     },
     {
       "section": "06",
@@ -83949,7 +85593,13 @@
         }
       ],
       "claim_id": "C34a7ce74946dc8c27a7ddd2e",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E090 学硕 2026 年 303、E092 2025 年 289、E091 专硕 2026 年 339；专硕 2025 年线未列，与证据清单一致。",
+        "carried_from": "Cb392d8e5798fa0908977f6ec",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E086、E122"
+      }
     },
     {
       "section": "06",
@@ -84465,7 +86115,13 @@
       ],
       "bindings": [],
       "claim_id": "C5ee01da086df67993bf8f9ac",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "不定档表第7行“江大 计算机学硕、专硕”。",
+        "carried_from": "C900e8df47b40951f2df56aa9",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E086、E122"
+      }
     },
     {
       "section": "06",
@@ -84981,7 +86637,13 @@
       ],
       "bindings": [],
       "claim_id": "C0e59ac0f95239c97d53d338a",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E103 记录 2026 年建议录取名单旧链接返回 404，分布缺失。",
+        "carried_from": "C96f06a6c1744754c77c922d8",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E086、E122"
+      }
     },
     {
       "section": "06",
@@ -85497,7 +87159,13 @@
       ],
       "bindings": [],
       "claim_id": "Cd4f5f49a5ad5a9386eb7aabf",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E103 记录 2027 年目录 PDF 下载接口返回网页而非 PDF，当届科目未取到。",
+        "carried_from": "Cfd4ca52cab972ab147be771f",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E086、E122"
+      }
     },
     {
       "section": "06",
@@ -86072,7 +87740,13 @@
         }
       ],
       "claim_id": "Cbffcf221b792fd6c8c712c55",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E100 学硕 2026 年 326、E102 2025 年 312、E101 专硕 2026 年 341；E100 范围注明含全日制和非全日制，表格未说明但不改变数值。",
+        "carried_from": "C01c90760501aedcdc96d54d2",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E086、E122"
+      }
     },
     {
       "section": "06",
@@ -86588,7 +88262,13 @@
       ],
       "bindings": [],
       "claim_id": "C56295d352e3b7be555b27abc",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "不定档表第8行“南理工 计算机学硕、专硕”。",
+        "carried_from": "Cfde13f6457fcc596c129b6b5",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E086、E122"
+      }
     },
     {
       "section": "06",
@@ -87104,7 +88784,13 @@
       ],
       "bindings": [],
       "claim_id": "C089366fe7f50c8bd70784762",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E112 状态 unretrieved（研究生院 2026 年页面无限重定向），南理工没有录取名单，分布缺失。",
+        "carried_from": "C97a3d951c6eb92d2b0edfb7a",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E086、E122"
+      }
     },
     {
       "section": "06",
@@ -87620,7 +89306,13 @@
       ],
       "bindings": [],
       "claim_id": "Cd428b118c06cc773000914b8",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "南理工只有 E110/E111 两条 2025 年线；相对 2027 年招生，2025 年是两届前，措辞准确。",
+        "carried_from": "C051e236805e7b047c3319ae0",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E086、E122"
+      }
     },
     {
       "section": "06",
@@ -88171,7 +89863,13 @@
         }
       ],
       "claim_id": "C2e38bd31f04b5e1f758f67bb",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E110 原文“081200 计算机科学与技术 335”、E111“0854 04 计算机技术 05 软件工程 340”，均为 2025 年。",
+        "carried_from": "C3bfbaa58c9c965f0645597fd",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E086、E122"
+      }
     },
     {
       "section": "07",
@@ -91558,7 +93256,13 @@
       ],
       "bindings": [],
       "claim_id": "C3bc988968b58de1774f77c80",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "11-15 检查点在 E010 报名截止之后，安排其只调整复习重点，是计划建议，不作制度断言。",
+        "carried_from": "C2cb784a161f0c5d44de67a2e",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010"
+      }
     },
     {
       "section": "07",
@@ -91598,7 +93302,13 @@
       ],
       "bindings": [],
       "claim_id": "C1f507ab446f112c3792fc53d",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "出分后重填问卷、转入“初试已出分”写法，是流程安排，不涉外部事实。",
+        "carried_from": "Cdeb889661039d061a9fafc51",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010"
+      }
     },
     {
       "section": "08",
@@ -91809,7 +93519,13 @@
       ],
       "bindings": [],
       "claim_id": "Cf8d44aed12aa3787f8f3d630",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "主线标题与第01节默认建议完全一致。",
+        "carried_from": "C48753146da55c258929584e3",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E016、E035"
+      }
     },
     {
       "section": "08",
@@ -91996,7 +93712,18 @@
         }
       ],
       "claim_id": "Cbed75d2ba097abf4dabbb421",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "同科目见 E035（2027 目录）；上一届复试线 341、326 见 E030、E043；单科不低于国家线见 E030 范围“单科不低于A类国家线”；复试满分 300、机考 150 见 2026 年 E033/E034，现已冠“上一届”。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "C3461dec51deba0b30a78e46b",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E016、E035"
+      }
     },
     {
       "section": "08",
@@ -92197,7 +93924,13 @@
         }
       ],
       "claim_id": "C7e842b9c28eafd4bf2a80477",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E010/E017 报名至 10 月 24 日 22:00，E012/E013 初试 12 月 19—20 日，复试写“按学院当届通知”不臆测日期。",
+        "carried_from": "C0668080a21390ce141dc7366",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E016、E035"
+      }
     },
     {
       "section": "08",
@@ -92374,7 +94107,13 @@
         }
       ],
       "claim_id": "C0f4240bac4776e71d838cca5",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "9 小时出自 ky_prep；数学一差 45 分为 c:/math_to_full；每周限时上机针对补充说明“没做过完整的上机模拟”。",
+        "carried_from": "C89170e81d9baecfe9f3db4c1",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E016、E035"
+      }
     },
     {
       "section": "08",
@@ -92540,7 +94279,13 @@
       ],
       "bindings": [],
       "claim_id": "C8f9a34aa5e64dc583264d1c3",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "切换条件与流程图 C→E→F/G 一致，并以 E016 过国家线为调剂前提。",
+        "carried_from": "Cbcc011c34890f0800b9d4e83",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E016、E035"
+      }
     },
     {
       "section": "08",
@@ -95957,7 +97702,13 @@
       ],
       "bindings": [],
       "claim_id": "Cb9a245d4fd29ec0e58ab91af",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "风险表第1列名“如果”。",
+        "carried_from": "C04de7a837d4ed5a39f51e05d",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010、E030、E050"
+      }
     },
     {
       "section": "09",
@@ -96082,7 +97833,13 @@
       ],
       "bindings": [],
       "claim_id": "C5dcf37a8b29dfd3f8af61fb3",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "风险表第2列名“为什么要改”。",
+        "carried_from": "C3e2ae312f4c93149e3e48d92",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010、E030、E050"
+      }
     },
     {
       "section": "09",
@@ -96207,7 +97964,13 @@
       ],
       "bindings": [],
       "claim_id": "C4d74a2bfd6c2154c5594b7a4",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "风险表第3列名“怎么应对”。",
+        "carried_from": "Cd42428f1a60bde40ccedf8d9",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010、E030、E050"
+      }
     },
     {
       "section": "09",
@@ -96332,7 +98095,13 @@
       ],
       "bindings": [],
       "claim_id": "C295aeb6ef80b40057394387b",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "风险情形一：第二次模考仍低于苏大下四分位 347.75，是触发条件，不作断言。",
+        "carried_from": "C9b0054c7c0c1e5428a8c4592",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010、E030、E050"
+      }
     },
     {
       "section": "09",
@@ -96457,7 +98226,18 @@
       ],
       "bindings": [],
       "claim_id": "Cbb088cd1e438a83fffdf496f",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "这一行的情形是第二次模考（checkpoint 2026-11-15）仍低于下四分位，而 E010 报名 2026-10-24 截止，那时只能调整复习而不能重选；句子已去掉需另有原文的“志愿改不了”。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "Cdc258c14b8e87c5a14d3e4db",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010、E030、E050"
+      }
     },
     {
       "section": "09",
@@ -96582,7 +98362,13 @@
       ],
       "bindings": [],
       "claim_id": "Cde657ee47eec9e849551f64d",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "把时间压到最弱科（英语一 62、政治 63 得分率最低）并放宽调剂清单，应对措施与本人只在江苏的约束相容。",
+        "carried_from": "Cbae34a076c8ae25ad7aa8967",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010、E030、E050"
+      }
     },
     {
       "section": "09",
@@ -96707,7 +98493,13 @@
       ],
       "bindings": [],
       "claim_id": "Ce86833e74187caace2d44f42",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "风险情形二：过国家线、没过苏大复试线，是条件描述。",
+        "carried_from": "C8f6bef03a83d2852ec5109e4",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010、E030、E050"
+      }
     },
     {
       "section": "09",
@@ -96832,7 +98624,13 @@
       ],
       "bindings": [],
       "claim_id": "C51b36a93f83d7a86f10ff9c2",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "推测",
+        "reason": "E030 是苏大复试录取细则中的复试线，低于它即进不了苏大复试，“一志愿这条路关了”是由线的含义直接推出。",
+        "carried_from": "Cfe6483f55beabde33caa413e",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010、E030、E050"
+      }
     },
     {
       "section": "09",
@@ -96957,7 +98755,13 @@
       ],
       "bindings": [],
       "claim_id": "C3909334c7a930ef5c43e3fc0",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "马上找同科目调剂并投春招，与 E016 调剂科目要求及第08节保底一、二一致。",
+        "carried_from": "C527a7d06a11971d7680dbd23",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010、E030、E050"
+      }
     },
     {
       "section": "09",
@@ -97082,7 +98886,13 @@
       ],
       "bindings": [],
       "claim_id": "Ccb628ad92cf9f2eda367b830",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "风险情形三：总分够但单科未过，条件描述。",
+        "carried_from": "Cc42fce5a3fc5928cb5fb8bf3",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010、E030、E050"
+      }
     },
     {
       "section": "09",
@@ -97207,7 +99017,13 @@
       ],
       "bindings": [],
       "claim_id": "Ce0ae27666b3921212c06f642",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E030 范围“单科不低于A类国家线”、E050 范围“单科参照国家A类线”，所以两校单科线即国家单科线；E016 规定调剂须过国家分数线，单科不过则复试、调剂都进不去，推理成立。",
+        "carried_from": "C40cb2a5dbdbbbc2366600a52",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010、E030、E050"
+      }
     },
     {
       "section": "09",
@@ -97332,7 +99148,13 @@
       ],
       "bindings": [],
       "claim_id": "Cb269c82086a94aff56a1d3c0",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "转春招并与家里谈再考条件，对应 earning_year 的未定状态。",
+        "carried_from": "Cc59e91eab9081a62041265f7",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010、E030、E050"
+      }
     },
     {
       "section": "09",
@@ -97457,7 +99279,13 @@
       ],
       "bindings": [],
       "claim_id": "Cafc38c92f319cc812d0c6bfc",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "风险情形四：进复试但机考没做好，条件描述。",
+        "carried_from": "C4d6bc1cb2dc1df88b33e9018",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010、E030、E050"
+      }
     },
     {
       "section": "09",
@@ -97582,7 +99410,18 @@
       ],
       "bindings": [],
       "claim_id": "C69bfc3cba995c77bc0f80a55",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "风险表第四行理由写“上一届苏大复试机考占一半分”，对应 2026 年细则 E033/E034 的 150/300，年份已标明，2027 办法未发布不影响此句。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "C7f44c3d205d765b78d9e40a9",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010、E030、E050"
+      }
     },
     {
       "section": "09",
@@ -97707,7 +99546,13 @@
       ],
       "bindings": [],
       "claim_id": "C431613cb32b9b69a4360a60b",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "每周一次限时上机针对“没做过完整的上机模拟”；复试没过可看调剂余额符合 E016 调剂制度。",
+        "carried_from": "Cd5e9c4f5f24fa1d98943a0fb",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010、E030、E050"
+      }
     },
     {
       "section": "09",
@@ -97832,7 +99677,13 @@
       ],
       "bindings": [],
       "claim_id": "Ca1ecc04d6e5b27238e1b7ea5",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "风险情形五：没过国家线，条件描述。",
+        "carried_from": "Ce1d4f8cc0f7a643d30d7f36a",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010、E030、E050"
+      }
     },
     {
       "section": "09",
@@ -97957,7 +99808,13 @@
       ],
       "bindings": [],
       "claim_id": "C576a8d9082c07ab1866fa972",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E016 原文“调剂考生初试成绩须符合第一志愿报考专业在调入地区的国家分数线”，没过国家线就不能调剂。",
+        "carried_from": "C510308e442002db809154d5e",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010、E030、E050"
+      }
     },
     {
       "section": "09",
@@ -98082,7 +99939,13 @@
       ],
       "bindings": [],
       "claim_id": "C4b4b8595d49861850543031e",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "没过国家线时春招找开发岗、再考与家里谈清，和第08节保底二、条件路线一致。",
+        "carried_from": "C788e6e268fe8c1efe97b19e8",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010、E030、E050"
+      }
     },
     {
       "section": "09",
@@ -98948,7 +100811,13 @@
       ],
       "bindings": [],
       "claim_id": "C1e5967d67d5598aa0756ae15",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "问题表第1列名“要问什么”。",
+        "carried_from": "C7f8dbf5e6fa64f41f73087e8",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E057"
+      }
     },
     {
       "section": "10",
@@ -99142,7 +101011,13 @@
       ],
       "bindings": [],
       "claim_id": "C12697fc90f7de75e81fec3bb",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "问题表第2列名“去哪里问”。",
+        "carried_from": "Cd4094d206c34ff2cfa90c6d8",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E057"
+      }
     },
     {
       "section": "10",
@@ -99336,7 +101211,13 @@
       ],
       "bindings": [],
       "claim_id": "C826d074d0913a0ce76085bc5",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "问题表第3列名“问完怎样改变决定”。",
+        "carried_from": "C0963e38b624b575cafac7907",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E057"
+      }
     },
     {
       "section": "10",
@@ -99530,7 +101411,13 @@
       ],
       "bindings": [],
       "claim_id": "C964f2981d1feeb91f53558e9",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "问题一列出三个同科目选项，均为前文已讨论的候选，属提问。",
+        "carried_from": "Ccba88e8569d9eac41b1a4ed3",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E057"
+      }
     },
     {
       "section": "10",
@@ -99724,7 +101611,13 @@
       ],
       "bindings": [],
       "claim_id": "Cdd69dca32e28d500ec21edc6",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "交由本人决定，并先看 E047 苏大软工方向与河海软工方向（E074 范围注明名单均为 03 方向），建议具体。",
+        "carried_from": "C9d287caf76a8e6d26e3ec6e6",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E057"
+      }
     },
     {
       "section": "10",
@@ -99918,7 +101811,13 @@
       ],
       "bindings": [],
       "claim_id": "Cf42265fe11d1f3426a281a83",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "苏大软工位置更好（中位数 349.0 等于模考）、数据全（当届目录与计划齐），河海软工上一届仅 3 人只作定性，三条与前文计算一致。",
+        "carried_from": "C39cc90a3ad514a2cd1ed4327",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E057"
+      }
     },
     {
       "section": "10",
@@ -100112,7 +102011,13 @@
       ],
       "bindings": [],
       "claim_id": "C7be984f536169e75bc9f0bb8",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "问题二对应 E085、E095、E103、E112 四个当届目录未取到项。",
+        "carried_from": "C280f4e14ec2a274e4a2456da",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E057"
+      }
     },
     {
       "section": "10",
@@ -100306,7 +102211,13 @@
       ],
       "bindings": [],
       "claim_id": "C0e3f03519dd832b341ab7264",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "去研招网硕士专业目录查询，和四条 gap 记录里写的“入口：研招网目录查询”一致。",
+        "carried_from": "C7024f48aa38336a9c9368502",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E057"
+      }
     },
     {
       "section": "10",
@@ -100500,7 +102411,13 @@
       ],
       "bindings": [],
       "claim_id": "C20d2bc5c82edaf6cbab6d3d6",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "科目不同就排除、同科目也只有线无分布仍不定档，与第305句规则一致。",
+        "carried_from": "Cee671e2464a05bd38c7a6d17",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E057"
+      }
     },
     {
       "section": "10",
@@ -100694,7 +102611,13 @@
       ],
       "bindings": [],
       "claim_id": "C3b6d65af857e05f42459d8b2",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "问题三对应 E072 河海当届目录未取到。",
+        "carried_from": "C0e801342fc98b44de966baea",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E057"
+      }
     },
     {
       "section": "10",
@@ -100888,7 +102811,13 @@
       ],
       "bindings": [],
       "claim_id": "C2b8187a5e77c374208e09235",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "E072 gap 写入口为研招网硕士专业目录查询，加上河海研究生院原栏目，地点合理。",
+        "carried_from": "C63cf7762246de5e93b04c8fa",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E057"
+      }
     },
     {
       "section": "10",
@@ -101082,7 +103011,13 @@
       ],
       "bindings": [],
       "claim_id": "C9979c0da94f3ccabe5bfff51",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "推测",
+        "reason": "河海各项建立在 E057 上一届科目上，E072 gap 原话“当届科目或方向若变化，河海候选的档位作废”，句子与之一致。",
+        "carried_from": "C7df48d2230d831802d6bc467",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E057"
+      }
     },
     {
       "section": "10",
@@ -101276,7 +103211,13 @@
       ],
       "bindings": [],
       "claim_id": "C1ffe431b378eb7d26a7036ce",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "问题四：本人报考点审核与补材料时间，对应 D6 未取到。",
+        "carried_from": "C88f489bcd6b69ceaf0407ed9",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E057"
+      }
     },
     {
       "section": "10",
@@ -101470,7 +103411,13 @@
       ],
       "bindings": [],
       "claim_id": "C5f4640774f0164cd56f47212",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "E010 范围“应届本科生原则上在就读学校所在省报考”，所以去就读学校所在地报考点公告查，方向正确。",
+        "carried_from": "Ccd98e91171d70aacf67acc71",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E057"
+      }
     },
     {
       "section": "10",
@@ -101664,7 +103611,13 @@
       ],
       "bindings": [],
       "claim_id": "C65f63007257cdc571b7eb761",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "推测",
+        "reason": "E073 只写明未按时支付“报名无效”，未涉补材料；句子用“可能”作提醒，没有断言制度后果，属谨慎推测。",
+        "carried_from": "Cd0bcd274c3e35af748dcb9fb",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E057"
+      }
     },
     {
       "section": "10",
@@ -101858,7 +103811,13 @@
       ],
       "bindings": [],
       "claim_id": "C8aa237ed5a0e3d556ba9b917",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "问题五对应 E122 范围中“培养地点与学位授予方式未在此写明”。",
+        "carried_from": "C8e5292057995bfb29480f4f4",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E057"
+      }
     },
     {
       "section": "10",
@@ -102052,7 +104011,13 @@
       ],
       "bindings": [],
       "claim_id": "C911391f87fcd7911b5785662",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "向学院研招电话或邮箱问，配合第540句只用官网联系方式的提醒。",
+        "carried_from": "C40fff77e8919e6773914d66f",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E057"
+      }
     },
     {
       "section": "10",
@@ -102246,7 +104211,13 @@
       ],
       "bindings": [],
       "claim_id": "Cbecaa15b702560bea06ab082",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "不接受就划掉、接受也因 5 人与 1 人不定档，与第202条一致。",
+        "carried_from": "C79ba5692443536663d0d5337",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E057"
+      }
     },
     {
       "section": "10",
@@ -102440,7 +104411,13 @@
       ],
       "bindings": [],
       "claim_id": "C3eb15d80a37346e50bc356f3",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "引号内“能支持一年”是 earning_year 原话“家里应该能支持一年”的原样片段。",
+        "carried_from": "Ca1d61a14fa0293a87e86aa74",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E057"
+      }
     },
     {
       "section": "10",
@@ -102634,7 +104611,13 @@
       ],
       "bindings": [],
       "claim_id": "Cdf4fc5dddaf0f201776d5764",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "与父母当面谈清，是对家庭条件不明的处理方式。",
+        "carried_from": "C85ac455e56147e2ddb91a9d6",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E057"
+      }
     },
     {
       "section": "10",
@@ -102828,7 +104811,13 @@
       ],
       "bindings": [],
       "claim_id": "Cc869e481bcf1153ac26e84f9",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "谈完决定先春招还是全职再考，对应第08节条件路线门槛。",
+        "carried_from": "C3b7e3216c653831e1b3a44c1",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E057"
+      }
     },
     {
       "section": "10",
@@ -103022,7 +105011,13 @@
       ],
       "bindings": [],
       "claim_id": "Cd29c39bcf75e756a289a0bd8",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "问题七对应 ky_tj“只接受部分城市或层次”未具体化。",
+        "carried_from": "C70ba6dce1f57d316925243be",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E057"
+      }
     },
     {
       "section": "10",
@@ -103216,7 +105211,13 @@
       ],
       "bindings": [],
       "claim_id": "C3f59e549cc4037afc7056e9e",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "由本人写下调剂范围，不替本人定。",
+        "carried_from": "Cb17b1713af5d1228069771e3",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E057"
+      }
     },
     {
       "section": "10",
@@ -103410,7 +105411,13 @@
       ],
       "bindings": [],
       "claim_id": "Cd893fb936322202bbf6e875b",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "推测",
+        "reason": "名单越窄越要早动，是对调剂余额竞争的一般判断，未给数字。",
+        "carried_from": "C543f8b3e809c241dc54a96fe",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E057"
+      }
     },
     {
       "section": "10",
@@ -103540,7 +105547,13 @@
       ],
       "bindings": [],
       "claim_id": "C8e8049aec00cce976a3cbcb2",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "复试线与名单来自学校原件（E030、E042、E065 等 grade=官方），模考来自 E002 本人，名单只存 anonymous_values，档位按分布定，方法说明属实。",
+        "carried_from": "Ceb28646c6d06cf5314828577",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E030"
+      }
     },
     {
       "section": "11",
@@ -103926,7 +105939,18 @@
       ],
       "bindings": [],
       "claim_id": "Cebf925c548ba3aa6b812838e",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "假设表第一列列名“量或规则”，与各行（模考总分、录取者分布、建议档、数据年份、单科线、预算）的性质相符。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "C222fae5876b47695742fa269",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010、E020、E030、E042、E045、E050、E065"
+      }
     },
     {
       "section": "11",
@@ -104105,7 +106129,18 @@
       ],
       "bindings": [],
       "claim_id": "Cda7a53e9bebb290f45a6eeeb",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第二列列名“输入与口径”，下面各行确实写的是算式、数据来源和统计方法。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "C40e0c8ab7f56bd6035959a3f",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010、E020、E030、E042、E045、E050、E065"
+      }
     },
     {
       "section": "11",
@@ -104284,7 +106319,18 @@
       ],
       "bindings": [],
       "claim_id": "Ce688efe84b1960629d5e3b26",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第三列列名“结论边界”，各行内容都是使用限制，如“不是上岸概率”“不叠加”。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "C454c21a683826f1df2a56dcb",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010、E020、E030、E042、E045、E050、E065"
+      }
     },
     {
       "section": "11",
@@ -104463,7 +106509,18 @@
       ],
       "bindings": [],
       "claim_id": "Cfdc3b87ff151a12d016bae88",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "行名“模考总分”指向 mock_total 这一项，本身不含数字。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "C3c68928b7c70f936ae4a776f",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010、E020、E030、E042、E045、E050、E065"
+      }
     },
     {
       "section": "11",
@@ -104668,7 +106725,18 @@
         }
       ],
       "claim_id": "C1a6514a01884afa77435b511",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "63、62、105、119 分别来自 profile_parse 字段 11 的政治、英语一、数学一、专业课，求和为 349，与 mock_total 一致。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "Cd0cc031b44b6c5ffefe70e4c",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010、E020、E030、E042、E045、E050、E065"
+      }
     },
     {
       "section": "11",
@@ -105026,7 +107094,18 @@
       ],
       "bindings": [],
       "claim_id": "Cc83123801d1fe5eb1300972d",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "行名“录取者分布”对应第 06 节两张区间图所用的匿名初试分。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "C579fd9f53a4b88b0b22407f5",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010、E020、E030、E042、E045、E050、E065"
+      }
     },
     {
       "section": "11",
@@ -105205,7 +107284,18 @@
       ],
       "bindings": [],
       "claim_id": "Ce0f613184f059d518584f6c9",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "苏大用拟录取名单（E042/E045），河海用一志愿建议录取名单（E065 等），按学校、方向、年份分开；含端点线性插值可复算：苏大计算机 12 个分下四分位位置 2.75 得 347.75，河海软工 2026 三个分下四分位得 314，均与 calculations.json 一致。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "Cf4df76695b7e4cefb63d7697",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010、E020、E030、E042、E045、E050、E065"
+      }
     },
     {
       "section": "11",
@@ -105384,7 +107474,18 @@
       ],
       "bindings": [],
       "claim_id": "Cfb51f65be0464d0d6f5af135",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "边界说明“是录取者的分数，不是报考者，也不是上岸概率”与第 06 节图注同口径，属于读法限定。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "C5979434385012096975ace16",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010、E020、E030、E042、E045、E050、E065"
+      }
     },
     {
       "section": "11",
@@ -105563,7 +107664,18 @@
       ],
       "bindings": [],
       "claim_id": "C61931ba8440c7b8964c22b4a",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "行名“建议档”指相对稳妥、够一够、冒险的分档规则。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "C81c1763894a41ef71b0a0ab1",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010、E020、E030、E042、E045、E050、E065"
+      }
     },
     {
       "section": "11",
@@ -105742,7 +107854,18 @@
       ],
       "bindings": [],
       "claim_id": "Cbdf5df32c2c7dea575440cec",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "规则与 skills/zhiqu/scripts/kaoyan_position.py 文档一致：单科低于复试单科线为冒险、任一年 n<5 不定档、两年都≥中位数为相对稳妥、≥最近一年下四分位为够一够、5≤n<10 最高够一够；本案苏大、河海档位都按此可复现。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "C96a5c32383338e4375cac4e0",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010、E020、E030、E042、E045、E050、E065"
+      }
     },
     {
       "section": "11",
@@ -105921,7 +108044,18 @@
       ],
       "bindings": [],
       "claim_id": "Ca391f966ef7fccea701a3038",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "说明档位按各项目自己的分布判定、不用统一分差，并列出不定档的四类原因；第 06 节不定档表的原因（样本太少、科目不同、分布缺失）都在其中。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "C809735154b59435a7146a15d",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010、E020、E030、E042、E045、E050、E065"
+      }
     },
     {
       "section": "11",
@@ -106100,7 +108234,18 @@
       ],
       "bindings": [],
       "claim_id": "Caa63a86e4984bf5ece20417e",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "行名“数据年份”，用来说明各数据分别属于哪一届。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "Cbd302defa8f1e504d17601c8",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010、E020、E030、E042、E045、E050、E065"
+      }
     },
     {
       "section": "11",
@@ -106279,7 +108424,18 @@
       ],
       "bindings": [],
       "claim_id": "C175e2fc5ff4f5aacecdc3bd6",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "复试线和名单是 2026、2025 年（E030、E050、E054、E065、E069 等），国家线是 2026 年（E020）；第 06 节两张区间图每行都写了 2026 或 2025；报名、初试、复试差额、调剂、录取时间取自 2027 年管理规定（E010—E018）。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "Ca28b3136f9f33a57436baace",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010、E020、E030、E042、E045、E050、E065"
+      }
     },
     {
       "section": "11",
@@ -106458,7 +108614,18 @@
       ],
       "bindings": [],
       "claim_id": "Cfec65da23b4b65a309989afc",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "旧年数字只看位置是方法边界；上一届国家线 2026-02-28 发布（E020），苏大、江大复试线 3 月中下旬发布（E030、E100），所以写“明年三月前后”重算有依据。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "C1c4273f79c6eaa9f4cbfb417",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010、E020、E030、E042、E045、E050、E065"
+      }
     },
     {
       "section": "11",
@@ -106637,7 +108804,18 @@
       ],
       "bindings": [],
       "claim_id": "C54e48754f299f3185a16295a",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "行名“单科线”，说明下面一行用的单科门槛口径。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "C8010e9064b826f1b99e948e6",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010、E020、E030、E042、E045、E050、E065"
+      }
     },
     {
       "section": "11",
@@ -106827,7 +109005,18 @@
         }
       ],
       "claim_id": "Cfbfff2d0f3fa27c1a3d8a0b6",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E021/E022 为 2026 年工学 A 类单科 35（满分 100 科）、53（满分超过 100 科），E020 范围写明 A 类即一区、含江苏；苏大“单科不低于A类国家线”（E030 范围）与河海“单科参照国家A类线”（E050 范围）都来自取文时的记录。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "C57387d7a09fb822dfb4a0713",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010、E020、E030、E042、E045、E050、E065"
+      }
     },
     {
       "section": "11",
@@ -107006,7 +109195,18 @@
       ],
       "bindings": [],
       "claim_id": "C02c742cb36fa94493566ab8d",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "上一届国家线文件发布于 2026-02-28（E020），在 2025 年 12 月初试和出分之后，当届线同样要等出分后公布，与此相符。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "C9734b7c046ada7c748bc30ee",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010、E020、E030、E042、E045、E050、E065"
+      }
     },
     {
       "section": "11",
@@ -107185,7 +109385,18 @@
       ],
       "bindings": [],
       "claim_id": "C452783bb42c485421ee0d9a9",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "行名“预算”，对应第 09 节预算图的计算口径。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "C101d57204a55b5304ebc84af",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E010、E020、E030、E042、E045、E050、E065"
+      }
     },
     {
       "section": "11",
@@ -110062,7 +112273,13 @@
       ],
       "bindings": [],
       "claim_id": "Ccc4e15415533226fd1416dc1",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "官方数字均带 excerpt 与 original_locator；分布统计在 calculation_plan 登记为 count/min/q1/median/q3/max 算法，可由 anonymous_values 复算。",
+        "carried_from": "C5fc280dd59bbe641ee0954f6",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E041"
+      }
     },
     {
       "section": "12",
@@ -110145,7 +112362,13 @@
       ],
       "bindings": [],
       "claim_id": "C7418fa8cee029bbb675fb4d6",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E042、E044 范围写“两次独立读图…统计一致”，E045 写“两次独立读图一致”；条数 12、10、10 分别等于 E041、E046 和 E032 原文“340 10”中的拟公开招考人数。",
+        "carried_from": "Cfde11dde37f9527cdb5d3d10",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E041"
+      }
     },
     {
       "section": "12",
@@ -110444,7 +112667,13 @@
       ],
       "bindings": [],
       "claim_id": "C35d6314d61849913c81e52dd",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "缺口表第1列名“没取到的”。",
+        "carried_from": "C74d532b80c3f41d109caa721",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E124"
+      }
     },
     {
       "section": "12",
@@ -110569,7 +112798,13 @@
       ],
       "bindings": [],
       "claim_id": "C2e570391f9b46d1c238d27b6",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "缺口表第2列名“试过的入口”。",
+        "carried_from": "C2574ac82ea17b1743366bbe0",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E124"
+      }
     },
     {
       "section": "12",
@@ -110694,7 +112929,13 @@
       ],
       "bindings": [],
       "claim_id": "C226139233422643b5284a4e7",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "缺口表第3列名“影响”。",
+        "carried_from": "C5f40013543693b3ae892d2ae",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E124"
+      }
     },
     {
       "section": "12",
@@ -110819,7 +113060,13 @@
       ],
       "bindings": [],
       "claim_id": "Cbce00cf47cce345e8d812a91",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "缺口一“河海当届招生目录”，对应 E072。",
+        "carried_from": "Ce91cb4427e11e16d3ee7441e",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E124"
+      }
     },
     {
       "section": "12",
@@ -110944,7 +113191,13 @@
       ],
       "bindings": [],
       "claim_id": "Ca63771761db645e179783bcb",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E072 摘录“栏目最新：2026-10-08 河海大学（3206）报考点…网上报名公告”，与“最新一条是网报公告”一致。",
+        "carried_from": "C3977fab6e6ce67365d9ef4c2",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E124"
+      }
     },
     {
       "section": "12",
@@ -111069,7 +113322,13 @@
       ],
       "bindings": [],
       "claim_id": "C5c031cc7e8be43fabd2f957f",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E072 gap 原话“河海各项只能按上一届科目和计划看”。",
+        "carried_from": "C983eebf067f4582fc6515781",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E124"
+      }
     },
     {
       "section": "12",
@@ -111194,7 +113453,13 @@
       ],
       "bindings": [],
       "claim_id": "C2a541ff751a029d1306ad2f6",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "缺口二“南航当届目录”，对应 E085。",
+        "carried_from": "Cf4f03d0a9bb7941dab0357ad",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E124"
+      }
     },
     {
       "section": "12",
@@ -111319,7 +113584,13 @@
       ],
       "bindings": [],
       "claim_id": "Ce8c49e42749a8981dc3c0e09",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E085 gap 写“又查了研究生院‘简章目录’栏目的当届专业目录页（2026-09-28），正文只给出这个查询网址”，加上动态查询页本身，两处入口都有记录。",
+        "carried_from": "Cb606e7f3a68ff3586a500512",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E124"
+      }
     },
     {
       "section": "12",
@@ -111444,7 +113715,13 @@
       ],
       "bindings": [],
       "claim_id": "C37c8e280693236e5f8c2531d",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E085 gap 影响“不能确认和模考同科目，不定档”。",
+        "carried_from": "C59a3bed2b830092218c662bb",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E124"
+      }
     },
     {
       "section": "12",
@@ -111569,7 +113846,13 @@
       ],
       "bindings": [],
       "claim_id": "Cfd9a719bc2b102c7cd38e247",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "缺口三“南航上一届拟录取名单”，对应 E086。",
+        "carried_from": "Ca74117c3bab9f9ed762efcd5",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E124"
+      }
     },
     {
       "section": "12",
@@ -111694,7 +113977,13 @@
       ],
       "bindings": [],
       "claim_id": "Cc6a2b3e152171f2f2eae577e",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E086 摘录“学院站‘研究生培养’栏目（2026年1—10月）未见拟录取名单公告”。",
+        "carried_from": "C8bbbafe8f331bc18d33e759a",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E124"
+      }
     },
     {
       "section": "12",
@@ -111819,7 +114108,13 @@
       ],
       "bindings": [],
       "claim_id": "C7e185d4eba72f4652fb89c66",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "“同上”指南航两项不定档，E086 gap 影响“没有录取者分布，只有复试线，不定档”。",
+        "carried_from": "C3194991ae1a7efc000f2cca2",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E124"
+      }
     },
     {
       "section": "12",
@@ -111944,7 +114239,13 @@
       ],
       "bindings": [],
       "claim_id": "C6a92cf97efe8895246aa8063",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "缺口四“南邮当届目录与上一届名单”，对应 E095。",
+        "carried_from": "Ce4c26da7d6f6ec7137448cf2",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E124"
+      }
     },
     {
       "section": "12",
@@ -112069,7 +114370,13 @@
       ],
       "bindings": [],
       "claim_id": "C55f875abed97d78917755ace",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E095 gap“研究生招生网目录表格要在浏览器里打开后才显示…又查了计算机学院‘研究生招生’栏目和学院通知栏目”，入口描述一致。",
+        "carried_from": "C069e2f35a45bda2ae5eae13a",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E124"
+      }
     },
     {
       "section": "12",
@@ -112194,7 +114501,13 @@
       ],
       "bindings": [],
       "claim_id": "Cd378e07b4bea61d1870b3bbe",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E095 gap 影响“科目不明、没有分布，不定档”。",
+        "carried_from": "C3bc1a837c817ead75751372f",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E124"
+      }
     },
     {
       "section": "12",
@@ -112319,7 +114632,13 @@
       ],
       "bindings": [],
       "claim_id": "Ccaf192953918dc516293ebb4",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "缺口五“江大当届目录与上一届名单”，对应 E103。",
+        "carried_from": "C20c58059be03bf8ecf674ec2",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E124"
+      }
     },
     {
       "section": "12",
@@ -112444,7 +114763,13 @@
       ],
       "bindings": [],
       "claim_id": "C8ba716233c0e6f65f3bb9fc9",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E103 gap“当届目录附件下载返回网页（带来源页再试一次，仍不是PDF）；上一届建议录取名单旧链接返回404”，与格内两处入口相符。",
+        "carried_from": "C086f72a6a03496b42aa5a346",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E124"
+      }
     },
     {
       "section": "12",
@@ -112569,7 +114894,13 @@
       ],
       "bindings": [],
       "claim_id": "C06e133b7fc9ccba17f200097",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E103 gap 影响“科目不明、没有分布，不定档”。",
+        "carried_from": "Cd1f72c9494dede93d9bb0302",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E124"
+      }
     },
     {
       "section": "12",
@@ -112694,7 +115025,13 @@
       ],
       "bindings": [],
       "claim_id": "Ce1b43c37602f76d71f319970",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "缺口六“南理工上一届线、当届目录与名单”，对应 E112（范围含 2026、2027 年）。",
+        "carried_from": "Ca38b30d486ab0ffff73e5ac8",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E124"
+      }
     },
     {
       "section": "12",
@@ -112819,7 +115156,13 @@
       ],
       "bindings": [],
       "claim_id": "Cbde9129e33a575b7b7149e5b",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E112 gap 原话“研究生院招生页需要登录、学院站有人机验证，按规则都不绕过”。",
+        "carried_from": "Ccb5bc396e01f108a993b9d2c",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E124"
+      }
     },
     {
       "section": "12",
@@ -112944,7 +115287,13 @@
       ],
       "bindings": [],
       "claim_id": "C44ce6623aab0af99a69dee76",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E112 gap 影响“只有两届前的线，科目与分布都缺，不定档”。",
+        "carried_from": "C85b11e836eff1e81eaf0f44d",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E124"
+      }
     },
     {
       "section": "12",
@@ -113069,7 +115418,18 @@
       ],
       "bindings": [],
       "claim_id": "C3ea0e41efa6a87046bae1ba4",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "缺口表第 7 行登记苏大以外各校学费没取到，试过的入口是 E121 河海简章（只写按物价部门标准收费，没有金额），影响是预算图不画学费，三列都与证据记录相符。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "carried_from": "Cc1f4bd9e3d0fa5e631ca6a6b",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E124"
+      }
     },
     {
       "section": "12",
@@ -113194,7 +115554,13 @@
       ],
       "bindings": [],
       "claim_id": "Cab5709482e1f250b23b93721",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E121 原文“根据物价部门批准或备案标准收取学费”，此处未加引号的概括“只写按物价部门标准收费”意思一致，范围注明未列金额。",
+        "carried_from": "C0e3e267a76b65dc555723bf5",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E124"
+      }
     },
     {
       "section": "12",
@@ -113319,7 +115685,13 @@
       ],
       "bindings": [],
       "claim_id": "Cf59759acc5f7c751c454c561",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "影响“预算图不画学费”，与预算图图注第467句一致。",
+        "carried_from": "C37756984aa1ac6a6b8234465",
+        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E124"
+      }
     },
     {
       "section": "12",
