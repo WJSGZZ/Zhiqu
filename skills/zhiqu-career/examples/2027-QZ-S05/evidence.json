@@ -1731,25 +1731,25 @@
           [
             "写明财务管理，有本人未填的条件",
             "{{c:/fa_unk_count}}",
-            "稳",
+            "留意",
             "{{c:/fa_unk_count}} 个"
           ],
           [
             "写明财务管理，但限男性或要党员等",
             "{{c:/fa_fail_count}}",
-            "冲",
+            "不利",
             "{{c:/fa_fail_count}} 个"
           ],
           [
             "只写“工商管理类”（先电话确认）",
             "{{c:/fc_count}}",
-            "稳",
+            "留意",
             "{{c:/fc_count}} 个"
           ],
           [
             "只列会计类（不报）",
             "{{c:/fb_count}}",
-            "冲",
+            "不利",
             "{{c:/fb_count}} 个"
           ]
         ]
@@ -1776,19 +1776,19 @@
           [
             "去城市合租（每月 ¥{{c:/monthly_cost|comma}}）",
             "{{c:/city_months}}",
-            "保",
+            "次",
             "{{c:/city_months|1f}} 个月"
           ],
           [
             "合租且先付押金搬家",
             "{{c:/after_move_months}}",
-            "稳",
+            "留意",
             "{{c:/after_move_months|1f}} 个月"
           ],
           [
             "连应急金也动用",
             "{{c:/all_cash_months}}",
-            "冲",
+            "不利",
             "{{c:/all_cash_months|1f}} 个月"
           ]
         ]

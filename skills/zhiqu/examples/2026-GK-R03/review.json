@@ -81,14 +81,14 @@
     ]
   },
   "snapshot": {
-    "2026-GK-R03-report.pdf": "636c8cd956376be9597ba21d3607c61a87b8b177e6e060ce37fbc7cecf3b9ad2",
+    "2026-GK-R03-report.pdf": "e14bc54be1b3b8e32e056b70fafabea054dca5f6bf5f748fd3c7c9fbd4b517b3",
     "case.json": "9e23f7a3e90fdda1692681da0d16d4960fd7025afaa46aa876040bde5edea18b",
     "operator_check.md": "1428ddbb969b641fa262d5d3506630c43897e9d1acf20f066a6727ddfa9586e1",
     "profile.txt": "1234f171f03b14ff6b66e2921fde1f4e53f3b51e14b678ee34daf20ea8e94656",
     "profile_snapshot.json": "0e678552defdace5dd04b99bfe4532498c9ec6d905d0ba647518242630a1d6f8",
-    "report.html": "55f6fd2f005a5f31424e1b269c9efe32c9cfdcb3f672d3d185171693b2e6a28d",
+    "report.html": "d58778dc7975d646abeb48f86de595ac7e44b2794b4b8bb4a7ef83c483b970a1",
     "report.json": "e4abbcf06e56a6380a6cf08912f5267156fe9a7014f21b560d7f080a5ede524c",
-    "report_trace.json": "2f527faf281861dd7b8f74726d619a4a9cecd84acb7387eb36fb02e1dd06a5f7",
+    "report_trace.json": "f21862693802643a09c8f07a524171009b5618436d63f9e4f2c079b28948b757",
     "retro_ranks/10192/result.json": "18597bc3b70500927c28a1d8c84b6e08816e7d5777e1899905fcb71596ec5682"
   },
   "self_assessment": {
@@ -228,6 +228,16 @@
         "report_trace.json"
       ],
       "reason": "共用样式 report.py 与 render_report.py 调整分页：读研/求职报告每节标题后的加粗导语不再跨页（第 12 节除外）；高考报告版面不受此规则影响，只因样式文件指纹变化重生成。正文文字、数字、候选与结论未变（report.md 逐字未变）。"
+    },
+    {
+      "date": "2026-10-21",
+      "by": "Claude（共用工具批量修复）",
+      "files": [
+        "2026-GK-R03-report.pdf",
+        "report.html",
+        "report_trace.json"
+      ],
+      "reason": "共用工具一批修复后统一重生成一次：①读研/求职条形图色名改为中性的主/次/留意/不利（高考仍用冲稳保），颜色本身不变；②构成条的段太窄写不下分项名时，在图下补全“左起第几段为 名称 数值”；③发布层换词收窄：考试练习里的“模拟”、读者用语“虚构”和引号内原话不再改字，并新增检查保证印出文字与逐句回查所见一致；④版面自检新增节末孤页检查，打印器对孤页所在节只收紧行距与段距（字号不变）后重排；⑤报告追踪改为只记本报告证据命中的官方域名行；⑥画像字段映射（has_offer 并入求职阶段、删 certs_detail）不影响本案已有解析。高考报告只因共用样式与打印器（report.py）指纹变化重生成：HTML 可见文字逐行比对仅“生成时间”不同，志愿、概率、数字与结论未变，页数不变，无节末孤页。"
     }
   ],
   "regeneration": {

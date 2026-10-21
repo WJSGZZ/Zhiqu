@@ -95,22 +95,22 @@
     "verification_scope": "本轮更新为附核对材料的PDF，自评和机器核对通过后仍等待独立审核；未补造官方原文和独立批准。"
   },
   "snapshot": {
-    "2027-QZ-S01-report.pdf": "1affa5e71f93a11f33272a6abd9470d544a87b7e90b47d1353938eb6f0a37187",
+    "2027-QZ-S01-report.pdf": "f6ca2193bbc29fe54029a3fb30fbf93b00992588b6e11714a5729fde5a640c9c",
     "calculations.json": "c9f6ffdadaa69063d1698e768de5b96dbfb4f2cafdd9a803a0a136e2d4ee2bae",
     "candidates.json": "3ffc2bc156346f42fbfacce9b243f26199511bb088405c601c9017efa4063c05",
     "case.json": "56c199fd854ba948916bb91afa440ed6d7b72a1c86500cd8d202dda6df921955",
-    "claim_check.json": "d5e51e838cad9418d79761b64486352b70c37a76a22bb535be748bc79784af3b",
+    "claim_check.json": "0b7d26bdd6261b2298d8ea27bdc9855aa56d5aaf8f377a81e49888b4a2df04c5",
     "directions.json": "6f799d567cc51a1d860a40f8d9bbbf4c16f3bfcd2af58b999cc1db8c54f2761e",
-    "evidence.json": "a70db6ca93962e6761d146b508eb812f5c1cfd0698e02e5e5c927252fa914088",
+    "evidence.json": "2ddba53ef171d3e4d650af8ed27273a30bb449ef63ffd0480bff3a924f9564f3",
     "judgment.json": "3f7455fd010637e7b0f16acacce93573a3fc2c7f8045264fdc0a8fad8293417d",
     "narrative.json": "51db2075140dde2211fff13ba26ab4e06ece9524a87c82178dbb9efdc5c10e49",
     "operator_check.md": "220d31d91b438aa6ccbe649fc6042b8a6f4a679890058629bc2f1ede6c70d324",
     "profile.txt": "69dfeb57cf005a4ace3990e51a96b3b821e9de0c130dd1f8eae5b2088f5bef5e",
     "profile_parse.json": "ec01d04e9f24802ce85fc5d2a069ee8532f7911604e9cdfe9a3a47191baec990",
     "profile_snapshot.json": "0a6cb6835c42b9e3a0e18679bd40d3c99c433453287f9e2a231e357647a858d9",
-    "report.html": "4a15d0390bc1726cbc4805fb2969b3dac461c05c74b08fd5371d2bbf64c9b8ae",
-    "report.md": "4023378e675a504af8cd3c6900a962b8cfaba6c5dce5b1b148620ddde284046f",
-    "report_trace.json": "27c41f1fccbcb3d42d32a5847415800254bb9e3b879dd4dfc177a227b37e5204",
+    "report.html": "9ec8b3f142dc48237513fac7c30deeed7f37ff71b0e7a73dbc3fa61a43d63b06",
+    "report.md": "0895952f1caa72b7576496650f775ddafc6137d721509d0fe4868561a12c2195",
+    "report_trace.json": "6dd4638c021bed92d04ddf619bfb1294de08b050b4a842b4cdd563e6cb2db912",
     "rules_check.json": "bda48a6be3aff5fdb6d27f0800903873b37d636b4444a9ed460b302c5d5b08f9"
   },
   "checklist_update_note": "仅核查单表述及核查工具记录更新；报告与计算原件未改。保留历史复核记录，当前仍等待独立审核，不是重新批准。",
@@ -320,6 +320,19 @@
         "report_trace.json"
       ],
       "reason": "共用样式 report.py 与 render_report.py 调整分页：读研/求职报告每节标题后的加粗导语不再跨页（第 12 节除外）；高考报告版面不受此规则影响，只因样式文件指纹变化重生成。正文文字、数字、候选与结论未变（report.md 逐字未变）。"
+    },
+    {
+      "date": "2026-10-21",
+      "by": "Claude（共用工具批量修复）",
+      "files": [
+        "2027-QZ-S01-report.pdf",
+        "claim_check.json",
+        "evidence.json",
+        "report.html",
+        "report.md",
+        "report_trace.json"
+      ],
+      "reason": "共用工具一批修复后统一重生成一次：①读研/求职条形图色名改为中性的主/次/留意/不利（高考仍用冲稳保），颜色本身不变；②构成条的段太窄写不下分项名时，在图下补全“左起第几段为 名称 数值”；③发布层换词收窄：考试练习里的“模拟”、读者用语“虚构”和引号内原话不再改字，并新增检查保证印出文字与逐句回查所见一致；④版面自检新增节末孤页检查，打印器对孤页所在节只收紧行距与段距（字号不变）后重排；⑤报告追踪改为只记本报告证据命中的官方域名行；⑥画像字段映射（has_offer 并入求职阶段、删 certs_detail）不影响本案已有解析。evidence.json 条形图色名 09 节三张收入图各 1 处“稳”→“留意”（report.md 同步，仅色名列）；逐句回查中这 3 个色名格因文字变化失去原“支持”判定，待独立会话重判（未代填）。印出的正文文字、数字与结论未变；页数不变。"
     }
   ],
   "regeneration": {

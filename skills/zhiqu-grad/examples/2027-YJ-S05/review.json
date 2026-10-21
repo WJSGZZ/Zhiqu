@@ -276,22 +276,22 @@
     ]
   },
   "snapshot": {
-    "2027-YJ-S05-report.pdf": "e7cea7d3df952ca6e2fc57023df5dacca74a7be9061ec301518d227d4880f423",
+    "2027-YJ-S05-report.pdf": "7ae130e9ee7d2ceb6314ff648d81427ea961519e2fabfaf053beb35f63888fdd",
     "calculations.json": "e78d090f8eaefcc1d16696d737b78ea95ae2dc4301377da12c1126e2b4ddeb23",
     "candidates.json": "1ceab0cc754836a5224bdbb53307b376792cdb845d79c66c886b6075385daae6",
     "case.json": "5131aec8aea6f2272d34db351b7682340c6f3e40b96f8e6f28399f93531f87b8",
-    "claim_check.json": "342d5875a4ae464f83fdbe65666e58a033fec2f24fa49f0726b5fdc104e744c4",
+    "claim_check.json": "9d59e306a53a084d4ac1b7438b16ddd18acbe8a8107112334346f474e69a6cbc",
     "directions.json": "141ba17063943d6893342f321196523fd0eaf4c8c102cafee5b91cfc3a254d3a",
-    "evidence.json": "6ab5d01663521398099dcad192fe8b32f2a268ffebfd5c7043fca1286be6827a",
+    "evidence.json": "fda7a9e2760414ba9bd5f9a73b88a87ccebf6f5d8983c0f0423876de377b273b",
     "judgment.json": "85624b7f49bc7815d5a44cbfcd46ba8f30b88348201fff5b5f63a0c30863e0ef",
     "narrative.json": "03913de2d38f660ca25c46d81869653d9dd53faa85fd394603267201cdc9ac7b",
     "operator_check.md": "e401c6112ee35537c4ca7f9580227ec458ffba2cd76a51b31a3a50e4d95012cb",
     "profile-supplement.txt": "952368202eeb2cd031c6c0d52212442dca0faaadcd6c99828f951e50ba15d704",
     "profile.json": "af232e95b42de1286681d5b04d706bbd8d16d3dd86cfe304a7d87e5a6bfcab88",
     "profile_parse.json": "26d77c111bb043cbc6cca5e761f0272ae369b77043836f7ff4e039a5759d96d9",
-    "report.html": "5a2aca568f2cd8f396e909c297ef8091678eb03a5f0755b06f2bc9af506c2b50",
-    "report.md": "6e148acdffc992518702ab4a17db1f62b9392297625378b0be40fad39eef1d1a",
-    "report_trace.json": "9f0dd4f357e6c0d96fabaf376c321a7638fd0043720aff236625c3eb18888d5d",
+    "report.html": "089d3246d3d46893cc1e75bbe0077ecde3f2bfdf4a134aa75848dab857fe8566",
+    "report.md": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
+    "report_trace.json": "6c544f4b1e42d7faf3120c918067de8fd26aa18d34d250d7cef12186836a9e27",
     "rules_check.json": "a49b73e4796ddce781c9559fadf72ac99b81b32fdc2d06bf2783d4c160e4b2f0"
   },
   "snapshot_refreshes": [
@@ -385,6 +385,19 @@
       ],
       "reason": "仅改文件名，正文逐字未变。",
       "comparison": "改名前后各抽取 PDF 全文（28 页）逐行比对：唯一差异是第 12 节“生成时间”（2026-10-20T18:15:48+08:00 → 2026-10-20T18:45:20+08:00）；页数、标题、案例号与画像指纹不变。"
+    },
+    {
+      "date": "2026-10-21",
+      "by": "Claude（共用工具批量修复）",
+      "files": [
+        "2027-YJ-S05-report.pdf",
+        "claim_check.json",
+        "evidence.json",
+        "report.html",
+        "report.md",
+        "report_trace.json"
+      ],
+      "reason": "共用工具一批修复后统一重生成一次：①读研/求职条形图色名改为中性的主/次/留意/不利（高考仍用冲稳保），颜色本身不变；②构成条的段太窄写不下分项名时，在图下补全“左起第几段为 名称 数值”；③发布层换词收窄：考试练习里的“模拟”、读者用语“虚构”和引号内原话不再改字，并新增检查保证印出文字与逐句回查所见一致；④版面自检新增节末孤页检查，打印器对孤页所在节只收紧行距与段距（字号不变）后重排；⑤报告追踪改为只记本报告证据命中的官方域名行；⑥画像字段映射（has_offer 并入求职阶段、删 certs_detail）不影响本案已有解析。evidence.json 条形图色名 09 节预算图 3 处“稳”→“留意”（report.md 同步，仅色名列）；逐句回查中这 3 个色名格因文字变化失去原“支持”判定，待独立会话重判（未代填）。印出文字有三处变化，均为还原本人原话或补图注，数字与结论未变：第 02 节现状一览“上机编程”一格由“没做过完整上机试算”恢复为本人原话“没做过完整上机模拟”；第 08 节分析段“你刷过算法题，但没做过完整的上机试算”恢复为“上机模拟”（源文件与逐句回查一直是“模拟”，旧版是发布层误换词）；第 02 节模考构成条图下新增一行“段内未写全的分项：十月模考：左起第2段为 英语一 62；单科最低要求：从左到右依次为 政治 35、英语一 35、数学一 53、专业课 53”，补上旧版漏标的科目名，数值与旧图一致。页数不变。"
     }
   ],
   "review_history": [

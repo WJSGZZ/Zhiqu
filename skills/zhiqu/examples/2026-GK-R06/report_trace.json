@@ -24,12 +24,12 @@
     "model": "未记录"
   },
   "renderer": {
-    "version": "sha256:62dfe9b90fea12873dc1bc0a0af640a43ae632be3493c3e0abd87855c8f94987",
+    "version": "sha256:9a2ad964e16e6703d89f4ee19b04d08b4a0522c66fbe06abc0bf3da527af124c",
     "files_sha256": {
-      "report.py": "270b384ce5a3428afa7b5e906199294dfb70054a6636f9704aaaba532dadb31b"
+      "report.py": "6bbcb82b0537c4bac11ad4152324f4c8bdbdaf7176983591c51a9a3a16844760"
     }
   },
   "artifacts": {
-    "2026-GK-R06-report.pdf": "d41569865e327cd38f08e052b93adee5f2f7407f2bdf47e53068a8f5019b1f88"
+    "2026-GK-R06-report.pdf": "e297cffe92da6680fbe52ce7b50edf365979a212d87a4f7ff8bdff77ba2d71f2"
   }
 }

@@ -435,6 +435,19 @@
         "report_trace.json"
       ],
       "reason": "共用样式 report.py 与 render_report.py 调整分页：读研/求职报告每节标题后的加粗导语不再跨页（第 12 节除外）；高考报告版面不受此规则影响，只因样式文件指纹变化重生成。正文文字、数字、候选与结论未变（report.md 逐字未变）。"
+    },
+    {
+      "date": "2026-10-21",
+      "by": "Claude（共用工具批量修复）",
+      "files": [
+        "2027-QZ-S05-report.pdf",
+        "claim_check.json",
+        "evidence.json",
+        "report.html",
+        "report.md",
+        "report_trace.json"
+      ],
+      "reason": "共用工具一批修复后统一重生成一次：①读研/求职条形图色名改为中性的主/次/留意/不利（高考仍用冲稳保），颜色本身不变；②构成条的段太窄写不下分项名时，在图下补全“左起第几段为 名称 数值”；③发布层换词收窄：考试练习里的“模拟”、读者用语“虚构”和引号内原话不再改字，并新增检查保证印出文字与逐句回查所见一致；④版面自检新增节末孤页检查，打印器对孤页所在节只收紧行距与段距（字号不变）后重排；⑤报告追踪改为只记本报告证据命中的官方域名行；⑥画像字段映射（has_offer 并入求职阶段、删 certs_detail）不影响本案已有解析。evidence.json 条形图色名 06 节职位数图“稳”→“留意”2 处、“冲”→“不利”2 处，09 节现金图“保”→“次”、“稳”→“留意”、“冲”→“不利”各 1 处（report.md 同步，仅色名列）；逐句回查中这 7 个色名格因文字变化失去原“支持”判定，待独立会话重判（未代填）。印出文字一处变化：第 09 节导语由“不比较本案工资”恢复为源文件原句“不比较虚构工资”（旧版发布层误换词）。第 11 节行距收紧一档，原第 15 页只剩 2 行的孤页消失，全文 26 页→25 页。数字与结论未变。"
     }
   ],
   "review_history": [
@@ -2698,22 +2711,22 @@
     "claim_check": "ok:true，errors []"
   },
   "snapshot": {
-    "2027-QZ-S05-report.pdf": "f05bee0dc3e3f06df9866d5f97b37e7f889650005c48eb4bc1c625a1de2f15c5",
+    "2027-QZ-S05-report.pdf": "7f327d645bad6a06bde359d5ba48935b38b44e5b15637b11959f1589f010b262",
     "calculations.json": "89d7a293fd6780b562866f4871846b19130b0d86e79cb9f9c233e572cbae5b5d",
     "candidates.json": "ea8bbcb101fc7dc899ec1137e869654c3b9e85d79d8229e4de8115418467aeae",
     "case.json": "79136c0287d7e845b2308724e997d90b3b7a805e4fe2843da189774d6ec93a6e",
-    "claim_check.json": "61368618c0fbe7e05f8dfc56b79fc3dfda03b293ce9fefee9599c60a2435340b",
+    "claim_check.json": "5a8cb7da0be2f5c8b85adb3bbdfb5167565b8f4901f3484d8e25e0b3ebdbdb3b",
     "directions.json": "2d709b22623617481aefa804b96da5c5d274812758094bb921c173d0466c29df",
-    "evidence.json": "a36a1d4072892ffd0e56b0ce2c425c1563b651a7113907892177e9ad2a5ffffe",
+    "evidence.json": "8c97b5ec4dd2e295bbf4a8eaa9372acfd30f2fcc1615cc5810525fdbbb596d59",
     "judgment.json": "89e67d8e39d0666399d8b470809425420fb18271c756578790e08248301ec3ff",
     "narrative.json": "8cecd1ff1956e1331cccd6cbe5ad00cd0a76b61dbe3c3632e44e06c9a2d37e1b",
     "operator_check.md": "85044e118ddd3b10da5bc883b7f5d94808ea0d29052f9c2c82420277b74f4683",
     "profile-supplement.txt": "247f31f22f4c9a6c33394b5b25e3b37ef21c19fd3b9c12a70a83839f7976b026",
     "profile.json": "f8c7a4b076a64c168d303710ea8836b70a79ffe5d53ce7521045bfe4ae4c2d1f",
     "profile_parse.json": "abe812515ea2a27d78209f08c28c8bdde0a5c10d1672ef0983d66d68c6eece1a",
-    "report.html": "46f79c04b4a025b204e9327f74ba4083812d95afc9f101bbfe513148d95ac1e6",
-    "report.md": "6f6db2bf1c02e59661412571809479cb6f5b3e97078a2a9d1b4feb09b74193e4",
-    "report_trace.json": "13c00e71f68f62b0c108984006470ce988ce3e49b9421ba6254dad634da521d9",
+    "report.html": "db68bc21a8ab90c8f86693c99ea0976d8d667b7d9558dce5b86440d6a0b996e6",
+    "report.md": "90ff1e8ce1555a081d376dbea69e831d6f8788393724d3db9bdb8189646a6262",
+    "report_trace.json": "6c25e3aca33e8456be49ad8ac3c75d82ded60531d442da1e6831ed1c25daca1f",
     "rules_check.json": "b45b1313cf295a6e320d32afce13a0b93b9b0e54e8b46d8d3cf2d6329732a40b"
   }
 }

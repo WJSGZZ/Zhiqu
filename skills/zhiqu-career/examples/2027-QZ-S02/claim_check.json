@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
   "case_id": "2027-QZ-S02",
-  "manifest_sha256": "fb4b50f983b36c3507dd5b26c8e2e5d1db2670dab195a1303ba7dc363e535276",
+  "manifest_sha256": "fefe283f6cdf3df52f8c157c0d5ebb7c92f1632389d485d070a1b901e55213d5",
   "source_sha256": {
     "case.json": "1266369f01a1fb4ddd7f6d8f6a4f7fcdcc475445fed3cfc9d464a41bbfda2d73",
     "profile_parse.json": "d34b3c37a261949e9502d03e5eec3b00d0ad8d8f989758bfe8c4509ffae5cfd7",
     "directions.json": "5b2397e7ee4e80db6b8b1b6bf0834869aabbf282dcfecc6f23c4c706d476cc76",
     "rules_check.json": "d887941488483a7992cfbe1fb174550f3fdb3083d8c597a1cdcc43f1eee9d198",
     "candidates.json": "d741b74ae820c210e0b7d43186496ea83b72584adfe0529440e2a3b7c251d835",
-    "evidence.json": "5a88399dc6cd1e7c5dd23c361a215dce3cf1e8c37105f3d609c8e6239da5699b",
+    "evidence.json": "39819a48f34df9a8ad734daa1ebc55980ea28b5ed46eabaa429b710b898af15d",
     "calculations.json": "8e8135c7483b79dbc2d7ed702e1d9add2628ccf852da45c3d957f1e3f05d98f5",
     "judgment.json": "6b1a98ce44bf3a24b623518f8bca10d5a21ff18b40d9e7d69cf39b5b605f113d",
     "narrative.json": "14ef994cbd73016b338364bf16e799765288afe1cc961bbe8469f8618f01388e",
@@ -18589,8 +18589,8 @@
     {
       "section": "09",
       "location": "evidence.json#/report_blocks/09_runway/content/rows/1/2:sentence1",
-      "text": "稳",
-      "expanded_text": "稳",
+      "text": "留意",
+      "expanded_text": "留意",
       "evidence_refs": [
         "E001"
       ],
@@ -18609,12 +18609,8 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C8885a605ebeda96bed8ab50d",
-      "review": {
-        "kind": "结构标签",
-        "decision": "支持",
-        "reason": "章节标题、节点/阶段说明或情景名称，不独立断言具体岗位事实；日期的条件性在配套节点另列。"
-      }
+      "claim_id": "C6ef8a7608e228113f3c4c227",
+      "review": null
     },
     {
       "section": "09",
@@ -18721,8 +18717,8 @@
     {
       "section": "09",
       "location": "evidence.json#/report_blocks/09_runway/content/rows/2/2:sentence1",
-      "text": "冲",
-      "expanded_text": "冲",
+      "text": "不利",
+      "expanded_text": "不利",
       "evidence_refs": [
         "E001"
       ],
@@ -18741,12 +18737,8 @@
         }
       ],
       "bindings": [],
-      "claim_id": "Cf0c98c1205180ccbbf0ad1a0",
-      "review": {
-        "kind": "结构标签",
-        "decision": "支持",
-        "reason": "章节标题、节点/阶段说明或情景名称，不独立断言具体岗位事实；日期的条件性在配套节点另列。"
-      }
+      "claim_id": "C2f29bf82e06f22b654d6d989",
+      "review": null
     },
     {
       "section": "09",
@@ -20907,11 +20899,11 @@
     }
   ],
   "report_snapshot": {
-    "trace_sha256": "95d8946a951ef210ff340cc48008157c0c51380d941ed8596900aa3b9030c527",
+    "trace_sha256": "2230a8099e04922b5a08134e975c835138f184b97bac809d4d9cacf103f10296",
     "artifacts": {
-      "report.md": "53b9de1bfaa50bdf3757ff18dcc5aea7109057575e09b4c2afc93d96aecba994",
-      "report.html": "f3c987d532cfdf89548d46deed77ffc71ef903fae839efa95caf47a0052eb50c",
-      "2027-QZ-S02-report.pdf": "dbb1113d7683ee71550ffccdbe83db74c707381e1e90ec3f48f0161bfe4134af"
+      "report.md": "caf501508e4bb94fa89ef30378a716f496ff000289aa508092a9fec6dc852eff",
+      "report.html": "e3df376f9cf7ba5645c049ef902deef847844a663b39764f798c679b95664d25",
+      "2027-QZ-S02-report.pdf": "06a84479614e941b57f6b9e51ec3a2816b720938acbc37e2b80a92c5a8e03094"
     }
   }
 }

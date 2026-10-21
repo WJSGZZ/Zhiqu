@@ -408,19 +408,19 @@
           [
             "其他费用上限",
             "{{c:/nonliving_ceiling}}",
-            "稳",
+            "留意",
             "{{c:/nonliving_ceiling|comma}} 元"
           ],
           [
             "生活费提高后上限",
             "{{c:/higher_living_ceiling}}",
-            "稳",
+            "留意",
             "{{c:/higher_living_ceiling|comma}} 元"
           ],
           [
             "先留应急后上限",
             "{{c:/reserve_ceiling}}",
-            "稳",
+            "留意",
             "{{c:/reserve_ceiling|comma}} 元"
           ]
         ]

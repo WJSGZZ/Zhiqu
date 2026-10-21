@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
   "case_id": "2027-QZ-S01",
-  "manifest_sha256": "a7d35206352a7fadcca20431b486b401e31779776863d04097ecaa3f40cc1158",
+  "manifest_sha256": "35c193a8e3cc2f5783bb33b5573fa32ed0f20d1faf4a962b3c35291175f3afef",
   "source_sha256": {
     "case.json": "56c199fd854ba948916bb91afa440ed6d7b72a1c86500cd8d202dda6df921955",
     "profile_parse.json": "ec01d04e9f24802ce85fc5d2a069ee8532f7911604e9cdfe9a3a47191baec990",
     "directions.json": "6f799d567cc51a1d860a40f8d9bbbf4c16f3bfcd2af58b999cc1db8c54f2761e",
     "rules_check.json": "bda48a6be3aff5fdb6d27f0800903873b37d636b4444a9ed460b302c5d5b08f9",
     "candidates.json": "3ffc2bc156346f42fbfacce9b243f26199511bb088405c601c9017efa4063c05",
-    "evidence.json": "a70db6ca93962e6761d146b508eb812f5c1cfd0698e02e5e5c927252fa914088",
+    "evidence.json": "2ddba53ef171d3e4d650af8ed27273a30bb449ef63ffd0480bff3a924f9564f3",
     "calculations.json": "c9f6ffdadaa69063d1698e768de5b96dbfb4f2cafdd9a803a0a136e2d4ee2bae",
     "judgment.json": "3f7455fd010637e7b0f16acacce93573a3fc2c7f8045264fdc0a8fad8293417d",
     "narrative.json": "51db2075140dde2211fff13ba26ab4e06ece9524a87c82178dbb9efdc5c10e49",
@@ -35626,8 +35626,8 @@
     {
       "section": "09",
       "location": "evidence.json#/report_blocks/09_8/content/rows/1/2:sentence1",
-      "text": "稳",
-      "expanded_text": "稳",
+      "text": "留意",
+      "expanded_text": "留意",
       "evidence_refs": [
         "E0001",
         "E0010",
@@ -35674,12 +35674,8 @@
         }
       ],
       "bindings": [],
-      "claim_id": "Caf45b643d93ddf7d6904af9d",
-      "review": {
-        "kind": "结构标签",
-        "decision": "支持",
-        "reason": "本条为章节/列名、图形色标或情景/风险触发标题；不是独立官方事实或结果承诺。"
-      }
+      "claim_id": "C4aa9a2b8e664b11642a0758b",
+      "review": null
     },
     {
       "section": "09",
@@ -36094,8 +36090,8 @@
     {
       "section": "09",
       "location": "evidence.json#/report_blocks/09_9/content/rows/1/2:sentence1",
-      "text": "稳",
-      "expanded_text": "稳",
+      "text": "留意",
+      "expanded_text": "留意",
       "evidence_refs": [
         "E0001"
       ],
@@ -36114,12 +36110,8 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C5e733cc8fbe5694b5a22e107",
-      "review": {
-        "kind": "结构标签",
-        "decision": "支持",
-        "reason": "本条为章节/列名、图形色标或情景/风险触发标题；不是独立官方事实或结果承诺。"
-      }
+      "claim_id": "C483e809a5b47aec954450718",
+      "review": null
     },
     {
       "section": "09",
@@ -36489,8 +36481,8 @@
     {
       "section": "09",
       "location": "evidence.json#/report_blocks/09_10/content/rows/1/2:sentence1",
-      "text": "稳",
-      "expanded_text": "稳",
+      "text": "留意",
+      "expanded_text": "留意",
       "evidence_refs": [
         "E0001"
       ],
@@ -36509,12 +36501,8 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C11c5fcbc492a5c5d86802adc",
-      "review": {
-        "kind": "结构标签",
-        "decision": "支持",
-        "reason": "本条为章节/列名、图形色标或情景/风险触发标题；不是独立官方事实或结果承诺。"
-      }
+      "claim_id": "Cbc1e7d81f43cabb8d16c6608",
+      "review": null
     },
     {
       "section": "09",
@@ -43436,11 +43424,11 @@
     }
   ],
   "report_snapshot": {
-    "trace_sha256": "27c41f1fccbcb3d42d32a5847415800254bb9e3b879dd4dfc177a227b37e5204",
+    "trace_sha256": "6dd4638c021bed92d04ddf619bfb1294de08b050b4a842b4cdd563e6cb2db912",
     "artifacts": {
-      "report.md": "4023378e675a504af8cd3c6900a962b8cfaba6c5dce5b1b148620ddde284046f",
-      "report.html": "4a15d0390bc1726cbc4805fb2969b3dac461c05c74b08fd5371d2bbf64c9b8ae",
-      "2027-QZ-S01-report.pdf": "1affa5e71f93a11f33272a6abd9470d544a87b7e90b47d1353938eb6f0a37187"
+      "report.md": "0895952f1caa72b7576496650f775ddafc6137d721509d0fe4868561a12c2195",
+      "report.html": "9ec8b3f142dc48237513fac7c30deeed7f37ff71b0e7a73dbc3fa61a43d63b06",
+      "2027-QZ-S01-report.pdf": "f6ca2193bbc29fe54029a3fb30fbf93b00992588b6e11714a5729fde5a640c9c"
     }
   }
 }

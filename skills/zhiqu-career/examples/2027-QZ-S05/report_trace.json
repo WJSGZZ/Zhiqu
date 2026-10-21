@@ -7,7 +7,7 @@
     "directions.json": "2d709b22623617481aefa804b96da5c5d274812758094bb921c173d0466c29df",
     "rules_check.json": "b45b1313cf295a6e320d32afce13a0b93b9b0e54e8b46d8d3cf2d6329732a40b",
     "candidates.json": "ea8bbcb101fc7dc899ec1137e869654c3b9e85d79d8229e4de8115418467aeae",
-    "evidence.json": "a36a1d4072892ffd0e56b0ce2c425c1563b651a7113907892177e9ad2a5ffffe",
+    "evidence.json": "8c97b5ec4dd2e295bbf4a8eaa9372acfd30f2fcc1615cc5810525fdbbb596d59",
     "calculations.json": "89d7a293fd6780b562866f4871846b19130b0d86e79cb9f9c233e572cbae5b5d",
     "judgment.json": "89e67d8e39d0666399d8b470809425420fb18271c756578790e08248301ec3ff",
     "narrative.json": "8cecd1ff1956e1331cccd6cbe5ad00cd0a76b61dbe3c3632e44e06c9a2d37e1b",
@@ -16,18 +16,18 @@
   },
   "contract_sha256": "8efe50a42837daeec7a83de34e595fd7eeb88a8cfeff1a26afc20699fd951d76",
   "tool_sha256": {
-    "planning_report.py": "f2305a63b08addc6b0d98fd9e66e317d39e4eb46411ca46ed4523872cbcefb10",
-    "planning_workflow.py": "9611234df2cbdb0b3f379faeb65ad632c0175b0a9e761eb61234b8efa380dc8a",
-    "operator_check.py": "e69cf811b9d369137e1919efaaf160c78f04ea1e3b739529c77d3ef9d784a4ae",
+    "planning_report.py": "de47b6729ae1469b9f016c65b623151cfc80744e0adc13dcbb51ee031d689b1d",
+    "planning_workflow.py": "2e8d5eb40e80dbf4e349aba04c9f048d7e8a69375cc238d2f7153a939bd27f7d",
+    "operator_check.py": "d99826c1cae9514c665edb0b1b6155ea99a0bce19b99a919b9ada81e0b93c0a1",
     "check_demos.py": "67d4edc1cd737beeb6729783a736e667a97c12d8f7de2de673632d9d5c3370b8",
-    "report.py": "270b384ce5a3428afa7b5e906199294dfb70054a6636f9704aaaba532dadb31b",
-    "render_report.py": "840dc1d3bb6113db53ae22b41b5e22ebf1f8eb1efdb270c88d2aeabad8e6182f",
-    "profile_store.py": "a6cebda41b504d6fef84c3c9b0686c055a1d0dc432a94350ba8ca15822d01391",
+    "report.py": "6bbcb82b0537c4bac11ad4152324f4c8bdbdaf7176983591c51a9a3a16844760",
+    "render_report.py": "e7dbbef97c3478f4591f34a01ebd0c730e807a1de3c69eca4fea397434dfbc4a",
+    "profile_store.py": "35de56c7f84f9ead83540d32cee7d9bd8885611fb25ef39dbc37b7cfa401b088",
     "claim_guards.py": "54bab4d942fafd148190df73cad34805538662b0a152ec5701c8a960e28dbd1d",
     "source_authentication.py": "b18201e997e0b4ca33c879979bc03f81deab1ea5edbbbc74cab6bf622821f278",
     "official_source_audit.py": "c09c40a2c5eec18318fbb1fa52393ee37b4e63f636ec7ea3999084d12ecc0df1",
     "unit_validation.py": "9f5df89a101dd684231fe35f8fe931e150127fc698f2ab774b628bc3ffdf093c",
-    "reader_language.py": "fac8d66d933db781bb357f4c32f402e154ab44bcf36eb9e398b8f583f089b853",
+    "reader_language.py": "ccb4d16f5a23fff9e9660c9cf33aa042b81f2e2221dc38bb641079b0d61259b6",
     "claim_check.py": "9551fd4dd5e87f13f6635e1158cebf8882b7c967e59e54939dc02b024eed41b5",
     "check_report.py": "1c91f94d58e4e99aca311ae2befe28508b1d1d79cffdb8427f55e49ba2dea485",
     "authoring_metadata.py": "9ac0328c9a8bdeec672daede766f49f5e9c94c2761ae64e0ec32e2ed8abf404c"
@@ -1271,27 +1271,44 @@
     }
   ],
   "artifacts": {
-    "report.md": "6f6db2bf1c02e59661412571809479cb6f5b3e97078a2a9d1b4feb09b74193e4",
-    "report.html": "46f79c04b4a025b204e9327f74ba4083812d95afc9f101bbfe513148d95ac1e6",
-    "2027-QZ-S05-report.pdf": "f05bee0dc3e3f06df9866d5f97b37e7f889650005c48eb4bc1c625a1de2f15c5"
+    "report.md": "90ff1e8ce1555a081d376dbea69e831d6f8788393724d3db9bdb8189646a6262",
+    "report.html": "db68bc21a8ab90c8f86693c99ea0976d8d667b7d9558dce5b86440d6a0b996e6",
+    "2027-QZ-S05-report.pdf": "7f327d645bad6a06bde359d5ba48935b38b44e5b15637b11959f1589f010b262"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "authoring": {
     "model": "未记录"
   },
   "renderer": {
-    "version": "sha256:f7da6d8dbea2f6ea37e41ed89323213850d559219c904cec5c2f834e3cac8e6f",
+    "version": "sha256:15fa9bd1aaf818dec6c99c2441c041dee1840e58ea492adb654569cb8e3b458d",
     "files_sha256": {
-      "planning_report.py": "f2305a63b08addc6b0d98fd9e66e317d39e4eb46411ca46ed4523872cbcefb10",
-      "render_report.py": "840dc1d3bb6113db53ae22b41b5e22ebf1f8eb1efdb270c88d2aeabad8e6182f",
-      "report.py": "270b384ce5a3428afa7b5e906199294dfb70054a6636f9704aaaba532dadb31b"
+      "planning_report.py": "de47b6729ae1469b9f016c65b623151cfc80744e0adc13dcbb51ee031d689b1d",
+      "render_report.py": "e7dbbef97c3478f4591f34a01ebd0c730e807a1de3c69eca4fea397434dfbc4a",
+      "report.py": "6bbcb82b0537c4bac11ad4152324f4c8bdbdaf7176983591c51a9a3a16844760"
     }
   },
   "policy_sha256": {
-    "zhiqu-shared/references/official-domains.csv": "fe9b53221663f0ebb8230c105937a6615aec882ce9d0d0a32cd19d96a050788a",
     "zhiqu-shared/references/unit-families.json": "a535c6ba17dc14fcf1d30d8b5f45691da0ab2f78cb92a30b01a55de41e72c9a0",
     "zhiqu-shared/references/reader-language.json": "247453b7a5c1d0bf4b5d4997d57ee8d32a1cd70327fff2683322bf4c79e5476d",
     "zhiqu/references/report-guide.md": "0278c07e521721d96450b8fbc707e88e403e04f725083e872957386d2e007955"
+  },
+  "official_domain_rows": {
+    "bm.scs.gov.cn": "a5b2d342d4d1fb2a35210e26189034b4e24c734a3983ace1e4b6a78392d9e043",
+    "chinatax.gov.cn": "1e4be0ff88f116e569b94d441d33540f5c1698947c9fe672a5fada8286d14d7c",
+    "deloitte.com": "1f808c123ad0b5c884e6f706129542dc74a9ef3931be9930dae990e64a023170",
+    "ey.com": "5032083038f9348d40721fab3675ec3079738afce60363fc876d57acfd337ac7",
+    "gwy.zjks.com": "7583a3fee509c5e90e0291dc1a83b4d0948d5fde5c91ff61073f5235a6fd705f",
+    "gwy.zjks.gov.cn": "083f3916042d3dd3b8400811342659d6b47ea0ae1d0525eede78924581f4d469",
+    "job.icbc.com.cn": "35737e5f41f68261d74a96b6320357936e1764017db103009033d294126ce995",
+    "kpmg.com": "b8f38cb307e63e4d65aac0acccf35d98400390980ab8d09f9150b2efedf4216e",
+    "moe.gov.cn": "11ea2d85aa600e0583fdf2425f16cdb33be6c628e3774818d86192adc39dbe58",
+    "mof.gov.cn": "f590720af12ff0307abce0daa95ab0dcb71c2eacc5c4ff738edf1b860e183706",
+    "omwb.oss-cn-beijing.aliyuncs.com": "8ced075399f07523e4b7a6d8665d1ca11edfdd50d02f9b35d4c7cb6a9ea22716",
+    "rlsbt.zj.gov.cn": "644cdea10e360959cdd48ecfa3b1fffa729107f2a072a4bc24bad9b854f2d057",
+    "www.cicpa.org.cn": "766435687b8bbc7867ed4144304e6de1bb3bf42d586a0b81172a4254baa33f19",
+    "www.ncss.cn": "97d35b9e8ef4fddcf969990839dc09813cf8132a6d57f1a66be5732fedc1d6e4",
+    "zhaopin.sgcc.com.cn": "e022a3a03e434f4c36d203014cc2dfbe7853dc323620a01dc9134deeb3a2103c",
+    "zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn": "61b7224c86e6a1fe05962b90163c4c97b8c98d3ebfbca7c4d6a6358961829b6d"
   },
   "report_profile": {
     "file": "profile.json",

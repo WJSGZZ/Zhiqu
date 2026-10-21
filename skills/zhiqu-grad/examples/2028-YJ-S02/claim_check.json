@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
   "case_id": "2028-YJ-S02",
-  "manifest_sha256": "98c255c893a89b8a51c180bf01b8212f76e96b0394ab66108808e7dbf62d2075",
+  "manifest_sha256": "6c3b26fb66be12897903046da93919c29934ba4afc18c8aede96d3e3f0edc6e4",
   "source_sha256": {
     "case.json": "0001243d062291f20d005fab27c3bcc9f801dd724d9bd8593487ad013319de45",
     "profile_parse.json": "2dda484ba11b430d3cc4c1db419900cc9517e79bb3b21abf9c9d3bb755c2ea46",
     "directions.json": "e11eb75bac9a1378195f15ef805daf0ffe3d0a4c2306d317d6d9944265b8008b",
     "rules_check.json": "248a80156349f8bee1d5de049d1153408fc4548108e5895abb5bba17d5c7cb03",
     "candidates.json": "1f9f3703275d1799b96d638988fd5c11a27d5f2c4ef9209db44868be66817183",
-    "evidence.json": "30d26ab9c1d3ba0f6dfacda08d65343af7e860c66e973ff11895c99349aacba5",
+    "evidence.json": "03304e7a1c5a1324a791db8d79dc9087ab501f578414afef2bda2728ef1d97fa",
     "calculations.json": "00e5087c418c579371b17558494a9c4c1f865b0b051ef63fc1a3c9a51a89cd87",
     "judgment.json": "a9dd41f886f0c6f554dcbfa124510778365a5a732f3490e40d1499b0ff24c03b",
     "narrative.json": "0c553b0c818c3903d5da218cf50a10f299a0c06c0d757e6222f4fc2799e36591",
@@ -16816,8 +16816,8 @@
     {
       "section": "09",
       "location": "evidence.json#/report_blocks/09_budget_chart_60/content/rows/2/2:sentence1",
-      "text": "稳",
-      "expanded_text": "稳",
+      "text": "留意",
+      "expanded_text": "留意",
       "evidence_refs": [
         "E001",
         "E020"
@@ -16849,12 +16849,8 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C08326547028760214d77a7a8",
-      "review": {
-        "decision": "支持",
-        "kind": "结构标签",
-        "reason": "“稳”是本报告的标题、表头、图形节点或本报告内定义，不主张新增学校制度或个人结果。"
-      }
+      "claim_id": "C11396dd55c9d75e37cc36ce7",
+      "review": null
     },
     {
       "section": "09",
@@ -17000,8 +16996,8 @@
     {
       "section": "09",
       "location": "evidence.json#/report_blocks/09_budget_chart_60/content/rows/3/2:sentence1",
-      "text": "稳",
-      "expanded_text": "稳",
+      "text": "留意",
+      "expanded_text": "留意",
       "evidence_refs": [
         "E001",
         "E020"
@@ -17033,12 +17029,8 @@
         }
       ],
       "bindings": [],
-      "claim_id": "Ce9cb19f25c4fb00a5fb49f65",
-      "review": {
-        "decision": "支持",
-        "kind": "结构标签",
-        "reason": "“稳”是本报告的标题、表头、图形节点或本报告内定义，不主张新增学校制度或个人结果。"
-      }
+      "claim_id": "C978d7251adb1bbbaaf784859",
+      "review": null
     },
     {
       "section": "09",
@@ -17184,8 +17176,8 @@
     {
       "section": "09",
       "location": "evidence.json#/report_blocks/09_budget_chart_60/content/rows/4/2:sentence1",
-      "text": "稳",
-      "expanded_text": "稳",
+      "text": "留意",
+      "expanded_text": "留意",
       "evidence_refs": [
         "E001",
         "E020"
@@ -17217,12 +17209,8 @@
         }
       ],
       "bindings": [],
-      "claim_id": "Cde8cb5db62263fdccacba213",
-      "review": {
-        "decision": "支持",
-        "kind": "结构标签",
-        "reason": "“稳”是本报告的标题、表头、图形节点或本报告内定义，不主张新增学校制度或个人结果。"
-      }
+      "claim_id": "C5bd118e9e261e3b1dbbc1345",
+      "review": null
     },
     {
       "section": "09",
@@ -18130,11 +18118,11 @@
     }
   ],
   "report_snapshot": {
-    "trace_sha256": "14cb98bb60c9332007b64bf9383bd10fb426bcbf6d1cf6e0105895aacd6dc537",
+    "trace_sha256": "aaad59266dd3a09d3fa8ce480f470f9176fbbcb3062212d4ccfd15e26388c129",
     "artifacts": {
-      "report.md": "7f4b1604f45a4a1c04e4d9816bd07170e88afd0e6cd6b5969568bc906e06b7de",
-      "report.html": "25e3a65133b621d103fd0af64eac7ad47c54357f76516bbfde780f75e646c221",
-      "2028-YJ-S02-report.pdf": "1c5b8820adf58dcc77cf7c21a04eda38fa5737238b13ab4df5a94acb4fc90234"
+      "report.md": "8dd0ba3d6bb84baacb05c1e5272f04bd89a83de4f111127c4e5dca4e4ebf1628",
+      "report.html": "0dc49ba2ae87352e34dce9d1e572785fd82cd95369dd857c38c8f7c7d06ef074",
+      "2028-YJ-S02-report.pdf": "f5707d225ebcb69451eb67c59c87280a8aabc0034066b904cfc04f4d79f22ca9"
     }
   }
 }

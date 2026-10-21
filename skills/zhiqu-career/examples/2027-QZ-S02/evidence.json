@@ -406,13 +406,13 @@
           [
             "住房提高（每月 {{c:/high_monthly_cost|comma}} 元）",
             "{{c:/higher_rent_months}}",
-            "稳",
+            "留意",
             "{{c:/higher_rent_months|1f}} 个月"
           ],
           [
             "连应急金也动用",
             "{{c:/all_cash_months}}",
-            "冲",
+            "不利",
             "{{c:/all_cash_months|1f}} 个月"
           ]
         ],

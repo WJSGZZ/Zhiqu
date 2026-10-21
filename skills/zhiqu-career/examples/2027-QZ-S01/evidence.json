@@ -2136,7 +2136,7 @@
           [
             "B 派遣近家情景",
             "{{c:/hypothetical_offers/1/annual_take_home_cash}}",
-            "稳",
+            "留意",
             "{{c:/hypothetical_offers/1/annual_take_home_cash|comma}} 元／年"
           ]
         ],
@@ -2163,7 +2163,7 @@
           [
             "B 派遣近家情景",
             "{{c:/hypothetical_offers/1/hourly_cash}}",
-            "稳",
+            "留意",
             "{{c:/hypothetical_offers/1/hourly_cash|1f}} 元／小时"
           ]
         ],
@@ -2188,7 +2188,7 @@
           [
             "B 派遣近家情景",
             "{{c:/hypothetical_offers/1/monthly_remaining_cash}}",
-            "稳",
+            "留意",
             "{{c:/hypothetical_offers/1/monthly_remaining_cash|comma}} 元／月"
           ]
         ],

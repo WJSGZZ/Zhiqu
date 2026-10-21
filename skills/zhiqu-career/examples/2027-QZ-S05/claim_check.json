@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
   "case_id": "2027-QZ-S05",
-  "manifest_sha256": "94ffd13c200a881060d6a98a990cf62098ed9829b909af09a74500a68bae8bfc",
+  "manifest_sha256": "4e3d694ad750eab34c8215fa9a8d6da472aa8183d2b382158849c06d9b97f0f7",
   "source_sha256": {
     "case.json": "79136c0287d7e845b2308724e997d90b3b7a805e4fe2843da189774d6ec93a6e",
     "profile_parse.json": "abe812515ea2a27d78209f08c28c8bdde0a5c10d1672ef0983d66d68c6eece1a",
     "directions.json": "2d709b22623617481aefa804b96da5c5d274812758094bb921c173d0466c29df",
     "rules_check.json": "b45b1313cf295a6e320d32afce13a0b93b9b0e54e8b46d8d3cf2d6329732a40b",
     "candidates.json": "ea8bbcb101fc7dc899ec1137e869654c3b9e85d79d8229e4de8115418467aeae",
-    "evidence.json": "a36a1d4072892ffd0e56b0ce2c425c1563b651a7113907892177e9ad2a5ffffe",
+    "evidence.json": "8c97b5ec4dd2e295bbf4a8eaa9372acfd30f2fcc1615cc5810525fdbbb596d59",
     "calculations.json": "89d7a293fd6780b562866f4871846b19130b0d86e79cb9f9c233e572cbae5b5d",
     "judgment.json": "89e67d8e39d0666399d8b470809425420fb18271c756578790e08248301ec3ff",
     "narrative.json": "8cecd1ff1956e1331cccd6cbe5ad00cd0a76b61dbe3c3632e44e06c9a2d37e1b",
@@ -29016,8 +29016,8 @@
     {
       "section": "06",
       "location": "evidence.json#/report_blocks/06_counts/content/rows/1/2:sentence1",
-      "text": "稳",
-      "expanded_text": "稳",
+      "text": "留意",
+      "expanded_text": "留意",
       "evidence_refs": [
         "E012",
         "E013",
@@ -29065,17 +29065,8 @@
         }
       ],
       "bindings": [],
-      "claim_id": "Cb85eb87bfe242257f317e92c",
-      "review": {
-        "decision": "支持",
-        "kind": "结构标签",
-        "reason": "第 2 行色调键“稳”，渲染为琥珀色条，对应图注“要先问清的”。",
-        "reviewer": {
-          "session_id": "claimcheck-qz-s05-r2-20261021",
-          "model": "Claude Opus 5.5",
-          "independent": true
-        }
-      }
+      "claim_id": "Cbf85a274212a99b3eb204d46",
+      "review": null
     },
     {
       "section": "06",
@@ -29284,8 +29275,8 @@
     {
       "section": "06",
       "location": "evidence.json#/report_blocks/06_counts/content/rows/2/2:sentence1",
-      "text": "冲",
-      "expanded_text": "冲",
+      "text": "不利",
+      "expanded_text": "不利",
       "evidence_refs": [
         "E012",
         "E013",
@@ -29333,17 +29324,8 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C958fc466e13546a647dc537a",
-      "review": {
-        "decision": "支持",
-        "kind": "结构标签",
-        "reason": "第 3 行色调键“冲”，在 HTML 中渲染为红色 #9B3B2E 条，对应图注“红色是不报的”；仅 report.md 文本版会露出“冲”字。",
-        "reviewer": {
-          "session_id": "claimcheck-qz-s05-r2-20261021",
-          "model": "Claude Opus 5.5",
-          "independent": true
-        }
-      }
+      "claim_id": "C6805b4e7abad03c1278de8c7",
+      "review": null
     },
     {
       "section": "06",
@@ -29552,8 +29534,8 @@
     {
       "section": "06",
       "location": "evidence.json#/report_blocks/06_counts/content/rows/3/2:sentence1",
-      "text": "稳",
-      "expanded_text": "稳",
+      "text": "留意",
+      "expanded_text": "留意",
       "evidence_refs": [
         "E012",
         "E013",
@@ -29601,17 +29583,8 @@
         }
       ],
       "bindings": [],
-      "claim_id": "Cd4c6cc61b4ec06d336882c37",
-      "review": {
-        "decision": "支持",
-        "kind": "结构标签",
-        "reason": "第 4 行色调键再次为“稳”，即工商管理类职位也用琥珀色表示待确认。",
-        "reviewer": {
-          "session_id": "claimcheck-qz-s05-r2-20261021",
-          "model": "Claude Opus 5.5",
-          "independent": true
-        }
-      }
+      "claim_id": "C516a88e4d852826ca1c1d5d0",
+      "review": null
     },
     {
       "section": "06",
@@ -29820,8 +29793,8 @@
     {
       "section": "06",
       "location": "evidence.json#/report_blocks/06_counts/content/rows/4/2:sentence1",
-      "text": "冲",
-      "expanded_text": "冲",
+      "text": "不利",
+      "expanded_text": "不利",
       "evidence_refs": [
         "E012",
         "E013",
@@ -29869,17 +29842,8 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C0c785558ce8e30d310a430b6",
-      "review": {
-        "decision": "支持",
-        "kind": "结构标签",
-        "reason": "第 5 行色调键也是“冲”，渲染为红色，表示只列会计类的不报。",
-        "reviewer": {
-          "session_id": "claimcheck-qz-s05-r2-20261021",
-          "model": "Claude Opus 5.5",
-          "independent": true
-        }
-      }
+      "claim_id": "C7c6deb38c776937362142079",
+      "review": null
     },
     {
       "section": "06",
@@ -47153,8 +47117,8 @@
     {
       "section": "09",
       "location": "evidence.json#/report_blocks/09_runway/content/rows/1/2:sentence1",
-      "text": "保",
-      "expanded_text": "保",
+      "text": "次",
+      "expanded_text": "次",
       "evidence_refs": [
         "E001"
       ],
@@ -47173,12 +47137,8 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C2e31a3573f32aab9a4ea0e26",
-      "review": {
-        "decision": "支持",
-        "kind": "结构标签",
-        "reason": "合租一行色标“保”，渲染为石绿，对应图例“石绿是去城市合租”；文字版显示“保”字并非把握程度。"
-      }
+      "claim_id": "C536621ca7700e5bdc72bdf72",
+      "review": null
     },
     {
       "section": "09",
@@ -47285,8 +47245,8 @@
     {
       "section": "09",
       "location": "evidence.json#/report_blocks/09_runway/content/rows/2/2:sentence1",
-      "text": "稳",
-      "expanded_text": "稳",
+      "text": "留意",
+      "expanded_text": "留意",
       "evidence_refs": [
         "E001"
       ],
@@ -47305,12 +47265,8 @@
         }
       ],
       "bindings": [],
-      "claim_id": "Cb3a1a1e3d4d8c3a402f71c03",
-      "review": {
-        "decision": "支持",
-        "kind": "结构标签",
-        "reason": "付押金一行色标“稳”，渲染为琥珀，对应图例。"
-      }
+      "claim_id": "C835897a12bc3bfeeefb07291",
+      "review": null
     },
     {
       "section": "09",
@@ -47417,8 +47373,8 @@
     {
       "section": "09",
       "location": "evidence.json#/report_blocks/09_runway/content/rows/3/2:sentence1",
-      "text": "冲",
-      "expanded_text": "冲",
+      "text": "不利",
+      "expanded_text": "不利",
       "evidence_refs": [
         "E001"
       ],
@@ -47437,12 +47393,8 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C055a37a834f82c4f1e537ee2",
-      "review": {
-        "decision": "支持",
-        "kind": "结构标签",
-        "reason": "动用应急金一行色标“冲”，渲染为红色风险边界；report.md 文字版直接显示“冲”字，可能被读成鼓励，建议文字版改写。"
-      }
+      "claim_id": "C3f8577dd92fdd1b00ecaaf6c",
+      "review": null
     },
     {
       "section": "09",
@@ -54889,11 +54841,11 @@
     }
   ],
   "report_snapshot": {
-    "trace_sha256": "13c00e71f68f62b0c108984006470ce988ce3e49b9421ba6254dad634da521d9",
+    "trace_sha256": "6c25e3aca33e8456be49ad8ac3c75d82ded60531d442da1e6831ed1c25daca1f",
     "artifacts": {
-      "report.md": "6f6db2bf1c02e59661412571809479cb6f5b3e97078a2a9d1b4feb09b74193e4",
-      "report.html": "46f79c04b4a025b204e9327f74ba4083812d95afc9f101bbfe513148d95ac1e6",
-      "2027-QZ-S05-report.pdf": "f05bee0dc3e3f06df9866d5f97b37e7f889650005c48eb4bc1c625a1de2f15c5"
+      "report.md": "90ff1e8ce1555a081d376dbea69e831d6f8788393724d3db9bdb8189646a6262",
+      "report.html": "db68bc21a8ab90c8f86693c99ea0976d8d667b7d9558dce5b86440d6a0b996e6",
+      "2027-QZ-S05-report.pdf": "7f327d645bad6a06bde359d5ba48935b38b44e5b15637b11959f1589f010b262"
     }
   }
 }

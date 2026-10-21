@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
   "case_id": "2027-YJ-S01",
-  "manifest_sha256": "ca1188a24879d40f6e7f5b775a280d4d879da7426a0729d7696ab2bea177c46a",
+  "manifest_sha256": "c092cd9acbd505f5cbe9abac0d9fab5045eb88e589b6630c597519fa216734dd",
   "source_sha256": {
     "case.json": "3b7e07dfbdad7b43a2d996e35f3c024d006a7f1ef5aa47e2f3206925f1e04d76",
     "profile_parse.json": "a9eee1981e639d511390eedec704012149c76ecf08348ddc03a5c9a8e32de7e9",
     "directions.json": "2b68a53951ab4a8de52d7edcbabdf32d24e4570392cd70ac212c62342430a3b2",
     "rules_check.json": "7b0a58159b98a98e96a17d877674c57bf2d59988aefd37a2f57d94f82580f5c2",
     "candidates.json": "c9c5db84e727dde6ec750e534d023b4e15e7dd85e5bd1bc77110b14166f9d8ad",
-    "evidence.json": "931f92b62c754f55ea753be5406aa0c7e8f297aa105c928a105c5fabb58e0c85",
+    "evidence.json": "68c102376c2f70ee266da8f295472bdb1cfd743bce3766c206e79b4ba346db27",
     "calculations.json": "cec5b3577a8d62196c2dfd606cfab91b31c421feb52a97cbdd3a5cfafcd5daf7",
     "judgment.json": "c5eb44314051a1d85b8307a79757f819c5b69fe03647180bab197757273f26ab",
     "narrative.json": "d7abb3f0d3c33de4ab5f50e821d67f81bad19bd57592c28c26e2159bb9083294",
@@ -39532,8 +39532,8 @@
     {
       "section": "09",
       "location": "evidence.json#/report_blocks/09_4/content/rows/1/2:sentence1",
-      "text": "稳",
-      "expanded_text": "稳",
+      "text": "留意",
+      "expanded_text": "留意",
       "evidence_refs": [
         "E0001",
         "E0008",
@@ -39580,18 +39580,8 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C23793be30f6ff1b250e01b80",
-      "review": {
-        "decision": "支持",
-        "kind": "结构标签",
-        "reason": "逐句核对为预算表头、项目名、情景名、图例或单位；补2027原PDF标题提升来源定位，不改变标签含义。",
-        "reviewer": {
-          "session_id": "/root/baseline_reports",
-          "model": "GPT-6（具体型号与版本未提供）",
-          "independent": true
-        },
-        "author_session_id": "/root"
-      }
+      "claim_id": "C3d7ffc8ff92f287eb26bc9a1",
+      "review": null
     },
     {
       "section": "09",
@@ -49230,11 +49220,11 @@
     }
   ],
   "report_snapshot": {
-    "trace_sha256": "864eb26d6b449f55d3c68a39e1d4156732e9e2af26d1c8671e3440dc4bfd33a4",
+    "trace_sha256": "f7b9722ff8b6875a5489b466665f1478921b9839d80fafe9dd9627c7de00a285",
     "artifacts": {
-      "report.md": "087c1b146226784d9ee026debb65d16ade1b29ba4401277b42aa2632f4774d45",
-      "report.html": "5c65058301941a24e306733c97e866a2376db0362141d8ef79e1915759c6268b",
-      "2027-YJ-S01-report.pdf": "90f25ebd2003a7296bb9c6bee96ea0f4e723e9a8b998f6eef7d43ee242c532eb"
+      "report.md": "5b32adb9f81133bd864cf2d979f5b6fcb4866562f99022ea7414c67342895c2a",
+      "report.html": "99f8e215da1e3387d2679fe498e0b55d74ee0df1be59bbb8daad348ce08ebda6",
+      "2027-YJ-S01-report.pdf": "0bbc537d3a124ded3ef9dea841c94cdcecbcbc98cd9d8dcee09925a5fafea2fc"
     }
   }
 }

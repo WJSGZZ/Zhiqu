@@ -81,14 +81,14 @@
     ]
   },
   "snapshot": {
-    "2026-GK-R08-report.pdf": "758c75976ec23fbc35f2cc704a81e76b2ae5451a851445931b878d4d98197952",
+    "2026-GK-R08-report.pdf": "8ca45d8520a8eb7f0f4f39c32be32109dc2c2b9c5c78ef91931a1a9877369f20",
     "case.json": "7a4566206c638e100b1fcf3c6c38fa440a0af1e9f723c02568fd0e0aec4926dd",
     "operator_check.md": "81966ea4f2db106c23aaa2ac2e4178d45a7800f02f9000553c514fd25def19c6",
     "profile.txt": "672221309792db1f0a14505535382b1e46bda621a4d573c764a7d0414f9074db",
     "profile_snapshot.json": "22d4d59ee175e8fab75568b9fa91d72299324961e02f0014ca9cd6989142fcbe",
-    "report.html": "3ac26df6a2d6a7a47e7b076751d6a21221beacb2fd2a713ad633e1ed78af3365",
+    "report.html": "e2f7738baaae6093ce0b68950484476cd829c75bd6618d7a835150aad8379c3c",
     "report.json": "bbba0f8a4ffeaf3bca04243156065674761cc5e912d08b74a4a2305f7236bcf2",
-    "report_trace.json": "836e46e6f6264c88c463ff809c9a60f2af30340cafa03778bb5c4b549a546824",
+    "report_trace.json": "9dc013958198573c820ed3808469dd084426244657124d4f4e28bb603d9fe35b",
     "retro_ranks/284930/result.json": "1bb1e1404ff28d6c9e8beec4aad27ee47e62f09081a3328930254ab88a0063e7"
   },
   "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。",
@@ -229,6 +229,16 @@
         "report_trace.json"
       ],
       "reason": "共用样式 report.py 与 render_report.py 调整分页：读研/求职报告每节标题后的加粗导语不再跨页（第 12 节除外）；高考报告版面不受此规则影响，只因样式文件指纹变化重生成。正文文字、数字、候选与结论未变（report.md 逐字未变）。"
+    },
+    {
+      "date": "2026-10-21",
+      "by": "Claude（共用工具批量修复）",
+      "files": [
+        "2026-GK-R08-report.pdf",
+        "report.html",
+        "report_trace.json"
+      ],
+      "reason": "共用工具一批修复后统一重生成一次：①读研/求职条形图色名改为中性的主/次/留意/不利（高考仍用冲稳保），颜色本身不变；②构成条的段太窄写不下分项名时，在图下补全“左起第几段为 名称 数值”；③发布层换词收窄：考试练习里的“模拟”、读者用语“虚构”和引号内原话不再改字，并新增检查保证印出文字与逐句回查所见一致；④版面自检新增节末孤页检查，打印器对孤页所在节只收紧行距与段距（字号不变）后重排；⑤报告追踪改为只记本报告证据命中的官方域名行；⑥画像字段映射（has_offer 并入求职阶段、删 certs_detail）不影响本案已有解析。高考报告只因共用样式与打印器（report.py）指纹变化重生成：HTML 可见文字逐行比对仅“生成时间”不同，志愿、概率、数字与结论未变，页数不变，无节末孤页。"
     }
   ],
   "regeneration": {

@@ -3287,19 +3287,19 @@
           [
             "留给学费住宿",
             "{{c:/nonliving_ceiling}}",
-            "稳",
+            "留意",
             "{{c:/nonliving_ceiling|comma}} 元"
           ],
           [
             "南京租房时",
             "{{c:/higher_living_ceiling}}",
-            "稳",
+            "留意",
             "{{c:/higher_living_ceiling|comma}} 元"
           ],
           [
             "先留应急金时",
             "{{c:/reserve_ceiling}}",
-            "稳",
+            "留意",
             "{{c:/reserve_ceiling|comma}} 元"
           ]
         ]

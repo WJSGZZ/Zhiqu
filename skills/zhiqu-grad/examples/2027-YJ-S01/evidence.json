@@ -2145,7 +2145,7 @@
           [
             "生活费增加后的年费用",
             "{{c:/annual_cost_if_living_plus_200}}",
-            "稳",
+            "留意",
             "{{c:/annual_cost_if_living_plus_200|comma}} 元"
           ]
         ],

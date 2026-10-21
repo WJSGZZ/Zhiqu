@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
   "case_id": "2027-YJ-S05",
-  "manifest_sha256": "ddf409d1d2a6d2f48e5e29376d1f1fd9280606de7315c1cf9055e0d6e8e7c667",
+  "manifest_sha256": "17a2640b26c27eeda374745f23395482bdd8c19f382d6fc975479743118a9787",
   "source_sha256": {
     "case.json": "5131aec8aea6f2272d34db351b7682340c6f3e40b96f8e6f28399f93531f87b8",
     "profile_parse.json": "26d77c111bb043cbc6cca5e761f0272ae369b77043836f7ff4e039a5759d96d9",
     "directions.json": "141ba17063943d6893342f321196523fd0eaf4c8c102cafee5b91cfc3a254d3a",
     "rules_check.json": "a49b73e4796ddce781c9559fadf72ac99b81b32fdc2d06bf2783d4c160e4b2f0",
     "candidates.json": "1ceab0cc754836a5224bdbb53307b376792cdb845d79c66c886b6075385daae6",
-    "evidence.json": "6ab5d01663521398099dcad192fe8b32f2a268ffebfd5c7043fca1286be6827a",
+    "evidence.json": "fda7a9e2760414ba9bd5f9a73b88a87ccebf6f5d8983c0f0423876de377b273b",
     "calculations.json": "e78d090f8eaefcc1d16696d737b78ea95ae2dc4301377da12c1126e2b4ddeb23",
     "judgment.json": "85624b7f49bc7815d5a44cbfcd46ba8f30b88348201fff5b5f63a0c30863e0ef",
     "narrative.json": "03913de2d38f660ca25c46d81869653d9dd53faa85fd394603267201cdc9ac7b",
@@ -97859,8 +97859,8 @@
     {
       "section": "09",
       "location": "evidence.json#/report_blocks/09_budget/content/rows/2/2:sentence1",
-      "text": "稳",
-      "expanded_text": "稳",
+      "text": "留意",
+      "expanded_text": "留意",
       "evidence_refs": [
         "E001",
         "E120",
@@ -97920,17 +97920,8 @@
         }
       ],
       "bindings": [],
-      "claim_id": "Cb5d425eda0f34753bd1f5853",
-      "review": {
-        "decision": "支持",
-        "kind": "结构标签",
-        "reason": "第3行角色“稳”画琥珀色，是图注所说三条余额中“平常”那一条。",
-        "reviewer": {
-          "session_id": "claimcheck-s05-r5-20261021",
-          "model": "Claude Opus 5.5",
-          "independent": true
-        }
-      }
+      "claim_id": "Cac88feb4ef322c5e99b84672",
+      "review": null
     },
     {
       "section": "09",
@@ -98175,8 +98166,8 @@
     {
       "section": "09",
       "location": "evidence.json#/report_blocks/09_budget/content/rows/3/2:sentence1",
-      "text": "稳",
-      "expanded_text": "稳",
+      "text": "留意",
+      "expanded_text": "留意",
       "evidence_refs": [
         "E001",
         "E120",
@@ -98236,17 +98227,8 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C72c0b26417846989634310c2",
-      "review": {
-        "decision": "支持",
-        "kind": "结构标签",
-        "reason": "第4行角色“稳”，是琥珀三条里“在南京租房”一条，与图注列举的第二种情形对应。",
-        "reviewer": {
-          "session_id": "claimcheck-s05-r5-20261021",
-          "model": "Claude Opus 5.5",
-          "independent": true
-        }
-      }
+      "claim_id": "C31630559319b5ce18653b941",
+      "review": null
     },
     {
       "section": "09",
@@ -98491,8 +98473,8 @@
     {
       "section": "09",
       "location": "evidence.json#/report_blocks/09_budget/content/rows/4/2:sentence1",
-      "text": "稳",
-      "expanded_text": "稳",
+      "text": "留意",
+      "expanded_text": "留意",
       "evidence_refs": [
         "E001",
         "E120",
@@ -98552,17 +98534,8 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C898a97d2f889149ae45f2d32",
-      "review": {
-        "decision": "支持",
-        "kind": "结构标签",
-        "reason": "第5行角色“稳”，是琥珀三条中最后一条“先留应急金”，与图注第三种情形对应。",
-        "reviewer": {
-          "session_id": "claimcheck-s05-r5-20261021",
-          "model": "Claude Opus 5.5",
-          "independent": true
-        }
-      }
+      "claim_id": "Ca5b667fe1660d87eba494e40",
+      "review": null
     },
     {
       "section": "09",
@@ -118406,11 +118379,11 @@
     }
   ],
   "report_snapshot": {
-    "trace_sha256": "9f0dd4f357e6c0d96fabaf376c321a7638fd0043720aff236625c3eb18888d5d",
+    "trace_sha256": "6c544f4b1e42d7faf3120c918067de8fd26aa18d34d250d7cef12186836a9e27",
     "artifacts": {
-      "report.md": "6e148acdffc992518702ab4a17db1f62b9392297625378b0be40fad39eef1d1a",
-      "report.html": "5a2aca568f2cd8f396e909c297ef8091678eb03a5f0755b06f2bc9af506c2b50",
-      "2027-YJ-S05-report.pdf": "e7cea7d3df952ca6e2fc57023df5dacca74a7be9061ec301518d227d4880f423"
+      "report.md": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
+      "report.html": "089d3246d3d46893cc1e75bbe0077ecde3f2bfdf4a134aa75848dab857fe8566",
+      "2027-YJ-S05-report.pdf": "7ae130e9ee7d2ceb6314ff648d81427ea961519e2fabfaf053beb35f63888fdd"
     }
   }
 }
