@@ -28,7 +28,7 @@
     "official_source_audit.py": "c09c40a2c5eec18318fbb1fa52393ee37b4e63f636ec7ea3999084d12ecc0df1",
     "unit_validation.py": "9f5df89a101dd684231fe35f8fe931e150127fc698f2ab774b628bc3ffdf093c",
     "reader_language.py": "fac8d66d933db781bb357f4c32f402e154ab44bcf36eb9e398b8f583f089b853",
-    "claim_check.py": "31851ebe4edb18b47bdcbdd65a3921a4aa412b5f65a1e813059251cfa544ceac",
+    "claim_check.py": "9551fd4dd5e87f13f6635e1158cebf8882b7c967e59e54939dc02b024eed41b5",
     "check_report.py": "1c91f94d58e4e99aca311ae2befe28508b1d1d79cffdb8427f55e49ba2dea485",
     "authoring_metadata.py": "9ac0328c9a8bdeec672daede766f49f5e9c94c2761ae64e0ec32e2ed8abf404c"
   },
@@ -564,8 +564,8 @@
   ],
   "artifacts": {
     "report.md": "53b9de1bfaa50bdf3757ff18dcc5aea7109057575e09b4c2afc93d96aecba994",
-    "report.html": "6131218f7fa22a371362b965b8f91171286840b8be79c5afebb234cfeaeffa2f",
-    "2027-QZ-S02-report.pdf": "bb5e634ae5601fe2fe9152e55aeb53109b1f0a15e6671b5859d2194b26d003ed"
+    "report.html": "b84dccdcc9533bf81c157ef5e5b4bed3a49963e04cbbfe17f0e198afca279a85",
+    "2027-QZ-S02-report.pdf": "ba9774b485fa3fcb07132b9c04575fa242ce00a8e0a9fa148535870fce4903ba"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "authoring": {

@@ -27,7 +27,7 @@
     "official_source_audit.py": "c09c40a2c5eec18318fbb1fa52393ee37b4e63f636ec7ea3999084d12ecc0df1",
     "unit_validation.py": "9f5df89a101dd684231fe35f8fe931e150127fc698f2ab774b628bc3ffdf093c",
     "reader_language.py": "fac8d66d933db781bb357f4c32f402e154ab44bcf36eb9e398b8f583f089b853",
-    "claim_check.py": "31851ebe4edb18b47bdcbdd65a3921a4aa412b5f65a1e813059251cfa544ceac",
+    "claim_check.py": "9551fd4dd5e87f13f6635e1158cebf8882b7c967e59e54939dc02b024eed41b5",
     "check_report.py": "1c91f94d58e4e99aca311ae2befe28508b1d1d79cffdb8427f55e49ba2dea485",
     "authoring_metadata.py": "9ac0328c9a8bdeec672daede766f49f5e9c94c2761ae64e0ec32e2ed8abf404c"
   },
@@ -1817,8 +1817,8 @@
   ],
   "artifacts": {
     "report.md": "087c1b146226784d9ee026debb65d16ade1b29ba4401277b42aa2632f4774d45",
-    "report.html": "82fa7ba2db4ca9bcb3e6d5e24bbca63934cf352898786047961a27ab21bfc6b7",
-    "2027-YJ-S01-report.pdf": "6efb2571b6788606cb916d7c5efd0289a764df9b381ba73e0f2c0ee954059d56"
+    "report.html": "551ea7aede07f6fea3eb9d88105cff91c4676c62d37487d5568baf1a8d75bfb1",
+    "2027-YJ-S01-report.pdf": "c5662207e16a43d6b82e25a3cfe3852cd6338c46a8c2a2f9b45c29ac3e9b9517"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "authoring": {

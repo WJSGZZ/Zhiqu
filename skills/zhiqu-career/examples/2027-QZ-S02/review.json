@@ -165,11 +165,11 @@
     "verification_scope": "本轮更新为附核对材料的PDF，自评和机器核对通过后仍等待独立审核；未补造官方原文和独立批准。"
   },
   "snapshot": {
-    "2027-QZ-S02-report.pdf": "bb5e634ae5601fe2fe9152e55aeb53109b1f0a15e6671b5859d2194b26d003ed",
+    "2027-QZ-S02-report.pdf": "ba9774b485fa3fcb07132b9c04575fa242ce00a8e0a9fa148535870fce4903ba",
     "calculations.json": "8e8135c7483b79dbc2d7ed702e1d9add2628ccf852da45c3d957f1e3f05d98f5",
     "candidates.json": "d741b74ae820c210e0b7d43186496ea83b72584adfe0529440e2a3b7c251d835",
     "case.json": "1266369f01a1fb4ddd7f6d8f6a4f7fcdcc475445fed3cfc9d464a41bbfda2d73",
-    "claim_check.json": "648878527df20ca212f1315b62cc3d4c245a56968ffff8088e6f29f8e90431a0",
+    "claim_check.json": "31406a7b2bdbd3461773601f3a645aca7552b4ed6b555f4206d15a5d99b218df",
     "directions.json": "5b2397e7ee4e80db6b8b1b6bf0834869aabbf282dcfecc6f23c4c706d476cc76",
     "evidence.json": "5a88399dc6cd1e7c5dd23c361a215dce3cf1e8c37105f3d609c8e6239da5699b",
     "judgment.json": "6b1a98ce44bf3a24b623518f8bca10d5a21ff18b40d9e7d69cf39b5b605f113d",
@@ -178,9 +178,9 @@
     "profile-supplement.txt": "7ae0beb59e74158ec5ff869bb796f5cf3352fb7fa5c9ab7172ee930e91c93360",
     "profile.json": "e985adff4dc5eb31443eef9a859f0e7955f84936dd8dab27a61b56e4b2e50d29",
     "profile_parse.json": "d34b3c37a261949e9502d03e5eec3b00d0ad8d8f989758bfe8c4509ffae5cfd7",
-    "report.html": "6131218f7fa22a371362b965b8f91171286840b8be79c5afebb234cfeaeffa2f",
+    "report.html": "b84dccdcc9533bf81c157ef5e5b4bed3a49963e04cbbfe17f0e198afca279a85",
     "report.md": "53b9de1bfaa50bdf3757ff18dcc5aea7109057575e09b4c2afc93d96aecba994",
-    "report_trace.json": "aa28c7ded48e4ae5379b32634f9ec7431e8d75f4f5880546933bd34b7403eed2",
+    "report_trace.json": "e7c44b4d737ad68e373735a661bae2e28f94bf913ebae85bc74bc12bab9588d9",
     "rules_check.json": "d887941488483a7992cfbe1fb174550f3fdb3083d8c597a1cdcc43f1eee9d198"
   },
   "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。",
@@ -358,6 +358,17 @@
         "report_trace.json"
       ],
       "reason": "共用 check_report.py、case_report.py 与 report-guide.md 为高考 R07 保底规则更新，读研/求职报告追踪记录随之重生成；正文只有第 12 节生成时间变化，数字、候选与结论未变。"
+    },
+    {
+      "date": "2026-10-21",
+      "by": "Claude",
+      "files": [
+        "2027-QZ-S02-report.pdf",
+        "claim_check.json",
+        "report.html",
+        "report_trace.json"
+      ],
+      "reason": "共用 claim_check.py 增加“只增补出处时保留原支持判定”规则，报告追踪随之重生成；正文只有第 12 节生成时间变化，数字、候选与结论未变。"
     }
   ],
   "regeneration": {

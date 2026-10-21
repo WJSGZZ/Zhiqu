@@ -20907,11 +20907,11 @@
     }
   ],
   "report_snapshot": {
-    "trace_sha256": "aa28c7ded48e4ae5379b32634f9ec7431e8d75f4f5880546933bd34b7403eed2",
+    "trace_sha256": "e7c44b4d737ad68e373735a661bae2e28f94bf913ebae85bc74bc12bab9588d9",
     "artifacts": {
       "report.md": "53b9de1bfaa50bdf3757ff18dcc5aea7109057575e09b4c2afc93d96aecba994",
-      "report.html": "6131218f7fa22a371362b965b8f91171286840b8be79c5afebb234cfeaeffa2f",
-      "2027-QZ-S02-report.pdf": "bb5e634ae5601fe2fe9152e55aeb53109b1f0a15e6671b5859d2194b26d003ed"
+      "report.html": "b84dccdcc9533bf81c157ef5e5b4bed3a49963e04cbbfe17f0e198afca279a85",
+      "2027-QZ-S02-report.pdf": "ba9774b485fa3fcb07132b9c04575fa242ce00a8e0a9fa148535870fce4903ba"
     }
   }
 }
