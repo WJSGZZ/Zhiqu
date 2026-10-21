@@ -10,12 +10,21 @@ usage:
 """
 import argparse
 import csv
+import json
 import os
 import re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 # 需要单独资格、异地培养或学费明显不同的条目，默认不进候选池
 EXCLUDE = "中外合作|国际|民办|独立学院|专项|联合培养|预科|民族班|面向.{1,8}[县市区州]|定向|分校招生|高本贯通|走读"
+# 校名括号里的招生计划类别（不是校区）：八协计划、协作计划、各类专项、预科、民族班、少数民族、定向、面向某地。
+# 以各省数据实际出现的写法为准（2026-10-22 统计：河北“八协计划”“地方专项计划”“少数民族预科班”，福建“面向厦门”“少数民族”等）。
+# 卓越优才计划、中高计划、京津冀职教改革项目等含义未核实，不在此列，仍按校区括号处理。
+PLAN_BRACKET = re.compile(r"八协计划|协作计划|专项|预科|民族班|^少数民族$|^面向|定向")
+# 新规则的默认排除词：旧排除词再加两类只限特定身份、却因写法漏网的括号——“（少数民族）”和不带市县字样的“（面向厦门）”。
+# 其余计划类（如八协计划）保留并标“资格待核”。考生符合资格时仍用 --exclude 放开。
+EXCLUDE_TAGGED = EXCLUDE + r"|[（(](少数民族|面向[^（）()]*)[）)]"
+PENDING = "资格待核"
 
 
 def schools():
@@ -44,6 +53,23 @@ def name_variants(name):
         n = re.sub(r"（[^（）]*）\s*$", "", n).strip()
         out.append(n)
     return out
+
+
+def plan_split(name):
+    """把校名末尾的招生计划类括号与校名分开：返回 (去掉计划括号后的校名, [计划名])。
+    内蒙古大学(八协计划)[公办] → 内蒙古大学、[八协计划]；校区、分校、独立学院等其他括号原样保留，
+    仍走名单匹配与校区核对，不会因此并到别的学校。括号内用逗号并列多项时，任一项是计划类就整个括号算计划。"""
+    n = re.sub(r"[\[【].*?[\]】]", "", name).replace("(", "（").replace(")", "）").strip()
+    tail = []
+    while True:
+        m = re.search(r"（([^（）]*)）\s*$", n)
+        if not m:
+            break
+        tail.insert(0, m.group(1).strip())
+        n = n[:m.start()].strip()
+    plans = [b for b in tail if any(PLAN_BRACKET.search(x.strip()) for x in re.split("[，,]", b))]
+    rest = "".join(f"（{b}）" for b in tail if b not in plans)
+    return n + rest, plans
 
 
 def lookup(code, name, by_code, by_name):
@@ -120,7 +146,7 @@ def main():
     ap.add_argument("--in-province", help="只保留位于该省的院校，如 广东省")
     ap.add_argument("--out-province", action="store_true", help="与 --in-province 相反：只保留外省院校")
     ap.add_argument("--public", action="store_true", help="排除民办与中外合作办学院校（按教育部名单备注）")
-    ap.add_argument("--exclude", default=EXCLUDE, help="名称/专业中含这些词的条目排除（正则，空串表示不排除）；专项、预科、民族班、面向某县的定向、联合培养等需要单独资格或异地培养，默认排除")
+    ap.add_argument("--exclude", default=None, help="名称/专业中含这些词的条目排除（正则，空串表示不排除）；专项、预科、民族班、少数民族、面向某地的定向、联合培养等需要单独资格或异地培养，默认排除")
     ap.add_argument("--match", help="只保留名称或专业匹配该正则的条目")
     ap.add_argument("--match-major", help="只保留专业名（key=major 时的专业名，不含校名）匹配该正则的条目；--match 会连校名一起匹配，如“信息工程”会命中南京信息工程大学的所有专业")
     ap.add_argument("--exclude-major", help="排除专业名匹配该正则的条目（只看专业名，不含校名）")
@@ -129,8 +155,15 @@ def main():
     ap.add_argument("--rank-max", type=int, help="最近一年位次上限")
     ap.add_argument("--legacy-join", action="store_true",
                     help="跨年对应不统一全角、半角括号与逗号（2026-10-17 以前的做法）；只用于复现已登记的回溯案例，新任务不要用")
+    ap.add_argument("--plan-brackets", choices=["tag", "legacy"], default="tag",
+                    help="校名带招生计划类括号（八协计划等）时：tag（默认）按括号外校名对名单、保留并在 limits 列标“资格待核：计划名”；"
+                         "legacy 为 2026-10-22 以前的做法（括号当校区，与所在地不符即提醒，回溯流程据此剔除），只用于复现已登记的回溯案例")
+    ap.add_argument("--screening-log", help="把本步各原因剔除的条数、对不上名单的条目和标“资格待核”的条目写成 JSON，供 screening.json 记账")
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
+    tagged = a.plan_brackets == "tag"
+    if a.exclude is None:
+        a.exclude = EXCLUDE_TAGGED if tagged else EXCLUDE
     by_code, by_name = schools()
     years = sorted((int(y), p) for y, p in (s.split("=", 1) for s in a.year))
     if len({y for y, _ in years}) != len(years):
@@ -185,20 +218,27 @@ def main():
                 if a.key == "group":
                     e["req"] = (r.get("major") or "").strip()  # 专业组省份的 major 列存的是选科要求
     rows, unmatched = [], 0
+    log = {"plan_brackets": a.plan_brackets, "dropped": {}, "unmatched": [], "eligibility_pending": []}
+    drop = lambda why: log["dropped"].__setitem__(why, log["dropped"].get(why, 0) + 1)
     for e in table.values():
         sub = e["sub"]
         code = e["code"]
         if last not in e["ranks"]:
             continue
-        info = lookup(code, e["school"], by_code, by_name)
+        school, plans = plan_split(e["school"]) if tagged else (e["school"], [])
+        info = lookup(code, school, by_code, by_name)
         text = e["school"] + " " + e["sub"] + " " + e["req"]  # 专业组省份的专项、预科、中外合作标记常写在选科要求一栏
         if a.exclude and re.search(a.exclude, text + " " + info.get("note", "")):
+            drop("排除词（需单独资格、异地培养或学费不同）")
             continue
         if not info:
             unmatched += 1
+            log["unmatched"].append(e["school"] + "·" + sub)
         if a.public and (not info or info.get("note")):
+            drop("院校未匹配教育部名单（办学性质不明）" if not info else "民办或中外合作（教育部名单备注）")
             continue
         if a.in_province and (not info or (info.get("province") == a.in_province) == a.out_province):
+            drop("所在省不符或未知")
             continue
         if a.match and not re.search(a.match, text):
             continue
@@ -207,6 +247,7 @@ def main():
         if a.exclude_major and re.search(a.exclude_major, sub):
             continue
         if a.in_provinces and (not info or info.get("province") not in a.in_provinces.split(",")):
+            drop("所在省不符或未知")
             continue
         rl = e["ranks"][last]
         if (a.rank_min and rl < a.rank_min) or (a.rank_max and rl > a.rank_max):
@@ -219,15 +260,19 @@ def main():
         row["note"] = "；".join(e["sources"]) if e["sources"] else ("专业组跨年组成未核实，只用最近一年" if a.key == "group" else "")
         if e["ambiguous"]:
             row["note"] += "；重复专业键已剔除年份：" + ",".join(map(str, sorted(e["ambiguous"])))
-        warn = campus_warning(e["school"], info)
+        warn = campus_warning(school, info)
         if warn:
             row["note"] = (row["note"] + "；" if row["note"] else "") + warn
+        if tagged:
+            row["limits"] = f"{PENDING}：{'、'.join(plans)}" if plans and info else ""
+            if row["limits"]:
+                log["eligibility_pending"].append(name)
         for y, _ in reversed(years):
             row[f"rank_{y}"] = e["ranks"].get(y, "")
         rows.append(row)
     rows.sort(key=lambda r: r[f"rank_{last}"])
     unknown = sum(r["province"] == "未知" for r in rows)
-    cols = ["id", "name", "code", "group", "major_code", "requirement", "province", "city", "plan", "history_status", "note"] + [f"rank_{y}" for y, _ in reversed(years)]
+    cols = ["id", "name", "code", "group", "major_code", "requirement", "province", "city", "plan", "history_status", "note"] + (["limits"] if tagged else []) + [f"rank_{y}" for y, _ in reversed(years)]
     with open(a.out, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=cols)
         w.writeheader()
@@ -240,6 +285,11 @@ def main():
         print(f"专业组跨年核实：{sum(r['history_status'] == 'verified' for r in rows)} 个；其余只用最近一年位次")
     if (a.in_province or a.public) and unmatched:
         print(f"⚠ {unmatched} 个条目因院校未匹配而无法按所在省或公办民办筛选：已排除，请人工核对")
+    if log["eligibility_pending"]:
+        print(f"⚠ {len(log['eligibility_pending'])} 个条目属招生计划类括号（如八协计划），已按括号外校名保留并标“{PENDING}”：填报前须按当年招生章程核对报名资格")
+    if a.screening_log:
+        with open(a.screening_log, "w", encoding="utf-8") as f:
+            json.dump(log, f, ensure_ascii=False, indent=1)
 
 
 if __name__ == "__main__":

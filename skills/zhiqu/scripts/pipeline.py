@@ -29,6 +29,21 @@ def run(script, args, cwd):
     subprocess.run([sys.executable, str(SCRIPTS / script), *args], cwd=cwd, check=True)
 
 
+def merge_row(pool_row, pref):
+    """偏好覆盖候选池同名列；但候选池给招生计划类括号标的“资格待核”不被静默抹掉：
+    只有该条 eligibility_evidence 为 verified 时才用偏好表的 limits 取代，否则两者并列。"""
+    row = dict(pool_row, **pref)
+    tag = (pool_row.get('limits') or '').strip()
+    if '资格待核' in tag:
+        try:
+            verified = json.loads(pref.get('eligibility_evidence') or '{}').get('status') == 'verified'
+        except (ValueError, AttributeError):
+            verified = False
+        if not verified:
+            row['limits'] = '；'.join(x for x in dict.fromkeys([tag, (pref.get('limits') or '').strip()]) if x)
+    return row
+
+
 def merge_preferences(pool, preferences, dest):
     with open(pool, encoding='utf-8-sig', newline='') as fh:
         reader = csv.DictReader(fh)
@@ -51,7 +66,7 @@ def merge_preferences(pool, preferences, dest):
         by_id[row['id']] = row
     if set(by_id) - {r['id'] for r in rows}:
         raise ValueError('偏好表含不在候选池中的 id，可能沿用了旧候选池')
-    selected = [dict(r, **by_id[r['id']]) for r in rows if r['id'] in by_id]
+    selected = [merge_row(r, by_id[r['id']]) for r in rows if r['id'] in by_id]
     if not selected:
         raise ValueError('没有人工确认的候选')
     with open(dest, 'w', encoding='utf-8', newline='') as fh:

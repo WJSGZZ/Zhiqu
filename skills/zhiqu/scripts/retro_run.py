@@ -179,7 +179,8 @@ def score_row(row, cfg, by_id, school, major):
 def one_rank(case, cfg, R, by_id, school, major, prestige=None, judge=True):
     out = case / "retro_ranks" / str(R)
     out.mkdir(parents=True, exist_ok=True)
-    rel = lambda p: str(Path(p).resolve().relative_to(SKILL))
+    # 技能目录内的案例传相对路径（与已登记产物一致）；目录外的演示副本传绝对路径
+    rel = lambda p: str(Path(p).resolve().relative_to(SKILL)) if Path(p).resolve().is_relative_to(SKILL) else str(Path(p).resolve())
     lo, hi = cfg.get("band_override", {}).get(str(R)) or [int(R * cfg["band"][0]), int(R * cfg["band"][1])]
     years = [a for y in cfg["data_years"] for a in ("--year", f"{y}={series_path(cfg, y)}")]
     opts = ["--school", cfg.get("school_key", "code")]
@@ -187,6 +188,11 @@ def one_rank(case, cfg, R, by_id, school, major, prestige=None, judge=True):
         opts.append("--public")
     if cfg.get("pool_join") == "legacy":
         opts.append("--legacy-join")
+    # 招生计划类括号（八协计划等）：已登记案例写 "plan_bracket_rule": "legacy" 沿用登记时的做法（当校区括号、随后剔除），
+    # 保证公开的志愿表逐字节复现；新案例不写，默认按 pool.py 新规则保留并标“资格待核”。
+    if cfg.get("plan_bracket_rule", "tag") not in ("tag", "legacy"):
+        raise SystemExit("plan_bracket_rule 只能是 tag 或 legacy")
+    opts += ["--plan-brackets", cfg.get("plan_bracket_rule", "tag")]
     for k in ("match_major", "exclude_major", "match", "exclude", "in_provinces", "in_province"):
         if k in cfg:
             opts += [f"--{k.replace('_', '-')}", cfg[k]]
