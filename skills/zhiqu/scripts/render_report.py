@@ -330,7 +330,7 @@ def markdown_to_html(body, notes=None):
                 num_m = re.match(r"^(\d{2})\s+(.*)$", title)
                 num = num_m.group(1) if num_m else None
                 disp_title = num_m.group(2) if num_m else title
-                out.append(f'<section data-section="{E(num or '')}"><h2>{f"<span class=\'no\'>{E(num)}</span>" if num else ""}{render_inline(disp_title)}</h2>')
+                out.append(f'<section data-section="{E(num or '')}" data-kind="plan"><h2>{f"<span class=\'no\'>{E(num)}</span>" if num else ""}{render_inline(disp_title)}</h2>')
                 cur_section_out = (num, disp_title, len(out) - 1)
             else:
                 tag = f"h{min(level, 3) if level != 2 else 3}"

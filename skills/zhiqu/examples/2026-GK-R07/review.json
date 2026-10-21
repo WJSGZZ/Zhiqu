@@ -81,14 +81,14 @@
     ]
   },
   "snapshot": {
-    "2026-GK-R07-report.pdf": "e35c21b4de7078751230331b4ca83786a9cc14ecefb88c998075ffd6ce005b08",
+    "2026-GK-R07-report.pdf": "46bd4e37a363c904a7c6bc3db93bdf6ba3376c7df8db4b9b37c0b3bddb382eef",
     "case.json": "b1d8f858f0baeeac939802cdeebc7106b536880c45823c8f6b51c3d7d48f2c1e",
-    "operator_check.md": "77c83e27d81dc404eafffd3281305bf952ab6d089fef50d8db8428b951a8dc7e",
+    "operator_check.md": "a5b404c8911a21633239f6ce5d51835c979f71949315870033969441012ecfa7",
     "profile.txt": "e436384e804986a0ae5f3bd84b5d34c4e6b06303eac99d0ca080264f1e0c710a",
     "profile_snapshot.json": "01281d8679abb7443186c360418d8d0b1838ea7d5e643a439b5ec9ca423fea98",
-    "report.html": "945e7b259cff9029c80b8e7a0ce079f48a45d9f3c79f19a4621787c8e76f9f64",
-    "report.json": "0faceb9235c70f4bad5da10d12b39de71cedc956b146dad4dbbdf5548c39e0bf",
-    "report_trace.json": "32da5a0622007aeefcb0a0d9119955870b95ecacf4a7e88d985bacd232eb8e63",
+    "report.html": "5ad4bc7b553a2aaf5456175667edafe07d65a5f67491c9140bfabf86fd82a18e",
+    "report.json": "b10e4d738bf4639a4bdd4b0a733ea958372478991b94f9f96af344a85178b911",
+    "report_trace.json": "aec6909ccc08e34b72413b369a7c721278893c69c187dbec318ab0f95a22cdf1",
     "retro_ranks/34678/result.json": "1b2bb6328db5cc3d0e17bfea1c0c55ba51a2dedf22dbcd3df5a6713a28c052b0"
   },
   "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。",
@@ -231,6 +231,18 @@
         "operator_check.md"
       ],
       "reason": "改写“保底不够”和法学相关的过头说法，与 R07 数据对齐：摘要首句、要点 1、行动 1、矛盾 1 与 3、志愿说明“法学为什么不在表里”、法学方向证据，由“周边公办几乎找不到稳拿的／法学都不到 2%”改为“本表筛选范围（2025 年位次在本人 2.1 倍以内）内如此”，并列出范围内被校名括号规则剔除的内蒙古大学（八协计划）新闻学、范围外的内蒙古师范大学（八协计划）法学与内蒙古大学（八协计划）社会工作（只引 2024、2025 年位次），注明位次波动大、八协报名资格待核；meta 新增 floor_shortfall（原因与补救），A 级保底检查由此降为警告。志愿表、概率、排序与第 11 节回看均未变。"
+    },
+    {
+      "date": "2026-10-21",
+      "by": "Claude",
+      "files": [
+        "2026-GK-R07-report.pdf",
+        "operator_check.md",
+        "report.html",
+        "report.json",
+        "report_trace.json"
+      ],
+      "reason": "共用样式 report.py 与 render_report.py 调整分页：读研/求职报告每节标题后的加粗导语不再跨页（第 12 节除外）；高考报告版面不受此规则影响，只因样式文件指纹变化重生成。正文文字、数字、候选与结论未变（report.md 逐字未变）。"
     }
   ],
   "regeneration": {

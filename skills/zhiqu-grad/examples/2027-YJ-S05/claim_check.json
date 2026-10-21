@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "case_id": "2027-YJ-S05",
-  "manifest_sha256": "25abcb56b048f32530121d907088fef5d0a523af9cc90b8be0b5b7fb2419e870",
+  "manifest_sha256": "ddf409d1d2a6d2f48e5e29376d1f1fd9280606de7315c1cf9055e0d6e8e7c667",
   "source_sha256": {
     "case.json": "5131aec8aea6f2272d34db351b7682340c6f3e40b96f8e6f28399f93531f87b8",
     "profile_parse.json": "26d77c111bb043cbc6cca5e761f0272ae369b77043836f7ff4e039a5759d96d9",
@@ -11,7 +11,7 @@
     "evidence.json": "6ab5d01663521398099dcad192fe8b32f2a268ffebfd5c7043fca1286be6827a",
     "calculations.json": "e78d090f8eaefcc1d16696d737b78ea95ae2dc4301377da12c1126e2b4ddeb23",
     "judgment.json": "85624b7f49bc7815d5a44cbfcd46ba8f30b88348201fff5b5f63a0c30863e0ef",
-    "narrative.json": "3d557cfc5c7ccc9fb6c6839fa137300ff74f3219eeabdbcb2df1067c2c66cd28",
+    "narrative.json": "03913de2d38f660ca25c46d81869653d9dd53faa85fd394603267201cdc9ac7b",
     "profile.json": "af232e95b42de1286681d5b04d706bbd8d16d3dd86cfe304a7d87e5a6bfcab88",
     "profile-supplement.txt": "952368202eeb2cd031c6c0d52212442dca0faaadcd6c99828f951e50ba15d704"
   },
@@ -154,7 +154,16 @@
         }
       ],
       "claim_id": "Cb0064ebc26933090e9254f6b",
-      "review": null
+      "review": {
+        "kind": "计算",
+        "decision": "支持",
+        "reason": "349 是 mock_total（profile_parse 第11项 63＋62＋105＋119）。“苏大、河海上一届录取者的分数”对应 calculations 的 suda26_0812、suda26_0835、hhu26_0812n 三组；“其余学校能取到的复试线”对应 candidates V3—V10 的不定档理由“分布缺失”。“没有数据可靠的相对稳妥档”：candidates.json 里 S1、S4 为够一够，S2 冒险，其余十二项不定档；按第11节档位规则，相对稳妥要两届都不低于中位数，而苏大只有 2026 一届名单，S4 的 349 等于中位数 349.0 也只算一届。括号“与学硕同科目”删去后，本句不再含无出处的外部事实。",
+        "reviewer": {
+          "session_id": "review7-yj-s05-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "00",
@@ -171,7 +180,16 @@
         }
       ],
       "claim_id": "C3ffe77694ec9d09ded15b695",
-      "review": null
+      "review": {
+        "kind": "建议",
+        "decision": "支持",
+        "reason": "默认报苏大计算机学硕且标“够一够”，与 candidates S1 档位一致；“同校软件工程学硕位置更好”由计算项得出：模考 349 等于 suda26_0835_median 349.0，比 suda26_0812_median 357.5 低 8.5，离两条复试线分别是 23 分和 8 分；“若接受”是条件句，本人目标原话只写计算机、未对软件工程表态；10 月 23 日来自 k:/context/personal_dates/action1，是本人规划日，不是官方日期。“同科目”删去后，剩下的都是建议和可复算的位置比较。",
+        "reviewer": {
+          "session_id": "review7-yj-s05-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "00",
@@ -201,8 +219,8 @@
     {
       "section": "01",
       "location": "narrative.json#/sections/01/lead/content/text:sentence1",
-      "text": "一志愿默认建议苏大计算机学硕（“够一够”）；你若接受软件工程，同校软件工程学硕同科目、位置更好；六校里没有数据可靠的稳妥档，保底靠出分后调剂和春招。",
-      "expanded_text": "一志愿默认建议苏大计算机学硕（“够一够”）；你若接受软件工程，同校软件工程学硕同科目、位置更好；六校里没有数据可靠的稳妥档，保底靠出分后调剂和春招。",
+      "text": "一志愿默认建议苏大计算机学硕（“够一够”）；你若接受软件工程，同校软件工程学硕位置更好；六校里没有数据可靠的稳妥档，保底靠出分后调剂和春招。",
+      "expanded_text": "一志愿默认建议苏大计算机学硕（“够一够”）；你若接受软件工程，同校软件工程学硕位置更好；六校里没有数据可靠的稳妥档，保底靠出分后调剂和春招。",
       "evidence_refs": [
         "E002",
         "E016",
@@ -277,12 +295,8 @@
         }
       ],
       "bindings": [],
-      "claim_id": "C5133a47d52b4282ef081b243",
-      "review": {
-        "decision": "支持",
-        "kind": "建议",
-        "reason": "导语把第01节结论压缩成一句：默认苏大计算机学硕、接受软工可改报、无稳妥档；所引 E030 341 线、E042/E045 分数数组与计算项一致，没有新增事实。"
-      }
+      "claim_id": "C7cd30aded0c76b906fdac0c6",
+      "review": null
     },
     {
       "section": "01",
@@ -26562,7 +26576,16 @@
       ],
       "bindings": [],
       "claim_id": "Cab6ecea5d2c75571e396f99d",
-      "review": null
+      "review": {
+        "kind": "事实",
+        "decision": "支持",
+        "reason": "一半分：本格所引 E034“复试成绩（300 分）=机考（150 分）＋…”，范围是 2026 年，格内写了“上一届”；我 curl 取苏大计算机学院 2026 细则 PDF，第二节原句逐字一致。编程：本格新列入 E037“考试形式：机考编程题”，我取 2027 目录 PDF 第37页原句一致，第36页 081200 的复试科目是“018001 计算机综合实践（机考编程题…）”。2026 细则只写“机考…时长3小时”、没写题型，所以“编程”是当届目录对同一门机考的说明，“上一届”限定的是分值比重；△ 标记与当届复试办法未发布相符。",
+        "reviewer": {
+          "session_id": "review7-yj-s05-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "04",
@@ -29028,7 +29051,16 @@
       ],
       "bindings": [],
       "claim_id": "C831875bac093e36897d305df",
-      "review": null
+      "review": {
+        "kind": "事实",
+        "decision": "支持",
+        "reason": "同一学院：所引 E039 是“018 计算机科学与技术学院 083500 软件工程”，E046 的 083500 复试线和 E034 的复试成绩构成出自同一份学院 2026 细则（原件复试分数线表同时列 081200、083500），所以 150/300 适用于软件工程学硕。编程：E037 是同一学院的复试科目 018001；我核了 2027 目录 PDF 第36页，083500 只列五个方向，考试科目与 081200 共用一栏（与 E047 范围注一致），复试也是 018001 机考编程题。",
+        "reviewer": {
+          "session_id": "review7-yj-s05-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "04",
@@ -48391,7 +48423,16 @@
         }
       ],
       "claim_id": "Cf643445cd68c452ff84a8f8d",
-      "review": null
+      "review": {
+        "kind": "计算",
+        "decision": "支持",
+        "reason": "“少 2 人”＝所引 E041 上一届拟公开招考 12 人减 E038 当届公开招考计划 10 人，即 suda_plan_drop；两者都不含推免，口径一致。“只有一届分布”：本格所引苏大 081200 名单只有 E042（2026）一份，calculations 也只有 suda26_0812 一组。“上一届复试机考编程占一半分”：E034 的 150/300（2026）加 E037 的“机考编程题”（2027 目录），均已列在本格引用中。",
+        "reviewer": {
+          "session_id": "review7-yj-s05-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -113523,7 +113564,16 @@
       ],
       "bindings": [],
       "claim_id": "C329029ec2ee45a5d54bee0e8",
-      "review": null
+      "review": {
+        "kind": "事实",
+        "decision": "支持",
+        "reason": "图片版：E042、E044 范围写“PDF无文字层”；我 curl 取名单页（指纹 8f17e762… 与登记一致）和所附 PDF，四页文字层依次只有 0、0、17、0 个字符，确实是图片。两次读图一致是 E042、E044、E045 范围里的制作记录。条数：suda26_0812_count 12＝E041 的 12，suda26_0835_count 10＝E046 的 10，suda26_085404_count 10＝本句新列的 E032“085404 计算机技术 340 10”；三行都在 2026 细则原件复试分数线表中逐字核到。",
+        "reviewer": {
+          "session_id": "review7-yj-s05-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -117504,7 +117554,7 @@
     "independent": true,
     "method": "未参与本案写作或修改的独立会话；原判定一律不继承，逐条对照 evidence.json 原文摘录与范围、gap 记录、profile.json 与补充说明原话、calculations.json 及 calculation_plan 算式（分布统计由匿名分数独立复算）后人工写出判定和理由；脚本只用于读取、合并、校验格式与统计重复。"
   },
-  "reviewed_manifest_sha256": "142685615940d3dacefbcd6d8675d7f9ace87c1244664f75d8651b5a8cbb27e9",
+  "reviewed_manifest_sha256": "25abcb56b048f32530121d907088fef5d0a523af9cc90b8be0b5b7fb2419e870",
   "retired": [
     {
       "claim_id": "Cb343ee6de0918705e9d47bcd",
@@ -118008,6 +118058,26 @@
           "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E041"
         }
       }
+    },
+    {
+      "claim_id": "C5133a47d52b4282ef081b243",
+      "text": "一志愿默认建议苏大计算机学硕（“够一够”）；你若接受软件工程，同校软件工程学硕同科目、位置更好；六校里没有数据可靠的稳妥档，保底靠出分后调剂和春招。",
+      "location": "narrative.json#/sections/01/lead/content/text:sentence1",
+      "review": {
+        "kind": "建议",
+        "decision": "部分支持",
+        "reason": "默认苏大计算机学硕、“位置更好”（349 等于软件工程中位数 349.0，计算机中位数 357.5）、六校无稳妥档都与计算项和 candidates 档位一致。但“同校软件工程学硕同科目”是招生目录事实，本句只引 E002、E016、E030、E042、E045，没有一条写到 083500 的初试科目（需要 E035 的科目原文与 E047 的“初试科目与081200共用同一栏”）；原理由也没涉及这一点。封面同一说法已因同样原因改掉，这里仍留着。改法：补引 E035、E047 后交另一会话重写理由，或像封面一样删去“同科目”。",
+        "reviewer": {
+          "session_id": "review7-yj-s05-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        },
+        "rejudged_from": {
+          "decision": "支持",
+          "kind": "建议",
+          "reason": "导语把第01节结论压缩成一句：默认苏大计算机学硕、接受软工可改报、无稳妥档；所引 E030 341 线、E042/E045 分数数组与计算项一致，没有新增事实。"
+        }
+      }
     }
   ],
   "cross_reviewers": [
@@ -118298,14 +118368,30 @@
         "C7fcc3f768245cbfb6d19f081"
       ],
       "scope": "第六轮作者改动（第09节导语、第11节补引 E010、第12节住宿费缺口、E124 范围说明）后逐句回查：判定 81 条无判定当前项；用脚本找出原理由引用了本句清单外证据号的 31 条（其中 18 条带 carried_from），逐条只用本句已引证据重判，旧判定存入 rejudged_from，6 条降为部分支持（封面“同科目”2 条、矩阵与候选表“机考编程”3 条、第12节专硕条数 1 条）；E124 苏大财务处页面本会话 curl 重取，sha256 与登记一致，8000 元/生·年属实、全页无住宿费。其余项保留原会话判定，不冒称重审。"
+    },
+    {
+      "session_id": "review7-yj-s05-20261021",
+      "model": "Claude Opus 5.5",
+      "independent": true,
+      "reviewed_manifest_sha256": "25abcb56b048f32530121d907088fef5d0a523af9cc90b8be0b5b7fb2419e870",
+      "claim_ids": [
+        "Cb0064ebc26933090e9254f6b",
+        "C3ffe77694ec9d09ded15b695",
+        "Cab6ecea5d2c75571e396f99d",
+        "C831875bac093e36897d305df",
+        "Cf643445cd68c452ff84a8f8d",
+        "C329029ec2ee45a5d54bee0e8",
+        "C5133a47d52b4282ef081b243"
+      ],
+      "scope": "第七轮独立复核：判定 6 条无判定当前项（封面两句删去“同科目”；矩阵两格、候选表一格补 E037；第12节补 E032），并 curl 取苏大 2026 细则 PDF、2027 目录 PDF、名单 PDF 原件核对；抽查 15 条既有判定（6 条带 carried_from）均成立。另发现第01节导语“同校软件工程学硕同科目”未引目录证据，与封面已改掉的问题相同，重判为部分支持，旧判定存入 rejudged_from。其余项保留原会话判定，不冒称重审。"
     }
   ],
   "report_snapshot": {
-    "trace_sha256": "7458600f0d17ee068e7654df20640ff1e38b3036666030bf40b133497c0ae8fd",
+    "trace_sha256": "9f0dd4f357e6c0d96fabaf376c321a7638fd0043720aff236625c3eb18888d5d",
     "artifacts": {
-      "report.md": "3c119963a0e8a83b1a64edfd8367369e34280ad40fe84330a9f4c8050350dbd0",
-      "report.html": "217b4f41450174b5ab2bb738ae22671d38fd01443dddcc247282ad1764167afb",
-      "2027-YJ-S05-report.pdf": "8f91917fa10a4586cc385ed818d89197726cf1923894e850f4c116cb28d0c3d2"
+      "report.md": "6e148acdffc992518702ab4a17db1f62b9392297625378b0be40fad39eef1d1a",
+      "report.html": "5a2aca568f2cd8f396e909c297ef8091678eb03a5f0755b06f2bc9af506c2b50",
+      "2027-YJ-S05-report.pdf": "e7cea7d3df952ca6e2fc57023df5dacca74a7be9061ec301518d227d4880f423"
     }
   }
 }

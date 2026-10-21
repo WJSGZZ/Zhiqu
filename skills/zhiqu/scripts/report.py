@@ -54,6 +54,7 @@ section { margin-top: 12mm; }
 section.newpage { break-before: page; margin-top: 0; }
 /* 节标题和第一句不单独留在页底：跟着下面的内容走。 */
 h2 + p, h2 + .lead { break-after: avoid; }
+section[data-kind="plan"]:not([data-section="12"]) > h2 + p:has(> strong:first-child) { break-inside: avoid; }
 p, li, dd { orphans: 3; widows: 3; }
 h4, dt { break-after: avoid; }
 svg.chart { width: 100%; height: auto; display: block; }

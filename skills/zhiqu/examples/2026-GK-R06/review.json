@@ -81,14 +81,14 @@
     ]
   },
   "snapshot": {
-    "2026-GK-R06-report.pdf": "03ff2a77b1172afa663075719693a015b70edd341419969f71d3db70fde17cd8",
+    "2026-GK-R06-report.pdf": "d41569865e327cd38f08e052b93adee5f2f7407f2bdf47e53068a8f5019b1f88",
     "case.json": "fe89664f2eede538848bf308359ebfaca35280a6d0a3856893b5864a06a5f326",
-    "operator_check.md": "9315997bfdffe908b8f4bc3d19d8e71e2e7e7f0ee1c810a0e3d84eeef864893a",
+    "operator_check.md": "ce78bd684e5048e24e5b558525d571b551227d62aedbd5eb05f380e0c1ccbc2d",
     "profile.txt": "100edbfd157d6bc1df9749d40465479ccc3b2aaa7da7145b82136526308372e2",
     "profile_snapshot.json": "ecea5465503e65626d941d1f8a7ca53011a8c18fbe86b4b6eb5ffee25159d414",
-    "report.html": "274b425185598ebb5337b47e34845a98847f0da1f55a226e68ace964895e0062",
+    "report.html": "9f915b4a378a64f5bb31dce3b7a93b0820fde828b96052d61b90992a18560366",
     "report.json": "9da765986b0b73e9297180c3e0c27024e8429dd674a0cbc5b6448e0150a4667c",
-    "report_trace.json": "e26c6469c11994f5671b097e6f69b6f2b7dad8dde72d997c1abf06632c971d59",
+    "report_trace.json": "94b55e210c280322be58c59e0cdeae45cdeedf970dd0bbe38eea05fcbf5959bb",
     "retro_ranks/4538/result.json": "2e55b25bf25c0ce3a0b81ca7c66d4746979686fea2d67e2d097f4420fa265711"
   },
   "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。",
@@ -218,6 +218,17 @@
         "operator_check.md"
       ],
       "reason": "补记提交 849ea85（高考数据层改用 sources.csv）：report.json 两句来源说明的路径由 data/<省>/README.md 改为 data/<省>/sources.csv，operator_check.md 只有对应指纹随之改变；数字、志愿、概率和结论均未变，不需为此重新复核。"
+    },
+    {
+      "date": "2026-10-21",
+      "by": "Claude",
+      "files": [
+        "2026-GK-R06-report.pdf",
+        "operator_check.md",
+        "report.html",
+        "report_trace.json"
+      ],
+      "reason": "共用样式 report.py 与 render_report.py 调整分页：读研/求职报告每节标题后的加粗导语不再跨页（第 12 节除外）；高考报告版面不受此规则影响，只因样式文件指纹变化重生成。正文文字、数字、候选与结论未变（report.md 逐字未变）。"
     }
   ],
   "regeneration": {

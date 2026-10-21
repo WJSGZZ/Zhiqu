@@ -17,19 +17,19 @@
   ],
   "source_sha256": {
     "case.json": "7bc8c812915c64516af9a5b10b540a625364ecedd8a4b6a6ac7c4f1f64816452",
-    "report.json": "d7822d5564c653e1d0107fde4f0e991a0e7f31b20e07ec0b4937e1b3e7544494",
+    "report.json": "8fcddc1212cc18bae61396974cc74cf525cd3c2ff536110ef2532f2db6c272f5",
     "result.json": "0faf19bfe8125473015a277518bb3e6accbfc8118b0b711f4d7e66d7b4cf7e84"
   },
   "authoring": {
     "model": "未记录"
   },
   "renderer": {
-    "version": "sha256:775fa7daf9d58cdf58e1c722e5357c2e4de3d43646981a5a685d9084004aaef6",
+    "version": "sha256:62dfe9b90fea12873dc1bc0a0af640a43ae632be3493c3e0abd87855c8f94987",
     "files_sha256": {
-      "report.py": "1d20cf4882a1184dbf283a45033525e25fbb2107e3f0d55af096794887ecd598"
+      "report.py": "270b384ce5a3428afa7b5e906199294dfb70054a6636f9704aaaba532dadb31b"
     }
   },
   "artifacts": {
-    "2026-GK-R11-report.pdf": "2b2b2b89e5b1090560d2ff00afb4816a5b8d8888b56a3968730dc6c5338aee20"
+    "2026-GK-R11-report.pdf": "50a8b189c46f67cb86339a905be292e0e8037eb5a883c232c1452389ffbb634e"
   }
 }

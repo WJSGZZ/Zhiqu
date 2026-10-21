@@ -95,11 +95,11 @@
     "verification_scope": "本轮更新为附核对材料的PDF，自评和机器核对通过后仍等待独立审核；未补造官方原文和独立批准。"
   },
   "snapshot": {
-    "2027-YJ-S01-report.pdf": "26e7462a93529fa31e12112ac1ffba23b26082953a1fabaa3d97b0703ad42317",
+    "2027-YJ-S01-report.pdf": "90f25ebd2003a7296bb9c6bee96ea0f4e723e9a8b998f6eef7d43ee242c532eb",
     "calculations.json": "cec5b3577a8d62196c2dfd606cfab91b31c421feb52a97cbdd3a5cfafcd5daf7",
     "candidates.json": "c9c5db84e727dde6ec750e534d023b4e15e7dd85e5bd1bc77110b14166f9d8ad",
     "case.json": "3b7e07dfbdad7b43a2d996e35f3c024d006a7f1ef5aa47e2f3206925f1e04d76",
-    "claim_check.json": "41628d2d2207cdec04de7e9c4544f282aff26853ee91ba2741e0d959bb8c8e85",
+    "claim_check.json": "18d97012fc8c1bf9bf878e56f5fab92f30f80c9f4c7e30edd627c2e9258b4cf1",
     "directions.json": "2b68a53951ab4a8de52d7edcbabdf32d24e4570392cd70ac212c62342430a3b2",
     "evidence.json": "931f92b62c754f55ea753be5406aa0c7e8f297aa105c928a105c5fabb58e0c85",
     "judgment.json": "c5eb44314051a1d85b8307a79757f819c5b69fe03647180bab197757273f26ab",
@@ -108,9 +108,9 @@
     "profile.txt": "2be92b9770f7a4a877386334b958c096198b948c89c5eabca030d4f557e29457",
     "profile_parse.json": "a9eee1981e639d511390eedec704012149c76ecf08348ddc03a5c9a8e32de7e9",
     "profile_snapshot.json": "432626de4888a0d461edc284e9c475796e8d96ce33683030143dcd3f896be032",
-    "report.html": "d6c3a3a834d6b572d3d1a2637e0732fcd2cea16837cf713f967a574ed319a341",
+    "report.html": "5c65058301941a24e306733c97e866a2376db0362141d8ef79e1915759c6268b",
     "report.md": "087c1b146226784d9ee026debb65d16ade1b29ba4401277b42aa2632f4774d45",
-    "report_trace.json": "dfa4d574ea0d6c5e8d94557c2cfde9a5a0cdbf68b624dbd79d080ca28a6bd8ae",
+    "report_trace.json": "864eb26d6b449f55d3c68a39e1d4156732e9e2af26d1c8671e3440dc4bfd33a4",
     "rules_check.json": "7b0a58159b98a98e96a17d877674c57bf2d59988aefd37a2f57d94f82580f5c2"
   },
   "checklist_update_note": "仅核查单表述及核查工具记录更新；报告与计算原件未改。保留历史复核记录，当前仍等待独立审核，不是重新批准。",
@@ -321,6 +321,17 @@
         "report_trace.json"
       ],
       "reason": "官方域名清单新增 12 个已核主办单位的域名（国务院、统计局、江苏/南通/上海/南京/苏州政府、宁波人社附件、腾讯与字节校招官网），报告追踪随之重生成；正文只有第 12 节生成时间变化，数字、候选与结论未变。"
+    },
+    {
+      "date": "2026-10-21",
+      "by": "Claude",
+      "files": [
+        "2027-YJ-S01-report.pdf",
+        "claim_check.json",
+        "report.html",
+        "report_trace.json"
+      ],
+      "reason": "共用样式 report.py 与 render_report.py 调整分页：读研/求职报告每节标题后的加粗导语不再跨页（第 12 节除外）；高考报告版面不受此规则影响，只因样式文件指纹变化重生成。正文文字、数字、候选与结论未变（report.md 逐字未变）。"
     }
   ],
   "regeneration": {

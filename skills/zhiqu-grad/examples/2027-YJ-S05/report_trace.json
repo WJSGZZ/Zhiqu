@@ -10,7 +10,7 @@
     "evidence.json": "6ab5d01663521398099dcad192fe8b32f2a268ffebfd5c7043fca1286be6827a",
     "calculations.json": "e78d090f8eaefcc1d16696d737b78ea95ae2dc4301377da12c1126e2b4ddeb23",
     "judgment.json": "85624b7f49bc7815d5a44cbfcd46ba8f30b88348201fff5b5f63a0c30863e0ef",
-    "narrative.json": "3d557cfc5c7ccc9fb6c6839fa137300ff74f3219eeabdbcb2df1067c2c66cd28",
+    "narrative.json": "03913de2d38f660ca25c46d81869653d9dd53faa85fd394603267201cdc9ac7b",
     "profile.json": "af232e95b42de1286681d5b04d706bbd8d16d3dd86cfe304a7d87e5a6bfcab88",
     "profile-supplement.txt": "952368202eeb2cd031c6c0d52212442dca0faaadcd6c99828f951e50ba15d704"
   },
@@ -20,8 +20,8 @@
     "planning_workflow.py": "9611234df2cbdb0b3f379faeb65ad632c0175b0a9e761eb61234b8efa380dc8a",
     "operator_check.py": "e69cf811b9d369137e1919efaaf160c78f04ea1e3b739529c77d3ef9d784a4ae",
     "check_demos.py": "67d4edc1cd737beeb6729783a736e667a97c12d8f7de2de673632d9d5c3370b8",
-    "report.py": "1d20cf4882a1184dbf283a45033525e25fbb2107e3f0d55af096794887ecd598",
-    "render_report.py": "18f22f904e72e162a9307dfef2a010bbaa5eadd95e08698457177c312bf14a68",
+    "report.py": "270b384ce5a3428afa7b5e906199294dfb70054a6636f9704aaaba532dadb31b",
+    "render_report.py": "840dc1d3bb6113db53ae22b41b5e22ebf1f8eb1efdb270c88d2aeabad8e6182f",
     "profile_store.py": "a6cebda41b504d6fef84c3c9b0686c055a1d0dc432a94350ba8ca15822d01391",
     "claim_guards.py": "54bab4d942fafd148190df73cad34805538662b0a152ec5701c8a960e28dbd1d",
     "source_authentication.py": "b18201e997e0b4ca33c879979bc03f81deab1ea5edbbbc74cab6bf622821f278",
@@ -1679,20 +1679,20 @@
     }
   ],
   "artifacts": {
-    "report.md": "3c119963a0e8a83b1a64edfd8367369e34280ad40fe84330a9f4c8050350dbd0",
-    "report.html": "217b4f41450174b5ab2bb738ae22671d38fd01443dddcc247282ad1764167afb",
-    "2027-YJ-S05-report.pdf": "8f91917fa10a4586cc385ed818d89197726cf1923894e850f4c116cb28d0c3d2"
+    "report.md": "6e148acdffc992518702ab4a17db1f62b9392297625378b0be40fad39eef1d1a",
+    "report.html": "5a2aca568f2cd8f396e909c297ef8091678eb03a5f0755b06f2bc9af506c2b50",
+    "2027-YJ-S05-report.pdf": "e7cea7d3df952ca6e2fc57023df5dacca74a7be9061ec301518d227d4880f423"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "authoring": {
     "model": "未记录"
   },
   "renderer": {
-    "version": "sha256:d973c62bf0994f790e3e6fdb608502c915845fdb92a55c92bd191ff3fbba5ec5",
+    "version": "sha256:f7da6d8dbea2f6ea37e41ed89323213850d559219c904cec5c2f834e3cac8e6f",
     "files_sha256": {
       "planning_report.py": "f2305a63b08addc6b0d98fd9e66e317d39e4eb46411ca46ed4523872cbcefb10",
-      "render_report.py": "18f22f904e72e162a9307dfef2a010bbaa5eadd95e08698457177c312bf14a68",
-      "report.py": "1d20cf4882a1184dbf283a45033525e25fbb2107e3f0d55af096794887ecd598"
+      "render_report.py": "840dc1d3bb6113db53ae22b41b5e22ebf1f8eb1efdb270c88d2aeabad8e6182f",
+      "report.py": "270b384ce5a3428afa7b5e906199294dfb70054a6636f9704aaaba532dadb31b"
     }
   },
   "policy_sha256": {

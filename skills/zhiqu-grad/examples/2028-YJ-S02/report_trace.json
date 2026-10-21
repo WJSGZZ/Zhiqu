@@ -20,8 +20,8 @@
     "planning_workflow.py": "9611234df2cbdb0b3f379faeb65ad632c0175b0a9e761eb61234b8efa380dc8a",
     "operator_check.py": "e69cf811b9d369137e1919efaaf160c78f04ea1e3b739529c77d3ef9d784a4ae",
     "check_demos.py": "67d4edc1cd737beeb6729783a736e667a97c12d8f7de2de673632d9d5c3370b8",
-    "report.py": "1d20cf4882a1184dbf283a45033525e25fbb2107e3f0d55af096794887ecd598",
-    "render_report.py": "18f22f904e72e162a9307dfef2a010bbaa5eadd95e08698457177c312bf14a68",
+    "report.py": "270b384ce5a3428afa7b5e906199294dfb70054a6636f9704aaaba532dadb31b",
+    "render_report.py": "840dc1d3bb6113db53ae22b41b5e22ebf1f8eb1efdb270c88d2aeabad8e6182f",
     "profile_store.py": "a6cebda41b504d6fef84c3c9b0686c055a1d0dc432a94350ba8ca15822d01391",
     "claim_guards.py": "54bab4d942fafd148190df73cad34805538662b0a152ec5701c8a960e28dbd1d",
     "source_authentication.py": "b18201e997e0b4ca33c879979bc03f81deab1ea5edbbbc74cab6bf622821f278",
@@ -498,19 +498,19 @@
   ],
   "artifacts": {
     "report.md": "7f4b1604f45a4a1c04e4d9816bd07170e88afd0e6cd6b5969568bc906e06b7de",
-    "report.html": "b013e68b66504a35af843a20fda740025db565e40cba6397903103698f25f1c1",
-    "2028-YJ-S02-report.pdf": "21431401ca9d36ed554f2039a8c6379f7fc6913ed9eedbe92a2e9c093a685b6b"
+    "report.html": "25e3a65133b621d103fd0af64eac7ad47c54357f76516bbfde780f75e646c221",
+    "2028-YJ-S02-report.pdf": "1c5b8820adf58dcc77cf7c21a04eda38fa5737238b13ab4df5a94acb4fc90234"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "authoring": {
     "model": "未记录"
   },
   "renderer": {
-    "version": "sha256:d973c62bf0994f790e3e6fdb608502c915845fdb92a55c92bd191ff3fbba5ec5",
+    "version": "sha256:f7da6d8dbea2f6ea37e41ed89323213850d559219c904cec5c2f834e3cac8e6f",
     "files_sha256": {
       "planning_report.py": "f2305a63b08addc6b0d98fd9e66e317d39e4eb46411ca46ed4523872cbcefb10",
-      "render_report.py": "18f22f904e72e162a9307dfef2a010bbaa5eadd95e08698457177c312bf14a68",
-      "report.py": "1d20cf4882a1184dbf283a45033525e25fbb2107e3f0d55af096794887ecd598"
+      "render_report.py": "840dc1d3bb6113db53ae22b41b5e22ebf1f8eb1efdb270c88d2aeabad8e6182f",
+      "report.py": "270b384ce5a3428afa7b5e906199294dfb70054a6636f9704aaaba532dadb31b"
     }
   },
   "policy_sha256": {

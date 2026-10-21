@@ -81,14 +81,14 @@
     ]
   },
   "snapshot": {
-    "2026-GK-R12-report.pdf": "76c5071b11b666a4d61782e465e8b79d30c393b64421a1b9cb68986f8056381e",
+    "2026-GK-R12-report.pdf": "efc064b1352073e1a0c970c386edec0879f058459ac25353404683850b762676",
     "case.json": "e90d1b94254275e03b76eb9b8bb4243c8d17de06df3c4f2e6868e91d9d15d12f",
-    "operator_check.md": "efc6add614ed021d627be4b319a5396fa92393366f1d3ca24433b8faa641a267",
+    "operator_check.md": "e85f56bebfbfee8d63962f564dd36b1d60cb5ff50236b2ad149044f0520dafdd",
     "profile.txt": "1aa83818b859eee159b40aa28f9e283b2bbbc67cfbeb003fd2c3d789f03567be",
     "profile_snapshot.json": "b12cc2cb12ceee8e620e0713627a0d604f3c190bd09a36519433d0ab18c4e2af",
-    "report.html": "f3fa50261c8e8aacbcd7ded0bf95ac278c5c2b9f1d07222d3fae2933949f9eb2",
+    "report.html": "7e7a74603cd20e7c1272a73db9c996e9ea6a3af27cfe5e9778f354a0d6507fc6",
     "report.json": "73ee7d0394eacbfc45db3358fda95c89bf1b4c1871689d65d0e888432c032f02",
-    "report_trace.json": "d8d42a85f6e66007174e8fa1acd050b4a0db3d5f64cc34347bed89e94126819d",
+    "report_trace.json": "a1fc03707031917a409d41c115394fe5c60245fa13542eab8258b8593b882b01",
     "retro_ranks/135253/result.json": "85969677c047dcc860dab9a01f6a50b07fff1f317f7f9e6ac2fc583acb17249a"
   },
   "self_assessment": {
@@ -217,6 +217,17 @@
         "operator_check.md"
       ],
       "reason": "补记提交 849ea85（高考数据层改用 sources.csv）：report.json 两句来源说明的路径由 data/<省>/README.md 改为 data/<省>/sources.csv，operator_check.md 只有对应指纹随之改变；数字、志愿、概率和结论均未变，不需为此重新复核。"
+    },
+    {
+      "date": "2026-10-21",
+      "by": "Claude",
+      "files": [
+        "2026-GK-R12-report.pdf",
+        "operator_check.md",
+        "report.html",
+        "report_trace.json"
+      ],
+      "reason": "共用样式 report.py 与 render_report.py 调整分页：读研/求职报告每节标题后的加粗导语不再跨页（第 12 节除外）；高考报告版面不受此规则影响，只因样式文件指纹变化重生成。正文文字、数字、候选与结论未变（report.md 逐字未变）。"
     }
   ],
   "regeneration": {
