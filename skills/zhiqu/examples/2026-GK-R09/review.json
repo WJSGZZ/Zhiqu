@@ -207,7 +207,17 @@
       ],
       "reason": "仅改文件名，正文逐字未变。",
       "comparison": "改名前后各抽取 PDF 全文（31 页）逐行比对：唯一差异是第 12 节“生成时间”（2026-10-20T17:23:50+08:00 → 2026-10-20T18:45:31+08:00）；页数、标题、案例号与画像指纹不变。",
-      "not_refreshed": "report.json、operator_check.md 在改名前（main 134a6a3）已与快照不符，不属于本次改名，未刷新，留待复核处理。"
+      "not_refreshed": "report.json、operator_check.md 在改名前（main 134a6a3）已与快照不符，不属于本次改名，未刷新，留待复核处理。",
+      "not_refreshed_resolved": "2026-10-21：已查明，见同日 849ea85 一条；快照已在 6522adb 随全部示例重新生成时刷新。"
+    },
+    {
+      "date": "2026-10-21",
+      "by": "Claude",
+      "files": [
+        "report.json",
+        "operator_check.md"
+      ],
+      "reason": "补记提交 849ea85（高考数据层改用 sources.csv）：report.json 两句来源说明的路径由 data/<省>/README.md 改为 data/<省>/sources.csv，operator_check.md 只有对应指纹随之改变；数字、志愿、概率和结论均未变，不需为此重新复核。"
     }
   ],
   "regeneration": {
