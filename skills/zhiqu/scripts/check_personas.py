@@ -127,7 +127,7 @@ def check(root=SKILLS,library=LIBRARY):
             else:
                 review=json.loads((path/'review.json').read_text())
                 approved=review.get('status')=='approved' and review.get('independent') is True and review.get('reviewer') and review.get('date')
-                waiting=review.get('status') in ('awaiting_independent_review','changes_required') and review.get('independent') is not True
+                waiting=(review.get('status')=='awaiting_independent_review' and review.get('independent') is not True) or review.get('status')=='changes_required'
                 if not (approved or waiting):errors.append(cid+'：不能冒充独立审核通过')
         except (OSError,KeyError,ValueError,TypeError) as exc:errors.append(cid+'：'+str(exc))
     return errors

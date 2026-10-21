@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "status": "awaiting_independent_review",
-  "status_label": "本轮重出后待定向独立复核；此前批准只适用于26ffa7a版本",
+  "status": "changes_required",
+  "status_label": "第5轮定向独立复核：须修改后重审（总分16，无0分，九项坑全过；本轮修订有两处改过头、claim_check理由为套话）",
   "self_assessment": {
     "reviewer": "本制作会话（自评，不是独立复核）",
     "date": "2026-10-20",
@@ -1162,89 +1162,369 @@
         "p6“一志愿只录了个位数的人”只对 2026 年（3 人）成立，2025 年是 10 人；可改成“上一届一志愿只录 3 人”。",
         "p2 数字卡“高于录取者里最低一档（按人数分四档）的最高分”仍稍绕，可直接写“高于录取者里分数靠后那四分之一”。"
       ]
-    }
-  ],
-  "independent": false,
-  "reviewer": "独立复核会话（Claude，第四轮，未参与制作）",
-  "date": "2026-10-20",
-  "rubric": {
-    "items": [
-      {
-        "id": "clarity",
-        "score": 2,
-        "reason": "封面三句与 p2 首句一致：默认一志愿苏大计算机学硕（够一够），接受软件工程就改报同校软件工程学硕，六校无稳妥档、保底靠调剂和春招；流程图和第 8、9 节写清触发条件。",
-        "evidence_refs": [],
-        "report_location": "封面、p2—p3、p9—p11"
+    },
+    {
+      "round": 4,
+      "result": "approved",
+      "score": 19,
+      "status_label": "第 4 轮独立复核：批准（总分 19，无 0 分，九项坑全过；第三轮两项已改好）",
+      "independent": true,
+      "reviewer": "独立复核会话（Claude，第四轮，未参与制作）",
+      "date": "2026-10-20",
+      "rubric": {
+        "items": [
+          {
+            "id": "clarity",
+            "score": 2,
+            "reason": "封面三句与 p2 首句一致：默认一志愿苏大计算机学硕（够一够），接受软件工程就改报同校软件工程学硕，六校无稳妥档、保底靠调剂和春招；流程图和第 8、9 节写清触发条件。",
+            "evidence_refs": [],
+            "report_location": "封面、p2—p3、p9—p11"
+          },
+          {
+            "id": "traceability",
+            "score": 2,
+            "reason": "第三轮唯一扣分点已改好：p16 E033/E034 同出处同段原文只印一次，为整句“3. 复试成绩（300 分）=机考（150 分）+外语听说能力测试（50 分）+综合素质考核（100 分）”，与原件逐字一致。本轮随机抽 4 条官方证据全部逐字命中、哈希一致。附录“其他”前缀、“数据快照版本”“calculations.json”属已登记共用代码问题，不扣分。证据适用范围里残留“见E035”“另记为E075”两处内部编号（读者查不到编号，但所指内容就印在相邻条目），记为可选改进。",
+            "evidence_refs": [
+              "E033",
+              "E034",
+              "E013",
+              "E037",
+              "E039",
+              "E122"
+            ],
+            "report_location": "p15—p21"
+          },
+          {
+            "id": "reasoning",
+            "score": 2,
+            "reason": "每个候选有支持、反对、改判条件（p24—p26）；河海软件工程按小样本只作定性，河海联培不作备选并说明原因；专硕改科目的反证写明。",
+            "evidence_refs": [],
+            "report_location": "p6—p8、p24—p26"
+          },
+          {
+            "id": "consistency",
+            "score": 2,
+            "reason": "本复核核对：苏大计算机学硕下四分位 347.75、中位 357.5，模考 349 高于下四分位低于中位 8.5；软件工程学硕中位 349；预算 30000−18000=12000、30000−21600=8400、27000−18000=9000；计划 12−10=2；正文、附录与计算表一致，verify_report ok。",
+            "evidence_refs": [],
+            "report_location": "p2、p7、p11、p21—p23"
+          },
+          {
+            "id": "timeliness",
+            "score": 2,
+            "reason": "报名、初试、调剂、录取规则取自 2027 管理规定（核实 2026-10-20，复核期限 2026-11-19，在期内）；旧年线与名单逐行标年份，并写明当届线公布后重算；未取到的当届目录列明入口。",
+            "evidence_refs": [],
+            "report_location": "p9、p13、p26—p27"
+          },
+          {
+            "id": "personalization",
+            "score": 2,
+            "reason": "模考四科决定可比范围；只留江苏决定候选；“计算机”原话决定默认项、接不接受软件工程交本人；三句听来的说法逐条用原件核对；调剂/非全的前后矛盾和二战分歧列入追问。",
+            "evidence_refs": [],
+            "report_location": "p2—p5、p12"
+          },
+          {
+            "id": "actionability",
+            "score": 2,
+            "reason": "三件事有日期（10-22、10-23、11-15）与入口；四张路线卡写了门槛、时间窗、投入、切换条件；出分后回填问卷的检查点明确。",
+            "evidence_refs": [],
+            "report_location": "p3、p9—p12"
+          },
+          {
+            "id": "boundaries",
+            "score": 2,
+            "reason": "档位反复注明是位置不是概率；不替本人决定软件工程与否；“没取到不等于不考”；报考点做法只作参照；不代联系学校。",
+            "evidence_refs": [],
+            "report_location": "p2、p7—p8、p12—p13、p28"
+          },
+          {
+            "id": "summary_access",
+            "score": 2,
+            "reason": "家长只读封面和 p2—p3 能知道报哪、为什么、没考上怎么办、接下来三件事；数字卡和流程图好懂。“最低一档（按人数分四档）的最高分”仍稍绕，但有解释，不扣分。",
+            "evidence_refs": [],
+            "report_location": "封面、p2—p3"
+          },
+          {
+            "id": "layout",
+            "score": 1,
+            "reason": "check_layout 通过，28 页速览图逐页看过、放大 p4，无挤压、拆行、断图。扣 1 分：p4 模考四科条形图第二段只印“62”，没有“英语一”字样（其他三段都有科目名），读者要靠上下文推断；不影响阅读，属小瑕疵。",
+            "evidence_refs": [],
+            "report_location": "p4"
+          }
+        ]
       },
-      {
-        "id": "traceability",
-        "score": 2,
-        "reason": "第三轮唯一扣分点已改好：p16 E033/E034 同出处同段原文只印一次，为整句“3. 复试成绩（300 分）=机考（150 分）+外语听说能力测试（50 分）+综合素质考核（100 分）”，与原件逐字一致。本轮随机抽 4 条官方证据全部逐字命中、哈希一致。附录“其他”前缀、“数据快照版本”“calculations.json”属已登记共用代码问题，不扣分。证据适用范围里残留“见E035”“另记为E075”两处内部编号（读者查不到编号，但所指内容就印在相邻条目），记为可选改进。",
-        "evidence_refs": [
-          "E033",
-          "E034",
+      "pitfalls": [
+        {
+          "item": "没查到写成不存在",
+          "result": "pass",
+          "note": "南航、南邮、江大、南理工当届科目写“没取到，不知道是否同科目”；第 12 节写“没取到不等于没有”，并列出试过的入口。",
+          "location": "p2、p7、p14、p26—p27"
+        },
+        {
+          "item": "群体数字当个人概率",
+          "result": "pass",
+          "note": "录取者分布只用来看模考位置；图注、术语表、免责声明都写“不是上岸概率”。",
+          "location": "p7—p8、p13、p28"
+        },
+        {
+          "item": "经验帖数字做决定",
+          "result": "pass",
+          "note": "“河海线不高”“苏大不看本科”“南航竞争大”只当线索，分别用官方线核对或注明无法核对。",
+          "location": "p3、p5"
+        },
+        {
+          "item": "按编号引用问卷",
+          "result": "pass",
+          "note": "引用画像用原话或内容，全文未见“第几节”指问卷。",
+          "location": "p3—p4、p15"
+        },
+        {
+          "item": "同一事实写两处",
+          "result": "pass",
+          "note": "同一量全篇单值；E033/E034 同一段原文只印一次，分别支撑 300 和 150。",
+          "location": "全篇、p16"
+        },
+        {
+          "item": "会过期的事实",
+          "result": "pass",
+          "note": "证据与规则核实 2026-10-20、复核期限 2026-11-19，在期内；旧年数据逐行标年份。",
+          "location": "p13、p15—p27"
+        },
+        {
+          "item": "八字越界",
+          "result": "pass",
+          "note": "人物未给出生信息，报告无八字内容。",
+          "location": "全篇"
+        },
+        {
+          "item": "委派判断类任务",
+          "result": "pass",
+          "note": "本复核的读报告、取原件、核对和评分都由本会话自己完成，未委派。",
+          "location": "review.json"
+        },
+        {
+          "item": "取页摘要当原文",
+          "result": "pass",
+          "note": "抽查的 6 条摘录都在本机 curl 原件（PDF/HTML）里逐字命中，不是摘要转述。",
+          "location": "p15—p21"
+        }
+      ],
+      "sampled_sources": [
+        {
+          "id": "E013",
+          "claim": "全国初试末日 2026-12-20",
+          "source": "http://www.moe.gov.cn/srcsite/A15/moe_778/s3261/202609/t20260923_1451734.html",
+          "source_url": "http://www.moe.gov.cn/srcsite/A15/moe_778/s3261/202609/t20260923_1451734.html",
+          "original": ".cache/t17-grad-xiaozhou/raw/moe_2027_rules.html",
+          "locator": "第三十六条",
+          "excerpt": "第三十六条 初试方式均为笔试。初试时间为2026年12月19日至20日。",
+          "method": "本机原件 pymupdf/去标签取文字，去空白后逐字检索；原件 SHA256 与取文回执一致；附件链接确认出现在所引来源页的本机 HTML 中",
+          "retrieved_on": "2026-10-20",
+          "matches": true
+        },
+        {
+          "id": "E037",
+          "claim": "苏大复试机考中程序设计占 60%",
+          "source": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+          "source_url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+          "original": ".cache/t13-grad-programs/raw/suda_2027_ml_a.pdf（_b 同文）",
+          "locator": "复试科目参考书目表 018001",
+          "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
+          "method": "本机原件 pymupdf/去标签取文字，去空白后逐字检索；原件 SHA256 与取文回执一致；附件链接确认出现在所引来源页的本机 HTML 中",
+          "retrieved_on": "2026-10-20",
+          "matches": true
+        },
+        {
+          "id": "E039",
+          "claim": "苏大软件工程学硕当届公开招考计划 10",
+          "source": "https://yjs.suda.edu.cn/ea/62/c8386a715362/page.htm",
+          "source_url": "https://yjs.suda.edu.cn/ea/62/c8386a715362/page.htm",
+          "original": ".cache/t13-grad-programs/raw/suda_2027_plan.pdf",
+          "locator": "招生计划表 018 学院行",
+          "excerpt": "018 计算机科学与技术学院 083500 软件工程 全日制 10",
+          "method": "本机原件 pymupdf/去标签取文字，去空白后逐字检索；原件 SHA256 与取文回执一致；附件链接确认出现在所引来源页的本机 HTML 中",
+          "retrieved_on": "2026-10-20",
+          "matches": true,
+          "note": "原件为表格单元，按列拼接后一致。"
+        },
+        {
+          "id": "E122",
+          "claim": "河海计算机学硕联培方向说明（计划 11、推免 6）",
+          "source": "https://gs.hhu.edu.cn/2025/0930/c17279a308103/page.htm",
+          "source_url": "https://gs.hhu.edu.cn/2025/0930/c17279a308103/page.htm",
+          "original": ".cache/t13-grad-programs/raw/hhu_2026_jz.pdf",
+          "locator": "专业目录 081200 备注栏",
+          "excerpt": "报考与中国科学院大学南京学院联合培养请选择01 方向，01 方向单独排名，招生计划为11 人，其中推免计划6 人。",
+          "method": "本机原件 pymupdf/去标签取文字，去空白后逐字检索；原件 SHA256 与取文回执一致；附件链接确认出现在所引来源页的本机 HTML 中",
+          "retrieved_on": "2026-10-20",
+          "matches": true,
+          "note": "原件同句在环境、水利等专业也出现（人数不同），已确认“11 人、推免 6 人”这一处紧接 081200 计算机科学与技术行。"
+        },
+        {
+          "id": "E033",
+          "claim": "苏大计算机学院复试满分 300（第三轮必核）",
+          "source": "https://scst.suda.edu.cn/8d/97/c29555a691607/page.htm",
+          "source_url": "https://scst.suda.edu.cn/8d/97/c29555a691607/page.htm",
+          "original": ".cache/t13-grad-programs/raw/suda_cs_2026_rule.pdf",
+          "locator": "二、3",
+          "excerpt": "3. 复试成绩（300 分）=机考（150 分）+外语听说能力测试（50 分）+综合素质考核（100 分）",
+          "method": "本机原件 pymupdf/去标签取文字，去空白后逐字检索；原件 SHA256 与取文回执一致；附件链接确认出现在所引来源页的本机 HTML 中",
+          "retrieved_on": "2026-10-20",
+          "matches": true,
+          "note": "原件在“（50 分）”后换行，摘录已跨行补全；原句末尾分号未收，不影响意思。"
+        },
+        {
+          "id": "E034",
+          "claim": "苏大计算机学院复试机考 150（第三轮必核）",
+          "source": "https://scst.suda.edu.cn/8d/97/c29555a691607/page.htm",
+          "source_url": "https://scst.suda.edu.cn/8d/97/c29555a691607/page.htm",
+          "original": ".cache/t13-grad-programs/raw/suda_cs_2026_rule.pdf",
+          "locator": "二、3",
+          "excerpt": "3. 复试成绩（300 分）=机考（150 分）+外语听说能力测试（50 分）+综合素质考核（100 分）",
+          "method": "本机原件 pymupdf/去标签取文字，去空白后逐字检索；原件 SHA256 与取文回执一致；附件链接确认出现在所引来源页的本机 HTML 中",
+          "retrieved_on": "2026-10-20",
+          "matches": true,
+          "note": "已与 E033 同为整句；PDF p16 两个数字共用一段原文，不再出现 300=150+50。"
+        }
+      ],
+      "sampling_independent": {
+        "round": 4,
+        "seed": 41027,
+        "method": "python random.Random(41027).sample(候选,4)；候选为 evidence.json 中 grade=官方、availability=available，且编号出现在 narrative.json、case.json、judgment.json 中的 51 条（含 E033、E034）。另把第三轮要求复查的 E033、E034 作为必核项加入记录。",
+        "pool_size": 51,
+        "picked": [
           "E013",
           "E037",
           "E039",
           "E122"
         ],
-        "report_location": "p15—p21"
+        "mandatory": [
+          "E033",
+          "E034"
+        ],
+        "checks_run": {
+          "case_check --stage 10": "阶段 0–10 通过（通过只说明步骤做全、账对得上）",
+          "check_layout": "通过",
+          "verify_report --json": "ok: true",
+          "preview_report": "28 页速览图逐页看过，放大 p4、p16",
+          "dev_wording_search": "全文搜“返工、复现、演示、脚本、门禁、会话、测试、工具”：返工/复现/演示/脚本 0 处（“测试”仅出现在“软件测试与验证”“外语听说能力测试”原文）。另见附录残留“复核时”4 处、“项目首次取数时一次、本报告制作时一次”3 处、“见E035”“另记为E075”各 1 处，均在第 12 节核对材料，来自本案例 evidence.json，记为可选改进。"
+        },
+        "round3_followup": {
+          "E034 摘录截断": "已改好：p16 E033/E034 合印一段整句原文，与原件逐字一致。",
+          "正文“返工”等开发用语": "已改好：p14 改为“计算机学硕、软件工程学硕和计算机技术专硕都读过两次”，p18—p20 适用范围改为“两次独立读图一致”；全文无“返工”。",
+          "可选：p6“个位数”": "已改为“上一届一志愿只录 3 人”。"
+        }
+      },
+      "required_changes": [],
+      "optional_improvements": [
+        "附录证据适用范围里的内部编号“（见E035）”（p20 苏大软件工程方向）和“05联培方向1人另记为E075”（p20 河海普通方向前一届）改成读者能看懂的说法，如“见上方‘苏大计算机学硕当届初试数学科目’一条”“联培方向 1 人单独统计”。",
+        "第 12 节“未取到的信息”里“复核时又查了…”“复核时带来源页再试一次”“复核时未再请求”，以及苏大名单“项目首次取数时一次、本报告制作时一次”是制作过程用语，可改成“10 月 20 日再查…”“两次独立读图”。",
+        "p4 模考条形图第二段补上“英语一”字样（或在段外标注），与其他三段一致。",
+        "附录“其他”前缀、“数据快照版本”“calculations.json”按已登记的共用代码问题另修。"
+      ],
+      "applies_to_git_ref": "26ffa7a"
+    }
+  ],
+  "independent": true,
+  "reviewer": "独立复核会话（Claude Opus 5.5，第五轮定向复核，未参与制作与本轮修订）",
+  "date": "2026-10-21",
+  "rubric": {
+    "items": [
+      {
+        "id": "clarity",
+        "score": 2,
+        "reason": "封面、p3 摘要与流程图一致：默认一志愿苏大计算机学硕（够一够），接受软件工程改报同校软件工程学硕，无稳妥档，保底靠调剂和春招。本轮改动未动主结论。",
+        "evidence_refs": [],
+        "report_location": "封面、p3、p10—p11"
+      },
+      {
+        "id": "traceability",
+        "score": 1,
+        "reason": "多数修订有原文支撑（偶数中位数、复试线定义、11节来源说明）。扣分：①p7第05节把苏大计算机学硕方向名整句删掉，理由是“科目摘录未含方向名”，但E035所指同一原件（苏大2027目录PDF第36页，本机原件c993ab73…哈希一致）明确列出01—06方向，含02机器学习与数据挖掘、03高性能计算与分布式系统、06嵌入式系统；正确做法是补全摘录而不是删。②claim_check.json理由是套话（见抽样记录）。③E010等教育部摘录登记的原件指纹4faca92b…本机找不到，本机.cache副本为33a54508…，文字逐字一致，只记为缺口。",
+        "evidence_refs": [
+          "E035",
+          "E047",
+          "E010",
+          "E016",
+          "E018"
+        ],
+        "report_location": "p7、p15—p22、claim_check.json"
       },
       {
         "id": "reasoning",
         "score": 2,
-        "reason": "每个候选有支持、反对、改判条件（p24—p26）；河海软件工程按小样本只作定性，河海联培不作备选并说明原因；专硕改科目的反证写明。",
-        "evidence_refs": [],
-        "report_location": "p6—p8、p24—p26"
+        "reason": "p8候选表每项仍有支持、反对与代价；专硕、本科就业的反证保留；改判条件在p14、p24—p26。方向卡“计算机学硕”一项改后只剩“待核”没写反证，但候选表已给出反证（只一届分布、计划少2人、机考占一半），不扣分。",
+        "evidence_refs": [
+          "E038",
+          "E041",
+          "E037"
+        ],
+        "report_location": "p7—p8、p14"
       },
       {
         "id": "consistency",
-        "score": 2,
-        "reason": "本复核核对：苏大计算机学硕下四分位 347.75、中位 357.5，模考 349 高于下四分位低于中位 8.5；软件工程学硕中位 349；预算 30000−18000=12000、30000−21600=8400、27000−18000=9000；计划 12−10=2；正文、附录与计算表一致，verify_report ok。",
-        "evidence_refs": [],
-        "report_location": "p2、p7、p11、p21—p23"
+        "score": 1,
+        "reason": "复算：苏大计算机学硕n=12，下四分位347.75、中位357.5；软件工程n=10中位349；偶数取平均的新图注与数字一致；verify_report ok:true。扣分：p14术语“联培”改成“本例河海该联培方向单独排名，划线和培养地点另核”，但p8正文写“普通方向和联培方向单独排名、复试线差了四十多分”，附录E051（01方向303）与E050（02—05方向350）就是分开划的线，术语表与正文、证据不一致。",
+        "evidence_refs": [
+          "E050",
+          "E051",
+          "E055",
+          "E122"
+        ],
+        "report_location": "p8、p14"
       },
       {
         "id": "timeliness",
         "score": 2,
-        "reason": "报名、初试、调剂、录取规则取自 2027 管理规定（核实 2026-10-20，复核期限 2026-11-19，在期内）；旧年线与名单逐行标年份，并写明当届线公布后重算；未取到的当届目录列明入口。",
-        "evidence_refs": [],
-        "report_location": "p9、p13、p26—p27"
+        "reason": "报名、初试、调剂、录取规则取自2027管理规定，复核期限2026-11-19，今天2026-10-21在期内；旧年数字逐行标年份。",
+        "evidence_refs": [
+          "E010",
+          "E012",
+          "E016",
+          "E018"
+        ],
+        "report_location": "p13—p14、附录"
       },
       {
         "id": "personalization",
-        "score": 2,
-        "reason": "模考四科决定可比范围；只留江苏决定候选；“计算机”原话决定默认项、接不接受软件工程交本人；三句听来的说法逐条用原件核对；调剂/非全的前后矛盾和二战分歧列入追问。",
-        "evidence_refs": [],
-        "report_location": "p2—p5、p12"
+        "score": 1,
+        "reason": "模考四科定可比范围、只留江苏、“计算机”原话定默认项仍在。扣分：本人明说“不想做纯理论、硬件和嵌入式”，原句把它对到苏大目录方向（计算机学硕有06嵌入式系统，软件工程有01认知软件理论与方法），这次改成“具体研究方向还要回目录…逐项核对”，原件里现成的对应被删，读者被要求去查报告本可直接给出的内容。",
+        "evidence_refs": [
+          "E035",
+          "E047",
+          "E001"
+        ],
+        "report_location": "p7"
       },
       {
         "id": "actionability",
         "score": 2,
-        "reason": "三件事有日期（10-22、10-23、11-15）与入口；四张路线卡写了门槛、时间窗、投入、切换条件；出分后回填问卷的检查点明确。",
+        "reason": "三件事有日期（10-22、10-23、11-15）和入口；路线卡门槛、时间窗、切换条件齐；新增“报名前问清导师选择和调整规则”是可执行的。",
         "evidence_refs": [],
-        "report_location": "p3、p9—p12"
+        "report_location": "p3、p10—p12"
       },
       {
         "id": "boundaries",
         "score": 2,
-        "reason": "档位反复注明是位置不是概率；不替本人决定软件工程与否；“没取到不等于不考”；报考点做法只作参照；不代联系学校。",
-        "evidence_refs": [],
-        "report_location": "p2、p7—p8、p12—p13、p28"
+        "reason": "“报完名就不能再换学校”改为“建议在报名截止前确认学校”，复试线定义加上单科与资格条件，均去掉了没原文的制度断言；档位仍反复注明不是概率。",
+        "evidence_refs": [
+          "E010",
+          "E030"
+        ],
+        "report_location": "p3、p8、p14"
       },
       {
         "id": "summary_access",
         "score": 2,
-        "reason": "家长只读封面和 p2—p3 能知道报哪、为什么、没考上怎么办、接下来三件事；数字卡和流程图好懂。“最低一档（按人数分四档）的最高分”仍稍绕，但有解释，不扣分。",
+        "reason": "封面与p3摘要不受本轮改动影响，家长只读摘要能知道报哪、为什么、保底怎么办和三件事。",
         "evidence_refs": [],
-        "report_location": "封面、p2—p3"
+        "report_location": "封面、p3"
       },
       {
         "id": "layout",
         "score": 1,
-        "reason": "check_layout 通过，28 页速览图逐页看过、放大 p4，无挤压、拆行、断图。扣 1 分：p4 模考四科条形图第二段只印“62”，没有“英语一”字样（其他三段都有科目名），读者要靠上下文推断；不影响阅读，属小瑕疵。",
+        "reason": "check_layout通过，改动页p7、p8、p14无挤压拆行。扣1分沿用上轮：p5模考条形图第二段仍只印“62”，没有“英语一”字样。",
         "evidence_refs": [],
-        "report_location": "p4"
+        "report_location": "p5、p7、p8、p14"
       }
     ]
   },
@@ -1252,170 +1532,391 @@
     {
       "item": "没查到写成不存在",
       "result": "pass",
-      "note": "南航、南邮、江大、南理工当届科目写“没取到，不知道是否同科目”；第 12 节写“没取到不等于没有”，并列出试过的入口。",
-      "location": "p2、p7、p14、p26—p27"
+      "note": "四校当届科目仍写“没取到不等于不考”；p8新增“没取到”说明未改坏。",
+      "location": "p3、p8、第12节"
     },
     {
       "item": "群体数字当个人概率",
       "result": "pass",
-      "note": "录取者分布只用来看模考位置；图注、术语表、免责声明都写“不是上岸概率”。",
-      "location": "p7—p8、p13、p28"
+      "note": "图注、术语表、第11节都写录取者分布不是上岸概率。",
+      "location": "p8、p14"
     },
     {
       "item": "经验帖数字做决定",
       "result": "pass",
-      "note": "“河海线不高”“苏大不看本科”“南航竞争大”只当线索，分别用官方线核对或注明无法核对。",
-      "location": "p3、p5"
+      "note": "“河海线不高”等仍只当线索并用官方线核对。",
+      "location": "p5"
     },
     {
       "item": "按编号引用问卷",
       "result": "pass",
-      "note": "引用画像用原话或内容，全文未见“第几节”指问卷。",
-      "location": "p3—p4、p15"
+      "note": "本轮改动未引入问卷节号。",
+      "location": "全篇"
     },
     {
       "item": "同一事实写两处",
       "result": "pass",
-      "note": "同一量全篇单值；E033/E034 同一段原文只印一次，分别支撑 300 和 150。",
-      "location": "全篇、p16"
+      "note": "数字单值；联培划线问题是术语表措辞与正文不一致，记在consistency，不是同一数字两处不同。",
+      "location": "p8、p14"
     },
     {
       "item": "会过期的事实",
       "result": "pass",
-      "note": "证据与规则核实 2026-10-20、复核期限 2026-11-19，在期内；旧年数据逐行标年份。",
-      "location": "p13、p15—p27"
+      "note": "规则复核期限2026-11-19，在期内。",
+      "location": "附录"
     },
     {
       "item": "八字越界",
       "result": "pass",
-      "note": "人物未给出生信息，报告无八字内容。",
+      "note": "无出生信息，无八字内容。",
       "location": "全篇"
     },
     {
       "item": "委派判断类任务",
       "result": "pass",
-      "note": "本复核的读报告、取原件、核对和评分都由本会话自己完成，未委派。",
+      "note": "本复核对改动、原件、抽样和评分均由本会话完成，未委派。claim_check填写方的套话问题另列必须修改。",
       "location": "review.json"
     },
     {
       "item": "取页摘要当原文",
       "result": "pass",
-      "note": "抽查的 6 条摘录都在本机 curl 原件（PDF/HTML）里逐字命中，不是摘要转述。",
-      "location": "p15—p21"
+      "note": "苏大目录在本机原件PDF第36页逐字核对；教育部规定第十九、五十九、六十五条在本机HTML逐字核对。",
+      "location": "p7、附录"
     }
   ],
   "sampled_sources": [
     {
-      "id": "E013",
-      "claim": "全国初试末日 2026-12-20",
-      "source": "http://www.moe.gov.cn/srcsite/A15/moe_778/s3261/202609/t20260923_1451734.html",
-      "source_url": "http://www.moe.gov.cn/srcsite/A15/moe_778/s3261/202609/t20260923_1451734.html",
-      "original": ".cache/t17-grad-xiaozhou/raw/moe_2027_rules.html",
-      "locator": "第三十六条",
-      "excerpt": "第三十六条 初试方式均为笔试。初试时间为2026年12月19日至20日。",
-      "method": "本机原件 pymupdf/去标签取文字，去空白后逐字检索；原件 SHA256 与取文回执一致；附件链接确认出现在所引来源页的本机 HTML 中",
-      "retrieved_on": "2026-10-20",
-      "matches": true
-    },
-    {
-      "id": "E037",
-      "claim": "苏大复试机考中程序设计占 60%",
-      "source": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+      "id": "E035",
+      "claim": "苏大计算机学硕当届科目（并核方向）",
       "source_url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
-      "original": ".cache/t13-grad-programs/raw/suda_2027_ml_a.pdf（_b 同文）",
-      "locator": "复试科目参考书目表 018001",
-      "excerpt": "018001 计算机综合实践 考试内容：程序设计（60%）、数据结构（20%）和算法（20%）；考试形式：机考编程题…",
-      "method": "本机原件 pymupdf/去标签取文字，去空白后逐字检索；原件 SHA256 与取文回执一致；附件链接确认出现在所引来源页的本机 HTML 中",
-      "retrieved_on": "2026-10-20",
+      "original": "/Users/xik/.codex/worktrees/check-gaps-2/Zhiqu/skills/zhiqu-shared/originals/c9/c993ab73c42b4f24eb3eefe609a4f721df6a9bac87323d6dc982992bc0a43c0c.pdf（.cache/t13-grad-programs/raw/suda_2027_ml_a.pdf.source.json 回执哈希一致）",
+      "locator": "PDF第36页（印刷页34）",
+      "excerpt": "081200 计算机科学与技术（学术学位）01（全日制）中文信息与自然语言处理 02 机器学习与数据挖掘 03 高性能计算与分布式系统 04 软件形式化与自动推理 05 图像处理与模式分析 06 嵌入式系统 ①101 ②201 英语（一） ③301 数学（一） ④408",
+      "method": "pymupdf取该页文字，去空白逐字检索",
+      "retrieved_on": "2026-10-21",
+      "matches": true,
+      "note": "摘录所引科目吻合；原件同页列出方向名，证明第05节删除方向名属改过头"
+    },
+    {
+      "id": "E047",
+      "claim": "苏大软件工程学硕方向",
+      "source_url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+      "original": "同上PDF",
+      "locator": "PDF第36页",
+      "excerpt": "083500 软件工程（学术学位） 01（全日制）认知软件理论与方法 02 软件测试与验证 03 人机智能接口技术 04 可信软件服务技术 05 现代软件工程技术",
+      "method": "同上",
+      "retrieved_on": "2026-10-21",
       "matches": true
     },
     {
-      "id": "E039",
-      "claim": "苏大软件工程学硕当届公开招考计划 10",
-      "source": "https://yjs.suda.edu.cn/ea/62/c8386a715362/page.htm",
-      "source_url": "https://yjs.suda.edu.cn/ea/62/c8386a715362/page.htm",
-      "original": ".cache/t13-grad-programs/raw/suda_2027_plan.pdf",
-      "locator": "招生计划表 018 学院行",
-      "excerpt": "018 计算机科学与技术学院 083500 软件工程 全日制 10",
-      "method": "本机原件 pymupdf/去标签取文字，去空白后逐字检索；原件 SHA256 与取文回执一致；附件链接确认出现在所引来源页的本机 HTML 中",
-      "retrieved_on": "2026-10-20",
-      "matches": true,
-      "note": "原件为表格单元，按列拼接后一致。"
+      "id": "E036",
+      "claim": "苏大计算机技术专硕考英二数二",
+      "source_url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
+      "original": "同上PDF",
+      "locator": "PDF第36页",
+      "excerpt": "085404 计算机技术（专业学位）…①101 ②204 英语（二） ③302 数学（二） ④408",
+      "method": "同上",
+      "retrieved_on": "2026-10-21",
+      "matches": true
     },
     {
-      "id": "E122",
-      "claim": "河海计算机学硕联培方向说明（计划 11、推免 6）",
-      "source": "https://gs.hhu.edu.cn/2025/0930/c17279a308103/page.htm",
-      "source_url": "https://gs.hhu.edu.cn/2025/0930/c17279a308103/page.htm",
-      "original": ".cache/t13-grad-programs/raw/hhu_2026_jz.pdf",
-      "locator": "专业目录 081200 备注栏",
-      "excerpt": "报考与中国科学院大学南京学院联合培养请选择01 方向，01 方向单独排名，招生计划为11 人，其中推免计划6 人。",
-      "method": "本机原件 pymupdf/去标签取文字，去空白后逐字检索；原件 SHA256 与取文回执一致；附件链接确认出现在所引来源页的本机 HTML 中",
-      "retrieved_on": "2026-10-20",
+      "id": "E010",
+      "claim": "报名10月15日至24日、每日9:00—22:00",
+      "source_url": "http://www.moe.gov.cn/srcsite/A15/moe_778/s3261/202609/t20260923_1451734.html",
+      "original": ".cache/t17-grad-xiaozhou/raw/moe_2027_rules.html（sha256 33a54508…，与evidence登记的4faca92b…不同，后者本机未找到）",
+      "locator": "第十九条",
+      "excerpt": "报名时间为2026年10月15日至10月24日（预报名时间为2026年10月9日至10月12日…），每日9:00—22:00。",
+      "method": "去标签去空白逐字检索",
+      "retrieved_on": "2026-10-21",
       "matches": true,
-      "note": "原件同句在环境、水利等专业也出现（人数不同），已确认“11 人、推免 6 人”这一处紧接 081200 计算机科学与技术行。"
+      "note": "文字一致；该条未写截止后可否修改，支持第01节把“报完名不能换”改为建议"
     },
     {
-      "id": "E033",
-      "claim": "苏大计算机学院复试满分 300（第三轮必核）",
-      "source": "https://scst.suda.edu.cn/8d/97/c29555a691607/page.htm",
-      "source_url": "https://scst.suda.edu.cn/8d/97/c29555a691607/page.htm",
-      "original": ".cache/t13-grad-programs/raw/suda_cs_2026_rule.pdf",
-      "locator": "二、3",
-      "excerpt": "3. 复试成绩（300 分）=机考（150 分）+外语听说能力测试（50 分）+综合素质考核（100 分）",
-      "method": "本机原件 pymupdf/去标签取文字，去空白后逐字检索；原件 SHA256 与取文回执一致；附件链接确认出现在所引来源页的本机 HTML 中",
-      "retrieved_on": "2026-10-20",
-      "matches": true,
-      "note": "原件在“（50 分）”后换行，摘录已跨行补全；原句末尾分号未收，不影响意思。"
+      "id": "E016",
+      "claim": "调剂成绩与科目要求",
+      "source_url": "同上",
+      "original": "同上",
+      "locator": "第五十九条",
+      "excerpt": "调剂考生初试成绩须符合第一志愿报考专业在调入地区的国家分数线…或初试科目与调入专业初试科目相同相近。",
+      "method": "同上",
+      "retrieved_on": "2026-10-21",
+      "matches": true
     },
     {
-      "id": "E034",
-      "claim": "苏大计算机学院复试机考 150（第三轮必核）",
-      "source": "https://scst.suda.edu.cn/8d/97/c29555a691607/page.htm",
-      "source_url": "https://scst.suda.edu.cn/8d/97/c29555a691607/page.htm",
-      "original": ".cache/t13-grad-programs/raw/suda_cs_2026_rule.pdf",
-      "locator": "二、3",
-      "excerpt": "3. 复试成绩（300 分）=机考（150 分）+外语听说能力测试（50 分）+综合素质考核（100 分）",
-      "method": "本机原件 pymupdf/去标签取文字，去空白后逐字检索；原件 SHA256 与取文回执一致；附件链接确认出现在所引来源页的本机 HTML 中",
-      "retrieved_on": "2026-10-20",
-      "matches": true,
-      "note": "已与 E033 同为整句；PDF p16 两个数字共用一段原文，不再出现 300=150+50。"
+      "id": "E018",
+      "claim": "录取一般4月底前完成",
+      "source_url": "同上",
+      "original": "同上",
+      "locator": "第六十五条",
+      "excerpt": "招生单位录取工作一般应在录取当年4月底前完成。",
+      "method": "同上",
+      "retrieved_on": "2026-10-21",
+      "matches": true
     }
   ],
   "sampling_independent": {
-    "round": 4,
-    "seed": 41027,
-    "method": "python random.Random(41027).sample(候选,4)；候选为 evidence.json 中 grade=官方、availability=available，且编号出现在 narrative.json、case.json、judgment.json 中的 51 条（含 E033、E034）。另把第三轮要求复查的 E033、E034 作为必核项加入记录。",
-    "pool_size": 51,
-    "picked": [
-      "E013",
-      "E037",
-      "E039",
-      "E122"
-    ],
-    "mandatory": [
-      "E033",
-      "E034"
-    ],
+    "round": 5,
+    "scope": "定向复核：Codex在基线26ffa7a之后对本例正文的修订",
+    "reviewed_snapshot": {
+      "2027-YJ-S05-report.pdf": "b41c307c5c6559f4bf3e71f6f07ff138a0ae17fd904eb6639d6f5e62ba1a214b",
+      "claim_check.json": "070f743007ff62b4c326ea614cd6bc3a90314b54ffd253c80b595b0bc9af0cc1"
+    },
+    "change_audit": {
+      "source": "/Users/xik/.codex/worktrees/check-gaps-2/Zhiqu/.cache/check-gaps-2/flagship-final-field-audit.md",
+      "items": [
+        {
+          "field": "directions 05 items/0",
+          "verdict": "可接受",
+          "note": "无培养方案原文，“学硕偏研究、学制可能更长”改为待核成立；方向卡少了“反证”二字，候选表有反证。"
+        },
+        {
+          "field": "directions 05 items/1",
+          "verdict": "可接受",
+          "note": "E047支持现代软件工程技术、认知软件理论与方法；“已摘录”是制作用语。"
+        },
+        {
+          "field": "directions 05 items/2",
+          "verdict": "可接受",
+          "note": "E036只证科目；“四科都与当前模考相同”比只看数学一更准确。"
+        },
+        {
+          "field": "directions 05 items/3",
+          "verdict": "可接受",
+          "note": "表述更准确，未删弱有据内容。"
+        },
+        {
+          "field": "evidence 06_same caption",
+          "verdict": "正确",
+          "note": "n=12、n=10为偶数，357.5、349为中间两数平均，复算一致。"
+        },
+        {
+          "field": "judgment 11_terms rows/0",
+          "verdict": "正确",
+          "note": "复试线还须单科和资格，E020/E030支持。"
+        },
+        {
+          "field": "judgment 11_terms rows/2",
+          "verdict": "正确",
+          "note": "同caption。"
+        },
+        {
+          "field": "judgment 11_terms rows/4（联培）",
+          "verdict": "改过头",
+          "note": "E122证单独排名；E050/E051（上一届350/303）、E054/E055证本例是分开划线，正文p8也这样写；“划线另核”与证据和正文冲突。培养地点另核成立。"
+        },
+        {
+          "field": "narrative 01 analysis/0",
+          "verdict": "正确",
+          "note": "教育部规定第十九条只给报名时段，未写提交后不可改；改为建议不新增制度断言。p3检查点“报名已截止，一志愿不再改”仍在，但指截止之后，可接受。"
+        },
+        {
+          "field": "narrative 05 analysis/0",
+          "verdict": "改过头",
+          "note": "苏大目录原件PDF第36页列出计算机学硕六个方向（含06嵌入式系统）和软件工程五个方向，旧句的方向清单有原文支持，只是E035摘录用省略号略去；应补摘录而不是删。删“学硕毕业去企业做开发很常见”“选导师时避开即可”成立。新句“已摘录初试科目”是制作用语。"
+        },
+        {
+          "field": "narrative 05 analysis/1",
+          "verdict": "可接受但偏空",
+          "note": "本例无就业证据，删除成立；改后“前景只用来排除风险”后面已无前景内容，“向目标学校和用人单位核对如何展示”空泛。可引用job-market.md统计局2026-09-15信息软件业就业增加的信号。"
+        },
+        {
+          "field": "narrative 05 lead",
+          "verdict": "可接受",
+          "note": "本例证据未含专硕培养定位；教育部规定第二条只泛述两类人才，未直接对应。"
+        },
+        {
+          "field": "narrative 06 analysis/2",
+          "verdict": "可接受，略偏弱",
+          "note": "本例已定档三项中位数比复试线高11—23分，原“通常高不少”在本例样本内大体成立；改成“差距各不相同”不算错。"
+        },
+        {
+          "field": "narrative 11 lead",
+          "verdict": "正确",
+          "note": "区分学校摘录与本人模考，不再声称仓库留有原件。"
+        },
+        {
+          "field": "evidence_refs 补引用（E002、E016、E020、E030、E033、E035、E057、E122）",
+          "verdict": "正确",
+          "note": "所补编号与句子内容相符。"
+        }
+      ]
+    },
+    "claim_check_sample": {
+      "seed": 20261021,
+      "method": "python random.Random(20261021).sample(range(len(pool)),25)；pool为claim_check.json中review.kind不是“结构标签”“建议”的条目（事实95、计算140、个人登记40，共275），按文件顺序编号",
+      "pool_size": 275,
+      "picked": [
+        {
+          "claim_id": "C9ec6687d5",
+          "text": "河海软件工程：上一届3人（统考计划6人）、前一届10人；模考高于两届录取者大多数",
+          "mine": "支持",
+          "note": "计数与E067一致；2026三人中两人低于349，2025上四分位337<349。同科目依据E057范围注明081200与083500科目相同。"
+        },
+        {
+          "claim_id": "Cb6370127c",
+          "text": "都是够一够",
+          "mine": "支持",
+          "note": "349≥347.75和334，只一届分布，按规则够一够。"
+        },
+        {
+          "claim_id": "Cc90a3c614",
+          "text": "河海联培上一届5人、前一届1人",
+          "mine": "支持",
+          "note": "计数一致。"
+        },
+        {
+          "claim_id": "Cfd4ca52ca",
+          "text": "录取者分数、当届科目没取到",
+          "mine": "支持",
+          "note": "E095/E103登记取不到原因。"
+        },
+        {
+          "claim_id": "C3c624a84e",
+          "text": "314",
+          "mine": "支持",
+          "note": "hhu25联培n=1，中位314。"
+        },
+        {
+          "claim_id": "C216200e75",
+          "text": "350",
+          "mine": "支持",
+          "note": "hhu26普通方向最低350。"
+        },
+        {
+          "claim_id": "C788a5bfb6",
+          "text": "只要计算机就报苏大计算机；接受软件工程苏大软件工程位置更好；河海软件工程人数太少",
+          "mine": "支持",
+          "note": "与分位计算和不定档规则一致。"
+        },
+        {
+          "claim_id": "Ccd36c05f7",
+          "text": "南航学硕340、330；专硕341、341",
+          "mine": "支持",
+          "note": "E080—E083逐值一致。"
+        },
+        {
+          "claim_id": "C069e2f35a",
+          "text": "南邮已试入口",
+          "mine": "支持",
+          "note": "E095原因描述一致。"
+        },
+        {
+          "claim_id": "C242387c7e",
+          "text": "模考349放进六校看，没有数据可靠的相对稳妥档",
+          "mine": "支持",
+          "note": "无一项两届都不低于中位数。"
+        },
+        {
+          "claim_id": "C67a7ea3e4",
+          "text": "328",
+          "mine": "支持",
+          "note": "苏大软件工程最低328。"
+        },
+        {
+          "claim_id": "C4b8c224cf",
+          "text": "当天22:00关闭",
+          "mine": "支持",
+          "note": "E017每日9:00—22:00。"
+        },
+        {
+          "claim_id": "Cd2d39bb2d",
+          "text": "模考349及四科",
+          "mine": "支持",
+          "note": "E002本人原话。"
+        },
+        {
+          "claim_id": "C72cb50048",
+          "text": "每年最多30,000元，学费还没查",
+          "mine": "支持",
+          "note": "本人登记；E121河海简章未列学费金额。"
+        },
+        {
+          "claim_id": "C564f238e2",
+          "text": "数学一离满分最远（45分），英语一和政治差不多",
+          "mine": "支持",
+          "note": "150−105=45；62与63。"
+        },
+        {
+          "claim_id": "Cb4ac5f530",
+          "text": "8,400元",
+          "mine": "支持",
+          "note": "30000−21600。"
+        },
+        {
+          "claim_id": "C051e23680",
+          "text": "只取到两届前的线",
+          "mine": "支持",
+          "note": "南理工E110/E111为前一届，E112上一届未取到。"
+        },
+        {
+          "claim_id": "Cfebc48784",
+          "text": "机构卷难度与真题的关系没核过，模考不是初试成绩",
+          "mine": "支持",
+          "note": "E002范围注明。"
+        },
+        {
+          "claim_id": "Cf0b99cdc9",
+          "text": "报名截止10月24日22:00",
+          "mine": "支持",
+          "note": "E010、E017。"
+        },
+        {
+          "claim_id": "C6ebfa979e",
+          "text": "349",
+          "mine": "支持",
+          "note": "mock_total。"
+        },
+        {
+          "claim_id": "Ca499db264",
+          "text": "365",
+          "mine": "支持",
+          "note": "hhu25电子信息中位365。"
+        },
+        {
+          "claim_id": "Cefc651a7c",
+          "text": "复试没过转调剂；录取一般4月底前完成",
+          "mine": "支持",
+          "note": "E018第六十五条逐字一致。"
+        },
+        {
+          "claim_id": "C18c2bb53b",
+          "text": "288",
+          "mine": "支持",
+          "note": "hhu25软件工程最低288。"
+        },
+        {
+          "claim_id": "C88a16a02e",
+          "text": "公开招考比上一届少，只有一届分布",
+          "mine": "支持",
+          "note": "E038当届10、E041上一届12。"
+        },
+        {
+          "claim_id": "C7034d32a3",
+          "text": "动态加载的目录，你本人登录研招网就能查到",
+          "mine": "部分支持",
+          "note": "E085只证南航目录是动态查询页取不到；“本人登录研招网就能查到”无摘录支持，应写成建议或补证据。"
+        }
+      ],
+      "agreement": "24/25（96%）与原判定一致；唯一不一致为C7034d32a3（原判支持，本复核判部分支持）",
+      "boilerplate": "25/25（100%）理由是三类统一模板（计算类“已对照calculations.json与E042/E045及河海匿名初试分数组…”、事实类“逐句对照所列官方摘录及其年份/方向范围…”、个人登记类“已逐句对照profile_parse.json本人字段原话…”），只附机械的绑定值后缀，未针对该句写出对照内容；如第2条“都是够一够”的理由仍引E042/E045和生活费12个月口径。全清单610条只有18种去后缀理由，前四种覆盖572条。违反claim-check.md“不得用…统一套话批量替代语义判断”。"
+    },
     "checks_run": {
-      "case_check --stage 10": "阶段 0–10 通过（通过只说明步骤做全、账对得上）",
+      "case_check --stage 10": "阶段 0–10 通过。通过只说明步骤做全、账对得上；判断与来源仍须复核。",
       "check_layout": "通过",
       "verify_report --json": "ok: true",
-      "preview_report": "28 页速览图逐页看过，放大 p4、p16",
-      "dev_wording_search": "全文搜“返工、复现、演示、脚本、门禁、会话、测试、工具”：返工/复现/演示/脚本 0 处（“测试”仅出现在“软件测试与验证”“外语听说能力测试”原文）。另见附录残留“复核时”4 处、“项目首次取数时一次、本报告制作时一次”3 处、“见E035”“另记为E075”各 1 处，均在第 12 节核对材料，来自本案例 evidence.json，记为可选改进。"
-    },
-    "round3_followup": {
-      "E034 摘录截断": "已改好：p16 E033/E034 合印一段整句原文，与原件逐字一致。",
-      "正文“返工”等开发用语": "已改好：p14 改为“计算机学硕、软件工程学硕和计算机技术专硕都读过两次”，p18—p20 适用范围改为“两次独立读图一致”；全文无“返工”。",
-      "可选：p6“个位数”": "已改为“上一届一志愿只录 3 人”。"
+      "pages_read": "p1、p3、p5、p7、p8、p10、p14 文字层；p5、p7 看图"
     }
   },
-  "required_changes": [],
+  "required_changes": [
+    "p7第05节第五段（narrative.json /sections/05/analysis/0）：把苏大目录原件PDF第36页的方向写回——计算机学硕01—06（含02机器学习与数据挖掘、03高性能计算与分布式系统、06嵌入式系统），软件工程学硕01—05；同时补全E035/E047摘录（不要用省略号略去方向名），并把它和本人“不想做纯理论、硬件和嵌入式”对上；删去“已摘录”这类制作用语（p7两处）。“选导师时避开即可”“毕业去企业做开发很常见”的删除保留。",
+    "p14术语“联培”（judgment.json /report_blocks/11_terms/content/rows/4/1）：写回本例河海01联培方向单独排名、单独划复试线（上一届303，普通方向350，见E050/E051），只把培养地点列为待核，与p8正文一致。",
+    "claim_check.json：由未参与写作的会话对275条事实、计算、个人登记逐句写具体理由（说清对照了哪个数、哪句原文、范围是否一致），不得用统一模板；C7034d32a3“你本人登录研招网就能查到”改为不带事实断言的建议或补证据后重新抽取复核；改完重新bind并复跑case_check --stage 10。"
+  ],
   "optional_improvements": [
-    "附录证据适用范围里的内部编号“（见E035）”（p20 苏大软件工程方向）和“05联培方向1人另记为E075”（p20 河海普通方向前一届）改成读者能看懂的说法，如“见上方‘苏大计算机学硕当届初试数学科目’一条”“联培方向 1 人单独统计”。",
-    "第 12 节“未取到的信息”里“复核时又查了…”“复核时带来源页再试一次”“复核时未再请求”，以及苏大名单“项目首次取数时一次、本报告制作时一次”是制作过程用语，可改成“10 月 20 日再查…”“两次独立读图”。",
-    "p4 模考条形图第二段补上“英语一”字样（或在段外标注），与其他三段一致。",
-    "附录“其他”前缀、“数据快照版本”“calculations.json”按已登记的共用代码问题另修。"
+    "p7第05节第六段：本例无就业证据，可引用job-market.md统计局2026-09-15“信息传输、软件和信息技术服务业就业人数明显增加”（注明只是一个月信号），替换空泛的“向目标学校和用人单位核对如何展示”。",
+    "p8第06节：可写出本例三项已定档候选中位数比复试线高11—23分，代替“差距各不相同”。",
+    "evidence.json中教育部规定（E010等）登记的原件指纹4faca92b…本机未找到；本机.cache副本为33a54508…，文字一致。宜说明两次取文差异或统一指纹。",
+    "上轮遗留：p5模考条形图第二段补“英语一”；附录“见E035”“另记为E075”（p22）与“复核时”（p28）制作用语。"
   ],
   "previous_approval": {
     "git_ref": "26ffa7a",
