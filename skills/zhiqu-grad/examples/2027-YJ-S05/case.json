@@ -786,6 +786,26 @@
         ],
         "label": "南京租房时全年生活费",
         "rounding": 0
+      },
+      {
+        "output": "suda_fee_left",
+        "algorithm": "difference",
+        "inputs": [
+          "{{c:/nonliving_ceiling}}",
+          "{{e:E124#/value}}"
+        ],
+        "label": "交完苏大学硕学费后，留给住宿等平常还剩多少",
+        "rounding": 0
+      },
+      {
+        "output": "suda_fee_left_reserve",
+        "algorithm": "difference",
+        "inputs": [
+          "{{c:/suda_fee_left}}",
+          "{{p:/fields/8/value/reserve}}"
+        ],
+        "label": "交完苏大学硕学费、再留出应急金后还剩多少",
+        "rounding": 0
       }
     ],
     "scenarios": [
@@ -1036,6 +1056,8 @@
     "c:/hhu25_0854_min": "分",
     "c:/hhu25_0854_max": "分",
     "c:/hhu25_0854_median": "分",
-    "k:/budget/annual_limit": "元/年"
+    "k:/budget/annual_limit": "元/年",
+    "c:/suda_fee_left": "元/年",
+    "c:/suda_fee_left_reserve": "元/年"
   }
 }

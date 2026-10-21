@@ -82,5 +82,7 @@
   "after_reserve": 27000,
   "higher_living": 21600,
   "higher_living_ceiling": 8400,
-  "reserve_ceiling": 9000
+  "reserve_ceiling": 9000,
+  "suda_fee_left": 4000,
+  "suda_fee_left_reserve": 1000
 }

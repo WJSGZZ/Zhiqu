@@ -2,15 +2,15 @@
   "schema_version": 1,
   "case_id": "2027-YJ-S05",
   "source_sha256": {
-    "case.json": "1a51301a55f90f0f9050e20e797c2af6d8a6ed6565967e5c1c900354057ba336",
+    "case.json": "8234650be7d95e335a0bb75feae8d45efafc6eabdb2e922a1dbe8d2b3ccde955",
     "profile_parse.json": "26d77c111bb043cbc6cca5e761f0272ae369b77043836f7ff4e039a5759d96d9",
-    "directions.json": "ed1d7e11f2d507ff8507e67a0d3b860efab243cd6ccf34118f18d5a93864ffcb",
+    "directions.json": "141ba17063943d6893342f321196523fd0eaf4c8c102cafee5b91cfc3a254d3a",
     "rules_check.json": "cbbb85f76a2388cb4c279d7c299b43f5eb46e7d5ee41846678608dbfb82f5925",
-    "candidates.json": "2bc9dcf3d2e44751d9f4083f94dc72c138ab59890c622509897724ea70ef38c8",
-    "evidence.json": "63ebbc686dedad8a6731f55d400c9ca673d4e93259d36b58536059184f0bd4ca",
-    "calculations.json": "d9da96c3e2546b239e866d1f561370c589b48febf5532f68a88226d2ccc1c368",
-    "judgment.json": "61738703958ec71ba599c15bdd4052f0edf8875f601d2cab9fbb93118a727e7c",
-    "narrative.json": "7e5d7b4a378f2f5e8bf38dcb8dea0ae04c9265d24e62102161a20b0bb00d1021",
+    "candidates.json": "8e98bc286da360aa16404074c976dbb3dabb53e4e98135a87890451b5093a2bc",
+    "evidence.json": "266347df93875b14b6f5d9715d08f2289e9f7bb68c06ed835f60791df485aac1",
+    "calculations.json": "e78d090f8eaefcc1d16696d737b78ea95ae2dc4301377da12c1126e2b4ddeb23",
+    "judgment.json": "688290b5ab8cf46141d9f8c7a02dd24e7d741fe6afd1e0a19085e15d65ebda34",
+    "narrative.json": "aec14e8fbc9bf4e2e1629d0313a26962a2a6741906f45816d3ad23cfbd9a921e",
     "profile.json": "af232e95b42de1286681d5b04d706bbd8d16d3dd86cfe304a7d87e5a6bfcab88",
     "profile-supplement.txt": "952368202eeb2cd031c6c0d52212442dca0faaadcd6c99828f951e50ba15d704"
   },
@@ -1438,6 +1438,18 @@
       "display": "12 月 20 日"
     },
     {
+      "location": "09.lead.0",
+      "ref": "{{c:/suda_fee_left|comma}}",
+      "value": 4000,
+      "display": "4,000"
+    },
+    {
+      "location": "09.lead.0",
+      "ref": "{{c:/suda_fee_left_reserve|comma}}",
+      "value": 1000,
+      "display": "1,000"
+    },
+    {
       "location": "09.budget_chart.1",
       "ref": "{{k:/budget/annual_limit}}",
       "value": 30000,
@@ -1546,6 +1558,30 @@
       "display": "8,000"
     },
     {
+      "location": "09.analysis.3",
+      "ref": "{{c:/suda_fee_left|comma}}",
+      "value": 4000,
+      "display": "4,000"
+    },
+    {
+      "location": "09.analysis.3",
+      "ref": "{{p:/fields/8/value/reserve|comma}}",
+      "value": 3000,
+      "display": "3,000"
+    },
+    {
+      "location": "09.analysis.3",
+      "ref": "{{c:/suda_fee_left_reserve|comma}}",
+      "value": 1000,
+      "display": "1,000"
+    },
+    {
+      "location": "09.analysis.3",
+      "ref": "{{c:/suda_fee_left_reserve|comma}}",
+      "value": 1000,
+      "display": "1,000"
+    },
+    {
       "location": "11.assumptions.3",
       "ref": "{{p:/fields/11/value/政治}}",
       "value": 63,
@@ -1613,15 +1649,21 @@
     },
     {
       "location": "11.assumptions.3",
-      "ref": "{{c:/higher_living_ceiling|comma}}",
-      "value": 8400,
-      "display": "8,400"
+      "ref": "{{e:E124#/value|comma}}",
+      "value": 8000,
+      "display": "8,000"
     },
     {
       "location": "11.assumptions.3",
-      "ref": "{{c:/reserve_ceiling|comma}}",
-      "value": 9000,
-      "display": "9,000"
+      "ref": "{{c:/suda_fee_left|comma}}",
+      "value": 4000,
+      "display": "4,000"
+    },
+    {
+      "location": "11.assumptions.3",
+      "ref": "{{c:/suda_fee_left_reserve|comma}}",
+      "value": 1000,
+      "display": "1,000"
     },
     {
       "location": "11.terms.5",
@@ -1637,9 +1679,9 @@
     }
   ],
   "artifacts": {
-    "report.md": "401d68bcc28b9d965152d2464b0cdcd438e23c6bfc9dbc518837fd29a293124a",
-    "report.html": "e5962b5b0edc42e63618eb063a03c6515e9c1d3ae5697f32ca666b6051f359a1",
-    "2027-YJ-S05-report.pdf": "907e4b5baef61139a79a7e823981a5a60c0b05433c40d308bf1dc55047e869e2"
+    "report.md": "39df54cb21af839ef8820d334a7da5f2bfb851e6508bdad3f46c3edbf80bc115",
+    "report.html": "3f5e84ed361e9353571b040ad1549127e97f10ffda62543b71a26088ac9102bc",
+    "2027-YJ-S05-report.pdf": "a169c5bf6eab4abdfc49f2e05e79a8a704aaf6f6fa1b55f1c4818a7831d58697"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "authoring": {

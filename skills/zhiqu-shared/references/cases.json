@@ -350,9 +350,9 @@
       "report_versions": [
         {
           "file": "skills/zhiqu-career/examples/2027-QZ-S05/2027-QZ-S05-report.pdf",
-          "generated_at": "2026-10-21T20:26:32+08:00",
+          "generated_at": "2026-10-21T20:49:06+08:00",
           "version": "1",
-          "sha256": "ed8469f02d0ccb73a3a0cba2aaef07f2d73a952f50b2f81400a696ba8f8a679a",
+          "sha256": "a6a269bab24a25276b61716b852b55db8278305234c10ba5387de892e1123c36",
           "profile_sha256": "f8c7a4b076a64c168d303710ea8836b70a79ffe5d53ce7521045bfe4ae4c2d1f"
         }
       ]
@@ -486,9 +486,9 @@
       "report_versions": [
         {
           "file": "skills/zhiqu-grad/examples/2027-YJ-S05/2027-YJ-S05-report.pdf",
-          "generated_at": "2026-10-21T20:25:10+08:00",
+          "generated_at": "2026-10-21T20:48:04+08:00",
           "version": "1",
-          "sha256": "907e4b5baef61139a79a7e823981a5a60c0b05433c40d308bf1dc55047e869e2",
+          "sha256": "a169c5bf6eab4abdfc49f2e05e79a8a704aaf6f6fa1b55f1c4818a7831d58697",
           "profile_sha256": "af232e95b42de1286681d5b04d706bbd8d16d3dd86cfe304a7d87e5a6bfcab88"
         }
       ]
