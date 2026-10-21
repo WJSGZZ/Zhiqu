@@ -6,7 +6,7 @@
 <title>求职 · 自我盘点</title>
 <script src="https://cdn.jsdelivr.net/npm/lunar-javascript@1.7.7/lunar.js" defer></script>
 <link rel="icon" type="image/png" href="assets/logo-192.png">
-<link rel="stylesheet" href="assets/questionnaire.css?v=20261020a">
+<link rel="stylesheet" href="assets/questionnaire.css?v=20261021a">
 </head>
 <body data-profile-kind="career">
 
@@ -77,19 +77,19 @@
           <label class="opt"><input type="radio" name="degree_auth" value="未办理"><span class="box">未办理</span></label>
           <label class="opt"><input type="radio" name="degree_auth" value="不清楚"><span class="box">不清楚</span></label></div></div></div>
       <div data-show-when="degree=硕士|博士"><div data-profile-id="bachelor_tier" class="q" ><div class="q-label">第一学历的本科情况<span class="opt-note">（选填）</span></div><div class="minilabel">本科学校层次</div>
-        <div class="opts stack"><label class="opt"><input type="radio" name="bachelor_tier" value="985"><span class="box">985</span></label><label class="opt"><input type="radio" name="bachelor_tier" value="211"><span class="box">211</span></label><label class="opt"><input type="radio" name="bachelor_tier" value="双一流（非985/211）"><span class="box">双一流（非985/211）</span></label><label class="opt"><input type="radio" name="bachelor_tier" value="普通公办本科"><span class="box">普通公办本科</span></label><label class="opt"><input type="radio" name="bachelor_tier" value="民办或独立学院"><span class="box">民办或独立学院</span></label><label class="opt"><input type="radio" name="bachelor_tier" value="境外或中外合作"><span class="box">境外或中外合作</span></label><label class="opt"><input type="radio" name="bachelor_tier" value="开放大学或成人高校"><span class="box">开放大学或成人高校</span></label><label class="opt"><input type="radio" name="bachelor_tier" value="没有本科经历"><span class="box">没有本科经历</span></label><label class="opt"><input type="radio" name="bachelor_tier" value="不清楚"><span class="box">不清楚</span></label></div><div class="minilabel">本科专业</div>
+        <div class="opts stack"><label class="opt"><input type="radio" name="bachelor_tier" value="985"><span class="box">985</span></label><label class="opt"><input type="radio" name="bachelor_tier" value="211"><span class="box">211</span></label><label class="opt"><input type="radio" name="bachelor_tier" value="双一流（非985/211）"><span class="box">双一流（非985/211）</span></label><label class="opt"><input type="radio" name="bachelor_tier" value="普通公办本科"><span class="box">普通公办本科</span></label><label class="opt"><input type="radio" name="bachelor_tier" value="民办或独立学院"><span class="box">民办或独立学院</span></label><label class="opt"><input type="radio" name="bachelor_tier" value="境外或中外合作"><span class="box">境外或中外合作</span></label><label class="opt"><input type="radio" name="bachelor_tier" value="开放大学或成人高校"><span class="box">开放大学或成人高校</span></label><label class="opt"><input type="radio" name="bachelor_tier" value="没有本科经历"><span class="box">没有本科经历</span></label><label class="opt"><input type="radio" name="bachelor_tier" value="不清楚"><span class="box">不清楚</span></label></div><div data-hide-when="bachelor_tier=没有本科经历"><div class="minilabel">本科专业</div>
         <input type="text" id="bachelor_major" placeholder="本科专业全名"><div class="minilabel">本科是否全日制统招</div><div class="opts stack"><label class="opt"><input type="radio" name="bachelor_fulltime" value="是，全日制统招"><span class="box">是，全日制统招</span></label>
           <label class="opt"><input type="radio" name="bachelor_fulltime" value="不是全日制统招"><span class="box">不是全日制统招</span></label>
           <label class="opt"><input type="radio" name="bachelor_fulltime" value="不清楚"><span class="box">不清楚</span></label></div><div class="minilabel">本科是否专升本</div><div class="opts"><label class="opt"><input type="radio" name="bachelor_upgrade" value="普通专升本"><span class="box">普通专升本</span></label>
           <label class="opt"><input type="radio" name="bachelor_upgrade" value="不是专升本"><span class="box">不是专升本</span></label>
-          <label class="opt"><input type="radio" name="bachelor_upgrade" value="不清楚"><span class="box">不清楚</span></label></div></div></div>
+          <label class="opt"><input type="radio" name="bachelor_upgrade" value="不清楚"><span class="box">不清楚</span></label></div></div></div></div>
 
       <div data-profile-id="grad_time" class="q req" ><div class="q-label">毕业证取得或预计取得年月</div>
         <input type="month" id="grad_time"></div>
       <div data-profile-id="degree_time" class="q" ><div class="q-label">学位证取得或预计取得年月<span class="opt-note">（选填）</span></div>
-        <input data-profile-label="学位证取得或预计年月" type="month" id="degree_time"><div class="opts"><label class="opt"><input data-profile-label="学位证状态" type="radio" name="degree_time_status" value="已明确年月"><span class="box">已明确年月</span></label>
+        <div class="opts"><label class="opt"><input data-profile-label="学位证状态" type="radio" name="degree_time_status" value="已明确年月"><span class="box">已明确年月</span></label>
           <label class="opt"><input data-profile-label="学位证状态" type="radio" name="degree_time_status" value="不授学位"><span class="box">不授学位</span></label>
-          <label class="opt"><input data-profile-label="学位证状态" type="radio" name="degree_time_status" value="不清楚"><span class="box">不清楚</span></label></div></div>
+          <label class="opt"><input data-profile-label="学位证状态" type="radio" name="degree_time_status" value="不清楚"><span class="box">不清楚</span></label></div><div data-show-when="degree_time_status=已明确年月"><input data-profile-label="学位证取得或预计年月" type="month" id="degree_time"></div></div>
 
       <div data-profile-id="education_path" class="q"><div class="q-label">学历取得方式与教育经历<span class="opt-note">（选填）</span></div>
         <input type="text" id="education_path" placeholder="例如：普通高考本科；普通专升本；自考；境外学历。多段学历请写各段专业、学位与获证时间，不确定可留空"></div>
@@ -252,67 +252,67 @@
           <label class="opt"><input type="checkbox" name="certs" value="专业技术资格或职称"><span class="box">专业技术资格或职称</span></label>
           <label class="opt"><input type="checkbox" name="certs" value="其他"><span class="box">其他</span></label>
           <label class="opt"><input type="checkbox" name="certs" value="暂时没有"><span class="box">暂时没有</span></label></div>
-        <input data-profile-label="证书补充" type="text" id="certs_detail" placeholder="其他已有证书：逐项写名称、等级、已取得/在考/计划、取得或预计年月"></div>
+        <div data-hide-when="certs=暂时没有"><input data-profile-label="证书补充" type="text" id="certs_detail" placeholder="其他已有证书：逐项写名称、等级、已取得/在考/计划、取得或预计年月"></div></div>
 <div data-show-when="certs=医护类执业资格"><div data-profile-id="cert_medical_detail" class="q" ><div class="q-label">医护类执业资格情况<span class="opt-note">（选填）</span></div>
         <input type="text" id="cert_medical_detail" placeholder="证书名称与等级"><div class="opts"><label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_medical_status" value="已取得"><span class="box">已取得</span></label>
           <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_medical_status" value="在考"><span class="box">在考</span></label>
           <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_medical_status" value="计划"><span class="box">计划</span></label></div>
-        <input data-profile-label="取得或预计年月" type="month" id="cert_medical_month"></div></div>
+        <div data-show-when="cert_medical_status=已取得|在考|计划"><div class="minilabel"><span data-show-when="cert_medical_status=已取得">取得时间</span><span data-show-when="cert_medical_status=在考|计划">预计考试时间</span></div><input data-profile-label="取得或预计年月" type="month" id="cert_medical_month"></div></div></div>
 <div data-show-when="certs=法律职业资格"><div data-profile-id="cert_law_detail" class="q" ><div class="q-label">法律职业资格情况<span class="opt-note">（选填）</span></div>
         <input type="text" id="cert_law_detail" placeholder="证书名称与等级"><div class="opts"><label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_law_status" value="已取得"><span class="box">已取得</span></label>
           <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_law_status" value="在考"><span class="box">在考</span></label>
           <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_law_status" value="计划"><span class="box">计划</span></label></div>
-        <input data-profile-label="取得或预计年月" type="month" id="cert_law_month"></div></div>
+        <div data-show-when="cert_law_status=已取得|在考|计划"><div class="minilabel"><span data-show-when="cert_law_status=已取得">取得时间</span><span data-show-when="cert_law_status=在考|计划">预计考试时间</span></div><input data-profile-label="取得或预计年月" type="month" id="cert_law_month"></div></div></div>
 <div data-show-when="certs=职业技能等级证书"><div data-profile-id="cert_vocational_detail" class="q" ><div class="q-label">职业技能等级证书情况<span class="opt-note">（选填）</span></div>
         <input type="text" id="cert_vocational_detail" placeholder="证书名称与等级"><div class="opts"><label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_vocational_status" value="已取得"><span class="box">已取得</span></label>
           <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_vocational_status" value="在考"><span class="box">在考</span></label>
           <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_vocational_status" value="计划"><span class="box">计划</span></label></div>
-        <input data-profile-label="取得或预计年月" type="month" id="cert_vocational_month"></div></div>
+        <div data-show-when="cert_vocational_status=已取得|在考|计划"><div class="minilabel"><span data-show-when="cert_vocational_status=已取得">取得时间</span><span data-show-when="cert_vocational_status=在考|计划">预计考试时间</span></div><input data-profile-label="取得或预计年月" type="month" id="cert_vocational_month"></div></div></div>
 <div data-show-when="certs=驾驶证"><div data-profile-id="cert_driving_detail" class="q" ><div class="q-label">驾驶证情况<span class="opt-note">（选填）</span></div>
         <input type="text" id="cert_driving_detail" placeholder="证书名称与等级"><div class="opts"><label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_driving_status" value="已取得"><span class="box">已取得</span></label>
           <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_driving_status" value="在考"><span class="box">在考</span></label>
           <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_driving_status" value="计划"><span class="box">计划</span></label></div>
-        <input data-profile-label="取得或预计年月" type="month" id="cert_driving_month"></div></div>
+        <div data-show-when="cert_driving_status=已取得|在考|计划"><div class="minilabel"><span data-show-when="cert_driving_status=已取得">取得时间</span><span data-show-when="cert_driving_status=在考|计划">预计考试时间</span></div><input data-profile-label="取得或预计年月" type="month" id="cert_driving_month"></div></div></div>
 <div data-show-when="certs=会计或财经类证书"><div data-profile-id="cert_finance_detail" class="q" ><div class="q-label">会计或财经类证书情况<span class="opt-note">（选填）</span></div>
         <input type="text" id="cert_finance_detail" placeholder="证书名称与等级"><div class="opts"><label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_finance_status" value="已取得"><span class="box">已取得</span></label>
           <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_finance_status" value="在考"><span class="box">在考</span></label>
           <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_finance_status" value="计划"><span class="box">计划</span></label></div>
-        <input data-profile-label="取得或预计年月" type="month" id="cert_finance_month"></div></div>
+        <div data-show-when="cert_finance_status=已取得|在考|计划"><div class="minilabel"><span data-show-when="cert_finance_status=已取得">取得时间</span><span data-show-when="cert_finance_status=在考|计划">预计考试时间</span></div><input data-profile-label="取得或预计年月" type="month" id="cert_finance_month"></div></div></div>
 <div data-show-when="certs=计算机等级或编程"><div data-profile-id="cert_computing_detail" class="q" ><div class="q-label">计算机等级或编程情况<span class="opt-note">（选填）</span></div>
         <input type="text" id="cert_computing_detail" placeholder="证书名称与等级"><div class="opts"><label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_computing_status" value="已取得"><span class="box">已取得</span></label>
           <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_computing_status" value="在考"><span class="box">在考</span></label>
           <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_computing_status" value="计划"><span class="box">计划</span></label></div>
-        <input data-profile-label="取得或预计年月" type="month" id="cert_computing_month"></div></div>
+        <div data-show-when="cert_computing_status=已取得|在考|计划"><div class="minilabel"><span data-show-when="cert_computing_status=已取得">取得时间</span><span data-show-when="cert_computing_status=在考|计划">预计考试时间</span></div><input data-profile-label="取得或预计年月" type="month" id="cert_computing_month"></div></div></div>
       <div data-show-when="certs=普通话等级"><div data-profile-id="cert_mandarin_detail" class="q" ><div class="q-label">普通话等级详情<span class="opt-note">（选填）</span></div>
         <input type="text" id="cert_mandarin_detail" placeholder="名称、等级；教师资格请写学段和学科"><div class="opts"><label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_mandarin_status" value="已取得"><span class="box">已取得</span></label>
           <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_mandarin_status" value="在考"><span class="box">在考</span></label>
-          <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_mandarin_status" value="计划"><span class="box">计划</span></label></div><div class="minilabel">取得或预计取得年月</div>
-        <input data-profile-label="取得或预计年月" type="month" id="cert_mandarin_month"></div></div>
+          <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_mandarin_status" value="计划"><span class="box">计划</span></label></div>
+        <div data-show-when="cert_mandarin_status=已取得|在考|计划"><div class="minilabel"><span data-show-when="cert_mandarin_status=已取得">取得时间</span><span data-show-when="cert_mandarin_status=在考|计划">预计考试时间</span></div><input data-profile-label="取得或预计年月" type="month" id="cert_mandarin_month"></div></div></div>
       <div data-show-when="certs=特种作业操作证"><div data-profile-id="cert_special_work_detail" class="q" ><div class="q-label">特种作业操作证详情<span class="opt-note">（选填）</span></div>
         <input type="text" id="cert_special_work_detail" placeholder="名称、等级；教师资格请写学段和学科"><div class="opts"><label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_special_work_status" value="已取得"><span class="box">已取得</span></label>
           <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_special_work_status" value="在考"><span class="box">在考</span></label>
-          <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_special_work_status" value="计划"><span class="box">计划</span></label></div><div class="minilabel">取得或预计取得年月</div>
-        <input data-profile-label="取得或预计年月" type="month" id="cert_special_work_month"></div></div>
+          <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_special_work_status" value="计划"><span class="box">计划</span></label></div>
+        <div data-show-when="cert_special_work_status=已取得|在考|计划"><div class="minilabel"><span data-show-when="cert_special_work_status=已取得">取得时间</span><span data-show-when="cert_special_work_status=在考|计划">预计考试时间</span></div><input data-profile-label="取得或预计年月" type="month" id="cert_special_work_month"></div></div></div>
       <div data-show-when="certs=专业技术资格或职称"><div data-profile-id="cert_professional_detail" class="q" ><div class="q-label">专业技术资格或职称详情<span class="opt-note">（选填）</span></div>
         <input type="text" id="cert_professional_detail" placeholder="名称、等级；教师资格请写学段和学科"><div class="opts"><label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_professional_status" value="已取得"><span class="box">已取得</span></label>
           <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_professional_status" value="在考"><span class="box">在考</span></label>
-          <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_professional_status" value="计划"><span class="box">计划</span></label></div><div class="minilabel">取得或预计取得年月</div>
-        <input data-profile-label="取得或预计年月" type="month" id="cert_professional_month"></div></div>
+          <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_professional_status" value="计划"><span class="box">计划</span></label></div>
+        <div data-show-when="cert_professional_status=已取得|在考|计划"><div class="minilabel"><span data-show-when="cert_professional_status=已取得">取得时间</span><span data-show-when="cert_professional_status=在考|计划">预计考试时间</span></div><input data-profile-label="取得或预计年月" type="month" id="cert_professional_month"></div></div></div>
       <div data-show-when="certs=教师资格证"><div data-profile-id="cert_teacher_detail" class="q" ><div class="q-label">教师资格证详情<span class="opt-note">（选填）</span></div>
         <input type="text" id="cert_teacher_detail" placeholder="名称、等级；教师资格请写学段和学科"><div class="opts"><label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_teacher_status" value="已取得"><span class="box">已取得</span></label>
           <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_teacher_status" value="在考"><span class="box">在考</span></label>
-          <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_teacher_status" value="计划"><span class="box">计划</span></label></div><div class="minilabel">取得或预计取得年月</div>
-        <input data-profile-label="取得或预计年月" type="month" id="cert_teacher_month"></div></div>
+          <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_teacher_status" value="计划"><span class="box">计划</span></label></div>
+        <div data-show-when="cert_teacher_status=已取得|在考|计划"><div class="minilabel"><span data-show-when="cert_teacher_status=已取得">取得时间</span><span data-show-when="cert_teacher_status=在考|计划">预计考试时间</span></div><input data-profile-label="取得或预计年月" type="month" id="cert_teacher_month"></div></div></div>
       <div data-show-when="certs=其他"><div data-profile-id="cert_other_detail" class="q" ><div class="q-label">其他证书详情<span class="opt-note">（选填）</span></div>
         <input type="text" id="cert_other_detail" placeholder="名称、等级；教师资格请写学段和学科"><div class="opts"><label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_other_status" value="已取得"><span class="box">已取得</span></label>
           <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_other_status" value="在考"><span class="box">在考</span></label>
-          <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_other_status" value="计划"><span class="box">计划</span></label></div><div class="minilabel">取得或预计取得年月</div>
-        <input data-profile-label="取得或预计年月" type="month" id="cert_other_month"></div></div>
+          <label class="opt"><input data-profile-label="证书状态" type="radio" name="cert_other_status" value="计划"><span class="box">计划</span></label></div>
+        <div data-show-when="cert_other_status=已取得|在考|计划"><div class="minilabel"><span data-show-when="cert_other_status=已取得">取得时间</span><span data-show-when="cert_other_status=在考|计划">预计考试时间</span></div><input data-profile-label="取得或预计年月" type="month" id="cert_other_month"></div></div></div>
       <div data-show-when="certs=外语（四六级、雅思等）"><div data-profile-id="cet4_score" class="q" ><div class="q-label">外语成绩与考试计划<span class="opt-note">（选填）</span></div>
         <input type="text" id="cet4_score" placeholder="四级分数；未考留空"><input type="text" id="cet6_score" placeholder="六级分数；未考留空"><input type="text" id="other_language" placeholder="其他语言考试及分数"><div class="opts"><label class="opt"><input type="radio" name="language_status" value="已取得"><span class="box">已取得</span></label>
           <label class="opt"><input type="radio" name="language_status" value="在考"><span class="box">在考</span></label>
           <label class="opt"><input type="radio" name="language_status" value="计划"><span class="box">计划</span></label></div>
-        <input type="month" id="language_month"></div></div>
+        <div data-show-when="language_status=已取得|在考|计划"><div class="minilabel"><span data-show-when="language_status=已取得">取得时间</span><span data-show-when="language_status=在考|计划">预计考试时间</span></div><input data-profile-label="取得或预计年月" type="month" id="language_month"></div></div></div>
 
       <div data-profile-id="strength" class="q req"><div class="q-label">你比较擅长的事<span class="opt-note">（可多选）</span></div>
         <div class="opts stack">
@@ -434,7 +434,7 @@
           <label class="opt"><input type="checkbox" name="ps_cadre" value="院系学生会或团委中层正职"><span class="box">院系学生会或团委中层正职</span></label>
           <label class="opt"><input type="checkbox" name="ps_cadre" value="校学生会或团委中层副职及以上"><span class="box">校学生会或团委中层副职及以上</span></label>
         </div>
-          <input data-profile-label="学生干部任职时长" class="mt" type="text" id="ps_cadre_time" placeholder="各职务当了多久，例如：班长两学年；院学生会部长一学年"></div>
+          <div data-show-when="ps_cadre=班委或团支部委员|班长或团支部书记|院系学生会或团委中层副职|院系学生会或团委中层正职|校学生会或团委中层副职及以上"><input data-profile-label="学生干部任职时长" type="text" id="ps_cadre_time" placeholder="各职务当了多久，例如：班长两学年；院学生会部长一学年"></div></div>
         <div data-profile-id="ps_award" class="q"><div class="q-label">获得过校级及以上综合表彰或奖学金吗</div>
           <input type="text" id="ps_award" placeholder="例如：校一等奖学金、校三好学生；没有就写没有"></div>
         <div data-profile-id="ps_rank" class="q"><div class="q-label">成绩在班级或专业的排名</div>
@@ -819,7 +819,7 @@
 </div>
 
 <script src="assets/profile-recipient.js?v=20261019p"></script>
-<script src="assets/questionnaire.js?v=20261019p"></script>
+<script src="assets/questionnaire.js?v=20261021a"></script>
 <script>
   function updateBaziPreview(){
     var el=document.getElementById('baziPreview'); if(!el) return;
@@ -833,20 +833,9 @@
   window.addEventListener('load',updateBaziPreview);
 
   /* ----- conditional follow-ups ----- */
-  function refreshFollowups(){
-    document.querySelectorAll('.followup').forEach(function(fu){
-      var cond=fu.getAttribute('data-when'); // name=value
-      var on=condOn(cond);
-      if(on){ fu.classList.add('show'); }
-      else if(fu.classList.contains('show')){
-        fu.classList.remove('show');
-        // clear its inputs so hidden answers don't linger
-        fu.querySelectorAll('input').forEach(function(i){ if(i.type==='radio'||i.type==='checkbox') i.checked=false; else i.value=''; });
-        fu.querySelectorAll('textarea').forEach(function(t){ t.value=''; });
-      }
-    });
-    applyStageVisibility();
-  }
+  // 追问、按阶段显示与选中后才出现的细节：统一由 questionnaire.js 计算并清空被收起的作答
+  function refreshFollowups(){ refreshConditions(); }
+
 
   /* ----- ranking ----- */
   var rankOrder=[];

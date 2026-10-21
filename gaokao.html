@@ -6,7 +6,7 @@
 <title>高考志愿 · 自我盘点</title>
 <script src="https://cdn.jsdelivr.net/npm/lunar-javascript@1.7.7/lunar.js" defer></script>
 <link rel="icon" type="image/png" href="assets/logo-192.png">
-<link rel="stylesheet" href="assets/questionnaire.css?v=20261020a">
+<link rel="stylesheet" href="assets/questionnaire.css?v=20261021a">
 </head>
 <body data-profile-kind="gaokao">
 
@@ -90,7 +90,7 @@
           <label class="opt"><input type="radio" name="kelei" value="传统文科"><span class="box">传统文科</span></label>
           <label class="opt"><input type="radio" name="kelei" value="不清楚"><span class="box">不太清楚</span></label>
         </div>
-        <input data-profile-label="具体选科组合" class="mt" type="text" id="subjects" placeholder="写下你的具体选科组合，例如：物理+化学+生物">
+        <div data-hide-when="kelei=传统理科|传统文科"><input data-profile-label="具体选科组合" type="text" id="subjects" placeholder="写下你的具体选科组合，例如：物理+化学+生物"></div>
         <p class="hint">选科直接决定你能报哪些专业，很多专业必选物理或化学。</p></div>
 
       <div data-profile-id="tier" class="q req" data-show-when="stage=高三上学期|高三下学期，还没高考|已考完，正在估分、等出分"><div class="q-label">你的分数大致落在哪一档？</div>
@@ -369,7 +369,7 @@
           <label class="opt"><input type="checkbox" name="major" value="历史/哲学/社科"><span class="box">历史/哲学/社科</span></label>
           <label class="opt"><input type="checkbox" name="major" value="暂时没有/想听建议"><span class="box">暂时没有，想听建议</span></label>
         <label class="opt"><input type="checkbox" name="major" value="其他"><span class="box">其他</span></label></div>
-        <input data-profile-label="其他想读的专业" class="mt" type="text" id="majorOther" placeholder="还有其他想读的专业？写在这里"></div>
+        <div data-show-when="major=其他"><input data-profile-label="其他想读的专业" type="text" id="majorOther" placeholder="还有其他想读的专业？写在这里"></div></div>
 
       <div data-profile-id="majorknow" class="q req"><div class="q-label">对你（最）想读的专业，你了解到什么程度？</div>
         <div class="opts stack">
@@ -381,9 +381,9 @@
 
       <div data-profile-id="interest_try" class="q"><div class="q-label">为了感兴趣的方向，你实际做过什么？<span class="opt-note">（可多选）</span></div>
         <div class="opts stack"><label class="opt"><input type="checkbox" name="interest_try" value="上过相关的课或讲座"><span class="box">上过相关的课或讲座</span></label><label class="opt"><input type="checkbox" name="interest_try" value="读过这方面的书"><span class="box">读过这方面的书</span></label><label class="opt"><input type="checkbox" name="interest_try" value="参加过相关竞赛"><span class="box">参加过相关竞赛</span></label><label class="opt"><input type="checkbox" name="interest_try" value="做过小项目或作品"><span class="box">做过小项目或作品</span></label><label class="opt"><input type="checkbox" name="interest_try" value="参加过大学的营地或开放日"><span class="box">参加过大学的营地或开放日</span></label><label class="opt"><input type="checkbox" name="interest_try" value="和这一行的人聊过"><span class="box">和这一行的人聊过</span></label><label class="opt"><input type="checkbox" name="interest_try" value="还没有实际接触过"><span class="box">还没有实际接触过</span></label></div>
-        <input data-profile-label="实践经历补充" type="text" id="interest_try_note" class="mt" placeholder="选填：具体做了什么、做完感觉如何">
+        <div data-show-when="interest_try=上过相关的课或讲座|读过这方面的书|参加过相关竞赛|做过小项目或作品|参加过大学的营地或开放日|和这一行的人聊过"><input data-profile-label="实践经历补充" type="text" id="interest_try_note" placeholder="选填：具体做了什么、做完感觉如何"></div>
         <p class="hint">“喜欢”要经得起试一试。做过、并且还想继续做的方向，比只是听起来不错的方向可靠得多；还没接触过也没关系，报告会给你低成本的试法。</p></div>
-      <div data-profile-id="major_no" class="q"><div class="q-label">明确不想读哪些专业？（选填，可多选）</div><div class="opts stack"><label class="opt"><input type="checkbox" name="major_no" value="计算机/软件/人工智能"><span class="box">计算机/软件/人工智能</span></label><label class="opt"><input type="checkbox" name="major_no" value="电子信息/通信"><span class="box">电子信息/通信</span></label><label class="opt"><input type="checkbox" name="major_no" value="自动化/机器人"><span class="box">自动化/机器人</span></label><label class="opt"><input type="checkbox" name="major_no" value="机械/能源/航空航天"><span class="box">机械/能源/航空航天</span></label><label class="opt"><input type="checkbox" name="major_no" value="电气工程"><span class="box">电气工程</span></label><label class="opt"><input type="checkbox" name="major_no" value="土木/建筑"><span class="box">土木/建筑</span></label><label class="opt"><input type="checkbox" name="major_no" value="材料/化工"><span class="box">材料/化工</span></label><label class="opt"><input type="checkbox" name="major_no" value="数学/物理/统计"><span class="box">数学/物理/统计</span></label><label class="opt"><input type="checkbox" name="major_no" value="经济/金融/财会"><span class="box">经济/金融/财会</span></label><label class="opt"><input type="checkbox" name="major_no" value="临床医学/口腔/中医"><span class="box">临床医学/口腔/中医</span></label><label class="opt"><input type="checkbox" name="major_no" value="药学/护理/医技"><span class="box">药学/护理/医技</span></label><label class="opt"><input type="checkbox" name="major_no" value="法学"><span class="box">法学</span></label><label class="opt"><input type="checkbox" name="major_no" value="师范/教育"><span class="box">师范/教育</span></label><label class="opt"><input type="checkbox" name="major_no" value="中文/新闻传播"><span class="box">中文/新闻传播</span></label><label class="opt"><input type="checkbox" name="major_no" value="外语"><span class="box">外语</span></label><label class="opt"><input type="checkbox" name="major_no" value="心理学"><span class="box">心理学</span></label><label class="opt"><input type="checkbox" name="major_no" value="设计/艺术"><span class="box">设计/艺术</span></label><label class="opt"><input type="checkbox" name="major_no" value="管理/工商"><span class="box">管理/工商</span></label><label class="opt"><input type="checkbox" name="major_no" value="公共管理/政治学"><span class="box">公共管理/政治学</span></label><label class="opt"><input type="checkbox" name="major_no" value="生物/医药/农林"><span class="box">生物/医药/农林</span></label><label class="opt"><input type="checkbox" name="major_no" value="地理/环境/海洋"><span class="box">地理/环境/海洋</span></label><label class="opt"><input type="checkbox" name="major_no" value="历史/哲学/社科"><span class="box">历史/哲学/社科</span></label><label class="opt"><input type="checkbox" name="major_no" value="其他"><span class="box">其他</span></label><label class="opt"><input type="checkbox" name="major_no" value="没有明确排除"><span class="box">没有明确排除</span></label></div><label for="majorNo">具体专业或其他补充（选填）</label><input data-profile-label="不想读的具体专业" type="text" id="majorNo"><div class="opts stack"><label class="opt"><input type="radio" name="major_no_hard" value="被调剂到上述专业宁可退档"><span class="box">被调剂到上述专业宁可退档</span></label><label class="opt"><input type="radio" name="major_no_hard" value="只是偏好较低，可再比较"><span class="box">只是偏好较低，可再比较</span></label><label class="opt"><input type="radio" name="major_no_hard" value="不清楚退档后果"><span class="box">不清楚退档后果</span></label></div><p class="hint">宁可退档属于硬底线，需结合退档后果再核对，不会仅凭专业大类直接排除学校。</p></div>
+      <div data-profile-id="major_no" class="q"><div class="q-label">明确不想读哪些专业？（选填，可多选）</div><div class="opts stack"><label class="opt"><input type="checkbox" name="major_no" value="计算机/软件/人工智能"><span class="box">计算机/软件/人工智能</span></label><label class="opt"><input type="checkbox" name="major_no" value="电子信息/通信"><span class="box">电子信息/通信</span></label><label class="opt"><input type="checkbox" name="major_no" value="自动化/机器人"><span class="box">自动化/机器人</span></label><label class="opt"><input type="checkbox" name="major_no" value="机械/能源/航空航天"><span class="box">机械/能源/航空航天</span></label><label class="opt"><input type="checkbox" name="major_no" value="电气工程"><span class="box">电气工程</span></label><label class="opt"><input type="checkbox" name="major_no" value="土木/建筑"><span class="box">土木/建筑</span></label><label class="opt"><input type="checkbox" name="major_no" value="材料/化工"><span class="box">材料/化工</span></label><label class="opt"><input type="checkbox" name="major_no" value="数学/物理/统计"><span class="box">数学/物理/统计</span></label><label class="opt"><input type="checkbox" name="major_no" value="经济/金融/财会"><span class="box">经济/金融/财会</span></label><label class="opt"><input type="checkbox" name="major_no" value="临床医学/口腔/中医"><span class="box">临床医学/口腔/中医</span></label><label class="opt"><input type="checkbox" name="major_no" value="药学/护理/医技"><span class="box">药学/护理/医技</span></label><label class="opt"><input type="checkbox" name="major_no" value="法学"><span class="box">法学</span></label><label class="opt"><input type="checkbox" name="major_no" value="师范/教育"><span class="box">师范/教育</span></label><label class="opt"><input type="checkbox" name="major_no" value="中文/新闻传播"><span class="box">中文/新闻传播</span></label><label class="opt"><input type="checkbox" name="major_no" value="外语"><span class="box">外语</span></label><label class="opt"><input type="checkbox" name="major_no" value="心理学"><span class="box">心理学</span></label><label class="opt"><input type="checkbox" name="major_no" value="设计/艺术"><span class="box">设计/艺术</span></label><label class="opt"><input type="checkbox" name="major_no" value="管理/工商"><span class="box">管理/工商</span></label><label class="opt"><input type="checkbox" name="major_no" value="公共管理/政治学"><span class="box">公共管理/政治学</span></label><label class="opt"><input type="checkbox" name="major_no" value="生物/医药/农林"><span class="box">生物/医药/农林</span></label><label class="opt"><input type="checkbox" name="major_no" value="地理/环境/海洋"><span class="box">地理/环境/海洋</span></label><label class="opt"><input type="checkbox" name="major_no" value="历史/哲学/社科"><span class="box">历史/哲学/社科</span></label><label class="opt"><input type="checkbox" name="major_no" value="其他"><span class="box">其他</span></label><label class="opt"><input type="checkbox" name="major_no" value="没有明确排除"><span class="box">没有明确排除</span></label></div><div data-show-when="major_no=计算机/软件/人工智能|电子信息/通信|自动化/机器人|机械/能源/航空航天|电气工程|土木/建筑|材料/化工|数学/物理/统计|经济/金融/财会|临床医学/口腔/中医|药学/护理/医技|法学|师范/教育|中文/新闻传播|外语|心理学|设计/艺术|管理/工商|公共管理/政治学|生物/医药/农林|地理/环境/海洋|历史/哲学/社科|其他"><label for="majorNo">具体专业或其他补充（选填）</label><input data-profile-label="不想读的具体专业" type="text" id="majorNo"><div class="opts stack"><label class="opt"><input type="radio" name="major_no_hard" value="被调剂到上述专业宁可退档"><span class="box">被调剂到上述专业宁可退档</span></label><label class="opt"><input type="radio" name="major_no_hard" value="只是偏好较低，可再比较"><span class="box">只是偏好较低，可再比较</span></label><label class="opt"><input type="radio" name="major_no_hard" value="不清楚退档后果"><span class="box">不清楚退档后果</span></label></div><p class="hint">宁可退档属于硬底线，需结合退档后果再核对，不会仅凭专业大类直接排除学校。</p></div></div>
 
       <div data-profile-id="hotcold" class="q req"><div class="q-label">"专业冷热"和"自己喜欢"，你更偏向？</div>
         <div class="opts stack">
@@ -540,7 +540,7 @@
           <label class="opt"><input type="checkbox" name="climate" value="有饮食/宗教习惯"><span class="box">有特定饮食/宗教习惯</span></label>
           <label class="opt"><input type="checkbox" name="climate" value="都能适应"><span class="box">都能适应</span></label>
         <label class="opt"><input type="checkbox" name="climate" value="不想说"><span class="box">不想说</span></label></div>
-        <input data-profile-label="气候饮食要求补充" class="mt" type="text" id="climateNote" placeholder="需要补充的，写在这里"></div>
+        <div data-show-when="climate=怕冷|怕热/潮湿|吃不了辣|有饮食/宗教习惯"><input data-profile-label="气候饮食要求补充" type="text" id="climateNote" placeholder="需要补充的，写在这里"></div></div>
 
 
 
@@ -709,7 +709,7 @@
       <div data-profile-id="weaksubject" class="q"><div class="q-label">有没有明显拖后腿的单科？<span class="opt-note">（选填）</span></div>
         <input type="text" id="weaksubject" placeholder="例如：英语偏弱 / 数学不好……部分专业对单科有要求。没有就留空"></div>
 
-      <div data-profile-id="money" class="q"><div class="q-label">每年学费最多能接受多少？（选填）</div><div class="opts stack"><label class="opt"><input type="radio" name="money" value="6000 元以内"><span class="box">6000 元以内</span></label><label class="opt"><input type="radio" name="money" value="6000—1.5 万元"><span class="box">6000—1.5 万元</span></label><label class="opt"><input type="radio" name="money" value="1.5—3 万元"><span class="box">1.5—3 万元</span></label><label class="opt"><input type="radio" name="money" value="3—6 万元"><span class="box">3—6 万元</span></label><label class="opt"><input type="radio" name="money" value="6 万元以上"><span class="box">6 万元以上</span></label><label class="opt"><input type="radio" name="money" value="要和家里商量"><span class="box">要和家里商量</span></label><label class="opt"><input type="radio" name="money" value="不想说"><span class="box">不想说</span></label></div><label for="four_year_budget">四年学费加生活费总共最多多少万元（选填）</label><input data-profile-label="四年总预算（万元）" type="number" id="four_year_budget"></div>
+      <div data-profile-id="money" class="q"><div class="q-label">每年学费最多能接受多少？（选填）</div><div class="opts stack"><label class="opt"><input type="radio" name="money" value="6000 元以内"><span class="box">6000 元以内</span></label><label class="opt"><input type="radio" name="money" value="6000—1.5 万元"><span class="box">6000—1.5 万元</span></label><label class="opt"><input type="radio" name="money" value="1.5—3 万元"><span class="box">1.5—3 万元</span></label><label class="opt"><input type="radio" name="money" value="3—6 万元"><span class="box">3—6 万元</span></label><label class="opt"><input type="radio" name="money" value="6 万元以上"><span class="box">6 万元以上</span></label><label class="opt"><input type="radio" name="money" value="要和家里商量"><span class="box">要和家里商量</span></label><label class="opt"><input type="radio" name="money" value="不想说"><span class="box">不想说</span></label></div><div data-hide-when="money=不想说"><label for="four_year_budget">四年学费加生活费总共最多多少万元（选填）</label><input data-profile-label="四年总预算（万元）" type="number" id="four_year_budget"></div></div>
 
       <div data-profile-id="livingcost" class="q"><div class="q-label">生活费 / 求学开销方面？</div>
         <div class="opts stack">
@@ -733,7 +733,7 @@
           <label class="opt"><input type="checkbox" name="awards" value="省级以上荣誉"><span class="box">省级以上荣誉</span></label>
           <label class="opt"><input type="checkbox" name="awards" value="暂时没有"><span class="box">暂时没有</span></label>
         </div>
-        <input data-profile-label="最高获奖等级" class="mt" type="text" id="award_level" placeholder="最高等级（选填），例如：数学竞赛省一、国家二级运动员"></div>
+        <div data-show-when="awards=五大学科竞赛获奖|科技创新类|文体特长|英语/作文类|省级以上荣誉"><input data-profile-label="最高获奖等级" type="text" id="award_level" placeholder="最高等级（选填），例如：数学竞赛省一、国家二级运动员"></div></div>
 
       <div data-profile-id="famspecial" class="q"><div class="q-label">家里有没有军人、警察烈士，因公牺牲或伤残，长期在边防等特殊岗位的情况？<span class="opt-note">（选填；只答有没有，不用写细节）</span></div>
         <div class="opts"><label class="opt"><input type="radio" name="famspecial" value="有，需要核对优待政策"><span class="box">有，需要核对优待政策</span></label><label class="opt"><input type="radio" name="famspecial" value="没有"><span class="box">没有</span></label><label class="opt"><input type="radio" name="famspecial" value="不想说"><span class="box">不想说</span></label></div>
@@ -908,7 +908,7 @@
 </div>
 
 <script src="assets/profile-recipient.js?v=20261019p"></script>
-<script src="assets/questionnaire.js?v=20261019p"></script>
+<script src="assets/questionnaire.js?v=20261021a"></script>
 <script>
   function updateBaziPreview(){
     var el=document.getElementById('baziPreview'); if(!el) return;
@@ -922,20 +922,9 @@
   window.addEventListener('load',updateBaziPreview);
 
   /* ----- conditional follow-ups ----- */
-  function refreshFollowups(){
-    applyStageVisibility();
-    document.querySelectorAll('.followup').forEach(function(fu){
-      var cond=fu.getAttribute('data-when'); // name=value
-      var on=condOn(cond);
-      if(on){ fu.classList.add('show'); }
-      else if(fu.classList.contains('show')){
-        fu.classList.remove('show');
-        // clear its inputs so hidden answers don't linger
-        fu.querySelectorAll('input').forEach(function(i){ if(i.type==='radio'||i.type==='checkbox') i.checked=false; else i.value=''; });
-        fu.querySelectorAll('textarea').forEach(function(t){ t.value=''; });
-      }
-    });
-  }
+  // 追问、按阶段显示与选中后才出现的细节：统一由 questionnaire.js 计算并清空被收起的作答
+  function refreshFollowups(){ refreshConditions(); }
+
 
   /* ----- ranking ----- */
   var rankOrder=[];

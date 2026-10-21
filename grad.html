@@ -6,7 +6,7 @@
 <title>读研 · 自我盘点</title>
 <script src="https://cdn.jsdelivr.net/npm/lunar-javascript@1.7.7/lunar.js" defer></script>
 <link rel="icon" type="image/png" href="assets/logo-192.png">
-<link rel="stylesheet" href="assets/questionnaire.css?v=20261020a">
+<link rel="stylesheet" href="assets/questionnaire.css?v=20261021a">
 </head>
 <body data-profile-kind="grad">
 
@@ -234,7 +234,7 @@
           <label class="opt"><input type="checkbox" name="eng" value="托福"><span class="box">托福</span></label>
           <label class="opt"><input type="checkbox" name="eng" value="都还没考"><span class="box">都还没考</span></label>
         </div>
-        <input data-profile-label="英语分数" class="mt" type="text" id="eng_score" placeholder="分数，例如：六级 520；雅思 6.5（小分 6）"></div>
+        <div data-show-when="eng=四级|六级|雅思|托福"><input data-profile-label="英语分数" type="text" id="eng_score" placeholder="分数，例如：六级 520；雅思 6.5（小分 6）"></div></div>
 
       <div data-profile-id="math" class="q req"><div class="q-label">目标方向考哪门数学？</div>
 <div class="opts">
@@ -257,7 +257,7 @@
           <label class="opt"><input type="checkbox" name="exp" value="学生工作"><span class="box">学生工作</span></label>
           <label class="opt"><input type="checkbox" name="exp" value="暂时没有"><span class="box">暂时没有</span></label>
         </div>
-        <input data-profile-label="代表性经历" class="mt" type="text" id="exp_note" placeholder="一两句说明最有代表性的一项（选填）"></div>
+        <div data-show-when="exp=科研项目|论文|竞赛获奖|实习或工作|学生工作"><input data-profile-label="代表性经历" type="text" id="exp_note" placeholder="一两句说明最有代表性的一项（选填）"></div></div>
     </div></section>
 
     <section class="section" data-title="为什么读研"><div class="card">
@@ -365,7 +365,7 @@
             <label class="opt"><input type="radio" name="ky_tj" value="只接受部分城市或层次"><span class="box">只接受部分城市或层次</span></label>
             <label class="opt"><input type="radio" name="ky_tj" value="不接受"><span class="box">不接受</span></label>
           </div>
-          <input data-profile-label="调剂底线" class="mt" type="text" id="ky_tj_limits" placeholder="调剂底线（选填）：不能接受的专业/城市、费用、学习方式，以及现有复试或确认期限"></div>
+          <div data-hide-when="ky_tj=不接受"><input data-profile-label="调剂底线" type="text" id="ky_tj_limits" placeholder="调剂底线（选填）：不能接受的专业/城市、费用、学习方式，以及现有复试或确认期限"></div></div>
 
         <div data-profile-id="ky_part" class="q"><div class="q-label">非全日制可以考虑吗？</div>
 <div class="opts stack">
@@ -900,7 +900,7 @@
 </div>
 
 <script src="assets/profile-recipient.js?v=20261019p"></script>
-<script src="assets/questionnaire.js?v=20261019p"></script>
+<script src="assets/questionnaire.js?v=20261021a"></script>
 <script>
   function updateBaziPreview(){
     var el=document.getElementById('baziPreview'); if(!el) return;
@@ -914,19 +914,9 @@
   window.addEventListener('load',updateBaziPreview);
 
   /* ----- conditional follow-ups ----- */
-  function refreshFollowups(){
-    document.querySelectorAll('.followup').forEach(function(fu){
-      var cond=fu.getAttribute('data-when'); // name=value
-      var on=condOn(cond);
-      if(on){ fu.classList.add('show'); }
-      else if(fu.classList.contains('show')){
-        fu.classList.remove('show');
-        // clear its inputs so hidden answers don't linger
-        fu.querySelectorAll('input').forEach(function(i){ if(i.type==='radio'||i.type==='checkbox') i.checked=false; else i.value=''; });
-        fu.querySelectorAll('textarea').forEach(function(t){ t.value=''; });
-      }
-    });
-  }
+  // 追问、按阶段显示与选中后才出现的细节：统一由 questionnaire.js 计算并清空被收起的作答
+  function refreshFollowups(){ refreshConditions(); }
+
 
   /* ----- ranking ----- */
   var rankOrder=[];
@@ -1006,12 +996,12 @@
   }
   function clearState(){ try{ localStorage.removeItem(STORE_KEY); }catch(e){} }
 
-  document.addEventListener('change',function(){applyStageVisibility();refreshFollowups();applyStageVisibility();updateProgress();saveState();});
+  document.addEventListener('change',function(){refreshFollowups();updateProgress();saveState();});
   document.addEventListener('input',function(){updateProgress();saveState();});
 
   /* 读回上次内容，再把分支题/排序/进度/印章一起刷新 */
   var hadSaved=restoreState();
-  applyStageVisibility(); refreshFollowups(); applyStageVisibility(); renderRank(); updateProgress();
+  refreshFollowups(); renderRank(); updateProgress();
   if(hadSaved) showRestoredNotice();
 
   function showRestoredNotice(){

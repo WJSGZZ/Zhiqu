@@ -85,7 +85,19 @@ textarea{resize:vertical;min-height:84px;}
 /* 按条件显示的题也保持题间距 */
 [data-show-when] > .q:last-child,[data-hide-when] > .q:last-child{margin-bottom:28px;}
 .minilabel{font-size:13px;color:var(--muted);margin-bottom:6px;}
-
+/* 题内间距统一由这里决定：任意两个相邻部件之间留 12px，小标题与它下面的格子留 6px；
+   不再靠每个控件各自加 margin，新加的控件组合也不会贴在一起 */
+.q > * + *{margin-top:12px;}
+.q > .q-label{margin-bottom:0;}
+.q > label[for]{margin-bottom:0;}
+.q > label[for]:not(:first-child){margin-top:16px;}
+.q > .q-label + label[for]{margin-top:12px;}
+.q > label[for] + *,.q > .minilabel + *{margin-top:6px;}
+.q > .minilabel{margin-bottom:0;}
+/* 题内“选中后才出现”的细节包在一层条件 div 里，里面沿用同样的间距 */
+.q > [data-show-when] > * + *,.q > [data-hide-when] > * + *{margin-top:12px;}
+.q > [data-show-when] > :is(label[for],.minilabel) + *,.q > [data-hide-when] > :is(label[for],.minilabel) + *{margin-top:6px;}
+.q > [data-show-when] > .minilabel,.q > [data-hide-when] > .minilabel{margin-bottom:0;}
 /* ---- 追问 ---- */
 .followup{display:none;margin:16px 0 26px;padding:18px 20px 6px;background:var(--green-pale);border-left:3px solid var(--green);border-radius:0 var(--r-ctl) var(--r-ctl) 0;}
 .followup.show{display:block;}
@@ -99,7 +111,7 @@ textarea{resize:vertical;min-height:84px;}
 .rank-item.on{border-color:var(--green-deep);}
 .rank-num{flex:none;width:28px;height:28px;border-radius:8px;border:1px dashed var(--line-strong);color:var(--faint);font-family:var(--serif);font-size:14px;display:flex;align-items:center;justify-content:center;}
 .rank-item.on .rank-num{background:var(--green-deep);border:1px solid var(--green-deep);color:#F2EFE6;}
-.rank-reset{align-self:flex-start;margin-top:4px;background:transparent;border:none;color:var(--green);font-family:var(--sans);font-size:13.5px;cursor:pointer;padding:3px 0;text-decoration:underline;text-underline-offset:3px;}
+.rank-reset{align-self:flex-start;margin-top:8px;background:transparent;border:none;color:var(--green);font-family:var(--sans);font-size:13.5px;cursor:pointer;padding:3px 0;text-decoration:underline;text-underline-offset:3px;}
 
 /* ---- 生成、提醒与结果 ---- */
 .finish{margin-top:22px;}

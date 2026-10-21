@@ -114,14 +114,35 @@
     el.querySelectorAll('input').forEach(function(i){ if(i.type==='radio'||i.type==='checkbox') i.checked=false; else i.value=''; });
     el.querySelectorAll('textarea').forEach(function(t){ t.value=''; });
   }
-  function applyStageVisibility(){
-    document.querySelectorAll('[data-hide-when]').forEach(function(el){
-      var h=condOn(el.getAttribute('data-hide-when'));
-      if(h&&!el.hidden) clearInside(el);
-      el.hidden=h;
-    });
-    document.querySelectorAll('[data-show-when]').forEach(function(el){ el.hidden=!condOn(el.getAttribute('data-show-when')); });
+  /* 三种条件一起算：data-hide-when / data-show-when 控制 hidden，.followup[data-when] 控制 show。
+     触发题可能本身在另一个追问里（读回草稿时尤其如此），所以反复计算到不再变化；
+     算稳之后，凡是被收起的部分一律清空作答，过时答案既不导出、也不会在条件再次成立时“复活”，也不会被存进本地草稿。 */
+  function conditionalHidden(el){
+    if(el.hasAttribute('data-hide-when')&&condOn(el.getAttribute('data-hide-when'))) return true;
+    return el.hasAttribute('data-show-when')&&!condOn(el.getAttribute('data-show-when'));
   }
+  function isFollowup(el){ return el.classList.contains('followup')&&el.hasAttribute('data-when'); }
+  function refreshConditions(){
+    var els=document.querySelectorAll('[data-hide-when],[data-show-when],.followup[data-when]');
+    for(var pass=0;pass<10;pass++){
+      var changed=false;
+      Array.prototype.forEach.call(els,function(el){
+        if(el.hasAttribute('data-hide-when')||el.hasAttribute('data-show-when')){
+          var h=conditionalHidden(el);
+          if(el.hidden!==h){ el.hidden=h; changed=true; }
+        }
+        if(isFollowup(el)){
+          var on=condOn(el.getAttribute('data-when'));
+          if(el.classList.contains('show')!==on){ if(on) el.classList.add('show'); else el.classList.remove('show'); changed=true; }
+        }
+      });
+      if(!changed) break;
+    }
+    Array.prototype.forEach.call(els,function(el){
+      if(el.hidden||(isFollowup(el)&&!el.classList.contains('show'))) clearInside(el);
+    });
+  }
+  function applyStageVisibility(){ refreshConditions(); }
 
   /* ===== 复制我的画像：一个包含题目原文的 JSON =====
      只输出 JSON，供人和工具读取、存档与按题比较。
