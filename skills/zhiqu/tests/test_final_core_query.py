@@ -64,7 +64,7 @@ class CoreDeltaQuery(unittest.TestCase):
   source=r['source'];self.assertEqual(source['archive_sha256'],'a'*64);self.assertIsNone(source['archive_path']);self.assertEqual(source['original_relative_path'],'gaokao/合成统计.xlsx');self.assertEqual(source['archive_status'],'已按用户授权删除');self.assertNotIn('landing_url',source)
   self.assertEqual(r['context']['scope_raw'],'[["备注","仅限校区A"]]');self.assertIsNone(r['excerpt'])
   text=db.render_text(result)
-  for word in ('综合分：612.5 分','第三方整理｜购买汇编｜vendor','src_row：12','原表范围说明','仅限校区A'):self.assertIn(word,text)
+  for word in ('综合分：612.5 分','第三方整理｜购买汇编｜S1','出处：vendor','行：12','原表范围说明','仅限校区A'):self.assertIn(word,text)
   self.assertNotIn('最低分：612.5',text)
  def test_text_attribute_and_rank_label_are_not_reinterpreted(self):
   self.views();self.insert(kind='attribute',record_id='b',field_name='subject_requirements',field_label='选科要求',value='物理且化学',raw_value='物理且化学',unit='')
@@ -74,7 +74,7 @@ class CoreDeltaQuery(unittest.TestCase):
   self.views();self.insert(source_id='official',value=620,official_locator='官方招生公告 第2页 表1 G8')
   row=self.section()['rows'][0];v=row['values']['composite_score'];self.assertEqual(v['grade'],'官方');self.assertEqual(v['source_id'],'official');self.assertEqual(v['original_source_id'],'vendor')
   self.assertEqual(row['original_locator']['src_row'],12);self.assertNotIn('src_row',row['locator']);self.assertNotIn('locator',v)
-  text=db.render_text(self.query());self.assertIn('官方位置：官方招生公告 第2页 表1 G8',text);self.assertIn('原始单元格定位：src_sheet：合成工作表；src_row：12',text)
+  text=db.render_text(self.query());self.assertIn('官方位置：官方招生公告 第2页 表1 G8',text);self.assertIn('原始单元格定位：工作表：合成工作表；行：12',text)
  def test_missing_official_locator_never_borrows_purchase_row(self):
   self.views();self.insert(source_id='official')
   row=self.section()['rows'][0];self.assertIsNone(row['values']['composite_score']['official_locator']);self.assertNotIn('src_row',row['locator'])

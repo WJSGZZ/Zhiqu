@@ -183,6 +183,7 @@ CONTEXT = ['year','plan_year','province','region','college','program_code','prog
 
 
 TITLES['employment_major_industry']='专业就业行业分布（届别、单位按原表）'
+TITLES.update({'ky_v_usable_program':'考研招生目录','ky_v_usable_line':'考研历史复试线'})
 LABELS['value_number']='原表占比数值'
 CONTEXT += ['industry','unit_raw','value_raw','cohort']
 CONTEXT.append('subjects')
@@ -535,11 +536,13 @@ def _core_delta_record(c, table, row):
             'excerpt_locator':{}}
 
 
-def _core_delta_section(c, identity, name, program, year, province, major, subject, plan_type, limit, offset):
+def _core_delta_section(c, identity, name, program, year, province, major, subject, plan_type, limit, offset, exclude_school_fields=()):
     tables=_tables(c);parts=[];args=[]
     for table in CORE_DELTA_VIEWS:
         if table not in tables:continue
         where=['t.institution_id=?'];bound=[identity['institution_id']]
+        if table=='v_core_delta_attribute' and exclude_school_fields:
+            where.append('t.field_name NOT IN ('+','.join('?' for _ in exclude_school_fields)+')');bound.extend(exclude_school_fields)
         if year is not None:where.append('CAST(t.year AS INTEGER)=?');bound.append(int(year))
         if province:where.append('t.province=?');bound.append(province)
         if major:where.append('t.major_name LIKE ?');bound.append('%'+major+'%')
@@ -592,6 +595,72 @@ def _warnings(c, identity, sections, year):
     return warnings
 
 
+def _school_attribute_section(c, ident, limit, offset):
+    """Canonical school facts; paginate fields, keeping every conflicting value together."""
+    tables=_tables(c)
+    if 'school_attribute_fact' not in tables:return None
+    labels={'school_level':'学校层次','school_tags':'学校标签','recommend_rate':'保研比例','n_master':'硕士点','n_phd':'博士点','master_list':'硕士点名单','phd_list':'博士点名单','is_985':'985院校','is_211':'211院校','school_location':'学校所在地','province_of_school':'学校所在省份','city':'城市','city_tier':'城市类别','rename_note':'更名说明','affiliation':'隶属','school_type':'学校类型','ownership':'办学性质','degree_level':'学位层次','school_rank':'原表排名','transfer_policy':'转专业说明','charter_url':'招生章程网址'}
+    priority=['school_level','school_tags','recommend_rate','n_master','n_phd','master_list','phd_list','is_985','is_211','school_location']
+    facts=[dict(r) for r in c.execute('SELECT f.attribute_id,f.field_name,t.value FROM data.school_attribute_fact f JOIN data.core_delta_text t ON t.text_id=f.value_text_id WHERE f.institution_id=? AND t.value<>\'\' ORDER BY f.field_name,t.value,f.attribute_id',(ident['institution_id'],))]
+    original_fact_count=len(facts)
+    profile_cols=_cols(c,'school_profile_source') if 'school_profile_source' in tables else set()
+    core_sources={'school_core_attribute_map','school_core_attribute_source','core_delta_locator','core_delta_source'}<=tables
+    scope_guard=('NOT EXISTS(SELECT 1 FROM data.core_delta_scope_issue qi WHERE qi.source_key=l.source_key AND qi.sheet_id=l.sheet_id)'
+                 if 'core_delta_scope_issue' in tables else '1=1')
+    eligible=[]
+    for fact in facts:
+        aid=fact['attribute_id'];field=fact['field_name']
+        supported=field in profile_cols and c.execute('SELECT 1 FROM data.school_profile_source WHERE '+_ident(field)+'=? LIMIT 1',(aid,)).fetchone() is not None
+        if not supported and core_sources:
+            supported=c.execute('''SELECT 1 FROM data.school_core_attribute_map m
+                CROSS JOIN data.school_core_attribute_source s ON s.original_value_id=m.original_value_id
+                CROSS JOIN data.core_delta_locator l ON l.locator_id=s.locator_id
+                WHERE m.attribute_id=? AND '''+scope_guard+' LIMIT 1',(aid,)).fetchone() is not None
+        if supported:eligible.append(fact)
+    facts=eligible
+    if not facts:return None
+    grouped={}
+    for fact in facts:grouped.setdefault(fact['field_name'],[]).append(fact)
+    fields=sorted(grouped,key=lambda f:(priority.index(f) if f in priority else len(priority),f))
+    selected=fields[offset:offset+limit];rows=[]
+    for field in selected:
+        for fact in grouped[field]:
+            aid=fact['attribute_id'];sources=[]
+            if field in profile_cols:
+                for loc in c.execute('SELECT ingest_id,province,school_code,src_file,src_row FROM data.school_profile_source WHERE '+_ident(field)+'=? ORDER BY src_file,src_row,ingest_id,province,school_code',(aid,)):
+                    locator={k:loc[k] for k in ('ingest_id','province','school_code','src_file','src_row') if loc[k] is not None}
+                    locator.update(database_table='gk_school_info',locator_status='原文件行号；工作表未登记，不推定')
+                    sources.append({'source':_source(c,'vendor-file-'+str(loc['src_file']) if loc['src_file'] is not None else None),'locator':locator})
+            if core_sources:
+                # Map(attribute_id,context_id) narrows first; source PK begins with original_value_id.
+                sql='''SELECT ds.source_id,sheet.value AS src_sheet,col.value AS src_col,
+                    min(l.src_row) AS first_row,max(l.src_row) AS last_row,
+                    count(DISTINCT l.src_row) AS matched_rows,count(*) AS matched_cells
+                    FROM data.school_core_attribute_map m
+                    CROSS JOIN data.school_core_attribute_source s ON s.original_value_id=m.original_value_id
+                    CROSS JOIN data.core_delta_locator l ON l.locator_id=s.locator_id
+                    CROSS JOIN data.core_delta_source ds ON ds.source_key=l.source_key
+                    CROSS JOIN data.core_delta_text sheet ON sheet.text_id=l.sheet_id
+                    CROSS JOIN data.core_delta_text col ON col.text_id=s.col_id
+                    WHERE m.attribute_id=? AND '''+scope_guard+'''
+                    GROUP BY ds.source_id,sheet.value,col.value
+                    ORDER BY ds.source_id,sheet.value,col.value'''
+                for loc in c.execute(sql,(aid,)):
+                    locator={k:loc[k] for k in ('src_sheet','src_col','first_row','last_row','matched_rows','matched_cells')}
+                    locator.update(src_row=loc['first_row'],locator_status='首个真实匹配行；首末行仅为边界，不表示中间各行均匹配；完整逐行位置保留在库中')
+                    sources.append({'source':_source(c,loc['source_id']),'locator':locator})
+            source=sources[0]['source'] if sources else {'source_id':'未登记','grade':'第三方整理','publisher':'未注明'}
+            value={'value':fact['value'],'display_label':labels.get(field,field),'unit':'个' if field in ('n_master','n_phd') else '比例（原值，未自动换算百分数）' if field=='recommend_rate' else '',
+                   'grade':'第三方整理','publisher':source.get('publisher') or '未注明','source_id':source.get('source_id') or '未登记','value_status':{'status':'第三方整理未核'}}
+            count_field={'master_list':'n_master','phd_list':'n_phd'}.get(field)
+            if count_field and len(grouped.get(count_field,[]))==1:
+                raw=grouped[count_field][0]['value']
+                if re.fullmatch(r'[0-9]+',raw.strip()):value['declared_count']=int(raw.strip())
+            rows.append({'table':'school_attribute_fact','record_id':'school-attribute-'+str(aid),'context':{'year_status':'未记录'},'values':{field:value},'sources':sources,
+                         'source_conflict':'来源之间不一致' if len(grouped[field])>1 else None})
+    return {'table':'school_attribute_fact','title':'学校概况（第三方，统计年份未明）','year_range':[],'total':len(fields),'fact_count':len(facts),'excluded_facts':original_fact_count-len(facts),'offset':offset,'returned':len(selected),'truncated':max(len(fields)-offset-len(selected),0),'canonical_fields':fields,'rows':rows}
+
+
 def _query_education(name, program=None, year=None, province=None, db=None, limit=10, offset=0, major=None, subject=None, plan_type=None):
     limit, offset = _bounds(limit, offset)
     if program is not None and not re.fullmatch(r'[0-9A-Za-z]{2,12}', str(program)):
@@ -600,6 +669,10 @@ def _query_education(name, program=None, year=None, province=None, db=None, limi
         ident,warnings = _identity(c,name,year,province);tables=_tables(c);sections=[]
         ky_tables=['ky_v_usable_program' if 'ky_v_usable_program' in tables else 'ky_program_year']+(['ky_v_usable_line'] if 'ky_v_usable_line' in tables else [])+['ky_v_usable']
         candidates = ['institution_profile','gk_plan_entry','gk_official_cutoff','gk_v_usable','gk_v_purchased']+ky_tables if program is None else ['gk_v_purchased']+ky_tables
+        canonical=_school_attribute_section(c,ident,limit,offset) if program is None and 'school_attribute_fact' in tables else None
+        if program is None and 'school_attribute_fact' in tables:
+            candidates.remove('institution_profile')
+            if canonical:sections.append(canonical)
         candidates.append('ky_v_retest_line' if 'ky_v_retest_line' in tables else 'ky_retest_line')
         entry_ids=None
         if program is None and 'gk_plan_entry' in tables and 'gk_school_code_map' in tables:
@@ -661,7 +734,8 @@ def _query_education(name, program=None, year=None, province=None, db=None, limi
             if 'quarantine_reason' in cols:where+=" AND coalesce(t.quarantine_reason,'')=''"
             sec=_section(c,table,where,args,limit,offset)
             if sec['total']:sections.append(sec)
-        core=_core_delta_section(c,ident,name,program,year,province,major,subject,plan_type,limit,offset)
+        exclude_school_fields=tuple(f for f in ('is_985','is_211','school_location') if canonical and f in canonical['canonical_fields'])
+        core=_core_delta_section(c,ident,name,program,year,province,major,subject,plan_type,limit,offset,exclude_school_fields=exclude_school_fields)
         if core:sections.append(core)
         warnings += _warnings(c,ident,sections,year)
         if program:
@@ -768,11 +842,11 @@ CONTEXT_LABELS.update({'major_full':'专业完整原名','school_group_code':'�
 CONTEXT_LABELS.update({'graduate_cohort':'毕业届别（原表）','graduate_cohort_raw':'届别原文','cohort_status':'届别状态','province_raw':'学校所在省（原表）','city_raw':'学校所在市（原表）','institution_name_raw':'院校名称（原表）','item':'就业项目','item_raw':'项目原文','record_type':'记录类型','dataset_type':'数据类型','school_raw':'院校原名','group_name':'专业组名称','subject_requirements':'选科要求','scope_raw':'原表范围说明'})
 
 def _plain(obj):
-    if isinstance(obj,dict):return '；'.join(str(k)+'：'+_plain(v) for k,v in obj.items())
+    if isinstance(obj,dict):return '；'.join(globals().get('_SOURCE_LABELS',{}).get(k,globals().get('CONTEXT_LABELS',{}).get(k,str(k)))+'：'+_plain(v) for k,v in obj.items())
     if isinstance(obj,list):return ' / '.join(_plain(v) for v in obj)
     return str(obj) if obj is not None else '未提供'
 
-def render_text(result):
+def _render_full_text(result):
     lines=[]
     identity=result.get('identity')
     if identity:
@@ -797,7 +871,7 @@ def render_text(result):
         for r in sec['rows']:
             def shown_context(k,v):
                 text=str(v)
-                cap=200 if k=='scope_raw' else 180
+                cap=10**12
                 if len(text)>cap:return text[:cap]+'…（本格文字共'+str(len(text))+'字，全文见--json）'
                 return text
             context_labels=CONTEXT_LABELS if sec['table']!='employment_major_industry' else {**CONTEXT_LABELS,'major_code':'原专业码','major_name':'专业名称'}
@@ -819,25 +893,274 @@ def render_text(result):
     return '\n'.join(lines)+'\n'
 
 
+# Text presentation is separate from the read-only result objects: no field or
+# provenance entry is removed from --json, and --full expands the current page.
+_PROFILE_TABLES = {'institution_profile', 'school_attribute_fact'}
+_LIST_FIELDS = {'master_list_raw', 'phd_list_raw', 'master_list', 'phd_list',
+                'masters_raw', 'phds_raw'}
+_SOURCE_LABELS = {'source_id':'出处', 'grade':'等级', 'publisher':'发布单位',
+    'title':'标题', 'landing_url':'网页', 'file_url':'附件', 'published':'发布',
+    'retrieved':'取文', 'archive_sha256':'指纹', 'archive_status':'原件状态',
+    'src_page':'页', 'src_table':'表', 'src_sheet':'工作表', 'src_row':'行',
+    'src_col':'列', 'locator':'定位', 'source_locator':'定位', 'src_locator':'定位',
+    'locator_status':'定位说明', 'database_table':'库内表',
+    'first_row':'首行', 'last_row':'末行', 'matched_rows':'匹配行数', 'matched_cells':'匹配格数'}
+
+
+def _short_text(value, full=False, cap=180):
+    text=_plain(value).replace('\n',' ')
+    return text if full or len(text)<=cap else text[:cap]+'…（全文见--json或--full）'
+
+
+def _list_text(field, value, full=False, declared_count=None):
+    if full or field not in _LIST_FIELDS:
+        return _short_text(value,full)
+    if type(declared_count) is int and declared_count>=0:
+        return str(declared_count)+' 个（原表数量；--full 查看名单）'
+    # Only actual sequences, JSON arrays, or unambiguous line/semicolon lists
+    # provide defensible counts. Chinese commas can occur inside discipline names.
+    items=None
+    if isinstance(value,(list,tuple)):items=list(value)
+    elif isinstance(value,str):
+        parsed=_json(value, None)
+        if isinstance(parsed,list):items=parsed
+        elif re.search(r'[;；\n]',value):items=[x.strip() for x in re.split(r'[;；\n]+',value) if x.strip()]
+    if items is not None and all(isinstance(x,str) and x.strip() for x in items):
+        return str(len(items))+' 个（--full 查看名单）'
+    if value in (None,'',[]):return '来源未提供'
+    return '原名单待核（无法可靠计数；--full 查看原文）'
+
+
+def _profile_rows(rows):
+    """Collapse only school attributes, never score/plan context dimensions."""
+    grouped={}
+    for row in rows:
+        context=row.get('context',{})
+        for key,value in row.get('values',{}).items():
+            token=(key,json.dumps(value.get('value'),ensure_ascii=False,sort_keys=True),value.get('unit',''))
+            item=grouped.setdefault(token,{'context':{},'values':{key:value},'_origin_rows':[]})
+            item['_origin_rows'].append(row)
+        for key,value in context.items():
+            if key not in {'tags','level','school_tags','degree_level','master_list','phd_list','master_list_raw','phd_list_raw'}:continue
+            token=(key,json.dumps(value,ensure_ascii=False,sort_keys=True),'context')
+            item=grouped.setdefault(token,{'context':{key:value},'values':{},'_origin_rows':[]})
+            item['_origin_rows'].append(row)
+    fields={}
+    for token in grouped:fields.setdefault(token[0],set()).add(token[1])
+    by_field={}
+    for token,item in grouped.items():
+        group=by_field.setdefault(token[0],{'context':{},'values':{},'_variants':[],'_origin_rows':[]})
+        group['_variants'].append(item)
+        group['_origin_rows'].extend(item['_origin_rows'])
+        group['_conflict']=len(fields[token[0]])>1 or any(r.get('source_conflict') for r in group['_origin_rows'])
+    return list(by_field.values()) or rows
+
+
+def _source_lines(row, full=False, refs=None):
+    lines=[]
+    source=row.get('source') or {}
+    refs=refs or {}
+    def prefix(src):return ('['+refs[str(src.get('source_id'))]+'] ') if str(src.get('source_id')) in refs else ''
+    # Explicit labels, one source per line; never dump the source dictionary.
+    if source:
+        keys=['source_id','grade','publisher','title','landing_url','file_url','published','retrieved','archive_sha256','archive_status']
+        lines.append(prefix(source)+'来源：'+'；'.join(_SOURCE_LABELS[k]+'：'+_short_text(source[k],full) for k in keys if source.get(k) not in (None,'')))
+    original=row.get('original_locator')
+    if original:lines.append(prefix(source)+'原始单元格定位：'+_plain(original))
+    elif row.get('locator'):lines.append(prefix(source)+'定位：'+_plain(row['locator']))
+    for value in row.get('values',{}).values():
+        if 'official_locator' in value or value.get('locator'):
+            lines.append('逐值出处：'+_value_text(value))
+    if row.get('excerpt_kind') and (row.get('excerpt') or row.get('excerpt_status')):
+        lines.append('摘录口径：'+row['excerpt_kind'])
+    if full and row.get('excerpt'):lines.append('摘录：'+_plain(row['excerpt']))
+    if full:
+        if row.get('context'):lines.append('原表范围：'+_plain(row['context']))
+        for key,label in [('major_links','本科专业字典'),('institution_links','学校身份关联'),('equivalent_sources','等价片段来源'),('excerpt_locator','摘录定位')]:
+            if row.get(key):lines.append(label+'：'+_plain(row[key]))
+        extra={k:v for k,v in source.items() if k not in _SOURCE_LABELS and v not in (None,'')}
+        if extra:lines.append('来源补充：'+_plain(extra))
+    if row.get('excerpt_status'):lines.append('摘录状态：'+_short_text(row['excerpt_status'],full))
+    for item in row.get('additional_sources',[]):
+        lines.append('额外来源：'+str(item.get('source_id') or '未登记')+'；'+_plain(item.get('locator',{})))
+    for item in row.get('sources',[]):
+        if isinstance(item,dict):
+            src=item.get('source',item)
+            lines.append(prefix(src)+'来源：'+'；'.join(_SOURCE_LABELS.get(k,k)+'：'+_short_text(src[k],full) for k in _SOURCE_LABELS if src.get(k) not in (None,'')))
+            if item.get('locator'):lines.append(prefix(src)+'定位：'+_plain(item['locator']))
+            if full:
+                extra={k:v for k,v in src.items() if k not in _SOURCE_LABELS and v not in (None,'')}
+                if extra:lines.append(prefix(src)+'来源补充：'+_plain(extra))
+    for item in (row.get('excerpt_locator') or {}).get('root_verified_image_references',[]):
+        lines.append('读图定位：'+str(item.get('locator') or '未提供')+'；SHA256='+str(item.get('sha256') or '未提供')+'；出处='+str(item.get('source_id') or '未提供'))
+    return lines
+
+
+def _compact_source_lines(rows, refs):
+    """One bounded, human-readable line per source; keep full objects untouched."""
+    entries={}
+    def add(sid,source=None,locator=None,detail=None):
+        sid=str(sid or '未登记')
+        entry=entries.setdefault(sid,{'source':{},'locations':[],'details':[]})
+        if source:entry['source'].update({k:v for k,v in source.items() if v not in (None,'')})
+        if locator and locator not in entry['locations']:entry['locations'].append(locator)
+        if detail and detail not in entry['details']:entry['details'].append(detail)
+    priority=[]
+    for row in rows:
+        source=row.get('source') or {};sid=source.get('source_id')
+        for value in row.get('values',{}).values():
+            vid=str(value.get('source_id') or '未登记')
+            if vid not in priority:priority.append(vid)
+            add(vid,locator=value.get('locator'))
+            if 'official_locator' in value:
+                add(vid,detail='逐值出处：'+_value_text(value))
+        if source:add(sid,source,row.get('original_locator') or row.get('locator'))
+        if row.get('original_locator'):add(sid,detail='原始单元格定位：'+_plain(row['original_locator']))
+        if row.get('excerpt_kind') and (row.get('excerpt') or row.get('excerpt_status')):add(sid,detail='摘录口径：'+_short_text(row['excerpt_kind'],cap=120))
+        if row.get('excerpt_status'):add(sid,detail='摘录状态：'+_short_text(row['excerpt_status'],cap=120))
+        for item in row.get('sources',[]):
+            if isinstance(item,dict):
+                src=item.get('source',item)
+                add(src.get('source_id'),src,item.get('locator'))
+        for item in row.get('additional_sources',[]):
+            add(item.get('source_id'),locator=item.get('locator'),detail='额外来源：'+str(item.get('source_id') or '未登记'))
+        for item in (row.get('excerpt_locator') or {}).get('root_verified_image_references',[]):
+            add(item.get('source_id'),detail='读图定位：'+str(item.get('locator') or '未提供')+'；SHA256='+str(item.get('sha256') or '未提供'))
+    for sid in refs:add(sid)
+    order=[sid for sid in priority if sid in entries]+[sid for sid in entries if sid not in priority]
+    def title_text(value):
+        value=str(value or '').replace('\n',' ')
+        if value.lstrip().startswith(('{','[')) or re.search(r'"(?:members|note|citation)"\s*:',value):return '结构化来源标题（--full查看）'
+        return value if len(value)<=60 else value[:59]+'…'
+    def location_text(loc):
+        if not isinstance(loc,dict):return _short_text(loc,cap=140)
+        parts=[]
+        for key in ('src_sheet','src_table','src_page','src_col','src_row','src_locator','locator','source_locator','locator_status'):
+            if loc.get(key) not in (None,''):parts.append(_SOURCE_LABELS.get(key,key)+'：'+_short_text(loc[key],cap=100))
+        if loc.get('first_row') is not None:
+            parts.append('行边界：'+str(loc['first_row'])+'—'+str(loc.get('last_row',loc['first_row']))+'（可能不连续；匹配'+str(loc.get('matched_rows','未注明'))+'行，全部逐行关联保留在库中，此处为边界摘要）')
+        return '；'.join(parts)
+    lines=[]
+    for sid in order[:10]:
+        entry=entries[sid];src=entry['source'];ref=refs.get(sid,sid)
+        parts=['['+ref+'] 来源：出处：'+sid]
+        for key in ('publisher','title'):
+            if src.get(key):parts.append(_SOURCE_LABELS[key]+'：'+title_text(src[key]))
+        for key in ('landing_url','file_url'):
+            if src.get(key):parts.append(_SOURCE_LABELS[key]+'：'+_short_text(src[key],cap=240))
+        if src.get('archive_sha256'):parts.append('指纹：'+str(src['archive_sha256']))
+        locations=entry['locations']
+        if locations:parts.append('定位：'+' / '.join(location_text(x) for x in locations[:2]))
+        if len(locations)>2:parts.append('另'+str(len(locations)-2)+'处定位见--full/--json（可能不连续）')
+        parts.extend(entry['details'][:4])
+        if len(entry['details'])>4:parts.append('其他核对信息见--full/--json')
+        lines.append('；'.join(parts).replace('\n',' '))
+    if len(order)>10:lines.append('另'+str(len(order)-10)+'条来源未展开（含其他值的出处时仍以上方S编号区分；--full或--json查看完整来源和定位）')
+    return lines
+
+
+def render_text(result, *, full=False):
+    if result.get('query')=='source':return _render_full_text(result)
+    # Preserve identity/event wording and warnings, with no business rows duplicated.
+    header=dict(result,sections=[],warnings=[])
+    lines=_render_full_text(header).splitlines()
+    if lines and lines[-1].startswith('未取到匹配业务记录'):lines.pop()
+    for sec in result.get('sections',[]):
+        original=sec.get('rows',[])
+        profile=sec.get('table') in _PROFILE_TABLES
+        rows=_profile_rows(original) if profile else original
+        visible=rows if full else rows[:10]
+        more=max(0,len(rows)-len(visible))+sec.get('truncated',0)
+        noun='字段' if profile else '行'
+        total_label=str(sec.get('total',len(original)))+noun
+        if profile and sec.get('fact_count') is not None:total_label+='（'+str(sec['fact_count'])+'个不同值）'
+        lines.extend(['',sec['title']+'：共'+total_label+'；本页'+str(len(visible))+noun+'；后续'+str(more)+'行未显示','适用范围 | 数值与出处','--- | ---'])
+        if sec.get('excluded_facts'):
+            lines.append('说明：'+str(sec['excluded_facts'])+'个属性无可用来源；已沿用原工作表身份隔离，不纳入概况或冲突判定。')
+        origins=[]
+        refs={}
+        for item in visible:
+            for origin in item.get('_origin_rows',[item]):
+                ids=[v.get('source_id') for v in origin.get('values',{}).values()]
+                ids.append((origin.get('source') or {}).get('source_id'))
+                ids.extend((x.get('source',x) or {}).get('source_id') for x in origin.get('sources',[]) if isinstance(x,dict))
+                for sid in ids:
+                    if sid is not None and str(sid) not in refs:refs[str(sid)]='S'+str(len(refs)+1)
+        for row in visible:
+            variants=row.get('_variants',[row])
+            context_parts=[]
+            for variant in variants:
+                for k,v in variant.get('context',{}).items():
+                    if not full and k in {'record_type','dataset_type','school_raw','school','school_name','comparison_status'}:
+                        continue
+                    if not full and k=='scope_raw':v=_json(v,v)
+                    text=_list_text(k,v,full)
+                    if not full:text=_short_text(text,cap=100)
+                    context_parts.append(({'master_list':'硕士点','phd_list':'博士点'}.get(k,CONTEXT_LABELS.get(k,k)))+'：'+text)
+            context='；'.join(dict.fromkeys(context_parts)) or ('学校概况' if profile else '原件未给适用范围')
+            vals=[]
+            missing=[]
+            for key,value in [(k,v) for variant in variants for k,v in variant.get('values',{}).items()]:
+                status=value.get('value_status')
+                status=status.get('status') if isinstance(status,dict) else status
+                if not full and value.get('value') is None and status=='来源未提供' and any(v.get('value') is not None for variant in variants for v in variant.get('values',{}).values()):
+                    continue
+                label=value.get('display_label',('签约人数' if sec['table']=='graduate_destination' and key=='headcount' else '名次' if sec['table']=='graduate_destination' and key=='rank' else LABELS.get(key,key)))
+                if not full and value.get('value') is None and status=='来源未提供':
+                    missing.append((label,value))
+                    continue
+                copy=dict(value)
+                if not full:
+                    copy={k:v for k,v in copy.items() if k not in ('locator','official_locator','official_locator_candidates')}
+                    if isinstance(copy.get('value'),(str,list,dict)):copy['value']=_list_text(key,copy['value'],full,copy.get('declared_count'))
+                    copy['publisher']=_short_text(copy.get('publisher','未注明'),cap=60)
+                    copy['source_id']=refs.get(str(copy.get('source_id')),str(copy.get('source_id') or '未登记'))
+                vals.append(label+'：'+_value_text(copy))
+            if missing:
+                label='、'.join(x[0] for x in missing[:3])
+                if len(missing)>3:label+='等'+str(len(missing))+'项'
+                copy=dict(missing[0][1]);copy['source_id']=refs.get(str(copy.get('source_id')),str(copy.get('source_id') or '未登记'))
+                vals.append(label+'：'+_value_text(copy))
+            if row.get('_conflict') or row.get('source_conflict'):context+='；来源之间不一致'
+            if row.get('annotation_json'):context+='；原表背景旁注（第三方整理未核，不作招生范围）：'+_short_text(row['annotation_json'],full)
+            if row.get('numeric_conflict_fields'):context+='；第三方版本冲突字段：'+'、'.join(LABELS.get(k,k) for k in dict.fromkeys(row['numeric_conflict_fields']))+'；'+NUMERIC_CONFLICT_NOTE
+            if row.get('numeric_conflict_fields_status'):context+='；'+row['numeric_conflict_fields_status']
+            lines.append(context+' | '+('；'.join(vals) or '原表文字信息'))
+            origins.extend(row.get('_origin_rows',[row]))
+        if full:
+            sources=[]
+            for row in origins:sources.extend(_source_lines(row,True,refs))
+            for sid,ref in refs.items():
+                if not any(('出处：'+sid) in line for line in sources):sources.append('['+ref+'] 出处：'+sid)
+            sources=list(dict.fromkeys(sources))
+        else:sources=_compact_source_lines(origins,refs)
+        if sources:lines.extend(['来源详情：']+sources)
+        # Explicit paging also keeps source-coordinate text outside the value cell.
+        lines.append('分页 | offset='+str(sec.get('offset',0))+'；后续'+str(more)+'行未显示；--full展开本页，后续页用--offset')
+    for warning in result.get('warnings',[]):lines.append('提示：'+warning)
+    if not result.get('sections'):lines.append('未取到匹配业务记录；不代表学校或专业未招生。')
+    return '\n'.join(lines)+'\n'
+
+
 def main(argv=None):
     argv=list(sys.argv[1:] if argv is None else argv)
     if argv[:2]==['detail','source']:argv=argv[1:]
     ap=argparse.ArgumentParser(description='知衢本机统一只读查询；来源链与适用范围不合并')
     sub=ap.add_subparsers(dest='command',required=True)
     for cmd in ['school','program','jobs','source']:
-        p=sub.add_parser(cmd);p.add_argument('--db');p.add_argument('--json',action='store_true');p.add_argument('--limit',type=int,default=10);p.add_argument('--offset',type=int,default=0)
+        p=sub.add_parser(cmd);p.add_argument('--db');p.add_argument('--json',action='store_true');p.add_argument('--full',action='store_true',help='展开当前页的完整文字与来源；分页仍用--limit/--offset');p.add_argument('--limit',type=int,default=10);p.add_argument('--offset',type=int,default=0)
         if cmd in ['school','program']:p.add_argument('school');p.add_argument('--year',type=int);p.add_argument('--province')
         if cmd in ['school','program']:p.add_argument('--major');p.add_argument('--subject');p.add_argument('--plan-type')
         if cmd=='program':p.add_argument('program')
         if cmd=='jobs':p.add_argument('--region');p.add_argument('--major');p.add_argument('--year',type=int);p.add_argument('--education-db')
         if cmd=='source':p.add_argument('source_id');p.add_argument('--domain',choices=['education','employment'],default='education')
-    ns=vars(ap.parse_args(argv));command=ns.pop('command');as_json=ns.pop('json')
+    ns=vars(ap.parse_args(argv));command=ns.pop('command');as_json=ns.pop('json');full=ns.pop('full')
     try:
         if command=='school':res=query_school(ns.pop('school'),**ns)
         elif command=='program':res=query_program(ns.pop('school'),ns.pop('program'),**ns)
         elif command=='jobs':res=query_jobs(**ns)
         else:res=query_source(ns.pop('source_id'),**ns)
-        print(json.dumps(res,ensure_ascii=False,indent=2) if as_json else render_text(res),end='\n' if as_json else '')
+        print(json.dumps(res,ensure_ascii=False,indent=2) if as_json else render_text(res,full=full),end='\n' if as_json else '')
     except (QueryError,sqlite3.Error) as e:ap.exit(2,'查询未完成：'+str(e)+'\n')
     return 0
 
