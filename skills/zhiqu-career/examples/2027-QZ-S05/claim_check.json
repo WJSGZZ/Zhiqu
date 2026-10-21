@@ -257,7 +257,16 @@
       ],
       "bindings": [],
       "claim_id": "C32bd5714a7e851737cf37ace",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "流程图标题把主线定为企业财务、省考等公告再定，对应画像本人目标“上市公司或大一点民企的财务”与父母“省考”两条，E011 记 2027 省考公告截至 10-20 未见，故“看公告再报”与证据状态一致。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -310,7 +319,16 @@
       ],
       "bindings": [],
       "claim_id": "C1b96e939efb4bdcf04b98092",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "图例说明方框、菱形与深浅色的含义，只解释流程图画法，不含对外事实。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -363,7 +381,16 @@
       ],
       "bindings": [],
       "claim_id": "Ce664c13c8f92c86e90cb9983",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "图注把专业规则写成三档：写了财务管理直接看、只写“工商管理类”打电话、只列会计类不报；原件表头第 8 列确为“咨询电话”，E012 那行号码 0571-65060030，打电话这一步有据可做。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -416,7 +443,16 @@
       ],
       "bindings": [],
       "claim_id": "C642c352385b4b7e7f985eac1",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "声明流程图只表示先后与条件、不代表录用把握，是对图的使用限制，无需外部证据。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -469,7 +505,16 @@
       ],
       "bindings": [],
       "claim_id": "C6a8ac2aa0dcc543311e45a2f",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "流程图第 1 行节点编号“A”，纯标识。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -522,7 +567,16 @@
       ],
       "bindings": [],
       "claim_id": "C5bd87d5e2d5992d7bfeda0cf",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "节点 A 的类型列写“步骤”，对应图例里的方框。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -575,7 +629,16 @@
       ],
       "bindings": [],
       "claim_id": "C17830bd79965eb565841f886",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "A 步“再投一批企业财务岗，同时盯省考公告”：画像已投 5 家（字段 27），“再投一批”措辞与之相符；盯公告对应 E011 未见 2027 公告的状态。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -628,7 +691,16 @@
       ],
       "bindings": [],
       "claim_id": "C8b65f2c21cc0bfe1e74c6774",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "A 行去向列“>B”，只表示连线指向判断节点 B。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -681,7 +753,16 @@
       ],
       "bindings": [],
       "claim_id": "C3e0de4e468f353510605dde9",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "流程图第 2 行节点编号“B”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -734,7 +815,16 @@
       ],
       "bindings": [],
       "claim_id": "C8136d9c41dda6e2e860d6232",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "节点 B 类型写“判断”，对应图例里的菱形。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -787,7 +877,16 @@
       ],
       "bindings": [],
       "claim_id": "C540d4719dc6e14d41a95fd28",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "判断题“有专业对得上、本人条件也符合的省考职位？”把是否报省考挂在职位筛选结果上，与 case.json 中 fresh_fa_ok 的筛选口径一致，是问题而非断言。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -840,7 +939,16 @@
       ],
       "bindings": [],
       "claim_id": "Cb324e10a83372beb2e06c906",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "B 的“有”分支连到 C，仅为流程连线。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -893,7 +1001,16 @@
       ],
       "bindings": [],
       "claim_id": "Caa29d9e7d40a8ed2325ae1db",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "B 的“没有”分支连到 D，仅为流程连线。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -946,7 +1063,16 @@
       ],
       "bindings": [],
       "claim_id": "C218f50f78f31affb28de9450",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "流程图第 3 行节点编号“D”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -999,7 +1125,16 @@
       ],
       "bindings": [],
       "claim_id": "Cf3e4a32c3763dbe5fd546293",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "节点 D 类型“备选”，即图例中浅色退路。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -1052,7 +1187,16 @@
       ],
       "bindings": [],
       "claim_id": "Cc873ba4a1969649f168f3355",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "D 的处理“不报，精力全给企业财务”是没有对口职位时的取舍建议，与本人每周只有约 12 小时（字段 15）的约束一致。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -1105,7 +1249,16 @@
       ],
       "bindings": [],
       "claim_id": "C9727616ecce66810b33a993e",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "流程图第 4 行节点编号“C”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -1158,7 +1311,16 @@
       ],
       "bindings": [],
       "claim_id": "C6f84b733fd96417fed0c3d44",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "节点 C 的类型列再次写“步骤”，表示报名动作。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -1211,7 +1373,16 @@
       ],
       "bindings": [],
       "claim_id": "Cb7adf0c20953d43ceaecb782",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "C 步“报名期内报一个，全力考一次”：省考一次只报一个职位属操作建议；“考一次”回应本人“怕考公考两年都考不上”（字段 19）。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -1264,7 +1435,16 @@
       ],
       "bindings": [],
       "claim_id": "C79b9c92e2ff2ef35cb0744af",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "C 行去向“>E”，连到年底复盘判断。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -1317,7 +1497,16 @@
       ],
       "bindings": [],
       "claim_id": "C6204d86d416fe3fbd7c666ee",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "流程图第 5 行节点编号“E”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -1370,7 +1559,16 @@
       ],
       "bindings": [],
       "claim_id": "C4ce36c47e4bc5191552b91cd",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "节点 E 类型写“判断”，是第二个菱形节点。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -1423,7 +1621,16 @@
       ],
       "bindings": [],
       "claim_id": "Ce8d608a067145191c8520ce2",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "E 的问题“到年底有没有企业面试或录用？”以 context.personal_dates.year_end=2026-12-31 为检查时点，是自设检查问题。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -1476,7 +1683,16 @@
       ],
       "bindings": [],
       "claim_id": "Cbc3527a70309ca80ded83023",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "E 的“有”分支指向 F，属连线。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -1529,7 +1745,16 @@
       ],
       "bindings": [],
       "claim_id": "C4e422a046a64d13b370f6ed2",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "E 的“没有”分支指向 G，属连线。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -1582,7 +1807,16 @@
       ],
       "bindings": [],
       "claim_id": "C15389fc97b6d38ba73bf97bd",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "流程图第 6 行节点编号“G”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -1635,7 +1869,16 @@
       ],
       "bindings": [],
       "claim_id": "C214c341fb33ef2f0a49deb27",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "节点 G 标“备选”，表示企业线没进展时的退路。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -1688,7 +1931,16 @@
       ],
       "bindings": [],
       "claim_id": "C211c10997599cf4ed6eedf7a",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "G 的退路“春招扩到中小企业、财务共享中心”：财务共享与画像实训经历（字段 4“财务共享的实训课”）相关，属扩大目标的建议，E056 推测条目也记了“到年底仍无面试就扩大目标”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -1741,7 +1993,16 @@
       ],
       "bindings": [],
       "claim_id": "C4baccbd824d356292ddfd523",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "流程图第 7 行节点编号“F”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -1794,7 +2055,16 @@
       ],
       "bindings": [],
       "claim_id": "Ce03378d7cb907d2bdd68d4ba",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "节点 F 类型“结果”，表示拿到面试或 offer 后的结点。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -1847,7 +2117,16 @@
       ],
       "bindings": [],
       "claim_id": "C7be1047da976df355aba8274",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "F 的动作“比职责、合同、到手收入，再定”，比较项与本人到手底线 4500（字段 7）和 E032 缺口里列的合同主体、工资构成一致。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -1929,7 +2208,16 @@
       ],
       "bindings": [],
       "claim_id": "C3e2641d5099d17d15f355234",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "要点卡第 1 行标签“主线”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -2011,7 +2299,16 @@
       ],
       "bindings": [],
       "claim_id": "C6220f5931ea8a3d7b02cb8cb",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "要点卡主线写“企业财务”，画像目标 3 原话“上市公司或者大一点民企的财务”，提出者为自己。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -2093,7 +2390,16 @@
       ],
       "bindings": [],
       "claim_id": "C6d50ec29d9c2b837058fc215",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "主线细化为“应收应付、费用、总账助理；浙江省内”：前两项来自本人原话“应收应付、费用核算那种”，总账助理是报告补充的相近岗位，省内对应字段 8“明确不去：省外”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -2175,7 +2481,16 @@
       ],
       "bindings": [],
       "claim_id": "C3278a9e1c376be873ae46ca0",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "要点卡第 2 行标签“省考对口职位有多挤”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -2263,7 +2578,16 @@
         }
       ],
       "claim_id": "C4aa075d1bf2a7e267d8bc5fa",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "“每名额约 64.5 人”绑定 c:/fa_ok_median=64.5；我用 case.json 中 84 个比值复算中位数同为 64.5，且从职位表与缴费表原件按代码连接后 84 个值逐一吻合。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -2351,7 +2675,16 @@
         }
       ],
       "claim_id": "C7e9d03d36cbfc3f680af208e",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "“是全省应届职位的 2.2 倍”绑定 fa_ok_vs_all=2.2，即 64.5÷29.0=2.22 取一位；29.0 是 2410 个限应届职位（含硕士职位）的中位数，句中对象写“全省应届职位”与此一致。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -2433,7 +2766,16 @@
       ],
       "bindings": [],
       "claim_id": "Cf6ab415dde86b1a4b347987d",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "把竞争比解释为“一大群人争一个名额，只说明热度，不是录取概率”，符合 E013 范围注“缴费不等于到考”和 AGENTS 第七节不得把群体数字当个人概率的要求。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -2515,7 +2857,16 @@
       ],
       "bindings": [],
       "claim_id": "C41c0fe831f3116eb928da42d",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "要点卡第 3 行标签“没收入时能撑多久”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -2603,7 +2954,16 @@
         }
       ],
       "claim_id": "Cc754f46d91027450b4fe76be",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "“合租约 3.0 个月”绑定 city_months=3.0：可动现金 12000−3000=9000，合租月支出 1500+1500=3000，9000÷3000=3.0。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -2691,7 +3051,16 @@
         }
       ],
       "claim_id": "C70fb7d59fa08f127b530a63b",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "“住家里约 11.2 个月”绑定 home_months=11.2：情景只把月支出换成字段 23 的 800，9000÷800=11.25，按一位小数呈现为 11.2；“留出应急金后”对应扣除的 3000。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -2773,7 +3142,16 @@
       ],
       "bindings": [],
       "claim_id": "C01ee1de518dd839d58075152",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "要点卡第 4 行标签“国考注册认证截止”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -2861,7 +3239,16 @@
         }
       ],
       "claim_id": "Cf184409f4c506bf632e87dab",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "“10 月 23 日”取自 E005 value 2026-10-23T18:00，原文“注册认证的时间为2026年10月14日8:00至10月23日18:00”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -2954,7 +3341,16 @@
         }
       ],
       "claim_id": "Cd42a876c4bfdc4f132209ef0",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "“当天 18:00 截止”对 E005 原文 10 月 23 日 18:00；“提交申请 10-24 18:00”对 E003 原文“10月15日8:00至10月24日18:00”；“只在有愿去的浙江职位时报”是附带建议，与不出省（字段 8）一致。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -3008,7 +3404,16 @@
       ],
       "bindings": [],
       "claim_id": "C70e5f0419ff2bd1878be3969",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "核心要点小标题“本人意愿决定主线”，是报告取舍原则，对应 E001 中本人与父母期待的区分。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -3062,7 +3467,16 @@
       ],
       "bindings": [],
       "claim_id": "C827f6434046594671e98af49",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "“成长和工作内容排在最前”与 E001 优先级原话“成长与前景、工作内容、城市……”前两位一致；“家里的期望转成要核的条件”是写法说明。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -3116,7 +3530,16 @@
       ],
       "bindings": [],
       "claim_id": "Ce0965e6b1d94e1bfdcf137cd",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "核心要点第 2 条小标题“省考看专业名单”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -3170,7 +3593,16 @@
       ],
       "bindings": [],
       "claim_id": "C9ddbac3d956fc3199208fea3",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "核心要点里的专业三档规则；“咨询电话”一栏在 E012 原件 20 列表头中确有，E048 目录显示财务管理属工商管理类，故类名职位须先电话确认而不是直接认定。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -3224,7 +3656,16 @@
       ],
       "bindings": [],
       "claim_id": "C9d77960bca23bff17af36cb0",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "“身份不限的更挤”：any_fa 中位数 177.0 对 fresh_fa 54.5；“专业不限的多数条件未确认符合”：58 个专业不限职位里只有 5 个本人条件也符合，其余 25 个不符、28 个待核，我从原件逐行复现了这一拆分。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -3278,7 +3719,16 @@
       ],
       "bindings": [],
       "claim_id": "C1e77a49bec0b1bb870f8757d",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "核心要点第 3 条小标题“竞争数据不是概率”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -3338,7 +3788,16 @@
         }
       ],
       "claim_id": "Cd577250eafc25df92ef8f886",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "“每个名额约 64.5 人缴费”绑定 fa_ok_median；对象写成“上一届专业写明财务管理、本人条件也符合的职位”，与 fresh_fa_ok 标签逐字对应，并明说不能算个人上岸率。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -3392,7 +3851,16 @@
       ],
       "bindings": [],
       "claim_id": "C941278eac845bee83913a2ff",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "核心要点第 4 条小标题“等待要设边界”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -3452,7 +3920,16 @@
         }
       ],
       "claim_id": "C54d8f40d07e3667575ac482f",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "“自己的钱合租只够约 3.0 个月”绑定 city_months；“家里能支持多久还要说清”对应字段 12 多快需要收入 status=unknown、D5 记本人选“不确定”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -4372,7 +4849,16 @@
         }
       ],
       "claim_id": "C9caa8694f5d3f11993681aea",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "上一届报名 11 月 6 日—11 月 11 日对 E006/E054 原文“2025年11月6日9时—11月11日17时”；国网“第一批招聘公告 2026年11月中旬”明确归于总公告（E029），并加“浙江单位是否在第一批待核”，与 E031“以各单位招聘公告为准”一致，没有说成浙江已定。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -4486,7 +4972,16 @@
       ],
       "bindings": [],
       "claim_id": "C886a8c8f7048fd3a47fb2cd2",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "推测",
+        "reason": "企业财务与本人排第一、第二的“成长”“工作内容”对得上、实习可衔接，均有画像字段 13、4 支撑；“拿到 offer 就能按期有收入”是常识推理，未写成官方事实。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -4546,7 +5041,16 @@
         }
       ],
       "claim_id": "C87e43cc1201564399babb3cb",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "“限应届职位有 84 个”绑定 fa_ok_count=84，我按原件复现 84；“比全省应届职位挤得多”对 2.2 倍；“零基础”对字段 21“没做过”模考；“家里也最认可”对父母原话“希望我考公务员”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "02",
@@ -4662,7 +5166,16 @@
       ],
       "bindings": [],
       "claim_id": "Ccd4b759584713249f6e50cce",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "现状表图注“只列画像写到的内容，不替本人估”，是表格的取材说明。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "02",
@@ -11912,7 +12425,16 @@
       ],
       "bindings": [],
       "claim_id": "Cbed9efdfd956bab52e01e10e",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "“缺大公司系统经验”对字段 4“没在大公司或者事务所实习过”；初级会计须一个考试年度内通过全部科目对 E035 原文，“推测明年两科都要考”句内已标推测，依据 E051 与字段 5“经济法基础没过”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "04",
@@ -12036,7 +12558,16 @@
       ],
       "bindings": [],
       "claim_id": "C009bfb6ca03b69d29aa26ca8",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "主线验证办法“投一批省内企业财务岗，年底前看有没有面试”，时点与 year_end=2026-12-31 一致，是可执行的检验建议。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "04",
@@ -12166,7 +12697,16 @@
         }
       ],
       "claim_id": "Cafd0ca216c6d8ef288affaea",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "84 个绑定 fa_ok_count；“除专业技术类和特殊职位外，省级和杭甬市级职位要求两年基层经历”逐项对 E008 原文“除专业技术类职位和特殊职位外……均须具有2年以上基层工作经历”，并标为上一届。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "04",
@@ -12290,7 +12830,16 @@
       ],
       "bindings": [],
       "claim_id": "C4a640d391dcbb48738422699",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "省考验证办法“公告一出按专业名单和本人条件筛”，与 D3 个人检查点从 11-01 起盯公告一致。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "04",
@@ -12414,7 +12963,16 @@
       ],
       "bindings": [],
       "claim_id": "Cb757bda07ffd19b370347356",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "“国网浙江单位的具体公告本案未取得”与 E047 状态 unretrieved、gap“平台连接超时未取到”一致，用的是“未取得”而非“未发布”；柜员营销指标写成“需确认”，与字段 24 只是同学转述相称。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "04",
@@ -12538,7 +13096,16 @@
       ],
       "bindings": [],
       "claim_id": "Caf4e4017a1aaf9c093174cf9",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "国企线验证办法“逐条看岗位职责，有销售指标的不报”，直接来自字段 18“不能接受有销售指标的岗位”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "04",
@@ -12662,7 +13229,16 @@
       ],
       "bindings": [],
       "claim_id": "C3b3d87ad12d4566386f3f495",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "“杭州调查中审计职业工资分位较高”：E020—E022 审计专业人员 25/50/75 分位 125831/169320/271200 元/年，高于 E017—E019 会计专业人员 69120/95000/138496；括注“不只事务所”符合范围注“杭州市家企业在岗人员”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "04",
@@ -12786,7 +13362,16 @@
       ],
       "bindings": [],
       "claim_id": "Ca5e5676381b5ea2c99c347e6",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "事务所只作对照的理由：画像三个目标是省考、银行、企业财务，没有事务所；字段 4 原话“没在大公司或者事务所实习过”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "04",
@@ -12826,7 +13411,16 @@
       ],
       "bindings": [],
       "claim_id": "C07a1fb0e45fbbcd76a6dcc00",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "推测",
+        "reason": "企业财务入门岗职责句首就标“按一般经验（不是本案取得的岗位原文）”，E032 记具体岗位原文未取得，句子没有把经验说成原文事实。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "04",
@@ -13302,7 +13896,16 @@
       ],
       "bindings": [],
       "claim_id": "C6236482cebef7ba3e693d0ea",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "毕马威“欢迎取得学士学位或以上的应届生”对 E043；安永“不限专业”对 E053；德勤改后的说法“无论什么专业都能找到适合的职业领域”对 E044 原文“无论您是什么专业，都能在这里找到适合自己的职业领域”；普华永道写“未取得”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "04",
@@ -13488,7 +14091,16 @@
       ],
       "bindings": [],
       "claim_id": "C1042824de9e696f9d5632ff5",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "方向细表第 1 列表头“方向”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "04",
@@ -13528,7 +14140,16 @@
       ],
       "bindings": [],
       "claim_id": "Ce6f7ab4a58e367c8957eb3a0",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "方向细表第 2 列表头“日常做什么”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "04",
@@ -13568,7 +14189,16 @@
       ],
       "bindings": [],
       "claim_id": "Cdf86408b0961de402e79c979",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "方向细表第 3 列表头“本人现有匹配”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "04",
@@ -13608,7 +14238,16 @@
       ],
       "bindings": [],
       "claim_id": "Cac69a02459f32429c629c152",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "方向细表第 4 列表头“还缺什么”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "04",
@@ -13648,7 +14287,16 @@
       ],
       "bindings": [],
       "claim_id": "C49e8be3371c6c607e32f505a",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "细表第 1 行方向名“企业财务（主线）”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "04",
@@ -13688,7 +14336,16 @@
       ],
       "bindings": [],
       "claim_id": "C2a980c70461be502ed6f3b8d",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "推测",
+        "reason": "企业财务日常职责一格开头写“一般经验（未取得岗位原文）”，与 E032 未取得状态一致，列出的录凭证等四项是经验描述。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "04",
@@ -13728,7 +14385,16 @@
       ],
       "bindings": [],
       "claim_id": "C8b0e01e67aaf149ee9a73364",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "“实习录过凭证、做过申报表”对字段 4“录凭证……帮着做小规模纳税人的申报表”；“Excel 和二级”对字段 5“计算机二级 MS Office 已取得”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "04",
@@ -13768,7 +14434,16 @@
       ],
       "bindings": [],
       "claim_id": "C2b1d224d3d0957c8d0d01a40",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "企业财务还缺“初级会计证书”对字段 5 经济法基础未过、尚未取得；“大公司财务系统经验”对字段 4 无大公司实习。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "04",
@@ -13808,7 +14483,16 @@
       ],
       "bindings": [],
       "claim_id": "C0089c8fa727dbf2697bb492b",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "细表第 2 行方向名“公务员（省考、国考）”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "04",
@@ -13848,7 +14532,16 @@
       ],
       "bindings": [],
       "claim_id": "Cdcaba2efdcf6158544387c3c",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "“职位简介”一栏在 E012 原件表头第 9 列；E012 摘录与原件该行该列均为“从事内部审计工作”，我已用指纹 ddce656f… 一致的原件核对。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "04",
@@ -13888,7 +14581,16 @@
       ],
       "bindings": [],
       "claim_id": "C1aeebd0617c2f1eea9b69549",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "“专业对口职位存在”对上一届写明财务管理的 133 个限应届职位（fa_count）；“本人浙江户籍”对字段 10。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "04",
@@ -13928,7 +14630,16 @@
       ],
       "bindings": [],
       "claim_id": "Cb480533130a2a3b0a253ca45",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "“行测申论零基础”对字段 21 没做过模考；“要逐岗核资格”对应 E012 范围注逐列对照的做法。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "04",
@@ -13968,7 +14679,16 @@
       ],
       "bindings": [],
       "claim_id": "C9f103fa892c4f236e50fef8f",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "细表第 3 行方向名“银行、国网等国企”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "04",
@@ -14008,7 +14728,16 @@
       ],
       "bindings": [],
       "claim_id": "Ce4790bb1086e731ef83e0bb7",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "国企方向日常一格列岗位类别：银行柜员或综合岗来自画像目标 2，国网财会类有 E050 财务会计类考试大纲作依据；该格只是候选岗位名，不是职责原文。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "04",
@@ -14048,7 +14777,16 @@
       ],
       "bindings": [],
       "claim_id": "C3676acfb8c093e0bcb8bb704",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "银行国企一格“专业相关”，财务管理与柜员、财会类岗位相关属一般判断，没有写成已符合招聘条件。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "04",
@@ -14088,7 +14826,16 @@
       ],
       "bindings": [],
       "claim_id": "C6c48e6ccd12e4aa96b339ce0",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "“国网浙江公告本案未取得”对 E047 status=unretrieved；“岗位是否带营销指标”列为缺口，与字段 24 的转述地位一致。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "04",
@@ -14128,7 +14875,16 @@
       ],
       "bindings": [],
       "claim_id": "C28011adf1f3531254a559ded",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "细表第 4 行方向名“事务所审计（对照）”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "04",
@@ -14168,7 +14924,16 @@
       ],
       "bindings": [],
       "claim_id": "C41ab2f148528233f529848dc",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "事务所一格把盘点、抽凭、底稿与忙季出差加班列为“逐岗核对”的事项，是核查清单而非断言，本案也确无事务所岗位原文。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "04",
@@ -14208,7 +14973,16 @@
       ],
       "bindings": [],
       "claim_id": "C328566ee139392170079e658",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "事务所一格“专业对口”：财务管理与审计同属财会类，E052 税务目录把两者同列“财会审计类”，判断有据。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "04",
@@ -14248,7 +15022,16 @@
       ],
       "bindings": [],
       "claim_id": "C7cff036f8341994b7bee9cf9",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "事务所还缺“真实加班和出差待核，再对照‘偶尔加班’”，偏好原话对字段 18“能接受的加班程度：偶尔加班”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -14319,7 +15102,16 @@
       ],
       "bindings": [],
       "claim_id": "Cb1bd0912445fa5db6e439964",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "竞争图标题“浙江省考上一届：每个名额有多少人缴费报名”，对象与 E013 缴费表一致。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -14360,7 +15152,16 @@
       ],
       "bindings": [],
       "claim_id": "Cf8f23d3945bdc059df7557e5",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "图注解释粗条为中间一半、竖线为中位数，对应 q1/q3 与 median 的画法。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -14401,7 +15202,16 @@
       ],
       "bindings": [],
       "claim_id": "C2265c1ec8bd3b9c2bb449170",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "“本人条件也符合”的定义与 case.json fresh_fa_ok 处理说明一致：去掉限男性、要求中共党员、要职称或证书的，并把民族、市县户籍生源、视力等未填条件单列；我复现 133→84/13/36 与此口径相符。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -14442,7 +15252,16 @@
       ],
       "bindings": [],
       "claim_id": "C7ce7b864e1ebfc04bd3c487f",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "图注“缴费不等于到考，不是上岸概率”，与 E013 范围注“缴费不等于到考”相合。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -14483,7 +15302,16 @@
       ],
       "bindings": [],
       "claim_id": "C364751f655ba5ab7beeb6ec8",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "竞争图单位“人/名额”，与计算项 unit“缴费人数÷招录人数”一致。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -14524,7 +15352,16 @@
       ],
       "bindings": [],
       "claim_id": "Cba090c26b54f86f9365ef0f0",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "竞争图第 1 行标签“限应届、写明财务管理、本人条件也符合”，即 fresh_fa_ok 组。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -14571,7 +15408,16 @@
         }
       ],
       "claim_id": "Ce16219a9fde37c72d8e85dee",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "第 1 行下四分位 48 绑定 fa_ok_q1=48.0，我用 84 个值按 inclusive 法复算为 48.0。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -14618,7 +15464,16 @@
         }
       ],
       "claim_id": "C20aaef9296d6c37953cd0cb3",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "第 1 行上四分位 90 绑定 fa_ok_q3=90.0，复算一致。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -14665,7 +15520,16 @@
         }
       ],
       "claim_id": "C06ce15343a128155bf2afdb3",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "第 1 行中位数 64.5 绑定 fa_ok_median，与原件重算一致。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -14706,7 +15570,16 @@
       ],
       "bindings": [],
       "claim_id": "Cf74a9bceb74d63cb44ea07be",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "竞争图第 2 行标签“限应届、写明财务管理（全部）”，即 133 个的 fresh_fa 组。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -14753,7 +15626,16 @@
         }
       ],
       "claim_id": "Cc4bdf638e6107b9a7749a78a",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "第 2 行下四分位 39 绑定 fa_q1=39.0，按 133 个值复算相同。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -14800,7 +15682,16 @@
         }
       ],
       "claim_id": "C28d7351708c411ad9e95e1d1",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "第 2 行上四分位 75 绑定 fa_q3=75.0，复算相同。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -14847,7 +15738,16 @@
         }
       ],
       "claim_id": "C06dc0b85be3c4aadb38f1908",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "第 2 行中位数 54.5 绑定 fa_median=54.5，复算相同。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -14888,7 +15788,16 @@
       ],
       "bindings": [],
       "claim_id": "Cbc89838b7449caa48d8fb530",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "竞争图第 3 行标签“全省限应届（不分专业）”；对应的 2410 个职位也含 741 个硕士起报职位，标签没写“不分学历”，但“全省限应届”本身描述准确。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -14935,7 +15844,16 @@
         }
       ],
       "claim_id": "C078d7898a172e89bbc1583e5",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "第 3 行下四分位 16 绑定 all_q1=16.0，我从原件 2413 个限应届职位中能连上缴费表的 2410 个复算为 16.0。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -14982,7 +15900,16 @@
         }
       ],
       "claim_id": "C7fb42543cfa5e4a58d7907fc",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "第 3 行上四分位显示 51.875，绑定 all_q3=51.875，inclusive 分位法复算一致（显示未取整，不影响数值）。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -15029,7 +15956,16 @@
         }
       ],
       "claim_id": "C796d3ba8cb866973e26329a6",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "第 3 行中位数 29 绑定 all_median=29.0，2410 个比值排序后复算为 29.0。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -15070,7 +16006,16 @@
       ],
       "bindings": [],
       "claim_id": "Ca07047e8151dc0a5d9923fbd",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "竞争图第 4 行标签“身份不限、写明财务管理（未筛）”，对应 any_fa 共 61 个、未按本人条件筛。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -15117,7 +16062,16 @@
         }
       ],
       "claim_id": "Cd89d721281b95674e29d7bec",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "第 4 行下四分位 102 绑定 anya_q1=102.0，按 61 个值复算一致。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -15164,7 +16118,16 @@
         }
       ],
       "claim_id": "C576ca3d4da32a7fc0892587a",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "第 4 行上四分位 241 绑定 anya_q3=241.0，复算一致。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -15211,7 +16174,16 @@
         }
       ],
       "claim_id": "C416508b6af057c66320267a8",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "第 4 行中位数 177 绑定 anya_median=177.0，复算一致。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -15283,7 +16255,16 @@
         }
       ],
       "claim_id": "C3998c9133cbe5420a46ab429",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "84 个、64.5、48.0—90.0、29.0、2.2 倍六个数分别绑定 fa_ok_count、fa_ok_median、fa_ok_q1、fa_ok_q3、all_median、fa_ok_vs_all，全部复算吻合，比较基准写明是“全省限应届职位”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -15340,7 +16321,16 @@
         }
       ],
       "claim_id": "Cebdb1f225c12e423857d1b58",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "“全部 133 个……中位数约 54.5 人”绑定 fa_count、fa_median；“身份不限的更挤，约 177.0 人”绑定 anya_median，且注明“不按本人条件筛”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -15381,7 +16371,16 @@
       ],
       "bindings": [],
       "claim_id": "Ce67f949eaccd01c1e0766d1d",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "竞争分析收尾句“这些是报名热度，不是上岸概率”，是对上文数字的解读限制。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -15533,7 +16532,16 @@
       ],
       "bindings": [],
       "claim_id": "C6f13f811b67b8d9d1e88ecb4",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "比较矩阵标题列出四个比较维度，不含外部事实。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -15685,7 +16693,16 @@
       ],
       "bindings": [],
       "claim_id": "C9cd87b329ea2e1a5d1b31f47",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "矩阵图例：勾＝有支持、半圆＝待核或有条件、叉＝明显不利，只定义符号。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -15837,7 +16854,16 @@
       ],
       "bindings": [],
       "claim_id": "Cb92a79495224a3c4f81a3658",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "图例规定只有转述、没有原文的标待核；我逐格核对：银行“理财待核”来自同学转述（字段 24）确标为半圆，没有哪一格把转述标成勾。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -15989,7 +17015,16 @@
       ],
       "bindings": [],
       "claim_id": "Cb10bccad8836696aab7e3f34",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "图例说明矩阵不打分、不加总、“家里接受”单列，矩阵确无合计列。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -16141,7 +17176,16 @@
       ],
       "bindings": [],
       "claim_id": "Cedc2639905cf9e6736b1c5c4",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "事务所收入依据是 E020—E022 杭州“审计专业人员”分位，范围注为全体企业在岗人员，图注“不只事务所”与之相符。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -16293,7 +17337,16 @@
       ],
       "bindings": [],
       "claim_id": "C407ff5d0a207db2f5e3b53b2",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "矩阵第 1 列表头“本人意愿”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -16445,7 +17498,16 @@
       ],
       "bindings": [],
       "claim_id": "C9e033e6814f332c68a879cca",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "矩阵第 2 列表头“资格能否核”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -16597,7 +17659,16 @@
       ],
       "bindings": [],
       "claim_id": "Cbf10ae9ac1c8527230e46379",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "矩阵第 3 列表头“竞争数据”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -16749,7 +17820,16 @@
       ],
       "bindings": [],
       "claim_id": "C04e656e1681019d475893309",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "矩阵第 4 列表头“准备投入”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -16901,7 +17981,16 @@
       ],
       "bindings": [],
       "claim_id": "C2825eea1a5a4185703df0349",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "矩阵第 5 列表头“收入依据”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -17053,7 +18142,16 @@
       ],
       "bindings": [],
       "claim_id": "Cdd1577054398355da529e261",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "矩阵第 6 列表头“家里接受”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -17205,7 +18303,16 @@
       ],
       "bindings": [],
       "claim_id": "C685d1960e8527b8f5d4a2eeb",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "矩阵第 1 行路线名“企业财务”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -17357,7 +18464,16 @@
       ],
       "bindings": [],
       "claim_id": "C9709caf12a7772d038bc2fe0",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "企业财务×本人意愿打勾“本人首选”：目标 3 由“自己”提出，且字段 20 原话“企业财务是我觉得能学到东西”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -17509,7 +18625,16 @@
       ],
       "bindings": [],
       "claim_id": "Cda44168431c559f09e34cf2f",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "企业财务×资格打半圆“逐份核原文”：E032 记具体企业岗位原文未取得，只能投递时逐份保存核对。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -17661,7 +18786,16 @@
       ],
       "bindings": [],
       "claim_id": "C19bfb71b50fde163e5399926",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "企业财务×竞争打半圆“无可比数据”：证据库没有任何企业财务岗位的报名或录取比数据，半圆而非叉是恰当的。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -17813,7 +18947,16 @@
       ],
       "bindings": [],
       "claim_id": "C1aa32edc16c0a5b38bddd173",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "企业财务×准备投入打勾“实习可衔接”：代理记账实习录凭证、做申报表（字段 4）与企业财务入门工作衔接。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -17965,7 +19108,16 @@
       ],
       "bindings": [],
       "claim_id": "Ca1e756150d5f811898837614",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "企业财务×收入打半圆“分位作参照”：只有 E017—E019 杭州会计专业人员在岗分位，范围注明不是应届起薪，因此不能打勾。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -18117,7 +19269,16 @@
       ],
       "bindings": [],
       "claim_id": "Cd7aadbd4ea654b28c1d71773",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "企业财务×家里接受打半圆“要条件说服”：父母原话“希望我考公务员，考不上就去银行或者国企”，企业财务不在父母首选里。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -18269,7 +19430,16 @@
       ],
       "bindings": [],
       "claim_id": "Ce2cc0d8c7fabb0024f40d833",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "矩阵第 2 行路线名“浙江省考”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -18421,7 +19591,16 @@
       ],
       "bindings": [],
       "claim_id": "C2478dd023ff9451ff1640d3f",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "省考×本人意愿打半圆“本人可接受”：画像“具体想走哪几条”一题本人勾了“省考”，但目标表把省考记为父母提出，故半圆不打勾。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -18573,7 +19752,16 @@
       ],
       "bindings": [],
       "claim_id": "Cd0fb3c1266ca1b07c6e381cd",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "省考×资格打半圆“新公告未见”：E011 记 10-20 两次查首页及浙江组工网，2027 年度公告未见；用的是“未见”，不是“未发布”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -18725,7 +19913,16 @@
       ],
       "bindings": [],
       "claim_id": "Ccee6fbad059a078e263b8389",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "省考×竞争打叉“对口更挤”：本人条件也符合的对口职位中位数 64.5 是全省限应届 29.0 的 2.2 倍（fa_ok_vs_all）。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -18877,7 +20074,16 @@
       ],
       "bindings": [],
       "claim_id": "Cedf81b23360a37c73195e1ab",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "省考×准备投入打叉“从零备考”：字段 21 原话“做过行测、申论或企业笔试的模考吗：没做过”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -19029,7 +20235,16 @@
       ],
       "bindings": [],
       "claim_id": "C3d3c4c424ba08b430de2f03d",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "省考×收入打半圆“无可比数据”：证据库没有浙江公务员收入的官方数据，标待核而不是给数字。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -19181,7 +20396,16 @@
       ],
       "bindings": [],
       "claim_id": "C43b34523bf21bcf8b063abeb",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "省考×家里接受打勾“父母首选”：家里期望原话第一句“爸妈希望我考公务员”，且“爸妈说今年先把省考报了”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -19333,7 +20557,16 @@
       ],
       "bindings": [],
       "claim_id": "C33f184ed51d9e3450cef32e3",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "矩阵第 3 行路线名“国考浙江职位”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -19485,7 +20718,16 @@
       ],
       "bindings": [],
       "claim_id": "C41c92f4f638236a6236dfd55",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "国考×本人意愿打半圆“未表态”：画像本人勾选的路线是省考、银行、其他国企央企，没有国考，也无反对表述。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -19637,7 +20879,16 @@
       ],
       "bindings": [],
       "claim_id": "Cb039aec3dec74e24427b7c83",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "国考×资格打半圆“逐岗核”：E046 记招考简章下载需图形验证码未取，职位条件无法替她核。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -19789,7 +21040,16 @@
       ],
       "bindings": [],
       "claim_id": "C7f3fc9711fb0080c9ee89801",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "国考×竞争打半圆“未统计”：E046 职位表未取得，证据库也无国考报名人数，故无竞争数据。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -19941,7 +21201,16 @@
       ],
       "bindings": [],
       "claim_id": "C4be37061f737b2cf634989d0",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "国考×准备投入同样打叉“从零备考”：国考笔试也考行测、申论（E004），本人没做过模考。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -20093,7 +21362,16 @@
       ],
       "bindings": [],
       "claim_id": "Cbd64794128192f56bda6c977",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "国考×收入打半圆“无可比数据”：证据库无中央机关驻浙职位收入资料。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -20245,7 +21523,16 @@
       ],
       "bindings": [],
       "claim_id": "C785c5c0e8d7c0a004936fa95",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "国考×家里接受打勾“父母认可”：父母期望的单位类型含“公务员”，未区分省考国考。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -20397,7 +21684,16 @@
       ],
       "bindings": [],
       "claim_id": "C8ad42a5b8834539aebcbecc6",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "矩阵第 4 行路线名“国网浙江”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -20549,7 +21845,16 @@
       ],
       "bindings": [],
       "claim_id": "Cb4732b9b4ff945fcf212c650",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "国网×本人意愿打半圆“选过国企”：本人想进的单位类型勾了“国企央企”，路线也勾了“其他国企央企”，但没有点名国网。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -20701,7 +22006,16 @@
       ],
       "bindings": [],
       "claim_id": "C5707c7591f954105397946f0",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "国网×资格打半圆“公告未取得”：E047 国网浙江 2027 第一批公告 unretrieved，措辞是“未取得”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -20853,7 +22167,16 @@
       ],
       "bindings": [],
       "claim_id": "C59632b463463ae363b1f7b98",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "国网×竞争打半圆“未取到”：证据库没有国网浙江历年报名或录取数据。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -21005,7 +22328,16 @@
       ],
       "bindings": [],
       "claim_id": "Cd9185625095eb49221cac64e",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "国网×准备投入打半圆“另需笔试”：E030 原文“按批次组织统一笔试……第一批2026年12月6日”（初定）。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -21157,7 +22489,16 @@
       ],
       "bindings": [],
       "claim_id": "C496fa4028f480d1a30caa1b3",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "国网×收入打半圆“未取到”：证据库无国网浙江薪酬资料，未给数字。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -21309,7 +22650,16 @@
       ],
       "bindings": [],
       "claim_id": "Ca28a768b67568cd4679ebcaa",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "国网×家里接受打勾“父母认可”：父母希望的单位类型含“国企央企”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -21461,7 +22811,16 @@
       ],
       "bindings": [],
       "claim_id": "C3134b1889330c8aabae178a6",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "矩阵第 5 行路线名“银行”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -21613,7 +22972,16 @@
       ],
       "bindings": [],
       "claim_id": "Ce18778d1b58d73febd0b4063",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "银行×本人意愿打半圆“理财待核”：柜员要卖理财只是同学转述（字段 24），本人又不接受销售指标（字段 18），符合“只有转述的标待核”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -21765,7 +23133,16 @@
       ],
       "bindings": [],
       "claim_id": "C08c90d954cfe3117e4808c4d",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "银行×资格打半圆“工行已截止”：E033 工行网上报名 2026-09-04 至 10-08，出稿日 10-20 已过；其他行未取，故半圆不打叉。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -21917,7 +23294,16 @@
       ],
       "bindings": [],
       "claim_id": "C9a5a1f7173970cfa587bb795",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "银行×竞争打半圆“未取到”：证据库没有银行校招报录数据。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -22069,7 +23455,16 @@
       ],
       "bindings": [],
       "claim_id": "C2068ec98a65320e6d96e0afc",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "银行×准备投入打半圆“笔试待核”：E033/E034 只取到报名时间与招聘对象，笔试安排未取。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -22221,7 +23616,16 @@
       ],
       "bindings": [],
       "claim_id": "Cb2917e531e3d27c495606fa4",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "银行×收入打半圆“未取到”：证据库无银行柜员或综合岗薪酬来源。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -22373,7 +23777,16 @@
       ],
       "bindings": [],
       "claim_id": "Ca0f13ab4875f67b7c2250cdf",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "银行×家里接受打勾“父母认可”：父母原话“考不上就去银行或者国企”，目标 2 银行由父母提出。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -22525,7 +23938,16 @@
       ],
       "bindings": [],
       "claim_id": "Cb855966c94107dc6990c189b",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "矩阵第 6 行路线名“事务所审计”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -22677,7 +24099,16 @@
       ],
       "bindings": [],
       "claim_id": "C8944ee1adbd13fe180fb67b1",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "事务所×本人意愿打半圆“未提出”：本人三个目标和单位类型里都没有事务所，只在“听到的说法”里转述学姐。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -22829,7 +24260,16 @@
       ],
       "bindings": [],
       "claim_id": "Cd4e2bc7d0471b3b9aa992d28",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "事务所×资格打半圆“逐所核”：E043/E044/E053 只给出学历、专业的概括说法，具体岗位条件以网申页为准。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -22981,7 +24421,16 @@
       ],
       "bindings": [],
       "claim_id": "C5c0d2f911824f69304184459",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "事务所×竞争打半圆“未取到”：证据库无事务所校招报录数据。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -23133,7 +24582,16 @@
       ],
       "bindings": [],
       "claim_id": "C0d5b1fd86b2ca2f9774bf92b",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "事务所×准备投入打勾“专业对口”：财务管理本科，E053 安永面向本科不限专业、E043 毕马威要学士学位，专业不构成额外准备门槛。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -23285,7 +24743,16 @@
       ],
       "bindings": [],
       "claim_id": "C1d15e3cb98264857426ae817",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "事务所×收入打半圆“审计分位高”：E021 审计专业人员中位 169320 元/年高于 E018 会计 95000，但非应届起薪，故用半圆。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -23437,7 +24904,16 @@
       ],
       "bindings": [],
       "claim_id": "Cbf6bd99f806d5757eac8d42c",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "事务所×家里接受打半圆“未问”：画像家里期望只提公务员、银行、国企，没有涉及事务所。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -23612,7 +25088,16 @@
       ],
       "bindings": [],
       "claim_id": "Ca1f537afc9547523f6d5e605",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "§06 计数图标题，对象为“省考上一届”“限应届职位”，与 fresh_fa 等组的筛选口径一致。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -23667,7 +25152,16 @@
       ],
       "bindings": [],
       "claim_id": "Cef75da17c16c112db4149567",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "配色定义逐项对 case.json 分组说明：深绿 84、琥珀 13 个未填条件加 98 个工商管理类、红色 36 个限男性或党员加 44 个只列会计类；本人“女、共青团员”对字段 25、11。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -23722,7 +25216,16 @@
       ],
       "bindings": [],
       "claim_id": "Cd64c19ee23dd26e0c36bc26a",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "“只写具体专业‘工商管理’的不算”对 fresh_c 筛选说明，并有 E048 目录 120201K 工商管理与 120204 财务管理是两个专业为据。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -23777,7 +25280,16 @@
       ],
       "bindings": [],
       "claim_id": "Cb758f8a771043ad37e7b204b",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "“年龄上限本人没填出生年月，没有计入”：画像出生年月选“不想说”；我查原件 4004 个职位都有年龄要求，处理说明也写年龄单列不参与分组。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -23832,7 +25344,16 @@
       ],
       "bindings": [],
       "claim_id": "C1daab0cb3089afda52f2f702",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "图注“条长是职位个数，从零起”，说明条形图刻度。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -23887,7 +25408,16 @@
       ],
       "bindings": [],
       "claim_id": "Cde29c4ad01cb69468a58c31f",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "计数图单位“个”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -23942,7 +25472,16 @@
       ],
       "bindings": [],
       "claim_id": "Cc190e1d801900335cf86f621",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "计数图第 1 行标签“写明财务管理，本人条件也符合”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -24003,7 +25542,16 @@
         }
       ],
       "claim_id": "Cf1964be840ef0be177cfdc37",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "第 1 行条长值 84 绑定 fa_ok_count，我用原件逐行复现得 84。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -24058,7 +25606,16 @@
       ],
       "bindings": [],
       "claim_id": "C16956895dab74b59630d023b",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第 1 行色调键“主”，在 HTML/PDF 中只转成深绿填色，不作为文字显示。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -24119,7 +25676,16 @@
         }
       ],
       "claim_id": "Cb80854e561e637d86e777ae5",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "第 1 行右端标注“84 个”，与 fa_ok_count 同值。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -24174,7 +25740,16 @@
       ],
       "bindings": [],
       "claim_id": "C3afc673c8b7780bde447f3d1",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "计数图第 2 行标签“写明财务管理，有本人未填的条件”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -24235,7 +25810,16 @@
         }
       ],
       "claim_id": "Cc49181a7e8412ea652ac9873",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "第 2 行值 13 绑定 fa_unk_count；复现得 13：市县户籍生源 9（含“限具有丽水户籍或生源”1 个）、视力 2、视力加市县 1、“适合男性”1。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -24290,7 +25874,16 @@
       ],
       "bindings": [],
       "claim_id": "Cb85eb87bfe242257f317e92c",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第 2 行色调键“稳”，渲染为琥珀色条，对应图注“要先问清的”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -24351,7 +25944,16 @@
         }
       ],
       "claim_id": "C95e81e13767693a79e73e93b",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "第 2 行右端“13 个”与 fa_unk_count 相同。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -24406,7 +26008,16 @@
       ],
       "bindings": [],
       "claim_id": "Cb4ea4dfad66200ccfe6ab587",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "计数图第 3 行标签“写明财务管理，但限男性或要党员等”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -24467,7 +26078,16 @@
         }
       ],
       "claim_id": "Cabcec33a3d69ce94234a9709",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "第 3 行值 36 绑定 fa_fail_count；原件复现为限男性 24 个、要求中共党员 12 个，合计 36。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -24522,7 +26142,16 @@
       ],
       "bindings": [],
       "claim_id": "C958fc466e13546a647dc537a",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第 3 行色调键“冲”，在 HTML 中渲染为红色 #9B3B2E 条，对应图注“红色是不报的”；仅 report.md 文本版会露出“冲”字。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -24583,7 +26212,16 @@
         }
       ],
       "claim_id": "C378fa916f3da18862c036f1a",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "第 3 行右端“36 个”与 fa_fail_count 相同。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -24638,7 +26276,16 @@
       ],
       "bindings": [],
       "claim_id": "C1fcd211cda9961aabf8bc172",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "计数图第 4 行标签“只写‘工商管理类’（先电话确认）”，“咨询电话”列在原件中存在。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -24699,7 +26346,16 @@
         }
       ],
       "claim_id": "C2474b483a188da67f265251d",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "第 4 行值 98 绑定 fc_count，按“名单无财务管理与会计类、但有工商管理类”从原件复现为 98。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -24754,7 +26410,16 @@
       ],
       "bindings": [],
       "claim_id": "Cd4c6cc61b4ec06d336882c37",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第 4 行色调键再次为“稳”，即工商管理类职位也用琥珀色表示待确认。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -24815,7 +26480,16 @@
         }
       ],
       "claim_id": "C338ab6ad6a0720e13802b50a",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "第 4 行右端“98 个”与 fc_count 相同。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -24870,7 +26544,16 @@
       ],
       "bindings": [],
       "claim_id": "Ccd829a417a3944a37e164e07",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "计数图第 5 行标签“只列会计类（不报）”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -24931,7 +26614,16 @@
         }
       ],
       "claim_id": "Cbfe2543b519236da2d1e2e4e",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "第 5 行值 44 绑定 fb_count，从原件复现为 44 个只列会计类、不含财务管理与工商管理类的限应届职位。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -24986,7 +26678,16 @@
       ],
       "bindings": [],
       "claim_id": "C0c785558ce8e30d310a430b6",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第 5 行色调键也是“冲”，渲染为红色，表示只列会计类的不报。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -25047,7 +26748,16 @@
         }
       ],
       "claim_id": "C0291615d6643c563c03a350b",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "第 5 行右端“44 个”与 fb_count 相同。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -25143,7 +26853,16 @@
       ],
       "bindings": [],
       "claim_id": "C239d48e87b90f31bba29e24f",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "候选表第 1 列表头“目标”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -25239,7 +26958,16 @@
       ],
       "bindings": [],
       "claim_id": "C0ed1316393731a613e0b7c22",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "候选表第 2 列表头“门槛要核什么”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -25335,7 +27063,16 @@
       ],
       "bindings": [],
       "claim_id": "C05673469b5fd8710f1e42828",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "候选表第 3 列表头“本人现在匹配”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -25431,7 +27168,16 @@
       ],
       "bindings": [],
       "claim_id": "Ca2d4f4c8a03326b482eaa9d4",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "候选表第 4 列表头“怎么处理”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -25527,7 +27273,16 @@
       ],
       "bindings": [],
       "claim_id": "C2d0268b72be40bb04865bc0f",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "候选第 1 行目标“企业财务（应收应付、费用、总账助理）”，前两项来自本人目标 3 原话，总账助理为报告补的相近岗位。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -25623,7 +27378,16 @@
       ],
       "bindings": [],
       "claim_id": "Ca92905f5a4d26c8d0d0602cd",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "企业财务门槛要核“学历专业、职责、合同主体、地点、工资构成”，与 E032 gap 列的“岗位职责、合同主体、地点、工资构成”一致。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -25719,7 +27483,16 @@
       ],
       "bindings": [],
       "claim_id": "Cda51e36eb27d2a390da8b06e",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "企业财务匹配一格“实习录过凭证、做过申报表；缺大公司系统经验”，两半分别对字段 4 实习内容与“没在大公司……实习过”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -25815,7 +27588,16 @@
       ],
       "bindings": [],
       "claim_id": "Ceb61082bf0d6918218b72efd",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "企业财务处理方式“主线：投一批，逐份留原文”，与 E032 gap“投递时逐份保存招聘原文”一致。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -25911,7 +27693,16 @@
       ],
       "bindings": [],
       "claim_id": "Cbd3fc46fa0bf0a30e5e8c0c5",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "候选第 2 行目标“财务共享中心、财务运营”，是报告依据本人实训经历扩展的方向，不是本人原列目标。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -26007,7 +27798,16 @@
       ],
       "bindings": [],
       "claim_id": "Cf363e94fae44d0a8c1000217",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "财务共享门槛要核“考核方式（是否按单量）、合同主体、晋升路径”，属核查事项清单，无事实断言。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -26103,7 +27903,16 @@
       ],
       "bindings": [],
       "claim_id": "C7d3b3520c3a3897a9ebfff95",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "财务共享匹配一格：“偏好按规则处理数据”对画像工作内容偏好“按规则处理数据、文件、流程”，“实训做过财务共享”对字段 4。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -26199,7 +28008,16 @@
       ],
       "bindings": [],
       "claim_id": "Ca7fcac18ed89a8177b04e3b9",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "财务共享处理“主线并列：问清考核再定”，是对扩展方向的处置建议。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -26295,7 +28113,16 @@
       ],
       "bindings": [],
       "claim_id": "C4688d68f81f7287ffc5a5484",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "候选第 3 行“浙江省考（市县，优先限应届，专业对得上）”：限市县是因为 E008 省级和杭甬市级要基层经历；优先限应届对 any_fa 177 比 fresh_fa 54.5 更挤。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -26391,7 +28218,16 @@
       ],
       "bindings": [],
       "claim_id": "Cbe85e81352ad681a82fc79b0",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "省考门槛一格“专业按同一条规则；再看不要基层经历、性别、政治面貌、户籍或生源”，这些正是 E012 职位表“现有身份要求”“政治面貌要求”及备注里出现的条件列。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -26487,7 +28323,16 @@
       ],
       "bindings": [],
       "claim_id": "C48e21cb23ab7b03d01e31e2b",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "省考匹配一格“专业对口；女、共青团员；行测申论零基础”分别对字段 1 财务管理、字段 25 女、字段 11 共青团员、字段 21 没做过模考。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -26583,7 +28428,16 @@
       ],
       "bindings": [],
       "claim_id": "C8500bb6febbe1d7cc3f95a79",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "省考处理“并行：只报一次，全力备考”，与主线企业财务并行，和本人“怕考两年都考不上”的担心相呼应。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -26679,7 +28533,16 @@
       ],
       "bindings": [],
       "claim_id": "C65c53ef0ffcc94cab586f4c0",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "候选第 4 行目标“国考浙江职位”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -26775,7 +28638,16 @@
       ],
       "bindings": [],
       "claim_id": "Cfdcb0dd40b5ef6e00dc71280",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "国考门槛逐岗核专业、学历、应届、基层经历、性别、政治面貌；E002 原文“具备……拟任职位所要求的其他资格条件”，且 E046 职位表未取，只能逐岗核。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -26871,7 +28743,16 @@
       ],
       "bindings": [],
       "claim_id": "Cf7a51b57305c5dff40543c4c",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "国考匹配一格“取决于是否有本人愿去的职位”，因职位表未取（E046）且本人未选国考路线，条件式表述恰当。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -26967,7 +28848,16 @@
       ],
       "bindings": [],
       "claim_id": "Ccc9e926f2ff8bcd3610dd86b",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "国考处理“看职位：有就报，没有不报”，与 §07 关于国考不必为练兵报不想去的职位一致。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -27063,7 +28953,16 @@
       ],
       "bindings": [],
       "claim_id": "Ccda0a7a8b6ee9db25375a0a3",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "候选第 5 行目标“国网浙江财会类”，E050 显示国网设有财务会计类考试大纲。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -27159,7 +29058,16 @@
       ],
       "bindings": [],
       "claim_id": "C9018f021667e0eb799989829",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "国网门槛要核“浙江公告是否招财会类、专业要求”，对应 E031“各批次招聘单位范围……以各单位招聘公告为准”和 E050 范围注。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -27255,7 +29163,16 @@
       ],
       "bindings": [],
       "claim_id": "C20d721451d69634a0f0b60f7",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "国网匹配一格“公告本案未取得”，对 E047 unretrieved，措辞没有写成未发布。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -27357,7 +29274,16 @@
         }
       ],
       "claim_id": "C504ed6a207e279dbbc6c13f9",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "“总公告说第一批 2026年11月中旬发布”对 E029 原文“第一批2026年11月中旬”，主语明确是总公告；“浙江单位是否在内待核”对 E031。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -27453,7 +29379,16 @@
       ],
       "bindings": [],
       "claim_id": "Cf19f938b9a2cd904740c29a3",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "候选第 6 行“银行运营、综合类”，来自本人画像目标 2“银行浙江分行的柜员或综合岗”，运营为柜员所在条线的统称。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -27549,7 +29484,16 @@
       ],
       "bindings": [],
       "claim_id": "Cdbc7d30874e702e7b82a4d0d",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "银行门槛“岗位职责里有无营销指标”是核查项；“工行秋招报名已截止”对证据库 E033 工行 2027 校招网上报名 9 月 4 日至 10 月 8 日，早于 10-20（该组件引用里未列 E033，但证据库有原文）。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -27645,7 +29589,16 @@
       ],
       "bindings": [],
       "claim_id": "C3d0a96a0572851370d7675ff",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "银行匹配“专业相关；本人不接受销售指标”，后半句对画像“能接受有业绩指标或营销任务的岗位吗：不能接受”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -27741,7 +29694,16 @@
       ],
       "bindings": [],
       "claim_id": "Cce906bbc99e1abbf1426a0bd",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "银行处理“看其他行和补招；有指标的不报”，因工行已截止，转向其他银行，符合本人底线。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -27837,7 +29799,16 @@
       ],
       "bindings": [],
       "claim_id": "C9447ea1998962a58afae4668",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "候选第 7 行目标“事务所审计（对照）”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -27933,7 +29904,16 @@
       ],
       "bindings": [],
       "claim_id": "Ca368449896101cfb71907dd8",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "事务所门槛“忙季加班出差多少、专业要求：逐所核”，与 E043/E053 页面注明具体以网申页为准一致。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -28029,7 +30009,16 @@
       ],
       "bindings": [],
       "claim_id": "Ce23d6aeceebf5b2452394a68",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "事务所匹配“专业对口；加班出差待核，本人未提出想做”，后半与画像目标中没有事务所相符。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -28125,7 +30114,16 @@
       ],
       "bindings": [],
       "claim_id": "Cc26075ac72cdcb4feef29357",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "事务所处理“只作对照，不列主线”，与 §04 方向说明一致。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -28186,7 +30184,16 @@
         }
       ],
       "claim_id": "C481f657ce9a72faaacf8d2a7",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "“本科专业名单逐字写了财务管理的有 133 个”绑定 fa_count；我按“本科所学专业要求为：”后按顿号拆分、恰为“财务管理”从原件复现 133。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -28257,7 +30264,16 @@
         }
       ],
       "claim_id": "C2e09a830c0f832b770e84d2a",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "36/13/84 分别绑定 fa_fail_count、fa_unk_count、fa_ok_count，原件复现一致；36 个确全为限男性或要求中共党员，13 个的原因确为市县户籍生源、视力和“适合男性”，与括号所列相同。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -28333,7 +30349,16 @@
         }
       ],
       "claim_id": "Ca24f650a9938cc7ca8980831",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "98/38/19/41 绑定 fc 系列，复现 38＝限男性 32＋党员 6、19＝市县或视力；“按本科专业目录财务管理属于这一类”对 E048；类名怎么认写成“本案摘录……未见”，没有说成规则不存在。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -28399,7 +30424,16 @@
         }
       ],
       "claim_id": "C94ecaa41b7eb21894b8fdd80",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "44 与 17 绑定 fb_count、fb_fail_count；复现 17＝限男性 10、党员 6、两者都有 1；“只写具体专业‘工商管理’的也不算”与筛选说明一致。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -28454,7 +30488,16 @@
       ],
       "bindings": [],
       "claim_id": "Ce4d648d714d3794903ac87c6",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "“部分职位备注写明录用后要在当地服务满一定年限”：原件备注多处有“录用后须在本县服务满5年”“最低服务年限为5年”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -28545,7 +30588,16 @@
         }
       ],
       "claim_id": "C40f31eed7e04d04103886841",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "61/44/206.5/58/5/25/28 七个数均有绑定；我从原件复现 58 个专业不限职位：25 个＝限男性 19＋中共党员 1＋A 类法律职业资格 5，28 个均有市县户籍生源、少数民族或畲族、视力条件，5 个无附加条件；第 58 个为学历“专科及以上”的职位，本科可报。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -28600,7 +30652,16 @@
       ],
       "bindings": [],
       "claim_id": "C50a29a294c2a1a3ee60a5652",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "“这是上一届的数，今年的职位要等新公告”，提醒年份口径，与 E011 新公告未见一致。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -29221,7 +31282,16 @@
       ],
       "bindings": [],
       "claim_id": "Cbdbd87399654634c632edd51",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "“尚未取得省考和初级会计的2027年度日期”对 E011 与 D6 未见状态；“国网总公告的第一批只写到月中旬”对 E029 原文“第一批2026年11月中旬”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "07",
@@ -33107,7 +35177,16 @@
         }
       ],
       "claim_id": "Cd1b0dd7a4d9aa15badb82b9d",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "注册认证 10-23 18:00 对 E005，提交申请 10-24 18:00 对 E003，笔试 2026 年 11 月 29 日对 E004“2026年11月29日上午9:00—11:00 行政职业能力测验”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "07",
@@ -33231,7 +35310,16 @@
       ],
       "bindings": [],
       "claim_id": "Cf1725bc14c2dff7b93b6a11a",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "“职位表在国考专题网站下载，本报告没有取得”对 E046：bm.scs.gov.cn/kl2027 下载需图形验证码，按规则未绕过。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "07",
@@ -33355,7 +35443,16 @@
       ],
       "bindings": [],
       "claim_id": "C56d6f95f9ff8036058e9bbea",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E052 税务系统参考目录 17 行工商管理类、18 行财会审计类都列有“财务管理”，句子据此说税务职位写这两类也对得上，并要求再逐岗看其他条件，与范围注“具体职位仍以招考简章为准”一致。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "07",
@@ -33479,7 +35576,16 @@
       ],
       "bindings": [],
       "claim_id": "C192896e45aceff1c8b8de827",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "国考考行测和申论对 E004；省考上一届“两科”对 E010“公共科目两科总分”与 E007“每个科目满分均为100分”，并如实说明摘录未写科目名。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "07",
@@ -33603,7 +35709,16 @@
       ],
       "bindings": [],
       "claim_id": "C3ea5812a81dbb187afc16eff",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "国考当练兵的条件句以“有本人愿去、专业和条件都对得上的浙江职位”为前提，与不出省（字段 8）和每周 12 小时的投入约束相容。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "07",
@@ -33729,7 +35844,16 @@
       ],
       "bindings": [],
       "claim_id": "Ce06c4c99e29bea97f1a24598",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "“省考2027年度公告截至出稿还没见到，录用网和组工网首页都查过”与 E011 gap“两次查浙江省公务员考试录用网首页……并查浙江组工网首页”一致，说的是没见到而非没发布。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "07",
@@ -34150,7 +36274,16 @@
         }
       ],
       "claim_id": "Cfe411c65f95032aa9f0d9f74",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "“国网总公告计划第一批招聘公告在 2026年11月中旬 发布”对 E029；“笔试暂定 2026 年 12 月 6 日”对 E030“时间初定……第一批2026年12月6日”；浙江单位待核对 E031。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "07",
@@ -34754,7 +36887,16 @@
       ],
       "bindings": [],
       "claim_id": "C8270559899e44af5cb5c6d54",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "路线卡标题“浙江省考：只报一次、全力考”，是路线取舍建议。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "08",
@@ -34864,7 +37006,16 @@
       ],
       "bindings": [],
       "claim_id": "C5568cf3d602ef8c1a570bbd9",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "路线卡专业门槛复述三档规则，咨询电话列确存在于 E012 原件，会计类不报因名单不含财务管理。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "08",
@@ -34974,7 +37125,16 @@
       ],
       "bindings": [],
       "claim_id": "Ce14aa59ca6a657849cff55b2",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "“省级和杭甬市级综合类职位上一届要两年基层经历，本人不能报”对 E008；我查原件省级综合管理类 12 个职位全为“2年以上基层工作经历”，例外只有硕博起报的专业技术类，对本科生结论成立。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "08",
@@ -35100,7 +37260,16 @@
         }
       ],
       "claim_id": "C06e9035b32bcad855c203535",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "“2027年度公告截至出稿未见”对 E011；上一届 11 月 6 日—11 月 11 日报名对 E006/E054，12 月 7 日笔试对 E007“公共科目笔试时间为2025年12月7日”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "08",
@@ -35216,7 +37385,16 @@
         }
       ],
       "claim_id": "C852a133c32e5d2bd01951eed",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "“11 月 1 日起每一两天看公告”绑定 personal_dates.checkpoint=2026-11-01，与 D3 个人检查点和 E011 gap 中“从11月1日起每一两天看一次”一致。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "08",
@@ -35326,7 +37504,16 @@
       ],
       "bindings": [],
       "claim_id": "C765d0449703c643296caac64",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "“协议班不是必需，交钱前先看退费条款”回应画像“有培训机构说报他们的省考协议班不过退费”的转述，未对机构做事实判断。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "08",
@@ -35442,7 +37629,16 @@
         }
       ],
       "claim_id": "C36e0d7fd0eddf44529a55604",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "“上一届综合类笔试合格线是两科总分 105 分”对 E010 原文“综合类职位的笔试合格分数线按公共科目两科总分105分划定”，并注“只是门槛”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "08",
@@ -35552,7 +37748,16 @@
       ],
       "bindings": [],
       "claim_id": "Ce4ce56208c3f4d12fa30709f",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "省考切换条件“没有对口职位就不报；没进面试就收手，春招全力投企业”，是止损建议，与本人担心“考两年都考不上”相应。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "08",
@@ -36500,7 +38705,16 @@
         }
       ],
       "claim_id": "C3e95ac9ffac37fabf484303b",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "1 月 5 日—1 月 27 日对 E055/E036 原文“2026年1月5日至1月27日……1月27日12:00截止”，5 月 16 日对 E037；“新一年通知未见”对 D6 记录；12 月 31 日绑定 personal_dates.year_end。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "08",
@@ -37104,7 +39318,16 @@
         }
       ],
       "claim_id": "C64f0a18819abd5af4516df20",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "叙述里重复上一年度初级会计报名与开考日期，三个日期分别对 E055、E036、E037；“别错过年初的报名”是据此给的提醒。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "08",
@@ -38916,7 +41139,16 @@
       ],
       "bindings": [],
       "claim_id": "C5835a25f166f5d58398156c1",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "风险表第 1 列表头“如果”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "10",
@@ -38970,7 +41202,16 @@
       ],
       "bindings": [],
       "claim_id": "Cbd795b771a1d415844a77757",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "风险表第 2 列表头“就这样应对”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "10",
@@ -39024,7 +41265,16 @@
       ],
       "bindings": [],
       "claim_id": "C43c8a3fadbcd00dedcca0789",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "风险表第 3 列表头“再看什么”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "10",
@@ -39078,7 +41328,16 @@
       ],
       "bindings": [],
       "claim_id": "C84af59fb3a17ad1acad646ca",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "风险情形“省考公告里没有专业对得上、本人条件也符合的应届职位”是假设条件；上一届此类有 84 个，今年未知（E011），列为风险合理。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "10",
@@ -39132,7 +41391,16 @@
       ],
       "bindings": [],
       "claim_id": "Cbf6b73a4209b00c9a4c11f87",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "风险应对一格重复三档专业规则并加“没有对得上的就不报”，与流程图 D 节点一致。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "10",
@@ -39186,7 +41454,16 @@
       ],
       "bindings": [],
       "claim_id": "C3e76b1bdcd49c6ec3c1edd22",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "“不为‘报了就有希望’硬报”括注依据为上一届职位表（E012）和本科专业目录（E048），这两项正是本组件的引用。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "10",
@@ -40075,7 +42352,16 @@
       ],
       "bindings": [],
       "claim_id": "Cd65610ecbc8f446a18c8597e",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "待问清单第 1 列表头“要问什么”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -40115,7 +42401,16 @@
       ],
       "bindings": [],
       "claim_id": "C38032987546abae54d1b26f6",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "待问清单第 2 列表头“问谁”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -40155,7 +42450,16 @@
       ],
       "bindings": [],
       "claim_id": "Ce1cac71862f9f2f7a8bf4777",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "待问清单第 3 列表头“核完怎样改变决定”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -40195,7 +42499,16 @@
       ],
       "bindings": [],
       "claim_id": "C557e41cd19bf74d3ec691793",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "向企业问“日常做什么、用什么系统、有没有人带”，对应本人卡点“不了解工作实际内容”（字段 19）。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -40235,7 +42548,16 @@
       ],
       "bindings": [],
       "claim_id": "Cec6de4869710ccf4028a1bc9",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第 1 问的对象“企业 HR”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -40275,7 +42597,16 @@
       ],
       "bindings": [],
       "claim_id": "C687458b8ca634f4afc50492e",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "“主要是出纳兼销售或纯录单，就降为保底”把本人不接受销售指标（字段 18）和看重成长（优先级第一）转成判断规则。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -40315,7 +42646,16 @@
       ],
       "bindings": [],
       "claim_id": "C001522c97422f570a1a28d38",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "“合同签哪家公司？”是核查合同主体的问题，对应 E032 gap 中的“合同主体”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -40355,7 +42695,16 @@
       ],
       "bindings": [],
       "claim_id": "C76c3d5b9a02a44aad3b5506a",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "“是直签还是派遣、外包？”对应画像“能接受劳务派遣吗：不了解”“外包驻场：不了解”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -40395,7 +42744,16 @@
       ],
       "bindings": [],
       "claim_id": "C2f349f0e8265c47f1c77314e",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "“试用期多长、社保公积金按什么基数？”对应 E032 gap 中试用期等未取项，是待问问题。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -40435,7 +42793,16 @@
       ],
       "bindings": [],
       "claim_id": "Cd69a39a7578d73be39ebc747",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第 2 问（合同与派遣）的对象同样是“企业 HR”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -40475,7 +42842,16 @@
       ],
       "bindings": [],
       "claim_id": "C984a253501e38d6869a090d7",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "“派遣外包本人还不了解，先问清再定”对画像两题均答“不了解”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -40515,7 +42891,16 @@
       ],
       "bindings": [],
       "claim_id": "C4fc8f56cd4a7bde995dbf322",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "向银行问“有没有理财、存款等营销考核”，用来核实同学“柜员也要卖理财”的转述。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -40555,7 +42940,16 @@
       ],
       "bindings": [],
       "claim_id": "C153f3bad1215e099b2b2f337",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第 3 问的对象“银行招聘公告或面试官”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -40595,7 +42989,16 @@
       ],
       "bindings": [],
       "claim_id": "C682e38c56413a11989549393",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "“有指标就按本人底线不报”，底线来自字段 18 不能接受销售指标。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -40635,7 +43038,16 @@
       ],
       "bindings": [],
       "claim_id": "Caba6d63feaee47ed94039ca8",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "待问“只写‘工商管理类’的职位，财务管理专业能不能报？”，对应 98 个 fc 职位的认定缺口。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -40675,7 +43087,16 @@
       ],
       "bindings": [],
       "claim_id": "C74a272a65fd1d3e189394e11",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "问省考职位表“咨询电话”一栏：原件表头确有该列，E012 摘录给出示例号码 0571-65060030，可照此拨打。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -40715,7 +43136,16 @@
       ],
       "bindings": [],
       "claim_id": "C95d99199f2fe4af8bc6014bd",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "“能报才放进候选，不能报就排除”，是工商管理类职位确认后的处置规则。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -40755,7 +43185,16 @@
       ],
       "bindings": [],
       "claim_id": "C3c7f97e6ad4aa92136bab876",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "问三方违约金、解约流程和毕业后多久仍算应届，对应画像“签过三方协议吗：否”及 E056 推测条目“签三方前先问违约与解约”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -40795,7 +43234,16 @@
       ],
       "bindings": [],
       "claim_id": "C2098456e1f33946bc26c6748",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第 5 问的对象“学校就业指导中心”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -40835,7 +43283,16 @@
       ],
       "bindings": [],
       "claim_id": "Cad95c7079ce0f1220fa50244",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "“决定签企业三方和等考试结果怎么衔接”，对应企业线与省考线并行时的时间冲突。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -40875,7 +43332,16 @@
       ],
       "bindings": [],
       "claim_id": "Ca4f1767f0fc560124f1406dd",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "问家里“能支持在家住多久、每月给多少”，补字段 12 多快需要收入的 unknown 状态。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -40915,7 +43381,16 @@
       ],
       "bindings": [],
       "claim_id": "Cf898d29c0b9d817dea7082b3",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "问父母“稳定”最担心的是收入、离家远还是名声，前两项对画像家里担心“收入不稳定、离家太远”，第三项是追问。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -40955,7 +43430,16 @@
       ],
       "bindings": [],
       "claim_id": "C178e8ef526a95c8f4c317203",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第 6 问的对象“爸妈”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -40995,7 +43479,16 @@
       ],
       "bindings": [],
       "claim_id": "C91bbb205d49232c62851ea33",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "“定等待边界；把担心换成合同、社保、地点等可核条件”，与核心要点“等待要设边界”一致。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -41035,7 +43528,16 @@
       ],
       "bindings": [],
       "claim_id": "C03a04f56a0a506497b037c3d",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "问“忙季真实加班多少”，用于核对本人“偶尔加班”的偏好。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -41075,7 +43577,16 @@
       ],
       "bindings": [],
       "claim_id": "Cc46a438d8789d09d43e963e5",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "问“头两年做什么、涨得怎样”，用于核对学姐“四大很累但涨得快”的转述。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -41115,7 +43626,16 @@
       ],
       "bindings": [],
       "claim_id": "Cf02da8c47b7b237f1c5bd61e",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "访谈对象“在事务所或企业财务工作的学姐”，画像“已经听到的建议”里确有学姐的说法。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -41155,7 +43675,16 @@
       ],
       "bindings": [],
       "claim_id": "Cf773687a187a541d9e15db08",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "“决定事务所是否值得投少量”，与事务所只作对照的定位一致。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -42241,7 +44770,16 @@
       ],
       "bindings": [],
       "claim_id": "C3f0cbde3f68c8ac82e1c2f37",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "术语表第 1 列表头“说法”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -42281,7 +44819,16 @@
       ],
       "bindings": [],
       "claim_id": "C2931dbe319419c3ea772a90c",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "术语表第 2 列表头“本报告里的意思”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -42321,7 +44868,16 @@
       ],
       "bindings": [],
       "claim_id": "Ceeb74f231f569bedc06618d4",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "术语表词条名“每名额缴费人数”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -42361,7 +44917,16 @@
       ],
       "bindings": [],
       "claim_id": "Cd05c6c334be4757264b798da",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "定义“某职位缴费报名人数 ÷ 招录人数”与计算项 unit“缴费人数÷招录人数”一致，并注明不是上岸概率。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -42401,7 +44966,16 @@
       ],
       "bindings": [],
       "claim_id": "Cc512a817565ddfff091bab0b",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "术语表词条名“写明财务管理”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -42441,7 +45015,16 @@
       ],
       "bindings": [],
       "claim_id": "Cc9c84724dd7cb4caa1c8de3e",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "“职位表本科专业名单里逐字出现‘财务管理’”与 fresh_fa 筛选说明“按顿号拆开，有一项恰为‘财务管理’”一致。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -42481,7 +45064,16 @@
       ],
       "bindings": [],
       "claim_id": "Cbacdc54caef58cd0e9739d4d",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "术语表把省考专业规则再列一次，内容与 §01、§08、§10 三处措辞相同，没有前后矛盾。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -42521,7 +45113,16 @@
       ],
       "bindings": [],
       "claim_id": "Cec26cfbd84b51772443e548d",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "术语表词条名“本人条件也符合”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -42561,7 +45162,16 @@
       ],
       "bindings": [],
       "claim_id": "C91b8f10a3e5cc2ffa985946d",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "定义列明不限男性、不要求中共党员、不要求本人没有的职称证书、无未填的民族户籍视力条件，与 fresh_fa_ok 处理说明一致；工作经历一项未写出，但限应届组本就不涉及。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -42601,7 +45211,16 @@
       ],
       "bindings": [],
       "claim_id": "C47d79107264e0cf833a83cd7",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "术语表词条名“分位数”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -42641,7 +45260,16 @@
       ],
       "bindings": [],
       "claim_id": "Cb8e46723f2f82eedd51b0fe4",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "“排在第几成的那个值；中位数是正中间”是给非专业读者的近似解释，报告用的 25%、75% 分位按此能理解，不涉及外部事实。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -42681,7 +45309,16 @@
       ],
       "bindings": [],
       "claim_id": "Caaae473effbc8311a256b509",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "术语表词条名“主线、并行、退路”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -42721,7 +45358,16 @@
       ],
       "bindings": [],
       "claim_id": "C4a5c3eade442d7fbf03b296c",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "“投入的先后顺序，不是结果保证”只定义用语。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -42761,7 +45407,16 @@
       ],
       "bindings": [],
       "claim_id": "C53a3d641585b393f4ddf0861",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "术语表词条名“待核”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -42801,7 +45456,16 @@
       ],
       "bindings": [],
       "claim_id": "Cfde52508958eacd6be088ee3",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "“原文或本人信息还没取得，不能写成没有机会”，与 AGENTS 第七节“没查到不等于不存在”的要求一致。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -42884,7 +45548,16 @@
       ],
       "bindings": [],
       "claim_id": "Cca8c3a6f4a2e7e4faddc7766",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "来源清单现已补上 E010 浙江省公务员局笔试成绩公告与 E045 省属事业单位下半年公告；其余对 E002—E005、E006—E013、E029—E031、E033、E017—E028、E035—E042，财政部与中注协标“上一年度”对其 2026 年度文件。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -42967,7 +45640,16 @@
       ],
       "bindings": [],
       "claim_id": "C3a20720155b26165460c4f21",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "竞争比做法对 E012/E013 按职位代码连接、逐职位相除；资格逐列对照的列名与原件 20 列表头一致；“所有职位都有年龄上限”经原件 4004 行年龄要求列核实无一为“不限”。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -43050,7 +45732,16 @@
       ],
       "bindings": [],
       "claim_id": "C7f39b9077b043c16f9d96c7f",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "“只保存匿名比值”对 case.json anonymous_data 只存比值、处理说明“不存单位名称与考生信息”；这些比值可据以复算各分位，我已复算一致。",
+        "reviewer": {
+          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -43239,7 +45930,7 @@
     "independent": true,
     "method": "未参与写作或修改本案；不继承原判定，逐条对照 evidence.json 原文摘录与范围注、profile.json/profile_parse.json 本人输入、calculations.json 与 case.json 计算口径（含 anonymous_data 筛选说明）重新判定；理由逐条手写，脚本只用于读取、合并、校验格式与统计重复。"
   },
-  "reviewed_manifest_sha256": "1725fcdb43d845aa43675f3e7b886c3e3e62ce08dc777562599af401329d53f5",
+  "reviewed_manifest_sha256": "458f154f8ef3b4d2ee7b16d0a5f82ae41c0550953bb4042a88f58a3f8d8134b0",
   "retired": [
     {
       "claim_id": "C8dadb07045224b9ea2eb36dd",
@@ -43740,6 +46431,314 @@
         "Ce7c8208f148cc3818b7dc2f8"
       ],
       "scope": "只跨审初审manifest之后新增/变更项；未变项保留原初审会话，不冒称重审全部报告。"
+    },
+    {
+      "session_id": "claimcheck-qz-s05-r2-20261021",
+      "model": "Claude Opus 5.5",
+      "independent": true,
+      "reviewed_manifest_sha256": "458f154f8ef3b4d2ee7b16d0a5f82ae41c0550953bb4042a88f58a3f8d8134b0",
+      "claim_ids": [
+        "C32bd5714a7e851737cf37ace",
+        "C1b96e939efb4bdcf04b98092",
+        "Ce664c13c8f92c86e90cb9983",
+        "C642c352385b4b7e7f985eac1",
+        "C6a8ac2aa0dcc543311e45a2f",
+        "C5bd87d5e2d5992d7bfeda0cf",
+        "C17830bd79965eb565841f886",
+        "C8b65f2c21cc0bfe1e74c6774",
+        "C3e0de4e468f353510605dde9",
+        "C8136d9c41dda6e2e860d6232",
+        "C540d4719dc6e14d41a95fd28",
+        "Cb324e10a83372beb2e06c906",
+        "Caa29d9e7d40a8ed2325ae1db",
+        "C218f50f78f31affb28de9450",
+        "Cf3e4a32c3763dbe5fd546293",
+        "Cc873ba4a1969649f168f3355",
+        "C9727616ecce66810b33a993e",
+        "C6f84b733fd96417fed0c3d44",
+        "Cb7adf0c20953d43ceaecb782",
+        "C79b9c92e2ff2ef35cb0744af",
+        "C6204d86d416fe3fbd7c666ee",
+        "C4ce36c47e4bc5191552b91cd",
+        "Ce8d608a067145191c8520ce2",
+        "Cbc3527a70309ca80ded83023",
+        "C4e422a046a64d13b370f6ed2",
+        "C15389fc97b6d38ba73bf97bd",
+        "C214c341fb33ef2f0a49deb27",
+        "C211c10997599cf4ed6eedf7a",
+        "C4baccbd824d356292ddfd523",
+        "Ce03378d7cb907d2bdd68d4ba",
+        "C7be1047da976df355aba8274",
+        "C3e2641d5099d17d15f355234",
+        "C6220f5931ea8a3d7b02cb8cb",
+        "C6d50ec29d9c2b837058fc215",
+        "C3278a9e1c376be873ae46ca0",
+        "C4aa075d1bf2a7e267d8bc5fa",
+        "C7e9d03d36cbfc3f680af208e",
+        "Cf6ab415dde86b1a4b347987d",
+        "C41c0fe831f3116eb928da42d",
+        "Cc754f46d91027450b4fe76be",
+        "C70fb7d59fa08f127b530a63b",
+        "C01ee1de518dd839d58075152",
+        "Cf184409f4c506bf632e87dab",
+        "Cd42a876c4bfdc4f132209ef0",
+        "C70e5f0419ff2bd1878be3969",
+        "C827f6434046594671e98af49",
+        "Ce0965e6b1d94e1bfdcf137cd",
+        "C9ddbac3d956fc3199208fea3",
+        "C9d77960bca23bff17af36cb0",
+        "C1e77a49bec0b1bb870f8757d",
+        "Cd577250eafc25df92ef8f886",
+        "C941278eac845bee83913a2ff",
+        "C54d8f40d07e3667575ac482f",
+        "C9caa8694f5d3f11993681aea",
+        "C886a8c8f7048fd3a47fb2cd2",
+        "C87e43cc1201564399babb3cb",
+        "Ccd4b759584713249f6e50cce",
+        "Cbed9efdfd956bab52e01e10e",
+        "C009bfb6ca03b69d29aa26ca8",
+        "Cafd0ca216c6d8ef288affaea",
+        "C4a640d391dcbb48738422699",
+        "Cb757bda07ffd19b370347356",
+        "Caf4e4017a1aaf9c093174cf9",
+        "C3b3d87ad12d4566386f3f495",
+        "Ca5e5676381b5ea2c99c347e6",
+        "C07a1fb0e45fbbcd76a6dcc00",
+        "C6236482cebef7ba3e693d0ea",
+        "C1042824de9e696f9d5632ff5",
+        "Ce6f7ab4a58e367c8957eb3a0",
+        "Cdf86408b0961de402e79c979",
+        "Cac69a02459f32429c629c152",
+        "C49e8be3371c6c607e32f505a",
+        "C2a980c70461be502ed6f3b8d",
+        "C8b0e01e67aaf149ee9a73364",
+        "C2b1d224d3d0957c8d0d01a40",
+        "C0089c8fa727dbf2697bb492b",
+        "Cdcaba2efdcf6158544387c3c",
+        "C1aeebd0617c2f1eea9b69549",
+        "Cb480533130a2a3b0a253ca45",
+        "C9f103fa892c4f236e50fef8f",
+        "Ce4790bb1086e731ef83e0bb7",
+        "C3676acfb8c093e0bcb8bb704",
+        "C6c48e6ccd12e4aa96b339ce0",
+        "C28011adf1f3531254a559ded",
+        "C41ab2f148528233f529848dc",
+        "C328566ee139392170079e658",
+        "C7cff036f8341994b7bee9cf9",
+        "Cb1bd0912445fa5db6e439964",
+        "Cf8f23d3945bdc059df7557e5",
+        "C2265c1ec8bd3b9c2bb449170",
+        "C7ce7b864e1ebfc04bd3c487f",
+        "C364751f655ba5ab7beeb6ec8",
+        "Cba090c26b54f86f9365ef0f0",
+        "Ce16219a9fde37c72d8e85dee",
+        "C20aaef9296d6c37953cd0cb3",
+        "C06ce15343a128155bf2afdb3",
+        "Cf74a9bceb74d63cb44ea07be",
+        "Cc4bdf638e6107b9a7749a78a",
+        "C28d7351708c411ad9e95e1d1",
+        "C06dc0b85be3c4aadb38f1908",
+        "Cbc89838b7449caa48d8fb530",
+        "C078d7898a172e89bbc1583e5",
+        "C7fb42543cfa5e4a58d7907fc",
+        "C796d3ba8cb866973e26329a6",
+        "Ca07047e8151dc0a5d9923fbd",
+        "Cd89d721281b95674e29d7bec",
+        "C576ca3d4da32a7fc0892587a",
+        "C416508b6af057c66320267a8",
+        "C3998c9133cbe5420a46ab429",
+        "Cebdb1f225c12e423857d1b58",
+        "Ce67f949eaccd01c1e0766d1d",
+        "C6f13f811b67b8d9d1e88ecb4",
+        "C9cd87b329ea2e1a5d1b31f47",
+        "Cb92a79495224a3c4f81a3658",
+        "Cb10bccad8836696aab7e3f34",
+        "Cedc2639905cf9e6736b1c5c4",
+        "C407ff5d0a207db2f5e3b53b2",
+        "C9e033e6814f332c68a879cca",
+        "Cbf10ae9ac1c8527230e46379",
+        "C04e656e1681019d475893309",
+        "C2825eea1a5a4185703df0349",
+        "Cdd1577054398355da529e261",
+        "C685d1960e8527b8f5d4a2eeb",
+        "C9709caf12a7772d038bc2fe0",
+        "Cda44168431c559f09e34cf2f",
+        "C19bfb71b50fde163e5399926",
+        "C1aa32edc16c0a5b38bddd173",
+        "Ca1e756150d5f811898837614",
+        "Cd7aadbd4ea654b28c1d71773",
+        "Ce2cc0d8c7fabb0024f40d833",
+        "C2478dd023ff9451ff1640d3f",
+        "Cd0fb3c1266ca1b07c6e381cd",
+        "Ccee6fbad059a078e263b8389",
+        "Cedf81b23360a37c73195e1ab",
+        "C3d3c4c424ba08b430de2f03d",
+        "C43b34523bf21bcf8b063abeb",
+        "C33f184ed51d9e3450cef32e3",
+        "C41c92f4f638236a6236dfd55",
+        "Cb039aec3dec74e24427b7c83",
+        "C7f3fc9711fb0080c9ee89801",
+        "C4be37061f737b2cf634989d0",
+        "Cbd64794128192f56bda6c977",
+        "C785c5c0e8d7c0a004936fa95",
+        "C8ad42a5b8834539aebcbecc6",
+        "Cb4732b9b4ff945fcf212c650",
+        "C5707c7591f954105397946f0",
+        "C59632b463463ae363b1f7b98",
+        "Cd9185625095eb49221cac64e",
+        "C496fa4028f480d1a30caa1b3",
+        "Ca28a768b67568cd4679ebcaa",
+        "C3134b1889330c8aabae178a6",
+        "Ce18778d1b58d73febd0b4063",
+        "C08c90d954cfe3117e4808c4d",
+        "C9a5a1f7173970cfa587bb795",
+        "C2068ec98a65320e6d96e0afc",
+        "Cb2917e531e3d27c495606fa4",
+        "Ca0f13ab4875f67b7c2250cdf",
+        "Cb855966c94107dc6990c189b",
+        "C8944ee1adbd13fe180fb67b1",
+        "Cd4e2bc7d0471b3b9aa992d28",
+        "C5c0d2f911824f69304184459",
+        "C0d5b1fd86b2ca2f9774bf92b",
+        "C1d15e3cb98264857426ae817",
+        "Cbf6bd99f806d5757eac8d42c",
+        "Ca1f537afc9547523f6d5e605",
+        "Cef75da17c16c112db4149567",
+        "Cd64c19ee23dd26e0c36bc26a",
+        "Cb758f8a771043ad37e7b204b",
+        "C1daab0cb3089afda52f2f702",
+        "Cde29c4ad01cb69468a58c31f",
+        "Cc190e1d801900335cf86f621",
+        "Cf1964be840ef0be177cfdc37",
+        "C16956895dab74b59630d023b",
+        "Cb80854e561e637d86e777ae5",
+        "C3afc673c8b7780bde447f3d1",
+        "Cc49181a7e8412ea652ac9873",
+        "Cb85eb87bfe242257f317e92c",
+        "C95e81e13767693a79e73e93b",
+        "Cb4ea4dfad66200ccfe6ab587",
+        "Cabcec33a3d69ce94234a9709",
+        "C958fc466e13546a647dc537a",
+        "C378fa916f3da18862c036f1a",
+        "C1fcd211cda9961aabf8bc172",
+        "C2474b483a188da67f265251d",
+        "Cd4c6cc61b4ec06d336882c37",
+        "C338ab6ad6a0720e13802b50a",
+        "Ccd829a417a3944a37e164e07",
+        "Cbfe2543b519236da2d1e2e4e",
+        "C0c785558ce8e30d310a430b6",
+        "C0291615d6643c563c03a350b",
+        "C239d48e87b90f31bba29e24f",
+        "C0ed1316393731a613e0b7c22",
+        "C05673469b5fd8710f1e42828",
+        "Ca2d4f4c8a03326b482eaa9d4",
+        "C2d0268b72be40bb04865bc0f",
+        "Ca92905f5a4d26c8d0d0602cd",
+        "Cda51e36eb27d2a390da8b06e",
+        "Ceb61082bf0d6918218b72efd",
+        "Cbd3fc46fa0bf0a30e5e8c0c5",
+        "Cf363e94fae44d0a8c1000217",
+        "C7d3b3520c3a3897a9ebfff95",
+        "Ca7fcac18ed89a8177b04e3b9",
+        "C4688d68f81f7287ffc5a5484",
+        "Cbe85e81352ad681a82fc79b0",
+        "C48e21cb23ab7b03d01e31e2b",
+        "C8500bb6febbe1d7cc3f95a79",
+        "C65c53ef0ffcc94cab586f4c0",
+        "Cfdcb0dd40b5ef6e00dc71280",
+        "Cf7a51b57305c5dff40543c4c",
+        "Ccc9e926f2ff8bcd3610dd86b",
+        "Ccda0a7a8b6ee9db25375a0a3",
+        "C9018f021667e0eb799989829",
+        "C20d721451d69634a0f0b60f7",
+        "C504ed6a207e279dbbc6c13f9",
+        "Cf19f938b9a2cd904740c29a3",
+        "Cdbc7d30874e702e7b82a4d0d",
+        "C3d0a96a0572851370d7675ff",
+        "Cce906bbc99e1abbf1426a0bd",
+        "C9447ea1998962a58afae4668",
+        "Ca368449896101cfb71907dd8",
+        "Ce23d6aeceebf5b2452394a68",
+        "Cc26075ac72cdcb4feef29357",
+        "C481f657ce9a72faaacf8d2a7",
+        "C2e09a830c0f832b770e84d2a",
+        "Ca24f650a9938cc7ca8980831",
+        "C94ecaa41b7eb21894b8fdd80",
+        "Ce4d648d714d3794903ac87c6",
+        "C40f31eed7e04d04103886841",
+        "C50a29a294c2a1a3ee60a5652",
+        "Cbdbd87399654634c632edd51",
+        "Cd1b0dd7a4d9aa15badb82b9d",
+        "Cf1725bc14c2dff7b93b6a11a",
+        "C56d6f95f9ff8036058e9bbea",
+        "C192896e45aceff1c8b8de827",
+        "C3ea5812a81dbb187afc16eff",
+        "Ce06c4c99e29bea97f1a24598",
+        "Cfe411c65f95032aa9f0d9f74",
+        "C8270559899e44af5cb5c6d54",
+        "C5568cf3d602ef8c1a570bbd9",
+        "Ce14aa59ca6a657849cff55b2",
+        "C06e9035b32bcad855c203535",
+        "C852a133c32e5d2bd01951eed",
+        "C765d0449703c643296caac64",
+        "C36e0d7fd0eddf44529a55604",
+        "Ce4ce56208c3f4d12fa30709f",
+        "C3e95ac9ffac37fabf484303b",
+        "C64f0a18819abd5af4516df20",
+        "C5835a25f166f5d58398156c1",
+        "Cbd795b771a1d415844a77757",
+        "C43c8a3fadbcd00dedcca0789",
+        "C84af59fb3a17ad1acad646ca",
+        "Cbf6b73a4209b00c9a4c11f87",
+        "C3e76b1bdcd49c6ec3c1edd22",
+        "Cd65610ecbc8f446a18c8597e",
+        "C38032987546abae54d1b26f6",
+        "Ce1cac71862f9f2f7a8bf4777",
+        "C557e41cd19bf74d3ec691793",
+        "Cec6de4869710ccf4028a1bc9",
+        "C687458b8ca634f4afc50492e",
+        "C001522c97422f570a1a28d38",
+        "C76c3d5b9a02a44aad3b5506a",
+        "C2f349f0e8265c47f1c77314e",
+        "Cd69a39a7578d73be39ebc747",
+        "C984a253501e38d6869a090d7",
+        "C4fc8f56cd4a7bde995dbf322",
+        "C153f3bad1215e099b2b2f337",
+        "C682e38c56413a11989549393",
+        "Caba6d63feaee47ed94039ca8",
+        "C74a272a65fd1d3e189394e11",
+        "C95d99199f2fe4af8bc6014bd",
+        "C3c7f97e6ad4aa92136bab876",
+        "C2098456e1f33946bc26c6748",
+        "Cad95c7079ce0f1220fa50244",
+        "Ca4f1767f0fc560124f1406dd",
+        "Cf898d29c0b9d817dea7082b3",
+        "C178e8ef526a95c8f4c317203",
+        "C91bbb205d49232c62851ea33",
+        "C03a04f56a0a506497b037c3d",
+        "Cc46a438d8789d09d43e963e5",
+        "Cf02da8c47b7b237f1c5bd61e",
+        "Cf773687a187a541d9e15db08",
+        "C3f0cbde3f68c8ac82e1c2f37",
+        "C2931dbe319419c3ea772a90c",
+        "Ceeb74f231f569bedc06618d4",
+        "Cd05c6c334be4757264b798da",
+        "Cc512a817565ddfff091bab0b",
+        "Cc9c84724dd7cb4caa1c8de3e",
+        "Cbacdc54caef58cd0e9739d4d",
+        "Cec26cfbd84b51772443e548d",
+        "C91b8f10a3e5cc2ffa985946d",
+        "C47d79107264e0cf833a83cd7",
+        "Cb8e46723f2f82eedd51b0fe4",
+        "Caaae473effbc8311a256b509",
+        "C4a5c3eade442d7fbf03b296c",
+        "C53a3d641585b393f4ddf0861",
+        "Cfde52508958eacd6be088ee3",
+        "Cca8c3a6f4a2e7e4faddc7766",
+        "C3a20720155b26165460c4f21",
+        "C7f39b9077b043c16f9d96c7f"
+      ],
+      "scope": "只判定本轮改写后未判的 299 条当前项；已有 309 条判定保留原复核会话，不冒称重审。逐条对照 evidence.json 摘录、profile.json/profile_parse.json、calculations.json 与 case.json；用 curl 取 E012、E013 原件（指纹与登记一致）复现分组计数。"
     }
   ],
   "report_snapshot": {
