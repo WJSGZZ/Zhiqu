@@ -186,6 +186,7 @@ TITLES['employment_major_industry']='专业就业行业分布（届别、单位�
 LABELS['value_number']='原表占比数值'
 CONTEXT += ['industry','unit_raw','value_raw','cohort']
 CONTEXT.append('subjects')
+CONTEXT += ['major_full','school_group_code','old_batch','duration','comparison_status','other_province_raw','province_status']
 CONTEXT += ['graduate_cohort','graduate_cohort_raw','cohort_status','province_raw','city_raw','institution_name_raw','item','item_raw','record_type','dataset_type','school_raw','group_name','subject_requirements','scope_raw']
 
 def _source(c, sid):
@@ -193,6 +194,17 @@ def _source(c, sid):
         row = c.execute('SELECT * FROM data.source WHERE source_id=?', (sid,)).fetchone()
         if row:
             return dict(row)
+    if sid and 'core_delta_source' in _tables(c):
+        row=c.execute('SELECT * FROM data.core_delta_source WHERE source_id=?',(sid,)).fetchone()
+        if row:
+            item=dict(row)
+            deleted=any(marker in str(item.get('status') or '') for marker in ('originals_deleted','已删除'))
+            return {'source_id':sid,'grade':'第三方整理','publisher':'购买汇编',
+                    'title':item.get('relative_path'),'archive_path':None if deleted else item.get('relative_path'),
+                    'original_relative_path':item.get('relative_path'),'archive_sha256':item.get('sha256'),
+                    'archive_status':'已按用户授权删除' if deleted else '临时原件待清理（有指纹）',
+                    'source_record_status':item.get('status'),'category':item.get('category'),
+                    'note':'购买汇编补录来源；未登记官方网址或逐字摘录'}
     return {'source_id': sid or '未登记', 'grade': '未注明', 'publisher': '未注明', 'archive_status':'未取到'}
 
 
@@ -489,6 +501,75 @@ def _section(c, table, where, args, limit, offset):
     return {'table':table,'title':TITLES.get(table,table),'year_range':year_range,'total':total,'offset':offset,'returned':len(rows),'truncated':max(total-offset-len(rows),0),'rows':[_record(c,table,dict(r)) for r in rows]}
 
 
+CORE_DELTA_VIEWS=('v_core_delta_number','v_core_delta_attribute')
+CORE_DELTA_COLUMNS=('record_id','source_id','vendor_source_id','institution_id','year','province','subject','batch','school_raw','school_code','group_code','major_code','major_name','plan_type','scope_raw','field_name','field_label','value','raw_value','unit','value_status','src_sheet','src_row','src_col','official_locator','major_full','school_group_code','group_name','subject_requirements','old_batch','duration','comparison_status','record_type','dataset_type','other_province_raw','year_status','province_status')
+
+
+def _core_delta_record(c, table, row):
+    """One field per record. Purchase coordinates never become official coordinates."""
+    sid=row.get('source_id');vendor=row.get('vendor_source_id');source=_source(c,sid)
+    locator={k:row[k] for k in ('src_sheet','src_row','src_col') if row.get(k) not in (None,'')}
+    if not locator.get('src_col'):locator['locator_status']='字段列位置未唯一确定，不能视为逐值列定位完整'
+    corrected=bool(vendor and sid!=vendor)
+    field=row.get('field_name') or 'value'
+    value={'value':row.get('value'),'raw_value':row.get('raw_value'),
+           'display_label':row.get('field_label') or field,'unit':row.get('unit') or '',
+           'grade':source.get('grade') or '未注明','publisher':source.get('publisher') or '未注明',
+           'source_id':sid or '未登记','value_status':{'status':row.get('value_status') or '未标记（待核）'}}
+    if vendor and 'unfilled_reason' in _cols(c,'core_delta_source'):
+        problem=c.execute('SELECT unfilled_reason FROM data.core_delta_source WHERE source_id=?',(vendor,)).fetchone()
+        if problem and problem[0]:
+            note=str(problem[0]).replace('year_unconfirmed:original_year_not_verified','年份缺少原表依据').replace('province_unconfirmed','省份缺少原行依据')
+            value['supplement_warning']='来源仍有未补或未解释内容：'+note
+    if corrected or row.get('official_locator'):
+        value.update(official_locator=row.get('official_locator'),original_source_id=vendor,
+                     vendor_locator=locator)
+    else:value['locator']=locator
+    return {'table':table,'record_id':row.get('record_id'),
+            'context':{k:row[k] for k in CONTEXT+['school_code'] if row.get(k) not in (None,'')},
+            'values':{field:value},'source':source,
+            'vendor_source_id':vendor,'vendor_source':_source(c,vendor) if vendor else None,
+            'locator':{'official_locator':row.get('official_locator')} if corrected else locator,
+            'original_locator':locator if corrected else None,
+            'excerpt':None,'excerpt_kind':'补录结构化字段及原格值；不冒充官方逐字摘录',
+            'excerpt_locator':{}}
+
+
+def _core_delta_section(c, identity, name, program, year, province, major, subject, plan_type, limit, offset):
+    tables=_tables(c);parts=[];args=[]
+    for table in CORE_DELTA_VIEWS:
+        if table not in tables:continue
+        where=['t.institution_id=?'];bound=[identity['institution_id']]
+        if year is not None:where.append('CAST(t.year AS INTEGER)=?');bound.append(int(year))
+        if province:where.append('t.province=?');bound.append(province)
+        if major:where.append('t.major_name LIKE ?');bound.append('%'+major+'%')
+        if subject:
+            where.append('t.subject IN (?,?)');bound.extend([subject.removesuffix('类'),subject.removesuffix('类')+'类'])
+        if plan_type:where.append('t.plan_type=?');bound.append(plan_type)
+        if program is not None:where.append('CAST(t.major_code AS TEXT) LIKE ?');bound.append(str(program)+'%')
+        if year is None and 'institution_alias' in tables:
+            aliases=[dict(x) for x in c.execute('SELECT * FROM data.institution_alias WHERE institution_id=?',(identity['institution_id'],)) if _norm(x['alias'])==_norm(name)]
+            if aliases and all(x.get('year') is not None or x.get('year_from') is not None or x.get('year_to') is not None for x in aliases):
+                ranges=[]
+                for a in aliases:
+                    lo=a.get('year') if a.get('year') is not None else a.get('year_from');hi=a.get('year') if a.get('year') is not None else a.get('year_to');clause=[]
+                    if lo is not None:clause.append('CAST(t.year AS INTEGER)>=?');bound.append(lo)
+                    if hi is not None:clause.append('CAST(t.year AS INTEGER)<=?');bound.append(hi)
+                    ranges.append('('+' AND '.join(clause)+')')
+                where.append('('+' OR '.join(ranges)+')')
+        available=_cols(c,table)
+        fields=','.join(('t.'+_ident(column) if column in available else 'NULL AS '+_ident(column)) for column in CORE_DELTA_COLUMNS)
+        parts.append("SELECT '"+table+"' AS core_view,"+fields+" FROM data."+_ident(table)+' t WHERE '+' AND '.join(where));args.extend(bound)
+    if not parts:return None
+    union=' UNION ALL '.join(parts)
+    totals=c.execute('SELECT count(*),min(CAST(year AS INTEGER)),max(CAST(year AS INTEGER)) FROM ('+union+')',args).fetchone()
+    if not totals[0]:return None
+    rows=c.execute('SELECT * FROM ('+union+') ORDER BY CAST(year AS INTEGER) DESC,record_id,core_view,field_name,source_id LIMIT ? OFFSET ?',(*args,limit,offset)).fetchall()
+    return {'table':'core_delta','title':'本轮补录字段','year_range':list(totals[1:]) if totals[1] is not None else [],
+            'total':totals[0],'offset':offset,'returned':len(rows),'truncated':max(totals[0]-offset-len(rows),0),
+            'rows':[_core_delta_record(c,row['core_view'],dict(row)) for row in rows]}
+
+
 def _bounds(limit, offset):
     if not 1 <= int(limit) <= 200 or int(offset) < 0:
         raise QueryError('limit须为1—200，offset须为非负整数')
@@ -504,7 +585,7 @@ def _warnings(c, identity, sections, year):
         scopes.discard('')
         for row in c.execute('SELECT * FROM data.comparability'):
             d = dict(row);scope = str(d.get('scope',''));effective = d.get('effective_year')
-            domains={('考研' if x['table'].startswith('ky_') else '高考') for x in sections if x['table'].startswith(('ky_','gk_'))}
+            domains={('考研' if x['table'].startswith('ky_') else '高考') for x in sections if x['table'].startswith(('ky_','gk_')) or x['table']=='core_delta'}
             if d.get('domain') and domains and d['domain'] not in domains:continue
             if effective and any(x in scope for x in scopes) and (not years or min(years) <= int(effective) <= max(years)):
                 warnings.append('跨年口径：%s %s；影响：%s；出处：%s' % (effective,d.get('change',''),d.get('impact',''),d.get('source_id','未登记')))
@@ -580,8 +661,11 @@ def _query_education(name, program=None, year=None, province=None, db=None, limi
             if 'quarantine_reason' in cols:where+=" AND coalesce(t.quarantine_reason,'')=''"
             sec=_section(c,table,where,args,limit,offset)
             if sec['total']:sections.append(sec)
+        core=_core_delta_section(c,ident,name,program,year,province,major,subject,plan_type,limit,offset)
+        if core:sections.append(core)
         warnings += _warnings(c,ident,sections,year)
-        if program:warnings.append('仅对研究生专业码作前缀检索；逐行保留具体代码，不与本科专业码直接相等连接。')
+        if program:
+            warnings.append('旧研究生记录按研究生专业码前缀检索；本轮补录字段按其原专业码前缀检索，二者不作等价连接。' if core else '仅对研究生专业码作前缀检索；逐行保留具体代码，不与本科专业码直接相等连接。')
         warnings.append('各行学院、方向、学习方式、专项、联培、志愿及计划类型独立呈现，未合并；未见口径变更记录不代表口径稳定。')
         return {'query':'program' if program else 'school','database':str(p),'identity':ident,'sections':sections,'warnings':warnings}
 
@@ -590,8 +674,8 @@ def query_school(name, *, year=None, province=None, db=None, limit=10, offset=0,
     return _query_education(name,year=year,province=province,db=db,limit=limit,offset=offset,major=major,subject=subject,plan_type=plan_type)
 
 
-def query_program(name, program, *, year=None, province=None, db=None, limit=10, offset=0):
-    return _query_education(name,program=program,year=year,province=province,db=db,limit=limit,offset=offset)
+def query_program(name, program, *, year=None, province=None, db=None, limit=10, offset=0, major=None, subject=None, plan_type=None):
+    return _query_education(name,program=program,year=year,province=province,db=db,limit=limit,offset=offset,major=major,subject=subject,plan_type=plan_type)
 
 
 def query_jobs(*, region=None, major=None, year=None, db=None, education_db=None, limit=10, offset=0):
@@ -663,6 +747,7 @@ def _value_text(v):
         text='未公布' if status=='未公布' else '人数太少未公布' if status=='人数太少未公布' else '原件缺失' if status=='原件缺失' else '来源未提供' if status=='来源未提供' else status
     else:text=str(raw)+((' '+v['unit']) if v.get('unit') else '')
     rendered = '%s〔%s｜%s｜%s；%s〕' % (text,v['grade'],v['publisher'],v['source_id'],status)
+    if v.get('supplement_warning'):rendered+='；'+v['supplement_warning']
     if 'official_locator' in v:
         if v['official_locator']:
             rendered += '；官方位置：' + _plain(v['official_locator'])
@@ -670,6 +755,7 @@ def _value_text(v):
             rendered += '；官方位置待核（多个匹配位置）：' + _plain(v['official_locator_candidates'])
         else:
             rendered += '；官方位置：未取到'
+    if v.get('locator'):rendered+='；位置：'+_plain(v['locator'])
     if v.get('numeric_conflict'):rendered+='；'+v['numeric_conflict']['reason']
     return rendered
 
@@ -678,6 +764,7 @@ CONTEXT_LABELS = dict(zip(CONTEXT, ['年份','计划年份','省份','地区','�
 
 CONTEXT_LABELS.update({'industry':'原列就业行业','unit_raw':'原列单位','value_raw':'原格占比','cohort':'原列毕业届别'})
 CONTEXT_LABELS['subjects']='考试科目'
+CONTEXT_LABELS.update({'major_full':'专业完整原名','school_group_code':'院校专业组组合代码','old_batch':'原旧批次','duration':'学制原文','comparison_status':'比较口径状态','other_province_raw':'另省份列（原口径未注明）','province_status':'省份依据状态'})
 CONTEXT_LABELS.update({'graduate_cohort':'毕业届别（原表）','graduate_cohort_raw':'届别原文','cohort_status':'届别状态','province_raw':'学校所在省（原表）','city_raw':'学校所在市（原表）','institution_name_raw':'院校名称（原表）','item':'就业项目','item_raw':'项目原文','record_type':'记录类型','dataset_type':'数据类型','school_raw':'院校原名','group_name':'专业组名称','subject_requirements':'选科要求','scope_raw':'原表范围说明'})
 
 def _plain(obj):
@@ -740,7 +827,7 @@ def main(argv=None):
     for cmd in ['school','program','jobs','source']:
         p=sub.add_parser(cmd);p.add_argument('--db');p.add_argument('--json',action='store_true');p.add_argument('--limit',type=int,default=10);p.add_argument('--offset',type=int,default=0)
         if cmd in ['school','program']:p.add_argument('school');p.add_argument('--year',type=int);p.add_argument('--province')
-        if cmd=='school':p.add_argument('--major');p.add_argument('--subject');p.add_argument('--plan-type')
+        if cmd in ['school','program']:p.add_argument('--major');p.add_argument('--subject');p.add_argument('--plan-type')
         if cmd=='program':p.add_argument('program')
         if cmd=='jobs':p.add_argument('--region');p.add_argument('--major');p.add_argument('--year',type=int);p.add_argument('--education-db')
         if cmd=='source':p.add_argument('source_id');p.add_argument('--domain',choices=['education','employment'],default='education')
