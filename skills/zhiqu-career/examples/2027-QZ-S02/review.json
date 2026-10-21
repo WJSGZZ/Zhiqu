@@ -165,11 +165,11 @@
     "verification_scope": "本轮更新为附核对材料的PDF，自评和机器核对通过后仍等待独立审核；未补造官方原文和独立批准。"
   },
   "snapshot": {
-    "2027-QZ-S02-report.pdf": "ba9774b485fa3fcb07132b9c04575fa242ce00a8e0a9fa148535870fce4903ba",
+    "2027-QZ-S02-report.pdf": "064aefbc4e21607e0cf74014e4b48302d73cf99e0ca5356d06985a3b8fe455d3",
     "calculations.json": "8e8135c7483b79dbc2d7ed702e1d9add2628ccf852da45c3d957f1e3f05d98f5",
     "candidates.json": "d741b74ae820c210e0b7d43186496ea83b72584adfe0529440e2a3b7c251d835",
     "case.json": "1266369f01a1fb4ddd7f6d8f6a4f7fcdcc475445fed3cfc9d464a41bbfda2d73",
-    "claim_check.json": "31406a7b2bdbd3461773601f3a645aca7552b4ed6b555f4206d15a5d99b218df",
+    "claim_check.json": "7f5e0c7303fbe45353cb1d32a2e8f2122bd2d5c9abd6b8be6f7d80e8d23a9c4c",
     "directions.json": "5b2397e7ee4e80db6b8b1b6bf0834869aabbf282dcfecc6f23c4c706d476cc76",
     "evidence.json": "5a88399dc6cd1e7c5dd23c361a215dce3cf1e8c37105f3d609c8e6239da5699b",
     "judgment.json": "6b1a98ce44bf3a24b623518f8bca10d5a21ff18b40d9e7d69cf39b5b605f113d",
@@ -178,9 +178,9 @@
     "profile-supplement.txt": "7ae0beb59e74158ec5ff869bb796f5cf3352fb7fa5c9ab7172ee930e91c93360",
     "profile.json": "e985adff4dc5eb31443eef9a859f0e7955f84936dd8dab27a61b56e4b2e50d29",
     "profile_parse.json": "d34b3c37a261949e9502d03e5eec3b00d0ad8d8f989758bfe8c4509ffae5cfd7",
-    "report.html": "b84dccdcc9533bf81c157ef5e5b4bed3a49963e04cbbfe17f0e198afca279a85",
+    "report.html": "c7afeef983768ffc664db6a1403dc0a2b84e64c5315bca76558df837c60d20aa",
     "report.md": "53b9de1bfaa50bdf3757ff18dcc5aea7109057575e09b4c2afc93d96aecba994",
-    "report_trace.json": "e7c44b4d737ad68e373735a661bae2e28f94bf913ebae85bc74bc12bab9588d9",
+    "report_trace.json": "5effc2b18a4b692d907694cc18e6cb9af417a96aa003ce8825c509922a9802bc",
     "rules_check.json": "d887941488483a7992cfbe1fb174550f3fdb3083d8c597a1cdcc43f1eee9d198"
   },
   "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。",
@@ -369,6 +369,17 @@
         "report_trace.json"
       ],
       "reason": "共用 claim_check.py 增加“只增补出处时保留原支持判定”规则，报告追踪随之重生成；正文只有第 12 节生成时间变化，数字、候选与结论未变。"
+    },
+    {
+      "date": "2026-10-21",
+      "by": "Claude",
+      "files": [
+        "2027-QZ-S02-report.pdf",
+        "claim_check.json",
+        "report.html",
+        "report_trace.json"
+      ],
+      "reason": "官方域名清单新增 12 个已核主办单位的域名（国务院、统计局、江苏/南通/上海/南京/苏州政府、宁波人社附件、腾讯与字节校招官网），报告追踪随之重生成；正文只有第 12 节生成时间变化，数字、候选与结论未变。"
     }
   ],
   "regeneration": {

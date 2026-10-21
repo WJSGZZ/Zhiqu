@@ -1817,8 +1817,8 @@
   ],
   "artifacts": {
     "report.md": "087c1b146226784d9ee026debb65d16ade1b29ba4401277b42aa2632f4774d45",
-    "report.html": "551ea7aede07f6fea3eb9d88105cff91c4676c62d37487d5568baf1a8d75bfb1",
-    "2027-YJ-S01-report.pdf": "c5662207e16a43d6b82e25a3cfe3852cd6338c46a8c2a2f9b45c29ac3e9b9517"
+    "report.html": "d6c3a3a834d6b572d3d1a2637e0732fcd2cea16837cf713f967a574ed319a341",
+    "2027-YJ-S01-report.pdf": "26e7462a93529fa31e12112ac1ffba23b26082953a1fabaa3d97b0703ad42317"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "authoring": {
@@ -1833,7 +1833,7 @@
     }
   },
   "policy_sha256": {
-    "zhiqu-shared/references/official-domains.csv": "0cd0d7be4307fd6e8696eaa2f845726929ddcb264c841fe32293fca58a49c934",
+    "zhiqu-shared/references/official-domains.csv": "fe9b53221663f0ebb8230c105937a6615aec882ce9d0d0a32cd19d96a050788a",
     "zhiqu-shared/references/unit-families.json": "a535c6ba17dc14fcf1d30d8b5f45691da0ab2f78cb92a30b01a55de41e72c9a0",
     "zhiqu-shared/references/reader-language.json": "247453b7a5c1d0bf4b5d4997d57ee8d32a1cd70327fff2683322bf4c79e5476d",
     "zhiqu/references/report-guide.md": "0278c07e521721d96450b8fbc707e88e403e04f725083e872957386d2e007955"

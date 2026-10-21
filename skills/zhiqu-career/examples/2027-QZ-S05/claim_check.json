@@ -16186,16 +16186,18 @@
       "bindings": [],
       "claim_id": "Cb5dfc62c55652cebc0e379b6",
       "review": {
+        "kind": "事实",
         "decision": "支持",
-        "kind": "建议",
-        "reason": "事务所一格“专业对口”：财务管理与审计同属财会类，E052 税务目录把两者同列“财会审计类”，判断有据。",
+        "reason": "本人专业为财务管理（profile_parse“主修专业全名：财务管理”）；本句已引的 E012 是“从事内部审计工作”的省考职位，专业名单同时列了审计学和财务管理，说明审计类岗位接收财务管理专业，“专业对口”有据。原理由依据的 E052 不在本句引用里，现改用清单内证据重判。",
         "reviewer": {
-          "session_id": "claimcheck-qz-s05-r2-20261021",
+          "session_id": "claimcheck-s05-r4-20261021",
           "model": "Claude Opus 5.5",
           "independent": true
         },
-        "carried_from": "C328566ee139392170079e658",
-        "carried_reason": "只增补出处：原句、绑定数值和原引证据摘录均未变，原“支持”判定保留；新增证据 E047、E050"
+        "rejudged_from": {
+          "carried_from": "C328566ee139392170079e658",
+          "reason": "事务所一格“专业对口”：财务管理与审计同属财会类，E052 税务目录把两者同列“财会审计类”，判断有据。"
+        }
       }
     },
     {
@@ -16264,7 +16266,16 @@
       ],
       "bindings": [],
       "claim_id": "C9ac95e747d25e003670a5248",
-      "review": null
+      "review": {
+        "kind": "建议",
+        "decision": "支持",
+        "reason": "profile.json 原答“能接受的加班程度：偶尔加班”“能接受出差或外派吗：偶尔可以”，profile_parse 归为“偶尔加班可以；偶尔可以出差”；格内引号写“偶尔加班、偶尔出差”含义一致，已按第六轮要求补上出差；“真实加班和出差待核”与本案没取到任何事务所岗位加班出差数据相符。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r4-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -17021,7 +17032,16 @@
       ],
       "bindings": [],
       "claim_id": "Cff7d3c56163c11f00df3efe8",
-      "review": null
+      "review": {
+        "kind": "结构标签",
+        "decision": "支持",
+        "reason": "组名对应 case.json anonymous_data.fresh_all：筛选只要求“现有身份要求”等于“2026年应届毕业生”，processing 写明不限学历（2410 个中本科及以上 1670、硕士研究生及以上 740）、不分专业；E012 是全省 4004 个职位的总表，故称“全省”；这一行引用的 all_q1、all_q3、all_median 为 16.0、51.875、29.0。",
+        "reviewer": {
+          "session_id": "claimcheck-s05-r4-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "05",
@@ -53441,7 +53461,7 @@
     "independent": true,
     "method": "未参与写作或修改本案；不继承原判定，逐条对照 evidence.json 原文摘录与范围注、profile.json/profile_parse.json 本人输入、calculations.json 与 case.json 计算口径（含 anonymous_data 筛选说明）重新判定；理由逐条手写，脚本只用于读取、合并、校验格式与统计重复。"
   },
-  "reviewed_manifest_sha256": "458f154f8ef3b4d2ee7b16d0a5f82ae41c0550953bb4042a88f58a3f8d8134b0",
+  "reviewed_manifest_sha256": "4de95a42d761fe03a364174d90cbcfd20af009a57cdf94fde498d9ebfd2d2387",
   "retired": [
     {
       "claim_id": "C8dadb07045224b9ea2eb36dd",
@@ -54250,14 +54270,26 @@
         "C7f39b9077b043c16f9d96c7f"
       ],
       "scope": "只判定本轮改写后未判的 299 条当前项；已有 309 条判定保留原复核会话，不冒称重审。逐条对照 evidence.json 摘录、profile.json/profile_parse.json、calculations.json 与 case.json；用 curl 取 E012、E013 原件（指纹与登记一致）复现分组计数。"
+    },
+    {
+      "session_id": "claimcheck-s05-r4-20261021",
+      "model": "Claude Opus 5.5",
+      "independent": true,
+      "reviewed_manifest_sha256": "4de95a42d761fe03a364174d90cbcfd20af009a57cdf94fde498d9ebfd2d2387",
+      "claim_ids": [
+        "C9ac95e747d25e003670a5248",
+        "Cff7d3c56163c11f00df3efe8",
+        "Cb5dfc62c55652cebc0e379b6"
+      ],
+      "scope": "第六轮改写后逐句回查：判定 2 条无判定当前项；随机抽查 15 条 carried_from 保留项，其中 1 条（Cb5dfc…）原理由引了本句清单外证据，改用清单内证据重判。其余项保留原会话判定，不冒称重审。"
     }
   ],
   "report_snapshot": {
-    "trace_sha256": "8e4e1ef00a6a715d96e5dd91e0e042f4eb74d4626988084b9810528f79631cbb",
+    "trace_sha256": "b36d2951e02d1be234628b318ddc0b680a118fe61f2fb748692c32a787dffc20",
     "artifacts": {
       "report.md": "e02a23e4695e320cab1b0f912aff7381c68193d80b8ddf56271121191cfdef49",
-      "report.html": "ac787bbe17fa2d5b9f0a56a5e3637dcda850a78845522f8132cfe8b8c9f3a5ff",
-      "2027-QZ-S05-report.pdf": "d8b79abfeb98a7dc829d80349ab588ba9f7d84fad618ce7cf7a3b284e78b8570"
+      "report.html": "cb374831be70010c8fcfd0f05f71ca094feba76d6a4ec9c5b67961c16db91377",
+      "2027-QZ-S05-report.pdf": "fac7d4ad6604d6f8e7852b331af8dac7c3b48e9997d0446d21073bb681f4a2be"
     }
   }
 }

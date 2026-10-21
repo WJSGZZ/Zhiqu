@@ -426,7 +426,7 @@
       "lead": {
         "type": "conclusion_sentence",
         "content": {
-          "text": "报苏大钱够但很紧：交完学费剩 {{c:/suda_fee_left|comma}} 元，再留应急金只剩 {{c:/suda_fee_left_reserve|comma}} 元；分数上最怕一志愿没够上。"
+          "text": "报苏大学费交得起但很紧：交完学费剩 {{c:/suda_fee_left|comma}} 元，再留应急金只剩 {{c:/suda_fee_left_reserve|comma}} 元，住宿费还没算进去；分数上最怕一志愿没够上。"
         },
         "evidence_refs": [
           "E001",
@@ -528,7 +528,8 @@
           "evidence_refs": [
             "E072",
             "E002",
-            "E020"
+            "E020",
+            "E010"
           ]
         }
       ]

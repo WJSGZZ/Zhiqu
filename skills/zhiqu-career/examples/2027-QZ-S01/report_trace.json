@@ -1283,8 +1283,8 @@
   ],
   "artifacts": {
     "report.md": "4023378e675a504af8cd3c6900a962b8cfaba6c5dce5b1b148620ddde284046f",
-    "report.html": "62f079e0f79f5a01f0a26b4f296c09fa58dc5e0de86a02f62f313d88e90431ad",
-    "2027-QZ-S01-report.pdf": "22bf53821fbe9ca19e47e0a6fea541f7e9fff70fba854842687711ce77a66265"
+    "report.html": "a879214003d5844829a3ea626a949de3fe146fe106a42682ea9e2c00c57325b7",
+    "2027-QZ-S01-report.pdf": "587687dc1731aa05a860b6eb7d6ab9e8af2b4e997da4726a8dd234ecd7fb6080"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "authoring": {
@@ -1299,7 +1299,7 @@
     }
   },
   "policy_sha256": {
-    "zhiqu-shared/references/official-domains.csv": "0cd0d7be4307fd6e8696eaa2f845726929ddcb264c841fe32293fca58a49c934",
+    "zhiqu-shared/references/official-domains.csv": "fe9b53221663f0ebb8230c105937a6615aec882ce9d0d0a32cd19d96a050788a",
     "zhiqu-shared/references/unit-families.json": "a535c6ba17dc14fcf1d30d8b5f45691da0ab2f78cb92a30b01a55de41e72c9a0",
     "zhiqu-shared/references/reader-language.json": "247453b7a5c1d0bf4b5d4997d57ee8d32a1cd70327fff2683322bf4c79e5476d",
     "zhiqu/references/report-guide.md": "0278c07e521721d96450b8fbc707e88e403e04f725083e872957386d2e007955"

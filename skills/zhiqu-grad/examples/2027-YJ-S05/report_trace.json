@@ -5,12 +5,12 @@
     "case.json": "8234650be7d95e335a0bb75feae8d45efafc6eabdb2e922a1dbe8d2b3ccde955",
     "profile_parse.json": "26d77c111bb043cbc6cca5e761f0272ae369b77043836f7ff4e039a5759d96d9",
     "directions.json": "141ba17063943d6893342f321196523fd0eaf4c8c102cafee5b91cfc3a254d3a",
-    "rules_check.json": "cbbb85f76a2388cb4c279d7c299b43f5eb46e7d5ee41846678608dbfb82f5925",
-    "candidates.json": "8e98bc286da360aa16404074c976dbb3dabb53e4e98135a87890451b5093a2bc",
-    "evidence.json": "266347df93875b14b6f5d9715d08f2289e9f7bb68c06ed835f60791df485aac1",
+    "rules_check.json": "a49b73e4796ddce781c9559fadf72ac99b81b32fdc2d06bf2783d4c160e4b2f0",
+    "candidates.json": "e66ca02aa7d6caf68c08f718b88aa08e3b4e22680319864cec4bebca12c8798d",
+    "evidence.json": "6ab5d01663521398099dcad192fe8b32f2a268ffebfd5c7043fca1286be6827a",
     "calculations.json": "e78d090f8eaefcc1d16696d737b78ea95ae2dc4301377da12c1126e2b4ddeb23",
     "judgment.json": "688290b5ab8cf46141d9f8c7a02dd24e7d741fe6afd1e0a19085e15d65ebda34",
-    "narrative.json": "aec14e8fbc9bf4e2e1629d0313a26962a2a6741906f45816d3ad23cfbd9a921e",
+    "narrative.json": "8c625732ad3d2a3564a05f3cc6593ddceb769e1b9ed849fa4efacd8123539256",
     "profile.json": "af232e95b42de1286681d5b04d706bbd8d16d3dd86cfe304a7d87e5a6bfcab88",
     "profile-supplement.txt": "952368202eeb2cd031c6c0d52212442dca0faaadcd6c99828f951e50ba15d704"
   },
@@ -1679,9 +1679,9 @@
     }
   ],
   "artifacts": {
-    "report.md": "39df54cb21af839ef8820d334a7da5f2bfb851e6508bdad3f46c3edbf80bc115",
-    "report.html": "32be96af4920656866d526b7de0326f761685f8eceedf1fb4263b8eaedc974d1",
-    "2027-YJ-S05-report.pdf": "bac81b06d6907dd60765a88034e026f8926706e55f84359e5642249f8967fcfd"
+    "report.md": "eb30b2609ff31d55af06a909690b6fede71b6fbcdcac17b5487f5807b0586b85",
+    "report.html": "f12727a08932e2a6866950801faaa3dccc784b06b75eb94ddb1592fdea611f94",
+    "2027-YJ-S05-report.pdf": "cb77e2574655bba93d7de7c6d6b03ef32248656f1bf6c29debf7e9dd793e195f"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "authoring": {
@@ -1696,7 +1696,7 @@
     }
   },
   "policy_sha256": {
-    "zhiqu-shared/references/official-domains.csv": "0cd0d7be4307fd6e8696eaa2f845726929ddcb264c841fe32293fca58a49c934",
+    "zhiqu-shared/references/official-domains.csv": "fe9b53221663f0ebb8230c105937a6615aec882ce9d0d0a32cd19d96a050788a",
     "zhiqu-shared/references/unit-families.json": "a535c6ba17dc14fcf1d30d8b5f45691da0ab2f78cb92a30b01a55de41e72c9a0",
     "zhiqu-shared/references/reader-language.json": "247453b7a5c1d0bf4b5d4997d57ee8d32a1cd70327fff2683322bf4c79e5476d",
     "zhiqu/references/report-guide.md": "0278c07e521721d96450b8fbc707e88e403e04f725083e872957386d2e007955"
