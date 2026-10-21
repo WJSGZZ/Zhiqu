@@ -140,7 +140,83 @@ console.log(JSON.stringify({initialHash,answerHash,rankHash,wordingHash,sectionH
 '''
 
 
+# Conditional display: a minimal DOM where hidden attributes and the followup
+# "show" class decide visibility, exactly as the stylesheet does.
+CONDITIONS_DOM = r'''
+const fs=require('fs'),vm=require('vm');
+class El{
+  constructor(tag,attrs={}){this.tagName=tag.toUpperCase();this.attrs=attrs;this.children=[];this.parentElement=null;
+    this.id=attrs.id||'';this.name=attrs.name||'';this.type=attrs.type||'';this.value=attrs.value||'';this.checked=!!attrs.checked;this.hidden=false;
+    const set=new Set((attrs.class||'').split(' ').filter(Boolean));
+    this.classList={contains:v=>set.has(v),add:v=>set.add(v),remove:v=>set.delete(v)};}
+  append(...k){k.forEach(e=>{e.parentElement=this;this.children.push(e);});return this;}
+  hasAttribute(k){return Object.hasOwn(this.attrs,k);}
+  getAttribute(k){return this.attrs[k]??null;}
+  get offsetParent(){if(this.hidden||(this.classList.contains('followup')&&!this.classList.contains('show')))return null;return this.parentElement?this.parentElement.offsetParent:{};}
+  matches(sel){const m=/^(\w+)?((?:\.[\w-]+)*)((?:\[[\w-]+\])*)$/.exec(sel.trim());if(!m)return false;
+    if(m[1]&&this.tagName.toLowerCase()!==m[1])return false;
+    if(m[2]&&!m[2].split('.').filter(Boolean).every(c=>this.classList.contains(c)))return false;
+    return !m[3]||m[3].slice(1,-1).split('][').every(a=>this.hasAttribute(a));}
+  querySelectorAll(sels){const out=[];const walk=e=>e.children.forEach(c=>{if(sels.split(',').some(s=>c.matches(s)))out.push(c);walk(c);});walk(this);return out;}
+}
+const E=(t,a)=>new El(t,a);
+const root=E('main');
+const a1=E('input',{type:'radio',name:'a',value:'1',checked:true}),a2=E('input',{type:'radio',name:'a',value:'2'});
+// W is placed before the followup that holds its trigger: a single pass would wrongly clear it.
+const w=E('div',{'data-show-when':'b=x'}),wText=E('input',{type:'text',id:'w',value:'保留'});w.append(wText);
+const f=E('div',{class:'followup','data-when':'a=1'}),bx=E('input',{type:'radio',name:'b',value:'x',checked:true});f.append(bx,E('input',{type:'radio',name:'b',value:'y'}));
+const g=E('div',{'data-show-when':'a=2'}),gText=E('input',{type:'month',id:'g',value:'2026-06'}),gRadio=E('input',{type:'radio',name:'c',value:'在考',checked:true});g.append(gText,gRadio);
+const h=E('div',{'data-hide-when':'a=1'}),hArea=E('textarea',{id:'h',value:'过时'});h.append(hArea);
+root.append(a1,a2,w,f,g,h);
+const ctx={document:{querySelectorAll:s=>root.querySelectorAll(s),querySelector:s=>root.querySelectorAll(s)[0]||null,getElementById:()=>null}};
+vm.createContext(ctx);vm.runInContext(fs.readFileSync(process.argv[1],'utf8'),ctx);
+const snap=()=>({w:[w.hidden,wText.value],f:[f.classList.contains('show'),bx.checked],g:[g.hidden,gText.value,gRadio.checked],h:[h.hidden,hArea.value]});
+ctx.refreshConditions();const first=snap();
+a1.checked=false;a2.checked=true;ctx.refreshConditions();const switched=snap();
+a2.checked=false;a1.checked=true;ctx.refreshConditions();const back=snap();
+console.log(JSON.stringify({first,switched,back}));
+'''
+
+
+def condition_groups(cond):
+    for group in cond.split(';'):
+        name, _, values = group.partition('=')
+        yield name.strip(), values.split('|')
+
+
 class QuestionnaireAssets(unittest.TestCase):
+    def test_every_display_condition_names_a_real_choice(self):
+        for name in PAGES:
+            with self.subTest(name=name):
+                raw = (ROOT / (name + '.html')).read_text(encoding='utf-8')
+                choices = {}
+                for field, value in re.findall(r'<input[^>]*?name="([^"]+)"[^>]*?value="([^"]+)"', raw):
+                    choices.setdefault(field, set()).add(value)
+                page = Elements(); page.feed(raw)
+                self.assertTrue(page.conditions)
+                for cond in page.conditions:
+                    for field, values in condition_groups(cond):
+                        self.assertIn(field, choices, cond)
+                        for value in values:
+                            self.assertIn(value, choices[field], cond)
+                self.assertRegex(raw, r'function refreshFollowups\(\)\{ refreshConditions\(\); \}')
+
+    def test_conditions_settle_before_clearing_and_hidden_answers_are_cleared(self):
+        node = shutil.which('node')
+        if node is None:
+            self.skipTest('Node.js unavailable')
+        result = json.loads(subprocess.run([node, '-e', CONDITIONS_DOM, str(ROOT / 'assets/questionnaire.js')],
+                                           check=True, capture_output=True, text=True, timeout=15).stdout)
+        # Trigger inside a followup that is shown later in the same refresh: kept.
+        self.assertEqual(result['first'], {'w': [False, '保留'], 'f': [True, True],
+                                           'g': [True, '', False], 'h': [True, '']})
+        # Switching the parent choice hides the followup and everything that depended on it, and clears them.
+        self.assertEqual(result['switched'], {'w': [True, ''], 'f': [False, False],
+                                              'g': [False, '', False], 'h': [False, '']})
+        # Switching back does not resurrect old answers.
+        self.assertEqual(result['back'], {'w': [True, ''], 'f': [True, False],
+                                          'g': [True, '', False], 'h': [True, '']})
+
     def test_no_duplicate_dom_ids_and_shared_assets_exist(self):
         for name in PAGES:
             with self.subTest(name=name):

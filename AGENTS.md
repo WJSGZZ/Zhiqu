@@ -55,6 +55,7 @@ python3 skills/zhiqu/scripts/check_family.py           # 引用、问卷节名�
 python3 skills/zhiqu/scripts/check_demos.py            # 读研、求职示例：重新排盘、重算 offer 与预算
 python3 skills/zhiqu/scripts/validate_data.py          # 改了数据时
 python3 skills/zhiqu/scripts/check_layout.py 报告.pdf  # 版面自检（生成 PDF 时已自动运行，失败即报错）
+python3 skills/zhiqu/scripts/check_questionnaire.py   # 改了问卷时：真实浏览器展开全部条件题，查控件贴边、重叠和溢出（需 playwright）
 ```
 
 - 改了计算逻辑：重跑受影响的示例，核对报告数字，更新测试基准。
