@@ -1608,9 +1608,26 @@ def unprefix(text, label):
     return t[len(label) + 1:].lstrip() if t.startswith(label + "：") else t
 
 
+def pending_plan(x):
+    """pool.py 给招生计划类括号（八协计划等）标的“资格待核：计划名”：返回计划名，没有则返回空串。"""
+    m = re.search(r"资格待核：([^；;]+)", x.get("limits") or "")
+    return m.group(1).strip() if m else ""
+
+
+def pending_note(x):
+    """志愿表行注：资格待核的志愿不当普通志愿，先核报名资格。"""
+    plan = pending_plan(x)
+    return f"需核对报名资格（{plan}）" if plan else ""
+
+
 def limit_line(x):
     """招生章程里的硬性限制（体检、单科、语种、性别等），提醒考生录入前再核对一次。"""
-    return f"<div class='small' style='color:#9B3B2E'>限制：{E(x['limits'])}</div>" if x.get("limits") else ""
+    if not x.get("limits"):
+        return ""
+    text = x["limits"]
+    if pending_plan(x):
+        text = re.sub(r"资格待核：[^；;]+", pending_note(x) + "：按当年招生章程和本省招生计划确认能报再填，核实前不算保底", text)
+    return f"<div class='small' style='color:#9B3B2E'>限制：{E(text)}</div>"
 
 
 def group_line(x, fmt=None):
@@ -1775,13 +1792,16 @@ def build(rep, opt):
             probs = f"<td class='r'>{fmt(x['p_clear'])}</td><td class='r'>{fmt(x['p_land'],1)}</td>" if numeric else "<td>按分档</td><td>不显示百分比</td>"
             rank_cell = f"{x['expected_cut_rank']:,}" + (f"<div class='small'>{interval80(x)}</div>" if grade!='A' else '')
             snippets = [v.strip() for v in re.split(r'[。；]', notes.get(x['name'],'')) if v.strip() and not re.search(r'\d',v)]
-            note = snippets[0] if snippets else ('请核章程限制' if x.get('limits') else '历年位次与计划见第 12 节')
+            note = pending_note(x) or (snippets[0] if snippets else ('请核章程限制' if x.get('limits') else '历年位次与计划见第 12 节'))
             note = note if len(note)<=18 else note[:17]+'…'
             body += (f"<tr{hl}><td class='num'>{x['order']}</td><td>{E(x['name'])}<span class='row-note'>{E(note)}</span></td>"
                      f"<td><span class='tag {E(x['tag'])}'>{E(x['tag'])}</span></td><td class='r'>{x['utility']:.1f}</td>{probs}<td class='r'>{rank_cell}</td></tr>")
         body += '</tbody></table>'
         body += ('<p class="small">"偏好"是 0–100 的分数，由"你的画像"一节的权重和各项打分算出。"单独过线"只看这一个志愿；"最终录取"考虑了前面志愿可能已经录取你；"预测位次"是今年最低录取位次的中位预测。'
                  '冲：单独过线 &lt; 40%；稳：40%–85%；保：≥ 85%。高亮行是最可能的去向。'
+                 + ('标“需核对报名资格”的志愿属于' + E('、'.join(dict.fromkeys(pending_plan(x) for x in lst if pending_plan(x))))
+                    + '等单列的招生计划，能不能报要按当年招生章程和本省招生计划核对；核实之前不当作普通志愿，也不要指望它兜底。'
+                    if any(pending_plan(x) for x in lst) else '')
                  + ('' if grade == "A" else '本省概率评级为 ' + grade + '：' + GRADE_MEANING[grade] + '“80% 区间”指今年最低录取位次大约有八成可能落在这个范围内。')
                  + '</p>')
         sec("志愿表", body)

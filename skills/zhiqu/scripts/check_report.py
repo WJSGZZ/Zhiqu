@@ -68,6 +68,8 @@ def check_report(rep, result, html=None):
                 actual = [cells[j] for j in idx] if len(cells) == len(head) else []
                 if actual != [public_text(v) for v in expected] or not cells[1].startswith(public_text(item['name'])):
                     errors.append(f'HTML 志愿表第 {i+1} 行与 result 不一致')
+                elif pending(item) and '需核对报名资格' not in cells[1]:
+                    errors.append(f'HTML 志愿表第 {i+1} 行是“资格待核”志愿，须标“需核对报名资格”')
         metrics = Metrics()
         metrics.feed(html)
         items = result['list']
@@ -140,6 +142,19 @@ def floor_shortfall_ok(rep):
             and ("保底不够" in body or "保底不足" in body))
 
 
+def pending(item):
+    """pool.py 标“资格待核”（招生计划类括号，如八协计划）的志愿：能否报考未核实，不算保底。"""
+    return "资格待核" in str(item.get("limits") or "")
+
+
+def pending_floor_disclosed(rep):
+    """保底只靠资格待核志愿时的例外：meta.floor_shortfall 写明原因与补救，正文写明要核对报名资格。"""
+    fs = rep.get("meta", {}).get("floor_shortfall")
+    body = json.dumps({k: v for k, v in rep.items() if k != "meta"}, ensure_ascii=False)
+    return (isinstance(fs, dict) and all(str(fs.get(k) or "").strip() for k in ("reason", "remedy"))
+            and "报名资格" in body)
+
+
 def check_grade(rep, result=None, warnings=None):
     """按本省评级写概率（references/report-guide.md）：评级不比体检更乐观，保底余量够，正文概率写法合规。
     warnings 为列表时，降级为警告的问题追加进去（不阻止生成）。"""
@@ -157,6 +172,18 @@ def check_grade(rep, result=None, warnings=None):
     if result and result.get("list"):
         lst, rank = result["list"], float(result.get("params", {}).get("rank") or 0)
         wide = lambda x, k: rank and x.get("expected_cut_rank", 0) >= k * rank
+        firm = [x for x in lst if not pending(x)]
+        floor_ok = {"A": lambda xs: any(x["p_clear"] >= 0.95 for x in xs),
+                    "B": lambda xs: any(x["p_clear"] >= 0.99 and wide(x, 1.2) for x in xs),
+                    "C": lambda xs: sum(bool(wide(x, 1.3)) for x in xs) >= 2}
+        floor_ok["D"] = floor_ok["C"]
+        if floor_ok[g](lst) and not floor_ok[g](firm):
+            # 保底只靠“资格待核”志愿撑着：能否报考未核实，不能当作保底已够
+            if pending_floor_disclosed(rep):
+                if warnings is not None:
+                    warnings.append(f"{g} 级保底只靠“资格待核”志愿满足（已在 meta.floor_shortfall 与正文写明须核对报名资格）")
+            else:
+                errs.append(f"{g} 级保底只靠“资格待核”志愿（如八协计划）满足：须在 meta.floor_shortfall 写 reason 与 remedy，并在正文写明须核对“报名资格”")
         if g == "A" and not any(x["p_clear"] >= 0.95 for x in lst):
             if floor_shortfall_ok(rep):
                 if warnings is not None:

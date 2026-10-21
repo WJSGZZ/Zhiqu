@@ -11,8 +11,10 @@ import unittest
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
 
+import check_report  # noqa: E402
 import pipeline  # noqa: E402
 import pool  # noqa: E402
+import report  # noqa: E402
 
 R07 = os.path.join(ROOT, "examples", "2026-GK-R07")
 BAXIE = "内蒙古大学(八协计划)[公办]·新闻学"
@@ -143,6 +145,31 @@ class TestRetroPlanRule(unittest.TestCase):
             self.assertFalse(any("校区括号" in r["note"] for r in kept.values()))
             legacy = {r["name"] for r in rows(os.path.join(R07, "retro_ranks", rank, "pool.csv"))}
             self.assertEqual(set(kept) - legacy, {BAXIE})  # 只多这一条，没有误保留
+
+
+class TestReportPending(unittest.TestCase):
+    item = {"order": 1, "name": BAXIE, "p_clear": 0.97, "expected_cut_rank": 48000, "limits": "资格待核：八协计划"}
+
+    def test_report_marks(self):
+        self.assertEqual(report.pending_note(self.item), "需核对报名资格（八协计划）")
+        self.assertIn("需核对报名资格（八协计划）", report.limit_line(self.item))
+        self.assertEqual(report.pending_note({"limits": "体检：色弱不录"}), "")
+
+    def rep(self, **meta):
+        return {"meta": dict(prob_grade="A", grade_note="河北评 A", province="河北省", category="历史类", **meta),
+                "summary": {"headline": "保底只靠八协计划，须先核对报名资格"}}
+
+    def test_floor_only_from_pending_needs_disclosure(self):
+        res = {"list": [dict(self.item), {"order": 2, "name": "甲·法学", "p_clear": 0.6, "expected_cut_rank": 30000}],
+               "params": {"rank": 34678}}
+        errs = check_report.check_grade(self.rep(), res)
+        self.assertTrue(any("资格待核" in e for e in errs))
+        warns = []
+        ok = self.rep(floor_shortfall={"reason": "范围内稳拿的只有八协计划", "remedy": "核对资格；不符则表尾补民办"})
+        self.assertEqual(check_report.check_grade(ok, res, warns), [])
+        self.assertTrue(any("资格待核" in w for w in warns))
+        firm = {"list": [dict(self.item, limits=""), res["list"][1]], "params": res["params"]}
+        self.assertEqual(check_report.check_grade(self.rep(), firm), [])
 
 
 class TestPipelinePending(unittest.TestCase):
