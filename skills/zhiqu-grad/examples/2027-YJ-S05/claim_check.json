@@ -67,7 +67,16 @@
         }
       ],
       "claim_id": "Cffa3f24d9e45c30c01612aec",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "封面日期取 case.json context.as_of=2026-10-21，与本次出稿日一致；E123、E124 取文日期也是 2026-10-21，没有晚于出稿日的证据。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "00",
@@ -99,7 +108,16 @@
         }
       ],
       "claim_id": "C38d432d4451ce2ec6f5530b4",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "“数据截至”同样绑定 as_of 2026-10-21；evidence.json 最晚取文日是 E123/E124 的 2026-10-21，其余为 10-20，截至日不早于任何取文日。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "00",
@@ -116,7 +134,16 @@
         }
       ],
       "claim_id": "C6c4bc3b9efc2212b5e78c084",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "349 是 mock_total（63+62+105+119）；苏大只有 2026 一届名单（E042/E045），不满足“两届都不低于中位数”，河海普通方向低于 2026 下四分位 352，河海联培与软工人数不足五人不定档，南航等只有复试线，故无“相对稳妥”；“与学硕同科目”在此指苏大 E035、河海 E057 的学硕。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "00",
@@ -5448,7 +5475,16 @@
       ],
       "bindings": [],
       "claim_id": "C4115a738ebc457fb617a9681",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "要点标题“只和同科目的比”概括下文做法：只把模考与 E035/E057 所列 101/201/301/408 相同的学硕对照，本身不陈述外部数字。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -5796,7 +5832,16 @@
       ],
       "bindings": [],
       "claim_id": "C10e3fc4b7ae6d9068a8ce53c",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "E002 本人原话列出政治 63、英语一 62、数学一 105、408 119；句中“计算机学科专业基础”就是 408 的官方科目名（E035“④408 计算机学科专业基础”）。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -6144,7 +6189,16 @@
       ],
       "bindings": [],
       "claim_id": "Ce0c6ca52b95655133e09f091",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "苏大 081200/083500 同科目见 2027 年目录 E035（范围写明两码同一合并单元格）；河海见 2026 年目录 E057“081200 与 083500 科目相同”；南航 E085、南邮 E095、江大 E103、南理工 E112 当届科目均为未取到，四校名单与句子一致。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -6492,7 +6546,16 @@
       ],
       "bindings": [],
       "claim_id": "Cd1d75bccd5c9f57b80bccc10",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "苏大 085404 当届考“②204 英语（二） ③302 数学（二）”（E036），河海计算机学院 085400 上一届目录同样是英语二、数学二（E059），限定为苏大、河海后不再外推到其他学校。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -6840,7 +6903,16 @@
       ],
       "bindings": [],
       "claim_id": "C68631c18afd01920a53bc67d",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "两项都按规则得“够一够”：081200 模考 349 ≥ 下四分位 347.75 但低于中位数 357.5；083500 模考 349 等于中位数、≥ 下四分位 334；两项都只有 2026 一届名单，按 kaoyan_position 规则不能给“相对稳妥”。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -7199,7 +7271,16 @@
         }
       ],
       "claim_id": "C9bfc18e183bd61fbcdafa6a5",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E042 十二个匿名分按含端点线性插值得下四分位 347.75（第 3、4 个分数 347 与 348 之间），中位数 (357+358)/2=357.5；349 高于 347.75、比 357.5 低 8.5，与 gap_suda0812_median 一致；“最低一档的最高分”即下四分位的通俗说法。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -7553,7 +7634,16 @@
         }
       ],
       "claim_id": "Ce2cafc89270da00182d1bb9c",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "E045 十个分数中位数为 (348+350)/2=349，恰等于模考；复试线 E043 326 比 E030 341 低 15 分，对应 suda_line_gap_0812_0835=15。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -7901,7 +7991,16 @@
       ],
       "bindings": [],
       "claim_id": "Cba0493c80761b339180a65e6",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "小标题“为什么默认还是计算机学硕”只提出下面三句要回答的问题，不含事实或数字。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -8249,7 +8348,16 @@
       ],
       "bindings": [],
       "claim_id": "Cf0148cbc7b83a934bf0f4a24",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "比较的是位置：软件工程学硕模考与中位数差 0（gap_suda0835_median），计算机学硕差 8.5，比复试线分别高 23 与 8 分，按分数位置软工更靠前，判断由计算项直接得出。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -8597,7 +8705,16 @@
       ],
       "bindings": [],
       "claim_id": "Cd52dd6bd61ee5d85280a46e3",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "问卷三个目标依次写“南京航空航天大学 计算机”“苏州大学 计算机”“河海大学 计算机”，全卷和补充说明都没提软件工程；把是否接受软工留给本人决定与此相符。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -8945,7 +9062,16 @@
       ],
       "bindings": [],
       "claim_id": "C4f8720ace410dea6b5218e2a",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "“接受就改报软件工程学硕”是条件式建议，前提来自上句本人未表态，且 E035 显示两专业当届同科目，改报不涉及换考试科目。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -9293,7 +9419,16 @@
       ],
       "bindings": [],
       "claim_id": "Cba4768be86302c1f6097f501",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "河海普通方向定为“冒险”：2026 一志愿名单 9 人（E065），模考 349 低于其下四分位 352，也低于最低分 350；9 人处于五到九人区间，最高只能到够一够，这里不到下四分位故为冒险。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -9662,7 +9797,16 @@
         }
       ],
       "claim_id": "C0a2ecf9232190e1c08e37984",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "复试线 308（E054，2025 年 01—04 普通方向）到 350（E050，2026 年 02—05 普通方向），统考计划 18 人（E064）到 9 人（E060），模考 349 比 350 低 1 分（gap_hhu0812n_line=1），“在线下”成立。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -10010,7 +10154,16 @@
       ],
       "bindings": [],
       "claim_id": "Cda0d8f0e196a77942dd003b1",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "本人原话是“同学说河海去年分数线不高”，按出稿时 2026 年的日历，“去年”公布的线就是 2025 年那一届的 308 分（E054），报告叫“前一届”；引号里压缩成“河海线不高”，意思没变。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -10358,7 +10511,16 @@
       ],
       "bindings": [],
       "claim_id": "Ccfda179d227bda6dcdd35ea4",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "要点标题“没有稳妥档，保底要提前备”与本节结论一致：各候选没有一个满足两届都不低于中位数，所以保底要另做准备。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -10722,7 +10884,16 @@
         }
       ],
       "claim_id": "Cee85ff0e2557e71102cc177b",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "联培一志愿录取 2026 年 5 人（E066 五个分数）、2025 年 1 人（E075），软工 2026 年 3 人（E074），低于 5 人门槛不定档；软工模考 349 高于 2026 三人中两人、2025 十人中八人，“大多数”成立；河海 2027 目录未取到见 E072。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -11070,7 +11241,16 @@
       ],
       "bindings": [],
       "claim_id": "C02c08bd8cb05395efbada0db",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "南航有 2026 复试线 340（E080）但无名单（E086），南邮有 2026 线 303（E090），江大有 2026 线 326（E100），南理工只有 2025 线 335（E110），四校都缺录取者分布，依规则不定档。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -11418,7 +11598,16 @@
       ],
       "bindings": [],
       "claim_id": "C772e16e636a6a6de048182d4",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "保底建议依据 E016“初试科目与调入专业初试科目相同相近”的调剂原则，以及本人“只接受部分城市或层次”的调剂意愿与“打算春招”的工作打算；准备时间放在初试后属建议。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -11762,7 +11951,16 @@
       ],
       "bindings": [],
       "claim_id": "C6ca56326f2d390deae152d36",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "检查点为 personal_dates.checkpoint 2026-11-15，而 E010 全国网报截止 2026-10-24，所以“那时报名早已截止”成立；后半句列出检查内容，是建议，不需原文。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -11858,7 +12056,16 @@
       ],
       "bindings": [],
       "claim_id": "C6dd0d13ab6d968b8d39592b5",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "录取者分数只有苏大（E042/E045）和河海（E065 等）；其余学校只对照复试线；南理工研究生院 2026 页面要登录（E112），只取到 2025 年线 E110，“连上一届的线也没取到”属实。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -11954,7 +12161,16 @@
       ],
       "bindings": [],
       "claim_id": "Ca9f7be2bd43225377218b4c0",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "推测",
+        "reason": "模考日期 2026-10-11（E002），初试 2026-12-19（E012，本句引用未列但在 evidence.json），相隔约十周，“几周”成立；“机构卷难度与真题关系没核过”对应补充说明“听同学讲比真题难一点，没核过”；“分数会变”是合理推断。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -12050,7 +12266,16 @@
       ],
       "bindings": [],
       "claim_id": "C034f22881ff7e3b78c169427",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "推测",
+        "reason": "“档位只是报名时的参考、不是承诺”由上两句（模考非初试、卷子难度未核）推出，E002 范围也写明“不是初试成绩”，措辞没有超出依据。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "01",
@@ -12146,7 +12371,16 @@
       ],
       "bindings": [],
       "claim_id": "C50738bfed760ef0dc575cca6",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "出稿日 2026-10-21 早于 E010 报名截止 2026-10-24，建议截止前确认学校可行；后半句把准备重点放在最弱两科和复试上机，对应 E037 复试机考编程题和本人没做过完整上机模拟，已不含被退回的“报完名不能改学校”。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "02",
@@ -12314,7 +12548,16 @@
       ],
       "bindings": [],
       "claim_id": "C37ab4bccd2c27ae54b5cbaee",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "表注说明第 02 节只列本人说过的话；该表内容取自 profile.json 问卷与 profile-supplement.txt 口头补充两处，没有估算值，表注覆盖了两种来源。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "02",
@@ -16247,7 +16490,16 @@
       ],
       "bindings": [],
       "claim_id": "Ca6ceab00cf7476f6dc6090a7",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "问卷目标栏原话：南航“自己定的，觉得名气大”、苏大“学长推荐的”、河海“同学说分数不高”，补充说明也说南航“是看排名定的”；所列证据号 E042 等不含这几句，依据实际在本人问卷。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "03",
@@ -16355,7 +16607,16 @@
         }
       ],
       "claim_id": "Cb084d25db03b3321bfecf5bc",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "河海计算机普通方向 2025 线 308（E054）、2026 线 350（E050），并已限定普通方向；E123 表头 11 列为专业代码、专业名称、考生编号、姓名、考试类别、学位类别、学习方式、录取类别及三项成绩，无本科学校列，我取原件 PDF 看图核对一致；南航只有 E080 复试线、E086 无名单，三处都成立。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "03",
@@ -16452,7 +16713,16 @@
       ],
       "bindings": [],
       "claim_id": "C0d2fc2f9ade48d052458a513",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "“只用官方原件说话、听来的话只当线索”是方法声明，与本节对三句传言逐一用 E050/E054、E123、E080/E086 核对的做法一致。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "03",
@@ -16909,7 +17179,16 @@
       ],
       "bindings": [],
       "claim_id": "C1d6927729a792bb9882586f0",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "矩阵标题与实际五列（城市与培养、科目可比、模考位置、名额与年度变化、复试准备）相符：先城市，后面是能否考、考得上。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "04",
@@ -17173,7 +17452,16 @@
       ],
       "bindings": [],
       "claim_id": "C9ad8895cb23b122452d4f3df",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "图注说第一列是最在乎的城市，本人优先级排序第一项正是“城市”；其余四列都是报考条件，已改掉此前“按优先级从左往右”的说法。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "04",
@@ -20653,7 +20941,16 @@
       ],
       "bindings": [],
       "claim_id": "C00553b585fbecb6e5b44d790",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "苏大计算机学院 2026 细则 E033“复试成绩（300 分）=机考（150 分）+…”，150/300 为一半，格内已标“上一届”；“编程”指机考内容，依据 2027 目录 E037“考试形式：机考编程题”，两份文件属同一学院同一复试科目。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "04",
@@ -22257,7 +22554,16 @@
       ],
       "bindings": [],
       "claim_id": "Ca0c1050cd3699a60e322c79c",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "081200 与 083500 都在苏大计算机科学与技术学院同一份细则里（E030、E043 同出该细则），复试结构相同；机考 150 分占 300 分一半出自 2026 年 E033/E034，已加“上一届”。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "04",
@@ -27338,7 +27644,16 @@
       ],
       "bindings": [],
       "claim_id": "Cda1d292c49c44cecd8f21d7b",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "说明句与图注同义：第一列城市对应本人 priority 首项“城市”，后几列是考试条件；不再声称各列按优先级排列。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "04",
@@ -37955,7 +38270,16 @@
         }
       ],
       "claim_id": "C6665b02d07b042b658265cc6",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "“只有一届分布”对应苏大只取到 2026 名单 E042；“少 2 人”= 上一届拟公开招考 12（E041）减当届计划 10（E038），即 suda_plan_drop；“上一届复试机考编程占一半分”同 E033/E034 与 E037。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -39038,7 +39362,16 @@
       ],
       "bindings": [],
       "claim_id": "C6d452845e8227b1922c7ffcd",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "只有 E045 一届分布；本人目标与方向题都未提软件工程；E047 列出 083500 方向“01 认知软件理论与方法”，可称偏理论（本人写过不想做纯理论）；复试与计算机学硕同属一份细则，机考 150/300 为 2026 年数值，已标上一届。E047 不在本句引用列表里，但 evidence.json 有原文。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "06",
@@ -78495,7 +78828,16 @@
         }
       ],
       "claim_id": "C4a63e0b42912712a4e96c09f",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E010/E017 原文“每日9:00—22:00”；E073 原文“须在2026年10月24日22:00前网上支付报名考试费，否则报名无效”，引号部分逐字一致；对本人报考点的类推已明写“推测”并要求以公告为准。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "07",
@@ -78960,7 +79302,16 @@
         }
       ],
       "claim_id": "C3461dec51deba0b30a78e46b",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "同科目见 E035（2027 目录）；上一届复试线 341、326 见 E030、E043；单科不低于国家线见 E030 范围“单科不低于A类国家线”；复试满分 300、机考 150 见 2026 年 E033/E034，现已冠“上一届”。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "08",
@@ -80471,7 +80822,16 @@
       ],
       "bindings": [],
       "claim_id": "Cfde9fa50cacf603888b2ef76",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "“上一届复试满分里机考占一半”有 E033/E034（150/300），括号“当届复试办法还没发布”对应 E033 范围“2027年办法未发布”；“当届目录写明以编程题为主、程序设计占大头”对应 E037“程序设计（60%）…考试形式：机考编程题”。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "08",
@@ -80744,7 +81104,16 @@
       ],
       "bindings": [],
       "claim_id": "Ceed901b0a58c0bbcb69673f9",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "家里上限 30000 减生活费 18000 剩 12000，苏大 2027 学术型硕士学费 8000（E124，我用 curl 取原页逐字核对过），平常情形余 4000、先留应急金也余 1000，“有余量”在已知数下成立；“学费只取到苏大的”与 E121 河海未列金额一致；“一志愿够一够没够上”是风险描述。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -80811,7 +81180,16 @@
       ],
       "bindings": [],
       "claim_id": "C93ef8a52f00581279d2c33ed",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "预算图标题说明图的内容是家里上限减生活费后的剩余，与图中 30000、18000、12000 等五行一致。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -80878,7 +81256,16 @@
       ],
       "bindings": [],
       "claim_id": "Cd1c620e79592a68d7c8ae235",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "图注颜色与 report.py 调色板一致：主=#21473E 深色、次=#34685D 中间色、稳=#A8772B 琥珀；三条“稳”行依次是 12000、8400、9000，对应平常、南京租房、留应急金，互为替代情形，不能相加。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -80945,7 +81332,16 @@
       ],
       "bindings": [],
       "claim_id": "Cfad089959dda88dc9faa2de3",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "本人只说“要是在南京租房可能到 1800”，没估苏州；苏大在苏州（E124 财务处页脚地址为苏州市东环路），所以苏大按每月 1500 平常生活费算，说明属实。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -81012,7 +81408,16 @@
       ],
       "bindings": [],
       "claim_id": "C35353e5979274adcbf71ee7c",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "图中五行都不含学费，与“学费只取到苏大一所（E124），没画进图”一致；条从零起是作图口径说明。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -81079,7 +81484,16 @@
       ],
       "bindings": [],
       "claim_id": "C6f500b3fad378dc3ad249f25",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "图的单位“元”与五行数值（30000、18000、12000、8400、9000）都是人民币元相符。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -81146,7 +81560,16 @@
       ],
       "bindings": [],
       "claim_id": "Ce3a274b34a1543110b7110cc",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "行名“家里每年上限”对应本人原话“家里说读研每年学费加生活费最多出 3 万”。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -81219,7 +81642,16 @@
         }
       ],
       "claim_id": "C82008f6e26d60f5a72816ed6",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "30000 绑定 case.json budget.annual_limit，来源是本人“最多出 3 万”，profile_parse 字段 8 annual=30000。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -81286,7 +81718,16 @@
       ],
       "bindings": [],
       "claim_id": "C0f2d2441ef88707108271210",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "“主”是作图色标代码（PALETTE 主=深色），不是事实陈述，与图注“深色是家里说的每年上限”对应。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -81359,7 +81800,16 @@
         }
       ],
       "claim_id": "C816047dd55dac7bb6d5dfd16",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "第四列“30,000 元”是同一 annual_limit 值的带千分位显示，与第二列 30000 相同。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -81426,7 +81876,16 @@
       ],
       "bindings": [],
       "claim_id": "Ce521da9694c58699cdab4906",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "行名“全年生活费”对应 known_living 计算项，即本人月生活费按 12 个月换算的年额。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -81499,7 +81958,16 @@
         }
       ],
       "claim_id": "C1d8360f3505b86179a30925c",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "18000 = 本人每月 1500（profile_parse 字段 8 living）× E120 的 12 个月，等于 calculations.json known_living。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -81566,7 +82034,16 @@
       ],
       "bindings": [],
       "claim_id": "Cd19f39ee127c1b404d283b61",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "“次”是第二档色标代码，对应图注“中间是按你估的生活费算的全年开支”。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -81639,7 +82116,16 @@
         }
       ],
       "claim_id": "Cbced3de2880587491b560564",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "“18,000 元”是 known_living=18000 的显示格式，与本行第二列一致。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -81706,7 +82192,16 @@
       ],
       "bindings": [],
       "claim_id": "C3da4a9b73450cd04034a6776",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "行名“留给学费住宿”对应 nonliving_ceiling，即上限扣掉生活费后的余额。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -81779,7 +82274,16 @@
         }
       ],
       "claim_id": "Cac54f4408ed5321787f5f897",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "12000 = 30000 − 18000，与 calculations.json nonliving_ceiling 相同。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -81846,7 +82350,16 @@
       ],
       "bindings": [],
       "claim_id": "C14c8d30c0cf0d3b6a2105854",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第三行色标“稳”= 琥珀色，对应图注琥珀色三条中的“平常”情形。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -81919,7 +82432,16 @@
         }
       ],
       "claim_id": "Cf4efcefeb57cb147f1b226a9",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "“12,000 元”与 nonliving_ceiling 12000 一致，仅为千分位格式。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -81986,7 +82508,16 @@
       ],
       "bindings": [],
       "claim_id": "C16a9e145c5ebc065fbbc4945",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "行名“南京租房时”对应 scenarios 中把生活费换成每月 1800 的情形。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -82059,7 +82590,16 @@
         }
       ],
       "claim_id": "C4d7a4ebdf4707fbb599b32f7",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "8400 = 30000 − 1800×12（higher_living=21600），等于 higher_living_ceiling；1800 出自本人“在南京租房可能到 1800”。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -82126,7 +82666,16 @@
       ],
       "bindings": [],
       "claim_id": "C1b79c4a2010d26f03a669374",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第四行色标“稳”是琥珀色，对应图注三种情形里的“在南京租房”。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -82199,7 +82748,16 @@
         }
       ],
       "claim_id": "C355d708045d5bf43425805d3",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "“8,400 元”是 higher_living_ceiling=8400 的显示形式。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -82266,7 +82824,16 @@
       ],
       "bindings": [],
       "claim_id": "Ce3fa98d55680620db0129aeb",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "行名“先留应急金时”对应本人“想留 3000 应急”这一情形的计算行。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -82339,7 +82906,16 @@
         }
       ],
       "claim_id": "Cc68bc4ab05f6cbc8240c13e3",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "9000 = (30000 − 3000 应急) − 18000，即 after_reserve 27000 减 known_living，等于 reserve_ceiling。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -82406,7 +82982,16 @@
       ],
       "bindings": [],
       "claim_id": "C57f1124c6f3894d18ba44979",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第五行色标“稳”为琥珀色，对应图注第三种情形“先留应急金”。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -82479,7 +83064,16 @@
         }
       ],
       "claim_id": "Cbccc6db915de9d397d5c7133",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "“9,000 元”与 reserve_ceiling 9000 相同，只是加了千分位。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -82910,7 +83504,16 @@
       ],
       "bindings": [],
       "claim_id": "Cdc258c14b8e87c5a14d3e4db",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "这一行的情形是第二次模考（checkpoint 2026-11-15）仍低于下四分位，而 E010 报名 2026-10-24 截止，那时只能调整复习而不能重选；句子已去掉需另有原文的“志愿改不了”。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -83689,7 +84292,16 @@
       ],
       "bindings": [],
       "claim_id": "C7f44c3d205d765b78d9e40a9",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "风险表第四行理由写“上一届苏大复试机考占一半分”，对应 2026 年细则 E033/E034 的 150/300，年份已标明，2027 办法未发布不影响此句。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -84135,7 +84747,16 @@
         }
       ],
       "claim_id": "Cd0d3be3dbbd474be60585028",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "30000、每月 1500 出自 profile_parse 字段 8；18000=1500×12，12000=30000−18000，8400=30000−21600，9000=27000−18000，六个数都与 calculations.json 对应项一致。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -84202,7 +84823,16 @@
       ],
       "bindings": [],
       "claim_id": "C4e1c73f1a6071cbe6295ee3d",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "个人登记",
+        "reason": "本人只给了平常每月 1500 和南京租房 1800 两个数，没提苏州；苏大校址在苏州，所以按平常生活费算并声明没有分城市，符合输入。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -84280,7 +84910,16 @@
         }
       ],
       "claim_id": "C19046cf748e726e946effded",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E121 原文“学校按照国家和江苏省的规定根据物价部门批准或备案标准收取学费”，引号内为逐字子串；E124 我用 curl 重取苏大财务处页（指纹与登记一致），2027 级全日制行写“学术型硕士研究生（不含中外合作办学） 8000 元/生·年”，与句子吻合；其余学校缺口见第 12 节。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -84347,7 +84986,16 @@
       ],
       "bindings": [],
       "claim_id": "C8bcc8b6a23cd2c909e7398ba",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "录取后先查学费、住宿费和奖学金覆盖面是建议；“没确定的奖助不算进去”是本人原话“奖助学金没确定的不算进去”的转述。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "09",
@@ -89683,7 +90331,16 @@
       ],
       "bindings": [],
       "claim_id": "C222fae5876b47695742fa269",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "假设表第一列列名“量或规则”，与各行（模考总分、录取者分布、建议档、数据年份、单科线、预算）的性质相符。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -89764,7 +90421,16 @@
       ],
       "bindings": [],
       "claim_id": "C40e0c8ab7f56bd6035959a3f",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第二列列名“输入与口径”，下面各行确实写的是算式、数据来源和统计方法。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -89845,7 +90511,16 @@
       ],
       "bindings": [],
       "claim_id": "C454c21a683826f1df2a56dcb",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "第三列列名“结论边界”，各行内容都是使用限制，如“不是上岸概率”“不叠加”。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -89926,7 +90601,16 @@
       ],
       "bindings": [],
       "claim_id": "C3c68928b7c70f936ae4a776f",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "行名“模考总分”指向 mock_total 这一项，本身不含数字。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -90033,7 +90717,16 @@
         }
       ],
       "claim_id": "Cd0cc031b44b6c5ffefe70e4c",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "63、62、105、119 分别来自 profile_parse 字段 11 的政治、英语一、数学一、专业课，求和为 349，与 mock_total 一致。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -90114,7 +90807,16 @@
       ],
       "bindings": [],
       "claim_id": "C24aa9012c206cb8c6c3615f9",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "推测",
+        "reason": "E002 范围写明“一次机构模拟考试…试卷难度与真题的关系未核”，补充说明也说“没核过”，所以“只看落在哪一段”的边界与输入相符。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -90195,7 +90897,16 @@
       ],
       "bindings": [],
       "claim_id": "C579fd9f53a4b88b0b22407f5",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "行名“录取者分布”对应第 06 节两张区间图所用的匿名初试分。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -90276,7 +90987,16 @@
       ],
       "bindings": [],
       "claim_id": "Cf4df76695b7e4cefb63d7697",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "苏大用拟录取名单（E042/E045），河海用一志愿建议录取名单（E065 等），按学校、方向、年份分开；含端点线性插值可复算：苏大计算机 12 个分下四分位位置 2.75 得 347.75，河海软工 2026 三个分下四分位得 314，均与 calculations.json 一致。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -90357,7 +91077,16 @@
       ],
       "bindings": [],
       "claim_id": "C5979434385012096975ace16",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "边界说明“是录取者的分数，不是报考者，也不是上岸概率”与第 06 节图注同口径，属于读法限定。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -90438,7 +91167,16 @@
       ],
       "bindings": [],
       "claim_id": "C81c1763894a41ef71b0a0ab1",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "行名“建议档”指相对稳妥、够一够、冒险的分档规则。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -90519,7 +91257,16 @@
       ],
       "bindings": [],
       "claim_id": "C96a5c32383338e4375cac4e0",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "规则与 skills/zhiqu/scripts/kaoyan_position.py 文档一致：单科低于复试单科线为冒险、任一年 n<5 不定档、两年都≥中位数为相对稳妥、≥最近一年下四分位为够一够、5≤n<10 最高够一够；本案苏大、河海档位都按此可复现。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -90600,7 +91347,16 @@
       ],
       "bindings": [],
       "claim_id": "C809735154b59435a7146a15d",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "说明档位按各项目自己的分布判定、不用统一分差，并列出不定档的四类原因；第 06 节不定档表的原因（样本太少、科目不同、分布缺失）都在其中。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -90681,7 +91437,16 @@
       ],
       "bindings": [],
       "claim_id": "Cbd302defa8f1e504d17601c8",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "行名“数据年份”，用来说明各数据分别属于哪一届。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -90762,7 +91527,16 @@
       ],
       "bindings": [],
       "claim_id": "Ca28b3136f9f33a57436baace",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "复试线和名单是 2026、2025 年（E030、E050、E054、E065、E069 等），国家线是 2026 年（E020）；第 06 节两张区间图每行都写了 2026 或 2025；报名、初试、复试差额、调剂、录取时间取自 2027 年管理规定（E010—E018）。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -90843,7 +91617,16 @@
       ],
       "bindings": [],
       "claim_id": "C1c4273f79c6eaa9f4cbfb417",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "建议",
+        "reason": "旧年数字只看位置是方法边界；上一届国家线 2026-02-28 发布（E020），苏大、江大复试线 3 月中下旬发布（E030、E100），所以写“明年三月前后”重算有依据。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -90924,7 +91707,16 @@
       ],
       "bindings": [],
       "claim_id": "C8010e9064b826f1b99e948e6",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "行名“单科线”，说明下面一行用的单科门槛口径。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -91016,7 +91808,16 @@
         }
       ],
       "claim_id": "C57387d7a09fb822dfb4a0713",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E021/E022 为 2026 年工学 A 类单科 35（满分 100 科）、53（满分超过 100 科），E020 范围写明 A 类即一区、含江苏；苏大“单科不低于A类国家线”（E030 范围）与河海“单科参照国家A类线”（E050 范围）都来自取文时的记录。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -91097,7 +91898,16 @@
       ],
       "bindings": [],
       "claim_id": "C9734b7c046ada7c748bc30ee",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "上一届国家线文件发布于 2026-02-28（E020），在 2025 年 12 月初试和出分之后，当届线同样要等出分后公布，与此相符。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -91178,7 +91988,16 @@
       ],
       "bindings": [],
       "claim_id": "C101d57204a55b5304ebc84af",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "行名“预算”，对应第 09 节预算图的计算口径。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -91290,7 +92109,16 @@
         }
       ],
       "claim_id": "C94df73f58f1551c2b0120bd0",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "计算",
+        "reason": "1500 来自 profile_parse 字段 8，12 个月来自 E120 换算口径，乘得 18000；12000、8400、9000 分别等于 nonliving_ceiling、higher_living_ceiling、reserve_ceiling。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -91371,7 +92199,16 @@
       ],
       "bindings": [],
       "claim_id": "C10721f64c78685363c52e6ea",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "边界写“本人估计”（生活费、应急金都是本人给的数）、“三种情形分别算不叠加”（scenarios 各自替换一个输入）、“学费只取到苏大的未计入”（E124 未进预算图），三点与计算方式一致。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "11",
@@ -93913,7 +94750,16 @@
       ],
       "bindings": [],
       "claim_id": "Cac69cce50b302f4d55c6b6a2",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "事实",
+        "reason": "E035 原文初试科目“①101 思想政治理论 ②201 英语（一） ③301 数学（一） ④408 计算机学科专业基础”，与本人模考四科对应；并说明“科目相同”不等于同一份卷子，避免把机构卷和真题混为一谈。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -96789,7 +97635,16 @@
       ],
       "bindings": [],
       "claim_id": "Cc1f4bd9e3d0fa5e631ca6a6b",
-      "review": null
+      "review": {
+        "decision": "支持",
+        "kind": "结构标签",
+        "reason": "缺口表第 7 行登记苏大以外各校学费没取到，试过的入口是 E121 河海简章（只写按物价部门标准收费，没有金额），影响是预算图不画学费，三列都与证据记录相符。",
+        "reviewer": {
+          "session_id": "claimcheck-yj-s05-r2-20261021",
+          "model": "Claude Opus 5.5",
+          "independent": true
+        }
+      }
     },
     {
       "section": "12",
@@ -97208,7 +98063,7 @@
     "independent": true,
     "method": "未参与本案写作或修改的独立会话；原判定一律不继承，逐条对照 evidence.json 原文摘录与范围、gap 记录、profile.json 与补充说明原话、calculations.json 及 calculation_plan 算式（分布统计由匿名分数独立复算）后人工写出判定和理由；脚本只用于读取、合并、校验格式与统计重复。"
   },
-  "reviewed_manifest_sha256": "da5e5edcf1aa10e7a87de09ce15b6b96934a14c7b2634fb463f6b8a4d08c8935",
+  "reviewed_manifest_sha256": "d822aaf423cf791479935e51d4d4a017f22a8653ad2e101d52fd15b5ee72d4af",
   "retired": [
     {
       "claim_id": "Cb343ee6de0918705e9d47bcd",
@@ -97558,6 +98413,110 @@
         "C11a29aae86b68878117a1221"
       ],
       "scope": "只跨审初审manifest之后新增/变更项；未变项保留原初审会话，不冒称重审全部报告。"
+    },
+    {
+      "session_id": "claimcheck-yj-s05-r2-20261021",
+      "model": "Claude Opus 5.5",
+      "independent": true,
+      "reviewed_manifest_sha256": "d822aaf423cf791479935e51d4d4a017f22a8653ad2e101d52fd15b5ee72d4af",
+      "claim_ids": [
+        "Cffa3f24d9e45c30c01612aec",
+        "C38d432d4451ce2ec6f5530b4",
+        "C6c4bc3b9efc2212b5e78c084",
+        "C4115a738ebc457fb617a9681",
+        "C10e3fc4b7ae6d9068a8ce53c",
+        "Ce0c6ca52b95655133e09f091",
+        "Cd1d75bccd5c9f57b80bccc10",
+        "C68631c18afd01920a53bc67d",
+        "C9bfc18e183bd61fbcdafa6a5",
+        "Ce2cafc89270da00182d1bb9c",
+        "Cba0493c80761b339180a65e6",
+        "Cf0148cbc7b83a934bf0f4a24",
+        "Cd52dd6bd61ee5d85280a46e3",
+        "C4f8720ace410dea6b5218e2a",
+        "Cba4768be86302c1f6097f501",
+        "C0a2ecf9232190e1c08e37984",
+        "Cda0d8f0e196a77942dd003b1",
+        "Ccfda179d227bda6dcdd35ea4",
+        "Cee85ff0e2557e71102cc177b",
+        "C02c08bd8cb05395efbada0db",
+        "C772e16e636a6a6de048182d4",
+        "C6ca56326f2d390deae152d36",
+        "C6dd0d13ab6d968b8d39592b5",
+        "Ca9f7be2bd43225377218b4c0",
+        "C034f22881ff7e3b78c169427",
+        "C50738bfed760ef0dc575cca6",
+        "C37ab4bccd2c27ae54b5cbaee",
+        "Ca6ceab00cf7476f6dc6090a7",
+        "Cb084d25db03b3321bfecf5bc",
+        "C0d2fc2f9ade48d052458a513",
+        "C1d6927729a792bb9882586f0",
+        "C9ad8895cb23b122452d4f3df",
+        "C00553b585fbecb6e5b44d790",
+        "Ca0c1050cd3699a60e322c79c",
+        "Cda1d292c49c44cecd8f21d7b",
+        "C6665b02d07b042b658265cc6",
+        "C6d452845e8227b1922c7ffcd",
+        "C4a63e0b42912712a4e96c09f",
+        "C3461dec51deba0b30a78e46b",
+        "Cfde9fa50cacf603888b2ef76",
+        "Ceed901b0a58c0bbcb69673f9",
+        "C93ef8a52f00581279d2c33ed",
+        "Cd1c620e79592a68d7c8ae235",
+        "Cfad089959dda88dc9faa2de3",
+        "C35353e5979274adcbf71ee7c",
+        "C6f500b3fad378dc3ad249f25",
+        "Ce3a274b34a1543110b7110cc",
+        "C82008f6e26d60f5a72816ed6",
+        "C0f2d2441ef88707108271210",
+        "C816047dd55dac7bb6d5dfd16",
+        "Ce521da9694c58699cdab4906",
+        "C1d8360f3505b86179a30925c",
+        "Cd19f39ee127c1b404d283b61",
+        "Cbced3de2880587491b560564",
+        "C3da4a9b73450cd04034a6776",
+        "Cac54f4408ed5321787f5f897",
+        "C14c8d30c0cf0d3b6a2105854",
+        "Cf4efcefeb57cb147f1b226a9",
+        "C16a9e145c5ebc065fbbc4945",
+        "C4d7a4ebdf4707fbb599b32f7",
+        "C1b79c4a2010d26f03a669374",
+        "C355d708045d5bf43425805d3",
+        "Ce3fa98d55680620db0129aeb",
+        "Cc68bc4ab05f6cbc8240c13e3",
+        "C57f1124c6f3894d18ba44979",
+        "Cbccc6db915de9d397d5c7133",
+        "Cdc258c14b8e87c5a14d3e4db",
+        "C7f44c3d205d765b78d9e40a9",
+        "Cd0d3be3dbbd474be60585028",
+        "C4e1c73f1a6071cbe6295ee3d",
+        "C19046cf748e726e946effded",
+        "C8bcc8b6a23cd2c909e7398ba",
+        "C222fae5876b47695742fa269",
+        "C40e0c8ab7f56bd6035959a3f",
+        "C454c21a683826f1df2a56dcb",
+        "C3c68928b7c70f936ae4a776f",
+        "Cd0cc031b44b6c5ffefe70e4c",
+        "C24aa9012c206cb8c6c3615f9",
+        "C579fd9f53a4b88b0b22407f5",
+        "Cf4df76695b7e4cefb63d7697",
+        "C5979434385012096975ace16",
+        "C81c1763894a41ef71b0a0ab1",
+        "C96a5c32383338e4375cac4e0",
+        "C809735154b59435a7146a15d",
+        "Cbd302defa8f1e504d17601c8",
+        "Ca28b3136f9f33a57436baace",
+        "C1c4273f79c6eaa9f4cbfb417",
+        "C8010e9064b826f1b99e948e6",
+        "C57387d7a09fb822dfb4a0713",
+        "C9734b7c046ada7c748bc30ee",
+        "C101d57204a55b5304ebc84af",
+        "C94df73f58f1551c2b0120bd0",
+        "C10721f64c78685363c52e6ea",
+        "Cac69cce50b302f4d55c6b6a2",
+        "Cc1f4bd9e3d0fa5e631ca6a6b"
+      ],
+      "scope": "只复核 5ff147f 改写后失去判定的 95 条当前项（含新增 E123 名单表头、E124 苏大学费与出稿日 2026-10-21）；E124 页面与 E123 名单 PDF 已重新取原件核对指纹与文字；其余 520 条保留顶层初审会话判定，不冒称重审。"
     }
   ],
   "report_snapshot": {
