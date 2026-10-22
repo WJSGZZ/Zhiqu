@@ -156,4 +156,38 @@ CREATE TABLE civil_major_summary(region TEXT,year INTEGER,major_name TEXT,share 
   self.assertEqual(row['values']['single_100']['source_id'],'s')
   self.assertIn('原表科目槽1',db.render_text(result))
 
+ def test_official_manifest_scope_without_public_csv_keeps_batch_and_audit_binding(self):
+  with sqlite3.connect(self.path) as c:
+   c.execute('ALTER TABLE gk_official_cutoff ADD COLUMN src TEXT')
+   c.execute("UPDATE gk_official_cutoff SET src='manifest-row-'||rowid")
+   c.execute('CREATE TABLE official_cutoff_scope(source_id TEXT,public_record TEXT,scope_json TEXT,locator_json TEXT)')
+   c.execute('CREATE TABLE gk_official_original_evidence(record_id TEXT,table_name TEXT,source_id TEXT,excerpt_locator_json TEXT)')
+   for i in (1,2):
+    src='manifest-row-'+str(i);rid='audit-'+str(i)
+    c.execute('INSERT INTO official_cutoff_scope VALUES (?,?,?,?)',('s',src,json.dumps({'source_batch_raw':'本科普通批','source_group_code':'0'+str(i),'source_subject_requirements':'物理'}),json.dumps({'record_id':rid,'audit_table':'gk_official_original_evidence'})))
+    c.execute('INSERT INTO gk_official_original_evidence VALUES (?,?,?,?)',(rid,'gk_official_cutoff','s',json.dumps({'business_key':{'source_id':'s','src':src},'excerpt':['原表总分'],'locator':{'sha256':'a'*64,'row':i}})))
+  section=next(s for s in self.school('甲大')['sections'] if s['table']=='gk_official_cutoff')
+  self.assertEqual({r['context']['source_group_code'] for r in section['rows']},{'01','02'})
+  self.assertTrue(all(r['context']['source_batch_raw']=='本科普通批' for r in section['rows']))
+  self.assertEqual(section['rows'][0]['excerpt'],['原表总分'])
+  with sqlite3.connect(self.path) as c:c.execute("UPDATE gk_official_original_evidence SET source_id='v' WHERE record_id='audit-1'")
+  with self.assertRaisesRegex(db.QueryError,'审计记录不匹配'):self.school('甲大')
+
+ def test_new_official_plan_is_queryable_with_original_scope_and_quality(self):
+  with sqlite3.connect(self.path) as c:
+   c.execute('CREATE TABLE gk_official_plan(record_id TEXT,institution_id TEXT,province TEXT,year INTEGER,subject TEXT,batch TEXT,group_code TEXT,major_code TEXT,major_name TEXT,gender TEXT,subject_requirements TEXT,scope_raw TEXT,plan_n INTEGER,source_id TEXT,value_status TEXT)')
+   c.execute('CREATE TABLE gk_official_original_evidence(record_id TEXT,table_name TEXT,source_id TEXT,excerpt_locator_json TEXT)')
+   c.execute('INSERT INTO gk_official_plan VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',('p','1','内蒙古',2026,'历史类','本科提前批B段','001','23','原招生专业','男','思想政治','仅提前批意向类别初始计划',2,'s',json.dumps({'plan_n':{'status':'官方原值','reason':'原格'}})))
+   proof={'business_key':{'record_id':'p'},'scope':{'intention_category_raw':'公安'},'excerpt':['原计划2人'],'locator':{'sha256':'b'*64,'html_row':2}}
+   c.execute('INSERT INTO gk_official_original_evidence VALUES (?,?,?,?)',('p','gk_official_plan','s',json.dumps(proof)))
+  section=next(s for s in self.school('甲大')['sections'] if s['table']=='gk_official_plan')
+  row=section['rows'][0]
+  self.assertEqual(row['values']['plan_n']['value'],2)
+  self.assertEqual(row['values']['plan_n']['grade'],'官方')
+  self.assertEqual(row['context']['gender'],'男')
+  self.assertIn('公安',row['context']['scope_raw'])
+  self.assertEqual(row['excerpt'],['原计划2人'])
+  with sqlite3.connect(self.path) as c:c.execute("DELETE FROM gk_official_original_evidence WHERE record_id='p'")
+  with self.assertRaisesRegex(db.QueryError,'原文审计记录不匹配'):self.school('甲大')
+
 if __name__=='__main__':unittest.main()
