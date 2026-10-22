@@ -166,6 +166,7 @@ def _identity(c, name, year=None, province=None):
 NUMERIC = {
     'institution_profile': ['recommend_rate', 'n_master', 'n_phd', 'school_rank'],
     'gk_plan_entry': ['plan_n', 'group_plan_n', 'years', 'tuition'],
+    'gk_official_plan': ['plan_n'],
     'gk_official_cutoff': ['plan', 'admit', 'score', 'rank'],
     'gk_v_usable': ['min_score', 'min_rank'],
     'gk_v_purchased': ['plan_n','admitted_n','min_score','mean_score','max_score','min_rank','max_rank','mean_rank','score','segment_n','cumulative_n','tuition','group_plan_n','plan_n_result','count_unspecified','rank_unspecified','score_unspecified'],
@@ -186,7 +187,7 @@ NUMERIC['ky_v_usable_line']=['line_total','politics','english','math','major','s
 NUMERIC['ky_v_usable_program']=['planned','tuimian']
 NUMERIC['ky_v_usable']=['n','min','q1','median','q3','max','mean','excluded_count']
 LABELS = {'single_150':'单科满分150门槛','total':'总分','line_total':'复试总分','politics':'原列政治/首科（须核口径）','english':'外语','math':'数学','major':'业务课','major1':'业务课一','major2':'业务课二','single_100':'单科满分100门槛','single_over_100':'单科满分超过100门槛','planned':'招生人数','tuimian':'推免人数','n':'样本人数','min':'最低','q1':'下四分位','median':'中位数','q3':'上四分位','max':'最高','mean':'平均','excluded_count':'排除数','recommend_rate':'保研比例','n_master':'硕士点','n_phd':'博士点','school_rank':'原表排名','plan_n':'计划人数','admitted_n':'录取人数','group_plan_n':'专业组人数','plan_n_result':'计划人数结果（原字段）','segment_n':'同分人数','cumulative_n':'累计人数','count_unspecified':'人数（含义未明确）','score_unspecified':'分数（含义未明确）','rank_unspecified':'位次（含义未明确）','years':'学制','tuition':'学费','plan':'计划人数','admit':'录取人数','score':'最低分','rank':'最低位次','min_score':'最低分','mean_score':'平均分','max_score':'最高分','min_rank':'最低位次','mean_rank':'平均位次','max_rank':'最高位次','headcount':'招录人数','percentage':'百分比','paid_applicants':'缴费人数','paid_per_seat':'缴费人数/名额','p10':'10%分位','p25':'25%分位','p50':'中位数','p75':'75%分位','p90':'90%分位','n_jobs':'职位数','share':'原表比例','share_below_10':'低于10人/名额的职位比例','share_100_plus':'100人/名额以上职位比例'}
-TITLES = {'institution_profile':'学校概况（第三方，年份未明单列）','gk_plan_entry':'高考招生计划','gk_official_cutoff':'高考官方投档线','gk_v_usable':'高考整理录取记录','gk_v_purchased':'高考购买数据（保留核验状态）','ky_program_year':'考研目录与往年线','ky_v_usable':'考研分布与可用历史记录','ky_v_retest_line':'学校官网复试线（保留核验状态）','ky_retest_line':'学校官网复试线（保留核验状态）','job_summary':'岗位与匿名报名人数','job_position':'岗位','wage_stat':'在岗工资调查（不代表应届起薪）','competition_stat':'匿名群体竞争统计（非个人概率）','civil_major_summary':'本科专业可报岗位汇总','selected_university':'选调高校范围','recruitment_notice':'招聘公告可用性','industry_stat':'行业统计','graduate_destination':'院校就业去向（届别按原表）'}
+TITLES = {'gk_official_plan':'高考官方初始计划（按原表范围）','institution_profile':'学校概况（第三方，年份未明单列）','gk_plan_entry':'高考招生计划','gk_official_cutoff':'高考官方投档线','gk_v_usable':'高考整理录取记录','gk_v_purchased':'高考购买数据（保留核验状态）','ky_program_year':'考研目录与往年线','ky_v_usable':'考研分布与可用历史记录','ky_v_retest_line':'学校官网复试线（保留核验状态）','ky_retest_line':'学校官网复试线（保留核验状态）','job_summary':'岗位与匿名报名人数','job_position':'岗位','wage_stat':'在岗工资调查（不代表应届起薪）','competition_stat':'匿名群体竞争统计（非个人概率）','civil_major_summary':'本科专业可报岗位汇总','selected_university':'选调高校范围','recruitment_notice':'招聘公告可用性','industry_stat':'行业统计','graduate_destination':'院校就业去向（届别按原表）'}
 CONTEXT = ['year','plan_year','province','region','college','program_code','program_name','major_code','major_name','degree_type','study_mode','direction','joint_program','special_plan','admission_route','line_scope','list_type','scope','scope_mismatch','scope_mismatch_note','plan_type','subject','subject_type','batch','group_code','grp','position_id','unit','position','education','degree','major_clause','group_type','group','category','school','school_name','verification_status','note','notes','school_tags','degree_level','master_list','phd_list','year_status']
 
 
@@ -194,7 +195,7 @@ TITLES['employment_major_industry']='专业就业行业分布（届别、单位�
 TITLES.update({'ky_v_usable_program':'考研招生目录','ky_v_usable_line':'考研历史复试线'})
 LABELS['value_number']='原表占比数值'
 CONTEXT += ['industry','unit_raw','value_raw','cohort']
-CONTEXT.append('subjects')
+CONTEXT += ['subjects','gender']
 CONTEXT += ['major_full','school_group_code','old_batch','duration','comparison_status','other_province_raw','province_status']
 CONTEXT += ['graduate_cohort','graduate_cohort_raw','cohort_status','province_raw','city_raw','institution_name_raw','item','item_raw','record_type','dataset_type','school_raw','group_name','subject_requirements','scope_raw']
 
@@ -438,9 +439,11 @@ def _official_context(c, row):
                 fixed=_json(item.get('scope_values'),{})
                 if isinstance(fixed,dict):context.update({k:v for k,v in fixed.items() if v not in (None,'')})
     if not reference:context['source_format_status']='原格式未核，空值状态见--full'
-    if context.get('source_public_row') and 'official_cutoff_scope' in _tables(c):
-        found=c.execute('SELECT scope_json,locator_json FROM data.official_cutoff_scope WHERE source_id=? AND public_record=?',(row.get('source_id'),context['source_public_row'])).fetchone()
+    public_record = context.get('source_public_row') or row.get('src')
+    if public_record and 'official_cutoff_scope' in _tables(c):
+        found=c.execute('SELECT scope_json,locator_json FROM data.official_cutoff_scope WHERE source_id=? AND public_record=?',(row.get('source_id'),public_record)).fetchone()
         if found:
+            context['source_public_row'] = public_record
             scope=_json(found[0],{});locator=_json(found[1],{})
             if isinstance(scope,dict):context.update(scope)
             context['source_scope_locator']=locator
@@ -480,6 +483,19 @@ def _record(c, table, row):
                 row.update({key: value for key, value in dict(context).items() if value not in (None, '')})
         if 'ky_line_component' in _tables(c):
             components = {item['component']: dict(item) for item in c.execute('SELECT * FROM data.ky_line_component WHERE record_id=?', (row['record_id'],))}
+    if table == 'gk_official_plan':
+        row = dict(row)
+        proof = None
+        if 'gk_official_original_evidence' in _tables(c):
+            proof = c.execute('SELECT table_name,source_id,excerpt_locator_json FROM data.gk_official_original_evidence WHERE record_id=?',(row.get('record_id'),)).fetchone()
+        if not proof or proof['table_name'] != table or proof['source_id'] != row.get('source_id'):
+            raise QueryError('招生计划与原文审计记录不匹配：'+str(row.get('record_id')))
+        original_proof = _json(proof['excerpt_locator_json'],{})
+        if original_proof.get('business_key') != {'record_id':row.get('record_id')}:
+            raise QueryError('招生计划与原文审计位置不匹配')
+        row['excerpt_locator_json'] = json.dumps({'excerpt':original_proof.get('excerpt'),'locator':original_proof.get('locator')},ensure_ascii=False)
+        intention = original_proof.get('scope',{}).get('intention_category_raw')
+        if intention:row['scope_raw'] = str(row.get('scope_raw') or '')+'；意向类别：'+str(intention)
     conflict_fields,conflict_parse_status=_numeric_conflicts(row) if table=='gk_v_purchased' else ([],None)
     sid = row.get('source_id')
     if not sid and row.get('src_file') is not None:
@@ -576,6 +592,18 @@ def _record(c, table, row):
         if row.get('src'):result['locator']['public_record']=row['src']
         if result['context'].get('source_scope_locator'):
             result['locator']['original_scope']=result['context']['source_scope_locator']
+            pointer=result['context']['source_scope_locator']
+            if isinstance(pointer,dict) and pointer.get('audit_table')=='gk_official_original_evidence':
+                proof=None
+                if 'gk_official_original_evidence' in _tables(c):
+                    proof=c.execute('SELECT table_name,source_id,excerpt_locator_json FROM data.gk_official_original_evidence WHERE record_id=?',(pointer.get('record_id'),)).fetchone()
+                expected={'source_id':row.get('source_id'),'src':row.get('src')}
+                if not proof or proof['table_name']!='gk_official_cutoff' or proof['source_id']!=row.get('source_id') or _json(proof['excerpt_locator_json'],{}).get('business_key')!=expected:
+                    raise QueryError('投档线与原文审计记录不匹配：'+str(pointer.get('record_id')))
+                original_proof=_json(proof['excerpt_locator_json'],{})
+                result['excerpt']=original_proof.get('excerpt')
+                result['excerpt_kind']='官方原表匿名单元格摘录（逐文件抽核）'
+                result['original_locator']=original_proof.get('locator')
         if result['context'].get('source_format_reference'):
             result['locator']['original_format']=result['context']['source_format_reference']
     if table=='gk_v_purchased':
@@ -861,7 +889,7 @@ def _query_education(name, program=None, year=None, province=None, db=None, limi
         official=_official_reference_section(c,ident) if program is None else None
         if official:sections.append(official)
         ky_tables=['ky_v_usable_program' if 'ky_v_usable_program' in tables else 'ky_program_year']+(['ky_v_usable_line'] if 'ky_v_usable_line' in tables else [])+['ky_v_usable']
-        candidates = ['institution_profile','gk_plan_entry','gk_official_cutoff','gk_v_usable','gk_v_purchased']+ky_tables if program is None else ['gk_v_purchased']+ky_tables
+        candidates = ['institution_profile','gk_official_plan','gk_plan_entry','gk_official_cutoff','gk_v_usable','gk_v_purchased']+ky_tables if program is None else ['gk_v_purchased']+ky_tables
         canonical=_school_attribute_section(c,ident,limit,offset) if program is None and 'school_attribute_fact' in tables else None
         if program is None and 'school_attribute_fact' in tables:
             candidates.remove('institution_profile')
@@ -932,7 +960,7 @@ def _query_education(name, program=None, year=None, province=None, db=None, limi
         if core:sections.append(core)
         def section_priority(section):
             if section['table']=='institution_official_reference':return 0
-            if section['table'] in {'gk_official_cutoff','ky_v_usable_line','ky_v_retest_line','ky_retest_line'}:return 1
+            if section['table'] in {'gk_official_plan','gk_official_cutoff','ky_v_usable_line','ky_v_retest_line','ky_retest_line'}:return 1
             grades=[v.get('grade') for r in section['rows'] for v in r.get('values',{}).values()]
             return 1 if grades and all(g=='官方' for g in grades) else 2
         sections.sort(key=section_priority)
@@ -1037,6 +1065,7 @@ CONTEXT_LABELS = dict(zip(CONTEXT, ['年份','计划年份','省份','地区','�
 
 CONTEXT_LABELS.update({'industry':'原列就业行业','unit_raw':'原列单位','value_raw':'原格占比','cohort':'原列毕业届别'})
 CONTEXT_LABELS['subjects']='考试科目'
+CONTEXT_LABELS['gender']='性别限制'
 CONTEXT_LABELS.update({'reference_scope':'官方名单口径','official_comparison':'与官方参考比较'})
 CONTEXT_LABELS.update({'major_full':'专业完整原名','school_group_code':'院校专业组组合代码','old_batch':'原旧批次','duration':'学制原文','comparison_status':'比较口径状态','other_province_raw':'另省份列（原口径未注明）','province_status':'省份依据状态'})
 CONTEXT_LABELS.update({'graduate_cohort':'毕业届别（原表）','graduate_cohort_raw':'届别原文','cohort_status':'届别状态','province_raw':'学校所在省（原表）','city_raw':'学校所在市（原表）','institution_name_raw':'院校名称（原表）','item':'就业项目','item_raw':'项目原文','record_type':'记录类型','dataset_type':'数据类型','school_raw':'院校原名','group_name':'专业组名称','subject_requirements':'选科要求','scope_raw':'原表范围说明'})
