@@ -135,4 +135,25 @@ CREATE TABLE civil_major_summary(region TEXT,year INTEGER,major_name TEXT,share 
   with self.assertRaises(db.QueryError):self.school('甲大',limit=0)
   with self.assertRaises(db.QueryError):self.program('甲大',"0854';DELETE")
 
+ def test_retest_scope_and_generic_components_are_explicit(self):
+  with sqlite3.connect(self.path) as c:
+   c.execute('CREATE TABLE ky_line_scope_context(record_id TEXT PRIMARY KEY,direction TEXT,joint_program TEXT,admission_route TEXT,scope_raw TEXT,source_id TEXT)')
+   c.execute('CREATE TABLE ky_line_component(record_id TEXT,component TEXT,value REAL,source_id TEXT,src_locator TEXT,value_status TEXT)')
+   c.execute("INSERT INTO ky_line_scope_context VALUES ('1','02软件方向','某校联培基地','一志愿','原表02方向','s')")
+   c.execute('INSERT INTO ky_line_component VALUES (?,?,?,?,?,?)',('1','single_100',40,'s',json.dumps({'page':2,'table':1,'row':3}),json.dumps({'status':'官方原值'})))
+   c.execute('INSERT INTO ky_line_component VALUES (?,?,?,?,?,?)',('1','exam_1',80,'s','{}',json.dumps({'status':'官方原值'})))
+   proof={'src_page':2,'src_table':'原表1','src_row':3,'excerpt':{'总分原格':'320'},'locator':{'sha256':'a'*64,'pdf_page':2,'pdf_row':3}}
+   c.execute('UPDATE ky_retest_line SET excerpt_locator_json=? WHERE record_id=?',(json.dumps(proof),'1'))
+  result=self.program('甲大','085404',year=2026)
+  row=next(r for sec in result['sections'] for r in sec['rows'] if r['record_id']=='1')
+  self.assertEqual(row['context']['direction'],'02软件方向')
+  self.assertEqual(row['context']['joint_program'],'某校联培基地')
+  self.assertEqual(row['values']['single_100']['value'],40)
+  self.assertEqual(row['values']['exam_1']['display_label'],'原表科目槽1')
+  self.assertIsNone(row['values']['politics']['value'])
+  self.assertEqual(row['excerpt'],{'总分原格':'320'})
+  self.assertEqual(row['locator']['src_page'],2)
+  self.assertEqual(row['values']['single_100']['source_id'],'s')
+  self.assertIn('原表科目槽1',db.render_text(result))
+
 if __name__=='__main__':unittest.main()

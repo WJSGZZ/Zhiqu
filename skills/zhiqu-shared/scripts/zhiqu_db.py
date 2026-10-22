@@ -185,7 +185,7 @@ NUMERIC = {
 NUMERIC['ky_v_usable_line']=['line_total','politics','english','math','major','single_100','single_over_100']
 NUMERIC['ky_v_usable_program']=['planned','tuimian']
 NUMERIC['ky_v_usable']=['n','min','q1','median','q3','max','mean','excluded_count']
-LABELS = {'total':'总分','line_total':'复试总分','politics':'原列政治/首科（须核口径）','english':'外语','math':'数学','major':'业务课','major1':'业务课一','major2':'业务课二','single_100':'单科满分100门槛','single_over_100':'单科满分超过100门槛','planned':'招生人数','tuimian':'推免人数','n':'样本人数','min':'最低','q1':'下四分位','median':'中位数','q3':'上四分位','max':'最高','mean':'平均','excluded_count':'排除数','recommend_rate':'保研比例','n_master':'硕士点','n_phd':'博士点','school_rank':'原表排名','plan_n':'计划人数','admitted_n':'录取人数','group_plan_n':'专业组人数','plan_n_result':'计划人数结果（原字段）','segment_n':'同分人数','cumulative_n':'累计人数','count_unspecified':'人数（含义未明确）','score_unspecified':'分数（含义未明确）','rank_unspecified':'位次（含义未明确）','years':'学制','tuition':'学费','plan':'计划人数','admit':'录取人数','score':'最低分','rank':'最低位次','min_score':'最低分','mean_score':'平均分','max_score':'最高分','min_rank':'最低位次','mean_rank':'平均位次','max_rank':'最高位次','headcount':'招录人数','percentage':'百分比','paid_applicants':'缴费人数','paid_per_seat':'缴费人数/名额','p10':'10%分位','p25':'25%分位','p50':'中位数','p75':'75%分位','p90':'90%分位','n_jobs':'职位数','share':'原表比例','share_below_10':'低于10人/名额的职位比例','share_100_plus':'100人/名额以上职位比例'}
+LABELS = {'single_150':'单科满分150门槛','total':'总分','line_total':'复试总分','politics':'原列政治/首科（须核口径）','english':'外语','math':'数学','major':'业务课','major1':'业务课一','major2':'业务课二','single_100':'单科满分100门槛','single_over_100':'单科满分超过100门槛','planned':'招生人数','tuimian':'推免人数','n':'样本人数','min':'最低','q1':'下四分位','median':'中位数','q3':'上四分位','max':'最高','mean':'平均','excluded_count':'排除数','recommend_rate':'保研比例','n_master':'硕士点','n_phd':'博士点','school_rank':'原表排名','plan_n':'计划人数','admitted_n':'录取人数','group_plan_n':'专业组人数','plan_n_result':'计划人数结果（原字段）','segment_n':'同分人数','cumulative_n':'累计人数','count_unspecified':'人数（含义未明确）','score_unspecified':'分数（含义未明确）','rank_unspecified':'位次（含义未明确）','years':'学制','tuition':'学费','plan':'计划人数','admit':'录取人数','score':'最低分','rank':'最低位次','min_score':'最低分','mean_score':'平均分','max_score':'最高分','min_rank':'最低位次','mean_rank':'平均位次','max_rank':'最高位次','headcount':'招录人数','percentage':'百分比','paid_applicants':'缴费人数','paid_per_seat':'缴费人数/名额','p10':'10%分位','p25':'25%分位','p50':'中位数','p75':'75%分位','p90':'90%分位','n_jobs':'职位数','share':'原表比例','share_below_10':'低于10人/名额的职位比例','share_100_plus':'100人/名额以上职位比例'}
 TITLES = {'institution_profile':'学校概况（第三方，年份未明单列）','gk_plan_entry':'高考招生计划','gk_official_cutoff':'高考官方投档线','gk_v_usable':'高考整理录取记录','gk_v_purchased':'高考购买数据（保留核验状态）','ky_program_year':'考研目录与往年线','ky_v_usable':'考研分布与可用历史记录','ky_v_retest_line':'学校官网复试线（保留核验状态）','ky_retest_line':'学校官网复试线（保留核验状态）','job_summary':'岗位与匿名报名人数','job_position':'岗位','wage_stat':'在岗工资调查（不代表应届起薪）','competition_stat':'匿名群体竞争统计（非个人概率）','civil_major_summary':'本科专业可报岗位汇总','selected_university':'选调高校范围','recruitment_notice':'招聘公告可用性','industry_stat':'行业统计','graduate_destination':'院校就业去向（届别按原表）'}
 CONTEXT = ['year','plan_year','province','region','college','program_code','program_name','major_code','major_name','degree_type','study_mode','direction','joint_program','special_plan','admission_route','line_scope','list_type','scope','scope_mismatch','scope_mismatch_note','plan_type','subject','subject_type','batch','group_code','grp','position_id','unit','position','education','degree','major_clause','group_type','group','category','school','school_name','verification_status','note','notes','school_tags','degree_level','master_list','phd_list','year_status']
 
@@ -255,7 +255,10 @@ def _unit(table, field, row):
 
 
 def _original_excerpt(locator):
-    if not isinstance(locator,dict) or not locator.get('path') or not locator.get('jsonl_line'):return None
+    if not isinstance(locator,dict):return None
+    if isinstance(locator.get('excerpt'), (str, dict, list)) and locator.get('locator'):
+        return locator['excerpt']
+    if not locator.get('path') or not locator.get('jsonl_line'):return None
     path=(ROOT/str(locator['path'])).resolve()
     allowed=(SHARED/'data').resolve()
     if not path.is_relative_to(allowed) or not path.is_file():return None
@@ -455,6 +458,28 @@ def _official_context(c, row):
 
 
 def _record(c, table, row):
+    components = {}
+    full_line_proof = None
+    if table in ('ky_retest_line', 'ky_v_retest_line') and row.get('record_id') is not None:
+        row = dict(row)
+        stored_proof = _json(row.get('excerpt_locator_json'))
+        audit_pointer = isinstance(stored_proof, dict) and stored_proof.get('audit_table') == 'ky_line_original_evidence'
+        evidence = None
+        if 'ky_line_original_evidence' in _tables(c):
+            evidence = c.execute('SELECT source_id,excerpt_locator_json FROM data.ky_line_original_evidence WHERE record_id=?', (row['record_id'],)).fetchone()
+        if audit_pointer and (not evidence or evidence['source_id'] != row.get('source_id')):
+            raise QueryError('复试线与原文审计记录不匹配：' + str(row['record_id']))
+        if evidence and evidence['source_id'] == row.get('source_id'):
+            # The compact query row points to the same generation's full audit proof.
+            full_line_proof = evidence['excerpt_locator_json']
+            row['excerpt_locator_json'] = full_line_proof
+        if 'ky_line_scope_context' in _tables(c):
+            context = c.execute('SELECT direction,joint_program,admission_route,scope_raw FROM data.ky_line_scope_context WHERE record_id=?', (row['record_id'],)).fetchone()
+            if context:
+                # Only explicitly retained original scope; never infer a direction from its score.
+                row.update({key: value for key, value in dict(context).items() if value not in (None, '')})
+        if 'ky_line_component' in _tables(c):
+            components = {item['component']: dict(item) for item in c.execute('SELECT * FROM data.ky_line_component WHERE record_id=?', (row['record_id'],))}
     conflict_fields,conflict_parse_status=_numeric_conflicts(row) if table=='gk_v_purchased' else ([],None)
     sid = row.get('source_id')
     if not sid and row.get('src_file') is not None:
@@ -510,6 +535,16 @@ def _record(c, table, row):
             values[field]['value_status'] = {'status':'推算','method':'缴费人数÷招录名额；群体人数/名额，非个人概率','inputs_source_ids':[sid,row.get('application_source_id')]}
         if field in conflict_fields:
             values[field]['numeric_conflict']={'status':'第三方版本冲突','reason':NUMERIC_CONFLICT_NOTE}
+    for component, item in components.items():
+        component_source = _source(c, item['source_id'])
+        values[component] = {
+            'value': item['value'], 'unit': '分',
+            'grade': component_source.get('grade') or '未注明',
+            'publisher': component_source.get('publisher') or '未注明',
+            'source_id': item['source_id'], 'value_status': _status({'value_status': item['value_status']}, 'value') if 'value' in _json(item['value_status']) else _json(item['value_status']),
+            'display_label': LABELS.get(component, '原表科目槽' + component.removeprefix('exam_')),
+            'original_locator': _json(full_line_proof or item['src_locator']),
+        }
     major_links=[];institution_links=[]
     link_id=row.get('record_id',row.get('position_id'))
     if link_id is not None:
@@ -525,6 +560,11 @@ def _record(c, table, row):
     if table == 'employment_major_industry' and 'employment_industry_version' in _tables(c):
         equivalent_sources=[dict(x) for x in c.execute('SELECT * FROM data.employment_industry_version WHERE preferred_source_id=? ORDER BY source_id',(sid,))]
     result = {'table':table,'major_links':major_links,'institution_links':institution_links,'record_id':row.get('record_id',row.get('entry_id',row.get('position_id'))),'field_source_ids':_json(row.get('field_source_ids')) if table == 'gk_v_purchased' else {},'context':{k:row[k] for k in CONTEXT if k in row and row[k] not in (None,'')},'values':values,'source':s,'locator':{k:row[k] for k in ['src_page','src_table','src_sheet','src_row','src_col','src_cell','src_locator','locator','source_locator','locator_method','locator_status'] if k in row},'excerpt':row.get('excerpt') or row.get('field_excerpt') or (original[0] if original else None) or _original_excerpt(_json(row.get('excerpt_locator_json'))),'excerpt_kind':('purchased_row原始单元格' if original else row.get('excerpt_kind') or ('原表摘录或读图定位记录（核验状态另列）' if row.get('excerpt_locator_json') else '原表单元格摘录' if table in ['job_summary','job_position'] else '未取到逐字原文摘录')),'excerpt_locator':_json(row.get('excerpt_locator_json')),'original_locator':original[1] if original else None,'equivalent_sources':equivalent_sources}
+    if table in ('ky_retest_line', 'ky_v_retest_line'):
+        proof = _json(row.get('excerpt_locator_json'))
+        if isinstance(proof, dict) and proof.get('locator'):
+            result['locator']['original'] = proof['locator']
+            result['locator'].update({key: proof[key] for key in ('src_page','src_table','src_row') if proof.get(key) not in (None, '')})
     if table=='gk_official_cutoff':
         result['context'].update(_official_context(c, row))
         provided=result['context'].get('source_format_columns')
