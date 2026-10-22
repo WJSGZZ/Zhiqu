@@ -38,7 +38,9 @@ class PolishOutput(unittest.TestCase):
         item['values']['min_score']['value_status']={'status':'来源未提供'}
         data=result([item],'gk_official_cutoff')
         short=db.render_text(data);full=db.render_text(data,full=True)
-        self.assertNotIn('最低分：',short)
+        self.assertIn('最低分：来源未提供',short)
+        item['context'].update(source_format_columns=['recommend_rate'],source_format_status='原格式已核')
+        self.assertNotIn('最低分：',db.render_text(data))
         self.assertIn('最低分：',full)
         self.assertNotIn('internal_type',short)
         self.assertIn('internal_type',full)
@@ -55,9 +57,9 @@ class PolishOutput(unittest.TestCase):
         self.assertIn('原件缺失〔',db.render_text(result([item],'gk_official_cutoff')))
 
     def test_profile_same_field_value_once_with_all_source_ids(self):
-        text=db.render_text(result([row(.128,'a'),row(.128,'b')]))
+        data=result([row(.128,'a'),row(.128,'b')]);text=db.render_text(data);full=db.render_text(data,full=True)
         self.assertEqual(text.count('保研比例：0.128'),1)
-        self.assertIn('出处：a',text);self.assertIn('出处：b',text)
+        self.assertIn('出处：a',full);self.assertIn('出处：b',full)
         self.assertNotIn('来源之间不一致',text)
 
     def test_conflicting_profile_values_parallel_with_their_sources(self):
@@ -103,12 +105,13 @@ class PolishOutput(unittest.TestCase):
     def test_profile_context_tags_levels_are_not_lost(self):
         data=result([{'context':{'school_tags':'双一流','degree_level':'本科','master_list':'甲；乙'},'values':{}}])
         text=db.render_text(data)
-        self.assertIn('双一流',text);self.assertIn('本科',text);self.assertIn('2 个',text)
+        self.assertNotIn('双一流',text);self.assertNotIn('本科',text);self.assertIn('2 个',text)
+        full=db.render_text(data,full=True);self.assertIn('双一流',full);self.assertIn('本科',full)
 
     def test_sources_come_after_rows_not_dictionary_repr(self):
         text=db.render_text(result([row(.128)]))
         self.assertLess(text.index('保研比例：'),text.index('来源详情：'))
-        self.assertIn('网页：https://example.edu.cn/a',text)
+        self.assertIn('｜https://example.edu.cn/a',text)
         self.assertNotIn("{'source_id'",text)
         self.assertNotIn('landing_url：',text)
 
@@ -119,7 +122,7 @@ class PolishOutput(unittest.TestCase):
 
     def test_normalized_attribute_table_multiple_source_interface(self):
         r=row(.128);r['sources']=[{'source':{'source_id':'b','grade':'官方','publisher':'学校'},'locator':{'src_row':8}}]
-        text=db.render_text(result([r],'school_attribute_fact'))
+        data=result([r],'school_attribute_fact');text=db.render_text(data,full=True)
         self.assertIn('出处：b',text);self.assertIn('行：8',text)
 
     def test_explicit_conflict_annotation(self):
@@ -149,15 +152,19 @@ class PolishOutput(unittest.TestCase):
     def test_short_reference_scope_resets_each_section(self):
         data=result([row(.128,'long-vendor-sha-abc')]);data['sections'].append(result([row(.149,'other-vendor')])['sections'][0])
         text=db.render_text(data)
-        self.assertEqual(text.count('汇编｜S1；'),2)
-        self.assertIn('[S1] 来源：出处：long-vendor-sha-abc',text)
-        self.assertIn('[S1] 来源：出处：other-vendor',text)
+        self.assertEqual(text.count('汇编｜S1〕'),2)
+        self.assertEqual(db.render_text(data,full=True).count('第三方整理未核'),2)
+        self.assertIn('[S1]｜汇编｜地区汇编｜未注明｜https://example.edu.cn/long-vendor-sha-abc',text)
+        self.assertIn('[S1] 来源：出处：long-vendor-sha-abc',db.render_text(data,full=True))
+        self.assertIn('[S1]｜汇编｜地区汇编｜未注明｜https://example.edu.cn/other-vendor',text)
 
     def test_context_field_conflict_all_values_visible(self):
         data=result([{'context':{'school_tags':'双一流'},'values':{}},{'context':{'school_tags':'省重点'},'values':{}}])
         text=db.render_text(data)
-        self.assertIn('双一流',text);self.assertIn('省重点',text)
-        self.assertEqual(sum('来源之间不一致' in line for line in text.splitlines()),1)
+        self.assertNotIn('双一流',text);self.assertNotIn('省重点',text)
+        full=db.render_text(data,full=True)
+        self.assertIn('双一流',full);self.assertIn('省重点',full)
+        self.assertEqual(sum('来源之间不一致' in line for line in full.splitlines()),1)
 
 
     def test_default_source_rows_capped_and_internal_json_hidden(self):
@@ -168,24 +175,24 @@ class PolishOutput(unittest.TestCase):
         text=db.render_text(data);full=db.render_text(data,full=True)
         self.assertNotIn('internal-member',text);self.assertNotIn('members',text)
         self.assertLess(len(text),7000)
-        self.assertEqual(sum('来源：出处：' in line for line in text.splitlines()),10)
+        self.assertEqual(sum(line.startswith('[S') for line in text.splitlines()),10)
         self.assertIn('另5条来源未展开',text)
         self.assertIn('internal-member',full);self.assertEqual(data,before)
-        line=next(line for line in text.splitlines() if '标题：' in line)
-        self.assertLessEqual(len(line.split('标题：',1)[1].split('；',1)[0]),60)
+        line=next(line for line in text.splitlines() if line.startswith('[S'))
+        self.assertLessEqual(len(line.split('｜')[2]),60)
 
     def test_many_rows_same_source_one_line_with_noncontinuous_warning(self):
         rows=[row(.128) for _ in range(4)]
         for i,r in enumerate(rows):r['locator']={'src_row':i*10+1,'src_sheet':'主表'}
         text=db.render_text(result(rows))
-        self.assertEqual(sum('来源：出处：' in line for line in text.splitlines()),1)
-        self.assertIn('可能不连续',text)
+        self.assertEqual(sum(line.startswith('[S') for line in text.splitlines()),1)
+        self.assertIn('行：31',db.render_text(result(rows),full=True));self.assertIn('行：1',db.render_text(result(rows),full=True))
 
     def test_existing_locator_summary_not_reported_as_continuous_rows(self):
         r=row(.128);r['locator']={'src_sheet':'表','first_row':1,'last_row':100,'matched_rows':3}
-        text=db.render_text(result([r]))
+        text=db.render_text(result([r]),full=True)
         self.assertIn('行边界：1—100（可能不连续；匹配3行',text)
-        self.assertIn('全部逐行关联保留在库中，此处为边界摘要',text)
+        self.assertIn('完整逐行关联保留在库中，此处未逐行展开',text)
         self.assertNotIn('逐行位置见--full/--json',text)
 
     def test_profile_header_counts_fields_separately_from_distinct_values(self):
