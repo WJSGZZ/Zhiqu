@@ -23,7 +23,9 @@ def check_row(c, row):
     name = c.execute('SELECT name FROM institution WHERE institution_id=?', (row['institution_id'],)).fetchone()
     if not name or name[0] != row['school']:
         raise ValueError('官方校名与身份未精确匹配')
-    if row.get('program_code') not in (None, '') and not re.fullmatch(r'[0-9]{4}[0-9A-Z]{2}', row['program_code']):
+    # Some official catalogues (e.g. PKU) prefix their six-digit code with S.
+    # Preserve that literal code; stripping the prefix would change its identity.
+    if row.get('program_code') not in (None, '') and not re.fullmatch(r'(?:[0-9]{4}[0-9A-Z]{2}|S[0-9]{6})', row['program_code']):
         raise ValueError('专业代码格式')
     status = json.loads(row['value_status'])
     planned = row.get('planned')
