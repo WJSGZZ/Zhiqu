@@ -93,6 +93,22 @@ class IngestKaoyanLinesTest(unittest.TestCase):
    self.assertIn('原表未注明科目序及满分',query.LABELS['comprehensive_unspecified'])
    self.assertIsNone(raw['math']);self.assertIsNone(raw['major1']);self.assertIsNone(raw['major2'])
    self.assertFalse(c.execute("SELECT 1 FROM data.ky_line_component WHERE component IN ('exam_3','single_over_100','single_150')").fetchone())
+ def _assert_literal_foreign_language_component(self,component,label):
+  self.m['rows'][0]['components']={component:60}
+  self.run_ingest()
+  spec=importlib.util.spec_from_file_location('literal_foreign_query_test',P.with_name('zhiqu_db.py'));query=importlib.util.module_from_spec(spec);spec.loader.exec_module(query)
+  with query._open('education',self.path) as (c,_):
+   raw=dict(c.execute('SELECT * FROM data.ky_retest_line').fetchone())
+   result=query._record(c,'ky_retest_line',raw)
+   self.assertEqual(result['values'][component]['value'],60)
+   self.assertEqual(query.LABELS[component],label)
+   self.assertIsNone(raw['politics']);self.assertIsNone(raw['english'])
+   self.assertEqual(c.execute('SELECT component FROM data.ky_line_component').fetchall()[0][0],component)
+   self.assertFalse(c.execute("SELECT 1 FROM data.ky_line_component WHERE component IN ('exam_1','exam_2','single_100','single_150','english_or_politics')").fetchone())
+ def test_shared_politics_foreign_language_does_not_mean_boolean_or(self):
+  self._assert_literal_foreign_language_component('politics_foreign_language_shared','政治／外语门槛（原表合列，未限定语种）')
+ def test_unspecified_foreign_language_is_not_assumed_english(self):
+  self._assert_literal_foreign_language_component('foreign_language_unspecified','外语门槛（原表未限定语种）')
  def test_conflicting_record_rejected_and_rollback(self):
   self.run_ingest();m=copy.deepcopy(self.m);m['rows'][0]['row']['total']=301
   with self.assertRaisesRegex(ValueError,'冲突'):self.run_ingest(m)
