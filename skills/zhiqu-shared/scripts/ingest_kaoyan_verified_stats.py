@@ -3,6 +3,7 @@
 
 Individual records and scores are not an input format. The older hand-off importer
 continues to quarantine summaries lacking original-file proof.
+Groups with fewer than three people are rejected, never silently loaded.
 """
 import argparse, hashlib, json, math, re, sqlite3
 from pathlib import Path
@@ -76,8 +77,10 @@ def ingest(database, manifest):
             if not school or school[0] != r['school'] or not c.execute("SELECT 1 FROM source WHERE source_id=? AND grade='官方'", (sid,)).fetchone():
                 raise ValueError('学校身份或来源不符')
             vals = {k: number(r[k], k) for k in ('year', 'n', 'min', 'median', 'max')}
+            if vals['n'] is not None and vals['n'] < 3:
+                raise ValueError('匿名统计组人数必须 n>=3；不足三人整组拒绝入库')
             if (any(v is None for v in vals.values()) or not 1900 <= vals['year'] <= 2100
-                    or vals['n'] < 1 or not vals['n'].is_integer()
+                    or not vals['n'].is_integer()
                     or not vals['min'] <= vals['median'] <= vals['max'] or r['list_type'] != '拟录取'
                     or not all(str(r[k] or '').strip() for k in ('src_row', 'src_table', 'scope_raw', 'admission_route'))):
                 raise ValueError('摘要数值、类型或原件定位非法')

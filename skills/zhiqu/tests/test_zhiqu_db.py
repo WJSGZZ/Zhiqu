@@ -49,6 +49,19 @@ CREATE TABLE civil_major_summary(region TEXT,year INTEGER,major_name TEXT,share 
  def program(self,*args,**kw):return db.query_program(*args,db=self.path,**kw)
  def test_alias_and_admission_code(self):
   self.assertEqual(self.school('甲大')['identity']['institution_id'],'1');self.assertEqual(self.school('10001')['identity']['institution_id'],'1')
+ def test_research_primary_id_keeps_history_but_dated_alias_stays_dated(self):
+  with sqlite3.connect(self.path) as c:
+   c.execute("INSERT INTO institution VALUES ('82817','甲研究院',NULL,'北京',NULL,NULL,NULL,NULL)")
+   c.executemany('INSERT INTO institution_alias VALUES (?,?,?,?,?,?)',[('82817','82817',None,2026,2026,2026),('82817','99999',None,2026,2026,2026)])
+   c.row_factory=sqlite3.Row
+   for original in c.execute("SELECT * FROM ky_retest_line WHERE record_id IN ('0','1')").fetchall():
+    row=dict(original);row['record_id']='research-'+row['record_id'];row['institution_id']='82817'
+    c.execute('INSERT INTO ky_retest_line('+','.join(row)+') VALUES ('+','.join('?' for _ in row)+')',list(row.values()))
+  years=lambda r:{x['context']['year'] for s in r['sections'] for x in s['rows'] if s['table'].startswith('ky_')}
+  self.assertEqual(years(self.school('82817')),{2025,2026})
+  self.assertEqual(years(self.school('82817',year=2025)),{2025})
+  self.assertEqual(years(self.school('99999')),{2026})
+  with self.assertRaises(db.QueryError):self.school('99999',year=2025)
  def test_ambiguous_never_picks_one(self):
   with self.assertRaises(db.QueryError):self.school('同名')
   self.assertEqual(self.school('同名',province='北京')['identity']['institution_id'],'4')

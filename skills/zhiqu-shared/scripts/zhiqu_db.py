@@ -106,6 +106,9 @@ def _identity(c, name, year=None, province=None):
     for a in aliases:
         if _norm(a.get('alias', '')) != target:
             continue
+        # A primary identity is not a dated spelling of that identity.
+        if target == _norm(a.get('institution_id', '')):
+            continue
         if province and a.get('province') and _norm(province).rstrip('省市') != _norm(a['province']).rstrip('省市'):
             continue
         if a.get('kind')=='省招生代码' and not province:
@@ -186,7 +189,7 @@ NUMERIC = {
 NUMERIC['ky_v_usable_line']=['line_total','politics','english','math','major','single_100','single_over_100']
 NUMERIC['ky_v_usable_program']=['planned','tuimian']
 NUMERIC['ky_v_usable']=['n','min','q1','median','q3','max','mean','excluded_count']
-LABELS = {'standard_score':'标准分门槛（非初试原始总分）','exam_1_2_3_sum':'第一至第三科成绩之和门槛','single_150':'单科满分150门槛','total':'总分','line_total':'复试总分','politics':'原列政治/首科（须核口径）','english':'外语','math':'数学','major':'业务课','major1':'业务课一','major2':'业务课二','single_100':'单科满分100门槛','single_over_100':'单科满分超过100门槛','planned':'招生人数','tuimian':'推免人数','n':'样本人数','min':'最低','q1':'下四分位','median':'中位数','q3':'上四分位','max':'最高','mean':'平均','excluded_count':'排除数','recommend_rate':'保研比例','n_master':'硕士点','n_phd':'博士点','school_rank':'原表排名','plan_n':'计划人数','admitted_n':'录取人数','group_plan_n':'专业组人数','plan_n_result':'计划人数结果（原字段）','segment_n':'同分人数','cumulative_n':'累计人数','count_unspecified':'人数（含义未明确）','score_unspecified':'分数（含义未明确）','rank_unspecified':'位次（含义未明确）','years':'学制','tuition':'学费','plan':'计划人数','admit':'录取人数','score':'最低分','rank':'最低位次','min_score':'最低分','mean_score':'平均分','max_score':'最高分','min_rank':'最低位次','mean_rank':'平均位次','max_rank':'最高位次','headcount':'招录人数','percentage':'百分比','paid_applicants':'缴费人数','paid_per_seat':'缴费人数/名额','p10':'10%分位','p25':'25%分位','p50':'中位数','p75':'75%分位','p90':'90%分位','n_jobs':'职位数','share':'原表比例','share_below_10':'低于10人/名额的职位比例','share_100_plus':'100人/名额以上职位比例'}
+LABELS = {'business_subject_unspecified':'业务课门槛（原表未注明科目序及满分）','single_ge150':'单科满分至少150门槛','politics_foreign_language_shared':'政治／外语门槛（原表合列，未限定语种）','foreign_language_unspecified':'外语门槛（原表未限定语种）','english_or_politics':'英语／政治门槛（原表合列）','comprehensive_unspecified':'综合门槛（原表未注明科目序及满分）','standard_score':'标准分门槛（非初试原始总分）','exam_1_2_3_sum':'第一至第三科成绩之和门槛','single_150':'单科满分150门槛','total':'总分','line_total':'复试总分','politics':'原列政治/首科（须核口径）','english':'外语','math':'数学','major':'业务课','major1':'业务课一','major2':'业务课二','single_100':'单科满分100门槛','single_over_100':'单科满分超过100门槛','planned':'招生人数','tuimian':'推免人数','n':'样本人数','min':'最低','q1':'下四分位','median':'中位数','q3':'上四分位','max':'最高','mean':'平均','excluded_count':'排除数','recommend_rate':'保研比例','n_master':'硕士点','n_phd':'博士点','school_rank':'原表排名','plan_n':'计划人数','admitted_n':'录取人数','group_plan_n':'专业组人数','plan_n_result':'计划人数结果（原字段）','segment_n':'同分人数','cumulative_n':'累计人数','count_unspecified':'人数（含义未明确）','score_unspecified':'分数（含义未明确）','rank_unspecified':'位次（含义未明确）','years':'学制','tuition':'学费','plan':'计划人数','admit':'录取人数','score':'最低分','rank':'最低位次','min_score':'最低分','mean_score':'平均分','max_score':'最高分','min_rank':'最低位次','mean_rank':'平均位次','max_rank':'最高位次','headcount':'招录人数','percentage':'百分比','paid_applicants':'缴费人数','paid_per_seat':'缴费人数/名额','p10':'10%分位','p25':'25%分位','p50':'中位数','p75':'75%分位','p90':'90%分位','n_jobs':'职位数','share':'原表比例','share_below_10':'低于10人/名额的职位比例','share_100_plus':'100人/名额以上职位比例'}
 TITLES = {'gk_official_plan':'高考官方初始计划（按原表范围）','institution_profile':'学校概况（第三方，年份未明单列）','gk_plan_entry':'高考招生计划','gk_official_cutoff':'高考官方投档线','gk_v_usable':'高考整理录取记录','gk_v_purchased':'高考购买数据（保留核验状态）','ky_program_year':'考研目录与往年线','ky_v_usable':'考研分布与可用历史记录','ky_v_retest_line':'学校官网复试线（保留核验状态）','ky_retest_line':'学校官网复试线（保留核验状态）','job_summary':'岗位与匿名报名人数','job_position':'岗位','wage_stat':'在岗工资调查（不代表应届起薪）','competition_stat':'匿名群体竞争统计（非个人概率）','civil_major_summary':'本科专业可报岗位汇总','selected_university':'选调高校范围','recruitment_notice':'招聘公告可用性','industry_stat':'行业统计','graduate_destination':'院校就业去向（届别按原表）'}
 CONTEXT = ['year','plan_year','province','region','college','program_code','program_name','major_code','major_name','degree_type','study_mode','direction','joint_program','special_plan','admission_route','line_scope','list_type','scope','scope_mismatch','scope_mismatch_note','plan_type','subject','subject_type','batch','group_code','grp','position_id','unit','position','education','degree','major_clause','group_type','group','category','school','school_name','verification_status','note','notes','school_tags','degree_level','master_list','phd_list','year_status']
 
@@ -723,7 +726,7 @@ def _core_delta_section(c, identity, name, program, year, province, major, subje
             where.append('t.subject IN (?,?)');bound.extend([subject.removesuffix('类'),subject.removesuffix('类')+'类'])
         if plan_type:where.append('t.plan_type=?');bound.append(plan_type)
         if program is not None:where.append('CAST(t.major_code AS TEXT) LIKE ?');bound.append(str(program)+'%')
-        if year is None and 'institution_alias' in tables:
+        if year is None and 'institution_alias' in tables and _norm(name) != _norm(identity['institution_id']):
             aliases=[dict(x) for x in c.execute('SELECT * FROM data.institution_alias WHERE institution_id=?',(identity['institution_id'],)) if _norm(x['alias'])==_norm(name)]
             if aliases and all(x.get('year') is not None or x.get('year_from') is not None or x.get('year_to') is not None for x in aliases):
                 ranges=[]
@@ -919,7 +922,7 @@ def _query_education(name, program=None, year=None, province=None, db=None, limi
             if table=='ky_v_usable_program':where+=' AND (t.planned IS NOT NULL OR t.tuimian IS NOT NULL OR t.subjects IS NOT NULL)'
             if year is not None and yf and table!='institution_profile':where+=' AND CAST(t.'+yf+' AS INTEGER)=?';args.append(int(year))
             if province and 'province' in cols and table.startswith('gk_'):where+=' AND t.province=?';args.append(province)
-            if year is None and yf and 'institution_alias' in tables:
+            if year is None and yf and 'institution_alias' in tables and _norm(name) != _norm(ident['institution_id']):
                 aliases=[dict(x) for x in c.execute('SELECT * FROM data.institution_alias WHERE institution_id=?',(ident['institution_id'],)) if _norm(x['alias'])==_norm(name)]
                 if aliases and all(x.get('year') is not None or x.get('year_from') is not None or x.get('year_to') is not None for x in aliases):
                     ranges=[]

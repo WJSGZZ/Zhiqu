@@ -8,7 +8,7 @@ from ingest_kaoyan_national import SAMPLE, VERDICTS
 
 COLS = ('record_id institution_id school college program_code program_name degree_type year study_mode direction direction_raw '
         'special_plan scope scope_raw source_id src_row src_page src_table locator_method locator_status planned planned_raw '
-        'planned_scope subjects extra_json value_status').split()
+        'planned_scope subjects extra_json value_status tuimian').split()
 REQUIRED = {'record_id', 'institution_id', 'school', 'year', 'source_id', 'src_table', 'src_row', 'value_status'}
 STATUS = {'官方原值', '来源未提供', '未公布'}
 
@@ -35,6 +35,15 @@ def check_row(c, row):
         raise ValueError('planned 逐值状态不符')
     if planned is None and not str(status['planned'].get('reason') or '').strip():
         raise ValueError('空人数须说明原因')
+    if 'tuimian' in row or 'tuimian' in status:
+        recommended = row.get('tuimian')
+        if recommended is not None and (not isinstance(recommended, int) or isinstance(recommended, bool) or recommended < 0):
+            raise ValueError('推免人数必须为非负整数，星号不得当人数')
+        mark = status.get('tuimian', {})
+        if mark.get('status') not in STATUS or (recommended is None) != (mark['status'] != '官方原值'):
+            raise ValueError('tuimian 逐值状态不符')
+        if recommended is None and not str(mark.get('reason') or '').strip():
+            raise ValueError('空推免人数须说明原因')
     return row
 
 

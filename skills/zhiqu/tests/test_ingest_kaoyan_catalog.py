@@ -17,7 +17,7 @@ class IngestKaoyanCatalogTest(unittest.TestCase):
             c.execute('CREATE TABLE institution(institution_id TEXT PRIMARY KEY,name TEXT)')
             c.execute("INSERT INTO institution VALUES('4135010384','厦门大学')")
             c.execute('CREATE TABLE source(' + ','.join(k + ' TEXT' + (' PRIMARY KEY' if k == 'source_id' else '') for k in mod.SOURCE) + ')')
-            c.execute('CREATE TABLE ky_program_year(' + ','.join(k + (' INTEGER' if k in ('year', 'planned', 'src_page') else ' TEXT') + (' PRIMARY KEY' if k == 'record_id' else '') for k in mod.COLS) + ',tuimian INTEGER)')
+            c.execute('CREATE TABLE ky_program_year(' + ','.join(k + (' INTEGER' if k in ('year', 'planned', 'tuimian', 'src_page') else ' TEXT') + (' PRIMARY KEY' if k == 'record_id' else '') for k in mod.COLS) + ')')
             c.execute('CREATE TABLE storage_manifest(key TEXT PRIMARY KEY,value TEXT NOT NULL)')
             c.executemany('INSERT INTO storage_manifest VALUES(?,?)', [('generation', 'g1'), ('audit_file', self.audit.name)])
         with sqlite3.connect(self.audit) as a:
@@ -60,6 +60,21 @@ class IngestKaoyanCatalogTest(unittest.TestCase):
         m['rows'][0]['program_code'] = '0501'
         with self.assertRaisesRegex(ValueError, '代码'):
             mod.ingest(self.path, m)
+
+    def test_explicit_recommended_count_is_queryable(self):
+        m = copy.deepcopy(self.m)
+        m['rows'][0].update(planned=42, tuimian=21, value_status=json.dumps({'planned': {'status': '官方原值'}, 'tuimian': {'status': '官方原值'}}))
+        mod.ingest(self.path, m)
+        with sqlite3.connect(self.path) as c:
+            self.assertEqual(c.execute('SELECT planned,tuimian FROM ky_program_year').fetchone(), (42,21))
+
+    def test_recommended_count_requires_value_and_status(self):
+        for value, mark in [(-1, {'status': '官方原值'}), ('★', {'status': '官方原值'}), (21, {'status': '来源未提供'}), (None, {'status': '来源未提供'})]:
+            m = copy.deepcopy(self.m)
+            m['rows'][0].update(tuimian=value)
+            status=json.loads(m['rows'][0]['value_status']);status['tuimian']=mark;m['rows'][0]['value_status']=json.dumps(status)
+            with self.subTest(value=value), self.assertRaises(ValueError):
+                mod.ingest(self.path, m)
 
     def test_official_prefixed_code_preserved(self):
         m = copy.deepcopy(self.m)

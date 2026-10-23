@@ -42,6 +42,27 @@ class IngestGaokaoOfficialTest(unittest.TestCase):
  def ingest(self,m=None):return mod.ingest(self.path,self.m if m is None else m)
  def snapshot(self):
   with sqlite3.connect(self.path) as c:return c.execute('SELECT * FROM gk_official_yfyd WHERE province=\'旧省\'').fetchall(),c.execute('SELECT * FROM institution').fetchall()
+ def test_original_decimal_score_preserves_integer_keys_and_traceable_context(self):
+  before=self.snapshot()
+  for i,r in enumerate(self.m['datasets'][0]['rows']):
+   r['data']['score']=99.75-i/4
+   r['yfyd_context']={'segment_n':None,'score_operator':'原表排序成绩（体育统考成绩）','score_upper':None,'scope_raw':'原表体育统考成绩；文化与专业均上线考生','count_raw':r['data']['cum'],'count_kind':'累计人数'}
+   r['excerpt']={'score_cell':str(r['data']['score'])}
+  self.assertEqual(self.ingest()['inserted'],3)
+  with sqlite3.connect(self.path) as c:
+   self.assertEqual(c.execute("SELECT score,typeof(score) FROM gk_official_yfyd WHERE province='甲省' ORDER BY score DESC").fetchall(),[(99.75,'real'),(99.5,'real'),(99.25,'real')])
+   self.assertEqual(c.execute("SELECT typeof(score) FROM gk_official_yfyd WHERE province='旧省'").fetchone()[0],'integer')
+   self.assertEqual(c.execute('SELECT count(*) FROM gk_yfyd_context').fetchone()[0],3)
+   self.assertFalse(c.execute('PRAGMA foreign_key_check').fetchall())
+  self.assertEqual(self.snapshot(),before)
+  self.assertEqual(self.ingest()['existing'],3)
+ def test_decimal_score_without_original_scope_is_rejected(self):
+  self.m['datasets'][0]['rows'][0]['data']['score']=99.75
+  with self.assertRaisesRegex(ValueError,'小数分'):self.ingest()
+  with sqlite3.connect(self.path) as c:self.assertEqual(c.execute('SELECT count(*) FROM source').fetchone()[0],0)
+ def test_decimal_counts_remain_rejected(self):
+  self.m['datasets'][0]['rows'][0]['data']['cum']=3.5
+  with self.assertRaisesRegex(ValueError,'整数'):self.ingest()
  def test_all_business_tables_idempotent_old_unchanged_and_link_receipt(self):
   before=self.snapshot();self.m['datasets']=[self.dataset(t,prefix=str(i)+'-') for i,t in enumerate(mod.FIELDS)]
   a=self.ingest();b=self.ingest();self.assertEqual(a['inserted'],15);self.assertEqual(b['existing'],15);self.assertEqual(b['inserted'],0);self.assertEqual(self.snapshot(),before)
