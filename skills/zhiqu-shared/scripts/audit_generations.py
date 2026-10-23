@@ -14,7 +14,7 @@
 """
 import argparse
 import re
-import shutil
+import subprocess
 import sqlite3
 import sys
 import time
@@ -92,10 +92,9 @@ def main(argv=None):
         if busy:
             print(f'有文件 {RECENT_SECONDS // 60} 分钟内刚写过，可能正在发布，拒绝清理: {busy}', file=sys.stderr)
             return 2
-        trash = Path.home() / '.Trash'
         for name, _ in result['removable']:
-            shutil.move(str(args.data_dir / name), str(trash / name))
-        print(f'已移入 {trash}')
+            subprocess.run(['/usr/bin/trash', str(args.data_dir / name)], check=True)
+        print('已移入废纸篓（清空废纸篓后空间才释放）')
         return 0
     return 1 if result['removable'] else 0
 
