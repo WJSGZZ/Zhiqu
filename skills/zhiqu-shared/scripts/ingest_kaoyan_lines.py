@@ -5,7 +5,7 @@ from pathlib import Path
 SOURCE='source_id grade publisher title landing_url file_url published retrieved method archive_sha256 archive_path archive_status wayback_url note citation license producer_revision'.split()
 RAW='year school institution_id college program_code program_name degree_type study_mode line_scope total politics english math major1 major2 special_plan note read_method source_url published_date retrieved_date src_locator'.split()
 NUM=['year','total','politics','english','math','major1','major2']
-COMP={'single_100','single_150','single_over_100','single_gt100','single_le100','exam_1','exam_2','exam_3','exam_4','standard_score','exam_1_2_3_sum','comprehensive_unspecified','english_or_politics','politics_foreign_language_shared','foreign_language_unspecified',}
+COMP={'single_100','single_150','single_over_100','single_gt100','single_le100','exam_1','exam_2','exam_3','exam_4','standard_score','exam_1_2_3_sum','comprehensive_unspecified','english_or_politics','politics_foreign_language_shared','foreign_language_unspecified','business_subject_unspecified','single_ge150',}
 DDL='CREATE TABLE ky_line_component(record_id TEXT NOT NULL REFERENCES ky_retest_line(record_id),component TEXT NOT NULL,value REAL NOT NULL,source_id TEXT NOT NULL REFERENCES source(source_id),src_locator TEXT NOT NULL,value_status TEXT NOT NULL,PRIMARY KEY(record_id,component))'
 SCOPE_DDL='CREATE TABLE ky_line_scope_context(record_id TEXT PRIMARY KEY REFERENCES ky_retest_line(record_id),direction TEXT,joint_program TEXT,admission_route TEXT,scope_raw TEXT,source_id TEXT NOT NULL REFERENCES source(source_id))'
 AUDIT_DDL='CREATE TABLE ky_line_original_evidence(record_id TEXT PRIMARY KEY,source_id TEXT NOT NULL,excerpt_locator_json TEXT NOT NULL)'
