@@ -304,6 +304,11 @@ class OnDemandTests(unittest.TestCase):
         self.assertEqual(summary['outcomes'][1]['status'],'not fetched')
         self.assertFalse(summary['published'])
         self.assertTrue((out/'README.md').exists())
+        readable=(out/'README.md').read_text()
+        self.assertIn('已取得',readable)
+        self.assertIn('未取得',readable)
+        self.assertNotIn('not fetched',readable)
+        self.assertNotIn('obtained',readable)
 
     def test_cli_hard_deadline_terminates_worker_process_group(self):
         worker=Mock(pid=43210);worker.communicate.side_effect=tool.subprocess.TimeoutExpired('worker',.01)

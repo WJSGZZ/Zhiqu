@@ -33,6 +33,7 @@ ENTRIES = ROOT / 'skills/zhiqu-grad/data/kaoyan_entrypoints.csv'
 LAYERS = {'lines': ('ky_retest_line', '学院专业资格线'), 'catalog': ('ky_program_year', '招生目录'),
           'stats': ('ky_score_dist', '拟录取统计')}
 CN = {'lines': '复试线', 'catalog': '招生目录', 'stats': '拟录取统计'}
+STATUS_CN = {'obtained': '已取得', 'partial': '部分取得', 'not fetched': '未取得', 'staged': '候选待验收'}
 RESTRICTED = {'login', 'verification', 'http_block', 'rate_limit'}
 
 class Deadline:
@@ -499,7 +500,7 @@ def run_request(request, *, fetch=fetch_public, publisher=validate_and_publish, 
                  deadline_seconds=request['seconds'],outcomes=outcomes,source_details=source_details,attempts=attempts,published=bool(published),warnings=warnings)
     write_json(out/'summary.json',summary)
     lines=[f"{identity['name']}：实际用时{summary['seconds']}秒，限时{request['seconds']}秒。"]
-    for r in outcomes:lines.append(f"{r['year']} {r['program']} {CN[r['layer']]}：{r['status']}，{r['reason']}。来源："+'；'.join((r.get('source_ids')or(r.get('attempted_entries',[])+r.get('not_retried_entries',[])))))
+    for r in outcomes:lines.append(f"{r['year']} {r['program']} {CN[r['layer']]}：{STATUS_CN[r['status']]}，{r['reason']}。来源："+'；'.join((r.get('source_ids')or(r.get('attempted_entries',[])+r.get('not_retried_entries',[])))))
     for detail in source_details:lines.append('来源详情：'+'｜'.join(str(detail[k]or'')for k in ['publisher','title','published'])+'｜'+(detail['landing_url']or detail['file_url']or'原来源未提供网址'))
     (out/'README.md').write_text('\n'.join(lines)+'\n')
     return summary
@@ -528,7 +529,7 @@ def timed_out_summary(request):
     if not (out/'summary.json').exists():
         write_json(out/'summary.json',summary)
         text=[summary['school']+'：单校时间限制，已终止本任务全部子进程。']
-        text.extend(f"{r['year']} {r['program']} {CN[r['layer']]}：{r['status']}；{r['reason']}"for r in outcomes)
+        text.extend(f"{r['year']} {r['program']} {CN[r['layer']]}：{STATUS_CN[r['status']]}；{r['reason']}"for r in outcomes)
         text.append('发布状态以publish.json及正式库指纹为准；候选不等于已发布。')
         (out/'README.md').write_text('\n'.join(text)+'\n')
         update_coverage(request['coverage'],summary['school'],[r for r in outcomes if not r.get('published_rows')])
