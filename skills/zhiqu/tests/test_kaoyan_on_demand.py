@@ -143,6 +143,28 @@ class OnDemandTests(unittest.TestCase):
         self.assertEqual(summary['outcomes'][0]['status'],'obtained')
         publish.assert_called_once()
 
+    def test_duplicate_chsi_entries_for_same_unit_code_resolve_same_identity(self):
+        registry=[dict(school=name,admission_unit_code='12345',institution_id=IDENTITY['institution_id'])for name in ['合成大学','合成大学研究生院']]
+        with patch.object(tool.zhiqu_db,'_open',side_effect=self.opened),patch.object(tool.zhiqu_db,'_identity',return_value=(IDENTITY,[]))as resolve:
+            identity,entry,warnings=tool.resolve_school(self.db,'12345',registry)
+        resolve.assert_called_once_with(unittest.mock.ANY,IDENTITY['institution_id'])
+        self.assertEqual(identity,IDENTITY)
+
+    def test_ambiguous_school_writing_does_not_choose_one_institution(self):
+        registry=[dict(school='合成学院',admission_unit_code=code,institution_id=iid)for code,iid in [('12345','4100000001'),('54321','4100000002')]]
+        with patch.object(tool.zhiqu_db,'_open',side_effect=self.opened),patch.object(tool.zhiqu_db,'_identity',side_effect=ValueError('歧义'))as resolve:
+            with self.assertRaises(ValueError):tool.resolve_school(self.db,'合成学院',registry)
+        resolve.assert_called_once_with(unittest.mock.ANY,'合成学院')
+
+    def test_unmapped_relevant_table_remains_pending(self):
+        extra='<table><tr><th>学科专业</th><th>门槛</th></tr><tr><td>085404</td><td>280</td></tr></table>'
+        blob=line_page().replace(b'</body>',extra.encode()+b'</body>')
+        parsed=adapters.parse_official_html(blob,URL,IDENTITY,2026,'lines',['0854'])
+        self.assertEqual(parsed['rows'],1)
+        self.assertEqual(parsed['pending'][0]['table'],2)
+        unrelated=blob.replace(b'<td>085404</td><td>280',b'<td>030101</td><td>280')
+        self.assertFalse(adapters.parse_official_html(unrelated,URL,IDENTITY,2026,'lines',['0854'])['pending'])
+
     def test_partial_source_is_not_promoted_to_obtained(self):
         parsed=adapters.parse_official_html(line_page(),URL,IDENTITY,2026,'lines',['0854'])
         parsed['pending']=[{'table':2,'reason':'专项列尚未对应'}]
@@ -261,13 +283,29 @@ class OnDemandTests(unittest.TestCase):
 
     def test_cli_hard_deadline_terminates_worker_process_group(self):
         worker=Mock(pid=43210);worker.communicate.side_effect=tool.subprocess.TimeoutExpired('worker',.01)
-        with patch.object(sys,'argv',['kaoyan_on_demand','--school','合成大学','--program','0854','--minutes','0.0001','--output',self.request['output']]),patch.object(tool.subprocess,'Popen',return_value=worker),patch.object(tool.os,'killpg')as kill,contextlib.redirect_stdout(io.StringIO()):
+        with patch.object(sys,'argv',['kaoyan_on_demand','--school','合成大学','--program','0854','--minutes','0.0001','--output',self.request['output'],'--coverage',self.request['coverage']]),patch.object(tool.subprocess,'Popen',return_value=worker),patch.object(tool.os,'killpg')as kill,contextlib.redirect_stdout(io.StringIO()):
             tool.main()
         kill.assert_called_once_with(worker.pid,tool.signal.SIGTERM)
         worker.wait.assert_called_once_with(timeout=3)
+        submitted=json.loads(worker.communicate.call_args.args[0])
+        self.assertEqual(Path(submitted['coverage']),Path(self.request['coverage']).resolve())
         summary=json.loads((Path(self.request['output'])/'summary.json').read_text())
         self.assertEqual(len(summary['outcomes']),9)
         self.assertFalse(summary['published'])
+
+    def test_custom_database_deadline_uses_isolated_coverage_by_default(self):
+        worker=Mock(pid=43210);worker.communicate.side_effect=tool.subprocess.TimeoutExpired('worker',.01)
+        args=['kaoyan_on_demand','--school','合成大学','--program','0854','--db',str(self.db),'--minutes','0.0001','--output',self.request['output']]
+        with patch.object(sys,'argv',args),patch.object(tool.subprocess,'Popen',return_value=worker),patch.object(tool.os,'killpg'),contextlib.redirect_stdout(io.StringIO()):tool.main()
+        submitted=json.loads(worker.communicate.call_args.args[0])
+        self.assertEqual(Path(submitted['coverage']),Path(self.request['output']).resolve()/'coverage.csv')
+        self.assertNotEqual(Path(submitted['coverage']),tool.SHARED/'data/coverage/kaoyan.csv')
+
+    def test_existing_run_directory_is_not_overwritten(self):
+        out=Path(self.request['output']);out.mkdir();(out/'publish.json').write_text('{}')
+        args=['kaoyan_on_demand','--school','合成大学','--program','0854','--output',str(out)]
+        with patch.object(sys,'argv',args),patch.object(tool.subprocess,'Popen')as worker,contextlib.redirect_stderr(io.StringIO()),self.assertRaises(SystemExit):tool.main()
+        worker.assert_not_called();self.assertEqual((out/'publish.json').read_text(),'{}')
 
     def test_cli_rejects_bypass_and_stealth_flags_before_worker(self):
         for flag in ['--bypass', '--stealth', '--bypass-captcha']:

@@ -118,6 +118,12 @@ def parse_official_html(body, url, identity, year, layer, programs):
         header = next((i for i, row in enumerate(grid[:5]) if
                        any(x.replace(' ', '') in {'专业代码', '招生专业代码', '专业代码、名称及研究方向'} for x in row)), None)
         if header is None:
+            # A second table may contain the requested programme with a new
+            # header format. It cannot silently disappear from an obtained claim.
+            for ri,row in enumerate(grid):
+                codes=[re.match(r'^\s*(S\d{6}|\d{4}[0-9A-Z]{2}|\d{4})(?=\s|[（(\u4e00-\u9fff]|$)',cell) for cell in row]
+                if any(m and any(m[1].startswith(p)or p.startswith(m[1])for p in programs)for m in codes):
+                    pending.append({'table':table['table'],'row':ri+1,'reason':'另表含所问专业或上级代码，但表头未明确映射，范围尚待核对'})
             continue
         labels = [re.sub(r'\s+', '', x) for x in grid[header]]
         roles = {HEAD[x]: i for i, x in enumerate(labels) if x in HEAD}

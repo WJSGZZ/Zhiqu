@@ -60,7 +60,10 @@ def entries(path=ENTRIES):
 
 def resolve_school(database, name, registry):
     matches = [r for r in registry if name in (r['school'], r['admission_unit_code'], r['institution_id'])]
-    target = matches[0]['school'] if len(matches)==1 else name
+    ids={r['institution_id']for r in matches if r.get('institution_id')}
+    # Several real CHSI entrances can belong to one MOE identity. This is not
+    # permission to choose between distinct institutions sharing a short name.
+    target = next(iter(ids)) if len(ids)==1 else matches[0]['school'] if len(matches)==1 else name
     with zhiqu_db._open('education', database) as (c, _):
         identity, warnings = zhiqu_db._identity(c, target)
     entry = next((r for r in registry if r['institution_id']==identity['institution_id'] or r['school']==identity['name']), {})
@@ -548,16 +551,21 @@ def main():
     ap.add_argument('--school',required=True);ap.add_argument('--program',dest='programs',nargs='+',required=True)
     ap.add_argument('--years');ap.add_argument('--layers',nargs='+',choices=list(LAYERS),default=list(LAYERS))
     ap.add_argument('--minutes',type=float,default=30);ap.add_argument('--db',default=str(zhiqu_db.DEFAULTS['education']))
+    ap.add_argument('--coverage',help='另选隔离覆盖表；自定义库默认不写共享覆盖表')
     ap.add_argument('--output');ap.add_argument('--entry',action='append',default=[])
     ap.add_argument('--reviewed',action='append',default=[],help='已独立核过的PDF/图片匿名清单和文件证明；仍实际重取并核对指纹')
     args=ap.parse_args()
     if not math.isfinite(args.minutes)or args.minutes<=0 or any(not re.fullmatch(r'(?:\d{4}(?:[0-9A-Z]{2})?|S\d{6})',p)for p in args.programs):ap.error('限时须为正数；专业代码须4/6位或原S前缀')
+    live_default=Path(args.db).resolve()==Path(zhiqu_db.DEFAULTS['education']).resolve()
+    coverage=args.coverage or (str(SHARED/'data/coverage/kaoyan.csv')if live_default else str(Path(args.output or ROOT/'.cache/kaoyan-on-demand-isolated')/'coverage.csv'))
     request=dict(school=args.school,programs=args.programs,years=year_range(args.years),layers=args.layers,
                  seconds=args.minutes*60,budget_seconds=max(0,args.minutes*60-5),database=str(Path(args.db).resolve()),
-                 coverage=str(SHARED/'data/coverage/kaoyan.csv'),entries=args.entry,reviewed=args.reviewed,
+                 coverage=str(Path(coverage).resolve()),entries=args.entry,reviewed=args.reviewed,
                  stop_ledger=str(SHARED/'data/data_complete/on-demand-known-stop-entries.json'),
                  output=str(Path(args.output or ROOT/'.cache/kaoyan-on-demand'/str(time.time_ns())).resolve()))
-    Path(request['output']).mkdir(parents=True,exist_ok=True)
+    output_path=Path(request['output'])
+    if output_path.exists() and any(output_path.iterdir()):ap.error('输出目录非空，请换新目录保留旧取数与验收回执')
+    output_path.mkdir(parents=True,exist_ok=True)
     worker=subprocess.Popen([sys.executable,__file__,'--worker'],stdin=subprocess.PIPE,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,start_new_session=True)
     try:
         worker.communicate(json.dumps(request).encode(),timeout=request['seconds'])
