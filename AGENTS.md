@@ -62,6 +62,7 @@ python3 -m unittest discover -s skills/zhiqu/tests     # 全部测试
 python3 skills/zhiqu/scripts/check_family.py           # 引用、问卷节名、报告目录、复核期限、重复与体积；须 0 错误
 python3 skills/zhiqu/scripts/check_demos.py            # 读研、求职示例：重新排盘、重算 offer 与预算
 python3 skills/zhiqu/scripts/validate_data.py          # 改了数据时
+python3 skills/zhiqu-shared/scripts/audit_generations.py  # 发布新一代教育库后：旧审计库不得堆积（有可清理文件则退出码 1）
 python3 skills/zhiqu/scripts/check_layout.py 报告.pdf  # 版面自检（生成 PDF 时已自动运行，失败即报错）
 python3 skills/zhiqu/scripts/check_questionnaire.py   # 改了问卷时：真实浏览器展开全部条件题，查控件贴边、重叠和溢出（需 playwright）
 ```
