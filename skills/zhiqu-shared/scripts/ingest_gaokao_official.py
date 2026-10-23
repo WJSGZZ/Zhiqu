@@ -121,7 +121,18 @@ def prepare_data(c,dataset,item):
  for key in ('province','subject'):
   if not isinstance(data[key],str) or not data[key].strip():raise ValueError('缺少明确省份/科类')
  for key in NUMERIC[table]:
-  data[key]=number(data[key],key) if key=='total' or table=='gk_official_cutoff' and key=='score' else integer(data[key],key,required=key=='year' or table=='gk_official_yfyd' and key=='score' or table=='gk_yfyd_bucket' and key=='score_boundary')
+  if table=='gk_official_yfyd' and key=='score':
+   value=number(data[key],key)
+   if value is None:raise ValueError('缺少数字:score')
+   if float(value).is_integer():data[key]=int(value)
+   else:
+    context=item.get('yfyd_context')
+    if not isinstance(context,dict) or not str(context.get('score_operator') or '').strip() or not str(context.get('scope_raw') or '').strip():raise ValueError('原表小数分必须保留分数口径与适用范围')
+    # SQLite INTEGER affinity preserves a non-integral REAL without rounding;
+    # keep existing integer keys and their storage types unchanged.
+    data[key]=value
+  else:
+   data[key]=number(data[key],key) if key=='total' or table=='gk_official_cutoff' and key=='score' else integer(data[key],key,required=key=='year' or table=='gk_yfyd_bucket' and key=='score_boundary')
  if table=='gk_yfyd_bucket':
   for field in ('score_label','boundary_operator','scope_raw'):
    if not isinstance(data.get(field),str) or not data[field].strip():raise ValueError('尾桶须保留原词/范围:'+field)
