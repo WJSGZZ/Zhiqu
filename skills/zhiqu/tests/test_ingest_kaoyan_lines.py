@@ -77,6 +77,22 @@ class IngestKaoyanLinesTest(unittest.TestCase):
   with sqlite3.connect(self.path) as c:
    self.assertIsNone(c.execute('SELECT politics FROM ky_retest_line').fetchone()[0])
    self.assertEqual(c.execute('SELECT component,value FROM ky_line_component').fetchall(),[('exam_1_2_3_sum',178.0)])
+ def test_original_comprehensive_does_not_guess_exam_slot_or_maximum(self):
+  self.m['rows'][0]['components']={'comprehensive_unspecified':108,'english_or_politics':36}
+  self.m['rows'][0]['excerpt']='原表：总分294，英语/政治36，综合108；未注明综合科目序及满分'
+  self.run_ingest()
+  query_path=P.with_name('zhiqu_db.py')
+  spec=importlib.util.spec_from_file_location('comprehensive_query_test',query_path);query=importlib.util.module_from_spec(spec);spec.loader.exec_module(query)
+  with query._open('education',self.path) as (c,_):
+   raw=dict(c.execute('SELECT * FROM data.ky_retest_line').fetchone())
+   result=query._record(c,'ky_retest_line',raw)
+   self.assertEqual(result['values']['comprehensive_unspecified']['value'],108)
+   self.assertEqual(result['values']['english_or_politics']['value'],36)
+   self.assertIsNone(raw['politics']);self.assertIsNone(raw['english'])
+   self.assertIn('原表合列',query.LABELS['english_or_politics'])
+   self.assertIn('原表未注明科目序及满分',query.LABELS['comprehensive_unspecified'])
+   self.assertIsNone(raw['math']);self.assertIsNone(raw['major1']);self.assertIsNone(raw['major2'])
+   self.assertFalse(c.execute("SELECT 1 FROM data.ky_line_component WHERE component IN ('exam_3','single_over_100','single_150')").fetchone())
  def test_conflicting_record_rejected_and_rollback(self):
   self.run_ingest();m=copy.deepcopy(self.m);m['rows'][0]['row']['total']=301
   with self.assertRaisesRegex(ValueError,'冲突'):self.run_ingest(m)
