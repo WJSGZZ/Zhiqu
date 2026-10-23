@@ -106,6 +106,9 @@ def _identity(c, name, year=None, province=None):
     for a in aliases:
         if _norm(a.get('alias', '')) != target:
             continue
+        # A primary identity is not a dated spelling of that identity.
+        if target == _norm(a.get('institution_id', '')):
+            continue
         if province and a.get('province') and _norm(province).rstrip('省市') != _norm(a['province']).rstrip('省市'):
             continue
         if a.get('kind')=='省招生代码' and not province:
@@ -723,7 +726,7 @@ def _core_delta_section(c, identity, name, program, year, province, major, subje
             where.append('t.subject IN (?,?)');bound.extend([subject.removesuffix('类'),subject.removesuffix('类')+'类'])
         if plan_type:where.append('t.plan_type=?');bound.append(plan_type)
         if program is not None:where.append('CAST(t.major_code AS TEXT) LIKE ?');bound.append(str(program)+'%')
-        if year is None and 'institution_alias' in tables:
+        if year is None and 'institution_alias' in tables and _norm(name) != _norm(identity['institution_id']):
             aliases=[dict(x) for x in c.execute('SELECT * FROM data.institution_alias WHERE institution_id=?',(identity['institution_id'],)) if _norm(x['alias'])==_norm(name)]
             if aliases and all(x.get('year') is not None or x.get('year_from') is not None or x.get('year_to') is not None for x in aliases):
                 ranges=[]
@@ -919,7 +922,7 @@ def _query_education(name, program=None, year=None, province=None, db=None, limi
             if table=='ky_v_usable_program':where+=' AND (t.planned IS NOT NULL OR t.tuimian IS NOT NULL OR t.subjects IS NOT NULL)'
             if year is not None and yf and table!='institution_profile':where+=' AND CAST(t.'+yf+' AS INTEGER)=?';args.append(int(year))
             if province and 'province' in cols and table.startswith('gk_'):where+=' AND t.province=?';args.append(province)
-            if year is None and yf and 'institution_alias' in tables:
+            if year is None and yf and 'institution_alias' in tables and _norm(name) != _norm(ident['institution_id']):
                 aliases=[dict(x) for x in c.execute('SELECT * FROM data.institution_alias WHERE institution_id=?',(ident['institution_id'],)) if _norm(x['alias'])==_norm(name)]
                 if aliases and all(x.get('year') is not None or x.get('year_from') is not None or x.get('year_to') is not None for x in aliases):
                     ranges=[]
