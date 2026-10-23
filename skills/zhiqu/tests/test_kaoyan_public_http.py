@@ -54,6 +54,33 @@ class PublicHTTPTests(unittest.TestCase):
             with self.subTest(kind=url.split('?')[-1].split('=')[0]):
                 with self.assertRaises(http.SafeStop):http.safe_url(url)
 
+    def test_failure_digits_in_fingerprint_or_url_are_not_http_status(self):
+        for reason in ['transfer failed sha256=abc412def403xyz',
+                       'TLS error https://fixture.edu.cn/202403/notice.html',
+                       'transfer failed https://fixture.edu.cn/a?tag=429401']:
+            with self.subTest(reason=reason):
+                self.assertNotIn(http.stop_category(reason),
+                                 {'http_block','login','rate_limit'})
+        self.assertEqual(http.stop_category('TLS error https://fixture.edu.cn/202403/a'),'tls')
+
+    def test_structured_http_status_and_explicit_challenge_stop(self):
+        for code,category in [(401,'login'),(403,'http_block'),(412,'http_block'),(429,'rate_limit')]:
+            with self.subTest(code=code):
+                self.assertEqual(http.stop_category('transfer failed',code),category)
+                self.assertEqual(http.stop_category('HTTP '+str(code)),category)
+        self.assertEqual(http.stop_category('浏览器环境检测',200),'verification')
+        self.assertEqual(http.stop_category('请求保护暂停 site_hour_budget',200),'shared_guard')
+
+    def test_receipt_uses_actual_status_and_success_has_no_stop_category(self):
+        url='https://fixture.edu.cn/202403/a'
+        attempts=[{'url':url,'http_status':200,'body_sha256':'abc412def'}]
+        ok=http.public_receipt(url,{'body':b'anonymous'},attempts,'sha256=abc412def')
+        self.assertIsNone(ok['stop_category'])
+        failed=http.public_receipt(url,None,attempts,'TLS error')
+        self.assertEqual(failed['stop_category'],'tls')
+        attempts[0]['http_status']=412
+        self.assertEqual(http.public_receipt(url,None,attempts,None)['stop_category'],'http_block')
+
     def test_original_retrieve_owns_guard_and_restores_transport(self):
         original=Mock()
         crawler=SimpleNamespace(curl_once=original)

@@ -68,13 +68,23 @@ def public_receipt(url,item,attempts,reason):
  for a in attempts:
   u=a.get('url',url);safe_url(u);z={k:a[k]for k in['http_status','bytes','body_sha256','origin_attempted']if k in a};z['url']=u
   if'retry_at'in a:z['retry_at']=round(a['retry_at'],3)
-  if'reason'in a:z['stop_category']=stop_category(a['reason'])
+  if'reason'in a:z['stop_category']=stop_category(a['reason'],a.get('http_status'))
   safe_attempts.append(z)
- return dict(source_url=url,status='retrieved'if item else'unretrieved',stop_category=stop_category(reason)if reason else None,sha256=hashlib.sha256(item['body']).hexdigest()if item else None,bytes=len(item['body'])if item else 0,attempts=safe_attempts,raw_original_written=False)
+ last_status=next((a['http_status']for a in reversed(attempts)if a.get('http_status')is not None),None)
+ return dict(source_url=url,status='retrieved'if item else'unretrieved',stop_category=None if item else stop_category(reason,last_status),sha256=hashlib.sha256(item['body']).hexdigest()if item else None,bytes=len(item['body'])if item else 0,attempts=safe_attempts,raw_original_written=False)
 
-def stop_category(reason):
+def stop_category(reason,http_status=None):
+ """Classify actual status/reason, never digits in a URL or fingerprint."""
  s=str(reason or'')
- for p,k in [('site_|global_|interval|请求保护','shared_guard'),('登录|login|401','login'),('验证|captcha|challenge','verification'),('429|限流','rate_limit'),('403|412','http_block'),('DNS|解析','dns'),('TLS|证书|退出码 (?:51|60)','tls')]:
+ for p,k in [(r'请求保护|(?:^|\s)(?:site_|global_|interval)[a-z_]*','shared_guard'),('登录|login','login'),('验证|captcha|challenge|环境检测','verification')]:
+  if re.search(p,s,re.I):return k
+ try:code=int(http_status)if http_status is not None else None
+ except (ValueError,TypeError):code=None
+ if code is None:
+  m=re.search(r'\bHTTP(?:[\s_-]*(?:status|状态码))?[\s:=_-]*(401|403|412|429)(?!\d)|^\s*(401|403|412|429)\s*$',s,re.I)
+  if m:code=int(m.group(1)or m.group(2))
+ if code in {401,403,412,429}:return {401:'login',403:'http_block',412:'http_block',429:'rate_limit'}[code]
+ for p,k in [('限流','rate_limit'),('DNS|解析','dns'),('TLS|证书|退出码 (?:51|60)','tls')]:
   if re.search(p,s,re.I):return k
  return'other_unretrieved'
 
