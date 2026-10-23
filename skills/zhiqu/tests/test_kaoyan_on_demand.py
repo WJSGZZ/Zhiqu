@@ -237,6 +237,17 @@ class OnDemandTests(unittest.TestCase):
         publisher.assert_not_called()
         self.assertFalse(summary['published'])
 
+    def test_reverified_existing_row_marks_program_obtained_without_count_inflation(self):
+        import csv
+        path=Path(self.request['coverage'])
+        with path.open('w',newline='')as f:
+            w=csv.DictWriter(f,fieldnames=['school','year','scope_level','status','reason','formal_official_rows']);w.writeheader();w.writerow(dict(school='合成大学',year=2026,scope_level='学院专业资格线',status='partial',reason='旧范围待核',formal_official_rows=1))
+        tool.update_coverage(path,'合成大学',[dict(year=2026,layer='lines',program='0854',status='obtained',published_rows=0,published_in_library=True,source_ids=['s'],reason='原有行重新全套核验通过')])
+        row=list(csv.DictReader(path.open()))[0]
+        self.assertEqual(row['formal_official_rows'],'1')
+        self.assertEqual(json.loads(row['on_demand_obtained']),{'0854':['s']})
+        self.assertEqual(row['status'],'partial')
+
     def test_parent_timeout_reports_each_missing_cell_and_keeps_cached_result(self):
         out=Path(self.request['output']);out.mkdir()
         tool.write_json(out/'progress.json',dict(school='合成大学',outcomes=[dict(year=2026,layer='lines',program='0854',status='obtained',reason='已有缓存')]))

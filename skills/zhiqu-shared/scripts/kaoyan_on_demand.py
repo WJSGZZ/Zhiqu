@@ -342,13 +342,13 @@ def update_coverage(path, school, outcomes):
             match={k:'' for k in fields};match.update(school=school,year=str(item['year']),scope_level=scope,status='not fetched');rs.append(match)
         reason='按需取数：'+item['reason']
         match['reason']=(match.get('reason','')+'；'+reason).strip('；')
-        if item.get('published_rows'):
-            match['formal_official_rows']=str(int(match.get('formal_official_rows')or 0)+item['published_rows'])
+        if item.get('published_in_library') or item.get('published_rows'):
+            match['formal_official_rows']=str(int(match.get('formal_official_rows')or 0)+item.get('published_rows',0))
             if item['status']=='obtained':
                 obtained=json.loads(match.get('on_demand_obtained')or '{}');obtained[item['program']]=item.get('source_ids',[]);match['on_demand_obtained']=json.dumps(obtained,ensure_ascii=False)
             # A programme request cannot prove that all school directions are present.
             if match['status']!='obtained':match['status']='partial'
-        if 'deferred_reason'in fields:match['deferred_reason']='' if item.get('published_rows') else match.get('deferred_reason','')
+        if 'deferred_reason'in fields:match['deferred_reason']='' if item.get('published_in_library') or item.get('published_rows') else match.get('deferred_reason','')
     tmp=path.with_suffix('.ondemand.tmp')
     with tmp.open('w',newline='') as f:w=csv.DictWriter(f,fieldnames=fields);w.writeheader();w.writerows(rs);f.flush();os.fsync(f.fileno())
     os.replace(tmp,path)
@@ -465,7 +465,7 @@ def run_request(request, *, fetch=fetch_public, publisher=validate_and_publish, 
                     partial=bool(r.get('pending'))
                     receipt=published.get('ingest',[{}for _ in manifests])[staged_index]
                     added=receipt.get('rows_inserted',receipt.get('inserted',r['rows']))
-                    r.update(status='partial'if partial else'obtained',published_rows=added,reason='已发布可核对部分，另有原表范围待核'if partial else'对应所问专业原表入库；两读/抽核/只增不改/全套检查与12案例回归通过')
+                    r.update(status='partial'if partial else'obtained',published_rows=added,published_in_library=True,reason='已发布可核对部分，另有原表范围待核'if partial else'对应所问专业原表入库；两读/抽核/只增不改/全套检查与12案例回归通过')
                     staged_index+=1
         except (TimeoutError,ValueError) as exc:
             for r in outcomes:
