@@ -63,6 +63,20 @@ class IngestKaoyanLinesTest(unittest.TestCase):
   self.run_ingest()
   with sqlite3.connect(self.path) as c:
    self.assertEqual(c.execute("SELECT component,value FROM ky_line_component").fetchall(),[('single_150',68.0)])
+ def test_standard_score_is_not_initial_total(self):
+  self.m['rows'][0]['row']['total']=None
+  self.m['rows'][0]['scope_kind']='专项资格规则'
+  self.m['rows'][0]['components']={'standard_score':126}
+  self.run_ingest()
+  with sqlite3.connect(self.path) as c:
+   self.assertIsNone(c.execute('SELECT total FROM ky_retest_line').fetchone()[0])
+   self.assertEqual(c.execute('SELECT component,value FROM ky_line_component').fetchall(),[('standard_score',126.0)])
+ def test_combined_exam_condition_is_not_single_subject(self):
+  self.m['rows'][0]['components']={'exam_1_2_3_sum':178}
+  self.run_ingest()
+  with sqlite3.connect(self.path) as c:
+   self.assertIsNone(c.execute('SELECT politics FROM ky_retest_line').fetchone()[0])
+   self.assertEqual(c.execute('SELECT component,value FROM ky_line_component').fetchall(),[('exam_1_2_3_sum',178.0)])
  def test_conflicting_record_rejected_and_rollback(self):
   self.run_ingest();m=copy.deepcopy(self.m);m['rows'][0]['row']['total']=301
   with self.assertRaisesRegex(ValueError,'冲突'):self.run_ingest(m)

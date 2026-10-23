@@ -61,6 +61,20 @@ class IngestKaoyanCatalogTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, '代码'):
             mod.ingest(self.path, m)
 
+    def test_official_prefixed_code_preserved(self):
+        m = copy.deepcopy(self.m)
+        m['rows'][0]['program_code'] = 'S145300'
+        self.assertEqual(mod.ingest(self.path, m)['rows_inserted'], 1)
+        with sqlite3.connect(self.path) as c:
+            self.assertEqual(c.execute('SELECT program_code FROM ky_program_year').fetchone()[0], 'S145300')
+
+    def test_unknown_prefix_not_normalized(self):
+        for code in ('X145300', 'S14530', 'S1453000'):
+            m = copy.deepcopy(self.m)
+            m['rows'][0]['program_code'] = code
+            with self.subTest(code=code), self.assertRaisesRegex(ValueError, '代码'):
+                mod.ingest(self.path, m)
+
     def test_only_candidate(self):
         with self.assertRaises(ValueError):
             mod.ingest(self.path.with_name('education.sqlite'), self.m)
