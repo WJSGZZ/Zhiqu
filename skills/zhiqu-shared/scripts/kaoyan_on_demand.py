@@ -369,7 +369,7 @@ def run_request(request, *, fetch=fetch_public, publisher=validate_and_publish, 
     coverage=list(csv.DictReader(coverage_path.open())) if coverage_path.exists() else []
     stop_path=Path(request['stop_ledger'])if request.get('stop_ledger')else None
     old_stops=json.loads(stop_path.read_text())if stop_path and stop_path.exists()else []
-    known_stops={r['url']for r in old_stops}
+    known_stops={r['url']for r in old_stops if r.get('stop_category')in RESTRICTED}
     cached=lookup_fn(request['database'],identity,request['programs'],request['years'],request['layers'],coverage)
     outcomes=[];manifests=[];seen=set();stopped_hosts=set();attempts=[];bodies={}
     def checkpoint():
@@ -415,6 +415,12 @@ def run_request(request, *, fetch=fetch_public, publisher=validate_and_publish, 
                         if stop_path:
                             old_stops.append({'url':url,'stop_category':category,'basis':str(out/'fetch-receipts.json')});write_json(stop_path,old_stops)
                     continue
+                final_url=item.get('url',url)
+                safe_url(final_url)
+                if not official_url(final_url,entry):
+                    result['reason']='原入口跳转到未经确认的域名；未解析、未入库'
+                    checkpoint();continue
+                url=final_url
                 body=item['body'];deadline()
                 if b'<html' in body[:3000].lower():queue.extend(navigation_links(body,url,identity['name'],entry))
                 reviewed_result=reviewed_manifest(body,url,layer,reviewed)

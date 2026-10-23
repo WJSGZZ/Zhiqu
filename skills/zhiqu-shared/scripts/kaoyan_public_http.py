@@ -76,7 +76,7 @@ def public_receipt(url,item,attempts,reason):
 def stop_category(reason,http_status=None):
  """Classify actual status/reason, never digits in a URL or fingerprint."""
  s=str(reason or'')
- for p,k in [(r'请求保护|(?:^|\s)(?:site_|global_|interval)[a-z_]*','shared_guard'),('登录|login','login'),('验证|captcha|challenge|环境检测','verification')]:
+ for p,k in [(r'请求保护|(?:^|\s)(?:site_|global_|interval)[a-z_]*','shared_guard'),('登录|login','login'),('验证|captcha|challenge|环境检测|浏览器校验|安全校验|人机校验','verification')]:
   if re.search(p,s,re.I):return k
  try:code=int(http_status)if http_status is not None else None
  except (ValueError,TypeError):code=None

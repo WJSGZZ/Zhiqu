@@ -69,6 +69,7 @@ class PublicHTTPTests(unittest.TestCase):
                 self.assertEqual(http.stop_category('transfer failed',code),category)
                 self.assertEqual(http.stop_category('HTTP '+str(code)),category)
         self.assertEqual(http.stop_category('浏览器环境检测',200),'verification')
+        self.assertEqual(http.stop_category('浏览器校验页（需确认交互）',200),'verification')
         self.assertEqual(http.stop_category('请求保护暂停 site_hour_budget',200),'shared_guard')
 
     def test_receipt_uses_actual_status_and_success_has_no_stop_category(self):

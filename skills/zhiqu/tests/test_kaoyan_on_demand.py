@@ -129,6 +129,30 @@ class OnDemandTests(unittest.TestCase):
         self.assertEqual(summary['outcomes'][0]['attempted_entries'],[])
         self.assertEqual(summary['outcomes'][0]['not_retried_entries'],[URL])
 
+    def test_old_tls_failure_is_not_a_permanent_captcha_stop(self):
+        ledger=self.root/'stops.json'
+        ledger.write_text(json.dumps([{'url':URL,'stop_category':'tls'}]))
+        self.request['stop_ledger']=str(ledger)
+        summary,fetch,publisher=self.run_fake()
+        fetch.assert_called_once();publisher.assert_called_once()
+        self.assertEqual(summary['outcomes'][0]['status'],'obtained')
+
+    def test_unconfirmed_redirect_cannot_become_official_source(self):
+        fetch=Mock(return_value=({'body':line_page(),'url':'https://unconfirmed.example/a'},
+                                 {'status':'retrieved'}))
+        summary,fetch,publisher=self.run_fake(fetch=fetch)
+        publisher.assert_not_called()
+        self.assertEqual(summary['outcomes'][0]['status'],'not fetched')
+        self.assertIn('未经确认的域名',summary['outcomes'][0]['reason'])
+
+    def test_confirmed_redirect_uses_actual_original_url(self):
+        final_url=URL+'?actual=1'
+        fetch=Mock(return_value=({'body':line_page(),'url':final_url},{'status':'retrieved'}))
+        summary,fetch,publisher=self.run_fake(fetch=fetch)
+        self.assertEqual(summary['outcomes'][0]['status'],'obtained')
+        manifest=json.loads((self.root/'out/reviewed-manifest-1.json').read_text())['manifest']
+        self.assertEqual(manifest['sources'][0]['landing_url'],final_url)
+
     def test_roster_title_is_not_copied_into_any_statistic(self):
         private_title='合成大学2026年硕士拟录取名单（合成人名甲等）'
         blob=roster(3).replace('合成大学2026年硕士拟录取名单'.encode(),private_title.encode())
