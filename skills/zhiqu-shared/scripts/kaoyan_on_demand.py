@@ -387,7 +387,7 @@ def run_request(request, *, fetch=fetch_public, publisher=validate_and_publish, 
         # then graduate/school site, then the proven document/college page.
         queue=[entry.get(k,'') for k in ['chsi_profile_url','graduate_site_url','school_homepage_url','known_official_document_entry_url']]
         queue += request.get('entries',[])
-        result=dict(cell,status='not fetched',reason='未定位可双读的官方原表',attempted_entries=[])
+        result=dict(cell,status='not fetched',reason='未定位可双读的官方原表',attempted_entries=[],entry_results=[])
         while queue:
             try:deadline()
             except TimeoutError:
@@ -450,6 +450,13 @@ def run_request(request, *, fetch=fetch_public, publisher=validate_and_publish, 
                 result.update(reason='单校时间限制，未验收部分不发布');break
             except Exception:
                 result['reason']='公开入口取文或解析失败；未保存原文异常内容'
+            finally:
+                # Keep each actual entry's outcome: the last TLS failure must
+                # not hide an earlier readable page whose scope was unconfirmed.
+                result['entry_results'].append({'url':url,'reason':result['reason']})
+        if result['status']=='not fetched' and result['entry_results']:
+            reasons=list(dict.fromkeys([r['reason']for r in result['entry_results']]+[result['reason']]))
+            result['reason']='逐入口未取得原因：'+'；'.join(reasons)
         outcomes.append(result)
         checkpoint()
         if deadline.remaining()<=0:break

@@ -145,6 +145,22 @@ class OnDemandTests(unittest.TestCase):
         self.assertEqual(summary['outcomes'][0]['status'],'not fetched')
         self.assertIn('未经确认的域名',summary['outcomes'][0]['reason'])
 
+    def test_last_tls_failure_does_not_hide_readable_unconfirmed_page(self):
+        second=URL+'?second=1'
+        self.request['entries']=[URL,second]
+        wrong=page('<p>公开学校介绍，没有所问年份的硕士原表。</p>', '合成大学学校介绍')
+        fetch=Mock(side_effect=[({'body':wrong,'url':URL},{'http_status':200}),
+                                (None,{'stop_category':'tls'})])
+        summary,fetch,publisher=self.run_fake(fetch=fetch)
+        result=summary['outcomes'][0]
+        publisher.assert_not_called()
+        self.assertEqual(len(result['entry_results']),2)
+        self.assertIn('原页标题',result['entry_results'][0]['reason'])
+        self.assertIn('tls',result['entry_results'][1]['reason'])
+        self.assertIn('原页标题',result['reason'])
+        self.assertIn('tls',result['reason'])
+        self.assertIn('原页标题',(self.root/'out'/'README.md').read_text())
+
     def test_confirmed_redirect_uses_actual_original_url(self):
         final_url=URL+'?actual=1'
         fetch=Mock(return_value=({'body':line_page(),'url':final_url},{'status':'retrieved'}))
