@@ -70,6 +70,24 @@ def state_json(v,fields):
   if not isinstance(s,dict) or s.get('status') not in STATUSES or not str(s.get('reason') or '').strip():raise ValueError('value_status须有明确status与reason')
  return dump(statuses)
 
+def validate_numeric_coverage(review):
+ """Check declared original-region coverage; equality of extracted grids alone is insufficient."""
+ pages=review.get('numeric_coverage')
+ if pages is None:return
+ if not isinstance(pages,list) or not pages:raise ValueError('原页数字归属证明不能为空')
+ fields={'page','a_observed','b_observed','a_assigned','b_assigned','a_unassigned','b_unassigned','a_multiset_equal','b_multiset_equal'}
+ seen=set();total=0
+ for page in pages:
+  if not isinstance(page,dict) or set(page)!=fields:raise ValueError('原页数字归属字段不完整')
+  numbers=fields-{'a_multiset_equal','b_multiset_equal'}
+  if any(type(page[k]) is not int or page[k]<0 for k in numbers):raise ValueError('原页数字归属计数须为非负整数')
+  if page['page']<1 or page['page'] in seen:raise ValueError('原页数字归属页码重复或无效')
+  seen.add(page['page']);total+=page['a_observed']
+  if page['a_multiset_equal'] is not True or page['b_multiset_equal'] is not True or page['a_unassigned'] or page['b_unassigned'] or len({page[k] for k in ('a_observed','b_observed','a_assigned','b_assigned')})!=1:
+   raise ValueError('原页数字未全部归属；两读相同也不能放行漏行')
+ if not total:raise ValueError('原页数字归属证明没有数值，不能证明数值表完整')
+
+
 def validate_reviews(manifest,sources):
  groups=collections.defaultdict(list);allids=set();datasets=manifest['datasets']
  for dataset in datasets:
@@ -80,6 +98,7 @@ def validate_reviews(manifest,sources):
   if not isinstance(rows,list) or not rows:raise ValueError('dataset须有数据行')
   if not isinstance(review,dict) or review.get('status')!='approved':raise ValueError('dataset必须经主审批准')
   if review.get('read_method') not in {'text','image'}:raise ValueError('read_method须明确text/image')
+  validate_numeric_coverage(review)
   for k in ('original_data_rows','extracted_rows'):
    if not isinstance(review.get(k),int) or isinstance(review[k],bool) or review[k]!=len(rows):raise ValueError('原表数据行数/提取行数/清单行数不相符')
   if not isinstance(review.get('samples'),list):raise ValueError('须提供已批准抽样')
@@ -252,7 +271,11 @@ def ingest(database,manifest):
       context_status.update(supplied)
      ctx['value_status']=state_json(context_status,tuple(context_status))
      result['context_inserted']+=exact(c,'gk_yfyd_context',ctx,list(key))
-    evidence={'record_id':rid,'table_name':table,'source_id':sid,'excerpt_locator_json':dump({'business_key':key,'scope':item['scope'],'locator':item['locator'],'excerpt':item['excerpt'],'review':{k:v for k,v in dataset['review'].items() if k!='samples'},'review_samples_sha256':review_samples_sha256})}
+    review_meta={k:v for k,v in dataset['review'].items() if k not in {'samples','numeric_coverage'}}
+    if dataset['review'].get('numeric_coverage') is not None:
+     # Keep the source-level proof once in the approved batch; bind each row by digest.
+     review_meta['numeric_coverage_sha256']=hashlib.sha256(dump(dataset['review']['numeric_coverage']).encode()).hexdigest()
+    evidence={'record_id':rid,'table_name':table,'source_id':sid,'excerpt_locator_json':dump({'business_key':key,'scope':item['scope'],'locator':item['locator'],'excerpt':item['excerpt'],'review':review_meta,'review_samples_sha256':review_samples_sha256})}
     result['evidence_inserted']+=exact(c,'gk_official_original_evidence',evidence,['record_id'],schema='audit')
     # Actually resolve each audit record to its exact business key before commit.
     e=c.execute('SELECT table_name,source_id,excerpt_locator_json FROM audit.gk_official_original_evidence WHERE record_id=?',(rid,)).fetchone()
