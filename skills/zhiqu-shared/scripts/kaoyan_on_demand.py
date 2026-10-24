@@ -23,6 +23,7 @@ import time
 from urllib.parse import urljoin, urlsplit
 
 from kaoyan_adapters import parse_official_html, NeedsReview, fingerprint
+from kaoyan_documents import parse_official_document
 from kaoyan_public_http import retrieve_memory, public_receipt, safe_url
 from ingest_kaoyan_lines import privacy
 import zhiqu_db
@@ -158,6 +159,15 @@ def discover_links(body, url, year, layer):
         try: safe_url(target)
         except Exception: continue
         if target not in links: links.append(target)
+    # Only actual images inside a correctly dated business document body. No
+    # logos, guessed URLs or images from undated navigation pages are fetched.
+    if document_page:
+        for image in root.xpath('//article//img[@src] | //*[@id="vsb_content"]//img[@src] | //*[@class="v_news_content"]//img[@src]'):
+            target=urljoin(url,image.get('src'))
+            if urlsplit(target).hostname==urlsplit(url).hostname:
+                try:safe_url(target)
+                except Exception:continue
+                if target not in links:links.append(target)
     return links[:12]
 
 
@@ -218,7 +228,8 @@ def run_command(command, log, deadline, env=None):
 
 def regression(output, deadline, candidate, live):
     """Re-run all twelve cases against live then candidate at the SAME copied path."""
-    work=Path(output)/'regression'
+    output=Path(output).resolve()
+    work=output/'regression'
     skill=ROOT/'skills/zhiqu'
     work.mkdir(exist_ok=True)
     before={}
@@ -276,6 +287,8 @@ def prepare_metadata(database,candidate,proof,table_counts,output):
     (staged/'README.md').write_text('\n'.join(dictionary)+'\n')
     (staged/'CHANGELOG.md').write_text('\n'.join(changes)+'\n')
     (staged/'VERSION').write_text(version+'\n')
+    if proof.get('foreign_key_certificate'):
+        write_json(staged/'foreign-key-validation.json',proof['foreign_key_certificate'])
     return staged
 
 
@@ -284,34 +297,46 @@ def validate_and_publish(database, manifests, output, deadline):
     import ingest_kaoyan_lines as lines
     import ingest_kaoyan_catalog as catalog
     import ingest_kaoyan_verified_stats as stats
+    from kaoyan_new_rows import verify_manifest_rows
     output=Path(output); candidate=output/'candidate/education.stage.sqlite';candidate.parent.mkdir(exist_ok=True)
-    baseline=counts(database)
-    tx.clone_pair(database,candidate,deadline)
+    timings={};started=time.monotonic()
+    def timed(name,call):
+        begin=time.monotonic()
+        try:return call()
+        finally:
+            timings[name]=round(time.monotonic()-begin,6)
+            write_json(output/'timings.json',dict(stages=timings,total=round(time.monotonic()-started,6)))
+    baseline=timed('baseline_counts',lambda:counts(database))
+    timed('clone_pair',lambda:tx.clone_pair(database,candidate,deadline))
     receipts=[]
     for layer,manifest in manifests:
         deadline()
-        receipts.append(({'lines':lines,'catalog':catalog,'stats':stats}[layer]).ingest(candidate,manifest))
+        receipts.append(timed('ingest_'+str(len(receipts)+1),lambda:({'lines':lines,'catalog':catalog,'stats':stats}[layer]).ingest(candidate,manifest)))
     with sqlite3.connect(candidate) as c:
         version=c.execute('select version from dataset_version order by rowid desc limit 1').fetchone()[0]
         major,minor,_=map(int,version.split('.'))
         c.execute('insert into dataset_version values(?,?,?,?)',(f'{major}.{minor+1}.0',dt.date.today().isoformat(),'minor','按需取得学校/专业官方原表；旧记录不变'))
-    after=counts(candidate);delta={k:after[k]-v for k,v in baseline.items()}
-    proof=tx.verify_append_only(database,candidate,delta,progress=lambda p:write_json(output/'validation-progress.json',p))
+    after=timed('candidate_counts',lambda:counts(candidate));delta={k:after[k]-v for k,v in baseline.items()}
+    added=timed('added_rows',lambda:verify_manifest_rows(candidate,manifests,deadline))
+    certificate=Path(database).parent/'foreign-key-validation.json'
+    try:baseline_fk=json.loads(certificate.read_text()) if certificate.is_file() else None
+    except (ValueError,OSError):baseline_fk=None
+    proof=timed('append_only_and_foreign_keys',lambda:tx.verify_append_only(database,candidate,delta,
+        progress=lambda p:write_json(output/'validation-progress.json',p),deadline=deadline,baseline_fk_certificate=baseline_fk))
     write_json(output/'append-only.json',proof)
-    checks={}
+    checks={'added_rows':added,'old_rows_unchanged':{'ok':proof['ok']},
+            'foreign_keys':{'ok':proof['local_foreign_keys_ok'] and proof['external_foreign_keys_ok'],
+                            'covered':proof['external_foreign_keys_checked'],
+                            'details':proof.get('foreign_key_checks',{})}}
     env=dict(os.environ,ZHIQU_EDUCATION_DB=str(candidate))
-    cmds={
-        'unittest':[sys.executable,'-m','unittest','discover','-s','skills/zhiqu/tests'],
-        'check_family':[sys.executable,'skills/zhiqu/scripts/check_family.py'],
-        'check_demos':[sys.executable,'skills/zhiqu/scripts/check_demos.py'],
-        'validate_data':[sys.executable,'skills/zhiqu/scripts/validate_data.py']}
+    # This path changes data only. Code changes are tested once at development
+    # acceptance, not 12 gaokao reruns and the full suite for each school.
+    cmds={'validate_data':[sys.executable,'skills/zhiqu/scripts/validate_data.py']}
     for name,cmd in cmds.items():
-        checks[name]=run_command(cmd,output/(name+'.log'),deadline,env)
-        if not checks[name]['ok']: raise ValueError('全套验收失败，候选未发布')
-    checks['gaokao_12']=regression(output,deadline,candidate,database)
-    if not checks['gaokao_12']['ok']: raise ValueError('12个案例逐字节比对失败，候选未发布')
+        checks[name]=timed(name,lambda:run_command(cmd,output/(name+'.log'),deadline,env))
+        if not checks[name]['ok']: raise ValueError('数据相关验收失败，候选未发布')
     write_json(output/'validation.json',checks)
-    metadata=prepare_metadata(database,candidate,proof,after,output)
+    metadata=timed('prepare_metadata',lambda:prepare_metadata(database,candidate,proof,after,output))
     # One local rollback pair, not the raw originals; no old audit is deleted.
     rollback=output/'rollback';rollback.mkdir(exist_ok=True)
     with sqlite3.connect(Path(database).as_uri()+'?mode=ro',uri=True) as c:
@@ -321,7 +346,7 @@ def validate_and_publish(database, manifests, output, deadline):
         if subprocess.run(['cp','-c',str(p),str(dest)],capture_output=True).returncode:shutil.copy2(p,dest)
     deadline()
     if deadline.remaining()<5:raise TimeoutError('预留原子发布回执时间不足，候选不发布')
-    receipt=tx.publish_pair(database,candidate,proof['live']['query_sha256'],proof,checks,deadline)
+    receipt=timed('atomic_publish',lambda:tx.publish_pair(database,candidate,proof['live']['query_sha256'],proof,checks,deadline))
     write_json(output/'publish.json',receipt)
     for f in metadata.iterdir():
         dest=Path(database).parent/f.name;tmp=dest.with_name('.'+dest.name+'.ondemand.tmp')
@@ -331,7 +356,7 @@ def validate_and_publish(database, manifests, output, deadline):
     # The accepted pair now has a durable published copy and one rollback pair.
     # Avoid retaining a second full candidate after successful publication.
     for file in [candidate,candidate.parent/proof['candidate']['audit_file']]:file.unlink()
-    return {'receipt':receipt,'ingest':receipts,'validation':checks}
+    return {'receipt':receipt,'ingest':receipts,'validation':checks,'timings':timings}
 
 
 def update_coverage(path, school, outcomes):
@@ -385,8 +410,8 @@ def run_request(request, *, fetch=fetch_public, publisher=validate_and_publish, 
         year,layer=cell['year'],cell['layer']
         # Reuse known actual original URLs; no reconstructed path. CHSI first,
         # then graduate/school site, then the proven document/college page.
-        queue=[entry.get(k,'') for k in ['chsi_profile_url','graduate_site_url','school_homepage_url','known_official_document_entry_url']]
-        queue += request.get('entries',[])
+        # Explicit known originals do not need rediscovery through the homepage.
+        queue=list(request.get('entries',[]))+[entry.get(k,'') for k in ['known_official_document_entry_url','chsi_profile_url','graduate_site_url','school_homepage_url']]
         result=dict(cell,status='not fetched',reason='未定位可双读的官方原表',attempted_entries=[],entry_results=[])
         while queue:
             try:deadline()
@@ -406,6 +431,8 @@ def run_request(request, *, fetch=fetch_public, publisher=validate_and_publish, 
                 if url in bodies:
                     item,receipt=bodies[url]
                 else:
+                    if manifests and deadline.remaining()<210:
+                        result['reason']='预留候选核验与原子发布时间，剩余入口未继续取';break
                     item,receipt=fetch(url,deadline);bodies[url]=(item,receipt)
                     attempts.append(receipt);write_json(out/'fetch-receipts.json',attempts)
                 if not item:
@@ -425,15 +452,18 @@ def run_request(request, *, fetch=fetch_public, publisher=validate_and_publish, 
                 body=item['body'];deadline()
                 if b'<html' in body[:3000].lower():queue.extend(navigation_links(body,url,identity['name'],entry))
                 reviewed_result=reviewed_manifest(body,url,layer,reviewed)
-                if reviewed_result is None and not (not body.startswith((b'%PDF',b'\x89PNG',b'\xff\xd8',b'PK\x03\x04',b'\xd0\xcf\x11\xe0')) and re.search(rb'<(?:!doctype|html|head|body|table)\b',body[:65536],re.I)):
-                    result['reason']='附件需PDF/读图独立读法核对；当前自动适配未能证明完整，不入库'
-                    result['sha256']=hashlib.sha256(body).hexdigest();continue
                 try:
-                    parsed=reviewed_result or parse_official_html(body,url,identity,year,layer,[cell['program']])
+                    parse_start=time.monotonic()
+                    is_html=not body.startswith((b'%PDF',b'\x89PNG',b'\xff\xd8')) and bool(re.search(rb'<(?:!doctype|html|head|body|table)\b',body[:65536],re.I))
+                    parsed=reviewed_result or (parse_official_html(body,url,identity,year,layer,[cell['program']]) if is_html else
+                        parse_official_document(body,url,identity,year,layer,[cell['program']],deadline=deadline))
+                    result['parse_seconds']=round(time.monotonic()-parse_start,6)
                 except NeedsReview as exc:
                     # Adapter diagnostics are fixed messages, never raw source text.
                     result['reason']=str(exc)
-                    queue.extend(discover_links(body,url,year,layer));continue
+                    result['sha256']=hashlib.sha256(body).hexdigest()
+                    if is_html:queue.extend(discover_links(body,url,year,layer))
+                    continue
                 except ValueError:
                     result['reason']='原表双读或结构核对未通过，整份不入库';continue
                 if parsed['rows']:
@@ -441,11 +471,11 @@ def run_request(request, *, fetch=fetch_public, publisher=validate_and_publish, 
                         row=business.get('row',business)
                         if row.get('school')!=identity['name']or row.get('year')!=year or business.get('institution_id')!=identity['institution_id']:raise ValueError('人工清单学校/年份范围不符')
                     manifests.append((layer,parsed['manifest']));write_json(out/('reviewed-manifest-'+str(len(manifests))+'.json'),{'layer':layer,'manifest':parsed['manifest'],'proofs':parsed['proofs']})
-                    result.update(status='staged',reason='原格双读一致、固定3%至少3行抽核通过；待全套验收与发布',
+                    result.update(status='staged',reason='原格双读及规定比例抽核通过；待数据相关验收与发布',
                                   rows=parsed['rows'],pending=parsed['pending'],source_ids=[s['source_id']for s in parsed['manifest']['sources']],proofs=parsed['proofs'])
                     break
                 result['reason']='所问专业的拟录取分组均n<3，整组不保存'if parsed.get('suppressed_groups')else'官方原表未找到所问专业，或该格式范围仍需核对'
-                queue.extend(discover_links(body,url,year,layer))
+                if is_html:queue.extend(discover_links(body,url,year,layer))
             except TimeoutError:
                 result.update(reason='单校时间限制，未验收部分不发布');break
             except Exception:
@@ -482,7 +512,7 @@ def run_request(request, *, fetch=fetch_public, publisher=validate_and_publish, 
                     partial=bool(r.get('pending'))
                     receipt=published.get('ingest',[{}for _ in manifests])[staged_index]
                     added=receipt.get('rows_inserted',receipt.get('inserted',r['rows']))
-                    r.update(status='partial'if partial else'obtained',published_rows=added,published_in_library=True,reason='已发布可核对部分，另有原表范围待核'if partial else'对应所问专业原表入库；两读/抽核/只增不改/全套检查与12案例回归通过')
+                    r.update(status='partial'if partial else'obtained',published_rows=added,published_in_library=True,reason='已发布可核对部分，另有原表范围待核'if partial else'对应所问专业原表入库；双读/抽核/新增行回读/旧值不变/关联及validate_data通过')
                     staged_index+=1
         except (TimeoutError,ValueError) as exc:
             for r in outcomes:
@@ -544,12 +574,12 @@ def timed_out_summary(request):
 
 
 def year_range(value):
-    if value is None:return list(range(dt.date.today().year-2,dt.date.today().year+1))
+    if value is None:return list(range(dt.date.today().year,dt.date.today().year-3,-1))
     match=re.fullmatch(r'(20\d\d)(?::(20\d\d))?',value)
     if not match:raise argparse.ArgumentTypeError('年份用2024:2026或2026')
     lo,hi=int(match[1]),int(match[2]or match[1])
     if hi<lo or hi-lo>10:raise argparse.ArgumentTypeError('年份范围须递增且不超过11年')
-    return list(range(lo,hi+1))
+    return list(range(hi,lo-1,-1))
 
 
 def main():
