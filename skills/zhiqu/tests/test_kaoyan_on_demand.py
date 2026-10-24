@@ -97,6 +97,31 @@ class OnDemandTests(unittest.TestCase):
         with patch.object(tool.zhiqu_db, '_open', side_effect=self.opened):
             return tool.lookup(self.db, IDENTITY, ['0854'], [2026], ['lines'], coverage)
 
+    def test_pdf_attachment_reaches_automatic_reader_and_publisher(self):
+        parsed=adapters.parse_official_html(line_page(),URL,IDENTITY,2026,'lines',['0854'])
+        fetch=Mock(return_value=({'body':b'%PDF-real-content','url':URL},{'url':URL,'http_status':200}))
+        with patch.object(tool,'parse_official_document',return_value=parsed)as reader:
+            summary,_,publisher=self.run_fake(fetch=fetch)
+        self.assertEqual(reader.call_count,1)
+        self.assertTrue(summary['published'])
+        self.assertEqual(publisher.call_count,1)
+        self.assertIn('数据相关',summary['outcomes'][0]['entry_results'][0]['reason'])
+
+    def test_pdf_mismatch_is_a_gap_and_no_publication(self):
+        fetch=Mock(return_value=({'body':b'%PDF-real-content','url':URL},{'url':URL,'http_status':200}))
+        with patch.object(tool,'parse_official_document',side_effect=adapters.NeedsReview('第三读抽核不一致，整份未入')):
+            summary,_,publisher=self.run_fake(fetch=fetch)
+        self.assertFalse(summary['published']);publisher.assert_not_called()
+        self.assertIn('第三读',summary['outcomes'][0]['reason'])
+
+    def test_unanchored_catalogue_numeric_row_cannot_disappear(self):
+        body=page('<table><tr><th>专业代码</th><th>专业名称</th><th>招生人数</th></tr>'
+                  '<tr><td>085404</td><td>计算机技术</td><td>10</td></tr>'
+                  '<tr><td></td><td>未明确归属的续行</td><td>3</td></tr></table>',
+                  '合成大学2026年硕士招生专业目录')
+        with self.assertRaisesRegex(adapters.NeedsReview,'专业代码不明确'):
+            adapters.parse_official_html(body,URL,IDENTITY,2026,'catalog',['0854'])
+
     def test_line_retains_explicit_subjects_without_inventing_shared_subject(self):
         blob=page('<table><tr><th>专业代码</th><th>总分</th><th>政治</th><th>英语</th><th>单科（满分&gt;100分）</th></tr><tr><td>085404</td><td>300</td><td>40</td><td>45</td><td>60</td></tr></table>')
         parsed=adapters.parse_official_html(blob,URL,IDENTITY,2026,'lines',['0854'])
@@ -536,8 +561,8 @@ class OnDemandTests(unittest.TestCase):
             def today(cls):
                 return actual_date(2026, 10, 23)
         with patch.object(tool.dt, 'date', Today):
-            self.assertEqual(tool.year_range(None), [2024, 2025, 2026])
-        self.assertEqual(tool.year_range('2025:2026'), [2025, 2026])
+            self.assertEqual(tool.year_range(None), [2026, 2025, 2024])
+        self.assertEqual(tool.year_range('2025:2026'), [2026, 2025])
 
 
 if __name__ == '__main__':
