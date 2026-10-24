@@ -56,6 +56,24 @@ class IngestGaokaoOfficialTest(unittest.TestCase):
    self.assertFalse(c.execute('PRAGMA foreign_key_check').fetchall())
   self.assertEqual(self.snapshot(),before)
   self.assertEqual(self.ingest()['existing'],3)
+ def coverage(self,**changes):
+  page=dict(page=1,a_observed=9,b_observed=9,a_assigned=9,b_assigned=9,a_unassigned=0,b_unassigned=0,a_multiset_equal=True,b_multiset_equal=True)
+  page.update(changes);return [page]
+ def test_shared_grid_omission_rejected_even_when_both_readers_agree(self):
+  # Both grid readers lose the first data row below an external header.
+  self.m['datasets'][0]['review']['numeric_coverage']=self.coverage(a_observed=12,b_observed=12,a_unassigned=3,b_unassigned=3,a_multiset_equal=False,b_multiset_equal=False)
+  with self.assertRaisesRegex(ValueError,'未全部归属'):self.ingest()
+  with sqlite3.connect(self.path)as c:self.assertEqual(c.execute('SELECT count(*) FROM source').fetchone()[0],0)
+ def test_complete_numeric_coverage_keeps_only_proof_digest_per_fact(self):
+  cov=self.coverage();self.m['datasets'][0]['review']['numeric_coverage']=cov
+  self.assertEqual(self.ingest()['inserted'],3)
+  with sqlite3.connect(self.audit)as c:
+   review=json.loads(c.execute('SELECT excerpt_locator_json FROM gk_official_original_evidence LIMIT 1').fetchone()[0])['review']
+  self.assertNotIn('numeric_coverage',review);self.assertEqual(len(review['numeric_coverage_sha256']),64)
+ def test_numeric_coverage_rejects_forged_counts_and_inconsistent_readers(self):
+  for cov in [[],self.coverage(a_assigned=True),self.coverage(b_observed=10),self.coverage(a_multiset_equal=False),self.coverage()+self.coverage()]:
+   with self.subTest(cov=cov),self.assertRaisesRegex(ValueError,'数字归属|未全部归属'):
+    mod.validate_numeric_coverage(dict(numeric_coverage=cov))
  def test_decimal_score_without_original_scope_is_rejected(self):
   self.m['datasets'][0]['rows'][0]['data']['score']=99.75
   with self.assertRaisesRegex(ValueError,'小数分'):self.ingest()
