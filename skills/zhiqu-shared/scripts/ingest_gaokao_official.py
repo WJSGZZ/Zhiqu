@@ -105,6 +105,18 @@ def excluded_image_rows(review,digest):
   keys.add(key)
  return keys
 
+
+def coverage_records(manifest):
+ """One compact source/table coverage declaration; no copied accepted rows."""
+ groups=collections.defaultdict(list)
+ for d in manifest['datasets']:groups[d['source_id'],d['table']].append(d)
+ for (sid,table),datasets in groups.items():
+  missing=[{'page':e['locator']['page'],'table':e['locator']['table'],'row':e['locator']['row'],'reason':e['reason']} for d in datasets for e in d['review'].get('excluded_rows',[])]
+  original=sum(d['review']['original_data_rows'] for d in datasets)
+  partial=bool(missing) or any(d['review'].get('scope_complete') is False for d in datasets)
+  value={'source_id':sid,'table_name':table,'status':'partial' if partial else 'obtained','original_rows':original,'accepted_rows':sum(len(d['rows']) for d in datasets),'missing_rows':missing,'missing_scope':'；'.join(dict.fromkeys(str(d['review'].get('scope_gap') or '') for d in datasets if d['review'].get('scope_gap')))}
+  yield 'gk_source_coverage:'+sid+':'+table+':'+hashlib.sha256(dump(value).encode()).hexdigest(),dump(value)
+
 def validate_reviews(manifest,sources):
  groups=collections.defaultdict(list);allids=set();datasets=manifest['datasets']
  for dataset in datasets:
@@ -222,7 +234,7 @@ def ingest(database,manifest):
   if not re.fullmatch('[0-9a-f]{64}',source.get('archive_sha256') or ''):raise ValueError('须有原件SHA256')
   sources[source['source_id']]=source
  validate_reviews(manifest,sources)
- result={'tables':{},'inserted':0,'existing':0,'sources_inserted':0,'evidence_inserted':0,'context_inserted':0,'scope_inserted':0,'validated_business_links':[]}
+ result={'tables':{},'inserted':0,'existing':0,'sources_inserted':0,'evidence_inserted':0,'context_inserted':0,'scope_inserted':0,'coverage_inserted':0,'validated_business_links':[]}
  c=sqlite3.connect(path);c.execute('PRAGMA foreign_keys=ON')
  try:
   config=dict(c.execute('SELECT key,value FROM storage_manifest'));name=config.get('audit_file','')
@@ -232,7 +244,7 @@ def ingest(database,manifest):
   c.execute('ATTACH DATABASE ? AS audit',(str(audit),));generation=c.execute("SELECT value FROM audit.storage_manifest WHERE key='generation'").fetchone()
   if not generation or generation[0]!=config.get('generation'):raise ValueError('查询与审计库代号不一致')
   c.execute('BEGIN IMMEDIATE');creating={'active':True}
-  allowed_main={'gk_yfyd_bucket','source','gk_official_yfyd','gk_official_cutoff','gk_yfyd_context','gk_batch_line','gk_official_plan','official_cutoff_scope','source_format_reference','storage_object','storage_moved','storage_external_fk'}
+  allowed_main={'meta','gk_yfyd_bucket','source','gk_official_yfyd','gk_official_cutoff','gk_yfyd_context','gk_batch_line','gk_official_plan','official_cutoff_scope','source_format_reference','storage_object','storage_moved','storage_external_fk'}
   def guard(action,a,b,db,trigger):
    if action in (sqlite3.SQLITE_UPDATE,sqlite3.SQLITE_DELETE):return sqlite3.SQLITE_OK if creating['active'] and a=='sqlite_master' and trigger is None else sqlite3.SQLITE_DENY
    if action==sqlite3.SQLITE_INSERT:
@@ -310,7 +322,12 @@ def ingest(database,manifest):
      # Keep the source-level proof once in the approved batch; bind each row by digest.
      review_meta['numeric_coverage_sha256']=hashlib.sha256(dump(dataset['review']['numeric_coverage']).encode()).hexdigest()
     evidence={'record_id':rid,'table_name':table,'source_id':sid,'excerpt_locator_json':dump({'business_key':key,'scope':item['scope'],'locator':item['locator'],'excerpt':item['excerpt'],'review':review_meta,'review_samples_sha256':review_samples_sha256})}
-    result['evidence_inserted']+=exact(c,'gk_official_original_evidence',evidence,['record_id'],schema='audit')
+    if added:
+     result['evidence_inserted']+=exact(c,'gk_official_original_evidence',evidence,['record_id'],schema='audit')
+    else:
+     prior=c.execute('SELECT table_name,source_id,excerpt_locator_json FROM audit.gk_official_original_evidence WHERE record_id=?',(rid,)).fetchone()
+     payload=json.loads(prior[2]) if prior else {}
+     if not prior or prior[0]!=table or prior[1]!=sid or payload.get('business_key')!=key or dump(payload.get('excerpt'))!=dump(item['excerpt']) or dump(payload.get('locator'))!=dump(item['locator']):raise ValueError('冲突：已有业务行的原文/位置不能被新复核改写')
     # Actually resolve each audit record to its exact business key before commit.
     e=c.execute('SELECT table_name,source_id,excerpt_locator_json FROM audit.gk_official_original_evidence WHERE record_id=?',(rid,)).fetchone()
     if not e or e[0]!=table or e[1]!=sid or json.loads(e[2])['business_key']!=key:raise ValueError('逐行审计绑定不一致')
@@ -319,6 +336,7 @@ def ingest(database,manifest):
     count=c.execute('SELECT count(*) FROM "'+table+'" WHERE '+where,args).fetchone()[0]
     if count!=1:raise ValueError('逐行业务联接悬空或不唯一')
     result['validated_business_links'].append({'record_id':rid,'table':table,'source_id':sid,'key':key,'matches':count})
+  for key,value in coverage_records(manifest):result['coverage_inserted']+=exact(c,'meta',{'key':key,'value':value},['key'])
   for table in ('gk_yfyd_bucket','gk_official_yfyd','gk_official_cutoff','gk_yfyd_context','gk_batch_line','gk_official_plan','official_cutoff_scope','source_format_reference'):
    if c.execute('PRAGMA foreign_key_check("'+table+'")').fetchone():raise ValueError('外键检查失败:'+table)
   c.commit();result.update(generation=config['generation'],audit_file=name,validated_business_link_count=len(result['validated_business_links']),manifest_content_sha256=hashlib.sha256(dump(manifest).encode()).hexdigest());return result

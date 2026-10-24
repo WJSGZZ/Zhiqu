@@ -79,6 +79,13 @@ CREATE TABLE civil_major_summary(region TEXT,year INTEGER,major_name TEXT,share 
   r=self.program('甲大','0854');self.assertTrue(all(s['table'].startswith('ky_') for s in r['sections']))
  def test_plan_types_and_candidate_province_preserved(self):
   r=self.school('甲大',province='山东');s=next(x for x in r['sections'] if x['table']=='gk_official_cutoff');self.assertEqual(s['total'],2);self.assertEqual({x['context']['plan_type'] for x in s['rows']},{'普通','中外合作'})
+ def test_partial_cutoff_exposes_original_missing_rows_in_default_query(self):
+  with sqlite3.connect(self.path)as c:
+   c.execute('CREATE TABLE meta(key TEXT PRIMARY KEY,value TEXT)')
+   value=dict(source_id='s',table_name='gk_official_cutoff',status='partial',original_rows=3,accepted_rows=2,missing_rows=[dict(page=2,table=1,row=9,reason='原图两读未一致')],missing_scope='续页未核')
+   c.execute('INSERT INTO meta VALUES(?,?)',('gk_source_coverage:s:gk_official_cutoff:one',json.dumps(value)))
+  result=self.school('甲大',province='山东');section=next(x for x in result['sections']if x['table']=='gk_official_cutoff')
+  self.assertTrue(all(x['completeness']['missing_rows'][0]['row']==9 for x in section['rows']));text=db.render_text(result);self.assertIn('原表不完整',text);self.assertIn('页2/表1/行9',text)
  def test_every_value_has_grade_origin_id_status(self):
   r=self.program('甲大','0854');v=r['sections'][0]['rows'][0]['values']['total'];self.assertEqual((v['grade'],v['publisher'],v['source_id']),('官方','甲大学研究生院','s'));self.assertEqual(v['value_status']['status'],'官方原值')
  def test_null_missing_original_not_unpublished(self):
