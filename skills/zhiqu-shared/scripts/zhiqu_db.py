@@ -28,6 +28,14 @@ _storage_spec.loader.exec_module(_storage)
 SHARED = Path(__file__).resolve().parents[1]
 ROOT = Path(__file__).resolve().parents[3]
 DEFAULTS = {k: SHARED / 'data' / k / (k + '.sqlite') for k in ('education', 'employment')}
+# Only these recorded source meanings explicitly identify a per-score count.
+# Unspecified “人数”, cumulative counts and derived counts cannot close a gap.
+SEGMENT_COUNT_KINDS = frozenset({
+    '分段人数（原列）', '原分段人数', '原表分别明示人数与累计人数',
+    '原表分别明示人数小计与人数累计', '原表本分人数',
+    '原表本段与累计人数分列', '原表本段人数/累计人数；空人数不推算',
+    '本分数人数', '本段人数/累计人数/累计比例%原表分列',
+})
 
 class QueryError(ValueError):
     pass
@@ -62,10 +70,20 @@ def query_yfyd(province, year, subject, *, score=None, rank=None, db=None):
     if str(scripts) not in sys.path:sys.path.insert(0,str(scripts))
     from rank import Table, MissingDataError
     with _open('education',db)as(c,_):
-        if 'gk_yfyd_context' in _tables(c):
-            sql='SELECT y.*,k.segment_n AS count FROM data.gk_official_yfyd y LEFT JOIN data.gk_yfyd_context k ON y.province=k.province AND y.year=k.year AND y.subject=k.subject AND y.score=k.score AND y.source_id=k.source_id WHERE y.province=? AND y.year=? AND y.subject=? ORDER BY y.score DESC'
+        context_columns={r[1] for r in c.execute('PRAGMA data.table_info(gk_yfyd_context)')}
+        if {'segment_n','count_kind','value_status'} <= context_columns:
+            sql='SELECT y.*,k.segment_n AS count,k.count_kind AS _count_kind,k.value_status AS _count_status FROM data.gk_official_yfyd y LEFT JOIN data.gk_yfyd_context k ON y.province=k.province AND y.year=k.year AND y.subject=k.subject AND y.score=k.score AND y.source_id=k.source_id WHERE y.province=? AND y.year=? AND y.subject=? ORDER BY y.score DESC'
         else:sql='SELECT * FROM data.gk_official_yfyd WHERE province=? AND year=? AND subject=? ORDER BY score DESC'
         rows=[dict(r) for r in c.execute(sql,(province,year,subject))]
+        for row in rows:
+            # Legacy segment_n also holds explicitly cumulative or unspecified
+            # counts. Neither those nor derived counts prove a tied-score interval.
+            kind=row.get('_count_kind') or ''
+            states=_json(row.get('_count_status'),{})
+            state=states.get('segment_n',{}) if isinstance(states,dict) else {}
+            original=isinstance(state,dict) and state.get('status') in {'官方原值','人工更正'}
+            segment=kind in SEGMENT_COUNT_KINDS
+            if not (original and segment):row['count']=None
         if not rows:raise QueryError('未取到该省年科类的一分一段表')
         ids=list(dict.fromkeys(r['source_id'] for r in rows));coverage=[_source_completeness(c,'gk_official_yfyd',sid)for sid in ids]
         result={'kind':'yfyd','province':province,'year':year,'subject':subject,'completeness':[v for v in coverage if v],'sources':[_source(c,sid)for sid in ids]}

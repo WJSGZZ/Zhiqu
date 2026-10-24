@@ -71,6 +71,22 @@ class DatabaseGapGuard(unittest.TestCase):
   r=db.query_yfyd('甲省',2025,'物理',score=599,db=self.p);self.assertEqual(r['status'],'missing_data');self.assertEqual(r['gap']['missing_scores'],[599]);self.assertEqual(r['completeness'][0]['missing_rows'][0]['row'],3);self.assertIn('原表不完整',db.render_text(r));self.assertIn('页1/表1/行3',db.render_text(r));self.assertNotIn('rank',r)
  def test_database_rank_gap_does_not_invent_score(self):
   r=db.query_yfyd('甲省',2025,'物理',rank=120,db=self.p);self.assertEqual(r['status'],'missing_data');self.assertNotIn('score',r)
+ def context_count(self,count,kind,status):
+  with sqlite3.connect(self.p)as c:
+   c.execute('CREATE TABLE IF NOT EXISTS gk_yfyd_context(province TEXT,year INTEGER,subject TEXT,score INTEGER,segment_n INTEGER,count_kind TEXT,value_status TEXT,source_id TEXT)')
+   c.execute('DELETE FROM gk_yfyd_context')
+   c.execute('INSERT INTO gk_yfyd_context VALUES(?,?,?,?,?,?,?,?)',('甲省',2025,'物理',598,count,kind,json.dumps({'segment_n':{'status':status}}),'s'))
+ def test_cumulative_context_count_does_not_close_gap(self):
+  self.context_count(130,'累计人数（原表明示）','官方原值')
+  r=db.query_yfyd('甲省',2025,'物理',rank=120,db=self.p);self.assertEqual(r['status'],'missing_data');self.assertNotIn('score',r)
+ def test_unspecified_or_derived_context_count_does_not_close_gap(self):
+  for kind,status in [('原表人数','官方原值'),('分段表累计人数','官方原值'),('本分数人数','推算')]:
+   with self.subTest(kind=kind,status=status):
+    self.context_count(40,kind,status)
+    r=db.query_yfyd('甲省',2025,'物理',rank=120,db=self.p);self.assertEqual(r['status'],'missing_data');self.assertNotIn('score',r)
+ def test_explicit_original_segment_count_proves_its_own_interval(self):
+  self.context_count(30,'本分数人数','官方原值')
+  r=db.query_yfyd('甲省',2025,'物理',rank=120,db=self.p);self.assertEqual(r['status'],'ok');self.assertEqual(r['score'],598)
  def test_latest_coverage_declaration_supersedes_older_one(self):
   with sqlite3.connect(self.p)as c:
    c.execute("INSERT INTO gk_official_yfyd VALUES('甲省',2025,'物理',599,115,'s')")
