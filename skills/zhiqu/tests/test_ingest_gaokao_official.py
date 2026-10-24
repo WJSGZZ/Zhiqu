@@ -278,4 +278,33 @@ class IngestGaokaoOfficialTest(unittest.TestCase):
    self.assertEqual(c.execute('SELECT count(*) FROM source').fetchone()[0],0);self.assertEqual(c.execute('SELECT count(*) FROM storage_object').fetchone()[0],0);self.assertFalse(c.execute("SELECT 1 FROM sqlite_master WHERE name='gk_yfyd_bucket'").fetchone())
   with sqlite3.connect(self.audit)as c:self.assertFalse(c.execute("SELECT 1 FROM sqlite_master WHERE name='gk_official_original_evidence'").fetchone())
 
+ def partial_image(self):
+  m=copy.deepcopy(self.m);d=m['datasets'][0];removed=d['rows'].pop()
+  d['review'].update(read_method='image',dual_read_equal=True,original_data_rows=3,extracted_rows=2,original_source_rows=3,partition='原图1明确两读一致的行',excluded_rows=[{'locator':removed['locator'],'reason':'两读仍不一致，原行不入库'}])
+  d['review']['samples']=[s for s in d['review']['samples'] if s['record_id']!=removed['record_id']]
+  return m
+ def test_partial_image_keeps_exclusion_proof_and_accepted_values_only(self):
+  m=self.partial_image();before=self.snapshot();self.assertEqual(self.ingest(m)['inserted'],2);self.assertEqual(self.snapshot(),before)
+  with sqlite3.connect(self.audit)as c:
+   for (payload,)in c.execute('SELECT excerpt_locator_json FROM gk_official_original_evidence'):
+    review=json.loads(payload)['review'];self.assertEqual(review['original_source_rows'],3);self.assertEqual(review['excluded_row_count'],1);self.assertEqual(len(review['excluded_rows_sha256']),64);self.assertNotIn('excluded_rows',review)
+ def test_partial_image_rejects_missing_reason_duplicate_or_accepted_row(self):
+  for change in ('no_reason','duplicate','accepted','wrong_sha','missing_total','wrong_total','bad_locator','text','not_equal'):
+   with self.subTest(change=change):
+    m=self.partial_image();d=m['datasets'][0];r=d['review'];e=r['excluded_rows'][0]
+    if change=='no_reason':e['reason']=''
+    elif change=='duplicate':r['excluded_rows'].append(copy.deepcopy(e));r['original_data_rows']=4;r['original_source_rows']=4
+    elif change=='accepted':e['locator']=copy.deepcopy(d['rows'][0]['locator'])
+    elif change=='wrong_sha':e['locator']['sha256']='b'*64
+    elif change=='missing_total':r.pop('original_source_rows')
+    elif change=='wrong_total':r['original_source_rows']=4
+    elif change=='bad_locator':e['locator']['row']=True
+    elif change=='text':r['read_method']='text'
+    else:r['dual_read_equal']=False
+    with self.assertRaises(ValueError):self.ingest(m)
+ def test_partial_image_rejects_excluded_row_in_other_partition(self):
+  m=self.partial_image();d=copy.deepcopy(m['datasets'][0]);d['review']['partition']='另一个原范围';d['rows'][0]['record_id']='other0';d['rows'][1]['record_id']='other1';d['review']['samples']=[{'record_id':r['record_id'],'status':'approved','locator':r['locator']}for r in d['rows']];m['datasets'].append(d)
+  for ds in m['datasets']:ds['review']['original_source_rows']=6
+  with self.assertRaisesRegex(ValueError,'排除行重复'):self.ingest(m)
+
 if __name__=='__main__':unittest.main()
