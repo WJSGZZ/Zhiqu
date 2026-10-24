@@ -121,7 +121,16 @@ def prepare_data(c,dataset,item):
  for key in ('province','subject'):
   if not isinstance(data[key],str) or not data[key].strip():raise ValueError('缺少明确省份/科类')
  for key in NUMERIC[table]:
-  if table=='gk_official_yfyd' and key=='score':
+  if table=='gk_yfyd_bucket' and key=='score_boundary':
+   value=number(data[key],key)
+   if value is None:raise ValueError('缺少数字:score_boundary')
+   if float(value).is_integer():data[key]=int(value)
+   else:
+    from decimal import Decimal
+    literal=re.findall(r'(?<![\d.])\d+(?:\.\d+)?(?![\d.])',str(data.get('score_label') or ''))
+    if not literal or Decimal(literal[0])!=Decimal(str(value)):raise ValueError('小数边界须与原分数标签逐值相同')
+    data[key]=value
+  elif table=='gk_official_yfyd' and key=='score':
    value=number(data[key],key)
    if value is None:raise ValueError('缺少数字:score')
    if float(value).is_integer():data[key]=int(value)

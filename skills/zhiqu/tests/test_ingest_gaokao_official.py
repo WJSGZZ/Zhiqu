@@ -63,6 +63,17 @@ class IngestGaokaoOfficialTest(unittest.TestCase):
  def test_decimal_counts_remain_rejected(self):
   self.m['datasets'][0]['rows'][0]['data']['cum']=3.5
   with self.assertRaisesRegex(ValueError,'整数'):self.ingest()
+ def test_original_decimal_bucket_boundary_retains_label_and_integer_storage(self):
+  before=self.snapshot();d=self.dataset('gk_yfyd_bucket',n=1,prefix='decimal-tail')
+  d['rows'][0]['data'].update(score_boundary=287.8,score_label='287.8分以上（含287.8分）',boundary_operator='以上（含）')
+  self.m['datasets']=[d];self.assertEqual(self.ingest()['inserted'],1)
+  with sqlite3.connect(self.path)as c:
+   self.assertEqual(c.execute('SELECT score_boundary,typeof(score_boundary),score_label FROM gk_yfyd_bucket').fetchone(),(287.8,'real','287.8分以上（含287.8分）'))
+  self.assertEqual(self.snapshot(),before)
+ def test_decimal_bucket_boundary_cannot_disagree_with_original_label(self):
+  for value,label in [(287.8,'287.9分以上（含287.9分）'),(.8,'287分以上（按0.8分段）')]:
+   d=self.dataset('gk_yfyd_bucket',n=1);d['rows'][0]['data'].update(score_boundary=value,score_label=label);self.m['datasets']=[d]
+   with self.assertRaisesRegex(ValueError,'原分数标签'):self.ingest()
  def test_all_business_tables_idempotent_old_unchanged_and_link_receipt(self):
   before=self.snapshot();self.m['datasets']=[self.dataset(t,prefix=str(i)+'-') for i,t in enumerate(mod.FIELDS)]
   a=self.ingest();b=self.ingest();self.assertEqual(a['inserted'],15);self.assertEqual(b['existing'],15);self.assertEqual(b['inserted'],0);self.assertEqual(self.snapshot(),before)
