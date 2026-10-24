@@ -88,6 +88,23 @@ def validate_numeric_coverage(review):
  if not total:raise ValueError('原页数字归属证明没有数值，不能证明数值表完整')
 
 
+def image_row_key(locator,digest):
+ if not isinstance(locator,dict) or locator.get('sha256')!=digest:raise ValueError('图片排除行原件指纹不符')
+ if any(type(locator.get(k)) is not int or locator[k]<1 for k in ('page','table','row')):raise ValueError('图片排除行须有真实正整数页表行')
+ return tuple(locator[k] for k in ('page','table','row'))
+
+def excluded_image_rows(review,digest):
+ excluded=review.get('excluded_rows',[])
+ if not isinstance(excluded,list):raise ValueError('图片排除行须为清单')
+ if excluded and (review.get('read_method')!='image' or review.get('dual_read_equal') is not True):raise ValueError('排除行仅用于其余图片行两读一致的明确子集')
+ keys=set()
+ for row in excluded:
+  if not isinstance(row,dict) or set(row)!={'locator','reason'} or not isinstance(row['reason'],str) or not row['reason'].strip():raise ValueError('图片排除行须有定位和明确原因')
+  key=image_row_key(row['locator'],digest)
+  if key in keys:raise ValueError('图片排除行重复')
+  keys.add(key)
+ return keys
+
 def validate_reviews(manifest,sources):
  groups=collections.defaultdict(list);allids=set();datasets=manifest['datasets']
  for dataset in datasets:
@@ -99,8 +116,10 @@ def validate_reviews(manifest,sources):
   if not isinstance(review,dict) or review.get('status')!='approved':raise ValueError('dataset必须经主审批准')
   if review.get('read_method') not in {'text','image'}:raise ValueError('read_method须明确text/image')
   validate_numeric_coverage(review)
-  for k in ('original_data_rows','extracted_rows'):
-   if not isinstance(review.get(k),int) or isinstance(review[k],bool) or review[k]!=len(rows):raise ValueError('原表数据行数/提取行数/清单行数不相符')
+  excluded=excluded_image_rows(review,sources[sid]['archive_sha256'])
+  expected={'original_data_rows':len(rows)+len(excluded),'extracted_rows':len(rows)}
+  for k,n in expected.items():
+   if type(review.get(k)) is not int or review[k]!=n:raise ValueError('原表数据行数/提取行数/清单行数不相符')
   if not isinstance(review.get('samples'),list):raise ValueError('须提供已批准抽样')
   for item in rows:
    if not isinstance(item,dict) or set(item)-{'record_id','data','scope','locator','excerpt','yfyd_context'}:raise ValueError('item字段白名单不符')
@@ -112,12 +131,24 @@ def validate_reviews(manifest,sources):
    if not isinstance(item.get('data'),dict):raise ValueError('data必须为对象')
   groups[sources[sid]['archive_sha256']].append(dataset)
  for digest,group in groups.items():
+  excluded=set();accepted=set();partial=any(d['review'].get('excluded_rows') for d in group)
+  if partial:
+   for d in group:
+    keys=excluded_image_rows(d['review'],digest)
+    if excluded & keys:raise ValueError('同源分区排除行重复')
+    excluded.update(keys)
+    for row in d['rows']:
+     key=image_row_key(row['locator'],digest)
+     if key in accepted:raise ValueError('同源图片分区数据行重复')
+     accepted.add(key)
+   if excluded & accepted:raise ValueError('排除行同时出现在已批准数据中')
   declarations=[d['review'].get('original_source_rows') for d in group]
+  if partial and any(v is None for v in declarations):raise ValueError('图片部分入库须声明原源总行数及分区')
   if any(v is not None for v in declarations):
    if any(not isinstance(v,int) or isinstance(v,bool) or v<=0 for v in declarations) or len(set(declarations))!=1:raise ValueError('同SHA原源总行数声明不一致')
    partitions=[d['review'].get('partition') for d in group]
    if any(not isinstance(p,str) or not p.strip() for p in partitions) or len(set(partitions))!=len(partitions):raise ValueError('同SHA须明确唯一partition')
-   if sum(len(d['rows']) for d in group)!=declarations[0]:raise ValueError('同SHA各partition合计与原源总行数不符')
+   if sum(d['review']['original_data_rows'] for d in group)!=declarations[0]:raise ValueError('同SHA各partition合计与原源总行数不符')
   candidates={r['record_id']:r for d in group for r in d['rows']};n=len(candidates);sampleids=set();image=any(d['review']['read_method']=='image' for d in group)
   for d in group:
    for sample in d['review']['samples']:
@@ -271,7 +302,10 @@ def ingest(database,manifest):
       context_status.update(supplied)
      ctx['value_status']=state_json(context_status,tuple(context_status))
      result['context_inserted']+=exact(c,'gk_yfyd_context',ctx,list(key))
-    review_meta={k:v for k,v in dataset['review'].items() if k not in {'samples','numeric_coverage'}}
+    review_meta={k:v for k,v in dataset['review'].items() if k not in {'samples','numeric_coverage','excluded_rows'}}
+    if dataset['review'].get('excluded_rows'):
+     review_meta['excluded_row_count']=len(dataset['review']['excluded_rows'])
+     review_meta['excluded_rows_sha256']=hashlib.sha256(dump(dataset['review']['excluded_rows']).encode()).hexdigest()
     if dataset['review'].get('numeric_coverage') is not None:
      # Keep the source-level proof once in the approved batch; bind each row by digest.
      review_meta['numeric_coverage_sha256']=hashlib.sha256(dump(dataset['review']['numeric_coverage']).encode()).hexdigest()
