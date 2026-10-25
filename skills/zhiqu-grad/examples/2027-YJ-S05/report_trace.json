@@ -20,7 +20,7 @@
     "planning_workflow.py": "2e8d5eb40e80dbf4e349aba04c9f048d7e8a69375cc238d2f7153a939bd27f7d",
     "operator_check.py": "d99826c1cae9514c665edb0b1b6155ea99a0bce19b99a919b9ada81e0b93c0a1",
     "check_demos.py": "67d4edc1cd737beeb6729783a736e667a97c12d8f7de2de673632d9d5c3370b8",
-    "report.py": "2b0c9bc736b34e44110e24b04b0a128fba0398ea099d38276e8f2b4c6201df7a",
+    "report.py": "1bcfe81ae6ffb3b337c4227d3e53e89c089cede71e89b1dd60541684738058cf",
     "render_report.py": "e7dbbef97c3478f4591f34a01ebd0c730e807a1de3c69eca4fea397434dfbc4a",
     "profile_store.py": "35de56c7f84f9ead83540d32cee7d9bd8885611fb25ef39dbc37b7cfa401b088",
     "claim_guards.py": "54bab4d942fafd148190df73cad34805538662b0a152ec5701c8a960e28dbd1d",
@@ -29,7 +29,7 @@
     "unit_validation.py": "9f5df89a101dd684231fe35f8fe931e150127fc698f2ab774b628bc3ffdf093c",
     "reader_language.py": "ccb4d16f5a23fff9e9660c9cf33aa042b81f2e2221dc38bb641079b0d61259b6",
     "claim_check.py": "9551fd4dd5e87f13f6635e1158cebf8882b7c967e59e54939dc02b024eed41b5",
-    "check_report.py": "dac356efefd14a1c48fd5665b8c84ac4d0cbd8d2a1d52fd1ebeeafcb2cea74fa",
+    "check_report.py": "22069b820a7d5b3cc35e5f6050b872f0cefde249a810af0daf7ee1a25ab11c0f",
     "authoring_metadata.py": "9ac0328c9a8bdeec672daede766f49f5e9c94c2761ae64e0ec32e2ed8abf404c"
   },
   "numeric_refs": [
@@ -1718,5 +1718,29 @@
   "verification_tools_sha256": {
     "verify_report.py": "008a50716d1c523376018e4c91280469b83fa9957ce8bf755cce961141d0e596",
     "verification_calculations.py": "80e4fb8e0d247582ade885655be5f30e0c2d1cc9e19ebf59c39f3fa83823a54b"
-  }
+  },
+  "compatibility_verifications": [
+    {
+      "date": "2026-10-25",
+      "kind": "compatibility_verification_only",
+      "reason": "本轮仅高考数据库取数和高考来源标注路径改变。以冻结旧工具与当前工具对临时副本逐字节比较组装正文、数值引用和渲染HTML均一致；原report.md、report.html、PDF及全部输入指纹不变。这里只登记当前工具兼容性复验，不是重新生成报告，不是新独立内容复核；原写作、渲染版本及历史独立评语保留。",
+      "tool_sha256": {
+        "report.py": {
+          "before": "2b0c9bc736b34e44110e24b04b0a128fba0398ea099d38276e8f2b4c6201df7a",
+          "after": "1bcfe81ae6ffb3b337c4227d3e53e89c089cede71e89b1dd60541684738058cf"
+        },
+        "check_report.py": {
+          "before": "dac356efefd14a1c48fd5665b8c84ac4d0cbd8d2a1d52fd1ebeeafcb2cea74fa",
+          "after": "22069b820a7d5b3cc35e5f6050b872f0cefde249a810af0daf7ee1a25ab11c0f"
+        }
+      },
+      "assembled_markdown_sha256": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
+      "rendered_html_sha256": "9b4eb5bdf5fb56d7d60c72b50c87550cb15d8dd456668a6c61c774705009dae2",
+      "original_artifacts": {
+        "report.md": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
+        "report.html": "3311e44a727830d10556b77e2d5e544eecd6c2ab68f4ac84b65aa043746f3f8d",
+        "2027-YJ-S05-report.pdf": "c3510ec62f75761aadca608bbe23109ef15281c5eacbda20f883ad1c0012c85a"
+      }
+    }
+  ]
 }
