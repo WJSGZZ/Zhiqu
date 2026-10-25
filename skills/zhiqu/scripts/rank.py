@@ -49,7 +49,12 @@ class Table:
             rows = []
             self.unverified_scores = set()
             self.aggregate_scores = set()
+            if 'source_head_unknown' in cols:self.head_unknown=False
             for r in reader:
+                if 'source_head_unknown' in cols:
+                    flag=(r.get(cols['source_head_unknown'])or'').strip()
+                    if flag not in ('','0','1'):raise ValueError('source_head_unknown须为0或1')
+                    self.head_unknown=self.head_unknown or flag=='1'
                 s = r[cols["score"]].strip()
                 if not s:
                     continue

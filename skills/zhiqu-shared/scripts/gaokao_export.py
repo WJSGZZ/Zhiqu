@@ -278,3 +278,64 @@ def export_records(records, province, subject, years, *, out, key='group', schoo
     metadata={'status':'ok' if all(counts.values()) else 'partial' if any(counts.values()) else 'missing_data','province':province,'subject':subject,'years':years,'key':key,'batch_filter':batch,'plan_type_filter':plan_type,'input_records':len(records),'exported_rows':counts,'files':paths,'conflict_count':len(conflicts),'conflicts_file':str((out/'conflicts.csv').resolve()),'rejected':rejected,'yfyd':yfyd_metadata or [],'rank_conversion_performed':False,'rules':['官方同事实同口径逐值优先，第三方补缺','rank_vs_yfyd不等同官方投档核对','缺位次不从分数推造','专业组跨年仍须pool --group-map核实'],'database_written':False}
     (out/'export-metadata.json').write_text(json.dumps(metadata,ensure_ascii=False,indent=2)+'\n')
     return metadata
+
+
+def export_yfyd(rows_by_year, province, subject, years, *, out, sources, coverage, metadata):
+    """Keep every original CDF row, plus a cumulative-only rank.Table input."""
+    columns=['province','year','subject','score','count','cum','score_operator','source_operator','source_head_unknown','score_label','count_raw','count_kind','grade','source_grade','display_grade','source_id','value_status','src_row','src_page','src_table','locator_method','locator_status','locator','completeness','data_provenance','source']
+    files={};usable_files={};counts={};usable_counts={};omitted={};out=Path(out)
+    targets=[out/f'{province}-{subject}-{year}-yfyd-{kind}.csv'for year in years for kind in ('all','usable')]
+    if any(p.exists()for p in targets):raise ValueError('一分一段目标已存在，不能覆盖')
+    labels=collections.defaultdict(list)
+    for item in metadata:
+        bucket=item.get('aggregate_bucket')
+        if bucket:labels[(item['year'],bucket['source_id'],bucket['score_boundary'])].append(bucket['score_label'])
+    for year in years:
+        raw=rows_by_year.get(year,[]);heads={};prepared=[]
+        usable=[r for r in raw if r.get('cum') is not None and r.get('score') is not None]
+        for row in usable:
+            sid=row['source_id']
+            if sid not in heads:
+                ordinary=str(row.get('score_operator')or'=').strip()in('','=', '＝')
+                heads[sid]=not ordinary or row.get('count')is None
+        for row in raw:
+            sid=row['source_id'];source=sources.get(sid,{})
+            if source.get('source_id')!=sid or source.get('grade')!='官方':raise ValueError('一分一段缺真实官方来源登记：'+str(sid))
+            scope={'province':province,'year':year,'subject':subject,'scope_raw':row.get('_scope_raw')or''}
+            locator={k:row.get(k)for k in ('src','src_row','src_page','src_table','locator_method','locator_status')if row.get(k)not in(None,'')}
+            complete=coverage.get(sid);scope['completeness']=complete
+            operator=row.get('score_operator')or'='
+            count=row.get('count')if str(operator).strip()in('','=', '＝')else None
+            states=obj(row.get('value_status'));context_states=obj(row.get('_count_status'));current=row.get('_current_states',{});evidence=row.get('_field_evidence',{})
+            raw_count=row.get('_count_raw');kind=row.get('_count_kind')or''
+            values={'score':row.get('score'),'cum':row.get('cum'),'count':count,'count_raw':raw_count};provenance={}
+            for field,value in values.items():
+                original_field='segment_n'if field=='count'else field
+                original=context_states.get(original_field)if field in('count','count_raw')else states.get(field)
+                state=current.get(original_field)or original
+                proof=evidence.get(original_field)if value is not None else None
+                active_locator=proof['locator']if proof else locator
+                if field=='count'and value is None:state=original if isinstance(original,dict)and original.get('status')=='原件缺失'else {'status':'来源未提供','reason':'没有可导出的可信原单分人数；原口径/原状态另保留，不填推算或合并档人数'}
+                provenance[field]=_meta(scope,field,value,source,state,active_locator)
+                provenance[field].update(original_value_status=original,original_locator=locator,original_source_metadata={k:source.get(k)for k in('source_id','grade','publisher','title','landing_url','file_url','archive_sha256','archive_status','published','retrieved')},source_assets=row.get('_source_assets',[]),evidence_refs=row.get('_evidence_refs',[]))
+                if proof:
+                    provenance[field].update(current_evidence=proof,archive_sha256=proof['locator']['sha256'],url=proof['source_asset'].get('url')or provenance[field]['url'])
+                else:provenance[field]['archive_sha256']=source.get('archive_sha256','')
+            provenance['count']['count_gate']='仅保留可信原单分人数；合并档、累计人数、推算值不填count'
+            provenance['count']['original_context_value_status']=context_states.get('segment_n')
+            bucket_labels=labels.get((year,sid,row.get('score')),[])
+            score_label=bucket_labels[0]if len(bucket_labels)==1 else ''
+            predicted=any(isinstance(v,dict)and v.get('status')=='推算'for v in states.values())
+            data={'province':province,'year':year,'subject':subject,'score':row.get('score'),'count':count,'cum':row.get('cum'),'score_operator':operator,'source_operator':row.get('score_operator')or'=', 'source_head_unknown':int(heads.get(sid,True)), 'score_label':score_label,'count_raw':raw_count,'count_kind':kind,'grade':'官方','source_grade':'官方','display_grade':'官方','source_id':sid,'value_status':dump({field:p['value_status']for field,p in provenance.items()}),'src_row':row.get('src_row'),'src_page':row.get('src_page'),'src_table':row.get('src_table'),'locator_method':row.get('locator_method'),'locator_status':row.get('locator_status'),'locator':dump(locator),'completeness':dump(complete),'data_provenance':dump(provenance),'source':'插值/推算，非原表行'if predicted else sid}
+            active=provenance['cum'].get('current_evidence')
+            if active:
+                loc=active['locator'];data.update(locator=dump(loc),src_row=loc.get('row',row.get('src_row')),src_page=loc.get('page',row.get('src_page')),src_table=loc.get('table',loc.get('sheet',row.get('src_table'))),locator_method='新增root逐值原件审计',locator_status='原登记另见各值original_locator/source_metadata')
+            prepared.append(data)
+        all_path=out/f'{province}-{subject}-{year}-yfyd-all.csv';usable_path=out/f'{province}-{subject}-{year}-yfyd-usable.csv'
+        valid=[row for row in prepared if row['cum']is not None and row['score']is not None]
+        for path,subset in ((all_path,prepared),(usable_path,valid)):
+            with path.open('w',newline='',encoding='utf-8')as f:
+                writer=csv.DictWriter(f,fieldnames=columns);writer.writeheader();writer.writerows({k:''if r.get(k)is None else r.get(k,'')for k in columns}for r in subset)
+        files[str(year)]=str(all_path.resolve());usable_files[str(year)]=str(usable_path.resolve());counts[str(year)]=len(prepared);usable_counts[str(year)]=len(valid)
+        omitted[str(year)]=[{'source_id':r['source_id'],'score':r.get('score'),'src_row':r.get('src_row'),'reason':'原累计或分数为空，仅保留all，不由本段人数补累计'}for r in prepared if r['cum']is None or r['score']is None]
+    return {'yfyd_files':files,'yfyd_usable_files':usable_files,'yfyd_exported_rows':counts,'yfyd_usable_rows':usable_counts,'yfyd_omitted_from_usable':omitted,'yfyd_rank_conversion_performed':False,'yfyd_subject_exact':subject,'yfyd_school_filter_applied':False}
