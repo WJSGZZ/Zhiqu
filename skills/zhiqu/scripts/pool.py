@@ -10,6 +10,7 @@ usage:
 """
 import argparse
 import csv
+from decimal import Decimal, InvalidOperation
 import json
 import os
 import re
@@ -25,6 +26,51 @@ PLAN_BRACKET = re.compile(r"八协计划|协作计划|专项|预科|民族班|^�
 # 其余计划类（如八协计划）保留并标“资格待核”。考生符合资格时仍用 --exclude 放开。
 EXCLUDE_TAGGED = EXCLUDE + r"|[（(](少数民族|面向[^（）()]*)[）)]"
 PENDING = "资格待核"
+
+
+def weakest_grade(grades):
+    """行概览取最弱来源；逐值的真实等级仍保留在 data_provenance 中。"""
+    order = {"官方": 0, "官方一致": 1, "第三方整理": 2, "第三方整理·内部未核": 2}
+    values = [str(g).strip() for g in grades if str(g or "").strip()]
+    return max(values, key=lambda g: order.get(g, 3)) if values else ""
+
+
+def input_provenance(row, year):
+    raw = (row.get("data_provenance") or "").strip()
+    if not raw:
+        return {}
+    value = json.loads(raw)
+    if not isinstance(value, dict) or any(not isinstance(v, dict) for v in value.values()):
+        raise ValueError("data_provenance 必须为按 rank/score/plan 记录的对象")
+    if any(key not in {"rank", "score", "plan"} for key in value):
+        raise ValueError("data_provenance 只接受 rank/score/plan 字段")
+    if not value.get("rank"):
+        raise ValueError("data_provenance 缺少实际参与计算的 rank 来历")
+    for field, metadata in value.items():
+        if "value" not in metadata:
+            raise ValueError(f"data_provenance.{field} 缺 value")
+        actual = str(row.get(field) or "").strip()
+        expected = metadata["value"]
+        if expected is None:
+            if actual or field == "rank":
+                raise ValueError(f"data_provenance.{field}.value 与 CSV 数字不一致")
+        else:
+            if isinstance(expected, bool) or not isinstance(expected, (int, float)):
+                raise ValueError(f"data_provenance.{field}.value 必须为数值，不能是布尔或文本")
+            try:
+                a, b = Decimal(actual), Decimal(str(expected))
+            except InvalidOperation:
+                raise ValueError(f"CSV {field} 必须为与来历一致的数值") from None
+            if not a.is_finite() or not b.is_finite() or a != b:
+                raise ValueError(f"data_provenance.{field}.value 与 CSV 数字不一致")
+            if field in ("rank", "plan") and a != a.to_integral_value():
+                raise ValueError(f"CSV {field} 必须为整数")
+        scope = metadata.get("scope", {})
+        if not isinstance(scope, dict):
+            raise ValueError(f"data_provenance.{field}.scope 必须为对象")
+        if "year" in scope and (isinstance(scope["year"], bool) or str(scope["year"]) != str(year)):
+            raise ValueError(f"data_provenance.{field}.scope.year 与输入年份不一致")
+    return value
 
 
 def schools():
@@ -199,15 +245,27 @@ def main():
                 else:
                     k = (join_key(school_key, a.legacy_join), join_key(sub, a.legacy_join))
                 e = table.setdefault(k, {"code": code, "school": school, "sub": sub.strip(),
-                                         "req": "", "ranks": {}, "plan": "", "sources": [], "ambiguous": set(), "major_code": ""})
+                                         "req": "", "ranks": {}, "plan": "", "sources": [], "ambiguous": set(), "major_code": "", "provenance": {}, "grades": {}})
                 if y in e["ambiguous"]:
                     continue
                 if y in e["ranks"]:
                     if a.key == "group":
                         ap.error(f"{y} 年 {school}·{sub} 出现重复键，不能静默覆盖；先核对校区、招生条件和专业代码")
                     e["ambiguous"].add(y)
-                    del e["ranks"][y]  # 同校同名专业的不同校区/类型，整年剔除，不能任选一条
+                    del e["ranks"][y]
+                    e["provenance"].pop(y, None)
+                    e["grades"].pop(y, None)
+                    # 同校同名专业的不同校区/类型，整年剔除，不能任选一条
                     continue
+                try:
+                    provenance = input_provenance(r, y)
+                except (ValueError, TypeError) as exc:
+                    ap.error(f"{y} 年 {school}·{sub} 来源信息无效：{exc}")
+                if provenance:
+                    e["provenance"][y] = provenance
+                grade = (r.get("source_grade") or "").strip()
+                if grade:
+                    e["grades"][y] = grade
                 e["ranks"][y] = int(rk)
                 e["code"] = code  # 保留最近一年的院校代码，填报单用
                 e["school"], e["sub"] = school, sub.strip()
@@ -269,10 +327,19 @@ def main():
                 log["eligibility_pending"].append(name)
         for y, _ in reversed(years):
             row[f"rank_{y}"] = e["ranks"].get(y, "")
+        if e["provenance"] or e["grades"]:
+            if e["provenance"]:
+                row["data_provenance"] = json.dumps(e["provenance"], ensure_ascii=False, sort_keys=True)
+            # 不以逐值抽核结果覆盖原始 grade，也不把另一字段的官方来源借给位次。
+            row["source_grade"] = weakest_grade(list(e["grades"].values()) + [
+                v.get("display_grade") or v.get("grade", "")
+                for fields in e["provenance"].values() for v in fields.values()
+                if v.get("value") is not None])
         rows.append(row)
     rows.sort(key=lambda r: r[f"rank_{last}"])
     unknown = sum(r["province"] == "未知" for r in rows)
     cols = ["id", "name", "code", "group", "major_code", "requirement", "province", "city", "plan", "history_status", "note"] + (["limits"] if tagged else []) + [f"rank_{y}" for y, _ in reversed(years)]
+    cols += [key for key in ("source_grade", "data_provenance") if any(key in row for row in rows)]
     with open(a.out, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=cols)
         w.writeheader()

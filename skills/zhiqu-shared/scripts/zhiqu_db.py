@@ -1515,11 +1515,51 @@ def render_text(result, *, full=False):
     return '\n'.join(lines)+'\n'
 
 
+def export_gaokao(province, subject, years, *, out, schools=None, batch=None, plan_type=None, key='group', db=None):
+    """Export read-only, scope-safe annual CSVs for pool.py, with value sources."""
+    from gaokao_export import collect, export_records
+    years = sorted(set(int(y) for y in years))
+    if not years or any(y < 1900 or y > 2100 for y in years):
+        raise QueryError('年份须为1900—2100的非空列表')
+    with _open('education', db) as (c, path):
+        tables = _tables(c)
+        selected = set(schools or [])
+        if selected and 'institution' in tables:
+            for school in schools:
+                try: selected.add(_identity(c, school)[0]['institution_id'])
+                except QueryError: pass
+        records = collect(c, tables, province, subject, years)
+        yfyd = []
+        for year in years:
+            if 'gk_official_yfyd' in tables:
+                for row in c.execute('SELECT source_id,count(*) AS rows FROM data.gk_official_yfyd WHERE province=? AND year=? AND subject=? GROUP BY source_id',(province,year,subject)):
+                    yfyd.append({'year':year,'source_id':row['source_id'],'rows':row['rows'],'completeness':_source_completeness(c,'gk_official_yfyd',row['source_id'])})
+            if 'gk_yfyd_context' in tables:
+                for row in c.execute("SELECT score,score_operator,scope_raw,source_id FROM data.gk_yfyd_context WHERE province=? AND year=? AND subject=? AND coalesce(score_operator,'=') NOT IN('','=', '＝')",(province,year,subject)):
+                    yfyd.append({'year':year,'aggregate_context':dict(row)})
+            if 'gk_yfyd_bucket' in tables:
+                for row in c.execute('SELECT score_label,score_boundary,boundary_operator,source_id FROM data.gk_yfyd_bucket WHERE province=? AND year=? AND subject=?',(province,year,subject)):
+                    yfyd.append({'year':year,'aggregate_bucket':dict(row)})
+        try:
+            result = export_records(records,province,subject,years,out=out,key=key,schools=selected,batch=batch,plan_type=plan_type,yfyd_metadata=yfyd)
+        except ValueError as exc:
+            raise QueryError(str(exc)) from exc
+        result['database'] = str(path)
+        if 'dataset_version' in tables:
+            version=c.execute('SELECT version FROM data.dataset_version ORDER BY rowid DESC LIMIT 1').fetchone()
+            result['database_version']=version[0] if version else None
+        if 'storage_manifest' in tables:
+            result['generation']=dict(c.execute('SELECT key,value FROM data.storage_manifest')).get('generation')
+        (Path(out)/'export-metadata.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+        return result
+
+
 def main(argv=None):
     argv=list(sys.argv[1:] if argv is None else argv)
     if argv[:2]==['detail','source']:argv=argv[1:]
     ap=argparse.ArgumentParser(description='知衢本机统一只读查询；来源链与适用范围不合并')
     sub=ap.add_subparsers(dest='command',required=True)
+    ex=sub.add_parser('export-gaokao');ex.add_argument('province');ex.add_argument('subject');ex.add_argument('--years',nargs='+',type=int,required=True);ex.add_argument('--out',required=True);ex.add_argument('--schools',nargs='+');ex.add_argument('--key',choices=['group','major'],default='group');ex.add_argument('--batch');ex.add_argument('--plan-type');ex.add_argument('--db');ex.add_argument('--json',action='store_true')
     yf=sub.add_parser('yfyd');yf.add_argument('province');yf.add_argument('year',type=int);yf.add_argument('subject');yf.add_argument('--db');yf.add_argument('--json',action='store_true');yf.add_argument('--full',action='store_true')
     choice=yf.add_mutually_exclusive_group(required=True);choice.add_argument('--score',type=float);choice.add_argument('--rank',type=float)
     for cmd in ['school','program','jobs','source']:
@@ -1529,9 +1569,14 @@ def main(argv=None):
         if cmd=='program':p.add_argument('program')
         if cmd=='jobs':p.add_argument('--region');p.add_argument('--major');p.add_argument('--year',type=int);p.add_argument('--education-db')
         if cmd=='source':p.add_argument('source_id');p.add_argument('--domain',choices=['education','employment'],default='education')
-    ns=vars(ap.parse_args(argv));command=ns.pop('command');as_json=ns.pop('json');full=ns.pop('full')
+    ns=vars(ap.parse_args(argv));command=ns.pop('command');as_json=ns.pop('json');full=ns.pop('full',False)
     try:
-        if command=='yfyd':res=query_yfyd(**ns)
+        if command=='export-gaokao':
+            res=export_gaokao(**ns)
+            if as_json:print(json.dumps(res,ensure_ascii=False,indent=2))
+            else:print('逐年导出：'+ '；'.join(year+'年 '+str(n)+'行'for year,n in res['exported_rows'].items())+'；冲突'+str(res['conflict_count'])+'条；见'+str(Path(ns['out'])/'export-metadata.json'))
+            return 2 if res.get('status')=='missing_data' else 0
+        elif command=='yfyd':res=query_yfyd(**ns)
         elif command=='school':res=query_school(ns.pop('school'),**ns)
         elif command=='program':res=query_program(ns.pop('school'),ns.pop('program'),**ns)
         elif command=='jobs':res=query_jobs(**ns)
