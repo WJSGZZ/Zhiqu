@@ -6,6 +6,8 @@ import math
 import re
 from html.parser import HTMLParser
 from pathlib import Path
+from data_provenance import (UNVERIFIED, entries as provenance_entries,
+                             only_third_party, prediction_label, provenance_errors)
 
 
 def at(obj, path):
@@ -15,7 +17,9 @@ def at(obj, path):
 
 
 def check_report(rep, result, html=None):
-    errors = []
+    errors = check_database_basis(rep, result)
+    if any(provenance_errors(item) for item in result.get('list', [])):
+        return errors
     params = result['params']
     for key in ('rank', 'slots'):
         value = rep.get('meta', {}).get(key)
@@ -62,6 +66,7 @@ def check_report(rep, result, html=None):
                 errors.append('HTML 志愿行数与 result 不一致')
             for i, (cells, item) in enumerate(zip(rows, result['list'])):
                 rank_cell = f'{item["expected_cut_rank"]:,}' + ('' if grade == 'A' else interval80(item))
+                rank_cell += prediction_label(item)
                 probs = [unescape(fmt(item['p_clear'])), unescape(fmt(item['p_land'], 1))] if numeric else ['按分档', '不显示百分比']
                 expected = [str(item['order']), item['tag'], f'{item["utility"]:.1f}'] + probs + [rank_cell]
                 idx = (0, 2, 3, 4, 5, 6)
@@ -70,6 +75,21 @@ def check_report(rep, result, html=None):
                     errors.append(f'HTML 志愿表第 {i+1} 行与 result 不一致')
                 elif pending(item) and '需核对报名资格' not in cells[1]:
                     errors.append(f'HTML 志愿表第 {i+1} 行是“资格待核”志愿，须标“需核对报名资格”')
+        if any(x.get('data_provenance') for x in result.get('list', [])):
+            from data_provenance import evidence_lines
+            # 报告的历年数字也逐项核对，不能只在表中放一个笼统等级。
+            text_parser = PublicationText()
+            text_parser.feed(html)
+            text = ''.join(text_parser.text)
+            for item in result['list']:
+                for line in evidence_lines(item):
+                    if public_text(line) not in text:
+                        errors.append(f'HTML 缺少或篡改「{item["name"]}」的逐值来历：{line}')
+                if only_third_party(item):
+                    review = rep.get('third_party_review', {}).get(item['name'], {})
+                    for key in ('disclosure', 'margin'):
+                        if str(review.get(key, '')).strip() not in text:
+                            errors.append(f'HTML 未显示「{item["name"]}」的第三方说明或余量建议')
         metrics = Metrics()
         metrics.feed(html)
         items = result['list']
@@ -100,6 +120,40 @@ def check_report(rep, result, html=None):
             expected = head4 + mid + tail
             if metrics.values != [public_text(v) for v in expected]:
                 errors.append('HTML 摘要指标与 result 不一致')
+    return errors
+
+
+class PublicationText(HTMLParser):
+    """只抽可见文本，保持数字和等级原文，不宽松删除待核内容。"""
+    def __init__(self):
+        super().__init__()
+        self.text = []
+
+    def handle_data(self, data):
+        self.text.append(data)
+
+
+def check_database_basis(rep, result):
+    errors, third_only = [], []
+    for item in result.get('list', []):
+        errs = provenance_errors(item)
+        errors += [f'{item["name"]}：{error}' for error in errs]
+        if errs:
+            continue
+        if only_third_party(item):
+            third_only.append(item)
+            review = rep.get('third_party_review', {}).get(item['name'], {})
+            disclosure = str(review.get('disclosure', '')).strip()
+            margin = str(review.get('margin', '')).strip()
+            if UNVERIFIED not in disclosure or '不单独支撑主结论' not in disclosure:
+                errors.append(f'{item["name"]}：仅凭第三方的冲稳保判断须逐条写明“{UNVERIFIED}”，且不单独支撑主结论')
+            if not margin or not any(word in margin for word in ('余量', '备选', '保底')):
+                errors.append(f'{item["name"]}：须在 third_party_review 中给出具体余量建议，纳入核对清单')
+    if third_only:
+        if rep.get('meta', {}).get('prob_grade') != 'D':
+            errors.append('仅有第三方位次依据须沿用 report-guide 的 D 级写法，不显示过线概率')
+        else:
+            errors += check_grade(rep, result)
     return errors
 
 

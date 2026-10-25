@@ -467,6 +467,15 @@
         "report_trace.json"
       ],
       "reason": "共用 report.py、check_report.py 为高考“需核对报名资格”标记更新，追踪指纹随之重生成；读研/求职正文文字、数字与结论未变（report.md 逐字未变）。"
+    },
+    {
+      "date": "2026-10-25",
+      "by": "Codex（工具兼容性复验）",
+      "files": [
+        "report_trace.json",
+        "claim_check.json"
+      ],
+      "reason": "本轮仅高考数据库取数和高考来源标注路径改变。以冻结旧工具与当前工具对临时副本逐字节比较组装正文、数值引用和渲染HTML均一致；原report.md、report.html、PDF及全部输入指纹不变。这里只登记当前工具兼容性复验，不是重新生成报告，不是新独立内容复核；原写作、渲染版本及历史独立评语保留。"
     }
   ],
   "review_history": [
@@ -2734,7 +2743,7 @@
     "calculations.json": "89d7a293fd6780b562866f4871846b19130b0d86e79cb9f9c233e572cbae5b5d",
     "candidates.json": "ea8bbcb101fc7dc899ec1137e869654c3b9e85d79d8229e4de8115418467aeae",
     "case.json": "79136c0287d7e845b2308724e997d90b3b7a805e4fe2843da189774d6ec93a6e",
-    "claim_check.json": "b7a899e4733103ce2eb7f8a5af855fb9153ef0647bd3fb57cbd2826bd64e2173",
+    "claim_check.json": "1e03b4be92ff1c7ac47607e8866c26c8d51c4f6ebcf5f745ee45527bbf1e7e5b",
     "directions.json": "2d709b22623617481aefa804b96da5c5d274812758094bb921c173d0466c29df",
     "evidence.json": "8c97b5ec4dd2e295bbf4a8eaa9372acfd30f2fcc1615cc5810525fdbbb596d59",
     "judgment.json": "89e67d8e39d0666399d8b470809425420fb18271c756578790e08248301ec3ff",
@@ -2745,7 +2754,7 @@
     "profile_parse.json": "abe812515ea2a27d78209f08c28c8bdde0a5c10d1672ef0983d66d68c6eece1a",
     "report.html": "cff1e3ca14fbc9145f6a1a4fbb3a4f14ae3c3e4544fbdeea5f215321011619d1",
     "report.md": "90ff1e8ce1555a081d376dbea69e831d6f8788393724d3db9bdb8189646a6262",
-    "report_trace.json": "ebf880a47e0d24e2c0bf743265eea3e1a327f40fbff5c6b477a76160c6546180",
+    "report_trace.json": "997bb29b5b59f88eb29560544fca843c288201ff96425e840657c684e45a1f0b",
     "rules_check.json": "b45b1313cf295a6e320d32afce13a0b93b9b0e54e8b46d8d3cf2d6329732a40b"
   }
 }

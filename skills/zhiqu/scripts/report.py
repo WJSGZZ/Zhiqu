@@ -10,6 +10,8 @@ report.json 的字段见 references/report-guide.md；result.json 是 optimize.p
 """
 import argparse
 from check_report import check_report, publication_gate
+from data_provenance import (entries as provenance_entries, evidence_lines,
+                             only_third_party, prediction_label)
 import html
 import json
 import os
@@ -1791,12 +1793,20 @@ def build(rep, opt):
             hl = " class='hl'" if likely and x is likely else ''
             probs = f"<td class='r'>{fmt(x['p_clear'])}</td><td class='r'>{fmt(x['p_land'],1)}</td>" if numeric else "<td>按分档</td><td>不显示百分比</td>"
             rank_cell = f"{x['expected_cut_rank']:,}" + (f"<div class='small'>{interval80(x)}</div>" if grade!='A' else '')
+            if prediction_label(x):
+                rank_cell += f"<div class='small'>{E(prediction_label(x))}</div>"
             snippets = [v.strip() for v in re.split(r'[。；]', notes.get(x['name'],'')) if v.strip() and not re.search(r'\d',v)]
             note = pending_note(x) or (snippets[0] if snippets else ('请核章程限制' if x.get('limits') else '历年位次与计划见第 12 节'))
             note = note if len(note)<=18 else note[:17]+'…'
             body += (f"<tr{hl}><td class='num'>{x['order']}</td><td>{E(x['name'])}<span class='row-note'>{E(note)}</span></td>"
                      f"<td><span class='tag {E(x['tag'])}'>{E(x['tag'])}</span></td><td class='r'>{x['utility']:.1f}</td>{probs}<td class='r'>{rank_cell}</td></tr>")
         body += '</tbody></table>'
+        for x in lst:
+            review = rep.get('third_party_review', {}).get(x['name'], {})
+            if only_third_party(x):
+                body += (f"<p class='small'><strong>{E(x['name'])}</strong>："
+                         f"{E(str(review.get('disclosure', '第三方整理，未经官方核对；不单独支撑主结论')))}；"
+                         f"{E(str(review.get('margin', '余量建议尚未填写，不能交付')))}</p>")
         body += ('<p class="small">"偏好"是 0–100 的分数，由"你的画像"一节的权重和各项打分算出。"单独过线"只看这一个志愿；"最终录取"考虑了前面志愿可能已经录取你；"预测位次"是今年最低录取位次的中位预测。'
                  '冲：单独过线 &lt; 40%；稳：40%–85%；保：≥ 85%。高亮行是最可能的去向。'
                  + ('标“需核对报名资格”的志愿属于' + E('、'.join(dict.fromkeys(pending_plan(x) for x in lst if pending_plan(x))))
@@ -1927,6 +1937,27 @@ def build(rep, opt):
         details += '<h4>各志愿历年位次与计划</h4><p class="small">未公布或未核实的项目不补造数字。</p><table><thead><tr><th style="width:6%">序</th><th style="width:30%">志愿</th><th>历年位次、计划及补充说明</th></tr></thead><tbody>'
         details += ''.join(f"<tr><td>{x['order']}</td><td>{E(x['name'])}</td><td>{E(rep.get('list_notes',{}).get(x['name'],'未提供历年明细'))}{group_line(x,fmt)}{limit_line(x)}</td></tr>" for x in lst)
         details += '</tbody></table>'
+        if any(x.get('data_provenance') for x in lst):
+            details += '<h4>逐值来历与待核清单</h4>'
+            for x in lst:
+                lines = evidence_lines(x)
+                if not lines:
+                    continue
+                details += f'<h4>{E(x["name"])}</h4><ul>' + ''.join(f'<li>{E(line)}</li>' for line in lines) + '</ul>'
+                seen = set()
+                for _, _, fact in provenance_entries(x):
+                    sid = fact.get('source_id', '')
+                    if sid in seen:
+                        continue
+                    seen.add(sid)
+                    source = fact.get('source') or fact
+                    label = '｜'.join(str(source.get(k) or '未注明') for k in ('publisher', 'title'))
+                    url = source.get('landing_url') or source.get('file_url') or source.get('url') or ''
+                    ref = refs.add(label + '；出处 ' + sid, url, source.get('retrieved', ''))
+                    details += f'<p class="small">{E(sid)}：{E(label)}<sup class="source-ref">[{ref}]</sup></p>'
+                if only_third_party(x):
+                    review = rep.get('third_party_review', {}).get(x['name'], {})
+                    details += f'<p>{E(str(review.get("disclosure", "")))}；{E(str(review.get("margin", "")))}</p>'
     sec("方法与假设", body)
 
     # 事后回看（仅用于回测案例）
@@ -1974,11 +2005,13 @@ def write_sheet(opt, path):
     import csv
     with open(path, "w", encoding="utf-8-sig", newline="") as fh:
         w = csv.writer(fh)
-        w.writerow(["序", "院校代码", "院校", "专业组", "专业代码", "组内专业顺序", "服从调剂"])
+        metadata = any(x.get('data_provenance') or x.get('source_grade') for x in (opt or {}).get('list', []))
+        w.writerow(["序", "院校代码", "院校", "专业组", "专业代码", "组内专业顺序", "服从调剂"] + (["数据等级", "历年数字与出处"] if metadata else []))
         for x in (opt or {}).get("list", []):
             ms = "、".join(f"{i}. {mj['name']}" for i, mj in enumerate(x.get("majors") or [], 1))
             w.writerow([x["order"], x.get("code") or "", x["name"].split("（")[0].split("·")[0] if x.get("group") else x["name"].split("（")[0],
-                        x.get("group") or "", x.get("major_code") or "", ms, ("是" if x.get("obey", True) else "否") if x.get("group") else "—"])
+                        x.get("group") or "", x.get("major_code") or "", ms, ("是" if x.get("obey", True) else "否") if x.get("group") else "—"]
+                       + ([prediction_label(x), '；'.join(evidence_lines(x))] if metadata else []))
 
 
 def find_browser():

@@ -431,6 +431,10 @@ def main():
                     "code": (r["raw"].get("code") or "").strip(), "group": (r["raw"].get("group") or "").strip(),
                     "major_code": (r["raw"].get("major_code") or "").strip(),
                     "limits": (r["raw"].get("limits") or "").strip()})
+        for key in ("source_grade", "data_provenance"):
+            value = r["raw"].get(key)
+            if value:
+                out[-1][key] = json.loads(value) if key == "data_provenance" else value
         if r["majors"]:
             out[-1]["majors"] = [{"name": nm, "utility": u, "p": c / args.sims} for (nm, u, _), c in zip(r["majors"], mk or [0] * len(r["majors"]))]
             p("|  | " + "；".join(f"{nm} {c / args.sims:.1%}" for (nm, _, _), c in zip(r["majors"], mk or [0] * len(r["majors"]))) + f"；调剂 {b / args.sims:.1%} | | | | | | | |")

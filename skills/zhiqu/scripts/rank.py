@@ -48,12 +48,15 @@ class Table:
                 sys.exit(f"{path}：需要 score 列，以及 count 或 cumulative 列")
             rows = []
             self.unverified_scores = set()
+            self.aggregate_scores = set()
             for r in reader:
                 s = r[cols["score"]].strip()
                 if not s:
                     continue
                 if 'source' in cols and '插值' in r[cols['source']]:
                     self.unverified_scores.add(float(s))
+                if 'score_operator' in cols and r[cols['score_operator']].strip() not in ('', '=', '＝'):
+                    self.aggregate_scores.add(float(s))
                 if "cumulative" in cols and r[cols["cumulative"]].strip():
                     count = r.get(cols.get('count'), '')
                     rows.append((float(s), int(float(count)) if count.strip() else None,
@@ -65,8 +68,11 @@ class Table:
     @classmethod
     def from_rows(cls, rows, label="数据库一分一段表", *, head_unknown=False):
         """与CSV消费者使用同一缺口门禁；不在临时CSV中重抄数据库。"""
+        rows = list(rows)
         table = cls.__new__(cls)
         table.unverified_scores = set()
+        table.aggregate_scores = {float(r['score']) for r in rows
+                                  if str(r.get('score_operator') or '=').strip() not in ('=', '＝')}
         table.head_unknown = head_unknown
         parsed = [(float(r['score']), r.get('count'), int(r['cum'])) for r in rows]
         table._set_rows(parsed, label)
@@ -115,6 +121,8 @@ class Table:
         if score != self.scores[i]:
             if i and self.scores[i - 1] - self.scores[i] > 1:raise self._gap(i)
             raise MissingDataError(self.path, None, None, [score], '原表未给该分数行')
+        if self.scores[i] in self.aggregate_scores:
+            raise MissingDataError(self.path, None, None, [], '原表为合并分数档，未公布该单分位次')
         if self.scores[i] in self.unverified_scores or (i and self.scores[i-1] in self.unverified_scores and self.counts[i] is None):
             raise MissingDataError(self.path, None, None, [self.scores[i]], '涉及标记为插值的非原表行')
         if i and (self.scores[i - 1] - self.scores[i] > 1 or not self.integer_grid):
@@ -132,6 +140,8 @@ class Table:
         i = bisect.bisect_left(self.cum, rank)
         if rank < 1 or i >= len(self.scores):
             raise MissingDataError(self.path, None, None, [], '位次超出原表范围')
+        if self.scores[i] in self.aggregate_scores:
+            raise MissingDataError(self.path, None, None, [], '原表为合并分数档，不能确定该位次的单分')
         if i == 0 and ((self.head_unknown and self.counts[i] is None) or
                        (self.counts[i] is not None and rank <= self.cum[i]-self.counts[i])):
             raise MissingDataError(self.path, None, None, [], '首档上方缺数据或为合并档，不能确定该位次的分数')
