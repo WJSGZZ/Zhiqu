@@ -28,9 +28,84 @@ _storage_spec.loader.exec_module(_storage)
 SHARED = Path(__file__).resolve().parents[1]
 ROOT = Path(__file__).resolve().parents[3]
 DEFAULTS = {k: SHARED / 'data' / k / (k + '.sqlite') for k in ('education', 'employment')}
+# Only these recorded source meanings explicitly identify a per-score count.
+# Unspecified “人数”, cumulative counts and derived counts cannot close a gap.
+SEGMENT_COUNT_KINDS = frozenset({
+    '分段人数（原列）', '原分段人数', '原表分别明示人数与累计人数',
+    '原表分别明示人数小计与人数累计', '原表本分人数',
+    '原表本段与累计人数分列', '原表本段人数/累计人数；空人数不推算',
+    '本分数人数', '本段人数/累计人数/累计比例%原表分列',
+})
 
 class QueryError(ValueError):
     pass
+
+
+def _source_completeness(c, table, source_id):
+    if 'meta' not in _tables(c):return None
+    prefix='gk_source_coverage:'+str(source_id)+':'+table+':'
+    row=c.execute('SELECT value FROM data.meta WHERE key>=? AND key<? ORDER BY rowid DESC LIMIT 1',(prefix,prefix+'\uffff')).fetchone()
+    if not row:return None
+    value=_json(row[0],{})
+    if value.get('source_id')!=source_id or value.get('table_name')!=table or not isinstance(value.get('missing_rows'),list):raise QueryError('原表完整性记录损坏：'+str(source_id))
+    return value
+
+
+def _completeness_text(value, full=False):
+    if not value or value.get('status')!='partial':return ''
+    missing=value['missing_rows'];shown=missing if full else missing[:12]
+    positions='、'.join(f"页{x['page']}/表{x['table']}/行{x['row']}" for x in shown)
+    text=f"原表不完整：原件{value['original_rows']}行，已核入{value['accepted_rows']}行；缺{len(missing)}行"
+    if positions:text+='（'+positions+'）'
+    if len(missing)>len(shown):text+='；--full查看全部缺行及原因'
+    if full and missing:text+='；排除原因：'+'；'.join(dict.fromkeys(x['reason'] for x in missing))
+    if value.get('missing_scope'):text+='；'+value['missing_scope']
+    return text
+
+
+def query_yfyd(province, year, subject, *, score=None, rank=None, db=None):
+    """SQLite与报告CSV共用rank.Table；缺行不能通过另一查询路径补算。"""
+    if (score is None)==(rank is None):raise QueryError('分数、位次必须且只能提供一项')
+    scripts=ROOT/'skills/zhiqu/scripts'
+    if str(scripts) not in sys.path:sys.path.insert(0,str(scripts))
+    from rank import Table, MissingDataError
+    with _open('education',db)as(c,_):
+        context_columns={r[1] for r in c.execute('PRAGMA data.table_info(gk_yfyd_context)')}
+        if {'segment_n','count_kind','value_status'} <= context_columns:
+            sql='SELECT y.*,k.segment_n AS count,k.count_kind AS _count_kind,k.value_status AS _count_status FROM data.gk_official_yfyd y LEFT JOIN data.gk_yfyd_context k ON y.province=k.province AND y.year=k.year AND y.subject=k.subject AND y.score=k.score AND y.source_id=k.source_id WHERE y.province=? AND y.year=? AND y.subject=? ORDER BY y.score DESC'
+        else:sql='SELECT * FROM data.gk_official_yfyd WHERE province=? AND year=? AND subject=? ORDER BY score DESC'
+        rows=[dict(r) for r in c.execute(sql,(province,year,subject))]
+        for row in rows:
+            # Legacy segment_n also holds explicitly cumulative or unspecified
+            # counts. Neither those nor derived counts prove a tied-score interval.
+            kind=row.get('_count_kind') or ''
+            states=_json(row.get('_count_status'),{})
+            state=states.get('segment_n',{}) if isinstance(states,dict) else {}
+            original=isinstance(state,dict) and state.get('status') in {'官方原值','人工更正'}
+            segment=kind in SEGMENT_COUNT_KINDS
+            if not (original and segment):row['count']=None
+        if not rows:raise QueryError('未取到该省年科类的一分一段表')
+        ids=list(dict.fromkeys(r['source_id'] for r in rows));coverage=[_source_completeness(c,'gk_official_yfyd',sid)for sid in ids]
+        result={'kind':'yfyd','province':province,'year':year,'subject':subject,'completeness':[v for v in coverage if v],'sources':[_source(c,sid)for sid in ids]}
+        usable=[r for r in rows if r.get('cum') is not None]
+        if not usable:
+            result.update(status='missing_data',message='该段缺数据：原表没有可用累计人数，不能换算')
+            return result
+        head=usable[0];head_unknown=False
+        for entry in result['completeness']:
+            if entry['source_id']!=head['source_id']:continue
+            for missing in entry['missing_rows']:
+                try:
+                    if missing['page']==head.get('src_page') and str(missing['table'])==str(head.get('src_table')) and missing['row']<int(head['src_row']):head_unknown=True
+                except (KeyError,TypeError,ValueError):head_unknown=True
+        table=Table.from_rows(usable,province+str(year)+subject,head_unknown=head_unknown)
+        try:
+            if score is not None:
+                best,last=table.rank_of(score);result.update(score=score,best_rank=best,rank=last)
+            else:result.update(rank=rank,score=table.score_of(rank))
+            result['status']='ok'
+        except MissingDataError as exc:result.update(status='missing_data',message=str(exc),gap=exc.details)
+        return result
 
 
 def _path(domain, db=None):
@@ -585,6 +660,7 @@ def _record(c, table, row):
             result['locator']['original'] = proof['locator']
             result['locator'].update({key: proof[key] for key in ('src_page','src_table','src_row') if proof.get(key) not in (None, '')})
     if table=='gk_official_cutoff':
+        result['completeness']=_source_completeness(c,table,row.get('source_id'))
         result['context'].update(_official_context(c, row))
         provided=result['context'].get('source_format_columns')
         if isinstance(provided,list):
@@ -1286,6 +1362,13 @@ def _compact_source_lines(rows, refs):
 
 
 def render_text(result, *, full=False):
+    if result.get('kind')=='yfyd':
+        lines=[result['province']+' '+str(result['year'])+' '+result['subject']]
+        lines.extend(_completeness_text(v,full)for v in result['completeness']if v.get('status')=='partial')
+        if result['status']=='missing_data':lines.append(result['message'])
+        else:lines.append(str(result['score'])+'分 → 位次'+str(result['rank']))
+        lines.extend('来源：'+str(s.get('grade')or'未注明')+'｜'+str(s.get('publisher')or'未注明')+'｜'+str(s.get('title')or'')+'｜'+str(s.get('landing_url')or s.get('file_url')or'') for s in result['sources'])
+        return '\n'.join(lines)+'\n'
     if result.get('query')=='source':
         if full:return _render_full_text(result)
         return _render_full_text(dict(result,locations=[{k:v for k,v in row.items() if k!='annotation_json'} for row in result.get('locations',[])]))
@@ -1309,6 +1392,14 @@ def render_text(result, *, full=False):
         total_label=str(sec.get('total',len(original)))+noun
         if profile and sec.get('fact_count') is not None:total_label+='（'+str(sec['fact_count'])+'个不同值）'
         lines.extend(['',sec['title']+'：共'+total_label+'；本页'+str(len(visible))+noun+'；后续'+str(more)+'行未显示','适用范围 | 数值与出处','--- | ---'])
+        completeness={}
+        for item in original:
+            for origin in item.get('_origin_rows',[item]):
+                value=origin.get('completeness')
+                if value:completeness[value['source_id']]=value
+        for value in completeness.values():
+            message=_completeness_text(value,full)
+            if message:lines.append('原表说明〔'+value['source_id']+'〕：'+message)
         if hidden_on_page:lines.append('显示说明：本页另有'+str(hidden_on_page)+'条保留记录默认不展开；--full或--json查看。')
         if sec.get('excluded_facts'):
             lines.append('说明：'+str(sec['excluded_facts'])+'个属性无可用来源；已沿用原工作表身份隔离，不纳入概况或冲突判定。')
@@ -1428,6 +1519,8 @@ def main(argv=None):
     if argv[:2]==['detail','source']:argv=argv[1:]
     ap=argparse.ArgumentParser(description='知衢本机统一只读查询；来源链与适用范围不合并')
     sub=ap.add_subparsers(dest='command',required=True)
+    yf=sub.add_parser('yfyd');yf.add_argument('province');yf.add_argument('year',type=int);yf.add_argument('subject');yf.add_argument('--db');yf.add_argument('--json',action='store_true');yf.add_argument('--full',action='store_true')
+    choice=yf.add_mutually_exclusive_group(required=True);choice.add_argument('--score',type=float);choice.add_argument('--rank',type=float)
     for cmd in ['school','program','jobs','source']:
         p=sub.add_parser(cmd);p.add_argument('--db');p.add_argument('--json',action='store_true');p.add_argument('--full',action='store_true',help='展开当前页的完整文字与来源；分页仍用--limit/--offset');p.add_argument('--limit',type=int,default=10);p.add_argument('--offset',type=int,default=0)
         if cmd in ['school','program']:p.add_argument('school');p.add_argument('--year',type=int);p.add_argument('--province')
@@ -1437,12 +1530,13 @@ def main(argv=None):
         if cmd=='source':p.add_argument('source_id');p.add_argument('--domain',choices=['education','employment'],default='education')
     ns=vars(ap.parse_args(argv));command=ns.pop('command');as_json=ns.pop('json');full=ns.pop('full')
     try:
-        if command=='school':res=query_school(ns.pop('school'),**ns)
+        if command=='yfyd':res=query_yfyd(**ns)
+        elif command=='school':res=query_school(ns.pop('school'),**ns)
         elif command=='program':res=query_program(ns.pop('school'),ns.pop('program'),**ns)
         elif command=='jobs':res=query_jobs(**ns)
         else:res=query_source(ns.pop('source_id'),**ns)
         print(json.dumps(res,ensure_ascii=False,indent=2) if as_json else render_text(res,full=full),end='\n' if as_json else '')
     except (QueryError,sqlite3.Error) as e:ap.exit(2,'查询未完成：'+str(e)+'\n')
-    return 0
+    return 2 if res.get('status')=='missing_data' else 0
 
-if __name__=='__main__':main()
+if __name__=='__main__':sys.exit(main())

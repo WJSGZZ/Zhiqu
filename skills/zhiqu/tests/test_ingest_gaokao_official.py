@@ -12,6 +12,7 @@ class IngestGaokaoOfficialTest(unittest.TestCase):
   self.temp=tempfile.TemporaryDirectory();self.path=Path(self.temp.name)/'education.stage.sqlite';self.audit=self.path.parent/'audit-test-generation.sqlite'
   with sqlite3.connect(self.path) as c:
    c.execute('CREATE TABLE institution(institution_id TEXT PRIMARY KEY,name TEXT)');c.execute("INSERT INTO institution VALUES('1000000001','甲大学')")
+   c.execute('CREATE TABLE meta(key TEXT PRIMARY KEY,value TEXT)')
    c.execute('CREATE TABLE source('+','.join(k+' TEXT'+(' PRIMARY KEY' if k=='source_id' else '') for k in mod.SOURCE)+')')
    c.execute('CREATE TABLE gk_official_yfyd('+','.join(k+(' INTEGER' if k in ['year','score','cum','src_page'] else ' TEXT') for k in mod.YFYD)+',PRIMARY KEY(province,year,subject,score))')
    c.execute('CREATE TABLE gk_official_cutoff('+','.join(k+(' INTEGER' if k in ['year','plan','admit','score','rank','src_page'] else ' TEXT') for k in mod.CUTOFF)+')')
@@ -285,6 +286,8 @@ class IngestGaokaoOfficialTest(unittest.TestCase):
   return m
  def test_partial_image_keeps_exclusion_proof_and_accepted_values_only(self):
   m=self.partial_image();before=self.snapshot();self.assertEqual(self.ingest(m)['inserted'],2);self.assertEqual(self.snapshot(),before)
+  with sqlite3.connect(self.path)as c:
+   coverage=json.loads(c.execute("SELECT value FROM meta WHERE key LIKE 'gk_source_coverage:%'").fetchone()[0]);self.assertEqual(coverage['status'],'partial');self.assertEqual(coverage['missing_rows'][0]['row'],4);self.assertEqual(coverage['accepted_rows'],2)
   with sqlite3.connect(self.audit)as c:
    for (payload,)in c.execute('SELECT excerpt_locator_json FROM gk_official_original_evidence'):
     review=json.loads(payload)['review'];self.assertEqual(review['original_source_rows'],3);self.assertEqual(review['excluded_row_count'],1);self.assertEqual(len(review['excluded_rows_sha256']),64);self.assertNotIn('excluded_rows',review)
@@ -306,5 +309,14 @@ class IngestGaokaoOfficialTest(unittest.TestCase):
   m=self.partial_image();d=copy.deepcopy(m['datasets'][0]);d['review']['partition']='另一个原范围';d['rows'][0]['record_id']='other0';d['rows'][1]['record_id']='other1';d['review']['samples']=[{'record_id':r['record_id'],'status':'approved','locator':r['locator']}for r in d['rows']];m['datasets'].append(d)
   for ds in m['datasets']:ds['review']['original_source_rows']=6
   with self.assertRaisesRegex(ValueError,'排除行重复'):self.ingest(m)
+
+ def test_filling_gap_preserves_old_business_and_audit_rows(self):
+  self.ingest(self.partial_image())
+  with sqlite3.connect(self.audit)as c:old=c.execute('SELECT * FROM gk_official_original_evidence ORDER BY record_id').fetchall()
+  full=copy.deepcopy(self.m);full['datasets'][0]['review'].update(read_method='image',dual_read_equal=True)
+  result=self.ingest(full);self.assertEqual(result['inserted'],1);self.assertEqual(result['existing'],2)
+  with sqlite3.connect(self.audit)as c:self.assertEqual(c.execute('SELECT * FROM gk_official_original_evidence ORDER BY record_id LIMIT 2').fetchall(),old)
+  with sqlite3.connect(self.path)as c:
+   latest=json.loads(c.execute("SELECT value FROM meta WHERE key LIKE 'gk_source_coverage:%' ORDER BY rowid DESC LIMIT 1").fetchone()[0]);self.assertEqual(latest['accepted_rows'],3);self.assertEqual(latest['missing_rows'],[])
 
 if __name__=='__main__':unittest.main()

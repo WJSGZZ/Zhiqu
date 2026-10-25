@@ -47,37 +47,110 @@ class Table:
             if "score" not in cols or not ({"count", "cumulative"} & cols.keys()):
                 sys.exit(f"{path}：需要 score 列，以及 count 或 cumulative 列")
             rows = []
+            self.unverified_scores = set()
             for r in reader:
                 s = r[cols["score"]].strip()
                 if not s:
                     continue
+                if 'source' in cols and '插值' in r[cols['source']]:
+                    self.unverified_scores.add(float(s))
                 if "cumulative" in cols and r[cols["cumulative"]].strip():
-                    rows.append((float(s), None, int(float(r[cols["cumulative"]]))))
+                    count = r.get(cols.get('count'), '')
+                    rows.append((float(s), int(float(count)) if count.strip() else None,
+                                 int(float(r[cols["cumulative"]]))))
                 else:
                     rows.append((float(s), int(float(r[cols["count"]])), None))
+        self._set_rows(rows, str(path))
+
+    @classmethod
+    def from_rows(cls, rows, label="数据库一分一段表", *, head_unknown=False):
+        """与CSV消费者使用同一缺口门禁；不在临时CSV中重抄数据库。"""
+        table = cls.__new__(cls)
+        table.unverified_scores = set()
+        table.head_unknown = head_unknown
+        parsed = [(float(r['score']), r.get('count'), int(r['cum'])) for r in rows]
+        table._set_rows(parsed, label)
+        return table
+
+    def _set_rows(self, rows, path):
+        if not rows:
+            raise ValueError(f"{path}：没有可用分数行")
         rows.sort(key=lambda x: -x[0])
+        self.integer_grid = all(float(r[0]).is_integer() for r in rows)
         self.scores, self.cum, total = [], [], 0
+        self.counts = []
         for s, cnt, cu in rows:
+            if cu is None and self.scores and self.scores[-1] - s > 1:
+                raise MissingDataError(path, self.scores[-1], s,
+                                       list(range(math.ceil(s) + 1, math.ceil(self.scores[-1]))),
+                                       '仅有本段人数，缺行后的累计无法推算')
             total = cu if cu is not None else total + cnt
             self.scores.append(s)
             self.cum.append(total)
+            self.counts.append(cnt)
         if any(b < a for a, b in zip(self.cum, self.cum[1:])):
             sys.exit(f"{path}：累计人数不是单调递增，请检查表格")
         self.path, self.total = path, self.cum[-1]
+        self.head_unknown = getattr(self, 'head_unknown', False)
+
+    def _gap(self, i):
+        upper, lower = self.scores[i - 1], self.scores[i]
+        missing = list(range(math.ceil(lower) + 1, math.ceil(upper))) if self.integer_grid else []
+        return MissingDataError(self.path, upper, lower, missing,
+                                '原表中间缺行' if self.integer_grid else '小数分段的连续刻度未证实')
+
+    @property
+    def gaps(self):
+        return [self._gap(i).details for i in range(1, len(self.scores))
+                if self.scores[i - 1] - self.scores[i] > 1 or not self.integer_grid]
 
     def rank_of(self, score):
-        """返回 (最好位次, 位次)。分数不在表中时取表中不高于它的最近一档。"""
+        """返回已公布同分区间；不跨缺行取下一档或补人数。"""
         neg = [-x for x in self.scores]
         i = bisect.bisect_left(neg, -score)
         if i >= len(self.scores):
-            return self.cum[-1], self.cum[-1]
+            raise MissingDataError(self.path, self.scores[-1], score, [], '低于原表范围')
+        if score > self.scores[0]:
+            raise MissingDataError(self.path, score, self.scores[0], [], '高于原表范围')
+        if score != self.scores[i]:
+            if i and self.scores[i - 1] - self.scores[i] > 1:raise self._gap(i)
+            raise MissingDataError(self.path, None, None, [score], '原表未给该分数行')
+        if self.scores[i] in self.unverified_scores or (i and self.scores[i-1] in self.unverified_scores and self.counts[i] is None):
+            raise MissingDataError(self.path, None, None, [self.scores[i]], '涉及标记为插值的非原表行')
+        if i and (self.scores[i - 1] - self.scores[i] > 1 or not self.integer_grid):
+            if score != self.scores[i] or self.counts[i] is None:
+                raise self._gap(i)
+        if self.counts[i] is not None:
+            return self.cum[i] - self.counts[i] + 1, self.cum[i]
+        if i == 0 and self.head_unknown:
+            raise MissingDataError(self.path, None, None, [], '最高已入行之前仍有排除行，最好位次未能确定')
         prev = self.cum[i - 1] if i > 0 else 0
         return prev + 1, self.cum[i]
 
     def score_of(self, rank):
         """位次 rank 的考生所在分数。"""
         i = bisect.bisect_left(self.cum, rank)
-        return self.scores[min(i, len(self.scores) - 1)]
+        if rank < 1 or i >= len(self.scores):
+            raise MissingDataError(self.path, None, None, [], '位次超出原表范围')
+        if i == 0 and ((self.head_unknown and self.counts[i] is None) or
+                       (self.counts[i] is not None and rank <= self.cum[i]-self.counts[i])):
+            raise MissingDataError(self.path, None, None, [], '首档上方缺数据或为合并档，不能确定该位次的分数')
+        if self.scores[i] in self.unverified_scores or (i and self.scores[i-1] in self.unverified_scores and self.counts[i] is None):
+            raise MissingDataError(self.path, None, None, [self.scores[i]], '涉及标记为插值的非原表行')
+        if i and (self.scores[i - 1] - self.scores[i] > 1 or not self.integer_grid):
+            # 明确的本段人数能证明本分数同分区间；累计差不能跨缺行冒充本段人数。
+            if self.counts[i] is None or rank <= self.cum[i] - self.counts[i]:
+                raise self._gap(i)
+        return self.scores[i]
+
+
+class MissingDataError(ValueError):
+    def __init__(self, path, upper, lower, missing, reason='原表中间缺行'):
+        self.details = dict(table=str(path), upper_score=upper, lower_score=lower,
+                            missing_scores=missing, reason=reason)
+        positions = '、'.join(str(x) + '分行' for x in missing) or reason
+        if not missing and upper is not None and lower is not None:positions+=f'（{lower:g}—{upper:g}分之间）'
+        super().__init__(f"该段缺数据：{positions}（{path}）；不能跨缺口换算")
 
 
 def cmd_score(a):
@@ -213,7 +286,10 @@ def main():
     s.set_defaults(fn=cmd_predict)
 
     a = ap.parse_args()
-    a.fn(a)
+    try:
+        a.fn(a)
+    except MissingDataError as exc:
+        ap.exit(2, str(exc) + '\n')
 
 
 if __name__ == "__main__":
