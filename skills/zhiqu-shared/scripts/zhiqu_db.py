@@ -72,7 +72,8 @@ def query_yfyd(province, year, subject, *, score=None, rank=None, db=None):
     with _open('education',db)as(c,_):
         context_columns={r[1] for r in c.execute('PRAGMA data.table_info(gk_yfyd_context)')}
         if {'segment_n','count_kind','value_status'} <= context_columns:
-            sql='SELECT y.*,k.segment_n AS count,k.count_kind AS _count_kind,k.value_status AS _count_status FROM data.gk_official_yfyd y LEFT JOIN data.gk_yfyd_context k ON y.province=k.province AND y.year=k.year AND y.subject=k.subject AND y.score=k.score AND y.source_id=k.source_id WHERE y.province=? AND y.year=? AND y.subject=? ORDER BY y.score DESC'
+            operator='k.score_operator' if 'score_operator' in context_columns else "'='"
+            sql='SELECT y.*,k.segment_n AS count,k.count_kind AS _count_kind,k.value_status AS _count_status,'+operator+' AS score_operator FROM data.gk_official_yfyd y LEFT JOIN data.gk_yfyd_context k ON y.province=k.province AND y.year=k.year AND y.subject=k.subject AND y.score=k.score AND y.source_id=k.source_id WHERE y.province=? AND y.year=? AND y.subject=? ORDER BY y.score DESC'
         else:sql='SELECT * FROM data.gk_official_yfyd WHERE province=? AND year=? AND subject=? ORDER BY score DESC'
         rows=[dict(r) for r in c.execute(sql,(province,year,subject))]
         for row in rows:

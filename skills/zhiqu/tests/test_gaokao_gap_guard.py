@@ -44,6 +44,17 @@ class RankGapGuard(unittest.TestCase):
   with self.assertRaises(MissingDataError):t.score_of(90)
  def test_absent_fractional_score_not_rounded_to_next_row(self):
   with self.assertRaises(MissingDataError):self.table().rank_of(597.5)
+ def test_explicit_aggregate_band_never_becomes_an_exact_score(self):
+  t=Table.from_rows([dict(score=683,cum=126,count=126,score_operator='>='),dict(score=682,cum=144,count=18)])
+  with self.assertRaisesRegex(MissingDataError,'合并分数档'):t.rank_of(683)
+  with self.assertRaisesRegex(MissingDataError,'合并分数档'):t.score_of(100)
+  self.assertEqual(t.rank_of(682),(127,144));self.assertEqual(t.score_of(130),682)
+ def test_csv_aggregate_operator_has_the_same_guard(self):
+  with tempfile.TemporaryDirectory()as d:
+   p=Path(d)/'t.csv';p.write_text('score,count,cum,score_operator\n658,109,109,>=\n657,16,125,=\n')
+   with self.assertRaisesRegex(MissingDataError,'合并分数档'):Table(p).score_of(50)
+   with self.assertRaisesRegex(MissingDataError,'合并分数档'):Table(p).rank_of(658)
+   self.assertEqual(Table(p).rank_of(657),(110,125))
  def test_fractional_scale_not_guessed_from_two_observations(self):
   t=Table.from_rows([dict(score=100,cum=10),dict(score=99.5,cum=20)])
   with self.assertRaises(MissingDataError):t.score_of(15)
@@ -79,6 +90,13 @@ class DatabaseGapGuard(unittest.TestCase):
  def test_cumulative_context_count_does_not_close_gap(self):
   self.context_count(130,'累计人数（原表明示）','官方原值')
   r=db.query_yfyd('甲省',2025,'物理',rank=120,db=self.p);self.assertEqual(r['status'],'missing_data');self.assertNotIn('score',r)
+ def test_database_aggregate_context_is_not_a_single_score(self):
+  self.context_count(100,'本分数人数','官方原值')
+  with sqlite3.connect(self.p)as c:
+   c.execute('ALTER TABLE gk_yfyd_context ADD COLUMN score_operator TEXT')
+   c.execute("UPDATE gk_yfyd_context SET score=600,score_operator='>='")
+  for kwargs in [dict(rank=50),dict(score=600)]:
+   r=db.query_yfyd('甲省',2025,'物理',db=self.p,**kwargs);self.assertEqual(r['status'],'missing_data');self.assertIn('合并分数档',r['message'])
  def test_unspecified_or_derived_context_count_does_not_close_gap(self):
   for kind,status in [('原表人数','官方原值'),('分段表累计人数','官方原值'),('本分数人数','推算')]:
    with self.subTest(kind=kind,status=status):
