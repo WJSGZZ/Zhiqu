@@ -1572,12 +1572,14 @@ def render_text(result, *, full=False):
 
 def export_gaokao(province, subject, years, *, out, schools=None, batch=None, plan_type=None, key='group', db=None):
     """Export read-only, scope-safe annual CSVs for pool.py, with value sources."""
-    from gaokao_export import collect, export_records, export_yfyd
+    from gaokao_export import collect, export_records, export_yfyd, collect_auxiliary, export_auxiliary
     years = sorted(set(int(y) for y in years))
     if not years or any(y < 1900 or y > 2100 for y in years):
         raise QueryError('年份须为1900—2100的非空列表')
     cdf_targets=[Path(out)/f'{province}-{subject}-{year}-yfyd-{kind}.csv'for year in years for kind in ('all','usable')]
     if any(target.exists()for target in cdf_targets):raise QueryError('一分一段导出目标已存在，请使用新目录')
+    auxiliary_targets=[Path(out)/f'{province}-{subject}-{year}-{kind}.csv'for year in years for kind in ('plans','batch-lines')]
+    if any(target.exists()for target in auxiliary_targets):raise QueryError('计划或控制线导出目标已存在，请使用新目录')
     with _open('education', db) as (c, path):
         tables = _tables(c)
         selected = set(schools or [])
@@ -1586,6 +1588,7 @@ def export_gaokao(province, subject, years, *, out, schools=None, batch=None, pl
                 try: selected.add(_identity(c, school)[0]['institution_id'])
                 except QueryError: pass
         records = collect(c, tables, province, subject, years)
+        auxiliary=collect_auxiliary(c,tables,province,subject,years,schools=selected,batch=batch,plan_type=plan_type,completeness=lambda row:_source_completeness(c,row['_table'],row['source_id']))
         yfyd = []; cdf_rows={}; cdf_sources={}; cdf_coverage={}
         for year in years:
             if 'gk_official_yfyd' in tables:
@@ -1607,9 +1610,18 @@ def export_gaokao(province, subject, years, *, out, schools=None, batch=None, pl
             result = export_records(records,province,subject,years,out=out,key=key,schools=selected,batch=batch,plan_type=plan_type,yfyd_metadata=yfyd)
             result['candidate_status']=result['status']
             result.update(export_yfyd(cdf_rows,province,subject,years,out=out,sources=cdf_sources,coverage=cdf_coverage,metadata=yfyd))
+            aux=export_auxiliary(auxiliary,province,subject,years,out=out)
+            for name in ('plan_files','batch_line_files','plan_exported_rows','batch_line_exported_rows'):
+                aux[name]={str(k):v for k,v in aux[name].items()}
+            result['auxiliary']=aux
+            result['plan_exported_rows']=aux['plan_exported_rows']
+            result['batch_line_exported_rows']=aux['batch_line_exported_rows']
             available={str(year):bool(result['exported_rows'][str(year)]or result['yfyd_exported_rows'][str(year)])for year in years}
             result['status']='ok' if all(available.values()) else 'partial' if any(available.values()) else 'missing_data'
             result['message']='未导出志愿候选；仅有一分一段原表' if not any(result['exported_rows'].values()) and any(result['yfyd_exported_rows'].values()) else '已按两类分别列出导出行数'
+            if not any(available.values()) and (any(aux['plan_exported_rows'].values()) or any(aux['batch_line_exported_rows'].values())):
+                result['status']='partial'
+                result['message']='仅导出计划或控制线辅助原表；志愿候选和一分一段仍缺，不可拿计划推算录取位次'
         except ValueError as exc:
             raise QueryError(str(exc)) from exc
         result['database'] = str(path)
@@ -1642,7 +1654,7 @@ def main(argv=None):
         if command=='export-gaokao':
             res=export_gaokao(**ns)
             if as_json:print(json.dumps(res,ensure_ascii=False,indent=2))
-            else:print('逐年导出：'+'；'.join(year+'年 志愿候选'+str(n)+'行，一分一段'+str(res['yfyd_exported_rows'].get(year,0))+'行（可读累计'+str(res['yfyd_usable_rows'].get(year,0))+'行）'for year,n in res['exported_rows'].items())+'；冲突'+str(res['conflict_count'])+'条；'+res['message']+'；见'+str(Path(ns['out'])/'export-metadata.json'))
+            else:print('逐年导出：'+'；'.join(year+'年 志愿候选'+str(n)+'行，一分一段'+str(res['yfyd_exported_rows'].get(year,0))+'行（可读累计'+str(res['yfyd_usable_rows'].get(year,0))+'行），计划'+str(res['plan_exported_rows'].get(year,0))+'行，控制线'+str(res['batch_line_exported_rows'].get(year,0))+'行'for year,n in res['exported_rows'].items())+'；冲突'+str(res['conflict_count'])+'条；'+res['message']+'；见'+str(Path(ns['out'])/'export-metadata.json'))
             return 2 if res.get('status')=='missing_data' else 0
         elif command=='yfyd':res=query_yfyd(**ns)
         elif command=='school':res=query_school(ns.pop('school'),**ns)
