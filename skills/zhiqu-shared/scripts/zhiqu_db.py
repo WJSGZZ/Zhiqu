@@ -12,6 +12,7 @@ import csv
 from functools import lru_cache
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 import re
@@ -814,6 +815,32 @@ CORE_DELTA_VIEWS=('v_core_delta_number','v_core_delta_attribute')
 CORE_DELTA_COLUMNS=('record_id','source_id','vendor_source_id','institution_id','year','province','subject','batch','school_raw','school_code','group_code','major_code','major_name','plan_type','scope_raw','field_name','field_label','value','raw_value','unit','value_status','src_sheet','src_row','src_col','official_locator','major_full','school_group_code','group_name','subject_requirements','old_batch','duration','comparison_status','record_type','dataset_type','other_province_raw','year_status','province_status')
 
 
+OFFICIAL_CORE_SCOPE=('province','year','subject','institution_id','school_raw','major_name','batch','plan_type','scope_raw')
+
+
+def _official_core_proof(c, row, source):
+    """Recognize a reviewed original cell, never infer quality from its publisher."""
+    if source.get('grade')!='官方' or 'gk_official_original_evidence' not in _tables(c):return None
+    evidence=c.execute('SELECT table_name,source_id,excerpt_locator_json FROM data.gk_official_original_evidence WHERE record_id=?',(row.get('record_id'),)).fetchone()
+    if not evidence or evidence[0]!='core_delta_number' or evidence[1]!=row.get('source_id'):return None
+    proof=_json(evidence[2],{})
+    if not isinstance(proof,dict):return None
+    review=proof.get('review',{});key=proof.get('business_key',{});loc=proof.get('locator',{});cell=proof.get('excerpt',{})
+    if not all(isinstance(x,dict) for x in (review,key,loc,cell)):return None
+    expected={'record_id':row.get('record_id'),'field_name':row.get('field_name'),'scope':{k:row.get(k) for k in OFFICIAL_CORE_SCOPE}}
+    position={k:row.get(k) for k in ('src_sheet','src_row','src_col')}
+    actual=row.get('value');stated=cell.get('value')
+    if (review.get('status')!='approved' or review.get('approved_by')!='root' or review.get('semantic_approved') is not True
+            or review.get('dual_read_equal') is not True or key!=expected
+            or not re.fullmatch('[0-9a-f]{64}',str(source.get('archive_sha256') or ''))
+            or loc.get('sha256')!=source['archive_sha256'] or loc.get('source_position')!=position
+            or type(actual) is not type(stated) or actual!=stated or isinstance(actual,bool)
+            or not isinstance(actual,(int,float)) or not math.isfinite(actual) or actual<0
+            or not cell.get('raw') or not cell.get('header') or not cell.get('score_basis')
+            or not all(isinstance(loc.get(k),int) and not isinstance(loc[k],bool) and loc[k]>0 for k in ('table','row','column'))):return None
+    return proof
+
+
 def _core_delta_record(c, table, row):
     """One field per record. Purchase coordinates never become official coordinates."""
     sid=row.get('source_id');vendor=row.get('vendor_source_id');source=_source(c,sid)
@@ -834,7 +861,7 @@ def _core_delta_record(c, table, row):
         value.update(official_locator=row.get('official_locator'),original_source_id=vendor,
                      vendor_locator=locator)
     else:value['locator']=locator
-    return {'table':table,'record_id':row.get('record_id'),
+    result = {'table':table,'record_id':row.get('record_id'),
             'context':{k:row[k] for k in CONTEXT+['school_code'] if row.get(k) not in (None,'')},
             'values':{field:value},'source':source,
             'vendor_source_id':vendor,'vendor_source':_source(c,vendor) if vendor else None,
@@ -842,6 +869,17 @@ def _core_delta_record(c, table, row):
             'original_locator':locator if corrected else None,
             'excerpt':None,'excerpt_kind':'补录结构化字段及原格值；不冒充官方逐字摘录',
             'excerpt_locator':{}}
+    if table=='v_core_delta_number' and source.get('grade')=='官方':
+        proof=_official_core_proof(c,row,source)
+        if proof:
+            value['value_status']={'status':'官方原值','reason':'本值原格、完整范围、来源指纹及主审两读核验链一致'}
+            value['raw_value']=proof['excerpt']['raw']
+            value['locator']=proof['locator'];value['display_label']=proof['excerpt']['score_basis']+'·'+proof['excerpt']['header']
+            result.update(locator=proof['locator'],excerpt=proof['excerpt'],excerpt_kind='主审核过的官方原格摘录',excerpt_locator=proof)
+        else:
+            value['value_status']={'status':'待核','reason':'官方发布身份不替代本值原格审核；审核链缺失或不匹配'}
+            result['quality_gate']='未通过'
+    return result
 
 
 def _core_delta_section(c, identity, name, program, year, province, major, subject, plan_type, limit, offset, exclude_school_fields=()):
@@ -1570,8 +1608,37 @@ def render_text(result, *, full=False):
     return '\n'.join(lines)+'\n'
 
 
+def _export_official_core(c, tables, province, subject, years, out, schools, batch, plan_type):
+    """Export reviewed official facts separately; incomplete scopes are not pool rows."""
+    rows=[];rejected=[];sources={}
+    if {'v_core_delta_number','core_delta_source','source'}<=tables:
+        ids=[r[0] for r in c.execute('SELECT cs.source_id FROM data.core_delta_source cs JOIN data.source s ON s.source_id=cs.source_id WHERE s.grade=?',('官方',))]
+        for sid in ids:
+            sql='SELECT '+','.join(CORE_DELTA_COLUMNS)+' FROM data.v_core_delta_number WHERE vendor_source_id=? AND province=? AND subject=? AND year IN ('+','.join('?'for _ in years)+')'
+            for item in c.execute(sql,(sid,province,subject,*years)):
+                raw=dict(item)
+                if schools and not schools.intersection({raw.get('institution_id'),raw.get('school_raw'),raw.get('school_code')}):continue
+                if batch is not None and raw.get('batch')!=batch:continue
+                if plan_type is not None and raw.get('plan_type')!=plan_type:continue
+                record=_core_delta_record(c,'v_core_delta_number',raw)
+                if record.get('quality_gate')=='未通过':
+                    rejected.append({'record_id':raw['record_id'],'reason':'官方字段原格核验链未闭合'});continue
+                field=raw['field_name'];value=record['values'][field];source=record['source'];sources[sid]=source
+                rows.append(dict(record_id=raw['record_id'],province=province,year=raw['year'],subject=subject,school=raw['school_raw'],program=raw['major_name'],batch=raw.get('batch'),plan_type=raw.get('plan_type'),scope_raw=raw.get('scope_raw'),field=field,value=value['value'],unit=value['unit'],source_grade=value['grade'],source_id=sid,publisher=source.get('publisher'),landing_url=source.get('landing_url'),file_url=source.get('file_url'),archive_sha256=source.get('archive_sha256'),value_status=value['value_status'],locator=record['locator'],excerpt=record['excerpt']))
+    fields='record_id province year subject school program batch plan_type scope_raw field value unit source_grade source_id publisher landing_url file_url archive_sha256 value_status locator excerpt'.split()
+    result={'official_field_files':{},'official_field_exported_rows':{},'official_field_rejected':rejected,'official_field_sources':sources}
+    for year in years:
+        path=Path(out)/f'{province}-{subject}-{year}-official-fields.csv'
+        with path.open('x',newline='',encoding='utf-8')as f:
+            writer=csv.DictWriter(f,fieldnames=fields);writer.writeheader()
+            items=sorted((r for r in rows if r['year']==year),key=lambda r:r['record_id'])
+            for row in items:writer.writerow({k:json.dumps(v,ensure_ascii=False,sort_keys=True)if isinstance(v,(dict,list))else v for k,v in row.items()})
+        result['official_field_files'][str(year)]=str(path);result['official_field_exported_rows'][str(year)]=len(items)
+    return result
+
+
 def export_gaokao(province, subject, years, *, out, schools=None, batch=None, plan_type=None, key='group', db=None):
-    """Export read-only, scope-safe annual CSVs for pool.py, with value sources."""
+    """Export pool inputs and separate reference CSVs, with scope and value sources."""
     from gaokao_export import collect, export_records, export_yfyd, collect_auxiliary, export_auxiliary
     years = sorted(set(int(y) for y in years))
     if not years or any(y < 1900 or y > 2100 for y in years):
@@ -1579,6 +1646,7 @@ def export_gaokao(province, subject, years, *, out, schools=None, batch=None, pl
     cdf_targets=[Path(out)/f'{province}-{subject}-{year}-yfyd-{kind}.csv'for year in years for kind in ('all','usable')]
     if any(target.exists()for target in cdf_targets):raise QueryError('一分一段导出目标已存在，请使用新目录')
     auxiliary_targets=[Path(out)/f'{province}-{subject}-{year}-{kind}.csv'for year in years for kind in ('plans','batch-lines')]
+    auxiliary_targets += [Path(out)/f'{province}-{subject}-{year}-official-fields.csv'for year in years]
     if any(target.exists()for target in auxiliary_targets):raise QueryError('计划或控制线导出目标已存在，请使用新目录')
     with _open('education', db) as (c, path):
         tables = _tables(c)
@@ -1616,12 +1684,13 @@ def export_gaokao(province, subject, years, *, out, schools=None, batch=None, pl
             result['auxiliary']=aux
             result['plan_exported_rows']=aux['plan_exported_rows']
             result['batch_line_exported_rows']=aux['batch_line_exported_rows']
+            result.update(_export_official_core(c,tables,province,subject,years,out,selected,batch,plan_type))
             available={str(year):bool(result['exported_rows'][str(year)]or result['yfyd_exported_rows'][str(year)])for year in years}
             result['status']='ok' if all(available.values()) else 'partial' if any(available.values()) else 'missing_data'
-            result['message']='未导出志愿候选；仅有一分一段原表' if not any(result['exported_rows'].values()) and any(result['yfyd_exported_rows'].values()) else '已按两类分别列出导出行数'
-            if not any(available.values()) and (any(aux['plan_exported_rows'].values()) or any(aux['batch_line_exported_rows'].values())):
+            result['message']='未导出志愿候选；仅有一分一段原表' if not any(result['exported_rows'].values()) and any(result['yfyd_exported_rows'].values()) else '已分别列出候选、分段表及辅助原表行数'
+            if not any(available.values()) and (any(aux['plan_exported_rows'].values()) or any(aux['batch_line_exported_rows'].values()) or any(result['official_field_exported_rows'].values())):
                 result['status']='partial'
-                result['message']='仅导出计划或控制线辅助原表；志愿候选和一分一段仍缺，不可拿计划推算录取位次'
+                result['message']='仅导出计划、控制线或已核官方字段辅助原表；志愿候选和一分一段仍缺，不可据此推算录取位次'
         except ValueError as exc:
             raise QueryError(str(exc)) from exc
         result['database'] = str(path)
@@ -1654,7 +1723,7 @@ def main(argv=None):
         if command=='export-gaokao':
             res=export_gaokao(**ns)
             if as_json:print(json.dumps(res,ensure_ascii=False,indent=2))
-            else:print('逐年导出：'+'；'.join(year+'年 志愿候选'+str(n)+'行，一分一段'+str(res['yfyd_exported_rows'].get(year,0))+'行（可读累计'+str(res['yfyd_usable_rows'].get(year,0))+'行），计划'+str(res['plan_exported_rows'].get(year,0))+'行，控制线'+str(res['batch_line_exported_rows'].get(year,0))+'行'for year,n in res['exported_rows'].items())+'；冲突'+str(res['conflict_count'])+'条；'+res['message']+'；见'+str(Path(ns['out'])/'export-metadata.json'))
+            else:print('逐年导出：'+'；'.join(year+'年 志愿候选'+str(n)+'行，一分一段'+str(res['yfyd_exported_rows'].get(year,0))+'行（可读累计'+str(res['yfyd_usable_rows'].get(year,0))+'行），计划'+str(res['plan_exported_rows'].get(year,0))+'行，控制线'+str(res['batch_line_exported_rows'].get(year,0))+'行，已核官方字段'+str(res['official_field_exported_rows'].get(year,0))+'项'for year,n in res['exported_rows'].items())+'；冲突'+str(res['conflict_count'])+'条；'+res['message']+'；见'+str(Path(ns['out'])/'export-metadata.json'))
             return 2 if res.get('status')=='missing_data' else 0
         elif command=='yfyd':res=query_yfyd(**ns)
         elif command=='school':res=query_school(ns.pop('school'),**ns)
