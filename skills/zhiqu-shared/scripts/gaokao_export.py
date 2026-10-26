@@ -339,3 +339,184 @@ def export_yfyd(rows_by_year, province, subject, years, *, out, sources, coverag
         files[str(year)]=str(all_path.resolve());usable_files[str(year)]=str(usable_path.resolve());counts[str(year)]=len(prepared);usable_counts[str(year)]=len(valid)
         omitted[str(year)]=[{'source_id':r['source_id'],'score':r.get('score'),'src_row':r.get('src_row'),'reason':'原累计或分数为空，仅保留all，不由本段人数补累计'}for r in prepared if r['cum']is None or r['score']is None]
     return {'yfyd_files':files,'yfyd_usable_files':usable_files,'yfyd_exported_rows':counts,'yfyd_usable_rows':usable_counts,'yfyd_omitted_from_usable':omitted,'yfyd_rank_conversion_performed':False,'yfyd_subject_exact':subject,'yfyd_school_filter_applied':False}
+
+
+# Independent reference exports: never volunteer candidates and never rank inputs.
+_AUX_PLAN_FIELDS = ['record_id','province','year','subject','institution_id','school_raw','school_code','group_code','major_code','major_name','batch','plan_type','plan_n','gender','subject_requirements','scope_raw','src_row','src_page','src_table','locator_method']
+_AUX_BATCH_FIELDS = ['record_id','province','year','subject','education_level','line_scope','total','requirements_json','src_row','src_page','src_table','locator_method']
+_AUX_METADATA_FIELDS = ['source_grade','source_id','value_status','data_provenance','completeness']
+
+
+def _aux_rows(c, sql, params=()):
+    cursor = c.execute(sql, params)
+    names = [x[0] for x in cursor.description]
+    return [dict(zip(names, row)) for row in cursor.fetchall()]
+
+
+def _aux_table(c, name, schemas=('data','main')):
+    available = {r[1] for r in c.execute('PRAGMA database_list')}
+    for schema in schemas:
+        if schema in available and c.execute('SELECT 1 FROM '+schema+'.sqlite_master WHERE name=? AND type IN (\'table\',\'view\')', (name,)).fetchone():
+            return schema+'.'+name
+    return None
+
+
+def _aux_list(value):
+    if isinstance(value, dict): return [value]
+    if isinstance(value, list) and all(isinstance(x, dict) for x in value): return value
+    return []
+
+
+def _aux_same_value(after, value):
+    if isinstance(value, bool) or isinstance(after, bool): return False
+    if isinstance(value, (int,float)) and isinstance(after, (int,float)):
+        return math.isfinite(value) and math.isfinite(after) and value == after
+    return type(value) is type(after) and value == after
+
+
+def collect_auxiliary(c, tables, province, subject, years, schools=None, batch=None,
+                      plan_type=None, completeness=None):
+    """Read exact-scope official-plan/control reference rows, without changing the DB.
+
+    `completeness` may be a mapping keyed by (source_id, table) / source_id, or
+    a callback receiving the unmodified row plus `_table`. Correction evidence
+    is consulted only for rows declaring a correction or an artificial change.
+    """
+    result = {'plans':[], 'batch_lines':[], 'rejected':[], 'sources':{}}
+    source_table = _aux_table(c, 'source')
+    audit_table = _aux_table(c, 'gk_official_original_evidence', ('audit','main','data'))
+    source_cache = result['sources']
+    years = sorted(set(map(int, years)))
+    if not years: return result
+    def source(sid):
+        if sid not in source_cache:
+            found = _aux_rows(c, 'SELECT * FROM '+source_table+' WHERE source_id=?', (sid,)) if source_table and sid else []
+            source_cache[sid] = dict(found[0], _registered=True) if len(found)==1 else {'source_id':sid,'grade':'未登记','_registered':False}
+        return source_cache[sid]
+    def reject(row, table, reason):
+        result['rejected'].append({'record_id':row.get('record_id'), 'table':table, 'source_id':row.get('source_id'), 'reason':reason})
+    def field_value(row, scope, field):
+        if field.startswith('scope_raw.'):
+            return scope.get(field.split('.',1)[1])
+        return row.get(field)
+    def corrected(row, scope, metas, original_source, original_locator):
+        declared = _aux_list(scope.get('更正依据'))
+        changed = obj(row.get('value_status')).get('plan_n',{}).get('status')=='人工更正'
+        if not declared and not changed: return None
+        if not audit_table: return '更正链缺少原格审计表'
+        evidence = _aux_rows(c, 'SELECT * FROM '+audit_table+' WHERE record_id=? AND table_name=? AND source_id=?', (row['record_id'],'gk_official_plan',row['source_id']))
+        if len(evidence)!=1: return '更正链原业务记录/本源审计不唯一或缺失'
+        evidence = obj(evidence[0].get('excerpt_locator_json'))
+        review = evidence.get('review',{})
+        if (evidence.get('business_key')!={'record_id':row['record_id']}
+                or review.get('status')!='approved' or review.get('approved_by')!='root'
+                or not original_source.get('archive_sha256')
+                or evidence.get('locator',{}).get('sha256')!=original_source['archive_sha256']):
+            return '更正链原业务键/root复核/原书指纹未闭合'
+        cells = _aux_list(evidence.get('excerpt',{}).get('更正原格'))
+        grouped = collections.defaultdict(list)
+        for cell in cells:
+            if not isinstance(cell.get('field'),str): return '更正原格字段类型无效'
+            grouped[cell['field']].append(cell)
+        if any(not isinstance(x.get('field'),str) for x in declared): return '更正范围字段类型无效'
+        expected = {x['field'] for x in declared}
+        if changed: expected.add('plan_n')
+        if None in expected or not expected: return '更正字段声明缺失'
+        # Extra evidence is not silently applied to another field or another number.
+        if set(grouped)!=expected: return '更正字段声明与原格证据集合不一致'
+        for field in sorted(expected):
+            if field not in row and not (field.startswith('scope_raw.') and field.split('.',1)[1] in scope): return '更正指向未登记字段：'+field
+            if len(grouped[field])!=1: return '更正字段不唯一：'+str(field)
+            cell = grouped[field][0]; value = field_value(row,scope,field)
+            # Some source annotations explicitly retain both changed phrase and full
+            # before/after cells. Use that full cell only for an exact scope text field;
+            # never reconstruct text or use it to coerce a numeric/code correction.
+            after = cell.get('after_full_raw') if field.startswith('scope_raw.') and 'after_full_raw' in cell else cell.get('after')
+            if 'after' not in cell or not _aux_same_value(after,value): return '更正后值与当前字段不同：'+str(field)
+            declarations = [x for x in declared if x.get('field')==field]
+            if len(declarations)>1: return '更正范围字段重复：'+str(field)
+            if declarations:
+                declaration = declarations[0]
+                declared_after = declaration.get('更正后',declaration.get('现行值',declaration.get('after')))
+                if declaration.get('source_id')!=cell.get('source_id') or not _aux_same_value(declared_after,value):
+                    return 'scope更正来源/现行值与审计不一致：'+str(field)
+            actual = source(cell.get('source_id'))
+            loc = cell.get('locator')
+            if (not actual.get('_registered') or actual.get('grade') not in ('官方','第三方整理')
+                    or not cell.get('sha256') or actual.get('archive_sha256')!=cell['sha256']
+                    or not isinstance(loc,dict) or loc.get('table') is None or loc.get('row') is None):
+                return '更正来源登记/指纹/原页表行缺失：'+str(field)
+            before = cell.get('before_full_raw') if field.startswith('scope_raw.') and 'before_full_raw' in cell else cell.get('before')
+            original = _meta(row,field,before,original_source,{'status':'官方原值' if original_source['grade']=='官方' else '第三方整理未核','reason':'更正前原书原值；不冒充现行值'},original_locator)
+            locator = dict(loc,sha256=cell['sha256'])
+            meta = _meta(row,field,value,actual,{'status':'人工更正','reason':'来源方更正原格与当前字段逐值一致'},locator)
+            meta['original_provenance'] = original
+            meta['correction_evidence'] = {'record_id':row['record_id'],'field':field,'before':before,'after':value,'source_id':actual['source_id'],'sha256':cell['sha256'],'locator':locator,'review':review}
+            metas[field] = meta
+        return None
+    wanted = set(schools or []) if not isinstance(schools,str) else {schools}
+    for table, bucket in [('gk_official_plan','plans'),('gk_batch_line','batch_lines')]:
+        if table not in tables and not any(str(x).endswith('.'+table) for x in tables): continue
+        qualified = _aux_table(c, table)
+        if not qualified: continue
+        sql = 'SELECT * FROM '+qualified+' WHERE province=? AND subject=? AND year IN ('+','.join('?' for _ in years)+')'
+        for raw in _aux_rows(c,sql,[province,subject,*years]):
+            if table=='gk_official_plan':
+                if wanted and not wanted.intersection({raw.get('institution_id'),raw.get('school_raw'),raw.get('school_code')}): continue
+                if batch is not None and raw.get('batch')!=batch: continue
+                if plan_type is not None and raw.get('plan_type')!=plan_type: continue
+            src = source(raw.get('source_id'))
+            if not src.get('_registered') or src.get('grade') not in ('官方','第三方整理'):
+                reject(raw,table,'缺少真实来源登记或不支持来源等级'); continue
+            row = dict(raw)
+            # Preserve raw local codes, NULL and literal withdrawal zero without conversion.
+            row.update(code=raw.get('school_code'),name=raw.get('school_raw'),group=raw.get('group_code'),major=raw.get('major_name'),requirement=raw.get('subject_requirements'))
+            row['_table'] = table
+            row['completeness'] = completeness(row) if callable(completeness) else (completeness or {}).get((raw['source_id'],table),(completeness or {}).get(raw['source_id']))
+            scope = obj(raw.get('scope_raw'))
+            original_scope = dict(raw)
+            row['original_scope'] = original_scope
+            loc = {k:raw.get(k) for k in ('src_row','src_page','src_table','locator_method')}
+            loc['sha256'] = src.get('archive_sha256','')
+            state = obj(raw.get('value_status'))
+            field = 'plan_n' if table=='gk_official_plan' else 'total'
+            fields = [field]+(['school_code','group_code','major_code','major_name','subject_requirements'] if table=='gk_official_plan' else [])
+            metas = {f:_meta(row,f,raw.get(f),src,state.get(f),loc) for f in fields}
+            if table=='gk_official_plan':
+                error = corrected(row,scope,metas,src,loc)
+                if error: reject(raw,table,error); continue
+            for m in metas.values():
+                if m['grade']=='第三方整理':
+                    m['cross_check_summary']={'scope':'本辅助数据逐值同口径核对','checked':0,'inconsistent':0,'note':'第三方整理·内部未核；不借其他范围检查提升等级'}
+            primary = metas[field]
+            output = {k:raw.get(k) for k in (_AUX_PLAN_FIELDS if table=='gk_official_plan' else _AUX_BATCH_FIELDS)}
+            if primary.get('correction_evidence'):
+                actual_loc = primary['locator']
+                output.update(src_row=str(actual_loc['row']), src_page=actual_loc.get('page'),
+                              src_table=str(actual_loc['table']), locator_method='来源方更正原格；原书定位见original_provenance')
+            output.update(source_id=primary['source_id'], source_grade=('第三方整理·内部未核' if any(m['grade']=='第三方整理' for m in metas.values()) else '官方'), value_status={f:m['value_status'] for f,m in metas.items()}, data_provenance=metas, completeness=row['completeness'])
+            result[bucket].append(output)
+    return result
+
+
+def export_auxiliary(collected, province, subject, years, *, out):
+    """Write separate references, checking every destination before any write."""
+    out = Path(out)
+    years = sorted(set(map(int,years)))
+    targets = {(kind,year):out/(f'{province}-{subject}-{year}-'+suffix+'.csv')
+               for kind,suffix in [('plans','plans'),('batch_lines','batch-lines')] for year in years}
+    for path in targets.values():
+        if path.exists(): raise FileExistsError('辅助导出目标已存在：'+str(path))
+    out.mkdir(parents=True,exist_ok=True)
+    result = {'plan_files':{},'batch_line_files':{},'plan_exported_rows':{},'batch_line_exported_rows':{},'rejected':collected.get('rejected',[]),'sources':collected.get('sources',{}),'volunteer_candidates_added':0,'rank_conversion_performed':False}
+    for (kind,year),path in targets.items():
+        fields = (_AUX_PLAN_FIELDS if kind=='plans' else _AUX_BATCH_FIELDS)+_AUX_METADATA_FIELDS
+        rows = [r for r in collected.get(kind,[]) if int(r['year'])==year]
+        with path.open('x',newline='',encoding='utf-8') as f:
+            writer = csv.DictWriter(f,fieldnames=fields);writer.writeheader()
+            for row in rows:
+                writer.writerow({k:dump(row.get(k)) if isinstance(row.get(k),(dict,list)) else row.get(k) for k in fields})
+        prefix = 'plan' if kind=='plans' else 'batch_line'
+        result[prefix+'_files'][year] = str(path)
+        result[prefix+'_exported_rows'][year] = len(rows)
+    return result
