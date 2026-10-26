@@ -63,6 +63,75 @@ def _completeness_text(value, full=False):
     return text
 
 
+def _yfyd_current_evidence(c, rows):
+    """Resolve explicit root-approved typed field proofs; never rewrite stored states."""
+    if not rows:return
+    tables=_tables(c);sources={};assets={};bykey={}
+    for row in rows:
+        sid=row['source_id']
+        if sid not in sources:
+            sources[sid]=_source(c,sid)
+            assets[sid]=[dict(r)for r in c.execute('SELECT source_id,sha256,url,role,retrieved FROM data.source_asset WHERE source_id=?',(sid,))] if 'source_asset'in tables else []
+        row['_source_assets']=assets[sid];row['_evidence_refs']=[];row['_field_evidence']={};row['_current_states']={}
+        bykey[(sid,row['province'],row['year'],row['subject'],row['score'])]=row
+    if 'gk_official_original_evidence'not in tables:return
+    digest=lambda value:isinstance(value,str)and re.fullmatch(r'[0-9a-f]{64}',value)is not None
+    def json_sql_type(value):
+        if value is None:return 'null'
+        if type(value)is int:return 'integer'
+        if type(value)is float:return 'real'
+        if type(value)is str:return 'text'
+        return 'invalid'
+    for sid in sources:
+        for evidence in c.execute("SELECT record_id,source_id,excerpt_locator_json FROM data.gk_official_original_evidence WHERE source_id=? AND table_name='gk_official_yfyd' ORDER BY rowid DESC",(sid,)):
+            payload=_json(evidence['excerpt_locator_json'])
+            if not isinstance(payload,dict):continue
+            key=payload.get('business_key',{})
+            if not isinstance(key,dict)or set(key)!={'province','year','subject','score'}:continue
+            lookup=(sid,key['province'],key['year'],key['subject'],key['score']);row=bykey.get(lookup)
+            if row is None or any(type(key[k])is not type(row[k])for k in key):continue
+            review=payload.get('review',{});locator=payload.get('locator',{})
+            if not isinstance(review,dict)or not isinstance(locator,dict):continue
+            fingerprint=locator.get('sha256')
+            linked=next((a for a in assets[sid]if a.get('sha256')==fingerprint),None)
+            if linked is None and digest(fingerprint)and sources[sid].get('archive_sha256')==fingerprint:
+                linked={'source_id':sid,'sha256':fingerprint,'url':sources[sid].get('file_url')or sources[sid].get('landing_url'),'role':'source_original'}
+            contract=(review.get('status')=='approved'and review.get('approved_by')=='root'and review.get('scope_verified')is True and isinstance(payload.get('scope'),dict)and bool(payload['scope'])and digest(review.get('manifest_sha256'))and digest(review.get('sample_proof_sha256'))and digest(fingerprint)and linked is not None and sources[sid].get('grade')=='官方')
+            reference={'record_id':evidence['record_id'],'source_id':sid,'locator':locator,'source_asset':linked,'review_status':review.get('status'),'approved_by':review.get('approved_by'),'scope_verified':review.get('scope_verified')is True,'manifest_sha256':review.get('manifest_sha256'),'sample_proof_sha256':review.get('sample_proof_sha256'),'root_asset_scope_contract_passed':bool(contract),'scope':payload.get('scope')}
+            row['_evidence_refs'].append(reference)
+            if not contract:continue
+            verified=payload.get('verified_fields',review.get('verified_fields',{}))
+            if not isinstance(verified,dict):continue
+            for field,value_key,type_key in [('score','score','_score_type'),('cum','cum','_cum_type'),('segment_n','_segment_n','_segment_type'),('count_raw','_count_raw','_count_raw_type')]:
+                value=row.get(value_key);proof=verified.get(field)
+                if value is None or field not in verified:continue
+                stated=proof.get('value')if isinstance(proof,dict)else proof
+                declared=proof.get('sqlite_type')if isinstance(proof,dict)else json_sql_type(stated)
+                if stated!=value or type(stated)is not type(value)or declared!=row.get(type_key)or json_sql_type(stated)!=row.get(type_key):continue
+                if field in row['_field_evidence']:continue
+                row['_field_evidence'][field]=dict(reference,field=field,verified_value=stated,sqlite_type=declared)
+                row['_current_states'][field]={'status':'官方原值','reason':'追加原件审计由root批准；同业务键/范围/来源成员及本字段原值、SQLite类型核对一致','evidence_record_id':evidence['record_id']}
+
+
+def _yfyd_rows(c, province, year, subject):
+    """One original-count gate shared by SQLite lookup and annual CSV export."""
+    context_columns={r[1] for r in c.execute('PRAGMA data.table_info(gk_yfyd_context)')}
+    if {'segment_n','count_kind','value_status'} <= context_columns:
+        operator='k.score_operator' if 'score_operator' in context_columns else "'='"
+        extras=','.join(('k.'+field if field in context_columns else 'NULL')+' AS _'+field for field in ('count_raw','scope_raw'))+",k.segment_n AS _segment_n,typeof(k.segment_n) AS _segment_type,"+("typeof(k.count_raw)"if 'count_raw'in context_columns else"'null'")+" AS _count_raw_type"
+        sql='SELECT y.*,typeof(y.score) AS _score_type,typeof(y.cum) AS _cum_type,k.segment_n AS count,k.count_kind AS _count_kind,k.value_status AS _count_status,'+operator+' AS score_operator,'+extras+' FROM data.gk_official_yfyd y LEFT JOIN data.gk_yfyd_context k ON y.province=k.province AND y.year=k.year AND y.subject=k.subject AND y.score=k.score AND y.source_id=k.source_id WHERE y.province=? AND y.year=? AND y.subject=? ORDER BY y.score DESC'
+    else:sql='SELECT *,typeof(score) AS _score_type,typeof(cum) AS _cum_type FROM data.gk_official_yfyd WHERE province=? AND year=? AND subject=? ORDER BY score DESC'
+    rows=[dict(r) for r in c.execute(sql,(province,year,subject))]
+    _yfyd_current_evidence(c,rows)
+    for row in rows:
+        kind=row.get('_count_kind') or ''
+        states=_json(row.get('_count_status'),{})
+        state=row.get('_current_states',{}).get('segment_n')or(states.get('segment_n',{}) if isinstance(states,dict) else {})
+        original=isinstance(state,dict) and state.get('status') in {'官方原值','人工更正'}
+        if not (original and kind in SEGMENT_COUNT_KINDS):row['count']=None
+    return rows
+
+
 def query_yfyd(province, year, subject, *, score=None, rank=None, db=None):
     """SQLite与报告CSV共用rank.Table；缺行不能通过另一查询路径补算。"""
     if (score is None)==(rank is None):raise QueryError('分数、位次必须且只能提供一项')
@@ -70,21 +139,7 @@ def query_yfyd(province, year, subject, *, score=None, rank=None, db=None):
     if str(scripts) not in sys.path:sys.path.insert(0,str(scripts))
     from rank import Table, MissingDataError
     with _open('education',db)as(c,_):
-        context_columns={r[1] for r in c.execute('PRAGMA data.table_info(gk_yfyd_context)')}
-        if {'segment_n','count_kind','value_status'} <= context_columns:
-            operator='k.score_operator' if 'score_operator' in context_columns else "'='"
-            sql='SELECT y.*,k.segment_n AS count,k.count_kind AS _count_kind,k.value_status AS _count_status,'+operator+' AS score_operator FROM data.gk_official_yfyd y LEFT JOIN data.gk_yfyd_context k ON y.province=k.province AND y.year=k.year AND y.subject=k.subject AND y.score=k.score AND y.source_id=k.source_id WHERE y.province=? AND y.year=? AND y.subject=? ORDER BY y.score DESC'
-        else:sql='SELECT * FROM data.gk_official_yfyd WHERE province=? AND year=? AND subject=? ORDER BY score DESC'
-        rows=[dict(r) for r in c.execute(sql,(province,year,subject))]
-        for row in rows:
-            # Legacy segment_n also holds explicitly cumulative or unspecified
-            # counts. Neither those nor derived counts prove a tied-score interval.
-            kind=row.get('_count_kind') or ''
-            states=_json(row.get('_count_status'),{})
-            state=states.get('segment_n',{}) if isinstance(states,dict) else {}
-            original=isinstance(state,dict) and state.get('status') in {'官方原值','人工更正'}
-            segment=kind in SEGMENT_COUNT_KINDS
-            if not (original and segment):row['count']=None
+        rows=_yfyd_rows(c,province,year,subject)
         if not rows:raise QueryError('未取到该省年科类的一分一段表')
         ids=list(dict.fromkeys(r['source_id'] for r in rows));coverage=[_source_completeness(c,'gk_official_yfyd',sid)for sid in ids]
         result={'kind':'yfyd','province':province,'year':year,'subject':subject,'completeness':[v for v in coverage if v],'sources':[_source(c,sid)for sid in ids]}
@@ -1517,10 +1572,12 @@ def render_text(result, *, full=False):
 
 def export_gaokao(province, subject, years, *, out, schools=None, batch=None, plan_type=None, key='group', db=None):
     """Export read-only, scope-safe annual CSVs for pool.py, with value sources."""
-    from gaokao_export import collect, export_records
+    from gaokao_export import collect, export_records, export_yfyd
     years = sorted(set(int(y) for y in years))
     if not years or any(y < 1900 or y > 2100 for y in years):
         raise QueryError('年份须为1900—2100的非空列表')
+    cdf_targets=[Path(out)/f'{province}-{subject}-{year}-yfyd-{kind}.csv'for year in years for kind in ('all','usable')]
+    if any(target.exists()for target in cdf_targets):raise QueryError('一分一段导出目标已存在，请使用新目录')
     with _open('education', db) as (c, path):
         tables = _tables(c)
         selected = set(schools or [])
@@ -1529,9 +1586,15 @@ def export_gaokao(province, subject, years, *, out, schools=None, batch=None, pl
                 try: selected.add(_identity(c, school)[0]['institution_id'])
                 except QueryError: pass
         records = collect(c, tables, province, subject, years)
-        yfyd = []
+        yfyd = []; cdf_rows={}; cdf_sources={}; cdf_coverage={}
         for year in years:
             if 'gk_official_yfyd' in tables:
+                cdf_rows[year]=_yfyd_rows(c,province,year,subject)
+                for item in cdf_rows[year]:
+                    sid=item['source_id']
+                    if sid not in cdf_sources:
+                        cdf_sources[sid]=_source(c,sid)
+                        cdf_coverage[sid]=_source_completeness(c,'gk_official_yfyd',sid)
                 for row in c.execute('SELECT source_id,count(*) AS rows FROM data.gk_official_yfyd WHERE province=? AND year=? AND subject=? GROUP BY source_id',(province,year,subject)):
                     yfyd.append({'year':year,'source_id':row['source_id'],'rows':row['rows'],'completeness':_source_completeness(c,'gk_official_yfyd',row['source_id'])})
             if 'gk_yfyd_context' in tables:
@@ -1542,6 +1605,11 @@ def export_gaokao(province, subject, years, *, out, schools=None, batch=None, pl
                     yfyd.append({'year':year,'aggregate_bucket':dict(row)})
         try:
             result = export_records(records,province,subject,years,out=out,key=key,schools=selected,batch=batch,plan_type=plan_type,yfyd_metadata=yfyd)
+            result['candidate_status']=result['status']
+            result.update(export_yfyd(cdf_rows,province,subject,years,out=out,sources=cdf_sources,coverage=cdf_coverage,metadata=yfyd))
+            available={str(year):bool(result['exported_rows'][str(year)]or result['yfyd_exported_rows'][str(year)])for year in years}
+            result['status']='ok' if all(available.values()) else 'partial' if any(available.values()) else 'missing_data'
+            result['message']='未导出志愿候选；仅有一分一段原表' if not any(result['exported_rows'].values()) and any(result['yfyd_exported_rows'].values()) else '已按两类分别列出导出行数'
         except ValueError as exc:
             raise QueryError(str(exc)) from exc
         result['database'] = str(path)
@@ -1574,7 +1642,7 @@ def main(argv=None):
         if command=='export-gaokao':
             res=export_gaokao(**ns)
             if as_json:print(json.dumps(res,ensure_ascii=False,indent=2))
-            else:print('逐年导出：'+ '；'.join(year+'年 '+str(n)+'行'for year,n in res['exported_rows'].items())+'；冲突'+str(res['conflict_count'])+'条；见'+str(Path(ns['out'])/'export-metadata.json'))
+            else:print('逐年导出：'+'；'.join(year+'年 志愿候选'+str(n)+'行，一分一段'+str(res['yfyd_exported_rows'].get(year,0))+'行（可读累计'+str(res['yfyd_usable_rows'].get(year,0))+'行）'for year,n in res['exported_rows'].items())+'；冲突'+str(res['conflict_count'])+'条；'+res['message']+'；见'+str(Path(ns['out'])/'export-metadata.json'))
             return 2 if res.get('status')=='missing_data' else 0
         elif command=='yfyd':res=query_yfyd(**ns)
         elif command=='school':res=query_school(ns.pop('school'),**ns)

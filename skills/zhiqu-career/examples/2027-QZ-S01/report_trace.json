@@ -1347,6 +1347,29 @@
         "report.html": "ffa710d2a9920cdd43b8f5681afaee51f3bd4a2e15c64b8be4f4556a6b4ef49f",
         "2027-QZ-S01-report.pdf": "442cf877493f9c33e75c418da23fa875a9030ade3240671c866913580aa08ad9"
       }
+    },
+    {
+      "date": "2026-10-25",
+      "kind": "document_comment_compatibility_only",
+      "reason": "本轮仅给报告工作流添加核实与复核期限HTML注释；移除新增注释后正文逐字节相同。代码、有效规则、组装正文、数值引用和渲染HTML未变，原报告MD/HTML/PDF及输入指纹不变。这是文档注释兼容记录与快照绑定刷新，未重新生成报告，不是新独立内容复核；原独立判定和实际渲染版本保留。",
+      "document": {
+        "path": "skills/zhiqu-shared/references/report-workflow.md",
+        "before_sha256": "d1e637fe8e90760fd31919c5a90821973894e00132dea4ab6b085d11563fdf05",
+        "after_sha256": "7063b04685705a3f154552c53ccd96627b18085c4ae8aff31c4e7c7e25cf8e42",
+        "added_comment": "<!-- 核实：2026-10-25；复核期限：2027-01-25 -->\n\n",
+        "body_byte_identical_after_removing_added_comment": true
+      },
+      "assembled_markdown_sha256": "0895952f1caa72b7576496650f775ddafc6137d721509d0fe4868561a12c2195",
+      "rendered_html_sha256": "cea5c65b04b10b2dfda34eb3b7cee34bc75286132556bb623b317db64fa67f16",
+      "numeric_refs_unchanged": true,
+      "assembled_ref_count": 207,
+      "original_stored_ref_count": 208,
+      "original_stored_numeric_refs_sha256": "ccca2e55f72f840f3d149549bf17965dceb0fc4f855769ca15edc43bb8707294",
+      "original_artifacts": {
+        "report.md": "0895952f1caa72b7576496650f775ddafc6137d721509d0fe4868561a12c2195",
+        "report.html": "ffa710d2a9920cdd43b8f5681afaee51f3bd4a2e15c64b8be4f4556a6b4ef49f",
+        "2027-QZ-S01-report.pdf": "442cf877493f9c33e75c418da23fa875a9030ade3240671c866913580aa08ad9"
+      }
     }
   ]
 }
