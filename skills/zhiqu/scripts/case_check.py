@@ -354,6 +354,8 @@ def run(case_dir, stage, delivery=False):
         return gate
     if stage > 8:
         raise ValueError('高考阶段保持0..8')
+    if delivery and stage != 8:
+        raise ValueError('--delivery 须检查高考阶段8；阶段7生成不等于独立批准交付')
     gate = Gate(case_dir)
     for n in range(stage + 1):
         getattr(gate, f'stage{n}')()
@@ -362,6 +364,18 @@ def run(case_dir, stage, delivery=False):
     if stage >= 1:
         from profile_store import alignment_errors
         gate.errors.extend(alignment_errors(case_dir))
+    if delivery:
+        report_path = Path(case_dir) / 'report.json'
+        if report_path.is_file() and load_json(report_path).get('research_status') == 'pending':
+            gate.err(8, '院校调研仍为待核实；模拟报告可供讨论，不能批准正式交付')
+        from planning_workflow import review_errors
+        gate.errors.extend(review_errors(case_dir, delivery=True))
+        result_path = Path(case_dir) / 'result.json'
+        uses_database = result_path.is_file() and any(
+            item.get('data_provenance') for item in load_json(result_path).get('list', []))
+        if gate.case.get('claim_check_required') or uses_database:
+            from claim_check import errors as claim_errors
+            gate.errors.extend(claim_errors(case_dir))
     return gate
 
 

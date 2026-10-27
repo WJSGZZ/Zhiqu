@@ -57,6 +57,8 @@ class ReportProvenanceTests(unittest.TestCase):
         html = report.build(self.rep, self.result)
         self.assertEqual(check_report(self.rep, self.result, html), [])
         self.assertIn(UNVERIFIED, html)
+        self.assertIn('本案数据评级', html)
+        self.assertNotIn('大约有八成可能', html)
         self.assertIn('缺口', html)
         self.assertIn('不跨缺口换算', html)
         # 改来源等级而不改数字，也必须被HTML逐格核验拦下。
