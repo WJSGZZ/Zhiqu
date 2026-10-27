@@ -1643,7 +1643,7 @@
           "id": "E035",
           "claim": "苏大计算机学硕当届科目（并核方向）",
           "source_url": "https://yjs.suda.edu.cn/ea/63/c8386a715363/page.htm",
-          "original": "/Users/xik/.codex/worktrees/check-gaps-2/Zhiqu/skills/zhiqu-shared/originals/c9/c993ab73c42b4f24eb3eefe609a4f721df6a9bac87323d6dc982992bc0a43c0c.pdf（.cache/t13-grad-programs/raw/suda_2027_ml_a.pdf.source.json 回执哈希一致）",
+          "original": "skills/zhiqu-shared/originals/c9/c993ab73c42b4f24eb3eefe609a4f721df6a9bac87323d6dc982992bc0a43c0c.pdf（.cache/t13-grad-programs/raw/suda_2027_ml_a.pdf.source.json 回执哈希一致）",
           "locator": "PDF第36页（印刷页34）",
           "excerpt": "081200 计算机科学与技术（学术学位）01（全日制）中文信息与自然语言处理 02 机器学习与数据挖掘 03 高性能计算与分布式系统 04 软件形式化与自动推理 05 图像处理与模式分析 06 嵌入式系统 ①101 ②201 英语（一） ③301 数学（一） ④408",
           "method": "pymupdf取该页文字，去空白逐字检索",
@@ -1716,7 +1716,7 @@
           "claim_check.json": "070f743007ff62b4c326ea614cd6bc3a90314b54ffd253c80b595b0bc9af0cc1"
         },
         "change_audit": {
-          "source": "/Users/xik/.codex/worktrees/check-gaps-2/Zhiqu/.cache/check-gaps-2/flagship-final-field-audit.md",
+          "source": ".cache/check-gaps-2/flagship-final-field-audit.md",
           "items": [
             {
               "field": "directions 05 items/0",
