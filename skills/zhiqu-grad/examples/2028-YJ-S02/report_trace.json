@@ -20,7 +20,7 @@
     "planning_workflow.py": "2e8d5eb40e80dbf4e349aba04c9f048d7e8a69375cc238d2f7153a939bd27f7d",
     "operator_check.py": "d99826c1cae9514c665edb0b1b6155ea99a0bce19b99a919b9ada81e0b93c0a1",
     "check_demos.py": "67d4edc1cd737beeb6729783a736e667a97c12d8f7de2de673632d9d5c3370b8",
-    "report.py": "1bcfe81ae6ffb3b337c4227d3e53e89c089cede71e89b1dd60541684738058cf",
+    "report.py": "eca4702bb22cafe760dc5252f95fd9c094b14ab9de2b30cccdbffea92524eda4",
     "render_report.py": "e7dbbef97c3478f4591f34a01ebd0c730e807a1de3c69eca4fea397434dfbc4a",
     "profile_store.py": "35de56c7f84f9ead83540d32cee7d9bd8885611fb25ef39dbc37b7cfa401b088",
     "claim_guards.py": "54bab4d942fafd148190df73cad34805538662b0a152ec5701c8a960e28dbd1d",
@@ -28,8 +28,8 @@
     "official_source_audit.py": "c09c40a2c5eec18318fbb1fa52393ee37b4e63f636ec7ea3999084d12ecc0df1",
     "unit_validation.py": "9f5df89a101dd684231fe35f8fe931e150127fc698f2ab774b628bc3ffdf093c",
     "reader_language.py": "ccb4d16f5a23fff9e9660c9cf33aa042b81f2e2221dc38bb641079b0d61259b6",
-    "claim_check.py": "9551fd4dd5e87f13f6635e1158cebf8882b7c967e59e54939dc02b024eed41b5",
-    "check_report.py": "22069b820a7d5b3cc35e5f6050b872f0cefde249a810af0daf7ee1a25ab11c0f",
+    "claim_check.py": "69fd237635e27c23214fb99e915d3a31afd51bc435dc86de31ca3b7dc9c35a6b",
+    "check_report.py": "282fdd1dfef99dee36b3603f7f2b01c9f65ba4460e2243666b255336b3e20189",
     "authoring_metadata.py": "9ac0328c9a8bdeec672daede766f49f5e9c94c2761ae64e0ec32e2ed8abf404c"
   },
   "numeric_refs": [
@@ -532,7 +532,7 @@
   },
   "verification_tools_sha256": {
     "verify_report.py": "008a50716d1c523376018e4c91280469b83fa9957ce8bf755cce961141d0e596",
-    "verification_calculations.py": "80e4fb8e0d247582ade885655be5f30e0c2d1cc9e19ebf59c39f3fa83823a54b"
+    "verification_calculations.py": "5505b8d65eb9ea0d47ebf4f5321f5953ff0c711c51c615c040a2057e1dc3b3d7"
   },
   "compatibility_verifications": [
     {
@@ -579,6 +579,40 @@
         "report.html": "04c6efa09cf2f390ec0fb35bc6ce1f005d4c2c5e7e7bb93a32007e4f008878a9",
         "2028-YJ-S02-report.pdf": "c475733eb75e27cb8a3fdb6d8d4b797208c0b545ef88b0d368963931f6217325"
       }
+    },
+    {
+      "date": "2026-10-27",
+      "kind": "gaokao_only_tool_compatibility",
+      "reason": "高考数据库到报告整链路实测：新增高考逐句适配、数据库来源复算、历史代码提示及模拟调研待核门禁；读研求职分支未改。对照上次兼容记录证明重新组装MD、原始HTML、数值引用数量不变，所有既有输入与MD/HTML/PDF逐字节不变。仅登记共享工具兼容复验与快照绑定，不冒充新独立语义复核；原批准人及实际渲染版本保留。",
+      "changed_tools": {
+        "report.py": {
+          "before": "1bcfe81ae6ffb3b337c4227d3e53e89c089cede71e89b1dd60541684738058cf",
+          "after": "eca4702bb22cafe760dc5252f95fd9c094b14ab9de2b30cccdbffea92524eda4"
+        },
+        "claim_check.py": {
+          "before": "9551fd4dd5e87f13f6635e1158cebf8882b7c967e59e54939dc02b024eed41b5",
+          "after": "69fd237635e27c23214fb99e915d3a31afd51bc435dc86de31ca3b7dc9c35a6b"
+        },
+        "check_report.py": {
+          "before": "22069b820a7d5b3cc35e5f6050b872f0cefde249a810af0daf7ee1a25ab11c0f",
+          "after": "282fdd1dfef99dee36b3603f7f2b01c9f65ba4460e2243666b255336b3e20189"
+        },
+        "verification_calculations.py": {
+          "before": "80e4fb8e0d247582ade885655be5f30e0c2d1cc9e19ebf59c39f3fa83823a54b",
+          "after": "5505b8d65eb9ea0d47ebf4f5321f5953ff0c711c51c615c040a2057e1dc3b3d7"
+        }
+      },
+      "assembled_markdown_sha256": "8dd0ba3d6bb84baacb05c1e5272f04bd89a83de4f111127c4e5dca4e4ebf1628",
+      "rendered_html_sha256": "65b1ef78c46661ecf86bc4c7c51298b345314a8786b2bad0de02c026b551043a",
+      "assembled_ref_count": 77,
+      "original_stored_ref_count": 77,
+      "original_artifacts": {
+        "report.md": "8dd0ba3d6bb84baacb05c1e5272f04bd89a83de4f111127c4e5dca4e4ebf1628",
+        "report.html": "04c6efa09cf2f390ec0fb35bc6ce1f005d4c2c5e7e7bb93a32007e4f008878a9",
+        "2028-YJ-S02-report.pdf": "c475733eb75e27cb8a3fdb6d8d4b797208c0b545ef88b0d368963931f6217325"
+      },
+      "numeric_refs_unchanged": true,
+      "claim_payload_unchanged": true
     }
   ]
 }
