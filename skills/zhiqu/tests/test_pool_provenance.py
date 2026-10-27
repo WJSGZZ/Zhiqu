@@ -43,6 +43,19 @@ class PoolProvenanceTests(unittest.TestCase):
         with out.open(encoding='utf-8') as f:
             return out, list(csv.DictReader(f))
 
+    def test_manual_new_csv_cannot_feed_reference_rank_to_model(self):
+        fact=dict(value=20000,grade='官方',display_grade='官方',source_id='official',
+                  value_status={'status':'推算','method':'投档分→同年同科一分一段累计'},
+                  original_scope={'source_format_reference':{'provided_fields':['score']}})
+        for state in [{'status':'推算'},'推算']:
+            fact['value_status']=state
+            row=self.row(data_provenance=json.dumps({'rank':fact}))
+            with self.assertRaisesRegex(ValueError,'不能作为实际投档位次'):
+                input_provenance(row,2025)
+        fact.pop('original_scope');fact['usage_gate']={'model_usable':False}
+        with self.assertRaisesRegex(ValueError,'不能作为实际投档位次'):
+            input_provenance(self.row(data_provenance=json.dumps({'rank':fact})),2025)
+
     def test_optional_fields_absent_for_legacy_csv(self):
         path = self.write('old.csv', [self.row()])
         out, rows = self.pool((2025, path))

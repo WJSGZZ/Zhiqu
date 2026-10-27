@@ -217,6 +217,60 @@ class OriginalHeaderScopeTests(unittest.TestCase):
             m=ex.export_records(self.collect(),'河北','物理',[2025],out=d,key='major')
             with open(m['files']['2025'])as f:rows=list(csv.DictReader(f))
             return m,rows
+    def test_derived_rank_from_score_only_original_is_not_model_input(self):
+        state={'score':{'status':'官方原值'},'rank':{'status':'推算','method':'投档分→同年同科一分一段累计'}}
+        self.c.execute('UPDATE data.gk_official_cutoff SET value_status=?',(json.dumps(state),))
+        before=dict(self.c.execute('SELECT * FROM data.gk_official_cutoff').fetchone())
+        normalized=self.collect()[0]
+        self.assertEqual(normalized['values'],{'rank':1000,'score':600,'plan':None})
+        self.assertFalse(normalized['provenance']['rank']['usage_gate']['model_usable'])
+        m,rows=self.export();self.assertEqual(rows,[])
+        withheld=m['withheld_values'][0]
+        self.assertEqual(withheld['value'],1000)
+        retained=withheld['retained_values']['score']
+        self.assertEqual(retained['value'],600);self.assertEqual(retained['grade'],'官方')
+        self.assertEqual(retained['source_id'],'o');self.assertEqual(retained['locator']['scope_locator']['row'],5)
+        self.assertEqual(withheld['locator']['scope_locator']['row'],5)
+        self.assertIn('非实际最低投档位次',withheld['usage_gate']['meaning'])
+        self.assertEqual(dict(self.c.execute('SELECT * FROM data.gk_official_cutoff').fetchone()),before)
+
+    def test_string_derived_status_is_preserved_and_blocked_like_query(self):
+        self.c.execute('UPDATE data.gk_official_cutoff SET value_status=?',
+            (json.dumps({'rank':'推算','score':{'status':'官方原值'}}),))
+        row=self.collect()[0]
+        self.assertEqual(row['provenance']['rank']['value_status']['status'],'推算')
+        self.assertFalse(row['provenance']['rank']['value_status_explicit'])
+        self.assertFalse(row['provenance']['rank']['usage_gate']['model_usable'])
+        m,rows=self.export();self.assertEqual(rows,[]);self.assertEqual(m['withheld_values'][0]['value'],1000)
+
+    def test_unknown_format_or_publisher_rank_not_reclassified(self):
+        self.c.execute('UPDATE data.gk_official_cutoff SET value_status=?',
+            (json.dumps({'rank':{'status':'推算','method':'待补方法'}}),))
+        self.c.execute('UPDATE data.source_format_reference SET provided_fields=?',('["score","rank"]',))
+        m,rows=self.export();self.assertEqual(len(rows),1);self.assertEqual(m['withheld_values'],[])
+        self.c.execute('DELETE FROM data.source_format_reference')
+        self.c.execute('UPDATE data.official_cutoff_scope SET scope_json=?',(json.dumps({'batch':'本科批','major_code':'16'}),))
+        m,rows=self.export();self.assertEqual(len(rows),1);self.assertEqual(m['withheld_values'],[])
+
+    def test_same_scope_vendor_rank_fills_gap_without_borrowing_official_grade(self):
+        self.c.execute('UPDATE data.gk_official_cutoff SET value_status=?',
+            (json.dumps({'rank':{'status':'推算','method':'投档分→同年同科一分一段累计'},'score':{'status':'官方原值'}}),))
+        official=self.collect()[0]
+        vendor=dict(official,record_id='vendor-test',table='fixture',source_id='vendor')
+        vendor['values']=dict(rank=999,score=599,plan=None)
+        vendor['provenance']={field:ex._meta(vendor,field,value,
+            {'grade':'第三方整理','source_id':'vendor','publisher':'测试整理方'},
+            {'status':'第三方整理未核'},{'src_row':'vendor.xlsx:7'})for field,value in vendor['values'].items()}
+        with tempfile.TemporaryDirectory()as d:
+            result=ex.export_records([official,vendor],'河北','物理',[2025],out=d,key='major')
+            with open(result['files']['2025']) as exported:rows=list(csv.DictReader(exported))
+        self.assertEqual(len(rows),1);self.assertEqual(rows[0]['rank'],'999');self.assertEqual(rows[0]['score'],'600')
+        self.assertEqual(rows[0]['source_grade'],'第三方整理·内部未核')
+        facts=json.loads(rows[0]['data_provenance'])
+        self.assertEqual(facts['rank']['source_id'],'vendor');self.assertEqual(facts['score']['source_id'],'o')
+        self.assertEqual(facts['rank']['cross_check_summary']['checked'],0)
+        self.assertEqual(len(result['withheld_values']),1)
+
     def test_exact_legacy_header_requires_matching_official_fingerprint(self):
         self.c.execute('ALTER TABLE data.source ADD COLUMN archive_sha256 TEXT')
         self.c.execute('UPDATE data.source SET archive_sha256=?', ('a'*64,))

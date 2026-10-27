@@ -130,6 +130,20 @@ class ReportProvenanceTests(unittest.TestCase):
         del fact['cross_check']['official_value_status']
         self.assertTrue(any('官方一致缺' in e for e in check_report(self.rep,self.result)))
 
+    def test_score_only_original_derived_rank_cannot_enter_new_report(self):
+        fact=self.result['list'][0]['data_provenance']['2025']['rank']
+        fact.update(grade='官方',display_grade='官方',value_status={'status':'推算','method':'投档分→同年同科一分一段累计'},
+            original_scope={'source_format_reference':{'provided_fields':['score']}})
+        for state in [{'status':'推算','method':'投档分→同年同科一分一段累计'},'推算']:
+            fact['value_status']=state
+            errors=check_report(self.rep,self.result)
+            self.assertTrue(any('不能作为实际投档位次' in error for error in errors))
+        # 仅标D级或另写余量不替代这项输入/口径核查。
+        self.rep['meta']['prob_grade']='D'
+        self.assertTrue(any('不能作为实际投档位次' in e for e in check_report(self.rep,self.result)))
+        fact.pop('original_scope');fact['usage_gate']={'model_usable':False}
+        self.assertTrue(any('不能作为实际投档位次' in e for e in check_report(self.rep,self.result)))
+
     def test_third_party_without_check_scope_is_rejected(self):
         fact = self.result['list'][0]['data_provenance']['2025']['rank']
         del fact['cross_check_summary']

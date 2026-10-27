@@ -1,11 +1,17 @@
 """Read-only gaokao exports; scope and field-level provenance survive CSV."""
 import collections
+import importlib.util
 import csv
 import json
 import math
 import re
 from pathlib import Path
 import unicodedata
+
+_basis_spec = importlib.util.spec_from_file_location('zhiqu_export_provenance', Path(__file__).resolve().parents[2] / 'zhiqu/scripts/data_provenance.py')
+_basis = importlib.util.module_from_spec(_basis_spec)
+_basis_spec.loader.exec_module(_basis)
+cutoff_rank_gate = _basis.cutoff_rank_gate
 
 FIELDS = ('rank', 'score', 'plan')
 CSV_FIELDS = ['code','name','group','major','major_code','rank','plan','score','year','batch','plan_type','requirement','source_grade','source_id','value_status','data_provenance']
@@ -82,7 +88,7 @@ def _meta(row, field, value, source, state, locator, checks=None, cross_check=No
     confirmed = grade=='第三方整理' and value is not None and valid_cross_check(cross_check,row,field,value)
     display = '官方' if grade=='官方' else '官方一致' if confirmed else '第三方整理·内部未核'
     explicit_status = isinstance(state,dict) and bool(state.get('status')) and state.get('status') not in ('未注明','未知')
-    state = dict(state) if isinstance(state,dict) else {}
+    state = dict(state) if isinstance(state,dict) else {'status':state} if isinstance(state,str) else {}
     if not state.get('status') or state.get('status') in ('未注明','未知'):
         state = {'status':'来源未提供' if value is None else '官方原值' if grade=='官方' else '第三方整理未核',
                  'reason':'原来源未提供此值，不补数' if value is None else '来源表登记等级为官方，保留原值' if grade=='官方' else '整理来源，尚无同事实同口径逐值官方核对凭据'}
@@ -140,7 +146,7 @@ def _format_scope(c, tables, source_id, cache):
                 field = aliases.get(key, key)
                 if field in {'province','year','subject','code','name','group','major_code','major','batch','plan_type','requirement'} and value not in (None, ''):
                     scope.setdefault(field, []).append(value)
-        reference = dict(source_id=entry['source_id'], excerpt=entry['excerpt'], locator=dump(locator) if 'legacy_locator_raw' in locator else entry['locator']) if valid else None
+        reference = dict(source_id=entry['source_id'], provided_fields=columns, excerpt=entry['excerpt'], locator=dump(locator) if 'legacy_locator_raw' in locator else entry['locator']) if valid else None
         if reference and isinstance(fixed.get('required_scope_fields'), list):
             reference['required_scope_fields'] = [f for f in fixed['required_scope_fields'] if f in {'major_code','group','code','batch'}]
         cache[source_id] = (scope, reference)
@@ -249,6 +255,9 @@ def collect(c, tables, province, subject, years):
                     d = dict(check)
                     checks.append({'kind':'unconfirmed_scope_check','same_scope':False,'same_value':d.get('verdict')=='一致','verdict':d.get('verdict'),'official_source_id':d.get('official_source_id'),'official_locator':d.get('official_locator')})
             row['provenance'][field] = _meta(row, field, value, src, statuses.get(original), locator, checks)
+            if field == 'rank':
+                gate = cutoff_rank_gate(row['provenance'][field])
+                if gate:row['provenance'][field]['usage_gate'] = gate
         if 'meta' in tables and row['source_id']:
             prefix = 'gk_source_coverage:'+row['source_id']+':'+table+':'
             if prefix not in completeness_cache:
@@ -320,13 +329,26 @@ def export_records(records, province, subject, years, *, out, key='group', schoo
         return (r['year'],school,r['code'],campus_scope,r['batch'],r.get('group',''),r.get('major_code',''),r.get('major',''),r.get('plan_type','未标'),r.get('requirement',''),r.get('scope_raw',''))
     groups=collections.defaultdict(list)
     for r in selected: groups[identity(r)].append(r)
-    merged=[]
+    merged=[]; withheld_values=[]
     def conflict(row,field,candidates,reason,resolution):
         conflicts.append({'year':row['year'],'school':row['name'],'group':row.get('group',''),'major':row.get('major',''),'batch':row['batch'],'plan_type':row.get('plan_type','未标'),'field':field,'values':dump([v for v,m in candidates]),'source_ids':dump([m.get('source_id') for v,m in candidates]),'reason':reason,'resolution':resolution,'scope':dump(_scope(row))})
     for facts in groups.values():
         representative=sorted(facts,key=lambda r:(r.get('table',''),str(r.get('record_id',''))))[0]; values={};provenance={}
         for field in FIELDS:
-            candidates=[(r['values'].get(field),r['provenance'][field]) for r in facts if r['values'].get(field) is not None]
+            candidates=[]
+            for fact_row in facts:
+                value=fact_row['values'].get(field); meta=fact_row['provenance'][field]
+                if value is None:continue
+                gate=cutoff_rank_gate(meta) if field=='rank' else None
+                if gate:
+                    withheld_values.append({'year':fact_row['year'],'school':fact_row['name'],'table':fact_row.get('table'),
+                        'record_id':fact_row.get('record_id'),'field':field,'value':value,'grade':meta.get('grade'),
+                        'source_id':meta.get('source_id'),'value_status':meta.get('value_status'),
+                        'locator':{k:v for k,v in meta.get('locator',{}).items() if k!='original_format'},
+                        'usage_gate':gate,'retained_values':{f:{k:v for k,v in fact_row['provenance'][f].items() if k in ('value','grade','display_grade','source_id','value_status','locator')}
+                            for f in FIELDS if f!=field and fact_row['values'].get(f)is not None}})
+                    continue
+                candidates.append((value,meta))
             official=[x for x in candidates if x[1].get('grade')=='官方'];chosen=official or candidates
             distinct={v for v,m in chosen}
             if len(distinct)>1:
@@ -380,7 +402,7 @@ def export_records(records, province, subject, years, *, out, key='group', schoo
         counts[str(year)]=len(ys);paths[str(year)]=str(path.resolve())
     with (out/'conflicts.csv').open('w',newline='',encoding='utf-8')as f:
         writer=csv.DictWriter(f,fieldnames=CONFLICT_FIELDS);writer.writeheader();writer.writerows(conflicts)
-    metadata={'status':'ok' if all(counts.values()) else 'partial' if any(counts.values()) else 'missing_data','province':province,'subject':subject,'years':years,'key':key,'batch_filter':batch,'plan_type_filter':plan_type,'input_records':len(records),'exported_rows':counts,'files':paths,'conflict_count':len(conflicts),'conflicts_file':str((out/'conflicts.csv').resolve()),'rejected':rejected,'yfyd':yfyd_metadata or [],'rank_conversion_performed':False,'rules':['官方同事实同口径逐值优先，第三方补缺','rank_vs_yfyd不等同官方投档核对','缺位次不从分数推造','专业组跨年仍须pool --group-map核实'],'database_written':False}
+    metadata={'status':'ok' if all(counts.values()) else 'partial' if any(counts.values()) else 'missing_data','province':province,'subject':subject,'years':years,'key':key,'batch_filter':batch,'plan_type_filter':plan_type,'input_records':len(records),'exported_rows':counts,'files':paths,'conflict_count':len(conflicts),'conflicts_file':str((out/'conflicts.csv').resolve()),'rejected':rejected,'withheld_values':withheld_values,'yfyd':yfyd_metadata or [],'rank_conversion_performed':False,'rules':['官方同事实同口径逐值优先，第三方补缺','rank_vs_yfyd不等同官方投档核对','缺位次不从分数推造','已核原格式未设位次列的推算位次只留待核参照，不进模型；同口径其他来源逐值补缺','专业组跨年仍须pool --group-map核实'],'database_written':False}
     (out/'export-metadata.json').write_text(json.dumps(metadata,ensure_ascii=False,indent=2)+'\n')
     return metadata
 

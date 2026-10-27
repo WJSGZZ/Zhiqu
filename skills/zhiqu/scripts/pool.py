@@ -14,6 +14,7 @@ from decimal import Decimal, InvalidOperation
 import json
 import os
 import re
+from data_provenance import cutoff_rank_gate
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 # 需要单独资格、异地培养或学费明显不同的条目，默认不进候选池
@@ -49,6 +50,8 @@ def input_provenance(row, year):
     if not value.get("rank"):
         raise ValueError("data_provenance 缺少实际参与计算的 rank 来历")
     for field, metadata in value.items():
+        if field == "rank" and cutoff_rank_gate(metadata):
+            raise ValueError("data_provenance.rank 是待核推算参照，不能作为实际投档位次进入候选模型")
         if "value" not in metadata:
             raise ValueError(f"data_provenance.{field} 缺 value")
         actual = str(row.get(field) or "").strip()

@@ -7,6 +7,31 @@ DISPLAY_GRADES = {'官方', '官方一致', '第三方整理·内部未核'}
 FIELDS = {'rank': '位次', 'score': '分数', 'plan': '计划人数'}
 
 
+def cutoff_rank_gate(fact, provided_fields=None):
+    """已核仅分数原表中的推算位次不能冒充实际投档位次；未知格式不猜。"""
+    declared_gate = fact.get('usage_gate')
+    if isinstance(declared_gate, dict) and declared_gate.get('model_usable') is False:
+        return declared_gate
+    if provided_fields is None:
+        original = fact.get('original_scope')
+        reference = original.get('source_format_reference') if isinstance(original, dict) else None
+        provided_fields = reference.get('provided_fields') if isinstance(reference, dict) else None
+    state = fact.get('value_status')
+    status = state.get('status') if isinstance(state, dict) else state
+    if not (fact.get('value') not in (None, '') and fact.get('grade') == '官方'
+            and status == '推算'
+            and isinstance(provided_fields, list) and provided_fields
+            and all(isinstance(field, str) for field in provided_fields)
+            and 'score' in provided_fields and 'rank' not in provided_fields):
+        return None
+    method = (state.get('method') if isinstance(state, dict) else None) or '未登记'
+    cumulative = isinstance(method, str) and '一分一段累计' in method
+    return {'model_usable': False, 'status': '推算参照，待核',
+            'meaning': '最低分对应累计末位，非实际最低投档位次' if cumulative else '推算位次，原表未公布实际最低投档位次',
+            'method': method,
+            'reason': '原表未设位次列；推算输入及适用口径须另核，不作为实际投档位次进入志愿模型'}
+
+
 def provenance(item):
     value = item.get('data_provenance') or {}
     return json.loads(value) if isinstance(value, str) else value
@@ -96,6 +121,8 @@ def provenance_errors(item):
             continue  # 计划/分数可未提供，不借空占位给已有位次升级。
         if not fact.get('source_id') or not status_text(fact):
             errors.append(f'{year}.{field} 缺来源编号或值状态')
+        if field == 'rank' and cutoff_rank_gate(fact):
+            errors.append(f'{year}.{field} 是原表未公布的推算参照，不能作为实际投档位次参与志愿判断；须另核输入和口径')
         if fact.get('grade') not in ('官方', '第三方整理') or display_grade(fact) not in DISPLAY_GRADES:
             errors.append(f'{year}.{field} 来源等级无效')
         if display_grade(fact) == '官方' and fact.get('grade') != '官方':

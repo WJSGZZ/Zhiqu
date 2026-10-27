@@ -19,6 +19,23 @@ class ReadableOutput(unittest.TestCase):
   self.c.executescript('''create table data.source(source_id text,grade text,publisher text,title text,landing_url text,archive_sha256 text,published text);insert into data.source values('s','官方','某省考试院','2025年本科投档线','https://example.gov.cn/a','full-fingerprint','2025-07-20');
   create table data.gk_official_cutoff(province text,year integer,subject text,code text,name text,grp text,major_code text,major text,plan integer,admit integer,score integer,rank integer,source_id text,src text,src_row text,value_status text);''')
   self.patch=patch.object(db,'ROOT',self.root);self.patch.start();self.addCleanup(self.patch.stop)
+ def test_derived_cumulative_rank_label_is_reference_only_and_score_retained(self):
+  self.verified_format(fields=['score'])
+  self.c.execute('UPDATE data.source_format_reference SET locator=?',(json.dumps({'sha256':'a'*64,'row':1}),))
+  row=self.raw(value_status=json.dumps({'score':{'status':'官方原值'},'rank':{'status':'推算','method':'投档分→同年同科一分一段累计'}}))
+  record=db._record(self.c,'gk_official_cutoff',row)
+  rank=record['values']['rank'];self.assertEqual(rank['value'],100);self.assertFalse(rank['usage_gate']['model_usable'])
+  self.assertEqual(record['values']['score']['value'],600)
+  text=db.render_text(self.result([record]));self.assertIn('非实际最低投档位次',text);self.assertIn('须另核',text)
+  self.assertIn('600',text);self.assertEqual(rank['value_status']['status'],'推算')
+
+ def test_unknown_original_header_does_not_activate_new_rank_gate(self):
+  self.verified_format(fields=['score'])  # 原有query支持的松散定位，不足以启用新门禁。
+  row=self.raw(value_status=json.dumps({'rank':{'status':'推算'}}))
+  result=db._record(self.c,'gk_official_cutoff',row)
+  self.assertNotIn('usage_gate',result['values']['rank'])
+  self.assertNotIn('supplement_warning',result['values']['rank'])
+
  def source_csv(self,headers,rows=None):
   file=self.root/'skills/zhiqu/data/jiangsu/physics_2025.csv';file.parent.mkdir(parents=True,exist_ok=True)
   if rows is None:rows=[{'code':'1234','name':'甲大学','group':'01','major':'化学','major_code':'','score':'600','rank':'100','source_id':'s'}]

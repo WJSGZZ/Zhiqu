@@ -26,6 +26,10 @@ _storage_spec = importlib.util.spec_from_file_location('zhiqu_db_storage', Path(
 _storage = importlib.util.module_from_spec(_storage_spec)
 _storage_spec.loader.exec_module(_storage)
 
+_export_rules_spec = importlib.util.spec_from_file_location('zhiqu_query_export_rules', Path(__file__).with_name('gaokao_export.py'))
+_export_rules = importlib.util.module_from_spec(_export_rules_spec)
+_export_rules_spec.loader.exec_module(_export_rules)
+
 SHARED = Path(__file__).resolve().parents[1]
 ROOT = Path(__file__).resolve().parents[3]
 DEFAULTS = {k: SHARED / 'data' / k / (k + '.sqlite') for k in ('education', 'employment')}
@@ -720,6 +724,11 @@ def _record(c, table, row):
         result['completeness']=_source_completeness(c,table,row.get('source_id'))
         result['context'].update(_official_context(c, row))
         provided=result['context'].get('source_format_columns')
+        if 'rank' in values:
+            _,reference=_export_rules._format_scope(c,_tables(c),row.get('source_id'),{})
+            gate=_export_rules.cutoff_rank_gate(values['rank'],reference.get('provided_fields') if reference else None)
+            if gate:
+                values['rank'].update(usage_gate=gate,display_label=gate['meaning'],supplement_warning=gate['reason'])
         if isinstance(provided,list):
             for field,value in values.items():
                 if value['value'] in (None,'') and field not in provided:
@@ -1691,6 +1700,8 @@ def export_gaokao(province, subject, years, *, out, schools=None, batch=None, pl
             if not any(available.values()) and (any(aux['plan_exported_rows'].values()) or any(aux['batch_line_exported_rows'].values()) or any(result['official_field_exported_rows'].values())):
                 result['status']='partial'
                 result['message']='仅导出计划、控制线或已核官方字段辅助原表；志愿候选和一分一段仍缺，不可据此推算录取位次'
+            if result.get('withheld_values'):
+                result['message']+='；'+str(len(result['withheld_values']))+'条推算位次只留待核参照，未作实际投档位次进入模型；原分数及逐行定位仍可查询，详情见导出说明'
             missing_years=[year for year in years if not result['exported_rows'][str(year)] or not result['yfyd_exported_rows'][str(year)]]
             result['subject_options']=subject_options(c,tables,province,missing_years,requested=subject)
             if result['subject_options']:
