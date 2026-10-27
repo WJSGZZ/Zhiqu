@@ -203,6 +203,11 @@ class OriginalHeaderScopeTests(unittest.TestCase):
         for value in ['   ','\u3000']:
             self.c.execute('UPDATE data.official_cutoff_scope SET scope_json=?',(json.dumps({'major_code':value}),));self.assertEqual(self.export()[1],[])
 
+    def test_ingest_alignment_contract_is_not_a_reader_scope(self):
+        self.c.execute('UPDATE data.source_format_reference SET scope_values=?',(json.dumps({'source_batch_raw':'本科批','required_scope_fields':['major_code']}),))
+        row=dict(self.c.execute('SELECT * FROM data.gk_official_cutoff').fetchone());context=zhiqu_db._official_context(self.c,row)
+        self.assertEqual(context['source_batch_raw'],'本科批');self.assertNotIn('required_scope_fields',context)
+
     def test_missing_header_does_not_guess_from_source_id_or_title(self):
         self.c.execute('DELETE FROM data.source_format_reference');self.assertEqual(self.export()[1],[])
 

@@ -572,7 +572,7 @@ def _official_context(c, row):
                 for original,key in scope.items():
                     if isinstance(key,str) and raw.get(original) not in (None,''):context[key]=raw[original]
                 fixed=_json(item.get('scope_values'),{})
-                if isinstance(fixed,dict):context.update({k:v for k,v in fixed.items() if v not in (None,'')})
+                if isinstance(fixed,dict):context.update({k:v for k,v in fixed.items() if v not in (None,'') and k!='required_scope_fields'})
     if not reference:context['source_format_status']='原格式未核，空值状态见--full'
     public_record = context.get('source_public_row') or row.get('src')
     if public_record and 'official_cutoff_scope' in _tables(c):
