@@ -548,7 +548,7 @@ def _public_format_record(root, locator):
     return None
 
 
-def _official_context(c, row):
+def _official_context(c, row, *, ignore_scope_fields=()):
     """Only verified original-header evidence establishes field applicability."""
     context={}
     if row.get('code') not in (None,''):context['source_school_code']=row['code']
@@ -584,7 +584,7 @@ def _official_context(c, row):
         if found:
             context['source_public_row'] = public_record
             scope=_json(found[0],{});locator=_json(found[1],{})
-            if isinstance(scope,dict):context.update(scope)
+            if isinstance(scope,dict):context.update({k:v for k,v in scope.items() if k not in ignore_scope_fields})
             context['source_scope_locator']=locator
     grp=context.get('source_group_code') or row.get('grp') or row.get('group')
     if grp not in (None,'','-','—','--'):
@@ -723,6 +723,22 @@ def _record(c, table, row):
     if table=='gk_official_cutoff':
         result['completeness']=_source_completeness(c,table,row.get('source_id'))
         result['context'].update(_official_context(c, row))
+        pointer=result['context'].get('source_scope_locator')
+        supplements,scope_errors=_export_rules.scope_field_sources(c,_tables(c),row,result['context'],pointer)
+        if supplements:
+            result['scope_sources']=supplements
+            result['sources']=[dict(proof,role='选科原标签') for proof in supplements.values()]
+            result['context']['subject_requirements_status']='官网当年该省专业原标签；不扩至其他年份或专项'
+        if scope_errors:
+            native_context=_official_context(c,row,ignore_scope_fields={'subject_requirements'})
+            native=next((row[k] for k in ('subject_requirements','subject_req_raw') if row.get(k) not in (None,'')),native_context.get('subject_requirements'))
+            if native not in (None,''):
+                result['context']['subject_requirements']=native
+                result['context']['subject_requirements_status']='原业务字段；另取的选科补充来源链不匹配，未采用补充'
+            else:
+                result['context'].pop('subject_requirements',None)
+                result['context']['subject_requirements_status']='待核：选科补充原文的来源链不匹配'
+            result['scope_source_errors']=scope_errors
         provided=result['context'].get('source_format_columns')
         if 'rank' in values:
             _,reference=_export_rules._format_scope(c,_tables(c),row.get('source_id'),{})
@@ -1244,6 +1260,7 @@ def _value_text(v, *, hide_status=False):
 
 
 CONTEXT_LABELS = dict(zip(CONTEXT, ['年份','计划年份','省份','地区','学院','研究生专业码','研究生专业','本科原专业码','本科专业','学位','学习方式','方向','联培','专项','志愿类型','线的范围','名单类型','统计范围','口径是否一致','口径差异','计划类型','科类','科类','批次','专业组','专业组','岗位编号','单位','岗位','学历条件','学位条件','专业条款','分组口径','分组','类别','学校','原校名','核验状态','原备注','原备注','院校标签','办学层次','硕士点原名单','博士点原名单','年份状态']))
+CONTEXT_LABELS['subject_requirements_status']='选科状态'
 
 CONTEXT_LABELS.update({'industry':'原列就业行业','unit_raw':'原列单位','value_raw':'原格占比','cohort':'原列毕业届别'})
 CONTEXT_LABELS['subjects']='考试科目'

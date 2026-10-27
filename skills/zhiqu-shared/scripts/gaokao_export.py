@@ -101,6 +101,41 @@ def _meta(row, field, value, source, state, locator, checks=None, cross_check=No
     return result
 
 
+def scope_field_sources(c, tables, raw, scope, locator):
+    """字段级补充只证明该字段；不把学校官网要求借给投档数字。"""
+    payload=obj(locator)
+    if 'scope_field_sources' in payload and not isinstance(payload['scope_field_sources'],dict):
+        return {},[{'field':'subject_requirements','reason':'选科补充来源记录不是对象'}]
+    proofs=obj(payload.get('scope_field_sources')); resolved={}; errors=[]
+    for field,proof in proofs.items():
+        if field!='subject_requirements':continue
+        proof=obj(proof)
+        if not isinstance(proof.get('source_id'),str) or not proof['source_id'].strip():
+            errors.append({'field':field,'reason':'选科补充来源编号必须是非空字符串'});continue
+        src=_source(c,proof['source_id'],{});position=obj(proof.get('locator'));review=obj(proof.get('review'))
+        key={k:raw.get(k) for k in ('source_id','src','institution_id','year','province','subject','major')}
+        actual=obj(proof.get('business_key'));digest=position.get('sha256')
+        evidence=None
+        if 'gk_official_original_evidence' in tables and isinstance(proof.get('record_id'),str):
+            evidence=c.execute('SELECT table_name,source_id,excerpt_locator_json FROM data.gk_official_original_evidence WHERE record_id=?',(proof['record_id'],)).fetchone()
+        bound=(evidence is not None and evidence['table_name']=='official_cutoff_scope' and evidence['source_id']==proof.get('source_id')
+               and dump(obj(evidence['excerpt_locator_json']))==dump(proof))
+        valid=(bound and set(actual)==set(key) and all(actual[k]==v and type(actual[k])is type(v) for k,v in key.items())
+               and src.get('_registered') and src.get('grade')=='官方' and (src.get('landing_url')or src.get('file_url'))
+               and isinstance(digest,str) and re.fullmatch(r'[0-9a-f]{64}',digest)is not None
+               and all(type(position.get(k))is int and position[k]>=low for k,low in (('table',0),('row',1),('column',1)))
+               and isinstance(position.get('url'),str) and position.get('url') in {src.get('landing_url'),src.get('file_url')} and bool(position.get('url'))
+               and src.get('archive_sha256')==digest and proof.get('value')==scope.get(field)
+               and isinstance(proof.get('value'),str) and bool(proof['value']) and bool(proof.get('excerpt'))
+               and review.get('status')=='approved' and review.get('approved_by')=='root' and review.get('dual_read_equal')is True
+               and all(isinstance(review.get(k),str) and re.fullmatch(r'[0-9a-f]{64}',review[k])is not None for k in ('manifest_sha256','sample_proof_sha256','independent_review_sha256')))
+        if not valid:
+            errors.append({'field':field,'reason':'选科补充原文的字段值、原行业务键、官方来源指纹或审核链不匹配'});continue
+        resolved[field]={'value':proof['value'],'source':src,'locator':position,'excerpt':proof['excerpt'],
+                         'scope':{k:key[k]for k in ('institution_id','year','province','subject','major')}}
+    return resolved,errors
+
+
 def _format_locator(c, source_id, value):
     """兼容明确的旧原表头坐标；同站同类表结构不能冒充本原件。"""
     try:
@@ -187,6 +222,11 @@ def collect(c, tables, province, subject, years):
     def source(sid): return _source(c, sid, source_cache)
     def normalize(raw, table):
         scope = obj(raw.get('_scope_json'))
+        original_scope=scope
+        supplements,supplement_errors=scope_field_sources(c,tables,raw,scope,obj(raw.get('_scope_locator'))) if table=='gk_official_cutoff' else ({},[])
+        if supplement_errors:
+            scope=dict(scope)
+            for error in supplement_errors:scope.pop(error['field'],None)
         fixed, format_reference = _format_scope(c, tables, raw.get('source_id'), format_cache) if table == 'gk_official_cutoff' else ({}, None)
         extra_scope = {k:v for k,v in scope.items() if k not in {'batch','批次','group','grp','major','major_code','plan_type','subject','province','year','name','code','institution_id','requirement','subject_requirements','group_code','school_code','school_name','school_raw','major_name'}}
         scope_conflicts=[]; row_scope_fields=set()
@@ -214,7 +254,8 @@ def collect(c, tables, province, subject, years):
             claims = fixed.get(field, []) + ([scope[field]] if scope.get(field) not in (None, '') else [])
             if any(text(v) != text(expected) for v in claims):
                 row['scope_conflicts'].append({'field':field,'original_values':[expected]+claims})
-        row['original_scope']=dict(_scope(row),source_scope_original=scope)
+        row['scope_source_errors']=supplement_errors
+        row['original_scope']=dict(_scope(row),source_scope_original=original_scope)
         if format_reference:row['original_scope']['source_format_reference']=format_reference
         row['group']=group_code(row['group'])
         row['requirement']=requirement(row['requirement'],subject)
@@ -255,6 +296,8 @@ def collect(c, tables, province, subject, years):
                     d = dict(check)
                     checks.append({'kind':'unconfirmed_scope_check','same_scope':False,'same_value':d.get('verdict')=='一致','verdict':d.get('verdict'),'official_source_id':d.get('official_source_id'),'official_locator':d.get('official_locator')})
             row['provenance'][field] = _meta(row, field, value, src, statuses.get(original), locator, checks)
+            if supplements:row['provenance'][field]['scope_sources']=supplements
+            if supplement_errors:row['provenance'][field]['scope_source_errors']=supplement_errors
             if field == 'rank':
                 gate = cutoff_rank_gate(row['provenance'][field])
                 if gate:row['provenance'][field]['usage_gate'] = gate
@@ -337,7 +380,7 @@ def export_records(records, province, subject, years, *, out, key='group', schoo
         native=[m for m in row['provenance'].values() if m.get('source_registered') and m.get('grade')=='官方' and m.get('source_id')==row.get('source_id')]
         if row.get('table')=='gk_official_cutoff' and not row.get('requirement') and re.search(r'物理|历史|综合',subject):
             loc=next((m.get('locator',{}) for m in native),{})
-            review={'status':'选科要求待核','reason':'记录未留选科要求；未取得当年对应原文，未用第三方填充',
+            review={'status':'选科要求待核','reason':('选科补充来源链未能核准，未采用该字段，须另核原文' if row.get('scope_source_errors') else '记录未留选科要求；未取得当年对应原文，未用第三方填充'),
                     'record_source_id':row.get('source_id'),'official_source_id':row.get('source_id') if native else None,'official_locator':loc.get('src') or loc.get('src_row') or '未定位'}
             row=dict(row,provenance={f:dict(m,selection_review=review) for f,m in row['provenance'].items()})
         annotated.append(row)
