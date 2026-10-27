@@ -435,6 +435,9 @@ def main():
             value = r["raw"].get(key)
             if value:
                 out[-1][key] = json.loads(value) if key == "data_provenance" else value
+        for key in ("plan_type", "source_admission_type_raw"):
+            if key in r["raw"]:
+                out[-1][key] = (r["raw"][key] or "").strip()
         if r["majors"]:
             out[-1]["majors"] = [{"name": nm, "utility": u, "p": c / args.sims} for (nm, u, _), c in zip(r["majors"], mk or [0] * len(r["majors"]))]
             p("|  | " + "；".join(f"{nm} {c / args.sims:.1%}" for (nm, _, _), c in zip(r["majors"], mk or [0] * len(r["majors"]))) + f"；调剂 {b / args.sims:.1%} | | | | | | | |")

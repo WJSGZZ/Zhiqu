@@ -26,6 +26,8 @@ PLAN_BRACKET = re.compile(r"八协计划|协作计划|专项|预科|民族班|^�
 # 其余计划类（如八协计划）保留并标“资格待核”。考生符合资格时仍用 --exclude 放开。
 EXCLUDE_TAGGED = EXCLUDE + r"|[（(](少数民族|面向[^（）()]*)[）)]"
 PENDING = "资格待核"
+UNKNOWN_PLAN = {"", "未标", "未注明", "未知", "来源未提供", "原件缺失"}
+ORDINARY_PLAN = {"普通", "普通类", "一般统考生"}
 
 
 def weakest_grade(grades):
@@ -71,6 +73,53 @@ def input_provenance(row, year):
         if "year" in scope and (isinstance(scope["year"], bool) or str(scope["year"]) != str(year)):
             raise ValueError(f"data_provenance.{field}.scope.year 与输入年份不一致")
     return value
+
+
+def input_plan_scope(row, provenance):
+    """只传递具名结构化条件，不从校名、标题或分数反推计划身份。"""
+    claims = {"plan_type": [], "source_admission_type_raw": []}
+    seen = False
+
+    def take(source, key):
+        nonlocal seen
+        if key not in source:
+            return
+        seen = True
+        value = source[key]
+        if value is not None and not isinstance(value, str):
+            raise ValueError(f"计划条件 {key} 必须为文本")
+        if value and value.strip():
+            claims[key].append(value.strip())
+
+    for key in claims:
+        take(row, key)
+    for meta in provenance.values():
+        if meta.get("value") is None:
+            continue
+        scope = meta.get("scope") or {}
+        for key in claims:
+            take(scope, key)
+        original = meta.get("original_scope") or {}
+        if not isinstance(original, dict):
+            raise ValueError("原计划条件 original_scope 必须为对象")
+        original_row = original.get("source_scope_original") or {}
+        if not isinstance(original_row, dict):
+            raise ValueError("原计划条件 source_scope_original 必须为对象")
+        take(original_row, "source_admission_type_raw")
+    if not seen:
+        return None
+    result = {}
+    for key, values in claims.items():
+        if len(set(values)) > 1:
+            raise ValueError(f"CSV 与逐值来历的计划条件 {key} 不一致")
+        result[key] = values[0] if values else ""
+    return result
+
+
+def pending_scope_plans(scope):
+    if scope is None:
+        return []
+    return list(dict.fromkeys(value for value in scope.values() if value not in ORDINARY_PLAN | UNKNOWN_PLAN))
 
 
 def schools():
@@ -208,7 +257,8 @@ def main():
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
     tagged = a.plan_brackets == "tag"
-    if a.exclude is None:
+    default_exclude = a.exclude is None
+    if default_exclude:
         a.exclude = EXCLUDE_TAGGED if tagged else EXCLUDE
     by_code, by_name = schools()
     years = sorted((int(y), p) for y, p in (s.split("=", 1) for s in a.year))
@@ -224,6 +274,7 @@ def main():
         ap.error(str(exc))
     last = years[-1][0]
     table = {}
+    base_scopes = {}
     for y, p in years:
         with open(p, encoding="utf-8-sig") as f:
             for r in csv.DictReader(f):
@@ -244,8 +295,21 @@ def main():
                         continue  # 同组号不证明同组；未核实的历史不进入预测
                 else:
                     k = (join_key(school_key, a.legacy_join), join_key(sub, a.legacy_join))
+                try:
+                    provenance = input_provenance(r, y)
+                    plan_scope = input_plan_scope(r, provenance)
+                except (ValueError, TypeError) as exc:
+                    ap.error(f"{y} 年 {school}·{sub} 来源信息无效：{exc}")
+                base_key = k
+                signature = None if plan_scope is None else tuple(plan_scope.items())
+                if plan_scope is not None and all(value in UNKNOWN_PLAN for value in plan_scope.values()):
+                    signature = ("unknown_year", y, signature)
+                if signature is not None:
+                    k = (k, signature)
+                base_scopes.setdefault(base_key, {}).setdefault(y, set()).add(signature)
                 e = table.setdefault(k, {"code": code, "school": school, "sub": sub.strip(),
-                                         "req": "", "ranks": {}, "plan": "", "sources": [], "ambiguous": set(), "major_code": "", "provenance": {}, "grades": {}})
+                                         "req": "", "ranks": {}, "plan": "", "sources": [], "ambiguous": set(), "major_code": "", "provenance": {}, "grades": {},
+                                         "plan_scope": plan_scope, "base_key": base_key, "signature": signature})
                 if y in e["ambiguous"]:
                     continue
                 if y in e["ranks"]:
@@ -257,10 +321,6 @@ def main():
                     e["grades"].pop(y, None)
                     # 同校同名专业的不同校区/类型，整年剔除，不能任选一条
                     continue
-                try:
-                    provenance = input_provenance(r, y)
-                except (ValueError, TypeError) as exc:
-                    ap.error(f"{y} 年 {school}·{sub} 来源信息无效：{exc}")
                 if provenance:
                     e["provenance"][y] = provenance
                 grade = (r.get("source_grade") or "").strip()
@@ -286,7 +346,13 @@ def main():
         school, plans = plan_split(e["school"]) if tagged else (e["school"], [])
         info = lookup(code, school, by_code, by_name)
         text = e["school"] + " " + e["sub"] + " " + e["req"]  # 专业组省份的专项、预科、中外合作标记常写在选科要求一栏
-        if a.exclude and re.search(a.exclude, text + " " + info.get("note", "")):
+        eligibility_text = text
+        structured_text = ""
+        if e["plan_scope"] is not None:
+            structured_text = " ".join("（" + value + "）" for value in e["plan_scope"].values() if value)
+            eligibility_text += " " + structured_text
+        if (a.exclude and re.search(a.exclude, eligibility_text + " " + info.get("note", ""))
+                or default_exclude and structured_text and re.search(EXCLUDE_TAGGED, structured_text)):
             drop("排除词（需单独资格、异地培养或学费不同）")
             continue
         if not info:
@@ -318,13 +384,21 @@ def main():
         row["note"] = "；".join(e["sources"]) if e["sources"] else ("专业组跨年组成未核实，只用最近一年" if a.key == "group" else "")
         if e["ambiguous"]:
             row["note"] += "；重复专业键已剔除年份：" + ",".join(map(str, sorted(e["ambiguous"])))
+        scope_gaps = [y for y, signatures in base_scopes[e["base_key"]].items()
+                      if y < last and y not in e["ranks"] and any(s != e["signature"] for s in signatures)]
+        if scope_gaps:
+            row["note"] += "；计划条件不同或未明，未采用以下年份：" + ",".join(map(str, sorted(scope_gaps)))
+            log.setdefault("plan_scope_history_gaps", []).append({"id": row["id"], "name": name, "years": sorted(scope_gaps)})
         warn = campus_warning(school, info)
         if warn:
             row["note"] = (row["note"] + "；" if row["note"] else "") + warn
-        if tagged:
-            row["limits"] = f"{PENDING}：{'、'.join(plans)}" if plans and info else ""
+        if tagged or e["plan_scope"] is not None:
+            pending = list(dict.fromkeys((plans if tagged and info else []) + pending_scope_plans(e["plan_scope"])))
+            row["limits"] = f"{PENDING}：{'、'.join(pending)}" if pending else ""
             if row["limits"]:
                 log["eligibility_pending"].append(name)
+        if e["plan_scope"] is not None:
+            row.update(e["plan_scope"])
         for y, _ in reversed(years):
             row[f"rank_{y}"] = e["ranks"].get(y, "")
         if e["provenance"] or e["grades"]:
@@ -336,9 +410,23 @@ def main():
                 for fields in e["provenance"].values() for v in fields.values()
                 if v.get("value") is not None])
         rows.append(row)
+    id_counts = {}
+    for row in rows:
+        id_counts[row["id"]] = id_counts.get(row["id"], 0) + 1
+    structured_ids = {row["id"] for row in rows if "plan_type" in row}
+    ambiguous_ids = {identity for identity, count in id_counts.items() if count > 1 and identity in structured_ids}
+    if ambiguous_ids:
+        rows = [row for row in rows if row["id"] not in ambiguous_ids]
+        log["plan_scope_ambiguous_ids"] = sorted(ambiguous_ids)
+        log["dropped"]["同一志愿有多个计划口径，须先按计划类型筛选来源"] = sum(id_counts[identity] for identity in ambiguous_ids)
+        kept_ids = {row["id"] for row in rows}
+        if "plan_scope_history_gaps" in log:
+            log["plan_scope_history_gaps"] = [item for item in log["plan_scope_history_gaps"] if item["id"] in kept_ids]
+    log["eligibility_pending"] = [row["name"] for row in rows if PENDING in row.get("limits", "")]
     rows.sort(key=lambda r: r[f"rank_{last}"])
     unknown = sum(r["province"] == "未知" for r in rows)
-    cols = ["id", "name", "code", "group", "major_code", "requirement", "province", "city", "plan", "history_status", "note"] + (["limits"] if tagged else []) + [f"rank_{y}" for y, _ in reversed(years)]
+    cols = ["id", "name", "code", "group", "major_code", "requirement", "province", "city", "plan", "history_status", "note"] + (["limits"] if tagged or any("limits" in row for row in rows) else []) + [f"rank_{y}" for y, _ in reversed(years)]
+    cols += [key for key in ("plan_type", "source_admission_type_raw") if any(key in row for row in rows)]
     cols += [key for key in ("source_grade", "data_provenance") if any(key in row for row in rows)]
     with open(a.out, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=cols)
@@ -353,7 +441,9 @@ def main():
     if (a.in_province or a.public) and unmatched:
         print(f"⚠ {unmatched} 个条目因院校未匹配而无法按所在省或公办民办筛选：已排除，请人工核对")
     if log["eligibility_pending"]:
-        print(f"⚠ {len(log['eligibility_pending'])} 个条目属招生计划类括号（如八协计划），已按括号外校名保留并标“{PENDING}”：填报前须按当年招生章程核对报名资格")
+        print(f"⚠ {len(log['eligibility_pending'])} 个条目含招生计划条件，已标“{PENDING}”：填报前须按当年招生章程核对报名资格")
+    if ambiguous_ids:
+        print(f"⚠ {len(ambiguous_ids)} 个志愿因计划口径不唯一未写出；先在来源导出时明确计划类型")
     if a.screening_log:
         with open(a.screening_log, "w", encoding="utf-8") as f:
             json.dump(log, f, ensure_ascii=False, indent=1)
