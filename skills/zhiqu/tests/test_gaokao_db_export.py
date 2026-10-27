@@ -172,6 +172,35 @@ class OriginalHeaderScopeTests(unittest.TestCase):
             m=ex.export_records(self.collect(),'河北','物理',[2025],out=d,key='major')
             with open(m['files']['2025'])as f:rows=list(csv.DictReader(f))
             return m,rows
+    def test_exact_legacy_header_requires_matching_official_fingerprint(self):
+        self.c.execute('ALTER TABLE data.source ADD COLUMN archive_sha256 TEXT')
+        self.c.execute('UPDATE data.source SET archive_sha256=?', ('a'*64,))
+        for prefix in ('原表表头；指纹=', '原表头；SHA=', '原件真实表头；SHA='):
+            self.c.execute('UPDATE data.source_format_reference SET locator=?', (prefix+'a'*64,))
+            _, rows = self.export()
+            self.assertEqual(len(rows), 1)
+            loc = json.loads(json.loads(rows[0]['data_provenance'])['score']['locator']['original_format']['locator'])
+            self.assertEqual(loc['sha256'], 'a'*64)
+            self.assertEqual(loc['legacy_locator_raw'], prefix+'a'*64)
+        self.c.execute('UPDATE data.source SET archive_sha256=?', ('b'*64,))
+        self.assertEqual(self.export()[1], [])
+        self.c.execute("UPDATE data.source SET archive_sha256=?,grade='第三方整理'", ('a'*64,))
+        self.assertEqual(self.export()[1], [])
+
+    def test_analogous_header_and_unbound_legacy_locator_are_not_original_proof(self):
+        self.c.execute('ALTER TABLE data.source ADD COLUMN archive_sha256 TEXT')
+        self.c.execute('UPDATE data.source SET archive_sha256=?', ('a'*64,))
+        for locator in ('原表表头或同站同类表列结构；指纹='+'a'*64,
+                        '原表头；SHA='+'a'*64+'extra',
+                        '原表头；SHA='+'a'*63,
+                        '原表头；SHA='+('A'*64),
+                        'original header '+('a'*64)):
+            self.c.execute('UPDATE data.source_format_reference SET locator=?', (locator,))
+            self.assertEqual(self.export()[1], [], locator)
+        self.c.execute('UPDATE data.source SET archive_sha256=NULL')
+        self.c.execute('UPDATE data.source_format_reference SET locator=?', ('原表头；SHA='+'a'*64,))
+        self.assertEqual(self.export()[1], [])
+
     def test_source_header_scope_and_real_row_locator_survive_export(self):
         m,rows=self.export();self.assertEqual(m['exported_rows'],{'2025':1});self.assertEqual(rows[0]['batch'],'本科批');self.assertEqual(rows[0]['major_code'],'16')
         fact=json.loads(rows[0]['data_provenance'])['score'];self.assertEqual(fact['value'],600);self.assertEqual(fact['grade'],'官方');self.assertEqual(fact['locator']['scope_locator']['row'],5);self.assertIn('source_format_reference',fact['original_scope'])

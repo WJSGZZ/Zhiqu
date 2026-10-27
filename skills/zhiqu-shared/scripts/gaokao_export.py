@@ -92,6 +92,25 @@ def _meta(row, field, value, source, state, locator, checks=None, cross_check=No
     return result
 
 
+def _format_locator(c, source_id, value):
+    """兼容明确的旧原表头坐标；同站同类表结构不能冒充本原件。"""
+    try:
+        parsed = json.loads(value)
+    except (TypeError, ValueError):
+        parsed = None
+    if isinstance(parsed, dict) and parsed:
+        return parsed
+    if not isinstance(value, str):
+        return None
+    legacy = re.fullmatch(r'(?:原表表头；指纹=|原表头；SHA=|原件真实表头；SHA=)([a-f0-9]{64})', value)
+    if not legacy:
+        return None
+    source = _source(c, source_id, {})
+    if source.get('grade') != '官方' or source.get('archive_sha256') != legacy.group(1):
+        return None
+    return {'location': '原表表头', 'sha256': legacy.group(1), 'legacy_locator_raw': value}
+
+
 def _format_scope(c, tables, source_id, cache):
     """Read source-wide scope only from retained original-header evidence."""
     if source_id not in cache:
@@ -101,7 +120,7 @@ def _format_scope(c, tables, source_id, cache):
             columns = json.loads(entry.get('provided_fields', 'null'))
             names = json.loads(entry.get('scope_fields', 'null'))
             fixed = json.loads(entry.get('scope_values', 'null'))
-            locator = json.loads(entry.get('locator', 'null'))
+            locator = _format_locator(c, source_id, entry.get('locator'))
         except (TypeError, ValueError):
             columns = names = fixed = locator = None
         valid = (isinstance(columns, list) and all(isinstance(x, str) for x in columns)
@@ -118,7 +137,7 @@ def _format_scope(c, tables, source_id, cache):
                 field = aliases.get(key, key)
                 if field in {'province','year','subject','code','name','group','major_code','major','batch','plan_type','requirement'} and value not in (None, ''):
                     scope.setdefault(field, []).append(value)
-        reference = {k:entry[k] for k in ('source_id','excerpt','locator')} if valid else None
+        reference = dict(source_id=entry['source_id'], excerpt=entry['excerpt'], locator=dump(locator) if 'legacy_locator_raw' in locator else entry['locator']) if valid else None
         if reference and isinstance(fixed.get('required_scope_fields'), list):
             reference['required_scope_fields'] = [f for f in fixed['required_scope_fields'] if f in {'major_code','group','code','batch'}]
         cache[source_id] = (scope, reference)
