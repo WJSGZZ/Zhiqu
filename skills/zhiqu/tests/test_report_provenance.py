@@ -144,6 +144,17 @@ class ReportProvenanceTests(unittest.TestCase):
         fact.pop('original_scope');fact['usage_gate']={'model_usable':False}
         self.assertTrue(any('不能作为实际投档位次' in e for e in check_report(self.rep,self.result)))
 
+    def test_old_export_declared_cumulative_rank_is_rejected_without_format_key(self):
+        from test_legacy_derived_rank_gate import legacy_fact
+        fact=self.result['list'][0]['data_provenance']['2025']['rank']
+        original_value=fact['value'];old=legacy_fact();old['value']=original_value;old['scope']={'year':2025}
+        fact.clear();fact.update(old)
+        errors=check_report(self.rep,self.result)
+        self.assertTrue(any('重新导出' in e for e in errors))
+        self.assertFalse(any('原表未公布' in e for e in errors))
+        fact['grade']='第三方整理';fact['display_grade']='第三方整理·内部未核'
+        self.assertTrue(any('不能作为实际投档位次' in e for e in check_report(self.rep,self.result)))
+
     def test_selection_gap_must_appear_in_report_and_not_count_as_confirmed(self):
         item=self.result['list'][0]
         item['data_provenance']['2025']['rank']['selection_review']={'status':'选科要求待核'}

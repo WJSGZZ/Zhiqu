@@ -13,12 +13,37 @@ def cutoff_rank_gate(fact, provided_fields=None):
     declared_gate = fact.get('usage_gate')
     if isinstance(declared_gate, dict) and declared_gate.get('model_usable') is False:
         return declared_gate
+    original = fact.get('original_scope')
+    if original is not None and not isinstance(original, dict) and fact.get('value') not in (None, ''):
+        return {'model_usable':False,'status':'来源范围格式无效','meaning':'原范围来源字段损坏',
+                'reason':'original_scope必须为对象；请重新导出或补核元数据，不能作为实际投档位次进入志愿模型'}
+    reference = original.get('source_format_reference') if isinstance(original, dict) else None
+    declared_reference = reference not in (None, {})
     if provided_fields is None:
-        original = fact.get('original_scope')
-        reference = original.get('source_format_reference') if isinstance(original, dict) else None
         provided_fields = reference.get('provided_fields') if isinstance(reference, dict) else None
     state = fact.get('value_status')
+    invalid_encoded_state = False
+    if isinstance(state, str):
+        try:
+            decoded = json.loads(state)
+            state = decoded
+            invalid_encoded_state = decoded is None
+        except (ValueError, TypeError):
+            invalid_encoded_state = state.lstrip().startswith(('{','[','"'))
     status = state.get('status') if isinstance(state, dict) else state
+    invalid_state = (invalid_encoded_state or
+                     isinstance(state, dict) and (not isinstance(status, str) or not status.strip()) or
+                     state is not None and not isinstance(state, (str,dict)))
+    if invalid_state and fact.get('value') not in (None, ''):
+        return {'model_usable':False,'status':'值状态格式无效','meaning':'位次的值状态字段损坏',
+                'reason':'value_status须为状态文本或含非空文本status的对象；请重新导出或补核元数据，不能作为实际投档位次进入志愿模型'}
+    if (declared_reference and fact.get('value') not in (None, '') and status not in ('官方原值','人工更正')
+            and not (isinstance(provided_fields, list) and provided_fields
+                     and all(isinstance(field, str) and field.strip() for field in provided_fields))):
+        return {'model_usable':False, 'status':'原格式字段清单待补',
+                'meaning':'位次的原格式凭据不完整',
+                'method':(state.get('method') if isinstance(state, dict) else None) or '未登记',
+                'reason':'旧导出的原格式凭据缺少有效provided_fields；须重新导出或补核字段清单，不能作为实际投档位次进入志愿模型'}
     if not (fact.get('value') not in (None, '') and fact.get('grade') == '官方'
             and status == '推算'
             and isinstance(provided_fields, list) and provided_fields
@@ -31,6 +56,11 @@ def cutoff_rank_gate(fact, provided_fields=None):
             'meaning': '最低分对应累计末位，非实际最低投档位次' if cumulative else '推算位次，原表未公布实际最低投档位次',
             'method': method,
             'reason': '原表未设位次列；推算输入及适用口径须另核，不作为实际投档位次进入志愿模型'}
+
+
+def rank_gate_reason(gate):
+    reason = gate.get('reason') if isinstance(gate, dict) else None
+    return reason if isinstance(reason, str) and reason.strip() else '数值来源或适用口径尚未核准'
 
 
 def provenance(item):
@@ -126,8 +156,9 @@ def provenance_errors(item):
         if (isinstance(selection, dict) and selection.get('status') == '选科要求待核'
                 and not re.search(r'资格待核：[^；;]*选科要求待核', str(item.get('limits') or ''))):
             errors.append(f'{year}.{field} 的选科要求待核须进入资格限制，不能静默当作可报或保底')
-        if field == 'rank' and cutoff_rank_gate(fact):
-            errors.append(f'{year}.{field} 是原表未公布的推算参照，不能作为实际投档位次参与志愿判断；须另核输入和口径')
+        gate = cutoff_rank_gate(fact) if field == 'rank' else None
+        if gate:
+            errors.append(f"{year}.{field} 不能作为实际投档位次参与志愿判断：{rank_gate_reason(gate)}")
         if fact.get('grade') not in ('官方', '第三方整理') or display_grade(fact) not in DISPLAY_GRADES:
             errors.append(f'{year}.{field} 来源等级无效')
         if display_grade(fact) == '官方' and fact.get('grade') != '官方':
