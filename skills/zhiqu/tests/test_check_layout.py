@@ -152,6 +152,49 @@ class TestBlankPages(unittest.TestCase):
         self.assertEqual(self.issues([self.section_start("11", "追问清单"), four, self.section_start("12", "核对与来源")]), [])
         self.assertEqual(self.issues([self.full(), self.HEAD + [(80, "12 核对与来源", 18), (110, self.BODY, 10)]]), [])
 
+    def test_new_heading_does_not_hide_previous_section_sparse_tail(self):
+        tail = self.HEAD + [(80, "回测", 10), (96, "用过去的数据检验方法。", 10),
+                            (150, "11 事后回看", 18), (200, "本期尚无事后结果。", 10)]
+        pages = [self.section_start("10", "方法与假设"), tail,
+                 self.section_start("12", "核对与来源")]
+        make_pages(self.path, pages)
+        with pymupdf.open(self.path) as doc:
+            self.assertEqual(check_layout.tail_orphans(doc), [(2, "10", 2)])
+        self.assertTrue(any("10 节" in x for x in check_layout.check_pdf(self.path)))
+
+    def test_dense_continuation_with_a_new_heading_is_not_an_orphan(self):
+        page = self.HEAD + [(80, "上一节末项。", 10), (125, "11 事后回看", 18)]
+        page += [(170 + 15 * k, self.BODY, 10) for k in range(35)]
+        make_pages(self.path, [self.section_start("10", "方法与假设"), page,
+                               self.section_start("12", "核对与来源")])
+        with pymupdf.open(self.path) as doc:
+            self.assertEqual(check_layout.tail_orphans(doc), [])
+
+    def test_continued_owner_survives_an_intermediate_page_without_heading(self):
+        tail = self.HEAD + [(80, "上一节最后一句。", 10), (125, "11 事后回看", 18),
+                            (165, "尚无事后结果。", 10)]
+        make_pages(self.path, [self.section_start("10", "方法与假设"), self.full(), tail,
+                               self.section_start("12", "核对与来源")])
+        with pymupdf.open(self.path) as doc:
+            self.assertEqual(check_layout.tail_orphans(doc), [(3, "10", 1)])
+
+    def test_numbered_heading_outside_body_does_not_crash(self):
+        for y in (30, 72):
+            with self.subTest(y=y):
+                page = self.HEAD + [(y, "11 页眉或上边界标题", 18),
+                                    (110, "正常说明。", 10)]
+                make_pages(self.path, [self.section_start("10", "方法与假设"), page,
+                                       self.section_start("12", "核对与来源")])
+                with pymupdf.open(self.path) as doc:
+                    self.assertEqual(check_layout.tail_orphans(doc), [])
+                check_layout.check_pdf(self.path)
+
+    def test_unknown_section_tail_is_still_reported_without_guessing_owner(self):
+        make_pages(self.path, [self.full(), self.HEAD + [(80, "无法归属的小段收尾。", 10)]])
+        with pymupdf.open(self.path) as doc:
+            self.assertEqual(check_layout.tail_orphans(doc), [(2, None, 1)])
+        self.assertTrue(any("? 节" in x for x in check_layout.check_pdf(self.path)))
+
     def test_fit_class_is_added_once_and_upgraded(self):
         doc = '<section data-section="10" data-kind="plan"><h2>10</h2></section><section class="newpage" data-section="11"><p>x</p></section>'
         one = report.add_section_class(doc, "11", "fit")

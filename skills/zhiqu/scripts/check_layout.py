@@ -158,7 +158,8 @@ def _section_heads(page):
 def tail_orphans(doc):
     """节末或全文最后一页只剩一两行收尾文字的页：[(页码, 所在小节编号, 行数)]。
 
-    只查有页眉的正文页；这一页本身不开新节，且下一页开新节或已是全文最后一页。
+    只查有页眉的正文页，且下一页开新节或已是全文最后一页。
+    若稀疏尾页先续上一节几行、再开新节，仍归前一节收紧，不让新标题掩盖孤尾。
     小节编号取这一页之前最近的一级标题，供生成器收紧那一节的行距后重排。
     """
     infos = [_blank_info(p) for p in doc]
@@ -169,15 +170,25 @@ def tail_orphans(doc):
         current = h[-1] if h else current
     out = []
     for i, info in enumerate(infos):
-        if i == 0 or not info["header"] or heads[i]:
+        if i == 0 or not info["header"]:
             continue
         if i < len(infos) - 1 and not _starts_section(infos[i + 1]):
             continue
         top, bot = PAGE_MARGIN, doc[i].rect.height - PAGE_MARGIN
         lines = [ln for ln in _lines(doc[i]) if top <= ln["y"] <= bot]
         used = 1 - sum(b - a for a, b in info["gaps"]) / info["height"]
+        sid = owner[i]
+        if heads[i]:
+            # 只查新节标题前的续行；整页仍须稀疏。正常的新节首页不受影响。
+            visible_heads = [ln["y"] for ln in lines
+                             if ln["size"] >= 16 and SECTION_HEAD.match(ln["t"])]
+            if not visible_heads:  # 整页扫描可能只在页眉/页边界找到大字号编号。
+                continue
+            first_head = min(visible_heads)
+            lines = [ln for ln in lines if ln["y"] < first_head]
+            sid = heads[i - 1][-1] if heads[i - 1] else owner[i - 1]
         if 0 < len(lines) <= TAIL_LINES and used < TAIL_OCCUPIED:
-            out.append((i + 1, owner[i], len(lines)))
+            out.append((i + 1, sid, len(lines)))
     return out
 
 
