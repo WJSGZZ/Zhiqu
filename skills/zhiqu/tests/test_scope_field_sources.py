@@ -121,6 +121,55 @@ class ScopeSourceTests(unittest.TestCase):
             original=self.proof['locator']['url'];self.proof['locator']['url']=value;self.save()
             self.assertTrue(self.resolve()[1]);self.proof['locator']['url']=original;self.save()
 
+    def test_batch_and_original_program_code_have_separate_field_sources(self):
+        for field,value in [('source_batch_raw','普通类常规批第1次志愿'),('major_code','02')]:
+            with self.subTest(field=field):
+                self.scope={field:value}
+                if field=='major_code':
+                    self.c.execute("UPDATE data.gk_official_cutoff SET major_code=NULL")
+                    self.raw['major_code']=None
+                self.proof['business_key'].update({k:self.raw.get(k)for k in ('code','major_code')})
+                self.proof['value']=value;self.proof['excerpt']=value
+                self.loc['scope_field_sources']={field:self.proof};self.save()
+                resolved,errors=self.resolve();self.assertFalse(errors)
+                self.assertEqual(resolved[field]['value'],value)
+                row=ex.collect(self.c,db._tables(self.c),'河北','物理',[2025])[0]
+                self.assertEqual(row['batch'if field=='source_batch_raw'else'major_code'],value)
+                self.assertEqual(row['provenance']['score']['source_id'],'cut')
+                record=db._record(self.c,'gk_official_cutoff',self.raw)
+                self.assertEqual(record['context'][field],value)
+                if field=='major_code':
+                    self.assertEqual(record['context']['major_name'],self.raw['major'])
+                    self.assertEqual(record['context']['source_granularity'],'专业')
+                    self.assertNotIn('original_major_raw',record['context'])
+                self.assertEqual(record['values']['score']['source_id'],'cut')
+                self.assertEqual(record['sources'][0]['source']['source_id'],'req')
+
+    def test_bad_batch_or_program_code_proof_only_drops_that_supplement(self):
+        for field,value in [('source_batch_raw','普通类常规批第1次志愿'),('major_code','02')]:
+            with self.subTest(field=field):
+                self.scope={field:value};self.proof['business_key'].update({k:self.raw.get(k)for k in ('code','major_code')});self.proof['value']='wrong';self.proof['excerpt']=value
+                self.loc['scope_field_sources']={field:self.proof};self.save()
+                row=ex.collect(self.c,db._tables(self.c),'河北','物理',[2025])[0]
+                self.assertFalse(row['scope_conflicts']);self.assertTrue(row['scope_source_errors'])
+                self.assertEqual(row['provenance']['score']['value'],600)
+                # Business column '11' is independent of the invalid '02' supplement.
+                self.assertEqual(row['major_code'],'11')
+                record=db._record(self.c,'gk_official_cutoff',self.raw)
+                self.assertEqual(record['values']['score']['value'],600)
+                if field=='source_batch_raw':self.assertNotIn(field,record['context'])
+                else:self.assertEqual(record['context'][field],'11')
+                self.assertNotIn('scope_sources',record)
+
+    def test_new_batch_and_code_cannot_overwrite_independent_original_field(self):
+        for field,value,native_key,native_value in [('major_code','02','major_code','11'),('source_batch_raw','普通类常规批第1次志愿','batch','第二次志愿')]:
+            with self.subTest(field=field):
+                self.raw[native_key]=native_value
+                self.scope={field:value};self.proof['value']=value;self.proof['excerpt']=value
+                self.proof['business_key'].update({k:self.raw.get(k)for k in ('code','major_code')})
+                self.loc['scope_field_sources']={field:self.proof};self.save()
+                self.assertTrue(self.resolve()[1])
+
     def test_malformed_reference_is_not_silently_native(self):
         self.loc['scope_field_sources']=[]
         self.assertTrue(self.resolve()[1])

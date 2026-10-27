@@ -105,22 +105,26 @@ def scope_field_sources(c, tables, raw, scope, locator):
     """字段级补充只证明该字段；不把学校官网要求借给投档数字。"""
     payload=obj(locator)
     if 'scope_field_sources' in payload and not isinstance(payload['scope_field_sources'],dict):
-        return {},[{'field':'subject_requirements','reason':'选科补充来源记录不是对象'}]
+        return {},[{'field':field,'reason':'范围补充来源记录不是对象'} for field in ('subject_requirements','source_batch_raw','major_code')]
     proofs=obj(payload.get('scope_field_sources')); resolved={}; errors=[]
     for field,proof in proofs.items():
-        if field!='subject_requirements':continue
+        if field not in {'subject_requirements','source_batch_raw','major_code'}:continue
         proof=obj(proof)
         if not isinstance(proof.get('source_id'),str) or not proof['source_id'].strip():
-            errors.append({'field':field,'reason':'选科补充来源编号必须是非空字符串'});continue
+            errors.append({'field':field,'reason':'范围补充来源编号必须是非空字符串'});continue
         src=_source(c,proof['source_id'],{});position=obj(proof.get('locator'));review=obj(proof.get('review'))
         key={k:raw.get(k) for k in ('source_id','src','institution_id','year','province','subject','major')}
+        if field in {'source_batch_raw','major_code'}:key.update({k:raw.get(k) for k in ('code','major_code')})
         actual=obj(proof.get('business_key'));digest=position.get('sha256')
+        native=raw.get(field)
+        if field=='source_batch_raw'and native in(None,''):native=raw.get('batch')
+        native_agrees=field=='subject_requirements'or native in(None,'')or native==proof.get('value')
         evidence=None
         if 'gk_official_original_evidence' in tables and isinstance(proof.get('record_id'),str):
             evidence=c.execute('SELECT table_name,source_id,excerpt_locator_json FROM data.gk_official_original_evidence WHERE record_id=?',(proof['record_id'],)).fetchone()
         bound=(evidence is not None and evidence['table_name']=='official_cutoff_scope' and evidence['source_id']==proof.get('source_id')
                and dump(obj(evidence['excerpt_locator_json']))==dump(proof))
-        valid=(bound and set(actual)==set(key) and all(actual[k]==v and type(actual[k])is type(v) for k,v in key.items())
+        valid=(bound and native_agrees and set(actual)==set(key) and all(actual[k]==v and type(actual[k])is type(v) for k,v in key.items())
                and src.get('_registered') and src.get('grade')=='官方' and (src.get('landing_url')or src.get('file_url'))
                and isinstance(digest,str) and re.fullmatch(r'[0-9a-f]{64}',digest)is not None
                and all(type(position.get(k))is int and position[k]>=low for k,low in (('table',0),('row',1),('column',1)))
@@ -130,7 +134,7 @@ def scope_field_sources(c, tables, raw, scope, locator):
                and review.get('status')=='approved' and review.get('approved_by')=='root' and review.get('dual_read_equal')is True
                and all(isinstance(review.get(k),str) and re.fullmatch(r'[0-9a-f]{64}',review[k])is not None for k in ('manifest_sha256','sample_proof_sha256','independent_review_sha256')))
         if not valid:
-            errors.append({'field':field,'reason':'选科补充原文的字段值、原行业务键、官方来源指纹或审核链不匹配'});continue
+            errors.append({'field':field,'reason':'范围补充原文的字段值、原行业务键、官方来源指纹或审核链不匹配'});continue
         resolved[field]={'value':proof['value'],'source':src,'locator':position,'excerpt':proof['excerpt'],
                          'scope':{k:key[k]for k in ('institution_id','year','province','subject','major')}}
     return resolved,errors
@@ -380,7 +384,7 @@ def export_records(records, province, subject, years, *, out, key='group', schoo
         native=[m for m in row['provenance'].values() if m.get('source_registered') and m.get('grade')=='官方' and m.get('source_id')==row.get('source_id')]
         if row.get('table')=='gk_official_cutoff' and not row.get('requirement') and re.search(r'物理|历史|综合',subject):
             loc=next((m.get('locator',{}) for m in native),{})
-            review={'status':'选科要求待核','reason':('选科补充来源链未能核准，未采用该字段，须另核原文' if row.get('scope_source_errors') else '记录未留选科要求；未取得当年对应原文，未用第三方填充'),
+            review={'status':'选科要求待核','reason':('选科补充来源链未能核准，未采用该字段，须另核原文' if any(x.get('field')=='subject_requirements' for x in row.get('scope_source_errors',[])) else '记录未留选科要求；未取得当年对应原文，未用第三方填充'),
                     'record_source_id':row.get('source_id'),'official_source_id':row.get('source_id') if native else None,'official_locator':loc.get('src') or loc.get('src_row') or '未定位'}
             row=dict(row,provenance={f:dict(m,selection_review=review) for f,m in row['provenance'].items()})
         annotated.append(row)
