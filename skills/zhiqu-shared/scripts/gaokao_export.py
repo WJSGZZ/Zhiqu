@@ -193,7 +193,7 @@ def collect(c, tables, province, subject, years):
                'code':pick('code',('code','school_code'),('code','school_code')), 'name':pick('name',('name','school_name','school_raw'),('name','school_name','school_raw')),
                'group':pick('group',('grp','group_code'),('group','grp','group_code')), 'major_code':pick('major_code',('major_code',),('major_code',)),
                'major':pick('major',('major','major_name'),('major','major_name')), 'institution_id':pick('institution_id',('institution_id',),('institution_id',)),
-               'batch':pick('batch',('batch',),('batch','批次')),
+               'batch':pick('batch',('batch',),('batch','批次','source_batch_raw')),
                'plan_type':pick('plan_type',('plan_type',),('plan_type',)) or '未标', 'requirement':pick('requirement',('subject_requirements','subject_req_raw'),('requirement','subject_requirements')),
                'scope_raw':text(raw.get('scope_raw')) or (dump(extra_scope) if extra_scope else ''), 'record_id':raw.get('record_id',raw.get('entry_id')), 'table':table,
                'source_id':raw.get('source_id') or ('vendor-file-'+str(raw.get('src_file')) if raw.get('src_file') is not None else ''),
@@ -292,6 +292,13 @@ def export_records(records, province, subject, years, *, out, key='group', schoo
         if plan_type is not None and row.get('plan_type') != plan_type: continue
         if row.get('scope_conflicts'):
             rejected.append({'year':row['year'],'school':row.get('name'),'record_id':row.get('record_id'),'table':row.get('table'),'reason':'业务列与明确scope字段冲突，不猜范围','scope_conflicts':row['scope_conflicts']})
+            continue
+        admission_type = text(obj(obj(row.get('original_scope')).get('source_scope_original')).get('source_admission_type_raw'))
+        if (row.get('table') == 'gk_official_cutoff' and admission_type and admission_type != '一般统考生'
+                and (plan_type in (None, '未标', '普通') or text(plan_type) != admission_type)):
+            rejected.append({'year':row['year'],'school':row.get('name'),'record_id':row.get('record_id'),
+                             'table':row.get('table'),'reason':'原招考类型未按普通候选核对，暂不导出；专项须明确计划类型并另核资格',
+                             'source_admission_type_raw':admission_type})
             continue
         unregistered=[field for field in FIELDS if row['values'].get(field) is not None and (not row['provenance'][field].get('source_registered') or row['provenance'][field].get('grade')not in ('官方','第三方整理'))]
         if unregistered:

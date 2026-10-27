@@ -240,4 +240,75 @@ class OriginalHeaderScopeTests(unittest.TestCase):
     def test_missing_header_does_not_guess_from_source_id_or_title(self):
         self.c.execute('DELETE FROM data.source_format_reference');self.assertEqual(self.export()[1],[])
 
+    def test_explicit_row_original_batch_is_not_lost_without_source_header(self):
+        self.c.execute('DELETE FROM data.source_format_reference')
+        scope={'major_code':'16','source_batch_raw':'本科批','source_admission_type_raw':'一般统考生'}
+        self.c.execute('UPDATE data.official_cutoff_scope SET scope_json=?',(json.dumps(scope),))
+        _,rows=self.export();self.assertEqual(len(rows),1);self.assertEqual(rows[0]['batch'],'本科批')
+        fact=json.loads(rows[0]['data_provenance'])['score']
+        self.assertEqual(fact['value'],600);self.assertEqual(fact['display_grade'],'官方')
+        self.assertEqual(fact['original_scope']['source_scope_original'],scope)
+        self.assertIn('一般统考生',fact['scope']['scope_raw'])
+
+    def test_original_row_batch_alias_participates_in_all_scope_conflicts(self):
+        # 明确批次、中文批次、原批次别名和整表常量均不能相互覆盖。
+        for scope in ({'major_code':'16','source_batch_raw':'提前批'},
+                      {'major_code':'16','batch':'提前批','source_batch_raw':'本科批'},
+                      {'major_code':'16','批次':'提前批','source_batch_raw':'本科批'}):
+            self.c.execute('UPDATE data.official_cutoff_scope SET scope_json=?',(json.dumps(scope),))
+            meta,rows=self.export();self.assertEqual(rows,[]);self.assertTrue(meta['rejected'])
+
+    def test_title_or_blank_original_batch_is_not_used_as_row_evidence(self):
+        self.c.execute('DELETE FROM data.source_format_reference')
+        for batch in ('',' ','\u3000'):
+            scope={'major_code':'16','source_batch_raw':batch,'source_title':'2025年普通类本科批投档情况','scope_raw':'本科批'}
+            self.c.execute('UPDATE data.official_cutoff_scope SET scope_json=?',(json.dumps(scope),))
+            self.assertEqual(self.export()[1],[])
+
+    def test_original_batch_alias_satisfies_only_its_own_row_alignment(self):
+        self.c.execute('UPDATE data.source_format_reference SET scope_values=?',(json.dumps({'source_batch_raw':'本科批','required_scope_fields':['batch']}),))
+        self.c.execute('UPDATE data.official_cutoff_scope SET scope_json=?',(json.dumps({'major_code':'16','source_batch_raw':'本科批'}),))
+        self.assertEqual(len(self.export()[1]),1)
+        self.c.execute('UPDATE data.official_cutoff_scope SET scope_json=?',(json.dumps({'major_code':'16','source_batch_raw':' '}),))
+        self.assertEqual(self.export()[1],[])
+
+    def test_different_admission_types_are_not_merged_by_original_batch_alias(self):
+        self.c.execute('DELETE FROM data.source_format_reference')
+        self.c.execute('UPDATE data.official_cutoff_scope SET scope_json=?',(json.dumps({'major_code':'16','source_batch_raw':'本科批','source_admission_type_raw':'一般统考生'}),))
+        self.c.execute("INSERT INTO data.gk_official_cutoff SELECT province,year,subject,code,name,grp,major_code,major,score,rank,source_id,'public.csv:3',value_status FROM data.gk_official_cutoff LIMIT 1")
+        self.c.execute('INSERT INTO data.official_cutoff_scope VALUES(?,?,?,?)',('o','public.csv:3',json.dumps({'major_code':'16','source_batch_raw':'本科批','source_admission_type_raw':'民族班'}),'{}'))
+        meta,rows=self.export();self.assertEqual(len(rows),1)
+        fact=json.loads(rows[0]['data_provenance'])['rank']
+        self.assertEqual(fact['original_scope']['source_scope_original']['source_admission_type_raw'],'一般统考生')
+        self.assertTrue(any(r.get('source_admission_type_raw')=='民族班'for r in meta['rejected']))
+
+    def test_unaligned_original_admission_type_is_not_an_ordinary_candidate(self):
+        self.c.execute('DELETE FROM data.source_format_reference')
+        for kind in ('民族班','预科','国家专项计划','地方专项计划','中外合作办学','少数民族彝语类','未知招考类型'):
+            self.c.execute('UPDATE data.official_cutoff_scope SET scope_json=?',(json.dumps({'major_code':'16','source_batch_raw':'本科批','source_admission_type_raw':kind}),))
+            meta,rows=self.export();self.assertEqual(rows,[],kind)
+            self.assertEqual(meta['rejected'][0]['source_admission_type_raw'],kind)
+
+    def test_special_candidate_requires_explicit_matching_plan_filter(self):
+        self.c.execute('ALTER TABLE data.gk_official_cutoff ADD COLUMN plan_type TEXT')
+        self.c.execute("UPDATE data.gk_official_cutoff SET plan_type='国家专项计划'")
+        self.c.execute('UPDATE data.official_cutoff_scope SET scope_json=?',(json.dumps({'major_code':'16','source_batch_raw':'本科批','source_admission_type_raw':'国家专项计划'}),))
+        self.assertEqual(self.export()[1],[])
+        with tempfile.TemporaryDirectory()as d:
+            result=ex.export_records(self.collect(),'河北','物理',[2025],out=d,key='major',plan_type='国家专项计划')
+            self.assertEqual(result['exported_rows'],{'2025':1})
+        self.c.execute("UPDATE data.gk_official_cutoff SET plan_type='中外合作办学'")
+        with tempfile.TemporaryDirectory()as d:
+            result=ex.export_records(self.collect(),'河北','物理',[2025],out=d,key='major',plan_type='中外合作办学')
+            self.assertEqual(result['exported_rows'],{'2025':0})
+        # 显式筛“未标”也不能把未对齐的专项当普通候选放行。
+        self.c.execute('UPDATE data.gk_official_cutoff SET plan_type=NULL')
+        with tempfile.TemporaryDirectory()as d:
+            result=ex.export_records(self.collect(),'河北','物理',[2025],out=d,key='major',plan_type='未标')
+            self.assertEqual(result['exported_rows'],{'2025':0})
+        self.c.execute('UPDATE data.official_cutoff_scope SET scope_json=?',(json.dumps({'major_code':'16','source_batch_raw':'本科批','source_admission_type_raw':'未标'}),))
+        with tempfile.TemporaryDirectory()as d:
+            result=ex.export_records(self.collect(),'河北','物理',[2025],out=d,key='major',plan_type='未标')
+            self.assertEqual(result['exported_rows'],{'2025':0})
+
 if __name__=='__main__':unittest.main()
