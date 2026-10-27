@@ -1700,6 +1700,8 @@ def export_gaokao(province, subject, years, *, out, schools=None, batch=None, pl
             if not any(available.values()) and (any(aux['plan_exported_rows'].values()) or any(aux['batch_line_exported_rows'].values()) or any(result['official_field_exported_rows'].values())):
                 result['status']='partial'
                 result['message']='仅导出计划、控制线或已核官方字段辅助原表；志愿候选和一分一段仍缺，不可据此推算录取位次'
+            if result.get('scope_audit_count'):
+                result['message']+='；'+str(result['scope_audit_count'])+'条第三方范围记录单列审计，未阻断唯一官方原行；选科缺口未用第三方填充'
             if result.get('withheld_values'):
                 result['message']+='；'+str(len(result['withheld_values']))+'条推算位次只留待核参照，未作实际投档位次进入模型；原分数及逐行定位仍可查询，详情见导出说明'
             missing_years=[year for year in years if not result['exported_rows'][str(year)] or not result['yfyd_exported_rows'][str(year)]]

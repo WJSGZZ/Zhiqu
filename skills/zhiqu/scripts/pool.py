@@ -395,8 +395,10 @@ def main():
         warn = campus_warning(school, info)
         if warn:
             row["note"] = (row["note"] + "；" if row["note"] else "") + warn
-        if tagged or e["plan_scope"] is not None:
-            pending = list(dict.fromkeys((plans if tagged and info else []) + pending_scope_plans(e["plan_scope"])))
+        selection_pending = any(isinstance(fact.get("selection_review"), dict) and fact["selection_review"].get("status") == "选科要求待核"
+                                for facts in e["provenance"].values() for fact in facts.values() if fact.get("value") is not None)
+        if tagged or e["plan_scope"] is not None or selection_pending:
+            pending = list(dict.fromkeys((plans if tagged and info else []) + pending_scope_plans(e["plan_scope"]) + (["选科要求待核"] if selection_pending else [])))
             row["limits"] = f"{PENDING}：{'、'.join(pending)}" if pending else ""
             if row["limits"]:
                 log["eligibility_pending"].append(name)

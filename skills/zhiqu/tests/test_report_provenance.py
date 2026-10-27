@@ -144,6 +144,15 @@ class ReportProvenanceTests(unittest.TestCase):
         fact.pop('original_scope');fact['usage_gate']={'model_usable':False}
         self.assertTrue(any('不能作为实际投档位次' in e for e in check_report(self.rep,self.result)))
 
+    def test_selection_gap_must_appear_in_report_and_not_count_as_confirmed(self):
+        item=self.result['list'][0]
+        item['data_provenance']['2025']['rank']['selection_review']={'status':'选科要求待核'}
+        self.assertTrue(any('选科要求待核须进入资格限制' in e for e in check_report(self.rep,self.result)))
+        item['limits']='资格待核：选科要求待核'
+        html=report.build(self.rep,self.result)
+        self.assertIn('需核对报名资格（选科要求待核）',html)
+        self.assertEqual(check_report(self.rep,self.result,html),[])
+
     def test_third_party_without_check_scope_is_rejected(self):
         fact = self.result['list'][0]['data_provenance']['2025']['rank']
         del fact['cross_check_summary']

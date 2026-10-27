@@ -25,6 +25,105 @@ class GaokaoDbExportTests(unittest.TestCase):
         with open(result['files']['2025'],newline='')as f:csvrows=list(csv.DictReader(f))
         return result,csvrows
 
+    def official(self,**kw):
+        r=record(grade='官方',sid='official',**kw);r['table']='gk_official_cutoff';r['source_id']='official'
+        return r
+
+    def test_incomparable_vendor_scope_cannot_block_unique_original(self):
+        official=self.official(rank=900);vendor=record(rank=1000)
+        vendor['requirement']='另一种选科';vendor['scope_raw']='第三方旁注'
+        for m in vendor['provenance'].values():m['scope']=ex._scope(vendor)
+        result,rows=self.run_export([vendor,official]);self.assertEqual(len(rows),1)
+        self.assertEqual(rows[0]['rank'],'900');self.assertEqual(rows[0]['requirement'],'物理+化学')
+        self.assertEqual(result['scope_audit_count'],1)
+        with open(result['scope_audit_file'])as f:audit=json.load(f)['records'][0]
+        self.assertEqual(audit['values']['rank']['value'],1000)
+        self.assertEqual(audit['values']['rank']['grade'],'第三方整理')
+        self.assertEqual(audit['official_scope']['requirement'],'物理+化学')
+        self.assertEqual(audit['thirdparty_scope']['requirement'],'另一种选科')
+
+    def test_official_missing_requirement_is_not_filled_by_vendor(self):
+        official=self.official();official['requirement']=''
+        for m in official['provenance'].values():m['scope']=ex._scope(official)
+        result,rows=self.run_export([official,record()]);self.assertEqual(len(rows),1)
+        self.assertEqual(rows[0]['requirement'],'');self.assertEqual(result['scope_audit_count'],1)
+        facts=json.loads(rows[0]['data_provenance'])
+        self.assertEqual(facts['rank']['selection_review']['status'],'选科要求待核')
+        self.assertEqual(facts['score']['selection_review']['official_source_id'],'official')
+
+    def test_multiple_original_rows_even_blank_do_not_get_priority_override(self):
+        official=self.official(rank=900);other=self.official(rank=None,score=None,plan=None)
+        other['source_id']='official-other';other['major_code']='another'
+        for m in other['provenance'].values():m['source_id']='official-other'
+        # 两个官方原行中一个没数值，仍不能声称只有一个原行。
+        vendor=record();vendor['requirement']='other'
+        result,rows=self.run_export([official,other,vendor])
+        self.assertEqual(result['scope_audit_count'],0)
+        with open(result['conflicts_file'])as f:self.assertTrue(any(x['field']=='scope'for x in csv.DictReader(f)))
+        self.assertEqual(rows,[])
+
+    def test_unlocatable_blank_second_official_disables_priority(self):
+        official=self.official(rank=900);blank=self.official(rank=None,score=None,plan=None)
+        blank['major_code']='another'
+        for m in blank['provenance'].values():m['locator']={}
+        vendor=record();vendor['requirement']='other'
+        result,rows=self.run_export([official,blank,vendor]);self.assertEqual(rows,[])
+        self.assertEqual(result['scope_audit_count'],0)
+
+    def test_missing_selection_is_pending_independent_of_original_uniqueness(self):
+        for second in [False,True]:
+            official=self.official();official['requirement']=''
+            for m in official['provenance'].values():m['locator']={}
+            records=[official]
+            if second:
+                other=self.official();other['requirement']=''
+                for m in other['provenance'].values():m['locator']={'src_row':'10'}
+                records.append(other)
+            result,rows=self.run_export(records);self.assertEqual(len(rows),1)
+            self.assertEqual(json.loads(rows[0]['data_provenance'])['rank']['selection_review']['status'],'选科要求待核')
+
+    def test_unconfirmed_empty_record_does_not_certify_vendor_or_erase_selection_gap(self):
+        official=self.official(rank=None,score=None,plan=None);official['requirement']=''
+        for m in official['provenance'].values():m['source_registered']=False;m['locator']={}
+        vendor=record();vendor['requirement']=''
+        result,rows=self.run_export([official,vendor]);self.assertEqual(len(rows),1)
+        facts=json.loads(rows[0]['data_provenance']);self.assertEqual(facts['rank']['grade'],'第三方整理')
+        self.assertEqual(facts['rank']['selection_review']['status'],'选科要求待核')
+        self.assertIsNone(facts['rank']['selection_review']['official_source_id'])
+        self.assertEqual(result['scope_audit_count'],0)
+
+    def test_other_subject_or_province_cannot_participate_in_priority(self):
+        official=self.official();vendor=record();vendor['subject']='历史'
+        result,rows=self.run_export([official,vendor]);self.assertEqual(len(rows),1)
+        self.assertEqual(result['scope_audit_count'],0)
+        self.assertTrue(any('科类不一致' in r['reason'] for r in result['rejected']))
+
+    def test_unlocatable_official_does_not_gain_unique_original_priority(self):
+        official=self.official()
+        for m in official['provenance'].values():m['locator']={}
+        vendor=record();vendor['requirement']='other'
+        result,rows=self.run_export([official,vendor]);self.assertEqual(rows,[])
+        self.assertEqual(result['scope_audit_count'],0)
+
+    def test_incompatible_vendor_cannot_supply_missing_official_rank(self):
+        official=self.official(rank=None)
+        vendor=record();vendor['requirement']='other'
+        result,rows=self.run_export([official,vendor]);self.assertEqual(rows,[])
+        self.assertEqual(result['scope_audit_count'],1)
+
+    def test_priority_cannot_choose_a_different_batch_or_special_plan(self):
+        for field,official_value,vendor_value,filter_name in [
+                ('batch','普通类常规批第2次志愿','普通类一段','batch'),
+                ('plan_type','国家专项','普通','plan_type')]:
+            official=self.official();official[field]=official_value
+            vendor=record();vendor[field]=vendor_value
+            result,rows=self.run_export([official,vendor])
+            self.assertEqual(rows,[]);self.assertEqual(result['scope_audit_count'],0)
+            for selected in [official_value,vendor_value]:
+                result,rows=self.run_export([official,vendor],**{filter_name:selected})
+                self.assertEqual(len(rows),1);self.assertEqual(rows[0][field],selected)
+                self.assertEqual(result['scope_audit_count'],0)
+
     def test_official_value_wins_same_scope_and_conflict_is_recorded(self):
         result,rows=self.run_export([record(),record(grade='官方',sid='official',rank=900)])
         self.assertEqual(rows[0]['rank'],'900')

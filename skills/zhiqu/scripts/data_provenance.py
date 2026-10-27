@@ -1,5 +1,6 @@
 """数据库导出到志愿表的逐值来历；不参与位次、预测或志愿排序计算。"""
 import json
+import re
 
 
 UNVERIFIED = '第三方整理，未经官方核对'
@@ -121,6 +122,10 @@ def provenance_errors(item):
             continue  # 计划/分数可未提供，不借空占位给已有位次升级。
         if not fact.get('source_id') or not status_text(fact):
             errors.append(f'{year}.{field} 缺来源编号或值状态')
+        selection = fact.get('selection_review')
+        if (isinstance(selection, dict) and selection.get('status') == '选科要求待核'
+                and not re.search(r'资格待核：[^；;]*选科要求待核', str(item.get('limits') or ''))):
+            errors.append(f'{year}.{field} 的选科要求待核须进入资格限制，不能静默当作可报或保底')
         if field == 'rank' and cutoff_rank_gate(fact):
             errors.append(f'{year}.{field} 是原表未公布的推算参照，不能作为实际投档位次参与志愿判断；须另核输入和口径')
         if fact.get('grade') not in ('官方', '第三方整理') or display_grade(fact) not in DISPLAY_GRADES:

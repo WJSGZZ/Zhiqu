@@ -293,11 +293,14 @@ def export_records(records, province, subject, years, *, out, key='group', schoo
     years = sorted(set(int(y) for y in years)); out = Path(out)
     if not years: raise ValueError('至少指定一年')
     out.mkdir(parents=True,exist_ok=True)
-    targets = [out/f'{province}-{subject}-{y}.csv' for y in years]+[out/'conflicts.csv',out/'export-metadata.json']
+    targets = [out/f'{province}-{subject}-{y}.csv' for y in years]+[out/'conflicts.csv',out/'scope-audit.json',out/'export-metadata.json']
     if any(p.exists() for p in targets): raise ValueError('导出目标已存在；请使用新目录，避免覆盖旧案例')
     selected=[]; rejected=[]; conflicts=[]
     school_set=set(schools or [])
     for row in records:
+        if row.get('province')!=province or row.get('subject')!=subject:
+            rejected.append({'year':row.get('year'),'school':row.get('name'),'record_id':row.get('record_id'),'reason':'与导出省份或科类不一致；不跨口径合并'})
+            continue
         if row['year'] not in years: continue
         if school_set and not {row.get('institution_id'),row.get('name'),row.get('code')} & school_set: continue
         if batch is not None and row.get('batch') != batch: continue
@@ -327,8 +330,48 @@ def export_records(records, province, subject, years, *, out, key='group', schoo
         school = ('id',r['institution_id']) if r.get('institution_id') else ('name',r['name'])
         campus_scope = r['name'] if re.search(r'校区|分校|校本部|办学点|教学点',r['name']) else ''
         return (r['year'],school,r['code'],campus_scope,r['batch'],r.get('group',''),r.get('major_code',''),r.get('major',''),r.get('plan_type','未标'),r.get('requirement',''),r.get('scope_raw',''))
+    # 只有一条可定位官方原行时，第三方的另一种范围不能否决它。
+    # 先于数值合并：不把不相容第三方当成官方缺字段的补丁。
+    annotated=[]
+    for row in selected:
+        native=[m for m in row['provenance'].values() if m.get('source_registered') and m.get('grade')=='官方' and m.get('source_id')==row.get('source_id')]
+        if row.get('table')=='gk_official_cutoff' and not row.get('requirement') and re.search(r'物理|历史|综合',subject):
+            loc=next((m.get('locator',{}) for m in native),{})
+            review={'status':'选科要求待核','reason':'记录未留选科要求；未取得当年对应原文，未用第三方填充',
+                    'record_source_id':row.get('source_id'),'official_source_id':row.get('source_id') if native else None,'official_locator':loc.get('src') or loc.get('src_row') or '未定位'}
+            row=dict(row,provenance={f:dict(m,selection_review=review) for f,m in row['provenance'].items()})
+        annotated.append(row)
+    pool_scopes=collections.defaultdict(list)
+    for row in annotated:
+        pool_scopes[(row['year'],row['code'],row.get('group','') if key=='group' else row.get('major',''),row['batch'],row.get('plan_type','未标'))].append(row)
+    scope_audit=[]; prioritized=[]
+    for siblings in pool_scopes.values():
+        originals=[]
+        for row in siblings:
+            if row.get('table')!='gk_official_cutoff':continue
+            facts=[m for m in row['provenance'].values() if m.get('grade')=='官方' and m.get('source_registered')
+                   and m.get('source_id')==row.get('source_id')]
+            loc=next((m.get('locator',{}) for m in facts if m.get('locator',{}).get('src')not in(None,'') or m.get('locator',{}).get('src_row')not in(None,'')),None)
+            originals.append((row,(row['source_id'],str(loc.get('src') or loc.get('src_row'))) if loc is not None else None))
+        unique=(bool(originals) and all(origin is not None for _,origin in originals) and len({origin for _,origin in originals})==1 and len({identity(row)for row,_ in originals})==1)
+        if not unique:
+            prioritized.extend(siblings);continue
+        anchor=originals[0][0];official_identity=identity(anchor)
+        for row in siblings:
+            incompatible=identity(row)!=official_identity
+            registered=[m for m in row['provenance'].values() if m.get('source_registered')]
+            thirdparty=row.get('table') in ('gk_v_usable','gk_v_purchased') or bool(registered) and all(m.get('grade')=='第三方整理' for m in registered)
+            if incompatible and thirdparty:
+                scope_audit.append({'reason':'与唯一官方原行范围冲突或不可比；未据第三方修改官方范围',
+                    'official_source_id':anchor['source_id'],'official_locator':originals[0][1][1],
+                    'official_scope':_scope(anchor),'thirdparty_scope':_scope(row),
+                    'record_id':row.get('record_id'),'table':row.get('table'),
+                    'values':{f:{k:v for k,v in m.items() if k in ('value','grade','source_id','value_status','locator')}
+                              for f,m in row['provenance'].items() if m.get('value')is not None}})
+                continue
+            prioritized.append(row)
     groups=collections.defaultdict(list)
-    for r in selected: groups[identity(r)].append(r)
+    for r in prioritized: groups[identity(r)].append(r)
     merged=[]; withheld_values=[]
     def conflict(row,field,candidates,reason,resolution):
         conflicts.append({'year':row['year'],'school':row['name'],'group':row.get('group',''),'major':row.get('major',''),'batch':row['batch'],'plan_type':row.get('plan_type','未标'),'field':field,'values':dump([v for v,m in candidates]),'source_ids':dump([m.get('source_id') for v,m in candidates]),'reason':reason,'resolution':resolution,'scope':dump(_scope(row))})
@@ -375,6 +418,9 @@ def export_records(records, province, subject, years, *, out, key='group', schoo
                 values[field]=value;provenance[field]=meta
             else:
                 values[field]=None;provenance[field]={'value':None,'grade':'未取得','display_grade':'来源未提供','source_id':'','value_status':{'status':'来源未提供'},'scope':_scope(representative),'completeness':representative.get('completeness')}
+        pending_review=next((m['selection_review'] for original in facts for m in original['provenance'].values() if isinstance(m.get('selection_review'),dict) and m['selection_review'].get('status')=='选科要求待核'),None)
+        if pending_review:
+            provenance={f:dict(m,selection_review=pending_review) for f,m in provenance.items()}
         row=dict(representative,values=values,provenance=provenance)
         if values['rank'] is None or not isinstance(values['rank'],int) or values['rank']<1:
             rejected.append({'year':row['year'],'school':row['name'],'record_id':row.get('record_id'),'reason':'缺可用整数位次；不从分数换算，不跨缺口插值'});continue
@@ -402,7 +448,9 @@ def export_records(records, province, subject, years, *, out, key='group', schoo
         counts[str(year)]=len(ys);paths[str(year)]=str(path.resolve())
     with (out/'conflicts.csv').open('w',newline='',encoding='utf-8')as f:
         writer=csv.DictWriter(f,fieldnames=CONFLICT_FIELDS);writer.writeheader();writer.writerows(conflicts)
-    metadata={'status':'ok' if all(counts.values()) else 'partial' if any(counts.values()) else 'missing_data','province':province,'subject':subject,'years':years,'key':key,'batch_filter':batch,'plan_type_filter':plan_type,'input_records':len(records),'exported_rows':counts,'files':paths,'conflict_count':len(conflicts),'conflicts_file':str((out/'conflicts.csv').resolve()),'rejected':rejected,'withheld_values':withheld_values,'yfyd':yfyd_metadata or [],'rank_conversion_performed':False,'rules':['官方同事实同口径逐值优先，第三方补缺','rank_vs_yfyd不等同官方投档核对','缺位次不从分数推造','已核原格式未设位次列的推算位次只留待核参照，不进模型；同口径其他来源逐值补缺','专业组跨年仍须pool --group-map核实'],'database_written':False}
+    audit_path=out/'scope-audit.json'
+    audit_path.write_text(json.dumps({'schema_version':1,'records':scope_audit},ensure_ascii=False,indent=2)+'\n')
+    metadata={'status':'ok' if all(counts.values()) else 'partial' if any(counts.values()) else 'missing_data','province':province,'subject':subject,'years':years,'key':key,'batch_filter':batch,'plan_type_filter':plan_type,'input_records':len(records),'exported_rows':counts,'files':paths,'conflict_count':len(conflicts),'conflicts_file':str((out/'conflicts.csv').resolve()),'scope_audit_count':len(scope_audit),'scope_audit_file':str(audit_path.resolve()),'rejected':rejected,'withheld_values':withheld_values,'yfyd':yfyd_metadata or [],'rank_conversion_performed':False,'rules':['官方同事实同口径逐值优先，第三方补缺','rank_vs_yfyd不等同官方投档核对','缺位次不从分数推造','已核原格式未设位次列的推算位次只留待核参照，不进模型；同口径其他来源逐值补缺','专业组跨年仍须pool --group-map核实'],'database_written':False}
     (out/'export-metadata.json').write_text(json.dumps(metadata,ensure_ascii=False,indent=2)+'\n')
     return metadata
 

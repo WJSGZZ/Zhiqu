@@ -56,6 +56,14 @@ class PoolProvenanceTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'不能作为实际投档位次'):
             input_provenance(self.row(data_provenance=json.dumps({'rank':fact})),2025)
 
+    def test_selection_requirement_gap_survives_to_eligibility_limits(self):
+        fact=dict(value=20000,grade='官方',display_grade='官方',source_id='official',
+                  value_status={'status':'官方原值'},selection_review={'status':'选科要求待核'})
+        source=self.write('selection.csv',[self.row(data_provenance=json.dumps({'rank':fact}))])
+        _,rows=self.pool((2025,source))
+        self.assertIn('资格待核：选科要求待核',rows[0]['limits'])
+        self.assertEqual(json.loads(rows[0]['data_provenance'])['2025']['rank']['selection_review']['status'],'选科要求待核')
+
     def test_optional_fields_absent_for_legacy_csv(self):
         path = self.write('old.csv', [self.row()])
         out, rows = self.pool((2025, path))
