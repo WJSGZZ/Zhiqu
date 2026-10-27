@@ -114,6 +114,8 @@ def provenance_errors(item):
                     and check.get('verdict') == '一致' and check.get('field') == field
                     and check.get('scope') == fact.get('scope') == check.get('thirdparty_scope')
                     and check.get('official_value') == fact.get('value') == check.get('thirdparty_value')
+                    and isinstance(check.get('official_value_status'), dict)
+                    and check['official_value_status'].get('status') in ('官方原值', '人工更正')
                     and check.get('official_locator') and check.get('comparison_basis') == '同事实同口径逐值'):
                 errors.append(f'{year}.{field} 官方一致缺逐值同口径官方核对凭据')
     return errors

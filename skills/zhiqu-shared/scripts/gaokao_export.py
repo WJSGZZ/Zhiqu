@@ -71,6 +71,8 @@ def valid_cross_check(check, row, field, value):
             and check.get('official_value')==value and check.get('thirdparty_value')==value
             and isinstance(official,dict) and official.get('grade')=='官方'
             and official.get('source_id') and (official.get('landing_url') or official.get('file_url'))
+            and isinstance(check.get('official_value_status'),dict)
+            and check['official_value_status'].get('status') in ('官方原值','人工更正')
             and check.get('official_locator') and check.get('comparison_basis')=='同事实同口径逐值')
 
 def _meta(row, field, value, source, state, locator, checks=None, cross_check=None):
@@ -79,11 +81,12 @@ def _meta(row, field, value, source, state, locator, checks=None, cross_check=No
     registered = source.get('_registered',bool(source.get('source_id'))) and grade in ('官方','第三方整理')
     confirmed = grade=='第三方整理' and value is not None and valid_cross_check(cross_check,row,field,value)
     display = '官方' if grade=='官方' else '官方一致' if confirmed else '第三方整理·内部未核'
+    explicit_status = isinstance(state,dict) and bool(state.get('status')) and state.get('status') not in ('未注明','未知')
     state = dict(state) if isinstance(state,dict) else {}
     if not state.get('status') or state.get('status') in ('未注明','未知'):
         state = {'status':'来源未提供' if value is None else '官方原值' if grade=='官方' else '第三方整理未核',
                  'reason':'原来源未提供此值，不补数' if value is None else '来源表登记等级为官方，保留原值' if grade=='官方' else '整理来源，尚无同事实同口径逐值官方核对凭据'}
-    result = {'value':value, 'source_registered':bool(registered), 'grade':grade, 'display_grade':display, 'source_id':source.get('source_id') or row.get('source_id',''), 'publisher':source.get('publisher',''), 'title':source.get('title',''), 'url':source.get('landing_url') or source.get('file_url',''), 'landing_url':source.get('landing_url',''), 'file_url':source.get('file_url',''), 'value_status':state, 'locator':locator, 'scope':_scope(row), 'completeness':row.get('completeness'), 'checks':checks, 'original_scope':row.get('original_scope',_scope(row))}
+    result = {'value':value, 'source_registered':bool(registered), 'grade':grade, 'display_grade':display, 'source_id':source.get('source_id') or row.get('source_id',''), 'publisher':source.get('publisher',''), 'title':source.get('title',''), 'url':source.get('landing_url') or source.get('file_url',''), 'landing_url':source.get('landing_url',''), 'file_url':source.get('file_url',''), 'value_status':state, 'value_status_explicit':explicit_status, 'locator':locator, 'scope':_scope(row), 'completeness':row.get('completeness'), 'checks':checks, 'original_scope':row.get('original_scope',_scope(row))}
     if grade=='第三方整理':
         historical=[c for c in checks if str(c.get('kind','')).startswith('rank_vs_yfyd')]
         result['cross_check_summary']={'scope':'本值同口径官方投档逐值核对','checked':1 if confirmed else 0,'inconsistent':0,'note':'有完整同事实同口径逐值官方凭据' if confirmed else '本值同口径官方投档未核；未将其他范围或全来源历史抽样算成本值已核','other_checks':checks}
@@ -344,7 +347,7 @@ def export_records(records, province, subject, years, *, out, key='group', schoo
                         summary['note']='本值同口径官方投档未核；同事实同值来源已有位次与官方一分一段检查，这不是官方投档逐值核对；该历史检查未计为本值官方投档已核'
                     meta['cross_check_summary']=summary
                 if official:
-                    meta['cross_checks']=[{'verdict':'一致','field':field,'scope':meta.get('scope'),'thirdparty_scope':other_meta.get('scope'),'scope_identity':identity(representative),'official_value':value,'thirdparty_value':other_value,'official_source':{k:meta.get(k)for k in ('source_id','grade','publisher','title','landing_url','file_url')},'official_locator':meta.get('locator'),'thirdparty_source_id':other_meta.get('source_id'),'comparison_basis':'同事实同口径逐值'}for other_value,other_meta in candidates if other_meta.get('grade')=='第三方整理' and other_value==value]
+                    meta['cross_checks']=[{'verdict':'一致','field':field,'scope':meta.get('scope'),'thirdparty_scope':other_meta.get('scope'),'scope_identity':identity(representative),'official_value':value,'thirdparty_value':other_value,'official_value_status':meta.get('value_status'),'official_source':{k:meta.get(k)for k in ('source_id','grade','publisher','title','landing_url','file_url')},'official_locator':meta.get('locator'),'thirdparty_source_id':other_meta.get('source_id'),'comparison_basis':'同事实同口径逐值'}for other_value,other_meta in candidates if other_meta.get('grade')=='第三方整理' and other_value==value and meta.get('value_status_explicit') is True and obj(meta.get('value_status')).get('status') in ('官方原值','人工更正')]
                     contrary=[x for x in candidates if x[1].get('grade')!='官方' and x[0]!=value]
                     if contrary: conflict(representative,field,official+contrary,'第三方与同口径官方冲突','采用官方值')
                 values[field]=value;provenance[field]=meta

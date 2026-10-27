@@ -105,10 +105,30 @@ class ReportProvenanceTests(unittest.TestCase):
         fact['cross_check'] = dict(verdict='一致', field='rank', scope=fact['scope'],
             thirdparty_scope=fact['scope'], official_value=fact['value'], thirdparty_value=fact['value'],
             official_source={'grade': '官方', 'source_id': 'official-test', 'landing_url': 'https://example.edu.cn'},
+            official_value_status={'status': '官方原值'},
             official_locator={'row': 7}, comparison_basis='同事实同口径逐值')
         self.assertEqual(check_report(self.rep, self.result), [])
         fact['cross_check']['official_value'] += 1
         self.assertTrue(check_report(self.rep, self.result))
+
+    def test_official_consistency_cannot_use_derived_or_unknown_official_value(self):
+        fact=self.result['list'][0]['data_provenance']['2025']['rank']
+        fact['scope']={'province':'河南','year':2025,'subject':'物理','major':'测试专业'}
+        fact['display_grade']='官方一致'
+        fact['cross_check']=dict(verdict='一致',field='rank',scope=fact['scope'],
+            thirdparty_scope=fact['scope'],official_value=fact['value'],thirdparty_value=fact['value'],
+            official_source={'grade':'官方','source_id':'official-test','landing_url':'https://example.edu.cn'},
+            official_locator={'row':7},comparison_basis='同事实同口径逐值')
+        for state in [None,{},'官方原值','{"status":"官方原值"}',[],{'status':'推算'},{'status':'原件缺失'},
+                      {'status':'待核'},{'status':'第三方已核一致'}]:
+            with self.subTest(state=state):
+                fact['cross_check']['official_value_status']=state
+                self.assertTrue(any('官方一致缺' in e for e in check_report(self.rep,self.result)))
+        for status in ['官方原值','人工更正']:
+            fact['cross_check']['official_value_status']={'status':status}
+            self.assertEqual(check_report(self.rep,self.result),[])
+        del fact['cross_check']['official_value_status']
+        self.assertTrue(any('官方一致缺' in e for e in check_report(self.rep,self.result)))
 
     def test_third_party_without_check_scope_is_rejected(self):
         fact = self.result['list'][0]['data_provenance']['2025']['rank']

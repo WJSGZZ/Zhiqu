@@ -62,10 +62,55 @@ class GaokaoDbExportTests(unittest.TestCase):
         self.assertIn('不是官方投档',m['cross_check_summary']['note'])
         m=ex._meta(r,'rank',1000,{'grade':'第三方整理','source_id':'v'},{},{},[{'kind':'official_cutoff','same_scope':True,'same_value':True}])
         self.assertEqual(m['display_grade'],'第三方整理·内部未核')
-        proof={'verdict':'一致','field':'rank','scope':ex._scope(r),'thirdparty_scope':ex._scope(r),'official_value':1000,'thirdparty_value':1000,'official_source':{'grade':'官方','source_id':'o','landing_url':'https://example.edu.cn'},'official_locator':{'row':7},'comparison_basis':'同事实同口径逐值'}
+        proof={'verdict':'一致','field':'rank','scope':ex._scope(r),'thirdparty_scope':ex._scope(r),'official_value':1000,'thirdparty_value':1000,'official_source':{'grade':'官方','source_id':'o','landing_url':'https://example.edu.cn'},'official_value_status':{'status':'官方原值'},'official_locator':{'row':7},'comparison_basis':'同事实同口径逐值'}
         m=ex._meta(r,'rank',1000,{'grade':'第三方整理','source_id':'v'},{},{},cross_check=proof)
         self.assertEqual(m['display_grade'],'官方一致')
         self.assertEqual(m['grade'],'第三方整理');self.assertEqual(m['cross_check'],proof)
+
+    def test_derived_official_rank_cannot_certify_matching_vendor(self):
+        official=record(grade='官方',sid='official')
+        official['provenance']['rank']['value_status']={'status':'推算','method':'投档分对应同年一分一段累计'}
+        _,rows=self.run_export([record(),official])
+        facts=json.loads(rows[0]['data_provenance'])
+        self.assertEqual(rows[0]['rank'],'1000')  # 不借本次凭据修补改变原业务数值。
+        self.assertEqual(facts['rank']['value_status']['status'],'推算')
+        self.assertEqual(facts['rank']['cross_checks'],[])
+        self.assertEqual(facts['score']['cross_checks'][0]['official_value_status'],{'status':'官方原值'})
+        self.assertEqual(facts['plan']['cross_checks'][0]['official_value_status'],{'status':'官方原值'})
+        proof=facts['score']['cross_checks'][0]
+        self.assertTrue(ex.valid_cross_check(proof,official,'score',600))
+        self.assertNotIn('cross_check',facts['rank'])
+
+    def test_source_grade_fallback_is_not_explicit_official_value_evidence(self):
+        for state in [None,{},'官方原值',{'status':'未知'},{'status':'未注明'}]:
+            with self.subTest(state=state):
+                official=record(grade='官方',sid='official')
+                official['provenance']['rank']=ex._meta(official,'rank',1000,
+                    {'grade':'官方','source_id':'official','landing_url':'https://example.edu.cn'},state,{'row':7})
+                self.assertEqual(official['provenance']['rank']['value_status']['status'],'官方原值')
+                self.assertFalse(official['provenance']['rank']['value_status_explicit'])
+                _,rows=self.run_export([record(),official])
+                self.assertEqual(json.loads(rows[0]['data_provenance'])['rank']['cross_checks'],[])
+
+    def test_official_consistency_requires_per_value_original_status(self):
+        r=record();official=record(grade='官方',sid='official')
+        _,rows=self.run_export([r,official])
+        proof=json.loads(rows[0]['data_provenance'])['rank']['cross_checks'][0]
+        for state in [None,{},'官方原值','{"status":"官方原值"}',[],{'status':'推算'},{'status':'原件缺失'},
+                      {'status':'待核'},{'status':'第三方已核一致'}]:
+            with self.subTest(state=state):
+                changed=dict(proof,official_value_status=state)
+                self.assertFalse(ex.valid_cross_check(changed,r,'rank',1000))
+                meta=ex._meta(r,'rank',1000,{'grade':'第三方整理','source_id':'vendor'},
+                              {'status':'第三方整理未核'},{'row':9},cross_check=changed)
+                self.assertEqual(meta['display_grade'],'第三方整理·内部未核')
+                self.assertEqual(meta['cross_check_summary']['checked'],0)
+        for status in ['官方原值','人工更正']:
+            with self.subTest(status=status):
+                changed=dict(proof,official_value_status={'status':status})
+                self.assertTrue(ex.valid_cross_check(changed,r,'rank',1000))
+        missing=dict(proof);missing.pop('official_value_status')
+        self.assertFalse(ex.valid_cross_check(missing,r,'rank',1000))
 
     def test_aggregate_metadata_is_retained_without_conversion(self):
         bucket={'year':2025,'aggregate_bucket':{'score_label':'683及以上','boundary_operator':'>='}}
