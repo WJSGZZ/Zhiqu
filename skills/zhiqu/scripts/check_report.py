@@ -111,7 +111,10 @@ def check_report(rep, result, html=None):
             elif numeric:
                 mid = ['概率' + unescape(fmt(probability))] + satisfaction
             else:
-                mid = ['落点最集中的志愿（本省评级不给精确概率）', '不估算', f'本省概率评级 {grade}，概率不可信，按概率加权的满意度也不算；表里最高的志愿 {max(x["utility"] for x in items):.0f} 分。']
+                database_d = grade == 'D' and any(x.get('data_provenance') for x in items)
+                scope = '本案数据' if database_d else '本省概率'
+                note = '内部情景参照（本案不提供个人概率）' if database_d else '落点最集中的志愿（本省评级不给精确概率）'
+                mid = [note, '不估算', f'{scope}评级 {grade}，概率不可信，按概率加权的满意度也不算；表里最高的志愿 {max(x["utility"] for x in items):.0f} 分。']
             sp = result['stress']['p_fall']
             if grade == 'A' or result['p_fall']:
                 tail = [fall(result['p_fall']), '录取线整体大波动时 ' + fall(sp)]
@@ -264,6 +267,21 @@ def check_grade(rep, result=None, warnings=None):
 def check_sections(rep, result=None, warnings=None):
     """付费报告每节的必备内容与篇幅下限（范围写在 references/report-guide.md）。不判断写得好不好，只查有没有、够不够、能不能溯源。"""
     errs = []
+    # Validate the renderer's shapes here rather than dying halfway through PDF
+    # generation or silently dropping paragraphs under an unsupported key.
+    for key, width in (('news', 4), ('todo', 2), ('assumptions', 3)):
+        if any(not isinstance(row, (list, tuple)) or len(row) != width for row in rep.get(key, [])):
+            errs.append(f'{key} 每行须为 {width} 格，与报告渲染格式一致')
+    if any(not isinstance(q, str) for q in rep.get('questions', [])):
+        errs.append('questions 每项须为问题文字，不能嵌套数组')
+    for group in rep.get('ask_me', []):
+        if not group.get('topic') or any(not isinstance(q, dict) or not q.get('q') for q in group.get('items', [])):
+            errs.append('ask_me 每组须有 topic，每题须为含 q 的对象')
+    for block in rep.get('methods', []):
+        if 'paragraphs' in block:
+            errs.append('methods 段落键须为 paras，paragraphs 不会渲染')
+    if errs:
+        return errs
     s = rep.get('summary', {})
     if len(str(s.get('headline', ''))) < 20:
         errs.append('summary.headline 太短或缺失（≥ 20 字）')
@@ -315,15 +333,18 @@ def check_sections(rep, result=None, warnings=None):
     if len(rs) < 3:
         errs.append('research 至少 3 所院校')
     covered = 0
+    pending_research = (rep.get('meta', {}).get('mode') == 'simulation' and rep.get('research_status') == 'pending' and bool(rep.get('research_gap_reason')))
     for r in rs:
         items = r.get('items', [])
         got = {a for a in RESEARCH_ASPECTS if any(a in str(i[0]) and not str(i[2]).startswith('未取到') for i in items if len(i) == 3)}
         covered += len(got) >= 4
-        if len([u for u in r.get('sources', []) if str(u).startswith('https://')]) < 2 or any(len(i) != 3 or not str(i[2]).strip() for i in items):
+        if (not pending_research and len([u for u in r.get('sources', []) if str(u).startswith(('https://', 'http://'))]) < 2) or any(len(i) != 3 or not str(i[2]).strip() for i in items):
             errs.append(f'院校「{r.get("school", "?")}」须有 ≥ 2 条 https 来源，且每条发现标证据等级')
-        if not got:
+        if pending_research and not all(str(i[2]).startswith('未取到') and str(i[1]).strip() for i in items):
+            errs.append(f'院校「{r.get("school", "?")}」待调研内容必须逐项写未取到及原因，不能冒充已查证')
+        if not got and not pending_research:
             errs.append(f'院校「{r.get("school", "?")}」没有任何有证据的调研项（取不到的写“未取到”并说明原因，也要有其余可查的内容）')
-    if rs and covered < 3:
+    if rs and covered < 3 and not pending_research:
         errs.append(f'至少 3 所院校须覆盖{"、".join(RESEARCH_ASPECTS)}中 ≥ 4 项有证据的内容（证据等级以“未取到”开头的不计），现有 {covered} 所')
     if len(rep.get('questions', [])) < 5 or len(rep.get('todo', [])) < 5:
         errs.append('questions 与 todo 各至少 5 条')

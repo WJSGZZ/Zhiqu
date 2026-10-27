@@ -9,7 +9,7 @@ report.json 的字段见 references/report-guide.md；result.json 是 optimize.p
 找不到浏览器时会只输出 HTML，并提示用浏览器"打印 → 存储为 PDF"。
 """
 import argparse
-from check_report import check_report, publication_gate
+from check_report import check_report, check_sections, publication_gate
 from data_provenance import (entries as provenance_entries, evidence_lines,
                              only_third_party, prediction_label)
 import html
@@ -1664,6 +1664,9 @@ def build(rep, opt):
     grade = m.get("prob_grade", "A")
     fmt = prob_formatter(grade)
     numeric = grade in ("A", "B")
+    database_d = grade == "D" and any(x.get("data_provenance") for x in lst)
+    grade_scope = "本案数据" if database_d else "本省概率"
+    nonnumeric_note = "内部情景参照（本案不提供个人概率）" if database_d else "落点最集中的志愿（本省评级不给精确概率）"
 
     def fall_txt(p):
         if p == 0:  # 模拟中一次都没出现，只能说低于 1/模拟次数
@@ -1708,9 +1711,9 @@ def build(rep, opt):
         tiers = " / ".join(f"{t} {sum(x['tag'] == t for x in lst)}" for t in ("冲", "稳", "保"))
         body += ('<div class="kpis">'
                  f'<div><b>推荐志愿数</b><span class="num">{len(lst)}</span><em>本批次可填 {E(str(m.get("slots", "–")))} 个；{tiers}</em></div>'
-                 f'<div><b>最可能的去向</b><span style="font-size:11pt">{E(likely_name)}</span><em>{"概率" + ("" if grade == "B" or fmt(likely_p).startswith("&") else "约 ") + fmt(likely_p) if numeric else "落点最集中的志愿（本省评级不给精确概率）"}</em></div>'
+                 f'<div><b>{"内部情景参照" if database_d else "最可能的去向"}</b><span style="font-size:11pt">{E(likely_name)}</span><em>{"概率" + ("" if grade == "B" or fmt(likely_p).startswith("&") else "约 ") + fmt(likely_p) if numeric else nonnumeric_note}</em></div>'
                  + (f'<div><b>平均满意度（0—100）</b><span class="num">{eu:.1f} 分</span><em>表里最高的志愿 {max(x["utility"] for x in lst):.0f} 分。{E(m.get("utility_scale", UTILITY_SCALE))}</em></div>' if numeric and eu is not None else
-                    f'<div><b>平均满意度（0—100）</b><span class="num">不估算</span><em>本省概率评级 {E(grade)}，概率不可信，按概率加权的满意度也不算；表里最高的志愿 {max(x["utility"] for x in lst):.0f} 分。</em></div>')
+                    f'<div><b>平均满意度（0—100）</b><span class="num">不估算</span><em>{grade_scope}评级 {E(grade)}，概率不可信，按概率加权的满意度也不算；表里最高的志愿 {max(x["utility"] for x in lst):.0f} 分。</em></div>')
                  + (f'<div><b>滑档风险</b><span class="num">{fall_txt(pfall)}</span><em>录取线整体大波动时 {fall_txt(stress.get("p_fall"))}</em></div>' if grade == "A" or pfall else
                     f'<div><b>滑档风险</b><span class="num">未出现</span><em>{sims:,} 次模拟中没有出现滑档；录取线整体大波动时{"也没有" if not stress.get("p_fall") else "：" + fall_txt(stress.get("p_fall"))}</em></div>')
                  + '</div>')
@@ -1812,7 +1815,7 @@ def build(rep, opt):
                  + ('标“需核对报名资格”的志愿属于' + E('、'.join(dict.fromkeys(pending_plan(x) for x in lst if pending_plan(x))))
                     + '等单列的招生计划，能不能报要按当年招生章程和本省招生计划核对；核实之前不当作普通志愿，也不要指望它兜底。'
                     if any(pending_plan(x) for x in lst) else '')
-                 + ('' if grade == "A" else '本省概率评级为 ' + grade + '：' + GRADE_MEANING[grade] + '“80% 区间”指今年最低录取位次大约有八成可能落在这个范围内。')
+                 + ('' if grade == "A" else ('本案数据评级为D：仅供参照。所示区间是内部模型的条件范围，未经本案数据验证，不能解释为个人概率或覆盖保证。' if database_d else '本省概率评级为 ' + grade + '：' + GRADE_MEANING[grade] + '“80% 区间”指今年最低录取位次大约有八成可能落在这个范围内。'))
                  + '</p>')
         sec("志愿表", body)
 
@@ -1890,6 +1893,9 @@ def build(rep, opt):
                 '<li>录入后，把系统里的志愿表截图或打印，逐行对照本页勾选；提交前确认截止时间。</li></ol></div>'
                 "<table><thead><tr><th class='c'>序</th><th>院校代码</th><th>院校</th><th>专业组 / 专业代码</th><th>组内专业志愿顺序</th><th class='c'>服从调剂</th><th class='c'>已核对</th></tr></thead><tbody>"
                 + rows_html + "</tbody></table>")
+        if any(x.get('data_provenance') for x in lst):
+            references = list(dict.fromkeys(code_reference(x, opt.get('params', {}).get('target_year')) for x in lst))
+            body = '<div class="box warn"><h4>历史代码参照，不能直接填报</h4>' + ''.join('<p>' + E(x) + '</p>' for x in references) + '</div>' + body
         sec("填报单", body)
     else:
         blank("list", "填报单", "本次没有运行志愿组合优化，因此没有填报单。")
@@ -2000,18 +2006,30 @@ def build(rep, opt):
     return document_html(m.get('title','高考志愿填报决策报告'),cover,''.join(b for _,_,b in secs),m.get('candidate','本人'),'高考',report_id,simulated=m.get('mode')!='formal')
 
 
+def code_reference(item, target_year):
+    """历史来历只能标历史代码，不能把它冒充目标年份的填报代码。"""
+    if not item.get('data_provenance'):
+        return ''
+    from data_provenance import entries
+    years = sorted({year for year, field, fact in entries(item) if field == 'rank'})
+    historical = '、'.join(years) or '年份未登记'
+    return f'{historical}年历史参照；{target_year or "当年"}招生代码待核，不能直接填报'
+
+
 def write_sheet(opt, path):
     """填报单 CSV：列与报告“填报单”一节一致，代码缺失的留空，由 case_check 拒绝。"""
     import csv
     with open(path, "w", encoding="utf-8-sig", newline="") as fh:
         w = csv.writer(fh)
         metadata = any(x.get('data_provenance') or x.get('source_grade') for x in (opt or {}).get('list', []))
-        w.writerow(["序", "院校代码", "院校", "专业组", "专业代码", "组内专业顺序", "服从调剂"] + (["数据等级", "历年数字与出处"] if metadata else []))
+        historical = any(x.get("data_provenance") for x in (opt or {}).get("list", []))
+        w.writerow(["序", "院校代码", "院校", "专业组", "专业代码", "组内专业顺序", "服从调剂"] + (["数据等级", "历年数字与出处"] if metadata else []) + (["代码适用年份与状态"] if historical else []))
         for x in (opt or {}).get("list", []):
             ms = "、".join(f"{i}. {mj['name']}" for i, mj in enumerate(x.get("majors") or [], 1))
             w.writerow([x["order"], x.get("code") or "", x["name"].split("（")[0].split("·")[0] if x.get("group") else x["name"].split("（")[0],
                         x.get("group") or "", x.get("major_code") or "", ms, ("是" if x.get("obey", True) else "否") if x.get("group") else "—"]
-                       + ([prediction_label(x), '；'.join(evidence_lines(x))] if metadata else []))
+                       + ([prediction_label(x), '；'.join(evidence_lines(x))] if metadata else [])
+                       + ([code_reference(x, (opt or {}).get('params', {}).get('target_year'))] if historical else []))
 
 
 def find_browser():
@@ -2140,6 +2158,8 @@ def main():
     opt = json.load(open(a.opt, encoding="utf-8")) if a.opt else None
     if opt:
         errors = check_report(rep, opt)
+        if (Path(a.report).resolve().parent/'case.json').exists() and any(x.get('data_provenance') for x in opt.get('list', [])):
+            errors += check_sections(rep, opt)
         if errors:
             ap.error("报告数字核验失败：" + "；".join(errors))
     if a.sheet:

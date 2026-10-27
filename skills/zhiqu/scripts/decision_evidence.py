@@ -1,7 +1,19 @@
 """Structured eligibility gate. Source URLs are provenance, not proof of truth."""
 import json
+from urllib.parse import urlsplit
 
 STATUSES = {'verified', 'pending', 'ineligible'}
+
+
+def source_url(value):
+    """Keep an actually recorded public HTTP URL; this performs no retrieval."""
+    if not isinstance(value, str) or any(c.isspace() for c in value):
+        return False
+    try:
+        parsed = urlsplit(value)
+        return parsed.scheme in {'http', 'https'} and bool(parsed.hostname) and not parsed.username and not parsed.password
+    except ValueError:
+        return False
 
 
 def validate_evidence(item, year=None):
@@ -9,13 +21,13 @@ def validate_evidence(item, year=None):
         raise ValueError('证据须为对象')
     if item.get('status') not in STATUSES:
         raise ValueError('证据状态须为 verified / pending / ineligible')
-    if not isinstance(item.get('year'), int) or not item.get('source', '').startswith('https://'):
+    if not isinstance(item.get('year'), int) or not source_url(item.get('source')):
         raise ValueError('证据须有适用年份和官方来源')
     if year is not None and item['year'] != year:
         raise ValueError('证据年份与决策年份不一致')
     conditions = item.get('hard_conditions', [])
     if not isinstance(conditions, list) or not conditions or any(not isinstance(c, dict) or c.get('status') not in {'met', 'unknown', 'failed'} or
-                             not c.get('name') or not c.get('source', '').startswith('https://') for c in conditions):
+                             not c.get('name') or not source_url(c.get('source')) for c in conditions):
         raise ValueError('逐项列出硬条件、met / unknown / failed 状态和来源')
     if item['status'] == 'verified' and (item.get('unresolved') or any(c['status'] != 'met' for c in conditions)):
         raise ValueError('未决或不满足的硬条件不能标已核实可行')

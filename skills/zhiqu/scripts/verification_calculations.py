@@ -324,6 +324,7 @@ def recompute_gaokao(result, candidates_csv):
     """
     import csv
     import io
+    import json
     import tempfile
     from pathlib import Path
     import optimize
@@ -416,6 +417,13 @@ def recompute_gaokao(result, candidates_csv):
                 'tag':optimize.label(clear[j]),'expected_cut_rank':round(row['expected_cut']),
                 'sigma':row['sigma'],'obey':row['obey'],'n_years':row['n_years']}
         for key in ('code','group','major_code','limits'): item[key] = (row['raw'].get(key) or '').strip()
+        # Reconstruct provenance from the bundled candidate input too; never drop
+        # these fields or trust only the result-side labels. Legacy inputs unchanged.
+        if row['raw'].get('data_provenance'):
+            for key in ('source_grade','data_provenance'):
+                value = row['raw'].get(key)
+                if value:
+                    item[key] = json.loads(value) if key == 'data_provenance' else value
         if row['majors']:
             item['majors'] = [{'name':name,'utility':utility,'p':count/n}
                              for (name,utility,_),count in zip(row['majors'],major_counts or [0]*len(row['majors']))]

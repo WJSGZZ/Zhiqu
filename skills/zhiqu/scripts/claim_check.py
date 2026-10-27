@@ -29,6 +29,66 @@ def sentences(text):
  parts=[s.strip() for s in re.findall(r'[^。！？\n]+[。！？]?(?:\[\d+\])*',text) if s.strip()]
  return parts
 
+class GaokaoCase:
+ """Read the inputs actually rendered by report.py; never certify their meaning.
+
+ The source table remains authoritative. Optional source_details supplies retained
+ excerpts and scope; an URL alone must not become a verified official quotation.
+ """
+ def __init__(self,root):
+  self.root=Path(root);self.case=read(self.root/'case.json')
+  self.report=read(self.root/'report.json');self.result=read(self.root/'result.json')
+  self.case=dict(self.case,report_meta=self.report.get('meta',{}))
+  self.data={'narrative.json':{}};self.evidence={};self._nodes={}
+  from operator_check import legacy_evidence
+  details=self.report.get('source_details',{})
+  for item in legacy_evidence(self.root,self.report):
+   eid=item['id'];explicit=details.get(eid,{})
+   self.evidence[eid]=dict(item,**{k:explicit[k] for k in ('excerpt','grade','status','source','scope','value','unit') if k in explicit})
+  self.refs=self.report.get('claim_evidence_refs',{})
+  sections={'01':('summary',),'02':('profile',),'03':('directions_intro','directions','roadmap','news'),
+            '04':('list_notes','third_party_review'),'05':('why','stress_mult','sensitivity'),'06':('research','questions'),
+            '07':('todo',),'09':('ask_me_intro','ask_me'),'10':('assumptions','backtest','methods'),'11':('hindsight','omitted')}
+  self.contract={'sections':[{'id':f'{i:02}','slots':[{'key':'body'}]} for i in range(1,13)]}
+  for sid,keys in sections.items():
+   for key in keys:
+    if key in self.report:self._nodes['report.json#/'+key]=(sid,self.report[key])
+  # Generated tables are report content too. C/D reports do not display precise
+  # probabilities, so those hidden fields must not be presented as authored claims.
+  precise=self.report.get('meta',{}).get('prob_grade','A') in ('A','B')
+  for i,item in enumerate(self.result.get('list',[])):
+   shown={k:item[k] for k in ('order','name','code','group','major_code','utility','tag','expected_cut_rank') if k in item}
+   if precise:shown.update({k:item[k] for k in ('p_clear','p_land') if k in item})
+   if self.report.get('meta',{}).get('prob_grade','A') != 'A' and 'sigma' in item and 'expected_cut_rank' in item:
+    from report import interval80
+    shown['rendered_interval']=interval80(item)
+   from data_provenance import evidence_lines
+   shown['historical_values']=evidence_lines(item)
+   from report import code_reference
+   shown['code_reference']=code_reference(item,self.result.get('params',{}).get('target_year'))
+   self._nodes[f'result.json#/list/{i}']=('04',shown)
+   self._nodes[f'result.json#/entry_sheet/{i}']=('08',{k:item.get(k) for k in ('name','code','group','major_code')})
+ def nodes(self):
+  result={f'{i:02}':[] for i in range(1,13)}
+  for ref,(sid,_) in self._nodes.items():result[sid].append({'slot':'body','ref':ref})
+  return result
+ def get_node(self,ref):
+  refs=[]
+  for prefix,values in self.refs.items():
+   if ref==prefix or ref.startswith(prefix.rstrip('/')+'/'):refs.extend(values)
+  return {'type':'analysis','content':self._nodes[ref][1],'evidence_refs':sorted(set(refs))}
+ def active(self,slot):return True
+ def expand(self,text,where):return text
+ def resolve(self,kind,path):
+  # Gaokao prose is plain report.json text, not PlanningCase templates.
+  raise KeyError(path)
+
+def case_for(root):
+ root=Path(root);registration=read(root/'case.json')
+ if registration.get('kind')=='gaokao' or registration.get('product')=='gaokao':return GaokaoCase(root)
+ from planning_workflow import PlanningCase
+ return PlanningCase(root)
+
 def extract(case):
  items=[];seen=set()
  def add(section,location,text,refs=()):
@@ -60,7 +120,7 @@ def extract(case):
    node=case.get_node(entry['ref'])
    # Sources, machine metadata and copied quotations are inputs, not authored claims.
    if node.get('type') in ('source_endnotes','evidence_legend'):continue
-   if node.get('type')=='analysis' and node.get('content',{}).get('kind')=='comment':continue
+   if node.get('type')=='analysis' and isinstance(node.get('content'),dict) and node['content'].get('kind')=='comment':continue
    slot=next(s for s in case.contract['sections'] if s['id']==section)
    cfg=next((s for s in slot['slots'] if s['key']==entry['slot']),{})
    if not case.active(cfg):continue
@@ -68,20 +128,25 @@ def extract(case):
     if path.endswith(('/kind','/comment')):continue
     add(section,entry['ref']+'/content'+path,text,node.get('evidence_refs',[]))
  # The generated offer-gap paragraph must be reviewed as well as hand-written prose.
- from planning_report import offer_gap_notice
- for section in case.contract['sections']:
-  sid=section['id'];notice=offer_gap_notice(case,sid)
-  if notice:add(sid,'planning_report.py#offer_gap_notice',notice)
+ if not isinstance(case,GaokaoCase):
+  from planning_report import offer_gap_notice
+  for section in case.contract['sections']:
+   sid=section['id'];notice=offer_gap_notice(case,sid)
+   if notice:add(sid,'planning_report.py#offer_gap_notice',notice)
  return items
 
 def content_snapshot(case):
  from planning_workflow import FILES
  from profile_store import source_files
+ if isinstance(case,GaokaoCase):
+  names={'case.json','report.json','result.json',*source_files(case.root)}
+  names.update(n for n in ('profile_parse.json','directions.json','rules_check.json','screening.json','pool.csv','attributes.csv','preferences_config.json','preferences_review.json','reviewed.csv','run.json','narrative.json') if (case.root/n).is_file())
+  names.update(str(p.relative_to(case.root)) for p in (case.root/'sensitivity').glob('*') if p.is_file())
+  return {name:file_sha(case.root/name) for name in sorted(names)}
  return {name:file_sha(case.root/name) for name in (*FILES,*source_files(case.root))}
 
 def build(root,bind=False):
- from planning_workflow import PlanningCase
- root=Path(root);case=PlanningCase(root);items=extract(case);path=root/'claim_check.json'
+ root=Path(root);case=case_for(root);items=extract(case);path=root/'claim_check.json'
  old=read(path) if path.exists() else {};prior={x['claim_id']:x for x in old.get('items',[])}
  # Adding a citation cannot make a supported sentence unsupported: keep a "支持" verdict
  # when the sentence, its bindings and every previously cited excerpt are unchanged and
@@ -110,10 +175,9 @@ def build(root,bind=False):
  write(path,result);return result
 
 def errors(root,require_review=True,require_report=True):
- from planning_workflow import PlanningCase
  root=Path(root);path=root/'claim_check.json'
  if not path.exists():return ['claim_check.json：缺逐句回查清单']
- data=read(path);case=PlanningCase(root);expected=extract(case);problems=[]
+ data=read(path);case=case_for(root);expected=extract(case);problems=[]
  expected_payload=[{k:v for k,v in x.items() if k!='review'} for x in expected]
  actual_payload=[{k:v for k,v in x.items() if k!='review'} for x in data.get('items',[])]
  if expected_payload!=actual_payload or data.get('manifest_sha256')!=digest(expected_payload):problems.append('claim_check.json：句子/组件/引用摘录清单不完整或已变更，须重新抽取')

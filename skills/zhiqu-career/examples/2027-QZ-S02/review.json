@@ -169,7 +169,7 @@
     "calculations.json": "8e8135c7483b79dbc2d7ed702e1d9add2628ccf852da45c3d957f1e3f05d98f5",
     "candidates.json": "d741b74ae820c210e0b7d43186496ea83b72584adfe0529440e2a3b7c251d835",
     "case.json": "1266369f01a1fb4ddd7f6d8f6a4f7fcdcc475445fed3cfc9d464a41bbfda2d73",
-    "claim_check.json": "0e1d561754284f8a334e788a964b6dd37bd433197ba9760e9d3849f8036d518d",
+    "claim_check.json": "599e22523aec680346bb70c608bcd939a7af92f7032dc8c8a876eb788a83fdc7",
     "directions.json": "5b2397e7ee4e80db6b8b1b6bf0834869aabbf282dcfecc6f23c4c706d476cc76",
     "evidence.json": "39819a48f34df9a8ad734daa1ebc55980ea28b5ed46eabaa429b710b898af15d",
     "judgment.json": "6b1a98ce44bf3a24b623518f8bca10d5a21ff18b40d9e7d69cf39b5b605f113d",
@@ -180,7 +180,7 @@
     "profile_parse.json": "d34b3c37a261949e9502d03e5eec3b00d0ad8d8f989758bfe8c4509ffae5cfd7",
     "report.html": "c09e09376b812953b4bb49bcbbb656b4c14c7ef2092c0418ceb1d8516cc0898c",
     "report.md": "caf501508e4bb94fa89ef30378a716f496ff000289aa508092a9fec6dc852eff",
-    "report_trace.json": "1509605c8e75e7069293a0443e4b949bd2a38553c3a9925b4a4260f775364eab",
+    "report_trace.json": "af169971bcb4cc87c80a1ca297ee4bae66078d06c61c709b328f494c7739c23d",
     "rules_check.json": "d887941488483a7992cfbe1fb174550f3fdb3083d8c597a1cdcc43f1eee9d198"
   },
   "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。",
@@ -441,6 +441,15 @@
         "claim_check.json"
       ],
       "reason": "本轮仅给报告工作流添加核实与复核期限HTML注释；移除新增注释后正文逐字节相同。代码、有效规则、组装正文、数值引用和渲染HTML未变，原报告MD/HTML/PDF及输入指纹不变。这是文档注释兼容记录与快照绑定刷新，未重新生成报告，不是新独立内容复核；原独立判定和实际渲染版本保留。"
+    },
+    {
+      "date": "2026-10-27",
+      "by": "Codex（高考工具兼容复验，非独立内容复核）",
+      "files": [
+        "report_trace.json",
+        "claim_check.json"
+      ],
+      "reason": "高考数据库到报告整链路实测：新增高考逐句适配、数据库来源复算、历史代码提示及模拟调研待核门禁；读研求职分支未改。对照上次兼容记录证明重新组装MD、原始HTML、数值引用数量不变，所有既有输入与MD/HTML/PDF逐字节不变。仅登记共享工具兼容复验与快照绑定，不冒充新独立语义复核；原批准人及实际渲染版本保留。"
     }
   ],
   "regeneration": {
