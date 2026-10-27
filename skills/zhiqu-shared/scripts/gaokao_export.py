@@ -92,16 +92,53 @@ def _meta(row, field, value, source, state, locator, checks=None, cross_check=No
     return result
 
 
+def _format_scope(c, tables, source_id, cache):
+    """Read source-wide scope only from retained original-header evidence."""
+    if source_id not in cache:
+        reference = c.execute('SELECT * FROM data.source_format_reference WHERE source_id=?', (source_id,)).fetchone() if 'source_format_reference' in tables else None
+        entry = dict(reference) if reference else {}
+        try:
+            columns = json.loads(entry.get('provided_fields', 'null'))
+            names = json.loads(entry.get('scope_fields', 'null'))
+            fixed = json.loads(entry.get('scope_values', 'null'))
+            locator = json.loads(entry.get('locator', 'null'))
+        except (TypeError, ValueError):
+            columns = names = fixed = locator = None
+        valid = (isinstance(columns, list) and all(isinstance(x, str) for x in columns)
+                 and isinstance(names, dict) and all(isinstance(k, str) and isinstance(v, str) for k, v in names.items())
+                 and isinstance(fixed, dict) and isinstance(locator, dict) and bool(locator) and bool(entry.get('excerpt')))
+        required = fixed.get('required_scope_fields', []) if isinstance(fixed, dict) else []
+        valid = valid and isinstance(required, list) and all(isinstance(f, str) and f in {'major_code','group','code','batch'} for f in required)
+        aliases = {'source_batch_raw':'batch','source_group_code':'group','source_major_code':'major_code',
+                   'source_school_code':'code','source_school_name':'name','major_name':'major',
+                   'subject_requirements':'requirement'}
+        scope = {}
+        if valid:
+            for key, value in fixed.items():
+                field = aliases.get(key, key)
+                if field in {'province','year','subject','code','name','group','major_code','major','batch','plan_type','requirement'} and value not in (None, ''):
+                    scope.setdefault(field, []).append(value)
+        reference = {k:entry[k] for k in ('source_id','excerpt','locator')} if valid else None
+        if reference and isinstance(fixed.get('required_scope_fields'), list):
+            reference['required_scope_fields'] = [f for f in fixed['required_scope_fields'] if f in {'major_code','group','code','batch'}]
+        cache[source_id] = (scope, reference)
+    return cache[source_id]
+
+
 def collect(c, tables, province, subject, years):
     """Read existing logical tables. No fallback rank conversion or guessed scope."""
-    source_cache = {}; completeness_cache = {}; school_ids = {}; result = []
+    source_cache = {}; completeness_cache = {}; school_ids = {}; format_cache = {}; result = []
     def source(sid): return _source(c, sid, source_cache)
     def normalize(raw, table):
         scope = obj(raw.get('_scope_json'))
+        fixed, format_reference = _format_scope(c, tables, raw.get('source_id'), format_cache) if table == 'gk_official_cutoff' else ({}, None)
         extra_scope = {k:v for k,v in scope.items() if k not in {'batch','批次','group','grp','major','major_code','plan_type','subject','province','year','name','code','institution_id','requirement','subject_requirements','group_code','school_code','school_name','school_raw','major_name'}}
-        scope_conflicts=[]
+        scope_conflicts=[]; row_scope_fields=set()
         def pick(field, raw_keys, scope_keys):
             candidates=[text(raw[k])for k in raw_keys if raw.get(k)not in(None,'')]+[text(scope[k])for k in scope_keys if scope.get(k)not in(None,'')]
+            candidates = [v for v in candidates if v]
+            if candidates:row_scope_fields.add(field)
+            candidates.extend(text(v) for v in fixed.get(field, []))
             normalize_value=group_code if field=='group' else (lambda v:requirement(v,subject)) if field=='requirement' else text
             if len({normalize_value(v)for v in candidates})>1:scope_conflicts.append({'field':field,'original_values':candidates})
             return candidates[0] if candidates else ''
@@ -114,7 +151,15 @@ def collect(c, tables, province, subject, years):
                'scope_raw':text(raw.get('scope_raw')) or (dump(extra_scope) if extra_scope else ''), 'record_id':raw.get('record_id',raw.get('entry_id')), 'table':table,
                'source_id':raw.get('source_id') or ('vendor-file-'+str(raw.get('src_file')) if raw.get('src_file') is not None else ''),
                'completeness':None,'scope_conflicts':scope_conflicts}
+        if format_reference:
+            for field in format_reference.get('required_scope_fields', []):
+                if field not in row_scope_fields:row['scope_conflicts'].append({'field':field,'reason':'原表必需范围字段尚未逐行对齐，不能按空值合并'})
+        for field, expected in [('province', province), ('year', raw['year']), ('subject', subject)]:
+            claims = fixed.get(field, []) + ([scope[field]] if scope.get(field) not in (None, '') else [])
+            if any(text(v) != text(expected) for v in claims):
+                row['scope_conflicts'].append({'field':field,'original_values':[expected]+claims})
         row['original_scope']=dict(_scope(row),source_scope_original=scope)
+        if format_reference:row['original_scope']['source_format_reference']=format_reference
         row['group']=group_code(row['group'])
         row['requirement']=requirement(row['requirement'],subject)
         row['scope_raw']=scope_text(row['scope_raw'])
@@ -139,6 +184,8 @@ def collect(c, tables, province, subject, years):
             value = number(raw.get(original)); row['values'][field] = value
             sid = overrides.get(original) or row['source_id']; src = source(sid)
             locator = {k:raw.get(k) for k in ('src','src_row','src_page','src_table','src_sheet') if raw.get(k) not in (None,'')}
+            if format_reference:locator['original_format']=format_reference
+            if raw.get('_scope_locator'):locator['scope_locator']=obj(raw['_scope_locator'])
             checks = []
             # An yfyd consistency check is not a same-scope official cutoff check.
             if table == 'gk_v_usable' and 'gk_check_sample' in tables:
@@ -163,7 +210,8 @@ def collect(c, tables, province, subject, years):
     for year in years:
         if 'gk_official_cutoff' in tables:
             join = ' LEFT JOIN data.official_cutoff_scope k ON k.source_id=t.source_id AND k.public_record=t.src' if 'official_cutoff_scope' in tables else ''
-            scope_select = ',k.scope_json AS _scope_json' if join else ''
+            has_locator = join and any(r[1] == 'locator_json' for r in c.execute('PRAGMA data.table_info(official_cutoff_scope)'))
+            scope_select = (',k.scope_json AS _scope_json' + (',k.locator_json AS _scope_locator' if has_locator else '')) if join else ''
             for item in c.execute('SELECT t.*'+scope_select+' FROM data.gk_official_cutoff t'+join+' WHERE t.province=? AND t.year=? AND t.subject=?',(province,year,subject)):
                 result.append(normalize(dict(item),'gk_official_cutoff'))
         if {'gk_v_usable','gk_v_plan'} <= tables:

@@ -159,4 +159,51 @@ class GaokaoDbExportTests(unittest.TestCase):
             self.assertEqual(status,0);self.assertEqual(json.loads(output.getvalue())['exported_rows'],{'2025':2})
             self.assertEqual(db.read_bytes(),before)
 
+
+class OriginalHeaderScopeTests(unittest.TestCase):
+    def setUp(self):
+        self.c=sqlite3.connect(':memory:');self.c.row_factory=sqlite3.Row;self.addCleanup(self.c.close)
+        self.c.executescript("ATTACH DATABASE ':memory:' AS data;CREATE TABLE data.source(source_id TEXT PRIMARY KEY,grade TEXT,publisher TEXT,title TEXT,landing_url TEXT);INSERT INTO data.source VALUES('o','官方','考试院','原表','https://example.edu.cn/original');CREATE TABLE data.gk_official_cutoff(province TEXT,year INT,subject TEXT,code TEXT,name TEXT,grp TEXT,major_code TEXT,major TEXT,score INT,rank INT,source_id TEXT,src TEXT,value_status TEXT);INSERT INTO data.gk_official_cutoff VALUES('河北',2025,'物理','001','甲大学','','','计算机科学与技术',600,1000,'o','public.csv:2','{}');CREATE TABLE data.source_format_reference(source_id TEXT PRIMARY KEY,provided_fields TEXT,scope_fields TEXT,excerpt TEXT,locator TEXT,scope_values TEXT);CREATE TABLE data.official_cutoff_scope(source_id TEXT,public_record TEXT,scope_json TEXT,locator_json TEXT);")
+        self.c.execute('INSERT INTO data.source_format_reference VALUES(?,?,?,?,?,?)',('o','["score"]','{}','2025年河北省普通高校招生本科批；物理科目组合',json.dumps({'sha256':'a'*64,'sheet':'原表','row':1}),json.dumps({'source_batch_raw':'本科批','year':2025,'subject':'物理'})))
+        self.c.execute('INSERT INTO data.official_cutoff_scope VALUES(?,?,?,?)',('o','public.csv:2',json.dumps({'major_code':'16'}),json.dumps({'sha256':'a'*64,'sheet':'原表','row':5,'columns':['A','C','D','E']})))
+    def collect(self):return ex.collect(self.c,zhiqu_db._tables(self.c),'河北','物理',[2025])
+    def export(self):
+        with tempfile.TemporaryDirectory()as d:
+            m=ex.export_records(self.collect(),'河北','物理',[2025],out=d,key='major')
+            with open(m['files']['2025'])as f:rows=list(csv.DictReader(f))
+            return m,rows
+    def test_source_header_scope_and_real_row_locator_survive_export(self):
+        m,rows=self.export();self.assertEqual(m['exported_rows'],{'2025':1});self.assertEqual(rows[0]['batch'],'本科批');self.assertEqual(rows[0]['major_code'],'16')
+        fact=json.loads(rows[0]['data_provenance'])['score'];self.assertEqual(fact['value'],600);self.assertEqual(fact['grade'],'官方');self.assertEqual(fact['locator']['scope_locator']['row'],5);self.assertIn('source_format_reference',fact['original_scope'])
+    def test_row_scope_cannot_silently_override_source_scope(self):
+        self.c.execute('UPDATE data.official_cutoff_scope SET scope_json=?',(json.dumps({'batch':'提前批','major_code':'16'}),));m,rows=self.export();self.assertEqual(rows,[]);self.assertIn('scope',m['rejected'][0]['reason'])
+    def test_unproved_or_malformed_header_does_not_fill_batch(self):
+        for column,value in [('excerpt',''),('locator',''),('locator','not-json'),('locator','[]'),('scope_fields','[]'),('provided_fields','{}'),('scope_values','not-json')]:
+            original=self.c.execute('SELECT '+column+' FROM data.source_format_reference').fetchone()[0]
+            self.c.execute('UPDATE data.source_format_reference SET '+column+'=?',(value,));m,rows=self.export();self.assertEqual(rows,[],column);self.c.execute('UPDATE data.source_format_reference SET '+column+'=?',(original,))
+    def test_source_wide_year_or_subject_mismatch_is_a_gap(self):
+        for field,value in [('year',2024),('subject','历史')]:
+            fixed={'source_batch_raw':'本科批','year':2025,'subject':'物理'};fixed[field]=value;self.c.execute('UPDATE data.source_format_reference SET scope_values=?',(json.dumps(fixed),));m,rows=self.export();self.assertEqual(rows,[]);self.assertTrue(m['rejected'])
+    def test_two_distinct_batch_labels_are_not_merged(self):
+        self.c.execute('UPDATE data.source_format_reference SET scope_values=?',(json.dumps({'batch':'提前批','source_batch_raw':'本科批'}),));self.assertEqual(self.export()[1],[])
+    def test_unaligned_original_major_code_cannot_be_merged_as_blank(self):
+        self.c.execute('UPDATE data.source_format_reference SET scope_values=?',(json.dumps({'source_batch_raw':'本科批','required_scope_fields':['major_code']}),))
+        self.c.execute('DELETE FROM data.official_cutoff_scope');m,rows=self.export();self.assertEqual(rows,[]);self.assertIn('scope',m['rejected'][0]['reason'])
+
+    def test_row_year_subject_and_province_must_match_selected_competition(self):
+        for field,value in [('year',2024),('subject','历史'),('province','河南')]:
+            scope={'major_code':'16',field:value};self.c.execute('UPDATE data.official_cutoff_scope SET scope_json=?',(json.dumps(scope),));self.assertEqual(self.export()[1],[],field)
+
+    def test_source_wide_major_code_cannot_replace_row_alignment(self):
+        self.c.execute('UPDATE data.source_format_reference SET scope_values=?',(json.dumps({'source_batch_raw':'本科批','major_code':'16','required_scope_fields':['major_code']}),))
+        self.c.execute('DELETE FROM data.official_cutoff_scope');self.assertEqual(self.export()[1],[])
+
+    def test_blank_row_major_codes_do_not_satisfy_alignment(self):
+        self.c.execute('UPDATE data.source_format_reference SET scope_values=?',(json.dumps({'source_batch_raw':'本科批','required_scope_fields':['major_code']}),))
+        for value in ['   ','\u3000']:
+            self.c.execute('UPDATE data.official_cutoff_scope SET scope_json=?',(json.dumps({'major_code':value}),));self.assertEqual(self.export()[1],[])
+
+    def test_missing_header_does_not_guess_from_source_id_or_title(self):
+        self.c.execute('DELETE FROM data.source_format_reference');self.assertEqual(self.export()[1],[])
+
 if __name__=='__main__':unittest.main()
