@@ -21,6 +21,7 @@ import argparse
 import csv
 import datetime
 import hashlib
+import json
 from pathlib import Path, PurePosixPath
 from datetime import date
 import os
@@ -587,6 +588,33 @@ def check_file(path, codes):
     return issues, notes
 
 
+def check_local_query_entry(repository_root=None):
+    """本机可选入口只检查文件存在性，不执行配置指定的程序。"""
+    root = Path(repository_root) if repository_root is not None else REPO_ROOT
+    config = root / "skills/zhiqu-shared/data/query_entry.json"
+    if not config.exists() and not config.is_symlink():
+        return [], ["未配置本机查询入口，跳过"]
+    try:
+        value = json.loads(config.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, ValueError):
+        return ["query_entry.json 无法读取或不是有效 JSON"], []
+    if not isinstance(value, dict):
+        return ["query_entry.json 必须是 JSON 对象"], []
+    entry = value.get("entry_path")
+    if not isinstance(entry, str) or not entry.strip():
+        return ["query_entry.json 的 entry_path 必须是非空文件路径"], []
+    target = Path(entry)
+    if not target.is_absolute():
+        target = root / target
+    try:
+        exists = target.is_file()
+    except (OSError, ValueError):
+        exists = False
+    if not exists:
+        return ["query_entry.json 的 entry_path 未指向现存文件，请修复本机查询入口"], []
+    return [], ["本机查询入口文件存在（未执行）"]
+
+
 def main():
     parser = argparse.ArgumentParser(description="校验投档 CSV、入学后的机会表和选调高校范围表")
     parser.add_argument("provinces", nargs="*", help="data 下的省份目录；默认全部省份")
@@ -598,6 +626,11 @@ def main():
         if province not in os.listdir(DATA) or not os.path.isdir(os.path.join(DATA, province)):
             parser.error(f"未知省份目录：{province}")
     n_issue = 0
+    issues, notes = check_local_query_entry()
+    print(f"## 本机查询入口：{'；'.join(notes) or '—'}")
+    for issue in issues:
+        print(f"    ⚠ {issue}")
+        n_issue += 1
     issues, notes = check_originals_index()
     print(f"## 公开原件库：{'；'.join(notes) or '—'}")
     for issue in issues:
