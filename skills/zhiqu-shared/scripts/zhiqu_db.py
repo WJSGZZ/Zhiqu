@@ -1639,7 +1639,7 @@ def _export_official_core(c, tables, province, subject, years, out, schools, bat
 
 def export_gaokao(province, subject, years, *, out, schools=None, batch=None, plan_type=None, key='group', db=None):
     """Export pool inputs and separate reference CSVs, with scope and value sources."""
-    from gaokao_export import collect, export_records, export_yfyd, collect_auxiliary, export_auxiliary
+    from gaokao_export import collect, export_records, export_yfyd, collect_auxiliary, export_auxiliary, subject_options
     years = sorted(set(int(y) for y in years))
     if not years or any(y < 1900 or y > 2100 for y in years):
         raise QueryError('年份须为1900—2100的非空列表')
@@ -1691,6 +1691,12 @@ def export_gaokao(province, subject, years, *, out, schools=None, batch=None, pl
             if not any(available.values()) and (any(aux['plan_exported_rows'].values()) or any(aux['batch_line_exported_rows'].values()) or any(result['official_field_exported_rows'].values())):
                 result['status']='partial'
                 result['message']='仅导出计划、控制线或已核官方字段辅助原表；志愿候选和一分一段仍缺，不可据此推算录取位次'
+            missing_years=[year for year in years if not result['exported_rows'][str(year)] or not result['yfyd_exported_rows'][str(year)]]
+            result['subject_options']=subject_options(c,tables,province,missing_years,requested=subject)
+            if result['subject_options']:
+                shown='；'.join(str(item['year'])+'年「'+item['subject']+'」（'+'、'.join(item['layers'])+'）'for item in result['subject_options'][:6])
+                more='；其余标签见导出说明' if len(result['subject_options'])>6 else ''
+                result['message']+='；本省相应年份另有原始科类标签：'+shown+more+'。请核对适用口径后重新指定；未自动换科类，标签存在不代表适用本考生或可导出，未按候选学校筛选'
         except ValueError as exc:
             raise QueryError(str(exc)) from exc
         result['database'] = str(path)

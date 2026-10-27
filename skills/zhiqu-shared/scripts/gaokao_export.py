@@ -144,6 +144,34 @@ def _format_scope(c, tables, source_id, cache):
     return cache[source_id]
 
 
+def subject_options(c, tables, province, years, *, requested):
+    """列出原标签供选口径；不把标签存在当作候选可用性证明。"""
+    years = sorted(set(map(int, years)))
+    if not years:
+        return []
+    found = collections.defaultdict(set)
+    layers = (
+        ('gk_official_cutoff', 'subject', '投档线原表', ''),
+        ('gk_v_usable', 'subject_type', '外购录取结果', ''),
+        ('gk_v_purchased', 'subject', '外购投档/专业录取分', " AND dataset_type IN ('投档线','专业录取分')"),
+        ('gk_official_yfyd', 'subject', '一分一段原表', ''),
+        ('gk_official_plan', 'subject', '招生计划原表', ''),
+        ('gk_batch_line', 'subject', '控制线原表', ''),
+    )
+    for table, column, label, extra in layers:
+        if table not in tables:
+            continue
+        sql = ('SELECT DISTINCT year,' + column + ' FROM data.' + table +
+               ' WHERE province=? AND year IN (' + ','.join('?' for _ in years) + ')' + extra)
+        for year, raw in c.execute(sql, [province, *years]):
+            if isinstance(raw, str) and raw.strip() and raw != requested:
+                found[(int(year), raw)].add(label)
+    # 仅调整提示顺序，防止六条默认提示被无关标签占满；不选择或改写科类。
+    ordered = sorted(found.items(), key=lambda item: (item[0][0], requested not in item[0][1], item[0][1]))
+    return [{'year': year, 'subject': raw, 'layers': sorted(labels)}
+            for (year, raw), labels in ordered]
+
+
 def collect(c, tables, province, subject, years):
     """Read existing logical tables. No fallback rank conversion or guessed scope."""
     source_cache = {}; completeness_cache = {}; school_ids = {}; format_cache = {}; result = []
