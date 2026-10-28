@@ -272,6 +272,17 @@ def collect(c, tables, province, subject, years):
             row['institution_id']=school_ids[mk]
         if table == 'gk_official_cutoff':
             row['grain'] = 'major' if row['major_code'] or row['major'] and not row['group'] else 'group' if row['group'] else 'school'
+            if row['grain']=='group' and row['major']:
+                # 旧 major 列既可能存专业名，也可能存选科说明；有组号
+                # 不能证明这一行是组线。只有明确列语义才能走兼容。
+                named_major=any(text(scope.get(k))==row['major'] for k in ('major','major_name'))
+                explicit_requirement=any(text(v)==row['major'] for v in
+                    [raw.get('subject_requirements'),raw.get('subject_req_raw'),scope.get('requirement'),scope.get('subject_requirements')])
+                if named_major:
+                    row['grain']='major'
+                elif not explicit_requirement:
+                    row['grain']='unknown'
+                    row['grain_note']='有组号但旧major列语义未核，不能判断是专业名还是选科说明；须核原表列语义'
             if row['grain'] == 'group':
                 row['requirement'] = row['requirement'] or row['major']; row['major'] = ''
         else:
@@ -371,7 +382,11 @@ def export_records(records, province, subject, years, *, out, key='group', schoo
         if key=='group' and not row.get('group'): missing.append('group')
         if key=='major' and not row.get('major'): missing.append('major')
         if missing:
-            rejected.append({'year':row['year'],'school':row.get('name'),'record_id':row.get('record_id'),'table':row.get('table'),'reason':'缺少或不符合关键范围：'+','.join(missing)})
+            rejection={'year':row['year'],'school':row.get('name'),'record_id':row.get('record_id'),'table':row.get('table'),'reason':'缺少或不符合关键范围：'+','.join(missing)}
+            if row.get('grain') != key:
+                rejection['grain_mismatch']={'requested':key,'actual':row.get('grain') or 'unknown'}
+                if row.get('grain_note'):rejection['grain_mismatch']['note']=row['grain_note']
+            rejected.append(rejection)
         else: selected.append(row)
     def identity(r):
         school = ('id',r['institution_id']) if r.get('institution_id') else ('name',r['name'])
@@ -498,6 +513,14 @@ def export_records(records, province, subject, years, *, out, key='group', schoo
     audit_path=out/'scope-audit.json'
     audit_path.write_text(json.dumps({'schema_version':1,'records':scope_audit},ensure_ascii=False,indent=2)+'\n')
     metadata={'status':'ok' if all(counts.values()) else 'partial' if any(counts.values()) else 'missing_data','province':province,'subject':subject,'years':years,'key':key,'batch_filter':batch,'plan_type_filter':plan_type,'input_records':len(records),'exported_rows':counts,'files':paths,'conflict_count':len(conflicts),'conflicts_file':str((out/'conflicts.csv').resolve()),'scope_audit_count':len(scope_audit),'scope_audit_file':str(audit_path.resolve()),'rejected':rejected,'withheld_values':withheld_values,'yfyd':yfyd_metadata or [],'rank_conversion_performed':False,'rules':['官方同事实同口径逐值优先，第三方补缺','rank_vs_yfyd不等同官方投档核对','缺位次不从分数推造','已核原格式未设位次列的推算位次只留待核参照，不进模型；同口径其他来源逐值补缺','专业组跨年仍须pool --group-map核实'],'database_written':False}
+    grain_counts={}
+    for item in rejected:
+        mismatch=item.get('grain_mismatch')
+        if mismatch:
+            k=(item['year'],mismatch['requested'],mismatch['actual'])
+            grain_counts[k]=grain_counts.get(k,0)+1
+    metadata['grain_mismatches']=[{'year':year,'requested':requested,'actual':actual,'rows':n}
+        for (year,requested,actual),n in sorted(grain_counts.items())]
     (out/'export-metadata.json').write_text(json.dumps(metadata,ensure_ascii=False,indent=2)+'\n')
     return metadata
 

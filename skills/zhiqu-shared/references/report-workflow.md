@@ -55,11 +55,13 @@ JSON 格式、旧文字兼容和本机版本库统一见 [画像输入与本机�
 新报告先导出本省、科类和历史年，再把缺项列入官网补取清单。例如：
 
 ```bash
-python3 skills/zhiqu-shared/scripts/zhiqu_db.py export-gaokao 河南 物理 --years 2024 2025 --key major --out .cache/gk-export
-python3 skills/zhiqu/scripts/pool.py --year 2024=.cache/gk-export/河南-物理-2024.csv --year 2025=.cache/gk-export/河南-物理-2025.csv --key major --out .cache/pool.csv
+python3 skills/zhiqu-shared/scripts/zhiqu_db.py export-gaokao 河南 物理 --years 2025 --batch 本科批 --key group --out .cache/gk-export
+python3 skills/zhiqu/scripts/pool.py --year 2025=.cache/gk-export/河南-物理-2025.csv --key group --out .cache/pool.csv
 ```
 
-可用 `--schools` 限候选、`--batch`／`--plan-type` 限范围。专业分不充组线；组模式跨年仍须 `--group-map`。原学校/组/专业、批次、科类和计划口径须相同才覆盖：官方优先，缺的用第三方；冲突记 `conflicts.csv`，多个第三方不同值不任选。不能从投档分擅推位次。`export-metadata.json` 留未导出原因和一分一段缺口；换算继续用 `zhiqu_db.py yfyd` 或带完整性元数据的 `rank.Table`，不跨缺行或合并档插值。
+示例按河南2025新高考的院校专业组单位；不拼2024旧理科。先确认导出有候选，再跑pool；有一分一段不等于有组投档线，空表停在缺口，不能改成专业单位凑候选。
+
+可用 `--schools` 限候选、`--batch`／`--plan-type` 限范围。专业分不充组线；有组号但旧major列未明确是专业名还是选科说明的，先核原表列语义，两种单位都不导出；组模式跨年仍须 `--group-map`。原学校/组/专业、批次、科类和计划口径须相同才覆盖：官方优先，缺的用第三方；冲突记 `conflicts.csv`，多个第三方不同值不任选。不能从投档分擅推位次。`export-metadata.json` 留未导出原因和一分一段缺口；换算继续用 `zhiqu_db.py yfyd` 或带完整性元数据的 `rank.Table`，不跨缺行或合并档插值。
 
 CSV 的 `data_provenance` 按 rank/score/plan 记原值、来源、状态、范围与缺口，pool按年保留，优化与填报单继续传递。显示等级只用“官方／官方一致／第三方整理·内部未核”；“官方一致”须是该值同口径官方原表核对，不用分数位次自洽或文件抽样给整行升级。来源仍保原始等级；第三方须附本节要求的 `cross_check` 范围与不一致数，无核对如实记0。
 

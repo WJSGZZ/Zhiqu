@@ -1726,6 +1726,10 @@ def export_gaokao(province, subject, years, *, out, schools=None, batch=None, pl
             if not any(available.values()) and (any(aux['plan_exported_rows'].values()) or any(aux['batch_line_exported_rows'].values()) or any(result['official_field_exported_rows'].values())):
                 result['status']='partial'
                 result['message']='仅导出计划、控制线或已核官方字段辅助原表；志愿候选和一分一段仍缺，不可据此推算录取位次'
+            if result.get('grain_mismatches'):
+                labels={'group':'院校专业组','major':'专业','school':'学校','unknown':'未明确粒度'}
+                shown='；'.join(str(r['year'])+'年'+labels[r['requested']]+'输入不接收'+labels.get(r['actual'],'未明确粒度')+'记录'+str(r['rows'])+'条'for r in result['grain_mismatches'])
+                result['message']+='；记录粒度不符：'+shown+'（计数为筛选后原记录，非去重学校数）；专业分数或专业位次不能直接当作专业组投档线；须补同口径原表，不要为凑候选更换填报单位'
             if result.get('scope_audit_count'):
                 result['message']+='；'+str(result['scope_audit_count'])+'条第三方范围记录单列审计，未阻断唯一官方原行；选科缺口未用第三方填充'
             if result.get('withheld_values'):
