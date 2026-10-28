@@ -253,6 +253,28 @@ class NewComponents(unittest.TestCase):
         self.assertIn('200,000 港币', out)
         self.assertIn('200,000 澳门元', out)
 
+    def test_cost_uses_one_axis_for_aliases_but_separates_period_and_scale(self):
+        out = report.cost_chart([['现金', 9000, '元'], ['扣后', 1800, '人民币']])
+        self.assertEqual(out.count('<svg'), 1)
+        widths = [r['width'] for r in rects(out, '#21473E')]
+        self.assertAlmostEqual(widths[0], 5 * widths[1], places=1)
+        separate = report.cost_chart([['月租', 1200, '元/月'], ['年费', 1200, '元/年'], ['总额', 1.2, '万元']])
+        self.assertEqual(separate.count('<svg'), 3)
+        self.assertIn('计价周期各用自己的刻度', separate)
+        aliases = report.cost_chart([['月租', 1200, '元每月'], ['房租', 900, '人民币/月'], ['学费', 8000, '元/生·年']])
+        self.assertEqual(aliases.count('<svg'), 2)
+
+    def test_cost_rejects_unsupported_units_and_rows_instead_of_autoscaling_them(self):
+        for unit in ('预算', '结余', '', '月', '元/预算', '元/预算/月', '元/月每年', '元每月/年', '元每月每年', '元/年每月'):
+            with self.subTest(unit=unit), self.assertRaisesRegex(ValueError, '第三列'):
+                report.cost_chart([['现金', 9000, unit]])
+        for row in (['现金', 9000], ['现金', 9000, '元', '9000元', '被忽略的第五列']):
+            with self.subTest(row=row), self.assertRaisesRegex(ValueError, '每行'):
+                report.cost_chart([row])
+        for value in (True, -1, float('nan'), float('inf')):
+            with self.subTest(value=value), self.assertRaisesRegex(ValueError, '有限非负'):
+                report.cost_chart([['现金', value, '元']])
+
     def test_evidence_grid_uses_badge_levels_only(self):
         svg = report.evidence_grid([('甲大学', [('收费', '官方'), ('就业', '未取到')]), ('乙大学', [('收费', '推测')])])
         self.assertIn('未查', svg)          # 乙大学没有“就业”一项
@@ -261,6 +283,13 @@ class NewComponents(unittest.TestCase):
 
 
 class Fences(unittest.TestCase):
+    def test_cost_rejects_silently_ignored_options(self):
+        import render_report as rr
+        for option in ('max: 9000', 'unit: 元', 'percent: 是'):
+            with self.subTest(option=option), self.assertRaisesRegex(ValueError, '费用图不支持选项'):
+                rr.render_fence('cost', '现金', ['caption: 同口径对比', 'source: 1', option, '- 现金 | 9000 | 元'])
+
+
     def test_new_fences_render_through_shared_components(self):
         import render_report as rr
         md = '\n'.join(['::: stack 初试构成', 'caption: 说明', 'source: 1', 'unit: 分', '- 三单元 | 政治 100 | 外语 100 | 专业课 300', ':::',

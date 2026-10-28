@@ -1149,17 +1149,35 @@ def facts(rows, inline=E):
 
 
 def cost_chart(rows):
-    """费用对比：rows=[项目, 数值或 None, 币种/单位, 显示?]。同一币种共用一条数轴；不同币种分开画、各自刻度，
-    不按汇率折算；没取到的项画虚线空框并写“未取到”，不画成 0。"""
+    """费用对比：[项目, 数值或None, 币种/单位, 显示值?]。
+
+    单位须来自共用单位族表；同币种、数量级及计价周期共轴，不折算。
+    预算、结余等用途写在项目名，不能作为单位把每一行拆成独立刻度。
+    """
+    from unit_validation import normalize_unit
+    import unicodedata
     groups = {}
     for row in rows:
-        label, value, cur, *rest = list(row) + [None] * (3 - len(row))
-        groups.setdefault(str(cur or '未注明单位'), []).append([label, value, '主', rest[0] if rest and rest[0] else None])
+        if not isinstance(row, (list, tuple)) or not 3 <= len(row) <= 4:
+            raise ValueError('费用图每行须为项目、数值、币种/单位，可加显示值')
+        label, value, cur, *rest = row
+        raw = re.sub(r'\s+', '', unicodedata.normalize('NFKC', str(cur or ''))).replace('／', '/')
+        raw = raw.replace('/生·', '/').replace('/人·', '/').replace('/生/', '/').replace('/人/', '/')
+        raw = raw.replace('每年', '/年').replace('每月', '/月')
+        unit = normalize_unit(raw)
+        if (not unit or unit.family != 'money' or not unit.currency
+                or unit.period.startswith('opaque:') or raw.count('/') > 1):
+            raise ValueError('费用图第三列须为已登记的币种/单位（如元、元/月、港币）；预算或结余写在项目名')
+        if value is not None and (isinstance(value, bool) or not math.isfinite(float(value)) or float(value) < 0):
+            raise ValueError('费用图只接受有限非负金额；负结余须用情景表披露')
+        group = groups.setdefault(unit, {'label': str(cur), 'items': []})
+        group['items'].append([label, value, '主', rest[0] if rest and rest[0] else None])
     panels = []
-    for cur, items in groups.items():
-        panels.append(f'<div class="panel-ttl">{E(cur)}</div>' + bar_chart(items, cur))
+    for group in groups.values():
+        cur = group['label']
+        panels.append(f'<div class="panel-ttl">{E(cur)}</div>' + bar_chart(group['items'], cur))
     if len(groups) > 1:
-        panels.append(f'<p class="matrix-key">不同币种各用自己的刻度，没有按汇率折算；条长只在同一币种内可比。虚线框为未取到。</p>')
+        panels.append('<p class="matrix-key">不同币种、数量级或计价周期各用自己的刻度，没有按汇率折算；条长只在同一单位口径内可比。虚线框为未取到。</p>')
     return '<div class="cost">' + ''.join(panels) + '</div>'
 
 

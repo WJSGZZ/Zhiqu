@@ -47,7 +47,8 @@ Markdown 格式：
     ::: flow 图题：每行 - 节点ID | 步骤/判断/结果/备选 | 文字 | 标签>目标ID | …（决策流程图，自上而下）
     ::: stack 图题：每行 - 标签 | 分项 数值 | 分项 数值 | …；可加 unit:、percent: 是（构成条，合计写在右侧）
     ::: facts 图题：每行 - 项目 | 内容 | 已知/待确认/未知（现状一览，未知画虚线框写“未填”）
-    ::: cost 图题：每行 - 项目 | 数值或未取到 | 币种 | 显示值（同币种共轴，不同币种分开画、不折算）
+    ::: cost 图题：每行 - 项目 | 数值或未取到 | 币种/单位 | 显示值（同单位口径共轴，不折算；预算等写项目名）
+    cost只接受caption/source选项，不支持max/unit/percent；要固定上界请用bars并声明同一单位。
     ::: route 路线名：恰好四行 - 门槛 | ... / - 时间窗口 | ... / - 投入 | ... / - 切换条件 | ...
     ::: evidence：每行 - 官方/多人一致/第三方整理/单人说法/推测 | 说明。
     ::: questions / ::: scenarios：columns: 列名 | 列名 | …，每行 - 各列内容；画成追问卡、风险触发卡。
@@ -219,6 +220,8 @@ def render_fence(kind, title, lines, notes=None):
         content = _report.stack([[r[0],[seg(x) for x in r[1:] if x.strip()]] for r in items],opts.get('unit',''),opts.get('percent','') in ('是','true','1'))
     elif kind == 'facts': content = _report.facts(items, render_inline)
     elif kind == 'cost':
+        unsupported = set(opts) - {'caption', 'source'}
+        if unsupported: raise ValueError('费用图不支持选项'+'、'.join(sorted(unsupported))+'；固定上界请用bars并声明同一单位')
         number = lambda s: float(s.replace(',','')) if s and s.strip() and s.strip()!='未取到' else None
         content = _report.cost_chart([[r[0],number(r[1] if len(r)>1 else ''),*(r[2:])] for r in items])
     elif kind == 'matrix':
