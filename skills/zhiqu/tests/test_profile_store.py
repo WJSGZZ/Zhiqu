@@ -380,6 +380,24 @@ class ProfileStore(unittest.TestCase):
         fields = {row['field']: row for row in store.build_parse(old, 'career')['fields']}
         self.assertEqual(fields['求职阶段']['value'], '还没开始')
 
+    def test_career_parent_questions_preserve_salary_and_income_month(self):
+        # The exporter groups nested controls under their parent question ID.
+        salary={'选择':'有大致底线','最低到手月薪':'5500'}
+        deadline={'选择':'有明确月份','最晚稳定收入年月':'2027-08'}
+        data=document(kind='career',items=[
+            {'id':'salary_known','q':'最低到手月薪（选填）','a':salary,'status':'已答'},
+            {'id':'income_deadline_status','q':'最晚需要稳定收入的年月（选填）','a':deadline,'status':'已答'}])
+        data.update(collapsed=[],counts={'visible':2,'answered':2})
+        data['checksum']=store.checksum(data)
+        parsed=store.build_parse(json.dumps(data,ensure_ascii=False),'career')
+        fields={row['field']:row for row in parsed['fields']}
+        for name,expected,owner in [('收入底线',salary,'salary_known'),
+                                    ('多快需要收入',deadline,'income_deadline_status')]:
+            self.assertEqual(fields[name]['status'],'given')
+            self.assertEqual(fields[name]['value'],expected)
+            self.assertEqual(fields[name]['answer_refs'],[owner])
+            self.assertNotIn(name,{row['field'] for row in parsed['missing']})
+
     def test_all_three_questionnaires_roundtrip_without_guessing(self):
         for kind, code in [('gaokao', 'GK'), ('grad', 'YJ'), ('career', 'QZ')]:
             with self.subTest(kind=kind):

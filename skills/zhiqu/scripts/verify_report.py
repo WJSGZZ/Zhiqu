@@ -236,7 +236,15 @@ def calculation_display_values(numbers):
     return values
 
 
+def planning_numbers_heading(evidence):
+    """A personal/scenario-only report must not imply official numeric evidence."""
+    if any(e.get('grade')=='官方' and e.get('status')=='verified' for e in evidence.values()):
+        return None  # Preserve existing mixed/official report presentation.
+    return '登记出处与条件计算'
+
+
 def planning_materials(case,trace,binding,warning=None):
+    from planning_workflow import text_items
     """Only explicit references determine provenance; never match by equal values."""
     from planning_workflow import REF
     from verification_calculations import calculation_rows
@@ -316,7 +324,7 @@ def planning_materials(case,trace,binding,warning=None):
         src=[evidence[e]['source'] for e in candidate.get('evidence_refs',[]) if e in evidence]
         base=names.get(candidate.get('candidate_id') or candidate.get('id'),{})
         limitations.append({'kind':'candidate','name':base.get('name') or base.get('title') or '候选 '+str(candidate.get('id','')),
-                            'claim':'；'.join(candidate.get('counters',[])),'reason':'；'.join(candidate.get('supports',[])),
+                            'claim':'；'.join(text_items(candidate.get('counters',[]))),'reason':'；'.join(text_items(candidate.get('supports',[]))),
                             'change_if':readable_value(candidate.get('switch_conditions','条件改变则重评')),'url':'；'.join(dict.fromkeys(s.get('url','') for s in src if s.get('url')))})
     for sid in ('04','09','10'):
         for entry in case.nodes()[sid]:
@@ -366,8 +374,11 @@ def planning_materials(case,trace,binding,warning=None):
             row['label']=name
     formulas=[dict(row,sections=section_names(calc_locations[row['path']]),inputs=cn_inputs(row.get('inputs'))) for row in formulas if row.get('path') in calc_locations]
     shared=case.data['judgment.json'].get('recommendation',{}).get('conditions',[])
-    return {'case_info':case_info(case.case,binding,warning),'personal_inputs':personal,'numbers':numbers+formulas,'limitations':limitations,'gaps':gaps,
-            'shared_conditions':[str(c) for c in shared],'qualitative':qualitative}
+    materials = {'case_info':case_info(case.case,binding,warning),'personal_inputs':personal,'numbers':numbers+formulas,'limitations':limitations,'gaps':gaps,
+            'shared_conditions':text_items(shared),'qualitative':qualitative}
+    heading=planning_numbers_heading(evidence)
+    if heading:materials['numbers_heading']=heading
+    return materials
 
 
 def candidate_file(root,result):

@@ -77,6 +77,19 @@ class VerifyDeliveredPDF(unittest.TestCase):
                 attachments['verification.json'] = verify.json_bytes(manifest)
         self.rewrite_attachments(change)
 
+    def test_personal_only_appendix_does_not_imply_official_evidence(self):
+        import report
+        heading=verify.planning_numbers_heading({'P1':{'grade':'单人说法','status':'verified'},
+                                                  'O1':{'grade':'官方','status':'unretrieved'}})
+        self.assertEqual(heading,'登记出处与条件计算')
+        self.materials['numbers_heading']=heading
+        html=report.verification_appendix_html(self.materials)
+        self.assertIn('<h4>登记出处与条件计算</h4>',html)
+        self.assertNotIn('<h4>官方出处与数字</h4>',html)
+        self.assertIsNone(verify.planning_numbers_heading({'O1':{'grade':'官方','status':'verified'}}))
+        self.materials.pop('numbers_heading')
+        self.assertIn('<h4>官方出处与数字</h4>',report.verification_appendix_html(self.materials))
+
     def test_normal_pdf_recomputes_extracts_and_lists_online_sources(self):
         target = self.root/'extracted'
         result = verify.verify(self.pdf, target)

@@ -132,6 +132,15 @@ def excerpt_contains(value, excerpt):
     return needle in haystack
 
 
+def text_items(value):
+    """One sentence stays one item; never iterate its individual characters."""
+    if isinstance(value, str) and value.strip():
+        return [value]
+    if isinstance(value, list) and value and all(isinstance(x,str) and x.strip() for x in value):
+        return value
+    raise ValueError('须为非空文字或非空文字列表')
+
+
 class PlanningCase:
     def __init__(self, root):
         self.root = Path(root)
@@ -613,6 +622,14 @@ class PlanningCase:
         for c in j.get('candidates',[]):
             for key in ('supports','counters','costs','fallback','switch_conditions','checkpoint'):
                 if not c.get(key):self.err('judgment.json',c.get('candidate_id','?')+'.'+key,'缺判断依据')
+            for key in ('supports','counters'):
+                if c.get(key):
+                    try:text_items(c[key])
+                    except ValueError as exc:self.err('judgment.json',c.get('candidate_id','?')+'.'+key,str(exc))
+        conditions=j.get('recommendation',{}).get('conditions')
+        if conditions:
+            try:text_items(conditions)
+            except ValueError as exc:self.err('judgment.json','recommendation.conditions',str(exc))
         if self.kind=='grad' and self.case.get('context',{}).get('takes_kaoyan') and self.has_complete_mock():
             pool=self.data.get('candidates.json',{}).get('school_programs',[])
             if not any(x.get('tier')=='相对稳妥' for x in pool):

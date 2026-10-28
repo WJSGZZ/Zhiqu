@@ -128,6 +128,40 @@ class PlanningWorkflowTests(unittest.TestCase):
         self.assertEqual(c.data['calculations.json']['reference_wages_cny']['会计专业人员']['p10'],42000)
         self.assertFalse(any(e.get('value') in (1967,42000,'1,967','42,000') for e in c.evidence.values()))
 
+    def test_sentence_judgments_remain_whole_in_verification_appendix(self):
+        from verify_report import planning_materials
+        for kind,root in self.roots.items():
+            with self.subTest(kind=kind):
+                obj=read(root/'judgment.json');candidate=obj['candidates'][0]
+                candidate['supports']='已有明确的本人经历线索'
+                candidate['counters']='具体岗位原文尚未取得'
+                obj['recommendation']['conditions']='只有书面条件核清后才重新比较'
+                dump(root/'judgment.json',obj)
+                case=PlanningCase(root);self.assertFalse(case.check(7),case.errors)
+                _,refs=assemble(case)
+                trace=read(root/'report_trace.json')
+                materials=planning_materials(case,refs,trace['report_profile'])
+                self.assertEqual(materials['shared_conditions'],['只有书面条件核清后才重新比较'])
+                row=materials['limitations'][0]
+                self.assertEqual(row['claim'],'具体岗位原文尚未取得')
+                self.assertEqual(row['reason'],'已有明确的本人经历线索')
+                self.assertNotIn('；',row['claim'])
+
+    def test_judgment_text_fields_reject_non_text_containers(self):
+        for field in ('supports','counters','conditions'):
+            for bad in ([1],[''],{'text':'不是文字列表'},True):
+                for kind,root in self.roots.items():
+                    with self.subTest(kind=kind,field=field,bad=bad):
+                        obj=read(root/'judgment.json')
+                        original=copy.deepcopy(obj)
+                        if field=='conditions':obj['recommendation'][field]=bad
+                        else:obj['candidates'][0][field]=bad
+                        dump(root/'judgment.json',obj)
+                        try:
+                            errors=PlanningCase(root).check(7)
+                            self.assertTrue(any(field in e and '非空文字' in e for e in errors),errors)
+                        finally:dump(root/'judgment.json',original)
+
     def test_complete_cases_and_existing_calculations_pass(self):
         for kind,root in self.roots.items():
             with self.subTest(kind=kind):

@@ -403,7 +403,7 @@ def verification_appendix_html(materials):
         body += '</tbody></table>'
 
     if evidence:
-        body += '<h4>官方出处与数字</h4>'
+        body += '<h4>'+val(materials.get('numbers_heading','官方出处与数字'))+'</h4>'
         groups={}
         for r in evidence:
             groups.setdefault((r.get('institution',''),r.get('url','')),{}).setdefault(r['evidence_id'],[]).append(r)
