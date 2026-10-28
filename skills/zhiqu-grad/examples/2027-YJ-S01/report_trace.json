@@ -19,7 +19,7 @@
     "planning_workflow.py": "2e8d5eb40e80dbf4e349aba04c9f048d7e8a69375cc238d2f7153a939bd27f7d",
     "operator_check.py": "d99826c1cae9514c665edb0b1b6155ea99a0bce19b99a919b9ada81e0b93c0a1",
     "check_demos.py": "67d4edc1cd737beeb6729783a736e667a97c12d8f7de2de673632d9d5c3370b8",
-    "report.py": "eca4702bb22cafe760dc5252f95fd9c094b14ab9de2b30cccdbffea92524eda4",
+    "report.py": "3605f021c68dc4d2da9d06bf342566e70fb4102da4a2cf636622ff0503586085",
     "render_report.py": "e7dbbef97c3478f4591f34a01ebd0c730e807a1de3c69eca4fea397434dfbc4a",
     "profile_store.py": "35de56c7f84f9ead83540d32cee7d9bd8885611fb25ef39dbc37b7cfa401b088",
     "claim_guards.py": "54bab4d942fafd148190df73cad34805538662b0a152ec5701c8a960e28dbd1d",
@@ -28,7 +28,7 @@
     "unit_validation.py": "9f5df89a101dd684231fe35f8fe931e150127fc698f2ab774b628bc3ffdf093c",
     "reader_language.py": "ccb4d16f5a23fff9e9660c9cf33aa042b81f2e2221dc38bb641079b0d61259b6",
     "claim_check.py": "69fd237635e27c23214fb99e915d3a31afd51bc435dc86de31ca3b7dc9c35a6b",
-    "check_report.py": "282fdd1dfef99dee36b3603f7f2b01c9f65ba4460e2243666b255336b3e20189",
+    "check_report.py": "943648b8c2b778f210550712d225c0b341d361c5c52e2fb751d4bec8d2e60917",
     "authoring_metadata.py": "9ac0328c9a8bdeec672daede766f49f5e9c94c2761ae64e0ec32e2ed8abf404c"
   },
   "numeric_refs": [
@@ -1835,7 +1835,7 @@
   "policy_sha256": {
     "zhiqu-shared/references/unit-families.json": "a535c6ba17dc14fcf1d30d8b5f45691da0ab2f78cb92a30b01a55de41e72c9a0",
     "zhiqu-shared/references/reader-language.json": "247453b7a5c1d0bf4b5d4997d57ee8d32a1cd70327fff2683322bf4c79e5476d",
-    "zhiqu/references/report-guide.md": "0278c07e521721d96450b8fbc707e88e403e04f725083e872957386d2e007955"
+    "zhiqu/references/report-guide.md": "64f07ceae928f3f0f835fed6ee506bb794f9fca61d10bf504524e3b135413857"
   },
   "official_domain_rows": {
     "csust.edu.cn": "39e47846e2477e667b6ff13694e01f300ce171b66ad8e28512fceaafe7022a4c",
@@ -1850,8 +1850,8 @@
     "form": null
   },
   "verification_tools_sha256": {
-    "verify_report.py": "008a50716d1c523376018e4c91280469b83fa9957ce8bf755cce961141d0e596",
-    "verification_calculations.py": "5505b8d65eb9ea0d47ebf4f5321f5953ff0c711c51c615c040a2057e1dc3b3d7"
+    "verify_report.py": "8e5383e8856e121114e311d0280344238122aa5d7ace80402d794e63a8cf38d9",
+    "verification_calculations.py": "24c83966e3bc62642683532ca98d4318d989efd7f5e4444a9c7d9c695accea98"
   },
   "compatibility_verifications": [
     {
@@ -1932,6 +1932,38 @@
       },
       "numeric_refs_unchanged": true,
       "claim_payload_unchanged": true
+    },
+    {
+      "date": "2026-10-29",
+      "kind": "gaokao_only_tool_compatibility",
+      "reason": "仅高考D级来源报告的显示/模拟缺口门禁及高考计划口径复算修补；读研求职代码路径未改。重新组装MD、原始HTML逐字节相同，输入、数字、正文、HTML及PDF指纹均未变；保留原批准人、日期与实际渲染版本，仅登记兼容复验，不冒充新内容复核。",
+      "changed_tools": {
+        "report.py": {
+          "before": "eca4702bb22cafe760dc5252f95fd9c094b14ab9de2b30cccdbffea92524eda4",
+          "after": "3605f021c68dc4d2da9d06bf342566e70fb4102da4a2cf636622ff0503586085"
+        },
+        "check_report.py": {
+          "before": "282fdd1dfef99dee36b3603f7f2b01c9f65ba4460e2243666b255336b3e20189",
+          "after": "943648b8c2b778f210550712d225c0b341d361c5c52e2fb751d4bec8d2e60917"
+        },
+        "verify_report.py": {
+          "before": "008a50716d1c523376018e4c91280469b83fa9957ce8bf755cce961141d0e596",
+          "after": "8e5383e8856e121114e311d0280344238122aa5d7ace80402d794e63a8cf38d9"
+        },
+        "verification_calculations.py": {
+          "before": "5505b8d65eb9ea0d47ebf4f5321f5953ff0c711c51c615c040a2057e1dc3b3d7",
+          "after": "24c83966e3bc62642683532ca98d4318d989efd7f5e4444a9c7d9c695accea98"
+        }
+      },
+      "assembled_markdown_sha256": "5b32adb9f81133bd864cf2d979f5b6fcb4866562f99022ea7414c67342895c2a",
+      "rendered_html_sha256": "fb91f3deec214fbf286ab8f27c95d932f3a0082ce467e549b217b4fff2b9b982",
+      "assembled_ref_count": 297,
+      "original_artifacts": {
+        "report.md": "5b32adb9f81133bd864cf2d979f5b6fcb4866562f99022ea7414c67342895c2a",
+        "report.html": "f5a9d9c3ab5198a65d516abad913651206196b851e3a087720da4374a11f2e36",
+        "2027-YJ-S01-report.pdf": "c70636c53c40ee08a6c685ae2fe3097a6088482efdd8899c55a0506a239b2217"
+      },
+      "previous_trace_sha256": "888cff74d509b52b47083fc5f6252f559057626e4919b09a7c51d51675c0e4ba"
     }
   ]
 }

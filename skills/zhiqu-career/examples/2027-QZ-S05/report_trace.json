@@ -20,7 +20,7 @@
     "planning_workflow.py": "2e8d5eb40e80dbf4e349aba04c9f048d7e8a69375cc238d2f7153a939bd27f7d",
     "operator_check.py": "d99826c1cae9514c665edb0b1b6155ea99a0bce19b99a919b9ada81e0b93c0a1",
     "check_demos.py": "67d4edc1cd737beeb6729783a736e667a97c12d8f7de2de673632d9d5c3370b8",
-    "report.py": "eca4702bb22cafe760dc5252f95fd9c094b14ab9de2b30cccdbffea92524eda4",
+    "report.py": "3605f021c68dc4d2da9d06bf342566e70fb4102da4a2cf636622ff0503586085",
     "render_report.py": "e7dbbef97c3478f4591f34a01ebd0c730e807a1de3c69eca4fea397434dfbc4a",
     "profile_store.py": "35de56c7f84f9ead83540d32cee7d9bd8885611fb25ef39dbc37b7cfa401b088",
     "claim_guards.py": "54bab4d942fafd148190df73cad34805538662b0a152ec5701c8a960e28dbd1d",
@@ -29,7 +29,7 @@
     "unit_validation.py": "9f5df89a101dd684231fe35f8fe931e150127fc698f2ab774b628bc3ffdf093c",
     "reader_language.py": "ccb4d16f5a23fff9e9660c9cf33aa042b81f2e2221dc38bb641079b0d61259b6",
     "claim_check.py": "69fd237635e27c23214fb99e915d3a31afd51bc435dc86de31ca3b7dc9c35a6b",
-    "check_report.py": "282fdd1dfef99dee36b3603f7f2b01c9f65ba4460e2243666b255336b3e20189",
+    "check_report.py": "943648b8c2b778f210550712d225c0b341d361c5c52e2fb751d4bec8d2e60917",
     "authoring_metadata.py": "9ac0328c9a8bdeec672daede766f49f5e9c94c2761ae64e0ec32e2ed8abf404c"
   },
   "numeric_refs": [
@@ -1290,7 +1290,7 @@
   "policy_sha256": {
     "zhiqu-shared/references/unit-families.json": "a535c6ba17dc14fcf1d30d8b5f45691da0ab2f78cb92a30b01a55de41e72c9a0",
     "zhiqu-shared/references/reader-language.json": "247453b7a5c1d0bf4b5d4997d57ee8d32a1cd70327fff2683322bf4c79e5476d",
-    "zhiqu/references/report-guide.md": "0278c07e521721d96450b8fbc707e88e403e04f725083e872957386d2e007955"
+    "zhiqu/references/report-guide.md": "64f07ceae928f3f0f835fed6ee506bb794f9fca61d10bf504524e3b135413857"
   },
   "official_domain_rows": {
     "bm.scs.gov.cn": "a5b2d342d4d1fb2a35210e26189034b4e24c734a3983ace1e4b6a78392d9e043",
@@ -1317,8 +1317,8 @@
     "form": "ab439b1f"
   },
   "verification_tools_sha256": {
-    "verify_report.py": "008a50716d1c523376018e4c91280469b83fa9957ce8bf755cce961141d0e596",
-    "verification_calculations.py": "5505b8d65eb9ea0d47ebf4f5321f5953ff0c711c51c615c040a2057e1dc3b3d7"
+    "verify_report.py": "8e5383e8856e121114e311d0280344238122aa5d7ace80402d794e63a8cf38d9",
+    "verification_calculations.py": "24c83966e3bc62642683532ca98d4318d989efd7f5e4444a9c7d9c695accea98"
   },
   "compatibility_verifications": [
     {
@@ -1399,6 +1399,38 @@
       },
       "numeric_refs_unchanged": true,
       "claim_payload_unchanged": true
+    },
+    {
+      "date": "2026-10-29",
+      "kind": "gaokao_only_tool_compatibility",
+      "reason": "仅高考D级来源报告的显示/模拟缺口门禁及高考计划口径复算修补；读研求职代码路径未改。重新组装MD、原始HTML逐字节相同，输入、数字、正文、HTML及PDF指纹均未变；保留原批准人、日期与实际渲染版本，仅登记兼容复验，不冒充新内容复核。",
+      "changed_tools": {
+        "report.py": {
+          "before": "eca4702bb22cafe760dc5252f95fd9c094b14ab9de2b30cccdbffea92524eda4",
+          "after": "3605f021c68dc4d2da9d06bf342566e70fb4102da4a2cf636622ff0503586085"
+        },
+        "check_report.py": {
+          "before": "282fdd1dfef99dee36b3603f7f2b01c9f65ba4460e2243666b255336b3e20189",
+          "after": "943648b8c2b778f210550712d225c0b341d361c5c52e2fb751d4bec8d2e60917"
+        },
+        "verify_report.py": {
+          "before": "008a50716d1c523376018e4c91280469b83fa9957ce8bf755cce961141d0e596",
+          "after": "8e5383e8856e121114e311d0280344238122aa5d7ace80402d794e63a8cf38d9"
+        },
+        "verification_calculations.py": {
+          "before": "5505b8d65eb9ea0d47ebf4f5321f5953ff0c711c51c615c040a2057e1dc3b3d7",
+          "after": "24c83966e3bc62642683532ca98d4318d989efd7f5e4444a9c7d9c695accea98"
+        }
+      },
+      "assembled_markdown_sha256": "90ff1e8ce1555a081d376dbea69e831d6f8788393724d3db9bdb8189646a6262",
+      "rendered_html_sha256": "58533d0ea502b39624371b3464f7d34f9fb66839f2594be0c9a49afe116b48f3",
+      "assembled_ref_count": 206,
+      "original_artifacts": {
+        "report.md": "90ff1e8ce1555a081d376dbea69e831d6f8788393724d3db9bdb8189646a6262",
+        "report.html": "cff1e3ca14fbc9145f6a1a4fbb3a4f14ae3c3e4544fbdeea5f215321011619d1",
+        "2027-QZ-S05-report.pdf": "a0932485cec61080da0cdf7a8351532db9c99bf17a19c9cb10a14348ab27ff3b"
+      },
+      "previous_trace_sha256": "3aa9438b2bd8ff4ded0ad9b970b7e8b6d4e51c34c33c99ed31a22398a7c67fa8"
     }
   ]
 }

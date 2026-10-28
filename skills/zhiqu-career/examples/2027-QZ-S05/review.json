@@ -494,6 +494,15 @@
         "claim_check.json"
       ],
       "reason": "高考数据库到报告整链路实测：新增高考逐句适配、数据库来源复算、历史代码提示及模拟调研待核门禁；读研求职分支未改。对照上次兼容记录证明重新组装MD、原始HTML、数值引用数量不变，所有既有输入与MD/HTML/PDF逐字节不变。仅登记共享工具兼容复验与快照绑定，不冒充新独立语义复核；原批准人及实际渲染版本保留。"
+    },
+    {
+      "date": "2026-10-29",
+      "by": "Codex（高考工具兼容复验，非独立内容复核）",
+      "files": [
+        "report_trace.json",
+        "claim_check.json"
+      ],
+      "reason": "仅高考D级来源报告的显示/模拟缺口门禁及高考计划口径复算修补；读研求职代码路径未改。重新组装MD、原始HTML逐字节相同，输入、数字、正文、HTML及PDF指纹均未变；保留原批准人、日期与实际渲染版本，仅登记兼容复验，不冒充新内容复核。"
     }
   ],
   "review_history": [
@@ -2761,7 +2770,7 @@
     "calculations.json": "89d7a293fd6780b562866f4871846b19130b0d86e79cb9f9c233e572cbae5b5d",
     "candidates.json": "ea8bbcb101fc7dc899ec1137e869654c3b9e85d79d8229e4de8115418467aeae",
     "case.json": "79136c0287d7e845b2308724e997d90b3b7a805e4fe2843da189774d6ec93a6e",
-    "claim_check.json": "592efcac0f652349870573cfbc1b0b53a0d82b2fd3d0d265c73a37478ffbc780",
+    "claim_check.json": "7807007fe5a5279005da9e0696cf834b0e902264ad2b8983a751abd5a78d947f",
     "directions.json": "2d709b22623617481aefa804b96da5c5d274812758094bb921c173d0466c29df",
     "evidence.json": "8c97b5ec4dd2e295bbf4a8eaa9372acfd30f2fcc1615cc5810525fdbbb596d59",
     "judgment.json": "89e67d8e39d0666399d8b470809425420fb18271c756578790e08248301ec3ff",
@@ -2772,7 +2781,7 @@
     "profile_parse.json": "abe812515ea2a27d78209f08c28c8bdde0a5c10d1672ef0983d66d68c6eece1a",
     "report.html": "cff1e3ca14fbc9145f6a1a4fbb3a4f14ae3c3e4544fbdeea5f215321011619d1",
     "report.md": "90ff1e8ce1555a081d376dbea69e831d6f8788393724d3db9bdb8189646a6262",
-    "report_trace.json": "3aa9438b2bd8ff4ded0ad9b970b7e8b6d4e51c34c33c99ed31a22398a7c67fa8",
+    "report_trace.json": "4e766de1c59d7ff09b9526ff4809afcb5353e239d9192f264e3abbd638d1ce13",
     "rules_check.json": "b45b1313cf295a6e320d32afce13a0b93b9b0e54e8b46d8d3cf2d6329732a40b"
   }
 }
