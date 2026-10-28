@@ -401,8 +401,25 @@ def build_parse(raw,kind):
         fields.append({'field':name,'category':category,'status':'given' if known else 'unknown','value':value,
                        'quote':json.dumps(values,ensure_ascii=False) if values else '',
                        'locator':'画像 JSON 题目：'+', '.join(values),'confirmed':False,'answer_refs':list(values)})
-        if not known:missing.append({'field':name,'question':'请补充或确认「'+name+'」','impact':'相关判断保留未知，不能当作没有资格','ask':'本人'})
-    return {'schema_version':1,'source':{'kind':kind,'form':data['form'],'filled_at':data['filled_at'],'raw_sha256':sha(raw)},'questionnaire':data,'fields':fields,'missing':[x['field'] for x in missing] if kind=='gaokao' else missing}
+        if not known:missing.append({'field':name,'question':'请补充或确认「'+name+'」','impact':'相关判断保留未知，不能当作没有资格','ask':'本人','answer_refs':refs})
+    # Visible required omissions outside FIELD_MAP still need an operator question.
+    # They remain gaps, not invented answers or an automatic refusal to plan.
+    required_gaps=[]
+    for section in data['sections']:
+        for item in section['items']:
+            if item.get('required') is True and item.get('status')=='未填':
+                required_gaps.append({'id':item['id'],'question':item['q'],'section':section['title']})
+                existing=next((m for m in missing if item['id'] in m.get('answer_refs',[])),None)
+                if existing is not None:
+                    existing.setdefault('unanswered_required',[]).append(item['id'])
+                    existing.setdefault('unanswered_questions',[]).append(item['q'])
+                    existing['question']='；'.join(existing['unanswered_questions'])
+                else:
+                    missing.append({'field':item['q'],'question':item['q'],
+                                    'impact':'可见必答尚未提供；相关条件不能认定已满足',
+                                    'ask':'本人','answer_refs':[item['id']],
+                                    'unanswered_required':[item['id']]})
+    return {'schema_version':1,'source':{'kind':kind,'form':data['form'],'filled_at':data['filled_at'],'raw_sha256':sha(raw)},'questionnaire':data,'fields':fields,'required_gaps':required_gaps,'missing':[x['field'] for x in missing] if kind=='gaokao' else missing}
 
 
 def active_profile(case_dir):
@@ -451,6 +468,17 @@ def alignment_errors(case_dir):
         fields={f['field']:f for f in parsed.get('questionnaire_fields',parsed.get('fields',[]))}
         for f in expected['fields']:
             if fields.get(f['field'],{}).get('value')!=f['value'] or fields.get(f['field'],{}).get('status')!=f['status']:return ['结构化画像字段与原始作答不一致：'+f['field']]
+        unanswered={i['id'] for sec in data['sections'] for i in sec['items']
+                    if i.get('required') is True and i.get('status')=='未填'}
+        if unanswered and parsed.get('required_gaps')!=expected['required_gaps']:
+            return ['画像解析遗漏或改动可见必答原题明细，须重新解析并保留缺口']
+        if kind=='gaokao':
+            covered=set(parsed.get('missing',[]))
+            expected_labels=set(expected['missing'])
+            if unanswered and not expected_labels<=covered:return ['画像解析遗漏可见必答未填项，须重新解析并保留缺口']
+        else:
+            covered={ref for m in parsed.get('missing',[]) if isinstance(m,dict) for ref in m.get('answer_refs',[])}
+            if not unanswered<=covered:return ['画像解析遗漏可见必答未填项，须重新解析并保留缺口']
         if case.get('profile'):
             info,_=latest(folder.parent,folder.name)
             if {k:v for k,v in case['profile'].items() if k!='integrity'}!={k:v for k,v in info.items() if k!='integrity'}:return ['case.json 当前画像版本与最新存档不一致']

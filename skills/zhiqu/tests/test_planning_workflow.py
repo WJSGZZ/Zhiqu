@@ -274,6 +274,50 @@ class PlanningWorkflowTests(unittest.TestCase):
         self.change(root,'case.json',fail)
         self.assertTrue(any('情景重复' in e for e in run(root,6).errors))
 
+    def test_unrequested_source_stays_a_gap_not_verified_fact(self):
+        for kind,root in self.roots.items():
+            def mark(j):
+                item=j['items'][0];item.update(availability='not_requested',status='unretrieved',gap='尚未请求；当前只列调查入口')
+            self.change(root,'evidence.json',mark)
+            self.assertFalse(any('尚未请求的来源' in e for e in run(root,5).errors))
+            self.change(root,'evidence.json',lambda j:j['items'][0].update(status='verified'))
+            self.assertTrue(any('尚未请求的来源' in e for e in run(root,5).errors))
+            self.change(root,'evidence.json',lambda j:j['items'][0].update(availability='made_up'))
+            self.assertTrue(any('来源可得状态' in e for e in run(root,5).errors))
+
+    def test_generation_warns_about_unpresented_narrative_without_inserting_it(self):
+        from planning_report import warn_unpresented_narrative, assemble
+        from contextlib import redirect_stderr
+        from io import StringIO
+        for kind,root in self.roots.items():
+            self.change(root,'narrative.json',lambda j:j['sections']['03']['analysis'].append(
+                {'type':'analysis','content':{'text':'这段新增但还没登记展示的文字'},'evidence_refs':[]}))
+            case=PlanningCase(root);index=len(case.data['narrative.json']['sections']['03']['analysis'])-1
+            ref='narrative.json#/sections/03/analysis/'+str(index)
+            out=StringIO()
+            with redirect_stderr(out):unused=warn_unpresented_narrative(case)
+            self.assertIn(ref,unused);self.assertIn(ref,out.getvalue())
+            self.assertIn('未进入报告',out.getvalue());self.assertNotIn('这段新增但还没登记展示的文字',assemble(case)[0])
+            self.change(root,'judgment.json',lambda j:j['presentation']['03'].append({'slot':'analysis','ref':ref}))
+            with redirect_stderr(StringIO()):self.assertNotIn(ref,warn_unpresented_narrative(PlanningCase(root)))
+
+    def test_unpresented_warning_includes_inactive_narrative_slots(self):
+        from planning_report import warn_unpresented_narrative
+        from contextlib import redirect_stderr
+        from io import StringIO
+        for kind,root in self.roots.items():
+            sid='04' if kind=='grad' else '05'
+            ref='narrative.json#/sections/'+sid+'/unknown_explanation'
+            self.change(root,'narrative.json',lambda j:j['sections'][sid].update(unknown_explanation={
+                'type':'unknown_explanation','content':{'missing_information':'待核','retrieval_plan':'查原文','decision_changes':'补后重评'},'evidence_refs':[]}))
+            def inactive(j):
+                j['presentation'][sid]=[e for e in j['presentation'][sid] if e['slot']!='unknown_explanation']+[{'slot':'unknown_explanation','ref':ref}]
+                for cell in j['matrix']['cells']:cell['status']='known'
+            self.change(root,'judgment.json',inactive)
+            with redirect_stderr(StringIO()):self.assertIn(ref,warn_unpresented_narrative(PlanningCase(root)))
+            self.change(root,'judgment.json',lambda j:[cell.update(status='unknown') for cell in j['matrix']['cells']])
+            with redirect_stderr(StringIO()):self.assertNotIn(ref,warn_unpresented_narrative(PlanningCase(root)))
+
     def test_unconfirmed_numeric_weights_are_rejected(self):
         for kind,root in self.roots.items():
             for confirmed in (False, None, 'false', '未确认', 1, ['已确认'], {'value': True}):

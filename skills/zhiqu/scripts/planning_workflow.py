@@ -534,6 +534,10 @@ class PlanningCase:
             if e.get('grade')=='官方' and not re.match(r'https?://',e.get('source',{}).get('url','')):self.err('evidence.json',e['id'],'官方网址为空')
             if day(e['retrieved_on'])>now or day(e['review_due'])<day(e['retrieved_on']):self.err('evidence.json',e['id'],'日期前后错误')
             if day(e['review_due'])<now:self.err('evidence.json',e['id'],'证据复核期限早于报告as_of，已过期')
+            if 'availability' in e and e['availability'] not in ('available','not_published','not_found','blocked','not_requested'):
+                self.err('evidence.json',e['id'],'来源可得状态错误')
+            if e.get('availability')=='not_requested' and e.get('status')!='unretrieved':
+                self.err('evidence.json',e['id'],'尚未请求的来源不能标已核实')
             if e.get('status')=='unretrieved' and not e.get('gap'):self.err('evidence.json',e['id'],'未取到缺原因')
             if e.get('status') not in ('verified','unretrieved'):self.err('evidence.json',e['id'],'证据状态错误')
             if e.get('status')=='verified' and not e.get('excerpt'):self.err('evidence.json',e['id'],'缺原文定位/关键摘录')

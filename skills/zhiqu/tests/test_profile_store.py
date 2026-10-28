@@ -198,6 +198,45 @@ class ProfileStore(unittest.TestCase):
         self.assertFalse(result['deleted'])
         self.assertTrue(any('人工解析' in x for x in result['warnings']))
 
+    def test_visible_required_omissions_outside_main_fields_are_retained(self):
+        for kind in ('grad','career','gaokao'):
+            with self.subTest(kind=kind):
+                data=document(kind=kind,items=[{'id':'major','q':'专业','a':'软件工程','status':'已答'},
+                    {'id':'available_time','q':'能投入多少时间？','required':True,'status':'未填'},
+                    {'id':'optional_note','q':'其他说明','status':'未填'}])
+                data.update(collapsed=['hidden_question'],counts={'visible':3,'answered':1})
+                data['checksum']=store.checksum(data)
+                parsed=store.build_parse(json.dumps(data,ensure_ascii=False),kind)
+                self.assertIn('能投入多少时间？',str(parsed['missing']))
+                self.assertNotIn('其他说明',str(parsed['missing']))
+                self.assertNotIn('hidden_question',str(parsed['missing']))
+                if kind!='gaokao':
+                    row=next(m for m in parsed['missing'] if m['field']=='能投入多少时间？')
+                    self.assertEqual(row['answer_refs'],['available_time'])
+
+    def test_required_gap_details_keep_mapped_questions_and_all_ids(self):
+        cases={'grad':[('gpa','你的均分和满分分别是多少？')],
+               'career':[('salary_known','你是否知道最低月薪？')],
+               'gaokao':[('money','每年学费上限是多少？'),('four_year_budget','本科总预算是多少？')]}
+        for kind,pairs in cases.items():
+            with self.subTest(kind=kind):
+                data=document(kind=kind,items=[dict(id=k,q=q,required=True,status='未填') for k,q in pairs])
+                data.update(collapsed=[],counts={'visible':len(pairs),'answered':0});data['checksum']=store.checksum(data)
+                parsed=store.build_parse(json.dumps(data,ensure_ascii=False),kind)
+                self.assertEqual(parsed['required_gaps'],[{'id':k,'question':q,'section':'模拟登记'}for k,q in pairs])
+                if kind!='gaokao':self.assertTrue(any(q in m['question'] for m in parsed['missing'] for k,q in pairs))
+                else:self.assertTrue(all(isinstance(m,str)for m in parsed['missing']))
+
+    def test_alignment_rejects_erasing_required_question_gaps(self):
+        data=document(items=[{'id':'major','q':'专业','a':'软件工程','status':'已答'},
+            {'id':'available_time','q':'能投入多少时间？','required':True,'status':'未填'}])
+        data.update(collapsed=[],counts={'visible':2,'answered':1});data['checksum']=store.checksum(data)
+        store.ingest(self.root,self.case,json.dumps(data,ensure_ascii=False));folder=self.root/self.case
+        store.prepare(folder);self.assertEqual(store.alignment_errors(folder),[])
+        parsed=json.loads((folder/'profile_parse.json').read_text());parsed['missing']=[m for m in parsed['missing'] if m['field']!='能投入多少时间？']
+        store.dump(folder/'profile_parse.json',parsed)
+        self.assertTrue(any('可见必答' in e for e in store.alignment_errors(folder)))
+
     def test_parse_json_returns_exact_data_and_supports_old_data_line(self):
         data = document(items=[{'id': 'money', 'q': '年度预算', 'a': '不想说'}])
         data['derived'] = {'bazi': '模拟排盘文字，不用于现实资格'}

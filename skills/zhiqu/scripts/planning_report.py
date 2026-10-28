@@ -106,6 +106,29 @@ def input_snapshot(case):
     return {f:sha(case.root/f) for f in (*FILES,*source_files(case.root))}
 
 
+def warn_unpresented_narrative(case):
+    # Retained source text is not necessarily intended for the current report.
+    shown=set()
+    for section in case.contract['sections']:
+        slots={slot['key']:slot for slot in section['slots']}
+        for entry in case.nodes().get(section['id'],[]):
+            slot=slots.get(entry.get('slot'))
+            if slot is not None and case.active(slot):shown.add(entry.get('ref'))
+    unused=[]
+    def visit(value,path):
+        if isinstance(value,dict):
+            if 'type' in value and 'content' in value:
+                ref='narrative.json#'+path
+                if ref not in shown:unused.append(ref)
+                return
+            for key,child in value.items():visit(child,path+'/'+key.replace('~','~0').replace('/','~1'))
+        elif isinstance(value,list):
+            for i,child in enumerate(value):visit(child,path+'/'+str(i))
+    visit(case.data.get('narrative.json',{}).get('sections',{}),'/sections')
+    if unused:print('提醒：以下叙述节点未进入报告（含未激活的条件槽），请确认是否有意保留或遗漏；不会自动纳入：'+'、'.join(unused),file=sys.stderr)
+    return unused
+
+
 def generate(root, html_only=False, profile_version=None):
     import render_report
     import check_report
@@ -119,6 +142,7 @@ def generate(root, html_only=False, profile_version=None):
     if len(re.sub(r'\{\{[^}]*\}\}','0',case.case.get('report_meta',{}).get('conclusion','')))<60:
         errors.append('case.json report_meta.conclusion：封面一句话结论太短；写清本人情况与在乎什么、建议是什么（带关键数字）、先做什么，两三句')
     if errors:raise ValueError('\n'.join(errors))
+    warn_unpresented_narrative(case)
     markdown,trace=assemble(case)
     document=render_report.render(markdown)[0]
     materials=planning_materials(case,trace,binding,warning)

@@ -4,7 +4,7 @@
 
 操控者是交付报告前亲自核查关键信息的人。
 
-本总纲约定三版共用的证据、数字、操控者核查与复核方法；业务阶段和各节内容只在下表的对应文件定义。
+约定三版共用的证据、数字、操控者核查与复核方法；业务阶段和各节内容只在下表的对应文件定义。
 
 | 版本 | 阶段表 | 内容合同与写作指南 |
 |---|---|---|
@@ -48,7 +48,7 @@ JSON 格式、旧文字兼容和本机版本库统一见 [画像输入与本机�
 
 出报告前，对读研候选学校先跑[按需取数工具](kaoyan-on-demand.md)：先查库，缺项再限时现取（每校默认30分钟）。常问规则和分数线入库复用；已有数据须在复核期内。取证与不依赖证据的写作并行；只取影响主结论的内容，超时记“未取到：时间限制”，不编数字。
 
-所有报告（含示例）直接生成为 `<报告号>-report.pdf`，不另存副本；发给客户的就是这份。
+报告（含示例）直接生成为 `<报告号>-report.pdf`，不另存副本。
 
 ### 高考先查库再补官网
 
@@ -99,7 +99,7 @@ CSV 的 `data_provenance` 按 rank/score/plan 记原值、来源、状态、范�
 | `id`、`claim` | 本案例内稳定唯一 ID（如 E001），一条原子说法；同一原文可关联多候选，不复制成矛盾事实 |
 | `value`、`unit` | 单个原始数值、字符串、日期或专业代码；不得用字典或列表，原单位；纯定性或未取到用 null 并说明，不能填 0。`personal_input` 必须另有 `registration_ref`（如 `profile_parse.json#/fields/8/value`）精确指向本人 given 值；值和类型一致，且不得带官方网址或官方机构名 |
 | `source.organization`、`source.url`、`source.locator` | 官方事实须有可定位的 http/https 官方 URL 与页码/表行/段落；个人输入的 URL 可为空，但须有画像节名或本机原件定位 |
-| `availability` | available / not_published / not_found / blocked；后二类说明已查入口和失败原因，不把未查到说成不存在 |
+| `availability` | available / not_published / not_found / blocked / not_requested；未请求用not_requested且status=unretrieved；已查未取到说明入口和失败，不把未知说成不存在 |
 | `published_on`、`publication_status` | 有日期填 YYYY-MM-DD；原页未署日期填 null + undated，不从 URL 猜日期；未发布与未取到分别在 availability 中说明 |
 | `retrieved_on`、`retrieval_method`、`verified_on`、`review_due` | 日期 YYYY-MM-DD，取文方式用上表枚举；未取到也记本次尝试日期及下次核对期限 |
 | `grade`、`status`、`scope` | 上表等级；status 为 verified / unretrieved；scope 明确年份、学校/学院/岗位、计划和学习方式等适用边界 |
@@ -166,7 +166,7 @@ rules_check.json顶层用 `{schema_version, as_of, items}`，每项来源通过e
 
 - `narrative.json.sections` 按节号存受控的 `lead`、`analysis`、`core_points`、`unknown_explanation`、`disclaimer`。lead和disclaimer的content为`{text}`；analysis节点可为paragraph、heading、list或callout，内容分别为text、items或title+items；核心结论用items数组，每项title+text；未知说明的content有missing_information、retrieval_plan、decision_changes。禁止正文嵌入整章标题、表格和组件代码。
 - 表格、图、路线卡、日期行动等是结构化节点，放在合同登记的对应阶段 `report_blocks` 内，不能放进叙述。表格content用columns+rows；图另含title、caption、unit及有效来源。行动节点content.items每项text+date；日期允许引用登记检查点或官方证据。图名与读图说明随图节点保存，避免另一份文稿重复维护。
-- 阶段业务记录保留候选、硬条件、判断与依据；presentation只决定如何展示这些记录，不得另填相反的资格或数值。组装器检查类型、来源位置、数量和引用，语义是否被准确概括仍由复核确认。
+- presentation决定展示哪些节点，不会自动带入新加叙述；生成时提示未展示节点，须确认是否遗漏。阶段记录与展示不得资格或数值相反；组装器核类型、位置、数量和引用，语义由独立复核确认。
 - 现有计算保留原键；`case.json.calculation_plan` 登记engine、inputs、dependencies与scenarios。旧案例使用已注册的legacy_demo算法，inputs逐个指向既有case字段的证据或本人输入，必须与实际计算值一致；dependencies记录计算键的证据依赖。通用算法仅支持已注册的sum/product/difference/ratio，operations写inputs引用和output键，不接受任意表达式。情景记录changed_inputs、why、output_ref及decision_effect，由已注册算法复算，不能以手填说明替代算术。
 
 组装器产物是供核查的报告；`case_check.py --stage 10 --delivery` 才检查操控者完成和独立批准，生成成功不等于获准向真实客户交付。
