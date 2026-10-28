@@ -1,0 +1,396 @@
+{
+  "schema_version": 1,
+  "purpose": "真实踩坑的离线回归索引；最小输入与断言只存于现有测试fixture，不重复另抄数据或另造验证引擎。",
+  "cases": [
+    {
+      "id": "gk-score-only-rank",
+      "domain": "高考",
+      "test": "test_legacy_derived_rank_gate.LegacyRankGateTests.test_missing_new_key_does_not_restore_declared_cumulative_rank",
+      "input_fixture": {
+        "file": "test_legacy_derived_rank_gate.py",
+        "symbols": [
+          "legacy_fact",
+          "LegacyRankGateTests.test_missing_new_key_does_not_restore_declared_cumulative_rank"
+        ]
+      },
+      "expected": "已声明原格式但缺字段清单的累计推算位次，不得进模型；原值不改。",
+      "provenance": {
+        "commit": "77fd27c",
+        "file": "skills/zhiqu/tests/test_legacy_derived_rank_gate.py",
+        "basis": "项目实际缺陷修补后的合成最小回归；不等同重新核验原件。"
+      }
+    },
+    {
+      "id": "gk-middle-gap",
+      "domain": "高考",
+      "test": "test_gaokao_db_export_yfyd.CdfExportTests.test_missing_middle_row_is_not_interpolated",
+      "input_fixture": {
+        "file": "test_gaokao_db_export_yfyd.py",
+        "symbols": [
+          "CdfExportTests.setUp",
+          "CdfExportTests.test_missing_middle_row_is_not_interpolated"
+        ]
+      },
+      "expected": "原表691分/原行5缺失，查询691或跨缺口位次须报缺，690原格仍可查。",
+      "provenance": {
+        "commit": "c7d0914",
+        "file": "skills/zhiqu/tests/test_gaokao_db_export_yfyd.py",
+        "basis": "项目实际缺陷修补后的合成最小回归；不等同重新核验原件。"
+      }
+    },
+    {
+      "id": "gk-top-bucket",
+      "domain": "高考",
+      "test": "test_gaokao_db_export_yfyd.CdfExportTests.test_aggregate_original_label_and_operator_remain",
+      "input_fixture": {
+        "file": "test_gaokao_db_export_yfyd.py",
+        "symbols": [
+          "CdfExportTests.setUp",
+          "CdfExportTests.test_aggregate_original_label_and_operator_remain"
+        ]
+      },
+      "expected": "683及以上保留合并档；不能拆成683单分或从该档插值，682原格正常。",
+      "provenance": {
+        "commit": "c7d0914",
+        "file": "skills/zhiqu/tests/test_gaokao_db_export_yfyd.py",
+        "basis": "项目实际缺陷修补后的合成最小回归；不等同重新核验原件。"
+      }
+    },
+    {
+      "id": "gk-official-priority",
+      "domain": "高考",
+      "test": "test_gaokao_db_export.GaokaoDbExportTests.test_incomparable_vendor_scope_cannot_block_unique_original",
+      "input_fixture": {
+        "file": "test_gaokao_db_export.py",
+        "symbols": [
+          "record",
+          "GaokaoDbExportTests.test_incomparable_vendor_scope_cannot_block_unique_original"
+        ]
+      },
+      "expected": "不同范围第三方不能阻断唯一同口径官方原行，也不能充当官方补丁。",
+      "provenance": {
+        "commit": "07e5783",
+        "file": "skills/zhiqu/tests/test_gaokao_db_export.py",
+        "basis": "项目实际缺陷修补后的合成最小回归；不等同重新核验原件。"
+      }
+    },
+    {
+      "id": "gk-selection-unknown",
+      "domain": "高考",
+      "test": "test_gaokao_db_export.GaokaoDbExportTests.test_official_missing_requirement_is_not_filled_by_vendor",
+      "input_fixture": {
+        "file": "test_gaokao_db_export.py",
+        "symbols": [
+          "record",
+          "GaokaoDbExportTests.test_official_missing_requirement_is_not_filled_by_vendor"
+        ]
+      },
+      "expected": "官方未给选科保持待核，不借第三方选科补成已核。",
+      "provenance": {
+        "commit": "07e5783",
+        "file": "skills/zhiqu/tests/test_gaokao_db_export.py",
+        "basis": "项目实际缺陷修补后的合成最小回归；不等同重新核验原件。"
+      }
+    },
+    {
+      "id": "gk-original-status",
+      "domain": "高考",
+      "test": "test_gaokao_db_export.GaokaoDbExportTests.test_derived_official_rank_cannot_certify_matching_vendor",
+      "input_fixture": {
+        "file": "test_gaokao_db_export.py",
+        "symbols": [
+          "record",
+          "GaokaoDbExportTests.test_derived_official_rank_cannot_certify_matching_vendor"
+        ]
+      },
+      "expected": "推算的官方值不能把相同第三方位次升级为官方一致。",
+      "provenance": {
+        "commit": "fdbc260",
+        "file": "skills/zhiqu/tests/test_gaokao_db_export.py",
+        "basis": "项目实际缺陷修补后的合成最小回归；不等同重新核验原件。"
+      }
+    },
+    {
+      "id": "gk-ambiguous-header",
+      "domain": "高考",
+      "test": "test_gaokao_db_export.OriginalHeaderScopeTests.test_unproved_or_malformed_header_does_not_fill_batch",
+      "input_fixture": {
+        "file": "test_gaokao_db_export.py",
+        "symbols": [
+          "record",
+          "OriginalHeaderScopeTests.setUp",
+          "OriginalHeaderScopeTests.test_unproved_or_malformed_header_does_not_fill_batch"
+        ]
+      },
+      "expected": "缺摘录、缺定位或格式损坏的表头凭据不得填批次，相关行不导出。",
+      "provenance": {
+        "commit": "e2ca0ee",
+        "file": "skills/zhiqu/tests/test_gaokao_db_export.py",
+        "basis": "项目实际缺陷修补后的合成最小回归；不等同重新核验原件。"
+      }
+    },
+    {
+      "id": "gk-analogous-header-is-not-proof",
+      "domain": "高考",
+      "test": "test_gaokao_db_export.OriginalHeaderScopeTests.test_analogous_header_and_unbound_legacy_locator_are_not_original_proof",
+      "input_fixture": {
+        "file": "test_gaokao_db_export.py",
+        "symbols": [
+          "OriginalHeaderScopeTests.setUp",
+          "OriginalHeaderScopeTests.test_analogous_header_and_unbound_legacy_locator_are_not_original_proof"
+        ]
+      },
+      "expected": "“原表或同站同类”的定位说明、错误指纹或未绑定官方原件指纹都不能冒充本源原表证据。",
+      "provenance": {
+        "commit": "7983485",
+        "file": "skills/zhiqu/tests/test_gaokao_db_export.py",
+        "basis": "此提交引入同站同类定位误当原件证明的回归；最小输入和断言在当前fixture中，不是重新读原件。"
+      }
+    },
+    {
+      "id": "gk-plan-year",
+      "domain": "高考",
+      "test": "test_pool_plan_scope.PoolPlanScopeTests.test_changed_plan_does_not_borrow_old_year",
+      "input_fixture": {
+        "file": "test_pool_plan_scope.py",
+        "symbols": [
+          "PoolPlanScopeTests.setUp",
+          "PoolPlanScopeTests.test_changed_plan_does_not_borrow_old_year"
+        ]
+      },
+      "expected": "计划类型改变不跨年借值，保留逐年口径。",
+      "provenance": {
+        "commit": "48d3258",
+        "file": "skills/zhiqu/tests/test_pool_plan_scope.py",
+        "basis": "项目实际缺陷修补后的合成最小回归；不等同重新核验原件。"
+      }
+    },
+    {
+      "id": "gk-empty-plan-preserved",
+      "domain": "高考",
+      "test": "test_pool_plan_scope.PoolPlanScopeTests.test_declared_empty_plan_fields_survive_optimization",
+      "input_fixture": {
+        "file": "test_pool_plan_scope.py",
+        "symbols": [
+          "PoolPlanScopeTests.setUp",
+          "PoolPlanScopeTests.test_declared_empty_plan_fields_survive_optimization"
+        ]
+      },
+      "expected": "明确给出的空计划列通过优化仍保留为空，不能当作不存在或默认为普通。",
+      "provenance": {
+        "commit": "48d3258",
+        "file": "skills/zhiqu/tests/test_pool_plan_scope.py",
+        "basis": "项目实际缺陷修补后的合成最小回归；不等同重新核验原件。"
+      }
+    },
+    {
+      "id": "gk-major-group-ambiguity",
+      "domain": "高考",
+      "test": "test_export_grain_diagnostics.GrainDiagnosticsTests.test_legacy_major_column_requires_explicit_semantics",
+      "input_fixture": {
+        "file": "test_export_grain_diagnostics.py",
+        "symbols": [
+          "GrainDiagnosticsTests.test_legacy_major_column_requires_explicit_semantics"
+        ]
+      },
+      "expected": "有组号不等于组线；旧major列语义未知时拒导，明确专业/选科列才按对应粒度处理。",
+      "provenance": {
+        "commit": "3c56252",
+        "file": "skills/zhiqu/tests/test_export_grain_diagnostics.py",
+        "basis": "项目实际缺陷修补后的合成最小回归；不等同重新核验原件。"
+      }
+    },
+    {
+      "id": "gk-pdf-plan-replay",
+      "domain": "高考",
+      "test": "test_verification_calculations.GaokaoVerificationTests.test_plan_scope_fields_replayed_from_csv_including_explicit_empty",
+      "input_fixture": {
+        "file": "test_verification_calculations.py",
+        "symbols": [
+          "GaokaoVerificationTests.test_plan_scope_fields_replayed_from_csv_including_explicit_empty"
+        ]
+      },
+      "expected": "PDF离线复算保留计划及原招考类型（含空值），篡改任一列应拒绝。",
+      "provenance": {
+        "commit": "94c3b6c",
+        "file": "skills/zhiqu/tests/test_verification_calculations.py",
+        "basis": "项目实际缺陷修补后的合成最小回归；不等同重新核验原件。"
+      }
+    },
+    {
+      "id": "report-d-hidden-probability",
+      "domain": "报告",
+      "test": "test_report_provenance.ReportProvenanceTests.test_d_does_not_draw_probability_weighted_strategy_with_negative_baseline",
+      "input_fixture": {
+        "file": "test_report_provenance.py",
+        "symbols": [
+          "ReportProvenanceTests.setUp",
+          "ReportProvenanceTests.test_d_does_not_draw_probability_weighted_strategy_with_negative_baseline"
+        ]
+      },
+      "expected": "D级来源报告不调用概率色条或加权满意度图；负基线不应让渲染崩溃，也不把零落空当安全。",
+      "provenance": {
+        "commit": "94c3b6c",
+        "file": "skills/zhiqu/tests/test_report_provenance.py",
+        "basis": "项目实际缺陷修补后的合成最小回归；不等同重新核验原件。"
+      }
+    },
+    {
+      "id": "report-d-code-and-adjustment",
+      "domain": "报告",
+      "test": "test_report_provenance.ReportProvenanceTests.test_d_code_reference_is_not_a_fill_instruction_or_adjustment_consent",
+      "input_fixture": {
+        "file": "test_report_provenance.py",
+        "symbols": [
+          "ReportProvenanceTests.setUp",
+          "ReportProvenanceTests.test_d_code_reference_is_not_a_fill_instruction_or_adjustment_consent"
+        ]
+      },
+      "expected": "历史代码不作直接录入指令，专业及资格未核时调剂选择须待本人确认，HTML/CSV一致。",
+      "provenance": {
+        "commit": "94c3b6c",
+        "file": "skills/zhiqu/tests/test_report_provenance.py",
+        "basis": "项目实际缺陷修补后的合成最小回归；不等同重新核验原件。"
+      }
+    },
+    {
+      "id": "report-d-visible-audit",
+      "domain": "报告",
+      "test": "test_report_provenance.ReportProvenanceTests.test_d_appendix_keeps_model_numbers_in_attachments_not_visible_table",
+      "input_fixture": {
+        "file": "test_report_provenance.py",
+        "symbols": [
+          "ReportProvenanceTests.setUp",
+          "ReportProvenanceTests.test_d_appendix_keeps_model_numbers_in_attachments_not_visible_table"
+        ]
+      },
+      "expected": "D级核对材料不列未经验证的模型概率；原result对象不改，B路径仍保留总概率核对。",
+      "provenance": {
+        "commit": "94c3b6c",
+        "file": "skills/zhiqu/tests/test_report_provenance.py",
+        "basis": "项目实际缺陷修补后的合成最小回归；不等同重新核验原件。"
+      }
+    },
+    {
+      "id": "report-mode-binding",
+      "domain": "报告",
+      "test": "test_case_workflow.GradeWording.test_stage7_and_renderer_enforce_registered_mode",
+      "input_fixture": {
+        "file": "test_case_workflow.py",
+        "symbols": [
+          "GradeWording.test_stage7_and_renderer_enforce_registered_mode"
+        ]
+      },
+      "expected": "正式案例不能用report.meta的模拟声明绕保底门禁；阶段7及渲染入口都拒绝并不写输出。",
+      "provenance": {
+        "commit": "94c3b6c",
+        "file": "skills/zhiqu/tests/test_case_workflow.py",
+        "basis": "项目实际缺陷修补后的合成最小回归；不等同重新核验原件。"
+      }
+    },
+    {
+      "id": "report-html-pdf-sync",
+      "domain": "报告",
+      "test": "test_report_provenance.ReportProvenanceTests.test_pdf_html_sync_binds_exact_printed_document_without_losing_pdf_digest",
+      "input_fixture": {
+        "file": "test_report_provenance.py",
+        "symbols": [
+          "ReportProvenanceTests.setUp",
+          "ReportProvenanceTests.test_pdf_html_sync_binds_exact_printed_document_without_losing_pdf_digest"
+        ]
+      },
+      "expected": "案例HTML必须与实际打印文档完全一致，追踪绑定其指纹且保留PDF及输入指纹。",
+      "provenance": {
+        "commit": "94c3b6c",
+        "file": "skills/zhiqu/tests/test_report_provenance.py",
+        "basis": "项目实际缺陷修补后的合成最小回归；不等同重新核验原件。"
+      }
+    },
+    {
+      "id": "ky-stats-n1",
+      "domain": "考研",
+      "test": "test_ingest_kaoyan_verified_stats.VerifiedAnonymousStatsTest.test_single_person_group_rejected",
+      "input_fixture": {
+        "file": "test_ingest_kaoyan_verified_stats.py",
+        "symbols": [
+          "VerifiedAnonymousStatsTest.setUp",
+          "VerifiedAnonymousStatsTest.test_single_person_group_rejected"
+        ]
+      },
+      "expected": "n=1拒入匿名分布表，不产生业务行。",
+      "provenance": {
+        "commit": "1866ae5",
+        "file": "skills/zhiqu/tests/test_ingest_kaoyan_verified_stats.py",
+        "basis": "项目实际缺陷修补后的合成最小回归；不等同重新核验原件。"
+      }
+    },
+    {
+      "id": "ky-stats-n2",
+      "domain": "考研",
+      "test": "test_ingest_kaoyan_verified_stats.VerifiedAnonymousStatsTest.test_two_person_group_rejected",
+      "input_fixture": {
+        "file": "test_ingest_kaoyan_verified_stats.py",
+        "symbols": [
+          "VerifiedAnonymousStatsTest.setUp",
+          "VerifiedAnonymousStatsTest.test_two_person_group_rejected"
+        ]
+      },
+      "expected": "n=2拒入匿名分布表，不产生业务行。",
+      "provenance": {
+        "commit": "1866ae5",
+        "file": "skills/zhiqu/tests/test_ingest_kaoyan_verified_stats.py",
+        "basis": "项目实际缺陷修补后的合成最小回归；不等同重新核验原件。"
+      }
+    },
+    {
+      "id": "ky-file-proof-failure",
+      "domain": "考研",
+      "test": "test_ingest_kaoyan_verified_stats.VerifiedAnonymousStatsTest.test_incomplete_or_failed_file_is_rejected",
+      "input_fixture": {
+        "file": "test_ingest_kaoyan_verified_stats.py",
+        "symbols": [
+          "VerifiedAnonymousStatsTest.setUp",
+          "VerifiedAnonymousStatsTest.test_incomplete_or_failed_file_is_rejected"
+        ]
+      },
+      "expected": "两读不一致、抽核不足或失败、总分口径不明及文件未完整证明均拒绝整份入库。",
+      "provenance": {
+        "commit": "822e69c",
+        "file": "skills/zhiqu/tests/test_ingest_kaoyan_verified_stats.py",
+        "basis": "该提交引入文件完整性/两读/抽核拒收回归；1866ae5因匿名组下限改为3人适配最小输入。输入和断言以当前fixture为准，不等同重核原件。"
+      }
+    },
+    {
+      "id": "ky-no-individual-input",
+      "domain": "考研",
+      "test": "test_ingest_kaoyan_verified_stats.VerifiedAnonymousStatsTest.test_individual_values_not_an_input_format",
+      "input_fixture": {
+        "file": "test_ingest_kaoyan_verified_stats.py",
+        "symbols": [
+          "VerifiedAnonymousStatsTest.setUp",
+          "VerifiedAnonymousStatsTest.test_individual_values_not_an_input_format"
+        ]
+      },
+      "expected": "匿名统计输入不接收个人姓名或逐人成绩数组。",
+      "provenance": {
+        "commit": "822e69c",
+        "file": "skills/zhiqu/tests/test_ingest_kaoyan_verified_stats.py",
+        "basis": "项目实际缺陷修补后的合成最小回归；不等同重新核验原件。"
+      }
+    }
+  ],
+  "not_in_this_suite": [
+    {
+      "id": "real-image-glyph-review",
+      "reason": "真实扫描小字、河北570格等仍需原图逐格两读与人工裁决；本批只测不一致时拒入，不认证OCR准确率。"
+    },
+    {
+      "id": "local-http-redirects",
+      "reason": "HTTP跳转/拦截回归属于本机xik-crawler独立离线套件，本批不导入用户本机技能，也不发真实请求。"
+    },
+    {
+      "id": "historical-school-identity",
+      "reason": "按年份的旧校/转设身份需具体官方依据；本批计划类型跨年拒借不代表所有校名已正确对齐。"
+    }
+  ]
+}
