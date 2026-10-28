@@ -275,8 +275,19 @@ class PlanningWorkflowTests(unittest.TestCase):
         self.assertTrue(any('情景重复' in e for e in run(root,6).errors))
 
     def test_unconfirmed_numeric_weights_are_rejected(self):
-        root=self.roots['career'];self.change(root,'judgment.json',lambda j:j['preferences'].update(method='numeric',weights={'salary':1},confirmed=False))
-        self.assertTrue(any('权重未经确认' in e for e in run(root,7).errors))
+        for kind,root in self.roots.items():
+            for confirmed in (False, None, 'false', '未确认', 1, ['已确认'], {'value': True}):
+                with self.subTest(kind=kind,confirmed=confirmed):
+                    self.change(root,'judgment.json',lambda j:j['preferences'].update(
+                        method='numeric',weights={'salary':1},confirmed=confirmed))
+                    self.assertTrue(any('权重未经确认' in e for e in run(root,7).errors))
+
+    def test_explicit_boolean_confirmation_keeps_numeric_weights_usable(self):
+        for kind,root in self.roots.items():
+            with self.subTest(kind=kind):
+                self.change(root,'judgment.json',lambda j:j['preferences'].update(
+                    method='numeric',weights={'salary':1},confirmed=True))
+                self.assertEqual(run(root,7).errors,[])
 
     def test_operator_union_and_indirect_main_dependencies(self):
         def evidence(eid,**kw):

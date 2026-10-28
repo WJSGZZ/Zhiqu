@@ -617,7 +617,7 @@ class PlanningCase:
         j=self.need('judgment.json');p=j.get('preferences',{})
         if not p.get('quote') or not p.get('profile_refs'):self.err('judgment.json','preferences','缺问卷优先级依据')
         if p.get('method')=='numeric':
-            if not p.get('confirmed') or not p.get('weights') or abs(sum(p['weights'].values())-1)>1e-8:self.err('judgment.json','preferences','权重未经确认/合计不是1')
+            if p.get('confirmed') is not True or not p.get('weights') or abs(sum(p['weights'].values())-1)>1e-8:self.err('judgment.json','preferences','权重未经确认/合计不是1')
         elif p.get('weights') is not None:self.err('judgment.json','preferences','没有数值权重依据不得编权重')
         for c in j.get('candidates',[]):
             for key in ('supports','counters','costs','fallback','switch_conditions','checkpoint'):
