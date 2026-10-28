@@ -19,8 +19,8 @@
     "planning_workflow.py": "93b7754939cd53fb7c3e2bb44a5dda607fd847023cc51bbca35eb60228070add",
     "operator_check.py": "d99826c1cae9514c665edb0b1b6155ea99a0bce19b99a919b9ada81e0b93c0a1",
     "check_demos.py": "67d4edc1cd737beeb6729783a736e667a97c12d8f7de2de673632d9d5c3370b8",
-    "report.py": "3a2fdd5e017c9da4ecefead141c1a3cb03484bdcfa06bf4eaf02ba01f00f0095",
-    "render_report.py": "e7dbbef97c3478f4591f34a01ebd0c730e807a1de3c69eca4fea397434dfbc4a",
+    "report.py": "41d37e32456f801cb673eeb9cf966894283ead1e7ca53bdcef6709039a5465f5",
+    "render_report.py": "17c81658af1834fc1216d61ca3c11070934229a74d8d1175a1602a348ffd1c0f",
     "profile_store.py": "35de56c7f84f9ead83540d32cee7d9bd8885611fb25ef39dbc37b7cfa401b088",
     "claim_guards.py": "54bab4d942fafd148190df73cad34805538662b0a152ec5701c8a960e28dbd1d",
     "source_authentication.py": "b18201e997e0b4ca33c879979bc03f81deab1ea5edbbbc74cab6bf622821f278",
@@ -2004,6 +2004,30 @@
         }
       },
       "previous_trace_sha256": "4181d280558065b543f7fb053d350d6fd7a0f8c55d891fd30b049f39bd6cad05",
+      "assembled_markdown_sha256": "5b32adb9f81133bd864cf2d979f5b6fcb4866562f99022ea7414c67342895c2a",
+      "rendered_body_html_sha256": "fb91f3deec214fbf286ab8f27c95d932f3a0082ce467e549b217b4fff2b9b982",
+      "appendix_materials_unchanged_except_runtime_timestamp": true,
+      "original_artifacts": {
+        "report.md": "5b32adb9f81133bd864cf2d979f5b6fcb4866562f99022ea7414c67342895c2a",
+        "report.html": "f5a9d9c3ab5198a65d516abad913651206196b851e3a087720da4374a11f2e36",
+        "2027-YJ-S01-report.pdf": "c70636c53c40ee08a6c685ae2fe3097a6088482efdd8899c55a0506a239b2217"
+      }
+    },
+    {
+      "date": "2026-10-29",
+      "kind": "cost_input_unit_compatibility",
+      "reason": "费用图拒绝预算/结余冒作单位、冲突周期及静默忽略的max等选项，同币种同量级同周期共轴。既有六份规划无该非法输入，正文、附录材料、计算和PDF未变，完整HTML对比一致。只更新工具兼容绑定，原审批及逐句判断保留，不冒充新内容复核。",
+      "changed_tools": {
+        "report.py": {
+          "before": "3a2fdd5e017c9da4ecefead141c1a3cb03484bdcfa06bf4eaf02ba01f00f0095",
+          "after": "41d37e32456f801cb673eeb9cf966894283ead1e7ca53bdcef6709039a5465f5"
+        },
+        "render_report.py": {
+          "before": "e7dbbef97c3478f4591f34a01ebd0c730e807a1de3c69eca4fea397434dfbc4a",
+          "after": "17c81658af1834fc1216d61ca3c11070934229a74d8d1175a1602a348ffd1c0f"
+        }
+      },
+      "previous_trace_sha256": "2b1a21b5f36cbb5ab77e4d1798e04e720403081e57dada08671b07968a7732a4",
       "assembled_markdown_sha256": "5b32adb9f81133bd864cf2d979f5b6fcb4866562f99022ea7414c67342895c2a",
       "rendered_body_html_sha256": "fb91f3deec214fbf286ab8f27c95d932f3a0082ce467e549b217b4fff2b9b982",
       "appendix_materials_unchanged_except_runtime_timestamp": true,
