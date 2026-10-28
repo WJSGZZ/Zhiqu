@@ -280,7 +280,7 @@
     "calculations.json": "e78d090f8eaefcc1d16696d737b78ea95ae2dc4301377da12c1126e2b4ddeb23",
     "candidates.json": "1ceab0cc754836a5224bdbb53307b376792cdb845d79c66c886b6075385daae6",
     "case.json": "5131aec8aea6f2272d34db351b7682340c6f3e40b96f8e6f28399f93531f87b8",
-    "claim_check.json": "ecbd445c646c3ce94710e0d4b9ff34a62274ec5827d0e8906053f30dc5b7152d",
+    "claim_check.json": "43d4bc1eb0cd63c84a2d55e033a45743a4ebb954b5c0c2ae9b38dfcfaabc54ad",
     "directions.json": "141ba17063943d6893342f321196523fd0eaf4c8c102cafee5b91cfc3a254d3a",
     "evidence.json": "fda7a9e2760414ba9bd5f9a73b88a87ccebf6f5d8983c0f0423876de377b273b",
     "judgment.json": "85624b7f49bc7815d5a44cbfcd46ba8f30b88348201fff5b5f63a0c30863e0ef",
@@ -291,7 +291,7 @@
     "profile_parse.json": "26d77c111bb043cbc6cca5e761f0272ae369b77043836f7ff4e039a5759d96d9",
     "report.html": "3311e44a727830d10556b77e2d5e544eecd6c2ab68f4ac84b65aa043746f3f8d",
     "report.md": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-    "report_trace.json": "acc3662511a57fe8e42442d1d84d9afe001017fa400f231b792df19bfb152338",
+    "report_trace.json": "b11633031b0b627f0b9bb8d1253d98d03a97105fdd1d7600025d1e39a6cd8398",
     "rules_check.json": "a49b73e4796ddce781c9559fadf72ac99b81b32fdc2d06bf2783d4c160e4b2f0"
   },
   "snapshot_refreshes": [
@@ -489,6 +489,15 @@
         "claim_check.json"
       ],
       "reason": "阶段7补数值权重形状门禁：非空字典、非布尔的有限非负数字且合计1，拒绝NaN/布尔/负数等错误。既有六份规划使用有序偏好，正文、附录材料、计算和PDF未变；仅更新工具兼容绑定，原批准及逐句判断保留，不冒充新内容复核。"
+    },
+    {
+      "date": "2026-10-29",
+      "by": "Codex（画像缺口兼容复验，非内容复核）",
+      "files": [
+        "report_trace.json",
+        "claim_check.json"
+      ],
+      "reason": "读研新模拟自查修补可见必答未填进入缺口及防抹除检查，并区分未请求与检索未找到；生成器提示未展示叙述，不自动改变旧稿。既有六例无显式可见必答未填，正文、附录材料、数字和PDF未变；只更新工具兼容绑定，原审批及逐句判断保留，不冒充新内容复核。"
     }
   ],
   "review_history": [

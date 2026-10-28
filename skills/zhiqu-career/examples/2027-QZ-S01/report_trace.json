@@ -15,13 +15,13 @@
   },
   "contract_sha256": "8efe50a42837daeec7a83de34e595fd7eeb88a8cfeff1a26afc20699fd951d76",
   "tool_sha256": {
-    "planning_report.py": "de47b6729ae1469b9f016c65b623151cfc80744e0adc13dcbb51ee031d689b1d",
-    "planning_workflow.py": "2e7c4899102638267991b967f5a7c30424abd6f264712f3a2ebbf622ec9b5d44",
+    "planning_report.py": "ce3ab0e1ce54cb7f250e71b60c56ce78f863f52b8840b82f12a416d6aee7c9c6",
+    "planning_workflow.py": "adc00b53b2b82d0676b21e7464d35c01b60c1b90624ae11095f0cf3ecdc702ef",
     "operator_check.py": "d99826c1cae9514c665edb0b1b6155ea99a0bce19b99a919b9ada81e0b93c0a1",
     "check_demos.py": "67d4edc1cd737beeb6729783a736e667a97c12d8f7de2de673632d9d5c3370b8",
     "report.py": "41d37e32456f801cb673eeb9cf966894283ead1e7ca53bdcef6709039a5465f5",
     "render_report.py": "17c81658af1834fc1216d61ca3c11070934229a74d8d1175a1602a348ffd1c0f",
-    "profile_store.py": "35de56c7f84f9ead83540d32cee7d9bd8885611fb25ef39dbc37b7cfa401b088",
+    "profile_store.py": "fd8be53ffc01658411258b540a0530749d10c0c94c78e7d08e3a16fbf4fca26e",
     "claim_guards.py": "54bab4d942fafd148190df73cad34805538662b0a152ec5701c8a960e28dbd1d",
     "source_authentication.py": "b18201e997e0b4ca33c879979bc03f81deab1ea5edbbbc74cab6bf622821f278",
     "official_source_audit.py": "c09c40a2c5eec18318fbb1fa52393ee37b4e63f636ec7ea3999084d12ecc0df1",
@@ -1520,6 +1520,34 @@
         }
       },
       "previous_trace_sha256": "00fd2143f5cb16454c7bbb091e7b845d6cc5819d06ab6c9206399b5db0e8af93",
+      "assembled_markdown_sha256": "0895952f1caa72b7576496650f775ddafc6137d721509d0fe4868561a12c2195",
+      "rendered_body_html_sha256": "cea5c65b04b10b2dfda34eb3b7cee34bc75286132556bb623b317db64fa67f16",
+      "appendix_materials_unchanged_except_runtime_timestamp": true,
+      "original_artifacts": {
+        "report.md": "0895952f1caa72b7576496650f775ddafc6137d721509d0fe4868561a12c2195",
+        "report.html": "ffa710d2a9920cdd43b8f5681afaee51f3bd4a2e15c64b8be4f4556a6b4ef49f",
+        "2027-QZ-S01-report.pdf": "442cf877493f9c33e75c418da23fa875a9030ade3240671c866913580aa08ad9"
+      }
+    },
+    {
+      "date": "2026-10-29",
+      "kind": "required_gap_and_unrequested_compatibility",
+      "reason": "读研新模拟自查修补可见必答未填进入缺口及防抹除检查，并区分未请求与检索未找到；生成器提示未展示叙述，不自动改变旧稿。既有六例无显式可见必答未填，正文、附录材料、数字和PDF未变；只更新工具兼容绑定，原审批及逐句判断保留，不冒充新内容复核。",
+      "changed_tools": {
+        "planning_report.py": {
+          "before": "de47b6729ae1469b9f016c65b623151cfc80744e0adc13dcbb51ee031d689b1d",
+          "after": "ce3ab0e1ce54cb7f250e71b60c56ce78f863f52b8840b82f12a416d6aee7c9c6"
+        },
+        "planning_workflow.py": {
+          "before": "2e7c4899102638267991b967f5a7c30424abd6f264712f3a2ebbf622ec9b5d44",
+          "after": "adc00b53b2b82d0676b21e7464d35c01b60c1b90624ae11095f0cf3ecdc702ef"
+        },
+        "profile_store.py": {
+          "before": "35de56c7f84f9ead83540d32cee7d9bd8885611fb25ef39dbc37b7cfa401b088",
+          "after": "fd8be53ffc01658411258b540a0530749d10c0c94c78e7d08e3a16fbf4fca26e"
+        }
+      },
+      "previous_trace_sha256": "b26f7de3da1fd9fbc09d56553c915b84d048e6bda05deebe5785db3a63734a31",
       "assembled_markdown_sha256": "0895952f1caa72b7576496650f775ddafc6137d721509d0fe4868561a12c2195",
       "rendered_body_html_sha256": "cea5c65b04b10b2dfda34eb3b7cee34bc75286132556bb623b317db64fa67f16",
       "appendix_materials_unchanged_except_runtime_timestamp": true,
