@@ -6,6 +6,7 @@ No network access and no evaluation of expressions supplied in case files.
 import copy
 import hashlib
 import json
+import math
 import re
 from datetime import date
 from claim_guards import personal_probability_errors
@@ -617,7 +618,13 @@ class PlanningCase:
         j=self.need('judgment.json');p=j.get('preferences',{})
         if not p.get('quote') or not p.get('profile_refs'):self.err('judgment.json','preferences','缺问卷优先级依据')
         if p.get('method')=='numeric':
-            if p.get('confirmed') is not True or not p.get('weights') or abs(sum(p['weights'].values())-1)>1e-8:self.err('judgment.json','preferences','权重未经确认/合计不是1')
+            weights=p.get('weights')
+            valid=(isinstance(weights,dict) and bool(weights)
+                   and all(isinstance(v,(int,float)) and not isinstance(v,bool)
+                           and 0<=v<=1 and math.isfinite(v) for v in weights.values())
+                   and abs(sum(weights.values())-1)<=1e-8)
+            if p.get('confirmed') is not True or not valid:
+                self.err('judgment.json','preferences','权重未经确认/须为非空非负有限数值字典且合计为1')
         elif p.get('weights') is not None:self.err('judgment.json','preferences','没有数值权重依据不得编权重')
         for c in j.get('candidates',[]):
             for key in ('supports','counters','costs','fallback','switch_conditions','checkpoint'):

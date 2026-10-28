@@ -289,6 +289,27 @@ class PlanningWorkflowTests(unittest.TestCase):
                     method='numeric',weights={'salary':1},confirmed=True))
                 self.assertEqual(run(root,7).errors,[])
 
+    def test_numeric_weights_reject_bad_values_and_containers(self):
+        invalid=(None, {}, [], [1], '1', True,
+                 {'salary': True}, {'salary': '1'}, {'salary': None}, {'salary': []},
+                 {'salary': float('nan')}, {'salary': float('inf')},
+                 {'salary': -1, 'cost': 2}, {'salary': 10**400},
+                 {'salary': .5}, {'salary': 0})
+        for kind,root in self.roots.items():
+            for weights in invalid:
+                with self.subTest(kind=kind,weights=weights):
+                    self.change(root,'judgment.json',lambda j:j['preferences'].update(
+                        method='numeric',weights=weights,confirmed=True))
+                    self.assertTrue(any('非空非负有限数值字典且合计为1' in e for e in run(root,7).errors))
+
+    def test_confirmed_zero_and_fractional_weights_remain_valid(self):
+        for kind,root in self.roots.items():
+            for weights in ({'salary': 1, 'cost': 0}, {'salary': .6, 'cost': .4}):
+                with self.subTest(kind=kind,weights=weights):
+                    self.change(root,'judgment.json',lambda j:j['preferences'].update(
+                        method='numeric',weights=weights,confirmed=True))
+                    self.assertEqual(run(root,7).errors,[])
+
     def test_operator_union_and_indirect_main_dependencies(self):
         def evidence(eid,**kw):
             return dict(id=eid,grade='官方',status='verified',review_due='2027-08-01',**kw)
