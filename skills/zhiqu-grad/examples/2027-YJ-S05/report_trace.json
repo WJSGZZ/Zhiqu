@@ -17,7 +17,7 @@
   "contract_sha256": "b805904d0c51a3684ce92ee68d71e57f416749bf20fbf6c5ef0604747f005a07",
   "tool_sha256": {
     "planning_report.py": "de47b6729ae1469b9f016c65b623151cfc80744e0adc13dcbb51ee031d689b1d",
-    "planning_workflow.py": "93b7754939cd53fb7c3e2bb44a5dda607fd847023cc51bbca35eb60228070add",
+    "planning_workflow.py": "2e7c4899102638267991b967f5a7c30424abd6f264712f3a2ebbf622ec9b5d44",
     "operator_check.py": "d99826c1cae9514c665edb0b1b6155ea99a0bce19b99a919b9ada81e0b93c0a1",
     "check_demos.py": "67d4edc1cd737beeb6729783a736e667a97c12d8f7de2de673632d9d5c3370b8",
     "report.py": "41d37e32456f801cb673eeb9cf966894283ead1e7ca53bdcef6709039a5465f5",
@@ -1894,6 +1894,26 @@
         }
       },
       "previous_trace_sha256": "99387188f54b848d8fe6934e632b15916f8b19b68d2090723173cc7704b2a2c4",
+      "assembled_markdown_sha256": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
+      "rendered_body_html_sha256": "9b4eb5bdf5fb56d7d60c72b50c87550cb15d8dd456668a6c61c774705009dae2",
+      "appendix_materials_unchanged_except_runtime_timestamp": true,
+      "original_artifacts": {
+        "report.md": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
+        "report.html": "3311e44a727830d10556b77e2d5e544eecd6c2ab68f4ac84b65aa043746f3f8d",
+        "2027-YJ-S05-report.pdf": "c3510ec62f75761aadca608bbe23109ef15281c5eacbda20f883ad1c0012c85a"
+      }
+    },
+    {
+      "date": "2026-10-29",
+      "kind": "preference_weight_value_compatibility",
+      "reason": "阶段7补数值权重形状门禁：非空字典、非布尔的有限非负数字且合计1，拒绝NaN/布尔/负数等错误。既有六份规划使用有序偏好，正文、附录材料、计算和PDF未变；仅更新工具兼容绑定，原批准及逐句判断保留，不冒充新内容复核。",
+      "changed_tools": {
+        "planning_workflow.py": {
+          "before": "93b7754939cd53fb7c3e2bb44a5dda607fd847023cc51bbca35eb60228070add",
+          "after": "2e7c4899102638267991b967f5a7c30424abd6f264712f3a2ebbf622ec9b5d44"
+        }
+      },
+      "previous_trace_sha256": "9b28f509ccf54d1190958dc11f5842881bb0ac2bdd815850fa1aeb3906eab77c",
       "assembled_markdown_sha256": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
       "rendered_body_html_sha256": "9b4eb5bdf5fb56d7d60c72b50c87550cb15d8dd456668a6c61c774705009dae2",
       "appendix_materials_unchanged_except_runtime_timestamp": true,

@@ -169,7 +169,7 @@
     "calculations.json": "00e5087c418c579371b17558494a9c4c1f865b0b051ef63fc1a3c9a51a89cd87",
     "candidates.json": "1f9f3703275d1799b96d638988fd5c11a27d5f2c4ef9209db44868be66817183",
     "case.json": "0001243d062291f20d005fab27c3bcc9f801dd724d9bd8593487ad013319de45",
-    "claim_check.json": "91f68875e5407b1866b63b0cd21998208fd362f7bdd2a3fad7737d7bf251ab30",
+    "claim_check.json": "f024dfb31e42f403aa2ebba75901418b381cd7f3ed0c55fac8f490119ca3e027",
     "directions.json": "e11eb75bac9a1378195f15ef805daf0ffe3d0a4c2306d317d6d9944265b8008b",
     "evidence.json": "03304e7a1c5a1324a791db8d79dc9087ab501f578414afef2bda2728ef1d97fa",
     "judgment.json": "a9dd41f886f0c6f554dcbfa124510778365a5a732f3490e40d1499b0ff24c03b",
@@ -180,7 +180,7 @@
     "profile_parse.json": "2dda484ba11b430d3cc4c1db419900cc9517e79bb3b21abf9c9d3bb755c2ea46",
     "report.html": "04c6efa09cf2f390ec0fb35bc6ce1f005d4c2c5e7e7bb93a32007e4f008878a9",
     "report.md": "8dd0ba3d6bb84baacb05c1e5272f04bd89a83de4f111127c4e5dca4e4ebf1628",
-    "report_trace.json": "3d76163090b14ca070d37fe57f9f8a0ac87fbbf4ed9b628893b41504f7bc6cd0",
+    "report_trace.json": "c16e73a043decdcc2cc928f9f882dcd87e259a4b2e92f2388d9b4a4cccddd91c",
     "rules_check.json": "248a80156349f8bee1d5de049d1153408fc4548108e5895abb5bba17d5c7cb03"
   },
   "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。",
@@ -493,6 +493,15 @@
         "claim_check.json"
       ],
       "reason": "费用图拒绝预算/结余冒作单位、冲突周期及静默忽略的max等选项，同币种同量级同周期共轴。既有六份规划无该非法输入，正文、附录材料、计算和PDF未变，完整HTML对比一致。只更新工具兼容绑定，原审批及逐句判断保留，不冒充新内容复核。"
+    },
+    {
+      "date": "2026-10-29",
+      "by": "Codex（权重数值兼容复验，非内容复核）",
+      "files": [
+        "report_trace.json",
+        "claim_check.json"
+      ],
+      "reason": "阶段7补数值权重形状门禁：非空字典、非布尔的有限非负数字且合计1，拒绝NaN/布尔/负数等错误。既有六份规划使用有序偏好，正文、附录材料、计算和PDF未变；仅更新工具兼容绑定，原批准及逐句判断保留，不冒充新内容复核。"
     }
   ],
   "regeneration": {

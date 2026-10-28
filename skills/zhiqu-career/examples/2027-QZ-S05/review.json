@@ -530,6 +530,15 @@
         "claim_check.json"
       ],
       "reason": "费用图拒绝预算/结余冒作单位、冲突周期及静默忽略的max等选项，同币种同量级同周期共轴。既有六份规划无该非法输入，正文、附录材料、计算和PDF未变，完整HTML对比一致。只更新工具兼容绑定，原审批及逐句判断保留，不冒充新内容复核。"
+    },
+    {
+      "date": "2026-10-29",
+      "by": "Codex（权重数值兼容复验，非内容复核）",
+      "files": [
+        "report_trace.json",
+        "claim_check.json"
+      ],
+      "reason": "阶段7补数值权重形状门禁：非空字典、非布尔的有限非负数字且合计1，拒绝NaN/布尔/负数等错误。既有六份规划使用有序偏好，正文、附录材料、计算和PDF未变；仅更新工具兼容绑定，原批准及逐句判断保留，不冒充新内容复核。"
     }
   ],
   "review_history": [
@@ -2797,7 +2806,7 @@
     "calculations.json": "89d7a293fd6780b562866f4871846b19130b0d86e79cb9f9c233e572cbae5b5d",
     "candidates.json": "ea8bbcb101fc7dc899ec1137e869654c3b9e85d79d8229e4de8115418467aeae",
     "case.json": "79136c0287d7e845b2308724e997d90b3b7a805e4fe2843da189774d6ec93a6e",
-    "claim_check.json": "ce9a2edc2995970be31e89c9fd1a65594eecec7670ce52994c321af2fb273141",
+    "claim_check.json": "d43b82c7b4f1e5184404edc660938a70b1c19267c29216053bb9c33770ae9809",
     "directions.json": "2d709b22623617481aefa804b96da5c5d274812758094bb921c173d0466c29df",
     "evidence.json": "8c97b5ec4dd2e295bbf4a8eaa9372acfd30f2fcc1615cc5810525fdbbb596d59",
     "judgment.json": "89e67d8e39d0666399d8b470809425420fb18271c756578790e08248301ec3ff",
@@ -2808,7 +2817,7 @@
     "profile_parse.json": "abe812515ea2a27d78209f08c28c8bdde0a5c10d1672ef0983d66d68c6eece1a",
     "report.html": "cff1e3ca14fbc9145f6a1a4fbb3a4f14ae3c3e4544fbdeea5f215321011619d1",
     "report.md": "90ff1e8ce1555a081d376dbea69e831d6f8788393724d3db9bdb8189646a6262",
-    "report_trace.json": "fee77561cf2c20286d997def2e0d18aecc1a9eaed63b0d4cb80027b3eacec7c7",
+    "report_trace.json": "678190d389fda1a6058a31970101538d3caeb0173f9b8390e7acfa3ce3e9fa78",
     "rules_check.json": "b45b1313cf295a6e320d32afce13a0b93b9b0e54e8b46d8d3cf2d6329732a40b"
   }
 }
