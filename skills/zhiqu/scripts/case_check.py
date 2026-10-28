@@ -24,6 +24,10 @@ PROFILE_FIELDS = ['年份', '省份', '位次', '选科', '批次', '体检', '�
 FIELD_STATUS = {'given', 'inferred', 'unknown'}
 CASE_ID = re.compile(r'^\d{4}-GK-(\d{4}|[SR]\d{2})$')
 SKIP_REASONS = {'rank_band', 'direction', 'hard_constraint', 'category', 'manual', 'duplicate', 'other'}
+PROVINCE_ALIASES = {'北京市': '北京', '天津市': '天津', '上海市': '上海', '重庆市': '重庆',
+                    '内蒙古自治区': '内蒙古', '广西壮族自治区': '广西', '西藏自治区': '西藏',
+                    '宁夏回族自治区': '宁夏', '新疆维吾尔自治区': '新疆'}
+PROVINCE_SUFFIX_NAMES = set('河北 山西 辽宁 吉林 黑龙江 江苏 浙江 安徽 福建 江西 山东 河南 湖北 湖南 广东 海南 四川 贵州 云南 陕西 甘肃 青海 台湾'.split())
 PITFALLS = ['没查到写成不存在', '群体数字当个人概率', '经验帖数字做决定', '按编号引用问卷', '同一事实写两处', '会过期的事实', '八字越界', '委派判断类任务', '取页摘要当原文']
 REPORT_MIN = {'summary_points': 3, 'directions': 2, 'research_schools': 3, 'ask_me_items': 6, 'sources': 8, 'sensitivity': 3}
 
@@ -42,6 +46,16 @@ def parse_day(text):
         return date.fromisoformat(str(text))
     except ValueError:
         return None
+
+
+def province_name(value):
+    """只归一省级名称写法；不把吉林市等地级市当作同名省。"""
+    if not isinstance(value, str):
+        return ''
+    value = value.strip()
+    if value.endswith('省') and value[:-1] in PROVINCE_SUFFIX_NAMES:
+        return value[:-1]
+    return PROVINCE_ALIASES.get(value, value)
 
 
 class Gate:
@@ -100,6 +114,16 @@ class Gate:
         rules = SKILL / str(case.get('province_rules', ''))
         if not rules.is_file():
             self.err(0, f'省份层规则文件不存在：{case.get("province_rules")}')
+        else:
+            try:
+                declared = load_json(rules)
+            except (OSError, ValueError, UnicodeError):
+                self.err(0, '省份层规则文件无法读取或不是有效JSON；须取得本省规则，不能借用其他省份')
+                return
+            if not isinstance(declared, dict) or not province_name(declared.get('province')):
+                self.err(0, '省份层规则缺少有效province；不能确认适用省份')
+            elif province_name(declared['province']) != province_name(case.get('province')):
+                self.err(0, f'省份层规则属于{declared["province"]}，与案例省份{case.get("province")}不一致；不能跨省借用')
 
     # 阶段 1：画像与缺项
     def stage1(self):
@@ -133,6 +157,10 @@ class Gate:
         if str(fields.get('位次', {}).get('value', '')) and self.case.get('rank') and fields.get('位次', {}).get('status') != 'unknown':
             if not re.search(str(int(float(self.case['rank']))), str(fields['位次'].get('value', '')).replace(',', '')):
                 self.err(1, '画像位次与 case.json 的 rank 不一致')
+        origin = fields.get('省份', {})
+        if origin.get('status') in ('given', 'inferred') and origin.get('value') not in (None, ''):
+            if province_name(origin['value']) != province_name(self.case.get('province')):
+                self.err(1, '画像生源省与 case.json 的 province 不一致；不能用登记覆盖本人省份')
 
     # 阶段 2：方向
     def stage2(self):

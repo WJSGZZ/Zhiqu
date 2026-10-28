@@ -33,8 +33,8 @@ python3 scripts/case_check.py <案例目录> --stage N    # 检查 0..N 阶段�
 
 | 阶段 | 文件 | 门槛（`case_check.py` 检查） |
 |---|---|---|
-| 0 登记 | `case.json` | 案例号与目录名一致；`mode`（formal / simulation）；准备日；`data_commit`；省份层文件存在；位次与志愿数 |
-| 1 画像 | `profile.json`（旧版 `profile.txt`）、`profile_parse.json` | JSON 的 zhiqu=gaokao，或有效旧文字；九个关键字段都有状态（given / inferred / unknown）；推断值已向本人确认；未知项列入 `missing` |
+| 0 登记 | `case.json` | 案例号与目录名一致；`mode`（formal / simulation）；准备日；`data_commit`；省份层文件可读且 `province` 与生源省一致，缺规则先补本省、不借他省；位次与志愿数 |
+| 1 画像 | `profile.json`（旧版 `profile.txt`）、`profile_parse.json` | JSON 的 zhiqu=gaokao，或有效旧文字；九个关键字段都有状态（given / inferred / unknown）；推断值已向本人确认；已知生源省与登记一致；未知项列入 `missing` |
 | 2 方向 | `directions.json` | 2–4 个方向，各有支持、反证、怎么验证 |
 | 3 本省规则 | `rules_check.json` | 所有 `volatile` 规则本次已复核（≤ 30 天内）；缺的数据项写明处理办法；历年数据文件齐全 |
 | 4 筛选与候选池 | `screening.json`、`pool.csv`、可选 `excluded*.csv` | **账对得上**：起点 = 源表实际行数，每步 `after` = 下步 `before`，终点 = 候选池行数；人工剔除逐条有原因；池 ≥ 志愿位 2 倍，否则写原因；每行有资格证据和来源等级；formal 模式要求逐项 verified |
