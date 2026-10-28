@@ -315,12 +315,14 @@ class Gate:
 
     # 阶段 7：报告与填报单
     def stage7(self):
-        from check_report import check_report, check_sections
+        from check_report import check_report, check_sections, report_mode_errors
         rep = self.json(7, 'report.json')
         res = self.json(7, 'result.json')
         sheet = self.csv(7, 'entry_sheet.csv')
         if rep is None or res is None:
             return
+        for msg in report_mode_errors(self.case, rep):
+            self.err(7, msg)
         if rep.get('meta', {}).get('case_id') != self.case.get('case_id'):
             self.err(7, 'report.meta.case_id 须等于案例号')
         if not rep.get('meta', {}).get('generated_on'):

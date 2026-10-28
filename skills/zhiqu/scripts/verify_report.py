@@ -384,11 +384,13 @@ def gaokao_materials(root,rep,result,binding,warning=None):
     personal += [{'label':'优先级：'+label,'value':value,'sections':'02、03、05、10'} for label,value in rep.get('profile',{}).get('priorities',[])]
     personal += [{'label':'本人约束','value':v,'sections':'02、04—09'} for v in rep.get('profile',{}).get('constraints',[])]
     numbers=[]
+    qualitative_model = rep.get('meta',{}).get('prob_grade') == 'D' and any(x.get('data_provenance') for x in result.get('list',[]))
     # 旧高考报告的文字数字没有逐项绑定原文；只抄报告原句不能帮助核对，所以不列入核对表，
     # 只如实说明。正文数字是否被改动由逐页文字校验和 body_numbers 覆盖。
     gaps=[{'label':'正文文字里的院校、分数线等数字没有逐项原文摘录','reason':'这些数字来自第12节列出的官方原表和附件 report.json 的整理表，生成时没有逐条保存官方原句。核对时请按第12节官网逐项查；概率、位次和偏好分可用附件 candidates.csv、result.json 复算。','url':''}]
     for item in result.get('list',[]):
         for field,label in [('p_clear','单独过线'),('p_land','最终录取'),('expected_cut_rank','预测位次'),('utility','偏好分')]:
+            if qualitative_model:continue  # 原始条件计算仍附带并完整复算，正文不展示未经验证的概率/加权满意度
             numbers.append({'label':item['name']+'：'+label,'value':item[field],'sections':'01、05、10','institution':'录取线模型计算（群体回测口径）','formula':{'p_clear':f'{round(item[field]*result["params"]["sims"])} ÷ {result["params"]["sims"]}（单独过线事件数/模拟次数）' if field=='p_clear' else '', 'p_land':f'{round(item[field]*result["params"]["sims"])} ÷ {result["params"]["sims"]}（此前均未命中、本项命中事件数/模拟次数）' if field=='p_land' else '', 'expected_cut_rank':'历史位次先按登记漂移调整，再对数近期加权求均值，取exp并取整；参数见第10节，原序候选表见附件。', 'utility':'本人优先级和登记评分；专业组按专业事件效用加权。完整操作数在附件，复算给定序列，不证明组合最优。'}[field],'result':item[field]})
     land=sum(x['p_land'] for x in result['list'])
     csvpath=candidate_file(root,result)
@@ -402,12 +404,14 @@ def gaokao_materials(root,rep,result,binding,warning=None):
     terms.append((result['p_fall'],result['params']['u_fall']))
     eu=sum(p*u for p,u in terms)
 
-    numbers += [{'label':'总概率核对','value':land+result['p_fall'],'sections':'01、05','inputs':f'各志愿最终录取概率之和 {land}；滑档 {result["p_fall"]}','formula':'各志愿最终录取概率之和 + 滑档概率 = 1（浮点误差除外）','result':land+result['p_fall']}, {'label':'平均满意度核对','value':result['expected_utility'],'sections':'01、05','inputs':'；'.join(f'{p} × {u}' for p,u in terms),'formula':'Σ（各实际专业落点概率 × 该专业效用）+ Σ（调剂概率 × 调剂效用）+ 滑档概率 × 滑档效用；显示值按正文精度取整','result':eu}]
+    if not qualitative_model:
+        numbers += [{'label':'总概率核对','value':land+result['p_fall'],'sections':'01、05','inputs':f'各志愿最终录取概率之和 {land}；滑档 {result["p_fall"]}','formula':'各志愿最终录取概率之和 + 滑档概率 = 1（浮点误差除外）','result':land+result['p_fall']}, {'label':'平均满意度核对','value':result['expected_utility'],'sections':'01、05','inputs':'；'.join(f'{p} × {u}' for p,u in terms),'formula':'Σ（各实际专业落点概率 × 该专业效用）+ Σ（调剂概率 × 调剂效用）+ 滑档概率 × 滑档效用；显示值按正文精度取整','result':eu}]
     import report as _report
     def readable(text):  # 与正文同样的发布层清理，并去掉参数英文名、内部文件名
         text=_report.public_text(str(text)).replace('profile-analysis.md','画像分析的默认表')
         return re.sub(r'\s*(?:--)?\b(?:sigma-floor|sigma-scale|sigma-single|sigma-rule|rank-sd)\b','',text)
     limits=[{'claim':readable(v),'reason':'只在本条所列数据与资格范围内有效。','change_if':'目标年招生计划、资格、本人排序或可承受风险变化时重新出表。','url':''} for v in [rep.get('backtest',''),*rep.get('profile',{}).get('tensions',[])] if v]
+    if qualitative_model:limits.append({'claim':'本案D级：不展示未经本案验证的个人概率或按概率加权满意度','reason':'原始条件模型计算仅留核对附件，仍可完整复算；一致不等于真实录取预测有效。','change_if':'专业组成、当年资格和模型适用性经独立核验后重新评定。','url':''})
     for r in rep.get('assumptions',[]):limits.append({'claim':readable('：'.join(map(str,r))),'reason':'这是正文第10节已披露的适用条件。','change_if':'数据或该项假设变化后重算；原结果不再自动适用。','url':''})
     return {'case_info':case_info(case,binding,warning),'personal_inputs':personal,'numbers':numbers,'limitations':limits,'gaps':gaps}
 

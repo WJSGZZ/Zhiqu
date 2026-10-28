@@ -1632,6 +1632,14 @@ def limit_line(x):
     return f"<div class='small' style='color:#9B3B2E'>限制：{E(text)}</div>"
 
 
+def entry_adjustment(x):
+    """计算里的调剂开关不等于本人确认了未知专业组的调剂选择。"""
+    if not x.get('group'):return '—'
+    if x.get('data_provenance') and (not x.get('majors') or '资格待核' in str(x.get('limits') or '')):
+        return '待本人确认'
+    return '是' if x.get('obey',True) else '否'
+
+
 def group_line(x, fmt=None):
     """专业组志愿：列出落到组内各专业和被调剂的概率。"""
     ms = x.get("majors")
@@ -1710,14 +1718,15 @@ def build(rep, opt):
         # 不用“满意度 70 分以上的概率”这类固定门槛：100 分是理想组合，位次靠后的考生整张表都到不了 70，会显示 0%、读成判决（R07）。
         tiers = " / ".join(f"{t} {sum(x['tag'] == t for x in lst)}" for t in ("冲", "稳", "保"))
         body += ('<div class="kpis">'
-                 f'<div><b>推荐志愿数</b><span class="num">{len(lst)}</span><em>本批次可填 {E(str(m.get("slots", "–")))} 个；{tiers}</em></div>'
-                 f'<div><b>{"内部情景参照" if database_d else "最可能的去向"}</b><span style="font-size:11pt">{E(likely_name)}</span><em>{"概率" + ("" if grade == "B" or fmt(likely_p).startswith("&") else "约 ") + fmt(likely_p) if numeric else nonnumeric_note}</em></div>'
+                 f'<div><b>{"历史参照组数" if database_d else "推荐志愿数"}</b><span class="num">{len(lst)}</span><em>{"模拟位置" if database_d else "本批次可填"} {E(str(m.get("slots", "–")))} 个；{tiers}</em></div>'
+                 f'<div><b>{"内部情景参照" if database_d else "最可能的去向"}</b><span style="font-size:11pt">{E('待逐组核验' if database_d else likely_name)}</span><em>{"概率" + ("" if grade == "B" or fmt(likely_p).startswith("&") else "约 ") + fmt(likely_p) if numeric else nonnumeric_note}</em></div>'
                  + (f'<div><b>平均满意度（0—100）</b><span class="num">{eu:.1f} 分</span><em>表里最高的志愿 {max(x["utility"] for x in lst):.0f} 分。{E(m.get("utility_scale", UTILITY_SCALE))}</em></div>' if numeric and eu is not None else
                     f'<div><b>平均满意度（0—100）</b><span class="num">不估算</span><em>{grade_scope}评级 {E(grade)}，概率不可信，按概率加权的满意度也不算；表里最高的志愿 {max(x["utility"] for x in lst):.0f} 分。</em></div>')
-                 + (f'<div><b>滑档风险</b><span class="num">{fall_txt(pfall)}</span><em>录取线整体大波动时 {fall_txt(stress.get("p_fall"))}</em></div>' if grade == "A" or pfall else
-                    f'<div><b>滑档风险</b><span class="num">未出现</span><em>{sims:,} 次模拟中没有出现滑档；录取线整体大波动时{"也没有" if not stress.get("p_fall") else "：" + fall_txt(stress.get("p_fall"))}</em></div>')
+                 + ('<div><b>滑档风险</b><span class="num">尚不能判断</span><em>条件模型没有出现落空也不代表实际无风险；先核专业、资格、费用及后备。</em></div>' if database_d else
+                    (f'<div><b>滑档风险</b><span class="num">{fall_txt(pfall)}</span><em>录取线整体大波动时 {fall_txt(stress.get("p_fall"))}</em></div>' if grade == "A" or pfall else
+                    f'<div><b>滑档风险</b><span class="num">未出现</span><em>{sims:,} 次模拟中没有出现滑档；录取线整体大波动时{"也没有" if not stress.get("p_fall") else "：" + fall_txt(stress.get("p_fall"))}</em></div>'))
                  + '</div>')
-    if lst:
+    if lst and not database_d:
         body += figure('你最终会被哪里录取', outcome_strip([(x['name'], x['p_land']) for x in lst], pfall or 0, fmt=strip_fmt, fall_text=html.unescape(fall_txt(pfall or 0))),
                        STRIP_CAP + ('浅色为最终录取不到5%的志愿；红色为滑档。' if numeric else '仅作定性示意，本省评级不显示百分比。'), model_ref)
     if s.get("points"):
@@ -1780,20 +1789,21 @@ def build(rep, opt):
     # 04 志愿表
     if lst:
         notes = rep.get("list_notes", {})
-        body = '<p class="lead">下表就是建议的填报顺序。顺序按本人偏好排列，单独过线与最终录取是两个不同的量。</p>'
+        body = ('<p class="lead">下表仅供逐组核对，不是已确认的填报顺序；组内专业和本人接受程度待核，不能把内部条件计算的次序当作你的偏好。</p>' if database_d else '<p class="lead">下表就是建议的填报顺序。顺序按本人偏好排列，单独过线与最终录取是两个不同的量。</p>')
         if numeric:
             # Ten rows per chart keeps labels readable and the figure on one printed page.
             for start in range(0, len(lst), 10):
                 part = lst[start:start+10]
                 body += figure('各志愿的单独过线' + (f'（{start+1}—{start+len(part)}）' if len(lst)>10 else ''),
-                               bar_chart([[f"{x['order']:02d} {x['name']}", x['p_clear'], x['tag'], html.unescape(fmt(x['p_clear']))] for x in part], maximum=1, palette=CERTAINTY,
-                                         legend={'冲': '冲', '稳': '稳', '保': '保'}, tick_fmt=lambda v: f'{v:.0%}'),
-                               '琥珀为冲、石绿为稳、黛绿为保；条长为单独过线，精度同主表。', model_ref)
-        body += figure('你最终会被哪里录取', outcome_strip([(x['name'], x['p_land']) for x in lst], pfall or 0, fmt=strip_fmt, fall_text=html.unescape(fall_txt(pfall or 0))), STRIP_CAP, model_ref)
+                                   bar_chart([[f"{x['order']:02d} {x['name']}", x['p_clear'], x['tag'], html.unescape(fmt(x['p_clear']))] for x in part], maximum=1, palette=CERTAINTY,
+                                             legend={'冲': '冲', '稳': '稳', '保': '保'}, tick_fmt=lambda v: f'{v:.0%}'),
+                                   '琥珀为冲、石绿为稳、黛绿为保；条长为单独过线，精度同主表。', model_ref)
+        if not database_d:
+            body += figure('你最终会被哪里录取', outcome_strip([(x['name'], x['p_land']) for x in lst], pfall or 0, fmt=strip_fmt, fall_text=html.unescape(fall_txt(pfall or 0))), STRIP_CAP, model_ref)
         cols = "<colgroup><col style='width:5%'><col style='width:35%'><col style='width:7%'><col style='width:8%'><col style='width:12%'><col style='width:12%'><col style='width:21%'></colgroup>"
         body += "<table class='vt'>"+cols+"<thead><tr><th>序</th><th>志愿</th><th>类型</th><th>偏好</th><th>单独过线</th><th>最终录取</th><th>预测位次</th></tr></thead><tbody>"
         for x in lst:
-            hl = " class='hl'" if likely and x is likely else ''
+            hl = " class='hl'" if not database_d and likely and x is likely else ''
             probs = f"<td class='r'>{fmt(x['p_clear'])}</td><td class='r'>{fmt(x['p_land'],1)}</td>" if numeric else "<td>按分档</td><td>不显示百分比</td>"
             rank_cell = f"{x['expected_cut_rank']:,}" + (f"<div class='small'>{interval80(x)}</div>" if grade!='A' else '')
             if prediction_label(x):
@@ -1810,13 +1820,16 @@ def build(rep, opt):
                 body += (f"<p class='small'><strong>{E(x['name'])}</strong>："
                          f"{E(str(review.get('disclosure', '第三方整理，未经官方核对；不单独支撑主结论')))}；"
                          f"{E(str(review.get('margin', '余量建议尚未填写，不能交付')))}</p>")
-        body += ('<p class="small">"偏好"是 0–100 的分数，由"你的画像"一节的权重和各项打分算出。"单独过线"只看这一个志愿；"最终录取"考虑了前面志愿可能已经录取你；"预测位次"是今年最低录取位次的中位预测。'
-                 '冲：单独过线 &lt; 40%；稳：40%–85%；保：≥ 85%。高亮行是最可能的去向。'
-                 + ('标“需核对报名资格”的志愿属于' + E('、'.join(dict.fromkeys(pending_plan(x) for x in lst if pending_plan(x))))
-                    + '等单列的招生计划，能不能报要按当年招生章程和本省招生计划核对；核实之前不当作普通志愿，也不要指望它兜底。'
-                    if any(pending_plan(x) for x in lst) else '')
-                 + ('' if grade == "A" else ('本案数据评级为D：仅供参照。所示区间是内部模型的条件范围，未经本案数据验证，不能解释为个人概率或覆盖保证。' if database_d else '本省概率评级为 ' + grade + '：' + GRADE_MEANING[grade] + '“80% 区间”指今年最低录取位次大约有八成可能落在这个范围内。'))
-                 + '</p>')
+        if database_d:
+            body += '<p class="small">偏好分是登记刻度，不是学校质量或个人满意度测评；冲稳保只留作内部条件标签，不代表保底达标。选科或其他条件待核只表示信息不完整，不能据此断言是特殊招生计划。所示区间是内部模型的条件范围，未经本案数据验证，不能解释为个人概率或覆盖保证。</p>'
+        else:
+            body += ('<p class="small">"偏好"是 0–100 的分数，由"你的画像"一节的权重和各项打分算出。"单独过线"只看这一个志愿；"最终录取"考虑了前面志愿可能已经录取你；"预测位次"是今年最低录取位次的中位预测。'
+                     '冲：单独过线 &lt; 40%；稳：40%–85%；保：≥ 85%。高亮行是最可能的去向。'
+                     + ('标“需核对报名资格”的志愿属于' + E('、'.join(dict.fromkeys(pending_plan(x) for x in lst if pending_plan(x))))
+                        + '等单列的招生计划，能不能报要按当年招生章程和本省招生计划核对；核实之前不当作普通志愿，也不要指望它兜底。'
+                        if any(pending_plan(x) for x in lst) else '')
+                     + ('' if grade == "A" else ('本案数据评级为D：仅供参照。所示区间是内部模型的条件范围，未经本案数据验证，不能解释为个人概率或覆盖保证。' if database_d else '本省概率评级为 ' + grade + '：' + GRADE_MEANING[grade] + '“80% 区间”指今年最低录取位次大约有八成可能落在这个范围内。'))
+                     + '</p>')
         sec("志愿表", body)
 
         # 05 为什么这样排
@@ -1827,16 +1840,21 @@ def build(rep, opt):
             rows.append(("只挑最想去的", bu[0], bu[1], False))
         if bs:
             rows.append(("只挑最稳的", bs[0], bs[1], False))
-        body = '<p class="lead">本方案兼顾偏好与落空代价；下图与其他两种填法使用同一组数据和假设。</p>'
-        body += figure('三种填法的对比', strategy_chart(rows, fmt=fall_shown),
-                       strategy_caption(eu, pfall, bu, bs, fall_shown) + '深绿为本报告方案，浅色为对照填法。', model_ref)
+        if database_d:
+            body = '<p class="lead">本案评级为D，暂不比较按录取概率加权的满意度，也不把条件模型的顺序当作真实录取去向。先核专业与报名资格，再判断是否值得保留。</p>'
+        else:
+            body = '<p class="lead">本方案兼顾偏好与落空代价；下图与其他两种填法使用同一组数据和假设。</p>'
+            body += figure('三种填法的对比', strategy_chart(rows, fmt=fall_shown),
+                           strategy_caption(eu, pfall, bu, bs, fall_shown) + '深绿为本报告方案，浅色为对照填法。', model_ref)
         if rep.get("why"):
             body += "".join(f"<p>{E(x)}</p>" for x in rep["why"])
-        if stress:
-            body += (f'<div class="box"><h4>压力测试</h4><p>如果今年各校录取线的波动是往年的 {E(str(rep.get("stress_mult", 2)))} 倍，'
-                     f'这张志愿表的期望效用为 {stress.get("expected_utility", 0):.1f}，滑档{("概率为 " + fall_txt(stress.get("p_fall"))) if grade == "A" else ("：" + fall_txt(stress.get("p_fall")))}。'
-                     + ('波动放大后期望效用反而略高，是因为波动是双向放大的：排在前面的冲刺志愿意外过线的机会也变大，而后面的保底仍然够稳。这说明这张表在大波动下没有变差，不说明大波动对你有利。'
-                        if stress.get("expected_utility", 0) > (eu or 0) and not stress.get("p_fall") else '') + '</p></div>')
+        if stress and database_d:
+            body += '<div class="box"><h4>压力测试的边界</h4><p>已按更大波动重新计算；这里只比较条件设定改变后的名单，不显示按概率加权的满意度或个人滑档概率。专业、资格与费用的缺口仍须补齐。</p></div>'
+        elif stress:
+                body += (f'<div class="box"><h4>压力测试</h4><p>如果今年各校录取线的波动是往年的 {E(str(rep.get("stress_mult", 2)))} 倍，'
+                         f'这张志愿表的期望效用为 {stress.get("expected_utility", 0):.1f}，滑档{("概率为 " + fall_txt(stress.get("p_fall"))) if grade == "A" else ("：" + fall_txt(stress.get("p_fall")))}。'
+                         + ('波动放大后期望效用反而略高，是因为波动是双向放大的：排在前面的冲刺志愿意外过线的机会也变大，而后面的保底仍然够稳。这说明这张表在大波动下没有变差，不说明大波动对你有利。'
+                            if stress.get("expected_utility", 0) > (eu or 0) and not stress.get("p_fall") else '') + '</p></div>')
         if rep.get("sensitivity"):
             body += "<h3>换一种假设，结论会变吗</h3><table><thead><tr><th>假设</th><th class='r'>期望效用</th><th class='r'>滑档概率</th><th>前段是否变化</th></tr></thead><tbody>" + "".join(
                 f"<tr><td>{E(a)}</td><td class='r'>{E(str(b))}</td><td class='r'>{E(str(c))}</td><td>{E(d)}</td></tr>" for a, b, c, d in rep["sensitivity"]) + "</tbody></table>"
@@ -1885,14 +1903,19 @@ def build(rep, opt):
             ms = "、".join(f"{i}. {m['name']}" for i, m in enumerate(x.get("majors") or [], 1))
             rows_html += (f"<tr><td class='c num'>{x['order']}</td><td class='num'>{E(code) or '＿＿＿'}</td><td>{E(x['name'].split('（')[0].split('·')[0] if x.get('group') else x['name'].split('（')[0])}</td>"
                           f"<td class='num'>{E(sub) or '＿＿'}</td><td class='small'>{E(ms) or '—'}{limit_line(x)}</td>"
-                          f"<td class='c'>{('是' if x.get('obey', True) else '<b>否</b>') if x.get('group') else '—'}</td><td class='c'><i class='checkbox'></i></td></tr>")
-        body = ('<p class="lead">这一页用来照着录入志愿填报系统。录错一个代码，前面算得再准也没用，所以请逐格核对。</p>'
-                '<div class="box warn"><h4>录入前必读</h4><ol class="tight">'
-                '<li>院校代码、专业组或专业代码<b>每年可能变</b>：表中代码来自往年数据，必须按今年的招生计划或专业目录逐个核对、改正。</li>'
-                '<li>专业组志愿：组内专业按下表顺序填；"服从调剂"一栏与本报告的计算一致，改动前先回来重算。</li>'
-                '<li>录入后，把系统里的志愿表截图或打印，逐行对照本页勾选；提交前确认截止时间。</li></ol></div>'
-                "<table><thead><tr><th class='c'>序</th><th>院校代码</th><th>院校</th><th>专业组 / 专业代码</th><th>组内专业志愿顺序</th><th class='c'>服从调剂</th><th class='c'>已核对</th></tr></thead><tbody>"
-                + rows_html + "</tbody></table>")
+                          f"<td class='c'>{E(entry_adjustment(x))}</td><td class='c'><i class='checkbox'></i></td></tr>")
+        if database_d:
+            body = ('<p class="lead">这一页只留历史代码供核对，不能照着录入系统。组内专业、当年代码和报名资格查明后，还要由本人决定是否服从调剂。</p>'
+                    '<table><thead><tr><th>序</th><th>历史院校代码</th><th>院校</th><th>历史组号</th><th>组内专业及待核条件</th><th>调剂选择</th><th>核对</th></tr></thead><tbody>'
+                    + rows_html + '</tbody></table>')
+        else:
+            body = ('<p class="lead">这一页用来照着录入志愿填报系统。录错一个代码，前面算得再准也没用，所以请逐格核对。</p>'
+                    '<div class="box warn"><h4>录入前必读</h4><ol class="tight">'
+                    '<li>院校代码、专业组或专业代码<b>每年可能变</b>：表中代码来自往年数据，必须按今年的招生计划或专业目录逐个核对、改正。</li>'
+                    '<li>专业组志愿：组内专业按下表顺序填；"服从调剂"一栏与本报告的计算一致，改动前先回来重算。</li>'
+                    '<li>录入后，把系统里的志愿表截图或打印，逐行对照本页勾选；提交前确认截止时间。</li></ol></div>'
+                    "<table><thead><tr><th class='c'>序</th><th>院校代码</th><th>院校</th><th>专业组 / 专业代码</th><th>组内专业志愿顺序</th><th class='c'>服从调剂</th><th class='c'>已核对</th></tr></thead><tbody>"
+                    + rows_html + "</tbody></table>")
         if any(x.get('data_provenance') for x in lst):
             references = list(dict.fromkeys(code_reference(x, opt.get('params', {}).get('target_year')) for x in lst))
             body = '<div class="box warn"><h4>历史代码参照，不能直接填报</h4>' + ''.join('<p>' + E(x) + '</p>' for x in references) + '</div>' + body
@@ -2027,7 +2050,7 @@ def write_sheet(opt, path):
         for x in (opt or {}).get("list", []):
             ms = "、".join(f"{i}. {mj['name']}" for i, mj in enumerate(x.get("majors") or [], 1))
             w.writerow([x["order"], x.get("code") or "", x["name"].split("（")[0].split("·")[0] if x.get("group") else x["name"].split("（")[0],
-                        x.get("group") or "", x.get("major_code") or "", ms, ("是" if x.get("obey", True) else "否") if x.get("group") else "—"]
+                        x.get("group") or "", x.get("major_code") or "", ms, entry_adjustment(x)]
                        + ([prediction_label(x), '；'.join(evidence_lines(x))] if metadata else [])
                        + ([code_reference(x, (opt or {}).get('params', {}).get('target_year'))] if historical else []))
 
@@ -2146,6 +2169,18 @@ def layout_gate(pdf):
         sys.exit("请修好版式后重新生成；不要交付这份 PDF。")
     print("版面自检通过")
 
+def sync_rendered_html(root, document):
+    """PDF通过核验后，保存同一份实际打印HTML并绑定到外部追踪。"""
+    import hashlib
+    from verify_report import json_bytes
+    root = Path(root)
+    trace = json.loads((root/'report_trace.json').read_text(encoding='utf-8'))
+    content = document.encode('utf-8')
+    trace.setdefault('artifacts', {})['report.html'] = hashlib.sha256(content).hexdigest()
+    (root/'report.html').write_bytes(content)
+    (root/'report_trace.json').write_bytes(json_bytes(trace))
+
+
 def main():
     ap = argparse.ArgumentParser(description="知衢 · 生成志愿填报决策报告（PDF/HTML）")
     ap.add_argument("report", help="报告内容 JSON（字段见 references/report-guide.md）")
@@ -2156,6 +2191,11 @@ def main():
     a = ap.parse_args()
     rep = json.load(open(a.report, encoding="utf-8"))
     opt = json.load(open(a.opt, encoding="utf-8")) if a.opt else None
+    root = Path(a.report).resolve().parent
+    if (root/'case.json').is_file():
+        from check_report import report_mode_errors
+        mode_errors = report_mode_errors(json.load(open(root/'case.json',encoding='utf-8')),rep)
+        if mode_errors:ap.error('；'.join(mode_errors))
     if opt:
         errors = check_report(rep, opt)
         if (Path(a.report).resolve().parent/'case.json').exists() and any(x.get('data_provenance') for x in opt.get('list', [])):
@@ -2206,6 +2246,7 @@ def main():
         from verify_report import verify
         result=verify(out)
         if not result['ok']:sys.exit('PDF核对失败，不能交付：'+'；'.join(result['errors']))
+        sync_rendered_html(root,doc)
     if binding:
         from verify_report import record_generation
         record_generation(root,out)

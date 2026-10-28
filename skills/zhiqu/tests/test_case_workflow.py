@@ -291,6 +291,52 @@ class GradeWording(unittest.TestCase):
             x["expected_cut_rank"] = int(res["params"]["rank"] * 1.1)
         self.assertTrue(any("保底不足" in e for e in check_report.check_grade(rep, res)))
 
+    def test_report_mode_cannot_override_registered_case(self):
+        from check_report import report_mode_errors
+        for declared in ['simulation',None,[],True,'FORMAL']:
+            self.assertTrue(report_mode_errors({'mode':'formal'},{'meta':{'mode':declared}}))
+        self.assertEqual(report_mode_errors({'mode':'formal'},{'meta':{'mode':'formal'}}),[])
+        self.assertEqual(report_mode_errors({'mode':'simulation'},{'meta':{'mode':'simulation'}}),[])
+        # 旧稿缺声明仍兼容；没有simulation声明就不能享受D模拟缺口例外。
+        self.assertEqual(report_mode_errors({'mode':'simulation'},{'meta':{}}),[])
+
+    def test_stage7_and_renderer_enforce_registered_mode(self):
+        from pathlib import Path
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);rep={'meta':{'case_id':'2027-GK-0001','mode':'simulation','generated_on':'2026-10-29'}}
+            (root/'report.json').write_text(json.dumps(rep));(root/'case.json').write_text(json.dumps({'mode':'formal'}))
+            (root/'result.json').write_text(json.dumps({'list':[]}));(root/'entry_sheet.csv').write_text('序,院校代码\n')
+            gate=case_check.Gate(root);gate.case={'case_id':'2027-GK-0001','mode':'formal'}
+            with patch('check_report.check_sections',return_value=[]),patch('check_report.check_report',return_value=[]):
+                gate.stage7()
+            self.assertTrue(any('登记模式不一致' in e for e in gate.errors))
+            output=run(os.path.join(SCRIPTS,'report.py'),str(root/'report.json'),'--out',str(root/'report.html'))
+            self.assertNotEqual(output[0],0)
+            self.assertIn('登记模式不一致',output[2])
+            self.assertFalse((root/'report.html').exists())
+
+    def test_d_insufficient_floor_can_only_be_an_explicit_simulation_gap(self):
+        import copy
+        rep={'meta':{'province':'广东','category':'物理','prob_grade':'D','mode':'simulation','grade_note':'广东其他样本B级，不认证本案单年未知组组成，降为D级'},
+             'summary':{'points':['保底不足，报名资格和组内专业仍待核；查明愿意读的后备再决定。']}}
+        result={'params':{'rank':100},'list':[{'expected_cut_rank':110,'p_clear':.7,'limits':''}]}
+        self.assertTrue(any('保底不足' in e for e in check_report.check_grade(rep,result)))
+        rep['meta']['floor_shortfall']={'reason':'单年参照、组内专业未知','remedy':'核当年资格与费用，补本人可接受后备'}
+        warnings=[]
+        self.assertEqual(check_report.check_grade(rep,result,warnings),[])
+        self.assertTrue(any('不能作为正式填报交付' in w for w in warnings))
+        for mode in ['formal',None,'SIMULATION']:
+            bad=copy.deepcopy(rep);bad['meta']['mode']=mode
+            self.assertTrue(any('保底不足' in e for e in check_report.check_grade(bad,result)))
+        for key,value in [('reason',[]),('remedy',True),('remedy',' ')]:
+            bad=copy.deepcopy(rep);bad['meta']['floor_shortfall'][key]=value
+            self.assertTrue(any('保底不足' in e for e in check_report.check_grade(bad,result)))
+        bad=copy.deepcopy(rep);bad['summary']={}
+        self.assertTrue(any('保底不足' in e for e in check_report.check_grade(bad,result)))
+        bad=copy.deepcopy(rep);bad['meta']['prob_grade']='C'
+        self.assertTrue(any('保底不足' in e for e in check_report.check_grade(bad,result)))
+
     def test_a_grade_floor_shortfall_is_warning_only_when_explained(self):
         rep, res = self.rep("2026-GK-R01"), self.result("2026-GK-R01")
         rep["meta"]["prob_grade"] = "A"

@@ -187,6 +187,24 @@ class GaokaoVerificationTests(unittest.TestCase):
         gate.assert_not_called()
         self.assertEqual(fresh['list'], result['list'])
 
+    def test_plan_scope_fields_replayed_from_csv_including_explicit_empty(self):
+        import csv
+        import io
+        from verification_calculations import recompute_gaokao
+        for plan,route in [('普通','一般统考生'),('','')]:
+            result,source=self.example(self.pro)
+            reader=csv.DictReader(io.StringIO(source.decode('utf-8-sig')))
+            rows=list(reader);fields=list(reader.fieldnames)+['plan_type','source_admission_type_raw']
+            for row in rows:row.update(plan_type=plan,source_admission_type_raw=route)
+            out=io.StringIO(newline='');writer=csv.DictWriter(out,fieldnames=fields)
+            writer.writeheader();writer.writerows(rows);source=out.getvalue().encode()
+            for row in result['list']:row.update(plan_type=plan,source_admission_type_raw=route)
+            self.assertEqual(recompute_gaokao(result,source)['list'],result['list'])
+            for key in ('plan_type','source_admission_type_raw'):
+                changed=copy.deepcopy(result);changed['list'][0][key]='错误口径'
+                with self.assertRaisesRegex(ValueError,'复算不一致'):
+                    recompute_gaokao(changed,source)
+
     def test_changed_candidate_order_or_source_rejected(self):
         from verification_calculations import recompute_gaokao
         result, source = self.example(self.group)

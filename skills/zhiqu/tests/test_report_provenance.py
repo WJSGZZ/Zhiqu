@@ -39,6 +39,69 @@ class ReportProvenanceTests(unittest.TestCase):
                 disclosure=UNVERIFIED + '；仅作历史参照，不单独支撑主结论',
                 margin='按原历史线留30%以上位次余量，另核两项可接受的保底')
 
+    def test_d_does_not_draw_probability_weighted_strategy_with_negative_baseline(self):
+        from unittest.mock import patch
+        self.result['baseline_top_utility'] = [-1.725, .51725]
+        self.result['stress']['expected_utility'] = -12.5
+        with patch.object(report, 'strategy_chart', side_effect=AssertionError('D级不应绘制概率加权满意度')), patch.object(report,'outcome_strip',side_effect=AssertionError('D级不应靠色条宽度隐含录取概率')):
+            rendered = report.build(self.rep, self.result)
+        self.assertIn('暂不比较按录取概率加权的满意度', rendered)
+        self.assertIn('压力测试的边界', rendered)
+        self.assertIn('尚不能判断', rendered)
+        self.assertIn('历史参照组数', rendered)
+        self.assertNotIn('这张志愿表的期望效用为', rendered)
+
+    def test_d_code_reference_is_not_a_fill_instruction_or_adjustment_consent(self):
+        self.result['list'][0].update(group='501',limits='资格待核：选科要求待核',obey=True)
+        rendered=report.build(self.rep,self.result)
+        self.assertNotIn('这一页用来照着录入志愿填报系统',rendered)
+        self.assertNotIn('冲：单独过线 &lt; 40%',rendered)
+        self.assertNotIn('等单列的招生计划',rendered)
+        self.assertIn('待本人确认',rendered)
+        with tempfile.TemporaryDirectory() as tmp:
+            path=Path(tmp)/'sheet.csv';report.write_sheet(self.result,path)
+            with path.open(encoding='utf-8-sig')as f:sheet=list(csv.DictReader(f))
+            self.assertEqual(sheet[0]['服从调剂'],'待本人确认')
+        legacy={'group':'501','obey':False}
+        self.assertEqual(report.entry_adjustment(legacy),'否')
+        known=dict(legacy,obey=True,data_provenance={'2025':{}},majors=[{'name':'已核专业'}])
+        self.assertEqual(report.entry_adjustment(known),'是')
+
+    def test_d_appendix_keeps_model_numbers_in_attachments_not_visible_table(self):
+        import verify_report as verify
+        from unittest.mock import patch
+        before=copy.deepcopy(self.result)
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);(root/'case.json').write_text(json.dumps({'case_id':'2027-GK-0001','mode':'simulation'}))
+            source=ROOT/self.result['params']['csv']
+            with patch.object(verify,'candidate_file',return_value=source):
+                material=verify.gaokao_materials(root,self.rep,self.result,{'sha256':'fixture','file':'profile.json'})
+                self.assertEqual(material['numbers'],[])
+                self.assertTrue(any('原始条件模型计算仅留核对附件' in r['reason'] for r in material['limitations']))
+                self.rep['meta']['prob_grade']='B'
+                numeric=verify.gaokao_materials(root,self.rep,self.result,{'sha256':'fixture','file':'profile.json'})
+                self.assertTrue(any(r['label']=='总概率核对'for r in numeric['numbers']))
+        self.assertEqual(before,self.result)
+
+    def test_d_qualitative_summary_is_still_checked_against_the_contract(self):
+        rendered=report.build(self.rep,self.result)
+        self.assertEqual(check_report(self.rep,self.result,rendered),[])
+        tampered=rendered.replace('尚不能判断','已经稳录')
+        self.assertTrue(any('摘要指标' in e for e in check_report(self.rep,self.result,tampered)))
+
+    def test_pdf_html_sync_binds_exact_printed_document_without_losing_pdf_digest(self):
+        import hashlib
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);original={'artifacts':{'2027-GK-0001-report.pdf':'existing-pdf-sha'},'source_sha256':{'report.json':'unchanged-source'}}
+            (root/'report_trace.json').write_text(json.dumps(original));(root/'report.html').write_text('过期旧版')
+            document='<html><p>最终打印内容：尚不能判断</p></html>'
+            report.sync_rendered_html(root,document)
+            self.assertEqual((root/'report.html').read_bytes(),document.encode())
+            trace=json.loads((root/'report_trace.json').read_text())
+            self.assertEqual(trace['artifacts']['report.html'],hashlib.sha256(document.encode()).hexdigest())
+            self.assertEqual(trace['artifacts']['2027-GK-0001-report.pdf'],'existing-pdf-sha')
+            self.assertEqual(trace['source_sha256'],original['source_sha256'])
+
     def test_third_party_d_disclosure_and_margin_pass(self):
         self.assertEqual(check_report(self.rep, self.result), [])
 

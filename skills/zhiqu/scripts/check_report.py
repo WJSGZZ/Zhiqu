@@ -16,6 +16,18 @@ def at(obj, path):
     return obj
 
 
+def report_mode_errors(case, rep):
+    """报告声明不能把正式登记降成模拟；旧稿缺mode不触发模拟例外。"""
+    meta = rep.get('meta', {})
+    if 'mode' not in meta:
+        return []
+    if meta['mode'] not in ('formal', 'simulation'):
+        return ['report.meta.mode 须为 formal 或 simulation']
+    if meta['mode'] != case.get('mode'):
+        return ['report.meta.mode 与 case.json 登记模式不一致，不能用模拟稿绕过正式门槛']
+    return []
+
+
 def check_report(rep, result, html=None):
     errors = check_database_basis(rep, result)
     if any(provenance_errors(item) for item in result.get('list', [])):
@@ -104,7 +116,10 @@ def check_report(rep, result, html=None):
             sims = params.get('sims', 4000)
             fall = lambda p: (f'< {100/sims:.2g}%' if grade == 'A' else '模拟中未出现') if p == 0 else (unescape(fmt(p, 1)) if numeric else '有风险，见第 05 节')
             tiers = ' / '.join(f"{t} {sum(x['tag'] == t for x in items)}" for t in ('冲', '稳', '保'))
+            database_d = grade == 'D' and any(x.get('data_provenance') for x in items)
             head4 = [str(len(items)), f'本批次可填 {rep.get("meta", {}).get("slots", "–")} 个；{tiers}', name]
+            if database_d:
+                head4 = [str(len(items)), f'模拟位置 {rep.get("meta", {}).get("slots", "–")} 个；{tiers}', '待逐组核验']
             if grade == 'A':
                 shown = unescape(fmt(probability))  # ≥99.5% 写“> 99%”，不加“约”
                 mid = ['概率' + ('' if shown.startswith('>') else '约 ') + shown] + satisfaction
@@ -116,7 +131,9 @@ def check_report(rep, result, html=None):
                 note = '内部情景参照（本案不提供个人概率）' if database_d else '落点最集中的志愿（本省评级不给精确概率）'
                 mid = [note, '不估算', f'{scope}评级 {grade}，概率不可信，按概率加权的满意度也不算；表里最高的志愿 {max(x["utility"] for x in items):.0f} 分。']
             sp = result['stress']['p_fall']
-            if grade == 'A' or result['p_fall']:
+            if database_d:
+                tail = ['尚不能判断', '条件模型没有出现落空也不代表实际无风险；先核专业、资格、费用及后备。']
+            elif grade == 'A' or result['p_fall']:
                 tail = [fall(result['p_fall']), '录取线整体大波动时 ' + fall(sp)]
             else:
                 tail = ['未出现', f'{sims:,} 次模拟中没有出现滑档；录取线整体大波动时' + ('也没有' if not sp else '：' + fall(sp))]
@@ -250,7 +267,12 @@ def check_grade(rep, result=None, warnings=None):
         if g == "B" and not any(x["p_clear"] >= 0.99 and wide(x, 1.2) for x in lst):
             errs.append("B 级保底不足：须至少一个志愿单独过线 ≥ 99% 且预测线比本人位次宽 20% 以上")
         if g in "CD" and sum(bool(wide(x, 1.3)) for x in lst) < 2:
-            errs.append(f"{g} 级保底不足：须至少两个志愿的预测线比本人位次宽 30% 以上")
+            if (g == 'D' and meta.get('mode') == 'simulation' and floor_shortfall_ok(rep)
+                    and all(isinstance(meta['floor_shortfall'].get(k), str) for k in ('reason', 'remedy'))):
+                if warnings is not None:
+                    warnings.append('D 级模拟稿保底不足：已写原因和补救；仅供讨论，不能作为正式填报交付')
+            else:
+                errs.append(f"{g} 级保底不足：须至少两个志愿的预测线比本人位次宽 30% 以上")
     if g in "BCD":
         s = rep.get("summary", {})
         texts = [s.get("headline", "")] + list(s.get("points", [])) + list(s.get("actions", [])) + list(rep.get("why", []))

@@ -424,6 +424,9 @@ def recompute_gaokao(result, candidates_csv):
                 value = row['raw'].get(key)
                 if value:
                     item[key] = json.loads(value) if key == 'data_provenance' else value
+        for key in ('plan_type', 'source_admission_type_raw'):
+            if key in row['raw']:
+                item[key] = (row['raw'][key] or '').strip()
         if row['majors']:
             item['majors'] = [{'name':name,'utility':utility,'p':count/n}
                              for (name,utility,_),count in zip(row['majors'],major_counts or [0]*len(row['majors']))]
