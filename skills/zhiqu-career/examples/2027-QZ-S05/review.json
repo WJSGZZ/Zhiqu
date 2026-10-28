@@ -512,6 +512,15 @@
         "claim_check.json"
       ],
       "reason": "求职新模拟自查修复单句判断依据被逐字拆进核对附录：支持/反证/共享条件统一接受文字或文字列表，其他类型拒绝。现有读研求职均为列表，重新组装正文、计算和附录材料未变，旧HTML/PDF字节不变；只更新工具兼容记录，保留原审批、评分及实际渲染版本，不冒充新内容复核。"
+    },
+    {
+      "date": "2026-10-29",
+      "by": "Codex（权重确认类型兼容复验，非内容复核）",
+      "files": [
+        "report_trace.json",
+        "claim_check.json"
+      ],
+      "reason": "共用原则澄清个人概率与偏好依据边界，阶段7数值权重确认只接受布尔true，拒绝字符串false等非布尔值；既有六份规划均为有序偏好，正文、附录材料、计算和PDF未变。仅更新工具兼容绑定，原批准及逐句判断保留，不冒充新内容复核。"
     }
   ],
   "review_history": [
@@ -2779,7 +2788,7 @@
     "calculations.json": "89d7a293fd6780b562866f4871846b19130b0d86e79cb9f9c233e572cbae5b5d",
     "candidates.json": "ea8bbcb101fc7dc899ec1137e869654c3b9e85d79d8229e4de8115418467aeae",
     "case.json": "79136c0287d7e845b2308724e997d90b3b7a805e4fe2843da189774d6ec93a6e",
-    "claim_check.json": "93ded4c98131159586bba6e190b659504db15fd3a0105320e8884979f59f68cd",
+    "claim_check.json": "c9a685cdbe332db075e93da47999857c15da0ba9e5960cab8a5b43788a66be6a",
     "directions.json": "2d709b22623617481aefa804b96da5c5d274812758094bb921c173d0466c29df",
     "evidence.json": "8c97b5ec4dd2e295bbf4a8eaa9372acfd30f2fcc1615cc5810525fdbbb596d59",
     "judgment.json": "89e67d8e39d0666399d8b470809425420fb18271c756578790e08248301ec3ff",
@@ -2790,7 +2799,7 @@
     "profile_parse.json": "abe812515ea2a27d78209f08c28c8bdde0a5c10d1672ef0983d66d68c6eece1a",
     "report.html": "cff1e3ca14fbc9145f6a1a4fbb3a4f14ae3c3e4544fbdeea5f215321011619d1",
     "report.md": "90ff1e8ce1555a081d376dbea69e831d6f8788393724d3db9bdb8189646a6262",
-    "report_trace.json": "c5f6f39453e84e85e82ea880e6f033eab883bea8f0ea0560ed15cdfa33da03e4",
+    "report_trace.json": "364b81224dfbad0ece5dae27b10045f3ba0ae0bbb9f90208bd7f38157f7bc9f6",
     "rules_check.json": "b45b1313cf295a6e320d32afce13a0b93b9b0e54e8b46d8d3cf2d6329732a40b"
   }
 }

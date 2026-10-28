@@ -99,7 +99,7 @@
     "calculations.json": "cec5b3577a8d62196c2dfd606cfab91b31c421feb52a97cbdd3a5cfafcd5daf7",
     "candidates.json": "c9c5db84e727dde6ec750e534d023b4e15e7dd85e5bd1bc77110b14166f9d8ad",
     "case.json": "3b7e07dfbdad7b43a2d996e35f3c024d006a7f1ef5aa47e2f3206925f1e04d76",
-    "claim_check.json": "ce8e6f0922bc4d44b8acea1c66f737e6cf48df04872dd3374f2d241cf9e1fa18",
+    "claim_check.json": "f9acacf2ee17d3b1612227157d535da36d67d63d2bbd93e7845d17e4ed1e7d70",
     "directions.json": "2b68a53951ab4a8de52d7edcbabdf32d24e4570392cd70ac212c62342430a3b2",
     "evidence.json": "68c102376c2f70ee266da8f295472bdb1cfd743bce3766c206e79b4ba346db27",
     "judgment.json": "c5eb44314051a1d85b8307a79757f819c5b69fe03647180bab197757273f26ab",
@@ -110,7 +110,7 @@
     "profile_snapshot.json": "432626de4888a0d461edc284e9c475796e8d96ce33683030143dcd3f896be032",
     "report.html": "f5a9d9c3ab5198a65d516abad913651206196b851e3a087720da4374a11f2e36",
     "report.md": "5b32adb9f81133bd864cf2d979f5b6fcb4866562f99022ea7414c67342895c2a",
-    "report_trace.json": "4181d280558065b543f7fb053d350d6fd7a0f8c55d891fd30b049f39bd6cad05",
+    "report_trace.json": "2b1a21b5f36cbb5ab77e4d1798e04e720403081e57dada08671b07968a7732a4",
     "rules_check.json": "7b0a58159b98a98e96a17d877674c57bf2d59988aefd37a2f57d94f82580f5c2"
   },
   "checklist_update_note": "仅核查单表述及核查工具记录更新；报告与计算原件未改。保留历史复核记录，当前仍等待独立审核，不是重新批准。",
@@ -409,6 +409,15 @@
         "claim_check.json"
       ],
       "reason": "求职新模拟自查修复单句判断依据被逐字拆进核对附录：支持/反证/共享条件统一接受文字或文字列表，其他类型拒绝。现有读研求职均为列表，重新组装正文、计算和附录材料未变，旧HTML/PDF字节不变；只更新工具兼容记录，保留原审批、评分及实际渲染版本，不冒充新内容复核。"
+    },
+    {
+      "date": "2026-10-29",
+      "by": "Codex（权重确认类型兼容复验，非内容复核）",
+      "files": [
+        "report_trace.json",
+        "claim_check.json"
+      ],
+      "reason": "共用原则澄清个人概率与偏好依据边界，阶段7数值权重确认只接受布尔true，拒绝字符串false等非布尔值；既有六份规划均为有序偏好，正文、附录材料、计算和PDF未变。仅更新工具兼容绑定，原批准及逐句判断保留，不冒充新内容复核。"
     }
   ],
   "regeneration": {
