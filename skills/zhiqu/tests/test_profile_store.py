@@ -39,6 +39,30 @@ def legacy_profile(kind='grad', stamp='2026-10-19T12:00:00+08:00', answers=None)
     return HEADERS[kind] + '\n模拟旧版画像\n' + json.dumps(data, ensure_ascii=False)
 
 
+class LegacyStudyExcerpts(unittest.TestCase):
+    def test_s02_subject_fields_keep_only_their_verbatim_source_fragments(self):
+        folder = Path(__file__).resolve().parents[2] / 'zhiqu-grad/examples/2028-YJ-S02'
+        raw = (folder / 'profile-supplement.txt').read_text(encoding='utf-8')
+        data = json.loads((folder / 'profile_parse.json').read_text(encoding='utf-8'))
+        fields = {item['field']: item for item in data['fields']}
+        expected = {
+            '均分或排名': ['均分大概86.1，没有首考不及格，',
+                '教务系统里我看到专业学习成绩第7/62，班委发的综合表写第9/60，不清楚两张表含不含选修、是不是同一批人。老师提到上一届交通工程推荐6人，我没核过正式名单。'],
+            '英语': ['四级487，六级还没过。'],
+            '数学基础': ['数学还跟得上，但没完整做过考研卷。'],
+        }
+        for name, fragments in expected.items():
+            with self.subTest(field=name):
+                item = fields[name]
+                self.assertEqual(item['value'], ('……' if name == '均分或排名' else '\n').join(fragments))
+                self.assertEqual(item['quote'].splitlines(), fragments)
+                self.assertIn('profile-supplement.txt', item['locator'])
+                self.assertIn('学业与语言', item['locator'])
+                for fragment in fragments:
+                    self.assertIn(fragment, raw)
+        self.assertIn('两段逐字摘录', fields['均分或排名']['locator'])
+
+
 class ProfileStore(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
