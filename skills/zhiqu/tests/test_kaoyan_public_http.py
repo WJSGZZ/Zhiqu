@@ -61,6 +61,18 @@ class PublicHTTPTests(unittest.TestCase):
         self.assertNotIn('synthetic_private_sentinel', json.dumps(receipt))
         self.assertNotIn('candidate_name', json.dumps(receipt))
 
+    def test_login_endpoint_file_extensions_are_rejected_before_transport(self):
+        fake = SimpleNamespace(resolve_public=Mock(), TargetValidationError=ValueError)
+        for path in ['/Open/Master/signin.aspx', '/Login.jsp', '/login.html', '/sso.php', '/captcha.do']:
+            with self.subTest(path=path), patch.object(http.subprocess, 'run') as send:
+                with self.assertRaises(http.SafeStop):http.safe_url('https://fixture.edu.cn'+path)
+                with self.assertRaises(ValueError):
+                    http.memory_curl_adapter(fake)('https://fixture.edu.cn'+path, headers={}, form=None, max_bytes=1000, timeout=20)
+                send.assert_not_called()
+        fake.resolve_public.assert_not_called()
+        for path in ['/news/login-policy.html', '/guide/signing.html', '/catalog.aspx']:
+            self.assertEqual(http.safe_url('https://fixture.edu.cn'+path), 'https://fixture.edu.cn'+path)
+
     def test_public_receipt_never_contains_body_private_header_or_reason(self):
         raw=b'synthetic-private-123456789012345'
         item={'body':raw,'headers':{'authorization':'synthetic-secret'}}
