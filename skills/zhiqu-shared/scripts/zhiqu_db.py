@@ -715,6 +715,19 @@ def _record(c, table, row):
     if table == 'employment_major_industry' and 'employment_industry_version' in _tables(c):
         equivalent_sources=[dict(x) for x in c.execute('SELECT * FROM data.employment_industry_version WHERE preferred_source_id=? ORDER BY source_id',(sid,))]
     result = {'table':table,'major_links':major_links,'institution_links':institution_links,'record_id':row.get('record_id',row.get('entry_id',row.get('position_id'))),'field_source_ids':_json(row.get('field_source_ids')) if table == 'gk_v_purchased' else {},'context':{k:row[k] for k in CONTEXT if k in row and row[k] not in (None,'')},'values':values,'source':s,'locator':{k:row[k] for k in ['src_page','src_table','src_sheet','src_row','src_col','src_cell','src_locator','locator','source_locator','locator_method','locator_status'] if k in row},'excerpt':row.get('excerpt') or row.get('field_excerpt') or (original[0] if original else None) or _original_excerpt(_json(row.get('excerpt_locator_json'))),'excerpt_kind':('purchased_row原始单元格' if original else row.get('excerpt_kind') or ('原表摘录或读图定位记录（核验状态另列）' if row.get('excerpt_locator_json') else '原表单元格摘录' if table in ['job_summary','job_position'] else '未取到逐字原文摘录')),'excerpt_locator':_json(row.get('excerpt_locator_json')),'original_locator':original[1] if original else None,'equivalent_sources':equivalent_sources}
+    if table=='recruitment_notice':
+        meta=_json(row.get('note'))
+        proof=_json(row.get('excerpt'))
+        if isinstance(meta,dict) and meta.get('schema')=='career-table-evidence-v1' and isinstance(proof,dict):
+            result['context'].pop('note',None)
+            result['context'].update(position=meta.get('position'),scope='原表匹配行；取文核对不代表当前在招或本人合格')
+            for field,label in [('duties','岗位职责'),('requirements','任职要求'),('pay','报酬原文'),('schedule','到岗安排')]:
+                if field not in meta.get('fields',{}):continue
+                value=meta['fields'][field]
+                result['values'][label]={'value':value,'unit':'原文（不换算）','grade':s.get('grade'),'publisher':s.get('publisher'),
+                                        'source_id':sid,'value_status':{'status':'官方原值'if value else'来源未提供'}}
+            result['locator'].update(src_table=proof.get('src_table'),src_row=proof.get('src_row'))
+            result['excerpt_kind']='已核匿名招聘表原格；HTML两读及抽核，不是资格认定'
     if table in ('ky_retest_line', 'ky_v_retest_line'):
         proof = _json(row.get('excerpt_locator_json'))
         if isinstance(proof, dict) and proof.get('locator'):
@@ -1303,6 +1316,11 @@ def query_source(source_id, *, db=None, domain='education', limit=10, offset=0):
                     locations.append({k:detailed[k] for k in ('table','locator','context','excerpt','excerpt_kind','excerpt_locator','original_locator','additional_sources','annotation_json','annotation_status','numeric_conflict_fields','numeric_conflict_fields_status') if k in detailed})
                     continue
                 locations.append({'table':table,'locator':{k:r[k] for k in ['record_id','src_page','src_table','src_sheet','src_row','src_col','src_cell','src_locator','locator'] if k in r},'excerpt':r.get('excerpt') or r.get('field_excerpt') or _original_excerpt(_json(r.get('excerpt_locator_json'))),'excerpt_kind':r.get('excerpt_kind') or ('原表摘录或读图定位记录（核验状态另列）' if r.get('excerpt_locator_json') else '未取到逐字原文摘录'),'excerpt_locator':_json(r.get('excerpt_locator_json'))})
+                meta=_json(r.get('note'))
+                proof=_json(r.get('excerpt'))
+                if table=='recruitment_notice' and isinstance(meta,dict) and meta.get('schema')=='career-table-evidence-v1' and isinstance(proof,dict):
+                    locations[-1]['locator'].update({k:proof.get(k)for k in ('src_table','src_row')})
+                    locations[-1]['excerpt_kind']='已核匿名招聘表原格；HTML两读及抽核，不是资格认定'
         return {'query':'source','database':str(p),'source':s,'locations':locations,'matching_rows_by_table':counts,'limit_per_table':limit,'offset':offset,'warnings':['未留存逐字摘录时明确显示未取到；结构化整理记录不冒充官网逐字原文。']}
 
 
