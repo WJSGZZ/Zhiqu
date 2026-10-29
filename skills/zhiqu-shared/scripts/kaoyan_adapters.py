@@ -11,7 +11,7 @@ import random
 import re
 import statistics
 from lxml import html
-from kaoyan_tables import html_tables, _decode, _lxml_text
+from kaoyan_tables import html_tables, _decode, _lxml_text, ARTICLE_IMAGE_XPATH
 from ingest_kaoyan_lines import RAW, dump, privacy
 
 class NeedsReview(ValueError):
@@ -116,7 +116,7 @@ def parse_official_html(body, url, identity, year, layer, programs):
     sid, digest = source['source_id'], source['archive_sha256']
     tables = html_tables(body)  # No output or persistence of raw grids.
     root = html.fromstring(_decode(body))
-    if not tables and root.xpath('//*[contains(@class,"v_news_content") or @id="vsb_content"]//img[@src]'):
+    if not tables and root.xpath(ARTICLE_IMAGE_XPATH):
         raise NeedsReview('原业务表为图片；需两种独立读图和10%至少5行抽核，尚未完成不入库')
     for table in tables:
         table['scope'] = _heading(root, table['table'])

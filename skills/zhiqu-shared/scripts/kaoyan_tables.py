@@ -23,6 +23,12 @@ _MAX_SPAN = 1000
 _MAX_COLUMNS = 2000
 _MAX_SLOTS = 200000
 
+# Actual article containers used by the official publishing systems. A class
+# token is required; banners and similarly named layout classes are excluded.
+ARTICLE_IMAGE_XPATH = ('//article//img[@src] | //*[@id="vsb_content"]//img[@src] | '
+    '//*[contains(concat(" ",normalize-space(@class)," ")," v_news_content ")]//img[@src] | '
+    '//*[contains(concat(" ",normalize-space(@class)," ")," wp_articlecontent ")]//img[@src]')
+
 
 def _norm(value):
     return ' '.join(unicodedata.normalize('NFKC', value).split())

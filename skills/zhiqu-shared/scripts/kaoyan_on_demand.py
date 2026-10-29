@@ -132,11 +132,12 @@ def existing_source_entries(database, source_ids):
 def navigation_links(body,url,school,entry):
     from lxml import html
     from kaoyan_tables import _decode
-    root=html.fromstring(_decode(body));out=[]
+    root=html.fromstring(_decode(body));out=[];priorities={}
     if school not in ''.join(root.itertext()):return out
     for a in root.xpath('//a[@href]'):
-        label=''.join(a.itertext())
-        if not re.search('研究生院|研究生招生|学校官网|学校主页|学院网站|官方网站|学校网站|院校网站|招生单位网站|院校简介|院校介绍|学校概况|学校简介|联系方式',label):continue
+        label=''.join(a.itertext())+' '+a.get('title','')
+        if '博士'in label and '硕士'not in label:continue
+        if not re.search('研究生院|研究生招生|硕士.*招生|硕士招生|招生信息|招生工作|学校官网|学校主页|学院网站|官方网站|学校网站|院校网站|招生单位网站|院校简介|院校介绍|学校概况|学校简介|联系方式',label):continue
         target=urljoin(url,a.get('href'));host=urlsplit(target).hostname or ''
         if urlsplit(url).hostname=='yz.chsi.com.cn' and host.endswith('.edu.cn'):
             entry['graduate_site_url']=target
@@ -144,6 +145,8 @@ def navigation_links(body,url,school,entry):
             try:safe_url(target)
             except Exception:continue
             if target not in out:out.append(target)
+            priority=0 if re.search('研究生院|研究生招生|硕士.*招生|硕士招生',label)else 1 if re.search('学校官网|学校主页|官方网站|学校网站|院校网站|招生单位网站',label)else 2 if re.search('招生信息|招生工作|学院网站',label)else 3
+            priorities[target]=min(priorities.get(target,priority),priority)
     if urlsplit(url).hostname=='yz.chsi.com.cn':
         text=' '.join(root.itertext())
         for match in re.finditer(r'(?:学校网址|学校官网|学校网站|学校主页|院校网址)\s*[:：]?\s*(https?://[^<>\s\"\']+)',text):
@@ -153,15 +156,19 @@ def navigation_links(body,url,school,entry):
             if (urlsplit(target).hostname or'').endswith('.edu.cn'):
                 entry['graduate_site_url']=target
                 if target not in out:out.append(target)
-    return out[:6]
+                priorities[target]=min(priorities.get(target,1),1)
+    # Keep the six-link budget; overview/contact links must not crowd out the
+    # actual graduate admissions entrance merely because they appear first.
+    return sorted(out,key=lambda u:priorities[u])[:6]
 
 
 def discover_links(body, url, year, layer):
     """Actual public hrefs only; no guessed path, pagination or API parameters."""
     from lxml import html
-    from kaoyan_tables import _decode
+    from kaoyan_tables import _decode, ARTICLE_IMAGE_XPATH
     root = html.fromstring(_decode(body))
     links = []
+    originals = set()
     document_page=False
     from kaoyan_adapters import source_record
     title_text=''.join(root.xpath('//h1//text() | //h2//text() | //title/text()'))
@@ -184,16 +191,18 @@ def discover_links(body, url, year, layer):
         try: safe_url(target)
         except Exception: continue
         if target not in links: links.append(target)
+        if attachment:originals.add(target)
     # Only actual images inside a correctly dated business document body. No
     # logos, guessed URLs or images from undated navigation pages are fetched.
     if document_page:
-        for image in root.xpath('//article//img[@src] | //*[@id="vsb_content"]//img[@src] | //*[@class="v_news_content"]//img[@src]'):
+        for image in root.xpath(ARTICLE_IMAGE_XPATH):
             target=urljoin(url,image.get('src'))
             if urlsplit(target).hostname==urlsplit(url).hostname:
                 try:safe_url(target)
                 except Exception:continue
                 if target not in links:links.append(target)
-    return links[:12]
+                originals.add(target)
+    return sorted(links,key=lambda u:u not in originals)[:12]
 
 
 def reviewed_manifest(body, url, layer, reviewed):
@@ -442,7 +451,7 @@ def run_request(request, *, fetch=fetch_public, publisher=validate_and_publish, 
         # Explicit known originals do not need rediscovery through the homepage.
         queue=(list(request.get('entries',[]))+
                existing_source_entries(request['database'],cell.get('source_ids',[]))+
-               [entry.get(k,'') for k in ['known_official_document_entry_url','chsi_profile_url','graduate_site_url','school_homepage_url']])
+               [entry.get(k,'') for k in ['known_official_document_entry_url','graduate_entry_basis_url','chsi_profile_url','graduate_site_url','school_homepage_url']])
         result=dict(cell,status='not fetched',reason='未定位可双读的官方原表',attempted_entries=[],entry_results=[])
         while queue:
             try:deadline()
@@ -496,7 +505,7 @@ def run_request(request, *, fetch=fetch_public, publisher=validate_and_publish, 
                     # Adapter diagnostics are fixed messages, never raw source text.
                     result['reason']=str(exc)
                     result['sha256']=hashlib.sha256(body).hexdigest()
-                    if is_html:queue.extend(discover_links(body,url,year,layer))
+                    if is_html:queue[:0]=discover_links(body,url,year,layer)
                     continue
                 except ValueError:
                     result['reason']='原表双读或结构核对未通过，整份不入库';continue
@@ -509,7 +518,7 @@ def run_request(request, *, fetch=fetch_public, publisher=validate_and_publish, 
                                   rows=parsed['rows'],pending=parsed['pending'],source_ids=[s['source_id']for s in parsed['manifest']['sources']],proofs=parsed['proofs'])
                     break
                 result['reason']='所问专业的拟录取分组均n<3，整组不保存'if parsed.get('suppressed_groups')else'官方原表未找到所问专业，或该格式范围仍需核对'
-                if is_html:queue.extend(discover_links(body,url,year,layer))
+                if is_html:queue[:0]=discover_links(body,url,year,layer)
             except TimeoutError:
                 result.update(reason='单校时间限制，未验收部分不发布');break
             except Exception:

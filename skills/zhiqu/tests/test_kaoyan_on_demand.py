@@ -472,6 +472,67 @@ class OnDemandTests(unittest.TestCase):
         self.assertEqual(json.loads(ledger.read_text())[0]['stop_category'], 'restricted_redirect')
         self.assertNotIn('/sso/start', json.dumps(summary))
 
+    def test_recorded_graduate_basis_url_is_requested_before_generic_site(self):
+        self.request['entries'] = []
+        basis = 'https://fixture.edu.cn/actual-admission.html'
+        summary, fetch, publisher = self.run_fake(entry={
+            'graduate_site_url': 'https://fixture.edu.cn/',
+            'graduate_entry_basis_url': basis,
+        })
+        self.assertEqual(fetch.call_args_list[0].args[0], basis)
+        self.assertTrue(summary['published'])
+
+    def test_masters_navigation_remains_school_bound_and_skips_doctoral_only(self):
+        body = page('<a href="/masters">硕士研究生招生信息</a>'
+                    '<a href="/doctoral">博士招生信息</a>'
+                    '<a href="https://unconfirmed.example/master">硕士招生</a>')
+        entry = {'graduate_site_url': 'https://fixture.edu.cn/'}
+        self.assertEqual(tool.navigation_links(body, URL, '合成大学', entry), ['https://fixture.edu.cn/masters'])
+        self.assertEqual(tool.navigation_links(body, URL, '另一所大学', entry), [])
+
+    def test_admissions_navigation_wins_six_link_budget_over_school_overviews(self):
+        markup = ''.join('<a href="/about'+str(i)+'">学校概况</a>' for i in range(6))
+        markup += '<a href="/masters">硕士招生</a>'
+        links = tool.navigation_links(page(markup), URL, '合成大学', {'graduate_site_url':'https://fixture.edu.cn/'})
+        self.assertEqual(len(links), 6)
+        self.assertEqual(links[0], 'https://fixture.edu.cn/masters')
+        self.assertNotIn('https://fixture.edu.cn/about5', links)
+
+    def test_webplus_original_image_is_discovered_without_logo_or_external_images(self):
+        body = page('<img src="/logo.jpg"><div class="content wp_articlecontent wide">'
+                    '<img src="/original.jpg"><img src="https://unconfirmed.example/other.jpg"></div>'
+                    '<div class="wp_articlecontent_fake"><img src="/layout.jpg"></div>')
+        self.assertEqual(tool.discover_links(body, URL, 2026, 'lines'), ['https://fixture.edu.cn/original.jpg'])
+        with self.assertRaisesRegex(adapters.NeedsReview, '原业务表为图片'):
+            adapters.parse_official_html(body, URL, IDENTITY, 2026, 'lines', ['0854'])
+        self.assertEqual(tool.discover_links(body, URL, 2025, 'lines'), [])
+        logo_only = page('<img src="/logo.jpg"><div class="wp_articlecontent_fake"><img src="/layout.jpg"></div>')
+        self.assertEqual(tool.discover_links(logo_only, URL, 2026, 'lines'), [])
+        self.assertEqual(adapters.parse_official_html(logo_only, URL, IDENTITY, 2026, 'lines', ['0854'])['rows'], 0)
+
+    def test_actual_original_attachment_is_tried_before_generic_fallback_page(self):
+        parent = URL
+        original = 'https://fixture.edu.cn/original.jpg'
+        generic = 'https://fixture.edu.cn/about'
+        self.request['entries'] = [parent, generic]
+        body = page('<div class="wp_articlecontent"><img src="/original.jpg"></div>')
+        def fetch(url, deadline):
+            return {'body': body if url == parent else b'%unrecognized', 'url': url}, {'status':'retrieved'}
+        f = Mock(side_effect=fetch)
+        with patch.object(tool, 'parse_official_document', side_effect=adapters.NeedsReview('固定原图核验未通过')):
+            summary, _, publisher = self.run_fake(fetch=f)
+        self.assertEqual([c.args[0] for c in f.call_args_list[:2]], [parent, original])
+        publisher.assert_not_called()
+        self.assertFalse(summary['published'])
+
+    def test_original_image_wins_twelve_link_budget_over_related_archive_links(self):
+        markup = ''.join('<a href="/archive'+str(i)+'">2026年硕士复试分数线</a>' for i in range(12))
+        markup += '<div class="wp_articlecontent"><img src="/original.jpg"></div>'
+        links = tool.discover_links(page(markup), URL, 2026, 'lines')
+        self.assertEqual(len(links), 12)
+        self.assertEqual(links[0], 'https://fixture.edu.cn/original.jpg')
+        self.assertNotIn('https://fixture.edu.cn/archive11', links)
+
     def test_recorded_url_padding_is_removed_without_rewriting_address(self):
         path = self.root/'entries.csv'
         path.write_text('school,graduate_site_url\n合成大学,  https://fixture.edu.cn/path/  \n')
