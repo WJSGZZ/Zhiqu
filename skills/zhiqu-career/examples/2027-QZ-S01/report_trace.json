@@ -15,7 +15,7 @@
   },
   "contract_sha256": "8efe50a42837daeec7a83de34e595fd7eeb88a8cfeff1a26afc20699fd951d76",
   "tool_sha256": {
-    "planning_report.py": "ce3ab0e1ce54cb7f250e71b60c56ce78f863f52b8840b82f12a416d6aee7c9c6",
+    "planning_report.py": "32ca898bbb421d198bdb1d35c9215014d0642ffdf5d08eb88f4030c5f050ddf6",
     "planning_workflow.py": "7126b68aa5b208ec08911ef4c4c356211d17433cad2c59debfd54407cfc6b27f",
     "operator_check.py": "d99826c1cae9514c665edb0b1b6155ea99a0bce19b99a919b9ada81e0b93c0a1",
     "check_demos.py": "67d4edc1cd737beeb6729783a736e667a97c12d8f7de2de673632d9d5c3370b8",
@@ -27,7 +27,7 @@
     "official_source_audit.py": "c09c40a2c5eec18318fbb1fa52393ee37b4e63f636ec7ea3999084d12ecc0df1",
     "unit_validation.py": "9f5df89a101dd684231fe35f8fe931e150127fc698f2ab774b628bc3ffdf093c",
     "reader_language.py": "ccb4d16f5a23fff9e9660c9cf33aa042b81f2e2221dc38bb641079b0d61259b6",
-    "claim_check.py": "69fd237635e27c23214fb99e915d3a31afd51bc435dc86de31ca3b7dc9c35a6b",
+    "claim_check.py": "9495d7fac08683e81002aa95d943de5f16030aa13d4c5ba08d27995d0b0f27bb",
     "check_report.py": "943648b8c2b778f210550712d225c0b341d361c5c52e2fb751d4bec8d2e60917",
     "authoring_metadata.py": "9ac0328c9a8bdeec672daede766f49f5e9c94c2761ae64e0ec32e2ed8abf404c"
   },
@@ -1322,7 +1322,7 @@
     "form": null
   },
   "verification_tools_sha256": {
-    "verify_report.py": "50c79876b1851c1a54e859b874f47c7760fba488fb5da8b9b6e8173d4538345d",
+    "verify_report.py": "0a82348fb6f66951d2fdb7039035177e87a53185bd100192f957f1a42d020331",
     "verification_calculations.py": "24c83966e3bc62642683532ca98d4318d989efd7f5e4444a9c7d9c695accea98"
   },
   "compatibility_verifications": [
@@ -1608,6 +1608,34 @@
         }
       },
       "previous_trace_sha256": "92692e297f28693f24b442dbeec405a1f3cede093dee73f35791e3bfc579d79d",
+      "assembled_markdown_sha256": "0895952f1caa72b7576496650f775ddafc6137d721509d0fe4868561a12c2195",
+      "rendered_body_html_sha256": "cea5c65b04b10b2dfda34eb3b7cee34bc75286132556bb623b317db64fa67f16",
+      "appendix_materials_unchanged_except_runtime_timestamp": true,
+      "original_artifacts": {
+        "report.md": "0895952f1caa72b7576496650f775ddafc6137d721509d0fe4868561a12c2195",
+        "report.html": "ffa710d2a9920cdd43b8f5681afaee51f3bd4a2e15c64b8be4f4556a6b4ef49f",
+        "2027-QZ-S01-report.pdf": "442cf877493f9c33e75c418da23fa875a9030ade3240671c866913580aa08ad9"
+      }
+    },
+    {
+      "date": "2026-10-30",
+      "kind": "internship_audit_compatibility",
+      "reason": "实习收入缺口提示仅核实际显示文本，并覆盖实习报酬说法；复合问卷专业/求职字段中文标签补齐。六旧例正文、核对材料、输入、数值、PDF及原审批完全相同，仅兼容工具指纹，不冒充内容新复核。",
+      "changed_tools": {
+        "planning_report.py": {
+          "before": "ce3ab0e1ce54cb7f250e71b60c56ce78f863f52b8840b82f12a416d6aee7c9c6",
+          "after": "32ca898bbb421d198bdb1d35c9215014d0642ffdf5d08eb88f4030c5f050ddf6"
+        },
+        "claim_check.py": {
+          "before": "69fd237635e27c23214fb99e915d3a31afd51bc435dc86de31ca3b7dc9c35a6b",
+          "after": "9495d7fac08683e81002aa95d943de5f16030aa13d4c5ba08d27995d0b0f27bb"
+        },
+        "verify_report.py": {
+          "before": "50c79876b1851c1a54e859b874f47c7760fba488fb5da8b9b6e8173d4538345d",
+          "after": "0a82348fb6f66951d2fdb7039035177e87a53185bd100192f957f1a42d020331"
+        }
+      },
+      "previous_trace_sha256": "0716d97e2684da25a72208eb2b70484bc4fe6d00ab9a50d8ff7fde291e41da4c",
       "assembled_markdown_sha256": "0895952f1caa72b7576496650f775ddafc6137d721509d0fe4868561a12c2195",
       "rendered_body_html_sha256": "cea5c65b04b10b2dfda34eb3b7cee34bc75286132556bb623b317db64fa67f16",
       "appendix_materials_unchanged_except_runtime_timestamp": true,
