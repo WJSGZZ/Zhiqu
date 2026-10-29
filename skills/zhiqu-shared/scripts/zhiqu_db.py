@@ -1186,9 +1186,51 @@ def query_program(name, program, *, year=None, province=None, db=None, limit=10,
     return _query_education(name,program=program,year=year,province=province,db=db,limit=limit,offset=offset,major=major,subject=subject,plan_type=plan_type)
 
 
+def _employment_place_paths(value):
+    """Explicit geographic labels only; annotations are not work locations.
+
+    This is label normalization, not an administrative geocoder. A province
+    does not certify any one city, and an employer name is never a location.
+    """
+    if not isinstance(value,str):return set()
+    head=re.split(r'[（(;；]',unicodedata.normalize('NFKC',value),maxsplit=1)[0].strip()
+    def clean(label):
+        return re.sub(r'(?:特别行政区|壮族自治区|回族自治区|维吾尔自治区|自治区|省|市)$','',label.strip())
+    paths=set()
+    # Split only explicit administrative suffixes, never a bare name prefix:
+    # 海南藏族自治州 is not 海南省; 河北区 is not 河北省.
+    parent=r'(?:内蒙古自治区|广西壮族自治区|宁夏回族自治区|新疆维吾尔自治区|西藏自治区|(?:黑龙江|吉林|辽宁|河北|河南|山东|山西|陕西|甘肃|青海|江苏|浙江|安徽|江西|福建|湖北|湖南|广东|海南|四川|贵州|云南|台湾)省|(?:北京|天津|上海|重庆)市)'
+    for alternative in re.split(r'[、,/／]',head):
+        path=[]
+        for label in alternative.split('·'):
+            label=label.strip()
+            if not re.fullmatch(r'[\u4e00-\u9fff]{2,18}',label):break
+            hierarchy=re.fullmatch('('+parent+r')([\u4e00-\u9fff]{2,12}(?:市|自治州|地区|盟|区|县))',label)
+            path.extend(clean(x)for x in hierarchy.groups())if hierarchy else path.append(clean(label))
+        else:
+            if path:paths.add(tuple(path))
+    return paths
+
+
+def _employment_region_match(*values):
+    # A literal query must denote one label. Never turn SQL wildcard characters
+    # or an annotation into a broader match.
+    *locations,requested=values
+    wanted=_employment_place_paths(requested)
+    if len(wanted)!=1 or re.search(r'[（(;；·、,/／]',str(requested)):return False
+    target=next(iter(wanted));groups=[p for x in locations if (p:=_employment_place_paths(x))]
+    paths=[p for group in groups for p in group]
+    if len(target)==1:return any(target[0]in p for p in paths)
+    if any(target==p[:len(target)]for p in paths):return True
+    # Separate explicit city/province columns can close one hierarchy. A
+    # multi-city field cannot be flattened into a fictitious cross-city pair.
+    return bool(groups)and all(len(g)==1 and len(next(iter(g)))==1 for g in groups)and set(target)<={p[0]for p in paths}
+
+
 def query_jobs(*, region=None, major=None, year=None, db=None, education_db=None, limit=10, offset=0):
     limit,offset=_bounds(limit,offset)
     with _open('employment',db,education_db) as (c,p):
+        c.create_function('employment_region_match',-1,_employment_region_match,deterministic=True)
         tables=_tables(c);sections=[];unknown_cohort_included=False
         for table in ['job_summary' if 'job_summary' in tables else 'job_position','wage_stat','competition_stat','civil_major_summary','selected_university','recruitment_notice','industry_stat','graduate_destination','employment_major_industry']:
             if table not in tables:continue
@@ -1196,11 +1238,16 @@ def query_jobs(*, region=None, major=None, year=None, db=None, education_db=None
             if table=='graduate_destination' and major:continue # source has no graduate-major dimension
             if region and table=='graduate_destination':
                 if not {'category','item'}<=cols:continue
-                where+=" AND t.category='地区' AND t.item LIKE ?";args.append('%'+region+'%')
+                where+=" AND t.category='地区' AND employment_region_match(t.item,?)";args.append(region)
             elif region:
-                loc=[x for x in ['region','province','scope','province_raw','city_raw'] if x in cols]
+                # A structured region/province is authoritative. The free-form
+                # scope often names excluded cities or the republisher's city.
+                # Never OR it with a known geographic label.
+                loc=[x for x in ['region','province'] if x in cols]
+                if not loc:loc=[x for x in ['scope'] if x in cols]
                 if not loc:continue
-                where+=' AND ('+' OR '.join('t.'+_ident(x)+' LIKE ?' for x in loc)+')';args += ['%'+region+'%']*len(loc)
+                location=','.join('t.'+_ident(x)for x in loc)
+                where+=' AND employment_region_match('+location+',?)';args.append(region)
             if major:
                 names=[x for x in ['major_code','major_name','major_clause','major_restriction','group','position','title','note','notes','category','item','item_raw'] if x in cols]
                 if not names:continue
@@ -1215,6 +1262,7 @@ def query_jobs(*, region=None, major=None, year=None, db=None, education_db=None
             sec=_section(c,table,where,args,limit,offset)
             if sec['total']:sections.append(sec)
         warnings=['工资是原调查在岗群体分位值，单位逐项列明，不等于应届起薪。','报名人数/名额是群体竞争口径，不是个人录用概率；专业关键词仅筛选原条款，不构成报考资格认定。','本科专业只按major_link的专业层级与全名精确关系解释，不将地方专业代码或研究生代码盲目等同。']
+        if region:warnings.append('地区只按原地域字段匹配；范围备注中的城市、转载地、单位名和学校所在地不算工作地。省级数据不自动算作某市覆盖，未命中不代表当地没有岗位；岗位地点尚未结构化的须回官方公告核实。')
         if major and 'graduate_destination' in tables:warnings.append('院校就业去向原表没有按专业统计，专业筛选时不列入；学校所在地或单位名称不等同于某专业的就业去向。')
         if any(sec['table']=='employment_major_industry' for sec in sections):
             warnings.append('专业就业行业分布为第三方历史参考；届别未注明，不能视为查询年份或单独支撑报告结论；未写百分号的占比数值不自动换算为百分比。')
