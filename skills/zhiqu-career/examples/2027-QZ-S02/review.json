@@ -169,7 +169,7 @@
     "calculations.json": "8e8135c7483b79dbc2d7ed702e1d9add2628ccf852da45c3d957f1e3f05d98f5",
     "candidates.json": "d741b74ae820c210e0b7d43186496ea83b72584adfe0529440e2a3b7c251d835",
     "case.json": "1266369f01a1fb4ddd7f6d8f6a4f7fcdcc475445fed3cfc9d464a41bbfda2d73",
-    "claim_check.json": "d61c561bd79d2e3f0b319db0bc4da6e89aececcf3637defdb061d605cd880bea",
+    "claim_check.json": "b72a7edfa1c1cb533a2dcb4dbd789ddd4b5a13a5466ebb0eb5df2b24e17c2a74",
     "directions.json": "5b2397e7ee4e80db6b8b1b6bf0834869aabbf282dcfecc6f23c4c706d476cc76",
     "evidence.json": "39819a48f34df9a8ad734daa1ebc55980ea28b5ed46eabaa429b710b898af15d",
     "judgment.json": "6b1a98ce44bf3a24b623518f8bca10d5a21ff18b40d9e7d69cf39b5b605f113d",
@@ -180,7 +180,7 @@
     "profile_parse.json": "d34b3c37a261949e9502d03e5eec3b00d0ad8d8f989758bfe8c4509ffae5cfd7",
     "report.html": "c09e09376b812953b4bb49bcbbb656b4c14c7ef2092c0418ceb1d8516cc0898c",
     "report.md": "caf501508e4bb94fa89ef30378a716f496ff000289aa508092a9fec6dc852eff",
-    "report_trace.json": "9492c36ad0061fa13274b881cfa9fee197607f5e726d42d34ea90b7807e8356f",
+    "report_trace.json": "a6accd98e4f0ee08d8d57fe0078a0191af608bee25224d5ef45fd2070cdf331b",
     "rules_check.json": "d887941488483a7992cfbe1fb174550f3fdb3083d8c597a1cdcc43f1eee9d198"
   },
   "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。",
@@ -540,6 +540,15 @@
         "claim_check.json"
       ],
       "reason": "实习收入缺口提示仅核实际显示文本，并覆盖实习报酬说法；复合问卷专业/求职字段中文标签补齐。六旧例正文、核对材料、输入、数值、PDF及原审批完全相同，仅兼容工具指纹，不冒充内容新复核。"
+    },
+    {
+      "date": "2026-10-30",
+      "by": "Codex（求职按需取证流程兼容复验，非内容复核）",
+      "files": [
+        "report_trace.json",
+        "claim_check.json"
+      ],
+      "reason": "求职按需候选原文工具及流程链接；原有示例未运行新取数器。六旧例正文、核对材料、输入、数值、PDF及原审批完全相同，仅兼容流程指纹，不冒充内容新复核。"
     }
   ],
   "regeneration": {
