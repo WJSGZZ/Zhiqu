@@ -769,6 +769,57 @@
         "file": "skills/zhiqu/tests/test_kaoyan_existing_lines.py",
         "basis": "同源存量核验实际关联问题的合成回归；不代替真实原件判读。"
       }
+    },
+    {
+      "id": "ky-object-data-not-src",
+      "domain": "考研",
+      "test": "test_kaoyan_embedded_documents.EmbeddedDocuments.test_object_uses_its_resource_data_attribute_not_an_unrelated_src",
+      "input_fixture": {
+        "file": "test_kaoyan_embedded_documents.py",
+        "symbols": [
+          "EmbeddedDocuments.test_object_uses_its_resource_data_attribute_not_an_unrelated_src"
+        ]
+      },
+      "expected": "object原件只取data，不能跟随浏览器忽略的src。",
+      "provenance": {
+        "commit": "a3c135c7aafcf3fe86b243041b6e130aef90dc81",
+        "file": "skills/zhiqu/tests/test_kaoyan_embedded_documents.py",
+        "basis": "嵌入原件实际定位问题与同类HTML语义的合成回归；没有取得真实PDF，不冒原件准确率。"
+      }
+    },
+    {
+      "id": "ky-incomplete-embedded-uri",
+      "domain": "考研",
+      "test": "test_kaoyan_embedded_documents.EmbeddedOrchestration.test_bad_embed_is_reported_without_requesting_its_broken_address",
+      "input_fixture": {
+        "file": "test_kaoyan_embedded_documents.py",
+        "symbols": [
+          "EmbeddedOrchestration.test_bad_embed_is_reported_without_requesting_its_broken_address"
+        ]
+      },
+      "expected": "原页嵌入地址残缺要记缺口，不补文件名、不请求坏地址、不调用入库。",
+      "provenance": {
+        "commit": "a3c135c7aafcf3fe86b243041b6e130aef90dc81",
+        "file": "skills/zhiqu/tests/test_kaoyan_embedded_documents.py",
+        "basis": "嵌入原件实际定位问题与同类HTML语义的合成回归；没有取得真实PDF，不冒原件准确率。"
+      }
+    },
+    {
+      "id": "ky-declared-document-base",
+      "domain": "考研",
+      "test": "test_kaoyan_embedded_documents.EmbeddedDocuments.test_anchor_and_article_image_use_the_declared_same_site_base",
+      "input_fixture": {
+        "file": "test_kaoyan_embedded_documents.py",
+        "symbols": [
+          "EmbeddedDocuments.test_anchor_and_article_image_use_the_declared_same_site_base"
+        ]
+      },
+      "expected": "正文链接及原图按单个同站HTML基址解析，不猜根目录路径。",
+      "provenance": {
+        "commit": "a3c135c7aafcf3fe86b243041b6e130aef90dc81",
+        "file": "skills/zhiqu/tests/test_kaoyan_embedded_documents.py",
+        "basis": "嵌入原件实际定位问题与同类HTML语义的合成回归；没有取得真实PDF，不冒原件准确率。"
+      }
     }
   ],
   "not_in_this_suite": [
