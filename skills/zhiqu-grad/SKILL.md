@@ -49,9 +49,9 @@ description: 知衢 · 读研规划。读取「知衢 · 硕士版」问卷生�
 
    如果时间、精力和资金可兼顾，就保留“主路径＋可接受备选”，例如考研与合适的秋招；否则先排冲突。参加秋招不等于已有工作保障。
 3. **只读需要的参考**：
-   - 中外合作办学或"境内读境外学位"看 `references/sino-foreign.md`；
+   - 中外合作办学或"境内读境外学位"看 `references/sino-foreign.md`，其中逐校入口与宁波诺丁汉核对步骤用于区分申请制、统招及证书；
    - 保研看 `references/tuimian.md`，大三及以上先按其中“能不能拿到本校推荐”部分判断还现不现实；
-   - 考研择校、跨专业、调剂、二战看 `references/kaoyan.md`；
+   - 考研择校、跨专业、调剂、二战先看 `references/kaoyan.md`；按其中招生单位表及[考试类别](references/kaoyan-categories.md)分流管理类联考、法硕、医学等，再核本人资格、科目与学习方式，不把不同类别的总分和时间表混用；
    - 要不要读、学硕/专硕、全/非全、在职路径和读博选择看 `references/routes.md`；
    - 出国/境外看 `references/abroad.md`。
 
