@@ -697,6 +697,78 @@
         "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
         "basis": "南京审计真实双行表头/类别与复试线表已取得但漏映射、原件已存在不同source_id的回归；不冒完成存量核验关联。"
       }
+    },
+    {
+      "id": "ky-existing-no-cross-scope",
+      "domain": "考研",
+      "test": "test_kaoyan_existing_lines.ExistingLineChecks.test_different_mode_program_year_college_or_score_is_not_same_fact",
+      "input_fixture": {
+        "file": "test_kaoyan_existing_lines.py",
+        "symbols": [
+          "ExistingLineChecks.setUp",
+          "ExistingLineChecks.test_different_mode_program_year_college_or_score_is_not_same_fact"
+        ]
+      },
+      "expected": "同源总分相同不能跨学习方式、专业、年份或学院复用。",
+      "provenance": {
+        "commit": "0f4637861ae368255e8dbaf223213d0e501b8132",
+        "file": "skills/zhiqu/tests/test_kaoyan_existing_lines.py",
+        "basis": "同源存量核验实际关联问题的合成回归；不代替真实原件判读。"
+      }
+    },
+    {
+      "id": "ky-existing-invalid-event-no-cache",
+      "domain": "考研",
+      "test": "test_kaoyan_existing_lines.ExistingLineChecks.test_lookup_ignores_unverified_neighbours_and_invalid_source_level_cache",
+      "input_fixture": {
+        "file": "test_kaoyan_existing_lines.py",
+        "symbols": [
+          "ExistingLineChecks.setUp",
+          "ExistingLineChecks.test_lookup_ignores_unverified_neighbours_and_invalid_source_level_cache"
+        ]
+      },
+      "expected": "逐行核验只覆盖本行；事件丢失不能靠来源级旧覆盖凭据认证邻行。",
+      "provenance": {
+        "commit": "0f4637861ae368255e8dbaf223213d0e501b8132",
+        "file": "skills/zhiqu/tests/test_kaoyan_existing_lines.py",
+        "basis": "同源存量核验实际关联问题的合成回归；不代替真实原件判读。"
+      }
+    },
+    {
+      "id": "ky-existing-raw-scope-preserved",
+      "domain": "考研",
+      "test": "test_kaoyan_existing_lines.ExistingLineChecks.test_identical_but_unexplained_scope_is_not_certified_as_ordinary",
+      "input_fixture": {
+        "file": "test_kaoyan_existing_lines.py",
+        "symbols": [
+          "ExistingLineChecks.setUp",
+          "ExistingLineChecks.test_identical_but_unexplained_scope_is_not_certified_as_ordinary"
+        ]
+      },
+      "expected": "原始范围即使新旧相同，未解释也不得认证为普通范围。",
+      "provenance": {
+        "commit": "0f4637861ae368255e8dbaf223213d0e501b8132",
+        "file": "skills/zhiqu/tests/test_kaoyan_existing_lines.py",
+        "basis": "同源存量核验实际关联问题的合成回归；不代替真实原件判读。"
+      }
+    },
+    {
+      "id": "ky-existing-header-not-sample",
+      "domain": "考研",
+      "test": "test_kaoyan_existing_lines.ExistingLineChecks.test_header_rows_cannot_count_as_samples",
+      "input_fixture": {
+        "file": "test_kaoyan_existing_lines.py",
+        "symbols": [
+          "ExistingLineChecks.setUp",
+          "ExistingLineChecks.test_header_rows_cannot_count_as_samples"
+        ]
+      },
+      "expected": "首行及续表头不能充当数据行抽样。",
+      "provenance": {
+        "commit": "0f4637861ae368255e8dbaf223213d0e501b8132",
+        "file": "skills/zhiqu/tests/test_kaoyan_existing_lines.py",
+        "basis": "同源存量核验实际关联问题的合成回归；不代替真实原件判读。"
+      }
     }
   ],
   "not_in_this_suite": [
