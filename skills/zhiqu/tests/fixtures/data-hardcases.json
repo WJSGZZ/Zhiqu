@@ -922,6 +922,82 @@
         "file": "skills/zhiqu/tests/test_planning_workflow.py",
         "basis": "本轮真实端到端自查发现后的最小合成回归，复用原方法，不冒充全部问卷或真实雇主原件已核。"
       }
+    },
+    {
+      "id": "career-explicit-stage-scope",
+      "domain": "就业",
+      "test": "test_career_on_demand.CareerDemandTests.test_candidate_cross_city_is_rejected_before_publication",
+      "input_fixture": {
+        "file": "test_career_on_demand.py",
+        "symbols": [
+          "body",
+          "database",
+          "CareerDemandTests.test_candidate_cross_city_is_rejected_before_publication"
+        ]
+      },
+      "expected": "候选逐行必须回对本次城市、年份、岗位与阶段，不因与自身写入值相同就放行。",
+      "provenance": {
+        "commit": "353167b",
+        "file": "skills/zhiqu/tests/test_career_on_demand.py",
+        "basis": "独立复核发现的源头缺口及隔离合成复现；不认证真实雇主网页、任意中文人名识别或市场覆盖。"
+      }
+    },
+    {
+      "id": "career-stored-source-identity",
+      "domain": "就业",
+      "test": "test_career_on_demand.CareerDemandTests.test_wrong_existing_source_identity_is_not_overwritten",
+      "input_fixture": {
+        "file": "test_career_on_demand.py",
+        "symbols": [
+          "body",
+          "database",
+          "CareerDemandTests.test_wrong_existing_source_identity_is_not_overwritten"
+        ]
+      },
+      "expected": "同指纹的旧source也须逐项回读发布单位与网址，不将新候选挂到错误旧身份。",
+      "provenance": {
+        "commit": "353167b",
+        "file": "skills/zhiqu/tests/test_career_on_demand.py",
+        "basis": "独立复核发现的源头缺口及隔离合成复现；不认证真实雇主网页、任意中文人名识别或市场覆盖。"
+      }
+    },
+    {
+      "id": "career-title-privacy",
+      "domain": "就业",
+      "test": "test_career_on_demand.CareerDemandTests.test_prose_title_contact_rejected",
+      "input_fixture": {
+        "file": "test_career_on_demand.py",
+        "symbols": [
+          "body",
+          "database",
+          "CareerDemandTests.test_prose_title_contact_rejected"
+        ]
+      },
+      "expected": "标题与拟保存单元格同样检查显式个人标记，拒绝且不落原文。",
+      "provenance": {
+        "commit": "353167b",
+        "file": "skills/zhiqu/tests/test_career_on_demand.py",
+        "basis": "独立复核发现的源头缺口及隔离合成复现；不认证真实雇主网页、任意中文人名识别或市场覆盖。"
+      }
+    },
+    {
+      "id": "career-interrupted-publication",
+      "domain": "就业",
+      "test": "test_career_on_demand.CareerDemandTests.test_interrupted_publication_recovers_own_db_and_dictionary",
+      "input_fixture": {
+        "file": "test_career_on_demand.py",
+        "symbols": [
+          "body",
+          "database",
+          "CareerDemandTests.test_interrupted_publication_recovers_own_db_and_dictionary"
+        ]
+      },
+      "expected": "工作进程中断后按本轮旧新指纹恢复数据库及字典，不冒称进程超时就未发布。",
+      "provenance": {
+        "commit": "353167b",
+        "file": "skills/zhiqu/tests/test_career_on_demand.py",
+        "basis": "独立复核发现的源头缺口及隔离合成复现；不认证真实雇主网页、任意中文人名识别或市场覆盖。"
+      }
     }
   ],
   "not_in_this_suite": [
