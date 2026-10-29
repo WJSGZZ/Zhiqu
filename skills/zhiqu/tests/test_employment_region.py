@@ -70,7 +70,7 @@ class EmploymentRegion(unittest.TestCase):
             with self.subTest(place=place):self.assertEqual(self.totals(place)['wage_stat'],1)
 
     def test_similar_prefix_does_not_create_province_relationship(self):
-        for value,query in [('海南藏族自治州','海南省'),('河北区','河北省'),('上海市税务局','上海'),('江苏苏州','苏州'),('广东省某大学','广东')]:
+        for value,query in [('海南藏族自治州','海南省'),('河北区','河北省'),('上海市税务局','上海'),('江苏苏州','苏州'),('广东省某大学','广东'),('浙江省外','浙江'),('江苏省外','江苏'),('上海以外省份','上海'),('[{上海','上海')]:
             with self.subTest(value=value):self.assertFalse(db._employment_region_match(value,query))
 
     def test_separate_city_paths_are_not_cross_joined(self):
