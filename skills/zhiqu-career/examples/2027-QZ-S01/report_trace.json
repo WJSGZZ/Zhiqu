@@ -21,7 +21,7 @@
     "check_demos.py": "67d4edc1cd737beeb6729783a736e667a97c12d8f7de2de673632d9d5c3370b8",
     "report.py": "41d37e32456f801cb673eeb9cf966894283ead1e7ca53bdcef6709039a5465f5",
     "render_report.py": "17c81658af1834fc1216d61ca3c11070934229a74d8d1175a1602a348ffd1c0f",
-    "profile_store.py": "16aed07fb557476980d5eee4d35e01a544a4bda8185568235a6c24a70439558f",
+    "profile_store.py": "a609d0a51cb4a27713fe00c8174069fd61df44656f2b859423e4712ca58b5cf1",
     "claim_guards.py": "54bab4d942fafd148190df73cad34805538662b0a152ec5701c8a960e28dbd1d",
     "source_authentication.py": "b18201e997e0b4ca33c879979bc03f81deab1ea5edbbbc74cab6bf622821f278",
     "official_source_audit.py": "c09c40a2c5eec18318fbb1fa52393ee37b4e63f636ec7ea3999084d12ecc0df1",
@@ -1568,6 +1568,26 @@
         }
       },
       "previous_trace_sha256": "9f57ca079425b81db3a05d675f349f217ef556773897bbf2218242c27ddf0ac5",
+      "assembled_markdown_sha256": "0895952f1caa72b7576496650f775ddafc6137d721509d0fe4868561a12c2195",
+      "rendered_body_html_sha256": "cea5c65b04b10b2dfda34eb3b7cee34bc75286132556bb623b317db64fa67f16",
+      "appendix_materials_unchanged_except_runtime_timestamp": true,
+      "original_artifacts": {
+        "report.md": "0895952f1caa72b7576496650f775ddafc6137d721509d0fe4868561a12c2195",
+        "report.html": "ffa710d2a9920cdd43b8f5681afaee51f3bd4a2e15c64b8be4f4556a6b4ef49f",
+        "2027-QZ-S01-report.pdf": "442cf877493f9c33e75c418da23fa875a9030ade3240671c866913580aa08ad9"
+      }
+    },
+    {
+      "date": "2026-10-29",
+      "kind": "grad_income_undecided_compatibility",
+      "reason": "修复未定/尚未定等明确未决答复的状态分类，保持原答与既有字段不动，不提取年份。既有六份规划输入、正文、附录、数字、PDF及原审批不变，仅作当前工具兼容绑定；不冒充新内容复核。",
+      "changed_tools": {
+        "profile_store.py": {
+          "before": "16aed07fb557476980d5eee4d35e01a544a4bda8185568235a6c24a70439558f",
+          "after": "a609d0a51cb4a27713fe00c8174069fd61df44656f2b859423e4712ca58b5cf1"
+        }
+      },
+      "previous_trace_sha256": "1bd28b020993465eaf951f6ff507c3d5ed5b7e51becf931719e4ab484d44151c",
       "assembled_markdown_sha256": "0895952f1caa72b7576496650f775ddafc6137d721509d0fe4868561a12c2195",
       "rendered_body_html_sha256": "cea5c65b04b10b2dfda34eb3b7cee34bc75286132556bb623b317db64fa67f16",
       "appendix_materials_unchanged_except_runtime_timestamp": true,

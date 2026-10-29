@@ -22,7 +22,7 @@
     "check_demos.py": "67d4edc1cd737beeb6729783a736e667a97c12d8f7de2de673632d9d5c3370b8",
     "report.py": "41d37e32456f801cb673eeb9cf966894283ead1e7ca53bdcef6709039a5465f5",
     "render_report.py": "17c81658af1834fc1216d61ca3c11070934229a74d8d1175a1602a348ffd1c0f",
-    "profile_store.py": "16aed07fb557476980d5eee4d35e01a544a4bda8185568235a6c24a70439558f",
+    "profile_store.py": "a609d0a51cb4a27713fe00c8174069fd61df44656f2b859423e4712ca58b5cf1",
     "claim_guards.py": "54bab4d942fafd148190df73cad34805538662b0a152ec5701c8a960e28dbd1d",
     "source_authentication.py": "b18201e997e0b4ca33c879979bc03f81deab1ea5edbbbc74cab6bf622821f278",
     "official_source_audit.py": "c09c40a2c5eec18318fbb1fa52393ee37b4e63f636ec7ea3999084d12ecc0df1",
@@ -1962,6 +1962,26 @@
         }
       },
       "previous_trace_sha256": "b11633031b0b627f0b9bb8d1253d98d03a97105fdd1d7600025d1e39a6cd8398",
+      "assembled_markdown_sha256": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
+      "rendered_body_html_sha256": "9b4eb5bdf5fb56d7d60c72b50c87550cb15d8dd456668a6c61c774705009dae2",
+      "appendix_materials_unchanged_except_runtime_timestamp": true,
+      "original_artifacts": {
+        "report.md": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
+        "report.html": "3311e44a727830d10556b77e2d5e544eecd6c2ab68f4ac84b65aa043746f3f8d",
+        "2027-YJ-S05-report.pdf": "c3510ec62f75761aadca608bbe23109ef15281c5eacbda20f883ad1c0012c85a"
+      }
+    },
+    {
+      "date": "2026-10-29",
+      "kind": "grad_income_undecided_compatibility",
+      "reason": "修复未定/尚未定等明确未决答复的状态分类，保持原答与既有字段不动，不提取年份。既有六份规划输入、正文、附录、数字、PDF及原审批不变，仅作当前工具兼容绑定；不冒充新内容复核。",
+      "changed_tools": {
+        "profile_store.py": {
+          "before": "16aed07fb557476980d5eee4d35e01a544a4bda8185568235a6c24a70439558f",
+          "after": "a609d0a51cb4a27713fe00c8174069fd61df44656f2b859423e4712ca58b5cf1"
+        }
+      },
+      "previous_trace_sha256": "c38bde9cd363163ca8baaaf44d7ee882a13de03798cc4e4c44a6ca5627ef34b1",
       "assembled_markdown_sha256": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
       "rendered_body_html_sha256": "9b4eb5bdf5fb56d7d60c72b50c87550cb15d8dd456668a6c61c774705009dae2",
       "appendix_materials_unchanged_except_runtime_timestamp": true,
