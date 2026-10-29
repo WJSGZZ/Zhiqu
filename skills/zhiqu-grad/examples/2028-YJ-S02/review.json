@@ -165,25 +165,25 @@
     "verification_scope": "本轮更新为附核对材料的PDF，自评和机器核对通过后仍等待独立审核；未补造官方原文和独立批准。"
   },
   "snapshot": {
-    "2028-YJ-S02-report.pdf": "c475733eb75e27cb8a3fdb6d8d4b797208c0b545ef88b0d368963931f6217325",
+    "2028-YJ-S02-report.pdf": "76fba02c256639191391b6ddfa9479ffabed277d02c475afb13b849436e7466b",
     "calculations.json": "00e5087c418c579371b17558494a9c4c1f865b0b051ef63fc1a3c9a51a89cd87",
     "candidates.json": "1f9f3703275d1799b96d638988fd5c11a27d5f2c4ef9209db44868be66817183",
     "case.json": "0001243d062291f20d005fab27c3bcc9f801dd724d9bd8593487ad013319de45",
-    "claim_check.json": "6d5d0fa1260ceceac22afecadcefe23840323aa4a9edc9acb1fbfc5ee9810092",
+    "claim_check.json": "b77e4e014529a4524b347257e0686e2f355f0a1ccaa4e50adfb3191a61cf075a",
     "directions.json": "e11eb75bac9a1378195f15ef805daf0ffe3d0a4c2306d317d6d9944265b8008b",
     "evidence.json": "03304e7a1c5a1324a791db8d79dc9087ab501f578414afef2bda2728ef1d97fa",
     "judgment.json": "a9dd41f886f0c6f554dcbfa124510778365a5a732f3490e40d1499b0ff24c03b",
     "narrative.json": "0c553b0c818c3903d5da218cf50a10f299a0c06c0d757e6222f4fc2799e36591",
-    "operator_check.md": "f32727b94c40b2ef2de309723accbc4a3429afc806e5b4357930bde15b344d8b",
+    "operator_check.md": "3d50dca3face43ad372afac262c857a78c92050955b9f93aaef86b64ba87c321",
     "profile-supplement.txt": "6d3fe85c4f5f9393a284253436e9dd3ae7a719f9ff73222d052dc7224a274e0f",
     "profile.json": "b04770d7a2589f2dbe7b35a80efaad8953b8db8666a26db85875f82cfc9eaf72",
-    "profile_parse.json": "2dda484ba11b430d3cc4c1db419900cc9517e79bb3b21abf9c9d3bb755c2ea46",
-    "report.html": "04c6efa09cf2f390ec0fb35bc6ce1f005d4c2c5e7e7bb93a32007e4f008878a9",
+    "profile_parse.json": "144dd86220da51855d80ca4502619b7208e49809122fbbb618e104e9992615ac",
+    "report.html": "296229b59ab9573d77d2c03f042a8b28fb161d8e8d671c223444cffc7a2df794",
     "report.md": "8dd0ba3d6bb84baacb05c1e5272f04bd89a83de4f111127c4e5dca4e4ebf1628",
-    "report_trace.json": "eb5ac905ebbcd8e07c517a380287a8ce220beb32ce5786259789ad6310315eb4",
+    "report_trace.json": "a1501c3a6d34c415b7fe914fc92c991910860bee3db98a8ef566924cdef31e5f",
     "rules_check.json": "248a80156349f8bee1d5de049d1153408fc4548108e5895abb5bba17d5c7cb03"
   },
-  "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。",
+  "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。\n2026-10-29：仅拆分均分/英语/数学的本人原话摘录，均分两段明确分隔；原答、证据、计算、正文结论不变，重出PDF附录并检版。本轮修改独立复核与旧报告正式交付审核分开，后者仍待独立复核及操控者核查，不重新认证旧官方事实。",
   "snapshot_refreshes": [
     {
       "date": "2026-10-20",
@@ -520,6 +520,12 @@
         "claim_check.json"
       ],
       "reason": "读研原答中的挣钱时点独立追加投影，不移动既有字段或推断稳定工资；未定答复保留未知。既有六份规划无需要新增已知期限的情况，历史未定原答仅沿旧迁移组合兼容核对；正文、附录材料、数字和PDF未变，仅更新工具兼容绑定，原审批及逐句判断保留，不冒充新内容复核。"
+    },
+    {
+      "date": "2026-10-29",
+      "reason": "2026-10-29：仅拆分均分/英语/数学的本人原话摘录，均分两段明确分隔；原答、证据、计算、正文结论不变，重出PDF附录并检版。本轮修改独立复核与旧报告正式交付审核分开，后者仍待独立复核及操控者核查，不重新认证旧官方事实。",
+      "content_changed": true,
+      "independent_delivery_approval": false
     }
   ],
   "regeneration": {

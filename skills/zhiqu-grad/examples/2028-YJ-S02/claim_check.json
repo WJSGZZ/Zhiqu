@@ -4,7 +4,7 @@
   "manifest_sha256": "6c3b26fb66be12897903046da93919c29934ba4afc18c8aede96d3e3f0edc6e4",
   "source_sha256": {
     "case.json": "0001243d062291f20d005fab27c3bcc9f801dd724d9bd8593487ad013319de45",
-    "profile_parse.json": "2dda484ba11b430d3cc4c1db419900cc9517e79bb3b21abf9c9d3bb755c2ea46",
+    "profile_parse.json": "144dd86220da51855d80ca4502619b7208e49809122fbbb618e104e9992615ac",
     "directions.json": "e11eb75bac9a1378195f15ef805daf0ffe3d0a4c2306d317d6d9944265b8008b",
     "rules_check.json": "248a80156349f8bee1d5de049d1153408fc4548108e5895abb5bba17d5c7cb03",
     "candidates.json": "1f9f3703275d1799b96d638988fd5c11a27d5f2c4ef9209db44868be66817183",
@@ -18156,11 +18156,11 @@
     }
   ],
   "report_snapshot": {
-    "trace_sha256": "eb5ac905ebbcd8e07c517a380287a8ce220beb32ce5786259789ad6310315eb4",
+    "trace_sha256": "23a80407cb95d269e5f1b7975e14da2eaa7387db0a0203d9cc4d60eb2f1a5e6e",
     "artifacts": {
       "report.md": "8dd0ba3d6bb84baacb05c1e5272f04bd89a83de4f111127c4e5dca4e4ebf1628",
-      "report.html": "04c6efa09cf2f390ec0fb35bc6ce1f005d4c2c5e7e7bb93a32007e4f008878a9",
-      "2028-YJ-S02-report.pdf": "c475733eb75e27cb8a3fdb6d8d4b797208c0b545ef88b0d368963931f6217325"
+      "report.html": "296229b59ab9573d77d2c03f042a8b28fb161d8e8d671c223444cffc7a2df794",
+      "2028-YJ-S02-report.pdf": "76fba02c256639191391b6ddfa9479ffabed277d02c475afb13b849436e7466b"
     }
   }
 }

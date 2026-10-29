@@ -420,9 +420,9 @@
       "report_versions": [
         {
           "file": "skills/zhiqu-grad/examples/2028-YJ-S02/2028-YJ-S02-report.pdf",
-          "generated_at": "2026-10-22T00:28:50+08:00",
+          "generated_at": "2026-10-29T08:55:32+08:00",
           "version": "1",
-          "sha256": "c475733eb75e27cb8a3fdb6d8d4b797208c0b545ef88b0d368963931f6217325",
+          "sha256": "76fba02c256639191391b6ddfa9479ffabed277d02c475afb13b849436e7466b",
           "profile_sha256": "b04770d7a2589f2dbe7b35a80efaad8953b8db8666a26db85875f82cfc9eaf72"
         }
       ]
