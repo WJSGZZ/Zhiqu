@@ -457,6 +457,21 @@ class OnDemandTests(unittest.TestCase):
         publisher.assert_not_called()
         self.assertFalse(summary['published'])
 
+    def test_rejected_redirect_receipt_stops_host_without_serializing_target(self):
+        from kaoyan_public_http import public_receipt
+        ledger = self.root/'rejected-stops.json'
+        self.request['stop_ledger'] = str(ledger)
+        self.request['entries'] = [URL, 'https://fixture.edu.cn/other-path']
+        receipt = public_receipt(URL, None, [
+            dict(url=URL, http_status=302),
+            dict(url='https://fixture.edu.cn/sso/start', origin_attempted=False),
+        ], 'fixed local rejection')
+        summary, fetch, publisher = self.run_fake(fetch=Mock(return_value=(None, receipt)))
+        self.assertEqual(fetch.call_count, 1)
+        publisher.assert_not_called()
+        self.assertEqual(json.loads(ledger.read_text())[0]['stop_category'], 'restricted_redirect')
+        self.assertNotIn('/sso/start', json.dumps(summary))
+
     def test_recorded_url_padding_is_removed_without_rewriting_address(self):
         path = self.root/'entries.csv'
         path.write_text('school,graduate_site_url\n合成大学,  https://fixture.edu.cn/path/  \n')

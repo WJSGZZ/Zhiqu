@@ -70,12 +70,22 @@ def public_receipt(url,item,attempts,reason):
  """No raw header/reason/body/exception is copied to disk or diagnostics."""
  safe_url(url);safe_attempts=[]
  for a in attempts:
-  u=a.get('url',url);safe_url(u);z={k:a[k]for k in['http_status','bytes','body_sha256','origin_attempted']if k in a};z['url']=u
+  u=a.get('url',url)
+  try:safe_url(u)
+  except SafeStop:
+   # The transport rejected this hop before sending it. Do not serialize its
+   # private query/path, but retain a stop receipt so no other path is tried.
+   rejected={'url':url,'stop_category':'restricted_redirect','target_url_suppressed':True}
+   if 'origin_attempted'in a:rejected['origin_attempted']=a['origin_attempted']
+   safe_attempts.append(rejected)
+   continue
+  z={k:a[k]for k in['http_status','bytes','body_sha256','origin_attempted']if k in a};z['url']=u
   if'retry_at'in a:z['retry_at']=round(a['retry_at'],3)
   if'reason'in a:z['stop_category']=stop_category(a['reason'],a.get('http_status'))
   safe_attempts.append(z)
  last_status=next((a['http_status']for a in reversed(attempts)if a.get('http_status')is not None),None)
- return dict(source_url=url,status='retrieved'if item else'unretrieved',stop_category=None if item else stop_category(reason,last_status),sha256=hashlib.sha256(item['body']).hexdigest()if item else None,bytes=len(item['body'])if item else 0,attempts=safe_attempts,raw_original_written=False)
+ category='restricted_redirect'if any(a.get('stop_category')=='restricted_redirect'for a in safe_attempts)else stop_category(reason,last_status)
+ return dict(source_url=url,status='retrieved'if item else'unretrieved',stop_category=None if item else category,sha256=hashlib.sha256(item['body']).hexdigest()if item else None,bytes=len(item['body'])if item else 0,attempts=safe_attempts,raw_original_written=False)
 
 def stop_category(reason,http_status=None):
  """Classify actual status/reason, never digits in a URL or fingerprint."""

@@ -48,6 +48,19 @@ class PublicHTTPTests(unittest.TestCase):
             fake.resolve_public.assert_not_called()
             send.assert_not_called()
 
+    def test_rejected_private_redirect_has_anonymous_stop_receipt(self):
+        url = 'https://fixture.edu.cn/start'
+        rejected = url+'?candidate_name=synthetic_private_sentinel'
+        receipt = http.public_receipt(url, None, [
+            {'url': url, 'http_status': 302},
+            {'url': rejected, 'origin_attempted': False, 'reason': 'fixed local rejection'},
+        ], 'fixed local rejection')
+        self.assertEqual(receipt['stop_category'], 'restricted_redirect')
+        self.assertEqual(receipt['attempts'][-1]['url'], url)
+        self.assertFalse(receipt['attempts'][-1]['origin_attempted'])
+        self.assertNotIn('synthetic_private_sentinel', json.dumps(receipt))
+        self.assertNotIn('candidate_name', json.dumps(receipt))
+
     def test_public_receipt_never_contains_body_private_header_or_reason(self):
         raw=b'synthetic-private-123456789012345'
         item={'body':raw,'headers':{'authorization':'synthetic-secret'}}

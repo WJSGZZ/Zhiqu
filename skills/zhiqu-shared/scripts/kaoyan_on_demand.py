@@ -35,7 +35,7 @@ LAYERS = {'lines': ('ky_retest_line', '学院专业资格线'), 'catalog': ('ky_
           'stats': ('ky_score_dist', '拟录取统计')}
 CN = {'lines': '复试线', 'catalog': '招生目录', 'stats': '拟录取统计'}
 STATUS_CN = {'obtained': '已取得', 'partial': '部分取得', 'not fetched': '未取得', 'staged': '候选待验收'}
-RESTRICTED = {'login', 'verification', 'http_block', 'rate_limit'}
+RESTRICTED = {'login', 'verification', 'http_block', 'rate_limit', 'restricted_redirect'}
 
 class Deadline:
     def __init__(self, seconds, clock=time.monotonic):
