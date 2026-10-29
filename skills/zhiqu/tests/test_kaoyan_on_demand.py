@@ -427,6 +427,87 @@ class OnDemandTests(unittest.TestCase):
                 self.assertNotIn('合成隐私标记'.encode(), p.read_bytes())
                 self.assertNotIn(b'12345678901234', p.read_bytes())
 
+    def test_previous_block_on_host_stops_new_path_but_not_other_official_host(self):
+        ledger = self.root/'prior-stops.json'
+        ledger.write_text(json.dumps([dict(url='https://fixture.edu.cn/old.html', stop_category='http_block')]))
+        self.request['stop_ledger'] = str(ledger)
+        summary, fetch, publish = self.run_fake()
+        fetch.assert_not_called();publish.assert_not_called()
+        self.assertEqual(summary['outcomes'][0]['not_retried_entries'], [URL])
+        alternate = 'https://college.fixture.edu.cn/line.html'
+        self.request['entries'] = [alternate]
+        summary, fetch, publish = self.run_fake(fetch=Mock(return_value=({'body': line_page(), 'url': alternate}, {'status':'retrieved'})))
+        self.assertEqual(fetch.call_count, 1)
+        self.assertTrue(summary['published'])
+
+    def test_fetch_allows_bounded_normal_redirects_without_transport_fallback(self):
+        with patch.object(tool, 'retrieve_memory', return_value=({'body': b'anonymous'}, [], None)) as fetch:
+            tool.fetch_public(URL, tool.Deadline(120))
+        self.assertEqual(fetch.call_args.kwargs, {'max_attempts': 3})
+
+    def test_injected_final_url_on_historically_blocked_host_cannot_publish(self):
+        ledger = self.root/'old-block.json'
+        ledger.write_text(json.dumps([dict(url=URL, stop_category='http_block')]))
+        self.request['stop_ledger'] = str(ledger)
+        alternative = 'https://college.fixture.edu.cn/redirect'
+        self.request['entries'] = [alternative]
+        summary, fetch, publisher = self.run_fake(fetch=Mock(return_value=(
+            {'body': line_page(), 'url': URL}, {'status': 'retrieved'})))
+        self.assertEqual(fetch.call_count, 1)
+        publisher.assert_not_called()
+        self.assertFalse(summary['published'])
+
+    def test_recorded_url_padding_is_removed_without_rewriting_address(self):
+        path = self.root/'entries.csv'
+        path.write_text('school,graduate_site_url\n合成大学,  https://fixture.edu.cn/path/  \n')
+        self.assertEqual(tool.entries(path)[0]['graduate_site_url'], 'https://fixture.edu.cn/path/')
+
+    def test_discovery_follows_existing_plan_wording_h2_and_full_anchor_title(self):
+        cases = [
+            ('<a href="/plan.html">合成大学2026年硕士招生计划分配</a>', 'catalog', '/plan.html'),
+            ('<h2>合成大学2026年硕士复试分数线</h2><a href="/line.pdf">附件1</a>', 'lines', '/line.pdf'),
+            ('<a href="/catalog.html" title="合成大学2026年硕士招生专业目录">合成大学2026年硕士研究生…</a>', 'catalog', '/catalog.html'),
+        ]
+        for markup, layer, suffix in cases:
+            body = page(markup, '合成大学研究生院')
+            self.assertEqual(tool.discover_links(body, URL, 2026, layer), ['https://fixture.edu.cn'+suffix])
+
+    def test_discovery_title_hint_does_not_override_year_or_document_verification(self):
+        body = page('<a href="/catalog.html" title="合成大学2025年硕士招生专业目录">更多</a>', '合成大学研究生院')
+        self.assertEqual(tool.discover_links(body, URL, 2026, 'catalog'), [])
+        with self.assertRaises(adapters.NeedsReview):
+            adapters.parse_official_html(body, URL, IDENTITY, 2026, 'catalog', ['0854'])
+        unsafe = page('<a href="https://evil.example/catalog.html" title="2026年硕士招生专业目录">更多</a>')
+        self.assertEqual(tool.discover_links(unsafe, URL, 2026, 'catalog'), [])
+
+    def test_partial_official_source_is_refetched_not_promoted_to_cache(self):
+        prior = 'https://fixture.edu.cn/recorded.html'
+        with sqlite3.connect(self.db) as c:
+            c.execute('insert into source(source_id,grade,landing_url,file_url) values(?,?,?,?)',
+                      ('partial', '官方', prior, ''))
+            c.execute('insert into source(source_id,grade,landing_url,file_url) values(?,?,?,?)',
+                      ('vendor', '第三方整理', 'https://fixture.edu.cn/vendor.html', ''))
+        self.assertEqual(tool.existing_source_entries(self.db, ['partial', 'vendor']), [prior])
+        self.request['entries'] = []
+        cells = self.cells();cells[0]['source_ids'] = ['partial']
+        summary, fetch, publisher = self.run_fake(cells=cells, entry={'graduate_site_url': 'https://fixture.edu.cn/'})
+        self.assertEqual(fetch.call_args.args[0], prior)
+        self.assertTrue(summary['published'])
+        publisher.assert_called_once()
+
+    def test_partial_source_url_is_still_subject_to_host_and_privacy_checks(self):
+        with sqlite3.connect(self.db) as c:
+            c.executemany('insert into source(source_id,grade,landing_url,file_url) values(?,?,?,?)', [
+                ('external', '官方', 'https://unconfirmed.example/line.html', ''),
+                ('private', '官方', 'https://fixture.edu.cn/a?candidate_name=sentinel', ''),
+                ('login', '官方', 'https://fixture.edu.cn/login', ''),
+            ])
+        self.assertEqual(tool.existing_source_entries(self.db, ['external', 'private', 'login']), ['https://unconfirmed.example/line.html'])
+        cells = self.cells();cells[0]['source_ids'] = ['external', 'private', 'login']
+        summary, fetch, publisher = self.run_fake(cells=cells, entry={})
+        fetch.assert_not_called();publisher.assert_not_called()
+        self.assertFalse(summary['published'])
+
     def test_same_original_multiple_program_requests_reuses_ram_body(self):
         self.request['programs'] = ['085404', '085410']
         cells = [dict(year=2026, layer='lines', program=code, obtained=False,

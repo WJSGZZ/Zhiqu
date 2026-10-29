@@ -57,7 +57,10 @@ def write_json(path, obj):
 
 def entries(path=ENTRIES):
     with Path(path).open() as f:
-        return list(csv.DictReader(f))
+        # Some recorded official hrefs have surrounding whitespace. Strip only
+        # their padding, never guess or rewrite an address inside the URL.
+        return [{k: v.strip() if k.endswith('_url') and isinstance(v, str) else v
+                 for k, v in row.items()} for row in csv.DictReader(f)]
 
 
 def resolve_school(database, name, registry):
@@ -106,6 +109,26 @@ def official_url(url,entry):
     return any(host==h or (h.endswith('.edu.cn') and host.endswith('.'+'.'.join(h.split('.')[-3:]))) for h in known if h)
 
 
+def existing_source_entries(database, source_ids):
+    """Rediscover partial official data from its recorded URLs, not guessed paths.
+
+    Having a row is not an obtained certificate. These are only fetch hints;
+    the normal host, document-scope, dual-read and sampling gates still apply.
+    """
+    urls=[]
+    with sqlite3.connect(Path(database).as_uri()+'?mode=ro',uri=True) as c:
+        for sid in sorted(set(source_ids)):
+            source=c.execute('select landing_url,file_url from source where source_id=? and grade=?',
+                             (sid,'官方')).fetchone()
+            for url in source or ():
+                if not url:continue
+                url=url.strip()
+                try:safe_url(url)
+                except Exception:continue
+                if url not in urls:urls.append(url)
+    return urls
+
+
 def navigation_links(body,url,school,entry):
     from lxml import html
     from kaoyan_tables import _decode
@@ -141,12 +164,14 @@ def discover_links(body, url, year, layer):
     links = []
     document_page=False
     from kaoyan_adapters import source_record
-    title_text=''.join(root.xpath('//h1//text() | //title/text()'))
+    title_text=''.join(root.xpath('//h1//text() | //h2//text() | //title/text()'))
     # The parent itself must identify the correct year and business type.
-    if str(year)in title_text and re.search({'lines':'复试.*(?:线|要求)|分数线','catalog':'目录|简章|专业.*计划','stats':'拟录取'}[layer],title_text):document_page=True
-    terms = {'lines': r'复试.*(?:线|要求)|分数线', 'catalog': r'目录|简章|专业.*计划', 'stats': r'拟录取'}[layer]
+    terms = {'lines': r'复试.*(?:线|要求)|分数线', 'catalog': r'目录|简章|(?:招生|专业).*计划|计划.*分配', 'stats': r'拟录取'}[layer]
+    if str(year)in title_text and re.search(terms,title_text):document_page=True
     for a in root.xpath('//a[@href]'):
-        label = ''.join(a.itertext())
+        # The title is a discovery hint for ellipsized navigation, never proof
+        # of the fetched document's school, year or business scope.
+        label = ''.join(a.itertext()) + ' ' + a.get('title', '')
         target = urljoin(url, a.get('href'))
         host = urlsplit(target).hostname or ''
         trusted = host.endswith(('.edu.cn','.gov.cn','.chsi.com.cn')) or host==urlsplit(url).hostname
@@ -197,7 +222,10 @@ def fetch_public(url, deadline):
     deadline()
     if deadline.remaining() < 40:
         raise TimeoutError('剩余时间不足一次受限取文，不发新请求')
-    item, attempts, reason = retrieve_memory(url, max_attempts=1)
+    # A single attempt also counts a 301/302, so it could never reach an
+    # ordinary same-host attachment redirect. Three is a total hop budget;
+    # the crawler still stops immediately at login, blocks and unsafe redirects.
+    item, attempts, reason = retrieve_memory(url, max_attempts=3)
     deadline()
     return item, public_receipt(url,item,attempts,reason)
 
@@ -396,6 +424,7 @@ def run_request(request, *, fetch=fetch_public, publisher=validate_and_publish, 
     stop_path=Path(request['stop_ledger'])if request.get('stop_ledger')else None
     old_stops=json.loads(stop_path.read_text())if stop_path and stop_path.exists()else []
     known_stops={r['url']for r in old_stops if r.get('stop_category')in RESTRICTED}
+    known_stop_hosts={urlsplit(url).hostname for url in known_stops}
     cached=lookup_fn(request['database'],identity,request['programs'],request['years'],request['layers'],coverage)
     outcomes=[];manifests=[];seen=set();stopped_hosts=set();attempts=[];bodies={}
     def checkpoint():
@@ -411,7 +440,9 @@ def run_request(request, *, fetch=fetch_public, publisher=validate_and_publish, 
         # Reuse known actual original URLs; no reconstructed path. CHSI first,
         # then graduate/school site, then the proven document/college page.
         # Explicit known originals do not need rediscovery through the homepage.
-        queue=list(request.get('entries',[]))+[entry.get(k,'') for k in ['known_official_document_entry_url','chsi_profile_url','graduate_site_url','school_homepage_url']]
+        queue=(list(request.get('entries',[]))+
+               existing_source_entries(request['database'],cell.get('source_ids',[]))+
+               [entry.get(k,'') for k in ['known_official_document_entry_url','chsi_profile_url','graduate_site_url','school_homepage_url']])
         result=dict(cell,status='not fetched',reason='未定位可双读的官方原表',attempted_entries=[],entry_results=[])
         while queue:
             try:deadline()
@@ -420,8 +451,8 @@ def run_request(request, *, fetch=fetch_public, publisher=validate_and_publish, 
             url=queue.pop(0)
             if not url or url in result['attempted_entries']or url in result.get('not_retried_entries',[]):continue
             safe_url(url);host=urlsplit(url).hostname
-            if url in known_stops:
-                result['reason']='已记录被拦/登录/验证的原入口，不重复请求';result.setdefault('not_retried_entries',[]).append(url);continue
+            if url in known_stops or host in known_stop_hosts:
+                result['reason']='已记录被拦/登录/验证的原入口或同站，不重复请求';result.setdefault('not_retried_entries',[]).append(url);continue
             if not official_url(url,entry):
                 result['reason']='入口域名未由本校官方名录/实际导航确认，未请求';continue
             if host in stopped_hosts:
@@ -445,6 +476,9 @@ def run_request(request, *, fetch=fetch_public, publisher=validate_and_publish, 
                     continue
                 final_url=item.get('url',url)
                 safe_url(final_url)
+                if urlsplit(final_url).hostname in known_stop_hosts | stopped_hosts:
+                    result['reason']='最终网址属于已记录被拦/需验证站点；未解析、未入库'
+                    checkpoint();continue
                 if not official_url(final_url,entry):
                     result['reason']='原入口跳转到未经确认的域名；未解析、未入库'
                     checkpoint();continue
