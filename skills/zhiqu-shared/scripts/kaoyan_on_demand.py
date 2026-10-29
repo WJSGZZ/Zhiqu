@@ -85,20 +85,36 @@ def lookup(database, identity, programs, years, layers, coverage):
                 covered = any(r['school']==identity['name'] and str(year)==r['year'] and r['scope_level']==scope and r['status']=='obtained' for r in coverage)
                 for program in programs:
                     cols = {'lines':'program_name,total,politics,english,math,major1,major2,line_scope,college,special_plan', 'catalog':'program_name,planned,tuimian,subjects,study_mode,college,direction', 'stats':'program_name,n,min,median,max,list_type,admission_route,special_plan,study_mode,college,direction,joint_program,scope_mismatch,scope_mismatch_note'}[layer]
+                    if layer=='lines':
+                        available=zhiqu_db._cols(c,table)
+                        cols+= ''.join(','+k for k in ('study_mode','degree_type','verification_status','note')if k in available)
                     usable=' AND t.quarantine_reason IS NULL'if 'quarantine_reason'in zhiqu_db._cols(c,table)else''
                     if layer=='stats':usable+=' AND t.n>=3'
                     rows = c.execute('SELECT t.record_id,t.program_code,t.source_id,'+','.join('t.'+x for x in cols.split(','))+' FROM data.'+table+
                         ' t JOIN data.source s ON s.source_id=t.source_id WHERE t.institution_id=? AND t.year=? AND CAST(t.program_code AS TEXT) LIKE ? AND s.grade=?'+usable,
                         (identity['institution_id'], year, program+'%', '官方')).fetchall()
                     records=[dict(r)for r in rows]
+                    verified_records=[]
+                    if layer=='lines' and 'ky_check_sample' in zhiqu_db._tables(c):
+                        from kaoyan_existing_lines import verified_record
+                        for record in records:
+                            check=verified_record(c,record['record_id'])
+                            if check:
+                                record.update(study_mode=check['projection']['study_mode'],degree_type=check['projection']['degree_type'],verification_event=check['event_sha256'],verified_on=check['checked_date'],verified_fields=check['verified_fields'],existing_scope_note=check['existing_scope_snapshot']['note'])
+                                verified_records.append(record)
                     if layer=='lines':
                         for r in records:
                             context=c.execute('select direction,joint_program,admission_route,scope_raw from data.ky_line_scope_context where record_id=?',(r['record_id'],)).fetchone()if 'ky_line_scope_context'in zhiqu_db._tables(c)else None
                             if context:r.update(dict(context))
                     specific = [json.loads(r.get('on_demand_obtained') or '{}').get(program, []) for r in coverage if r['school']==identity['name'] and str(year)==r['year'] and r['scope_level']==scope]
                     explicit = any(set(ids) <= {r['source_id'] for r in rows} and bool(ids) for ids in specific)
-                    result.append(dict(year=year, layer=layer, program=program, obtained=(covered or explicit) and bool(rows),
-                                       existing_rows=len(rows), records=records, source_ids=sorted({r['source_id'] for r in rows})))
+                    if verified_records and not covered:
+                        # A one-row check does not certify unchecked neighbours
+                        # from the same source or a broader program prefix.
+                        records=verified_records
+                    cache_rows_valid=layer!='lines' or all(record.get('verification_event')or record.get('verification_status')=='原文审核通过'for record in records)
+                    result.append(dict(year=year, layer=layer, program=program, obtained=(covered or explicit or bool(verified_records)) and bool(records) and cache_rows_valid,
+                                       existing_rows=len(records), records=records, source_ids=sorted({r['source_id'] for r in records})))
     return result
 
 
@@ -345,6 +361,7 @@ def validate_and_publish(database, manifests, output, deadline):
     import ingest_kaoyan_lines as lines
     import ingest_kaoyan_catalog as catalog
     import ingest_kaoyan_verified_stats as stats
+    import kaoyan_existing_lines as existing_lines
     from kaoyan_new_rows import verify_manifest_rows
     output=Path(output); candidate=output/'candidate/education.stage.sqlite';candidate.parent.mkdir(exist_ok=True)
     timings={};started=time.monotonic()
@@ -359,11 +376,11 @@ def validate_and_publish(database, manifests, output, deadline):
     receipts=[]
     for layer,manifest in manifests:
         deadline()
-        receipts.append(timed('ingest_'+str(len(receipts)+1),lambda:({'lines':lines,'catalog':catalog,'stats':stats}[layer]).ingest(candidate,manifest)))
+        receipts.append(timed('ingest_'+str(len(receipts)+1),lambda:({'lines':lines,'catalog':catalog,'stats':stats,'line_verification':existing_lines}[layer]).ingest(candidate,manifest)))
     with sqlite3.connect(candidate) as c:
         version=c.execute('select version from dataset_version order by rowid desc limit 1').fetchone()[0]
         major,minor,_=map(int,version.split('.'))
-        c.execute('insert into dataset_version values(?,?,?,?)',(f'{major}.{minor+1}.0',dt.date.today().isoformat(),'minor','按需取得学校/专业官方原表；旧记录不变'))
+        c.execute('insert into dataset_version values(?,?,?,?)',(f'{major}.{minor+1}.0',dt.date.today().isoformat(),'minor','只追加存量官方行独立核验，旧业务/来源/状态不变'if all(layer=='line_verification'for layer,_ in manifests)else'按需取得学校/专业官方原表；旧记录不变'))
     after=timed('candidate_counts',lambda:counts(candidate));delta={k:after[k]-v for k,v in baseline.items()}
     added=timed('added_rows',lambda:verify_manifest_rows(candidate,manifests,deadline))
     certificate=Path(database).parent/'foreign-key-validation.json'
@@ -421,7 +438,7 @@ def update_coverage(path, school, outcomes):
         match['reason']=(match.get('reason','')+'；'+reason).strip('；')
         if item.get('published_in_library') or item.get('published_rows'):
             match['formal_official_rows']=str(int(match.get('formal_official_rows')or 0)+item.get('published_rows',0))
-            if item['status']=='obtained':
+            if item['status']=='obtained' and not item.get('verification_only'):
                 obtained=json.loads(match.get('on_demand_obtained')or '{}');obtained[item['program']]=item.get('source_ids',[]);match['on_demand_obtained']=json.dumps(obtained,ensure_ascii=False)
             # A programme request cannot prove that all school directions are present.
             if match['status']!='obtained':match['status']='partial'
@@ -525,6 +542,18 @@ def run_request(request, *, fetch=fetch_public, publisher=validate_and_publish, 
                         row=business.get('row',business)
                         if row.get('school')!=identity['name']or row.get('year')!=year or business.get('institution_id')!=identity['institution_id']:raise ValueError('人工清单学校/年份范围不符')
                     conflicts=source_identity_conflicts(request['database'],parsed['manifest']['sources'])
+                    if conflicts and layer=='lines':
+                        from kaoyan_existing_lines import prepare as prepare_existing
+                        try:
+                            with sqlite3.connect(Path(request['database']).as_uri()+'?mode=ro',uri=True)as existing:
+                                linked=prepare_existing(existing,parsed['manifest'])
+                        except (ValueError,sqlite3.Error):linked=None
+                        if linked:
+                            manifests.append(('line_verification',linked))
+                            write_json(out/('reviewed-manifest-'+str(len(manifests))+'.json'),{'layer':'line_verification','manifest':linked,'proofs':parsed['proofs']})
+                            result.update(status='staged',reason='同原件存量值和范围一致；只追加独立核验，待候选验收发布',
+                                          rows=parsed['rows'],pending=parsed['pending'],source_ids=[x['source_id']for x in linked['sources']],verification_only=True)
+                            break
                     if conflicts:
                         write_json(out/('existing-source-'+str(year)+'-'+layer+'-'+cell['program']+'.json'),
                                    {'conflicts':conflicts,'manifest':parsed['manifest'],'proofs':parsed['proofs']})
@@ -573,7 +602,8 @@ def run_request(request, *, fetch=fetch_public, publisher=validate_and_publish, 
                     partial=bool(r.get('pending'))
                     receipt=published.get('ingest',[{}for _ in manifests])[staged_index]
                     added=receipt.get('rows_inserted',receipt.get('inserted',r['rows']))
-                    r.update(status='partial'if partial else'obtained',published_rows=added,published_in_library=True,reason='已发布可核对部分，另有原表范围待核'if partial else'对应所问专业原表入库；双读/抽核/新增行回读/旧值不变/关联及validate_data通过')
+                    r.update(status='partial'if partial else'obtained',published_rows=added,published_in_library=True,reason=('只追加存量独立核验，旧业务行/来源/原状态不变'if r.get('verification_only')else'已发布可核对部分，另有原表范围待核'if partial else'对应所问专业原表入库；双读/抽核/新增行回读/旧值不变/关联及validate_data通过'))
+                    if r.get('verification_only'):r.update(verified_existing_rows=receipt.get('existing',0),verification_events_inserted=receipt.get('verification_events_inserted',0))
                     staged_index+=1
         except (TimeoutError,ValueError) as exc:
             for r in outcomes:

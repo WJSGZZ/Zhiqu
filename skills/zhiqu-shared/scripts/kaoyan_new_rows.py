@@ -32,6 +32,15 @@ def verify_manifest_rows(database, manifests, deadline=None):
         c.execute('pragma query_only=on')
         for layer,manifest in manifests:
             privacy(manifest)
+            if layer=='line_verification':
+                from kaoyan_existing_lines import verify
+                cfg=dict(c.execute('select key,value from storage_manifest'))
+                c.execute('attach database ? as audit',(str(Path(database).parent/cfg['audit_file']),))
+                c.row_factory=sqlite3.Row
+                counts['existing_verified']=counts.get('existing_verified',0)+verify(c,manifest)
+                c.row_factory=None
+                c.execute('detach database audit')
+                continue
             for source in manifest['sources']:
                 if deadline:deadline()
                 _exact(c,'source',{k:source[k]for k in SOURCE},['source_id']);counts['sources']+=1

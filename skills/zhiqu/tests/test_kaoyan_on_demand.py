@@ -57,7 +57,7 @@ class OnDemandTests(unittest.TestCase):
             for table in ['ky_retest_line', 'ky_program_year', 'ky_score_dist']:
                 c.execute('create table '+table+'(record_id text,institution_id text,year integer,program_code text,source_id text,program_name text,'
                           'total real,politics real,english real,math real,major1 real,major2 real,line_scope text,college text,special_plan text,'
-                          'planned integer,tuimian integer,subjects text,study_mode text,direction text,n integer,min real,median real,max real,list_type text,admission_route text)')
+                          'planned integer,tuimian integer,subjects text,study_mode text,verification_status text,direction text,n integer,min real,median real,max real,list_type text,admission_route text)')
         self.request = dict(database=str(self.db), school='合成大学', programs=['0854'], years=[2026],
                             layers=['lines'], seconds=120, output=str(self.root/'out'),
                             coverage=str(self.root/'coverage.csv'), entries=[URL])
@@ -93,6 +93,7 @@ class OnDemandTests(unittest.TestCase):
         with sqlite3.connect(self.db) as c:
             c.execute('insert into source(source_id,grade) values(?,?)', ('s', grade))
             c.execute('insert into ky_retest_line(record_id,institution_id,year,program_code,source_id) values(?,?,?,?,?)', ('r', IDENTITY['institution_id'], 2026, '085404', 's'))
+            c.execute("update ky_retest_line set verification_status='原文审核通过' where record_id='r'")
         coverage = [dict(school='合成大学', year='2026', scope_level='学院专业资格线', status=status)]
         with patch.object(tool.zhiqu_db, '_open', side_effect=self.opened):
             return tool.lookup(self.db, IDENTITY, ['0854'], [2026], ['lines'], coverage)
