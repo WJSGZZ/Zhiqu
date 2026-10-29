@@ -525,10 +525,50 @@ class PlanningWorkflowTests(unittest.TestCase):
         text,_=assemble(c)
         self.assertNotIn('::: bars',text)
         self.assertNotIn('当前没有真实offer',text)
-        self.assertTrue('尚无' in text or '还没有拿到工作录用通知' in text)
+        self.assertTrue('尚无' in text or '还没有拿到可核的录用或实习条件' in text)
         # Changing the real input case this way would be rejected by the stage gate.
         self.change(root,'case.json',lambda x:x['context'].update(offer_basis='none'))
         self.assertTrue(any('跳过收入图' in e for e in run(root,0).errors))
+
+
+class NoOfferNoticeTests(unittest.TestCase):
+    def notice(self,text,active=False):
+        from types import SimpleNamespace
+        from planning_report import offer_gap_notice
+        case=SimpleNamespace(contract={'sections':[{'id':'09','slots':[{'otherwise':'explicit_no_offer_and_input_gaps'}]}]},
+            active=lambda slot:active,nodes=lambda:{'09':[{'ref':'n'}]},get_node=lambda ref:{'content':{'text':text}})
+        return offer_gap_notice(case,'09',text)
+
+    def test_internship_and_compensation_gap_is_already_explained(self):
+        self.assertEqual(self.notice('尚无实习通知，报酬和支付时间未取得，不能比较到手现金。'),'')
+
+    def test_partial_gap_still_gets_neutral_notice(self):
+        for text in ['没有房租报价，生活支出待核。','尚无实习通知，先了解所在地。']:
+            with self.subTest(text=text):
+                note=self.notice(text);self.assertIn('录用或实习条件',note);self.assertNotIn('社保公积金',note)
+        self.assertEqual(self.notice('条件齐全',active=True),'')
+
+    def test_hidden_explanation_cannot_suppress_rendered_notice(self):
+        from types import SimpleNamespace
+        text='尚无实习通知，报酬和支付时间未取得，不能比较到手现金。'
+        for comment,inactive in [(True,False),(False,True),(False,False)]:
+            with self.subTest(comment=comment,inactive=inactive):
+                content={'kind':'comment'if comment else'paragraph','text':text}
+                slots=[{'key':'body'},{'key':'income','otherwise':'explicit_no_offer_and_input_gaps'}]
+                c=SimpleNamespace(case={'report_meta':{},'mode':'simulation'},evidence={},trace=[],
+                    data={'evidence.json':{'source_groups':[]},'narrative.json':{'sections':{'09':{}}}},
+                    contract={'sections':[{'id':'09','default_title':'收入比较','slots':slots}]},
+                    nodes=lambda:{'09':[{'slot':'income'if inactive else'body','ref':'n'}]},
+                    active=lambda slot:slot['key']!='income',get_node=lambda ref:{'type':'analysis','content':content},expand=lambda value,where:value)
+                rendered,_=assemble(c)
+                self.assertEqual('还没有拿到可核的录用或实习条件'in rendered,comment or inactive)
+                self.assertEqual(text in rendered,not(comment or inactive))
+                from claim_check import extract
+                previous_trace=c.trace
+                claims=extract(c)
+                notices=[x for x in claims if x['location'].startswith('planning_report.py#offer_gap_notice')]
+                self.assertEqual(bool(notices),comment or inactive)
+                self.assertIs(c.trace,previous_trace)
 
 
 class DomainPolicySnapshotTests(unittest.TestCase):

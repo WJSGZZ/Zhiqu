@@ -129,9 +129,15 @@ def extract(case):
     add(section,entry['ref']+'/content'+path,text,node.get('evidence_refs',[]))
  # The generated offer-gap paragraph must be reviewed as well as hand-written prose.
  if not isinstance(case,GaokaoCase):
-  from planning_report import offer_gap_notice
+  from planning_report import offer_gap_notice,section_markdown
   for section in case.contract['sections']:
-   sid=section['id'];notice=offer_gap_notice(case,sid)
+   if not any(s.get('otherwise')=='explicit_no_offer_and_input_gaps'for s in section['slots']):continue
+   sid=section['id'];trace=case.trace
+   try:
+    case.trace=[]
+    visible='\n'.join(section_markdown(case,section,{eid:e.get('source_group')for eid,e in case.evidence.items()}))
+   finally:case.trace=trace
+   notice=offer_gap_notice(case,sid,visible)
    if notice:add(sid,'planning_report.py#offer_gap_notice',notice)
  return items
 

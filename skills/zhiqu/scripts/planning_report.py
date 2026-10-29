@@ -67,16 +67,31 @@ def node_markdown(node, expand, numbers):
     raise ValueError('未实现的组件：'+str(typ))
 
 
-def offer_gap_notice(case, sid):
+def offer_gap_notice(case, sid, visible=''):
     section=next(s for s in case.contract['sections'] if s['id']==sid)
     if not any(not case.active(s) and s.get('otherwise')=='explicit_no_offer_and_input_gaps' for s in section['slots']):
         return ''
     # Suppress only when the existing paragraph already covers both the missing
     # offer and the need to establish comparable income conditions.
-    visible=' '.join(str(case.get_node(e['ref']).get('content',{})) for e in case.nodes()[sid])
-    if re.search(r'没有|暂无|尚无|还没|未拿到',visible) and re.search(r'offer|录用|工作',visible,re.I) and re.search(r'工资|薪|收入|工时|生活.*支出',visible):
+    # The caller supplies the actual active, rendered section. Source comments,
+    # inactive slots and metadata are not explanations a reader can see.
+    if re.search(r'没有|暂无|尚无|还没|未拿到',visible) and re.search(r'offer|录用|工作|实习',visible,re.I) and re.search(r'工资|薪|收入|报酬|工时|生活.*支出',visible):
         return ''
-    return '你还没有拿到工作录用通知；先问清工资、工时、社保公积金和生活开销，再比较能存下多少钱。'
+    return '还没有拿到可核的录用或实习条件；先问清报酬、工时、和谁签约以及生活开销，再比较能存下多少钱。'
+
+
+def section_markdown(case,section,numbers):
+    """One rendering path shared by assembly and generated-claim extraction."""
+    sid=section['id'];blocks=[]
+    for index,entry in enumerate(case.nodes()[sid]):
+        node=case.get_node(entry['ref']);where=f'{sid}.{entry["slot"]}.{index}'
+        slot=next(s for s in section['slots']if s['key']==entry['slot'])
+        if not case.active(slot):continue
+        if slot.get('heading'):
+            import copy
+            node=copy.deepcopy(node);node['content']['heading']=slot['heading']
+        blocks.append(node_markdown(node,lambda text:case.expand(text,where),numbers))
+    return blocks
 
 
 def assemble(case):
@@ -87,15 +102,9 @@ def assemble(case):
     for section in case.contract['sections']:
         sid=section['id'];title=case.data['narrative.json']['sections'][sid].get('title',section['default_title']) if section.get('title_override_allowed',True) else section['default_title']
         out.append('## '+sid+' '+title);out.append('')
-        for index,entry in enumerate(case.nodes()[sid]):
-            node=case.get_node(entry['ref']);where=f'{sid}.{entry["slot"]}.{index}'
-            slot=next(s for s in section['slots'] if s['key']==entry['slot'])
-            if not case.active(slot):continue
-            if slot.get('heading'):
-                import copy
-                node=copy.deepcopy(node);node['content']['heading']=slot['heading']
-            out.append(node_markdown(node,lambda text:case.expand(text,where),numbers));out.append('')
-        notice=offer_gap_notice(case,sid)
+        visible_start=len(out)
+        for block in section_markdown(case,section,numbers):out.extend([block,''])
+        notice=offer_gap_notice(case,sid,'\n'.join(out[visible_start:]))
         if notice:out.extend([notice,''])
     source='::: sources\n'+'\n'.join('- '+g['title']+' | '+g.get('url','')+' | '+g['metadata'] for g in groups)+'\n:::'
     markdown='\n'.join(out).replace('__STAGED_SOURCES__',source)

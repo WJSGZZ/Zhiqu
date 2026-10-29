@@ -375,6 +375,12 @@ class AppendixReadability(unittest.TestCase):
         self.assertEqual(verify_report.readable_value({'四级': 518, '六级': 446}), '四级 518；六级 446')
         self.assertEqual(verify_report.readable_value({'unknown_english_key': 5}), '其他 5')
 
+    def test_current_compound_career_fields_keep_specific_labels(self):
+        import verify_report
+        value={'major_name':'软件工程','major_code':{'专业代码或学科门类':'080902'}}
+        self.assertEqual(verify_report.readable_value(value),'专业名称 软件工程；代码与辅修信息 专业代码或学科门类 080902')
+        self.assertEqual(verify_report.readable_value({'job_stage':'还没开始','has_offer':'没有'}),'求职进度 还没开始；录用通知 没有')
+
     def test_shared_conditions_and_table_rows_print_once_each(self):
         html_ = report.verification_appendix_html({
             'shared_conditions': ['挂科先处理'],

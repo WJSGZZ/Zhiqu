@@ -142,6 +142,7 @@ CASE_LABELS={'/context/as_of':'报告基准日','/education/expected_graduation'
 DATE_LABELS={'checkpoint':'下一个个人检查点','previous':'上一次检查点','action0':'第 1 件事的日期','action1':'第 2 件事的日期','action2':'第 3 件事的日期',
              'year_end':'年底复核','exam_month':'考试月份','graduate':'毕业时间','term_end':'学期末','summer':'暑假','spring':'春季','recommend':'推免时间','entry':'入学时间'}
 SUB_LABELS={'reserve':'备用金','other':'其他','housing':'住房','higher_housing':'较高住房情景','cash':'现金','living':'生活费','higher_living':'较高生活费情景',
+            'major_name':'专业名称','major_code':'代码与辅修信息','job_stage':'求职进度','has_offer':'录用通知',
             'mean':'均分','cet4':'四级','comprehensive_rank':'综合排名','comprehensive_count':'综合排名总人数','academic_rank':'学业排名','academic_count':'学业排名总人数',
             'fail':'挂科情况','fail_count':'没过的门数','scale':'满分','annual':'年度预算','sustainable_low':'可持续投入下限','sustainable_high':'可持续投入上限'}
 # 本人填写的复合答案印成一句中文，不印 JSON（2026-10-20 小洋报告把挂科印成了 {"fail": …}）。
