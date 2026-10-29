@@ -165,11 +165,11 @@ rules_check.json顶层用 `{schema_version, as_of, items}`，每项来源通过e
 `judgment.json.presentation` 按节号列出 `{slot, ref}`；ref是 `文件名#/JSON/Pointer`，必须落在合同登记的文件和子树内，不能任意换文件。每个节点采用 `{type, content, evidence_refs, calc_refs, registration_refs}`，只允许该槽的组件类型。
 
 - `narrative.json.sections` 按节号存受控的 `lead`、`analysis`、`core_points`、`unknown_explanation`、`disclaimer`。lead和disclaimer的content为`{text}`；analysis节点可为paragraph、heading、list或callout，内容分别为text、items或title+items；核心结论用items数组，每项title+text；未知说明的content有missing_information、retrieval_plan、decision_changes。禁止正文嵌入整章标题、表格和组件代码。
-- 表格、图、路线卡、日期行动等是结构化节点，放在合同登记的对应阶段 `report_blocks` 内，不能放进叙述。表格content用columns+rows；图另含title、caption、unit及有效来源。行动节点content.items每项text+date；日期允许引用登记检查点或官方证据。图名与读图说明随图节点保存，避免另一份文稿重复维护。
+- 表格、图、路线卡、日期行动等是结构化节点，放在合同登记的对应阶段 `report_blocks` 内，不能放进叙述。表格content用columns+rows；图另含title、caption、unit及有效来源。行动节点content.items每项text+date；日期允许引用登记检查点或官方证据。时间线末列只接受空值、普通或检查点标记，不显示正文；后果写进说明。图名与读图说明随图节点保存，避免另一份文稿重复维护。
 - presentation决定展示哪些节点，不会自动带入新加叙述；生成时提示未展示节点，须确认是否遗漏。阶段记录与展示不得资格或数值相反；组装器核类型、位置、数量和引用，语义由独立复核确认。
 - 现有计算保留原键；`case.json.calculation_plan` 登记engine、inputs、dependencies与scenarios。旧案例使用已注册的legacy_demo算法，inputs逐个指向既有case字段的证据或本人输入，必须与实际计算值一致；dependencies记录计算键的证据依赖。通用算法仅支持已注册的sum/product/difference/ratio，operations写inputs引用和output键，不接受任意表达式。情景记录changed_inputs、why、output_ref及decision_effect，由已注册算法复算，不能以手填说明替代算术。
 
-组装器产物是供核查的报告；`case_check.py --stage 10 --delivery` 才检查操控者完成和独立批准，生成成功不等于获准向真实客户交付。
+生成报告不等于批准交付，须过阶段10的`--delivery`。
 
 ## 五、操控者核查单
 

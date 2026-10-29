@@ -391,6 +391,16 @@ class PlanningCase:
                     if typ in FIGURE_TYPES:
                         if not self.figure_has_data(typ,content):errs.append(where+'：没有可画数据，须改为一行缺口说明')
                         if not all(node.get('content',{}).get(k) for k in ('title','caption')): errs.append(where+'：图缺标题或读图说明')
+                    if typ=='timeline':
+                        for row_no,row in enumerate(content.get('rows',[]),1):
+                            if not isinstance(row,(list,tuple)) or len(row) not in (3,4):
+                                errs.append(where+f'：时间线第{row_no}行须为时间、事项、说明及可选检查点标记，不能多列或少列')
+                            else:
+                                cells=[self.expand(cell) for cell in row]
+                                if any(re.search(r'[|\r\n]',cell) for cell in cells):
+                                    errs.append(where+f'：时间线第{row_no}行展开后含分隔符或换行，会隐藏或拆散正文；请改写为同一格的普通句子')
+                                if len(cells)==4 and cells[3] not in ('','普通','检查点'):
+                                    errs.append(where+f'：时间线第{row_no}行末列只接受空值、普通或检查点；行动、后果须写入事项或说明，不能放进不会显示的标记列')
                     if typ=='dated_actions':
                         for action in node.get('content',{}).get('items',[]):
                             try:

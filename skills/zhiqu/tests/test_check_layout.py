@@ -195,6 +195,61 @@ class TestBlankPages(unittest.TestCase):
             self.assertEqual(check_layout.tail_orphans(doc), [(2, None, 1)])
         self.assertTrue(any("? 节" in x for x in check_layout.check_pdf(self.path)))
 
+    def test_short_multicolumn_tail_uses_visual_rows(self):
+        rows=[]
+        for k in range(5):
+            rows.extend([(56,80+20*k,'术语说明'),(200,80+20*k,'这是一项对应解释')])
+        doc=pymupdf.open()
+        first=doc.new_page(width=595,height=842)
+        first.insert_text((56,30),'页眉',fontsize=8,fontname=FONT)
+        first.insert_text((56,90),'11 方法与假设',fontsize=18,fontname=FONT)
+        tail=doc.new_page(width=595,height=842)
+        tail.insert_text((56,30),'页眉',fontsize=8,fontname=FONT)
+        for x,y,text in rows:tail.insert_text((x,y),text,fontsize=8.8,fontname=FONT)
+        for y in range(65,166,20):
+            tail.draw_rect(pymupdf.Rect(50,y,190,y+0.75),color=None,fill=(0,0,0))
+            tail.draw_rect(pymupdf.Rect(190,y,500,y+0.75),color=None,fill=(0,0,0))
+        last=doc.new_page(width=595,height=842)
+        last.insert_text((56,30),'页眉',fontsize=8,fontname=FONT)
+        last.insert_text((56,90),'12 核对与来源',fontsize=18,fontname=FONT)
+        try:
+            self.assertEqual(check_layout.tail_orphans(doc),[(2,'11',5)])
+            # 同样短的单栏四行正文沿用原规则，不扩大段落门禁。
+            self.assertIsNone(check_layout._short_table_rows([{'x':56,'y':80+15*k}for k in range(4)]))
+            self.assertIsNone(check_layout._short_table_rows([{'x':x,'y':80+15*k}for k in range(6)for x in (56,200)]))
+        finally:doc.close()
+
+    def test_split_cell_borders_detect_one_remaining_table_row(self):
+        doc=pymupdf.open()
+        first=doc.new_page(width=595,height=842)
+        first.insert_text((56,30),'页眉',fontsize=8,fontname=FONT)
+        first.insert_text((56,90),'11 方法与假设',fontsize=18,fontname=FONT)
+        tail=doc.new_page(width=595,height=842)
+        tail.insert_text((56,30),'页眉',fontsize=8,fontname=FONT)
+        for y in (80,100):
+            for x in (56,200):tail.insert_text((x,y),'对应说明',fontsize=8.8,fontname=FONT)
+        for y in (65,85,105):
+            for x0,x1 in ((50,190),(190,500)):
+                tail.draw_rect(pymupdf.Rect(x0,y,x1,y+0.75),color=None,fill=(0,0,0))
+        try:self.assertEqual(check_layout.tail_orphans(doc),[(2,'11',2)])
+        finally:doc.close()
+
+    def test_short_table_rule_requires_table_lines_and_main_body_owner(self):
+        for owner,ruled,toc in [('11',False,False),('12',True,False),('11',True,True)]:
+            with self.subTest(owner=owner,ruled=ruled,toc=toc):
+                doc=pymupdf.open()
+                first=doc.new_page(width=595,height=842)
+                first.insert_text((56,30),'页眉',fontsize=8,fontname=FONT)
+                first.insert_text((56,90),owner+' 方法与假设',fontsize=18,fontname=FONT)
+                tail=doc.new_page(width=595,height=842)
+                tail.insert_text((56,30),'页眉',fontsize=8,fontname=FONT)
+                for k in range(5):
+                    for x in (56,200):tail.insert_text((x,80+20*k),'目录'if toc and k==0 and x==56 else '对应说明',fontsize=8.8,fontname=FONT)
+                if ruled:
+                    for y in range(65,166,20):tail.draw_line((50,y),(500,y))
+                try:self.assertEqual(check_layout.tail_orphans(doc),[])
+                finally:doc.close()
+
     def test_fit_class_is_added_once_and_upgraded(self):
         doc = '<section data-section="10" data-kind="plan"><h2>10</h2></section><section class="newpage" data-section="11"><p>x</p></section>'
         one = report.add_section_class(doc, "11", "fit")

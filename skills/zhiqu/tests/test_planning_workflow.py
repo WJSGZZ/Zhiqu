@@ -44,6 +44,37 @@ class PlanningWorkflowTests(unittest.TestCase):
             fn(pointer(obj,path))
         self.change(root,f,update)
 
+    def test_timeline_does_not_silently_hide_consequences_in_marker_column(self):
+        for value in ('未核不付款','个人节点','{{k:/context/personal_dates/checkpoint}}'):
+            with self.subTest(value=value):
+                root=self.roots['grad']
+                self.mutate_node(root,'timeline',lambda n:n['content']['rows'][0].__setitem__(3,value),'07')
+                self.assertTrue(any('不会显示的标记列' in e for e in PlanningCase(root).contract_errors()))
+
+    def test_timeline_visible_note_and_standard_marker_pass(self):
+        root=self.roots['grad']
+        for marker in ('','普通','检查点'):
+            self.mutate_node(root,'timeline',lambda n:n['content']['rows'][0].__setitem__(3,marker),'07')
+            self.assertFalse(any('时间线第' in e for e in PlanningCase(root).contract_errors()))
+        self.mutate_node(root,'timeline',lambda n:n['content']['rows'][0].__setitem__(2,'未核到资格就暂停付款'),'07')
+        markdown,_=assemble(PlanningCase(root))
+        self.assertIn('未核到资格就暂停付款',markdown)
+
+    def test_timeline_delimiters_cannot_turn_visible_note_into_hidden_marker(self):
+        root=self.roots['grad']
+        for value in ('完成核对 | 未核不付款','完成核对\n未核不付款','完成核对\r未核不付款'):
+            with self.subTest(value=value):
+                self.mutate_node(root,'timeline',lambda n:n['content']['rows'][0].__setitem__(2,value),'07')
+                self.assertTrue(any('展开后含分隔符或换行' in e for e in PlanningCase(root).contract_errors()))
+        self.change(root,'case.json',lambda c:c['context']['personal_dates'].update(hidden_test_note='完成核对 | 未核不付款'))
+        self.mutate_node(root,'timeline',lambda n:n['content']['rows'][0].__setitem__(2,'{{k:/context/personal_dates/hidden_test_note}}'),'07')
+        self.assertTrue(any('展开后含分隔符或换行' in e for e in PlanningCase(root).contract_errors()))
+
+    def test_timeline_extra_columns_are_not_silently_dropped(self):
+        root=self.roots['grad']
+        self.mutate_node(root,'timeline',lambda n:n['content']['rows'][0].append('不应消失的后果'),'07')
+        self.assertTrue(any('不能多列或少列' in e for e in PlanningCase(root).contract_errors()))
+
     def test_personal_input_without_official_source_is_allowed(self):
         for root in self.roots.values():
             self.assertFalse(any('personal_input' in e for e in PlanningCase(root).evidence_integrity_errors()))

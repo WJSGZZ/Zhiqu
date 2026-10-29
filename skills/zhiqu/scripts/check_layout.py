@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """检查生成的 PDF 报告版面：表格某一栏被挤成一字一行、数字被拆成两行、正文页中间留下大片空白、
-节末或全文最后一页只剩一两行收尾文字（孤页）。
+节末或全文最后一页只剩一两行收尾内容（孤页）。
 
 用法：python3 check_layout.py 报告.pdf [更多.pdf ...]
 发现问题时逐条列出页码和原因，退出码 1；没有问题退出码 0。
@@ -155,6 +155,47 @@ def _section_heads(page):
     return out
 
 
+def _short_table_rows(lines, page=None):
+    """只识别同一基线的多栏短尾；避免把普通四五行段落也当三行孤尾。"""
+    bands=[]
+    for line in sorted(lines,key=lambda item:item['y']):
+        if not bands or abs(line['y']-bands[-1][0]['y'])>2:
+            bands.append([line])
+        else:
+            bands[-1].append(line)
+    if not 2<=len(bands)<=5:
+        return None
+    if not all(len(band)>=2 and max(x['x'] for x in band)-min(x['x'] for x in band)>40
+               for band in bands) or page is None:
+        return None
+    # 双栏段落也会共享基线；必须有跨过所有单元格的表格横线，一带一格。
+    left=min(line['x'] for line in lines)
+    right=max(line['x']+line.get('w',0) for line in lines)
+    segments=defaultdict(list)
+    for drawing in page.get_drawings():
+        rect=drawing['rect']
+        if rect.height<=1.5 and rect.width>0:
+            segments[round(rect.y0,1)].append((rect.x0,rect.x1))
+    rules=[]
+    for y,parts in segments.items():
+        merged=[]
+        for start,end in sorted(parts):
+            if merged and start<=merged[-1][1]+1:
+                merged[-1]=(merged[-1][0],max(end,merged[-1][1]))
+            else:merged.append((start,end))
+        if any(a<=left and b>=right for a,b in merged):rules.append(y)
+    rules.sort()
+    intervals=[]
+    for band in bands:
+        y=band[0]['y']
+        interval=next((i for i,(a,b) in enumerate(zip(rules,rules[1:])) if a<y<b),None)
+        if interval is None:return None
+        intervals.append(interval)
+    if len(set(intervals))==len(bands):
+        return len(bands)
+    return None
+
+
 def tail_orphans(doc):
     """节末或全文最后一页只剩一两行收尾文字的页：[(页码, 所在小节编号, 行数)]。
 
@@ -187,8 +228,14 @@ def tail_orphans(doc):
             first_head = min(visible_heads)
             lines = [ln for ln in lines if ln["y"] < first_head]
             sid = heads[i - 1][-1] if heads[i - 1] else owner[i - 1]
-        if 0 < len(lines) <= TAIL_LINES and used < TAIL_OCCUPIED:
-            out.append((i + 1, sid, len(lines)))
+        count=len(lines)
+        if (not heads[i] and sid in {f'{n:02}' for n in range(1,12)}
+                and not any(ln['t']=='目录' for ln in lines)):
+            # 五行双栏短表会成为十条PDF文本行；按视觉行检查，不让新节豁免遮住整块孤表。
+            count=_short_table_rows(lines,doc[i]) or count
+        limit=5 if count!=len(lines) else TAIL_LINES
+        if 0 < count <= limit and used < TAIL_OCCUPIED:
+            out.append((i + 1, sid, count))
     return out
 
 
@@ -202,7 +249,7 @@ def check_pdf(path):
     for page_no, msg in blank_issues(doc):
         found.append(f"第 {page_no} 页：{msg}")
     for page_no, sid, n in tail_orphans(doc):
-        found.append(f"第 {page_no} 页：节末孤页，只剩 {n} 行收尾文字（{sid or '?'} 节）；"
+        found.append(f"第 {page_no} 页：节末孤页，只剩 {n} 行收尾内容（{sid or '?'} 节）；"
                      "生成器已试过收紧该节行距仍放不回上一页，先删短或调整这一节的内容")
     return found
 
