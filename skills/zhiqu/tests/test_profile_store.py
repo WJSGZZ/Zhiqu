@@ -290,6 +290,52 @@ class ProfileStore(unittest.TestCase):
                 self.assertEqual(field['field'],'最迟开始挣钱年份');self.assertEqual(field['status'],'unknown');self.assertIsNone(field['value'])
                 self.assertIn(answer,field['quote']);self.assertIn('最迟开始挣钱年份',{x['field']for x in parsed['missing']})
 
+    def test_grad_undecided_income_preserves_explanation_as_unknown(self):
+        answers = ('未定', '尚未定', '暂未定', '还未定', '没定', '待定',
+            '未定，需要先确认全日制学习与挣钱的取舍。',
+            '尚未定，2029年后再说。', '暂未定具体年份',
+            '目前未定什么时候开始挣钱', '还未定，但2029是毕业年',
+            '未定下来，需要先和家里谈', '我现在尚未定好，等拿到录取再评',
+            '没有定下来，需要和家里商量', '还没有定具体年份',
+            '未定具体哪年', '还没定但家里可以支持一年',
+            '待定，需要澄清收入含义', '没定好要不要先工作',
+            '未定（需要和家里谈）', '尚未定(先确认收入含义)',
+            '不确定', '不知道', '不确定，2030年是目标入学年')
+        for answer in answers:
+            with self.subTest(answer=answer):
+                raw = profile(items=[{'id':'worst','q':'退路','a':['直接工作']},
+                    {'id':'earning_year','q':'最迟哪年挣钱？','a':answer}])
+                parsed = store.build_parse(raw, 'grad')
+                field = parsed['fields'][-1]
+                self.assertEqual(field['status'], 'unknown')
+                self.assertIsNone(field['value'])
+                self.assertIn(answer, field['quote'])
+                self.assertEqual(field['answer_refs'], ['earning_year'])
+                self.assertIn('最迟开始挣钱年份', {m['field'] for m in parsed['missing']})
+                self.assertEqual(parsed['source']['raw_sha256'], store.sha(raw))
+                # The old combined field keeps its existing exact-unknown behavior.
+                expected = ['直接工作'] if answer in ('不确定','不知道') else {
+                    'worst':['直接工作'], 'earning_year':answer}
+                self.assertEqual(parsed['fields'][9]['value'], expected)
+
+    def test_short_income_markers_require_a_complete_phrase(self):
+        for answer in ('未定价的合同还没签，但2029年前要挣钱',
+                '待定价方案与收入无关，毕业前挣钱',
+                '尚未定岗，但2029年前必须挣钱',
+                '还没定居，但2029年前要挣钱',
+                '未定型的项目先暂停，毕业前要开始挣钱',
+                '没定稿的合同不影响2029开始挣钱',
+                '未定级之前也要在2029年开始挣钱',
+                '2029年必须开始有稳定工资', '2029年毕业前',
+                '毕业前先开始挣钱'):
+            with self.subTest(answer=answer):
+                parsed = store.build_parse(profile(items=[
+                    {'id':'earning_year','q':'最迟哪年挣钱？','a':answer}]), 'grad')
+                field = parsed['fields'][-1]
+                self.assertEqual(field['status'], 'given')
+                self.assertEqual(field['value'], answer)
+                self.assertFalse(field['confirmed'])
+
     def test_income_refusal_words_do_not_capture_unrelated_prefixes(self):
         for answer in ('不想说服父母，2029必须开始挣钱','不确定性比较大，但2029年前要挣钱','待定价方案与我的收入无关，毕业前挣钱','不方便说服父母，但2029年前必须挣钱','没想到2029年就必须挣钱'):
             with self.subTest(answer=answer):
