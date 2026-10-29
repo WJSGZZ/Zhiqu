@@ -99,7 +99,7 @@
     "calculations.json": "c9f6ffdadaa69063d1698e768de5b96dbfb4f2cafdd9a803a0a136e2d4ee2bae",
     "candidates.json": "3ffc2bc156346f42fbfacce9b243f26199511bb088405c601c9017efa4063c05",
     "case.json": "56c199fd854ba948916bb91afa440ed6d7b72a1c86500cd8d202dda6df921955",
-    "claim_check.json": "b7a07ee49efb02c0993074d4c457ea3fbef9529fe8ebb751041dd379fcb4598b",
+    "claim_check.json": "c4209cf64bab45f68b773a555f69d4c4934358cbe1de894d5c81d65ff8d1185d",
     "directions.json": "6f799d567cc51a1d860a40f8d9bbbf4c16f3bfcd2af58b999cc1db8c54f2761e",
     "evidence.json": "2ddba53ef171d3e4d650af8ed27273a30bb449ef63ffd0480bff3a924f9564f3",
     "judgment.json": "3f7455fd010637e7b0f16acacce93573a3fc2c7f8045264fdc0a8fad8293417d",
@@ -110,7 +110,7 @@
     "profile_snapshot.json": "0a6cb6835c42b9e3a0e18679bd40d3c99c433453287f9e2a231e357647a858d9",
     "report.html": "ffa710d2a9920cdd43b8f5681afaee51f3bd4a2e15c64b8be4f4556a6b4ef49f",
     "report.md": "0895952f1caa72b7576496650f775ddafc6137d721509d0fe4868561a12c2195",
-    "report_trace.json": "9f57ca079425b81db3a05d675f349f217ef556773897bbf2218242c27ddf0ac5",
+    "report_trace.json": "1bd28b020993465eaf951f6ff507c3d5ed5b7e51becf931719e4ab484d44151c",
     "rules_check.json": "bda48a6be3aff5fdb6d27f0800903873b37d636b4444a9ed460b302c5d5b08f9"
   },
   "checklist_update_note": "仅核查单表述及核查工具记录更新；报告与计算原件未改。保留历史复核记录，当前仍等待独立审核，不是重新批准。",
@@ -433,6 +433,15 @@
         "claim_check.json"
       ],
       "reason": "读研新模拟自查修补可见必答未填进入缺口及防抹除检查，并区分未请求与检索未找到；生成器提示未展示叙述，不自动改变旧稿。既有六例无显式可见必答未填，正文、附录材料、数字和PDF未变；只更新工具兼容绑定，原审批及逐句判断保留，不冒充新内容复核。"
+    },
+    {
+      "date": "2026-10-29",
+      "by": "Codex（挣钱时点投影兼容复验，非内容复核）",
+      "files": [
+        "report_trace.json",
+        "claim_check.json"
+      ],
+      "reason": "读研原答中的挣钱时点独立追加投影，不移动既有字段或推断稳定工资；未定答复保留未知。既有六份规划无需要新增已知期限的情况，历史未定原答仅沿旧迁移组合兼容核对；正文、附录材料、数字和PDF未变，仅更新工具兼容绑定，原审批及逐句判断保留，不冒充新内容复核。"
     }
   ],
   "regeneration": {

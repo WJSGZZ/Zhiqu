@@ -22,7 +22,7 @@
     "check_demos.py": "67d4edc1cd737beeb6729783a736e667a97c12d8f7de2de673632d9d5c3370b8",
     "report.py": "41d37e32456f801cb673eeb9cf966894283ead1e7ca53bdcef6709039a5465f5",
     "render_report.py": "17c81658af1834fc1216d61ca3c11070934229a74d8d1175a1602a348ffd1c0f",
-    "profile_store.py": "fd8be53ffc01658411258b540a0530749d10c0c94c78e7d08e3a16fbf4fca26e",
+    "profile_store.py": "16aed07fb557476980d5eee4d35e01a544a4bda8185568235a6c24a70439558f",
     "claim_guards.py": "54bab4d942fafd148190df73cad34805538662b0a152ec5701c8a960e28dbd1d",
     "source_authentication.py": "b18201e997e0b4ca33c879979bc03f81deab1ea5edbbbc74cab6bf622821f278",
     "official_source_audit.py": "c09c40a2c5eec18318fbb1fa52393ee37b4e63f636ec7ea3999084d12ecc0df1",
@@ -1543,6 +1543,26 @@
         }
       },
       "previous_trace_sha256": "678190d389fda1a6058a31970101538d3caeb0173f9b8390e7acfa3ce3e9fa78",
+      "assembled_markdown_sha256": "90ff1e8ce1555a081d376dbea69e831d6f8788393724d3db9bdb8189646a6262",
+      "rendered_body_html_sha256": "58533d0ea502b39624371b3464f7d34f9fb66839f2594be0c9a49afe116b48f3",
+      "appendix_materials_unchanged_except_runtime_timestamp": true,
+      "original_artifacts": {
+        "report.md": "90ff1e8ce1555a081d376dbea69e831d6f8788393724d3db9bdb8189646a6262",
+        "report.html": "cff1e3ca14fbc9145f6a1a4fbb3a4f14ae3c3e4544fbdeea5f215321011619d1",
+        "2027-QZ-S05-report.pdf": "a0932485cec61080da0cdf7a8351532db9c99bf17a19c9cb10a14348ab27ff3b"
+      }
+    },
+    {
+      "date": "2026-10-29",
+      "kind": "grad_income_projection_compatibility",
+      "reason": "读研原答中的挣钱时点独立追加投影，不移动既有字段或推断稳定工资；未定答复保留未知。既有六份规划无需要新增已知期限的情况，历史未定原答仅沿旧迁移组合兼容核对；正文、附录材料、数字和PDF未变，仅更新工具兼容绑定，原审批及逐句判断保留，不冒充新内容复核。",
+      "changed_tools": {
+        "profile_store.py": {
+          "before": "fd8be53ffc01658411258b540a0530749d10c0c94c78e7d08e3a16fbf4fca26e",
+          "after": "16aed07fb557476980d5eee4d35e01a544a4bda8185568235a6c24a70439558f"
+        }
+      },
+      "previous_trace_sha256": "af0af2df94a8d75540ae6e86fb6ae80c4ee206c80d3eb6df644cbb6dd275bac8",
       "assembled_markdown_sha256": "90ff1e8ce1555a081d376dbea69e831d6f8788393724d3db9bdb8189646a6262",
       "rendered_body_html_sha256": "58533d0ea502b39624371b3464f7d34f9fb66839f2594be0c9a49afe116b48f3",
       "appendix_materials_unchanged_except_runtime_timestamp": true,
