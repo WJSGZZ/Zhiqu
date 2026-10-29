@@ -1,4 +1,5 @@
-"""Public HTTP adapter for on-demand kaoyan retrieval. Public crawler guard unchanged; raw response bodies stay in RAM.
+"""Public HTTP adapter for on-demand kaoyan retrieval. Business bodies stay in RAM.
+The fixed public DNS helper retains the crawler's native guarded transport.
 No live HTTP on import. Only exact parent-approved header/role mappings may be aggregated.
 """
 from pathlib import Path
@@ -60,7 +61,19 @@ def memory_curl_adapter(crawl):
 def retrieve_memory(url,*,referer=None,max_bytes=50_000_000,max_attempts=2,crawler=None):
  safe_url(url)
  if referer:safe_url(referer)
- c=crawler or load_crawler();old=c.curl_once;c.curl_once=memory_curl_adapter(c)
+ c=crawler or load_crawler();old=c.curl_once;memory_send=memory_curl_adapter(c)
+ # resolve_public() uses this same module-level transport for its internal
+ # public DNS query. Its `name` is the exact requested hostname, not a person.
+ # Keep that fixed helper on the original crawler transport; never exempt a
+ # business URL's name query or an arbitrary request to the resolver host.
+ resolver_url='https://cloudflare-dns.com/dns-query?'+urlencode({'name':urlsplit(url).hostname,'type':'A'})
+ def send(target,**kwargs):
+  if (target==resolver_url and kwargs.get('resolved_ip')=='1.1.1.1'
+      and kwargs.get('form')is None and kwargs.get('headers')=={'Accept':'application/dns-json'}
+      and kwargs.get('max_bytes')==65536 and kwargs.get('timeout')==8):
+   return old(target,**kwargs)
+  return memory_send(target,**kwargs)
+ c.curl_once=send
  try:
   # Original retrieve owns RequestGuard.reserve/finish, DNS cache, redirect and challenge checks.
   return c.retrieve(url,referer=referer,max_bytes=max_bytes,transport='plain',fallback=False,max_attempts=max_attempts,allow_http_redirect=False)

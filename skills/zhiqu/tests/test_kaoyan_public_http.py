@@ -73,6 +73,46 @@ class PublicHTTPTests(unittest.TestCase):
         for path in ['/news/login-policy.html', '/guide/signing.html', '/catalog.aspx']:
             self.assertEqual(http.safe_url('https://fixture.edu.cn'+path), 'https://fixture.edu.cn'+path)
 
+    def test_internal_public_dns_name_stays_on_native_transport_only_for_bound_host(self):
+        resolver = 'https://cloudflare-dns.com/dns-query?name=fixture.edu.cn&type=A'
+        original = Mock(return_value={'body': b'public DNS reply'})
+        memory = Mock(return_value={'body': b'public source in RAM'})
+        crawler = SimpleNamespace(curl_once=original)
+        helper = dict(headers={'Accept':'application/dns-json'}, form=None,
+                      max_bytes=65536, timeout=8, resolved_ip='1.1.1.1')
+        def retrieve(url, **kwargs):
+            self.assertEqual(crawler.curl_once(resolver, **helper)['body'], b'public DNS reply')
+            self.assertEqual(crawler.curl_once(url, headers={}, form=None, max_bytes=1000, timeout=20)['body'], b'public source in RAM')
+            return None, [], 'offline'
+        crawler.retrieve = Mock(side_effect=retrieve)
+        with patch.object(http, 'memory_curl_adapter', return_value=memory):
+            http.retrieve_memory('https://fixture.edu.cn/notice', crawler=crawler)
+        original.assert_called_once_with(resolver, **helper)
+        self.assertEqual(memory.call_count, 1)
+        self.assertIs(crawler.curl_once, original)
+
+    def test_dns_helper_contract_never_exempts_an_unbound_or_private_business_query(self):
+        resolver = 'https://cloudflare-dns.com/dns-query?name=fixture.edu.cn&type=A'
+        helper = dict(headers={'Accept':'application/dns-json'}, form=None,
+                      max_bytes=65536, timeout=8, resolved_ip='1.1.1.1')
+        cases = [(resolver.replace('fixture.edu.cn','other.edu.cn'), {}),
+                 (resolver+'&extra=1', {}), (resolver.replace('type=A','type=AAAA'), {}),
+                 (resolver, {'resolved_ip':'8.8.8.8'}), (resolver, {'form':{'key':'value'}}),
+                 (resolver, {'headers':{}}), (resolver, {'max_bytes':65537}),
+                 ('https://fixture.edu.cn/notice?name=synthetic_private', {})]
+        for target, updates in cases:
+            with self.subTest(kind=target.split('?')[0], changes=list(updates)):
+                original = Mock()
+                crawler = SimpleNamespace(curl_once=original, TargetValidationError=ValueError)
+                def retrieve(url, **kwargs):
+                    with self.assertRaises(ValueError):crawler.curl_once(target, **dict(helper, **updates))
+                    return None, [], 'offline'
+                crawler.retrieve = Mock(side_effect=retrieve)
+                http.retrieve_memory('https://fixture.edu.cn/notice', crawler=crawler)
+                original.assert_not_called()
+        with self.assertRaises(http.SafeStop):
+            http.retrieve_memory(resolver, crawler=crawler)
+
     def test_public_receipt_never_contains_body_private_header_or_reason(self):
         raw=b'synthetic-private-123456789012345'
         item={'body':raw,'headers':{'authorization':'synthetic-secret'}}
