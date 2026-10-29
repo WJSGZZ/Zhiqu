@@ -45,7 +45,7 @@ def validate_catalog(data):
                 or not isinstance(fixture.get('symbols'), list) or cls+'.'+method not in fixture['symbols']
                 or any(not isinstance(s, str) or s not in symbols for s in fixture['symbols'])):
             raise ValueError('最小输入须指向实际存在的fixture函数或方法，不另抄一份数据')
-        if case.get('domain') not in ('高考', '考研', '报告') or not isinstance(case.get('expected'), str) or not case['expected'].strip():
+        if case.get('domain') not in ('高考', '考研', '就业', '报告') or not isinstance(case.get('expected'), str) or not case['expected'].strip():
             raise ValueError('难例须有领域及明确期望结果')
         origin = case.get('provenance')
         if (not isinstance(origin, dict) or not isinstance(origin.get('commit'), str)

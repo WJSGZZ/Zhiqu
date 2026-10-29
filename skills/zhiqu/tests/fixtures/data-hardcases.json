@@ -820,6 +820,57 @@
         "file": "skills/zhiqu/tests/test_kaoyan_embedded_documents.py",
         "basis": "嵌入原件实际定位问题与同类HTML语义的合成回归；没有取得真实PDF，不冒原件准确率。"
       }
+    },
+    {
+      "id": "job-excluded-city",
+      "domain": "就业",
+      "test": "test_employment_region.EmploymentRegion.test_excluded_city_in_scope_does_not_override_province",
+      "input_fixture": {
+        "file": "test_employment_region.py",
+        "symbols": [
+          "EmploymentRegion.test_excluded_city_in_scope_does_not_override_province"
+        ]
+      },
+      "expected": "范围备注里被排除的苏州，不能覆盖明确的江苏省范围；仍可查询江苏原汇总。",
+      "provenance": {
+        "commit": "7d1083f",
+        "file": "skills/zhiqu/tests/test_employment_region.py",
+        "basis": "该提交引入真实查询缺陷的合成最小回归；本机原数据仅只读盘点，不冒称重新核验官方原件。"
+      }
+    },
+    {
+      "id": "job-republisher-city",
+      "domain": "就业",
+      "test": "test_employment_region.EmploymentRegion.test_republisher_city_is_not_work_location",
+      "input_fixture": {
+        "file": "test_employment_region.py",
+        "symbols": [
+          "EmploymentRegion.test_republisher_city_is_not_work_location"
+        ]
+      },
+      "expected": "全国公告的上海转载地不能变成上海工作地，原公告和来源保留。",
+      "provenance": {
+        "commit": "7d1083f",
+        "file": "skills/zhiqu/tests/test_employment_region.py",
+        "basis": "该提交引入真实查询缺陷的合成最小回归；本机原数据仅只读盘点，不冒称重新核验官方原件。"
+      }
+    },
+    {
+      "id": "job-geographic-path-binding",
+      "domain": "就业",
+      "test": "test_employment_region.EmploymentRegion.test_separate_city_paths_are_not_cross_joined",
+      "input_fixture": {
+        "file": "test_employment_region.py",
+        "symbols": [
+          "EmploymentRegion.test_separate_city_paths_are_not_cross_joined"
+        ]
+      },
+      "expected": "浙江杭州与江苏苏州两条原地理链不能拼出浙江苏州；原链和单城市仍可查。",
+      "provenance": {
+        "commit": "7d1083f",
+        "file": "skills/zhiqu/tests/test_employment_region.py",
+        "basis": "该提交引入真实查询缺陷的合成最小回归；本机原数据仅只读盘点，不冒称重新核验官方原件。"
+      }
     }
   ],
   "not_in_this_suite": [
