@@ -888,6 +888,40 @@
         "file": "skills/zhiqu/tests/test_employment_region.py",
         "basis": "保留SQL字段角色和行政层级的最小回归；不凭裸同名地名推行政身份。"
       }
+    },
+    {
+      "id": "report-career-compound-labels",
+      "domain": "报告",
+      "test": "test_chart_geometry.AppendixReadability.test_current_compound_career_fields_keep_specific_labels",
+      "input_fixture": {
+        "file": "test_chart_geometry.py",
+        "symbols": [
+          "AppendixReadability.test_current_compound_career_fields_keep_specific_labels"
+        ]
+      },
+      "expected": "真实复合问卷专业名、专业码、求职进度与录用通知有明确中文标签，不笼统打印其他。",
+      "provenance": {
+        "commit": "0eaa0ba",
+        "file": "skills/zhiqu/tests/test_chart_geometry.py",
+        "basis": "本轮真实端到端自查发现后的最小合成回归，复用原方法，不冒充全部问卷或真实雇主原件已核。"
+      }
+    },
+    {
+      "id": "report-hidden-offer-gap-claim",
+      "domain": "报告",
+      "test": "test_planning_workflow.NoOfferNoticeTests.test_hidden_explanation_cannot_suppress_rendered_notice",
+      "input_fixture": {
+        "file": "test_planning_workflow.py",
+        "symbols": [
+          "NoOfferNoticeTests.test_hidden_explanation_cannot_suppress_rendered_notice"
+        ]
+      },
+      "expected": "隐藏注释和未激活节点不能抑制缺口说明；实际组装与逐句回查对生成提示判断一致，trace不被污染。",
+      "provenance": {
+        "commit": "0eaa0ba",
+        "file": "skills/zhiqu/tests/test_planning_workflow.py",
+        "basis": "本轮真实端到端自查发现后的最小合成回归，复用原方法，不冒充全部问卷或真实雇主原件已核。"
+      }
     }
   ],
   "not_in_this_suite": [
