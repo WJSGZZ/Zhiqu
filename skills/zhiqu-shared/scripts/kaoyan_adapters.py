@@ -71,7 +71,7 @@ def source_record(body, url, school, year, layer):
 HEAD = {
     '专业代码': 'code', '招生专业代码': 'code', '专业名称': 'name', '招生专业名称': 'name',
     '学院': 'college', '学院名称': 'college', '院系名称': 'college',
-    '复试线': 'total', '总分': 'total', '初试总分': 'initial', '初试成绩': 'initial',
+    '复试线': 'total', '复试分数线': 'total', '总分': 'total', '初试总分': 'initial', '初试成绩': 'initial',
     '政治':'politics','思想政治理论':'politics','英语':'english','数学':'math',
     '业务课一':'major1','业务课二':'major2',
     '单科(满分=100分)':'component_single_100',
@@ -156,9 +156,19 @@ def parse_verified_tables(tables, source, identity, year, layer, programs):
             raise NeedsReview('重复业务表头，需原表人工定位')
         if not {'code', 'combined'} & roles.keys():
             continue
+        if layer=='lines' and '类别'in labels:
+            if labels.count('类别')!=1:raise NeedsReview('类别列不唯一，需原表核对')
+            roles['category']=labels.index('类别')
+        # A header rowspan may occupy a second physical tr. It is still a
+        # header, not a data row or a valid random data sample.
+        header_continuations={ri for ri in range(header+1,len(grid))
+                              if grid[ri]==grid[header] and anchors[ri]==anchors[header]}
+        if header_continuations and 'sample_row_indices'in table:
+            raise NeedsReview('跨行表头的原页抽核须先按实际数据行重新核对')
         scope = table.get('scope', '')
         selected = []
         for row_index in range(header+1, len(grid)):
+            if row_index in header_continuations:continue
             row = grid[row_index]
             raw_code = row[roles.get('code', roles.get('combined'))]
             if len(re.findall(r'(?<!\d)(?:\d{4}[0-9A-Z]{2}|S\d{6})(?!\d)',raw_code))>1:
@@ -186,7 +196,7 @@ def parse_verified_tables(tables, source, identity, year, layer, programs):
         for label in ['备注', '说明']:
             if label in labels and any(row[labels.index(label)].strip() for _, row, _, _ in selected):
                 raise NeedsReview('非空备注可能改变范围，需人工范围映射')
-        physical = list(range(header+1, len(grid)))
+        physical = [ri for ri in range(header+1,len(grid))if ri not in header_continuations]
         sampled = table.get('sample_row_indices', [physical[i] for i in samples(len(physical))])
         def row_locator(ri):
             return dict({'page': 1, 'table': table['table'], 'row': ri+1},
@@ -196,6 +206,7 @@ def parse_verified_tables(tables, source, identity, year, layer, programs):
                      dual_read_equal=True, sample_passed=True, sample_locators=sample_locs,
                      sample_count=len(sample_locs), sha256=digest, method=table.get('read_method', 'lxml及html.parser独立原格与跨度；原行锚点固定随机复读'),
                      selected_rows=len(selected))
+        if header_continuations:proof['header_continuation_rows']=[row_locator(ri)for ri in sorted(header_continuations)]
         if table.get('cross_page_proofs'):proof['cross_page_proofs']=table['cross_page_proofs']
         proofs.append(proof)
         seen_origins = set()
@@ -209,6 +220,16 @@ def parse_verified_tables(tables, source, identity, year, layer, programs):
             mode = get('mode')
             if mode and mode not in {'全日制', '非全日制', '全日制、非全日制'}:
                 raise NeedsReview('学习方式原列无法明确解释')
+            degree=get('degree')
+            row_scope=scope
+            if 'category'in roles:
+                category=re.sub(r'\s+','',get('category'))
+                match=re.fullmatch(r'(学术硕士|专业硕士)\((全日制|非全日制)\)',category)
+                if not match:raise NeedsReview('类别列的学位/学习方式或计划口径尚未明确映射')
+                category_degree={'学术硕士':'学术学位','专业硕士':'专业学位'}[match[1]]
+                if (mode and mode!=match[2])or(degree and degree!=category_degree):raise NeedsReview('类别与独立学位/学习方式列冲突，整份未入')
+                degree,mode=category_degree,match[2]
+                row_scope='；'.join(x for x in [scope,'原表类别：'+literal('category')]if x)
             special = get('special')
             if not special:
                 special = next((x for x in ['少数民族高层次骨干人才计划', '退役大学生士兵计划'] if x in scope), '')
@@ -246,9 +267,9 @@ def parse_verified_tables(tables, source, identity, year, layer, programs):
                 if unknown:raise NeedsReview('单科表头尚未明确映射，需原表槽位核对；不把未映射说成来源未提供')
                 raw = {k: None for k in RAW}
                 raw.update(year=year, school=school, institution_id=iid, college=get('college') or None,
-                           program_code=code, program_name=name, study_mode=mode or None,
+                           program_code=code, program_name=name, degree_type=degree or None,study_mode=mode or None,
                            total=number(get('total')), special_plan=special or None,
-                           line_scope=scope or '原表未单列范围', note='只取原总分列；单科未提供',
+                           line_scope=row_scope or '原表未单列范围', note='只取原总分列；单科未提供',
                            read_method=table.get('read_method','文字双DOM'), source_url=url, src_locator=dump(loc))
                 for field in ['politics','english','math','major1','major2']:
                     if field in roles:raw[field]=number(get(field))
@@ -257,10 +278,10 @@ def parse_verified_tables(tables, source, identity, year, layer, programs):
                 if mapped or components:raw['note']='原总分及明示单科按原表槽位保留；未标科目不强行映射'
                 output.append(dict(record_id=rid, institution_id=iid, source_id=sid, row=raw,
                                    src_page=loc['page'], src_table=str(loc['table']), src_row=str(loc['row']),
-                                   locator=loc, excerpt=dump(dict({'专业代码': literal('code'), '总分': literal('total')},**{label:literal(HEAD[label])for label in labels if HEAD.get(label)in mapped or HEAD.get(label,'').startswith('component_')})),components=components,
+                                   locator=loc, excerpt=dump(dict({'专业代码': literal('code'), '总分': literal('total')},**({'类别':literal('category')}if 'category'in roles else{}),**{label:literal(HEAD[label])for label in labels if HEAD.get(label)in mapped or HEAD.get(label,'').startswith('component_')})),components=components,
                                    review=dict(status='approved', method=proof['method'], file_proof=proof),
                                    scope_context=dict(direction=get('direction'), joint_program=get('joint'),
-                                                      admission_route=get('route'), scope_raw=scope),
+                                                      admission_route=get('route'), scope_raw=row_scope),
                                    field_status={k: state(raw.get(k)) for k in ['year','total','politics','english','math','major1','major2']}))
             else:
                 plan_raw = literal('planned').strip()

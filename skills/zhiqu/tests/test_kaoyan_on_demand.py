@@ -533,6 +533,46 @@ class OnDemandTests(unittest.TestCase):
         self.assertEqual(links[0], 'https://fixture.edu.cn/original.jpg')
         self.assertNotIn('https://fixture.edu.cn/archive11', links)
 
+    def test_literal_retest_score_header_preserves_degree_mode_and_header_spans(self):
+        labels=['类别','专业代码','专业名称','学院','复试分数线']
+        markup='<table><tr>'+''.join('<th rowspan="2">'+x+'</th>'for x in labels)+'</tr><tr></tr>'
+        for code,mode in [('125300','全日制'),('125700','全日制'),('025300','非全日制')]:
+            markup+='<tr><td>专业硕士('+mode+')</td><td>'+code+'</td><td>合成专业</td><td>合成学院</td><td>220</td></tr>'
+        markup+='</table>'
+        result=adapters.parse_official_html(page(markup),URL,IDENTITY,2026,'lines',['125300'])
+        self.assertEqual(result['rows'],1)
+        row=result['manifest']['rows'][0]
+        self.assertEqual(row['row']['total'],220)
+        self.assertEqual(row['row']['degree_type'],'专业学位')
+        self.assertEqual(row['row']['study_mode'],'全日制')
+        self.assertIn('专业硕士(全日制)',row['excerpt'])
+        self.assertIn('原表类别',row['scope_context']['scope_raw'])
+        proof=result['proofs'][0]
+        self.assertEqual(proof['original_rows'],3)
+        self.assertEqual(proof['sample_count'],3)
+        self.assertEqual([x['row']for x in proof['sample_locators']],[3,4,5])
+        self.assertEqual([x['row']for x in proof['header_continuation_rows']],[2])
+
+    def test_category_cannot_hide_special_plan_or_conflicting_study_mode(self):
+        for category,mode in [('地方专项','全日制'),('专业硕士(全日制)','非全日制'),('','全日制')]:
+            markup='<table><tr><th>类别</th><th>专业代码</th><th>复试分数线</th><th>学习方式</th></tr>'
+            markup+='<tr><td>'+category+'</td><td>125300</td><td>220</td><td>'+mode+'</td></tr></table>'
+            with self.subTest(category=category,mode=mode),self.assertRaises(adapters.NeedsReview):
+                adapters.parse_official_html(page(markup),URL,IDENTITY,2026,'lines',['125300'])
+
+    def test_existing_original_under_another_source_id_does_not_duplicate_ingest(self):
+        with sqlite3.connect(self.db) as c:
+            c.execute('insert into source(source_id,grade,publisher,archive_sha256) values(?,?,?,?)',
+                      ('old-prefix', '官方', IDENTITY['name'], hashlib.sha256(line_page()).hexdigest()))
+        summary, _, publisher = self.run_fake()
+        publisher.assert_not_called()
+        self.assertFalse(summary['published'])
+        self.assertEqual(summary['outcomes'][0]['status'], 'partial')
+        self.assertFalse(summary['outcomes'][0]['published_in_library'])
+        self.assertIn('未重复建来源', summary['outcomes'][0]['reason'])
+        self.assertEqual(summary['outcomes'][0]['source_ids'], ['old-prefix'])
+        self.assertTrue(list((self.root/'out').glob('existing-source-*.json')))
+
     def test_recorded_url_padding_is_removed_without_rewriting_address(self):
         path = self.root/'entries.csv'
         path.write_text('school,graduate_site_url\n合成大学,  https://fixture.edu.cn/path/  \n')

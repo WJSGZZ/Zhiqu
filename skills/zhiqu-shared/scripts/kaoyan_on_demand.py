@@ -129,6 +129,17 @@ def existing_source_entries(database, source_ids):
     return urls
 
 
+def source_identity_conflicts(database, sources):
+    """Do not duplicate a raw original under a different ingest prefix."""
+    conflicts=[]
+    with sqlite3.connect(Path(database).as_uri()+'?mode=ro',uri=True) as c:
+        for source in sources:
+            ids=[r[0]for r in c.execute('select source_id from source where archive_sha256=? and source_id<>? order by source_id',
+                 (source['archive_sha256'],source['source_id']))]
+            if ids:conflicts.append({'sha256':source['archive_sha256'],'candidate_source_id':source['source_id'],'existing_source_ids':ids})
+    return conflicts
+
+
 def navigation_links(body,url,school,entry):
     from lxml import html
     from kaoyan_tables import _decode
@@ -513,6 +524,13 @@ def run_request(request, *, fetch=fetch_public, publisher=validate_and_publish, 
                     for business in parsed['manifest']['rows']:
                         row=business.get('row',business)
                         if row.get('school')!=identity['name']or row.get('year')!=year or business.get('institution_id')!=identity['institution_id']:raise ValueError('人工清单学校/年份范围不符')
+                    conflicts=source_identity_conflicts(request['database'],parsed['manifest']['sources'])
+                    if conflicts:
+                        write_json(out/('existing-source-'+str(year)+'-'+layer+'-'+cell['program']+'.json'),
+                                   {'conflicts':conflicts,'manifest':parsed['manifest'],'proofs':parsed['proofs']})
+                        result.update(status='partial',rows=parsed['rows'],reason='原件指纹已存在于其他来源编号；存量核验关联尚未闭合，未重复建来源或入库',
+                                      source_ids=sorted({sid for conflict in conflicts for sid in conflict['existing_source_ids']}),published_in_library=False)
+                        break
                     manifests.append((layer,parsed['manifest']));write_json(out/('reviewed-manifest-'+str(len(manifests))+'.json'),{'layer':layer,'manifest':parsed['manifest'],'proofs':parsed['proofs']})
                     result.update(status='staged',reason='原格双读及规定比例抽核通过；待数据相关验收与发布',
                                   rows=parsed['rows'],pending=parsed['pending'],source_ids=[s['source_id']for s in parsed['manifest']['sources']],proofs=parsed['proofs'])
