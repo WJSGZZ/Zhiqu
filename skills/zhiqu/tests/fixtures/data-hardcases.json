@@ -377,6 +377,113 @@
         "file": "skills/zhiqu/tests/test_ingest_kaoyan_verified_stats.py",
         "basis": "项目实际缺陷修补后的合成最小回归；不等同重新核验原件。"
       }
+    },
+    {
+      "id": "ky-navigation-plan-and-attachment",
+      "domain": "考研",
+      "test": "test_kaoyan_on_demand.OnDemandTests.test_discovery_follows_existing_plan_wording_h2_and_full_anchor_title",
+      "input_fixture": {
+        "file": "test_kaoyan_on_demand.py",
+        "symbols": [
+          "OnDemandTests.setUp",
+          "OnDemandTests.test_discovery_follows_existing_plan_wording_h2_and_full_anchor_title"
+        ]
+      },
+      "expected": "目录计划词、h2附件及链接title只能作发现提示，原表仍须独立核学校年份与口径。",
+      "provenance": {
+        "commit": "67f4949",
+        "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
+        "basis": "20目标基线暴露的入口/跳转与部分记录复取缺口；最小合成回归不等同实际原表核验或生产拦截绕过实证。"
+      }
+    },
+    {
+      "id": "ky-partial-source-refetch",
+      "domain": "考研",
+      "test": "test_kaoyan_on_demand.OnDemandTests.test_partial_official_source_is_refetched_not_promoted_to_cache",
+      "input_fixture": {
+        "file": "test_kaoyan_on_demand.py",
+        "symbols": [
+          "OnDemandTests.setUp",
+          "OnDemandTests.test_partial_official_source_is_refetched_not_promoted_to_cache"
+        ]
+      },
+      "expected": "已有官方部分记录的实际来源URL应重新取核，不直接升级obtained，不借第三方或未确认host。",
+      "provenance": {
+        "commit": "67f4949",
+        "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
+        "basis": "20目标基线暴露的入口/跳转与部分记录复取缺口；最小合成回归不等同实际原表核验或生产拦截绕过实证。"
+      }
+    },
+    {
+      "id": "ky-bounded-normal-redirect",
+      "domain": "考研",
+      "test": "test_kaoyan_on_demand.OnDemandTests.test_fetch_allows_bounded_normal_redirects_without_transport_fallback",
+      "input_fixture": {
+        "file": "test_kaoyan_on_demand.py",
+        "symbols": [
+          "OnDemandTests.setUp",
+          "OnDemandTests.test_fetch_allows_bounded_normal_redirects_without_transport_fallback"
+        ]
+      },
+      "expected": "普通301/302占请求次数，允许总计3跳；不放宽传输降级、登录和拦截停止。",
+      "provenance": {
+        "commit": "67f4949",
+        "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
+        "basis": "20目标基线暴露的入口/跳转与部分记录复取缺口；最小合成回归不等同实际原表核验或生产拦截绕过实证。"
+      }
+    },
+    {
+      "id": "ky-historic-host-stop",
+      "domain": "考研",
+      "test": "test_kaoyan_on_demand.OnDemandTests.test_previous_block_on_host_stops_new_path_but_not_other_official_host",
+      "input_fixture": {
+        "file": "test_kaoyan_on_demand.py",
+        "symbols": [
+          "OnDemandTests.setUp",
+          "OnDemandTests.test_previous_block_on_host_stops_new_path_but_not_other_official_host"
+        ]
+      },
+      "expected": "同host的历史拦截不能换路径重试；其他已确认官方host仍独立处理。",
+      "provenance": {
+        "commit": "67f4949",
+        "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
+        "basis": "20目标基线暴露的入口/跳转与部分记录复取缺口；最小合成回归不等同实际原表核验或生产拦截绕过实证。"
+      }
+    },
+    {
+      "id": "ky-redirect-private-target",
+      "domain": "考研",
+      "test": "test_kaoyan_public_http.PublicHTTPTests.test_every_redirect_target_is_checked_before_dns_and_http",
+      "input_fixture": {
+        "file": "test_kaoyan_public_http.py",
+        "symbols": [
+          "PublicHTTPTests.test_every_redirect_target_is_checked_before_dns_and_http"
+        ]
+      },
+      "expected": "普通跳转每一跳在DNS与HTTP之前拒绝个人查询键、登录/验证码路径和凭据；不得等到最终回执才检查。",
+      "provenance": {
+        "commit": "f170dd7",
+        "file": "skills/zhiqu/tests/test_kaoyan_public_http.py",
+        "basis": "独立复核用真实本机传输与合成跳转复现；零网络，不代表生产曾发生绕过。"
+      }
+    },
+    {
+      "id": "ky-redirect-stop-receipt",
+      "domain": "考研",
+      "test": "test_kaoyan_on_demand.OnDemandTests.test_rejected_redirect_receipt_stops_host_without_serializing_target",
+      "input_fixture": {
+        "file": "test_kaoyan_on_demand.py",
+        "symbols": [
+          "OnDemandTests.setUp",
+          "OnDemandTests.test_rejected_redirect_receipt_stops_host_without_serializing_target"
+        ]
+      },
+      "expected": "拒绝含隐私/登录/验证跳转时仍生成匿名停止回执，整站停止，不换另一条路径继续请求。",
+      "provenance": {
+        "commit": "6188100",
+        "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
+        "basis": "独立复核离线复现的编排停止语义缺口；个人目标URL不落回执。"
+      }
     }
   ],
   "not_in_this_suite": [
