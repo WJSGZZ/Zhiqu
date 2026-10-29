@@ -169,7 +169,7 @@
     "calculations.json": "00e5087c418c579371b17558494a9c4c1f865b0b051ef63fc1a3c9a51a89cd87",
     "candidates.json": "1f9f3703275d1799b96d638988fd5c11a27d5f2c4ef9209db44868be66817183",
     "case.json": "0001243d062291f20d005fab27c3bcc9f801dd724d9bd8593487ad013319de45",
-    "claim_check.json": "b77e4e014529a4524b347257e0686e2f355f0a1ccaa4e50adfb3191a61cf075a",
+    "claim_check.json": "f5abae0e63db6dcc857d276e79fdddf2f2eefe26fc96f54a99fe0021eca56a99",
     "directions.json": "e11eb75bac9a1378195f15ef805daf0ffe3d0a4c2306d317d6d9944265b8008b",
     "evidence.json": "03304e7a1c5a1324a791db8d79dc9087ab501f578414afef2bda2728ef1d97fa",
     "judgment.json": "a9dd41f886f0c6f554dcbfa124510778365a5a732f3490e40d1499b0ff24c03b",
@@ -525,6 +525,12 @@
       "date": "2026-10-29",
       "reason": "2026-10-29：仅拆分均分/英语/数学的本人原话摘录，均分两段明确分隔；原答、证据、计算、正文结论不变，重出PDF附录并检版。本轮修改独立复核与旧报告正式交付审核分开，后者仍待独立复核及操控者核查，不重新认证旧官方事实。",
       "content_changed": true,
+      "independent_delivery_approval": false
+    },
+    {
+      "date": "2026-10-29",
+      "reason": "修复前轮追加previous_generation历史后未最后重绑逐句清单的问题；仅绑定元数据，原判定、报告和输入字节不变，不冒充交付批准。",
+      "content_changed": false,
       "independent_delivery_approval": false
     }
   ],
