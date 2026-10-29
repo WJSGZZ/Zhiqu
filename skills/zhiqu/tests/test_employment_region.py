@@ -45,7 +45,7 @@ class EmploymentRegion(unittest.TestCase):
         self.assertEqual(self.totals('浙江')['job_summary'],1)
 
     def test_normalize_city_suffix_and_hierarchy_without_city_expansion(self):
-        for value,query in [('浙江·杭州','杭州市'),('浙江省杭州市','杭州'),('浙江省杭州市','浙江'),('浙江省杭州市','浙江省杭州市'),('内蒙古自治区呼和浩特市','呼和浩特')]:
+        for value,query in [('浙江·杭州','杭州'),('浙江省杭州市','杭州'),('浙江省杭州市','浙江'),('浙江省杭州市','浙江省杭州市'),('内蒙古自治区呼和浩特市','呼和浩特')]:
             with self.subTest(value=value,query=query):self.assertTrue(db._employment_region_match(value,query))
         for value,query in [('浙江','杭州'),('杭州市','杭州湾'),('全国','上海'),('江苏苏州市','浙江苏州市')]:
             with self.subTest(value=value,query=query):self.assertFalse(db._employment_region_match(value,query))
@@ -80,6 +80,23 @@ class EmploymentRegion(unittest.TestCase):
         self.assertTrue(db._employment_region_match(value,'江苏省苏州市'))
         self.assertTrue(db._employment_region_match(value,'苏州'))
         self.assertFalse(db._employment_region_match(value,'浙江省','浙江省苏州市'))
+
+    def test_explicit_province_and_city_homonyms_keep_their_level(self):
+        self.assertFalse(db._employment_region_match('吉林市','吉林省'))
+        self.assertFalse(db._employment_region_match('吉林省','吉林市'))
+        self.assertTrue(db._employment_region_match('吉林省吉林市','吉林省'))
+        self.assertTrue(db._employment_region_match('吉林省吉林市','吉林市'))
+        self.assertFalse(db._employment_region_match('吉林','吉林市'))
+        self.assertFalse(db._employment_region_match('浙江·杭州','杭州市'))
+        self.assertTrue(db._employment_region_match('上海','上海市'))
+
+    def test_bare_province_column_is_not_certified_as_same_named_city(self):
+        with sqlite3.connect(self.path)as c:
+            c.execute("UPDATE competition_stat SET province='吉林'")
+        self.assertNotIn('competition_stat',self.totals('吉林市'))
+        self.assertEqual(self.totals('吉林省')['competition_stat'],1)
+        with sqlite3.connect(self.path)as c:c.execute("UPDATE competition_stat SET province='上海'")
+        self.assertEqual(self.totals('上海市')['competition_stat'],1)
 
     def test_destination_uses_destination_not_school_city(self):
         with sqlite3.connect(self.path)as c:
