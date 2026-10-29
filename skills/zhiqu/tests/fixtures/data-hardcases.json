@@ -609,6 +609,94 @@
         "file": "skills/zhiqu/tests/test_kaoyan_public_http.py",
         "basis": "华工真实公开导航暴露的端点后缀遗漏；离线合成边界，不等同认证或绕过线上登录。"
       }
+    },
+    {
+      "id": "ky-bound-dns-helper",
+      "domain": "考研",
+      "test": "test_kaoyan_public_http.PublicHTTPTests.test_internal_public_dns_name_stays_on_native_transport_only_for_bound_host",
+      "input_fixture": {
+        "file": "test_kaoyan_public_http.py",
+        "symbols": [
+          "PublicHTTPTests.test_internal_public_dns_name_stays_on_native_transport_only_for_bound_host"
+        ]
+      },
+      "expected": "固定公共DNS参数name只作为与当前hostname绑定的内部协议，业务仍RAM；不得误拦解析使原站请求前失败。",
+      "provenance": {
+        "commit": "7b26ab7",
+        "file": "skills/zhiqu/tests/test_kaoyan_public_http.py",
+        "basis": "真实fake-IP到DoH链被业务姓名规则误拦的源头回归；原站未触达不能冒学校DNS/访问失败。"
+      }
+    },
+    {
+      "id": "ky-dns-helper-boundary",
+      "domain": "考研",
+      "test": "test_kaoyan_public_http.PublicHTTPTests.test_dns_helper_contract_never_exempts_an_unbound_or_private_business_query",
+      "input_fixture": {
+        "file": "test_kaoyan_public_http.py",
+        "symbols": [
+          "PublicHTTPTests.test_dns_helper_contract_never_exempts_an_unbound_or_private_business_query"
+        ]
+      },
+      "expected": "换host/参数/协议预算/引脚或顶层伪装均不能获得DNS通道；业务姓名查询仍拒绝。",
+      "provenance": {
+        "commit": "7b26ab7",
+        "file": "skills/zhiqu/tests/test_kaoyan_public_http.py",
+        "basis": "真实fake-IP到DoH链被业务姓名规则误拦的源头回归；原站未触达不能冒学校DNS/访问失败。"
+      }
+    },
+    {
+      "id": "ky-literal-retest-category",
+      "domain": "考研",
+      "test": "test_kaoyan_on_demand.OnDemandTests.test_literal_retest_score_header_preserves_degree_mode_and_header_spans",
+      "input_fixture": {
+        "file": "test_kaoyan_on_demand.py",
+        "symbols": [
+          "OnDemandTests.setUp",
+          "OnDemandTests.test_literal_retest_score_header_preserves_degree_mode_and_header_spans"
+        ]
+      },
+      "expected": "复试分数线精确映射总分，类别明示学位和学习方式保留原文；跨行表头不算数据或抽样。",
+      "provenance": {
+        "commit": "ea6cc57",
+        "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
+        "basis": "南京审计真实双行表头/类别与复试线表已取得但漏映射、原件已存在不同source_id的回归；不冒完成存量核验关联。"
+      }
+    },
+    {
+      "id": "ky-category-scope-conflict",
+      "domain": "考研",
+      "test": "test_kaoyan_on_demand.OnDemandTests.test_category_cannot_hide_special_plan_or_conflicting_study_mode",
+      "input_fixture": {
+        "file": "test_kaoyan_on_demand.py",
+        "symbols": [
+          "OnDemandTests.setUp",
+          "OnDemandTests.test_category_cannot_hide_special_plan_or_conflicting_study_mode"
+        ]
+      },
+      "expected": "未知/空类别、专项及与独立学习方式冲突不可当普通类别；整份拒绝。",
+      "provenance": {
+        "commit": "ea6cc57",
+        "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
+        "basis": "南京审计真实双行表头/类别与复试线表已取得但漏映射、原件已存在不同source_id的回归；不冒完成存量核验关联。"
+      }
+    },
+    {
+      "id": "ky-existing-source-prefix",
+      "domain": "考研",
+      "test": "test_kaoyan_on_demand.OnDemandTests.test_existing_original_under_another_source_id_does_not_duplicate_ingest",
+      "input_fixture": {
+        "file": "test_kaoyan_on_demand.py",
+        "symbols": [
+          "OnDemandTests.setUp",
+          "OnDemandTests.test_existing_original_under_another_source_id_does_not_duplicate_ingest"
+        ]
+      },
+      "expected": "同一原件SHA不同来源编号先留候选与关联缺口，不克隆/重复入库或升级覆盖。",
+      "provenance": {
+        "commit": "ea6cc57",
+        "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
+        "basis": "南京审计真实双行表头/类别与复试线表已取得但漏映射、原件已存在不同source_id的回归；不冒完成存量核验关联。"
+      }
     }
   ],
   "not_in_this_suite": [
