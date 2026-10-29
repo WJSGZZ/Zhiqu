@@ -17,7 +17,7 @@
   "contract_sha256": "b805904d0c51a3684ce92ee68d71e57f416749bf20fbf6c5ef0604747f005a07",
   "tool_sha256": {
     "planning_report.py": "ce3ab0e1ce54cb7f250e71b60c56ce78f863f52b8840b82f12a416d6aee7c9c6",
-    "planning_workflow.py": "adc00b53b2b82d0676b21e7464d35c01b60c1b90624ae11095f0cf3ecdc702ef",
+    "planning_workflow.py": "7126b68aa5b208ec08911ef4c4c356211d17433cad2c59debfd54407cfc6b27f",
     "operator_check.py": "d99826c1cae9514c665edb0b1b6155ea99a0bce19b99a919b9ada81e0b93c0a1",
     "check_demos.py": "67d4edc1cd737beeb6729783a736e667a97c12d8f7de2de673632d9d5c3370b8",
     "report.py": "41d37e32456f801cb673eeb9cf966894283ead1e7ca53bdcef6709039a5465f5",
@@ -1982,6 +1982,26 @@
         }
       },
       "previous_trace_sha256": "c38bde9cd363163ca8baaaf44d7ee882a13de03798cc4e4c44a6ca5627ef34b1",
+      "assembled_markdown_sha256": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
+      "rendered_body_html_sha256": "9b4eb5bdf5fb56d7d60c72b50c87550cb15d8dd456668a6c61c774705009dae2",
+      "appendix_materials_unchanged_except_runtime_timestamp": true,
+      "original_artifacts": {
+        "report.md": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
+        "report.html": "3311e44a727830d10556b77e2d5e544eecd6c2ab68f4ac84b65aa043746f3f8d",
+        "2027-YJ-S05-report.pdf": "c3510ec62f75761aadca608bbe23109ef15281c5eacbda20f883ad1c0012c85a"
+      }
+    },
+    {
+      "date": "2026-10-29",
+      "kind": "management_audit_compatibility",
+      "reason": "时间线拒绝把正文放入不显示的标记列；短多栏节尾按视觉行检查。旧六份时间线与版面均已检查通过，输入、正文、附录、数字、PDF及原审批不变，仅更新工具兼容绑定，不冒充新内容复核。",
+      "changed_tools": {
+        "planning_workflow.py": {
+          "before": "adc00b53b2b82d0676b21e7464d35c01b60c1b90624ae11095f0cf3ecdc702ef",
+          "after": "7126b68aa5b208ec08911ef4c4c356211d17433cad2c59debfd54407cfc6b27f"
+        }
+      },
+      "previous_trace_sha256": "70e4c3523bff5818e1fed8fd1275edf5d9a42b964b40adb4d6352903cc938763",
       "assembled_markdown_sha256": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
       "rendered_body_html_sha256": "9b4eb5bdf5fb56d7d60c72b50c87550cb15d8dd456668a6c61c774705009dae2",
       "appendix_materials_unchanged_except_runtime_timestamp": true,

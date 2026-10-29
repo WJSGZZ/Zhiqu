@@ -169,7 +169,7 @@
     "calculations.json": "00e5087c418c579371b17558494a9c4c1f865b0b051ef63fc1a3c9a51a89cd87",
     "candidates.json": "1f9f3703275d1799b96d638988fd5c11a27d5f2c4ef9209db44868be66817183",
     "case.json": "0001243d062291f20d005fab27c3bcc9f801dd724d9bd8593487ad013319de45",
-    "claim_check.json": "3b096b24969762255b2c296319ed62dca031b46c5283a84b4354bbf28264b87a",
+    "claim_check.json": "e5ac07b3827518caf4dc7a4d6cf9d0fa482af1e7c9f61711fcd5e4e8ebcd33b4",
     "directions.json": "e11eb75bac9a1378195f15ef805daf0ffe3d0a4c2306d317d6d9944265b8008b",
     "evidence.json": "03304e7a1c5a1324a791db8d79dc9087ab501f578414afef2bda2728ef1d97fa",
     "judgment.json": "a9dd41f886f0c6f554dcbfa124510778365a5a732f3490e40d1499b0ff24c03b",
@@ -180,7 +180,7 @@
     "profile_parse.json": "144dd86220da51855d80ca4502619b7208e49809122fbbb618e104e9992615ac",
     "report.html": "296229b59ab9573d77d2c03f042a8b28fb161d8e8d671c223444cffc7a2df794",
     "report.md": "8dd0ba3d6bb84baacb05c1e5272f04bd89a83de4f111127c4e5dca4e4ebf1628",
-    "report_trace.json": "97001d95078d52c4425887cf6133f10514954787df77db3ba0f717eef931bfc5",
+    "report_trace.json": "47991e4f4ea5319e7db56e19ada2df79a70a027851d571316278a49dfc2e0b1f",
     "rules_check.json": "248a80156349f8bee1d5de049d1153408fc4548108e5895abb5bba17d5c7cb03"
   },
   "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。\n2026-10-29：仅拆分均分/英语/数学的本人原话摘录，均分两段明确分隔；原答、证据、计算、正文结论不变，重出PDF附录并检版。本轮修改独立复核与旧报告正式交付审核分开，后者仍待独立复核及操控者核查，不重新认证旧官方事实。",
@@ -541,6 +541,15 @@
         "claim_check.json"
       ],
       "reason": "修复未定/尚未定等明确未决答复的状态分类，保持原答与既有字段不动，不提取年份。既有六份规划输入、正文、附录、数字、PDF及原审批不变，仅作当前工具兼容绑定；不冒充新内容复核。"
+    },
+    {
+      "date": "2026-10-29",
+      "by": "Codex（在职自查工具兼容复验，非内容复核）",
+      "files": [
+        "report_trace.json",
+        "claim_check.json"
+      ],
+      "reason": "时间线拒绝把正文放入不显示的标记列；短多栏节尾按视觉行检查。旧六份时间线与版面均已检查通过，输入、正文、附录、数字、PDF及原审批不变，仅更新工具兼容绑定，不冒充新内容复核。"
     }
   ],
   "regeneration": {

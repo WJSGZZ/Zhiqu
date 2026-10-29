@@ -566,6 +566,15 @@
         "claim_check.json"
       ],
       "reason": "修复未定/尚未定等明确未决答复的状态分类，保持原答与既有字段不动，不提取年份。既有六份规划输入、正文、附录、数字、PDF及原审批不变，仅作当前工具兼容绑定；不冒充新内容复核。"
+    },
+    {
+      "date": "2026-10-29",
+      "by": "Codex（在职自查工具兼容复验，非内容复核）",
+      "files": [
+        "report_trace.json",
+        "claim_check.json"
+      ],
+      "reason": "时间线拒绝把正文放入不显示的标记列；短多栏节尾按视觉行检查。旧六份时间线与版面均已检查通过，输入、正文、附录、数字、PDF及原审批不变，仅更新工具兼容绑定，不冒充新内容复核。"
     }
   ],
   "review_history": [
@@ -2833,7 +2842,7 @@
     "calculations.json": "89d7a293fd6780b562866f4871846b19130b0d86e79cb9f9c233e572cbae5b5d",
     "candidates.json": "ea8bbcb101fc7dc899ec1137e869654c3b9e85d79d8229e4de8115418467aeae",
     "case.json": "79136c0287d7e845b2308724e997d90b3b7a805e4fe2843da189774d6ec93a6e",
-    "claim_check.json": "e34bcfa5d02c4a7135fd5694adc69bc902c5e14e97743894f7a1ad349c63eec9",
+    "claim_check.json": "f73b311b840a6edc9cc0de285000f59497fc62626faa05ba0c2ed115f2ee633e",
     "directions.json": "2d709b22623617481aefa804b96da5c5d274812758094bb921c173d0466c29df",
     "evidence.json": "8c97b5ec4dd2e295bbf4a8eaa9372acfd30f2fcc1615cc5810525fdbbb596d59",
     "judgment.json": "89e67d8e39d0666399d8b470809425420fb18271c756578790e08248301ec3ff",
@@ -2844,7 +2853,7 @@
     "profile_parse.json": "abe812515ea2a27d78209f08c28c8bdde0a5c10d1672ef0983d66d68c6eece1a",
     "report.html": "cff1e3ca14fbc9145f6a1a4fbb3a4f14ae3c3e4544fbdeea5f215321011619d1",
     "report.md": "90ff1e8ce1555a081d376dbea69e831d6f8788393724d3db9bdb8189646a6262",
-    "report_trace.json": "869949202e63b00938f26af065c9b87d5f01b40e5d914d479e7cf859028f2f83",
+    "report_trace.json": "1039f3c9da569d6932689f931bb6541670e32cdeeb6a972970edf9ba22e780c2",
     "rules_check.json": "b45b1313cf295a6e320d32afce13a0b93b9b0e54e8b46d8d3cf2d6329732a40b"
   }
 }
