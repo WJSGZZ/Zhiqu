@@ -484,6 +484,131 @@
         "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
         "basis": "独立复核离线复现的编排停止语义缺口；个人目标URL不落回执。"
       }
+    },
+    {
+      "id": "ky-recorded-basis-url",
+      "domain": "考研",
+      "test": "test_kaoyan_on_demand.OnDemandTests.test_recorded_graduate_basis_url_is_requested_before_generic_site",
+      "input_fixture": {
+        "file": "test_kaoyan_on_demand.py",
+        "symbols": [
+          "OnDemandTests.setUp",
+          "OnDemandTests.test_recorded_graduate_basis_url_is_requested_before_generic_site"
+        ]
+      },
+      "expected": "名录已记录的实际官网依据页要进入队列；仍经官方域名与原表核验，不升级缓存。",
+      "provenance": {
+        "commit": "f1d605c",
+        "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
+        "basis": "20目标导航失败及真实WebPlus原图漏发现的最小合成回归；原图发现不等同OCR/抽核或实际入库通过。"
+      }
+    },
+    {
+      "id": "ky-masters-navigation",
+      "domain": "考研",
+      "test": "test_kaoyan_on_demand.OnDemandTests.test_masters_navigation_remains_school_bound_and_skips_doctoral_only",
+      "input_fixture": {
+        "file": "test_kaoyan_on_demand.py",
+        "symbols": [
+          "OnDemandTests.setUp",
+          "OnDemandTests.test_masters_navigation_remains_school_bound_and_skips_doctoral_only"
+        ]
+      },
+      "expected": "硕士招生等常见栏目可发现，博士专用、未确认域与其他学校不借此放行。",
+      "provenance": {
+        "commit": "f1d605c",
+        "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
+        "basis": "20目标导航失败及真实WebPlus原图漏发现的最小合成回归；原图发现不等同OCR/抽核或实际入库通过。"
+      }
+    },
+    {
+      "id": "ky-navigation-budget",
+      "domain": "考研",
+      "test": "test_kaoyan_on_demand.OnDemandTests.test_admissions_navigation_wins_six_link_budget_over_school_overviews",
+      "input_fixture": {
+        "file": "test_kaoyan_on_demand.py",
+        "symbols": [
+          "OnDemandTests.setUp",
+          "OnDemandTests.test_admissions_navigation_wins_six_link_budget_over_school_overviews"
+        ]
+      },
+      "expected": "六条导航预算内研究生招生入口优先，不被多条概况占满，不增加预算。",
+      "provenance": {
+        "commit": "f1d605c",
+        "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
+        "basis": "20目标导航失败及真实WebPlus原图漏发现的最小合成回归；原图发现不等同OCR/抽核或实际入库通过。"
+      }
+    },
+    {
+      "id": "ky-webplus-original",
+      "domain": "考研",
+      "test": "test_kaoyan_on_demand.OnDemandTests.test_webplus_original_image_is_discovered_without_logo_or_external_images",
+      "input_fixture": {
+        "file": "test_kaoyan_on_demand.py",
+        "symbols": [
+          "OnDemandTests.setUp",
+          "OnDemandTests.test_webplus_original_image_is_discovered_without_logo_or_external_images"
+        ]
+      },
+      "expected": "WebPlus真实正文原图进入读图队列；相似类名、logo、跨域图片和错年不混入。",
+      "provenance": {
+        "commit": "f1d605c",
+        "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
+        "basis": "20目标导航失败及真实WebPlus原图漏发现的最小合成回归；原图发现不等同OCR/抽核或实际入库通过。"
+      }
+    },
+    {
+      "id": "ky-original-queue-priority",
+      "domain": "考研",
+      "test": "test_kaoyan_on_demand.OnDemandTests.test_actual_original_attachment_is_tried_before_generic_fallback_page",
+      "input_fixture": {
+        "file": "test_kaoyan_on_demand.py",
+        "symbols": [
+          "OnDemandTests.setUp",
+          "OnDemandTests.test_actual_original_attachment_is_tried_before_generic_fallback_page"
+        ]
+      },
+      "expected": "实际业务原图先于泛导航取核；读图未核过仍拒发布。",
+      "provenance": {
+        "commit": "f1d605c",
+        "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
+        "basis": "20目标导航失败及真实WebPlus原图漏发现的最小合成回归；原图发现不等同OCR/抽核或实际入库通过。"
+      }
+    },
+    {
+      "id": "ky-original-link-budget",
+      "domain": "考研",
+      "test": "test_kaoyan_on_demand.OnDemandTests.test_original_image_wins_twelve_link_budget_over_related_archive_links",
+      "input_fixture": {
+        "file": "test_kaoyan_on_demand.py",
+        "symbols": [
+          "OnDemandTests.setUp",
+          "OnDemandTests.test_original_image_wins_twelve_link_budget_over_related_archive_links"
+        ]
+      },
+      "expected": "十二业务链接预算内优先实际原件，相关归档不挤掉正文原图。",
+      "provenance": {
+        "commit": "f1d605c",
+        "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
+        "basis": "20目标导航失败及真实WebPlus原图漏发现的最小合成回归；原图发现不等同OCR/抽核或实际入库通过。"
+      }
+    },
+    {
+      "id": "ky-login-endpoint-suffix",
+      "domain": "考研",
+      "test": "test_kaoyan_public_http.PublicHTTPTests.test_login_endpoint_file_extensions_are_rejected_before_transport",
+      "input_fixture": {
+        "file": "test_kaoyan_public_http.py",
+        "symbols": [
+          "PublicHTTPTests.test_login_endpoint_file_extensions_are_rejected_before_transport"
+        ]
+      },
+      "expected": "真实signin.aspx型登录入口在DNS与HTTP前拒绝，login-policy等相似公开页面不误拦。",
+      "provenance": {
+        "commit": "09d6de1",
+        "file": "skills/zhiqu/tests/test_kaoyan_public_http.py",
+        "basis": "华工真实公开导航暴露的端点后缀遗漏；离线合成边界，不等同认证或绕过线上登录。"
+      }
     }
   ],
   "not_in_this_suite": [
