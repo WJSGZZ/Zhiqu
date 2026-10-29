@@ -23,6 +23,10 @@ def load_crawler():
 def memory_curl_adapter(crawl):
  """Same curl arguments/TLS/public DNS as official curl_once, sinks changed to pipes only."""
  def once(url,*,headers,form,max_bytes,timeout,resolved_ip=None):
+  # retrieve() validates generic public targets, but our stricter privacy and
+  # login-path rules must also run before every redirect's DNS/HTTP attempt.
+  try:safe_url(url)
+  except SafeStop:raise crawl.TargetValidationError('拒绝不符合公开取文规则的跳转目标')from None
   started=time.monotonic();ip=resolved_ip or crawl.resolve_public(url)
   if not ipaddress.ip_address(ip).is_global:raise crawl.Unretrieved('拒绝非公网目标')
   timeout-=time.monotonic()-started

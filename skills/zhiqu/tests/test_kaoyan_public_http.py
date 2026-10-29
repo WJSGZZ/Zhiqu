@@ -36,6 +36,18 @@ class PublicHTTPTests(unittest.TestCase):
         for prohibited in ['--insecure','-k','--cookie','--cookie-jar','-L']:
             self.assertNotIn(prohibited,args)
 
+    def test_every_redirect_target_is_checked_before_dns_and_http(self):
+        for url in ['https://fixture.edu.cn/new?candidate_name=synthetic_sentinel',
+                    'https://fixture.edu.cn/sso/start', 'https://fixture.edu.cn/captcha/start',
+                    'https://fixture.edu.cn/a?ksbh=synthetic_sentinel',
+                    'https://user:pass@fixture.edu.cn/redirect']:
+            fake = SimpleNamespace(resolve_public=Mock(), TargetValidationError=ValueError)
+            with patch.object(http.subprocess, 'run') as send:
+                with self.assertRaisesRegex(ValueError, '拒绝不符合公开取文规则'):
+                    http.memory_curl_adapter(fake)(url, headers={}, form=None, max_bytes=1000, timeout=20)
+            fake.resolve_public.assert_not_called()
+            send.assert_not_called()
+
     def test_public_receipt_never_contains_body_private_header_or_reason(self):
         raw=b'synthetic-private-123456789012345'
         item={'body':raw,'headers':{'authorization':'synthetic-secret'}}
