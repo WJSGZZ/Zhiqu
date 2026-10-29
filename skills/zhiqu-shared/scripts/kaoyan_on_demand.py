@@ -20,7 +20,7 @@ import sqlite3
 import subprocess
 import sys
 import time
-from urllib.parse import urljoin, urlsplit
+from urllib.parse import urljoin, urlsplit, parse_qsl, quote, urlunsplit, unquote
 
 from kaoyan_adapters import parse_official_html, NeedsReview, fingerprint
 from kaoyan_documents import parse_official_document
@@ -156,16 +156,30 @@ def source_identity_conflicts(database, sources):
     return conflicts
 
 
+def document_base(root,url):
+    """Respect one same-site HTML base; never guess a relative resource base."""
+    bases=root.xpath('//base[@href]')
+    if not bases:return url,None
+    if len(bases)!=1:return url,'ambiguous_base'
+    base=urljoin(url,bases[0].get('href'))
+    try:safe_url(base)
+    except Exception:return url,'invalid_base'
+    if urlsplit(base).hostname!=urlsplit(url).hostname:return url,'untrusted_base'
+    return base,None
+
+
 def navigation_links(body,url,school,entry):
     from lxml import html
     from kaoyan_tables import _decode
     root=html.fromstring(_decode(body));out=[];priorities={}
+    base,base_issue=document_base(root,url)
     if school not in ''.join(root.itertext()):return out
     for a in root.xpath('//a[@href]'):
         label=''.join(a.itertext())+' '+a.get('title','')
         if '博士'in label and '硕士'not in label:continue
         if not re.search('研究生院|研究生招生|硕士.*招生|硕士招生|招生信息|招生工作|学校官网|学校主页|学院网站|官方网站|学校网站|院校网站|招生单位网站|院校简介|院校介绍|学校概况|学校简介|联系方式',label):continue
-        target=urljoin(url,a.get('href'));host=urlsplit(target).hostname or ''
+        if base_issue and not urlsplit(a.get('href')).scheme:continue
+        target=urljoin(base,a.get('href'));host=urlsplit(target).hostname or ''
         if urlsplit(url).hostname=='yz.chsi.com.cn' and host.endswith('.edu.cn'):
             entry['graduate_site_url']=target
         if official_url(target,entry):
@@ -189,11 +203,53 @@ def navigation_links(body,url,school,entry):
     return sorted(out,key=lambda u:priorities[u])[:6]
 
 
-def discover_links(body, url, year, layer):
+def embedded_originals(root, url, document_page, layer):
+    """Only literal same-site document references; never run a viewer script."""
+    links=[];issues=[]
+    if not document_page:return links,issues
+    base,base_issue=document_base(root,url)
+    if base_issue:return [],[{'reason':base_issue}]
+    for index,element in enumerate(root.xpath('//iframe[@src] | //embed[@src] | //object[@data]'),1):
+        raw=element.get('data')if element.tag=='object'else element.get('src')
+        def reject(reason):issues.append({'element':element.tag,'index':index,'reason':reason})
+        if not raw or not raw.strip():reject('empty_reference');continue
+        viewer=urljoin(base,raw.strip())
+        if re.search(r'%(?![0-9a-fA-F]{2})',viewer):reject('incomplete_uri');continue
+        try:safe_url(viewer)
+        except Exception:reject('restricted_or_invalid_uri');continue
+        if urlsplit(viewer).hostname!=urlsplit(url).hostname:reject('untrusted_host');continue
+        path=urlsplit(viewer).path
+        mime=(element.get('type')or'').lower()
+        direct=bool(re.search(r'\.(?:pdf|png|jpe?g)(?:$)',path,re.I))or(element.tag in ('object','embed')and mime=='application/pdf')
+        target=viewer
+        if not direct:
+            # These are reader routes, not arbitrary query endpoints. The file
+            # must be the single actual file argument, not an inferred address.
+            if not re.search(r'/(?:ofdview/ofdview1|(?:pdfjs/web/)?viewer)\.html$',path,re.I):reject('unsupported_viewer');continue
+            try:values=[v for k,v in parse_qsl(urlsplit(viewer).query,keep_blank_values=True,errors='strict')if k=='file']
+            except (ValueError,UnicodeError):reject('invalid_file_parameter');continue
+            if len(values)!=1 or not values[0]:reject('ambiguous_file_parameter');continue
+            target=urljoin(viewer,values[0]);parts=urlsplit(target)
+            # Normal browser URL encoding of a literal Unicode path only.
+            target=urlunsplit((parts.scheme,parts.netloc,quote(parts.path,safe="/%:@!$&'()*+,;=-._~"),parts.query,parts.fragment))
+            if not re.search(r'\.(?:pdf|png|jpe?g)$',parts.path,re.I):reject('unsupported_file');continue
+        try:
+            # Inspect encoded path separators as well; do not navigate to a
+            # login URL merely because its path was percent-encoded.
+            safe_url(target)
+        except Exception:reject('restricted_or_invalid_file');continue
+        if urlsplit(target).hostname!=urlsplit(url).hostname:reject('untrusted_file_host');continue
+        if layer!='stats' and re.search('名单|拟录取',unquote(urlsplit(target).path)):reject('outside_requested_layer');continue
+        if target not in links:links.append(target)
+    return links,issues
+
+
+def discover_links(body, url, year, layer, diagnostics=None):
     """Actual public hrefs only; no guessed path, pagination or API parameters."""
     from lxml import html
     from kaoyan_tables import _decode, ARTICLE_IMAGE_XPATH
     root = html.fromstring(_decode(body))
+    base,base_issue=document_base(root,url)
     links = []
     originals = set()
     document_page=False
@@ -206,7 +262,8 @@ def discover_links(body, url, year, layer):
         # The title is a discovery hint for ellipsized navigation, never proof
         # of the fetched document's school, year or business scope.
         label = ''.join(a.itertext()) + ' ' + a.get('title', '')
-        target = urljoin(url, a.get('href'))
+        if base_issue and not urlsplit(a.get('href')).scheme:continue
+        target = urljoin(base, a.get('href'))
         host = urlsplit(target).hostname or ''
         trusted = host.endswith(('.edu.cn','.gov.cn','.chsi.com.cn')) or host==urlsplit(url).hostname
         # CHSI site-wide catalogue/news navigation is not this school's source.
@@ -223,12 +280,19 @@ def discover_links(body, url, year, layer):
     # logos, guessed URLs or images from undated navigation pages are fetched.
     if document_page:
         for image in root.xpath(ARTICLE_IMAGE_XPATH):
-            target=urljoin(url,image.get('src'))
+            if base_issue and not urlsplit(image.get('src')).scheme:continue
+            target=urljoin(base,image.get('src'))
             if urlsplit(target).hostname==urlsplit(url).hostname:
                 try:safe_url(target)
                 except Exception:continue
                 if target not in links:links.append(target)
                 originals.add(target)
+    embedded,issues=embedded_originals(root,url,document_page,layer)
+    for target in embedded:
+        if target not in links:links.append(target)
+        originals.add(target)
+    if diagnostics is not None:
+        diagnostics.update(embedded_originals_found=len(embedded),embedded_issues=issues,base_issue=base_issue)
     return sorted(links,key=lambda u:u not in originals)[:12]
 
 
@@ -533,7 +597,7 @@ def run_request(request, *, fetch=fetch_public, publisher=validate_and_publish, 
                     # Adapter diagnostics are fixed messages, never raw source text.
                     result['reason']=str(exc)
                     result['sha256']=hashlib.sha256(body).hexdigest()
-                    if is_html:queue[:0]=discover_links(body,url,year,layer)
+                    if is_html:queue[:0]=discover_links(body,url,year,layer,diagnostics=result.setdefault('discovery_diagnostics',{}).setdefault(url,{}))
                     continue
                 except ValueError:
                     result['reason']='原表双读或结构核对未通过，整份不入库';continue
@@ -565,7 +629,11 @@ def run_request(request, *, fetch=fetch_public, publisher=validate_and_publish, 
                                   rows=parsed['rows'],pending=parsed['pending'],source_ids=[s['source_id']for s in parsed['manifest']['sources']],proofs=parsed['proofs'])
                     break
                 result['reason']='所问专业的拟录取分组均n<3，整组不保存'if parsed.get('suppressed_groups')else'官方原表未找到所问专业，或该格式范围仍需核对'
-                if is_html:queue[:0]=discover_links(body,url,year,layer)
+                if is_html:
+                    diagnostic=result.setdefault('discovery_diagnostics',{}).setdefault(url,{})
+                    queue[:0]=discover_links(body,url,year,layer,diagnostics=diagnostic)
+                    if any(x['reason']=='incomplete_uri'for x in diagnostic.get('embedded_issues',[])):
+                        result['reason']+='；原页嵌入原件地址不完整，未猜补或请求该地址'
             except TimeoutError:
                 result.update(reason='单校时间限制，未验收部分不发布');break
             except Exception:

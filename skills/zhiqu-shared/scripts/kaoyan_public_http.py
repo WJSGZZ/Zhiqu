@@ -11,9 +11,12 @@ PRIVATE_KEYS=re.compile(r'^(?:name|xm|phone|email|contact|sfzh|ksbh|zkzh|student
 class SafeStop(Exception):pass
 
 def safe_url(url):
+ if re.search(r'%(?![0-9a-fA-F]{2})',url):raise SafeStop('unsafe_url')
  p=urlsplit(url)
  if p.scheme not in{'http','https'}or not p.hostname or p.username or p.password or p.port not in{None,80 if p.scheme=='http'else 443}:raise SafeStop('unsafe_url')
- if re.search(r'/(?:login|logon|logout|signin|sso|captcha)(?:\.(?:html?|aspx?|ashx|jsp|php|do|action|cgi))?(?:/|$)',p.path,re.I):raise SafeStop('restricted_url')
+ path=p.path
+ for _ in range(2):path=unquote(path)
+ if re.search(r'/(?:login|logon|logout|signin|sso|captcha)(?:\.(?:html?|aspx?|ashx|jsp|php|do|action|cgi))?(?:/|$)',path,re.I):raise SafeStop('restricted_url')
  for k,v in parse_qsl(p.query):
   if PRIVATE_KEYS.fullmatch(k)or re.search(r'(?<!\d)\d{12,18}[Xx]?(?!\d)',v):raise SafeStop('private_query')
  return url
