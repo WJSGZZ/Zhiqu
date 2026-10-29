@@ -237,6 +237,65 @@ class ProfileStore(unittest.TestCase):
         store.dump(folder/'profile_parse.json',parsed)
         self.assertTrue(any('可见必答' in e for e in store.alignment_errors(folder)))
 
+    def test_grad_income_deadline_is_independent_verbatim_and_appended(self):
+        from planning_workflow import PlanningCase
+        from planning_report import node_markdown
+        for answer in ('2029','2029年毕业前','毕业前先开始挣钱'):
+            with self.subTest(answer=answer):
+                data=document(items=[{'id':'worst','q':'退路','a':['直接工作']},
+                    {'id':'earning_year','q':'最迟哪年挣钱？','a':answer}])
+                raw=json.dumps(data,ensure_ascii=False);parsed=store.build_parse(raw,'grad')
+                no_income=document(items=[{'id':'worst','q':'退路','a':['直接工作']}])
+                ordinary=store.build_parse(json.dumps(no_income,ensure_ascii=False),'grad')
+                self.assertEqual([f['field'] for f in parsed['fields'][:11]],[f['field'] for f in ordinary['fields']])
+                self.assertEqual(parsed['fields'][9]['value'],{'worst':['直接工作'],'earning_year':answer})
+                field=parsed['fields'][11]
+                self.assertEqual((field['field'],field['category'],field['status'],field['value']),('最迟开始挣钱年份','constraint','given',answer))
+                self.assertEqual(field['answer_refs'],['earning_year']);self.assertIn(answer,field['quote'])
+                # The same given value reaches a report input without year/pay inference.
+                folder=self.folder();store.dump(folder/'case.json',{'kind':'grad'});store.dump(folder/'profile_parse.json',parsed)
+                case=PlanningCase(folder)
+                text=node_markdown({'type':'analysis','content':{'text':'挣钱时点原答：{{p:/fields/11/value}}'}},case.expand,{})
+                self.assertEqual(text,'挣钱时点原答：'+answer)
+
+    def test_grad_uncertain_or_refused_income_does_not_become_a_year(self):
+        for answer in ('不想说','没想好。二战的话家里应该能支持一年，但我自己不太想。','还没想好，2029年毕业','不确定收入含义，但提到2030年','暂时不想说','不愿透露','拒绝回答','没有想好，等毕业再说','尚未想好','暂不确定','目前还没想好什么时候挣钱','没想好但家里可以支持一年','没想好，但家里可以支持一年','没想好要不要二战','没想好具体哪年开始挣钱','不清楚自己什么时候能经济独立'):
+            with self.subTest(answer=answer):
+                parsed=store.build_parse(profile(items=[{'id':'earning_year','q':'最迟哪年挣钱？','a':answer}]),'grad')
+                field=parsed['fields'][-1]
+                self.assertEqual(field['field'],'最迟开始挣钱年份');self.assertEqual(field['status'],'unknown');self.assertIsNone(field['value'])
+                self.assertIn(answer,field['quote']);self.assertIn('最迟开始挣钱年份',{x['field']for x in parsed['missing']})
+
+    def test_income_refusal_words_do_not_capture_unrelated_prefixes(self):
+        for answer in ('不想说服父母，2029必须开始挣钱','不确定性比较大，但2029年前要挣钱','待定价方案与我的收入无关，毕业前挣钱','不方便说服父母，但2029年前必须挣钱','没想到2029年就必须挣钱'):
+            with self.subTest(answer=answer):
+                parsed=store.build_parse(profile(items=[{'id':'earning_year','q':'最迟哪年挣钱？','a':answer}]),'grad')
+                self.assertEqual(parsed['fields'][-1]['value'],answer)
+                self.assertEqual(parsed['fields'][-1]['status'],'given')
+
+    def test_grad_new_income_projection_cannot_be_erased(self):
+        for checked in (False,True):
+            data=document(items=[{'id':'earning_year','q':'最迟哪年挣钱？','a':'2029','status':'已答'}])
+            if checked:
+                data.update(collapsed=[],counts={'visible':1,'answered':1});data['checksum']=store.checksum(data)
+            else:data['sections'][0]['items'][0].pop('status')
+            root=self.root/('checked' if checked else 'plain');root.mkdir();store.ingest(root,self.case,json.dumps(data,ensure_ascii=False));folder=root/self.case;store.prepare(folder)
+            self.assertEqual(store.alignment_errors(folder),[])
+            parsed=json.loads((folder/'profile_parse.json').read_text());parsed['fields']=[f for f in parsed['fields'] if f['field']!='最迟开始挣钱年份'];store.dump(folder/'profile_parse.json',parsed)
+            self.assertTrue(any('最迟开始挣钱年份' in e for e in store.alignment_errors(folder)))
+
+    def test_only_unresolved_historic_migration_keeps_the_combined_income_projection(self):
+        data=document(items=[{'id':'earning_year','q':'最迟哪年挣钱？','a':'没想好。家里说可再支持一年。'}])
+        store.ingest(self.root,self.case,json.dumps(data,ensure_ascii=False));folder=self.root/self.case;store.prepare(folder)
+        parsed=json.loads((folder/'profile_parse.json').read_text());legacy=[f for f in parsed['fields'] if f['field']!='最迟开始挣钱年份']
+        parsed['questionnaire_fields']=legacy;parsed['fields']=legacy;store.dump(folder/'profile_parse.json',parsed)
+        self.assertEqual(store.alignment_errors(folder),[])
+        # That exception cannot mask a supplied deadline in a migrated projection.
+        newer=document(stamp='2026-10-20T12:00:00+08:00',items=[{'id':'earning_year','q':'最迟哪年挣钱？','a':'2029'}])
+        store.ingest(self.root,self.case,json.dumps(newer,ensure_ascii=False));store.prepare(folder,replace=True)
+        parsed=json.loads((folder/'profile_parse.json').read_text());legacy=[f for f in parsed['fields'] if f['field']!='最迟开始挣钱年份'];parsed.update(fields=legacy,questionnaire_fields=legacy);store.dump(folder/'profile_parse.json',parsed)
+        self.assertTrue(any('最迟开始挣钱年份' in e for e in store.alignment_errors(folder)))
+
     def test_parse_json_returns_exact_data_and_supports_old_data_line(self):
         data = document(items=[{'id': 'money', 'q': '年度预算', 'a': '不想说'}])
         data['derived'] = {'bazi': '模拟排盘文字，不用于现实资格'}

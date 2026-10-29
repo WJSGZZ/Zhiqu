@@ -34,7 +34,7 @@ CASE_ID = re.compile(r'^\d{4}-(GK|YJ|QZ)-(?:\d{4}|[SR]\d{2})$')
 ID = re.compile(r'^[A-Za-z][A-Za-z0-9_-]*$')
 FIELD_MAP = {
  'gaokao': [('年份','fact','gk_year'),('省份','fact','province'),('位次','fact','rank'),('选科','fact','kelei','subjects'),('批次','fact','batch'),('体检','constraint','body'),('学费上限','constraint','money','four_year_budget'),('调剂态度','preference','tiaoji'),('优先级','preference','priority')],
- 'grad': [('年级','fact','grade'),('专业','fact','major'),('院校层次','fact','school_tier'),('均分或排名','fact','gpa','rank_in_major'),('英语','fact','eng','eng_score'),('数学基础','fact','math','math_courses'),('读研动机','self_judgment','why','why_main'),('目标方向','preference','dir_want'),('预算','constraint','money','finance_note'),('能否二战','constraint','worst','earning_year'),('目标地区','preference','city_pref','city','home_province','near_home')],
+ 'grad': [('年级','fact','grade'),('专业','fact','major'),('院校层次','fact','school_tier'),('均分或排名','fact','gpa','rank_in_major'),('英语','fact','eng','eng_score'),('数学基础','fact','math','math_courses'),('读研动机','self_judgment','why','why_main'),('目标方向','preference','dir_want'),('预算','constraint','money','finance_note'),('能否二战','constraint','worst','earning_year'),('目标地区','preference','city_pref','city','home_province','near_home'),('最迟开始挣钱年份','constraint','earning_year')],
  'career': [('学历','fact','degree'),('专业','fact','major_name','major_code','minor_major','dual_major'),('毕业时间','fact','grad_time'),('求职阶段','fact','job_stage','has_offer'),('经历','fact','work_exp','employment_history'),('证书','fact','certs'),('目标岗位','preference','tgt1','tgt2','tgt3'),('收入底线','constraint','min_salary','salary_known'),('城市','preference','city_first','city_second','city_third'),('单位类型偏好','preference','org_type'),('户籍','fact','hukou','origin_province','hukou_location','hukou_disclosure'),('政治面貌','fact','political'),('多快需要收入','constraint','income_deadline','income_deadline_status')]
 }
 
@@ -380,6 +380,20 @@ class QuestionMap(HTMLParser):
             if self.stack[i][0]==tag:self.stack=self.stack[:i];break
 
 
+def _income_unresolved(value):
+    # Explicit unresolved/refusal openings may continue with an explanation,
+    # with or without punctuation. Exclude known word-internal false prefixes.
+    # This never extracts a date or resolves a complex reply on the person's behalf.
+    opening=re.sub(r'\s+','',value.strip())
+    return bool(re.match(
+        r'^(?:我)?(?:(?:现在|目前|暂时|暂且|暂|还是|仍然|还|尚|仍))*'
+        r'(?:不想说(?!服)|不愿说(?!服)|不愿(?:意)?透露|不透露|不便透露|'
+        r'不方便(?:说(?!服)|回答|透露)|拒绝回答|拒答|不想回答|不愿(?:意)?回答|保密|'
+        r'(?:没(?:有)?|未|还没|尚未)(?:想好(?!好)|确定(?!性))|'
+        r'不确定(?!性)|不知道|不清楚|没想(?!到|好好)|还没定(?!价)|待定(?!价)|'
+        r'暂无明确年份|还没和家里谈|要和家里商量)',opening))
+
+
 def build_parse(raw,kind):
     data=parse_profile(raw)
     if kind not in HEADERS or data and data['zhiqu']!=kind:raise ValueError('登记与画像类型不一致')
@@ -387,6 +401,8 @@ def build_parse(raw,kind):
     mapping=QuestionMap();mapping.feed((REPO/(kind+'.html')).read_text())
     given=items(data);fields=[];missing=[]
     for name,category,*keys in FIELD_MAP[kind]:
+        # Optional extension: append only when this question was in the submission.
+        if kind=='grad' and name=='最迟开始挣钱年份' and 'earning_year' not in given:continue
         refs=list(dict.fromkeys(mapping.mapping.get(k,k) for k in keys));values={k:given[k]['a'] for k in refs if k in given and 'a' in given[k]}
         if name=='优先级' and data['rank']:values={'priority':data['rank']}
         # A refused/unknown answer is retained verbatim but cannot become a known constraint.
@@ -397,6 +413,12 @@ def build_parse(raw,kind):
             if isinstance(value,dict):return any(is_known(x) for x in value.values())
             return False
         known={k:v for k,v in values.items() if is_known(v)}
+        if kind=='grad' and name=='最迟开始挣钱年份':
+            # Keep a free-form answer verbatim; never extract a year or infer stable pay.
+            # An uncertainty/refusal opening does not become a known deadline just
+            # because the rest mentions family support, a year or another plan.
+            known={k:v for k,v in known.items() if isinstance(v,str)
+                   and not _income_unresolved(v)}
         value=next(iter(known.values())) if len(known)==1 else known if known else None
         fields.append({'field':name,'category':category,'status':'given' if known else 'unknown','value':value,
                        'quote':json.dumps(values,ensure_ascii=False) if values else '',
@@ -467,6 +489,13 @@ def alignment_errors(case_dir):
         if parsed.get('source')!=expected['source']:return ['画像已更新，须优先采用最新存档并重新解析，不能沿用旧作答']
         fields={f['field']:f for f in parsed.get('questionnaire_fields',parsed.get('fields',[]))}
         for f in expected['fields']:
+            # Historic migrated, unchecked questionnaires can keep an unresolved
+            # income answer in the old combined projection. A stated deadline or
+            # any freshly parsed/checksummed submission must have its own field.
+            if (f['field']=='最迟开始挣钱年份' and f['status']=='unknown'
+                    and f['field'] not in fields and 'checksum' not in data
+                    and isinstance(parsed.get('questionnaire_fields'),list)):
+                continue
             if fields.get(f['field'],{}).get('value')!=f['value'] or fields.get(f['field'],{}).get('status')!=f['status']:return ['结构化画像字段与原始作答不一致：'+f['field']]
         unanswered={i['id'] for sec in data['sections'] for i in sec['items']
                     if i.get('required') is True and i.get('status')=='未填'}
