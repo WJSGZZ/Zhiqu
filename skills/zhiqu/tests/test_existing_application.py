@@ -45,7 +45,7 @@ class ExistingApplicationTests(unittest.TestCase):
         for source in [{'url':'https://third.example/page','sha256':'a'*64},{'url':'javascript://www.moe.gov.cn/a','sha256':'a'*64},{'url':'https://www.moe.gov.cn/a','sha256':''}]:
             self.deadline['source']=source;self.assertTrue(self.check())
     def test_statement_must_match_original_school_code_and_affirmation(self):
-        for text in ['本人未报名合成大学081200。','本人不是已经报名合成大学081200。','本人想报合成大学081200。','本人已报别的大学081200。','本人已报合成大学081201。','本人已报合成大学0812000。','同学已报合成大学081200，我尚在择校。','本人并没有完成报名合成大学081200，系统误显已经报名。','本人已报合成大学081200，随后已撤销报名，目前仍在择校。','本人已报合成大学081200；后来撤回报名。']:
+        for text in ['本人未报名合成大学081200。','本人不是已经报名合成大学081200。','本人想报合成大学081200。','本人已报别的大学081200。','本人已报合成大学081201。','本人已报合成大学0812000。','同学已报合成大学081200，我尚在择校。','本人并没有完成报名合成大学081200，系统误显已经报名。','本人已报合成大学081200，随后已撤销报名，目前仍在择校。','本人已报合成大学081200；后来撤回报名。','本人已报名，替同学报合成大学081200。','本人已报合成大学081200调剂。']:
             with self.subTest(text=text):
                 self.field.update(value=text,quote=text);self.raw['sections'][0]['items'][0]['a']=text;self.assertTrue(self.check())
     def test_fabricated_parse_and_unbound_original_are_rejected(self):
@@ -63,6 +63,8 @@ class ExistingApplicationTests(unittest.TestCase):
         self.assertTrue(self.check())
         self.deadline['excerpt']='网上确认时间为2026年10月15日至10月24日。'
         self.assertTrue(self.check())
+        self.deadline['excerpt']='预 报名时间为2026年10月15日至10月24日。'
+        self.assertTrue(self.check())
     def test_future_cohort_cannot_relabel_last_years_registration_window(self):
         self.case['target_year']=2028;self.candidates['school_programs'][0]['year']=2028;self.deadline['scope']='2028年全国统考'
         self.assertTrue(self.check())
@@ -70,3 +72,11 @@ class ExistingApplicationTests(unittest.TestCase):
     def test_existing_application_cannot_turn_off_kaoyan_guards(self):
         self.case['context']['takes_kaoyan']=False
         self.assertTrue(any('不能用false' in e for e in self.check()))
+
+    def test_alternative_school_or_code_cannot_be_spliced_into_registration(self):
+        for text in ['本人已报其他大学081201，合成大学081200仅作备选。','本人已报合成大学081201，081200只是往年专业代码。','本人已报合成大学081200；我仍在择校，还未提交报名。','本人已报合成大学081200；其实我没报。']:
+            self.field.update(value=text,quote=text);self.raw['sections'][0]['items'][0]['a']=text
+            self.assertTrue(self.check())
+    def test_registration_interval_must_have_a_valid_ordered_start(self):
+        for text in ['全国网上报名时间为2026年11月15日至10月24日。','全国网上报名时间为2026年99月99日至10月24日。']:
+            self.deadline['excerpt']=text;self.assertTrue(self.check())

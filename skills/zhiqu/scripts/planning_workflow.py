@@ -515,10 +515,10 @@ class PlanningCase:
             school=target.get('school');code=target.get('program_code')
             if not school or not re.fullmatch(r'\d{4}(?:\d{2})?',str(code or '')):raise ValueError('学校全称与专业代码须明确')
             clauses=re.split(r'[。；;\n]',text)
-            affirm=r'^\s*(?:(?:本人|我)(?:称|自报|说)?|自报)?已(?:经)?(?:报(?:名)?|(?:提交|完成).{0,20}报名)'
-            deny=r'未报|没(?:有)?报|并未|不是|尚未|不曾|假如|如果|计划|准备报|想报'
-            if re.search(r'取消报名|撤销报名|撤回报名|报名.{0,8}(?:取消|撤销|撤回|作废|无效)',text):raise ValueError('原答有取消/无效信息，须先澄清，不能缩成单校')
-            if not any(school in s and re.search(r'(?<!\d)'+re.escape(str(code))+r'(?!\d)',s) and re.search(affirm,s) and not re.search(deny,s) for s in clauses):raise ValueError('原答须在同一分句明确自报该校该专业，否定或计划不算')
+            # 只认紧邻的“本人已报 + 学校全称 + 代码”，不把句末备选绑到句首另一个报名对象。
+            object_statement=r'^\s*(?:(?:本人|我)(?:称|自报|说)?|自报)?已(?:经)?报(?:名)?\s*'+re.escape(school)+r'\s*'+re.escape(str(code))+r'(?!\d)'
+            if re.search(r'未报|没(?:有)?报|其实|并非|取消报名|撤销报名|撤回报名|报名.{0,8}(?:取消|撤销|撤回|作废|无效)|未.{0,5}(?:报名|提交)|没(?:有)?.{0,5}报名|仍在择校|还在择校',text):raise ValueError('原答有未报、取消或仍在择校信息，须先澄清')
+            if not any(re.search(object_statement,s) and not re.search(r'同学|朋友|家人|老师|代报|替人|调剂|推免|夏令营|复试报名|只是|仅作',s) for s in clauses):raise ValueError('原答须明确本人已报该校该代码；不跨分句或报名对象拼接')
             e=self.evidence.get(scope.get('deadline_evidence_id'),{});source=e.get('source') or {}
             from urllib.parse import urlsplit
             if e.get('grade')!='官方' or e.get('status')!='verified' or e.get('availability')!='available':raise ValueError('须有已核官方全国网报截止证据')
@@ -527,9 +527,9 @@ class PlanningCase:
             if not re.search(r'(?<!\d)'+str(self.case['target_year'])+r'(?!\d)',e.get('scope','')):raise ValueError('截止证据须明确本届')
             now=day(self.case['context']['as_of']);end=day(e['value'])
             # 只接受教育部正式网报时间区间的明确末日，不从预报名或确认日期借值。
-            ranges=re.findall(r'(?<!预)报名时间[为：:]?\s*(\d{4})年(\d{1,2})月(\d{1,2})日至(?:(\d{4})年)?(?:(\d{1,2})月)?(\d{1,2})日',e.get('excerpt',''))
-            ends={day(f'{int(y2 or y):04}-{int(m2 or m):02}-{int(d2):02}') for y,m,d,y2,m2,d2 in ranges}
-            if ends!={end}:raise ValueError('正式网报区间末日与证据值不一致或未取得')
+            ranges=re.findall(r'(?<!预)报名时间[为：:]?\s*(\d{4})年(\d{1,2})月(\d{1,2})日至(?:(\d{4})年)?(?:(\d{1,2})月)?(\d{1,2})日',re.sub(r'\s+','',e.get('excerpt','')))
+            periods=[(day(f'{int(y):04}-{int(m):02}-{int(d):02}'),day(f'{int(y2 or y):04}-{int(m2 or m):02}-{int(d2):02}')) for y,m,d,y2,m2,d2 in ranges]
+            if not periods or any(start>finish or start.year!=finish.year for start,finish in periods) or {finish for start,finish in periods}!={end}:raise ValueError('正式网报区间无效、末日与证据值不一致或未取得')
             if end.year!=self.case['target_year']-1 or now.year not in (end.year,self.case['target_year']):raise ValueError('报名日历与本届/报告时间不一致')
             if not day(e['published_on'])<=day(e['retrieved_on'])<=now or not day(e['retrieved_on'])<=day(e['verified_on'])<=now<=day(e['review_due']) or not end<now:raise ValueError('须已过窗口，且所用证据未过期、非未来取文')
             return True
