@@ -1171,6 +1171,23 @@
         "file": "skills/zhiqu/tests/test_kaoyan_backtest.py",
         "basis": "现行聚合统计适配时独立反例实证；旧数学方法源c813ec4，本方法是df47aad新增，不认证名单原件。"
       }
+    },
+    {
+      "id": "ky-incomplete-summary-no-tier",
+      "domain": "考研",
+      "test": "test_kaoyan_position.KaoyanPositionTests.test_partial_distribution_is_a_gap_not_a_crash",
+      "input_fixture": {
+        "file": "test_kaoyan_position.py",
+        "symbols": [
+          "KaoyanPositionTests.test_partial_distribution_is_a_gap_not_a_crash"
+        ]
+      },
+      "expected": "已知参考年份缺任一必要统计时不抛异常、不填零、不略过该年抬档，返回分布缺失；可用复试线差额照留。",
+      "provenance": {
+        "commit": "0a3fc88",
+        "file": "skills/zhiqu/tests/test_kaoyan_position.py",
+        "basis": "聚合摘要只有最低/中位/最高、缺四分位时真实函数TypeError的合成复现；本方法在该提交新增，不认证原件或分档可靠性。"
+      }
     }
   ],
   "not_in_this_suite": [
