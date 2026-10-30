@@ -366,6 +366,79 @@ class ProfileStore(unittest.TestCase):
         parsed=json.loads((folder/'profile_parse.json').read_text());legacy=[f for f in parsed['fields'] if f['field']!='最迟开始挣钱年份'];parsed.update(fields=legacy,questionnaire_fields=legacy);store.dump(folder/'profile_parse.json',parsed)
         self.assertTrue(any('最迟开始挣钱年份' in e for e in store.alignment_errors(folder)))
 
+    def test_grad_exam_accounts_are_appended_verbatim_without_inference(self):
+        answers={'ky_history':'去年315分，未进复试；我说已报名，回执未核。','ky_prep':'每天自报6小时；有效投入未记录。','mock_detail':'没有完整模考，零散练习60分不能当总分。'}
+        rows=[{'id':k,'q':'模拟原题','a':v}for k,v in answers.items()]
+        base=store.build_parse(profile(items=[{'id':'earning_year','q':'收入时点','a':'2029'}]),'grad')
+        raw=profile(items=[{'id':'earning_year','q':'收入时点','a':'2029'}]+rows);before=json.loads(raw)
+        parsed=store.build_parse(raw,'grad');self.assertEqual(parsed['fields'][:12],base['fields'])
+        for field,(name,qid) in zip(parsed['fields'][12:],store.GRAD_EXAM_ANSWERS):
+            self.assertEqual((field['field'],field['value'],field['status'],field['category']),(name,answers[qid],'given','self_judgment'))
+            self.assertEqual(field['answer_refs'],[qid]);self.assertEqual(json.loads(field['quote']),{qid:answers[qid]});self.assertFalse(field['confirmed'])
+        self.assertEqual(json.loads(raw),before);self.assertNotIn('mock_exam',parsed);self.assertNotIn('score',parsed)
+
+    def test_grad_exam_account_questions_not_asked_are_not_added(self):
+        parsed=store.build_parse(profile(),'grad');self.assertEqual(len(parsed['fields']),11)
+        self.assertFalse(any(f['field']in dict(store.GRAD_EXAM_ANSWERS)for f in parsed['fields']))
+
+    def test_grad_exam_refusals_and_invalid_text_stay_unknown(self):
+        for answer in ['不想说',' 不想说。 ','不清楚','不愿透露','拒绝回答',['未提供']]:
+            with self.subTest(answer=answer):
+                p=store.build_parse(profile(items=[{'id':'mock_detail','q':'模考原答','a':answer}]),'grad');f=p['fields'][-1]
+                self.assertEqual(f['field'],'可比模考原答');self.assertEqual(f['status'],'unknown');self.assertIsNone(f['value']);self.assertEqual(json.loads(f['quote']),{'mock_detail':answer})
+
+    def test_fresh_exam_projection_cannot_be_erased_or_rebound(self):
+        data=document(items=[{'id':'ky_history','q':'历次情况','a':'首次备考，状态未核。','status':'已答'}]);data.update(collapsed=[],counts={'visible':1,'answered':1});data['checksum']=store.checksum(data)
+        folder=self.folder();store.ingest(self.root,self.case,json.dumps(data,ensure_ascii=False));store.prepare(folder);original=json.loads((folder/'profile_parse.json').read_text())
+        for key,value in [('value','伪造分数'),('quote','伪造原句'),('answer_refs',['mock_detail']),('locator','别的题'),('category','fact')]:
+            parsed=json.loads(json.dumps(original));f=next(f for f in parsed['fields']if f['field']=='考研经历原答');f[key]=value;store.dump(folder/'profile_parse.json',parsed)
+            self.assertTrue(store.alignment_errors(folder),(key,value))
+        parsed=json.loads(json.dumps(original));parsed['fields']=[f for f in parsed['fields']if f['field']!='考研经历原答'];store.dump(folder/'profile_parse.json',parsed);self.assertTrue(store.alignment_errors(folder))
+
+    def test_historical_migrated_exam_fields_do_not_force_old_reports_to_change(self):
+        folder=self.folder();store.ingest(self.root,self.case,profile(items=[{'id':'ky_history','q':'历次情况','a':'首次'}]));store.prepare(folder)
+        parsed=json.loads((folder/'profile_parse.json').read_text());old=[f for f in parsed['fields']if f['field']!='考研经历原答'];parsed.update(fields=old,questionnaire_fields=old);store.dump(folder/'profile_parse.json',parsed)
+        self.assertEqual(store.alignment_errors(folder),[])
+
+    def test_exam_accounts_reach_the_actual_operator_checklist(self):
+        from operator_check import checklist_groups
+        answers={'ky_history':'去年某校未录取，原因还没证实。','ky_prep':'自报每天6小时，不代表有效学习。','mock_detail':'没有完整同卷模考，不定档。'}
+        parsed=store.build_parse(profile(items=[{'id':k,'q':k,'a':v}for k,v in answers.items()]),'grad');folder=self.folder()
+        for name,value in [('case.json',{'case_id':self.case,'kind':'grad','context':{'as_of':'2026-10-30'},'calculation_plan':{'engine':'registered_operations','operations':[]}}),('profile_parse.json',parsed),('evidence.json',{'items':[],'source_groups':[]}),('judgment.json',{'presentation':{}}),('calculations.json',{}),('candidates.json',{})]:store.dump(folder/name,value)
+        groups,_,_=checklist_groups(folder);checks=next(g for g in groups if g['id']=='PROFILE')['checks']
+        for value in answers.values():self.assertTrue(any(value in c for c in checks))
+
+    def test_grad_exam_explicit_short_refusal_stays_unknown(self):
+        parsed=store.build_parse(profile(items=[{'id':'mock_detail','q':'模拟模考题','a':'拒答'}]),'grad')
+        field=parsed['fields'][-1]
+        self.assertEqual(field['status'],'unknown')
+        self.assertIsNone(field['value'])
+        self.assertEqual(json.loads(field['quote']),{'mock_detail':'拒答'})
+
+    def test_migration_checks_exam_projection_present_only_in_analysis_fields(self):
+        folder=self.folder();store.ingest(self.root,self.case,profile(items=[{'id':'ky_history','q':'模拟历次情况','a':'首次'}]));store.prepare(folder)
+        original=json.loads((folder/'profile_parse.json').read_text())
+        for key,value in [('value','捏造结果'),('quote','捏造出处'),('answer_refs',['mock_detail']),('locator','另一题'),('category','fact')]:
+            with self.subTest(key=key):
+                parsed=json.loads(json.dumps(original))
+                parsed['questionnaire_fields']=[f for f in parsed['fields']if f['field']!='考研经历原答']
+                next(f for f in parsed['fields']if f['field']=='考研经历原答')[key]=value
+                store.dump(folder/'profile_parse.json',parsed)
+                self.assertTrue(store.alignment_errors(folder),key)
+
+    def test_fresh_exam_projection_cannot_hide_behind_questionnaire_fields(self):
+        data=document(items=[{'id':'ky_history','q':'模拟历次情况','a':'首次','status':'已答'}])
+        data.update(collapsed=[],counts={'visible':1,'answered':1});data['checksum']=store.checksum(data)
+        folder=self.folder();store.ingest(self.root,self.case,json.dumps(data,ensure_ascii=False));store.prepare(folder)
+        original=json.loads((folder/'profile_parse.json').read_text())
+        for action in ('change','remove'):
+            with self.subTest(action=action):
+                parsed=json.loads(json.dumps(original));parsed['questionnaire_fields']=json.loads(json.dumps(parsed['fields']))
+                if action=='change':next(f for f in parsed['fields']if f['field']=='考研经历原答')['value']='捏造结果'
+                else:parsed['fields']=[f for f in parsed['fields']if f['field']!='考研经历原答']
+                store.dump(folder/'profile_parse.json',parsed)
+                self.assertTrue(store.alignment_errors(folder),action)
+
     def test_parse_json_returns_exact_data_and_supports_old_data_line(self):
         data = document(items=[{'id': 'money', 'q': '年度预算', 'a': '不想说'}])
         data['derived'] = {'bazi': '模拟排盘文字，不用于现实资格'}

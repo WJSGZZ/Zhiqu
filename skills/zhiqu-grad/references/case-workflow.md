@@ -38,6 +38,8 @@ profile_parse.fields 每项 `{field, category, status, value, quote, locator, co
 
 关键字段：**年级、专业、院校层次、均分或排名、英语、数学基础、读研动机、目标方向、预算、能否二战、目标地区**。没有排名不强制编一个，只要均分/排名的已知与未知分别注明；保研案例必须额外核排名分母、口径、推免资格和名额规则。优先级排序按本人原话记录，没有权重不自己赋数。
 
+JSON问卷里出现考研经历、复习进度或可比模考题时，默认在旧字段后独立追加“考研经历原答／备考进度原答／可比模考原答”；未提交的题不补造，拒答或未定保留未知及完整引语。不拆出分数、报名状态或模考完整性；given只表示取得该段本人自报，confirmed仍为false，不能替代personal_difficulty的证据。新解析在分析fields与questionnaire_fields（若有）中均须保留原值、类别和题目定位；不能用一个正确副本掩盖操控者实际读取的另一个错误副本。既有无校验码且已迁移的冻结报告可缺这三项，但保留同名项时仍核原答，不因此重写旧报告。
+
 ## 问题、候选和条件分档
 
 questions 每项 `{id, question, profile_refs}`；directions 每项有 support / counter / verify，支持和反证条目含 claim 与 profile_refs/evidence_refs，验证项有动作、入口和检查点。

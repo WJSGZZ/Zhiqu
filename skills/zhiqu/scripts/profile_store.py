@@ -39,6 +39,11 @@ FIELD_MAP = {
 }
 
 
+# These free-form answers are optional, verbatim projections, never score/status parsers.
+GRAD_EXAM_ANSWERS = (('考研经历原答','ky_history'),('备考进度原答','ky_prep'),('可比模考原答','mock_detail'))
+FIELD_MAP['grad'].extend((name,'self_judgment',qid) for name,qid in GRAD_EXAM_ANSWERS)
+
+
 def sha(raw):return hashlib.sha256(raw.encode('utf-8')).hexdigest()
 
 
@@ -404,7 +409,7 @@ def build_parse(raw,kind):
     given=items(data);fields=[];missing=[]
     for name,category,*keys in FIELD_MAP[kind]:
         # Optional extension: append only when this question was in the submission.
-        if kind=='grad' and name=='最迟开始挣钱年份' and 'earning_year' not in given:continue
+        if kind=='grad' and (name=='最迟开始挣钱年份' or name in dict(GRAD_EXAM_ANSWERS)) and keys[0] not in given:continue
         refs=list(dict.fromkeys(mapping.mapping.get(k,k) for k in keys));values={k:given[k]['a'] for k in refs if k in given and 'a' in given[k]}
         if name=='优先级' and data['rank']:values={'priority':data['rank']}
         # A refused/unknown answer is retained verbatim but cannot become a known constraint.
@@ -421,6 +426,10 @@ def build_parse(raw,kind):
             # because the rest mentions family support, a year or another plan.
             known={k:v for k,v in known.items() if isinstance(v,str)
                    and not _income_unresolved(v)}
+        if kind=='grad' and name in dict(GRAD_EXAM_ANSWERS):
+            # A supplied account is known only as the person's words; it does not
+            # prove exam completion, subject comparability or registration success.
+            known={k:v for k,v in known.items() if isinstance(v,str) and v.strip() and v.strip().rstrip('。.!！?？') not in unknown|{'不愿透露','拒绝回答','暂时不想说','暂不提供'} and not _income_unresolved(v)}
         value=next(iter(known.values())) if len(known)==1 else known if known else None
         fields.append({'field':name,'category':category,'status':'given' if known else 'unknown','value':value,
                        'quote':json.dumps(values,ensure_ascii=False) if values else '',
@@ -491,6 +500,16 @@ def alignment_errors(case_dir):
         if parsed.get('source')!=expected['source']:return ['画像已更新，须优先采用最新存档并重新解析，不能沿用旧作答']
         fields={f['field']:f for f in parsed.get('questionnaire_fields',parsed.get('fields',[]))}
         for f in expected['fields']:
+            if f['field'] in dict(GRAD_EXAM_ANSWERS):
+                # The checklist consumes analysis fields, not only the frozen
+                # questionnaire projection. Audit both, including duplicate names.
+                copies=[row for group in ('fields','questionnaire_fields') for row in parsed.get(group,[]) if isinstance(row,dict) and row.get('field')==f['field']]
+                for row in copies:
+                    if any(row.get(key)!=f[key] for key in ('value','status','quote','answer_refs','locator','category')):
+                        return ['原答投影或题目定位与原始作答不一致：'+f['field']]
+                analysis_present=any(isinstance(row,dict) and row.get('field')==f['field'] for row in parsed.get('fields',[]))
+                migrated='checksum' not in data and isinstance(parsed.get('questionnaire_fields'),list)
+                if not analysis_present and not migrated:return ['操控者核查字段缺原答投影：'+f['field']]
             # Historic migrated, unchecked questionnaires can keep an unresolved
             # income answer in the old combined projection. A stated deadline or
             # any freshly parsed/checksummed submission must have its own field.
@@ -498,7 +517,11 @@ def alignment_errors(case_dir):
                     and f['field'] not in fields and 'checksum' not in data
                     and isinstance(parsed.get('questionnaire_fields'),list)):
                 continue
+            if (f['field'] in dict(GRAD_EXAM_ANSWERS) and f['field'] not in fields
+                    and 'checksum' not in data and isinstance(parsed.get('questionnaire_fields'),list)):
+                continue # Old migrated reports retain their frozen analysis; do not force a rewrite.
             if fields.get(f['field'],{}).get('value')!=f['value'] or fields.get(f['field'],{}).get('status')!=f['status']:return ['结构化画像字段与原始作答不一致：'+f['field']]
+
         unanswered={i['id'] for sec in data['sections'] for i in sec['items']
                     if i.get('required') is True and i.get('status')=='未填'}
         if unanswered and parsed.get('required_gaps')!=expected['required_gaps']:
