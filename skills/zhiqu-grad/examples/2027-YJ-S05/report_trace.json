@@ -1716,7 +1716,7 @@
     "form": "8bcf0611"
   },
   "verification_tools_sha256": {
-    "verify_report.py": "0a82348fb6f66951d2fdb7039035177e87a53185bd100192f957f1a42d020331",
+    "verify_report.py": "e6b5191814dac954b8662107e07318a8d5b7620d51edd30d18848b6f8e7a84fe",
     "verification_calculations.py": "24c83966e3bc62642683532ca98d4318d989efd7f5e4444a9c7d9c695accea98"
   },
   "compatibility_verifications": [
@@ -2075,6 +2075,26 @@
       "reason": "境外分校及私立课程知识路由与认证边界更新；旧示例原有证据和分析不变，不冒重新核过官方事实。六旧例正文、核对材料、输入、数值、PDF及原审批完全相同，仅兼容流程指纹，不冒充内容新复核。",
       "changed_tools": {},
       "previous_trace_sha256": "a8f7457cc254086e48aa765ae6721fcddbeecd81902a0efe043005870e143a7d",
+      "assembled_markdown_sha256": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
+      "rendered_body_html_sha256": "9b4eb5bdf5fb56d7d60c72b50c87550cb15d8dd456668a6c61c774705009dae2",
+      "appendix_materials_unchanged_except_runtime_timestamp": true,
+      "original_artifacts": {
+        "report.md": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
+        "report.html": "3311e44a727830d10556b77e2d5e544eecd6c2ab68f4ac84b65aa043746f3f8d",
+        "2027-YJ-S05-report.pdf": "c3510ec62f75761aadca608bbe23109ef15281c5eacbda20f883ad1c0012c85a"
+      }
+    },
+    {
+      "date": "2026-10-30",
+      "kind": "campus_audit_compatibility",
+      "reason": "读研复合成绩标签及定性官方背景不抬升情景数字的核对标题修正；旧示例原有证据和分析不变，不冒重新核过官方事实。六旧例正文、核对材料、输入、数值、PDF及原审批完全相同，仅兼容流程指纹，不冒充内容新复核。",
+      "changed_tools": {
+        "verify_report.py": {
+          "before": "0a82348fb6f66951d2fdb7039035177e87a53185bd100192f957f1a42d020331",
+          "after": "e6b5191814dac954b8662107e07318a8d5b7620d51edd30d18848b6f8e7a84fe"
+        }
+      },
+      "previous_trace_sha256": "cf0d09cc906e8ac0d4a2960142cdf05de2ec04cf9b1b53dd876cab21b24ae450",
       "assembled_markdown_sha256": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
       "rendered_body_html_sha256": "9b4eb5bdf5fb56d7d60c72b50c87550cb15d8dd456668a6c61c774705009dae2",
       "appendix_materials_unchanged_except_runtime_timestamp": true,
