@@ -603,4 +603,99 @@ class DomainPolicySnapshotTests(unittest.TestCase):
         self.write([hit,('unlisted.example.org','某机构','https://unlisted.example.org | 单位：某机构')])
         self.assertNotEqual(self.snap(),base)
 
+class RecommendationEligibilityTests(unittest.TestCase):
+    """Synthetic eligibility gates, without reading or copying personal cases."""
+
+    def synthetic_case(self,kind,pool,condition='failed',status='ineligible'):
+        temp=tempfile.TemporaryDirectory();self.addCleanup(temp.cleanup)
+        root=Path(temp.name)
+        dump(root/'case.json',{'kind':kind,'context':{'takes_kaoyan':False}})
+        evidence={'id':'E_SYNTHETIC','grade':'官方','status':'verified'}
+        dump(root/'evidence.json',{'items':[evidence]})
+        def candidate(cid,hc='met',state='verified'):
+            return {'id':cid,'status':state,'hard_conditions':[
+                {'name':'虚构学历门槛','status':hc,'evidence_refs':['E_SYNTHETIC']}],
+                'excluded_reason':'虚构岗位仅限本科，虚构申请人学历为专科' if hc=='failed' else ''}
+        candidates={'school_programs':[candidate('SYN_SCHOOL')],
+                    'job_types':[candidate('SYN_TYPE_A'),candidate('SYN_TYPE_B'),candidate('SYN_TYPE_C')],
+                    'paths':[candidate('SYN_PATH')],'jobs':[candidate('SYN_JOB')]}
+        target=candidates[pool][0]
+        target.update(candidate(target['id'],condition,status))
+        dump(root/'candidates.json',candidates)
+        judgment={'preferences':{'quote':'虚构偏好：先核资格','profile_refs':['synthetic']},
+                  'candidates':[{'candidate_id':target['id'],**{key:'虚构判断依据' for key in (
+                      'supports','counters','costs','fallback','switch_conditions','checkpoint')}}],
+                  'recommendation':{'primary':['SYN_TYPE_B'],'backup':['SYN_TYPE_C'],
+                                    'conditions':'未核实条件只作调查，符合后再行动'},
+                  'checkpoint':'虚构复核节点'}
+        dump(root/'judgment.json',judgment)
+        return root,target['id']
+
+    def test_failed_candidate_cannot_be_primary_or_backup(self):
+        for kind,pools in (('grad',('school_programs','paths')),('career',('job_types','jobs','paths'))):
+            for pool in pools:
+                for slot in ('primary','backup'):
+                    with self.subTest(kind=kind,pool=pool,slot=slot):
+                        root,cid=self.synthetic_case(kind,pool)
+                        case=PlanningCase(root);case.stage4()
+                        self.assertEqual(case.errors,[],case.errors)
+                        judgment=read(root/'judgment.json')
+                        judgment['recommendation'][slot]=[cid]
+                        dump(root/'judgment.json',judgment)
+                        case=PlanningCase(root);case.stage7()
+                        self.assertTrue(any(cid in error and 'recommendation' in error for error in case.errors),case.errors)
+
+    def test_pending_direction_and_unselected_exclusion_remain_allowed(self):
+        for condition,status,selected in (('unknown','pending',True),('failed','ineligible',False)):
+            with self.subTest(condition=condition,status=status,selected=selected):
+                root,cid=self.synthetic_case('career','job_types',condition,status)
+                if selected:
+                    judgment=read(root/'judgment.json');judgment['recommendation']['primary']=[cid]
+                    dump(root/'judgment.json',judgment)
+                case=PlanningCase(root);case.stage4();case.stage7()
+                self.assertEqual(case.errors,[],case.errors)
+
+    def test_either_failed_condition_or_ineligible_status_blocks_recommendation(self):
+        for condition,status in (('failed','verified'),('met','ineligible')):
+            with self.subTest(condition=condition,status=status):
+                root,cid=self.synthetic_case('career','jobs',condition,status)
+                judgment=read(root/'judgment.json');judgment['recommendation']['primary']=[cid]
+                dump(root/'judgment.json',judgment)
+                case=PlanningCase(root);case.stage7()
+                self.assertTrue(any(cid in error and 'recommendation.primary' in error for error in case.errors),case.errors)
+
+    def test_failed_duplicate_is_not_hidden_by_another_pool_or_order(self):
+        for failed_pool in ('job_types','jobs'):
+            with self.subTest(failed_pool=failed_pool):
+                root,cid=self.synthetic_case('career',failed_pool)
+                candidates=read(root/'candidates.json')
+                other_pool='jobs' if failed_pool=='job_types' else 'job_types'
+                candidates[other_pool][0]['id']=cid
+                dump(root/'candidates.json',candidates)
+                judgment=read(root/'judgment.json');judgment['recommendation']['backup']=[cid]
+                dump(root/'judgment.json',judgment)
+                case=PlanningCase(root);case.stage7()
+                self.assertTrue(any(cid in error and 'recommendation.backup' in error for error in case.errors),case.errors)
+
+    def test_empty_hard_conditions_still_fail_candidate_gate(self):
+        root,cid=self.synthetic_case('career','jobs','met','verified')
+        candidates=read(root/'candidates.json');candidates['jobs'][0]['hard_conditions']=[]
+        dump(root/'candidates.json',candidates)
+        case=PlanningCase(root);case.stage4()
+        self.assertTrue(any(cid in error and '硬条件为空' in error for error in case.errors),case.errors)
+
+    def test_case_check_and_report_generation_reach_eligibility_gate(self):
+        root,cid=self.synthetic_case('career','jobs')
+        judgment=read(root/'judgment.json');judgment['recommendation']['primary']=[cid]
+        dump(root/'judgment.json',judgment)
+        # Unrelated missing synthetic stages are expected; eligibility must still be checked.
+        errors=run(root,7).errors
+        self.assertTrue(any(cid in error and 'recommendation.primary' in error for error in errors),errors)
+        # Bypass profile binding only. Run the real report preflight and all workflow gates.
+        with patch('verify_report.bind_profile',return_value=({}, {}, None)):
+            with self.assertRaises(ValueError) as caught:
+                generate(root,html_only=True,profile_version='synthetic')
+        self.assertIn('recommendation.primary',str(caught.exception))
+        self.assertIn(cid,str(caught.exception))
+
 if __name__=='__main__':unittest.main()

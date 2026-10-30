@@ -664,6 +664,13 @@ class PlanningCase:
         if not all(j.get('recommendation',{}).get(k) for k in ('primary','backup','conditions')):self.err('judgment.json','recommendation','缺主路径/保险路径/条件')
         known={c['id'] for key in ('school_programs','paths','job_types','jobs') for c in self.data.get('candidates.json',{}).get(key,[])}
         if any(cid not in known for key in ('primary','backup') for cid in j.get('recommendation',{}).get(key,[])):self.err('judgment.json','recommendation','推荐了未登记候选')
+        # 保留不符候选用于审计，不等于允许它进入主路径或保险路径。
+        excluded={c['id'] for key in ('school_programs','paths','job_types','jobs')
+                  for c in self.data.get('candidates.json',{}).get(key,[])
+                  if c.get('status')=='ineligible' or any(h.get('status')=='failed' for h in c.get('hard_conditions',[]))}
+        for slot in ('primary','backup'):
+            for cid in j.get('recommendation',{}).get(slot,[]):
+                if cid in excluded:self.err('judgment.json','recommendation.'+slot,'推荐了硬条件不符/已排除的候选：'+cid)
         if not j.get('candidates') or not j.get('checkpoint'):self.err('judgment.json','','缺候选判断或检查点')
         for _,v in walk(j):
             if isinstance(v,str) and re.search(r'个人.{0,4}(?:上岸|录用|录取).{0,4}\d+%',self.expand(v)):self.err('judgment.json','','禁止个人概率')
