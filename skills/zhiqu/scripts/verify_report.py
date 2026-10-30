@@ -129,7 +129,10 @@ def require_analysis_profile(root,binding,profile):
 
 def case_info(case,binding,warning=None):
     generated=datetime.now(timezone(timedelta(hours=8))).isoformat(timespec='seconds')
-    return [('案例号',case['case_id']),('报告版本',case.get('report_version','1')),('生成时间',generated),
+    if 'version' in case and 'report_version' in case and str(case['version'])!=str(case['report_version']):
+        raise ValueError('报告版本登记冲突：version与旧report_version不一致')
+    version=case.get('version',case.get('report_version','1'))
+    return [('案例号',case['case_id']),('报告版本',version),('生成时间',generated),
             ('所用画像时间',binding.get('filled_at') or '旧画像未记录填写时间'),('画像SHA256（前12位）',binding['sha256'][:12]),
             ('所用资料版本',case.get('data_commit','未记录')),('画像版本提示',warning or '生成时未发现更新版本')]
 

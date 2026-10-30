@@ -22,6 +22,19 @@ def profile(stamp='2026-10-19T12:00:00+08:00'):
             'rank':[],'derived':{},'未填的必答题':[]}
 
 
+class CaseVersionTests(unittest.TestCase):
+    def test_canonical_case_version_is_printed_without_a_second_alias(self):
+        data={'case_id':'synthetic','version':'2'}
+        self.assertEqual(dict(verify.case_info(data,{'sha256':'a'*64}))['报告版本'],'2')
+    def test_legacy_version_alias_and_default_are_retained(self):
+        self.assertEqual(dict(verify.case_info({'case_id':'synthetic','report_version':'7'},{'sha256':'a'*64}))['报告版本'],'7')
+        self.assertEqual(dict(verify.case_info({'case_id':'synthetic'},{'sha256':'a'*64}))['报告版本'],'1')
+    def test_conflicting_version_aliases_do_not_silently_mislabel_pdf(self):
+        with self.assertRaisesRegex(ValueError,'报告版本登记冲突'):
+            verify.case_info({'case_id':'synthetic','version':'2','report_version':'1'},{'sha256':'a'*64})
+        self.assertEqual(str(dict(verify.case_info({'case_id':'synthetic','version':2,'report_version':'2'},{'sha256':'a'*64}))['报告版本']),'2')
+
+
 class PlanningMaterialsHeading(unittest.TestCase):
     def test_unused_official_number_does_not_relabel_scenario_table(self):
         evidence = {
