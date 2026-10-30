@@ -1327,6 +1327,23 @@
         "file": "skills/zhiqu/tests/test_data_quality.py",
         "basis": "质量摘要改为逐渠道给出可比核对分母，本提交首次引入该合成反例；不认证原核对结论或人工金标准。"
       }
+    },
+    {
+      "id": "profile-derived-labels-not-replayed",
+      "domain": "报告",
+      "test": "test_planning_workflow.PlanningWorkflowTests.test_duplicate_label_whitespace_and_generation_gate",
+      "input_fixture": {
+        "file": "test_planning_workflow.py",
+        "symbols": [
+          "PlanningWorkflowTests.test_duplicate_label_whitespace_and_generation_gate"
+        ]
+      },
+      "expected": "派生画像fields内相同名称（含首尾空白差异）在阶段1和真实生成入口拒绝，不能用dict覆盖隐藏重复，也不能覆盖已有报告；不误拦不同名称同值或合法问卷副本。",
+      "provenance": {
+        "commit": "da45cd748b932c5a9d60e9bc21fa7adf347f0a5d",
+        "file": "skills/zhiqu/tests/test_planning_workflow.py",
+        "basis": "江西二战跨考完整自查的本机作者重跑在旧派生结果后重复追加字段，独立复核发现；此提交首次加入该实际生成入口合成回归，不认证原答真实性。"
+      }
     }
   ],
   "not_in_this_suite": [
