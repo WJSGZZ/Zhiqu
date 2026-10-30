@@ -493,9 +493,54 @@ class PlanningCase:
                 if day(i['review_due'])<now:self.err('rules_check.json',i['id'],'规则已过期')
             elif not i.get('gap'):self.err('rules_check.json',i.get('id','?'),'未取到须说明影响与下一步')
 
+    def existing_application_scope(self, candidates, pool):
+        """仅核一个本人声称已报的对象；不认证报名成功，也不放宽仍在择校的情形。"""
+        scope=candidates.get('existing_application')
+        if scope is None:return False
+        try:
+            if not isinstance(scope,dict) or scope.get('status')!='reported':raise ValueError('须明确为本人自报，不能认证报名成功')
+            if len(pool)!=1 or pool[0].get('id')!=scope.get('candidate_id'):raise ValueError('仅适用唯一且明确的现有报考对象')
+            target=pool[0]
+            if target.get('year')!=self.case.get('target_year') or target.get('status')!='pending':raise ValueError('届次须匹配，报名未核仍须pending')
+            if not any(h.get('id')=='registration_status' and h.get('status')=='unknown' for h in target.get('hard_conditions',[])):raise ValueError('须单列registration_status为unknown，另核回执与确认')
+            match=re.fullmatch(r'profile_parse\.json#/fields/(\d+)/value',str(scope.get('statement_ref','')))
+            if not match:raise ValueError('自报须指向画像登记的原答')
+            field=self.data['profile_parse.json']['fields'][int(match[1])];text=field.get('value');refs=field.get('answer_refs',[])
+            if not isinstance(text,str) or len(refs)!=1:raise ValueError('须引用单题完整原答，不从旁人或推测生成')
+            original=(self.root/self.case['profile']['file']).resolve()
+            if not original.is_relative_to(self.root.resolve()):raise ValueError('原画像须在本案内')
+            raw=read(original)
+            answers=[i.get('a') for s in raw.get('sections',[]) for i in s.get('items',[]) if i.get('id')==refs[0] and 'a' in i]
+            if len(answers)!=1 or answers[0]!=text or field.get('quote') not in (text,json.dumps(text,ensure_ascii=False)):raise ValueError('登记值及引语必须精确回到原始问卷')
+            school=target.get('school');code=target.get('program_code')
+            if not school or not re.fullmatch(r'\d{4}(?:\d{2})?',str(code or '')):raise ValueError('学校全称与专业代码须明确')
+            clauses=re.split(r'[。；;\n]',text)
+            affirm=r'^\s*(?:(?:本人|我)(?:称|自报|说)?|自报)?已(?:经)?(?:报(?:名)?|(?:提交|完成).{0,20}报名)'
+            deny=r'未报|没(?:有)?报|并未|不是|尚未|不曾|假如|如果|计划|准备报|想报'
+            if re.search(r'取消报名|撤销报名|撤回报名|报名.{0,8}(?:取消|撤销|撤回|作废|无效)',text):raise ValueError('原答有取消/无效信息，须先澄清，不能缩成单校')
+            if not any(school in s and re.search(r'(?<!\d)'+re.escape(str(code))+r'(?!\d)',s) and re.search(affirm,s) and not re.search(deny,s) for s in clauses):raise ValueError('原答须在同一分句明确自报该校该专业，否定或计划不算')
+            e=self.evidence.get(scope.get('deadline_evidence_id'),{});source=e.get('source') or {}
+            from urllib.parse import urlsplit
+            if e.get('grade')!='官方' or e.get('status')!='verified' or e.get('availability')!='available':raise ValueError('须有已核官方全国网报截止证据')
+            if urlsplit(source.get('url','')).scheme not in ('http','https') or urlsplit(source.get('url','')).hostname not in ('moe.gov.cn','www.moe.gov.cn','yz.chsi.com.cn') or not re.fullmatch(r'[0-9a-f]{64}',str(source.get('sha256',''))):raise ValueError('截止证据须有教育部/研招网原网址和指纹')
+            if not re.search(r'全国.*(?:报名|网报).*(?:截止|结束)',e.get('claim','')) or '报名' not in e.get('excerpt','') or not excerpt_contains(e.get('value'),e.get('excerpt','')):raise ValueError('证据须明确支持全国网报截止日，不借其他日期')
+            if not re.search(r'(?<!\d)'+str(self.case['target_year'])+r'(?!\d)',e.get('scope','')):raise ValueError('截止证据须明确本届')
+            now=day(self.case['context']['as_of']);end=day(e['value'])
+            # 只接受教育部正式网报时间区间的明确末日，不从预报名或确认日期借值。
+            ranges=re.findall(r'(?<!预)报名时间[为：:]?\s*(\d{4})年(\d{1,2})月(\d{1,2})日至(?:(\d{4})年)?(?:(\d{1,2})月)?(\d{1,2})日',e.get('excerpt',''))
+            ends={day(f'{int(y2 or y):04}-{int(m2 or m):02}-{int(d2):02}') for y,m,d,y2,m2,d2 in ranges}
+            if ends!={end}:raise ValueError('正式网报区间末日与证据值不一致或未取得')
+            if end.year!=self.case['target_year']-1 or now.year not in (end.year,self.case['target_year']):raise ValueError('报名日历与本届/报告时间不一致')
+            if not day(e['published_on'])<=day(e['retrieved_on'])<=now or not day(e['retrieved_on'])<=day(e['verified_on'])<=now<=day(e['review_due']) or not end<now:raise ValueError('须已过窗口，且所用证据未过期、非未来取文')
+            return True
+        except (KeyError,IndexError,TypeError,ValueError,AttributeError) as exc:
+            self.err('candidates.json','existing_application','不能缩成单校：'+str(exc));return False
+
     def stage4(self):
         c=self.need('candidates.json');pool=c.get('school_programs',[]) if self.kind=='grad' else c.get('job_types',[])
         minimum=self.limits['school_programs_min_if_kaoyan'] if self.kind=='grad' and self.case['context'].get('takes_kaoyan') else self.limits['job_types_min'] if self.kind=='career' else 1
+        if self.kind=='grad' and c.get('existing_application') is not None and not self.case['context'].get('takes_kaoyan'):self.err('case.json','context.takes_kaoyan','既有考研报名对象不能用false跳过考研门禁')
+        if self.kind=='grad' and self.case['context'].get('takes_kaoyan') and self.existing_application_scope(c,pool):minimum=1
         if len(pool)<minimum:self.err('candidates.json','','候选少于合同要求')
         if self.kind=='grad' and self.case['context'].get('takes_kaoyan'):
             assessment=c.get('personal_difficulty',{});mock=assessment.get('mock_exam')
