@@ -131,6 +131,27 @@ class DocumentTests(unittest.TestCase):
         blob=doc.tobytes();doc.close()
         with self.assertRaisesRegex(NeedsReview,'页面存在'):self.parse(blob,ocr)
 
+    def test_unmapped_later_page_scope_is_not_ignored_by_program_filter(self):
+        # A matching ordinary table cannot certify a different section/page.
+        blob,ocr=document(layer='lines')
+        doc=pymupdf.open(stream=blob,filetype='pdf');page=doc.new_page(width=700,height=350)
+        page.insert_text((40,60),'二、硕士研究生专项计划进入复试成绩基本要求',fontname='china-s',fontsize=12)
+        page.insert_text((40,100),'其他专业另行规定，调剂复试由各学院安排。',fontname='china-s',fontsize=10)
+        mixed=doc.tobytes();doc.close()
+        third=unittest.mock.Mock(side_effect=ocr)
+        with self.assertRaisesRegex(NeedsReview,'表格外'):
+            self.parse(mixed,third,'lines')
+        third.assert_not_called()
+
+    def test_plain_later_page_number_does_not_create_a_scope_exception(self):
+        blob,ocr=document(layer='lines')
+        doc=pymupdf.open(stream=blob,filetype='pdf');page=doc.new_page(width=700,height=350)
+        page.insert_text((40,60),'2',fontsize=12)
+        plain=doc.tobytes();doc.close()
+        result=self.parse(plain,ocr,'lines')
+        self.assertEqual(result['rows'],4)
+        self.assertTrue(result['proofs'][-1]['sample_passed'])
+
     def test_outside_grid_special_scope_cannot_be_silently_dropped(self):
         blob,ocr=document();doc=pymupdf.open(stream=blob,filetype='pdf')
         doc[0].insert_text((40,300),'仅限退役大学生士兵专项计划',fontname='china-s',fontsize=10)
