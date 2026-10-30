@@ -16,12 +16,12 @@
   "contract_sha256": "8efe50a42837daeec7a83de34e595fd7eeb88a8cfeff1a26afc20699fd951d76",
   "tool_sha256": {
     "planning_report.py": "32ca898bbb421d198bdb1d35c9215014d0642ffdf5d08eb88f4030c5f050ddf6",
-    "planning_workflow.py": "66afce3c97657941d7e9b7c6c5d30fe2225970052a4d2eeb39981537ce78dac4",
+    "planning_workflow.py": "9d839c2310d28396340d75733ade67bec8b7067055dd29da218aeec4ab37283a",
     "operator_check.py": "d99826c1cae9514c665edb0b1b6155ea99a0bce19b99a919b9ada81e0b93c0a1",
     "check_demos.py": "67d4edc1cd737beeb6729783a736e667a97c12d8f7de2de673632d9d5c3370b8",
     "report.py": "c1a2e82e6ce5fb9fefd866e14679a24f1ad5dcdcf56e2bdc1d578668d10e1cd8",
     "render_report.py": "17c81658af1834fc1216d61ca3c11070934229a74d8d1175a1602a348ffd1c0f",
-    "profile_store.py": "0d7642d89e21844f36318802a53829cabe227f7f710ae5438bee0976e9e9b1b3",
+    "profile_store.py": "befbb880239b1fa3207b7875f396c70c2f21d500dca57d6bf9cedcac4db2a2be",
     "claim_guards.py": "54bab4d942fafd148190df73cad34805538662b0a152ec5701c8a960e28dbd1d",
     "source_authentication.py": "b18201e997e0b4ca33c879979bc03f81deab1ea5edbbbc74cab6bf622821f278",
     "official_source_audit.py": "c09c40a2c5eec18318fbb1fa52393ee37b4e63f636ec7ea3999084d12ecc0df1",
@@ -1362,11 +1362,15 @@
     {
       "date": "2026-10-30",
       "kind": "grad_exam_answer_compatibility",
-      "reason": "追加考研原答投影；历史无校验码迁移允许保留冻结分析，新老正文与材料分别比对；逐份组装正文、核对材料及PDF字节均未变。仅兼容流程指纹，不重新认证官方事实或原审批。",
+      "reason": "追加四项考研原答投影并兼容精确题号对象引语；历史无校验码迁移允许保留冻结分析，新老正文与材料分别比对；逐份组装正文、核对材料及PDF字节均未变。仅兼容流程指纹，不重新认证官方事实或原审批。",
       "changed_tools": {
+        "planning_workflow.py": {
+          "before": "66afce3c97657941d7e9b7c6c5d30fe2225970052a4d2eeb39981537ce78dac4",
+          "after": "9d839c2310d28396340d75733ade67bec8b7067055dd29da218aeec4ab37283a"
+        },
         "profile_store.py": {
           "before": "a609d0a51cb4a27713fe00c8174069fd61df44656f2b859423e4712ca58b5cf1",
-          "after": "0d7642d89e21844f36318802a53829cabe227f7f710ae5438bee0976e9e9b1b3"
+          "after": "befbb880239b1fa3207b7875f396c70c2f21d500dca57d6bf9cedcac4db2a2be"
         }
       },
       "previous_trace_sha256": "d6590058f3ea702e88824cfe990b6e79cde92b485c6248be54251ba2d3c4ea16",
