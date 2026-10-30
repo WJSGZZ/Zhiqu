@@ -21,7 +21,7 @@
     "check_demos.py": "67d4edc1cd737beeb6729783a736e667a97c12d8f7de2de673632d9d5c3370b8",
     "report.py": "c1a2e82e6ce5fb9fefd866e14679a24f1ad5dcdcf56e2bdc1d578668d10e1cd8",
     "render_report.py": "17c81658af1834fc1216d61ca3c11070934229a74d8d1175a1602a348ffd1c0f",
-    "profile_store.py": "7d78ae78c185aa37cb8ba10b306ddf3505717f4c6572bfef8c268a81455df538",
+    "profile_store.py": "be7eca0205487f28950f9351ee948115ac6bf3b72eca09ed2921ebbe085cefe6",
     "claim_guards.py": "54bab4d942fafd148190df73cad34805538662b0a152ec5701c8a960e28dbd1d",
     "source_authentication.py": "b18201e997e0b4ca33c879979bc03f81deab1ea5edbbbc74cab6bf622821f278",
     "official_source_audit.py": "c09c40a2c5eec18318fbb1fa52393ee37b4e63f636ec7ea3999084d12ecc0df1",
@@ -1397,6 +1397,25 @@
         }
       },
       "previous_trace_sha256": "88108eafcbbf44741971b841f335e640fefbc5149a8c71f033b73d1bb8fbec98",
+      "assembled_markdown_sha256": "0895952f1caa72b7576496650f775ddafc6137d721509d0fe4868561a12c2195",
+      "appendix_materials_unchanged": true,
+      "original_artifacts": {
+        "report.md": "0895952f1caa72b7576496650f775ddafc6137d721509d0fe4868561a12c2195",
+        "report.html": "874f4f27b8b595bb0d7359b302fab4a90416724998afa6706f7799749a66d58f",
+        "2027-QZ-S01-report.pdf": "8b776f829fbaf4810c743018bf4409a317e289a2020545cc03aa25a5ddbea9ed"
+      }
+    },
+    {
+      "date": "2026-10-30",
+      "kind": "career_employment_answer_compatibility",
+      "reason": "追加在职工作、离开原因及在岗离职约定原答；历史无校验码迁移允许保留冻结分析，新老正文与材料分别比对；逐份组装正文、核对材料及PDF字节均未变。仅兼容流程指纹，不重新认证官方事实或原审批。",
+      "changed_tools": {
+        "profile_store.py": {
+          "before": "7d78ae78c185aa37cb8ba10b306ddf3505717f4c6572bfef8c268a81455df538",
+          "after": "be7eca0205487f28950f9351ee948115ac6bf3b72eca09ed2921ebbe085cefe6"
+        }
+      },
+      "previous_trace_sha256": "03d5cddc997a3085cb546c6a6ae54d6bffd925be4d01ea829fad6079fd4c7f51",
       "assembled_markdown_sha256": "0895952f1caa72b7576496650f775ddafc6137d721509d0fe4868561a12c2195",
       "appendix_materials_unchanged": true,
       "original_artifacts": {
