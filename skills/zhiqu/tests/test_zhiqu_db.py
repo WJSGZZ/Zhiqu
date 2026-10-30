@@ -99,6 +99,29 @@ CREATE TABLE civil_major_summary(region TEXT,year INTEGER,major_name TEXT,share 
   r=db.query_source('s',db=self.path);text=db.render_text(r);self.assertIn('https://a.edu.cn/a.pdf',text);self.assertIn('abc',text);self.assertIn('2026-01-02',text);self.assertIn('PDF第2页',text)
  def test_jobs_regions_units_and_not_person_probability(self):
   r=db.query_jobs(region='浙江',major='计算机',db=self.path);text=db.render_text(r);self.assertIn('元/年',text);self.assertIn('非个人',text);self.assertIn('在岗',text);self.assertNotIn('录用概率为',text)
+ def add_notice(self,region='郑州市'):
+  with sqlite3.connect(self.path)as c:
+   c.execute('CREATE TABLE recruitment_notice(record_id TEXT,region TEXT,year INTEGER,title TEXT,source_id TEXT,note TEXT,value_status TEXT)')
+   c.execute('INSERT INTO recruitment_notice VALUES(?,?,?,?,?,?,?)',('notice',region,2027,'财务助理','s','月薪范围4K-6K','{}'))
+ def test_notice_only_does_not_claim_survey_or_competition(self):
+  self.add_notice();r=db.query_jobs(region='郑州市',major='财务',year=2027,db=self.path)
+  self.assertEqual([s['table']for s in r['sections']],['recruitment_notice'])
+  warnings=' '.join(r['warnings']);self.assertIn('不是在岗群体工资调查',warnings);self.assertIn('不代表当前仍在招聘、本人资格或个人offer',warnings)
+  self.assertNotIn('原调查在岗群体分位值',warnings);self.assertNotIn('报名人数/名额',warnings);self.assertIn('不构成报考资格认定',warnings)
+ def test_mixed_notice_and_wage_have_separate_scope_warnings(self):
+  self.add_notice(region='浙江·杭州');r=db.query_jobs(region='杭州',db=self.path)
+  self.assertEqual({s['table']for s in r['sections']},{'wage_stat','recruitment_notice'})
+  self.assertTrue(any('工资调查块是原调查在岗群体分位值'in x for x in r['warnings']))
+  self.assertTrue(any('招聘公告块保留岗位原文报价'in x for x in r['warnings']))
+  self.assertFalse(any('报名人数/名额'in x for x in r['warnings']))
+ def test_no_results_do_not_assert_data_types_present(self):
+  r=db.query_jobs(region='无匹配地区',major='财务',db=self.path);self.assertEqual(r['sections'],[])
+  self.assertFalse(any('分位值'in x or '报名人数/名额'in x or '招聘公告块'in x for x in r['warnings']))
+  self.assertTrue(any('未命中不代表当地没有岗位'in x for x in r['warnings']))
+ def test_type_caveats_follow_matching_block_even_after_last_page(self):
+  self.add_notice();r=db.query_jobs(region='郑州市',year=2027,db=self.path,offset=1)
+  self.assertEqual((r['sections'][0]['total'],r['sections'][0]['returned']),(1,0))
+  self.assertTrue(any('招聘公告块'in x for x in r['warnings']));self.assertFalse(any('分位值'in x for x in r['warnings']))
  def test_percent_string_preserved(self):
   r=db.query_jobs(region='广东',major='计算机',db=self.path);v=r['sections'][0]['rows'][0]['values']['share'];self.assertEqual(v['value'],'30.7%')
  def test_readonly_bytes_unchanged_and_query_only(self):

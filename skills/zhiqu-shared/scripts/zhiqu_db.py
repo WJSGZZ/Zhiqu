@@ -1291,7 +1291,16 @@ def query_jobs(*, region=None, major=None, year=None, db=None, education_db=None
             if year is not None and 'year' in cols:where+=' AND t.year=?';args.append(int(year))
             sec=_section(c,table,where,args,limit,offset)
             if sec['total']:sections.append(sec)
-        warnings=['工资是原调查在岗群体分位值，单位逐项列明，不等于应届起薪。','报名人数/名额是群体竞争口径，不是个人录用概率；专业关键词仅筛选原条款，不构成报考资格认定。','本科专业只按major_link的专业层级与全名精确关系解释，不将地方专业代码或研究生代码盲目等同。']
+        present={sec['table']for sec in sections}
+        warnings=[]
+        if 'wage_stat'in present:
+            warnings.append('工资调查块是原调查在岗群体分位值，单位逐项列明，不等于应届起薪。')
+        if present&{'job_summary','job_position','competition_stat'}:
+            warnings.append('职位/竞争统计块的报名人数/名额是群体竞争口径，不是个人录用概率。')
+        if 'recruitment_notice'in present:
+            warnings.append('招聘公告块保留岗位原文报价，不是在岗群体工资调查；不代表当前仍在招聘、本人资格或个人offer。')
+        if major and present&{'job_summary','job_position','civil_major_summary','selected_university','recruitment_notice'}:
+            warnings.append('专业关键词仅筛选原条款，不构成报考资格认定；本科专业只按major_link的专业层级与全名精确关系解释，不将地方专业代码或研究生代码盲目等同。')
         if region:warnings.append('地区只按原地域字段匹配；范围备注中的城市、转载地、单位名和学校所在地不算工作地。省级数据不自动算作某市覆盖；无行政后缀的同名地名仅作原标签检索，不能据此认定城市工作地。未命中不代表当地没有岗位；岗位地点尚未结构化的须回官方公告核实。')
         if major and 'graduate_destination' in tables:warnings.append('院校就业去向原表没有按专业统计，专业筛选时不列入；学校所在地或单位名称不等同于某专业的就业去向。')
         if any(sec['table']=='employment_major_industry' for sec in sections):
