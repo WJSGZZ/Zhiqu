@@ -151,7 +151,7 @@ def file_sha(path):
 def run(db,output,reps=2000,seed=20261020,prefixes=FOCUS):
     wal=Path(str(db.resolve())+'-wal')
     if wal.exists() and wal.stat().st_size:raise ValueError('存在非空WAL；主文件指纹不足以代表快照，须用已静态发布的只读库')
-    output.mkdir(parents=True,exist_ok=True);before=db.stat();identity=lambda st:(st.st_dev,st.st_ino,st.st_size,st.st_mtime_ns);con=sqlite3.connect('file:'+str(db.resolve())+'?mode=ro',uri=True);con.row_factory=sqlite3.Row
+    output.mkdir(parents=True,exist_ok=True);before=db.stat();identity=lambda st:(st.st_dev,st.st_ino,st.st_size,st.st_mtime_ns);con=sqlite3.connect(db.resolve().as_uri()+'?mode=ro',uri=True);con.row_factory=sqlite3.Row
     try:
         version_before=con.execute('PRAGMA data_version').fetchone()[0];con.execute('BEGIN')
         names={r[0] for r in con.execute("SELECT name FROM sqlite_master WHERE type IN ('view','table')")}

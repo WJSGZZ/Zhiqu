@@ -101,6 +101,18 @@ class TestKaoyanBacktest(unittest.TestCase):
         self.assertEqual(kb.tier_intervals(small,old)[2],('相对稳妥',math.inf,math.inf))
         self.assertEqual(kb.count_bounds(old,*kb.tier_intervals(small,old)[2][1:]),(0,0))
 
+    def test_database_uri_escapes_filename_and_does_not_create_another_file(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);db=root/'special?#.sqlite';con=sqlite3.connect(db)
+            con.execute('CREATE TABLE v_usable(list_type,program_code)')
+            con.execute('CREATE TABLE v_usable_line(line_total)');con.commit();con.close()
+            before=db.read_bytes();result=kb.run(db,root/'out',100,42)
+            self.assertEqual(result['usable_admitted_rows'],0)
+            self.assertEqual(db.read_bytes(),before)
+            self.assertFalse((root/'special').exists())
+            with self.assertRaises(sqlite3.OperationalError):kb.run(root/'absent.sqlite',root/'bad',100,42)
+            self.assertFalse((root/'absent.sqlite').exists())
+
     def test_nonempty_wal_is_rejected_without_checkpoint_or_copy(self):
         with tempfile.TemporaryDirectory() as temp:
             root=Path(temp);db=root/'live.sqlite';writer=sqlite3.connect(db)
