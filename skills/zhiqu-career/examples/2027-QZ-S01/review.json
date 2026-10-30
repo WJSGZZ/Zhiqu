@@ -99,7 +99,7 @@
     "calculations.json": "c9f6ffdadaa69063d1698e768de5b96dbfb4f2cafdd9a803a0a136e2d4ee2bae",
     "candidates.json": "3ffc2bc156346f42fbfacce9b243f26199511bb088405c601c9017efa4063c05",
     "case.json": "56c199fd854ba948916bb91afa440ed6d7b72a1c86500cd8d202dda6df921955",
-    "claim_check.json": "ece04598b660c18d760ec88060878bc651da2a3287b0fe34f2832f1d1ad84c72",
+    "claim_check.json": "3666d355358b563d8e01aafa5f6e50643022259dbe2de2b533f62d8089064f21",
     "directions.json": "6f799d567cc51a1d860a40f8d9bbbf4c16f3bfcd2af58b999cc1db8c54f2761e",
     "evidence.json": "2ddba53ef171d3e4d650af8ed27273a30bb449ef63ffd0480bff3a924f9564f3",
     "judgment.json": "3f7455fd010637e7b0f16acacce93573a3fc2c7f8045264fdc0a8fad8293417d",
@@ -110,7 +110,7 @@
     "profile_snapshot.json": "0a6cb6835c42b9e3a0e18679bd40d3c99c433453287f9e2a231e357647a858d9",
     "report.html": "874f4f27b8b595bb0d7359b302fab4a90416724998afa6706f7799749a66d58f",
     "report.md": "0895952f1caa72b7576496650f775ddafc6137d721509d0fe4868561a12c2195",
-    "report_trace.json": "93ab030b099c58df34dd251b121b21eaf59d87b51c52687d7275b423e125dda6",
+    "report_trace.json": "d6590058f3ea702e88824cfe990b6e79cde92b485c6248be54251ba2d3c4ea16",
     "rules_check.json": "bda48a6be3aff5fdb6d27f0800903873b37d636b4444a9ed460b302c5d5b08f9"
   },
   "checklist_update_note": "仅核查单表述及核查工具记录更新；报告与计算原件未改。保留历史复核记录，当前仍等待独立审核，不是重新批准。",
@@ -542,6 +542,15 @@
           "after": "93ab030b099c58df34dd251b121b21eaf59d87b51c52687d7275b423e125dda6"
         }
       ]
+    },
+    {
+      "date": "2026-10-30",
+      "by": "Codex（既有报名单校范围兼容复验，非内容复核）",
+      "files": [
+        "report_trace.json",
+        "claim_check.json"
+      ],
+      "reason": "既有报名单校范围；旧案例未声明例外，正文、核对材料、数值与PDF字节不变。标准版本字段迁移另待决定，未改变版本读取源码；仅兼容流程指纹，不重认证官方事实或原审批。"
     }
   ],
   "regeneration": {

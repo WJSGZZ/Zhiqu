@@ -16,7 +16,7 @@
   "contract_sha256": "8efe50a42837daeec7a83de34e595fd7eeb88a8cfeff1a26afc20699fd951d76",
   "tool_sha256": {
     "planning_report.py": "32ca898bbb421d198bdb1d35c9215014d0642ffdf5d08eb88f4030c5f050ddf6",
-    "planning_workflow.py": "4562a217b5d94864019b8346a11bda4568e9828e4cafd0d902ae05c87547f434",
+    "planning_workflow.py": "66afce3c97657941d7e9b7c6c5d30fe2225970052a4d2eeb39981537ce78dac4",
     "operator_check.py": "d99826c1cae9514c665edb0b1b6155ea99a0bce19b99a919b9ada81e0b93c0a1",
     "check_demos.py": "67d4edc1cd737beeb6729783a736e667a97c12d8f7de2de673632d9d5c3370b8",
     "report.py": "c1a2e82e6ce5fb9fefd866e14679a24f1ad5dcdcf56e2bdc1d578668d10e1cd8",
@@ -1337,6 +1337,27 @@
         "2027-QZ-S01-report.pdf": "442cf877493f9c33e75c418da23fa875a9030ade3240671c866913580aa08ad9"
       },
       "historical_compatibility_records": "见baseline_commit中同路径旧trace，不将旧兼容工具冒作本次生成器。"
+    }
+  ],
+  "compatibility_verifications": [
+    {
+      "date": "2026-10-30",
+      "kind": "existing_application_scope_compatibility",
+      "reason": "既有报名单校范围；旧案例未声明例外，正文、核对材料、数值与PDF字节不变。标准版本字段迁移另待决定，未改变版本读取源码；仅兼容流程指纹，不重认证官方事实或原审批。",
+      "changed_tools": {
+        "planning_workflow.py": {
+          "before": "4562a217b5d94864019b8346a11bda4568e9828e4cafd0d902ae05c87547f434",
+          "after": "66afce3c97657941d7e9b7c6c5d30fe2225970052a4d2eeb39981537ce78dac4"
+        }
+      },
+      "previous_trace_sha256": "93ab030b099c58df34dd251b121b21eaf59d87b51c52687d7275b423e125dda6",
+      "assembled_markdown_sha256": "0895952f1caa72b7576496650f775ddafc6137d721509d0fe4868561a12c2195",
+      "appendix_materials_unchanged": true,
+      "original_artifacts": {
+        "report.md": "0895952f1caa72b7576496650f775ddafc6137d721509d0fe4868561a12c2195",
+        "report.html": "874f4f27b8b595bb0d7359b302fab4a90416724998afa6706f7799749a66d58f",
+        "2027-QZ-S01-report.pdf": "8b776f829fbaf4810c743018bf4409a317e289a2020545cc03aa25a5ddbea9ed"
+      }
     }
   ]
 }
