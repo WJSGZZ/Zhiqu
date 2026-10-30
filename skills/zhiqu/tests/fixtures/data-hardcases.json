@@ -1188,6 +1188,23 @@
         "file": "skills/zhiqu/tests/test_kaoyan_position.py",
         "basis": "聚合摘要只有最低/中位/最高、缺四分位时真实函数TypeError的合成复现；本方法在该提交新增，不认证原件或分档可靠性。"
       }
+    },
+    {
+      "id": "ky-existing-application-original-binding",
+      "domain": "考研",
+      "test": "test_existing_application.ExistingApplicationTests.test_statement_must_match_original_school_code_and_affirmation",
+      "input_fixture": {
+        "file": "test_existing_application.py",
+        "symbols": [
+          "ExistingApplicationTests.test_statement_must_match_original_school_code_and_affirmation"
+        ]
+      },
+      "expected": "单校例外不把旁人、否定、计划、错误学校或代码当本人既报；原答值绑定不放宽，仍在择校保持原门槛。",
+      "provenance": {
+        "commit": "748e3e4",
+        "file": "skills/zhiqu/tests/test_existing_application.py",
+        "basis": "山东二战完整自查暴露单校核实仍被要求3校；本方法首次在该提交出现，后续独立反例扩展断言，不认证真实报名状态。"
+      }
     }
   ],
   "not_in_this_suite": [
