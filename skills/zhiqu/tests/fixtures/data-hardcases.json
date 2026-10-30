@@ -1274,6 +1274,24 @@
         "file": "skills/zhiqu/tests/test_profile_store.py",
         "basis": "江苏在职转向完整模拟发现三原答未自动投影，本提交首次加入该方法；纯合成副本检查，不认证真实雇主条款。"
       }
+    },
+    {
+      "id": "career-answer-hidden-link-not-consumed",
+      "domain": "报告",
+      "test": "test_career_input_consumption.CareerInputConsumptionTests.test_hidden_link_target_and_title_are_not_visible_bindings",
+      "input_fixture": {
+        "file": "test_career_input_consumption.py",
+        "symbols": [
+          "CareerInputConsumptionTests.make",
+          "CareerInputConsumptionTests.test_hidden_link_target_and_title_are_not_visible_bindings"
+        ]
+      },
+      "expected": "新封存求职关键原答仅放链接href或title不能算正文消费，显示的链接label可算；不以使用登记或同值数字代替原题绑定。",
+      "provenance": {
+        "commit": "c3425f16c11dda65b92c7d94528b68fd9700ad37",
+        "file": "skills/zhiqu/tests/test_career_input_consumption.py",
+        "basis": "江苏在职自查后独立对抗复现完整阶段8隐藏链接仍放行，本提交首次引入该最小回归；纯合成，非语义或资格认证。"
+      }
     }
   ],
   "not_in_this_suite": [
