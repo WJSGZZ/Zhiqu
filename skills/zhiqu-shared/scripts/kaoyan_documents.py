@@ -293,12 +293,18 @@ def _ownership(tables, page_chars, programs, layer="catalog"):
 def _outside_pdf_scope(tables,page_chars,school):
     # Outside-grid scope is data too. Until it has a declared mapping, do not
     # silently discard an exception/plan footnote just because cells agree.
+    unmapped_pages=[]
     for pi,chars in page_chars.items():
         boxes=[t['bbox']for t in tables if t['page']==pi]
         outside=[c for c in chars if not any(b[0]<=(c[0]+c[2])/2<=b[2]and b[1]<=(c[1]+c[3])/2<=b[3]for b in boxes)]
         text=norm(''.join(_lines(outside))).replace(norm(school),'')
         if re.search(r'推免|专项|士兵|骨干|联合培养|联培|一志愿|调剂|非全日制|研究方向|不含|包含|另行|调整|(?:总分|单科|满分|计划数|招生人数).{0,12}\d',text):
-            raise NeedsReview('PDF表格外含未映射的专项/志愿/方向或人数分数口径，需先核清范围')
+            unmapped_pages.append(pi)
+    if unmapped_pages:
+        # Fixed wording plus actual page numbers only; never echo the raw
+        # paragraph, names or IDs. Collect all pages in this pass, not just the
+        # first exception, so a human need not re-fetch to discover the next one.
+        raise NeedsReview('PDF第'+'、'.join(str(p)for p in sorted(unmapped_pages))+'页表格外含未映射的专项/志愿/方向或人数分数口径，需先核清范围')
 
 
 def _sample_tables(tables, page_image, deadline, ocr_regions):

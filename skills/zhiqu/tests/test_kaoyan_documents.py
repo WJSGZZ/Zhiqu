@@ -139,9 +139,21 @@ class DocumentTests(unittest.TestCase):
         page.insert_text((40,100),'其他专业另行规定，调剂复试由各学院安排。',fontname='china-s',fontsize=10)
         mixed=doc.tobytes();doc.close()
         third=unittest.mock.Mock(side_effect=ocr)
-        with self.assertRaisesRegex(NeedsReview,'表格外'):
+        with self.assertRaisesRegex(NeedsReview,'PDF第2页表格外'):
             self.parse(mixed,third,'lines')
         third.assert_not_called()
+
+    def test_all_unmapped_pages_reported_without_raw_text(self):
+        blob,ocr=document(layer='lines')
+        doc=pymupdf.open(stream=blob,filetype='pdf')
+        for label in ('合成隐私哨兵，仅限专项','合成另一哨兵，调剂条件另行规定'):
+            page=doc.new_page(width=700,height=350)
+            page.insert_text((40,60),label,fontname='china-s',fontsize=12)
+        mixed=doc.tobytes();doc.close()
+        third=unittest.mock.Mock(side_effect=ocr)
+        with self.assertRaises(NeedsReview) as caught:self.parse(mixed,third,'lines')
+        self.assertIn('PDF第2、3页表格外',str(caught.exception))
+        self.assertNotIn('哨兵',str(caught.exception));third.assert_not_called()
 
     def test_plain_later_page_number_does_not_create_a_scope_exception(self):
         blob,ocr=document(layer='lines')
