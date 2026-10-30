@@ -998,6 +998,40 @@
         "file": "skills/zhiqu/tests/test_career_on_demand.py",
         "basis": "独立复核发现的源头缺口及隔离合成复现；不认证真实雇主网页、任意中文人名识别或市场覆盖。"
       }
+    },
+    {
+      "id": "career-body-city-scope",
+      "domain": "就业",
+      "test": "test_career_positions.PositionTests.test_tng_popup_positions_never_cross_city",
+      "input_fixture": {
+        "file": "test_career_positions.py",
+        "symbols": [
+          "PositionTests.test_tng_popup_positions_never_cross_city"
+        ]
+      },
+      "expected": "同页武汉前端不得混入杭州后端；保留原明确届别和实习限制。",
+      "provenance": {
+        "commit": "2f70c14",
+        "file": "skills/zhiqu/tests/test_career_positions.py",
+        "basis": "具体岗位原页适配后合成回归；真实原件另由独立复核，不将合成用例冒充原件准确率。"
+      }
+    },
+    {
+      "id": "career-publication-date-scope",
+      "domain": "就业",
+      "test": "test_career_positions.PositionTests.test_publish_and_cache_keep_year_and_field_proofs",
+      "input_fixture": {
+        "file": "test_career_positions.py",
+        "symbols": [
+          "PositionTests.test_publish_and_cache_keep_year_and_field_proofs"
+        ]
+      },
+      "expected": "发布日期只作历史公告年度；缓存和查询保留口径及逐字段原文定位，不冒资格届别。",
+      "provenance": {
+        "commit": "2f70c14",
+        "file": "skills/zhiqu/tests/test_career_positions.py",
+        "basis": "具体岗位原页适配后合成回归；真实原件另由独立复核，不将合成用例冒充原件准确率。"
+      }
     }
   ],
   "not_in_this_suite": [
