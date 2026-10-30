@@ -721,6 +721,10 @@ def _record(c, table, row):
         if isinstance(meta,dict) and meta.get('schema')=='career-table-evidence-v1' and isinstance(proof,dict):
             result['context'].pop('note',None)
             result['context'].update(position=meta.get('position'),scope='原表匹配行；取文核对不代表当前在招或本人合格')
+            if meta.get('year_basis')=='publication_date':
+                result['context']['年份口径']=meta.get('year_scope')or'公告发布年份；资格届别另按任职要求原文'
+            if meta.get('region_raw'):result['context']['原文工作地']=meta['region_raw']
+            result['career_scope']={k:meta.get(k)for k in ('year_basis','published','recruitment_year','year_scope','region_raw','region_basis','position_locator','field_locators','visibility_basis')if k in meta}
             for field,label in [('duties','岗位职责'),('requirements','任职要求'),('pay','报酬原文'),('schedule','到岗安排')]:
                 if field not in meta.get('fields',{}):continue
                 value=meta['fields'][field]

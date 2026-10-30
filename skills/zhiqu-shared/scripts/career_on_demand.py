@@ -308,7 +308,13 @@ def run_request(request, *, fetch=fetch_public, lookup_fn=lookup, clock=time.mon
                 continue
             if not official(item['url']) or not publisher_matches(item['url'], entry['publisher']):
                 raise Gap('最终网址不在已确认的官方单位域名清单')
-            parsed = parse_table(item['body'], entry, request)
+            try:
+                parsed = parse_table(item['body'], entry, request)
+            except Gap as table_gap:
+                from career_positions import parse_position
+                if (urlsplit(item['url']).hostname or '') not in {'www.eitech.edu.cn','eitech.edu.cn','www.bodenai.com','bodenai.com','www.tngdigital.com.cn','tngdigital.com.cn'}:
+                    raise table_gap
+                parsed = parse_position(item['body'], dict(entry, url=item['url']), request)
             fingerprint = digest(item['body'])
             source = dict.fromkeys(SOURCE_COLS, '')
             source.update(source_id='career-demand-'+fingerprint, grade='官方', publisher=entry['publisher'],
@@ -317,6 +323,9 @@ def run_request(request, *, fetch=fetch_public, lookup_fn=lookup, clock=time.mon
                           archive_sha256=fingerprint, archive_status='已核后删除（有指纹）',
                           citation=f"{entry['publisher']}：《{parsed['title']}》，{item['url']}，取得日期{dt.date.today().isoformat()}。",
                           license='未注明')
+            if parsed['proofs'][0].get('kind') == 'position-body-v1':
+                source['method'] = '具体岗位正文DOM/流式两读逐段一致；保留业务段原始标签全核；不保存联系资料'
+                source['published'] = parsed.get('published','')
             result['candidates'].append(dict(source=source, rows=parsed['rows'], proofs=parsed['proofs']))
             for row in parsed['rows']:
                 needed -= {(row['year'], key) for key in row['fields']}
@@ -402,6 +411,8 @@ def publish_result(result, database, output, deadline, *, metadata_builder=None,
                     meta = dict(schema=SCHEMA, direction=result['request']['direction'], stage=row['stage'],
                                 position=row['position'], stage_raw=row['stage_raw'], fields=row['fields'],
                                 review_due=(dt.date.today()+dt.timedelta(days=7)).isoformat())
+                    for key in ('year_basis','year_scope','published','recruitment_year','region_raw','region_basis','position_locator','field_locators','visibility_basis'):
+                        if key in row:meta[key]=row[key]
                     evidence = dict(proof, sha256=source['archive_sha256'], src_row=row['src_row'],
                                     position=row['position'], fields=row['fields'])
                     values = [record_id,row['region'],row['year'],source['title'],source['source_id'],'原表匹配行已核',
@@ -520,6 +531,15 @@ def validate_candidate(candidate, result):
                 if meta['fields']!=row['fields']or proof.get('fields')!=row['fields']or proof.get('src_row')!=row['src_row']or proof.get('sha256')!=source['archive_sha256']:
                     raise Gap('候选原值或原行定位回读不同')
                 if proof.get('dual_read_equal')is not True or proof.get('sample_passed')is not True:raise Gap('候选核对证明缺失')
+                if proof.get('kind')=='position-body-v1':
+                    for key in ('year_basis','year_scope','published','recruitment_year','region_raw','region_basis','position_locator','field_locators','visibility_basis'):
+                        if key in row and meta.get(key)!=row[key]:
+                            raise Gap('具体岗位口径或定位回读不同')
+                    if proof.get('src_table')!=row['src_table']:
+                        raise Gap('具体岗位正文定位回读不同')
+                    from career_positions import validate_position_proof
+                    validate_position_proof(row, proof)
+                    continue
                 n=proof.get('original_rows')
                 sample=proof.get('sample_rows')
                 if type(n)is not int or n<1 or not isinstance(sample,list)or any(type(x)is not int or not 2<=x<=n+1 for x in sample)or len(set(sample))<min(n,max(3,math.ceil(n*.03))):
@@ -588,13 +608,13 @@ def text_summary(result):
     lines = [f"{q['region']}｜{q['direction']}｜{stage}：缓存{len(result['cache'])}项，候选{sum(len(x['rows']) for x in result['candidates'])}行。",
              ('已通过候选验收并发布。'if result['published']else'尚未发布。')+'格式两读和抽核不等于仍在招聘或本人合格。']
     for row in result['cache']:
-        lines.append(f"{row['year']} {row['metadata']['position']} {FIELDS[row['field']]}：{row['value'] or '来源未提供'}｜官方｜{row['publisher']}｜{row['source_id']}")
+        lines.append(f"{row['year']} {row['metadata'].get('year_scope','')} {row['metadata']['position']} {FIELDS[row['field']]}：{row['value'] or '来源未提供'}｜官方｜{row['publisher']}｜{row['source_id']}")
         lines.append('来源：'+row['landing_url'])
     for bundle in result['candidates']:
         source = bundle['source']
         lines.append(f"来源：{source['publisher']}｜{source['title']}｜{source['landing_url']}")
         for row in bundle['rows']:
-            lines.append(f"{row['year']} {row['region']} {row['position']}："+'；'.join(FIELDS[k]+'：'+(v or '来源未提供') for k,v in row['fields'].items()))
+            lines.append(f"{row['year']} {row.get('year_scope','')} {row['region']} {row['position']}："+'；'.join(FIELDS[k]+'：'+(v or '来源未提供') for k,v in row['fields'].items()))
     for gap in result['gaps']:
         lines.append('未取得：'+gap['reason']+'｜'+gap['url'])
     for cell in result.get('missing', []):
