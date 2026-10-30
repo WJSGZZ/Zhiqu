@@ -390,6 +390,10 @@ class AppendixReadability(unittest.TestCase):
         case=SimpleNamespace(data={'profile_parse.json':{'fields':[{'field':'均分或排名'}]}})
         self.assertEqual(verify_report.readable_path(case,'p','/fields/0/value/gpa'),'均分或排名（均分或绩点原答）')
 
+    def test_work_boundary_labels_keep_the_original_acceptance_scope(self):
+        import verify_report
+        self.assertEqual(verify_report.readable_value({'hard_limits':['工作与生活平衡'],'night_shift':'不能接受','sales_target':'不能接受','overtime':'偶尔加班','travel':'偶尔可以'}),'工作底线 工作与生活平衡；夜班 不能接受；营销任务 不能接受；加班 偶尔加班；出差 偶尔可以')
+
     def test_shared_conditions_and_table_rows_print_once_each(self):
         html_ = report.verification_appendix_html({
             'shared_conditions': ['挂科先处理'],

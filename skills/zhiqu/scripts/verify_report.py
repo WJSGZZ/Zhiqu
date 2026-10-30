@@ -144,6 +144,7 @@ DATE_LABELS={'checkpoint':'下一个个人检查点','previous':'上一次检查
 SUB_LABELS={'reserve':'备用金','other':'其他','housing':'住房','higher_housing':'较高住房情景','cash':'现金','living':'生活费','higher_living':'较高生活费情景',
             'major_name':'专业名称','major_code':'代码与辅修信息','job_stage':'求职进度','has_offer':'录用通知',
             'rank_in_major':'专业排名原答',
+            'hard_limits':'工作底线','night_shift':'夜班','sales_target':'营销任务','overtime':'加班','travel':'出差',
             'mean':'均分','cet4':'四级','comprehensive_rank':'综合排名','comprehensive_count':'综合排名总人数','academic_rank':'学业排名','academic_count':'学业排名总人数',
             'fail':'挂科情况','fail_count':'没过的门数','scale':'满分','annual':'年度预算','sustainable_low':'可持续投入下限','sustainable_high':'可持续投入上限'}
 # 本人填写的复合答案印成一句中文，不印 JSON（2026-10-20 小洋报告把挂科印成了 {"fail": …}）。

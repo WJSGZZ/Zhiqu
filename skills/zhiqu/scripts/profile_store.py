@@ -42,6 +42,8 @@ FIELD_MAP = {
 # These free-form answers are optional, verbatim projections, never score/status parsers.
 GRAD_EXAM_ANSWERS = (('考研经历原答','ky_history'),('备考进度原答','ky_prep'),('可比模考原答','mock_detail'),('考研目标原答','ky_target'))
 FIELD_MAP['grad'].extend((name,'self_judgment',qid) for name,qid in GRAD_EXAM_ANSWERS)
+CAREER_WORK_BOUNDARIES = ('hard_limits','night_shift','sales_target','overtime','travel')
+FIELD_MAP['career'].append(('工作边界原答','constraint',*CAREER_WORK_BOUNDARIES))
 
 
 def sha(raw):return hashlib.sha256(raw.encode('utf-8')).hexdigest()
@@ -410,6 +412,7 @@ def build_parse(raw,kind):
     for name,category,*keys in FIELD_MAP[kind]:
         # Optional extension: append only when this question was in the submission.
         if kind=='grad' and (name=='最迟开始挣钱年份' or name in dict(GRAD_EXAM_ANSWERS)) and keys[0] not in given:continue
+        if kind=='career' and name=='工作边界原答' and not any(k in given for k in keys):continue
         refs=list(dict.fromkeys(mapping.mapping.get(k,k) for k in keys));values={k:given[k]['a'] for k in refs if k in given and 'a' in given[k]}
         if name=='优先级' and data['rank']:values={'priority':data['rank']}
         # A refused/unknown answer is retained verbatim but cannot become a known constraint.
@@ -430,6 +433,11 @@ def build_parse(raw,kind):
             # A supplied account is known only as the person's words; it does not
             # prove exam completion, subject comparability or registration success.
             known={k:v for k,v in known.items() if isinstance(v,str) and v.strip() and v.strip().rstrip('。.!！?？') not in unknown|{'不愿透露','拒绝回答','暂时不想说','暂不提供'} and not _income_unresolved(v)}
+        if kind=='career' and name=='工作边界原答':
+            def boundary_known(v):
+                if isinstance(v,list):return any(boundary_known(x) for x in v)
+                return isinstance(v,str) and bool(v.strip()) and v.strip().rstrip('。.!！?？') not in unknown|{'不愿透露','拒绝回答','暂时不想说','暂不提供'} and not _income_unresolved(v)
+            known={k:v for k,v in known.items() if boundary_known(v)}
         value=next(iter(known.values())) if len(known)==1 else known if known else None
         fields.append({'field':name,'category':category,'status':'given' if known else 'unknown','value':value,
                        'quote':json.dumps(values,ensure_ascii=False) if values else '',
@@ -500,7 +508,7 @@ def alignment_errors(case_dir):
         if parsed.get('source')!=expected['source']:return ['画像已更新，须优先采用最新存档并重新解析，不能沿用旧作答']
         fields={f['field']:f for f in parsed.get('questionnaire_fields',parsed.get('fields',[]))}
         for f in expected['fields']:
-            if f['field'] in dict(GRAD_EXAM_ANSWERS):
+            if f['field'] in (*dict(GRAD_EXAM_ANSWERS),'工作边界原答'):
                 # The checklist consumes analysis fields, not only the frozen
                 # questionnaire projection. Audit both, including duplicate names.
                 copies=[row for group in ('fields','questionnaire_fields') for row in parsed.get(group,[]) if isinstance(row,dict) and row.get('field')==f['field']]
@@ -517,7 +525,7 @@ def alignment_errors(case_dir):
                     and f['field'] not in fields and 'checksum' not in data
                     and isinstance(parsed.get('questionnaire_fields'),list)):
                 continue
-            if (f['field'] in dict(GRAD_EXAM_ANSWERS) and f['field'] not in fields
+            if (f['field'] in (*dict(GRAD_EXAM_ANSWERS),'工作边界原答') and f['field'] not in fields
                     and 'checksum' not in data and isinstance(parsed.get('questionnaire_fields'),list)):
                 continue # Old migrated reports retain their frozen analysis; do not force a rewrite.
             if fields.get(f['field'],{}).get('value')!=f['value'] or fields.get(f['field'],{}).get('status')!=f['status']:return ['结构化画像字段与原始作答不一致：'+f['field']]

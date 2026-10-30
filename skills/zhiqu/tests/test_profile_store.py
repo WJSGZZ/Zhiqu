@@ -439,6 +439,36 @@ class ProfileStore(unittest.TestCase):
                 store.dump(folder/'profile_parse.json',parsed)
                 self.assertTrue(store.alignment_errors(folder),action)
 
+    def test_career_work_boundaries_append_verbatim_without_strengthening(self):
+        answers={'hard_limits':['工作与生活平衡'],'night_shift':'不能接受','overtime':'偶尔加班','sales_target':'不能接受','travel':'偶尔可以'}
+        old=store.build_parse(profile(kind='career',items=[]),'career')
+        parsed=store.build_parse(profile(kind='career',items=[{'id':k,'q':k,'a':v}for k,v in answers.items()]),'career')
+        self.assertEqual(parsed['fields'][:13],old['fields'])
+        f=parsed['fields'][-1];self.assertEqual(f['field'],'工作边界原答');self.assertEqual(f['category'],'constraint')
+        self.assertEqual(f['value'],answers);self.assertEqual(json.loads(f['quote']),answers);self.assertFalse(f['confirmed'])
+        self.assertEqual(len(old['fields']),13)
+
+    def test_career_work_boundary_refusals_do_not_become_constraints(self):
+        for answer in ['拒答','不想说','不清楚','暂时不想说，后面再谈','暂不提供','不了解。',' 不了解 ']:
+            p=store.build_parse(profile(kind='career',items=[{'id':'night_shift','q':'模拟夜班题','a':answer}]),'career')
+            f=p['fields'][-1];self.assertEqual(f['status'],'unknown');self.assertIsNone(f['value']);self.assertEqual(json.loads(f['quote']),{'night_shift':answer})
+
+    def test_career_boundary_cannot_hide_changed_or_deleted_analysis_copy(self):
+        data=document(kind='career',items=[{'id':'night_shift','q':'模拟夜班','a':'不能接受','status':'已答'}]);data.update(collapsed=[],counts={'visible':1,'answered':1});data['checksum']=store.checksum(data)
+        case='2027-QZ-0001';store.new_id(self.root,'career',2027,'simulation');store.ingest(self.root,case,json.dumps(data,ensure_ascii=False));folder=self.root/case;store.dump(folder/'case.json',{'case_id':case,'kind':'career'});store.prepare(folder)
+        original=json.loads((folder/'profile_parse.json').read_text())
+        for action in ['change','delete']:
+            p=json.loads(json.dumps(original));p['questionnaire_fields']=json.loads(json.dumps(original['fields']))
+            if action=='change':next(f for f in p['fields']if f['field']=='工作边界原答')['value']='可以夜班'
+            else:p['fields']=[f for f in p['fields']if f['field']!='工作边界原答']
+            store.dump(folder/'profile_parse.json',p);self.assertTrue(store.alignment_errors(folder))
+
+    def test_career_boundary_reaches_actual_operator_checks(self):
+        from operator_check import checklist_groups
+        parsed=store.build_parse(profile(kind='career',items=[{'id':'night_shift','q':'模拟夜班','a':'不能接受'}]),'career');folder=self.folder()
+        for name,obj in [('case.json',{'case_id':self.case,'kind':'career','context':{'as_of':'2026-10-30'},'calculation_plan':{'engine':'registered_operations','operations':[]}}),('profile_parse.json',parsed),('evidence.json',{'items':[],'source_groups':[]}),('judgment.json',{'presentation':{}}),('calculations.json',{}),('candidates.json',{})]:store.dump(folder/name,obj)
+        groups,_,_=checklist_groups(folder);checks=next(g for g in groups if g['id']=='PROFILE')['checks'];self.assertTrue(any('不能接受' in c and '工作边界原答' in c for c in checks))
+
     def test_parse_json_returns_exact_data_and_supports_old_data_line(self):
         data = document(items=[{'id': 'money', 'q': '年度预算', 'a': '不想说'}])
         data['derived'] = {'bazi': '模拟排盘文字，不用于现实资格'}
