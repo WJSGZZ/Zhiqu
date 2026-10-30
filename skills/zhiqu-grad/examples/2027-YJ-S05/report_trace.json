@@ -17,7 +17,7 @@
   "contract_sha256": "b805904d0c51a3684ce92ee68d71e57f416749bf20fbf6c5ef0604747f005a07",
   "tool_sha256": {
     "planning_report.py": "32ca898bbb421d198bdb1d35c9215014d0642ffdf5d08eb88f4030c5f050ddf6",
-    "planning_workflow.py": "9d839c2310d28396340d75733ade67bec8b7067055dd29da218aeec4ab37283a",
+    "planning_workflow.py": "76f2cbf4a68ad76eb9ac355e9f592622a02924203bbc8bbc133a0ba2657cd18a",
     "operator_check.py": "d99826c1cae9514c665edb0b1b6155ea99a0bce19b99a919b9ada81e0b93c0a1",
     "check_demos.py": "67d4edc1cd737beeb6729783a736e667a97c12d8f7de2de673632d9d5c3370b8",
     "report.py": "c1a2e82e6ce5fb9fefd866e14679a24f1ad5dcdcf56e2bdc1d578668d10e1cd8",
@@ -1810,6 +1810,25 @@
         }
       },
       "previous_trace_sha256": "6b87b03a5c8641af7dd85562e8fc47967d54115ea1ff9925404a64e728d3bcd2",
+      "assembled_markdown_sha256": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
+      "appendix_materials_unchanged": true,
+      "original_artifacts": {
+        "report.md": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
+        "report.html": "638a2167d28b25b2df93798c23955d7c7cc78c32e3d11d5e77ed04a5828496c7",
+        "2027-YJ-S05-report.pdf": "cadd442459edc636ad53d7302e69bcb0ef6b68a7bf6b08557687443c15ddb0fc"
+      }
+    },
+    {
+      "date": "2026-10-30",
+      "kind": "career_input_consumption_compatibility",
+      "reason": "新增新封存求职关键原答的实际消费门禁；历史无校验码迁移允许保留冻结分析，新老正文与材料分别比对；逐份组装正文、核对材料及PDF字节均未变。仅兼容流程指纹，不重新认证官方事实或原审批。",
+      "changed_tools": {
+        "planning_workflow.py": {
+          "before": "9d839c2310d28396340d75733ade67bec8b7067055dd29da218aeec4ab37283a",
+          "after": "76f2cbf4a68ad76eb9ac355e9f592622a02924203bbc8bbc133a0ba2657cd18a"
+        }
+      },
+      "previous_trace_sha256": "8d65b78c71c57fea90928e738a387dcc30f272a07b08d9034e2f3e3abc17e6f8",
       "assembled_markdown_sha256": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
       "appendix_materials_unchanged": true,
       "original_artifacts": {
