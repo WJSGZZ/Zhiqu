@@ -118,6 +118,7 @@ class CareerDemandTests(unittest.TestCase):
         rows=[dict(year=2026,field=f)for f in request()['layers']]
         r=m.run_request(request(),lookup_fn=lambda *_:rows,fetch=lambda *_:self.fail('cache re-fetched'))
         self.assertEqual(r['missing'],[])
+        self.assertIn('已复用库内',m.text_summary(dict(r,cache=[dict(year=2026,metadata={'position':'合成实习'},field='pay',value=None,publisher='合成单位',source_id='s',landing_url='https://example.edu.cn')])))
 
     def test_unregistered_publisher_cannot_impersonate(self):
         q=request();q['entries']=[dict(url='https://www.ey.com/x',publisher='假单位')]

@@ -611,7 +611,7 @@ def text_summary(result):
     q = result['request']
     stage={'internship':'在校实习','graduate':'应届校招'}[q['stage']]
     lines = [f"{q['region']}｜{q['direction']}｜{stage}：缓存{len(result['cache'])}项，候选{sum(len(x['rows']) for x in result['candidates'])}行。",
-             ('已通过候选验收并发布。'if result['published']else'尚未发布。')+'格式两读和抽核不等于仍在招聘或本人合格。']
+             ('已通过候选验收并发布。'if result['published']else'已复用库内核验记录，本次无新发布。'if result['cache']and not result['candidates']else'候选尚未发布。'if result['candidates']else'未形成可发布候选。')+'格式两读和抽核不等于仍在招聘或本人合格。']
     for row in result['cache']:
         lines.append(f"{row['year']} {row['metadata'].get('year_scope','')} {row['metadata']['position']} {FIELDS[row['field']]}：{row['value'] or '来源未提供'}｜官方｜{row['publisher']}｜{row['source_id']}")
         lines.append('来源：'+row['landing_url'])
