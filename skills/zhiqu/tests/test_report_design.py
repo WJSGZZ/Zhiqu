@@ -22,6 +22,9 @@ class PublicationGateTests(unittest.TestCase):
         self.assertNotIn('class="short-label">虚构大学',doc)
         self.assertEqual(report.td('未过'),'<td>未过</td>')
         self.assertIn("class='num'",report.td('23,456',short_label=True))
+        rep['hindsight']['columns']=['类别','结果']
+        rep['hindsight']['table']=[['机会','待核实']]
+        self.assertNotIn('<td class="short-label">',report.build(rep,None))
 
     def test_long_url_in_body_or_split_across_inline_nodes_is_rejected(self):
         url = 'https://example.edu.cn/' + 'a' * 45

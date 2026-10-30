@@ -1103,6 +1103,40 @@
         "file": "skills/zhiqu/tests/test_planning_workflow.py",
         "basis": "专科求职完整模拟暴露并以合成最小输入独立复现；不推断全行业资格，不认证官方原件。"
       }
+    },
+    {
+      "id": "report-repeated-short-table-labels",
+      "domain": "报告",
+      "test": "test_check_layout.TestCheckLayout.test_repeated_two_character_table_cells_fail",
+      "input_fixture": {
+        "file": "test_check_layout.py",
+        "symbols": [
+          "TestCheckLayout.test_repeated_two_character_table_cells_fail"
+        ]
+      },
+      "expected": "同表不同格短标签各自两字纵排要拦；不能把任意两个单字、两表或单格当坏表。",
+      "provenance": {
+        "commit": "78dd370",
+        "file": "skills/zhiqu/tests/test_check_layout.py",
+        "basis": "专科稿独立视觉记录引出的合成复现，兼查到R01实际末列缺陷；不冒称已覆盖旧专科原工件。"
+      }
+    },
+    {
+      "id": "report-hindsight-result-nowrap",
+      "domain": "报告",
+      "test": "test_report_design.PublicationGateTests.test_hindsight_short_result_labels_stay_whole_without_changing_values",
+      "input_fixture": {
+        "file": "test_report_design.py",
+        "symbols": [
+          "PublicationGateTests.test_hindsight_short_result_labels_stay_whole_without_changing_values"
+        ]
+      },
+      "expected": "回溯表结果短词保持完整，未过/过线原字不改，不改预测或事后结论。",
+      "provenance": {
+        "commit": "78dd370",
+        "file": "skills/zhiqu/tests/test_report_design.py",
+        "basis": "专科稿独立视觉记录引出的合成复现，兼查到R01实际末列缺陷；不冒称已覆盖旧专科原工件。"
+      }
     }
   ],
   "not_in_this_suite": [
