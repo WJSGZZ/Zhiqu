@@ -381,6 +381,15 @@ class AppendixReadability(unittest.TestCase):
         self.assertEqual(verify_report.readable_value(value),'专业名称 软件工程；代码与辅修信息 专业代码或学科门类 080902')
         self.assertEqual(verify_report.readable_value({'job_stage':'还没开始','has_offer':'没有'}),'求职进度 还没开始；录用通知 没有')
 
+    def test_current_grade_composite_keeps_marks_and_ranking_distinct(self):
+        import verify_report
+        self.assertEqual(verify_report.readable_value({'gpa':'82/100','rank_in_major':'未核实'}),'均分或绩点原答 82/100；专业排名原答 未核实')
+        self.assertEqual(verify_report.readable_value({'gpa':'3.2/4','rank_in_major':None}),'均分或绩点原答 3.2/4')
+        self.assertEqual(verify_report.readable_value({'gpa':'82','rank':'未知'}),'其他 82；其他 未知')
+        from types import SimpleNamespace
+        case=SimpleNamespace(data={'profile_parse.json':{'fields':[{'field':'均分或排名'}]}})
+        self.assertEqual(verify_report.readable_path(case,'p','/fields/0/value/gpa'),'均分或排名（均分或绩点原答）')
+
     def test_shared_conditions_and_table_rows_print_once_each(self):
         html_ = report.verification_appendix_html({
             'shared_conditions': ['挂科先处理'],

@@ -143,6 +143,7 @@ DATE_LABELS={'checkpoint':'下一个个人检查点','previous':'上一次检查
              'year_end':'年底复核','exam_month':'考试月份','graduate':'毕业时间','term_end':'学期末','summer':'暑假','spring':'春季','recommend':'推免时间','entry':'入学时间'}
 SUB_LABELS={'reserve':'备用金','other':'其他','housing':'住房','higher_housing':'较高住房情景','cash':'现金','living':'生活费','higher_living':'较高生活费情景',
             'major_name':'专业名称','major_code':'代码与辅修信息','job_stage':'求职进度','has_offer':'录用通知',
+            'rank_in_major':'专业排名原答',
             'mean':'均分','cet4':'四级','comprehensive_rank':'综合排名','comprehensive_count':'综合排名总人数','academic_rank':'学业排名','academic_count':'学业排名总人数',
             'fail':'挂科情况','fail_count':'没过的门数','scale':'满分','annual':'年度预算','sustainable_low':'可持续投入下限','sustainable_high':'可持续投入上限'}
 # 本人填写的复合答案印成一句中文，不印 JSON（2026-10-20 小洋报告把挂科印成了 {"fail": …}）。
@@ -160,6 +161,10 @@ def readable_value(value):
         for k,v in value.items():
             if v in (None,''):continue
             shown=readable_value(v)
+            # 当前问卷的成绩/排名复合题；旧 gpa/rank 自由格式保持原呈现。
+            if k=='gpa' and 'rank_in_major' in value:
+                parts.append('均分或绩点原答 '+shown)
+                continue
             parts.append(VALUE_FORMATS[k].format(shown) if k in VALUE_FORMATS else (shown if k in ('fail','value','text') else SUB_LABELS.get(k,k if re.search(r'[\u3400-\u9fff]',str(k)) else '其他')+' '+shown))
         return '；'.join(parts)
     if isinstance(value,(list,tuple)):return '；'.join(readable_value(v) for v in value)
@@ -179,7 +184,7 @@ def readable_path(case, kind, path):
         parts=path.lstrip('/').split('/')
         try:name=ptr(case.data['profile_parse.json'],'/'+'/'.join(parts[:2])).get('field',path)
         except Exception:name=path
-        tail=[SUB_LABELS.get(x,x) for x in parts[3:]] if len(parts)>3 else []
+        tail=[('均分或绩点原答' if x=='gpa' else SUB_LABELS.get(x,x)) for x in parts[3:]] if len(parts)>3 else []
         return name+('（'+'，'.join(tail)+'）' if tail else '')
     if path in CASE_LABELS:return CASE_LABELS[path]
     if path.startswith('/context/personal_dates/'):
@@ -238,9 +243,11 @@ def calculation_display_values(numbers):
 
 
 def planning_numbers_heading(evidence):
-    """A personal/scenario-only report must not imply official numeric evidence."""
-    if any(e.get('grade')=='官方' and e.get('status')=='verified' for e in evidence.values()):
-        return None  # Preserve existing mixed/official report presentation.
+    """Qualitative official context does not certify personal/scenario numbers."""
+    if any(e.get('grade')=='官方' and e.get('status')=='verified'
+           and e.get('value') is not None and not isinstance(e.get('value'),bool)
+           and NUMBER.search(str(e['value'])) for e in evidence.values()):
+        return None  # A registered official numeric/date value is actually available.
     return '登记出处与条件计算'
 
 
@@ -377,7 +384,7 @@ def planning_materials(case,trace,binding,warning=None):
     shared=case.data['judgment.json'].get('recommendation',{}).get('conditions',[])
     materials = {'case_info':case_info(case.case,binding,warning),'personal_inputs':personal,'numbers':numbers+formulas,'limitations':limitations,'gaps':gaps,
             'shared_conditions':text_items(shared),'qualitative':qualitative}
-    heading=planning_numbers_heading(evidence)
+    heading=planning_numbers_heading({r['evidence_id']:evidence[r['evidence_id']] for r in numbers if r.get('evidence_id')})
     if heading:materials['numbers_heading']=heading
     return materials
 

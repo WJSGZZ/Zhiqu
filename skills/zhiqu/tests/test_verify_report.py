@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import sys
 import tempfile
+from types import SimpleNamespace
 import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
@@ -19,6 +20,39 @@ def profile(stamp='2026-10-19T12:00:00+08:00'):
     return {'zhiqu':'grad','schema':1,'问卷':'知衢 · 读研 · 模拟问卷','form':'fixture-form','filled_at':stamp,
             'sections':[{'title':'模拟登记','items':[{'id':'budget','q':'预算（模拟）','a':'120'}]}],
             'rank':[],'derived':{},'未填的必答题':[]}
+
+
+class PlanningMaterialsHeading(unittest.TestCase):
+    def test_unused_official_number_does_not_relabel_scenario_table(self):
+        evidence = {
+            'O1': {'id':'O1','claim':'模拟官方定性条件','grade':'官方',
+                   'status':'verified','value':None,'excerpt':'须具有本科层次学历',
+                   'source':{'organization':'模拟学校','url':'https://example.edu.cn/qualitative'}},
+            'O2': {'id':'O2','claim':'未引用的模拟费用','grade':'官方',
+                   'status':'verified','value':0,'excerpt':'模拟费用为 0 元',
+                   'source':{'organization':'模拟学校','url':'https://example.edu.cn/fee'}}}
+        case_data = {'case_id':'synthetic-heading','report_input_usage':[
+            {'pointer':'/fields/0/value','sections':['01']}],
+            'calculation_plan':{'engine':'registered_operations','operations':[
+                {'output':'scenario','label':'模拟情景合计','algorithm':'sum','inputs':[120]}]}}
+        data = {'profile_parse.json':{'fields':[{'field':'模拟预算','status':'given','value':120}]},
+                'evidence.json':{'items':list(evidence.values())},
+                'calculations.json':{'scenario':120},
+                'judgment.json':{'recommendation':{'conditions':['模拟条件待核实']}}}
+        node = {'type':'paragraph','content':{'text':'{{e:O1#/excerpt}}'},'evidence_refs':['O1']}
+        case = SimpleNamespace(case=case_data,data=data,evidence=evidence,
+                               nodes=lambda: {'01':[{'ref':'synthetic'}],'04':[],'09':[],'10':[]},
+                               get_node=lambda ref: node,resolve=lambda kind,path:120)
+        trace = [{'ref':'{{k:/budget/take_home_assumption}}','display':'120','location':'01.body'},
+                 {'ref':'{{c:/scenario}}','display':'120','location':'01.body'}]
+        materials = verify.planning_materials(case,trace,{'sha256':'synthetic'})
+        self.assertEqual(materials.get('numbers_heading'),'登记出处与条件计算')
+        self.assertEqual([r['evidence_id'] for r in materials['qualitative']],['O1'])
+        self.assertTrue(all(not r.get('evidence_id') for r in materials['numbers']))
+        trace.append({'ref':'{{e:O2}}','display':'0','location':'01.body'})
+        materials = verify.planning_materials(case,trace,{'sha256':'synthetic'})
+        self.assertNotIn('numbers_heading',materials)
+        self.assertTrue(any(r.get('evidence_id')=='O2' for r in materials['numbers']))
 
 
 @unittest.skipIf(pymupdf is None, 'PDF tests require the PDF renderer dependency PyMuPDF')
@@ -86,9 +120,18 @@ class VerifyDeliveredPDF(unittest.TestCase):
         html=report.verification_appendix_html(self.materials)
         self.assertIn('<h4>登记出处与条件计算</h4>',html)
         self.assertNotIn('<h4>官方出处与数字</h4>',html)
-        self.assertIsNone(verify.planning_numbers_heading({'O1':{'grade':'官方','status':'verified'}}))
+        self.assertIsNone(verify.planning_numbers_heading({'O1':{'grade':'官方','status':'verified','value':0}}))
         self.materials.pop('numbers_heading')
         self.assertIn('<h4>官方出处与数字</h4>',report.verification_appendix_html(self.materials))
+
+    def test_official_qualitative_context_does_not_relabel_scenario_numbers(self):
+        evidence={'O1':{'grade':'官方','status':'verified','value':None},
+                  'S1':{'grade':'推测','status':'verified','value':0}}
+        self.assertEqual(verify.planning_numbers_heading(evidence),'登记出处与条件计算')
+        evidence['O1']['value']=True
+        self.assertEqual(verify.planning_numbers_heading(evidence),'登记出处与条件计算')
+        evidence['O1']['value']='2026-10-30'
+        self.assertIsNone(verify.planning_numbers_heading(evidence))
 
     def test_normal_pdf_recomputes_extracts_and_lists_online_sources(self):
         target = self.root/'extracted'
