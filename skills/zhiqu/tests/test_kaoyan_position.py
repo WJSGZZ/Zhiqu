@@ -90,7 +90,8 @@ class KaoyanPositionTests(unittest.TestCase):
     def test_invalid_statistics_cannot_create_a_tier(self):
         for field, value in [('n', 0), ('n', 2.5), ('n', True), ('n', '80'),
                              ('q1', float('nan')), ('q3', float('inf')),
-                             ('median', True), ('min', -1), ('q1', 500), ('max', 300)]:
+                             ('median', True), ('min', -1), ('q1', 500), ('max', 300),
+                             ('n', 10**400), ('q3', 10**400)]:
             with self.subTest(field=field, value=value):
                 a = dist(355, 365); a[field] = value
                 r = place(MOCK, program(a, dist(352, 360)))
@@ -105,12 +106,13 @@ class KaoyanPositionTests(unittest.TestCase):
                 self.assertEqual(r['untiered_reason'], '分布缺失')
 
     def test_single_subject_risk_survives_partial_statistics(self):
-        a = dist(355, 365); a['q1'] = None; a['q3'] = None
-        r = place(MOCK, program(a, singles={'英语一': 70}))
-        self.assertEqual(r['tier'], '冒险')
-        self.assertTrue(any('单科低于' in reason for reason in r['reasons']))
-        self.assertNotIn('2026', r['positions'])
-        self.assertEqual(r['gaps']['2026']['retest_total'], 42)
+        for missing in [None, 10**400]:
+            a = dist(355, 365); a['q1'] = missing; a['q3'] = missing
+            r = place(MOCK, program(a, singles={'英语一': 70}))
+            self.assertEqual(r['tier'], '冒险')
+            self.assertTrue(any('单科低于' in reason for reason in r['reasons']))
+            self.assertNotIn('2026', r['positions'])
+            self.assertEqual(r['gaps']['2026']['retest_total'], 42)
 
 if __name__ == '__main__':
     unittest.main()

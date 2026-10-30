@@ -32,7 +32,10 @@ def distribution_issues(admitted):
     issues = []
     for key, label in labels.items():
         v = admitted.get(key)
-        valid = isinstance(v, (int, float)) and not isinstance(v, bool) and math.isfinite(v) and v >= 0
+        try:
+            valid = isinstance(v, (int, float)) and not isinstance(v, bool) and math.isfinite(v) and v >= 0
+        except OverflowError:
+            valid = False
         if key == 'n':
             valid = valid and v >= 1 and int(v) == v
         if not valid:
