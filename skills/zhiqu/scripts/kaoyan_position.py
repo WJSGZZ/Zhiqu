@@ -19,7 +19,29 @@
 """
 import argparse
 import json
+import math
 import sys
+
+
+def distribution_issues(admitted):
+    """缺失和无效摘要都不补值，也不把已知不完整年份当作没有该年。"""
+    if not isinstance(admitted, dict):
+        return ['分布不是统计表']
+    labels = {'n': '人数', 'min': '最低分', 'q1': '下四分位',
+              'median': '中位数', 'q3': '上四分位', 'max': '最高分'}
+    issues = []
+    for key, label in labels.items():
+        v = admitted.get(key)
+        valid = isinstance(v, (int, float)) and not isinstance(v, bool) and math.isfinite(v) and v >= 0
+        if key == 'n':
+            valid = valid and v >= 1 and int(v) == v
+        if not valid:
+            issues.append(label + '缺失或无效')
+    if not issues:
+        values = [admitted[k] for k in ('min', 'q1', 'median', 'q3', 'max')]
+        if values != sorted(values):
+            issues.append('分位数顺序无效')
+    return issues
 
 
 def position(total, admitted):
@@ -58,11 +80,18 @@ def place(mock, program):
     retest = latest.get('retest') or {}
     weak = [f"{s} {mock['singles'][s]:g}（{years[0]} 年单科线 {line:g}）"
             for s, line in (retest.get('singles') or {}).items() if s in mock.get('singles', {}) and mock['singles'][s] < line]
+    adm_years = []
+    issues = {}
     for y in years[:2]:
         adm = program['years'][y].get('admitted')
-        if adm:
-            out['positions'][y] = position(mock['total'], adm)
-            out['gaps'][y] = {k: round(mock['total'] - adm[k], 1) for k in ('min', 'q1', 'median', 'q3')}
+        if adm is not None:
+            adm_years.append(y)
+            missing = distribution_issues(adm)
+            if missing:
+                issues[y] = missing
+            else:
+                out['positions'][y] = position(mock['total'], adm)
+                out['gaps'][y] = {k: round(mock['total'] - adm[k], 1) for k in ('min', 'q1', 'median', 'q3')}
         line = (program['years'][y].get('retest') or {}).get('total')
         if line is not None:
             out['gaps'].setdefault(y, {})['retest_total'] = round(mock['total'] - line, 1)
@@ -70,11 +99,15 @@ def place(mock, program):
         out['tier'] = '冒险'
         out['reasons'].append('单科低于复试单科线：' + '；'.join(weak))
         return out
-    adm_years = [y for y in years[:2] if program['years'][y].get('admitted')]
     if not adm_years:
         out['untiered_reason'] = '分布缺失'
         line = retest.get('total')
         out['reasons'].append('只有复试线、没有拟录取分布：' + (f'总分比 {years[0]} 年复试线高 {mock["total"] - line:g} 分' if line is not None else '复试线也未取到') + '；只作参照，不定档')
+        return out
+    if issues:
+        out['untiered_reason'] = '分布缺失'
+        out['reasons'].extend(f'{y} 年拟录取分布：' + '、'.join(gaps) + '；不填补统计值，不定档'
+                              for y, gaps in issues.items())
         return out
     sizes = {y: program['years'][y]['admitted'].get('n') for y in adm_years}
     tiny = [y for y, n in sizes.items() if n is not None and n < 5]

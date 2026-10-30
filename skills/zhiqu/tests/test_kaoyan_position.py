@@ -69,5 +69,48 @@ class KaoyanPositionTests(unittest.TestCase):
         p['subjects'] = []
         self.assertEqual(place(MOCK, p)['untiered_reason'], '分布缺失')
 
+    def test_partial_distribution_is_a_gap_not_a_crash(self):
+        for year in ['2026', '2025']:
+            for field in ['n', 'min', 'q1', 'median', 'q3', 'max']:
+                for missing in ['absent', None]:
+                    with self.subTest(year=year, field=field, missing=missing):
+                        p = program(dist(355, 365), dist(352, 360))
+                        adm = p['years'][year]['admitted']
+                        if missing == 'absent':
+                            adm.pop(field)
+                        else:
+                            adm[field] = None
+                        r = place(MOCK, p)
+                        self.assertIsNone(r['tier'])
+                        self.assertEqual(r['untiered_reason'], '分布缺失')
+                        self.assertNotIn(year, r['positions'])
+                        self.assertEqual(r['gaps'][year], {'retest_total': MOCK['total'] - p['years'][year]['retest']['total']})
+                        self.assertTrue(any(year in reason for reason in r['reasons']))
+
+    def test_invalid_statistics_cannot_create_a_tier(self):
+        for field, value in [('n', 0), ('n', 2.5), ('n', True), ('n', '80'),
+                             ('q1', float('nan')), ('q3', float('inf')),
+                             ('median', True), ('min', -1), ('q1', 500), ('max', 300)]:
+            with self.subTest(field=field, value=value):
+                a = dist(355, 365); a[field] = value
+                r = place(MOCK, program(a, dist(352, 360)))
+                self.assertIsNone(r['tier'])
+                self.assertEqual(r['untiered_reason'], '分布缺失')
+
+    def test_empty_or_non_mapping_statistics_remain_a_gap(self):
+        for a in [{}, [], '未公布', 1]:
+            with self.subTest(admitted=a):
+                r = place(MOCK, program(a, dist(352, 360)))
+                self.assertIsNone(r['tier'])
+                self.assertEqual(r['untiered_reason'], '分布缺失')
+
+    def test_single_subject_risk_survives_partial_statistics(self):
+        a = dist(355, 365); a['q1'] = None; a['q3'] = None
+        r = place(MOCK, program(a, singles={'英语一': 70}))
+        self.assertEqual(r['tier'], '冒险')
+        self.assertTrue(any('单科低于' in reason for reason in r['reasons']))
+        self.assertNotIn('2026', r['positions'])
+        self.assertEqual(r['gaps']['2026']['retest_total'], 42)
+
 if __name__ == '__main__':
     unittest.main()
