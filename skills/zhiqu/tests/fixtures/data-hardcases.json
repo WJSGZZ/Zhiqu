@@ -1382,6 +1382,42 @@
         "file": "skills/zhiqu/tests/test_kaoyan_documents.py",
         "basis": "河海混合范围PDF诊断显示已有逐页定位却在首个异常时丢弃；本提交首次引入全部页码与禁止原文回显的生产入口回归，不认证真实原件两读。"
       }
+    },
+    {
+      "id": "html-inline-heading-three-layer-scope",
+      "domain": "考研",
+      "test": "test_kaoyan_on_demand.OnDemandTests.test_inline_title_fragments_are_one_original_heading_for_each_layer",
+      "input_fixture": {
+        "file": "test_kaoyan_on_demand.py",
+        "symbols": [
+          "page",
+          "OnDemandTests.test_inline_title_fragments_are_one_original_heading_for_each_layer"
+        ]
+      },
+      "expected": "同一标题内span等分段仍保留原学校/年份/硕士/业务，三层解析和抽核通过；拟录取仅n>=3统计，不把合成通过当真实入库。",
+      "provenance": {
+        "commit": "1708f6417e54057a3443240537ffcd8a45a673a8",
+        "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
+        "basis": "按需文本适配检查中以合法合成h1内联分段复现单text节点误拒；此提交首次引入该方法，复用现有DOM取文规则，不声称具体学校已受影响。"
+      }
+    },
+    {
+      "id": "html-heading-script-style-not-evidence",
+      "domain": "考研",
+      "test": "test_kaoyan_on_demand.OnDemandTests.test_scripts_styles_comments_are_not_heading_scope_evidence",
+      "input_fixture": {
+        "file": "test_kaoyan_on_demand.py",
+        "symbols": [
+          "page",
+          "OnDemandTests.test_scripts_styles_comments_are_not_heading_scope_evidence"
+        ]
+      },
+      "expected": "标题中的script/style/comment不能补足年份或硕士复试类型，原页拒入；不回显原文，不降低其他范围和隐私门槛。",
+      "provenance": {
+        "commit": "1708f6417e54057a3443240537ffcd8a45a673a8",
+        "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
+        "basis": "按需文本适配检查中以合法合成h1内联分段复现单text节点误拒；此提交首次引入该方法，复用现有DOM取文规则，不声称具体学校已受影响。"
+      }
     }
   ],
   "not_in_this_suite": [
