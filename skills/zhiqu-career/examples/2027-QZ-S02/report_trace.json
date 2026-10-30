@@ -934,6 +934,21 @@
         "report.html": "c09e09376b812953b4bb49bcbbb656b4c14c7ef2092c0418ceb1d8516cc0898c",
         "2027-QZ-S02-report.pdf": "ba4839b1b2b5140125e3417a12b9364986a41430ed2e68ede3b508ace9eabc85"
       }
+    },
+    {
+      "date": "2026-10-30",
+      "kind": "career_demand_compatibility",
+      "reason": "具体岗位正文两读及域名依据更新；原有示例未运行新取数器。六旧例正文、核对材料、输入、数值、PDF及原审批完全相同，仅兼容流程指纹，不冒充内容新复核。",
+      "changed_tools": {},
+      "previous_trace_sha256": "a6accd98e4f0ee08d8d57fe0078a0191af608bee25224d5ef45fd2070cdf331b",
+      "assembled_markdown_sha256": "caf501508e4bb94fa89ef30378a716f496ff000289aa508092a9fec6dc852eff",
+      "rendered_body_html_sha256": "b0b006303fea94ede329e48f72fb1c650c2f80d88b68157ef392a1a23f3d7e6e",
+      "appendix_materials_unchanged_except_runtime_timestamp": true,
+      "original_artifacts": {
+        "report.md": "caf501508e4bb94fa89ef30378a716f496ff000289aa508092a9fec6dc852eff",
+        "report.html": "c09e09376b812953b4bb49bcbbb656b4c14c7ef2092c0418ceb1d8516cc0898c",
+        "2027-QZ-S02-report.pdf": "ba4839b1b2b5140125e3417a12b9364986a41430ed2e68ede3b508ace9eabc85"
+      }
     }
   ]
 }

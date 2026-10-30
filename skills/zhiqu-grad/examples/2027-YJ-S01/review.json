@@ -99,7 +99,7 @@
     "calculations.json": "cec5b3577a8d62196c2dfd606cfab91b31c421feb52a97cbdd3a5cfafcd5daf7",
     "candidates.json": "c9c5db84e727dde6ec750e534d023b4e15e7dd85e5bd1bc77110b14166f9d8ad",
     "case.json": "3b7e07dfbdad7b43a2d996e35f3c024d006a7f1ef5aa47e2f3206925f1e04d76",
-    "claim_check.json": "3f1515dd69c57645917c6dbb488457f3f10318db78e32810b65db7fd4e93b99a",
+    "claim_check.json": "c40fcc2e7ac51908772cd3d1ace3e9e328f68775d1eef938889ab3c3ca64288b",
     "directions.json": "2b68a53951ab4a8de52d7edcbabdf32d24e4570392cd70ac212c62342430a3b2",
     "evidence.json": "68c102376c2f70ee266da8f295472bdb1cfd743bce3766c206e79b4ba346db27",
     "judgment.json": "c5eb44314051a1d85b8307a79757f819c5b69fe03647180bab197757273f26ab",
@@ -110,7 +110,7 @@
     "profile_snapshot.json": "432626de4888a0d461edc284e9c475796e8d96ce33683030143dcd3f896be032",
     "report.html": "f5a9d9c3ab5198a65d516abad913651206196b851e3a087720da4374a11f2e36",
     "report.md": "5b32adb9f81133bd864cf2d979f5b6fcb4866562f99022ea7414c67342895c2a",
-    "report_trace.json": "34a53b0bb787fd62310e4ba27d67dc60c6d9d1eace737e743288fa92c5d4403c",
+    "report_trace.json": "c6e0195be2434dc977bc36c9ae57f7fbc11eaeeba66837b8d0481c333a45f8b5",
     "rules_check.json": "7b0a58159b98a98e96a17d877674c57bf2d59988aefd37a2f57d94f82580f5c2"
   },
   "checklist_update_note": "仅核查单表述及核查工具记录更新；报告与计算原件未改。保留历史复核记录，当前仍等待独立审核，不是重新批准。",
@@ -490,6 +490,15 @@
         "claim_check.json"
       ],
       "reason": "求职按需候选原文工具及流程链接；原有示例未运行新取数器。六旧例正文、核对材料、输入、数值、PDF及原审批完全相同，仅兼容流程指纹，不冒充内容新复核。"
+    },
+    {
+      "date": "2026-10-30",
+      "by": "Codex（求职按需取证流程兼容复验，非内容复核）",
+      "files": [
+        "report_trace.json",
+        "claim_check.json"
+      ],
+      "reason": "具体岗位正文两读及域名依据更新；原有示例未运行新取数器。六旧例正文、核对材料、输入、数值、PDF及原审批完全相同，仅兼容流程指纹，不冒充内容新复核。"
     }
   ],
   "regeneration": {

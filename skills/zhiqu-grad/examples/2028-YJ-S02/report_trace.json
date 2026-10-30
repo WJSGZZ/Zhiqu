@@ -887,6 +887,21 @@
         "report.html": "296229b59ab9573d77d2c03f042a8b28fb161d8e8d671c223444cffc7a2df794",
         "2028-YJ-S02-report.pdf": "76fba02c256639191391b6ddfa9479ffabed277d02c475afb13b849436e7466b"
       }
+    },
+    {
+      "date": "2026-10-30",
+      "kind": "career_demand_compatibility",
+      "reason": "具体岗位正文两读及域名依据更新；原有示例未运行新取数器。六旧例正文、核对材料、输入、数值、PDF及原审批完全相同，仅兼容流程指纹，不冒充内容新复核。",
+      "changed_tools": {},
+      "previous_trace_sha256": "140268fce961537ecfdf3d7ea823ae5bb7c8436693c9d63a78aabd5ca907a31f",
+      "assembled_markdown_sha256": "8dd0ba3d6bb84baacb05c1e5272f04bd89a83de4f111127c4e5dca4e4ebf1628",
+      "rendered_body_html_sha256": "65b1ef78c46661ecf86bc4c7c51298b345314a8786b2bad0de02c026b551043a",
+      "appendix_materials_unchanged_except_runtime_timestamp": true,
+      "original_artifacts": {
+        "report.md": "8dd0ba3d6bb84baacb05c1e5272f04bd89a83de4f111127c4e5dca4e4ebf1628",
+        "report.html": "296229b59ab9573d77d2c03f042a8b28fb161d8e8d671c223444cffc7a2df794",
+        "2028-YJ-S02-report.pdf": "76fba02c256639191391b6ddfa9479ffabed277d02c475afb13b849436e7466b"
+      }
     }
   ]
 }
