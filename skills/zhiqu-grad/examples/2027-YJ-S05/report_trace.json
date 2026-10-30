@@ -20,7 +20,7 @@
     "planning_workflow.py": "4562a217b5d94864019b8346a11bda4568e9828e4cafd0d902ae05c87547f434",
     "operator_check.py": "d99826c1cae9514c665edb0b1b6155ea99a0bce19b99a919b9ada81e0b93c0a1",
     "check_demos.py": "67d4edc1cd737beeb6729783a736e667a97c12d8f7de2de673632d9d5c3370b8",
-    "report.py": "41d37e32456f801cb673eeb9cf966894283ead1e7ca53bdcef6709039a5465f5",
+    "report.py": "c1a2e82e6ce5fb9fefd866e14679a24f1ad5dcdcf56e2bdc1d578668d10e1cd8",
     "render_report.py": "17c81658af1834fc1216d61ca3c11070934229a74d8d1175a1602a348ffd1c0f",
     "profile_store.py": "a609d0a51cb4a27713fe00c8174069fd61df44656f2b859423e4712ca58b5cf1",
     "claim_guards.py": "54bab4d942fafd148190df73cad34805538662b0a152ec5701c8a960e28dbd1d",
@@ -1680,19 +1680,19 @@
   ],
   "artifacts": {
     "report.md": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-    "report.html": "3311e44a727830d10556b77e2d5e544eecd6c2ab68f4ac84b65aa043746f3f8d",
-    "2027-YJ-S05-report.pdf": "c3510ec62f75761aadca608bbe23109ef15281c5eacbda20f883ad1c0012c85a"
+    "report.html": "638a2167d28b25b2df93798c23955d7c7cc78c32e3d11d5e77ed04a5828496c7",
+    "2027-YJ-S05-report.pdf": "cadd442459edc636ad53d7302e69bcb0ef6b68a7bf6b08557687443c15ddb0fc"
   },
   "delivery_status": "awaiting_operator_and_independent_review",
   "authoring": {
     "model": "未记录"
   },
   "renderer": {
-    "version": "sha256:e22fffeb118269cbc69dfaeab55c517da0ebf90b1db04806a0797849fde422e9",
+    "version": "sha256:89e0033dddcb4a79a03d5cfb4a98cb6702d29598f4da30797d54dfd0760b0756",
     "files_sha256": {
-      "planning_report.py": "de47b6729ae1469b9f016c65b623151cfc80744e0adc13dcbb51ee031d689b1d",
-      "render_report.py": "e7dbbef97c3478f4591f34a01ebd0c730e807a1de3c69eca4fea397434dfbc4a",
-      "report.py": "2b0c9bc736b34e44110e24b04b0a128fba0398ea099d38276e8f2b4c6201df7a"
+      "planning_report.py": "32ca898bbb421d198bdb1d35c9215014d0642ffdf5d08eb88f4030c5f050ddf6",
+      "render_report.py": "17c81658af1834fc1216d61ca3c11070934229a74d8d1175a1602a348ffd1c0f",
+      "report.py": "c1a2e82e6ce5fb9fefd866e14679a24f1ad5dcdcf56e2bdc1d578668d10e1cd8"
     }
   },
   "policy_sha256": {
@@ -1719,410 +1719,18 @@
     "verify_report.py": "e6b5191814dac954b8662107e07318a8d5b7620d51edd30d18848b6f8e7a84fe",
     "verification_calculations.py": "24c83966e3bc62642683532ca98d4318d989efd7f5e4444a9c7d9c695accea98"
   },
-  "compatibility_verifications": [
-    {
-      "date": "2026-10-25",
-      "kind": "compatibility_verification_only",
-      "reason": "本轮仅高考数据库取数和高考来源标注路径改变。以冻结旧工具与当前工具对临时副本逐字节比较组装正文、数值引用和渲染HTML均一致；原report.md、report.html、PDF及全部输入指纹不变。这里只登记当前工具兼容性复验，不是重新生成报告，不是新独立内容复核；原写作、渲染版本及历史独立评语保留。",
-      "tool_sha256": {
-        "report.py": {
-          "before": "2b0c9bc736b34e44110e24b04b0a128fba0398ea099d38276e8f2b4c6201df7a",
-          "after": "1bcfe81ae6ffb3b337c4227d3e53e89c089cede71e89b1dd60541684738058cf"
-        },
-        "check_report.py": {
-          "before": "dac356efefd14a1c48fd5665b8c84ac4d0cbd8d2a1d52fd1ebeeafcb2cea74fa",
-          "after": "22069b820a7d5b3cc35e5f6050b872f0cefde249a810af0daf7ee1a25ab11c0f"
-        }
-      },
-      "assembled_markdown_sha256": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-      "rendered_html_sha256": "9b4eb5bdf5fb56d7d60c72b50c87550cb15d8dd456668a6c61c774705009dae2",
-      "original_artifacts": {
-        "report.md": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-        "report.html": "3311e44a727830d10556b77e2d5e544eecd6c2ab68f4ac84b65aa043746f3f8d",
-        "2027-YJ-S05-report.pdf": "c3510ec62f75761aadca608bbe23109ef15281c5eacbda20f883ad1c0012c85a"
-      }
-    },
-    {
-      "date": "2026-10-25",
-      "kind": "document_comment_compatibility_only",
-      "reason": "本轮仅给报告工作流添加核实与复核期限HTML注释；移除新增注释后正文逐字节相同。代码、有效规则、组装正文、数值引用和渲染HTML未变，原报告MD/HTML/PDF及输入指纹不变。这是文档注释兼容记录与快照绑定刷新，未重新生成报告，不是新独立内容复核；原独立判定和实际渲染版本保留。",
-      "document": {
-        "path": "skills/zhiqu-shared/references/report-workflow.md",
-        "before_sha256": "d1e637fe8e90760fd31919c5a90821973894e00132dea4ab6b085d11563fdf05",
-        "after_sha256": "7063b04685705a3f154552c53ccd96627b18085c4ae8aff31c4e7c7e25cf8e42",
-        "added_comment": "<!-- 核实：2026-10-25；复核期限：2027-01-25 -->\n\n",
-        "body_byte_identical_after_removing_added_comment": true
-      },
-      "assembled_markdown_sha256": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-      "rendered_html_sha256": "9b4eb5bdf5fb56d7d60c72b50c87550cb15d8dd456668a6c61c774705009dae2",
-      "numeric_refs_unchanged": true,
-      "assembled_ref_count": 274,
-      "original_stored_ref_count": 274,
-      "original_stored_numeric_refs_sha256": "1f56e480fed7491f5703c4343ed7c076ea2d40dc9304f74da1c0bd7c5149979b",
-      "original_artifacts": {
-        "report.md": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-        "report.html": "3311e44a727830d10556b77e2d5e544eecd6c2ab68f4ac84b65aa043746f3f8d",
-        "2027-YJ-S05-report.pdf": "c3510ec62f75761aadca608bbe23109ef15281c5eacbda20f883ad1c0012c85a"
-      }
-    },
-    {
-      "date": "2026-10-27",
-      "kind": "gaokao_only_tool_compatibility",
-      "reason": "高考数据库到报告整链路实测：新增高考逐句适配、数据库来源复算、历史代码提示及模拟调研待核门禁；读研求职分支未改。对照上次兼容记录证明重新组装MD、原始HTML、数值引用数量不变，所有既有输入与MD/HTML/PDF逐字节不变。仅登记共享工具兼容复验与快照绑定，不冒充新独立语义复核；原批准人及实际渲染版本保留。",
-      "changed_tools": {
-        "report.py": {
-          "before": "1bcfe81ae6ffb3b337c4227d3e53e89c089cede71e89b1dd60541684738058cf",
-          "after": "eca4702bb22cafe760dc5252f95fd9c094b14ab9de2b30cccdbffea92524eda4"
-        },
-        "claim_check.py": {
-          "before": "9551fd4dd5e87f13f6635e1158cebf8882b7c967e59e54939dc02b024eed41b5",
-          "after": "69fd237635e27c23214fb99e915d3a31afd51bc435dc86de31ca3b7dc9c35a6b"
-        },
-        "check_report.py": {
-          "before": "22069b820a7d5b3cc35e5f6050b872f0cefde249a810af0daf7ee1a25ab11c0f",
-          "after": "282fdd1dfef99dee36b3603f7f2b01c9f65ba4460e2243666b255336b3e20189"
-        },
-        "verification_calculations.py": {
-          "before": "80e4fb8e0d247582ade885655be5f30e0c2d1cc9e19ebf59c39f3fa83823a54b",
-          "after": "5505b8d65eb9ea0d47ebf4f5321f5953ff0c711c51c615c040a2057e1dc3b3d7"
-        }
-      },
-      "assembled_markdown_sha256": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-      "rendered_html_sha256": "9b4eb5bdf5fb56d7d60c72b50c87550cb15d8dd456668a6c61c774705009dae2",
-      "assembled_ref_count": 274,
-      "original_stored_ref_count": 274,
-      "original_artifacts": {
-        "report.md": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-        "report.html": "3311e44a727830d10556b77e2d5e544eecd6c2ab68f4ac84b65aa043746f3f8d",
-        "2027-YJ-S05-report.pdf": "c3510ec62f75761aadca608bbe23109ef15281c5eacbda20f883ad1c0012c85a"
-      },
-      "numeric_refs_unchanged": true,
-      "claim_payload_unchanged": true
-    },
-    {
-      "date": "2026-10-29",
-      "kind": "gaokao_only_tool_compatibility",
-      "reason": "仅高考D级来源报告的显示/模拟缺口门禁及高考计划口径复算修补；读研求职代码路径未改。重新组装MD、原始HTML逐字节相同，输入、数字、正文、HTML及PDF指纹均未变；保留原批准人、日期与实际渲染版本，仅登记兼容复验，不冒充新内容复核。",
-      "changed_tools": {
-        "report.py": {
-          "before": "eca4702bb22cafe760dc5252f95fd9c094b14ab9de2b30cccdbffea92524eda4",
-          "after": "3605f021c68dc4d2da9d06bf342566e70fb4102da4a2cf636622ff0503586085"
-        },
-        "check_report.py": {
-          "before": "282fdd1dfef99dee36b3603f7f2b01c9f65ba4460e2243666b255336b3e20189",
-          "after": "943648b8c2b778f210550712d225c0b341d361c5c52e2fb751d4bec8d2e60917"
-        },
-        "verify_report.py": {
-          "before": "008a50716d1c523376018e4c91280469b83fa9957ce8bf755cce961141d0e596",
-          "after": "8e5383e8856e121114e311d0280344238122aa5d7ace80402d794e63a8cf38d9"
-        },
-        "verification_calculations.py": {
-          "before": "5505b8d65eb9ea0d47ebf4f5321f5953ff0c711c51c615c040a2057e1dc3b3d7",
-          "after": "24c83966e3bc62642683532ca98d4318d989efd7f5e4444a9c7d9c695accea98"
-        }
-      },
-      "assembled_markdown_sha256": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-      "rendered_html_sha256": "9b4eb5bdf5fb56d7d60c72b50c87550cb15d8dd456668a6c61c774705009dae2",
-      "assembled_ref_count": 274,
-      "original_artifacts": {
-        "report.md": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-        "report.html": "3311e44a727830d10556b77e2d5e544eecd6c2ab68f4ac84b65aa043746f3f8d",
-        "2027-YJ-S05-report.pdf": "c3510ec62f75761aadca608bbe23109ef15281c5eacbda20f883ad1c0012c85a"
-      },
-      "previous_trace_sha256": "4453b37913662c531d56e753bdcd62a5e7cca58e4a5018598462aea6a23185cb"
-    },
-    {
-      "date": "2026-10-29",
-      "kind": "judgment_text_type_compatibility",
-      "reason": "求职新模拟自查修复单句判断依据被逐字拆进核对附录：支持/反证/共享条件统一接受文字或文字列表，其他类型拒绝。现有读研求职均为列表，重新组装正文、计算和附录材料未变，旧HTML/PDF字节不变；只更新工具兼容记录，保留原审批、评分及实际渲染版本，不冒充新内容复核。",
-      "changed_tools": {
-        "planning_workflow.py": {
-          "before": "2e8d5eb40e80dbf4e349aba04c9f048d7e8a69375cc238d2f7153a939bd27f7d",
-          "after": "be9baaa4f35fa038b4fb10db84d930b1e87525f37b17b8c518f916846a28e47a"
-        },
-        "report.py": {
-          "before": "3605f021c68dc4d2da9d06bf342566e70fb4102da4a2cf636622ff0503586085",
-          "after": "3a2fdd5e017c9da4ecefead141c1a3cb03484bdcfa06bf4eaf02ba01f00f0095"
-        },
-        "verify_report.py": {
-          "before": "8e5383e8856e121114e311d0280344238122aa5d7ace80402d794e63a8cf38d9",
-          "after": "50c79876b1851c1a54e859b874f47c7760fba488fb5da8b9b6e8173d4538345d"
-        }
-      },
-      "previous_trace_sha256": "c66e3df682c0ab19692b7a5e530118da533dd1cf3836d9c60044662a8f0bded3",
-      "assembled_markdown_sha256": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-      "rendered_body_html_sha256": "9b4eb5bdf5fb56d7d60c72b50c87550cb15d8dd456668a6c61c774705009dae2",
-      "appendix_materials_unchanged_except_runtime_timestamp": true,
-      "original_artifacts": {
-        "report.md": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-        "report.html": "3311e44a727830d10556b77e2d5e544eecd6c2ab68f4ac84b65aa043746f3f8d",
-        "2027-YJ-S05-report.pdf": "c3510ec62f75761aadca608bbe23109ef15281c5eacbda20f883ad1c0012c85a"
-      }
-    },
-    {
-      "date": "2026-10-29",
-      "kind": "preference_confirmation_type_compatibility",
-      "reason": "共用原则澄清个人概率与偏好依据边界，阶段7数值权重确认只接受布尔true，拒绝字符串false等非布尔值；既有六份规划均为有序偏好，正文、附录材料、计算和PDF未变。仅更新工具兼容绑定，原批准及逐句判断保留，不冒充新内容复核。",
-      "changed_tools": {
-        "planning_workflow.py": {
-          "before": "be9baaa4f35fa038b4fb10db84d930b1e87525f37b17b8c518f916846a28e47a",
-          "after": "93b7754939cd53fb7c3e2bb44a5dda607fd847023cc51bbca35eb60228070add"
-        }
-      },
-      "previous_trace_sha256": "899b106eae000dc8918bce195e8b80efae723afd096dce0f81fa338f5a94d7ea",
-      "assembled_markdown_sha256": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-      "rendered_body_html_sha256": "9b4eb5bdf5fb56d7d60c72b50c87550cb15d8dd456668a6c61c774705009dae2",
-      "appendix_materials_unchanged_except_runtime_timestamp": true,
-      "original_artifacts": {
-        "report.md": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-        "report.html": "3311e44a727830d10556b77e2d5e544eecd6c2ab68f4ac84b65aa043746f3f8d",
-        "2027-YJ-S05-report.pdf": "c3510ec62f75761aadca608bbe23109ef15281c5eacbda20f883ad1c0012c85a"
-      }
-    },
-    {
-      "date": "2026-10-29",
-      "kind": "cost_input_unit_compatibility",
-      "reason": "费用图拒绝预算/结余冒作单位、冲突周期及静默忽略的max等选项，同币种同量级同周期共轴。既有六份规划无该非法输入，正文、附录材料、计算和PDF未变，完整HTML对比一致。只更新工具兼容绑定，原审批及逐句判断保留，不冒充新内容复核。",
-      "changed_tools": {
-        "report.py": {
-          "before": "3a2fdd5e017c9da4ecefead141c1a3cb03484bdcfa06bf4eaf02ba01f00f0095",
-          "after": "41d37e32456f801cb673eeb9cf966894283ead1e7ca53bdcef6709039a5465f5"
-        },
-        "render_report.py": {
-          "before": "e7dbbef97c3478f4591f34a01ebd0c730e807a1de3c69eca4fea397434dfbc4a",
-          "after": "17c81658af1834fc1216d61ca3c11070934229a74d8d1175a1602a348ffd1c0f"
-        }
-      },
-      "previous_trace_sha256": "99387188f54b848d8fe6934e632b15916f8b19b68d2090723173cc7704b2a2c4",
-      "assembled_markdown_sha256": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-      "rendered_body_html_sha256": "9b4eb5bdf5fb56d7d60c72b50c87550cb15d8dd456668a6c61c774705009dae2",
-      "appendix_materials_unchanged_except_runtime_timestamp": true,
-      "original_artifacts": {
-        "report.md": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-        "report.html": "3311e44a727830d10556b77e2d5e544eecd6c2ab68f4ac84b65aa043746f3f8d",
-        "2027-YJ-S05-report.pdf": "c3510ec62f75761aadca608bbe23109ef15281c5eacbda20f883ad1c0012c85a"
-      }
-    },
-    {
-      "date": "2026-10-29",
-      "kind": "preference_weight_value_compatibility",
-      "reason": "阶段7补数值权重形状门禁：非空字典、非布尔的有限非负数字且合计1，拒绝NaN/布尔/负数等错误。既有六份规划使用有序偏好，正文、附录材料、计算和PDF未变；仅更新工具兼容绑定，原批准及逐句判断保留，不冒充新内容复核。",
-      "changed_tools": {
-        "planning_workflow.py": {
-          "before": "93b7754939cd53fb7c3e2bb44a5dda607fd847023cc51bbca35eb60228070add",
-          "after": "2e7c4899102638267991b967f5a7c30424abd6f264712f3a2ebbf622ec9b5d44"
-        }
-      },
-      "previous_trace_sha256": "9b28f509ccf54d1190958dc11f5842881bb0ac2bdd815850fa1aeb3906eab77c",
-      "assembled_markdown_sha256": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-      "rendered_body_html_sha256": "9b4eb5bdf5fb56d7d60c72b50c87550cb15d8dd456668a6c61c774705009dae2",
-      "appendix_materials_unchanged_except_runtime_timestamp": true,
-      "original_artifacts": {
-        "report.md": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-        "report.html": "3311e44a727830d10556b77e2d5e544eecd6c2ab68f4ac84b65aa043746f3f8d",
-        "2027-YJ-S05-report.pdf": "c3510ec62f75761aadca608bbe23109ef15281c5eacbda20f883ad1c0012c85a"
-      }
-    },
-    {
-      "date": "2026-10-29",
-      "kind": "required_gap_and_unrequested_compatibility",
-      "reason": "读研新模拟自查修补可见必答未填进入缺口及防抹除检查，并区分未请求与检索未找到；生成器提示未展示叙述，不自动改变旧稿。既有六例无显式可见必答未填，正文、附录材料、数字和PDF未变；只更新工具兼容绑定，原审批及逐句判断保留，不冒充新内容复核。",
-      "changed_tools": {
-        "planning_report.py": {
-          "before": "de47b6729ae1469b9f016c65b623151cfc80744e0adc13dcbb51ee031d689b1d",
-          "after": "ce3ab0e1ce54cb7f250e71b60c56ce78f863f52b8840b82f12a416d6aee7c9c6"
-        },
-        "planning_workflow.py": {
-          "before": "2e7c4899102638267991b967f5a7c30424abd6f264712f3a2ebbf622ec9b5d44",
-          "after": "adc00b53b2b82d0676b21e7464d35c01b60c1b90624ae11095f0cf3ecdc702ef"
-        },
-        "profile_store.py": {
-          "before": "35de56c7f84f9ead83540d32cee7d9bd8885611fb25ef39dbc37b7cfa401b088",
-          "after": "fd8be53ffc01658411258b540a0530749d10c0c94c78e7d08e3a16fbf4fca26e"
-        }
-      },
-      "previous_trace_sha256": "acc3662511a57fe8e42442d1d84d9afe001017fa400f231b792df19bfb152338",
-      "assembled_markdown_sha256": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-      "rendered_body_html_sha256": "9b4eb5bdf5fb56d7d60c72b50c87550cb15d8dd456668a6c61c774705009dae2",
-      "appendix_materials_unchanged_except_runtime_timestamp": true,
-      "original_artifacts": {
-        "report.md": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-        "report.html": "3311e44a727830d10556b77e2d5e544eecd6c2ab68f4ac84b65aa043746f3f8d",
-        "2027-YJ-S05-report.pdf": "c3510ec62f75761aadca608bbe23109ef15281c5eacbda20f883ad1c0012c85a"
-      }
-    },
-    {
-      "date": "2026-10-29",
-      "kind": "grad_income_projection_compatibility",
-      "reason": "读研原答中的挣钱时点独立追加投影，不移动既有字段或推断稳定工资；未定答复保留未知。既有六份规划无需要新增已知期限的情况，历史未定原答仅沿旧迁移组合兼容核对；正文、附录材料、数字和PDF未变，仅更新工具兼容绑定，原审批及逐句判断保留，不冒充新内容复核。",
-      "changed_tools": {
-        "profile_store.py": {
-          "before": "fd8be53ffc01658411258b540a0530749d10c0c94c78e7d08e3a16fbf4fca26e",
-          "after": "16aed07fb557476980d5eee4d35e01a544a4bda8185568235a6c24a70439558f"
-        }
-      },
-      "previous_trace_sha256": "b11633031b0b627f0b9bb8d1253d98d03a97105fdd1d7600025d1e39a6cd8398",
-      "assembled_markdown_sha256": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-      "rendered_body_html_sha256": "9b4eb5bdf5fb56d7d60c72b50c87550cb15d8dd456668a6c61c774705009dae2",
-      "appendix_materials_unchanged_except_runtime_timestamp": true,
-      "original_artifacts": {
-        "report.md": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-        "report.html": "3311e44a727830d10556b77e2d5e544eecd6c2ab68f4ac84b65aa043746f3f8d",
-        "2027-YJ-S05-report.pdf": "c3510ec62f75761aadca608bbe23109ef15281c5eacbda20f883ad1c0012c85a"
-      }
-    },
-    {
-      "date": "2026-10-29",
-      "kind": "grad_income_undecided_compatibility",
-      "reason": "修复未定/尚未定等明确未决答复的状态分类，保持原答与既有字段不动，不提取年份。既有六份规划输入、正文、附录、数字、PDF及原审批不变，仅作当前工具兼容绑定；不冒充新内容复核。",
-      "changed_tools": {
-        "profile_store.py": {
-          "before": "16aed07fb557476980d5eee4d35e01a544a4bda8185568235a6c24a70439558f",
-          "after": "a609d0a51cb4a27713fe00c8174069fd61df44656f2b859423e4712ca58b5cf1"
-        }
-      },
-      "previous_trace_sha256": "c38bde9cd363163ca8baaaf44d7ee882a13de03798cc4e4c44a6ca5627ef34b1",
-      "assembled_markdown_sha256": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-      "rendered_body_html_sha256": "9b4eb5bdf5fb56d7d60c72b50c87550cb15d8dd456668a6c61c774705009dae2",
-      "appendix_materials_unchanged_except_runtime_timestamp": true,
-      "original_artifacts": {
-        "report.md": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-        "report.html": "3311e44a727830d10556b77e2d5e544eecd6c2ab68f4ac84b65aa043746f3f8d",
-        "2027-YJ-S05-report.pdf": "c3510ec62f75761aadca608bbe23109ef15281c5eacbda20f883ad1c0012c85a"
-      }
-    },
-    {
-      "date": "2026-10-29",
-      "kind": "management_audit_compatibility",
-      "reason": "时间线拒绝把正文放入不显示的标记列；短多栏节尾按视觉行检查。旧六份时间线与版面均已检查通过，输入、正文、附录、数字、PDF及原审批不变，仅更新工具兼容绑定，不冒充新内容复核。",
-      "changed_tools": {
-        "planning_workflow.py": {
-          "before": "adc00b53b2b82d0676b21e7464d35c01b60c1b90624ae11095f0cf3ecdc702ef",
-          "after": "7126b68aa5b208ec08911ef4c4c356211d17433cad2c59debfd54407cfc6b27f"
-        }
-      },
-      "previous_trace_sha256": "70e4c3523bff5818e1fed8fd1275edf5d9a42b964b40adb4d6352903cc938763",
-      "assembled_markdown_sha256": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-      "rendered_body_html_sha256": "9b4eb5bdf5fb56d7d60c72b50c87550cb15d8dd456668a6c61c774705009dae2",
-      "appendix_materials_unchanged_except_runtime_timestamp": true,
-      "original_artifacts": {
-        "report.md": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-        "report.html": "3311e44a727830d10556b77e2d5e544eecd6c2ab68f4ac84b65aa043746f3f8d",
-        "2027-YJ-S05-report.pdf": "c3510ec62f75761aadca608bbe23109ef15281c5eacbda20f883ad1c0012c85a"
-      }
-    },
+  "regeneration_history": [
     {
       "date": "2026-10-30",
-      "kind": "internship_audit_compatibility",
-      "reason": "实习收入缺口提示仅核实际显示文本，并覆盖实习报酬说法；复合问卷专业/求职字段中文标签补齐。六旧例正文、核对材料、输入、数值、PDF及原审批完全相同，仅兼容工具指纹，不冒充内容新复核。",
-      "changed_tools": {
-        "planning_report.py": {
-          "before": "ce3ab0e1ce54cb7f250e71b60c56ce78f863f52b8840b82f12a416d6aee7c9c6",
-          "after": "32ca898bbb421d198bdb1d35c9215014d0642ffdf5d08eb88f4030c5f050ddf6"
-        },
-        "claim_check.py": {
-          "before": "69fd237635e27c23214fb99e915d3a31afd51bc435dc86de31ca3b7dc9c35a6b",
-          "after": "9495d7fac08683e81002aa95d943de5f16030aa13d4c5ba08d27995d0b0f27bb"
-        },
-        "verify_report.py": {
-          "before": "50c79876b1851c1a54e859b874f47c7760fba488fb5da8b9b6e8173d4538345d",
-          "after": "0a82348fb6f66951d2fdb7039035177e87a53185bd100192f957f1a42d020331"
-        }
+      "reason": "同表二字纵排检查与回溯结果短词不折行；真实重渲染，正文/数字/输入不变，生成时刻如实更新，不冒重核官方事实。",
+      "baseline_commit": "6daaa23",
+      "previous_trace_sha256": "b201665ee8622025687c7f14a4180e301e16b2d4436954cdf2e7a3a9e387bbc6",
+      "previous_artifacts": {
+        "report.md": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
+        "report.html": "3311e44a727830d10556b77e2d5e544eecd6c2ab68f4ac84b65aa043746f3f8d",
+        "2027-YJ-S05-report.pdf": "c3510ec62f75761aadca608bbe23109ef15281c5eacbda20f883ad1c0012c85a"
       },
-      "previous_trace_sha256": "bc1c8ec3a105f4e698b554c52d89b9e221b1e16e820d5b67cad6e6bae6b533b7",
-      "assembled_markdown_sha256": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-      "rendered_body_html_sha256": "9b4eb5bdf5fb56d7d60c72b50c87550cb15d8dd456668a6c61c774705009dae2",
-      "appendix_materials_unchanged_except_runtime_timestamp": true,
-      "original_artifacts": {
-        "report.md": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-        "report.html": "3311e44a727830d10556b77e2d5e544eecd6c2ab68f4ac84b65aa043746f3f8d",
-        "2027-YJ-S05-report.pdf": "c3510ec62f75761aadca608bbe23109ef15281c5eacbda20f883ad1c0012c85a"
-      }
-    },
-    {
-      "date": "2026-10-30",
-      "kind": "career_demand_compatibility",
-      "reason": "求职按需候选原文工具及流程链接；原有示例未运行新取数器。六旧例正文、核对材料、输入、数值、PDF及原审批完全相同，仅兼容流程指纹，不冒充内容新复核。",
-      "changed_tools": {},
-      "previous_trace_sha256": "dd6dfb0045608b6234a270cff9717620940671a79455a5f55cf82d256158cdbc",
-      "assembled_markdown_sha256": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-      "rendered_body_html_sha256": "9b4eb5bdf5fb56d7d60c72b50c87550cb15d8dd456668a6c61c774705009dae2",
-      "appendix_materials_unchanged_except_runtime_timestamp": true,
-      "original_artifacts": {
-        "report.md": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-        "report.html": "3311e44a727830d10556b77e2d5e544eecd6c2ab68f4ac84b65aa043746f3f8d",
-        "2027-YJ-S05-report.pdf": "c3510ec62f75761aadca608bbe23109ef15281c5eacbda20f883ad1c0012c85a"
-      }
-    },
-    {
-      "date": "2026-10-30",
-      "kind": "career_demand_compatibility",
-      "reason": "具体岗位正文两读及域名依据更新；原有示例未运行新取数器。六旧例正文、核对材料、输入、数值、PDF及原审批完全相同，仅兼容流程指纹，不冒充内容新复核。",
-      "changed_tools": {},
-      "previous_trace_sha256": "4ae530b7399eb5f15a5a790d210cf3415df482a0fcb8ed325eda032b0f30af79",
-      "assembled_markdown_sha256": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-      "rendered_body_html_sha256": "9b4eb5bdf5fb56d7d60c72b50c87550cb15d8dd456668a6c61c774705009dae2",
-      "appendix_materials_unchanged_except_runtime_timestamp": true,
-      "original_artifacts": {
-        "report.md": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-        "report.html": "3311e44a727830d10556b77e2d5e544eecd6c2ab68f4ac84b65aa043746f3f8d",
-        "2027-YJ-S05-report.pdf": "c3510ec62f75761aadca608bbe23109ef15281c5eacbda20f883ad1c0012c85a"
-      }
-    },
-    {
-      "date": "2026-10-30",
-      "kind": "career_demand_compatibility",
-      "reason": "境外分校及私立课程知识路由与认证边界更新；旧示例原有证据和分析不变，不冒重新核过官方事实。六旧例正文、核对材料、输入、数值、PDF及原审批完全相同，仅兼容流程指纹，不冒充内容新复核。",
-      "changed_tools": {},
-      "previous_trace_sha256": "a8f7457cc254086e48aa765ae6721fcddbeecd81902a0efe043005870e143a7d",
-      "assembled_markdown_sha256": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-      "rendered_body_html_sha256": "9b4eb5bdf5fb56d7d60c72b50c87550cb15d8dd456668a6c61c774705009dae2",
-      "appendix_materials_unchanged_except_runtime_timestamp": true,
-      "original_artifacts": {
-        "report.md": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-        "report.html": "3311e44a727830d10556b77e2d5e544eecd6c2ab68f4ac84b65aa043746f3f8d",
-        "2027-YJ-S05-report.pdf": "c3510ec62f75761aadca608bbe23109ef15281c5eacbda20f883ad1c0012c85a"
-      }
-    },
-    {
-      "date": "2026-10-30",
-      "kind": "campus_audit_compatibility",
-      "reason": "读研复合成绩标签及定性官方背景不抬升情景数字的核对标题修正；旧示例原有证据和分析不变，不冒重新核过官方事实。六旧例正文、核对材料、输入、数值、PDF及原审批完全相同，仅兼容流程指纹，不冒充内容新复核。",
-      "changed_tools": {
-        "verify_report.py": {
-          "before": "0a82348fb6f66951d2fdb7039035177e87a53185bd100192f957f1a42d020331",
-          "after": "e6b5191814dac954b8662107e07318a8d5b7620d51edd30d18848b6f8e7a84fe"
-        }
-      },
-      "previous_trace_sha256": "cf0d09cc906e8ac0d4a2960142cdf05de2ec04cf9b1b53dd876cab21b24ae450",
-      "assembled_markdown_sha256": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-      "rendered_body_html_sha256": "9b4eb5bdf5fb56d7d60c72b50c87550cb15d8dd456668a6c61c774705009dae2",
-      "appendix_materials_unchanged_except_runtime_timestamp": true,
-      "original_artifacts": {
-        "report.md": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-        "report.html": "3311e44a727830d10556b77e2d5e544eecd6c2ab68f4ac84b65aa043746f3f8d",
-        "2027-YJ-S05-report.pdf": "c3510ec62f75761aadca608bbe23109ef15281c5eacbda20f883ad1c0012c85a"
-      }
-    },
-    {
-      "date": "2026-10-30",
-      "kind": "eligibility_gate_compatibility",
-      "reason": "主路径与保险路径拒绝明示不符候选的阶段门禁修补；旧示例原有证据和分析不变，不冒重新核过官方事实。六旧例正文、核对材料、输入、数值、PDF及原审批完全相同，仅兼容流程指纹，不冒充内容新复核。",
-      "changed_tools": {
-        "planning_workflow.py": {
-          "before": "7126b68aa5b208ec08911ef4c4c356211d17433cad2c59debfd54407cfc6b27f",
-          "after": "4562a217b5d94864019b8346a11bda4568e9828e4cafd0d902ae05c87547f434"
-        }
-      },
-      "previous_trace_sha256": "2fb865a402ce7d21e4f0b09c75a0c2969eb077e3cd941b731f4b7ba236b57141",
-      "assembled_markdown_sha256": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-      "rendered_body_html_sha256": "9b4eb5bdf5fb56d7d60c72b50c87550cb15d8dd456668a6c61c774705009dae2",
-      "appendix_materials_unchanged_except_runtime_timestamp": true,
-      "original_artifacts": {
-        "report.md": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-        "report.html": "3311e44a727830d10556b77e2d5e544eecd6c2ab68f4ac84b65aa043746f3f8d",
-        "2027-YJ-S05-report.pdf": "c3510ec62f75761aadca608bbe23109ef15281c5eacbda20f883ad1c0012c85a"
-      }
+      "historical_compatibility_records": "见baseline_commit中同路径旧trace，不将旧兼容工具冒作本次生成器。"
     }
   ]
 }

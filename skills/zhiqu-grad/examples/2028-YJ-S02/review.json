@@ -165,11 +165,11 @@
     "verification_scope": "本轮更新为附核对材料的PDF，自评和机器核对通过后仍等待独立审核；未补造官方原文和独立批准。"
   },
   "snapshot": {
-    "2028-YJ-S02-report.pdf": "76fba02c256639191391b6ddfa9479ffabed277d02c475afb13b849436e7466b",
+    "2028-YJ-S02-report.pdf": "f7fff2fe82ae975e16f3355da6e0c0f0b5fa22221e6aa77e2d183cecb0e429d8",
     "calculations.json": "00e5087c418c579371b17558494a9c4c1f865b0b051ef63fc1a3c9a51a89cd87",
     "candidates.json": "1f9f3703275d1799b96d638988fd5c11a27d5f2c4ef9209db44868be66817183",
     "case.json": "0001243d062291f20d005fab27c3bcc9f801dd724d9bd8593487ad013319de45",
-    "claim_check.json": "532b7aa35743b0c10d94ce9577500e68ecb35b9b6f2d9820c789618f687ccf13",
+    "claim_check.json": "e9387d5a93f783acec4d8e7e3d2b0f0ba7cf2127ef755f20489dd6ca4aa14642",
     "directions.json": "e11eb75bac9a1378195f15ef805daf0ffe3d0a4c2306d317d6d9944265b8008b",
     "evidence.json": "03304e7a1c5a1324a791db8d79dc9087ab501f578414afef2bda2728ef1d97fa",
     "judgment.json": "a9dd41f886f0c6f554dcbfa124510778365a5a732f3490e40d1499b0ff24c03b",
@@ -178,9 +178,9 @@
     "profile-supplement.txt": "6d3fe85c4f5f9393a284253436e9dd3ae7a719f9ff73222d052dc7224a274e0f",
     "profile.json": "b04770d7a2589f2dbe7b35a80efaad8953b8db8666a26db85875f82cfc9eaf72",
     "profile_parse.json": "144dd86220da51855d80ca4502619b7208e49809122fbbb618e104e9992615ac",
-    "report.html": "296229b59ab9573d77d2c03f042a8b28fb161d8e8d671c223444cffc7a2df794",
+    "report.html": "8702f3f6e692420574312ee93b9194c16d546ed6d353e6c039794ed4ff933fa8",
     "report.md": "8dd0ba3d6bb84baacb05c1e5272f04bd89a83de4f111127c4e5dca4e4ebf1628",
-    "report_trace.json": "fbc1b988f2adabf7d7f576b991e4ed82b3152b78d7805ead8baf09699a3798bc",
+    "report_trace.json": "7c20e7e6e74cbad4a29e2251053a1730af0d90e9d047c6137f00295f5a8af767",
     "rules_check.json": "248a80156349f8bee1d5de049d1153408fc4548108e5895abb5bba17d5c7cb03"
   },
   "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。\n2026-10-29：仅拆分均分/英语/数学的本人原话摘录，均分两段明确分隔；原答、证据、计算、正文结论不变，重出PDF附录并检版。本轮修改独立复核与旧报告正式交付审核分开，后者仍待独立复核及操控者核查，不重新认证旧官方事实。",
@@ -604,6 +604,34 @@
         "claim_check.json"
       ],
       "reason": "主路径与保险路径拒绝明示不符候选的阶段门禁修补；旧示例原有证据和分析不变，不冒重新核过官方事实。六旧例正文、核对材料、输入、数值、PDF及原审批完全相同，仅兼容流程指纹，不冒充内容新复核。"
+    },
+    {
+      "date": "2026-10-30",
+      "by": "Codex（独立逐页格式复验后机械重绑，不是内容或官方事实新批准）",
+      "reason": "回溯结果短词不折行并重新生成全部20例。全原文/数字/附录材料/输入一致；仅真实生成时间和高考封面生成日期变化。旧状态、独立身份、日期和语义评语不动；原未批准不升级。",
+      "baseline_commit": "6daaa23",
+      "changed_files": [
+        {
+          "file": "2028-YJ-S02-report.pdf",
+          "before": "76fba02c256639191391b6ddfa9479ffabed277d02c475afb13b849436e7466b",
+          "after": "f7fff2fe82ae975e16f3355da6e0c0f0b5fa22221e6aa77e2d183cecb0e429d8"
+        },
+        {
+          "file": "claim_check.json",
+          "before": "532b7aa35743b0c10d94ce9577500e68ecb35b9b6f2d9820c789618f687ccf13",
+          "after": "e9387d5a93f783acec4d8e7e3d2b0f0ba7cf2127ef755f20489dd6ca4aa14642"
+        },
+        {
+          "file": "report.html",
+          "before": "296229b59ab9573d77d2c03f042a8b28fb161d8e8d671c223444cffc7a2df794",
+          "after": "8702f3f6e692420574312ee93b9194c16d546ed6d353e6c039794ed4ff933fa8"
+        },
+        {
+          "file": "report_trace.json",
+          "before": "fbc1b988f2adabf7d7f576b991e4ed82b3152b78d7805ead8baf09699a3798bc",
+          "after": "7c20e7e6e74cbad4a29e2251053a1730af0d90e9d047c6137f00295f5a8af767"
+        }
+      ]
     }
   ],
   "regeneration": {

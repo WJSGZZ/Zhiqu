@@ -81,14 +81,14 @@
     ]
   },
   "snapshot": {
-    "2026-GK-R06-report.pdf": "e297cffe92da6680fbe52ce7b50edf365979a212d87a4f7ff8bdff77ba2d71f2",
+    "2026-GK-R06-report.pdf": "0dbbb78108fd3144c1636e70e0154700f40e8736427bf683785a272f22a597aa",
     "case.json": "fe89664f2eede538848bf308359ebfaca35280a6d0a3856893b5864a06a5f326",
     "operator_check.md": "ce78bd684e5048e24e5b558525d571b551227d62aedbd5eb05f380e0c1ccbc2d",
     "profile.txt": "100edbfd157d6bc1df9749d40465479ccc3b2aaa7da7145b82136526308372e2",
     "profile_snapshot.json": "ecea5465503e65626d941d1f8a7ca53011a8c18fbe86b4b6eb5ffee25159d414",
-    "report.html": "1b5ca1b916e796ac58e7b5334f4e3f433047bfc738af8b2233d56c7286690450",
+    "report.html": "8c54ef1130cf2a0b1c84871a3b849ae755a7653c7efb81991a64f3ab67a8978c",
     "report.json": "9da765986b0b73e9297180c3e0c27024e8429dd674a0cbc5b6448e0150a4667c",
-    "report_trace.json": "61f412ae8659f576b0d35ad4c487ba320fcc4327a9cf1cde26a29e90902b20cc",
+    "report_trace.json": "52d5964650a04cd2f85c7533542704bd7409fbb0f4bf1dfaed791c84db8ed311",
     "retro_ranks/4538/result.json": "2e55b25bf25c0ce3a0b81ca7c66d4746979686fea2d67e2d097f4420fa265711"
   },
   "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。",
@@ -239,6 +239,29 @@
         "report_trace.json"
       ],
       "reason": "共用工具一批修复后统一重生成一次：①读研/求职条形图色名改为中性的主/次/留意/不利（高考仍用冲稳保），颜色本身不变；②构成条的段太窄写不下分项名时，在图下补全“左起第几段为 名称 数值”；③发布层换词收窄：考试练习里的“模拟”、读者用语“虚构”和引号内原话不再改字，并新增检查保证印出文字与逐句回查所见一致；④版面自检新增节末孤页检查，打印器对孤页所在节只收紧行距与段距（字号不变）后重排；⑤报告追踪改为只记本报告证据命中的官方域名行；⑥画像字段映射（has_offer 并入求职阶段、删 certs_detail）不影响本案已有解析。高考报告只因共用样式与打印器（report.py）指纹变化重生成：HTML 可见文字逐行比对仅“生成时间”不同，志愿、概率、数字与结论未变，页数不变，无节末孤页。"
+    },
+    {
+      "date": "2026-10-30",
+      "by": "Codex（独立逐页格式复验后机械重绑，不是内容或官方事实新批准）",
+      "reason": "回溯结果短词不折行并重新生成全部20例。全原文/数字/附录材料/输入一致；仅真实生成时间和高考封面生成日期变化。旧状态、独立身份、日期和语义评语不动；原未批准不升级。",
+      "baseline_commit": "6daaa23",
+      "changed_files": [
+        {
+          "file": "2026-GK-R06-report.pdf",
+          "before": "e297cffe92da6680fbe52ce7b50edf365979a212d87a4f7ff8bdff77ba2d71f2",
+          "after": "0dbbb78108fd3144c1636e70e0154700f40e8736427bf683785a272f22a597aa"
+        },
+        {
+          "file": "report.html",
+          "before": "1b5ca1b916e796ac58e7b5334f4e3f433047bfc738af8b2233d56c7286690450",
+          "after": "8c54ef1130cf2a0b1c84871a3b849ae755a7653c7efb81991a64f3ab67a8978c"
+        },
+        {
+          "file": "report_trace.json",
+          "before": "61f412ae8659f576b0d35ad4c487ba320fcc4327a9cf1cde26a29e90902b20cc",
+          "after": "52d5964650a04cd2f85c7533542704bd7409fbb0f4bf1dfaed791c84db8ed311"
+        }
+      ]
     }
   ],
   "regeneration": {

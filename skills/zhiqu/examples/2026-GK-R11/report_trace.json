@@ -17,19 +17,32 @@
   ],
   "source_sha256": {
     "case.json": "7bc8c812915c64516af9a5b10b540a625364ecedd8a4b6a6ac7c4f1f64816452",
-    "report.json": "8fcddc1212cc18bae61396974cc74cf525cd3c2ff536110ef2532f2db6c272f5",
+    "report.json": "9735ca185e0b1168f1686ba60026023ab2c30442e6667c78d004b7ec438cb9b6",
     "result.json": "0faf19bfe8125473015a277518bb3e6accbfc8118b0b711f4d7e66d7b4cf7e84"
   },
   "authoring": {
     "model": "未记录"
   },
   "renderer": {
-    "version": "sha256:9a2ad964e16e6703d89f4ee19b04d08b4a0522c66fbe06abc0bf3da527af124c",
+    "version": "sha256:76046b5721746ad6a65ab7bbbf530b4a79eebd0e5b2fd904c0384144ed11f1f7",
     "files_sha256": {
-      "report.py": "6bbcb82b0537c4bac11ad4152324f4c8bdbdaf7176983591c51a9a3a16844760"
+      "report.py": "c1a2e82e6ce5fb9fefd866e14679a24f1ad5dcdcf56e2bdc1d578668d10e1cd8"
     }
   },
   "artifacts": {
-    "2026-GK-R11-report.pdf": "222c86c37725fabb211fd36d176dec2d18c75f21144684c8386fddbb84ec9bd3"
-  }
+    "2026-GK-R11-report.pdf": "17c2183bdecd7b3330c9cf6cf9d12f6c55f09aac7e5ba8d90ccd02922e336749",
+    "report.html": "6d82bc1fe9fd5c1121ea551fc7347f92608dcb15c9cab0e01b33c00ba047594f"
+  },
+  "regeneration_history": [
+    {
+      "date": "2026-10-30",
+      "reason": "同表二字纵排检查与回溯结果短词不折行；真实重渲染，正文/数字/输入不变，生成时刻如实更新，不冒重核官方事实。",
+      "baseline_commit": "6daaa23",
+      "previous_trace_sha256": "5044cbddac0c9d826350f1af87f62e8e831efc1ee6b1cb3f663bf33efa99b3bc",
+      "previous_artifacts": {
+        "2026-GK-R11-report.pdf": "222c86c37725fabb211fd36d176dec2d18c75f21144684c8386fddbb84ec9bd3"
+      },
+      "historical_compatibility_records": "见baseline_commit中同路径旧trace，不将旧兼容工具冒作本次生成器。"
+    }
+  ]
 }

@@ -95,11 +95,11 @@
     "verification_scope": "本轮更新为附核对材料的PDF，自评和机器核对通过后仍等待独立审核；未补造官方原文和独立批准。"
   },
   "snapshot": {
-    "2027-QZ-S01-report.pdf": "442cf877493f9c33e75c418da23fa875a9030ade3240671c866913580aa08ad9",
+    "2027-QZ-S01-report.pdf": "8b776f829fbaf4810c743018bf4409a317e289a2020545cc03aa25a5ddbea9ed",
     "calculations.json": "c9f6ffdadaa69063d1698e768de5b96dbfb4f2cafdd9a803a0a136e2d4ee2bae",
     "candidates.json": "3ffc2bc156346f42fbfacce9b243f26199511bb088405c601c9017efa4063c05",
     "case.json": "56c199fd854ba948916bb91afa440ed6d7b72a1c86500cd8d202dda6df921955",
-    "claim_check.json": "dc05b57f561fbe9a0d22871bf7eb598110a2228a4b7c13d76fa32eb4763a191f",
+    "claim_check.json": "ece04598b660c18d760ec88060878bc651da2a3287b0fe34f2832f1d1ad84c72",
     "directions.json": "6f799d567cc51a1d860a40f8d9bbbf4c16f3bfcd2af58b999cc1db8c54f2761e",
     "evidence.json": "2ddba53ef171d3e4d650af8ed27273a30bb449ef63ffd0480bff3a924f9564f3",
     "judgment.json": "3f7455fd010637e7b0f16acacce93573a3fc2c7f8045264fdc0a8fad8293417d",
@@ -108,9 +108,9 @@
     "profile.txt": "69dfeb57cf005a4ace3990e51a96b3b821e9de0c130dd1f8eae5b2088f5bef5e",
     "profile_parse.json": "ec01d04e9f24802ce85fc5d2a069ee8532f7911604e9cdfe9a3a47191baec990",
     "profile_snapshot.json": "0a6cb6835c42b9e3a0e18679bd40d3c99c433453287f9e2a231e357647a858d9",
-    "report.html": "ffa710d2a9920cdd43b8f5681afaee51f3bd4a2e15c64b8be4f4556a6b4ef49f",
+    "report.html": "874f4f27b8b595bb0d7359b302fab4a90416724998afa6706f7799749a66d58f",
     "report.md": "0895952f1caa72b7576496650f775ddafc6137d721509d0fe4868561a12c2195",
-    "report_trace.json": "67f881eb9dd65fd3d7d2cebdb101d1dc1f196d3413a1b4bc01405df54e88b180",
+    "report_trace.json": "93ab030b099c58df34dd251b121b21eaf59d87b51c52687d7275b423e125dda6",
     "rules_check.json": "bda48a6be3aff5fdb6d27f0800903873b37d636b4444a9ed460b302c5d5b08f9"
   },
   "checklist_update_note": "仅核查单表述及核查工具记录更新；报告与计算原件未改。保留历史复核记录，当前仍等待独立审核，不是重新批准。",
@@ -514,6 +514,34 @@
         "claim_check.json"
       ],
       "reason": "主路径与保险路径拒绝明示不符候选的阶段门禁修补；旧示例原有证据和分析不变，不冒重新核过官方事实。六旧例正文、核对材料、输入、数值、PDF及原审批完全相同，仅兼容流程指纹，不冒充内容新复核。"
+    },
+    {
+      "date": "2026-10-30",
+      "by": "Codex（独立逐页格式复验后机械重绑，不是内容或官方事实新批准）",
+      "reason": "回溯结果短词不折行并重新生成全部20例。全原文/数字/附录材料/输入一致；仅真实生成时间和高考封面生成日期变化。旧状态、独立身份、日期和语义评语不动；原未批准不升级。",
+      "baseline_commit": "6daaa23",
+      "changed_files": [
+        {
+          "file": "2027-QZ-S01-report.pdf",
+          "before": "442cf877493f9c33e75c418da23fa875a9030ade3240671c866913580aa08ad9",
+          "after": "8b776f829fbaf4810c743018bf4409a317e289a2020545cc03aa25a5ddbea9ed"
+        },
+        {
+          "file": "claim_check.json",
+          "before": "dc05b57f561fbe9a0d22871bf7eb598110a2228a4b7c13d76fa32eb4763a191f",
+          "after": "ece04598b660c18d760ec88060878bc651da2a3287b0fe34f2832f1d1ad84c72"
+        },
+        {
+          "file": "report.html",
+          "before": "ffa710d2a9920cdd43b8f5681afaee51f3bd4a2e15c64b8be4f4556a6b4ef49f",
+          "after": "874f4f27b8b595bb0d7359b302fab4a90416724998afa6706f7799749a66d58f"
+        },
+        {
+          "file": "report_trace.json",
+          "before": "67f881eb9dd65fd3d7d2cebdb101d1dc1f196d3413a1b4bc01405df54e88b180",
+          "after": "93ab030b099c58df34dd251b121b21eaf59d87b51c52687d7275b423e125dda6"
+        }
+      ]
     }
   ],
   "regeneration": {

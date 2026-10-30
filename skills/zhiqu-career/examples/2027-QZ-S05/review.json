@@ -629,6 +629,34 @@
         "claim_check.json"
       ],
       "reason": "主路径与保险路径拒绝明示不符候选的阶段门禁修补；旧示例原有证据和分析不变，不冒重新核过官方事实。六旧例正文、核对材料、输入、数值、PDF及原审批完全相同，仅兼容流程指纹，不冒充内容新复核。"
+    },
+    {
+      "date": "2026-10-30",
+      "by": "Codex（独立逐页格式复验后机械重绑，不是内容或官方事实新批准）",
+      "reason": "回溯结果短词不折行并重新生成全部20例。全原文/数字/附录材料/输入一致；仅真实生成时间和高考封面生成日期变化。旧状态、独立身份、日期和语义评语不动；原未批准不升级。",
+      "baseline_commit": "6daaa23",
+      "changed_files": [
+        {
+          "file": "2027-QZ-S05-report.pdf",
+          "before": "a0932485cec61080da0cdf7a8351532db9c99bf17a19c9cb10a14348ab27ff3b",
+          "after": "a2767dbe1d24f7e55e18218cc32ad525c10466cf5beb16bcb32545239fa3ab23"
+        },
+        {
+          "file": "claim_check.json",
+          "before": "a27137732349c17fb8aa57c3c9c67d71d16625fff6c4911fa9c5bfbb30eb77d4",
+          "after": "3bcff178ee20f8693084b9db70aa8cab58f17b812af4d7ad183ef864a5314bf3"
+        },
+        {
+          "file": "report.html",
+          "before": "cff1e3ca14fbc9145f6a1a4fbb3a4f14ae3c3e4544fbdeea5f215321011619d1",
+          "after": "7ffb0b04713dcc3f25d982f2e19a439f5b2d79cd0a6e84e64e50a11bf89e4890"
+        },
+        {
+          "file": "report_trace.json",
+          "before": "711c03cdbfa6f28c36e0d2c3d1741539d1b4164ebd7ebd6b6b68a56fba3fdb3b",
+          "after": "fedeeb5375df0f0d47b6f5f9796ced4bd04f5fe86fb43e740ad41402172c3c77"
+        }
+      ]
     }
   ],
   "review_history": [
@@ -2892,11 +2920,11 @@
     "claim_check": "ok:true，errors []"
   },
   "snapshot": {
-    "2027-QZ-S05-report.pdf": "a0932485cec61080da0cdf7a8351532db9c99bf17a19c9cb10a14348ab27ff3b",
+    "2027-QZ-S05-report.pdf": "a2767dbe1d24f7e55e18218cc32ad525c10466cf5beb16bcb32545239fa3ab23",
     "calculations.json": "89d7a293fd6780b562866f4871846b19130b0d86e79cb9f9c233e572cbae5b5d",
     "candidates.json": "ea8bbcb101fc7dc899ec1137e869654c3b9e85d79d8229e4de8115418467aeae",
     "case.json": "79136c0287d7e845b2308724e997d90b3b7a805e4fe2843da189774d6ec93a6e",
-    "claim_check.json": "a27137732349c17fb8aa57c3c9c67d71d16625fff6c4911fa9c5bfbb30eb77d4",
+    "claim_check.json": "3bcff178ee20f8693084b9db70aa8cab58f17b812af4d7ad183ef864a5314bf3",
     "directions.json": "2d709b22623617481aefa804b96da5c5d274812758094bb921c173d0466c29df",
     "evidence.json": "8c97b5ec4dd2e295bbf4a8eaa9372acfd30f2fcc1615cc5810525fdbbb596d59",
     "judgment.json": "89e67d8e39d0666399d8b470809425420fb18271c756578790e08248301ec3ff",
@@ -2905,9 +2933,9 @@
     "profile-supplement.txt": "247f31f22f4c9a6c33394b5b25e3b37ef21c19fd3b9c12a70a83839f7976b026",
     "profile.json": "f8c7a4b076a64c168d303710ea8836b70a79ffe5d53ce7521045bfe4ae4c2d1f",
     "profile_parse.json": "abe812515ea2a27d78209f08c28c8bdde0a5c10d1672ef0983d66d68c6eece1a",
-    "report.html": "cff1e3ca14fbc9145f6a1a4fbb3a4f14ae3c3e4544fbdeea5f215321011619d1",
+    "report.html": "7ffb0b04713dcc3f25d982f2e19a439f5b2d79cd0a6e84e64e50a11bf89e4890",
     "report.md": "90ff1e8ce1555a081d376dbea69e831d6f8788393724d3db9bdb8189646a6262",
-    "report_trace.json": "711c03cdbfa6f28c36e0d2c3d1741539d1b4164ebd7ebd6b6b68a56fba3fdb3b",
+    "report_trace.json": "fedeeb5375df0f0d47b6f5f9796ced4bd04f5fe86fb43e740ad41402172c3c77",
     "rules_check.json": "b45b1313cf295a6e320d32afce13a0b93b9b0e54e8b46d8d3cf2d6329732a40b"
   }
 }

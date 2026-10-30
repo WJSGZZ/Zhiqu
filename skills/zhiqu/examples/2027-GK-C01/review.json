@@ -81,13 +81,13 @@
     ]
   },
   "snapshot": {
-    "2027-GK-C01-report.pdf": "fe3a9dbd09792da49b52e717804112556f3b86480fb0f3d54aba2ae2291c86b4",
+    "2027-GK-C01-report.pdf": "95d783d597af87980f072fc82455e2794e2442e4db9647cf5d7eab69d138a2ad",
     "case.json": "eb69064a53f0b6d517293bf2602ee0a507f297764f08aa49250bc18a1f5de10b",
     "operator_check.md": "4eafc66bd367aec08dfb0419a581ca0e0abc061348fab91761d9e3114a32cf6e",
     "profile_snapshot.json": "05357e9d7c77baf4b132978319ea870ae6805a200e09f63f759015b176649f95",
-    "report.html": "635547899c456e4e4a4211e0d665de2d4b31d812dac695490673140b50c867c0",
+    "report.html": "474f4096ec01237818911431ae97361a8a4ad01576042521b1ed253f33b6ab5b",
     "report.json": "736cdff47255f4cdea4800bec54905e61368b944aa746621f4d1be160132c3fb",
-    "report_trace.json": "8b903fd65e03df5d9d8fae1602e5cf1469a870143b77a44400bdb5d65354d057",
+    "report_trace.json": "7480bbabcf3f5ff1fe54be9ef1a206a247e3d55266eca1e041365ff1a0e40247",
     "result.json": "bbc6c54712a33b3c41f00e62c37a27002f2d2a3b87208f25cc503d5d09460582"
   },
   "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。",
@@ -206,6 +206,29 @@
       ],
       "reason": "仅改文件名，正文逐字未变。另：result.json 里记录的命令参数路径随目录改名；operator_check.md 里的案例目录名随改名更新。",
       "comparison": "改名前后各抽取 PDF 全文（14 页）逐行比对：唯一差异是第 12 节“生成时间”（2026-10-20T17:24:13+08:00 → 2026-10-20T18:45:37+08:00）；页数、标题、案例号与画像指纹不变。"
+    },
+    {
+      "date": "2026-10-30",
+      "by": "Codex（独立逐页格式复验后机械重绑，不是内容或官方事实新批准）",
+      "reason": "回溯结果短词不折行并重新生成全部20例。全原文/数字/附录材料/输入一致；仅真实生成时间和高考封面生成日期变化。旧状态、独立身份、日期和语义评语不动；原未批准不升级。",
+      "baseline_commit": "6daaa23",
+      "changed_files": [
+        {
+          "file": "2027-GK-C01-report.pdf",
+          "before": "fe3a9dbd09792da49b52e717804112556f3b86480fb0f3d54aba2ae2291c86b4",
+          "after": "95d783d597af87980f072fc82455e2794e2442e4db9647cf5d7eab69d138a2ad"
+        },
+        {
+          "file": "report.html",
+          "before": "635547899c456e4e4a4211e0d665de2d4b31d812dac695490673140b50c867c0",
+          "after": "474f4096ec01237818911431ae97361a8a4ad01576042521b1ed253f33b6ab5b"
+        },
+        {
+          "file": "report_trace.json",
+          "before": "8b903fd65e03df5d9d8fae1602e5cf1469a870143b77a44400bdb5d65354d057",
+          "after": "7480bbabcf3f5ff1fe54be9ef1a206a247e3d55266eca1e041365ff1a0e40247"
+        }
+      ]
     }
   ],
   "regeneration": {

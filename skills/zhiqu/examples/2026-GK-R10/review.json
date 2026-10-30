@@ -81,14 +81,14 @@
     ]
   },
   "snapshot": {
-    "2026-GK-R10-report.pdf": "6be3b7eb1c14fadf14c682738686316924dd2727b4a1b024f5508bc8b88ab469",
+    "2026-GK-R10-report.pdf": "a799c3ff7d06680c2711edc2144d69e3a84e0fbd39301c0bc7e2c24a21dfbfa5",
     "case.json": "7ae31d937c00db93719a70752ed9591f7ed8e3bb896ac2e2064f007d7c9fd835",
     "operator_check.md": "fcecc5ac3f89723198ccdbc177478a1649d3a4cd0749fd77eed1310fd08a6378",
     "profile.txt": "445c989a2e58fbb9c8ab0d99e3e58eed1586994d64dc2eec0467e5802aef82d0",
     "profile_snapshot.json": "774d76add4dc6ba1ba43217669a3755a6e15329ca9ee5bf7399727138348649a",
-    "report.html": "b93f044b49d4cab16024ae8d70949e628540cc5e7ce81bf6e6de1cf2eb2f498e",
+    "report.html": "3cac1be9e83e250d0ed2287955081c316ab0280e8716c3e98a23937d92b101fc",
     "report.json": "ff6a45796d0f6ffd2cc0d659eff891c2e03740a765f3c22e7ddb802ce43acc57",
-    "report_trace.json": "2c5b6e8778a7691820df2e296c29798fb01bbf5b174c1982d6fe12ea70ea7f5e",
+    "report_trace.json": "755065340abf851a35057294c72b4b86bca89b3ebd4f2273c160dc7baa42af78",
     "retro_ranks/29895/result.json": "679062fa1c75fb9966e2ea740f24a15f8849dbdbcbc6f35d1aa02989c177bd66"
   },
   "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。",
@@ -239,6 +239,29 @@
         "report_trace.json"
       ],
       "reason": "共用工具一批修复后统一重生成一次：①读研/求职条形图色名改为中性的主/次/留意/不利（高考仍用冲稳保），颜色本身不变；②构成条的段太窄写不下分项名时，在图下补全“左起第几段为 名称 数值”；③发布层换词收窄：考试练习里的“模拟”、读者用语“虚构”和引号内原话不再改字，并新增检查保证印出文字与逐句回查所见一致；④版面自检新增节末孤页检查，打印器对孤页所在节只收紧行距与段距（字号不变）后重排；⑤报告追踪改为只记本报告证据命中的官方域名行；⑥画像字段映射（has_offer 并入求职阶段、删 certs_detail）不影响本案已有解析。高考报告只因共用样式与打印器（report.py）指纹变化重生成：HTML 可见文字逐行比对仅“生成时间”不同，志愿、概率、数字与结论未变，页数不变，无节末孤页。"
+    },
+    {
+      "date": "2026-10-30",
+      "by": "Codex（独立逐页格式复验后机械重绑，不是内容或官方事实新批准）",
+      "reason": "回溯结果短词不折行并重新生成全部20例。全原文/数字/附录材料/输入一致；仅真实生成时间和高考封面生成日期变化。旧状态、独立身份、日期和语义评语不动；原未批准不升级。",
+      "baseline_commit": "6daaa23",
+      "changed_files": [
+        {
+          "file": "2026-GK-R10-report.pdf",
+          "before": "6be3b7eb1c14fadf14c682738686316924dd2727b4a1b024f5508bc8b88ab469",
+          "after": "a799c3ff7d06680c2711edc2144d69e3a84e0fbd39301c0bc7e2c24a21dfbfa5"
+        },
+        {
+          "file": "report.html",
+          "before": "b93f044b49d4cab16024ae8d70949e628540cc5e7ce81bf6e6de1cf2eb2f498e",
+          "after": "3cac1be9e83e250d0ed2287955081c316ab0280e8716c3e98a23937d92b101fc"
+        },
+        {
+          "file": "report_trace.json",
+          "before": "2c5b6e8778a7691820df2e296c29798fb01bbf5b174c1982d6fe12ea70ea7f5e",
+          "after": "755065340abf851a35057294c72b4b86bca89b3ebd4f2273c160dc7baa42af78"
+        }
+      ]
     }
   ],
   "regeneration": {

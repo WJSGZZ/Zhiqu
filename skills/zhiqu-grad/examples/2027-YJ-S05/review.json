@@ -276,11 +276,11 @@
     ]
   },
   "snapshot": {
-    "2027-YJ-S05-report.pdf": "c3510ec62f75761aadca608bbe23109ef15281c5eacbda20f883ad1c0012c85a",
+    "2027-YJ-S05-report.pdf": "cadd442459edc636ad53d7302e69bcb0ef6b68a7bf6b08557687443c15ddb0fc",
     "calculations.json": "e78d090f8eaefcc1d16696d737b78ea95ae2dc4301377da12c1126e2b4ddeb23",
     "candidates.json": "1ceab0cc754836a5224bdbb53307b376792cdb845d79c66c886b6075385daae6",
     "case.json": "5131aec8aea6f2272d34db351b7682340c6f3e40b96f8e6f28399f93531f87b8",
-    "claim_check.json": "3cd94181794dff7a1555613db7de244449d4914b7830c34481a9659e2b3e106b",
+    "claim_check.json": "368e3309043dde06e5aa00eb9dcb3894122d675a47716d250f9d66576fccdf0b",
     "directions.json": "141ba17063943d6893342f321196523fd0eaf4c8c102cafee5b91cfc3a254d3a",
     "evidence.json": "fda7a9e2760414ba9bd5f9a73b88a87ccebf6f5d8983c0f0423876de377b273b",
     "judgment.json": "85624b7f49bc7815d5a44cbfcd46ba8f30b88348201fff5b5f63a0c30863e0ef",
@@ -289,9 +289,9 @@
     "profile-supplement.txt": "952368202eeb2cd031c6c0d52212442dca0faaadcd6c99828f951e50ba15d704",
     "profile.json": "af232e95b42de1286681d5b04d706bbd8d16d3dd86cfe304a7d87e5a6bfcab88",
     "profile_parse.json": "26d77c111bb043cbc6cca5e761f0272ae369b77043836f7ff4e039a5759d96d9",
-    "report.html": "3311e44a727830d10556b77e2d5e544eecd6c2ab68f4ac84b65aa043746f3f8d",
+    "report.html": "638a2167d28b25b2df93798c23955d7c7cc78c32e3d11d5e77ed04a5828496c7",
     "report.md": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-    "report_trace.json": "b201665ee8622025687c7f14a4180e301e16b2d4436954cdf2e7a3a9e387bbc6",
+    "report_trace.json": "ae59745be4511aca4a7907758ffeb064c711b53e3e9d4866aa1c884c9ed7ea4e",
     "rules_check.json": "a49b73e4796ddce781c9559fadf72ac99b81b32fdc2d06bf2783d4c160e4b2f0"
   },
   "snapshot_refreshes": [
@@ -579,6 +579,34 @@
         "claim_check.json"
       ],
       "reason": "主路径与保险路径拒绝明示不符候选的阶段门禁修补；旧示例原有证据和分析不变，不冒重新核过官方事实。六旧例正文、核对材料、输入、数值、PDF及原审批完全相同，仅兼容流程指纹，不冒充内容新复核。"
+    },
+    {
+      "date": "2026-10-30",
+      "by": "Codex（独立逐页格式复验后机械重绑，不是内容或官方事实新批准）",
+      "reason": "回溯结果短词不折行并重新生成全部20例。全原文/数字/附录材料/输入一致；仅真实生成时间和高考封面生成日期变化。旧状态、独立身份、日期和语义评语不动；原未批准不升级。",
+      "baseline_commit": "6daaa23",
+      "changed_files": [
+        {
+          "file": "2027-YJ-S05-report.pdf",
+          "before": "c3510ec62f75761aadca608bbe23109ef15281c5eacbda20f883ad1c0012c85a",
+          "after": "cadd442459edc636ad53d7302e69bcb0ef6b68a7bf6b08557687443c15ddb0fc"
+        },
+        {
+          "file": "claim_check.json",
+          "before": "3cd94181794dff7a1555613db7de244449d4914b7830c34481a9659e2b3e106b",
+          "after": "368e3309043dde06e5aa00eb9dcb3894122d675a47716d250f9d66576fccdf0b"
+        },
+        {
+          "file": "report.html",
+          "before": "3311e44a727830d10556b77e2d5e544eecd6c2ab68f4ac84b65aa043746f3f8d",
+          "after": "638a2167d28b25b2df93798c23955d7c7cc78c32e3d11d5e77ed04a5828496c7"
+        },
+        {
+          "file": "report_trace.json",
+          "before": "b201665ee8622025687c7f14a4180e301e16b2d4436954cdf2e7a3a9e387bbc6",
+          "after": "ae59745be4511aca4a7907758ffeb064c711b53e3e9d4866aa1c884c9ed7ea4e"
+        }
+      ]
     }
   ],
   "review_history": [
