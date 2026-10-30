@@ -52,7 +52,7 @@ def database(path):
 
 def metadata(directory,*,database_path,output_dir):
     output_dir.mkdir(parents=True)
-    (output_dir/'datapackage.json').write_text(json.dumps({'x-database-file':database_path.name,'resources':[{'path':database_path.name}]}))
+    (output_dir/'datapackage.json').write_text(json.dumps({'x-database-file':database_path.name,'resources':[{'path':database_path.name},{'path':'sqlite:///file:'+str(database_path.resolve())+'?mode=ro&uri=true'}]}))
     (output_dir/'README.md').write_text('generated dictionary')
     (output_dir/'CHANGELOG.md').write_text('generated changelog')
     (output_dir/'VERSION').write_text('3.1.0\n')
@@ -146,6 +146,10 @@ class CareerDemandTests(unittest.TestCase):
             self.assertEqual(old.execute('select count(*)from recruitment_notice').fetchone()[0],0)
             self.assertEqual(sqlite3.connect(db).execute('select value from old_fact').fetchone()[0],42)
             self.assertEqual(json.loads((root/'datapackage.json').read_text())['resources'][0]['path'],'employment.sqlite')
+            uri=json.loads((root/'datapackage.json').read_text())['resources'][1]['path']
+            self.assertNotIn('candidate',uri)
+            with sqlite3.connect(uri.removeprefix('sqlite:///'),uri=True)as package_db:
+                self.assertEqual(package_db.execute('select value from old_fact').fetchone()[0],42)
             hit=m.lookup(db,request(db));self.assertEqual(len(hit),3)
             self.assertEqual(hit[0]['grade'],'官方');old.close()
 

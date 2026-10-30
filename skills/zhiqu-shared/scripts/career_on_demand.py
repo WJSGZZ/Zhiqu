@@ -474,7 +474,12 @@ def publish_result(result, database, output, deadline, *, metadata_builder=None,
         package=json.loads(package_path.read_text())
         package['x-database-file']=database.name
         for resource in package.get('resources',[]):
-            if resource.get('path')==candidate.name:resource['path']=database.name
+            original_path=resource.get('path')
+            if original_path==candidate.name:resource['path']=database.name
+            elif original_path=='sqlite:///file:'+str(candidate)+'?mode=ro&uri=true':
+                resource['path']='sqlite:///file:'+str(database)+'?mode=ro&uri=true'
+            elif isinstance(original_path,str)and str(candidate)in original_path:
+                raise Gap('候选字典路径格式未识别，不发布失效入口')
         dump(package_path,package)
         for name,value in old_metadata.items():
             if value is not None:
