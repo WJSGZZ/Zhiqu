@@ -439,6 +439,30 @@ class ProfileStore(unittest.TestCase):
                 store.dump(folder/'profile_parse.json',parsed)
                 self.assertTrue(store.alignment_errors(folder),action)
 
+    def test_employment_original_answers_append_only_when_present(self):
+        old=store.build_parse(profile(kind='career',items=[]),'career')
+        answers={'current_job':'税前6500，到手5200为自报，不保证未来。','leave_reason':'希望少夜班，还没决定辞职。','current_terms':'主管口头下月再谈，合同通知与交接期限未知。'}
+        p=store.build_parse(profile(kind='career',items=[{'id':k,'q':k,'a':v}for k,v in answers.items()]),'career')
+        self.assertEqual(p['fields'][:13],old['fields']);self.assertEqual(len(p['fields']),16)
+        for f,(key,value)in zip(p['fields'][13:],answers.items()):
+            self.assertEqual(f['value'],value);self.assertEqual(json.loads(f['quote']),{key:value});self.assertEqual(f['answer_refs'],[key]);self.assertFalse(f['confirmed'])
+        self.assertEqual(p['fields'][14]['category'],'self_judgment')
+
+    def test_employment_refusal_and_uncertainty_are_not_proven_terms(self):
+        for answer in ['不想说','拒答','不清楚。',' 不了解 ','不确定，尚未核合同','不了解，尚未核合同','暂不提供，涉及公司资料','目前不了解合同细节']:
+            p=store.build_parse(profile(kind='career',items=[{'id':'current_terms','q':'模拟条款','a':answer}]),'career')
+            self.assertIsNone(p['fields'][-1]['value']);self.assertEqual(p['fields'][-1]['status'],'unknown');self.assertIn(answer,p['fields'][-1]['quote'])
+
+    def test_employment_analysis_copy_cannot_be_hidden_or_tampered(self):
+        data=document(kind='career',items=[{'id':'current_job','q':'模拟工作','a':'在职，无新offer。','status':'已答'}]);data.update(collapsed=[],counts={'visible':1,'answered':1});data['checksum']=store.checksum(data)
+        case='2027-QZ-0001';store.new_id(self.root,'career',2027,'simulation');store.ingest(self.root,case,json.dumps(data,ensure_ascii=False));folder=self.root/case;store.dump(folder/'case.json',{'case_id':case,'kind':'career'});store.prepare(folder)
+        original=json.loads((folder/'profile_parse.json').read_text())
+        for action in ['change','delete']:
+            p=json.loads(json.dumps(original));p['questionnaire_fields']=json.loads(json.dumps(original['fields']))
+            if action=='change':next(f for f in p['fields']if f['field']=='当前工作原答')['value']='已离职'
+            else:p['fields']=[f for f in p['fields']if f['field']!='当前工作原答']
+            store.dump(folder/'profile_parse.json',p);self.assertTrue(store.alignment_errors(folder))
+
     def test_career_work_boundaries_append_verbatim_without_strengthening(self):
         answers={'hard_limits':['工作与生活平衡'],'night_shift':'不能接受','overtime':'偶尔加班','sales_target':'不能接受','travel':'偶尔可以'}
         old=store.build_parse(profile(kind='career',items=[]),'career')
