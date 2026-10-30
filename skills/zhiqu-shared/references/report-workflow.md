@@ -132,7 +132,7 @@ judgment.json的字段固定如下，表格和组件直接取这些记录；数�
 | preferences | questionnaire_section、quote、profile_refs、method（numeric/ordinal/unconfirmed）、dimensions、weights、confirmed；无确认数值权重时weights=null，不算综合分 |
 | matrix | options、dimensions、cells；每格有 candidate_id、dimension_id、status、text 及引用；每对行列恰有一格 |
 | candidates | id（J类）、candidate_id、supports、counters、costs、fallback、switch_conditions、checkpoint；支持、反对和改判条件分别登记 |
-| recommendation | primary、backup、judgment_refs、evidence_refs、calc_refs、conditions；资格不明只作调查优先级 |
+| recommendation | primary、backup、judgment_refs、evidence_refs、calc_refs、conditions仅列共同前提，单路径条件放对应候选；资格不明只作调查优先级 |
 | checkpoint | date、trigger；全局与每个候选的检查点保持一致 |
 | presentation | 按节号保存有序 `{slot, ref}` 数组；slot 来自本版合同，ref 是阶段文件名加 JSON Pointer，例如 `judgment.json#/report_blocks/01_1` |
 | report_blocks | 以稳定键保存 `{type, content, evidence_refs}`；数字卡、行动、时间线、路线卡、风险、假设等组件放在合同指定的阶段文件 `report_blocks`，不另造同名顶层数组 |
@@ -145,7 +145,7 @@ rules_check.json顶层用 `{schema_version, as_of, items}`，每项来源通过e
 
 ## 四、内容合同与自动组装
 
-每版 references/report-contract.json 是该版各节必备内容和上下限的唯一机器可读登记；report-guide 说明写法，避免在多处抄同一组数量。三版共用 CSS/组件只在 report.py，读研/求职组装后调用 render_report.py；不另建样式。
+各版 references/report-contract.json 唯一登记各节必备内容及数量；report-guide 只述写法，不复制数量。共用 CSS/组件只在 report.py；读研/求职组装后调用 render_report.py，不另建样式。
 
 合同的 `sections` 按 01…12 排列，`role` 固定；`default_title` 沿用本版指南，读研/求职可围绕同一角色个人化标题，不能换名后省略内容，旧示例题名保持。高考保持现有节名。页数不作为内容达标证明。
 
