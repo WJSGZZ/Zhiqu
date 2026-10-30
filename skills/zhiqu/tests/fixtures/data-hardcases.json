@@ -1085,6 +1085,24 @@
         "file": "skills/zhiqu/tests/test_chart_geometry.py",
         "basis": "完整模拟自查暴露的呈现问题；复用合成最小回归，不等于重新核验官方事实。"
       }
+    },
+    {
+      "id": "planning-ineligible-recommendation",
+      "domain": "报告",
+      "test": "test_planning_workflow.RecommendationEligibilityTests.test_failed_candidate_cannot_be_primary_or_backup",
+      "input_fixture": {
+        "file": "test_planning_workflow.py",
+        "symbols": [
+          "RecommendationEligibilityTests.synthetic_case",
+          "RecommendationEligibilityTests.test_failed_candidate_cannot_be_primary_or_backup"
+        ]
+      },
+      "expected": "明确硬条件不符或已排除的候选不得进入主路径或保险路径；保留排除记录不等于推荐，条件待核的调查方向仍允许。",
+      "provenance": {
+        "commit": "ce0f2fe",
+        "file": "skills/zhiqu/tests/test_planning_workflow.py",
+        "basis": "专科求职完整模拟暴露并以合成最小输入独立复现；不推断全行业资格，不认证官方原件。"
+      }
     }
   ],
   "not_in_this_suite": [
