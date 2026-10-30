@@ -1137,6 +1137,40 @@
         "file": "skills/zhiqu/tests/test_report_design.py",
         "basis": "专科稿独立视觉记录引出的合成复现，兼查到R01实际末列缺陷；不冒称已覆盖旧专科原工件。"
       }
+    },
+    {
+      "id": "ky-total-analysis-small-samples",
+      "domain": "考研",
+      "test": "test_kaoyan_backtest.TestKaoyanBacktest.test_current_small_n_policy_is_preserved",
+      "input_fixture": {
+        "file": "test_kaoyan_backtest.py",
+        "symbols": [
+          "TestKaoyanBacktest.test_current_small_n_policy_is_preserved"
+        ]
+      },
+      "expected": "总分诊断跟随现行规则：参考n<5不定档，5—9不能相对稳妥；不冒个人上岸率。",
+      "provenance": {
+        "commit": "df47aad",
+        "file": "skills/zhiqu/tests/test_kaoyan_backtest.py",
+        "basis": "现行聚合统计适配时独立反例实证；旧数学方法源c813ec4，本方法是df47aad新增，不认证名单原件。"
+      }
+    },
+    {
+      "id": "ky-backtest-scope-and-quantile-contract",
+      "domain": "考研",
+      "test": "test_kaoyan_backtest.TestKaoyanBacktest.test_run_scope_precision_and_tiny_reference_guards",
+      "input_fixture": {
+        "file": "test_kaoyan_backtest.py",
+        "symbols": [
+          "TestKaoyanBacktest.test_run_scope_precision_and_tiny_reference_guards"
+        ]
+      },
+      "expected": "跨年范围/方法/精度、已知Y-2小n不得伪装成缺失；非零精度不输出精确人数界。",
+      "provenance": {
+        "commit": "df47aad",
+        "file": "skills/zhiqu/tests/test_kaoyan_backtest.py",
+        "basis": "现行聚合统计适配时独立反例实证；旧数学方法源c813ec4，本方法是df47aad新增，不认证名单原件。"
+      }
     }
   ],
   "not_in_this_suite": [

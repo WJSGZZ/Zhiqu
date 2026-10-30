@@ -78,6 +78,17 @@ class TestKaoyanBacktest(unittest.TestCase):
             self.assertEqual(kb.total_only_analysis(500,dist(list(range(300,300+n))),dist(list(range(300,320)))),'够一够')
             self.assertEqual(kb.total_only_analysis(500,dist(list(range(300,320))),dist(list(range(300,300+n)))),'够一够')
 
+        for n in [1,2,4,5,9,10,20]:
+            previous=dist(list(range(300,300+n)))
+            for older_n in [None,5,20]:
+                older=dist(list(range(305,305+older_n))) if older_n else None
+                years={'2024':{'admitted':previous}}
+                if older:years['2023']={'admitted':older}
+                program={'id':'synthetic-small','name':'合成总分阈值','subjects':['科目甲'],'years':years}
+                for score in [299,300,305,320,500]:
+                    actual=kp.place({'total':score,'complete':True,'subjects':['科目甲'],'singles':{}},program)['tier']
+                    self.assertEqual(kb.total_only_analysis(score,previous,older),actual,(n,older_n,score))
+
     def test_joint_plan_and_known_line_scope_cannot_be_mixed(self):
         r=dict(study_mode='全日制',admission_route='一志愿',special_plan='普通计划',degree_type='学术',direction='不分方向',joint_program='非联培',scope='普通统考',grade='官方',quantile_method='inclusive_linear',quantile_rounding=0)
         self.assertIn('joint_program',kb.KEY)
@@ -110,7 +121,7 @@ class TestKaoyanBacktest(unittest.TestCase):
             self.assertEqual(result['usable_admitted_rows'],0)
             self.assertEqual(db.read_bytes(),before)
             self.assertFalse((root/'special').exists())
-            with self.assertRaises(sqlite3.OperationalError):kb.run(root/'absent.sqlite',root/'bad',100,42)
+            with self.assertRaises(FileNotFoundError):kb.run(root/'absent.sqlite',root/'bad',100,42)
             self.assertFalse((root/'absent.sqlite').exists())
 
     def test_nonempty_wal_is_rejected_without_checkpoint_or_copy(self):
@@ -139,7 +150,7 @@ class TestKaoyanBacktest(unittest.TestCase):
                   **dist(list(range(300,310))))
         cases=[('changed_scope',1),('missing_scope',0),('unknown_scope',0),('older_tiny',0),
                ('known_nonzero_precision',2),('unknown_precision',0),
-               ('negative_precision',0),('infinite_precision',0),('changed_precision',1)]
+               ('negative_precision',0),('infinite_precision',0),('changed_precision',1),('changed_method',1)]
         with tempfile.TemporaryDirectory() as temp:
             root=Path(temp)
             for case,expected_strict in cases:
@@ -159,6 +170,7 @@ class TestKaoyanBacktest(unittest.TestCase):
                         if case=='negative_precision':row['quantile_rounding']=-1
                         if case=='infinite_precision':row['quantile_rounding']=math.inf
                         if case=='changed_precision':row['quantile_rounding']=.2 if year==2025 else .1
+                        if case=='changed_method' and year==2025:row['quantile_method']='nearest_rank'
                         for table,record in [('v_usable',row),('v_usable_line',{**row,'line_total':300})]:
                             con.execute('INSERT INTO '+table+' ('+','.join(record)+') VALUES ('+','.join('?'for _ in record)+')',list(record.values()))
                     con.commit();con.close()
