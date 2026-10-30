@@ -88,6 +88,7 @@ def parse_position(body, entry, request):
     except Exception:
         raise Gap('具体岗位不是可核对的UTF-8文字HTML') from None
     host = urlsplit(entry['url']).hostname or ''
+    if host=='zhjyb.zua.edu.cn':return parse_campus_position(text,root,entry,request)
     if host in {'www.tngdigital.com.cn','tngdigital.com.cn'}:
         return parse_tngd(text,root,entry,request)
     if host in {'www.bodenai.com','bodenai.com'}:
@@ -270,3 +271,124 @@ def parse_tngd(text,root,entry,request):
     if not rows:raise Gap('具体岗位正文没有匹配的城市、发布年度、岗位和实习阶段')
     return dict(title='TNGD Career｜'+ '、'.join(r['position']for r in rows),rows=rows,proofs=proofs,
                 published=rows[0]['published'])
+
+
+class CampusBlocks(HTMLParser):
+    """Stream observed university-platform blocks; never serialize other content."""
+    classes = ('job-information', 'describe-details', 'job-time')
+    def __init__(self, text):
+        super().__init__(convert_charrefs=True)
+        self.text=text;self.stack=[];self.blocks={};self.offsets=[0]
+        self.offsets.extend(m.end()for m in re.finditer('\n',text))
+    def pos(self):
+        line,col=self.getpos();return self.offsets[line-1]+col
+    def handle_starttag(self,tag,attrs):
+        attrs=dict(attrs);hits=set(attrs.get('class','').split())&set(self.classes)
+        if len(hits)>1:raise ValueError('ambiguous block')
+        target=next(iter(hits),None)
+        if target:
+            if target in self.blocks:raise ValueError('duplicate block')
+            self.blocks[target]={'tokens':[],'start':self.pos()+len(self.get_starttag_text())}
+        if tag not in {'br','img','hr','meta','link','input','wbr','source'}:self.stack.append((tag,target))
+    def handle_data(self,data):
+        if not norm(data):return
+        for _,target in self.stack:
+            if target:self.blocks[target]['tokens'].append(norm(data))
+    def handle_endtag(self,tag):
+        for n in range(len(self.stack)-1,-1,-1):
+            if self.stack[n][0]==tag:
+                for _,target in self.stack[n:]:
+                    if target:self.blocks[target]['raw']=self.text[self.blocks[target]['start']:self.pos()]
+                del self.stack[n:];break
+
+
+CAMPUS_SCOPE='高校就业平台职位原页，非雇主自有官网；招聘单位仅为页面登记，未独立认证用人主体、合同甲方或授权；不代表当前在招、本人资格或录用报价。'
+CAMPUS_KEYS=('职位名称','职位类别','工作性质','月薪范围','学历要求','工作城市','招聘人数','招聘单位')
+
+
+def parse_campus_position(text,root,entry,request):
+    from career_on_demand import Gap,public_text
+    if entry['publisher']!='郑州航空工业管理学院':raise Gap('高校就业平台发布者不匹配')
+    if not re.fullmatch(r'/module/position_details/id-\d+/nid-\d+',urlsplit(entry['url']).path):raise Gap('不是已适配的高校具体职位原页')
+    titles=root.xpath('//title/text()')
+    if len(titles)!=1 or entry['publisher']not in titles[0]or '就业信息网'not in titles[0]:raise Gap('高校就业平台原页身份未对应')
+    second=CampusBlocks(text)
+    try:second.feed(text);second.close()
+    except Exception:raise Gap('高校职位流式读取边界不一致')from None
+    proof_blocks={};tokens={}
+    for cls in CampusBlocks.classes:
+        nodes=root.xpath('//*[contains(concat(" ",normalize-space(@class)," ")," '+cls+' ")]')
+        if len(nodes)!=1 or cls not in second.blocks:raise Gap('高校职位业务块缺失或不唯一')
+        node=nodes[0]
+        if any('hidden'in n.attrib or re.search(r'display\s*:\s*none|visibility\s*:\s*hidden',n.get('style',''),re.I)for n in [node]+list(node.iterancestors())+list(node.iterdescendants())):raise Gap('高校职位业务块有显式隐藏内容')
+        if node.xpath('.//script|.//style|.//form|.//table'):raise Gap('高校职位业务块结构未适配')
+        first=[norm(x)for x in node.xpath('.//text()')if norm(x)]
+        if first!=second.blocks[cls]['tokens']:raise Gap('高校职位两读逐格不一致')
+        raw=norm(unescape(re.sub('<[^>]+>',' ',second.blocks[cls].get('raw',''))))
+        if raw!=norm(' '.join(first)):raise Gap('高校职位原始标签全核不一致')
+        selected=[(n+1,x)for n,x in enumerate(first)if (any(x.startswith(k+'：')for k in CAMPUS_KEYS)if cls=='job-information'else bool(re.fullmatch(r'\d{4}/\d{2}/\d{2}',x))if cls=='job-time'else True)]
+        for _,x in selected:public_text(x)
+        tokens[cls]=selected;proof_blocks[cls]={'original_tokens':len(first),'retained': [{'token':n,'text':x}for n,x in selected]}
+    data={}
+    for n,x in tokens['job-information']:
+        key,value=x.split('：',1)
+        if key in data:raise Gap('高校职位同字段多值')
+        data[key]=(value,n)
+    if set(data)!=set(CAMPUS_KEYS):raise Gap('高校职位关键原格缺失')
+    if data['工作性质'][0]!='校招'or request['stage']!='graduate':raise Gap('高校职位没有明确匹配的校招阶段')
+    if data['工作城市'][0]not in {'郑州','郑州市'}or request['region']!='郑州市':raise Gap('高校职位工作城市不匹配，不借单位所在地')
+    position=data['职位名称'][0]
+    if request['direction']not in position:raise Gap('高校职位名称不匹配')
+    req=[x for _,x in tokens['describe-details']]
+    if not req or req[0]!='任职要求'or len(req)<2:raise Gap('高校职位任职段结构变化')
+    cohorts=re.findall(r'(?<!\d)(20\d{2})届(?:全日制)?应届毕业生',' '.join(req))
+    if len(set(cohorts))!=1:raise Gap('高校职位招聘届别不唯一或未明确')
+    year=int(cohorts[0])
+    if year not in request['years']:raise Gap('高校职位届别不在查询范围，不借发布日期')
+    dates=tokens['job-time']
+    if len(dates)!=1:raise Gap('高校职位发布日期未明确或不唯一')
+    published=dates[0][1].replace('/','-')
+    try:dt.date.fromisoformat(published)
+    except ValueError:raise Gap('高校职位日期无效')from None
+    values={'duties':None,'requirements':' '.join(req),'pay':'月薪范围：'+data['月薪范围'][0],'schedule':None}
+    fields={k:values[k]for k in request['layers']}
+    locator='div.job-information[1]';locs={k:([f'div.describe-details[1]/text()[{n}]'for n,_ in tokens['describe-details']]if k=='requirements'else[f'{locator}/text()[{data["月薪范围"][1]}]']if k=='pay'else[])for k in fields}
+    row=dict(region=request['region'],region_raw='工作城市：'+data['工作城市'][0],region_basis='explicit_campus_position_city',year=year,year_basis='explicit_recruitment_cohort',recruitment_year=year,published=published,year_scope='任职要求明确招聘届别；不由公告发布年推定',position=position,stage='graduate',stage_raw='校招',fields=fields,src_table=1,src_row=1,position_locator=locator,field_locators=locs,visibility_basis='public_static_html_blocks',source_scope=CAMPUS_SCOPE,employer_raw=data['招聘单位'][0],education_summary_raw='学历要求：'+data['学历要求'][0])
+    proof=dict(kind='university-position-v1',src_table=1,original_rows=1,loaded_rows=1,dual_read_equal=True,sample_passed=True,methods=['lxml-dom-text-nodes','stdlib-htmlparser-class-blocks'],sample_method='raw-html-blocks-all-retained',blocks=proof_blocks,position_locator=locator,field_locators=locs)
+    validate_campus_proof(row,proof)
+    return dict(title=norm(titles[0]),rows=[row],proofs=[proof],published=published)
+
+
+def validate_campus_proof(row,proof):
+    from career_on_demand import Gap,public_text
+    if (proof.get('kind')!='university-position-v1'or proof.get('methods')!=['lxml-dom-text-nodes','stdlib-htmlparser-class-blocks']or proof.get('sample_method')!='raw-html-blocks-all-retained'or proof.get('dual_read_equal')is not True or proof.get('sample_passed')is not True):raise Gap('高校职位双读全核证明缺失')
+    if any(type(v)is not int or v!=1 for v in (row.get('src_table'),row.get('src_row'),proof.get('src_table'),proof.get('original_rows'),proof.get('loaded_rows'))):raise Gap('高校单职位原表行数或定位声明无效')
+    if row.get('year_scope')!='任职要求明确招聘届别；不由公告发布年推定'or row.get('visibility_basis')!='public_static_html_blocks':raise Gap('高校职位口径说明或读取方式不一致')
+    blocks=proof.get('blocks',{});texts={};locators={}
+    for cls in CampusBlocks.classes:
+        b=blocks.get(cls,{})
+        if type(b.get('original_tokens'))is not int or b['original_tokens']<1 or not isinstance(b.get('retained'),list)or not b['retained']:raise Gap('高校职位抽核位置缺失')
+        seen=set();texts[cls]=[]
+        for cell in b['retained']:
+            n=cell.get('token');v=cell.get('text')
+            if type(n)is not int or n in seen or not 1<=n<=b['original_tokens']or not isinstance(v,str):raise Gap('高校职位抽核位置无效')
+            seen.add(n);public_text(v);texts[cls].append(v);locators[f'div.{cls}[1]/text()[{n}]']=v
+    vals={}
+    for x in texts['job-information']:
+        if '：'not in x:raise Gap('高校职位原格字段无效')
+        key,value=x.split('：',1)
+        if key not in CAMPUS_KEYS or key in vals:raise Gap('高校职位原格重复或包含非业务字段')
+        vals[key]=value
+    dates=texts['job-time'];req=texts['describe-details'];cohorts=re.findall(r'(?<!\d)(20\d{2})届(?:全日制)?应届毕业生',' '.join(req))
+    if set(vals)!=set(CAMPUS_KEYS)or vals['工作性质']!='校招'or vals['工作城市']not in {'郑州','郑州市'}or len(dates)!=1 or not re.fullmatch(r'\d{4}/\d{2}/\d{2}',dates[0])or not req or req[0]!='任职要求'or len(set(cohorts))!=1:raise Gap('高校职位口径原格不能核对')
+    if (row.get('region')!='郑州市'or row.get('region_raw')!='工作城市：'+vals['工作城市']or row.get('region_basis')!='explicit_campus_position_city'or row.get('year_basis')!='explicit_recruitment_cohort'or row.get('year')!=int(cohorts[0])or row.get('recruitment_year')!=int(cohorts[0])or row.get('published')!=dates[0].replace('/','-')or row.get('position')!=vals['职位名称']or row.get('stage')!='graduate'or row.get('stage_raw')!='校招'or row.get('source_scope')!=CAMPUS_SCOPE or row.get('employer_raw')!=vals['招聘单位']or row.get('education_summary_raw')!='学历要求：'+vals['学历要求']):raise Gap('高校职位结构值与原格不同')
+    try:dt.date.fromisoformat(row['published'])
+    except (ValueError,TypeError):raise Gap('高校职位日期无效')from None
+    expected={'duties':None,'requirements':' '.join(req),'pay':'月薪范围：'+vals['月薪范围'],'schedule':None}
+    if row.get('position_locator')!='div.job-information[1]'or proof.get('position_locator')!=row['position_locator']or row.get('field_locators')!=proof.get('field_locators')or set(row.get('field_locators',{}))!=set(row.get('fields',{})):raise Gap('高校职位行级或字段定位缺失')
+    for k,v in row['fields'].items():
+        if k not in expected or v!=expected[k]:raise Gap('高校职位业务值与原段不同')
+        ls=row['field_locators'][k]
+        if not isinstance(ls,list)or len(set(ls))!=len(ls)or any(x not in locators for x in ls):raise Gap('高校职位字段没有原格支持')
+        reconstructed=' '.join(locators[x]for x in ls)if ls else None
+        if reconstructed!=v:raise Gap('高校职位字段与定位原文不同')

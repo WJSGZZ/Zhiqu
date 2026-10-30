@@ -312,7 +312,7 @@ def run_request(request, *, fetch=fetch_public, lookup_fn=lookup, clock=time.mon
                 parsed = parse_table(item['body'], entry, request)
             except Gap as table_gap:
                 from career_positions import parse_position
-                if (urlsplit(item['url']).hostname or '') not in {'www.eitech.edu.cn','eitech.edu.cn','www.bodenai.com','bodenai.com','www.tngdigital.com.cn','tngdigital.com.cn'}:
+                if (urlsplit(item['url']).hostname or '') not in {'www.eitech.edu.cn','eitech.edu.cn','www.bodenai.com','bodenai.com','www.tngdigital.com.cn','tngdigital.com.cn','zhjyb.zua.edu.cn'}:
                     raise table_gap
                 parsed = parse_position(item['body'], dict(entry, url=item['url']), request)
             fingerprint = digest(item['body'])
@@ -323,7 +323,7 @@ def run_request(request, *, fetch=fetch_public, lookup_fn=lookup, clock=time.mon
                           archive_sha256=fingerprint, archive_status='已核后删除（有指纹）',
                           citation=f"{entry['publisher']}：《{parsed['title']}》，{item['url']}，取得日期{dt.date.today().isoformat()}。",
                           license='未注明')
-            if parsed['proofs'][0].get('kind') == 'position-body-v1':
+            if parsed['proofs'][0].get('kind') in {'position-body-v1','university-position-v1'}:
                 source['method'] = '具体岗位正文DOM/流式两读逐段一致；保留业务段原始标签全核；不保存联系资料'
                 source['published'] = parsed.get('published','')
             result['candidates'].append(dict(source=source, rows=parsed['rows'], proofs=parsed['proofs']))
@@ -411,7 +411,7 @@ def publish_result(result, database, output, deadline, *, metadata_builder=None,
                     meta = dict(schema=SCHEMA, direction=result['request']['direction'], stage=row['stage'],
                                 position=row['position'], stage_raw=row['stage_raw'], fields=row['fields'],
                                 review_due=(dt.date.today()+dt.timedelta(days=7)).isoformat())
-                    for key in ('year_basis','year_scope','published','recruitment_year','region_raw','region_basis','position_locator','field_locators','visibility_basis'):
+                    for key in ('year_basis','year_scope','published','recruitment_year','region_raw','region_basis','position_locator','field_locators','visibility_basis','source_scope','employer_raw','education_summary_raw'):
                         if key in row:meta[key]=row[key]
                     evidence = dict(proof, sha256=source['archive_sha256'], src_row=row['src_row'],
                                     position=row['position'], fields=row['fields'])
@@ -525,7 +525,7 @@ def validate_candidate(candidate, result):
                 if (row['region']!=q['region']or row['year']not in q['years']or row['stage']!=q['stage']or
                     q['direction']not in row['position']or set(row['fields'])!=set(q['layers'])or
                     (q['stage']=='internship'and '实习'not in row['position'])or
-                    (q['stage']=='graduate'and row.get('stage_raw')not in {'校园招聘','应届毕业生招聘'})):
+                    (q['stage']=='graduate'and row.get('stage_raw')not in {'校园招聘','应届毕业生招聘'} and not (row.get('stage_raw')=='校招'and any(p.get('kind')=='university-position-v1'and p.get('src_table')==row['src_table']for p in bundle['proofs'])))):
                     raise Gap('候选超出本次城市、年度、岗位或阶段')
                 record_id='career-demand-'+digest(json.dumps([source['source_id'],row,result['request']['direction']],sort_keys=True,ensure_ascii=False).encode())
                 stored=c.execute('SELECT region,year,note,excerpt FROM recruitment_notice WHERE record_id=? AND source_id=?',(record_id,source['source_id'])).fetchone()
@@ -536,8 +536,13 @@ def validate_candidate(candidate, result):
                 if meta['fields']!=row['fields']or proof.get('fields')!=row['fields']or proof.get('src_row')!=row['src_row']or proof.get('sha256')!=source['archive_sha256']:
                     raise Gap('候选原值或原行定位回读不同')
                 if proof.get('dual_read_equal')is not True or proof.get('sample_passed')is not True:raise Gap('候选核对证明缺失')
+                if proof.get('kind')=='university-position-v1':
+                    from career_positions import validate_campus_proof
+                    validate_campus_proof(row,proof)
+                    if any(meta.get(key)!=row.get(key)for key in ('year_basis','year_scope','published','recruitment_year','region_raw','region_basis','position_locator','field_locators','visibility_basis','source_scope','employer_raw','education_summary_raw')):raise Gap('高校职位范围或原段回读不同')
+                    continue
                 if proof.get('kind')=='position-body-v1':
-                    for key in ('year_basis','year_scope','published','recruitment_year','region_raw','region_basis','position_locator','field_locators','visibility_basis'):
+                    for key in ('year_basis','year_scope','published','recruitment_year','region_raw','region_basis','position_locator','field_locators','visibility_basis','source_scope','employer_raw','education_summary_raw'):
                         if key in row and meta.get(key)!=row[key]:
                             raise Gap('具体岗位口径或定位回读不同')
                     if proof.get('src_table')!=row['src_table']:
