@@ -29,6 +29,9 @@ class PublicHTTPTests(unittest.TestCase):
             result=http.memory_curl_adapter(fake)('https://fixture.edu.cn/a',headers={},form=None,max_bytes=1000,timeout=20)
         self.assertEqual(result['body'],body)
         self.assertEqual(result['headers']['set-cookie'],'[present]')
+        receipt=http.public_receipt('https://fixture.edu.cn/a',result,[],None)
+        self.assertEqual(receipt['format_hint']['declared_mime'],'text/html')
+        self.assertNotIn('synthetic',json.dumps(receipt))
         self.assertEqual(captured.getvalue(),'')
         args=called[0]
         self.assertEqual(args[args.index('--output')+1],'-')
@@ -171,5 +174,52 @@ class PublicHTTPTests(unittest.TestCase):
         self.assertFalse(kw['allow_http_redirect'])
         self.assertEqual(kw['max_attempts'],1)
         self.assertEqual(kw['transport'],'plain')
+
+
+
+class ReceiptFormatHintTests(unittest.TestCase):
+    def receipt(self,body,mime=None):
+        return http.public_receipt('https://fixture.edu.cn/download',{'body':body,'content_type':mime,'headers':{'set-cookie':'synthetic-secret'}},[],None)
+
+    def test_html_returned_for_spreadsheet_has_signals_not_a_block_verdict(self):
+        body=b'<script>var privateValue="synthetic-secret";</script><form></form>'
+        out=self.receipt(body,'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        hint=out['format_hint'];self.assertEqual(hint['body_signature'],'html_prefix');self.assertTrue(hint['html_tags']['script']);self.assertTrue(hint['html_tags']['form']);self.assertFalse(hint['html_tags']['title'])
+        self.assertEqual(out['status'],'retrieved');self.assertIsNone(out['stop_category']);self.assertEqual(out['sha256'],hashlib.sha256(body).hexdigest());self.assertNotIn('synthetic',json.dumps(out));self.assertFalse(out['raw_original_written'])
+
+    def test_finite_mime_drops_parameters_unknown_values_and_bad_types(self):
+        cases=[(' TEXT/HTML ; filename=synthetic-secret','text/html'),('application/x-synthetic-secret','unrecognized'),('text/html\r\nSecret: synthetic-secret','unrecognized'),(None,'not_provided'),('','not_provided'),({},'unrecognized'),(False,'unrecognized')]
+        for mime,expected in cases:
+            with self.subTest(mime_type=type(mime).__name__):
+                out=self.receipt(b'opaque',mime);self.assertEqual(out['format_hint']['declared_mime'],expected);self.assertNotIn('synthetic',json.dumps(out))
+
+    def test_binary_signatures_are_only_container_prefix_hints(self):
+        fixtures=[(b'%PDF-1.7','pdf'),(b'PK\x03\x04','zip'),(b'PK\x05\x06','zip'),(b'\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1','ole_compound'),(b'\x89PNG\r\n\x1a\n','png'),(b'\xff\xd8\xff','jpeg'),(b'GIF89a','gif'),(b'RIFF1234WEBP','webp'),(b'','empty'),(b'opaque','unknown')]
+        for body,expected in fixtures:
+            with self.subTest(expected=expected):
+                hint=self.receipt(body,'application/octet-stream')['format_hint'];self.assertEqual(hint['body_signature'],expected);self.assertIn('not_business_verification',hint['scope']);self.assertIsNone(hint['html_tags']);self.assertNotIn('header_bytes',hint)
+
+    def test_prefix_limit_does_not_claim_missing_later_tags(self):
+        body=b'<html>'+b' '*(http.FORMAT_HINT_PREFIX_BYTES)+b'<script>synthetic-secret</script>'
+        hint=self.receipt(body,'text/html')['format_hint'];self.assertEqual(hint['inspected_bytes'],http.FORMAT_HINT_PREFIX_BYTES);self.assertTrue(hint['prefix_truncated']);self.assertFalse(hint['html_tags']['script']);self.assertIn('prefix_only',hint['scope'])
+
+    def test_comments_and_script_literals_do_not_create_title_or_table(self):
+        body=b'<html><!-- <title>synthetic-secret</title> --><script>var x="<table></table>";</script></html>'
+        hint=self.receipt(body,'text/html')['format_hint'];self.assertFalse(hint['html_tags']['title']);self.assertFalse(hint['html_tags']['table']);self.assertTrue(hint['html_tags']['script']);self.assertNotIn('synthetic',json.dumps(hint))
+
+    def test_title_and_textarea_literals_do_not_create_form_or_table(self):
+        body=b'<html><title>synthetic-secret <form></form></title><textarea><table></table></textarea><img></html>'
+        hint=self.receipt(body,'text/html')['format_hint']
+        self.assertTrue(hint['html_tags']['title_has_nonspace_text'])
+        self.assertFalse(hint['html_tags']['form']);self.assertFalse(hint['html_tags']['table'])
+        self.assertTrue(hint['html_tags']['img']);self.assertNotIn('synthetic',json.dumps(hint))
+
+    def test_utf16_bom_structure_never_keeps_title_text_or_attributes(self):
+        body='<html><title>synthetic-secret</title><iframe src="synthetic-private"></iframe></html>'.encode('utf-16')
+        hint=self.receipt(body,'text/html')['format_hint'];self.assertEqual(hint['body_signature'],'html_prefix');self.assertTrue(hint['html_tags']['title_has_nonspace_text']);self.assertTrue(hint['html_tags']['iframe']);self.assertNotIn('synthetic',json.dumps(hint))
+
+    def test_unretrieved_body_cannot_be_reconstructed_from_attempt_payload(self):
+        out=http.public_receipt('https://fixture.edu.cn/a',None,[{'url':'https://fixture.edu.cn/a','http_status':403,'body':b'synthetic-secret','content_type':'text/html'}],'HTTP 403')
+        self.assertIsNone(out['format_hint']);self.assertEqual(out['stop_category'],'http_block');self.assertNotIn('synthetic',json.dumps(out))
 
 if __name__=='__main__':unittest.main()

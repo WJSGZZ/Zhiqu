@@ -3,6 +3,7 @@ The fixed public DNS helper retains the crawler's native guarded transport.
 No live HTTP on import. Only exact parent-approved header/role mappings may be aggregated.
 """
 from pathlib import Path
+from html.parser import HTMLParser
 import hashlib,importlib.util,ipaddress,json,re,shutil,subprocess,sys,time
 from urllib.parse import urlsplit,parse_qsl,unquote,urlencode
 CRAWLER=Path.home()/'.agents/skills/xik-crawler/scripts/crawl.py'
@@ -82,6 +83,58 @@ def retrieve_memory(url,*,referer=None,max_bytes=50_000_000,max_attempts=2,crawl
   return c.retrieve(url,referer=referer,max_bytes=max_bytes,transport='plain',fallback=False,max_attempts=max_attempts,allow_http_redirect=False)
  finally:c.curl_once=old
 
+# Diagnostic enums only: even a syntactically valid MIME subtype can contain
+# arbitrary private text. Never retain unknown header values or byte previews.
+MIME_HINTS=frozenset(('text/html','application/xhtml+xml','application/pdf','application/zip',
+ 'application/octet-stream','application/vnd.ms-excel',
+ 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+ 'application/msword','application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+ 'image/png','image/jpeg','image/gif','image/webp','image/svg+xml',
+ 'application/json','text/plain','text/csv','text/xml','application/xml'))
+FORMAT_HINT_PREFIX_BYTES=262144
+
+class _ReceiptTags(HTMLParser):
+ # Treat title/textarea content as text, just as script/style content is text.
+ CDATA_CONTENT_ELEMENTS=('script','style','title','textarea')
+ def __init__(self):
+  super().__init__();self.flags={k:False for k in ('html','title','script','form','table','img','iframe','object','embed')};self.in_title=False;self.title_text=False
+ def handle_starttag(self,tag,attrs):
+  if tag in self.flags:self.flags[tag]=True
+  if tag=='title':self.in_title=True
+ def handle_startendtag(self,tag,attrs):
+  self.handle_starttag(tag,attrs)
+  if tag=='title':self.in_title=False
+ def handle_endtag(self,tag):
+  if tag=='title':self.in_title=False
+ def handle_data(self,data):
+  if self.in_title and data.strip():self.title_text=True
+
+def response_format_hint(item):
+ """Bounded RAM observations, not a parser, source identity or block verdict."""
+ body=item['body'];sample=bytes(body[:FORMAT_HINT_PREFIX_BYTES]);mime=item.get('content_type')
+ declared=mime.split(';',1)[0].strip().lower()if isinstance(mime,str)else''
+ missing=mime is None or isinstance(mime,str)and not mime.strip()
+ declared=declared if declared in MIME_HINTS else'not_provided'if missing else'unrecognized'
+ signatures=((b'%PDF-','pdf'),(b'PK\x03\x04','zip'),(b'PK\x05\x06','zip'),(b'PK\x07\x08','zip'),
+  (b'\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1','ole_compound'),(b'\x89PNG\r\n\x1a\n','png'),
+  (b'\xff\xd8\xff','jpeg'),(b'GIF87a','gif'),(b'GIF89a','gif'))
+ signature=next((name for magic,name in signatures if sample.startswith(magic)),'empty'if not sample else'unknown')
+ if sample.startswith(b'RIFF')and sample[8:12]==b'WEBP':signature='webp'
+ text=None
+ if signature=='unknown'or declared in ('text/html','application/xhtml+xml'):
+  text=sample.decode('utf-16'if sample.startswith((b'\xff\xfe',b'\xfe\xff'))else'utf-8-sig',errors='replace')
+  beginning=text.lstrip().lower()
+  if signature=='unknown':
+   if any(beginning.startswith(k)for k in ('<!doctype html','<html','<head','<body','<script')):signature='html_prefix'
+   elif beginning.startswith(('<?xml','<svg')):signature='xml_prefix'
+ tags=None
+ if signature=='html_prefix'or declared in ('text/html','application/xhtml+xml'):
+  parser=_ReceiptTags()
+  try:parser.feed(text or'');parser.close();tags=dict(parser.flags,title_has_nonspace_text=parser.title_text)
+  except (ValueError,AssertionError):tags={'inspection_failed':True}
+ return dict(scope='byte_prefix_only_not_business_verification',declared_mime=declared,
+  body_signature=signature,inspected_bytes=len(sample),prefix_truncated=len(body)>len(sample),html_tags=tags)
+
 def public_receipt(url,item,attempts,reason):
  """No raw header/reason/body/exception is copied to disk or diagnostics."""
  safe_url(url);safe_attempts=[]
@@ -101,7 +154,7 @@ def public_receipt(url,item,attempts,reason):
   safe_attempts.append(z)
  last_status=next((a['http_status']for a in reversed(attempts)if a.get('http_status')is not None),None)
  category='restricted_redirect'if any(a.get('stop_category')=='restricted_redirect'for a in safe_attempts)else stop_category(reason,last_status)
- return dict(source_url=url,status='retrieved'if item else'unretrieved',stop_category=None if item else category,sha256=hashlib.sha256(item['body']).hexdigest()if item else None,bytes=len(item['body'])if item else 0,attempts=safe_attempts,raw_original_written=False)
+ return dict(source_url=url,status='retrieved'if item else'unretrieved',stop_category=None if item else category,sha256=hashlib.sha256(item['body']).hexdigest()if item else None,bytes=len(item['body'])if item else 0,attempts=safe_attempts,raw_original_written=False,format_hint=response_format_hint(item)if item else None)
 
 def stop_category(reason,http_status=None):
  """Classify actual status/reason, never digits in a URL or fingerprint."""
