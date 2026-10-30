@@ -1344,6 +1344,25 @@
         "file": "skills/zhiqu/tests/test_planning_workflow.py",
         "basis": "江西二战跨考完整自查的本机作者重跑在旧派生结果后重复追加字段，独立复核发现；此提交首次加入该实际生成入口合成回归，不认证原答真实性。"
       }
+    },
+    {
+      "id": "pdf-later-page-scope-not-hidden-by-program",
+      "domain": "考研",
+      "test": "test_kaoyan_documents.DocumentTests.test_unmapped_later_page_scope_is_not_ignored_by_program_filter",
+      "input_fixture": {
+        "file": "test_kaoyan_documents.py",
+        "symbols": [
+          "document",
+          "DocumentTests.parse",
+          "DocumentTests.test_unmapped_later_page_scope_is_not_ignored_by_program_filter"
+        ]
+      },
+      "expected": "已命中所问专业的普通表不能遮住后页未映射的专项/调剂范围，当前解析须整份拒入；纯另一页页码仍可通过，不把拒入合成回归当实际原件核准。",
+      "provenance": {
+        "commit": "1a10fb1a87280f08e89acecf6b07098e0d98c851",
+        "file": "skills/zhiqu/tests/test_kaoyan_documents.py",
+        "basis": "河海2026既有7页PDF单次受限重取发现普通/专项/复试安排混合，表外未映射仍拒入；此提交首次加入该跨页生产入口回归，真实范围双读尚未闭合。"
+      }
     }
   ],
   "not_in_this_suite": [
