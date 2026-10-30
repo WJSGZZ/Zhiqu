@@ -702,6 +702,15 @@
         "claim_check.json"
       ],
       "reason": "新增新封存求职关键原答的实际消费门禁；历史无校验码迁移允许保留冻结分析，新老正文与材料分别比对；逐份组装正文、核对材料及PDF字节均未变。仅兼容流程指纹，不重新认证官方事实或原审批。"
+    },
+    {
+      "date": "2026-10-31",
+      "by": "Codex（派生字段唯一性兼容复验，非内容复核）",
+      "files": [
+        "report_trace.json",
+        "claim_check.json"
+      ],
+      "reason": "新增派生画像字段名唯一门禁；旧例均无重复，逐份组装正文、核对材料和PDF字节不变，仅兼容流程指纹，不重认证官方事实或原审批。"
     }
   ],
   "review_history": [
@@ -2969,7 +2978,7 @@
     "calculations.json": "89d7a293fd6780b562866f4871846b19130b0d86e79cb9f9c233e572cbae5b5d",
     "candidates.json": "ea8bbcb101fc7dc899ec1137e869654c3b9e85d79d8229e4de8115418467aeae",
     "case.json": "79136c0287d7e845b2308724e997d90b3b7a805e4fe2843da189774d6ec93a6e",
-    "claim_check.json": "327079a7f2539bfafd78561cf570f44c6ff146fd274ed9dca9beb1b4e1b486cf",
+    "claim_check.json": "98a857f93a888553abb466c7ceee0947fea7fed8f35c1921252d0f7b75e42c0c",
     "directions.json": "2d709b22623617481aefa804b96da5c5d274812758094bb921c173d0466c29df",
     "evidence.json": "8c97b5ec4dd2e295bbf4a8eaa9372acfd30f2fcc1615cc5810525fdbbb596d59",
     "judgment.json": "89e67d8e39d0666399d8b470809425420fb18271c756578790e08248301ec3ff",
@@ -2980,7 +2989,7 @@
     "profile_parse.json": "abe812515ea2a27d78209f08c28c8bdde0a5c10d1672ef0983d66d68c6eece1a",
     "report.html": "7ffb0b04713dcc3f25d982f2e19a439f5b2d79cd0a6e84e64e50a11bf89e4890",
     "report.md": "90ff1e8ce1555a081d376dbea69e831d6f8788393724d3db9bdb8189646a6262",
-    "report_trace.json": "39bdf376cd67862b6b1e0826c14e9a1ad14c3133b7a663a4633c9f2d5c00ec9a",
+    "report_trace.json": "d847d972527b634510735539d4b0a16ab6b711b1f0481e251a9c3b54ac6dbc33",
     "rules_check.json": "b45b1313cf295a6e320d32afce13a0b93b9b0e54e8b46d8d3cf2d6329732a40b"
   }
 }
