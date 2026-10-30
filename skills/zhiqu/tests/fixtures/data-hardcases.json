@@ -1310,6 +1310,23 @@
         "file": "skills/zhiqu/tests/test_kaoyan_public_http.py",
         "basis": "河北旧附件返回非ZIP而收据丢弃已有MIME；本提交首次引入安全枚举及该合成回归，不重新请求旧入口，不认证真实页面类型。"
       }
+    },
+    {
+      "id": "quality-comparable-check-denominator",
+      "domain": "考研",
+      "test": "test_data_quality.QualityTests.test_comparable_check_denominator_excludes_scope_missing_and_unknown",
+      "input_fixture": {
+        "file": "test_data_quality.py",
+        "symbols": [
+          "QualityTests.test_comparable_check_denominator_excludes_scope_missing_and_unknown"
+        ]
+      },
+      "expected": "登记核对一致占比只以一致+不一致为分母，口径不同、未取到及其他结论排除；不伪称人工真值准确率或全库覆盖率，不回显未知原文。",
+      "provenance": {
+        "commit": "ad3104446d22e3bb44fcbf5b314c03e9e67f72a1",
+        "file": "skills/zhiqu/tests/test_data_quality.py",
+        "basis": "质量摘要改为逐渠道给出可比核对分母，本提交首次引入该合成反例；不认证原核对结论或人工金标准。"
+      }
     }
   ],
   "not_in_this_suite": [
