@@ -1032,6 +1032,25 @@
         "file": "skills/zhiqu/tests/test_career_positions.py",
         "basis": "具体岗位原页适配后合成回归；真实原件另由独立复核，不将合成用例冒充原件准确率。"
       }
+    },
+    {
+      "id": "career-published-sql-resource",
+      "domain": "就业",
+      "test": "test_career_on_demand.CareerDemandTests.test_publish_atomic_and_old_reader_stays_valid",
+      "input_fixture": {
+        "file": "test_career_on_demand.py",
+        "symbols": [
+          "database",
+          "metadata",
+          "CareerDemandTests.test_publish_atomic_and_old_reader_stays_valid"
+        ]
+      },
+      "expected": "发布后字典裸路径及SQLite SQL资源URI均指向正式库，资源实际可读，已有SQLite读者仍可读旧文件。",
+      "provenance": {
+        "commit": "353167b",
+        "file": "skills/zhiqu/tests/test_career_on_demand.py",
+        "basis": "方法最初由353167b引入；95d2d1c根据真实build_packages生成格式补SQL URI并实际打开资源断言，不以合成裸路径代替真实生产格式。"
+      }
     }
   ],
   "not_in_this_suite": [
