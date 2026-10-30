@@ -1051,6 +1051,40 @@
         "file": "skills/zhiqu/tests/test_career_on_demand.py",
         "basis": "方法最初由353167b引入；95d2d1c根据真实build_packages生成格式补SQL URI并实际打开资源断言，不以合成裸路径代替真实生产格式。"
       }
+    },
+    {
+      "id": "report-qualitative-official-scenario",
+      "domain": "报告",
+      "test": "test_verify_report.PlanningMaterialsHeading.test_unused_official_number_does_not_relabel_scenario_table",
+      "input_fixture": {
+        "file": "test_verify_report.py",
+        "symbols": [
+          "PlanningMaterialsHeading.test_unused_official_number_does_not_relabel_scenario_table"
+        ]
+      },
+      "expected": "只引用定性官方原文、未引用的官方数字不得给个人/情景数字冠官方标题；实际引用官方0仍保留官方数字。",
+      "provenance": {
+        "commit": "17b91c5",
+        "file": "skills/zhiqu/tests/test_verify_report.py",
+        "basis": "完整模拟自查暴露的呈现问题；复用合成最小回归，不等于重新核验官方事实。"
+      }
+    },
+    {
+      "id": "report-current-grade-composite",
+      "domain": "报告",
+      "test": "test_chart_geometry.AppendixReadability.test_current_grade_composite_keeps_marks_and_ranking_distinct",
+      "input_fixture": {
+        "file": "test_chart_geometry.py",
+        "symbols": [
+          "AppendixReadability.test_current_grade_composite_keeps_marks_and_ranking_distinct"
+        ]
+      },
+      "expected": "当前问卷均分/绩点与排名复合题分开显示、未知排名保留、GPA不换算；旧自由格式呈现保持。",
+      "provenance": {
+        "commit": "17b91c5",
+        "file": "skills/zhiqu/tests/test_chart_geometry.py",
+        "basis": "完整模拟自查暴露的呈现问题；复用合成最小回归，不等于重新核验官方事实。"
+      }
     }
   ],
   "not_in_this_suite": [
