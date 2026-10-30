@@ -1205,6 +1205,23 @@
         "file": "skills/zhiqu/tests/test_existing_application.py",
         "basis": "山东二战完整自查暴露单校核实仍被要求3校；本方法首次在该提交出现，后续独立反例扩展断言，不认证真实报名状态。"
       }
+    },
+    {
+      "id": "grad-exam-account-shadow-binding",
+      "domain": "报告",
+      "test": "test_profile_store.ProfileStore.test_fresh_exam_projection_cannot_hide_behind_questionnaire_fields",
+      "input_fixture": {
+        "file": "test_profile_store.py",
+        "symbols": [
+          "ProfileStore.test_fresh_exam_projection_cannot_hide_behind_questionnaire_fields"
+        ]
+      },
+      "expected": "新解析的三段原答在fields和questionnaire_fields均不得篡改或抹去；正确问卷副本不能遮蔽操控者实际读取的错误分析副本。",
+      "provenance": {
+        "commit": "2791d59",
+        "file": "skills/zhiqu/tests/test_profile_store.py",
+        "basis": "真实模拟流程中需手工追加二战原答后独立审发现副本遮蔽漏检；此提交首次引入该方法，纯合成输入，不认证真实成绩或资格。"
+      }
     }
   ],
   "not_in_this_suite": [
