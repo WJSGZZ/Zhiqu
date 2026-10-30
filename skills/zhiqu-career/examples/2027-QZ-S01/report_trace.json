@@ -21,7 +21,7 @@
     "check_demos.py": "67d4edc1cd737beeb6729783a736e667a97c12d8f7de2de673632d9d5c3370b8",
     "report.py": "c1a2e82e6ce5fb9fefd866e14679a24f1ad5dcdcf56e2bdc1d578668d10e1cd8",
     "render_report.py": "17c81658af1834fc1216d61ca3c11070934229a74d8d1175a1602a348ffd1c0f",
-    "profile_store.py": "befbb880239b1fa3207b7875f396c70c2f21d500dca57d6bf9cedcac4db2a2be",
+    "profile_store.py": "7d78ae78c185aa37cb8ba10b306ddf3505717f4c6572bfef8c268a81455df538",
     "claim_guards.py": "54bab4d942fafd148190df73cad34805538662b0a152ec5701c8a960e28dbd1d",
     "source_authentication.py": "b18201e997e0b4ca33c879979bc03f81deab1ea5edbbbc74cab6bf622821f278",
     "official_source_audit.py": "c09c40a2c5eec18318fbb1fa52393ee37b4e63f636ec7ea3999084d12ecc0df1",
@@ -1322,7 +1322,7 @@
     "form": null
   },
   "verification_tools_sha256": {
-    "verify_report.py": "e6b5191814dac954b8662107e07318a8d5b7620d51edd30d18848b6f8e7a84fe",
+    "verify_report.py": "6baa67d0aca61ec2a793da7663f834c1074873440da35a48ea1bb47bbc27a6ee",
     "verification_calculations.py": "24c83966e3bc62642683532ca98d4318d989efd7f5e4444a9c7d9c695accea98"
   },
   "regeneration_history": [
@@ -1374,6 +1374,29 @@
         }
       },
       "previous_trace_sha256": "d6590058f3ea702e88824cfe990b6e79cde92b485c6248be54251ba2d3c4ea16",
+      "assembled_markdown_sha256": "0895952f1caa72b7576496650f775ddafc6137d721509d0fe4868561a12c2195",
+      "appendix_materials_unchanged": true,
+      "original_artifacts": {
+        "report.md": "0895952f1caa72b7576496650f775ddafc6137d721509d0fe4868561a12c2195",
+        "report.html": "874f4f27b8b595bb0d7359b302fab4a90416724998afa6706f7799749a66d58f",
+        "2027-QZ-S01-report.pdf": "8b776f829fbaf4810c743018bf4409a317e289a2020545cc03aa25a5ddbea9ed"
+      }
+    },
+    {
+      "date": "2026-10-30",
+      "kind": "career_work_boundary_compatibility",
+      "reason": "追加求职工作边界原答与已知键中文标签；历史无校验码迁移允许保留冻结分析，新老正文与材料分别比对；逐份组装正文、核对材料及PDF字节均未变。仅兼容流程指纹，不重新认证官方事实或原审批。",
+      "changed_tools": {
+        "profile_store.py": {
+          "before": "befbb880239b1fa3207b7875f396c70c2f21d500dca57d6bf9cedcac4db2a2be",
+          "after": "7d78ae78c185aa37cb8ba10b306ddf3505717f4c6572bfef8c268a81455df538"
+        },
+        "verify_report.py": {
+          "before": "e6b5191814dac954b8662107e07318a8d5b7620d51edd30d18848b6f8e7a84fe",
+          "after": "6baa67d0aca61ec2a793da7663f834c1074873440da35a48ea1bb47bbc27a6ee"
+        }
+      },
+      "previous_trace_sha256": "88108eafcbbf44741971b841f335e640fefbc5149a8c71f033b73d1bb8fbec98",
       "assembled_markdown_sha256": "0895952f1caa72b7576496650f775ddafc6137d721509d0fe4868561a12c2195",
       "appendix_materials_unchanged": true,
       "original_artifacts": {
