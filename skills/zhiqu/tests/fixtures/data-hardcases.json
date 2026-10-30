@@ -1257,6 +1257,23 @@
         "file": "skills/zhiqu/tests/test_career_campus_position.py",
         "basis": "独立审查在真实郑州高校平台职位适配中发现可改表/行/计数，最小合成fixture复用；此提交首次引入该方法。"
       }
+    },
+    {
+      "id": "career-employment-answer-shadow-binding",
+      "domain": "报告",
+      "test": "test_profile_store.ProfileStore.test_employment_analysis_copy_cannot_be_hidden_or_tampered",
+      "input_fixture": {
+        "file": "test_profile_store.py",
+        "symbols": [
+          "ProfileStore.test_employment_analysis_copy_cannot_be_hidden_or_tampered"
+        ]
+      },
+      "expected": "当次提交的当前工作、离开原因、在岗及离职约定逐字保留；正确问卷副本不能遮住实际分析字段的改写或删除；自报不认证薪酬、合同或辞职决定。",
+      "provenance": {
+        "commit": "0abee546c519816a65e1b8261b23c993bdc50d77",
+        "file": "skills/zhiqu/tests/test_profile_store.py",
+        "basis": "江苏在职转向完整模拟发现三原答未自动投影，本提交首次加入该方法；纯合成副本检查，不认证真实雇主条款。"
+      }
     }
   ],
   "not_in_this_suite": [
