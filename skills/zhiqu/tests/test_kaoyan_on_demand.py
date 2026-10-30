@@ -135,6 +135,44 @@ class OnDemandTests(unittest.TestCase):
         blob=page('<table><tr><th>专业代码</th><th>总分</th><th>综合单科门槛</th></tr><tr><td>085404</td><td>300</td><td>70</td></tr></table>')
         with self.assertRaises(adapters.NeedsReview):adapters.parse_official_html(blob,URL,IDENTITY,2026,'lines',['0854'])
 
+    def test_inline_title_fragments_are_one_original_heading_for_each_layer(self):
+        tables={'lines':'<table><tr><th>专业代码</th><th>总分</th></tr><tr><td>085404</td><td>300</td></tr></table>',
+                'catalog':'<table><tr><th>专业代码</th><th>招生人数</th></tr><tr><td>085404</td><td>9</td></tr></table>',
+                'stats':'<table><tr><th>专业代码</th><th>初试总分</th></tr>'+''.join('<tr><td>085404</td><td>'+str(x)+'</td></tr>'for x in [300,301,302])+'</table>'}
+        names={'lines':'复试分数线','catalog':'招生专业目录','stats':'拟录取名单'}
+        for layer,table in tables.items():
+            with self.subTest(layer=layer):
+                heading='<h1>合成大学<span>2026</span>年<strong>硕士研究生</strong><em>'+names[layer]+'</em></h1>'
+                result=adapters.parse_official_html(page(heading+table,'合成大学研究生院'),URL,IDENTITY,2026,layer,['0854'])
+                self.assertEqual(result['rows'],1)
+                self.assertTrue(result['proofs'][0]['sample_passed'])
+                if layer=='stats':self.assertEqual(result['manifest']['rows'][0]['n'],3)
+                else:self.assertEqual(result['manifest']['sources'][0]['title'],'合成大学2026年硕士研究生'+names[layer])
+
+    def test_title_fragments_cannot_be_borrowed_from_other_headings_or_body(self):
+        table='<table><tr><th>专业代码</th><th>总分</th></tr><tr><td>085404</td><td>300</td></tr></table>'
+        for heading in ['<h1>合成大学2026年通知</h1><h2>合成大学2025年硕士复试分数线</h2>',
+                        '<h1>合成大学硕士复试分数线</h1><p>2026</p>']:
+            with self.subTest(kind=heading[:4]),self.assertRaises(adapters.NeedsReview):
+                adapters.parse_official_html(page(heading+table,'合成大学研究生院'),URL,IDENTITY,2026,'lines',['0854'])
+
+    def test_scripts_styles_comments_are_not_heading_scope_evidence(self):
+        table='<table><tr><th>专业代码</th><th>总分</th></tr><tr><td>085404</td><td>300</td></tr></table>'
+        for fragment in ['<script>2026年硕士复试分数线</script>',
+                         '<style>2026年硕士复试分数线</style>',
+                         '<!--2026年硕士复试分数线-->']:
+            with self.subTest(kind=fragment[:8]),self.assertRaises(adapters.NeedsReview):
+                adapters.parse_official_html(page('<h1>合成大学'+fragment+'</h1>'+table,'合成大学研究生院'),URL,IDENTITY,2026,'lines',['0854'])
+
+    def test_inline_heading_is_kept_through_on_demand_manifest(self):
+        table='<h1>合成大学<span>2026</span>年<strong>硕士</strong>复试分数线</h1><table><tr><th>专业代码</th><th>总分</th></tr><tr><td>085404</td><td>300</td></tr></table>'
+        blob=page(table,'合成大学研究生院')
+        summary,fetch,publisher=self.run_fake(fetch=Mock(return_value=({'body':blob,'url':URL},{'status':'retrieved'})))
+        self.assertEqual(summary['outcomes'][0]['status'],'obtained');publisher.assert_called_once()
+        manifest=json.loads((self.root/'out/reviewed-manifest-1.json').read_text())['manifest']
+        self.assertEqual(manifest['sources'][0]['title'],'合成大学2026年硕士复试分数线')
+        self.assertEqual(manifest['rows'][0]['row']['total'],300)
+
     def test_doctoral_or_unmarked_catalogue_is_not_masters(self):
         for title in ['合成大学2026年博士招生专业目录', '合成大学2026年招生专业目录']:
             with self.subTest(title=title), self.assertRaises(adapters.NeedsReview):

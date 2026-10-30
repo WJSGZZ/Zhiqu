@@ -41,7 +41,8 @@ def number(value):
 
 def source_record(body, url, school, year, layer):
     root = html.fromstring(_decode(body))
-    titles = root.xpath('//h1//text() | //h2//text() | //title/text()')
+    # Inline spans belong to one heading; distinct headings must not fuse.
+    titles = [_lxml_text(node) for node in root.xpath('//h1 | //h2 | //title')]
     title = next((re.sub(r'\s+', ' ', x).strip() for x in titles
                   if str(year) in x and re.search({'lines':'复试|分数线','catalog':'目录|(?:招生|专业).*计划|计划.*分配','stats':'拟录取'}[layer], x)), None)
     if not title or school not in ''.join(titles):
