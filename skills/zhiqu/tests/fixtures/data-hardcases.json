@@ -1363,6 +1363,25 @@
         "file": "skills/zhiqu/tests/test_kaoyan_documents.py",
         "basis": "河海2026既有7页PDF单次受限重取发现普通/专项/复试安排混合，表外未映射仍拒入；此提交首次加入该跨页生产入口回归，真实范围双读尚未闭合。"
       }
+    },
+    {
+      "id": "pdf-scope-diagnostics-all-pages-no-raw-text",
+      "domain": "考研",
+      "test": "test_kaoyan_documents.DocumentTests.test_all_unmapped_pages_reported_without_raw_text",
+      "input_fixture": {
+        "file": "test_kaoyan_documents.py",
+        "symbols": [
+          "document",
+          "DocumentTests.parse",
+          "DocumentTests.test_all_unmapped_pages_reported_without_raw_text"
+        ]
+      },
+      "expected": "未映射范围的拒入不放宽，一次报告所有命中页码，不能只给首页或回显原文/隐私哨兵；第三读前拒入，纯页码不误拦。",
+      "provenance": {
+        "commit": "01f50137218d06de9f6a7cae1abe7873344b4838",
+        "file": "skills/zhiqu/tests/test_kaoyan_documents.py",
+        "basis": "河海混合范围PDF诊断显示已有逐页定位却在首个异常时丢弃；本提交首次引入全部页码与禁止原文回显的生产入口回归，不认证真实原件两读。"
+      }
     }
   ],
   "not_in_this_suite": [
