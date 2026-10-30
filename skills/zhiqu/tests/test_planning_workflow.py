@@ -31,6 +31,30 @@ class PlanningWorkflowTests(unittest.TestCase):
     def change(self,root,file,fn):
         obj=read(root/file);fn(obj);dump(root/file,obj)
 
+    def test_duplicate_profile_labels_rejected_even_when_values_agree(self):
+        for kind in ('grad','career'):
+            root=self.roots[kind];original=read(root/'profile_parse.json')
+            for same_value in (True,False):
+                obj=copy.deepcopy(original);duplicate=copy.deepcopy(obj['fields'][0])
+                if not same_value:duplicate['value']='不同的合成值'
+                obj['fields'].append(duplicate);dump(root/'profile_parse.json',obj)
+                errors=PlanningCase(root).check(1)
+                self.assertTrue(any('字段名重复' in e for e in errors))
+            dump(root/'profile_parse.json',original)
+
+    def test_duplicate_label_whitespace_and_generation_gate(self):
+        root=self.roots['grad'];p=read(root/'profile_parse.json');duplicate=copy.deepcopy(p['fields'][0]);duplicate['field']=' '+duplicate['field']+' '
+        p['fields'].append(duplicate);dump(root/'profile_parse.json',p)
+        self.assertTrue(any('字段名重复' in e for e in PlanningCase(root).check(1)))
+        before=(root/'report.md').read_bytes()
+        with self.assertRaisesRegex(ValueError,'字段名重复'):generate(root,html_only=True,profile_version='profile.txt')
+        self.assertEqual((root/'report.md').read_bytes(),before)
+
+    def test_distinct_labels_with_equal_values_are_allowed(self):
+        root=self.roots['grad'];p=read(root/'profile_parse.json');duplicate=copy.deepcopy(p['fields'][0]);duplicate['field']='另一个有区分的含义'
+        p['fields'].append(duplicate);dump(root/'profile_parse.json',p)
+        self.assertFalse(any('字段名重复' in e for e in PlanningCase(root).check(1)))
+
     def entry(self,root,slot,sid='01'):
         c=PlanningCase(root)
         e=next(x for x in c.nodes()[sid] if x['slot']==slot)

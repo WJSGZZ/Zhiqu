@@ -464,7 +464,14 @@ class PlanningCase:
             if structured['zhiqu']!=self.kind:self.err('profile.json','','画像类型与登记不一致')
         elif not raw.startswith(header):self.err('profile.txt','','画像开头错误')
         if structured is not None:self.errors.extend(alignment_errors(self.root))
-        p=self.need('profile_parse.json');fields={x['field']:x for x in p.get('fields',[])};missing={x['field'] for x in p.get('missing',[])}
+        p=self.need('profile_parse.json');seen={}
+        for i,field in enumerate(p.get('fields',[])):
+            label=field.get('field')
+            if isinstance(label,str) and label.strip():
+                key=label.strip()
+                if key in seen:self.err('profile_parse.json','fields/'+str(i)+'/field','字段名重复，与fields/'+str(seen[key])+'/field相同；重建派生画像或区分含义，不能重复追加')
+                else:seen[key]=i
+        fields={x['field']:x for x in p.get('fields',[])};missing={x['field'] for x in p.get('missing',[])}
         for name in PROFILE_FIELDS[self.kind]:
             f=fields.get(name,{})
             if f.get('status') not in ('given','inferred','unknown'): self.err('profile_parse.json',name,'缺字段状态')
