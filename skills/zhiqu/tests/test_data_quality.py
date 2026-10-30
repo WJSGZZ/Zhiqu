@@ -119,6 +119,40 @@ class QualityTests(unittest.TestCase):
         self.assertEqual(r['correction_without_domain_prefix']['rows'],3)
         self.assertEqual(r['correction_without_domain_prefix']['by_table'],{'kyXelse':1,'staging_kaoyan_candidate':1,'未标':1})
 
+    def test_comparable_check_denominator_excludes_scope_missing_and_unknown(self):
+        self.c.execute('CREATE TABLE data.samples(verdict TEXT)')
+        self.c.executemany('INSERT INTO data.samples VALUES (?)',[(x,) for x in ['一致','一致','不一致','口径不同','未取到','synthetic-private',None]])
+        r=q.check_outcomes(self.c,'samples','verdict')
+        self.assertEqual(r['recorded_checks'],7);self.assertEqual(r['comparable_checks'],3)
+        self.assertEqual(r['agreement_rate'],2/3);self.assertEqual(r['outcome_counts']['其他或未标'],2)
+        self.assertIsNone(r['manual_gold_accuracy']);self.assertIsNone(r['population_coverage_rate'])
+        self.assertNotIn('synthetic-private',json.dumps(r))
+
+    def test_zero_comparable_denominator_and_absent_field_are_unknown(self):
+        self.c.execute('CREATE TABLE data.samples(verdict TEXT)')
+        for values in [[],[('未取到',),('口径不同',)]]:
+            self.c.execute('DELETE FROM data.samples');self.c.executemany('INSERT INTO data.samples VALUES (?)',values)
+            r=q.check_outcomes(self.c,'samples','verdict');self.assertIsNone(r['agreement_rate'])
+            self.assertEqual(r['comparable_checks'],0)
+        r=q.check_outcomes(self.c,'samples','status');self.assertFalse(r['available']);self.assertIsNone(r['agreement_rate'])
+
+    def test_check_channels_keep_domain_and_mirror_filters_without_pooling(self):
+        self.c.execute('CREATE TABLE data.check_sample(domain TEXT,verdict TEXT)')
+        self.c.executemany('INSERT INTO data.check_sample VALUES (?,?)',[('高考','不一致'),('考研','一致'),('就业','一致')])
+        self.c.execute('CREATE TABLE data.purchased_check(sample_mirrored INT,verdict TEXT)')
+        self.c.executemany('INSERT INTO data.purchased_check VALUES (?,?)',[(1,'一致'),(0,'不一致'),(None,'未取到')])
+        r=q.audit(self.c,q.db._tables(self.c),'考研')
+        self.assertEqual(r['check_sample']['check_outcomes']['recorded_checks'],1)
+        self.assertEqual(r['ky_check_sample']['check_outcomes']['recorded_checks'],1)
+        self.assertNotIn('total',r)
+        r=q.extra_audit(self.c,q.db._tables(self.c),'高考')['purchased_check_unmirrored']['check_outcomes']
+        self.assertEqual(r['recorded_checks'],2);self.assertEqual(r['comparable_checks'],1);self.assertEqual(r['agreement_rate'],0)
+
+    def test_markdown_names_recorded_agreement_not_manual_accuracy(self):
+        report=q.build(self.c,self.root);text=q.markdown(report,'考研')
+        self.assertIn('1/1，100.00%',text);self.assertIn('不是人工真值准确率',text)
+        self.assertIn('不合并比例',text)
+
     def test_build_does_not_write_database(self):
         before=list(self.c.iterdump());q.build(self.c,self.root)
         self.assertEqual(list(self.c.iterdump()),before)

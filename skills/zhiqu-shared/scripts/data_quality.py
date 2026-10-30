@@ -123,6 +123,29 @@ def coverage(path, domain):
             'not_obtained_reason_cells': dict(sorted(reasons.items()))}
 
 
+
+def check_outcomes(c, table, field, where='', params=()):
+    """登记核对的结果构成，不能当人工金标准准确率或全库覆盖率。"""
+    if field not in db._cols(c, table):
+        return {'available': False, 'reason': '核对结论列缺失', 'agreement_rate': None}
+    # 只接收规范四枚举；不猜旧状态同义词，也不输出未知原文。
+    sql = ('SELECT CASE WHEN ' + db._ident(field) +
+           " IN ('一致','不一致','口径不同','未取到') THEN " + db._ident(field) +
+           " ELSE '其他或未标' END,COUNT(*) FROM data." + db._ident(table) +
+           (' WHERE ' + where if where else '') + ' GROUP BY 1')
+    counts = dict(c.execute(sql, params))
+    same, different = counts.get('一致', 0), counts.get('不一致', 0)
+    comparable = same + different
+    return {'available': True, 'outcome_counts': counts,
+            'recorded_checks': sum(counts.values()), 'comparable_checks': comparable,
+            'agreement_checks': same, 'disagreement_checks': different,
+            'agreement_rate': same / comparable if comparable else None,
+            'denominator': '同一逻辑渠道中结论恰为一致或不一致的登记核对条目；不去重，不含口径不同、未取到或其他结论',
+            'manual_gold_accuracy': None,
+            'manual_gold_reason': '未登记独立人工真值集合及逐值预测对照，不能由核对结论或reviewer文字推定',
+            'population_coverage_rate': None,
+            'population_coverage_reason': '核对记录数不是已去重全库事实或抽样总体分母；各渠道可能重叠，不合计'}
+
 def audit(c, names, domain):
     prefix = 'gk' if domain == '高考' else 'ky'
     result = {}
@@ -138,6 +161,8 @@ def audit(c, names, domain):
         result[table] = {'available': True,
                         'rows': c.execute('SELECT COUNT(*) FROM data.'+db._ident(table)).fetchone()[0],
                         'by_'+field: group(c, table, field)}
+        if table.endswith('_check_sample'):
+            result[table]['check_outcomes'] = check_outcomes(c, table, field)
     for table in ['check_sample', 'correction']:
         if table not in names:
             result[table] = {'available': False, 'rows': None}
@@ -153,6 +178,8 @@ def audit(c, names, domain):
         result[table] = {'available': True, 'rows': c.execute('SELECT COUNT(*) FROM data.'+
             db._ident(table)+' WHERE '+where, params).fetchone()[0],
             'outcomes': group(c, table, 'verdict' if table == 'check_sample' else 'reason', where, params)}
+        if table == 'check_sample':
+            result[table]['check_outcomes'] = check_outcomes(c, table, 'verdict', where, params)
     return result
 
 
@@ -171,6 +198,8 @@ def extra_audit(c, names, domain):
         out[table] = {'available': True, 'rows': c.execute('SELECT COUNT(*) FROM data.'+db._ident(table)).fetchone()[0]}
         if field:
             out[table]['outcomes'] = group(c, table, field)
+        if table == 'core_delta_check':
+            out[table]['check_outcomes'] = check_outcomes(c, table, 'verdict')
         if occurrences and occurrences in db._cols(c, table):
             out[table]['occurrences'] = c.execute('SELECT COALESCE(SUM('+db._ident(occurrences)+'),0) FROM data.'+db._ident(table)).fetchone()[0]
             out[table]['note'] = 'rows为问题组，occurrences为登记出现次数，不是去重业务行数'
@@ -181,6 +210,7 @@ def extra_audit(c, names, domain):
             out['purchased_check_unmirrored'] = {'available': True,
                 'rows': c.execute('SELECT COUNT(*) FROM data.purchased_check WHERE '+where).fetchone()[0],
                 'outcomes': group(c, table, 'verdict', where),
+                'check_outcomes': check_outcomes(c, table, 'verdict', where),
                 'note': '仅未镜像到check_sample的检查；不重复列sample_mirrored=1'}
         else:
             out['purchased_check_unmirrored'] = {'available': False, 'rows': None}
@@ -248,6 +278,12 @@ def markdown(report, domain):
         outcomes = data.get('outcomes') or data.get('by_status') or data.get('by_verdict')
         suffix = '；结果 '+json.dumps(outcomes, ensure_ascii=False) if outcomes and len(outcomes) <= 12 else ''
         lines.append(f"- {table}：{data['rows'] if data['available'] else '未知'} 条{suffix}。")
+        checks = data.get('check_outcomes')
+        if checks and checks['available']:
+            rate = checks['agreement_rate']
+            display = f"{rate:.2%}" if rate is not None else '不可计算（可比条目为0）'
+            lines.append(f"  登记可比核对一致占比：{checks['agreement_checks']}/{checks['comparable_checks']}，{display}；口径不同、未取到与其他结论不进分母。")
+    lines += ['', '上述比例仅为各渠道登记结果构成，不是人工真值准确率或全库覆盖率；两者缺独立集合/总体分母，仍不可计算。各渠道可能重叠，不合并比例。']
     lines += ['', '共用/旧名渠道（未纳入以上领域计数）：']
     for name, data in report['shared_audit_channels'].items():
         lines.append('- '+name+'：'+str(data['rows'])+' 条；'+json.dumps(data.get('by_table') or data.get('by_domain'), ensure_ascii=False))
