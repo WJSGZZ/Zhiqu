@@ -43,3 +43,5 @@ python3 skills/zhiqu-shared/scripts/career_on_demand.py \
 `zhiqu_db.py jobs` 能显示入库的职责、条件、报酬原文和等级，`source` 可查指纹与行定位；工资数字不自动去掉税前/税后、日/月/年或币种信息。按需工具的小结同样列出出处及缺项。写报告时将实际依赖的原句按[证据规则](report-workflow.md#二证据只有一份)登记到证据表，来源过期、无可比报价的继续写“未取到”，不能把格式核验自动升为结论支持。
 
 离线测试：`python3 -m unittest discover -s skills/zhiqu/tests -p test_career_on_demand.py -v`。它覆盖合成输入，不认证真实雇主表格、市场覆盖或任意网页可取。
+
+高校职位的 `html-class:类名/nonempty-descendant-text:序号` 是自定义原文定位：在唯一 class 业务块内，按文档顺序取全部后代文本，统一空白后去掉空文本，从 1 编号；它不是 XPath。证明的 `locator_basis` 固定声明该口径，业务值须按保留的 token 原文复原。

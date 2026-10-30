@@ -45,6 +45,23 @@ class CampusPositionTests(unittest.TestCase):
         with self.assertRaises(m.Gap):p.validate_campus_proof(r,dict(x['proofs'][0],field_locators=r['field_locators']))
     def test_fixed_single_position_scope_and_counts_cannot_be_changed(self):
         x=result()
+        # A class block contains nested spans/p; locators index normalized,
+        # nonempty descendant tokens and deliberately do not claim XPath.
+        from lxml import html
+        root=html.fromstring(body().decode())
+        for field,locs in x['rows'][0]['field_locators'].items():
+            values=[]
+            for loc in locs:
+                block,number=loc.removeprefix('html-class:').split('/nonempty-descendant-text:')
+                node=root.xpath('//*[@class="'+block+'"]')[0]
+                values.append([m.norm(t)for t in node.xpath('.//text()')if m.norm(t)][int(number)-1])
+            self.assertEqual(' '.join(values)if values else None,x['rows'][0]['fields'][field])
+        for wrong in [None,'xpath']:
+            f=copy.deepcopy(x['proofs'][0]);f['locator_basis']=wrong
+            with self.assertRaises(m.Gap):p.validate_campus_proof(x['rows'][0],f)
+        r=copy.deepcopy(x['rows'][0]);r['field_locators']['pay']=['div.job-information[1]/text()[4]']
+        f=copy.deepcopy(x['proofs'][0]);f['field_locators']=r['field_locators']
+        with self.assertRaises(m.Gap):p.validate_campus_proof(r,f)
         for group,key in [('row','src_table'),('row','src_row'),('proof','src_table'),('proof','original_rows'),('proof','loaded_rows')]:
             for value in [0,9,True,'1']:
                 with self.subTest(group=group,key=key,value=value):

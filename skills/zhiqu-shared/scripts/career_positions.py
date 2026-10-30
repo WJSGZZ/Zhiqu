@@ -352,16 +352,16 @@ def parse_campus_position(text,root,entry,request):
     except ValueError:raise Gap('高校职位日期无效')from None
     values={'duties':None,'requirements':' '.join(req),'pay':'月薪范围：'+data['月薪范围'][0],'schedule':None}
     fields={k:values[k]for k in request['layers']}
-    locator='div.job-information[1]';locs={k:([f'div.describe-details[1]/text()[{n}]'for n,_ in tokens['describe-details']]if k=='requirements'else[f'{locator}/text()[{data["月薪范围"][1]}]']if k=='pay'else[])for k in fields}
+    locator='html-class:job-information';locs={k:([f'html-class:describe-details/nonempty-descendant-text:{n}'for n,_ in tokens['describe-details']]if k=='requirements'else[f'{locator}/nonempty-descendant-text:{data["月薪范围"][1]}']if k=='pay'else[])for k in fields}
     row=dict(region=request['region'],region_raw='工作城市：'+data['工作城市'][0],region_basis='explicit_campus_position_city',year=year,year_basis='explicit_recruitment_cohort',recruitment_year=year,published=published,year_scope='任职要求明确招聘届别；不由公告发布年推定',position=position,stage='graduate',stage_raw='校招',fields=fields,src_table=1,src_row=1,position_locator=locator,field_locators=locs,visibility_basis='public_static_html_blocks',source_scope=CAMPUS_SCOPE,employer_raw=data['招聘单位'][0],education_summary_raw='学历要求：'+data['学历要求'][0])
-    proof=dict(kind='university-position-v1',src_table=1,original_rows=1,loaded_rows=1,dual_read_equal=True,sample_passed=True,methods=['lxml-dom-text-nodes','stdlib-htmlparser-class-blocks'],sample_method='raw-html-blocks-all-retained',blocks=proof_blocks,position_locator=locator,field_locators=locs)
+    proof=dict(kind='university-position-v1',src_table=1,original_rows=1,loaded_rows=1,dual_read_equal=True,sample_passed=True,methods=['lxml-dom-text-nodes','stdlib-htmlparser-class-blocks'],sample_method='raw-html-blocks-all-retained',locator_basis='class_block_normalized_nonempty_descendant_text_tokens',blocks=proof_blocks,position_locator=locator,field_locators=locs)
     validate_campus_proof(row,proof)
     return dict(title=norm(titles[0]),rows=[row],proofs=[proof],published=published)
 
 
 def validate_campus_proof(row,proof):
     from career_on_demand import Gap,public_text
-    if (proof.get('kind')!='university-position-v1'or proof.get('methods')!=['lxml-dom-text-nodes','stdlib-htmlparser-class-blocks']or proof.get('sample_method')!='raw-html-blocks-all-retained'or proof.get('dual_read_equal')is not True or proof.get('sample_passed')is not True):raise Gap('高校职位双读全核证明缺失')
+    if (proof.get('locator_basis')!='class_block_normalized_nonempty_descendant_text_tokens'or proof.get('kind')!='university-position-v1'or proof.get('methods')!=['lxml-dom-text-nodes','stdlib-htmlparser-class-blocks']or proof.get('sample_method')!='raw-html-blocks-all-retained'or proof.get('dual_read_equal')is not True or proof.get('sample_passed')is not True):raise Gap('高校职位双读全核证明缺失')
     if any(type(v)is not int or v!=1 for v in (row.get('src_table'),row.get('src_row'),proof.get('src_table'),proof.get('original_rows'),proof.get('loaded_rows'))):raise Gap('高校单职位原表行数或定位声明无效')
     if row.get('year_scope')!='任职要求明确招聘届别；不由公告发布年推定'or row.get('visibility_basis')!='public_static_html_blocks':raise Gap('高校职位口径说明或读取方式不一致')
     blocks=proof.get('blocks',{});texts={};locators={}
@@ -372,7 +372,7 @@ def validate_campus_proof(row,proof):
         for cell in b['retained']:
             n=cell.get('token');v=cell.get('text')
             if type(n)is not int or n in seen or not 1<=n<=b['original_tokens']or not isinstance(v,str):raise Gap('高校职位抽核位置无效')
-            seen.add(n);public_text(v);texts[cls].append(v);locators[f'div.{cls}[1]/text()[{n}]']=v
+            seen.add(n);public_text(v);texts[cls].append(v);locators[f'html-class:{cls}/nonempty-descendant-text:{n}']=v
     vals={}
     for x in texts['job-information']:
         if '：'not in x:raise Gap('高校职位原格字段无效')
@@ -385,7 +385,7 @@ def validate_campus_proof(row,proof):
     try:dt.date.fromisoformat(row['published'])
     except (ValueError,TypeError):raise Gap('高校职位日期无效')from None
     expected={'duties':None,'requirements':' '.join(req),'pay':'月薪范围：'+vals['月薪范围'],'schedule':None}
-    if row.get('position_locator')!='div.job-information[1]'or proof.get('position_locator')!=row['position_locator']or row.get('field_locators')!=proof.get('field_locators')or set(row.get('field_locators',{}))!=set(row.get('fields',{})):raise Gap('高校职位行级或字段定位缺失')
+    if row.get('position_locator')!='html-class:job-information'or proof.get('position_locator')!=row['position_locator']or row.get('field_locators')!=proof.get('field_locators')or set(row.get('field_locators',{}))!=set(row.get('fields',{})):raise Gap('高校职位行级或字段定位缺失')
     for k,v in row['fields'].items():
         if k not in expected or v!=expected[k]:raise Gap('高校职位业务值与原段不同')
         ls=row['field_locators'][k]
