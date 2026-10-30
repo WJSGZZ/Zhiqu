@@ -47,9 +47,60 @@ def _chains(lines, keep):
     return chains
 
 
+def _two_character_table_columns(page, lines):
+    """仅凭重复格证据拦二字短标签纵排；不把任意两个单字当坏表格。"""
+    segments = defaultdict(list)
+    for drawing in page.get_drawings():
+        rect = drawing['rect']
+        if rect.height <= 1.5 and rect.width > 0:
+            segments[round((rect.y0 + rect.y1) / 2, 1)].append((rect.x0, rect.x1))
+    grids = defaultdict(list)
+    for y, pieces in segments.items():
+        merged = []
+        for left, right in sorted(pieces):
+            if merged and left <= merged[-1][1] + 1:
+                merged[-1] = (merged[-1][0], max(right, merged[-1][1]))
+            else:
+                merged.append((left, right))
+        for left, right in merged:
+            if right - left >= 40:
+                grids[(round(left, 1), round(right, 1))].append(y)
+    found = []
+    for (left, right), rules in grids.items():
+        previous = []
+        for top, bottom in zip(sorted(set(rules)), sorted(set(rules))[1:]):
+            row = [ln for ln in lines if left <= ln['x'] and ln['x'] + ln['w'] <= right + 1
+                   and top < ln['y'] and ln['y'] + ln['size'] < bottom]
+            if not any(len(a['t']) >= 3 and abs(a['x'] - b['x']) > 2 * max(a['size'], b['size'])
+                       for a in row for b in row):
+                previous = []
+                continue  # 两张不相连的表之间没有多栏行证据，不能拼成一张表。
+            labels = []
+            singles = [ln for ln in row if re.fullmatch(r'[一-鿿]', ln['t'])]
+            for first in singles:
+                column = sorted((ln for ln in row if abs(ln['x'] - first['x']) <= 1.5), key=lambda ln: ln['y'])
+                if len(column) != 2 or column[0] is not first:
+                    continue
+                a, b = column
+                if not re.fullmatch(r'[一-鿿]', b['t']) or not 0 < b['y'] - a['y'] < 2 * max(a['size'], b['size']):
+                    continue
+                # 邻格有正常横排文字，不能只是图示中的两个单字。
+                if not any(len(ln['t']) >= 3 and abs(ln['x'] - a['x']) > 2 * a['size'] for ln in row):
+                    continue
+                labels.append((a['x'], a['t'] + b['t']))
+            for x, text in labels:
+                if any(abs(px - x) <= 1.5 for px, _ in previous):
+                    found.append(text)
+            previous.extend(labels)  # 正常多栏行不截断同表；跨空隙/同一大格不累计。
+    return found
+
+
 def check_page(page):
     issues = []
     lines = _lines(page)
+    split_labels = _two_character_table_columns(page, lines)
+    if split_labels:
+        issues.append('同一表格短标签列多格被挤成一字一行（' + '、'.join(split_labels[:4]) + '）')
     # 一栏被挤成一两个字一行（中文或数字），连续 3 行以上
     for run in _chains(lines, lambda d: len(d["t"]) <= 2 and CJK_OR_DIGIT.match(d["t"]) and not re.fullmatch(r"\d{1,2}%", d["t"])):
         if len(run) >= 3:

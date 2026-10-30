@@ -77,6 +77,62 @@ class TestCheckLayout(unittest.TestCase):
         self.assertEqual(self.issues(rows), [])
 
 
+    def short_label_table(self, labels=('学业','目标'), *, horizontal=False,
+                          rules=True, fragment_rules=False, single_cell=False, shifts=(0,0)):
+        doc=pymupdf.open();page=doc.new_page(width=595,height=842)
+        boundaries=[100,200] if single_cell else [100,150,200]
+        if rules:
+            for y in boundaries:
+                if fragment_rules:
+                    for a,b in [(56,100),(100,300),(300,540)]:page.draw_line((a,y),(b,y))
+                else:page.draw_line((56,y),(540,y))
+        for i,text in enumerate(labels):
+            x=60+shifts[i];y=120+50*i
+            if horizontal:page.insert_text((x,y),text,fontsize=8.8,fontname=FONT)
+            else:
+                for j,ch in enumerate(text):page.insert_text((x,y+15*j),ch,fontsize=8.8,fontname=FONT)
+            page.insert_text((150,y),'正常横排说明文字',fontsize=8.8,fontname=FONT)
+        doc.save(self.path);doc.close()
+        return check_layout.check_pdf(self.path)
+
+    def test_repeated_two_character_table_cells_fail(self):
+        self.assertTrue(any('短标签列' in x for x in self.short_label_table()))
+
+    def test_fragmented_rules_and_alignment_bucket_boundary_fail(self):
+        self.assertTrue(any('短标签列' in x for x in self.short_label_table(fragment_rules=True,shifts=(1.4,1.5))))
+
+    def test_horizontal_short_labels_and_unruled_diagram_pass(self):
+        for kwargs in ({'horizontal':True},{'rules':False}):
+            with self.subTest(kwargs=kwargs):self.assertEqual(self.short_label_table(**kwargs),[])
+
+    def test_one_split_cell_or_two_runs_inside_one_cell_are_not_repeated_cells(self):
+        for kwargs in ({'labels':('学业','正常文字')},{'single_cell':True}):
+            with self.subTest(kwargs=kwargs):
+                self.assertFalse(any('短标签列' in x for x in self.short_label_table(**kwargs)))
+
+    def test_split_cells_in_different_columns_are_not_combined(self):
+        self.assertFalse(any('短标签列' in x for x in self.short_label_table(shifts=(0,40))))
+
+
+    def test_repeated_cells_survive_normal_row_but_not_empty_table_gap(self):
+        for separate_tables in (False, True):
+            with self.subTest(separate_tables=separate_tables):
+                doc=pymupdf.open();page=doc.new_page(width=595,height=842)
+                for y in (100,170,240,310):page.draw_line((50,y),(500,y))
+                for k in (0,2):
+                    y=125+70*k
+                    page.insert_text((60,y),'学',fontsize=8.8,fontname=FONT)
+                    page.insert_text((60,y+15),'业',fontsize=8.8,fontname=FONT)
+                    page.insert_text((150,y),'正常横排说明文字',fontsize=8.8,fontname=FONT)
+                if not separate_tables:
+                    page.insert_text((60,195),'目标',fontsize=8.8,fontname=FONT)
+                    page.insert_text((150,195),'正常横排说明文字',fontsize=8.8,fontname=FONT)
+                try:
+                    found=any('短标签列' in issue for issue in check_layout.check_page(page))
+                    self.assertEqual(found,not separate_tables)
+                finally:doc.close()
+
+
 def make_pages(path, pages):
     """pages: 每页 [(y, 文字, 字号)]；y<56 的行当页眉。"""
     doc = pymupdf.open()

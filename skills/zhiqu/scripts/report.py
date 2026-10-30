@@ -28,10 +28,10 @@ E = html.escape
 NUM_CELL = re.compile(r"[\d,.\s%~～+\-–—<>≥≤/]+|(?:不到|超过|约)\s?[\d,.]+%?")
 
 
-def td(c):
+def td(c, *, short_label=False):
     """表格单元格：纯数字（位次、分数、百分比、序号）不换行，避免被拆成两行。"""
     s = str(c)
-    cls = " class='num'" if NUM_CELL.fullmatch(s.strip()) else ""
+    cls = " class='num'" if NUM_CELL.fullmatch(s.strip()) else " class='short-label'" if short_label else ""
     return f"<td{cls}>{E(s)}</td>"
 
 CSS = r"""
@@ -123,6 +123,7 @@ table.rt { table-layout: fixed; }
 .number-run { white-space:nowrap !important; display:inline !important; font:inherit !important; color:inherit !important;
   margin:0 !important; padding:0 !important; border:0 !important; background:none !important; min-height:0 !important;
   width:auto !important; letter-spacing:inherit !important; }
+td.short-label { white-space: nowrap; }
 td.num { white-space: nowrap; font-variant-numeric: tabular-nums; }
 td { overflow-wrap: anywhere; }
 table.vt thead th { white-space: normal; }
@@ -2013,7 +2014,7 @@ def build(rep, opt):
         body = '<p class="lead">' + E(h.get("intro", "")) + "</p>"
         if h.get("table"):
             body += "<table><thead><tr>" + "".join(f"<th>{E(c)}</th>" for c in h["columns"]) + "</tr></thead><tbody>" + "".join(
-                "<tr>" + "".join(td(c) for c in row) + "</tr>" for row in h["table"]) + "</tbody></table>"
+                "<tr>" + "".join(td(c, short_label=i < len(h["columns"]) and h["columns"][i] == "结果" and bool(re.fullmatch(r"[一-鿿]{1,2}", str(c)))) for i,c in enumerate(row)) + "</tr>" for row in h["table"]) + "</tbody></table>"
         body += "".join(f"<p>{E(x)}</p>" for x in h.get("notes", []))
         body += "".join(block(b) for b in h.get("extra", []))
         sec("事后回看", body)

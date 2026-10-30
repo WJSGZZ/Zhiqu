@@ -1,5 +1,6 @@
 """Shared print components and publication gates: reject missing evidence, preserve values."""
 import sys
+import json
 import re
 import unittest
 from pathlib import Path
@@ -11,6 +12,17 @@ from check_report import check_publication_html
 
 
 class PublicationGateTests(unittest.TestCase):
+    def test_hindsight_short_result_labels_stay_whole_without_changing_values(self):
+        rep=json.loads((Path(__file__).resolve().parents[1]/'examples/2026-GK-R01/report.json').read_text())
+        rep['hindsight']={'intro':'仅核对合成的已发生结果。','columns':['志愿','结果'],'table':[['虚构大学','未过'],['虚构大学','过线']]}
+        doc=report.build(rep,None)
+        self.assertIn('class="short-label">未过</td>',doc)
+        self.assertIn('class="short-label">过线</td>',doc)
+        self.assertIn('td.short-label { white-space: nowrap; }',doc)
+        self.assertNotIn('class="short-label">虚构大学',doc)
+        self.assertEqual(report.td('未过'),'<td>未过</td>')
+        self.assertIn("class='num'",report.td('23,456',short_label=True))
+
     def test_long_url_in_body_or_split_across_inline_nodes_is_rejected(self):
         url = 'https://example.edu.cn/' + 'a' * 45
         for content in (url, url[:25]+'<span>'+url[25:]+'</span>'):
