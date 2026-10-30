@@ -169,7 +169,7 @@
     "calculations.json": "8e8135c7483b79dbc2d7ed702e1d9add2628ccf852da45c3d957f1e3f05d98f5",
     "candidates.json": "d741b74ae820c210e0b7d43186496ea83b72584adfe0529440e2a3b7c251d835",
     "case.json": "1266369f01a1fb4ddd7f6d8f6a4f7fcdcc475445fed3cfc9d464a41bbfda2d73",
-    "claim_check.json": "7453ece89e7f9fabcf164c1307f0190e8c331ff7470850f6ac1be94bc814e1b6",
+    "claim_check.json": "537dff327ee31fe2c24bb6e29f88f36c5100ae0620f0e262a0b1050fe9e56d7c",
     "directions.json": "5b2397e7ee4e80db6b8b1b6bf0834869aabbf282dcfecc6f23c4c706d476cc76",
     "evidence.json": "39819a48f34df9a8ad734daa1ebc55980ea28b5ed46eabaa429b710b898af15d",
     "judgment.json": "6b1a98ce44bf3a24b623518f8bca10d5a21ff18b40d9e7d69cf39b5b605f113d",
@@ -180,7 +180,7 @@
     "profile_parse.json": "d34b3c37a261949e9502d03e5eec3b00d0ad8d8f989758bfe8c4509ffae5cfd7",
     "report.html": "4021097fe264bcd0daee8a3703e37b996c8c096bbef70d0bd2b69e8a051c0ceb",
     "report.md": "caf501508e4bb94fa89ef30378a716f496ff000289aa508092a9fec6dc852eff",
-    "report_trace.json": "dc254484d58b97e4eb4bd5228fd96721ba36cb65ca0c92b2e920ad7286be44fc",
+    "report_trace.json": "026ae11b5a2935e201a382677055d072b07329b6ba14e781bb0c113103baeccb",
     "rules_check.json": "d887941488483a7992cfbe1fb174550f3fdb3083d8c597a1cdcc43f1eee9d198"
   },
   "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。",
@@ -622,6 +622,15 @@
         "claim_check.json"
       ],
       "reason": "既有报名单校范围；旧案例未声明例外，正文、核对材料、数值与PDF字节不变。标准版本字段迁移另待决定，未改变版本读取源码；仅兼容流程指纹，不重认证官方事实或原审批。"
+    },
+    {
+      "date": "2026-10-30",
+      "by": "Codex（原答投影兼容复验，非内容复核）",
+      "files": [
+        "report_trace.json",
+        "claim_check.json"
+      ],
+      "reason": "追加考研原答投影；历史无校验码迁移允许保留冻结分析，新老正文与材料分别比对；逐份组装正文、核对材料及PDF字节均未变。仅兼容流程指纹，不重新认证官方事实或原审批。"
     }
   ],
   "regeneration": {

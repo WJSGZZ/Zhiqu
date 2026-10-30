@@ -22,7 +22,7 @@
     "check_demos.py": "67d4edc1cd737beeb6729783a736e667a97c12d8f7de2de673632d9d5c3370b8",
     "report.py": "c1a2e82e6ce5fb9fefd866e14679a24f1ad5dcdcf56e2bdc1d578668d10e1cd8",
     "render_report.py": "17c81658af1834fc1216d61ca3c11070934229a74d8d1175a1602a348ffd1c0f",
-    "profile_store.py": "a609d0a51cb4a27713fe00c8174069fd61df44656f2b859423e4712ca58b5cf1",
+    "profile_store.py": "0d7642d89e21844f36318802a53829cabe227f7f710ae5438bee0976e9e9b1b3",
     "claim_guards.py": "54bab4d942fafd148190df73cad34805538662b0a152ec5701c8a960e28dbd1d",
     "source_authentication.py": "b18201e997e0b4ca33c879979bc03f81deab1ea5edbbbc74cab6bf622821f278",
     "official_source_audit.py": "c09c40a2c5eec18318fbb1fa52393ee37b4e63f636ec7ea3999084d12ecc0df1",
@@ -1346,6 +1346,25 @@
         }
       },
       "previous_trace_sha256": "fedeeb5375df0f0d47b6f5f9796ced4bd04f5fe86fb43e740ad41402172c3c77",
+      "assembled_markdown_sha256": "90ff1e8ce1555a081d376dbea69e831d6f8788393724d3db9bdb8189646a6262",
+      "appendix_materials_unchanged": true,
+      "original_artifacts": {
+        "report.md": "90ff1e8ce1555a081d376dbea69e831d6f8788393724d3db9bdb8189646a6262",
+        "report.html": "7ffb0b04713dcc3f25d982f2e19a439f5b2d79cd0a6e84e64e50a11bf89e4890",
+        "2027-QZ-S05-report.pdf": "a2767dbe1d24f7e55e18218cc32ad525c10466cf5beb16bcb32545239fa3ab23"
+      }
+    },
+    {
+      "date": "2026-10-30",
+      "kind": "grad_exam_answer_compatibility",
+      "reason": "追加考研原答投影；历史无校验码迁移允许保留冻结分析，新老正文与材料分别比对；逐份组装正文、核对材料及PDF字节均未变。仅兼容流程指纹，不重新认证官方事实或原审批。",
+      "changed_tools": {
+        "profile_store.py": {
+          "before": "a609d0a51cb4a27713fe00c8174069fd61df44656f2b859423e4712ca58b5cf1",
+          "after": "0d7642d89e21844f36318802a53829cabe227f7f710ae5438bee0976e9e9b1b3"
+        }
+      },
+      "previous_trace_sha256": "e2b7b6f3922b40b838d3a18aad6c057c9ce550afe56bd28c8adaff9e84eb2ff7",
       "assembled_markdown_sha256": "90ff1e8ce1555a081d376dbea69e831d6f8788393724d3db9bdb8189646a6262",
       "appendix_materials_unchanged": true,
       "original_artifacts": {
