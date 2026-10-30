@@ -720,8 +720,125 @@ class PlanningCase:
         for _,v in walk(j):
             if isinstance(v,str) and re.search(r'个人.{0,4}(?:上岸|录用|录取).{0,4}\d+%',self.expand(v)):self.err('judgment.json','','禁止个人概率')
 
+    def career_input_usage_errors(self):
+        """Bind supplied critical answers to rendered sections; not a semantic judge.
+
+        Unsealed migrated reports keep their frozen analysis. Equal numeric values,
+        unused nodes and an appendix-only declaration do not prove consumption.
+        """
+        if self.kind!='career':return []
+        from profile_store import build_parse,items
+        try:
+            raw=active_profile(self.root);data=parse_profile(raw)
+            if data is None or 'checksum'not in data:return []
+            expected=build_parse(raw,'career');answers=items(data)
+        except (ValueError,KeyError,TypeError,OSError):
+            return ['profile_parse.json：无法核对封存原答的报告使用登记']
+        critical={'收入底线','多快需要收入','当前工作原答','离开原因原答','在岗与离职约定原答'}
+        required={f['field']:f for f in expected['fields']if f['field']in critical and f['status']=='given'}
+        if not required:return []
+        profile=self.data.get('profile_parse.json',{})
+        if not isinstance(profile,dict)or not isinstance(profile.get('fields',[]),list):return ['profile_parse.json：原答字段须为列表']
+        fields=profile.get('fields',[]);indices={}
+        errors=[]
+        for name in required:
+            hits=[i for i,f in enumerate(fields)if isinstance(f,dict)and f.get('field')==name]
+            if len(hits)!=1:errors.append('profile_parse.json：关键原答须唯一保留：'+name)
+            else:indices[name]=hits[0]
+        declarations={}
+        uses=self.case.get('report_input_usage',[])
+        if not isinstance(uses,list):return errors+['case.json.report_input_usage：须为列表']
+        for row in uses:
+            if not isinstance(row,dict):continue
+            m=re.fullmatch(r'/fields/(\d+)/value(?:/.*)?',str(row.get('pointer','')))
+            sections=row.get('sections')
+            if m and isinstance(sections,list):declarations.setdefault(int(m[1]),set()).update(s for s in sections if isinstance(s,str))
+        used={};plan=self.case.get('calculation_plan',{})
+        if not isinstance(plan,dict):return errors+['case.json.calculation_plan：须为对象']
+        if not all(isinstance(plan.get(k,[]),list)for k in ('operations','scenarios')):return errors+['case.json.calculation_plan：操作和情景须为列表']
+        operations={o.get('output'):o for o in plan.get('operations',[])if isinstance(o,dict)}
+        scenarios={}
+        for scenario in plan.get('scenarios',[]):
+            if not isinstance(scenario,dict):continue
+            m=REF.fullmatch(str(scenario.get('output_ref','')))
+            if m and m[1]=='c':scenarios[m[2]]=scenario
+        def refs(value,seen=(),changes=None):
+            if not isinstance(value,str):return set()
+            if changes is not None and not isinstance(changes,dict):return set()
+            value=(changes or {}).get(value,value)
+            if not isinstance(value,str):return set()
+            m=REF.fullmatch(value)
+            if not m:return set()
+            if m[1]in ('p','c'):
+                try:self.format(self.resolve(m[1],m[2]),m[3])
+                except (ValueError,KeyError,TypeError,IndexError):return set()
+            if m[1]=='p':
+                q=re.match(r'^/fields/(\d+)/value(?:/|$)',m[2]);return {int(q[1])}if q else set()
+            if m[1]!='c'or plan.get('engine')!='registered_operations'or value in seen:return set()
+            scenario=scenarios.get(m[2])
+            if scenario:
+                baseline=scenario.get('baseline_output')
+                return refs('{{c:/'+baseline+'}}',(*seen,value),scenario.get('changed_inputs',{}))if isinstance(baseline,str)else set()
+            op=operations.get(m[2].lstrip('/'),{})
+            inputs=op.get('inputs',[])
+            return set().union(*(refs(v,(*seen,value),changes)for v in inputs))if isinstance(inputs,list)else set()
+        def personal_fields(eid):
+            e=self.evidence.get(eid,{})
+            if not isinstance(e,dict):return set()
+            if e.get('grade')!='单人说法'or e.get('status')!='verified'or e.get('retrieval_method')!='provided':return set()
+            source=e.get('source');locator=source.get('locator','')if isinstance(source,dict)else'';prefix='画像 JSON 题目：'
+            if not isinstance(locator,str)or not locator.startswith(prefix):return set()
+            qid=locator[len(prefix):].strip();original=answers.get(qid,{}).get('a');excerpt=e.get('excerpt')
+            same=isinstance(original,str)and excerpt==original
+            if not same:
+                try:same=(json.dumps(json.loads(excerpt),ensure_ascii=False,sort_keys=True)==json.dumps(original,ensure_ascii=False,sort_keys=True) and original is not None)
+                except (ValueError,TypeError):pass
+            if not same:return set()
+            return {indices[name]for name,f in required.items()if name in indices and qid in f.get('answer_refs',[])}
+        def consume(sid,visible,eids=(),inline=True):
+            visible=re.sub(r'<!--[\s\S]*?-->','',visible)
+            if inline:
+                # Use the same inline renderer: href/title attributes are not
+                # prose, whereas a reference in a visible link label is.
+                from render_report import render_inline
+                from reader_language import html_fragments
+                visible=' '.join(f.text for f in html_fragments('<section data-section="03">'+render_inline(visible)+'</section>'))
+            if not visible.strip():return
+            found=set()
+            for m in REF.finditer(visible):
+                found.update(refs(m[0]))
+                if m[1]=='e':found.update(personal_fields(m[2].partition('#')[0]))
+            for eid in eids:found.update(personal_fields(eid))
+            for i in found:used.setdefault(i,set()).add(sid)
+        meta=self.case.get('report_meta',{})
+        if not isinstance(meta,dict):return errors+['case.json.report_meta：须为对象']
+        for key in ('title','subtitle','person','stage','region','id','date','data_asof','conclusion'):
+            if isinstance(meta.get(key),str):consume('01',meta[key],inline=False)
+        if not meta.get('conclusion')and isinstance(meta.get('note'),str):consume('01',meta['note'],inline=False)
+        from planning_report import node_markdown
+        for section in self.contract['sections']:
+            sid=section['id']
+            if sid=='12':continue
+            slots={s['key']:s for s in section['slots']}
+            for entry in self.nodes().get(sid,[]):
+                slot=slots.get(entry.get('slot'))
+                if slot is None or not self.active(slot):continue
+                try:
+                    node=self.get_node(entry['ref'])
+                    visible=node_markdown(node,lambda s:s,{eid:e.get('source_group',1)if isinstance(e,dict)else 1 for eid,e in self.evidence.items()})
+                    consume(sid,visible,node.get('evidence_refs',[]))
+                except (ValueError,KeyError,TypeError,IndexError):
+                    errors.append('case.json.report_input_usage：无法核对实际呈现节点 '+sid)
+        for name,i in indices.items():
+            declared=declarations.get(i,set());actual=used.get(i,set())
+            if not declared-{'12'}:errors.append('case.json.report_input_usage：关键原答缺正文使用登记：'+name)
+            if not actual:errors.append('case.json.report_input_usage：关键原答未在激活正文中绑定：'+name)
+            elif not actual<=declared:errors.append('case.json.report_input_usage：关键原答漏登记实际节 '+','.join(sorted(actual-declared))+'：'+name)
+        return errors
+
     def stage8(self):
         self.need('narrative.json');self.errors.extend(self.contract_errors())
+        self.errors.extend(self.career_input_usage_errors())
         from reader_language import check_html,check_planning_source
         self.errors.extend('第'+x['section']+'节 '+x['location']+'：'+x['message']+'（'+x['term']+'）' for x in check_planning_source(self))
         from planning_report import assemble
