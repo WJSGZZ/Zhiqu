@@ -511,7 +511,7 @@ class PlanningCase:
             if not original.is_relative_to(self.root.resolve()):raise ValueError('原画像须在本案内')
             raw=read(original)
             answers=[i.get('a') for s in raw.get('sections',[]) for i in s.get('items',[]) if i.get('id')==refs[0] and 'a' in i]
-            if len(answers)!=1 or answers[0]!=text or field.get('quote') not in (text,json.dumps(text,ensure_ascii=False)):raise ValueError('登记值及引语必须精确回到原始问卷')
+            if len(answers)!=1 or answers[0]!=text or field.get('quote') not in (text,json.dumps(text,ensure_ascii=False),json.dumps({refs[0]:text},ensure_ascii=False)):raise ValueError('登记值及引语必须精确回到原始问卷')
             school=target.get('school');code=target.get('program_code')
             if not school or not re.fullmatch(r'\d{4}(?:\d{2})?',str(code or '')):raise ValueError('学校全称与专业代码须明确')
             clauses=re.split(r'[。；;\n]',text)

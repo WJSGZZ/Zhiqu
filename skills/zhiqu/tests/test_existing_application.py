@@ -80,3 +80,11 @@ class ExistingApplicationTests(unittest.TestCase):
     def test_registration_interval_must_have_a_valid_ordered_start(self):
         for text in ['全国网上报名时间为2026年11月15日至10月24日。','全国网上报名时间为2026年99月99日至10月24日。']:
             self.deadline['excerpt']=text;self.assertTrue(self.check())
+
+    def test_default_parser_quote_binds_the_same_original_question_only(self):
+        self.field['quote']=json.dumps({'ky_target':self.text},ensure_ascii=False)
+        self.assertEqual(self.check(),[])
+        self.field['quote']=json.dumps({'another_question':self.text},ensure_ascii=False)
+        self.assertTrue(self.check())
+        self.field['quote']=json.dumps({'ky_target':self.text,'extra':'未提供'},ensure_ascii=False)
+        self.assertTrue(self.check())

@@ -40,7 +40,7 @@ FIELD_MAP = {
 
 
 # These free-form answers are optional, verbatim projections, never score/status parsers.
-GRAD_EXAM_ANSWERS = (('考研经历原答','ky_history'),('备考进度原答','ky_prep'),('可比模考原答','mock_detail'))
+GRAD_EXAM_ANSWERS = (('考研经历原答','ky_history'),('备考进度原答','ky_prep'),('可比模考原答','mock_detail'),('考研目标原答','ky_target'))
 FIELD_MAP['grad'].extend((name,'self_judgment',qid) for name,qid in GRAD_EXAM_ANSWERS)
 
 

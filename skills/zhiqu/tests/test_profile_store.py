@@ -367,7 +367,7 @@ class ProfileStore(unittest.TestCase):
         self.assertTrue(any('最迟开始挣钱年份' in e for e in store.alignment_errors(folder)))
 
     def test_grad_exam_accounts_are_appended_verbatim_without_inference(self):
-        answers={'ky_history':'去年315分，未进复试；我说已报名，回执未核。','ky_prep':'每天自报6小时；有效投入未记录。','mock_detail':'没有完整模考，零散练习60分不能当总分。'}
+        answers={'ky_history':'去年315分，未进复试；我说已报名，回执未核。','ky_prep':'每天自报6小时；有效投入未记录。','mock_detail':'没有完整模考，零散练习60分不能当总分。','ky_target':'本人称已报合成大学081200，状态待核。'}
         rows=[{'id':k,'q':'模拟原题','a':v}for k,v in answers.items()]
         base=store.build_parse(profile(items=[{'id':'earning_year','q':'收入时点','a':'2029'}]),'grad')
         raw=profile(items=[{'id':'earning_year','q':'收入时点','a':'2029'}]+rows);before=json.loads(raw)
