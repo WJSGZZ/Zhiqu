@@ -1239,6 +1239,24 @@
         "file": "skills/zhiqu/tests/test_profile_store.py",
         "basis": "河南会计求职模拟的独立审查发现夜班、营销及加班出差边界漏用；此提交首次引入实际双副本拒改方法，纯合成，不认证具体雇主条件。"
       }
+    },
+    {
+      "id": "career-campus-position-fixed-locator",
+      "domain": "就业",
+      "test": "test_career_campus_position.CampusPositionTests.test_fixed_single_position_scope_and_counts_cannot_be_changed",
+      "input_fixture": {
+        "file": "test_career_campus_position.py",
+        "symbols": [
+          "body",
+          "CampusPositionTests.test_fixed_single_position_scope_and_counts_cannot_be_changed"
+        ]
+      },
+      "expected": "固定单职位的表、行和原始/加载计数须为严格整型1，不接受篡改或布尔值；不是多职位/全省覆盖证明。",
+      "provenance": {
+        "commit": "5f782cd96ddb3aec58a441cf717aab991a6af796",
+        "file": "skills/zhiqu/tests/test_career_campus_position.py",
+        "basis": "独立审查在真实郑州高校平台职位适配中发现可改表/行/计数，最小合成fixture复用；此提交首次引入该方法。"
+      }
     }
   ],
   "not_in_this_suite": [
