@@ -1009,7 +1009,7 @@
           "PositionTests.test_tng_popup_positions_never_cross_city"
         ]
       },
-      "expected": "同页武汉前端不得混入杭州后端；保留原明确届别和实习限制。",
+      "expected": "同页武汉前端不得混入杭州后端，未提供报酬保留空值；不认证资格届别。",
       "provenance": {
         "commit": "2f70c14",
         "file": "skills/zhiqu/tests/test_career_positions.py",
