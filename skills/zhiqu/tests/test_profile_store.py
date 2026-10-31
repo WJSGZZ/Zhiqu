@@ -439,6 +439,30 @@ class ProfileStore(unittest.TestCase):
                 store.dump(folder/'profile_parse.json',parsed)
                 self.assertTrue(store.alignment_errors(folder),action)
 
+    def test_cash_original_is_optional_verbatim_and_not_a_money_parser(self):
+        old=store.build_parse(profile(kind='career',items=[]),'career')
+        answer='存款30000含应急12000；每月家用2000，课程16800一次性，未付款。'
+        parsed=store.build_parse(profile(kind='career',items=[{'id':'cash_buffer','q':'储备','a':answer}]),'career')
+        self.assertEqual(parsed['fields'][:-1],old['fields'])
+        f=parsed['fields'][-1];self.assertEqual(f['field'],'资金与支出原答')
+        self.assertEqual(f['value'],answer);self.assertEqual(f['category'],'constraint')
+        self.assertEqual(json.loads(f['quote']),{'cash_buffer':answer})
+        self.assertEqual(f['answer_refs'],['cash_buffer']);self.assertFalse(f['confirmed'])
+        for refused in ['不想说','暂不提供，涉及家庭','不确定，需先问家里',' 不知道 ']:
+            f=store.build_parse(profile(kind='career',items=[{'id':'cash_buffer','q':'储备','a':refused}]),'career')['fields'][-1]
+            self.assertEqual(f['status'],'unknown');self.assertIsNone(f['value']);self.assertIn(refused,f['quote'])
+
+    def test_cash_original_analysis_and_questionnaire_copies_are_both_audited(self):
+        data=document(kind='career',items=[{'id':'cash_buffer','q':'储备','a':'家用不能停，金额暂估2000。','status':'已答'}])
+        data.update(collapsed=[],counts={'visible':1,'answered':1});data['checksum']=store.checksum(data)
+        store.new_id(self.root,'career',2027,'simulation');store.ingest(self.root,'2027-QZ-0001',json.dumps(data,ensure_ascii=False));p=self.root/'2027-QZ-0001';store.prepare(p)
+        original=json.loads((p/'profile_parse.json').read_text())
+        for action in ('delete','tamper'):
+            parsed=json.loads(json.dumps(original));parsed['questionnaire_fields']=json.loads(json.dumps(original['fields']))
+            if action=='delete':parsed['fields']=[f for f in parsed['fields']if f['field']!='资金与支出原答']
+            else:next(f for f in parsed['fields']if f['field']=='资金与支出原答')['value']='可以不付家用'
+            store.dump(p/'profile_parse.json',parsed);self.assertTrue(store.alignment_errors(p))
+
     def test_employment_original_answers_append_only_when_present(self):
         old=store.build_parse(profile(kind='career',items=[]),'career')
         answers={'current_job':'税前6500，到手5200为自报，不保证未来。','leave_reason':'希望少夜班，还没决定辞职。','current_terms':'主管口头下月再谈，合同通知与交接期限未知。'}

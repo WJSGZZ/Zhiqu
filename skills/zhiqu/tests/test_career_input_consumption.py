@@ -25,6 +25,20 @@ class CareerInputConsumptionTests(unittest.TestCase):
   c=json.loads((p/'case.json').read_text());c['report_input_usage']=[{'pointer':f'/fields/{indices[n]}/value','sections':['03','12']}for n in ['收入底线','多快需要收入','当前工作原答','离开原因原答','在岗与离职约定原答']if n in indices and f['fields'][indices[n]]['status']=='given'];ps.dump(p/'case.json',c)
   ps.dump(p/'narrative.json',{'sections':{'03':{'analysis':[{'type':'analysis','content':{'text':'；'.join(refs)},'evidence_refs':[],'calc_refs':[]}]}}});ps.dump(p/'judgment.json',{'presentation':{'03':[{'slot':'analysis','ref':'narrative.json#/sections/03/analysis/0'}]}});ps.dump(p/'evidence.json',{'items':[]})
   return PlanningCase(p),p,indices
+ def test_cash_answer_requires_visible_use_not_just_derived_amounts(self):
+  case,path,indices=self.make(self.base/'cash',answers={'cash_buffer':'现金30000，应急12000不动；家用2000每月，课程16800一次性。'})
+  i=indices['资金与支出原答'];case.case['report_input_usage']=[{'pointer':f'/fields/{i}/value','sections':['03','12']}]
+  node=case.data['narrative.json']['sections']['03']['analysis'][0]
+  node['content']['text']='这里只写数字30000，不绑定完整原答。'
+  self.assertTrue(any('未在激活正文中绑定'in x for x in case.career_input_usage_errors()))
+  node['content']['text']='本人资金原答：{{p:/fields/'+str(i)+'/value}}'
+  self.assertEqual(case.career_input_usage_errors(),[])
+  case.case['report_input_usage'][0]['sections']=['12']
+  self.assertTrue(any('缺正文使用登记'in x for x in case.career_input_usage_errors()))
+ def test_cash_refusal_is_not_forced_to_a_known_budget(self):
+  c,_,_=self.make(self.base/'refusal',answers={'cash_buffer':'不想说，家里还没商量'})
+  self.assertEqual(c.career_input_usage_errors(),[])
+
  def test_complete_explicit_bindings_pass_and_missing_each_declaration_fails(self):
   self.assertEqual(self.case.career_input_usage_errors(),[])
   for row in self.case.case['report_input_usage']:

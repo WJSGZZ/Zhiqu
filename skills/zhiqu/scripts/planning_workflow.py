@@ -741,7 +741,7 @@ class PlanningCase:
             expected=build_parse(raw,'career');answers=items(data)
         except (ValueError,KeyError,TypeError,OSError):
             return ['profile_parse.json：无法核对封存原答的报告使用登记']
-        critical={'收入底线','多快需要收入','当前工作原答','离开原因原答','在岗与离职约定原答'}
+        critical={'收入底线','多快需要收入','当前工作原答','离开原因原答','在岗与离职约定原答','资金与支出原答'}
         required={f['field']:f for f in expected['fields']if f['field']in critical and f['status']=='given'}
         if not required:return []
         profile=self.data.get('profile_parse.json',{})
