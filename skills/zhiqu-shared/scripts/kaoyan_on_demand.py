@@ -609,7 +609,11 @@ def run_request(request, *, fetch=fetch_public, publisher=validate_and_publish, 
                 try:
                     parse_start=time.monotonic()
                     is_html=not body.startswith((b'%PDF',b'\x89PNG',b'\xff\xd8')) and bool(re.search(rb'<(?:!doctype|html|head|body|table)\b',body[:65536],re.I))
-                    parsed=reviewed_result or (parse_official_html(body,url,identity,year,layer,[cell['program']]) if is_html else
+                    from kaoyan_hznu_catalog import advance as hznu_catalog
+                    spa=hznu_catalog(body,url,identity,year,layer,[cell['program']],bodies,deadline)
+                    if spa and 'next_urls'in spa:
+                        queue[:0]=spa['next_urls'];result['reason']=spa['reason'];continue
+                    parsed=reviewed_result or spa or (parse_official_html(body,url,identity,year,layer,[cell['program']]) if is_html else
                         parse_official_document(body,url,identity,year,layer,[cell['program']],deadline=deadline))
                     result['parse_seconds']=round(time.monotonic()-parse_start,6)
                 except NeedsReview as exc:
