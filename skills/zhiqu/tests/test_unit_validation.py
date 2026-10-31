@@ -78,6 +78,13 @@ class UnitValidationTests(unittest.TestCase):
         self.check('元','{{e:E1#/value}}分数学成绩',False)
         self.check('元','{{e:E1#/value}}个人',False)
         self.check('人','{{e:E1#/value}}个人')
+    def test_condition_word_is_not_count_unit_but_explicit_items_still_check(self):
+        self.check('年份','{{e:E1#/value}}条件与收费待核',True,2028)
+        self.check('年份','{{e:E1#/value}} 条件尚未取得',True,2028)
+        self.check('年份','{{e:E1#/value}}条规定',False,2028)
+        self.check('元','{{e:E1#/value}}条要求',False)
+        self.check('条','{{e:E1#/value}}条要求')
+
     def test_evidence_unit_only_applies_to_value(self):
         self.assertIsNone(reference_unit(self.case(),'e','E1#/source/id'))
     def test_registered_operation_unit(self):

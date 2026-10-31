@@ -100,3 +100,12 @@ class ClaimPhraseBoundaries(unittest.TestCase):
         self.assertFalse(personal_probability_errors('你需要核对该群体80%的学生获得实习机会的统计口径。'))
 
 if __name__=='__main__':unittest.main()
+
+class HznuPublicServiceDomain(unittest.TestCase):
+    def test_actual_official_catalogue_service_has_a_narrow_verified_row(self):
+        row=official_domain_for_url('https://yjsfw.hznu.edu.cn/dataapi/open/zsss/zsml?mllx=0&zsnf=2026')
+        self.assertIsNotNone(row)
+        self.assertEqual(row['domain'],'yjsfw.hznu.edu.cn')
+        self.assertIn('https://yjs.hznu.edu.cn/c/2025-09-28/3113195.shtml',row['evidence'])
+        self.assertIsNone(official_domain_for_url('https://yjsfw.hznu.edu.cn.attacker.example/catalog'))
+        self.assertIsNone(official_domain_for_url('https://yjsfw.hznu.edu.cn@attacker.example/catalog'))

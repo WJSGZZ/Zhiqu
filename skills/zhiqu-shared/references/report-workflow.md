@@ -4,7 +4,7 @@
 
 操控者是交付报告前亲自核查关键信息的人。
 
-约定三版共用的证据、数字、操控者核查与复核方法；业务阶段和各节内容只在下表的对应文件定义。
+共用证据、数字和复核方法；业务阶段与各节内容见下表。
 
 | 版本 | 阶段表 | 内容合同与写作指南 |
 |---|---|---|
@@ -138,6 +138,8 @@ judgment.json的字段固定如下，表格和组件直接取这些记录；数�
 | report_blocks | 以稳定键保存 `{type, content, evidence_refs}`；数字卡、行动、时间线、路线卡、风险、假设等组件放在合同指定的阶段文件 `report_blocks`，不另造同名顶层数组 |
 | main_evidence_dependencies | 主结论所依赖的候选、证据和计算引用；用于继续追踪间接输入 |
 
+整套判断重复检查见[逐路径比较](report-judgment.md)。
+
 连贯分析放 `narrative.json.sections` 对应的 lead、analysis、core_points 等登记位置；画像表放 `profile_parse.json.report_blocks`，候选表放 `candidates.json.report_blocks`，数据图与来源放 `evidence.json.report_blocks`。每个节点统一使用 type/content/evidence_refs；具体允许的位置与组件类型以合同的 from/node_types 为准。
 这里的text是结构化短理由或动作；长分析只在narrative登记位置写。main_conclusion所需的证据要从recommendation及其引用继续追踪，不能漏掉间接影响结果的计算输入。
 
@@ -221,7 +223,7 @@ review.json 复用高考既有 `independent`、`reviewer`、`date`、`pitfalls`�
 
 ## 使用工具
 
-在仓库根目录运行；四个技能及共用目录须同层安装：
+在仓库根目录运行：
 
 ```bash
 python3 skills/zhiqu/scripts/case_check.py <案例目录> --stage 7

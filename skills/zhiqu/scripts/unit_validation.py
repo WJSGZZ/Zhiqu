@@ -111,7 +111,7 @@ def _display_units(text,match,embedded_percent=False):
         raw=suffix['base']+(suffix['denom'] or '')
         # Avoid interpreting prose such as 分析/分别 as a score suffix.
         rest=after[suffix.end():]
-        prose_starts={'分':r'(?:[析别布类开为享歧位]|数(?!学))', '岗':r'位'}
+        prose_starts={'分':r'(?:[析别布类开为享歧位]|数(?!学))', '岗':r'位', '条':r'件'}
         if not ((suffix['base'] in prose_starts and re.match(prose_starts[suffix['base']],rest)) or (suffix['base']=='个人' and embedded_percent)):
             actual=normalize_unit(raw)
             # 同一段必须已明确分母，才把‘人’理解为每名额人数；不把普通人数放宽为比率。

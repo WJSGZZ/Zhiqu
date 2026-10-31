@@ -699,6 +699,7 @@ class PlanningCase:
                 if c.get(key):
                     try:text_items(c[key])
                     except ValueError as exc:self.err('judgment.json',c.get('candidate_id','?')+'.'+key,str(exc))
+        self.errors.extend(self.judgment_repetition_errors())
         conditions=j.get('recommendation',{}).get('conditions')
         if conditions:
             try:text_items(conditions)
@@ -726,6 +727,59 @@ class PlanningCase:
         if not j.get('candidates') or not j.get('checkpoint'):self.err('judgment.json','','缺候选判断或检查点')
         for _,v in walk(j):
             if isinstance(v,str) and re.search(r'个人.{0,4}(?:上岸|录用|录取).{0,4}\d+%',self.expand(v)):self.err('judgment.json','','禁止个人概率')
+
+    def judgment_repetition_errors(self):
+        """Reject a literal whole argument reused for distinct active options.
+
+        Sealed new reports only; migrated unsealed analyses remain frozen.
+        This catches copying, not the meaning or adequacy of differing reasons.
+        """
+        try:
+            data=parse_profile(active_profile(self.root))
+            if data is None or 'checksum'not in data:return []
+        except (ValueError,KeyError,TypeError,OSError):
+            return []  # The profile gate owns malformed or missing originals.
+        j=self.data.get('judgment.json',{})
+        if not isinstance(j,dict):return []
+        matrix=j.get('matrix',{});recommendation=j.get('recommendation',{})
+        options=matrix.get('options',[])if isinstance(matrix,dict)else []
+        active={x for x in options if isinstance(x,str)}if isinstance(options,list)else set()
+        if isinstance(recommendation,dict):
+            for slot in ('primary','backup'):
+                values=recommendation.get(slot,[])
+                if isinstance(values,list):active.update(x for x in values if isinstance(x,str))
+        def normalized(value):
+            if isinstance(value,str):
+                text=re.sub(r'\s+',' ',value).strip()
+                return re.sub(r'(?<=[\u4e00-\u9fff，。；：！？、（）.,;:!?])\s+|\s+(?=[\u4e00-\u9fff，。；：！？、（）.,;:!?])','',text)
+            if isinstance(value,list):return [normalized(x)for x in value]
+            if isinstance(value,dict):return {k:normalized(v)for k,v in value.items()}
+            return value
+        pool=self.data.get('candidates.json',{});known=set()
+        if isinstance(pool,dict):
+            for group in ('paths','school_programs','job_types','jobs'):
+                values=pool.get(group,[])
+                if isinstance(values,list):known.update(x['id']for x in values if isinstance(x,dict)and isinstance(x.get('id'),str))
+        fields=('supports','counters','costs','fallback','switch_conditions');seen={};errors=[];counts={}
+        entries=j.get('candidates',[])
+        if not isinstance(entries,list):return []
+        for entry in entries:
+            if not isinstance(entry,dict):continue
+            cid=entry.get('candidate_id')
+            if not isinstance(cid,str)or not cid:
+                errors.append('judgment.json：候选判断须有有效candidate_id');continue
+            counts[cid]=counts.get(cid,0)+1
+            if cid not in known:errors.append('judgment.json：候选判断引用了未登记候选'+cid)
+            if cid not in active:continue
+            try:arguments=[normalized(text_items(entry.get(k)))for k in fields]
+            except ValueError:
+                errors.append('judgment.json：'+cid+'五项判断须为非空文字或文字列表');continue
+            signature=json.dumps(arguments,ensure_ascii=False,sort_keys=True)
+            prior=seen.setdefault(signature,cid)
+            if prior!=cid:errors.append('judgment.json：'+prior+'与'+cid+'五项判断完全相同；逐路径核支持、反证、成本、退路与切换条件，共同前提只登记一处')
+        for cid in sorted(active):
+            if counts.get(cid,0)!=1:errors.append('judgment.json：有效比较对象'+cid+'须恰有一条候选判断，不能缺失或重复ID')
+        return errors
 
     def career_input_usage_errors(self):
         """Bind supplied critical answers to rendered sections; not a semantic judge.
