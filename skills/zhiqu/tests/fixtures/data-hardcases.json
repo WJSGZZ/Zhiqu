@@ -1778,6 +1778,63 @@
         "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
         "basis": "首次引入此方法的提交；从独立合成反例修源头，不认证真实旧库或所有HTML机构语义。"
       }
+    },
+    {
+      "id": "ky-public-inclusive-plan",
+      "domain": "考研",
+      "test": "test_kaoyan_hznu_catalog.HznuCatalogTests.test_target_values_keep_inclusive_plan_and_unknown_special_scope",
+      "input_fixture": {
+        "file": "test_kaoyan_hznu_catalog.py",
+        "symbols": [
+          "fixtures",
+          "HznuCatalogTests.setUp",
+          "HznuCatalogTests.test_target_values_keep_inclusive_plan_and_unknown_special_scope"
+        ]
+      },
+      "expected": "原UI拟招生名额含推免须保留；未经公开标签核实的tmme不作推免数，接收专项不推人数。",
+      "provenance": {
+        "commit": "d68218acddb413309c982cd43eb03369b5f7e8b1",
+        "file": "skills/zhiqu/tests/test_kaoyan_hznu_catalog.py",
+        "basis": "首次引入目标方法的提交；离线合成公开JSON和JS指纹，不认证实际原件/全校范围或所有SPA。"
+      }
+    },
+    {
+      "id": "ky-public-duplicate-business-direction",
+      "domain": "考研",
+      "test": "test_kaoyan_hznu_catalog.HznuCatalogTests.test_duplicate_business_direction_with_another_id_is_refused",
+      "input_fixture": {
+        "file": "test_kaoyan_hznu_catalog.py",
+        "symbols": [
+          "fixtures",
+          "HznuCatalogTests.setUp",
+          "HznuCatalogTests.test_duplicate_business_direction_with_another_id_is_refused"
+        ]
+      },
+      "expected": "同一学院专业方向学习方式学位及考试方式不能因不同远端行id重复存人数，整份待核。",
+      "provenance": {
+        "commit": "d68218acddb413309c982cd43eb03369b5f7e8b1",
+        "file": "skills/zhiqu/tests/test_kaoyan_hznu_catalog.py",
+        "basis": "首次引入目标方法的提交；离线合成公开JSON和JS指纹，不认证实际原件/全校范围或所有SPA。"
+      }
+    },
+    {
+      "id": "ky-public-known-stop",
+      "domain": "考研",
+      "test": "test_kaoyan_hznu_catalog.HznuCatalogTests.test_known_stop_does_not_request_catalogue_or_publish",
+      "input_fixture": {
+        "file": "test_kaoyan_hznu_catalog.py",
+        "symbols": [
+          "fixtures",
+          "HznuCatalogTests.setUp",
+          "HznuCatalogTests.test_known_stop_does_not_request_catalogue_or_publish"
+        ]
+      },
+      "expected": "真实停止类别且有效官方入口时不请求该站；无旧stop对照会实际请求一次，新block仍停，不借域名拒绝制造测试通过。",
+      "provenance": {
+        "commit": "d68218acddb413309c982cd43eb03369b5f7e8b1",
+        "file": "skills/zhiqu/tests/test_kaoyan_hznu_catalog.py",
+        "basis": "首次引入目标方法的提交；离线合成公开JSON和JS指纹，不认证实际原件/全校范围或所有SPA。"
+      }
     }
   ],
   "not_in_this_suite": [
