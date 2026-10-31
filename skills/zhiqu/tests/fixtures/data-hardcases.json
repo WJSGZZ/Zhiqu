@@ -1854,6 +1854,40 @@
         "file": "skills/zhiqu/tests/test_kaoyan_hznu_catalog.py",
         "basis": "首次引入此方法的提交；合成公开JSON/fake fetch/publisher全链回归，不冒实际原件已重取或存量并源已完成。"
       }
+    },
+    {
+      "id": "report-year-condition-prose",
+      "domain": "报告",
+      "test": "test_unit_validation.UnitValidationTests.test_condition_word_is_not_count_unit_but_explicit_items_still_check",
+      "input_fixture": {
+        "file": "test_unit_validation.py",
+        "symbols": [
+          "UnitValidationTests.test_condition_word_is_not_count_unit_but_explicit_items_still_check"
+        ]
+      },
+      "expected": "年份引用后的条件是散文词，不误判条计数；显式条规定/条要求的错单位仍拒绝。",
+      "provenance": {
+        "commit": "0401ed73b9d5c7edf93efafddb9ad6bbc4850bc5",
+        "file": "skills/zhiqu/tests/test_unit_validation.py",
+        "basis": "首次引入目标方法；合成单位与URL回归及已核域名登记，不认证原件重取、所有域名或语义判断。"
+      }
+    },
+    {
+      "id": "ky-official-public-catalogue-service",
+      "domain": "考研",
+      "test": "test_guard_boundaries.HznuPublicServiceDomain.test_actual_official_catalogue_service_has_a_narrow_verified_row",
+      "input_fixture": {
+        "file": "test_guard_boundaries.py",
+        "symbols": [
+          "HznuPublicServiceDomain.test_actual_official_catalogue_service_has_a_narrow_verified_row"
+        ]
+      },
+      "expected": "仅登记有真实官方父页链接依据的研究生公开服务域；域名伪后缀或userinfo不能冒官方，不以edu.cn字样泛化。",
+      "provenance": {
+        "commit": "0401ed73b9d5c7edf93efafddb9ad6bbc4850bc5",
+        "file": "skills/zhiqu/tests/test_guard_boundaries.py",
+        "basis": "首次引入目标方法；合成单位与URL回归及已核域名登记，不认证原件重取、所有域名或语义判断。"
+      }
     }
   ],
   "not_in_this_suite": [
