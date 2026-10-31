@@ -280,7 +280,7 @@
     "calculations.json": "e78d090f8eaefcc1d16696d737b78ea95ae2dc4301377da12c1126e2b4ddeb23",
     "candidates.json": "1ceab0cc754836a5224bdbb53307b376792cdb845d79c66c886b6075385daae6",
     "case.json": "5131aec8aea6f2272d34db351b7682340c6f3e40b96f8e6f28399f93531f87b8",
-    "claim_check.json": "4d6894b1a4257ab4aee266d43ae7c985f6f411de10c83a412a40fc52760e1449",
+    "claim_check.json": "7b7c3a3b2da5176dadcad47ba9be99784e758e9ef168df5a148ad82f3dc987ef",
     "directions.json": "141ba17063943d6893342f321196523fd0eaf4c8c102cafee5b91cfc3a254d3a",
     "evidence.json": "fda7a9e2760414ba9bd5f9a73b88a87ccebf6f5d8983c0f0423876de377b273b",
     "judgment.json": "85624b7f49bc7815d5a44cbfcd46ba8f30b88348201fff5b5f63a0c30863e0ef",
@@ -291,7 +291,7 @@
     "profile_parse.json": "26d77c111bb043cbc6cca5e761f0272ae369b77043836f7ff4e039a5759d96d9",
     "report.html": "638a2167d28b25b2df93798c23955d7c7cc78c32e3d11d5e77ed04a5828496c7",
     "report.md": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
-    "report_trace.json": "0dbcd9dda52fad42a85b9672b3330497ec47e8590b65518421ac08f2214b900b",
+    "report_trace.json": "eee69f3f860b51dea76e70c37b76ec41d8d19944eebda97b81b212863b70d647",
     "rules_check.json": "a49b73e4796ddce781c9559fadf72ac99b81b32fdc2d06bf2783d4c160e4b2f0"
   },
   "snapshot_refreshes": [
@@ -661,6 +661,15 @@
         "claim_check.json"
       ],
       "reason": "新增派生画像字段名唯一门禁；旧例均无重复，逐份组装正文、核对材料和PDF字节不变，仅兼容流程指纹，不重认证官方事实或原审批。"
+    },
+    {
+      "date": "2026-10-31",
+      "by": "Codex（核查单数值常量与引用标点兼容复验，非内容复核）",
+      "files": [
+        "report_trace.json",
+        "claim_check.json"
+      ],
+      "reason": "操控者核查依赖遍历兼容数值常量、正文引用末尾标点门禁；本例前后核查分组、正文、核对输入和PDF均未改变，仅更新工具指纹与复核绑定，不升级原审批或认证官方原文。"
     }
   ],
   "review_history": [

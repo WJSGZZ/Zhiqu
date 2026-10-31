@@ -18,7 +18,7 @@
   "tool_sha256": {
     "planning_report.py": "32ca898bbb421d198bdb1d35c9215014d0642ffdf5d08eb88f4030c5f050ddf6",
     "planning_workflow.py": "32a66006d43469e3893893b30f011c2bc1daee45274263d7acbeaa73f855f3f4",
-    "operator_check.py": "d99826c1cae9514c665edb0b1b6155ea99a0bce19b99a919b9ada81e0b93c0a1",
+    "operator_check.py": "79a4c46fee21efc47a609a4023d09cf4dd556ab2632a6410b8a93aff353d19a0",
     "check_demos.py": "67d4edc1cd737beeb6729783a736e667a97c12d8f7de2de673632d9d5c3370b8",
     "report.py": "c1a2e82e6ce5fb9fefd866e14679a24f1ad5dcdcf56e2bdc1d578668d10e1cd8",
     "render_report.py": "17c81658af1834fc1216d61ca3c11070934229a74d8d1175a1602a348ffd1c0f",
@@ -27,7 +27,7 @@
     "source_authentication.py": "b18201e997e0b4ca33c879979bc03f81deab1ea5edbbbc74cab6bf622821f278",
     "official_source_audit.py": "c09c40a2c5eec18318fbb1fa52393ee37b4e63f636ec7ea3999084d12ecc0df1",
     "unit_validation.py": "9f5df89a101dd684231fe35f8fe931e150127fc698f2ab774b628bc3ffdf093c",
-    "reader_language.py": "ccb4d16f5a23fff9e9660c9cf33aa042b81f2e2221dc38bb641079b0d61259b6",
+    "reader_language.py": "34a64a5989895ee11a166d41ae8a4c6b7b12f2924bb5234ae3b7bb401046bbfc",
     "claim_check.py": "9495d7fac08683e81002aa95d943de5f16030aa13d4c5ba08d27995d0b0f27bb",
     "check_report.py": "943648b8c2b778f210550712d225c0b341d361c5c52e2fb751d4bec8d2e60917",
     "authoring_metadata.py": "9ac0328c9a8bdeec672daede766f49f5e9c94c2761ae64e0ec32e2ed8abf404c"
@@ -731,6 +731,29 @@
       "previous_trace_sha256": "e54e4f6d9d0f01ca257bda2fda98aedf950c3f93f5736eb64288f1c3d14f9788",
       "assembled_markdown_sha256": "caf501508e4bb94fa89ef30378a716f496ff000289aa508092a9fec6dc852eff",
       "appendix_materials_unchanged": true,
+      "original_artifacts": {
+        "report.md": "caf501508e4bb94fa89ef30378a716f496ff000289aa508092a9fec6dc852eff",
+        "report.html": "4021097fe264bcd0daee8a3703e37b996c8c096bbef70d0bd2b69e8a051c0ceb",
+        "2027-QZ-S02-report.pdf": "588815242891105c29653161035e28406485708ec9783e995c0863a1c4bd64ca"
+      }
+    },
+    {
+      "date": "2026-10-31",
+      "kind": "numeric_inputs_and_quote_punctuation_compatibility",
+      "reason": "操控者核查依赖遍历兼容数值常量、正文引用末尾标点门禁；本例前后核查分组、正文、核对输入和PDF均未改变，仅更新工具指纹与复核绑定，不升级原审批或认证官方原文。",
+      "changed_tools": {
+        "operator_check.py": {
+          "before": "d99826c1cae9514c665edb0b1b6155ea99a0bce19b99a919b9ada81e0b93c0a1",
+          "after": "79a4c46fee21efc47a609a4023d09cf4dd556ab2632a6410b8a93aff353d19a0"
+        },
+        "reader_language.py": {
+          "before": "ccb4d16f5a23fff9e9660c9cf33aa042b81f2e2221dc38bb641079b0d61259b6",
+          "after": "34a64a5989895ee11a166d41ae8a4c6b7b12f2924bb5234ae3b7bb401046bbfc"
+        }
+      },
+      "previous_trace_sha256": "de608cb25a0e32c90c14a4b17987752435a8b6faf1db47f24ae1bc4c8adb02c2",
+      "assembled_markdown_sha256": "caf501508e4bb94fa89ef30378a716f496ff000289aa508092a9fec6dc852eff",
+      "checklist_groups_unchanged": true,
       "original_artifacts": {
         "report.md": "caf501508e4bb94fa89ef30378a716f496ff000289aa508092a9fec6dc852eff",
         "report.html": "4021097fe264bcd0daee8a3703e37b996c8c096bbef70d0bd2b69e8a051c0ceb",
