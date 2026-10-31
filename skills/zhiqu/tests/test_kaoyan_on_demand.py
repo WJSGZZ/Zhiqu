@@ -165,6 +165,104 @@ class OnDemandTests(unittest.TestCase):
                 blob=page(table,prefix+'合成大学2026年硕士复试分数线')
                 self.assertEqual(adapters.parse_official_html(blob,URL,IDENTITY,2026,'lines',['0854'])['rows'],1)
 
+    def test_local_table_heading_cannot_borrow_document_school(self):
+        tables={'lines':'<table><tr><th>专业代码</th><th>总分</th></tr><tr><td>085404</td><td>300</td></tr></table>',
+                'catalog':'<table><tr><th>专业代码</th><th>招生人数</th></tr><tr><td>085404</td><td>9</td></tr></table>',
+                'stats':'<table><tr><th>专业代码</th><th>初试总分</th></tr>'+''.join('<tr><td>085404</td><td>'+str(x)+'</td></tr>'for x in [300,301,302])+'</table>'}
+        names={'lines':'复试分数线','catalog':'招生专业目录','stats':'拟录取名单'}
+        for layer,table in tables.items():
+            for tag in ['h3','h4','h5','h6','p','caption']:
+                for label in ['另一大学2026年硕士','合成大学附属大学2026年硕士','合成大学2025年硕士','合成大学2026年博士']:
+                    local='<'+tag+'>'+label+names[layer]+'</'+tag+'>'
+                    body=table.replace('<table>','<table>'+local,1) if tag=='caption' else local+'<p>请按下表查阅</p>'+table
+                    with self.subTest(layer=layer,tag=tag,label=label),self.assertRaises(adapters.NeedsReview):
+                        adapters.parse_official_html(page(body,'合成大学2026年硕士'+names[layer]),URL,IDENTITY,2026,layer,['0854'])
+
+    def test_local_table_scope_keeps_clean_own_heading_and_department_role(self):
+        table='<table><tr><th>专业代码</th><th>总分</th></tr><tr><td>085404</td><td>300</td></tr></table>'
+        for local in ['<h3>合成大学2026年硕士复试分数线</h3><p>请查下表</p>',
+                      '<h3>学院：数学学院</h3>',
+                      '<p>学校：合成大学</p>',
+                      '<h3><script>另一大学2026年博士复试分数线</script>普通计划</h3>',
+                      '<h3><style>另一大学</style>普通计划</h3>',
+                      '<h3><!--另一大学-->普通计划</h3>']:
+            with self.subTest(local=local):
+                result=adapters.parse_official_html(page(local+table),URL,IDENTITY,2026,'lines',['0854'])
+                self.assertEqual(result['rows'],1)
+                self.assertNotIn('另一大学',result['manifest']['rows'][0]['scope_context']['scope_raw'])
+
+    def test_explicit_school_column_must_match_without_parent_carry(self):
+        for name in ['另一大学','合成大学附属大学','', '学校：合成大学']:
+            body='<table><tr><th>专业代码</th><th>学校名称</th><th>总分</th></tr><tr><td>085404</td><td>'+name+'</td><td>300</td></tr></table>'
+            with self.subTest(name=name),self.assertRaises(adapters.NeedsReview):
+                adapters.parse_official_html(page(body),URL,IDENTITY,2026,'lines',['0854'])
+        body='<table><tr><th>专业代码</th><th>学校名称</th><th>总分</th></tr><tr><td>085404</td><td rowspan="2">合成大学</td><td>300</td></tr><tr><td>085410</td><td>310</td></tr></table>'
+        self.assertEqual(adapters.parse_official_html(page(body),URL,IDENTITY,2026,'lines',['0854'])['rows'],2)
+
+    def test_local_scope_does_not_reset_on_neutral_paragraph_or_other_table(self):
+        table='<table><tr><th>专业代码</th><th>总分</th></tr><tr><td>085404</td><td>300</td></tr></table>'
+        other=table.replace('085404','081200')
+        for body in ['<h3>另一大学2026年硕士复试分数线</h3><p>请查阅</p>'+table,
+                     '<h3>另一大学2026年硕士复试分数线</h3><h4>普通计划</h4>'+table,
+                     '<p>学校：另一大学</p><h4>普通计划</h4>'+table,
+                     '<h3>另一大学2026年硕士复试分数线</h3>'+other+table]:
+            with self.subTest(body=body),self.assertRaises(adapters.NeedsReview):
+                adapters.parse_official_html(page(body),URL,IDENTITY,2026,'lines',['0854'])
+        body='<h3>另一大学2026年硕士复试分数线</h3>'+other+'<h3>合成大学2026年硕士复试分数线</h3>'+table
+        self.assertEqual(adapters.parse_official_html(page(body),URL,IDENTITY,2026,'lines',['0854'])['rows'],1)
+
+    def test_school_name_suffix_is_not_a_parent_school_identity(self):
+        table='<table><tr><th>专业代码</th><th>总分</th></tr><tr><td>085404</td><td>300</td></tr></table>'
+        for suffix in ['附属大学','独立学院','分校','研究生院附属大学','（附属大学）','研究生学院','招生学院','硕士学院','全日制学院']:
+            with self.subTest(suffix=suffix),self.assertRaises(adapters.NeedsReview):
+                adapters.parse_official_html(page(table,'合成大学'+suffix+'2026年硕士复试分数线'),URL,IDENTITY,2026,'lines',['0854'])
+        self.assertEqual(adapters.parse_official_html(page(table,'合成大学研究生院2026年硕士复试分数线'),URL,IDENTITY,2026,'lines',['0854'])['rows'],1)
+
+    def test_local_table_year_and_degree_do_not_need_business_words_to_conflict(self):
+        table='<table><tr><th>专业代码</th><th>总分</th></tr><tr><td>085404</td><td>300</td></tr></table>'
+        for scope in ['2025年','博士研究生','另一大学招生信息']:
+            with self.subTest(scope=scope),self.assertRaises(adapters.NeedsReview):
+                adapters.parse_official_html(page('<h3>'+scope+'</h3>'+table),URL,IDENTITY,2026,'lines',['0854'])
+        for scope in ['2026年','硕士研究生']:
+            self.assertEqual(adapters.parse_official_html(page('<h3>'+scope+'</h3>'+table),URL,IDENTITY,2026,'lines',['0854'])['rows'],1)
+
+    def test_business_document_year_must_be_unambiguous(self):
+        table='<table><tr><th>专业代码</th><th>总分</th></tr><tr><td>085404</td><td>300</td></tr></table>'
+        with self.assertRaises(adapters.NeedsReview):
+            adapters.parse_official_html(page(table,'合成大学2025年2026年硕士复试分数线'),URL,IDENTITY,2026,'lines',['0854'])
+
+    def test_bare_school_label_cannot_erase_parent_year_or_degree(self):
+        table='<table><tr><th>专业代码</th><th>总分</th></tr><tr><td>085404</td><td>300</td></tr></table>'
+        for parent in ['2025年','博士研究生']:
+            for child in ['<p>合成大学</p>','<h4>学校：合成大学</h4>']:
+                with self.subTest(parent=parent,child=child),self.assertRaises(adapters.NeedsReview):
+                    adapters.parse_official_html(page('<h3>'+parent+'</h3>'+child+table),URL,IDENTITY,2026,'lines',['0854'])
+
+    def test_school_scope_without_business_words_is_still_identity(self):
+        table='<table><tr><th>专业代码</th><th>总分</th></tr><tr><td>085404</td><td>300</td></tr></table>'
+        for text in ['另一学校','另一学校招生信息']:
+            with self.subTest(text=text),self.assertRaises(adapters.NeedsReview):
+                adapters.parse_official_html(page('<h3>'+text+'</h3>'+table),URL,IDENTITY,2026,'lines',['0854'])
+
+    def test_school_column_aliases_and_unmapped_identity_are_not_ignored(self):
+        for label in ['高校名称','招生院校','单位名称','招生单位代码','学校代码(教育部标识码)']:
+            table='<table><tr><th>专业代码</th><th>'+label+'</th><th>总分</th></tr><tr><td>085404</td><td>另一大学</td><td>300</td></tr></table>'
+            with self.subTest(label=label),self.assertRaises(adapters.NeedsReview):
+                adapters.parse_official_html(page(table),URL,IDENTITY,2026,'lines',['0854'])
+
+    def test_explicit_table_year_and_level_cannot_borrow_document_scope(self):
+        for label,value in [('年份','2025'),('招生年份','2025'),('招生层次','博士'),('年份',''),('层次','研究生'),('学年','2025—2026')]:
+            table='<table><tr><th>专业代码</th><th>'+label+'</th><th>总分</th></tr><tr><td>085404</td><td>'+value+'</td><td>300</td></tr></table>'
+            with self.subTest(label=label,value=value),self.assertRaises(adapters.NeedsReview):
+                adapters.parse_official_html(page(table),URL,IDENTITY,2026,'lines',['0854'])
+
+    def test_explicit_table_year_and_masters_level_remain_usable(self):
+        for year in ['2026','2026年']:
+            for level in ['硕士','硕士研究生','专业学位硕士研究生','学术硕士','硕士研究生（全日制）']:
+                table='<table><tr><th>专业代码</th><th>招生年度</th><th>招生层次</th><th>总分</th></tr><tr><td>085404</td><td>'+year+'</td><td>'+level+'</td><td>300</td></tr></table>'
+                with self.subTest(year=year,level=level):
+                    self.assertEqual(adapters.parse_official_html(page(table),URL,IDENTITY,2026,'lines',['0854'])['rows'],1)
+
     def test_inline_title_fragments_are_one_original_heading_for_each_layer(self):
         tables={'lines':'<table><tr><th>专业代码</th><th>总分</th></tr><tr><td>085404</td><td>300</td></tr></table>',
                 'catalog':'<table><tr><th>专业代码</th><th>招生人数</th></tr><tr><td>085404</td><td>9</td></tr></table>',

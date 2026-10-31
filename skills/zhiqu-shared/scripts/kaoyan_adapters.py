@@ -39,21 +39,33 @@ def number(value):
     return float(s) if '.' in s else int(s)
 
 
+BUSINESS_TITLE = {'lines':'复试|分数线','catalog':'目录|(?:招生|专业).*计划|计划.*分配','stats':'拟录取'}
+
+
+def _names_school(text, school):
+    before, found, after = text.partition(school)
+    if not found or not re.fullmatch(r'(?:关于|公布|发布|印发|转发|20\d{2}年|[\s\W])*', before):
+        return False
+    # A university-name prefix is not an identity: a suffixed institution or
+    # an unregistered college needs explicit review, not parent-school carry.
+    after = after.lstrip(' \t\r\n（）()【】《》:：—-')
+    if after.startswith('研究生院'):
+        after = after[len('研究生院'):].lstrip(' \t\r\n（）()【】《》:：—-')
+    if re.search(r'大学(?!生)|学院|研究所|研究院|党校|学校', after):
+        return False
+    return not after or bool(re.match(r'20\d{2}|硕士|研究生|招生|复试|初试|统考|全日制|非全日制', after))
+
+
 def source_record(body, url, school, year, layer):
     root = html.fromstring(_decode(body))
     # Inline spans belong to one heading; distinct headings must not fuse.
     titles = [_lxml_text(node) for node in root.xpath('//h1 | //h2 | //title')]
     business_titles = [re.sub(r'\s+', ' ', x).strip() for x in titles
-                       if str(year) in x and re.search({'lines':'复试|分数线','catalog':'目录|(?:招生|专业).*计划|计划.*分配','stats':'拟录取'}[layer], x)]
-    def names_school(text):
-        # Do not mistake e.g. 新合成大学 for 合成大学. Only conventional
-        # announcement/year prefixes may precede the full requested name.
-        before, found, _ = text.partition(school)
-        return bool(found) and bool(re.fullmatch(r'(?:关于|公布|发布|印发|转发|20\d{2}年|[\s\W])*', before))
+                       if str(year) in x and re.search(BUSINESS_TITLE[layer], x)]
     # Every heading claiming the requested year's business scope must be
     # attributable. A site masthead or a competing heading cannot lend its
     # school to another table; ambiguous/generic headings need manual review.
-    if not business_titles or not all(names_school(x) for x in business_titles):
+    if not business_titles or not all(_names_school(x, school) and set(re.findall(r'20\d{2}', x)) == {str(year)} for x in business_titles):
         raise NeedsReview('原页标题未能同时确认学校、年份和业务类型')
     title = business_titles[0]
     if any('博士'in x or '硕士'not in x for x in business_titles):raise NeedsReview('原页未单独明确硕士层次；不把博士/混合招生表当硕士入库')
@@ -114,10 +126,79 @@ def _heading(root, table_index):
         raise NeedsReview('独立DOM表定位不一致')
     # Only the nearest preceding paragraph or heading. No previous-school carry.
     nodes = tables[table_index-1].xpath('preceding::*[self::p or self::h2 or self::h3]')
-    raw = re.sub(r'\s+', '', ''.join(nodes[-1].itertext())) if nodes else ''
+    raw = re.sub(r'\s+', '', _lxml_text(nodes[-1])) if nodes else ''
     if len(raw) > 200 or re.search(r'\d{12,18}|姓名|考生号|联系人|电话|邮箱', raw):
         return ''
     return raw
+
+
+def _html_table_identity(dom_table, table, school, year, layer, programs):
+    """Check local original scope, without searching arbitrary page prose.
+
+    Nearest complete business scope plus intervening headings/paragraphs and
+    the table's own caption form its context. Neutral/bare-school subheadings
+    cannot reset inherited years or degrees.
+    Other tables' cells never supply its institution.
+    Unknown labels/long context fail closed; nothing from it is logged.
+    """
+    grid = table['rows']
+    header = next((i for i, row in enumerate(grid[:5]) if any(HEAD.get(re.sub(r'\s+', '', x)) in {'code','combined'} for x in row)), None)
+    if header is None:
+        return  # The existing unmapped-programme guard owns this case.
+    columns = [i for i,x in enumerate(grid[header]) if HEAD.get(re.sub(r'\s+','',x)) in {'code','combined'}]
+    selected = [row for row in grid[header+1:] if any(
+        (m := re.match(r'^\s*(S\d{6}|\d{4}[0-9A-Z]{2}|\d{4})(?=\D|$)', row[i])) and
+        any(m[1].startswith(p) for p in programs) for i in columns)]
+    if not selected:
+        return
+    preceding = dom_table.xpath('preceding::*[not(ancestor::table) and (self::h1 or self::h2 or self::h3 or self::h4 or self::h5 or self::h6 or self::p)]')
+    context = [_lxml_text(x) for x in dom_table.xpath('./caption | ancestor::*[self::h1 or self::h2 or self::h3 or self::h4 or self::h5 or self::h6 or self::p]')]
+    for node in reversed(preceding):
+        context.append(_lxml_text(node))
+        text = _lxml_text(node)
+        # A bare school label cannot reset an inherited year or degree. Only
+        # a complete, self-contained scope starts a new table section.
+        if (_names_school(re.sub(r'\s+', ' ', text).strip(), school)
+                and set(re.findall(r'20\d{2}', text)) == {str(year)}
+                and '硕士' in text and '博士' not in text
+                and re.search(BUSINESS_TITLE[layer], text)):
+            break
+        if len(context) > 12:
+            raise NeedsReview('原表局部标题/段落范围过长，学校归属需人工核对')
+    for text in context:
+        text = re.sub(r'\s+', ' ', text).strip()
+        if _department_scope(text):
+            continue  # Explicit department role, not a separate institution.
+        business = bool(re.search(BUSINESS_TITLE[layer], text))
+        explicit_school = bool(re.search(r'大学(?!生)|学院|研究所|研究院|党校|学校', text))
+        labelled = re.match(r'^(?:学校|院校|招生单位)(?:名称)?[：:]\s*(.*)$', text)
+        years = set(re.findall(r'20\d{2}', text))
+        if not (business or explicit_school or labelled or years or '博士' in text):
+            continue
+        if len(text) > 300:
+            raise NeedsReview('原表局部学校范围说明过长，需人工核对')
+        name_text = labelled[1] if labelled else text
+        if ((business or explicit_school or labelled) and not _names_school(name_text, school)) or (years and years != {str(year)}) or '博士' in text:
+            raise NeedsReview('原表局部学校、年份或层次与请求不一致或未明确；不借网页总标题归属')
+    labels = [re.sub(r'\s+','',x) for x in grid[header]]
+    school_columns = [i for i,x in enumerate(labels) if re.fullmatch(r'(?:招生)?(?:学校|院校|高校|单位)(?:名称|名)?',x)]
+    if any(re.search(r'学校|院校|高校|招生单位',x) and i not in school_columns
+           and not re.search(r'毕业|本科|来源',x) for i,x in enumerate(labels)):
+        raise NeedsReview('原表学校身份列尚未明确映射，需人工核对')
+    year_columns = [i for i,x in enumerate(labels) if x in {'年份','年度','招生年份','招生年度','招生年','学年'}]
+    level_columns = [i for i,x in enumerate(labels) if x in {'层次','招生层次','学历层次','培养层次'}]
+    for row in selected:
+        if any(row[i].strip() != school for i in school_columns):
+            raise NeedsReview('原表显式学校列未唯一对应所问学校，需人工核对')
+        if any(not re.fullmatch(str(year)+r'(?:年|年度|级)?',row[i].strip()) for i in year_columns):
+            raise NeedsReview('原表显式年份列与请求不一致或未明确，需人工核对')
+        if any(not re.fullmatch(r'(?:学术(?:学位)?|专业(?:学位)?)?硕士(?:研究生)?(?:[（(](?:全日制|非全日制|专业学位|学术学位)[）)])?',row[i].strip()) for i in level_columns):
+            raise NeedsReview('原表显式招生层次不是明确硕士，需人工核对')
+
+
+def _department_scope(text):
+    department = re.fullmatch(r'(?:学院|院系|培养学院)[：:]\s*(.{1,60}(?:学院|系))', text.strip())
+    return bool(department) and not re.search(r'大学|研究所|研究院|学校|党校', department[1])
 
 
 def parse_official_html(body, url, identity, year, layer, programs):
@@ -134,6 +215,7 @@ def parse_official_html(body, url, identity, year, layer, programs):
         trs = [tr for tr in dom_table.xpath('.//tr') if tr.xpath('ancestor::table[1]')[0] is dom_table]
         table['literal_cells'] = {(ri, ci): _lxml_text(cell) for ri, tr in enumerate(trs, 1)
                                   for ci, cell in enumerate(tr.xpath('./td|./th'), 1)}
+        _html_table_identity(dom_table, table, school, year, layer, programs)
     return parse_verified_tables(tables, source, identity, year, layer, programs)
 
 
