@@ -168,18 +168,26 @@ def document_base(root,url):
     return base,None
 
 
-def navigation_links(body,url,school,entry):
+def resource_label(element):
+    from kaoyan_tables import _lxml_text
+    # Include explicit accessible/fallback labels, never infer opaque content.
+    return ' '.join([_lxml_text(element),*(node.get(key)or'' for node in element.iter()
+                    for key in ('title','aria-label','alt'))])
+
+
+def navigation_links(body,url,school,entry,layer=None):
     from lxml import html
     from kaoyan_tables import _decode
     root=html.fromstring(_decode(body));out=[];priorities={}
     base,base_issue=document_base(root,url)
     if school not in ''.join(root.itertext()):return out
     for a in root.xpath('//a[@href]'):
-        label=''.join(a.itertext())+' '+a.get('title','')
+        label=resource_label(a)
         if '博士'in label and '硕士'not in label:continue
         if not re.search('研究生院|研究生招生|硕士.*招生|硕士招生|招生信息|招生工作|学校官网|学校主页|学院网站|官方网站|学校网站|院校网站|招生单位网站|院校简介|院校介绍|学校概况|学校简介|联系方式',label):continue
         if base_issue and not urlsplit(a.get('href')).scheme:continue
         target=urljoin(base,a.get('href'));host=urlsplit(target).hostname or ''
+        if outside_requested_layer(layer,label,target):continue
         if urlsplit(url).hostname=='yz.chsi.com.cn' and host.endswith('.edu.cn'):
             entry['graduate_site_url']=target
         if official_url(target,entry):
@@ -194,6 +202,7 @@ def navigation_links(body,url,school,entry):
             target=match[1].rstrip('。，；')
             try:safe_url(target)
             except Exception:continue
+            if outside_requested_layer(layer,target):continue
             if (urlsplit(target).hostname or'').endswith('.edu.cn'):
                 entry['graduate_site_url']=target
                 if target not in out:out.append(target)
@@ -201,6 +210,11 @@ def navigation_links(body,url,school,entry):
     # Keep the six-link budget; overview/contact links must not crowd out the
     # actual graduate admissions entrance merely because they appear first.
     return sorted(out,key=lambda u:priorities[u])[:6]
+
+
+def outside_requested_layer(layer, *labels):
+    """Explicit roster hints are not line/catalog resources; opaque content stays unknown."""
+    return layer!='stats' and any(re.search('名单|拟录取',unquote(label or '')) for label in labels)
 
 
 def embedded_originals(root, url, document_page, layer):
@@ -239,7 +253,7 @@ def embedded_originals(root, url, document_page, layer):
             safe_url(target)
         except Exception:reject('restricted_or_invalid_file');continue
         if urlsplit(target).hostname!=urlsplit(url).hostname:reject('untrusted_file_host');continue
-        if layer!='stats' and re.search('名单|拟录取',unquote(urlsplit(target).path)):reject('outside_requested_layer');continue
+        if outside_requested_layer(layer,viewer,target,resource_label(element)):reject('outside_requested_layer');continue
         if target not in links:links.append(target)
     return links,issues
 
@@ -247,24 +261,26 @@ def embedded_originals(root, url, document_page, layer):
 def discover_links(body, url, year, layer, diagnostics=None):
     """Actual public hrefs only; no guessed path, pagination or API parameters."""
     from lxml import html
-    from kaoyan_tables import _decode, ARTICLE_IMAGE_XPATH
+    from kaoyan_tables import _decode, _lxml_text, ARTICLE_IMAGE_XPATH
     root = html.fromstring(_decode(body))
     base,base_issue=document_base(root,url)
     links = []
     originals = set()
     document_page=False
     from kaoyan_adapters import source_record
-    title_text=''.join(root.xpath('//h1//text() | //h2//text() | //title/text()'))
+    headings=[_lxml_text(node) for node in root.xpath('//h1 | //h2 | //title')]
     # The parent itself must identify the correct year and business type.
     terms = {'lines': r'复试.*(?:线|要求)|分数线', 'catalog': r'目录|简章|(?:招生|专业).*计划|计划.*分配', 'stats': r'拟录取'}[layer]
-    if str(year)in title_text and re.search(terms,title_text):document_page=True
+    document_page=any(str(year)in title and re.search(terms,title)
+                      and not outside_requested_layer(layer,title) for title in headings)
     for a in root.xpath('//a[@href]'):
         # The title is a discovery hint for ellipsized navigation, never proof
         # of the fetched document's school, year or business scope.
-        label = ''.join(a.itertext()) + ' ' + a.get('title', '')
+        label = resource_label(a)
         if base_issue and not urlsplit(a.get('href')).scheme:continue
         target = urljoin(base, a.get('href'))
         host = urlsplit(target).hostname or ''
+        if outside_requested_layer(layer,label,target):continue
         trusted = host.endswith(('.edu.cn','.gov.cn','.chsi.com.cn')) or host==urlsplit(url).hostname
         # CHSI site-wide catalogue/news navigation is not this school's source.
         # Follow a concrete dated article, or this school's actual /sch/ link.
@@ -282,6 +298,7 @@ def discover_links(body, url, year, layer, diagnostics=None):
         for image in root.xpath(ARTICLE_IMAGE_XPATH):
             if base_issue and not urlsplit(image.get('src')).scheme:continue
             target=urljoin(base,image.get('src'))
+            if outside_requested_layer(layer,target,resource_label(image)):continue
             if urlsplit(target).hostname==urlsplit(url).hostname:
                 try:safe_url(target)
                 except Exception:continue
@@ -554,6 +571,8 @@ def run_request(request, *, fetch=fetch_public, publisher=validate_and_publish, 
             safe_url(url);host=urlsplit(url).hostname
             if url in known_stops or host in known_stop_hosts:
                 result['reason']='已记录被拦/登录/验证的原入口或同站，不重复请求';result.setdefault('not_retried_entries',[]).append(url);continue
+            if outside_requested_layer(layer,url):
+                result['reason']='入口明确为名单或拟录取资料，不属于本次复试线/目录层，未请求';continue
             if not official_url(url,entry):
                 result['reason']='入口域名未由本校官方名录/实际导航确认，未请求';continue
             if host in stopped_hosts:
@@ -585,7 +604,7 @@ def run_request(request, *, fetch=fetch_public, publisher=validate_and_publish, 
                     checkpoint();continue
                 url=final_url
                 body=item['body'];deadline()
-                if b'<html' in body[:3000].lower():queue.extend(navigation_links(body,url,identity['name'],entry))
+                if b'<html' in body[:3000].lower():queue.extend(navigation_links(body,url,identity['name'],entry,layer))
                 reviewed_result=reviewed_manifest(body,url,layer,reviewed)
                 try:
                     parse_start=time.monotonic()

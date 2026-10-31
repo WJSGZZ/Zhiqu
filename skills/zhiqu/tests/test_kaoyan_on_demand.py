@@ -537,6 +537,55 @@ class OnDemandTests(unittest.TestCase):
         self.assertEqual(links[0], 'https://fixture.edu.cn/masters')
         self.assertNotIn('https://fixture.edu.cn/about5', links)
 
+    def test_non_stats_discovery_excludes_explicit_rosters_in_all_resource_roles(self):
+        from urllib.parse import quote
+        for layer,title in [('lines','复试分数线'),('catalog','招生目录')]:
+            markup='<a href="/anonymous.pdf">正式原表</a><a href="/opaque.xlsx">拟录取名单</a>'
+            markup+='<a href="/'+quote('复试名单')+'.PDF">附件</a><a href="/aria.pdf" aria-label="拟录取名单">附件</a>'
+            markup+='<div class="wp_articlecontent"><img src="/good.png"><img src="/opaque.png" alt="复试名单"></div>'
+            markup+='<iframe src="/opaque.pdf" title="拟录取名单"></iframe>'
+            markup+='<object data="/'+quote('拟录取名单')+'.pdf"></object><object data="/fallback.pdf">拟录取名单</object>'
+            markup+='<iframe src="/viewer.html?file=%2Fopaque.pdf&amp;title='+quote('拟录取名单')+'"></iframe>'
+            links=tool.discover_links(page(markup,'合成大学2026年硕士'+title),URL,2026,layer)
+            self.assertEqual(set(links),{'https://fixture.edu.cn/anonymous.pdf','https://fixture.edu.cn/good.png'})
+        self.assertIn('https://fixture.edu.cn/opaque.xlsx',tool.discover_links(
+            page('<a href="/opaque.xlsx">拟录取名单</a>','合成大学2026年硕士拟录取名单'),URL,2026,'stats'))
+
+    def test_discovery_document_year_and_layer_stay_in_one_clean_heading(self):
+        img='<div class="wp_articlecontent"><img src="/original.jpg"></div>'
+        for title,head in [('合成大学2026年通知','<h1>2025年硕士复试分数线</h1>'),
+                           ('合成大学2026年通知','<h1>2026年硕士复试线及拟录取名单</h1>'),
+                           ('合成大学研究生院','<h1>硕士复试分数线<script>2026</script></h1>')]:
+            self.assertEqual(tool.discover_links(page(head+img,title),URL,2026,'lines'),[])
+        heading='<h1>合成大学<span>2026</span>年硕士<strong>复试分数线</strong></h1>'
+        self.assertEqual(tool.discover_links(page(heading+img,'研究生院'),URL,2026,'lines'),['https://fixture.edu.cn/original.jpg'])
+
+    def test_line_request_never_fetches_explicit_roster_discovered_on_parent(self):
+        body=page('<a href="/opaque.xlsx">2026硕士招生拟录取名单</a>'
+                  '<div class="wp_articlecontent"><img src="/opaque.png" alt="复试名单"></div>')
+        def fetch(url,deadline):return {'body':body if url==URL else b'not-an-original'}, {'status':'retrieved'}
+        fetcher=Mock(side_effect=fetch);summary,_,publisher=self.run_fake(fetch=fetcher)
+        self.assertEqual([c.args[0]for c in fetcher.call_args_list],[URL])
+        publisher.assert_not_called();self.assertFalse(summary['published'])
+
+    def test_non_stats_queue_and_chsi_plaintext_entry_cannot_reintroduce_rosters(self):
+        from urllib.parse import quote
+        bad='https://fixture.edu.cn/'+quote('拟录取名单')+'.pdf'
+        chsi='https://yz.chsi.com.cn/sch/schoolInfo--schId-1.dhtml'
+        for layer in ('lines','catalog'):
+            self.request['layers']=[layer];cells=self.cells();cells[0]['layer']=layer
+            self.request['entries']=[bad]
+            fetcher=Mock(return_value=({'body':b'not-an-original'},{'status':'retrieved'}))
+            summary,_,publisher=self.run_fake(cells=cells,fetch=fetcher,entry={})
+            fetcher.assert_not_called();publisher.assert_not_called()
+            self.request['entries']=[chsi]
+            entry={'chsi_profile_url':chsi}
+            body=page('合成大学 学校官网：'+bad)
+            fetcher=Mock(return_value=({'body':body},{'status':'retrieved'}))
+            summary,_,publisher=self.run_fake(cells=cells,fetch=fetcher,entry=entry)
+            self.assertEqual([c.args[0]for c in fetcher.call_args_list],[chsi])
+            self.assertNotIn('graduate_site_url',entry);publisher.assert_not_called()
+
     def test_webplus_original_image_is_discovered_without_logo_or_external_images(self):
         body = page('<img src="/logo.jpg"><div class="content wp_articlecontent wide">'
                     '<img src="/original.jpg"><img src="https://unconfirmed.example/other.jpg"></div>'
