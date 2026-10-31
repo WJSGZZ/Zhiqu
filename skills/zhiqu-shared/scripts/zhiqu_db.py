@@ -1308,7 +1308,20 @@ def query_jobs(*, region=None, major=None, year=None, db=None, education_db=None
             if 'employment_industry_version' in tables:
                 warnings.append('行业表的已入库匿名片段逐格相同者只显示一份；各原件来源与片段指纹保留在 employment_industry_version，未据此认定原文件字节相同或官方已核。')
         if unknown_cohort_included:warnings.append('院校就业去向中仍列出届别未注明或无法解析的记录；未知届别不代表查询年份，只有明确届别与查询年份相符的记录才按该年份筛选。')
-        return {'query':'jobs','database':str(p),'sections':sections,'warnings':warnings}
+        # Empty results also need a recoverable search scope. These are the
+        # filters supplied to this query, not a claim that every table has
+        # each dimension (unknown cohorts and their warnings remain visible).
+        filter_year=year
+        if year is not None:
+            try:filter_year=int(year)
+            except (TypeError,ValueError,OverflowError):pass
+            # Preserve the old Python API on empty schemas, where no table
+            # applies a year filter. CLI years are already validated as ints.
+        return {'query':'jobs','database':str(p),
+                'filters':{'region':region,'major':major,
+                           'year':filter_year,
+                           'limit':limit,'offset':offset},
+                'sections':sections,'warnings':warnings}
 
 
 def query_source(source_id, *, db=None, domain='education', limit=10, offset=0):

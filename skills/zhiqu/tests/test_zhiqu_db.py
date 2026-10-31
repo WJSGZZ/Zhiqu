@@ -13,6 +13,27 @@ SCRIPT=Path(__file__).resolve().parents[2]/'zhiqu-shared/scripts/zhiqu_db.py'
 spec=importlib.util.spec_from_file_location('zhiqu_db',SCRIPT);db=importlib.util.module_from_spec(spec);spec.loader.exec_module(db)
 
 class UnifiedQueries(unittest.TestCase):
+ def test_empty_jobs_preserves_search_scope(self):
+  result=db.query_jobs(region='山东',major='运营',year=2026,limit=7,offset=2,db=self.path)
+  self.assertEqual(result['sections'],[])
+  self.assertEqual(result['filters'],{'region':'山东','major':'运营','year':2026,'limit':7,'offset':2})
+  self.assertIn('未命中不代表', '\n'.join(result['warnings']))
+
+ def test_jobs_scope_does_not_invent_unspecified_filters(self):
+  result=db.query_jobs(db=self.path)
+  self.assertEqual(result['filters'],{'region':None,'major':None,'year':None,'limit':10,'offset':0})
+  self.assertTrue(result['sections'])
+  # Request metadata is for the JSON audit path; reader tables stay the same.
+  legacy={k:v for k,v in result.items() if k!='filters'}
+  self.assertEqual(db.render_text(result),db.render_text(legacy))
+
+ def test_empty_schema_retains_unapplied_year_input(self):
+  empty=Path(self.temp.name)/'empty.sqlite'
+  sqlite3.connect(empty).close()
+  result=db.query_jobs(year='bad',db=empty)
+  self.assertEqual(result['sections'],[])
+  self.assertEqual(result['filters']['year'],'bad')
+
  def setUp(self):
   self.temp=tempfile.TemporaryDirectory();self.path=Path(self.temp.name)/'fixture.sqlite';c=sqlite3.connect(self.path)
   c.executescript('''
