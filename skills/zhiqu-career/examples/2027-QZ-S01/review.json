@@ -99,7 +99,7 @@
     "calculations.json": "c9f6ffdadaa69063d1698e768de5b96dbfb4f2cafdd9a803a0a136e2d4ee2bae",
     "candidates.json": "3ffc2bc156346f42fbfacce9b243f26199511bb088405c601c9017efa4063c05",
     "case.json": "56c199fd854ba948916bb91afa440ed6d7b72a1c86500cd8d202dda6df921955",
-    "claim_check.json": "c34ba26ed08a00899bece0dbb9386c4aa0ae5d65adfcd099b46c9a4f94bcbd6a",
+    "claim_check.json": "8ebb1449543afbb3cc94be1ed222bbd625fe69019d211be2fc9983cd3ee67a98",
     "directions.json": "6f799d567cc51a1d860a40f8d9bbbf4c16f3bfcd2af58b999cc1db8c54f2761e",
     "evidence.json": "2ddba53ef171d3e4d650af8ed27273a30bb449ef63ffd0480bff3a924f9564f3",
     "judgment.json": "3f7455fd010637e7b0f16acacce93573a3fc2c7f8045264fdc0a8fad8293417d",
@@ -110,7 +110,7 @@
     "profile_snapshot.json": "0a6cb6835c42b9e3a0e18679bd40d3c99c433453287f9e2a231e357647a858d9",
     "report.html": "874f4f27b8b595bb0d7359b302fab4a90416724998afa6706f7799749a66d58f",
     "report.md": "0895952f1caa72b7576496650f775ddafc6137d721509d0fe4868561a12c2195",
-    "report_trace.json": "e748e7b903ae941174f96496e0f5dba3f7da38e5a54e9e485415d41b03a02d68",
+    "report_trace.json": "154b7f2412bd99ec11697d47c1c412de095e2d82dc1981508edf37036fbd1e66",
     "rules_check.json": "bda48a6be3aff5fdb6d27f0800903873b37d636b4444a9ed460b302c5d5b08f9"
   },
   "checklist_update_note": "仅核查单表述及核查工具记录更新；报告与计算原件未改。保留历史复核记录，当前仍等待独立审核，不是重新批准。",
@@ -614,6 +614,15 @@
         "claim_check.json"
       ],
       "reason": "封存求职问卷可选资金与支出原答保留及消费门禁；本例前后核查分组、正文、核对输入和PDF均未改变，仅更新工具指纹与复核绑定，不升级原审批或认证官方原文。"
+    },
+    {
+      "date": "2026-10-31",
+      "by": "Codex（封存判断与单位词法兼容复验，非内容复核）",
+      "files": [
+        "report_trace.json",
+        "claim_check.json"
+      ],
+      "reason": "新增封存判断整套重复门禁及条件词单位识别；旧无封存例保持冻结，逐份组装正文、核对材料和PDF字节不变，仅兼容流程指纹，不重认证官方事实或原审批。"
     }
   ],
   "regeneration": {

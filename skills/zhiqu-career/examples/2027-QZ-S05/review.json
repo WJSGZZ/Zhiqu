@@ -729,6 +729,15 @@
         "claim_check.json"
       ],
       "reason": "封存求职问卷可选资金与支出原答保留及消费门禁；本例前后核查分组、正文、核对输入和PDF均未改变，仅更新工具指纹与复核绑定，不升级原审批或认证官方原文。"
+    },
+    {
+      "date": "2026-10-31",
+      "by": "Codex（封存判断与单位词法兼容复验，非内容复核）",
+      "files": [
+        "report_trace.json",
+        "claim_check.json"
+      ],
+      "reason": "新增封存判断整套重复门禁及条件词单位识别；旧无封存例保持冻结，逐份组装正文、核对材料和PDF字节不变，仅兼容流程指纹，不重认证官方事实或原审批。"
     }
   ],
   "review_history": [
@@ -2996,7 +3005,7 @@
     "calculations.json": "89d7a293fd6780b562866f4871846b19130b0d86e79cb9f9c233e572cbae5b5d",
     "candidates.json": "ea8bbcb101fc7dc899ec1137e869654c3b9e85d79d8229e4de8115418467aeae",
     "case.json": "79136c0287d7e845b2308724e997d90b3b7a805e4fe2843da189774d6ec93a6e",
-    "claim_check.json": "dc81b4ee4540d50b35206eb753af47917850b78297b39d36e54b8d48ca71aee6",
+    "claim_check.json": "daee5d946e28471f45e325bd62ff1f4dd4062b392891c0e1b9648c9021494633",
     "directions.json": "2d709b22623617481aefa804b96da5c5d274812758094bb921c173d0466c29df",
     "evidence.json": "8c97b5ec4dd2e295bbf4a8eaa9372acfd30f2fcc1615cc5810525fdbbb596d59",
     "judgment.json": "89e67d8e39d0666399d8b470809425420fb18271c756578790e08248301ec3ff",
@@ -3007,7 +3016,7 @@
     "profile_parse.json": "abe812515ea2a27d78209f08c28c8bdde0a5c10d1672ef0983d66d68c6eece1a",
     "report.html": "7ffb0b04713dcc3f25d982f2e19a439f5b2d79cd0a6e84e64e50a11bf89e4890",
     "report.md": "90ff1e8ce1555a081d376dbea69e831d6f8788393724d3db9bdb8189646a6262",
-    "report_trace.json": "067f7dffd3ee56d937c69fefc576bd8148f3569f9129f26ec9b7a64071ec7e09",
+    "report_trace.json": "f2c8997d9e5f5bad521221c098ba3a55bdac11dc67b79020b5ab165f1fa5ef11",
     "rules_check.json": "b45b1313cf295a6e320d32afce13a0b93b9b0e54e8b46d8d3cf2d6329732a40b"
   }
 }

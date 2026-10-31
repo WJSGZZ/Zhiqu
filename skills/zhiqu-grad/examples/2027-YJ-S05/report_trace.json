@@ -17,7 +17,7 @@
   "contract_sha256": "b805904d0c51a3684ce92ee68d71e57f416749bf20fbf6c5ef0604747f005a07",
   "tool_sha256": {
     "planning_report.py": "32ca898bbb421d198bdb1d35c9215014d0642ffdf5d08eb88f4030c5f050ddf6",
-    "planning_workflow.py": "f5b6ff37b02b216c144dc29902743285461784b5d1df796862bc2f9379affbab",
+    "planning_workflow.py": "e57a93e1d43ea25b21d37f6d36b040bbf6338c7f38757fee5701c429fa1155bc",
     "operator_check.py": "79a4c46fee21efc47a609a4023d09cf4dd556ab2632a6410b8a93aff353d19a0",
     "check_demos.py": "67d4edc1cd737beeb6729783a736e667a97c12d8f7de2de673632d9d5c3370b8",
     "report.py": "c1a2e82e6ce5fb9fefd866e14679a24f1ad5dcdcf56e2bdc1d578668d10e1cd8",
@@ -26,7 +26,7 @@
     "claim_guards.py": "54bab4d942fafd148190df73cad34805538662b0a152ec5701c8a960e28dbd1d",
     "source_authentication.py": "b18201e997e0b4ca33c879979bc03f81deab1ea5edbbbc74cab6bf622821f278",
     "official_source_audit.py": "c09c40a2c5eec18318fbb1fa52393ee37b4e63f636ec7ea3999084d12ecc0df1",
-    "unit_validation.py": "9f5df89a101dd684231fe35f8fe931e150127fc698f2ab774b628bc3ffdf093c",
+    "unit_validation.py": "46557d27aea835beb7e246ddfd3fa487520f5fcc77344b210c88dbd070d8b753",
     "reader_language.py": "34a64a5989895ee11a166d41ae8a4c6b7b12f2924bb5234ae3b7bb401046bbfc",
     "claim_check.py": "9495d7fac08683e81002aa95d943de5f16030aa13d4c5ba08d27995d0b0f27bb",
     "check_report.py": "943648b8c2b778f210550712d225c0b341d361c5c52e2fb751d4bec8d2e60917",
@@ -1896,6 +1896,29 @@
       "previous_trace_sha256": "eee69f3f860b51dea76e70c37b76ec41d8d19944eebda97b81b212863b70d647",
       "assembled_markdown_sha256": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
       "checklist_groups_unchanged": true,
+      "original_artifacts": {
+        "report.md": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
+        "report.html": "638a2167d28b25b2df93798c23955d7c7cc78c32e3d11d5e77ed04a5828496c7",
+        "2027-YJ-S05-report.pdf": "cadd442459edc636ad53d7302e69bcb0ef6b68a7bf6b08557687443c15ddb0fc"
+      }
+    },
+    {
+      "date": "2026-10-31",
+      "kind": "sealed_judgment_and_unit_prose_compatibility",
+      "reason": "新增封存判断整套重复门禁及条件词单位识别；旧无封存例保持冻结，逐份组装正文、核对材料和PDF字节不变，仅兼容流程指纹，不重认证官方事实或原审批。",
+      "changed_tools": {
+        "planning_workflow.py": {
+          "before": "f5b6ff37b02b216c144dc29902743285461784b5d1df796862bc2f9379affbab",
+          "after": "e57a93e1d43ea25b21d37f6d36b040bbf6338c7f38757fee5701c429fa1155bc"
+        },
+        "unit_validation.py": {
+          "before": "9f5df89a101dd684231fe35f8fe931e150127fc698f2ab774b628bc3ffdf093c",
+          "after": "46557d27aea835beb7e246ddfd3fa487520f5fcc77344b210c88dbd070d8b753"
+        }
+      },
+      "previous_trace_sha256": "9d2810dbc47ab29b6c09e52e315649eef2d43e17c22ffc771ed12f3e7e36716e",
+      "assembled_markdown_sha256": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
+      "appendix_materials_unchanged": true,
       "original_artifacts": {
         "report.md": "d87d907d644af2d024c62e531fd5c707e03f43524a93e8fc4612cb9012dfc578",
         "report.html": "638a2167d28b25b2df93798c23955d7c7cc78c32e3d11d5e77ed04a5828496c7",
