@@ -135,6 +135,36 @@ class OnDemandTests(unittest.TestCase):
         blob=page('<table><tr><th>专业代码</th><th>总分</th><th>综合单科门槛</th></tr><tr><td>085404</td><td>300</td><td>70</td></tr></table>')
         with self.assertRaises(adapters.NeedsReview):adapters.parse_official_html(blob,URL,IDENTITY,2026,'lines',['0854'])
 
+    def test_school_cannot_be_borrowed_from_site_heading_for_other_school(self):
+        tables={'lines':'<table><tr><th>专业代码</th><th>总分</th></tr><tr><td>085404</td><td>300</td></tr></table>',
+                'catalog':'<table><tr><th>专业代码</th><th>招生人数</th></tr><tr><td>085404</td><td>9</td></tr></table>',
+                'stats':'<table><tr><th>专业代码</th><th>初试总分</th></tr>'+''.join('<tr><td>085404</td><td>'+str(x)+'</td></tr>'for x in [300,301,302])+'</table>'}
+        names={'lines':'复试分数线','catalog':'招生专业目录','stats':'拟录取名单'}
+        for layer,table in tables.items():
+            for school in ['另一大学','新合成大学','']:
+                with self.subTest(layer=layer,heading_school=school),self.assertRaises(adapters.NeedsReview):
+                    heading='<h1>'+school+'2026年硕士'+names[layer]+'</h1>'
+                    adapters.parse_official_html(page(heading+table,'合成大学研究生院'),URL,IDENTITY,2026,layer,['0854'])
+
+    def test_school_cannot_be_borrowed_from_another_year_heading(self):
+        table='<table><tr><th>专业代码</th><th>总分</th></tr><tr><td>085404</td><td>300</td></tr></table>'
+        blob=page('<h1>合成大学2025年硕士复试分数线</h1><h2>另一大学2026年硕士复试分数线</h2>'+table,'研究生院')
+        with self.assertRaises(adapters.NeedsReview):
+            adapters.parse_official_html(blob,URL,IDENTITY,2026,'lines',['0854'])
+
+    def test_other_business_heading_cannot_borrow_correct_document_title(self):
+        table='<table><tr><th>专业代码</th><th>总分</th></tr><tr><td>085404</td><td>300</td></tr></table>'
+        for heading in ['另一大学2026年硕士复试分数线','2026年硕士复试分数线','合成大学2026年博士复试分数线']:
+            with self.subTest(heading=heading),self.assertRaises(adapters.NeedsReview):
+                adapters.parse_official_html(page('<h2>'+heading+'</h2>'+table),URL,IDENTITY,2026,'lines',['0854'])
+
+    def test_conventional_heading_prefix_preserves_full_school_identity(self):
+        table='<table><tr><th>专业代码</th><th>总分</th></tr><tr><td>085404</td><td>300</td></tr></table>'
+        for prefix in ['关于公布','2026年','【','']:
+            with self.subTest(prefix=prefix):
+                blob=page(table,prefix+'合成大学2026年硕士复试分数线')
+                self.assertEqual(adapters.parse_official_html(blob,URL,IDENTITY,2026,'lines',['0854'])['rows'],1)
+
     def test_inline_title_fragments_are_one_original_heading_for_each_layer(self):
         tables={'lines':'<table><tr><th>专业代码</th><th>总分</th></tr><tr><td>085404</td><td>300</td></tr></table>',
                 'catalog':'<table><tr><th>专业代码</th><th>招生人数</th></tr><tr><td>085404</td><td>9</td></tr></table>',

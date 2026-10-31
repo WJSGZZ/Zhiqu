@@ -43,11 +43,20 @@ def source_record(body, url, school, year, layer):
     root = html.fromstring(_decode(body))
     # Inline spans belong to one heading; distinct headings must not fuse.
     titles = [_lxml_text(node) for node in root.xpath('//h1 | //h2 | //title')]
-    title = next((re.sub(r'\s+', ' ', x).strip() for x in titles
-                  if str(year) in x and re.search({'lines':'复试|分数线','catalog':'目录|(?:招生|专业).*计划|计划.*分配','stats':'拟录取'}[layer], x)), None)
-    if not title or school not in ''.join(titles):
+    business_titles = [re.sub(r'\s+', ' ', x).strip() for x in titles
+                       if str(year) in x and re.search({'lines':'复试|分数线','catalog':'目录|(?:招生|专业).*计划|计划.*分配','stats':'拟录取'}[layer], x)]
+    def names_school(text):
+        # Do not mistake e.g. 新合成大学 for 合成大学. Only conventional
+        # announcement/year prefixes may precede the full requested name.
+        before, found, _ = text.partition(school)
+        return bool(found) and bool(re.fullmatch(r'(?:关于|公布|发布|印发|转发|20\d{2}年|[\s\W])*', before))
+    # Every heading claiming the requested year's business scope must be
+    # attributable. A site masthead or a competing heading cannot lend its
+    # school to another table; ambiguous/generic headings need manual review.
+    if not business_titles or not all(names_school(x) for x in business_titles):
         raise NeedsReview('原页标题未能同时确认学校、年份和业务类型')
-    if '博士'in title or '硕士'not in title:raise NeedsReview('原页未单独明确硕士层次；不把博士/混合招生表当硕士入库')
+    title = business_titles[0]
+    if any('博士'in x or '硕士'not in x for x in business_titles):raise NeedsReview('原页未单独明确硕士层次；不把博士/混合招生表当硕士入库')
     if layer == 'lines' and (not re.search('复试|分数线', title) or re.search('名单|成绩公示|成绩查询',title)):
         raise NeedsReview('原页并非明确复试线')
     if layer == 'catalog' and not re.search('目录|(?:招生|专业).*计划|计划.*分配', title):
