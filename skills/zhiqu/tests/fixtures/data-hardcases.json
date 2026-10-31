@@ -1490,6 +1490,78 @@
         "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
         "basis": "此提交首次引入该合成方法；真实发现调用链的越层/跨标题问题离线复现，不代表已下载真实名单、错年入库或全部隐匿资源已可识别。"
       }
+    },
+    {
+      "id": "ky-heading-school-is-local",
+      "domain": "考研",
+      "test": "test_kaoyan_on_demand.OnDemandTests.test_school_cannot_be_borrowed_from_site_heading_for_other_school",
+      "input_fixture": {
+        "file": "test_kaoyan_on_demand.py",
+        "symbols": [
+          "page",
+          "OnDemandTests.test_school_cannot_be_borrowed_from_site_heading_for_other_school"
+        ]
+      },
+      "expected": "三层原页不能从站点标题借校名给他校或未知学校的业务标题；新合成大学不能借合成大学子串。",
+      "provenance": {
+        "commit": "8c696cd2a5f5f1bafda5fc0ea6276e1a41744a4c",
+        "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
+        "basis": "首次引入此目标方法的提交；合成原文与离线编排，不认证真实杭州原件或所有表格归属。"
+      }
+    },
+    {
+      "id": "ky-heading-school-year-local",
+      "domain": "考研",
+      "test": "test_kaoyan_on_demand.OnDemandTests.test_school_cannot_be_borrowed_from_another_year_heading",
+      "input_fixture": {
+        "file": "test_kaoyan_on_demand.py",
+        "symbols": [
+          "page",
+          "OnDemandTests.test_school_cannot_be_borrowed_from_another_year_heading"
+        ]
+      },
+      "expected": "旧年本校标题不能认证新年他校标题下原表。",
+      "provenance": {
+        "commit": "8c696cd2a5f5f1bafda5fc0ea6276e1a41744a4c",
+        "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
+        "basis": "首次引入此目标方法的提交；合成原文与离线编排，不认证真实杭州原件或所有表格归属。"
+      }
+    },
+    {
+      "id": "ky-heading-competing-school",
+      "domain": "考研",
+      "test": "test_kaoyan_on_demand.OnDemandTests.test_other_business_heading_cannot_borrow_correct_document_title",
+      "input_fixture": {
+        "file": "test_kaoyan_on_demand.py",
+        "symbols": [
+          "page",
+          "OnDemandTests.test_other_business_heading_cannot_borrow_correct_document_title"
+        ]
+      },
+      "expected": "正确本校document title不能认证另一个他校、无校名或博士业务标题的表。",
+      "provenance": {
+        "commit": "8c696cd2a5f5f1bafda5fc0ea6276e1a41744a4c",
+        "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
+        "basis": "首次引入此目标方法的提交；合成原文与离线编排，不认证真实杭州原件或所有表格归属。"
+      }
+    },
+    {
+      "id": "ky-heading-school-prefix",
+      "domain": "考研",
+      "test": "test_kaoyan_on_demand.OnDemandTests.test_conventional_heading_prefix_preserves_full_school_identity",
+      "input_fixture": {
+        "file": "test_kaoyan_on_demand.py",
+        "symbols": [
+          "page",
+          "OnDemandTests.test_conventional_heading_prefix_preserves_full_school_identity"
+        ]
+      },
+      "expected": "本校全名的常用公告/年份/标点前缀仍通过，不跨节点借学校。",
+      "provenance": {
+        "commit": "8c696cd2a5f5f1bafda5fc0ea6276e1a41744a4c",
+        "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
+        "basis": "首次引入此目标方法的提交；合成原文与离线编排，不认证真实杭州原件或所有表格归属。"
+      }
     }
   ],
   "not_in_this_suite": [
