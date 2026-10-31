@@ -126,6 +126,35 @@ class HznuCatalogTests(unittest.TestCase):
         self.assertEqual(calls,[hz.PARENT,hz.SERVICE,hz.APP,hz.CHUNK,hz.DICTIONARY,self.api]);self.assertEqual(pub.call_count,1)
         rows=pub.call_args.args[1][0][1]['rows'];self.assertEqual(rows[0]['planned'],25)
 
+    def test_partial_existing_direction_is_not_duplicated_by_new_response_hash(self):
+        from test_kaoyan_on_demand import OnDemandTests
+        fixture=OnDemandTests('runTest');fixture.setUp();self.addCleanup(fixture.tearDown)
+        req=dict(fixture.request,school=hz.SCHOOL,programs=['045108'],layers=['catalog'],entries=[hz.PARENT])
+        existing=dict(record_id='old-record',source_id='old-source',program_code='045108',college='合成教育学院',direction='不区分研究方向',study_mode='全日制')
+        cell=dict(year=2026,layer='catalog',program='045108',obtained=False,existing_rows=1,source_ids=['old-source'],records=[existing])
+        pub=Mock()
+        def fetch(u,deadline):return {'body':self.data[u],'url':u},{'url':u,'http_status':200}
+        with patch.object(tool,'resolve_school',return_value=(IDENTITY,{'graduate_site_url':hz.SERVICE},[])):
+            summary=tool.run_request(req,registry=[],lookup_fn=Mock(return_value=[cell]),fetch=fetch,publisher=pub)
+        self.assertEqual(summary['outcomes'][0]['status'],'partial');self.assertEqual(summary['outcomes'][0]['rows'],0)
+        self.assertIn('不重复入库',summary['outcomes'][0]['reason']);pub.assert_not_called();self.assertFalse(summary['published'])
+
+    def test_distinct_college_direction_or_mode_remains_a_new_row(self):
+        from test_kaoyan_on_demand import OnDemandTests
+        for changed,value in [('college','其他学院'),('direction','其他方向'),('study_mode','非全日制')]:
+            with self.subTest(changed=changed):
+                fixture=OnDemandTests('runTest');fixture.setUp()
+                try:
+                    req=dict(fixture.request,school=hz.SCHOOL,programs=['045108'],layers=['catalog'],entries=[hz.PARENT])
+                    old=dict(record_id='old',source_id='s-old',program_code='045108',college='合成教育学院',direction='不区分研究方向',study_mode='全日制');old[changed]=value
+                    cell=dict(year=2026,layer='catalog',program='045108',obtained=False,existing_rows=1,source_ids=['s-old'],records=[old])
+                    pub=Mock(return_value={'ingest':[{'rows_inserted':1}]})
+                    def fetch(u,deadline):return {'body':self.data[u],'url':u},{'url':u,'http_status':200}
+                    with patch.object(tool,'resolve_school',return_value=(IDENTITY,{'graduate_site_url':hz.SERVICE},[])):
+                        summary=tool.run_request(req,registry=[],lookup_fn=Mock(return_value=[cell]),fetch=fetch,publisher=pub)
+                    self.assertTrue(summary['published']);pub.assert_called_once()
+                finally:fixture.tearDown()
+
     def test_known_stop_does_not_request_catalogue_or_publish(self):
         from test_kaoyan_on_demand import OnDemandTests
         fixture=OnDemandTests('runTest');fixture.setUp();self.addCleanup(fixture.tearDown)

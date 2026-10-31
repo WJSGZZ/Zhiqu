@@ -628,6 +628,21 @@ def run_request(request, *, fetch=fetch_public, publisher=validate_and_publish, 
                     for business in parsed['manifest']['rows']:
                         row=business.get('row',business)
                         if row.get('school')!=identity['name']or row.get('year')!=year or business.get('institution_id')!=identity['institution_id']:raise ValueError('人工清单学校/年份范围不符')
+                    if spa:
+                        # Public JSON envelopes may carry a fresh response timestamp.
+                        # A changed byte hash must not duplicate an already stored
+                        # catalogue direction merely to fill an unverified remark.
+                        keys=('program_code','college','direction','study_mode')
+                        existing=[old for old in cell.get('records',[]) if any(
+                            all((old.get(k)or'')==(row.get(k)or'')for k in keys)
+                            for row in parsed['manifest']['rows'])]
+                        if existing:
+                            write_json(out/'existing-public-catalog.json',{'manifest':parsed['manifest'],'proofs':parsed['proofs'],
+                                'existing_record_ids':[r['record_id']for r in existing]})
+                            result.update(status='partial',rows=0,pending_rows=parsed['rows'],published_in_library=False,
+                                source_ids=sorted({r['source_id']for r in existing}),
+                                reason='同专业、学院、方向与学习方式已有目录；原件新指纹不代表新事实，补字段或版本差异须并源核对，不重复入库')
+                            break
                     conflicts=source_identity_conflicts(request['database'],parsed['manifest']['sources'])
                     if conflicts and layer=='lines':
                         from kaoyan_existing_lines import prepare as prepare_existing
