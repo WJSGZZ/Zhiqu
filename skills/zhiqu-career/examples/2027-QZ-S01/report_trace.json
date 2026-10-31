@@ -16,12 +16,12 @@
   "contract_sha256": "8efe50a42837daeec7a83de34e595fd7eeb88a8cfeff1a26afc20699fd951d76",
   "tool_sha256": {
     "planning_report.py": "32ca898bbb421d198bdb1d35c9215014d0642ffdf5d08eb88f4030c5f050ddf6",
-    "planning_workflow.py": "32a66006d43469e3893893b30f011c2bc1daee45274263d7acbeaa73f855f3f4",
+    "planning_workflow.py": "f5b6ff37b02b216c144dc29902743285461784b5d1df796862bc2f9379affbab",
     "operator_check.py": "79a4c46fee21efc47a609a4023d09cf4dd556ab2632a6410b8a93aff353d19a0",
     "check_demos.py": "67d4edc1cd737beeb6729783a736e667a97c12d8f7de2de673632d9d5c3370b8",
     "report.py": "c1a2e82e6ce5fb9fefd866e14679a24f1ad5dcdcf56e2bdc1d578668d10e1cd8",
     "render_report.py": "17c81658af1834fc1216d61ca3c11070934229a74d8d1175a1602a348ffd1c0f",
-    "profile_store.py": "be7eca0205487f28950f9351ee948115ac6bf3b72eca09ed2921ebbe085cefe6",
+    "profile_store.py": "42218ba8bf34934c9afb4619ec477258cd6e842de7939ca2134f39106ed2cf08",
     "claim_guards.py": "54bab4d942fafd148190df73cad34805538662b0a152ec5701c8a960e28dbd1d",
     "source_authentication.py": "b18201e997e0b4ca33c879979bc03f81deab1ea5edbbbc74cab6bf622821f278",
     "official_source_audit.py": "c09c40a2c5eec18318fbb1fa52393ee37b4e63f636ec7ea3999084d12ecc0df1",
@@ -1477,6 +1477,29 @@
         }
       },
       "previous_trace_sha256": "e0322fe90c64e58f91e34ebc57e7c3f880e5dc212fe42dda349429cff1c05058",
+      "assembled_markdown_sha256": "0895952f1caa72b7576496650f775ddafc6137d721509d0fe4868561a12c2195",
+      "checklist_groups_unchanged": true,
+      "original_artifacts": {
+        "report.md": "0895952f1caa72b7576496650f775ddafc6137d721509d0fe4868561a12c2195",
+        "report.html": "874f4f27b8b595bb0d7359b302fab4a90416724998afa6706f7799749a66d58f",
+        "2027-QZ-S01-report.pdf": "8b776f829fbaf4810c743018bf4409a317e289a2020545cc03aa25a5ddbea9ed"
+      }
+    },
+    {
+      "date": "2026-10-31",
+      "kind": "cash_answer_preservation_compatibility",
+      "reason": "封存求职问卷可选资金与支出原答保留及消费门禁；本例前后核查分组、正文、核对输入和PDF均未改变，仅更新工具指纹与复核绑定，不升级原审批或认证官方原文。",
+      "changed_tools": {
+        "planning_workflow.py": {
+          "before": "32a66006d43469e3893893b30f011c2bc1daee45274263d7acbeaa73f855f3f4",
+          "after": "f5b6ff37b02b216c144dc29902743285461784b5d1df796862bc2f9379affbab"
+        },
+        "profile_store.py": {
+          "before": "be7eca0205487f28950f9351ee948115ac6bf3b72eca09ed2921ebbe085cefe6",
+          "after": "42218ba8bf34934c9afb4619ec477258cd6e842de7939ca2134f39106ed2cf08"
+        }
+      },
+      "previous_trace_sha256": "abbb059bedd63871891fc29c109ff9b2920c046a882d8c6457a77e453e1440cb",
       "assembled_markdown_sha256": "0895952f1caa72b7576496650f775ddafc6137d721509d0fe4868561a12c2195",
       "checklist_groups_unchanged": true,
       "original_artifacts": {

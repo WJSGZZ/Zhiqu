@@ -169,7 +169,7 @@
     "calculations.json": "00e5087c418c579371b17558494a9c4c1f865b0b051ef63fc1a3c9a51a89cd87",
     "candidates.json": "1f9f3703275d1799b96d638988fd5c11a27d5f2c4ef9209db44868be66817183",
     "case.json": "0001243d062291f20d005fab27c3bcc9f801dd724d9bd8593487ad013319de45",
-    "claim_check.json": "90a2df30731db25a0280b84ce365aa5ddf6c6a52f6456b20dd9daa93318f4aa0",
+    "claim_check.json": "0b933b95382c7e99f81598ab0e19a92e3ee4227a95f784a0304630b37ab17f52",
     "directions.json": "e11eb75bac9a1378195f15ef805daf0ffe3d0a4c2306d317d6d9944265b8008b",
     "evidence.json": "03304e7a1c5a1324a791db8d79dc9087ab501f578414afef2bda2728ef1d97fa",
     "judgment.json": "a9dd41f886f0c6f554dcbfa124510778365a5a732f3490e40d1499b0ff24c03b",
@@ -180,7 +180,7 @@
     "profile_parse.json": "144dd86220da51855d80ca4502619b7208e49809122fbbb618e104e9992615ac",
     "report.html": "8702f3f6e692420574312ee93b9194c16d546ed6d353e6c039794ed4ff933fa8",
     "report.md": "8dd0ba3d6bb84baacb05c1e5272f04bd89a83de4f111127c4e5dca4e4ebf1628",
-    "report_trace.json": "9b1b1ea66e56ecf2800087ab6fa757508f5738cbc14c4839a9ebd2266ddab2a9",
+    "report_trace.json": "ab92a58a456439fd3004e55500337227551edd73903177fd2e7c7c1b86ab3ca4",
     "rules_check.json": "248a80156349f8bee1d5de049d1153408fc4548108e5895abb5bba17d5c7cb03"
   },
   "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。\n2026-10-29：仅拆分均分/英语/数学的本人原话摘录，均分两段明确分隔；原答、证据、计算、正文结论不变，重出PDF附录并检版。本轮修改独立复核与旧报告正式交付审核分开，后者仍待独立复核及操控者核查，不重新认证旧官方事实。",
@@ -695,6 +695,15 @@
         "claim_check.json"
       ],
       "reason": "操控者核查依赖遍历兼容数值常量、正文引用末尾标点门禁；本例前后核查分组、正文、核对输入和PDF均未改变，仅更新工具指纹与复核绑定，不升级原审批或认证官方原文。"
+    },
+    {
+      "date": "2026-10-31",
+      "by": "Codex（现金原答保留和消费兼容复验，非内容复核）",
+      "files": [
+        "report_trace.json",
+        "claim_check.json"
+      ],
+      "reason": "封存求职问卷可选资金与支出原答保留及消费门禁；本例前后核查分组、正文、核对输入和PDF均未改变，仅更新工具指纹与复核绑定，不升级原审批或认证官方原文。"
     }
   ],
   "regeneration": {
