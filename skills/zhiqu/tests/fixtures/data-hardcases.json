@@ -1418,6 +1418,78 @@
         "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
         "basis": "按需文本适配检查中以合法合成h1内联分段复现单text节点误拒；此提交首次引入该方法，复用现有DOM取文规则，不声称具体学校已受影响。"
       }
+    },
+    {
+      "id": "discovery-explicit-roster-resource-roles",
+      "domain": "考研",
+      "test": "test_kaoyan_on_demand.OnDemandTests.test_non_stats_discovery_excludes_explicit_rosters_in_all_resource_roles",
+      "input_fixture": {
+        "file": "test_kaoyan_on_demand.py",
+        "symbols": [
+          "page",
+          "OnDemandTests.test_non_stats_discovery_excludes_explicit_rosters_in_all_resource_roles"
+        ]
+      },
+      "expected": "复试线/目录不发现明确名单链接、图、嵌入原件，包含无障碍标签、fallback及viewer参数；stats保留正例。",
+      "provenance": {
+        "commit": "cfaacc69a49e597a6d0acf6f79ca674b9d4d00c5",
+        "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
+        "basis": "此提交首次引入该合成方法；真实发现调用链的越层/跨标题问题离线复现，不代表已下载真实名单、错年入库或全部隐匿资源已可识别。"
+      }
+    },
+    {
+      "id": "discovery-heading-year-scope",
+      "domain": "考研",
+      "test": "test_kaoyan_on_demand.OnDemandTests.test_discovery_document_year_and_layer_stay_in_one_clean_heading",
+      "input_fixture": {
+        "file": "test_kaoyan_on_demand.py",
+        "symbols": [
+          "page",
+          "OnDemandTests.test_discovery_document_year_and_layer_stay_in_one_clean_heading"
+        ]
+      },
+      "expected": "同一干净标题确认年与类别；不同标题、脚本内容和混合名单标题不能为原图借范围，内联标题仍可发现。",
+      "provenance": {
+        "commit": "cfaacc69a49e597a6d0acf6f79ca674b9d4d00c5",
+        "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
+        "basis": "此提交首次引入该合成方法；真实发现调用链的越层/跨标题问题离线复现，不代表已下载真实名单、错年入库或全部隐匿资源已可识别。"
+      }
+    },
+    {
+      "id": "discovery-no-roster-fetch",
+      "domain": "考研",
+      "test": "test_kaoyan_on_demand.OnDemandTests.test_line_request_never_fetches_explicit_roster_discovered_on_parent",
+      "input_fixture": {
+        "file": "test_kaoyan_on_demand.py",
+        "symbols": [
+          "page",
+          "OnDemandTests.test_line_request_never_fetches_explicit_roster_discovered_on_parent"
+        ]
+      },
+      "expected": "运行完整离线取文编排，导航不能将明确招生名单加回lines队列，假fetch只访问母页，零发布。",
+      "provenance": {
+        "commit": "cfaacc69a49e597a6d0acf6f79ca674b9d4d00c5",
+        "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
+        "basis": "此提交首次引入该合成方法；真实发现调用链的越层/跨标题问题离线复现，不代表已下载真实名单、错年入库或全部隐匿资源已可识别。"
+      }
+    },
+    {
+      "id": "discovery-entry-roster-gate",
+      "domain": "考研",
+      "test": "test_kaoyan_on_demand.OnDemandTests.test_non_stats_queue_and_chsi_plaintext_entry_cannot_reintroduce_rosters",
+      "input_fixture": {
+        "file": "test_kaoyan_on_demand.py",
+        "symbols": [
+          "page",
+          "OnDemandTests.test_non_stats_queue_and_chsi_plaintext_entry_cannot_reintroduce_rosters"
+        ]
+      },
+      "expected": "直接名单入口及CHSI纯文本官网链接也按层拒绝，lines/catalog不请求且不污染学校入口。",
+      "provenance": {
+        "commit": "cfaacc69a49e597a6d0acf6f79ca674b9d4d00c5",
+        "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
+        "basis": "此提交首次引入该合成方法；真实发现调用链的越层/跨标题问题离线复现，不代表已下载真实名单、错年入库或全部隐匿资源已可识别。"
+      }
     }
   ],
   "not_in_this_suite": [
