@@ -1835,6 +1835,25 @@
         "file": "skills/zhiqu/tests/test_kaoyan_hznu_catalog.py",
         "basis": "首次引入目标方法的提交；离线合成公开JSON和JS指纹，不认证实际原件/全校范围或所有SPA。"
       }
+    },
+    {
+      "id": "ky-public-response-revision-not-new-fact",
+      "domain": "考研",
+      "test": "test_kaoyan_hznu_catalog.HznuCatalogTests.test_partial_existing_direction_is_not_duplicated_by_new_response_hash",
+      "input_fixture": {
+        "file": "test_kaoyan_hznu_catalog.py",
+        "symbols": [
+          "fixtures",
+          "HznuCatalogTests.setUp",
+          "HznuCatalogTests.test_partial_existing_direction_is_not_duplicated_by_new_response_hash"
+        ]
+      },
+      "expected": "partial存量方向遇新响应指纹时不重复创建事实，不覆盖旧值；字段补充与版本差异留待并源核对。",
+      "provenance": {
+        "commit": "0e91cd1099298618bfcd66a57d493f818e63c281",
+        "file": "skills/zhiqu/tests/test_kaoyan_hznu_catalog.py",
+        "basis": "首次引入此方法的提交；合成公开JSON/fake fetch/publisher全链回归，不冒实际原件已重取或存量并源已完成。"
+      }
     }
   ],
   "not_in_this_suite": [
