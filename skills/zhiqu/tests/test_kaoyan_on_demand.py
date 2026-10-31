@@ -220,7 +220,7 @@ class OnDemandTests(unittest.TestCase):
 
     def test_local_table_year_and_degree_do_not_need_business_words_to_conflict(self):
         table='<table><tr><th>专业代码</th><th>总分</th></tr><tr><td>085404</td><td>300</td></tr></table>'
-        for scope in ['2025年','博士研究生','另一大学招生信息']:
+        for scope in ['2025年','博士研究生','另一大学招生信息','学院：2025年数学学院','学院：博士学院']:
             with self.subTest(scope=scope),self.assertRaises(adapters.NeedsReview):
                 adapters.parse_official_html(page('<h3>'+scope+'</h3>'+table),URL,IDENTITY,2026,'lines',['0854'])
         for scope in ['2026年','硕士研究生']:

@@ -198,7 +198,7 @@ def _html_table_identity(dom_table, table, school, year, layer, programs):
 
 def _department_scope(text):
     department = re.fullmatch(r'(?:学院|院系|培养学院)[：:]\s*(.{1,60}(?:学院|系))', text.strip())
-    return bool(department) and not re.search(r'大学|研究所|研究院|学校|党校', department[1])
+    return bool(department) and not re.search(r'大学|研究所|研究院|学校|党校|20\d{2}|博士|硕士|研究生', department[1])
 
 
 def parse_official_html(body, url, identity, year, layer, programs):

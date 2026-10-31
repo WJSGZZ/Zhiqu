@@ -1562,6 +1562,222 @@
         "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
         "basis": "首次引入此目标方法的提交；合成原文与离线编排，不认证真实杭州原件或所有表格归属。"
       }
+    },
+    {
+      "id": "ky-table-local-school",
+      "domain": "考研",
+      "test": "test_kaoyan_on_demand.OnDemandTests.test_local_table_heading_cannot_borrow_document_school",
+      "input_fixture": {
+        "file": "test_kaoyan_on_demand.py",
+        "symbols": [
+          "page",
+          "OnDemandTests.test_local_table_heading_cannot_borrow_document_school"
+        ]
+      },
+      "expected": "h3–h6、段落和caption的他校、错年或博士原表不能借网页总标题入库。",
+      "provenance": {
+        "commit": "4faf749a800908f1c675efe50c9fa0966486dfa8",
+        "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
+        "basis": "首次引入此方法的提交；从独立合成反例修源头，不认证真实旧库或所有HTML机构语义。"
+      }
+    },
+    {
+      "id": "ky-table-clean-local-role",
+      "domain": "考研",
+      "test": "test_kaoyan_on_demand.OnDemandTests.test_local_table_scope_keeps_clean_own_heading_and_department_role",
+      "input_fixture": {
+        "file": "test_kaoyan_on_demand.py",
+        "symbols": [
+          "page",
+          "OnDemandTests.test_local_table_scope_keeps_clean_own_heading_and_department_role"
+        ]
+      },
+      "expected": "明确本校和学院角色可用，script/style/comment不进原始scope。",
+      "provenance": {
+        "commit": "4faf749a800908f1c675efe50c9fa0966486dfa8",
+        "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
+        "basis": "首次引入此方法的提交；从独立合成反例修源头，不认证真实旧库或所有HTML机构语义。"
+      }
+    },
+    {
+      "id": "ky-table-explicit-school",
+      "domain": "考研",
+      "test": "test_kaoyan_on_demand.OnDemandTests.test_explicit_school_column_must_match_without_parent_carry",
+      "input_fixture": {
+        "file": "test_kaoyan_on_demand.py",
+        "symbols": [
+          "page",
+          "OnDemandTests.test_explicit_school_column_must_match_without_parent_carry"
+        ]
+      },
+      "expected": "显式学校列须逐行唯一等于本校全称；他校、后缀校和空值不借母校；合并格独立锚点仍过。",
+      "provenance": {
+        "commit": "4faf749a800908f1c675efe50c9fa0966486dfa8",
+        "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
+        "basis": "首次引入此方法的提交；从独立合成反例修源头，不认证真实旧库或所有HTML机构语义。"
+      }
+    },
+    {
+      "id": "ky-table-local-neutral-scope",
+      "domain": "考研",
+      "test": "test_kaoyan_on_demand.OnDemandTests.test_local_scope_does_not_reset_on_neutral_paragraph_or_other_table",
+      "input_fixture": {
+        "file": "test_kaoyan_on_demand.py",
+        "symbols": [
+          "page",
+          "OnDemandTests.test_local_scope_does_not_reset_on_neutral_paragraph_or_other_table"
+        ]
+      },
+      "expected": "中性小标题、段落和邻表不擦上级身份；明确完整新业务标题可重开本校范围。",
+      "provenance": {
+        "commit": "4faf749a800908f1c675efe50c9fa0966486dfa8",
+        "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
+        "basis": "首次引入此方法的提交；从独立合成反例修源头，不认证真实旧库或所有HTML机构语义。"
+      }
+    },
+    {
+      "id": "ky-school-suffix-identity",
+      "domain": "考研",
+      "test": "test_kaoyan_on_demand.OnDemandTests.test_school_name_suffix_is_not_a_parent_school_identity",
+      "input_fixture": {
+        "file": "test_kaoyan_on_demand.py",
+        "symbols": [
+          "page",
+          "OnDemandTests.test_school_name_suffix_is_not_a_parent_school_identity"
+        ]
+      },
+      "expected": "以本校名开头的附属校或未知后缀不当本校，固定研究生院与明确业务标题仍可用。",
+      "provenance": {
+        "commit": "4faf749a800908f1c675efe50c9fa0966486dfa8",
+        "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
+        "basis": "首次引入此方法的提交；从独立合成反例修源头，不认证真实旧库或所有HTML机构语义。"
+      }
+    },
+    {
+      "id": "ky-table-year-degree-scope",
+      "domain": "考研",
+      "test": "test_kaoyan_on_demand.OnDemandTests.test_local_table_year_and_degree_do_not_need_business_words_to_conflict",
+      "input_fixture": {
+        "file": "test_kaoyan_on_demand.py",
+        "symbols": [
+          "page",
+          "OnDemandTests.test_local_table_year_and_degree_do_not_need_business_words_to_conflict"
+        ]
+      },
+      "expected": "局部错年、博士层次及他校信息即使没有业务关键词也拒收。",
+      "provenance": {
+        "commit": "4faf749a800908f1c675efe50c9fa0966486dfa8",
+        "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
+        "basis": "首次引入此方法的提交；从独立合成反例修源头，不认证真实旧库或所有HTML机构语义。"
+      }
+    },
+    {
+      "id": "ky-document-unique-year",
+      "domain": "考研",
+      "test": "test_kaoyan_on_demand.OnDemandTests.test_business_document_year_must_be_unambiguous",
+      "input_fixture": {
+        "file": "test_kaoyan_on_demand.py",
+        "symbols": [
+          "page",
+          "OnDemandTests.test_business_document_year_must_be_unambiguous"
+        ]
+      },
+      "expected": "业务标题含多个年份时不猜目标招生年。",
+      "provenance": {
+        "commit": "4faf749a800908f1c675efe50c9fa0966486dfa8",
+        "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
+        "basis": "首次引入此方法的提交；从独立合成反例修源头，不认证真实旧库或所有HTML机构语义。"
+      }
+    },
+    {
+      "id": "ky-bare-school-parent-scope",
+      "domain": "考研",
+      "test": "test_kaoyan_on_demand.OnDemandTests.test_bare_school_label_cannot_erase_parent_year_or_degree",
+      "input_fixture": {
+        "file": "test_kaoyan_on_demand.py",
+        "symbols": [
+          "page",
+          "OnDemandTests.test_bare_school_label_cannot_erase_parent_year_or_degree"
+        ]
+      },
+      "expected": "纯校名或学校标签不能顺带取消上级错年/博士层次。",
+      "provenance": {
+        "commit": "4faf749a800908f1c675efe50c9fa0966486dfa8",
+        "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
+        "basis": "首次引入此方法的提交；从独立合成反例修源头，不认证真实旧库或所有HTML机构语义。"
+      }
+    },
+    {
+      "id": "ky-school-scope-no-business",
+      "domain": "考研",
+      "test": "test_kaoyan_on_demand.OnDemandTests.test_school_scope_without_business_words_is_still_identity",
+      "input_fixture": {
+        "file": "test_kaoyan_on_demand.py",
+        "symbols": [
+          "page",
+          "OnDemandTests.test_school_scope_without_business_words_is_still_identity"
+        ]
+      },
+      "expected": "另一学校或学校招生信息仍是身份反证，不借document标题。",
+      "provenance": {
+        "commit": "4faf749a800908f1c675efe50c9fa0966486dfa8",
+        "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
+        "basis": "首次引入此方法的提交；从独立合成反例修源头，不认证真实旧库或所有HTML机构语义。"
+      }
+    },
+    {
+      "id": "ky-table-school-alias-column",
+      "domain": "考研",
+      "test": "test_kaoyan_on_demand.OnDemandTests.test_school_column_aliases_and_unmapped_identity_are_not_ignored",
+      "input_fixture": {
+        "file": "test_kaoyan_on_demand.py",
+        "symbols": [
+          "page",
+          "OnDemandTests.test_school_column_aliases_and_unmapped_identity_are_not_ignored"
+        ]
+      },
+      "expected": "高校/招生院校/单位名称逐格核；未映射学校身份代码等列不能忽略。",
+      "provenance": {
+        "commit": "4faf749a800908f1c675efe50c9fa0966486dfa8",
+        "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
+        "basis": "首次引入此方法的提交；从独立合成反例修源头，不认证真实旧库或所有HTML机构语义。"
+      }
+    },
+    {
+      "id": "ky-table-explicit-year-degree",
+      "domain": "考研",
+      "test": "test_kaoyan_on_demand.OnDemandTests.test_explicit_table_year_and_level_cannot_borrow_document_scope",
+      "input_fixture": {
+        "file": "test_kaoyan_on_demand.py",
+        "symbols": [
+          "page",
+          "OnDemandTests.test_explicit_table_year_and_level_cannot_borrow_document_scope"
+        ]
+      },
+      "expected": "行内明确错年、空年、跨年或博士/不明层次不能被正确网页标题覆盖。",
+      "provenance": {
+        "commit": "4faf749a800908f1c675efe50c9fa0966486dfa8",
+        "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
+        "basis": "首次引入此方法的提交；从独立合成反例修源头，不认证真实旧库或所有HTML机构语义。"
+      }
+    },
+    {
+      "id": "ky-table-masters-year-positive",
+      "domain": "考研",
+      "test": "test_kaoyan_on_demand.OnDemandTests.test_explicit_table_year_and_masters_level_remain_usable",
+      "input_fixture": {
+        "file": "test_kaoyan_on_demand.py",
+        "symbols": [
+          "page",
+          "OnDemandTests.test_explicit_table_year_and_masters_level_remain_usable"
+        ]
+      },
+      "expected": "明确本年与硕士的有限原文形式仍可用，不把所有显式范围列都拒绝。",
+      "provenance": {
+        "commit": "4faf749a800908f1c675efe50c9fa0966486dfa8",
+        "file": "skills/zhiqu/tests/test_kaoyan_on_demand.py",
+        "basis": "首次引入此方法的提交；从独立合成反例修源头，不认证真实旧库或所有HTML机构语义。"
+      }
     }
   ],
   "not_in_this_suite": [
