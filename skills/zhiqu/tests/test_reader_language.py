@@ -66,6 +66,30 @@ class BeforeCleanupTests(unittest.TestCase):
                 self.assertTrue(any(x['code']=='development_language' for x in check_planning_source(case)))
                 self.assertTrue(any('正文出现开发用语' in e for e in case.check(8)))
 
+    def test_reference_sentence_end_does_not_take_another_template_stop(self):
+        for original in ('这是原话。','这是原话！','这是原话？'):
+            for separator in ('。','，','；','  。','\t；'):
+                with self.subTest(original=original,separator=separator):
+                    case=self.case();case.data['profile_parse.json']['fields'][0]['value']=original
+                    case.data['narrative.json']['sections']['01']['analysis'][0]['content']['text']='本人原答：{{p:/fields/0/value}}'+separator+'后续另核。'
+                    found=[x for x in language.check_planning_source(case)if x['code']=='reference_punctuation']
+                    self.assertEqual(len(found),1)
+                    self.assertEqual(found[0]['section'],'01')
+                    self.assertTrue(any('引用末尾' in e for e in case.check(8)))
+                    self.assertEqual(case.data['profile_parse.json']['fields'][0]['value'],original)
+
+    def test_reference_punctuation_preserves_quotes_numbers_and_audit_text(self):
+        for text in ('本人原答：{{p:/fields/0/value}}',
+                     '本人说“{{p:/fields/0/value}}”，待核。',
+                     '金额{{p:/fields/1/value}}。',
+                     '完整原话含双句号。。这里没有跨引用拼接。'):
+            case=self.case();case.data['profile_parse.json']['fields'][0]['value']='这是原话。';case.data['profile_parse.json']['fields'][1]['value']=3.5
+            case.data['narrative.json']['sections']['01']['analysis'][0]['content']['text']=text
+            self.assertFalse([x for x in language.check_planning_source(case)if x['code']=='reference_punctuation'])
+        case=self.case();case.data['profile_parse.json']['fields'][0]['value']='原话。'
+        case.data['narrative.json']['sections']['12']['analysis'][0]['content']['text']='{{p:/fields/0/value}}。'
+        self.assertFalse([x for x in language.check_planning_source(case)if x['code']=='reference_punctuation'])
+
     def test_source_check_leaves_current_examples_and_section_twelve_alone(self):
         from reader_language import check_planning_source
         case=self.case();self.assertEqual(check_planning_source(case),[])

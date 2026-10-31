@@ -212,6 +212,9 @@ def checklist_groups(root, rep=None):
         if key in seen:return set()
         seen.add(key);result=set()
         for value in dependencies.get(key,[]):
+            # Registered operations/scenarios also accept numeric constants.
+            # They carry no source references; keep following the other inputs.
+            if not isinstance(value,str):continue
             for m in REF.finditer(value):
                 if m[1]=='e':result.add(m[2].split('#')[0])
                 elif m[1]=='c':result.update(input_evidence('c:'+m[2],seen))

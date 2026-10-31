@@ -409,6 +409,31 @@ class PlanningWorkflowTests(unittest.TestCase):
                         method='numeric',weights=weights,confirmed=True))
                     self.assertEqual(run(root,7).errors,[])
 
+    def test_operator_numeric_inputs_keep_transitive_source_locations(self):
+        from operator_check import checklist_groups
+        from verification_calculations import _registered
+        root=self.roots['grad']
+        for literal in (0, -2, 0.5):
+            with self.subTest(literal=literal):
+                case=read(root/'case.json')
+                case['calculation_plan']={'engine':'registered_operations','operations':[
+                    {'output':'base','algorithm':'sum','inputs':[literal,'{{e:E0008#/value}}']},
+                    {'output':'result','algorithm':'difference','inputs':['{{c:/base}}','{{e:E0008#/value}}']}],
+                    'scenarios':[{'baseline_output':'result','changed_inputs':{'{{e:E0008#/value}}':0},
+                                  'output_ref':'{{c:/zero_cost}}','why':'取消一个数值费用'}]}
+                # Numeric operations and zero-valued scenario replacements are legal.
+                dump(root/'case.json',case)
+                values,_=_registered(case,read(root/'profile_parse.json'),read(root/'evidence.json'))
+                dump(root/'calculations.json',values)
+                with patch('operator_check.report_locations',return_value={
+                        'c:/result':['第 9 节，合成基准位置'],
+                        'c:/zero_cost':['第 9 节，合成零费用情景']}):
+                    groups,_,_=checklist_groups(root)
+                fee=next(g for g in groups if g['id']=='E0008')
+                tuition=next(x for x in fee['checks']if x.startswith('华工非定向全日制能源动力年度学费'))
+                self.assertIn('合成基准位置',tuition)
+                self.assertIn('合成零费用情景',tuition)
+
     def test_operator_union_and_indirect_main_dependencies(self):
         def evidence(eid,**kw):
             return dict(id=eid,grade='官方',status='verified',review_due='2027-08-01',**kw)
