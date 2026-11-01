@@ -114,6 +114,8 @@ def cn_number(text):
 def with_arabic(text):
     """在摘录后附上中文数字的阿拉伯写法，供数值比对；原摘录不改。"""
     runs=re.findall(r'[零〇一二两兩三四五六七八九十拾百佰千仟萬万億亿]{2,}',str(text))
+    # 单字只认紧跟量词的（学制三年、两门）；“一般”“第三”“三月”“一次性”不算数值。
+    runs+=re.findall(r'(?<![第零〇一二两兩三四五六七八九十拾百佰千仟萬万億亿])[一二两兩三四五六七八九十](?=(?:年(?!级|制)|个月|个|门|科|项|次(?!性)|周|天|所|条|名|人))',str(text))
     return str(text)+''.join(' '+str(cn_number(r)) for r in runs)
 
 

@@ -16,7 +16,7 @@
   "contract_sha256": "b805904d0c51a3684ce92ee68d71e57f416749bf20fbf6c5ef0604747f005a07",
   "tool_sha256": {
     "planning_report.py": "32ca898bbb421d198bdb1d35c9215014d0642ffdf5d08eb88f4030c5f050ddf6",
-    "planning_workflow.py": "e57a93e1d43ea25b21d37f6d36b040bbf6338c7f38757fee5701c429fa1155bc",
+    "planning_workflow.py": "9fff671fa8960d14eb752f632f4ba6b4960ee5a6c6d56dd78993fe6f657f57b3",
     "operator_check.py": "79a4c46fee21efc47a609a4023d09cf4dd556ab2632a6410b8a93aff353d19a0",
     "check_demos.py": "67d4edc1cd737beeb6729783a736e667a97c12d8f7de2de673632d9d5c3370b8",
     "report.py": "c1a2e82e6ce5fb9fefd866e14679a24f1ad5dcdcf56e2bdc1d578668d10e1cd8",
@@ -2051,6 +2051,25 @@
         }
       },
       "previous_trace_sha256": "4457b942acf26f14175f17ab3de64443c7dbe64b4ffcdcf302e155d488587b25",
+      "assembled_markdown_sha256": "5b32adb9f81133bd864cf2d979f5b6fcb4866562f99022ea7414c67342895c2a",
+      "appendix_materials_unchanged": true,
+      "original_artifacts": {
+        "report.md": "5b32adb9f81133bd864cf2d979f5b6fcb4866562f99022ea7414c67342895c2a",
+        "report.html": "7438573d6d2fd22682e4677c25c96930d9aabb08f9fc9f92c72dda20fcad85b2",
+        "2027-YJ-S01-report.pdf": "1b9d665ce265c6efa9c544b696bd6c91d8f0bce8c2d6ad0eae2c97e819bc9f42"
+      }
+    },
+    {
+      "date": "2026-11-01",
+      "kind": "single_cn_numeral_excerpt_compatibility",
+      "reason": "摘录数值比对补认紧跟量词的单个中文数字（如“学制三年”），只放宽校验、不参与渲染；正文、核对材料和PDF字节不变，仅兼容流程指纹，不重认证官方事实或原审批。",
+      "changed_tools": {
+        "planning_workflow.py": {
+          "before": "e57a93e1d43ea25b21d37f6d36b040bbf6338c7f38757fee5701c429fa1155bc",
+          "after": "9fff671fa8960d14eb752f632f4ba6b4960ee5a6c6d56dd78993fe6f657f57b3"
+        }
+      },
+      "previous_trace_sha256": "54d3477ba1ca60ef46027acdc7277ea91a0b6ab1ed17ceaf799a37bee524657e",
       "assembled_markdown_sha256": "5b32adb9f81133bd864cf2d979f5b6fcb4866562f99022ea7414c67342895c2a",
       "appendix_materials_unchanged": true,
       "original_artifacts": {

@@ -169,7 +169,7 @@
     "calculations.json": "8e8135c7483b79dbc2d7ed702e1d9add2628ccf852da45c3d957f1e3f05d98f5",
     "candidates.json": "d741b74ae820c210e0b7d43186496ea83b72584adfe0529440e2a3b7c251d835",
     "case.json": "1266369f01a1fb4ddd7f6d8f6a4f7fcdcc475445fed3cfc9d464a41bbfda2d73",
-    "claim_check.json": "7729f83ab24c8c56c9e227ab28847c8624f66ca9cc85cda0757a41b393e33f25",
+    "claim_check.json": "b58953e1662dee726326b3a637adcc5f122856b4cff262ceb339bbbb836f2cbf",
     "directions.json": "5b2397e7ee4e80db6b8b1b6bf0834869aabbf282dcfecc6f23c4c706d476cc76",
     "evidence.json": "39819a48f34df9a8ad734daa1ebc55980ea28b5ed46eabaa429b710b898af15d",
     "judgment.json": "6b1a98ce44bf3a24b623518f8bca10d5a21ff18b40d9e7d69cf39b5b605f113d",
@@ -180,7 +180,7 @@
     "profile_parse.json": "d34b3c37a261949e9502d03e5eec3b00d0ad8d8f989758bfe8c4509ffae5cfd7",
     "report.html": "4021097fe264bcd0daee8a3703e37b996c8c096bbef70d0bd2b69e8a051c0ceb",
     "report.md": "caf501508e4bb94fa89ef30378a716f496ff000289aa508092a9fec6dc852eff",
-    "report_trace.json": "34bfd46b738ad48264463a6f09c2e14fd1c21b687dbe8f3b443376d49481cafc",
+    "report_trace.json": "43b5583983aea8f4ae4bcdfdd2864724ee9c44c014e8df96504f804e0a1ae750",
     "rules_check.json": "d887941488483a7992cfbe1fb174550f3fdb3083d8c597a1cdcc43f1eee9d198"
   },
   "revision_note": "姓名统一；个人分档按完整同科目模考证据决定，缺数据用缺口说明。原计算不变；本次仍待独立审核，未代填操控者确认。",
@@ -694,6 +694,15 @@
         "claim_check.json"
       ],
       "reason": "新增封存判断整套重复门禁及条件词单位识别；旧无封存例保持冻结，逐份组装正文、核对材料和PDF字节不变，仅兼容流程指纹，不重认证官方事实或原审批。"
+    },
+    {
+      "date": "2026-11-01",
+      "by": "Claude（单字中文数字校验兼容复验，非内容复核）",
+      "files": [
+        "report_trace.json",
+        "claim_check.json"
+      ],
+      "reason": "摘录数值比对补认紧跟量词的单个中文数字（如“学制三年”），只放宽校验、不参与渲染；正文、核对材料和PDF字节不变，仅兼容流程指纹，不重认证官方事实或原审批。"
     }
   ],
   "regeneration": {
