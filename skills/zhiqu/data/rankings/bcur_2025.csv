@@ -1,0 +1,590 @@
+rank,name,name_en,province,category,source_id
+1,清华大学,Tsinghua University,北京,综合,shanghairanking-bcur-2025
+2,北京大学,Peking University,北京,综合,shanghairanking-bcur-2025
+3,浙江大学,Zhejiang University,浙江,综合,shanghairanking-bcur-2025
+4,上海交通大学,Shanghai Jiao Tong University,上海,综合,shanghairanking-bcur-2025
+5,复旦大学,Fudan University,上海,综合,shanghairanking-bcur-2025
+6,南京大学,Nanjing University,江苏,综合,shanghairanking-bcur-2025
+7,中国科学技术大学,University of Science and Technology of China,安徽,理工,shanghairanking-bcur-2025
+8,武汉大学,Wuhan University,湖北,综合,shanghairanking-bcur-2025
+9,华中科技大学,Huazhong University of Science and Technology,湖北,综合,shanghairanking-bcur-2025
+10,西安交通大学,Xi'an Jiaotong University,陕西,综合,shanghairanking-bcur-2025
+11,北京航空航天大学,Beihang University,北京,理工,shanghairanking-bcur-2025
+12,中山大学,Sun Yat-sen University,广东,综合,shanghairanking-bcur-2025
+13,北京理工大学,Beijing Institute of Technology,北京,理工,shanghairanking-bcur-2025
+14,哈尔滨工业大学,Harbin Institute of Technology,黑龙江,理工,shanghairanking-bcur-2025
+15,四川大学,Sichuan University,四川,综合,shanghairanking-bcur-2025
+16,东南大学,Southeast University,江苏,综合,shanghairanking-bcur-2025
+17,中国人民大学,Renmin University of China,北京,综合,shanghairanking-bcur-2025
+18,同济大学,Tongji University,上海,综合,shanghairanking-bcur-2025
+19,北京师范大学,Beijing Normal University,北京,师范,shanghairanking-bcur-2025
+20,天津大学,Tianjin University,天津,理工,shanghairanking-bcur-2025
+21,西北工业大学,Northwestern Polytechnical University,陕西,理工,shanghairanking-bcur-2025
+22,山东大学,Shandong University,山东,综合,shanghairanking-bcur-2025
+23,南开大学,Nankai University,天津,综合,shanghairanking-bcur-2025
+24,厦门大学,Xiamen University,福建,综合,shanghairanking-bcur-2025
+25,中国农业大学,China Agricultural University,北京,农业,shanghairanking-bcur-2025
+26,吉林大学,Jilin University,吉林,综合,shanghairanking-bcur-2025
+27,中南大学,Central South University,湖南,综合,shanghairanking-bcur-2025
+28,大连理工大学,Dalian University of Technology,辽宁,理工,shanghairanking-bcur-2025
+29,湖南大学,Hunan University,湖南,综合,shanghairanking-bcur-2025
+30,华东师范大学,East China Normal University,上海,师范,shanghairanking-bcur-2025
+31,华南理工大学,South China University of Technology,广东,理工,shanghairanking-bcur-2025
+32,南方科技大学,Southern University of Science and Technology,广东,综合,shanghairanking-bcur-2025
+33,电子科技大学,University of Electronic Science and Technology of China,四川,理工,shanghairanking-bcur-2025
+34,重庆大学,Chongqing University,重庆,综合,shanghairanking-bcur-2025
+35,北京科技大学,University of Science and Technology Beijing,北京,理工,shanghairanking-bcur-2025
+36,南京航空航天大学,Nanjing University of Aeronautics and Astronautics,江苏,理工,shanghairanking-bcur-2025
+37,东北大学,Northeastern University,辽宁,理工,shanghairanking-bcur-2025
+38,南京理工大学,Nanjing University of Science and Technology,江苏,理工,shanghairanking-bcur-2025
+39,兰州大学,Lanzhou University,甘肃,综合,shanghairanking-bcur-2025
+40,西安电子科技大学,Xidian University,陕西,理工,shanghairanking-bcur-2025
+41,上海科技大学,ShanghaiTech University,上海,综合,shanghairanking-bcur-2025
+42,北京交通大学,Beijing Jiaotong University,北京,理工,shanghairanking-bcur-2025
+43,哈尔滨工程大学,Harbin Engineering University,黑龙江,理工,shanghairanking-bcur-2025
+44,华东理工大学,East China University of Science and Technology,上海,理工,shanghairanking-bcur-2025
+45,东北师范大学,Northeast Normal University,吉林,师范,shanghairanking-bcur-2025
+46,苏州大学,Soochow University,江苏,综合,shanghairanking-bcur-2025
+47,华中农业大学,Huazhong Agricultural University,湖北,农业,shanghairanking-bcur-2025
+48,武汉理工大学,Wuhan University of Technology,湖北,理工,shanghairanking-bcur-2025
+48,中国石油大学（北京）,"China University of Petroleum, Beijing",北京,理工,shanghairanking-bcur-2025
+50,郑州大学,Zhengzhou University,河南,综合,shanghairanking-bcur-2025
+51,江南大学,Jiangnan University,江苏,综合,shanghairanking-bcur-2025
+52,西南交通大学,Southwest Jiaotong University,四川,理工,shanghairanking-bcur-2025
+53,南京农业大学,Nanjing Agricultural University,江苏,农业,shanghairanking-bcur-2025
+54,中国地质大学（武汉）,China University of Geosciences,湖北,理工,shanghairanking-bcur-2025
+55,暨南大学,Jinan University,广东,综合,shanghairanking-bcur-2025
+56,华中师范大学,Central China Normal University,湖北,师范,shanghairanking-bcur-2025
+56,中国海洋大学,Ocean University of China,山东,综合,shanghairanking-bcur-2025
+58,南京师范大学,Nanjing Normal University,江苏,师范,shanghairanking-bcur-2025
+59,中国矿业大学,China University of Mining and Technology,江苏,理工,shanghairanking-bcur-2025
+60,北京邮电大学,Beijing University of Posts and Telecommunications,北京,理工,shanghairanking-bcur-2025
+61,上海大学,Shanghai University,上海,综合,shanghairanking-bcur-2025
+62,浙江工业大学,Zhejiang University of Technology,浙江,理工,shanghairanking-bcur-2025
+63,北京化工大学,Beijing University of Chemical Technology,北京,理工,shanghairanking-bcur-2025
+64,河海大学,Hohai University,江苏,理工,shanghairanking-bcur-2025
+65,陕西师范大学,Shaanxi Normal University,陕西,师范,shanghairanking-bcur-2025
+66,西南大学,Southwest University,重庆,综合,shanghairanking-bcur-2025
+67,中国石油大学（华东）,China University of Petroleum (East China),山东,理工,shanghairanking-bcur-2025
+68,深圳大学,Shenzhen University,广东,综合,shanghairanking-bcur-2025
+69,云南大学,Yunnan University,云南,综合,shanghairanking-bcur-2025
+70,西北大学,Northwest University,陕西,综合,shanghairanking-bcur-2025
+71,西北农林科技大学,Northwest A&F University,陕西,农业,shanghairanking-bcur-2025
+72,北京工业大学,Beijing University of Technology,北京,理工,shanghairanking-bcur-2025
+73,南昌大学,Nanchang University,江西,综合,shanghairanking-bcur-2025
+74,东华大学,Donghua University,上海,理工,shanghairanking-bcur-2025
+75,中国地质大学（北京）,China University of Geosciences Beijing,北京,理工,shanghairanking-bcur-2025
+76,中国矿业大学（北京）,China University of Mining & Technology-Beijing,北京,理工,shanghairanking-bcur-2025
+77,福州大学,Fuzhou University,福建,理工,shanghairanking-bcur-2025
+78,宁波大学,Ningbo University,浙江,综合,shanghairanking-bcur-2025
+79,合肥工业大学,Hefei University of Technology,安徽,理工,shanghairanking-bcur-2025
+80,华南师范大学,South China Normal University,广东,师范,shanghairanking-bcur-2025
+81,南京邮电大学,Nanjing University of Posts and Telecommunications,江苏,理工,shanghairanking-bcur-2025
+82,江苏大学,Jiangsu University,江苏,综合,shanghairanking-bcur-2025
+83,华北电力大学,North China Electric Power University,北京,理工,shanghairanking-bcur-2025
+84,长安大学,Chang'an University,陕西,理工,shanghairanking-bcur-2025
+85,北京林业大学,Beijing Forestry University,北京,林业,shanghairanking-bcur-2025
+86,贵州大学,Guizhou University,贵州,综合,shanghairanking-bcur-2025
+87,福建师范大学,Fujian Normal University,福建,师范,shanghairanking-bcur-2025
+88,湖南师范大学,Hunan Normal University,湖南,师范,shanghairanking-bcur-2025
+89,广西大学,Guangxi University,广西,综合,shanghairanking-bcur-2025
+90,南京林业大学,Nanjing Forestry University,江苏,林业,shanghairanking-bcur-2025
+91,扬州大学,Yangzhou University,江苏,综合,shanghairanking-bcur-2025
+92,浙江师范大学,Zhejiang Normal University,浙江,师范,shanghairanking-bcur-2025
+93,海南大学,Hainan University,海南,综合,shanghairanking-bcur-2025
+94,南京工业大学,Nanjing Tech University,江苏,理工,shanghairanking-bcur-2025
+95,南京信息工程大学,Nanjing University of Information Science & Technology,江苏,理工,shanghairanking-bcur-2025
+96,广东工业大学,Guangdong University of Technology,广东,理工,shanghairanking-bcur-2025
+97,杭州电子科技大学,Hangzhou Dianzi University,浙江,理工,shanghairanking-bcur-2025
+98,安徽大学,Anhui University,安徽,综合,shanghairanking-bcur-2025
+99,首都师范大学,Capital Normal University,北京,师范,shanghairanking-bcur-2025
+100,华南农业大学,South China Agricultural University,广东,农业,shanghairanking-bcur-2025
+101,山西大学,Shanxi University,山西,综合,shanghairanking-bcur-2025
+102,河南大学,Henan University,河南,综合,shanghairanking-bcur-2025
+103,太原理工大学,Taiyuan University of Technology,山西,理工,shanghairanking-bcur-2025
+104,山东师范大学,Shandong Normal University,山东,师范,shanghairanking-bcur-2025
+105,广州大学,Guangzhou University,广东,综合,shanghairanking-bcur-2025
+106,浙江理工大学,Zhejiang Sci-Tech University,浙江,理工,shanghairanking-bcur-2025
+107,湘潭大学,Xiangtan University,湖南,综合,shanghairanking-bcur-2025
+108,上海理工大学,University of Shanghai for Science and Technology,上海,理工,shanghairanking-bcur-2025
+109,河北工业大学,Hebei University of Technology,河北,理工,shanghairanking-bcur-2025
+110,大连海事大学,Dalian Maritime University,辽宁,综合,shanghairanking-bcur-2025
+111,青岛大学,Qingdao University,山东,综合,shanghairanking-bcur-2025
+112,燕山大学,Yanshan University,河北,理工,shanghairanking-bcur-2025
+113,东北林业大学,Northeast Forestry University,黑龙江,林业,shanghairanking-bcur-2025
+114,杭州师范大学,Hangzhou Normal University,浙江,师范,shanghairanking-bcur-2025
+115,西安建筑科技大学,Xi'an University of Architecture and Technology,陕西,理工,shanghairanking-bcur-2025
+116,湖北大学,Hubei University,湖北,综合,shanghairanking-bcur-2025
+117,昆明理工大学,Kunming University of Science and Technology,云南,理工,shanghairanking-bcur-2025
+118,内蒙古大学,Inner Mongolia University,内蒙古,综合,shanghairanking-bcur-2025
+119,西安理工大学,Xi'an University of Technology,陕西,理工,shanghairanking-bcur-2025
+120,武汉科技大学,Wuhan University of Science and Technology,湖北,理工,shanghairanking-bcur-2025
+121,江西师范大学,Jiangxi Normal University,江西,师范,shanghairanking-bcur-2025
+122,东北农业大学,Northeast Agricultural University,黑龙江,农业,shanghairanking-bcur-2025
+122,西南石油大学,Southwest Petroleum University,四川,理工,shanghairanking-bcur-2025
+124,上海师范大学,Shanghai Normal University,上海,师范,shanghairanking-bcur-2025
+125,福建农林大学,Fujian Agriculture and Forestry University,福建,农业,shanghairanking-bcur-2025
+126,温州大学,Wenzhou University,浙江,综合,shanghairanking-bcur-2025
+127,长沙理工大学,Changsha University of Science and Technology,湖南,理工,shanghairanking-bcur-2025
+127,新疆大学,Xinjiang University,新疆,综合,shanghairanking-bcur-2025
+129,河北大学,Hebei University,河北,综合,shanghairanking-bcur-2025
+130,山东科技大学,Shandong University of Science and Technology,山东,理工,shanghairanking-bcur-2025
+131,辽宁大学,Liaoning University,辽宁,综合,shanghairanking-bcur-2025
+132,成都理工大学,Chengdu University of Technology,四川,理工,shanghairanking-bcur-2025
+133,山东农业大学,Shandong Agricultural University,山东,农业,shanghairanking-bcur-2025
+134,宁夏大学,Ningxia University,宁夏,综合,shanghairanking-bcur-2025
+135,华侨大学,Huaqiao University,福建,综合,shanghairanking-bcur-2025
+135,陕西科技大学,Shaanxi University of Science and Technology,陕西,理工,shanghairanking-bcur-2025
+137,天津工业大学,Tiangong University,天津,理工,shanghairanking-bcur-2025
+138,长春理工大学,Changchun University of Science and Technology,吉林,理工,shanghairanking-bcur-2025
+139,安徽师范大学,Anhui Normal University,安徽,师范,shanghairanking-bcur-2025
+140,石河子大学,Shihezi University,新疆,综合,shanghairanking-bcur-2025
+141,四川农业大学,Sichuan Agricultural University,四川,农业,shanghairanking-bcur-2025
+142,天津师范大学,Tianjin Normal University,天津,师范,shanghairanking-bcur-2025
+143,上海海洋大学,Shanghai Ocean University,上海,农业,shanghairanking-bcur-2025
+144,江苏科技大学,Jiangsu University of Science and Technology,江苏,理工,shanghairanking-bcur-2025
+145,齐鲁工业大学,Qilu University of Technology,山东,理工,shanghairanking-bcur-2025
+146,中国计量大学,China Jiliang University,浙江,理工,shanghairanking-bcur-2025
+147,黑龙江大学,Heilongjiang University,黑龙江,综合,shanghairanking-bcur-2025
+148,安徽农业大学,Anhui Agricultural University,安徽,农业,shanghairanking-bcur-2025
+148,湖北工业大学,Hubei University of Technology,湖北,理工,shanghairanking-bcur-2025
+150,浙江农林大学,Zhejiang A&F University,浙江,林业,shanghairanking-bcur-2025
+151,南通大学,Nantong University,江苏,综合,shanghairanking-bcur-2025
+152,河南农业大学,Henan Agricultural University,河南,农业,shanghairanking-bcur-2025
+153,重庆邮电大学,Chongqing University of Posts and Telecommunications,重庆,理工,shanghairanking-bcur-2025
+154,常州大学,Changzhou University,江苏,理工,shanghairanking-bcur-2025
+155,广西师范大学,Guangxi Normal University,广西,师范,shanghairanking-bcur-2025
+156,湖南农业大学,Hunan Agricultural University,湖南,农业,shanghairanking-bcur-2025
+157,曲阜师范大学,Qufu Normal University,山东,师范,shanghairanking-bcur-2025
+158,吉林农业大学,Jilin Agricultural University,吉林,农业,shanghairanking-bcur-2025
+159,武汉纺织大学,Wuhan Textile University,湖北,理工,shanghairanking-bcur-2025
+160,武汉工程大学,Wuhan Institute of Technology,湖北,理工,shanghairanking-bcur-2025
+161,河南师范大学,Henan Normal University,河南,师范,shanghairanking-bcur-2025
+162,天津科技大学,Tianjin University of Science and Technology,天津,理工,shanghairanking-bcur-2025
+163,辽宁师范大学,Liaoning Normal University,辽宁,师范,shanghairanking-bcur-2025
+164,江苏师范大学,Jiangsu Normal University,江苏,师范,shanghairanking-bcur-2025
+165,北京建筑大学,Beijing University of Civil Engineering and Architecture,北京,理工,shanghairanking-bcur-2025
+166,汕头大学,Shantou University,广东,综合,shanghairanking-bcur-2025
+167,集美大学,Jimei University,福建,综合,shanghairanking-bcur-2025
+168,青岛科技大学,Qingdao University of Science and Technology,山东,理工,shanghairanking-bcur-2025
+168,三峡大学,China Three Gorges University,湖北,综合,shanghairanking-bcur-2025
+168,延边大学,Yanbian University,吉林,综合,shanghairanking-bcur-2025
+171,沈阳农业大学,Shenyang Agricultural University,辽宁,农业,shanghairanking-bcur-2025
+172,河南科技大学,Henan University of Science and Technology,河南,综合,shanghairanking-bcur-2025
+173,中北大学,North University of China,山西,理工,shanghairanking-bcur-2025
+174,济南大学,University of Jinan,山东,综合,shanghairanking-bcur-2025
+175,华东交通大学,East China Jiaotong University,江西,理工,shanghairanking-bcur-2025
+176,上海海事大学,Shanghai Maritime University,上海,综合,shanghairanking-bcur-2025
+177,南昌航空大学,Nanchang Hangkong University,江西,理工,shanghairanking-bcur-2025
+178,河北师范大学,Hebei Normal University,河北,师范,shanghairanking-bcur-2025
+179,西北师范大学,Northwest Normal University,甘肃,师范,shanghairanking-bcur-2025
+180,天津理工大学,Tianjin University of Technology,天津,理工,shanghairanking-bcur-2025
+181,湖南科技大学,Hunan University of Science and Technology,湖南,综合,shanghairanking-bcur-2025
+182,国际关系学院,University of International Relations,北京,综合,shanghairanking-bcur-2025
+183,沈阳航空航天大学,Shenyang Aerospace University,辽宁,理工,shanghairanking-bcur-2025
+184,河南理工大学,Henan Polytechnic University,河南,理工,shanghairanking-bcur-2025
+185,长江大学,Yangtze University,湖北,综合,shanghairanking-bcur-2025
+186,上海电力大学,Shanghai University of Electric Power,上海,理工,shanghairanking-bcur-2025
+187,南华大学,University of South China,湖南,综合,shanghairanking-bcur-2025
+187,沈阳工业大学,Shenyang University of Technology,辽宁,理工,shanghairanking-bcur-2025
+189,重庆交通大学,Chongqing Jiaotong University,重庆,理工,shanghairanking-bcur-2025
+190,安徽工业大学,Anhui University of Technology,安徽,理工,shanghairanking-bcur-2025
+190,江西理工大学,Jiangxi University of Science and Technology,江西,理工,shanghairanking-bcur-2025
+192,西安科技大学,Xi'an University of Science and Technology,陕西,理工,shanghairanking-bcur-2025
+193,安徽理工大学,Anhui University of Science and Technology,安徽,理工,shanghairanking-bcur-2025
+194,山东理工大学,Shandong University of Technology,山东,理工,shanghairanking-bcur-2025
+195,西藏大学,Tibet University,西藏,综合,shanghairanking-bcur-2025
+196,江西农业大学,Jiangxi Agricultural University,江西,农业,shanghairanking-bcur-2025
+197,河北农业大学,Hebei Agricultural University,河北,农业,shanghairanking-bcur-2025
+198,青海大学,Qinghai University,青海,综合,shanghairanking-bcur-2025
+199,兰州理工大学,Lanzhou University of Technology,甘肃,理工,shanghairanking-bcur-2025
+200,西安邮电大学,Xi'an University of Posts and Telecommunications,陕西,理工,shanghairanking-bcur-2025
+201,桂林电子科技大学,Guilin University of Electronic Technology,广西,理工,shanghairanking-bcur-2025
+201,四川师范大学,Sichuan Normal University,四川,师范,shanghairanking-bcur-2025
+203,云南师范大学,Yunnan Normal University,云南,师范,shanghairanking-bcur-2025
+204,北京信息科技大学,Beijing Information Science & Technology University,北京,理工,shanghairanking-bcur-2025
+205,烟台大学,Yantai University,山东,综合,shanghairanking-bcur-2025
+206,苏州科技大学,Suzhou University of Science and Technology,江苏,理工,shanghairanking-bcur-2025
+207,中南林业科技大学,Central South University of Forestry & Technology,湖南,林业,shanghairanking-bcur-2025
+208,西南科技大学,Southwest University of Science and Technology,四川,理工,shanghairanking-bcur-2025
+209,兰州交通大学,Lanzhou Jiaotong University,甘肃,理工,shanghairanking-bcur-2025
+210,青岛理工大学,Qingdao University of Technology,山东,理工,shanghairanking-bcur-2025
+211,湖州师范学院,Huzhou University,浙江,师范,shanghairanking-bcur-2025
+212,西安工业大学,Xi'an Technological University,陕西,理工,shanghairanking-bcur-2025
+213,哈尔滨师范大学,Harbin Normal University,黑龙江,师范,shanghairanking-bcur-2025
+214,东华理工大学,East China University of Technology,江西,理工,shanghairanking-bcur-2025
+215,北方工业大学,North China University of Technology,北京,理工,shanghairanking-bcur-2025
+216,北京电子科技学院,Beijing Electronic Science and Technology Institute,北京,理工,shanghairanking-bcur-2025
+217,东北石油大学,Northeast Petroleum University,黑龙江,理工,shanghairanking-bcur-2025
+218,重庆师范大学,Chongqing Normal University,重庆,师范,shanghairanking-bcur-2025
+219,沈阳建筑大学,Shenyang Jianzhu University,辽宁,理工,shanghairanking-bcur-2025
+220,内蒙古农业大学,Inner Mongolia Agricultural University,内蒙古,农业,shanghairanking-bcur-2025
+221,内蒙古师范大学,Inner Mongolia Normal University,内蒙古,师范,shanghairanking-bcur-2025
+222,大连工业大学,Dalian Polytechnic University,辽宁,理工,shanghairanking-bcur-2025
+223,石家庄铁道大学,Shijiazhuang Tiedao University,河北,理工,shanghairanking-bcur-2025
+224,河南工业大学,Henan University of Technology,河南,理工,shanghairanking-bcur-2025
+225,嘉兴大学,Jiaxing University,浙江,综合,shanghairanking-bcur-2025
+226,海南师范大学,Hainan Normal University,海南,师范,shanghairanking-bcur-2025
+227,山西农业大学,Shanxi Agricultural University,山西,农业,shanghairanking-bcur-2025
+228,青岛农业大学,Qingdao Agricultural University,山东,农业,shanghairanking-bcur-2025
+229,东北电力大学,Northeast Electric Power University,吉林,理工,shanghairanking-bcur-2025
+229,浙江海洋大学,Zhejiang Ocean University,浙江,农业,shanghairanking-bcur-2025
+231,浙江科技大学,Zhejiang University of Science and Technology,浙江,理工,shanghairanking-bcur-2025
+232,成都大学,Chengdu University,四川,综合,shanghairanking-bcur-2025
+233,哈尔滨理工大学,Harbin University of Science and Technology,黑龙江,理工,shanghairanking-bcur-2025
+234,上海工程技术大学,Shanghai University of Engineering Science,上海,理工,shanghairanking-bcur-2025
+235,西安石油大学,Xi'an Shiyou University,陕西,理工,shanghairanking-bcur-2025
+236,上海应用技术大学,Shanghai Institute of Technology,上海,理工,shanghairanking-bcur-2025
+237,贵州师范大学,Guizhou Normal University,贵州,师范,shanghairanking-bcur-2025
+238,河北科技大学,Hebei University of Science and Technology,河北,理工,shanghairanking-bcur-2025
+239,佛山大学,Foshan University,广东,理工,shanghairanking-bcur-2025
+240,青海师范大学,Qinghai Normal University,青海,师范,shanghairanking-bcur-2025
+241,甘肃农业大学,Gansu Agricultural University,甘肃,农业,shanghairanking-bcur-2025
+242,东莞理工学院,Dongguan University of Technology,广东,理工,shanghairanking-bcur-2025
+243,中国民航大学,Civil Aviation University of China,天津,理工,shanghairanking-bcur-2025
+244,重庆理工大学,Chongqing University of Technology,重庆,理工,shanghairanking-bcur-2025
+245,华北水利水电大学,North China University of Water Resources and Electric Power,河南,理工,shanghairanking-bcur-2025
+246,武汉轻工大学,Wuhan Polytechnic University,湖北,理工,shanghairanking-bcur-2025
+247,鲁东大学,Ludong University,山东,综合,shanghairanking-bcur-2025
+248,赣南师范大学,Gannan Normal University,江西,师范,shanghairanking-bcur-2025
+249,山东建筑大学,Shandong Jianzhu University,山东,理工,shanghairanking-bcur-2025
+250,江汉大学,Jianghan University,湖北,综合,shanghairanking-bcur-2025
+251,浙大城市学院,Hangzhou City University,浙江,理工,shanghairanking-bcur-2025
+252,聊城大学,Liaocheng University,山东,综合,shanghairanking-bcur-2025
+253,沈阳化工大学,Shenyang University of Chemical Technology,辽宁,理工,shanghairanking-bcur-2025
+254,桂林理工大学,Guilin University of Technology,广西,理工,shanghairanking-bcur-2025
+255,成都信息工程大学,Chengdu University of Information Technology,四川,理工,shanghairanking-bcur-2025
+256,西安工程大学,Xi'an Polytechnic University,陕西,理工,shanghairanking-bcur-2025
+256,郑州轻工业大学,Zhengzhou University of Light Industry,河南,理工,shanghairanking-bcur-2025
+258,安徽工程大学,Anhui Polytechnic University,安徽,理工,shanghairanking-bcur-2025
+258,西华师范大学,China West Normal University,四川,师范,shanghairanking-bcur-2025
+260,大连交通大学,Dalian Jiaotong University,辽宁,理工,shanghairanking-bcur-2025
+261,南京工程学院,Nanjing Institute of Technology,江苏,理工,shanghairanking-bcur-2025
+262,上海海关学院,Shanghai Customs College,上海,综合,shanghairanking-bcur-2025
+263,辽宁石油化工大学,Liaoning Petrochemical University,辽宁,理工,shanghairanking-bcur-2025
+264,沈阳理工大学,Shenyang Ligong University,辽宁,理工,shanghairanking-bcur-2025
+265,绍兴文理学院,Shaoxing University,浙江,师范,shanghairanking-bcur-2025
+266,延安大学,Yan'an University,陕西,综合,shanghairanking-bcur-2025
+267,内蒙古工业大学,Inner Mongolia University of Technology,内蒙古,理工,shanghairanking-bcur-2025
+267,沈阳大学,Shenyang University,辽宁,综合,shanghairanking-bcur-2025
+269,厦门理工学院,Xiamen University of Technology,福建,理工,shanghairanking-bcur-2025
+270,西华大学,Xihua University,四川,综合,shanghairanking-bcur-2025
+271,长春工业大学,Changchun University of Technology,吉林,理工,shanghairanking-bcur-2025
+272,沈阳师范大学,Shenyang Normal University,辽宁,师范,shanghairanking-bcur-2025
+273,大连大学,Dalian University,辽宁,综合,shanghairanking-bcur-2025
+273,华北理工大学,North China University of Science and Technology,河北,综合,shanghairanking-bcur-2025
+275,安徽建筑大学,Anhui Jianzhu University,安徽,理工,shanghairanking-bcur-2025
+276,湖南工业大学,Hunan University of Technology,湖南,理工,shanghairanking-bcur-2025
+277,井冈山大学,Jinggangshan University,江西,综合,shanghairanking-bcur-2025
+278,山西师范大学,Shanxi Normal University,山西,师范,shanghairanking-bcur-2025
+279,辽宁工程技术大学,Liaoning Technical University,辽宁,理工,shanghairanking-bcur-2025
+280,北京农学院,Beijing University of Agriculture,北京,农业,shanghairanking-bcur-2025
+281,浙大宁波理工学院,NingboTech University,浙江,理工,shanghairanking-bcur-2025
+282,福建理工大学,Fujian University of Technology,福建,理工,shanghairanking-bcur-2025
+283,常熟理工学院,Changshu Institute of Technology,江苏,理工,shanghairanking-bcur-2025
+284,中原工学院,Zhongyuan University of Technology,河南,理工,shanghairanking-bcur-2025
+285,合肥大学,Hefei University,安徽,理工,shanghairanking-bcur-2025
+286,重庆科技大学,Chongqing University of Science and Technology,重庆,理工,shanghairanking-bcur-2025
+287,渤海大学,Bohai University,辽宁,综合,shanghairanking-bcur-2025
+288,云南农业大学,Yunnan Agricultural University,云南,农业,shanghairanking-bcur-2025
+289,台州学院,Taizhou University,浙江,综合,shanghairanking-bcur-2025
+290,大理大学,Dali University,云南,综合,shanghairanking-bcur-2025
+291,太原科技大学,Taiyuan University of Science and Technology,山西,理工,shanghairanking-bcur-2025
+292,黑龙江八一农垦大学,Heilongjiang Bayi Agricultural University,黑龙江,农业,shanghairanking-bcur-2025
+293,宁波工程学院,Ningbo University of Technology,浙江,理工,shanghairanking-bcur-2025
+294,深圳技术大学,Shenzhen Technology University,广东,综合,shanghairanking-bcur-2025
+295,河北工程大学,Hebei University of Engineering,河北,理工,shanghairanking-bcur-2025
+296,辽宁科技大学,University of Science and Technology Liaoning,辽宁,理工,shanghairanking-bcur-2025
+297,北京联合大学,Beijing Union University,北京,综合,shanghairanking-bcur-2025
+297,北京石油化工学院,Beijing Institute of Petrochemical Technology,北京,理工,shanghairanking-bcur-2025
+299,新疆农业大学,Xinjiang Agricultural University,新疆,农业,shanghairanking-bcur-2025
+300,吉首大学,Jishou University,湖南,综合,shanghairanking-bcur-2025
+300,辽宁工业大学,Liaoning University of Technology,辽宁,理工,shanghairanking-bcur-2025
+302,北京印刷学院,Beijing Institute of Graphic Communication,北京,理工,shanghairanking-bcur-2025
+303,闽南师范大学,Minnan Normal University,福建,师范,shanghairanking-bcur-2025
+304,淮阴工学院,Huaiyin Institute of Technology,江苏,理工,shanghairanking-bcur-2025
+305,闽江学院,Minjiang University,福建,理工,shanghairanking-bcur-2025
+306,广东海洋大学,Guangdong Ocean University,广东,农业,shanghairanking-bcur-2025
+307,信阳师范大学,Xinyang Normal University,河南,师范,shanghairanking-bcur-2025
+308,河北地质大学,Hebei GEO University,河北,综合,shanghairanking-bcur-2025
+309,北华大学,Beihua University,吉林,综合,shanghairanking-bcur-2025
+310,吉林师范大学,Jilin Normal University,吉林,师范,shanghairanking-bcur-2025
+311,临沂大学,Linyi University,山东,综合,shanghairanking-bcur-2025
+312,淮北师范大学,Huaibei Normal University,安徽,师范,shanghairanking-bcur-2025
+313,大连海洋大学,Dalian Ocean University,辽宁,农业,shanghairanking-bcur-2025
+314,南宁师范大学,Nanning Normal University,广西,师范,shanghairanking-bcur-2025
+315,盐城工学院,Yancheng Institute of Technology,江苏,理工,shanghairanking-bcur-2025
+316,吉林建筑大学,Jilin Jianzhu University,吉林,理工,shanghairanking-bcur-2025
+317,无锡学院,Wuxi University,江苏,综合,shanghairanking-bcur-2025
+318,塔里木大学,Tarim University,新疆,综合,shanghairanking-bcur-2025
+319,广东技术师范大学,Guangdong Polytechnic Normal University,广东,师范,shanghairanking-bcur-2025
+320,长沙学院,Changsha University,湖南,理工,shanghairanking-bcur-2025
+321,景德镇陶瓷大学,Jingdezhen Ceramic University,江西,理工,shanghairanking-bcur-2025
+322,河南科技学院,Henan Institute of Science and Technology,河南,师范,shanghairanking-bcur-2025
+322,江苏海洋大学,Jiangsu Ocean University,江苏,理工,shanghairanking-bcur-2025
+324,天津城建大学,Tianjin Chengjian University,天津,理工,shanghairanking-bcur-2025
+325,湖北师范大学,Hubei Normal University,湖北,师范,shanghairanking-bcur-2025
+326,贵州师范学院,Guizhou Education University,贵州,师范,shanghairanking-bcur-2025
+327,江西科技师范大学,Jiangxi Science and Technology Normal University,江西,师范,shanghairanking-bcur-2025
+328,西南林业大学,Southwest Forestry University,云南,林业,shanghairanking-bcur-2025
+329,五邑大学,Wuyi University,广东,综合,shanghairanking-bcur-2025
+330,内蒙古科技大学,Inner Mongolia University of Science & Technology,内蒙古,综合,shanghairanking-bcur-2025
+331,南京晓庄学院,Nanjing XiaoZhuang University,江苏,师范,shanghairanking-bcur-2025
+332,长春师范大学,Changchun Normal University,吉林,师范,shanghairanking-bcur-2025
+333,长江师范学院,Yangtze Normal University,重庆,师范,shanghairanking-bcur-2025
+333,重庆文理学院,Chongqing University of Arts and Sciences,重庆,综合,shanghairanking-bcur-2025
+335,新疆师范大学,Xinjiang Normal University,新疆,师范,shanghairanking-bcur-2025
+336,安庆师范大学,Anqing Normal University,安徽,师范,shanghairanking-bcur-2025
+336,淮阴师范学院,Huaiyin Normal University,江苏,师范,shanghairanking-bcur-2025
+338,浙江万里学院,Zhejiang Wanli University,浙江,理工,shanghairanking-bcur-2025
+339,江苏理工学院,Jiangsu University of Technology,江苏,理工,shanghairanking-bcur-2025
+340,上海电机学院,Shanghai Dianji University,上海,理工,shanghairanking-bcur-2025
+341,上海第二工业大学,Shanghai Polytechnic University,上海,理工,shanghairanking-bcur-2025
+342,四川轻化工大学,Sichuan University of Science and Engineering,四川,理工,shanghairanking-bcur-2025
+343,常州工学院,Changzhou Institute of Technology,江苏,理工,shanghairanking-bcur-2025
+344,湖南理工学院,Hunan Institute of Science and Technology,湖南,理工,shanghairanking-bcur-2025
+345,盐城师范学院,Yancheng Teachers University,江苏,师范,shanghairanking-bcur-2025
+346,仲恺农业工程学院,Zhongkai University of Agriculture and Engineering,广东,农业,shanghairanking-bcur-2025
+347,湖北汽车工业学院,Hubei University of Automotive Technology,湖北,理工,shanghairanking-bcur-2025
+348,广西科技大学,Guangxi University of Science and Technology,广西,理工,shanghairanking-bcur-2025
+348,黄冈师范学院,Huanggang Normal University,湖北,师范,shanghairanking-bcur-2025
+350,江西水利电力大学,Nanchang Institute of Technology,江西,理工,shanghairanking-bcur-2025
+351,榆林学院,Yulin University,陕西,师范,shanghairanking-bcur-2025
+352,金陵科技学院,Jinling Institute of Technology,江苏,理工,shanghairanking-bcur-2025
+352,山东交通学院,Shandong Jiaotong University,山东,理工,shanghairanking-bcur-2025
+354,湖北第二师范学院,Hubei University of Education,湖北,师范,shanghairanking-bcur-2025
+355,徐州工程学院,Xuzhou University of Technology,江苏,理工,shanghairanking-bcur-2025
+356,天津农学院,Tianjin Agricultural University,天津,农业,shanghairanking-bcur-2025
+357,泉州师范学院,Quanzhou Normal University,福建,师范,shanghairanking-bcur-2025
+358,湖北文理学院,Hubei University of Arts and Science,湖北,综合,shanghairanking-bcur-2025
+359,洛阳师范学院,Luoyang Normal University,河南,师范,shanghairanking-bcur-2025
+360,天津职业技术师范大学,TianJin University of Technology and Education,天津,师范,shanghairanking-bcur-2025
+361,陕西理工大学,Shaanxi University of Technology,陕西,理工,shanghairanking-bcur-2025
+362,湖南第一师范学院,Hunan First Normal University,湖南,师范,shanghairanking-bcur-2025
+363,合肥师范学院,Hefei Normal University,安徽,师范,shanghairanking-bcur-2025
+364,广东石油化工学院,Guangdong University of Petrochemical Technology,广东,综合,shanghairanking-bcur-2025
+365,安徽科技学院,Anhui Science and Technology University,安徽,师范,shanghairanking-bcur-2025
+365,绵阳师范学院,Mianyang Teachers' College,四川,师范,shanghairanking-bcur-2025
+367,衢州学院,Quzhou University,浙江,理工,shanghairanking-bcur-2025
+368,贵阳学院,Guiyang University,贵州,综合,shanghairanking-bcur-2025
+369,惠州学院,Huizhou University,广东,综合,shanghairanking-bcur-2025
+370,三明学院,Sanming University,福建,综合,shanghairanking-bcur-2025
+371,齐齐哈尔大学,Qiqihar University,黑龙江,综合,shanghairanking-bcur-2025
+372,重庆三峡学院,Chongqing Three Gorges University,重庆,综合,shanghairanking-bcur-2025
+373,长春工程学院,Changchun Institute of Technology,吉林,理工,shanghairanking-bcur-2025
+373,丽水学院,Lishui University,浙江,师范,shanghairanking-bcur-2025
+375,衡阳师范学院,Hengyang Normal University,湖南,师范,shanghairanking-bcur-2025
+376,西藏农牧学院,Xizang Agricultural and Animal Husbandry University,西藏,农业,shanghairanking-bcur-2025
+377,攀枝花学院,Panzhihua University,四川,综合,shanghairanking-bcur-2025
+378,湘南学院,Xiangnan University,湖南,理工,shanghairanking-bcur-2025
+379,长春大学,Changchun University,吉林,综合,shanghairanking-bcur-2025
+379,铜仁学院,Tongren University,贵州,综合,shanghairanking-bcur-2025
+381,湖北科技学院,Hubei University of Science and Technology,湖北,综合,shanghairanking-bcur-2025
+381,洛阳理工学院,Luoyang Institute of Science and Technology,河南,综合,shanghairanking-bcur-2025
+383,中国民用航空飞行学院,Civil Aviation Flight University of China,四川,理工,shanghairanking-bcur-2025
+384,岭南师范学院,Lingnan Normal University,广东,师范,shanghairanking-bcur-2025
+385,阜阳师范大学,Fuyang Normal University,安徽,师范,shanghairanking-bcur-2025
+385,佳木斯大学,Jiamusi University,黑龙江,综合,shanghairanking-bcur-2025
+385,黔南民族师范学院,Qiannan Normal College for Nationalities,贵州,师范,shanghairanking-bcur-2025
+385,泰山学院,Taishan University,山东,综合,shanghairanking-bcur-2025
+389,黑龙江科技大学,Heilongjiang University of Science and Technology,黑龙江,理工,shanghairanking-bcur-2025
+390,龙岩学院,Longyan University,福建,综合,shanghairanking-bcur-2025
+391,防灾科技学院,Institute of Disaster Prevention,河北,理工,shanghairanking-bcur-2025
+392,成都师范学院,Chengdu Normal University,四川,师范,shanghairanking-bcur-2025
+393,内江师范学院,Neijiang Normal University,四川,师范,shanghairanking-bcur-2025
+394,滁州学院,Chuzhou University,安徽,师范,shanghairanking-bcur-2025
+395,湖北理工学院,Hubei Polytechnic University,湖北,理工,shanghairanking-bcur-2025
+396,周口师范学院,Zhoukou Normal University,河南,师范,shanghairanking-bcur-2025
+397,河北科技师范学院,Hebei Normal University of Science and Technology,河北,师范,shanghairanking-bcur-2025
+397,江苏第二师范学院,Jiangsu Second Normal University,江苏,师范,shanghairanking-bcur-2025
+399,山东航空学院,Shandong University of Aeronautics,山东,理工,shanghairanking-bcur-2025
+400,怀化学院,Huaihua University,湖南,综合,shanghairanking-bcur-2025
+401,沈阳工程学院,Shenyang Institute of Engineering,辽宁,理工,shanghairanking-bcur-2025
+402,莆田学院,Putian University,福建,综合,shanghairanking-bcur-2025
+403,湖南城市学院,Hunan City University,湖南,综合,shanghairanking-bcur-2025
+404,北华航天工业学院,North China Institute of Aerospace Engineering,河北,理工,shanghairanking-bcur-2025
+405,韶关学院,Shaoguan University,广东,综合,shanghairanking-bcur-2025
+406,湖南工程学院,Hunan Institute of Engineering,湖南,理工,shanghairanking-bcur-2025
+407,曲靖师范学院,Qujing Normal University,云南,师范,shanghairanking-bcur-2025
+408,湖南文理学院,Hunan University of Arts and Science,湖南,综合,shanghairanking-bcur-2025
+408,浙江水利水电学院,Zhejiang University of Water Resources and Electric Power,浙江,理工,shanghairanking-bcur-2025
+410,潍坊学院,Weifang University,山东,综合,shanghairanking-bcur-2025
+411,宜宾学院,Yibin University,四川,综合,shanghairanking-bcur-2025
+412,德州学院,Dezhou University,山东,综合,shanghairanking-bcur-2025
+412,皖西学院,West Anhui University,安徽,师范,shanghairanking-bcur-2025
+414,南阳师范学院,Nanyang Normal University,河南,师范,shanghairanking-bcur-2025
+415,北部湾大学,Beibu Gulf University,广西,综合,shanghairanking-bcur-2025
+416,贵州理工学院,Guizhou Institute of Technology,贵州,理工,shanghairanking-bcur-2025
+416,湖南科技学院,Hunan University of Science and Engineering,湖南,综合,shanghairanking-bcur-2025
+418,枣庄学院,Zaozhuang University,山东,综合,shanghairanking-bcur-2025
+419,牡丹江师范学院,Mudanjiang Normal University,黑龙江,师范,shanghairanking-bcur-2025
+420,宿迁学院,Suqian University,江苏,综合,shanghairanking-bcur-2025
+421,太原师范学院,Taiyuan Normal University,山西,师范,shanghairanking-bcur-2025
+422,邵阳学院,Shaoyang University,湖南,理工,shanghairanking-bcur-2025
+423,广东第二师范学院,Guangdong University of Education,广东,师范,shanghairanking-bcur-2025
+423,玉林师范学院,Yulin Normal University,广西,师范,shanghairanking-bcur-2025
+425,石家庄学院,Shijiazhuang University,河北,师范,shanghairanking-bcur-2025
+426,通化师范学院,Tonghua Normal University,吉林,师范,shanghairanking-bcur-2025
+426,西安文理学院,Xi'an University,陕西,师范,shanghairanking-bcur-2025
+428,河南工程学院,Henan University Of Engineering,河南,理工,shanghairanking-bcur-2025
+428,肇庆学院,Zhaoqing University,广东,综合,shanghairanking-bcur-2025
+428,遵义师范学院,Zunyi Normal University,贵州,师范,shanghairanking-bcur-2025
+431,黑龙江工程学院,Heilongjiang Institute of Technology,黑龙江,理工,shanghairanking-bcur-2025
+431,昆明学院,Kunming University,云南,综合,shanghairanking-bcur-2025
+433,宁德师范学院,Ningde Normal University,福建,师范,shanghairanking-bcur-2025
+434,南阳理工学院,Nanyang Institute Of Technology,河南,理工,shanghairanking-bcur-2025
+434,武夷学院,Wuyi University,福建,综合,shanghairanking-bcur-2025
+436,黄淮学院,Huanghuai University,河南,理工,shanghairanking-bcur-2025
+437,宜春学院,Yichun University,江西,综合,shanghairanking-bcur-2025
+438,吉林化工大学,Jilin Institute of Chemical Technology,吉林,理工,shanghairanking-bcur-2025
+439,许昌学院,Xuchang University,河南,理工,shanghairanking-bcur-2025
+440,韩山师范学院,Hanshan Normal University,广东,师范,shanghairanking-bcur-2025
+440,上饶师范学院,Shangrao Normal University,江西,师范,shanghairanking-bcur-2025
+442,宝鸡文理学院,Baoji University of Arts and Sciences,陕西,师范,shanghairanking-bcur-2025
+442,重庆第二师范学院,Chongqing University of Education,重庆,师范,shanghairanking-bcur-2025
+442,乐山师范学院,Leshan Normal University,四川,师范,shanghairanking-bcur-2025
+445,淮南师范学院,Huainan Normal University,安徽,师范,shanghairanking-bcur-2025
+445,温州理工学院,Wenzhou University of Technology,浙江,理工,shanghairanking-bcur-2025
+447,安阳师范学院,Anyang Normal University,河南,师范,shanghairanking-bcur-2025
+448,西昌学院,Xichang College,四川,综合,shanghairanking-bcur-2025
+449,广州航海学院,Guangzhou Maritime University,广东,理工,shanghairanking-bcur-2025
+450,河南城建学院,Henan University of Urban Construction,河南,理工,shanghairanking-bcur-2025
+451,齐鲁师范学院,Qilu Normal University,山东,师范,shanghairanking-bcur-2025
+452,湖州学院,Huzhou College,浙江,师范,shanghairanking-bcur-2025
+453,天水师范学院,Tianshui Normal University,甘肃,师范,shanghairanking-bcur-2025
+454,湖南人文科技学院,"Hunan University of Humanities, Science and Technology",湖南,师范,shanghairanking-bcur-2025
+454,唐山师范学院,Tangshan Normal University,河北,师范,shanghairanking-bcur-2025
+456,商丘师范学院,Shangqiu Normal University,河南,师范,shanghairanking-bcur-2025
+457,成都工业学院,Chengdu Technological University,四川,理工,shanghairanking-bcur-2025
+457,六盘水师范学院,Liupanshui Normal University,贵州,师范,shanghairanking-bcur-2025
+459,巢湖学院,Chaohu University,安徽,师范,shanghairanking-bcur-2025
+460,贺州学院,Hezhou University,广西,综合,shanghairanking-bcur-2025
+460,内蒙古科技大学包头师范学院,Baotou Teachers' College,内蒙古,综合,shanghairanking-bcur-2025
+460,平顶山学院,Pingdingshan University,河南,师范,shanghairanking-bcur-2025
+463,南昌师范学院,Nanchang Normal University,江西,师范,shanghairanking-bcur-2025
+463,渭南师范学院,Weinan Normal University,陕西,师范,shanghairanking-bcur-2025
+465,宁夏师范大学,Ningxia Normal University,宁夏,师范,shanghairanking-bcur-2025
+466,湖南工学院,Hunan Institute of Technology,湖南,理工,shanghairanking-bcur-2025
+467,鞍山师范学院,Anshan Normal University,辽宁,师范,shanghairanking-bcur-2025
+468,哈尔滨学院,Harbin University,黑龙江,综合,shanghairanking-bcur-2025
+468,湖北工程学院,Hubei Engineering University,湖北,综合,shanghairanking-bcur-2025
+470,吉林工程技术师范学院,Jilin Engineering Normal University,吉林,师范,shanghairanking-bcur-2025
+471,廊坊师范学院,Langfang Normal University,河北,师范,shanghairanking-bcur-2025
+472,西安航空学院,Xi'an Aeronautical Institute,陕西,理工,shanghairanking-bcur-2025
+473,信阳农林学院,Xinyang Agriculture and Forestry University,河南,农业,shanghairanking-bcur-2025
+474,山西大同大学,Shanxi Datong University,山西,综合,shanghairanking-bcur-2025
+475,黄山学院,Huangshan University,安徽,师范,shanghairanking-bcur-2025
+475,嘉应学院,Jiaying University,广东,综合,shanghairanking-bcur-2025
+477,福建技术师范学院,Fujian Polytechnic Normal University,福建,师范,shanghairanking-bcur-2025
+478,四川旅游学院,Sichuan Tourism University,四川,综合,shanghairanking-bcur-2025
+478,咸阳师范学院,Xianyang Normal University,陕西,师范,shanghairanking-bcur-2025
+480,南京特殊教育师范学院,Nanjing Normal University of Special Education,江苏,师范,shanghairanking-bcur-2025
+480,宿州学院,Suzhou University,安徽,师范,shanghairanking-bcur-2025
+482,凯里学院,Kaili University,贵州,综合,shanghairanking-bcur-2025
+483,海南热带海洋学院,Hainan Tropical Ocean University,海南,综合,shanghairanking-bcur-2025
+483,九江学院,Jiujiang University,江西,综合,shanghairanking-bcur-2025
+485,山东管理学院,Shandong Management University,山东,综合,shanghairanking-bcur-2025
+486,玉溪师范学院,Yuxi Normal University,云南,师范,shanghairanking-bcur-2025
+487,安阳工学院,Anyang Institute of Technology,河南,理工,shanghairanking-bcur-2025
+487,新乡学院,Xinxiang University,河南,理工,shanghairanking-bcur-2025
+489,河西学院,HeXi University,甘肃,综合,shanghairanking-bcur-2025
+490,太原工业学院,Taiyuan Institute of Technology,山西,理工,shanghairanking-bcur-2025
+491,山东女子学院,Shandong Women's University,山东,综合,shanghairanking-bcur-2025
+491,伊犁师范大学,Yili Normal University,新疆,师范,shanghairanking-bcur-2025
+493,河北建筑工程学院,Hebei University of Architecture,河北,理工,shanghairanking-bcur-2025
+494,赤峰学院,Chifeng University,内蒙古,综合,shanghairanking-bcur-2025
+495,琼台师范学院,Qiongtai Normal University,海南,师范,shanghairanking-bcur-2025
+496,陇东学院,Longdong University,甘肃,师范,shanghairanking-bcur-2025
+496,苏州城市学院,Suzhou City University,江苏,综合,shanghairanking-bcur-2025
+498,营口理工学院,YingKou Institute of Technology,辽宁,理工,shanghairanking-bcur-2025
+499,大庆师范学院,Daqing Normal University,黑龙江,综合,shanghairanking-bcur-2025
+500,华北科技学院,North China Institute of Science and Technology,河北,理工,shanghairanking-bcur-2025
+500+,阿坝师范学院,ABA TEACHERS COLLEGE,四川,师范,shanghairanking-bcur-2025
+500+,安康学院,Ankang University,陕西,综合,shanghairanking-bcur-2025
+500+,安顺学院,Anshun University,贵州,综合,shanghairanking-bcur-2025
+500+,白城师范学院,Baicheng Normal University,吉林,师范,shanghairanking-bcur-2025
+500+,百色学院,Baise University,广西,综合,shanghairanking-bcur-2025
+500+,保定学院,Baoding University,河北,师范,shanghairanking-bcur-2025
+500+,保山学院,Baoshan University,云南,师范,shanghairanking-bcur-2025
+500+,蚌埠学院,Bengbu University,安徽,理工,shanghairanking-bcur-2025
+500+,亳州学院,Bozhou University,安徽,师范,shanghairanking-bcur-2025
+500+,沧州师范学院,Cangzhou Normal University,河北,师范,shanghairanking-bcur-2025
+500+,昌吉学院,Changji University,新疆,师范,shanghairanking-bcur-2025
+500+,长沙师范学院,Changsha Normal University,湖南,师范,shanghairanking-bcur-2025
+500+,长治学院,Changzhi University,山西,师范,shanghairanking-bcur-2025
+500+,池州学院,Chizhou University,安徽,师范,shanghairanking-bcur-2025
+500+,楚雄师范学院,Chuxiong Normal University,云南,师范,shanghairanking-bcur-2025
+500+,滇西科技师范学院,West Yunnan University,云南,师范,shanghairanking-bcur-2025
+500+,滇西应用技术大学,West Yunnan University of Applied Sciences,云南,综合,shanghairanking-bcur-2025
+500+,鄂尔多斯应用技术学院,Ordos Institute of Technology,内蒙古,综合,shanghairanking-bcur-2025
+500+,赣东学院,"East China Institute of Technology, Yangtze River College",江西,理工,shanghairanking-bcur-2025
+500+,赣南科技学院,"College of Applied Science, Jiangxi University of Science and Technology",江西,理工,shanghairanking-bcur-2025
+500+,甘肃民族师范学院,Gansu Normal University for Nationalities,甘肃,师范,shanghairanking-bcur-2025
+500+,广西科技师范学院,Guangxi Science and Technology Normal University,广西,师范,shanghairanking-bcur-2025
+500+,广西民族师范学院,Guangxi Normal University for Nationalities,广西,师范,shanghairanking-bcur-2025
+500+,广西职业师范学院,Guangxi Vocational Normal University,广西,综合,shanghairanking-bcur-2025
+500+,桂林航天工业学院,Guilin University of Aerospace Technology,广西,理工,shanghairanking-bcur-2025
+500+,贵州工程应用技术学院,Guizhou University of Engineering Science,贵州,师范,shanghairanking-bcur-2025
+500+,邯郸学院,Handan University,河北,师范,shanghairanking-bcur-2025
+500+,汉江师范学院,Hanjiang Normal University,湖北,师范,shanghairanking-bcur-2025
+500+,河北环境工程学院,Hebei University of Environmental Engineering,河北,综合,shanghairanking-bcur-2025
+500+,河北民族师范学院,Hebei Normal University for Nationalities,河北,师范,shanghairanking-bcur-2025
+500+,河北水利电力学院,Hebei University of Water Resources and Electric Engineering,河北,理工,shanghairanking-bcur-2025
+500+,河池学院,Hechi University,广西,综合,shanghairanking-bcur-2025
+500+,合肥理工学院,Jianghuai College of Anhui University,安徽,综合,shanghairanking-bcur-2025
+500+,黑河学院,Heihe University,黑龙江,综合,shanghairanking-bcur-2025
+500+,黑龙江工业学院,Heilongjiang University of Technology,黑龙江,理工,shanghairanking-bcur-2025
+500+,河南工学院,Henan Institute of Technology,河南,理工,shanghairanking-bcur-2025
+500+,河南牧业经济学院,Henan University of Animal Husbandry and Economy,河南,农业,shanghairanking-bcur-2025
+500+,衡水学院,Hengshui University,河北,师范,shanghairanking-bcur-2025
+500+,河套学院,Hetao University,内蒙古,综合,shanghairanking-bcur-2025
+500+,菏泽学院,Heze University,山东,综合,shanghairanking-bcur-2025
+500+,红河学院,Honghe University,云南,综合,shanghairanking-bcur-2025
+500+,呼伦贝尔学院,Hulunbuir University,内蒙古,综合,shanghairanking-bcur-2025
+500+,吉林农业科技学院,Jilin Agricultural Science and Technology University,吉林,农业,shanghairanking-bcur-2025
+500+,荆楚理工学院,Jingchu University of Technology,湖北,理工,shanghairanking-bcur-2025
+500+,景德镇学院,Jingdezhen University,江西,综合,shanghairanking-bcur-2025
+500+,集宁师范学院,Jining Normal University,内蒙古,师范,shanghairanking-bcur-2025
+500+,济宁学院,Jining University,山东,师范,shanghairanking-bcur-2025
+500+,晋中学院,Jinzhong University,山西,师范,shanghairanking-bcur-2025
+500+,喀什大学,Kashi University,新疆,师范,shanghairanking-bcur-2025
+500+,兰州城市学院,Lanzhou City University,甘肃,综合,shanghairanking-bcur-2025
+500+,兰州工业学院,Lanzhou Institute of Technology,甘肃,理工,shanghairanking-bcur-2025
+500+,兰州文理学院,Lanzhou University of Arts and Science,甘肃,综合,shanghairanking-bcur-2025
+500+,辽东学院,Liaodong University,辽宁,综合,shanghairanking-bcur-2025
+500+,辽宁科技学院,Liaoning Institute of Science and Technology,辽宁,理工,shanghairanking-bcur-2025
+500+,吕梁学院,Lyuliang University,山西,师范,shanghairanking-bcur-2025
+500+,萍乡学院,Pingxiang University,江西,综合,shanghairanking-bcur-2025
+500+,普洱学院,Puer University,云南,师范,shanghairanking-bcur-2025
+500+,山东农业工程学院,Shandong Agriculture and Engineering University,山东,综合,shanghairanking-bcur-2025
+500+,山东青年政治学院,Shandong Youth University of Political Science,山东,综合,shanghairanking-bcur-2025
+500+,山东石油化工学院,SHANDONG INSTITUTE OF PETROLEUM AND CHEMICAL TECHNOLOGY,山东,理工,shanghairanking-bcur-2025
+500+,商洛学院,Shangluo University,陕西,综合,shanghairanking-bcur-2025
+500+,山西电子科技学院,Modern College of Humanities and Sciences of Shanxi Normal University,山西,理工,shanghairanking-bcur-2025
+500+,山西工程技术学院,Shanxi Institute of Technology,山西,理工,shanghairanking-bcur-2025
+500+,山西工学院,SHANXI COLLEGE OF TECHNOLOGY,山西,理工,shanghairanking-bcur-2025
+500+,山西科技学院,Huake College of Taiyuan University of Science and Technology,山西,理工,shanghairanking-bcur-2025
+500+,山西能源学院,Shanxi Institute of Energy,山西,综合,shanghairanking-bcur-2025
+500+,陕西学前师范学院,Shaanxi Xueqian Normal University,陕西,师范,shanghairanking-bcur-2025
+500+,四川民族学院,Sichuan Minzu College,四川,师范,shanghairanking-bcur-2025
+500+,四川文理学院,Sichuan University of Arts and Science,四川,综合,shanghairanking-bcur-2025
+500+,绥化学院,Suihua University,黑龙江,综合,shanghairanking-bcur-2025
+500+,太原学院,Taiyuan University,山西,理工,shanghairanking-bcur-2025
+500+,泰州学院,Taizhou University,江苏,师范,shanghairanking-bcur-2025
+500+,唐山学院,Tangshan University,河北,理工,shanghairanking-bcur-2025
+500+,天津中德应用技术大学,Tianjin Sino-German University of Applied Sciences,天津,理工,shanghairanking-bcur-2025
+500+,文山学院,Wenshan University,云南,师范,shanghairanking-bcur-2025
+500+,梧州学院,Wuzhou University,广西,综合,shanghairanking-bcur-2025
+500+,邢台学院,Xingtai University,河北,师范,shanghairanking-bcur-2025
+500+,兴义民族师范学院,Xingyi Normal University for Nationalities,贵州,师范,shanghairanking-bcur-2025
+500+,新疆工程学院,Xinjiang Institute of Engineering,新疆,理工,shanghairanking-bcur-2025
+500+,新疆理工学院,Xinjiang Institute of Technology,新疆,综合,shanghairanking-bcur-2025
+500+,新疆政法学院,Xinjiang Institute Of Political Science And Law,新疆,综合,shanghairanking-bcur-2025
+500+,新余学院,Xinyu University,江西,综合,shanghairanking-bcur-2025
+500+,忻州师范学院,Xinzhou Teachers University,山西,师范,shanghairanking-bcur-2025
+500+,运城学院,Yuncheng University,山西,师范,shanghairanking-bcur-2025
+500+,豫章师范学院,Yuzhang Normal University,江西,师范,shanghairanking-bcur-2025
+500+,张家口学院,Zhangjiakou University,河北,综合,shanghairanking-bcur-2025
+500+,昭通学院,Zhaotong University,云南,师范,shanghairanking-bcur-2025
+500+,郑州工程技术学院,Zhengzhou University of Technology,河南,理工,shanghairanking-bcur-2025
+500+,郑州师范学院,Zhengzhou Normal University,河南,师范,shanghairanking-bcur-2025

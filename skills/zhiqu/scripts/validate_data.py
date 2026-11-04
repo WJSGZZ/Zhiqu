@@ -32,7 +32,7 @@ from urllib.parse import urlsplit
 
 DATA = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data")
 CAREER_DATA = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "zhiqu-career", "data")
-SKIP_DIRS = {"civil_service", "calibration", "purchased"}  # purchased 是本地内部库，不提交
+SKIP_DIRS = {"civil_service", "calibration", "purchased", "rankings"}  # purchased 是本地内部库，不提交；rankings 是第三方排名快照，来源由其测试检查
 MAX_SCORE = 750
 VIOLATION_WARN = 0.02
 AFTER_ENTRY_FIELDS = (
