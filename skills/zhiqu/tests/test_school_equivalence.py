@@ -57,6 +57,10 @@ class SchoolEquivalenceTests(unittest.TestCase):
 
     def test_name_normalisation_and_bands(self):
         self.assertEqual(se.norm('香港城市大学（东莞）'), '香港城市大学(东莞)')
+        self.assertEqual(se.norm('东华大学(上海市)[公办]'), '东华大学')
+        self.assertEqual(se.norm('宁波诺丁汉大学[中外合作办学]'), '宁波诺丁汉大学')
+        self.assertEqual(se.norm('河北大学(地方专项计划)'), '河北大学(地方专项计划)')
+        self.assertEqual(se.norm('中国地质大学(北京)'), '中国地质大学(北京)')
         self.assertEqual(se.band_mid('801-900'), 850.5)
 
     def test_real_snapshot_lists_coop_universities(self):

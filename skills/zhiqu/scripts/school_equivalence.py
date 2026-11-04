@@ -22,7 +22,11 @@ MIN_REFS = 80         # 一个省年至少要有这么多有名次的学校才�
 
 
 def norm(name):
-    return re.sub(r'\s+', '', name.replace('（', '(').replace('）', ')'))
+    """统一括号和空白；去掉河北表的办学性质标签“[公办]”和所在城市“(保定市)”。
+    校区、专项计划等其他括号保留，它们不与本校主体合并。"""
+    name = re.sub(r'\s+', '', name.replace('（', '(').replace('）', ')'))
+    name = re.sub(r'\[[^\]]*\]$', '', name)
+    return re.sub(r'\([^()]*市\)$', '', name)
 
 
 def read_csv(path):
