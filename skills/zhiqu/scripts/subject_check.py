@@ -16,6 +16,8 @@ import json
 import re
 from pathlib import Path
 
+from decision_evidence import expected_status
+
 DATA = Path(__file__).resolve().parent.parent / "data"
 TABLE = DATA / "subject_req_2027.csv"
 CHAR = {"河北": "冀", "河南": "豫", "山东": "鲁", "江苏": "苏", "浙江": "浙", "福建": "闽", "湖北": "鄂", "湖南": "湘", "广东": "粤"}
@@ -64,6 +66,24 @@ def check(name, idx, subjects):
     return "unknown", "官方表中未找到该校该专业"
 
 
+def update_evidence(ev, status, note, src):
+    """Write the subject result into the 选考 hard condition and re-derive the status."""
+    for c in ev.get("hard_conditions", []):
+        if "选考" in c.get("name", ""):
+            c["status"] = status
+            if status != "unknown" and src and src.startswith("https://"):
+                c["source"] = src
+            c["note"] = note + "（data/subject_req_2027.csv）"
+    # Re-derive from every condition each run, so a rerun can move the
+    # candidate back (failed → met, met → unknown) instead of only down.
+    unresolved = [u for u in ev.get("unresolved", []) if "选考" not in u]
+    if status == "unknown":
+        unresolved.append("选考要求待核：" + note)
+    ev["unresolved"] = unresolved
+    ev["status"] = expected_status(ev.get("hard_conditions", []), unresolved)
+    return ev
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("csv")
@@ -82,17 +102,7 @@ def main():
         counts[status] += 1
         r["subject_check"] = f"{status}：{note}"
         if r.get("eligibility_evidence"):
-            ev = json.loads(r["eligibility_evidence"])
-            for c in ev.get("hard_conditions", []):
-                if "选考" in c.get("name", ""):
-                    c["status"] = status
-                    if status != "unknown" and src and src.startswith("https://"):
-                        c["source"] = src
-                    c["note"] = note + "（data/subject_req_2027.csv）"
-            if status == "met":
-                ev["unresolved"] = [u for u in ev.get("unresolved", []) if "选考" not in u] or ev.get("unresolved", [])
-            if status == "failed":
-                ev["status"] = "ineligible"
+            ev = update_evidence(json.loads(r["eligibility_evidence"]), status, note, src)
             r["eligibility_evidence"] = json.dumps(ev, ensure_ascii=False)
     fields = list(rows[0]) if rows else []
     with open(a.out, "w", encoding="utf-8", newline="") as f:

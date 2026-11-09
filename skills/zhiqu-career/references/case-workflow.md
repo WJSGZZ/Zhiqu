@@ -30,7 +30,14 @@
 
 case.json新增字段和旧stage并存，原budget、hypothetical_followup、出生输入和已有计算结果不删不改：
 
-- `decision_stage`：还没开始 / 投递中 / 有 offer 在比较 / 在职想跳槽。应届毕业与有工作经历、劳务关系、是否参加某种招录分别核，不从阶段推定。
+- `decision_stage`：还没开始 / 投递中 / 有 offer 在比较 / 在职想跳槽。应届毕业与有工作经历、劳务关系、是否参加某种招录分别核，不从阶段推定。问卷「求职进行到哪一步」的选项按下表对应，原答案另记在画像里，不改写：
+
+  | 问卷选项 | decision_stage |
+  |---|---|
+  | 还没开始 | 还没开始 |
+  | 正在准备简历和投递；已经在面试；在准备或参加考公考编国企笔试 | 投递中 |
+  | 手里有offer在比较；已签约在考虑解约（解约成本按labor-rules核） | 有 offer 在比较 |
+  | 在职，考虑跳槽 | 在职想跳槽 |
 - `education`：degree、major、expected_graduation、qualification_date。未知可null并列missing；学历取得方式和学位另核，不能从“本科”二字补全。
 - `deadlines`：每项id/label/date/kind（official / personal_checkpoint）/evidence_refs/unknown_reason，至少记录最晚需要收入的节点；日期未知保留问题，不能用旧招考日历冒充当届。
 - `case_id`：`^\d{4}-QZ-(\d{4}|S\d{2})$`，formal不用S编号。version是本次报告版本；prepared_on为准备日，出稿另用as_of判断时效；data_commit固定数据版本。

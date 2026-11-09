@@ -5,6 +5,17 @@ from urllib.parse import urlsplit
 STATUSES = {'verified', 'pending', 'ineligible'}
 
 
+def expected_status(conditions, unresolved=()):
+    """The only status the hard conditions allow: any failed → ineligible;
+    any unknown or open item → pending; otherwise verified."""
+    states = {c.get('status') for c in conditions if isinstance(c, dict)}
+    if 'failed' in states:
+        return 'ineligible'
+    if 'unknown' in states or unresolved:
+        return 'pending'
+    return 'verified'
+
+
 def source_url(value):
     """Keep an actually recorded public HTTP URL; this performs no retrieval."""
     if not isinstance(value, str) or any(c.isspace() for c in value):

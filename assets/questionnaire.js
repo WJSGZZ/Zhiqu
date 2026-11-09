@@ -304,6 +304,17 @@
     bytes[0]=wrapped.length>>8;bytes[1]=wrapped.length&255;bytes.set(wrapped,2);bytes.set(iv,2+wrapped.length);bytes.set(ciphertext,14+wrapped.length);
     return 'ZQ1:'+zhiquBase64(bytes);
   }
+  // After a copy, any further edit makes the pasted profile out of date: say so.
+  var zhiquCopyFresh=false;
+  function zhiquMarkCopyStale(e){
+    var msg=document.getElementById('copyDone');
+    if(!zhiquCopyFresh||!msg||(e&&e.target&&e.target.id==='summary'))return;
+    zhiquCopyFresh=false;msg.textContent='复制后又改了答案，请再点一次复制';
+  }
+  if(typeof document.addEventListener==='function'){
+    document.addEventListener('input',zhiquMarkCopyStale);
+    document.addEventListener('change',zhiquMarkCopyStale);
+  }
   function zhiquCopyNotice(){
     var note=document.getElementById('copyPrivacy');if(!note)return;
     if(zhiquRecipient()){
@@ -319,7 +330,7 @@
       var full=JSON.stringify(profile,null,2),recipient=zhiquRecipient();
       if(recipient&&!plain)full=await zhiquEncrypt(full,recipient);
       out.classList.remove('show');ta.value=full;
-      var done=function(){msg.textContent='已复制 ✓ 直接粘贴发回去就行';msg.classList.add('show');};
+      var done=function(){msg.textContent='已复制 ✓ 直接粘贴发回去就行';msg.classList.add('show');zhiquCopyFresh=true;};
       var fail=function(){msg.textContent='没能自动复制，请长按全选复制';msg.classList.add('show');out.classList.add('show');out.scrollIntoView({block:'start'});};
       if(navigator.clipboard&&navigator.clipboard.writeText){
         try{await navigator.clipboard.writeText(full);done();}

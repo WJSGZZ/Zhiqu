@@ -835,7 +835,7 @@
 </div>
 
 <script src="assets/profile-recipient.js?v=20261019p"></script>
-<script src="assets/questionnaire.js?v=20261022a"></script>
+<script src="assets/questionnaire.js?v=20261109a"></script>
 <script>
   function updateBaziPreview(){
     var el=document.getElementById('baziPreview'); if(!el) return;
@@ -925,7 +925,7 @@
       function setChecked(name,vals){ document.querySelectorAll('input[name="'+name+'"]').forEach(function(el){ if(vals.indexOf(el.value)>=0) el.checked=true; }); }
       if(d.radio) Object.keys(d.radio).forEach(function(n){ setChecked(n,[d.radio[n]]); });
       if(d.check) Object.keys(d.check).forEach(function(n){ setChecked(n,d.check[n]); });
-      if(d.rank && d.rank.length) rankOrder=d.rank.slice();
+      if(d.rank && d.rank.length){ var allowed=Array.prototype.map.call(document.querySelectorAll('#rank .rank-item'),function(it){return it.getAttribute('data-id');}); rankOrder=d.rank.filter(function(id){return allowed.indexOf(id)>=0;}); }
       return true;
     }catch(e){ return false; }
   }

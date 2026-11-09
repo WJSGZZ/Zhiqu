@@ -492,17 +492,52 @@ def validate_and_publish(database, manifests, output, deadline):
         if subprocess.run(['cp','-c',str(p),str(dest)],capture_output=True).returncode:shutil.copy2(p,dest)
     deadline()
     if deadline.remaining()<5:raise TimeoutError('预留原子发布回执时间不足，候选不发布')
+    # Written before the irreversible step: a worker killed mid-publication
+    # leaves the old/new fingerprints, so the parent can tell which side won.
+    write_json(output/'publish-prepared.json',{'database':str(Path(database).resolve()),
+        'old_query_sha256':proof['live']['query_sha256'],'new_query_sha256':proof['candidate']['query_sha256']})
     receipt=timed('atomic_publish',lambda:tx.publish_pair(database,candidate,proof['live']['query_sha256'],proof,checks,deadline))
     write_json(output/'publish.json',receipt)
-    for f in metadata.iterdir():
-        dest=Path(database).parent/f.name;tmp=dest.with_name('.'+dest.name+'.ondemand.tmp')
-        shutil.copy2(f,tmp)
-        with tmp.open('rb')as stream:os.fsync(stream.fileno())
-        os.replace(tmp,dest)
+    # From here the live database is already replaced. Housekeeping failures are
+    # reported, never turned into an "unpublished" outcome.
+    warnings=[]
+    try:
+        for f in metadata.iterdir():
+            dest=Path(database).parent/f.name;tmp=dest.with_name('.'+dest.name+'.ondemand.tmp')
+            shutil.copy2(f,tmp)
+            with tmp.open('rb')as stream:os.fsync(stream.fileno())
+            os.replace(tmp,dest)
+    except OSError as exc:
+        warnings.append('已发布，但字典/版本文件未全部更新：'+type(exc).__name__)
     # The accepted pair now has a durable published copy and one rollback pair.
     # Avoid retaining a second full candidate after successful publication.
-    for file in [candidate,candidate.parent/proof['candidate']['audit_file']]:file.unlink()
-    return {'receipt':receipt,'ingest':receipts,'validation':checks,'timings':timings}
+    for file in [candidate,candidate.parent/proof['candidate']['audit_file']]:
+        try:file.unlink()
+        except OSError as exc:warnings.append('已发布，但候选副本未删除：'+file.name+'（'+type(exc).__name__+'）')
+    if warnings:write_json(output/'post-publish-warnings.json',warnings)
+    return {'receipt':receipt,'ingest':receipts,'validation':checks,'timings':timings,'post_publish_warnings':warnings}
+
+
+PUBLISHED,UNPUBLISHED,UNCERTAIN='已发布','未发布','发布状态待核'
+
+
+def publication_state(output, database):
+    """Publication state from durable markers; a killed worker is not proof of either side.
+
+    publish.json → 已发布. Only publish-prepared.json → compare the live query
+    fingerprint with the recorded old/new values. Neither marker → 未发布.
+    """
+    output=Path(output)
+    if (output/'publish.json').is_file():return PUBLISHED
+    prepared=output/'publish-prepared.json'
+    if not prepared.is_file():return UNPUBLISHED
+    try:
+        marker=json.loads(prepared.read_text())
+        with Path(marker.get('database') or database).open('rb')as f:actual=hashlib.file_digest(f,'sha256').hexdigest()
+    except (OSError,ValueError):return UNCERTAIN
+    if actual==marker.get('new_query_sha256'):return PUBLISHED
+    if actual==marker.get('old_query_sha256'):return UNPUBLISHED
+    return UNCERTAIN
 
 
 def update_coverage(path, school, outcomes):
@@ -702,6 +737,7 @@ def run_request(request, *, fetch=fetch_public, publisher=validate_and_publish, 
                             manifest['sources'][i]=dict(old)
             published=publisher(Path(request['database']),manifests,out,deadline)
             if not published:raise ValueError('没有成功发布回执')
+            warnings.extend(published.get('post_publish_warnings',[]))
             staged_index=0
             for r in outcomes:
                 if r['status']=='staged':
@@ -745,9 +781,13 @@ def timed_out_summary(request):
     out=Path(request['output']);saved=out/'progress.json'
     progress=json.loads(saved.read_text()) if saved.exists() else {}
     outcomes=progress.get('outcomes',[])
+    state=publication_state(out,request.get('database'))
+    staged_reason={PUBLISHED:'单校时间限制；候选已发布到正式库，但本格小结未写完，行数以publish.json及正式库为准',
+                   UNPUBLISHED:'单校时间限制；已解析未完成发布回执，需核对正式库后续取',
+                   UNCERTAIN:'单校时间限制；发布中断，正式库指纹与发布前后均不符，需人工核对后再取'}[state]
     for item in outcomes:
         if item['status']=='staged':
-            item.update(status='partial',reason='单校时间限制；已解析未完成发布回执，需核对正式库后续取')
+            item.update(status='partial',reason=staged_reason)
     present={(r['year'],r['layer'],r['program'])for r in outcomes}
     for year in request['years']:
         for layer in request['layers']:
@@ -758,7 +798,7 @@ def timed_out_summary(request):
     # must never claim that a prepared candidate reached the live database.
     summary=dict(school=progress.get('school',request['school']),seconds=request['seconds'],
                  deadline_seconds=request['seconds'],outcomes=outcomes,attempts=progress.get('attempts',[]),
-                 published=(out/'publish.json').is_file(),publication_receipt=str(out/'publish.json'))
+                 published=state==PUBLISHED,publication_state=state,publication_receipt=str(out/'publish.json'))
     write_json(out/'timeout.json',summary)
     if not (out/'summary.json').exists():
         write_json(out/'summary.json',summary)
@@ -785,7 +825,7 @@ def main():
         try:run_request(request)
         except Exception:
             # No traceback/source text can escape the private processing worker.
-            write_json(Path(request['output'])/'stopped.json',{'status':'未发布','reason':'身份/输入/期限或验收失败，原始异常不输出'})
+            write_json(Path(request['output'])/'stopped.json',{'status':publication_state(request['output'],request.get('database')),'reason':'身份/输入/期限或验收失败，原始异常不输出'})
             raise SystemExit(1)
         return
     ap=argparse.ArgumentParser(description='按学校/专业限时取官方考研数据；不绕过登录、验证码或403/412')
