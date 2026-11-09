@@ -107,6 +107,54 @@ CREATE TABLE civil_major_summary(region TEXT,year INTEGER,major_name TEXT,share 
    c.execute('INSERT INTO meta VALUES(?,?)',('gk_source_coverage:s:gk_official_cutoff:one',json.dumps(value)))
   result=self.school('甲大',province='山东');section=next(x for x in result['sections']if x['table']=='gk_official_cutoff')
   self.assertTrue(all(x['completeness']['missing_rows'][0]['row']==9 for x in section['rows']));text=db.render_text(result);self.assertIn('原表不完整',text);self.assertIn('页2/表1/行9',text)
+ def _catalogue_fixture(self, **changes):
+  note='以最终实际录取人数为准。'
+  extra={'original_plan_header':'拟招生名额(含推免)','planned_note_raw':note,'remarks_raw':None,
+         'remarks_unavailable_reason':db._CATALOGUE_REMARK_DIAGNOSTIC,'tuimian_note':'公开列未独列推免人数；不使用未核标签的后端tmme字段'}
+  row={'record_id':'catalogue','institution_id':'1','year':2026,'program_code':'045108',
+       'program_name':'学科教学（英语）','direction':'不区分研究方向','study_mode':'全日制',
+       'scope':'含推免；专项名额范围未明确','scope_raw':extra['original_plan_header']+'；'+note+'；'+extra['remarks_unavailable_reason'],
+       'planned':25,'tuimian':None,'source_id':'s','value_status':'{"planned":{"status":"官方原值"},"tuimian":{"status":"来源未提供"}}',
+       'extra_json':json.dumps(extra,ensure_ascii=False)}
+  row.update(changes)
+  with db._open('education',self.path) as (c,_):
+   record=db._record(c,'ky_v_usable_program',row)
+  result={'query':'program','identity':{'name':'甲大学','institution_id':'1'},'sections':[{'table':'ky_v_usable_program','title':'考研招生目录','rows':[record]}]}
+  return result,record,row,extra
+
+ def test_catalogue_default_separates_bound_diagnostic_from_original_scope(self):
+  result,record,row,extra=self._catalogue_fixture()
+  before=json.dumps(result,ensure_ascii=False,sort_keys=True)
+  text=db.render_text(result)
+  self.assertIn('原表范围说明：拟招生名额(含推免)；以最终实际录取人数为准。',text)
+  self.assertIn('核对提示：原备注未完成两种读法核对，未采用',text)
+  self.assertIn('报考资格须回学校原页确认',text)
+  self.assertIn('推免人数未单列',text)
+  self.assertIn('专项名额范围未明确',text)
+  self.assertNotIn('tkbz',text);self.assertNotIn('tmme',text)
+  self.assertEqual(record['values']['planned']['value'],25)
+  self.assertEqual(record['context']['scope_raw'],row['scope_raw'])
+  self.assertEqual(record['catalogue_audit_notes'],extra)
+  self.assertIn(row['scope_raw'],db.render_text(result,full=True))
+  self.assertEqual(json.dumps(result,ensure_ascii=False,sort_keys=True),before)
+
+ def test_catalogue_unknown_or_unbound_notes_are_never_hidden(self):
+  _,_,row,extra=self._catalogue_fixture()
+  variants=[{'extra_json':'[]'},{'extra_json':'bad json'}, {'tuimian':3},
+            {'extra_json':json.dumps(dict(extra,original_plan_header='统考计划'))},
+            {'extra_json':json.dumps(dict(extra,remarks_unavailable_reason='资格另有限制，未核'))},
+            {'extra_json':json.dumps(dict(extra,remarks_raw='只招英语本科'))},
+            {'extra_json':json.dumps(dict(extra,planned_note_raw=None))},
+            {'scope_raw':row['scope_raw']+'；只招英语本科'},
+            {'scope_raw':'只招英语本科；'+db._CATALOGUE_REMARK_DIAGNOSTIC}]
+  for change in variants:
+   with self.subTest(change=change):
+    result,record,raw,_=self._catalogue_fixture(**change)
+    self.assertNotIn('reader_context_overrides',record)
+    self.assertIn('原表范围说明：',db.render_text(result))
+    self.assertEqual(record['context']['scope_raw'],raw['scope_raw'])
+  self.assertIsNone(db._catalogue_reader_context('gk_official_plan',row))
+
  def test_every_value_has_grade_origin_id_status(self):
   r=self.program('甲大','0854');v=r['sections'][0]['rows'][0]['values']['total'];self.assertEqual((v['grade'],v['publisher'],v['source_id']),('官方','甲大学研究生院','s'));self.assertEqual(v['value_status']['status'],'官方原值')
  def test_null_missing_original_not_unpublished(self):

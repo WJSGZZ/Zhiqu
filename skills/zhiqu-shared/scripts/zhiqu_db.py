@@ -599,6 +599,30 @@ def _official_context(c, row, *, ignore_scope_fields=()):
     return context
 
 
+# A legacy catalogue producer appended its own diagnostic to scope_raw. Only
+# detach that known diagnostic when the metadata and the entire remaining
+# original header/note agree exactly. Unknown prose must remain visible.
+_CATALOGUE_REMARK_DIAGNOSTIC = '本次原备注tkbz未完成第二种原件读取，已排除，报考资格仍须回原页；未核后端tmme不作人数'
+_CATALOGUE_REMARK_READER_NOTE = '原备注未完成两种读法核对，未采用；报考资格须回学校原页确认。推免人数未单列，不从未核数据推算。'
+
+
+def _catalogue_reader_context(table, row):
+    if table not in {'ky_program_year', 'ky_v_usable_program'}:
+        return None
+    extra = _json(row.get('extra_json'), {})
+    if not isinstance(extra, dict):
+        return None
+    if extra.get('remarks_unavailable_reason') != _CATALOGUE_REMARK_DIAGNOSTIC or extra.get('remarks_raw') not in (None, ''):
+        return None
+    header, note = extra.get('original_plan_header'), extra.get('planned_note_raw')
+    if header != '拟招生名额(含推免)' or not isinstance(note, str) or row.get('tuimian') is not None:
+        return None
+    original = header + '；' + note
+    if row.get('scope_raw') != original + '；' + _CATALOGUE_REMARK_DIAGNOSTIC:
+        return None
+    return {'scope_raw': original, '核对提示': _CATALOGUE_REMARK_READER_NOTE}
+
+
 def _record(c, table, row):
     components = {}
     full_line_proof = None
@@ -715,6 +739,10 @@ def _record(c, table, row):
     if table == 'employment_major_industry' and 'employment_industry_version' in _tables(c):
         equivalent_sources=[dict(x) for x in c.execute('SELECT * FROM data.employment_industry_version WHERE preferred_source_id=? ORDER BY source_id',(sid,))]
     result = {'table':table,'major_links':major_links,'institution_links':institution_links,'record_id':row.get('record_id',row.get('entry_id',row.get('position_id'))),'field_source_ids':_json(row.get('field_source_ids')) if table == 'gk_v_purchased' else {},'context':{k:row[k] for k in CONTEXT if k in row and row[k] not in (None,'')},'values':values,'source':s,'locator':{k:row[k] for k in ['src_page','src_table','src_sheet','src_row','src_col','src_cell','src_locator','locator','source_locator','locator_method','locator_status'] if k in row},'excerpt':row.get('excerpt') or row.get('field_excerpt') or (original[0] if original else None) or _original_excerpt(_json(row.get('excerpt_locator_json'))),'excerpt_kind':('purchased_row原始单元格' if original else row.get('excerpt_kind') or ('原表摘录或读图定位记录（核验状态另列）' if row.get('excerpt_locator_json') else '原表单元格摘录' if table in ['job_summary','job_position'] else '未取到逐字原文摘录')),'excerpt_locator':_json(row.get('excerpt_locator_json')),'original_locator':original[1] if original else None,'equivalent_sources':equivalent_sources}
+    reader_context = _catalogue_reader_context(table, row)
+    if reader_context:
+        result['reader_context_overrides'] = reader_context
+        result['catalogue_audit_notes'] = _json(row['extra_json'])
     if table=='recruitment_notice':
         meta=_json(row.get('note'))
         proof=_json(row.get('excerpt'))
@@ -1672,7 +1700,10 @@ def render_text(result, *, full=False):
             variants=row.get('_variants',[row])
             context_parts=[]
             for variant in variants:
-                for k,v in variant.get('context',{}).items():
+                context_values = dict(variant.get('context', {}))
+                if not full:
+                    context_values.update(variant.get('reader_context_overrides', {}))
+                for k,v in context_values.items():
                     if not full and k in {'school_tags','school_tag','school_levels','school_level','degree_level','tags','levels','is_985','is_211','affiliation','ownership','school_type','school_rank','school_location','province_of_school','school_city','city_tier'}:continue
                     if not full and k in {'source_format_columns','source_public_row','source_record_key','public_csv_columns','source_format_reference','source_format_status','source_scope_locator'}:continue
                     if not full and (k,str(v)) in common:continue
