@@ -4,7 +4,7 @@
 数据取自 xixicc186/xixicc2027 的 jobs.json（第三方整理，每日更新，仓库未声明
 许可证）。运行时现取、只在内存里筛，不写进本项目；--file 读本机已有的副本。
 
-    python3 skills/zhiqu-shared/scripts/campus_feed.py --cohort 2027届 --city 宁波
+    python3 skills/zhiqu-shared/scripts/campus_feed.py --cohort 2027届 --city 杭州
     python3 skills/zhiqu-shared/scripts/campus_feed.py --industry 央国企,银行/金融 --days 14 --json
 
 每条都标“第三方聚合·待回官网核”：截止日、岗位和投递链接以单位官网公告为准；
@@ -13,27 +13,49 @@
 import argparse
 import datetime as dt
 import json
+import shutil
+import subprocess
 import sys
-import time
 import urllib.request
 from pathlib import Path
 
-FEED = 'https://raw.githubusercontent.com/xixicc186/xixicc2027/main/jobs.json'
+# Same file from the repository, its GitHub Pages site and two CDNs; tried in
+# order, because any one of them can be unreachable from a given network.
+FEEDS = ('https://raw.githubusercontent.com/xixicc186/xixicc2027/main/jobs.json',
+         'https://xixicc186.github.io/xixicc2027/jobs.json',
+         'https://fastly.jsdelivr.net/gh/xixicc186/xixicc2027@main/jobs.json',
+         'https://cdn.jsdelivr.net/gh/xixicc186/xixicc2027@main/jobs.json')
 SOURCE = 'xixicc186/xixicc2027 jobs.json（第三方聚合）'
 GRADE = '第三方聚合·待回官网核'
 
 
-def fetch(url=FEED, attempts=3, timeout=60):
-    last = None
-    for i in range(attempts):
+def _download(url, timeout):
+    """System curl first (it uses the OS certificate store; python.org builds on
+    macOS often lack one), then urllib."""
+    curl = shutil.which('curl')
+    if curl:
+        done = subprocess.run([curl, '-fsSL', '--proto', '=https', '--max-time', str(timeout), url],
+                              capture_output=True, timeout=timeout + 5)
+        if done.returncode == 0:
+            return done.stdout
+    req = urllib.request.Request(url, headers={'User-Agent': 'zhiqu-campus-feed'})
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+        return r.read()
+
+
+def fetch(urls=FEEDS, timeout=30, download=None):
+    """First mirror that returns JSON wins; report only the failure kinds."""
+    download = download or _download
+    failures = []
+    for url in urls:
         try:
-            req = urllib.request.Request(url, headers={'User-Agent': 'zhiqu-campus-feed'})
-            with urllib.request.urlopen(req, timeout=timeout) as r:
-                return json.loads(r.read().decode('utf-8'))
-        except (OSError, ValueError) as exc:
-            last = exc
-            time.sleep(2 * (i + 1))
-    raise SystemExit(f'未取到秋招聚合（{type(last).__name__}）；可用 --file 读本机副本')
+            data = json.loads(download(url, timeout).decode('utf-8'))
+            if isinstance(data, (list, dict)):
+                return data
+            failures.append('格式不符')
+        except (OSError, ValueError, subprocess.SubprocessError) as exc:
+            failures.append(type(exc).__name__)
+    raise SystemExit('未取到秋招聚合（' + '、'.join(failures) + '）；网络恢复后重试，或用 --file 读本机副本')
 
 
 def parse_day(value):
@@ -107,7 +129,7 @@ def main(argv=None):
     ap.add_argument('--file', help='本机已有的 jobs.json，不联网')
     ap.add_argument('--cohort', help='届别原文，如 2027届')
     ap.add_argument('--industry', help='行业，逗号分隔，如 央国企,银行/金融')
-    ap.add_argument('--city', help='工作地点包含的文字，如 宁波')
+    ap.add_argument('--city', help='工作地点包含的文字，如 杭州')
     ap.add_argument('--keyword', help='公司或岗位关键词')
     ap.add_argument('--days', type=int, help='只看 N 天内截止的（无截止日的不列）')
     ap.add_argument('--json', action='store_true', help='输出 JSON')
